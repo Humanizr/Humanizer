@@ -1,0 +1,13 @@
+_ReSharper.*
+bin/
+obj/
+*.user
+*.suo
+*~
+*.swp
+*.orig
+*.crunchproject.local.xml
+*.crunchsolution.local.xml
+*.ncrunchsolution
+*.ncrunchproject
+*.cache
