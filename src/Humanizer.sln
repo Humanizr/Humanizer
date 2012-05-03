@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Mvc", "Humanizer.Mvc\Humanizer.Mvc.csproj", "{788E6DA3-F180-462E-B1BB-462F0415D714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer", "Humanizer\Humanizer.csproj", "{511A7984-F455-4A6E-ADB9-9CAAC47EA079}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{788E6DA3-F180-462E-B1BB-462F0415D714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{788E6DA3-F180-462E-B1BB-462F0415D714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{788E6DA3-F180-462E-B1BB-462F0415D714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{788E6DA3-F180-462E-B1BB-462F0415D714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
