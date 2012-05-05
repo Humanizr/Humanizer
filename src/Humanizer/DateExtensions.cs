@@ -25,7 +25,7 @@
 
 using System;
 
-namespace Humanizer.Extensions
+namespace Humanizer
 {
     public static class DateExtensions
     {

@@ -27,7 +27,7 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Humanizer.Extensions
+namespace Humanizer
 {
     public static class EnumExtensions
     {

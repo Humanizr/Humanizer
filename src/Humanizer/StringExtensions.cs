@@ -27,7 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Humanizer.Extensions
+namespace Humanizer
 {
     public static class StringExtensions
     {

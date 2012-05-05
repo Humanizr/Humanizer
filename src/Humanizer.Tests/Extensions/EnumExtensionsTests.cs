@@ -24,7 +24,6 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.using System;
 
 using System.ComponentModel;
-using Humanizer.Extensions;
 using Xunit;
 
 namespace Humanizer.Tests.Extensions
