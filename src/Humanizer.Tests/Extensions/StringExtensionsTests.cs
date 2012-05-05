@@ -1,9 +1,9 @@
 ﻿using Humanize.Extensions;
 using Xunit;
 
-namespace Humanizer.Tests
+namespace Humanizer.Tests.Extensions
 {
-    public class StringExtensionTests
+    public class StringExtensionsTests
     {
         [Fact]
         public void PascalCaseInputStringIsTurnedIntoSentence()
