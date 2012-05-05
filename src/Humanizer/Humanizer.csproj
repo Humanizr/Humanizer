@@ -8,8 +8,8 @@
     <ProjectGuid>{511A7984-F455-4A6E-ADB9-9CAAC47EA079}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Humanize</RootNamespace>
-    <AssemblyName>Humanize</AssemblyName>
+    <RootNamespace>Humanizer</RootNamespace>
+    <AssemblyName>Humanizer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
