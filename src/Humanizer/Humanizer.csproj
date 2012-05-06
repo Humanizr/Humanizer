@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DateExtensions.cs" />
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="LetterCasing.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

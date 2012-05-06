@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Humanizer
@@ -81,6 +82,25 @@ namespace Humanizer
                 return FromUnderscoreSeparatedWords(input);
 
             return FromPascalCase(input);
+        }
+
+        public static string Humanize(this string input, LetterCasing casing) 
+        {
+            var humanizedString = input.Humanize();
+
+            switch (casing)
+            {
+                case LetterCasing.Title:
+                    return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(humanizedString);
+
+                case LetterCasing.LowerCase:
+                    return humanizedString.ToLower();
+
+                case LetterCasing.AllCaps:
+                    return humanizedString.ToUpper();
+            }
+
+            return humanizedString;
         }
     }
 }

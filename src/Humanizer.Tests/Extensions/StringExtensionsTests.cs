@@ -88,5 +88,61 @@ namespace Humanizer.Tests.Extensions
                 "HTML",
                 "HTML".Humanize());
         }
+
+        [Fact]
+        public void CanHumanizeIntoTitleCaseWithoutUsingUnderscores()
+        {
+            Assert.Equal(
+                "Can Return Title Case",
+                "CanReturnTitleCase".Humanize(LetterCasing.Title));
+        }
+
+        [Fact]
+        public void CanHumanizeIntoTitleCaseWhenUsingUnderscores()
+        {
+            Assert.Equal(
+                "Can Return Title Case",
+                "Can_return_title_Case".Humanize(LetterCasing.Title));
+        }
+
+        [Fact]
+        public void TitleHumanizationHonorsAllCaps()
+        {
+            Assert.Equal(
+                "Title Humanization Honors ALLCAPS",
+                "Title_humanization_Honors_ALLCAPS".Humanize(LetterCasing.Title));
+        }
+
+        [Fact]
+        public void CanHumanizeIntoLowerCase()
+        {
+            Assert.Equal(
+                "can return lower case",
+                "CanReturnLowerCase".Humanize(LetterCasing.LowerCase));
+        }
+
+        [Fact]
+        public void CanHumanizeIntoLowerCaseEvenWhenUsingAllCaps()
+        {
+            Assert.Equal(
+                "lowercase",
+                "LOWERCASE".Humanize(LetterCasing.LowerCase));
+        }
+
+        [Fact]
+        public void CanHumanizeIntoUpperCase()
+        {
+            Assert.Equal(
+                "CAN HUMANIZE INTO UPPER CASE",
+                "CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps));
+        }
+
+        [Fact]
+        public void CanTurnIntoUpperCasewhenUsingUnderscores()
+        {
+            Assert.Equal(
+                "CAN HUMANIZE INTO UPPER CASE",
+                "Can_Humanize_into_Upper_case".Humanize(LetterCasing.AllCaps));
+        }
     }
 }
