@@ -80,5 +80,13 @@ namespace Humanizer.Tests.Extensions
                 "X is first word in the sentence",
                 "XIsFirstWordInTheSentence".Humanize());
         }
+
+        [Fact]
+        public void AcronymsAreLeftIntact()
+        {
+            Assert.Equal(
+                "HTML",
+                "HTML".Humanize());
+        }
     }
 }

@@ -73,6 +73,10 @@ namespace Humanizer
 
         public static string Humanize(this string input) 
         {
+            // if input is all capitals (e.g. an acronym) then return it without change
+            if (!input.Any(Char.IsLower))
+                return input;
+
             if (input.Contains("_"))
                 return FromUnderscoreSeparatedWords(input);
 

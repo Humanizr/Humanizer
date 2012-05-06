@@ -32,7 +32,8 @@ namespace Humanizer.Tests.Extensions
     {
         [Description(EnumExtensionsTests.CustomDescription)]
         MemberWithDescriptionAttribute,
-        MemberWithoutDescriptionAttribute
+        MemberWithoutDescriptionAttribute,
+        ALLCAPITALS
     }
 
     public class EnumExtensionsTests
@@ -49,6 +50,12 @@ namespace Humanizer.Tests.Extensions
         public void CanHumanizeMembersWithoutDescriptionAttribute()
         {
             Assert.Equal("Member without description attribute", EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
+        }
+
+        [Fact] 
+        public void AllCapitalMembersAreReturnedAsIs()
+        {
+            Assert.Equal(EnumUnderTest.ALLCAPITALS.ToString(), EnumUnderTest.ALLCAPITALS.Humanize());
         }
     }
 }
