@@ -53,6 +53,22 @@ namespace Humanizer.Tests.Extensions
         }
 
         [Fact] 
+        public void CanApplyTitleCasingOnEnumHumanization()
+        {
+            Assert.Equal(
+                "Member Without Description Attribute", 
+                EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title));
+        }
+
+        [Fact] 
+        public void CanApplyLowerCaseCasingOnEnumHumanization()
+        {
+            Assert.Equal(
+                "member without description attribute", 
+                EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.LowerCase));
+        }
+
+        [Fact] 
         public void AllCapitalMembersAreReturnedAsIs()
         {
             Assert.Equal(EnumUnderTest.ALLCAPITALS.ToString(), EnumUnderTest.ALLCAPITALS.Humanize());

@@ -48,5 +48,12 @@ namespace Humanizer
 
              return input.ToString().Humanize();
          }
-    }
+
+         public static string Humanize(this Enum input, LetterCasing casing)
+         {
+             var humanizedEnum = Humanize(input);
+
+             return humanizedEnum.ApplyCase(casing);
+         }
+   }
 }

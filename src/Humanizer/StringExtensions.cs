@@ -88,19 +88,24 @@ namespace Humanizer
         {
             var humanizedString = input.Humanize();
 
+            return ApplyCase(humanizedString, casing);
+        }
+
+        public static string ApplyCase(this string input, LetterCasing casing)
+        {
             switch (casing)
             {
                 case LetterCasing.Title:
-                    return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(humanizedString);
+                    return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
 
                 case LetterCasing.LowerCase:
-                    return humanizedString.ToLower();
+                    return input.ToLower();
 
                 case LetterCasing.AllCaps:
-                    return humanizedString.ToUpper();
+                    return input.ToUpper();
             }
 
-            return humanizedString;
+            return input;
         }
     }
 }
