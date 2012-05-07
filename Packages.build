@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="Release" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="tools\Build\MSBuild.Community.Tasks.targets" />
+
+  <PropertyGroup>
+    <Version Condition="$(Version)==''">0.0.0.0</Version>
+    <BuildPath>$(MSBuildProjectDirectory)\Build</BuildPath>
+    <ArtifactPath>$(BuildPath)\Library</ArtifactPath>
+    <PackageDefinitionSourcePath>$(MSBuildProjectDirectory)\Nuget</PackageDefinitionSourcePath>
+    <PackageWorkingPath>$(MSBuildProjectDirectory)\PackageBuild</PackageWorkingPath>
+    <ArtifactTemp>$(PackageWorkingPath)\Library</ArtifactTemp>
+    <PackageDefinitionPath>$(PackageWorkingPath)\PackageTemp</PackageDefinitionPath>
+    <NuGetExe>"$(MSBuildProjectDirectory)\src\.nuget\NuGet.exe"</NuGetExe>
+    <HumanizerBuild>$(MSBuildProjectDirectory)\Humanizer.build</HumanizerBuild>
+    <PackageOutput>$(PackageWorkingPath)\Packages</PackageOutput>
+    <ZipPath>$(BuildPath)\_Package</ZipPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <HumanizerSpecPath>$(PackageDefinitionPath)\Humanizer</HumanizerSpecPath>
+    <HumanizerSpec>$(HumanizerSpecPath)\Humanizer.nuspec</HumanizerSpec>
+  </PropertyGroup>
+
+  <Target Name="Clean">
+    <RemoveDir Directories="$(PackageWorkingPath)" />
+  </Target>
+
+  <Target Name="Prepare">
+    <MakeDir Directories="$(PackageWorkingPath)" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="Net40Build">
+    <MSBuild Projects="$(HumanizerBuild)" Properties="Version=$(Version);BuildFramework=" Targets="Release" />
+    <MakeDir Directories="$(ArtifactTemp)\NET40"/>
+    <CreateItem Include="$(ArtifactPath)\*.*">
+      <Output ItemName="Net40Artifact" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="@(Net40Artifact)" DestinationFolder="$(ArtifactTemp)\NET40" />
+    <Copy SourceFiles="$(ZipPath)\Humanizer-$(Version)-NET40.zip" DestinationFolder="$(PackageOutput)" />
+  </Target>
+
+  <Target Name="Net35Build">
+    <MSBuild Projects="$(HumanizerBuild)" Properties="Version=$(Version);BuildFramework=NET35" Targets="Release" />
+    <MakeDir Directories="$(ArtifactTemp)\NET35"/>
+    <CreateItem Include="$(ArtifactPath)\*.*">
+      <Output ItemName="Net35Artifact" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="@(Net35Artifact)" DestinationFolder="$(ArtifactTemp)\NET35" />
+    <Copy SourceFiles="$(ZipPath)\Humanizer-$(Version)-NET35.zip" DestinationFolder="$(PackageOutput)" />
+  </Target>
+
+  <Target Name="Build">
+    <CallTarget Targets="Net40Build" />
+    <CallTarget Targets="Net35Build" />
+  </Target>
+
+  <Target Name="CopyNuspecFiles">
+    <Copy SourceFiles="PackageDefinitionSourcePath" DestinationFolder="$(PackageDefinitionPath)" />
+  </Target>
+  
+  <Target Name="CopyHumanizerLibs">
+    <Copy SourceFiles="$(ArtifactTemp)\NET40\Humanizer.dll" DestinationFolder="$(HumanizerSpecPath)\lib\NET40"  />
+    <Copy SourceFiles="$(ArtifactTemp)\NET35\Humanizer.dll" DestinationFolder="$(HumanizerSpecPath)\lib\NET35"  />
+  </Target>
+
+  <Target Name="Pack">
+    <CreateItem Include="$(PackageDefinitionSourcePath)\**\*.*">
+      <Output ItemName="PackageContent" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="@(PackageContent)" DestinationFiles="@(PackageContent->'$(PackageDefinitionPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <CreateItem Include="$(HumanizerSpec);$(SamplesSpec);">
+      <Output ItemName="NuGetSpec" TaskParameter="Include"/>
+    </CreateItem>
+    <FileUpdate Files="@(NuGetSpec)" Regex="0\.0\.0\.0" ReplacementText="$(Version)" />
+    <CallTarget Targets="CopyHumanizerLibs;" />
+    <MakeDir Directories="$(PackageOutput)" ContinueOnError="true"/>
+    <Exec Command='$(NuGetExe) pack "%(NuGetSpec.FullPath)"' WorkingDirectory="$(PackageOutput)"/>
+  </Target>
+
+  <Target Name="Release" DependsOnTargets="Clean;Prepare;Build;Pack"/>
+  
+</Project>

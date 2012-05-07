@@ -11,28 +11,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5B7F4A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.MvcSample", "Humanizer.MvcSample\Humanizer.MvcSample.csproj", "{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{4A8A6307-0272-49D8-8CA8-F1C9F1988A7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Humanizer", "Humanizer", "{9B089B32-EBD8-42DD-A3C2-276FCA091644}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuGet\Humanizer\Humanizer.nuspec = ..\NuGet\Humanizer\Humanizer.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleaseNET35|Any CPU = ReleaseNET35|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.ReleaseNET35|Any CPU.ActiveCfg = ReleaseNET35|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.ReleaseNET35|Any CPU.Build.0 = ReleaseNET35|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.ReleaseNET35|Any CPU.ActiveCfg = ReleaseNET35|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.ReleaseNET35|Any CPU.Build.0 = ReleaseNET35|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9B089B32-EBD8-42DD-A3C2-276FCA091644} = {4A8A6307-0272-49D8-8CA8-F1C9F1988A7A}
 	EndGlobalSection
 EndGlobal

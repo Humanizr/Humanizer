@@ -13,3 +13,5 @@ obj/
 *.ncrunchproject
 *.cache
 src/packages/*
+PackageBuild/*
+Build/*

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Humanizer")]
-[assembly: AssemblyDescription("A small framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format")]
+[assembly: AssemblyDescription("A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Mehdi Khalili")]
 [assembly: AssemblyProduct("Humanizer")]

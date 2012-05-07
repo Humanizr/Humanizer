@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>Humanizer</id>
     <version>0.1</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>Humanizer</title>
+    <authors>Mehdi Khalili</authors>
+    <owners>Mehdi Khalili</owners>
     <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+    <description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</description>
     <releaseNotes>The baseline for the Humanizer</releaseNotes>
     <copyright>Copyright 2012  Mehdi Khalili</copyright>
   </metadata>
