@@ -38,7 +38,7 @@ namespace Humanizer
 
              if (memInfo.Length > 0)
              {
-                 object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                 object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), true);
 
                  if (attrs.Length > 0)
                  {
