@@ -72,7 +72,7 @@ namespace Humanizer
             return result.Replace(" i ", " I "); // I is an exception
         }
 
-        public static string Humanize(this string input) 
+        public static string Humanize(this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
             if (!input.Any(Char.IsLower))
@@ -84,7 +84,7 @@ namespace Humanizer
             return FromPascalCase(input);
         }
 
-        public static string Humanize(this string input, LetterCasing casing) 
+        public static string Humanize(this string input, LetterCasing casing)
         {
             var humanizedString = input.Humanize();
 
@@ -103,9 +103,13 @@ namespace Humanizer
 
                 case LetterCasing.AllCaps:
                     return input.ToUpper();
-            }
 
-            return input;
+                case LetterCasing.Sentence:
+                    return string.Concat(input.Substring(0, 1).ToUpper(), input.Substring(1));
+
+                default:
+                    throw new ArgumentOutOfRangeException("casing");
+            }
         }
     }
 }
