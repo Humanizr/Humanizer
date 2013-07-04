@@ -24,73 +24,65 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.using System;
 
 using System;
+using System.ComponentModel;
 
 namespace Humanizer
 {
+    [Localizable(true)]
     public static class DateExtensions
     {
-        public static string FutureDate = "not yet";
-        public static string OneSecondAgo = "one second ago";
-        public static string SecondsAgo = " seconds ago";
-        public static string OneMinuteAgo = "a minute ago";
-        public static string MinutesAgo = " minutes ago";
-        public static string OneHourAgo = "an hour ago";
-        public static string HoursAgo = " hours ago";
-        public static string Yesterday = "yesterday";
-        public static string DaysAgo = " days ago";
-        public static string OneMonthAgo = "one month ago";
-        public static string MonthsAgo = " months ago";
-        public static string OneYearAgo = "one year ago";
-        public static string YearsAgo = " years ago";
-
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
-        public static string Humanize(this DateTime input, bool utcDate = true)
+        public static string Humanize(this DateTime input, bool utcDate = true, DateTime? now = null)
         {
+            if (now == null)
+            {
+                now = DateTime.UtcNow;
+            }
             const int second = 1;
             const int minute = 60 * second;
             const int hour = 60 * minute;
             const int day = 24 * hour;
             const int month = 30 * day;
 
-            var comparisonBase = DateTime.UtcNow;
+            var comparisonBase = now.Value;
             if (!utcDate)
                 comparisonBase = comparisonBase.ToLocalTime();
 
             if (input > comparisonBase)
-                return FutureDate;
+                return Resources.DateExtensions_FutureDate_not_yet;
 
             var ts = new TimeSpan(comparisonBase.Ticks - input.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * minute)
-                return ts.Seconds == 1 ? OneSecondAgo : ts.Seconds + SecondsAgo;
+                return ts.Seconds == 1 ? Resources.DateExtensions_OneSecondAgo_one_second_ago : string.Format(Resources.DateExtensions_SecondsAgo__seconds_ago, ts.Seconds);
 
             if (delta < 2 * minute)
-                return OneMinuteAgo;
+                return Resources.DateExtensions_OneMinuteAgo_a_minute_ago;
 
             if (delta < 45 * minute)
-                return ts.Minutes + MinutesAgo;
+                return string.Format(Resources.DateExtensions_MinutesAgo__minutes_ago, ts.Minutes);
 
             if (delta < 90 * minute)
-                return OneHourAgo;
+                return Resources.DateExtensions_OneHourAgo_an_hour_ago;
 
             if (delta < 24 * hour)
-                return ts.Hours + HoursAgo;
+                return string.Format(Resources.DateExtensions_HoursAgo__hours_ago, ts.Hours);
 
             if (delta < 48 * hour)
-                return Yesterday;
+                return Resources.DateExtensions_Yesterday_yesterday;
 
             if (delta < 30 * day)
-                return ts.Days + DaysAgo;
+                return string.Format(Resources.DateExtensions_DaysAgo__days_ago, ts.Days);
 
             if (delta < 12 * month)
             {
                 int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-                return months <= 1 ? OneMonthAgo : months + MonthsAgo;
+                return months <= 1 ? Resources.DateExtensions_OneMonthAgo_one_month_ago : string.Format(Resources.DateExtensions_MonthsAgo__months_ago, months);
             }
 
             int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-            return years <= 1 ? OneYearAgo : years + YearsAgo;
+            return years <= 1 ? Resources.DateExtensions_OneYearAgo_one_year_ago : string.Format(Resources.DateExtensions_YearsAgo__years_ago, years);
         }
     }
 }
