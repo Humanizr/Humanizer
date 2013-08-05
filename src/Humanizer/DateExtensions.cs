@@ -35,9 +35,8 @@ namespace Humanizer
         public static string Humanize(this DateTime input, bool utcDate = true, DateTime? now = null)
         {
             if (now == null)
-            {
                 now = DateTime.UtcNow;
-            }
+            
             const int second = 1;
             const int minute = 60 * second;
             const int hour = 60 * minute;
