@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Humanizer</id>
-    <version>0.2</version>
+    <version>0.3</version>
     <title>Humanizer</title>
     <authors>Mehdi Khalili</authors>
     <owners>Mehdi Khalili</owners>
     <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</description>
-    <releaseNotes>The baseline for the Humanizer</releaseNotes>
-    <copyright>Copyright 2012  Mehdi Khalili</copyright>
+    <copyright>Copyright 2012-2013  Mehdi Khalili</copyright>
+    <licenseUrl>https://github.com/MehdiK/Humanizer/blob/master/LICENSE</licenseUrl>
   </metadata>
 </package>
