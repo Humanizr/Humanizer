@@ -136,6 +136,9 @@ No need to mention that if you want title casing for your labels you may call th
 
     modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize(LetterCasing.Title));
 
+## Building & running the Tests
+You can build the whole solution, run the tests and create a local nuget package for the library by running the `go.cmd` on the root of the repo.
+
 ###Author
 Mehdi Khalili (@MehdiK)
 
