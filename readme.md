@@ -55,6 +55,12 @@ Well, I did not write much of this code myself and do not want to take any credi
 
     DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 
+Humanizer supports local as well as UTC dates and you could also inject the "current" date if you want to. Here is the API signature:
+
+    public static string Humanize(this DateTime input, bool utcDate = true, DateTime? now = null)
+
+For dates Humanizer also supports localization.
+
 ##What else?##
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
 
