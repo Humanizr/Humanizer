@@ -122,6 +122,22 @@ namespace Humanizer.Tests.Extensions
         }
 
         [Fact]
+        public void CanHumanizeIntoSentenceCase()
+        {
+            Assert.Equal(
+                "Can return sentence case",
+                "CanReturnSentenceCase".Humanize(LetterCasing.Sentence));
+        }
+
+        [Fact]
+        public void SentenceCasingWorksOnEmptyStrings()
+        {
+            Assert.Equal(
+                "",
+                "".Humanize(LetterCasing.Sentence));
+        }
+
+        [Fact]
         public void CanHumanizeIntoLowerCaseEvenWhenUsingAllCaps()
         {
             Assert.Equal(
