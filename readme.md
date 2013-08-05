@@ -1,7 +1,13 @@
+Humanizer is a small framework that helps .Net developer turn their otherwise geeky strings, type names, enum fields, date fields into a human friendly format.
+
+##Installation
+You can install Humanizer as a nuget package: `Install-Package Humanizer`
+
+##Usage
 Humanizer is basically a set of extension methods, currently available on <code>String</code>, <code>Enum</code> and <code>DateTime</code>. Over time, I will try to make this a one-stop shop for user-friendly developers!!
 
 ###String Extensions###
-String extensions are at the heart of this micro-framework. The foundation of this was set in the [bddify framework][3] where class names, method names and properties are turned into human readable sentences. 
+String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDFY framework][3] where class names, method names and properties are turned into human readable sentences. 
 
     "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
     
@@ -40,7 +46,7 @@ You will get:
     
     EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title) => "Member Without Description Attribute"; // an of course you can still apply letter casing 
 
-Hopefully this will help avoid enums littered with unnecessary attributes!
+Hopefully this will help avoid littering enums with unnecessary attributes!
 
 ###Date Extensions###
 The <code>DateTime</code> extension methods were not part of what I had initially envisaged for this project; but while I was "humanizitationing" .Net types I thought it would be a shame to not have <code>DateTime</code> in there. 
@@ -124,6 +130,11 @@ No need to mention that if you want title casing for your labels you may call th
 
     modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize(LetterCasing.Title));
 
+###Author
+Mehdi Khalili (@MehdiK)
+
+###License
+Humanizer is released under the MIT License. See the bundled LICENSE file for details.
 
   [1]: https://github.com/MehdiK/Humanizer
   [2]: https://nuget.org/packages/Humanizer
