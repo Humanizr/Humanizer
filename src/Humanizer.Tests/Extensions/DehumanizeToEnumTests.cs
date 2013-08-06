@@ -1,13 +1,25 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Humanizer.Tests.Extensions
 {
     public class DehumanizeToEnumTests
     {
+        class DummyClass
+        {
+            
+        }
+
         [Fact]
         public void HonorsDescriptionAttribute()
         {
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.CustomDescription.DehumanizeTo<EnumUnderTest>());
+        }
+
+        [Fact]
+        public void ThrowsForNonEnums()
+        {
+            Assert.Throws<ArgumentException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyClass>());
         }
 
         [Fact]
