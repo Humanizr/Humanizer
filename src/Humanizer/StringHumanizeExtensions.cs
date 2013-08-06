@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Humanizer
 {
-    public static class StringExtensions
+    public static class StringHumanizeExtensions
     {
         static readonly Func<string, string> FromUnderscoreSeparatedWords = methodName => string.Join(" ", methodName.Split(new[] { '_' }));
         static string FromPascalCase(string name)
