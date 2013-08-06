@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateHumanizeExtensions.cs" />
+    <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
     <Compile Include="Resources.Designer.cs">

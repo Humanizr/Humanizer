@@ -62,7 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\DateHumanizeTests.cs" />
+    <Compile Include="Extensions\DehumanizeToEnumTests.cs" />
     <Compile Include="Extensions\EnumHumanizeTests.cs" />
+    <Compile Include="Extensions\EnumTestsResources.cs" />
+    <Compile Include="Extensions\EnumUnderTest.cs" />
     <Compile Include="Extensions\StringDehumanizeTests.cs" />
     <Compile Include="Extensions\StringHumanizeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

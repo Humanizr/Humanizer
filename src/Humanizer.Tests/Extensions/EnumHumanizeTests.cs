@@ -1,37 +1,26 @@
-﻿using System.ComponentModel;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Extensions
 {
-    public enum EnumUnderTest
-    {
-        [Description(EnumHumanizeTests.CustomDescription)]
-        MemberWithDescriptionAttribute,
-        MemberWithoutDescriptionAttribute,
-        ALLCAPITALS
-    }
-
     public class EnumHumanizeTests
     {
-        public const string CustomDescription = "Some Description";
-
         [Fact] 
         public void HonorsDescriptionAttribute()
         {
-            Assert.Equal(CustomDescription, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
+            Assert.Equal(EnumTestsResources.CustomDescription, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
         }
 
         [Fact] 
         public void CanHumanizeMembersWithoutDescriptionAttribute()
         {
-            Assert.Equal("Member without description attribute", EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
+            Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
         }
 
         [Fact] 
         public void CanApplyTitleCasingOnEnumHumanization()
         {
             Assert.Equal(
-                "Member Without Description Attribute", 
+                EnumTestsResources.MemberWithoutDescriptionAttributeTitle, 
                 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title));
         }
 
@@ -39,7 +28,7 @@ namespace Humanizer.Tests.Extensions
         public void CanApplyLowerCaseCasingOnEnumHumanization()
         {
             Assert.Equal(
-                "member without description attribute", 
+                EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase, 
                 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.LowerCase));
         }
 
