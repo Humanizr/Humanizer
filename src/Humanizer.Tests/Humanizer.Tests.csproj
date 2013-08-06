@@ -61,10 +61,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\DateExtensionsTests.cs" />
-    <Compile Include="Extensions\EnumExtensionsTests.cs" />
+    <Compile Include="Extensions\DateHumanizeTests.cs" />
+    <Compile Include="Extensions\EnumHumanizeTests.cs" />
     <Compile Include="Extensions\StringDehumanizeTests.cs" />
-    <Compile Include="Extensions\StringExtensionsTests.cs" />
+    <Compile Include="Extensions\StringHumanizeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Humanizer.Tests.Extensions
 {
-    public class DateExtensionsTests
+    public class DateHumanizeTests
     {
         void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {

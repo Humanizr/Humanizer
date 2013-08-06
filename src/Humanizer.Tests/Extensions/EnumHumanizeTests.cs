@@ -5,13 +5,13 @@ namespace Humanizer.Tests.Extensions
 {
     public enum EnumUnderTest
     {
-        [Description(EnumExtensionsTests.CustomDescription)]
+        [Description(EnumHumanizeTests.CustomDescription)]
         MemberWithDescriptionAttribute,
         MemberWithoutDescriptionAttribute,
         ALLCAPITALS
     }
 
-    public class EnumExtensionsTests
+    public class EnumHumanizeTests
     {
         public const string CustomDescription = "Some Description";
 

@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Humanizer
 {
-    public static class EnumExtensions
+    public static class EnumHumanizeExtensions
     {
          public static string Humanize(this Enum input)
          {

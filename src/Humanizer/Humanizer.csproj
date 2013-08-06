@@ -63,8 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateExtensions.cs" />
-    <Compile Include="EnumExtensions.cs" />
+    <Compile Include="DateHumanizeExtensions.cs" />
+    <Compile Include="EnumHumanizeExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

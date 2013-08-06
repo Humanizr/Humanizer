@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace Humanizer
 {
     [Localizable(true)]
-    public static class DateExtensions
+    public static class DateHumanizeExtensions
     {
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
         public static string Humanize(this DateTime input, bool utcDate = true, DateTime? now = null)
