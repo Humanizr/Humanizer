@@ -33,7 +33,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal(
                 EnumUnderTest.MemberWithoutDescriptionAttribute,
-                EnumTestsResources.MemberWithoutDescriptionAttributeTitle.DehumanizeTo<EnumUnderTest>(LetterCasing.Title));
+                EnumTestsResources.MemberWithoutDescriptionAttributeTitle.DehumanizeTo<EnumUnderTest>());
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal(
                 EnumUnderTest.MemberWithoutDescriptionAttribute,
-                EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase.DehumanizeTo<EnumUnderTest>(LetterCasing.LowerCase));
+                EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase.DehumanizeTo<EnumUnderTest>());
         }
 
         [Fact]

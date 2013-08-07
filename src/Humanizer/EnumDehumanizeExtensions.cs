@@ -9,14 +9,10 @@ namespace Humanizer
         /// </summary>
         /// <typeparam name="TTargetEnum">The target enum</typeparam>
         /// <param name="input">The string to be converted</param>
-        /// <param name="casing">A hint to Dehumanizer around what casing was originally used for humanization</param>
         /// <returns></returns>
-        public static Enum DehumanizeTo<TTargetEnum>(this string input, LetterCasing? casing = null) 
+        public static Enum DehumanizeTo<TTargetEnum>(this string input) 
         {
             var values = (TTargetEnum[]) Enum.GetValues(typeof (TTargetEnum));
-            Func<Enum, string> humanize = e => e.Humanize();
-            if (casing != null)
-                humanize = e => e.Humanize(casing.Value);
 
             foreach (var value in values)
             {
@@ -24,7 +20,7 @@ namespace Humanizer
                 if (enumValue == null)
                     return null;
 
-                if (humanize(enumValue) == input)
+                if (string.Equals(enumValue.Humanize(), input, StringComparison.OrdinalIgnoreCase))
                     return enumValue;
             }
 
