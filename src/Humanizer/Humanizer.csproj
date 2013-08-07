@@ -66,6 +66,7 @@
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
+    <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

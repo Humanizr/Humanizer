@@ -57,7 +57,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit">
-      <HintPath>..\packages\xunit.1.9.0.1566\lib\xunit.dll</HintPath>
+      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>..\packages\xunit.extensions.1.9.1\lib\net20\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -66,18 +69,27 @@
     <Compile Include="Extensions\EnumHumanizeTests.cs" />
     <Compile Include="Extensions\EnumTestsResources.cs" />
     <Compile Include="Extensions\EnumUnderTest.cs" />
+    <Compile Include="Extensions\Inflector\CapitalizeTests.cs" />
+    <Compile Include="Extensions\Inflector\DasherizeTests.cs" />
+    <Compile Include="Extensions\Inflector\InflectorTestBase.cs" />
+    <Compile Include="Extensions\Inflector\OrdinalizeTests.cs" />
+    <Compile Include="Extensions\Inflector\PascalizeAndCamelizeTests.cs" />
+    <Compile Include="Extensions\Inflector\PluralizeTests.cs" />
+    <Compile Include="Extensions\Inflector\TitleizeTests.cs" />
+    <Compile Include="Extensions\Inflector\UncapitalizeTests.cs" />
+    <Compile Include="Extensions\Inflector\UnderscoreTests.cs" />
     <Compile Include="Extensions\StringDehumanizeTests.cs" />
     <Compile Include="Extensions\StringHumanizeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Humanizer\Humanizer.csproj">
       <Project>{511A7984-F455-4A6E-ADB9-9CAAC47EA079}</Project>
       <Name>Humanizer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
