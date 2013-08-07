@@ -69,14 +69,12 @@
     <Compile Include="Extensions\EnumHumanizeTests.cs" />
     <Compile Include="Extensions\EnumTestsResources.cs" />
     <Compile Include="Extensions\EnumUnderTest.cs" />
-    <Compile Include="Extensions\Inflector\CapitalizeTests.cs" />
     <Compile Include="Extensions\Inflector\DasherizeTests.cs" />
     <Compile Include="Extensions\Inflector\InflectorTestBase.cs" />
     <Compile Include="Extensions\Inflector\OrdinalizeTests.cs" />
     <Compile Include="Extensions\Inflector\PascalizeAndCamelizeTests.cs" />
     <Compile Include="Extensions\Inflector\PluralizeTests.cs" />
     <Compile Include="Extensions\Inflector\TitleizeTests.cs" />
-    <Compile Include="Extensions\Inflector\UncapitalizeTests.cs" />
     <Compile Include="Extensions\Inflector\UnderscoreTests.cs" />
     <Compile Include="Extensions\StringDehumanizeTests.cs" />
     <Compile Include="Extensions\StringHumanizeTests.cs" />

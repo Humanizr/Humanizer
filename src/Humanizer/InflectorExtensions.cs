@@ -6,8 +6,6 @@ namespace Humanizer
 {
     public static class InflectorExtensions
     {
-        #region Default Rules
-
         static InflectorExtensions()
         {
             AddPlural("$", "s");
@@ -73,8 +71,6 @@ namespace Humanizer
             AddUncountable("aircraft");
         }
 
-        #endregion
-
         private class Rule
         {
             private readonly Regex _regex;
@@ -122,11 +118,21 @@ namespace Humanizer
         private static readonly List<Rule> Singulars = new List<Rule>();
         private static readonly List<string> Uncountables = new List<string>();
 
+        /// <summary>
+        /// Pluralizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be pluralized</param>
+        /// <returns></returns>
         public static string Pluralize(this string word)
         {
             return ApplyRules(Plurals, word);
         }
 
+        /// <summary>
+        /// Singularizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be singularized</param>
+        /// <returns></returns>
         public static string Singularize(this string word)
         {
             return ApplyRules(Singulars, word);
@@ -150,49 +156,69 @@ namespace Humanizer
             return result;
         }
 
-        public static string Titleize(this string word)
+        /// <summary>
+        /// Humanizes the input with Title casing
+        /// </summary>
+        /// <param name="input">The string to be titleized</param>
+        /// <returns></returns>
+        public static string Titleize(this string input)
         {
-            return Regex.Replace(Humanize(Underscore(word)), @"\b([a-z])", match => match.Captures[0].Value.ToUpper());
+            return input.Humanize(LetterCasing.Title);
         }
 
-        static string Humanize(this string lowercaseAndUnderscoredWord)
+        /// <summary>
+        /// By default, pascalize converts strings to UpperCamelCase also removing underscores
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string Pascalize(this string input)
         {
-            return Capitalize(Regex.Replace(lowercaseAndUnderscoredWord, @"_", " "));
+            return Regex.Replace(input, "(?:^|_)(.)", match => match.Groups[1].Value.ToUpper());
         }
 
-        public static string Pascalize(this string lowercaseAndUnderscoredWord)
+        /// <summary>
+        /// Same as Pascalize except that the first character is lower case
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string Camelize(this string input)
         {
-            return Regex.Replace(lowercaseAndUnderscoredWord, "(?:^|_)(.)", match => match.Groups[1].Value.ToUpper());
+            return Uncapitalize(Pascalize(input));
         }
 
-        public static string Camelize(this string lowercaseAndUnderscoredWord)
-        {
-            return Uncapitalize(Pascalize(lowercaseAndUnderscoredWord));
-        }
-
-        public static string Underscore(this string pascalCasedWord)
+        /// <summary>
+        /// Separates the input words with underscore
+        /// </summary>
+        /// <param name="input">The string to be underscored</param>
+        /// <returns></returns>
+        public static string Underscore(this string input)
         {
             return Regex.Replace(
                 Regex.Replace(
-                    Regex.Replace(pascalCasedWord, @"([A-Z]+)([A-Z][a-z])", "$1_$2"), @"([a-z\d])([A-Z])",
+                    Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1_$2"), @"([a-z\d])([A-Z])",
                     "$1_$2"), @"[-\s]", "_").ToLower();
         }
 
-        public static string Capitalize(this string word)
-        {
-            return word.Substring(0, 1).ToUpper() + word.Substring(1).ToLower();
-        }
-
-        public static string Uncapitalize(this string word)
+        static string Uncapitalize(this string word)
         {
             return word.Substring(0, 1).ToLower() + word.Substring(1);
         }
 
+        /// <summary>
+        /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+        /// </summary>
+        /// <param name="numberString">The number, in string, to be ordinalized</param>
+        /// <returns></returns>
         public static string Ordinalize(this string numberString)
         {
             return Ordanize(int.Parse(numberString), numberString);
         }
 
+        /// <summary>
+        /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+        /// </summary>
+        /// <param name="number">The number to be ordinalized</param>
+        /// <returns></returns>
         public static string Ordinalize(this int number)
         {
             return Ordanize(number, number.ToString(CultureInfo.InvariantCulture));
@@ -220,7 +246,11 @@ namespace Humanizer
             }
         }
 
-
+        /// <summary>
+        /// Replaces underscores with dashes in the string
+        /// </summary>
+        /// <param name="underscoredWord"></param>
+        /// <returns></returns>
         public static string Dasherize(this string underscoredWord)
         {
             return underscoredWord.Replace('_', '-');

@@ -7,7 +7,7 @@ namespace Humanizer
 {
     public static class StringHumanizeExtensions
     {
-        static readonly Func<string, string> FromUnderscoreSeparatedWords = methodName => string.Join(" ", methodName.Split(new[] { '_' }));
+        static readonly Func<string, string> FromUnderscoreDashSeparatedWords = methodName => string.Join(" ", methodName.Split(new[] { '_', '-' }));
         static string FromPascalCase(string name)
         {
             var chars = name.Aggregate(
@@ -58,8 +58,8 @@ namespace Humanizer
             if (!input.Any(Char.IsLower))
                 return input;
 
-            if (input.Contains("_"))
-                return FromUnderscoreSeparatedWords(input);
+            if (input.Contains('_') || input.Contains('-'))
+                return FromUnderscoreDashSeparatedWords(input);
 
             return FromPascalCase(input);
         }
