@@ -9,7 +9,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal(
                 "PascalCaseSentenceIsCamelized",
-                "Pascal case sentence is camelized".Duhumanize());
+                "Pascal case sentence is camelized".Dehumanize());
         }
 
         [Fact]
@@ -17,7 +17,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal(
                 "TitleCaseSentenceIsCamelized",
-                "Title Case Sentence Is Camelized".Duhumanize());
+                "Title Case Sentence Is Camelized".Dehumanize());
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal(
                 "MixedCaseSentenceIsCamelized",
-                "Mixed case sentence Is Camelized".Duhumanize());
+                "Mixed case sentence Is Camelized".Dehumanize());
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal(
                 "LowerCaseSentenceIsCamelized",
-                "lower case sentence is camelized".Duhumanize());
+                "lower case sentence is camelized".Dehumanize());
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal(
                 "",
-                "".Duhumanize());
+                "".Dehumanize());
         }
     }
 }

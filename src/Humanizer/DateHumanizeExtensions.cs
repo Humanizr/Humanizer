@@ -7,10 +7,17 @@ namespace Humanizer
     public static class DateHumanizeExtensions
     {
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
-        public static string Humanize(this DateTime input, bool utcDate = true, DateTime? now = null)
+        /// <summary>
+        /// Turns the current or provided date into a human readable sentence
+        /// </summary>
+        /// <param name="input">The date to be humanized</param>
+        /// <param name="utcDate">Boolean value indicating whether the date is in UTC or local</param>
+        /// <param name="dateToHumanize">Date to humanize. The current date is humanized if this value is null</param>
+        /// <returns></returns>
+        public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToHumanize = null)
         {
-            if (now == null)
-                now = DateTime.UtcNow;
+            if (dateToHumanize == null)
+                dateToHumanize = DateTime.UtcNow;
             
             const int second = 1;
             const int minute = 60 * second;
@@ -18,7 +25,7 @@ namespace Humanizer
             const int day = 24 * hour;
             const int month = 30 * day;
 
-            var comparisonBase = now.Value;
+            var comparisonBase = dateToHumanize.Value;
             if (!utcDate)
                 comparisonBase = comparisonBase.ToLocalTime();
 

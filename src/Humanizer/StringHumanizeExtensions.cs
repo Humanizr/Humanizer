@@ -47,6 +47,11 @@ namespace Humanizer
             return result.Replace(" i ", " I "); // I is an exception
         }
 
+        /// <summary>
+        /// Humanizes the input string; e.g. Underscored_input_String_is_turned_INTO_sentence -> 'Underscored input String is turned INTO sentence'
+        /// </summary>
+        /// <param name="input">The string to be humanized</param>
+        /// <returns></returns>
         public static string Humanize(this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
@@ -59,6 +64,12 @@ namespace Humanizer
             return FromPascalCase(input);
         }
 
+        /// <summary>
+        /// Humanized the input string based on the provided casing
+        /// </summary>
+        /// <param name="input">The string to be humanized</param>
+        /// <param name="casing">The desired casing for the output</param>
+        /// <returns></returns>
         public static string Humanize(this string input, LetterCasing casing)
         {
             var humanizedString = input.Humanize();
@@ -66,6 +77,12 @@ namespace Humanizer
             return ApplyCase(humanizedString, casing);
         }
 
+        /// <summary>
+        /// Changes the casing of the provided input
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="casing"></param>
+        /// <returns></returns>
         public static string ApplyCase(this string input, LetterCasing casing)
         {
             switch (casing)
