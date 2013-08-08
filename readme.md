@@ -1,7 +1,7 @@
 Humanizer is a small framework that helps .Net developer turn their otherwise geeky strings, type names, enum fields, date fields ETC into a human friendly format.
 
 ##Installation
-You can install Humanizer as a nuget package: `Install-Package Humanizer`
+You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
 ##Usage
 Humanizer is a set of extension methods, currently available on `String`, `Enum`, `DateTime` and `int` and turns them from computer friendly into human friendly format (and vice versa).
@@ -65,7 +65,7 @@ And the usage is:
 And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
 
 ###Humanize Dates###
-This is borrowed from [StackOverFlow algorithm][4] - although I had to apply some minor fixes on top of it. I am not going to bore you with all the examples as I am sure you know what this does: you basically give it an instance of `DateTime` and get back a string telling how far back in time that is:
+This is borrowed from [StackOverFlow algorithm](http://stackoverflow.com/a/12/141101) - although I had to apply some minor fixes on top of it. I am not going to bore you with all the examples as I am sure you know what this does: you basically give it an instance of `DateTime` and get back a string telling how far back in time that is:
 
     DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 
@@ -92,7 +92,7 @@ This is just a baseline and you can use this to simplify your day to day job. Fo
 
 You may find an Asp.Net MVC sample [in the code][5] that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
 
-This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called `[HumanizerMetadataProvider][6]`. It is small enough to repeat here; so here we go:
+This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called `[HumanizerMetadataProvider](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs)`. It is small enough to repeat here; so here we go:
 
     public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
     {
@@ -170,11 +170,3 @@ Mehdi Khalili (@MehdiK)
 
 ###License
 Humanizer is released under the MIT License. See the bundled LICENSE file for details.
-
-  [1]: https://github.com/MehdiK/Humanizer
-  [2]: https://nuget.org/packages/Humanizer
-  [5]: https://github.com/MehdiK/Humanizer
-  [6]: https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs
-
-
-
