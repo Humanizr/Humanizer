@@ -16,7 +16,7 @@ namespace Humanizer.Tests.Extensions
             var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
             var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
 
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(dateToHumanize: utcNow));
+            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(dateToCompareAgainst: utcNow));
             Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
         }
 
