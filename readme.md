@@ -1,13 +1,13 @@
-Humanizer is a small framework that helps .Net developer turn their otherwise geeky strings, type names, enum fields, date fields into a human friendly format.
+Humanizer is a small framework that helps .Net developer turn their otherwise geeky strings, type names, enum fields, date fields ETC into a human friendly format.
 
 ##Installation
 You can install Humanizer as a nuget package: `Install-Package Humanizer`
 
 ##Usage
-Humanizer is basically a set of extension methods, currently available on <code>String</code>, <code>Enum</code> and <code>DateTime</code>. Over time, I will try to make this a one-stop shop for user-friendly developers!!
+Humanizer is a set of extension methods, currently available on `String`, `Enum`, `DateTime` and `int` and turns them from computer friendly into human friendly format (and vice versa).
 
-###String Extensions###
-String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDFY framework][3] where class names, method names and properties are turned into human readable sentences. 
+###Humanize Strings###
+String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](http://teststack.github.com/TestStack.BDDfy/) where class names, method names and properties are turned into human readable sentences. 
 
     "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
     
@@ -27,8 +27,13 @@ You may also specify the desired letter casing:
     
     "CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps) => "CAN HUMANIZE INTO UPPER CASE"
 
-###Enum Extensions###
-Calling <code>ToString</code> directly on enum members usually results in less than ideal output for users. The solution to this is usually to use <code>DescriptionAttribute</code> data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what <code>String.Humanize()</code> does well. For an enum like:
+####Dehumanize Strings####
+Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
+
+    "Pascal case input string is turned into sentence".Humanize() => "PascalCaseInputStringIsTurnedIntoSentence"
+
+###Humanize Enums###
+Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
 
     public enum EnumUnderTest
     {
@@ -48,25 +53,46 @@ You will get:
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
-###Date Extensions###
-The <code>DateTime</code> extension methods were not part of what I had initially envisaged for this project; but while I was "humanizitationing" .Net types I thought it would be a shame to not have <code>DateTime</code> in there. 
+####Dehumanize Enums####
+Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
-Well, I did not write much of this code myself and do not want to take any credit for it. This is a copy of [StackOverFlow algorithm][4] - although I had to apply some minor fixes on top of it. I am not going to bore you with all the examples as I am sure you know what this does: you basically give it an instance of <code>DateTime</code> and get back a string telling how far back in time that is:
+    public static Enum DehumanizeTo<TTargetEnum>(this string input) 
+
+And the usage is:
+
+	"Member without description attribute".Dehumanize() => EnumUnderTest.MemberWithoutDescriptionAttribute
+
+And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
+
+###Humanize Dates###
+This is borrowed from [StackOverFlow algorithm][4] - although I had to apply some minor fixes on top of it. I am not going to bore you with all the examples as I am sure you know what this does: you basically give it an instance of `DateTime` and get back a string telling how far back in time that is:
 
     DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 
-Humanizer supports local as well as UTC dates and you could also inject the "current" date if you want to. Here is the API signature:
+Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base. Here is the API signature:
 
-    public static string Humanize(this DateTime input, bool utcDate = true, DateTime? now = null)
+    public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null)
 
 For dates Humanizer also supports localization.
 
+**No dehumanization for dates as the human friendly date is not reversible**
+
+###Inflector methods###
+There are also a few inflector methods:
+
+ * Pluralize: pluralizes the provided input considering irregular words; e.g. "Man".Pluralize() -> "Men" & "string".Pluralize() -> strings
+ * Singularize: singularizes the provided input considering irregular words; e.g. "Men".Singularize() -> "Man" & "strings".Singularize() -> string
+ * Ordinalize numbers: turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. 1.Ordinalize() -> "1st", 5.Ordinalize() -> "5th"
+ * Ordinalize strings: Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. "21".Ordinalize() -> "21st"
+ * Underscore: separates the input words with underscore; e.g. "SomeTitle".Underscore() -> "some_title"
+ * Dasherize: replaces underscores with dashes in the string; e.g. "some_title".Dasherize() -> "some-title"
+
 ##What else?##
-This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
+This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
 
 You may find an Asp.Net MVC sample [in the code][5] that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
 
-This is achieved using a custom <code>DataAnnotationsModelMetadataProvider</code> I called <code>[HumanizerMetadataProvider][6]</code>. It is small enough to repeat here; so here we go:
+This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called `[HumanizerMetadataProvider][6]`. It is small enough to repeat here; so here we go:
 
     public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
     {
@@ -101,7 +127,7 @@ This is achieved using a custom <code>DataAnnotationsModelMetadataProvider</code
         }
     }
 
-This class calls the base class to extract the metadata and then, if required, humanizes the property name. It is checking if the property already has a <code>DisplayName</code> or <code>Display</code> attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. For other properties it will Humanize the property name. That is all.
+This class calls the base class to extract the metadata and then, if required, humanizes the property name. It is checking if the property already has a `DisplayName` or `Display` attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. For other properties it will Humanize the property name. That is all.
 
 Now I need to register this metadata provider with Asp.Net MVC:
 
@@ -132,7 +158,7 @@ with:
 
 ... and the "metadata humanizer" will take care of the rest.
 
-No need to mention that if you want title casing for your labels you may call the other overload of <code>Humanize</code> method:
+No need to mention that if you want title casing for your labels you may call the other overload of `Humanize` method:
 
     modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize(LetterCasing.Title));
 
@@ -147,8 +173,6 @@ Humanizer is released under the MIT License. See the bundled LICENSE file for de
 
   [1]: https://github.com/MehdiK/Humanizer
   [2]: https://nuget.org/packages/Humanizer
-  [3]: http://www.mehdi-khalili.com/bddify-in-action/introduction
-  [4]: http://stackoverflow.com/a/12/141101
   [5]: https://github.com/MehdiK/Humanizer
   [6]: https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs
 
