@@ -9,28 +9,28 @@ Humanizer is a set of extension methods, currently available on `String`, `Enum`
 ###Humanize Strings###
 String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
 
-`"PascalCaseInputStringIsTurnedIntoSentence".Humanize()` => `"Pascal case input string is turned into sentence"`
+    "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
     
-`"Underscored_input_string_is_turned_into_sentence".Humanize()` => `"Underscored input string is turned into sentence"`
+    "Underscored_input_string_is_turned_into_sentence".Humanize() => "Underscored input string is turned into sentence"
     
-`"Underscored_input_String_is_turned_INTO_sentence".Humanize()` => `"Underscored input String is turned INTO sentence"`
+    "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
     
-`"HTML".Humanize()` => `"HTML"` // acronyms are left intact
+    "HTML".Humanize() => "HTML" // acronyms are left intact
 
 You may also specify the desired letter casing:
 
-`"CanReturnTitleCase".Humanize(LetterCasing.Title)` => `"Can Return Title Case"`
+    "CanReturnTitleCase".Humanize(LetterCasing.Title) => "Can Return Title Case"
     
-`"Can_return_title_Case".Humanize(LetterCasing.Title)` => `"Can Return Title Case"`
+    "Can_return_title_Case".Humanize(LetterCasing.Title) => "Can Return Title Case"
     
-`"CanReturnLowerCase".Humanize(LetterCasing.LowerCase)` => `"can return lower case"`
+    "CanReturnLowerCase".Humanize(LetterCasing.LowerCase) => "can return lower case"
     
-`"CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps)` => `"CAN HUMANIZE INTO UPPER CASE"`
+    "CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps) => "CAN HUMANIZE INTO UPPER CASE"
 
 ####Dehumanize Strings####
 Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
 
-    `"Pascal case input string is turned into sentence".Humanize()` => `"PascalCaseInputStringIsTurnedIntoSentence"`
+    "Pascal case input string is turned into sentence".Humanize() => "PascalCaseInputStringIsTurnedIntoSentence"
 
 ###Humanize Enums###
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
@@ -43,35 +43,35 @@ Calling `ToString` directly on enum members usually results in less than ideal o
         ALLCAPITALS
     }
 
-You can use humanizer like:
+You will get:
 
-`EnumUnderTest.MemberWithDescriptionAttribute.Humanize()` => `"Custom description"; // DescriptionAttribute is honored`
+    EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"; // DescriptionAttribute is honored
     
-`EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize()` => `"Member without description attribute"; // in the absence of Description attribute string.Humanizer kicks in`
+    EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute"; // in the absence of Description attribute string.Humanizer kicks in
     
-`EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title)` => `"Member Without Description Attribute"; // an of course you can still apply letter casing`
+    EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title) => "Member Without Description Attribute"; // an of course you can still apply letter casing 
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
 ####Dehumanize Enums####
 Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
-`public static Enum DehumanizeTo<TTargetEnum>(this string input)`
+    public static Enum DehumanizeTo<TTargetEnum>(this string input) 
 
 And the usage is:
 
-`"Member without description attribute".Dehumanize()` => `EnumUnderTest.MemberWithoutDescriptionAttribute`
+	"Member without description attribute".Dehumanize() => EnumUnderTest.MemberWithoutDescriptionAttribute
 
 And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
 
 ###Humanize Dates###
 This is borrowed from [StackOverFlow algorithm][4] - although I had to apply some minor fixes on top of it. I am not going to bore you with all the examples as I am sure you know what this does: you basically give it an instance of `DateTime` and get back a string telling how far back in time that is:
 
-`DateTime.UtcNow.AddHours(-30).Humanize()` => `"yesterday"`
+    DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 
 Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base. Here is the API signature:
 
-`public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null)`
+    public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null)
 
 For dates Humanizer also supports localization.
 
