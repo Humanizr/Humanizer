@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer", "Humanizer\Humanizer.csproj", "{511A7984-F455-4A6E-ADB9-9CAAC47EA079}"
@@ -16,6 +16,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Humanizer", "Humanizer", "{9B089B32-EBD8-42DD-A3C2-276FCA091644}"
 	ProjectSection(SolutionItems) = preProject
 		..\NuGet\Humanizer\Humanizer.nuspec = ..\NuGet\Humanizer\Humanizer.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}"
+	ProjectSection(SolutionItems) = preProject
+		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
 Global

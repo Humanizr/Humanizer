@@ -7,7 +7,7 @@ You can install Humanizer as a nuget package: `Install-Package Humanizer`
 Humanizer is a set of extension methods, currently available on `String`, `Enum`, `DateTime` and `int` and turns them from computer friendly into human friendly format (and vice versa).
 
 ###Humanize Strings###
-String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](http://teststack.github.com/TestStack.BDDfy/) where class names, method names and properties are turned into human readable sentences. 
+String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
 
     "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
     
