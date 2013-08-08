@@ -92,7 +92,7 @@ This is just a baseline and you can use this to simplify your day to day job. Fo
 
 You may find an Asp.Net MVC sample [in the code][5] that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
 
-This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called `[HumanizerMetadataProvider](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs)`. It is small enough to repeat here; so here we go:
+This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
     public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
     {
