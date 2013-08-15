@@ -66,7 +66,7 @@
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
-    <Compile Include="FluentDate\NumberToTimeSpanExtensions.cs" />
+    <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -98,7 +98,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="FluentDate\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
