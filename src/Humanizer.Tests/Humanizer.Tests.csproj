@@ -69,6 +69,7 @@
     <Compile Include="Extensions\EnumHumanizeTests.cs" />
     <Compile Include="Extensions\EnumTestsResources.cs" />
     <Compile Include="Extensions\EnumUnderTest.cs" />
+    <Compile Include="Extensions\NumberToTimeSpanTests.cs" />
     <Compile Include="Extensions\Inflector\DasherizeTests.cs" />
     <Compile Include="Extensions\Inflector\InflectorTestBase.cs" />
     <Compile Include="Extensions\Inflector\OrdinalizeTests.cs" />
