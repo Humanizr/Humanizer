@@ -66,6 +66,18 @@
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
+    <Compile Include="FluentDate\PrepositionsExtensions.cs" />
+    <Compile Include="FluentDate\On.Days.cs">
+      <DependentUpon>On.Days.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="FluentDate\In.cs" />
+    <Compile Include="FluentDate\In.Months.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>In.Months.tt</DependentUpon>
+    </Compile>
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
@@ -79,6 +91,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FluentDate\On.Days.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>On.Days.cs</LastGenOutput>
+    </None>
+    <None Include="FluentDate\In.Months.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>In.Months.cs</LastGenOutput>
+    </None>
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +119,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="FluentDate\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

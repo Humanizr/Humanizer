@@ -1,0 +1,40 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ assembly name="$(SolutionDir)Humanizer\bin\Debug\Humanizer.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="Humanizer" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+using System;
+
+namespace Humanizer
+{
+    public partial class On
+    {
+	<#    
+	const int leapYear = 2012;
+    for (int month = 1; month <= 12; month++)
+    {
+		var firstDayOfMonth = new DateTime(leapYear, month, 1);
+		var monthName = firstDayOfMonth.ToString("MMMM");#>
+	    
+		public class <#= monthName #>
+		{
+        <#for (int day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
+        {
+		var ordinalDay = day.Ordinalize();#>
+ 
+			public static DateTime The<#= ordinalDay #>
+			{
+				get { return new DateTime(DateTime.Now.Year, <#= month #>, <#= day #>); }
+			}
+	    <#}#>
+}
+    <#}#>
+	}
+}
