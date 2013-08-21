@@ -124,7 +124,7 @@
     <value>acum o secundă</value>
   </data>
   <data name="DateExtensions_SecondsAgo__seconds_ago" xml:space="preserve">
-    <value>acum {0} seconde</value>
+    <value>acum {0} secunde</value>
   </data>
   <data name="DateExtensions_OneMinuteAgo_a_minute_ago" xml:space="preserve">
     <value>acum un minut</value>
