@@ -80,6 +80,7 @@
     <Compile Include="Extensions\Inflector\PluralizeTests.cs" />
     <Compile Include="Extensions\Inflector\TitleizeTests.cs" />
     <Compile Include="Extensions\Inflector\UnderscoreTests.cs" />
+    <Compile Include="Extensions\NumberToWordsTests.cs" />
     <Compile Include="Extensions\StringDehumanizeTests.cs" />
     <Compile Include="Extensions\StringHumanizeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
