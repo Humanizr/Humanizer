@@ -69,6 +69,9 @@
     <Compile Include="Extensions\EnumHumanizeTests.cs" />
     <Compile Include="Extensions\EnumTestsResources.cs" />
     <Compile Include="Extensions\EnumUnderTest.cs" />
+    <Compile Include="Extensions\FluentDate\InTests.cs" />
+    <Compile Include="Extensions\FluentDate\OnTests.cs" />
+    <Compile Include="Extensions\FluentDate\PrepositionTests.cs" />
     <Compile Include="Extensions\NumberToTimeSpanTests.cs" />
     <Compile Include="Extensions\Inflector\DasherizeTests.cs" />
     <Compile Include="Extensions\Inflector\InflectorTestBase.cs" />
@@ -90,9 +93,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\FluentDate\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
