@@ -60,7 +60,7 @@
   <Target Name="Rebuild" DependsOnTargets="Clean;Build;" />
   
   <Target Name="Integrate" DependsOnTargets="Clean;Test" />
-  <Target Name="Release" DependsOnTargets="Clean;Build;Test;Distrib" />
+  <Target Name="Release" DependsOnTargets="Clean;Build;Test" />
 
   <!--
    Copies built items to the distrib directory
@@ -70,10 +70,10 @@
 
     <!--Libraries-->
     <CreateItem
-      Include="$(LibrarySource)\*.dll;$(LibrarySource)\*.xml;">
+      Include="$(LibrarySource)\**;">
       <Output ItemName="libFiles" TaskParameter="Include"/>
     </CreateItem>
-    <Copy SourceFiles="@(libFiles)" DestinationFolder="$(LibraryPath)" />
+    <Copy SourceFiles="@(libFiles)" DestinationFolder="$(LibraryPath)\%(libFiles.RecursiveDir)" />
 
     <!--All Tests-->
     <CreateItem Include="src\Humanizer.Tests\bin\$(Configuration)\*.*">
@@ -93,15 +93,5 @@
       <Output ItemName="_testFiles" TaskParameter="Include"/>
     </CreateItem>
     <Exec Command="$(xunitConsole) @(_testFiles->'&quot;%(FullPath)&quot;', ' ') /noshadow"></Exec>
-  </Target>
-
-  <Target Name="Distrib" DependsOnTargets="Clean;Build;Copy">
-    <MakeDir Directories="$(PackageDirectory)" />
-
-    <!-- Archive-->
-    <CreateItem Include="$(LibraryPath)\Humanizer*.*;$(LicensePath)\*.*">
-      <Output ItemName="_libFiles" TaskParameter="Include" />
-    </CreateItem>
-    <Zip Files="@(_libFiles)" ZipFileName="$(PackageDirectory)\$(PackageName).zip" Flatten="true" WorkingDirectory="$(BuildPath)" />
   </Target>
 </Project>
