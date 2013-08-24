@@ -3,6 +3,11 @@ namespace Humanizer
 {
     public static class NumberToTimeSpanExtensions
     {
+        /// <summary>
+        /// 2.Weeks() == new TimeSpan(14, 0, 0, 0)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static TimeSpan Weeks(this int input)
         {
             return new TimeSpan(input*7, 0, 0, 0);
@@ -49,7 +54,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// 5.Seconds() == new TimeSpan(0, 0, 0, 5) 
+        /// 5.Milliseconds() == new TimeSpan(0, 0, 0, 0, 5) 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

@@ -87,6 +87,49 @@ There are also a few inflector methods:
  * Underscore: separates the input words with underscore; e.g. `"SomeTitle".Underscore()` -> `"some_title"`
  * Dasherize: replaces underscores with dashes in the string; e.g. `"some_title".Dasherize()` -> `"some-title"`
 
+###Fluent Date
+Humanizer provices a fluent API to deal with `DateTime` and `TimeSpan` as follows:
+
+`TimeSpan` methods:
+
+	2.Milliseconds() == new TimeSpan(0, 0, 0, 0, 2)
+	2.Seconds() == new TimeSpan(0, 0, 0, 2)
+	2.Minutes() == new TimeSpan(0, 0, 2, 0)
+	2.Hours() == new TimeSpan(0, 2, 0, 0)
+	2.Days() => new TimeSpan(2, 0, 0, 0)
+	2.Weeks() == new TimeSpan(14, 0, 0, 0)
+
+There are no fluent APIs for month or year as a month could have between 28 to 31 days and a year could be 365 or 366 days.
+
+`DateTime` fluent methods:
+
+	In.TheYear(2010) // Returns the first of January of 2010
+	In.January // Returns 1st of January of the current year
+	In.FebruaryOf(2009) // Returns 1st of February of 2009
+	In.One.Second //  DateTime.UtcNow.AddSeconds(1);
+	In.Two.SecondsFrom(DateTime dateTime)
+	In.Three.Minutes // With corresponding From method
+	In.Three.Hours // With corresponding From method
+	In.Three.Days // With corresponding From method
+	In.Three.Weeks // With corresponding From method
+	In.Three.Months // With corresponding From method
+	In.Three.Years // With corresponding From method
+	On.January.The4th // Returns 4th of January of the current year
+	On.February.The(12) // Returns 12th of Feb of the current year
+	On.November.The10th.In(2007) // Returns 10th of Nov of 2007
+
+and extension methods:
+
+	var someDateTime = new DateTime(2011, 2, 10, 5, 25, 45, 125);
+	someDateTime.In(2008) // Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008
+	someDateTime.At(2) // Returns new DateTime(2011, 2, 10, 2, 25, 45, 125) changing the hour to 2:25:45.125
+	someDateTime.At(2, 20, 15) // Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125
+	someDateTime.AtNoon() // Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000
+	someDateTime.AtMidnight() // Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000
+
+###Number to words 
+Humanizer can change numbers to words; e.g. `3501.ToWords() -> "three thousand five hundred and one"
+
 ##What else?##
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
 
