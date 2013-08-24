@@ -92,12 +92,12 @@ Humanizer provices a fluent API to deal with `DateTime` and `TimeSpan` as follow
 
 `TimeSpan` methods:
 
-	2.Milliseconds() == new TimeSpan(0, 0, 0, 0, 2)
-	2.Seconds() == new TimeSpan(0, 0, 0, 2)
-	2.Minutes() == new TimeSpan(0, 0, 2, 0)
-	2.Hours() == new TimeSpan(0, 2, 0, 0)
-	2.Days() => new TimeSpan(2, 0, 0, 0)
-	2.Weeks() == new TimeSpan(14, 0, 0, 0)
+	2.Milliseconds() // Returns new TimeSpan(0, 0, 0, 0, 2)
+	2.Seconds() // Returns new TimeSpan(0, 0, 0, 2)
+	2.Minutes() // Returns new TimeSpan(0, 0, 2, 0)
+	2.Hours() // Returns new TimeSpan(0, 2, 0, 0)
+	2.Days() // Returns new TimeSpan(2, 0, 0, 0)
+	2.Weeks() // Returns new TimeSpan(14, 0, 0, 0)
 
 There are no fluent APIs for month or year as a month could have between 28 to 31 days and a year could be 365 or 366 days.
 
