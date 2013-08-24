@@ -25,6 +25,10 @@ namespace Humanizer
 	    
 		public class <#= monthName #>
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, <#= month #>, dayNumber); 
+			}
         <#for (int day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
         {
 		var ordinalDay = day.Ordinalize();#>

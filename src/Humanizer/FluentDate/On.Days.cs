@@ -8,6 +8,10 @@ namespace Humanizer
 		    
 		public class January
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 1, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -167,6 +171,10 @@ namespace Humanizer
     	    
 		public class February
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 2, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -316,6 +324,10 @@ namespace Humanizer
     	    
 		public class March
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 3, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -475,6 +487,10 @@ namespace Humanizer
     	    
 		public class April
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 4, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -629,6 +645,10 @@ namespace Humanizer
     	    
 		public class May
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 5, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -788,6 +808,10 @@ namespace Humanizer
     	    
 		public class June
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 6, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -942,6 +966,10 @@ namespace Humanizer
     	    
 		public class July
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 7, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -1101,6 +1129,10 @@ namespace Humanizer
     	    
 		public class August
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 8, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -1260,6 +1292,10 @@ namespace Humanizer
     	    
 		public class September
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 9, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -1414,6 +1450,10 @@ namespace Humanizer
     	    
 		public class October
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 10, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -1573,6 +1613,10 @@ namespace Humanizer
     	    
 		public class November
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 11, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{
@@ -1727,6 +1771,10 @@ namespace Humanizer
     	    
 		public class December
 		{
+			public static DateTime The(int dayNumber)
+			{
+				return new DateTime(DateTime.Now.Year, 12, dayNumber); 
+			}
          
 			public static DateTime The1st
 			{

@@ -1,0 +1,104 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ assembly name="$(SolutionDir)Humanizer\bin\Debug\Humanizer.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="Humanizer" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+using System;
+
+namespace Humanizer
+{
+    public partial class In
+    {
+  <#for (int i = 1; i <= 10; i++){
+		var plural = ( i > 1 ? "s" : "");
+		var second = "Second" + plural;
+		var minute = "Minute" + plural;
+		var hour = "Hour" + plural;
+		var day = "Day" + plural;
+		var week = "Week" + plural;
+		var month = "Month" + plural;
+		var year = "Year" + plural;
+  
+  #> 
+		public static class <#= i.ToWords().Dehumanize() #>
+		{
+			public static DateTime <#= second #>
+			{
+				get { return DateTime.UtcNow.AddSeconds(<#= i #>); }
+			}
+
+			public static DateTime <#= second #>From(DateTime date)
+			{
+				return date.AddSeconds(<#= i #>);
+			}
+
+			public static DateTime <#= minute #>
+			{
+				get { return DateTime.UtcNow.AddMinutes(<#= i #>); }
+			}
+
+			public static DateTime <#= minute #>From(DateTime date)
+			{
+				return date.AddMinutes(<#= i #>);
+			}
+
+			public static DateTime <#= hour #>
+			{
+				get { return DateTime.UtcNow.AddHours(<#= i #>); }
+			}
+
+			public static DateTime <#= hour #>From(DateTime date)
+			{
+				return date.AddHours(<#= i #>);
+			}
+
+			public static DateTime <#= day #>
+			{
+				get { return DateTime.UtcNow.AddDays(<#= i #>); }
+			}
+
+			public static DateTime <#= day #>From(DateTime date)
+			{
+				return date.AddDays(<#= i #>);
+			}
+
+			public static DateTime <#= week #>
+			{
+				get { return DateTime.UtcNow.AddDays(<#= i * 7 #>); }
+			}
+
+			public static DateTime <#= week #>From(DateTime date)
+			{
+				return date.AddDays(<#= i * 7 #>);
+			}
+
+			public static DateTime <#= month #>
+			{
+				get { return DateTime.UtcNow.AddMonths(<#= i #>); }
+			}
+
+			public static DateTime <#= month #>From(DateTime date)
+			{
+				return date.AddMonths(<#= i #>);
+			}
+
+			public static DateTime <#= year #>
+			{
+				get { return DateTime.UtcNow.AddYears(<#= i #>); }
+			}
+
+			public static DateTime <#= year #>From(DateTime date)
+			{
+				return date.AddYears(<#= i #>);
+			}
+		}
+    <#}#>
+  }
+}

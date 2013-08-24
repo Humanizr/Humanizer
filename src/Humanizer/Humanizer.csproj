@@ -66,6 +66,11 @@
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
+    <Compile Include="FluentDate\In.SomeTimeFrom.cs">
+      <DependentUpon>In.SomeTimeFrom.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="FluentDate\PrepositionsExtensions.cs" />
     <Compile Include="FluentDate\On.Days.cs">
       <DependentUpon>On.Days.tt</DependentUpon>
@@ -92,6 +97,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FluentDate\In.SomeTimeFrom.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>In.SomeTimeFrom.cs</LastGenOutput>
+    </None>
     <None Include="FluentDate\On.Days.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>On.Days.cs</LastGenOutput>

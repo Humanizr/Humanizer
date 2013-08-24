@@ -54,7 +54,20 @@ namespace Humanizer.Tests.Extensions.FluentDate
             Assert.Equal(0, date.Minute);
             Assert.Equal(0, date.Second);
             Assert.Equal(0, date.Millisecond);
+        }
 
+        [Fact]
+        public void InFiveDays()
+        {
+            var baseDate = On.January.The21st;
+            var date = In.Five.DaysFrom(baseDate);
+            Assert.Equal(baseDate.Year, date.Year);
+            Assert.Equal(baseDate.Month, date.Month);
+            Assert.Equal(baseDate.Day + 5, date.Day);
+            Assert.Equal(baseDate.Hour, date.Hour);
+            Assert.Equal(baseDate.Minute, date.Minute);
+            Assert.Equal(baseDate.Second, date.Second);
+            Assert.Equal(baseDate.Millisecond, date.Millisecond);
         }
     }
 }

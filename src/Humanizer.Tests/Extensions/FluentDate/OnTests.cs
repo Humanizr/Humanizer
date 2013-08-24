@@ -30,5 +30,18 @@ namespace Humanizer.Tests.Extensions.FluentDate
             Assert.Equal(0, dec4th.Second);
             Assert.Equal(0, dec4th.Millisecond);
         }
+
+        [Fact]
+        public void OnFebruaryThe()
+        {
+            var feb11th = On.February.The(11);
+            Assert.Equal(DateTime.Now.Year, feb11th.Year);
+            Assert.Equal(2, feb11th.Month);
+            Assert.Equal(11, feb11th.Day);
+            Assert.Equal(0, feb11th.Hour);
+            Assert.Equal(0, feb11th.Minute);
+            Assert.Equal(0, feb11th.Second);
+            Assert.Equal(0, feb11th.Millisecond);
+        }
     }
 }
