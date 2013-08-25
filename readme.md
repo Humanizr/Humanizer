@@ -116,7 +116,6 @@ There are no fluent APIs for month or year as a month could have between 28 to 3
 	In.Three.Years // With corresponding From method
 	On.January.The4th // Returns 4th of January of the current year
 	On.February.The(12) // Returns 12th of Feb of the current year
-	On.November.The10th.In(2007) // Returns 10th of Nov of 2007
 
 and extension methods:
 
@@ -126,6 +125,10 @@ and extension methods:
 	someDateTime.At(2, 20, 15) // Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125
 	someDateTime.AtNoon() // Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000
 	someDateTime.AtMidnight() // Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000
+
+Obviously you could chain the methods; e.g.
+
+	On.November.The13th.In(2010).AtNoon
 
 ###Number to words 
 Humanizer can change numbers to words; e.g. `3501.ToWords() -> "three thousand five hundred and one"
