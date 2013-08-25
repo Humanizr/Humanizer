@@ -30,7 +30,7 @@ You may also specify the desired letter casing:
 ####Dehumanize Strings####
 Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
 
-    "Pascal case input string is turned into sentence".Humanize() => "PascalCaseInputStringIsTurnedIntoSentence"
+    "Pascal case input string is turned into sentence".Dehumanize() => "PascalCaseInputStringIsTurnedIntoSentence"
 
 ###Humanize Enums###
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
