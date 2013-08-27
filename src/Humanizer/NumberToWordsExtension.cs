@@ -17,25 +17,25 @@ namespace Humanizer
                 return "zero";
 
             if (number < 0)
-                return "minus " + ToWords(Math.Abs(number));
+                return string.Format("minus {0}", ToWords(Math.Abs(number)));
 
             var words = new StringBuilder();
 
             if ((number / 1000000) > 0)
             {
-                words.Append(ToWords(number / 1000000) + " million ");
+                words.AppendFormat("{0} million ", ToWords(number / 1000000));
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                words.Append(ToWords(number / 1000) + " thousand ");
+                words.AppendFormat("{0} thousand ", ToWords(number / 1000));
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                words.Append(ToWords(number / 100) + " hundred ");
+                words.AppendFormat("{0} hundred ", ToWords(number / 100));
                 number %= 100;
             }
 
@@ -53,7 +53,7 @@ namespace Humanizer
                 {
                     words.Append(tensMap[number / 10]);
                     if ((number % 10) > 0)
-                        words.Append("-" + unitsMap[number % 10]);
+                        words.AppendFormat("-{0}", unitsMap[number % 10]);
                 }
             }
 
