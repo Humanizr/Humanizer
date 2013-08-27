@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Humanizer
@@ -19,45 +20,46 @@ namespace Humanizer
             if (number < 0)
                 return string.Format("minus {0}", ToWords(Math.Abs(number)));
 
-            var words = new StringBuilder();
+            var parts = new List<string>();
 
             if ((number / 1000000) > 0)
             {
-                words.AppendFormat("{0} million ", ToWords(number / 1000000));
+                parts.Add(string.Format("{0} million", ToWords(number / 1000000)));
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                words.AppendFormat("{0} thousand ", ToWords(number / 1000));
+                parts.Add(string.Format("{0} thousand", ToWords(number / 1000)));
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                words.AppendFormat("{0} hundred ", ToWords(number / 100));
+                parts.Add(string.Format("{0} hundred", ToWords(number / 100)));
                 number %= 100;
             }
 
             if (number > 0)
             {
-                if (words.Length != 0)
-                    words.Append("and ");
+                if (parts.Count != 0)
+                    parts.Add("and");
 
                 var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
                 var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
                 if (number < 20)
-                    words.Append(unitsMap[number]);
+                    parts.Add(unitsMap[number]);
                 else
                 {
-                    words.Append(tensMap[number / 10]);
+                    var lastPart = tensMap[number / 10];
                     if ((number % 10) > 0)
-                        words.AppendFormat("-{0}", unitsMap[number % 10]);
+                        lastPart += string.Format("-{0}", unitsMap[number % 10]);
+                    parts.Add(lastPart);
                 }
             }
 
-            return words.ToString();
+            return string.Join(" ", parts);
         }
     }
 }
