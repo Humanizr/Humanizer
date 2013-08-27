@@ -58,7 +58,7 @@ namespace Humanizer
                 }
             }
 
-            return string.Join(" ", parts);
+            return string.Join(" ", parts.ToArray());
         }
     }
 }
