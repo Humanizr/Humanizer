@@ -63,117 +63,117 @@ namespace Humanizer.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {0} days ago.
         /// </summary>
-        public static string DateExtensions_DaysAgo__days_ago {
+        public static string DateHumanize__days_ago {
             get {
-                return ResourceManager.GetString("DateExtensions_DaysAgo__days_ago", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to not yet.
-        /// </summary>
-        public static string DateExtensions_FutureDate_not_yet {
-            get {
-                return ResourceManager.GetString("DateExtensions_FutureDate_not_yet", resourceCulture);
+                return ResourceManager.GetString("DateHumanize__days_ago", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0} hours ago.
         /// </summary>
-        public static string DateExtensions_HoursAgo__hours_ago {
+        public static string DateHumanize__hours_ago {
             get {
-                return ResourceManager.GetString("DateExtensions_HoursAgo__hours_ago", resourceCulture);
+                return ResourceManager.GetString("DateHumanize__hours_ago", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0} minutes ago.
         /// </summary>
-        public static string DateExtensions_MinutesAgo__minutes_ago {
+        public static string DateHumanize__minutes_ago {
             get {
-                return ResourceManager.GetString("DateExtensions_MinutesAgo__minutes_ago", resourceCulture);
+                return ResourceManager.GetString("DateHumanize__minutes_ago", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0} months ago.
         /// </summary>
-        public static string DateExtensions_MonthsAgo__months_ago {
+        public static string DateHumanize__months_ago {
             get {
-                return ResourceManager.GetString("DateExtensions_MonthsAgo__months_ago", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to an hour ago.
-        /// </summary>
-        public static string DateExtensions_OneHourAgo_an_hour_ago {
-            get {
-                return ResourceManager.GetString("DateExtensions_OneHourAgo_an_hour_ago", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to a minute ago.
-        /// </summary>
-        public static string DateExtensions_OneMinuteAgo_a_minute_ago {
-            get {
-                return ResourceManager.GetString("DateExtensions_OneMinuteAgo_a_minute_ago", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to one month ago.
-        /// </summary>
-        public static string DateExtensions_OneMonthAgo_one_month_ago {
-            get {
-                return ResourceManager.GetString("DateExtensions_OneMonthAgo_one_month_ago", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to one second ago.
-        /// </summary>
-        public static string DateExtensions_OneSecondAgo_one_second_ago {
-            get {
-                return ResourceManager.GetString("DateExtensions_OneSecondAgo_one_second_ago", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to one year ago.
-        /// </summary>
-        public static string DateExtensions_OneYearAgo_one_year_ago {
-            get {
-                return ResourceManager.GetString("DateExtensions_OneYearAgo_one_year_ago", resourceCulture);
+                return ResourceManager.GetString("DateHumanize__months_ago", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0} seconds ago.
         /// </summary>
-        public static string DateExtensions_SecondsAgo__seconds_ago {
+        public static string DateHumanize__seconds_ago {
             get {
-                return ResourceManager.GetString("DateExtensions_SecondsAgo__seconds_ago", resourceCulture);
+                return ResourceManager.GetString("DateHumanize__seconds_ago", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to {0} years ago.
         /// </summary>
-        public static string DateExtensions_YearsAgo__years_ago {
+        public static string DateHumanize__years_ago {
             get {
-                return ResourceManager.GetString("DateExtensions_YearsAgo__years_ago", resourceCulture);
+                return ResourceManager.GetString("DateHumanize__years_ago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a minute ago.
+        /// </summary>
+        public static string DateHumanize_a_minute_ago {
+            get {
+                return ResourceManager.GetString("DateHumanize_a_minute_ago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to an hour ago.
+        /// </summary>
+        public static string DateHumanize_an_hour_ago {
+            get {
+                return ResourceManager.GetString("DateHumanize_an_hour_ago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to not yet.
+        /// </summary>
+        public static string DateHumanize_not_yet {
+            get {
+                return ResourceManager.GetString("DateHumanize_not_yet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to one month ago.
+        /// </summary>
+        public static string DateHumanize_one_month_ago {
+            get {
+                return ResourceManager.GetString("DateHumanize_one_month_ago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to one second ago.
+        /// </summary>
+        public static string DateHumanize_one_second_ago {
+            get {
+                return ResourceManager.GetString("DateHumanize_one_second_ago", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to one year ago.
+        /// </summary>
+        public static string DateHumanize_one_year_ago {
+            get {
+                return ResourceManager.GetString("DateHumanize_one_year_ago", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to yesterday.
         /// </summary>
-        public static string DateExtensions_Yesterday_yesterday {
+        public static string DateHumanize_yesterday {
             get {
-                return ResourceManager.GetString("DateExtensions_Yesterday_yesterday", resourceCulture);
+                return ResourceManager.GetString("DateHumanize_yesterday", resourceCulture);
             }
         }
     }
