@@ -18,25 +18,25 @@ namespace Humanizer
                 return "zero";
 
             if (number < 0)
-                return Configurator.Formatter.FormatNumberInString("minus {0}", ToWords(Math.Abs(number)));
+                return string.Format("minus {0}", ToWords(Math.Abs(number)));
 
             var parts = new List<string>();
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(Configurator.Formatter.FormatNumberInString("{0} million", ToWords(number / 1000000)));
+                parts.Add(string.Format("{0} million", ToWords(number / 1000000)));
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(Configurator.Formatter.FormatNumberInString("{0} thousand", ToWords(number / 1000)));
+                parts.Add(string.Format("{0} thousand", ToWords(number / 1000)));
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(Configurator.Formatter.FormatNumberInString("{0} hundred", ToWords(number / 100)));
+                parts.Add(string.Format("{0} hundred", ToWords(number / 100)));
                 number %= 100;
             }
 
@@ -54,7 +54,7 @@ namespace Humanizer
                 {
                     var lastPart = tensMap[number / 10];
                     if ((number % 10) > 0)
-                        lastPart += Configurator.Formatter.FormatNumberInString("-{0}", unitsMap[number % 10]);
+                        lastPart += string.Format("-{0}", unitsMap[number % 10]);
                     parts.Add(lastPart);
                 }
             }

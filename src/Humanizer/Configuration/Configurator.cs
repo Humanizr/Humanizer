@@ -8,12 +8,13 @@
         /// <summary>
         /// The formatter to be used 
         /// </summary>
-        public static ILocaleAwareFormatter Formatter { get; set; }
-
-        static Configurator()
+        public static IFormatter Formatter 
         {
-            // ToDo: when other formatters are created we should change this implementation to set the Formatter based on the current locale
-            Formatter = new DefaultFormatter();
+            get
+            {
+                // ToDo: when other formatters are created we should change this implementation to resolve the Formatter based on the current culture
+                return new DefaultFormatter();
+            }
         }
     }
 }

@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="Configuration\DefaultFormatter.cs" />
-    <Compile Include="Configuration\ILocaleAwareFormatter.cs" />
+    <Compile Include="Configuration\IFormatter.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
