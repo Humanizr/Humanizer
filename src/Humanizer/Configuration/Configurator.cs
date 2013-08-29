@@ -21,6 +21,11 @@ namespace Humanizer.Configuration
                     return new RussianFormatter();
                 }
 
+                if (CurrentLanguageIs("ro"))
+                {
+                    return new RomanianFormatter();
+                }
+
                 // ToDo: when other formatters are created we should change this implementation to resolve the Formatter based on the current culture
                 return new DefaultFormatter();
             }
