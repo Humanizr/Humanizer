@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 
 namespace Humanizer.Configuration
@@ -9,14 +9,14 @@ namespace Humanizer.Configuration
     public static class Configurator
     {
         /// <summary>
-        /// The formatter to be used 
+        /// The formatter to be used
         /// </summary>
         public static IFormatter Formatter 
         {
             get
             {
                 //TODO: find proper way to get partial cultures. We want to match all xx-RU cultures.
-                if (string.Equals(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, "ru", StringComparison.OrdinalIgnoreCase))
+                if (CurrentLanguageIs("ru"))
                 {
                     return new RussianFormatter();
                 }
@@ -24,6 +24,11 @@ namespace Humanizer.Configuration
                 // ToDo: when other formatters are created we should change this implementation to resolve the Formatter based on the current culture
                 return new DefaultFormatter();
             }
+        }
+
+        private static bool CurrentLanguageIs(string twoLetterCode)
+        {
+            return string.Equals(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, twoLetterCode, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
