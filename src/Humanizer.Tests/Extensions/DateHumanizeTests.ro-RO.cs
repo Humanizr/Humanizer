@@ -21,7 +21,7 @@ namespace Humanizer.Tests.Extensions
             Assert.Equal("acum 3 ore", threeHoursAgo);
         }
 
-        [Fact(Skip = "Doesn't pass yet")]
+        [Fact]
         public void RomanianTranslationIsCorrectFor20HoursAgo()
         {
             var currentCulture = Thread.CurrentThread.CurrentUICulture;

@@ -33,7 +33,7 @@ namespace Humanizer.Configuration
 
         private static bool CurrentLanguageIs(string twoLetterCode)
         {
-            return string.Equals(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, twoLetterCode, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, twoLetterCode, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

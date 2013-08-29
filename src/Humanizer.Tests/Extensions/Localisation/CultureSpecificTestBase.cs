@@ -10,8 +10,8 @@ namespace Humanizer.Tests.Extensions.Localisation
 
         protected CultureSpecificTestBase(CultureInfo culture)
         {
-            _culture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = culture;
+            _culture = Thread.CurrentThread.CurrentUICulture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
 
         protected CultureSpecificTestBase(string cultureName)
@@ -21,7 +21,7 @@ namespace Humanizer.Tests.Extensions.Localisation
 
         public void Dispose()
         {
-            Thread.CurrentThread.CurrentCulture = _culture;
+            Thread.CurrentThread.CurrentUICulture = _culture;
         }
     }
 }
