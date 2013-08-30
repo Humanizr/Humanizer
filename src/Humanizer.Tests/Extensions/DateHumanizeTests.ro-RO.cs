@@ -100,6 +100,28 @@ namespace Humanizer.Tests.Extensions
             }
         }
 
+        [Fact]
+        public void RomanianTranslationIsCorrectFor119YearsAgo()
+        {
+            using (RomanianCulture())
+            {
+                var oneHundredNineteenYearsAgo = DateTime.UtcNow.AddYears(-119).Humanize();
+
+                Assert.Equal("acum 119 ani", oneHundredNineteenYearsAgo);
+            }
+        }
+
+        [Fact]
+        public void RomanianTranslationIsCorrectFor100YearsAgo()
+        {
+            using (RomanianCulture())
+            {
+                var hunderedYearsAgo = DateTime.UtcNow.AddYears(-100).Humanize();
+
+                Assert.Equal("acum 100 de ani", hunderedYearsAgo);
+            }
+        }
+
         private static CurrentCultureChanger RomanianCulture()
         {
             return new CurrentCultureChanger(new CultureInfo("ro-RO"));

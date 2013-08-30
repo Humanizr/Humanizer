@@ -4,6 +4,18 @@ namespace Humanizer.Configuration
 {
     class RomanianFormatter : DefaultFormatter
     {
+        public override string DateHumanize__years_ago(int numberOfYears)
+        {
+            Debug.Assert(numberOfYears > 1);
+
+            if (0 < numberOfYears % 100 && numberOfYears % 100 < 20)
+            {
+                return base.DateHumanize__years_ago(numberOfYears);
+            }
+
+            return string.Format("acum {0} de ani", numberOfYears);
+        }
+
         public override string DateHumanize__days_ago(int numberOfDays)
         {
             Debug.Assert(numberOfDays > 1);
