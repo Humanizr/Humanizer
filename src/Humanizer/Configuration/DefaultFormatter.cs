@@ -4,34 +4,34 @@ namespace Humanizer.Configuration
 {
     class DefaultFormatter : IFormatter
     {
-        public virtual string DateHumanize__days_ago(int number)
+        public virtual string DateHumanize__days_ago(int numberOfDays)
         {
-            return string.Format(Resources.DateHumanize__days_ago, number);
+            return string.Format(Resources.DateHumanize__days_ago, numberOfDays);
         }
 
-        public virtual string DateHumanize__hours_ago(int number)
+        public virtual string DateHumanize__hours_ago(int numberOfHours)
         {
-            return string.Format(Resources.DateHumanize__hours_ago, number);
+            return string.Format(Resources.DateHumanize__hours_ago, numberOfHours);
         }
 
-        public virtual string DateHumanize__minutes_ago(int number)
+        public virtual string DateHumanize__minutes_ago(int numberOfMinutes)
         {
-            return string.Format(Resources.DateHumanize__minutes_ago, number);
+            return string.Format(Resources.DateHumanize__minutes_ago, numberOfMinutes);
         }
 
-        public virtual string DateHumanize__months_ago(int number)
+        public virtual string DateHumanize__months_ago(int numberOfMonths)
         {
-            return string.Format(Resources.DateHumanize__months_ago, number);
+            return string.Format(Resources.DateHumanize__months_ago, numberOfMonths);
         }
 
-        public virtual string DateHumanize__seconds_ago(int number)
+        public virtual string DateHumanize__seconds_ago(int numberOfSeconds)
         {
-            return string.Format(Resources.DateHumanize__seconds_ago, number);
+            return string.Format(Resources.DateHumanize__seconds_ago, numberOfSeconds);
         }
 
-        public virtual string DateHumanize__years_ago(int number)
+        public virtual string DateHumanize__years_ago(int numberOfYears)
         {
-            return string.Format(Resources.DateHumanize__years_ago, number);
+            return string.Format(Resources.DateHumanize__years_ago, numberOfYears);
         }
 
         public virtual string DateHumanize_a_minute_ago()

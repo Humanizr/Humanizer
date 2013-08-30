@@ -4,9 +4,8 @@ namespace Humanizer.Configuration
 {
     class RomanianFormatter : DefaultFormatter
     {
-        public override string DateHumanize__hours_ago(int number)
+        public override string DateHumanize__hours_ago(int numberOfHours)
         {
-            var numberOfHours = number;
             Debug.Assert(numberOfHours > 1);
 
             if (0 < numberOfHours%100 && numberOfHours%100 < 20)
@@ -17,16 +16,16 @@ namespace Humanizer.Configuration
             return string.Format("acum {0} de ore", numberOfHours);
         }
 
-        public override string DateHumanize__minutes_ago(int number)
+        public override string DateHumanize__minutes_ago(int numberOfMinutes)
         {
-            Debug.Assert(number > 1);
+            Debug.Assert(numberOfMinutes > 1);
 
-            if (0 < number % 100 && number % 100 < 20)
+            if (0 < numberOfMinutes % 100 && numberOfMinutes % 100 < 20)
             {
-                return base.DateHumanize__minutes_ago(number);
+                return base.DateHumanize__minutes_ago(numberOfMinutes);
             }
 
-            return string.Format("acum {0} de minute", number);
+            return string.Format("acum {0} de minute", numberOfMinutes);
         }
     }
 }
