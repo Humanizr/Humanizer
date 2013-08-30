@@ -4,32 +4,32 @@
     {
         public virtual string DateHumanize__days_ago(int numberOfDays)
         {
-            return string.Format(Resources.GetResource(ResourceKeys.DateHumanize__days_ago), numberOfDays);
+            return Format(ResourceKeys.DateHumanize__days_ago, numberOfDays);
         }
 
         public virtual string DateHumanize__hours_ago(int numberOfHours)
         {
-            return string.Format(Resources.GetResource(ResourceKeys.DateHumanize__hours_ago), numberOfHours);
+            return Format(ResourceKeys.DateHumanize__hours_ago, numberOfHours);
         }
 
         public virtual string DateHumanize__minutes_ago(int numberOfMinutes)
         {
-            return string.Format(Resources.GetResource(ResourceKeys.DateHumanize__minutes_ago), numberOfMinutes);
+            return Format(ResourceKeys.DateHumanize__minutes_ago, numberOfMinutes);
         }
 
         public virtual string DateHumanize__months_ago(int numberOfMonths)
         {
-            return string.Format(Resources.GetResource(ResourceKeys.DateHumanize__months_ago), numberOfMonths);
+            return Format(ResourceKeys.DateHumanize__months_ago, numberOfMonths);
         }
 
         public virtual string DateHumanize__seconds_ago(int numberOfSeconds)
         {
-            return string.Format(Resources.GetResource(ResourceKeys.DateHumanize__seconds_ago), numberOfSeconds);
+            return Format(ResourceKeys.DateHumanize__seconds_ago, numberOfSeconds);
         }
 
         public virtual string DateHumanize__years_ago(int numberOfYears)
         {
-            return string.Format(Resources.GetResource(ResourceKeys.DateHumanize__years_ago), numberOfYears);
+            return Format(ResourceKeys.DateHumanize__years_ago, numberOfYears);
         }
 
         public virtual string DateHumanize_a_minute_ago()
@@ -65,6 +65,16 @@
         public virtual string DateHumanize_yesterday()
         {
             return Resources.GetResource(ResourceKeys.DateHumanize_yesterday);
+        }
+
+        protected string Format(string resourceKey, int number)
+        {
+            return string.Format(Resources.GetResource(GetResourceKey(resourceKey, number)), number);
+        }
+
+        protected virtual string GetResourceKey(string resourceKey, int number)
+        {
+            return resourceKey;
         }
     }
 }
