@@ -76,10 +76,10 @@
     <Copy SourceFiles="@(libFiles)" DestinationFolder="$(LibraryPath)\%(libFiles.RecursiveDir)" />
 
     <!--All Tests-->
-    <CreateItem Include="src\Humanizer.Tests\bin\$(Configuration)\*.*">
+    <CreateItem Include="src\Humanizer.Tests\bin\$(Configuration)\**">
       <Output ItemName="TestFiles" TaskParameter="Include"/>
     </CreateItem>
-    <Copy SourceFiles="@(TestFiles)" DestinationFolder="$(TestPath)" />
+    <Copy SourceFiles="@(TestFiles)" DestinationFolder="$(TestPath)\%(TestFiles.RecursiveDir)" />
     
     <!--Licenses-->
     <CreateItem Include="*License.txt">
