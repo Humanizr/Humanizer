@@ -118,45 +118,81 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_not_yet" xml:space="preserve">
-    <value>not yet</value>
+    <value>в будущем</value>
   </data>
   <data name="DateHumanize_one_second_ago" xml:space="preserve">
-    <value>one second ago</value>
-  </data>
-  <data name="DateHumanize__seconds_ago" xml:space="preserve">
-    <value>{0} seconds ago</value>
+    <value>секунду назад</value>
   </data>
   <data name="DateHumanize_a_minute_ago" xml:space="preserve">
-    <value>a minute ago</value>
-  </data>
-  <data name="DateHumanize__minutes_ago" xml:space="preserve">
-    <value>{0} minutes ago</value>
+    <value>минуту назад</value>
   </data>
   <data name="DateHumanize_an_hour_ago" xml:space="preserve">
-    <value>an hour ago</value>
-  </data>
-  <data name="DateHumanize__hours_ago" xml:space="preserve">
-    <value>{0} hours ago</value>
+    <value>час назад</value>
   </data>
   <data name="DateHumanize_yesterday" xml:space="preserve">
-    <value>yesterday</value>
-  </data>
-  <data name="DateHumanize__days_ago" xml:space="preserve">
-    <value>{0} days ago</value>
+    <value>вчера</value>
   </data>
   <data name="DateHumanize_one_month_ago" xml:space="preserve">
-    <value>one month ago</value>
-  </data>
-  <data name="DateHumanize__months_ago" xml:space="preserve">
-    <value>{0} months ago</value>
+    <value>месяц назад</value>
   </data>
   <data name="DateHumanize_one_year_ago" xml:space="preserve">
-    <value>one year ago</value>
-  </data>
-  <data name="DateHumanize__years_ago" xml:space="preserve">
-    <value>{0} years ago</value>
+    <value>год назад</value>
   </data>
   <data name="DateHumanize__ago" xml:space="preserve">
-    <value>{0} {1} ago</value>
+    <value>{0} {1} назад</value>
+  </data>
+  <data name="DateHumanize__days_ago_singular" xml:space="preserve">
+    <value>{0} день назад</value>
+  </data>
+  <data name="DateHumanize__hours_ago" xml:space="preserve">
+    <value>{0} часов назад</value>
+  </data>
+  <data name="DateHumanize__minutes_ago" xml:space="preserve">
+    <value>{0} минут назад</value>
+  </data>
+  <data name="DateHumanize__months_ago" xml:space="preserve">
+    <value>{0} месяцев назад</value>
+  </data>
+  <data name="DateHumanize__seconds_ago" xml:space="preserve">
+    <value>{0} секунд назад</value>
+  </data>
+  <data name="DateHumanize__years_ago" xml:space="preserve">
+    <value>{0} лет назад</value>
+  </data>
+  <data name="DateHumanize__days_ago" xml:space="preserve">
+    <value>{0} дней назад</value>
+  </data>
+  <data name="DateHumanize__days_ago_paucal" xml:space="preserve">
+    <value>{0} дня назад</value>
+  </data>
+  <data name="DateHumanize__hours_ago_paucal" xml:space="preserve">
+    <value>{0} часа назад</value>
+  </data>
+  <data name="DateHumanize__hours_ago_singular" xml:space="preserve">
+    <value>{0} час назад</value>
+  </data>
+  <data name="DateHumanize__minutes_ago_paucal" xml:space="preserve">
+    <value>{0} минуты назад</value>
+  </data>
+  <data name="DateHumanize__minutes_ago_singular" xml:space="preserve">
+    <value>{0} минуту назад</value>
+  </data>
+  <data name="DateHumanize__months_ago_paucal" xml:space="preserve">
+    <value>{0} месяца назад</value>
+  </data>
+  <data name="DateHumanize__months_ago_singular" xml:space="preserve">
+    <value>{0} месяц назад</value>
+  </data>
+  <data name="DateHumanize__seconds_ago_paucal" xml:space="preserve">
+    <value>{0} секунды назад</value>
+  </data>
+  <data name="DateHumanize__seconds_ago_singular" xml:space="preserve">
+    <value>{0} секунду назад</value>
+  </data>
+  <data name="DateHumanize__years_ago_paucal" xml:space="preserve">
+    <value>{0} года назад</value>
+  </data>
+  <data name="DateHumanize__years_ago_singular" xml:space="preserve">
+    <value>{0} год назад</value>
   </data>
 </root>

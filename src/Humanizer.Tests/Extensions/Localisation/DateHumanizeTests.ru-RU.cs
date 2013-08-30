@@ -2,11 +2,11 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Extensions.Localisation.Russian
+namespace Humanizer.Tests.Extensions.Localisation
 {
-    public class DateHumanizeTests : AmbientCulture
+    public class RussianDateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests() : base("ru-RU")
+        public RussianDateHumanizeTests() : base("ru-RU")
         {
         }
 
