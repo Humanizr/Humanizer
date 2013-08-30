@@ -2,11 +2,11 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Extensions.Localisation.Russian
+namespace Humanizer.Tests.Extensions.Localisation
 {
-    public class DateHumanizeTests : AmbientCulture
+    public class RussianDateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests() : base("ru-RU")
+        public RussianDateHumanizeTests() : base("ru-RU")
         {
         }
 
@@ -132,6 +132,13 @@ namespace Humanizer.Tests.Extensions.Localisation.Russian
         {
             var humanize = DateTime.UtcNow.Date.AddYears(-1 * number).Humanize();
             Assert.Equal(expected, humanize);
+        }
+
+        [Fact]
+        public void NotYet()
+        {
+            var humanize = DateTime.UtcNow.AddDays(1).Humanize();
+            Assert.Equal("в будущем", humanize);
         }
     }
 }
