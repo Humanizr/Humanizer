@@ -16,7 +16,7 @@ namespace Humanizer.Configuration
             get
             {
                 //TODO: find proper way to get partial cultures. We want to match all xx-RU cultures.
-                if (string.Equals(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, "ru", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, "ru", StringComparison.OrdinalIgnoreCase))
                 {
                     return new RussianFormatter();
                 }
