@@ -1,6 +1,6 @@
 ﻿namespace Humanizer.Localisation
 {
-    internal class RussianFormatter : IFormatter
+    internal class RussianFormatter : DefaultFormatter
     {
         private const string Ago = "{0} {1} назад";
 
@@ -25,67 +25,67 @@
             return plural;
         }
 
-        public string DateHumanize_one_second_ago()
+        public override string DateHumanize_one_second_ago()
         {
             return "секунду назад";
         }
 
-        public string DateHumanize__seconds_ago(int number)
+        public override string DateHumanize__seconds_ago(int number)
         {
             return string.Format(Ago, number, Select(number, "секунду", "секунды", "секунд"));
         }
 
-        public string DateHumanize_a_minute_ago()
+        public override string DateHumanize_a_minute_ago()
         {
             return "минуту назад";
         }
 
-        public string DateHumanize__minutes_ago(int number)
+        public override string DateHumanize__minutes_ago(int number)
         {
             return string.Format(Ago, number, Select(number, "минуту", "минуты", "минут"));
         }
 
-        public string DateHumanize_an_hour_ago()
+        public override string DateHumanize_an_hour_ago()
         {
             return "час назад";
         }
 
-        public string DateHumanize__hours_ago(int number)
+        public override string DateHumanize__hours_ago(int number)
         {
             return string.Format(Ago, number, Select(number, "час", "часа", "часов"));
         }
 
-        public string DateHumanize_yesterday()
+        public override string DateHumanize_yesterday()
         {
             return "вчера";
         }
 
-        public string DateHumanize__days_ago(int number)
+        public override string DateHumanize__days_ago(int number)
         {
             return string.Format(Ago, number, Select(number, "день", "дня", "дней"));
         }
 
-        public string DateHumanize_one_month_ago()
+        public override string DateHumanize_one_month_ago()
         {
             return "месяц назад";
         }
 
-        public string DateHumanize__months_ago(int number)
+        public override string DateHumanize__months_ago(int number)
         {
             return string.Format(Ago, number, Select(number, "месяц", "месяца", "месяцев"));
         }
 
-        public string DateHumanize_one_year_ago()
+        public override string DateHumanize_one_year_ago()
         {
             return "год назад";
         }
 
-        public string DateHumanize__years_ago(int number)
+        public override string DateHumanize__years_ago(int number)
         {
             return string.Format(Ago, number, Select(number, "год", "года", "лет"));
         }
 
-        public string DateHumanize_not_yet()
+        public override string DateHumanize_not_yet()
         {
             return "в будущем";
         }
