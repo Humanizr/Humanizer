@@ -20,27 +20,27 @@
 
         public override string DateHumanize__years_ago(int numberOfYears)
         {
-            return FormatWithAbove20Rule("DateHumanize__years_ago", numberOfYears);
+            return FormatWithAbove20Rule(ResourceKeys.DateHumanize__years_ago, numberOfYears);
         }
 
         public override string DateHumanize__days_ago(int numberOfDays)
         {
-            return FormatWithAbove20Rule("DateHumanize__days_ago", numberOfDays);
+            return FormatWithAbove20Rule(ResourceKeys.DateHumanize__days_ago, numberOfDays);
         }
 
         public override string DateHumanize__hours_ago(int numberOfHours)
         {
-            return FormatWithAbove20Rule("DateHumanize__hours_ago", numberOfHours);
+            return FormatWithAbove20Rule(ResourceKeys.DateHumanize__hours_ago, numberOfHours);
         }
 
         public override string DateHumanize__minutes_ago(int numberOfMinutes)
         {
-            return FormatWithAbove20Rule("DateHumanize__minutes_ago", numberOfMinutes);
+            return FormatWithAbove20Rule(ResourceKeys.DateHumanize__minutes_ago, numberOfMinutes);
         }
 
         public override string DateHumanize__seconds_ago(int numberOfSeconds)
         {
-            return FormatWithAbove20Rule("DateHumanize__seconds_ago", numberOfSeconds);
+            return FormatWithAbove20Rule(ResourceKeys.DateHumanize__seconds_ago, numberOfSeconds);
         }
     }
 }
