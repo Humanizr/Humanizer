@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 
+using Humanizer.Properties;
+
 namespace Humanizer.Configuration
 {
     class RomanianFormatter : DefaultFormatter
@@ -13,7 +15,7 @@ namespace Humanizer.Configuration
                 return base.DateHumanize__years_ago(numberOfYears);
             }
 
-            return string.Format("acum {0} de ani", numberOfYears);
+            return string.Format(Resources.DateHumanize__years_ago_above_20, numberOfYears);
         }
 
         public override string DateHumanize__days_ago(int numberOfDays)
@@ -25,7 +27,7 @@ namespace Humanizer.Configuration
                 return base.DateHumanize__days_ago(numberOfDays);
             }
 
-            return string.Format("acum {0} de zile", numberOfDays);
+            return string.Format(Resources.DateHumanize__days_ago_above_20, numberOfDays);
         }
 
         public override string DateHumanize__hours_ago(int numberOfHours)
@@ -37,7 +39,7 @@ namespace Humanizer.Configuration
                 return base.DateHumanize__hours_ago(numberOfHours);
             }
 
-            return string.Format("acum {0} de ore", numberOfHours);
+            return string.Format(Resources.DateHumanize__hours_ago_above_20, numberOfHours);
         }
 
         public override string DateHumanize__minutes_ago(int numberOfMinutes)
@@ -49,7 +51,7 @@ namespace Humanizer.Configuration
                 return base.DateHumanize__minutes_ago(numberOfMinutes);
             }
 
-            return string.Format("acum {0} de minute", numberOfMinutes);
+            return string.Format(Resources.DateHumanize__minutes_ago_above_20, numberOfMinutes);
         }
 
         public override string DateHumanize__seconds_ago(int numberOfSeconds)
@@ -61,7 +63,7 @@ namespace Humanizer.Configuration
                 return base.DateHumanize__seconds_ago(numberOfSeconds);
             }
 
-            return string.Format("acum {0} de secunde", numberOfSeconds);
+            return string.Format(Resources.DateHumanize__seconds_ago_above_20, numberOfSeconds);
         }
     }
 }
