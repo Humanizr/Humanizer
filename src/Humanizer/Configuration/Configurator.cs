@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Humanizer.Localisation;
 
@@ -9,32 +10,26 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
+        private static readonly IDictionary<string, Func<IFormatter>> formatterFactories = new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "ro", () => new RomanianFormatter() },
+            { "ru", () => new RussianFormatter() }
+        };
+
         /// <summary>
         /// The formatter to be used
         /// </summary>
-        public static IFormatter Formatter 
+        public static IFormatter Formatter
         {
             get
             {
-                //TODO: find proper way to get partial cultures. We want to match all xx-RU cultures.
-                if (CurrentLanguageIs("ru"))
+                Func<IFormatter> formatterFactory;
+                if (formatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory))
                 {
-                    return new RussianFormatter();
+                    return formatterFactory();
                 }
-
-                if (CurrentLanguageIs("ro"))
-                {
-                    return new RomanianFormatter();
-                }
-
-                // ToDo: when other formatters are created we should change this implementation to resolve the Formatter based on the current culture
                 return new DefaultFormatter();
             }
-        }
-
-        private static bool CurrentLanguageIs(string twoLetterCode)
-        {
-            return string.Equals(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, twoLetterCode, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
