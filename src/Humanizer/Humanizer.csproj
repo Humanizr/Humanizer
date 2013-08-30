@@ -71,12 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Configurator.cs" />
-    <Compile Include="Configuration\DefaultFormatter.cs" />
-    <Compile Include="Configuration\IFormatter.cs" />
-    <Compile Include="Configuration\ResourceKeys.cs" />
-    <Compile Include="Configuration\Resources.cs" />
-    <Compile Include="Configuration\RussianFormatter.cs" />
-    <Compile Include="Configuration\RomanianFormatter.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
@@ -97,6 +91,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>In.Months.tt</DependentUpon>
     </Compile>
+    <Compile Include="Localization\DefaultFormatter.cs" />
+    <Compile Include="Localization\IFormatter.cs" />
+    <Compile Include="Localization\ResourceKeys.cs" />
+    <Compile Include="Localization\Resources.cs" />
+    <Compile Include="Localization\RomanianFormatter.cs" />
+    <Compile Include="Localization\RussianFormatter.cs" />
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />

@@ -1,4 +1,5 @@
 ﻿using Humanizer.Configuration;
+using Humanizer.Localization;
 using Xunit;
 namespace Humanizer.Tests.Extensions.Localisation
 {

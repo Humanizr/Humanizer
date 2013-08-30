@@ -1,6 +1,6 @@
-﻿using System;
-using System.Globalization;
-namespace Humanizer.Configuration
+﻿using System.Globalization;
+
+namespace Humanizer.Localization
 {
     public class Resources
     {

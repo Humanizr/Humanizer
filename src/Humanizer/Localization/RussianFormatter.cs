@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Configuration
+﻿namespace Humanizer.Localization
 {
     internal class RussianFormatter : IFormatter
     {

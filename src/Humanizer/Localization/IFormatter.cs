@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Configuration
+﻿namespace Humanizer.Localization
 {
     /// <summary>
     /// Implement this interface if your language has complex rules around dealing with numbers. 
