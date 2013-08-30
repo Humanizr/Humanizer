@@ -4,6 +4,18 @@ namespace Humanizer.Configuration
 {
     class RomanianFormatter : DefaultFormatter
     {
+        public override string DateHumanize__days_ago(int numberOfDays)
+        {
+            Debug.Assert(numberOfDays > 1);
+
+            if (0 < numberOfDays % 100 && numberOfDays % 100 < 20)
+            {
+                return base.DateHumanize__days_ago(numberOfDays);
+            }
+
+            return string.Format("acum {0} de zile", numberOfDays);
+        }
+
         public override string DateHumanize__hours_ago(int numberOfHours)
         {
             Debug.Assert(numberOfHours > 1);

@@ -73,6 +73,27 @@ namespace Humanizer.Tests.Extensions
             }
         }
 
+        [Fact]
+        public void RomanianTranslationIsCorrectFor10DaysAgo()
+        {
+            using (RomanianCulture())
+            {
+                var tenDaysAgo = DateTime.UtcNow.AddDays(-10).Humanize();
+
+                Assert.Equal("acum 10 zile", tenDaysAgo);
+            }
+        }
+
+        [Fact]
+        public void RomanianTranslationIsCorrectFor23DaysAgo()
+        {
+            using (RomanianCulture())
+            {
+                var twentyThreeDaysAgo = DateTime.UtcNow.AddDays(-23).Humanize();
+
+                Assert.Equal("acum 23 de zile", twentyThreeDaysAgo);
+            }
+        }
 
         private static CurrentCultureChanger RomanianCulture()
         {
