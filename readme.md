@@ -145,8 +145,10 @@ Humanizer can change numbers to words using the `ToWords` extension. Here is a f
     Assert.Equal("one hundred and twenty-two", 122.ToWords());
     Assert.Equal("three thousand five hundred and one", 3501.ToWords());
 
-###Localisation
-Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Arabic, Russian and Romanian languages for `Date.Humanize` method. Support for `ToWords` is being added soon.
+##How to contribute?
+Your contribution to Humanizer would be very welcome. Just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues). They should be relatively straightforward. If you want to contribute, fork the repo, fix an issue and send a PR.
+
+One area Humanizer could definitely use your help is localisation. Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Arabic, Russian and Romanian languages for `Date.Humanize` method. Support for `ToWords` is being added soon.
 
 It would be awesome if you could contribute a translation. 
 To do this, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
