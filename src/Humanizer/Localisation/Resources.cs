@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Humanizer.Localization
+namespace Humanizer.Localisation
 {
     public class Resources
     {

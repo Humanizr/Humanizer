@@ -91,12 +91,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>In.Months.tt</DependentUpon>
     </Compile>
-    <Compile Include="Localization\DefaultFormatter.cs" />
-    <Compile Include="Localization\IFormatter.cs" />
-    <Compile Include="Localization\ResourceKeys.cs" />
-    <Compile Include="Localization\Resources.cs" />
-    <Compile Include="Localization\RomanianFormatter.cs" />
-    <Compile Include="Localization\RussianFormatter.cs" />
+    <Compile Include="Localisation\DefaultFormatter.cs" />
+    <Compile Include="Localisation\IFormatter.cs" />
+    <Compile Include="Localisation\ResourceKeys.cs" />
+    <Compile Include="Localisation\Resources.cs" />
+    <Compile Include="Localisation\RomanianFormatter.cs" />
+    <Compile Include="Localisation\RussianFormatter.cs" />
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />

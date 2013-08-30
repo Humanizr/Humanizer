@@ -1,6 +1,6 @@
 ﻿using System;
 using Humanizer.Configuration;
-using Humanizer.Localization;
+using Humanizer.Localisation;
 using Xunit;
 
 namespace Humanizer.Tests.Extensions

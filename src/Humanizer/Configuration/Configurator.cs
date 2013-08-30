@@ -1,6 +1,6 @@
 using System;
 using System.Globalization;
-using Humanizer.Localization;
+using Humanizer.Localisation;
 
 namespace Humanizer.Configuration
 {
