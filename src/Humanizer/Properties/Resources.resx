@@ -156,4 +156,19 @@
   <data name="DateHumanize__years_ago" xml:space="preserve">
     <value>{0} years ago</value>
   </data>
+  <data name="DateHumanize__years_ago_above_20" xml:space="preserve">
+    <value>Used in the Romanian localization</value>
+  </data>
+  <data name="DateHumanize__days_ago_above_20" xml:space="preserve">
+    <value>Used in the Romanian localization</value>
+  </data>
+  <data name="DateHumanize__hours_ago_above_20" xml:space="preserve">
+    <value>Used in the Romanian localization</value>
+  </data>
+  <data name="DateHumanize__minutes_ago_above_20" xml:space="preserve">
+    <value>Used in the Romanian localization</value>
+  </data>
+  <data name="DateHumanize__seconds_ago_above_20" xml:space="preserve">
+    <value>Used in the Romanian localization</value>
+  </data>
 </root>

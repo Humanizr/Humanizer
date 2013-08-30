@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Localisation\DateHumanizeTests.ro-RO.cs" />
     <Compile Include="Extensions\DateHumanizeTests.cs" />
     <Compile Include="Extensions\DehumanizeToEnumTests.cs" />
     <Compile Include="Extensions\EnumHumanizeTests.cs" />
