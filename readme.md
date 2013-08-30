@@ -145,17 +145,16 @@ Humanizer can change numbers to words using the `ToWords` extension. Here is a f
     Assert.Equal("one hundred and twenty-two", 122.ToWords());
     Assert.Equal("three thousand five hundred and one", 3501.ToWords());
 
-###Localization
-Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Arabic and Romanian languages for `Date.Humanize` method. Support for `ToWords` is being added soon.
+###Localisation
+Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Arabic, Russian and Romanian languages for `Date.Humanize` method. Support for `ToWords` is being added soon.
 
 It would be awesome if you could contribute a translation. 
-To do this, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end, translate the values to your language, commit, and send a pull request for it. Thanks.
+To do this, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
 
-Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic 2 days is يومين not 2 يوم.
-Obviously a normal resource file doesn't cut it in these cases. 
-So in addition to creating a resource file you should also implement `IFormatter` [interface](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/IFormatter.cs) in a class that represents your language; 
-e.g. RomanianFormatter and then override the methods that need involve the complex rules. 
-Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
+Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
+Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
+In cases like this in addition to creating a resource file you should also subclass [`DefaultFormatter`](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/DefaultFormatter.cs) in a class that represents your language; 
+e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. Overriding the `GetResourceKey` method should do it; check out RomanianFormatter and RussianFormatter to see an example. Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
 
 ##What else?##
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
