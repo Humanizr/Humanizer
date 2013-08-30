@@ -13,15 +13,12 @@
                 var mod10 = number%10;
 
                 if (mod10 == 1) // 1, 21, 31, 41 ... 91, 101, 121 ..
-                {
                     return resourceKey + SingularPostfix;
-                }
 
                 if (mod10 > 1 && mod10 < 5) // 2, 3, 4, 22, 23, 24 ...
-                {
                     return resourceKey + PaucalPostfix;
-                }
             }
+            
             return resourceKey;
         }
     }
