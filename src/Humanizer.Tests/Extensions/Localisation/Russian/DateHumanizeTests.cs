@@ -4,7 +4,7 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests.Extensions.Localisation.Russian
 {
-    public class DateHumanizeTests : CultureSpecificTestBase
+    public class DateHumanizeTests : AmbientCulture
     {
         public DateHumanizeTests() : base("ru-RU")
         {

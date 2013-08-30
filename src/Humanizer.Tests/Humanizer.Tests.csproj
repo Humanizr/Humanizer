@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Localisation\DateHumanizeTests.ro-RO.cs" />
     <Compile Include="Extensions\DateHumanizeTests.cs" />
     <Compile Include="Extensions\DehumanizeToEnumTests.cs" />
     <Compile Include="Extensions\EnumHumanizeTests.cs" />
@@ -72,7 +73,8 @@
     <Compile Include="Extensions\FluentDate\InTests.cs" />
     <Compile Include="Extensions\FluentDate\OnTests.cs" />
     <Compile Include="Extensions\FluentDate\PrepositionTests.cs" />
-    <Compile Include="Extensions\Localisation\CultureSpecificTestBase.cs" />
+    <Compile Include="Extensions\Localisation\AmbientCulture.cs" />
+    <Compile Include="Extensions\Localisation\ResourcesTests.cs" />
     <Compile Include="Extensions\Localisation\Russian\DateHumanizeTests.cs" />
     <Compile Include="Extensions\NumberToTimeSpanTests.cs" />
     <Compile Include="Extensions\Inflector\DasherizeTests.cs" />

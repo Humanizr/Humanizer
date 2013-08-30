@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using Humanizer.Configuration;
-using Humanizer.Properties;
 
 namespace Humanizer
 {

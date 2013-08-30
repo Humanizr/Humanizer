@@ -4,17 +4,17 @@ using System.Threading;
 
 namespace Humanizer.Tests.Extensions.Localisation
 {
-    public abstract class CultureSpecificTestBase : IDisposable
+    public class AmbientCulture : IDisposable
     {
         private readonly CultureInfo _culture;
 
-        protected CultureSpecificTestBase(CultureInfo culture)
+        public AmbientCulture(CultureInfo culture)
         {
             _culture = Thread.CurrentThread.CurrentUICulture;
             Thread.CurrentThread.CurrentUICulture = culture;
         }
 
-        protected CultureSpecificTestBase(string cultureName)
+        public AmbientCulture(string cultureName)
             : this(new CultureInfo(cultureName))
         {
         }

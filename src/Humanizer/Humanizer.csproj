@@ -24,6 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Humanizer.XML</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,6 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Humanizer.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseNET35|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
@@ -49,6 +52,8 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>bin\Release\Humanizer.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -68,7 +73,10 @@
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="Configuration\DefaultFormatter.cs" />
     <Compile Include="Configuration\IFormatter.cs" />
+    <Compile Include="Configuration\ResourceKeys.cs" />
+    <Compile Include="Configuration\Resources.cs" />
     <Compile Include="Configuration\RussianFormatter.cs" />
+    <Compile Include="Configuration\RomanianFormatter.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
@@ -93,11 +101,6 @@
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
     <Compile Include="NumberToWordsExtension.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="StringDehumanizeExtensions.cs" />
     <Compile Include="StringHumanizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,8 +130,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ro.resx" />

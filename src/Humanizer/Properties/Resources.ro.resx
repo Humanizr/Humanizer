@@ -156,4 +156,19 @@
   <data name="DateHumanize__years_ago" xml:space="preserve">
     <value>acum {0} ani</value>
   </data>
+  <data name="DateHumanize__days_ago_above_20" xml:space="preserve">
+    <value>acum {0} de zile</value>
+  </data>
+  <data name="DateHumanize__hours_ago_above_20" xml:space="preserve">
+    <value>acum {0} de ore</value>
+  </data>
+  <data name="DateHumanize__minutes_ago_above_20" xml:space="preserve">
+    <value>acum {0} de minute</value>
+  </data>
+  <data name="DateHumanize__seconds_ago_above_20" xml:space="preserve">
+    <value>acum {0} de secunde</value>
+  </data>
+  <data name="DateHumanize__years_ago_above_20" xml:space="preserve">
+    <value>acum {0} de ani</value>
+  </data>
 </root>

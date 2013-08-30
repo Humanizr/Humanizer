@@ -7,12 +7,12 @@
     /// </summary>
     public interface IFormatter
     {
-        string DateHumanize__days_ago(int number);
-        string DateHumanize__hours_ago(int number);
-        string DateHumanize__minutes_ago(int number);
-        string DateHumanize__months_ago(int number);
-        string DateHumanize__seconds_ago(int number);
-        string DateHumanize__years_ago(int number);
+        string DateHumanize__days_ago(int numberOfDays);
+        string DateHumanize__hours_ago(int numberOfHours);
+        string DateHumanize__minutes_ago(int numberOfMinutes);
+        string DateHumanize__months_ago(int numberOfMonths);
+        string DateHumanize__seconds_ago(int numberOfSeconds);
+        string DateHumanize__years_ago(int numberOfYears);
         string DateHumanize_a_minute_ago();
         string DateHumanize_an_hour_ago();
         string DateHumanize_not_yet();
