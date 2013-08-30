@@ -51,6 +51,28 @@ namespace Humanizer.Tests.Extensions
             }
         }
 
+        [Fact]
+        public void RomanianTranslationIsCorrectFor2SecondsAgo()
+        {
+            using (RomanianCulture())
+            {
+                var twoSecondsAgo = DateTime.UtcNow.AddSeconds(-2).Humanize();
+
+                Assert.Equal("acum 2 secunde", twoSecondsAgo);
+            }
+        }
+
+        [Fact]
+        public void RomanianTranslationIsCorrectFor59SecondsAgo()
+        {
+            using (RomanianCulture())
+            {
+                var fiftyNineSecondsAgo = DateTime.UtcNow.AddSeconds(-59).Humanize();
+
+                Assert.Equal("acum 59 de secunde", fiftyNineSecondsAgo);
+            }
+        }
+
 
         private static CurrentCultureChanger RomanianCulture()
         {

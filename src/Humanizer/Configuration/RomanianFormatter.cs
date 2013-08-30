@@ -27,5 +27,17 @@ namespace Humanizer.Configuration
 
             return string.Format("acum {0} de minute", numberOfMinutes);
         }
+
+        public override string DateHumanize__seconds_ago(int numberOfSeconds)
+        {
+            Debug.Assert(numberOfSeconds > 1);
+
+            if (0 < numberOfSeconds%100 && numberOfSeconds%100 < 20)
+            {
+                return base.DateHumanize__seconds_ago(numberOfSeconds);
+            }
+
+            return string.Format("acum {0} de secunde", numberOfSeconds);
+        }
     }
 }
