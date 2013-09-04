@@ -121,6 +121,9 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.fr-BE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.fi-FI.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
