@@ -10,7 +10,8 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
-        private static readonly IDictionary<string, Func<IFormatter>> formatterFactories = new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
+        private static readonly IDictionary<string, Func<IFormatter>> FormatterFactories = 
+            new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
         {
             { "ro", () => new RomanianFormatter() },
             { "ru", () => new RussianFormatter() }
@@ -24,7 +25,7 @@ namespace Humanizer.Configuration
             get
             {
                 Func<IFormatter> formatterFactory;
-                if (formatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory))
+                if (FormatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory))
                 {
                     return formatterFactory();
                 }
