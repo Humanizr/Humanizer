@@ -59,5 +59,15 @@
         {
             get { return "TimeSpan_Zero"; }
         }
+
+        public static string MultipleWeeks
+        {
+            get { return "TimeSpan_MultipleWeeks"; }
+        }
+
+        public static string SingleWeek
+        {
+            get { return "TimeSpan_SingleWeek"; }
+        }
     }
 }

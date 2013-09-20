@@ -7,6 +7,8 @@
     /// </summary>
     public interface ITimeSpanFormatter
     {
+        string MultipleWeeks(int weeks);
+        string SingleWeek();
         string MultipleDays(int days);
         string SingleDay();
         string MultipleHours(int hours);

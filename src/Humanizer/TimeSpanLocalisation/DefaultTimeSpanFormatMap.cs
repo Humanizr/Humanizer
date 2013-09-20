@@ -20,6 +20,10 @@ namespace Humanizer.TimeSpanLocalisation
                 return new[]
                 {
                     new TimeSpanPropertyFormat(
+                        timespan => timespan.Days / 7,
+                        formatter.SingleWeek,
+                        formatter.MultipleWeeks), 
+                    new TimeSpanPropertyFormat(
                         timespan => timespan.Days,
                         formatter.SingleDay,
                         formatter.MultipleDays),

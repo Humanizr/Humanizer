@@ -8,6 +8,16 @@ namespace Humanizer.TimeSpanLocalisation
     /// </summary>
     public class DefaultTimeSpanFormatter : ITimeSpanFormatter
     {
+        public string MultipleWeeks(int weeks)
+        {
+            return Format(ResourceKeys.MultipleWeeks, weeks);
+        }
+
+        public string SingleWeek()
+        {
+            return Format(ResourceKeys.SingleWeek);
+        }
+
         public virtual string MultipleDays(int days)
         {
             return Format(ResourceKeys.MultipleDays, days);

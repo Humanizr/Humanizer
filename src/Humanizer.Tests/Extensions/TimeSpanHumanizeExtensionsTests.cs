@@ -6,6 +6,30 @@ namespace Humanizer.Tests.Extensions
     public class TimeSpanHumanizeExtensionsTests
     {
         [Fact]
+        public void TwoWeeks()
+        {
+            var twoWeeks = TimeSpan.FromDays(14);
+            var actual = twoWeeks.Humanize();
+            Assert.Equal("2 weeks", actual);
+        }
+
+        [Fact]
+        public void OneWeek()
+        {
+            var oneWeek = TimeSpan.FromDays(7);
+            var actual = oneWeek.Humanize();
+            Assert.Equal("1 week", actual);
+        }
+
+        [Fact]
+        public void SixDays()
+        {
+            var sixDays = TimeSpan.FromDays(6);
+            var actual = sixDays.Humanize();
+            Assert.Equal("6 days", actual);
+        }
+
+        [Fact]
         public void TwoDays()
         {
             var twoDays = TimeSpan.FromDays(2);

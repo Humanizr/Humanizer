@@ -192,4 +192,10 @@
   <data name="TimeSpan_Zero" xml:space="preserve">
     <value>no time</value>
   </data>
+  <data name="TimeSpan_MultipleWeeks" xml:space="preserve">
+    <value>{0} weeks</value>
+  </data>
+  <data name="TimeSpan_SingleWeek" xml:space="preserve">
+    <value>1 week</value>
+  </data>
 </root>
