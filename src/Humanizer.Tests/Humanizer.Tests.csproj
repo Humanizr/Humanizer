@@ -87,6 +87,7 @@
     <Compile Include="Extensions\NumberToWordsTests.cs" />
     <Compile Include="Extensions\StringDehumanizeTests.cs" />
     <Compile Include="Extensions\StringHumanizeTests.cs" />
+    <Compile Include="Extensions\TimeSpanHumanizeExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
