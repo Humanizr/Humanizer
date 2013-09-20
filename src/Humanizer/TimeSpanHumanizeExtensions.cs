@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Linq;
+using Humanizer.TimeSpanLocalisation;
 
 namespace Humanizer
 {
@@ -13,30 +14,40 @@ namespace Humanizer
         /// </summary>
         /// <param name="timeSpan"></param>
         /// <returns></returns>
+        /// <remarks>
+        /// This method chooses the largest part of the TimeSpan (Day, Hour, Minute, Second,
+        /// Millisecond) and returns only that part.
+        /// </remarks>
         public static string Humanize(this TimeSpan timeSpan)
         {
-            var days = timeSpan.Days;
-            if (days > 1) return string.Format("{0} days", days);
-            if (days == 1) return string.Format("1 day");
+            var formatMap = new DefaultTimeSpanFormatMap();
+            return formatMap
+                .FormatParameters
+                .Select(format => TryFormat(format, timeSpan))
+                .FirstOrDefault(result => result != null);
+        }
 
-            var hours = timeSpan.Hours;
-            if (hours > 1) return string.Format("{0} hours", hours);
-            if (hours == 1) return string.Format("1 hour");
-
-            var minutes = timeSpan.Minutes;
-            if (minutes > 1) return string.Format("{0} minutes", minutes);
-            if (minutes == 1) return string.Format("1 minute");
-
-            var seconds = timeSpan.Seconds;
-            if (seconds > 1) return string.Format("{0} seconds", seconds);
-            if (seconds == 1) return string.Format("1 second");
-
-            var milliseconds = timeSpan.Milliseconds;
-            if (milliseconds > 1) return string.Format("{0} milliseconds", milliseconds);
-            if (milliseconds == 1) return string.Format("1 millisecond");
-
-            Debug.Assert(timeSpan == TimeSpan.Zero, "Should be zero");
-            return "No time";
+        /// <summary>
+        /// Maps a single property (Day, Hour etc.) of TimeSpan to a formatted string "1 day" etc.
+        /// </summary>
+        /// <param name="propertyFormat"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private static string TryFormat(
+            TimeSpanPropertyFormat propertyFormat,
+            TimeSpan timeSpan)
+        {
+            var value = propertyFormat.PropertySelector(timeSpan);
+            switch (value)
+            {
+                case 0:
+                    return propertyFormat.Zero();
+                case 1:
+                    return propertyFormat.Single();
+                default:
+                    return propertyFormat.Multiple(value);
+            }
         }
     }
 }

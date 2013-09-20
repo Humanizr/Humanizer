@@ -90,7 +90,7 @@ namespace Humanizer.Tests.Extensions
         {
             var noTime = TimeSpan.Zero;
             var actual = noTime.Humanize();
-            Assert.Equal("No time", actual);
+            Assert.Equal("no time", actual);
         }
     }
 }
