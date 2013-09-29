@@ -65,6 +65,46 @@ namespace Humanizer.Tests.Extensions
         }
 
         [Fact]
+        public void AcronymsAreSeparatedFromOtherWordsInTheMiddle()
+        {
+            Assert.Equal(
+                "The HTML language",
+                "TheHTMLLanguage".Humanize());
+        }
+
+        [Fact]
+        public void AcronymsAreSeparatedFromOtherWordsInTheStart()
+        {
+            Assert.Equal(
+                "HTML is the language",
+                "HTMLIsTheLanguage".Humanize());
+        }
+
+        [Fact]
+        public void AcronymsAreSeparatedFromOtherWordsInTheEnd()
+        {
+            Assert.Equal(
+                "The language is HTML",
+                "TheLanguageIsHTML".Humanize());
+        }
+
+        [Fact]
+        public void AcronymsAreSeparatedFromNumbersInTheEnd()
+        {
+            Assert.Equal(
+                "HTML 5",
+                "HTML5".Humanize());
+        }
+
+        [Fact]
+        public void AcronymsAreSeparatedFromNumbersInTheStart()
+        {
+            Assert.Equal(
+                "1 HTML",
+                "1HTML".Humanize());
+        }
+
+        [Fact]
         public void CanHumanizeIntoTitleCaseWithoutUsingUnderscores()
         {
             Assert.Equal(
