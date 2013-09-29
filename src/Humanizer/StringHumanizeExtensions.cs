@@ -1,49 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
     public static class StringHumanizeExtensions
     {
         static readonly Func<string, string> FromUnderscoreDashSeparatedWords = methodName => string.Join(" ", methodName.Split(new[] { '_', '-' }));
+
+        static readonly Regex PascalCaseWordBoundaryRegex = new Regex(@"
+(?# word to word, number or acronym)
+(?<=[a-z])(?=[A-Z0-9])|
+(?# number to word or acronym)
+(?<=[0-9])(?=[A-Za-z])|
+(?# acronym to number)
+(?<=[A-Z])(?=[0-9])|
+(?# acronym to word)
+(?<=[A-Z])(?=[A-Z][a-z])
+", RegexOptions.IgnorePatternWhitespace|RegexOptions.Compiled);
+
         static string FromPascalCase(string name)
         {
-            var chars = name.Aggregate(
-                new List<char>(),
-                (list, currentChar) =>
-                {
-                    if (currentChar == ' ')
-                    {
-                        list.Add(currentChar);
-                        return list;
-                    }
+            var result = PascalCaseWordBoundaryRegex
+                .Split(name)
+                .Select(word =>
+                    word.All(Char.IsUpper) && word.Length > 1
+                        ? word
+                        : word.ToLower())
+                .Aggregate((res, word) => res + " " + word);
 
-                    if (list.Count == 0)
-                    {
-                        list.Add(currentChar);
-                        return list;
-                    }
-
-                    var lastCharacterInTheList = list[list.Count - 1];
-                    if (lastCharacterInTheList != ' ')
-                    {
-                        if (char.IsDigit(lastCharacterInTheList))
-                        {
-                            if (char.IsLetter(currentChar))
-                                list.Add(' ');
-                        }
-                        else if (!char.IsLower(currentChar))
-                            list.Add(' ');
-                    }
-
-                    list.Add(char.ToLower(currentChar));
-
-                    return list;
-                });
-
-            var result = new string(chars.ToArray());
+            result = Char.ToUpper(result[0]) +
+                result.Substring(1, result.Length - 1);
             return result.Replace(" i ", " I "); // I is an exception
         }
 
@@ -55,7 +43,7 @@ namespace Humanizer
         public static string Humanize(this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
-            if (!input.Any(Char.IsLower))
+            if (input.All(Char.IsUpper))
                 return input;
 
             if (input.Contains('_') || input.Contains('-'))
