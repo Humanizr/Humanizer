@@ -117,46 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_not_yet" xml:space="preserve">
+  <data name="DateHumanize_NotYet" xml:space="preserve">
     <value>not yet</value>
   </data>
-  <data name="DateHumanize_one_second_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>one second ago</value>
   </data>
-  <data name="DateHumanize__seconds_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} seconds ago</value>
   </data>
-  <data name="DateHumanize_a_minute_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>a minute ago</value>
   </data>
-  <data name="DateHumanize__minutes_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minutes ago</value>
   </data>
-  <data name="DateHumanize_an_hour_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>an hour ago</value>
   </data>
-  <data name="DateHumanize__hours_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} hours ago</value>
   </data>
-  <data name="DateHumanize_yesterday" xml:space="preserve">
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>yesterday</value>
   </data>
-  <data name="DateHumanize__days_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} days ago</value>
   </data>
-  <data name="DateHumanize_one_month_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>one month ago</value>
   </data>
-  <data name="DateHumanize__months_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} months ago</value>
   </data>
-  <data name="DateHumanize_one_year_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>one year ago</value>
   </data>
-  <data name="DateHumanize__years_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} years ago</value>
-  </data>
-  <data name="DateHumanize__ago" xml:space="preserve">
-    <value>{0} {1} ago</value>
   </data>
 </root>

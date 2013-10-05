@@ -2,8 +2,8 @@
 {
     internal class RussianFormatter : DefaultFormatter
     {
-        private const string SingularPostfix = "_singular";
-        private const string PaucalPostfix = "_paucal";
+        private const string SingularPostfix = "_Singular";
+        private const string PaucalPostfix = "_Paucal";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

@@ -2,7 +2,7 @@
 {
     internal class RomanianFormatter : DefaultFormatter
     {
-        private const string Above20PostFix = "_above_20";
+        private const string Above20PostFix = "_Above20";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

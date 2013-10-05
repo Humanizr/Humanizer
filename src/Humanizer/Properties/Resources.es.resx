@@ -117,43 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_not_yet" xml:space="preserve">
+  <data name="DateHumanize_NotYet" xml:space="preserve">
     <value>todavía no</value>
   </data>
-  <data name="DateHumanize_one_second_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>hace un segundo</value>
   </data>
-  <data name="DateHumanize__seconds_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>hace {0} segundos</value>
   </data>
-  <data name="DateHumanize_a_minute_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>hace un minuto</value>
   </data>
-  <data name="DateHumanize__minutes_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>hace {0} minutos</value>
   </data>
-  <data name="DateHumanize_an_hour_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>hace una hora</value>
   </data>
-  <data name="DateHumanize__hours_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>hace {0} horas</value>
   </data>
-  <data name="DateHumanize_yesterday" xml:space="preserve">
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ayer</value>
   </data>
-  <data name="DateHumanize__days_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>hace {0} días</value>
   </data>
-  <data name="DateHumanize_one_month_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>hace una mes</value>
   </data>
-  <data name="DateHumanize__months_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>hace {0} meses</value>
   </data>
-  <data name="DateHumanize_one_year_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>hace un año</value>
   </data>
-  <data name="DateHumanize__years_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>hace {0} años</value>
   </data>
 </root>

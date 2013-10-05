@@ -117,43 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_not_yet" xml:space="preserve">
+  <data name="DateHumanize_NotYet" xml:space="preserve">
     <value>nog niet</value>
   </data>
-  <data name="DateHumanize_one_second_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>één seconde geleden</value>
   </data>
-  <data name="DateHumanize__seconds_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} seconden geleden</value>
   </data>
-  <data name="DateHumanize_a_minute_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>één minuut geleden</value>
   </data>
-  <data name="DateHumanize__minutes_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minuten geleden</value>
   </data>
-  <data name="DateHumanize_an_hour_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>één uur geleden</value>
   </data>
-  <data name="DateHumanize__hours_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} uur geleden</value>
   </data>
-  <data name="DateHumanize_yesterday" xml:space="preserve">
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>gisteren</value>
   </data>
-  <data name="DateHumanize__days_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} dagen geleden</value>
   </data>
-  <data name="DateHumanize_one_month_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>één maand geleden</value>
   </data>
-  <data name="DateHumanize__months_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} maanden geleden</value>
   </data>
-  <data name="DateHumanize_one_year_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>één jaar geleden</value>
   </data>
-  <data name="DateHumanize__years_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} jaar geleden</value>
   </data>
 </root>

@@ -9,7 +9,7 @@ namespace Humanizer.Tests.Extensions.Localisation
         {
             using (new AmbientCulture("ro"))
             {
-                var format = Resources.GetResource("DateHumanize__years_ago_above_20");
+                var format = Resources.GetResource("DateHumanize_MultipleYearsAgo_Above20");
                 Assert.Equal("acum {0} de ani", format);
             }
         }

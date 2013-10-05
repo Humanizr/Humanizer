@@ -2,69 +2,69 @@
 {
     public class ResourceKeys
     {
-        public static string DateHumanize__days_ago
+        public static string DateHumanize_MultipleDaysAgo
         {
-            get { return "DateHumanize__days_ago"; }
+            get { return "DateHumanize_MultipleDaysAgo"; }
         }
 
-        public static string DateHumanize__hours_ago
+        public static string DateHumanize_MultipleHoursAgo
         {
-            get { return "DateHumanize__hours_ago"; }
+            get { return "DateHumanize_MultipleHoursAgo"; }
         }
 
-        public static string DateHumanize__minutes_ago
+        public static string DateHumanize_MultipleMinutesAgo
         {
-            get { return "DateHumanize__minutes_ago"; }
+            get { return "DateHumanize_MultipleMinutesAgo"; }
         }
 
-        public static string DateHumanize__months_ago
+        public static string DateHumanize_MultipleMonthsAgo
         {
-            get { return "DateHumanize__months_ago"; }
+            get { return "DateHumanize_MultipleMonthsAgo"; }
         }
 
-        public static string DateHumanize__seconds_ago
+        public static string DateHumanize_MultipleSecondsAgo
         {
-            get { return "DateHumanize__seconds_ago"; }
+            get { return "DateHumanize_MultipleSecondsAgo"; }
         }
 
-        public static string DateHumanize__years_ago
+        public static string DateHumanize_MultipleYearsAgo
         {
-            get { return "DateHumanize__years_ago"; }
+            get { return "DateHumanize_MultipleYearsAgo"; }
         }
 
-        public static string DateHumanize_a_minute_ago
+        public static string DateHumanize_SingleMinuteAgo
         {
-            get { return "DateHumanize_a_minute_ago"; }
+            get { return "DateHumanize_SingleMinuteAgo"; }
         }
 
-        public static string DateHumanize_an_hour_ago
+        public static string DateHumanize_SingleHourAgo
         {
-            get { return "DateHumanize_an_hour_ago"; }
+            get { return "DateHumanize_SingleHourAgo"; }
         }
 
-        public static string DateHumanize_not_yet
+        public static string DateHumanize_NotYet
         {
-            get { return "DateHumanize_not_yet"; }
+            get { return "DateHumanize_NotYet"; }
         }
 
-        public static string DateHumanize_one_month_ago
+        public static string DateHumanize_SingleMonthAgo
         {
-            get { return "DateHumanize_one_month_ago"; }
+            get { return "DateHumanize_SingleMonthAgo"; }
         }
 
-        public static string DateHumanize_one_second_ago
+        public static string DateHumanize_SingleSecondAgo
         {
-            get { return "DateHumanize_one_second_ago"; }
+            get { return "DateHumanize_SingleSecondAgo"; }
         }
 
-        public static string DateHumanize_one_year_ago
+        public static string DateHumanize_SingleYearAgo
         {
-            get { return "DateHumanize_one_year_ago"; }
+            get { return "DateHumanize_SingleYearAgo"; }
         }
 
-        public static string DateHumanize_yesterday
+        public static string DateHumanize_SingleDayAgo
         {
-            get { return "DateHumanize_yesterday"; }
+            get { return "DateHumanize_SingleDayAgo"; }
         }
     }
 }

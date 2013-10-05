@@ -117,58 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_not_yet" xml:space="preserve">
+  <data name="DateHumanize_NotYet" xml:space="preserve">
     <value>nu încă</value>
   </data>
-  <data name="DateHumanize_one_second_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>acum o secundă</value>
   </data>
-  <data name="DateHumanize__seconds_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>acum {0} secunde</value>
   </data>
-  <data name="DateHumanize_a_minute_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>acum un minut</value>
   </data>
-  <data name="DateHumanize__minutes_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>acum {0} minute</value>
   </data>
-  <data name="DateHumanize_an_hour_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>acum o oră</value>
   </data>
-  <data name="DateHumanize__hours_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>acum {0} ore</value>
   </data>
-  <data name="DateHumanize_yesterday" xml:space="preserve">
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ieri</value>
   </data>
-  <data name="DateHumanize__days_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>acum {0} zile</value>
   </data>
-  <data name="DateHumanize_one_month_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>acum o lună</value>
   </data>
-  <data name="DateHumanize__months_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>acum {0} luni</value>
   </data>
-  <data name="DateHumanize_one_year_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>acum un an</value>
   </data>
-  <data name="DateHumanize__years_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>acum {0} ani</value>
   </data>
-  <data name="DateHumanize__days_ago_above_20" xml:space="preserve">
+  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
     <value>acum {0} de zile</value>
   </data>
-  <data name="DateHumanize__hours_ago_above_20" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
     <value>acum {0} de ore</value>
   </data>
-  <data name="DateHumanize__minutes_ago_above_20" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
     <value>acum {0} de minute</value>
   </data>
-  <data name="DateHumanize__seconds_ago_above_20" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
     <value>acum {0} de secunde</value>
   </data>
-  <data name="DateHumanize__years_ago_above_20" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
     <value>acum {0} de ani</value>
   </data>
 </root>

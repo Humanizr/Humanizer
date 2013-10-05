@@ -31,85 +31,85 @@ namespace Humanizer.Tests.Extensions
         [Fact]
         public void FutureDates()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_not_yet), new TimeSpan(0, 0, 1, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_NotYet), new TimeSpan(0, 0, 1, 0));
         }
 
         [Fact]
         public void JustNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_one_second_ago), new TimeSpan(0, 0, 0, -1));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_SingleSecondAgo), new TimeSpan(0, 0, 0, -1));
         }
 
         [Fact]
         public void SecondsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize__seconds_ago), 10), new TimeSpan(0, 0, 0, -10));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize_MultipleSecondsAgo), 10), new TimeSpan(0, 0, 0, -10));
         }
 
         [Fact]
         public void OneMinuteAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_a_minute_ago), new TimeSpan(0, 0, -1, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_SingleMinuteAgo), new TimeSpan(0, 0, -1, 0));
         }
 
         [Fact]
         public void AFewMinutesAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize__minutes_ago), 10), new TimeSpan(0, 0, -10, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize_MultipleMinutesAgo), 10), new TimeSpan(0, 0, -10, 0));
         }
 
         [Fact]
         public void AnHourAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_an_hour_ago), new TimeSpan(0, -1, -10, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_SingleHourAgo), new TimeSpan(0, -1, -10, 0));
         }
 
         [Fact]
         public void HoursAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize__hours_ago), 10), new TimeSpan(0, -10, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize_MultipleHoursAgo), 10), new TimeSpan(0, -10, 0, 0));
         }
 
         [Fact]
         public void Yesterday()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_yesterday), new TimeSpan(-1, -10, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_SingleDayAgo), new TimeSpan(-1, -10, 0, 0));
         }
 
         [Fact]
         public void AFewDaysAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize__days_ago), 10), new TimeSpan(-10, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize_MultipleDaysAgo), 10), new TimeSpan(-10, 0, 0, 0));
         }
 
         [Fact]
         public void OneMonthAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_one_month_ago), new TimeSpan(-30, 0, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_SingleMonthAgo), new TimeSpan(-30, 0, 0, 0));
         }
 
         [Fact]
         public void AFewMonthsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize__months_ago), 2), new TimeSpan(-60, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize_MultipleMonthsAgo), 2), new TimeSpan(-60, 0, 0, 0));
         }
 
         [Fact]
         public void OneYearAgoIsNotAccureate()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_one_year_ago), new TimeSpan(-360, 0, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_SingleYearAgo), new TimeSpan(-360, 0, 0, 0));
         }
 
         [Fact]
         public void OneYearAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize_one_year_ago), new TimeSpan(-400, 0, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize_SingleYearAgo), new TimeSpan(-400, 0, 0, 0));
         }
 
         [Fact]
         public void FewYearsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize__years_ago), 2), new TimeSpan(-900, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize_MultipleYearsAgo), 2), new TimeSpan(-900, 0, 0, 0));
         }
     }
 }

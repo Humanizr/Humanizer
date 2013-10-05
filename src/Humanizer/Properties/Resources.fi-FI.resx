@@ -117,46 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_not_yet" xml:space="preserve">
+  <data name="DateHumanize_NotYet" xml:space="preserve">
     <value>ei vielä</value>
   </data>
-  <data name="DateHumanize_one_second_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>sekuntti sitten</value>
   </data>
-  <data name="DateHumanize__seconds_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} sekunttia sitten</value>
   </data>
-  <data name="DateHumanize_a_minute_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>minuutti sitten</value>
   </data>
-  <data name="DateHumanize__minutes_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minuuttia sitten</value>
   </data>
-  <data name="DateHumanize_an_hour_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>tunti sitten</value>
   </data>
-  <data name="DateHumanize__hours_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} tuntia sitten</value>
   </data>
-  <data name="DateHumanize_yesterday" xml:space="preserve">
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>eilen</value>
   </data>
-  <data name="DateHumanize__days_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} päivää sitten</value>
   </data>
-  <data name="DateHumanize_one_month_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>kuukausi sitten</value>
   </data>
-  <data name="DateHumanize__months_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} kuukautta sitten</value>
   </data>
-  <data name="DateHumanize_one_year_ago" xml:space="preserve">
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>vuosi sitten</value>
   </data>
-  <data name="DateHumanize__years_ago" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} vuotta sitten</value>
-  </data>
-  <data name="DateHumanize__ago" xml:space="preserve">
-    <value>{0} {1} sitten</value>
   </data>
 </root>

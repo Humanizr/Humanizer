@@ -2,69 +2,69 @@
 {
     public class DefaultFormatter : IFormatter
     {
-        public virtual string DateHumanize__days_ago(int numberOfDays)
+        public virtual string DateHumanize_MultipleDaysAgo(int numberOfDays)
         {
-            return Format(ResourceKeys.DateHumanize__days_ago, numberOfDays);
+            return Format(ResourceKeys.DateHumanize_MultipleDaysAgo, numberOfDays);
         }
 
-        public virtual string DateHumanize__hours_ago(int numberOfHours)
+        public virtual string DateHumanize_MultipleHoursAgo(int numberOfHours)
         {
-            return Format(ResourceKeys.DateHumanize__hours_ago, numberOfHours);
+            return Format(ResourceKeys.DateHumanize_MultipleHoursAgo, numberOfHours);
         }
 
-        public virtual string DateHumanize__minutes_ago(int numberOfMinutes)
+        public virtual string DateHumanize_MultipleMinutesAgo(int numberOfMinutes)
         {
-            return Format(ResourceKeys.DateHumanize__minutes_ago, numberOfMinutes);
+            return Format(ResourceKeys.DateHumanize_MultipleMinutesAgo, numberOfMinutes);
         }
 
-        public virtual string DateHumanize__months_ago(int numberOfMonths)
+        public virtual string DateHumanize_MultipleMonthsAgo(int numberOfMonths)
         {
-            return Format(ResourceKeys.DateHumanize__months_ago, numberOfMonths);
+            return Format(ResourceKeys.DateHumanize_MultipleMonthsAgo, numberOfMonths);
         }
 
-        public virtual string DateHumanize__seconds_ago(int numberOfSeconds)
+        public virtual string DateHumanize_MultipleSecondsAgo(int numberOfSeconds)
         {
-            return Format(ResourceKeys.DateHumanize__seconds_ago, numberOfSeconds);
+            return Format(ResourceKeys.DateHumanize_MultipleSecondsAgo, numberOfSeconds);
         }
 
-        public virtual string DateHumanize__years_ago(int numberOfYears)
+        public virtual string DateHumanize_MultipleYearsAgo(int numberOfYears)
         {
-            return Format(ResourceKeys.DateHumanize__years_ago, numberOfYears);
+            return Format(ResourceKeys.DateHumanize_MultipleYearsAgo, numberOfYears);
         }
 
-        public virtual string DateHumanize_a_minute_ago()
+        public virtual string DateHumanize_SingleMinuteAgo()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize_a_minute_ago);
+            return Resources.GetResource(ResourceKeys.DateHumanize_SingleMinuteAgo);
         }
 
-        public virtual string DateHumanize_an_hour_ago()
+        public virtual string DateHumanize_SingleHourAgo()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize_an_hour_ago);
+            return Resources.GetResource(ResourceKeys.DateHumanize_SingleHourAgo);
         }
 
-        public virtual string DateHumanize_not_yet()
+        public virtual string DateHumanize_NotYet()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize_not_yet);
+            return Resources.GetResource(ResourceKeys.DateHumanize_NotYet);
         }
 
-        public virtual string DateHumanize_one_month_ago()
+        public virtual string DateHumanize_SingleMonthAgo()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize_one_month_ago);
+            return Resources.GetResource(ResourceKeys.DateHumanize_SingleMonthAgo);
         }
 
-        public virtual string DateHumanize_one_second_ago()
+        public virtual string DateHumanize_SingleSecondAgo()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize_one_second_ago);
+            return Resources.GetResource(ResourceKeys.DateHumanize_SingleSecondAgo);
         }
 
-        public virtual string DateHumanize_one_year_ago()
+        public virtual string DateHumanize_SingleYearAgo()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize_one_year_ago);
+            return Resources.GetResource(ResourceKeys.DateHumanize_SingleYearAgo);
         }
 
-        public virtual string DateHumanize_yesterday()
+        public virtual string DateHumanize_SingleDayAgo()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize_yesterday);
+            return Resources.GetResource(ResourceKeys.DateHumanize_SingleDayAgo);
         }
 
         protected string Format(string resourceKey, int number)

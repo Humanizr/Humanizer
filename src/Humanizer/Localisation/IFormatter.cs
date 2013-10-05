@@ -7,18 +7,18 @@
     /// </summary>
     public interface IFormatter
     {
-        string DateHumanize__days_ago(int numberOfDays);
-        string DateHumanize__hours_ago(int numberOfHours);
-        string DateHumanize__minutes_ago(int numberOfMinutes);
-        string DateHumanize__months_ago(int numberOfMonths);
-        string DateHumanize__seconds_ago(int numberOfSeconds);
-        string DateHumanize__years_ago(int numberOfYears);
-        string DateHumanize_a_minute_ago();
-        string DateHumanize_an_hour_ago();
-        string DateHumanize_not_yet();
-        string DateHumanize_one_month_ago();
-        string DateHumanize_one_second_ago();
-        string DateHumanize_one_year_ago();
-        string DateHumanize_yesterday();
+        string DateHumanize_MultipleDaysAgo(int numberOfDays);
+        string DateHumanize_MultipleHoursAgo(int numberOfHours);
+        string DateHumanize_MultipleMinutesAgo(int numberOfMinutes);
+        string DateHumanize_MultipleMonthsAgo(int numberOfMonths);
+        string DateHumanize_MultipleSecondsAgo(int numberOfSeconds);
+        string DateHumanize_MultipleYearsAgo(int numberOfYears);
+        string DateHumanize_SingleMinuteAgo();
+        string DateHumanize_SingleHourAgo();
+        string DateHumanize_NotYet();
+        string DateHumanize_SingleMonthAgo();
+        string DateHumanize_SingleSecondAgo();
+        string DateHumanize_SingleYearAgo();
+        string DateHumanize_SingleDayAgo();
     }
 }

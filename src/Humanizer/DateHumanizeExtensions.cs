@@ -36,40 +36,40 @@ namespace Humanizer
             var formatter = Configurator.Formatter;
 
             if (input > comparisonBase)
-                return formatter.DateHumanize_not_yet();
+                return formatter.DateHumanize_NotYet();
 
             var ts = new TimeSpan(comparisonBase.Ticks - input.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * minute)
-                return ts.Seconds == 1 ? formatter.DateHumanize_one_second_ago() : formatter.DateHumanize__seconds_ago(ts.Seconds);
+                return ts.Seconds == 1 ? formatter.DateHumanize_SingleSecondAgo() : formatter.DateHumanize_MultipleSecondsAgo(ts.Seconds);
 
             if (delta < 2 * minute)
-                return formatter.DateHumanize_a_minute_ago();
+                return formatter.DateHumanize_SingleMinuteAgo();
 
             if (delta < 45 * minute)
-                return formatter.DateHumanize__minutes_ago(ts.Minutes);
+                return formatter.DateHumanize_MultipleMinutesAgo(ts.Minutes);
 
             if (delta < 90 * minute)
-                return formatter.DateHumanize_an_hour_ago();
+                return formatter.DateHumanize_SingleHourAgo();
 
             if (delta < 24 * hour)
-                return formatter.DateHumanize__hours_ago(ts.Hours);
+                return formatter.DateHumanize_MultipleHoursAgo(ts.Hours);
 
             if (delta < 48 * hour)
-                return formatter.DateHumanize_yesterday();
+                return formatter.DateHumanize_SingleDayAgo();
 
             if (delta < 30 * day)
-                return formatter.DateHumanize__days_ago(ts.Days);
+                return formatter.DateHumanize_MultipleDaysAgo(ts.Days);
 
             if (delta < 12 * month)
             {
                 int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-                return months <= 1 ? formatter.DateHumanize_one_month_ago() : formatter.DateHumanize__months_ago(months);
+                return months <= 1 ? formatter.DateHumanize_SingleMonthAgo() : formatter.DateHumanize_MultipleMonthsAgo(months);
             }
 
             int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-            return years <= 1 ? formatter.DateHumanize_one_year_ago() : formatter.DateHumanize__years_ago(years);
+            return years <= 1 ? formatter.DateHumanize_SingleYearAgo() : formatter.DateHumanize_MultipleYearsAgo(years);
         }
     }
 }
