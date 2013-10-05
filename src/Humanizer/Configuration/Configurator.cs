@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Humanizer.Localisation;
+using Humanizer.TimeSpanLocalisation;
 
 namespace Humanizer.Configuration
 {
@@ -30,6 +31,24 @@ namespace Humanizer.Configuration
                     return formatterFactory();
                 }
                 return new DefaultFormatter();
+            }
+        }
+
+        private static readonly IDictionary<string, Func<ITimeSpanFormatter>> TimeSpanFormatterFactories =
+            new Dictionary<string, Func<ITimeSpanFormatter>>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Gets a formatter that knows how to format various parts of a TimeSpan object
+        /// </summary>
+        public static ITimeSpanFormatter TimeSpanFormatter
+        {
+            get
+            {
+                var languageName = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                Func<ITimeSpanFormatter> formatterFactory;
+                return TimeSpanFormatterFactories.TryGetValue(languageName, out formatterFactory)
+                    ? formatterFactory()
+                    : new DefaultTimeSpanFormatter();
             }
         }
     }

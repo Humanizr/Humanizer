@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
+    <Compile Include="TimeSpanLocalisation\DefaultTimeSpanFormatMap.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
@@ -93,10 +94,12 @@
     </Compile>
     <Compile Include="Localisation\DefaultFormatter.cs" />
     <Compile Include="Localisation\IFormatter.cs" />
+    <Compile Include="TimeSpanLocalisation\ITimeSpanFormatter.cs" />
     <Compile Include="Localisation\ResourceKeys.cs" />
     <Compile Include="Localisation\Resources.cs" />
     <Compile Include="Localisation\RomanianFormatter.cs" />
     <Compile Include="Localisation\RussianFormatter.cs" />
+    <Compile Include="TimeSpanLocalisation\DefaultTimeSpanFormatter.cs" />
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
@@ -104,6 +107,9 @@
     <Compile Include="StringDehumanizeExtensions.cs" />
     <Compile Include="StringHumanizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeSpanLocalisation\ResourceKeys.cs" />
+    <Compile Include="TimeSpanLocalisation\TimeSpanPropertyFormat.cs" />
+    <Compile Include="TimeSpanHumanizeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FluentDate\In.SomeTimeFrom.tt">

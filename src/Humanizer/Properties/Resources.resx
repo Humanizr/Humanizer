@@ -159,4 +159,43 @@
   <data name="DateHumanize__ago" xml:space="preserve">
     <value>{0} {1} ago</value>
   </data>
+  <data name="TimeSpan_MultipleDays" xml:space="preserve">
+    <value>{0} days</value>
+  </data>
+  <data name="TimeSpan_MultipleHours" xml:space="preserve">
+    <value>{0} hours</value>
+  </data>
+  <data name="TimeSpan_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} milliseconds</value>
+  </data>
+  <data name="TimeSpan_MultipleMinutes" xml:space="preserve">
+    <value>{0} minutes</value>
+  </data>
+  <data name="TimeSpan_MultipleSeconds" xml:space="preserve">
+    <value>{0} seconds</value>
+  </data>
+  <data name="TimeSpan_SingleDay" xml:space="preserve">
+    <value>1 day</value>
+  </data>
+  <data name="TimeSpan_SingleHour" xml:space="preserve">
+    <value>1 hour</value>
+  </data>
+  <data name="TimeSpan_SingleMillisecond" xml:space="preserve">
+    <value>1 millisecond</value>
+  </data>
+  <data name="TimeSpan_SingleMinute" xml:space="preserve">
+    <value>1 minute</value>
+  </data>
+  <data name="TimeSpan_SingleSecond" xml:space="preserve">
+    <value>1 second</value>
+  </data>
+  <data name="TimeSpan_Zero" xml:space="preserve">
+    <value>no time</value>
+  </data>
+  <data name="TimeSpan_MultipleWeeks" xml:space="preserve">
+    <value>{0} weeks</value>
+  </data>
+  <data name="TimeSpan_SingleWeek" xml:space="preserve">
+    <value>1 week</value>
+  </data>
 </root>
