@@ -18,6 +18,7 @@ namespace Humanizer.Tests.Extensions
         {
             Assert.Equal("one hundred", 100.ToWords());
             Assert.Equal("one thousand", 1000.ToWords());
+            Assert.Equal("one hundred thousand", 100000.ToWords());
             Assert.Equal("one million", 1000000.ToWords());
         }
     }

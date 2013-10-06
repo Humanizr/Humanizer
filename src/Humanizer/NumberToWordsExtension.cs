@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Humanizer.Configuration;
 
 namespace Humanizer
 {
@@ -10,7 +9,7 @@ namespace Humanizer
         /// <summary>
         /// 3501.ToWords() -> "three thousand five hundred and one"
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="number">Number to be turned to words</param>
         /// <returns></returns>
         public static string ToWords(this int number)
         {
