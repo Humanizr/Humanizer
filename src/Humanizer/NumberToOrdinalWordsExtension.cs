@@ -27,7 +27,7 @@ namespace Humanizer
                 if (ExceptionNumbersToWords(number%10, out exceptionPart))
                 {
                     var normalPart = number - number%10;
-                    towords = normalPart.ToWords();
+                    towords = RemoveOnePrefix(normalPart.ToWords());
                     return towords + " " + exceptionPart;
                 }
             }
@@ -39,14 +39,21 @@ namespace Humanizer
         {
             string towords = number.ToWords().Replace('-', ' ');
 
-            // one hundred => hundredth
-            if (towords.IndexOf("one", StringComparison.Ordinal) == 0)
-                towords = towords.Remove(0, 4);
+            towords = RemoveOnePrefix(towords);
             // twenty => twentieth
             if (towords.EndsWith("y"))
                 towords = towords.TrimEnd('y') + "ie";
 
             return towords + "th";
+        }
+
+        private static string RemoveOnePrefix(string towords)
+        {
+            // one hundred => hundredth
+            if (towords.IndexOf("one", StringComparison.Ordinal) == 0)
+                towords = towords.Remove(0, 4);
+
+            return towords;
         }
 
         static bool ExceptionNumbersToWords(int number, out string words)

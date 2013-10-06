@@ -40,8 +40,12 @@ namespace Humanizer.Tests.Extensions
         [InlineData(96, "ninety sixth")]
         [InlineData(100, "hundredth")]
         [InlineData(120, "hundred and twentieth")]
+        [InlineData(121, "hundred and twenty first")]
         [InlineData(1000, "thousandth")]
+        [InlineData(1001, "thousand first")]
+        [InlineData(1021, "thousand and twenty first")]
         [InlineData(10000, "ten thousandth")]
+        [InlineData(10121, "ten thousand one hundred and twenty first")]
         [InlineData(100000, "hundred thousandth")]
         [InlineData(1000000, "millionth")]
         public void ToOrdinalWords(int number, string words)
