@@ -2,72 +2,71 @@
 {
     public partial class ResourceKeys
     {
-
         public static class TimeSpanHumanize
         {
             public static string MultipleDays
             {
-                get { return "TimeSpan_MultipleDays"; }
+                get { return "TimeSpanHumanize_MultipleDays"; }
             }
 
             public static string SingleDay
             {
-                get { return "TimeSpan_SingleDay"; }
+                get { return "TimeSpanHumanize_SingleDay"; }
             }
 
             public static string MultipleHours
             {
-                get { return "TimeSpan_MultipleHours"; }
+                get { return "TimeSpanHumanize_MultipleHours"; }
             }
 
             public static string SingleHour
             {
-                get { return "TimeSpan_SingleHour"; }
+                get { return "TimeSpanHumanize_SingleHour"; }
             }
 
             public static string MultipleMinutes
             {
-                get { return "TimeSpan_MultipleMinutes"; }
+                get { return "TimeSpanHumanize_MultipleMinutes"; }
             }
 
             public static string SingleMinute
             {
-                get { return "TimeSpan_SingleMinute"; }
+                get { return "TimeSpanHumanize_SingleMinute"; }
             }
 
             public static string MultipleSeconds
             {
-                get { return "TimeSpan_MultipleSeconds"; }
+                get { return "TimeSpanHumanize_MultipleSeconds"; }
             }
 
             public static string SingleSecond
             {
-                get { return "TimeSpan_SingleSecond"; }
+                get { return "TimeSpanHumanize_SingleSecond"; }
             }
 
             public static string MultipleMilliseconds
             {
-                get { return "TimeSpan_MultipleMilliseconds"; }
+                get { return "TimeSpanHumanize_MultipleMilliseconds"; }
             }
 
             public static string SingleMillisecond
             {
-                get { return "TimeSpan_SingleMillisecond"; }
+                get { return "TimeSpanHumanize_SingleMillisecond"; }
             }
 
             public static string Zero
             {
-                get { return "TimeSpan_Zero"; }
+                get { return "TimeSpanHumanize_Zero"; }
             }
 
             public static string MultipleWeeks
             {
-                get { return "TimeSpan_MultipleWeeks"; }
+                get { return "TimeSpanHumanize_MultipleWeeks"; }
             }
 
             public static string SingleWeek
             {
-                get { return "TimeSpan_SingleWeek"; }
+                get { return "TimeSpanHumanize_SingleWeek"; }
             }
         }
     }
