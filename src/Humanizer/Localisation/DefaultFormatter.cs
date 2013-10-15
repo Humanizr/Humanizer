@@ -67,12 +67,87 @@
             return Resources.GetResource(ResourceKeys.DateHumanize_SingleDayAgo);
         }
 
-        protected string Format(string resourceKey, int number)
+        public virtual string TimeSpanHumanize_MultipleWeeks(int weeks)
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_MultipleWeeks, weeks);
+        }
+
+        public virtual string TimeSpanHumanize_SingleWeek()
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_SingleWeek);
+        }
+
+        public virtual string TimeSpanHumanize_MultipleDays(int days)
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_MultipleDays, days);
+        }
+
+        public virtual string TimeSpanHumanize_SingleDay()
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_SingleDay);
+        }
+
+        public virtual string TimeSpanHumanize_MultipleHours(int hours)
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_MultipleHours, hours);
+        }
+
+        public virtual string TimeSpanHumanize_SingleHour()
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_SingleHour);
+        }
+
+        public virtual string TimeSpanHumanize_MultipleMinutes(int minutes)
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_MultipleMinutes, minutes);
+        }
+
+        public virtual string TimeSpanHumanize_SingleMinute()
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_SingleMinute);
+        }
+
+        public virtual string TimeSpanHumanize_MultipleSeconds(int seconds)
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_MultipleSeconds, seconds);
+        }
+
+        public virtual string TimeSpanHumanize_SingleSecond()
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_SingleSecond);
+        }
+
+        public virtual string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds)
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_MultipleMilliseconds, milliSeconds);
+        }
+
+        public virtual string TimeSpanHumanize_SingleMillisecond()
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_SingleMillisecond);
+        }
+
+        public virtual string TimeSpanHumanize_Zero()
+        {
+            return Format(ResourceKeys.TimeSpanHumanize_Zero);
+        }
+
+        protected virtual string Format(string resourceKey)
+        {
+            return Resources.GetResource(GetResourceKey(resourceKey));
+        }
+
+        protected virtual string Format(string resourceKey, int number)
         {
             return string.Format(Resources.GetResource(GetResourceKey(resourceKey, number)), number);
         }
 
         protected virtual string GetResourceKey(string resourceKey, int number)
+        {
+            return resourceKey;
+        }
+
+        protected virtual string GetResourceKey(string resourceKey)
         {
             return resourceKey;
         }

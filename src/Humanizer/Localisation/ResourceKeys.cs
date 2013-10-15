@@ -66,5 +66,70 @@
         {
             get { return "DateHumanize_SingleDayAgo"; }
         }
+
+        public static string TimeSpanHumanize_MultipleDays
+        {
+            get { return "TimeSpan_MultipleDays"; }
+        }
+
+        public static string TimeSpanHumanize_SingleDay
+        {
+            get { return "TimeSpan_SingleDay"; }
+        }
+
+        public static string TimeSpanHumanize_MultipleHours
+        {
+            get { return "TimeSpan_MultipleHours"; }
+        }
+
+        public static string TimeSpanHumanize_SingleHour
+        {
+            get { return "TimeSpan_SingleHour"; }
+        }
+
+        public static string TimeSpanHumanize_MultipleMinutes
+        {
+            get { return "TimeSpan_MultipleMinutes"; }
+        }
+
+        public static string TimeSpanHumanize_SingleMinute
+        {
+            get { return "TimeSpan_SingleMinute"; }
+        }
+
+        public static string TimeSpanHumanize_MultipleSeconds
+        {
+            get { return "TimeSpan_MultipleSeconds"; }
+        }
+
+        public static string TimeSpanHumanize_SingleSecond
+        {
+            get { return "TimeSpan_SingleSecond"; }
+        }
+
+        public static string TimeSpanHumanize_MultipleMilliseconds
+        {
+            get { return "TimeSpan_MultipleMilliseconds"; }
+        }
+
+        public static string TimeSpanHumanize_SingleMillisecond
+        {
+            get { return "TimeSpan_SingleMillisecond"; }
+        }
+
+        public static string TimeSpanHumanize_Zero
+        {
+            get { return "TimeSpan_Zero"; }
+        }
+
+        public static string TimeSpanHumanize_MultipleWeeks
+        {
+            get { return "TimeSpan_MultipleWeeks"; }
+        }
+
+        public static string TimeSpanHumanize_SingleWeek
+        {
+            get { return "TimeSpan_SingleWeek"; }
+        }
     }
 }
