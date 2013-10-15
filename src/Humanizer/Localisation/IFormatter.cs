@@ -20,5 +20,18 @@
         string DateHumanize_SingleSecondAgo();
         string DateHumanize_SingleYearAgo();
         string DateHumanize_SingleDayAgo();
+        string TimeSpanHumanize_MultipleWeeks(int weeks);
+        string TimeSpanHumanize_SingleWeek();
+        string TimeSpanHumanize_MultipleDays(int days);
+        string TimeSpanHumanize_SingleDay();
+        string TimeSpanHumanize_MultipleHours(int hours);
+        string TimeSpanHumanize_SingleHour();
+        string TimeSpanHumanize_MultipleMinutes(int minutes);
+        string TimeSpanHumanize_SingleMinute();
+        string TimeSpanHumanize_MultipleSeconds(int seconds);
+        string TimeSpanHumanize_SingleSecond();
+        string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds);
+        string TimeSpanHumanize_SingleMillisecond();
+        string TimeSpanHumanize_Zero();
     }
 }
