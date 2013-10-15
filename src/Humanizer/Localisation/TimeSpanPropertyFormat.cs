@@ -6,7 +6,7 @@ namespace Humanizer.Localisation
     /// Stores a single mapping of a part of the time span (Day, Hour etc.) to its associated
     /// formatter method for Zero, Single, Multiple.
     /// </summary>
-    public class TimeSpanPropertyFormat
+    class TimeSpanPropertyFormat
     {
         public TimeSpanPropertyFormat(
             Func<TimeSpan, int> propertySelector,

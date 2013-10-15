@@ -31,7 +31,7 @@ namespace Humanizer
         /// Gets the elements of the TimeSpan associated with their correct formatter methods
         /// in zero, single and multiple forms.
         /// </summary>
-        public static IEnumerable<TimeSpanPropertyFormat> FormatParameters
+        static IEnumerable<TimeSpanPropertyFormat> FormatParameters
         {
             get
             {
