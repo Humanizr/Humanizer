@@ -88,24 +88,24 @@ You can call `Humanizes` on a `TimeSpan` to a get human friendly representation 
 ###Inflector methods###
 There are also a few inflector methods:
 
- * Pluralize: pluralizes the provided input considering irregular words; e.g. `"Man".Pluralize()` -> `"Men"` & `"string".Pluralize()` -> `"strings"`
- * Singularize: singularizes the provided input considering irregular words; e.g. `"Men".Singularize()` -> `"Man"` & `"strings".Singularize()` -> `"string"`
- * Ordinalize numbers: turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. `1.Ordinalize()` -> `"1st"`, `5.Ordinalize()` -> `"5th"`
- * Ordinalize strings: Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. `"21".Ordinalize()` -> `"21st"`
- * Underscore: separates the input words with underscore; e.g. `"SomeTitle".Underscore()` -> `"some_title"`
- * Dasherize: replaces underscores with dashes in the string; e.g. `"some_title".Dasherize()` -> `"some-title"`
+ * Pluralize: pluralizes the provided input considering irregular words; e.g. `"Man".Pluralize()` => `"Men"` & `"string".Pluralize()` => `"strings"`
+ * Singularize: singularizes the provided input considering irregular words; e.g. `"Men".Singularize()` => `"Man"` & `"strings".Singularize()` => `"string"`
+ * Ordinalize numbers: turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. `1.Ordinalize()` => `"1st"`, `5.Ordinalize()` => `"5th"`
+ * Ordinalize strings: Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. `"21".Ordinalize()` => `"21st"`
+ * Underscore: separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
+ * Dasherize: replaces underscores with dashes in the string; e.g. `"some_title".Dasherize()` => `"some-title"`
 
 ###Fluent Date
 Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follows:
 
 `TimeSpan` methods:
 
-	2.Milliseconds() // Returns new TimeSpan(0, 0, 0, 0, 2)
-	2.Seconds() // Returns new TimeSpan(0, 0, 0, 2)
-	2.Minutes() // Returns new TimeSpan(0, 0, 2, 0)
-	2.Hours() // Returns new TimeSpan(0, 2, 0, 0)
-	2.Days() // Returns new TimeSpan(2, 0, 0, 0)
-	2.Weeks() // Returns new TimeSpan(14, 0, 0, 0)
+	2.Milliseconds() => TimeSpan.FromMilliseconds(2)
+	2.Seconds() => TimeSpan.FromSeconds(2)
+	2.Minutes() => TimeSpan.FromMinutes(2)
+	2.Hours() => TimeSpan.FromHours(2)
+	2.Days() => TimeSpan.FromDays(2)
+	2.Weeks() => TimeSpan.FromDays(14)
 
 <small>There are no fluent APIs for month or year as a month could have between 28 to 31 days and a year could be 365 or 366 days.</small>
 
@@ -145,13 +145,13 @@ and some extension methods:
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
 ###Number to words 
-Humanizer can change numbers to words using the `ToWords` extension. Here is a few examples from the unit tests: 
+Humanizer can change numbers to words using the `ToWords` extension:
 
-    Assert.Equal("one", 1.ToWords());
-    Assert.Equal("ten", 10.ToWords());
-    Assert.Equal("eleven", 11.ToWords());
-    Assert.Equal("one hundred and twenty-two", 122.ToWords());
-    Assert.Equal("three thousand five hundred and one", 3501.ToWords());
+    1.ToWords() => "one"
+    10.ToWords() => "ten"
+    11.ToWords() => "eleven"
+    122.ToWords() => "one hundred and twenty-two"
+    3501.ToWords() => "three thousand five hundred and one"
 
 ###Number to ordinal words
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words!! Let me show that with an example:
