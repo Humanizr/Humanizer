@@ -9,6 +9,7 @@ Humanizer is a set of extension methods, currently available on `String`, `Enum`
 ###Humanize Strings
 String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
 
+```C#
     "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
     
     "Underscored_input_string_is_turned_into_sentence".Humanize() => "Underscored input string is turned into sentence"
@@ -16,9 +17,11 @@ String extensions are at the heart of this micro-framework. The foundation of th
     "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
     
     "HTML".Humanize() => "HTML" // acronyms are left intact
+```
 
 You may also specify the desired letter casing:
 
+```C#
     "CanReturnTitleCase".Humanize(LetterCasing.Title) => "Can Return Title Case"
     
     "Can_return_title_Case".Humanize(LetterCasing.Title) => "Can Return Title Case"
@@ -26,15 +29,19 @@ You may also specify the desired letter casing:
     "CanReturnLowerCase".Humanize(LetterCasing.LowerCase) => "can return lower case"
     
     "CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps) => "CAN HUMANIZE INTO UPPER CASE"
+```
 
 ####Dehumanize Strings
 Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
 
+```C#
     "Pascal case input string is turned into sentence".Dehumanize() => "PascalCaseInputStringIsTurnedIntoSentence"
+```
 
 ###Humanize Enums
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
 
+```C#
     public enum EnumUnderTest
     {
         [Description("Custom description")]
@@ -42,21 +49,26 @@ Calling `ToString` directly on enum members usually results in less than ideal o
         MemberWithoutDescriptionAttribute,
         ALLCAPITALS
     }
+```
 
 You will get:
 
+```C#
     EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"; // DescriptionAttribute is honored
     
     EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute"; // in the absence of Description attribute string.Humanizer kicks in
     
     EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title) => "Member Without Description Attribute"; // an of course you can still apply letter casing 
+```
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
 ####Dehumanize Enums
 Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
+```C#
     public static Enum DehumanizeTo<TTargetEnum>(this string input) 
+```
 
 And the usage is:
 
@@ -80,10 +92,12 @@ For dates Humanizer also supports localization.
 ###Humanizer TimeSpan
 You can call `Humanizes` on a `TimeSpan` to a get human friendly representation for it:
 
+```C#
     TimeSpan.FromMilliseconds(1).Humanize() => "1 millisecond"
     TimeSpan.FromMilliseconds(2).Humanize() => "2 milliseconds"
 	TimeSpan.FromDays(1).Humanize() => "1 day"
 	TimeSpan.FromDays(14).Humanize() => "2 weeks"
+```
 
 ###Inflector methods###
 There are also a few inflector methods:
@@ -119,6 +133,7 @@ with
 
 There are also fluent methods to deal with `DateTime`:
 
+```C#
 	In.TheYear(2010) // Returns the first of January of 2010
 	In.January // Returns 1st of January of the current year
 	In.FebruaryOf(2009) // Returns 1st of February of 2009
@@ -132,30 +147,36 @@ There are also fluent methods to deal with `DateTime`:
 	In.Three.Years // With corresponding From method
 	On.January.The4th // Returns 4th of January of the current year
 	On.February.The(12) // Returns 12th of Feb of the current year
+```
 
 and some extension methods:
 
+```C#
 	var someDateTime = new DateTime(2011, 2, 10, 5, 25, 45, 125);
 	someDateTime.In(2008) // Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008
 	someDateTime.At(2) // Returns new DateTime(2011, 2, 10, 2, 25, 45, 125) changing the hour to 2:25:45.125
 	someDateTime.At(2, 20, 15) // Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125
 	someDateTime.AtNoon() // Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000
 	someDateTime.AtMidnight() // Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000
+```
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
 ###Number to words 
 Humanizer can change numbers to words using the `ToWords` extension:
 
+```C#
     1.ToWords() => "one"
     10.ToWords() => "ten"
     11.ToWords() => "eleven"
     122.ToWords() => "one hundred and twenty-two"
     3501.ToWords() => "three thousand five hundred and one"
+```
 
 ###Number to ordinal words
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words!! Let me show that with an example:
 
+```C#
     0.ToOrdinalWords() => "zeroth"
     1.ToOrdinalWords() => "first"
     2.ToOrdinalWords() => "second"
@@ -166,6 +187,7 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
     20.ToOrdinalWords() => "twentieth"
     21.ToOrdinalWords() => "twenty first"
     121.ToOrdinalWords() => "hundred and twenty first"
+```
 
 ##Mix this into your framework to simplify your life
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
@@ -174,6 +196,7 @@ You may find an Asp.Net MVC sample [in the code][5] that does that (although the
 
 This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
+```C#
     public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
     {
         protected override ModelMetadata CreateMetadata(
@@ -206,6 +229,7 @@ This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called 
             return true;
         }
     }
+```
 
 This class calls the base class to extract the metadata and then, if required, humanizes the property name. It is checking if the property already has a `DisplayName` or `Display` attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. For other properties it will Humanize the property name. That is all.
 
@@ -215,6 +239,7 @@ Now I need to register this metadata provider with Asp.Net MVC:
 
 ... and now I can replace:
 
+```C#
     public class RegisterModel
     {
         [Display(Name = "User name")]
@@ -226,15 +251,18 @@ Now I need to register this metadata provider with Asp.Net MVC:
         [Display(Name = "Confirm password")]
         public string ConfirmPassword { get; set; }
     }
+```
 
 with:
 
+```C#
     public class RegisterModel
     {
         public string UserName { get; set; }
         public string EmailAddress { get; set; }
         public string ConfirmPassword { get; set; }
     }
+```
 
 ... and the "metadata humanizer" will take care of the rest.
 
