@@ -1,6 +1,9 @@
 ﻿using System;
 namespace Humanizer
 {
+    /// <summary>
+    /// Number to TimeSpan extensions
+    /// </summary>
     public static class NumberToTimeSpanExtensions
     {
         /// <summary>
@@ -10,57 +13,57 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Weeks(this int input)
         {
-            return new TimeSpan(input*7, 0, 0, 0);
+            return Days(7*input);
         }
 
         /// <summary>
-        /// 2.Days() == new TimeSpan(2, 0, 0, 0)
+        /// 2.Days() == TimeSpan.FromDays(2)
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="days"></param>
         /// <returns></returns>
-        public static TimeSpan Days(this int input)
+        public static TimeSpan Days(this int days)
         {
-            return new TimeSpan(input, 0, 0, 0);
+            return TimeSpan.FromDays(days);
         }
 
         /// <summary>
-        /// 3.Hours() == new TimeSpan(0, 3, 0, 0)
+        /// 3.Hours() == TimeSpan.FromHours(3)
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="hours"></param>
         /// <returns></returns>
-        public static TimeSpan Hours(this int input)
+        public static TimeSpan Hours(this int hours)
         {
-            return new TimeSpan(0, input, 0, 0);
+            return TimeSpan.FromHours(hours);
         }
 
         /// <summary>
-        /// 4.Minutes() == new TimeSpan(0, 0, 4, 0) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="minutes"></param>
         /// <returns></returns>
-        public static TimeSpan Minutes(this int input)
+        public static TimeSpan Minutes(this int minutes)
         {
-            return new TimeSpan(0, 0, input, 0);
+            return TimeSpan.FromMinutes(minutes);
         }
 
         /// <summary>
-        /// 5.Seconds() == new TimeSpan(0, 0, 0, 5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="seconds"></param>
         /// <returns></returns>
-        public static TimeSpan Seconds(this int input)
+        public static TimeSpan Seconds(this int seconds)
         {
-            return new TimeSpan(0, 0, 0, input);
+            return TimeSpan.FromSeconds(seconds);
         }
 
         /// <summary>
-        /// 5.Milliseconds() == new TimeSpan(0, 0, 0, 0, 5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="ms"></param>
         /// <returns></returns>
-        public static TimeSpan Milliseconds(this int input)
+        public static TimeSpan Milliseconds(this int ms)
         {
-            return new TimeSpan(0, 0, 0, 0, input);
+            return TimeSpan.FromMilliseconds(ms);
         }
     }
 }
