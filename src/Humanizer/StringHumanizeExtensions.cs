@@ -61,38 +61,7 @@ namespace Humanizer
         public static string Humanize(this string input, LetterCasing casing)
         {
             var humanizedString = input.Humanize();
-
-            return ApplyCase(humanizedString, casing);
-        }
-
-        /// <summary>
-        /// Changes the casing of the provided input
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="casing"></param>
-        /// <returns></returns>
-        public static string ApplyCase(this string input, LetterCasing casing)
-        {
-            switch (casing)
-            {
-                case LetterCasing.Title:
-                    return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
-
-                case LetterCasing.LowerCase:
-                    return input.ToLower();
-
-                case LetterCasing.AllCaps:
-                    return input.ToUpper();
-
-                case LetterCasing.Sentence:
-                    if (input.Length >= 1)
-                        return String.Concat(input.Substring(0, 1).ToUpper(), input.Substring(1));
-
-                    return input.ToUpper();
-
-                default:
-                    throw new ArgumentOutOfRangeException("casing");
-            }
+            return humanizedString.ApplyCase(casing);
         }
 
         /// <summary>
