@@ -102,6 +102,7 @@
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
     <Compile Include="NumberToWordsExtension.cs" />
+    <Compile Include="OrdinalizeExtensions.cs" />
     <Compile Include="StringDehumanizeExtensions.cs" />
     <Compile Include="StringHumanizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
+    /// <summary>
+    /// Inflector extensions
+    /// </summary>
     public static class InflectorExtensions
     {
         static InflectorExtensions()
@@ -183,7 +185,8 @@ namespace Humanizer
         /// <returns></returns>
         public static string Camelize(this string input)
         {
-            return Uncapitalize(Pascalize(input));
+            string word = Pascalize(input);
+            return word.Substring(0, 1).ToLower() + word.Substring(1);
         }
 
         /// <summary>
@@ -197,53 +200,6 @@ namespace Humanizer
                 Regex.Replace(
                     Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1_$2"), @"([a-z\d])([A-Z])",
                     "$1_$2"), @"[-\s]", "_").ToLower();
-        }
-
-        static string Uncapitalize(this string word)
-        {
-            return word.Substring(0, 1).ToLower() + word.Substring(1);
-        }
-
-        /// <summary>
-        /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
-        /// </summary>
-        /// <param name="numberString">The number, in string, to be ordinalized</param>
-        /// <returns></returns>
-        public static string Ordinalize(this string numberString)
-        {
-            return Ordanize(int.Parse(numberString), numberString);
-        }
-
-        /// <summary>
-        /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
-        /// </summary>
-        /// <param name="number">The number to be ordinalized</param>
-        /// <returns></returns>
-        public static string Ordinalize(this int number)
-        {
-            return Ordanize(number, number.ToString(CultureInfo.InvariantCulture));
-        }
-
-        private static string Ordanize(int number, string numberString)
-        {
-            int nMod100 = number % 100;
-
-            if (nMod100 >= 11 && nMod100 <= 13)
-            {
-                return numberString + "th";
-            }
-
-            switch (number % 10)
-            {
-                case 1:
-                    return numberString + "st";
-                case 2:
-                    return numberString + "nd";
-                case 3:
-                    return numberString + "rd";
-                default:
-                    return numberString + "th";
-            }
         }
 
         /// <summary>
