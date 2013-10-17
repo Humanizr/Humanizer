@@ -43,19 +43,6 @@ namespace Humanizer.Tests
             Assert.Equal(expectedOutput, input.Camelize());
         }
 
-        //Uppercases individual words and removes some characters 
-        [Theory]
-        [InlineData("some title", "Some Title")]
-        [InlineData("some-title", "Some Title")]
-        [InlineData("sometitle", "Sometitle")]
-        [InlineData("some-title: The begining", "Some Title: The Begining")]
-        [InlineData("some_title:_the_begining", "Some Title: The Begining")]
-        [InlineData("some title: The_begining", "Some Title: The Begining")]
-        public void Titleize(string input, string expectedOuput)
-        {
-            Assert.Equal(expectedOuput, input.Titleize());
-        }
-
         [Theory]
         [InlineData("SomeTitle", "some_title")]
         [InlineData("someTitle", "some_title")]

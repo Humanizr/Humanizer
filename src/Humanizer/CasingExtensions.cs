@@ -44,6 +44,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be titleized</param>
         /// <returns></returns>
+        [Obsolete("Use input.Humanize().ToTitle() instead")]
         public static string Titleize(this string input)
         {
             return input.Humanize(LetterCasing.Title);
