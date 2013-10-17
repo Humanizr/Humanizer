@@ -40,6 +40,16 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Changes the casing to title casing
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string ToTitle(this string input)
+        {
+            return input.ApplyCase(LetterCasing.Title);
+        }
+
+        /// <summary>
         /// Humanizes the input with Title casing
         /// </summary>
         /// <param name="input">The string to be titleized</param>

@@ -5,6 +5,16 @@ namespace Humanizer.Tests
 {
     public class CasingTests
     {
+        [Theory]
+        [InlineData("lower case statement", "Lower Case Statement")]
+        [InlineData("Sentence casing", "Sentence Casing")]
+        [InlineData("honors UPPER case", "Honors UPPER Case")]
+        [InlineData("Title Case", "Title Case")]
+        public void ToTitle(string input, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.ToTitle());
+        }
+
         //Makes an underscored lowercase string
         [InlineData("some_title", "some-title")]
         [InlineData("some-title", "some-title")]
