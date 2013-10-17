@@ -78,10 +78,8 @@
     <Compile Include="Extensions\Localisation\ResourcesTests.cs" />
     <Compile Include="Extensions\Localisation\DateHumanizeTests.ru-RU.cs" />
     <Compile Include="Extensions\NumberToTimeSpanTests.cs" />
-    <Compile Include="Extensions\Inflector\DasherizeTests.cs" />
     <Compile Include="Extensions\Inflector\InflectorTestBase.cs" />
     <Compile Include="Extensions\OrdinalizeTests.cs" />
-    <Compile Include="Extensions\Inflector\PascalizeAndCamelizeTests.cs" />
     <Compile Include="Extensions\Inflector\PluralizeTests.cs" />
     <Compile Include="Extensions\Inflector\TitleizeTests.cs" />
     <Compile Include="Extensions\Inflector\UnderscoreTests.cs" />
