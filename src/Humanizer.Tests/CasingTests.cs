@@ -10,9 +10,9 @@ namespace Humanizer.Tests
         [InlineData("Sentence casing", "Sentence Casing")]
         [InlineData("honors UPPER case", "Honors UPPER Case")]
         [InlineData("Title Case", "Title Case")]
-        public void ToTitle(string input, string expectedOutput)
+        public void ApplyCaseTitle(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.ToTitle());
+            Assert.Equal(expectedOutput, input.ApplyCase(LetterCasing.Title));
         }
 
         //Makes an underscored lowercase string
