@@ -81,8 +81,6 @@
     <Compile Include="Inflector\InflectorTestBase.cs" />
     <Compile Include="OrdinalizeTests.cs" />
     <Compile Include="Inflector\PluralizeTests.cs" />
-    <Compile Include="Inflector\TitleizeTests.cs" />
-    <Compile Include="Inflector\UnderscoreTests.cs" />
     <Compile Include="NumberToWordsTests.cs" />
     <Compile Include="StringDehumanizeTests.cs" />
     <Compile Include="StringHumanizeTests.cs" />

@@ -215,5 +215,30 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expectedOutput, input.Camelize());
         }
+
+        [Theory]
+        //Uppercases individual words and removes some characters 
+        [InlineData("some title", "Some Title")]
+        [InlineData("some-title", "Some Title")]
+        [InlineData("sometitle", "Sometitle")]
+        [InlineData("some-title: The begining", "Some Title: The Begining")]
+        [InlineData("some_title:_the_begining", "Some Title: The Begining")]
+        [InlineData("some title: The_begining", "Some Title: The Begining")]
+        public void Titleize(string input, string expectedOuput)
+        {
+            Assert.Equal(expectedOuput, input.Titleize());
+        }
+
+        //Makes an underscored lowercase string
+        [Theory]
+        [InlineData("SomeTitle", "some_title")]
+        [InlineData("someTitle", "some_title")]
+        [InlineData("some title", "some_title")]
+        [InlineData("some title that will be underscored", "some_title_that_will_be_underscored")]
+        [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
+        public void Underscore(string input, string expectedOuput)
+        {
+            Assert.Equal(expectedOuput, input.Underscore());
+        }
     }
 }
