@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Extensions
+namespace Humanizer.Tests
 {
     public class NumberToOrdinalWordsTests
     {

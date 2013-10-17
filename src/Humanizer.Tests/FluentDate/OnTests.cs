@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Humanizer.Tests.Extensions.FluentDate
+namespace Humanizer.Tests.FluentDate
 {
     public class OnTests
     {

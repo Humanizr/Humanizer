@@ -1,9 +1,8 @@
 ﻿using System;
-using Humanizer.Configuration;
 using Humanizer.Localisation;
 using Xunit;
 
-namespace Humanizer.Tests.Extensions
+namespace Humanizer.Tests
 {
     public class DateHumanizeTests
     {

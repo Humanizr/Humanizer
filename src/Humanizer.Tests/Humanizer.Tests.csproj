@@ -64,29 +64,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\NumberToOrdinalWordsTests.cs" />
-    <Compile Include="Extensions\Localisation\DateHumanizeTests.ro-RO.cs" />
-    <Compile Include="Extensions\DateHumanizeTests.cs" />
-    <Compile Include="Extensions\DehumanizeToEnumTests.cs" />
-    <Compile Include="Extensions\EnumHumanizeTests.cs" />
-    <Compile Include="Extensions\EnumTestsResources.cs" />
-    <Compile Include="Extensions\EnumUnderTest.cs" />
-    <Compile Include="Extensions\FluentDate\InTests.cs" />
-    <Compile Include="Extensions\FluentDate\OnTests.cs" />
-    <Compile Include="Extensions\FluentDate\PrepositionTests.cs" />
-    <Compile Include="Extensions\Localisation\AmbientCulture.cs" />
-    <Compile Include="Extensions\Localisation\ResourcesTests.cs" />
-    <Compile Include="Extensions\Localisation\DateHumanizeTests.ru-RU.cs" />
-    <Compile Include="Extensions\NumberToTimeSpanTests.cs" />
-    <Compile Include="Extensions\Inflector\InflectorTestBase.cs" />
-    <Compile Include="Extensions\OrdinalizeTests.cs" />
-    <Compile Include="Extensions\Inflector\PluralizeTests.cs" />
-    <Compile Include="Extensions\Inflector\TitleizeTests.cs" />
-    <Compile Include="Extensions\Inflector\UnderscoreTests.cs" />
-    <Compile Include="Extensions\NumberToWordsTests.cs" />
-    <Compile Include="Extensions\StringDehumanizeTests.cs" />
-    <Compile Include="Extensions\StringHumanizeTests.cs" />
-    <Compile Include="Extensions\TimeSpanHumanizeExtensionsTests.cs" />
+    <Compile Include="NumberToOrdinalWordsTests.cs" />
+    <Compile Include="Localisation\DateHumanizeTests.ro-RO.cs" />
+    <Compile Include="DateHumanizeTests.cs" />
+    <Compile Include="DehumanizeToEnumTests.cs" />
+    <Compile Include="EnumHumanizeTests.cs" />
+    <Compile Include="EnumTestsResources.cs" />
+    <Compile Include="EnumUnderTest.cs" />
+    <Compile Include="FluentDate\InTests.cs" />
+    <Compile Include="FluentDate\OnTests.cs" />
+    <Compile Include="FluentDate\PrepositionTests.cs" />
+    <Compile Include="Localisation\AmbientCulture.cs" />
+    <Compile Include="Localisation\ResourcesTests.cs" />
+    <Compile Include="Localisation\DateHumanizeTests.ru-RU.cs" />
+    <Compile Include="NumberToTimeSpanTests.cs" />
+    <Compile Include="Inflector\InflectorTestBase.cs" />
+    <Compile Include="OrdinalizeTests.cs" />
+    <Compile Include="Inflector\PluralizeTests.cs" />
+    <Compile Include="Inflector\TitleizeTests.cs" />
+    <Compile Include="Inflector\UnderscoreTests.cs" />
+    <Compile Include="NumberToWordsTests.cs" />
+    <Compile Include="StringDehumanizeTests.cs" />
+    <Compile Include="StringHumanizeTests.cs" />
+    <Compile Include="TimeSpanHumanizeExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +96,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\Localisation\DateHumanizeTests.fi-FI.cs" />
+    <Compile Include="Localisation\DateHumanizeTests.fi-FI.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

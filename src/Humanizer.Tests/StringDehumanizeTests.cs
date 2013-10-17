@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Humanizer.Tests.Extensions
+namespace Humanizer.Tests
 {
     class StringDehumanizeTests
     {

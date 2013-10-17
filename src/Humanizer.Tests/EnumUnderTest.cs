@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Humanizer.Tests.Extensions
+namespace Humanizer.Tests
 {
     public enum EnumUnderTest
     {

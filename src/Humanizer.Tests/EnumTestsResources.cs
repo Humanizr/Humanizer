@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Extensions
+﻿namespace Humanizer.Tests
 {
     public class EnumTestsResources
     {

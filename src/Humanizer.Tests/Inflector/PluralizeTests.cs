@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Humanizer.Tests.Extensions.Inflector
+namespace Humanizer.Tests.Inflector
 {
     public class PluralizeTests : InflectorTestBase
     {

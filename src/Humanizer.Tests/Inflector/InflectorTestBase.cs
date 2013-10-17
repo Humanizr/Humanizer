@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Humanizer.Tests.Extensions.Inflector
+namespace Humanizer.Tests.Inflector
 {
     public abstract class InflectorTestBase
     {

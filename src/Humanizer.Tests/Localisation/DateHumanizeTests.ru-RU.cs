@@ -2,7 +2,7 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Extensions.Localisation
+namespace Humanizer.Tests.Localisation
 {
     public class RussianDateHumanizeTests : AmbientCulture
     {

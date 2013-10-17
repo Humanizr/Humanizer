@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Humanizer.Tests.Extensions.Localisation
+namespace Humanizer.Tests.Localisation
 {
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral

@@ -1,9 +1,9 @@
-﻿namespace Humanizer.Tests.Extensions.Localisation
-{
-    using System;
-    using Xunit;
-    using Xunit.Extensions;
+﻿using System;
+using Xunit;
+using Xunit.Extensions;
 
+namespace Humanizer.Tests.Localisation
+{
     public class DateHumanizeTests_fiFI : AmbientCulture
     {
         public DateHumanizeTests_fiFI()
