@@ -78,9 +78,8 @@
     <Compile Include="Localisation\ResourcesTests.cs" />
     <Compile Include="Localisation\DateHumanizeTests.ru-RU.cs" />
     <Compile Include="NumberToTimeSpanTests.cs" />
-    <Compile Include="Inflector\InflectorTestBase.cs" />
     <Compile Include="OrdinalizeTests.cs" />
-    <Compile Include="Inflector\PluralizeTests.cs" />
+    <Compile Include="InflectorTests.cs" />
     <Compile Include="NumberToWordsTests.cs" />
     <Compile Include="StringDehumanizeTests.cs" />
     <Compile Include="StringHumanizeTests.cs" />

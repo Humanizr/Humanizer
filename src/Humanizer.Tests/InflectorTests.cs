@@ -1,9 +1,12 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using Xunit;
 
-namespace Humanizer.Tests.Inflector
+namespace Humanizer.Tests
 {
-    public class PluralizeTests : InflectorTestBase
+    public class InflectorTests 
     {
+        public readonly Dictionary<string, string> TestData = new Dictionary<string, string>();
+
         [Fact]
         public void Pluralize()
         {
@@ -22,7 +25,7 @@ namespace Humanizer.Tests.Inflector
             }
         }
 
-        public PluralizeTests()
+        public InflectorTests()
         {
             TestData.Add("search", "searches");
             TestData.Add("switch", "switches");
