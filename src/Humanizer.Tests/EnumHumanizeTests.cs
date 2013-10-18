@@ -29,7 +29,7 @@ namespace Humanizer.Tests
         {
             Assert.Equal(
                 EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase, 
-                EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.LowerCase));
+                EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Lower));
         }
 
         [Fact] 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
@@ -22,8 +21,8 @@ namespace Humanizer
                 case LetterCasing.Title:
                     return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
 
-                case LetterCasing.LowerCase:
-                    return input.ToLower();
+                case LetterCasing.Lower:
+                    return CultureInfo.CurrentCulture.TextInfo.ToLower(input);
 
                 case LetterCasing.AllCaps:
                     return input.ToUpper();

@@ -16,7 +16,7 @@ namespace Humanizer
         /// <summary>
         /// SomeString -> some string
         /// </summary>
-        LowerCase,
+        Lower,
         /// <summary>
         /// SomeString -> Some string
         /// </summary>
