@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CasingTests.cs" />
+    <Compile Include="TransformersTests.cs" />
     <Compile Include="NumberToOrdinalWordsTests.cs" />
     <Compile Include="Localisation\DateHumanizeTests.ro-RO.cs" />
     <Compile Include="DateHumanizeTests.cs" />
