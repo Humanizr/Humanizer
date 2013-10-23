@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Humanizer.Transformer
+namespace Humanizer
 {
     public class ToTitleCase : IStringTransformer
     {

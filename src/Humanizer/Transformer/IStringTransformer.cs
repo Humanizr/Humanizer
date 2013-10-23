@@ -1,4 +1,4 @@
-namespace Humanizer.Transformer
+namespace Humanizer
 {
     /// <summary>
     /// Can tranform a string

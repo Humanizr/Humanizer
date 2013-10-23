@@ -1,4 +1,4 @@
-namespace Humanizer.Transformer
+namespace Humanizer
 {
     public class ToUpperCase : IStringTransformer
     {

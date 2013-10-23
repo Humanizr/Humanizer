@@ -72,7 +72,7 @@
   <ItemGroup>
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
-    <Compile Include="Transformers.cs" />
+    <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
     <Compile Include="NumberToOrdinalWordsExtension.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />

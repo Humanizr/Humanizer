@@ -1,6 +1,6 @@
 using System;
 
-namespace Humanizer.Transformer
+namespace Humanizer
 {
     public class ToSentenceCase : IStringTransformer
     {

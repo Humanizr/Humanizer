@@ -1,12 +1,11 @@
 ﻿using System.Linq;
-using Humanizer.Transformer;
 
 namespace Humanizer
 {
     /// <summary>
     /// A portal to string transformation using IStringTransformer
     /// </summary>
-    public static class Transformers
+    public static class To
     {
         /// <summary>
         /// Transforms a string using the provided transformers. Transformations are applied in the provided order.
@@ -14,12 +13,12 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <param name="transformers"></param>
         /// <returns></returns>
-        public static string TransformWith(this string input, params IStringTransformer[] transformers)
+        public static string Transform(this string input, params IStringTransformer[] transformers)
         {
             return transformers.Aggregate(input, (current, stringTransformer) => stringTransformer.Transform(current));
         }
 
-        public static IStringTransformer ToTitleCase
+        public static IStringTransformer TitleCase
         {
             get
             {
@@ -27,7 +26,7 @@ namespace Humanizer
             }
         }
 
-        public static IStringTransformer ToLowerCase
+        public static IStringTransformer LowerCase
         {
             get
             {
@@ -35,7 +34,7 @@ namespace Humanizer
             }
         }
 
-        public static IStringTransformer ToUpperCase
+        public static IStringTransformer UpperCase
         {
             get
             {
@@ -43,7 +42,7 @@ namespace Humanizer
             }
         }
 
-        public static IStringTransformer ToSentenceCase
+        public static IStringTransformer SentenceCase
         {
             get
             {

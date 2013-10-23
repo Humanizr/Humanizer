@@ -12,7 +12,7 @@ namespace Humanizer.Tests
         [InlineData("Title Case", "Title Case")]
         public void TransformToTitleCase(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.TransformWith(Transformers.ToTitleCase));
+            Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace Humanizer.Tests
         [InlineData("Title Case", "title case")]
         public void TransformToLowerCase(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.TransformWith(Transformers.ToLowerCase));
+            Assert.Equal(expectedOutput, input.Transform(To.LowerCase));
         }
 
         [Theory]
@@ -31,7 +31,7 @@ namespace Humanizer.Tests
         [InlineData("honors UPPER case", "Honors UPPER case")]
         public void TransformToSentenceCase(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.TransformWith(Transformers.ToSentenceCase));
+            Assert.Equal(expectedOutput, input.Transform(To.SentenceCase));
         }
 
         [Theory]
@@ -40,7 +40,7 @@ namespace Humanizer.Tests
         [InlineData("Title Case", "TITLE CASE")]
         public void TransformToUpperCase(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.TransformWith(Transformers.ToUpperCase));
+            Assert.Equal(expectedOutput, input.Transform(To.UpperCase));
         }
     }
 }
