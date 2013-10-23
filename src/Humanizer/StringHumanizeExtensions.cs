@@ -63,5 +63,17 @@ namespace Humanizer
             var humanizedString = input.Humanize();
             return humanizedString.ApplyCase(casing);
         }
+
+        /// <summary>
+        /// Humanized the input string based on the provided casing
+        /// </summary>
+        /// <param name="input">The string to be humanized</param>
+        /// <param name="transformers">The transformers to apply on the result</param>
+        /// <returns></returns>
+        public static string Humanize(this string input, params IStringTransformer[] transformers)
+        {
+            var humanizedString = input.Humanize();
+            return humanizedString.Transform(transformers);
+        }
     }
 }
