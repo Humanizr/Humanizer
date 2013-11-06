@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using Xunit.Extensions;
 
@@ -133,6 +134,20 @@ namespace Humanizer.Tests
             TestData.Add("alumna", "alumnae");
             TestData.Add("alumnus", "alumni");
             TestData.Add("fungus", "fungi");
+        }
+
+        [Fact]
+        public void DoNotPluralize()
+        {
+            var singular = TestData.First(pair => pair.Key != pair.Value).Key;
+            Assert.Equal(singular.Pluralize(), singular);
+        }
+
+        [Fact]
+        public void DoNotSingularize()
+        {
+            var plural = TestData.First(pair => pair.Key != pair.Value).Value;
+            Assert.Equal(plural.Singularize(), plural);
         }
 
         //Uppercases individual words and removes some characters 
