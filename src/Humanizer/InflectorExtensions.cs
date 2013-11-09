@@ -124,9 +124,15 @@ namespace Humanizer
         /// Pluralizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be pluralized</param>
+        /// <param name="onlyIf">Only perform pluralization if expression is true</param>
         /// <returns></returns>
-        public static string Pluralize(this string word)
+        public static string Pluralize(this string word, bool onlyIf = true)
         {
+            if (onlyIf == false)
+            {
+                return word;
+            }
+
             return ApplyRules(Plurals, word);
         }
 
@@ -134,9 +140,15 @@ namespace Humanizer
         /// Singularizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be singularized</param>
+        /// <param name="onlyIf">Only perform pluralization if expression is true</param>
         /// <returns></returns>
-        public static string Singularize(this string word)
+        public static string Singularize(this string word, bool onlyIf = true)
         {
+            if (onlyIf == false)
+            {
+                return word;
+            }
+
             return ApplyRules(Singulars, word);
         }
 
