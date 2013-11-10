@@ -13,7 +13,8 @@ String extensions are at the heart of this micro-framework. The foundation of th
     
 "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
     
-"HTML".Humanize() => "HTML" // acronyms are left intact
+// acronyms are left intact
+"HTML".Humanize() => "HTML" 
 ```
 
 You may also specify the desired letter casing:
@@ -75,11 +76,14 @@ public enum EnumUnderTest
 You will get:
 
 ```C#
-EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"; // DescriptionAttribute is honored
+// DescriptionAttribute is honored
+EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"
     
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute"; // in the absence of Description attribute string.Humanizer kicks in
+// In the absence of Description attribute string.Humanizer kicks in
+EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute" 
     
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title) => "Member Without Description Attribute"; // an of course you can still apply letter casing 
+// Of course you can still apply letter casing 
+EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title) => "Member Without Description Attribute"
 ```
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
@@ -186,11 +190,21 @@ and some extension methods:
 
 ```C#
 var someDateTime = new DateTime(2011, 2, 10, 5, 25, 45, 125);
-someDateTime.In(2008) // Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008
-someDateTime.At(2) // Returns new DateTime(2011, 2, 10, 2, 25, 45, 125) changing the hour to 2:25:45.125
-someDateTime.At(2, 20, 15) // Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125
-someDateTime.AtNoon() // Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000
-someDateTime.AtMidnight() // Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000
+
+// Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008
+someDateTime.In(2008) 
+
+// Returns new DateTime(2011, 2, 10, 2, 25, 45, 125) changing the hour to 2:25:45.125
+someDateTime.At(2) 
+
+// Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125
+someDateTime.At(2, 20, 15) 
+
+// Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000
+someDateTime.AtNoon() 
+
+// Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000
+someDateTime.AtMidnight() 
 ```
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
