@@ -1,4 +1,9 @@
-﻿public class Configurator
+﻿public class CasingExtensions
+{
+    public string ApplyCase(string input, Humanizer.LetterCasing casing) { }
+}
+
+public class Configurator
 {
     public Humanizer.Localisation.IFormatter Formatter { get; }
 }
@@ -53,13 +58,16 @@ public class InflectorExtensions
 {
     public string Camelize(string input) { }
     public string Dasherize(string underscoredWord) { }
-    public string Ordinalize(string numberString) { }
-    public string Ordinalize(int number) { }
     public string Pascalize(string input) { }
     public string Pluralize(string word) { }
     public string Singularize(string word) { }
     public string Titleize(string input) { }
     public string Underscore(string input) { }
+}
+
+public interface IStringTransformer
+{
+    string Transform(string input);
 }
 
 public enum LetterCasing
@@ -151,11 +159,11 @@ public class NumberToOrdinalWordsExtension
 
 public class NumberToTimeSpanExtensions
 {
-    public System.TimeSpan Days(int input) { }
-    public System.TimeSpan Hours(int input) { }
-    public System.TimeSpan Milliseconds(int input) { }
-    public System.TimeSpan Minutes(int input) { }
-    public System.TimeSpan Seconds(int input) { }
+    public System.TimeSpan Days(int days) { }
+    public System.TimeSpan Hours(int hours) { }
+    public System.TimeSpan Milliseconds(int ms) { }
+    public System.TimeSpan Minutes(int minutes) { }
+    public System.TimeSpan Seconds(int seconds) { }
     public System.TimeSpan Weeks(int input) { }
 }
 
@@ -167,6 +175,12 @@ public class NumberToWordsExtension
 public class On
 {
     public On() { }
+}
+
+public class OrdinalizeExtensions
+{
+    public string Ordinalize(string numberString) { }
+    public string Ordinalize(int number) { }
 }
 
 public class PrepositionsExtensions
@@ -184,12 +198,21 @@ public class StringDehumanizeExtensions
 
 public class StringHumanizeExtensions
 {
-    public string ApplyCase(string input, Humanizer.LetterCasing casing) { }
     public string Humanize(string input) { }
     public string Humanize(string input, Humanizer.LetterCasing casing) { }
+    public string Humanize(string input, Humanizer.IStringTransformer[] transformers) { }
 }
 
 public class TimeSpanHumanizeExtensions
 {
     public string Humanize(System.TimeSpan timeSpan) { }
-} 
+}
+
+public class To
+{
+    public Humanizer.IStringTransformer LowerCase { get; }
+    public Humanizer.IStringTransformer SentenceCase { get; }
+    public Humanizer.IStringTransformer TitleCase { get; }
+    public Humanizer.IStringTransformer UpperCase { get; }
+    public string Transform(string input, Humanizer.IStringTransformer[] transformers) { }
+}

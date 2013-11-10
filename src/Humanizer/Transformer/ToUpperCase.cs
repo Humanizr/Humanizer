@@ -1,6 +1,6 @@
 namespace Humanizer
 {
-    public class ToUpperCase : IStringTransformer
+    class ToUpperCase : IStringTransformer
     {
         public string Transform(string input)
         {

@@ -21,7 +21,7 @@ namespace Humanizer
                 case LetterCasing.Title:
                     return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
 
-                case LetterCasing.Lower:
+                case LetterCasing.LowerCase:
                     return CultureInfo.CurrentCulture.TextInfo.ToLower(input);
 
                 case LetterCasing.AllCaps:

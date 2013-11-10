@@ -22,7 +22,7 @@ namespace Humanizer.Tests
         [InlineData("Title Case", "title case")]
         public void ApplyCaseLower(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.ApplyCase(LetterCasing.Lower));
+            Assert.Equal(expectedOutput, input.ApplyCase(LetterCasing.LowerCase));
         }
 
         [Theory]

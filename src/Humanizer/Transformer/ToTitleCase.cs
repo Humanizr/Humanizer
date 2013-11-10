@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace Humanizer
 {
-    public class ToTitleCase : IStringTransformer
+    class ToTitleCase : IStringTransformer
     {
         public string Transform(string input)
         {

@@ -2,7 +2,7 @@ using System;
 
 namespace Humanizer
 {
-    public class ToSentenceCase : IStringTransformer
+    class ToSentenceCase : IStringTransformer
     {
         public string Transform(string input)
         {

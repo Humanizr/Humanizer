@@ -141,7 +141,7 @@ namespace Humanizer.Tests
         {
             Assert.Equal(
                 "can return lower case",
-                "CanReturnLowerCase".Humanize(LetterCasing.Lower));
+                "CanReturnLowerCase".Humanize(LetterCasing.LowerCase));
         }
 
         [Fact]
@@ -181,7 +181,7 @@ namespace Humanizer.Tests
         {
             Assert.Equal(
                 "lowercase",
-                "LOWERCASE".Humanize(LetterCasing.Lower));
+                "LOWERCASE".Humanize(LetterCasing.LowerCase));
         }
 
         [Fact]
