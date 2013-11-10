@@ -34,12 +34,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(BuildFramework)=='NET35'">
-    <PackageName>$(ProjectName)-$(Version)-NET35</PackageName>
-    <BuildConstants>NET35;TRACE</BuildConstants>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-  </PropertyGroup>
-
   <!-- 
    Solution redirects. Every VS project normally knows how to support these targets
     -->

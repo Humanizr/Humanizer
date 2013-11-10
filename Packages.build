@@ -36,17 +36,8 @@
     <Copy SourceFiles="@(Net40Artifact)" DestinationFolder="$(HumanizerSpecPath)\lib\NET40\%(Net40Artifact.RecursiveDir)" />
   </Target>
 
-  <Target Name="Net35Build">
-    <MSBuild Projects="$(HumanizerBuild)" Properties="Version=$(Version);BuildFramework=NET35" Targets="Release" />
-    <CreateItem Include="$(ArtifactPath)\**;">
-      <Output ItemName="Net35Artifact" TaskParameter="Include"/>
-    </CreateItem>
-    <Copy SourceFiles="@(Net35Artifact)" DestinationFolder="$(HumanizerSpecPath)\lib\NET35\%(Net35Artifact.RecursiveDir)" />
-  </Target>
-
   <Target Name="Build">
     <CallTarget Targets="Net40Build" />
-    <CallTarget Targets="Net35Build" />
   </Target>
 
   <Target Name="CopyNuspecFiles">
