@@ -200,7 +200,6 @@ public class StringHumanizeExtensions
 {
     public string Humanize(string input) { }
     public string Humanize(string input, Humanizer.LetterCasing casing) { }
-    public string Humanize(string input, Humanizer.IStringTransformer[] transformers) { }
 }
 
 public class TimeSpanHumanizeExtensions

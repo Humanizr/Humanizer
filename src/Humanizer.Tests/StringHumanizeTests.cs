@@ -111,15 +111,7 @@ namespace Humanizer.Tests
                 "Can Return Title Case",
                 "CanReturnTitleCase".Humanize(LetterCasing.Title));
         }
-
-        [Fact]
-        public void CanHumanizeIntoTitleCaseWithoutUsingUnderscoresWithTransformers()
-        {
-            Assert.Equal(
-                "Can Return Title Case",
-                "CanReturnTitleCase".Humanize(To.TitleCase));
-        }
-
+    
         [Fact]
         public void CanHumanizeIntoTitleCaseWhenUsingUnderscores()
         {
@@ -145,27 +137,11 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void CanHumanizeIntoLowerCaseWithTransformers()
-        {
-            Assert.Equal(
-                "can return lower case",
-                "CanReturnLowerCase".Humanize(To.LowerCase));
-        }
-
-        [Fact]
         public void CanHumanizeIntoSentenceCase()
         {
             Assert.Equal(
                 "Can return sentence case",
                 "CanReturnSentenceCase".Humanize(LetterCasing.Sentence));
-        }
-
-        [Fact]
-        public void CanHumanizeIntoSentenceCaseWithTransformers()
-        {
-            Assert.Equal(
-                "Can return sentence case",
-                "CanReturnSentenceCase".Humanize(To.SentenceCase));
         }
 
         [Fact]
@@ -193,27 +169,11 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void CanHumanizeIntoUpperCaseWithTransformers()
-        {
-            Assert.Equal(
-                "CAN HUMANIZE INTO UPPER CASE",
-                "CanHumanizeIntoUpperCase".Humanize(To.UpperCase));
-        }
-
-        [Fact]
         public void CanTurnIntoUpperCasewhenUsingUnderscores()
         {
             Assert.Equal(
                 "CAN HUMANIZE INTO UPPER CASE",
                 "Can_Humanize_into_Upper_case".Humanize(LetterCasing.AllCaps));
-        }
-
-        [Fact]
-        public void CanTurnIntoUpperCasewhenUsingUnderscoresWithTransformers()
-        {
-            Assert.Equal(
-                "CAN HUMANIZE INTO UPPER CASE",
-                "Can_Humanize_into_Upper_case".Humanize(To.UpperCase));
         }
     }
 }
