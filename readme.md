@@ -1,6 +1,6 @@
 Humanizer is a small framework that helps .Net developer turn their otherwise geeky strings, type names, enum fields, date, timespan values into a human friendly format plus a lot more.
 
-##Installation
+###Installation
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
 ###Humanize Strings
@@ -83,7 +83,7 @@ EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"
 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute" 
     
 // Of course you can still apply letter casing 
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title) => "Member Without Description Attribute"
+EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase) => "Member Without Description Attribute"
 ```
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
@@ -236,7 +236,7 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 121.ToOrdinalWords() => "hundred and twenty first"
 ```
 
-##Mix this into your framework to simplify your life
+###Mix this into your framework to simplify your life
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
 
 You may find an Asp.Net MVC sample [in the code][5] that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
@@ -318,7 +318,7 @@ public class RegisterModel
 No need to mention that if you want title casing for your labels you may call the other overload of `Humanize` method:
 
 ```C#
-modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize(LetterCasing.Title));
+modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.TitleCase);
 ```
 
 ##How to contribute?
