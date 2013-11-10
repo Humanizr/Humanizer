@@ -1,0 +1,195 @@
+﻿public class Configurator
+{
+    public Humanizer.Localisation.IFormatter Formatter { get; }
+}
+
+public class DateHumanizeExtensions
+{
+    public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst) { }
+}
+
+public class EnumDehumanizeExtensions
+{
+    public System.Enum DehumanizeTo(string input) { }
+}
+
+public class EnumHumanizeExtensions
+{
+    public string Humanize(System.Enum input) { }
+    public string Humanize(System.Enum input, Humanizer.LetterCasing casing) { }
+}
+
+public class In
+{
+    public In() { }
+    public System.DateTime April { get; }
+    public System.DateTime August { get; }
+    public System.DateTime December { get; }
+    public System.DateTime February { get; }
+    public System.DateTime January { get; }
+    public System.DateTime July { get; }
+    public System.DateTime June { get; }
+    public System.DateTime March { get; }
+    public System.DateTime May { get; }
+    public System.DateTime November { get; }
+    public System.DateTime October { get; }
+    public System.DateTime September { get; }
+    public System.DateTime AprilOf(int year) { }
+    public System.DateTime AugustOf(int year) { }
+    public System.DateTime DecemberOf(int year) { }
+    public System.DateTime FebruaryOf(int year) { }
+    public System.DateTime JanuaryOf(int year) { }
+    public System.DateTime JulyOf(int year) { }
+    public System.DateTime JuneOf(int year) { }
+    public System.DateTime MarchOf(int year) { }
+    public System.DateTime MayOf(int year) { }
+    public System.DateTime NovemberOf(int year) { }
+    public System.DateTime OctoberOf(int year) { }
+    public System.DateTime SeptemberOf(int year) { }
+    public System.DateTime TheYear(int year) { }
+}
+
+public class InflectorExtensions
+{
+    public string Camelize(string input) { }
+    public string Dasherize(string underscoredWord) { }
+    public string Ordinalize(string numberString) { }
+    public string Ordinalize(int number) { }
+    public string Pascalize(string input) { }
+    public string Pluralize(string word) { }
+    public string Singularize(string word) { }
+    public string Titleize(string input) { }
+    public string Underscore(string input) { }
+}
+
+public enum LetterCasing
+{
+    AllCaps,
+    LowerCase,
+    Sentence,
+    Title,
+    value__,
+}
+
+public class DefaultFormatter
+{
+    public DefaultFormatter() { }
+    public string DateHumanize_MultipleDaysAgo(int numberOfDays) { }
+    public string DateHumanize_MultipleHoursAgo(int numberOfHours) { }
+    public string DateHumanize_MultipleMinutesAgo(int numberOfMinutes) { }
+    public string DateHumanize_MultipleMonthsAgo(int numberOfMonths) { }
+    public string DateHumanize_MultipleSecondsAgo(int numberOfSeconds) { }
+    public string DateHumanize_MultipleYearsAgo(int numberOfYears) { }
+    public string DateHumanize_NotYet() { }
+    public string DateHumanize_SingleDayAgo() { }
+    public string DateHumanize_SingleHourAgo() { }
+    public string DateHumanize_SingleMinuteAgo() { }
+    public string DateHumanize_SingleMonthAgo() { }
+    public string DateHumanize_SingleSecondAgo() { }
+    public string DateHumanize_SingleYearAgo() { }
+    public string TimeSpanHumanize_MultipleDays(int days) { }
+    public string TimeSpanHumanize_MultipleHours(int hours) { }
+    public string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds) { }
+    public string TimeSpanHumanize_MultipleMinutes(int minutes) { }
+    public string TimeSpanHumanize_MultipleSeconds(int seconds) { }
+    public string TimeSpanHumanize_MultipleWeeks(int weeks) { }
+    public string TimeSpanHumanize_SingleDay() { }
+    public string TimeSpanHumanize_SingleHour() { }
+    public string TimeSpanHumanize_SingleMillisecond() { }
+    public string TimeSpanHumanize_SingleMinute() { }
+    public string TimeSpanHumanize_SingleSecond() { }
+    public string TimeSpanHumanize_SingleWeek() { }
+    public string TimeSpanHumanize_Zero() { }
+}
+
+public interface IFormatter
+{
+    string DateHumanize_MultipleDaysAgo(int numberOfDays);
+    string DateHumanize_MultipleHoursAgo(int numberOfHours);
+    string DateHumanize_MultipleMinutesAgo(int numberOfMinutes);
+    string DateHumanize_MultipleMonthsAgo(int numberOfMonths);
+    string DateHumanize_MultipleSecondsAgo(int numberOfSeconds);
+    string DateHumanize_MultipleYearsAgo(int numberOfYears);
+    string DateHumanize_NotYet();
+    string DateHumanize_SingleDayAgo();
+    string DateHumanize_SingleHourAgo();
+    string DateHumanize_SingleMinuteAgo();
+    string DateHumanize_SingleMonthAgo();
+    string DateHumanize_SingleSecondAgo();
+    string DateHumanize_SingleYearAgo();
+    string TimeSpanHumanize_MultipleDays(int days);
+    string TimeSpanHumanize_MultipleHours(int hours);
+    string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds);
+    string TimeSpanHumanize_MultipleMinutes(int minutes);
+    string TimeSpanHumanize_MultipleSeconds(int seconds);
+    string TimeSpanHumanize_MultipleWeeks(int weeks);
+    string TimeSpanHumanize_SingleDay();
+    string TimeSpanHumanize_SingleHour();
+    string TimeSpanHumanize_SingleMillisecond();
+    string TimeSpanHumanize_SingleMinute();
+    string TimeSpanHumanize_SingleSecond();
+    string TimeSpanHumanize_SingleWeek();
+    string TimeSpanHumanize_Zero();
+}
+
+public class ResourceKeys
+{
+    public ResourceKeys() { }
+}
+
+public class Resources
+{
+    public Resources() { }
+    public System.Resources.ResourceManager ResourceManager { get; }
+    public string GetResource(string resourceKey) { }
+}
+
+public class NumberToOrdinalWordsExtension
+{
+    public string ToOrdinalWords(int number) { }
+}
+
+public class NumberToTimeSpanExtensions
+{
+    public System.TimeSpan Days(int input) { }
+    public System.TimeSpan Hours(int input) { }
+    public System.TimeSpan Milliseconds(int input) { }
+    public System.TimeSpan Minutes(int input) { }
+    public System.TimeSpan Seconds(int input) { }
+    public System.TimeSpan Weeks(int input) { }
+}
+
+public class NumberToWordsExtension
+{
+    public string ToWords(int number) { }
+}
+
+public class On
+{
+    public On() { }
+}
+
+public class PrepositionsExtensions
+{
+    public System.DateTime At(System.DateTime date, int hour, int min, int second, int millisecond) { }
+    public System.DateTime AtMidnight(System.DateTime date) { }
+    public System.DateTime AtNoon(System.DateTime date) { }
+    public System.DateTime In(System.DateTime date, int year) { }
+}
+
+public class StringDehumanizeExtensions
+{
+    public string Dehumanize(string input) { }
+}
+
+public class StringHumanizeExtensions
+{
+    public string ApplyCase(string input, Humanizer.LetterCasing casing) { }
+    public string Humanize(string input) { }
+    public string Humanize(string input, Humanizer.LetterCasing casing) { }
+}
+
+public class TimeSpanHumanizeExtensions
+{
+    public string Humanize(System.TimeSpan timeSpan) { }
+} 

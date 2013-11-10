@@ -50,6 +50,12 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApprovalTests">
+      <HintPath>..\packages\ApprovalTests.3.0.5\lib\net40\ApprovalTests.dll</HintPath>
+    </Reference>
+    <Reference Include="ApprovalUtilities">
+      <HintPath>..\packages\ApprovalUtilities.3.0.5\lib\net35\ApprovalUtilities.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -87,6 +93,8 @@
     <Compile Include="StringHumanizeTests.cs" />
     <Compile Include="TimeSpanHumanizeExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ApiApprover\PublicApiApprovalTest.cs" />
+    <Compile Include="ApiApprover\PublicApiGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Humanizer\Humanizer.csproj">
