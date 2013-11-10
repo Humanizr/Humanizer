@@ -1,10 +1,7 @@
-Humanizer is a small framework that helps .Net developer turn their otherwise geeky strings, type names, enum fields, date fields ETC into a human friendly format.
+Humanizer is a small framework that helps .Net developer turn their otherwise geeky strings, type names, enum fields, date, timespan values into a human friendly format plus a lot more.
 
 ##Installation
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
-
-##Usage
-Humanizer is a set of extension methods, currently available on `String`, `Enum`, `DateTime` and `int` and turns them from computer friendly into human friendly format (and vice versa).
 
 ###Humanize Strings
 String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
@@ -31,12 +28,36 @@ You may also specify the desired letter casing:
 "CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps) => "CAN HUMANIZE INTO UPPER CASE"
 ```
 
+ > The `LetterCasing` API and the methods accepting it are legacy from V0.2 era and will be deprecated in the future. Instead of that, you can use `Transform` method explained below.
+
 ####Dehumanize Strings
 Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
 
 ```C#
 "Pascal case input string is turned into sentence".Dehumanize() => "PascalCaseInputStringIsTurnedIntoSentence"
 ```
+
+###Transform
+There is a `Transform` method that supercedes `LetterCasing`, `ApplyCase` and `Humanize` overloads that accept `LetterCasing`. 
+Transform method signatue is as follows:
+
+```C#
+string Transform(this string input, params IStringTransformer[] transformers)
+```
+
+And there are some out of the box implemenations of `IStringTransformer` for letter casing:
+
+```C#
+"Sentence casing".Transform(To.LowerCase) => "sentence casing"
+"Sentence casing".Transform(To.SentenceCase) => "Sentence casing"
+"Sentence casing".Transform(To.TitleCase) => "Sentence Casing"
+"Sentence casing".Transform(To.UpperCase) => "SENTENCE CASING"
+```
+
+`LowerCase` is a public static property on `To` class that returns an instance of private `ToLowerCase` class that implements `IStringTransformer` and knows how to turn a string into lower case.
+
+The benefit of using `Transform` and `IStringTransformer` over `ApplyCase` and `LetterCasing` is that `LetterCasing` is an enum and you're limited to use what's in the framework
+while `IStringTransformer` is an interface you can implement in your codebase once and use it with `Transform` method allowing for easy extension. 
 
 ###Humanize Enums
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
@@ -105,7 +126,7 @@ TimeSpan.FromDays(1).Humanize() => "1 day"
 TimeSpan.FromDays(14).Humanize() => "2 weeks"
 ```
 
-###Inflector methods###
+###Inflector methods
 There are also a few inflector methods:
 
  * Pluralize: pluralizes the provided input considering irregular words; e.g. `"Man".Pluralize()` => `"Men"` & `"string".Pluralize()` => `"strings"`
@@ -287,17 +308,21 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize(LetterCasing.Tit
 ```
 
 ##How to contribute?
-Your contribution to Humanizer would be very welcome. Just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues). They should be relatively straightforward. If you want to contribute, fork the repo, fix an issue and send a PR.
+Your contribution to Humanizer would be very welcome. Just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues). They should be relatively straightforward. 
+We us [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. 
+So if you want to contribute, fork the repo, fix an issue and send a PR.
 
-One area Humanizer could definitely use your help is localisation. Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Arabic, Russian and Romanian languages for `Date.Humanize` method. Support for `ToWords` is being added soon.
+One area Humanizer could definitely use your help is localisation. 
+Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Spanish, Greek, German, Arabic, Russian and Romanian languages for `Date.Humanize` method. 
+Humanizer could definitely do with more translations. We also need localization for `TimeSpan.Humanize`.
 
-It would be awesome if you could contribute a translation. 
-To do this, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
+To add a translation, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
 
 Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
 Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
 In cases like this in addition to creating a resource file you should also subclass [`DefaultFormatter`](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/DefaultFormatter.cs) in a class that represents your language; 
-e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. Overriding the `GetResourceKey` method should do it; check out RomanianFormatter and RussianFormatter to see an example. Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
+e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. We think overriding the `GetResourceKey` method should be enough. To see how to do that check out RomanianFormatter and `RussianFormatter` to see an example. 
+Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
 
 ### Building & running the Tests
 You can build the whole solution, run the tests and create a local nuget package for the library by running the `go.cmd` on the root of the repo.
