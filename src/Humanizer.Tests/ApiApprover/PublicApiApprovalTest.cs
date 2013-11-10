@@ -1,4 +1,5 @@
-﻿using ApiApprover;
+﻿#if !NET35
+using ApiApprover;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using Xunit;
@@ -22,3 +23,4 @@ namespace Humanizer.Tests.ApiApprover
         }
     }
 }
+#endif
