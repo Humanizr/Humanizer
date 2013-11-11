@@ -133,6 +133,9 @@
     <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.nb-NO.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.af.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
