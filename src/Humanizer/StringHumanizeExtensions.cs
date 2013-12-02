@@ -9,7 +9,7 @@ namespace Humanizer
     {
         static readonly Func<string, string> FromUnderscoreDashSeparatedWords = methodName => String.Join(" ", methodName.Split(new[] { '_', '-' }));
 
-        static readonly Regex PascalCaseWordBoundaryRegex = new Regex(@"
+        private static readonly Regex PascalCaseWordBoundaryRegex = new Regex(@"
 (?# word to word, number or acronym)
 (?<=[a-z])(?=[A-Z0-9])|
 (?# number to word or acronym)
@@ -18,14 +18,14 @@ namespace Humanizer
 (?<=[A-Z])(?=[0-9])|
 (?# acronym to word)
 (?<=[A-Z])(?=[A-Z][a-z])
-", RegexOptions.IgnorePatternWhitespace|RegexOptions.Compiled);
+", RegexOptions.IgnorePatternWhitespace);//|RegexOptions.Compiled);
 
         static string FromPascalCase(string name)
         {
             var result = PascalCaseWordBoundaryRegex
                 .Split(name)
                 .Select(word =>
-                    word.All(Char.IsUpper) && word.Length > 1
+                    word.ToCharArray().All(Char.IsUpper) && word.Length > 1
                         ? word
                         : word.ToLower())
                 .Aggregate((res, word) => res + " " + word);
@@ -43,10 +43,10 @@ namespace Humanizer
         public static string Humanize(this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
-            if (input.All(Char.IsUpper))
+            if (input.ToCharArray().All(Char.IsUpper))
                 return input;
 
-            if (input.Contains('_') || input.Contains('-'))
+            if (input.Contains("_") || input.Contains("-"))
                 return FromUnderscoreDashSeparatedWords(input);
 
             return FromPascalCase(input);

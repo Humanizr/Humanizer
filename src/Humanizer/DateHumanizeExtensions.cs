@@ -7,7 +7,8 @@ namespace Humanizer
     /// <summary>
     /// Humanizes DateTime into human readable sentence
     /// </summary>
-    [Localizable(true)]
+    //TODO: RWM: This attribute is not supported on PCLs. Investigate how to compensate.
+    //[Localizable(true)]
     public static class DateHumanizeExtensions
     {
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time

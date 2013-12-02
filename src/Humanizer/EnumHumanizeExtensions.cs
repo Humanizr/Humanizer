@@ -13,18 +13,20 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this Enum input)
         {
-            Type type = input.GetType();
-            MemberInfo[] memInfo = type.GetMember(input.ToString());
+            //TODO: RWM: The DescriptionAttribute is not available in PCLs.
 
-            if (memInfo.Length > 0)
-            {
-                object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), true);
+            //Type type = input.GetType();
+            //MemberInfo[] memInfo = type.GetMember(input.ToString());
 
-                if (attrs.Length > 0)
-                {
-                    return ((DescriptionAttribute)attrs[0]).Description;
-                }
-            }
+            //if (memInfo.Length > 0)
+            //{
+            //    object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), true);
+
+            //    if (attrs.Length > 0)
+            //    {
+            //        return ((DescriptionAttribute)attrs[0]).Description;
+            //    }
+            //}
 
             return input.ToString().Humanize();
         }
