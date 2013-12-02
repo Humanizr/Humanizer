@@ -5,15 +5,15 @@ namespace Humanizer.Tests
 {
     public class TransformersTests
     {
-        [Theory]
-        [InlineData("lower case statement", "Lower Case Statement")]
-        [InlineData("Sentence casing", "Sentence Casing")]
-        [InlineData("honors UPPER case", "Honors UPPER Case")]
-        [InlineData("Title Case", "Title Case")]
-        public void TransformToTitleCase(string input, string expectedOutput)
-        {
-            Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
-        }
+        //[Theory]
+        //[InlineData("lower case statement", "Lower Case Statement")]
+        //[InlineData("Sentence casing", "Sentence Casing")]
+        //[InlineData("honors UPPER case", "Honors UPPER Case")]
+        //[InlineData("Title Case", "Title Case")]
+        //public void TransformToTitleCase(string input, string expectedOutput)
+        //{
+        //    Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
+        //}
 
         [Theory]
         [InlineData("lower case statement", "lower case statement")]

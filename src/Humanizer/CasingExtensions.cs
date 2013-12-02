@@ -19,7 +19,10 @@ namespace Humanizer
             switch (casing)
             {
                 case LetterCasing.Title:
-                    return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
+                    //TODO: RWM: Fix this in Portable Class Libraries
+                    //return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
+                    System.Diagnostics.Debug.WriteLine("TitleCase is not supported in Portable Class Libraries.");
+                    return input;
 
                 case LetterCasing.LowerCase:
                     return CultureInfo.CurrentCulture.TextInfo.ToLower(input);
@@ -37,5 +40,7 @@ namespace Humanizer
                     throw new ArgumentOutOfRangeException("casing");
             }
         }
+
+        
     }
 }

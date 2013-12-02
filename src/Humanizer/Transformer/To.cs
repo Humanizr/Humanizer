@@ -18,13 +18,13 @@ namespace Humanizer
             return transformers.Aggregate(input, (current, stringTransformer) => stringTransformer.Transform(current));
         }
 
-        public static IStringTransformer TitleCase
-        {
-            get
-            {
-                return new ToTitleCase();
-            }
-        }
+        //public static IStringTransformer TitleCase
+        //{
+        //    get
+        //    {
+        //        return new ToTitleCase();
+        //    }
+        //}
 
         public static IStringTransformer LowerCase
         {
