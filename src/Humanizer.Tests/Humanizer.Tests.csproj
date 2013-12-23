@@ -98,16 +98,15 @@
     <Compile Include="ApiApprover\PublicApiGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Humanizer\Humanizer.csproj">
-      <Project>{511A7984-F455-4A6E-ADB9-9CAAC47EA079}</Project>
-      <Name>Humanizer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Localisation\DateHumanizeTests.fi-FI.cs" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Humanizer\Humanizer.csproj">
+      <Project>{511a7984-f455-4a6e-adb9-9caac47ea079}</Project>
+      <Name>Humanizer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
