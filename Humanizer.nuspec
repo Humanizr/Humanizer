@@ -16,6 +16,9 @@
     </releaseNotes>
   </metadata>
   <files>
-    <file src="src\Humanizer\bin\Release\**" target="lib\portable-win+net40+sl50+wp8" />
+     <file src="src\Humanizer\bin\Release\Humanizer.dll" target="lib\portable-net4+sl5+wp8+win8\Humanizer.dll" />
+     <file src="src\Humanizer\bin\Release\Humanizer.pdb" target="lib\portable-net4+sl5+wp8+win8\Humanizer.pdb" />
+     <file src="src\Humanizer\bin\Release\Humanizer.xml" target="lib\portable-net4+sl5+wp8+win8\Humanizer.xml" />
+     <file src="src\Humanizer\**\*.cs" exclude="**\obj\**\*.*" target="src" />
   </files>
 </package>

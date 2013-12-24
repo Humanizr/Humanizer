@@ -54,7 +54,7 @@
     </CreateItem>
     <FileUpdate Files="@(NuGetSpec)" Regex="0\.0\.0\.0" ReplacementText="$(Version)" />
     <MakeDir Directories="$(PackageOutput)" ContinueOnError="true"/>
-    <Exec Command='$(NuGetExe) pack "%(NuGetSpec.FullPath)"' WorkingDirectory="$(PackageOutput)"/>
+    <Exec Command='$(NuGetExe) pack "%(NuGetSpec.FullPath)" -symbols' WorkingDirectory="$(PackageOutput)"/>
   </Target>
 
   <Target Name="Release" DependsOnTargets="Clean;Prepare;Build;Pack"/>
