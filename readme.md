@@ -239,7 +239,7 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 ###Mix this into your framework to simplify your life
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
 
-You may find an Asp.Net MVC sample [in the code][5] that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
+You may find an Asp.Net MVC sample [in the code](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
 
 This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 

@@ -18,17 +18,17 @@ namespace Humanizer
     for (int i = 0; i < 12; i++){
 		var monthName = new DateTime(now.Year, i + 1, 1).ToString("MMMM");
 	#> 
-        ///// <summary>
-        ///// Returns 1st of <#= monthName #> of the current year
-        ///// </summary>
+        /// <summary>
+        /// Returns 1st of <#= monthName #> of the current year
+        /// </summary>
 		public static DateTime <#= monthName #>
 		{
 			get { return new DateTime(DateTime.UtcNow.Year, <#= i + 1 #>, 1); }
 		}
 
-        ///// <summary>
-        ///// Returns 1st of <#= monthName #> of the year passed in
-        ///// </summary>
+        /// <summary>
+        /// Returns 1st of <#= monthName #> of the year passed in
+        /// </summary>
         public static DateTime <#= monthName#>Of(int year)
 		{
 			return new DateTime(year, <#= i + 1 #>, 1);

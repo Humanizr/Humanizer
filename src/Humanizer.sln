@@ -14,7 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}"
 	ProjectSection(SolutionItems) = preProject
 		..\Humanizer.build = ..\Humanizer.build
-		..\NuGet\Humanizer\Humanizer.nuspec = ..\NuGet\Humanizer\Humanizer.nuspec
+		..\Humanizer.nuspec = ..\Humanizer.nuspec
 		..\LICENSE = ..\LICENSE
 		..\Packages.build = ..\Packages.build
 		..\readme.md = ..\readme.md

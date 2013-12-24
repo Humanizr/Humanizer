@@ -5,6 +5,7 @@ namespace Humanizer.Tests
 {
     public class TransformersTests
     {
+<<<<<<< HEAD
         //[Theory]
         //[InlineData("lower case statement", "Lower Case Statement")]
         //[InlineData("Sentence casing", "Sentence Casing")]
@@ -14,6 +15,20 @@ namespace Humanizer.Tests
         //{
         //    Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
         //}
+=======
+        [Theory]
+        [InlineData("lower case statement", "Lower Case Statement")]
+        [InlineData("Sentence casing", "Sentence Casing")]
+        [InlineData("honors UPPER case", "Honors UPPER Case")]
+        [InlineData("INvalid caSEs arE corrected", "Invalid Cases Are Corrected")]
+        [InlineData("Can deal w 1 letter words as i do", "Can Deal W 1 Letter Words As I Do")]
+        [InlineData("  random spaces   are HONORED    too ", "  Random Spaces   Are HONORED    Too ")]
+        [InlineData("Title Case", "Title Case")]
+        public void TransformToTitleCase(string input, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
+        }
+>>>>>>> 0d285f39a5d6d56c869e3ea01743f81197b1415f
 
         [Theory]
         [InlineData("lower case statement", "lower case statement")]

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Humanizer</id>
-    <version>1.0</version>
+    <version>$version$</version>
     <title>Humanizer</title>
     <authors>Mehdi Khalili</authors>
     <owners>Mehdi Khalili</owners>

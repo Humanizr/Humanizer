@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using Humanizer.Configuration;
 
 namespace Humanizer
@@ -7,8 +6,11 @@ namespace Humanizer
     /// <summary>
     /// Humanizes DateTime into human readable sentence
     /// </summary>
+<<<<<<< HEAD
     //TODO: RWM: This attribute is not supported on PCLs. Investigate how to compensate.
     //[Localizable(true)]
+=======
+>>>>>>> 0d285f39a5d6d56c869e3ea01743f81197b1415f
     public static class DateHumanizeExtensions
     {
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time

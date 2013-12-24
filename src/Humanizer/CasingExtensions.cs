@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace Humanizer
 {
@@ -19,22 +18,23 @@ namespace Humanizer
             switch (casing)
             {
                 case LetterCasing.Title:
+<<<<<<< HEAD
                     //TODO: RWM: Fix this in Portable Class Libraries
                     //return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
                     System.Diagnostics.Debug.WriteLine("TitleCase is not supported in Portable Class Libraries.");
                     return input;
+=======
+                    return input.Transform(To.TitleCase);
+>>>>>>> 0d285f39a5d6d56c869e3ea01743f81197b1415f
 
                 case LetterCasing.LowerCase:
-                    return CultureInfo.CurrentCulture.TextInfo.ToLower(input);
+                    return input.Transform(To.LowerCase);
 
                 case LetterCasing.AllCaps:
-                    return input.ToUpper();
+                    return input.Transform(To.UpperCase);
 
                 case LetterCasing.Sentence:
-                    if (input.Length >= 1)
-                        return String.Concat(input.Substring(0, 1).ToUpper(), input.Substring(1));
-
-                    return input.ToUpper();
+                    return input.Transform(To.SentenceCase);
 
                 default:
                     throw new ArgumentOutOfRangeException("casing");
