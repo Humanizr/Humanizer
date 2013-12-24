@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
-
     class ToTitleCase : IStringTransformer
     {
         public string Transform(string input)
