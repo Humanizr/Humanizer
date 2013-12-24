@@ -15,22 +15,6 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this Enum input)
         {
-<<<<<<< HEAD
-            //TODO: RWM: The DescriptionAttribute is not available in PCLs.
-
-            //Type type = input.GetType();
-            //MemberInfo[] memInfo = type.GetMember(input.ToString());
-
-            //if (memInfo.Length > 0)
-            //{
-            //    object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), true);
-
-            //    if (attrs.Length > 0)
-            //    {
-            //        return ((DescriptionAttribute)attrs[0]).Description;
-            //    }
-            //}
-=======
             Type type = input.GetType();
             var memInfo = type.GetMember(input.ToString());
 
@@ -63,7 +47,6 @@ namespace Humanizer
                     }
                 }
             }
->>>>>>> 0d285f39a5d6d56c869e3ea01743f81197b1415f
 
             return null;
         }

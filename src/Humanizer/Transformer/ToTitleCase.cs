@@ -5,15 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
-<<<<<<< HEAD
-    //class ToTitleCase : IStringTransformer
-    //{
-    //    public string Transform(string input)
-    //    {
-    //        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
-    //    }
-    //}
-=======
+
     class ToTitleCase : IStringTransformer
     {
         public string Transform(string input)
@@ -38,5 +30,4 @@ namespace Humanizer
             return Regex.IsMatch(input, @"^[A-Z]+$");
         }
     }
->>>>>>> 0d285f39a5d6d56c869e3ea01743f81197b1415f
 }

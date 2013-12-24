@@ -18,14 +18,7 @@ namespace Humanizer
             switch (casing)
             {
                 case LetterCasing.Title:
-<<<<<<< HEAD
-                    //TODO: RWM: Fix this in Portable Class Libraries
-                    //return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
-                    System.Diagnostics.Debug.WriteLine("TitleCase is not supported in Portable Class Libraries.");
-                    return input;
-=======
                     return input.Transform(To.TitleCase);
->>>>>>> 0d285f39a5d6d56c869e3ea01743f81197b1415f
 
                 case LetterCasing.LowerCase:
                     return input.Transform(To.LowerCase);
