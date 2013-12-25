@@ -341,11 +341,9 @@ Then you return an instance of your class in the [Configurator](https://github.c
 ### Continuous Integration from TeamCity
 Humanizer project is built & tested continuously by TeamCity. That applies to Pull Requests too. Shortly after you submit a PR you can check the build and test status notification on your PR.
 
-Here is the current status of the project on the CI server:
-<pre><a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
-<img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:btN)/statusIcon"/>
-</a>
-</pre>
+The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
+<img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
+
 
 ###Author
 Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
