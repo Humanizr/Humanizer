@@ -338,8 +338,13 @@ In cases like this in addition to creating a resource file you should also subcl
 e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. We think overriding the `GetResourceKey` method should be enough. To see how to do that check out RomanianFormatter and `RussianFormatter` to see an example. 
 Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
 
-### Building & running the Tests
-You can build the whole solution, run the tests and create a local nuget package for the library by running the `go.cmd` on the root of the repo.
+### Continuous Integration from TeamCity
+Humanizer project is built & tested continuously by TeamCity. That applies to Pull Requests too. Shortly after you submit a PR you can check the build and test status notification on your PR.
+
+Here is the current status of the project on the CI server:
+<pre><a href="http://teamcity/viewType.html?buildTypeId=Humanizer_CI&guest=1">
+<img src="http://teamcity/app/rest/builds/buildType:(id:btN)/statusIcon"/>
+</a>
 
 ###Author
 Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
