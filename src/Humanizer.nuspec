@@ -16,6 +16,6 @@
     </releaseNotes>
   </metadata>
   <files>
-    <file src="src\Humanizer\bin\Release\**" target="lib\portable-win+net40+sl50+wp8" />
+    <file src="Humanizer\bin\Release\**" target="lib\portable-win+net40+sl50+wp8" />
   </files>
 </package>
