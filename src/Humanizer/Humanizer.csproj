@@ -82,6 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
+    <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
     <Compile Include="NumberToOrdinalWordsExtension.cs" />
