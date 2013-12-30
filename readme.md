@@ -168,12 +168,13 @@ with
 DateTime.Now + 2.Days() + 3.Hours() - 5.Minutes()
 ```
 
-There are also fluent methods to deal with `DateTime`:
+There are also three categories of fluent methods to deal with `DateTime`:
 
 ```C#
 In.TheYear(2010) // Returns the first of January of 2010
 In.January // Returns 1st of January of the current year
 In.FebruaryOf(2009) // Returns 1st of February of 2009
+
 In.One.Second //  DateTime.UtcNow.AddSeconds(1);
 In.Two.SecondsFrom(DateTime dateTime)
 In.Three.Minutes // With corresponding From method
@@ -182,6 +183,7 @@ In.Three.Days // With corresponding From method
 In.Three.Weeks // With corresponding From method
 In.Three.Months // With corresponding From method
 In.Three.Years // With corresponding From method
+
 On.January.The4th // Returns 4th of January of the current year
 On.February.The(12) // Returns 12th of Feb of the current year
 ```
