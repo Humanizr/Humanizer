@@ -93,6 +93,11 @@ namespace Humanizer
 
                 return _regex.Replace(word, _replacement);
             }
+
+            public bool IsMatch(string word)
+            {
+                return _regex.IsMatch(word);
+            }
         }
 
         private static void AddIrregular(string singular, string plural)
@@ -127,7 +132,10 @@ namespace Humanizer
         /// <returns></returns>
         public static string Pluralize(this string word)
         {
-            return ApplyRules(Plurals, word);
+            if (!word.IsPlural())
+                return ApplyRules(Plurals, word);
+
+            return word;
         }
 
         /// <summary>
@@ -137,7 +145,48 @@ namespace Humanizer
         /// <returns></returns>
         public static string Singularize(this string word)
         {
-            return ApplyRules(Singulars, word);
+            if (!word.IsSingular())
+                return ApplyRules(Singulars, word);
+
+            return word;
+        }
+
+        /// <summary>
+        /// Returns whether the provided word is plural or not
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static bool IsPlural(this string word)
+        {
+            if (Uncountables.Contains(word.ToLowerInvariant()))
+                return true;
+
+            foreach (var singularizationRule in Singulars)
+            {
+                if (singularizationRule.IsMatch(word))
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns whether the provided word is singular or not
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static bool IsSingular(this string word)
+        {
+            if (Uncountables.Contains(word.ToLowerInvariant()))
+                return true;
+
+            foreach (var pluralizatinoRule in Plurals)
+            {
+                if (pluralizatinoRule.IsMatch(word))
+                    return true;
+            }
+
+            return false;
         }
 
         private static string ApplyRules(List<Rule> rules, string word)

@@ -13,7 +13,7 @@ namespace Humanizer.Tests
         {
             foreach (var pair in TestData)
             {
-                Assert.Equal(pair.Key.Pluralize(), pair.Value);
+                Assert.Equal(pair.Value, pair.Key.Pluralize());
             }
         }
 
@@ -22,7 +22,43 @@ namespace Humanizer.Tests
         {
             foreach (var pair in TestData)
             {
-                Assert.Equal(pair.Value.Singularize(), pair.Key);
+                Assert.Equal(pair.Key, pair.Value.Singularize());
+            }
+        }
+
+        [Fact]
+        public void IsPlural()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.True(pair.Value.IsPlural());
+            }
+        }
+
+        [Fact]
+        public void IsSingular()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.True(pair.Key.IsSingular());
+            }
+        }
+
+        [Fact]
+        public void CanSingularizeSingularWords()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Key, pair.Key.Singularize());
+            }
+        }
+
+        [Fact]
+        public void CanPluralizePluralWords()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Value, pair.Value.Pluralize());
             }
         }
 
