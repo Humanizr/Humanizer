@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Humanizer
@@ -127,7 +128,13 @@ namespace Humanizer
         /// <returns></returns>
         public static string Pluralize(this string word)
         {
-            return ApplyRules(Plurals, word);
+            var asSingular = ApplyRules(Singulars, word);
+            var asSingularAsPlural = ApplyRules(Plurals, asSingular);
+            var result = ApplyRules(Plurals, word);
+            if (asSingular != null && asSingular != word && asSingular + "s" != word && asSingularAsPlural == word && result != word)
+                return word;
+
+            return result;
         }
 
         /// <summary>
@@ -137,12 +144,21 @@ namespace Humanizer
         /// <returns></returns>
         public static string Singularize(this string word)
         {
-            return ApplyRules(Singulars, word);
+            var asPlural = ApplyRules(Plurals, word);
+            var asPluralAsSingular = ApplyRules(Singulars, asPlural);
+            var result = ApplyRules(Singulars, word);
+            if (asPlural != word && word+"s" != asPlural && asPluralAsSingular == word && result != word)
+                return word;
+
+            return result ?? word;
         }
 
         private static string ApplyRules(List<Rule> rules, string word)
         {
-            string result = word;
+            if (word == null)
+                return null;
+
+            var result = word;
 
             if (!Uncountables.Contains(word.ToLower()))
             {

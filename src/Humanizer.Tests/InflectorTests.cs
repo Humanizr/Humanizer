@@ -18,11 +18,29 @@ namespace Humanizer.Tests
         }
 
         [Fact]
+        public void PluralizeAlreadyPluralWord()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Value.Pluralize(), pair.Value);
+            }
+        }
+
+        [Fact]
         public void Singularize()
         {
             foreach (var pair in TestData)
             {
                 Assert.Equal(pair.Value.Singularize(), pair.Key);
+            }
+        }
+
+        [Fact]
+        public void SingularizeAlreadySingularWord()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Key.Singularize(), pair.Key);
             }
         }
 
