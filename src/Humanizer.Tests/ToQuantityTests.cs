@@ -5,7 +5,6 @@ namespace Humanizer.Tests
 {
     public class ToQuantityTests
     {
-
         [Theory]
         [InlineData("case", 0, "0 cases")]
         [InlineData("case", 1, "1 case")]
@@ -15,6 +14,7 @@ namespace Humanizer.Tests
         [InlineData("man", 2, "2 men")]
         [InlineData("men", 2, "2 men")]
         [InlineData("process", 2, "2 processes")]
+        [InlineData("process", 1, "1 process")]
         [InlineData("processes", 2, "2 processes")]
         [InlineData("processes", 1, "1 process")]
         public void ToQuantity(string word, int quatity, string expected)
