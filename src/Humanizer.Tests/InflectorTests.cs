@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Xunit;
 using Xunit.Extensions;
 
@@ -6,171 +7,50 @@ namespace Humanizer.Tests
 {
     public class InflectorTests 
     {
-        public readonly Dictionary<string, string> TestData = new Dictionary<string, string>();
+        public readonly IList<object[]> PluralTestData = new List<object[]>();
 
-        [Fact]
-        public void Pluralize()
+        [Theory]
+        [ClassData(typeof(PluralTestSource))]
+        public void Pluralize(string singular, string plural)
         {
-            foreach (var pair in TestData)
-            {
-                Assert.Equal(pair.Value, pair.Key.Pluralize());
-            }
+            Assert.Equal(plural, singular.Pluralize());
         }
 
-        [Fact]
-        public void PluralizeAlreadyPluralWord()
+        [Theory]
+        [ClassData(typeof(PluralTestSource))]
+        public void PluralizeAlreadyPluralWord(string singular, string plural)
         {
-            foreach (var pair in TestData)
-            {
-                Assert.Equal(pair.Value, pair.Value.Pluralize(Plurality.Plural));
-            }
+            Assert.Equal(plural, plural.Pluralize(Plurality.Plural));
         }
 
-        [Fact]
-        public void PluralizeWordsWithUnknownPlurality()
+        [Theory]
+        [ClassData(typeof(PluralTestSource))]
+        public void PluralizeWordsWithUnknownPlurality(string singular, string plural)
         {
-            foreach (var pair in TestData)
-            {
-                Assert.Equal(pair.Value, pair.Value.Pluralize(Plurality.CouldBeEither));
-                Assert.Equal(pair.Value, pair.Key.Pluralize(Plurality.CouldBeEither));
-            }
+            Assert.Equal(plural, plural.Pluralize(Plurality.CouldBeEither));
+            Assert.Equal(plural, singular.Pluralize(Plurality.CouldBeEither));
         }
 
-        [Fact]
-        public void Singularize()
+        [Theory]
+        [ClassData(typeof(PluralTestSource))]
+        public void Singularize(string singular, string plural)
         {
-            foreach (var pair in TestData)
-            {
-                Assert.Equal(pair.Key, pair.Value.Singularize());
-            }
+            Assert.Equal(singular, plural.Singularize());
         }
 
-        [Fact]
-        public void SingularizeAlreadySingularWord()
+        [Theory]
+        [ClassData(typeof(PluralTestSource))]
+        public void SingularizeAlreadySingularWord(string singular, string plural)
         {
-            foreach (var pair in TestData)
-            {
-                Assert.Equal(pair.Key, pair.Key.Singularize(Plurality.Singular));
-            }
+            Assert.Equal(singular, singular.Singularize(Plurality.Singular));
         }
 
-        [Fact]
-        public void SingularizeWordsWithUnknownSingularity()
+        [Theory]
+        [ClassData(typeof(PluralTestSource))]
+        public void SingularizeWordsWithUnknownSingularity(string singular, string plural)
         {
-            foreach (var pair in TestData)
-            {
-                Assert.Equal(pair.Key, pair.Key.Singularize(Plurality.CouldBeEither));
-                Assert.Equal(pair.Key, pair.Value.Singularize(Plurality.CouldBeEither));
-            }
-        }
-
-        public InflectorTests()
-        {
-            TestData.Add("search", "searches");
-            TestData.Add("switch", "switches");
-            TestData.Add("fix", "fixes");
-            TestData.Add("box", "boxes");
-            TestData.Add("process", "processes");
-            TestData.Add("address", "addresses");
-            TestData.Add("case", "cases");
-            TestData.Add("stack", "stacks");
-            TestData.Add("wish", "wishes");
-            TestData.Add("fish", "fish");
-
-            TestData.Add("category", "categories");
-            TestData.Add("query", "queries");
-            TestData.Add("ability", "abilities");
-            TestData.Add("agency", "agencies");
-            TestData.Add("movie", "movies");
-
-            TestData.Add("archive", "archives");
-
-            TestData.Add("index", "indices");
-
-            TestData.Add("wife", "wives");
-            TestData.Add("safe", "saves");
-            TestData.Add("half", "halves");
-
-            TestData.Add("move", "moves");
-
-            TestData.Add("salesperson", "salespeople");
-            TestData.Add("person", "people");
-
-            TestData.Add("spokesman", "spokesmen");
-            TestData.Add("man", "men");
-            TestData.Add("woman", "women");
-
-            TestData.Add("basis", "bases");
-            TestData.Add("diagnosis", "diagnoses");
-
-            TestData.Add("datum", "data");
-            TestData.Add("medium", "media");
-            TestData.Add("analysis", "analyses");
-
-            TestData.Add("node_child", "node_children");
-            TestData.Add("child", "children");
-
-            TestData.Add("experience", "experiences");
-            TestData.Add("day", "days");
-
-            TestData.Add("comment", "comments");
-            TestData.Add("foobar", "foobars");
-            TestData.Add("newsletter", "newsletters");
-
-            TestData.Add("old_news", "old_news");
-            TestData.Add("news", "news");
-
-            TestData.Add("series", "series");
-            TestData.Add("species", "species");
-
-            TestData.Add("quiz", "quizzes");
-
-            TestData.Add("perspective", "perspectives");
-
-            TestData.Add("ox", "oxen");
-            TestData.Add("photo", "photos");
-            TestData.Add("buffalo", "buffaloes");
-            TestData.Add("tomato", "tomatoes");
-            TestData.Add("dwarf", "dwarves");
-            TestData.Add("elf", "elves");
-            TestData.Add("information", "information");
-            TestData.Add("equipment", "equipment");
-            TestData.Add("bus", "buses");
-            TestData.Add("status", "statuses");
-            TestData.Add("status_code", "status_codes");
-            TestData.Add("mouse", "mice");
-
-            TestData.Add("louse", "lice");
-            TestData.Add("house", "houses");
-            TestData.Add("octopus", "octopi");
-            TestData.Add("virus", "viri");
-            TestData.Add("alias", "aliases");
-            TestData.Add("portfolio", "portfolios");
-
-            TestData.Add("vertex", "vertices");
-            TestData.Add("matrix", "matrices");
-
-            TestData.Add("axis", "axes");
-            TestData.Add("testis", "testes");
-            TestData.Add("crisis", "crises");
-
-            TestData.Add("rice", "rice");
-            TestData.Add("shoe", "shoes");
-
-            TestData.Add("horse", "horses");
-            TestData.Add("prize", "prizes");
-            TestData.Add("edge", "edges");
-
-            /* Tests added by Bas Jansen */
-            TestData.Add("goose", "geese");
-            TestData.Add("deer", "deer");
-            TestData.Add("sheep", "sheep");
-            TestData.Add("wolf", "wolves");
-            TestData.Add("volcano", "volcanoes");
-            TestData.Add("aircraft", "aircraft");
-            TestData.Add("alumna", "alumnae");
-            TestData.Add("alumnus", "alumni");
-            TestData.Add("fungus", "fungi");
+            Assert.Equal(singular, singular.Singularize(Plurality.CouldBeEither));
+            Assert.Equal(singular, plural.Singularize(Plurality.CouldBeEither));
         }
 
         //Uppercases individual words and removes some characters 
@@ -234,6 +114,123 @@ namespace Humanizer.Tests
         public void Underscore(string input, string expectedOuput)
         {
             Assert.Equal(expectedOuput, input.Underscore());
+        }
+    }
+
+    class PluralTestSource : IEnumerable<object[]>
+    {
+        public IEnumerator<object[]> GetEnumerator()
+        {
+            yield return new object[] {"search", "searches"};
+            yield return new object[] {"switch", "switches"};
+            yield return new object[] {"fix", "fixes"};
+            yield return new object[] {"box", "boxes"};
+            yield return new object[] {"process", "processes"};
+            yield return new object[] {"address", "addresses"};
+            yield return new object[] {"case", "cases"};
+            yield return new object[] {"stack", "stacks"};
+            yield return new object[] {"wish", "wishes"};
+            yield return new object[] {"fish", "fish"};
+
+            yield return new object[] {"category", "categories"};
+            yield return new object[] {"query", "queries"};
+            yield return new object[] {"ability", "abilities"};
+            yield return new object[] {"agency", "agencies"};
+            yield return new object[] {"movie", "movies"};
+
+            yield return new object[] {"archive", "archives"};
+
+            yield return new object[] {"index", "indices"};
+
+            yield return new object[] {"wife", "wives"};
+            yield return new object[] {"safe", "saves"};
+            yield return new object[] {"half", "halves"};
+
+            yield return new object[] {"move", "moves"};
+
+            yield return new object[] {"salesperson", "salespeople"};
+            yield return new object[] {"person", "people"};
+
+            yield return new object[] {"spokesman", "spokesmen"};
+            yield return new object[] {"man", "men"};
+            yield return new object[] {"woman", "women"};
+
+            yield return new object[] {"basis", "bases"};
+            yield return new object[] {"diagnosis", "diagnoses"};
+
+            yield return new object[] {"datum", "data"};
+            yield return new object[] {"medium", "media"};
+            yield return new object[] {"analysis", "analyses"};
+
+            yield return new object[] {"node_child", "node_children"};
+            yield return new object[] {"child", "children"};
+
+            yield return new object[] {"experience", "experiences"};
+            yield return new object[] {"day", "days"};
+
+            yield return new object[] {"comment", "comments"};
+            yield return new object[] {"foobar", "foobars"};
+            yield return new object[] {"newsletter", "newsletters"};
+
+            yield return new object[] {"old_news", "old_news"};
+            yield return new object[] {"news", "news"};
+
+            yield return new object[] {"series", "series"};
+            yield return new object[] {"species", "species"};
+
+            yield return new object[] {"quiz", "quizzes"};
+
+            yield return new object[] {"perspective", "perspectives"};
+
+            yield return new object[] {"ox", "oxen"};
+            yield return new object[] {"photo", "photos"};
+            yield return new object[] {"buffalo", "buffaloes"};
+            yield return new object[] {"tomato", "tomatoes"};
+            yield return new object[] {"dwarf", "dwarves"};
+            yield return new object[] {"elf", "elves"};
+            yield return new object[] {"information", "information"};
+            yield return new object[] {"equipment", "equipment"};
+            yield return new object[] {"bus", "buses"};
+            yield return new object[] {"status", "statuses"};
+            yield return new object[] {"status_code", "status_codes"};
+            yield return new object[] {"mouse", "mice"};
+
+            yield return new object[] {"louse", "lice"};
+            yield return new object[] {"house", "houses"};
+            yield return new object[] {"octopus", "octopi"};
+            yield return new object[] {"virus", "viri"};
+            yield return new object[] {"alias", "aliases"};
+            yield return new object[] {"portfolio", "portfolios"};
+
+            yield return new object[] {"vertex", "vertices"};
+            yield return new object[] {"matrix", "matrices"};
+
+            yield return new object[] {"axis", "axes"};
+            yield return new object[] {"testis", "testes"};
+            yield return new object[] {"crisis", "crises"};
+
+            yield return new object[] {"rice", "rice"};
+            yield return new object[] {"shoe", "shoes"};
+
+            yield return new object[] {"horse", "horses"};
+            yield return new object[] {"prize", "prizes"};
+            yield return new object[] {"edge", "edges"};
+
+            /* Tests added by Bas Jansen */
+            yield return new object[] {"goose", "geese"};
+            yield return new object[] {"deer", "deer"};
+            yield return new object[] {"sheep", "sheep"};
+            yield return new object[] {"wolf", "wolves"};
+            yield return new object[] {"volcano", "volcanoes"};
+            yield return new object[] {"aircraft", "aircraft"};
+            yield return new object[] {"alumna", "alumnae"};
+            yield return new object[] {"alumnus", "alumni"};
+            yield return new object[] {"fungus", "fungi"};
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
