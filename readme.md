@@ -134,7 +134,7 @@ TimeSpan.FromDays(14).Humanize() => "2 weeks"
 There are also a few inflector methods:
 
 ####Pluralize 
-`Pluralize` pluralizes the provided input considering irregular words:
+`Pluralize` pluralizes the provided input while taking irregular and uncountable words into consideration:
 
 ```C#
 "Man".Pluralize() => "Men" 
@@ -150,7 +150,7 @@ Normally you would call `Pluralize` on a singular word but if you're unsure abou
 ```
 
 ####Singularize 
-`Singularize` singularizes the provided input considering irregular words
+`Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
 
 ```C#
 "Men".Singularize() => "Man" 
@@ -166,25 +166,25 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 ```
 
 ####ToQuantity
-Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. 2 requests, 3 men. `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
+Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
 
 ```C#
 "case".ToQuantity(0) => "0 cases"
-"case.ToQuantity(1) => "1 case"
-"case.ToQuantity(5) => "5 cases"
-"man.ToQuantity(0) => "0 men"
-"man.ToQuantity(1) => "1 man"
-"man.ToQuantity(2) => "2 men"
+"case".ToQuantity(1) => "1 case"
+"case".ToQuantity(5) => "5 cases"
+"man".ToQuantity(0) => "0 men"
+"man".ToQuantity(1) => "1 man"
+"man".ToQuantity(2) => "2 men"
 ```
 
-`ToQuantity` has smarts to figure out whether your input word is plural or singular and changes or leaves it depending on the inpur quantity:
+`ToQuantity` has smarts to figure out whether your input word is plural or singular and changes or leaves it depending on the input quantity:
 
 ```C#
 "men.ToQuantity(2) => "2 men"
-"process.ToQuantity(2) => "2 processes"
-"process.ToQuantity(1) => "1 process"
-"processes.ToQuantity(2) => "2 processes"
-"processes.ToQuantity(1) => "1 process"
+"process".ToQuantity(2) => "2 processes"
+"process".ToQuantity(1) => "1 process"
+"processes".ToQuantity(2) => "2 processes"
+"processes".ToQuantity(1) => "1 process"
 ```
 
 ####Ordinalize numbers & strings
@@ -195,7 +195,7 @@ Many times you want to call `Singularize` and `Pluralize` to prefix a word with 
 5.Ordinalize() => "5th"
 ```
 
-You can also call `Ordinalize` on a numeric string and acheive the same result: `"21".Ordinalize()` => `"21st"`
+You can also call `Ordinalize` on a numeric string and achieve the same result: `"21".Ordinalize()` => `"21st"`
 
 ####Underscore 
 `Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
