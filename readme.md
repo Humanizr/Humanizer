@@ -180,7 +180,7 @@ Many times you want to call `Singularize` and `Pluralize` to prefix a word with 
 `ToQuantity` has smarts to figure out whether your input word is plural or singular and changes or leaves it depending on the input quantity:
 
 ```C#
-"men.ToQuantity(2) => "2 men"
+"men".ToQuantity(2) => "2 men"
 "process".ToQuantity(2) => "2 processes"
 "process".ToQuantity(1) => "1 process"
 "processes".ToQuantity(2) => "2 processes"
