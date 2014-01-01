@@ -13,7 +13,26 @@ namespace Humanizer.Tests
         {
             foreach (var pair in TestData)
             {
-                Assert.Equal(pair.Key.Pluralize(), pair.Value);
+                Assert.Equal(pair.Value, pair.Key.Pluralize());
+            }
+        }
+
+        [Fact]
+        public void PluralizeAlreadyPluralWord()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Value, pair.Value.Pluralize(Plurality.Plural));
+            }
+        }
+
+        [Fact]
+        public void PluralizeWordsWithUnknownPlurality()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Value, pair.Value.Pluralize(Plurality.CouldBeEither));
+                Assert.Equal(pair.Value, pair.Key.Pluralize(Plurality.CouldBeEither));
             }
         }
 
@@ -22,7 +41,26 @@ namespace Humanizer.Tests
         {
             foreach (var pair in TestData)
             {
-                Assert.Equal(pair.Value.Singularize(), pair.Key);
+                Assert.Equal(pair.Key, pair.Value.Singularize());
+            }
+        }
+
+        [Fact]
+        public void SingularizeAlreadySingularWord()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Key, pair.Key.Singularize(Plurality.Singular));
+            }
+        }
+
+        [Fact]
+        public void SingularizeWordsWithUnknownSingularity()
+        {
+            foreach (var pair in TestData)
+            {
+                Assert.Equal(pair.Key, pair.Key.Singularize(Plurality.CouldBeEither));
+                Assert.Equal(pair.Key, pair.Value.Singularize(Plurality.CouldBeEither));
             }
         }
 

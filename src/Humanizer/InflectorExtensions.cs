@@ -4,6 +4,25 @@ using System.Text.RegularExpressions;
 namespace Humanizer
 {
     /// <summary>
+    /// Provides hint for Humanizer as to whether a word is singular, plural or with unknown plurality
+    /// </summary>
+    public enum Plurality
+    {
+        /// <summary>
+        /// The word is singular
+        /// </summary>
+        Singular,
+        /// <summary>
+        /// The word is plural
+        /// </summary>
+        Plural,
+        /// <summary>
+        /// I am unsure of the plurality
+        /// </summary>
+        CouldBeEither
+    }
+
+    /// <summary>
     /// Inflector extensions
     /// </summary>
     public static class InflectorExtensions
@@ -124,25 +143,57 @@ namespace Humanizer
         /// Pluralizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be pluralized</param>
+        /// <param name="plurality">Normally you call Pluralize on singular words; but if you're unsure call it with Plurality.CouldBeEither</param>
         /// <returns></returns>
-        public static string Pluralize(this string word)
+        public static string Pluralize(this string word, Plurality plurality = Plurality.Singular)
         {
-            return ApplyRules(Plurals, word);
+            if (plurality == Plurality.Plural)
+                return word;
+
+            var result = ApplyRules(Plurals, word);
+
+            if (plurality == Plurality.Singular)
+                return result;
+
+            var asSingular = ApplyRules(Singulars, word);
+            var asSingularAsPlural = ApplyRules(Plurals, asSingular);
+            if (asSingular != null && asSingular != word && asSingular + "s" != word && asSingularAsPlural == word && result != word)
+                return word;
+
+            return result;
         }
 
         /// <summary>
         /// Singularizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be singularized</param>
+        /// <param name="plurality">Normally you call Singularize on plural words; but if you're unsure call it with Plurality.CouldBeEither</param>
         /// <returns></returns>
-        public static string Singularize(this string word)
+        public static string Singularize(this string word, Plurality plurality = Plurality.Plural)
         {
-            return ApplyRules(Singulars, word);
+            if (plurality == Plurality.Singular)
+                return word;
+
+            var result = ApplyRules(Singulars, word);
+
+            if (plurality == Plurality.Plural)
+                return result;
+
+            // the Plurality is unknown so we should check all possibilities
+            var asPlural = ApplyRules(Plurals, word);
+            var asPluralAsSingular = ApplyRules(Singulars, asPlural);
+            if (asPlural != word && word+"s" != asPlural && asPluralAsSingular == word && result != word)
+                return word;
+
+            return result ?? word;
         }
 
         private static string ApplyRules(List<Rule> rules, string word)
         {
-            string result = word;
+            if (word == null)
+                return null;
+
+            var result = word;
 
             if (!Uncountables.Contains(word.ToLower()))
             {

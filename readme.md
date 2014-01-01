@@ -133,12 +133,75 @@ TimeSpan.FromDays(14).Humanize() => "2 weeks"
 ###Inflector methods
 There are also a few inflector methods:
 
- * Pluralize: pluralizes the provided input considering irregular words; e.g. `"Man".Pluralize()` => `"Men"` & `"string".Pluralize()` => `"strings"`
- * Singularize: singularizes the provided input considering irregular words; e.g. `"Men".Singularize()` => `"Man"` & `"strings".Singularize()` => `"string"`
- * Ordinalize numbers: turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. `1.Ordinalize()` => `"1st"`, `5.Ordinalize()` => `"5th"`
- * Ordinalize strings: Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th; e.g. `"21".Ordinalize()` => `"21st"`
- * Underscore: separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
- * Dasherize: replaces underscores with dashes in the string; e.g. `"some_title".Dasherize()` => `"some-title"`
+####Pluralize 
+`Pluralize` pluralizes the provided input while taking irregular and uncountable words into consideration:
+
+```C#
+"Man".Pluralize() => "Men" 
+"string".Pluralize() => "strings"
+```
+
+Normally you would call `Pluralize` on a singular word but if you're unsure about the singularity of the word you can call the method with the optional `plurality` argument:
+
+```C#
+"Men".Pluralize(Plurality.CouldBeEither) => "Men" 
+"Man".Pluralize(Plurality.CouldBeEither) => "Men" 
+"string".Pluralize(Plurality.CouldBeEither) => "strings"
+```
+
+####Singularize 
+`Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
+
+```C#
+"Men".Singularize() => "Man" 
+"strings".Singularize() => "string"
+```
+
+Normally you would call `Singularize` on a plural word but if you're unsure about the pluralit of the word you can call the method with the optional `plurality` argument:
+
+```C#
+"Men".Singularize(Plurality.CouldBeEither) => "Man" 
+"Man".Singularize(Plurality.CouldBeEither) => "Man" 
+"strings".Singularize(Plurality.CouldBeEither) => "string"
+```
+
+####ToQuantity
+Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
+
+```C#
+"case".ToQuantity(0) => "0 cases"
+"case".ToQuantity(1) => "1 case"
+"case".ToQuantity(5) => "5 cases"
+"man".ToQuantity(0) => "0 men"
+"man".ToQuantity(1) => "1 man"
+"man".ToQuantity(2) => "2 men"
+```
+
+`ToQuantity` has smarts to figure out whether your input word is plural or singular and changes or leaves it depending on the input quantity:
+
+```C#
+"men.ToQuantity(2) => "2 men"
+"process".ToQuantity(2) => "2 processes"
+"process".ToQuantity(1) => "1 process"
+"processes".ToQuantity(2) => "2 processes"
+"processes".ToQuantity(1) => "1 process"
+```
+
+####Ordinalize numbers & strings
+`Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th: 
+
+```C#
+1.Ordinalize() => "1st"
+5.Ordinalize() => "5th"
+```
+
+You can also call `Ordinalize` on a numeric string and achieve the same result: `"21".Ordinalize()` => `"21st"`
+
+####Underscore 
+`Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
+
+####Dasherize 
+`Dasherize` replaces underscores with dashes in the string; e.g. `"some_title".Dasherize()` => `"some-title"`
 
 ###Fluent Date
 Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follows:
