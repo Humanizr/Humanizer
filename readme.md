@@ -3,7 +3,7 @@ Humanizer is a small framework that helps .Net developer turn their otherwise ge
 ###Installation
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
-###Humanize Strings
+###Humanize String
 String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
 
 ```C#
@@ -31,7 +31,7 @@ You may also specify the desired letter casing:
 
  > The `LetterCasing` API and the methods accepting it are legacy from V0.2 era and will be deprecated in the future. Instead of that, you can use `Transform` method explained below.
 
-####Dehumanize Strings
+####Dehumanize String
 Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
 
 ```C#
@@ -103,7 +103,7 @@ And the usage is:
 
 And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
 
-###Humanize Dates
+###Humanize DateTime
 This is borrowed from [StackOverFlow algorithm](http://stackoverflow.com/a/12/141101) - although I had to apply some minor fixes on top of it. I am not going to bore you with all the examples as I am sure you know what this does: you basically give it an instance of `DateTime` and get back a string telling how far back in time that is:
 
 ```C#
@@ -120,7 +120,7 @@ For dates Humanizer also supports localization.
 
 **No dehumanization for dates as the human friendly date is not reversible**
 
-###Humanizer TimeSpan
+###Humanize TimeSpan
 You can call `Humanizes` on a `TimeSpan` to a get human friendly representation for it:
 
 ```C#
@@ -302,7 +302,7 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 ```
 
 ###Mix this into your framework to simplify your life
-This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use string.Humanizer for that?! 
+This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
 
 You may find an Asp.Net MVC sample [in the code](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
 
@@ -380,35 +380,34 @@ public class RegisterModel
 
 ... and the "metadata humanizer" will take care of the rest.
 
-No need to mention that if you want title casing for your labels you may call the other overload of `Humanize` method:
+No need to mention that if you want title casing for your labels you can chain the method with `Transform`:
 
 ```C#
 modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.TitleCase);
 ```
 
 ##How to contribute?
-Your contribution to Humanizer would be very welcome. Just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues). They should be relatively straightforward. 
-We us [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. 
-So if you want to contribute, fork the repo, fix an issue and send a PR.
+Your contribution to Humanizer would be very welcome. If you find a bug, please raise it as an issue. Even better fix it and send me a pull request. If you like to help me out with existing bugs and feature requests just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues) and grab and fix one. I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.
 
-One area Humanizer could definitely use your help is localisation. 
-Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Spanish, Greek, German, Arabic, Russian and Romanian languages for `Date.Humanize` method. 
-Humanizer could definitely do with more translations. We also need localization for `TimeSpan.Humanize`.
+I use [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. So if you want to contribute, fork the repo, fix an issue and send a PR.
+
+####Need your help with localisation
+One area Humanizer could always use your help is localisation. Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Spanish, Greek, German, Arabic, Russian and Romanian languages for `Date.Humanize` method. 
+Humanizer could definitely do with more translations. `TimeSpan.Humanize` also requires translations.
 
 To add a translation, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
 
 Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
 Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
 In cases like this in addition to creating a resource file you should also subclass [`DefaultFormatter`](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/DefaultFormatter.cs) in a class that represents your language; 
-e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. We think overriding the `GetResourceKey` method should be enough. To see how to do that check out RomanianFormatter and `RussianFormatter` to see an example. 
+e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. We think overriding the `GetResourceKey` method should be enough. To see how to do that check out `RomanianFormatter` and `RussianFormatter`. 
 Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
 
 ### Continuous Integration from TeamCity
-Humanizer project is built & tested continuously by TeamCity. That applies to Pull Requests too. Shortly after you submit a PR you can check the build and test status notification on your PR.
+Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.
 
 The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
-
 
 ###Author
 Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
