@@ -132,6 +132,7 @@
     </None>
     <None Include="Humanizer.snk" />
     <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.nb-NO.resx">
