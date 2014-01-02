@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Humanizer</id>
-    <version>$GitHubFlowVersion.SemVer$</version>
+    <version>$version$</version>
     <title>Humanizer</title>
     <authors>Mehdi Khalili</authors>
     <owners>Mehdi Khalili</owners>
