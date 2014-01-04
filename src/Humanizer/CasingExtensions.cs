@@ -33,7 +33,5 @@ namespace Humanizer
                     throw new ArgumentOutOfRangeException("casing");
             }
         }
-
-        
     }
 }
