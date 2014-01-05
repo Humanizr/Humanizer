@@ -169,4 +169,32 @@
     <value>منذ {0} سنوات</value>
     <comment>{0} years ago</comment>
   </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>يوم واحد</value>
+    <comment>single day</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>ساعة واحدة</value>
+    <comment>single hour</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>جزء من الثانية</value>
+    <comment>single millisecond</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>دقيقة واحدة</value>
+    <comment>single minute</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>ثانية واحدة</value>
+    <comment>single second</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>أسبوع واحد</value>
+    <comment>single week</comment>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>حالاً</value>
+    <comment>no time</comment>
+  </data>
 </root>
