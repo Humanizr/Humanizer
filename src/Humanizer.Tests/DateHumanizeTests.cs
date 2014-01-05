@@ -21,7 +21,7 @@ namespace Humanizer.Tests
             Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
         }
 
-        public void Verify(string expectedString, TimeSpan deltaFromNow)
+        void Verify(string expectedString, TimeSpan deltaFromNow)
         {
             VerifyWithCurrentDate(expectedString, deltaFromNow);
             VerifyWithDateInjection(expectedString, deltaFromNow);

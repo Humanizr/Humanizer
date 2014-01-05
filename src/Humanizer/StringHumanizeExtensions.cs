@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -7,9 +6,14 @@ namespace Humanizer
 {
     public static class StringHumanizeExtensions
     {
-        static readonly Func<string, string> FromUnderscoreDashSeparatedWords = methodName => String.Join(" ", methodName.Split(new[] { '_', '-' }));
+        static string FromUnderscoreDashSeparatedWords (string input)
+        {
+            return String.Join(" ", input.Split(new[] {'_', '-'}));
+        }
 
-        private static readonly Regex PascalCaseWordBoundaryRegex = new Regex(@"
+        static string FromPascalCase(string input)
+        {
+            var pascalCaseWordBoundaryRegex = new Regex(@"
 (?# word to word, number or acronym)
 (?<=[a-z])(?=[A-Z0-9])|
 (?# number to word or acronym)
@@ -18,12 +22,10 @@ namespace Humanizer
 (?<=[A-Z])(?=[0-9])|
 (?# acronym to word)
 (?<=[A-Z])(?=[A-Z][a-z])
-", RegexOptions.IgnorePatternWhitespace);//|RegexOptions.Compiled);
+", RegexOptions.IgnorePatternWhitespace);
 
-        static string FromPascalCase(string name)
-        {
-            var result = PascalCaseWordBoundaryRegex
-                .Split(name)
+            var result = pascalCaseWordBoundaryRegex
+                .Split(input)
                 .Select(word =>
                     word.ToCharArray().All(Char.IsUpper) && word.Length > 1
                         ? word
@@ -60,8 +62,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this string input, LetterCasing casing)
         {
-            var humanizedString = input.Humanize();
-            return humanizedString.ApplyCase(casing);
+            return input.Humanize().ApplyCase(casing);
         }
     }
 }
