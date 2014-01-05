@@ -1,47 +1,19 @@
 ﻿using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    class StringDehumanizeTests
+    public class StringDehumanizeTests
     {
-        [Fact]
-        public void PascalCaseSentence()
+        [Theory]
+        [InlineData("Pascal case sentence is camelized", "PascalCaseSentenceIsCamelized")]
+        [InlineData("Title Case Sentence Is Camelized", "TitleCaseSentenceIsCamelized")]
+        [InlineData("Mixed case sentence Is Camelized", "MixedCaseSentenceIsCamelized")]
+        [InlineData("lower case sentence is camelized", "LowerCaseSentenceIsCamelized")]
+        [InlineData("", "")]
+        public void CanDehumanizeIntoAPascalCaseWord(string input, string expectedResult)
         {
-            Assert.Equal(
-                "PascalCaseSentenceIsCamelized",
-                "Pascal case sentence is camelized".Dehumanize());
-        }
-
-        [Fact]
-        public void TitleCaseSentence()
-        {
-            Assert.Equal(
-                "TitleCaseSentenceIsCamelized",
-                "Title Case Sentence Is Camelized".Dehumanize());
-        }
-
-        [Fact]
-        public void MixedCaseSentence()
-        {
-            Assert.Equal(
-                "MixedCaseSentenceIsCamelized",
-                "Mixed case sentence Is Camelized".Dehumanize());
-        }
-
-        [Fact]
-        public void LowerCaseSentence()
-        {
-            Assert.Equal(
-                "LowerCaseSentenceIsCamelized",
-                "lower case sentence is camelized".Dehumanize());
-        }
-
-        [Fact]
-        public void EmptySentence()
-        {
-            Assert.Equal(
-                "",
-                "".Dehumanize());
+            Assert.Equal(expectedResult, input.Dehumanize());
         }
     }
 }
