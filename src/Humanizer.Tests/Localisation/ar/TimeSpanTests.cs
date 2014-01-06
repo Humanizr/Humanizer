@@ -1,11 +1,12 @@
 ﻿using System;
+using Humanizer.Tests;
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.ar
 {
     public class TimeSpanHumanizeExtensionsTests : AmbientCulture
     {
-        public TimeSpanHumanizeExtensionsTests() : base("ar") {         }
+        public TimeSpanHumanizeExtensionsTests() : base("ar") { }
 
         [Fact]
         public void OneWeek()
