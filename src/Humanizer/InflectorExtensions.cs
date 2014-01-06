@@ -262,14 +262,14 @@ namespace Humanizer
             return underscoredWord.Replace('_', '-');
         }
 		
-		/// <summary>
+        /// <summary>
         /// Replaces underscores with hyphens in the string
         /// </summary>
         /// <param name="underscoredWord"></param>
         /// <returns></returns>
         public static string Hyphenate(this string underscoredWord)
         {
-            return Dasherize(underscoredWord)
+            return Dasherize(underscoredWord);
         }
     }
 }
