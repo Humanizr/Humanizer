@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.ar
 {
@@ -7,47 +8,54 @@ namespace Humanizer.Tests.Localisation.ar
     {
         public TimeSpanHumanizeExtensionsTests() : base("ar") {         }
 
-        [Fact]
-        public void OneWeek()
+        [Theory]
+        [InlineData(7, "أسبوع واحد")]
+        [InlineData(14, "أسبوعين")]
+        public void Weeks(int days, string expected)
         {
-            Assert.Equal("أسبوع واحد", TimeSpan.FromDays(7).Humanize());
-        }
-
-        [Fact]
-        public void TwoWeeks()
-        {
-            Assert.Equal("أسبوعين", TimeSpan.FromDays(14).Humanize());
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
 
 
-        [Fact]
-        public void OneDay()
+        [Theory]
+        [InlineData(1, "يوم واحد")]
+        [InlineData(2, "يومين")]
+        public void Days(int days, string expected)
         {
-            Assert.Equal("يوم واحد", TimeSpan.FromDays(1).Humanize());
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
 
-        [Fact]
-        public void OneHour()
+        [Theory]
+        [InlineData(1, "ساعة واحدة")]
+        [InlineData(2, "ساعتين")]
+        public void Hours(int hours, string expected)
         {
-            Assert.Equal("ساعة واحدة", TimeSpan.FromHours(1).Humanize());
+            Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize());
         }
 
-        [Fact]
-        public void OneMinute()
+        [Theory]
+        [InlineData(1, "دقيقة واحدة")]
+        [InlineData(2, "دقيقتين")]
+        public void Minutes(int minutes, string expected)
         {
-            Assert.Equal("دقيقة واحدة", TimeSpan.FromMinutes(1).Humanize());
+            Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
         }
 
-        [Fact]
-        public void OneSecond()
+
+        [Theory]
+        [InlineData(1, "ثانية واحدة")]
+        [InlineData(2, "ثانيتين")]
+        public void Seconds(int seconds, string expected)
         {
-            Assert.Equal("ثانية واحدة", TimeSpan.FromSeconds(1).Humanize());
+            Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
         }
 
-        [Fact]
-        public void OneMillisecond()
+        [Theory]
+        [InlineData(1, "جزء من الثانية")]
+        [InlineData(2, "جزئين من الثانية")]
+        public void Milliseconds(int milliseconds, string expected)
         {
-            Assert.Equal("جزء من الثانية", TimeSpan.FromMilliseconds(1).Humanize());
+            Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
         }
 
         [Fact]

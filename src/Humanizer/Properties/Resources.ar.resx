@@ -225,4 +225,24 @@
     <value>أسبوعين</value>
     <comment>two weeks</comment>
   </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>يومين</value>
+    <comment>two days</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>ساعتين</value>
+    <comment>two hours</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>جزئين من الثانية</value>
+    <comment>two milliseconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>دقيقتين</value>
+    <comment>two minutes</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>ثانيتين</value>
+    <comment>two seconds</comment>
+  </data>
 </root>
