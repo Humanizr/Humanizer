@@ -75,6 +75,8 @@
     <Compile Include="Localisation\DateHumanizeTests.nb-NO.cs" />
     <Compile Include="Localisation\es\DateHumanizeTests.cs" />
     <Compile Include="Localisation\es\TimeSpanTests.cs" />
+    <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\pt-BR\TimeSpanTests.cs" />
     <Compile Include="RunnableInDebugModeOnlyAttribute.cs" />
     <Compile Include="ToQuantityTests.cs" />
     <Compile Include="TransformersTests.cs" />
@@ -88,7 +90,7 @@
     <Compile Include="FluentDate\InTests.cs" />
     <Compile Include="FluentDate\OnTests.cs" />
     <Compile Include="FluentDate\PrepositionTests.cs" />
-    <Compile Include="Localisation\AmbientCulture.cs" />
+    <Compile Include="AmbientCulture.cs" />
     <Compile Include="Localisation\ResourcesTests.cs" />
     <Compile Include="Localisation\DateHumanizeTests.ru-RU.cs" />
     <Compile Include="NumberToTimeSpanTests.cs" />
