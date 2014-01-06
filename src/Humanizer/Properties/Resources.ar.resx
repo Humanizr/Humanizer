@@ -197,4 +197,32 @@
     <value>حالاً</value>
     <comment>no time</comment>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>منذ يومين</value>
+    <comment>two days ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>منذ ساعتين</value>
+    <comment>two hours ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>منذ دقيقتين</value>
+    <comment>two minutes ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>منذ شهرين</value>
+    <comment>two months ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>منذ ثانيتين</value>
+    <comment>two  seconds ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>منذ سنتين</value>
+    <comment>two years ago</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>أسبوعين</value>
+    <comment>two weeks</comment>
+  </data>
 </root>

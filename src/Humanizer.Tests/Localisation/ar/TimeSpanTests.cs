@@ -14,6 +14,13 @@ namespace Humanizer.Tests.Localisation.ar
         }
 
         [Fact]
+        public void TwoWeeks()
+        {
+            Assert.Equal("أسبوعين", TimeSpan.FromDays(14).Humanize());
+        }
+
+
+        [Fact]
         public void OneDay()
         {
             Assert.Equal("يوم واحد", TimeSpan.FromDays(1).Humanize());

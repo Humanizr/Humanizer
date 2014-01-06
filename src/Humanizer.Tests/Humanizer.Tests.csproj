@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CasingTests.cs" />
+    <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\TimeSpanTests.cs" />
     <Compile Include="Localisation\DateHumanizeTests.nb-NO.cs" />
     <Compile Include="Localisation\es\DateHumanizeTests.cs" />
