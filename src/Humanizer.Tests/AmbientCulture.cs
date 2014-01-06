@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Threading;
 
-namespace Humanizer.Tests.Localisation
+namespace Humanizer.Tests
 {
     public class AmbientCulture : IDisposable
     {

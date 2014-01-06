@@ -3,8 +3,10 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class TimeSpanHumanizeExtensionsTests
+    public class TimeSpanHumanizeExtensionsTests : AmbientCulture
     {
+        public TimeSpanHumanizeExtensionsTests() : base("en-US") { }
+
         [Fact]
         public void TwoWeeks()
         {
