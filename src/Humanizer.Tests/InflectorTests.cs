@@ -76,6 +76,16 @@ namespace Humanizer.Tests
             Assert.Equal(input.Dasherize(), expectedOutput);
         }
 
+        [InlineData("some_title", "some-title")]
+        [InlineData("some-title", "some-title")]
+        [InlineData("some_title_goes_here", "some-title-goes-here")]
+        [InlineData("some_title and_another", "some-title and-another")]
+        [Theory]
+        public void Hyphenate(string input, string expectedOutput)
+        {
+            Assert.Equal(input.Hyphenate(), expectedOutput);
+        }
+
         [Theory]
         [InlineData("customer", "Customer")]
         [InlineData("CUSTOMER", "CUSTOMER")]
