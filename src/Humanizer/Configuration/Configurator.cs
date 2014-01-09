@@ -14,7 +14,8 @@ namespace Humanizer.Configuration
             new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
         {
             { "ro", () => new RomanianFormatter() },
-            { "ru", () => new RussianFormatter() }
+            { "ru", () => new RussianFormatter() },
+            { "ar", () => new ArabicFormatter() },
         };
 
         /// <summary>
