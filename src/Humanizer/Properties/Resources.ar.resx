@@ -126,7 +126,7 @@
     <comment>one second ago</comment>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>منذ {0} ثوان</value>
+    <value>منذ {0} ثانية</value>
     <comment>{0} seconds ago</comment>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
@@ -134,7 +134,7 @@
     <comment>a minute ago</comment>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>منذ {0} دقائق</value>
+    <value>منذ {0} دقيقة</value>
     <comment>{0} minutes ago</comment>
   </data>
   <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
@@ -142,7 +142,7 @@
     <comment>an hour ago</comment>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>منذ {0} ساعات</value>
+    <value>منذ {0} ساعة</value>
     <comment>{0} hours ago</comment>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
@@ -150,7 +150,7 @@
     <comment>yesterday</comment>
   </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>منذ {0} أيام</value>
+    <value>منذ {0} يوم</value>
     <comment>{0} days ago</comment>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
@@ -158,7 +158,7 @@
     <comment>one month ago</comment>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
-    <value>منذ {0} أشهر</value>
+    <value>منذ {0} شهر</value>
     <comment>{0} months ago</comment>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
@@ -166,7 +166,7 @@
     <comment>one year ago</comment>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
-    <value>منذ {0} سنوات</value>
+    <value>منذ {0} عام</value>
     <comment>{0} years ago</comment>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
@@ -218,7 +218,7 @@
     <comment>two  seconds ago</comment>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
-    <value>منذ سنتين</value>
+    <value>منذ عامين</value>
     <comment>two years ago</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
@@ -244,5 +244,77 @@
   <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
     <value>ثانيتين</value>
     <comment>two seconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} يوم</value>
+    <comment>{0} days</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} أيام</value>
+    <comment>{0} days</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} ساعة</value>
+    <comment>{0} hours</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} ساعات</value>
+    <comment>{0} hours</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} جزء من الثانية</value>
+    <comment>{0} milliseconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} أجزاء من الثانية</value>
+    <comment>{0} milliseconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} دقيقة</value>
+    <comment>{0} minutes</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} دقائق</value>
+    <comment>{0} minutes</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} ثانية</value>
+    <comment>{0} seconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} ثوان</value>
+    <comment>{0} seconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} أسبوع</value>
+    <comment>{0} weeks</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} أسابيع</value>
+    <comment>{0} weeks</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>منذ {0} أيام</value>
+    <comment>{0} days ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>منذ {0} ساعات</value>
+    <comment>{0} hours ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>منذ {0} دقائق</value>
+    <comment>{0} minutes ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>منذ {0} أشهر</value>
+    <comment>{0} months ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>منذ {0} ثوان</value>
+    <comment>{0} seconds ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>منذ {0} أعوام</value>
+    <comment>{0} years ago</comment>
   </data>
 </root>
