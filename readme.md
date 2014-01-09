@@ -200,8 +200,13 @@ You can also call `Ordinalize` on a numeric string and achieve the same result: 
 ####Underscore 
 `Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
 
-####Dasherize 
-`Dasherize` replaces underscores with dashes in the string; e.g. `"some_title".Dasherize()` => `"some-title"`
+####Dasherize & Hyphenate
+`Dasherize` and `Hyphenate` replace underscores with dashes in the string:
+
+```C3
+"some_title".Dasherize() => "some-title"
+"some_title".Hyphenate() => "some-title"
+```
 
 ###Fluent Date
 Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follows:
