@@ -9,7 +9,7 @@ namespace Humanizer
 
         public override bool Applies()
         {
-            return Verb.EndsWith("y");
+            return LastChar == 'y';
         }
 
         public override string Apply()

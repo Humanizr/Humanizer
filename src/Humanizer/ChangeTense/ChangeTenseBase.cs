@@ -18,4 +18,21 @@ namespace Humanizer
         public abstract bool Applies();
         public abstract string Apply();
     }
+
+    class CatchAll : ChangeTenseBase
+    {
+        public CatchAll(string verb) : base(verb)
+        {
+        }
+
+        public override bool Applies()
+        {
+            return true;
+        }
+
+        public override string Apply()
+        {
+            return Verb + "ed";
+        }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Humanizer
 {
@@ -192,7 +193,8 @@ namespace Humanizer
                 new VerbEndsWithVowelAndY(present), 
                 new VerbEndsWithVowelAndConsonant(present),
                 new VerbEndsWithE(present),
-                new VerbEndsWithY(present)
+                new VerbEndsWithY(present),
+                new CatchAll(present)
             };
 
             foreach (var rule in rules)
@@ -201,8 +203,7 @@ namespace Humanizer
                     return rule.Apply();
             }
 
-            // Catch all: + ed
-            return present + "ed";
+            throw new ArgumentOutOfRangeException("present", "None of the defined rules apply to the provided verb");
         }
 
         /// <summary>
