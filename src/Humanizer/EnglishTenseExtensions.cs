@@ -197,16 +197,40 @@ namespace Humanizer
             return AppendEd(present);
         }
 
+        private static readonly List<char> Vowels = new List<char> {'a', 'e', 'i', 'o', 'u'};
+
         private static string AppendEd(string present)
         {
+            var lastChar = present[present.Length - 1];
+            var secondLastChar = present[present.Length - 2];
+
+            // Rule 1: verb ends with vowel + y => + ed; e.g. played
+            if (Vowels.Contains(secondLastChar) && lastChar == 'y')
+                return present + "ed";
+
+            if (Vowels.Contains(secondLastChar) && !Vowels.Contains(lastChar))
+            {
+                // Rule 2: verb ends with vowel + non-vowel => double the last char + ed; e.g. begged
+                if (lastChar != 'x' && lastChar != 'w')
+                    return present + lastChar + "ed";
+
+                // Rule 3: don't double the last x & w; e.g. mixed
+                return present + "ed";
+            }
+
+            // Rule 4: verb ends with e => + d; e.g. created
             if (present.EndsWith("e"))
                 return present + "d";
 
+            // Rule 5: verb ends with y => -y + ied; e.g. cried
             if (present.EndsWith("y"))
                 return present.TrimEnd('y') + "ied";
 
+            // Catch all: + ed
             return present + "ed";
         }
+
+
 
         /// <summary>
         /// Converts a present verb to past participle tense

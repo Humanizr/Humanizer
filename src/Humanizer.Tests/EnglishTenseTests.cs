@@ -165,15 +165,49 @@ namespace Humanizer.Tests
         [InlineData("Wind","Wound")]
         [InlineData("Withdraw","Withdrew")]
         [InlineData("Wring","Wrung")]
-        [InlineData("Write","Wrote")]  
-        // normal verbs
-        [InlineData("Decide","Decided")]
-        [InlineData("Perform","Performed")]
-        [InlineData("Cry","Cried")]
-        [InlineData("Test","Tested")]
-        [InlineData("Love","Loved")]
-        [InlineData("Walk","Walked")]
-        [InlineData("BDDfy","BDDfied")]
+        [InlineData("Write","Wrote")]
+
+        // vowel + consonant
+        [InlineData("Drop", "Dropped")]
+        [InlineData("Beg", "Begged")]
+        [InlineData("Stop", "Stopped")]
+        [InlineData("Rob", "Robbed")]
+        [InlineData("Admit", "Admitted")]
+        [InlineData("Occur", "Occurred")]
+        [InlineData("Permit", "Permitted")]
+
+        // vowel + x/w
+        [InlineData("Sew", "Sewed")]
+        [InlineData("Mix", "Mixed")]
+
+        // ending with e
+        [InlineData("Decide", "Decided")]
+        [InlineData("Love", "Loved")]
+        [InlineData("Live", "Lived")]
+        [InlineData("Care", "Cared")]
+        [InlineData("Die", "Died")]
+
+        // vowel + y
+        [InlineData("Play", "Played")]
+        [InlineData("Pray", "Prayed")]
+        [InlineData("Stay", "Stayed")]
+        [InlineData("Destroy", "Destroyed")]
+
+        // ending with y
+        [InlineData("Dry", "Dried")]
+        [InlineData("BDDfy", "BDDfied")]
+        [InlineData("Carry", "Carried")]
+        [InlineData("Marry", "Married")]
+        [InlineData("Spy", "Spied")]
+        [InlineData("Cry", "Cried")]
+
+        // catch all: adding ed to the end
+        [InlineData("Start", "Started")]
+        [InlineData("Finish", "Finished")]
+        [InlineData("Wash", "Washed")]
+        [InlineData("Perform", "Performed")]
+        [InlineData("Test", "Tested")]
+        [InlineData("Walk", "Walked")]
         public void ToPast(string present, string past)
         {
             Assert.Equal(past, present.ToPast());
@@ -341,14 +375,48 @@ namespace Humanizer.Tests
         [InlineData("Withdraw","Withdrawn")]
         [InlineData("Wring","Wrung")]
         [InlineData("Write","Written")]
-        // normal verbs
+        
+        // vowel + consonant
+        [InlineData("Drop", "Dropped")]
+        [InlineData("Beg", "Begged")]
+        [InlineData("Stop", "Stopped")]
+        [InlineData("Rob", "Robbed")]
+        [InlineData("Admit", "Admitted")]
+        [InlineData("Occur", "Occurred")]
+        [InlineData("Permit", "Permitted")]
+
+        // vowel + x/w
+        [InlineData("Sew", "Sewed")]
+        [InlineData("Mix", "Mixed")]
+
+        // ending with e
         [InlineData("Decide", "Decided")]
-        [InlineData("Perform", "Performed")]
-        [InlineData("Cry", "Cried")]
-        [InlineData("Test", "Tested")]
         [InlineData("Love", "Loved")]
-        [InlineData("Walk", "Walked")]
+        [InlineData("Live", "Lived")]
+        [InlineData("Care", "Cared")]
+        [InlineData("Die", "Died")]
+
+        // vowel + y
+        [InlineData("Play", "Played")]
+        [InlineData("Pray", "Prayed")]
+        [InlineData("Stay", "Stayed")]
+        [InlineData("Destroy", "Destroyed")]
+
+        // ending with y
+        [InlineData("Dry", "Dried")]
         [InlineData("BDDfy", "BDDfied")]
+        [InlineData("Carry", "Carried")]
+        [InlineData("Marry", "Married")]
+        [InlineData("Spy", "Spied")]
+        [InlineData("Cry", "Cried")]
+
+        // catch all: adding ed to the end
+        [InlineData("Start", "Started")]
+        [InlineData("Finish", "Finished")]
+        [InlineData("Wash", "Washed")]
+        [InlineData("Perform", "Performed")]
+        [InlineData("Test", "Tested")]
+        [InlineData("Walk", "Walked")]
         public void ToPastParticiple(string present, string pastParticiple)
         {
             Assert.Equal(pastParticiple, present.ToPastParticiple());
