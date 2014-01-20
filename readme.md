@@ -187,6 +187,13 @@ Many times you want to call `Singularize` and `Pluralize` to prefix a word with 
 "processes".ToQuantity(1) => "1 process"
 ```
 
+You can also pass a second argument, `ShowQuantityAs`, to `ToQuantity` to specify how you want the provided quantity to be outputted. The default value is `ShowQuantityAs.Numeric` which is what we saw above. The other two values are `ShowQuantityAs.Words` and `ShowQuantityAs.None`.
+
+```C#
+"case".ToQuantity(5, ShowQuantityAs.Words) => "five cases"
+"case".ToQuantity(5, ShowQuantityAs.None) => "cases"
+```
+
 ####Ordinalize numbers & strings
 `Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th: 
 

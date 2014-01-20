@@ -1,5 +1,12 @@
 ﻿namespace Humanizer
 {
+    public enum ShowQuantityAs
+    {
+        None = 0,
+        Numeric,
+        Words
+    }
+
     public static class ToQuantityExtensions
     {
         /// <summary>
@@ -7,6 +14,7 @@
         /// </summary>
         /// <param name="input">The word to be prefixes</param>
         /// <param name="quantity">The quantity of the word</param>
+        /// <param name="showQuantityAs">How to show the quantity. Numeric by default</param>
         /// <example>
         /// "request".ToQuantity(0) => "0 requests"
         /// "request".ToQuantity(1) => "1 request"
@@ -15,9 +23,19 @@
         /// "men".ToQuantity(1) => "1 man"
         /// </example>
         /// <returns></returns>
-        public static string ToQuantity(this string input, int quantity)
+        public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
-            return string.Format("{0} {1}", quantity, quantity == 1 ? input.Singularize(Plurality.CouldBeEither) : input.Pluralize(Plurality.CouldBeEither));
+            var transformedInput = quantity == 1
+                ? input.Singularize(Plurality.CouldBeEither)
+                : input.Pluralize(Plurality.CouldBeEither);
+
+            if (showQuantityAs == ShowQuantityAs.None)
+                return transformedInput;
+
+            if (showQuantityAs == ShowQuantityAs.Numeric)
+                return string.Format("{0} {1}", quantity, transformedInput);
+
+            return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
         }
     }
 }
