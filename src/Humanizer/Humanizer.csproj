@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
+    <Compile Include="EnglishTenseExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
