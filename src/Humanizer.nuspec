@@ -8,7 +8,7 @@
     <owners>Mehdi Khalili</owners>
     <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A framework that turns your normal strings, type names, enums and DateTime into a human friendly format and provides human friendly API for DateTime, TimeSpan etc</description>
+    <description>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</description>
     <copyright>Copyright 2012-2014  Mehdi Khalili</copyright>
     <licenseUrl>https://github.com/MehdiK/Humanizer/blob/master/LICENSE</licenseUrl>
     <releaseNotes>
