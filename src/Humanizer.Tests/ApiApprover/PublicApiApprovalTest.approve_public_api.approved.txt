@@ -58,9 +58,10 @@ public class InflectorExtensions
 {
     public string Camelize(string input) { }
     public string Dasherize(string underscoredWord) { }
+    public string Hyphenate(string underscoredWord) { }
     public string Pascalize(string input) { }
-    public string Pluralize(string word) { }
-    public string Singularize(string word) { }
+    public string Pluralize(string word, Humanizer.Plurality plurality) { }
+    public string Singularize(string word, Humanizer.Plurality plurality) { }
     public string Titleize(string input) { }
     public string Underscore(string input) { }
 }
@@ -183,12 +184,28 @@ public class OrdinalizeExtensions
     public string Ordinalize(int number) { }
 }
 
+public enum Plurality
+{
+    CouldBeEither,
+    Plural,
+    Singular,
+    value__,
+}
+
 public class PrepositionsExtensions
 {
     public System.DateTime At(System.DateTime date, int hour, int min, int second, int millisecond) { }
     public System.DateTime AtMidnight(System.DateTime date) { }
     public System.DateTime AtNoon(System.DateTime date) { }
     public System.DateTime In(System.DateTime date, int year) { }
+}
+
+public enum ShowQuantityAs
+{
+    None,
+    Numeric,
+    value__,
+    Words,
 }
 
 public class StringDehumanizeExtensions
@@ -204,7 +221,7 @@ public class StringHumanizeExtensions
 
 public class TimeSpanHumanizeExtensions
 {
-    public string Humanize(System.TimeSpan timeSpan) { }
+    public string Humanize(System.TimeSpan timeSpan, int precesion) { }
 }
 
 public class To
@@ -214,4 +231,9 @@ public class To
     public Humanizer.IStringTransformer TitleCase { get; }
     public Humanizer.IStringTransformer UpperCase { get; }
     public string Transform(string input, Humanizer.IStringTransformer[] transformers) { }
+}
+
+public class ToQuantityExtensions
+{
+    public string ToQuantity(string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs) { }
 }
