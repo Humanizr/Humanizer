@@ -130,7 +130,22 @@ You can call `Humanizes` on a `TimeSpan` to a get human friendly representation 
 TimeSpan.FromMilliseconds(1).Humanize() => "1 millisecond"
 TimeSpan.FromMilliseconds(2).Humanize() => "2 milliseconds"
 TimeSpan.FromDays(1).Humanize() => "1 day"
-TimeSpan.FromDays(14).Humanize() => "2 weeks"
+TimeSpan.FromDays(16).Humanize() => "2 weeks"
+```
+
+There is an optional `precision` parameter for `TimeSpan.Humanize` which allows you to specify the precision of the returned value. 
+The default value of `precision` is 1 which means only the largest time unit is returned like you saw in `TimeSpan.FromDays(16).Humanize()`.
+Here is a few examples of specifying precision:
+
+```C#
+TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only on unit in the provided TimeSpan
+TimeSpan.FromDays(16).Humanize(2) => "2 weeks, 2 days"
+
+// the same TimeSpan value with different precision returns different results
+TimeSpan.FromMilliseconds(1299630020).Humanize() => "2 weeks"
+TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
+TimeSpan.FromMilliseconds(1299630020).Humanize(4) => "2 weeks, 1 day, 1 hour, 30 seconds"
+TimeSpan.FromMilliseconds(1299630020).Humanize(5) => "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds"
 ```
 
 ###Inflector methods
