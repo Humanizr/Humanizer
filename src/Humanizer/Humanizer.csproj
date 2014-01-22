@@ -111,7 +111,6 @@
     <Compile Include="StringDehumanizeExtensions.cs" />
     <Compile Include="StringHumanizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Localisation\TimeSpanPropertyFormat.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="Transformer\ToTitleCase.cs" />
     <Compile Include="Transformer\ToUpperCase.cs" />

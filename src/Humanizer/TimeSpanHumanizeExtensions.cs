@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Humanizer.Configuration;
-using Humanizer.Localisation;
 
 namespace Humanizer
 {
@@ -16,7 +15,7 @@ namespace Humanizer
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
         /// </summary>
         /// <param name="timeSpan"></param>
-        /// <param name="precision">The maximum number of time units to return</param>
+        /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision = 1)
         {
@@ -32,15 +31,15 @@ namespace Humanizer
                 
                 result.Append(timePart);
 
-                timeSpan = DeduceTheLargestUnit(timeSpan);
+                timeSpan = TakeOutTheLargestUnit(timeSpan);
                 if (timeSpan == TimeSpan.Zero)
-                    return result.ToString();
+                    break;
             }
 
             return result.ToString();
         }
 
-        static TimeSpan DeduceTheLargestUnit(TimeSpan timeSpan)
+        static TimeSpan TakeOutTheLargestUnit(TimeSpan timeSpan)
         {
             return timeSpan - LargestUnit(timeSpan);
         }
@@ -134,6 +133,35 @@ namespace Humanizer
                 default:
                     return propertyFormat.Multiple(value);
             }
+        }
+
+        /// <summary>
+        /// Stores a single mapping of a part of the time span (Day, Hour etc.) to its associated
+        /// formatter method for Zero, Single, Multiple.
+        /// </summary>
+        class TimeSpanPropertyFormat
+        {
+            public TimeSpanPropertyFormat(
+                Func<TimeSpan, int> propertySelector,
+                Func<string> single,
+                Func<int, string> multiple)
+            {
+                PropertySelector = propertySelector;
+                Single = single;
+                Multiple = multiple;
+                Zero = () => null;
+            }
+
+            public TimeSpanPropertyFormat(Func<TimeSpan, int> propertySelector, Func<string> zeroFunc)
+            {
+                PropertySelector = propertySelector;
+                Zero = zeroFunc;
+            }
+
+            public Func<TimeSpan, int> PropertySelector { get; private set; }
+            public Func<string> Single { get; private set; }
+            public Func<int, string> Multiple { get; private set; }
+            public Func<string> Zero { get; private set; }
         }
     }
 }
