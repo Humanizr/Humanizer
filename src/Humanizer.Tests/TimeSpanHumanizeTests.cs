@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
@@ -7,108 +8,65 @@ namespace Humanizer.Tests
     {
         public TimeSpanHumanizeTests() : base("en-US") { }
 
-        [Fact]
-        public void TwoWeeks()
+        [Theory]
+        [InlineData(14, "2 weeks")]
+        [InlineData(7, "1 week")]
+        public void Weeks(int days, string expected)
         {
-            var twoWeeks = TimeSpan.FromDays(14);
+            var twoWeeks = TimeSpan.FromDays(days);
             var actual = twoWeeks.Humanize();
-            Assert.Equal("2 weeks", actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void OneWeek()
+        [Theory]
+        [InlineData(6, "6 days")]
+        [InlineData(2, "2 days")]
+        [InlineData(1, "1 day")]
+        public void Days(int days, string expected)
         {
-            var oneWeek = TimeSpan.FromDays(7);
-            var actual = oneWeek.Humanize();
-            Assert.Equal("1 week", actual);
-        }
-
-        [Fact]
-        public void SixDays()
-        {
-            var sixDays = TimeSpan.FromDays(6);
+            var sixDays = TimeSpan.FromDays(days);
             var actual = sixDays.Humanize();
-            Assert.Equal("6 days", actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void TwoDays()
+        [Theory]
+        [InlineData(2, "2 hours")]
+        [InlineData(1, "1 hour")]
+        public void Hours(int hours, string expected)
         {
-            var twoDays = TimeSpan.FromDays(2);
-            var actual = twoDays.Humanize();
-            Assert.Equal("2 days", actual);
-        }
-
-        [Fact]
-        public void OneDay()
-        {
-            var oneDay = TimeSpan.FromDays(1);
-            var actual = oneDay.Humanize();
-            Assert.Equal("1 day", actual);
-        }
-
-        [Fact]
-        public void TwoHours()
-        {
-            var twoHours = TimeSpan.FromHours(2);
+            var twoHours = TimeSpan.FromHours(hours);
             var actual = twoHours.Humanize();
-            Assert.Equal("2 hours", actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void OneHour()
+        [Theory]
+        [InlineData(2, "2 minutes")]
+        [InlineData(1, "1 minute")]
+        public void Minutes(int minutes, string expected)
         {
-            var oneHour = TimeSpan.FromHours(1);
-            var actual = oneHour.Humanize();
-            Assert.Equal("1 hour", actual);
-        }
-
-        [Fact]
-        public void TwoMinutes()
-        {
-            var twoMinutes = TimeSpan.FromMinutes(2);
+            var twoMinutes = TimeSpan.FromMinutes(minutes);
             var actual = twoMinutes.Humanize();
-            Assert.Equal("2 minutes", actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void OneMinute()
+        [Theory]
+        [InlineData(2, "2 seconds")]
+        [InlineData(1, "1 second")]
+        public void Seconds(int seconds, string expected)
         {
-            var oneMinute = TimeSpan.FromMinutes(1);
-            var actual = oneMinute.Humanize();
-            Assert.Equal("1 minute", actual);
-        }
-
-        [Fact]
-        public void TwoSeconds()
-        {
-            var twoSeconds = TimeSpan.FromSeconds(2);
+            var twoSeconds = TimeSpan.FromSeconds(seconds);
             var actual = twoSeconds.Humanize();
-            Assert.Equal("2 seconds", actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void OneSecond()
+        [Theory]
+        [InlineData(2, "2 milliseconds")]
+        [InlineData(1, "1 millisecond")]
+        public void Milliseconds(int ms, string expected)
         {
-            var oneSecond = TimeSpan.FromSeconds(1);
-            var actual = oneSecond.Humanize();
-            Assert.Equal("1 second", actual);
-        }
-
-        [Fact]
-        public void TwoMilliseconds()
-        {
-            var twoMilliseconds = TimeSpan.FromMilliseconds(2);
+            var twoMilliseconds = TimeSpan.FromMilliseconds(ms);
             var actual = twoMilliseconds.Humanize();
-            Assert.Equal("2 milliseconds", actual);
-        }
-
-        [Fact]
-        public void OneMillisecond()
-        {
-            var oneMillisecond = TimeSpan.FromMilliseconds(1);
-            var actual = oneMillisecond.Humanize();
-            Assert.Equal("1 millisecond", actual);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
