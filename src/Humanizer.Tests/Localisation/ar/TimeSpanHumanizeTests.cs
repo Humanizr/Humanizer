@@ -1,13 +1,12 @@
 ﻿using System;
-using Humanizer.Tests;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.ar
 {
-    public class TimeSpanHumanizeExtensionsTests : AmbientCulture
+    public class TimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeExtensionsTests() : base("ar") { }
+        public TimeSpanHumanizeTests() : base("ar") { }
 
         [Theory]
         [InlineData(7, "أسبوع واحد")]
