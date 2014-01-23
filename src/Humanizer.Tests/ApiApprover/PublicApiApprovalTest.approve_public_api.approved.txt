@@ -221,7 +221,7 @@ public class StringHumanizeExtensions
 
 public class TimeSpanHumanizeExtensions
 {
-    public string Humanize(System.TimeSpan timeSpan, int precesion) { }
+    public string Humanize(System.TimeSpan timeSpan, int precision) { }
 }
 
 public class To
