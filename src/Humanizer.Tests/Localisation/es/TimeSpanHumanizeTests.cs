@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.es
 {
-    public class TimeSpanHumanizeExtensionsTests : AmbientCulture
+    public class TimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeExtensionsTests() : base("es-ES") {         }
+        public TimeSpanHumanizeTests() : base("es-ES") {         }
 
         [Fact]
         public void TwoWeeks()

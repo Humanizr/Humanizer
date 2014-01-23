@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Humanizer.Configuration;
-using Humanizer.Localisation;
 
 namespace Humanizer
 {
@@ -15,16 +15,60 @@ namespace Humanizer
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
         /// </summary>
         /// <param name="timeSpan"></param>
+        /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
         /// <returns></returns>
-        /// <remarks>
-        /// This method chooses the largest part of the TimeSpan (Day, Hour, Minute, Second,
-        /// Millisecond) and returns only that part.
-        /// </remarks>
-        public static string Humanize(this TimeSpan timeSpan)
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1)
         {
-            return FormatParameters
-                .Select(format => TryFormat(format, timeSpan))
-                .FirstOrDefault(result => result != null);
+            var result = new StringBuilder();
+            for (int i = 0; i < precision; i++)
+            {
+                var timePart = FormatParameters
+                    .Select(format => TryFormat(format, timeSpan))
+                    .FirstOrDefault(part => part != null);
+            
+                if (result.Length > 0)
+                    result.Append(", ");
+                
+                result.Append(timePart);
+
+                timeSpan = TakeOutTheLargestUnit(timeSpan);
+                if (timeSpan == TimeSpan.Zero)
+                    break;
+            }
+
+            return result.ToString();
+        }
+
+        static TimeSpan TakeOutTheLargestUnit(TimeSpan timeSpan)
+        {
+            return timeSpan - LargestUnit(timeSpan);
+        }
+
+        static TimeSpan LargestUnit(TimeSpan timeSpan)
+        {
+            var days = timeSpan.Days;
+            if (days >= 7)
+                return TimeSpan.FromDays((days/7) * 7);
+            if (days >= 1)
+                return TimeSpan.FromDays(days);
+
+            var hours = timeSpan.Hours;
+            if (hours >= 1)
+                return TimeSpan.FromHours(hours);
+
+            var minutes = timeSpan.Minutes;
+            if (minutes >= 1)
+                return TimeSpan.FromMinutes(minutes);
+
+            var seconds = timeSpan.Seconds;
+            if (seconds >= 1)
+                return TimeSpan.FromSeconds(seconds);
+
+            var milliseconds = timeSpan.Milliseconds;
+            if (milliseconds >= 1)
+                return TimeSpan.FromMilliseconds(milliseconds);
+
+            return TimeSpan.Zero;
         }
 
         /// <summary>
@@ -89,6 +133,35 @@ namespace Humanizer
                 default:
                     return propertyFormat.Multiple(value);
             }
+        }
+
+        /// <summary>
+        /// Stores a single mapping of a part of the time span (Day, Hour etc.) to its associated
+        /// formatter method for Zero, Single, Multiple.
+        /// </summary>
+        class TimeSpanPropertyFormat
+        {
+            public TimeSpanPropertyFormat(
+                Func<TimeSpan, int> propertySelector,
+                Func<string> single,
+                Func<int, string> multiple)
+            {
+                PropertySelector = propertySelector;
+                Single = single;
+                Multiple = multiple;
+                Zero = () => null;
+            }
+
+            public TimeSpanPropertyFormat(Func<TimeSpan, int> propertySelector, Func<string> zeroFunc)
+            {
+                PropertySelector = propertySelector;
+                Zero = zeroFunc;
+            }
+
+            public Func<TimeSpan, int> PropertySelector { get; private set; }
+            public Func<string> Single { get; private set; }
+            public Func<int, string> Multiple { get; private set; }
+            public Func<string> Zero { get; private set; }
         }
     }
 }
