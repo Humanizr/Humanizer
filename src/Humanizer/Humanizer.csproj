@@ -71,7 +71,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CasingExtensions.cs" />
+    <Compile Include="ChangeTense\ChangeTenseBase.cs" />
+    <Compile Include="ChangeTense\IChangeTense.cs" />
+    <Compile Include="ChangeTense\VerbEndsWithE.cs" />
+    <Compile Include="ChangeTense\VerbEndsWithVowelAndConsonant.cs" />
+    <Compile Include="ChangeTense\VerbEndsWithVowelAndY.cs" />
+    <Compile Include="ChangeTense\VerbEndsWithY.cs" />
     <Compile Include="Configuration\Configurator.cs" />
+    <Compile Include="ChangeTense\EnglishTenseExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

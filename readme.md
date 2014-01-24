@@ -331,6 +331,35 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 121.ToOrdinalWords() => "hundred and twenty first"
 ```
 
+###English Tense 
+There are a few methods that help manipulate English verbs. 
+
+####ToPast
+`ToPast` converts a simple present verb into simple past taking irregular verbs into consideration:
+
+```C#
+"Test".ToPast() => "Tested"
+"Cry".ToPast() => "Cried"
+"Love".ToPast() => "Loved"
+
+"Fly".ToPast() => "Flew"
+"Freeze".ToPast() => "Froze"
+"Grind".ToPast() => "Ground"
+```
+
+####ToPastParticiple
+`ToPastParticiple` converts simple past to past participle taking irregular verbs into consideration:
+
+```C#
+"Test".ToPastParticiple() => "Tested"
+"Cry".ToPastParticiple() => "Cried"
+"Love".ToPastParticiple() => "Loved"
+
+"Fly".ToPastParticiple() => "Flown"
+"Freeze".ToPastParticiple() => "Frozen"
+"Grind".ToPastParticiple() => "Ground"
+```
+
 ###Mix this into your framework to simplify your life
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
 
