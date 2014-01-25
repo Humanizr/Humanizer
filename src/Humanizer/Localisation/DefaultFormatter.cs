@@ -67,6 +67,71 @@
             return Resources.GetResource(ResourceKeys.DateHumanize.SingleDayAgo);
         }
 
+        public virtual string DateHumanize_MultipleDaysFromNow(int numberOfDays)
+        {
+            return Format(ResourceKeys.DateHumanize.MultipleDaysFromNow, numberOfDays);
+        }
+
+        public virtual string DateHumanize_MultipleHoursFromNow(int numberOfHours)
+        {
+            return Format(ResourceKeys.DateHumanize.MultipleHoursFromNow, numberOfHours);
+        }
+
+        public virtual string DateHumanize_MultipleMinutesFromNow(int numberOfMinutes)
+        {
+            return Format(ResourceKeys.DateHumanize.MultipleMinutesFromNow, numberOfMinutes);
+        }
+
+        public virtual string DateHumanize_MultipleMonthsFromNow(int numberOfMonths)
+        {
+            return Format(ResourceKeys.DateHumanize.MultipleMonthsFromNow, numberOfMonths);
+        }
+
+        public virtual string DateHumanize_MultipleSecondsFromNow(int numberOfSeconds)
+        {
+            return Format(ResourceKeys.DateHumanize.MultipleSecondsFromNow, numberOfSeconds);
+        }
+
+        public virtual string DateHumanize_MultipleYearsFromNow(int numberOfYears)
+        {
+            return Format(ResourceKeys.DateHumanize.MultipleYearsFromNow, numberOfYears);
+        }
+
+        public virtual string DateHumanize_SingleMinuteFromNow()
+        {
+            return Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteFromNow);
+        }
+
+        public virtual string DateHumanize_SingleHourFromNow()
+        {
+            return Resources.GetResource(ResourceKeys.DateHumanize.SingleHourFromNow);
+        }
+
+        public virtual string DateHumanize_Now()
+        {
+            return Resources.GetResource(ResourceKeys.DateHumanize.Now);
+        }
+
+        public virtual string DateHumanize_SingleMonthFromNow()
+        {
+            return Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow);
+        }
+
+        public virtual string DateHumanize_SingleSecondFromNow()
+        {
+            return Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondFromNow);
+        }
+
+        public virtual string DateHumanize_SingleYearFromNow()
+        {
+            return Resources.GetResource(ResourceKeys.DateHumanize.SingleYearFromNow);
+        }
+
+        public virtual string DateHumanize_SingleDayFromNow()
+        {
+            return Resources.GetResource(ResourceKeys.DateHumanize.SingleDayFromNow);
+        }
+
         public virtual string TimeSpanHumanize_MultipleWeeks(int weeks)
         {
             return Format(ResourceKeys.TimeSpanHumanize.MultipleWeeks, weeks);
