@@ -27,10 +27,75 @@ namespace Humanizer.Tests
             VerifyWithDateInjection(expectedString, deltaFromNow);
         }
 
-        [Fact]
-        public void FutureDates()
+        public void SecondsFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.NotYet), new TimeSpan(0, 0, 1, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleSecondsFromNow), 10), new TimeSpan(0, 0, 0, 10));
+        }
+
+        [Fact]
+        public void OneMinuteFromNow()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteFromNow), new TimeSpan(0, 0, 1, 0));
+        }
+
+        [Fact]
+        public void AFewMinutesFromNow()
+        {
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMinutesFromNow), 10), new TimeSpan(0, 0, 10, 0));
+        }
+
+        [Fact]
+        public void AnHourFromNow()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleHourFromNow), new TimeSpan(0, 1, 10, 0));
+        }
+
+        [Fact]
+        public void HoursFromNow()
+        {
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleHoursFromNow), 10), new TimeSpan(0, 10, 0, 0));
+        }
+
+        [Fact]
+        public void Tomorrow()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleDayFromNow), new TimeSpan(1, 10, 0, 0));
+        }
+
+        [Fact]
+        public void AFewDaysFromNow()
+        {
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleDaysFromNow), 10), new TimeSpan(10, 0, 0, 0));
+        }
+
+        [Fact]
+        public void OneMonthFromNow()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow), new TimeSpan(30, 0, 0, 0));
+        }
+
+        [Fact]
+        public void AFewMonthsFromNow()
+        {
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsFromNow), 2), new TimeSpan(60, 0, 0, 0));
+        }
+
+        [Fact]
+        public void OneYearFromNowIsNotAccureate()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleYearFromNow), new TimeSpan(360, 0, 0, 0));
+        }
+
+        [Fact]
+        public void OneYearFromNow()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleYearFromNow), new TimeSpan(400, 0, 0, 0));
+        }
+
+        [Fact]
+        public void FewYearsFromNow()
+        {
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleYearsFromNow), 2), new TimeSpan(900, 0, 0, 0));
         }
 
         [Fact]
