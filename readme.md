@@ -95,7 +95,7 @@ Hopefully this will help avoid littering enums with unnecessary attributes!
 Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
 ```C#
-public static Enum DehumanizeTo<TTargetEnum>(this string input) 
+public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input) 
 ```
 
 And the usage is:
