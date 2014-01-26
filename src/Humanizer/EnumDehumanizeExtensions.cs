@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Humanizer
 {
@@ -9,22 +11,22 @@ namespace Humanizer
         /// </summary>
         /// <typeparam name="TTargetEnum">The target enum</typeparam>
         /// <param name="input">The string to be converted</param>
+        /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
+        /// <exception cref="KeyNotFoundException">If the provided string cannot be mapped to the target enum</exception>
         /// <returns></returns>
-        public static Enum DehumanizeTo<TTargetEnum>(this string input) 
+        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input) where TTargetEnum : struct, IComparable, IFormattable, IConvertible
         {
-            var values = (TTargetEnum[]) Enum.GetValues(typeof (TTargetEnum));
+            var values = Enum.GetValues(typeof(TTargetEnum)).Cast<TTargetEnum>();
 
             foreach (var value in values)
             {
-                var enumValue = value as Enum;
-                if (enumValue == null)
-                    return null;
+                var @enum = value as Enum;
 
-                if (string.Equals(enumValue.Humanize(), input, StringComparison.OrdinalIgnoreCase))
-                    return enumValue;
+                if (string.Equals(@enum.Humanize(), input, StringComparison.OrdinalIgnoreCase))
+                    return value;
             }
 
-            return null;
+            throw new KeyNotFoundException("Couldn't find a dehumanized enum value that matches the string : " + input);
         }
     }
 }
