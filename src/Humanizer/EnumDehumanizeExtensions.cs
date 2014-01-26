@@ -12,7 +12,7 @@ namespace Humanizer
         /// <typeparam name="TTargetEnum">The target enum</typeparam>
         /// <param name="input">The string to be converted</param>
         /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
-        /// <exception cref="KeyNotFoundException">If the string doesn't match to any of the dehuminized enum values</exception>
+        /// <exception cref="KeyNotFoundException">If the provided string cannot be mapped to the target enum</exception>
         /// <returns></returns>
         public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input) where TTargetEnum : struct, IComparable, IFormattable, IConvertible
         {
