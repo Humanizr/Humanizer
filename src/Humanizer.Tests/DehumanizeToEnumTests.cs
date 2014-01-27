@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
     public class DehumanizeToEnumTests
     {
-        [Fact]
-        public void HonorsDescriptionAttribute()
-        {
-            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.CustomDescription.DehumanizeTo<EnumUnderTest>());
-        }
-
         [Fact]
         public void ThrowsForNonEnums()
         {
@@ -21,29 +16,30 @@ namespace Humanizer.Tests
         [Fact]
         public void ThrowsForEnumNoMatch()
         {
-            Assert.Throws<KeyNotFoundException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyEnum>());
+            Assert.Throws<CannotMapToTargetException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyEnum>());
         }
 
         [Fact]
-        public void CanHumanizeMembersWithoutDescriptionAttribute()
+        public void HonorsDescriptionAttribute()
+        {
+            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.CustomDescription.DehumanizeTo<EnumUnderTest>());
+        }
+
+        [Fact]
+        public void DehumanizeMembersWithoutDescriptionAttribute()
         {
             Assert.Equal(EnumUnderTest.MemberWithoutDescriptionAttribute, EnumTestsResources.MemberWithoutDescriptionAttributeSentence.DehumanizeTo<EnumUnderTest>());
         }
 
-        [Fact]
-        public void CanApplyTitleCasingOnEnumHumanization()
+        [Theory]
+        [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeTitle, EnumUnderTest.MemberWithoutDescriptionAttribute)]
+        [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase, EnumUnderTest.MemberWithoutDescriptionAttribute)]
+        [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute)]
+        public void IsCaseInsensitive(string input, EnumUnderTest expectedEnum)
         {
             Assert.Equal(
-                EnumUnderTest.MemberWithoutDescriptionAttribute,
-                EnumTestsResources.MemberWithoutDescriptionAttributeTitle.DehumanizeTo<EnumUnderTest>());
-        }
-
-        [Fact]
-        public void CanApplyLowerCaseCasingOnEnumHumanization()
-        {
-            Assert.Equal(
-                EnumUnderTest.MemberWithoutDescriptionAttribute,
-                EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase.DehumanizeTo<EnumUnderTest>());
+                expectedEnum,
+                input.DehumanizeTo<EnumUnderTest>());
         }
 
         [Fact]

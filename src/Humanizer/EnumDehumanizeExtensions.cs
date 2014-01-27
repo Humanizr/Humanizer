@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Humanizer
@@ -12,21 +11,41 @@ namespace Humanizer
         /// <typeparam name="TTargetEnum">The target enum</typeparam>
         /// <param name="input">The string to be converted</param>
         /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
-        /// <exception cref="KeyNotFoundException">If the provided string cannot be mapped to the target enum</exception>
+        /// <exception cref="CannotMapToTargetException">If the provided string cannot be mapped to the target enum</exception>
         /// <returns></returns>
-        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input) where TTargetEnum : struct, IComparable, IFormattable, IConvertible
+        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input) 
+            where TTargetEnum : struct, IComparable, IFormattable, IConvertible
         {
             var values = Enum.GetValues(typeof(TTargetEnum)).Cast<TTargetEnum>();
 
             foreach (var value in values)
             {
                 var @enum = value as Enum;
-
                 if (string.Equals(@enum.Humanize(), input, StringComparison.OrdinalIgnoreCase))
                     return value;
             }
 
-            throw new KeyNotFoundException("Couldn't find a dehumanized enum value that matches the string : " + input);
+            throw new CannotMapToTargetException("Couldn't find any enum member that matches the string " + input);
+        }
+    }
+
+    /// <summary>
+    /// This is thrown on String.DehumanizeTo enum when the provided string cannot be mapped to the target enum
+    /// </summary>
+    public class CannotMapToTargetException : Exception
+    {
+        public CannotMapToTargetException()
+        {
+        }
+
+        public CannotMapToTargetException(string message)
+            : base(message)
+        {
+        }
+
+        public CannotMapToTargetException(string message, Exception inner)
+            : base(message, inner)
+        {
         }
     }
 }
