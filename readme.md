@@ -101,7 +101,7 @@ public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
 And the usage is:
 
 ```C#
-"Member without description attribute".Dehumanize() => EnumUnderTest.MemberWithoutDescriptionAttribute
+"Member without description attribute".DehumanizeTo<EnumUnderTest>() => EnumUnderTest.MemberWithoutDescriptionAttribute
 ```
 
 And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
