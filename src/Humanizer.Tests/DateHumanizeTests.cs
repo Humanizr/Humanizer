@@ -27,6 +27,13 @@ namespace Humanizer.Tests
             VerifyWithDateInjection(expectedString, deltaFromNow);
         }
 
+        [Fact]
+        public void OneSecondFromNow()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondFromNow), new TimeSpan(0, 0, 0, 1));
+        }
+
+        [Fact]
         public void SecondsFromNow()
         {
             Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleSecondsFromNow), 10), new TimeSpan(0, 0, 0, 10));
@@ -103,7 +110,7 @@ namespace Humanizer.Tests
         {
             Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondAgo), new TimeSpan(0, 0, 0, -1));
         }
-
+        
         [Fact]
         public void SecondsAgo()
         {
