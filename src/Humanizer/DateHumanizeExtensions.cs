@@ -41,11 +41,11 @@ namespace Humanizer
 
             double delta = Math.Abs(ts.TotalSeconds);
 
-
             if (delta < 1*minute)
             {
                 if(isFuture)
                     return ts.Seconds == 1 ? formatter.DateHumanize_SingleSecondFromNow() : formatter.DateHumanize_MultipleSecondsFromNow(ts.Seconds);
+
                 return ts.Seconds == 1 ? formatter.DateHumanize_SingleSecondAgo() : formatter.DateHumanize_MultipleSecondsAgo(ts.Seconds);
             }
 
@@ -73,6 +73,7 @@ namespace Humanizer
                 
                 if(isFuture)
                     return months <= 1 ? formatter.DateHumanize_SingleMonthFromNow() : formatter.DateHumanize_MultipleMonthsFromNow(months);
+
                 return months <= 1 ? formatter.DateHumanize_SingleMonthAgo() : formatter.DateHumanize_MultipleMonthsAgo(months);
             }
 
@@ -80,6 +81,7 @@ namespace Humanizer
             
             if(isFuture)
                 return years <= 1 ? formatter.DateHumanize_SingleYearFromNow() : formatter.DateHumanize_MultipleYearsFromNow(years);
+
             return years <= 1 ? formatter.DateHumanize_SingleYearAgo() : formatter.DateHumanize_MultipleYearsAgo(years);
         }
     }
