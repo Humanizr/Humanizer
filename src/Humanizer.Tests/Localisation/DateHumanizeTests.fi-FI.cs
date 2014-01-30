@@ -76,14 +76,5 @@ namespace Humanizer.Tests.Localisation
             var date = DateTime.UtcNow.AddYears(years);
             Assert.Equal(expected, date.Humanize());
         }
-
-        [Fact]
-        public void NotYet()
-        {
-			// does not yet mean in future?
-            var date = DateTime.UtcNow.AddDays(1);
-
-			Assert.Equal("ei vielä", date.Humanize());
-        }
     }
 }

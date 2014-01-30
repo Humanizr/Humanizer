@@ -15,7 +15,6 @@
         string DateHumanize_MultipleYearsAgo(int numberOfYears);
         string DateHumanize_SingleMinuteAgo();
         string DateHumanize_SingleHourAgo();
-        string DateHumanize_NotYet();
         string DateHumanize_SingleMonthAgo();
         string DateHumanize_SingleSecondAgo();
         string DateHumanize_SingleYearAgo();

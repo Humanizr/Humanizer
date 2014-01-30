@@ -67,11 +67,5 @@ namespace Humanizer.Tests.Localisation.ptBR
         {
             Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
         }
-
-        [Fact]
-        public void NotYet()
-        {
-            Assert.Equal("ainda não", DateTime.UtcNow.AddDays(1).Humanize());
-        }
     }
 }

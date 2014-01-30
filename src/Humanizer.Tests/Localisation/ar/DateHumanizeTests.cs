@@ -68,11 +68,5 @@ namespace Humanizer.Tests.Localisation.ar
         {
             Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
         }
-
-        [Fact]
-        public void NotYet()
-        {
-            Assert.Equal("ليس بعد", DateTime.UtcNow.AddDays(1).Humanize());
-        }
     }
 }
