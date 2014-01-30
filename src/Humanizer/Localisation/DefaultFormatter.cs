@@ -42,11 +42,6 @@
             return Resources.GetResource(ResourceKeys.DateHumanize.SingleHourAgo);
         }
 
-        public virtual string DateHumanize_NotYet()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.NotYet);
-        }
-
         public virtual string DateHumanize_SingleMonthAgo()
         {
             return Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthAgo);

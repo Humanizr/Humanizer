@@ -44,11 +44,6 @@
                 get { return "DateHumanize_SingleHourAgo"; }
             }
 
-            public static string NotYet
-            {
-                get { return "DateHumanize_NotYet"; }
-            }
-
             public static string SingleMonthAgo
             {
                 get { return "DateHumanize_SingleMonthAgo"; }
