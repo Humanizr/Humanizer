@@ -107,10 +107,14 @@ And the usage is:
 And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
 
 ###Humanize DateTime
-This is borrowed from [StackOverFlow algorithm](http://stackoverflow.com/a/12/141101) - although I had to apply some minor fixes on top of it. I am not going to bore you with all the examples as I am sure you know what this does: you basically give it an instance of `DateTime` and get back a string telling how far back in time that is:
+You can `Humanize` an instance of `DateTime` and get back a string telling how far back or forward in time that is:
 
 ```C#
 DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
+DateTime.UtcNow.AddHours(-2).Humanize() => "2 hours ago"
+
+DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
+DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
 ```
 
 Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base. Here is the API signature:
@@ -119,7 +123,7 @@ Humanizer supports local as well as UTC dates. You could also provide the date y
 public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null)
 ```
 
-For dates Humanizer also supports localization.
+Quite a few translations are available for humanized dates.
 
 **No dehumanization for dates as the human friendly date is not reversible**
 
