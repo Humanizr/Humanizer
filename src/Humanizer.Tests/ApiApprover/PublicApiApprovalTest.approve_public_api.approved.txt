@@ -84,18 +84,30 @@ public class DefaultFormatter
 {
     public DefaultFormatter() { }
     public string DateHumanize_MultipleDaysAgo(int numberOfDays) { }
+    public string DateHumanize_MultipleDaysFromNow(int numberOfDays) { }
     public string DateHumanize_MultipleHoursAgo(int numberOfHours) { }
+    public string DateHumanize_MultipleHoursFromNow(int numberOfHours) { }
     public string DateHumanize_MultipleMinutesAgo(int numberOfMinutes) { }
+    public string DateHumanize_MultipleMinutesFromNow(int numberOfMinutes) { }
     public string DateHumanize_MultipleMonthsAgo(int numberOfMonths) { }
+    public string DateHumanize_MultipleMonthsFromNow(int numberOfMonths) { }
     public string DateHumanize_MultipleSecondsAgo(int numberOfSeconds) { }
+    public string DateHumanize_MultipleSecondsFromNow(int numberOfSeconds) { }
     public string DateHumanize_MultipleYearsAgo(int numberOfYears) { }
-    public string DateHumanize_NotYet() { }
+    public string DateHumanize_MultipleYearsFromNow(int numberOfYears) { }
+    public string DateHumanize_Now() { }
     public string DateHumanize_SingleDayAgo() { }
+    public string DateHumanize_SingleDayFromNow() { }
     public string DateHumanize_SingleHourAgo() { }
+    public string DateHumanize_SingleHourFromNow() { }
     public string DateHumanize_SingleMinuteAgo() { }
+    public string DateHumanize_SingleMinuteFromNow() { }
     public string DateHumanize_SingleMonthAgo() { }
+    public string DateHumanize_SingleMonthFromNow() { }
     public string DateHumanize_SingleSecondAgo() { }
+    public string DateHumanize_SingleSecondFromNow() { }
     public string DateHumanize_SingleYearAgo() { }
+    public string DateHumanize_SingleYearFromNow() { }
     public string TimeSpanHumanize_MultipleDays(int days) { }
     public string TimeSpanHumanize_MultipleHours(int hours) { }
     public string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds) { }
@@ -114,18 +126,30 @@ public class DefaultFormatter
 public interface IFormatter
 {
     string DateHumanize_MultipleDaysAgo(int numberOfDays);
+    string DateHumanize_MultipleDaysFromNow(int numberOfDays);
     string DateHumanize_MultipleHoursAgo(int numberOfHours);
+    string DateHumanize_MultipleHoursFromNow(int numberOfHours);
     string DateHumanize_MultipleMinutesAgo(int numberOfMinutes);
+    string DateHumanize_MultipleMinutesFromNow(int numberOfMinutes);
     string DateHumanize_MultipleMonthsAgo(int numberOfMonths);
+    string DateHumanize_MultipleMonthsFromNow(int numberOfMonths);
     string DateHumanize_MultipleSecondsAgo(int numberOfSeconds);
+    string DateHumanize_MultipleSecondsFromNow(int numberOfSeconds);
     string DateHumanize_MultipleYearsAgo(int numberOfYears);
-    string DateHumanize_NotYet();
+    string DateHumanize_MultipleYearsFromNow(int numberOfYears);
+    string DateHumanize_Now();
     string DateHumanize_SingleDayAgo();
+    string DateHumanize_SingleDayFromNow();
     string DateHumanize_SingleHourAgo();
+    string DateHumanize_SingleHourFromNow();
     string DateHumanize_SingleMinuteAgo();
+    string DateHumanize_SingleMinuteFromNow();
     string DateHumanize_SingleMonthAgo();
+    string DateHumanize_SingleMonthFromNow();
     string DateHumanize_SingleSecondAgo();
+    string DateHumanize_SingleSecondFromNow();
     string DateHumanize_SingleYearAgo();
+    string DateHumanize_SingleYearFromNow();
     string TimeSpanHumanize_MultipleDays(int days);
     string TimeSpanHumanize_MultipleHours(int hours);
     string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds);
