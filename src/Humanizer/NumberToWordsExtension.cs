@@ -126,7 +126,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// 3501.ToWords() -> "ثلاث آلاف و خمس مائة و واحد"
+        /// 3501.ToWords() -> "ثلاثة آلاف و خمسمائة و واحد"
         /// </summary>
         /// <param name="number">Number to be turned to words in Arabic</param>
         /// <returns></returns>
