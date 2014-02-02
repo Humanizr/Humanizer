@@ -37,7 +37,7 @@ namespace Humanizer.Tests
             Assert.Equal("ثلاثة عشر", 13.ToArabicWords());
             Assert.Equal("مئتان و خمسون", 250.ToArabicWords());
             Assert.Equal("سبعة و ثلاثون ألفاً و تسعمائة و واحد و ثمانون", 37981.ToArabicWords());
-
+            Assert.Equal("مليون", 1000000.ToArabicWords());
         }
     }
 }
