@@ -16,13 +16,13 @@ namespace Humanizer
             switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
             {
                 case "ar":
-                    return ToWordsArabic(number);
+                    return ToArabicWords(number);
                 default:
-                    return ToWordsEnglish(number);
+                    return ToEnglishWords(number);
             }
         }
 
-        public static string ToWordsEnglish(int number)
+        private static string ToEnglishWords(int number)
         {
             if (number == 0)
                 return "zero";
@@ -72,7 +72,7 @@ namespace Humanizer
             return string.Join(" ", parts.ToArray());
         }
 
-        public static string ToWordsArabic(int number)
+        private static string ToArabicWords(int number)
         {
             string[] arabicGroup = { "مائة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون" };
             string[] arabicAppendedGroup = { "", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً" };
