@@ -4,6 +4,9 @@ using System.Globalization;
 
 namespace Humanizer
 {
+    /// <summary>
+    /// Transform a number into words; e.g. 1 => one
+    /// </summary>
     public static class NumberToWordsExtension
     {
         /// <summary>
@@ -168,10 +171,7 @@ namespace Humanizer
                                     result = String.Format("{0} {1}", arabicPluralGroups[groupLevel], result);
                                 else
                                 {
-                                    if (result != String.Empty)
-                                        result = String.Format("{0} {1}", arabicAppendedGroup[groupLevel], result);
-                                    else
-                                        result = String.Format("{0} {1}", arabicGroup[groupLevel], result);
+                                    result = String.Format("{0} {1}", result != String.Empty ? arabicAppendedGroup[groupLevel] : arabicGroup[groupLevel], result);
                                 }
                             }
                             else
