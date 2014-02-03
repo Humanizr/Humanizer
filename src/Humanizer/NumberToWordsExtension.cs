@@ -13,12 +13,25 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToWords(this int number)
         {
-            switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+           return ToWords(number, NumeralSystem.Latin);
+        }
+
+        /// <summary>
+        /// 3501.ToWords() -> "three thousand five hundred and one"
+        /// </summary>
+        /// <param name="number">Number to be turned to words</param>
+        /// <param name="system">Numeral system to be used</param>
+        /// <returns></returns>
+        public static string ToWords(this int number, NumeralSystem system)
+        {
+            switch (system)
             {
-                case "ar":
+                case NumeralSystem.Arabic:
                     return ToArabicWords(number);
-                default:
+                case NumeralSystem.Latin:
                     return ToEnglishWords(number);
+                default:
+                    throw new CultureNotFoundException();
             }
         }
 
