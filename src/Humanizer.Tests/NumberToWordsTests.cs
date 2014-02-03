@@ -33,7 +33,7 @@ namespace Humanizer.Tests
         [InlineData("اثنان", 2)]
         [InlineData("اثنان و عشرون", 22)]
         [InlineData("أحد عشر", 11)]
-        [InlineData("ثلاثة آلاف و خمسمائة و واحد", 3501)]
+        [InlineData("ثلاثة آلاف و خمس مئة و واحد", 3501)]
         [InlineData("مليون و واحد", 1000001)]
         public void ToWordsArabic(string expected, int number)
         {
