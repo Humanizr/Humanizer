@@ -10,19 +10,9 @@ namespace Humanizer
         /// 3501.ToWords() -> "three thousand five hundred and one"
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
-        /// <returns></returns>
-        public static string ToWords(this int number)
-        {
-           return ToWords(number, NumeralSystem.Latin);
-        }
-
-        /// <summary>
-        /// 3501.ToWords() -> "three thousand five hundred and one"
-        /// </summary>
-        /// <param name="number">Number to be turned to words</param>
         /// <param name="system">Numeral system to be used</param>
         /// <returns></returns>
-        public static string ToWords(this int number, NumeralSystem system)
+        public static string ToWords(this int number, NumeralSystem system = NumeralSystem.Latin)
         {
             switch (system)
             {
