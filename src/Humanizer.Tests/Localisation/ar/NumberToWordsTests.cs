@@ -1,4 +1,5 @@
 ﻿using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.ar
 {
@@ -6,22 +7,17 @@ namespace Humanizer.Tests.Localisation.ar
     {
         public NumberToWordsTests() : base("ar") { }
 
-        [Fact]
-        public void ToWords()
+        [Theory]
+        [InlineData("صفر", 0)]
+        [InlineData("واحد", 1)]
+        [InlineData("اثنان", 2)]
+        [InlineData("اثنان و عشرون", 22)]
+        [InlineData("أحد عشر", 11)]
+        [InlineData("ثلاثة آلاف و خمسمائة و واحد", 3501)]
+        [InlineData("مليون و واحد", 1000001)]
+        public void ToWords(string expected, int number)
         {
-            Assert.Equal("صفر", 0.ToWords());
-            Assert.Equal("واحد", 1.ToWords());
-            Assert.Equal("اثنان", 2.ToWords());
-            Assert.Equal("اثنان و عشرون", 22.ToWords());
-            Assert.Equal("أحد عشر", 11.ToWords());
-            Assert.Equal("مائة و اثنان و عشرون", 122.ToWords());
-            Assert.Equal("ثلاثة آلاف و خمسمائة و واحد", 3501.ToWords());
-            Assert.Equal("سبعة و ثلاثون", 37.ToWords());
-            Assert.Equal("ثلاثة عشر", 13.ToWords());
-            Assert.Equal("مئتان و خمسون", 250.ToWords());
-            Assert.Equal("سبعة و ثلاثون ألفاً و تسعمائة و واحد و ثمانون", 37981.ToWords());
-            Assert.Equal("مليون", 1000000.ToWords());
-            Assert.Equal("مليون و واحد", 1000001.ToWords());
+            Assert.Equal(expected, number.ToWords());
         }
     }
 }
