@@ -22,22 +22,5 @@ namespace Humanizer.Tests
             Assert.Equal("one hundred thousand", 100000.ToWords());
             Assert.Equal("one million", 1000000.ToWords());
         }
-
-        [Fact]
-        public void ToWodrsArabic()
-        {
-            Assert.Equal("صفر", 0.ToArabicWords());
-            Assert.Equal("واحد", 1.ToArabicWords());
-            Assert.Equal("اثنان", 2.ToArabicWords());
-            Assert.Equal("اثنان و عشرون", 22.ToArabicWords());
-            Assert.Equal("أحد عشر", 11.ToArabicWords());
-            Assert.Equal("مائة و اثنان و عشرون", 122.ToArabicWords());
-            Assert.Equal("ثلاثة آلاف و خمسمائة و واحد", 3501.ToArabicWords());
-            Assert.Equal("سبعة و ثلاثون", 37.ToArabicWords());
-            Assert.Equal("ثلاثة عشر", 13.ToArabicWords());
-            Assert.Equal("مئتان و خمسون", 250.ToArabicWords());
-            Assert.Equal("سبعة و ثلاثون ألفاً و تسعمائة و واحد و ثمانون", 37981.ToArabicWords());
-            Assert.Equal("مليون", 1000000.ToArabicWords());
-        }
     }
 }

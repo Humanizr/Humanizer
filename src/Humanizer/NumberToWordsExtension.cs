@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Humanizer
 {
@@ -11,6 +12,17 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <returns></returns>
         public static string ToWords(this int number)
+        {
+            switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+            {
+                case "ar":
+                    return ToWordsArabic(number);
+                default:
+                    return ToWordsEnglish(number);
+            }
+        }
+
+        public static string ToWordsEnglish(int number)
         {
             if (number == 0)
                 return "zero";
@@ -60,128 +72,117 @@ namespace Humanizer
             return string.Join(" ", parts.ToArray());
         }
 
-        private static string ProcessArabicGroup(int groupNumber, int groupLevel, int number)
-        {
-            string[] Ones = { "", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر" };
-            string[] Tens = { "", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون" };
-            string[] Hundreds = { "", "مائة", "مئتان", "ثلاثمائة", "أربعمائة", "خمسمائة", "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة" };
-            string[] arabicAppendedTwos = { "مئتا", "ألفا", "مليونا", "مليارا", "تريليونا", "كوادريليونا", "كوينتليونا", "سكستيليونا" };
-            string[] arabicTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان" };
-
-            int tens = groupNumber % 100;
-            int hundreds = groupNumber / 100;
-            string result = String.Empty;
-
-            if (hundreds > 0)
-            {
-                if (tens == 0 && hundreds == 2)
-                    result = arabicAppendedTwos[0];
-                else
-                    result = Hundreds[hundreds];
-            }
-
-            if (tens > 0)
-            {
-                if (tens < 20)
-                {
-                    if (tens == 2 && hundreds == 0 && groupLevel > 0)
-                    {
-                        if (number == 2000 || number == 2000000 || number == 2000000000)
-                            result = arabicAppendedTwos[groupLevel];
-                        else
-                            result = arabicTwos[groupLevel];
-                    }
-                    else
-                    {
-                        if (result != String.Empty)
-                            result += " و ";
-
-                        if (tens == 1 && groupLevel > 0 && hundreds == 0)
-                            result += " ";
-                        else
-                            result += Ones[tens];
-                    }
-                }
-                else
-                {
-                    int ones = tens % 10;
-                    tens = (tens / 10);
-
-                    if (ones > 0)
-                    {
-                        if (result != String.Empty)
-                            result += " و ";
-
-                        result += Ones[ones];
-                    }
-
-                    if (result != String.Empty)
-                        result += " و ";
-
-                    result += Tens[tens];
-                }
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// 3501.ToWords() -> "ثلاثة آلاف و خمسمائة و واحد"
-        /// </summary>
-        /// <param name="number">Number to be turned to words in Arabic</param>
-        /// <returns></returns>
-        public static string ToArabicWords(this int number)
+        public static string ToWordsArabic(int number)
         {
             string[] arabicGroup = { "مائة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون" };
             string[] arabicAppendedGroup = { "", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً" };
             string[] arabicPluralGroups = { "", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات", "كوينتليونات", "سكستيليونات" };
+            string[] onesGroup = { "", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر" };
+            string[] tensGroup = { "", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون" };
+            string[] hundredsGroup = { "", "مائة", "مئتان", "ثلاثمائة", "أربعمائة", "خمسمائة", "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة" };
+            string[] arabicAppendedTwos = { "مئتا", "ألفا", "مليونا", "مليارا", "تريليونا", "كوادريليونا", "كوينتليونا", "سكستيليونا" };
+            string[] arabicTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان" };
 
             if (number == 0)
                 return "صفر";
 
             string result = String.Empty;
-            int group = 0;
+            int groupLevel = 0;
 
             while (number >= 1)
             {
-                int numberToProcess = number % 1000;
+                int groupNumber = number % 1000;
                 number /= 1000;
 
-                string groupDescription = ProcessArabicGroup(numberToProcess, group, number);
+                int tens = groupNumber % 100;
+                int hundreds = groupNumber / 100;
+                string process = String.Empty;
+
+                if (hundreds > 0)
+                {
+                    if (tens == 0 && hundreds == 2)
+                        process = arabicAppendedTwos[0];
+                    else
+                        process = hundredsGroup[hundreds];
+                }
+
+                if (tens > 0)
+                {
+                    if (tens < 20)
+                    {
+                        if (tens == 2 && hundreds == 0 && groupLevel > 0)
+                        {
+                            if (number == 2000 || number == 2000000 || number == 2000000000)
+                                process = arabicAppendedTwos[groupLevel];
+                            else
+                                process = arabicTwos[groupLevel];
+                        }
+                        else
+                        {
+                            if (process != String.Empty)
+                                process += " و ";
+
+                            if (tens == 1 && groupLevel > 0 && hundreds == 0)
+                                process += " ";
+                            else
+                                process += onesGroup[tens];
+                        }
+                    }
+                    else
+                    {
+                        int ones = tens % 10;
+                        tens = (tens / 10);
+
+                        if (ones > 0)
+                        {
+                            if (process != String.Empty)
+                                process += " و ";
+
+                            process += onesGroup[ones];
+                        }
+
+                        if (process != String.Empty)
+                            process += " و ";
+
+                        process += tensGroup[tens];
+                    }
+                }
+
+                string groupDescription = process;
 
                 if (groupDescription != String.Empty)
                 {
-                    if (group > 0)
+                    if (groupLevel > 0)
                     {
                         if (result != String.Empty)
                             result = String.Format("{0} {1}", "و", result);
 
-                        if (numberToProcess != 2)
+                        if (groupNumber != 2)
                         {
-                            if (numberToProcess % 100 != 1)
+                            if (groupNumber % 100 != 1)
                             {
-                                if (numberToProcess >= 3 && numberToProcess <= 10)
-                                    result = String.Format("{0} {1}", arabicPluralGroups[group], result);
+                                if (groupNumber >= 3 && groupNumber <= 10)
+                                    result = String.Format("{0} {1}", arabicPluralGroups[groupLevel], result);
                                 else
                                 {
                                     if (result != String.Empty)
-                                        result = String.Format("{0} {1}", arabicAppendedGroup[group], result);
+                                        result = String.Format("{0} {1}", arabicAppendedGroup[groupLevel], result);
                                     else
-                                        result = String.Format("{0} {1}", arabicGroup[group], result);
+                                        result = String.Format("{0} {1}", arabicGroup[groupLevel], result);
                                 }
                             }
                             else
                             {
-                                result = String.Format("{0} {1}", arabicGroup[group], result);
+                                result = String.Format("{0} {1}", arabicGroup[groupLevel], result);
                             }
                         }
                     }
                     result = String.Format("{0} {1}", groupDescription, result);
                 }
-                group++;
+                groupLevel++;
             }
 
-            return result.TrimEnd();
+            return result.Trim();
         }
     }
 }

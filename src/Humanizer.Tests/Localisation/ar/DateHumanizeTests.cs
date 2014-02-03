@@ -8,7 +8,6 @@ namespace Humanizer.Tests.Localisation.ar
     {
         public DateHumanizeTests() : base("ar") { }
 
-
         [Theory]
         [InlineData(-1, "أمس")]
         [InlineData(-2, "منذ يومين")]
