@@ -21,6 +21,7 @@ namespace Humanizer.Tests.Localisation.ar
             Assert.Equal("مئتان و خمسون", 250.ToWords());
             Assert.Equal("سبعة و ثلاثون ألفاً و تسعمائة و واحد و ثمانون", 37981.ToWords());
             Assert.Equal("مليون", 1000000.ToWords());
+            Assert.Equal("مليون و واحد", 1000001.ToWords());
         }
     }
 }
