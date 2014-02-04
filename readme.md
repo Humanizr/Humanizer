@@ -3,7 +3,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 ###Installation
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
-Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
+Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Windows 8 applications and higher. 
 Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
 
 ###Humanize String
