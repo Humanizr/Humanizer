@@ -20,10 +20,8 @@ namespace Humanizer
             {
                 case "ar":
                     return ToArabicWords(number);
-                case "en":
-                    return ToEnglishWords(number);
                 default:
-                    throw new Exception();
+                    return ToEnglishWords(number);
             }
         }
 
