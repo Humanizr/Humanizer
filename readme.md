@@ -421,21 +421,39 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 ```
 
 ##How to contribute?
-Your contribution to Humanizer would be very welcome. If you find a bug, please raise it as an issue. Even better fix it and send me a pull request. If you like to help me out with existing bugs and feature requests just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues) and grab and fix one. I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.
+Your contribution to Humanizer would be very welcome. 
+If you find a bug, please raise it as an issue. 
+Even better fix it and send me a pull request. 
+If you like to help me out with existing bugs and feature requests just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues) and grab and fix one. 
+I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.
 
-I use [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. So if you want to contribute, fork the repo, fix an issue and send a PR.
+###Contribution guideline
+I use [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. 
+So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue and send a PR.
 
-####Need your help with localisation
-One area Humanizer could always use your help is localisation. Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) French, Belgium, Spanish, Greek, German, Arabic, Russian and Romanian languages for `Date.Humanize` method. 
-Humanizer could definitely do with more translations. `TimeSpan.Humanize` also requires translations.
+Pull requests are code reviewed. Here is what I look for in your pull request:
 
-To add a translation, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
+ - Clean implementation
+ - Very little or no comments because comments shouldn't be needed if you write clean code
+ - Xml documentation for new extensions or updating the existing documentation when you make a change
+ - Proper unit test coverage 
+ - Adherence to the existing coding styles
+ - Updated readme if you change an existing feature or add something
+
+###Need your help with localisation
+One area Humanizer could always use your help is localisation. 
+Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) quite a few localisations for `Date.Humanize` and a few for `TimeSpan.Humanize` methods. 
+There is also ongoing effort to add localisation to `ToWords` extension method which currently only supports English and Arabic.
+
+Humanizer could definitely do with more translations. To add a translation, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
 
 Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
 Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
 In cases like this in addition to creating a resource file you should also subclass [`DefaultFormatter`](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/DefaultFormatter.cs) in a class that represents your language; 
 e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. We think overriding the `GetResourceKey` method should be enough. To see how to do that check out `RomanianFormatter` and `RussianFormatter`. 
 Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
+
+Translations for ToWords method are currently done in code as there is a huge difference between the way different languages deal with number words.
 
 ### Continuous Integration from TeamCity
 Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.
