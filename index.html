@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,17 +16,18 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Humanizer</h1>
-        <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</p>
-
-        <p class="view"><a href="https://github.com/MehdiK/Humanizer">View the Project on GitHub <small>MehdiK/Humanizer</small></a></p>
-
+        <h1 class="header">Humanizer</h1>
+        <p class="header">Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</p>
 
         <ul>
-          <li><a href="https://github.com/MehdiK/Humanizer/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/MehdiK/Humanizer/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/MehdiK/Humanizer">View On <strong>GitHub</strong></a></li>
+          <li class="download"><a class="buttons" href="https://github.com/MehdiK/Humanizer/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/MehdiK/Humanizer/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/MehdiK/Humanizer">View On GitHub</a></li>
         </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/MehdiK">MehdiK</a></p>
+
+
       </header>
       <section>
         <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.</p>
@@ -459,23 +461,45 @@ Here is a few examples of specifying precision:</p>
 <h2>
 <a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a>How to contribute?</h2>
 
-<p>Your contribution to Humanizer would be very welcome. If you find a bug, please raise it as an issue. Even better fix it and send me a pull request. If you like to help me out with existing bugs and feature requests just check out the list of <a href="https://github.com/MehdiK/Humanizer/issues">issues</a> and grab and fix one. I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.</p>
+<p>Your contribution to Humanizer would be very welcome. 
+If you find a bug, please raise it as an issue. 
+Even better fix it and send me a pull request. 
+If you like to help me out with existing bugs and feature requests just check out the list of <a href="https://github.com/MehdiK/Humanizer/issues">issues</a> and grab and fix one. 
+I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.</p>
 
-<p>I use <a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub flow</a> for pull requests. So if you want to contribute, fork the repo, fix an issue and send a PR.</p>
+<h3>
+<a name="contribution-guideline" class="anchor" href="#contribution-guideline"><span class="octicon octicon-link"></span></a>Contribution guideline</h3>
 
-<h4>
-<a name="need-your-help-with-localisation" class="anchor" href="#need-your-help-with-localisation"><span class="octicon octicon-link"></span></a>Need your help with localisation</h4>
+<p>I use <a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub flow</a> for pull requests. 
+So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue and send a PR.</p>
 
-<p>One area Humanizer could always use your help is localisation. Currently Humanizer <a href="https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties">supports</a> French, Belgium, Spanish, Greek, German, Arabic, Russian and Romanian languages for <code>Date.Humanize</code> method. 
-Humanizer could definitely do with more translations. <code>TimeSpan.Humanize</code> also requires translations.</p>
+<p>Pull requests are code reviewed. Here is what I look for in your pull request:</p>
 
-<p>To add a translation, fork the repository if you haven't done yet, duplicate the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx">resources.resx</a> file, add your target <a href="http://msdn.microsoft.com/en-us/library/hh441729.aspx">locale code</a> to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.</p>
+<ul>
+<li>Clean implementation</li>
+<li>Very little or no comments because comments shouldn't be needed if you write clean code</li>
+<li>Xml documentation for new extensions or updating the existing documentation when you make a change</li>
+<li>Proper unit test coverage </li>
+<li>Adherence to the existing coding styles</li>
+<li>Updated readme if you change an existing feature or add something</li>
+</ul><p>Also please link to the issue(s) you're fixing from your PR description.</p>
+
+<h3>
+<a name="need-your-help-with-localisation" class="anchor" href="#need-your-help-with-localisation"><span class="octicon octicon-link"></span></a>Need your help with localisation</h3>
+
+<p>One area Humanizer could always use your help is localisation. 
+Currently Humanizer <a href="https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties">supports</a> quite a few localisations for <code>Date.Humanize</code> and a few for <code>TimeSpan.Humanize</code> methods. 
+There is also ongoing effort to add localisation to <code>ToWords</code> extension method which currently only supports English and Arabic.</p>
+
+<p>Humanizer could definitely do with more translations. To add a translation, fork the repository if you haven't done yet, duplicate the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx">resources.resx</a> file, add your target <a href="http://msdn.microsoft.com/en-us/library/hh441729.aspx">locale code</a> to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.</p>
 
 <p>Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
 Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
 In cases like this in addition to creating a resource file you should also subclass <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/DefaultFormatter.cs"><code>DefaultFormatter</code></a> in a class that represents your language; 
 e.g. <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs">RomanianFormatter</a> and then override the methods that need involve the complex rules. We think overriding the <code>GetResourceKey</code> method should be enough. To see how to do that check out <code>RomanianFormatter</code> and <code>RussianFormatter</code>. 
 Then you return an instance of your class in the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs">Configurator</a> class in the getter of the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11">Formatter property</a> based on the current culture.</p>
+
+<p>Translations for ToWords method are currently done in code as there is a huge difference between the way different languages deal with number words.</p>
 
 <h3>
 <a name="continuous-integration-from-teamcity" class="anchor" href="#continuous-integration-from-teamcity"><span class="octicon octicon-link"></span></a>Continuous Integration from TeamCity</h3>
@@ -496,11 +520,10 @@ Then you return an instance of your class in the <a href="https://github.com/Meh
 <p>Humanizer is released under the MIT License. See the <a href="https://github.com/MehdiK/Humanizer/blob/master/LICENSE">bundled LICENSE</a> file for details.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/MehdiK">MehdiK</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
