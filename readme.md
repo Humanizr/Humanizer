@@ -440,6 +440,8 @@ Pull requests are code reviewed. Here is what I look for in your pull request:
  - Adherence to the existing coding styles
  - Updated readme if you change an existing feature or add something
 
+Also please link to the issue(s) you're fixing from your PR description.
+
 ###Need your help with localisation
 One area Humanizer could always use your help is localisation. 
 Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) quite a few localisations for `Date.Humanize` and a few for `TimeSpan.Humanize` methods. 
