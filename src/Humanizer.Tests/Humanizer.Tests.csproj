@@ -77,6 +77,8 @@
     <Compile Include="Localisation\DateHumanizeTests.nb-NO.cs" />
     <Compile Include="Localisation\es\DateHumanizeTests.cs" />
     <Compile Include="Localisation\es\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\he\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\he\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
     <Compile Include="RunnableInDebugModeOnlyAttribute.cs" />
