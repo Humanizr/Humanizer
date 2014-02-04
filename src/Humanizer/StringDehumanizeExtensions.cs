@@ -13,7 +13,7 @@ namespace Humanizer
         {
             var titlizedWords = 
                 (from word in input.Split(' ')
-                select word.Humanize(LetterCasing.Title)).ToArray(); // ToArrayed to support .Net 3.5
+                select word.Humanize(LetterCasing.Title));
 
             return string.Join("", titlizedWords);
         }
