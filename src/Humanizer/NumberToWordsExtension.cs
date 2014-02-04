@@ -15,16 +15,14 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="system">Numeral system to be used</param>
         /// <returns></returns>
-        public static string ToWords(this int number, NumeralSystem system = NumeralSystem.Latin)
+        public static string ToWords(this int number)
         {
-            switch (system)
+            switch (CultureInfo.CurrentCulture.TwoLetterISOLanguageName)
             {
-                case NumeralSystem.Arabic:
+                case "ar":
                     return ToArabicWords(number);
-                case NumeralSystem.Latin:
-                    return ToEnglishWords(number);
                 default:
-                    throw new CultureNotFoundException();
+                    return ToEnglishWords(number);
             }
         }
 
@@ -154,9 +152,7 @@ namespace Humanizer
                     }
                 }
 
-                string groupDescription = process;
-
-                if (groupDescription != String.Empty)
+                if (process != String.Empty)
                 {
                     if (groupLevel > 0)
                     {
@@ -180,7 +176,7 @@ namespace Humanizer
                             }
                         }
                     }
-                    result = String.Format("{0} {1}", groupDescription, result);
+                    result = String.Format("{0} {1}", process, result);
                 }
                 groupLevel++;
             }

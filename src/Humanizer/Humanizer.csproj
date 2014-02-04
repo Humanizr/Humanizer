@@ -83,7 +83,6 @@
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\ArabicFormatter.cs" />
-    <Compile Include="NumeralSystem.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
