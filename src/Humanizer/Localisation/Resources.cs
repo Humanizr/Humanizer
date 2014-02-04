@@ -1,22 +1,18 @@
 ﻿using System.Globalization;
 using System.Reflection;
+using System.Resources;
 
 namespace Humanizer.Localisation
 {
     public class Resources
     {
-        private static System.Resources.ResourceManager _resourceMan;
+        private static ResourceManager resourceMan;
 
-        public static System.Resources.ResourceManager ResourceManager
+        public static ResourceManager ResourceManager
         {
             get
             {
-                if (ReferenceEquals(_resourceMan, null))
-                {
-                    var temp = new System.Resources.ResourceManager("Humanizer.Properties.Resources", typeof(Resources).Assembly);
-                    _resourceMan = temp;
-                }
-                return _resourceMan;
+                return resourceMan ?? new ResourceManager("Humanizer.Properties.Resources", Assembly.GetExecutingAssembly());
             }
         }
 
