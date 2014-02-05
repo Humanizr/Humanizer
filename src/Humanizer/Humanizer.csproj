@@ -148,7 +148,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.es.resx" />
-    <EmbeddedResource Include="Properties\Resources.gr.resx" />
     <EmbeddedResource Include="Properties\Resources.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -167,6 +166,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
+    <EmbeddedResource Include="Properties\Resource.el-GR.resx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
