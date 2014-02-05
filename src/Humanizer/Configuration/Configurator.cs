@@ -26,11 +26,7 @@ namespace Humanizer.Configuration
             get
             {
                 Func<IFormatter> formatterFactory;
-                if (FormatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory))
-                {
-                    return formatterFactory();
-                }
-                return new DefaultFormatter();
+                return FormatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory) ? formatterFactory() : new DefaultFormatter();
             }
         }
     }
