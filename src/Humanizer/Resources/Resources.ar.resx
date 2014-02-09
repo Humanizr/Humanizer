@@ -313,4 +313,10 @@
     <value>منذ {0} أعوام</value>
     <comment>{0} years ago</comment>
   </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>غداً</value>
+  </data>
 </root>

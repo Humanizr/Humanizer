@@ -83,6 +83,7 @@
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\ArabicFormatter.cs" />
+    <Compile Include="RomanNumeralExtensions.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
@@ -135,38 +136,38 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.nb-NO.resx">
+    <EmbeddedResource Include="Resources\Resources.nb-NO.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.af.resx">
+    <EmbeddedResource Include="Resources\Resources.af.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.fr-BE.resx">
+    <EmbeddedResource Include="Resources\Resources.fr-BE.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.fi-FI.resx">
+    <EmbeddedResource Include="Resources\Resources.fi-FI.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.es.resx" />
-    <EmbeddedResource Include="Properties\Resources.gr.resx" />
-    <EmbeddedResource Include="Properties\Resources.ru.resx">
+    <EmbeddedResource Include="Resources\Resources.es.resx" />
+    <EmbeddedResource Include="Resources\Resources.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ar.resx">
+    <EmbeddedResource Include="Resources\Resources.ar.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.fr.resx">
+    <EmbeddedResource Include="Resources\Resources.fr.resx">
       <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.nl-BE.resx">
+    <EmbeddedResource Include="Resources\Resources.nl-BE.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Resources\Resources.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ro.resx" />
-    <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
+    <EmbeddedResource Include="Resources\Resources.ro.resx" />
+    <EmbeddedResource Include="Resources\Resources.pt-BR.resx" />
+    <EmbeddedResource Include="Resources\Resources.el-GR.resx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
