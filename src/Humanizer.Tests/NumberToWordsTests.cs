@@ -1,26 +1,23 @@
 ﻿using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
     public class NumberToWordsTests
     {
-        [Fact]
-        public void ToWords()
+        [InlineData(1, "one")]
+        [InlineData(10, "ten")]
+        [InlineData(11, "eleven")]
+        [InlineData(122, "one hundred and twenty-two")]
+        [InlineData(3501, "three thousand five hundred and one")]
+        [InlineData(100, "one hundred")]
+        [InlineData(1000, "one thousand")]
+        [InlineData(100000, "one hundred thousand")]
+        [InlineData(1000000, "one million")]
+        [Theory]
+        public void Test(int number, string expected)
         {
-            Assert.Equal("one", 1.ToWords());
-            Assert.Equal("ten", 10.ToWords());
-            Assert.Equal("eleven", 11.ToWords());
-            Assert.Equal("one hundred and twenty-two", 122.ToWords());
-            Assert.Equal("three thousand five hundred and one", 3501.ToWords());
-        }
-
-        [Fact]
-        public void RoundNumbersHaveNoSpaceAtTheEnd()
-        {
-            Assert.Equal("one hundred", 100.ToWords());
-            Assert.Equal("one thousand", 1000.ToWords());
-            Assert.Equal("one hundred thousand", 100000.ToWords());
-            Assert.Equal("one million", 1000000.ToWords());
+            Assert.Equal(expected, number.ToWords());
         }
     }
 }
