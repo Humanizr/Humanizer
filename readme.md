@@ -128,7 +128,7 @@ Quite a few translations are available for humanized dates.
 **No dehumanization for dates as the human friendly date is not reversible**
 
 ###Humanize TimeSpan
-You can call `Humanizes` on a `TimeSpan` to a get human friendly representation for it:
+You can call `Humanize` on a `TimeSpan` to a get human friendly representation for it:
 
 ```C#
 TimeSpan.FromMilliseconds(1).Humanize() => "1 millisecond"
