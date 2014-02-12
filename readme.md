@@ -336,7 +336,7 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 ```
 
 ###Roman numerals
-Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
+Humanizer can change integers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
 
 ```C#
 1.ToRoman() => "I"
@@ -351,7 +351,7 @@ Humanizer can change numbers to Roman numerals using the `ToRoman` extension. Th
 10.ToRoman() => "X"
 ```
 
-Also the reverse operation using the `FromRoman` extension.
+You can also go from a Roman number back to an integer using `FromRoman` extension.
 
 ```C#
 "I".FromRoman() => 1

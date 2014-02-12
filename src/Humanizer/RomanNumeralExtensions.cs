@@ -34,7 +34,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// Convert Roman numbers string to human-readable number.
+        /// Converts Roman numbers into integer
         /// </summary>
         /// <param name="value">Roman number</param>
         /// <returns>Human-readable number</returns>
@@ -74,7 +74,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// Convert human-readable number to Roman numbers string.
+        /// Converts the input to Roman number
         /// </summary>
         /// <param name="value">Human-readable number</param>
         /// <returns>Roman number</returns>
