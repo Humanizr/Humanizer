@@ -29,9 +29,9 @@ namespace Humanizer
 
         private static readonly Regex validRomanNumeral = new Regex("^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))" + "?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$", RegexOptions.None);
 
-        private static bool IsValidRomanNumeral(this string value)
+        private static bool IsInvalidRomanNumeral(string value)
         {
-            return validRomanNumeral.IsMatch(value);
+            return !validRomanNumeral.IsMatch(value);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Humanizer
             value = value.ToUpper().Trim();
             var length = value.Length;
 
-            if (length == 0 || !value.IsValidRomanNumeral())
+            if (length == 0 || IsInvalidRomanNumeral(value))
                 throw new ArgumentException("Empty or invalid Roman numeral string.", "value");
 
             var total = 0;
