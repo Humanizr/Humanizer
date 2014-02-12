@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using Xunit.Extensions;
+using Humanizer;
 
 namespace Humanizer.Tests
 {
@@ -7,23 +8,42 @@ namespace Humanizer.Tests
     {
         [Theory]
         [InlineData(1, "I")]
+        [InlineData(2, "II")]
+        [InlineData(3, "III")]
+        [InlineData(4, "IV")]
+        [InlineData(5, "V")]
+        [InlineData(6, "VI")]
+        [InlineData(7, "VII")]
+        [InlineData(8, "VIII")]
+        [InlineData(9, "IX")]
+        [InlineData(10, "X")]
+        [InlineData(11, "XI")]
         [InlineData(12, "XII")]
         [InlineData(100, "C")]
-        [InlineData(6, "VI")]
+        [InlineData(3999, "MMMCMXCIX")]
         public void CanRomanize(int input, string expected)
         {
-            Assert.Equal(input.ToRoman(), expected);
+            Assert.Equal(expected, input.ToRoman());
         }
 
         [Theory]
-        [InlineData("D", 500)]
-        [InlineData("XX", 20)]
-        [InlineData("III", 3)]
-        [InlineData("iv", 4)]
-        [InlineData("XC", 90)]
-        public void CanUnromanize(string input, int expected)
+        [InlineData(1, "I")]
+        [InlineData(2, "II")]
+        [InlineData(3, "III")]
+        [InlineData(4, "IV")]
+        [InlineData(5, "V")]
+        [InlineData(6, "VI")]
+        [InlineData(7, "VII")]
+        [InlineData(8, "VIII")]
+        [InlineData(9, "IX")]
+        [InlineData(10, "X")]
+        [InlineData(11, "XI")]
+        [InlineData(12, "XII")]
+        [InlineData(100, "C")]
+        [InlineData(3999, "MMMCMXCIX")]
+        public void CanUnromanize(int expected, string input)
         {
-            Assert.Equal(input.FromRoman(), expected);
+            Assert.Equal(expected, input.FromRoman());
         }
     }
 }
