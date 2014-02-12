@@ -14,6 +14,8 @@ namespace Humanizer.Localisation
         /// <summary>
         /// Returns the value of the specified string resource
         /// </summary>
+        /// <param name="resourceKey">The name of the resource to retrieve.</param>
+        /// <returns>The value of the resource localized for the caller's current UI culture.</returns>
         public static string GetResource(string resourceKey)
         {
             return ResourceManager.GetString(resourceKey);
