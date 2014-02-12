@@ -35,6 +35,12 @@ namespace Humanizer
 
             var parts = new List<string>();
 
+            if ((number / 1000000000) > 0)
+            {
+                parts.Add(string.Format("{0} billion", ToWords(number / 1000000000)));
+                number %= 1000000000;
+            }
+
             if ((number / 1000000) > 0)
             {
                 parts.Add(string.Format("{0} million", ToWords(number / 1000000)));
