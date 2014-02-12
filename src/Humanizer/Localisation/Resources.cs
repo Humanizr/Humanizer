@@ -7,9 +7,7 @@ namespace Humanizer.Localisation
     /// </summary>
     public static class Resources
     {
-        private static readonly ResourceManager ResourceManager = new ResourceManager(
-        "Humanizer.Properties.Resources",
-        typeof(Resources).Assembly);
+        static readonly ResourceManager ResourceManager = new ResourceManager("Humanizer.Properties.Resources", typeof(Resources).Assembly);
 
         /// <summary>
         /// Returns the value of the specified string resource
