@@ -1,33 +1,22 @@
-﻿using System.Globalization;
-using System.Reflection;
+﻿using System.Resources;
 
 namespace Humanizer.Localisation
 {
-    public class Resources
+    /// <summary>
+    /// Provides access to the resources of Humanizer
+    /// </summary>
+    public static class Resources
     {
-        private static System.Resources.ResourceManager _resourceMan;
-
-        public static System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (ReferenceEquals(_resourceMan, null))
-                {
-                    var temp = new System.Resources.ResourceManager("Humanizer.Properties.Resources", typeof(Resources).Assembly);
-                    _resourceMan = temp;
-                }
-                return _resourceMan;
-            }
-        }
+        static readonly ResourceManager ResourceManager = new ResourceManager("Humanizer.Properties.Resources", typeof(Resources).Assembly);
 
         /// <summary>
-        /// Returns a resource value from a culture specific resource
+        /// Returns the value of the specified string resource
         /// </summary>
-        /// <param name="resourceKey"></param>
-        /// <returns></returns>
+        /// <param name="resourceKey">The name of the resource to retrieve.</param>
+        /// <returns>The value of the resource localized for the caller's current UI culture.</returns>
         public static string GetResource(string resourceKey)
         {
-            return ResourceManager.GetString(resourceKey, CultureInfo.CurrentUICulture);
+            return ResourceManager.GetString(resourceKey);
         }
     }
 }
