@@ -9,8 +9,7 @@ namespace Humanizer
     {
         private const int NumberOfRomanNumeralMaps = 13;
 
-        private static readonly Dictionary<string, int> romanNumerals =
-            new Dictionary<string, int>(NumberOfRomanNumeralMaps)
+        private static readonly Dictionary<string, int> romanNumerals = new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
                 { "M", 1000 }, 
                 { "CM", 900 }, 
@@ -30,44 +29,37 @@ namespace Humanizer
 
         private static readonly Regex validRomanNumeral = new Regex("^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))" + "?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$", RegexOptions.None);
 
-        public static bool IsValidRomanNumeral(this string value)
+        private static bool IsValidRomanNumeral(this string value)
         {
             return validRomanNumeral.IsMatch(value);
         }
 
+        /// <summary>
+        /// Convert Roman numbers string to human-readable number.
+        /// </summary>
+        /// <param name="value">Roman number</param>
+        /// <returns>Human-readable number</returns>
         public static int FromRoman(this string value)
         {
             if (value == null)
-            {
                 throw new ArgumentNullException("value");
-            }
 
-
-            value = value.ToUpperInvariant().Trim();
-
-
+            value = value.ToUpper().Trim();
             var length = value.Length;
 
-
-            if ((length == 0) || !value.IsValidRomanNumeral())
-            {
+            if (length == 0 || !value.IsValidRomanNumeral())
                 throw new ArgumentException("Empty or invalid Roman numeral string.", "value");
-            }
-
 
             var total = 0;
             var i = length;
-
 
             while (i > 0)
             {
                 var digit = romanNumerals[value[--i].ToString()];
 
-
                 if (i > 0)
                 {
                     var previousDigit = romanNumerals[value[i - 1].ToString()];
-
 
                     if (previousDigit < digit)
                     {
@@ -76,29 +68,27 @@ namespace Humanizer
                     }
                 }
 
-
                 total += digit;
             }
-
 
             return total;
         }
 
+        /// <summary>
+        /// Convert human-readable number to Roman numbers string.
+        /// </summary>
+        /// <param name="value">Human-readable number</param>
+        /// <returns>Roman number</returns>
         public static string ToRoman(this int value)
         {
             const int MinValue = 1;
             const int MaxValue = 3999;
-
+            const int MaxRomanNumeralLength = 15;
 
             if ((value < MinValue) || (value > MaxValue))
-            {
                 throw new ArgumentOutOfRangeException();
-            }
 
-
-            const int MaxRomanNumeralLength = 15;
             var sb = new StringBuilder(MaxRomanNumeralLength);
-
 
             foreach (var pair in romanNumerals)
             {
@@ -108,7 +98,6 @@ namespace Humanizer
                     value -= pair.Value;
                 }
             }
-
 
             return sb.ToString();
         }
