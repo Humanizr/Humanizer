@@ -1,4 +1,5 @@
 ﻿using Humanizer.Pluralization;
+
 namespace Humanizer
 {
     public enum ShowQuantityAs
