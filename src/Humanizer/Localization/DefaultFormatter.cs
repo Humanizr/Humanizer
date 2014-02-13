@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation
+﻿namespace Humanizer.Localization
 {
     public class DefaultFormatter : IFormatter
     {

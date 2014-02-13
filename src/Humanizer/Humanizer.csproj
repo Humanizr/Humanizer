@@ -82,7 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
-    <Compile Include="Localisation\ArabicFormatter.cs" />
+    <Compile Include="Localization\ArabicFormatter.cs" />
     <Compile Include="Pluralization\BidirectionalDictionary.cs" />
     <Compile Include="Pluralization\EnglishPluralizationService.cs" />
     <Compile Include="Pluralization\IPluralizationService.cs" />
@@ -102,12 +102,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>In.Months.tt</DependentUpon>
     </Compile>
-    <Compile Include="Localisation\DefaultFormatter.cs" />
-    <Compile Include="Localisation\IFormatter.cs" />
-    <Compile Include="Localisation\ResourceKeys.DateHumanize.cs" />
-    <Compile Include="Localisation\Resources.cs" />
-    <Compile Include="Localisation\RomanianFormatter.cs" />
-    <Compile Include="Localisation\RussianFormatter.cs" />
+    <Compile Include="Localization\DefaultFormatter.cs" />
+    <Compile Include="Localization\IFormatter.cs" />
+    <Compile Include="Localization\ResourceKeys.DateHumanize.cs" />
+    <Compile Include="Localization\Resources.cs" />
+    <Compile Include="Localization\RomanianFormatter.cs" />
+    <Compile Include="Localization\RussianFormatter.cs" />
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
@@ -136,7 +136,7 @@
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
     <None Include="Humanizer.snk" />
-    <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
+    <Compile Include="Localization\ResourceKeys.TimeSpanHumanize.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

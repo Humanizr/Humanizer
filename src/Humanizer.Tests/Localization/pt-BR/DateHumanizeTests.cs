@@ -2,67 +2,67 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.es
+namespace Humanizer.Tests.Localization.ptBR
 {
     public class DateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests() : base("es-ES") { }
+        public DateHumanizeTests() : base("pt-BR") { }
 
         [Theory]
-        [InlineData(-10, "hace 10 días")]
-        [InlineData(-3, "hace 3 días")]
-        [InlineData(-2, "hace 2 días")]
-		[InlineData(-1, "ayer")]
+        [InlineData(-10, "10 dias atrás")]
+        [InlineData(-3, "3 dias atrás")]
+        [InlineData(-2, "2 dias atrás")]
+		[InlineData(-1, "ontem")]
         public void DaysAgo(int days, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddDays(days).Humanize());
         }
 
         [Theory]
-        [InlineData(-10, "hace 10 horas")]
-        [InlineData(-3, "hace 3 horas")]
-        [InlineData(-2, "hace 2 horas")]
-        [InlineData(-1, "hace una hora")]
+        [InlineData(-10, "10 horas atrás")]
+        [InlineData(-3, "3 horas atrás")]
+        [InlineData(-2, "2 horas atrás")]
+        [InlineData(-1, "uma hora atrás")]
         public void HoursAgo(int hours, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddHours(hours).Humanize());
         }
 
         [Theory]
-        [InlineData(-10, "hace 10 minutos")]
-        [InlineData(-3, "hace 3 minutos")]
-        [InlineData(-2, "hace 2 minutos")]
-        [InlineData(-1, "hace un minuto")]
+        [InlineData(-10, "10 minutos atrás")]
+        [InlineData(-3, "3 minutos atrás")]
+        [InlineData(-2, "2 minutos atrás")]
+        [InlineData(-1, "um minuto atrás")]
         public void MinutesAgo(int minutes, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddMinutes(minutes).Humanize());
         }
 
         [Theory]
-        [InlineData(-10, "hace 10 meses")]
-        [InlineData(-3, "hace 3 meses")]
-        [InlineData(-2, "hace 2 meses")]
-        [InlineData(-1, "hace un mes")]
+        [InlineData(-10, "10 meses atrás")]
+        [InlineData(-3, "3 meses atrás")]
+        [InlineData(-2, "2 meses atrás")]
+        [InlineData(-1, "um mês atrás")]
         public void MonthsAgo(int months, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddMonths(months).Humanize());
         }
 
         [Theory]
-        [InlineData(-10, "hace 10 segundos")]
-        [InlineData(-3, "hace 3 segundos")]
-        [InlineData(-2, "hace 2 segundos")]
-        [InlineData(-1, "hace un segundo")]
+        [InlineData(-10, "10 segundos atrás")]
+        [InlineData(-3, "3 segundos atrás")]
+        [InlineData(-2, "2 segundos atrás")]
+        [InlineData(-1, "um segundo atrás")]
         public void SecondsAgo(int seconds, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddSeconds(seconds).Humanize());
         }
 
         [Theory]
-        [InlineData(-10, "hace 10 años")]
-        [InlineData(-3, "hace 3 años")]
-        [InlineData(-2, "hace 2 años")]
-        [InlineData(-1, "hace un año")]
+        [InlineData(-10, "10 anos atrás")]
+        [InlineData(-3, "3 anos atrás")]
+        [InlineData(-2, "2 anos atrás")]
+        [InlineData(-1, "um ano atrás")]
         public void YearsAgo(int years, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
