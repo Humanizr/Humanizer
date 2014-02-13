@@ -11,27 +11,22 @@ namespace Humanizer
 
         private static readonly Dictionary<string, int> romanNumerals = new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
-                { "M", 1000 }, 
-                { "CM", 900 }, 
-                { "D", 500 }, 
-                { "CD", 400 }, 
-                { "C", 100 }, 
-                { "XC", 90 }, 
-                { "L", 50 }, 
-                { "XL", 40 }, 
-                { "X", 10 }, 
-                { "IX", 9 }, 
-                { "V", 5 }, 
-                { "IV", 4 }, 
+                { "M", 1000 },
+                { "CM", 900 },
+                { "D", 500 },
+                { "CD", 400 },
+                { "C", 100 },
+                { "XC", 90 },
+                { "L", 50 },
+                { "XL", 40 },
+                { "X", 10 },
+                { "IX", 9 },
+                { "V", 5 },
+                { "IV", 4 },
                 { "I", 1 }
             };
 
         private static readonly Regex validRomanNumeral = new Regex("^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))" + "?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$", RegexOptions.None);
-
-        private static bool IsInvalidRomanNumeral(string value)
-        {
-            return !validRomanNumeral.IsMatch(value);
-        }
 
         /// <summary>
         /// Converts Roman numbers into integer
@@ -99,6 +94,11 @@ namespace Humanizer
             }
 
             return sb.ToString();
+        }
+
+        private static bool IsInvalidRomanNumeral(string value)
+        {
+            return !validRomanNumeral.IsMatch(value);
         }
     }
 }
