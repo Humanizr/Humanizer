@@ -71,19 +71,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CasingTests.cs" />
-    <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
-    <Compile Include="Localisation\ar\NumberToWordsTests.cs" />
-    <Compile Include="Localisation\ar\TimeSpanHumanizeTests.cs" />
-    <Compile Include="Localisation\DateHumanizeTests.nb-NO.cs" />
-    <Compile Include="Localisation\es\DateHumanizeTests.cs" />
-    <Compile Include="Localisation\es\TimeSpanHumanizeTests.cs" />
-    <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
-    <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localization\ar\DateHumanizeTests.cs" />
+    <Compile Include="Localization\ar\NumberToWordsTests.cs" />
+    <Compile Include="Localization\ar\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localization\DateHumanizeTests.nb-NO.cs" />
+    <Compile Include="Localization\es\DateHumanizeTests.cs" />
+    <Compile Include="Localization\es\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localization\pt-BR\DateHumanizeTests.cs" />
+    <Compile Include="Localization\pt-BR\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Pluralization\EnglishPluralizationServiceTests.cs" />
+    <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="RunnableInDebugModeOnlyAttribute.cs" />
     <Compile Include="ToQuantityTests.cs" />
     <Compile Include="TransformersTests.cs" />
     <Compile Include="NumberToOrdinalWordsTests.cs" />
-    <Compile Include="Localisation\DateHumanizeTests.ro-RO.cs" />
+    <Compile Include="Localization\DateHumanizeTests.ro-RO.cs" />
     <Compile Include="DateHumanizeTests.cs" />
     <Compile Include="DehumanizeToEnumTests.cs" />
     <Compile Include="EnumHumanizeTests.cs" />
@@ -93,8 +95,8 @@
     <Compile Include="FluentDate\OnTests.cs" />
     <Compile Include="FluentDate\PrepositionTests.cs" />
     <Compile Include="AmbientCulture.cs" />
-    <Compile Include="Localisation\ResourcesTests.cs" />
-    <Compile Include="Localisation\DateHumanizeTests.ru-RU.cs" />
+    <Compile Include="Localization\ResourcesTests.cs" />
+    <Compile Include="Localization\DateHumanizeTests.ru-RU.cs" />
     <Compile Include="NumberToTimeSpanTests.cs" />
     <Compile Include="OrdinalizeTests.cs" />
     <Compile Include="InflectorTests.cs" />
@@ -107,7 +109,7 @@
     <Compile Include="ApiApprover\PublicApiGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Localisation\DateHumanizeTests.fi-FI.cs" />
+    <Compile Include="Localization\DateHumanizeTests.fi-FI.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
