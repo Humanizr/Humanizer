@@ -335,6 +335,32 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 121.ToOrdinalWords() => "hundred and twenty first"
 ```
 
+###Roman numerals
+Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
+
+```C#
+1.ToRoman() => "I"
+2.ToRoman() => "II"
+3.ToRoman() => "III"
+4.ToRoman() => "IV"
+5.ToRoman() => "V"
+6.ToRoman() => "VI"
+7.ToRoman() => "VII"
+8.ToRoman() => "VIII"
+9.ToRoman() => "IX"
+10.ToRoman() => "X"
+```
+
+Also the reverse operation using the `FromRoman` extension.
+
+```C#
+"I".FromRoman() => 1
+"II".FromRoman() => 2
+"III".FromRoman() => 3
+"IV".FromRoman() => 4
+"V".FromRoman() => 5
+```
+
 ###Mix this into your framework to simplify your life
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
 
@@ -468,3 +494,4 @@ Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
 
 ###License
 Humanizer is released under the MIT License. See the [bundled LICENSE](https://github.com/MehdiK/Humanizer/blob/master/LICENSE) file for details.
+
