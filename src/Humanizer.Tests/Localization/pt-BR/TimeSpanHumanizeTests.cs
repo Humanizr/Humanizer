@@ -1,11 +1,11 @@
 ﻿using System;
 using Xunit;
 
-namespace Humanizer.Tests.Localisation.es
+namespace Humanizer.Tests.Localization.ptBR
 {
     public class TimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeTests() : base("es-ES") {         }
+        public TimeSpanHumanizeTests() : base("pt-BR") { }
 
         [Fact]
         public void TwoWeeks()
@@ -16,25 +16,25 @@ namespace Humanizer.Tests.Localisation.es
         [Fact]
         public void OneWeek()
         {
-            Assert.Equal("una semana", TimeSpan.FromDays(7).Humanize());
+            Assert.Equal("1 semana", TimeSpan.FromDays(7).Humanize());
         }
 
         [Fact]
         public void SixDays()
         {
-            Assert.Equal("6 días", TimeSpan.FromDays(6).Humanize());
+            Assert.Equal("6 dias", TimeSpan.FromDays(6).Humanize());
         }
 
         [Fact]
         public void TwoDays()
         {
-            Assert.Equal("2 días", TimeSpan.FromDays(2).Humanize());
+            Assert.Equal("2 dias", TimeSpan.FromDays(2).Humanize());
         }
 
         [Fact]
         public void OneDay()
         {
-            Assert.Equal("un día", TimeSpan.FromDays(1).Humanize());
+            Assert.Equal("1 dia", TimeSpan.FromDays(1).Humanize());
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace Humanizer.Tests.Localisation.es
         [Fact]
         public void OneHour()
         {
-            Assert.Equal("una hora", TimeSpan.FromHours(1).Humanize());
+            Assert.Equal("1 hora", TimeSpan.FromHours(1).Humanize());
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Humanizer.Tests.Localisation.es
         [Fact]
         public void OneMinute()
         {
-            Assert.Equal("un minuto", TimeSpan.FromMinutes(1).Humanize());
+            Assert.Equal("1 minuto", TimeSpan.FromMinutes(1).Humanize());
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace Humanizer.Tests.Localisation.es
         [Fact]
         public void OneSecond()
         {
-            Assert.Equal("un segundo", TimeSpan.FromSeconds(1).Humanize());
+            Assert.Equal("1 segundo", TimeSpan.FromSeconds(1).Humanize());
         }
 
         [Fact]
@@ -82,14 +82,14 @@ namespace Humanizer.Tests.Localisation.es
         [Fact]
         public void OneMillisecond()
         {
-            Assert.Equal("un milisegundo", TimeSpan.FromMilliseconds(1).Humanize());
+            Assert.Equal("1 milisegundo", TimeSpan.FromMilliseconds(1).Humanize());
         }
 
         [Fact]
         public void NoTime()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("no hay tiempo", TimeSpan.Zero.Humanize());
+            Assert.Equal("sem horário", TimeSpan.Zero.Humanize());
         }
     }
 }

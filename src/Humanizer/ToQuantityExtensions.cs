@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿using Humanizer.Pluralization;
+namespace Humanizer
 {
     public enum ShowQuantityAs
     {
@@ -25,9 +26,9 @@
         /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
-            var transformedInput = quantity == 1
-                ? input.Singularize(Plurality.CouldBeEither)
-                : input.Pluralize(Plurality.CouldBeEither);
+            var service = new EnglishPluralizationService();
+
+            var transformedInput = quantity == 1 ? service.Singularize(input) : service.Pluralize(input);
 
             if (showQuantityAs == ShowQuantityAs.None)
                 return transformedInput;
