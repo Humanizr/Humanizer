@@ -1,7 +1,7 @@
-﻿using Humanizer.Localisation;
+﻿using Humanizer.Localization;
 using Xunit;
 
-namespace Humanizer.Tests.Localisation
+namespace Humanizer.Tests.Localization
 {
     public class ResourcesTests
     {

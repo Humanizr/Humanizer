@@ -1,6 +1,6 @@
 ﻿using System.Resources;
 
-namespace Humanizer.Localisation
+namespace Humanizer.Localization
 {
     /// <summary>
     /// Provides access to the resources of Humanizer

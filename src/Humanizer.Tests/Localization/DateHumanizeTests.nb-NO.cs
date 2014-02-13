@@ -2,20 +2,20 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation
+namespace Humanizer.Tests.Localization
 {
-    public class DateHumanizeTests_fiFI : AmbientCulture
+    public class DateHumanizeTests_nbNO : AmbientCulture
     {
-        public DateHumanizeTests_fiFI()
-            : base("fi-Fi")
+        public DateHumanizeTests_nbNO()
+            : base("nb-NO")
         {
         }
 
         [Theory]
-        [InlineData(-10, "10 päivää sitten")]
-        [InlineData(-3, "3 päivää sitten")]
-        [InlineData(-2, "2 päivää sitten")]
-		[InlineData(-1, "eilen")]
+        [InlineData(-10, "10 dager siden")]
+        [InlineData(-3, "3 dager siden")]
+        [InlineData(-2, "2 dager siden")]
+		[InlineData(-1, "i går")]
         public void DaysAgo(int days, string expected)
         {
             var date = DateTime.UtcNow.AddDays(days);
@@ -23,10 +23,10 @@ namespace Humanizer.Tests.Localisation
         }
 
         [Theory]
-        [InlineData(-10, "10 tuntia sitten")]
-        [InlineData(-3, "3 tuntia sitten")]
-        [InlineData(-2, "2 tuntia sitten")]
-        [InlineData(-1, "tunti sitten")]
+        [InlineData(-10, "10 timer siden")]
+        [InlineData(-3, "3 timer siden")]
+        [InlineData(-2, "2 timer siden")]
+        [InlineData(-1, "en time siden")]
         public void HoursAgo(int hours, string expected)
         {
             var date = DateTime.UtcNow.AddHours(hours);
@@ -34,10 +34,10 @@ namespace Humanizer.Tests.Localisation
         }
 
         [Theory]
-        [InlineData(-10, "10 minuuttia sitten")]
-        [InlineData(-3, "3 minuuttia sitten")]
-        [InlineData(-2, "2 minuuttia sitten")]
-        [InlineData(-1, "minuutti sitten")]
+        [InlineData(-10, "10 minutter siden")]
+        [InlineData(-3, "3 minutter siden")]
+        [InlineData(-2, "2 minutter siden")]
+        [InlineData(-1, "et minutt siden")]
         public void MinutesAgo(int minutes, string expected)
         {
             var date = DateTime.UtcNow.AddMinutes(minutes);
@@ -45,10 +45,10 @@ namespace Humanizer.Tests.Localisation
         }
 
         [Theory]
-        [InlineData(-10, "10 kuukautta sitten")]
-        [InlineData(-3, "3 kuukautta sitten")]
-        [InlineData(-2, "2 kuukautta sitten")]
-        [InlineData(-1, "kuukausi sitten")]
+        [InlineData(-10, "10 måneder siden")]
+        [InlineData(-3, "3 måneder siden")]
+        [InlineData(-2, "2 måneder siden")]
+        [InlineData(-1, "en måned siden")]
         public void MonthsAgo(int months, string expected)
         {
             var date = DateTime.UtcNow.AddMonths(months);
@@ -56,10 +56,10 @@ namespace Humanizer.Tests.Localisation
         }
 
         [Theory]
-        [InlineData(-10, "10 sekunttia sitten")]
-        [InlineData(-3, "3 sekunttia sitten")]
-        [InlineData(-2, "2 sekunttia sitten")]
-        [InlineData(-1, "sekuntti sitten")]
+        [InlineData(-10, "10 sekunder siden")]
+        [InlineData(-3, "3 sekunder siden")]
+        [InlineData(-2, "2 sekunder siden")]
+        [InlineData(-1, "et sekund siden")]
         public void SecondsAgo(int seconds, string expected)
         {
             var date = DateTime.UtcNow.AddSeconds(seconds);
@@ -67,10 +67,10 @@ namespace Humanizer.Tests.Localisation
         }
 
         [Theory]
-        [InlineData(-10, "10 vuotta sitten")]
-        [InlineData(-3, "3 vuotta sitten")]
-        [InlineData(-2, "2 vuotta sitten")]
-        [InlineData(-1, "vuosi sitten")]
+        [InlineData(-10, "10 år siden")]
+        [InlineData(-3, "3 år siden")]
+        [InlineData(-2, "2 år siden")]
+        [InlineData(-1, "et år siden")]
         public void YearsAgo(int years, string expected)
         {
             var date = DateTime.UtcNow.AddYears(years);

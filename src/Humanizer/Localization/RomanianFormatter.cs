@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation
+﻿namespace Humanizer.Localization
 {
     internal class RomanianFormatter : DefaultFormatter
     {
