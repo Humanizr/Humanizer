@@ -465,6 +465,7 @@ Pull requests are code reviewed. Here is what I look for in your pull request:
  - Proper unit test coverage 
  - Adherence to the existing coding styles
  - Updated readme if you change an existing feature or add something
+ - Add an entry in the release_notes.md file in the 'In Development' section with a link to your PR link and description of what's changed. Please follow the wording style for the description.
 
 Also please link to the issue(s) you're fixing from your PR description.
 
