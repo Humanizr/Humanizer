@@ -165,7 +165,7 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 <h3>
 <a name="humanize-timespan" class="anchor" href="#humanize-timespan"><span class="octicon octicon-link"></span></a>Humanize TimeSpan</h3>
 
-<p>You can call <code>Humanizes</code> on a <code>TimeSpan</code> to a get human friendly representation for it:</p>
+<p>You can call <code>Humanize</code> on a <code>TimeSpan</code> to a get human friendly representation for it:</p>
 
 <div class="highlight highlight-C#"><pre><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"1 millisecond"</span>
 <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">2</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"2 milliseconds"</span>
@@ -375,6 +375,32 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h3>
+<a name="roman-numerals" class="anchor" href="#roman-numerals"><span class="octicon octicon-link"></span></a>Roman numerals</h3>
+
+<p>Humanizer can change numbers to Roman numerals using the <code>ToRoman</code> extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:</p>
+
+<div class="highlight highlight-C#"><pre><span class="m">1.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"I"</span>
+<span class="m">2.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"II"</span>
+<span class="m">3.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"III"</span>
+<span class="m">4.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"IV"</span>
+<span class="m">5.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"V"</span>
+<span class="m">6.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"VI"</span>
+<span class="m">7.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"VII"</span>
+<span class="m">8.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"VIII"</span>
+<span class="m">9.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"IX"</span>
+<span class="m">10.</span><span class="n">ToRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"X"</span>
+</pre></div>
+
+<p>Also the reverse operation using the <code>FromRoman</code> extension.</p>
+
+<div class="highlight highlight-C#"><pre><span class="s">"I"</span><span class="p">.</span><span class="n">FromRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="m">1</span>
+<span class="s">"II"</span><span class="p">.</span><span class="n">FromRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="m">2</span>
+<span class="s">"III"</span><span class="p">.</span><span class="n">FromRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="m">3</span>
+<span class="s">"IV"</span><span class="p">.</span><span class="n">FromRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="m">4</span>
+<span class="s">"V"</span><span class="p">.</span><span class="n">FromRoman</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="m">5</span>
+</pre></div>
+
+<h3>
 <a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a>Mix this into your framework to simplify your life</h3>
 
 <p>This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use <code>"string".Humanize</code> for that?! </p>
@@ -480,6 +506,7 @@ So if you want to contribute, fork the repo, preferrably create a local branch t
 <li>Proper unit test coverage </li>
 <li>Adherence to the existing coding styles</li>
 <li>Updated readme if you change an existing feature or add something</li>
+<li>Add an entry in the release_notes.md file in the 'In Development' section with a link to your PR link and description of what's changed. Please follow the wording style for the description.</li>
 </ul><p>Also please link to the issue(s) you're fixing from your PR description.</p>
 
 <h3>
