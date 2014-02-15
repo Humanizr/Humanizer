@@ -33,7 +33,7 @@ namespace Humanizer.Tests
         [InlineData(123456789, "one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine")]
         [InlineData(1234567890, "one billion two hundred and thirty-four million five hundred and sixty-seven thousand eight hundred and ninety")]
         [Theory]
-        public void Test(int number, string expected)
+        public void ToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }
