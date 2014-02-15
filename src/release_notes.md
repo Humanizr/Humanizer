@@ -1,7 +1,13 @@
 ###In Development
   -
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.9.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.10.1...master)
+
+###v1.10.1 - 2014-02-15
+  - [#89](https://github.com/MehdiK/Humanizer/pull/89): added `ToRoman` and `FromRoman` extensions
+  - [#82](https://github.com/MehdiK/Humanizer/pull/82): fixed Greek locale code
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.9.1...v1.10.1)
 
 ###v1.9.1 - 2014-02-12
   - [#78](https://github.com/MehdiK/Humanizer/pull/78): added support for billions to `ToWords`
