@@ -5,11 +5,14 @@ using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class RomanNumeralExtensions
     {
         private const int NumberOfRomanNumeralMaps = 13;
 
-        private static readonly Dictionary<string, int> romanNumerals = new Dictionary<string, int>(NumberOfRomanNumeralMaps)
+        private static readonly Dictionary<string, int> RomanNumerals = new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
                 { "M", 1000 },
                 { "CM", 900 },
@@ -26,34 +29,34 @@ namespace Humanizer
                 { "I", 1 }
             };
 
-        private static readonly Regex validRomanNumeral = new Regex("^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))" + "?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$", RegexOptions.None);
+        private static readonly Regex ValidRomanNumeral = new Regex("^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))" + "?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$", RegexOptions.None);
 
         /// <summary>
         /// Converts Roman numbers into integer
         /// </summary>
-        /// <param name="value">Roman number</param>
+        /// <param name="input">Roman number</param>
         /// <returns>Human-readable number</returns>
-        public static int FromRoman(this string value)
+        public static int FromRoman(this string input)
         {
-            if (value == null)
-                throw new ArgumentNullException("value");
+            if (input == null)
+                throw new ArgumentNullException("input");
 
-            value = value.ToUpper().Trim();
-            var length = value.Length;
+            input = input.ToUpper().Trim();
+            var length = input.Length;
 
-            if (length == 0 || IsInvalidRomanNumeral(value))
-                throw new ArgumentException("Empty or invalid Roman numeral string.", "value");
+            if (length == 0 || IsInvalidRomanNumeral(input))
+                throw new ArgumentException("Empty or invalid Roman numeral string.", "input");
 
             var total = 0;
             var i = length;
 
             while (i > 0)
             {
-                var digit = romanNumerals[value[--i].ToString()];
+                var digit = RomanNumerals[input[--i].ToString()];
 
                 if (i > 0)
                 {
-                    var previousDigit = romanNumerals[value[i - 1].ToString()];
+                    var previousDigit = RomanNumerals[input[i - 1].ToString()];
 
                     if (previousDigit < digit)
                     {
@@ -71,34 +74,34 @@ namespace Humanizer
         /// <summary>
         /// Converts the input to Roman number
         /// </summary>
-        /// <param name="value">Human-readable number</param>
+        /// <param name="input">Integer input</param>
         /// <returns>Roman number</returns>
-        public static string ToRoman(this int value)
+        public static string ToRoman(this int input)
         {
-            const int MinValue = 1;
-            const int MaxValue = 3999;
-            const int MaxRomanNumeralLength = 15;
+            const int minValue = 1;
+            const int maxValue = 3999;
+            const int maxRomanNumeralLength = 15;
 
-            if ((value < MinValue) || (value > MaxValue))
+            if ((input < minValue) || (input > maxValue))
                 throw new ArgumentOutOfRangeException();
 
-            var sb = new StringBuilder(MaxRomanNumeralLength);
+            var sb = new StringBuilder(maxRomanNumeralLength);
 
-            foreach (var pair in romanNumerals)
+            foreach (var pair in RomanNumerals)
             {
-                while (value / pair.Value > 0)
+                while (input / pair.Value > 0)
                 {
                     sb.Append(pair.Key);
-                    value -= pair.Value;
+                    input -= pair.Value;
                 }
             }
 
             return sb.ToString();
         }
 
-        private static bool IsInvalidRomanNumeral(string value)
+        private static bool IsInvalidRomanNumeral(string input)
         {
-            return !validRomanNumeral.IsMatch(value);
+            return !ValidRomanNumeral.IsMatch(input);
         }
     }
 }

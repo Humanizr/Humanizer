@@ -1,6 +1,5 @@
 ﻿using Xunit;
 using Xunit.Extensions;
-using Humanizer;
 
 namespace Humanizer.Tests
 {
@@ -19,9 +18,14 @@ namespace Humanizer.Tests
         [InlineData(10, "X")]
         [InlineData(11, "XI")]
         [InlineData(12, "XII")]
+        [InlineData(40, "XL")]
+        [InlineData(50, "L")]
+        [InlineData(90, "XC")]
         [InlineData(100, "C")]
+        [InlineData(400, "CD")]
+        [InlineData(500, "D")]
         [InlineData(3999, "MMMCMXCIX")]
-        public void CanRomanize(int input, string expected)
+        public void ToRoman(int input, string expected)
         {
             Assert.Equal(expected, input.ToRoman());
         }
@@ -39,9 +43,14 @@ namespace Humanizer.Tests
         [InlineData(10, "X")]
         [InlineData(11, "XI")]
         [InlineData(12, "XII")]
+        [InlineData(40, "XL")]
+        [InlineData(50, "L")]
+        [InlineData(90, "XC")]
         [InlineData(100, "C")]
+        [InlineData(400, "CD")]
+        [InlineData(500, "D")]
         [InlineData(3999, "MMMCMXCIX")]
-        public void CanUnromanize(int expected, string input)
+        public void FromRoman(int expected, string input)
         {
             Assert.Equal(expected, input.FromRoman());
         }
