@@ -1,5 +1,5 @@
 ###In Development
-  -
+  - [#93](https://github.com/MehdiK/Humanizer/pull/93): added non-generic DehumanizeTo for Enums unknown at compile time
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.10.1...master)
 
