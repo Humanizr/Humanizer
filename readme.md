@@ -106,6 +106,18 @@ And the usage is:
 
 And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
 
+There is also a non-generic counterpart for when the original Enum is not known at compile time:
+
+```C#
+public static Enum DehumanizeTo(this string input, Type targetEnum) 
+```
+
+which can be used like:
+
+```C#
+"Member without description attribute".DehumanizeTo(typeof(EnumUnderTest)) => EnumUnderTest.MemberWithoutDescriptionAttribute
+```
+
 ###Humanize DateTime
 You can `Humanize` an instance of `DateTime` and get back a string telling how far back or forward in time that is:
 
