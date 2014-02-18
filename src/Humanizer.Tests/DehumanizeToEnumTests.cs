@@ -10,24 +10,28 @@ namespace Humanizer.Tests
         public void ThrowsForNonEnums()
         {
             Assert.Throws<ArgumentException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyStructWithEnumInterfaces>());
+            Assert.Throws<ArgumentException>(() => EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyStructWithEnumInterfaces)));
         }
 
         [Fact]
         public void ThrowsForEnumNoMatch()
         {
             Assert.Throws<CannotMapToTargetException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyEnum>());
+            Assert.Throws<CannotMapToTargetException>(() => EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyEnum)));
         }
 
         [Fact]
         public void HonorsDescriptionAttribute()
         {
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.CustomDescription.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.CustomDescription.DehumanizeTo(typeof(EnumUnderTest)));
         }
 
         [Fact]
         public void DehumanizeMembersWithoutDescriptionAttribute()
         {
             Assert.Equal(EnumUnderTest.MemberWithoutDescriptionAttribute, EnumTestsResources.MemberWithoutDescriptionAttributeSentence.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.MemberWithoutDescriptionAttribute, EnumTestsResources.MemberWithoutDescriptionAttributeSentence.DehumanizeTo(typeof(EnumUnderTest)));
         }
 
         [Theory]
@@ -36,17 +40,15 @@ namespace Humanizer.Tests
         [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute)]
         public void IsCaseInsensitive(string input, EnumUnderTest expectedEnum)
         {
-            Assert.Equal(
-                expectedEnum,
-                input.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(expectedEnum, input.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(expectedEnum, input.DehumanizeTo(typeof(EnumUnderTest)));
         }
 
         [Fact]
         public void AllCapitalMembersAreReturnedAsIs()
         {
-            Assert.Equal(
-                EnumUnderTest.ALLCAPITALS,
-                EnumUnderTest.ALLCAPITALS.ToString().DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.ALLCAPITALS, EnumUnderTest.ALLCAPITALS.ToString().DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.ALLCAPITALS, EnumUnderTest.ALLCAPITALS.ToString().DehumanizeTo(typeof(EnumUnderTest)));
         }
 
         struct DummyStructWithEnumInterfaces : IComparable, IFormattable, IConvertible
