@@ -16,8 +16,14 @@ namespace Humanizer.Tests
         [Fact]
         public void ThrowsForEnumNoMatch()
         {
-            Assert.Throws<CannotMapToTargetException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyEnum>());
-            Assert.Throws<CannotMapToTargetException>(() => EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyEnum)));
+            Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyEnum>());
+            Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyEnum)));
+        }
+
+        [Fact]
+        public void CanReturnNullForEnumNoMatch()
+        {
+            Assert.Null(EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
         }
 
         [Fact]

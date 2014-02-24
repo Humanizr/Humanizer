@@ -83,6 +83,8 @@
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\ArabicFormatter.cs" />
+    <Compile Include="OnNoMatch.cs" />
+    <Compile Include="NoMatchFoundException.cs" />
     <Compile Include="RomanNumeralExtensions.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
