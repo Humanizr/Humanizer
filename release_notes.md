@@ -1,5 +1,8 @@
 ###In Development
-  -
+  - [#95](https://github.com/MehdiK/Humanizer/pull/95): Added NoMatch optional parameter to DehumanizeTo & renamed `CannotMapToTargetException` to `NoMatchFoundException`
+
+####Breaking Changes
+If you were catching `CannotMapToTargetException` on a `DehumanizeTo` call, that's been renamed to `NoMatchFoundException` to make it more generic.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.11.3...master)
 
