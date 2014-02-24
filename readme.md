@@ -109,7 +109,7 @@ And just like the Humanize API it honors the `Description` attribute. You don't 
 There is also a non-generic counterpart for when the original Enum is not known at compile time:
 
 ```C#
-public static Enum DehumanizeTo(this string input, Type targetEnum) 
+public static Enum DehumanizeTo(this string input, Type targetEnum, NoMatch onNoMatch = NoMatch.ThrowsException) 
 ```
 
 which can be used like:
@@ -117,6 +117,9 @@ which can be used like:
 ```C#
 "Member without description attribute".DehumanizeTo(typeof(EnumUnderTest)) => EnumUnderTest.MemberWithoutDescriptionAttribute
 ```
+
+By default both methods throw a `NoMatchFoundException` when they cannot match the provided input against the target enum. 
+In the non-generic method you can also ask the method to return null by setting the second optiona parameter to `NoMatch.ReturnsNull`.
 
 ###Humanize DateTime
 You can `Humanize` an instance of `DateTime` and get back a string telling how far back or forward in time that is:
