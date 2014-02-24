@@ -141,6 +141,19 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 
 <p>And just like the Humanize API it honors the <code>Description</code> attribute. You don't have to provide the casing you provided during humanization: it figures it out.</p>
 
+<p>There is also a non-generic counterpart for when the original Enum is not known at compile time:</p>
+
+<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="n">Enum</span> <span class="nf">DehumanizeTo</span><span class="p">(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">input</span><span class="p">,</span> <span class="n">Type</span> <span class="n">targetEnum</span><span class="p">,</span> <span class="n">NoMatch</span> <span class="n">onNoMatch</span> <span class="p">=</span> <span class="n">NoMatch</span><span class="p">.</span><span class="n">ThrowsException</span><span class="p">)</span> 
+</pre></div>
+
+<p>which can be used like:</p>
+
+<div class="highlight highlight-C#"><pre><span class="s">"Member without description attribute"</span><span class="p">.</span><span class="n">DehumanizeTo</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">EnumUnderTest</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">MemberWithoutDescriptionAttribute</span>
+</pre></div>
+
+<p>By default both methods throw a <code>NoMatchFoundException</code> when they cannot match the provided input against the target enum. 
+In the non-generic method you can also ask the method to return null by setting the second optiona parameter to <code>NoMatch.ReturnsNull</code>.</p>
+
 <h3>
 <a name="humanize-datetime" class="anchor" href="#humanize-datetime"><span class="octicon octicon-link"></span></a>Humanize DateTime</h3>
 
