@@ -163,13 +163,13 @@ namespace Humanizer.ByteSizez
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             Func<double, string> output = n => n.ToString(format);
 
-            if (has("TB"))
+            if (has(TeraByteSymbol))
                 return output(this.TeraBytes);
-            if (has("GB"))
+            if (has(GigaByteSymbol))
                 return output(this.GigaBytes);
-            if (has("MB"))
+            if (has(MegaByteSymbol))
                 return output(this.MegaBytes);
-            if (has("KB"))
+            if (has(KiloByteSymbol))
                 return output(this.KiloBytes);
 
             // Byte and Bit symbol look must be case-sensitive
@@ -339,40 +339,35 @@ namespace Humanizer.ByteSizez
                 return false;
 
             // Get the magnitude part
-            switch (sizePart)
+            switch (sizePart.ToUpper())
             {
-                case "b":
-                    if (number % 1 != 0) // Can't have partial bits
-                        return false;
+                case ByteSymbol:
+                    if (sizePart == BitSymbol)
+                    { // Bits
+                        if (number % 1 != 0) // Can't have partial bits
+                            return false;
 
-                    result = FromBits((long)number);
+                        result = FromBits((long)number);
+                    }
+                    else
+                    { // Bytes
+                        result = FromBytes(number);
+                    }
                     break;
 
-                case "B":
-                    result = FromBytes(number);
-                    break;
-
-                case "KB":
-                case "kB":
-                case "kb":
+                case KiloByteSymbol:
                     result = FromKiloBytes(number);
                     break;
 
-                case "MB":
-                case "mB":
-                case "mb":
+                case MegaByteSymbol:
                     result = FromMegaBytes(number);
                     break;
 
-                case "GB":
-                case "gB":
-                case "gb":
+                case GigaByteSymbol:
                     result = FromGigaBytes(number);
                     break;
 
-                case "TB":
-                case "tB":
-                case "tb":
+                case TeraByteSymbol:
                     result = FromTeraBytes(number);
                     break;
             }

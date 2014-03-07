@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Humanizer.ByteSizez // Todo on this
+namespace Humanizer.ByteSizez // TODO: Named horribly to force refactoring of namespaces & folder layout
 {
     public static class FluentCreation
     {
@@ -35,6 +35,7 @@ namespace Humanizer.ByteSizez // Todo on this
 
     public static class HumanizeExtension
     {
+        // TODO: Overload this to give access to formatting options in a Humanizey way
         public static string Humanize(this ByteSize val)
         {
             return val.ToString();

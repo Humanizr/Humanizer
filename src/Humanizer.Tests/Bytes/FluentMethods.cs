@@ -20,16 +20,15 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void Humanizes()
+        public void HumanizesWithFormat()
         {
-            var humanized = (2.0).Terabytes().Humanize();
-            Assert.Equal("2 TB", humanized);
+            // TODO
         }
 
         [Fact]
         public void Dehumanizes()
         {
-            // Todo
+            // TODO
         }
     }
 }
