@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Humanizer.ByteSizez // TODO: Named horribly to force refactoring of namespaces & folder layout
+namespace Humanizer.Bytes // TODO: Named horribly to force refactoring of namespaces & folder layout
 {
     public static class FluentCreation
     {

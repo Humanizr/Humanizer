@@ -24,7 +24,7 @@
 using System;
 using System.Linq;
 
-namespace Humanizer.ByteSizez
+namespace Humanizer.Bytes
 {
     /// <summary>
     /// Represents a byte size value.
