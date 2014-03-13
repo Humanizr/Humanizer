@@ -6,14 +6,23 @@ namespace Humanizer.Tests
 {
     public class DateHumanizeTests
     {
-        void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
+        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {
-            Assert.Equal(expectedString, DateTime.UtcNow.Add(deltaFromNow).Humanize());
-            Assert.Equal(expectedString, DateTime.Now.Add(deltaFromNow).Humanize(false));
+            if (expectedString == null)
+                throw new ArgumentNullException("expectedString");
+
+            var utcNow = DateTime.UtcNow;
+            var localNow = DateTime.Now;
+
+            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(true, utcNow));
+            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(false, localNow));
         }
 
-        void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
+        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
         {
+            if (expectedString == null)
+                throw new ArgumentNullException("expectedString");
+
             var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
             var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
 
@@ -21,7 +30,7 @@ namespace Humanizer.Tests
             Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
         }
 
-        void Verify(string expectedString, TimeSpan deltaFromNow)
+        static void Verify(string expectedString, TimeSpan deltaFromNow)
         {
             VerifyWithCurrentDate(expectedString, deltaFromNow);
             VerifyWithDateInjection(expectedString, deltaFromNow);
@@ -108,9 +117,9 @@ namespace Humanizer.Tests
         [Fact]
         public void JustNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondAgo), new TimeSpan(0, 0, 0, -1));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.Now), new TimeSpan(0, 0, 0, 0));
         }
-        
+
         [Fact]
         public void SecondsAgo()
         {
