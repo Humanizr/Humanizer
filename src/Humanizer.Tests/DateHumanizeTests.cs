@@ -8,21 +8,15 @@ namespace Humanizer.Tests
     {
         static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {
-            if (expectedString == null)
-                throw new ArgumentNullException("expectedString");
-
             var utcNow = DateTime.UtcNow;
             var localNow = DateTime.Now;
 
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(true, utcNow));
-            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(false, localNow));
+            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize());
+            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(false));
         }
 
         static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
         {
-            if (expectedString == null)
-                throw new ArgumentNullException("expectedString");
-
             var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
             var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
 
@@ -118,6 +112,12 @@ namespace Humanizer.Tests
         public void JustNow()
         {
             Verify(Resources.GetResource(ResourceKeys.DateHumanize.Now), new TimeSpan(0, 0, 0, 0));
+        }
+
+        [Fact]
+        public void OneSecondAgo()
+        {
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondAgo), new TimeSpan(0, 0, 0, -1));
         }
 
         [Fact]
