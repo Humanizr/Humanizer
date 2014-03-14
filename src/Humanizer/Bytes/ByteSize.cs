@@ -1,29 +1,6 @@
-#region License, Terms and Author(s)
-//
-// ByteSize utility class.
-// Copyright (c) 2013 Omar Khudeira. All rights reserved.
-//
-//  Author(s):
-//
-//      Omar Khudeira, http://omar.io
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-#endregion
-
 using System;
-using System.Linq;
 
+// ReSharper disable CSharpWarnings::CS1591
 namespace Humanizer.Bytes
 {
     /// <summary>
@@ -31,8 +8,8 @@ namespace Humanizer.Bytes
     /// </summary>
     public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
     {
-        public static readonly ByteSize MinValue = ByteSize.FromBits(long.MinValue);
-        public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);
+        public static readonly ByteSize MinValue = FromBits(long.MinValue);
+        public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
         public const long BytesInKiloByte = 1024;
@@ -59,22 +36,22 @@ namespace Humanizer.Bytes
             get
             {
                 // Absolute value is used to deal with negative values
-                if (Math.Abs(this.TeraBytes) >= 1)
-                    return ByteSize.TeraByteSymbol;
+                if (Math.Abs(TeraBytes) >= 1)
+                    return TeraByteSymbol;
 
-                if (Math.Abs(this.GigaBytes) >= 1)
-                    return ByteSize.GigaByteSymbol;
+                if (Math.Abs(GigaBytes) >= 1)
+                    return GigaByteSymbol;
 
-                if (Math.Abs(this.MegaBytes) >= 1)
-                    return ByteSize.MegaByteSymbol;
+                if (Math.Abs(MegaBytes) >= 1)
+                    return MegaByteSymbol;
 
-                if (Math.Abs(this.KiloBytes) >= 1)
-                    return ByteSize.KiloByteSymbol;
+                if (Math.Abs(KiloBytes) >= 1)
+                    return KiloByteSymbol;
 
-                if (Math.Abs(this.Bytes) >= 1)
-                    return ByteSize.ByteSymbol;
+                if (Math.Abs(Bytes) >= 1)
+                    return ByteSymbol;
 
-                return ByteSize.BitSymbol;
+                return BitSymbol;
             }
         }
         public double LargestWholeNumberValue
@@ -82,22 +59,22 @@ namespace Humanizer.Bytes
             get
             {
                 // Absolute value is used to deal with negative values
-                if (Math.Abs(this.TeraBytes) >= 1)
-                    return this.TeraBytes;
+                if (Math.Abs(TeraBytes) >= 1)
+                    return TeraBytes;
 
-                if (Math.Abs(this.GigaBytes) >= 1)
-                    return this.GigaBytes;
+                if (Math.Abs(GigaBytes) >= 1)
+                    return GigaBytes;
 
-                if (Math.Abs(this.MegaBytes) >= 1)
-                    return this.MegaBytes;
+                if (Math.Abs(MegaBytes) >= 1)
+                    return MegaBytes;
 
-                if (Math.Abs(this.KiloBytes) >= 1)
-                    return this.KiloBytes;
+                if (Math.Abs(KiloBytes) >= 1)
+                    return KiloBytes;
 
-                if (Math.Abs(this.Bytes) >= 1)
-                    return this.Bytes;
+                if (Math.Abs(Bytes) >= 1)
+                    return Bytes;
 
-                return this.Bits;
+                return Bits;
             }
         }
 
@@ -152,7 +129,7 @@ namespace Humanizer.Bytes
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} {1}", this.LargestWholeNumberValue, this.LargestWholeNumberSymbol);
+            return string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberSymbol);
         }
 
         public string ToString(string format)
@@ -164,22 +141,22 @@ namespace Humanizer.Bytes
             Func<double, string> output = n => n.ToString(format);
 
             if (has(TeraByteSymbol))
-                return output(this.TeraBytes);
+                return output(TeraBytes);
             if (has(GigaByteSymbol))
-                return output(this.GigaBytes);
+                return output(GigaBytes);
             if (has(MegaByteSymbol))
-                return output(this.MegaBytes);
+                return output(MegaBytes);
             if (has(KiloByteSymbol))
-                return output(this.KiloBytes);
+                return output(KiloBytes);
 
             // Byte and Bit symbol look must be case-sensitive
-            if (format.IndexOf(ByteSize.ByteSymbol) != -1)
-                return output(this.Bytes);
+            if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
+                return output(Bytes);
 
-            if (format.IndexOf(ByteSize.BitSymbol) != -1)
-                return output(this.Bits);
+            if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
+                return output(Bits);
 
-            return string.Format("{0} {1}", this.LargestWholeNumberValue.ToString(format), this.LargestWholeNumberSymbol);
+            return string.Format("{0} {1}", LargestWholeNumberValue.ToString(format), LargestWholeNumberSymbol);
         }
 
         public override bool Equals(object value)
@@ -198,57 +175,57 @@ namespace Humanizer.Bytes
 
         public bool Equals(ByteSize value)
         {
-            return this.Bits == value.Bits;
+            return Bits == value.Bits;
         }
 
         public override int GetHashCode()
         {
-            return this.Bits.GetHashCode();
+            return Bits.GetHashCode();
         }
 
         public int CompareTo(ByteSize other)
         {
-            return this.Bits.CompareTo(other.Bits);
+            return Bits.CompareTo(other.Bits);
         }
 
         public ByteSize Add(ByteSize bs)
         {
-            return new ByteSize(this.Bits + bs.Bits);
+            return new ByteSize(Bits + bs.Bits);
         }
 
         public ByteSize AddBits(long value)
         {
-            return new ByteSize(this.Bits + value);
+            return new ByteSize(Bits + value);
         }
 
         public ByteSize AddBytes(double value)
         {
-            return this + ByteSize.FromBytes(value);
+            return this + FromBytes(value);
         }
 
         public ByteSize AddKiloBytes(double value)
         {
-            return this + ByteSize.FromKiloBytes(value);
+            return this + FromKiloBytes(value);
         }
 
         public ByteSize AddMegaBytes(double value)
         {
-            return this + ByteSize.FromMegaBytes(value);
+            return this + FromMegaBytes(value);
         }
 
         public ByteSize AddGigaBytes(double value)
         {
-            return this + ByteSize.FromGigaBytes(value);
+            return this + FromGigaBytes(value);
         }
 
         public ByteSize AddTeraBytes(double value)
         {
-            return this + ByteSize.FromTeraBytes(value);
+            return this + FromTeraBytes(value);
         }
 
         public ByteSize Subtract(ByteSize bs)
         {
-            return new ByteSize(this.Bits - bs.Bits);
+            return new ByteSize(Bits - bs.Bits);
         }
 
         public static ByteSize operator +(ByteSize b1, ByteSize b2)
@@ -313,7 +290,7 @@ namespace Humanizer.Bytes
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
 
-            var num = 0;
+            int num;
             var found = false;
 
             // Pick first non-digit number
@@ -386,3 +363,4 @@ namespace Humanizer.Bytes
         }
     }
 }
+// ReSharper restore CSharpWarnings::CS1591

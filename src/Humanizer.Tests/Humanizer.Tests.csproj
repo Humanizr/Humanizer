@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bytes\CreatingMethods.cs" />
-    <Compile Include="Bytes\FluentMethods.cs" />
+    <Compile Include="ByteSizeTests.cs" />
     <Compile Include="Bytes\ParsingMethods.cs" />
     <Compile Include="Bytes\ToStringMethod.cs" />
     <Compile Include="CasingTests.cs" />
