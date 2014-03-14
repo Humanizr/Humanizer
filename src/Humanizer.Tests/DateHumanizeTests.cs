@@ -45,7 +45,7 @@ namespace Humanizer.Tests
         [Fact]
         public void OneMinuteFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteFromNow), new TimeSpan(0, 0, 1, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteFromNow), new TimeSpan(0, 0, 1, 1));
         }
 
         [Fact]
@@ -75,19 +75,19 @@ namespace Humanizer.Tests
         [Fact]
         public void AFewDaysFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleDaysFromNow), 10), new TimeSpan(10, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleDaysFromNow), 10), new TimeSpan(10, 1, 0, 0));
         }
 
         [Fact]
         public void OneMonthFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow), new TimeSpan(31, 0, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow), new TimeSpan(31, 1, 0, 0));
         }
 
         [Fact]
         public void AFewMonthsFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsFromNow), 2), new TimeSpan(62, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsFromNow), 2), new TimeSpan(62, 1, 0, 0));
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace Humanizer.Tests
         [Fact]
         public void OneMinuteAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteAgo), new TimeSpan(0, 0, -1, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteAgo), new TimeSpan(0, 0, -1, -10));
         }
 
         [Fact]
@@ -159,19 +159,19 @@ namespace Humanizer.Tests
         [Fact]
         public void AFewDaysAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleDaysAgo), 10), new TimeSpan(-10, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleDaysAgo), 10), new TimeSpan(-10, -1, 0, 0));
         }
 
         [Fact]
         public void OneMonthAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthAgo), new TimeSpan(-31, 0, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthAgo), new TimeSpan(-31, -1, 0, 0));
         }
 
         [Fact]
         public void AFewMonthsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsAgo), 2), new TimeSpan(-62, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsAgo), 2), new TimeSpan(-62, -1, 0, 0));
         }
 
         [Fact]
