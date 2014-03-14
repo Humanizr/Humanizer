@@ -81,13 +81,13 @@ namespace Humanizer.Tests
         [Fact]
         public void OneMonthFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow), new TimeSpan(30, 0, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow), new TimeSpan(31, 0, 0, 0));
         }
 
         [Fact]
         public void AFewMonthsFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsFromNow), 2), new TimeSpan(60, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsFromNow), 2), new TimeSpan(62, 0, 0, 0));
         }
 
         [Fact]
@@ -165,13 +165,13 @@ namespace Humanizer.Tests
         [Fact]
         public void OneMonthAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthAgo), new TimeSpan(-30, 0, 0, 0));
+            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthAgo), new TimeSpan(-31, 0, 0, 0));
         }
 
         [Fact]
         public void AFewMonthsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsAgo), 2), new TimeSpan(-60, 0, 0, 0));
+            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsAgo), 2), new TimeSpan(-62, 0, 0, 0));
         }
 
         [Fact]
