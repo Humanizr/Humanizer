@@ -72,6 +72,8 @@
   <ItemGroup>
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
+    <Compile Include="DynamicResourceKeys\DateHumanizeExtensions.cs" />
+    <Compile Include="DynamicResourceKeys\TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,9 +85,16 @@
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\ArabicFormatter.cs" />
+    <Compile Include="Localisation\DynamicResourceKeys\DefaultFormatter.cs" />
+    <Compile Include="Localisation\DynamicResourceKeys\IFormatter.cs" />
+    <Compile Include="Localisation\DynamicResourceKeys\ResourceKeys.Common.cs" />
+    <Compile Include="Localisation\DynamicResourceKeys\ResourceKeys.DateHumanize.cs" />
+    <Compile Include="Localisation\DynamicResourceKeys\ResourceKeys.TimeSpanHumanize.cs" />
+    <Compile Include="Localisation\DynamicResourceKeys\TimeUnit.cs" />
     <Compile Include="OnNoMatch.cs" />
     <Compile Include="NoMatchFoundException.cs" />
     <Compile Include="RomanNumeralExtensions.cs" />
+    <Compile Include="StringExentions.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
