@@ -8,11 +8,8 @@ namespace Humanizer.Tests
     {
         static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {
-            var utcNow = DateTime.UtcNow;
-            var localNow = DateTime.Now;
-
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize());
-            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(false));
+            Assert.Equal(expectedString, DateTime.UtcNow.Add(deltaFromNow).Humanize());
+            Assert.Equal(expectedString, DateTime.Now.Add(deltaFromNow).Humanize(false));
         }
 
         static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)

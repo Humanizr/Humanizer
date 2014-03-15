@@ -199,7 +199,7 @@
 
         protected virtual string Format(string resourceKey, int number)
         {
-            return string.Format(Resources.GetResource(GetResourceKey(resourceKey, number)), number);
+            return Resources.GetResource(GetResourceKey(resourceKey, number)).FormatWith(number);
         }
 
         protected virtual string GetResourceKey(string resourceKey, int number)
