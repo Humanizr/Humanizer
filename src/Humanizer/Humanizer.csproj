@@ -70,6 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bytes\ByteSize.cs" />
+    <Compile Include="ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
