@@ -64,14 +64,14 @@ namespace Humanizer.Tests
         [Fact]
         public void Bits()
         {
-            var size = ((long)2).Bits();
+            var size = (2).Bits();
             Assert.Equal(ByteSize.FromBits(2), size);
         }
 
         [Fact]
         public void HumanizesBits()
         {
-            var humanized = ((long)2).Bits().Humanize();
+            var humanized = (2).Bits().Humanize();
             Assert.Equal("2 b", humanized);
         }
         [Fact]

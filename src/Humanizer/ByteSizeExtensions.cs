@@ -15,6 +15,16 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Use value as a quantity of bits
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        public static ByteSize Bits(this int val)
+        {
+            return ByteSize.FromBits(val);
+        }
+
+        /// <summary>
         /// Use value as a quantity of bytes
         /// </summary>
         /// <param name="val"></param>
