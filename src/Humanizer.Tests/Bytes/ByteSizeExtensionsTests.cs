@@ -1,7 +1,7 @@
 ﻿using Humanizer.Bytes;
 using Xunit;
 
-namespace Humanizer.Tests
+namespace Humanizer.Tests.Bytes
 {
     public class FluentMethods
     {
@@ -13,7 +13,7 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void HumanizesTB()
+        public void HumanizesTerabytes()
         {
             var humanized = (2.0).Terabytes().Humanize();
             Assert.Equal("2 TB", humanized);
@@ -27,7 +27,7 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void HumanizesGB()
+        public void HumanizesGigabytes()
         {
             var humanized = (2.0).Gigabytes().Humanize();
             Assert.Equal("2 GB", humanized);
@@ -41,7 +41,7 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void HumanizesKB()
+        public void HumanizesKilobytes()
         {
             var humanized = (2.0).Kilobytes().Humanize();
             Assert.Equal("2 KB", humanized);
@@ -74,14 +74,8 @@ namespace Humanizer.Tests
             var humanized = (2).Bits().Humanize();
             Assert.Equal("2 b", humanized);
         }
-        [Fact]
+        
         public void HumanizesWithFormat()
-        {
-            // TODO
-        }
-
-        [Fact]
-        public void Dehumanizes()
         {
             // TODO
         }

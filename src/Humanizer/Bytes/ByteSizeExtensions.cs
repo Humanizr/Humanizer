@@ -1,7 +1,11 @@
 ﻿using Humanizer.Bytes;
 
+// ReSharper disable once CheckNamespace
 namespace Humanizer
 {
+    /// <summary>
+    /// Provides extension methods for ByteSize
+    /// </summary>
     public static class ByteSizeExtensions
     {
         /// <summary>
@@ -73,10 +77,7 @@ namespace Humanizer
         {
             return ByteSize.FromTeraBytes(val);
         }
-    }
 
-    public static class HumanizeExtension
-    {
         /// <summary>
         /// Turns a byte quantity into human readable form, eg 2 GB
         /// </summary>
