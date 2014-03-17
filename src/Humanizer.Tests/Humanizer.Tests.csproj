@@ -70,10 +70,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bytes\CreatingMethods.cs" />
+    <Compile Include="Bytes\CreatingTests.cs" />
     <Compile Include="Bytes\ByteSizeExtensionsTests.cs" />
-    <Compile Include="Bytes\ParsingMethods.cs" />
-    <Compile Include="Bytes\ToStringMethod.cs" />
+    <Compile Include="Bytes\ParsingTests.cs" />
+    <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\NumberToWordsTests.cs" />
