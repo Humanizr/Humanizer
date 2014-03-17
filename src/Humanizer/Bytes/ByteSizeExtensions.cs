@@ -9,83 +9,83 @@ namespace Humanizer
     public static class ByteSizeExtensions
     {
         /// <summary>
-        /// Use value as a quantity of bits
+        /// Considers input as bits
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static ByteSize Bits(this long val)
+        public static ByteSize Bits(this long input)
         {
-            return ByteSize.FromBits(val);
+            return ByteSize.FromBits(input);
         }
 
         /// <summary>
-        /// Use value as a quantity of bits
+        /// Considers input as bits
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static ByteSize Bits(this int val)
+        public static ByteSize Bits(this int input)
         {
-            return ByteSize.FromBits(val);
+            return ByteSize.FromBits(input);
         }
 
         /// <summary>
-        /// Use value as a quantity of bytes
+        /// Considers input as bytes
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static ByteSize Bytes(this double val)
+        public static ByteSize Bytes(this double input)
         {
-            return ByteSize.FromBytes(val);
+            return ByteSize.FromBytes(input);
         }
 
         /// <summary>
-        /// Use value as a quantity of kilobytes
+        /// Considers input as kilobytes
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static ByteSize Kilobytes(this double val)
+        public static ByteSize Kilobytes(this double input)
         {
-            return ByteSize.FromKiloBytes(val);
+            return ByteSize.FromKiloBytes(input);
         }
 
         /// <summary>
-        /// Use value as a quantity of megabytes
+        /// Considers input as megabytes
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static ByteSize Megabytes(this double val)
+        public static ByteSize Megabytes(this double input)
         {
-            return ByteSize.FromMegaBytes(val);
+            return ByteSize.FromMegaBytes(input);
         }
 
         /// <summary>
-        /// Use value as a quantity of gigabytes
+        /// Considers input as gigabytes
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static ByteSize Gigabytes(this double val)
+        public static ByteSize Gigabytes(this double input)
         {
-            return ByteSize.FromGigaBytes(val);
+            return ByteSize.FromGigaBytes(input);
         }
 
         /// <summary>
-        /// Use value as a quantity of terabytes
+        /// Considers input as terabytes
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static ByteSize Terabytes(this double val)
+        public static ByteSize Terabytes(this double input)
         {
-            return ByteSize.FromTeraBytes(val);
+            return ByteSize.FromTeraBytes(input);
         }
 
         /// <summary>
         /// Turns a byte quantity into human readable form, eg 2 GB
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public static string Humanize(this ByteSize val)
+        public static string Humanize(this ByteSize input)
         {
-            return val.ToString();
+            return input.ToString();
         }
     }
 }
