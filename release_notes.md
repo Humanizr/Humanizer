@@ -3,7 +3,7 @@
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.13.2...master)
 
 ###v1.13.2 - 2014-03-17
-  - [#95](https://github.com/MehdiK/Humanizer/pull/95): Added NoMatch optional parameter to DehumanizeTo & renamed `CannotMapToTargetException` to `NoMatchFoundException`
+  - [#99](https://github.com/MehdiK/Humanizer/pull/99): Added `ByteSize` feature
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.12.4...v1.13.2)
 
