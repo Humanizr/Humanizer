@@ -376,6 +376,27 @@ Also the reverse operation using the `FromRoman` extension.
 "V".FromRoman() => 5
 ```
 
+###ByteSize
+Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library with some Humanizer easy API touch.
+Some changes had to be made to make the API and tests consistent with the rest of Humanizer; but apart from those it's more or less the same.
+To learn what ByteSize offers please refer to the [documentations](https://github.com/omar/ByteSize). 
+
+Quite a few extension methods have been added on top of ByteSize to make the interaction with ByteSize easier and more consistent with the Humanizer API. 
+Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
+
+```c#
+var fileSize = (10).Kilobytes();
+
+fileSize.Bits      => 81920
+fileSize.Bytes     => 10240
+fileSize.Kilobytes => 10
+fileSize.Megabytes => 0.009765625
+fileSize.Gigabytes => 9.53674316e-6
+fileSize.Terabytes => 9.31322575e-9
+
+fileSize.Humanize() => "10 KB"
+```
+
 ###Mix this into your framework to simplify your life
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
 
