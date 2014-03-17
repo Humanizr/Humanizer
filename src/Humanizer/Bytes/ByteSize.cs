@@ -12,41 +12,41 @@ namespace Humanizer.Bytes
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
-        public const long BytesInKiloByte = 1024;
-        public const long BytesInMegaByte = 1048576;
-        public const long BytesInGigaByte = 1073741824;
-        public const long BytesInTeraByte = 1099511627776;
+        public const long BytesInKilobyte = 1024;
+        public const long BytesInMegabyte = 1048576;
+        public const long BytesInGigabyte = 1073741824;
+        public const long BytesInTerabyte = 1099511627776;
 
         public const string BitSymbol = "b";
         public const string ByteSymbol = "B";
-        public const string KiloByteSymbol = "KB";
-        public const string MegaByteSymbol = "MB";
-        public const string GigaByteSymbol = "GB";
-        public const string TeraByteSymbol = "TB";
+        public const string KilobyteSymbol = "KB";
+        public const string MegabyteSymbol = "MB";
+        public const string GigabyteSymbol = "GB";
+        public const string TerabyteSymbol = "TB";
 
         public long Bits { get; private set; }
         public double Bytes { get; private set; }
-        public double KiloBytes { get; private set; }
-        public double MegaBytes { get; private set; }
-        public double GigaBytes { get; private set; }
-        public double TeraBytes { get; private set; }
+        public double Kilobytes { get; private set; }
+        public double Megabytes { get; private set; }
+        public double Gigabytes { get; private set; }
+        public double Terabytes { get; private set; }
 
         public string LargestWholeNumberSymbol
         {
             get
             {
                 // Absolute value is used to deal with negative values
-                if (Math.Abs(TeraBytes) >= 1)
-                    return TeraByteSymbol;
+                if (Math.Abs(Terabytes) >= 1)
+                    return TerabyteSymbol;
 
-                if (Math.Abs(GigaBytes) >= 1)
-                    return GigaByteSymbol;
+                if (Math.Abs(Gigabytes) >= 1)
+                    return GigabyteSymbol;
 
-                if (Math.Abs(MegaBytes) >= 1)
-                    return MegaByteSymbol;
+                if (Math.Abs(Megabytes) >= 1)
+                    return MegabyteSymbol;
 
-                if (Math.Abs(KiloBytes) >= 1)
-                    return KiloByteSymbol;
+                if (Math.Abs(Kilobytes) >= 1)
+                    return KilobyteSymbol;
 
                 if (Math.Abs(Bytes) >= 1)
                     return ByteSymbol;
@@ -59,17 +59,17 @@ namespace Humanizer.Bytes
             get
             {
                 // Absolute value is used to deal with negative values
-                if (Math.Abs(TeraBytes) >= 1)
-                    return TeraBytes;
+                if (Math.Abs(Terabytes) >= 1)
+                    return Terabytes;
 
-                if (Math.Abs(GigaBytes) >= 1)
-                    return GigaBytes;
+                if (Math.Abs(Gigabytes) >= 1)
+                    return Gigabytes;
 
-                if (Math.Abs(MegaBytes) >= 1)
-                    return MegaBytes;
+                if (Math.Abs(Megabytes) >= 1)
+                    return Megabytes;
 
-                if (Math.Abs(KiloBytes) >= 1)
-                    return KiloBytes;
+                if (Math.Abs(Kilobytes) >= 1)
+                    return Kilobytes;
 
                 if (Math.Abs(Bytes) >= 1)
                     return Bytes;
@@ -85,10 +85,10 @@ namespace Humanizer.Bytes
             Bits = (long)Math.Ceiling(byteSize * BitsInByte);
 
             Bytes = byteSize;
-            KiloBytes = byteSize / BytesInKiloByte;
-            MegaBytes = byteSize / BytesInMegaByte;
-            GigaBytes = byteSize / BytesInGigaByte;
-            TeraBytes = byteSize / BytesInTeraByte;
+            Kilobytes = byteSize / BytesInKilobyte;
+            Megabytes = byteSize / BytesInMegabyte;
+            Gigabytes = byteSize / BytesInGigabyte;
+            Terabytes = byteSize / BytesInTerabyte;
         }
 
         public static ByteSize FromBits(long value)
@@ -101,24 +101,24 @@ namespace Humanizer.Bytes
             return new ByteSize(value);
         }
 
-        public static ByteSize FromKiloBytes(double value)
+        public static ByteSize FromKilobytes(double value)
         {
-            return new ByteSize(value * BytesInKiloByte);
+            return new ByteSize(value * BytesInKilobyte);
         }
 
-        public static ByteSize FromMegaBytes(double value)
+        public static ByteSize FromMegabytes(double value)
         {
-            return new ByteSize(value * BytesInMegaByte);
+            return new ByteSize(value * BytesInMegabyte);
         }
 
-        public static ByteSize FromGigaBytes(double value)
+        public static ByteSize FromGigabytes(double value)
         {
-            return new ByteSize(value * BytesInGigaByte);
+            return new ByteSize(value * BytesInGigabyte);
         }
 
-        public static ByteSize FromTeraBytes(double value)
+        public static ByteSize FromTerabytes(double value)
         {
-            return new ByteSize(value * BytesInTeraByte);
+            return new ByteSize(value * BytesInTerabyte);
         }
 
         /// <summary>
@@ -140,14 +140,14 @@ namespace Humanizer.Bytes
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             Func<double, string> output = n => n.ToString(format);
 
-            if (has(TeraByteSymbol))
-                return output(TeraBytes);
-            if (has(GigaByteSymbol))
-                return output(GigaBytes);
-            if (has(MegaByteSymbol))
-                return output(MegaBytes);
-            if (has(KiloByteSymbol))
-                return output(KiloBytes);
+            if (has(TerabyteSymbol))
+                return output(Terabytes);
+            if (has(GigabyteSymbol))
+                return output(Gigabytes);
+            if (has(MegabyteSymbol))
+                return output(Megabytes);
+            if (has(KilobyteSymbol))
+                return output(Kilobytes);
 
             // Byte and Bit symbol look must be case-sensitive
             if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
@@ -203,24 +203,24 @@ namespace Humanizer.Bytes
             return this + FromBytes(value);
         }
 
-        public ByteSize AddKiloBytes(double value)
+        public ByteSize AddKilobytes(double value)
         {
-            return this + FromKiloBytes(value);
+            return this + FromKilobytes(value);
         }
 
-        public ByteSize AddMegaBytes(double value)
+        public ByteSize AddMegabytes(double value)
         {
-            return this + FromMegaBytes(value);
+            return this + FromMegabytes(value);
         }
 
-        public ByteSize AddGigaBytes(double value)
+        public ByteSize AddGigabytes(double value)
         {
-            return this + FromGigaBytes(value);
+            return this + FromGigabytes(value);
         }
 
-        public ByteSize AddTeraBytes(double value)
+        public ByteSize AddTerabytes(double value)
         {
-            return this + FromTeraBytes(value);
+            return this + FromTerabytes(value);
         }
 
         public ByteSize Subtract(ByteSize bs)
@@ -332,20 +332,20 @@ namespace Humanizer.Bytes
                     }
                     break;
 
-                case KiloByteSymbol:
-                    result = FromKiloBytes(number);
+                case KilobyteSymbol:
+                    result = FromKilobytes(number);
                     break;
 
-                case MegaByteSymbol:
-                    result = FromMegaBytes(number);
+                case MegabyteSymbol:
+                    result = FromMegabytes(number);
                     break;
 
-                case GigaByteSymbol:
-                    result = FromGigaBytes(number);
+                case GigabyteSymbol:
+                    result = FromGigabytes(number);
                     break;
 
-                case TeraByteSymbol:
-                    result = FromTeraBytes(number);
+                case TerabyteSymbol:
+                    result = FromTerabytes(number);
                     break;
             }
 

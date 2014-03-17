@@ -10,7 +10,7 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void Parse()
         {
-            Assert.Equal(ByteSize.FromKiloBytes(1020), ByteSize.Parse("1020KB"));
+            Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020KB"));
         }
 
         [Fact]
@@ -20,13 +20,13 @@ namespace Humanizer.Tests.Bytes
             var resultBool = ByteSize.TryParse("1020KB", out resultByteSize);
 
             Assert.True(resultBool);
-            Assert.Equal(ByteSize.FromKiloBytes(1020), resultByteSize);
+            Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
         }
 
         [Fact]
-        public void ParseDecimalMegaBytes()
+        public void ParseDecimalMegabytes()
         {
-            Assert.Equal(ByteSize.FromMegaBytes(100.5), ByteSize.Parse("100.5MB"));
+            Assert.Equal(ByteSize.FromMegabytes(100.5), ByteSize.Parse("100.5MB"));
         }
 
         [Theory]
@@ -45,7 +45,7 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void TryParseWorksWithLotsOfSpaces()
         {
-            Assert.Equal(ByteSize.FromKiloBytes(100), ByteSize.Parse(" 100 KB "));
+            Assert.Equal(ByteSize.FromKilobytes(100), ByteSize.Parse(" 100 KB "));
         }
 
         [Fact]
@@ -79,27 +79,27 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void ParseKiloBytes()
+        public void ParseKilobytes()
         {
-            Assert.Equal(ByteSize.FromKiloBytes(1020), ByteSize.Parse("1020KB"));
+            Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020KB"));
         }
 
         [Fact]
-        public void ParseMegaBytes()
+        public void ParseMegabytes()
         {
-            Assert.Equal(ByteSize.FromMegaBytes(1000), ByteSize.Parse("1000MB"));
+            Assert.Equal(ByteSize.FromMegabytes(1000), ByteSize.Parse("1000MB"));
         }
 
         [Fact]
-        public void ParseGigaBytes()
+        public void ParseGigabytes()
         {
-            Assert.Equal(ByteSize.FromGigaBytes(805), ByteSize.Parse("805GB"));
+            Assert.Equal(ByteSize.FromGigabytes(805), ByteSize.Parse("805GB"));
         }
 
         [Fact]
-        public void ParseTeraBytes()
+        public void ParseTerabytes()
         {
-            Assert.Equal(ByteSize.FromTeraBytes(100), ByteSize.Parse("100TB"));
+            Assert.Equal(ByteSize.FromTerabytes(100), ByteSize.Parse("100TB"));
         }
     }
 }

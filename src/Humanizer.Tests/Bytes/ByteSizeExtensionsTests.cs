@@ -9,7 +9,7 @@ namespace Humanizer.Tests.Bytes
         public void Terabytes()
         {
             var size = (2.0).Terabytes();
-            Assert.Equal(ByteSize.FromTeraBytes(2), size);
+            Assert.Equal(ByteSize.FromTerabytes(2), size);
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace Humanizer.Tests.Bytes
         public void Gigabytes()
         {
             var size = (2.0).Gigabytes();
-            Assert.Equal(ByteSize.FromGigaBytes(2), size);
+            Assert.Equal(ByteSize.FromGigabytes(2), size);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace Humanizer.Tests.Bytes
         public void Kilobytes()
         {
             var size = (2.0).Kilobytes();
-            Assert.Equal(ByteSize.FromKiloBytes(2), size);
+            Assert.Equal(ByteSize.FromKilobytes(2), size);
         }
 
         [Fact]

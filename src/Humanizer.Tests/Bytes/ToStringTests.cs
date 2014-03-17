@@ -8,19 +8,19 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ReturnsLargestMetricSuffix()
         {
-            Assert.Equal("10.5 KB", ByteSize.FromKiloBytes(10.5).ToString());
+            Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.5).ToString());
         }
 
         [Fact]
         public void ReturnsDefaultNumberFormat()
         {
-            Assert.Equal("10.5 KB", ByteSize.FromKiloBytes(10.5).ToString("KB"));
+            Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.5).ToString("KB"));
         }
 
         [Fact]
         public void ReturnsProvidedNumberFormat()
         {
-            Assert.Equal("10.1234 KB", ByteSize.FromKiloBytes(10.1234).ToString("#.#### KB"));
+            Assert.Equal("10.1234 KB", ByteSize.FromKilobytes(10.1234).ToString("#.#### KB"));
         }
 
         [Fact]
@@ -36,45 +36,45 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void ReturnsKiloBytes()
+        public void ReturnsKilobytes()
         {
-            Assert.Equal("10 KB", ByteSize.FromKiloBytes(10).ToString("##.#### KB"));
+            Assert.Equal("10 KB", ByteSize.FromKilobytes(10).ToString("##.#### KB"));
         }
 
         [Fact]
-        public void ReturnsMegaBytes()
+        public void ReturnsMegabytes()
         {
-            Assert.Equal("10 MB", ByteSize.FromMegaBytes(10).ToString("##.#### MB"));
+            Assert.Equal("10 MB", ByteSize.FromMegabytes(10).ToString("##.#### MB"));
         }
 
         [Fact]
-        public void ReturnsGigaBytes()
+        public void ReturnsGigabytes()
         {
-            Assert.Equal("10 GB", ByteSize.FromGigaBytes(10).ToString("##.#### GB"));
+            Assert.Equal("10 GB", ByteSize.FromGigabytes(10).ToString("##.#### GB"));
         }
 
         [Fact]
-        public void ReturnsTeraBytes()
+        public void ReturnsTerabytes()
         {
-            Assert.Equal("10 TB", ByteSize.FromTeraBytes(10).ToString("##.#### TB"));
+            Assert.Equal("10 TB", ByteSize.FromTerabytes(10).ToString("##.#### TB"));
         }
 
         [Fact]
         public void ReturnsSelectedFormat()
         {
-            Assert.Equal("10.0 TB", ByteSize.FromTeraBytes(10).ToString("0.0 TB"));
+            Assert.Equal("10.0 TB", ByteSize.FromTerabytes(10).ToString("0.0 TB"));
         }
 
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZero()
         {
-            Assert.Equal("512 KB", ByteSize.FromMegaBytes(.5).ToString("#.#"));
+            Assert.Equal("512 KB", ByteSize.FromMegabytes(.5).ToString("#.#"));
         }
 
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZeroForNegativeValues()
         {
-            Assert.Equal("-512 KB", ByteSize.FromMegaBytes(-.5).ToString("#.#"));
+            Assert.Equal("-512 KB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
         }
     }
 }

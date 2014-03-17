@@ -45,7 +45,7 @@ namespace Humanizer
         /// <returns></returns>
         public static ByteSize Kilobytes(this double input)
         {
-            return ByteSize.FromKiloBytes(input);
+            return ByteSize.FromKilobytes(input);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Humanizer
         /// <returns></returns>
         public static ByteSize Megabytes(this double input)
         {
-            return ByteSize.FromMegaBytes(input);
+            return ByteSize.FromMegabytes(input);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Humanizer
         /// <returns></returns>
         public static ByteSize Gigabytes(this double input)
         {
-            return ByteSize.FromGigaBytes(input);
+            return ByteSize.FromGigabytes(input);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Humanizer
         /// <returns></returns>
         public static ByteSize Terabytes(this double input)
         {
-            return ByteSize.FromTeraBytes(input);
+            return ByteSize.FromTerabytes(input);
         }
 
         /// <summary>
