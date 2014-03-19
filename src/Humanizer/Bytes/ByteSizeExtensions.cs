@@ -82,10 +82,14 @@ namespace Humanizer
         /// Turns a byte quantity into human readable form, eg 2 GB
         /// </summary>
         /// <param name="input"></param>
+        /// <param name="format">The string format to use</param>
         /// <returns></returns>
-        public static string Humanize(this ByteSize input)
+        public static string Humanize(this ByteSize input, string format = null)
         {
-            return input.ToString();
+            if (string.IsNullOrWhiteSpace(format))
+                return input.ToString();
+
+            return input.ToString(format);
         }
     }
 }

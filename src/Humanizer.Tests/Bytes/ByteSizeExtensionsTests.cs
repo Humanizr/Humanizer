@@ -1,83 +1,99 @@
 ﻿using Humanizer.Bytes;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class FluentMethods
+    public class ByteSizeExtensionsTests
     {
         [Fact]
         public void Terabytes()
         {
-            var size = (2.0).Terabytes();
-            Assert.Equal(ByteSize.FromTerabytes(2), size);
+            Assert.Equal(ByteSize.FromTerabytes(2), (2.0).Terabytes());
         }
 
-        [Fact]
-        public void HumanizesTerabytes()
+        [Theory]
+        [InlineData(2, null, "2 TB")]
+        [InlineData(2, "GB", "2048 GB")]
+        [InlineData(2.123, "#.#", "2.1 TB")]
+        public void HumanizesTerabytes(double input, string format, string expectedValue)
         {
-            var humanized = (2.0).Terabytes().Humanize();
-            Assert.Equal("2 TB", humanized);
+            Assert.Equal(expectedValue, input.Terabytes().Humanize(format));
         }
 
         [Fact]
         public void Gigabytes()
         {
-            var size = (2.0).Gigabytes();
-            Assert.Equal(ByteSize.FromGigabytes(2), size);
+            Assert.Equal(ByteSize.FromGigabytes(2), (2.0).Gigabytes());
+        }
+
+        [Theory]
+        [InlineData(2, null, "2 GB")]
+        [InlineData(2, "MB", "2048 MB")]
+        [InlineData(2.123, "#.##", "2.12 GB")]
+        public void HumanizesGigabytes(double input, string format, string expectedValue)
+        {
+            Assert.Equal(expectedValue, input.Gigabytes().Humanize(format));
         }
 
         [Fact]
-        public void HumanizesGigabytes()
+        public void Megabytes()
         {
-            var humanized = (2.0).Gigabytes().Humanize();
-            Assert.Equal("2 GB", humanized);
+            Assert.Equal(ByteSize.FromMegabytes(2), (2.0).Megabytes());
+        }
+
+        [Theory]
+        [InlineData(2, null, "2 MB")]
+        [InlineData(2, "KB", "2048 KB")]
+        [InlineData(2.123, "#", "2 MB")]
+        public void HumanizesMegabytes(double input, string format, string expectedValue)
+        {
+            Assert.Equal(expectedValue, input.Megabytes().Humanize(format));
         }
 
         [Fact]
         public void Kilobytes()
         {
-            var size = (2.0).Kilobytes();
-            Assert.Equal(ByteSize.FromKilobytes(2), size);
+            Assert.Equal(ByteSize.FromKilobytes(2), (2.0).Kilobytes());
         }
 
-        [Fact]
-        public void HumanizesKilobytes()
+        [Theory]
+        [InlineData(2, null, "2 KB")]
+        [InlineData(2, "B", "2048 B")]
+        [InlineData(2.123, "#.####", "2.123 KB")]
+        public void HumanizesKilobytes(double input, string format, string expectedValue)
         {
-            var humanized = (2.0).Kilobytes().Humanize();
-            Assert.Equal("2 KB", humanized);
+            Assert.Equal(expectedValue, input.Kilobytes().Humanize(format));
         }
 
         [Fact]
         public void Bytes()
         {
-            var size = (2.0).Bytes();
-            Assert.Equal(ByteSize.FromBytes(2), size);
+            Assert.Equal(ByteSize.FromBytes(2), (2.0).Bytes());
         }
 
-        [Fact]
-        public void HumanizesBytes()
+        [Theory]
+        [InlineData(2, null, "2 B")]
+        [InlineData(2000, "KB", "1.95 KB")]
+        [InlineData(2123, "#.##", "2.07 KB")]
+        public void HumanizesBytes(double input, string format, string expectedValue)
         {
-            var humanized = (2.0).Bytes().Humanize();
-            Assert.Equal("2 B", humanized);
+            Assert.Equal(expectedValue, input.Bytes().Humanize(format));
         }
 
         [Fact]
         public void Bits()
         {
-            var size = (2).Bits();
-            Assert.Equal(ByteSize.FromBits(2), size);
+            Assert.Equal(ByteSize.FromBits(2), (2).Bits());
         }
 
-        [Fact]
-        public void HumanizesBits()
+        [Theory]
+        [InlineData(2, null, "2 b")]
+        [InlineData(12, "B", "1.5 B")]
+        [InlineData(10000, "#.# KB", "1.2 KB")]
+        public void HumanizesBits(long input, string format, string expectedValue)
         {
-            var humanized = (2).Bits().Humanize();
-            Assert.Equal("2 b", humanized);
-        }
-        
-        public void HumanizesWithFormat()
-        {
-            // TODO
+            Assert.Equal(expectedValue, input.Bits().Humanize(format));
         }
     }
 }
