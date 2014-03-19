@@ -377,9 +377,7 @@ Also the reverse operation using the `FromRoman` extension.
 ```
 
 ###ByteSize
-Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library with some Humanizer easy API touch.
-Some changes had to be made to make the API and tests consistent with the rest of Humanizer; but apart from those it's more or less the same.
-To learn what ByteSize offers please refer to the [documentations](https://github.com/omar/ByteSize). 
+Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library with some Humanizer API touch. 
 
 Quite a few extension methods have been added on top of ByteSize to make the interaction with ByteSize easier and more consistent with the Humanizer API. 
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
@@ -393,8 +391,68 @@ fileSize.Kilobytes => 10
 fileSize.Megabytes => 0.009765625
 fileSize.Gigabytes => 9.53674316e-6
 fileSize.Terabytes => 9.31322575e-9
+```
 
-fileSize.Humanize() => "10 KB"
+There are quite a few extension methods that allow you to turn a number into a ByteSize instance:
+
+```C#
+3.Bits();
+5.Bytes();
+(10.5).Kilobytes();
+(2.5).Megabytes();
+(10.2).Gigabytes();
+(4.7).Terabytes();
+```
+
+You can also add/subtract the values using +/- operators and Add/Subtract methods:
+
+```C#
+var total = (10).Gigabytes() + (512).Megabytes() - (2.5).Gigabytes();
+total.Subtract((2500).Kilobytes()).Add((25).Megabytes());
+```
+
+A `ByteSize` object also contains two properties that represent the largest metric prefix symbol and value.
+
+```C#
+var maxFileSize = (10).Kilobytes();
+
+maxFileSize.LargestWholeNumberSymbol;  // "KB"
+maxFileSize.LargestWholeNumberValue;   // 10
+```
+
+If you want a string representation you can call `ToString` or `Humanize` on the ByteSize instance:
+
+```C#
+7.Bits().ToString();         // 7 b
+8.Bits().ToString();         // 1 B
+(.5).Kilobytes().Humanize();   // 512 B
+(1000).Kilobytes().ToString(); // 1000 KB
+(1024).Kilobytes().Humanize(); // 1 MB
+(.5).Gigabytes().Humanize();   // 512 MB
+(1024).Gigabytes().ToString(); // 1 TB
+```
+
+You can also optionally provide a format for the expected string representation. The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). The default number format is `#.##` which rounds the number to two decimal places:
+
+```C#
+var b = (10.505).Kilobytes();
+
+// Default number format is #.##
+b.ToString("KB");         // 10.52 KB
+b.Humanize("MB");         // .01 MB
+b.Humanize("b");          // 86057 b
+
+// Default symbol is the largest metric prefix value >= 1
+b.ToString("#.#");        // 10.5 KB
+
+// All valid values of double.ToString(string format) are acceptable
+b.ToString("0.0000");     // 10.5050 KB
+b.Humanize("000.00");     // 010.51 KB
+
+// You can include number format and symbols
+b.ToString("#.#### MB");  // .0103 MB
+b.Humanize("0.00 GB");    // 0 GB
+b.Humanize("#.## B");     // 10757.12 B
 ```
 
 ###Mix this into your framework to simplify your life
