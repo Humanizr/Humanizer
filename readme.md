@@ -377,9 +377,8 @@ Also the reverse operation using the `FromRoman` extension.
 ```
 
 ###ByteSize
-Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library with some Humanizer API touch. 
-
-Quite a few extension methods have been added on top of ByteSize to make the interaction with ByteSize easier and more consistent with the Humanizer API. 
+Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
+Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API. 
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
 ```c#
@@ -393,7 +392,7 @@ fileSize.Gigabytes => 9.53674316e-6
 fileSize.Terabytes => 9.31322575e-9
 ```
 
-There are quite a few extension methods that allow you to turn a number into a ByteSize instance:
+There are a few extension methods that allow you to turn a number into a ByteSize instance:
 
 ```C#
 3.Bits();
@@ -411,7 +410,7 @@ var total = (10).Gigabytes() + (512).Megabytes() - (2.5).Gigabytes();
 total.Subtract((2500).Kilobytes()).Add((25).Megabytes());
 ```
 
-A `ByteSize` object also contains two properties that represent the largest metric prefix symbol and value.
+A `ByteSize` object contains two properties that represent the largest metric prefix symbol and value:
 
 ```C#
 var maxFileSize = (10).Kilobytes();
@@ -420,7 +419,7 @@ maxFileSize.LargestWholeNumberSymbol;  // "KB"
 maxFileSize.LargestWholeNumberValue;   // 10
 ```
 
-If you want a string representation you can call `ToString` or `Humanize` on the ByteSize instance:
+If you want a string representation you can call `ToString` or `Humanize` interchangeably on the `ByteSize` instance:
 
 ```C#
 7.Bits().ToString();         // 7 b
@@ -432,7 +431,9 @@ If you want a string representation you can call `ToString` or `Humanize` on the
 (1024).Gigabytes().ToString(); // 1 TB
 ```
 
-You can also optionally provide a format for the expected string representation. The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx). The default number format is `#.##` which rounds the number to two decimal places:
+You can also optionally provide a format for the expected string representation. 
+The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. 
+The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx) with `#.##` as the default format which rounds the number to two decimal places:
 
 ```C#
 var b = (10.505).Kilobytes();
@@ -453,6 +454,34 @@ b.Humanize("000.00");     // 010.51 KB
 b.ToString("#.#### MB");  // .0103 MB
 b.Humanize("0.00 GB");    // 0 GB
 b.Humanize("#.## B");     // 10757.12 B
+```
+
+There isn't a `Dehumanize` method to turn a string representation back into a `ByteSize` instance; but you can use `Parse` and `TryParse` on `ByteSize` to do that.
+Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful. 
+If the value is parsed it is output to the `out` parameter supplied:
+
+```
+ByteSize output;
+ByteSize.TryParse("1.5mb", out output);
+
+// Invalid
+ByteSize.Parse("1.5 b");   // Can't have partial bits
+
+// Valid
+ByteSize.Parse("5b");
+ByteSize.Parse("1.55B");
+ByteSize.Parse("1.55KB");
+ByteSize.Parse("1.55 kB "); // Spaces are trimmed
+ByteSize.Parse("1.55 kb");
+ByteSize.Parse("1.55 MB");
+ByteSize.Parse("1.55 mB");
+ByteSize.Parse("1.55 mb");
+ByteSize.Parse("1.55 GB");
+ByteSize.Parse("1.55 gB");
+ByteSize.Parse("1.55 gb");
+ByteSize.Parse("1.55 TB");
+ByteSize.Parse("1.55 tB");
+ByteSize.Parse("1.55 tb");
 ```
 
 ###Mix this into your framework to simplify your life
