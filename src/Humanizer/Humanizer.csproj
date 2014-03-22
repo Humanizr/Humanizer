@@ -70,6 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bytes\ByteSize.cs" />
+    <Compile Include="Bytes\ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DynamicResourceKeys\DateHumanizeExtensions.cs" />

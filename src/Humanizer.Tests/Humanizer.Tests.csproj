@@ -70,6 +70,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bytes\CreatingTests.cs" />
+    <Compile Include="Bytes\ByteSizeExtensionsTests.cs" />
+    <Compile Include="Bytes\ParsingTests.cs" />
+    <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
     <Compile Include="Localisation\DynamicResourceKeys\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />

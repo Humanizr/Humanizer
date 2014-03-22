@@ -8,8 +8,12 @@ namespace Humanizer.Tests
     {
         static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {
-            Assert.Equal(expectedString, DateTime.UtcNow.Add(deltaFromNow).Humanize());
-            Assert.Equal(expectedString, DateTime.Now.Add(deltaFromNow).Humanize(false));
+            var utcNow = DateTime.UtcNow;
+            var localNow = DateTime.Now;
+
+            // feels like the only way to avoid breaking tests because CPU ticks over is to inject the base date
+            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow));
+            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(utcDate: false, dateToCompareAgainst: localNow));
         }
 
         static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
