@@ -1,195 +1,164 @@
 ﻿namespace Humanizer.Localisation
 {
+    /// <summary>
+    /// Default implementation of IFormatter interface.
+    /// </summary>
     public class DefaultFormatter : IFormatter
     {
-        public virtual string DateHumanize_MultipleDaysAgo(int numberOfDays)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleDaysAgo, numberOfDays);
-        }
-
-        public virtual string DateHumanize_MultipleHoursAgo(int numberOfHours)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleHoursAgo, numberOfHours);
-        }
-
-        public virtual string DateHumanize_MultipleMinutesAgo(int numberOfMinutes)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleMinutesAgo, numberOfMinutes);
-        }
-
-        public virtual string DateHumanize_MultipleMonthsAgo(int numberOfMonths)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleMonthsAgo, numberOfMonths);
-        }
-
-        public virtual string DateHumanize_MultipleSecondsAgo(int numberOfSeconds)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleSecondsAgo, numberOfSeconds);
-        }
-
-        public virtual string DateHumanize_MultipleYearsAgo(int numberOfYears)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleYearsAgo, numberOfYears);
-        }
-
-        public virtual string DateHumanize_SingleMinuteAgo()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteAgo);
-        }
-
-        public virtual string DateHumanize_SingleHourAgo()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleHourAgo);
-        }
-
-        public virtual string DateHumanize_SingleMonthAgo()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthAgo);
-        }
-
-        public virtual string DateHumanize_SingleSecondAgo()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondAgo);
-        }
-
-        public virtual string DateHumanize_SingleYearAgo()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleYearAgo);
-        }
-
-        public virtual string DateHumanize_SingleDayAgo()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleDayAgo);
-        }
-
-        public virtual string DateHumanize_MultipleDaysFromNow(int numberOfDays)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleDaysFromNow, numberOfDays);
-        }
-
-        public virtual string DateHumanize_MultipleHoursFromNow(int numberOfHours)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleHoursFromNow, numberOfHours);
-        }
-
-        public virtual string DateHumanize_MultipleMinutesFromNow(int numberOfMinutes)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleMinutesFromNow, numberOfMinutes);
-        }
-
-        public virtual string DateHumanize_MultipleMonthsFromNow(int numberOfMonths)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleMonthsFromNow, numberOfMonths);
-        }
-
-        public virtual string DateHumanize_MultipleSecondsFromNow(int numberOfSeconds)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleSecondsFromNow, numberOfSeconds);
-        }
-
-        public virtual string DateHumanize_MultipleYearsFromNow(int numberOfYears)
-        {
-            return Format(ResourceKeys.DateHumanize.MultipleYearsFromNow, numberOfYears);
-        }
-
-        public virtual string DateHumanize_SingleMinuteFromNow()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteFromNow);
-        }
-
-        public virtual string DateHumanize_SingleHourFromNow()
-        {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleHourFromNow);
-        }
-
+        /// <summary>
+        /// Now!
+        /// </summary>
+        /// <returns>Time expressed in words</returns>
         public virtual string DateHumanize_Now()
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize.Now);
+            return GetResourceForDate(TimeUnit.Millisecond, 0);
         }
 
-        public virtual string DateHumanize_SingleMonthFromNow()
+        /// <summary>
+        /// To express time in secounds.
+        /// </summary>
+        /// <param name="seconds">number of seconds</param>
+        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string DateHumanize_Seconds(int seconds = 1, bool isFuture = false)
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow);
+            return GetResourceForDate(TimeUnit.Second, seconds, isFuture);
         }
 
-        public virtual string DateHumanize_SingleSecondFromNow()
+        /// <summary>
+        /// To express time in minutes.
+        /// </summary>
+        /// <param name="minutes">number of minutes</param>
+        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string DateHumanize_Minutes(int minutes = 1, bool isFuture = false)
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondFromNow);
+            return GetResourceForDate(TimeUnit.Minute, minutes, isFuture);
         }
 
-        public virtual string DateHumanize_SingleYearFromNow()
+        /// <summary>
+        /// To express time in hours.
+        /// </summary>
+        /// <param name="hours">number of hours</param>
+        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string DateHumanize_Hours(int hours = 1, bool isFuture = false)
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleYearFromNow);
+            return GetResourceForDate(TimeUnit.Hour, hours, isFuture);
         }
 
-        public virtual string DateHumanize_SingleDayFromNow()
+        /// <summary>
+        /// To express time in days.
+        /// </summary>
+        /// <param name="days">number of days</param>
+        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string DateHumanize_Days(int days = 1, bool isFuture = false)
         {
-            return Resources.GetResource(ResourceKeys.DateHumanize.SingleDayFromNow);
+            return GetResourceForDate(TimeUnit.Day, days, isFuture);
         }
 
-        public virtual string TimeSpanHumanize_MultipleWeeks(int weeks)
+        /// <summary>
+        /// To express time in months
+        /// </summary>
+        /// <param name="months">number of months</param>
+        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string DateHumanize_Months(int months = 1, bool isFuture = false)
         {
-            return Format(ResourceKeys.TimeSpanHumanize.MultipleWeeks, weeks);
+            return GetResourceForDate(TimeUnit.Month, months, isFuture);
         }
 
-        public virtual string TimeSpanHumanize_SingleWeek()
+        /// <summary>
+        /// To express time in years
+        /// </summary>
+        /// <param name="years">number of years</param>
+        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string DateHumanize_Years(int years = 1, bool isFuture = false)
         {
-            return Format(ResourceKeys.TimeSpanHumanize.SingleWeek);
+            return GetResourceForDate(TimeUnit.Year, years, isFuture);
         }
 
-        public virtual string TimeSpanHumanize_MultipleDays(int days)
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.MultipleDays, days);
-        }
-
-        public virtual string TimeSpanHumanize_SingleDay()
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.SingleDay);
-        }
-
-        public virtual string TimeSpanHumanize_MultipleHours(int hours)
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.MultipleHours, hours);
-        }
-
-        public virtual string TimeSpanHumanize_SingleHour()
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.SingleHour);
-        }
-
-        public virtual string TimeSpanHumanize_MultipleMinutes(int minutes)
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.MultipleMinutes, minutes);
-        }
-
-        public virtual string TimeSpanHumanize_SingleMinute()
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.SingleMinute);
-        }
-
-        public virtual string TimeSpanHumanize_MultipleSeconds(int seconds)
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.MultipleSeconds, seconds);
-        }
-
-        public virtual string TimeSpanHumanize_SingleSecond()
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.SingleSecond);
-        }
-
-        public virtual string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds)
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.MultipleMilliseconds, milliSeconds);
-        }
-
-        public virtual string TimeSpanHumanize_SingleMillisecond()
-        {
-            return Format(ResourceKeys.TimeSpanHumanize.SingleMillisecond);
-        }
-
+        /// <summary>
+        /// In NO time!
+        /// </summary>
+        /// <returns>Time expressed in words</returns>
         public virtual string TimeSpanHumanize_Zero()
         {
-            return Format(ResourceKeys.TimeSpanHumanize.Zero);
+            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0);
+        }
+
+        /// <summary>
+        /// To express time in milliseconds.
+        /// </summary>
+        /// <param name="milliSeconds">number of milliseconds</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string TimeSpanHumanize_Milliseconds(int milliSeconds = 1)
+        {
+            return GetResourceForTimeSpan(TimeUnit.Millisecond, milliSeconds);
+        }
+
+        /// <summary>
+        /// To express time in secounds.
+        /// </summary>
+        /// <param name="seconds">number of seconds</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string TimeSpanHumanize_Seconds(int seconds = 1)
+        {
+            return GetResourceForTimeSpan(TimeUnit.Second, seconds);
+        }
+
+        /// <summary>
+        /// To express time in minutes.
+        /// </summary>
+        /// <param name="minutes">number of minutes</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string TimeSpanHumanize_Minutes(int minutes = 1)
+        {
+            return GetResourceForTimeSpan(TimeUnit.Minute, minutes);
+        }
+
+        /// <summary>
+        /// To express time in hours
+        /// </summary>
+        /// <param name="hours">number of hours</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string TimeSpanHumanize_Hours(int hours = 1)
+        {
+            return GetResourceForTimeSpan(TimeUnit.Hour, hours);
+        }
+
+        /// <summary>
+        /// To express time in days.
+        /// </summary>
+        /// <param name="days">number of days</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string TimeSpanHumanize_Days(int days = 1)
+        {
+            return GetResourceForTimeSpan(TimeUnit.Day, days);
+        }
+
+        /// <summary>
+        /// To express time in weeks.
+        /// </summary>
+        /// <param name="weeks">number of weeks</param>
+        /// <returns>Time expressed in words</returns>
+        public virtual string TimeSpanHumanize_Weeks(int weeks = 1)
+        {
+            return GetResourceForTimeSpan(TimeUnit.Week, weeks);
+        }
+
+        private string GetResourceForDate(TimeUnit unit, int count, bool isFuture = false)
+        {
+            string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, count, isFuture);
+            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+        }
+
+        private string GetResourceForTimeSpan(TimeUnit unit, int count)
+        {
+            string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
+            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
         protected virtual string Format(string resourceKey)
@@ -199,7 +168,7 @@
 
         protected virtual string Format(string resourceKey, int number)
         {
-            return string.Format(Resources.GetResource(GetResourceKey(resourceKey, number)), number);
+            return Resources.GetResource(GetResourceKey(resourceKey, number)).FormatWith(number);
         }
 
         protected virtual string GetResourceKey(string resourceKey, int number)

@@ -74,6 +74,8 @@
     <Compile Include="Bytes\ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
+    <Compile Include="DateHumanizeExtensions.cs" />
+    <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,14 +87,20 @@
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\ArabicFormatter.cs" />
+    <Compile Include="Localisation\DefaultFormatter.cs" />
+    <Compile Include="Localisation\IFormatter.cs" />
+    <Compile Include="Localisation\ResourceKeys.Common.cs" />
+    <Compile Include="Localisation\ResourceKeys.DateHumanize.cs" />
+    <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
+    <Compile Include="Localisation\TimeUnit.cs" />
     <Compile Include="OnNoMatch.cs" />
     <Compile Include="NoMatchFoundException.cs" />
     <Compile Include="RomanNumeralExtensions.cs" />
+    <Compile Include="StringExentions.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
     <Compile Include="NumberToOrdinalWordsExtension.cs" />
-    <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
     <Compile Include="FluentDate\PrepositionsExtensions.cs" />
@@ -102,9 +110,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>In.Months.tt</DependentUpon>
     </Compile>
-    <Compile Include="Localisation\DefaultFormatter.cs" />
-    <Compile Include="Localisation\IFormatter.cs" />
-    <Compile Include="Localisation\ResourceKeys.DateHumanize.cs" />
     <Compile Include="Localisation\Resources.cs" />
     <Compile Include="Localisation\RomanianFormatter.cs" />
     <Compile Include="Localisation\RussianFormatter.cs" />
@@ -116,7 +121,6 @@
     <Compile Include="StringDehumanizeExtensions.cs" />
     <Compile Include="StringHumanizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="Transformer\ToTitleCase.cs" />
     <Compile Include="Transformer\ToUpperCase.cs" />
     <Compile Include="Transformer\ToLowerCase.cs" />
@@ -136,7 +140,6 @@
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
     <None Include="Humanizer.snk" />
-    <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -34,55 +34,43 @@ namespace Humanizer
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
 
             if (ts.TotalSeconds < 60)
-            {
-                if (isFuture)
-                    return ts.TotalSeconds <= 1 ? formatter.DateHumanize_SingleSecondFromNow() : formatter.DateHumanize_MultipleSecondsFromNow(ts.Seconds);
-
-                return ts.TotalSeconds <= 1 ? formatter.DateHumanize_SingleSecondAgo() : formatter.DateHumanize_MultipleSecondsAgo(ts.Seconds);
-            }
+                return formatter.DateHumanize_Seconds(ts.Seconds, isFuture);
 
             if (ts.TotalSeconds < 120)
-                return isFuture ? formatter.DateHumanize_SingleMinuteFromNow() : formatter.DateHumanize_SingleMinuteAgo();
+                return formatter.DateHumanize_Minutes(1, isFuture);
 
             if (ts.TotalMinutes < 45)
-                return isFuture ? formatter.DateHumanize_MultipleMinutesFromNow(ts.Minutes) : formatter.DateHumanize_MultipleMinutesAgo(ts.Minutes);
+                return formatter.DateHumanize_Minutes(ts.Minutes, isFuture);
 
             if (ts.TotalMinutes < 90)
-                return isFuture ? formatter.DateHumanize_SingleHourFromNow() : formatter.DateHumanize_SingleHourAgo();
+                return formatter.DateHumanize_Hours(1, isFuture);
 
             if (ts.TotalHours < 24)
-                return isFuture ? formatter.DateHumanize_MultipleHoursFromNow(ts.Hours) : formatter.DateHumanize_MultipleHoursAgo(ts.Hours);
+                return formatter.DateHumanize_Hours(ts.Hours, isFuture);
 
             if (ts.TotalHours < 48)
-                return isFuture ? formatter.DateHumanize_SingleDayFromNow() : formatter.DateHumanize_SingleDayAgo();
+                return formatter.DateHumanize_Days(1, isFuture);
 
             if (ts.TotalDays < 28)
-                return isFuture ? formatter.DateHumanize_MultipleDaysFromNow(ts.Days) : formatter.DateHumanize_MultipleDaysAgo(ts.Days);
+                return formatter.DateHumanize_Days(ts.Days, isFuture);
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
                 if (comparisonBase.Date.AddMonths(isFuture ? 1 : -1) == input.Date)
-                    return isFuture ? formatter.DateHumanize_SingleMonthFromNow() : formatter.DateHumanize_SingleMonthAgo();
+                    return formatter.DateHumanize_Months(1, isFuture);
 
-                return isFuture ? formatter.DateHumanize_MultipleDaysFromNow(ts.Days) : formatter.DateHumanize_MultipleDaysAgo(ts.Days);
+                return formatter.DateHumanize_Days(ts.Days, isFuture);
             }
 
             if (ts.TotalDays < 345)
             {
                 int months = Convert.ToInt32(Math.Floor(ts.TotalDays / 29.5));
-
-                if (isFuture)
-                    return months <= 1 ? formatter.DateHumanize_SingleMonthFromNow() : formatter.DateHumanize_MultipleMonthsFromNow(months);
-
-                return months <= 1 ? formatter.DateHumanize_SingleMonthAgo() : formatter.DateHumanize_MultipleMonthsAgo(months);
+                return formatter.DateHumanize_Months(months, isFuture);
             }
 
             int years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
-
-            if (isFuture)
-                return years <= 1 ? formatter.DateHumanize_SingleYearFromNow() : formatter.DateHumanize_MultipleYearsFromNow(years);
-
-            return years <= 1 ? formatter.DateHumanize_SingleYearAgo() : formatter.DateHumanize_MultipleYearsAgo(years);
+            if (years == 0) years = 1;
+            return formatter.DateHumanize_Years(years, isFuture);
         }
     }
 }

@@ -4,129 +4,33 @@
     {
         public static class DateHumanize
         {
-            public static string MultipleDaysAgo
-            {
-                get { return "DateHumanize_MultipleDaysAgo"; }
-            }
+            /// <summary>
+            /// Resource key for Now.
+            /// </summary>
+            public const string Now = "DateHumanize_Now";
 
-            public static string MultipleHoursAgo
-            {
-                get { return "DateHumanize_MultipleHoursAgo"; }
-            }
+            /// <summary>
+            /// Examples: DateHumanize_SingleMinuteAgo, DateHumanize_MultipleHoursAgo
+            /// Note: "s" for plural served separately by third part.
+            /// </summary>
+            private const string DateTimeFormat = "DateHumanize_{0}{1}{2}{3}";
 
-            public static string MultipleMinutesAgo
-            {
-                get { return "DateHumanize_MultipleMinutesAgo"; }
-            }
+            private const string Ago = "Ago";
+            private const string FromNow = "FromNow";
 
-            public static string MultipleMonthsAgo
+            /// <summary>
+            /// Generates Resource Keys accordning to convention.
+            /// </summary>
+            /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
+            /// <param name="count">Number of units, default is One.</param>
+            /// <param name="isFuture">Boolean flag, is it in future? Default is false</param>
+            /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
+            public static string GetResourceKey(TimeUnit unit, int count = 1, bool isFuture = false)
             {
-                get { return "DateHumanize_MultipleMonthsAgo"; }
-            }
+                if (count == 0) return Now;
 
-            public static string MultipleSecondsAgo
-            {
-                get { return "DateHumanize_MultipleSecondsAgo"; }
-            }
-
-            public static string MultipleYearsAgo
-            {
-                get { return "DateHumanize_MultipleYearsAgo"; }
-            }
-
-            public static string SingleMinuteAgo
-            {
-                get { return "DateHumanize_SingleMinuteAgo"; }
-            }
-
-            public static string SingleHourAgo
-            {
-                get { return "DateHumanize_SingleHourAgo"; }
-            }
-
-            public static string SingleMonthAgo
-            {
-                get { return "DateHumanize_SingleMonthAgo"; }
-            }
-
-            public static string SingleSecondAgo
-            {
-                get { return "DateHumanize_SingleSecondAgo"; }
-            }
-
-            public static string SingleYearAgo
-            {
-                get { return "DateHumanize_SingleYearAgo"; }
-            }
-
-            public static string SingleDayAgo
-            {
-                get { return "DateHumanize_SingleDayAgo"; }
-            }
-
-            public static string MultipleDaysFromNow
-            {
-                get { return "DateHumanize_MultipleDaysFromNow"; }
-            }
-
-            public static string MultipleHoursFromNow
-            {
-                get { return "DateHumanize_MultipleHoursFromNow"; }
-            }
-
-            public static string MultipleMinutesFromNow
-            {
-                get { return "DateHumanize_MultipleMinutesFromNow"; }
-            }
-
-            public static string MultipleMonthsFromNow
-            {
-                get { return "DateHumanize_MultipleMonthsFromNow"; }
-            }
-
-            public static string MultipleSecondsFromNow
-            {
-                get { return "DateHumanize_MultipleSecondsFromNow"; }
-            }
-
-            public static string MultipleYearsFromNow
-            {
-                get { return "DateHumanize_MultipleYearsFromNow"; }
-            }
-
-            public static string SingleMinuteFromNow
-            {
-                get { return "DateHumanize_SingleMinuteFromNow"; }
-            }
-
-            public static string SingleHourFromNow
-            {
-                get { return "DateHumanize_SingleHourFromNow"; }
-            }
-
-            public static string Now
-            {
-                get { return "DateHumanize_Now"; }
-            }
-
-            public static string SingleMonthFromNow
-            {
-                get { return "DateHumanize_SingleMonthFromNow"; }
-            }
-
-            public static string SingleSecondFromNow
-            {
-                get { return "DateHumanize_SingleSecondFromNow"; }
-            }
-
-            public static string SingleYearFromNow
-            {
-                get { return "DateHumanize_SingleYearFromNow"; }
-            }
-
-            public static string SingleDayFromNow
-            {
-                get { return "DateHumanize_SingleDayFromNow"; }
+                ValidateRange(count);
+                return DateTimeFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s", isFuture ? FromNow : Ago);
             }
         }
     }
