@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Humanizer.Localisation.DynamicResourceKeys;
+using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
-using Resources = Humanizer.Localisation.Resources;
-using ResourceKeys = Humanizer.Localisation.DynamicResourceKeys.ResourceKeys;
-using Dyna = Humanizer.DynamicResourceKeys.DateHumanizeExtensions;
 
 namespace Humanizer.Tests.Localisation.DynamicResourceKeys
 {
@@ -13,17 +10,23 @@ namespace Humanizer.Tests.Localisation.DynamicResourceKeys
     {
         static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {
-            Assert.Equal(expectedString, Dyna.Humanize(DateTime.UtcNow.Add(deltaFromNow)));
-            Assert.Equal(expectedString, Dyna.Humanize(DateTime.Now.Add(deltaFromNow), false));
+            if (expectedString == null)
+                throw new ArgumentNullException("expectedString");
+
+            Assert.Equal(expectedString, DateTime.UtcNow.Add(deltaFromNow).Humanize());
+            Assert.Equal(expectedString, DateTime.Now.Add(deltaFromNow).Humanize(false));
         }
 
         static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
         {
+            if (expectedString == null)
+                throw new ArgumentNullException("expectedString");
+
             var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
             var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
 
-            Assert.Equal(expectedString, Dyna.Humanize(utcNow.Add(deltaFromNow), true, utcNow));
-            Assert.Equal(expectedString, Dyna.Humanize(now.Add(deltaFromNow), false, now));
+            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(true, utcNow));
+            Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
         }
 
         static void Verify(string expectedString, TimeSpan deltaFromNow)
@@ -49,9 +52,10 @@ namespace Humanizer.Tests.Localisation.DynamicResourceKeys
 
         [Theory]
         [PropertyData("OneTimeUnitAgoTestsSource")]
-        public void OneTimeUnitAgo(TimeUnit unit, TimeSpan timeSpan)
+        public void OneTimeUnitAgo(TimeUnit timeUnit, TimeSpan timeSpan)
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(unit, 1)), timeSpan);
+            string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(timeUnit, 1);
+            Verify(Resources.GetResource(resourceKey), timeSpan);
         }
     }
 }

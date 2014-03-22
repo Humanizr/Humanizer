@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.DynamicResourceKeys
+﻿namespace Humanizer.Localisation
 {
     /// <summary>
     /// Units of time.

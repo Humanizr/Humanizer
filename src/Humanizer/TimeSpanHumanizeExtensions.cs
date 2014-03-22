@@ -80,32 +80,27 @@ namespace Humanizer
             get
             {
                 var formatter = Configurator.Formatter;
+
                 return new[]
                 {
                     new TimeSpanPropertyFormat(
                         timespan => timespan.Days / 7,
-                        formatter.TimeSpanHumanize_SingleWeek,
-                        formatter.TimeSpanHumanize_MultipleWeeks), 
+                        formatter.TimeSpanHumanize_Weeks), 
                     new TimeSpanPropertyFormat(
                         timespan => timespan.Days,
-                        formatter.TimeSpanHumanize_SingleDay,
-                        formatter.TimeSpanHumanize_MultipleDays),
+                        formatter.TimeSpanHumanize_Days),
                     new TimeSpanPropertyFormat(
                         timespan => timespan.Hours,
-                        formatter.TimeSpanHumanize_SingleHour,
-                        formatter.TimeSpanHumanize_MultipleHours),
+                        formatter.TimeSpanHumanize_Hours),
                     new TimeSpanPropertyFormat(
                         timespan => timespan.Minutes,
-                        formatter.TimeSpanHumanize_SingleMinute,
-                        formatter.TimeSpanHumanize_MultipleMinutes),
+                        formatter.TimeSpanHumanize_Minutes),
                     new TimeSpanPropertyFormat(
                         timespan => timespan.Seconds,
-                        formatter.TimeSpanHumanize_SingleSecond,
-                        formatter.TimeSpanHumanize_MultipleSeconds),
+                        formatter.TimeSpanHumanize_Seconds),
                     new TimeSpanPropertyFormat(
                         timespan => timespan.Milliseconds,
-                        formatter.TimeSpanHumanize_SingleMillisecond,
-                        formatter.TimeSpanHumanize_MultipleMilliseconds),
+                        formatter.TimeSpanHumanize_Milliseconds),
                     new TimeSpanPropertyFormat(
                         timespan => 0,
                         formatter.TimeSpanHumanize_Zero) 
@@ -128,10 +123,8 @@ namespace Humanizer
             {
                 case 0:
                     return propertyFormat.Zero();
-                case 1:
-                    return propertyFormat.Single();
                 default:
-                    return propertyFormat.Multiple(value);
+                    return propertyFormat.Format(value);
             }
         }
 
@@ -143,12 +136,10 @@ namespace Humanizer
         {
             public TimeSpanPropertyFormat(
                 Func<TimeSpan, int> propertySelector,
-                Func<string> single,
-                Func<int, string> multiple)
+                Func<int, string> format)
             {
                 PropertySelector = propertySelector;
-                Single = single;
-                Multiple = multiple;
+                Format = format;
                 Zero = () => null;
             }
 
@@ -159,8 +150,7 @@ namespace Humanizer
             }
 
             public Func<TimeSpan, int> PropertySelector { get; private set; }
-            public Func<string> Single { get; private set; }
-            public Func<int, string> Multiple { get; private set; }
+            public Func<int, string> Format { get; private set; }
             public Func<string> Zero { get; private set; }
         }
     }

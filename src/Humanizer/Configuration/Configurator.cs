@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Humanizer.Localisation;
-using Dyna = Humanizer.Localisation.DynamicResourceKeys;
 
 namespace Humanizer.Configuration
 {
@@ -32,17 +31,6 @@ namespace Humanizer.Configuration
                     return formatterFactory();
                 }
                 return new DefaultFormatter();
-            }
-        }
-
-        /// <summary>
-        /// Providers similar functionality for the DefaultFormatter except the localization, at the moment.
-        /// </summary>
-        public static Dyna.IFormatter DynamicFormatter
-        {
-            get
-            {
-                return new Dyna.DefaultFormatter();
             }
         }
     }

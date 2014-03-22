@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Humanizer.Localisation.DynamicResourceKeys;
+using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
-using Resources = Humanizer.Localisation.Resources;
 
 namespace Humanizer.Tests.Localisation.DynamicResourceKeys
 {

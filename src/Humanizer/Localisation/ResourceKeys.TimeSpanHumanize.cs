@@ -1,72 +1,30 @@
-﻿namespace Humanizer.Localisation
+﻿using System;
+
+namespace Humanizer.Localisation
 {
     public partial class ResourceKeys
     {
         public static class TimeSpanHumanize
         {
-            public static string MultipleDays
-            {
-                get { return "TimeSpanHumanize_MultipleDays"; }
-            }
+            /// <summary>
+            /// Examples: TimeSpanHumanize_SingleMinute, TimeSpanHumanize_MultipleHours.
+            /// Note: "s" for plural served separately by third part.
+            /// </summary>
+            private const string TimeSpanFormat = "TimeSpanHumanize_{0}{1}{2}";
+            private const string Zero = "TimeSpanHumanize_Zero";
 
-            public static string SingleDay
+            /// <summary>
+            /// Generates Resource Keys according to convention.
+            /// </summary>
+            /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
+            /// <param name="count">Number of units, default is One.</param>
+            /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
+            public static string GetResourceKey(TimeUnit unit, int count = 1)
             {
-                get { return "TimeSpanHumanize_SingleDay"; }
-            }
+                if (count == 0) return Zero;
 
-            public static string MultipleHours
-            {
-                get { return "TimeSpanHumanize_MultipleHours"; }
-            }
-
-            public static string SingleHour
-            {
-                get { return "TimeSpanHumanize_SingleHour"; }
-            }
-
-            public static string MultipleMinutes
-            {
-                get { return "TimeSpanHumanize_MultipleMinutes"; }
-            }
-
-            public static string SingleMinute
-            {
-                get { return "TimeSpanHumanize_SingleMinute"; }
-            }
-
-            public static string MultipleSeconds
-            {
-                get { return "TimeSpanHumanize_MultipleSeconds"; }
-            }
-
-            public static string SingleSecond
-            {
-                get { return "TimeSpanHumanize_SingleSecond"; }
-            }
-
-            public static string MultipleMilliseconds
-            {
-                get { return "TimeSpanHumanize_MultipleMilliseconds"; }
-            }
-
-            public static string SingleMillisecond
-            {
-                get { return "TimeSpanHumanize_SingleMillisecond"; }
-            }
-
-            public static string Zero
-            {
-                get { return "TimeSpanHumanize_Zero"; }
-            }
-
-            public static string MultipleWeeks
-            {
-                get { return "TimeSpanHumanize_MultipleWeeks"; }
-            }
-
-            public static string SingleWeek
-            {
-                get { return "TimeSpanHumanize_SingleWeek"; }
+                ValidateRange(count);
+                return TimeSpanFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s");
             }
         }
     }

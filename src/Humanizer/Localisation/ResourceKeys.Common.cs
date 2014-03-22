@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Humanizer.Localisation.DynamicResourceKeys
+namespace Humanizer.Localisation
 {
     public partial class ResourceKeys
     {
