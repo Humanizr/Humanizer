@@ -3,7 +3,7 @@ using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.DynamicResourceKeys
+namespace Humanizer.Tests
 {
     public class ResourceKeyTests
     {
@@ -40,12 +40,12 @@ namespace Humanizer.Tests.Localisation.DynamicResourceKeys
             get
             {
                 return new[] {
-                    new object[]{ "DateHumanize_SingleSecondAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, 1) },
-                    new object[]{ "DateHumanize_SingleMinuteAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, 1) },
-                    new object[]{ "DateHumanize_SingleHourAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, 1) },
-                    new object[]{ "DateHumanize_SingleDayAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, 1) },
-                    new object[]{ "DateHumanize_SingleMonthAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, 1) },
-                    new object[]{ "DateHumanize_SingleYearAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, 1) },
+                    new object[]{ "DateHumanize_SingleSecondAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second) },
+                    new object[]{ "DateHumanize_SingleMinuteAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute) },
+                    new object[]{ "DateHumanize_SingleHourAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour) },
+                    new object[]{ "DateHumanize_SingleDayAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day) },
+                    new object[]{ "DateHumanize_SingleMonthAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month) },
+                    new object[]{ "DateHumanize_SingleYearAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year) },
                     new object[]{ "DateHumanize_MultipleSecondsAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, 10) },
                     new object[]{ "DateHumanize_MultipleMinutesAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, 10) },
                     new object[]{ "DateHumanize_MultipleHoursAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, 10) },
@@ -73,7 +73,8 @@ namespace Humanizer.Tests.Localisation.DynamicResourceKeys
                     new object[]{ "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, 0) },
                     new object[]{ "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Week, 0) },
                     new object[]{ "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, 0) },
-                    new object[]{ "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, 0) }
+                    new object[]{ "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, 0) },
+                    new object[]{ "DateHumanize_Now", ResourceKeys.DateHumanize.Now }
                 };
             }
         }
@@ -83,11 +84,11 @@ namespace Humanizer.Tests.Localisation.DynamicResourceKeys
             get
             {
                 return new[] {
-                    new object[]{ "TimeSpanHumanize_SingleSecond", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Second, 1) },
-                    new object[]{ "TimeSpanHumanize_SingleMinute", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Minute, 1) },
-                    new object[]{ "TimeSpanHumanize_SingleHour", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Hour, 1) },
-                    new object[]{ "TimeSpanHumanize_SingleDay", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Day, 1) },
-                    new object[]{ "TimeSpanHumanize_SingleWeek", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Week, 1) },
+                    new object[]{ "TimeSpanHumanize_SingleSecond", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Second) },
+                    new object[]{ "TimeSpanHumanize_SingleMinute", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Minute) },
+                    new object[]{ "TimeSpanHumanize_SingleHour", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Hour) },
+                    new object[]{ "TimeSpanHumanize_SingleDay", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Day) },
+                    new object[]{ "TimeSpanHumanize_SingleWeek", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Week) },
                     new object[]{ "TimeSpanHumanize_MultipleSeconds", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Second, 10) },
                     new object[]{ "TimeSpanHumanize_MultipleMinutes", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Minute, 10) },
                     new object[]{ "TimeSpanHumanize_MultipleHours", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Hour, 10) },

@@ -4,9 +4,9 @@ using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.DynamicResourceKeys
+namespace Humanizer.Tests
 {
-    public class DateHumanizeWithResourceKeysTests
+    public class DateHumanizeOneTimeUnitTests
     {
         static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {
@@ -50,11 +50,34 @@ namespace Humanizer.Tests.Localisation.DynamicResourceKeys
             }
         }
 
+        public static IEnumerable<object[]> OneTimeUnitFromNowTestsSource
+        {
+            get
+            {
+                return new[] {
+                    new object[]{ TimeUnit.Second, TimeSpan.FromSeconds(1) },
+                    new object[]{ TimeUnit.Minute, TimeSpan.FromMinutes(1) },
+                    new object[]{ TimeUnit.Hour, TimeSpan.FromHours(1) },
+                    new object[]{ TimeUnit.Day, TimeSpan.FromDays(1) },
+                    new object[]{ TimeUnit.Month, TimeSpan.FromDays(30) },
+                    new object[]{ TimeUnit.Year, TimeSpan.FromDays(365) },
+                };
+            }
+        }
+
         [Theory]
         [PropertyData("OneTimeUnitAgoTestsSource")]
         public void OneTimeUnitAgo(TimeUnit timeUnit, TimeSpan timeSpan)
         {
             string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(timeUnit, 1);
+            Verify(Resources.GetResource(resourceKey), timeSpan);
+        }
+
+        [Theory]
+        [PropertyData("OneTimeUnitFromNowTestsSource")]
+        public void OneTimeUnitFromNow(TimeUnit timeUnit, TimeSpan timeSpan)
+        {
+            string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(timeUnit, 1, true);
             Verify(Resources.GetResource(resourceKey), timeSpan);
         }
     }
