@@ -414,6 +414,109 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h3>
+<a name="bytesize" class="anchor" href="#bytesize"><span class="octicon octicon-link"></span></a>ByteSize</h3>
+
+<p>Humanizer includes a port of the brilliant <a href="https://github.com/omar/ByteSize">ByteSize</a> library.
+Quite a few changes and additions are made on <code>ByteSize</code> to make the interaction with <code>ByteSize</code> easier and more consistent with the Humanizer API. 
+Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:</p>
+
+<div class="highlight highlight-c#"><pre><span class="kt">var</span> <span class="n">fileSize</span> <span class="p">=</span> <span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">();</span>
+
+<span class="n">fileSize</span><span class="p">.</span><span class="n">Bits</span>      <span class="p">=&gt;</span> <span class="m">81920</span>
+<span class="n">fileSize</span><span class="p">.</span><span class="n">Bytes</span>     <span class="p">=&gt;</span> <span class="m">10240</span>
+<span class="n">fileSize</span><span class="p">.</span><span class="n">Kilobytes</span> <span class="p">=&gt;</span> <span class="m">10</span>
+<span class="n">fileSize</span><span class="p">.</span><span class="n">Megabytes</span> <span class="p">=&gt;</span> <span class="m">0.009765625</span>
+<span class="n">fileSize</span><span class="p">.</span><span class="n">Gigabytes</span> <span class="p">=&gt;</span> <span class="m">9.53674316e-6</span>
+<span class="n">fileSize</span><span class="p">.</span><span class="n">Terabytes</span> <span class="p">=&gt;</span> <span class="m">9.31322575e-9</span>
+</pre></div>
+
+<p>There are a few extension methods that allow you to turn a number into a ByteSize instance:</p>
+
+<div class="highlight highlight-C#"><pre><span class="m">3.</span><span class="n">Bits</span><span class="p">();</span>
+<span class="m">5.</span><span class="n">Bytes</span><span class="p">();</span>
+<span class="p">(</span><span class="m">10.5</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">();</span>
+<span class="p">(</span><span class="m">2.5</span><span class="p">).</span><span class="n">Megabytes</span><span class="p">();</span>
+<span class="p">(</span><span class="m">10.2</span><span class="p">).</span><span class="n">Gigabytes</span><span class="p">();</span>
+<span class="p">(</span><span class="m">4.7</span><span class="p">).</span><span class="n">Terabytes</span><span class="p">();</span>
+</pre></div>
+
+<p>You can also add/subtract the values using +/- operators and Add/Subtract methods:</p>
+
+<div class="highlight highlight-C#"><pre><span class="kt">var</span> <span class="n">total</span> <span class="p">=</span> <span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">Gigabytes</span><span class="p">()</span> <span class="p">+</span> <span class="p">(</span><span class="m">512</span><span class="p">).</span><span class="n">Megabytes</span><span class="p">()</span> <span class="p">-</span> <span class="p">(</span><span class="m">2.5</span><span class="p">).</span><span class="n">Gigabytes</span><span class="p">();</span>
+<span class="n">total</span><span class="p">.</span><span class="n">Subtract</span><span class="p">((</span><span class="m">2500</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">()).</span><span class="n">Add</span><span class="p">((</span><span class="m">25</span><span class="p">).</span><span class="n">Megabytes</span><span class="p">());</span>
+</pre></div>
+
+<p>A <code>ByteSize</code> object contains two properties that represent the largest metric prefix symbol and value:</p>
+
+<div class="highlight highlight-C#"><pre><span class="kt">var</span> <span class="n">maxFileSize</span> <span class="p">=</span> <span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">();</span>
+
+<span class="n">maxFileSize</span><span class="p">.</span><span class="n">LargestWholeNumberSymbol</span><span class="p">;</span>  <span class="c1">// "KB"</span>
+<span class="n">maxFileSize</span><span class="p">.</span><span class="n">LargestWholeNumberValue</span><span class="p">;</span>   <span class="c1">// 10</span>
+</pre></div>
+
+<p>If you want a string representation you can call <code>ToString</code> or <code>Humanize</code> interchangeably on the <code>ByteSize</code> instance:</p>
+
+<div class="highlight highlight-C#"><pre><span class="m">7.</span><span class="n">Bits</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span>         <span class="c1">// 7 b</span>
+<span class="m">8.</span><span class="n">Bits</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span>         <span class="c1">// 1 B</span>
+<span class="p">(.</span><span class="m">5</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">().</span><span class="n">Humanize</span><span class="p">();</span>   <span class="c1">// 512 B</span>
+<span class="p">(</span><span class="m">1000</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span> <span class="c1">// 1000 KB</span>
+<span class="p">(</span><span class="m">1024</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">().</span><span class="n">Humanize</span><span class="p">();</span> <span class="c1">// 1 MB</span>
+<span class="p">(.</span><span class="m">5</span><span class="p">).</span><span class="n">Gigabytes</span><span class="p">().</span><span class="n">Humanize</span><span class="p">();</span>   <span class="c1">// 512 MB</span>
+<span class="p">(</span><span class="m">1024</span><span class="p">).</span><span class="n">Gigabytes</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span> <span class="c1">// 1 TB</span>
+</pre></div>
+
+<p>You can also optionally provide a format for the expected string representation. 
+The formatter can contain the symbol of the value to display: <code>b</code>, <code>B</code>, <code>KB</code>, <code>MB</code>, <code>GB</code>, <code>TB</code>. 
+The formatter uses the built in <a href="http://msdn.microsoft.com/en-us/library/kfsatb94(v=vs.110).aspx"><code>double.ToString</code> method</a> with <code>#.##</code> as the default format which rounds the number to two decimal places:</p>
+
+<div class="highlight highlight-C#"><pre><span class="kt">var</span> <span class="n">b</span> <span class="p">=</span> <span class="p">(</span><span class="m">10.505</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">();</span>
+
+<span class="c1">// Default number format is #.##</span>
+<span class="n">b</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">"KB"</span><span class="p">);</span>         <span class="c1">// 10.52 KB</span>
+<span class="n">b</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="s">"MB"</span><span class="p">);</span>         <span class="c1">// .01 MB</span>
+<span class="n">b</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="s">"b"</span><span class="p">);</span>          <span class="c1">// 86057 b</span>
+
+<span class="c1">// Default symbol is the largest metric prefix value &gt;= 1</span>
+<span class="n">b</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">"#.#"</span><span class="p">);</span>        <span class="c1">// 10.5 KB</span>
+
+<span class="c1">// All valid values of double.ToString(string format) are acceptable</span>
+<span class="n">b</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">"0.0000"</span><span class="p">);</span>     <span class="c1">// 10.5050 KB</span>
+<span class="n">b</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="s">"000.00"</span><span class="p">);</span>     <span class="c1">// 010.51 KB</span>
+
+<span class="c1">// You can include number format and symbols</span>
+<span class="n">b</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">"#.#### MB"</span><span class="p">);</span>  <span class="c1">// .0103 MB</span>
+<span class="n">b</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="s">"0.00 GB"</span><span class="p">);</span>    <span class="c1">// 0 GB</span>
+<span class="n">b</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="s">"#.## B"</span><span class="p">);</span>     <span class="c1">// 10757.12 B</span>
+</pre></div>
+
+<p>There isn't a <code>Dehumanize</code> method to turn a string representation back into a <code>ByteSize</code> instance; but you can use <code>Parse</code> and <code>TryParse</code> on <code>ByteSize</code> to do that.
+Like other <code>TryParse</code> methods, <code>ByteSize.TryParse</code> returns <code>boolean</code> value indicating whether or not the parsing was successful. 
+If the value is parsed it is output to the <code>out</code> parameter supplied:</p>
+
+<pre><code>ByteSize output;
+ByteSize.TryParse("1.5mb", out output);
+
+// Invalid
+ByteSize.Parse("1.5 b");   // Can't have partial bits
+
+// Valid
+ByteSize.Parse("5b");
+ByteSize.Parse("1.55B");
+ByteSize.Parse("1.55KB");
+ByteSize.Parse("1.55 kB "); // Spaces are trimmed
+ByteSize.Parse("1.55 kb");
+ByteSize.Parse("1.55 MB");
+ByteSize.Parse("1.55 mB");
+ByteSize.Parse("1.55 mb");
+ByteSize.Parse("1.55 GB");
+ByteSize.Parse("1.55 gB");
+ByteSize.Parse("1.55 gb");
+ByteSize.Parse("1.55 TB");
+ByteSize.Parse("1.55 tB");
+ByteSize.Parse("1.55 tb");
+</code></pre>
+
+<h3>
 <a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a>Mix this into your framework to simplify your life</h3>
 
 <p>This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use <code>"string".Humanize</code> for that?! </p>
@@ -563,6 +666,16 @@ Then you return an instance of your class in the <a href="https://github.com/Meh
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-49249463-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
