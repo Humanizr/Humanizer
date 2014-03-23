@@ -11,73 +11,12 @@
         /// <returns>Time expressed in words</returns>
         public virtual string DateHumanize_Now()
         {
-            return GetResourceForDate(TimeUnit.Millisecond, 0);
+            return GetResourceForDate(TimeUnit.Millisecond, TimeUnitTense.Past, 0);
         }
 
-        /// <summary>
-        /// To express time in secounds.
-        /// </summary>
-        /// <param name="seconds">number of seconds</param>
-        /// <param name="timeUnitTense">Is time unit in future or past</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Seconds(int seconds = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
+        public virtual string DateHumanize(TimeUnit timeUnit, TimeUnitTense timeUnitTense, int unit)
         {
-            return GetResourceForDate(TimeUnit.Second, seconds, timeUnitTense);
-        }
-
-        /// <summary>
-        /// To express time in minutes.
-        /// </summary>
-        /// <param name="minutes">number of minutes</param>
-        /// <param name="timeUnitTense">Is time unit in future or past</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Minutes(int minutes = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
-        {
-            return GetResourceForDate(TimeUnit.Minute, minutes, timeUnitTense);
-        }
-
-        /// <summary>
-        /// To express time in hours.
-        /// </summary>
-        /// <param name="hours">number of hours</param>
-        /// <param name="timeUnitTense">Is time unit in future or past</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Hours(int hours = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
-        {
-            return GetResourceForDate(TimeUnit.Hour, hours, timeUnitTense);
-        }
-
-        /// <summary>
-        /// To express time in days.
-        /// </summary>
-        /// <param name="days">number of days</param>
-        /// <param name="timeUnitTense">Is time unit in future or past</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Days(int days = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
-        {
-            return GetResourceForDate(TimeUnit.Day, days, timeUnitTense);
-        }
-
-        /// <summary>
-        /// To express time in months
-        /// </summary>
-        /// <param name="months">number of months</param>
-        /// <param name="timeUnitTense">Is time unit in future or past</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Months(int months = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
-        {
-            return GetResourceForDate(TimeUnit.Month, months, timeUnitTense);
-        }
-
-        /// <summary>
-        /// To express time in years
-        /// </summary>
-        /// <param name="years">number of years</param>
-        /// <param name="timeUnitTense">Is time unit in future or past</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Years(int years = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
-        {
-            return GetResourceForDate(TimeUnit.Year, years, timeUnitTense);
+            return GetResourceForDate(timeUnit, timeUnitTense, unit);
         }
 
         /// <summary>
@@ -87,6 +26,11 @@
         public virtual string TimeSpanHumanize_Zero()
         {
             return GetResourceForTimeSpan(TimeUnit.Millisecond, 0);
+        }
+
+        public string TimeSpanHumanize(TimeUnit timeUnit, int unit = 1)
+        {
+            return GetResourceForTimeSpan(timeUnit, unit);
         }
 
         /// <summary>
@@ -149,7 +93,7 @@
             return GetResourceForTimeSpan(TimeUnit.Week, weeks);
         }
 
-        private string GetResourceForDate(TimeUnit unit, int count, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
+        private string GetResourceForDate(TimeUnit unit, TimeUnitTense timeUnitTense, int count)
         {
             string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
