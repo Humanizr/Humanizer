@@ -13,7 +13,7 @@
             /// Examples: DateHumanize_SingleMinuteAgo, DateHumanize_MultipleHoursAgo
             /// Note: "s" for plural served separately by third part.
             /// </summary>
-            private const string DateTimeFormat = "DateHumanize_{0}{1}{2}{3}";
+            private const string DateTimeFormat = "DateHumanize_{0}{1}{2}";
 
             private const string Ago = "Ago";
             private const string FromNow = "FromNow";
@@ -21,18 +21,21 @@
             /// <summary>
             /// Generates Resource Keys accordning to convention.
             /// </summary>
-            /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
+            /// <param name="timeUnit">Time unit</param>
+            /// <param name="timeUnitTense">Is time unit in future or past</param>
             /// <param name="count">Number of units, default is One.</param>
-            /// <param name="isFuture">Boolean flag, is it in future? Default is false</param>
             /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
-            public static string GetResourceKey(TimeUnit unit, int count = 1, bool isFuture = false)
+            public static string GetResourceKey(TimeUnit timeUnit, TimeUnitTense timeUnitTense, int count = 1)
             {
                 ValidateRange(count);
 
                 if (count == 0) 
                     return Now;
 
-                return DateTimeFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s", isFuture ? FromNow : Ago);
+                var singularity = count == 1 ? Single : Multiple;
+                var tense = timeUnitTense == TimeUnitTense.Future ? FromNow : Ago;
+                var unit = timeUnit.ToString().ToQuantity(count, ShowQuantityAs.None);
+                return DateTimeFormat.FormatWith(singularity, unit, tense);
             }
         }
     }

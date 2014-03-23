@@ -18,66 +18,66 @@
         /// To express time in secounds.
         /// </summary>
         /// <param name="seconds">number of seconds</param>
-        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <param name="timeUnitTense">Is time unit in future or past</param>
         /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Seconds(int seconds = 1, bool isFuture = false)
+        public virtual string DateHumanize_Seconds(int seconds = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
         {
-            return GetResourceForDate(TimeUnit.Second, seconds, isFuture);
+            return GetResourceForDate(TimeUnit.Second, seconds, timeUnitTense);
         }
 
         /// <summary>
         /// To express time in minutes.
         /// </summary>
         /// <param name="minutes">number of minutes</param>
-        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <param name="timeUnitTense">Is time unit in future or past</param>
         /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Minutes(int minutes = 1, bool isFuture = false)
+        public virtual string DateHumanize_Minutes(int minutes = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
         {
-            return GetResourceForDate(TimeUnit.Minute, minutes, isFuture);
+            return GetResourceForDate(TimeUnit.Minute, minutes, timeUnitTense);
         }
 
         /// <summary>
         /// To express time in hours.
         /// </summary>
         /// <param name="hours">number of hours</param>
-        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <param name="timeUnitTense">Is time unit in future or past</param>
         /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Hours(int hours = 1, bool isFuture = false)
+        public virtual string DateHumanize_Hours(int hours = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
         {
-            return GetResourceForDate(TimeUnit.Hour, hours, isFuture);
+            return GetResourceForDate(TimeUnit.Hour, hours, timeUnitTense);
         }
 
         /// <summary>
         /// To express time in days.
         /// </summary>
         /// <param name="days">number of days</param>
-        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <param name="timeUnitTense">Is time unit in future or past</param>
         /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Days(int days = 1, bool isFuture = false)
+        public virtual string DateHumanize_Days(int days = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
         {
-            return GetResourceForDate(TimeUnit.Day, days, isFuture);
+            return GetResourceForDate(TimeUnit.Day, days, timeUnitTense);
         }
 
         /// <summary>
         /// To express time in months
         /// </summary>
         /// <param name="months">number of months</param>
-        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <param name="timeUnitTense">Is time unit in future or past</param>
         /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Months(int months = 1, bool isFuture = false)
+        public virtual string DateHumanize_Months(int months = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
         {
-            return GetResourceForDate(TimeUnit.Month, months, isFuture);
+            return GetResourceForDate(TimeUnit.Month, months, timeUnitTense);
         }
 
         /// <summary>
         /// To express time in years
         /// </summary>
         /// <param name="years">number of years</param>
-        /// <param name="isFuture">boolean flag, is it in future?</param>
+        /// <param name="timeUnitTense">Is time unit in future or past</param>
         /// <returns>Time expressed in words</returns>
-        public virtual string DateHumanize_Years(int years = 1, bool isFuture = false)
+        public virtual string DateHumanize_Years(int years = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
         {
-            return GetResourceForDate(TimeUnit.Year, years, isFuture);
+            return GetResourceForDate(TimeUnit.Year, years, timeUnitTense);
         }
 
         /// <summary>
@@ -149,9 +149,9 @@
             return GetResourceForTimeSpan(TimeUnit.Week, weeks);
         }
 
-        private string GetResourceForDate(TimeUnit unit, int count, bool isFuture = false)
+        private string GetResourceForDate(TimeUnit unit, int count, TimeUnitTense timeUnitTense = TimeUnitTense.Past)
         {
-            string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, count, isFuture);
+            string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 

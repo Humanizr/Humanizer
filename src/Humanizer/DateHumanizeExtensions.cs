@@ -1,5 +1,6 @@
 ﻿using System;
 using Humanizer.Configuration;
+using Humanizer.Localisation;
 
 namespace Humanizer
 {
@@ -30,47 +31,47 @@ namespace Humanizer
             if (input <= comparisonBase && comparisonBase.Subtract(input) < TimeSpan.FromMilliseconds(500))
                 return formatter.DateHumanize_Now();
 
-            var isFuture = input > comparisonBase;
+            var timeUnitTense = input > comparisonBase ? TimeUnitTense.Future : TimeUnitTense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
 
             if (ts.TotalSeconds < 60)
-                return formatter.DateHumanize_Seconds(ts.Seconds, isFuture);
+                return formatter.DateHumanize_Seconds(ts.Seconds, timeUnitTense);
 
             if (ts.TotalSeconds < 120)
-                return formatter.DateHumanize_Minutes(1, isFuture);
+                return formatter.DateHumanize_Minutes(1, timeUnitTense);
 
             if (ts.TotalMinutes < 45)
-                return formatter.DateHumanize_Minutes(ts.Minutes, isFuture);
+                return formatter.DateHumanize_Minutes(ts.Minutes, timeUnitTense);
 
             if (ts.TotalMinutes < 90)
-                return formatter.DateHumanize_Hours(1, isFuture);
+                return formatter.DateHumanize_Hours(1, timeUnitTense);
 
             if (ts.TotalHours < 24)
-                return formatter.DateHumanize_Hours(ts.Hours, isFuture);
+                return formatter.DateHumanize_Hours(ts.Hours, timeUnitTense);
 
             if (ts.TotalHours < 48)
-                return formatter.DateHumanize_Days(1, isFuture);
+                return formatter.DateHumanize_Days(1, timeUnitTense);
 
             if (ts.TotalDays < 28)
-                return formatter.DateHumanize_Days(ts.Days, isFuture);
+                return formatter.DateHumanize_Days(ts.Days, timeUnitTense);
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
-                if (comparisonBase.Date.AddMonths(isFuture ? 1 : -1) == input.Date)
-                    return formatter.DateHumanize_Months(1, isFuture);
+                if (comparisonBase.Date.AddMonths(timeUnitTense == TimeUnitTense.Future ? 1 : -1) == input.Date)
+                    return formatter.DateHumanize_Months(1, timeUnitTense);
 
-                return formatter.DateHumanize_Days(ts.Days, isFuture);
+                return formatter.DateHumanize_Days(ts.Days, timeUnitTense);
             }
 
             if (ts.TotalDays < 345)
             {
                 int months = Convert.ToInt32(Math.Floor(ts.TotalDays / 29.5));
-                return formatter.DateHumanize_Months(months, isFuture);
+                return formatter.DateHumanize_Months(months, timeUnitTense);
             }
 
             int years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
             if (years == 0) years = 1;
-            return formatter.DateHumanize_Years(years, isFuture);
+            return formatter.DateHumanize_Years(years, timeUnitTense);
         }
     }
 }

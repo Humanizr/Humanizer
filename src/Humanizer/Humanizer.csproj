@@ -75,6 +75,7 @@
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
+    <Compile Include="Localisation\TimeUnitTense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>

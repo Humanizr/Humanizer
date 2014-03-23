@@ -8,12 +8,12 @@
     public interface IFormatter
     {
         string DateHumanize_Now();
-        string DateHumanize_Seconds(int seconds = 1, bool isFuture = false);
-        string DateHumanize_Minutes(int minutes = 1, bool isFuture = false);
-        string DateHumanize_Hours(int hours = 1, bool isFuture = false);
-        string DateHumanize_Days(int days = 1, bool isFuture = false);
-        string DateHumanize_Months(int months = 1, bool isFuture = false);
-        string DateHumanize_Years(int years = 1, bool isFuture = false);
+        string DateHumanize_Seconds(int seconds = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past);
+        string DateHumanize_Minutes(int minutes = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past);
+        string DateHumanize_Hours(int hours = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past);
+        string DateHumanize_Days(int days = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past);
+        string DateHumanize_Months(int months = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past);
+        string DateHumanize_Years(int years = 1, TimeUnitTense timeUnitTense = TimeUnitTense.Past);
 
         string TimeSpanHumanize_Zero();
         string TimeSpanHumanize_Milliseconds(int milliSeconds = 1);
