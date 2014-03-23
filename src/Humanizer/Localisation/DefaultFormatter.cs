@@ -28,69 +28,9 @@
             return GetResourceForTimeSpan(TimeUnit.Millisecond, 0);
         }
 
-        public string TimeSpanHumanize(TimeUnit timeUnit, int unit = 1)
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
             return GetResourceForTimeSpan(timeUnit, unit);
-        }
-
-        /// <summary>
-        /// To express time in milliseconds.
-        /// </summary>
-        /// <param name="milliSeconds">number of milliseconds</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string TimeSpanHumanize_Milliseconds(int milliSeconds = 1)
-        {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, milliSeconds);
-        }
-
-        /// <summary>
-        /// To express time in secounds.
-        /// </summary>
-        /// <param name="seconds">number of seconds</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string TimeSpanHumanize_Seconds(int seconds = 1)
-        {
-            return GetResourceForTimeSpan(TimeUnit.Second, seconds);
-        }
-
-        /// <summary>
-        /// To express time in minutes.
-        /// </summary>
-        /// <param name="minutes">number of minutes</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string TimeSpanHumanize_Minutes(int minutes = 1)
-        {
-            return GetResourceForTimeSpan(TimeUnit.Minute, minutes);
-        }
-
-        /// <summary>
-        /// To express time in hours
-        /// </summary>
-        /// <param name="hours">number of hours</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string TimeSpanHumanize_Hours(int hours = 1)
-        {
-            return GetResourceForTimeSpan(TimeUnit.Hour, hours);
-        }
-
-        /// <summary>
-        /// To express time in days.
-        /// </summary>
-        /// <param name="days">number of days</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string TimeSpanHumanize_Days(int days = 1)
-        {
-            return GetResourceForTimeSpan(TimeUnit.Day, days);
-        }
-
-        /// <summary>
-        /// To express time in weeks.
-        /// </summary>
-        /// <param name="weeks">number of weeks</param>
-        /// <returns>Time expressed in words</returns>
-        public virtual string TimeSpanHumanize_Weeks(int weeks = 1)
-        {
-            return GetResourceForTimeSpan(TimeUnit.Week, weeks);
         }
 
         private string GetResourceForDate(TimeUnit unit, TimeUnitTense timeUnitTense, int count)

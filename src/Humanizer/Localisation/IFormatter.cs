@@ -11,12 +11,6 @@
         string DateHumanize(TimeUnit timeUnit, TimeUnitTense timeUnitTense, int unit);
         
         string TimeSpanHumanize_Zero();
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit = 1);
-        string TimeSpanHumanize_Milliseconds(int milliSeconds = 1);
-        string TimeSpanHumanize_Seconds(int seconds = 1);
-        string TimeSpanHumanize_Minutes(int minutes = 1);
-        string TimeSpanHumanize_Hours(int hours = 1);
-        string TimeSpanHumanize_Days(int days = 1);
-        string TimeSpanHumanize_Weeks(int weeks = 1);
+        string TimeSpanHumanize(TimeUnit timeUnit, int unit);
     }
 }

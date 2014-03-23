@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Humanizer.Configuration;
+using Humanizer.Localisation;
 
 namespace Humanizer
 {
@@ -39,22 +40,22 @@ namespace Humanizer
         {
             var formatter = Configurator.Formatter;
             if (timespan.Days >= 7)
-                return formatter.TimeSpanHumanize_Weeks(timespan.Days/7);
+                return formatter.TimeSpanHumanize(TimeUnit.Week, timespan.Days/7);
 
             if(timespan.Days >= 1)
-                    return formatter.TimeSpanHumanize_Days(timespan.Days);
+                    return formatter.TimeSpanHumanize(TimeUnit.Day, timespan.Days);
 
             if (timespan.Hours >= 1)
-                    return formatter.TimeSpanHumanize_Hours(timespan.Hours);
+                    return formatter.TimeSpanHumanize(TimeUnit.Hour, timespan.Hours);
 
             if (timespan.Minutes >= 1)
-                return formatter.TimeSpanHumanize_Minutes(timespan.Minutes);
+                return formatter.TimeSpanHumanize(TimeUnit.Minute, timespan.Minutes);
 
             if (timespan.Seconds >= 1)
-                return formatter.TimeSpanHumanize_Seconds(timespan.Seconds);
+                return formatter.TimeSpanHumanize(TimeUnit.Second, timespan.Seconds);
 
             if (timespan.Milliseconds >= 1)
-                return formatter.TimeSpanHumanize_Milliseconds(timespan.Milliseconds);
+                return formatter.TimeSpanHumanize(TimeUnit.Millisecond, timespan.Milliseconds);
 
             return formatter.TimeSpanHumanize_Zero();
         }
