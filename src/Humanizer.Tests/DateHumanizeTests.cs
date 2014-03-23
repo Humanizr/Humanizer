@@ -34,163 +34,190 @@ namespace Humanizer.Tests
         [Fact]
         public void OneSecondFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondFromNow), new TimeSpan(0, 0, 0, 1));
+            var oneSecondFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Future, count: 1));
+            Verify(oneSecondFromNow, new TimeSpan(0, 0, 0, 1));
         }
 
         [Fact]
         public void SecondsFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleSecondsFromNow), 10), new TimeSpan(0, 0, 0, 10));
+            var secsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Future, count: 10)), 10);
+            Verify(secsFromNow, new TimeSpan(0, 0, 0, 10));
         }
 
         [Fact]
         public void OneMinuteFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteFromNow), new TimeSpan(0, 0, 1, 1));
+            var oneMinFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Future, count: 1));
+            Verify(oneMinFromNow, new TimeSpan(0, 0, 1, 1));
         }
 
         [Fact]
         public void AFewMinutesFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMinutesFromNow), 10), new TimeSpan(0, 0, 10, 0));
+            var minsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Future, count: 10)), 10);
+            Verify(minsFromNow, new TimeSpan(0, 0, 10, 0));
         }
 
         [Fact]
         public void AnHourFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleHourFromNow), new TimeSpan(0, 1, 10, 0));
+            var anHourFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Future, count: 1));
+            Verify(anHourFromNow, new TimeSpan(0, 1, 10, 0));
         }
 
         [Fact]
         public void HoursFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleHoursFromNow), 10), new TimeSpan(0, 10, 0, 0));
+            var hoursFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Future, count: 10)), 10);
+            Verify(hoursFromNow, new TimeSpan(0, 10, 0, 0));
         }
 
         [Fact]
         public void Tomorrow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleDayFromNow), new TimeSpan(1, 10, 0, 0));
+            var tomorrow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Future, count: 1));
+            Verify(tomorrow, new TimeSpan(1, 10, 0, 0));
         }
 
         [Fact]
         public void AFewDaysFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleDaysFromNow), 10), new TimeSpan(10, 1, 0, 0));
+            var daysFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Future, count: 10)), 10);
+            Verify(daysFromNow, new TimeSpan(10, 1, 0, 0));
         }
 
         [Fact]
         public void OneMonthFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthFromNow), new TimeSpan(31, 1, 0, 0));
+            var oneMonthFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Future, count: 1));
+            Verify(oneMonthFromNow, new TimeSpan(31, 1, 0, 0));
         }
 
         [Fact]
         public void AFewMonthsFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsFromNow), 2), new TimeSpan(62, 1, 0, 0));
+            var monthsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Future, count: 2)), 2);
+            Verify(monthsFromNow, new TimeSpan(62, 1, 0, 0));
         }
 
         [Fact]
         public void OneYearFromNowIsNotAccureate()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleYearFromNow), new TimeSpan(360, 0, 0, 0));
+            var aYearFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Future, count: 1));
+            Verify(aYearFromNow, new TimeSpan(360, 0, 0, 0));
         }
 
         [Fact]
         public void OneYearFromNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleYearFromNow), new TimeSpan(400, 0, 0, 0));
+            var aYearFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Future, count: 1));
+            Verify(aYearFromNow, new TimeSpan(400, 0, 0, 0));
         }
 
         [Fact]
         public void FewYearsFromNow()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleYearsFromNow), 2), new TimeSpan(900, 0, 0, 0));
+            var fewYearsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Future, count: 2)), 2);
+            Verify(fewYearsFromNow, new TimeSpan(900, 0, 0, 0));
         }
 
         [Fact]
         public void JustNow()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.Now), new TimeSpan(0, 0, 0, 0));
+            var now = Resources.GetResource(ResourceKeys.DateHumanize.Now);
+            Verify(now, new TimeSpan(0, 0, 0, 0));
         }
 
         [Fact]
         public void OneSecondAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleSecondAgo), new TimeSpan(0, 0, 0, -1));
+            var aSecAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Past));
+            Verify(aSecAgo, new TimeSpan(0, 0, 0, -1));
         }
 
         [Fact]
         public void SecondsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleSecondsAgo), 10), new TimeSpan(0, 0, 0, -10));
+            var secondsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Past, count: 10)), 10);
+            Verify(secondsAgo, new TimeSpan(0, 0, 0, -10));
         }
 
         [Fact]
         public void OneMinuteAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMinuteAgo), new TimeSpan(0, 0, -1, -10));
+            var aMinuteAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Past));
+            Verify(aMinuteAgo, new TimeSpan(0, 0, -1, -10));
         }
 
         [Fact]
         public void AFewMinutesAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMinutesAgo), 10), new TimeSpan(0, 0, -10, 0));
+            var minsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Past, count: 10)), 10);
+            Verify(minsAgo, new TimeSpan(0, 0, -10, 0));
         }
 
         [Fact]
         public void AnHourAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleHourAgo), new TimeSpan(0, -1, -10, 0));
+            var anHourAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Past));
+            Verify(anHourAgo, new TimeSpan(0, -1, -10, 0));
         }
 
         [Fact]
         public void HoursAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleHoursAgo), 10), new TimeSpan(0, -10, 0, 0));
+            var hoursAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Past, count: 10)), 10);
+            Verify(hoursAgo, new TimeSpan(0, -10, 0, 0));
         }
 
         [Fact]
         public void Yesterday()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleDayAgo), new TimeSpan(-1, -10, 0, 0));
+            var yesterday = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Past));
+            Verify(yesterday, new TimeSpan(-1, -10, 0, 0));
         }
 
         [Fact]
         public void AFewDaysAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleDaysAgo), 10), new TimeSpan(-10, -1, 0, 0));
+            var fewDaysAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Past, count: 10)), 10);
+            Verify(fewDaysAgo, new TimeSpan(-10, -1, 0, 0));
         }
 
         [Fact]
         public void OneMonthAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleMonthAgo), new TimeSpan(-31, -1, 0, 0));
+            var aMonthAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Past));
+            Verify(aMonthAgo, new TimeSpan(-31, -1, 0, 0));
         }
 
         [Fact]
         public void AFewMonthsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleMonthsAgo), 2), new TimeSpan(-62, -1, 0, 0));
+            var monthsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Past, count: 2)), 2);
+            Verify(monthsAgo, new TimeSpan(-62, -1, 0, 0));
         }
 
         [Fact]
         public void OneYearAgoIsNotAccureate()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleYearAgo), new TimeSpan(-360, 0, 0, 0));
+            var aYearAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Past));
+            Verify(aYearAgo, new TimeSpan(-360, 0, 0, 0));
         }
 
         [Fact]
         public void OneYearAgo()
         {
-            Verify(Resources.GetResource(ResourceKeys.DateHumanize.SingleYearAgo), new TimeSpan(-400, 0, 0, 0));
+            var aYearAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Past));
+            Verify(aYearAgo, new TimeSpan(-400, 0, 0, 0));
         }
 
         [Fact]
         public void FewYearsAgo()
         {
-            Verify(string.Format(Resources.GetResource(ResourceKeys.DateHumanize.MultipleYearsAgo), 2), new TimeSpan(-900, 0, 0, 0));
+            var yearsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Past, count: 2)), 2);
+            Verify(yearsAgo, new TimeSpan(-900, 0, 0, 0));
         }
     }
 }
