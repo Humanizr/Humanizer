@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Humanizer.Configuration;
 
@@ -22,9 +20,7 @@ namespace Humanizer
             var result = new StringBuilder();
             for (int i = 0; i < precision; i++)
             {
-                var timePart = FormatParameters
-                    .Select(format => TryFormat(format, timeSpan))
-                    .FirstOrDefault(part => part != null);
+                var timePart = GetTimePart(timeSpan);
             
                 if (result.Length > 0)
                     result.Append(", ");
@@ -37,6 +33,30 @@ namespace Humanizer
             }
 
             return result.ToString();
+        }
+
+        private static string GetTimePart(TimeSpan timespan)
+        {
+            var formatter = Configurator.Formatter;
+            if (timespan.Days >= 7)
+                return formatter.TimeSpanHumanize_Weeks(timespan.Days/7);
+
+            if(timespan.Days >= 1)
+                    return formatter.TimeSpanHumanize_Days(timespan.Days);
+
+            if (timespan.Hours >= 1)
+                    return formatter.TimeSpanHumanize_Hours(timespan.Hours);
+
+            if (timespan.Minutes >= 1)
+                return formatter.TimeSpanHumanize_Minutes(timespan.Minutes);
+
+            if (timespan.Seconds >= 1)
+                return formatter.TimeSpanHumanize_Seconds(timespan.Seconds);
+
+            if (timespan.Milliseconds >= 1)
+                return formatter.TimeSpanHumanize_Milliseconds(timespan.Milliseconds);
+
+            return formatter.TimeSpanHumanize_Zero();
         }
 
         static TimeSpan TakeOutTheLargestUnit(TimeSpan timeSpan)
@@ -69,89 +89,6 @@ namespace Humanizer
                 return TimeSpan.FromMilliseconds(milliseconds);
 
             return TimeSpan.Zero;
-        }
-
-        /// <summary>
-        /// Gets the elements of the TimeSpan associated with their correct formatter methods
-        /// in zero, single and multiple forms.
-        /// </summary>
-        static IEnumerable<TimeSpanPropertyFormat> FormatParameters
-        {
-            get
-            {
-                var formatter = Configurator.Formatter;
-
-                return new[]
-                {
-                    new TimeSpanPropertyFormat(
-                        timespan => timespan.Days / 7,
-                        formatter.TimeSpanHumanize_Weeks), 
-                    new TimeSpanPropertyFormat(
-                        timespan => timespan.Days,
-                        formatter.TimeSpanHumanize_Days),
-                    new TimeSpanPropertyFormat(
-                        timespan => timespan.Hours,
-                        formatter.TimeSpanHumanize_Hours),
-                    new TimeSpanPropertyFormat(
-                        timespan => timespan.Minutes,
-                        formatter.TimeSpanHumanize_Minutes),
-                    new TimeSpanPropertyFormat(
-                        timespan => timespan.Seconds,
-                        formatter.TimeSpanHumanize_Seconds),
-                    new TimeSpanPropertyFormat(
-                        timespan => timespan.Milliseconds,
-                        formatter.TimeSpanHumanize_Milliseconds),
-                    new TimeSpanPropertyFormat(
-                        timespan => 0,
-                        formatter.TimeSpanHumanize_Zero) 
-                };
-            }
-        }
-        
-        /// <summary>
-        /// Maps a single property (Day, Hour etc.) of TimeSpan to a formatted string "1 day" etc.
-        /// </summary>
-        /// <param name="propertyFormat"></param>
-        /// <param name="timeSpan"></param>
-        /// <returns></returns>
-        private static string TryFormat(
-            TimeSpanPropertyFormat propertyFormat,
-            TimeSpan timeSpan)
-        {
-            var value = propertyFormat.PropertySelector(timeSpan);
-            switch (value)
-            {
-                case 0:
-                    return propertyFormat.Zero();
-                default:
-                    return propertyFormat.Format(value);
-            }
-        }
-
-        /// <summary>
-        /// Stores a single mapping of a part of the time span (Day, Hour etc.) to its associated
-        /// formatter method for Zero, Single, Multiple.
-        /// </summary>
-        class TimeSpanPropertyFormat
-        {
-            public TimeSpanPropertyFormat(
-                Func<TimeSpan, int> propertySelector,
-                Func<int, string> format)
-            {
-                PropertySelector = propertySelector;
-                Format = format;
-                Zero = () => null;
-            }
-
-            public TimeSpanPropertyFormat(Func<TimeSpan, int> propertySelector, Func<string> zeroFunc)
-            {
-                PropertySelector = propertySelector;
-                Zero = zeroFunc;
-            }
-
-            public Func<TimeSpan, int> PropertySelector { get; private set; }
-            public Func<int, string> Format { get; private set; }
-            public Func<string> Zero { get; private set; }
         }
     }
 }
