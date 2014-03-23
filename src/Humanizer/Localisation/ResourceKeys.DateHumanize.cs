@@ -27,9 +27,11 @@
             /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
             public static string GetResourceKey(TimeUnit unit, int count = 1, bool isFuture = false)
             {
-                if (count == 0) return Now;
-
                 ValidateRange(count);
+
+                if (count == 0) 
+                    return Now;
+
                 return DateTimeFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s", isFuture ? FromNow : Ago);
             }
         }

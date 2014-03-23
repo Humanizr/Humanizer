@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer.Localisation
+﻿namespace Humanizer.Localisation
 {
     public partial class ResourceKeys
     {
@@ -21,9 +19,11 @@ namespace Humanizer.Localisation
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
             public static string GetResourceKey(TimeUnit unit, int count = 1)
             {
-                if (count == 0) return Zero;
-
                 ValidateRange(count);
+
+                if (count == 0) 
+                    return Zero;
+
                 return TimeSpanFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s");
             }
         }
