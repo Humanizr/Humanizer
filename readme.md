@@ -11,7 +11,7 @@ Table of contents:
  - [Dehumanize String](#dehumanize-string)
  - [Transform](#transform)
  - [Humanize Enums](#humanize-enums)
- - [Dehumanize Enums](#humanize-enums)
+ - [Dehumanize Enums](#dehumanize-enums)
  - [Humanize TimeSpan](#humanize-timespan)
  - [Inflector methods](#inflector-methods)
    - [Pluralize](#pluralize)
@@ -118,7 +118,7 @@ EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCas
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
-###<a id="dehumanize-enums>Dehumanize Enums</a>
+###<a id="dehumanize-enums">Dehumanize Enums</a>
 Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
 ```C#
