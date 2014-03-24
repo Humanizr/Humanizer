@@ -19,7 +19,7 @@ Table of contents:
    - [ToQuantity](#toquantity)
    - [Ordinalize](#ordinalize)
    - [Underscore](#underscore)
-   - [Dasherize & Hyphenate](#dasherize-hyphenate)
+   - [Dasherize & Hyphenate](#dasherize--hyphenate)
  - [Fluent date](#fluent-date)
  - [Number to words](#number-to-words)
  - [Number to ordinal words](#number-to-ordinal-words)
@@ -271,7 +271,7 @@ You can also call `Ordinalize` on a numeric string and achieve the same result: 
 ####<a id="underscore">Underscore</a>
 `Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
 
-####<a id="dasherize-hyphenate">Dasherize & Hyphenate</a>
+####<a id="dasherize--hyphenate">Dasherize & Hyphenate</a>
 `Dasherize` and `Hyphenate` replace underscores with dashes in the string:
 
 ```C3
