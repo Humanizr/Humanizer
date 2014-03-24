@@ -21,15 +21,15 @@ Table of contents:
    - [Underscore](#underscore)
    - [Dasherize & Hyphenate](#dasherize-hyphenate)
  - [Fluent date](#fluent-date)
- - [Number to words](#number-towords)
- - [Number to ordinal words](#number-toordinalwords)
+ - [Number to words](#number-to-words)
+ - [Number to ordinal words](#number-to-ordinal-words)
  - [Roman numerals](#roman-numerals)
  - [ByteSize](#bytesize)
- - [Mix this into your framework to simplify your life](#mix-humanize-in)
- - [How to contribute?](#contribute)
+ - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
+ - [How to contribute?](#how-to-contribute)
    - [Contribution guideline](#contribution-guideline)
-   - [Need your help with localisation](#contribute-localisation)
- - [Continuous Integration from TeamCity](#ci-from-teamcity)
+   - [Need your help with localisation](#need-your-help-with-localisation)
+ - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
  - [Author](#author)
  - [License](#license)
 
@@ -511,7 +511,7 @@ ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
 ```
 
-###<a id="mix-humanize-in">Mix this into your framework to simplify your life</a>
+###<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
 
 You may find an Asp.Net MVC sample [in the code](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
@@ -596,7 +596,7 @@ No need to mention that if you want title casing for your labels you can chain t
 modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.TitleCase);
 ```
 
-##<a id="contribute">How to contribute?</a>
+##<a id="how-to-contribute">How to contribute?</a>
 Your contribution to Humanizer would be very welcome. 
 If you find a bug, please raise it as an issue. 
 Even better fix it and send me a pull request. 
@@ -619,7 +619,7 @@ Pull requests are code reviewed. Here is what I look for in your pull request:
 
 Also please link to the issue(s) you're fixing from your PR description.
 
-###<a id="contribute-localisation">Need your help with localisation</a>
+###<a id="need-your-help-with-localisation">Need your help with localisation</a>
 One area Humanizer could always use your help is localisation. 
 Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) quite a few localisations for `Date.Humanize` and a few for `TimeSpan.Humanize` methods. 
 There is also ongoing effort to add localisation to `ToWords` extension method which currently only supports English and Arabic.
@@ -634,7 +634,7 @@ Then you return an instance of your class in the [Configurator](https://github.c
 
 Translations for ToWords method are currently done in code as there is a huge difference between the way different languages deal with number words.
 
-###<a id="ci-from-teamcity">Continuous Integration from TeamCity</a>
+###<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
 Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.
 
 The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
