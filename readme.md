@@ -19,7 +19,7 @@ Table of contents:
    - [ToQuantity](#toquantity)
    - [Ordinalize](#ordinalize)
    - [Underscore](#underscore)
-   - [Dasherize & Hyphenate](#dasherize)
+   - [Dasherize & Hyphenate](#dasherize-hyphenate)
  - [Fluent date](#fluent-date)
  - [Number to words](#number-towords)
  - [Number to ordinal words](#number-toordinalwords)
@@ -271,7 +271,7 @@ You can also call `Ordinalize` on a numeric string and achieve the same result: 
 ####<a id="underscore">Underscore</a>
 `Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
 
-####<a id="dasherize">Dasherize & Hyphenate</a>
+####<a id="dasherize-hyphenate">Dasherize & Hyphenate</a>
 `Dasherize` and `Hyphenate` replace underscores with dashes in the string:
 
 ```C3
@@ -350,7 +350,7 @@ someDateTime.AtMidnight()
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
-###<a id="number-towords"Number to words</a>
+###<a id="number-towords">Number to words</a>
 Humanizer can change numbers to words using the `ToWords` extension:
 
 ```C#
