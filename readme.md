@@ -268,7 +268,7 @@ You can also pass a second argument, `ShowQuantityAs`, to `ToQuantity` to specif
 
 You can also call `Ordinalize` on a numeric string and achieve the same result: `"21".Ordinalize()` => `"21st"`
 
-####<a id="underscore>Underscore</a>
+####<a id="underscore">Underscore</a>
 `Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
 
 ####<a id="dasherize">Dasherize & Hyphenate</a>
