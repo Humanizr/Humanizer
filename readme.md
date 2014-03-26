@@ -5,7 +5,7 @@ You can install Humanizer as [a nuget package](https://nuget.org/packages/Humani
 Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
 Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
 
-Table of contents:
+**Table of contents:**
 
  - [Humanize String](#humanize-string)
  - [Dehumanize String](#dehumanize-string)
