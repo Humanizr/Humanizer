@@ -9,28 +9,43 @@ namespace Humanizer.Tests
         [Fact]
         public void ThrowsForNonEnums()
         {
-            Assert.Throws<ArgumentException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyStructWithEnumInterfaces>());
-            Assert.Throws<ArgumentException>(() => EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyStructWithEnumInterfaces)));
+            Assert.Throws<ArgumentException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyStructWithEnumInterfaces>());
+            Assert.Throws<ArgumentException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyStructWithEnumInterfaces)));
         }
 
         [Fact]
         public void ThrowsForEnumNoMatch()
         {
-            Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.CustomDescription.DehumanizeTo<DummyEnum>());
-            Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyEnum)));
+            Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyEnum>());
+            Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum)));
         }
 
         [Fact]
         public void CanReturnNullForEnumNoMatch()
         {
-            Assert.Null(EnumTestsResources.CustomDescription.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
+            Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
         }
 
         [Fact]
         public void HonorsDescriptionAttribute()
         {
-            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.CustomDescription.DehumanizeTo<EnumUnderTest>());
-            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.CustomDescription.DehumanizeTo(typeof(EnumUnderTest)));
+            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(EnumUnderTest)));
+        }
+
+        [Fact]
+        public void HonorsDescriptionAttributeSubclasses()
+        {
+            const string calculatedDescription = "Overridden " + EnumTestsResources.MemberWithDescriptionAttributeSubclass;
+            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttributeSubclass, calculatedDescription.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.MemberWithDescriptionAttributeSubclass, calculatedDescription.DehumanizeTo(typeof(EnumUnderTest)));
+        }
+
+        [Fact]
+        public void HonorsAnyAttributeWithDescriptionStringProperty()
+        {
+            Assert.Equal(EnumUnderTest.MemberWithCustomDescriptionAttribute, EnumTestsResources.MemberWithCustomDescriptionAttribute.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.MemberWithCustomDescriptionAttribute, EnumTestsResources.MemberWithCustomDescriptionAttribute.DehumanizeTo(typeof(EnumUnderTest)));
         }
 
         [Fact]

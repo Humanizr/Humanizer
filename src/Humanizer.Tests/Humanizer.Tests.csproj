@@ -93,7 +93,6 @@
     <Compile Include="DateHumanizeTests.cs" />
     <Compile Include="DehumanizeToEnumTests.cs" />
     <Compile Include="EnumHumanizeTests.cs" />
-    <Compile Include="EnumTestsResources.cs" />
     <Compile Include="EnumUnderTest.cs" />
     <Compile Include="FluentDate\InTests.cs" />
     <Compile Include="FluentDate\OnTests.cs" />

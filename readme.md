@@ -116,6 +116,9 @@ EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without de
 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase) => "Member Without Description Attribute"
 ```
 
+You are not limited to `DescriptionAttribute` for custom description. Any attribute applied on enum members with a string `Description` field counts. 
+This is to help with platforms with missing `DescriptionAttribute` and also for using subclasses of the attribute.
+
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
 ###<a id="dehumanize-enums">Dehumanize Enums</a>

@@ -7,7 +7,25 @@ namespace Humanizer.Tests
         [Fact] 
         public void HonorsDescriptionAttribute()
         {
-            Assert.Equal(EnumTestsResources.CustomDescription, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
+            Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
+        }
+
+        [Fact]
+        public void HonorsDescriptionAttributeSubclasses()
+        {
+            Assert.Equal("Overridden " + EnumTestsResources.MemberWithDescriptionAttributeSubclass, EnumUnderTest.MemberWithDescriptionAttributeSubclass.Humanize());
+        }
+
+        [Fact]
+        public void HonorsAnyAttributeWithDescriptionStringProperty()
+        {
+            Assert.Equal(EnumTestsResources.MemberWithCustomDescriptionAttribute, EnumUnderTest.MemberWithCustomDescriptionAttribute.Humanize());
+        }
+
+        [Fact]
+        public void OnlyStringDescriptionsApply()
+        {
+            Assert.Equal(EnumTestsResources.MemberWithImposterDescriptionAttribute, EnumUnderTest.MemberWithImposterDescriptionAttribute.Humanize());
         }
 
         [Fact] 
