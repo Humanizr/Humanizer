@@ -37,15 +37,9 @@ namespace Humanizer
             foreach (var attr in attrs)
             {
                 var attrType = attr.GetType();
-                if (attrType.FullName == "System.ComponentModel.DescriptionAttribute")
-                {
-                    var descriptionProperty = attrType.GetProperties().FirstOrDefault(DescriptionProperty);
-                    if (descriptionProperty != null)
-                    {
-                        //we have a hit
-                        return descriptionProperty.GetValue(attr, null).ToString();
-                    }
-                }
+                var descriptionProperty = attrType.GetProperties().FirstOrDefault(DescriptionProperty);
+                if (descriptionProperty != null)
+                    return descriptionProperty.GetValue(attr, null).ToString();
             }
 
             return null;
