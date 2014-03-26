@@ -4,42 +4,88 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Humanizer by MehdiK</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/MehdiK/Humanizer">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/MehdiK/Humanizer/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/MehdiK/Humanizer/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1>Humanizer</h1>
-        <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</p>
 
-        <p class="view"><a href="https://github.com/MehdiK/Humanizer">View the Project on GitHub <small>MehdiK/Humanizer</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/MehdiK/Humanizer/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/MehdiK/Humanizer/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/MehdiK/Humanizer">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
       <section>
-        <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.</p>
+        <div id="title">
+          <h1>Humanizer</h1>
+          <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/MehdiK">MehdiK</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-<h3>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+        <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.</p>
 
 <p>You can install Humanizer as <a href="https://nuget.org/packages/Humanizer">a nuget package</a>: <code>Install-Package Humanizer</code></p>
 
 <p>Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
 Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer">symbols nuget package</a> is published so you can <a href="http://www.symbolsource.org/Public/Home/VisualStudio">step through Humanizer code</a> while debugging your code.</p>
 
-<h3>
-<a name="humanize-string" class="anchor" href="#humanize-string"><span class="octicon octicon-link"></span></a>Humanize String</h3>
+<p>Table of contents:</p>
+
+<ul>
+<li><a href="#humanize-string">Humanize String</a></li>
+<li><a href="#dehumanize-string">Dehumanize String</a></li>
+<li><a href="#transform">Transform</a></li>
+<li><a href="#humanize-enums">Humanize Enums</a></li>
+<li><a href="#dehumanize-enums">Dehumanize Enums</a></li>
+<li><a href="#humanize-timespan">Humanize TimeSpan</a></li>
+<li>
+<a href="#inflector-methods">Inflector methods</a>
+
+<ul>
+<li><a href="#pluralize">Pluralize</a></li>
+<li><a href="#singularize">Singularize</a></li>
+<li><a href="#toquantity">ToQuantity</a></li>
+<li><a href="#ordinalize">Ordinalize</a></li>
+<li><a href="#underscore">Underscore</a></li>
+<li><a href="#dasherize--hyphenate">Dasherize &amp; Hyphenate</a></li>
+</ul>
+</li>
+<li><a href="#fluent-date">Fluent date</a></li>
+<li><a href="#number-to-words">Number to words</a></li>
+<li><a href="#number-to-ordinal-words">Number to ordinal words</a></li>
+<li><a href="#roman-numerals">Roman numerals</a></li>
+<li><a href="#bytesize">ByteSize</a></li>
+<li><a href="#mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a></li>
+<li>
+<a href="#how-to-contribute">How to contribute?</a>
+
+<ul>
+<li><a href="#contribution-guideline">Contribution guideline</a></li>
+<li><a href="#need-your-help-with-localisation">Need your help with localisation</a></li>
+</ul>
+</li>
+<li><a href="#continuous-integration-from-teamcity">Continuous Integration from TeamCity</a></li>
+<li><a href="#author">Author</a></li>
+<li><a href="#license">License</a></li>
+</ul><h3>
+<a name="humanize-string" class="anchor" href="#humanize-string"><span class="octicon octicon-link"></span></a><a>Humanize String</a>
+</h3>
 
 <p>String extensions are at the heart of this micro-framework. The foundation of this was set in the <a href="https://github.com/TestStack/TestStack.BDDfy">BDDfy framework</a> where class names, method names and properties are turned into human readable sentences. </p>
 
@@ -68,8 +114,9 @@ Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Projec
 <p>The <code>LetterCasing</code> API and the methods accepting it are legacy from V0.2 era and will be deprecated in the future. Instead of that, you can use <code>Transform</code> method explained below.</p>
 </blockquote>
 
-<h4>
-<a name="dehumanize-string" class="anchor" href="#dehumanize-string"><span class="octicon octicon-link"></span></a>Dehumanize String</h4>
+<h3>
+<a name="dehumanize-string" class="anchor" href="#dehumanize-string"><span class="octicon octicon-link"></span></a><a>Dehumanize String</a>
+</h3>
 
 <p>Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:</p>
 
@@ -77,7 +124,8 @@ Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Projec
 </pre></div>
 
 <h3>
-<a name="transform" class="anchor" href="#transform"><span class="octicon octicon-link"></span></a>Transform</h3>
+<a name="transform" class="anchor" href="#transform"><span class="octicon octicon-link"></span></a><a>Transform</a>
+</h3>
 
 <p>There is a <code>Transform</code> method that supercedes <code>LetterCasing</code>, <code>ApplyCase</code> and <code>Humanize</code> overloads that accept <code>LetterCasing</code>. 
 Transform method signatue is as follows:</p>
@@ -99,7 +147,8 @@ Transform method signatue is as follows:</p>
 while <code>IStringTransformer</code> is an interface you can implement in your codebase once and use it with <code>Transform</code> method allowing for easy extension. </p>
 
 <h3>
-<a name="humanize-enums" class="anchor" href="#humanize-enums"><span class="octicon octicon-link"></span></a>Humanize Enums</h3>
+<a name="humanize-enums" class="anchor" href="#humanize-enums"><span class="octicon octicon-link"></span></a><a>Humanize Enums</a>
+</h3>
 
 <p>Calling <code>ToString</code> directly on enum members usually results in less than ideal output for users. The solution to this is usually to use <code>DescriptionAttribute</code> data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what <code>String.Humanize()</code> does well. For an enum like:</p>
 
@@ -126,8 +175,9 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 
 <p>Hopefully this will help avoid littering enums with unnecessary attributes!</p>
 
-<h4>
-<a name="dehumanize-enums" class="anchor" href="#dehumanize-enums"><span class="octicon octicon-link"></span></a>Dehumanize Enums</h4>
+<h3>
+<a name="dehumanize-enums" class="anchor" href="#dehumanize-enums"><span class="octicon octicon-link"></span></a><a>Dehumanize Enums</a>
+</h3>
 
 <p>Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:</p>
 
@@ -155,7 +205,8 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 In the non-generic method you can also ask the method to return null by setting the second optiona parameter to <code>NoMatch.ReturnsNull</code>.</p>
 
 <h3>
-<a name="humanize-datetime" class="anchor" href="#humanize-datetime"><span class="octicon octicon-link"></span></a>Humanize DateTime</h3>
+<a name="humanize-datetime" class="anchor" href="#humanize-datetime"><span class="octicon octicon-link"></span></a><a>Humanize DateTime</a>
+</h3>
 
 <p>You can <code>Humanize</code> an instance of <code>DateTime</code> and get back a string telling how far back or forward in time that is:</p>
 
@@ -176,7 +227,8 @@ In the non-generic method you can also ask the method to return null by setting 
 <p><strong>No dehumanization for dates as the human friendly date is not reversible</strong></p>
 
 <h3>
-<a name="humanize-timespan" class="anchor" href="#humanize-timespan"><span class="octicon octicon-link"></span></a>Humanize TimeSpan</h3>
+<a name="humanize-timespan" class="anchor" href="#humanize-timespan"><span class="octicon octicon-link"></span></a><a>Humanize TimeSpan</a>
+</h3>
 
 <p>You can call <code>Humanize</code> on a <code>TimeSpan</code> to a get human friendly representation for it:</p>
 
@@ -201,12 +253,14 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h3>
-<a name="inflector-methods" class="anchor" href="#inflector-methods"><span class="octicon octicon-link"></span></a>Inflector methods</h3>
+<a name="inflector-methods" class="anchor" href="#inflector-methods"><span class="octicon octicon-link"></span></a><a>Inflector methods</a>
+</h3>
 
 <p>There are also a few inflector methods:</p>
 
 <h4>
-<a name="pluralize" class="anchor" href="#pluralize"><span class="octicon octicon-link"></span></a>Pluralize</h4>
+<a name="pluralize" class="anchor" href="#pluralize"><span class="octicon octicon-link"></span></a><a>Pluralize</a>
+</h4>
 
 <p><code>Pluralize</code> pluralizes the provided input while taking irregular and uncountable words into consideration:</p>
 
@@ -222,7 +276,8 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h4>
-<a name="singularize" class="anchor" href="#singularize"><span class="octicon octicon-link"></span></a>Singularize</h4>
+<a name="singularize" class="anchor" href="#singularize"><span class="octicon octicon-link"></span></a><a>Singularize</a>
+</h4>
 
 <p><code>Singularize</code> singularizes the provided input while taking irregular and uncountable words into consideration:</p>
 
@@ -238,7 +293,8 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h4>
-<a name="toquantity" class="anchor" href="#toquantity"><span class="octicon octicon-link"></span></a>ToQuantity</h4>
+<a name="toquantity" class="anchor" href="#toquantity"><span class="octicon octicon-link"></span></a><a>ToQuantity</a>
+</h4>
 
 <p>Many times you want to call <code>Singularize</code> and <code>Pluralize</code> to prefix a word with a number; e.g. "2 requests", "3 men". <code>ToQuantity</code> prefixes the provided word with the number and accordingly pluralizes or singularizes the word:</p>
 
@@ -266,7 +322,8 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h4>
-<a name="ordinalize-numbers--strings" class="anchor" href="#ordinalize-numbers--strings"><span class="octicon octicon-link"></span></a>Ordinalize numbers &amp; strings</h4>
+<a name="ordinalize" class="anchor" href="#ordinalize"><span class="octicon octicon-link"></span></a><a>Ordinalize</a>
+</h4>
 
 <p><code>Ordinalize</code> turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th: </p>
 
@@ -277,12 +334,14 @@ Here is a few examples of specifying precision:</p>
 <p>You can also call <code>Ordinalize</code> on a numeric string and achieve the same result: <code>"21".Ordinalize()</code> =&gt; <code>"21st"</code></p>
 
 <h4>
-<a name="underscore" class="anchor" href="#underscore"><span class="octicon octicon-link"></span></a>Underscore</h4>
+<a name="underscore" class="anchor" href="#underscore"><span class="octicon octicon-link"></span></a><a>Underscore</a>
+</h4>
 
 <p><code>Underscore</code> separates the input words with underscore; e.g. <code>"SomeTitle".Underscore()</code> =&gt; <code>"some_title"</code></p>
 
 <h4>
-<a name="dasherize--hyphenate" class="anchor" href="#dasherize--hyphenate"><span class="octicon octicon-link"></span></a>Dasherize &amp; Hyphenate</h4>
+<a name="dasherize--hyphenate" class="anchor" href="#dasherize--hyphenate"><span class="octicon octicon-link"></span></a><a>Dasherize &amp; Hyphenate</a>
+</h4>
 
 <p><code>Dasherize</code> and <code>Hyphenate</code> replace underscores with dashes in the string:</p>
 
@@ -291,7 +350,8 @@ Here is a few examples of specifying precision:</p>
 </code></pre>
 
 <h3>
-<a name="fluent-date" class="anchor" href="#fluent-date"><span class="octicon octicon-link"></span></a>Fluent Date</h3>
+<a name="fluent-date" class="anchor" href="#fluent-date"><span class="octicon octicon-link"></span></a><a>Fluent Date</a>
+</h3>
 
 <p>Humanizer provides a fluent API to deal with <code>DateTime</code> and <code>TimeSpan</code> as follows:</p>
 
@@ -359,7 +419,8 @@ Here is a few examples of specifying precision:</p>
 <p>Obviously you could chain the methods too; e.g. <code>On.November.The13th.In(2010).AtNoon + 5.Minutes()</code></p>
 
 <h3>
-<a name="number-to-words" class="anchor" href="#number-to-words"><span class="octicon octicon-link"></span></a>Number to words</h3>
+<a name="number-to-words" class="anchor" href="#number-to-words"><span class="octicon octicon-link"></span></a><a>Number to words</a>
+</h3>
 
 <p>Humanizer can change numbers to words using the <code>ToWords</code> extension:</p>
 
@@ -371,7 +432,8 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h3>
-<a name="number-to-ordinal-words" class="anchor" href="#number-to-ordinal-words"><span class="octicon octicon-link"></span></a>Number to ordinal words</h3>
+<a name="number-to-ordinal-words" class="anchor" href="#number-to-ordinal-words"><span class="octicon octicon-link"></span></a><a>Number to ordinal words</a>
+</h3>
 
 <p>This is kind of mixing <code>ToWords</code> with <code>Ordinalize</code>. You can call <code>ToOrdinalWords</code> on a number to get an ordinal representation of the number in words!! Let me show that with an example:</p>
 
@@ -388,7 +450,8 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h3>
-<a name="roman-numerals" class="anchor" href="#roman-numerals"><span class="octicon octicon-link"></span></a>Roman numerals</h3>
+<a name="roman-numerals" class="anchor" href="#roman-numerals"><span class="octicon octicon-link"></span></a><a>Roman numerals</a>
+</h3>
 
 <p>Humanizer can change numbers to Roman numerals using the <code>ToRoman</code> extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:</p>
 
@@ -414,7 +477,8 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h3>
-<a name="bytesize" class="anchor" href="#bytesize"><span class="octicon octicon-link"></span></a>ByteSize</h3>
+<a name="bytesize" class="anchor" href="#bytesize"><span class="octicon octicon-link"></span></a><a>ByteSize</a>
+</h3>
 
 <p>Humanizer includes a port of the brilliant <a href="https://github.com/omar/ByteSize">ByteSize</a> library.
 Quite a few changes and additions are made on <code>ByteSize</code> to make the interaction with <code>ByteSize</code> easier and more consistent with the Humanizer API. 
@@ -517,7 +581,8 @@ ByteSize.Parse("1.55 tb");
 </code></pre>
 
 <h3>
-<a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a>Mix this into your framework to simplify your life</h3>
+<a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a><a>Mix this into your framework to simplify your life</a>
+</h3>
 
 <p>This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use <code>"string".Humanize</code> for that?! </p>
 
@@ -599,7 +664,8 @@ ByteSize.Parse("1.55 tb");
 </pre></div>
 
 <h2>
-<a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a>How to contribute?</h2>
+<a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a><a>How to contribute?</a>
+</h2>
 
 <p>Your contribution to Humanizer would be very welcome. 
 If you find a bug, please raise it as an issue. 
@@ -608,7 +674,8 @@ If you like to help me out with existing bugs and feature requests just check ou
 I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.</p>
 
 <h3>
-<a name="contribution-guideline" class="anchor" href="#contribution-guideline"><span class="octicon octicon-link"></span></a>Contribution guideline</h3>
+<a name="contribution-guideline" class="anchor" href="#contribution-guideline"><span class="octicon octicon-link"></span></a><a>Contribution guideline</a>
+</h3>
 
 <p>I use <a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub flow</a> for pull requests. 
 So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue and send a PR.</p>
@@ -626,7 +693,8 @@ So if you want to contribute, fork the repo, preferrably create a local branch t
 </ul><p>Also please link to the issue(s) you're fixing from your PR description.</p>
 
 <h3>
-<a name="need-your-help-with-localisation" class="anchor" href="#need-your-help-with-localisation"><span class="octicon octicon-link"></span></a>Need your help with localisation</h3>
+<a name="need-your-help-with-localisation" class="anchor" href="#need-your-help-with-localisation"><span class="octicon octicon-link"></span></a><a>Need your help with localisation</a>
+</h3>
 
 <p>One area Humanizer could always use your help is localisation. 
 Currently Humanizer <a href="https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties">supports</a> quite a few localisations for <code>Date.Humanize</code> and a few for <code>TimeSpan.Humanize</code> methods. 
@@ -643,7 +711,8 @@ Then you return an instance of your class in the <a href="https://github.com/Meh
 <p>Translations for ToWords method are currently done in code as there is a huge difference between the way different languages deal with number words.</p>
 
 <h3>
-<a name="continuous-integration-from-teamcity" class="anchor" href="#continuous-integration-from-teamcity"><span class="octicon octicon-link"></span></a>Continuous Integration from TeamCity</h3>
+<a name="continuous-integration-from-teamcity" class="anchor" href="#continuous-integration-from-teamcity"><span class="octicon octicon-link"></span></a><a>Continuous Integration from TeamCity</a>
+</h3>
 
 <p>Humanizer project is built &amp; tested continuously by TeamCity (more details <a href="http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity">here</a>). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.</p>
 
@@ -651,21 +720,20 @@ Then you return an instance of your class in the <a href="https://github.com/Meh
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"></a></p>
 
 <h3>
-<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h3>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a><a>Author</a>
+</h3>
 
 <p>Mehdi Khalili (<a href="http://twitter.com/MehdiKhalili">@MehdiKhalili</a>)</p>
 
 <h3>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h3>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a><a>License</a>
+</h3>
 
 <p>Humanizer is released under the MIT License. See the <a href="https://github.com/MehdiK/Humanizer/blob/master/LICENSE">bundled LICENSE</a> file for details.</p>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/MehdiK">MehdiK</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
