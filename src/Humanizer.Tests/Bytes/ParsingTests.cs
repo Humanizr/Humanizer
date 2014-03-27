@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using Humanizer.Bytes;
 using Xunit;
 using Xunit.Extensions;
@@ -7,6 +9,11 @@ namespace Humanizer.Tests.Bytes
 {
     public class ParsingTests
     {
+        public ParsingTests()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+        }
+
         [Fact]
         public void Parse()
         {
