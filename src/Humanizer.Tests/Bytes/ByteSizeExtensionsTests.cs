@@ -1,17 +1,12 @@
-﻿using System.Globalization;
-using System.Threading;
-using Humanizer.Bytes;
+﻿using Humanizer.Bytes;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ByteSizeExtensionsTests
+    public class ByteSizeExtensionsTests : AmbientCulture
     {
-        public ByteSizeExtensionsTests()
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        }
+        public ByteSizeExtensionsTests() : base("en") { }
 
         [Fact]
         public void Terabytes()

@@ -11,6 +11,7 @@ namespace Humanizer.Tests
         public AmbientCulture(CultureInfo culture)
         {
             _culture = Thread.CurrentThread.CurrentUICulture;
+            Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
         }
 

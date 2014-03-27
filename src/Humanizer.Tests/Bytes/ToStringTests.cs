@@ -1,16 +1,11 @@
-﻿using System.Globalization;
-using System.Threading;
-using Humanizer.Bytes;
+﻿using Humanizer.Bytes;
 using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ToStringTests
+    public class ToStringTests : AmbientCulture
     {
-        public ToStringTests()
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-        }
+        public ToStringTests() : base("en") { }
 
         [Fact]
         public void ReturnsLargestMetricSuffix()
