@@ -126,6 +126,8 @@
     <Compile Include="Transformer\ToUpperCase.cs" />
     <Compile Include="Transformer\ToLowerCase.cs" />
     <Compile Include="Transformer\ToSentenceCase.cs" />
+    <Compile Include="TruncateExtensions.cs" />
+    <Compile Include="TruncateMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FluentDate\In.SomeTimeFrom.tt">
