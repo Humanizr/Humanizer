@@ -525,10 +525,10 @@ You can truncate a `string` using the `Truncate` method:
 By default the `'…'` character is used to truncate strings. The advantage of using the `'…'` character instead of `"..."` is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:
 
 ```c#
-"Long text to truncate".Truncate(10, "---") => "Long te..."
+"Long text to truncate".Truncate(10, "---") => "Long te---"
 ```
 
-The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. Here are examples om how to use the three provided truncators:
+The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters one and one for a fixed number of words. To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples both have an overload that allow you to specify the `ITruncator` instance to use for the truncation. Here are examples on how to use the three provided truncators:
 
 ```c#
 "Long text to truncate".Truncate(10, Truncator.FixedLength) => "Long text…"
