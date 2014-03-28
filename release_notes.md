@@ -2,6 +2,8 @@
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.14.1...master)
 
+  - [#110](https://github.com/MehdiK/Humanizer/pull/110): Added `Truncate` feature
+
 ###v1.14.1 - 2014-03-26
   - [#108](https://github.com/MehdiK/Humanizer/pull/108): Added support for custom description attributes
   - [#106](https://github.com/MehdiK/Humanizer/pull/106): 
@@ -9,12 +11,6 @@
 	- Refactored `DateTime.Humanize` and `TimeSpan.Humanize`
 	- Changed `ResourceKeys` to use a dynamic key generation
 	- Fixed the intermittent failing tests on `DateTime.Humanize`
-
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.13.2...v1.14.1)
-
-  - [#110](https://github.com/MehdiK/Humanizer/pull/110): Added `Truncate` feature
-
-  - [#110](https://github.com/MehdiK/Humanizer/pull/110): Added `Truncate` feature
 
 ###v1.13.2 - 2014-03-17
   - [#99](https://github.com/MehdiK/Humanizer/pull/99): Added `ByteSize` feature
