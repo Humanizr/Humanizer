@@ -4,6 +4,7 @@
 
 ###v1.15.1 - 2014-03-28
   - [#113](https://github.com/MehdiK/Humanizer/pull/113): Added `Truncate` feature
+  - [#109](https://github.com/MehdiK/Humanizer/pull/109): Made Dutch (NL) localization a neutral culture, not just for Belgium
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.14.1...v1.15.1)
 
