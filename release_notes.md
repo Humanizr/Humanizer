@@ -14,6 +14,8 @@
 
   - [#110](https://github.com/MehdiK/Humanizer/pull/110): Added `Truncate` feature
 
+  - [#110](https://github.com/MehdiK/Humanizer/pull/110): Added `Truncate` feature
+
 ###v1.13.2 - 2014-03-17
   - [#99](https://github.com/MehdiK/Humanizer/pull/99): Added `ByteSize` feature
 
