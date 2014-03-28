@@ -2,6 +2,8 @@
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.14.1...master)
 
+  - [#110](https://github.com/MehdiK/Humanizer/pull/110): Added `Truncate` feature
+
 ###v1.14.1 - 2014-03-26
   - [#108](https://github.com/MehdiK/Humanizer/pull/108): Added support for custom description attributes
   - [#106](https://github.com/MehdiK/Humanizer/pull/106): 
