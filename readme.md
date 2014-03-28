@@ -25,6 +25,7 @@ Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metada
  - [Number to ordinal words](#number-to-ordinal-words)
  - [Roman numerals](#roman-numerals)
  - [ByteSize](#bytesize)
+ - [Truncate](#truncate)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
    - [Contribution guideline](#contribution-guideline)
@@ -512,6 +513,32 @@ ByteSize.Parse("1.55 gb");
 ByteSize.Parse("1.55 TB");
 ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
+```
+
+###<a id="truncate">Truncate</a>
+You can truncate a `string` using the `Truncate` method:
+
+```c#
+"Long text to truncate".Truncate(10) => "Long text…"
+```
+
+By default the `'…'` character is used to truncate strings with, but you can also provide your own truncation string:
+
+```c#
+"Long text to truncate".Truncate(10, "---") => "Long te..."
+```
+
+The default truncation strategy is to truncate the `string` to a specific (maximum) length (which includes the truncation string length). There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters one and one for a fixed number of words. To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples both have an overload that allow you to specify the `ITruncator` to use for the truncation. Here are examples om how to use the three provided truncators:
+
+```c#
+"Long text to truncate".Truncate(10, Truncator.FixedLength) => "Long text…"
+"Long text to truncate".Truncate(10, "---", Truncator.FixedLength) => "Long te---"
+
+"Long text to truncate".Truncate(6, Truncator.FixedNumberOfCharacters) => "Long t…"
+"Long text to truncate".Truncate(6, "---", Truncator.FixedNumberOfCharacters) => "Lon---"
+
+"Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "Long text…"
+"Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "Long text---"
 ```
 
 ###<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>

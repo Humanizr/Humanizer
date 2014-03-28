@@ -6,7 +6,7 @@ namespace Humanizer
     /// <summary>
     /// Truncate a string to a fixed number of words
     /// </summary>
-    public class FixedNumberOfWordsTruncator : ITruncator
+    class FixedNumberOfWordsTruncator : ITruncator
     {
         public string Truncate(string value, int length, string truncationString)
         {
@@ -29,7 +29,7 @@ namespace Humanizer
                 if (Char.IsWhiteSpace(value[i]))
                 {
                     if (!lastCharactersWasWhiteSpace)
-                        ++numberOfWordsProcessed;
+                        numberOfWordsProcessed++;
 
                     lastCharactersWasWhiteSpace = true;
 
