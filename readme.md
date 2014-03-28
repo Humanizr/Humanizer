@@ -522,13 +522,13 @@ You can truncate a `string` using the `Truncate` method:
 "Long text to truncate".Truncate(10) => "Long text…"
 ```
 
-By default the `'…'` character is used to truncate strings with, but you can also provide your own truncation string:
+By default the `'…'` character is used to truncate strings. The advantage of using the `'…'` character instead of `"..."` is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:
 
 ```c#
 "Long text to truncate".Truncate(10, "---") => "Long te..."
 ```
 
-The default truncation strategy is to truncate the `string` to a specific (maximum) length (which includes the truncation string length). There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters one and one for a fixed number of words. To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples both have an overload that allow you to specify the `ITruncator` to use for the truncation. Here are examples om how to use the three provided truncators:
+The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. Here are examples om how to use the three provided truncators:
 
 ```c#
 "Long text to truncate".Truncate(10, Truncator.FixedLength) => "Long text…"
@@ -540,6 +540,8 @@ The default truncation strategy is to truncate the `string` to a specific (maxim
 "Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "Long text…"
 "Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "Long text---"
 ```
+
+Note that you can also use create your own truncator by having a class implement the `ITruncator` interface.
 
 ###<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
