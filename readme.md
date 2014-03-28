@@ -25,6 +25,7 @@ Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metada
  - [Number to ordinal words](#number-to-ordinal-words)
  - [Roman numerals](#roman-numerals)
  - [ByteSize](#bytesize)
+ - [Truncate](#truncate)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
    - [Contribution guideline](#contribution-guideline)
@@ -513,6 +514,34 @@ ByteSize.Parse("1.55 TB");
 ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
 ```
+
+###<a id="truncate">Truncate</a>
+You can truncate a `string` using the `Truncate` method:
+
+```c#
+"Long text to truncate".Truncate(10) => "Long text…"
+```
+
+By default the `'…'` character is used to truncate strings. The advantage of using the `'…'` character instead of `"..."` is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:
+
+```c#
+"Long text to truncate".Truncate(10, "---") => "Long te---"
+```
+
+The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples both have an overload that allow you to specify the `ITruncator` instance to use for the truncation. Here are examples on how to use the three provided truncators:
+
+```c#
+"Long text to truncate".Truncate(10, Truncator.FixedLength) => "Long text…"
+"Long text to truncate".Truncate(10, "---", Truncator.FixedLength) => "Long te---"
+
+"Long text to truncate".Truncate(6, Truncator.FixedNumberOfCharacters) => "Long t…"
+"Long text to truncate".Truncate(6, "---", Truncator.FixedNumberOfCharacters) => "Lon---"
+
+"Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "Long text…"
+"Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "Long text---"
+```
+
+Note that you can also use create your own truncator by having a class implement the `ITruncator` interface.
 
 ###<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 

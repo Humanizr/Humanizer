@@ -126,6 +126,11 @@
     <Compile Include="Transformer\ToUpperCase.cs" />
     <Compile Include="Transformer\ToLowerCase.cs" />
     <Compile Include="Transformer\ToSentenceCase.cs" />
+    <Compile Include="Truncation\FixedLengthTruncator.cs" />
+    <Compile Include="Truncation\FixedNumberOfCharactersTruncator.cs" />
+    <Compile Include="Truncation\FixedNumberOfWordsTruncator.cs" />
+    <Compile Include="Truncation\ITruncator.cs" />
+    <Compile Include="Truncation\Truncator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FluentDate\In.SomeTimeFrom.tt">
