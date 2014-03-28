@@ -81,6 +81,8 @@
     <Compile Include="Localisation\DateHumanizeTests.nb-NO.cs" />
     <Compile Include="Localisation\es\DateHumanizeTests.cs" />
     <Compile Include="Localisation\es\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\nl\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\nl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />

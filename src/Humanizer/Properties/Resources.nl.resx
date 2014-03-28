@@ -153,4 +153,43 @@
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} jaar geleden</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} dagen</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} uur</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} milliseconden</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} minuten</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} seconden</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} weken</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>één dag</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>één uur</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>één milliseconde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>één minuut</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>één seconde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>één week</value>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>geen tijd</value>
+  </data>
 </root>
