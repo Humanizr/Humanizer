@@ -6,7 +6,7 @@ namespace Humanizer
     /// <summary>
     /// Truncate a string to a fixed number of characters
     /// </summary>
-    public class FixedNumberOfCharactersTruncator : ITruncator
+    class FixedNumberOfCharactersTruncator : ITruncator
     {
         public string Truncate(string value, int length, string truncationString)
         {
@@ -26,7 +26,7 @@ namespace Humanizer
             for (var i = 0; i < value.Length - truncationString.Length; i++)
             {
                 if (Char.IsLetterOrDigit(value[i]))
-                    ++alphaNumericalCharactersProcessed;
+                    alphaNumericalCharactersProcessed++;
 
                 if (numberOfCharactersEqualToTruncateLength && alphaNumericalCharactersProcessed == length)
                     return value;

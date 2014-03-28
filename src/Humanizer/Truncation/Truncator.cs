@@ -32,11 +32,11 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be truncated</param>
         /// <param name="length">The length to truncate to</param>
-        /// <param name="truncatationString">The string used to truncate with</param>
+        /// <param name="truncationString">The string used to truncate with</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length, string truncatationString)
+        public static string Truncate(this string input, int length, string truncationString)
         {
-            return input.Truncate(length, truncatationString, FixedLength);
+            return input.Truncate(length, truncationString, FixedLength);
         }
 
         /// <summary>
@@ -44,10 +44,10 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be truncated</param>
         /// <param name="length">The length to truncate to</param>
-        /// <param name="truncatationString">The string used to truncate with</param>
+        /// <param name="truncationString">The string used to truncate with</param>
         /// <param name="truncator">The truncator to use</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length, string truncatationString, ITruncator truncator)
+        public static string Truncate(this string input, int length, string truncationString, ITruncator truncator)
         {
             if (truncator == null)
                 throw new ArgumentNullException("truncator");
@@ -55,7 +55,7 @@ namespace Humanizer
             if (input == null) 
                 return null;
 
-            return truncator.Truncate(input, length, truncatationString);
+            return truncator.Truncate(input, length, truncationString);
         }
 
         /// <summary>
