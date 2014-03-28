@@ -1,12 +1,15 @@
 ﻿using System;
+
 using Humanizer.Bytes;
 using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ParsingTests
+    public class ParsingTests : AmbientCulture
     {
+        public ParsingTests() : base("en") { }
+
         [Fact]
         public void Parse()
         {

@@ -3,8 +3,10 @@ using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ToStringTests
+    public class ToStringTests : AmbientCulture
     {
+        public ToStringTests() : base("en") { }
+
         [Fact]
         public void ReturnsLargestMetricSuffix()
         {
