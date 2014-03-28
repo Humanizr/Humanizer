@@ -111,7 +111,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApiApprover\PublicApiApprovalTest.cs" />
     <Compile Include="ApiApprover\PublicApiGenerator.cs" />
-    <Compile Include="TruncateTests.cs" />
+    <Compile Include="Truncation\FixedLengthTruncatorTests.cs" />
+    <Compile Include="Truncation\FixedNumberOfCharactersTruncatorTests.cs" />
+    <Compile Include="Truncation\FixedNumberOfWordsTruncatorTests.cs" />
+    <Compile Include="Truncation\TruncatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Localisation\DateHumanizeTests.fi-FI.cs" />
