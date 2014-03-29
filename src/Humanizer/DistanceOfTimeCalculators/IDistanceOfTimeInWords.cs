@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Humanizer.DotiwCalculators
+namespace Humanizer.DistanceOfTimeCalculators
 {
     /// <summary>
     /// Distance of time in works calculator

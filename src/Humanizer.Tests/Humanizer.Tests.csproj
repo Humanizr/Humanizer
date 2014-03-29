@@ -75,6 +75,7 @@
     <Compile Include="Bytes\ParsingTests.cs" />
     <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
+    <Compile Include="DistanceOfTimeCalculators\PrecisionBasedDistanceOfTimeTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\NumberToWordsTests.cs" />
     <Compile Include="Localisation\ar\TimeSpanHumanizeTests.cs" />
@@ -130,6 +131,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

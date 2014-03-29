@@ -75,9 +75,11 @@
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
-    <Compile Include="DotiwCalculators\DefaultDotiwCalculator.cs" />
-    <Compile Include="DotiwCalculators\IDistanceOfTimeInWords.cs" />
-    <Compile Include="DotiwCalculators\PercisionBasedDotiwCalculator.cs" />
+    <Compile Include="DistanceOfTimeCalculators\DefaultDistanceOfTime.cs" />
+    <Compile Include="DistanceOfTimeCalculators\DistanceOfTime.cs" />
+    <Compile Include="DistanceOfTimeCalculators\IDistanceOfTimeInWords.cs" />
+    <Compile Include="DistanceOfTimeCalculators\PrecisionBasedDistanceOfTime.cs" />
+    <Compile Include="Localisation\TimeStructure.cs" />
     <Compile Include="Localisation\TimeUnitTense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">

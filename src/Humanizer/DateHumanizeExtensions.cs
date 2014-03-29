@@ -1,6 +1,6 @@
 ﻿using System;
 using Humanizer.Configuration;
-using Humanizer.DotiwCalculators;
+using Humanizer.DistanceOfTimeCalculators;
 
 namespace Humanizer
 {

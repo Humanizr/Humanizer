@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation
+﻿using Humanizer.DistanceOfTimeCalculators;
+
+namespace Humanizer.Localisation
 {
     /// <summary>
     /// Default implementation of IFormatter interface.
@@ -31,6 +33,13 @@
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
             return GetResourceForTimeSpan(timeUnit, unit);
+        }
+
+        public virtual string Humanize(DistanceOfTime distanceOfTime)
+        {
+            return distanceOfTime.Structure == TimeStructure.DateTime
+                ? DateHumanize(distanceOfTime.Unit, distanceOfTime.Tense, distanceOfTime.Count)
+                : TimeSpanHumanize(distanceOfTime.Unit, distanceOfTime.Count);
         }
 
         private string GetResourceForDate(TimeUnit unit, TimeUnitTense timeUnitTense, int count)

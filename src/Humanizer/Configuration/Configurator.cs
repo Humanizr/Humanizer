@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Humanizer.DotiwCalculators;
+using Humanizer.DistanceOfTimeCalculators;
 using Humanizer.Localisation;
 
 namespace Humanizer.Configuration
@@ -11,6 +11,11 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
+        static Configurator()
+        {
+            DistanceOfTimeInWords = new DefaultDistanceOfTime();
+        }
+
         private static readonly IDictionary<string, Func<IFormatter>> FormatterFactories =
             new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
         {
@@ -38,9 +43,14 @@ namespace Humanizer.Configuration
         /// <summary>
         /// The distance of time in words (DOTIW) calculator
         /// </summary>
-        public static IDistanceOfTimeInWords DistanceOfTimeInWords
+        public static IDistanceOfTimeInWords DistanceOfTimeInWords { get; set; }
+
+        /// <summary>
+        /// Default precision used to calculate DOTIW.
+        /// </summary>
+        public static double DefaultPrecision
         {
-            get { return new DefaultDotiwCalculator(); }
+            get { return 0.75; }
         }
     }
 }
