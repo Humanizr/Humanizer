@@ -45,7 +45,7 @@
 <p>Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
 Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer">symbols nuget package</a> is published so you can <a href="http://www.symbolsource.org/Public/Home/VisualStudio">step through Humanizer code</a> while debugging your code.</p>
 
-<p>Table of contents:</p>
+<p><strong>Table of contents:</strong></p>
 
 <ul>
 <li><a href="#humanize-string">Humanize String</a></li>
@@ -71,6 +71,7 @@ Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Projec
 <li><a href="#number-to-ordinal-words">Number to ordinal words</a></li>
 <li><a href="#roman-numerals">Roman numerals</a></li>
 <li><a href="#bytesize">ByteSize</a></li>
+<li><a href="#truncate">Truncate</a></li>
 <li><a href="#mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a></li>
 <li>
 <a href="#how-to-contribute">How to contribute?</a>
@@ -172,6 +173,9 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 <span class="c1">// Of course you can still apply letter casing </span>
 <span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">MemberWithoutDescriptionAttribute</span><span class="p">.</span><span class="n">Humanize</span><span class="p">().</span><span class="n">Transform</span><span class="p">(</span><span class="n">To</span><span class="p">.</span><span class="n">TitleCase</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Member Without Description Attribute"</span>
 </pre></div>
+
+<p>You are not limited to <code>DescriptionAttribute</code> for custom description. Any attribute applied on enum members with a <code>string Description</code> property counts. 
+This is to help with platforms with missing <code>DescriptionAttribute</code> and also for allowing subclasses of the <code>DescriptionAttribute</code>.</p>
 
 <p>Hopefully this will help avoid littering enums with unnecessary attributes!</p>
 
@@ -579,6 +583,34 @@ ByteSize.Parse("1.55 TB");
 ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
 </code></pre>
+
+<h3>
+<a name="truncate" class="anchor" href="#truncate"><span class="octicon octicon-link"></span></a><a>Truncate</a>
+</h3>
+
+<p>You can truncate a <code>string</code> using the <code>Truncate</code> method:</p>
+
+<div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long text…"</span>
+</pre></div>
+
+<p>By default the <code>'…'</code> character is used to truncate strings. The advantage of using the <code>'…'</code> character instead of <code>"..."</code> is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:</p>
+
+<div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="s">"---"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long te---"</span>
+</pre></div>
+
+<p>The default truncation strategy, <code>Truncator.FixedLength</code>, is to truncate the input string to a specific length, including the truncation string length. There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. To use a specific truncator when truncating, the two <code>Truncate</code> methods shown in the previous examples both have an overload that allow you to specify the <code>ITruncator</code> instance to use for the truncation. Here are examples on how to use the three provided truncators:</p>
+
+<div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long text…"</span>
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long te---"</span>
+
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">6</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfCharacters</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long t…"</span>
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">6</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfCharacters</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Lon---"</span>
+
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfWords</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long text…"</span>
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfWords</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long text---"</span>
+</pre></div>
+
+<p>Note that you can also use create your own truncator by having a class implement the <code>ITruncator</code> interface.</p>
 
 <h3>
 <a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a><a>Mix this into your framework to simplify your life</a>
