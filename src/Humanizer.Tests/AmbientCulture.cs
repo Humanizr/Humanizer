@@ -6,11 +6,11 @@ namespace Humanizer.Tests
 {
     public class AmbientCulture : IDisposable
     {
-        private readonly CultureInfo _culture;
+        private readonly CultureInfo _callerCulture;
 
         public AmbientCulture(CultureInfo culture)
         {
-            _culture = Thread.CurrentThread.CurrentUICulture;
+            _callerCulture = Thread.CurrentThread.CurrentUICulture;
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
         }
@@ -22,7 +22,8 @@ namespace Humanizer.Tests
 
         public void Dispose()
         {
-            Thread.CurrentThread.CurrentUICulture = _culture;
+            Thread.CurrentThread.CurrentCulture = _callerCulture;
+            Thread.CurrentThread.CurrentUICulture = _callerCulture;
         }
     }
 }
