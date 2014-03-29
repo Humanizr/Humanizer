@@ -32,6 +32,7 @@ namespace Humanizer.DistanceOfTimeCalculators
             //Note: Calculation has magic numbers but it'll be much difficult with variables. I did try :)
 
             double precision = Configurator.DefaultPrecision;
+
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
 
@@ -42,8 +43,8 @@ namespace Humanizer.DistanceOfTimeCalculators
             if (hours >= 23 * precision) days += 1;
 
             // month calculation 
-            if (days >= 30 * precision & days <= 31) months += 1;
-            if (days > 31)
+            if (days >= 30 * precision & days <= 31) months = 1;
+            if (days > 31 && days < 365 * precision)
             {
                 int factor = Convert.ToInt32(Math.Floor((double)days / 30));
                 int maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 30));
@@ -51,7 +52,7 @@ namespace Humanizer.DistanceOfTimeCalculators
             }
 
             // year calculation
-            if (days >= 365 * precision && days <= 366) years += 1;
+            if (days >= 365 * precision && days <= 366) years = 1;
             if (days > 365)
             {
                 int factor = Convert.ToInt32(Math.Floor((double)days / 365));
