@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
@@ -17,20 +18,20 @@ namespace Humanizer.DistanceOfTimeCalculators
         /// <returns>Distance of time in words (DOTIW)</returns>
         public string Calculate(DateTime date1, DateTime date2)
         {
-            var formatter = Configurator.Formatter;
-            var defaultPrecision = Configurator.DefaultPrecision;
+            Debug.WriteLine("Using PrecisionBasedDistanceOfTime");
 
             var ts = new TimeSpan(Math.Abs(date2.Ticks - date1.Ticks));
             var timeUnitTense = date1 > date2 ? TimeUnitTense.Future : TimeUnitTense.Past;
-            var distanceOfTime = Compute(ts, timeUnitTense, TimeStructure.DateTime, defaultPrecision);
+            var distanceOfTime = Compute(ts, timeUnitTense, TimeStructure.DateTime);
 
-            return formatter.Humanize(distanceOfTime);
+            return Configurator.Formatter.Humanize(distanceOfTime);
         }
 
-        private static DistanceOfTime Compute(TimeSpan ts, TimeUnitTense tense, TimeStructure structure, double precision)
+        private static DistanceOfTime Compute(TimeSpan ts, TimeUnitTense tense, TimeStructure structure)
         {
-            //Note: Calculation has magic numbers but it'll be much difficult with variables.
+            //Note: Calculation has magic numbers but it'll be much difficult with variables. I did try :)
 
+            double precision = Configurator.DefaultPrecision;
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
 

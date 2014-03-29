@@ -1,6 +1,5 @@
 ﻿using System;
 using Humanizer.Configuration;
-using Humanizer.DistanceOfTimeCalculators;
 
 namespace Humanizer
 {
@@ -9,11 +8,6 @@ namespace Humanizer
     /// </summary>
     public static class DateHumanizeExtensions
     {
-        /// <summary>
-        /// Distance of time in works calculator
-        /// </summary>
-        private static readonly IDistanceOfTimeInWords DistanceOfTimeInWords = Configurator.DistanceOfTimeInWords;
-
         /// <summary>
         /// Turns the current or provided date into a human readable sentence
         /// </summary>
@@ -28,7 +22,7 @@ namespace Humanizer
             if (!utcDate)
                 comparisonBase = comparisonBase.ToLocalTime();
 
-            return DistanceOfTimeInWords.Calculate(input, comparisonBase);
+            return Configurator.DistanceOfTimeInWords.Calculate(input, comparisonBase);
         }
     }
 }

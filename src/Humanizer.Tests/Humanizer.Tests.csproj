@@ -75,6 +75,7 @@
     <Compile Include="Bytes\ParsingTests.cs" />
     <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
+    <Compile Include="DateHumanizeTestsBase.cs" />
     <Compile Include="DistanceOfTimeCalculators\PrecisionBasedDistanceOfTimeTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\NumberToWordsTests.cs" />

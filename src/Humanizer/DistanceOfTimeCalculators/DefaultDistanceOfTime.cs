@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
@@ -18,6 +19,7 @@ namespace Humanizer.DistanceOfTimeCalculators
         /// <returns></returns>
         public string Calculate(DateTime date1, DateTime date2)
         {
+            Debug.WriteLine("Using DefaultDistanceOfTime");
             return Configurator.Formatter.Humanize(Compute(date1, date2));
         }
 
