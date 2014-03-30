@@ -1,31 +1,27 @@
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
-You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
-
-Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
-Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
-
-**Table of contents:**
-
- - [Humanize String](#humanize-string)
- - [Dehumanize String](#dehumanize-string)
- - [Transform](#transform)
- - [Humanize Enums](#humanize-enums)
- - [Dehumanize Enums](#dehumanize-enums)
- - [Humanize TimeSpan](#humanize-timespan)
- - [Inflector methods](#inflector-methods)
-   - [Pluralize](#pluralize)
-   - [Singularize](#singularize)
-   - [ToQuantity](#toquantity)
-   - [Ordinalize](#ordinalize)
-   - [Underscore](#underscore)
-   - [Dasherize & Hyphenate](#dasherize--hyphenate)
- - [Fluent date](#fluent-date)
- - [Number to words](#number-to-words)
- - [Number to ordinal words](#number-to-ordinal-words)
- - [Roman numerals](#roman-numerals)
- - [ByteSize](#bytesize)
- - [Truncate](#truncate)
+###Table of contents
+ - [Install](#install)
+ - [Features](#features)
+   - [Humanize String](#humanize-string)
+   - [Dehumanize String](#dehumanize-string)
+   - [Transform](#transform)
+   - [Humanize Enums](#humanize-enums)
+   - [Dehumanize Enums](#dehumanize-enums)
+   - [Humanize TimeSpan](#humanize-timespan)
+   - [Inflector methods](#inflector-methods)
+     - [Pluralize](#pluralize)
+     - [Singularize](#singularize)
+     - [ToQuantity](#toquantity)
+     - [Ordinalize](#ordinalize)
+     - [Underscore](#underscore)
+     - [Dasherize & Hyphenate](#dasherize--hyphenate)
+   - [Fluent date](#fluent-date)
+   - [Number to words](#number-to-words)
+   - [Number to ordinal words](#number-to-ordinal-words)
+   - [Roman numerals](#roman-numerals)
+   - [ByteSize](#bytesize)
+   - [Truncate](#truncate)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
    - [Contribution guideline](#contribution-guideline)
@@ -33,6 +29,14 @@ Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metada
  - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
  - [Author](#author)
  - [License](#license)
+
+##<a id="install">Install</a>
+You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
+
+Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
+Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
+
+##<a id="features">Features</a>
 
 ###<a id="humanize-string">Humanize String</a>
 String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
