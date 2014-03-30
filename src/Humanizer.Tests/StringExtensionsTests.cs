@@ -29,5 +29,12 @@ namespace Humanizer.Tests
         {
             Assert.Throws<FormatException>(() => format.FormatWith(1, 2));
         }
+
+        [Fact]
+        public void FormatCannotBeNull()
+        {
+            string format = null;
+            Assert.Throws<ArgumentNullException>(() => format.FormatWith(1, 2));
+        }
     }
 }
