@@ -1,4 +1,64 @@
-﻿public class CasingExtensions
+﻿public struct ByteSize
+{
+    public long BitsInByte;
+    public string BitSymbol;
+    public long BytesInGigabyte;
+    public long BytesInKilobyte;
+    public long BytesInMegabyte;
+    public long BytesInTerabyte;
+    public string ByteSymbol;
+    public string GigabyteSymbol;
+    public string KilobyteSymbol;
+    public Humanizer.Bytes.ByteSize MaxValue;
+    public string MegabyteSymbol;
+    public Humanizer.Bytes.ByteSize MinValue;
+    public string TerabyteSymbol;
+    public ByteSize(double byteSize) { }
+    public long Bits { get; set; }
+    public double Bytes { get; set; }
+    public double Gigabytes { get; set; }
+    public double Kilobytes { get; set; }
+    public string LargestWholeNumberSymbol { get; }
+    public double LargestWholeNumberValue { get; }
+    public double Megabytes { get; set; }
+    public double Terabytes { get; set; }
+    public Humanizer.Bytes.ByteSize Add(Humanizer.Bytes.ByteSize bs) { }
+    public Humanizer.Bytes.ByteSize AddBits(long value) { }
+    public Humanizer.Bytes.ByteSize AddBytes(double value) { }
+    public Humanizer.Bytes.ByteSize AddGigabytes(double value) { }
+    public Humanizer.Bytes.ByteSize AddKilobytes(double value) { }
+    public Humanizer.Bytes.ByteSize AddMegabytes(double value) { }
+    public Humanizer.Bytes.ByteSize AddTerabytes(double value) { }
+    public int CompareTo(Humanizer.Bytes.ByteSize other) { }
+    public bool Equals(object value) { }
+    public bool Equals(Humanizer.Bytes.ByteSize value) { }
+    public Humanizer.Bytes.ByteSize FromBits(long value) { }
+    public Humanizer.Bytes.ByteSize FromBytes(double value) { }
+    public Humanizer.Bytes.ByteSize FromGigabytes(double value) { }
+    public Humanizer.Bytes.ByteSize FromKilobytes(double value) { }
+    public Humanizer.Bytes.ByteSize FromMegabytes(double value) { }
+    public Humanizer.Bytes.ByteSize FromTerabytes(double value) { }
+    public int GetHashCode() { }
+    public Humanizer.Bytes.ByteSize Parse(string s) { }
+    public Humanizer.Bytes.ByteSize Subtract(Humanizer.Bytes.ByteSize bs) { }
+    public string ToString() { }
+    public string ToString(string format) { }
+    public bool TryParse(string s, Humanizer.Bytes.ByteSize& result) { }
+}
+
+public class ByteSizeExtensions
+{
+    public Humanizer.Bytes.ByteSize Bits(long input) { }
+    public Humanizer.Bytes.ByteSize Bits(int input) { }
+    public Humanizer.Bytes.ByteSize Bytes(double input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(double input) { }
+    public string Humanize(Humanizer.Bytes.ByteSize input, string format) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(double input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(double input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(double input) { }
+}
+
+public class CasingExtensions
 {
     public string ApplyCase(string input, Humanizer.LetterCasing casing) { }
 }
@@ -15,7 +75,8 @@ public class DateHumanizeExtensions
 
 public class EnumDehumanizeExtensions
 {
-    public System.Enum DehumanizeTo(string input) { }
+    public TTargetEnum DehumanizeTo(string input) { }
+    public System.Enum DehumanizeTo(string input, System.Type targetEnum, Humanizer.OnNoMatch onNoMatch) { }
 }
 
 public class EnumHumanizeExtensions
@@ -71,6 +132,11 @@ public interface IStringTransformer
     string Transform(string input);
 }
 
+public interface ITruncator
+{
+    string Truncate(string value, int length, string truncationString);
+}
+
 public enum LetterCasing
 {
     AllCaps,
@@ -83,85 +149,17 @@ public enum LetterCasing
 public class DefaultFormatter
 {
     public DefaultFormatter() { }
-    public string DateHumanize_MultipleDaysAgo(int numberOfDays) { }
-    public string DateHumanize_MultipleDaysFromNow(int numberOfDays) { }
-    public string DateHumanize_MultipleHoursAgo(int numberOfHours) { }
-    public string DateHumanize_MultipleHoursFromNow(int numberOfHours) { }
-    public string DateHumanize_MultipleMinutesAgo(int numberOfMinutes) { }
-    public string DateHumanize_MultipleMinutesFromNow(int numberOfMinutes) { }
-    public string DateHumanize_MultipleMonthsAgo(int numberOfMonths) { }
-    public string DateHumanize_MultipleMonthsFromNow(int numberOfMonths) { }
-    public string DateHumanize_MultipleSecondsAgo(int numberOfSeconds) { }
-    public string DateHumanize_MultipleSecondsFromNow(int numberOfSeconds) { }
-    public string DateHumanize_MultipleYearsAgo(int numberOfYears) { }
-    public string DateHumanize_MultipleYearsFromNow(int numberOfYears) { }
+    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.TimeUnitTense timeUnitTense, int unit) { }
     public string DateHumanize_Now() { }
-    public string DateHumanize_SingleDayAgo() { }
-    public string DateHumanize_SingleDayFromNow() { }
-    public string DateHumanize_SingleHourAgo() { }
-    public string DateHumanize_SingleHourFromNow() { }
-    public string DateHumanize_SingleMinuteAgo() { }
-    public string DateHumanize_SingleMinuteFromNow() { }
-    public string DateHumanize_SingleMonthAgo() { }
-    public string DateHumanize_SingleMonthFromNow() { }
-    public string DateHumanize_SingleSecondAgo() { }
-    public string DateHumanize_SingleSecondFromNow() { }
-    public string DateHumanize_SingleYearAgo() { }
-    public string DateHumanize_SingleYearFromNow() { }
-    public string TimeSpanHumanize_MultipleDays(int days) { }
-    public string TimeSpanHumanize_MultipleHours(int hours) { }
-    public string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds) { }
-    public string TimeSpanHumanize_MultipleMinutes(int minutes) { }
-    public string TimeSpanHumanize_MultipleSeconds(int seconds) { }
-    public string TimeSpanHumanize_MultipleWeeks(int weeks) { }
-    public string TimeSpanHumanize_SingleDay() { }
-    public string TimeSpanHumanize_SingleHour() { }
-    public string TimeSpanHumanize_SingleMillisecond() { }
-    public string TimeSpanHumanize_SingleMinute() { }
-    public string TimeSpanHumanize_SingleSecond() { }
-    public string TimeSpanHumanize_SingleWeek() { }
+    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
     public string TimeSpanHumanize_Zero() { }
 }
 
 public interface IFormatter
 {
-    string DateHumanize_MultipleDaysAgo(int numberOfDays);
-    string DateHumanize_MultipleDaysFromNow(int numberOfDays);
-    string DateHumanize_MultipleHoursAgo(int numberOfHours);
-    string DateHumanize_MultipleHoursFromNow(int numberOfHours);
-    string DateHumanize_MultipleMinutesAgo(int numberOfMinutes);
-    string DateHumanize_MultipleMinutesFromNow(int numberOfMinutes);
-    string DateHumanize_MultipleMonthsAgo(int numberOfMonths);
-    string DateHumanize_MultipleMonthsFromNow(int numberOfMonths);
-    string DateHumanize_MultipleSecondsAgo(int numberOfSeconds);
-    string DateHumanize_MultipleSecondsFromNow(int numberOfSeconds);
-    string DateHumanize_MultipleYearsAgo(int numberOfYears);
-    string DateHumanize_MultipleYearsFromNow(int numberOfYears);
+    string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.TimeUnitTense timeUnitTense, int unit);
     string DateHumanize_Now();
-    string DateHumanize_SingleDayAgo();
-    string DateHumanize_SingleDayFromNow();
-    string DateHumanize_SingleHourAgo();
-    string DateHumanize_SingleHourFromNow();
-    string DateHumanize_SingleMinuteAgo();
-    string DateHumanize_SingleMinuteFromNow();
-    string DateHumanize_SingleMonthAgo();
-    string DateHumanize_SingleMonthFromNow();
-    string DateHumanize_SingleSecondAgo();
-    string DateHumanize_SingleSecondFromNow();
-    string DateHumanize_SingleYearAgo();
-    string DateHumanize_SingleYearFromNow();
-    string TimeSpanHumanize_MultipleDays(int days);
-    string TimeSpanHumanize_MultipleHours(int hours);
-    string TimeSpanHumanize_MultipleMilliseconds(int milliSeconds);
-    string TimeSpanHumanize_MultipleMinutes(int minutes);
-    string TimeSpanHumanize_MultipleSeconds(int seconds);
-    string TimeSpanHumanize_MultipleWeeks(int weeks);
-    string TimeSpanHumanize_SingleDay();
-    string TimeSpanHumanize_SingleHour();
-    string TimeSpanHumanize_SingleMillisecond();
-    string TimeSpanHumanize_SingleMinute();
-    string TimeSpanHumanize_SingleSecond();
-    string TimeSpanHumanize_SingleWeek();
+    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
     string TimeSpanHumanize_Zero();
 }
 
@@ -172,9 +170,34 @@ public class ResourceKeys
 
 public class Resources
 {
-    public Resources() { }
-    public System.Resources.ResourceManager ResourceManager { get; }
     public string GetResource(string resourceKey) { }
+}
+
+public enum TimeUnit
+{
+    Day,
+    Hour,
+    Millisecond,
+    Minute,
+    Month,
+    Second,
+    value__,
+    Week,
+    Year,
+}
+
+public enum TimeUnitTense
+{
+    Future,
+    Past,
+    value__,
+}
+
+public class NoMatchFoundException
+{
+    public NoMatchFoundException() { }
+    public NoMatchFoundException(string message) { }
+    public NoMatchFoundException(string message, System.Exception inner) { }
 }
 
 public class NumberToOrdinalWordsExtension
@@ -202,6 +225,13 @@ public class On
     public On() { }
 }
 
+public enum OnNoMatch
+{
+    ReturnsNull,
+    ThrowsException,
+    value__,
+}
+
 public class OrdinalizeExtensions
 {
     public string Ordinalize(string numberString) { }
@@ -224,6 +254,12 @@ public class PrepositionsExtensions
     public System.DateTime In(System.DateTime date, int year) { }
 }
 
+public class RomanNumeralExtensions
+{
+    public int FromRoman(string input) { }
+    public string ToRoman(int input) { }
+}
+
 public enum ShowQuantityAs
 {
     None,
@@ -235,6 +271,11 @@ public enum ShowQuantityAs
 public class StringDehumanizeExtensions
 {
     public string Dehumanize(string input) { }
+}
+
+public class StringExentions
+{
+    public string FormatWith(string format, object[] args) { }
 }
 
 public class StringHumanizeExtensions
@@ -260,4 +301,15 @@ public class To
 public class ToQuantityExtensions
 {
     public string ToQuantity(string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs) { }
+}
+
+public class Truncator
+{
+    public Humanizer.ITruncator FixedLength { get; }
+    public Humanizer.ITruncator FixedNumberOfCharacters { get; }
+    public Humanizer.ITruncator FixedNumberOfWords { get; }
+    public string Truncate(string input, int length) { }
+    public string Truncate(string input, int length, Humanizer.ITruncator truncator) { }
+    public string Truncate(string input, int length, string truncationString) { }
+    public string Truncate(string input, int length, string truncationString, Humanizer.ITruncator truncator) { }
 }

@@ -1,15 +1,15 @@
-﻿using System.Diagnostics;
+﻿using System;
 using Xunit;
 
 namespace Humanizer.Tests
 {
-    public sealed class RunnableInDebugOnlyAttribute : FactAttribute
+    public sealed class FactExcludingTeamCityAttribute : FactAttribute
     {
-        public RunnableInDebugOnlyAttribute()
+        public FactExcludingTeamCityAttribute()
         {
-            if (!Debugger.IsAttached)
+            if (Environment.GetEnvironmentVariable("TEAMCITY_PROJECT_NAME") != null)
             {
-                Skip = "Only running in interactive mode.";
+                Skip = "Sorry, I am told not to run on TeamCity!";
             }
         }
     }
