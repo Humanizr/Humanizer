@@ -10,6 +10,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Format String](#format-string)  
    - [Humanize Enums](#humanize-enums)
    - [Dehumanize Enums](#dehumanize-enums)
+   - [Humanize DateTime](#humanize-datetime)
    - [Humanize TimeSpan](#humanize-timespan)
    - [Inflector methods](#inflector-methods)
      - [Pluralize](#pluralize)
