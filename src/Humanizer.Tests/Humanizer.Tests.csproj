@@ -87,6 +87,7 @@
     <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
+    <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="ToQuantityTests.cs" />
     <Compile Include="TransformersTests.cs" />
     <Compile Include="NumberToOrdinalWordsTests.cs" />
