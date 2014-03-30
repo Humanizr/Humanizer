@@ -21,7 +21,8 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Number to ordinal words](#number-to-ordinal-words)
    - [Roman numerals](#roman-numerals)
    - [ByteSize](#bytesize)
-   - [Truncate](#truncate)
+   - [Truncate String](#truncate)
+   - [Format String](#format)  
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
    - [Contribution guideline](#contribution-guideline)
@@ -546,6 +547,17 @@ The default truncation strategy, `Truncator.FixedLength`, is to truncate the inp
 ```
 
 Note that you can also use create your own truncator by having a class implement the `ITruncator` interface.
+
+###<a id="format">Format String</a>
+You can format a `string` using the `FormatWith()` method:
+
+```c#
+"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formated -> 1/A."
+```
+
+This is an extension method based on `String.Format`, so exact rules applies to it.
+If `format` is null, it'll throw `ArgumentNullException`.
+If passed a fewer number for arguments, it'll throw `String.FormatException` exception.
 
 ##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
