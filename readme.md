@@ -547,7 +547,7 @@ The default truncation strategy, `Truncator.FixedLength`, is to truncate the inp
 
 Note that you can also use create your own truncator by having a class implement the `ITruncator` interface.
 
-###<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
+##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
 
 You may find an Asp.Net MVC sample [in the code](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
@@ -670,15 +670,15 @@ Then you return an instance of your class in the [Configurator](https://github.c
 
 Translations for ToWords method are currently done in code as there is a huge difference between the way different languages deal with number words.
 
-###<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
+##<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
 Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.
 
 The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
 
-###<a id="author">Author</a>
+##<a id="author">Author</a>
 Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
 
-###<a id="license">License</a>
+##<a id="license">License</a>
 Humanizer is released under the MIT License. See the [bundled LICENSE](https://github.com/MehdiK/Humanizer/blob/master/LICENSE) file for details.
 
