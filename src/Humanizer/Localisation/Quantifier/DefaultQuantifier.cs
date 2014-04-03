@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Humanizer.Localisation.Quantifier
 {
-    internal class DefaultQuantifier
+    internal class DefaultQuantifier : IQuantifier
     {
         public string ToQuantity(string input, int quantity, ShowQuantityAs showQuantityAs)
         {

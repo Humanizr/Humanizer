@@ -9,17 +9,17 @@ namespace Humanizer.Localisation.Quantifier
 {
     internal class QuantifierFactory
     {
-        internal static DefaultQuantifier GetQuantifier(CultureInfo culture)
+        internal static IQuantifier GetQuantifier(CultureInfo culture)
         {
             return GetQuantifier(culture.TwoLetterISOLanguageName);
         }
 
-        internal static DefaultQuantifier GetQuantifier()
+        internal static IQuantifier GetQuantifier()
         {
             return GetQuantifier(Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
         }
 
-        private static DefaultQuantifier GetQuantifier(string twoLetterISOLanguageName)
+        private static IQuantifier GetQuantifier(string twoLetterISOLanguageName)
         {
             switch (twoLetterISOLanguageName)
             {

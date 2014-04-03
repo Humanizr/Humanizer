@@ -1,4 +1,5 @@
-﻿using Humanizer.Localisation.Quantifier;
+﻿using Humanizer.Configuration;
+using Humanizer.Localisation.Quantifier;
 using System.Globalization;
 using System.Threading;
 namespace Humanizer
@@ -28,7 +29,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
-            return QuantifierFactory.GetQuantifier().ToQuantity(input, quantity, showQuantityAs);
+            return Configurator.Quantifier.ToQuantity(input, quantity, showQuantityAs);
         }
     }
 }

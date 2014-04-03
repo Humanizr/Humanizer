@@ -77,6 +77,7 @@
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="Localisation\Quantifier\DefaultQuantifier.cs" />
     <Compile Include="Localisation\Quantifier\FarsiQuantifier.cs" />
+    <Compile Include="Localisation\Quantifier\IQuantifier.cs" />
     <Compile Include="Localisation\Quantifier\QuantifierFactory.cs" />
     <Compile Include="Localisation\TimeUnitTense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />

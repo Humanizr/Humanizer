@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Humanizer.Localisation;
+using Humanizer.Localisation.Quantifier;
 
 namespace Humanizer.Configuration
 {
@@ -31,6 +32,14 @@ namespace Humanizer.Configuration
                     return formatterFactory();
                 }
                 return new DefaultFormatter();
+            }
+        }
+
+        internal static IQuantifier Quantifier
+        {
+            get
+            {
+                return QuantifierFactory.GetQuantifier();
             }
         }
     }
