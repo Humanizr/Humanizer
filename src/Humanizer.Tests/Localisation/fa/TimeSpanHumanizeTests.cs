@@ -16,7 +16,6 @@ namespace Humanizer.Tests.Localisation.fa
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
 
-
         [Theory]
         [InlineData(1, "یک روز")]
         [InlineData(3, "3 روز")]
@@ -40,7 +39,6 @@ namespace Humanizer.Tests.Localisation.fa
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
         }
-
 
         [Theory]
         [InlineData(1, "یک ثانیه")]

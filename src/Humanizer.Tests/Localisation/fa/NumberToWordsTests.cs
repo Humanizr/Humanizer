@@ -7,6 +7,7 @@ namespace Humanizer.Tests.Localisation.fa
     {
         public NumberToWordsTests() : base("fa") { }
 
+        [Theory]
         [InlineData(1, "یک")]
         [InlineData(10, "ده")]
         [InlineData(11, "یازده")]
@@ -34,7 +35,6 @@ namespace Humanizer.Tests.Localisation.fa
         [InlineData(12345678, "دوازده میلیون و سیصد و چهل و پنج هزار و ششصد و هفتاد و هشت")]
         [InlineData(123456789, "صد و بیست و سه میلیون و چهارصد و پنجاه و شش هزار و هفتصد و هشتاد و نه")]
         [InlineData(1234567890, "یک میلیارد و دویست و سی و چهار میلیون و پانصد و شصت و هفت هزار و هشتصد و نود")]
-        [Theory]
         public void ToWordsFarsi(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
