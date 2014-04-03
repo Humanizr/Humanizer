@@ -37,6 +37,5 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expected, number.ToWords());
         }
-
     }
 }
