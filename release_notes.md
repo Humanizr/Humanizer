@@ -1,4 +1,5 @@
 ###In Development
+  - [#126](https://github.com/MehdiK/Humanizer/pull/126): Refactoring of date verification
   - [#120](https://github.com/MehdiK/Humanizer/pull/120): Added translation for culture 'de'
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.15.1...master)

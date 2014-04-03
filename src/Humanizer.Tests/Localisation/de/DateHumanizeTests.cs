@@ -15,15 +15,16 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(-1, "gestern")]
         public void DaysAgo(int days, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddDays(days).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(days,0,0,0));
         }
 
         [Theory]
+        [InlineData(3, "in 3 Tagen")]
         [InlineData(2, "in 2 Tagen")]
         [InlineData(1, "morgen")]
         public void InDays(int days, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddDays(days).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(days, 0, 0, 0));
         }
 
         [Theory]
@@ -33,7 +34,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(-1, "vor einer Stunde")]
         public void HoursAgo(int hours, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddHours(hours).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(0, hours, 0, 0));
         }
 
         [Theory]
@@ -41,7 +42,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(1, "in einer Stunde")]
         public void InHours(int hours, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddHours(hours).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(0, hours, 0, 0));
         }
 
         [Theory]
@@ -51,7 +52,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(-1, "vor einer Minute")]
         public void MinutesAgo(int minutes, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMinutes(minutes).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(0, 0, minutes, 0));
         }
 
         [Theory]
@@ -59,7 +60,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(1, "in einer Minute")]
         public void InMinutes(int minutes, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMinutes(minutes).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(0, 0, minutes, 0));
         }
 
         [Theory]
@@ -69,6 +70,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(-1, "vor einem Monat")]
         public void MonthsAgo(int months, string expected)
         {
+            //TODO should we test with fixed UTC dates?
             Assert.Equal(expected, DateTime.UtcNow.AddMonths(months).Humanize());
         }
 
@@ -77,6 +79,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(1, "in einem Monat")]
         public void InMonths(int months, string expected)
         {
+            //TODO should we test with fixed UTC dates?
             Assert.Equal(expected, DateTime.UtcNow.AddMonths(months).Humanize());
         }
 
@@ -87,7 +90,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(-1, "vor einer Sekunde")]
         public void SecondsAgo(int seconds, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddSeconds(seconds).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(0, 0, 0, seconds));
         }
 
         [Theory]
@@ -95,7 +98,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(1, "in einer Sekunde")]
         public void InSeconds(int seconds, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddSeconds(seconds).Humanize());
+            DateVerification.Verify(expected, new TimeSpan(0, 0, 0, seconds));
         }
 
         [Theory]
@@ -105,6 +108,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(-1, "vor einem Jahr")]
         public void YearsAgo(int years, string expected)
         {
+            //TODO should we test with fixed UTC dates?
             Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
         }
 
@@ -113,6 +117,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(1, "in einem Jahr")]
         public void InYears(int years, string expected)
         {
+            //TODO should we test with fixed UTC dates?
             Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
         }
     }
