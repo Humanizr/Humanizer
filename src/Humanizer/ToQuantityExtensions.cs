@@ -1,4 +1,7 @@
-﻿namespace Humanizer
+﻿using Humanizer.Localisation.Quantifier;
+using System.Globalization;
+using System.Threading;
+namespace Humanizer
 {
     public enum ShowQuantityAs
     {
@@ -25,17 +28,7 @@
         /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
-            var transformedInput = quantity == 1
-                ? input.Singularize(Plurality.CouldBeEither)
-                : input.Pluralize(Plurality.CouldBeEither);
-
-            if (showQuantityAs == ShowQuantityAs.None)
-                return transformedInput;
-
-            if (showQuantityAs == ShowQuantityAs.Numeric)
-                return string.Format("{0} {1}", quantity, transformedInput);
-
-            return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
+            return QuantifierFactory.GetQuantifier().ToQuantity(input, quantity, showQuantityAs);
         }
     }
 }

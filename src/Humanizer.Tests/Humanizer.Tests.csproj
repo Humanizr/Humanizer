@@ -86,6 +86,7 @@
     <Compile Include="Localisation\fa\DateHumanizeTests.cs" />
     <Compile Include="Localisation\fa\NumberToWordsTests.cs" />
     <Compile Include="Localisation\fa\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\fa\ToQuantityTests.cs" />
     <Compile Include="Localisation\nl\DateHumanizeTests.cs" />
     <Compile Include="Localisation\nl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
