@@ -75,6 +75,10 @@
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
+    <Compile Include="Localisation\Quantifier\DefaultQuantifier.cs" />
+    <Compile Include="Localisation\Quantifier\FarsiQuantifier.cs" />
+    <Compile Include="Localisation\Quantifier\IQuantifier.cs" />
+    <Compile Include="Localisation\Quantifier\QuantifierFactory.cs" />
     <Compile Include="Localisation\TimeUnitTense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
@@ -150,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.de.resx" />
+    <EmbeddedResource Include="Properties\Resources.fa.resx" />
     <EmbeddedResource Include="Properties\Resources.nb-NO.resx" />
     <EmbeddedResource Include="Properties\Resources.af.resx" />
     <EmbeddedResource Include="Properties\Resources.fr-BE.resx" />
