@@ -195,41 +195,29 @@ namespace Humanizer
         {
             if (number < 0)
                 return string.Format("منفی {0}", ToFarsiWords(-number));
+
             if (number == 0)
                 return "صفر";
 
             var farsiHundredsMap = new[]
             {
-                "صفر",
-               "صد",
-               "دویست",
-               "سیصد",
-               "چهارصد",
-               "پانصد",
-               "ششصد",
-               "هفتصد",
-               "هشتصد",
-               "نهصد",
+                "صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"
             };
-
-            
             var farsiTensMap = new[] 
-                {
-                    "صفر", "ده","بیست","سی","چهل","پنجاه","شصت","هفتاد","هشتاد","نود"
-                };
-
+            {
+                 "صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"
+            };
             var farsiUnitsMap = new[]
             {
-               "صفر", "یک","دو","سه","چهار","پنج","شش","هفت","هشت","نه","ده","یازده","دوازده","سیزده","چهارده","پانزده","شانزده","هفده","هجده","نوزده"
+                 "صفر", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه", "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده"
             };
-
-            var farsiGroupsMap = new Dictionary<int, Func<int, string>> { 
+            var farsiGroupsMap = new Dictionary<int, Func<int, string>> 
+            { 
                 {(int)Math.Pow(10, 9), n => string.Format("{0} میلیارد", ToFarsiWords(n)) },
                 {(int)Math.Pow(10, 6), n => string.Format("{0} میلیون", ToFarsiWords(n)) },
                 {(int)Math.Pow(10, 3), n => string.Format("{0} هزار", ToFarsiWords(n)) },
                 {(int)Math.Pow(10, 2), n => farsiHundredsMap[n]}
             };
-
             var parts = new List<string>();
             foreach (var group in farsiGroupsMap.Keys)
             {

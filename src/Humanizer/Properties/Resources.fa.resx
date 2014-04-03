@@ -169,28 +169,28 @@
     <value>{0} ثانیه</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>1 روز</value>
+    <value>یک روز</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>1 ساعت</value>
+    <value>یک ساعت</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 میلی ثانیه</value>
+    <value>یک میلی ثانیه</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>1 دقیقه</value>
+    <value>یک دقیقه</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>1 ثانیه</value>
+    <value>یک ثانیه</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>الان</value>
+    <value>الآن</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} هفته</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>1 هفته</value>
+    <value>یک هفته</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>{0} روز بعد</value>
@@ -211,7 +211,7 @@
     <value>{0} سال بعد</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
-    <value>الان</value>
+    <value>الآن</value>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>فردا</value>
