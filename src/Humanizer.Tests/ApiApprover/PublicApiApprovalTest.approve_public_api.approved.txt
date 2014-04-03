@@ -65,12 +65,41 @@ public class CasingExtensions
 
 public class Configurator
 {
+    public double DefaultPrecision { get; }
+    public Humanizer.DistanceOfTimeCalculators.IDistanceOfTimeInWords DistanceOfTimeInWords { get; set; }
     public Humanizer.Localisation.IFormatter Formatter { get; }
 }
 
 public class DateHumanizeExtensions
 {
     public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst) { }
+}
+
+public class DefaultDistanceOfTime
+{
+    public DefaultDistanceOfTime() { }
+    public string Calculate(System.DateTime date1, System.DateTime date2) { }
+}
+
+public class DistanceOfTime
+{
+    public DistanceOfTime() { }
+    public int Count { get; set; }
+    public Humanizer.Localisation.TimeStructure Structure { get; set; }
+    public Humanizer.Localisation.TimeUnitTense Tense { get; set; }
+    public Humanizer.Localisation.TimeUnit Unit { get; set; }
+    public Humanizer.DistanceOfTimeCalculators.DistanceOfTime Create(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.TimeUnitTense timeUnitTense, Humanizer.Localisation.TimeStructure timeStructure, int count) { }
+}
+
+public interface IDistanceOfTimeInWords
+{
+    string Calculate(System.DateTime date1, System.DateTime date2);
+}
+
+public class PrecisionBasedDistanceOfTime
+{
+    public PrecisionBasedDistanceOfTime() { }
+    public string Calculate(System.DateTime date1, System.DateTime date2) { }
 }
 
 public class EnumDehumanizeExtensions
@@ -151,6 +180,7 @@ public class DefaultFormatter
     public DefaultFormatter() { }
     public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.TimeUnitTense timeUnitTense, int unit) { }
     public string DateHumanize_Now() { }
+    public string Humanize(Humanizer.DistanceOfTimeCalculators.DistanceOfTime distanceOfTime) { }
     public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
     public string TimeSpanHumanize_Zero() { }
 }
@@ -159,6 +189,7 @@ public interface IFormatter
 {
     string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.TimeUnitTense timeUnitTense, int unit);
     string DateHumanize_Now();
+    string Humanize(Humanizer.DistanceOfTimeCalculators.DistanceOfTime timeUnit);
     string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
     string TimeSpanHumanize_Zero();
 }
@@ -171,6 +202,13 @@ public class ResourceKeys
 public class Resources
 {
     public string GetResource(string resourceKey) { }
+}
+
+public enum TimeStructure
+{
+    DateTime,
+    TimeSpan,
+    value__,
 }
 
 public enum TimeUnit

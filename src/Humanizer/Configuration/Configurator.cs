@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.DistanceOfTimeCalculators;
 using Humanizer.Localisation;
 
 namespace Humanizer.Configuration
@@ -10,7 +11,12 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
-        private static readonly IDictionary<string, Func<IFormatter>> FormatterFactories = 
+        static Configurator()
+        {
+            DistanceOfTimeInWords = new DefaultDistanceOfTime();
+        }
+
+        private static readonly IDictionary<string, Func<IFormatter>> FormatterFactories =
             new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
         {
             { "ro", () => new RomanianFormatter() },
@@ -32,6 +38,19 @@ namespace Humanizer.Configuration
                 }
                 return new DefaultFormatter();
             }
+        }
+
+        /// <summary>
+        /// The distance of time in words (DOTIW) calculator
+        /// </summary>
+        public static IDistanceOfTimeInWords DistanceOfTimeInWords { get; set; }
+
+        /// <summary>
+        /// Default precision used to calculate DOTIW.
+        /// </summary>
+        public static double DefaultPrecision
+        {
+            get { return 0.75; }
         }
     }
 }

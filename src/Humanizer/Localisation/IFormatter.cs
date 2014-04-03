@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation
+﻿using Humanizer.DistanceOfTimeCalculators;
+
+namespace Humanizer.Localisation
 {
     /// <summary>
     /// Implement this interface if your language has complex rules around dealing with numbers. 
@@ -12,5 +14,7 @@
         
         string TimeSpanHumanize_Zero();
         string TimeSpanHumanize(TimeUnit timeUnit, int unit);
+
+        string Humanize(DistanceOfTime timeUnit);
     }
 }
