@@ -1,4 +1,5 @@
 ###In Development
+  - [#121](https://github.com/MehdiK/Humanizer/pull/121): Added Farsi support to DateTime and NumberToWords
   - [#120](https://github.com/MehdiK/Humanizer/pull/120): Added translation for culture 'de'
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.15.1...master)
