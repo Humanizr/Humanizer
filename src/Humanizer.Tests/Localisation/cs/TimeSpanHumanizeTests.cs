@@ -19,7 +19,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "5 milisekund")]
         [InlineData(6, "6 milisekund")]
         [InlineData(10, "10 milisekund")]
-        public void Miliseconds(int number, string expected)
+        public void Milliseconds(int number, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMilliseconds(number).Humanize());
         }
