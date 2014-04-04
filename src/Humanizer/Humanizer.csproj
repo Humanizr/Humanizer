@@ -77,11 +77,6 @@
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="Localisation\SlovakFormatter.cs" />
     <Compile Include="Localisation\TimeUnitTense.cs" />
-    <Compile Include="Properties\Resources.sk.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.sk.resx</DependentUpon>
-    </Compile>
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -172,7 +167,6 @@
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.sk.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
