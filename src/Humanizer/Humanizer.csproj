@@ -146,9 +146,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.cs.resx">
-      <LastGenOutput>Resources.cs.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.cs.resx" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.fa.resx" />
     <EmbeddedResource Include="Properties\Resources.nb-NO.resx" />
@@ -158,17 +156,13 @@
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.el.resx" />
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
-    <EmbeddedResource Include="Properties\Resources.ar.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ar.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.nl.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
-    <EmbeddedResource Include="Properties\Resources.sk.resx">
-      <LastGenOutput>Resources.sk.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.sk.resx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
