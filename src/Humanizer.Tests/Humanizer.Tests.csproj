@@ -75,6 +75,7 @@
     <Compile Include="Bytes\ParsingTests.cs" />
     <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
+    <Compile Include="Localisation\sk\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\NumberToWordsTests.cs" />
     <Compile Include="Localisation\ar\TimeSpanHumanizeTests.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Localisation\nl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sk\TimeSpanHumanizeTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
