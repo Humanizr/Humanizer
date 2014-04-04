@@ -86,6 +86,83 @@ namespace Humanizer.Tests.Localisation.sk
         public void YearsFromNow(int number, string expected)
         {            
             Assert.Equal(expected, DateTime.UtcNow.AddYears(number).Humanize());
-        }              
+        }
+
+        [Theory]
+        [InlineData(1, "pred sekundou")]
+        [InlineData(2, "pred 2 sekundami")]
+        [InlineData(3, "pred 3 sekundami")]
+        [InlineData(4, "pred 4 sekundami")]
+        [InlineData(5, "pred 5 sekundami")]
+        [InlineData(6, "pred 6 sekundami")]
+        [InlineData(10, "pred 10 sekundami")]
+        public void SecondsAgo(int number, string expected)
+        {
+            Assert.Equal(expected, DateTime.UtcNow.AddSeconds(-1*number).Humanize());
+        }
+
+        [Theory]
+        [InlineData(1, "pred minútou")]
+        [InlineData(2, "pred 2 minútami")]
+        [InlineData(3, "pred 3 minútami")]
+        [InlineData(4, "pred 4 minútami")]
+        [InlineData(5, "pred 5 minútami")]
+        [InlineData(6, "pred 6 minútami")]
+        [InlineData(10, "pred 10 minútami")]
+        public void MinutesAgo(int number, string expected)
+        {
+            Assert.Equal(expected, DateTime.UtcNow.AddMinutes(-1*number).Humanize());
+        }
+
+        [Theory]
+        [InlineData(1, "pred hodinou")]
+        [InlineData(2, "pred 2 hodinami")]
+        [InlineData(3, "pred 3 hodinami")]
+        [InlineData(4, "pred 4 hodinami")]
+        [InlineData(5, "pred 5 hodinami")]
+        [InlineData(6, "pred 6 hodinami")]
+        [InlineData(10, "pred 10 hodinami")]
+        public void HoursAgo(int number, string expected)
+        {
+            Assert.Equal(expected, DateTime.UtcNow.AddHours(-1*number).Humanize());
+        }
+
+        [Theory]
+        [InlineData(1, "včera")]
+        [InlineData(2, "pred 2 dňami")]
+        [InlineData(3, "pred 3 dňami")]
+        [InlineData(4, "pred 4 dňami")]
+        [InlineData(9, "pred 9 dňami")]
+        [InlineData(10, "pred 10 dňami")]
+        public void DayAgo(int number, string expected)
+        {
+            Assert.Equal(expected, DateTime.UtcNow.AddDays(-1*number).Humanize());
+        }
+
+        [Theory]
+        [InlineData(1, "pred mesiacom")]
+        [InlineData(2, "pred 2 mesiacmi")]
+        [InlineData(3, "pred 3 mesiacmi")]
+        [InlineData(4, "pred 4 mesiacmi")]
+        [InlineData(5, "pred 5 mesiacmi")]
+        [InlineData(6, "pred 6 mesiacmi")]
+        [InlineData(10, "pred 10 mesiacmi")]
+        public void MonthsAgo(int number, string expected)
+        {
+            Assert.Equal(expected, DateTime.UtcNow.AddMonths(-1*number).Humanize());
+        }
+
+        [Theory]
+        [InlineData(1, "pred rokom")]
+        [InlineData(2, "pred 2 rokmi")]
+        [InlineData(3, "pred 3 rokmi")]
+        [InlineData(4, "pred 4 rokmi")]
+        [InlineData(5, "pred 5 rokmi")]
+        [InlineData(6, "pred 6 rokmi")]
+        [InlineData(10, "pred 10 rokmi")]
+        public void YearsAgo(int number, string expected)
+        {
+            Assert.Equal(expected, DateTime.UtcNow.AddYears(-1*number).Humanize());
+        }   
     }
 }
