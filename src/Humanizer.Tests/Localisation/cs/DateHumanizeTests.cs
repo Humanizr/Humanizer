@@ -80,9 +80,9 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(2, "za 2 roky")]
         [InlineData(3, "za 3 roky")]
         [InlineData(4, "za 4 roky")]
-        [InlineData(5, "za 5 roků")]
-        [InlineData(6, "za 6 roků")]
-        [InlineData(10, "za 10 roků")]
+        [InlineData(5, "za 5 let")]
+        [InlineData(6, "za 6 let")]
+        [InlineData(10, "za 10 let")]
         public void YearsFromNow(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddYears(number).Humanize());
