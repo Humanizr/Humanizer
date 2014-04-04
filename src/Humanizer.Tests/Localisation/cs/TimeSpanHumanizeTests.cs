@@ -2,25 +2,25 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.sk
+namespace Humanizer.Tests.Localisation.cs
 {
     public class TimeSpanHumanizeTests : AmbientCulture
     {
         public TimeSpanHumanizeTests()
-            : base("sk-SK")
+            : base("cs-CZ")
         {
-        }        
+        }
 
         [Theory]
         [InlineData(1, "1 milisekunda")]
         [InlineData(2, "2 milisekundy")]
         [InlineData(3, "3 milisekundy")]
         [InlineData(4, "4 milisekundy")]
-        [InlineData(5, "5 milisekúnd")]
-        [InlineData(6, "6 milisekúnd")]
-        [InlineData(10, "10 milisekúnd")]
+        [InlineData(5, "5 milisekund")]
+        [InlineData(6, "6 milisekund")]
+        [InlineData(10, "10 milisekund")]
         public void Milliseconds(int number, string expected)
-        {            
+        {
             Assert.Equal(expected, TimeSpan.FromMilliseconds(number).Humanize());
         }
 
@@ -29,22 +29,22 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(2, "2 sekundy")]
         [InlineData(3, "3 sekundy")]
         [InlineData(4, "4 sekundy")]
-        [InlineData(5, "5 sekúnd")]
-        [InlineData(6, "6 sekúnd")]
-        [InlineData(10, "10 sekúnd")]
+        [InlineData(5, "5 sekund")]
+        [InlineData(6, "6 sekund")]
+        [InlineData(10, "10 sekund")]
         public void Seconds(int number, string expected)
-        {            
+        {
             Assert.Equal(expected, TimeSpan.FromSeconds(number).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "1 minúta")]
-        [InlineData(2, "2 minúty")]
-        [InlineData(3, "3 minúty")]
-        [InlineData(4, "4 minúty")]
-        [InlineData(5, "5 minút")]
-        [InlineData(6, "6 minút")]
-        [InlineData(10, "10 minút")]
+        [InlineData(1, "1 minuta")]
+        [InlineData(2, "2 minuty")]
+        [InlineData(3, "3 minuty")]
+        [InlineData(4, "4 minuty")]
+        [InlineData(5, "5 minut")]
+        [InlineData(6, "6 minut")]
+        [InlineData(10, "10 minut")]
         public void Minutes(int number, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(number).Humanize());
@@ -55,36 +55,36 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(2, "2 hodiny")]
         [InlineData(3, "3 hodiny")]
         [InlineData(4, "4 hodiny")]
-        [InlineData(5, "5 hodín")]
-        [InlineData(6, "6 hodín")]
-        [InlineData(10, "10 hodín")]
+        [InlineData(5, "5 hodin")]
+        [InlineData(6, "6 hodin")]
+        [InlineData(10, "10 hodin")]
         public void Hours(int number, string expected)
-        {            
+        {
             Assert.Equal(expected, TimeSpan.FromHours(number).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "1 deň")]
-        [InlineData(2, "2 dni")]
-        [InlineData(3, "3 dni")]
-        [InlineData(4, "4 dni")]
-        [InlineData(5, "5 dní")]
-        [InlineData(6, "6 dní")]
+        [InlineData(1, "1 den")]
+        [InlineData(2, "2 dny")]
+        [InlineData(3, "3 dny")]
+        [InlineData(4, "4 dny")]
+        [InlineData(5, "5 dnů")]
+        [InlineData(6, "6 dnů")]
         public void Days(int number, string expected)
-        {            
+        {
             Assert.Equal(expected, TimeSpan.FromDays(number).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "1 týždeň")]
-        [InlineData(2, "2 týždne")]
-        [InlineData(3, "3 týždne")]
-        [InlineData(4, "4 týždne")]
-        [InlineData(5, "5 týždňov")]
-        [InlineData(6, "6 týždňov")]
+        [InlineData(1, "1 týden")]
+        [InlineData(2, "2 týdny")]
+        [InlineData(3, "3 týdny")]
+        [InlineData(4, "4 týdny")]
+        [InlineData(5, "5 týdnů")]
+        [InlineData(6, "6 týdnů")]
         public void Weeks(int number, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
+            Assert.Equal(expected, TimeSpan.FromDays(number*7).Humanize());
         }
 
 
