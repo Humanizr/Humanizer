@@ -1,7 +1,14 @@
 ###In Development
-  - [#120](https://github.com/MehdiK/Humanizer/pull/120): Added translation for culture 'de'
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.15.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.16.4...master)
+
+###v1.16.4 - 2014-04-04
+  - [#129](https://github.com/MehdiK/Humanizer/pull/129): Removed all but PCL references
+  - [#121](https://github.com/MehdiK/Humanizer/pull/121): Added Farsi translation for DateTime, TimeSpan and NumberToWords
+  - [#120](https://github.com/MehdiK/Humanizer/pull/120): Added German translation for DateTime and TimeSpan
+  - [#117](https://github.com/MehdiK/Humanizer/pull/117): Added `FormatWith` string extension
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.15.1...v1.16.4)
 
 ###v1.15.1 - 2014-03-28
   - [#113](https://github.com/MehdiK/Humanizer/pull/113): Added `Truncate` feature
