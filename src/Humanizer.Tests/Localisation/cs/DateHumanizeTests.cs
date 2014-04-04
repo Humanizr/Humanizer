@@ -12,39 +12,39 @@ namespace Humanizer.Tests.Localisation.cs
         }
 
         [Theory]
-        [InlineData(1, "o sekundu")]
-        [InlineData(2, "o 2 sekundy")]
-        [InlineData(3, "o 3 sekundy")]
-        [InlineData(4, "o 4 sekundy")]
-        [InlineData(5, "o 5 sekund")]
-        [InlineData(6, "o 6 sekund")]
-        [InlineData(10, "o 10 sekund")]
+        [InlineData(1, "za sekundu")]
+        [InlineData(2, "za 2 sekundy")]
+        [InlineData(3, "za 3 sekundy")]
+        [InlineData(4, "za 4 sekundy")]
+        [InlineData(5, "za 5 sekund")]
+        [InlineData(6, "za 6 sekund")]
+        [InlineData(10, "za 10 sekund")]
         public void SecondsFromNow(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddSeconds(number).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "o minutu")]
-        [InlineData(2, "o 2 minuty")]
-        [InlineData(3, "o 3 minuty")]
-        [InlineData(4, "o 4 minuty")]
-        [InlineData(5, "o 5 minut")]
-        [InlineData(6, "o 6 minut")]
-        [InlineData(10, "o 10 minut")]
+        [InlineData(1, "za minutu")]
+        [InlineData(2, "za 2 minuty")]
+        [InlineData(3, "za 3 minuty")]
+        [InlineData(4, "za 4 minuty")]
+        [InlineData(5, "za 5 minut")]
+        [InlineData(6, "za 6 minut")]
+        [InlineData(10, "za 10 minut")]
         public void MinutesFromNow(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddMinutes(number).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "o hodinu")]
-        [InlineData(2, "o 2 hodiny")]
-        [InlineData(3, "o 3 hodiny")]
-        [InlineData(4, "o 4 hodiny")]
-        [InlineData(5, "o 5 hodin")]
-        [InlineData(6, "o 6 hodin")]
-        [InlineData(10, "o 10 hodin")]
+        [InlineData(1, "za hodinu")]
+        [InlineData(2, "za 2 hodiny")]
+        [InlineData(3, "za 3 hodiny")]
+        [InlineData(4, "za 4 hodiny")]
+        [InlineData(5, "za 5 hodin")]
+        [InlineData(6, "za 6 hodin")]
+        [InlineData(10, "za 10 hodin")]
         public void HoursFromNow(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddHours(number).Humanize());
@@ -52,37 +52,37 @@ namespace Humanizer.Tests.Localisation.cs
 
         [Theory]
         [InlineData(1, "zítra")]
-        [InlineData(2, "o 2 dny")]
-        [InlineData(3, "o 3 dny")]
-        [InlineData(4, "o 4 dny")]
-        [InlineData(9, "o 9 dnů")]
-        [InlineData(10, "o 10 dnů")]
+        [InlineData(2, "za 2 dny")]
+        [InlineData(3, "za 3 dny")]
+        [InlineData(4, "za 4 dny")]
+        [InlineData(9, "za 9 dnů")]
+        [InlineData(10, "za 10 dnů")]
         public void DayFromNow(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddDays(number).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "o měsíc")]
-        [InlineData(2, "o 2 měsíce")]
-        [InlineData(3, "o 3 měsíce")]
-        [InlineData(4, "o 4 měsíce")]
-        [InlineData(5, "o 5 měsíců")]
-        [InlineData(6, "o 6 měsíců")]
-        [InlineData(10, "o 10 měsíců")]
+        [InlineData(1, "za měsíc")]
+        [InlineData(2, "za 2 měsíce")]
+        [InlineData(3, "za 3 měsíce")]
+        [InlineData(4, "za 4 měsíce")]
+        [InlineData(5, "za 5 měsíců")]
+        [InlineData(6, "za 6 měsíců")]
+        [InlineData(10, "za 10 měsíců")]
         public void MonthsFromNow(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddMonths(number).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "o rok")]
-        [InlineData(2, "o 2 roky")]
-        [InlineData(3, "o 3 roky")]
-        [InlineData(4, "o 4 roky")]
-        [InlineData(5, "o 5 roků")]
-        [InlineData(6, "o 6 roků")]
-        [InlineData(10, "o 10 roků")]
+        [InlineData(1, "za rok")]
+        [InlineData(2, "za 2 roky")]
+        [InlineData(3, "za 3 roky")]
+        [InlineData(4, "za 4 roky")]
+        [InlineData(5, "za 5 roků")]
+        [InlineData(6, "za 6 roků")]
+        [InlineData(10, "za 10 roků")]
         public void YearsFromNow(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddYears(number).Humanize());
@@ -154,12 +154,12 @@ namespace Humanizer.Tests.Localisation.cs
 
         [Theory]
         [InlineData(1, "před rokem")]
-        [InlineData(2, "před 2 roky")]
-        [InlineData(3, "před 3 roky")]
-        [InlineData(4, "před 4 roky")]
-        [InlineData(5, "před 5 roky")]
-        [InlineData(6, "před 6 roky")]
-        [InlineData(10, "před 10 roky")]
+        [InlineData(2, "před 2 lety")]
+        [InlineData(3, "před 3 lety")]
+        [InlineData(4, "před 4 lety")]
+        [InlineData(5, "před 5 lety")]
+        [InlineData(6, "před 6 lety")]
+        [InlineData(10, "před 10 lety")]
         public void YearsAgo(int number, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddYears(-1 * number).Humanize());
