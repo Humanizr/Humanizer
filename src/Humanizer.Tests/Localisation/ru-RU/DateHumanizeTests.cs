@@ -1,12 +1,11 @@
-﻿using System;
-using Xunit;
+﻿using Humanizer.Localisation;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation
+namespace Humanizer.Tests.Localisation.ruRU
 {
-    public class RussianDateHumanizeTests : AmbientCulture
+    public class DateHumanizeTests : AmbientCulture
     {
-        public RussianDateHumanizeTests() : base("ru-RU")
+        public DateHumanizeTests() : base("ru-RU")
         {
         }
 
@@ -27,10 +26,9 @@ namespace Humanizer.Tests.Localisation
         [InlineData(24, "24 секунды назад")]
         [InlineData(25, "25 секунд назад")]
         [InlineData(40, "40 секунд назад")]
-        public void NSecondsAgo(int number, string expected)
+        public void SecondsAgo(int seconds, string expected)
         {
-            var humanize = DateTime.UtcNow.AddSeconds(-1 * number).Humanize();
-            Assert.Equal(expected, humanize);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
@@ -50,10 +48,9 @@ namespace Humanizer.Tests.Localisation
         [InlineData(24, "24 минуты назад")]
         [InlineData(25, "25 минут назад")]
         [InlineData(40, "40 минут назад")]
-        public void NMinutesAgo(int number, string expected)
+        public void MinutesAgo(int minutes, string expected)
         {
-            var humanize = DateTime.UtcNow.AddMinutes(-1 * number).Humanize();
-            Assert.Equal(expected, humanize);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]
@@ -70,10 +67,9 @@ namespace Humanizer.Tests.Localisation
         [InlineData(21, "21 час назад")]
         [InlineData(22, "22 часа назад")]
         [InlineData(23, "23 часа назад")]
-        public void NHoursAgo(int number, string expected)
+        public void HoursAgo(int hours, string expected)
         {
-            var humanize = DateTime.UtcNow.AddHours(-1 * number).Humanize();
-            Assert.Equal(expected, humanize);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
@@ -92,10 +88,9 @@ namespace Humanizer.Tests.Localisation
         [InlineData(23, "23 дня назад")]
         [InlineData(24, "24 дня назад")]
         [InlineData(25, "25 дней назад")]
-        public void NDaysAgo(int number, string expected)
+        public void DaysAgo(int days, string expected)
         {
-            var humanize = DateTime.UtcNow.Date.AddDays(-1 * number).Humanize();
-            Assert.Equal(expected, humanize);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
         [Theory]
@@ -107,10 +102,9 @@ namespace Humanizer.Tests.Localisation
         [InlineData(6, "6 месяцев назад")]
         [InlineData(10, "10 месяцев назад")]
         [InlineData(11, "11 месяцев назад")]
-        public void NMonthsAgo(int number, string expected)
+        public void MonthsAgo(int months, string expected)
         {
-            var humanize = DateTime.UtcNow.Date.AddMonths(-1 * number).Humanize();
-            Assert.Equal(expected, humanize);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
         
         [Theory]
@@ -128,10 +122,9 @@ namespace Humanizer.Tests.Localisation
         [InlineData(121, "121 год назад")]
         [InlineData(222, "222 года назад")]
         [InlineData(325, "325 лет назад")]
-        public void NYearsAgo(int number, string expected)
+        public void YearsAgo(int years, string expected)
         {
-            var humanize = DateTime.UtcNow.Date.AddYears(-1 * number).Humanize();
-            Assert.Equal(expected, humanize);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
     }
 }

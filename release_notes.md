@@ -1,4 +1,6 @@
 ###In Development
+  - [#124](https://github.com/MehdiK/Humanizer/pull/124): Added Slovak localization (strings, formatter, tests)
+  - [#130](https://github.com/MehdiK/Humanizer/pull/130): Added Czech localization (strings, formatter, tests)
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.16.4...master)
 

@@ -1,12 +1,11 @@
-﻿using System;
-using Xunit;
+﻿using Humanizer.Localisation;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation
+namespace Humanizer.Tests.Localisation.fiFI
 {
-    public class DateHumanizeTests_fiFI : AmbientCulture
+    public class DateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests_fiFI()
+        public DateHumanizeTests()
             : base("fi-Fi")
         {
         }
@@ -18,8 +17,7 @@ namespace Humanizer.Tests.Localisation
 		[InlineData(-1, "eilen")]
         public void DaysAgo(int days, string expected)
         {
-            var date = DateTime.UtcNow.AddDays(days);
-			Assert.Equal(expected, date.Humanize());
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
         [Theory]
@@ -29,8 +27,7 @@ namespace Humanizer.Tests.Localisation
         [InlineData(-1, "tunti sitten")]
         public void HoursAgo(int hours, string expected)
         {
-            var date = DateTime.UtcNow.AddHours(hours);
-            Assert.Equal(expected, date.Humanize());
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
@@ -40,8 +37,7 @@ namespace Humanizer.Tests.Localisation
         [InlineData(-1, "minuutti sitten")]
         public void MinutesAgo(int minutes, string expected)
         {
-            var date = DateTime.UtcNow.AddMinutes(minutes);
-            Assert.Equal(expected, date.Humanize());
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]
@@ -51,8 +47,7 @@ namespace Humanizer.Tests.Localisation
         [InlineData(-1, "kuukausi sitten")]
         public void MonthsAgo(int months, string expected)
         {
-            var date = DateTime.UtcNow.AddMonths(months);
-            Assert.Equal(expected, date.Humanize());
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
@@ -62,8 +57,7 @@ namespace Humanizer.Tests.Localisation
         [InlineData(-1, "sekuntti sitten")]
         public void SecondsAgo(int seconds, string expected)
         {
-            var date = DateTime.UtcNow.AddSeconds(seconds);
-            Assert.Equal(expected, date.Humanize());
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
@@ -73,8 +67,7 @@ namespace Humanizer.Tests.Localisation
         [InlineData(-1, "vuosi sitten")]
         public void YearsAgo(int years, string expected)
         {
-            var date = DateTime.UtcNow.AddYears(years);
-            Assert.Equal(expected, date.Humanize());
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
     }
 }

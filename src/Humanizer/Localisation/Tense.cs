@@ -1,6 +1,6 @@
 ﻿namespace Humanizer.Localisation
 {
-    public enum TimeUnitTense
+    public enum Tense
     {
         Future,
         Past

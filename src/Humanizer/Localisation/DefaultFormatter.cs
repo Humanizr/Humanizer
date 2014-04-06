@@ -11,10 +11,10 @@
         /// <returns>Time expressed in words</returns>
         public virtual string DateHumanize_Now()
         {
-            return GetResourceForDate(TimeUnit.Millisecond, TimeUnitTense.Past, 0);
+            return GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
         }
 
-        public virtual string DateHumanize(TimeUnit timeUnit, TimeUnitTense timeUnitTense, int unit)
+        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit)
         {
             return GetResourceForDate(timeUnit, timeUnitTense, unit);
         }
@@ -33,7 +33,7 @@
             return GetResourceForTimeSpan(timeUnit, unit);
         }
 
-        private string GetResourceForDate(TimeUnit unit, TimeUnitTense timeUnitTense, int count)
+        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
             string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);

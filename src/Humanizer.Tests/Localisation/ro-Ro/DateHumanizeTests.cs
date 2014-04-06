@@ -1,16 +1,16 @@
 ﻿using System;
 using Xunit;
 
-namespace Humanizer.Tests.Localisation
+namespace Humanizer.Tests.Localisation.roRo
 {
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral
     /// and the time unit: http://ebooks.unibuc.ro/filologie/NForascu-DGLR/numerale.htm.
     /// There is no test for months since there are only 12 of them in a year.
     /// </summary>
-    public class RomanianDateHumanizeTests : AmbientCulture
+    public class DateHumanizeTests : AmbientCulture
     {
-        public RomanianDateHumanizeTests() : base("ro-RO")
+        public DateHumanizeTests() : base("ro-RO")
         {
         }
 

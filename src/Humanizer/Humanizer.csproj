@@ -71,7 +71,7 @@
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="Localisation\CzechSlovakFormatter.cs" />
-    <Compile Include="Localisation\TimeUnitTense.cs" />
+    <Compile Include="Localisation\Tense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -158,7 +158,9 @@
     <EmbeddedResource Include="Properties\Resources.ar.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.nl.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx" />
