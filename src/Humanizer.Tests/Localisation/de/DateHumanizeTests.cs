@@ -1,6 +1,4 @@
-﻿using System;
-using Humanizer.Localisation;
-using Xunit;
+﻿using Humanizer.Localisation;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.de
