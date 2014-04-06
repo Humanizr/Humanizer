@@ -4,9 +4,9 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.sk
 {
-    public class DateTimeHumanizeTests : AmbientCulture
+    public class DateHumanizeTests : AmbientCulture
     {
-        public DateTimeHumanizeTests()
+        public DateHumanizeTests()
             : base("sk-SK")
         {
         }
