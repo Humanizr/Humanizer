@@ -101,7 +101,7 @@
     <Compile Include="ToQuantityTests.cs" />
     <Compile Include="TransformersTests.cs" />
     <Compile Include="NumberToOrdinalWordsTests.cs" />
-    <Compile Include="Localisation\DateHumanizeTests.ro-RO.cs" />
+    <Compile Include="Localisation\ro-Ro\DateHumanizeTests.cs" />
     <Compile Include="DateHumanizeTests.cs" />
     <Compile Include="DehumanizeToEnumTests.cs" />
     <Compile Include="EnumHumanizeTests.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="FluentDate\PrepositionTests.cs" />
     <Compile Include="AmbientCulture.cs" />
     <Compile Include="Localisation\ResourcesTests.cs" />
-    <Compile Include="Localisation\DateHumanizeTests.ru-RU.cs" />
+    <Compile Include="Localisation\ru-RU\DateHumanizeTests.cs" />
     <Compile Include="NumberToTimeSpanTests.cs" />
     <Compile Include="OrdinalizeTests.cs" />
     <Compile Include="InflectorTests.cs" />
