@@ -158,7 +158,9 @@
     <EmbeddedResource Include="Properties\Resources.ar.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.nl.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx" />

@@ -1,223 +1,132 @@
 ﻿using System;
-using Humanizer.Localisation;
-using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
     public class DateHumanizeTests
     {
-        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
+        [Theory]
+        [InlineData(1, "one second ago")]
+        [InlineData(10, "10 seconds ago")]
+        [InlineData(59, "59 seconds ago")]
+        [InlineData(60, "a minute ago")]
+        public void SecondsAgo(int seconds, string expected)
         {
-            var utcNow = DateTime.UtcNow;
-            var localNow = DateTime.Now;
-
-            // feels like the only way to avoid breaking tests because CPU ticks over is to inject the base date
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow));
-            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(utcDate: false, dateToCompareAgainst: localNow));
+            DateHumanize.Verify(expected, TimeSpan.FromSeconds(-seconds));
         }
 
-        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
+        [Theory]
+        [InlineData(1, "one second from now")]
+        [InlineData(10, "10 seconds from now")]
+        [InlineData(59, "59 seconds from now")]
+        [InlineData(60, "a minute from now")]
+        public void SecondsFromNow(int seconds, string expected)
         {
-            var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
-            var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
-
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(dateToCompareAgainst: utcNow));
-            Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
+            DateHumanize.Verify(expected, TimeSpan.FromSeconds(seconds));
         }
 
-        static void Verify(string expectedString, TimeSpan deltaFromNow)
+        [Theory]
+        [InlineData(1, "a minute ago")]
+        [InlineData(10, "10 minutes ago")]
+        [InlineData(44, "44 minutes ago")]
+        [InlineData(45, "an hour ago")]
+        [InlineData(119, "an hour ago")]
+        [InlineData(120, "2 hours ago")]
+        public void MinutesAgo(int minutes, string expected)
         {
-            VerifyWithCurrentDate(expectedString, deltaFromNow);
-            VerifyWithDateInjection(expectedString, deltaFromNow);
+            DateHumanize.Verify(expected, TimeSpan.FromMinutes(-minutes));
         }
 
-        [Fact]
-        public void OneSecondFromNow()
+        [Theory]
+        [InlineData(1, "a minute from now")]
+        [InlineData(10, "10 minutes from now")]
+        [InlineData(44, "44 minutes from now")]
+        [InlineData(45, "an hour from now")]
+        [InlineData(119, "an hour from now")]
+        [InlineData(120, "2 hours from now")]
+        public void MinutesFromNow(int minutes, string expected)
         {
-            var oneSecondFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Future, count: 1));
-            Verify(oneSecondFromNow, new TimeSpan(0, 0, 0, 1));
+            DateHumanize.Verify(expected, TimeSpan.FromMinutes(minutes));
         }
 
-        [Fact]
-        public void SecondsFromNow()
+        [Theory]
+        [InlineData(1, "an hour ago")]
+        [InlineData(10, "10 hours ago")]
+        [InlineData(23, "23 hours ago")]
+        [InlineData(24, "yesterday")]
+        public void HoursAgo(int hours, string expected)
         {
-            var secsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Future, count: 10)), 10);
-            Verify(secsFromNow, new TimeSpan(0, 0, 0, 10));
+            DateHumanize.Verify(expected, TimeSpan.FromHours(-hours));
         }
 
-        [Fact]
-        public void OneMinuteFromNow()
+        [Theory]
+        [InlineData(1, "an hour from now")]
+        [InlineData(10, "10 hours from now")]
+        [InlineData(23, "23 hours from now")]
+        [InlineData(24, "tomorrow")]
+        public void HoursFfomNow(int hours, string expected)
         {
-            var oneMinFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Future, count: 1));
-            Verify(oneMinFromNow, new TimeSpan(0, 0, 1, 1));
+            DateHumanize.Verify(expected, TimeSpan.FromHours(hours));
         }
 
-        [Fact]
-        public void AFewMinutesFromNow()
+        [Theory]
+        [InlineData(1, "yesterday")]
+        [InlineData(10, "10 days ago")]
+        [InlineData(28, "28 days ago")]
+        [InlineData(32, "one month ago")]
+        public void DaysAgo(int days, string expected)
         {
-            var minsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Future, count: 10)), 10);
-            Verify(minsFromNow, new TimeSpan(0, 0, 10, 0));
+            DateHumanize.Verify(expected, TimeSpan.FromDays(-days));
         }
 
-        [Fact]
-        public void AnHourFromNow()
+        [Theory]
+        [InlineData(1, "tomorrow")]
+        [InlineData(10, "10 days from now")]
+        [InlineData(28, "28 days from now")]
+        [InlineData(32, "one month from now")]
+        public void DaysFromNow(int days, string expected)
         {
-            var anHourFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Future, count: 1));
-            Verify(anHourFromNow, new TimeSpan(0, 1, 10, 0));
+            DateHumanize.Verify(expected, TimeSpan.FromDays(days));
         }
 
-        [Fact]
-        public void HoursFromNow()
+        [Theory]
+        [InlineData(1, "one month ago")]
+        [InlineData(10, "10 months ago")]
+        [InlineData(11, "11 months ago")]
+        [InlineData(12, "one year ago")]
+        public void MonthsAgo(int months, string expected)
         {
-            var hoursFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Future, count: 10)), 10);
-            Verify(hoursFromNow, new TimeSpan(0, 10, 0, 0));
+            // ToDo should come up with a more solid logic
+            DateHumanize.Verify(expected, TimeSpan.FromDays(-months * 31));
         }
 
-        [Fact]
-        public void Tomorrow()
+        [Theory]
+        [InlineData(1, "one month from now")]
+        [InlineData(10, "10 months from now")]
+        [InlineData(11, "11 months from now")]
+        [InlineData(12, "one year from now")]
+        public void MonthsFromNow(int months, string expected)
         {
-            var tomorrow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Future, count: 1));
-            Verify(tomorrow, new TimeSpan(1, 10, 0, 0));
+            // ToDo should come up with a more solid logic
+            DateHumanize.Verify(expected, TimeSpan.FromDays(months * 31));
         }
 
-        [Fact]
-        public void AFewDaysFromNow()
+        [Theory]
+        [InlineData(1, "one year ago")]
+        [InlineData(2, "2 years ago")]
+        public void YearsAgo(int years, string expected)
         {
-            var daysFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Future, count: 10)), 10);
-            Verify(daysFromNow, new TimeSpan(10, 1, 0, 0));
+            // ToDo should come up with a more solid logic
+            DateHumanize.Verify(expected, TimeSpan.FromDays(-years * 366));
         }
 
-        [Fact]
-        public void OneMonthFromNow()
+        [Theory]
+        [InlineData(1, "one year from now")]
+        [InlineData(2, "2 years from now")]
+        public void YearsFromNow(int years, string expected)
         {
-            var oneMonthFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Future, count: 1));
-            Verify(oneMonthFromNow, new TimeSpan(31, 1, 0, 0));
-        }
-
-        [Fact]
-        public void AFewMonthsFromNow()
-        {
-            var monthsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Future, count: 2)), 2);
-            Verify(monthsFromNow, new TimeSpan(62, 1, 0, 0));
-        }
-
-        [Fact]
-        public void OneYearFromNowIsNotAccureate()
-        {
-            var aYearFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Future, count: 1));
-            Verify(aYearFromNow, new TimeSpan(360, 0, 0, 0));
-        }
-
-        [Fact]
-        public void OneYearFromNow()
-        {
-            var aYearFromNow = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Future, count: 1));
-            Verify(aYearFromNow, new TimeSpan(400, 0, 0, 0));
-        }
-
-        [Fact]
-        public void FewYearsFromNow()
-        {
-            var fewYearsFromNow = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Future, count: 2)), 2);
-            Verify(fewYearsFromNow, new TimeSpan(900, 0, 0, 0));
-        }
-
-        [Fact]
-        public void JustNow()
-        {
-            var now = Resources.GetResource(ResourceKeys.DateHumanize.Now);
-            Verify(now, new TimeSpan(0, 0, 0, 0));
-        }
-
-        [Fact]
-        public void OneSecondAgo()
-        {
-            var aSecAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Past));
-            Verify(aSecAgo, new TimeSpan(0, 0, 0, -1));
-        }
-
-        [Fact]
-        public void SecondsAgo()
-        {
-            var secondsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, TimeUnitTense.Past, count: 10)), 10);
-            Verify(secondsAgo, new TimeSpan(0, 0, 0, -10));
-        }
-
-        [Fact]
-        public void OneMinuteAgo()
-        {
-            var aMinuteAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Past));
-            Verify(aMinuteAgo, new TimeSpan(0, 0, -1, -10));
-        }
-
-        [Fact]
-        public void AFewMinutesAgo()
-        {
-            var minsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, TimeUnitTense.Past, count: 10)), 10);
-            Verify(minsAgo, new TimeSpan(0, 0, -10, 0));
-        }
-
-        [Fact]
-        public void AnHourAgo()
-        {
-            var anHourAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Past));
-            Verify(anHourAgo, new TimeSpan(0, -1, -10, 0));
-        }
-
-        [Fact]
-        public void HoursAgo()
-        {
-            var hoursAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, TimeUnitTense.Past, count: 10)), 10);
-            Verify(hoursAgo, new TimeSpan(0, -10, 0, 0));
-        }
-
-        [Fact]
-        public void Yesterday()
-        {
-            var yesterday = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Past));
-            Verify(yesterday, new TimeSpan(-1, -10, 0, 0));
-        }
-
-        [Fact]
-        public void AFewDaysAgo()
-        {
-            var fewDaysAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, TimeUnitTense.Past, count: 10)), 10);
-            Verify(fewDaysAgo, new TimeSpan(-10, -1, 0, 0));
-        }
-
-        [Fact]
-        public void OneMonthAgo()
-        {
-            var aMonthAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Past));
-            Verify(aMonthAgo, new TimeSpan(-31, -1, 0, 0));
-        }
-
-        [Fact]
-        public void AFewMonthsAgo()
-        {
-            var monthsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, TimeUnitTense.Past, count: 2)), 2);
-            Verify(monthsAgo, new TimeSpan(-62, -1, 0, 0));
-        }
-
-        [Fact]
-        public void OneYearAgoIsNotAccureate()
-        {
-            var aYearAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Past));
-            Verify(aYearAgo, new TimeSpan(-360, 0, 0, 0));
-        }
-
-        [Fact]
-        public void OneYearAgo()
-        {
-            var aYearAgo = Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Past));
-            Verify(aYearAgo, new TimeSpan(-400, 0, 0, 0));
-        }
-
-        [Fact]
-        public void FewYearsAgo()
-        {
-            var yearsAgo = string.Format(Resources.GetResource(ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, TimeUnitTense.Past, count: 2)), 2);
-            Verify(yearsAgo, new TimeSpan(-900, 0, 0, 0));
+            // ToDo should come up with a more solid logic
+            DateHumanize.Verify(expected, TimeSpan.FromDays(    years * 366));
         }
     }
 }
