@@ -82,7 +82,7 @@
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\NumberToWordsTests.cs" />
     <Compile Include="Localisation\ar\TimeSpanHumanizeTests.cs" />
-    <Compile Include="Localisation\DateHumanizeTests.nb-NO.cs" />
+    <Compile Include="Localisation\nb-NO\DateHumanizeTests.cs" />
     <Compile Include="Localisation\de\DateHumanizeTests.cs" />
     <Compile Include="Localisation\de\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\es\DateHumanizeTests.cs" />

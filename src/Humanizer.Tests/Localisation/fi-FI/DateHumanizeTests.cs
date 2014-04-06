@@ -1,7 +1,7 @@
 ﻿using Humanizer.Localisation;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation
+namespace Humanizer.Tests.Localisation.fiFI
 {
     public class DateHumanizeTests : AmbientCulture
     {
