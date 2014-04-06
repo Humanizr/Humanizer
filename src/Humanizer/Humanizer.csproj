@@ -71,7 +71,7 @@
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="Localisation\CzechSlovakFormatter.cs" />
-    <Compile Include="Localisation\TimeUnitTense.cs" />
+    <Compile Include="Localisation\Tense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>

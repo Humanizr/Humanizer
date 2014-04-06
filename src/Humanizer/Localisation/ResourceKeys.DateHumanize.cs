@@ -25,7 +25,7 @@
             /// <param name="timeUnitTense">Is time unit in future or past</param>
             /// <param name="count">Number of units, default is One.</param>
             /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
-            public static string GetResourceKey(TimeUnit timeUnit, TimeUnitTense timeUnitTense, int count = 1)
+            public static string GetResourceKey(TimeUnit timeUnit, Tense timeUnitTense, int count = 1)
             {
                 ValidateRange(count);
 
@@ -33,7 +33,7 @@
                     return Now;
 
                 var singularity = count == 1 ? Single : Multiple;
-                var tense = timeUnitTense == TimeUnitTense.Future ? FromNow : Ago;
+                var tense = timeUnitTense == Tense.Future ? FromNow : Ago;
                 var unit = timeUnit.ToString().ToQuantity(count, ShowQuantityAs.None);
                 return DateTimeFormat.FormatWith(singularity, unit, tense);
             }

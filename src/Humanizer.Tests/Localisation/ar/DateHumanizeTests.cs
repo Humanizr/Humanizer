@@ -15,7 +15,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(-11, "منذ 11 يوم")]
         public void DaysAgo(int days, string expected)
         {
-            DateHumanize.Verify(expected, days, TimeUnit.Day, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
         [Theory]
@@ -25,7 +25,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(-11, "منذ 11 ساعة")]
         public void HoursAgo(int hours, string expected)
         {
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
@@ -35,7 +35,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(-11, "منذ 11 دقيقة")]
         public void MinutesAgo(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]
@@ -45,7 +45,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(-11, "منذ 11 شهر")]
         public void MonthsAgo(int months, string expected)
         {
-            DateHumanize.Verify(expected, months, TimeUnit.Month, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
@@ -55,7 +55,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(-11, "منذ 11 ثانية")]
         public void SecondsAgo(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Second, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
@@ -65,7 +65,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(-11, "منذ 11 عام")]
         public void YearsAgo(int years, string expected)
         {
-            DateHumanize.Verify(expected, years, TimeUnit.Year, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
     }
 }

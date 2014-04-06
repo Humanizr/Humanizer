@@ -31,7 +31,7 @@ namespace Humanizer
             if (input <= comparisonBase && comparisonBase.Subtract(input) < TimeSpan.FromMilliseconds(500))
                 return formatter.DateHumanize_Now();
 
-            var timeUnitTense = input > comparisonBase ? TimeUnitTense.Future : TimeUnitTense.Past;
+            var timeUnitTense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
 
             if (ts.TotalSeconds < 60)
@@ -57,7 +57,7 @@ namespace Humanizer
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
-                if (comparisonBase.Date.AddMonths(timeUnitTense == TimeUnitTense.Future ? 1 : -1) == input.Date)
+                if (comparisonBase.Date.AddMonths(timeUnitTense == Tense.Future ? 1 : -1) == input.Date)
                     return formatter.DateHumanize(TimeUnit.Month, timeUnitTense, 1);
 
                 return formatter.DateHumanize(TimeUnit.Day, timeUnitTense, ts.Days);

@@ -25,12 +25,12 @@ namespace Humanizer.Tests
             Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
         }
 
-        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, TimeUnitTense tense)
+        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense)
         {
             var deltaFromNow = new TimeSpan();
             unit = Math.Abs(unit);
 
-            if (tense == TimeUnitTense.Past)
+            if (tense == Tense.Past)
                 unit = -unit;
 
             switch (timeUnit)

@@ -20,7 +20,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "za 10 sekund")]
         public void SecondsFromNow(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Second, TimeUnitTense.Future);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
         }
 
         [Theory]
@@ -33,7 +33,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "za 10 minut")]
         public void MinutesFromNow(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, TimeUnitTense.Future);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
         }
 
         [Theory]
@@ -46,7 +46,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "za 10 hodin")]
         public void HoursFromNow(int hours, string expected)
         {
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, TimeUnitTense.Future);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
         }
 
         [Theory]
@@ -58,7 +58,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "za 10 dnů")]
         public void DayFromNow(int days, string expected)
         {
-            DateHumanize.Verify(expected, days, TimeUnit.Day, TimeUnitTense.Future);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
         }
 
         [Theory]
@@ -71,7 +71,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "za 10 měsíců")]
         public void MonthsFromNow(int months, string expected)
         {
-            DateHumanize.Verify(expected, months, TimeUnit.Month, TimeUnitTense.Future);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
         }
 
         [Theory]
@@ -84,7 +84,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "za 10 let")]
         public void YearsFromNow(int years, string expected)
         {
-            DateHumanize.Verify(expected, years, TimeUnit.Year, TimeUnitTense.Future);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
 
         [Theory]
@@ -97,7 +97,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "před 10 sekundami")]
         public void SecondsAgo(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Second, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
@@ -110,7 +110,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "před 10 minutami")]
         public void MinutesAgo(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]
@@ -123,7 +123,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "před 10 hodinami")]
         public void HoursAgo(int hours, string expected)
         {
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
@@ -135,7 +135,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "před 10 dny")]
         public void DayAgo(int days, string expected)
         {
-            DateHumanize.Verify(expected, days, TimeUnit.Day, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
         [Theory]
@@ -148,7 +148,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "před 10 měsíci")]
         public void MonthsAgo(int months, string expected)
         {
-            DateHumanize.Verify(expected, months, TimeUnit.Month, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
@@ -161,7 +161,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(10, "před 10 lety")]
         public void YearsAgo(int years, string expected)
         {
-            DateHumanize.Verify(expected, years, TimeUnit.Year, TimeUnitTense.Past);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
     }
 }

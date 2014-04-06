@@ -8,7 +8,7 @@
     public interface IFormatter
     {
         string DateHumanize_Now();
-        string DateHumanize(TimeUnit timeUnit, TimeUnitTense timeUnitTense, int unit);
+        string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit);
         
         string TimeSpanHumanize_Zero();
         string TimeSpanHumanize(TimeUnit timeUnit, int unit);

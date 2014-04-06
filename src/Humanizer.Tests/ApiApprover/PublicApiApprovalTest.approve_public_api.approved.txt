@@ -149,7 +149,7 @@ public enum LetterCasing
 public class DefaultFormatter
 {
     public DefaultFormatter() { }
-    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.TimeUnitTense timeUnitTense, int unit) { }
+    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
     public string DateHumanize_Now() { }
     public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
     public string TimeSpanHumanize_Zero() { }
@@ -157,7 +157,7 @@ public class DefaultFormatter
 
 public interface IFormatter
 {
-    string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.TimeUnitTense timeUnitTense, int unit);
+    string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
     string DateHumanize_Now();
     string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
     string TimeSpanHumanize_Zero();
@@ -173,6 +173,13 @@ public class Resources
     public string GetResource(string resourceKey) { }
 }
 
+public enum Tense
+{
+    Future,
+    Past,
+    value__,
+}
+
 public enum TimeUnit
 {
     Day,
@@ -184,13 +191,6 @@ public enum TimeUnit
     value__,
     Week,
     Year,
-}
-
-public enum TimeUnitTense
-{
-    Future,
-    Past,
-    value__,
 }
 
 public class NoMatchFoundException
