@@ -86,7 +86,5 @@ namespace Humanizer.Tests.Localisation.cs
         {
             Assert.Equal(expected, TimeSpan.FromDays(number*7).Humanize());
         }
-
-
     }
 }
