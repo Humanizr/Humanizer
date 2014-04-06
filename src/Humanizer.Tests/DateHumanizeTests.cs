@@ -64,7 +64,7 @@ namespace Humanizer.Tests
         [InlineData(10, "10 hours from now")]
         [InlineData(23, "23 hours from now")]
         [InlineData(24, "tomorrow")]
-        public void HoursFfomNow(int hours, string expected)
+        public void HoursFromNow(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
         }
