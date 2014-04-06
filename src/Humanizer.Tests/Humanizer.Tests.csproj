@@ -125,7 +125,7 @@
     <Compile Include="TruncatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Localisation\DateHumanizeTests.fi-FI.cs" />
+    <Compile Include="Localisation\fi-FI\DateHumanizeTests.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
