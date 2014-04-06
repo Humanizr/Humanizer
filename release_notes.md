@@ -1,6 +1,11 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.17.1...master)
+
+###v1.17.1 - 2014-04-06
   - [#124](https://github.com/MehdiK/Humanizer/pull/124): Added Slovak localization (strings, formatter, tests)
   - [#130](https://github.com/MehdiK/Humanizer/pull/130): Added Czech localization (strings, formatter, tests)
+  - [#131](https://github.com/MehdiK/Humanizer/pull/131): Clean date humanize tests and renamed `TimeUnitTense` to `Tense`
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.16.4...master)
 
