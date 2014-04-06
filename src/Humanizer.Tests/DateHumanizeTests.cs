@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Humanizer.Localisation;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests
@@ -12,7 +12,7 @@ namespace Humanizer.Tests
         [InlineData(60, "a minute ago")]
         public void SecondsAgo(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromSeconds(-seconds));
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, TimeUnitTense.Past);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace Humanizer.Tests
         [InlineData(60, "a minute from now")]
         public void SecondsFromNow(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromSeconds(seconds));
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, TimeUnitTense.Future);
         }
 
         [Theory]
@@ -34,7 +34,7 @@ namespace Humanizer.Tests
         [InlineData(120, "2 hours ago")]
         public void MinutesAgo(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromMinutes(-minutes));
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, TimeUnitTense.Past);
         }
 
         [Theory]
@@ -46,7 +46,7 @@ namespace Humanizer.Tests
         [InlineData(120, "2 hours from now")]
         public void MinutesFromNow(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromMinutes(minutes));
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, TimeUnitTense.Future);
         }
 
         [Theory]
@@ -56,7 +56,7 @@ namespace Humanizer.Tests
         [InlineData(24, "yesterday")]
         public void HoursAgo(int hours, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromHours(-hours));
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, TimeUnitTense.Past);
         }
 
         [Theory]
@@ -66,7 +66,7 @@ namespace Humanizer.Tests
         [InlineData(24, "tomorrow")]
         public void HoursFfomNow(int hours, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromHours(hours));
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, TimeUnitTense.Future);
         }
 
         [Theory]
@@ -76,7 +76,7 @@ namespace Humanizer.Tests
         [InlineData(32, "one month ago")]
         public void DaysAgo(int days, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromDays(-days));
+            DateHumanize.Verify(expected, days, TimeUnit.Day, TimeUnitTense.Past);
         }
 
         [Theory]
@@ -86,7 +86,7 @@ namespace Humanizer.Tests
         [InlineData(32, "one month from now")]
         public void DaysFromNow(int days, string expected)
         {
-            DateHumanize.Verify(expected, TimeSpan.FromDays(days));
+            DateHumanize.Verify(expected, days, TimeUnit.Day, TimeUnitTense.Future);
         }
 
         [Theory]
@@ -96,8 +96,7 @@ namespace Humanizer.Tests
         [InlineData(12, "one year ago")]
         public void MonthsAgo(int months, string expected)
         {
-            // ToDo should come up with a more solid logic
-            DateHumanize.Verify(expected, TimeSpan.FromDays(-months * 31));
+            DateHumanize.Verify(expected, months, TimeUnit.Month, TimeUnitTense.Past);
         }
 
         [Theory]
@@ -107,8 +106,7 @@ namespace Humanizer.Tests
         [InlineData(12, "one year from now")]
         public void MonthsFromNow(int months, string expected)
         {
-            // ToDo should come up with a more solid logic
-            DateHumanize.Verify(expected, TimeSpan.FromDays(months * 31));
+            DateHumanize.Verify(expected, months, TimeUnit.Month, TimeUnitTense.Future);
         }
 
         [Theory]
@@ -116,8 +114,7 @@ namespace Humanizer.Tests
         [InlineData(2, "2 years ago")]
         public void YearsAgo(int years, string expected)
         {
-            // ToDo should come up with a more solid logic
-            DateHumanize.Verify(expected, TimeSpan.FromDays(-years * 366));
+            DateHumanize.Verify(expected, years, TimeUnit.Year, TimeUnitTense.Past);
         }
 
         [Theory]
@@ -125,8 +122,7 @@ namespace Humanizer.Tests
         [InlineData(2, "2 years from now")]
         public void YearsFromNow(int years, string expected)
         {
-            // ToDo should come up with a more solid logic
-            DateHumanize.Verify(expected, TimeSpan.FromDays(    years * 366));
+            DateHumanize.Verify(expected, years, TimeUnit.Year, TimeUnitTense.Future);
         }
     }
 }

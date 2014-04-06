@@ -1,4 +1,5 @@
 ﻿using System;
+using Humanizer.Localisation;
 using Xunit;
 
 namespace Humanizer.Tests
@@ -24,8 +25,36 @@ namespace Humanizer.Tests
             Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
         }
 
-        public static void Verify(string expectedString, TimeSpan deltaFromNow)
+        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, TimeUnitTense tense)
         {
+            var deltaFromNow = new TimeSpan();
+            unit = Math.Abs(unit);
+
+            if (tense == TimeUnitTense.Past)
+                unit = -unit;
+
+            switch (timeUnit)
+            {
+                case TimeUnit.Second:
+                    deltaFromNow = TimeSpan.FromSeconds(unit);
+                    break;
+                case TimeUnit.Minute:
+                    deltaFromNow = TimeSpan.FromMinutes(unit);
+                    break;
+                case TimeUnit.Hour:
+                    deltaFromNow = TimeSpan.FromHours(unit);
+                    break;
+                case TimeUnit.Day:
+                    deltaFromNow = TimeSpan.FromDays(unit);
+                    break;
+                case TimeUnit.Month:
+                    deltaFromNow = TimeSpan.FromDays(unit*31);
+                    break;
+                case TimeUnit.Year:
+                    deltaFromNow = TimeSpan.FromDays(unit*366);
+                    break;
+            }
+
             VerifyWithCurrentDate(expectedString, deltaFromNow);
             VerifyWithDateInjection(expectedString, deltaFromNow);
         }
