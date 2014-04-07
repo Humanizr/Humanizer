@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.DateTimeStrategy;
 using Humanizer.Localisation;
 
 namespace Humanizer.Configuration
@@ -35,5 +36,7 @@ namespace Humanizer.Configuration
                 return new DefaultFormatter();
             }
         }
+
+        public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
     }
 }
