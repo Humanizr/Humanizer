@@ -76,6 +76,9 @@
     <Compile Include="Localisation\NumberToWords\EnglishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
+    <Compile Include="DateTimeStrategy\DefaultDateTimeStrategy.cs" />
+    <Compile Include="DateTimeStrategy\IDateTimeHumanizeStrategy.cs" />
+    <Compile Include="DateTimeStrategy\PrecisionDateTimeStrategy.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">

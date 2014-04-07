@@ -1,7 +1,7 @@
-using Humanizer.Localisation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.DateTimeStrategy;
 using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Configuration
@@ -31,11 +31,12 @@ namespace Humanizer.Configuration
             {
                 Func<IFormatter> formatterFactory;
                 if (FormatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory))
-                {
                     return formatterFactory();
-                }
+                
                 return new DefaultFormatter();
             }
         }
+
+        public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
     }
 }

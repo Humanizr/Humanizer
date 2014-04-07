@@ -4,7 +4,7 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class DateHumanizeTests : AmbientCulture
+    public class DateHumanizeDefaultStrategyTests : AmbientCulture
     {
         public DateHumanizeTests()
             : base("en-US")
