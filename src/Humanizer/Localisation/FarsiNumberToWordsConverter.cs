@@ -46,5 +46,10 @@ namespace Humanizer.Localisation
 
             return string.Join(" و ", parts);
         }
+
+        public string ConvertToOrdinal(int number)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

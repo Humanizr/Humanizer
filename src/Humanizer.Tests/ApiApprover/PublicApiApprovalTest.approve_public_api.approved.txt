@@ -166,6 +166,7 @@ public interface IFormatter
 public interface INumberToWordsConverter
 {
     string Convert(int number);
+    string ConvertToOrdinal(int number);
 }
 
 public class ResourceKeys

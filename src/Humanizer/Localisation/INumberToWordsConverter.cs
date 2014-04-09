@@ -11,5 +11,12 @@
         /// <param name="number">Number to be turned to words</param>
         /// <returns></returns>
         string Convert(int number);
+
+        /// <summary>
+        /// 1.ToOrdinalWords() -> "first"
+        /// </summary>
+        /// <param name="number">Number to be turned to ordinal words</param>
+        /// <returns></returns>
+        string ConvertToOrdinal(int number);
     }
 }

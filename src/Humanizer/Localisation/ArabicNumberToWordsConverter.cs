@@ -111,5 +111,10 @@ namespace Humanizer.Localisation
 
             return result.Trim();
         }
+
+        public string ConvertToOrdinal(int number)
+        {
+            throw new NotSupportedException();
+        }
     }
 }
