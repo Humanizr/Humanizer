@@ -3,7 +3,7 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class DateHumanizeTests
+    public class DateHumanizeDefaultStrategyTests
     {
         [Theory]
         [InlineData(1, "one second ago")]
