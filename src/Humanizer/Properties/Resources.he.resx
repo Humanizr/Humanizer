@@ -190,7 +190,7 @@
     <comment>single week</comment>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>אפס</value>
+    <value>אין זמן</value>
     <comment>no time</comment>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">

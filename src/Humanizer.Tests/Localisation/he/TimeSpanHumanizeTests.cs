@@ -72,7 +72,7 @@ namespace Humanizer.Tests.Localisation.he
         [Fact]
         public void NoTime()
         {
-            Assert.Equal("אפס", TimeSpan.Zero.Humanize());
+            Assert.Equal("אין זמן", TimeSpan.Zero.Humanize());
         }
     }
 }
