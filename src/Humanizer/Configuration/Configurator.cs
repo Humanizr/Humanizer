@@ -16,9 +16,9 @@ namespace Humanizer.Configuration
             { "ro", () => new RomanianFormatter() },
             { "ru", () => new RussianFormatter() },
             { "ar", () => new ArabicFormatter() },
-            { "sk", () => new CzechSlovakFormatter() },
-            { "cs", () => new CzechSlovakFormatter() },
-            { "pl", () => new PolishFormatter() }
+            { "sk", () => new CzechSlovakPolishFormatter() },
+            { "cs", () => new CzechSlovakPolishFormatter() },
+            { "pl", () => new CzechSlovakPolishFormatter() }
         };
 
         /// <summary>
