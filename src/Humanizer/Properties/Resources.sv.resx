@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>för en sekund sedan</value>
+    <value>en sekund sedan</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} sekunder sedan</value>
+    <value>för {0} sekunder sedan</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>en minut sedan</value>
@@ -133,25 +133,25 @@
     <value>en timme sedan</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>{0} timmar sedan</value>
+    <value>för {0} timmar sedan</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>igår</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>{0} dagar sedan</value>
+    <value>för {0} dagar sedan</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>för en månad sedan</value>
+    <value>en månad sedan</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
-    <value>{0} månader sedan</value>
+    <value>för {0} månader sedan</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>ett år sedan</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
-    <value>{0} år sedan</value>
+    <value>för {0} år sedan</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} dagar</value>
