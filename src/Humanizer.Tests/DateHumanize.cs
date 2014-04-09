@@ -42,6 +42,9 @@ namespace Humanizer.Tests
 
             switch (timeUnit)
             {
+                case TimeUnit.Millisecond:
+                    deltaFromNow = TimeSpan.FromMilliseconds(unit);
+                    break;
                 case TimeUnit.Second:
                     deltaFromNow = TimeSpan.FromSeconds(unit);
                     break;
