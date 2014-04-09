@@ -45,7 +45,7 @@ namespace Humanizer.Tests.Localisation.id
         [InlineData(44, "44 menit dari sekarang")]
         [InlineData(45, "sejam dari sekarang")]
         [InlineData(119, "sejam dari sekarang")]
-        [InlineData(120, "2 hours from now")]
+        [InlineData(120, "2 jam dari sekarang")]
         public void MinutesFromNow(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
