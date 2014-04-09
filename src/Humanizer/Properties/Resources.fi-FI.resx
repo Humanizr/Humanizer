@@ -121,7 +121,7 @@
     <value>sekuntti sitten</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} sekunttia sitten</value>
+    <value>{0} sekuntia sitten</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>minuutti sitten</value>
