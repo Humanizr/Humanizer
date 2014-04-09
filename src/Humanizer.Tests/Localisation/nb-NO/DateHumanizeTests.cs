@@ -30,7 +30,6 @@ namespace Humanizer.Tests.Localisation.nbNO
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
         }
 
-
         [Theory]
         [InlineData(1, "ett sekund fra nå")]
         [InlineData(10, "10 sekunder fra nå")]
@@ -41,7 +40,6 @@ namespace Humanizer.Tests.Localisation.nbNO
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
         }
 
-
         [Theory]
         [InlineData(-10, "10 timer siden")]
         [InlineData(-3, "3 timer siden")]
@@ -51,7 +49,6 @@ namespace Humanizer.Tests.Localisation.nbNO
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
-
 
         [Theory]
         [InlineData(1, "en time fra nå")]
