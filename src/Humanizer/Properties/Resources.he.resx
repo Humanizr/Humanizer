@@ -166,23 +166,23 @@
     <comment>{0} years ago</comment>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>يوم واحد</value>
+    <value>יום</value>
     <comment>single day</comment>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>ساعة واحدة</value>
+    <value>שעה</value>
     <comment>single hour</comment>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>جزء من الثانية</value>
+    <value>מילי שניה</value>
     <comment>single millisecond</comment>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>دقيقة واحدة</value>
+    <value>דקה</value>
     <comment>single minute</comment>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>ثانية واحدة</value>
+    <value>שניה</value>
     <comment>single second</comment>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
@@ -190,7 +190,7 @@
     <comment>single week</comment>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>حالاً</value>
+    <value>אפס</value>
     <comment>no time</comment>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
@@ -222,63 +222,63 @@
     <comment>two weeks</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
-    <value>يومين</value>
+    <value>יומיים</value>
     <comment>two days</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
-    <value>ساعتين</value>
+    <value>שעתיים</value>
     <comment>two hours</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>جزئين من الثانية</value>
+    <value>שתי מילי שניות</value>
     <comment>two milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
-    <value>دقيقتين</value>
+    <value>שתי דקות</value>
     <comment>two minutes</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
-    <value>ثانيتين</value>
+    <value>שתי שניות</value>
     <comment>two seconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
-    <value>{0} يوم</value>
+    <value>{0} ימים</value>
     <comment>{0} days</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
-    <value>{0} أيام</value>
+    <value>{0} ימים</value>
     <comment>{0} days</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
-    <value>{0} ساعة</value>
+    <value>{0} שעות</value>
     <comment>{0} hours</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
-    <value>{0} ساعات</value>
+    <value>{0} שעות</value>
     <comment>{0} hours</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} جزء من الثانية</value>
+    <value>{0} מילי שניות</value>
     <comment>{0} milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} أجزاء من الثانية</value>
+    <value>{0} מילי שניות</value>
     <comment>{0} milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
-    <value>{0} دقيقة</value>
+    <value>{0} דקות</value>
     <comment>{0} minutes</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
-    <value>{0} دقائق</value>
+    <value>{0} דקות</value>
     <comment>{0} minutes</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
-    <value>{0} ثانية</value>
+    <value>{0} שניות</value>
     <comment>{0} seconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
-    <value>{0} ثوان</value>
+    <value>{0} שניות</value>
     <comment>{0} seconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
