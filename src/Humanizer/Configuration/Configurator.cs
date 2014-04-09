@@ -1,7 +1,7 @@
+using Humanizer.Localisation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Humanizer.Localisation;
 
 namespace Humanizer.Configuration
 {
@@ -10,14 +10,15 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
-        private static readonly IDictionary<string, Func<IFormatter>> FormatterFactories = 
+        private static readonly IDictionary<string, Func<IFormatter>> FormatterFactories =
             new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
         {
             { "ro", () => new RomanianFormatter() },
             { "ru", () => new RussianFormatter() },
             { "ar", () => new ArabicFormatter() },
-            { "sk", () => new CzechSlovakFormatter() },
-            { "cs", () => new CzechSlovakFormatter() }
+            { "sk", () => new CzechSlovakPolishFormatter() },
+            { "cs", () => new CzechSlovakPolishFormatter() },
+            { "pl", () => new CzechSlovakPolishFormatter() }
         };
 
         /// <summary>
