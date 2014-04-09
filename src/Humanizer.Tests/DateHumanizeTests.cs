@@ -4,8 +4,10 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class DateHumanizeTests
+    public class DateHumanizeTests : AmbientCulture
     {
+        public DateHumanizeTests() : base("en") { }
+
         [Theory]
         [InlineData(1, "one second ago")]
         [InlineData(10, "10 seconds ago")]
