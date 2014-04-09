@@ -1,4 +1,5 @@
 ###In Development
+  - [#143](https://github.com/MehdiK/Humanizer/pull/143): Added Russian translation for future DateTime, TimeSpan and Now
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.18.1...master)
 
