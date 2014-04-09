@@ -4,17 +4,17 @@ namespace Humanizer.Localisation
 {
     internal class ArabicNumberToWordsConverter : INumberToWordsConverter
     {
+        private static readonly string[] Groups = { "مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون" };
+        private static readonly string[] AppendedGroups = { "", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً" };
+        private static readonly string[] PluralGroups = { "", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات", "كوينتليونات", "سكستيليونات" };
+        private static readonly string[] OnesGroup = { "", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر" };
+        private static readonly string[] TensGroup = { "", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون" };
+        private static readonly string[] HundredsGroup = { "", "مئة", "مئتان", "ثلاث مئة", "أربع مئة", "خمس مئة", "ست مئة", "سبع مئة", "ثمان مئة", "تسع مئة" };
+        private static readonly string[] AppendedTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن" };
+        private static readonly string[] Twos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان" };
+
         public string Convert(int number)
         {
-            string[] arabicGroup = { "مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون" };
-            string[] arabicAppendedGroup = { "", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً" };
-            string[] arabicPluralGroups = { "", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات", "كوينتليونات", "سكستيليونات" };
-            string[] onesGroup = { "", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر" };
-            string[] tensGroup = { "", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون" };
-            string[] hundredsGroup = { "", "مئة", "مئتان", "ثلاث مئة", "أربع مئة", "خمس مئة", "ست مئة", "سبع مئة", "ثمان مئة", "تسع مئة" };
-            string[] arabicAppendedTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن" };
-            string[] arabicTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان" };
-
             if (number == 0)
                 return "صفر";
 
@@ -33,9 +33,9 @@ namespace Humanizer.Localisation
                 if (hundreds > 0)
                 {
                     if (tens == 0 && hundreds == 2)
-                        process = arabicAppendedTwos[0];
+                        process = AppendedTwos[0];
                     else
-                        process = hundredsGroup[hundreds];
+                        process = HundredsGroup[hundreds];
                 }
 
                 if (tens > 0)
@@ -45,9 +45,9 @@ namespace Humanizer.Localisation
                         if (tens == 2 && hundreds == 0 && groupLevel > 0)
                         {
                             if (number == 2000 || number == 2000000 || number == 2000000000)
-                                process = arabicAppendedTwos[groupLevel];
+                                process = AppendedTwos[groupLevel];
                             else
-                                process = arabicTwos[groupLevel];
+                                process = Twos[groupLevel];
                         }
                         else
                         {
@@ -57,7 +57,7 @@ namespace Humanizer.Localisation
                             if (tens == 1 && groupLevel > 0 && hundreds == 0)
                                 process += " ";
                             else
-                                process += onesGroup[tens];
+                                process += OnesGroup[tens];
                         }
                     }
                     else
@@ -70,13 +70,13 @@ namespace Humanizer.Localisation
                             if (process != String.Empty)
                                 process += " و ";
 
-                            process += onesGroup[ones];
+                            process += OnesGroup[ones];
                         }
 
                         if (process != String.Empty)
                             process += " و ";
 
-                        process += tensGroup[tens];
+                        process += TensGroup[tens];
                     }
                 }
 
@@ -92,15 +92,15 @@ namespace Humanizer.Localisation
                             if (groupNumber % 100 != 1)
                             {
                                 if (groupNumber >= 3 && groupNumber <= 10)
-                                    result = String.Format("{0} {1}", arabicPluralGroups[groupLevel], result);
+                                    result = String.Format("{0} {1}", PluralGroups[groupLevel], result);
                                 else
                                 {
-                                    result = String.Format("{0} {1}", result != String.Empty ? arabicAppendedGroup[groupLevel] : arabicGroup[groupLevel], result);
+                                    result = String.Format("{0} {1}", result != String.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel], result);
                                 }
                             }
                             else
                             {
-                                result = String.Format("{0} {1}", arabicGroup[groupLevel], result);
+                                result = String.Format("{0} {1}", Groups[groupLevel], result);
                             }
                         }
                     }
