@@ -87,6 +87,8 @@
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\CzechSlovakPolishFormatter.cs" />
+    <Compile Include="Localisation\HebrewFormatter.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
@@ -162,6 +164,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.bg.resx" />
+    <EmbeddedResource Include="Properties\Resources.he.resx">
+      <LastGenOutput>Resources.he1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.da.resx" />
     <EmbeddedResource Include="Properties\Resources.hu.resx" />
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
