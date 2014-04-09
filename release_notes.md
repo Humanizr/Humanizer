@@ -1,5 +1,7 @@
 ###In Development
 
+- [#140](https://github.com/MehdiK/Humanizer/pull/140): Polish localization (strings, formatter, tests)
+
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.17.1...master)
 
 ###v1.17.1 - 2014-04-06
