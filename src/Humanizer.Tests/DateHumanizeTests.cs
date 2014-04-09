@@ -6,7 +6,7 @@ namespace Humanizer.Tests
 {
     public class DateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests() : base("en") { }
+        public DateHumanizeTests() : base("en-US") { }
 
         [Theory]
         [InlineData(1, "one second ago")]
