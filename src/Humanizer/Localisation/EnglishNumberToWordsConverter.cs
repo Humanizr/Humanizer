@@ -8,6 +8,18 @@ namespace Humanizer.Localisation
         private static readonly string[] UnitsMap = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] TensMap = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
+        private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
+        {
+            {1, "first"},
+            {2, "second"},
+            {3, "third"},
+            {4, "forth"},
+            {5, "fifth"},
+            {8, "eighth"},
+            {9, "ninth"},
+            {12, "twelfth"},
+        };
+
         public string Convert(int number)
         {
             if (number == 0)
@@ -76,7 +88,7 @@ namespace Humanizer.Localisation
                 if (ExceptionNumbersToWords(number%10, out exceptionPart))
                 {
                     var normalPart = number - number%10;
-                    towords = RemoveOnePrefix(normalPart.ToWords());
+                    towords = RemoveOnePrefix(Convert(normalPart));
                     return towords + " " + exceptionPart;
                 }
             }
@@ -84,9 +96,9 @@ namespace Humanizer.Localisation
             return NormalNumberToWords(number);
         }
 
-        private static string NormalNumberToWords(int number)
+        private string NormalNumberToWords(int number)
         {
-            string towords = number.ToWords().Replace('-', ' ');
+            string towords = Convert(number).Replace('-', ' ');
 
             towords = RemoveOnePrefix(towords);
             // twenty => twentieth
@@ -107,19 +119,7 @@ namespace Humanizer.Localisation
 
         private static bool ExceptionNumbersToWords(int number, out string words)
         {
-            var exceptions = new Dictionary<int, string>
-            {
-                {1, "first"},
-                {2, "second"},
-                {3, "third"},
-                {4, "forth"},
-                {5, "fifth"},
-                {8, "eighth"},
-                {9, "ninth"},
-                {12, "twelfth"},
-            };
-
-            return exceptions.TryGetValue(number, out words);
+            return OrdinalExceptions.TryGetValue(number, out words);
         }
     }
 }
