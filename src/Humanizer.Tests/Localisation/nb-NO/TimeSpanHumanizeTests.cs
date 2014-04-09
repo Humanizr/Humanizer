@@ -10,6 +10,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [InlineData(7, "en uke")]
+        [InlineData(14, "2 uker")]
         public void Weeks(int days, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
@@ -17,6 +18,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [InlineData(1, "en dag")]
+        [InlineData(2, "2 dager")]
         public void Days(int days, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
@@ -24,6 +26,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [InlineData(1, "en time")]
+        [InlineData(2, "2 timer")]
         public void Hours(int hours, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize());
@@ -31,6 +34,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [InlineData(1, "ett minutt")]
+        [InlineData(2, "2 minutter")]
         public void Minutes(int minutes, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
@@ -38,6 +42,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [InlineData(1, "ett sekund")]
+        [InlineData(2, "2 sekunder")]
         public void Seconds(int seconds, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
@@ -45,6 +50,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [InlineData(1, "ett millisekund")]
+        [InlineData(2, "2 millisekunder")]
         public void Milliseconds(int milliseconds, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
