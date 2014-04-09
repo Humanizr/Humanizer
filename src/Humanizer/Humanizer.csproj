@@ -77,6 +77,7 @@
     <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
     <Compile Include="Localisation\Tense.cs" />
+    <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
