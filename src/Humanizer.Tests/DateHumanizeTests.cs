@@ -1,4 +1,5 @@
 ﻿using Humanizer.Localisation;
+using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests
@@ -123,6 +124,12 @@ namespace Humanizer.Tests
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
+        }
+
+        [Fact]
+        public void Now()
+        {
+            DateHumanize.Verify("now", 0, TimeUnit.Year, Tense.Future);
         }
     }
 }

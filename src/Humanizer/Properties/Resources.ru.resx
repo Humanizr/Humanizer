@@ -189,6 +189,9 @@
   <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
     <value>{0} год назад</value>
   </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>сейчас</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} дней</value>
   </data>
