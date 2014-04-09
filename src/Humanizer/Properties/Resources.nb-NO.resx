@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>et sekund siden</value>
+    <value>ett sekund siden</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} sekunder siden</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>et minutt siden</value>
+    <value>ett minutt siden</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minutter siden</value>
@@ -148,7 +148,7 @@
     <value>{0} måneder siden</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>et år siden</value>
+    <value>ett år siden</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} år siden</value>

@@ -34,7 +34,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         [InlineData(-10, "10 minutter siden")]
         [InlineData(-3, "3 minutter siden")]
         [InlineData(-2, "2 minutter siden")]
-        [InlineData(-1, "et minutt siden")]
+        [InlineData(-1, "ett minutt siden")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
@@ -54,7 +54,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         [InlineData(-10, "10 sekunder siden")]
         [InlineData(-3, "3 sekunder siden")]
         [InlineData(-2, "2 sekunder siden")]
-        [InlineData(-1, "et sekund siden")]
+        [InlineData(-1, "ett sekund siden")]
         public void SecondsAgo(int seconds, string expected)
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
@@ -64,7 +64,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         [InlineData(-10, "10 år siden")]
         [InlineData(-3, "3 år siden")]
         [InlineData(-2, "2 år siden")]
-        [InlineData(-1, "et år siden")]
+        [InlineData(-1, "ett år siden")]
         public void YearsAgo(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
