@@ -178,7 +178,7 @@
     <value>et millisekund</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>et minutt</value>
+    <value>et minut</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>et sekund</value>

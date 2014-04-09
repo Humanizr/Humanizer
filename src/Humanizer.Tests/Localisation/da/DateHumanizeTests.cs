@@ -6,7 +6,7 @@ namespace Humanizer.Tests.Localisation.da
     public class DateHumanizeTests : AmbientCulture
     {
         public DateHumanizeTests()
-            : base("da")
+            : base("da-DK")
         {
         }
 
