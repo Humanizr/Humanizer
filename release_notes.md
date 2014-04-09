@@ -1,6 +1,7 @@
 ###In Development
 
 - [#135](https://github.com/MehdiK/Humanizer/pull/135): Swedish localization (strings, tests)
+- [#138](https://github.com/MehdiK/Humanizer/pull/135): Correct term is sekuntia not sekunttia
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.17.1...master)
 
