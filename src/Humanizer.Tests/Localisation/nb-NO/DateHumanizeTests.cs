@@ -135,6 +135,5 @@ namespace Humanizer.Tests.Localisation.nbNO
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
-
     }
 }
