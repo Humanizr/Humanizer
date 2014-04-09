@@ -2,17 +2,17 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.ar
+namespace Humanizer.Tests.Localisation.he
 {
     public class TimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeTests() : base("ar") { }
+        public TimeSpanHumanizeTests() : base("he") { }
 
         [Theory]
-        [InlineData(7, "أسبوع واحد")]
-        [InlineData(14, "أسبوعين")]
-        [InlineData(21, "3 أسابيع")]
-        [InlineData(77, "11 أسبوع")]
+        [InlineData(7, "שבוע")]
+        [InlineData(14, "שבועיים")]
+        [InlineData(21, "3 שבועות")]
+        [InlineData(77, "11 שבועות")]
         public void Weeks(int days, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
@@ -20,29 +20,29 @@ namespace Humanizer.Tests.Localisation.ar
 
 
         [Theory]
-        [InlineData(1, "يوم واحد")]
-        [InlineData(2, "يومين")]
-        [InlineData(3, "3 أيام")]
+        [InlineData(1, "יום")]
+        [InlineData(2, "יומיים")]
+        [InlineData(3, "3 ימים")]
         public void Days(int days, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "ساعة واحدة")]
-        [InlineData(2, "ساعتين")]
-        [InlineData(3, "3 ساعات")]
-        [InlineData(11, "11 ساعة")]
+        [InlineData(1, "שעה")]
+        [InlineData(2, "שעתיים")]
+        [InlineData(3, "3 שעות")]
+        [InlineData(11, "11 שעות")]
         public void Hours(int hours, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "دقيقة واحدة")]
-        [InlineData(2, "دقيقتين")]
-        [InlineData(3, "3 دقائق")]
-        [InlineData(11, "11 دقيقة")]
+        [InlineData(1, "דקה")]
+        [InlineData(2, "שתי דקות")]
+        [InlineData(3, "3 דקות")]
+        [InlineData(11, "11 דקות")]
         public void Minutes(int minutes, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
@@ -50,20 +50,20 @@ namespace Humanizer.Tests.Localisation.ar
 
 
         [Theory]
-        [InlineData(1, "ثانية واحدة")]
-        [InlineData(2, "ثانيتين")]
-        [InlineData(3, "3 ثوان")]
-        [InlineData(11, "11 ثانية")]
+        [InlineData(1, "שניה")]
+        [InlineData(2, "שתי שניות")]
+        [InlineData(3, "3 שניות")]
+        [InlineData(11, "11 שניות")]
         public void Seconds(int seconds, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "جزء من الثانية")]
-        [InlineData(2, "جزئين من الثانية")]
-        [InlineData(3, "3 أجزاء من الثانية")]
-        [InlineData(11, "11 جزء من الثانية")]
+        [InlineData(1, "מילי שניה")]
+        [InlineData(2, "שתי מילי שניות")]
+        [InlineData(3, "3 מילי שניות")]
+        [InlineData(11, "11 מילי שניות")]
         public void Milliseconds(int milliseconds, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
@@ -72,7 +72,7 @@ namespace Humanizer.Tests.Localisation.ar
         [Fact]
         public void NoTime()
         {
-            Assert.Equal("حالاً", TimeSpan.Zero.Humanize());
+            Assert.Equal("אפס", TimeSpan.Zero.Humanize());
         }
     }
 }
