@@ -228,4 +228,7 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>un año desde ahora</value>
   </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>ahora</value>
+  </data>
 </root>
