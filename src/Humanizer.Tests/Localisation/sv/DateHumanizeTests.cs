@@ -20,7 +20,7 @@ namespace Humanizer.Tests.Localisation.sv
 
         [Theory]
         [InlineData(1, "om en minut")]
-		[InlineData(2, "om 2 minuter")]
+        [InlineData(2, "om 2 minuter")]
         public void MinutesFromNow(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
@@ -68,7 +68,7 @@ namespace Humanizer.Tests.Localisation.sv
 
         [Theory]
         [InlineData(1, "en minut sedan")]
-		[InlineData(2, "för 2 minuter sedan")]
+        [InlineData(2, "för 2 minuter sedan")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
@@ -76,7 +76,7 @@ namespace Humanizer.Tests.Localisation.sv
 
         [Theory]
         [InlineData(1, "en timme sedan")]
-		[InlineData(2, "för 2 timmar sedan")]
+        [InlineData(2, "för 2 timmar sedan")]
         public void HoursAgo(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
@@ -84,7 +84,7 @@ namespace Humanizer.Tests.Localisation.sv
 
         [Theory]
         [InlineData(1, "igår")]
-		[InlineData(2, "för 2 dagar sedan")]
+        [InlineData(2, "för 2 dagar sedan")]
         public void DayAgo(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
@@ -92,7 +92,7 @@ namespace Humanizer.Tests.Localisation.sv
 
         [Theory]
         [InlineData(1, "en månad sedan")]
-		[InlineData(2, "för 2 månader sedan")]
+        [InlineData(2, "för 2 månader sedan")]
         public void MonthsAgo(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
@@ -100,7 +100,7 @@ namespace Humanizer.Tests.Localisation.sv
 
         [Theory]
         [InlineData(1, "ett år sedan")]
-		[InlineData(2, "för 2 år sedan")]
+        [InlineData(2, "för 2 år sedan")]
         public void YearsAgo(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);

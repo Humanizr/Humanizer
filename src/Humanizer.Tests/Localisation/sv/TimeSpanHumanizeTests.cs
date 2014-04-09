@@ -56,7 +56,7 @@ namespace Humanizer.Tests.Localisation.sv
         [InlineData(2, "2 veckor")]
         public void Weeks(int number, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(number*7).Humanize());
+            Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
         }
     }
 }
