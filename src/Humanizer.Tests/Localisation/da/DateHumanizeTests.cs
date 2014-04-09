@@ -5,16 +5,13 @@ namespace Humanizer.Tests.Localisation.da
 {
     public class DateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests()
-            : base("da-DK")
-        {
-        }
+        public DateHumanizeTests() : base("da-DK") { }
 
         [Theory]
         [InlineData(-10, "10 dage siden")]
         [InlineData(-3, "3 dage siden")]
         [InlineData(-2, "2 dage siden")]
-		[InlineData(-1, "i går")]
+        [InlineData(-1, "i går")]
         public void DaysAgo(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
