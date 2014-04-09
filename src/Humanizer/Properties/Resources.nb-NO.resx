@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>et sekund siden</value>
+    <value>ett sekund siden</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} sekunder siden</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>et minutt siden</value>
+    <value>ett minutt siden</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minutter siden</value>
@@ -148,7 +148,7 @@
     <value>{0} måneder siden</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>et år siden</value>
+    <value>ett år siden</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} år siden</value>
@@ -175,13 +175,13 @@
     <value>en time</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>et millisekund</value>
+    <value>ett millisekund</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>et minutt</value>
+    <value>ett minutt</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>et sekund</value>
+    <value>ett sekund</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ingen tid</value>
@@ -191,5 +191,44 @@
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>en uke</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} dager fra nå</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>{0} timer fra nå</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>{0} minutter fra nå</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>{0} måneder fra nå</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>{0} sekunder fra nå</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>{0} år fra nå</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>nå</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>i morgen</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>en time fra nå</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>ett minutt fra nå</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>en måned fra nå</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>ett sekund fra nå</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>ett år fra nå</value>
   </data>
 </root>

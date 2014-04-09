@@ -1,4 +1,8 @@
 ###In Development
+  - [#137](https://github.com/MehdiK/Humanizer/pull/137): 
+    - Fixed grammar error in `nb-NO` resource file
+    - Added missing Norwegian resource strings (mainly `DateHumanize_*FromNow`) with tests
+    - Added tests for Norwegian `TimeSpan` resource strings
 
 - [#135](https://github.com/MehdiK/Humanizer/pull/135): Swedish localization (strings, tests)
 
