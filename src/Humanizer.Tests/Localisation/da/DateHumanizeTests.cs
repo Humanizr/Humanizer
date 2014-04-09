@@ -78,6 +78,7 @@ namespace Humanizer.Tests.Localisation.da
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
         }
+
         [Theory]
         [InlineData(-10, "10 måneder siden")]
         [InlineData(-3, "3 måneder siden")]
