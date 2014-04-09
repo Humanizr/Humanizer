@@ -163,6 +163,11 @@ public interface IFormatter
     string TimeSpanHumanize_Zero();
 }
 
+public interface INumberToWordsConverter
+{
+    string Convert(int number);
+}
+
 public class ResourceKeys
 {
     public ResourceKeys() { }
