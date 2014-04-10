@@ -190,43 +190,43 @@
     <value>una semana</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>no hay tiempo</value>
+    <value>0 segundos</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} días desde ahora</value>
+    <value>en {0} días</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} horas desde ahora</value>
+    <value>en {0} horas</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} minutos desde ahora</value>
+    <value>en {0} minutos</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} meses desde ahora</value>
+    <value>en {0} meses</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} segundos desde ahora</value>
+    <value>en {0} segundos</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} años desde ahora</value>
+    <value>en {0} años</value>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>mañana</value>
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>una hora desde ahora</value>
+    <value>en una hora</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>un minuto desde ahora</value>
+    <value>en un minuto</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>un mes desde ahora</value>
+    <value>en un mes</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>un segundo desde ahora</value>
+    <value>en un segundo</value>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>un año desde ahora</value>
+    <value>en un año</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>ahora</value>
