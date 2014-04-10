@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     /// <summary>
     /// An abstraction to convert number to words

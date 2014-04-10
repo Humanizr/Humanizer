@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Humanizer.Localisation
+namespace Humanizer.Localisation.NumberToWords
 {
     internal class FarsiNumberToWordsConverter : DefaultNumberToWordsConverter
     {

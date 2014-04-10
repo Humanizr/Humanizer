@@ -1,4 +1,4 @@
-﻿using Humanizer.Localisation;
+﻿using Humanizer.Localisation.NumberToWords;
 
 namespace Humanizer
 {

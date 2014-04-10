@@ -65,17 +65,17 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Localisation\DefaultNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\FarsiNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\ArabicNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
     <Compile Include="Bytes\ByteSize.cs" />
     <Compile Include="Bytes\ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
-    <Compile Include="Localisation\EnglishNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\INumberToWordsConverter.cs" />
-    <Compile Include="Localisation\CzechSlovakPolishFormatter.cs" />
+    <Compile Include="Localisation\NumberToWords\EnglishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
@@ -88,9 +88,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
-    <Compile Include="Localisation\ArabicFormatter.cs" />
-    <Compile Include="Localisation\DefaultFormatter.cs" />
-    <Compile Include="Localisation\IFormatter.cs" />
+    <Compile Include="Localisation\Formatters\ArabicFormatter.cs" />
+    <Compile Include="Localisation\Formatters\DefaultFormatter.cs" />
+    <Compile Include="Localisation\Formatters\IFormatter.cs" />
     <Compile Include="Localisation\ResourceKeys.Common.cs" />
     <Compile Include="Localisation\ResourceKeys.DateHumanize.cs" />
     <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
@@ -113,8 +113,8 @@
       <DependentUpon>In.Months.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\Resources.cs" />
-    <Compile Include="Localisation\RomanianFormatter.cs" />
-    <Compile Include="Localisation\RussianFormatter.cs" />
+    <Compile Include="Localisation\Formatters\RomanianFormatter.cs" />
+    <Compile Include="Localisation\Formatters\RussianFormatter.cs" />
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Humanizer.Localisation
+namespace Humanizer.Localisation.NumberToWords
 {
     internal class ArabicNumberToWordsConverter : DefaultNumberToWordsConverter
     {
