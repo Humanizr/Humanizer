@@ -6,7 +6,7 @@ namespace Humanizer.Tests
 {
     public class DateHumanizeDefaultStrategyTests : AmbientCulture
     {
-        public DateHumanizeTests()
+        public DateHumanizeDefaultStrategyTests()
             : base("en-US")
         {
         }
