@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -28,15 +28,8 @@ namespace Humanizer.Localisation.NumberToWords
 		    new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
 		    new Fact {Value = 1000000,    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
 		    new Fact {Value = 1000,       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
-		    new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false},
+		    new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
 	    };
-
-        private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
-        {
-            {1, "eerste"},
-            {3, "derde"},
-            {8, "achtste"},
-        };
 
         public string Convert(int number)
         {
@@ -96,45 +89,36 @@ namespace Humanizer.Localisation.NumberToWords
             return word;
         }
 
+        private static readonly Dictionary<string, string> OrdinalExceptions = new Dictionary<string, string>
+        {
+            {"een", "eerste"},
+            {"drie", "derde"},
+            {"miljoen", "miljoenste"},
+        };
+
+        private static readonly char[] EndingCharForSte = {'t', 'g', 'd'};
+        
         public string ConvertToOrdinal(int number)
         {
-            var exceptionalTens = number % 100;
-
-            // 112 => 12 => honderdtwaalfde
-            if (exceptionalTens < 20 && number > 20 && exceptionalTens > 0)
-            {
-                // replace normal word with ordinal version
-                return ReplaceNormalWordWithOrdinalWord(number, exceptionalTens);
-            }
-
-            var exceptionalUnit = number % 10;
-
-            string exceptionalWord;
-            if (exceptionalTens < 10 && ExceptionNumbersToWords(exceptionalUnit, out exceptionalWord))
-            {
-                // replace normal word with ordinal version
-                return ReplaceNormalWordWithOrdinalWord(number, exceptionalUnit, exceptionalWord);
-            }
-
-            return number < 20 ? Convert(number) + "de" : Convert(number) + "ste";
-        }
-
-        private string ReplaceNormalWordWithOrdinalWord(int number, int exceptionalNumber)
-        {
-            return ReplaceNormalWordWithOrdinalWord(number, exceptionalNumber, ConvertToOrdinal(exceptionalNumber));
-        }
-
-        private string ReplaceNormalWordWithOrdinalWord(int number, int exceptionalNumber, string ordinalWord)
-        {
             var word = Convert(number);
-            var normalWord = Convert(exceptionalNumber);
-            var pos = word.LastIndexOf(normalWord, StringComparison.CurrentCulture);
-            return word.Substring(0, pos) + ordinalWord;
-        }
 
-        private static bool ExceptionNumbersToWords(int number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
+            // exceptions
+            foreach (var kv in OrdinalExceptions.Where(kv => word.EndsWith(kv.Key)))
+            {
+                // replace word with exception
+                return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
+            }
+
+            // achtste
+            // twintigste, dertigste, veertigste, ...
+            // honderdste, duizendste, ...
+            if (word.LastIndexOfAny(EndingCharForSte) == (word.Length - 1))
+            {
+                return word + "ste";
+            }
+
+            // anything else
+            return word + "de";
         }
     }
 }
