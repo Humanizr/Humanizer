@@ -118,225 +118,117 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>секунду назад</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>минуту назад</value>
-  </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>час назад</value>
-  </data>
-  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
-    <value>вчера</value>
-  </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>месяц назад</value>
-  </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>год назад</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
-    <value>{0} день назад</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>{0} часов назад</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>{0} минут назад</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
-    <value>{0} месяцев назад</value>
+    <value>et sekund siden</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} секунд назад</value>
+    <value>{0} sekunder siden</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
-    <value>{0} лет назад</value>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>et minut siden</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>{0} minutter siden</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>en time siden</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>{0} timer siden</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>i går</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>{0} дней назад</value>
+    <value>{0} dage siden</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
-    <value>{0} дня назад</value>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>en måned siden</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
-    <value>{0} часа назад</value>
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
+    <value>{0} måneder siden</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
-    <value>{0} час назад</value>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>et år siden</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
-    <value>{0} минуты назад</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
-    <value>{0} минуту назад</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
-    <value>{0} месяца назад</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
-    <value>{0} месяц назад</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
-    <value>{0} секунды назад</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
-    <value>{0} секунду назад</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>{0} года назад</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
-    <value>{0} год назад</value>
-  </data>
-  <data name="DateHumanize_Now" xml:space="preserve">
-    <value>сейчас</value>
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>{0} år siden</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
-    <value>{0} дней</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
-    <value>{0} дня</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
-    <value>{0} день</value>
+    <value>{0} dage</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
-    <value>{0} часов</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
-    <value>{0} часа</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
-    <value>{0} час</value>
+    <value>{0} timer</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} миллисекунд</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
-    <value>{0} миллисекунды</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
-    <value>{0} миллисекунда</value>
+    <value>{0} millisekunder</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
-    <value>{0} минут</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
-    <value>{0} минуты</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
-    <value>{0} минута</value>
+    <value>{0} minutter</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
-    <value>{0} секунд</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
-    <value>{0} секунды</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
-    <value>{0} секунда</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
-    <value>{0} недель</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
-    <value>{0} недели</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>{0} неделя</value>
+    <value>{0} sekunder</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>один день</value>
+    <value>en dag</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>один час</value>
+    <value>en time</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>одна миллисекунда</value>
+    <value>et millisekund</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>одна минута</value>
+    <value>et minut</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>одна секунда</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>одна неделя</value>
+    <value>et sekund</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>нет времени</value>
+    <value>ingen tid</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} uger</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>en uge</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>через {0} дней</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
-    <value>через {0} дня</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
-    <value>через {0} день</value>
+    <value>{0} dage fra nu</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>через {0} часов</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
-    <value>через {0} часа</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
-    <value>через {0} час</value>
+    <value>{0} timer fra nu</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>через {0} минут</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
-    <value>через {0} минуты</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>через {0} минуту</value>
+    <value>{0} minutter fra nu</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>через {0} месяцев</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
-    <value>через {0} месяца</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
-    <value>через {0} месяц</value>
+    <value>{0} måneder fra nu</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>через {0} секунд</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
-    <value>через {0} секунды</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
-    <value>через {0} секунду</value>
+    <value>{0} sekunder fra nu</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>через {0} лет</value>
+    <value>{0} år fra nu</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
-    <value>через {0} года</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
-    <value>через {0} год</value>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>nu</value>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
-    <value>завтра</value>
+    <value>i morgen</value>
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>через час</value>
+    <value>en time fra nu</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>через минуту</value>
+    <value>et minut fra nu</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>через месяц</value>
+    <value>en måned fra nu</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>через секунду</value>
+    <value>et sekund fra nu</value>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>через год</value>
+    <value>et år fra nu</value>
   </data>
 </root>

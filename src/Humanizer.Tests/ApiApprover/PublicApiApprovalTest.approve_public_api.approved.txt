@@ -65,7 +65,7 @@ public class CasingExtensions
 
 public class Configurator
 {
-    public Humanizer.Localisation.IFormatter Formatter { get; }
+    public Humanizer.Localisation.Formatters.IFormatter Formatter { get; }
 }
 
 public class DateHumanizeExtensions
@@ -161,6 +161,12 @@ public interface IFormatter
     string DateHumanize_Now();
     string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
     string TimeSpanHumanize_Zero();
+}
+
+public interface INumberToWordsConverter
+{
+    string Convert(int number);
+    string ConvertToOrdinal(int number);
 }
 
 public class ResourceKeys

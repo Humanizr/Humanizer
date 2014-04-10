@@ -1,4 +1,5 @@
 ﻿using Humanizer.Localisation;
+using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.ruRU
@@ -32,6 +33,28 @@ namespace Humanizer.Tests.Localisation.ruRU
         }
 
         [Theory]
+        [InlineData(1, "через секунду")]
+        [InlineData(2, "через 2 секунды")]
+        [InlineData(3, "через 3 секунды")]
+        [InlineData(4, "через 4 секунды")]
+        [InlineData(5, "через 5 секунд")]
+        [InlineData(6, "через 6 секунд")]
+        [InlineData(10, "через 10 секунд")]
+        [InlineData(11, "через 11 секунд")]
+        [InlineData(19, "через 19 секунд")]
+        [InlineData(20, "через 20 секунд")]
+        [InlineData(21, "через 21 секунду")]
+        [InlineData(22, "через 22 секунды")]
+        [InlineData(23, "через 23 секунды")]
+        [InlineData(24, "через 24 секунды")]
+        [InlineData(25, "через 25 секунд")]
+        [InlineData(40, "через 40 секунд")]
+        public void SecondsFromNow(int seconds, string expected)
+        {
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
+        }
+
+        [Theory]
         [InlineData(1, "минуту назад")]
         [InlineData(2, "2 минуты назад")]
         [InlineData(3, "3 минуты назад")]
@@ -54,6 +77,28 @@ namespace Humanizer.Tests.Localisation.ruRU
         }
 
         [Theory]
+        [InlineData(1, "через минуту")]
+        [InlineData(2, "через 2 минуты")]
+        [InlineData(3, "через 3 минуты")]
+        [InlineData(4, "через 4 минуты")]
+        [InlineData(5, "через 5 минут")]
+        [InlineData(6, "через 6 минут")]
+        [InlineData(10, "через 10 минут")]
+        [InlineData(11, "через 11 минут")]
+        [InlineData(19, "через 19 минут")]
+        [InlineData(20, "через 20 минут")]
+        [InlineData(21, "через 21 минуту")]
+        [InlineData(22, "через 22 минуты")]
+        [InlineData(23, "через 23 минуты")]
+        [InlineData(24, "через 24 минуты")]
+        [InlineData(25, "через 25 минут")]
+        [InlineData(40, "через 40 минут")]
+        public void MinutesFromNow(int minutes, string expected)
+        {
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
+        }
+
+        [Theory]
         [InlineData(1, "час назад")]
         [InlineData(2, "2 часа назад")]
         [InlineData(3, "3 часа назад")]
@@ -70,6 +115,25 @@ namespace Humanizer.Tests.Localisation.ruRU
         public void HoursAgo(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
+        }
+
+        [Theory]
+        [InlineData(1, "через час")]
+        [InlineData(2, "через 2 часа")]
+        [InlineData(3, "через 3 часа")]
+        [InlineData(4, "через 4 часа")]
+        [InlineData(5, "через 5 часов")]
+        [InlineData(6, "через 6 часов")]
+        [InlineData(10, "через 10 часов")]
+        [InlineData(11, "через 11 часов")]
+        [InlineData(19, "через 19 часов")]
+        [InlineData(20, "через 20 часов")]
+        [InlineData(21, "через 21 час")]
+        [InlineData(22, "через 22 часа")]
+        [InlineData(23, "через 23 часа")]
+        public void HoursFromNow(int hours, string expected)
+        {
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
         }
 
         [Theory]
@@ -94,6 +158,27 @@ namespace Humanizer.Tests.Localisation.ruRU
         }
 
         [Theory]
+        [InlineData(1, "завтра")]
+        [InlineData(2, "через 2 дня")]
+        [InlineData(3, "через 3 дня")]
+        [InlineData(4, "через 4 дня")]
+        [InlineData(5, "через 5 дней")]
+        [InlineData(6, "через 6 дней")]
+        [InlineData(10, "через 10 дней")]
+        [InlineData(11, "через 11 дней")]
+        [InlineData(19, "через 19 дней")]
+        [InlineData(20, "через 20 дней")]
+        [InlineData(21, "через 21 день")]
+        [InlineData(22, "через 22 дня")]
+        [InlineData(23, "через 23 дня")]
+        [InlineData(24, "через 24 дня")]
+        [InlineData(25, "через 25 дней")]
+        public void DaysFromNow(int days, string expected)
+        {
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
+        }
+
+        [Theory]
         [InlineData(1, "месяц назад")]
         [InlineData(2, "2 месяца назад")]
         [InlineData(3, "3 месяца назад")]
@@ -106,7 +191,21 @@ namespace Humanizer.Tests.Localisation.ruRU
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
-        
+
+        [Theory]
+        [InlineData(1, "через месяц")]
+        [InlineData(2, "через 2 месяца")]
+        [InlineData(3, "через 3 месяца")]
+        [InlineData(4, "через 4 месяца")]
+        [InlineData(5, "через 5 месяцев")]
+        [InlineData(6, "через 6 месяцев")]
+        [InlineData(10, "через 10 месяцев")]
+        [InlineData(11, "через 11 месяцев")]
+        public void MonthsFromNow(int months, string expected)
+        {
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
+        }
+
         [Theory]
         [InlineData(1, "год назад")]
         [InlineData(2, "2 года назад")]
@@ -125,6 +224,33 @@ namespace Humanizer.Tests.Localisation.ruRU
         public void YearsAgo(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
+        }
+
+        [Theory]
+        [InlineData(1, "через год")]
+        [InlineData(2, "через 2 года")]
+        [InlineData(3, "через 3 года")]
+        [InlineData(4, "через 4 года")]
+        [InlineData(5, "через 5 лет")]
+        [InlineData(6, "через 6 лет")]
+        [InlineData(10, "через 10 лет")]
+        [InlineData(11, "через 11 лет")]
+        [InlineData(19, "через 19 лет")]
+        [InlineData(20, "через 20 лет")]
+        [InlineData(21, "через 21 год")]
+        [InlineData(111, "через 111 лет")]
+        [InlineData(121, "через 121 год")]
+        [InlineData(222, "через 222 года")]
+        [InlineData(325, "через 325 лет")]
+        public void YearsFromNow(int years, string expected)
+        {
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
+        }
+
+        [Fact]
+        public void Now()
+        {
+            DateHumanize.Verify("сейчас", 0, TimeUnit.Day, Tense.Past);
         }
     }
 }
