@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Humanizer.Localisation;
+﻿using Humanizer.Localisation;
 
 namespace Humanizer
 {

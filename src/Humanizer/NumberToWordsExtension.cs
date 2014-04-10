@@ -34,9 +34,7 @@ namespace Humanizer
             {
                 Func<INumberToWordsConverter> converterFactory;
                 if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
-                {
                     return converterFactory();
-                }
 
                 return new DefaultNumberToWordsConverter();
             }
