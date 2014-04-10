@@ -3,8 +3,13 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class NumberToWordsTests
+    public class NumberToWordsTests : AmbientCulture
     {
+        public NumberToWordsTests()
+            : base("en-US")
+        {
+        }
+
         [InlineData(1, "one")]
         [InlineData(10, "ten")]
         [InlineData(11, "eleven")]
