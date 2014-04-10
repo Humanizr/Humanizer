@@ -3,8 +3,10 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class ToQuantityTests
+    public class ToQuantityTests : AmbientCulture
     {
+        public ToQuantityTests() : base("en") { }
+
         [Theory]
         [InlineData("case", 0, "0 cases")]
         [InlineData("case", 1, "1 case")]
