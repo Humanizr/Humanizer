@@ -12,8 +12,8 @@ using System.Globalization;
                 { "ar", () => new ArabicNumberToWordsConverter() },
                 { "fa", () => new FarsiNumberToWordsConverter() },
                 { "es", () => new SpanishNumberToWordsConverter() },
-                { "pl", () => new PolishNumberToWordsConverter() }
-                { "pt-BR", () => new BrazilianPortugueseNumberToWordsConverter() },
+                { "pl", () => new PolishNumberToWordsConverter() },
+                { "pt-BR", () => new BrazilianPortugueseNumberToWordsConverter() }
             };
 
         /// <summary>
