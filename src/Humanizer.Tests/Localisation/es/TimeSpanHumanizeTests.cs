@@ -5,7 +5,7 @@ namespace Humanizer.Tests.Localisation.es
 {
     public class TimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeTests() : base("es-ES") {         }
+        public TimeSpanHumanizeTests() : base("es-ES") { }
 
         [Fact]
         public void TwoWeeks()
@@ -89,7 +89,7 @@ namespace Humanizer.Tests.Localisation.es
         public void NoTime()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("no hay tiempo", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 segundos", TimeSpan.Zero.Humanize());
         }
     }
 }
