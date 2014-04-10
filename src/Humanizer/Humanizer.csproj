@@ -65,11 +65,16 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Localisation\DefaultNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\FarsiNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\ArabicNumberToWordsConverter.cs" />
     <Compile Include="Bytes\ByteSize.cs" />
     <Compile Include="Bytes\ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
+    <Compile Include="Localisation\EnglishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\INumberToWordsConverter.cs" />
     <Compile Include="Localisation\CzechSlovakPolishFormatter.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
