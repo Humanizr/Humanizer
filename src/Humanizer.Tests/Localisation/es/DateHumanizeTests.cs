@@ -11,19 +11,15 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(1, "hace un segundo")]
-        [InlineData(10, "hace 10 segundos")]
-        [InlineData(59, "hace 59 segundos")]
-        [InlineData(60, "hace un minuto")]
+        [InlineData(2, "hace 2 segundos")]
         public void SecondsAgo(int seconds, string expected) 
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
-        [InlineData(1, "un segundo desde ahora")]
-        [InlineData(10, "10 segundos desde ahora")]
-        [InlineData(59, "59 segundos desde ahora")]
-        [InlineData(60, "un minuto desde ahora")]
+        [InlineData(1, "en un segundo")]
+        [InlineData(2, "en 2 segundos")]
         public void SecondsFromNow(int seconds, string expected) 
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
@@ -31,23 +27,15 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(1, "hace un minuto")]
-        [InlineData(10, "hace 10 minutos")]
-        [InlineData(44, "hace 44 minutos")]
-        [InlineData(45, "hace una hora")]
-        [InlineData(119, "hace una hora")]
-        [InlineData(120, "hace 2 horas")]
+        [InlineData(2, "hace 2 minutos")]
         public void MinutesAgo(int minutes, string expected) 
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]
-        [InlineData(1, "un minuto desde ahora")]
-        [InlineData(10, "10 minutos desde ahora")]
-        [InlineData(44, "44 minutos desde ahora")]
-        [InlineData(45, "una hora desde ahora")]
-        [InlineData(119, "una hora desde ahora")]
-        [InlineData(120, "2 horas desde ahora")]
+        [InlineData(1, "en un minuto")]
+        [InlineData(2, "en 2 minutos")]
         public void MinutesFromNow(int minutes, string expected) 
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
@@ -55,19 +43,15 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(1, "hace una hora")]
-        [InlineData(10, "hace 10 horas")]
-        [InlineData(23, "hace 23 horas")]
-        [InlineData(24, "ayer")]
+        [InlineData(2, "hace 2 horas")]
         public void HoursAgo(int hours, string expected) 
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
-        [InlineData(1, "una hora desde ahora")]
-        [InlineData(10, "10 horas desde ahora")]
-        [InlineData(23, "23 horas desde ahora")]
-        [InlineData(24, "mañana")]
+        [InlineData(1, "en una hora")]
+        [InlineData(2, "en 2 horas")]
         public void HoursFromNow(int hours, string expected) 
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
@@ -75,9 +59,7 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(1, "ayer")]
-        [InlineData(10, "hace 10 días")]
-        [InlineData(28, "hace 28 días")]
-        [InlineData(32, "hace un mes")]
+        [InlineData(2, "hace 2 días")]
         public void DaysAgo(int days, string expected) 
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
@@ -85,9 +67,7 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(1, "mañana")]
-        [InlineData(10, "10 días desde ahora")]
-        [InlineData(28, "28 días desde ahora")]
-        [InlineData(32, "un mes desde ahora")]
+        [InlineData(2, "en 2 días")]
         public void DaysFromNow(int days, string expected) 
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
@@ -95,19 +75,15 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(1, "hace un mes")]
-        [InlineData(10, "hace 10 meses")]
-        [InlineData(11, "hace 11 meses")]
-        [InlineData(12, "hace un año")]
+        [InlineData(2, "hace 2 meses")]
         public void MonthsAgo(int months, string expected) 
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
-        [InlineData(1, "un mes desde ahora")]
-        [InlineData(10, "10 meses desde ahora")]
-        [InlineData(11, "11 meses desde ahora")]
-        [InlineData(12, "un año desde ahora")]
+        [InlineData(1, "en un mes")]
+        [InlineData(2, "en 2 meses")]
         public void MonthsFromNow(int months, string expected) 
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
@@ -122,8 +98,8 @@ namespace Humanizer.Tests.Localisation.es
         }
 
         [Theory]
-        [InlineData(1, "un año desde ahora")]
-        [InlineData(2, "2 años desde ahora")]
+        [InlineData(1, "en un año")]
+        [InlineData(2, "en 2 años")]
         public void YearsFromNow(int years, string expected) 
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
