@@ -4,58 +4,68 @@ using Humanizer.Localisation;
 
 namespace Humanizer.DateTimeStrategy
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PrecisionDateTimeStrategy : IDateTimeHumanizeStrategy
     {
         private readonly double _precision;
 
+        /// <summary>
+        /// Constructs a precision-based calculator for distance of time with default precision 0.75.
+        /// </summary>
+        /// <param name="precision">precision of approximation, if not provided  0.75 will be used as a default precision.</param>
         public PrecisionDateTimeStrategy(double precision = .75)
         {
             _precision = precision;
         }
 
+        /// <summary>
+        /// Returns localized & humanized distance of time between two dates; given a specific precision.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="comparisonBase"></param>
+        /// <returns></returns>
         public string Humanize(DateTime input, DateTime comparisonBase)
         {
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
 
-            if (ts.TotalMilliseconds < 1000 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
+            int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
+            int years = 0, months = 0;
 
-            if (ts.TotalSeconds < 60 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Second, tense, ts.Seconds);
+            // start approximate from smaller units towards bigger ones
+            if (ts.Milliseconds >= 999 * _precision) seconds += 1;
+            if (seconds >= 59 * _precision) minutes += 1;
+            if (minutes >= 59 * _precision) hours += 1;
+            if (hours >= 23 * _precision) days += 1;
 
-            if (ts.TotalSeconds < 120 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Minute, tense, 1);
-
-            if (ts.TotalMinutes < 60 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes);
-
-            if (ts.TotalMinutes < 120 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Hour, tense, 1);
-
-            if (ts.TotalHours < 24 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Hour, tense, ts.Hours);
-
-            if (ts.TotalHours < 48 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Day, tense, 1);
-
-            if (ts.TotalDays < 30 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
-
-            if (ts.TotalDays < 60 * _precision)
-                return Configurator.Formatter.DateHumanize(TimeUnit.Month, tense, 1);
-
-            if (ts.TotalDays < 365 * _precision)
+            // month calculation 
+            if (days >= 30 * _precision & days <= 31) months = 1;
+            if (days > 31 && days < 365 * _precision)
             {
-                int months = Convert.ToInt32(Math.Floor(ts.TotalDays / 29.5));
-                return Configurator.Formatter.DateHumanize(TimeUnit.Month, tense, months);
+                int factor = Convert.ToInt32(Math.Floor((double)days / 30));
+                int maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 30));
+                months = (days >= 30 * (factor + _precision)) ? maxMonths : maxMonths - 1;
             }
 
-            int years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
-            if (years == 0) 
-                years = 1;
+            // year calculation
+            if (days >= 365 * _precision && days <= 366) years = 1;
+            if (days > 365)
+            {
+                int factor = Convert.ToInt32(Math.Floor((double)days / 365));
+                int maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 365));
+                years = (days >= 365 * (factor + _precision)) ? maxMonths : maxMonths - 1;
+            }
 
-            return Configurator.Formatter.DateHumanize(TimeUnit.Year, tense, years);
+            // start computing result from larger units to smaller ones
+            if (years > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Year, tense, years);
+            if (months > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Month, tense, months);
+            if (days > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Day, tense, days);
+            if (hours > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Hour, tense, hours);
+            if (minutes > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Minute, tense, minutes);
+            if (seconds > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Second, tense, seconds);
+            return Configurator.Formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
         }
     }
 }
