@@ -10,7 +10,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "il y a une seconde")]
         [InlineData(10, "il y a 10 secondes")]
-        [InlineData(60, "il y a une minute")]
         public void SecondsAgo(int seconds, string expected)
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
@@ -19,7 +18,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "dans une seconde")]
         [InlineData(10, "dans 10 secondes")]
-        [InlineData(60, "dans une minute")]
         public void SecondsFromNow(int seconds, string expected)
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
@@ -28,8 +26,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "il y a une minute")]
         [InlineData(10, "il y a 10 minutes")]
-        [InlineData(45, "il y a une heure")]
-        [InlineData(120, "il y a 2 heures")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
@@ -38,8 +34,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "dans une minute")]
         [InlineData(10, "dans 10 minutes")]
-        [InlineData(45, "dans une heure")]
-        [InlineData(120, "dans 2 heures")]
         public void MinutesFromNow(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
@@ -48,7 +42,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "il y a une heure")]
         [InlineData(10, "il y a 10 heures")]
-        [InlineData(24, "hier")]
         public void HoursAgo(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
@@ -57,7 +50,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "dans une heure")]
         [InlineData(10, "dans 10 heures")]
-        [InlineData(24, "demain")]
         public void HoursFromNow(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
@@ -66,7 +58,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "hier")]
         [InlineData(10, "il y a 10 jours")]
-        [InlineData(32, "il y a un mois")]
         public void DaysAgo(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
@@ -75,7 +66,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "demain")]
         [InlineData(10, "dans 10 jours")]
-        [InlineData(32, "dans un mois")]
         public void DaysFromNow(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
@@ -84,7 +74,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "il y a un mois")]
         [InlineData(10, "il y a 10 mois")]
-        [InlineData(12, "il y a un an")]
         public void MonthsAgo(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
@@ -93,7 +82,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Theory]
         [InlineData(1, "dans un mois")]
         [InlineData(10, "dans 10 mois")]
-        [InlineData(12, "dans un an")]
         public void MonthsFromNow(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
