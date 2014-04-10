@@ -31,3 +31,19 @@ namespace Humanizer.Tests.Localisation
         }
     }
 }
+                Assert.NotEqual("one billion",retorno);
+            }
+        }
+
+        [Fact]
+        public void CanGetTwoLetterISOLanguageSpecificFactory()
+        {
+
+            using (new AmbientCulture("ar"))
+            {
+                string retorno = 1000000000.ToWords();
+                Assert.NotEqual("one billion", retorno);
+            }
+        }
+    }
+}
