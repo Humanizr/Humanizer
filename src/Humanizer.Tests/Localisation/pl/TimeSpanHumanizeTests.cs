@@ -84,7 +84,13 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(6, "6 tygodni")]
         public void Weeks(int number, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(number*7).Humanize());
+            Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
+        }
+
+        [Fact]
+        public void NoTime()
+        {
+            Assert.Equal("brak czasu", TimeSpan.Zero.Humanize());
         }
     }
 }
