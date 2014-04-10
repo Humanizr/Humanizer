@@ -22,6 +22,8 @@ namespace Humanizer
                     return ToArabicWords(number);
                 case "fa":
                     return ToFarsiWords(number);
+                case "pt":
+                    return ToPortugueseWords(number);
                 default:
                     return ToEnglishWords(number);
             }
@@ -231,6 +233,97 @@ namespace Humanizer
                 parts.Add(farsiUnitsMap[number]);
 
             return string.Join(" و ", parts);
+        }
+
+        private static string ToPortugueseWords(int number)
+        {
+            if (number == 0)
+                return "zero";
+
+            if (number < 0)
+                return string.Format("menos {0}", ToWords(Math.Abs(number)));
+
+            var parts = new List<string>();
+
+            if ((number / 1000000000) > 0)
+            {
+                if (number / 1000000000 > 2)
+                {
+                    parts.Add(string.Format("{0} bilhões", ToWords(number / 1000000000)));
+                }
+                else
+                {
+                    parts.Add(string.Format("{0} bilhão", ToWords(number / 1000000000)));
+                }
+                number %= 1000000000;
+            }
+
+            if ((number / 1000000) > 0)
+            {
+                if (number / 1000000 > 2)
+                {
+                    parts.Add(string.Format("{0} milhões", ToWords(number / 1000000)));
+                }
+                else
+                {
+                    parts.Add(string.Format("{0} milhão", ToWords(number / 1000000)));
+                }
+                number %= 1000000;
+            }
+
+            if ((number / 1000) > 0)
+            {
+                if (number / 1000 == 1)
+                    parts.Add("mil");
+                else
+                    parts.Add(string.Format("{0} mil", ToWords(number / 1000)));
+
+                number %= 1000;
+            }
+
+            if ((number / 100) > 0) {
+                var portugueseHundredsMap = new[] { "zero", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos" };
+
+                if (number == 100)
+                {
+                    if (parts.Count > 0)
+                    {
+                        parts.Add("e cem");
+                    }
+                    else
+                    {
+                        parts.Add("cem");
+                    }
+                }
+                else
+                {
+                    parts.Add(portugueseHundredsMap[(number / 100)]);
+                }
+
+                number %= 100;
+            }
+
+            if (number > 0)
+            {
+                if (parts.Count != 0)
+                    parts.Add("e");
+
+                var portugueseUnitsMap = new[] { "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove" };
+                var portugueseTensMap = new[] { "zero", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa" };
+
+                if (number < 20)
+                    parts.Add(portugueseUnitsMap[number]);
+                else
+                {
+                    var lastPart = portugueseTensMap[number / 10];
+                    if ((number % 10) > 0)
+                        lastPart += string.Format(" e {0}", portugueseUnitsMap[number % 10]);
+
+                    parts.Add(lastPart);
+                }
+            }
+
+            return string.Join(" ", parts.ToArray());
         }
     }
 }
