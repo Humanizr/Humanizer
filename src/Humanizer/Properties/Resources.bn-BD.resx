@@ -185,6 +185,7 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>শুন্য সময়</value>
+    <value>no time</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} সপ্তাহ</value>
