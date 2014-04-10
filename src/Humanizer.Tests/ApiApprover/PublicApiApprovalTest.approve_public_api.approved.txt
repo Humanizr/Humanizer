@@ -66,7 +66,7 @@ public class CasingExtensions
 public class Configurator
 {
     public Humanizer.DateTimeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
-    public Humanizer.Localisation.IFormatter Formatter { get; }
+    public Humanizer.Localisation.Formatters.IFormatter Formatter { get; }
 }
 
 public class DateHumanizeExtensions

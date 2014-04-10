@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Humanizer.Localisation;
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.roRo
@@ -17,81 +17,61 @@ namespace Humanizer.Tests.Localisation.roRo
         [Fact]
         public void RomanianTranslationIsCorrectForThreeHoursAgo()
         {
-            var threeHoursAgo = DateTime.UtcNow.AddHours(-3).Humanize();
-
-            Assert.Equal("acum 3 ore", threeHoursAgo);
+            DateHumanize.Verify("acum 3 ore", 3, TimeUnit.Hour, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor20HoursAgo()
         {
-            var threeHoursAgo = DateTime.UtcNow.AddHours(-20).Humanize();
-
-            Assert.Equal("acum 20 de ore", threeHoursAgo);
+            DateHumanize.Verify("acum 20 de ore", 20, TimeUnit.Hour, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor19MinutesAgo()
         {
-            var nineteenMinutesAgo = DateTime.UtcNow.AddMinutes(-19).Humanize();
-
-            Assert.Equal("acum 19 minute", nineteenMinutesAgo);
+            DateHumanize.Verify("acum 19 minute", 19, TimeUnit.Minute, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor44MinutesAgo()
         {
-            var fourtyFourMinutesAgo = DateTime.UtcNow.AddMinutes(-44).Humanize();
-
-            Assert.Equal("acum 44 de minute", fourtyFourMinutesAgo);
+            DateHumanize.Verify("acum 44 de minute", 44, TimeUnit.Minute, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor2SecondsAgo()
         {
-            var twoSecondsAgo = DateTime.UtcNow.AddSeconds(-2).Humanize();
-
-            Assert.Equal("acum 2 secunde", twoSecondsAgo);
+            DateHumanize.Verify("acum 2 secunde", 2, TimeUnit.Second, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor59SecondsAgo()
         {
-            var fiftyNineSecondsAgo = DateTime.UtcNow.AddSeconds(-59).Humanize();
-
-            Assert.Equal("acum 59 de secunde", fiftyNineSecondsAgo);
+            DateHumanize.Verify("acum 59 de secunde", 59, TimeUnit.Second, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor10DaysAgo()
         {
-            var tenDaysAgo = DateTime.UtcNow.AddDays(-10).Humanize();
-
-            Assert.Equal("acum 10 zile", tenDaysAgo);
+            DateHumanize.Verify("acum 10 zile", 10, TimeUnit.Day, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor23DaysAgo()
         {
-            var twentyThreeDaysAgo = DateTime.UtcNow.AddDays(-23).Humanize();
-
-            Assert.Equal("acum 23 de zile", twentyThreeDaysAgo);
+            DateHumanize.Verify("acum 23 de zile", 23, TimeUnit.Day, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor119YearsAgo()
         {
-            var oneHundredNineteenYearsAgo = DateTime.UtcNow.AddYears(-119).Humanize();
-
-            Assert.Equal("acum 119 ani", oneHundredNineteenYearsAgo);
+            DateHumanize.Verify("acum 119 ani", 119, TimeUnit.Year, Tense.Past);
         }
 
         [Fact]
         public void RomanianTranslationIsCorrectFor100YearsAgo()
         {
-            var hunderedYearsAgo = DateTime.UtcNow.AddYears(-100).Humanize();
-
-            Assert.Equal("acum 100 de ani", hunderedYearsAgo);
+            DateHumanize.Verify("acum 100 de ani", 100, TimeUnit.Year, Tense.Past);
         }
     }
 }
