@@ -2,6 +2,7 @@
   - [#143](https://github.com/MehdiK/Humanizer/pull/143): Added Russian translation for future DateTime, TimeSpan and Now
   - [#144](https://github.com/MehdiK/Humanizer/pull/144): Danish localization (strings, tests)
   - [#149](https://github.com/MehdiK/Humanizer/pull/149): Number to words localisation improvements
+  - [#170](https://github.com/MehdiK/Humanizer/pull/170): Added Italian language support to Resources (Date and Timespan humanization), ToWords and ToOrdinalWords extensions.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.18.1...master)
 
