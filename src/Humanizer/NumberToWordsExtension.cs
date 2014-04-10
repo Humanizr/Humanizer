@@ -25,12 +25,21 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToWords(this int number)
         {
-            Func<INumberToWordsConverter> converterFactory;
-            if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
+            return Converter.Convert(number);
+        }
+
+        private static INumberToWordsConverter Converter
+        {
+            get
             {
-                return converterFactory().Convert(number);
+                Func<INumberToWordsConverter> converterFactory;
+                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
+                {
+                    return converterFactory();
+                }
+
+                return new DefaultNumberToWordsConverter();
             }
-            return new EnglishNumberToWordsConverter().Convert(number);
         }
     }
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation
 {
-    internal class FarsiNumberToWordsConverter : INumberToWordsConverter
+    internal class FarsiNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] farsiHundredsMap = { "صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد" };
         private static readonly string[] farsiTensMap = { "صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود" };
         private static readonly string[] farsiUnitsMap = { "صفر", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه", "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده" };
 
-        public string Convert(int number)
+        public override string Convert(int number)
         {
             if (number < 0)
                 return string.Format("منفی {0}", Convert(-number));
@@ -45,11 +45,6 @@ namespace Humanizer.Localisation
                 parts.Add(farsiUnitsMap[number]);
 
             return string.Join(" و ", parts);
-        }
-
-        public string ConvertToOrdinal(int number)
-        {
-            throw new NotSupportedException();
         }
     }
 }

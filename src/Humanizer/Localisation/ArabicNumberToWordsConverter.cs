@@ -2,7 +2,7 @@
 
 namespace Humanizer.Localisation
 {
-    internal class ArabicNumberToWordsConverter : INumberToWordsConverter
+    internal class ArabicNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] Groups = { "مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون" };
         private static readonly string[] AppendedGroups = { "", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً" };
@@ -13,7 +13,7 @@ namespace Humanizer.Localisation
         private static readonly string[] AppendedTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن" };
         private static readonly string[] Twos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان" };
 
-        public string Convert(int number)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return "صفر";
@@ -110,11 +110,6 @@ namespace Humanizer.Localisation
             }
 
             return result.Trim();
-        }
-
-        public string ConvertToOrdinal(int number)
-        {
-            throw new NotSupportedException();
         }
     }
 }
