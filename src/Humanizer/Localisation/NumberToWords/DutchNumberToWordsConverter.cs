@@ -121,7 +121,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private string ReplaceNormalWordWithOrdinalWord(int number, int exceptionalNumber)
         {
-            return ReplaceNormalWordWithOrdinalWord(number, exceptionalNumber, Convert(exceptionalNumber));
+            return ReplaceNormalWordWithOrdinalWord(number, exceptionalNumber, ConvertToOrdinal(exceptionalNumber));
         }
 
         private string ReplaceNormalWordWithOrdinalWord(int number, int exceptionalNumber, string ordinalWord)
