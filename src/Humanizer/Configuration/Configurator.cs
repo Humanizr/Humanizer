@@ -2,6 +2,7 @@ using Humanizer.Localisation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Configuration
 {

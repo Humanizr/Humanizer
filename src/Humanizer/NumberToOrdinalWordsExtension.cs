@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Humanizer.Localisation.NumberToWords;
 
 namespace Humanizer
 {
@@ -15,62 +14,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToOrdinalWords(this int number)
         {
-            string towords;
-            // 9 => ninth
-            if (ExceptionNumbersToWords(number, out towords))
-                return towords;
-
-            // 21 => twenty first
-            if (number > 20)
-            {
-                string exceptionPart;
-                if (ExceptionNumbersToWords(number%10, out exceptionPart))
-                {
-                    var normalPart = number - number%10;
-                    towords = RemoveOnePrefix(normalPart.ToWords());
-                    return towords + " " + exceptionPart;
-                }
-            }
-
-            return NormalNumberToWords(number);
-        }
-
-        private static string NormalNumberToWords(int number)
-        {
-            string towords = number.ToWords().Replace('-', ' ');
-
-            towords = RemoveOnePrefix(towords);
-            // twenty => twentieth
-            if (towords.EndsWith("y"))
-                towords = towords.TrimEnd('y') + "ie";
-
-            return towords + "th";
-        }
-
-        private static string RemoveOnePrefix(string towords)
-        {
-            // one hundred => hundredth
-            if (towords.IndexOf("one", StringComparison.Ordinal) == 0)
-                towords = towords.Remove(0, 4);
-
-            return towords;
-        }
-
-        static bool ExceptionNumbersToWords(int number, out string words)
-        {
-            var exceptions = new Dictionary<int, string>
-            {
-                {1, "first"},
-                {2, "second"},
-                {3, "third"},
-                {4, "forth"},
-                {5, "fifth"},
-                {8, "eighth"},
-                {9, "ninth"},
-                {12, "twelfth"},
-            };
-
-            return exceptions.TryGetValue(number, out words);
+            return new EnglishNumberToWordsConverter().ConvertToOrdinal(number);
         }
     }
 }
