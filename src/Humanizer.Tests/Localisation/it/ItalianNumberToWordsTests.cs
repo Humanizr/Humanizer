@@ -4,9 +4,10 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.it
 {
-    public class NumberToWordsTests : AmbientCulture
+    public class ItalianNumberToWordsTests : AmbientCulture
     {
-        public NumberToWordsTests() : base("it")
+        public ItalianNumberToWordsTests()
+            : base("it")
         {
         }
 
@@ -38,7 +39,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(123456789, "centoventitremilioniquattrocentocinquantaseimilasettecentoottantanove")]
         [InlineData(1234567890, "unmiliardoduecentotrentaquattromilionicinquecentosessantasettemilaottocentonovanta")]
         [Theory]
-        public void ToWords(int number, string expected)
+        public void ItalianToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }

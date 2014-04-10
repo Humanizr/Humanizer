@@ -4,16 +4,16 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.it
 {
-    public class DateHumanizeTests : AmbientCulture
+    public class ItalianDateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests() : base("it") { }
+        public ItalianDateHumanizeTests() : base("it") { }
 
         [Theory]
         [InlineData(-10, "10 giorni fa")]
         [InlineData(-3, "3 giorni fa")]
         [InlineData(-2, "2 giorni fa")]
 		[InlineData(-1, "ieri")]
-        public void DaysAgo(int days, string expected)
+        public void ItalianDaysAgo(int days, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddDays(days).Humanize());
         }
@@ -23,7 +23,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(-3, "3 ore fa")]
         [InlineData(-2, "2 ore fa")]
         [InlineData(-1, "un'ora fa")]
-        public void HoursAgo(int hours, string expected)
+        public void ItalianHoursAgo(int hours, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddHours(hours).Humanize());
         }
@@ -33,7 +33,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(-3, "3 minuti fa")]
         [InlineData(-2, "2 minuti fa")]
         [InlineData(-1, "un minuto fa")]
-        public void MinutesAgo(int minutes, string expected)
+        public void ItalianMinutesAgo(int minutes, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddMinutes(minutes).Humanize());
         }
@@ -43,7 +43,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(-3, "3 mesi fa")]
         [InlineData(-2, "2 mesi fa")]
         [InlineData(-1, "un mese fa")]
-        public void MonthsAgo(int months, string expected)
+        public void ItalianMonthsAgo(int months, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddMonths(months).Humanize());
         }
@@ -53,7 +53,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(-3, "3 secondi fa")]
         [InlineData(-2, "2 secondi fa")]
         [InlineData(-1, "un secondo fa")]
-        public void SecondsAgo(int seconds, string expected)
+        public void ItalianSecondsAgo(int seconds, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddSeconds(seconds).Humanize());
         }
@@ -63,7 +63,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(-3, "3 anni fa")]
         [InlineData(-2, "2 anni fa")]
         [InlineData(-1, "un anno fa")]
-        public void YearsAgo(int years, string expected)
+        public void ItalianYearsAgo(int years, string expected)
         {
             Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
         }

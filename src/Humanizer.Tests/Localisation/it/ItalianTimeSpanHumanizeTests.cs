@@ -3,90 +3,90 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.it
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    public class ItalianTimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeTests() : base("it") {         }
+        public ItalianTimeSpanHumanizeTests() : base("it") { }
 
         [Fact]
-        public void TwoWeeks()
+        public void ItalianTwoWeeks()
         {
             Assert.Equal("2 settimane", TimeSpan.FromDays(14).Humanize());
         }
 
         [Fact]
-        public void OneWeek()
+        public void ItalianOneWeek()
         {
             Assert.Equal("una settimana", TimeSpan.FromDays(7).Humanize());
         }
 
         [Fact]
-        public void SixDays()
+        public void ItalianSixDays()
         {
             Assert.Equal("6 giorni", TimeSpan.FromDays(6).Humanize());
         }
 
         [Fact]
-        public void TwoDays()
+        public void ItalianTwoDays()
         {
             Assert.Equal("2 giorni", TimeSpan.FromDays(2).Humanize());
         }
 
         [Fact]
-        public void OneDay()
+        public void ItalianOneDay()
         {
             Assert.Equal("un giorno", TimeSpan.FromDays(1).Humanize());
         }
 
         [Fact]
-        public void TwoHours()
+        public void ItalianTwoHours()
         {
             Assert.Equal("2 ore", TimeSpan.FromHours(2).Humanize());
         }
 
         [Fact]
-        public void OneHour()
+        public void ItalianOneHour()
         {
             Assert.Equal("un'ora", TimeSpan.FromHours(1).Humanize());
         }
 
         [Fact]
-        public void TwoMinutes()
+        public void ItalianTwoMinutes()
         {
             Assert.Equal("2 minuti", TimeSpan.FromMinutes(2).Humanize());
         }
 
         [Fact]
-        public void OneMinute()
+        public void ItalianOneMinute()
         {
             Assert.Equal("un minuto", TimeSpan.FromMinutes(1).Humanize());
         }
 
         [Fact]
-        public void TwoSeconds()
+        public void ItalianTwoSeconds()
         {
             Assert.Equal("2 secondi", TimeSpan.FromSeconds(2).Humanize());
         }
 
         [Fact]
-        public void OneSecond()
+        public void ItalianOneSecond()
         {
             Assert.Equal("un secondo", TimeSpan.FromSeconds(1).Humanize());
         }
 
         [Fact]
-        public void TwoMilliseconds()
+        public void ItalianTwoMilliseconds()
         {
             Assert.Equal("2 millisecondi", TimeSpan.FromMilliseconds(2).Humanize());
         }
 
         [Fact]
-        public void OneMillisecond()
+        public void ItalianOneMillisecond()
         {
             Assert.Equal("un millisecondo", TimeSpan.FromMilliseconds(1).Humanize());
         }
 
         [Fact]
-        public void NoTime()
+        public void ItalianNoTime()
         {
             // This one doesn't make a lot of sense but ... w/e
             var notime = TimeSpan.Zero;
