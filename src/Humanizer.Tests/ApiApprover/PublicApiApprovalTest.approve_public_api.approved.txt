@@ -65,12 +65,30 @@ public class CasingExtensions
 
 public class Configurator
 {
+    public Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
     public Humanizer.Localisation.Formatters.IFormatter Formatter { get; }
 }
 
 public class DateHumanizeExtensions
 {
     public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst) { }
+}
+
+public class DefaultDateTimeHumanizeStrategy
+{
+    public DefaultDateTimeHumanizeStrategy() { }
+    public string Humanize(System.DateTime input, System.DateTime comparisonBase) { }
+}
+
+public interface IDateTimeHumanizeStrategy
+{
+    string Humanize(System.DateTime input, System.DateTime comparisonBase);
+}
+
+public class PrecisionDateTimeHumanizeStrategy
+{
+    public PrecisionDateTimeHumanizeStrategy(double precision) { }
+    public string Humanize(System.DateTime input, System.DateTime comparisonBase) { }
 }
 
 public class EnumDehumanizeExtensions
