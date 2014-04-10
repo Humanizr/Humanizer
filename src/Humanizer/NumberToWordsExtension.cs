@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Humanizer.Localisation.NumberToWords;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Humanizer.Localisation.NumberToWords;
 
 namespace Humanizer {
     /// <summary>
@@ -14,7 +14,8 @@ namespace Humanizer {
                 { "en", () => new EnglishNumberToWordsConverter() },
                 { "ar", () => new ArabicNumberToWordsConverter() },
                 { "fa", () => new FarsiNumberToWordsConverter() },
-                { "es", () => new SpanishNumberToWordsConverter() }
+                { "es", () => new SpanishNumberToWordsConverter() },
+                { "pl", () => new PolishNumberToWordsConverter() }
             };
 
         /// <summary>
