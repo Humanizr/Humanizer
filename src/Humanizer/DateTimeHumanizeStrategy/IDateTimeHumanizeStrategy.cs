@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Humanizer.DateTimeStrategy
+namespace Humanizer.DateTimeHumanizeStrategy
 {
     public interface IDateTimeHumanizeStrategy
     {

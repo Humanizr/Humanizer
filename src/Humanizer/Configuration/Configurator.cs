@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Humanizer.DateTimeStrategy;
+using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Configuration

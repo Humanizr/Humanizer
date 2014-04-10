@@ -2,12 +2,12 @@ using System;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
-namespace Humanizer.DateTimeStrategy
+namespace Humanizer.DateTimeHumanizeStrategy
 {
     /// <summary>
     ///     The default distance of time in works calculator
     /// </summary>
-    public class DefaultDateTimeStrategy : IDateTimeHumanizeStrategy
+    public class DefaultDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy
     {
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
         /// <summary>

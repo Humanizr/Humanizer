@@ -1,6 +1,6 @@
 ﻿using System;
 using Humanizer.Configuration;
-using Humanizer.DateTimeStrategy;
+using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation;
 using Xunit;
 
@@ -30,9 +30,9 @@ namespace Humanizer.Tests
         public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null)
         {
             if (precision.HasValue)
-                Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeStrategy(precision.Value);
+                Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision.Value);
             else
-                Configurator.DateTimeHumanizeStrategy = new DefaultDateTimeStrategy();
+                Configurator.DateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
 
             var deltaFromNow = new TimeSpan();
             unit = Math.Abs(unit);

@@ -2,12 +2,12 @@ using System;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
-namespace Humanizer.DateTimeStrategy
+namespace Humanizer.DateTimeHumanizeStrategy
 {
     /// <summary>
     /// 
     /// </summary>
-    public class PrecisionDateTimeStrategy : IDateTimeHumanizeStrategy
+    public class PrecisionDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy
     {
         private readonly double _precision;
 
@@ -15,7 +15,7 @@ namespace Humanizer.DateTimeStrategy
         /// Constructs a precision-based calculator for distance of time with default precision 0.75.
         /// </summary>
         /// <param name="precision">precision of approximation, if not provided  0.75 will be used as a default precision.</param>
-        public PrecisionDateTimeStrategy(double precision = .75)
+        public PrecisionDateTimeHumanizeStrategy(double precision = .75)
         {
             _precision = precision;
         }
