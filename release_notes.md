@@ -1,6 +1,7 @@
 ###In Development
   - [#143](https://github.com/MehdiK/Humanizer/pull/143): Added Russian translation for future DateTime, TimeSpan and Now
   - [#144](https://github.com/MehdiK/Humanizer/pull/144): Danish localization (strings, tests)
+  - [#149](https://github.com/MehdiK/Humanizer/pull/149): Number to words localisation improvements
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.18.1...master)
 
