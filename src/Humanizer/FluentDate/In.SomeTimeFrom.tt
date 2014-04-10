@@ -28,10 +28,11 @@ namespace Humanizer
 		var month = "Month" + plural;
 		var year = "Year" + plural;
   
+		var converter= new Humanizer.Localisation.NumberToWords.EnglishNumberToWordsConverter();
   #> 
         /// <summary>
         /// </summary>
-		public static class <#= i.ToWords().Dehumanize() #>
+		public static class <#= converter.Convert(i).Dehumanize() #>
 		{
 			/// <summary>
 			/// <#= i #> seconds from now
