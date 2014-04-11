@@ -1,4 +1,7 @@
 ﻿using Humanizer.Localisation.NumberToWords;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Humanizer
 {
@@ -7,6 +10,13 @@ namespace Humanizer
     /// </summary>
     public static class NumberToOrdinalWordsExtension
     {
+        private static readonly IDictionary<string, Func<INumberToWordsConverter>> ConverterFactories =
+            new Dictionary<string, Func<INumberToWordsConverter>>
+            {
+                {"en", () => new EnglishNumberToWordsConverter()},
+                {"fr", () => new FrenchNumberToWordsConverter()}
+            };
+
         /// <summary>
         /// 1.ToOrdinalWords() -> "first"
         /// </summary>
@@ -14,7 +24,19 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToOrdinalWords(this int number)
         {
-            return new EnglishNumberToWordsConverter().ConvertToOrdinal(number);
+            return Converter.ConvertToOrdinal(number);
+        }
+
+        private static INumberToWordsConverter Converter 
+        {
+            get 
+            {
+                Func<INumberToWordsConverter> converterFactory;
+                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
+                    return converterFactory();
+
+                return new DefaultNumberToWordsConverter();
+            }
         }
     }
 }

@@ -3,8 +3,10 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class NumberToOrdinalWordsTests
+    public class NumberToOrdinalWordsTests : AmbientCulture
     {
+        public NumberToOrdinalWordsTests() : base("en-US"){ }
+
         [Theory]
         [InlineData(0, "zeroth")]
         [InlineData(1, "first")]

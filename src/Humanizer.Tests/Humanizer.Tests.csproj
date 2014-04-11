@@ -83,6 +83,8 @@
     <Compile Include="Localisation\fr-BE\DateHumanizeTests.cs" />
     <Compile Include="Localisation\fr-BE\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\fr\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\fr\NumberToOrdinalWordsTests.cs" />
+    <Compile Include="Localisation\fr\NumberToWordsTests.cs" />
     <Compile Include="Localisation\fr\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\invariant\NumberToWordsTests.cs" />
     <Compile Include="Localisation\invariant\ToQuantityTests.cs" />
