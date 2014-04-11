@@ -14,8 +14,8 @@ namespace Humanizer.Localisation.NumberToWords
             Miliard = 1000000000,//10^9
         }
 
-        private static readonly string Negative = "minus";
-        private static readonly string Zero = "zero";
+        private const string Negative = "minus";
+        private const string Zero = "zero";
 
         private static string ConvertNumberUnderThousand(Numeral numeral, int number)
         {
@@ -48,6 +48,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             return result.ToString();
         }
+
         private static int GetMappingIndex(int number)
         {
             if (number == 1)
@@ -66,6 +67,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             return 2;//genitive
         }
+       
         private static string GetSuffix(Numeral numeral, int num)
         {
             switch (numeral)
@@ -110,6 +112,5 @@ namespace Humanizer.Localisation.NumberToWords
 
             return result.ToString().Trim();
         }
-
     }
 }
