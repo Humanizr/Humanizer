@@ -104,26 +104,26 @@ namespace Humanizer.Tests.Localisation.hu
         }
 
         [Theory]
-        [InlineData(1, "one month from now")]
-        [InlineData(10, "10 months from now")]
-        [InlineData(11, "11 months from now")]
-        [InlineData(12, "one year from now")]
+        [InlineData(1, "egy hónap múlva")]
+        [InlineData(10, "10 hónap múlva")]
+        [InlineData(11, "11 hónap múlva")]
+        [InlineData(12, "egy év múlva")]
         public void MonthsFromNow(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
         }
 
         [Theory]
-        [InlineData(1, "one year ago")]
-        [InlineData(2, "2 years ago")]
+        [InlineData(1, "egy éve")]
+        [InlineData(2, "2 éve")]
         public void YearsAgo(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
 
         [Theory]
-        [InlineData(1, "one year from now")]
-        [InlineData(2, "2 years from now")]
+        [InlineData(1, "egy év múlva")]
+        [InlineData(2, "2 év múlva")]
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);

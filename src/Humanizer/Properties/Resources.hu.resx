@@ -160,7 +160,7 @@
     <value>{0} óra</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} miliszekundum</value>
+    <value>{0} ezredmásodperc</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
     <value>{0} perc</value>
@@ -175,7 +175,7 @@
     <value>1 óra</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 miliszekundum</value>
+    <value>1 ezredmásodperc</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 perc</value>
@@ -202,7 +202,7 @@
     <value>{0} perc múlva</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} hónap műlva</value>
+    <value>{0} hónap múlva</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>{0} másodperc múlva</value>
