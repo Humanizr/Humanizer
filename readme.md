@@ -656,17 +656,24 @@ I have also flagged some of the easier issues as 'jump in' so you can start with
 I use [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. 
 So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue and send a PR.
 
-Pull requests are code reviewed. Here is what I look for in your pull request:
+Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
 
- - Clean implementation
- - Very little or no comments because comments shouldn't be needed if you write clean code
- - Xml documentation for new extensions or updating the existing documentation when you make a change
- - Proper unit test coverage 
- - Adherence to the existing coding styles
- - Updated readme if you change an existing feature or add something
- - Add an entry in the release_notes.md file in the 'In Development' section with a link to your PR link and description of what's changed. Please follow the wording style for the description.
+ - [ ] Implementation is clean
+ - [ ] Code adheres to the existing coding standards; e.g. no curlies for one-line blocks & no redundant empty lines between methods or code blocks
+ - [ ] No ReSharper warnings
+ - [ ] There is proper unit test coverage
+ - [ ] If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
+ - [ ] There is very little or no comments (because comments shouldn't be needed if you write clean code)
+ - [ ] Xml documentation is added/updated for the addition/change
+ - [ ] Your PR is (re)based on top of the latest commits (more info below)
+ - [ ] Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
+ - [ ] Readme is updated if you change an existing feature or add a new one
+ - [ ] An entry is added in the release_notes.md file in the 'In Development' section with a link to your PR and a description of what's changed. Please follow the wording style for the description.
 
-Also please link to the issue(s) you're fixing from your PR description.
+Please rebase your code on top of the latest commits. 
+Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts. 
+Also before sending the pull request pleast rebase your code as there is a chance there has been a few commits pushed up after you pulled last. 
+Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912#the-workflow) if you're new to git.
 
 ###<a id="need-your-help-with-localisation">Need your help with localisation</a>
 One area Humanizer could always use your help is localisation. 
