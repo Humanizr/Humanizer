@@ -1,9 +1,10 @@
-﻿using Humanizer.Localisation.NumberToWords;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.Localisation.NumberToWords;
 
-namespace Humanizer {
+namespace Humanizer
+{
     /// <summary>
     /// Transform a number into words; e.g. 1 => one
     /// </summary>
@@ -15,7 +16,8 @@ namespace Humanizer {
                 { "ar", () => new ArabicNumberToWordsConverter() },
                 { "fa", () => new FarsiNumberToWordsConverter() },
                 { "es", () => new SpanishNumberToWordsConverter() },
-                { "pl", () => new PolishNumberToWordsConverter() }
+                { "pl", () => new PolishNumberToWordsConverter() },
+                { "pt-BR", () => new BrazilianPortugueseNumberToWordsConverter() }
             };
 
         /// <summary>
@@ -33,6 +35,10 @@ namespace Humanizer {
             get 
             {
                 Func<INumberToWordsConverter> converterFactory;
+
+                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out converterFactory))
+                    return converterFactory();
+
                 if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
                     return converterFactory();
 

@@ -1,9 +1,11 @@
 ###In Development
   - [#171](https://github.com/MehdiK/Humanizer/pull/171): T4-Template fix: Using EnglishNumberToWordsConverter instead of 'ToWords()' while dogfooding the template with the library.
+  - [#174](https://github.com/MehdiK/Humanizer/pull/174): Changed the NumberToWords Converter to find the right converter by the language Name as well.
   - [#165](https://github.com/MehdiK/Humanizer/pull/165): Added precision based `DateTime.Humanize` strategy
   - [#155](https://github.com/MehdiK/Humanizer/pull/155): French and Belgian French localisation
   - [#151](https://github.com/MehdiK/Humanizer/pull/151): Added Spanish ToWords Translations
   - [#172](https://github.com/MehdiK/Humanizer/pull/172): Added Polish translation for ToWords
+  - [#174](https://github.com/MehdiK/Humanizer/pull/174): Fixed the NumberToWords converter to find the right converter by the language Name as well
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...master)
 
