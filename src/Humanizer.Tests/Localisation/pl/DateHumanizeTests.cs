@@ -1,4 +1,5 @@
 ﻿using Humanizer.Localisation;
+using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.pl
@@ -163,6 +164,12 @@ namespace Humanizer.Tests.Localisation.pl
         public void YearsAgo(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
+        }
+
+        [Fact]
+        public void Now()
+        {
+            DateHumanize.Verify("teraz", 0, TimeUnit.Day, Tense.Past);
         }
     }
 }
