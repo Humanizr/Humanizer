@@ -65,6 +65,8 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GrammaticalCase.cs" />
+    <Compile Include="GrammaticalGender.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
