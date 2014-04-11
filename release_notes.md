@@ -4,6 +4,7 @@
   - [#155](https://github.com/MehdiK/Humanizer/pull/155): French and Belgian French localisation
   - [#151](https://github.com/MehdiK/Humanizer/pull/151): Added Spanish ToWords Translations
   - [#172](https://github.com/MehdiK/Humanizer/pull/172): Added Polish translation for ToWords
+  - [#174](https://github.com/MehdiK/Humanizer/pull/174): Fixed the NumberToWords converter to find the right converter by the language Name as well
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...master)
 
