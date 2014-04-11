@@ -9,13 +9,13 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve" };
         private static readonly string[] TensMap = { "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
 
-        public string Convert(int number)
+        public string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
                 return "cero";
 
             if (number < 0)
-                return string.Format("menos {0}", Convert(Math.Abs(number)));
+                return string.Format("menos {0}", Convert(Math.Abs(number), gender));
 
             var parts = new List<string>();
 
@@ -23,7 +23,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(number/1000000000 == 1
                     ? string.Format("mil millones")
-                    : string.Format("{0} mil millones", Convert(number/1000000000)));
+                    : string.Format("{0} mil millones", Convert(number / 1000000000, gender)));
 
                 number %= 1000000000;
             }
@@ -32,7 +32,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(number/1000000 == 1
                     ? string.Format("millón")
-                    : string.Format("{0} millones", Convert(number/1000000)));
+                    : string.Format("{0} millones", Convert(number / 1000000, gender)));
 
                 number %= 1000000;
             }
@@ -41,7 +41,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(number/1000 == 1
                     ? string.Format("mil")
-                    : string.Format("{0} mil", Convert(number/1000)));
+                    : string.Format("{0} mil", Convert(number / 1000, gender)));
 
                 number %= 1000;
             }

@@ -103,6 +103,25 @@ public class EnumHumanizeExtensions
     public string Humanize(System.Enum input, Humanizer.LetterCasing casing) { }
 }
 
+public enum GrammaticalCase
+{
+    Accusative,
+    Dative,
+    Genitive,
+    Instrumental,
+    Nominative,
+    Prepositional,
+    value__,
+}
+
+public enum GrammaticalGender
+{
+    Feminine,
+    Masculine,
+    Neuter,
+    value__,
+}
+
 public class In
 {
     public In() { }
@@ -183,7 +202,7 @@ public interface IFormatter
 
 public interface INumberToWordsConverter
 {
-    string Convert(int number);
+    string Convert(int number, Humanizer.GrammaticalGender gender);
     string ConvertToOrdinal(int number);
 }
 
@@ -237,7 +256,7 @@ public class NumberToTimeSpanExtensions
 public class NumberToWordsExtension
 {
     public string ToOrdinalWords(int number) { }
-    public string ToWords(int number) { }
+    public string ToWords(int number, Humanizer.GrammaticalGender gender) { }
 }
 
 public class On

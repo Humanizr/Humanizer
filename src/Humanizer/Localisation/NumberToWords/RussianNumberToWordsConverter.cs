@@ -44,13 +44,13 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public override string Convert(int number)
+        public override string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
                 return "ноль";
 
             if (number < 0)
-                return string.Format("минус {0}", Convert(-number));
+                return string.Format("минус {0}", Convert(-number, gender));
 
             var parts = new List<string>();
 
@@ -83,7 +83,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number > 0)
             {
-                parts.Add(ToWordsUnderThousand(number, GrammaticalGender.Masculine));
+                parts.Add(ToWordsUnderThousand(number, gender));
             }
 
             return string.Join(" ", parts.ToArray());
