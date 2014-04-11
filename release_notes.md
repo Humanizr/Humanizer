@@ -4,6 +4,7 @@
   - [#155](https://github.com/MehdiK/Humanizer/pull/155): French and Belgian French localisation
   - [#151](https://github.com/MehdiK/Humanizer/pull/151): Added Spanish ToWords Translations
   - [#172](https://github.com/MehdiK/Humanizer/pull/172): Added Polish translation for ToWords
+  - [#184](https://github.com/Mehdik/Humanizer/pull/184): Fixed spelling error with forth/fourth in EnglishNumberToWordsConverter
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...master)
 
