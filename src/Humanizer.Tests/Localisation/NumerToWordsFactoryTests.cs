@@ -15,7 +15,7 @@ namespace Humanizer.Tests.Localisation
             using (new AmbientCulture("pt-BR"))
             {
                 string retorno = 1000000000.ToWords();
-                Assert.NotEqual("one billion",retorno);
+                Assert.NotEqual("1000000000",retorno);
             }
         }
 
@@ -26,7 +26,7 @@ namespace Humanizer.Tests.Localisation
             using (new AmbientCulture("ar"))
             {
                 string retorno = 1000000000.ToWords();
-                Assert.NotEqual("one billion", retorno);
+                Assert.NotEqual("1000000000", retorno);
             }
         }
     }
