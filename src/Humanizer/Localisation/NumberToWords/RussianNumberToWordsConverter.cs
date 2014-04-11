@@ -1,33 +1,10 @@
 ﻿using System.Collections.Generic;
+using Humanizer.Localisation.GrammaticalNumber;
 
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class RussianNumberToWordsConverter : DefaultNumberToWordsConverter
     {
-        private enum GrammaticalNumber
-        {
-            Singular,
-            Paucal,
-            Plural
-        }
-
-        private static GrammaticalNumber ToRussianGrammaticalNumber(int number)
-        {
-            var mod100 = number % 100;
-            if (mod100 / 10 != 1)
-            {
-                var mod10 = number % 10;
-
-                if (mod10 == 1) // 1, 21, 31, 41 ... 91, 101, 121 ..
-                    return GrammaticalNumber.Singular;
-
-                if (mod10 > 1 && mod10 < 5) // 2, 3, 4, 22, 23, 24 ...
-                    return GrammaticalNumber.Paucal;
-            }
-
-            return GrammaticalNumber.Plural;
-        }
-
         private static string ToWordsUnderThousand(int number, GrammaticalGender gender)
         {
             var parts = new List<string>();
@@ -81,7 +58,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (milliards > 0)
             {
                 var map = new[] { "миллиард", "миллиарда", "миллиардов" };
-                var grammaticalNumber = ToRussianGrammaticalNumber(milliards);
+                var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(milliards);
                 parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(milliards, GrammaticalGender.Masculine), map[(int)grammaticalNumber]));
                 number %= 1000000000;
             }
@@ -90,7 +67,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (millions > 0)
             {
                 var map = new[] { "миллион", "миллиона", "миллионов" };
-                var grammaticalNumber = ToRussianGrammaticalNumber(millions);
+                var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(millions);
                 parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(millions, GrammaticalGender.Masculine), map[(int)grammaticalNumber]));
                 number %= 1000000;
             }
@@ -99,7 +76,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (thousands > 0)
             {
                 var map = new[] { "тысяча", "тысячи", "тысячь" };
-                var grammaticalNumber = ToRussianGrammaticalNumber(thousands);
+                var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(thousands);
                 parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(thousands, GrammaticalGender.Feminine), map[(int)grammaticalNumber]));
                 number %= 1000;
             }
