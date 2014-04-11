@@ -29,11 +29,6 @@ namespace Humanizer.Tests.Localisation
                 Assert.NotEqual("1000000000", retorno);
             }
         }
-    }
-}
-                Assert.NotEqual("one billion",retorno);
-            }
-        }
 
         [Fact]
         public void CanGetTwoLetterISOLanguageSpecificFactory()
@@ -42,7 +37,7 @@ namespace Humanizer.Tests.Localisation
             using (new AmbientCulture("ar"))
             {
                 string retorno = 1000000000.ToWords();
-                Assert.NotEqual("one billion", retorno);
+                Assert.NotEqual("1000000000", retorno);
             }
         }
     }
