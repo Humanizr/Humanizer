@@ -112,7 +112,7 @@ By default the `'…'` character is used to truncate strings. The advantage of u
 "Long text to truncate".Truncate(10, "---") => "Long te---"
 ```
 
-The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples both have an overload that allow you to specify the `ITruncator` instance to use for the truncation. Here are examples on how to use the three provided truncators:
+The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. There are three more truncator strategies available: one for a fixed number of (alpha-numerical) characters, one for a fixed number of words and one for right justified fixed length. To use a specific truncator when truncating, the three `Truncate` methods shown in the previous examples all have an overload that allow you to specify the `ITruncator` instance to use for the truncation. Here are examples on how to use the four provided truncators:
 
 ```c#
 "Long text to truncate".Truncate(10, Truncator.FixedLength) => "Long text…"
@@ -123,6 +123,9 @@ The default truncation strategy, `Truncator.FixedLength`, is to truncate the inp
 
 "Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "Long text…"
 "Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "Long text---"
+
+"Long text to truncate".Truncate(10, Truncator.RightJustifiedFixedLength) => "… truncate"
+"Long text to truncate".Truncate(10, "---", Truncator.RightJustifiedFixedLength) => "---runcate"
 ```
 
 Note that you can also use create your own truncator by having a class implement the `ITruncator` interface.
