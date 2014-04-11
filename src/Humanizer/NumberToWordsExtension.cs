@@ -22,12 +22,15 @@ namespace Humanizer {
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <returns></returns>
-        public static string ToWords(this int number) {
+        public static string ToWords(this int number) 
+        {
             return Converter.Convert(number);
         }
 
-        private static INumberToWordsConverter Converter {
-            get {
+        private static INumberToWordsConverter Converter 
+        {
+            get 
+            {
                 Func<INumberToWordsConverter> converterFactory;
                 if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
                     return converterFactory();

@@ -81,7 +81,8 @@ namespace Humanizer {
             return string.Join(" ", parts.ToArray());
         }
 
-        public string ConvertToOrdinal(int number) {
+        public string ConvertToOrdinal(int number) 
+        {
             throw new NotImplementedException();
         }
     }
