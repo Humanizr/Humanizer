@@ -20,37 +20,37 @@ namespace Humanizer.Localisation.NumberToWords
             {12, "twelfth"},
         };
 
-        public string Convert(int number)
+        public string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
                 return "zero";
 
             if (number < 0)
-                return string.Format("minus {0}", Convert(-number));
+                return string.Format("minus {0}", Convert(-number, gender));
 
             var parts = new List<string>();
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0} billion", Convert(number / 1000000000)));
+                parts.Add(string.Format("{0} billion", Convert(number / 1000000000, gender)));
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0} million", Convert(number / 1000000)));
+                parts.Add(string.Format("{0} million", Convert(number / 1000000, gender)));
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(string.Format("{0} thousand", Convert(number / 1000)));
+                parts.Add(string.Format("{0} thousand", Convert(number / 1000, gender)));
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(string.Format("{0} hundred", Convert(number / 100)));
+                parts.Add(string.Format("{0} hundred", Convert(number / 100, gender)));
                 number %= 100;
             }
 
@@ -88,7 +88,7 @@ namespace Humanizer.Localisation.NumberToWords
                 if (ExceptionNumbersToWords(number%10, out exceptionPart))
                 {
                     var normalPart = number - number%10;
-                    towords = RemoveOnePrefix(Convert(normalPart));
+                    towords = RemoveOnePrefix(Convert(normalPart, GrammaticalGender.Masculine));
                     return towords + " " + exceptionPart;
                 }
             }
@@ -98,7 +98,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private string NormalNumberToWords(int number)
         {
-            string towords = Convert(number).Replace('-', ' ');
+            string towords = Convert(number, GrammaticalGender.Masculine).Replace('-', ' ');
 
             towords = RemoveOnePrefix(towords);
             // twenty => twentieth

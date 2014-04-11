@@ -86,7 +86,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        public override string Convert(int number)
+        public override string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
                 return Zero;

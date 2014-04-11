@@ -7,6 +7,7 @@ namespace Humanizer.Tests.Localisation.ruRU
     {
         public NumberToWordsTests() : base("ru-RU") { }
 
+        [Theory]
         [InlineData(0, "ноль")]
         [InlineData(1, "один")]
         [InlineData(10, "десять")]
@@ -49,8 +50,6 @@ namespace Humanizer.Tests.Localisation.ruRU
         [InlineData(100000000, "сто миллионов")]
         [InlineData(1000000000, "один миллиард")]
         [InlineData(2000000000, "два миллиарда")]
-        //[InlineData(5000000000, "пять миллиардов")]
-
         [InlineData(122, "сто двадцать два")]
         [InlineData(3501, "три тысячи пятьсот один")]
         [InlineData(111, "сто одиннадцать")]
@@ -62,10 +61,18 @@ namespace Humanizer.Tests.Localisation.ruRU
         [InlineData(751633617, "семьсот пятьдесят один миллион шестьсот тридцать три тысячи шестьсот семнадцать")]
         [InlineData(1111111118, "один миллиард сто одиннадцать миллионов сто одиннадцать тысячь сто восемнадцать")]
         [InlineData(-751633617, "минус семьсот пятьдесят один миллион шестьсот тридцать три тысячи шестьсот семнадцать")]
-        [Theory]
         public void ToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(122, "сто двадцать две", GrammaticalGender.Feminine)]
+        [InlineData(3501, "три тысячи пятьсот одна", GrammaticalGender.Feminine)]
+        [InlineData(3501, "три тысячи пятьсот одно", GrammaticalGender.Neuter)]
+        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
+        {
+            Assert.Equal(expected, number.ToWords(gender));
         }
     }
 }
