@@ -15,7 +15,8 @@ namespace Humanizer
             {
                 { "en", () => new EnglishNumberToWordsConverter() },
                 { "ar", () => new ArabicNumberToWordsConverter() },
-                { "fa", () => new FarsiNumberToWordsConverter() }
+                { "fa", () => new FarsiNumberToWordsConverter() },
+                { "pt-BR", () => new BrazilianPortugueseNumberToWordsConverter() },
             };
 
         /// <summary>
@@ -33,6 +34,10 @@ namespace Humanizer
             get
             {
                 Func<INumberToWordsConverter> converterFactory;
+
+                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out converterFactory))
+                    return converterFactory();
+
                 if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
                     return converterFactory();
 
