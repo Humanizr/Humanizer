@@ -568,49 +568,63 @@ You may find an Asp.Net MVC sample [in the code](https://github.com/MehdiK/Human
 This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
 ```C#
-public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.Mvc;
+using Humanizer;
+
+namespace YourApp
 {
-    protected override ModelMetadata CreateMetadata(
-        IEnumerable<Attribute> attributes,
-        Type containerType,
-        Func<object> modelAccessor,
-        Type modelType,
-        string propertyName)
+    public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
     {
-        var propertyAttributes = attributes.ToList();
-        var modelMetadata = base.CreateMetadata(propertyAttributes, containerType, modelAccessor, modelType, propertyName);
-    
-        if (IsTransformRequired(modelMetadata, propertyAttributes))
-            modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize();
-    
-        return modelMetadata;
-    }
-    
-    private static bool IsTransformRequired(ModelMetadata modelMetadata, IList<Attribute> propertyAttributes)
-    {
-        if (string.IsNullOrEmpty(modelMetadata.PropertyName))
-            return false;
-    
-        if (propertyAttributes.OfType<DisplayNameAttribute>().Any())
-            return false;
-    
-        if (propertyAttributes.OfType<DisplayAttribute>().Any())
-            return false;
-    
-        return true;
+        protected override ModelMetadata CreateMetadata(
+            IEnumerable<Attribute> attributes,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName)
+        {
+            var propertyAttributes = attributes.ToList();
+            var modelMetadata = base.CreateMetadata(propertyAttributes, containerType, modelAccessor, modelType, propertyName);
+        
+            if (IsTransformRequired(modelMetadata, propertyAttributes))
+                modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize();
+        
+            return modelMetadata;
+        }
+        
+        private static bool IsTransformRequired(ModelMetadata modelMetadata, IList<Attribute> propertyAttributes)
+        {
+            if (string.IsNullOrEmpty(modelMetadata.PropertyName))
+                return false;
+        
+            if (propertyAttributes.OfType<DisplayNameAttribute>().Any())
+                return false;
+        
+            if (propertyAttributes.OfType<DisplayAttribute>().Any())
+                return false;
+        
+            return true;
+        }
     }
 }
 ```
 
-This class calls the base class to extract the metadata and then, if required, humanizes the property name. It is checking if the property already has a `DisplayName` or `Display` attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. For other properties it will Humanize the property name. That is all.
+This class calls the base class to extract the metadata and then, if required, humanizes the property name. 
+It is checking if the property already has a `DisplayName` or `Display` attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. 
+For other properties it will Humanize the property name. That is all.
 
-Now I need to register this metadata provider with Asp.Net MVC:
+Now you need to register this metadata provider with Asp.Net MVC. 
+Make sure you use `System.Web.Mvc.ModelMetadataProviders`, and not `System.Web.ModelBinding.ModelMetadataProviders`:
 
 ```C#
 ModelMetadataProviders.Current = new HumanizerMetadataProvider();
 ```
 
-... and now I can replace:
+... and now you can replace:
 
 ```C#
 public class RegisterModel
