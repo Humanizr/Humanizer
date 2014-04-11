@@ -4,13 +4,6 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class RussianNumberToWordsConverter : DefaultNumberToWordsConverter
     {
-        private enum GrammaticalGender
-        {
-            Masculine,
-            Feminine,
-            Neuter
-        }
-
         private enum GrammaticalNumber
         {
             Singular,
