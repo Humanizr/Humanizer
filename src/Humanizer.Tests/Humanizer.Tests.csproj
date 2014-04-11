@@ -80,6 +80,10 @@
     <Compile Include="Localisation\cs\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\da\DateHumanizeTests.cs" />
     <Compile Include="Localisation\da\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\fr-BE\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\fr-BE\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\fr\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\fr\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\nb-NO\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\pl\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pl\TimeSpanHumanizeTests.cs" />

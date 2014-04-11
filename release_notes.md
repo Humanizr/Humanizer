@@ -1,6 +1,7 @@
 ###In Development
   - [#171](https://github.com/MehdiK/Humanizer/pull/171): T4-Template fix: Using EnglishNumberToWordsConverter instead of 'ToWords()' while dogfooding the template with the library.
   - [#165](https://github.com/MehdiK/Humanizer/pull/165): Added precision based `DateTime.Humanize` strategy
+  - [#155](https://github.com/MehdiK/Humanizer/pull/155): French and Belgian French localisation
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...master)
 
@@ -9,7 +10,7 @@
   - [#143](https://github.com/MehdiK/Humanizer/pull/143): Added Russian translation for future DateTime, TimeSpan and Now
   - [#144](https://github.com/MehdiK/Humanizer/pull/144): Added Danish localization (strings, tests)
   - [#146](https://github.com/MehdiK/Humanizer/pull/146): Added Spanish translation for future DateTime, TimeSpan and Now
-
+           
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.18.1...v1.19.1)
 
 ###v1.18.1 - 2014-04-09
