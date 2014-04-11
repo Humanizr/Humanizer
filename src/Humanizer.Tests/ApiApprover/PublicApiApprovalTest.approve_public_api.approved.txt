@@ -224,11 +224,6 @@ public class NoMatchFoundException
     public NoMatchFoundException(string message, System.Exception inner) { }
 }
 
-public class NumberToOrdinalWordsExtension
-{
-    public string ToOrdinalWords(int number) { }
-}
-
 public class NumberToTimeSpanExtensions
 {
     public System.TimeSpan Days(int days) { }
@@ -241,6 +236,7 @@ public class NumberToTimeSpanExtensions
 
 public class NumberToWordsExtension
 {
+    public string ToOrdinalWords(int number) { }
     public string ToWords(int number) { }
 }
 
