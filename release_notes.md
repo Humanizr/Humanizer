@@ -1,10 +1,11 @@
 ###In Development
+  - [#147](https://github.com/MehdiK/Humanizer/pull/147): Added Russian translation for ToWords
+
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
 
 ###v1.20.15 - 2014-04-12
   - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored `ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
   - [#193](https://github.com/Mehdik/Humanizer/pull/193): Fixed the NullException error on DateTime.Humanize
-  - [#143](https://github.com/MehdiK/Humanizer/pull/143): Added Russian translation for future DateTime, TimeSpan and Now
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...v1.20.15)
 
