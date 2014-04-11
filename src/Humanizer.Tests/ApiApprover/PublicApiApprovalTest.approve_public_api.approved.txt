@@ -181,13 +181,6 @@ public interface IFormatter
     string TimeSpanHumanize_Zero();
 }
 
-public class EnglishNumberToWordsConverter
-{
-    public EnglishNumberToWordsConverter() { }
-    public string Convert(int number) { }
-    public string ConvertToOrdinal(int number) { }
-}
-
 public interface INumberToWordsConverter
 {
     string Convert(int number);
