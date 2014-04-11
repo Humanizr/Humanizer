@@ -1,33 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
+﻿using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation
 {
     public class NumerToWordsFactoryTests
     {
-        [Fact]
-        public void CanGetRFCStandardLanguageSpecificFactory()
+        [Theory]
+        [InlineData("1000000000", 1000000000)]
+        public void CanGetTwoLetterISOLanguageSpecificFactory(string notExpected, int number)
         {
-
-            using (new AmbientCulture("pt-BR"))
+            using (new AmbientCulture("ar"))
             {
-                string retorno = 1000000000.ToWords();
-                Assert.NotEqual("1000000000",retorno);
+                string result = number.ToWords();
+                Assert.NotEqual(notExpected, result);
             }
         }
 
-        [Fact]
-        public void CanGetTwoLetterISOLanguageSpecificFactory()
+        [Theory]
+        [InlineData("1000000000", 1000000000)]
+        public void CanGetRFCStandardLanguageSpecificFactory(string notExpected, int number)
         {
-
-            using (new AmbientCulture("ar"))
+            using (new AmbientCulture("pt-BR"))
             {
-                string retorno = 1000000000.ToWords();
-                Assert.NotEqual("1000000000", retorno);
+                string result = number.ToWords();
+                Assert.NotEqual(notExpected, result);
             }
+        }
+
+        [Theory]
+        [InlineData(1000000000)]
+        public void CanGetCorrectRFCStandardLanguageSpecificFactory(int number)
+        {
+            string resultPtBR;
+            using (new AmbientCulture("pt-BR"))
+            {
+                resultPtBR = number.ToWords();
+            }
+
+            string resultPtPT;
+            using (new AmbientCulture("pt-PT"))
+            {
+                resultPtPT = number.ToWords();
+            }
+
+            Assert.NotEqual(resultPtBR, resultPtPT);
         }
     }
 }
