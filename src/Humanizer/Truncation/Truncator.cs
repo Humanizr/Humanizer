@@ -55,7 +55,7 @@ namespace Humanizer
             if (truncator == null)
                 throw new ArgumentNullException("truncator");
 
-            if (input == null) 
+            if (input == null)
                 return null;
 
             return truncator.Truncate(input, length, truncationString);
@@ -64,7 +64,7 @@ namespace Humanizer
         /// <summary>
         /// Fixed length truncator
         /// </summary>
-        public static ITruncator FixedLength 
+        public static ITruncator FixedLength
         {
             get
             {
@@ -91,6 +91,17 @@ namespace Humanizer
             get
             {
                 return new FixedNumberOfWordsTruncator();
+            }
+        }
+
+        /// <summary>
+        /// Right justified truncator
+        /// </summary>
+        public static ITruncator RightJustifiedFixedLength
+        {
+            get
+            {
+                return new RightJustifiedFixedLengthTruncator();
             }
         }
     }

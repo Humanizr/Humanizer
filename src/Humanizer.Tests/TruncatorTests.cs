@@ -27,7 +27,7 @@ namespace Humanizer.Tests
         public void TruncateWithFixedLengthTruncator(string input, int length, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedLength));
-        }
+        }              
 
         [Theory]
         [InlineData(null, 10, null)]
@@ -52,6 +52,18 @@ namespace Humanizer.Tests
         public void TruncateWithFixedNumberOfWordsTruncator(string input, int length, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfWords));
+        }
+
+        [Theory]
+        [InlineData(null, 10, null)]
+        [InlineData("", 10, "")]
+        [InlineData("a", 1, "a")]
+        [InlineData("Text longer than truncate length", 10, "…te length")]
+        [InlineData("Text with length equal to truncate length", 41, "Text with length equal to truncate length")]
+        [InlineData("Text smaller than truncate length", 34, "Text smaller than truncate length")]
+        public void TruncateWithRightJustifiedFixedLengthTruncator(string input, int length, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.Truncate(length, Truncator.RightJustifiedFixedLength));
         }
 
         [Theory]
@@ -111,6 +123,21 @@ namespace Humanizer.Tests
         public void TruncateWithTruncationStringAndFixedNumberOfWordsTruncator(string input, int length, string truncationString, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords));
+        }
+
+        [Theory]
+        [InlineData(null, 10, "...", null)]
+        [InlineData("", 10, "...", "")]
+        [InlineData("a", 1, "...", "a")]
+        [InlineData("Text longer than truncate length", 10, "...", "... length")]
+        [InlineData("Text with different truncation string", 10, "---", "--- string")]
+        [InlineData("Text with length equal to truncate length", 41, "...", "Text with length equal to truncate length")]
+        [InlineData("Text smaller than truncate length", 34, "...", "Text smaller than truncate length")]
+        [InlineData("Text with delimiter length greater than truncate length truncates to fixed length without truncation string", 2, "...", "ng")]
+        [InlineData("Null truncation string truncates to truncate length without truncation string", 4, null, "ring")]
+        public void TruncateWithTruncationStringAndRightJustifiedFixedLengthTruncator(string input, int length, string truncationString, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.RightJustifiedFixedLength));
         }
     }
 }
