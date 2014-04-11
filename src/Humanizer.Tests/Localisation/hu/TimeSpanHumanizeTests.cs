@@ -57,17 +57,6 @@ namespace Humanizer.Tests.Localisation.hu
         }
 
         [Theory]
-        [InlineData(2500, "2 másodperc")]
-        [InlineData(1400, "1 másodperc")]
-        [InlineData(2, "2 ezredmásodperc")]
-        [InlineData(1, "1 ezredmásodperc")]
-        public void Milliseconds(int ms, string expected)
-        {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize();
-            Assert.Equal(expected, actual);
-        }
-
-        [Theory]
         [InlineData(0, 3, "nincs idő")]
         [InlineData(0, 2, "nincs idő")]
         [InlineData(10, 2, "10 ezredmásodperc")]
