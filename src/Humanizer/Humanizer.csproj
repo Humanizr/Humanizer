@@ -68,6 +68,8 @@
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
     <Compile Include="GrammaticalGender.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
