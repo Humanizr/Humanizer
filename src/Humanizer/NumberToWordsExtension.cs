@@ -15,7 +15,8 @@ namespace Humanizer {
                 { "ar", () => new ArabicNumberToWordsConverter() },
                 { "fa", () => new FarsiNumberToWordsConverter() },
                 { "es", () => new SpanishNumberToWordsConverter() },
-                { "pl", () => new PolishNumberToWordsConverter() }
+                { "pl", () => new PolishNumberToWordsConverter() },
+                { "fr", () => new FrenchNumberToWordsConverter() }
             };
 
         /// <summary>
