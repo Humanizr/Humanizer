@@ -28,6 +28,16 @@ namespace Humanizer {
             return Converter.Convert(number);
         }
 
+        /// <summary>
+        /// 1.ToOrdinalWords() -> "first"
+        /// </summary>
+        /// <param name="number">Number to be turned to ordinal words</param>
+        /// <returns></returns>
+        public static string ToOrdinalWords(this int number)
+        {
+            return Converter.ConvertToOrdinal(number);
+        }
+
         private static INumberToWordsConverter Converter 
         {
             get 

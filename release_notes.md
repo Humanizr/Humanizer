@@ -1,5 +1,5 @@
 ###In Development
-
+  - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored 'ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization.
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
 
 ###v1.20.2 - 2014-04-11
