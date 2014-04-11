@@ -615,13 +615,13 @@ namespace YourApp
 
 This class calls the base class to extract the metadata and then, if required, humanizes the property name. It is checking if the property already has a `DisplayName` or `Display` attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. For other properties it will Humanize the property name. That is all.
 
-Now I need to register this metadata provider with Asp.Net MVC (making sure that I use System.Web.Mvc.ModelMetadataProviders, not System.Web.ModelBinding.ModelMetadataProviders):
+Now you need to register this metadata provider with Asp.Net MVC. Make sure you use System.Web.Mvc.ModelMetadataProviders, not System.Web.ModelBinding.ModelMetadataProviders):
 
 ```C#
 ModelMetadataProviders.Current = new HumanizerMetadataProvider();
 ```
 
-... and now I can replace:
+... and now you can replace:
 
 ```C#
 public class RegisterModel
