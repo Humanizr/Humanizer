@@ -10,7 +10,7 @@ namespace Humanizer.Tests
         [InlineData(1, "first")]
         [InlineData(2, "second")]
         [InlineData(3, "third")]
-        [InlineData(4, "forth")]
+        [InlineData(4, "fourth")]
         [InlineData(5, "fifth")]
         [InlineData(6, "sixth")]
         [InlineData(7, "seventh")]
