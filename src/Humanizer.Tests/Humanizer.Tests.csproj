@@ -76,6 +76,9 @@
     <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
     <Compile Include="DateHumanize.cs" />
+    <Compile Include="Localisation\bn-BD\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\bn-BD\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\bn-BD\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\cs\DateHumanizeTests.cs" />
     <Compile Include="Localisation\cs\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sk\DateHumanizeTests.cs" />
