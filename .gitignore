@@ -7,10 +7,8 @@ obj/
 *.swp
 *.orig
 *.nupkg
-*.crunchproject.local.xml
-*.crunchsolution.local.xml
-*.ncrunchsolution
-*.ncrunchproject
+*ncrunch*
+*crunch*.local.xml
 *.cache
 src/packages/*
 PackageBuild/*
