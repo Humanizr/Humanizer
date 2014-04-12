@@ -9,8 +9,8 @@ namespace Humanizer
     /// Transform a number into words; e.g. 1 => one
     /// </summary>
     public static class NumberToWordsExtension {
-        private static readonly IDictionary<string, Func<INumberToWordsConverter>> ConverterFactories =
-            new Dictionary<string, Func<INumberToWordsConverter>>
+        private static readonly IDictionary<string, Func<DefaultNumberToWordsConverter>> ConverterFactories =
+            new Dictionary<string, Func<DefaultNumberToWordsConverter>>
             {
                 { "en", () => new EnglishNumberToWordsConverter() },
                 { "ar", () => new ArabicNumberToWordsConverter() },
@@ -68,11 +68,11 @@ namespace Humanizer
             return Converter.ConvertToOrdinal(number, gender);
         }
 
-        private static INumberToWordsConverter Converter 
+        private static DefaultNumberToWordsConverter Converter 
         {
             get 
             {
-                Func<INumberToWordsConverter> converterFactory;
+                Func<DefaultNumberToWordsConverter> converterFactory;
 
                 if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out converterFactory))
                     return converterFactory();
