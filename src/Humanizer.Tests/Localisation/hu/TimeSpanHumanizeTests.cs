@@ -18,7 +18,6 @@ namespace Humanizer.Tests.Localisation.hu
         }
 
         [Theory]
-        [InlineData(6, "6 nap")]
         [InlineData(2, "2 nap")]
         [InlineData(1, "1 nap")]
         public void Days(int days, string expected)
@@ -46,8 +45,6 @@ namespace Humanizer.Tests.Localisation.hu
         }
 
         [Theory]
-        [InlineData(135, "2 perc")]
-        [InlineData(60, "1 perc")]
         [InlineData(2, "2 másodperc")]
         [InlineData(1, "1 másodperc")]
         public void Seconds(int seconds, string expected)
