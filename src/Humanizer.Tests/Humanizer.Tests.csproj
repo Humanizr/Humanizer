@@ -88,9 +88,11 @@
     <Compile Include="Localisation\invariant\ToQuantityTests.cs" />
     <Compile Include="Localisation\es\NumberToWordsTests.cs" />
     <Compile Include="Localisation\nb-NO\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\NumberToWordsFactoryTests.cs" />
     <Compile Include="Localisation\pl\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pl\NumberToWordsTests.cs" />
     <Compile Include="Localisation\pl\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
     <Compile Include="Localisation\ru-RU\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sk\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
