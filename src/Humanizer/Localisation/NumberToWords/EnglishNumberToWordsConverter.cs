@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class EnglishNumberToWordsConverter : INumberToWordsConverter
+    internal class EnglishNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] TensMap = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
@@ -20,37 +20,37 @@ namespace Humanizer.Localisation.NumberToWords
             {12, "twelfth"},
         };
 
-        public string Convert(int number, GrammaticalGender gender)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return "zero";
 
             if (number < 0)
-                return string.Format("minus {0}", Convert(-number, gender));
+                return string.Format("minus {0}", Convert(-number));
 
             var parts = new List<string>();
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0} billion", Convert(number / 1000000000, gender)));
+                parts.Add(string.Format("{0} billion", Convert(number / 1000000000)));
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0} million", Convert(number / 1000000, gender)));
+                parts.Add(string.Format("{0} million", Convert(number / 1000000)));
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(string.Format("{0} thousand", Convert(number / 1000, gender)));
+                parts.Add(string.Format("{0} thousand", Convert(number / 1000)));
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(string.Format("{0} hundred", Convert(number / 100, gender)));
+                parts.Add(string.Format("{0} hundred", Convert(number / 100)));
                 number %= 100;
             }
 
@@ -74,7 +74,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public string ConvertToOrdinal(int number)
+        public override string ConvertToOrdinal(int number)
         {
             string towords;
             // 9 => ninth
@@ -88,7 +88,7 @@ namespace Humanizer.Localisation.NumberToWords
                 if (ExceptionNumbersToWords(number%10, out exceptionPart))
                 {
                     var normalPart = number - number%10;
-                    towords = RemoveOnePrefix(Convert(normalPart, GrammaticalGender.Masculine));
+                    towords = RemoveOnePrefix(Convert(normalPart));
                     return towords + " " + exceptionPart;
                 }
             }
@@ -98,7 +98,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private string NormalNumberToWords(int number)
         {
-            string towords = Convert(number, GrammaticalGender.Masculine).Replace('-', ' ');
+            string towords = Convert(number).Replace('-', ' ');
 
             towords = RemoveOnePrefix(towords);
             // twenty => twentieth

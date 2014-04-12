@@ -9,19 +9,19 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] FarsiTensMap = { "صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود" };
         private static readonly string[] FarsiUnitsMap = { "صفر", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه", "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده" };
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(int number)
         {
             if (number < 0)
-                return string.Format("منفی {0}", Convert(-number, gender));
+                return string.Format("منفی {0}", Convert(-number));
 
             if (number == 0)
                 return "صفر";
 
             var farsiGroupsMap = new Dictionary<int, Func<int, string>> 
             { 
-                {(int)Math.Pow(10, 9), n => string.Format("{0} میلیارد", Convert(n, gender)) },
-                {(int)Math.Pow(10, 6), n => string.Format("{0} میلیون", Convert(n, gender)) },
-                {(int)Math.Pow(10, 3), n => string.Format("{0} هزار", Convert(n, gender)) },
+                {(int)Math.Pow(10, 9), n => string.Format("{0} میلیارد", Convert(n)) },
+                {(int)Math.Pow(10, 6), n => string.Format("{0} میلیون", Convert(n)) },
+                {(int)Math.Pow(10, 3), n => string.Format("{0} هزار", Convert(n)) },
                 {(int)Math.Pow(10, 2), n => FarsiHundredsMap[n]}
             };
 
