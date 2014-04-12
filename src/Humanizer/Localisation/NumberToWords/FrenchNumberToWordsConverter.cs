@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class FrenchNumberToWordsConverter : INumberToWordsConverter
+    internal class FrenchNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf" };
         private static readonly string[] TensMap = { "zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante-dix", "quatre-vingt", "quatre-vingt-dix"};
@@ -15,10 +15,11 @@ namespace Humanizer.Localisation.NumberToWords
             {91, "quatre-vingt-onze"}
         };
 
-        public string Convert(int number)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return UnitsMap[0];
+
             if (number < 0)
                 return string.Format("moins {0}", Convert(Math.Abs(number)));
 
@@ -89,7 +90,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public string ConvertToOrdinal(int number)
+        public override string ConvertToOrdinal(int number)
         {
             if (number == 1)
                 return "premier";
@@ -104,9 +105,7 @@ namespace Humanizer.Localisation.NumberToWords
                 convertedNumber = convertedNumber.TrimEnd('f') + "v";
 
             if (convertedNumber.StartsWith("un "))
-            {
                 convertedNumber = convertedNumber.Remove(0, 3);
-            }
 
             convertedNumber = convertedNumber.TrimEnd('e');
             convertedNumber += "ième";

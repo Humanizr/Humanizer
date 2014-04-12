@@ -7,7 +7,7 @@ namespace Humanizer.Tests
     {
         public DateTimeHumanizePrecisionStrategyTests() : base("en-US") { }
 
-        private const double defaultPrecision = .75;
+        private const double DefaultPrecision = .75;
 
         [Theory]
         [InlineData(1, "now")]
@@ -18,7 +18,7 @@ namespace Humanizer.Tests
         [InlineData(1750, "2 seconds ago")]
         public void MillisecondsAgo(int milliseconds, string expected)
         {
-            DateHumanize.Verify(expected, milliseconds, TimeUnit.Millisecond, Tense.Past, defaultPrecision);
+            DateHumanize.Verify(expected, milliseconds, TimeUnit.Millisecond, Tense.Past, DefaultPrecision);
         }
 
         [Theory]
@@ -30,7 +30,7 @@ namespace Humanizer.Tests
         [InlineData(1750, "2 seconds from now")]
         public void MillisecondsFromNow(int milliseconds, string expected)
         {
-            DateHumanize.Verify(expected, milliseconds, TimeUnit.Millisecond, Tense.Future, defaultPrecision);
+            DateHumanize.Verify(expected, milliseconds, TimeUnit.Millisecond, Tense.Future, DefaultPrecision);
         }
 
         [Theory]
@@ -44,7 +44,7 @@ namespace Humanizer.Tests
         [InlineData(120, "2 minutes ago")]
         public void SecondsAgo(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past, defaultPrecision);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past, DefaultPrecision);
         }
 
         [Theory]
@@ -58,7 +58,7 @@ namespace Humanizer.Tests
         [InlineData(120, "2 minutes from now")]
         public void SecondsFromNow(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future, defaultPrecision);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future, DefaultPrecision);
         }
 
         [Theory]
@@ -72,7 +72,7 @@ namespace Humanizer.Tests
         [InlineData(120, "2 hours ago")]
         public void MinutesAgo(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past, defaultPrecision);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past, DefaultPrecision);
         }
 
         [Theory]
@@ -86,7 +86,7 @@ namespace Humanizer.Tests
         [InlineData(120, "2 hours from now")]
         public void MinutesFromNow(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future, defaultPrecision);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future, DefaultPrecision);
         }
 
         [Theory]
@@ -101,7 +101,7 @@ namespace Humanizer.Tests
         [InlineData(60, "2 days ago")]
         public void HoursAgo(int hours, string expected)
         {
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past, defaultPrecision);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past, DefaultPrecision);
         }
 
         [Theory]
@@ -115,7 +115,7 @@ namespace Humanizer.Tests
         [InlineData(60, "2 days from now")]
         public void HoursFromNow(int hours, string expected)
         {
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future, defaultPrecision);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future, DefaultPrecision);
         }
 
         [Theory]
@@ -129,7 +129,7 @@ namespace Humanizer.Tests
         [InlineData(53, "2 months ago")]
         public void DaysAgo(int days, string expected)
         {
-            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past, defaultPrecision);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past, DefaultPrecision);
         }
 
         [Theory]
@@ -143,7 +143,7 @@ namespace Humanizer.Tests
         [InlineData(53, "2 months from now")]
         public void DaysFromNow(int days, string expected)
         {
-            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future, defaultPrecision);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future, DefaultPrecision);
         }
 
         [Theory]
@@ -156,7 +156,7 @@ namespace Humanizer.Tests
         [InlineData(24, "2 years ago")]
         public void MonthsAgo(int months, string expected)
         {
-            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past, defaultPrecision);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past, DefaultPrecision);
         }
 
         [Theory]
@@ -169,7 +169,7 @@ namespace Humanizer.Tests
         [InlineData(24, "2 years from now")]
         public void MonthsFromNow(int months, string expected)
         {
-            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future, defaultPrecision);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future, DefaultPrecision);
         }
 
         [Theory]
@@ -177,7 +177,7 @@ namespace Humanizer.Tests
         [InlineData(2, "2 years ago")]
         public void YearsAgo(int years, string expected)
         {
-            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past, defaultPrecision);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past, DefaultPrecision);
         }
 
         [Theory]
@@ -185,7 +185,7 @@ namespace Humanizer.Tests
         [InlineData(2, "2 years from now")]
         public void YearsFromNow(int years, string expected)
         {
-            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future, defaultPrecision);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future, DefaultPrecision);
         }
     }
 }
