@@ -436,7 +436,9 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 121.ToOrdinalWords() => "hundred and twenty first"
 ```
 
-`ToOrdinalWords` also supports `GrammaticalGender`, if that is applicable to your culture, you can pass a second argument to `ToOrdinalWords` to specify which gender the number should be outputted in. The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`. Passing `GrammaticalGender` is optional since it doesn't apply to all cultures.
+`ToOrdinalWords` also supports grammatical gender. 
+You can pass a second argument to `ToOrdinalWords` to specify which gender the number should be outputted in. 
+The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`.
 
 ```C#
 // for Brazilian Portuguese locale
@@ -447,6 +449,8 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 2.ToOrdinalWords(GrammaticalGender.Feminine) => "segunda"
 2.ToOrdinalWords(GrammaticalGender.Neuter) => "segundo"
 ```
+
+Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
 
 ###<a id="roman-numerals">Roman numerals</a>
 Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
