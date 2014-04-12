@@ -20,7 +20,8 @@ namespace Humanizer
                 {"pl", () => new PolishNumberToWordsConverter()},
                 {"pt-BR", () => new BrazilianPortugueseNumberToWordsConverter()},
                 {"ru", () => new RussianNumberToWordsConverter()},
-                {"fr", () => new FrenchNumberToWordsConverter()}
+                {"fr", () => new FrenchNumberToWordsConverter()},
+                {"nl", () => new DutchNumberToWordsConverter()}
             };
 
         /// <summary>
