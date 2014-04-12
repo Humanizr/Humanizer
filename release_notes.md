@@ -1,21 +1,9 @@
 ###In Development
-  - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored 'ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
-  - [#193](https://github.com/Mehdik/Humanizer/pull/193): Fixed the NullException error on DateTime.Humanize
-
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
-  - [#181](https://github.com/Mehdik/Humanizer/pull/181): Added Bulgarian localization, date and timespan tests
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
-
-###v1.20.2 - 2014-04-11
   - [#171](https://github.com/MehdiK/Humanizer/pull/171): T4-Template fix: Using EnglishNumberToWordsConverter instead of 'ToWords()' while dogfooding the template with the library.
   - [#165](https://github.com/MehdiK/Humanizer/pull/165): Added precision based `DateTime.Humanize` strategy
   - [#155](https://github.com/MehdiK/Humanizer/pull/155): French and Belgian French localisation
-  - [#151](https://github.com/MehdiK/Humanizer/pull/151): Added Spanish ToWords Translations
-  - [#172](https://github.com/MehdiK/Humanizer/pull/172): Added Polish translation for ToWords
-  - [#184](https://github.com/Mehdik/Humanizer/pull/184): Fixed spelling error with forth/fourth in EnglishNumberToWordsConverter
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...v1.20.2)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...master)
 
 ###v1.19.1 - 2014-04-10
   - [#149](https://github.com/MehdiK/Humanizer/pull/149): Improved & refactored number to words localisation 
@@ -157,3 +145,4 @@ fix it based on your requirements.
 
 ###v1.0.0 - 2013-11-10
 No release history before this point: check out http://www.mehdi-khalili.com/humanizer-v1 for the feature-set at V1
+
