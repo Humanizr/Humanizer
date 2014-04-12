@@ -45,30 +45,23 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 var divided = number / m.Value;
 
-                if (divided <= 0) continue;
+                if (divided <= 0) 
+                    continue;
 
                 if (divided == 1 && !m.DisplayOneUnit)
-                {
                     word += m.Name;
-                }
                 else
-                {
                     word += Convert(divided) + m.Prefix + m.Name;
-                }
 
                 number %= m.Value;
                 if (number > 0)
-                {
                     word += m.Postfix;
-                }
             }
 
             if (number > 0)
             {
                 if (number < 20)
-                {
                     word += UnitsMap[number];
-                }
                 else
                 {
                     var tens = TensMap[number / 10];
@@ -80,9 +73,7 @@ namespace Humanizer.Localisation.NumberToWords
                         word += units + (trema ? "ën" : "en") + tens;
                     }
                     else
-                    {
                         word += tens;
-                    }
                 }
             }
 
@@ -102,7 +93,6 @@ namespace Humanizer.Localisation.NumberToWords
         {
             var word = Convert(number);
 
-            // exceptions
             foreach (var kv in OrdinalExceptions.Where(kv => word.EndsWith(kv.Key)))
             {
                 // replace word with exception
@@ -113,11 +103,8 @@ namespace Humanizer.Localisation.NumberToWords
             // twintigste, dertigste, veertigste, ...
             // honderdste, duizendste, ...
             if (word.LastIndexOfAny(EndingCharForSte) == (word.Length - 1))
-            {
                 return word + "ste";
-            }
 
-            // anything else
             return word + "de";
         }
     }
