@@ -34,18 +34,31 @@ namespace Humanizer.Tests.Localisation.he
         [InlineData(500, "חמש מאות")]
         [InlineData(505, "חמש מאות וחמש")]
         [InlineData(725, "שבע מאות עשרים וחמש")]
-        //[InlineData(1000, "אלף")]
-        //[InlineData(1024, "אלף עשרים וארבע")]
-        //[InlineData(1040, "אלף ארבעים")]
-        //[InlineData(20000, "עשרים אלף")]
-        //[InlineData(500000, "חמש מאוד אלף")]
-        //[InlineData(500001, "חמש מאות אלף ואחת")]
-        //[InlineData(1000000, "מיליון")]
-        //[InlineData(1000001, "מיליון ואחת")]
-        //[InlineData(1000000000, "מיליארד")]
-        //[InlineData(1000000001, "מיליארד ואחת")]
-        //[InlineData(9876543210, "תשע מיליארד שמונה מאות שבעים ושש מיליון חמש מאות ארבעים ושלוש אלף מאתיים ועשר")]
+        [InlineData(1000, "אלף")]
+        [InlineData(1009, "אלף ותשע")]
+        [InlineData(1011, "אלף ואחת עשרה")]
+        [InlineData(1024, "אלף עשרים וארבע")]
+        [InlineData(1040, "אלף ארבעים")]
+        [InlineData(2000, "אלפיים")]
+        [InlineData(7021, "שבעת אלפים עשרים ואחת")]
+        [InlineData(20000, "עשרים אלף")]
+        [InlineData(28123, "עשרים ושמונה אלף מאה עשרים ושלוש")]
+        [InlineData(500000, "חמש מאות אלף")]
+        [InlineData(500001, "חמש מאות אלף ואחת")]
+        [InlineData(1000000, "מיליון")]
+        [InlineData(1000001, "מיליון ואחת")]
+        [InlineData(2000408, "שני מיליון ארבע מאות ושמונה")]
+        [InlineData(1000000000, "מיליארד")]
+        [InlineData(1000000001, "מיליארד ואחת")]
+        [InlineData(int.MaxValue /* 2147483647 */, "שני מיליארד מאה ארבעים ושבעה מיליון ארבע מאות שמונים ושלוש אלף שש מאות ארבעים ושבע")]
         public void ToWords(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(-2, "מינוס שתיים")]
+        public void NegativeToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }
