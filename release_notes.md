@@ -1,9 +1,11 @@
 ###In Development
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
+
+###v1.20.15 - 2014-04-12
   - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored 'ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
   - [#193](https://github.com/Mehdik/Humanizer/pull/193): Fixed the NullException error on DateTime.Humanize
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...v1.20.15)
 
 ###v1.20.2 - 2014-04-11
   - [#171](https://github.com/MehdiK/Humanizer/pull/171): T4-Template fix: Using EnglishNumberToWordsConverter instead of 'ToWords()' while dogfooding the template with the library.
