@@ -1,4 +1,5 @@
 ###In Development
+  - [#196](https://github.com/MehdiK/Humanizer/pull/196): Added Gender for ToOrdinalWords (needed for Brazilian Portuguese). Added pt-br OrdinalToWords localisation
   - [#194](https://github.com/MehdiK/Humanizer/pull/194): Added pt-BR NumberToWords localisation
   - [#147](https://github.com/MehdiK/Humanizer/pull/147): Added Russian translation for ToWords
   - [#190](https://github.com/MehdiK/Humanizer/pull/190): Added French translation for ToWords and ToOrdinalWords

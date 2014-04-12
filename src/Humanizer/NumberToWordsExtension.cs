@@ -55,6 +55,19 @@ namespace Humanizer
             return Converter.ConvertToOrdinal(number);
         }
 
+        /// <summary>
+        /// for Brazilian Portuguese locale
+        /// 1.ToOrdinalWords(GrammaticalGender.Masculine) -> "primeiro"
+        /// 1.ToOrdinalWords(GrammaticalGender.Feminine) -> "primeira"
+        /// </summary>
+        /// <param name="number">Number to be turned to words</param>
+        /// <param name="gender">The grammatical gender to use for output words. Defaults to masculine.</param>
+        /// <returns></returns>
+        public static string ToOrdinalWords(this int number, GrammaticalGender gender)
+        {
+            return Converter.ConvertToOrdinal(number, gender);
+        }
+
         private static INumberToWordsConverter Converter 
         {
             get 
