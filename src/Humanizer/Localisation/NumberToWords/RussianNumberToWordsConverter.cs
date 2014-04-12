@@ -41,7 +41,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
             }
 
-            return string.Join(" ", parts.ToArray());
+            return string.Join(" ", parts);
         }
 
         public override string Convert(int number)
