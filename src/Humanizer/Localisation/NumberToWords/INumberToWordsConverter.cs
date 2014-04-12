@@ -3,7 +3,7 @@
     /// <summary>
     /// An abstraction to convert number to words
     /// </summary>
-    public interface INumberToWordsConverter
+    internal interface INumberToWordsConverter
     {
         /// <summary>
         /// 3501.ToWords() -> "three thousand five hundred and one"
