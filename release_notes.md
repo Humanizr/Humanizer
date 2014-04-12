@@ -4,7 +4,8 @@
   - [#190](https://github.com/MehdiK/Humanizer/pull/190): Added French translation for ToWords and ToOrdinalWords
   - [#179](https://github.com/MehdiK/Humanizer/pull/179): Adding Hungarian localisation
   - [#181](https://github.com/Mehdik/Humanizer/pull/181): Added Bulgarian localization, date and timespan tests
-  - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesias localization 
+  - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesian localization 
+  - [#148](https://github.com/Mehdik/Humanizer/pull/148): Adding Hebrew localization for date and timespan
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
 
