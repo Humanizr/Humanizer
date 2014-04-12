@@ -44,6 +44,11 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
+        public override string Convert(int number)
+        {
+            return Convert(number, GrammaticalGender.Masculine);
+        }
+
         public override string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
