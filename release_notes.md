@@ -1,8 +1,6 @@
 ###In Development
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
-
-###v1.20.15 - 2014-04-12
-  - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored `ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
+  - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesia localization (strings, tests)
+  - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored 'ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
   - [#193](https://github.com/Mehdik/Humanizer/pull/193): Fixed the NullException error on DateTime.Humanize
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...v1.20.15)
@@ -29,7 +27,6 @@
   - [#137](https://github.com/MehdiK/Humanizer/pull/137): Fixed grammar error in `nb-NO` resource file & added missing Norwegian resource strings (mainly `DateHumanize_*FromNow`)
   - [#135](https://github.com/MehdiK/Humanizer/pull/135): Added Swedish localization (strings, tests)
   - [#140](https://github.com/MehdiK/Humanizer/pull/140): Added Polish localization (strings, formatter, tests)
-  - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesia localization (strings, tests)
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.17.1...v1.18.1)
 
