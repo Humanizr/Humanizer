@@ -22,6 +22,8 @@ namespace Humanizer.Configuration
             { "pl", () => new CzechSlovakPolishFormatter() }
         };
 
+        private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
+
         /// <summary>
         /// The formatter to be used
         /// </summary>
@@ -37,6 +39,10 @@ namespace Humanizer.Configuration
             }
         }
 
-        public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
+        public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy
+        {
+            get { return _dateTimeHumanizeStrategy; }
+            set { _dateTimeHumanizeStrategy = value; }
+        }
     }
 }
