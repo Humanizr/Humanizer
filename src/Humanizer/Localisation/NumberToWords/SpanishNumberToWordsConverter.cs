@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class SpanishNumberToWordsConverter : INumberToWordsConverter
+    internal class SpanishNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] HundredsMap = { "cero", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos" };
         private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve" };
         private static readonly string[] TensMap = { "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
 
-        public string Convert(int number, GrammaticalGender gender)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return "cero";
 
             if (number < 0)
-                return string.Format("menos {0}", Convert(Math.Abs(number), gender));
+                return string.Format("menos {0}", Convert(Math.Abs(number)));
 
             var parts = new List<string>();
 
@@ -23,7 +23,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(number/1000000000 == 1
                     ? string.Format("mil millones")
-                    : string.Format("{0} mil millones", Convert(number / 1000000000, gender)));
+                    : string.Format("{0} mil millones", Convert(number/1000000000)));
 
                 number %= 1000000000;
             }
@@ -32,7 +32,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(number/1000000 == 1
                     ? string.Format("millón")
-                    : string.Format("{0} millones", Convert(number / 1000000, gender)));
+                    : string.Format("{0} millones", Convert(number/1000000)));
 
                 number %= 1000000;
             }
@@ -41,7 +41,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(number/1000 == 1
                     ? string.Format("mil")
-                    : string.Format("{0} mil", Convert(number / 1000, gender)));
+                    : string.Format("{0} mil", Convert(number/1000)));
 
                 number %= 1000;
             }
@@ -77,7 +77,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public string ConvertToOrdinal(int number)
+        public override string ConvertToOrdinal(int number)
         {
             throw new NotImplementedException();
         }

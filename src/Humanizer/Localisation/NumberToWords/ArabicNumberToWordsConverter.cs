@@ -13,7 +13,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] AppendedTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن" };
         private static readonly string[] Twos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان" };
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return "صفر";
