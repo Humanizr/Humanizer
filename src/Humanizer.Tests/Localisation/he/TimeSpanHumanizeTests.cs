@@ -18,7 +18,6 @@ namespace Humanizer.Tests.Localisation.he
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
 
-
         [Theory]
         [InlineData(1, "יום")]
         [InlineData(2, "יומיים")]
@@ -47,7 +46,6 @@ namespace Humanizer.Tests.Localisation.he
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
         }
-
 
         [Theory]
         [InlineData(1, "שנייה")]
