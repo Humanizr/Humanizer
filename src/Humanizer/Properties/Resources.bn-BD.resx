@@ -184,7 +184,7 @@
     <value>এক সেকেন্ড</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>no time</value>
+    <value>শূন্য সময়</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} সপ্তাহ</value>
