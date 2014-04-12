@@ -1,10 +1,8 @@
 ﻿using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.es
-{
-    public class NumberToWordsTests : AmbientCulture
-    {
+namespace Humanizer.Tests.Localisation.es {
+    public class NumberToWordsTests : AmbientCulture {
         public NumberToWordsTests() : base("es-ES") { }
 
         [Theory]
@@ -43,9 +41,18 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(1999, "mil novecientos noventa y nueve")]
         [InlineData(2014, "dos mil catorce")]
         [InlineData(2048, "dos mil cuarenta y ocho")]
-        public void ToWordsSpanish(int number, string expected)
-        {
+        public void ToWordsSpanish(int number, string expected) {
             Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(1, "primero", null)]
+        [InlineData(2, "segundo", GrammaticalGender.Masculine)]
+        [InlineData(2, "segunda", GrammaticalGender.Feminine)]
+        [InlineData(2, "segundo", GrammaticalGender.Neuter)]
+        [InlineData(11, "once", null)]
+        public void ToOrdinalWordsSpanish(int number, string words, GrammaticalGender gender) {
+            Assert.Equal(words, number.ToOrdinalWords(gender));
         }
     }
 }
