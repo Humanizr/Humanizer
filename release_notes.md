@@ -157,4 +157,3 @@ fix it based on your requirements.
 
 ###v1.0.0 - 2013-11-10
 No release history before this point: check out http://www.mehdi-khalili.com/humanizer-v1 for the feature-set at V1
-
