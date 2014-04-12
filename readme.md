@@ -410,6 +410,15 @@ Humanizer can change numbers to words using the `ToWords` extension:
 3501.ToWords() => "three thousand five hundred and one"
 ```
 
+You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specify which gender the number should be outputted in. The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`.
+
+```C#
+// for Russian locale
+1.ToWords(GrammaticalGender.Masculine) => "один"
+1.ToWords(GrammaticalGender.Feminine) => "одна"
+1.ToWords(GrammaticalGender.Neuter) => "одно"
+```
+
 ###<a id="number-toordinalwords">Number to ordinal words</a>
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words!! Let me show that with an example:
 
