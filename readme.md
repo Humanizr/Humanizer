@@ -436,14 +436,16 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 121.ToOrdinalWords() => "hundred and twenty first"
 ```
 
-`ToOrdinalWords` also supports `GrammaticalGender`, you can pass a second argument to `ToOrdinalWords` to specify which gender the number should be outputted in. The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`.
+`ToOrdinalWords` also supports `GrammaticalGender`, if that is applicable to your culture, you can pass a second argument to `ToOrdinalWords` to specify which gender the number should be outputted in. The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`. Passing `GrammaticalGender` is optional since it doesn't apply to all cultures.
 
 ```C#
 // for Brazilian Portuguese locale
 1.ToOrdinalWords(GrammaticalGender.Masculine) => "primeiro"
 1.ToOrdinalWords(GrammaticalGender.Feminine) => "primeira"
+1.ToOrdinalWords(GrammaticalGender.Neuter) => "primeiro"
 2.ToOrdinalWords(GrammaticalGender.Masculine) => "segundo"
 2.ToOrdinalWords(GrammaticalGender.Feminine) => "segunda"
+2.ToOrdinalWords(GrammaticalGender.Neuter) => "segundo"
 ```
 
 ###<a id="roman-numerals">Roman numerals</a>
