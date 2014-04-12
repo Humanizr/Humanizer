@@ -5,8 +5,7 @@ namespace Humanizer.Tests.Localisation.hu
 {
     public class DateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests()
-            : base("hu-HU")
+        public DateHumanizeTests(): base("hu-HU")
         {
         }
 
@@ -105,6 +104,5 @@ namespace Humanizer.Tests.Localisation.hu
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
-
     }
 }
