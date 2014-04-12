@@ -2,8 +2,8 @@
   - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored 'ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
   - [#193](https://github.com/Mehdik/Humanizer/pull/193): Fixed the NullException error on DateTime.Humanize
-
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...master)
+  - [#179](https://github.com/MehdiK/Humanizer/pull/179): Adding Hungarian localisation
 
 ###v1.20.2 - 2014-04-11
   - [#171](https://github.com/MehdiK/Humanizer/pull/171): T4-Template fix: Using EnglishNumberToWordsConverter instead of 'ToWords()' while dogfooding the template with the library.
@@ -12,6 +12,7 @@
   - [#151](https://github.com/MehdiK/Humanizer/pull/151): Added Spanish ToWords Translations
   - [#172](https://github.com/MehdiK/Humanizer/pull/172): Added Polish translation for ToWords
   - [#184](https://github.com/Mehdik/Humanizer/pull/184): Fixed spelling error with forth/fourth in EnglishNumberToWordsConverter
+
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...v1.20.2)
 
