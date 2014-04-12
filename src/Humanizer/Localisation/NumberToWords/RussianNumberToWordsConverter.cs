@@ -64,7 +64,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 var map = new[] { "миллиард", "миллиарда", "миллиардов" };
                 var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(milliards);
-                parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(milliards, GrammaticalGender.Masculine), map[(int)grammaticalNumber]));
+                parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(milliards, GrammaticalGender.Masculine), map[GetIndex(grammaticalNumber)]));
                 number %= 1000000000;
             }
 
@@ -73,7 +73,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 var map = new[] { "миллион", "миллиона", "миллионов" };
                 var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(millions);
-                parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(millions, GrammaticalGender.Masculine), map[(int)grammaticalNumber]));
+                parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(millions, GrammaticalGender.Masculine), map[GetIndex(grammaticalNumber)]));
                 number %= 1000000;
             }
 
@@ -82,7 +82,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 var map = new[] { "тысяча", "тысячи", "тысячь" };
                 var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(thousands);
-                parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(thousands, GrammaticalGender.Feminine), map[(int)grammaticalNumber]));
+                parts.Add(string.Format("{0} {1}", ToWordsUnderThousand(thousands, GrammaticalGender.Feminine), map[GetIndex(grammaticalNumber)]));
                 number %= 1000;
             }
 
@@ -92,6 +92,15 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return string.Join(" ", parts.ToArray());
+        }
+
+        private static int GetIndex(RussianGrammaticalNumber grammaticalNumber)
+        {
+            if (grammaticalNumber == RussianGrammaticalNumber.Singular)
+                return 0;
+            if (grammaticalNumber == RussianGrammaticalNumber.Paucal)
+                return 1;
+            return 2;
         }
     }
 }
