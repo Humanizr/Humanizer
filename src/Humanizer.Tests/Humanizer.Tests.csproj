@@ -128,7 +128,6 @@
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="ToQuantityTests.cs" />
     <Compile Include="TransformersTests.cs" />
-    <Compile Include="NumberToOrdinalWordsTests.cs" />
     <Compile Include="Localisation\ro-Ro\DateHumanizeTests.cs" />
     <Compile Include="DateHumanizeDefaultStrategyTests.cs" />
     <Compile Include="DehumanizeToEnumTests.cs" />
