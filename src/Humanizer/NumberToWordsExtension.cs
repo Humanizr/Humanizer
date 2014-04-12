@@ -25,9 +25,19 @@ namespace Humanizer
         /// 3501.ToWords() -> "three thousand five hundred and one"
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
+        /// <returns></returns>
+        public static string ToWords(this int number)
+        {
+            return Converter.Convert(number);
+        }
+
+        /// <summary>
+        /// 3501.ToWords() -> "three thousand five hundred and one"
+        /// </summary>
+        /// <param name="number">Number to be turned to words</param>
         /// <param name="gender">The grammatical gender to use for output words. Defaults to masculine.</param>
         /// <returns></returns>
-        public static string ToWords(this int number, GrammaticalGender gender = GrammaticalGender.Masculine)
+        public static string ToWords(this int number, GrammaticalGender gender)
         {
             return Converter.Convert(number, gender);
         }

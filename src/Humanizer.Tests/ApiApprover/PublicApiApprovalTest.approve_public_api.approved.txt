@@ -202,6 +202,7 @@ public interface IFormatter
 
 public interface INumberToWordsConverter
 {
+    string Convert(int number);
     string Convert(int number, Humanizer.GrammaticalGender gender);
     string ConvertToOrdinal(int number);
 }
@@ -256,6 +257,7 @@ public class NumberToTimeSpanExtensions
 public class NumberToWordsExtension
 {
     public string ToOrdinalWords(int number) { }
+    public string ToWords(int number) { }
     public string ToWords(int number, Humanizer.GrammaticalGender gender) { }
 }
 
