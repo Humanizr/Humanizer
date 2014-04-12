@@ -1,4 +1,6 @@
 ###In Development
+  - [#181](https://github.com/Mehdik/Humanizer/pull/181): Added Bulgarian localization, date and timespan tests
+  
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
 
 ###v1.20.15 - 2014-04-12
