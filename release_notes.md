@@ -1,4 +1,5 @@
 ###In Development
+  - [#188](https://github.com/Mehdik/Humanizer/pull/188): Added Spanish ToOrdinalWords translations
   - [#166](https://github.com/MehdiK/Humanizer/pull/166): Added Dutch (NL) Number to words and ordinals
   
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.21.15...master)
