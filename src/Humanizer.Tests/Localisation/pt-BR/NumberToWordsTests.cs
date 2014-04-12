@@ -5,7 +5,10 @@ namespace Humanizer.Tests.Localisation.ptBR
 {
     public class NumberToWordsTests : AmbientCulture
     {
-        public NumberToWordsTests() : base("pt-BR") { }
+        public NumberToWordsTests()
+            : base("pt-BR")
+        {
+        }
 
         [Theory]
         [InlineData(1, "um")]
