@@ -9,7 +9,7 @@ namespace Humanizer.Localisation.NumberToWords
     /// Used the rules as stated here.
     /// http://www.beterspellen.nl/website/?pag=110
     /// </summary>
-    internal class DutchNumberToWordsConverter : INumberToWordsConverter
+    internal class DutchNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien" };
         private static readonly string[] TensMap = { "nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig" };
@@ -31,7 +31,7 @@ namespace Humanizer.Localisation.NumberToWords
 		    new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
 	    };
 
-        public string Convert(int number)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return UnitsMap[0];
@@ -98,7 +98,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly char[] EndingCharForSte = {'t', 'g', 'd'};
         
-        public string ConvertToOrdinal(int number)
+        public override string ConvertToOrdinal(int number)
         {
             var word = Convert(number);
 
