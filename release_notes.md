@@ -1,4 +1,8 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.21.15...master)
+
+###v1.21.1 - 2014-04-12
   - [#196](https://github.com/MehdiK/Humanizer/pull/196): Added Gender for ToOrdinalWords (needed for Brazilian Portuguese). Added pt-br OrdinalToWords localisation
   - [#194](https://github.com/MehdiK/Humanizer/pull/194): Added pt-BR NumberToWords localisation
   - [#147](https://github.com/MehdiK/Humanizer/pull/147): Added Russian translation for ToWords
@@ -8,7 +12,7 @@
   - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesian localization 
   - [#148](https://github.com/Mehdik/Humanizer/pull/148): Added Hebrew localization for date and timespan
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...v1.21.1)
 
 ###v1.20.15 - 2014-04-12
   - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored `ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
