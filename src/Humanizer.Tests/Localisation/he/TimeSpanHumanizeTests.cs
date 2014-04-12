@@ -50,7 +50,7 @@ namespace Humanizer.Tests.Localisation.he
 
 
         [Theory]
-        [InlineData(1, "שניה")]
+        [InlineData(1, "שנייה")]
         [InlineData(2, "שתי שניות")]
         [InlineData(3, "3 שניות")]
         [InlineData(11, "11 שניות")]
@@ -60,10 +60,10 @@ namespace Humanizer.Tests.Localisation.he
         }
 
         [Theory]
-        [InlineData(1, "מילי שניה")]
-        [InlineData(2, "שתי מילי שניות")]
-        [InlineData(3, "3 מילי שניות")]
-        [InlineData(11, "11 מילי שניות")]
+        [InlineData(1, "אלפית שנייה")]
+        [InlineData(2, "שתי אלפיות שנייה")]
+        [InlineData(3, "3 אלפיות שנייה")]
+        [InlineData(11, "11 אלפיות שנייה")]
         public void Milliseconds(int milliseconds, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());

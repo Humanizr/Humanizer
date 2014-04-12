@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>לפני שניה</value>
+    <value>לפני שנייה</value>
     <comment>one second ago</comment>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
@@ -174,7 +174,7 @@
     <comment>single hour</comment>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>מילי שניה</value>
+    <value>אלפית שנייה</value>
     <comment>single millisecond</comment>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
@@ -182,7 +182,7 @@
     <comment>single minute</comment>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>שניה</value>
+    <value>שנייה</value>
     <comment>single second</comment>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
@@ -230,7 +230,7 @@
     <comment>two hours</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>שתי מילי שניות</value>
+    <value>שתי אלפיות שנייה</value>
     <comment>two milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
@@ -258,11 +258,11 @@
     <comment>{0} hours</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} מילי שניות</value>
+    <value>{0} אלפיות שנייה</value>
     <comment>{0} milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} מילי שניות</value>
+    <value>{0} אלפיות שנייה</value>
     <comment>{0} milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">

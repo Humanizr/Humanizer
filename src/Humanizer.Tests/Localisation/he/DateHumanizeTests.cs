@@ -1,4 +1,5 @@
 ﻿using System;
+using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
 
@@ -15,7 +16,7 @@ namespace Humanizer.Tests.Localisation.he
         [InlineData(-11, "לפני 11 יום")]
         public void DaysAgo(int days, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddDays(days).Humanize());
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
         [Theory]
@@ -25,7 +26,7 @@ namespace Humanizer.Tests.Localisation.he
         [InlineData(-11, "לפני 11 שעות")]
         public void HoursAgo(int hours, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddHours(hours).Humanize());
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
@@ -35,7 +36,7 @@ namespace Humanizer.Tests.Localisation.he
         [InlineData(-11, "לפני 11 דקות")]
         public void MinutesAgo(int minutes, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMinutes(minutes).Humanize());
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]
@@ -45,17 +46,17 @@ namespace Humanizer.Tests.Localisation.he
         [InlineData(-11, "לפני 11 חודשים")]
         public void MonthsAgo(int months, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMonths(months).Humanize());
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
         [InlineData(-2, "לפני 2 שניות")]
-        [InlineData(-1, "לפני שניה")]
+        [InlineData(-1, "לפני שנייה")]
         [InlineData(-3, "לפני 3 שניות")]
         [InlineData(-11, "לפני 11 שניות")]
         public void SecondsAgo(int seconds, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddSeconds(seconds).Humanize());
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
@@ -65,7 +66,7 @@ namespace Humanizer.Tests.Localisation.he
         [InlineData(-11, "לפני 11 שנה")]
         public void YearsAgo(int years, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
     }
 }
