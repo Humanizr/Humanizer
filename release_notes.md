@@ -1,4 +1,5 @@
 ###In Development
+  - [#194](https://github.com/MehdiK/Humanizer/pull/194): Added pt-BR NumberToWords localisation
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
 
 ###v1.20.15 - 2014-04-12
