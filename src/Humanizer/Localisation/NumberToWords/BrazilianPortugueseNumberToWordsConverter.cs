@@ -67,9 +67,7 @@ namespace Humanizer.Localisation.NumberToWords
                     parts.Add("e");
 
                 if (number < 20)
-                {
                     parts.Add(ApplyGender(PortugueseUnitsMap[number], gender));
-                }
                 else
                 {
                     var lastPart = PortugueseTensMap[number / 10];
@@ -126,21 +124,17 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 100) > 0)
             {
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalHundredsMap[number / 100], gender));
-
                 number %= 100;
             }
 
             if ((number / 10) > 0)
             {
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalTensMap[number / 10], gender));
-
                 number %= 10;
             }
 
             if (number > 0)
-            {
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalUnitsMap[number], gender));
-            }
 
             return string.Join(" ", parts.ToArray());
         }
@@ -152,31 +146,27 @@ namespace Humanizer.Localisation.NumberToWords
 
         private string ApplyGender(string toWords, GrammaticalGender gender)
         {
-            if (gender == GrammaticalGender.Feminine)
-                if (toWords.EndsWith("os"))
-                    return toWords.Substring(0, toWords.Length - 2) + "as";
-                else
-                {
-                    if (toWords.EndsWith("um"))
-                        return toWords.Substring(0, toWords.Length - 2) + "uma";
-                    else
-                    {
-                        if (toWords.EndsWith("dois"))
-                            return toWords.Substring(0, toWords.Length - 4) + "duas";
-                        else
-                            return toWords;
-                    }
-                }
-            else
+            if (gender != GrammaticalGender.Feminine) 
                 return toWords;
+
+            if (toWords.EndsWith("os"))
+                return toWords.Substring(0, toWords.Length - 2) + "as";
+
+            if (toWords.EndsWith("um"))
+                return toWords.Substring(0, toWords.Length - 2) + "uma";
+
+            if (toWords.EndsWith("dois"))
+                return toWords.Substring(0, toWords.Length - 4) + "duas";
+
+            return toWords;
         }
 
         private string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
         {
             if (gender == GrammaticalGender.Feminine)
                 return toWords.TrimEnd('o') + 'a';
-            else
-                return toWords;
+            
+            return toWords;
         }
     }
 }
