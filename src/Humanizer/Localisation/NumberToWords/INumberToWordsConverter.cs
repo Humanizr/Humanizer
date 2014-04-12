@@ -13,7 +13,9 @@
         string Convert(int number);
 
         /// <summary>
-        /// 3501.ToWords() -> "three thousand five hundred and one"
+        /// for Russian locale
+        /// 1.ToWords(GrammaticalGender.Masculine) -> "один"
+        /// 1.ToWords(GrammaticalGender.Feminine) -> "одна"
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
