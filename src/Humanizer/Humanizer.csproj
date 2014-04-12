@@ -66,6 +66,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
+    <Compile Include="GrammaticalCase.cs" />
+    <Compile Include="GrammaticalGender.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />

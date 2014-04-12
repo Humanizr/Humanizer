@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class SpanishNumberToWordsConverter : INumberToWordsConverter
+    internal class SpanishNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] HundredsMap = { "cero", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos" };
         private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve" };
         private static readonly string[] TensMap = { "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
 
-        public string Convert(int number)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return "cero";
@@ -77,7 +77,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public string ConvertToOrdinal(int number)
+        public override string ConvertToOrdinal(int number)
         {
             throw new NotImplementedException();
         }

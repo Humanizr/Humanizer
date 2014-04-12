@@ -17,7 +17,8 @@ namespace Humanizer
                 { "fa", () => new FarsiNumberToWordsConverter() },
                 { "es", () => new SpanishNumberToWordsConverter() },
                 { "pl", () => new PolishNumberToWordsConverter() },
-                { "pt-BR", () => new BrazilianPortugueseNumberToWordsConverter() }
+                { "pt-BR", () => new BrazilianPortugueseNumberToWordsConverter() },
+                { "ru", () => new RussianNumberToWordsConverter() }
             };
 
         /// <summary>
@@ -25,9 +26,22 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <returns></returns>
-        public static string ToWords(this int number) 
+        public static string ToWords(this int number)
         {
             return Converter.Convert(number);
+        }
+
+        /// <summary>
+        /// for Russian locale
+        /// 1.ToWords(GrammaticalGender.Masculine) -> "один"
+        /// 1.ToWords(GrammaticalGender.Feminine) -> "одна"
+        /// </summary>
+        /// <param name="number">Number to be turned to words</param>
+        /// <param name="gender">The grammatical gender to use for output words. Defaults to masculine.</param>
+        /// <returns></returns>
+        public static string ToWords(this int number, GrammaticalGender gender)
+        {
+            return Converter.Convert(number, gender);
         }
 
         /// <summary>
