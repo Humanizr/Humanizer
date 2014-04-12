@@ -9,10 +9,8 @@ namespace Humanizer.Tests.Localisation.id
         public TimeSpanHumanizeTests() : base("id-ID") { }
 
         [Theory]
-        [InlineData(-7, "waktu kosong")]
+        [InlineData(14, "2 minggu")]
         [InlineData(7, "1 minggu")]
-        [InlineData(21, "3 minggu")]
-        [InlineData(367, "52 minggu")]
         public void Weeks(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize();
@@ -20,8 +18,8 @@ namespace Humanizer.Tests.Localisation.id
         }
 
         [Theory]
-        [InlineData(3, "3 hari")]
-        [InlineData(8, "1 minggu")]
+        [InlineData(2, "2 hari")]
+        [InlineData(1, "1 hari")]
         public void Days(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize();
@@ -29,9 +27,8 @@ namespace Humanizer.Tests.Localisation.id
         }
 
         [Theory]
-        [InlineData(12, "12 jam")]
-        [InlineData(24, "1 hari")]
-        [InlineData(25, "1 hari")]
+        [InlineData(2, "2 jam")]
+        [InlineData(1, "1 jam")]
         public void Hours(int hours, string expected)
         {
             var actual = TimeSpan.FromHours(hours).Humanize();
@@ -39,9 +36,8 @@ namespace Humanizer.Tests.Localisation.id
         }
 
         [Theory]
+        [InlineData(2, "2 menit")]
         [InlineData(1, "1 menit")]
-        [InlineData(60, "1 jam")]
-        [InlineData(120, "2 jam")]
         public void Minutes(int minutes, string expected)
         {
             var actual = TimeSpan.FromMinutes(minutes).Humanize();
@@ -49,9 +45,8 @@ namespace Humanizer.Tests.Localisation.id
         }
 
         [Theory]
+        [InlineData(2, "2 detik")]
         [InlineData(1, "1 detik")]
-        [InlineData(60, "1 menit")]
-        [InlineData(150, "2 menit")]
         public void Seconds(int seconds, string expected)
         {
             var actual = TimeSpan.FromSeconds(seconds).Humanize();
@@ -60,8 +55,7 @@ namespace Humanizer.Tests.Localisation.id
 
         [Theory]
         [InlineData(2, "2 milidetik")]
-        [InlineData(2500, "2 detik")]
-        [InlineData(65000, "1 menit")]
+        [InlineData(1, "1 milidetik")]
         public void Milliseconds(int ms, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize();
