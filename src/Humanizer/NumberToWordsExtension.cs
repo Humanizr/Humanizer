@@ -8,18 +8,19 @@ namespace Humanizer
     /// <summary>
     /// Transform a number into words; e.g. 1 => one
     /// </summary>
-    public static class NumberToWordsExtension {
+    public static class NumberToWordsExtension
+    {
         private static readonly IDictionary<string, Func<DefaultNumberToWordsConverter>> ConverterFactories =
             new Dictionary<string, Func<DefaultNumberToWordsConverter>>
             {
-                { "en", () => new EnglishNumberToWordsConverter() },
-                { "ar", () => new ArabicNumberToWordsConverter() },
-                { "fa", () => new FarsiNumberToWordsConverter() },
-                { "es", () => new SpanishNumberToWordsConverter() },
-                { "pl", () => new PolishNumberToWordsConverter() },
-                { "pt-BR", () => new BrazilianPortugueseNumberToWordsConverter() },
-                { "ru", () => new RussianNumberToWordsConverter() },
-                { "fr", () => new FrenchNumberToWordsConverter() }
+                {"en", () => new EnglishNumberToWordsConverter()},
+                {"ar", () => new ArabicNumberToWordsConverter()},
+                {"fa", () => new FarsiNumberToWordsConverter()},
+                {"es", () => new SpanishNumberToWordsConverter()},
+                {"pl", () => new PolishNumberToWordsConverter()},
+                {"pt-BR", () => new BrazilianPortugueseNumberToWordsConverter()},
+                {"ru", () => new RussianNumberToWordsConverter()},
+                {"fr", () => new FrenchNumberToWordsConverter()}
             };
 
         /// <summary>
@@ -68,9 +69,9 @@ namespace Humanizer
             return Converter.ConvertToOrdinal(number, gender);
         }
 
-        private static DefaultNumberToWordsConverter Converter 
+        private static DefaultNumberToWordsConverter Converter
         {
-            get 
+            get
             {
                 Func<DefaultNumberToWordsConverter> converterFactory;
 
