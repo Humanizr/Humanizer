@@ -39,7 +39,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(1999, "mil novecentos e noventa e nove")]
         [InlineData(2014, "dois mil e quatorze")]
         [InlineData(2048, "dois mil e quarenta e oito")]
-        public void ToWordsPortuguese(int number, string expected)
+        public void ToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }
