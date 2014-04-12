@@ -2,6 +2,7 @@
   - [#194](https://github.com/MehdiK/Humanizer/pull/194): Added pt-BR NumberToWords localisation
   - [#147](https://github.com/MehdiK/Humanizer/pull/147): Added Russian translation for ToWords
   - [#190](https://github.com/MehdiK/Humanizer/pull/190): Added French translation for ToWords and ToOrdinalWords
+  - [#179](https://github.com/MehdiK/Humanizer/pull/179): Adding Hungarian localisation
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...master)
 
