@@ -200,13 +200,6 @@ public interface IFormatter
     string TimeSpanHumanize_Zero();
 }
 
-public interface INumberToWordsConverter
-{
-    string Convert(int number);
-    string Convert(int number, Humanizer.GrammaticalGender gender);
-    string ConvertToOrdinal(int number);
-}
-
 public class ResourceKeys
 {
     public ResourceKeys() { }
