@@ -13,6 +13,7 @@
   - [#172](https://github.com/MehdiK/Humanizer/pull/172): Added Polish translation for ToWords
   - [#184](https://github.com/Mehdik/Humanizer/pull/184): Fixed spelling error with forth/fourth in EnglishNumberToWordsConverter
 
+
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...v1.20.2)
 
 ###v1.19.1 - 2014-04-10
