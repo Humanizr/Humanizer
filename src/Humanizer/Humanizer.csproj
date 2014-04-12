@@ -87,8 +87,7 @@
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\CzechSlovakPolishFormatter.cs" />
-    <Compile Include="Localisation\HebrewFormatter.cs" />
+    <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
