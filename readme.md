@@ -30,6 +30,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Need your help with localisation](#need-your-help-with-localisation)
  - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
  - [Author](#author)
+ - [Main contributors](#main-contributors)
  - [License](#license)
 
 ##<a id="install">Install</a>
@@ -721,6 +722,9 @@ The current build status on the CI server is <a href="http://teamcity.ginnivan.n
 
 ##<a id="author">Author</a>
 Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
+
+##<a id="main-contributors">Main contributors</a>
+Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
 
 ##<a id="license">License</a>
 Humanizer is released under the MIT License. See the [bundled LICENSE](https://github.com/MehdiK/Humanizer/blob/master/LICENSE) file for details.
