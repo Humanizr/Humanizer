@@ -2,6 +2,11 @@
 {
     internal class DefaultNumberToWordsConverter : INumberToWordsConverter
     {
+        public virtual string Convert(int number, GrammaticalGender gender)
+        {
+            return Convert(number);
+        }
+
         public virtual string Convert(int number)
         {
             return number.ToString();

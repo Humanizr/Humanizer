@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class EnglishNumberToWordsConverter : INumberToWordsConverter
+    internal class EnglishNumberToWordsConverter : DefaultNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] TensMap = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
@@ -20,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
             {12, "twelfth"},
         };
 
-        public string Convert(int number)
+        public override string Convert(int number)
         {
             if (number == 0)
                 return "zero";
@@ -74,7 +74,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public string ConvertToOrdinal(int number)
+        public override string ConvertToOrdinal(int number)
         {
             string towords;
             // 9 => ninth
