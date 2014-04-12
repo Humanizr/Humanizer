@@ -12,6 +12,11 @@
             return number.ToString();
         }
 
+        public virtual string ConvertToOrdinal(int number, GrammaticalGender gender)
+        {
+            return ConvertToOrdinal(number);
+        }
+
         public virtual string ConvertToOrdinal(int number)
         {
             return number.ToString();

@@ -250,6 +250,7 @@ public class NumberToTimeSpanExtensions
 public class NumberToWordsExtension
 {
     public string ToOrdinalWords(int number) { }
+    public string ToOrdinalWords(int number, Humanizer.GrammaticalGender gender) { }
     public string ToWords(int number) { }
     public string ToWords(int number, Humanizer.GrammaticalGender gender) { }
 }

@@ -28,5 +28,15 @@
         /// <param name="number">Number to be turned to ordinal words</param>
         /// <returns></returns>
         string ConvertToOrdinal(int number);
+
+        /// <summary>
+        /// for Brazilian Portuguese
+        /// 1.ToOrdinalWords(GrammaticalGender.Masculine) -> "primeiro"
+        /// 1.ToOrdinalWords(GrammaticalGender.Feminine) -> "primeira"
+        /// </summary>
+        /// <param name="number">Number to be turned to words</param>
+        /// <param name="gender">The grammatical gender to use for output words</param>
+        /// <returns></returns>
+        string ConvertToOrdinal(int number, GrammaticalGender gender);
     }
 }
