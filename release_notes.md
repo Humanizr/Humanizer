@@ -3,6 +3,7 @@
   - [#166](https://github.com/MehdiK/Humanizer/pull/166): Added Dutch (NL) Number to words and ordinals
   - [#199](https://github.com/MehdiK/Humanizer/pull/199): Added Hebrew Number to words (both genders)
   - [#202](https://github.com/MehdiK/Humanizer/pull/202): Fixed typo sekunttia -> sekuntia (Finnish translation)
+  - [#203](https://github.com/MehdiK/Humanizer/pull/203): Add feminine gender for french ordinal words
   
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.21.1...master)
 
