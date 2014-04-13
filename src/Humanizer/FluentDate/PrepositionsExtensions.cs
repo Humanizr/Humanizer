@@ -1,8 +1,15 @@
 ﻿using System;
 namespace Humanizer
 {
+    /// <summary>
+    /// <see cref="DateTime"/> extensions related to spacial or temporal relations
+    /// </summary>
     public static class PrepositionsExtensions
     {
+        /// <summary>
+        /// Returns a new <see cref="DateTime"/> with the specifed hour and, optionally
+        /// provided minutes, seconds, and milliseconds.
+        /// </summary>
         public static DateTime At(this DateTime date, int hour, int min = 0, int second = 0, int millisecond = 0)
         {
             return new DateTime(date.Year, date.Month, date.Day, hour, min, second, millisecond);
