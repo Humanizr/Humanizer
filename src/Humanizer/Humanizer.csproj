@@ -81,6 +81,7 @@
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="Localisation\NumberToWords\EnglishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FrenchNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\HebrewNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeHumanizeStrategy.cs" />
