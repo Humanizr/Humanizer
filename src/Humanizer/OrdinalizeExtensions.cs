@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.Localisation;
+using Humanizer.Localisation.BrazilianPortuguese;
+using Humanizer.Localisation.English;
+using Humanizer.Localisation.Russian;
+using Humanizer.Localisation.Spanish;
 using Humanizer.Configuration;
-using Humanizer.Localisation.Ordinalizers;
 
 namespace Humanizer
 {

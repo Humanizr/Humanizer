@@ -1,4 +1,8 @@
-﻿using Humanizer.Localisation.Ordinalizers;
+﻿using Humanizer.Localisation;
+using Humanizer.Localisation.BrazilianPortuguese;
+using Humanizer.Localisation.English;
+using Humanizer.Localisation.Russian;
+using Humanizer.Localisation.Spanish;
 
 namespace Humanizer.Configuration
 {

@@ -1,7 +1,5 @@
 using Humanizer.DateTimeHumanizeStrategy;
-using Humanizer.Localisation.Formatters;
-using Humanizer.Localisation.NumberToWords;
-using Humanizer.Localisation.Ordinalizers;
+using Humanizer.Localisation;
 
 namespace Humanizer.Configuration
 {

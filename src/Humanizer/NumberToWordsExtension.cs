@@ -1,8 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.Localisation;
+using Humanizer.Localisation.Arabic;
+using Humanizer.Localisation.BrazilianPortuguese;
+using Humanizer.Localisation.Dutch;
+using Humanizer.Localisation.English;
+using Humanizer.Localisation.Farsi;
+using Humanizer.Localisation.French;
+using Humanizer.Localisation.Hebrew;
+using Humanizer.Localisation.Russian;
+using Humanizer.Localisation.Spanish;
 using Humanizer.Configuration;
-using Humanizer.Localisation.NumberToWords;
 
 namespace Humanizer
 {

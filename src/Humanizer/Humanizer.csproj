@@ -49,47 +49,47 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
-    <Compile Include="Localisation\Formatters\SlovenianFormatter.cs" />
+    <Compile Include="Localisation\Serbian\SerbianFormatter.cs" />
+    <Compile Include="Localisation\Slovenian\SlovenianFormatter.cs" />
     <Compile Include="Configuration\LocaliserRegistry.cs" />
     <Compile Include="Configuration\FormatterRegistry.cs" />
     <Compile Include="Configuration\NumberToWordsConverterRegistry.cs" />
     <Compile Include="Configuration\OrdinalizerRegistry.cs" />
-    <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
     <Compile Include="GrammaticalGender.cs" />
-    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
-    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
-    <Compile Include="Localisation\NumberToWords\SlovenianNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\DutchNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\GermanNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Slovenian\SlovenianNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\German\GermanNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\BrazilianPortuguese\BrazilianPortugueseNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Russian\RussianGrammaticalNumber.cs" />
+    <Compile Include="Localisation\Russian\RussianGrammaticalNumberDetector.cs" />
+    <Compile Include="Localisation\Dutch\DutchNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\DefaultNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Farsi\FarsiNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Arabic\ArabicNumberToWordsConverter.cs" />
     <Compile Include="Bytes\ByteSize.cs" />
     <Compile Include="Bytes\ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
-    <Compile Include="Localisation\NumberToWords\EnglishNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\FrenchNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\HebrewNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
+    <Compile Include="Localisation\English\EnglishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\French\FrenchNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Hebrew\HebrewNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\CzechSlovakPolishFormatter.cs" />
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
-    <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
-    <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
-    <Compile Include="Localisation\Ordinalizers\RussianOrdinalizer.cs" />
-    <Compile Include="Localisation\Ordinalizers\SpanishOrdinalizer.cs" />
-    <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
-    <Compile Include="Localisation\Ordinalizers\EnglishOrdinalizer.cs" />
-    <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
+    <Compile Include="Localisation\INumberToWordsConverter.cs" />
+    <Compile Include="Localisation\IOrdinalizer.cs" />
+    <Compile Include="Localisation\Russian\RussianOrdinalizer.cs" />
+    <Compile Include="Localisation\Spanish\SpanishOrdinalizer.cs" />
+    <Compile Include="Localisation\DefaultOrdinalizer.cs" />
+    <Compile Include="Localisation\English\EnglishOrdinalizer.cs" />
+    <Compile Include="Localisation\BrazilianPortuguese\BrazilianPortugueseOrdinalizer.cs" />
+    <Compile Include="Localisation\Polish\PolishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Russian\RussianNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Hebrew\HebrewFormatter.cs" />
     <Compile Include="Localisation\Tense.cs" />
-    <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Spanish\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -101,9 +101,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
-    <Compile Include="Localisation\Formatters\ArabicFormatter.cs" />
-    <Compile Include="Localisation\Formatters\DefaultFormatter.cs" />
-    <Compile Include="Localisation\Formatters\IFormatter.cs" />
+    <Compile Include="Localisation\Arabic\ArabicFormatter.cs" />
+    <Compile Include="Localisation\DefaultFormatter.cs" />
+    <Compile Include="Localisation\IFormatter.cs" />
     <Compile Include="Localisation\ResourceKeys.Common.cs" />
     <Compile Include="Localisation\ResourceKeys.DateHumanize.cs" />
     <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
@@ -125,8 +125,8 @@
       <DependentUpon>In.Months.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\Resources.cs" />
-    <Compile Include="Localisation\Formatters\RomanianFormatter.cs" />
-    <Compile Include="Localisation\Formatters\RussianFormatter.cs" />
+    <Compile Include="Localisation\Romanian\RomanianFormatter.cs" />
+    <Compile Include="Localisation\Russian\RussianFormatter.cs" />
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />

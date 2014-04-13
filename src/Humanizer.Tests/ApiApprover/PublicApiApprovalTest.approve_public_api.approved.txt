@@ -66,9 +66,9 @@ public class CasingExtensions
 public class Configurator
 {
     public Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
-    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
-    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
-    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.IFormatter> Formatters { get; }
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.INumberToWordsConverter> NumberToWordsConverters { get; }
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.IOrdinalizer> Ordinalizers { get; }
 }
 
 public class LocaliserRegistry`1
