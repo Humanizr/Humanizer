@@ -47,5 +47,16 @@ namespace Humanizer.Tests.Localisation.es
         {
             Assert.Equal(expected, number.ToWords());
         }
+
+        [Theory]
+        [InlineData(1, "primero", null)]
+        [InlineData(2, "segundo", GrammaticalGender.Masculine)]
+        [InlineData(2, "segunda", GrammaticalGender.Feminine)]
+        [InlineData(2, "segundo", GrammaticalGender.Neuter)]
+        [InlineData(11, "once", null)]
+        public void ToOrdinalWordsSpanish(int number, string words, GrammaticalGender gender)
+        {
+            Assert.Equal(words, number.ToOrdinalWords(gender));
+        }
     }
 }
