@@ -1,12 +1,32 @@
 ﻿namespace Humanizer
 {
+    /// <summary>
+    /// Enumerates the ways of displaying a quantity value when converting
+    /// a word to a quantity string.
+    /// </summary>
     public enum ShowQuantityAs
     {
+        /// <summary>
+        /// Indicates that no quantity will be included in the formatted string.
+        /// </summary>
         None = 0,
+
+        /// <summary>
+        /// Indicates that the quantity will be included in the output, formatted
+        /// as its numeric value (e.g. "1").
+        /// </summary>
         Numeric,
+
+        /// <summary>
+        /// Incidates that the quantity will be included in the output, formatted as
+        /// words (e.g. 123 => "one hundred and twenty three").
+        /// </summary>
         Words
     }
 
+    /// <summary>
+    /// Provides extensions for formatting a <see cref="string"/> word as a quantity.
+    /// </summary>
     public static class ToQuantityExtensions
     {
         /// <summary>
@@ -20,7 +40,7 @@
         /// "request".ToQuantity(1) => "1 request"
         /// "request".ToQuantity(2) => "2 requests"
         /// "men".ToQuantity(2) => "2 men"
-        /// "men".ToQuantity(1) => "1 man"
+        /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
         /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
