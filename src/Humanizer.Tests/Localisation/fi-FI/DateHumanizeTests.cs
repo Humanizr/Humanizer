@@ -51,9 +51,9 @@ namespace Humanizer.Tests.Localisation.fiFI
         }
 
         [Theory]
-        [InlineData(-10, "10 sekunttia sitten")]
-        [InlineData(-3, "3 sekunttia sitten")]
-        [InlineData(-2, "2 sekunttia sitten")]
+        [InlineData(-10, "10 sekuntia sitten")]
+        [InlineData(-3, "3 sekuntia sitten")]
+        [InlineData(-2, "2 sekuntia sitten")]
         [InlineData(-1, "sekuntti sitten")]
         public void SecondsAgo(int seconds, string expected)
         {
