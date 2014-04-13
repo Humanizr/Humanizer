@@ -1,52 +1,31 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class PolishNumberToWordsConverter : DefaultNumberToWordsConverter
     {
-        private enum Numeral
+        private static readonly string[] HundredsMap = { "zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset" };
+        private static readonly string[] TensMap = { "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt" };
+        private static readonly string[] UnitsMap = { "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście" };
+
+        private static void CollectPartsUnderThousand(ICollection<string> parts, int number)
         {
-            One = 1,
-            Thousand = 1000,
-            Million = 1000000,//10^6
-            Miliard = 1000000000,//10^9
-        }
-
-        private const string Negative = "minus";
-        private const string Zero = "zero";
-
-        private static string ConvertNumberUnderThousand(Numeral numeral, int number)
-        {
-            if (numeral != Numeral.One && number == 1)
-                return string.Empty;
-
-            var result = new StringBuilder();
-
-            var hundreds = number / 100;
+            var hundreds = number/100;
             if (hundreds > 0)
             {
-                var map = new[] { "", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset" };
-                result.AppendFormat(@"{0} ", map[hundreds]);
-                number = number % 100;
+                parts.Add(HundredsMap[hundreds]);
+                number = number%100;
             }
 
-            var tens = number / 10;
+            var tens = number/10;
             if (tens > 1)
             {
-                var map = new[] { "", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt" };
-                result.AppendFormat(@"{0} ", map[tens]);
-                number = number % 10;
+                parts.Add(TensMap[tens]);
+                number = number%10;
             }
 
             if (number > 0)
-            {
-                var map = new[] { "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście" };
-                result.AppendFormat(@"{0} ", map[number]);
-            }
-
-            return result.ToString();
+                parts.Add(UnitsMap[number]);
         }
 
         private static int GetMappingIndex(int number)
@@ -55,62 +34,70 @@ namespace Humanizer.Localisation.NumberToWords
                 return 0;
 
             if (number > 1 && number < 5)
-                return 1;//denominator
+                return 1; //denominator
 
-            var tens = number / 10;
+            var tens = number/10;
             if (tens > 1)
             {
-                var unity = number % 10;
+                var unity = number%10;
                 if (unity > 1 && unity < 5)
-                    return 1;//denominator
+                    return 1; //denominator
             }
 
-            return 2;//genitive
-        }
-       
-        private static string GetSuffix(Numeral numeral, int num)
-        {
-            switch (numeral)
-            {
-                case Numeral.Miliard:
-                    var miliard = new[] { "miliard", "miliardy", "miliardów" }; //one, denominator, genitive
-                    return miliard[GetMappingIndex(num)];
-                case Numeral.Million:
-                    var million = new[] { "milion", "miliony", "milionów" }; //one, denominator, genitive
-                    return million[GetMappingIndex(num)];
-                case Numeral.Thousand:
-                    var thousand = new[] { "tysiąc", "tysiące", "tysięcy" }; //one, denominator, genitive
-                    return thousand[GetMappingIndex(num)];
-                default:
-                    return string.Empty;
-            }
+            return 2; //genitive
         }
 
         public override string Convert(int number)
         {
             if (number == 0)
-                return Zero;
+                return "zero";
 
-            var result = new StringBuilder();
+            var parts = new List<string>();
 
             if (number < 0)
             {
-                result.AppendFormat(@"{0} ", Negative);
-                number = Math.Abs(number);
+                parts.Add("minus");
+                number = -number;
             }
 
-            var numerals = ((Numeral[])Enum.GetValues(typeof(Numeral))).Reverse();
-            foreach (var numeral in numerals)
+            var milliard = number/1000000000;
+            if (milliard > 0)
             {
-                var num = number / (int)numeral;
-                if (num > 0)
-                {
-                    result.AppendFormat(@"{0}{1} ", ConvertNumberUnderThousand(numeral, num), GetSuffix(numeral, num));
-                    number %= (int)numeral;
-                }
+                if (milliard > 1)
+                    CollectPartsUnderThousand(parts, milliard);
+
+                var map = new[] { "miliard", "miliardy", "miliardów" }; //one, denominator, genitive
+                parts.Add(map[GetMappingIndex(milliard)]);
+                number %= 1000000000;
             }
 
-            return result.ToString().Trim();
+            var million = number/1000000;
+            if (million > 0)
+            {
+                if (million > 1)
+                    CollectPartsUnderThousand(parts, million);
+
+                var map = new[] { "milion", "miliony", "milionów" }; //one, denominator, genitive
+                parts.Add(map[GetMappingIndex(million)]);
+                number %= 1000000;
+            }
+
+            var thouthand = number/1000;
+            if (thouthand > 0)
+            {
+                if (thouthand > 1)
+                    CollectPartsUnderThousand(parts, thouthand);
+
+                var thousand = new[] { "tysiąc", "tysiące", "tysięcy" }; //one, denominator, genitive
+                parts.Add(thousand[GetMappingIndex(thouthand)]);
+                number %= 1000;
+            }
+
+            var units = number/1;
+            if (units > 0)
+                CollectPartsUnderThousand(parts, units);
+
+            return string.Join(" ", parts);
         }
     }
 }
