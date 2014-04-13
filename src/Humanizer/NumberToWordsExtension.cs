@@ -21,7 +21,7 @@ namespace Humanizer
                 {"pt-BR", () => new BrazilianPortugueseNumberToWordsConverter()},
                 {"ru", () => new RussianNumberToWordsConverter()},
                 {"fr", () => new FrenchNumberToWordsConverter()},
-				{"nl", () => new DutchNumberToWordsConverter()},
+                {"nl", () => new DutchNumberToWordsConverter()},
                 {"he", () => new HebrewNumberToWordsConverter()}
             };
 
@@ -75,7 +75,7 @@ namespace Humanizer
         /// 1.ToOrdinalWords(GrammaticalGender.Feminine) -> "primeira"
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
-        /// <param name="gender">The grammatical gender to use for output words. Defaults to masculine.</param>
+        /// <param name="gender">The grammatical gender to use for output words</param>
         /// <returns></returns>
         public static string ToOrdinalWords(this int number, GrammaticalGender gender)
         {
