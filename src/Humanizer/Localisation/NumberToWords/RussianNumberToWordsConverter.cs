@@ -5,23 +5,25 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class RussianNumberToWordsConverter : DefaultNumberToWordsConverter
     {
+        private static readonly string[] HunderdsMap = { "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
+        private static readonly string[] TensMap = { "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто" };
+        private static readonly string[] UnitsMap = { "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать" };
+
         private static string ToWordsUnderThousand(int number, GrammaticalGender gender)
         {
             var parts = new List<string>();
 
-            var hunderdsMap = new[] { "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
             var hunderds = number / 100;
             if (hunderds > 0)
             {
-                parts.Add(hunderdsMap[hunderds]);
+                parts.Add(HunderdsMap[hunderds]);
                 number %= 100;
             }
 
             var tens = number / 10;
             if (tens > 1)
             {
-                var tensMap = new[] { "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто" };
-                parts.Add(tensMap[tens]);
+                parts.Add(TensMap[tens]);
                 number %= 10;
             }
 
@@ -35,9 +37,8 @@ namespace Humanizer.Localisation.NumberToWords
                     parts.Add("две");
                 else
                 {
-                    var unitsMap = new[] { "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать" };
                     if (number < 20)
-                        parts.Add(unitsMap[number]);
+                        parts.Add(UnitsMap[number]);
                 }
             }
 
@@ -91,7 +92,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(ToWordsUnderThousand(number, gender));
             }
 
-            return string.Join(" ", parts.ToArray());
+            return string.Join(" ", parts);
         }
 
         private static int GetIndex(RussianGrammaticalNumber grammaticalNumber)
