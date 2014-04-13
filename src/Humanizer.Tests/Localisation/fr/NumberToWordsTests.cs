@@ -107,5 +107,13 @@ namespace Humanizer.Tests.Localisation.fr
         {
             Assert.Equal(words, number.ToOrdinalWords());
         }
+
+        [Theory]
+        [InlineData(1, "première", GrammaticalGender.Feminine)]
+        [InlineData(1, "premier", GrammaticalGender.Masculine)]
+        public void ToOrdinalWordsWithGender(int number, string expected, GrammaticalGender gender)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(gender));
+        }
     }
 }

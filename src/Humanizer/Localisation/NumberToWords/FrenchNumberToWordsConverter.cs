@@ -90,6 +90,14 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+        {
+            if (number == 1 && gender == GrammaticalGender.Feminine)
+                return "première";
+
+            return base.ConvertToOrdinal(number, gender);
+        }
+
         public override string ConvertToOrdinal(int number)
         {
             if (number == 1)
