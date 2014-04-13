@@ -147,7 +147,7 @@ namespace Humanizer.Bytes
         /// Converts the value of the current ByteSize object to a string.
         /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
         /// the largest metric prefix such that the corresponding value is greater
-        //  than or equal to one.
+        ///  than or equal to one.
         /// </summary>
         public override string ToString()
         {

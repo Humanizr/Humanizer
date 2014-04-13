@@ -21,7 +21,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         }
 
         /// <summary>
-        /// Returns localized & humanized distance of time between two dates; given a specific precision.
+        /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
         /// <param name="input"></param>
         /// <param name="comparisonBase"></param>
