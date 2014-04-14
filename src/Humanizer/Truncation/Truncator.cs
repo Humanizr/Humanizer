@@ -93,5 +93,27 @@ namespace Humanizer
                 return new FixedNumberOfWordsTruncator();
             }
         }
+
+        /// <summary>
+        /// Truncates string after the word it lands on
+        /// </summary>
+        public static ITruncator MaximumLengthCompleteCurrentWord
+        {
+            get
+            {
+                return new MaximumLengthCompleteCurrentWord();
+            }
+        }
+
+        /// <summary>
+        /// Truncates string before the word it lands on
+        /// </summary>
+        public static ITruncator MaximumLengthWithoutWordBreak
+        {
+            get
+            {
+                return new MaximumLengthWithoutWordBreak();
+            }
+        }
     }
 }

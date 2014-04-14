@@ -110,7 +110,7 @@ By default the `'…'` character is used to truncate strings. The advantage of u
 
 ```c#
 "Long text to truncate".Truncate(10, "---") => "Long te---"
-```
+```c#
 
 The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples both have an overload that allow you to specify the `ITruncator` instance to use for the truncation. Here are examples on how to use the three provided truncators:
 
@@ -126,6 +126,15 @@ The default truncation strategy, `Truncator.FixedLength`, is to truncate the inp
 ```
 
 Note that you can also use create your own truncator by having a class implement the `ITruncator` interface.
+
+To make sure that your truncation ends in a full word you can use the ```c#Truncator.NoMoreWordsAfterNumberOfCharacters``` or
+```c#Truncator.NoMoreWordsBeforeNumberOfCharacters```
+
+```
+"Long text to truncate".Truncate(6, Truncator.MaximumLengthCompleteCurrentWord) => "Long text..."
+"Long text to truncate".Truncate(6, Truncator.MaximumLengthWithoutWordBreak) => "Long..."
+```
+
 
 ###<a id="format-string">Format String</a>
 You can format a `string` using the `FormatWith()` method:
