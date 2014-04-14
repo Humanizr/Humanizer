@@ -313,4 +313,100 @@
     <value>לפני {0} שנים</value>
     <comment>{0} years ago</comment>
   </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>בעוד {0} יום</value>
+    <comment>{0} days from now</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>בעוד יומיים</value>
+    <comment>in 2 days</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} ימים</value>
+    <comment>{0} days from now</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>בעוד {0} שעות</value>
+    <comment>in {0} hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>בעוד שעתיים</value>
+    <comment>in 2 hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} שעות</value>
+    <comment>in {0} hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>בעוד {0} דקות</value>
+    <comment>in {0} minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>בעוד 2 דקות</value>
+    <comment>in 2 minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} דקות</value>
+    <comment>in {0} minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>בעוד {0} חודשים</value>
+    <comment>in {0} months</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>בעוד חודשיים</value>
+    <comment>in 2 months</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} חודשים</value>
+    <comment>in {0} months</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>בעוד {0} שנה</value>
+    <comment>in {0} years</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>בעוד שנתיים</value>
+    <comment>in 2 years</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} שנים</value>
+    <comment>in {0} years</comment>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>מחר</value>
+    <comment>tomorrow</comment>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>בעוד שעה</value>
+    <comment>in an hour</comment>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>בעוד דקה</value>
+    <comment>in a minute</comment>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>בעוד חודש</value>
+    <comment>in a month</comment>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>בעוד שנה</value>
+    <comment>in a year</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>בעוד {0} שניות</value>
+    <comment>in {0} seconds</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>בעוד 2 שניות</value>
+    <comment>in 2 seconds</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} שניות</value>
+    <comment>in {0} seconds</comment>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>בעוד שנייה</value>
+    <comment>in a second</comment>
+  </data>
 </root>
