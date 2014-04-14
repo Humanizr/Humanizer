@@ -5,10 +5,6 @@ using System.Text;
 
 namespace Humanizer
 {
-
-    /// <summary>
-    /// Truncates string after the word it lands on
-    /// </summary>
     class MaximumLengthWithoutWordBreak : ITruncator
     {
         public string Truncate(string value, int length, string truncationString)
@@ -26,9 +22,7 @@ namespace Humanizer
             if (truncationString == null || truncationString.Length > length)
             {
                 while (Char.IsLetterOrDigit(value, length) && length > 0)
-                {
                     length--;
-                }
                 return value.Substring(0, length);
             }
 
@@ -43,9 +37,7 @@ namespace Humanizer
                 if (!numberOfCharactersEqualToTruncateLength && alphaNumericalCharactersProcessed + truncationString.Length == length)
                 {
                     while (Char.IsLetterOrDigit(value, i) && i > 0)
-                    {
                         i--;
-                    }
                     return value.Substring(0, i) + truncationString;
                 }
             }

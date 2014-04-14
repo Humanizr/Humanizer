@@ -7,7 +7,6 @@ namespace Humanizer
 {
     class MaximumLengthCompleteCurrentWord : ITruncator
     {
-
         public string Truncate(string value, int length, string truncationString)
         {
             if (value == null)
@@ -23,9 +22,7 @@ namespace Humanizer
             if (truncationString == null || truncationString.Length > length)
             {
                 while (Char.IsLetterOrDigit(value, length))
-                {
                     length++;
-                }
                 return value.Substring(0, length);
             }
 
@@ -40,9 +37,7 @@ namespace Humanizer
                 if (!numberOfCharactersEqualToTruncateLength && alphaNumericalCharactersProcessed + truncationString.Length == length)
                 {
                     while (Char.IsLetterOrDigit(value, i + 1))
-                    {
                         i++;
-                    }
                     return value.Substring(0, i + 1) + truncationString;
                 }
             }

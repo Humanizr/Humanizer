@@ -129,9 +129,9 @@ Note that you can also use create your own truncator by having a class implement
 To make sure that your truncation ends in a full word you can use the ```c#Truncator.NoMoreWordsAfterNumberOfCharacters``` or
 ```c#Truncator.NoMoreWordsBeforeNumberOfCharacters```
 
-```c#
-"Long text to truncate".Truncate(6, Truncator.NoMoreWordsAfterNumberOfCharacters) => "Long text…"
-"Long text to truncate".Truncate(6, Truncator.NoMoreWordsBeforeNumberOfCharacters) => "Long---"
+```
+"Long text to truncate".Truncate(6, Truncator.MaximumLengthCompleteCurrentWord) => "Long text..."
+"Long text to truncate".Truncate(6, Truncator.MaximumLengthWithoutWordBreak) => "Long..."
 ```
 
 
