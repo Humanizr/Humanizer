@@ -42,7 +42,8 @@ Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metada
 ##<a id="features">Features</a>
 
 ###<a id="humanize-string">Humanize String</a>
-String extensions are at the heart of this micro-framework. The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
+`Humanize` string extensions allow you turn an otherwise computerized string into a more readable human-friendly one. 
+The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
 
 ```C#
 "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
@@ -215,9 +216,41 @@ Humanizer supports local as well as UTC dates. You could also provide the date y
 public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null)
 ```
 
-Quite a few translations are available for humanized dates.
+Many localisations are availalbe for this method. Here is a few examples:
 
-**No dehumanization for dates as the human friendly date is not reversible**
+```C#
+// In ar culture
+DateTime.UtcNow.AddDays(-1).Humanize() => "أمس"
+DateTime.UtcNow.AddDays(-2).Humanize() => "منذ يومين"
+DateTime.UtcNow.AddDays(-3).Humanize() => "منذ 3 أيام"
+DateTime.UtcNow.AddDays(-11).Humanize() => "منذ 11 يوم"
+
+// In ru-RU culture
+DateTime.UtcNow.AddMinutes(-1).Humanize() => "минуту назад"
+DateTime.UtcNow.AddMinutes(-2).Humanize() => "2 минуты назад"
+DateTime.UtcNow.AddMinutes(-10).Humanize() => "10 минут назад"
+DateTime.UtcNow.AddMinutes(-21).Humanize() => "21 минуту назад"
+DateTime.UtcNow.AddMinutes(-22).Humanize() => "22 минуты назад"
+DateTime.UtcNow.AddMinutes(-40).Humanize() => "40 минут назад"
+```
+
+There are two strategies for `DateTime.Humanize`: the default one as seen above and a precision based one. 
+To use the precision based strategy you need to configure it: 
+
+`Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75)`.
+
+The default precision is set to .75 but you can pass your desired precision too. With precision set to 0.75:
+
+```C#
+44 seconds => 44 seconds ago/from now
+45 seconds => one minute ago/from now
+104 seconds => one minute ago/from now
+105 seconds => two minutes ago/from now
+
+25 days => a month ago/from now
+```
+
+**No dehumanization for dates as `Humanize` is a lossy transformation and the human friendly date is not reversible**
 
 ###<a id="humanize-timespan">Humanize TimeSpan</a>
 You can call `Humanize` on a `TimeSpan` to a get human friendly representation for it:
@@ -242,6 +275,19 @@ TimeSpan.FromMilliseconds(1299630020).Humanize() => "2 weeks"
 TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
 TimeSpan.FromMilliseconds(1299630020).Humanize(4) => "2 weeks, 1 day, 1 hour, 30 seconds"
 TimeSpan.FromMilliseconds(1299630020).Humanize(5) => "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds"
+```
+
+Many localisations are availalbe for this method:
+
+```C#
+// in de-DE culture
+TimeSpan.FromDays(1).Humanize() => "Ein Tag"
+TimeSpan.FromDays(2).Humanize() => "2 Tage"
+
+// in sk-SK culture
+TimeSpan.FromMilliseconds(1).Humanize() => "1 milisekunda"
+TimeSpan.FromMilliseconds(2).Humanize() => "2 milisekundy"
+TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
 ```
 
 ###<a id="inflector-methods">Inflector methods</a>
@@ -411,7 +457,8 @@ Humanizer can change numbers to words using the `ToWords` extension:
 3501.ToWords() => "three thousand five hundred and one"
 ```
 
-You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specify which gender the number should be outputted in. The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`.
+You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specify which gender the number should be outputted in. 
+The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
 ```C#
 // for Russian locale
@@ -419,6 +466,8 @@ You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specif
 1.ToWords(GrammaticalGender.Feminine) => "одна"
 1.ToWords(GrammaticalGender.Neuter) => "одно"
 ```
+
+Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
 
 ###<a id="number-toordinalwords">Number to ordinal words</a>
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words!! Let me show that with an example:
@@ -438,7 +487,7 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 
 `ToOrdinalWords` also supports grammatical gender. 
 You can pass a second argument to `ToOrdinalWords` to specify which gender the number should be outputted in. 
-The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`.
+The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
 ```C#
 // for Brazilian Portuguese locale
@@ -698,17 +747,17 @@ So if you want to contribute, fork the repo, preferrably create a local branch t
 
 Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
 
- - [ ] Implementation is clean
- - [ ] Code adheres to the existing coding standards; e.g. no curlies for one-line blocks & no redundant empty lines between methods or code blocks
- - [ ] No ReSharper warnings
- - [ ] There is proper unit test coverage
- - [ ] If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
- - [ ] There is very little or no comments (because comments shouldn't be needed if you write clean code)
- - [ ] Xml documentation is added/updated for the addition/change
- - [ ] Your PR is (re)based on top of the latest commits (more info below)
- - [ ] Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
- - [ ] Readme is updated if you change an existing feature or add a new one
- - [ ] An entry is added in the release_notes.md file in the 'In Development' section with a link to your PR and a description of what's changed. Please follow the wording style for the description.
+ - Implementation is clean
+ - Code adheres to the existing coding standards; e.g. no curlies for one-line blocks & no redundant empty lines between methods or code blocks
+ - No ReSharper warnings
+ - There is proper unit test coverage
+ - If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
+ - There is very little or no comments (because comments shouldn't be needed if you write clean code)
+ - Xml documentation is added/updated for the addition/change
+ - Your PR is (re)based on top of the latest commits (more info below)
+ - Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
+ - Readme is updated if you change an existing feature or add a new one
+ - An entry is added in the release_notes.md file in the 'In Development' section with a link to your PR and a description of what's changed. Please follow the wording style for the description.
 
 Please rebase your code on top of the latest commits. 
 Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts. 
@@ -717,18 +766,27 @@ Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912
 
 ###<a id="need-your-help-with-localisation">Need your help with localisation</a>
 One area Humanizer could always use your help is localisation. 
-Currently Humanizer [supports](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer/Properties) quite a few localisations for `Date.Humanize` and a few for `TimeSpan.Humanize` methods. 
-There is also ongoing effort to add localisation to `ToWords` extension method which currently only supports English and Arabic.
+Currently Humanizer supports quite a few localisations for `DateTime.Humanize`, `TimeSpan.Humanize`, `ToWords` and `ToOrdinalWords`. 
 
-Humanizer could definitely do with more translations. To add a translation, fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) to the end (e.g. resources.ru.resx for Russian), translate the values to your language, commit, and send a pull request for it. Thanks.
+Humanizer could definitely do with more translations. 
+To add a translation for `DateTime.Humanize` and `TimeSpan.Humanize`, 
+fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) 
+to the end (e.g. resources.ru.resx for Russian), translate the values to your language, write unit tests for the translation, commit, and send a pull request for it. Thanks.
 
 Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
 Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
-In cases like this in addition to creating a resource file you should also subclass [`DefaultFormatter`](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/DefaultFormatter.cs) in a class that represents your language; 
-e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/RomanianFormatter.cs) and then override the methods that need involve the complex rules. We think overriding the `GetResourceKey` method should be enough. To see how to do that check out `RomanianFormatter` and `RussianFormatter`. 
-Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs#L11) based on the current culture.
+In cases like this in addition to creating a resource file you should also subclass [`DefaultFormatter`](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/Formatters/DefaultFormatter.cs) in a class that represents your language; 
+e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/Formatters/RomanianFormatter.cs) and then override the methods that need the complex rules. 
+We think overriding the `GetResourceKey` method should be enough. 
+To see how to do that check out `RomanianFormatter` and `RussianFormatter`. 
+Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) based on the current culture.
 
-Translations for ToWords method are currently done in code as there is a huge difference between the way different languages deal with number words.
+Translations for `ToWords` and `ToOrdinalWords` methods are currently done in code as there is a huge difference between the way different languages deal with number words.
+Check out [Dutch](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/DutchNumberToWordsConverter.cs) and 
+[Russian](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/RussianNumberToWordsConverter.cs) localisations for examples of how you can write a Converter for your language.
+You should then register your converter in the [ConverterFactory](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/NumberToWordsExtension.cs#L13) for it to kick in on your locale.
+
+Don't forget to write tests for your localisations. Check out the existing [DateHumanizeTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/DateHumanizeTests.cs), [TimeSpanHumanizeTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/TimeSpanHumanizeTests.cs) and [NumberToWordsTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/NumberToWordsTests.cs).
 
 ##<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
 Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.
