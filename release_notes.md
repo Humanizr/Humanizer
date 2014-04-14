@@ -1,4 +1,5 @@
 ###In Development
+  - [#136] not yet known: Added truncating functions to end in complete words
   - [#188](https://github.com/Mehdik/Humanizer/pull/188): Added Spanish ToOrdinalWords translations
   - [#166](https://github.com/MehdiK/Humanizer/pull/166): Added Dutch (NL) Number to words and ordinals
   - [#199](https://github.com/MehdiK/Humanizer/pull/199): Added Hebrew Number to words (both genders)
