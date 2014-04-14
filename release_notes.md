@@ -1,12 +1,16 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...master)
+
+###v1.22.1 - 2014-04-14
   - [#188](https://github.com/Mehdik/Humanizer/pull/188): Added Spanish ToOrdinalWords translations
   - [#166](https://github.com/MehdiK/Humanizer/pull/166): Added Dutch (NL) Number to words and ordinals
   - [#199](https://github.com/MehdiK/Humanizer/pull/199): Added Hebrew Number to words (both genders)
   - [#202](https://github.com/MehdiK/Humanizer/pull/202): Fixed typo sekunttia -> sekuntia (Finnish translation)
   - [#203](https://github.com/MehdiK/Humanizer/pull/203): Added feminine gender for french ordinal words
-  - [#208](https://github.com/MehdiK/Humanizer/pull/208): Added Hebrew implementation of FromNow: Years, Months, Days, Hours, Minutes, Seconds
+  - [#208](https://github.com/MehdiK/Humanizer/pull/208): Added Hebrew implementation of future DateTime 
   
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.21.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.21.1...v1.22.1)
 
 ###v1.21.1 - 2014-04-12
   - [#196](https://github.com/MehdiK/Humanizer/pull/196): Added Gender for ToOrdinalWords (needed for Brazilian Portuguese). Added pt-br OrdinalToWords localisation
