@@ -761,7 +761,7 @@ Pull requests are code reviewed. Here is a checklist you should tick through bef
 
 Please rebase your code on top of the latest commits. 
 Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts. 
-Also before sending the pull request pleast rebase your code as there is a chance there has been a few commits pushed up after you pulled last. 
+Also before sending the pull request please rebase your code as there is a chance there has been a few commits pushed up after you pulled last. 
 Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912#the-workflow) if you're new to git.
 
 ###<a id="need-your-help-with-localisation">Need your help with localisation</a>
