@@ -143,6 +143,8 @@
     <Compile Include="Truncation\FixedNumberOfCharactersTruncator.cs" />
     <Compile Include="Truncation\FixedNumberOfWordsTruncator.cs" />
     <Compile Include="Truncation\ITruncator.cs" />
+    <Compile Include="Truncation\MaximumLengthCompleteCurrentWord.cs" />
+    <Compile Include="Truncation\MaximumLengthWithoutWordBreak.cs" />
     <Compile Include="Truncation\Truncator.cs" />
   </ItemGroup>
   <ItemGroup>
