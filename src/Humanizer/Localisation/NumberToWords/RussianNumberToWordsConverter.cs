@@ -1,42 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Humanizer.Localisation.GrammaticalNumber;
 
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class RussianNumberToWordsConverter : DefaultNumberToWordsConverter
     {
-        private static readonly string[] HunderdsMap = { "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
+        private static readonly string[] HundredsMap = { "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
         private static readonly string[] TensMap = { "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто" };
         private static readonly string[] UnitsMap = { "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать" };
-
-        private static void CollectPartsUnderThousand(ICollection<string> parts, int number, GrammaticalGender gender)
-        {
-            var hunderds = number / 100;
-            if (hunderds > 0)
-            {
-                parts.Add(HunderdsMap[hunderds]);
-                number %= 100;
-            }
-
-            var tens = number / 10;
-            if (tens > 1)
-            {
-                parts.Add(TensMap[tens]);
-                number %= 10;
-            }
-
-            if (number > 0)
-            {
-                if (number == 1 && gender == GrammaticalGender.Feminine)
-                    parts.Add("одна");
-                else if (number == 1 && gender == GrammaticalGender.Neuter)
-                    parts.Add("одно");
-                else if (number == 2 && gender == GrammaticalGender.Feminine)
-                    parts.Add("две");
-                else if (number < 20)
-                    parts.Add(UnitsMap[number]);
-            }
-        }
+        private static readonly string[] UnitsOrdinalPrefixes = { string.Empty, string.Empty, "двух", "трёх", "четырёх", "пяти", "шести", "семи", "восьми", "девяти", "десяти", "одиннадцати", "двенадцати", "тринадцати", "четырнадцати", "пятнадцати", "шестнадцати", "семнадцати", "восемнадцати", "девятнадцати" };
+        private static readonly string[] TensOrdinalPrefixes = { string.Empty, "десяти", "двадцати", "тридцати", "сорока", "пятидесяти", "шестидесяти", "семидесяти", "восьмидесяти", "девятидесяти" };
+        private static readonly string[] TensOrdinal = { string.Empty, "десят", "двадцат", "тридцат", "сороков", "пятидесят", "шестидесят", "семидесят", "восьмидесят", "девяност" };
+        private static readonly string[] UnitsOrdinal = { string.Empty, "перв", "втор", "трет", "четверт", "пят", "шест", "седьм", "восьм", "девят", "десят", "одиннадцат", "двенадцат", "тринадцат", "четырнадцат", "пятнадцат", "шестнадцат", "семнадцат", "восемнадцат", "девятнадцат" };
 
         public override string Convert(int number)
         {
@@ -56,51 +32,170 @@ namespace Humanizer.Localisation.NumberToWords
                 number = -number;
             }
 
-            var milliards = number / 1000000000;
-            if (milliards > 0)
-            {
-                CollectPartsUnderThousand(parts, milliards, GrammaticalGender.Masculine);
-                var map = new[] { "миллиард", "миллиарда", "миллиардов" };
-                var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(milliards);
-                parts.Add(map[GetIndex(grammaticalNumber)]);
-                number %= 1000000000;
-            }
-
-            var millions = number / 1000000;
-            if (millions > 0)
-            {
-                CollectPartsUnderThousand(parts, millions, GrammaticalGender.Masculine);
-                var map = new[] { "миллион", "миллиона", "миллионов" };
-                var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(millions);
-                parts.Add(map[GetIndex(grammaticalNumber)]);
-                number %= 1000000;
-            }
-
-            var thousands = number / 1000;
-            if (thousands > 0)
-            {
-                CollectPartsUnderThousand(parts, thousands, GrammaticalGender.Feminine);
-                var map = new[] { "тысяча", "тысячи", "тысячь" };
-                var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(thousands);
-                parts.Add(map[GetIndex(grammaticalNumber)]);
-                number %= 1000;
-            }
+            CollectParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "миллиард", "миллиарда", "миллиардов");
+            CollectParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "миллион", "миллиона", "миллионов");
+            CollectParts(parts, ref number, 1000, GrammaticalGender.Feminine, "тысяча", "тысячи", "тысячь");
 
             if (number > 0)
-                CollectPartsUnderThousand(parts, number, gender);
+                CollectPartsUnderOneThousand(parts, number, gender);
 
             return string.Join(" ", parts);
         }
 
-        private static int GetIndex(RussianGrammaticalNumber grammaticalNumber)
+        public override string ConvertToOrdinal(int number)
         {
-            if (grammaticalNumber == RussianGrammaticalNumber.Singular)
+            return ConvertToOrdinal(number, GrammaticalGender.Masculine);
+        }
+
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+        {
+            if (number == 0)
+                return "нулев" + GetEndingForGender(gender, number);
+
+            var parts = new List<string>();
+
+            if (number < 0)
+            {
+                parts.Add("минус");
+                number = -number;
+            }
+
+            CollectOrdinalParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "миллиардн" + GetEndingForGender(gender, number), "миллиард", "миллиарда", "миллиардов");
+            CollectOrdinalParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "миллионн" + GetEndingForGender(gender, number), "миллион", "миллиона", "миллионов");
+            CollectOrdinalParts(parts, ref number, 1000, GrammaticalGender.Feminine, "тысячн" + GetEndingForGender(gender, number), "тысяча", "тысячи", "тысячь");
+
+            if (number >= 100)
+            {
+                var i = number;
+                var hundreds = number/100;
+                number %= 100;
+                if (number == 0)
+                    parts.Add(GetPrefix(hundreds) + "сот" + GetEndingForGender(gender, i));
+                else
+                    parts.Add(HundredsMap[hundreds]);
+            }
+            if (number >= 20)
+            {
+                var i = number;
+                var tens = i/10;
+                number %= 10;
+                if (number == 0)
+                    parts.Add(TensOrdinal[tens] + GetEndingForGender(gender, i));
+                else
+                    parts.Add(TensMap[tens]);
+            }
+
+            if (number > 0)
+                parts.Add(UnitsOrdinal[number] + GetEndingForGender(gender, number));
+
+            return string.Join(" ", parts);
+        }
+
+        private static void CollectPartsUnderOneThousand(ICollection<string> parts, int number, GrammaticalGender gender)
+        {
+            if (number >= 100)
+            {
+                var hundreds = number / 100;
+                number %= 100;
+                parts.Add(HundredsMap[hundreds]);
+            }
+
+            if (number >= 20)
+            {
+                int tens = number/10;
+                parts.Add(TensMap[tens]);
+                number %= 10;
+            }
+
+            if (number > 0)
+            {
+                if (number == 1 && gender == GrammaticalGender.Feminine)
+                    parts.Add("одна");
+                else if (number == 1 && gender == GrammaticalGender.Neuter)
+                    parts.Add("одно");
+                else if (number == 2 && gender == GrammaticalGender.Feminine)
+                    parts.Add("две");
+                else if (number < 20)
+                    parts.Add(UnitsMap[number]);
+            }
+        }
+
+        private static string GetPrefix(int number)
+        {
+            var parts = new List<string>();
+            if (number >= 100)
+            {
+                var hundreds = number/100;
+                number %= 100;
+                parts.Add(HundredsMap[hundreds]);
+            }
+            if (number >= 20)
+            {
+                var tens = number/10;
+                number %= 10;
+                parts.Add(TensOrdinalPrefixes[tens]);
+            }
+            if (number > 0)
+                parts.Add(UnitsOrdinalPrefixes[number]);
+            
+            return string.Join("", parts);
+        }
+
+        private static void CollectParts(ICollection<string> parts, ref int number, int divisor, GrammaticalGender gender, params string[] forms)
+        {
+            if (number < divisor) return;
+            var result = number/divisor;
+            number %= divisor;
+
+            CollectPartsUnderOneThousand(parts, result, gender);
+            parts.Add(ChooseOneForGrammaticalNumber(result, forms));
+        }
+
+        private static void CollectOrdinalParts(ICollection<string> parts, ref int number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
+        {
+            if (number < divisor) return;
+            var result = number/divisor;
+            number %= divisor;
+            if (number == 0)
+                parts.Add(GetPrefix(result) + prefixedForm);
+            else
+            {
+                CollectPartsUnderOneThousand(parts, result, gender);
+                parts.Add(ChooseOneForGrammaticalNumber(result, forms));
+            }
+        }
+
+        private static int GetIndex(RussianGrammaticalNumber number)
+        {
+            if (number == RussianGrammaticalNumber.Singular)
                 return 0;
 
-            if (grammaticalNumber == RussianGrammaticalNumber.Paucal)
+            if (number == RussianGrammaticalNumber.Paucal)
                 return 1;
 
             return 2;
+        }
+
+        private static string ChooseOneForGrammaticalNumber(int number, string[] forms)
+        {
+            return forms[GetIndex(RussianGrammaticalNumberDetector.Detect(number))];
+        }
+
+        private static string GetEndingForGender(GrammaticalGender gender, int number)
+        {
+            switch (gender)
+            {
+                case GrammaticalGender.Masculine:
+                    if (number == 0 || number == 2 || number == 6 || number == 7 || number == 8 || number == 40)
+                        return "ой";
+                    return "ый";
+                case GrammaticalGender.Feminine:
+                    return "ая";
+                case GrammaticalGender.Neuter:
+                    return "ое";
+                default:
+                    throw new ArgumentOutOfRangeException("gender");
+            }
         }
     }
 }
