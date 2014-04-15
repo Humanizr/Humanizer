@@ -88,6 +88,7 @@
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
+    <Compile Include="Localisation\Ordinalize\SpanishOrdinalizeConverter.cs" />
     <Compile Include="Localisation\Ordinalize\DefaultOrdinalizeConverter.cs" />
     <Compile Include="Localisation\Ordinalize\EnglishOrdinalizeConverter.cs" />
     <Compile Include="Localisation\Ordinalize\BrazilianPortugueseOrdinalizeConverter.cs" />

@@ -14,6 +14,7 @@ namespace Humanizer
             new Dictionary<string, Func<DefaultOrdinalizeConverter>>
             {
                 {"en", () => new EnglishOrdinalizeConverter()},
+                {"es", () => new SpanishOrdinalizeConverter()},
                 {"pt-BR", () => new BrazilianPortugueseOrdinalizeConverter()}
             };
 
