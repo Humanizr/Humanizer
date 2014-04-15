@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.Ordinalizer
+﻿namespace Humanizer.Localisation.Ordinalizers
 {
     internal class SpanishOrdinalizer : DefaultOrdinalizer
     {

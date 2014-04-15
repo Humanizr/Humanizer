@@ -1,7 +1,7 @@
-﻿using Humanizer.Localisation.Ordinalizer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.Localisation.Ordinalizers;
 
 namespace Humanizer
 {

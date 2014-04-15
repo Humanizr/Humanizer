@@ -82,17 +82,7 @@ namespace Humanizer.Tests
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(8)]
-        [InlineData(9)]
-        [InlineData(10)]
-        [InlineData(11)]
-        [InlineData(12)]
-        [InlineData(23)]
-        [InlineData(24)]
-        [InlineData(100)]
-        [InlineData(101)]
-        [InlineData(102)]
-        [InlineData(1001)]
-        public void OrdinalizeNumberGenderIndifferent(int number)
+        public void OrdinalizeNumberGenderIsImmaterial(int number)
         {
             string masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
             string feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
@@ -103,17 +93,7 @@ namespace Humanizer.Tests
         [InlineData("0")]
         [InlineData("1")]
         [InlineData("8")]
-        [InlineData("9")]
-        [InlineData("10")]
-        [InlineData("11")]
-        [InlineData("12")]
-        [InlineData("23")]
-        [InlineData("24")]
-        [InlineData("100")]
-        [InlineData("101")]
-        [InlineData("102")]
-        [InlineData("1001")]
-        public void OrdinalizeStringGenderIndifferent(string number)
+        public void OrdinalizeStringGenderIsImmaterial(string number)
         {
             string masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
             string feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
