@@ -270,7 +270,9 @@ public enum OnNoMatch
 public class OrdinalizeExtensions
 {
     public string Ordinalize(string numberString) { }
+    public string Ordinalize(string numberString, Humanizer.GrammaticalGender gender) { }
     public string Ordinalize(int number) { }
+    public string Ordinalize(int number, Humanizer.GrammaticalGender gender) { }
 }
 
 public enum Plurality
