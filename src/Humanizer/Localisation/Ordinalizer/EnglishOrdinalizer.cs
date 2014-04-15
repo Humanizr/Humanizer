@@ -1,15 +1,13 @@
-﻿namespace Humanizer.Localisation.Ordinalize
+﻿namespace Humanizer.Localisation.Ordinalizer
 {
-    internal class EnglishOrdinalizeConverter : DefaultOrdinalizeConverter
+    internal class EnglishOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString)
         {
             int nMod100 = number % 100;
 
             if (nMod100 >= 11 && nMod100 <= 13)
-            {
                 return numberString + "th";
-            }
 
             switch (number % 10)
             {

@@ -1,4 +1,4 @@
-﻿using Humanizer.Localisation.Ordinalize;
+﻿using Humanizer.Localisation.Ordinalizer;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,12 +10,12 @@ namespace Humanizer
     /// </summary>
     public static class OrdinalizeExtensions
     {
-        private static readonly IDictionary<string, Func<DefaultOrdinalizeConverter>> ConverterFactories =
-            new Dictionary<string, Func<DefaultOrdinalizeConverter>>
+        private static readonly IDictionary<string, Func<DefaultOrdinalizer>> OrdinalizerFactories =
+            new Dictionary<string, Func<DefaultOrdinalizer>>
             {
-                {"en", () => new EnglishOrdinalizeConverter()},
-                {"es", () => new SpanishOrdinalizeConverter()},
-                {"pt-BR", () => new BrazilianPortugueseOrdinalizeConverter()}
+                {"en", () => new EnglishOrdinalizer()},
+                {"es", () => new SpanishOrdinalizer()},
+                {"pt-BR", () => new BrazilianPortugueseOrdinalizer()}
             };
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this string numberString)
         {
-            return Converter.Convert(int.Parse(numberString), numberString);
+            return Ordinalizer.Convert(int.Parse(numberString), numberString);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this string numberString, GrammaticalGender gender)
         {
-            return Converter.Convert(int.Parse(numberString), numberString, gender);
+            return Ordinalizer.Convert(int.Parse(numberString), numberString, gender);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this int number)
         {
-            return Converter.Convert(number, number.ToString(CultureInfo.InvariantCulture));
+            return Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -63,22 +63,22 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this int number, GrammaticalGender gender)
         {
-            return Converter.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
+            return Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
         }
 
-        private static DefaultOrdinalizeConverter Converter
+        private static DefaultOrdinalizer Ordinalizer
         {
             get
             {
-                Func<DefaultOrdinalizeConverter> converterFactory;
+                Func<DefaultOrdinalizer> ordinalizerFactory;
 
-                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out converterFactory))
-                    return converterFactory();
+                if (OrdinalizerFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out ordinalizerFactory))
+                    return ordinalizerFactory();
 
-                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
-                    return converterFactory();
+                if (OrdinalizerFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out ordinalizerFactory))
+                    return ordinalizerFactory();
 
-                return new DefaultOrdinalizeConverter();
+                return new DefaultOrdinalizer();
             }
         }
     }

@@ -1,6 +1,6 @@
-﻿namespace Humanizer.Localisation.Ordinalize
+﻿namespace Humanizer.Localisation.Ordinalizer
 {
-    internal class BrazilianPortugueseOrdinalizeConverter : DefaultOrdinalizeConverter
+    internal class BrazilianPortugueseOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString)
         {

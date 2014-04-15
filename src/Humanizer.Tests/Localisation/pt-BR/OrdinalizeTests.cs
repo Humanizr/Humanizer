@@ -63,7 +63,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(102, "102º")]
         [InlineData(103, "103º")]
         [InlineData(1001, "1001º")]
-        public void OrdanizeNumber(int number, string ordinalized)
+        public void OrdinalizeNumber(int number, string ordinalized)
         {
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
         }
@@ -83,7 +83,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(102, "102ª")]
         [InlineData(103, "103ª")]
         [InlineData(1001, "1001ª")]
-        public void OrdanizeNumberFeminine(int number, string ordinalized)
+        public void OrdinalizeNumberFeminine(int number, string ordinalized)
         {
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
         }
