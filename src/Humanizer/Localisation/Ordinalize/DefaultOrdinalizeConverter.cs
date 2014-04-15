@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.Ordinalize
+﻿namespace Humanizer.Localisation.Ordinalize
 {
     internal class DefaultOrdinalizeConverter
     {

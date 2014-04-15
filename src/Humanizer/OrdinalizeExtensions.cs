@@ -16,6 +16,7 @@ namespace Humanizer
                 {"en", () => new EnglishOrdinalizeConverter()},
                 {"pt-BR", () => new BrazilianPortugueseOrdinalizeConverter()}
             };
+
         /// <summary>
         /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
         /// </summary>
@@ -25,7 +26,7 @@ namespace Humanizer
         {
             return Converter.Convert(int.Parse(numberString), numberString);
         }
-        
+
         /// <summary>
         /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
         /// Gender for Brazilian Portuguese locale
@@ -63,7 +64,7 @@ namespace Humanizer
         {
             return Converter.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
         }
-        
+
         private static DefaultOrdinalizeConverter Converter
         {
             get
