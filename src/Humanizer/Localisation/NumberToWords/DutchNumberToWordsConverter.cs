@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Humanizer.Localisation.NumberToWords
@@ -70,7 +70,7 @@ namespace Humanizer.Localisation.NumberToWords
                     {
                         var units = UnitsMap[unit];
                         var trema = units.EndsWith("e");
-                        word += units + (trema ? "�n" : "en") + tens;
+                        word += units + (trema ? "ën" : "en") + tens;
                     }
                     else
                         word += tens;
