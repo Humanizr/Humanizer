@@ -1,18 +1,16 @@
+// Done by Jesse Slicer https://github.com/jslicer
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+
 namespace Humanizer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static class RomanNumeralExtensions
     {
         private const int NumberOfRomanNumeralMaps = 13;
 
-        private static readonly IDictionary<string, int> romanNumerals =
+        private static readonly IDictionary<string, int> RomanNumerals =
             new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
                 { "M",  1000 },
@@ -30,9 +28,10 @@ namespace Humanizer
                 { "I",  1 }
             };
 
-        private static readonly Regex ValidRomanNumeral = new Regex(
-            "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
-            RegexOptions.None);
+        private static readonly Regex ValidRomanNumeral = 
+            new Regex(
+                "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
+                RegexOptions.None);
 
         /// <summary>
         /// Converts Roman numbers into integer
@@ -42,29 +41,25 @@ namespace Humanizer
         public static int FromRoman(this string input)
         {
             if (input == null)
-            {
                 throw new ArgumentNullException("input");
-            }
 
             input = input.Trim().ToUpperInvariant();
 
             var length = input.Length;
 
             if ((length == 0) || IsInvalidRomanNumeral(input))
-            {
                 throw new ArgumentException("Empty or invalid Roman numeral string.", "input");
-            }
 
             var total = 0;
             var i     = length;
 
             while (i > 0)
             {
-                var digit = romanNumerals[input[--i].ToString()];
+                var digit = RomanNumerals[input[--i].ToString()];
 
                 if (i > 0)
                 {
-                    var previousDigit = romanNumerals[input[i - 1].ToString()];
+                    var previousDigit = RomanNumerals[input[i - 1].ToString()];
 
                     if (previousDigit < digit)
                     {
@@ -86,18 +81,16 @@ namespace Humanizer
         /// <returns>Roman number</returns>
         public static string ToRoman(this int input)
         {
-            const int MinValue              = 1;
-            const int MaxValue              = 3999;
-            const int MaxRomanNumeralLength = 15;
+            const int minValue              = 1;
+            const int maxValue              = 3999;
+            const int maxRomanNumeralLength = 15;
 
-            if ((input < MinValue) || (input > MaxValue))
-            {
+            if ((input < minValue) || (input > maxValue))
                 throw new ArgumentOutOfRangeException();
-            }
 
-            var sb = new StringBuilder(MaxRomanNumeralLength);
+            var sb = new StringBuilder(maxRomanNumeralLength);
 
-            foreach (var pair in romanNumerals)
+            foreach (var pair in RomanNumerals)
             {
                 while (input / pair.Value > 0)
                 {
