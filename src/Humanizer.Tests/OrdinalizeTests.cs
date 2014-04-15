@@ -3,8 +3,13 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class OrdinalizeTests
+    public class OrdinalizeTests : AmbientCulture
     {
+        public OrdinalizeTests()
+            : base("en-US")
+        {
+        }
+
         [Theory]
         [InlineData("0", "0th")]
         [InlineData("1", "1st")]
