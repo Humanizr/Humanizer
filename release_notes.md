@@ -1,4 +1,5 @@
 ###In Development
+  - [#217](https://github.com/Mehdik/Humanizer/pull/217): Changed OrdinalizeExtensions to better accommodate localisations. Added pt-BR and Spanish Ordinalize localisation.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...master)
 

@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using Humanizer.Localisation.Ordinalizers;
 
 namespace Humanizer
 {
@@ -7,6 +10,13 @@ namespace Humanizer
     /// </summary>
     public static class OrdinalizeExtensions
     {
+        private static readonly IDictionary<string, Func<DefaultOrdinalizer>> OrdinalizerFactories =
+            new Dictionary<string, Func<DefaultOrdinalizer>>
+            {
+                {"en", () => new EnglishOrdinalizer()},
+                {"es", () => new SpanishOrdinalizer()},
+                {"pt-BR", () => new BrazilianPortugueseOrdinalizer()}
+            };
 
         /// <summary>
         /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
@@ -15,7 +25,21 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this string numberString)
         {
-            return Ordinalize(int.Parse(numberString), numberString);
+            return Ordinalizer.Convert(int.Parse(numberString), numberString);
+        }
+
+        /// <summary>
+        /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+        /// Gender for Brazilian Portuguese locale
+        /// 1.Ordinalize(GrammaticalGender.Masculine) -> "1º"
+        /// 1.Ordinalize(GrammaticalGender.Feminine) -> "1ª"
+        /// </summary>
+        /// <param name="numberString">The number, in string, to be ordinalized</param>
+        /// <param name="gender">The grammatical gender to use for output words</param>
+        /// <returns></returns>
+        public static string Ordinalize(this string numberString, GrammaticalGender gender)
+        {
+            return Ordinalizer.Convert(int.Parse(numberString), numberString, gender);
         }
 
         /// <summary>
@@ -25,28 +49,36 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this int number)
         {
-            return Ordinalize(number, number.ToString(CultureInfo.InvariantCulture));
+            return Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture));
         }
 
-        private static string Ordinalize(int number, string numberString)
+        /// <summary>
+        /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+        /// Gender for Brazilian Portuguese locale
+        /// 1.Ordinalize(GrammaticalGender.Masculine) -> "1º"
+        /// 1.Ordinalize(GrammaticalGender.Feminine) -> "1ª"
+        /// </summary>
+        /// <param name="number">The number to be ordinalized</param>
+        /// <param name="gender">The grammatical gender to use for output words</param>
+        /// <returns></returns>
+        public static string Ordinalize(this int number, GrammaticalGender gender)
         {
-            int nMod100 = number % 100;
+            return Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
+        }
 
-            if (nMod100 >= 11 && nMod100 <= 13)
+        private static DefaultOrdinalizer Ordinalizer
+        {
+            get
             {
-                return numberString + "th";
-            }
+                Func<DefaultOrdinalizer> ordinalizerFactory;
 
-            switch (number % 10)
-            {
-                case 1:
-                    return numberString + "st";
-                case 2:
-                    return numberString + "nd";
-                case 3:
-                    return numberString + "rd";
-                default:
-                    return numberString + "th";
+                if (OrdinalizerFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out ordinalizerFactory))
+                    return ordinalizerFactory();
+
+                if (OrdinalizerFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out ordinalizerFactory))
+                    return ordinalizerFactory();
+
+                return new DefaultOrdinalizer();
             }
         }
     }
