@@ -27,8 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Humanizer.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -65,6 +64,12 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
+    <Compile Include="GrammaticalCase.cs" />
+    <Compile Include="GrammaticalGender.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
+    <Compile Include="Localisation\NumberToWords\DutchNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
@@ -74,12 +79,17 @@
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
     <Compile Include="Localisation\NumberToWords\EnglishNumberToWordsConverter.cs" />
-    <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\FrenchNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\HebrewNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
+    <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
     <Compile Include="Localisation\Tense.cs" />
+    <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -105,7 +115,6 @@
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
-    <Compile Include="NumberToOrdinalWordsExtension.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
     <Compile Include="FluentDate\PrepositionsExtensions.cs" />
@@ -154,7 +163,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.bg.resx" />
+    <EmbeddedResource Include="Properties\Resources.he.resx" />
     <EmbeddedResource Include="Properties\Resources.da.resx" />
+    <EmbeddedResource Include="Properties\Resources.hu.resx" />
+    <EmbeddedResource Include="Properties\Resources.id.resx" />
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
     <EmbeddedResource Include="Properties\Resources.cs.resx" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
@@ -169,9 +182,7 @@
     <EmbeddedResource Include="Properties\Resources.ar.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.nl.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx" />
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx" />

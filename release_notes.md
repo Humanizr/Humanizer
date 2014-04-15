@@ -1,15 +1,51 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...master)
+
+###v1.22.1 - 2014-04-14
+  - [#188](https://github.com/Mehdik/Humanizer/pull/188): Added Spanish ToOrdinalWords translations
+  - [#166](https://github.com/MehdiK/Humanizer/pull/166): Added Dutch (NL) Number to words and ordinals
+  - [#199](https://github.com/MehdiK/Humanizer/pull/199): Added Hebrew Number to words (both genders)
+  - [#202](https://github.com/MehdiK/Humanizer/pull/202): Fixed typo sekunttia -> sekuntia (Finnish translation)
+  - [#203](https://github.com/MehdiK/Humanizer/pull/203): Added feminine gender for french ordinal words
+  - [#208](https://github.com/MehdiK/Humanizer/pull/208): Added Hebrew implementation of future DateTime 
+  
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.21.1...v1.22.1)
+
+###v1.21.1 - 2014-04-12
+  - [#196](https://github.com/MehdiK/Humanizer/pull/196): Added Gender for ToOrdinalWords (needed for Brazilian Portuguese). Added pt-br OrdinalToWords localisation
+  - [#194](https://github.com/MehdiK/Humanizer/pull/194): Added pt-BR NumberToWords localisation
+  - [#147](https://github.com/MehdiK/Humanizer/pull/147): Added Russian translation for ToWords
+  - [#190](https://github.com/MehdiK/Humanizer/pull/190): Added French translation for ToWords and ToOrdinalWords
+  - [#179](https://github.com/MehdiK/Humanizer/pull/179): Added Hungarian localisation
+  - [#181](https://github.com/Mehdik/Humanizer/pull/181): Added Bulgarian localization, date and timespan tests
+  - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesian localization 
+  - [#148](https://github.com/Mehdik/Humanizer/pull/148): Added Hebrew localization for date and timespan
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...v1.21.1)
+
+###v1.20.15 - 2014-04-12
+  - [#186](https://github.com/Mehdik/Humanizer/pull/186): Refactored `ToOrdinalWords` to use existing `NumberToWordsExtension` to prepare for Ordinal localization
+  - [#193](https://github.com/Mehdik/Humanizer/pull/193): Fixed the NullException error on DateTime.Humanize
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.2...v1.20.15)
+
+###v1.20.2 - 2014-04-11
   - [#171](https://github.com/MehdiK/Humanizer/pull/171): T4-Template fix: Using EnglishNumberToWordsConverter instead of 'ToWords()' while dogfooding the template with the library.
   - [#165](https://github.com/MehdiK/Humanizer/pull/165): Added precision based `DateTime.Humanize` strategy
   - [#155](https://github.com/MehdiK/Humanizer/pull/155): French and Belgian French localisation
+  - [#151](https://github.com/MehdiK/Humanizer/pull/151): Added Spanish ToWords Translations
+  - [#172](https://github.com/MehdiK/Humanizer/pull/172): Added Polish translation for ToWords
+  - [#184](https://github.com/Mehdik/Humanizer/pull/184): Fixed spelling error with forth/fourth in EnglishNumberToWordsConverter
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...v1.20.2)
 
 ###v1.19.1 - 2014-04-10
   - [#149](https://github.com/MehdiK/Humanizer/pull/149): Improved & refactored number to words localisation 
   - [#143](https://github.com/MehdiK/Humanizer/pull/143): Added Russian translation for future DateTime, TimeSpan and Now
   - [#144](https://github.com/MehdiK/Humanizer/pull/144): Added Danish localization (strings, tests)
   - [#146](https://github.com/MehdiK/Humanizer/pull/146): Added Spanish translation for future DateTime, TimeSpan and Now
+  
            
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.18.1...v1.19.1)
 

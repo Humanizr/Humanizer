@@ -23,6 +23,7 @@ namespace Humanizer.Tests
         public void Dispose()
         {
             Thread.CurrentThread.CurrentUICulture = _culture;
+            Thread.CurrentThread.CurrentCulture = _culture;
         }
     }
 }

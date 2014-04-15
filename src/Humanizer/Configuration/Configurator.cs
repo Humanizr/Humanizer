@@ -17,10 +17,13 @@ namespace Humanizer.Configuration
             { "ro", () => new RomanianFormatter() },
             { "ru", () => new RussianFormatter() },
             { "ar", () => new ArabicFormatter() },
+            { "he", () => new HebrewFormatter() },
             { "sk", () => new CzechSlovakPolishFormatter() },
             { "cs", () => new CzechSlovakPolishFormatter() },
             { "pl", () => new CzechSlovakPolishFormatter() }
         };
+
+        private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
 
         /// <summary>
         /// The formatter to be used
@@ -37,6 +40,10 @@ namespace Humanizer.Configuration
             }
         }
 
-        public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
+        public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy
+        {
+            get { return _dateTimeHumanizeStrategy; }
+            set { _dateTimeHumanizeStrategy = value; }
+        }
     }
 }
