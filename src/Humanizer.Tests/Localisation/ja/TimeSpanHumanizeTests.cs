@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.ja
 {
@@ -7,82 +8,52 @@ namespace Humanizer.Tests.Localisation.ja
     {
         public TimeSpanHumanizeTests() : base("ja") { }
 
-        [Fact]
-        public void TwoWeeks()
+        [Theory]
+        [InlineData(7, "1 週間")]
+        [InlineData(14, "2 週間")]
+        public void Weeks(int days, string expected)
         {
-            Assert.Equal("2 週間", TimeSpan.FromDays(14).Humanize());
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
 
-        [Fact]
-        public void OneWeek()
+        [Theory]
+        [InlineData(1, "1 日間")]
+        [InlineData(2, "2 日間")]
+        public void Days(int days, string expected)
         {
-            Assert.Equal("1 週間", TimeSpan.FromDays(7).Humanize());
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
 
-        [Fact]
-        public void SixDays()
+        [Theory]
+        [InlineData(1, "1 時間")]
+        [InlineData(2, "2 時間")]
+        public void Hours(int hours, string expected)
         {
-            Assert.Equal("6 日間", TimeSpan.FromDays(6).Humanize());
+            Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize());
         }
 
-        [Fact]
-        public void TwoDays()
+        [Theory]
+        [InlineData(1, "1 分間")]
+        [InlineData(2, "2 分間")]
+        public void Minutes(int minutes, string expected)
         {
-            Assert.Equal("2 日間", TimeSpan.FromDays(2).Humanize());
+            Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
         }
 
-        [Fact]
-        public void OneDay()
+        [Theory]
+        [InlineData(1, "1 秒間")]
+        [InlineData(2, "2 秒間")]
+        public void Seconds(int seconds, string expected)
         {
-            Assert.Equal("1 日間", TimeSpan.FromDays(1).Humanize());
+            Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
         }
 
-        [Fact]
-        public void TwoHours()
+        [Theory]
+        [InlineData(1, "1 ミリ秒間")]
+        [InlineData(2, "2 ミリ秒間")]
+        public void Milliseconds(int milliseconds, string expected)
         {
-            Assert.Equal("2 時間", TimeSpan.FromHours(2).Humanize());
-        }
-
-        [Fact]
-        public void OneHour()
-        {
-            Assert.Equal("1 時間", TimeSpan.FromHours(1).Humanize());
-        }
-
-        [Fact]
-        public void TwoMinutes()
-        {
-            Assert.Equal("2 分間", TimeSpan.FromMinutes(2).Humanize());
-        }
-
-        [Fact]
-        public void OneMinute()
-        {
-            Assert.Equal("1 分間", TimeSpan.FromMinutes(1).Humanize());
-        }
-
-        [Fact]
-        public void TwoSeconds()
-        {
-            Assert.Equal("2 秒間", TimeSpan.FromSeconds(2).Humanize());
-        }
-
-        [Fact]
-        public void OneSecond()
-        {
-            Assert.Equal("1 秒間", TimeSpan.FromSeconds(1).Humanize());
-        }
-
-        [Fact]
-        public void TwoMilliseconds()
-        {
-            Assert.Equal("2 ミリ秒間", TimeSpan.FromMilliseconds(2).Humanize());
-        }
-
-        [Fact]
-        public void OneMillisecond()
-        {
-            Assert.Equal("1 ミリ秒間", TimeSpan.FromMilliseconds(1).Humanize());
+            Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
         }
 
         [Fact]
