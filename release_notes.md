@@ -1,6 +1,7 @@
 ###In Development
   - [#217](https://github.com/Mehdik/Humanizer/pull/217): Changed OrdinalizeExtensions to better accommodate localisations. Added pt-BR and Spanish Ordinalize localisation.
   - [#221](https://github.com/Mehdik/Humanizer/pull/221): Added Russian ordinalizer
+  - [#222](https://github.com/Mehdik/Humanizer/pull/222): Updated Ordinalize and ToOrdinalWords to account for special exceptions with 1 and 3.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...master)
 
