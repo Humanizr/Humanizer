@@ -188,10 +188,16 @@ namespace Humanizer.Localisation.NumberToWords
                 case GrammaticalGender.Masculine:
                     if (number == 0 || number == 2 || number == 6 || number == 7 || number == 8 || number == 40)
                         return "ой";
+                    if (number == 3)
+                        return "ий";
                     return "ый";
                 case GrammaticalGender.Feminine:
+                    if (number == 3)
+                        return "ья";
                     return "ая";
                 case GrammaticalGender.Neuter:
+                    if (number == 3)
+                        return "ье";
                     return "ое";
                 default:
                     throw new ArgumentOutOfRangeException("gender");
