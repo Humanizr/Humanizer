@@ -33,24 +33,24 @@ namespace Humanizer.Tests.Localisation.ja
         }
 
         [Theory]
-        [InlineData(1, "1 分間")]
-        [InlineData(2, "2 分間")]
+        [InlineData(1, "1 分")]
+        [InlineData(2, "2 分")]
         public void Minutes(int minutes, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "1 秒間")]
-        [InlineData(2, "2 秒間")]
+        [InlineData(1, "1 秒")]
+        [InlineData(2, "2 秒")]
         public void Seconds(int seconds, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
         }
 
         [Theory]
-        [InlineData(1, "1 ミリ秒間")]
-        [InlineData(2, "2 ミリ秒間")]
+        [InlineData(1, "1 ミリ秒")]
+        [InlineData(2, "2 ミリ秒")]
         public void Milliseconds(int milliseconds, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
@@ -59,7 +59,7 @@ namespace Humanizer.Tests.Localisation.ja
         [Fact]
         public void NoTime()
         {
-            Assert.Equal("0 秒間", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 秒", TimeSpan.Zero.Humanize());
         }
     }
 }
