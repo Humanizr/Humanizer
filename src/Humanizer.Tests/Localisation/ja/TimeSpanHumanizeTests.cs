@@ -88,8 +88,7 @@ namespace Humanizer.Tests.Localisation.ja
         [Fact]
         public void NoTime()
         {
-            // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("時間なし", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 秒間", TimeSpan.Zero.Humanize());
         }
     }
 }
