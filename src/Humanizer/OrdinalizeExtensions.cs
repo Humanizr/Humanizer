@@ -15,7 +15,8 @@ namespace Humanizer
             {
                 {"en", () => new EnglishOrdinalizer()},
                 {"es", () => new SpanishOrdinalizer()},
-                {"pt-BR", () => new BrazilianPortugueseOrdinalizer()}
+                {"pt-BR", () => new BrazilianPortugueseOrdinalizer()},
+                {"ru", () => new RussianOrdinalizer()}
             };
 
         /// <summary>
