@@ -184,7 +184,7 @@
     <value>1 秒間</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>時間なし</value>
+    <value>0 秒間</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} 週間</value>
