@@ -338,6 +338,7 @@ public class To
 public class ToQuantityExtensions
 {
     public string ToQuantity(string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs) { }
+    public string ToQuantity(string input, int quantity, string format, System.IFormatProvider formatProvider) { }
 }
 
 public class Truncator
