@@ -5,11 +5,11 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class SpanishNumberToWordsConverter : DefaultNumberToWordsConverter
     {
-        private static readonly string[] HundredsMap = { "cero", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos" };
         private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", 
                                                         "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
                                                         "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
         private static readonly string[] TensMap = { "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
+        private static readonly string[] HundredsMap = { "cero", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos" };
 
         private static readonly Dictionary<int, string> Ordinals = new Dictionary<int, string>
         {
@@ -97,8 +97,11 @@ namespace Humanizer.Localisation.NumberToWords
             string towords;
             if (!Ordinals.TryGetValue(number, out towords))
                 towords = Convert(number);
+
             if (gender == GrammaticalGender.Feminine)
                 towords = towords.TrimEnd('o') + "a";
+            else if(number % 10 == 1 || number % 10 == 3)
+                towords = towords.TrimEnd('o');
 
             return towords;
         }
