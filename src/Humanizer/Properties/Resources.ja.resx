@@ -169,22 +169,22 @@
     <value>{0} 秒間</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>1 日間</value>
+    <value>1 日</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
     <value>1 時間</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 ミリ秒間</value>
+    <value>1 ミリ秒</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>1 分間</value>
+    <value>1 分</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>1 秒間</value>
+    <value>1 秒</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>0 秒間</value>
+    <value>0 秒</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} 週間</value>
