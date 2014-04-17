@@ -24,10 +24,11 @@ namespace Humanizer
         /// <param name="input">The string to be truncated</param>
         /// <param name="length">The length to truncate to</param>
         /// <param name="truncator">The truncate to use</param>
+        /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length, ITruncator truncator)
+        public static string Truncate(this string input, int length, ITruncator truncator, TruncateFrom from = TruncateFrom.Right)
         {
-            return input.Truncate(length, "…", truncator);
+            return input.Truncate(length, "…", truncator, from);
         }
 
         /// <summary>
@@ -36,10 +37,11 @@ namespace Humanizer
         /// <param name="input">The string to be truncated</param>
         /// <param name="length">The length to truncate to</param>
         /// <param name="truncationString">The string used to truncate with</param>
+        /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length, string truncationString)
+        public static string Truncate(this string input, int length, string truncationString, TruncateFrom from = TruncateFrom.Right)
         {
-            return input.Truncate(length, truncationString, FixedLength);
+            return input.Truncate(length, truncationString, FixedLength, from);
         }
 
         /// <summary>
@@ -49,22 +51,23 @@ namespace Humanizer
         /// <param name="length">The length to truncate to</param>
         /// <param name="truncationString">The string used to truncate with</param>
         /// <param name="truncator">The truncator to use</param>
+        /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length, string truncationString, ITruncator truncator)
+        public static string Truncate(this string input, int length, string truncationString, ITruncator truncator, TruncateFrom from = TruncateFrom.Right)
         {
             if (truncator == null)
                 throw new ArgumentNullException("truncator");
 
-            if (input == null) 
+            if (input == null)
                 return null;
 
-            return truncator.Truncate(input, length, truncationString);
+            return truncator.Truncate(input, length, truncationString, from);
         }
 
         /// <summary>
         /// Fixed length truncator
         /// </summary>
-        public static ITruncator FixedLength 
+        public static ITruncator FixedLength
         {
             get
             {
@@ -93,5 +96,20 @@ namespace Humanizer
                 return new FixedNumberOfWordsTruncator();
             }
         }
+    }
+
+    /// <summary>
+    /// Truncation location for humanizer
+    /// </summary>
+    public enum TruncateFrom
+    {
+        /// <summary>
+        /// Truncate letters from the left (start) of the string
+        /// </summary>
+        Left,
+        /// <summary>
+        /// Truncate letters from the right (end) of the string
+        /// </summary>
+        Right
     }
 }

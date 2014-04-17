@@ -79,6 +79,7 @@ namespace Humanizer.Tests.Localisation.ruRU
         [InlineData(0, "нулевой")]
         [InlineData(1, "первый")]
         [InlineData(2, "второй")]
+        [InlineData(3, "третий")]
         [InlineData(10, "десятый")]
         [InlineData(11, "одиннадцатый")]
         [InlineData(12, "двенадцатый")]
@@ -139,6 +140,7 @@ namespace Humanizer.Tests.Localisation.ruRU
         [InlineData(0, "нулевая")]
         [InlineData(1, "первая")]
         [InlineData(2, "вторая")]
+        [InlineData(3, "третья")]
         [InlineData(10, "десятая")]
         [InlineData(11, "одиннадцатая")]
         [InlineData(12, "двенадцатая")]
@@ -200,6 +202,7 @@ namespace Humanizer.Tests.Localisation.ruRU
         }
 
         [Theory]
+        [InlineData(3, "третье")]
         [InlineData(111, "сто одиннадцатое")]
         [InlineData(1112, "одна тысяча сто двенадцатое")]
         [InlineData(11213, "одиннадцать тысячь двести тринадцатое")]
