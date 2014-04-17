@@ -64,6 +64,7 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
     <Compile Include="GrammaticalGender.cs" />
@@ -190,6 +191,8 @@
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr-Latn.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr.resx" />
     <EmbeddedResource Include="Properties\Resources.sv.resx" />
   </ItemGroup>
   <ItemGroup>

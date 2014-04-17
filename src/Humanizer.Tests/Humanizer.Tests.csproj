@@ -125,6 +125,10 @@
     <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sk\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sr-Latn\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sr-Latn\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sr\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sr\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sv\DateHumanizeTests.cs" />
     <Compile Include="Localisation\sv\TimeSpanHumanizeTests.cs" />
     <Compile Include="DateTimeHumanizePrecisionStrategyTests.cs" />
