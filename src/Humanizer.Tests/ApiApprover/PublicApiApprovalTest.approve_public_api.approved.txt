@@ -67,6 +67,7 @@ public class Configurator
 {
     public Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
     public Humanizer.Localisation.Formatters.IFormatter Formatter { get; }
+    public System.Collections.Generic.IDictionary<string, System.Func<Humanizer.Localisation.Formatters.IFormatter>> FormatterFactories { get; }
 }
 
 public class DateHumanizeExtensions
