@@ -122,7 +122,7 @@ namespace Humanizer.Tests
         [InlineData("Text smaller than truncate length", 34, "Text smaller than truncate length")]
         public void TruncateWithFixedLengthTruncatorTruncateFromLeft(string input, int length, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedLength, Truncator.TruncateFrom.Left));
+            Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedLength, TruncateFrom.Left));
         }              
 
         [Theory]
@@ -135,7 +135,7 @@ namespace Humanizer.Tests
         [InlineData("Text with strange characters ^$(*^ and more ^$**)%  ", 10, "…rs ^$(*^ and more ^$**)%  ")]
         public void TruncateWithFixedNumberOfCharactersTruncatorTruncateFromLeft(string input, int length, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfCharacters, Truncator.TruncateFrom.Left));
+            Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfCharacters, TruncateFrom.Left));
         }
 
         [Theory]
@@ -149,7 +149,7 @@ namespace Humanizer.Tests
         [InlineData("Text with whitespace at the end  ", 4, "…whitespace at the end")]
         public void TruncateWithFixedNumberOfWordsTruncatorTruncateFromLeft(string input, int length, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfWords, Truncator.TruncateFrom.Left));
+            Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfWords, TruncateFrom.Left));
         }
 
         [Theory]
@@ -164,7 +164,7 @@ namespace Humanizer.Tests
         [InlineData("Null truncation string truncates to truncate length without truncation string", 4, null, "ring")]
         public void TruncateWithTruncationStringAndFixedLengthTruncatorTruncateFromLeft(string input, int length, string truncationString, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedLength, Truncator.TruncateFrom.Left));
+            Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedLength, TruncateFrom.Left));
         }
 
         [Theory]
@@ -179,7 +179,7 @@ namespace Humanizer.Tests
         [InlineData("Null truncation string truncates to truncate length without truncation string", 4, null, "ring")]
         public void TruncateWithTruncationStringAndFixedNumberOfCharactersTruncatorTruncateFromLeft(string input, int length, string truncationString, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfCharacters, Truncator.TruncateFrom.Left));
+            Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfCharacters, TruncateFrom.Left));
         }
 
         [Theory]
@@ -195,7 +195,7 @@ namespace Humanizer.Tests
         [InlineData("Text with whitespace at the end  ", 4, "...", "...whitespace at the end")]
         public void TruncateWithTruncationStringAndFixedNumberOfWordsTruncatorTruncateFromLeft(string input, int length, string truncationString, string expectedOutput)
         {
-            Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords, Truncator.TruncateFrom.Left));
+            Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords, TruncateFrom.Left));
         }
 
     }

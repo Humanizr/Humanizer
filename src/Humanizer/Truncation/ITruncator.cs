@@ -13,6 +13,6 @@
         /// <param name="truncationString">The string used to truncate with</param>
         /// <param name="truncateFrom">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
-        string Truncate(string value, int length, string truncationString, Truncator.TruncateFrom truncateFrom = Truncator.TruncateFrom.Right);
+        string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right);
     }
 }

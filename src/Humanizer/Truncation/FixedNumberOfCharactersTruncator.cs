@@ -8,7 +8,7 @@ namespace Humanizer
     /// </summary>
     class FixedNumberOfCharactersTruncator : ITruncator
     {
-        public string Truncate(string value, int length, string truncationString, Truncator.TruncateFrom truncateFrom = Truncator.TruncateFrom.Right)
+        public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {
             if (value == null)
                 return null;
@@ -18,7 +18,7 @@ namespace Humanizer
 
             if (truncationString == null || truncationString.Length > length)
             {
-                return truncateFrom == Truncator.TruncateFrom.Right ? value.Substring(0, length) : value.Substring(value.Length - length);
+                return truncateFrom == TruncateFrom.Right ? value.Substring(0, length) : value.Substring(value.Length - length);
             }
 
             var alphaNumericalCharactersProcessed = 0;
@@ -28,7 +28,7 @@ namespace Humanizer
                 return value;
             }
 
-            if (truncateFrom == Truncator.TruncateFrom.Left)
+            if (truncateFrom == TruncateFrom.Left)
             {
                 for (var i = value.Length - 1; i > 0; i--)
                 {
