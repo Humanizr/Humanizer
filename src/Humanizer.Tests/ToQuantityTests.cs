@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System;
+using System.Globalization;
+using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests
@@ -78,6 +80,39 @@ namespace Humanizer.Tests
         public void ToQuantityWords(string word, int quatity, string expected)
         {
             Assert.Equal(expected, word.ToQuantity(quatity, ShowQuantityAs.Words));
+        }
+
+        [Theory]
+        [InlineData("case", 0, null, "0 cases")]
+        [InlineData("case", 1, null, "1 case")]
+        [InlineData("case", 2, null, "2 cases")]
+        [InlineData("case", 1, "N0", "1 case")]
+        [InlineData("case", 2, "N0", "2 cases")]
+        [InlineData("case", 123456, "N0", "123,456 cases")]
+        [InlineData("case", 123456, "N2", "123,456.00 cases")]
+        [InlineData("dollar", 0, "C0", "$0 dollars")]
+        [InlineData("dollar", 1, "C0", "$1 dollar")]
+        [InlineData("dollar", 2, "C0", "$2 dollars")]
+        [InlineData("dollar", 2, "C2", "$2.00 dollars")]
+        public void ToQuantityWordsWithCurrentCultureFormatting(string word, int quantity, string format, string expected)
+        {
+            Assert.Equal(expected, word.ToQuantity(quantity, format));
+        }
+
+        [Theory]
+        [InlineData("case", 0, "N0", "it-IT", "0 cases")]
+        [InlineData("case", 1, "N0", "it-IT", "1 case")]
+        [InlineData("case", 2, "N0", "it-IT", "2 cases")]
+        [InlineData("case", 1234567, "N0", "it-IT", "1.234.567 cases")]
+        [InlineData("case", 1234567, "N2", "it-IT", "1.234.567,00 cases")]
+        [InlineData("euro", 0, "C0", "es-ES", "0 € euros")]
+        [InlineData("euro", 1, "C0", "es-ES", "1 € euro")]
+        [InlineData("euro", 2, "C0", "es-ES", "2 € euros")]
+        [InlineData("euro", 2, "C2", "es-ES", "2,00 € euros")]
+        public void ToQuantityWordsWithCustomCultureFormatting(string word, int quantity, string format, string cultureCode, string expected)
+        {
+            var culture = new CultureInfo(cultureCode);
+            Assert.Equal(expected, word.ToQuantity(quantity, format, culture), StringComparer.Create(culture, false));
         }
     }
 }
