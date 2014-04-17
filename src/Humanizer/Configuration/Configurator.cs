@@ -11,7 +11,7 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
-        private static readonly IDictionary<string, Func<IFormatter>> FormatterFactories =
+        private static readonly IDictionary<string, Func<IFormatter>> _formatterFactories =
             new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
         {
             { "ro", () => new RomanianFormatter() },
@@ -22,6 +22,11 @@ namespace Humanizer.Configuration
             { "cs", () => new CzechSlovakPolishFormatter() },
             { "pl", () => new CzechSlovakPolishFormatter() }
         };
+
+        public static IDictionary<string, Func<IFormatter>> FormatterFactories
+        {
+            get { return _formatterFactories; }
+        }
 
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
 
