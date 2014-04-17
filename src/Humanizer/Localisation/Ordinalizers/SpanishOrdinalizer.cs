@@ -14,10 +14,7 @@
                 return "0";
 
             if (gender == GrammaticalGender.Feminine)
-                return numberString + ".ª";
-            
-            if (numberString.EndsWith("1") || number % 10 == 1 || numberString.EndsWith("3") || number % 10 == 3)
-                return numberString + "er";
+                return numberString + ".ª";           
             else
                 return numberString + ".º";
         }
