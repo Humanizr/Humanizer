@@ -8,6 +8,7 @@
   - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal 
   - [#235](https://github.com/Mehdik/Humanizer/pull/235): Fixed the conversion for "1 millon" in SpanishNumberToWordsConverter
   - [#233](https://github.com/Mehdik/Humanizer/pull/233): Added build.cmd and Verify build configuration for strict project build and analysis
+  - [#227](https://github.com/MehdiK/Humanizer/pull/227): Switched Configurator.FormatterFactories to have a public get to allow for adding/removing of formatters
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.23.1...v1.24.1)
 
@@ -19,7 +20,6 @@
   - [#228](https://github.com/Mehdik/Humanizer/pull/228): Fixed the "twenties" in SpanishNumberToWordsConverter
   - [#231](https://github.com/Mehdik/Humanizer/pull/231): Added more settings for FromNow, Dual and Plural (Arabic)
   - [#222](https://github.com/Mehdik/Humanizer/pull/222): Updated Ordinalize and ToOrdinalWords to account for special exceptions with 1 and 3.
-
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...v1.23.1)
 
