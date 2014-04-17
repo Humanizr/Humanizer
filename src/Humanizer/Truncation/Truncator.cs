@@ -8,21 +8,6 @@ namespace Humanizer
     public static class Truncator
     {
         /// <summary>
-        /// Truncation location for humanizer
-        /// </summary>
-        public enum TruncateFrom
-        {
-            /// <summary>
-            /// Truncate letters from the left (start) of the string
-            /// </summary>
-            Left,
-            /// <summary>
-            /// Truncate letters from the right (end) of the string
-            /// </summary>
-            Right
-        }
-
-        /// <summary>
         /// Truncate the string
         /// </summary>
         /// <param name="input">The string to be truncated</param>
@@ -111,5 +96,20 @@ namespace Humanizer
                 return new FixedNumberOfWordsTruncator();
             }
         }
+    }
+
+    /// <summary>
+    /// Truncation location for humanizer
+    /// </summary>
+    public enum TruncateFrom
+    {
+        /// <summary>
+        /// Truncate letters from the left (start) of the string
+        /// </summary>
+        Left,
+        /// <summary>
+        /// Truncate letters from the right (end) of the string
+        /// </summary>
+        Right
     }
 }

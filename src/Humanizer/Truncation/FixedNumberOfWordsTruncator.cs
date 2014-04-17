@@ -8,7 +8,7 @@ namespace Humanizer
     /// </summary>
     class FixedNumberOfWordsTruncator : ITruncator
     {
-        public string Truncate(string value, int length, string truncationString, Truncator.TruncateFrom truncateFrom = Truncator.TruncateFrom.Right)
+        public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {
             if (value == null)
                 return null;
@@ -20,7 +20,7 @@ namespace Humanizer
             if (numberOfWords <= length)
                 return value;
 
-            return truncateFrom == Truncator.TruncateFrom.Left
+            return truncateFrom == TruncateFrom.Left
                 ? TruncateFromLeft(value, length, truncationString)
                 : TruncateFromRight(value, length, truncationString);
         }
@@ -42,9 +42,8 @@ namespace Humanizer
                         return value.Substring(0, i) + truncationString;
                 }
                 else
-                {
                     lastCharactersWasWhiteSpace = false;
-                }
+
             }
             return value + truncationString;
         }
@@ -66,9 +65,8 @@ namespace Humanizer
                         return truncationString + value.Substring(i + 1).TrimEnd();
                 }
                 else
-                {
                     lastCharactersWasWhiteSpace = false;
-                }
+
             }
             return truncationString + value;
         }
