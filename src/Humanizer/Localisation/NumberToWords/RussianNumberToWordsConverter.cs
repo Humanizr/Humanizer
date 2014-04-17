@@ -66,21 +66,22 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number >= 100)
             {
-                var i = number;
+                var ending = GetEndingForGender(gender, number);
                 var hundreds = number/100;
                 number %= 100;
                 if (number == 0)
-                    parts.Add(GetPrefix(hundreds) + "сот" + GetEndingForGender(gender, i));
+                    parts.Add(UnitsOrdinalPrefixes[hundreds] + "сот" + ending);
                 else
                     parts.Add(HundredsMap[hundreds]);
             }
+
             if (number >= 20)
             {
-                var i = number;
-                var tens = i/10;
+                var ending = GetEndingForGender(gender, number);
+                var tens = number/10;
                 number %= 10;
                 if (number == 0)
-                    parts.Add(TensOrdinal[tens] + GetEndingForGender(gender, i));
+                    parts.Add(TensOrdinal[tens] + ending);
                 else
                     parts.Add(TensMap[tens]);
             }
@@ -95,14 +96,14 @@ namespace Humanizer.Localisation.NumberToWords
         {
             if (number >= 100)
             {
-                var hundreds = number / 100;
+                var hundreds = number/100;
                 number %= 100;
                 parts.Add(HundredsMap[hundreds]);
             }
 
             if (number >= 20)
             {
-                int tens = number/10;
+                var tens = number/10;
                 parts.Add(TensMap[tens]);
                 number %= 10;
             }
@@ -120,24 +121,35 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static string GetPrefix(int number)
+        private static string GetPrefix(int number, GrammaticalGender gender)
         {
             var parts = new List<string>();
+
             if (number >= 100)
             {
                 var hundreds = number/100;
                 number %= 100;
-                parts.Add(HundredsMap[hundreds]);
+                if (hundreds != 1)
+                    parts.Add(UnitsOrdinalPrefixes[hundreds] + "сот");
+                else
+                    parts.Add("сто");
             }
+
             if (number >= 20)
             {
                 var tens = number/10;
                 number %= 10;
                 parts.Add(TensOrdinalPrefixes[tens]);
             }
+
             if (number > 0)
-                parts.Add(UnitsOrdinalPrefixes[number]);
-            
+            {
+                if (number == 1)
+                    parts.Add(gender == GrammaticalGender.Feminine ? "одна" : "одно");
+                else
+                    parts.Add(UnitsOrdinalPrefixes[number]);
+            }
+
             return string.Join("", parts);
         }
 
@@ -157,7 +169,12 @@ namespace Humanizer.Localisation.NumberToWords
             var result = number/divisor;
             number %= divisor;
             if (number == 0)
-                parts.Add(GetPrefix(result) + prefixedForm);
+            {
+                if (result == 1)
+                    parts.Add(prefixedForm);
+                else
+                    parts.Add(GetPrefix(result, gender) + prefixedForm);
+            }
             else
             {
                 CollectPartsUnderOneThousand(parts, result, gender);
