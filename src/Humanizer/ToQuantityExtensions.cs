@@ -33,7 +33,7 @@ namespace Humanizer
         /// <summary>
         /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
         /// </summary>
-        /// <param name="input">The word to be prefixes</param>
+        /// <param name="input">The word to be prefixed</param>
         /// <param name="quantity">The quantity of the word</param>
         /// <param name="showQuantityAs">How to show the quantity. Numeric by default</param>
         /// <example>
@@ -52,7 +52,7 @@ namespace Humanizer
         /// <summary>
         /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
         /// </summary>
-        /// <param name="input">The word to be prefixes</param>
+        /// <param name="input">The word to be prefixed</param>
         /// <param name="quantity">The quantity of the word</param>
         /// <param name="format">A standard or custom numeric format string.</param>
         /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
