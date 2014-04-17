@@ -354,6 +354,14 @@ You can also pass a second argument, `ShowQuantityAs`, to `ToQuantity` to specif
 "case".ToQuantity(5, ShowQuantityAs.None) => "cases"
 ```
 
+There is also an overload that allows you to format the number. You can pass in the format and the culture to be used.
+
+```C#
+"dollar".ToQuantity(2, "C0", new CultureInfo("en-US")) => "$2 dollars"
+"dollar".ToQuantity(2, "C2", new CultureInfo("en-US")) => "$2.00 dollars"
+"cases".ToQuantity(12000, "N0") => "12,000 cases"
+```
+
 ####<a id="ordinalize">Ordinalize</a>
 `Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th: 
 
