@@ -114,25 +114,30 @@ By default the `'…'` character is used to truncate strings. The advantage of u
 
 The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples all have an overload that allow you to specify the `ITruncator` instance to use for the truncation. 
 
-There is also an option to choose whether to truncate the string from the beginning (left) or the end (right). Default is the right.
-
 Here are examples on how to use the three provided truncators:
 
 ```c#
 "Long text to truncate".Truncate(10, Truncator.FixedLength) => "Long text…"
 "Long text to truncate".Truncate(10, "---", Truncator.FixedLength) => "Long te---"
-"Long text to truncate".Truncate(10, Truncator.FixedLength, Truncator.TruncateFrom.Left) => "… truncate"
-"Long text to truncate".Truncate(10, "---", Truncator.FixedLength, Truncator.TruncateFrom.Left) => "---runcate"
 
 "Long text to truncate".Truncate(6, Truncator.FixedNumberOfCharacters) => "Long t…"
 "Long text to truncate".Truncate(6, "---", Truncator.FixedNumberOfCharacters) => "Lon---"
-"Long text to truncate".Truncate(10, Truncator.FixedNumberOfCharacters, Truncator.TruncateFrom.Left) => "o truncate…"
-"Long text to truncate".Truncate(16, "---", Truncator.FixedNumberOfCharacters, Truncator.TruncateFrom.Left) => "---ext to truncate"
 
 "Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "Long text…"
 "Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "Long text---"
-"Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "…to truncate"
-"Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "---to truncate"
+```
+
+There is also an option to choose whether to truncate the string from the beginning (```TruncateFrom.Left```) or the end (```TruncateFrom.Right```). Default is the right as shown in the examples above. The examples below show how to truncate from the beginning of the string.
+
+```c#
+"Long text to truncate".Truncate(10, Truncator.FixedLength, TruncateFrom.Left) => "… truncate"
+"Long text to truncate".Truncate(10, "---", Truncator.FixedLength, TruncateFrom.Left) => "---runcate"
+
+"Long text to truncate".Truncate(10, Truncator.FixedNumberOfCharacters, TruncateFrom.Left) => "o truncate…"
+"Long text to truncate".Truncate(16, "---", Truncator.FixedNumberOfCharacters, TruncateFrom.Left) => "---ext to truncate"
+
+"Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords, TruncateFrom.Left) => "…to truncate"
+"Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords, TruncateFrom.Left) => "---to truncate"
 ```
 
 Note that you can also use create your own truncator by having a class implement the `ITruncator` interface.
