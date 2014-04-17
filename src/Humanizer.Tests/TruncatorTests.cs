@@ -27,7 +27,7 @@ namespace Humanizer.Tests
         public void TruncateWithFixedLengthTruncator(string input, int length, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedLength));
-        }              
+        }
 
         [Theory]
         [InlineData(null, 10, null)]
@@ -197,6 +197,5 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords, TruncateFrom.Left));
         }
-
     }
 }

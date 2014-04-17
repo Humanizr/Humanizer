@@ -17,9 +17,7 @@ namespace Humanizer
                 return value;
 
             if (truncationString == null || truncationString.Length > length)
-            {
                 return truncateFrom == TruncateFrom.Right ? value.Substring(0, length) : value.Substring(value.Length - length);
-            }
 
             var alphaNumericalCharactersProcessed = 0;
 
