@@ -3,8 +3,13 @@ using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
-    public class OrdinalizeTests
+    public class OrdinalizeTests : AmbientCulture
     {
+        public OrdinalizeTests()
+            : base("en-US")
+        {
+        }
+
         [Theory]
         [InlineData("0", "0th")]
         [InlineData("1", "1st")]
@@ -39,6 +44,7 @@ namespace Humanizer.Tests
             Assert.Equal(number.Ordinalize(), ordinalized);
         }
 
+        [Theory]
         [InlineData(0, "0th")]
         [InlineData(1, "1st")]
         [InlineData(2, "2nd")]
@@ -67,10 +73,31 @@ namespace Humanizer.Tests
         [InlineData(110, "110th")]
         [InlineData(1000, "1000th")]
         [InlineData(1001, "1001st")]
-        [Theory]
-        public void OrdanizeNumber(int number, string ordinalized)
+        public void OrdinalizeNumber(int number, string ordinalized)
         {
             Assert.Equal(number.Ordinalize(), ordinalized);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(8)]
+        public void OrdinalizeNumberGenderIsImmaterial(int number)
+        {
+            string masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
+            string feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
+            Assert.Equal(masculineOrdinalized, feminineOrdinalized);
+        }
+
+        [Theory]
+        [InlineData("0")]
+        [InlineData("1")]
+        [InlineData("8")]
+        public void OrdinalizeStringGenderIsImmaterial(string number)
+        {
+            string masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
+            string feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
+            Assert.Equal(masculineOrdinalized, feminineOrdinalized);
         }
     }
 }

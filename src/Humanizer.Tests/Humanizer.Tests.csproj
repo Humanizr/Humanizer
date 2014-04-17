@@ -82,6 +82,7 @@
     <Compile Include="Localisation\cs\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\da\DateHumanizeTests.cs" />
     <Compile Include="Localisation\da\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\es\OrdinalizeTests.cs" />
     <Compile Include="Localisation\fr-BE\DateHumanizeTests.cs" />
     <Compile Include="Localisation\fr-BE\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\fr\DateHumanizeTests.cs" />
@@ -103,7 +104,9 @@
     <Compile Include="Localisation\pl\NumberToWordsTests.cs" />
     <Compile Include="Localisation\pl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\pt-BR\OrdinalizeTests.cs" />
     <Compile Include="Localisation\ru-RU\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\ru-RU\OrdinalizeTests.cs" />
     <Compile Include="Localisation\ru-RU\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sk\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />

@@ -374,6 +374,22 @@ You can also pass a second argument, `ShowQuantityAs`, to `ToQuantity` to specif
 
 You can also call `Ordinalize` on a numeric string and achieve the same result: `"21".Ordinalize()` => `"21st"`
 
+`Ordinalize` also supports grammatical gender for both forms. 
+You can pass an argument to `Ordinalize` to specify which gender the number should be outputted in. 
+The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
+
+```C#
+// for Brazilian Portuguese locale
+1.ToOrdinalWords(GrammaticalGender.Masculine) => "1º"
+1.ToOrdinalWords(GrammaticalGender.Feminine) => "1ª"
+1.ToOrdinalWords(GrammaticalGender.Neuter) => "1º"
+"2".ToOrdinalWords(GrammaticalGender.Masculine) => "2º"
+"2".ToOrdinalWords(GrammaticalGender.Feminine) => "2ª"
+"2".ToOrdinalWords(GrammaticalGender.Neuter) => "2º"
+```
+
+Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.
+
 ####<a id="underscore">Underscore</a>
 `Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
 
