@@ -24,9 +24,7 @@ namespace Humanizer
             var alphaNumericalCharactersProcessed = 0;
 
             if (value.ToCharArray().Count(Char.IsLetterOrDigit) <= length)
-            {
                 return value;
-            }
 
             if (truncateFrom == TruncateFrom.Left)
             {
