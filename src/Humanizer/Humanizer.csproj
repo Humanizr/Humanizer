@@ -148,7 +148,6 @@
     <Compile Include="Truncation\FixedNumberOfCharactersTruncator.cs" />
     <Compile Include="Truncation\FixedNumberOfWordsTruncator.cs" />
     <Compile Include="Truncation\ITruncator.cs" />
-    <Compile Include="Truncation\RightJustifiedFixedLengthTruncator.cs" />
     <Compile Include="Truncation\Truncator.cs" />
   </ItemGroup>
   <ItemGroup>

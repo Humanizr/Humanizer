@@ -8,7 +8,7 @@ namespace Humanizer
     /// </summary>
     class FixedNumberOfWordsTruncator : ITruncator
     {
-        public string Truncate(string value, int length, string truncationString)
+        public string Truncate(string value, int length, string truncationString, Truncator.TruncateFrom truncateFrom = Truncator.TruncateFrom.Right)
         {
             if (value == null)
                 return null;
@@ -16,14 +16,19 @@ namespace Humanizer
             if (value.Length == 0)
                 return value;
 
-            var numberOfWordsProcessed = 0;
             var numberOfWords = value.Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Count();
-
             if (numberOfWords <= length)
                 return value;
 
-            var lastCharactersWasWhiteSpace = true;
+            return truncateFrom == Truncator.TruncateFrom.Left
+                ? TruncateFromLeft(value, length, truncationString)
+                : TruncateFromRight(value, length, truncationString);
+        }
 
+        private static string TruncateFromRight(string value, int length, string truncationString)
+        {
+            var lastCharactersWasWhiteSpace = true;
+            var numberOfWordsProcessed = 0;
             for (var i = 0; i < value.Length; i++)
             {
                 if (Char.IsWhiteSpace(value[i]))
@@ -41,8 +46,31 @@ namespace Humanizer
                     lastCharactersWasWhiteSpace = false;
                 }
             }
-
             return value + truncationString;
+        }
+
+        private static string TruncateFromLeft(string value, int length, string truncationString)
+        {
+            var lastCharactersWasWhiteSpace = true;
+            var numberOfWordsProcessed = 0;
+            for (var i = value.Length - 1; i > 0; i--)
+            {
+                if (Char.IsWhiteSpace(value[i]))
+                {
+                    if (!lastCharactersWasWhiteSpace)
+                        numberOfWordsProcessed++;
+
+                    lastCharactersWasWhiteSpace = true;
+
+                    if (numberOfWordsProcessed == length)
+                        return truncationString + value.Substring(i + 1).TrimEnd();
+                }
+                else
+                {
+                    lastCharactersWasWhiteSpace = false;
+                }
+            }
+            return truncationString + value;
         }
     }
 }
