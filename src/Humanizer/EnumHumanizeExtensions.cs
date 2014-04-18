@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace Humanizer
 {
+    /// <summary>
+    /// Contains extension methods for humanizing Enums
+    /// </summary>
     public static class EnumHumanizeExtensions
     {
         private static readonly Func<PropertyInfo, bool> DescriptionProperty = p => p.Name == "Description" && p.PropertyType == typeof (string);
