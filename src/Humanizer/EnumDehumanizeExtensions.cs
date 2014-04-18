@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Humanizer
 {
+    /// <summary>
+    /// Contains extension methods for dehumanizing Enum string values.
+    /// </summary>
     public static class EnumDehumanizeExtensions
     {
         /// <summary>
