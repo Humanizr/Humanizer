@@ -2,6 +2,9 @@
 {
     public partial class ResourceKeys
     {
+        /// <summary>
+        /// Encapsulates the logic required to get the resource keys for DateTime.Humanize
+        /// </summary>
         public static class DateHumanize
         {
             /// <summary>

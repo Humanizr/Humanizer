@@ -27,6 +27,7 @@ namespace Humanizer.Bytes
     /// <summary>
     /// Represents a byte size value.
     /// </summary>
+#pragma warning disable 1591
     public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
@@ -384,3 +385,4 @@ namespace Humanizer.Bytes
         }
     }
 }
+#pragma warning restore 1591
