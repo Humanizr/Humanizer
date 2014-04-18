@@ -2,6 +2,9 @@
 
 namespace Humanizer.Localisation
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ResourceKeys
     {
         private const string Single = "Single";

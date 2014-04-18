@@ -6,6 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
+    /// <summary>
+    /// Contains extension methods for changing a number to Roman representation (ToRoman) and from Roman representation back to the number (FromRoman)
+    /// </summary>
     public static class RomanNumeralExtensions
     {
         private const int NumberOfRomanNumeralMaps = 13;
