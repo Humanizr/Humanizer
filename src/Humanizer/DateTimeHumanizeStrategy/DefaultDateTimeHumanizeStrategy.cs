@@ -5,7 +5,7 @@ using Humanizer.Localisation;
 namespace Humanizer.DateTimeHumanizeStrategy
 {
     /// <summary>
-    ///     The default distance of time in works calculator
+    /// The default 'distance of time' -> words calculator.
     /// </summary>
     public class DefaultDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy
     {
