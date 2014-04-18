@@ -22,7 +22,6 @@
 
 using System;
 
-// ReSharper disable CSharpWarnings::CS1591
 namespace Humanizer.Bytes
 {
     /// <summary>
@@ -385,4 +384,3 @@ namespace Humanizer.Bytes
         }
     }
 }
-// ReSharper restore CSharpWarnings::CS1591

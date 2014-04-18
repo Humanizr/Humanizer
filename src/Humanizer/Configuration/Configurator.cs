@@ -40,6 +40,9 @@ namespace Humanizer.Configuration
             }
         }
 
+        /// <summary>
+        /// The strategy to be used for DateTime.Humanize
+        /// </summary>
         public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy
         {
             get { return _dateTimeHumanizeStrategy; }
