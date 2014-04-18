@@ -17,8 +17,8 @@ namespace Humanizer.Tests.Localisation.ja
         }
 
         [Theory]
-        [InlineData(1, "1 日間")]
-        [InlineData(2, "2 日間")]
+        [InlineData(1, "1 日")]
+        [InlineData(2, "2 日")]
         public void Days(int days, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
