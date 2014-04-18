@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
+    /// <summary>
+    /// Contains extension methods for humanizing string values.
+    /// </summary>
     public static class StringHumanizeExtensions
     {
         static string FromUnderscoreDashSeparatedWords (string input)
