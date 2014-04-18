@@ -3,6 +3,7 @@
   - [#219](https://github.com/Mehdik/Humanizer/pull/219): Added Japanese translation for date and timespan
   - [#221](https://github.com/Mehdik/Humanizer/pull/221): Added Russian ordinalizer
   - [#228](https://github.com/Mehdik/Humanizer/pull/228): Fixed the "twenties" in SpanishNumberToWordsConverter
+  - [#231](https://github.com/Mehdik/Humanizer/pull/231): Added more settings for FromNow, Dual and Plural (Arabic)
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...master)
 
