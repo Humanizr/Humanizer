@@ -22,8 +22,6 @@
 
 using System;
 
-// ReSharper disable CSharpWarnings::CS1591
-#pragma warning disable 1591
 namespace Humanizer.Bytes
 {
     /// <summary>
@@ -386,5 +384,3 @@ namespace Humanizer.Bytes
         }
     }
 }
-#pragma warning restore 1591
-// ReSharper restore CSharpWarnings::CS1591
