@@ -1,5 +1,6 @@
 ###In Development
   - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal 
+  - [#235](https://github.com/Mehdik/Humanizer/pull/235): Fixed the conversion for "1 millon" in SpanishNumberToWordsConverter
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.23.1...master)
 
