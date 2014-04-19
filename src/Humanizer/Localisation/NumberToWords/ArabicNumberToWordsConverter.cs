@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -110,6 +112,91 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return result.Trim();
+        }
+
+        private static readonly Dictionary<string, string> OrdinalExceptions = new Dictionary<string, string>
+        {
+            {"واحد", "الحادي"},
+            {"أحد", "الحادي"},
+            {"اثنان", "الثاني"},
+            {"اثنا", "الثاني"},
+            {"ثلاثة", "الثالث"},
+            {"أربعة", "الرابع"},
+            {"خمسة", "الخامس"},
+            {"ستة", "السادس"},
+            {"سبعة", "السابع"},
+            {"ثمانية", "الثامن"},
+            {"تسعة", "التاسع"},
+            {"عشرة", "العاشر"},
+        };
+
+        public override string ConvertToOrdinal(int number)
+        {
+            if (number == 0) return "الصفر";
+            var beforeOneHundredNumber = number%100;
+            var overTensPart = number/100*100;
+            var beforeOneHundredWord = string.Empty;
+            var overTensWord = string.Empty;
+            
+            if (beforeOneHundredNumber > 0)
+            {
+                beforeOneHundredWord = Convert(beforeOneHundredNumber);
+                beforeOneHundredWord = ParseNumber(beforeOneHundredWord, beforeOneHundredNumber);
+            }
+            
+            if (overTensPart > 0)
+            {
+                overTensWord = Convert(overTensPart);
+                overTensWord = ParseNumber(overTensWord, overTensPart);
+            }
+
+            var word =
+                beforeOneHundredWord + (overTensPart > 0
+                    ? (string.IsNullOrWhiteSpace(beforeOneHundredWord) ? string.Empty : " بعد ") + overTensWord
+                    : string.Empty
+                    );
+            return word.Trim();
+        }
+
+        private static string ParseNumber(string word, int number)
+        {
+            if (number == 1) return "الأول";
+            
+            if (number <= 10)
+            {
+                foreach (var kv in OrdinalExceptions.Where(kv => word.EndsWith(kv.Key)))
+                {
+                    // replace word with exception
+                    return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
+                }
+            }
+            else if (number > 10 && number < 100)
+            {
+                var parts = word.Split(' ');
+                var newParts = new string[parts.Length];
+                int count = 0;
+                foreach (var part in parts)
+                {
+                    var newPart = part;
+                    var oldPart = part;
+                    foreach (var kv in OrdinalExceptions.Where(kv => oldPart.EndsWith(kv.Key)))
+                    {
+                        // replace word with exception
+                        newPart = oldPart.Substring(0, oldPart.Length - kv.Key.Length) + kv.Value;
+                    }
+                    if (number > 19 && newPart == oldPart && oldPart.Length > 1)
+                        newPart = "ال" + oldPart;
+                    newParts[count++] = newPart;
+                }
+                word = newParts.Aggregate(string.Empty, (current, newPart) => current + (newPart + " "));
+                word = word.Trim();
+            }
+            else
+            {
+                word = "ال"+word;
+            }
+
+            return word;
         }
     }
 }
