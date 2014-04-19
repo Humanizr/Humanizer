@@ -1,0 +1,1 @@
+@msbuild build.proj /m /clp:Verbosity=minimal
