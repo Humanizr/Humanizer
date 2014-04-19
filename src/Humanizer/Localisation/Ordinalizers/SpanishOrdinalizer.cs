@@ -14,9 +14,9 @@
                 return "0";
 
             if (gender == GrammaticalGender.Feminine)
-                return numberString + "ª";
-
-            return numberString + "º";
+                return numberString + ".ª";           
+            else
+                return numberString + ".º";
         }
     }
 }
