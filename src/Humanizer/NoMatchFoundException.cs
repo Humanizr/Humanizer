@@ -5,6 +5,7 @@ namespace Humanizer
     /// <summary>
     /// This is thrown on String.DehumanizeTo enum when the provided string cannot be mapped to the target enum
     /// </summary>
+#pragma warning disable 1591
     public class NoMatchFoundException : Exception
     {
         public NoMatchFoundException()
@@ -21,4 +22,5 @@ namespace Humanizer
         {
         }
     }
+#pragma warning restore 1591
 }
