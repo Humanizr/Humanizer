@@ -1,4 +1,8 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.23.1...master)
+
+###v1.23.1 - 2014-04-19
   - [#217](https://github.com/Mehdik/Humanizer/pull/217): Added pt-BR and Spanish Ordinalize localisation.
   - [#220](https://github.com/Mehdik/Humanizer/pull/220): Added string formatting options to ToQuantity
   - [#219](https://github.com/Mehdik/Humanizer/pull/219): Added Japanese translation for date and timespan
@@ -7,7 +11,7 @@
   - [#231](https://github.com/Mehdik/Humanizer/pull/231): Added more settings for FromNow, Dual and Plural (Arabic)
   - [#222](https://github.com/Mehdik/Humanizer/pull/222): Updated Ordinalize and ToOrdinalWords to account for special exceptions with 1 and 3.
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...v1.23.1)
 
 ###v1.22.1 - 2014-04-14
   - [#188](https://github.com/Mehdik/Humanizer/pull/188): Added Spanish ToOrdinalWords translations
