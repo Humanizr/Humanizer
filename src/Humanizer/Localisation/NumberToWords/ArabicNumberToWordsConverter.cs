@@ -96,18 +96,16 @@ namespace Humanizer.Localisation.NumberToWords
                                 if (groupNumber >= 3 && groupNumber <= 10)
                                     result = String.Format("{0} {1}", PluralGroups[groupLevel], result);
                                 else
-                                {
                                     result = String.Format("{0} {1}", result != String.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel], result);
-                                }
                             }
                             else
-                            {
                                 result = String.Format("{0} {1}", Groups[groupLevel], result);
-                            }
                         }
                     }
+
                     result = String.Format("{0} {1}", process, result);
                 }
+
                 groupLevel++;
             }
 
@@ -150,17 +148,17 @@ namespace Humanizer.Localisation.NumberToWords
                 overTensWord = ParseNumber(overTensWord, overTensPart);
             }
 
-            var word =
-                beforeOneHundredWord + (overTensPart > 0
+            var word = beforeOneHundredWord + 
+                (overTensPart > 0
                     ? (string.IsNullOrWhiteSpace(beforeOneHundredWord) ? string.Empty : " بعد ") + overTensWord
-                    : string.Empty
-                    );
+                    : string.Empty);
             return word.Trim();
         }
 
         private static string ParseNumber(string word, int number)
         {
-            if (number == 1) return "الأول";
+            if (number == 1) 
+                return "الأول";
             
             if (number <= 10)
             {
@@ -175,25 +173,28 @@ namespace Humanizer.Localisation.NumberToWords
                 var parts = word.Split(' ');
                 var newParts = new string[parts.Length];
                 int count = 0;
+
                 foreach (var part in parts)
                 {
                     var newPart = part;
                     var oldPart = part;
+
                     foreach (var kv in OrdinalExceptions.Where(kv => oldPart.EndsWith(kv.Key)))
                     {
                         // replace word with exception
                         newPart = oldPart.Substring(0, oldPart.Length - kv.Key.Length) + kv.Value;
                     }
+                    
                     if (number > 19 && newPart == oldPart && oldPart.Length > 1)
                         newPart = "ال" + oldPart;
+                    
                     newParts[count++] = newPart;
                 }
+
                 word = string.Join(" ", newParts);
             }
             else
-            {
                 word = "ال"+word;
-            }
 
             return word;
         }
