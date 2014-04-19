@@ -1,5 +1,6 @@
 ###In Development
-  - [#217](https://github.com/Mehdik/Humanizer/pull/217): Changed OrdinalizeExtensions to better accommodate localisations. Added pt-BR and Spanish Ordinalize localisation.
+  - [#217](https://github.com/Mehdik/Humanizer/pull/217): Added pt-BR and Spanish Ordinalize localisation.
+  - [#220](https://github.com/Mehdik/Humanizer/pull/220): Added string formatting options to ToQuantity
   - [#219](https://github.com/Mehdik/Humanizer/pull/219): Added Japanese translation for date and timespan
   - [#221](https://github.com/Mehdik/Humanizer/pull/221): Added Russian ordinalizer
   - [#228](https://github.com/Mehdik/Humanizer/pull/228): Fixed the "twenties" in SpanishNumberToWordsConverter
