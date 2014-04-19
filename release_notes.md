@@ -4,6 +4,8 @@
   - [#221](https://github.com/Mehdik/Humanizer/pull/221): Added Russian ordinalizer
   - [#228](https://github.com/Mehdik/Humanizer/pull/228): Fixed the "twenties" in SpanishNumberToWordsConverter
   - [#231](https://github.com/Mehdik/Humanizer/pull/231): Added more settings for FromNow, Dual and Plural (Arabic)
+  - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal 
+
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.22.1...master)
 
