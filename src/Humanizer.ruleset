@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Humanizer" Description="These rules focus on the most critical problems in your code, including potential security holes, application crashes, and other important logic and design errors. You should include this rule set in any custom rule set you create for your projects." ToolsVersion="12.0">
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1001" Action="Error" />
+    <Rule Id="CA1009" Action="Error" />
+    <Rule Id="CA1016" Action="Error" />
+    <Rule Id="CA1033" Action="Error" />
+    <Rule Id="CA1049" Action="Error" />
+    <Rule Id="CA1060" Action="Error" />
+    <Rule Id="CA1061" Action="Error" />
+    <Rule Id="CA1063" Action="Error" />
+    <Rule Id="CA1065" Action="Error" />
+    <Rule Id="CA1301" Action="Error" />
+    <Rule Id="CA1400" Action="Error" />
+    <Rule Id="CA1401" Action="Error" />
+    <Rule Id="CA1403" Action="Error" />
+    <Rule Id="CA1404" Action="Error" />
+    <Rule Id="CA1405" Action="Error" />
+    <Rule Id="CA1410" Action="Error" />
+    <Rule Id="CA1415" Action="Error" />
+    <Rule Id="CA1821" Action="Error" />
+    <Rule Id="CA1900" Action="Error" />
+    <Rule Id="CA1901" Action="Error" />
+    <Rule Id="CA2002" Action="Error" />
+    <Rule Id="CA2100" Action="Error" />
+    <Rule Id="CA2101" Action="Error" />
+    <Rule Id="CA2108" Action="Error" />
+    <Rule Id="CA2111" Action="Error" />
+    <Rule Id="CA2112" Action="Error" />
+    <Rule Id="CA2114" Action="Error" />
+    <Rule Id="CA2116" Action="Error" />
+    <Rule Id="CA2117" Action="Error" />
+    <Rule Id="CA2122" Action="Error" />
+    <Rule Id="CA2123" Action="Error" />
+    <Rule Id="CA2124" Action="Error" />
+    <Rule Id="CA2126" Action="Error" />
+    <Rule Id="CA2131" Action="Error" />
+    <Rule Id="CA2132" Action="Error" />
+    <Rule Id="CA2133" Action="Error" />
+    <Rule Id="CA2134" Action="Error" />
+    <Rule Id="CA2137" Action="Error" />
+    <Rule Id="CA2138" Action="Error" />
+    <Rule Id="CA2140" Action="Error" />
+    <Rule Id="CA2141" Action="Error" />
+    <Rule Id="CA2146" Action="Error" />
+    <Rule Id="CA2147" Action="Error" />
+    <Rule Id="CA2149" Action="Error" />
+    <Rule Id="CA2200" Action="Error" />
+    <Rule Id="CA2202" Action="Error" />
+    <Rule Id="CA2207" Action="Error" />
+    <Rule Id="CA2212" Action="Error" />
+    <Rule Id="CA2213" Action="Error" />
+    <Rule Id="CA2214" Action="Error" />
+    <Rule Id="CA2216" Action="Error" />
+    <Rule Id="CA2220" Action="Error" />
+    <Rule Id="CA2229" Action="Error" />
+    <Rule Id="CA2231" Action="Error" />
+    <Rule Id="CA2232" Action="Error" />
+    <Rule Id="CA2235" Action="Error" />
+    <Rule Id="CA2236" Action="Error" />
+    <Rule Id="CA2237" Action="Error" />
+    <Rule Id="CA2238" Action="Error" />
+    <Rule Id="CA2240" Action="Error" />
+    <Rule Id="CA2241" Action="Error" />
+    <Rule Id="CA2242" Action="Error" />
+  </Rules>
+</RuleSet>

@@ -46,6 +46,18 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Verify|AnyCPU'">
+    <OutputPath>bin\Verify\</OutputPath>
+    <Optimize>false</Optimize>
+    <DocumentationFile>bin\Verify\Humanizer.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>..\Humanizer.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <NoWarn>
+    </NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />

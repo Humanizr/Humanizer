@@ -49,6 +49,16 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Verify|AnyCPU'">
+    <OutputPath>bin\Verify\</OutputPath>
+    <CodeAnalysisRuleSet>..\Humanizer.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <NoWarn>
+    </NoWarn>
+    <DocumentationFile>bin\Verify\Humanizer.Tests.XML</DocumentationFile>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ApprovalTests">
       <HintPath>..\packages\ApprovalTests.3.0.5\lib\net40\ApprovalTests.dll</HintPath>
