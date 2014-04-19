@@ -188,8 +188,7 @@ namespace Humanizer.Localisation.NumberToWords
                         newPart = "ال" + oldPart;
                     newParts[count++] = newPart;
                 }
-                word = newParts.Aggregate(string.Empty, (current, newPart) => current + (newPart + " "));
-                word = word.Trim();
+                word = string.Join(" ", newParts);
             }
             else
             {
