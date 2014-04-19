@@ -47,7 +47,7 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000) > 0)
             {
                 parts.Add(number / 1000000 == 1
-                    ? string.Format("millón")
+                    ? string.Format("un millón")
                     : string.Format("{0} millones", Convert(number / 1000000)));
 
                 number %= 1000000;
