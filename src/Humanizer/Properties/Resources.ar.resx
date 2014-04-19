@@ -397,4 +397,8 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>في غضون سنة واحدة من الآن</value>
   </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>الآن</value>
+    <comment>now</comment>
+  </data>
 </root>

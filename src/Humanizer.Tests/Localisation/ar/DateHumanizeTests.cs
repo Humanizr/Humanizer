@@ -98,6 +98,7 @@ namespace Humanizer.Tests.Localisation.ar
         }
 
         [Theory]
+        [InlineData(0, "الآن")]
         [InlineData(1, "في غضون ثانية واحدة من الآن")]
         [InlineData(2, "في غضون ثانيتين من الآن")]
         [InlineData(10, "في غضون 10 ثوان من الآن")]
