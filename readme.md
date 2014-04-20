@@ -784,7 +784,7 @@ I have also flagged some of the easier issues as 'jump in' so you can start with
 
 ###<a id="contribution-guideline">Contribution guideline</a>
 I use [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. 
-So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue and send a PR.
+So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
 
 Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
 
