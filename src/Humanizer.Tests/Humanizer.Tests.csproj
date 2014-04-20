@@ -53,11 +53,11 @@
     <OutputPath>bin\Verify\</OutputPath>
     <CodeAnalysisRuleSet>..\Humanizer.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <NoWarn>
-    </NoWarn>
+    <NoWarn>1591</NoWarn>
     <DocumentationFile>bin\Verify\Humanizer.Tests.XML</DocumentationFile>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ApprovalTests">
