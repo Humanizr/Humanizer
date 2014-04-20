@@ -1,4 +1,5 @@
 ###In Development
+  - [#236](https://github.com/Mehdik/Humanizer/pull/236): Added Turkish localisation
   - [#217](https://github.com/Mehdik/Humanizer/pull/217): Changed OrdinalizeExtensions to better accommodate localisations. Added pt-BR and Spanish Ordinalize localisation.
   - [#219](https://github.com/Mehdik/Humanizer/pull/219): Added Japanese translation for date and timespan
   - [#221](https://github.com/Mehdik/Humanizer/pull/221): Added Russian ordinalizer
