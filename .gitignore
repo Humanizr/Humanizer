@@ -13,6 +13,7 @@ obj/
 src/packages/*
 PackageBuild/*
 Build/*
+Release/*
 src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.received.txt
 *.tss
 src/TestResults/*
