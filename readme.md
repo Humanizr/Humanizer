@@ -1,3 +1,5 @@
+<p><img src="https://raw.github.com/MehdiK/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
+
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
 ###Table of contents
@@ -32,6 +34,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
  - [Author](#author)
  - [Main contributors](#main-contributors)
  - [License](#license)
+ - [Icon](#icon)
 
 ##<a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
@@ -844,3 +847,5 @@ Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
 ##<a id="license">License</a>
 Humanizer is released under the MIT License. See the [bundled LICENSE](https://github.com/MehdiK/Humanizer/blob/master/LICENSE) file for details.
 
+##<a id="icon">Icon</a>
+Icon created by [Tyrone Rieschiek](https://twitter.com/Inkventive)
