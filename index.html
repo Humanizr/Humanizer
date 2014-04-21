@@ -4,41 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Humanizer by MehdiK</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/MehdiK/Humanizer">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/MehdiK/Humanizer/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/MehdiK/Humanizer/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
     <div class="wrapper">
+      <header>
+        <h1>Humanizer</h1>
+        <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</p>
 
+        <p class="view"><a href="https://github.com/MehdiK/Humanizer">View the Project on GitHub <small>MehdiK/Humanizer</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/MehdiK/Humanizer/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/MehdiK/Humanizer/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/MehdiK/Humanizer">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
       <section>
-        <div id="title">
-          <h1>Humanizer</h1>
-          <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/MehdiK">MehdiK</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
+        <p><img src="https://raw.github.com/MehdiK/Humanizer/master/logo.png" alt="Logo"></p>
 
-        <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.</p>
+<p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.</p>
 
 <h3>
 <a name="table-of-contents" class="anchor" href="#table-of-contents"><span class="octicon octicon-link"></span></a>Table of contents</h3>
@@ -92,6 +84,7 @@
 <li><a href="#author">Author</a></li>
 <li><a href="#main-contributors">Main contributors</a></li>
 <li><a href="#license">License</a></li>
+<li><a href="#icon">Icon</a></li>
 </ul><h2>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a><a>Install</a>
 </h2>
@@ -183,7 +176,10 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 <div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="s">"---"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long te---"</span>
 </pre></div>
 
-<p>The default truncation strategy, <code>Truncator.FixedLength</code>, is to truncate the input string to a specific length, including the truncation string length. There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. To use a specific truncator when truncating, the two <code>Truncate</code> methods shown in the previous examples both have an overload that allow you to specify the <code>ITruncator</code> instance to use for the truncation. Here are examples on how to use the three provided truncators:</p>
+<p>The default truncation strategy, <code>Truncator.FixedLength</code>, is to truncate the input string to a specific length, including the truncation string length. 
+There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. 
+To use a specific truncator when truncating, the two <code>Truncate</code> methods shown in the previous examples all have an overload that allow you to specify the <code>ITruncator</code> instance to use for the truncation. 
+Here are examples on how to use the three provided truncators:</p>
 
 <div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long text…"</span>
 <span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long te---"</span>
@@ -195,7 +191,20 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 <span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfWords</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long text---"</span>
 </pre></div>
 
-<p>Note that you can also use create your own truncator by having a class implement the <code>ITruncator</code> interface.</p>
+<p>Note that you can also use create your own truncator by implementing the <code>ITruncator</code> interface.</p>
+
+<p>There is also an option to choose whether to truncate the string from the beginning (<code>TruncateFrom.Left</code>) or the end (<code>TruncateFrom.Right</code>). 
+Default is the right as shown in the examples above. The examples below show how to truncate from the beginning of the string:</p>
+
+<div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">,</span> <span class="n">TruncateFrom</span><span class="p">.</span><span class="n">Left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"… truncate"</span>
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">,</span> <span class="n">TruncateFrom</span><span class="p">.</span><span class="n">Left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"---runcate"</span>
+
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfCharacters</span><span class="p">,</span> <span class="n">TruncateFrom</span><span class="p">.</span><span class="n">Left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"…o truncate"</span>
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">16</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfCharacters</span><span class="p">,</span> <span class="n">TruncateFrom</span><span class="p">.</span><span class="n">Left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"---ext to truncate"</span>
+
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfWords</span><span class="p">,</span> <span class="n">TruncateFrom</span><span class="p">.</span><span class="n">Left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"…to truncate"</span>
+<span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="s">"---"</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedNumberOfWords</span><span class="p">,</span> <span class="n">TruncateFrom</span><span class="p">.</span><span class="n">Left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"---to truncate"</span>
+</pre></div>
 
 <h3>
 <a name="format-string" class="anchor" href="#format-string"><span class="octicon octicon-link"></span></a><a>Format String</a>
@@ -430,6 +439,13 @@ Here is a few examples of specifying precision:</p>
 <span class="s">"case"</span><span class="p">.</span><span class="n">ToQuantity</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="n">ShowQuantityAs</span><span class="p">.</span><span class="n">None</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"cases"</span>
 </pre></div>
 
+<p>There is also an overload that allows you to format the number. You can pass in the format and the culture to be used.</p>
+
+<div class="highlight highlight-C#"><pre><span class="s">"dollar"</span><span class="p">.</span><span class="n">ToQuantity</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="s">"C0"</span><span class="p">,</span> <span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">"en-US"</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="s">"$2 dollars"</span>
+<span class="s">"dollar"</span><span class="p">.</span><span class="n">ToQuantity</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="s">"C2"</span><span class="p">,</span> <span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">"en-US"</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="s">"$2.00 dollars"</span>
+<span class="s">"cases"</span><span class="p">.</span><span class="n">ToQuantity</span><span class="p">(</span><span class="m">12000</span><span class="p">,</span> <span class="s">"N0"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"12,000 cases"</span>
+</pre></div>
+
 <h4>
 <a name="ordinalize" class="anchor" href="#ordinalize"><span class="octicon octicon-link"></span></a><a>Ordinalize</a>
 </h4>
@@ -441,6 +457,21 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <p>You can also call <code>Ordinalize</code> on a numeric string and achieve the same result: <code>"21".Ordinalize()</code> =&gt; <code>"21st"</code></p>
+
+<p><code>Ordinalize</code> also supports grammatical gender for both forms. 
+You can pass an argument to <code>Ordinalize</code> to specify which gender the number should be outputted in. 
+The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
+
+<div class="highlight highlight-C#"><pre><span class="c1">// for Brazilian Portuguese locale</span>
+<span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1º"</span>
+<span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Feminine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1ª"</span>
+<span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Neuter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1º"</span>
+<span class="s">"2"</span><span class="p">.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2º"</span>
+<span class="s">"2"</span><span class="p">.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Feminine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2ª"</span>
+<span class="s">"2"</span><span class="p">.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Neuter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2º"</span>
+</pre></div>
+
+<p>Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.</p>
 
 <h4>
 <a name="underscore" class="anchor" href="#underscore"><span class="octicon octicon-link"></span></a><a>Underscore</a>
@@ -827,7 +858,7 @@ I have also flagged some of the easier issues as 'jump in' so you can start with
 </h3>
 
 <p>I use <a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub flow</a> for pull requests. 
-So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue and send a PR.</p>
+So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.</p>
 
 <p>Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:</p>
 
@@ -902,10 +933,19 @@ You should then register your converter in the <a href="https://github.com/Mehdi
 </h2>
 
 <p>Humanizer is released under the MIT License. See the <a href="https://github.com/MehdiK/Humanizer/blob/master/LICENSE">bundled LICENSE</a> file for details.</p>
-      </section>
 
+<h2>
+<a name="icon" class="anchor" href="#icon"><span class="octicon octicon-link"></span></a><a>Icon</a>
+</h2>
+
+<p>Icon created by <a href="https://twitter.com/Inkventive">Tyrone Rieschiek</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/MehdiK">MehdiK</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
