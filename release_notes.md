@@ -1,9 +1,13 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...master)
+
+###v1.24.1 - 2014-04-21
   - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal 
   - [#235](https://github.com/Mehdik/Humanizer/pull/235): Fixed the conversion for "1 millon" in SpanishNumberToWordsConverter
   - [#233](https://github.com/Mehdik/Humanizer/pull/233): Added build.cmd and Verify build configuration for strict project build and analysis
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.23.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.23.1...v1.24.1)
 
 ###v1.23.1 - 2014-04-19
   - [#217](https://github.com/Mehdik/Humanizer/pull/217): Added pt-BR and Spanish Ordinalize localisation.
