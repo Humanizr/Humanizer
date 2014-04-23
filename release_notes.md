@@ -1,4 +1,5 @@
 ###In Development
+  - [#236](https://github.com/Mehdik/Humanizer/pull/236): Added Turkish localisation
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...master)
 
