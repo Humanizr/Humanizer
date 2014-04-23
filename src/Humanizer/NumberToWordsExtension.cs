@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.Configuration;
 using Humanizer.Localisation.NumberToWords;
 
 namespace Humanizer
@@ -10,21 +11,6 @@ namespace Humanizer
     /// </summary>
     public static class NumberToWordsExtension
     {
-        private static readonly IDictionary<string, Func<DefaultNumberToWordsConverter>> ConverterFactories =
-            new Dictionary<string, Func<DefaultNumberToWordsConverter>>
-            {
-                {"en", () => new EnglishNumberToWordsConverter()},
-                {"ar", () => new ArabicNumberToWordsConverter()},
-                {"fa", () => new FarsiNumberToWordsConverter()},
-                {"es", () => new SpanishNumberToWordsConverter()},
-                {"pl", () => new PolishNumberToWordsConverter()},
-                {"pt-BR", () => new BrazilianPortugueseNumberToWordsConverter()},
-                {"ru", () => new RussianNumberToWordsConverter()},
-                {"fr", () => new FrenchNumberToWordsConverter()},
-                {"nl", () => new DutchNumberToWordsConverter()},
-                {"he", () => new HebrewNumberToWordsConverter()}
-            };
-
         /// <summary>
         /// 3501.ToWords() -> "three thousand five hundred and one"
         /// </summary>
@@ -32,7 +18,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToWords(this int number)
         {
-            return Converter.Convert(number);
+            return Configurator.NumberToWordsConverter.Convert(number);
         }
 
         /// <summary>
@@ -56,7 +42,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToWords(this int number, GrammaticalGender gender)
         {
-            return Converter.Convert(number, gender);
+            return Configurator.NumberToWordsConverter.Convert(number, gender);
         }
 
         /// <summary>
@@ -66,7 +52,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToOrdinalWords(this int number)
         {
-            return Converter.ConvertToOrdinal(number);
+            return Configurator.NumberToWordsConverter.ConvertToOrdinal(number);
         }
 
         /// <summary>
@@ -79,23 +65,9 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToOrdinalWords(this int number, GrammaticalGender gender)
         {
-            return Converter.ConvertToOrdinal(number, gender);
+            return Configurator.NumberToWordsConverter.ConvertToOrdinal(number, gender);
         }
 
-        private static DefaultNumberToWordsConverter Converter
-        {
-            get
-            {
-                Func<DefaultNumberToWordsConverter> converterFactory;
 
-                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out converterFactory))
-                    return converterFactory();
-
-                if (ConverterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out converterFactory))
-                    return converterFactory();
-
-                return new DefaultNumberToWordsConverter();
-            }
-        }
     }
 }
