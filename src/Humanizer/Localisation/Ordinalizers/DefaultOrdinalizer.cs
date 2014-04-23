@@ -1,6 +1,6 @@
 ﻿namespace Humanizer.Localisation.Ordinalizers
 {
-    internal class DefaultOrdinalizer
+    internal class DefaultOrdinalizer : IOrdinalizer
     {
         public virtual string Convert(int number, string numberString, GrammaticalGender gender)
         {
