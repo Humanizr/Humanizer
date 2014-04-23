@@ -5,7 +5,7 @@ using Humanizer.Localisation.Ordinalizers;
 
 namespace Humanizer.Configuration
 {
-    public class OrdinalizerFactoryCollection : FactoryCollection<IOrdinalizer>
+    internal class OrdinalizerFactoryManager : FactoryManager<IOrdinalizer>
     {
         private static Lazy<EnglishOrdinalizer> _lazyEnglishOrdinalizer = new Lazy<EnglishOrdinalizer>();
         private static Lazy<SpanishOrdinalizer> _lazySpanishOrdinalizer = new Lazy<SpanishOrdinalizer>();
@@ -13,14 +13,17 @@ namespace Humanizer.Configuration
         private static Lazy<RussianOrdinalizer> _lazyRussianOrdinalizer = new Lazy<RussianOrdinalizer>();
         private static Lazy<DefaultOrdinalizer> _lazyDefaultOrdinalizer = new Lazy<DefaultOrdinalizer>();
 
-        public OrdinalizerFactoryCollection() : base(
-            new Dictionary<string, Func<IOrdinalizer>>(StringComparer.OrdinalIgnoreCase)
+        public OrdinalizerFactoryManager()
+            : base(
+                new Dictionary<string, Func<IOrdinalizer>>
             {
                 {"en", () => _lazyEnglishOrdinalizer.Value},
                 {"es", () => _lazySpanishOrdinalizer.Value},
                 {"pt-BR", () => _lazyBrazilianPortugueseOrdinalizer.Value},
-                {"ru", () => _lazyRussianOrdinalizer.Value},
-                {"default", () => _lazyDefaultOrdinalizer.Value}
-            }) { }
+                {"ru", () => _lazyRussianOrdinalizer.Value}
+            })
+        {
+            SetDefaultFactory(() => _lazyDefaultOrdinalizer.Value);
+        }
     }
 }

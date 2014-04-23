@@ -60,6 +60,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
+    <Compile Include="Configuration\FactoryManager.cs" />
+    <Compile Include="Configuration\FormatterFactoryManager.cs" />
+    <Compile Include="Configuration\NumberToWordsConverterFactoryManager.cs" />
+    <Compile Include="Configuration\OrdinalizerFactoryManager.cs" />
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
     <Compile Include="GrammaticalGender.cs" />
@@ -81,9 +85,11 @@
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
+    <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
+    <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\RussianOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\SpanishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
