@@ -1,6 +1,6 @@
 ﻿namespace Humanizer.Localisation.NumberToWords
 {
-    internal class DefaultNumberToWordsConverter
+    internal class DefaultNumberToWordsConverter : INumberToWordsConverter
     {
         /// <summary>
         /// for Russian locale

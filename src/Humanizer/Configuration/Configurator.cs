@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
+using Humanizer.Localisation.NumberToWords;
+using Humanizer.Localisation.Ordinalizers;
 
 namespace Humanizer.Configuration
 {
@@ -11,21 +13,26 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
-        private static readonly IDictionary<string, Func<IFormatter>> _formatterFactories =
-            new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "ro", () => new RomanianFormatter() },
-            { "ru", () => new RussianFormatter() },
-            { "ar", () => new ArabicFormatter() },
-            { "he", () => new HebrewFormatter() },
-            { "sk", () => new CzechSlovakPolishFormatter() },
-            { "cs", () => new CzechSlovakPolishFormatter() },
-            { "pl", () => new CzechSlovakPolishFormatter() }
-        };
 
-        public static IDictionary<string, Func<IFormatter>> FormatterFactories
+        private static FactoryManager<IFormatter> _formatterFactoryManager = new FormatterFactoryManager();
+
+        public static FactoryManager<IFormatter> FormatterFactoryManager
         {
-            get { return _formatterFactories; }
+            get { return _formatterFactoryManager; }
+        }
+
+        private static FactoryManager<INumberToWordsConverter> _numberToWordsConverterFactoryManager = new NumberToWordsConverterFactoryManager();
+
+        public static FactoryManager<INumberToWordsConverter> NumberToWordsConverterFactoryManager
+        {
+            get { return _numberToWordsConverterFactoryManager; }
+        }
+
+        private static FactoryManager<IOrdinalizer> _ordinalizerFactoryManager = new OrdinalizerFactoryManager();
+
+        public static FactoryManager<IOrdinalizer> OrdinalizerFactoryManager
+        {
+            get { return _ordinalizerFactoryManager; }
         }
 
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
@@ -33,15 +40,33 @@ namespace Humanizer.Configuration
         /// <summary>
         /// The formatter to be used
         /// </summary>
-        public static IFormatter Formatter
+        internal static IFormatter Formatter
         {
             get
             {
-                Func<IFormatter> formatterFactory;
-                if (FormatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory))
-                    return formatterFactory();
-                
-                return new DefaultFormatter();
+                return FormatterFactoryManager.GetFactory()();
+            }
+        }
+
+        /// <summary>
+        /// The converter to be used
+        /// </summary>
+        internal static INumberToWordsConverter NumberToWordsConverter
+        {
+            get
+            {
+                return NumberToWordsConverterFactoryManager.GetFactory()();
+            }
+        }
+
+        /// <summary>
+        /// The ordinalizer to be used
+        /// </summary>
+        internal static IOrdinalizer Ordinalizer
+        {
+            get
+            {
+                return OrdinalizerFactoryManager.GetFactory()();
             }
         }
 
