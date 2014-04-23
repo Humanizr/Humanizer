@@ -67,6 +67,7 @@
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
     <Compile Include="Localisation\NumberToWords\DutchNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\GermanNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
     <Compile Include="Bytes\ByteSize.cs" />
