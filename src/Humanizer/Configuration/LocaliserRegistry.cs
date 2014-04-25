@@ -50,7 +50,7 @@ namespace Humanizer.Configuration
         /// </summary>
         public void Register(Func<T> localiser, CultureInfo culture = null)
         {
-            var lazyLocaliser = new Lazy<T>(localiser);
+            var lazyLocaliser = MakeLazy(localiser);
 
             if (culture == null)
                 _defaultLocaliser = lazyLocaliser;
