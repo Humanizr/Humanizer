@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
@@ -13,26 +10,31 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
-
-        private static FactoryManager<IFormatter> _formatterFactoryManager = new FormatterFactoryManager();
-
-        public static FactoryManager<IFormatter> FormatterFactoryManager
+        private static readonly LocaliserRegistry<IFormatter> _formatters = new FormatterRegistry();
+        /// <summary>
+        /// A registry of formatters used to format strings based on the current locale
+        /// </summary>
+        public static LocaliserRegistry<IFormatter> Formatters
         {
-            get { return _formatterFactoryManager; }
+            get { return _formatters; }
         }
 
-        private static FactoryManager<INumberToWordsConverter> _numberToWordsConverterFactoryManager = new NumberToWordsConverterFactoryManager();
-
-        public static FactoryManager<INumberToWordsConverter> NumberToWordsConverterFactoryManager
+        private static readonly LocaliserRegistry<INumberToWordsConverter> _numberToWordsConverters = new NumberToWordsConverterRegistry();
+        /// <summary>
+        /// A registry of number to words converters used to localise ToWords and ToOrdinalWords methods
+        /// </summary>
+        public static LocaliserRegistry<INumberToWordsConverter> NumberToWordsConverters
         {
-            get { return _numberToWordsConverterFactoryManager; }
+            get { return _numberToWordsConverters; }
         }
 
-        private static FactoryManager<IOrdinalizer> _ordinalizerFactoryManager = new OrdinalizerFactoryManager();
-
-        public static FactoryManager<IOrdinalizer> OrdinalizerFactoryManager
+        private static LocaliserRegistry<IOrdinalizer> _ordinalizers = new OrdinalizerRegistry();
+        /// <summary>
+        /// A registry of ordinalizers used to localise Ordinalize method
+        /// </summary>
+        public static LocaliserRegistry<IOrdinalizer> Ordinalizers
         {
-            get { return _ordinalizerFactoryManager; }
+            get { return _ordinalizers; }
         }
 
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
@@ -44,7 +46,7 @@ namespace Humanizer.Configuration
         {
             get
             {
-                return FormatterFactoryManager.GetFactory()();
+                return Formatters.ResolveForUiCulture();
             }
         }
 
@@ -55,7 +57,7 @@ namespace Humanizer.Configuration
         {
             get
             {
-                return NumberToWordsConverterFactoryManager.GetFactory()();
+                return NumberToWordsConverters.ResolveForUiCulture();
             }
         }
 
@@ -66,7 +68,7 @@ namespace Humanizer.Configuration
         {
             get
             {
-                return OrdinalizerFactoryManager.GetFactory()();
+                return Ordinalizers.ResolveForUiCulture();
             }
         }
 

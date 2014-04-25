@@ -1,6 +1,7 @@
 ###In Development
   - [#236](https://github.com/Mehdik/Humanizer/pull/236): Added Turkish localisation
   - [#239](https://github.com/Mehdik/Humanizer/pull/239): Added Serbian localisation
+  - [#227](https://github.com/MehdiK/Humanizer/pull/227): Moved factory collections to their own classes, allowed public access via Configurator, and made the default factories lazy loaded
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...master)
 
@@ -8,7 +9,6 @@
   - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal 
   - [#235](https://github.com/Mehdik/Humanizer/pull/235): Fixed the conversion for "1 millon" in SpanishNumberToWordsConverter
   - [#233](https://github.com/Mehdik/Humanizer/pull/233): Added build.cmd and Verify build configuration for strict project build and analysis
-  - [#227](https://github.com/MehdiK/Humanizer/pull/227): Moved factory collections to their own classes, allowed public access via Configurator, and made the default factories lazy loaded
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.23.1...v1.24.1)
 
