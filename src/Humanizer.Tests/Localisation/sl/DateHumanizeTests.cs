@@ -9,8 +9,10 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(-10, "pred 10 leti")]
+        [InlineData(-5, "pred 5 leti")]
+        [InlineData(-4, "pred 4 leti")]
         [InlineData(-3, "pred 3 leti")]
-        [InlineData(-2, "pred 2 leti")]
+        [InlineData(-2, "pred 2 letoma")]
         [InlineData(-1, "pred enim letom")]
         public void YearsAgo(int years, string expected) {
            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
@@ -18,8 +20,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(5, "čez 5 let")]
-        [InlineData(4, "čez 4 let")]
-        [InlineData(3, "čez 3 let")]
+        [InlineData(4, "čez 4 leta")]
+        [InlineData(3, "čez 3 leta")]
         [InlineData(2, "čez 2 leti")]
         [InlineData(1, "čez eno leto")]
         public void YearsFromNow(int years, string expected) {
@@ -28,6 +30,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(-10, "pred 10 meseci")]
+        [InlineData(-5, "pred 5 meseci")]
+        [InlineData(-4, "pred 4 meseci")]
         [InlineData(-3, "pred 3 meseci")]
         [InlineData(-2, "pred 2 mesecema")]
         [InlineData(-1, "pred enim mesecem")]
@@ -36,7 +40,9 @@ namespace Humanizer.Tests.Localisation.sl
         }
 
         [Theory]
-        [InlineData(3, "čez 3 mesecev")]
+        [InlineData(5, "čez 5 mesecev")]
+        [InlineData(4, "čez 4 mesece")]
+        [InlineData(3, "čez 3 mesece")]
         [InlineData(2, "čez 2 meseca")]
         [InlineData(1, "čez en mesec")]
         public void MonthsFromNow(int months, string expected) {
@@ -45,6 +51,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(-10, "pred 10 dnevi")]
+        [InlineData(-5, "pred 5 dnevi")]
+        [InlineData(-4, "pred 4 dnevi")]
         [InlineData(-3, "pred 3 dnevi")]
         [InlineData(-2, "pred 2 dnevoma")]
         [InlineData(-1, "včeraj")]
@@ -54,6 +62,9 @@ namespace Humanizer.Tests.Localisation.sl
         }
 
         [Theory]
+        [InlineData(5, "čez 5 dni")]
+        [InlineData(4, "čez 4 dni")]
+        [InlineData(3, "čez 3 dni")]
         [InlineData(2, "čez 2 dni")]
         [InlineData(1, "jutri")]
         public void DaysFromNow(int days, string expected)
@@ -63,6 +74,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(-10, "pred 10 urami")]
+        [InlineData(-5, "pred 5 urami")]
+        [InlineData(-4, "pred 4 urami")]
         [InlineData(-3, "pred 3 urami")]
         [InlineData(-2, "pred 2 urama")]
         [InlineData(-1, "pred eno uro")]
@@ -73,8 +86,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(5, "čez 5 ur")]
-        [InlineData(4, "čez 4 ur")]
-        [InlineData(3, "čez 3 ur")]
+        [InlineData(4, "čez 4 ure")]
+        [InlineData(3, "čez 3 ure")]
         [InlineData(2, "čez 2 uri")]
         [InlineData(1, "čez eno uro")]
         public void HoursFromNow(int hours, string expected)
@@ -84,6 +97,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(-10, "pred 10 minutami")]
+        [InlineData(-5, "pred 5 minutami")]
+        [InlineData(-4, "pred 4 minutami")]
         [InlineData(-3, "pred 3 minutami")]
         [InlineData(-2, "pred 2 minutama")]
         [InlineData(-1, "pred eno minuto")]
@@ -94,8 +109,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(5, "čez 5 minut")]
-        [InlineData(4, "čez 4 minut")]
-        [InlineData(3, "čez 3 minut")]
+        [InlineData(4, "čez 4 minute")]
+        [InlineData(3, "čez 3 minute")]
         [InlineData(2, "čez 2 minuti")]
         [InlineData(1, "čez eno minuto")]
         public void MinutesFromNow(int minutes, string expected)
@@ -105,6 +120,8 @@ namespace Humanizer.Tests.Localisation.sl
 
         [Theory]
         [InlineData(-10, "pred 10 sekundami")]
+        [InlineData(-5, "pred 5 sekundami")]
+        [InlineData(-4, "pred 4 sekundami")]
         [InlineData(-3, "pred 3 sekundami")]
         [InlineData(-2, "pred 2 sekundama")]
         [InlineData(-1, "pred eno sekundo")]
@@ -114,7 +131,10 @@ namespace Humanizer.Tests.Localisation.sl
         }
 
         [Theory]
-        [InlineData(3, "čez 3 sekund")]
+        [InlineData(10, "čez 10 sekund")]
+        [InlineData(5, "čez 5 sekund")]
+        [InlineData(4, "čez 4 sekunde")]
+        [InlineData(3, "čez 3 sekunde")]
         [InlineData(2, "čez 2 sekundi")]
         [InlineData(1, "čez eno sekundo")]
         public void SecondsFromNow(int seconds, string expected)
