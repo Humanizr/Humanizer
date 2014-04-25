@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
+using Humanizer.Localisation.NumberToWords;
+using Humanizer.Localisation.Ordinalizers;
 
 namespace Humanizer.Configuration
 {
@@ -11,23 +10,31 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
-        private static readonly IDictionary<string, Func<IFormatter>> _formatterFactories =
-            new Dictionary<string, Func<IFormatter>>(StringComparer.OrdinalIgnoreCase)
+        private static readonly LocaliserRegistry<IFormatter> _formatters = new FormatterRegistry();
+        /// <summary>
+        /// A registry of formatters used to format strings based on the current locale
+        /// </summary>
+        public static LocaliserRegistry<IFormatter> Formatters
         {
-            { "ro", () => new RomanianFormatter() },
-            { "ru", () => new RussianFormatter() },
-            { "ar", () => new ArabicFormatter() },
-            { "he", () => new HebrewFormatter() },
-            { "sk", () => new CzechSlovakPolishFormatter() },
-            { "cs", () => new CzechSlovakPolishFormatter() },
-            { "pl", () => new CzechSlovakPolishFormatter() },
-            { "sr", () => new SerbianFormatter() },
-            { "sl", () => new SlovenianFormatter() }
-        };
+            get { return _formatters; }
+        }
 
-        public static IDictionary<string, Func<IFormatter>> FormatterFactories
+        private static readonly LocaliserRegistry<INumberToWordsConverter> _numberToWordsConverters = new NumberToWordsConverterRegistry();
+        /// <summary>
+        /// A registry of number to words converters used to localise ToWords and ToOrdinalWords methods
+        /// </summary>
+        public static LocaliserRegistry<INumberToWordsConverter> NumberToWordsConverters
         {
-            get { return _formatterFactories; }
+            get { return _numberToWordsConverters; }
+        }
+
+        private static LocaliserRegistry<IOrdinalizer> _ordinalizers = new OrdinalizerRegistry();
+        /// <summary>
+        /// A registry of ordinalizers used to localise Ordinalize method
+        /// </summary>
+        public static LocaliserRegistry<IOrdinalizer> Ordinalizers
+        {
+            get { return _ordinalizers; }
         }
 
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
@@ -35,15 +42,33 @@ namespace Humanizer.Configuration
         /// <summary>
         /// The formatter to be used
         /// </summary>
-        public static IFormatter Formatter
+        internal static IFormatter Formatter
         {
             get
             {
-                Func<IFormatter> formatterFactory;
-                if (FormatterFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out formatterFactory))
-                    return formatterFactory();
-                
-                return new DefaultFormatter();
+                return Formatters.ResolveForUiCulture();
+            }
+        }
+
+        /// <summary>
+        /// The converter to be used
+        /// </summary>
+        internal static INumberToWordsConverter NumberToWordsConverter
+        {
+            get
+            {
+                return NumberToWordsConverters.ResolveForUiCulture();
+            }
+        }
+
+        /// <summary>
+        /// The ordinalizer to be used
+        /// </summary>
+        internal static IOrdinalizer Ordinalizer
+        {
+            get
+            {
+                return Ordinalizers.ResolveForUiCulture();
             }
         }
 
