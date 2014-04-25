@@ -1,7 +1,7 @@
 ﻿namespace Humanizer.Localisation.Formatters{
    internal class SlovenianFormatter : DefaultFormatter{
       private const string DualPostfix = "_Dual";
-      private const string TrialQuadralPrefix = "_TrialQuadral";
+      private const string TrialQuadralPostfix = "_TrialQuadral";
 
       protected override string GetResourceKey(string resourceKey, int number){
          if (number == 2)
