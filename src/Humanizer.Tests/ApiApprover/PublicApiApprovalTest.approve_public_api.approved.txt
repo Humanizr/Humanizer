@@ -73,7 +73,9 @@ public class Configurator
 
 public class LocaliserRegistry`1
 {
-    public void Register(System.Func<> localiser, System.Globalization.CultureInfo culture) { }
+    public LocaliserRegistry`1() { }
+    public void Register(string localeCode) { }
+    public void RegisterDefault() { }
     public T ResolveForUiCulture() { }
 }
 

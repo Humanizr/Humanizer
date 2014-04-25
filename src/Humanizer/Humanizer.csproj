@@ -59,7 +59,6 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Localiser.cs" />
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Configuration\LocaliserRegistry.cs" />
     <Compile Include="Configuration\FormatterRegistry.cs" />
