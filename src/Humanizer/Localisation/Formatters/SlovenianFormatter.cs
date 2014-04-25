@@ -8,7 +8,7 @@
             return resourceKey + DualPostfix;
          // When the count is three or four some some words have a different form when counting in Slovenian language
          else if (number == 3 || number == 4)
-            return resourceKey + TrialQuadralPrefix;
+            return resourceKey + TrialQuadralPostfix;
          return resourceKey;
       }
    }
