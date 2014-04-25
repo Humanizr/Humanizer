@@ -137,6 +137,8 @@
     <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sk\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sl\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sr-Latn\DateHumanizeTests.cs" />
     <Compile Include="Localisation\sr-Latn\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sr\DateHumanizeTests.cs" />
