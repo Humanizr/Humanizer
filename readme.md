@@ -9,7 +9,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Dehumanize String](#dehumanize-string)
    - [Transform String](#transform-string)
    - [Truncate String](#truncate-string)
-   - [Format String](#format-string)  
+   - [Format String](#format-string)
    - [Humanize Enums](#humanize-enums)
    - [Dehumanize Enums](#dehumanize-enums)
    - [Humanize DateTime](#humanize-datetime)
@@ -28,8 +28,6 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [ByteSize](#bytesize)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
-   - [Contribution guideline](#contribution-guideline)
-   - [Need your help with localisation](#need-your-help-with-localisation)
  - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
  - [Author](#author)
  - [Main contributors](#main-contributors)
@@ -39,35 +37,35 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 ##<a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
-Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
+Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications.
 Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
 
 ##<a id="features">Features</a>
 
 ###<a id="humanize-string">Humanize String</a>
-`Humanize` string extensions allow you turn an otherwise computerized string into a more readable human-friendly one. 
-The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences. 
+`Humanize` string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
+The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences.
 
 ```C#
 "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
-    
+
 "Underscored_input_string_is_turned_into_sentence".Humanize() => "Underscored input string is turned into sentence"
-    
+
 "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
-    
+
 // acronyms are left intact
-"HTML".Humanize() => "HTML" 
+"HTML".Humanize() => "HTML"
 ```
 
 You may also specify the desired letter casing:
 
 ```C#
 "CanReturnTitleCase".Humanize(LetterCasing.Title) => "Can Return Title Case"
-    
+
 "Can_return_title_Case".Humanize(LetterCasing.Title) => "Can Return Title Case"
-    
+
 "CanReturnLowerCase".Humanize(LetterCasing.LowerCase) => "can return lower case"
-    
+
 "CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps) => "CAN HUMANIZE INTO UPPER CASE"
 ```
 
@@ -81,14 +79,14 @@ Much like you can humanize a computer friendly into human friendly string you ca
 ```
 
 ###<a id="transform-string">Transform String</a>
-There is a `Transform` method that supercedes `LetterCasing`, `ApplyCase` and `Humanize` overloads that accept `LetterCasing`. 
-Transform method signatue is as follows:
+There is a `Transform` method that supersedes `LetterCasing`, `ApplyCase` and `Humanize` overloads that accept `LetterCasing`.
+Transform method signature is as follows:
 
 ```C#
 string Transform(this string input, params IStringTransformer[] transformers)
 ```
 
-And there are some out of the box implemenations of `IStringTransformer` for letter casing:
+And there are some out of the box implementations of `IStringTransformer` for letter casing:
 
 ```C#
 "Sentence casing".Transform(To.LowerCase) => "sentence casing"
@@ -100,7 +98,7 @@ And there are some out of the box implemenations of `IStringTransformer` for let
 `LowerCase` is a public static property on `To` class that returns an instance of private `ToLowerCase` class that implements `IStringTransformer` and knows how to turn a string into lower case.
 
 The benefit of using `Transform` and `IStringTransformer` over `ApplyCase` and `LetterCasing` is that `LetterCasing` is an enum and you're limited to use what's in the framework
-while `IStringTransformer` is an interface you can implement in your codebase once and use it with `Transform` method allowing for easy extension. 
+while `IStringTransformer` is an interface you can implement in your codebase once and use it with `Transform` method allowing for easy extension.
 
 ###<a id="truncate-string">Truncate String</a>
 You can truncate a `string` using the `Truncate` method:
@@ -115,9 +113,9 @@ By default the `'…'` character is used to truncate strings. The advantage of u
 "Long text to truncate".Truncate(10, "---") => "Long te---"
 ```
 
-The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length. 
-There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. 
-To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples all have an overload that allow you to specify the `ITruncator` instance to use for the truncation. 
+The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length.
+There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words.
+To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples all have an overload that allow you to specify the `ITruncator` instance to use for the truncation.
 Here are examples on how to use the three provided truncators:
 
 ```c#
@@ -133,7 +131,7 @@ Here are examples on how to use the three provided truncators:
 
 Note that you can also use create your own truncator by implementing the `ITruncator` interface.
 
-There is also an option to choose whether to truncate the string from the beginning (`TruncateFrom.Left`) or the end (`TruncateFrom.Right`). 
+There is also an option to choose whether to truncate the string from the beginning (`TruncateFrom.Left`) or the end (`TruncateFrom.Right`).
 Default is the right as shown in the examples above. The examples below show how to truncate from the beginning of the string:
 
 ```c#
@@ -176,15 +174,15 @@ You will get:
 ```C#
 // DescriptionAttribute is honored
 EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"
-    
+
 // In the absence of Description attribute string.Humanizer kicks in
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute" 
-    
-// Of course you can still apply letter casing 
+EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute"
+
+// Of course you can still apply letter casing
 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase) => "Member Without Description Attribute"
 ```
 
-You are not limited to `DescriptionAttribute` for custom description. Any attribute applied on enum members with a `string Description` property counts. 
+You are not limited to `DescriptionAttribute` for custom description. Any attribute applied on enum members with a `string Description` property counts.
 This is to help with platforms with missing `DescriptionAttribute` and also for allowing subclasses of the `DescriptionAttribute`.
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
@@ -193,7 +191,7 @@ Hopefully this will help avoid littering enums with unnecessary attributes!
 Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
 ```C#
-public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input) 
+public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
 ```
 
 And the usage is:
@@ -207,7 +205,7 @@ And just like the Humanize API it honors the `Description` attribute. You don't 
 There is also a non-generic counterpart for when the original Enum is not known at compile time:
 
 ```C#
-public static Enum DehumanizeTo(this string input, Type targetEnum, NoMatch onNoMatch = NoMatch.ThrowsException) 
+public static Enum DehumanizeTo(this string input, Type targetEnum, NoMatch onNoMatch = NoMatch.ThrowsException)
 ```
 
 which can be used like:
@@ -216,8 +214,8 @@ which can be used like:
 "Member without description attribute".DehumanizeTo(typeof(EnumUnderTest)) => EnumUnderTest.MemberWithoutDescriptionAttribute
 ```
 
-By default both methods throw a `NoMatchFoundException` when they cannot match the provided input against the target enum. 
-In the non-generic method you can also ask the method to return null by setting the second optiona parameter to `NoMatch.ReturnsNull`.
+By default both methods throw a `NoMatchFoundException` when they cannot match the provided input against the target enum.
+In the non-generic method you can also ask the method to return null by setting the second optional parameter to `NoMatch.ReturnsNull`.
 
 ###<a id="humanize-datetime">Humanize DateTime</a>
 You can `Humanize` an instance of `DateTime` and get back a string telling how far back or forward in time that is:
@@ -236,7 +234,7 @@ Humanizer supports local as well as UTC dates. You could also provide the date y
 public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null)
 ```
 
-Many localisations are availalbe for this method. Here is a few examples:
+Many localizations are available for this method. Here is a few examples:
 
 ```C#
 // In ar culture
@@ -254,8 +252,8 @@ DateTime.UtcNow.AddMinutes(-22).Humanize() => "22 минуты назад"
 DateTime.UtcNow.AddMinutes(-40).Humanize() => "40 минут назад"
 ```
 
-There are two strategies for `DateTime.Humanize`: the default one as seen above and a precision based one. 
-To use the precision based strategy you need to configure it: 
+There are two strategies for `DateTime.Humanize`: the default one as seen above and a precision based one.
+To use the precision based strategy you need to configure it:
 
 `Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75)`.
 
@@ -282,12 +280,12 @@ TimeSpan.FromDays(1).Humanize() => "1 day"
 TimeSpan.FromDays(16).Humanize() => "2 weeks"
 ```
 
-There is an optional `precision` parameter for `TimeSpan.Humanize` which allows you to specify the precision of the returned value. 
+There is an optional `precision` parameter for `TimeSpan.Humanize` which allows you to specify the precision of the returned value.
 The default value of `precision` is 1 which means only the largest time unit is returned like you saw in `TimeSpan.FromDays(16).Humanize()`.
 Here is a few examples of specifying precision:
 
 ```C#
-TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only on unit in the provided TimeSpan
+TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only one unit in the provided TimeSpan
 TimeSpan.FromDays(16).Humanize(2) => "2 weeks, 2 days"
 
 // the same TimeSpan value with different precision returns different results
@@ -297,7 +295,7 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(4) => "2 weeks, 1 day, 1 hour, 30
 TimeSpan.FromMilliseconds(1299630020).Humanize(5) => "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds"
 ```
 
-Many localisations are availalbe for this method:
+Many localizations are available for this method:
 
 ```C#
 // in de-DE culture
@@ -317,15 +315,15 @@ There are also a few inflector methods:
 `Pluralize` pluralizes the provided input while taking irregular and uncountable words into consideration:
 
 ```C#
-"Man".Pluralize() => "Men" 
+"Man".Pluralize() => "Men"
 "string".Pluralize() => "strings"
 ```
 
 Normally you would call `Pluralize` on a singular word but if you're unsure about the singularity of the word you can call the method with the optional `plurality` argument:
 
 ```C#
-"Men".Pluralize(Plurality.CouldBeEither) => "Men" 
-"Man".Pluralize(Plurality.CouldBeEither) => "Men" 
+"Men".Pluralize(Plurality.CouldBeEither) => "Men"
+"Man".Pluralize(Plurality.CouldBeEither) => "Men"
 "string".Pluralize(Plurality.CouldBeEither) => "strings"
 ```
 
@@ -333,15 +331,15 @@ Normally you would call `Pluralize` on a singular word but if you're unsure abou
 `Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
 
 ```C#
-"Men".Singularize() => "Man" 
+"Men".Singularize() => "Man"
 "strings".Singularize() => "string"
 ```
 
-Normally you would call `Singularize` on a plural word but if you're unsure about the pluralit of the word you can call the method with the optional `plurality` argument:
+Normally you would call `Singularize` on a plural word but if you're unsure about the plurality of the word you can call the method with the optional `plurality` argument:
 
 ```C#
-"Men".Singularize(Plurality.CouldBeEither) => "Man" 
-"Man".Singularize(Plurality.CouldBeEither) => "Man" 
+"Men".Singularize(Plurality.CouldBeEither) => "Man"
+"Man".Singularize(Plurality.CouldBeEither) => "Man"
 "strings".Singularize(Plurality.CouldBeEither) => "string"
 ```
 
@@ -357,7 +355,7 @@ Many times you want to call `Singularize` and `Pluralize` to prefix a word with 
 "man".ToQuantity(2) => "2 men"
 ```
 
-`ToQuantity` has smarts to figure out whether your input word is plural or singular and changes or leaves it depending on the input quantity:
+`ToQuantity` can figure out whether the input word is singular or plural and will singularize or pluralize as necessary:
 
 ```C#
 "men".ToQuantity(2) => "2 men"
@@ -383,7 +381,7 @@ There is also an overload that allows you to format the number. You can pass in 
 ```
 
 ####<a id="ordinalize">Ordinalize</a>
-`Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th: 
+`Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th:
 
 ```C#
 1.Ordinalize() => "1st"
@@ -392,8 +390,8 @@ There is also an overload that allows you to format the number. You can pass in 
 
 You can also call `Ordinalize` on a numeric string and achieve the same result: `"21".Ordinalize()` => `"21st"`
 
-`Ordinalize` also supports grammatical gender for both forms. 
-You can pass an argument to `Ordinalize` to specify which gender the number should be outputted in. 
+`Ordinalize` also supports grammatical gender for both forms.
+You can pass an argument to `Ordinalize` to specify which gender the number should be outputted in.
 The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
 ```C#
@@ -436,12 +434,12 @@ Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follow
 <small>There are no fluent APIs for month or year as a month could have between 28 to 31 days and a year could be 365 or 366 days.</small>
 
 You could use these methods to, for example, replace
- 
+
 ```C#
 DateTime.Now.AddDays(2).AddHours(3).AddMinutes(-5)
 ```
 
-with 
+with
 
 ```C#
 DateTime.Now + 2.Days() + 3.Hours() - 5.Minutes()
@@ -473,19 +471,19 @@ and some extension methods:
 var someDateTime = new DateTime(2011, 2, 10, 5, 25, 45, 125);
 
 // Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008
-someDateTime.In(2008) 
+someDateTime.In(2008)
 
 // Returns new DateTime(2011, 2, 10, 2, 25, 45, 125) changing the hour to 2:25:45.125
-someDateTime.At(2) 
+someDateTime.At(2)
 
 // Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125
-someDateTime.At(2, 20, 15) 
+someDateTime.At(2, 20, 15)
 
 // Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000
-someDateTime.AtNoon() 
+someDateTime.AtNoon()
 
 // Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000
-someDateTime.AtMidnight() 
+someDateTime.AtMidnight()
 ```
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
@@ -501,7 +499,7 @@ Humanizer can change numbers to words using the `ToWords` extension:
 3501.ToWords() => "three thousand five hundred and one"
 ```
 
-You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specify which gender the number should be outputted in. 
+You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specify which gender the number should be outputted in.
 The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
 ```C#
@@ -514,7 +512,7 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
 
 ###<a id="number-toordinalwords">Number to ordinal words</a>
-This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words!! Let me show that with an example:
+This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
 
 ```C#
 0.ToOrdinalWords() => "zeroth"
@@ -529,8 +527,8 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 121.ToOrdinalWords() => "hundred and twenty first"
 ```
 
-`ToOrdinalWords` also supports grammatical gender. 
-You can pass a second argument to `ToOrdinalWords` to specify which gender the number should be outputted in. 
+`ToOrdinalWords` also supports grammatical gender.
+You can pass a second argument to `ToOrdinalWords` to specify the gender of the output.
 The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
 ```C#
@@ -573,7 +571,7 @@ Also the reverse operation using the `FromRoman` extension.
 
 ###<a id="bytesize">ByteSize</a>
 Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
-Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API. 
+Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
 ```c#
@@ -626,8 +624,8 @@ If you want a string representation you can call `ToString` or `Humanize` interc
 (1024).Gigabytes().ToString(); // 1 TB
 ```
 
-You can also optionally provide a format for the expected string representation. 
-The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`. 
+You can also optionally provide a format for the expected string representation.
+The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`.
 The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx) with `#.##` as the default format which rounds the number to two decimal places:
 
 ```C#
@@ -652,7 +650,7 @@ b.Humanize("#.## B");     // 10757.12 B
 ```
 
 There isn't a `Dehumanize` method to turn a string representation back into a `ByteSize` instance; but you can use `Parse` and `TryParse` on `ByteSize` to do that.
-Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful. 
+Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful.
 If the value is parsed it is output to the `out` parameter supplied:
 
 ```
@@ -680,9 +678,9 @@ ByteSize.Parse("1.55 tb");
 ```
 
 ##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
-This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
+This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
-You may find an Asp.Net MVC sample [in the code](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). 
+You may find an Asp.Net MVC sample [in the code](https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
 
 This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
@@ -708,35 +706,35 @@ namespace YourApp
         {
             var propertyAttributes = attributes.ToList();
             var modelMetadata = base.CreateMetadata(propertyAttributes, containerType, modelAccessor, modelType, propertyName);
-        
+
             if (IsTransformRequired(modelMetadata, propertyAttributes))
                 modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize();
-        
+
             return modelMetadata;
         }
-        
+
         private static bool IsTransformRequired(ModelMetadata modelMetadata, IList<Attribute> propertyAttributes)
         {
             if (string.IsNullOrEmpty(modelMetadata.PropertyName))
                 return false;
-        
+
             if (propertyAttributes.OfType<DisplayNameAttribute>().Any())
                 return false;
-        
+
             if (propertyAttributes.OfType<DisplayAttribute>().Any())
                 return false;
-        
+
             return true;
         }
     }
 }
 ```
 
-This class calls the base class to extract the metadata and then, if required, humanizes the property name. 
-It is checking if the property already has a `DisplayName` or `Display` attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. 
+This class calls the base class to extract the metadata and then, if required, humanizes the property name.
+It is checking if the property already has a `DisplayName` or `Display` attribute on it in which case the metadata provider will just honor the attribute and leave the property alone.
 For other properties it will Humanize the property name. That is all.
 
-Now you need to register this metadata provider with Asp.Net MVC. 
+Now you need to register this metadata provider with Asp.Net MVC.
 Make sure you use `System.Web.Mvc.ModelMetadataProviders`, and not `System.Web.ModelBinding.ModelMetadataProviders`:
 
 ```C#
@@ -750,10 +748,10 @@ public class RegisterModel
 {
     [Display(Name = "User name")]
     public string UserName { get; set; }
-    
+
     [Display(Name = "Email address")]
     public string EmailAddress { get; set; }
-    
+
     [Display(Name = "Confirm password")]
     public string ConfirmPassword { get; set; }
 }
@@ -779,61 +777,11 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 ```
 
 ##<a id="how-to-contribute">How to contribute?</a>
-Your contribution to Humanizer would be very welcome. 
-If you find a bug, please raise it as an issue. 
-Even better fix it and send me a pull request. 
-If you like to help me out with existing bugs and feature requests just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues) and grab and fix one. 
-I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.
 
-###<a id="contribution-guideline">Contribution guideline</a>
-I use [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests. 
-So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
-
-Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
-
- - Implementation is clean
- - Code adheres to the existing coding standards; e.g. no curlies for one-line blocks & no redundant empty lines between methods or code blocks
- - No ReSharper warnings
- - There is proper unit test coverage
- - If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
- - There is very little or no comments (because comments shouldn't be needed if you write clean code)
- - Xml documentation is added/updated for the addition/change
- - Your PR is (re)based on top of the latest commits (more info below)
- - Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
- - Readme is updated if you change an existing feature or add a new one
- - An entry is added in the release_notes.md file in the 'In Development' section with a link to your PR and a description of what's changed. Please follow the wording style for the description.
-
-Please rebase your code on top of the latest commits. 
-Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts. 
-Also before sending the pull request please rebase your code as there is a chance there has been a few commits pushed up after you pulled last. 
-Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912#the-workflow) if you're new to git.
-
-###<a id="need-your-help-with-localisation">Need your help with localisation</a>
-One area Humanizer could always use your help is localisation. 
-Currently Humanizer supports quite a few localisations for `DateTime.Humanize`, `TimeSpan.Humanize`, `ToWords` and `ToOrdinalWords`. 
-
-Humanizer could definitely do with more translations. 
-To add a translation for `DateTime.Humanize` and `TimeSpan.Humanize`, 
-fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx) 
-to the end (e.g. resources.ru.resx for Russian), translate the values to your language, write unit tests for the translation, commit, and send a pull request for it. Thanks.
-
-Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
-Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
-In cases like this in addition to creating a resource file you should also subclass [`DefaultFormatter`](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/Formatters/DefaultFormatter.cs) in a class that represents your language; 
-e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/Formatters/RomanianFormatter.cs) and then override the methods that need the complex rules. 
-We think overriding the `GetResourceKey` method should be enough. 
-To see how to do that check out `RomanianFormatter` and `RussianFormatter`. 
-Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) based on the current culture.
-
-Translations for `ToWords` and `ToOrdinalWords` methods are currently done in code as there is a huge difference between the way different languages deal with number words.
-Check out [Dutch](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/DutchNumberToWordsConverter.cs) and 
-[Russian](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/RussianNumberToWordsConverter.cs) localisations for examples of how you can write a Converter for your language.
-You should then register your converter in the [ConverterFactory](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/NumberToWordsExtension.cs#L13) for it to kick in on your locale.
-
-Don't forget to write tests for your localisations. Check out the existing [DateHumanizeTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/DateHumanizeTests.cs), [TimeSpanHumanizeTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/TimeSpanHumanizeTests.cs) and [NumberToWordsTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/NumberToWordsTests.cs).
+Please see <a href="CONTRIBUTING.md">CONTRIBUTING.md</a>.
 
 ##<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
-Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.
+Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you <a href="CONTRIBUTING.md">contribute</a> some green PRs.
 
 The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
