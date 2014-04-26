@@ -22,7 +22,8 @@ namespace Humanizer
                 {"ru", () => new RussianNumberToWordsConverter()},
                 {"fr", () => new FrenchNumberToWordsConverter()},
                 {"nl", () => new DutchNumberToWordsConverter()},
-                {"he", () => new HebrewNumberToWordsConverter()}
+                {"he", () => new HebrewNumberToWordsConverter()},
+                {"de", () => new GermanNumberToWordsConverter()},
             };
 
         /// <summary>
