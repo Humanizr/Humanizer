@@ -160,7 +160,6 @@
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
     <None Include="Humanizer.snk" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.tr.resx" />
