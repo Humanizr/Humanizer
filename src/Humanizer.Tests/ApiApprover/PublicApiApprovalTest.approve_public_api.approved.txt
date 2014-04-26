@@ -73,10 +73,10 @@ public class Configurator
 
 public class LocaliserRegistry`1
 {
-    public LocaliserRegistry`1() { }
+    public LocaliserRegistry`1(TLocaliser defaultLocaliser) { }
     public void Register(string localeCode) { }
-    public void RegisterDefault() { }
-    public T ResolveForUiCulture() { }
+    public void RegisterDefault(TLocaliser defaultLocaliser) { }
+    public TLocaliser ResolveForUiCulture() { }
 }
 
 public class DateHumanizeExtensions

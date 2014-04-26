@@ -4,9 +4,8 @@ namespace Humanizer.Configuration
 {
     internal class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
     {
-        public OrdinalizerRegistry()
+        public OrdinalizerRegistry() : base(new DefaultOrdinalizer())
         {
-            RegisterDefault<DefaultOrdinalizer>();
             Register<EnglishOrdinalizer>("en");
             Register<SpanishOrdinalizer>("es");
             Register<RussianOrdinalizer>("ru");
