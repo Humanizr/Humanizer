@@ -21,7 +21,8 @@ namespace Humanizer.Configuration
             { "sk", () => new CzechSlovakPolishFormatter() },
             { "cs", () => new CzechSlovakPolishFormatter() },
             { "pl", () => new CzechSlovakPolishFormatter() },
-            { "sr", () => new SerbianFormatter() }
+            { "sr", () => new SerbianFormatter() },
+            { "sl", () => new SlovenianFormatter() }
         };
 
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
