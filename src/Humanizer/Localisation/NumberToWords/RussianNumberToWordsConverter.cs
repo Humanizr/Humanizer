@@ -144,10 +144,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number > 0)
             {
-                if (number == 1)
-                    parts.Add(gender == GrammaticalGender.Feminine ? "одна" : "одно");
-                else
-                    parts.Add(UnitsOrdinalPrefixes[number]);
+                parts.Add(number == 1 ? "одно" : UnitsOrdinalPrefixes[number]);
             }
 
             return string.Join("", parts);
