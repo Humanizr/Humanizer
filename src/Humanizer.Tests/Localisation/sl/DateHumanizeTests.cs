@@ -5,7 +5,7 @@ namespace Humanizer.Tests.Localisation.sl
 {
     public class DateHumanizeTests : AmbientCulture
     {
-        public DateHumanizeTests() : base("sl-SI") {}
+        public DateHumanizeTests() : base("sl-SI") { }
 
         [Theory]
         [InlineData(-10, "pred 10 leti")]
@@ -14,8 +14,9 @@ namespace Humanizer.Tests.Localisation.sl
         [InlineData(-3, "pred 3 leti")]
         [InlineData(-2, "pred 2 letoma")]
         [InlineData(-1, "pred enim letom")]
-        public void YearsAgo(int years, string expected) {
-           DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
+        public void YearsAgo(int years, string expected)
+        {
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
 
         [Theory]
@@ -24,8 +25,9 @@ namespace Humanizer.Tests.Localisation.sl
         [InlineData(3, "čez 3 leta")]
         [InlineData(2, "čez 2 leti")]
         [InlineData(1, "čez eno leto")]
-        public void YearsFromNow(int years, string expected) {
-           DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
+        public void YearsFromNow(int years, string expected)
+        {
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
 
         [Theory]
@@ -35,8 +37,9 @@ namespace Humanizer.Tests.Localisation.sl
         [InlineData(-3, "pred 3 meseci")]
         [InlineData(-2, "pred 2 mesecema")]
         [InlineData(-1, "pred enim mesecem")]
-        public void MonthsAgo(int months, string expected) {
-           DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
+        public void MonthsAgo(int months, string expected)
+        {
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
@@ -45,8 +48,9 @@ namespace Humanizer.Tests.Localisation.sl
         [InlineData(3, "čez 3 mesece")]
         [InlineData(2, "čez 2 meseca")]
         [InlineData(1, "čez en mesec")]
-        public void MonthsFromNow(int months, string expected) {
-           DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
+        public void MonthsFromNow(int months, string expected)
+        {
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
         }
 
         [Theory]
