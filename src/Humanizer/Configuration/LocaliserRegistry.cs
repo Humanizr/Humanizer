@@ -50,6 +50,14 @@ namespace Humanizer.Configuration
         }
 
         /// <summary>
+        /// Registers the localiser for the culture provided 
+        /// </summary>
+        public void Register(Func<TLocaliser> localiserFactory, string localeCode)
+        {
+            _localisers[localeCode] = new Lazy<TLocaliser>(localiserFactory);
+        }
+
+        /// <summary>
         /// Registers the localiser as the catch all 
         /// </summary>
         public void RegisterDefault(TLocaliser defaultLocaliser)
