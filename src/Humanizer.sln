@@ -21,27 +21,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D
 		..\build.cmd = ..\build.cmd
 		..\build.config = ..\build.config
 		..\build.proj = ..\build.proj
+		Humanizer.ruleset = Humanizer.ruleset
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-		Verify|Any CPU = Verify|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Verify|Any CPU.ActiveCfg = Verify|Any CPU
-		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Verify|Any CPU.Build.0 = Verify|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.Build.0 = Release|Any CPU
-		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Verify|Any CPU.ActiveCfg = Verify|Any CPU
-		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Verify|Any CPU.Build.0 = Verify|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

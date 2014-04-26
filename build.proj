@@ -6,20 +6,16 @@
   <UsingTask TaskName="xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
 
   <!--Clean-->
-  <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanVerify;CleanRelease" />
+  <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
   <Target Name="CleanDebug">
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
-  </Target>
-  <Target Name="CleanVerify">
-    <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Verify" />
   </Target>
   <Target Name="CleanRelease">
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
   </Target>
 
   <!--Compile-->
-  <Target Name="Build" DependsOnTargets="CleanAll;RestorePackages">
-    <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Verify" />
+  <Target Name="Build" DependsOnTargets="CleanAll">
     <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
   </Target>
 
@@ -39,14 +35,4 @@
     <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(ReleaseFolder)" />
   </Target>
   
-  
-  <!--Nuget restore-->
-  <ItemGroup>
-    <Solution Include="$(MSBuildThisFileDirectory)src\*.sln" />
-  </ItemGroup>
-
-  <Target Name="RestorePackages">
-    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
-  </Target>
-
 </Project>
