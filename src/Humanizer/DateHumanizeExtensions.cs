@@ -3,9 +3,6 @@ using Humanizer.Configuration;
 
 namespace Humanizer
 {
-    /// <summary>
-    /// Humanizes DateTime into human readable sentence
-    /// </summary>
     public static class DateHumanizeExtensions
     {
         /// <summary>
