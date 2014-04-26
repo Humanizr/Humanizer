@@ -1,7 +1,7 @@
 ###In Development
   - [#236](https://github.com/Mehdik/Humanizer/pull/236): Added Turkish localisation
   - [#239](https://github.com/Mehdik/Humanizer/pull/239): Added Serbian localisation
-  - [#227](https://github.com/MehdiK/Humanizer/pull/227): Moved factory collections to their own classes, allowed public access via Configurator, and made the default factories lazy loaded
+  - [#227](https://github.com/MehdiK/Humanizer/pull/227): Moved localiser registry to their own classes, allowed public access via Configurator, and made the default registrations lazy loaded
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...master)
 
