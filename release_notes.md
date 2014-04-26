@@ -4,7 +4,7 @@
   - [#241](https://github.com/Mehdik/Humanizer/pull/241): Added German ToWords localisation
   - [#244](https://github.com/MehdiK/Humanizer/pull/244): Added Slovenian localisation
   - [#247](https://github.com/MehdiK/Humanizer/pull/247): Added Slovenian number to words localisation
-  - [#227](https://github.com/MehdiK/Humanizer/pull/227): Moved factory collections to their own classes, allowed public access via Configurator, and made the default factories lazy loaded
+  - [#227](https://github.com/MehdiK/Humanizer/pull/227): Moved localiser registry to their own classes, allowed public access via Configurator, and made the default registrations lazy loaded
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...master)
 
