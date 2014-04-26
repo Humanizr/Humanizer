@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Humanizer.Configuration;
 using Humanizer.Localisation.Ordinalizers;
 
 namespace Humanizer
@@ -26,7 +27,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this string numberString)
         {
-            return Ordinalizer.Convert(int.Parse(numberString), numberString);
+            return Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString);
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this string numberString, GrammaticalGender gender)
         {
-            return Ordinalizer.Convert(int.Parse(numberString), numberString, gender);
+            return Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString, gender);
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this int number)
         {
-            return Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture));
+            return Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -64,23 +65,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Ordinalize(this int number, GrammaticalGender gender)
         {
-            return Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
-        }
-
-        private static DefaultOrdinalizer Ordinalizer
-        {
-            get
-            {
-                Func<DefaultOrdinalizer> ordinalizerFactory;
-
-                if (OrdinalizerFactories.TryGetValue(CultureInfo.CurrentUICulture.Name, out ordinalizerFactory))
-                    return ordinalizerFactory();
-
-                if (OrdinalizerFactories.TryGetValue(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName, out ordinalizerFactory))
-                    return ordinalizerFactory();
-
-                return new DefaultOrdinalizer();
-            }
+            return Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
         }
     }
 }
