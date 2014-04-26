@@ -1,16 +1,16 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
    internal class SlovenianNumberToWordsConverter : DefaultNumberToWordsConverter
    {
-      private static readonly string[] UnitsMap = {"niè", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"};
-      private static readonly string[] TensMap = {"niè", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"};
+      private static readonly string[] UnitsMap = {"niÄ", "ena", "dva", "tri", "Å¡tiri", "pet", "Å¡est", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "Å¡tirinajst", "petnajst", "Å¡estnajst", "sedemnajst", "osemnajst", "devetnajst"};
+      private static readonly string[] TensMap = {"niÄ", "deset", "dvajset", "trideset", "Å¡tirideset", "petdeset", "Å¡estdeset", "sedemdeset", "osemdeset", "devetdeset"};
 
       public override string Convert(int number)
       {
          if (number == 0)
-            return "niè";
+            return "niÄ";
 
          if (number < 0)
             return string.Format("minus {0}", Convert(-number));
@@ -38,7 +38,7 @@ namespace Humanizer.Localisation.NumberToWords
          var thousands = number / 1000;
          if (thousands > 0)
          {
-            parts.Add(Part("tisoè", "dva tisoè", "{0} tisoè", "{0} tisoè", thousands));
+            parts.Add(Part("tisoÄ", "dva tisoÄ", "{0} tisoÄ", "{0} tisoÄ", thousands));
             number %= 1000;
             if (number > 0)
                parts.Add(" ");
