@@ -4,9 +4,8 @@ namespace Humanizer.Configuration
 {
     internal class FormatterRegistry : LocaliserRegistry<IFormatter>
     {
-        public FormatterRegistry()
+        public FormatterRegistry() : base(new DefaultFormatter())
         {
-            RegisterDefault<DefaultFormatter>();
             Register<RomanianFormatter>("ro");
             Register<RussianFormatter>("ru");
             Register<ArabicFormatter>("ar");

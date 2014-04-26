@@ -7,25 +7,29 @@ namespace Humanizer.Configuration
     /// <summary>
     /// A registry of localised system components with their associated locales
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class LocaliserRegistry<T> 
+    /// <typeparam name="TLocaliser"></typeparam>
+    public class LocaliserRegistry<TLocaliser> 
     {
-        private readonly IDictionary<string, Lazy<T>> _localisers = new Dictionary<string, Lazy<T>>();
-        private Lazy<T> _defaultLocaliser;
+        private readonly IDictionary<string, Lazy<TLocaliser>> _localisers = new Dictionary<string, Lazy<TLocaliser>>();
+        private TLocaliser _defaultLocaliser;
 
-        Lazy<T> MakeLazy(Func<T> factoryMethod)
+        /// <summary>
+        /// Creates a localiser registry with the default localiser set to the provided value
+        /// </summary>
+        /// <param name="defaultLocaliser"></param>
+        public LocaliserRegistry(TLocaliser defaultLocaliser)
         {
-            return new Lazy<T>(factoryMethod);
+            _defaultLocaliser = defaultLocaliser;
         }
 
         /// <summary>
         /// Gets the localiser for the current UI culture 
         /// </summary>
-        public T ResolveForUiCulture()
+        public TLocaliser ResolveForUiCulture()
         {
             var culture = CultureInfo.CurrentUICulture;
 
-            Lazy<T> factory;
+            Lazy<TLocaliser> factory;
 
             if (_localisers.TryGetValue(culture.Name, out factory))
                 return factory.Value;
@@ -33,25 +37,24 @@ namespace Humanizer.Configuration
             if (_localisers.TryGetValue(culture.TwoLetterISOLanguageName, out factory))
                 return factory.Value;
 
-            return _defaultLocaliser.Value;
+            return _defaultLocaliser;
         }
 
         /// <summary>
         /// Registers the localiser for the culture provided 
         /// </summary>
-        public void Register<TLocaliser>(string localeCode)
-            where TLocaliser: T, new()
+        public void Register<T>(string localeCode)
+            where T: TLocaliser, new()
         {
-            _localisers[localeCode] = MakeLazy(() => new TLocaliser());
+            _localisers[localeCode] = new Lazy<TLocaliser>(() => new T());
         }
 
         /// <summary>
         /// Registers the localiser as the catch all 
         /// </summary>
-        public void RegisterDefault<TLocaliser>()
-            where TLocaliser: T, new ()
+        public void RegisterDefault(TLocaliser defaultLocaliser)
         {
-            _defaultLocaliser = MakeLazy(() => new TLocaliser());
+            _defaultLocaliser = defaultLocaliser;
         }
     }
 }
