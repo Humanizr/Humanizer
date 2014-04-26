@@ -15,7 +15,7 @@
   </Target>
 
   <!--Compile-->
-  <Target Name="Build" DependsOnTargets="CleanAll;RestorePackages">
+  <Target Name="Build" DependsOnTargets="CleanAll">
     <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
   </Target>
 
@@ -35,14 +35,4 @@
     <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(ReleaseFolder)" />
   </Target>
   
-  
-  <!--Nuget restore-->
-  <ItemGroup>
-    <Solution Include="$(MSBuildThisFileDirectory)src\*.sln" />
-  </ItemGroup>
-
-  <Target Name="RestorePackages">
-    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
-  </Target>
-
 </Project>
