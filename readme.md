@@ -781,7 +781,7 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 Please see <a href="CONTRIBUTING.md">CONTRIBUTING.md</a>.
 
 ##<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
-Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you <a href="CONTRIBUTING.md">contribute</a> some green PRs.
+Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="CONTRIBUTING.md">contribute</a> some green PRs!
 
 The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
