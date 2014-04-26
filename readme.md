@@ -681,9 +681,8 @@ ByteSize.Parse("1.55 tb");
 ```
 
 ##<a id="configuration">Configuration</a>
-
-Custom factories for `Formatter`s, `NumberToWordsConverter`s, and `Ordinalizer`s may be added or updated via `FormatterFactoryManager`, `NumberToWordsConverterFactoryManager`, and `OrdinalizerFactoryManager` using the `SetFactory` method.
-
+Custom localisers for `Formatter`s, `NumberToWordsConverter`s, and `Ordinalizer`s may be added or updated via `Formatters`, `NumberToWordsConverters`, and `Ordinalizers` properties on `Configurator` class. 
+To register a localiser call `Register<T>(string localeCode)` or `Register(Func<TLocaliser> localiserFactory, string localeCode)` passing the desired localiser and the associated locale code; e.g. `Configurator.Formatters.Register<RomanianFormatter>("ro");`
 
 ##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?! 
@@ -829,12 +828,12 @@ In cases like this in addition to creating a resource file you should also subcl
 e.g. [RomanianFormatter](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/Formatters/RomanianFormatter.cs) and then override the methods that need the complex rules. 
 We think overriding the `GetResourceKey` method should be enough. 
 To see how to do that check out `RomanianFormatter` and `RussianFormatter`. 
-Then you return an instance of your class in the [Configurator](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) class in the getter of the [Formatter property](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs) based on the current culture.
+Then you register your formatter in the `FormatterRegistry` class with the associated culture.
 
 Translations for `ToWords` and `ToOrdinalWords` methods are currently done in code as there is a huge difference between the way different languages deal with number words.
 Check out [Dutch](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/DutchNumberToWordsConverter.cs) and 
 [Russian](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/RussianNumberToWordsConverter.cs) localisations for examples of how you can write a Converter for your language.
-You should then register your converter in the [NumberToWordsConverterFactoryManager](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/NumberToWordsConverterFactoryManager.cs#L35) for it to kick in on your locale.
+You should then register your converter in the `NumberToWordsConverterRegistry` with the associated locale for it to kick in on your locale.
 
 Don't forget to write tests for your localisations. Check out the existing [DateHumanizeTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/DateHumanizeTests.cs), [TimeSpanHumanizeTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/TimeSpanHumanizeTests.cs) and [NumberToWordsTests](https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/NumberToWordsTests.cs).
 
