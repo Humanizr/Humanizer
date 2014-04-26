@@ -6,12 +6,9 @@
   <UsingTask TaskName="xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
 
   <!--Clean-->
-  <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanVerify;CleanRelease" />
+  <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
   <Target Name="CleanDebug">
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
-  </Target>
-  <Target Name="CleanVerify">
-    <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Verify" />
   </Target>
   <Target Name="CleanRelease">
     <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
@@ -19,7 +16,6 @@
 
   <!--Compile-->
   <Target Name="Build" DependsOnTargets="CleanAll;RestorePackages">
-    <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Verify" />
     <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
   </Target>
 
