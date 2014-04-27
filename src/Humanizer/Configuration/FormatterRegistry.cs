@@ -1,4 +1,10 @@
-﻿using Humanizer.Localisation.Formatters;
+﻿using Humanizer.Localisation;
+using Humanizer.Localisation.Arabic;
+using Humanizer.Localisation.Hebrew;
+using Humanizer.Localisation.Romanian;
+using Humanizer.Localisation.Russian;
+using Humanizer.Localisation.Serbian;
+using Humanizer.Localisation.Slovenian;
 
 namespace Humanizer.Configuration
 {

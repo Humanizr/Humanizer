@@ -1,4 +1,16 @@
-﻿using Humanizer.Localisation.NumberToWords;
+﻿using Humanizer.Localisation;
+using Humanizer.Localisation.Arabic;
+using Humanizer.Localisation.BrazilianPortuguese;
+using Humanizer.Localisation.Dutch;
+using Humanizer.Localisation.English;
+using Humanizer.Localisation.Farsi;
+using Humanizer.Localisation.French;
+using Humanizer.Localisation.German;
+using Humanizer.Localisation.Hebrew;
+using Humanizer.Localisation.Polish;
+using Humanizer.Localisation.Russian;
+using Humanizer.Localisation.Slovenian;
+using Humanizer.Localisation.Spanish;
 
 namespace Humanizer.Configuration
 {
