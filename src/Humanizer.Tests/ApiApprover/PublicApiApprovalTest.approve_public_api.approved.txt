@@ -66,7 +66,18 @@ public class CasingExtensions
 public class Configurator
 {
     public Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
-    public Humanizer.Localisation.Formatters.IFormatter Formatter { get; }
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }
+}
+
+public class LocaliserRegistry`1
+{
+    public LocaliserRegistry`1(TLocaliser defaultLocaliser) { }
+    public void Register(string localeCode) { }
+    public void Register(System.Func<> localiserFactory, string localeCode) { }
+    public void RegisterDefault(TLocaliser defaultLocaliser) { }
+    public TLocaliser ResolveForUiCulture() { }
 }
 
 public class DateHumanizeExtensions
@@ -198,6 +209,20 @@ public interface IFormatter
     string DateHumanize_Now();
     string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
     string TimeSpanHumanize_Zero();
+}
+
+public interface INumberToWordsConverter
+{
+    string Convert(int number);
+    string Convert(int number, Humanizer.GrammaticalGender gender);
+    string ConvertToOrdinal(int number);
+    string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
+}
+
+public interface IOrdinalizer
+{
+    string Convert(int number, string numberString);
+    string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
 }
 
 public class ResourceKeys
