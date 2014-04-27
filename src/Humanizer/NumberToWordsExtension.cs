@@ -24,6 +24,7 @@ namespace Humanizer
                 {"nl", () => new DutchNumberToWordsConverter()},
                 {"he", () => new HebrewNumberToWordsConverter()},
                 {"de", () => new GermanNumberToWordsConverter()},
+                {"sl", () => new SlovenianNumberToWordsConverter()}
             };
 
         /// <summary>

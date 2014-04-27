@@ -3,6 +3,7 @@
   - [#239](https://github.com/Mehdik/Humanizer/pull/239): Added Serbian localisation
   - [#241](https://github.com/Mehdik/Humanizer/pull/241): Added German ToWords localisation
   - [#244](https://github.com/MehdiK/Humanizer/pull/244): Added Slovenian localisation
+  - [#247](https://github.com/MehdiK/Humanizer/pull/247): Added Slovenian number to words localisation
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...master)
 
