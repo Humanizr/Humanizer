@@ -1,4 +1,8 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.25.4...master)
+
+###v1.25.1 - 2014-04-27
   - [#236](https://github.com/Mehdik/Humanizer/pull/236): Added Turkish localisation
   - [#239](https://github.com/Mehdik/Humanizer/pull/239): Added Serbian localisation
   - [#241](https://github.com/Mehdik/Humanizer/pull/241): Added German ToWords localisation
@@ -6,7 +10,7 @@
   - [#247](https://github.com/MehdiK/Humanizer/pull/247): Added Slovenian number to words localisation
   - [#227](https://github.com/MehdiK/Humanizer/pull/227): Moved localiser registry to their own classes, allowed public access via Configurator, and made the default registrations lazy loaded
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...v1.25.4)
 
 ###v1.24.1 - 2014-04-21
   - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal 
