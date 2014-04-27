@@ -51,10 +51,6 @@
   <ItemGroup>
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Localisation\Formatters\SlovenianFormatter.cs" />
-    <Compile Include="Configuration\FactoryManager.cs" />
-    <Compile Include="Configuration\FormatterFactoryManager.cs" />
-    <Compile Include="Configuration\NumberToWordsConverterFactoryManager.cs" />
-    <Compile Include="Configuration\OrdinalizerFactoryManager.cs" />
     <Compile Include="Configuration\LocaliserRegistry.cs" />
     <Compile Include="Configuration\FormatterRegistry.cs" />
     <Compile Include="Configuration\NumberToWordsConverterRegistry.cs" />

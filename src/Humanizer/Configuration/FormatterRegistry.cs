@@ -14,6 +14,7 @@ namespace Humanizer.Configuration
             Register<CzechSlovakPolishFormatter>("cs");
             Register<CzechSlovakPolishFormatter>("pl");
             Register<SerbianFormatter>("sr");
+            Register<SlovenianFormatter>("sl");
         }
     }
 }

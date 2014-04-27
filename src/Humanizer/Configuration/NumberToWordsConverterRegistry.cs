@@ -16,6 +16,8 @@ namespace Humanizer.Configuration
             Register<FrenchNumberToWordsConverter>("fr");
             Register<DutchNumberToWordsConverter>("nl");
             Register<HebrewNumberToWordsConverter>("he");
+            Register<SlovenianNumberToWordsConverter>("sl");
+            Register<GermanNumberToWordsConverter>("de");
         }
     }
 }
