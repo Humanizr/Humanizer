@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class GermanNumberToWordsConverter : DefaultNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn" };
-        private static readonly string[] TensMap = { "null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig" };
+        private static readonly string[] UnitsMap = { "null", "ein", "zwei", "drei", "vier", "fÃ¼nf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwÃ¶lf", "dreizehn", "vierzehn", "fÃ¼nfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn" };
+        private static readonly string[] TensMap = { "null", "zehn", "zwanzig", "dreiÃŸig", "vierzig", "fÃ¼nfzig", "sechzig", "siebzig", "achtzig", "neunzig" };
 
         public override string Convert(int number)
         {
