@@ -1,34 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Humanizer by MehdiK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <title>Humanizer by MehdiK</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
+    <header>
+      <div class="inner">
         <h1>Humanizer</h1>
-        <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</p>
+        <h2>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</h2>
+        <a href="https://github.com/MehdiK/Humanizer" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-        <p class="view"><a href="https://github.com/MehdiK/Humanizer">View the Project on GitHub <small>MehdiK/Humanizer</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/MehdiK/Humanizer/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/MehdiK/Humanizer/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/MehdiK/Humanizer">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <p><img src="https://raw.github.com/MehdiK/Humanizer/master/logo.png" alt="Logo"></p>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><img src="https://raw.github.com/MehdiK/Humanizer/master/logo.png" alt="Logo"></p>
 
 <p>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.</p>
 
@@ -45,9 +45,7 @@
 <li><a href="#dehumanize-string">Dehumanize String</a></li>
 <li><a href="#transform-string">Transform String</a></li>
 <li><a href="#truncate-string">Truncate String</a></li>
-<li>
-<a href="#format-string">Format String</a><br>
-</li>
+<li><a href="#format-string">Format String</a></li>
 <li><a href="#humanize-enums">Humanize Enums</a></li>
 <li><a href="#dehumanize-enums">Dehumanize Enums</a></li>
 <li><a href="#humanize-datetime">Humanize DateTime</a></li>
@@ -72,14 +70,7 @@
 </ul>
 </li>
 <li><a href="#mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a></li>
-<li>
-<a href="#how-to-contribute">How to contribute?</a>
-
-<ul>
-<li><a href="#contribution-guideline">Contribution guideline</a></li>
-<li><a href="#need-your-help-with-localisation">Need your help with localisation</a></li>
-</ul>
-</li>
+<li><a href="#how-to-contribute">How to contribute?</a></li>
 <li><a href="#continuous-integration-from-teamcity">Continuous Integration from TeamCity</a></li>
 <li><a href="#author">Author</a></li>
 <li><a href="#main-contributors">Main contributors</a></li>
@@ -91,7 +82,7 @@
 
 <p>You can install Humanizer as <a href="https://nuget.org/packages/Humanizer">a nuget package</a>: <code>Install-Package Humanizer</code></p>
 
-<p>Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications. 
+<p>Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications.
 Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer">symbols nuget package</a> is published so you can <a href="http://www.symbolsource.org/Public/Home/VisualStudio">step through Humanizer code</a> while debugging your code.</p>
 
 <h2>
@@ -102,8 +93,8 @@ Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Projec
 <a name="humanize-string" class="anchor" href="#humanize-string"><span class="octicon octicon-link"></span></a><a>Humanize String</a>
 </h3>
 
-<p><code>Humanize</code> string extensions allow you turn an otherwise computerized string into a more readable human-friendly one. 
-The foundation of this was set in the <a href="https://github.com/TestStack/TestStack.BDDfy">BDDfy framework</a> where class names, method names and properties are turned into human readable sentences. </p>
+<p><code>Humanize</code> string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
+The foundation of this was set in the <a href="https://github.com/TestStack/TestStack.BDDfy">BDDfy framework</a> where class names, method names and properties are turned into human readable sentences.</p>
 
 <div class="highlight highlight-C#"><pre><span class="s">"PascalCaseInputStringIsTurnedIntoSentence"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Pascal case input string is turned into sentence"</span>
 
@@ -112,7 +103,7 @@ The foundation of this was set in the <a href="https://github.com/TestStack/Test
 <span class="s">"Underscored_input_String_is_turned_INTO_sentence"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Underscored input String is turned INTO sentence"</span>
 
 <span class="c1">// acronyms are left intact</span>
-<span class="s">"HTML"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"HTML"</span> 
+<span class="s">"HTML"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"HTML"</span>
 </pre></div>
 
 <p>You may also specify the desired letter casing:</p>
@@ -143,13 +134,13 @@ The foundation of this was set in the <a href="https://github.com/TestStack/Test
 <a name="transform-string" class="anchor" href="#transform-string"><span class="octicon octicon-link"></span></a><a>Transform String</a>
 </h3>
 
-<p>There is a <code>Transform</code> method that supercedes <code>LetterCasing</code>, <code>ApplyCase</code> and <code>Humanize</code> overloads that accept <code>LetterCasing</code>. 
-Transform method signatue is as follows:</p>
+<p>There is a <code>Transform</code> method that supersedes <code>LetterCasing</code>, <code>ApplyCase</code> and <code>Humanize</code> overloads that accept <code>LetterCasing</code>.
+Transform method signature is as follows:</p>
 
 <div class="highlight highlight-C#"><pre><span class="kt">string</span> <span class="nf">Transform</span><span class="p">(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">input</span><span class="p">,</span> <span class="k">params</span> <span class="n">IStringTransformer</span><span class="p">[]</span> <span class="n">transformers</span><span class="p">)</span>
 </pre></div>
 
-<p>And there are some out of the box implemenations of <code>IStringTransformer</code> for letter casing:</p>
+<p>And there are some out of the box implementations of <code>IStringTransformer</code> for letter casing:</p>
 
 <div class="highlight highlight-C#"><pre><span class="s">"Sentence casing"</span><span class="p">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">To</span><span class="p">.</span><span class="n">LowerCase</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"sentence casing"</span>
 <span class="s">"Sentence casing"</span><span class="p">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">To</span><span class="p">.</span><span class="n">SentenceCase</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Sentence casing"</span>
@@ -160,7 +151,7 @@ Transform method signatue is as follows:</p>
 <p><code>LowerCase</code> is a public static property on <code>To</code> class that returns an instance of private <code>ToLowerCase</code> class that implements <code>IStringTransformer</code> and knows how to turn a string into lower case.</p>
 
 <p>The benefit of using <code>Transform</code> and <code>IStringTransformer</code> over <code>ApplyCase</code> and <code>LetterCasing</code> is that <code>LetterCasing</code> is an enum and you're limited to use what's in the framework
-while <code>IStringTransformer</code> is an interface you can implement in your codebase once and use it with <code>Transform</code> method allowing for easy extension. </p>
+while <code>IStringTransformer</code> is an interface you can implement in your codebase once and use it with <code>Transform</code> method allowing for easy extension.</p>
 
 <h3>
 <a name="truncate-string" class="anchor" href="#truncate-string"><span class="octicon octicon-link"></span></a><a>Truncate String</a>
@@ -176,9 +167,9 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 <div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="s">"---"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long te---"</span>
 </pre></div>
 
-<p>The default truncation strategy, <code>Truncator.FixedLength</code>, is to truncate the input string to a specific length, including the truncation string length. 
-There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words. 
-To use a specific truncator when truncating, the two <code>Truncate</code> methods shown in the previous examples all have an overload that allow you to specify the <code>ITruncator</code> instance to use for the truncation. 
+<p>The default truncation strategy, <code>Truncator.FixedLength</code>, is to truncate the input string to a specific length, including the truncation string length.
+There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words.
+To use a specific truncator when truncating, the two <code>Truncate</code> methods shown in the previous examples all have an overload that allow you to specify the <code>ITruncator</code> instance to use for the truncation.
 Here are examples on how to use the three provided truncators:</p>
 
 <div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Long text…"</span>
@@ -193,7 +184,7 @@ Here are examples on how to use the three provided truncators:</p>
 
 <p>Note that you can also use create your own truncator by implementing the <code>ITruncator</code> interface.</p>
 
-<p>There is also an option to choose whether to truncate the string from the beginning (<code>TruncateFrom.Left</code>) or the end (<code>TruncateFrom.Right</code>). 
+<p>There is also an option to choose whether to truncate the string from the beginning (<code>TruncateFrom.Left</code>) or the end (<code>TruncateFrom.Right</code>).
 Default is the right as shown in the examples above. The examples below show how to truncate from the beginning of the string:</p>
 
 <div class="highlight highlight-c#"><pre><span class="s">"Long text to truncate"</span><span class="p">.</span><span class="n">Truncate</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="n">Truncator</span><span class="p">.</span><span class="n">FixedLength</span><span class="p">,</span> <span class="n">TruncateFrom</span><span class="p">.</span><span class="n">Left</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"… truncate"</span>
@@ -240,13 +231,13 @@ If passed a fewer number for arguments, it'll throw <code>String.FormatException
 <span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">MemberWithDescriptionAttribute</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Custom description"</span>
 
 <span class="c1">// In the absence of Description attribute string.Humanizer kicks in</span>
-<span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">MemberWithoutDescriptionAttribute</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Member without description attribute"</span> 
+<span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">MemberWithoutDescriptionAttribute</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Member without description attribute"</span>
 
-<span class="c1">// Of course you can still apply letter casing </span>
+<span class="c1">// Of course you can still apply letter casing</span>
 <span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">MemberWithoutDescriptionAttribute</span><span class="p">.</span><span class="n">Humanize</span><span class="p">().</span><span class="n">Transform</span><span class="p">(</span><span class="n">To</span><span class="p">.</span><span class="n">TitleCase</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Member Without Description Attribute"</span>
 </pre></div>
 
-<p>You are not limited to <code>DescriptionAttribute</code> for custom description. Any attribute applied on enum members with a <code>string Description</code> property counts. 
+<p>You are not limited to <code>DescriptionAttribute</code> for custom description. Any attribute applied on enum members with a <code>string Description</code> property counts.
 This is to help with platforms with missing <code>DescriptionAttribute</code> and also for allowing subclasses of the <code>DescriptionAttribute</code>.</p>
 
 <p>Hopefully this will help avoid littering enums with unnecessary attributes!</p>
@@ -257,7 +248,7 @@ This is to help with platforms with missing <code>DescriptionAttribute</code> an
 
 <p>Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:</p>
 
-<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="n">TTargetEnum</span> <span class="n">DehumanizeTo</span><span class="p">&lt;</span><span class="n">TTargetEnum</span><span class="p">&gt;(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">input</span><span class="p">)</span> 
+<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="n">TTargetEnum</span> <span class="n">DehumanizeTo</span><span class="p">&lt;</span><span class="n">TTargetEnum</span><span class="p">&gt;(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">input</span><span class="p">)</span>
 </pre></div>
 
 <p>And the usage is:</p>
@@ -269,7 +260,7 @@ This is to help with platforms with missing <code>DescriptionAttribute</code> an
 
 <p>There is also a non-generic counterpart for when the original Enum is not known at compile time:</p>
 
-<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="n">Enum</span> <span class="nf">DehumanizeTo</span><span class="p">(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">input</span><span class="p">,</span> <span class="n">Type</span> <span class="n">targetEnum</span><span class="p">,</span> <span class="n">NoMatch</span> <span class="n">onNoMatch</span> <span class="p">=</span> <span class="n">NoMatch</span><span class="p">.</span><span class="n">ThrowsException</span><span class="p">)</span> 
+<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="n">Enum</span> <span class="nf">DehumanizeTo</span><span class="p">(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">input</span><span class="p">,</span> <span class="n">Type</span> <span class="n">targetEnum</span><span class="p">,</span> <span class="n">NoMatch</span> <span class="n">onNoMatch</span> <span class="p">=</span> <span class="n">NoMatch</span><span class="p">.</span><span class="n">ThrowsException</span><span class="p">)</span>
 </pre></div>
 
 <p>which can be used like:</p>
@@ -277,8 +268,8 @@ This is to help with platforms with missing <code>DescriptionAttribute</code> an
 <div class="highlight highlight-C#"><pre><span class="s">"Member without description attribute"</span><span class="p">.</span><span class="n">DehumanizeTo</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">EnumUnderTest</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">MemberWithoutDescriptionAttribute</span>
 </pre></div>
 
-<p>By default both methods throw a <code>NoMatchFoundException</code> when they cannot match the provided input against the target enum. 
-In the non-generic method you can also ask the method to return null by setting the second optiona parameter to <code>NoMatch.ReturnsNull</code>.</p>
+<p>By default both methods throw a <code>NoMatchFoundException</code> when they cannot match the provided input against the target enum.
+In the non-generic method you can also ask the method to return null by setting the second optional parameter to <code>NoMatch.ReturnsNull</code>.</p>
 
 <h3>
 <a name="humanize-datetime" class="anchor" href="#humanize-datetime"><span class="octicon octicon-link"></span></a><a>Humanize DateTime</a>
@@ -298,7 +289,7 @@ In the non-generic method you can also ask the method to return null by setting 
 <div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">Humanize</span><span class="p">(</span><span class="k">this</span> <span class="n">DateTime</span> <span class="n">input</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">utcDate</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">?</span> <span class="n">dateToCompareAgainst</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
 </pre></div>
 
-<p>Many localisations are availalbe for this method. Here is a few examples:</p>
+<p>Many localizations are available for this method. Here is a few examples:</p>
 
 <div class="highlight highlight-C#"><pre><span class="c1">// In ar culture</span>
 <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">.</span><span class="n">AddDays</span><span class="p">(-</span><span class="m">1</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"أمس"</span>
@@ -315,8 +306,8 @@ In the non-generic method you can also ask the method to return null by setting 
 <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">.</span><span class="n">AddMinutes</span><span class="p">(-</span><span class="m">40</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"40 минут назад"</span>
 </pre></div>
 
-<p>There are two strategies for <code>DateTime.Humanize</code>: the default one as seen above and a precision based one. 
-To use the precision based strategy you need to configure it: </p>
+<p>There are two strategies for <code>DateTime.Humanize</code>: the default one as seen above and a precision based one.
+To use the precision based strategy you need to configure it:</p>
 
 <p><code>Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75)</code>.</p>
 
@@ -344,11 +335,11 @@ To use the precision based strategy you need to configure it: </p>
 <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromDays</span><span class="p">(</span><span class="m">16</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"2 weeks"</span>
 </pre></div>
 
-<p>There is an optional <code>precision</code> parameter for <code>TimeSpan.Humanize</code> which allows you to specify the precision of the returned value. 
+<p>There is an optional <code>precision</code> parameter for <code>TimeSpan.Humanize</code> which allows you to specify the precision of the returned value.
 The default value of <code>precision</code> is 1 which means only the largest time unit is returned like you saw in <code>TimeSpan.FromDays(16).Humanize()</code>.
 Here is a few examples of specifying precision:</p>
 
-<div class="highlight highlight-C#"><pre><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromDays</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">Humanize</span><span class="p">(</span><span class="n">precision</span><span class="p">:</span><span class="m">2</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1 day"</span> <span class="c1">// no difference when there is only on unit in the provided TimeSpan</span>
+<div class="highlight highlight-C#"><pre><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromDays</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">Humanize</span><span class="p">(</span><span class="n">precision</span><span class="p">:</span><span class="m">2</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1 day"</span> <span class="c1">// no difference when there is only one unit in the provided TimeSpan</span>
 <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromDays</span><span class="p">(</span><span class="m">16</span><span class="p">).</span><span class="n">Humanize</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2 weeks, 2 days"</span>
 
 <span class="c1">// the same TimeSpan value with different precision returns different results</span>
@@ -358,7 +349,7 @@ Here is a few examples of specifying precision:</p>
 <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">1299630020</span><span class="p">).</span><span class="n">Humanize</span><span class="p">(</span><span class="m">5</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds"</span>
 </pre></div>
 
-<p>Many localisations are availalbe for this method:</p>
+<p>Many localizations are available for this method:</p>
 
 <div class="highlight highlight-C#"><pre><span class="c1">// in de-DE culture</span>
 <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromDays</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Ein Tag"</span>
@@ -382,14 +373,14 @@ Here is a few examples of specifying precision:</p>
 
 <p><code>Pluralize</code> pluralizes the provided input while taking irregular and uncountable words into consideration:</p>
 
-<div class="highlight highlight-C#"><pre><span class="s">"Man"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Men"</span> 
+<div class="highlight highlight-C#"><pre><span class="s">"Man"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Men"</span>
 <span class="s">"string"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"strings"</span>
 </pre></div>
 
 <p>Normally you would call <code>Pluralize</code> on a singular word but if you're unsure about the singularity of the word you can call the method with the optional <code>plurality</code> argument:</p>
 
-<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span> 
-<span class="s">"Man"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span> 
+<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span>
+<span class="s">"Man"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span>
 <span class="s">"string"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"strings"</span>
 </pre></div>
 
@@ -399,14 +390,14 @@ Here is a few examples of specifying precision:</p>
 
 <p><code>Singularize</code> singularizes the provided input while taking irregular and uncountable words into consideration:</p>
 
-<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Man"</span> 
+<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Man"</span>
 <span class="s">"strings"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"string"</span>
 </pre></div>
 
-<p>Normally you would call <code>Singularize</code> on a plural word but if you're unsure about the pluralit of the word you can call the method with the optional <code>plurality</code> argument:</p>
+<p>Normally you would call <code>Singularize</code> on a plural word but if you're unsure about the plurality of the word you can call the method with the optional <code>plurality</code> argument:</p>
 
-<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span> 
-<span class="s">"Man"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span> 
+<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span>
+<span class="s">"Man"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span>
 <span class="s">"strings"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"string"</span>
 </pre></div>
 
@@ -424,7 +415,7 @@ Here is a few examples of specifying precision:</p>
 <span class="s">"man"</span><span class="p">.</span><span class="n">ToQuantity</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2 men"</span>
 </pre></div>
 
-<p><code>ToQuantity</code> has smarts to figure out whether your input word is plural or singular and changes or leaves it depending on the input quantity:</p>
+<p><code>ToQuantity</code> can figure out whether the input word is singular or plural and will singularize or pluralize as necessary:</p>
 
 <div class="highlight highlight-C#"><pre><span class="s">"men"</span><span class="p">.</span><span class="n">ToQuantity</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2 men"</span>
 <span class="s">"process"</span><span class="p">.</span><span class="n">ToQuantity</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2 processes"</span>
@@ -450,7 +441,7 @@ Here is a few examples of specifying precision:</p>
 <a name="ordinalize" class="anchor" href="#ordinalize"><span class="octicon octicon-link"></span></a><a>Ordinalize</a>
 </h4>
 
-<p><code>Ordinalize</code> turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th: </p>
+<p><code>Ordinalize</code> turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th:</p>
 
 <div class="highlight highlight-C#"><pre><span class="m">1.</span><span class="n">Ordinalize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"1st"</span>
 <span class="m">5.</span><span class="n">Ordinalize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"5th"</span>
@@ -458,8 +449,8 @@ Here is a few examples of specifying precision:</p>
 
 <p>You can also call <code>Ordinalize</code> on a numeric string and achieve the same result: <code>"21".Ordinalize()</code> =&gt; <code>"21st"</code></p>
 
-<p><code>Ordinalize</code> also supports grammatical gender for both forms. 
-You can pass an argument to <code>Ordinalize</code> to specify which gender the number should be outputted in. 
+<p><code>Ordinalize</code> also supports grammatical gender for both forms.
+You can pass an argument to <code>Ordinalize</code> to specify which gender the number should be outputted in.
 The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="c1">// for Brazilian Portuguese locale</span>
@@ -512,7 +503,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <div class="highlight highlight-C#"><pre><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">AddDays</span><span class="p">(</span><span class="m">2</span><span class="p">).</span><span class="n">AddHours</span><span class="p">(</span><span class="m">3</span><span class="p">).</span><span class="n">AddMinutes</span><span class="p">(-</span><span class="m">5</span><span class="p">)</span>
 </pre></div>
 
-<p>with </p>
+<p>with</p>
 
 <div class="highlight highlight-C#"><pre><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span> <span class="p">+</span> <span class="m">2.D</span><span class="n">ays</span><span class="p">()</span> <span class="p">+</span> <span class="m">3.</span><span class="n">Hours</span><span class="p">()</span> <span class="p">-</span> <span class="m">5.</span><span class="n">Minutes</span><span class="p">()</span>
 </pre></div>
@@ -541,19 +532,19 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <div class="highlight highlight-C#"><pre><span class="kt">var</span> <span class="n">someDateTime</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DateTime</span><span class="p">(</span><span class="m">2011</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">25</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">125</span><span class="p">);</span>
 
 <span class="c1">// Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008</span>
-<span class="n">someDateTime</span><span class="p">.</span><span class="n">In</span><span class="p">(</span><span class="m">2008</span><span class="p">)</span> 
+<span class="n">someDateTime</span><span class="p">.</span><span class="n">In</span><span class="p">(</span><span class="m">2008</span><span class="p">)</span>
 
 <span class="c1">// Returns new DateTime(2011, 2, 10, 2, 25, 45, 125) changing the hour to 2:25:45.125</span>
-<span class="n">someDateTime</span><span class="p">.</span><span class="n">At</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> 
+<span class="n">someDateTime</span><span class="p">.</span><span class="n">At</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
 
 <span class="c1">// Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125</span>
-<span class="n">someDateTime</span><span class="p">.</span><span class="n">At</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span> 
+<span class="n">someDateTime</span><span class="p">.</span><span class="n">At</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">15</span><span class="p">)</span>
 
 <span class="c1">// Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000</span>
-<span class="n">someDateTime</span><span class="p">.</span><span class="n">AtNoon</span><span class="p">()</span> 
+<span class="n">someDateTime</span><span class="p">.</span><span class="n">AtNoon</span><span class="p">()</span>
 
 <span class="c1">// Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000</span>
-<span class="n">someDateTime</span><span class="p">.</span><span class="n">AtMidnight</span><span class="p">()</span> 
+<span class="n">someDateTime</span><span class="p">.</span><span class="n">AtMidnight</span><span class="p">()</span>
 </pre></div>
 
 <p>Obviously you could chain the methods too; e.g. <code>On.November.The13th.In(2010).AtNoon + 5.Minutes()</code></p>
@@ -571,7 +562,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <span class="m">3501.</span><span class="n">ToWords</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"three thousand five hundred and one"</span>
 </pre></div>
 
-<p>You can also pass a second argument, <code>GrammaticalGender</code>, to <code>ToWords</code> to specify which gender the number should be outputted in. 
+<p>You can also pass a second argument, <code>GrammaticalGender</code>, to <code>ToWords</code> to specify which gender the number should be outputted in.
 The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="c1">// for Russian locale</span>
@@ -586,7 +577,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <a name="number-to-ordinal-words" class="anchor" href="#number-to-ordinal-words"><span class="octicon octicon-link"></span></a><a>Number to ordinal words</a>
 </h3>
 
-<p>This is kind of mixing <code>ToWords</code> with <code>Ordinalize</code>. You can call <code>ToOrdinalWords</code> on a number to get an ordinal representation of the number in words!! Let me show that with an example:</p>
+<p>This is kind of mixing <code>ToWords</code> with <code>Ordinalize</code>. You can call <code>ToOrdinalWords</code> on a number to get an ordinal representation of the number in words! For example:</p>
 
 <div class="highlight highlight-C#"><pre><span class="m">0.</span><span class="n">ToOrdinalWords</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"zeroth"</span>
 <span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"first"</span>
@@ -600,8 +591,8 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <span class="m">121.</span><span class="n">ToOrdinalWords</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"hundred and twenty first"</span>
 </pre></div>
 
-<p><code>ToOrdinalWords</code> also supports grammatical gender. 
-You can pass a second argument to <code>ToOrdinalWords</code> to specify which gender the number should be outputted in. 
+<p><code>ToOrdinalWords</code> also supports grammatical gender.
+You can pass a second argument to <code>ToOrdinalWords</code> to specify the gender of the output.
 The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="c1">// for Brazilian Portuguese locale</span>
@@ -647,7 +638,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 </h3>
 
 <p>Humanizer includes a port of the brilliant <a href="https://github.com/omar/ByteSize">ByteSize</a> library.
-Quite a few changes and additions are made on <code>ByteSize</code> to make the interaction with <code>ByteSize</code> easier and more consistent with the Humanizer API. 
+Quite a few changes and additions are made on <code>ByteSize</code> to make the interaction with <code>ByteSize</code> easier and more consistent with the Humanizer API.
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:</p>
 
 <div class="highlight highlight-c#"><pre><span class="kt">var</span> <span class="n">fileSize</span> <span class="p">=</span> <span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">();</span>
@@ -695,8 +686,8 @@ Here is a few examples of how you can convert from numbers to byte sizes and bet
 <span class="p">(</span><span class="m">1024</span><span class="p">).</span><span class="n">Gigabytes</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span> <span class="c1">// 1 TB</span>
 </pre></div>
 
-<p>You can also optionally provide a format for the expected string representation. 
-The formatter can contain the symbol of the value to display: <code>b</code>, <code>B</code>, <code>KB</code>, <code>MB</code>, <code>GB</code>, <code>TB</code>. 
+<p>You can also optionally provide a format for the expected string representation.
+The formatter can contain the symbol of the value to display: <code>b</code>, <code>B</code>, <code>KB</code>, <code>MB</code>, <code>GB</code>, <code>TB</code>.
 The formatter uses the built in <a href="http://msdn.microsoft.com/en-us/library/kfsatb94(v=vs.110).aspx"><code>double.ToString</code> method</a> with <code>#.##</code> as the default format which rounds the number to two decimal places:</p>
 
 <div class="highlight highlight-C#"><pre><span class="kt">var</span> <span class="n">b</span> <span class="p">=</span> <span class="p">(</span><span class="m">10.505</span><span class="p">).</span><span class="n">Kilobytes</span><span class="p">();</span>
@@ -720,7 +711,7 @@ The formatter uses the built in <a href="http://msdn.microsoft.com/en-us/library
 </pre></div>
 
 <p>There isn't a <code>Dehumanize</code> method to turn a string representation back into a <code>ByteSize</code> instance; but you can use <code>Parse</code> and <code>TryParse</code> on <code>ByteSize</code> to do that.
-Like other <code>TryParse</code> methods, <code>ByteSize.TryParse</code> returns <code>boolean</code> value indicating whether or not the parsing was successful. 
+Like other <code>TryParse</code> methods, <code>ByteSize.TryParse</code> returns <code>boolean</code> value indicating whether or not the parsing was successful.
 If the value is parsed it is output to the <code>out</code> parameter supplied:</p>
 
 <pre><code>ByteSize output;
@@ -750,9 +741,9 @@ ByteSize.Parse("1.55 tb");
 <a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a><a>Mix this into your framework to simplify your life</a>
 </h2>
 
-<p>This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use <code>"string".Humanize</code> for that?! </p>
+<p>This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use <code>"string".Humanize</code> for that?!</p>
 
-<p>You may find an Asp.Net MVC sample <a href="https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample">in the code</a> that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too). </p>
+<p>You may find an Asp.Net MVC sample <a href="https://github.com/MehdiK/Humanizer/tree/master/src/Humanizer.MvcSample">in the code</a> that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).</p>
 
 <p>This is achieved using a custom <code>DataAnnotationsModelMetadataProvider</code> I called <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs">HumanizerMetadataProvider</a>. It is small enough to repeat here; so here we go:</p>
 
@@ -801,11 +792,11 @@ ByteSize.Parse("1.55 tb");
 <span class="p">}</span>
 </pre></div>
 
-<p>This class calls the base class to extract the metadata and then, if required, humanizes the property name. 
-It is checking if the property already has a <code>DisplayName</code> or <code>Display</code> attribute on it in which case the metadata provider will just honor the attribute and leave the property alone. 
+<p>This class calls the base class to extract the metadata and then, if required, humanizes the property name.
+It is checking if the property already has a <code>DisplayName</code> or <code>Display</code> attribute on it in which case the metadata provider will just honor the attribute and leave the property alone.
 For other properties it will Humanize the property name. That is all.</p>
 
-<p>Now you need to register this metadata provider with Asp.Net MVC. 
+<p>Now you need to register this metadata provider with Asp.Net MVC.
 Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <code>System.Web.ModelBinding.ModelMetadataProviders</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="n">ModelMetadataProviders</span><span class="p">.</span><span class="n">Current</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HumanizerMetadataProvider</span><span class="p">();</span>
@@ -847,71 +838,13 @@ Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <c
 <a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a><a>How to contribute?</a>
 </h2>
 
-<p>Your contribution to Humanizer would be very welcome. 
-If you find a bug, please raise it as an issue. 
-Even better fix it and send me a pull request. 
-If you like to help me out with existing bugs and feature requests just check out the list of <a href="https://github.com/MehdiK/Humanizer/issues">issues</a> and grab and fix one. 
-I have also flagged some of the easier issues as 'jump in' so you can start with easier tasks.</p>
-
-<h3>
-<a name="contribution-guideline" class="anchor" href="#contribution-guideline"><span class="octicon octicon-link"></span></a><a>Contribution guideline</a>
-</h3>
-
-<p>I use <a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub flow</a> for pull requests. 
-So if you want to contribute, fork the repo, preferrably create a local branch to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.</p>
-
-<p>Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:</p>
-
-<ul>
-<li>Implementation is clean</li>
-<li>Code adheres to the existing coding standards; e.g. no curlies for one-line blocks &amp; no redundant empty lines between methods or code blocks</li>
-<li>No ReSharper warnings</li>
-<li>There is proper unit test coverage</li>
-<li>If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution</li>
-<li>There is very little or no comments (because comments shouldn't be needed if you write clean code)</li>
-<li>Xml documentation is added/updated for the addition/change</li>
-<li>Your PR is (re)based on top of the latest commits (more info below)</li>
-<li>Link to the issue(s) you're fixing from your PR description. Use <code>fixes #&lt;the issue number&gt;</code>
-</li>
-<li>Readme is updated if you change an existing feature or add a new one</li>
-<li>An entry is added in the release_notes.md file in the 'In Development' section with a link to your PR and a description of what's changed. Please follow the wording style for the description.</li>
-</ul><p>Please rebase your code on top of the latest commits. 
-Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts. 
-Also before sending the pull request please rebase your code as there is a chance there has been a few commits pushed up after you pulled last. 
-Please refer to <a href="https://gist.github.com/jbenet/ee6c9ac48068889b0912#the-workflow">this guide</a> if you're new to git.</p>
-
-<h3>
-<a name="need-your-help-with-localisation" class="anchor" href="#need-your-help-with-localisation"><span class="octicon octicon-link"></span></a><a>Need your help with localisation</a>
-</h3>
-
-<p>One area Humanizer could always use your help is localisation. 
-Currently Humanizer supports quite a few localisations for <code>DateTime.Humanize</code>, <code>TimeSpan.Humanize</code>, <code>ToWords</code> and <code>ToOrdinalWords</code>. </p>
-
-<p>Humanizer could definitely do with more translations. 
-To add a translation for <code>DateTime.Humanize</code> and <code>TimeSpan.Humanize</code>, 
-fork the repository if you haven't done yet, duplicate the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx">resources.resx</a> file, add your target <a href="http://msdn.microsoft.com/en-us/library/hh441729.aspx">locale code</a> 
-to the end (e.g. resources.ru.resx for Russian), translate the values to your language, write unit tests for the translation, commit, and send a pull request for it. Thanks.</p>
-
-<p>Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومين" not "2 يوم".
-Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
-In cases like this in addition to creating a resource file you should also subclass <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/Formatters/DefaultFormatter.cs"><code>DefaultFormatter</code></a> in a class that represents your language; 
-e.g. <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/Formatters/RomanianFormatter.cs">RomanianFormatter</a> and then override the methods that need the complex rules. 
-We think overriding the <code>GetResourceKey</code> method should be enough. 
-To see how to do that check out <code>RomanianFormatter</code> and <code>RussianFormatter</code>. 
-Then you return an instance of your class in the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs">Configurator</a> class in the getter of the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Configuration/Configurator.cs">Formatter property</a> based on the current culture.</p>
-
-<p>Translations for <code>ToWords</code> and <code>ToOrdinalWords</code> methods are currently done in code as there is a huge difference between the way different languages deal with number words.
-Check out <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/DutchNumberToWordsConverter.cs">Dutch</a> and 
-<a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/Localisation/NumberToWords/RussianNumberToWordsConverter.cs">Russian</a> localisations for examples of how you can write a Converter for your language.
-You should then register your converter in the <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer/NumberToWordsExtension.cs#L13">ConverterFactory</a> for it to kick in on your locale.</p>
-
-<p>Don't forget to write tests for your localisations. Check out the existing <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/DateHumanizeTests.cs">DateHumanizeTests</a>, <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/TimeSpanHumanizeTests.cs">TimeSpanHumanizeTests</a> and <a href="https://github.com/MehdiK/Humanizer/blob/master/src/Humanizer.Tests/Localisation/ru-RU/NumberToWordsTests.cs">NumberToWordsTests</a>.</p>
+<p>Please see <a href="CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 
 <h2>
 <a name="continuous-integration-from-teamcity" class="anchor" href="#continuous-integration-from-teamcity"><span class="octicon octicon-link"></span></a><a>Continuous Integration from TeamCity</a>
 </h2>
 
-<p>Humanizer project is built &amp; tested continuously by TeamCity (more details <a href="http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity">here</a>). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. I would appreciate if you could send me green PRs.</p>
+<p>Humanizer project is built &amp; tested continuously by TeamCity (more details <a href="http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity">here</a>). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="CONTRIBUTING.md">contribute</a> some green PRs!</p>
 
 <p>The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&amp;guest=1">
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"></a></p>
@@ -939,14 +872,26 @@ You should then register your converter in the <a href="https://github.com/Mehdi
 </h2>
 
 <p>Icon created by <a href="https://twitter.com/Inkventive">Tyrone Rieschiek</a></p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/MehdiK">MehdiK</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/MehdiK/Humanizer/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/MehdiK/Humanizer/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/MehdiK/Humanizer"></a> is maintained by <a href="https://github.com/MehdiK">MehdiK</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
