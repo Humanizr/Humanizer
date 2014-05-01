@@ -121,7 +121,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static string GetPrefix(int number, GrammaticalGender gender)
+        private static string GetPrefix(int number)
         {
             var parts = new List<string>();
 
@@ -170,7 +170,7 @@ namespace Humanizer.Localisation.NumberToWords
                 if (result == 1)
                     parts.Add(prefixedForm);
                 else
-                    parts.Add(GetPrefix(result, gender) + prefixedForm);
+                    parts.Add(GetPrefix(result) + prefixedForm);
             }
             else
             {
