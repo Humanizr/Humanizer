@@ -10,6 +10,7 @@ namespace Humanizer.Configuration
             Register<SpanishOrdinalizer>("es");
             Register<RussianOrdinalizer>("ru");
             Register<BrazilianPortugueseOrdinalizer>("pt-BR");
+            Register<GermanOrdinalizer>("de");
         }
     }
 }
