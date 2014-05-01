@@ -1,4 +1,5 @@
 ###In Development
+  - [#259](https://github.com/Mehdik/Humanizer/pull/259): Fixed example for Ordinalize of string
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.25.4...master)
 
