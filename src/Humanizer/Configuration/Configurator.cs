@@ -28,7 +28,7 @@ namespace Humanizer.Configuration
             get { return _numberToWordsConverters; }
         }
 
-        private static LocaliserRegistry<IOrdinalizer> _ordinalizers = new OrdinalizerRegistry();
+        private static readonly LocaliserRegistry<IOrdinalizer> _ordinalizers = new OrdinalizerRegistry();
         /// <summary>
         /// A registry of ordinalizers used to localise Ordinalize method
         /// </summary>
