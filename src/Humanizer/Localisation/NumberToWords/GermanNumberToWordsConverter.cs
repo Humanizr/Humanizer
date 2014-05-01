@@ -6,6 +6,11 @@ namespace Humanizer.Localisation.NumberToWords
     {
         private static readonly string[] UnitsMap = { "null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn" };
         private static readonly string[] TensMap = { "null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig" };
+        private static readonly string[] UnitsOrdinal = { string.Empty, "erster", "zweiter", "dritter", "vierter", "fünfter", "sechster", "siebter", "achter", "neunter", "zehnter", "elfter", "zwölfter", "dreizehnter", "vierzehnter", "fünfzehnter", "sechzehnter", "siebzehnter", "achtzehnter", "neunzehnter" };
+        private static readonly string[] MillionOrdinalSingular = { "einmillion", "einemillion" };
+        private static readonly string[] MillionOrdinalPlural = { "{0}million", "{0}millionen" };
+        private static readonly string[] BillionOrdinalSingular = { "einmilliard", "einemilliarde" };
+        private static readonly string[] BillionOrdinalPlural = { "{0}milliard", "{0}milliarden" };
 
         public override string Convert(int number)
         {
@@ -67,6 +72,70 @@ namespace Humanizer.Localisation.NumberToWords
                     parts.Add(TensMap[number / 10]);
                 }
             }
+
+            return string.Join("", parts);
+        }
+
+        public override string ConvertToOrdinal(int number)
+        {
+            if (number == 0)
+                return "nullter";
+
+            var parts = new List<string>();
+            if (number < 0)
+            {
+                parts.Add("minus ");
+                number = -number;
+            }
+
+            var billions = number / 1000000000;
+            if (billions > 0)
+            {
+                number %= 1000000000;
+                var noRest = number == 0 ? 0 : 1;
+                parts.Add(Part(BillionOrdinalPlural[noRest], BillionOrdinalSingular[noRest], billions));
+            }
+
+            var millions = number / 1000000;
+            if (millions > 0)
+            {
+                number %= 1000000;
+                var noRest = number == 0 ? 0 : 1;
+                parts.Add(Part(MillionOrdinalPlural[noRest], MillionOrdinalSingular[noRest], millions));
+            }
+
+            var thousands = number / 1000;
+            if (thousands > 0)
+            {
+                parts.Add(Part("{0}tausend", "eintausend", thousands));
+                number %= 1000;
+            }
+
+            var hundreds = number / 100;
+            if (hundreds > 0)
+            {
+                parts.Add(Part("{0}hundert", "einhundert", hundreds));
+                number %= 100;
+            }
+
+            if (number > 0)
+            {
+                if (number < 20)
+                {
+                    parts.Add(UnitsOrdinal[number]);
+                }
+                else
+                {
+                    var units = number%10;
+                    if (units > 0)
+                        parts.Add(string.Format("{0}und", UnitsMap[units]));
+
+                    parts.Add(TensMap[number/10]);
+                }
+            }
+
+            if (number == 0 || number >= 20)
+                parts.Add("ster");
 
             return string.Join("", parts);
         }
