@@ -1,4 +1,5 @@
 ###In Development
+  - [#257](https://github.com/Mehdik/Humanizer/pull/257): Added German localisation for ToOrdinalWords and Ordinalize
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.25.4...master)
 
