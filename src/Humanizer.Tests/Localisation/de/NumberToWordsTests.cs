@@ -98,5 +98,57 @@ namespace Humanizer.Tests.Localisation.de
         {
             Assert.Equal(expected, number.ToOrdinalWords());
         }
+
+        [Theory]
+        [InlineData(0, "nullte")]
+        [InlineData(1, "erste")]
+        [InlineData(2, "zweite")]
+        [InlineData(3, "dritte")]
+        [InlineData(4, "vierte")]
+        [InlineData(5, "fünfte")]
+        [InlineData(6, "sechste")]
+        [InlineData(7, "siebte")]
+        [InlineData(8, "achte")]
+        [InlineData(9, "neunte")]
+        [InlineData(10, "zehnte")]
+        [InlineData(111, "einhundertelfte")]
+        [InlineData(1112, "eintausendeinhundertzwölfte")]
+        [InlineData(11213, "elftausendzweihundertdreizehnte")]
+        [InlineData(121314, "einhunderteinundzwanzigtausenddreihundertvierzehnte")]
+        [InlineData(2132415, "zweimillioneneinhundertzweiunddreißigtausendvierhundertfünfzehnte")]
+        [InlineData(12345516, "zwölfmillionendreihundertfünfundvierzigtausendfünfhundertsechzehnte")]
+        [InlineData(751633617, "siebenhunderteinundfünfzigmillionensechshundertdreiunddreißigtausendsechshundertsiebzehnte")]
+        [InlineData(1111111118, "einemilliardeeinhundertelfmillioneneinhundertelftausendeinhundertachtzehnte")]
+        [InlineData(-751633619, "minus siebenhunderteinundfünfzigmillionensechshundertdreiunddreißigtausendsechshundertneunzehnte")]
+        public void ToOrdinalWordsFeminine(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
+        }
+
+        [Theory]
+        [InlineData(0, "nulltes")]
+        [InlineData(1, "erstes")]
+        [InlineData(2, "zweites")]
+        [InlineData(3, "drittes")]
+        [InlineData(4, "viertes")]
+        [InlineData(5, "fünftes")]
+        [InlineData(6, "sechstes")]
+        [InlineData(7, "siebtes")]
+        [InlineData(8, "achtes")]
+        [InlineData(9, "neuntes")]
+        [InlineData(10, "zehntes")]
+        [InlineData(111, "einhundertelftes")]
+        [InlineData(1112, "eintausendeinhundertzwölftes")]
+        [InlineData(11213, "elftausendzweihundertdreizehntes")]
+        [InlineData(121314, "einhunderteinundzwanzigtausenddreihundertvierzehntes")]
+        [InlineData(2132415, "zweimillioneneinhundertzweiunddreißigtausendvierhundertfünfzehntes")]
+        [InlineData(12345516, "zwölfmillionendreihundertfünfundvierzigtausendfünfhundertsechzehntes")]
+        [InlineData(751633617, "siebenhunderteinundfünfzigmillionensechshundertdreiunddreißigtausendsechshundertsiebzehntes")]
+        [InlineData(1111111118, "einemilliardeeinhundertelfmillioneneinhundertelftausendeinhundertachtzehntes")]
+        [InlineData(-751633619, "minus siebenhunderteinundfünfzigmillionensechshundertdreiunddreißigtausendsechshundertneunzehntes")]
+        public void ToOrdinalWordsNeuter(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
+        }
     }
 }
