@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using Humanizer.Configuration;
-using Humanizer.Localisation.NumberToWords;
 
 namespace Humanizer
 {
@@ -67,7 +63,5 @@ namespace Humanizer
         {
             return Configurator.NumberToWordsConverter.ConvertToOrdinal(number, gender);
         }
-
-
     }
 }
