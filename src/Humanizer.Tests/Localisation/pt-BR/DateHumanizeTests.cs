@@ -16,7 +16,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(-1, "um segundo atrás")]
         public void SecondsAgo(int seconds, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddSeconds(seconds).Humanize());
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
@@ -34,7 +34,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(-1, "um minuto atrás")]
         public void MinutesAgo(int minutes, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMinutes(minutes).Humanize());
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]
@@ -52,7 +52,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(-1, "uma hora atrás")]
         public void HoursAgo(int hours, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddHours(hours).Humanize());
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
@@ -70,7 +70,7 @@ namespace Humanizer.Tests.Localisation.ptBR
 		[InlineData(-1, "ontem")]
         public void DaysAgo(int days, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddDays(days).Humanize());
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
         [Theory]
@@ -88,7 +88,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(-1, "um mês atrás")]
         public void MonthsAgo(int months, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMonths(months).Humanize());
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
@@ -106,7 +106,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(-1, "um ano atrás")]
         public void YearsAgo(int years, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
 
         [Theory]
