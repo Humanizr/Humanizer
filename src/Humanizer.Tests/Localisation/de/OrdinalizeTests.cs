@@ -23,7 +23,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData("1001", "1001.")]
         public void OrdinalizeString(string number, string ordinalized)
         {
-            Assert.Equal(number.Ordinalize(), ordinalized);
+            Assert.Equal(ordinalized, number.Ordinalize());
         }
     }
 }
