@@ -120,29 +120,59 @@
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>um segundo atrás</value>
   </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>em um segundo</value>
+  </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} segundos atrás</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>em {0} segundos</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>um minuto atrás</value>
   </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>em um minuto</value>
+  </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minutos atrás</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>em {0} minutos</value>
   </data>
   <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>uma hora atrás</value>
   </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>em uma hora</value>
+  </data>  
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} horas atrás</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>em {0} horas</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ontem</value>
   </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>amanhã</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} dias atrás</value>
   </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>em {0} dias</value>
+  </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>um mês atrás</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>em um mês</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>em {0} meses</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} meses atrás</value>
@@ -150,8 +180,14 @@
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>um ano atrás</value>
   </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>em um ano</value>
+  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} anos atrás</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>em {0} anos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} dias</value>
