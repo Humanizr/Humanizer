@@ -21,8 +21,8 @@ namespace Humanizer
         /// <summary>
         /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
         /// Gender for Brazilian Portuguese locale
-        /// 1.Ordinalize(GrammaticalGender.Masculine) -> "1º"
-        /// 1.Ordinalize(GrammaticalGender.Feminine) -> "1ª"
+        /// "1".Ordinalize(GrammaticalGender.Masculine) -> "1º"
+        /// "1".Ordinalize(GrammaticalGender.Feminine) -> "1ª"
         /// </summary>
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
