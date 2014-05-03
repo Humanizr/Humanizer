@@ -116,5 +116,11 @@ namespace Humanizer.Tests.Localisation.ptBR
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
+
+        [Fact]
+        public void Now()
+        {
+            DateHumanize.Verify("agora", 0, TimeUnit.Day, Tense.Future);
+        }
     }
 }

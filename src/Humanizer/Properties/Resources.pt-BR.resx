@@ -146,7 +146,7 @@
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
     <value>em uma hora</value>
-  </data>  
+  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} horas atrás</value>
   </data>
@@ -227,5 +227,8 @@
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>1 semana</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>agora</value>
   </data>
 </root>
