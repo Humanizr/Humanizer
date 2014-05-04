@@ -1,5 +1,6 @@
 ###In Development
   - [#257](https://github.com/Mehdik/Humanizer/pull/257): Added German localisation for ToOrdinalWords and Ordinalize
+  - [#261](https://github.com/Mehdik/Humanizer/pull/261): Added future dates to Portuguese - Brazil
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.25.4...master)
 
