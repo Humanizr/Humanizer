@@ -300,6 +300,11 @@ public class OrdinalizeExtensions
     public string Ordinalize(int number, Humanizer.GrammaticalGender gender) { }
 }
 
+public class StringPhoneNumberFormatExtensions
+{
+    public string FormatPhone(string phoneNumber) { }
+}
+
 public enum Plurality
 {
     CouldBeEither,
