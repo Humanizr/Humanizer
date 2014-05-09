@@ -28,7 +28,7 @@ namespace Humanizer.Configuration
             get { return _numberToWordsConverters; }
         }
 
-        private static LocaliserRegistry<IOrdinalizer> _ordinalizers = new OrdinalizerRegistry();
+        private static readonly LocaliserRegistry<IOrdinalizer> _ordinalizers = new OrdinalizerRegistry();
         /// <summary>
         /// A registry of ordinalizers used to localise Ordinalize method
         /// </summary>
@@ -36,9 +36,7 @@ namespace Humanizer.Configuration
         {
             get { return _ordinalizers; }
         }
-
-        private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
-
+        
         /// <summary>
         /// The formatter to be used
         /// </summary>
@@ -72,6 +70,7 @@ namespace Humanizer.Configuration
             }
         }
 
+        private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
         /// <summary>
         /// The strategy to be used for DateTime.Humanize
         /// </summary>
