@@ -90,6 +90,9 @@
     <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="PhoneNumber\FormatRule.cs" />
+    <Compile Include="PhoneNumber\PhoneNumberFormatter.cs" />
+    <Compile Include="PhoneNumber\StringPhoneNumberFormatExtensions.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>

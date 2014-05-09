@@ -126,6 +126,7 @@
     <Compile Include="DateTimeHumanizePrecisionStrategyTests.cs" />
     <Compile Include="Localisation\tr\DateHumanizeTests.cs" />
     <Compile Include="Localisation\tr\TimeSpanHumanizeTests.cs" />
+    <Compile Include="PhoneNumber\PhoneNumberTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
