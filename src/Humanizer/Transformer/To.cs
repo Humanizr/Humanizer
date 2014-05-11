@@ -73,5 +73,19 @@ namespace Humanizer
                 return new ToSentenceCase();
             }
         }
+
+        /// <summary>
+        /// Formats a phone number according to the rules for the country the number is from.
+        /// </summary>
+        /// <example>
+        /// "+79091234567" -> "+7 909 123-45-67"
+        /// </example>
+        public static IStringTransformer PhoneNumber
+        {
+            get
+            {
+                return new ToPhoneNumber();
+            }
+        }
     }
 }

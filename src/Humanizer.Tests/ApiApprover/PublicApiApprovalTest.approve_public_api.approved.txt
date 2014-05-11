@@ -354,6 +354,7 @@ public class TimeSpanHumanizeExtensions
 public class To
 {
     public Humanizer.IStringTransformer LowerCase { get; }
+    public Humanizer.IStringTransformer PhoneNumber { get; }
     public Humanizer.IStringTransformer SentenceCase { get; }
     public Humanizer.IStringTransformer TitleCase { get; }
     public Humanizer.IStringTransformer UpperCase { get; }

@@ -136,6 +136,7 @@
     <Compile Include="StringDehumanizeExtensions.cs" />
     <Compile Include="StringHumanizeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformer\ToPhoneNumber.cs" />
     <Compile Include="Transformer\ToTitleCase.cs" />
     <Compile Include="Transformer\ToUpperCase.cs" />
     <Compile Include="Transformer\ToLowerCase.cs" />
