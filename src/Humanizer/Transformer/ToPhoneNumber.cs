@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
     class ToPhoneNumber : IStringTransformer
     {
-        private static readonly Lazy<PhoneNumberFormatter> Formatter = new Lazy<PhoneNumberFormatter>(() => new PhoneNumberFormatter());
+        private static readonly PhoneNumberFormatter Formatter = new PhoneNumberFormatter();
 
         public string Transform(string input)
         {
-            return Formatter.Value.Format(input);
+            return Formatter.Format(input);
         }
     }
 

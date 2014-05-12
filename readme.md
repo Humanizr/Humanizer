@@ -8,7 +8,6 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Humanize String](#humanize-string)
    - [Dehumanize String](#dehumanize-string)
    - [Transform String](#transform-string)
-     - [Transform to Phone Number](#transform-to-phone-number)
    - [Truncate String](#truncate-string)
    - [Format String](#format-string)
    - [Humanize Enums](#humanize-enums)
@@ -101,7 +100,7 @@ And there are some out of the box implementations of `IStringTransformer` for le
 The benefit of using `Transform` and `IStringTransformer` over `ApplyCase` and `LetterCasing` is that `LetterCasing` is an enum and you're limited to use what's in the framework
 while `IStringTransformer` is an interface you can implement in your codebase once and use it with `Transform` method allowing for easy extension.
 
-####<a id="transform-to-phone-number">Transform to Phone Number</a>
+
 There is another one implementation of `IStringTransformer` interface, using it you can format phone numbers according to the rules for the country the number is from.
 
 ```C#
