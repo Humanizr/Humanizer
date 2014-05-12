@@ -100,6 +100,13 @@ And there are some out of the box implementations of `IStringTransformer` for le
 The benefit of using `Transform` and `IStringTransformer` over `ApplyCase` and `LetterCasing` is that `LetterCasing` is an enum and you're limited to use what's in the framework
 while `IStringTransformer` is an interface you can implement in your codebase once and use it with `Transform` method allowing for easy extension.
 
+
+There is another one implementation of `IStringTransformer` interface, using it you can format phone numbers according to the rules for the country the number is from.
+
+```C#
+"+79091234567".Transform(To.PhoneNumber) => "+7 909 123-45-67"
+```
+
 ###<a id="truncate-string">Truncate String</a>
 You can truncate a `string` using the `Truncate` method:
 

@@ -45,5 +45,26 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expectedOutput, input.Transform(To.UpperCase));
         }
+
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData("", "")]
+        [InlineData("some text", "some text")]
+        [InlineData("+79091234567 (ext. 123)", "+79091234567 (ext. 123)")]
+        [InlineData("++79091234567", "++79091234567")]
+        public void TransformToPhoneNumberWhenItsNot(string input, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.Transform(To.PhoneNumber));
+        }
+
+        [Theory]
+        [InlineData("+79091234567", "+7 909 123-45-67")]
+        [InlineData("89091234567", "8 909 123-45-67")]
+        [InlineData("+7 909 12-34-567", "+7 909 123-45-67")]
+        [InlineData("8 909 12-34-567", "8 909 123-45-67")]
+        public void TransformToPhoneNumberRussianFormat(string input, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.Transform(To.PhoneNumber));
+        }
     }
 }
