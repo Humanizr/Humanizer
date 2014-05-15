@@ -9,7 +9,7 @@ namespace Humanizer.Tests
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
         [InlineData("a", 1, "a")]
-        [InlineData("Text longer than truncate length", 10, "Text long¡¦")]
+        [InlineData("Text longer than truncate length", 10, "Text long?)]
         [InlineData("Text with length equal to truncate length", 41, "Text with length equal to truncate length")]
         [InlineData("Text smaller than truncate length", 34, "Text smaller than truncate length")]
         public void Truncate(string input, int length, string expectedOutput)
@@ -21,7 +21,7 @@ namespace Humanizer.Tests
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
         [InlineData("a", 1, "a")]
-        [InlineData("Text longer than truncate length", 10, "Text long¡¦")]
+        [InlineData("Text longer than truncate length", 10, "Text long?)]
         [InlineData("Text with length equal to truncate length", 41, "Text with length equal to truncate length")]
         [InlineData("Text smaller than truncate length", 34, "Text smaller than truncate length")]
         public void TruncateWithFixedLengthTruncator(string input, int length, string expectedOutput)
@@ -33,7 +33,7 @@ namespace Humanizer.Tests
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
         [InlineData("a", 1, "a")]
-        [InlineData("Text with more characters than truncate length", 10, "Text with m¡¦")]
+        [InlineData("Text with more characters than truncate length", 10, "Text with m?)]
         [InlineData("Text with number of characters equal to truncate length", 47, "Text with number of characters equal to truncate length")]
         [InlineData("Text with less characters than truncate length", 41, "Text with less characters than truncate length")]
         public void TruncateWithFixedNumberOfCharactersTruncator(string input, int length, string expectedOutput)
@@ -45,10 +45,10 @@ namespace Humanizer.Tests
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
         [InlineData("a", 1, "a")]
-        [InlineData("Text with more words than truncate length", 4, "Text with more words¡¦")]
+        [InlineData("Text with more words than truncate length", 4, "Text with more words?)]
         [InlineData("Text with number of words equal to truncate length", 9, "Text with number of words equal to truncate length")]
         [InlineData("Text with less words than truncate length", 8, "Text with less words than truncate length")]
-        [InlineData("Words are\nsplit\rby\twhitespace", 4, "Words are\nsplit\rby¡¦")]
+        [InlineData("Words are\nsplit\rby\twhitespace", 4, "Words are\nsplit\rby?)]
         public void TruncateWithFixedNumberOfWordsTruncator(string input, int length, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfWords));
@@ -117,7 +117,7 @@ namespace Humanizer.Tests
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
         [InlineData("a", 1, "a")]
-        [InlineData("Text longer than truncate length", 10, "¡¦te length")]
+        [InlineData("Text longer than truncate length", 10, "…te length")]
         [InlineData("Text with length equal to truncate length", 41, "Text with length equal to truncate length")]
         [InlineData("Text smaller than truncate length", 34, "Text smaller than truncate length")]
         public void TruncateWithFixedLengthTruncatorTruncateFromLeft(string input, int length, string expectedOutput)
@@ -129,10 +129,10 @@ namespace Humanizer.Tests
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
         [InlineData("a", 1, "a")]
-        [InlineData("Text with more characters than truncate length", 10, "¡¦ate length")]
+        [InlineData("Text with more characters than truncate length", 10, "…ate length")]
         [InlineData("Text with number of characters equal to truncate length", 47, "Text with number of characters equal to truncate length")]
         [InlineData("Text with less characters than truncate length", 41, "Text with less characters than truncate length")]
-        [InlineData("Text with strange characters ^$(*^ and more ^$**)%  ", 10, "¡¦rs ^$(*^ and more ^$**)%  ")]
+        [InlineData("Text with strange characters ^$(*^ and more ^$**)%  ", 10, "…rs ^$(*^ and more ^$**)%  ")]
         public void TruncateWithFixedNumberOfCharactersTruncatorTruncateFromLeft(string input, int length, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfCharacters, TruncateFrom.Left));
@@ -142,11 +142,11 @@ namespace Humanizer.Tests
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
         [InlineData("a", 1, "a")]
-        [InlineData("Text with more words than truncate length", 4, "¡¦words than truncate length")]
+        [InlineData("Text with more words than truncate length", 4, "…words than truncate length")]
         [InlineData("Text with number of words equal to truncate length", 9, "Text with number of words equal to truncate length")]
         [InlineData("Text with less words than truncate length", 8, "Text with less words than truncate length")]
-        [InlineData("Words are\nsplit\rby\twhitespace", 4, "¡¦are\nsplit\rby\twhitespace")]
-        [InlineData("Text with whitespace at the end  ", 4, "¡¦whitespace at the end")]
+        [InlineData("Words are\nsplit\rby\twhitespace", 4, "…are\nsplit\rby\twhitespace")]
+        [InlineData("Text with whitespace at the end  ", 4, "…whitespace at the end")]
         public void TruncateWithFixedNumberOfWordsTruncatorTruncateFromLeft(string input, int length, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfWords, TruncateFrom.Left));
