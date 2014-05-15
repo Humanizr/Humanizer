@@ -2,7 +2,7 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.ko
+namespace Humanizer.Tests.Localisation.koKR
 {
     public class TimeSpanHumanizeTests : AmbientCulture
     {
