@@ -63,8 +63,17 @@ public class CasingExtensions
     public string ApplyCase(string input, Humanizer.LetterCasing casing) { }
 }
 
+public class CollectionHumanizeExtensions
+{
+    public string Humanize(System.Collections.Generic.IEnumerable<> collection) { }
+    public string Humanize(System.Collections.Generic.IEnumerable<> collection, System.Func<, > displayFormatter) { }
+    public string Humanize(System.Collections.Generic.IEnumerable<> collection, string separator) { }
+    public string Humanize(System.Collections.Generic.IEnumerable<> collection, System.Func<, > displayFormatter, string separator) { }
+}
+
 public class Configurator
 {
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
     public Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
@@ -192,6 +201,14 @@ public enum LetterCasing
     Sentence,
     Title,
     value__,
+}
+
+public interface ICollectionFormatter
+{
+    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection);
+    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection, System.Func<, > objectFormatter);
+    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection, string separator);
+    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection, System.Func<, > objectFormatter, string separator);
 }
 
 public class DefaultFormatter
