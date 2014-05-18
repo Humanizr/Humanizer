@@ -13,6 +13,9 @@ namespace Humanizer.Configuration
     {
         private static readonly LocaliserRegistry<ICollectionFormatter> _collectionFormatters = new CollectionFormatterRegistry();
 
+        /// <summary>
+        /// A registry of formatters used to format collections based on the current locale
+        /// </summary>
         public static LocaliserRegistry<ICollectionFormatter> CollectionFormatters
         {
             get { return _collectionFormatters; }
