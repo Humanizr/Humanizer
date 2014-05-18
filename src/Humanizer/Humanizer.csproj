@@ -91,6 +91,11 @@
     <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="Properties\Resources.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.vi.resx</DependentUpon>
+    </Compile>
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -191,6 +196,10 @@
     <EmbeddedResource Include="Properties\Resources.sr-Latn.resx" />
     <EmbeddedResource Include="Properties\Resources.sr.resx" />
     <EmbeddedResource Include="Properties\Resources.sv.resx" />
+    <EmbeddedResource Include="Properties\Resources.vi.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
