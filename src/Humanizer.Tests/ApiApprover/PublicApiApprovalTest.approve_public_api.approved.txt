@@ -205,10 +205,10 @@ public enum LetterCasing
 
 public interface ICollectionFormatter
 {
-    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection);
-    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection, System.Func<, > objectFormatter);
-    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection, string separator);
-    string FormatForDisplay(System.Collections.Generic.IEnumerable<> collection, System.Func<, > objectFormatter, string separator);
+    string Humanize(System.Collections.Generic.IEnumerable<> collection);
+    string Humanize(System.Collections.Generic.IEnumerable<> collection, System.Func<, > objectFormatter);
+    string Humanize(System.Collections.Generic.IEnumerable<> collection, string separator);
+    string Humanize(System.Collections.Generic.IEnumerable<> collection, System.Func<, > objectFormatter, string separator);
 }
 
 public class DefaultFormatter

@@ -11,7 +11,7 @@ namespace Humanizer.Localisation.CollectionFormatters
             DefaultSeparator = "and";
         }
 
-        public override string FormatForDisplay<T>(IEnumerable<T> collection, Func<T, String> objectFormatter, String separator)
+        public override string Humanize<T>(IEnumerable<T> collection, Func<T, String> objectFormatter, String separator)
         {
             if (collection == null)
                 throw new ArgumentException("collection");
