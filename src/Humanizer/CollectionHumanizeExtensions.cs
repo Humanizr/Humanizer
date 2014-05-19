@@ -17,7 +17,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize<T>(this IEnumerable<T> collection)
         {
-            return Configurator.CollectionFormatter.FormatForDisplay(collection);
+            return Configurator.CollectionFormatter.Humanize(collection);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Humanizer
             if (displayFormatter == null)
                 throw new ArgumentNullException("displayFormatter");
 
-            return Configurator.CollectionFormatter.FormatForDisplay(collection, displayFormatter);
+            return Configurator.CollectionFormatter.Humanize(collection, displayFormatter);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Humanizer
         public static string Humanize<T>(this IEnumerable<T> collection, String separator)
         {
 
-            return Configurator.CollectionFormatter.FormatForDisplay(collection, separator);
+            return Configurator.CollectionFormatter.Humanize(collection, separator);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Humanizer
             if (displayFormatter == null)
                 throw new ArgumentNullException("displayFormatter");
 
-            return Configurator.CollectionFormatter.FormatForDisplay(collection, displayFormatter, separator);
+            return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, separator);
         }
     }
 }
