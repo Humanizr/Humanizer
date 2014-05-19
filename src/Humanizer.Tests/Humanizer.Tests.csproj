@@ -62,6 +62,7 @@
     <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
     <Compile Include="DateHumanize.cs" />
+    <Compile Include="CollectionHumanizeTests.cs" />
     <Compile Include="Localisation\bg\DateHumanizeTests.cs" />
     <Compile Include="Localisation\bg\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\cs\DateHumanizeTests.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Localisation\da\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\de\NumberToWordsTests.cs" />
     <Compile Include="Localisation\de\OrdinalizeTests.cs" />
-    <Compile Include="Localisation\en\EnglishCollectionFormatterTests.cs" />
     <Compile Include="Localisation\es\OrdinalizeTests.cs" />
     <Compile Include="Localisation\fr-BE\DateHumanizeTests.cs" />
     <Compile Include="Localisation\fr-BE\TimeSpanHumanizeTests.cs" />
