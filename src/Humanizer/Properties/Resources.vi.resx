@@ -130,10 +130,10 @@
     <value>cách đây {0} phút</value>
   </data>
   <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>cách đây một giờ</value>
+    <value>cách đây một tiếng</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>cách đây {0} giờ</value>
+    <value>cách đây {0} tiếng</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>hôm qua</value>
@@ -196,7 +196,7 @@
     <value>{0} ngày nữa</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} giờ nữa</value>
+    <value>{0} tiếng nữa</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
     <value>{0} phút nữa</value>
