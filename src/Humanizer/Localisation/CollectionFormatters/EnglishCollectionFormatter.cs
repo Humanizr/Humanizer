@@ -28,8 +28,6 @@ namespace Humanizer.Localisation.CollectionFormatters
 
             string formatString = count > 2 ? "{0}, {1} {2}" : "{0} {1} {2}";
 
-            separator = separator.Trim();
-
             return String.Format(formatString,
                                  String.Join(", ", enumerable.Take(count - 1).Select(objectFormatter)),
                                  separator,
