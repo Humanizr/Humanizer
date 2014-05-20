@@ -2,6 +2,7 @@ using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
 using Humanizer.Localisation.Ordinalizers;
+using Humanizer.Localisation.CollectionFormatters;
 
 namespace Humanizer.Configuration
 {
@@ -10,6 +11,16 @@ namespace Humanizer.Configuration
     /// </summary>
     public static class Configurator
     {
+        private static readonly LocaliserRegistry<ICollectionFormatter> _collectionFormatters = new CollectionFormatterRegistry();
+
+        /// <summary>
+        /// A registry of formatters used to format collections based on the current locale
+        /// </summary>
+        public static LocaliserRegistry<ICollectionFormatter> CollectionFormatters
+        {
+            get { return _collectionFormatters; }
+        }
+
         private static readonly LocaliserRegistry<IFormatter> _formatters = new FormatterRegistry();
         /// <summary>
         /// A registry of formatters used to format strings based on the current locale
@@ -35,6 +46,14 @@ namespace Humanizer.Configuration
         public static LocaliserRegistry<IOrdinalizer> Ordinalizers
         {
             get { return _ordinalizers; }
+        }
+
+        internal static ICollectionFormatter CollectionFormatter
+        {
+            get
+            {
+                return CollectionFormatters.ResolveForUiCulture();
+            }
         }
         
         /// <summary>
