@@ -14,7 +14,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Dehumanize Enums](#dehumanize-enums)
    - [Humanize DateTime](#humanize-datetime)
    - [Humanize TimeSpan](#humanize-timespan)
-   - [Humainze Collections](#humanize-collections)
+   - [Humanize Collections](#humanize-collections)
    - [Inflector methods](#inflector-methods)
      - [Pluralize](#pluralize)
      - [Singularize](#singularize)
@@ -311,7 +311,7 @@ TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
 
 ###<a id="humanize-collections">Humanize Collections</a>
 
-You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default, `ToString()` will be called on each item to get it's representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into `Humainze`.
+You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into `Humainze`.
 
 For instance:
 
