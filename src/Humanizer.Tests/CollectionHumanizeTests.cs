@@ -17,25 +17,6 @@ namespace Humanizer.Tests
     {
         public CollectionHumanizeTests() : base("en") { }
 
-        private readonly List<SomeClass> _testCollection = new List<SomeClass>
-            {
-                new SomeClass
-                {
-                    SomeInt = 1,
-                    SomeString = "One"
-                },
-                new SomeClass
-                {
-                    SomeInt = 2,
-                    SomeString = "Two"
-                },
-                new SomeClass
-                {
-                    SomeInt = 3,
-                    SomeString = "Three"
-                }
-            };
-
         [Fact]
         public void HumanizeReturnsOnlyNameWhenCollectionContainsOneItem()
         {
@@ -81,28 +62,31 @@ namespace Humanizer.Tests
             Assert.Equal("A String, Another String, or A Third String", collection.Humanize("or"));
         }
 
+        private readonly List<SomeClass> _testCollection = new List<SomeClass>
+            {
+                new SomeClass { SomeInt = 1, SomeString = "One" },
+                new SomeClass { SomeInt = 2, SomeString = "Two" },
+                new SomeClass { SomeInt = 3, SomeString = "Three" }
+            };
+
         [Fact]
         public void HumanizeDefaultsToToString()
         {
-
             Assert.Equal("ToString, ToString, or ToString", _testCollection.Humanize("or"));
         }
 
         [Fact]
         public void HumanizeUsesObjectFormatter()
         {
-
-            Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three",
-                         _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString)));
+            var humanized = _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString));
+            Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three", humanized);
         }
 
         [Fact]
         public void HumanizeUsesObjectFormatterWhenSeparatorIsProvided()
         {
-
-            Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, or SomeObject #3 - Three",
-                         _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString),
-                                             "or"));
+            var humanized = _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString), "or");
+            Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, or SomeObject #3 - Three", humanized);
         }
     }
 }
