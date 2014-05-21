@@ -14,6 +14,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Dehumanize Enums](#dehumanize-enums)
    - [Humanize DateTime](#humanize-datetime)
    - [Humanize TimeSpan](#humanize-timespan)
+   - [Humanize Collections](#humanize-collections)
    - [Inflector methods](#inflector-methods)
      - [Pluralize](#pluralize)
      - [Singularize](#singularize)
@@ -307,6 +308,43 @@ TimeSpan.FromMilliseconds(1).Humanize() => "1 milisekunda"
 TimeSpan.FromMilliseconds(2).Humanize() => "2 milisekundy"
 TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
 ```
+
+###<a id="humanize-collections">Humanize Collections</a>
+
+You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into `Humanize`.
+
+For instance:
+
+```C#
+class SomeClass
+{
+    public string SomeString;
+    public int SomeInt;
+    public override string ToString()
+    {
+        return "Specific String";
+    }
+}
+
+string FormatSomeClass(SomeClass sc)
+{
+	return string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString);
+}
+
+var collection = new List<SomeClass>
+    {
+        new SomeClass { SomeInt = 1, SomeString = "One" },
+        new SomeClass { SomeInt = 2, SomeString = "Two" },
+        new SomeClass { SomeInt = 3, SomeString = "Three" }
+    };
+
+collection.Humanize()                                    // "Specific String, Specific String, and Specific String"
+collection.Humanize("or")                                //"Specific String, Specific String, or Specific String"
+collection.Humanize(FormatSomeClass)                     //"SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"
+collection.Humanize(sc => sc.SomeInt.Ordinalize(), "or") //"1st, 2nd, or 3rd"
+```
+
+You can provide your own collection formatter by implementing `ICollectionFormatter` and registering it with `Configurator.CollectionFormatters`
 
 ###<a id="inflector-methods">Inflector methods</a>
 There are also a few inflector methods:
