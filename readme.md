@@ -338,9 +338,9 @@ var collection = new List<SomeClass>
         new SomeClass { SomeInt = 3, SomeString = "Three" }
     };
 
-collection.Humanize() // "Specific String, Specific String, and Specific String"
-collection.Humanize("or") //"Specific String, Specific String, or Specific String"
-collection.Humanize(FormatSomeClass) //"SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"
+collection.Humanize()                                    // "Specific String, Specific String, and Specific String"
+collection.Humanize("or")                                //"Specific String, Specific String, or Specific String"
+collection.Humanize(FormatSomeClass)                     //"SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"
 collection.Humanize(sc => sc.SomeInt.Ordinalize(), "or") //"1st, 2nd, or 3rd"
 ```
 
