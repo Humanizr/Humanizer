@@ -62,6 +62,7 @@
     <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
     <Compile Include="DateHumanize.cs" />
+    <Compile Include="CollectionHumanizeTests.cs" />
     <Compile Include="Localisation\bg\DateHumanizeTests.cs" />
     <Compile Include="Localisation\bg\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\cs\DateHumanizeTests.cs" />
