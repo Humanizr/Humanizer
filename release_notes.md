@@ -1,12 +1,16 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
+
+###v1.26.1 - 2014-05-20
   - [#257](https://github.com/Mehdik/Humanizer/pull/257): Added German localisation for ToOrdinalWords and Ordinalize
   - [#261](https://github.com/Mehdik/Humanizer/pull/261): Added future dates to Portuguese - Brazil
   - [#269](https://github.com/MehdiK/Humanizer/pull/269): Added Vietnamese localisation
   - [#268](https://github.com/Mehdik/Humanizer/pull/268): Added humanization of collections
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.25.4...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.25.4...v1.26.1)
 
-###v1.25.1 - 2014-04-27
+###v1.25.4 - 2014-04-27
   - [#236](https://github.com/Mehdik/Humanizer/pull/236): Added Turkish localisation
   - [#239](https://github.com/Mehdik/Humanizer/pull/239): Added Serbian localisation
   - [#241](https://github.com/Mehdik/Humanizer/pull/241): Added German ToWords localisation
