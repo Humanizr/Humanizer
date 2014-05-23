@@ -384,14 +384,7 @@ public class ToQuantityExtensions
     public string ToQuantity(string input, int quantity, string format, System.IFormatProvider formatProvider) { }
 }
 
-public enum TruncateFrom
-{
-    Left,
-    Right,
-    value__,
-}
-
-public class Truncator
+public class TruncateExtensions
 {
     public Humanizer.ITruncator FixedLength { get; }
     public Humanizer.ITruncator FixedNumberOfCharacters { get; }
@@ -400,4 +393,11 @@ public class Truncator
     public string Truncate(string input, int length, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from) { }
     public string Truncate(string input, int length, string truncationString, Humanizer.TruncateFrom from) { }
     public string Truncate(string input, int length, string truncationString, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from) { }
+}
+
+public enum TruncateFrom
+{
+    Left,
+    Right,
+    value__,
 }
