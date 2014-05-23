@@ -1,11 +1,13 @@
-﻿using System;
+﻿ 
+using System;
 
 namespace Humanizer
 {
     /// <summary>
     /// </summary>
-    public class On
+    public partial class On
     {
+		    
         /// <summary>
 		/// Provides fluent date accessors for January
         /// </summary>
@@ -3101,5 +3103,5 @@ namespace Humanizer
 				get { return new DateTime(DateTime.Now.Year, 12, 31); }
 			}
 	    }
-    }
+    	}
 }

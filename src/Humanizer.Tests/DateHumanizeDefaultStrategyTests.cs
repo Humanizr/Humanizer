@@ -35,7 +35,9 @@ namespace Humanizer.Tests
         [InlineData(1, "a minute ago")]
         [InlineData(10, "10 minutes ago")]
         [InlineData(44, "44 minutes ago")]
-        [InlineData(45, "an hour ago")]
+        [InlineData(45, "45 minutes ago")]
+        [InlineData(59, "59 minutes ago")]
+        [InlineData(60, "an hour ago")]
         [InlineData(119, "an hour ago")]
         [InlineData(120, "2 hours ago")]
         public void MinutesAgo(int minutes, string expected)
@@ -47,7 +49,7 @@ namespace Humanizer.Tests
         [InlineData(1, "a minute from now")]
         [InlineData(10, "10 minutes from now")]
         [InlineData(44, "44 minutes from now")]
-        [InlineData(45, "an hour from now")]
+        [InlineData(45, "45 minutes from now")]
         [InlineData(119, "an hour from now")]
         [InlineData(120, "2 hours from now")]
         public void MinutesFromNow(int minutes, string expected)

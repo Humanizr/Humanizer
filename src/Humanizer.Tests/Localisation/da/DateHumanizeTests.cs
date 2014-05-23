@@ -71,7 +71,7 @@ namespace Humanizer.Tests.Localisation.da
         [InlineData(1, "et minut fra nu")]
         [InlineData(10, "10 minutter fra nu")]
         [InlineData(44, "44 minutter fra nu")]
-        [InlineData(45, "en time fra nu")]
+        [InlineData(45, "45 minutter fra nu")]
         [InlineData(119, "en time fra nu")]
         [InlineData(120, "2 timer fra nu")]
         public void MinutesFromNow(int minutes, string expected)
