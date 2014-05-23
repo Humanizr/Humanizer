@@ -3,7 +3,7 @@
     /// <summary>
     /// Default implementation of IFormatter interface.
     /// </summary>
-    public class DefaultFormatter : IFormatter
+    internal class DefaultFormatter : IFormatter
     {
         /// <summary>
         /// Now
