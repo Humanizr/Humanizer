@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Humanizer.Configuration;
 
 namespace Humanizer
 {
@@ -9,7 +10,8 @@ namespace Humanizer
     /// </summary>
     public static class EnumHumanizeExtensions
     {
-        private static readonly Func<PropertyInfo, bool> DescriptionProperty = p => p.Name == "Description" && p.PropertyType == typeof (string);
+        private const string DescriptionPropertyName = "Description";
+        private static readonly Func<PropertyInfo, bool> StringTypedProperty = p => p.PropertyType == typeof(string);
 
         /// <summary>
         /// Turns an enum member into a human readable string; e.g. AnonymousUser -> Anonymous user. It also honors DescriptionAttribute data annotation
@@ -24,7 +26,8 @@ namespace Humanizer
 
             if (memInfo.Length > 0)
             {
-                var customDescription = GetCustomDescription(memInfo[0]);
+                var propertyName = Configurator.EnumDescriptionPropertyNameFor(type) ?? DescriptionPropertyName;
+                var customDescription = GetCustomDescription(memInfo[0], propertyName);
 
                 if (customDescription != null)
                     return customDescription;
@@ -34,14 +37,17 @@ namespace Humanizer
         }
 
         // I had to add this method because PCL doesn't have DescriptionAttribute & I didn't want two versions of the code & thus the reflection
-        private static string GetCustomDescription(MemberInfo memberInfo)
+        private static string GetCustomDescription(MemberInfo memberInfo, string propertyName)
         {
             var attrs = memberInfo.GetCustomAttributes(true);
 
             foreach (var attr in attrs)
             {
                 var attrType = attr.GetType();
-                var descriptionProperty = attrType.GetProperties().FirstOrDefault(DescriptionProperty);
+                var descriptionProperty =
+                    attrType.GetProperties()
+                        .Where(StringTypedProperty)
+                        .FirstOrDefault(p => p.Name == propertyName);
                 if (descriptionProperty != null)
                     return descriptionProperty.GetValue(attr, null).ToString();
             }
