@@ -4,6 +4,8 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
+        Justification = "This is a test only class, and doesn't need a 'proper' IDisposable implementation.")]
     public class EnumHumanizeWithCustomDescriptionPropertyNamesTests : IDisposable
     {
         public EnumHumanizeWithCustomDescriptionPropertyNamesTests()
