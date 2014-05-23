@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
@@ -101,19 +102,15 @@ namespace Humanizer.Configuration
             set { _dateTimeHumanizeStrategy = value; }
         }
 
-        private const string DefaultEnumDescriptionPropertyName = "Description";
-        private static readonly Dictionary<Type, string> _enumDescriptionPropertyNames = new Dictionary<Type, string>();
-        internal static string EnumDescriptionPropertyNameFor(Type type)
-        {
-            string result = _enumDescriptionPropertyNames.TryGetValue(type, out result) ? result : null;
-            return result ?? DefaultEnumDescriptionPropertyName;
-        }
+        private static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
+        private static Func<PropertyInfo, bool> _enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
         /// <summary>
-        /// The registry of custom attribute property names for Enum.Humanize
+        /// A predicate function for description property of attribute to use for Enum.Humanize
         /// </summary>
-        public static IDictionary<Type, string> EnumDescriptionPropertyNames
+        public static Func<PropertyInfo, bool> EnumDescriptionPropertyLocator
         {
-            get { return _enumDescriptionPropertyNames; }
+            get { return _enumDescriptionPropertyLocator; }
+            set { _enumDescriptionPropertyLocator = value ?? DefaultEnumDescriptionPropertyLocator; }
         }
     }
 }

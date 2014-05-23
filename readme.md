@@ -188,7 +188,7 @@ This is to help with platforms with missing `DescriptionAttribute` and also for 
 
 You can even configure the name of the property of attibute to use as description.
 
-`Configurator.EnumDescriptionPropertyNames[typeof(EnumUnderTest)] = "Info"`
+`Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info"`
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
