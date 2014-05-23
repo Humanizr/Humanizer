@@ -1,4 +1,5 @@
 ###In Development
+- [#270](https://github.com/Mehdik/Humanizer/pull/270): DefaultFormatter is now internal
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
 
