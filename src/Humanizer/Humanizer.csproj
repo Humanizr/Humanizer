@@ -149,7 +149,7 @@
     <Compile Include="Truncation\FixedNumberOfCharactersTruncator.cs" />
     <Compile Include="Truncation\FixedNumberOfWordsTruncator.cs" />
     <Compile Include="Truncation\ITruncator.cs" />
-    <Compile Include="Truncation\Truncator.cs" />
+    <Compile Include="TruncateExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FluentDate\In.SomeTimeFrom.tt">

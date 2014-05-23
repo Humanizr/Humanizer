@@ -5,7 +5,7 @@ namespace Humanizer
     /// <summary>
     /// Allow strings to be truncated
     /// </summary>
-    public static class Truncator
+    public static class TruncateExtensions
     {
         /// <summary>
         /// Truncate the string
