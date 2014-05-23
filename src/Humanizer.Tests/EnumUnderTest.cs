@@ -13,6 +13,8 @@ namespace Humanizer.Tests
         MemberWithCustomDescriptionAttribute,
         [ImposterDescription(42)]
         MemberWithImposterDescriptionAttribute,
+        [CustomProperty(EnumTestsResources.MemberWithCustomPropertyAttribute)]
+        MemberWithCustomPropertyAttribute,
         MemberWithoutDescriptionAttribute,
         ALLCAPITALS
     }
@@ -23,6 +25,7 @@ namespace Humanizer.Tests
         public const string MemberWithDescriptionAttributeSubclass = "Description in Description subclass";
         public const string MemberWithCustomDescriptionAttribute = "Description in custom Description attribute";
         public const string MemberWithImposterDescriptionAttribute = "Member with imposter description attribute";
+        public const string MemberWithCustomPropertyAttribute = "Description in custom property attribute";
         public const string MemberWithoutDescriptionAttributeSentence = "Member without description attribute";
         public const string MemberWithoutDescriptionAttributeTitle = "Member Without Description Attribute";
         public const string MemberWithoutDescriptionAttributeLowerCase = "member without description attribute";
@@ -57,6 +60,16 @@ namespace Humanizer.Tests
         public override string Description
         {
             get { return "Overridden " + base.Description; }
+        }
+    }
+
+    public class CustomPropertyAttribute : Attribute
+    {
+        public string Info { get; set; }
+
+        public CustomPropertyAttribute(string info)
+        {
+            Info = info;
         }
     }
 }
