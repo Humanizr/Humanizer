@@ -211,15 +211,6 @@ public interface ICollectionFormatter
     string Humanize(System.Collections.Generic.IEnumerable<> collection, System.Func<, > objectFormatter, string separator);
 }
 
-public class DefaultFormatter
-{
-    public DefaultFormatter() { }
-    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
-    public string DateHumanize_Now() { }
-    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
-    public string TimeSpanHumanize_Zero() { }
-}
-
 public interface IFormatter
 {
     string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
