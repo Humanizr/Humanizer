@@ -163,10 +163,10 @@ Calling `ToString` directly on enum members usually results in less than ideal o
 ```C#
 public enum EnumUnderTest
 {
-[Description("Custom description")]
-MemberWithDescriptionAttribute,
-MemberWithoutDescriptionAttribute,
-ALLCAPITALS
+    [Description("Custom description")]
+    MemberWithDescriptionAttribute,
+    MemberWithoutDescriptionAttribute,
+    ALLCAPITALS
 }
 ```
 
