@@ -60,7 +60,8 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [InlineData(1, "ett minutt fra nå")]
-        [InlineData(10, "10 minutter fra nå")]
+        [InlineData(59, "59 minutter fra nå")]
+        [InlineData(60, "en time fra nå")]
         public void MinutesFromNow(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);

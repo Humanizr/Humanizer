@@ -58,6 +58,8 @@ namespace Humanizer.Tests.Localisation.da
         [Theory]
         [InlineData(1, "et minut fra nu")]
         [InlineData(10, "10 minutter fra nu")]
+        [InlineData(59, "59 minutter fra nu")]
+        [InlineData(60, "en time fra nu")]
         public void MinutesFromNow(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
