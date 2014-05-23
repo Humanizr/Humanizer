@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
@@ -97,6 +99,20 @@ namespace Humanizer.Configuration
         {
             get { return _dateTimeHumanizeStrategy; }
             set { _dateTimeHumanizeStrategy = value; }
+        }
+
+        private static readonly Dictionary<Type, string> _enumDescriptionPropertyNames = new Dictionary<Type, string>();
+        internal static string EnumDescriptionPropertyNameFor(Type type)
+        {
+            string result;
+            return _enumDescriptionPropertyNames.TryGetValue(type, out result) ? result : null;
+        }
+        /// <summary>
+        /// The registry of custom attribute property names for Enum.Humanize
+        /// </summary>
+        public static IDictionary<Type, string> EnumDescriptionPropertyNames
+        {
+            get { return _enumDescriptionPropertyNames; }
         }
     }
 }
