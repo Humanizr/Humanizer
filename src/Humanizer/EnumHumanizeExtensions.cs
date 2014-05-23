@@ -19,7 +19,8 @@ namespace Humanizer
         public static string Humanize(this Enum input)
         {
             Type type = input.GetType();
-            var memInfo = type.GetMember(input.ToString());
+            var caseName = input.ToString();
+            var memInfo = type.GetMember(caseName);
 
             if (memInfo.Length > 0)
             {
@@ -29,7 +30,7 @@ namespace Humanizer
                     return customDescription;
             }
 
-            return input.ToString().Humanize();
+            return caseName.Humanize();
         }
 
         // I had to add this method because PCL doesn't have DescriptionAttribute & I didn't want two versions of the code & thus the reflection
