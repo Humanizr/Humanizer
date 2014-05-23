@@ -11,6 +11,8 @@ namespace Humanizer.Tests
             Configurator.EnumDescriptionPropertyNames[typeof (EnumUnderTest)] = "Info";
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
+            Justification = "This is a test only class, and doesn't need a 'proper' IDisposable implementation.")]
         public void Dispose()
         {
             Configurator.EnumDescriptionPropertyNames.Remove(typeof (EnumUnderTest));
