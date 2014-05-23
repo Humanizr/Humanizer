@@ -33,6 +33,9 @@ namespace Humanizer.DateTimeHumanizeStrategy
             if (ts.TotalMinutes < 45)
                 return Configurator.Formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes);
 
+            if (ts.TotalMinutes < 60)
+                return Configurator.Formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes);
+
             if (ts.TotalMinutes < 90)
                 return Configurator.Formatter.DateHumanize(TimeUnit.Hour, tense, 1);
 
