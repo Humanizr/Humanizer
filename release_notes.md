@@ -1,5 +1,6 @@
 ###In Development
-  - [#257](https://github.com/MehdiK/Humanizer/pull/277): Added support for custom enum description attribute property names
+  - [#277](https://github.com/MehdiK/Humanizer/pull/277): Added support for custom enum description attribute property names
+  - [#276](https://github.com/Mehdik/Humanizer/pull/276): Added Farsi ToOrdinalWords
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
 
