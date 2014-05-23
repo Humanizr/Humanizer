@@ -163,10 +163,10 @@ Calling `ToString` directly on enum members usually results in less than ideal o
 ```C#
 public enum EnumUnderTest
 {
-    [Description("Custom description")]
-    MemberWithDescriptionAttribute,
-    MemberWithoutDescriptionAttribute,
-    ALLCAPITALS
+[Description("Custom description")]
+MemberWithDescriptionAttribute,
+MemberWithoutDescriptionAttribute,
+ALLCAPITALS
 }
 ```
 
@@ -185,6 +185,10 @@ EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCas
 
 You are not limited to `DescriptionAttribute` for custom description. Any attribute applied on enum members with a `string Description` property counts.
 This is to help with platforms with missing `DescriptionAttribute` and also for allowing subclasses of the `DescriptionAttribute`.
+
+You can even configure the name of the property of attibute to use as description.
+
+`Configurator.EnumDescriptionPropertyNames[typeof(EnumUnderTest)] = "Info"`
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
