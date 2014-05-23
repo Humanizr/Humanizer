@@ -10,14 +10,14 @@ namespace Humanizer.Tests
     {
         public EnumHumanizeWithCustomDescriptionPropertyNamesTests()
         {
-            Configurator.EnumDescriptionPropertyNames[typeof (EnumUnderTest)] = "Info";
+            Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info";
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
             Justification = "This is a test only class, and doesn't need a 'proper' IDisposable implementation.")]
         public void Dispose()
         {
-            Configurator.EnumDescriptionPropertyNames.Remove(typeof (EnumUnderTest));
+            Configurator.EnumDescriptionPropertyLocator = null;
         }
 
         [Fact]

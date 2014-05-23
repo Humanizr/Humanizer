@@ -75,7 +75,7 @@ public class Configurator
 {
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
     public Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
-    public System.Collections.Generic.IDictionary<System.Type, string> EnumDescriptionPropertyNames { get; }
+    public System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }

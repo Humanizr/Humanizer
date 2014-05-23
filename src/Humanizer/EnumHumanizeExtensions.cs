@@ -25,8 +25,7 @@ namespace Humanizer
 
             if (memInfo.Length > 0)
             {
-                var propertyName = Configurator.EnumDescriptionPropertyNameFor(type);
-                var customDescription = GetCustomDescription(memInfo[0], propertyName);
+                var customDescription = GetCustomDescription(memInfo[0]);
 
                 if (customDescription != null)
                     return customDescription;
@@ -36,7 +35,7 @@ namespace Humanizer
         }
 
         // I had to add this method because PCL doesn't have DescriptionAttribute & I didn't want two versions of the code & thus the reflection
-        private static string GetCustomDescription(MemberInfo memberInfo, string propertyName)
+        private static string GetCustomDescription(MemberInfo memberInfo)
         {
             var attrs = memberInfo.GetCustomAttributes(true);
 
@@ -46,7 +45,7 @@ namespace Humanizer
                 var descriptionProperty =
                     attrType.GetProperties()
                         .Where(StringTypedProperty)
-                        .FirstOrDefault(p => p.Name == propertyName);
+                        .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
                     return descriptionProperty.GetValue(attr, null).ToString();
             }
