@@ -46,5 +46,25 @@ namespace Humanizer.Localisation.NumberToWords
 
             return string.Join(" و ", parts);
         }
+
+        public override string ConvertToOrdinal(int number)
+        {
+            if (number == 1)
+                return "اول";
+
+            if (number == 3)
+                return "سوم";
+
+            if (number % 10 == 3 && number != 13)
+                return Convert((number / 10) * 10) + " و سوم";
+
+            var word = Convert(number);
+            return string.Format("{0}{1}", word, word.EndsWith("ی") ? " ام" : "م");
+        }
+
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+        {
+            return ConvertToOrdinal(number);
+        }
     }
 }

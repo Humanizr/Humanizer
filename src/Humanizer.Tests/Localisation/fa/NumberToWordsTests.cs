@@ -39,5 +39,42 @@ namespace Humanizer.Tests.Localisation.fa
         {
             Assert.Equal(expected, number.ToWords());
         }
+
+        [Theory]
+        [InlineData(0, "صفرم")]
+        [InlineData(1, "اول")]
+        [InlineData(2, "دوم")]
+        [InlineData(3, "سوم")]
+        [InlineData(4,"چهارم")]
+        [InlineData(5, "پنجم")]
+        [InlineData(6, "ششم")]
+        [InlineData(7, "هفتم")]
+        [InlineData(8, "هشتم")]
+        [InlineData(9, "نهم")]
+        [InlineData(10, "دهم")]
+        [InlineData(11, "یازدهم")]
+        [InlineData(12, "دوازدهم")]
+        [InlineData(13, "سیزدهم")]
+        [InlineData(21, "بیست و یکم")]
+        [InlineData(22, "بیست و دوم")]
+        [InlineData(23, "بیست و سوم")]
+        [InlineData(24, "بیست و چهارم")]
+        [InlineData(25, "بیست و پنجم")]
+        [InlineData(30, "سی ام")]
+        [InlineData(40, "چهلم")]
+        [InlineData(50, "پنجاهم")]
+        [InlineData(60, "شصتم")]
+        [InlineData(70, "هفتادم")]
+        [InlineData(80, "هشتادم")]
+        [InlineData(90, "نودم")]
+        [InlineData(100, "صدم")]
+        [InlineData(200, "دویستم")]
+        [InlineData(1000, "یک هزارم")]
+        [InlineData(1333, "یک هزار و سیصد و سی و سوم")]
+        [InlineData(1000000, "یک میلیونم")]
+        public void ToOrdinalWords(int number, string words)
+        {
+            Assert.Equal(words, number.ToOrdinalWords());
+        }
     }
 }
