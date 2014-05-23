@@ -101,11 +101,12 @@ namespace Humanizer.Configuration
             set { _dateTimeHumanizeStrategy = value; }
         }
 
+        private const string DefaultEnumDescriptionPropertyName = "Description";
         private static readonly Dictionary<Type, string> _enumDescriptionPropertyNames = new Dictionary<Type, string>();
         internal static string EnumDescriptionPropertyNameFor(Type type)
         {
-            string result;
-            return _enumDescriptionPropertyNames.TryGetValue(type, out result) ? result : null;
+            string result = _enumDescriptionPropertyNames.TryGetValue(type, out result) ? result : null;
+            return result ?? DefaultEnumDescriptionPropertyName;
         }
         /// <summary>
         /// The registry of custom attribute property names for Enum.Humanize

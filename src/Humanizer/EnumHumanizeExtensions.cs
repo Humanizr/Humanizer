@@ -10,7 +10,6 @@ namespace Humanizer
     /// </summary>
     public static class EnumHumanizeExtensions
     {
-        private const string DescriptionPropertyName = "Description";
         private static readonly Func<PropertyInfo, bool> StringTypedProperty = p => p.PropertyType == typeof(string);
 
         /// <summary>
@@ -26,7 +25,7 @@ namespace Humanizer
 
             if (memInfo.Length > 0)
             {
-                var propertyName = Configurator.EnumDescriptionPropertyNameFor(type) ?? DescriptionPropertyName;
+                var propertyName = Configurator.EnumDescriptionPropertyNameFor(type);
                 var customDescription = GetCustomDescription(memInfo[0], propertyName);
 
                 if (customDescription != null)
