@@ -1,5 +1,6 @@
 ###In Development
   - [#257](https://github.com/MehdiK/Humanizer/pull/277): Added support for custom enum description attribute property names
+  - [#280](https://github.com/MehdiK/Humanizer/pull/280): Removed redundant localised tests
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
 
