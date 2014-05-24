@@ -386,9 +386,6 @@ public class ToQuantityExtensions
 
 public class TruncateExtensions
 {
-    public Humanizer.ITruncator FixedLength { get; }
-    public Humanizer.ITruncator FixedNumberOfCharacters { get; }
-    public Humanizer.ITruncator FixedNumberOfWords { get; }
     public string Truncate(string input, int length) { }
     public string Truncate(string input, int length, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from) { }
     public string Truncate(string input, int length, string truncationString, Humanizer.TruncateFrom from) { }
@@ -400,4 +397,12 @@ public enum TruncateFrom
     Left,
     Right,
     value__,
+}
+
+public class Truncator
+{
+    public Truncator() { }
+    public Humanizer.ITruncator FixedLength { get; }
+    public Humanizer.ITruncator FixedNumberOfCharacters { get; }
+    public Humanizer.ITruncator FixedNumberOfWords { get; }
 }
