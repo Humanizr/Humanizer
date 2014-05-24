@@ -9,8 +9,6 @@ namespace Humanizer.Tests.Localisation.nl
         public DateHumanizeTests() : base("nl-NL") { }
 
         [Theory]
-        [InlineData(-10, "10 dagen geleden")]
-        [InlineData(-3, "3 dagen geleden")]
         [InlineData(-2, "2 dagen geleden")]
         [InlineData(-1, "gisteren")]
         public void DaysAgo(int days, string expected)
@@ -19,8 +17,6 @@ namespace Humanizer.Tests.Localisation.nl
         }
 
         [Theory]
-        [InlineData(-10, "10 uur geleden")]
-        [InlineData(-3, "3 uur geleden")]
         [InlineData(-2, "2 uur geleden")]
         [InlineData(-1, "één uur geleden")]
         public void HoursAgo(int hours, string expected)
@@ -29,8 +25,6 @@ namespace Humanizer.Tests.Localisation.nl
         }
 
         [Theory]
-        [InlineData(-10, "10 minuten geleden")]
-        [InlineData(-3, "3 minuten geleden")]
         [InlineData(-2, "2 minuten geleden")]
         [InlineData(-1, "één minuut geleden")]
         public void MinutesAgo(int minutes, string expected)
@@ -39,8 +33,6 @@ namespace Humanizer.Tests.Localisation.nl
         }
 
         [Theory]
-        [InlineData(-10, "10 maanden geleden")]
-        [InlineData(-3, "3 maanden geleden")]
         [InlineData(-2, "2 maanden geleden")]
         [InlineData(-1, "één maand geleden")]
         public void MonthsAgo(int months, string expected)
@@ -49,8 +41,6 @@ namespace Humanizer.Tests.Localisation.nl
         }
 
         [Theory]
-        [InlineData(-10, "10 seconden geleden")]
-        [InlineData(-3, "3 seconden geleden")]
         [InlineData(-2, "2 seconden geleden")]
         [InlineData(-1, "één seconde geleden")]
         public void SecondsAgo(int seconds, string expected)
@@ -59,8 +49,6 @@ namespace Humanizer.Tests.Localisation.nl
         }
 
         [Theory]
-        [InlineData(-10, "10 jaar geleden")]
-        [InlineData(-3, "3 jaar geleden")]
         [InlineData(-2, "2 jaar geleden")]
         [InlineData(-1, "één jaar geleden")]
         public void YearsAgo(int years, string expected)
