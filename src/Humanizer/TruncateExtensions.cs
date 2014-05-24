@@ -15,7 +15,7 @@ namespace Humanizer
         /// <returns>The truncated string</returns>
         public static string Truncate(this string input, int length)
         {
-            return input.Truncate(length, "…", FixedLength);
+            return input.Truncate(length, "…", Truncator.FixedLength);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Humanizer
         /// <returns>The truncated string</returns>
         public static string Truncate(this string input, int length, string truncationString, TruncateFrom from = TruncateFrom.Right)
         {
-            return input.Truncate(length, truncationString, FixedLength, from);
+            return input.Truncate(length, truncationString, Truncator.FixedLength, from);
         }
 
         /// <summary>
@@ -62,39 +62,6 @@ namespace Humanizer
                 return null;
 
             return truncator.Truncate(input, length, truncationString, from);
-        }
-
-        /// <summary>
-        /// Fixed length truncator
-        /// </summary>
-        public static ITruncator FixedLength
-        {
-            get
-            {
-                return new FixedLengthTruncator();
-            } 
-        }
-
-        /// <summary>
-        /// Fixed number of characters truncator
-        /// </summary>
-        public static ITruncator FixedNumberOfCharacters
-        {
-            get
-            {
-                return new FixedNumberOfCharactersTruncator();
-            }
-        }
-
-        /// <summary>
-        /// Fixed number of words truncator
-        /// </summary>
-        public static ITruncator FixedNumberOfWords
-        {
-            get
-            {
-                return new FixedNumberOfWordsTruncator();
-            }
         }
     }
 
