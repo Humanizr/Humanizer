@@ -3,7 +3,7 @@
     /// <summary>
     /// Gets a ITruncator
     /// </summary>
-    public static class Truncator
+    public class Truncator
     {
         /// <summary>
         /// Fixed length truncator
