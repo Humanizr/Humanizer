@@ -401,7 +401,6 @@ public enum TruncateFrom
 
 public class Truncator
 {
-    public Truncator() { }
     public Humanizer.ITruncator FixedLength { get; }
     public Humanizer.ITruncator FixedNumberOfCharacters { get; }
     public Humanizer.ITruncator FixedNumberOfWords { get; }
