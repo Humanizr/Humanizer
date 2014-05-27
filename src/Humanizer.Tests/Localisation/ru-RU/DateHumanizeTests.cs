@@ -71,6 +71,7 @@ namespace Humanizer.Tests.Localisation.ruRU
         [InlineData(24, "24 минуты назад")]
         [InlineData(25, "25 минут назад")]
         [InlineData(40, "40 минут назад")]
+        [InlineData(60, "час назад")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

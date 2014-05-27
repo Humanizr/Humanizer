@@ -27,6 +27,7 @@ namespace Humanizer.Tests.Localisation.ja
         [Theory]
         [InlineData(1, "1 分前")]
         [InlineData(2, "2 分前")]
+        [InlineData(60, "1 時間前")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

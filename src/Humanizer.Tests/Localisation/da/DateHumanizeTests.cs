@@ -50,6 +50,7 @@ namespace Humanizer.Tests.Localisation.da
         [Theory]
         [InlineData(-2, "2 minutter siden")]
         [InlineData(-1, "et minut siden")]
+        [InlineData(60, "en time siden")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
@@ -58,6 +59,8 @@ namespace Humanizer.Tests.Localisation.da
         [Theory]
         [InlineData(1, "et minut fra nu")]
         [InlineData(10, "10 minutter fra nu")]
+        [InlineData(59, "59 minutter fra nu")]
+        [InlineData(60, "en time fra nu")]
         public void MinutesFromNow(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);

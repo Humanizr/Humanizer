@@ -108,6 +108,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "před 5 minutami")]
         [InlineData(6, "před 6 minutami")]
         [InlineData(10, "před 10 minutami")]
+        [InlineData(60, "před hodinou")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
