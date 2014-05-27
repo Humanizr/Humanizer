@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
@@ -97,6 +100,17 @@ namespace Humanizer.Configuration
         {
             get { return _dateTimeHumanizeStrategy; }
             set { _dateTimeHumanizeStrategy = value; }
+        }
+
+        private static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
+        private static Func<PropertyInfo, bool> _enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
+        /// <summary>
+        /// A predicate function for description property of attribute to use for Enum.Humanize
+        /// </summary>
+        public static Func<PropertyInfo, bool> EnumDescriptionPropertyLocator
+        {
+            get { return _enumDescriptionPropertyLocator; }
+            set { _enumDescriptionPropertyLocator = value ?? DefaultEnumDescriptionPropertyLocator; }
         }
     }
 }

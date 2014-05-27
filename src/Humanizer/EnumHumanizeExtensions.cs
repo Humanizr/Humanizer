@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Humanizer.Configuration;
 
 namespace Humanizer
 {
@@ -9,7 +10,7 @@ namespace Humanizer
     /// </summary>
     public static class EnumHumanizeExtensions
     {
-        private static readonly Func<PropertyInfo, bool> DescriptionProperty = p => p.Name == "Description" && p.PropertyType == typeof (string);
+        private static readonly Func<PropertyInfo, bool> StringTypedProperty = p => p.PropertyType == typeof(string);
 
         /// <summary>
         /// Turns an enum member into a human readable string; e.g. AnonymousUser -> Anonymous user. It also honors DescriptionAttribute data annotation
@@ -19,7 +20,8 @@ namespace Humanizer
         public static string Humanize(this Enum input)
         {
             Type type = input.GetType();
-            var memInfo = type.GetMember(input.ToString());
+            var caseName = input.ToString();
+            var memInfo = type.GetMember(caseName);
 
             if (memInfo.Length > 0)
             {
@@ -29,7 +31,7 @@ namespace Humanizer
                     return customDescription;
             }
 
-            return input.ToString().Humanize();
+            return caseName.Humanize();
         }
 
         // I had to add this method because PCL doesn't have DescriptionAttribute & I didn't want two versions of the code & thus the reflection
@@ -40,7 +42,10 @@ namespace Humanizer
             foreach (var attr in attrs)
             {
                 var attrType = attr.GetType();
-                var descriptionProperty = attrType.GetProperties().FirstOrDefault(DescriptionProperty);
+                var descriptionProperty =
+                    attrType.GetProperties()
+                        .Where(StringTypedProperty)
+                        .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
                     return descriptionProperty.GetValue(attr, null).ToString();
             }

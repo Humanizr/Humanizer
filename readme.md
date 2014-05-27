@@ -186,6 +186,10 @@ EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCas
 You are not limited to `DescriptionAttribute` for custom description. Any attribute applied on enum members with a `string Description` property counts.
 This is to help with platforms with missing `DescriptionAttribute` and also for allowing subclasses of the `DescriptionAttribute`.
 
+You can even configure the name of the property of attibute to use as description.
+
+`Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info"`
+
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
 ###<a id="dehumanize-enums">Dehumanize Enums</a>
