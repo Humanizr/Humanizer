@@ -108,6 +108,7 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "pred 5 minútami")]
         [InlineData(6, "pred 6 minútami")]
         [InlineData(10, "pred 10 minútami")]
+        [InlineData(60, "pred hodinou")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

@@ -32,6 +32,7 @@ namespace Humanizer.Tests.Localisation.he
         [InlineData(1, "לפני דקה")]
         [InlineData(3, "לפני 3 דקות")]
         [InlineData(11, "לפני 11 דקות")]
+        [InlineData(60, "לפני שעה")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
