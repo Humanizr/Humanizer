@@ -3,6 +3,7 @@
   - [#276](https://github.com/Mehdik/Humanizer/pull/276): Added Farsi ToOrdinalWords
   - [#281](https://github.com/Mehdik/Humanizer/pull/281): Changed the logic for handling hyphenation and large numbers ending in twelve for English ordinal words; e.g. before "twenty first" now "twenty-first"
   - [#278](https://github.com/MehdiK/Humanizer/pull/278): Changed DefaultDateTimeHumanizeStrategy to turn 60 min to one hour not 45
+  - [#283](https://github.com/MehdiK/Humanizer/pull/283): Added Neutral nb support for DateTime and TimeSpan Humanize
   
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
 
