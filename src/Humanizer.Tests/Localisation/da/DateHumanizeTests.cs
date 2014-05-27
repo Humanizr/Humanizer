@@ -62,6 +62,7 @@ namespace Humanizer.Tests.Localisation.da
         [InlineData(-3, "3 minutter siden")]
         [InlineData(-2, "2 minutter siden")]
         [InlineData(-1, "et minut siden")]
+        [InlineData(60, "en time siden")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

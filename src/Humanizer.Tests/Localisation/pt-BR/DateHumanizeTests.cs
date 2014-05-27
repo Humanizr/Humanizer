@@ -27,6 +27,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [Theory]
         [InlineData(-2, "2 minutos atrás")]
         [InlineData(-1, "um minuto atrás")]
+        [InlineData(60, "uma hora atrás")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

@@ -33,6 +33,12 @@ namespace Humanizer.Tests.Localisation.roRo
         }
 
         [Fact]
+        public void RomanianTranslationIsCorrectFor60MinutesAgo()
+        {
+            DateHumanize.Verify("acum o oră", 60, TimeUnit.Minute, Tense.Past);
+        }
+
+        [Fact]
         public void RomanianTranslationIsCorrectFor44MinutesAgo()
         {
             DateHumanize.Verify("acum 44 de minute", 44, TimeUnit.Minute, Tense.Past);

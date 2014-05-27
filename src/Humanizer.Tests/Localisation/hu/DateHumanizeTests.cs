@@ -28,6 +28,7 @@ namespace Humanizer.Tests.Localisation.hu
         [Theory]
         [InlineData(1, "egy perce")]
         [InlineData(10, "10 perce")]
+        [InlineData(60, "egy órája")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

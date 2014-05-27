@@ -53,6 +53,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(-1, "منذ دقيقة واحدة")]
         [InlineData(-3, "منذ 3 دقائق")]
         [InlineData(-11, "منذ 11 دقيقة")]
+        [InlineData(60, "منذ ساعة واحدة")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

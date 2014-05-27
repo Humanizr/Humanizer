@@ -69,6 +69,7 @@ namespace Humanizer.Tests.Localisation.sv
         [Theory]
         [InlineData(1, "en minut sedan")]
         [InlineData(2, "för 2 minuter sedan")]
+        [InlineData(60, "en timme sedan")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

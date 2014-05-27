@@ -1,4 +1,5 @@
 ﻿using System;
+using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
 
@@ -33,9 +34,10 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData(-3, "3 minuten geleden")]
         [InlineData(-2, "2 minuten geleden")]
         [InlineData(-1, "één minuut geleden")]
+        [InlineData(60, "één uur geleden")]
         public void MinutesAgo(int minutes, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMinutes(minutes).Humanize());
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
         [Theory]

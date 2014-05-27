@@ -35,6 +35,7 @@ namespace Humanizer.Tests.Localisation.fiFI
         [InlineData(3, "3 minuuttia sitten")]
         [InlineData(2, "2 minuuttia sitten")]
         [InlineData(1, "minuutti sitten")]
+        [InlineData(60, "tunti sitten")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
