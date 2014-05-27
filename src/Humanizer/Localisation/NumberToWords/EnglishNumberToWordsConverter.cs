@@ -22,8 +22,18 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(int number)
         {
+            return Convert(number, false);
+        }
+
+        public override string ConvertToOrdinal(int number)
+        {
+            return Convert(number, true);
+        }
+
+        private string Convert(int number, bool isOrdinal)
+        {
             if (number == 0)
-                return "zero";
+                return GetUnitValue(0, isOrdinal);
 
             if (number < 0)
                 return string.Format("minus {0}", Convert(-number));
@@ -60,61 +70,50 @@ namespace Humanizer.Localisation.NumberToWords
                     parts.Add("and");
 
                 if (number < 20)
-                    parts.Add(UnitsMap[number]);
+                    parts.Add(GetUnitValue(number, isOrdinal));
                 else
                 {
                     var lastPart = TensMap[number / 10];
                     if ((number % 10) > 0)
-                        lastPart += string.Format("-{0}", UnitsMap[number % 10]);
+                        lastPart += string.Format("-{0}", GetUnitValue(number % 10, isOrdinal));
+                    else if (isOrdinal)
+                        lastPart = lastPart.TrimEnd('y') + "ieth";
 
                     parts.Add(lastPart);
                 }
             }
+            else if (isOrdinal)
+                parts[parts.Count - 1] += "th";
 
-            return string.Join(" ", parts.ToArray());
+            string toWords = string.Join(" ", parts.ToArray());
+
+            if (isOrdinal)
+                toWords = RemoveOnePrefix(toWords);
+
+            return toWords;
         }
 
-        public override string ConvertToOrdinal(int number)
+        private static string GetUnitValue(int number, bool isOrdinal)
         {
-            string towords;
-            // 9 => ninth
-            if (ExceptionNumbersToWords(number, out towords))
-                return towords;
-
-            // 21 => twenty first
-            if (number > 20)
+            if (isOrdinal)
             {
-                string exceptionPart;
-                if (ExceptionNumbersToWords(number%10, out exceptionPart))
-                {
-                    var normalPart = number - number%10;
-                    towords = RemoveOnePrefix(Convert(normalPart));
-                    return towords + " " + exceptionPart;
-                }
+                string exceptionString;
+                if (ExceptionNumbersToWords(number, out exceptionString))
+                    return exceptionString;
+                else
+                    return UnitsMap[number] + "th";
             }
-
-            return NormalNumberToWords(number);
+            else
+                return UnitsMap[number];
         }
 
-        private string NormalNumberToWords(int number)
-        {
-            string towords = Convert(number).Replace('-', ' ');
-
-            towords = RemoveOnePrefix(towords);
-            // twenty => twentieth
-            if (towords.EndsWith("y"))
-                towords = towords.TrimEnd('y') + "ie";
-
-            return towords + "th";
-        }
-
-        private static string RemoveOnePrefix(string towords)
+        private static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
-            if (towords.IndexOf("one", StringComparison.Ordinal) == 0)
-                towords = towords.Remove(0, 4);
+            if (toWords.IndexOf("one", StringComparison.Ordinal) == 0)
+                toWords = toWords.Remove(0, 4);
 
-            return towords;
+            return toWords;
         }
 
         private static bool ExceptionNumbersToWords(int number, out string words)
