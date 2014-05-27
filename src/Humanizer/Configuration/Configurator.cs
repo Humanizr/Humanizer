@@ -6,6 +6,7 @@ using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
 using Humanizer.Localisation.Ordinalizers;
 using Humanizer.Localisation.CollectionFormatters;
+using Humanizer.Localisation.Quantifiers;
 
 namespace Humanizer.Configuration
 {
@@ -51,6 +52,16 @@ namespace Humanizer.Configuration
             get { return _ordinalizers; }
         }
 
+        private static readonly LocaliserRegistry<IQuantifier> _quantifiers = new QuantifierRegistry();
+
+        /// <summary>
+        /// A registry of quantifiers used to localise ToQuantity method
+        /// </summary>
+        public static LocaliserRegistry<IQuantifier> Quantifiers
+        {
+            get { return _quantifiers; }
+        }
+
         internal static ICollectionFormatter CollectionFormatter
         {
             get
@@ -58,7 +69,7 @@ namespace Humanizer.Configuration
                 return CollectionFormatters.ResolveForUiCulture();
             }
         }
-        
+
         /// <summary>
         /// The formatter to be used
         /// </summary>
@@ -89,6 +100,17 @@ namespace Humanizer.Configuration
             get
             {
                 return Ordinalizers.ResolveForUiCulture();
+            }
+        }
+
+        /// <summary>
+        /// The quantifier to be used
+        /// </summary>
+        internal static IQuantifier Quantifier
+        {
+            get
+            {
+                return Quantifiers.ResolveForUiCulture();
             }
         }
 

@@ -79,6 +79,7 @@ public class Configurator
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }
+    public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Quantifiers.IQuantifier> Quantifiers { get; }
 }
 
 public class LocaliserRegistry`1
@@ -241,6 +242,11 @@ public interface IOrdinalizer
 {
     string Convert(int number, string numberString);
     string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
+}
+
+public interface IQuantifier
+{
+    string ToQuantity(string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs, string format, System.IFormatProvider formatProvider);
 }
 
 public class ResourceKeys
