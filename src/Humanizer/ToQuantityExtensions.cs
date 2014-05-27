@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer.Configuration;
+using System;
 namespace Humanizer
 {
     /// <summary>
@@ -46,7 +47,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
-            return input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
+            return Configurator.Quantifier.ToQuantity(input, quantity, showQuantityAs, null, null);
         }
 
         /// <summary>
@@ -64,22 +65,8 @@ namespace Humanizer
         /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, string format, IFormatProvider formatProvider = null)
         {
-            return input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
+            return Configurator.Quantifier.ToQuantity(input, quantity, ShowQuantityAs.Numeric, format, formatProvider);
         }
 
-        private static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string format = null, IFormatProvider formatProvider = null)
-        {
-            var transformedInput = quantity == 1
-                ? input.Singularize(Plurality.CouldBeEither)
-                : input.Pluralize(Plurality.CouldBeEither);
-
-            if (showQuantityAs == ShowQuantityAs.None)
-                return transformedInput;
-
-            if (showQuantityAs == ShowQuantityAs.Numeric)
-                return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
-
-            return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
-        }
     }
 }
