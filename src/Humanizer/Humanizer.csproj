@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CollectionHumanizeExtensions.cs" />
     <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
+    <Compile Include="Configuration\QuantifierRegistry.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\EnglishCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
@@ -94,6 +95,9 @@
     <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\EnglishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
+    <Compile Include="Localisation\Quantifiers\DefaultQuantifier.cs" />
+    <Compile Include="Localisation\Quantifiers\FarsiQuantifier.cs" />
+    <Compile Include="Localisation\Quantifiers\IQuantifier.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />

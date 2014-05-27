@@ -1,4 +1,5 @@
 ###In Development
+  - [#284](https://github.com/Mehdik/Humanizer/pull/284): Localised ToQuantity and added FarsiQuantifier
   - [#277](https://github.com/MehdiK/Humanizer/pull/277): Added support for custom enum description attribute property names
   - [#276](https://github.com/Mehdik/Humanizer/pull/276): Added Farsi ToOrdinalWords
 
