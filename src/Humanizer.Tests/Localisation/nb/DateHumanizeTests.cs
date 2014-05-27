@@ -12,7 +12,7 @@ namespace Humanizer.Tests.Localisation.nb
 
         [Theory]
         [InlineData(-2, "2 dager siden")]
-		[InlineData(-1, "i går")]
+        [InlineData(-1, "i går")]
         public void DaysAgo(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
