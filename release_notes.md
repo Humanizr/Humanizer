@@ -1,7 +1,8 @@
 ###In Development
   - [#257](https://github.com/Mehdik/Humanizer/pull/257): Added German localisation for ToOrdinalWords and Ordinalize
   - [#261](https://github.com/Mehdik/Humanizer/pull/261): Added future dates to Portuguese - Brazil
-
+  - [#278](https://github.com/MehdiK/Humanizer/pull/278): Added "60 minutes" to "an hour ago" test cases for all locals
+  
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.25.4...master)
 
 ###v1.25.1 - 2014-04-27
