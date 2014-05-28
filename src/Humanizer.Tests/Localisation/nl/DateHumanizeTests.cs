@@ -14,7 +14,7 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData(-1, "gisteren")]
         public void DaysAgo(int days, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddDays(days).Humanize());
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData(-1, "één uur geleden")]
         public void HoursAgo(int hours, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddHours(hours).Humanize());
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
         [Theory]
@@ -39,7 +39,7 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData(-1, "één maand geleden")]
         public void MonthsAgo(int months, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddMonths(months).Humanize());
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
         [Theory]
@@ -47,7 +47,7 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData(-1, "één seconde geleden")]
         public void SecondsAgo(int seconds, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddSeconds(seconds).Humanize());
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
         [Theory]
@@ -55,7 +55,7 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData(-1, "één jaar geleden")]
         public void YearsAgo(int years, string expected)
         {
-            Assert.Equal(expected, DateTime.UtcNow.AddYears(years).Humanize());
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
     }
 }

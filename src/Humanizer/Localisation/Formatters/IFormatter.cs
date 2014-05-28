@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿using System.Globalization;
+
+namespace Humanizer.Localisation.Formatters
 {
     /// <summary>
     /// Implement this interface if your language has complex rules around dealing with numbers. 
@@ -10,8 +12,9 @@
         /// <summary>
         /// Now
         /// </summary>
+        /// <param name="culture"></param>
         /// <returns>Returns Now</returns>
-        string DateHumanize_Now();
+        string DateHumanize_Now(CultureInfo culture);
 
         /// <summary>
         /// Returns the string representation of the provided DateTime
@@ -19,8 +22,9 @@
         /// <param name="timeUnit"></param>
         /// <param name="timeUnitTense"></param>
         /// <param name="unit"></param>
+        /// <param name="culture"></param>
         /// <returns></returns>
-        string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit);
+        string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit, CultureInfo culture);
 
         /// <summary>
         /// 0 seconds

@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿using System.Globalization;
+
+namespace Humanizer.Localisation.Formatters
 {
     /// <summary>
     /// Default implementation of IFormatter interface.
@@ -8,10 +10,11 @@
         /// <summary>
         /// Now
         /// </summary>
+        /// <param name="culture"></param>
         /// <returns>Returns Now</returns>
-        public virtual string DateHumanize_Now()
+        public virtual string DateHumanize_Now(CultureInfo culture)
         {
-            return GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
+            return GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0, culture);
         }
 
         /// <summary>
@@ -20,10 +23,11 @@
         /// <param name="timeUnit"></param>
         /// <param name="timeUnitTense"></param>
         /// <param name="unit"></param>
+        /// <param name="culture"></param>
         /// <returns></returns>
-        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit)
+        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit, CultureInfo culture)
         {
-            return GetResourceForDate(timeUnit, timeUnitTense, unit);
+            return GetResourceForDate(timeUnit, timeUnitTense, unit, culture);
         }
 
         /// <summary>
@@ -46,26 +50,27 @@
             return GetResourceForTimeSpan(timeUnit, unit);
         }
 
-        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
+        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count, CultureInfo culture)
         {
             string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
-            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+            return count == 1 ? Format(resourceKey, culture) : Format(resourceKey, count, culture);
         }
 
         private string GetResourceForTimeSpan(TimeUnit unit, int count)
         {
             string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
-            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+            return count == 1 ? Format(resourceKey, null) : Format(resourceKey, count, null);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="resourceKey"></param>
+        /// <param name="culture"></param>
         /// <returns></returns>
-        protected virtual string Format(string resourceKey)
+        protected virtual string Format(string resourceKey, CultureInfo culture)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey));
+            return Resources.GetResource(GetResourceKey(resourceKey), culture);
         }
 
         /// <summary>
@@ -73,10 +78,11 @@
         /// </summary>
         /// <param name="resourceKey"></param>
         /// <param name="number"></param>
+        /// <param name="culture"></param>
         /// <returns></returns>
-        protected virtual string Format(string resourceKey, int number)
+        protected virtual string Format(string resourceKey, int number, CultureInfo culture)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey, number)).FormatWith(number);
+            return Resources.GetResource(GetResourceKey(resourceKey, number), culture).FormatWith(number);
         }
 
         /// <summary>
