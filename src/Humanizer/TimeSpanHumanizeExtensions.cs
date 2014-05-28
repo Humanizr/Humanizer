@@ -38,7 +38,7 @@ namespace Humanizer
 
         private static string GetTimePart(TimeSpan timespan)
         {
-            var formatter = Configurator.Formatter;
+            var formatter = Configurator.GetFormatter();
             if (timespan.Days >= 7)
                 return formatter.TimeSpanHumanize(TimeUnit.Week, timespan.Days/7);
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using Humanizer.Configuration;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation;
@@ -8,26 +10,33 @@ namespace Humanizer.Tests
 {
     public class DateHumanize
     {
-        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
+        private static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
         {
-            var utcNow = DateTime.UtcNow;
-            var localNow = DateTime.Now;
+            CheckWithExplicitAndImplicitCulture(culture =>
+            {
+                var utcNow = DateTime.UtcNow;
+                var localNow = DateTime.Now;
 
-            // feels like the only way to avoid breaking tests because CPU ticks over is to inject the base date
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow));
-            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(utcDate: false, dateToCompareAgainst: localNow));
+                // feels like the only way to avoid breaking tests because CPU ticks over is to inject the base date
+                Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(true, utcNow, culture));
+                Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(false, localNow, culture));
+            });
         }
 
-        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
+        private static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
         {
-            var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
-            var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
+            CheckWithExplicitAndImplicitCulture(culture =>
+            {
+                var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
+                var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
 
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow));
-            Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
+                Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(true, utcNow, culture));
+                Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now, culture));
+            });
         }
 
-        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null)
+        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense,
+            double? precision = null)
         {
             if (precision.HasValue)
                 Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision.Value);
@@ -67,6 +76,15 @@ namespace Humanizer.Tests
 
             VerifyWithCurrentDate(expectedString, deltaFromNow);
             VerifyWithDateInjection(expectedString, deltaFromNow);
+        }
+
+        private static void CheckWithExplicitAndImplicitCulture(Action<CultureInfo> action)
+        {
+            action(null);
+
+            CultureInfo culture = Thread.CurrentThread.CurrentUICulture;
+            using (new AmbientCulture(culture.TwoLetterISOLanguageName == "da" ? "tr" : "da"))
+                action(culture);
         }
     }
 }

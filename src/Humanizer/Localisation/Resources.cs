@@ -1,4 +1,5 @@
-﻿using System.Resources;
+﻿using System.Globalization;
+using System.Resources;
 
 namespace Humanizer.Localisation
 {
@@ -13,10 +14,11 @@ namespace Humanizer.Localisation
         /// Returns the value of the specified string resource
         /// </summary>
         /// <param name="resourceKey">The name of the resource to retrieve.</param>
+        /// <param name="culture">The culture of the resource to retrieve.</param>
         /// <returns>The value of the resource localized for the caller's current UI culture.</returns>
-        public static string GetResource(string resourceKey)
+        public static string GetResource(string resourceKey, CultureInfo culture = null)
         {
-            return ResourceManager.GetString(resourceKey);
+            return ResourceManager.GetString(resourceKey, culture);
         }
     }
 }

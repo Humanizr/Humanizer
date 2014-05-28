@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
@@ -25,8 +26,9 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// </summary>
         /// <param name="input"></param>
         /// <param name="comparisonBase"></param>
+        /// <param name="culture"></param>
         /// <returns></returns>
-        public string Humanize(DateTime input, DateTime comparisonBase)
+        public string Humanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
         {
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
@@ -59,13 +61,14 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             // start computing result from larger units to smaller ones
-            if (years > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Year, tense, years);
-            if (months > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Month, tense, months);
-            if (days > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Day, tense, days);
-            if (hours > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Hour, tense, hours);
-            if (minutes > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Minute, tense, minutes);
-            if (seconds > 0) return Configurator.Formatter.DateHumanize(TimeUnit.Second, tense, seconds);
-            return Configurator.Formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
+            var formatter = Configurator.GetFormatter(culture);
+            if (years > 0) return formatter.DateHumanize(TimeUnit.Year, tense, years, culture);
+            if (months > 0) return formatter.DateHumanize(TimeUnit.Month, tense, months, culture);
+            if (days > 0) return formatter.DateHumanize(TimeUnit.Day, tense, days, culture);
+            if (hours > 0) return formatter.DateHumanize(TimeUnit.Hour, tense, hours, culture);
+            if (minutes > 0) return formatter.DateHumanize(TimeUnit.Minute, tense, minutes, culture);
+            if (seconds > 0) return formatter.DateHumanize(TimeUnit.Second, tense, seconds, culture);
+            return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0, culture);
         }
     }
 }

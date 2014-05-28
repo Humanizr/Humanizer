@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.Formatters;
@@ -58,16 +59,14 @@ namespace Humanizer.Configuration
                 return CollectionFormatters.ResolveForUiCulture();
             }
         }
-        
+
         /// <summary>
         /// The formatter to be used
         /// </summary>
-        internal static IFormatter Formatter
+        /// <param name="culture">The culture to retrieve formatter for. If not specified, current thread's UI culture is used.</param>
+        internal static IFormatter GetFormatter(CultureInfo culture = null)
         {
-            get
-            {
-                return Formatters.ResolveForUiCulture();
-            }
+            return Formatters.ResolveForCulture(culture);
         }
 
         /// <summary>
