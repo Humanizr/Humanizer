@@ -35,8 +35,7 @@ namespace Humanizer.Tests
             });
         }
 
-        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense,
-            double? precision = null)
+        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null)
         {
             if (precision.HasValue)
                 Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision.Value);
