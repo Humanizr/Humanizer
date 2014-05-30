@@ -27,14 +27,14 @@ namespace Humanizer.Configuration
         /// </summary>
         public TLocaliser ResolveForUiCulture()
         {
-            return ResolveForCulture();
+            return ResolveForCulture(null);
         }
 
         /// <summary>
         /// Gets the localiser for the specified culture 
         /// </summary>
         /// <param name="culture">The culture to retrieve localiser for. If not specified, current thread's UI culture is used.</param>
-        public TLocaliser ResolveForCulture(CultureInfo culture = null)
+        public TLocaliser ResolveForCulture(CultureInfo culture)
         {
             culture = culture ?? CultureInfo.CurrentUICulture;
 

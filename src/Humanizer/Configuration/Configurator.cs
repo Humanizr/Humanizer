@@ -63,8 +63,8 @@ namespace Humanizer.Configuration
         /// <summary>
         /// The formatter to be used
         /// </summary>
-        /// <param name="culture">The culture to retrieve formatter for. If not specified, current thread's UI culture is used.</param>
-        internal static IFormatter GetFormatter(CultureInfo culture = null)
+        /// <param name="culture">The culture to retrieve formatter for. Null means that current thread's UI culture should be used.</param>
+        internal static IFormatter GetFormatter(CultureInfo culture)
         {
             return Formatters.ResolveForCulture(culture);
         }
