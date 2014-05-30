@@ -1,4 +1,5 @@
-﻿using Humanizer.Localisation;
+﻿using System.Globalization;
+using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
 
@@ -137,6 +138,15 @@ namespace Humanizer.Tests
         public void Now()
         {
             DateHumanize.Verify("now", 0, TimeUnit.Year, Tense.Future);
+        }
+
+        [Theory]
+        [InlineData(1, TimeUnit.Year, Tense.Future, "en-US", "one year from now")]
+        [InlineData(40, TimeUnit.Second, Tense.Past,  "ru-RU", "40 секунд назад")]
+        [InlineData(2, TimeUnit.Day, Tense.Past, "sv-SE", "för 2 dagar sedan")]
+        public void ExplicitCultureIsUsed(int unit, TimeUnit timeUnit, Tense tense, string culture, string expected)
+        {
+            DateHumanize.Verify(expected, unit, timeUnit, tense, culture: new CultureInfo(culture));
         }
     }
 }

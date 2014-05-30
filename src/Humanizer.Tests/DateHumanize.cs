@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation;
@@ -8,26 +9,26 @@ namespace Humanizer.Tests
 {
     public class DateHumanize
     {
-        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow)
+        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
         {
             var utcNow = DateTime.UtcNow;
             var localNow = DateTime.Now;
 
             // feels like the only way to avoid breaking tests because CPU ticks over is to inject the base date
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow));
-            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(utcDate: false, dateToCompareAgainst: localNow));
+            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow, culture: culture));
+            Assert.Equal(expectedString, localNow.Add(deltaFromNow).Humanize(utcDate: false, dateToCompareAgainst: localNow, culture: culture));
         }
 
-        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow)
+        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
         {
             var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
             var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
 
-            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow));
-            Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now));
+            Assert.Equal(expectedString, utcNow.Add(deltaFromNow).Humanize(utcDate: true, dateToCompareAgainst: utcNow, culture: culture));
+            Assert.Equal(expectedString, now.Add(deltaFromNow).Humanize(false, now, culture: culture));
         }
 
-        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null)
+        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null, CultureInfo culture = null)
         {
             if (precision.HasValue)
                 Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision.Value);
@@ -65,8 +66,8 @@ namespace Humanizer.Tests
                     break;
             }
 
-            VerifyWithCurrentDate(expectedString, deltaFromNow);
-            VerifyWithDateInjection(expectedString, deltaFromNow);
+            VerifyWithCurrentDate(expectedString, deltaFromNow, culture);
+            VerifyWithDateInjection(expectedString, deltaFromNow, culture);
         }
     }
 }
