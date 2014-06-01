@@ -29,15 +29,17 @@ namespace Humanizer.Localisation.Formatters
         /// <summary>
         /// 0 seconds
         /// </summary>
+        /// <param name="culture"></param>
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
-        string TimeSpanHumanize_Zero();
+        string TimeSpanHumanize_Zero(CultureInfo culture);
 
         /// <summary>
         /// Returns the string representation of the provided TimeSpan
         /// </summary>
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
+        /// <param name="culture"></param>
         /// <returns></returns>
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit);
+        string TimeSpanHumanize(TimeUnit timeUnit, int unit, CultureInfo culture);
     }
 }

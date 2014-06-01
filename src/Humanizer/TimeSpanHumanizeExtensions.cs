@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
@@ -15,13 +16,14 @@ namespace Humanizer
         /// </summary>
         /// <param name="timeSpan"></param>
         /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1)
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null)
         {
             var result = new StringBuilder();
             for (int i = 0; i < precision; i++)
             {
-                var timePart = GetTimePart(timeSpan);
+                var timePart = GetTimePart(timeSpan, culture);
             
                 if (result.Length > 0)
                     result.Append(", ");
@@ -36,28 +38,28 @@ namespace Humanizer
             return result.ToString();
         }
 
-        private static string GetTimePart(TimeSpan timespan)
+        private static string GetTimePart(TimeSpan timespan, CultureInfo culture)
         {
-            var formatter = Configurator.GetFormatter(null);
+            var formatter = Configurator.GetFormatter(culture);
             if (timespan.Days >= 7)
-                return formatter.TimeSpanHumanize(TimeUnit.Week, timespan.Days/7);
+                return formatter.TimeSpanHumanize(TimeUnit.Week, timespan.Days/7, culture);
 
-            if(timespan.Days >= 1)
-                    return formatter.TimeSpanHumanize(TimeUnit.Day, timespan.Days);
+            if (timespan.Days >= 1)
+                return formatter.TimeSpanHumanize(TimeUnit.Day, timespan.Days, culture);
 
             if (timespan.Hours >= 1)
-                    return formatter.TimeSpanHumanize(TimeUnit.Hour, timespan.Hours);
+                return formatter.TimeSpanHumanize(TimeUnit.Hour, timespan.Hours, culture);
 
             if (timespan.Minutes >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Minute, timespan.Minutes);
+                return formatter.TimeSpanHumanize(TimeUnit.Minute, timespan.Minutes, culture);
 
             if (timespan.Seconds >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Second, timespan.Seconds);
+                return formatter.TimeSpanHumanize(TimeUnit.Second, timespan.Seconds, culture);
 
             if (timespan.Milliseconds >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Millisecond, timespan.Milliseconds);
+                return formatter.TimeSpanHumanize(TimeUnit.Millisecond, timespan.Milliseconds, culture);
 
-            return formatter.TimeSpanHumanize_Zero();
+            return formatter.TimeSpanHumanize_Zero(culture);
         }
 
         static TimeSpan TakeOutTheLargestUnit(TimeSpan timeSpan)

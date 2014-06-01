@@ -33,10 +33,11 @@ namespace Humanizer.Localisation.Formatters
         /// <summary>
         /// 0 seconds
         /// </summary>
+        /// <param name="culture"></param>
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
-        public virtual string TimeSpanHumanize_Zero()
+        public virtual string TimeSpanHumanize_Zero(CultureInfo culture)
         {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0);
+            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, culture);
         }
 
         /// <summary>
@@ -44,10 +45,11 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
+        /// <param name="culture"></param>
         /// <returns></returns>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, CultureInfo culture)
         {
-            return GetResourceForTimeSpan(timeUnit, unit);
+            return GetResourceForTimeSpan(timeUnit, unit, culture);
         }
 
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count, CultureInfo culture)
@@ -56,10 +58,10 @@ namespace Humanizer.Localisation.Formatters
             return count == 1 ? Format(resourceKey, culture) : Format(resourceKey, count, culture);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count)
+        private string GetResourceForTimeSpan(TimeUnit unit, int count, CultureInfo culture)
         {
             string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
-            return count == 1 ? Format(resourceKey, null) : Format(resourceKey, count, null);
+            return count == 1 ? Format(resourceKey, culture) : Format(resourceKey, count, culture);
         }
 
         /// <summary>

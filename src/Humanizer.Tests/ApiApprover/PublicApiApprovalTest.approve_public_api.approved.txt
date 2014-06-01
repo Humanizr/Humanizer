@@ -218,16 +218,16 @@ public class DefaultFormatter
     public DefaultFormatter() { }
     public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit, System.Globalization.CultureInfo culture) { }
     public string DateHumanize_Now(System.Globalization.CultureInfo culture) { }
-    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
-    public string TimeSpanHumanize_Zero() { }
+    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, System.Globalization.CultureInfo culture) { }
+    public string TimeSpanHumanize_Zero(System.Globalization.CultureInfo culture) { }
 }
 
 public interface IFormatter
 {
     string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit, System.Globalization.CultureInfo culture);
     string DateHumanize_Now(System.Globalization.CultureInfo culture);
-    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
-    string TimeSpanHumanize_Zero();
+    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, System.Globalization.CultureInfo culture);
+    string TimeSpanHumanize_Zero(System.Globalization.CultureInfo culture);
 }
 
 public interface INumberToWordsConverter
@@ -367,7 +367,7 @@ public class StringHumanizeExtensions
 
 public class TimeSpanHumanizeExtensions
 {
-    public string Humanize(System.TimeSpan timeSpan, int precision) { }
+    public string Humanize(System.TimeSpan timeSpan, int precision, System.Globalization.CultureInfo culture) { }
 }
 
 public class To
