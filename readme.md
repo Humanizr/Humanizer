@@ -315,6 +315,14 @@ TimeSpan.FromMilliseconds(2).Humanize() => "2 milisekundy"
 TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
 ```
 
+Culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Example:
+
+```C#
+
+TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
+
+```
+
 ###<a id="humanize-collections">Humanize Collections</a>
 
 You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into `Humanize`.
