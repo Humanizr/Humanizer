@@ -5,6 +5,11 @@
         private const string DualPostfix = "_Dual";
         private const string PluralPostfix = "_Plural";
 
+        public HebrewFormatter()
+            : base("he")
+        {
+        }
+
         protected override string GetResourceKey(string resourceKey, int number)
         {
             //In Hebrew pluralization 2 entities gets a different word.

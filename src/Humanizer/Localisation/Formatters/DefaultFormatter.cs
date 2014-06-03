@@ -7,14 +7,24 @@ namespace Humanizer.Localisation.Formatters
     /// </summary>
     public class DefaultFormatter : IFormatter
     {
+        private readonly CultureInfo _culture;
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="localeCode">Name of the culture to use.</param>
+        public DefaultFormatter(string localeCode)
+        {
+            _culture = new CultureInfo(localeCode);
+        }
+
         /// <summary>
         /// Now
         /// </summary>
-        /// <param name="culture"></param>
         /// <returns>Returns Now</returns>
-        public virtual string DateHumanize_Now(CultureInfo culture)
+        public virtual string DateHumanize_Now()
         {
-            return GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0, culture);
+            return GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
         }
 
         /// <summary>
@@ -23,21 +33,19 @@ namespace Humanizer.Localisation.Formatters
         /// <param name="timeUnit"></param>
         /// <param name="timeUnitTense"></param>
         /// <param name="unit"></param>
-        /// <param name="culture"></param>
         /// <returns></returns>
-        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit, CultureInfo culture)
+        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit)
         {
-            return GetResourceForDate(timeUnit, timeUnitTense, unit, culture);
+            return GetResourceForDate(timeUnit, timeUnitTense, unit);
         }
 
         /// <summary>
         /// 0 seconds
         /// </summary>
-        /// <param name="culture"></param>
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
-        public virtual string TimeSpanHumanize_Zero(CultureInfo culture)
+        public virtual string TimeSpanHumanize_Zero()
         {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, culture);
+            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0);
         }
 
         /// <summary>
@@ -45,34 +53,32 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
-        /// <param name="culture"></param>
         /// <returns></returns>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, CultureInfo culture)
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
-            return GetResourceForTimeSpan(timeUnit, unit, culture);
+            return GetResourceForTimeSpan(timeUnit, unit);
         }
 
-        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count, CultureInfo culture)
+        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
             string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
-            return count == 1 ? Format(resourceKey, culture) : Format(resourceKey, count, culture);
+            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count, CultureInfo culture)
+        private string GetResourceForTimeSpan(TimeUnit unit, int count)
         {
             string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
-            return count == 1 ? Format(resourceKey, culture) : Format(resourceKey, count, culture);
+            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="resourceKey"></param>
-        /// <param name="culture"></param>
         /// <returns></returns>
-        protected virtual string Format(string resourceKey, CultureInfo culture)
+        protected virtual string Format(string resourceKey)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey), culture);
+            return Resources.GetResource(GetResourceKey(resourceKey), _culture);
         }
 
         /// <summary>
@@ -80,11 +86,10 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="resourceKey"></param>
         /// <param name="number"></param>
-        /// <param name="culture"></param>
         /// <returns></returns>
-        protected virtual string Format(string resourceKey, int number, CultureInfo culture)
+        protected virtual string Format(string resourceKey, int number)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey, number), culture).FormatWith(number);
+            return Resources.GetResource(GetResourceKey(resourceKey, number), _culture).FormatWith(number);
         }
 
         /// <summary>
