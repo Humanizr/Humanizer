@@ -62,13 +62,13 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             // start computing result from larger units to smaller ones
             var formatter = Configurator.GetFormatter(culture);
-            if (years > 0) return formatter.DateHumanize(TimeUnit.Year, tense, years, culture);
-            if (months > 0) return formatter.DateHumanize(TimeUnit.Month, tense, months, culture);
-            if (days > 0) return formatter.DateHumanize(TimeUnit.Day, tense, days, culture);
-            if (hours > 0) return formatter.DateHumanize(TimeUnit.Hour, tense, hours, culture);
-            if (minutes > 0) return formatter.DateHumanize(TimeUnit.Minute, tense, minutes, culture);
-            if (seconds > 0) return formatter.DateHumanize(TimeUnit.Second, tense, seconds, culture);
-            return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0, culture);
+            if (years > 0) return formatter.DateHumanize(TimeUnit.Year, tense, years);
+            if (months > 0) return formatter.DateHumanize(TimeUnit.Month, tense, months);
+            if (days > 0) return formatter.DateHumanize(TimeUnit.Day, tense, days);
+            if (hours > 0) return formatter.DateHumanize(TimeUnit.Hour, tense, hours);
+            if (minutes > 0) return formatter.DateHumanize(TimeUnit.Minute, tense, minutes);
+            if (seconds > 0) return formatter.DateHumanize(TimeUnit.Second, tense, seconds);
+            return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
         }
     }
 }

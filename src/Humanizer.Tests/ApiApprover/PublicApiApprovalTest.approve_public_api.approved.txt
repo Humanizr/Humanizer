@@ -215,19 +215,19 @@ public interface ICollectionFormatter
 
 public class DefaultFormatter
 {
-    public DefaultFormatter() { }
-    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit, System.Globalization.CultureInfo culture) { }
-    public string DateHumanize_Now(System.Globalization.CultureInfo culture) { }
-    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, System.Globalization.CultureInfo culture) { }
-    public string TimeSpanHumanize_Zero(System.Globalization.CultureInfo culture) { }
+    public DefaultFormatter(string localeCode) { }
+    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
+    public string DateHumanize_Now() { }
+    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
+    public string TimeSpanHumanize_Zero() { }
 }
 
 public interface IFormatter
 {
-    string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit, System.Globalization.CultureInfo culture);
-    string DateHumanize_Now(System.Globalization.CultureInfo culture);
-    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, System.Globalization.CultureInfo culture);
-    string TimeSpanHumanize_Zero(System.Globalization.CultureInfo culture);
+    string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
+    string DateHumanize_Now();
+    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
+    string TimeSpanHumanize_Zero();
 }
 
 public interface INumberToWordsConverter
