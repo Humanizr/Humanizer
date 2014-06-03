@@ -4,6 +4,11 @@
     {
         private const string Above20PostFix = "_Above20";
 
+        public RomanianFormatter()
+            : base("ro")
+        {
+        }
+
         protected override string GetResourceKey(string resourceKey, int number)
         {
             var mod100 = number%100;

@@ -1,10 +1,23 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿using System.Globalization;
+
+namespace Humanizer.Localisation.Formatters
 {
     /// <summary>
     /// Default implementation of IFormatter interface.
     /// </summary>
     public class DefaultFormatter : IFormatter
     {
+        private readonly CultureInfo _culture;
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="localeCode">Name of the culture to use.</param>
+        public DefaultFormatter(string localeCode)
+        {
+            _culture = new CultureInfo(localeCode);
+        }
+
         /// <summary>
         /// Now
         /// </summary>
@@ -65,7 +78,7 @@
         /// <returns></returns>
         protected virtual string Format(string resourceKey)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey));
+            return Resources.GetResource(GetResourceKey(resourceKey), _culture);
         }
 
         /// <summary>
@@ -76,7 +89,7 @@
         /// <returns></returns>
         protected virtual string Format(string resourceKey, int number)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey, number)).FormatWith(number);
+            return Resources.GetResource(GetResourceKey(resourceKey, number), _culture).FormatWith(number);
         }
 
         /// <summary>

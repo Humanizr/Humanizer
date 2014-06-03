@@ -233,10 +233,12 @@ DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
 ```
 
-Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base. Here is the API signature:
+Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
+Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
+Here is the API signature:
 
 ```C#
-public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null)
+public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
 ```
 
 Many localizations are available for this method. Here is a few examples:
@@ -311,6 +313,14 @@ TimeSpan.FromDays(2).Humanize() => "2 Tage"
 TimeSpan.FromMilliseconds(1).Humanize() => "1 milisekunda"
 TimeSpan.FromMilliseconds(2).Humanize() => "2 milisekundy"
 TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
+```
+
+Culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Example:
+
+```C#
+
+TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
+
 ```
 
 ###<a id="humanize-collections">Humanize Collections</a>

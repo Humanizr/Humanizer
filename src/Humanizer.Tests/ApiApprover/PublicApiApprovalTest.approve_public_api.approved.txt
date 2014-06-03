@@ -87,29 +87,30 @@ public class LocaliserRegistry`1
     public void Register(string localeCode) { }
     public void Register(System.Func<> localiserFactory, string localeCode) { }
     public void RegisterDefault(TLocaliser defaultLocaliser) { }
+    public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
     public TLocaliser ResolveForUiCulture() { }
 }
 
 public class DateHumanizeExtensions
 {
-    public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst) { }
+    public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst, System.Globalization.CultureInfo culture) { }
 }
 
 public class DefaultDateTimeHumanizeStrategy
 {
     public DefaultDateTimeHumanizeStrategy() { }
-    public string Humanize(System.DateTime input, System.DateTime comparisonBase) { }
+    public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
 }
 
 public interface IDateTimeHumanizeStrategy
 {
-    string Humanize(System.DateTime input, System.DateTime comparisonBase);
+    string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
 }
 
 public class PrecisionDateTimeHumanizeStrategy
 {
     public PrecisionDateTimeHumanizeStrategy(double precision) { }
-    public string Humanize(System.DateTime input, System.DateTime comparisonBase) { }
+    public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
 }
 
 public class EnumDehumanizeExtensions
@@ -214,7 +215,7 @@ public interface ICollectionFormatter
 
 public class DefaultFormatter
 {
-    public DefaultFormatter() { }
+    public DefaultFormatter(string localeCode) { }
     public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
     public string DateHumanize_Now() { }
     public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
@@ -250,7 +251,7 @@ public class ResourceKeys
 
 public class Resources
 {
-    public string GetResource(string resourceKey) { }
+    public string GetResource(string resourceKey, System.Globalization.CultureInfo culture) { }
 }
 
 public enum Tense
@@ -366,7 +367,7 @@ public class StringHumanizeExtensions
 
 public class TimeSpanHumanizeExtensions
 {
-    public string Humanize(System.TimeSpan timeSpan, int precision) { }
+    public string Humanize(System.TimeSpan timeSpan, int precision, System.Globalization.CultureInfo culture) { }
 }
 
 public class To
