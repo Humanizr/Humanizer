@@ -29,7 +29,7 @@ Also before sending the pull request please rebase your code as there is a chanc
 Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912#the-workflow) if you're new to git.
 
 ###<a id="need-your-help-with-localisation">Need your help with localisation</a>
-One area Humanizer an always use your help is localisation.
+One area where Humanizer can always use your help is localisation.
 Currently Humanizer supports quite a few localisations for `DateTime.Humanize`, `TimeSpan.Humanize`, `ToWords` and `ToOrdinalWords`.
 
 Humanizer could definitely do with more translations.

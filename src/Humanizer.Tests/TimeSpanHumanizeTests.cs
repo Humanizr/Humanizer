@@ -116,7 +116,7 @@ namespace Humanizer.Tests
         [InlineData(1, "en-US", "1 millisecond")]
         [InlineData(6 * 24 * 60 * 60 * 1000, "ru-RU", "6 дней")]
         [InlineData(11 * 60 * 60 * 1000, "ar", "11 ساعة")]
-        public void ExplicitCultureIsUsed(int ms, string culture, string expected)
+        public void CanSpecifyCultureExplicitly(int ms, string culture, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize(culture: new CultureInfo(culture));
             Assert.Equal(expected, actual);

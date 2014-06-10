@@ -6,10 +6,23 @@ namespace Humanizer.Configuration
     {
         public FormatterRegistry() : base(new DefaultFormatter("en-US"))
         {
-            RegisterDefaultFormatter("af");
-            Register<ArabicFormatter>("ar");
-            RegisterDefaultFormatter("bg");
+            Register("ar", new ArabicFormatter());
+            Register("he", new HebrewFormatter());
+            Register("ro", new RomanianFormatter());
+            Register("ru", new RussianFormatter());
+            Register("sl", new SlovenianFormatter());
+            Register("sr", new SerbianFormatter("sr"));
+            Register("sr-Latn", new SerbianFormatter("sr-Latn"));
             RegisterCzechSlovakPolishFormatter("cs");
+            RegisterCzechSlovakPolishFormatter("pl");
+            RegisterCzechSlovakPolishFormatter("sk");
+            RegisterDefaultFormatter("bg");
+            RegisterDefaultFormatter("pt-BR");
+            RegisterDefaultFormatter("sv");
+            RegisterDefaultFormatter("tr");
+            RegisterDefaultFormatter("vi");
+            RegisterDefaultFormatter("en-US");
+            RegisterDefaultFormatter("af");
             RegisterDefaultFormatter("da");
             RegisterDefaultFormatter("de");
             RegisterDefaultFormatter("el");
@@ -18,39 +31,22 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("fi-FI");
             RegisterDefaultFormatter("fr");
             RegisterDefaultFormatter("fr-BE");
-            Register<HebrewFormatter>("he");
             RegisterDefaultFormatter("hu");
             RegisterDefaultFormatter("id");
             RegisterDefaultFormatter("ja");
             RegisterDefaultFormatter("nb");
             RegisterDefaultFormatter("nb-NO");
             RegisterDefaultFormatter("nl");
-            RegisterCzechSlovakPolishFormatter("pl");
-            RegisterDefaultFormatter("pt-BR");
-            Register<RomanianFormatter>("ro");
-            Register<RussianFormatter>("ru");
-            RegisterCzechSlovakPolishFormatter("sk");
-            Register<SlovenianFormatter>("sl");
-            RegisterSerbianFormatter("sr");
-            RegisterSerbianFormatter("sr-Latn");
-            RegisterDefaultFormatter("sv");
-            RegisterDefaultFormatter("tr");
-            RegisterDefaultFormatter("vi");
         }
 
         private void RegisterDefaultFormatter(string localeCode)
         {
-            Register(() => new DefaultFormatter(localeCode), localeCode);
+            Register(localeCode, new DefaultFormatter(localeCode));
         }
 
         private void RegisterCzechSlovakPolishFormatter(string localeCode)
         {
-            Register(() => new CzechSlovakPolishFormatter(localeCode), localeCode);
-        }
-
-        private void RegisterSerbianFormatter(string localeCode)
-        {
-            Register(() => new SerbianFormatter(localeCode), localeCode);
+            Register(localeCode, new CzechSlovakPolishFormatter(localeCode));
         }
     }
 }
