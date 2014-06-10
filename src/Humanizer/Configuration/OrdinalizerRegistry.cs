@@ -6,11 +6,11 @@ namespace Humanizer.Configuration
     {
         public OrdinalizerRegistry() : base(new DefaultOrdinalizer())
         {
-            Register<EnglishOrdinalizer>("en");
-            Register<SpanishOrdinalizer>("es");
-            Register<RussianOrdinalizer>("ru");
-            Register<BrazilianPortugueseOrdinalizer>("pt-BR");
-            Register<GermanOrdinalizer>("de");
+            Register("en", new EnglishOrdinalizer());
+            Register("es", new SpanishOrdinalizer());
+            Register("ru", new RussianOrdinalizer());
+            Register("pt-BR", new BrazilianPortugueseOrdinalizer());
+            Register("de", new GermanOrdinalizer());
         }
     }
 }

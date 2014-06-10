@@ -4,7 +4,8 @@
   - [#281](https://github.com/Mehdik/Humanizer/pull/281): Changed the logic for handling hyphenation and large numbers ending in twelve for English ordinal words; e.g. before "twenty first" now "twenty-first"
   - [#278](https://github.com/MehdiK/Humanizer/pull/278): Changed DefaultDateTimeHumanizeStrategy to turn 60 min to one hour not 45
   - [#283](https://github.com/MehdiK/Humanizer/pull/283): Added Neutral nb support for DateTime and TimeSpan Humanize
-  
+  - [#286](https://github.com/MehdiK/Humanizer/pull/286): Added optional Culture parameter to DateTime.Humanize & TimeSpan.Humanize
+
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
 
 ###v1.26.1 - 2014-05-20
@@ -26,7 +27,7 @@
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.24.1...v1.25.4)
 
 ###v1.24.1 - 2014-04-21
-  - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal 
+  - [#232](https://github.com/Mehdik/Humanizer/pull/232): Adding code & tests to handle Arabic numbers to ordinal
   - [#235](https://github.com/Mehdik/Humanizer/pull/235): Fixed the conversion for "1 millon" in SpanishNumberToWordsConverter
   - [#233](https://github.com/Mehdik/Humanizer/pull/233): Added build.cmd and Verify build configuration for strict project build and analysis
 
@@ -49,8 +50,8 @@
   - [#199](https://github.com/MehdiK/Humanizer/pull/199): Added Hebrew Number to words (both genders)
   - [#202](https://github.com/MehdiK/Humanizer/pull/202): Fixed typo sekunttia -> sekuntia (Finnish translation)
   - [#203](https://github.com/MehdiK/Humanizer/pull/203): Added feminine gender for french ordinal words
-  - [#208](https://github.com/MehdiK/Humanizer/pull/208): Added Hebrew implementation of future DateTime 
-  
+  - [#208](https://github.com/MehdiK/Humanizer/pull/208): Added Hebrew implementation of future DateTime
+
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.21.1...v1.22.1)
 
 ###v1.21.1 - 2014-04-12
@@ -60,7 +61,7 @@
   - [#190](https://github.com/MehdiK/Humanizer/pull/190): Added French translation for ToWords and ToOrdinalWords
   - [#179](https://github.com/MehdiK/Humanizer/pull/179): Added Hungarian localisation
   - [#181](https://github.com/Mehdik/Humanizer/pull/181): Added Bulgarian localization, date and timespan tests
-  - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesian localization 
+  - [#141](https://github.com/MehdiK/Humanizer/pull/141): Added Indonesian localization
   - [#148](https://github.com/Mehdik/Humanizer/pull/148): Added Hebrew localization for date and timespan
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.20.15...v1.21.1)
@@ -82,12 +83,12 @@
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.19.1...v1.20.2)
 
 ###v1.19.1 - 2014-04-10
-  - [#149](https://github.com/MehdiK/Humanizer/pull/149): Improved & refactored number to words localisation 
+  - [#149](https://github.com/MehdiK/Humanizer/pull/149): Improved & refactored number to words localisation
   - [#143](https://github.com/MehdiK/Humanizer/pull/143): Added Russian translation for future DateTime, TimeSpan and Now
   - [#144](https://github.com/MehdiK/Humanizer/pull/144): Added Danish localization (strings, tests)
   - [#146](https://github.com/MehdiK/Humanizer/pull/146): Added Spanish translation for future DateTime, TimeSpan and Now
-  
-           
+
+
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.18.1...v1.19.1)
 
 ###v1.18.1 - 2014-04-09
@@ -120,7 +121,7 @@
 
 ###v1.14.1 - 2014-03-26
   - [#108](https://github.com/MehdiK/Humanizer/pull/108): Added support for custom description attributes
-  - [#106](https://github.com/MehdiK/Humanizer/pull/106): 
+  - [#106](https://github.com/MehdiK/Humanizer/pull/106):
     - Refactored IFormatter and DefaultFormatter
 	- Refactored `DateTime.Humanize` and `TimeSpan.Humanize`
 	- Changed `ResourceKeys` to use a dynamic key generation
@@ -179,7 +180,7 @@ If you were catching `CannotMapToTargetException` on a `DehumanizeTo` call, that
 ####Potential breaking change
 The return type of `DehumanizeTo<TTargetEnum>` was changed from `Enum` to `TTargetEnum` to make the API a lot easier to work with.
 That also potentially means that your calls to the old method may be broken.
-Depending on how you were using the method you might have to either drop the now redundant cast to `TTargetEnum` in your code, or 
+Depending on how you were using the method you might have to either drop the now redundant cast to `TTargetEnum` in your code, or
 fix it based on your requirements.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.5.1...v1.6.1)
@@ -205,7 +206,7 @@ fix it based on your requirements.
 
 ###v1.1.0 - 2014-01-01
   - [#37](https://github.com/MehdiK/Humanizer/pull/37): added `ToQuantity` method
-  - [#43](https://github.com/MehdiK/Humanizer/pull/43): 
+  - [#43](https://github.com/MehdiK/Humanizer/pull/43):
     - added `Plurality` enum
     - can call `Singularize` on singular and `Pluralize` on plural words
     - `ToQuantity` can be called on words with unknown plurality
@@ -214,7 +215,7 @@ fix it based on your requirements.
 
 ###v1.0.29 - 2013-12-25
   - [#26](https://github.com/MehdiK/Humanizer/pull/26): added Norwegian (nb-NO) localization for `DateTime.Humanize()`
-  - [#33](https://github.com/MehdiK/Humanizer/pull/33): 
+  - [#33](https://github.com/MehdiK/Humanizer/pull/33):
     - changed to Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications
     - symbols nuget package is published so you can step through Humanizer code while debugging your code
 

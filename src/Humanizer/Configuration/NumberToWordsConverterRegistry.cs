@@ -6,18 +6,18 @@ namespace Humanizer.Configuration
     {
         public NumberToWordsConverterRegistry() : base(new DefaultNumberToWordsConverter())
         {
-            Register<EnglishNumberToWordsConverter>("en");
-            Register<ArabicNumberToWordsConverter>("ar");
-            Register<FarsiNumberToWordsConverter>("fa");
-            Register<SpanishNumberToWordsConverter>("es");
-            Register<PolishNumberToWordsConverter>("pl");
-            Register<BrazilianPortugueseNumberToWordsConverter>("pt-BR");
-            Register<RussianNumberToWordsConverter>("ru");
-            Register<FrenchNumberToWordsConverter>("fr");
-            Register<DutchNumberToWordsConverter>("nl");
-            Register<HebrewNumberToWordsConverter>("he");
-            Register<SlovenianNumberToWordsConverter>("sl");
-            Register<GermanNumberToWordsConverter>("de");
+            Register("en", new EnglishNumberToWordsConverter());
+            Register("ar", new ArabicNumberToWordsConverter());
+            Register("fa", new FarsiNumberToWordsConverter());
+            Register("es", new SpanishNumberToWordsConverter());
+            Register("pl", new PolishNumberToWordsConverter());
+            Register("pt-BR", new BrazilianPortugueseNumberToWordsConverter());
+            Register("ru", new RussianNumberToWordsConverter());
+            Register("fr", new FrenchNumberToWordsConverter());
+            Register("nl", new DutchNumberToWordsConverter());
+            Register("he", new HebrewNumberToWordsConverter());
+            Register("sl", new SlovenianNumberToWordsConverter());
+            Register("de", new GermanNumberToWordsConverter());
         }
     }
 }

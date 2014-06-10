@@ -4,6 +4,11 @@
     {
         private const string PaucalPostfix = "_Paucal";
 
+        public SerbianFormatter(string localeCode)
+            : base(localeCode)
+        {
+        }
+
         protected override string GetResourceKey(string resourceKey, int number)
         {
             int mod10 = number % 10;
