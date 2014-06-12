@@ -1,4 +1,5 @@
 ###In Development
+  - [#294](https://github.com/MehdiK/Humanizer/pull/294): Added support for untyped comparison of ByteSize
   - [#277](https://github.com/MehdiK/Humanizer/pull/277): Added support for custom enum description attribute property names
   - [#276](https://github.com/Mehdik/Humanizer/pull/276): Added Farsi ToOrdinalWords
   - [#281](https://github.com/Mehdik/Humanizer/pull/281): Changed the logic for handling hyphenation and large numbers ending in twelve for English ordinal words; e.g. before "twenty first" now "twenty-first"

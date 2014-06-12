@@ -29,6 +29,7 @@
     public Humanizer.Bytes.ByteSize AddKilobytes(double value) { }
     public Humanizer.Bytes.ByteSize AddMegabytes(double value) { }
     public Humanizer.Bytes.ByteSize AddTerabytes(double value) { }
+    public int CompareTo(object obj) { }
     public int CompareTo(Humanizer.Bytes.ByteSize other) { }
     public bool Equals(object value) { }
     public bool Equals(Humanizer.Bytes.ByteSize value) { }

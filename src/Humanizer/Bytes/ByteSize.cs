@@ -28,7 +28,7 @@ namespace Humanizer.Bytes
     /// Represents a byte size value.
     /// </summary>
 #pragma warning disable 1591
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
+    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
@@ -203,6 +203,17 @@ namespace Humanizer.Bytes
         public override int GetHashCode()
         {
             return Bits.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+                return 1;
+
+            if (!(obj is ByteSize))
+                throw new ArgumentException("Object is not a ByteSize");
+
+            return CompareTo((ByteSize) obj);
         }
 
         public int CompareTo(ByteSize other)
