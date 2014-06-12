@@ -1,4 +1,6 @@
-﻿using Humanizer.Bytes;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Humanizer.Bytes;
 using Xunit;
 using Xunit.Extensions;
 
@@ -30,6 +32,17 @@ namespace Humanizer.Tests.Bytes
             var result = valueSize.CompareTo(otherSize);
 
             Assert.Equal(expectedResult, result);
+        }
+
+        [Theory]
+        [InlineData(new[] { "1GB", "3KB", "5MB" }, new[] { "3KB", "5MB", "1GB"})]
+        [InlineData(new[] { "1MB", "3KB", "5MB" }, new[] { "3KB", "1MB", "5MB"})]
+        public void SortList(IEnumerable<string> values, IEnumerable<string> expected)
+        {
+            var list = values.Select(ByteSize.Parse).ToList();
+            list.Sort();
+
+            Assert.Equal(expected.Select(ByteSize.Parse), list);
         }
     }
 }
