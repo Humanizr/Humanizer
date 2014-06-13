@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build;CopyToReleaseFolder" ToolsVersion="4.0">
+  <!--Project configuration-->
+  <Import Project="Build.config" />
+  
+  <UsingTask TaskName="xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
+
+  <!--Clean-->
+  <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
+  <Target Name="CleanDebug">
+    <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
+  </Target>
+  <Target Name="CleanRelease">
+    <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
+  </Target>
+
+  <!--Compile-->
+  <Target Name="Build" DependsOnTargets="CleanAll;RestorePackages">
+    <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
+  </Target>
+
+  <!--Test. Note that the GetTestAssemblies Task MUST BE defined in the Build.config file. -->
+  <Target Name="Test" DependsOnTargets="GetTestAssemblies">
+    <xunit Assemblies="@(TestAssemblies)" />
+  </Target>
+
+  <!--Release-->
+  <Target Name="DeleteReleaseFolder">
+    <RemoveDir Directories="$(ReleaseFolder)" />
+  </Target>
+  <Target Name="MakeReleaseFolder" DependsOnTargets="DeleteReleaseFolder">
+    <MakeDir Directories="$(ReleaseFolder)" Condition="!Exists($(ReleaseFolder))" />
+  </Target>
+  <Target Name="CopyToReleaseFolder" DependsOnTargets="Test">
+    <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(ReleaseFolder)" />
+  </Target>
+  
+  <!--Nuget restore-->
+  <ItemGroup>
+    <Solution Include="$(MSBuildThisFileDirectory)src\*.sln" />
+  </ItemGroup>
+
+  <Target Name="RestorePackages">
+    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
+  </Target>
+
+</Project>

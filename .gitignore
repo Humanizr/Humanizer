@@ -7,14 +7,15 @@ obj/
 *.swp
 *.orig
 *.nupkg
-*.crunchproject.local.xml
-*.crunchsolution.local.xml
-*.ncrunchsolution
-*.ncrunchproject
+*ncrunch*
+*crunch*.local.xml
 *.cache
 src/packages/*
 PackageBuild/*
 Build/*
+Release/*
 src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.received.txt
 *.tss
 src/TestResults/*
+# Roslyn's metadata directory
+*.sln.ide/

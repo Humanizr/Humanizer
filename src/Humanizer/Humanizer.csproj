@@ -27,8 +27,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Humanizer.xml</DocumentationFile>
-    <NoWarn>
-    </NoWarn>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,25 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Humanizer.xml</DocumentationFile>
-    <NoWarn>1591</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseNET35|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\Humanizer.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <NoWarn>1591</NoWarn>
-    <DocumentationFile>bin\Release\Humanizer.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\Humanizer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -65,13 +49,53 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CollectionHumanizeExtensions.cs" />
+    <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
+    <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
+    <Compile Include="Localisation\CollectionFormatters\EnglishCollectionFormatter.cs" />
+    <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
+    <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
+    <Compile Include="Localisation\Formatters\SlovenianFormatter.cs" />
+    <Compile Include="Configuration\LocaliserRegistry.cs" />
+    <Compile Include="Configuration\FormatterRegistry.cs" />
+    <Compile Include="Configuration\NumberToWordsConverterRegistry.cs" />
+    <Compile Include="Configuration\OrdinalizerRegistry.cs" />
+    <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
+    <Compile Include="GrammaticalCase.cs" />
+    <Compile Include="GrammaticalGender.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
+    <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
+    <Compile Include="Localisation\NumberToWords\SlovenianNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\DutchNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\GermanNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\FarsiNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
     <Compile Include="Bytes\ByteSize.cs" />
     <Compile Include="Bytes\ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />
     <Compile Include="Configuration\Configurator.cs" />
     <Compile Include="DateHumanizeExtensions.cs" />
-    <Compile Include="Localisation\CzechSlovakFormatter.cs" />
+    <Compile Include="Localisation\NumberToWords\EnglishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\FrenchNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\HebrewNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\IDateTimeHumanizeStrategy.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
+    <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
+    <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\GermanOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\RussianOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\SpanishOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\EnglishOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
+    <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -83,9 +107,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>On.Days.tt</DependentUpon>
     </Compile>
-    <Compile Include="Localisation\ArabicFormatter.cs" />
-    <Compile Include="Localisation\DefaultFormatter.cs" />
-    <Compile Include="Localisation\IFormatter.cs" />
+    <Compile Include="Localisation\Formatters\ArabicFormatter.cs" />
+    <Compile Include="Localisation\Formatters\DefaultFormatter.cs" />
+    <Compile Include="Localisation\Formatters\IFormatter.cs" />
     <Compile Include="Localisation\ResourceKeys.Common.cs" />
     <Compile Include="Localisation\ResourceKeys.DateHumanize.cs" />
     <Compile Include="Localisation\ResourceKeys.TimeSpanHumanize.cs" />
@@ -97,7 +121,6 @@
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
-    <Compile Include="NumberToOrdinalWordsExtension.cs" />
     <Compile Include="EnumDehumanizeExtensions.cs" />
     <Compile Include="EnumHumanizeExtensions.cs" />
     <Compile Include="FluentDate\PrepositionsExtensions.cs" />
@@ -108,8 +131,8 @@
       <DependentUpon>In.Months.tt</DependentUpon>
     </Compile>
     <Compile Include="Localisation\Resources.cs" />
-    <Compile Include="Localisation\RomanianFormatter.cs" />
-    <Compile Include="Localisation\RussianFormatter.cs" />
+    <Compile Include="Localisation\Formatters\RomanianFormatter.cs" />
+    <Compile Include="Localisation\Formatters\RussianFormatter.cs" />
     <Compile Include="NumberToTimeSpanExtensions.cs" />
     <Compile Include="InflectorExtensions.cs" />
     <Compile Include="LetterCasing.cs" />
@@ -126,6 +149,7 @@
     <Compile Include="Truncation\FixedNumberOfCharactersTruncator.cs" />
     <Compile Include="Truncation\FixedNumberOfWordsTruncator.cs" />
     <Compile Include="Truncation\ITruncator.cs" />
+    <Compile Include="TruncateExtensions.cs" />
     <Compile Include="Truncation\Truncator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,12 +166,21 @@
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
     <None Include="Humanizer.snk" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.bn-BD.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.nb.resx" />
+    <EmbeddedResource Include="Properties\Resources.sl.resx" />
+    <EmbeddedResource Include="Properties\Resources.tr.resx" />
+    <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.bg.resx" />
+    <EmbeddedResource Include="Properties\Resources.he.resx" />
+    <EmbeddedResource Include="Properties\Resources.da.resx" />
+    <EmbeddedResource Include="Properties\Resources.hu.resx" />
+    <EmbeddedResource Include="Properties\Resources.id.resx" />
+    <EmbeddedResource Include="Properties\Resources.pl.resx" />
     <EmbeddedResource Include="Properties\Resources.cs.resx" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.fa.resx" />
@@ -161,12 +194,14 @@
     <EmbeddedResource Include="Properties\Resources.ar.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.nl.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx" />
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr-Latn.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr.resx" />
+    <EmbeddedResource Include="Properties\Resources.sv.resx" />
+    <EmbeddedResource Include="Properties\Resources.vi.resx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

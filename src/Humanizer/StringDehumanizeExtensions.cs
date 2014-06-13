@@ -2,6 +2,9 @@
 
 namespace Humanizer
 {
+    /// <summary>
+    /// Contains extension methods for dehumanizing strings.
+    /// </summary>
     public static class StringDehumanizeExtensions
     {
         /// <summary>

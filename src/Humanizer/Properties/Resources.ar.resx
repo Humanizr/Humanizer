@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -312,5 +312,93 @@
   <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
     <value>منذ {0} أعوام</value>
     <comment>{0} years ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>في غضون {0} يوم من الآن</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>في غضون يومين من الآن</value>
+    <comment>in 2 days</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>في غضون {0} أيام من الآن</value>
+    <comment>{0} days from now</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>في غضون {0} ساعة من الآن</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>في غضون ساعتين من الآن</value>
+    <comment>in 2 hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>في غضون {0} ساعات من الآن</value>
+    <comment>in {0} hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>في غضون {0} دقيقة من الآن</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>في غضون دقيقتين من الآن</value>
+    <comment>in 2 minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>في غضون {0} دقائق من الآن</value>
+    <comment>in {0} minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>في غضون {0} شهر من الآن</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>في غضون شهرين من الآن</value>
+    <comment>in 2 months</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>في غضون {0} أشهر من الآن</value>
+    <comment>in {0} months</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>في غضون {0} ثانية من الآن</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>في غضون ثانيتين من الآن</value>
+    <comment>in 2 seconds</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>في غضون {0} ثوان من الآن</value>
+    <comment>in {0} seconds</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>في غضون {0} سنة من الآن</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>في غضون سنتين من الآن</value>
+    <comment>in 2 years</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>في غضون {0} سنوات من الآن</value>
+    <comment>in {0} years</comment>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>في غضون يوم واحد من الآن</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>في غضون ساعة واحدة من الآن</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>في غضون دقيقة واحدة من الآن</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>في غضون شهر واحد من الآن</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>في غضون ثانية واحدة من الآن</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>في غضون سنة واحدة من الآن</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>الآن</value>
+    <comment>now</comment>
   </data>
 </root>

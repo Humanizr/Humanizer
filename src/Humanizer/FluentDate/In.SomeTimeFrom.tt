@@ -1,8 +1,8 @@
-﻿<#@ template debug="true" hostSpecific="true" #>
+﻿<#@ template debug="true" hostSpecific="true" culture="en-US"#>
 <#@ output extension=".cs" #>
 <#@ Assembly Name="System.Core" #>
 <#@ Assembly Name="System.Windows.Forms" #>
-<#@ assembly name="$(SolutionDir)Humanizer\bin\Debug\Humanizer.dll" #>
+<#@ assembly name="$(TargetPath)" #>
 <#@ import namespace="System" #>
 <#@ import namespace="Humanizer" #>
 <#@ import namespace="System.IO" #>
@@ -27,7 +27,6 @@ namespace Humanizer
 		var week = "Week" + plural;
 		var month = "Month" + plural;
 		var year = "Year" + plural;
-  
   #> 
         /// <summary>
         /// </summary>

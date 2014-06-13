@@ -1,12 +1,34 @@
+//The MIT License (MIT)
+
+//Copyright (c) 2013-2014 Omar Khudeira (http://omar.io)
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+
+//The above copyright notice and this permission notice shall be included in
+//all copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//THE SOFTWARE.
+
 using System;
 
-// ReSharper disable CSharpWarnings::CS1591
 namespace Humanizer.Bytes
 {
     /// <summary>
     /// Represents a byte size value.
     /// </summary>
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>
+#pragma warning disable 1591
+    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
@@ -125,7 +147,7 @@ namespace Humanizer.Bytes
         /// Converts the value of the current ByteSize object to a string.
         /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
         /// the largest metric prefix such that the corresponding value is greater
-        //  than or equal to one.
+        ///  than or equal to one.
         /// </summary>
         public override string ToString()
         {
@@ -181,6 +203,17 @@ namespace Humanizer.Bytes
         public override int GetHashCode()
         {
             return Bits.GetHashCode();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+                return 1;
+
+            if (!(obj is ByteSize))
+                throw new ArgumentException("Object is not a ByteSize");
+
+            return CompareTo((ByteSize) obj);
         }
 
         public int CompareTo(ByteSize other)
@@ -363,4 +396,4 @@ namespace Humanizer.Bytes
         }
     }
 }
-// ReSharper restore CSharpWarnings::CS1591
+#pragma warning restore 1591

@@ -31,23 +31,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseNET35|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\Humanizer.Tests.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\Humanizer.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ApprovalTests">
@@ -70,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bytes\ComparingTests.cs" />
     <Compile Include="Bytes\CreatingTests.cs" />
     <Compile Include="Bytes\ByteSizeExtensionsTests.cs" />
     <Compile Include="Bytes\ParsingTests.cs" />
@@ -79,12 +66,50 @@
     <Compile Include="Localisation\bn-BD\DateHumanizeTests.cs" />
     <Compile Include="Localisation\bn-BD\NumberToWordsTests.cs" />
     <Compile Include="Localisation\bn-BD\TimeSpanHumanizeTests.cs" />
+    <Compile Include="CollectionHumanizeTests.cs" />
+    <Compile Include="EnumHumanizeWithCustomDescriptionPropertyNamesTests.cs" />
+    <Compile Include="Localisation\bg\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\bg\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\nb\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\nb\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\cs\DateHumanizeTests.cs" />
     <Compile Include="Localisation\cs\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\da\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\da\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\de\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\de\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\es\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\fr-BE\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\fr-BE\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\fr\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\fr\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\fr\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\he\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\invariant\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\invariant\ToQuantityTests.cs" />
+    <Compile Include="Localisation\es\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\hu\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\hu\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\id\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\id\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\he\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\ar\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\ja\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\ja\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\nb-NO\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\nl\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\pl\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\pl\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\pl\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\pt-BR\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\ru-RU\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\ru-RU\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\ru-RU\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sk\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\NumberToWordsTests.cs" />
-    <Compile Include="Localisation\ar\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\he\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\nb-NO\DateHumanizeTests.cs" />
     <Compile Include="Localisation\de\DateHumanizeTests.cs" />
     <Compile Include="Localisation\de\TimeSpanHumanizeTests.cs" />
@@ -98,14 +123,27 @@
     <Compile Include="Localisation\pt-BR\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sk\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sl\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sl\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\sl\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sr-Latn\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sr-Latn\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sr\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sr\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\sv\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sv\TimeSpanHumanizeTests.cs" />
+    <Compile Include="DateTimeHumanizePrecisionStrategyTests.cs" />
+    <Compile Include="Localisation\tr\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\tr\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\vi\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\vi\TimeSpanHumanizeTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="ToQuantityTests.cs" />
     <Compile Include="TransformersTests.cs" />
-    <Compile Include="NumberToOrdinalWordsTests.cs" />
     <Compile Include="Localisation\ro-Ro\DateHumanizeTests.cs" />
-    <Compile Include="DateHumanizeTests.cs" />
+    <Compile Include="DateHumanizeDefaultStrategyTests.cs" />
     <Compile Include="DehumanizeToEnumTests.cs" />
     <Compile Include="EnumHumanizeTests.cs" />
     <Compile Include="EnumUnderTest.cs" />
@@ -143,6 +181,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

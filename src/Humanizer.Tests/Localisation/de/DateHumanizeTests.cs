@@ -8,8 +8,6 @@ namespace Humanizer.Tests.Localisation.de
         public DateHumanizeTests() : base("de-DE") {}
 
         [Theory]
-        [InlineData(-10, "vor 10 Tagen")]
-        [InlineData(-3, "vor 3 Tagen")]
         [InlineData(-2, "vor 2 Tagen")]
         [InlineData(-1, "gestern")]
         public void DaysAgo(int days, string expected)
@@ -26,8 +24,6 @@ namespace Humanizer.Tests.Localisation.de
         }
 
         [Theory]
-        [InlineData(-10, "vor 10 Stunden")]
-        [InlineData(-3, "vor 3 Stunden")]
         [InlineData(-2, "vor 2 Stunden")]
         [InlineData(-1, "vor einer Stunde")]
         public void HoursAgo(int hours, string expected)
@@ -44,10 +40,9 @@ namespace Humanizer.Tests.Localisation.de
         }
 
         [Theory]
-        [InlineData(-10, "vor 10 Minuten")]
-        [InlineData(-3, "vor 3 Minuten")]
         [InlineData(-2, "vor 2 Minuten")]
         [InlineData(-1, "vor einer Minute")]
+        [InlineData(60, "vor einer Stunde")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
@@ -62,8 +57,6 @@ namespace Humanizer.Tests.Localisation.de
         }
 
         [Theory]
-        [InlineData(-10, "vor 10 Monaten")]
-        [InlineData(-3, "vor 3 Monaten")]
         [InlineData(-2, "vor 2 Monaten")]
         [InlineData(-1, "vor einem Monat")]
         public void MonthsAgo(int months, string expected)
@@ -80,8 +73,6 @@ namespace Humanizer.Tests.Localisation.de
         }
 
         [Theory]
-        [InlineData(-10, "vor 10 Sekunden")]
-        [InlineData(-3, "vor 3 Sekunden")]
         [InlineData(-2, "vor 2 Sekunden")]
         [InlineData(-1, "vor einer Sekunde")]
         public void SecondsAgo(int seconds, string expected)
@@ -98,8 +89,6 @@ namespace Humanizer.Tests.Localisation.de
         }
 
         [Theory]
-        [InlineData(-10, "vor 10 Jahren")]
-        [InlineData(-3, "vor 3 Jahren")]
         [InlineData(-2, "vor 2 Jahren")]
         [InlineData(-1, "vor einem Jahr")]
         public void YearsAgo(int years, string expected)
