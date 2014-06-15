@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-   internal class SlovenianNumberToWordsConverter : DefaultNumberToWordsConverter
+   internal class SlovenianNumberToWordsConverter : GenderlessNumberToWordsConverter
    {
       private static readonly string[] UnitsMap = {"nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"};
       private static readonly string[] TensMap = {"nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"};
+
+      private readonly CultureInfo _culture = new CultureInfo("sl");
 
       public override string Convert(int number)
       {
@@ -73,6 +76,11 @@ namespace Humanizer.Localisation.NumberToWords
          }
 
          return string.Join("", parts);
+      }
+
+      public override string ConvertToOrdinal(int number)
+      {
+          return number.ToString(_culture);
       }
 
       private string Part(string singular, string dual, string trialQuadral, string plural, int number)

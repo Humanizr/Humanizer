@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class FarsiNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] FarsiHundredsMap = { "صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد" };
         private static readonly string[] FarsiTensMap = { "صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود" };
@@ -60,11 +60,6 @@ namespace Humanizer.Localisation.NumberToWords
 
             var word = Convert(number);
             return string.Format("{0}{1}", word, word.EndsWith("ی") ? " ام" : "م");
-        }
-
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return ConvertToOrdinal(number);
         }
     }
 }

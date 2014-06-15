@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class GermanNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class GermanNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn" };
         private static readonly string[] TensMap = { "null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig" };
@@ -13,7 +13,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] BillionOrdinalSingular = {"einmilliard", "einemilliarde"};
         private static readonly string[] BillionOrdinalPlural = {"{0}milliard", "{0}milliarden"};
 
-        public override string Convert(int number)
+        public override string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
                 return "null";
@@ -75,11 +75,6 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return string.Join("", parts);
-        }
-
-        public override string ConvertToOrdinal(int number)
-        {
-            return ConvertToOrdinal(number, GrammaticalGender.Masculine);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)

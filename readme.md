@@ -560,6 +560,13 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 
 Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
 
+Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
+
+```C#
+11.ToWords(new CultureInfo("ru")) => "eleven"
+1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru")) => "один"
+```
+
 ###<a id="number-toordinalwords">Number to ordinal words</a>
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
 
@@ -591,6 +598,13 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 ```
 
 Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
+
+Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
+
+```C#
+10.ToOrdinalWords(new CultureInfo("en-US")) => "tenth"
+1.ToOrdinalWords(GrammaticalGender.Masculine, new CulureInfo("pt-BR")) => "primeiro"
+```
 
 ###<a id="roman-numerals">Roman numerals</a>
 Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class BrazilianPortugueseNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class BrazilianPortugueseNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] PortugueseUnitsMap = { "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove" };
         private static readonly string[] PortugueseTensMap = { "zero", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa" };
@@ -81,11 +81,6 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public override string Convert(int number)
-        {
-            return Convert(number, GrammaticalGender.Masculine);
-        }
-
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             // N/A in Portuguese ordinal
@@ -139,12 +134,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return ConvertToOrdinal(number, GrammaticalGender.Masculine);
-        }
-
-        private string ApplyGender(string toWords, GrammaticalGender gender)
+        private static string ApplyGender(string toWords, GrammaticalGender gender)
         {
             if (gender != GrammaticalGender.Feminine) 
                 return toWords;
@@ -161,11 +151,11 @@ namespace Humanizer.Localisation.NumberToWords
             return toWords;
         }
 
-        private string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
+        private static string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
         {
             if (gender == GrammaticalGender.Feminine)
                 return toWords.TrimEnd('o') + 'a';
-            
+
             return toWords;
         }
     }

@@ -4,7 +4,7 @@ using Humanizer.Localisation.GrammaticalNumber;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class RussianNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] HundredsMap = { "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
         private static readonly string[] TensMap = { "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто" };
@@ -13,11 +13,6 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] TensOrdinalPrefixes = { string.Empty, "десяти", "двадцати", "тридцати", "сорока", "пятидесяти", "шестидесяти", "семидесяти", "восьмидесяти", "девятидесяти" };
         private static readonly string[] TensOrdinal = { string.Empty, "десят", "двадцат", "тридцат", "сороков", "пятидесят", "шестидесят", "семидесят", "восьмидесят", "девяност" };
         private static readonly string[] UnitsOrdinal = { string.Empty, "перв", "втор", "трет", "четверт", "пят", "шест", "седьм", "восьм", "девят", "десят", "одиннадцат", "двенадцат", "тринадцат", "четырнадцат", "пятнадцат", "шестнадцат", "семнадцат", "восемнадцат", "девятнадцат" };
-
-        public override string Convert(int number)
-        {
-            return Convert(number, GrammaticalGender.Masculine);
-        }
 
         public override string Convert(int number, GrammaticalGender gender)
         {
@@ -40,11 +35,6 @@ namespace Humanizer.Localisation.NumberToWords
                 CollectPartsUnderOneThousand(parts, number, gender);
 
             return string.Join(" ", parts);
-        }
-
-        public override string ConvertToOrdinal(int number)
-        {
-            return ConvertToOrdinal(number, GrammaticalGender.Masculine);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)

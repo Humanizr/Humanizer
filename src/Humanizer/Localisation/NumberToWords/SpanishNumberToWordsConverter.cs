@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class SpanishNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", 
                                                         "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
@@ -25,7 +25,7 @@ namespace Humanizer.Localisation.NumberToWords
             {10, "décimo"}
         };
 
-        public override string Convert(int number)
+        public override string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
                 return "cero";
@@ -92,7 +92,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts.ToArray());
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender = GrammaticalGender.Masculine)
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             string towords;
             if (!Ordinals.TryGetValue(number, out towords))

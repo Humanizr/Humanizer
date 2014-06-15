@@ -4,7 +4,7 @@ namespace Humanizer.Configuration
 {
     internal class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
     {
-        public NumberToWordsConverterRegistry() : base(new DefaultNumberToWordsConverter())
+        public NumberToWordsConverterRegistry() : base((culture) => new DefaultNumberToWordsConverter(culture))
         {
             Register("en", new EnglishNumberToWordsConverter());
             Register("ar", new ArabicNumberToWordsConverter());

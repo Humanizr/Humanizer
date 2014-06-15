@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Globalization;
+using Xunit;
 using Xunit.Extensions;
 
 namespace Humanizer.Tests
@@ -91,6 +92,24 @@ namespace Humanizer.Tests
         public void ToOrdinalWords(int number, string words)
         {
             Assert.Equal(words, number.ToOrdinalWords());
+        }
+
+        [Theory]
+        [InlineData(11, "en-US", "eleven")]
+        [InlineData(22, "ar", "اثنان و عشرون")]
+        [InlineData(40, "ru", "сорок")]
+        public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
+        }
+
+        [Theory]
+        [InlineData(1021, "en-US", "thousand and twenty-first")]
+        [InlineData(21, "ar", "الحادي و العشرون")]
+        [InlineData(1112, "ru", "одна тысяча сто двенадцатый")]
+        public void ToOrdinalWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo(culture)));
         }
     }
 }

@@ -84,6 +84,7 @@ public class Configurator
 public class LocaliserRegistry`1
 {
     public LocaliserRegistry`1(TLocaliser defaultLocaliser) { }
+    public LocaliserRegistry`1(System.Func<, > defaultLocaliser) { }
     public void Register(string localeCode, TLocaliser localiser) { }
     public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
     public TLocaliser ResolveForUiCulture() { }
@@ -291,10 +292,10 @@ public class NumberToTimeSpanExtensions
 
 public class NumberToWordsExtension
 {
-    public string ToOrdinalWords(int number) { }
-    public string ToOrdinalWords(int number, Humanizer.GrammaticalGender gender) { }
-    public string ToWords(int number) { }
-    public string ToWords(int number, Humanizer.GrammaticalGender gender) { }
+    public string ToOrdinalWords(int number, System.Globalization.CultureInfo culture) { }
+    public string ToOrdinalWords(int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture) { }
+    public string ToWords(int number, System.Globalization.CultureInfo culture) { }
+    public string ToWords(int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture) { }
 }
 
 public class On

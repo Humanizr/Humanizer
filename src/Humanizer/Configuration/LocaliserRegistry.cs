@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Humanizer.Configuration
@@ -7,10 +8,12 @@ namespace Humanizer.Configuration
     /// A registry of localised system components with their associated locales
     /// </summary>
     /// <typeparam name="TLocaliser"></typeparam>
-    public class LocaliserRegistry<TLocaliser> 
+    public class LocaliserRegistry<TLocaliser>
+        where TLocaliser : class
     {
         private readonly IDictionary<string, TLocaliser> _localisers = new Dictionary<string, TLocaliser>();
         private readonly TLocaliser _defaultLocaliser;
+        private readonly Func<CultureInfo, TLocaliser> _defaultLocaliserFactory;
 
         /// <summary>
         /// Creates a localiser registry with the default localiser set to the provided value
@@ -19,6 +22,15 @@ namespace Humanizer.Configuration
         public LocaliserRegistry(TLocaliser defaultLocaliser)
         {
             _defaultLocaliser = defaultLocaliser;
+        }
+
+        /// <summary>
+        /// Creates a localiser registry with the default localiser factory set to the provided value
+        /// </summary>
+        /// <param name="defaultLocaliser"></param>
+        public LocaliserRegistry(Func<CultureInfo, TLocaliser> defaultLocaliser)
+        {
+            _defaultLocaliserFactory = defaultLocaliser;
         }
 
         /// <summary>
@@ -45,7 +57,7 @@ namespace Humanizer.Configuration
             if (_localisers.TryGetValue(culture.TwoLetterISOLanguageName, out localiser))
                 return localiser;
 
-            return _defaultLocaliser;
+            return _defaultLocaliser ?? _defaultLocaliserFactory(culture);
         }
 
         /// <summary>

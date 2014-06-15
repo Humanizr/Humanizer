@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class ArabicNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class ArabicNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] Groups = { "مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون" };
         private static readonly string[] AppendedGroups = { "", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً" };
