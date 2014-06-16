@@ -5,7 +5,7 @@ namespace Humanizer.Tests.Localisation.bnBD
 {
     public class NumberToWordsTests : AmbientCulture
     {
-        public NumberToWordsTests() : base("fa") { }
+        public NumberToWordsTests() : base("bn-BD") { }
 
         [Theory]
         [InlineData(1, "یک")]
