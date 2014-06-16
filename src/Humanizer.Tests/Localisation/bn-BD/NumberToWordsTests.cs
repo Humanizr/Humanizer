@@ -86,7 +86,6 @@ namespace Humanizer.Tests.Localisation.bnBD
         }
     }
 }
-        public NumberToWordsTests() : base("fa") { }
 
         [Theory]
         [InlineData(1, "یک")]
