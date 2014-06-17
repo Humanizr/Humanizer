@@ -282,12 +282,60 @@ public class NoMatchFoundException
 
 public class NumberToTimeSpanExtensions
 {
+    public System.TimeSpan Days(byte days) { }
+    public System.TimeSpan Days(sbyte days) { }
+    public System.TimeSpan Days(short days) { }
+    public System.TimeSpan Days(ushort days) { }
     public System.TimeSpan Days(int days) { }
+    public System.TimeSpan Days(uint days) { }
+    public System.TimeSpan Days(long days) { }
+    public System.TimeSpan Days(ulong days) { }
+    public System.TimeSpan Days(double days) { }
+    public System.TimeSpan Hours(byte hours) { }
+    public System.TimeSpan Hours(sbyte hours) { }
+    public System.TimeSpan Hours(short hours) { }
+    public System.TimeSpan Hours(ushort hours) { }
     public System.TimeSpan Hours(int hours) { }
+    public System.TimeSpan Hours(uint hours) { }
+    public System.TimeSpan Hours(long hours) { }
+    public System.TimeSpan Hours(ulong hours) { }
+    public System.TimeSpan Hours(double hours) { }
+    public System.TimeSpan Milliseconds(byte ms) { }
+    public System.TimeSpan Milliseconds(sbyte ms) { }
+    public System.TimeSpan Milliseconds(short ms) { }
+    public System.TimeSpan Milliseconds(ushort ms) { }
     public System.TimeSpan Milliseconds(int ms) { }
+    public System.TimeSpan Milliseconds(uint ms) { }
+    public System.TimeSpan Milliseconds(long ms) { }
+    public System.TimeSpan Milliseconds(ulong ms) { }
+    public System.TimeSpan Milliseconds(double ms) { }
+    public System.TimeSpan Minutes(byte minutes) { }
+    public System.TimeSpan Minutes(sbyte minutes) { }
+    public System.TimeSpan Minutes(short minutes) { }
+    public System.TimeSpan Minutes(ushort minutes) { }
     public System.TimeSpan Minutes(int minutes) { }
+    public System.TimeSpan Minutes(uint minutes) { }
+    public System.TimeSpan Minutes(long minutes) { }
+    public System.TimeSpan Minutes(ulong minutes) { }
+    public System.TimeSpan Minutes(double minutes) { }
+    public System.TimeSpan Seconds(byte seconds) { }
+    public System.TimeSpan Seconds(sbyte seconds) { }
+    public System.TimeSpan Seconds(short seconds) { }
+    public System.TimeSpan Seconds(ushort seconds) { }
     public System.TimeSpan Seconds(int seconds) { }
+    public System.TimeSpan Seconds(uint seconds) { }
+    public System.TimeSpan Seconds(long seconds) { }
+    public System.TimeSpan Seconds(ulong seconds) { }
+    public System.TimeSpan Seconds(double seconds) { }
+    public System.TimeSpan Weeks(byte input) { }
+    public System.TimeSpan Weeks(sbyte input) { }
+    public System.TimeSpan Weeks(short input) { }
+    public System.TimeSpan Weeks(ushort input) { }
     public System.TimeSpan Weeks(int input) { }
+    public System.TimeSpan Weeks(uint input) { }
+    public System.TimeSpan Weeks(long input) { }
+    public System.TimeSpan Weeks(ulong input) { }
+    public System.TimeSpan Weeks(double input) { }
 }
 
 public class NumberToWordsExtension
