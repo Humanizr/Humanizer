@@ -563,7 +563,7 @@ Obviously this only applies to some cultures. For others passing gender in doesn
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
 
 ```C#
-11.ToWords(new CultureInfo("ru")) => "eleven"
+11.ToWords(new CultureInfo("en")) => "eleven"
 1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru")) => "один"
 ```
 
