@@ -169,6 +169,9 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.bn-BD.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.nb.resx" />
     <EmbeddedResource Include="Properties\Resources.sl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr.resx" />
