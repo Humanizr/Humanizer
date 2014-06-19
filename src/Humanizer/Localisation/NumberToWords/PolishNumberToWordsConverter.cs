@@ -9,7 +9,12 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] TensMap = { "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt" };
         private static readonly string[] UnitsMap = { "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście" };
 
-        private readonly CultureInfo _culture = new CultureInfo("pl");
+        private readonly CultureInfo _culture;
+
+        public PolishNumberToWordsConverter(CultureInfo culture)
+        {
+            _culture = culture;
+        }
 
         private static void CollectPartsUnderThousand(ICollection<string> parts, int number)
         {

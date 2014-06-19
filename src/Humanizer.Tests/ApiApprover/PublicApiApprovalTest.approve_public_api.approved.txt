@@ -86,6 +86,7 @@ public class LocaliserRegistry`1
     public LocaliserRegistry`1(TLocaliser defaultLocaliser) { }
     public LocaliserRegistry`1(System.Func<, > defaultLocaliser) { }
     public void Register(string localeCode, TLocaliser localiser) { }
+    public void Register(string localeCode, System.Func<, > localiser) { }
     public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
     public TLocaliser ResolveForUiCulture() { }
 }

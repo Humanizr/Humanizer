@@ -32,10 +32,10 @@ namespace Humanizer.Localisation.NumberToWords
             Billions  = 1000000000
         }
 
-        public HebrewNumberToWordsConverter()
+        public HebrewNumberToWordsConverter(CultureInfo culture)
             : base(GrammaticalGender.Feminine)
         {
-            _culture = new CultureInfo("he");
+            _culture = culture;
         }
 
         public override string Convert(int number, GrammaticalGender gender)
