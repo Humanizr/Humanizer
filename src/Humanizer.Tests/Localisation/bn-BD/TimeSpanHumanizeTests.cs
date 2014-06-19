@@ -60,7 +60,7 @@ namespace Humanizer.Tests.Localisation.bnBD
         public void NoTime()
         {
             // This one really doesn't make a lot of sense but again... w/e
-            Assert.Equal("শুন্য সময়", TimeSpan.Zero.Humanize());
+            Assert.Equal("শূন্য সময়", TimeSpan.Zero.Humanize());
         }
     }
 }
