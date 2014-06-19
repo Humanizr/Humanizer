@@ -88,36 +88,50 @@ namespace Humanizer.Tests.Localisation.bnBD
 }
 
         [Theory]
-        [InlineData(1, "یک")]
-        [InlineData(10, "ده")]
-        [InlineData(11, "یازده")]
-        [InlineData(122, "صد و بیست و دو")]
-        [InlineData(3501, "سه هزار و پانصد و یک")]
-        [InlineData(100, "صد")]
-        [InlineData(1000, "یک هزار")]
-        [InlineData(100000, "صد هزار")]
-        [InlineData(1000000, "یک میلیون")]
-        [InlineData(10000000, "ده میلیون")]
-        [InlineData(100000000, "صد میلیون")]
-        [InlineData(1000000000, "یک میلیارد")]
-        [InlineData(111, "صد و یازده")]
-        [InlineData(1111, "یک هزار و صد و یازده")]
-        [InlineData(111111, "صد و یازده هزار و صد و یازده")]
-        [InlineData(1111111, "یک میلیون و صد و یازده هزار و صد و یازده")]
-        [InlineData(11111111, "یازده میلیون و صد و یازده هزار و صد و یازده")]
-        [InlineData(111111111, "صد و یازده میلیون و صد و یازده هزار و صد و یازده")]
-        [InlineData(1111111111, "یک میلیارد و صد و یازده میلیون و صد و یازده هزار و صد و یازده")]
-        [InlineData(123, "صد و بیست و سه")]
-        [InlineData(1234, "یک هزار و دویست و سی و چهار")]
-        [InlineData(12345, "دوازده هزار و سیصد و چهل و پنج")]
-        [InlineData(123456, "صد و بیست و سه هزار و چهارصد و پنجاه و شش")]
-        [InlineData(1234567, "یک میلیون و دویست و سی و چهار هزار و پانصد و شصت و هفت")]
-        [InlineData(12345678, "دوازده میلیون و سیصد و چهل و پنج هزار و ششصد و هفتاد و هشت")]
-        [InlineData(123456789, "صد و بیست و سه میلیون و چهارصد و پنجاه و شش هزار و هفتصد و هشتاد و نه")]
-        [InlineData(1234567890, "یک میلیارد و دویست و سی و چهار میلیون و پانصد و شصت و هفت هزار و هشتصد و نود")]
-        public void ToWordsFarsi(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
+        }
+
+
+
+        [Theory]
+        [InlineData(0, "শূন্য তম")]
+        [InlineData(1, "প্রথম")]
+        [InlineData(2, "দ্বিতীয়")]
+        [InlineData(3, "তৃতীয়")]
+        [InlineData(4, "চতুর্থ")]
+        [InlineData(5, "পঞ্চম")]
+        [InlineData(6, "ষষ্ট")]
+        [InlineData(7, "সপ্তম")]
+        [InlineData(8, "অষ্টম")]
+        [InlineData(9, "নবম")]
+        [InlineData(10, "দশম")]
+        [InlineData(11, "একাদশ")]
+        [InlineData(12, "দ্বাদশ")]
+        [InlineData(13, "ত্রয়োদশ")]
+        [InlineData(14, "চতুর্দশ")]
+        [InlineData(15, "পঞ্চদশ")]
+        [InlineData(16, "ষোড়শ")]
+        [InlineData(17, "সপ্তদশ")]
+        [InlineData(18, "অষ্টাদশ")]
+        [InlineData(19, "উনিশ তম")]
+        [InlineData(20, "বিশ তম")]
+        [InlineData(21, "একুশ তম")]        
+        [InlineData(100, "শত তম")]
+        [InlineData(112, "একশ বারো তম")]
+        [InlineData(118, "একশ আঠারো তম")]
+        [InlineData(1000, "হাজার তম")]
+        [InlineData(1001, "এক হাজার এক তম")]
+        [InlineData(1021, "এক হাজার একুশ তম")]
+        [InlineData(10000, "দশ হাজার তম")]
+        [InlineData(10121, "দশ হাজার একশ একুশ তম")]
+        [InlineData(100000, "লক্ষ তম")]
+        [InlineData(1000000, "দশ লক্ষ তম")]
+        [InlineData(10000000, "কোটি তম")]
+
+        public void ToOrdinalWords(int number, string words)
+        {
+            Assert.Equal(words, number.ToOrdinalWords());
         }
     }
 }
