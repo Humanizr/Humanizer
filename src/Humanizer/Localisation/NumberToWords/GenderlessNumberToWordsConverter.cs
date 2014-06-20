@@ -3,7 +3,7 @@
     abstract class GenderlessNumberToWordsConverter : INumberToWordsConverter
     {
         /// <summary>
-        /// Converts the number to string using
+        /// Converts the number to string
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
