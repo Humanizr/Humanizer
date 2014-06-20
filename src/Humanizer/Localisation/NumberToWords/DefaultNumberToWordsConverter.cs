@@ -2,7 +2,7 @@
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal sealed class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
+    internal class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private readonly CultureInfo _culture;
 

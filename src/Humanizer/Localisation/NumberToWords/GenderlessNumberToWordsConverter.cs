@@ -3,14 +3,14 @@
     abstract class GenderlessNumberToWordsConverter : INumberToWordsConverter
     {
         /// <summary>
-        /// Converts the number to string using the locale's default grammatical gender
+        /// Converts the number to string using
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
         public abstract string Convert(int number);
 
         /// <summary>
-        /// Converts the number to string using the provided grammatical gender
+        /// Converts the number to string ignoring the provided grammatical gender
         /// </summary>
         /// <param name="number"></param>
         /// <param name="gender"></param>
@@ -21,14 +21,14 @@
         }
 
         /// <summary>
-        /// Converts the number to ordinal string using the locale's default grammatical gender
+        /// Converts the number to ordinal string
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
         public abstract string ConvertToOrdinal(int number);
 
         /// <summary>
-        /// Converts the number to ordinal string using the provided grammatical gender
+        /// Converts the number to ordinal string ignoring  the provided grammatical gender
         /// </summary>
         /// <param name="number"></param>
         /// <param name="gender"></param>
