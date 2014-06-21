@@ -1,5 +1,6 @@
 ###In Development
   - [#306](https://github.com/MehdiK/Humanizer/pull/306): Added Singularize/Pluralize overload without using obsolete plurality enum
+  - [#303](https://github.com/MehdiK/Humanizer/pull/303): Added support for all integer types in ByteSize extensions
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...master)
 
