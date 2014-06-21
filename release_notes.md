@@ -1,4 +1,5 @@
 ###In Development
+  - [#303](https://github.com/MehdiK/Humanizer/pull/303): Added support for all integer types in ByteSize extensions
   - [#297](https://github.com/MehdiK/Humanizer/pull/297): Added support for all integer types in Fluent Date
   - [#294](https://github.com/MehdiK/Humanizer/pull/294): Added support for untyped comparison of ByteSize
   - [#277](https://github.com/MehdiK/Humanizer/pull/277): Added support for custom enum description attribute property names
