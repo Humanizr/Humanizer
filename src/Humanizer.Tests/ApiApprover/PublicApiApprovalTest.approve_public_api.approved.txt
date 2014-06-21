@@ -49,13 +49,48 @@
 
 public class ByteSizeExtensions
 {
-    public Humanizer.Bytes.ByteSize Bits(long input) { }
+    public Humanizer.Bytes.ByteSize Bits(byte input) { }
+    public Humanizer.Bytes.ByteSize Bits(sbyte input) { }
+    public Humanizer.Bytes.ByteSize Bits(short input) { }
+    public Humanizer.Bytes.ByteSize Bits(ushort input) { }
     public Humanizer.Bytes.ByteSize Bits(int input) { }
+    public Humanizer.Bytes.ByteSize Bits(uint input) { }
+    public Humanizer.Bytes.ByteSize Bits(long input) { }
+    public Humanizer.Bytes.ByteSize Bytes(byte input) { }
+    public Humanizer.Bytes.ByteSize Bytes(sbyte input) { }
+    public Humanizer.Bytes.ByteSize Bytes(short input) { }
+    public Humanizer.Bytes.ByteSize Bytes(ushort input) { }
+    public Humanizer.Bytes.ByteSize Bytes(int input) { }
+    public Humanizer.Bytes.ByteSize Bytes(uint input) { }
     public Humanizer.Bytes.ByteSize Bytes(double input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(byte input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(sbyte input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(short input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(ushort input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(int input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Gigabytes(double input) { }
     public string Humanize(Humanizer.Bytes.ByteSize input, string format) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(byte input) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(sbyte input) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(short input) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(ushort input) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(int input) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(uint input) { }
     public Humanizer.Bytes.ByteSize Kilobytes(double input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(byte input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(sbyte input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(short input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(ushort input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(int input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Megabytes(double input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(byte input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(sbyte input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(short input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(ushort input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(int input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Terabytes(double input) { }
 }
 

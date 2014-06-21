@@ -9,9 +9,52 @@ namespace Humanizer.Tests.Bytes
         public ByteSizeExtensionsTests() : base("en") { }
 
         [Fact]
-        public void Terabytes()
+        public void ByteTerabytes()
         {
-            Assert.Equal(ByteSize.FromTerabytes(2), (2.0).Terabytes());
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(2), size.Terabytes());
+        }
+
+        [Fact]
+        public void SbyteTerabytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(2), size.Terabytes());
+        }
+
+        [Fact]
+        public void ShortTerabytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(2), size.Terabytes());
+        }
+
+        [Fact]
+        public void UshortTerabytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(2), size.Terabytes());
+        }
+
+        [Fact]
+        public void IntTerabytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(2), size.Terabytes());
+        }
+
+        [Fact]
+        public void UintTerabytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(2), size.Terabytes());
+        }
+
+        [Fact]
+        public void DoubleTerabytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(2), size.Terabytes());
         }
 
         [Theory]
@@ -24,9 +67,52 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void Gigabytes()
+        public void ByteGigabytes()
         {
-            Assert.Equal(ByteSize.FromGigabytes(2), (2.0).Gigabytes());
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(2), size.Gigabytes());
+        }
+
+        [Fact]
+        public void SbyteGigabytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(2), size.Gigabytes());
+        }
+
+        [Fact]
+        public void ShortGigabytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(2), size.Gigabytes());
+        }
+
+        [Fact]
+        public void UshortGigabytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(2), size.Gigabytes());
+        }
+
+        [Fact]
+        public void IntGigabytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(2), size.Gigabytes());
+        }
+
+        [Fact]
+        public void UintGigabytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(2), size.Gigabytes());
+        }
+
+        [Fact]
+        public void DoubleGigabytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(2), size.Gigabytes());
         }
 
         [Theory]
@@ -39,9 +125,52 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void Megabytes()
+        public void ByteMegabytes()
         {
-            Assert.Equal(ByteSize.FromMegabytes(2), (2.0).Megabytes());
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(2), size.Megabytes());
+        }
+
+        [Fact]
+        public void SbyteMegabytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(2), size.Megabytes());
+        }
+
+        [Fact]
+        public void ShortMegabytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(2), size.Megabytes());
+        }
+
+        [Fact]
+        public void UshortMegabytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(2), size.Megabytes());
+        }
+
+        [Fact]
+        public void IntMegabytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(2), size.Megabytes());
+        }
+
+        [Fact]
+        public void UintMegabytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(2), size.Megabytes());
+        }
+
+        [Fact]
+        public void DoubleMegabytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(2), size.Megabytes());
         }
 
         [Theory]
@@ -54,9 +183,52 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void Kilobytes()
+        public void ByteKilobytes()
         {
-            Assert.Equal(ByteSize.FromKilobytes(2), (2.0).Kilobytes());
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(2), size.Kilobytes());
+        }
+
+        [Fact]
+        public void SbyteKilobytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(2), size.Kilobytes());
+        }
+
+        [Fact]
+        public void ShortKilobytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(2), size.Kilobytes());
+        }
+
+        [Fact]
+        public void UshortKilobytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(2), size.Kilobytes());
+        }
+
+        [Fact]
+        public void IntKilobytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(2), size.Kilobytes());
+        }
+
+        [Fact]
+        public void UintKilobytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(2), size.Kilobytes());
+        }
+
+        [Fact]
+        public void DoubleKilobytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(2), size.Kilobytes());
         }
 
         [Theory]
@@ -69,9 +241,52 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void Bytes()
+        public void ByteBytes()
         {
-            Assert.Equal(ByteSize.FromBytes(2), (2.0).Bytes());
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromBytes(2), size.Bytes());
+        }
+
+        [Fact]
+        public void SbyteBytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromBytes(2), size.Bytes());
+        }
+
+        [Fact]
+        public void ShortBytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromBytes(2), size.Bytes());
+        }
+
+        [Fact]
+        public void UshortBytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromBytes(2), size.Bytes());
+        }
+
+        [Fact]
+        public void IntBytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromBytes(2), size.Bytes());
+        }
+
+        [Fact]
+        public void UintBytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromBytes(2), size.Bytes());
+        }
+
+        [Fact]
+        public void DoubleBytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromBytes(2), size.Bytes());
         }
 
         [Theory]
@@ -84,9 +299,52 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void Bits()
+        public void ByteBits()
         {
-            Assert.Equal(ByteSize.FromBits(2), (2).Bits());
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromBits(2), size.Bits());
+        }
+
+        [Fact]
+        public void SbyteBits()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromBits(2), size.Bits());
+        }
+
+        [Fact]
+        public void ShortBits()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromBits(2), size.Bits());
+        }
+
+        [Fact]
+        public void UshortBits()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromBits(2), size.Bits());
+        }
+
+        [Fact]
+        public void IntBits()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromBits(2), size.Bits());
+        }
+
+        [Fact]
+        public void UintBits()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromBits(2), size.Bits());
+        }
+
+        [Fact]
+        public void LongBits()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromBits(2), size.Bits());
         }
 
         [Theory]
