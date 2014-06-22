@@ -43,8 +43,6 @@ namespace Humanizer.Tests.Localisation.bnBD
             Assert.Equal(expected, number.ToWords());
         }
 
-
-
         [Theory]
         [InlineData(0, "শূন্য তম")]
         [InlineData(1, "প্রথম")]
@@ -79,56 +77,6 @@ namespace Humanizer.Tests.Localisation.bnBD
         [InlineData(100000, "লক্ষ তম")]
         [InlineData(1000000, "দশ লক্ষ তম")]
         [InlineData(10000000, "কোটি তম")]
-
-        public void ToOrdinalWords(int number, string words)
-        {
-            Assert.Equal(words, number.ToOrdinalWords());
-        }
-    }
-}
-
-        [Theory]
-        {
-            Assert.Equal(expected, number.ToWords());
-        }
-
-
-
-        [Theory]
-        [InlineData(0, "শূন্য তম")]
-        [InlineData(1, "প্রথম")]
-        [InlineData(2, "দ্বিতীয়")]
-        [InlineData(3, "তৃতীয়")]
-        [InlineData(4, "চতুর্থ")]
-        [InlineData(5, "পঞ্চম")]
-        [InlineData(6, "ষষ্ট")]
-        [InlineData(7, "সপ্তম")]
-        [InlineData(8, "অষ্টম")]
-        [InlineData(9, "নবম")]
-        [InlineData(10, "দশম")]
-        [InlineData(11, "একাদশ")]
-        [InlineData(12, "দ্বাদশ")]
-        [InlineData(13, "ত্রয়োদশ")]
-        [InlineData(14, "চতুর্দশ")]
-        [InlineData(15, "পঞ্চদশ")]
-        [InlineData(16, "ষোড়শ")]
-        [InlineData(17, "সপ্তদশ")]
-        [InlineData(18, "অষ্টাদশ")]
-        [InlineData(19, "উনিশ তম")]
-        [InlineData(20, "বিশ তম")]
-        [InlineData(21, "একুশ তম")]        
-        [InlineData(100, "শত তম")]
-        [InlineData(112, "একশ বারো তম")]
-        [InlineData(118, "একশ আঠারো তম")]
-        [InlineData(1000, "হাজার তম")]
-        [InlineData(1001, "এক হাজার এক তম")]
-        [InlineData(1021, "এক হাজার একুশ তম")]
-        [InlineData(10000, "দশ হাজার তম")]
-        [InlineData(10121, "দশ হাজার একশ একুশ তম")]
-        [InlineData(100000, "লক্ষ তম")]
-        [InlineData(1000000, "দশ লক্ষ তম")]
-        [InlineData(10000000, "কোটি তম")]
-
         public void ToOrdinalWords(int number, string words)
         {
             Assert.Equal(words, number.ToOrdinalWords());

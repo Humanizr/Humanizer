@@ -1,5 +1,6 @@
 ###In Development
   - [#301](https://github.com/MehdiK/Humanizer/pull/301): Added Bangla (Bangladesh) localisation
+  - [#300](https://github.com/MehdiK/Humanizer/pull/300): Added optional Culture parameter to NumberToWords
   - [#297](https://github.com/MehdiK/Humanizer/pull/297): Added support for all integer types in Fluent Date
   - [#294](https://github.com/MehdiK/Humanizer/pull/294): Added support for untyped comparison of ByteSize
   - [#277](https://github.com/MehdiK/Humanizer/pull/277): Added support for custom enum description attribute property names
@@ -8,7 +9,6 @@
   - [#278](https://github.com/MehdiK/Humanizer/pull/278): Changed DefaultDateTimeHumanizeStrategy to turn 60 min to one hour not 45
   - [#283](https://github.com/MehdiK/Humanizer/pull/283): Added Neutral nb support for DateTime and TimeSpan Humanize
   - [#286](https://github.com/MehdiK/Humanizer/pull/286): Added optional Culture parameter to DateTime.Humanize & TimeSpan.Humanize
-  - [#295](https://github.com/MehdiK/Humanizer/pull/295): Added optional Culture parameter to NumberToWords
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
 
