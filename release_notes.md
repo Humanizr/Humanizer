@@ -1,4 +1,8 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...master)
+
+###v1.27.0 - 2014-06-21
   - [#301](https://github.com/MehdiK/Humanizer/pull/301): Added Bangla (Bangladesh) localisation
   - [#300](https://github.com/MehdiK/Humanizer/pull/300): Added optional Culture parameter to NumberToWords
   - [#297](https://github.com/MehdiK/Humanizer/pull/297): Added support for all integer types in Fluent Date
@@ -10,7 +14,7 @@
   - [#283](https://github.com/MehdiK/Humanizer/pull/283): Added Neutral nb support for DateTime and TimeSpan Humanize
   - [#286](https://github.com/MehdiK/Humanizer/pull/286): Added optional Culture parameter to DateTime.Humanize & TimeSpan.Humanize
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...v1.27.0)
 
 ###v1.26.1 - 2014-05-20
   - [#257](https://github.com/Mehdik/Humanizer/pull/257): Added German localisation for ToOrdinalWords and Ordinalize
