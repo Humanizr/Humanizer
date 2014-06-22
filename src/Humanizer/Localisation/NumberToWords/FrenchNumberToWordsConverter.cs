@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class FrenchNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class FrenchNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf" };
         private static readonly string[] TensMap = { "zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante-dix", "quatre-vingt", "quatre-vingt-dix"};
@@ -15,7 +15,7 @@ namespace Humanizer.Localisation.NumberToWords
             {91, "quatre-vingt-onze"}
         };
 
-        public override string Convert(int number)
+        public override string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0)
                 return UnitsMap[0];
@@ -92,16 +92,8 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
-            if (number == 1 && gender == GrammaticalGender.Feminine)
-                return "première";
-
-            return base.ConvertToOrdinal(number, gender);
-        }
-
-        public override string ConvertToOrdinal(int number)
-        {
             if (number == 1)
-                return "premier";
+                return gender == GrammaticalGender.Feminine ? "première" : "premier";
 
             var convertedNumber = Convert(number);
 

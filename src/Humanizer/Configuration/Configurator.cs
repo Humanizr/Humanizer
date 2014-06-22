@@ -72,12 +72,10 @@ namespace Humanizer.Configuration
         /// <summary>
         /// The converter to be used
         /// </summary>
-        internal static INumberToWordsConverter NumberToWordsConverter
+        /// <param name="culture">The culture to retrieve number to words converter for. Null means that current thread's UI culture should be used.</param>
+        internal static INumberToWordsConverter GetNumberToWordsConverter(CultureInfo culture)
         {
-            get
-            {
-                return NumberToWordsConverters.ResolveForUiCulture();
-            }
+            return NumberToWordsConverters.ResolveForCulture(culture);
         }
 
         /// <summary>

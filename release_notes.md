@@ -7,6 +7,7 @@
   - [#278](https://github.com/MehdiK/Humanizer/pull/278): Changed DefaultDateTimeHumanizeStrategy to turn 60 min to one hour not 45
   - [#283](https://github.com/MehdiK/Humanizer/pull/283): Added Neutral nb support for DateTime and TimeSpan Humanize
   - [#286](https://github.com/MehdiK/Humanizer/pull/286): Added optional Culture parameter to DateTime.Humanize & TimeSpan.Humanize
+  - [#295](https://github.com/MehdiK/Humanizer/pull/295): Added optional Culture parameter to NumberToWords
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.26.1...master)
 

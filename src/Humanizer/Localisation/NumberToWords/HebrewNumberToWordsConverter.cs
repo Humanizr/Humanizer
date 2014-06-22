@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class HebrewNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class HebrewNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsFeminine = { "אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר" };
         private static readonly string[] UnitsMasculine = { "אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה" };
         private static readonly string[] TensUnit = { "עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים" };
+
+        private readonly CultureInfo _culture;
 
         private class DescriptionAttribute : Attribute
         {
@@ -29,10 +32,10 @@ namespace Humanizer.Localisation.NumberToWords
             Billions  = 1000000000
         }
 
-        public override string Convert(int number)
+        public HebrewNumberToWordsConverter(CultureInfo culture)
+            : base(GrammaticalGender.Feminine)
         {
-            // in Hebrew, the default number gender form is feminine.
-            return Convert(number, GrammaticalGender.Feminine);
+            _culture = culture;
         }
 
         public override string Convert(int number, GrammaticalGender gender)
@@ -104,6 +107,11 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts);
         }
 
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+        {
+            return number.ToString(_culture);
+        }
+
         private void ToBigNumber(int number, Group group, List<string> parts)
         {
             // Big numbers (million and above) always use the masculine form
@@ -131,7 +139,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(Convert(thousands) + " אלף");
         }
 
-        private void ToHundreds(int number, List<string> parts)
+        private static void ToHundreds(int number, List<string> parts)
         {
             // For hundreds, Hebrew is using the feminine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php

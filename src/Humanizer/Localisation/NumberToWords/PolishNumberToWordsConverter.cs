@@ -1,12 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class PolishNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class PolishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] HundredsMap = { "zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset" };
         private static readonly string[] TensMap = { "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt" };
         private static readonly string[] UnitsMap = { "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście" };
+
+        private readonly CultureInfo _culture;
+
+        public PolishNumberToWordsConverter(CultureInfo culture)
+        {
+            _culture = culture;
+        }
 
         private static void CollectPartsUnderThousand(ICollection<string> parts, int number)
         {
@@ -98,6 +106,11 @@ namespace Humanizer.Localisation.NumberToWords
                 CollectPartsUnderThousand(parts, units);
 
             return string.Join(" ", parts);
+        }
+
+        public override string ConvertToOrdinal(int number)
+        {
+            return number.ToString(_culture);
         }
     }
 }

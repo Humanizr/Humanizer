@@ -1,13 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-   internal class SlovenianNumberToWordsConverter : DefaultNumberToWordsConverter
-   {
-      private static readonly string[] UnitsMap = {"nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"};
-      private static readonly string[] TensMap = {"nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"};
+    internal class SlovenianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    {
+        private static readonly string[] UnitsMap = {"nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"};
+        private static readonly string[] TensMap = {"nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"};
 
-      public override string Convert(int number)
+        private readonly CultureInfo _culture;
+
+        public SlovenianNumberToWordsConverter(CultureInfo culture)
+        {
+            _culture = culture;
+        }
+
+        public override string Convert(int number)
       {
          if (number == 0)
             return "nič";
@@ -75,7 +83,12 @@ namespace Humanizer.Localisation.NumberToWords
          return string.Join("", parts);
       }
 
-      private string Part(string singular, string dual, string trialQuadral, string plural, int number)
+        public override string ConvertToOrdinal(int number)
+        {
+            return number.ToString(_culture);
+        }
+
+        private string Part(string singular, string dual, string trialQuadral, string plural, int number)
       {
          if (number == 1)
             return singular;
@@ -88,5 +101,5 @@ namespace Humanizer.Localisation.NumberToWords
 
          return string.Format(plural, Convert(number));
       }
-   }
+    }
 }

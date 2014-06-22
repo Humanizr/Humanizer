@@ -9,7 +9,7 @@ namespace Humanizer.Localisation.NumberToWords
     /// Used the rules as stated here.
     /// http://www.beterspellen.nl/website/?pag=110
     /// </summary>
-    internal class DutchNumberToWordsConverter : DefaultNumberToWordsConverter
+    internal class DutchNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien" };
         private static readonly string[] TensMap = { "nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig" };
@@ -24,12 +24,12 @@ namespace Humanizer.Localisation.NumberToWords
         }
 
         private static readonly Fact[] Hunderds =
-	    {
-		    new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-		    new Fact {Value = 1000000,    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-		    new Fact {Value = 1000,       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
-		    new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
-	    };
+        {
+            new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000000,    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000,       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
+            new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
+        };
 
         public override string Convert(int number)
         {
@@ -88,7 +88,7 @@ namespace Humanizer.Localisation.NumberToWords
         };
 
         private static readonly char[] EndingCharForSte = {'t', 'g', 'd'};
-        
+
         public override string ConvertToOrdinal(int number)
         {
             var word = Convert(number);

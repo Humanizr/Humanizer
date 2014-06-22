@@ -1,3 +1,4 @@
+using System.Globalization;
 using Humanizer.Configuration;
 
 namespace Humanizer
@@ -11,10 +12,11 @@ namespace Humanizer
         /// 3501.ToWords() -> "three thousand five hundred and one"
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public static string ToWords(this int number)
+        public static string ToWords(this int number, CultureInfo culture = null)
         {
-            return Configurator.NumberToWordsConverter.Convert(number);
+            return Configurator.GetNumberToWordsConverter(culture).Convert(number);
         }
 
         /// <summary>
@@ -35,20 +37,22 @@ namespace Humanizer
         /// 
         /// <param name="number">Number to be turned to words</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public static string ToWords(this int number, GrammaticalGender gender)
+        public static string ToWords(this int number, GrammaticalGender gender, CultureInfo culture = null)
         {
-            return Configurator.NumberToWordsConverter.Convert(number, gender);
+            return Configurator.GetNumberToWordsConverter(culture).Convert(number, gender);
         }
 
         /// <summary>
         /// 1.ToOrdinalWords() -> "first"
         /// </summary>
         /// <param name="number">Number to be turned to ordinal words</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public static string ToOrdinalWords(this int number)
+        public static string ToOrdinalWords(this int number, CultureInfo culture = null)
         {
-            return Configurator.NumberToWordsConverter.ConvertToOrdinal(number);
+            return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number);
         }
 
         /// <summary>
@@ -58,10 +62,11 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public static string ToOrdinalWords(this int number, GrammaticalGender gender)
+        public static string ToOrdinalWords(this int number, GrammaticalGender gender, CultureInfo culture = null)
         {
-            return Configurator.NumberToWordsConverter.ConvertToOrdinal(number, gender);
+            return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
         }
     }
 }

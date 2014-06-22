@@ -1,18 +1,18 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿using System.Globalization;
+
+namespace Humanizer.Localisation.NumberToWords
 {
-    internal class DefaultNumberToWordsConverter : INumberToWordsConverter
+    internal class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
+        private readonly CultureInfo _culture;
+
         /// <summary>
-        /// for Russian locale
-        /// 1.ToWords(GrammaticalGender.Masculine) -> "один"
-        /// 1.ToWords(GrammaticalGender.Feminine) -> "одна"
+        /// Constructor.
         /// </summary>
-        /// <param name="number">Number to be turned to words</param>
-        /// <param name="gender">The grammatical gender to use for output words</param>
-        /// <returns></returns>
-        public virtual string Convert(int number, GrammaticalGender gender)
+        /// <param name="culture">Culture to use.</param>
+        public DefaultNumberToWordsConverter(CultureInfo culture)
         {
-            return Convert(number);
+            _culture = culture;
         }
 
         /// <summary>
@@ -20,22 +20,9 @@
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <returns></returns>
-        public virtual string Convert(int number)
+        public override string Convert(int number)
         {
-            return number.ToString();
-        }
-
-        /// <summary>
-        /// for Brazilian Portuguese
-        /// 1.ToOrdinalWords(GrammaticalGender.Masculine) -> "primeiro"
-        /// 1.ToOrdinalWords(GrammaticalGender.Feminine) -> "primeira"
-        /// </summary>
-        /// <param name="number">Number to be turned to words</param>
-        /// <param name="gender">The grammatical gender to use for output words</param>
-        /// <returns></returns>
-        public virtual string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return ConvertToOrdinal(number);
+            return number.ToString(_culture);
         }
 
         /// <summary>
@@ -43,9 +30,9 @@
         /// </summary>
         /// <param name="number">Number to be turned to ordinal words</param>
         /// <returns></returns>
-        public virtual string ConvertToOrdinal(int number)
+        public override string ConvertToOrdinal(int number)
         {
-            return number.ToString();
+            return number.ToString(_culture);
         }
     }
 }
