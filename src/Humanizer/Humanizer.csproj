@@ -60,6 +60,7 @@
     <Compile Include="Configuration\FormatterRegistry.cs" />
     <Compile Include="Configuration\NumberToWordsConverterRegistry.cs" />
     <Compile Include="Configuration\OrdinalizerRegistry.cs" />
+    <Compile Include="Localisation\NumberToWords\BanglaNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
     <Compile Include="GrammaticalGender.cs" />
@@ -170,6 +171,9 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.bn-BD.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.nb.resx" />
     <EmbeddedResource Include="Properties\Resources.sl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr.resx" />

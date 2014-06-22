@@ -63,6 +63,9 @@
     <Compile Include="Bytes\ToStringTests.cs" />
     <Compile Include="CasingTests.cs" />
     <Compile Include="DateHumanize.cs" />
+    <Compile Include="Localisation\bn-BD\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\bn-BD\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\bn-BD\TimeSpanHumanizeTests.cs" />
     <Compile Include="CollectionHumanizeTests.cs" />
     <Compile Include="EnumHumanizeWithCustomDescriptionPropertyNamesTests.cs" />
     <Compile Include="Localisation\bg\DateHumanizeTests.cs" />

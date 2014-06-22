@@ -37,6 +37,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("nb");
             RegisterDefaultFormatter("nb-NO");
             RegisterDefaultFormatter("nl");
+            RegisterDefaultFormatter("bn-BD");
         }
 
         private void RegisterDefaultFormatter(string localeCode)
