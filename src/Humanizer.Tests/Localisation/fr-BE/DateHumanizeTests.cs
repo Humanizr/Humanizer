@@ -103,6 +103,5 @@ namespace Humanizer.Tests.Localisation.frBE
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
-
     }
 }
