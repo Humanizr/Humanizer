@@ -21,6 +21,7 @@
 //IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -168,7 +169,7 @@ namespace Humanizer
         /// <param name="word">Word to be pluralized</param>
         /// <param name="plurality">Normally you call Pluralize on singular words; but if you're unsure call it with Plurality.CouldBeEither</param>
         /// <returns></returns>
-        public static string Pluralize(this string word, Plurality plurality = Plurality.Singular)
+        public static string Pluralize(this string word, Plurality plurality)
         {
             if (plurality == Plurality.Plural)
                 return word;
@@ -187,12 +188,23 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Pluralizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be pluralized</param>
+        /// <param name="inputIsSingular">Normally you call Pluralize on singular words; but if you're unsure call it with inputIsSingular = false</param>
+        /// <returns></returns>
+        public static string Pluralize(this string word, bool inputIsSingular = true)
+        {
+            return Pluralize(word, inputIsSingular ? Plurality.Singular : Plurality.CouldBeEither);
+        }
+
+        /// <summary>
         /// Singularizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be singularized</param>
         /// <param name="plurality">Normally you call Singularize on plural words; but if you're unsure call it with Plurality.CouldBeEither</param>
         /// <returns></returns>
-        public static string Singularize(this string word, Plurality plurality = Plurality.Plural)
+        public static string Singularize(this string word, Plurality plurality)
         {
             if (plurality == Plurality.Singular)
                 return word;
@@ -209,6 +221,17 @@ namespace Humanizer
                 return word;
 
             return result ?? word;
+        }
+
+        /// <summary>
+        /// Singularizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be singularized</param>
+        /// <param name="inputIsPlural">Normally you call Singularize on plural words; but if you're unsure call it with inputIsPlural = false</param>
+        /// <returns></returns>
+        public static string Singularize(this string word, bool inputIsPlural = true)
+        {
+            return Singularize(word, inputIsPlural ? Plurality.Plural : Plurality.CouldBeEither);
         }
 
         private static string ApplyRules(List<Rule> rules, string word)
