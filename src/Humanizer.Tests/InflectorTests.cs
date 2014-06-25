@@ -41,17 +41,10 @@ namespace Humanizer.Tests
 
         [Theory]
         [ClassData(typeof(PluralTestSource))]
-        public void PluralizeAlreadyPluralWord(string singular, string plural)
-        {
-            Assert.Equal(plural, plural.Pluralize(Plurality.Plural));
-        }
-
-        [Theory]
-        [ClassData(typeof(PluralTestSource))]
         public void PluralizeWordsWithUnknownPlurality(string singular, string plural)
         {
-            Assert.Equal(plural, plural.Pluralize(Plurality.CouldBeEither));
-            Assert.Equal(plural, singular.Pluralize(Plurality.CouldBeEither));
+            Assert.Equal(plural, plural.Pluralize(false));
+            Assert.Equal(plural, singular.Pluralize(false));
         }
 
         [Theory]
@@ -63,17 +56,10 @@ namespace Humanizer.Tests
 
         [Theory]
         [ClassData(typeof(PluralTestSource))]
-        public void SingularizeAlreadySingularWord(string singular, string plural)
-        {
-            Assert.Equal(singular, singular.Singularize(Plurality.Singular));
-        }
-
-        [Theory]
-        [ClassData(typeof(PluralTestSource))]
         public void SingularizeWordsWithUnknownSingularity(string singular, string plural)
         {
-            Assert.Equal(singular, singular.Singularize(Plurality.CouldBeEither));
-            Assert.Equal(singular, plural.Singularize(Plurality.CouldBeEither));
+            Assert.Equal(singular, singular.Singularize(false));
+            Assert.Equal(singular, plural.Singularize(false));
         }
 
         //Uppercases individual words and removes some characters 

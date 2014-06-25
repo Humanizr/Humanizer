@@ -169,14 +169,23 @@ namespace Humanizer
         /// <param name="word">Word to be pluralized</param>
         /// <param name="plurality">Normally you call Pluralize on singular words; but if you're unsure call it with Plurality.CouldBeEither</param>
         /// <returns></returns>
+        [Obsolete("Use string.Pluralize(bool) instead. This method will be removed in next major release.")]
         public static string Pluralize(this string word, Plurality plurality)
         {
-            if (plurality == Plurality.Plural)
-                return word;
+            return plurality == Plurality.Plural ? word : word.Pluralize(inputIsSingular: false);
+        }
 
+        /// <summary>
+        /// Pluralizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be pluralized</param>
+        /// <param name="inputIsSingular">Normally you call Pluralize on singular words; but if you're unsure call it with inputIsSingular = false</param>
+        /// <returns></returns>
+        public static string Pluralize(this string word, bool inputIsSingular = true)
+        {
             var result = ApplyRules(Plurals, word);
 
-            if (plurality == Plurality.Singular)
+            if (inputIsSingular)
                 return result;
 
             var asSingular = ApplyRules(Singulars, word);
@@ -188,39 +197,15 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// Pluralizes the provided input considering irregular words
-        /// </summary>
-        /// <param name="word">Word to be pluralized</param>
-        /// <param name="inputIsSingular">Normally you call Pluralize on singular words; but if you're unsure call it with inputIsSingular = false</param>
-        /// <returns></returns>
-        public static string Pluralize(this string word, bool inputIsSingular = true)
-        {
-            return Pluralize(word, inputIsSingular ? Plurality.Singular : Plurality.CouldBeEither);
-        }
-
-        /// <summary>
         /// Singularizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be singularized</param>
         /// <param name="plurality">Normally you call Singularize on plural words; but if you're unsure call it with Plurality.CouldBeEither</param>
         /// <returns></returns>
+        [Obsolete("Use string.Singularize(bool) instead. This method will be removed in next major release.")]
         public static string Singularize(this string word, Plurality plurality)
         {
-            if (plurality == Plurality.Singular)
-                return word;
-
-            var result = ApplyRules(Singulars, word);
-
-            if (plurality == Plurality.Plural)
-                return result;
-
-            // the Plurality is unknown so we should check all possibilities
-            var asPlural = ApplyRules(Plurals, word);
-            var asPluralAsSingular = ApplyRules(Singulars, asPlural);
-            if (asPlural != word && word+"s" != asPlural && asPluralAsSingular == word && result != word)
-                return word;
-
-            return result ?? word;
+            return plurality == Plurality.Singular ? word : word.Singularize(inputIsPlural: false);
         }
 
         /// <summary>
@@ -231,7 +216,19 @@ namespace Humanizer
         /// <returns></returns>
         public static string Singularize(this string word, bool inputIsPlural = true)
         {
-            return Singularize(word, inputIsPlural ? Plurality.Plural : Plurality.CouldBeEither);
+
+            var result = ApplyRules(Singulars, word);
+
+            if (inputIsPlural)
+                return result;
+
+            // the Plurality is unknown so we should check all possibilities
+            var asPlural = ApplyRules(Plurals, word);
+            var asPluralAsSingular = ApplyRules(Singulars, asPlural);
+            if (asPlural != word && word + "s" != asPlural && asPluralAsSingular == word && result != word)
+                return word;
+
+            return result ?? word;
         }
 
         private static string ApplyRules(List<Rule> rules, string word)
