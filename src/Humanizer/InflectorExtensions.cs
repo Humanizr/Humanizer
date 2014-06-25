@@ -172,20 +172,20 @@ namespace Humanizer
         [Obsolete("Use string.Pluralize(bool) instead. This method will be removed in next major release.")]
         public static string Pluralize(this string word, Plurality plurality)
         {
-            return plurality == Plurality.Plural ? word : word.Pluralize(inputIsSingular: false);
+            return plurality == Plurality.Plural ? word : word.Pluralize(inputIsKnownToBeSingular: false);
         }
 
         /// <summary>
         /// Pluralizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be pluralized</param>
-        /// <param name="inputIsSingular">Normally you call Pluralize on singular words; but if you're unsure call it with inputIsSingular = false</param>
+        /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
         /// <returns></returns>
-        public static string Pluralize(this string word, bool inputIsSingular = true)
+        public static string Pluralize(this string word, bool inputIsKnownToBeSingular = true)
         {
             var result = ApplyRules(Plurals, word);
 
-            if (inputIsSingular)
+            if (inputIsKnownToBeSingular)
                 return result;
 
             var asSingular = ApplyRules(Singulars, word);
@@ -205,21 +205,21 @@ namespace Humanizer
         [Obsolete("Use string.Singularize(bool) instead. This method will be removed in next major release.")]
         public static string Singularize(this string word, Plurality plurality)
         {
-            return plurality == Plurality.Singular ? word : word.Singularize(inputIsPlural: false);
+            return plurality == Plurality.Singular ? word : word.Singularize(inputIsKnownToBePlural: false);
         }
 
         /// <summary>
         /// Singularizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be singularized</param>
-        /// <param name="inputIsPlural">Normally you call Singularize on plural words; but if you're unsure call it with inputIsPlural = false</param>
+        /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
         /// <returns></returns>
-        public static string Singularize(this string word, bool inputIsPlural = true)
+        public static string Singularize(this string word, bool inputIsKnownToBePlural = true)
         {
 
             var result = ApplyRules(Singulars, word);
 
-            if (inputIsPlural)
+            if (inputIsKnownToBePlural)
                 return result;
 
             // the Plurality is unknown so we should check all possibilities
