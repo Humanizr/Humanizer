@@ -70,8 +70,8 @@ namespace Humanizer
         private static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string format = null, IFormatProvider formatProvider = null)
         {
             var transformedInput = quantity == 1
-                ? input.Singularize(Plurality.CouldBeEither)
-                : input.Pluralize(Plurality.CouldBeEither);
+                ? input.Singularize(inputIsKnownToBePlural: false)
+                : input.Pluralize(inputIsKnownToBeSingular: false);
 
             if (showQuantityAs == ShowQuantityAs.None)
                 return transformedInput;

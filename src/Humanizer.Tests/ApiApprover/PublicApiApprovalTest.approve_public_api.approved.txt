@@ -182,7 +182,9 @@ public class InflectorExtensions
     public string Hyphenate(string underscoredWord) { }
     public string Pascalize(string input) { }
     public string Pluralize(string word, Humanizer.Plurality plurality) { }
+    public string Pluralize(string word, bool inputIsKnownToBeSingular) { }
     public string Singularize(string word, Humanizer.Plurality plurality) { }
+    public string Singularize(string word, bool inputIsKnownToBePlural) { }
     public string Titleize(string input) { }
     public string Underscore(string input) { }
 }

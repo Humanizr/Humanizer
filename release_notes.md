@@ -1,4 +1,5 @@
 ###In Development
+  - [#306](https://github.com/MehdiK/Humanizer/pull/306): Added Singularize/Pluralize overload without using obsolete plurality enum
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...master)
 

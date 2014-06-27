@@ -368,13 +368,16 @@ There are also a few inflector methods:
 "string".Pluralize() => "strings"
 ```
 
-Normally you would call `Pluralize` on a singular word but if you're unsure about the singularity of the word you can call the method with the optional `plurality` argument:
+Normally you would call `Pluralize` on a singular word but if you're unsure about the singularity of the word you can call the method with the optional `inputIsKnownToBeSingular` argument:
 
 ```C#
-"Men".Pluralize(Plurality.CouldBeEither) => "Men"
-"Man".Pluralize(Plurality.CouldBeEither) => "Men"
-"string".Pluralize(Plurality.CouldBeEither) => "strings"
+"Men".Pluralize(inputIsKnownToBeSingular: false) => "Men"
+"Man".Pluralize(inputIsKnownToBeSingular: false) => "Men"
+"string".Pluralize(inputIsKnownToBeSingular: false) => "strings"
 ```
+
+
+The overload of `Pluralize` with `plurality` argument is obsolete and will be removed in next major release.
 
 ####<a id="singularize">Singularize</a>
 `Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
@@ -384,13 +387,16 @@ Normally you would call `Pluralize` on a singular word but if you're unsure abou
 "strings".Singularize() => "string"
 ```
 
-Normally you would call `Singularize` on a plural word but if you're unsure about the plurality of the word you can call the method with the optional `plurality` argument:
+Normally you would call `Singularize` on a plural word but if you're unsure about the plurality of the word you can call the method with the optional `inputIsKnownToBePlural` argument:
 
 ```C#
-"Men".Singularize(Plurality.CouldBeEither) => "Man"
-"Man".Singularize(Plurality.CouldBeEither) => "Man"
-"strings".Singularize(Plurality.CouldBeEither) => "string"
+"Men".Singularize(inputIsKnownToBePlural: false) => "Man"
+"Man".Singularize(inputIsKnownToBePlural: false) => "Man"
+"strings".Singularize(inputIsKnownToBePlural: false) => "string"
 ```
+
+
+The overload of `Singularize` with `plurality` argument is obsolete and will be removed in next major release.
 
 ####<a id="toquantity">ToQuantity</a>
 Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
