@@ -50,6 +50,7 @@
 <li><a href="#dehumanize-enums">Dehumanize Enums</a></li>
 <li><a href="#humanize-datetime">Humanize DateTime</a></li>
 <li><a href="#humanize-timespan">Humanize TimeSpan</a></li>
+<li><a href="#humanize-collections">Humanize Collections</a></li>
 <li>
 <a href="#inflector-methods">Inflector methods</a>
 
@@ -77,8 +78,7 @@
 <li><a href="#license">License</a></li>
 <li><a href="#icon">Icon</a></li>
 </ul><h2>
-<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a><a>Install</a>
-</h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
 
 <p>You can install Humanizer as <a href="https://nuget.org/packages/Humanizer">a nuget package</a>: <code>Install-Package Humanizer</code></p>
 
@@ -86,12 +86,10 @@
 Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer">symbols nuget package</a> is published so you can <a href="http://www.symbolsource.org/Public/Home/VisualStudio">step through Humanizer code</a> while debugging your code.</p>
 
 <h2>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a><a>Features</a>
-</h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
 
 <h3>
-<a name="humanize-string" class="anchor" href="#humanize-string"><span class="octicon octicon-link"></span></a><a>Humanize String</a>
-</h3>
+<a name="humanize-string" class="anchor" href="#humanize-string"><span class="octicon octicon-link"></span></a>Humanize String</h3>
 
 <p><code>Humanize</code> string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
 The foundation of this was set in the <a href="https://github.com/TestStack/TestStack.BDDfy">BDDfy framework</a> where class names, method names and properties are turned into human readable sentences.</p>
@@ -122,8 +120,7 @@ The foundation of this was set in the <a href="https://github.com/TestStack/Test
 </blockquote>
 
 <h3>
-<a name="dehumanize-string" class="anchor" href="#dehumanize-string"><span class="octicon octicon-link"></span></a><a>Dehumanize String</a>
-</h3>
+<a name="dehumanize-string" class="anchor" href="#dehumanize-string"><span class="octicon octicon-link"></span></a>Dehumanize String</h3>
 
 <p>Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:</p>
 
@@ -131,8 +128,7 @@ The foundation of this was set in the <a href="https://github.com/TestStack/Test
 </pre></div>
 
 <h3>
-<a name="transform-string" class="anchor" href="#transform-string"><span class="octicon octicon-link"></span></a><a>Transform String</a>
-</h3>
+<a name="transform-string" class="anchor" href="#transform-string"><span class="octicon octicon-link"></span></a>Transform String</h3>
 
 <p>There is a <code>Transform</code> method that supersedes <code>LetterCasing</code>, <code>ApplyCase</code> and <code>Humanize</code> overloads that accept <code>LetterCasing</code>.
 Transform method signature is as follows:</p>
@@ -154,8 +150,7 @@ Transform method signature is as follows:</p>
 while <code>IStringTransformer</code> is an interface you can implement in your codebase once and use it with <code>Transform</code> method allowing for easy extension.</p>
 
 <h3>
-<a name="truncate-string" class="anchor" href="#truncate-string"><span class="octicon octicon-link"></span></a><a>Truncate String</a>
-</h3>
+<a name="truncate-string" class="anchor" href="#truncate-string"><span class="octicon octicon-link"></span></a>Truncate String</h3>
 
 <p>You can truncate a <code>string</code> using the <code>Truncate</code> method:</p>
 
@@ -198,8 +193,7 @@ Default is the right as shown in the examples above. The examples below show how
 </pre></div>
 
 <h3>
-<a name="format-string" class="anchor" href="#format-string"><span class="octicon octicon-link"></span></a><a>Format String</a>
-</h3>
+<a name="format-string" class="anchor" href="#format-string"><span class="octicon octicon-link"></span></a>Format String</h3>
 
 <p>You can format a <code>string</code> using the <code>FormatWith()</code> method:</p>
 
@@ -211,8 +205,7 @@ If <code>format</code> is null, it'll throw <code>ArgumentNullException</code>.
 If passed a fewer number for arguments, it'll throw <code>String.FormatException</code> exception.</p>
 
 <h3>
-<a name="humanize-enums" class="anchor" href="#humanize-enums"><span class="octicon octicon-link"></span></a><a>Humanize Enums</a>
-</h3>
+<a name="humanize-enums" class="anchor" href="#humanize-enums"><span class="octicon octicon-link"></span></a>Humanize Enums</h3>
 
 <p>Calling <code>ToString</code> directly on enum members usually results in less than ideal output for users. The solution to this is usually to use <code>DescriptionAttribute</code> data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what <code>String.Humanize()</code> does well. For an enum like:</p>
 
@@ -240,11 +233,14 @@ If passed a fewer number for arguments, it'll throw <code>String.FormatException
 <p>You are not limited to <code>DescriptionAttribute</code> for custom description. Any attribute applied on enum members with a <code>string Description</code> property counts.
 This is to help with platforms with missing <code>DescriptionAttribute</code> and also for allowing subclasses of the <code>DescriptionAttribute</code>.</p>
 
+<p>You can even configure the name of the property of attibute to use as description.</p>
+
+<p><code>Configurator.EnumDescriptionPropertyLocator = p =&gt; p.Name == "Info"</code></p>
+
 <p>Hopefully this will help avoid littering enums with unnecessary attributes!</p>
 
 <h3>
-<a name="dehumanize-enums" class="anchor" href="#dehumanize-enums"><span class="octicon octicon-link"></span></a><a>Dehumanize Enums</a>
-</h3>
+<a name="dehumanize-enums" class="anchor" href="#dehumanize-enums"><span class="octicon octicon-link"></span></a>Dehumanize Enums</h3>
 
 <p>Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:</p>
 
@@ -272,8 +268,7 @@ This is to help with platforms with missing <code>DescriptionAttribute</code> an
 In the non-generic method you can also ask the method to return null by setting the second optional parameter to <code>NoMatch.ReturnsNull</code>.</p>
 
 <h3>
-<a name="humanize-datetime" class="anchor" href="#humanize-datetime"><span class="octicon octicon-link"></span></a><a>Humanize DateTime</a>
-</h3>
+<a name="humanize-datetime" class="anchor" href="#humanize-datetime"><span class="octicon octicon-link"></span></a>Humanize DateTime</h3>
 
 <p>You can <code>Humanize</code> an instance of <code>DateTime</code> and get back a string telling how far back or forward in time that is:</p>
 
@@ -284,9 +279,11 @@ In the non-generic method you can also ask the method to return null by setting 
 <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">.</span><span class="n">AddHours</span><span class="p">(</span><span class="m">2</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"2 hours from now"</span>
 </pre></div>
 
-<p>Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base. Here is the API signature:</p>
+<p>Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
+Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
+Here is the API signature:</p>
 
-<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">Humanize</span><span class="p">(</span><span class="k">this</span> <span class="n">DateTime</span> <span class="n">input</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">utcDate</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">?</span> <span class="n">dateToCompareAgainst</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
+<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">Humanize</span><span class="p">(</span><span class="k">this</span> <span class="n">DateTime</span> <span class="n">input</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">utcDate</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">?</span> <span class="n">dateToCompareAgainst</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span> <span class="n">CultureInfo</span> <span class="n">culture</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span>
 </pre></div>
 
 <p>Many localizations are available for this method. Here is a few examples:</p>
@@ -324,8 +321,7 @@ To use the precision based strategy you need to configure it:</p>
 <p><strong>No dehumanization for dates as <code>Humanize</code> is a lossy transformation and the human friendly date is not reversible</strong></p>
 
 <h3>
-<a name="humanize-timespan" class="anchor" href="#humanize-timespan"><span class="octicon octicon-link"></span></a><a>Humanize TimeSpan</a>
-</h3>
+<a name="humanize-timespan" class="anchor" href="#humanize-timespan"><span class="octicon octicon-link"></span></a>Humanize TimeSpan</h3>
 
 <p>You can call <code>Humanize</code> on a <code>TimeSpan</code> to a get human friendly representation for it:</p>
 
@@ -361,15 +357,55 @@ Here is a few examples of specifying precision:</p>
 <span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">5</span><span class="p">).</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"5 milisekúnd"</span>
 </pre></div>
 
+<p>Culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Example:</p>
+
+<div class="highlight highlight-C#"><pre><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromDays</span><span class="p">(</span><span class="m">1</span><span class="p">).</span><span class="n">Humanize</span><span class="p">(</span><span class="n">culture</span><span class="p">:</span> <span class="s">"ru-RU"</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"один день"</span>
+</pre></div>
+
 <h3>
-<a name="inflector-methods" class="anchor" href="#inflector-methods"><span class="octicon octicon-link"></span></a><a>Inflector methods</a>
-</h3>
+<a name="humanize-collections" class="anchor" href="#humanize-collections"><span class="octicon octicon-link"></span></a>Humanize Collections</h3>
+
+<p>You can call <code>Humanize</code> on any <code>IEnumerable</code> to get a nicely formatted string representing the objects in the collection. By default <code>ToString()</code> will be called on each item to get its representation but a formatting function may be passed to <code>Humanize</code> instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into <code>Humanize</code>.</p>
+
+<p>For instance:</p>
+
+<div class="highlight highlight-C#"><pre><span class="k">class</span> <span class="nc">SomeClass</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">SomeString</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">SomeInt</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s">"Specific String"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">string</span> <span class="nf">FormatSomeClass</span><span class="p">(</span><span class="n">SomeClass</span> <span class="n">sc</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"SomeObject #{0} - {1}"</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">SomeInt</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">SomeString</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">collection</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">SomeClass</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+        <span class="k">new</span> <span class="n">SomeClass</span> <span class="p">{</span> <span class="n">SomeInt</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">SomeString</span> <span class="p">=</span> <span class="s">"One"</span> <span class="p">},</span>
+        <span class="k">new</span> <span class="n">SomeClass</span> <span class="p">{</span> <span class="n">SomeInt</span> <span class="p">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">SomeString</span> <span class="p">=</span> <span class="s">"Two"</span> <span class="p">},</span>
+        <span class="k">new</span> <span class="n">SomeClass</span> <span class="p">{</span> <span class="n">SomeInt</span> <span class="p">=</span> <span class="m">3</span><span class="p">,</span> <span class="n">SomeString</span> <span class="p">=</span> <span class="s">"Three"</span> <span class="p">}</span>
+    <span class="p">};</span>
+
+<span class="n">collection</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span>                                    <span class="c1">// "Specific String, Specific String, and Specific String"</span>
+<span class="n">collection</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="s">"or"</span><span class="p">)</span>                                <span class="c1">//"Specific String, Specific String, or Specific String"</span>
+<span class="n">collection</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="n">FormatSomeClass</span><span class="p">)</span>                     <span class="c1">//"SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"</span>
+<span class="n">collection</span><span class="p">.</span><span class="n">Humanize</span><span class="p">(</span><span class="n">sc</span> <span class="p">=&gt;</span> <span class="n">sc</span><span class="p">.</span><span class="n">SomeInt</span><span class="p">.</span><span class="n">Ordinalize</span><span class="p">(),</span> <span class="s">"or"</span><span class="p">)</span> <span class="c1">//"1st, 2nd, or 3rd"</span>
+</pre></div>
+
+<p>You can provide your own collection formatter by implementing <code>ICollectionFormatter</code> and registering it with <code>Configurator.CollectionFormatters</code></p>
+
+<h3>
+<a name="inflector-methods" class="anchor" href="#inflector-methods"><span class="octicon octicon-link"></span></a>Inflector methods</h3>
 
 <p>There are also a few inflector methods:</p>
 
 <h4>
-<a name="pluralize" class="anchor" href="#pluralize"><span class="octicon octicon-link"></span></a><a>Pluralize</a>
-</h4>
+<a name="pluralize" class="anchor" href="#pluralize"><span class="octicon octicon-link"></span></a>Pluralize</h4>
 
 <p><code>Pluralize</code> pluralizes the provided input while taking irregular and uncountable words into consideration:</p>
 
@@ -377,16 +413,17 @@ Here is a few examples of specifying precision:</p>
 <span class="s">"string"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"strings"</span>
 </pre></div>
 
-<p>Normally you would call <code>Pluralize</code> on a singular word but if you're unsure about the singularity of the word you can call the method with the optional <code>plurality</code> argument:</p>
+<p>Normally you would call <code>Pluralize</code> on a singular word but if you're unsure about the singularity of the word you can call the method with the optional <code>inputIsKnownToBeSingular</code> argument:</p>
 
-<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span>
-<span class="s">"Man"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span>
-<span class="s">"string"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"strings"</span>
+<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">inputIsKnownToBeSingular</span><span class="p">:</span> <span class="k">false</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span>
+<span class="s">"Man"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">inputIsKnownToBeSingular</span><span class="p">:</span> <span class="k">false</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Men"</span>
+<span class="s">"string"</span><span class="p">.</span><span class="n">Pluralize</span><span class="p">(</span><span class="n">inputIsKnownToBeSingular</span><span class="p">:</span> <span class="k">false</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"strings"</span>
 </pre></div>
 
+<p>The overload of <code>Pluralize</code> with <code>plurality</code> argument is obsolete and will be removed in next major release.</p>
+
 <h4>
-<a name="singularize" class="anchor" href="#singularize"><span class="octicon octicon-link"></span></a><a>Singularize</a>
-</h4>
+<a name="singularize" class="anchor" href="#singularize"><span class="octicon octicon-link"></span></a>Singularize</h4>
 
 <p><code>Singularize</code> singularizes the provided input while taking irregular and uncountable words into consideration:</p>
 
@@ -394,16 +431,17 @@ Here is a few examples of specifying precision:</p>
 <span class="s">"strings"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"string"</span>
 </pre></div>
 
-<p>Normally you would call <code>Singularize</code> on a plural word but if you're unsure about the plurality of the word you can call the method with the optional <code>plurality</code> argument:</p>
+<p>Normally you would call <code>Singularize</code> on a plural word but if you're unsure about the plurality of the word you can call the method with the optional <code>inputIsKnownToBePlural</code> argument:</p>
 
-<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span>
-<span class="s">"Man"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span>
-<span class="s">"strings"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">Plurality</span><span class="p">.</span><span class="n">CouldBeEither</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"string"</span>
+<div class="highlight highlight-C#"><pre><span class="s">"Men"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">inputIsKnownToBePlural</span><span class="p">:</span> <span class="k">false</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span>
+<span class="s">"Man"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">inputIsKnownToBePlural</span><span class="p">:</span> <span class="k">false</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Man"</span>
+<span class="s">"strings"</span><span class="p">.</span><span class="n">Singularize</span><span class="p">(</span><span class="n">inputIsKnownToBePlural</span><span class="p">:</span> <span class="k">false</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"string"</span>
 </pre></div>
 
+<p>The overload of <code>Singularize</code> with <code>plurality</code> argument is obsolete and will be removed in next major release.</p>
+
 <h4>
-<a name="toquantity" class="anchor" href="#toquantity"><span class="octicon octicon-link"></span></a><a>ToQuantity</a>
-</h4>
+<a name="toquantity" class="anchor" href="#toquantity"><span class="octicon octicon-link"></span></a>ToQuantity</h4>
 
 <p>Many times you want to call <code>Singularize</code> and <code>Pluralize</code> to prefix a word with a number; e.g. "2 requests", "3 men". <code>ToQuantity</code> prefixes the provided word with the number and accordingly pluralizes or singularizes the word:</p>
 
@@ -438,8 +476,7 @@ Here is a few examples of specifying precision:</p>
 </pre></div>
 
 <h4>
-<a name="ordinalize" class="anchor" href="#ordinalize"><span class="octicon octicon-link"></span></a><a>Ordinalize</a>
-</h4>
+<a name="ordinalize" class="anchor" href="#ordinalize"><span class="octicon octicon-link"></span></a>Ordinalize</h4>
 
 <p><code>Ordinalize</code> turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th:</p>
 
@@ -465,14 +502,12 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <p>Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.</p>
 
 <h4>
-<a name="underscore" class="anchor" href="#underscore"><span class="octicon octicon-link"></span></a><a>Underscore</a>
-</h4>
+<a name="underscore" class="anchor" href="#underscore"><span class="octicon octicon-link"></span></a>Underscore</h4>
 
 <p><code>Underscore</code> separates the input words with underscore; e.g. <code>"SomeTitle".Underscore()</code> =&gt; <code>"some_title"</code></p>
 
 <h4>
-<a name="dasherize--hyphenate" class="anchor" href="#dasherize--hyphenate"><span class="octicon octicon-link"></span></a><a>Dasherize &amp; Hyphenate</a>
-</h4>
+<a name="dasherize--hyphenate" class="anchor" href="#dasherize--hyphenate"><span class="octicon octicon-link"></span></a>Dasherize &amp; Hyphenate</h4>
 
 <p><code>Dasherize</code> and <code>Hyphenate</code> replace underscores with dashes in the string:</p>
 
@@ -481,8 +516,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 </code></pre>
 
 <h3>
-<a name="fluent-date" class="anchor" href="#fluent-date"><span class="octicon octicon-link"></span></a><a>Fluent Date</a>
-</h3>
+<a name="fluent-date" class="anchor" href="#fluent-date"><span class="octicon octicon-link"></span></a>Fluent Date</h3>
 
 <p>Humanizer provides a fluent API to deal with <code>DateTime</code> and <code>TimeSpan</code> as follows:</p>
 
@@ -550,8 +584,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <p>Obviously you could chain the methods too; e.g. <code>On.November.The13th.In(2010).AtNoon + 5.Minutes()</code></p>
 
 <h3>
-<a name="number-to-words" class="anchor" href="#number-to-words"><span class="octicon octicon-link"></span></a><a>Number to words</a>
-</h3>
+<a name="number-to-words" class="anchor" href="#number-to-words"><span class="octicon octicon-link"></span></a>Number to words</h3>
 
 <p>Humanizer can change numbers to words using the <code>ToWords</code> extension:</p>
 
@@ -573,9 +606,14 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p>Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.</p>
 
+<p>Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:</p>
+
+<div class="highlight highlight-C#"><pre><span class="m">11.</span><span class="n">ToWords</span><span class="p">(</span><span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">"en"</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="s">"eleven"</span>
+<span class="m">1.</span><span class="n">ToWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">,</span> <span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">"ru"</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="s">"один"</span>
+</pre></div>
+
 <h3>
-<a name="number-to-ordinal-words" class="anchor" href="#number-to-ordinal-words"><span class="octicon octicon-link"></span></a><a>Number to ordinal words</a>
-</h3>
+<a name="number-to-ordinal-words" class="anchor" href="#number-to-ordinal-words"><span class="octicon octicon-link"></span></a>Number to ordinal words</h3>
 
 <p>This is kind of mixing <code>ToWords</code> with <code>Ordinalize</code>. You can call <code>ToOrdinalWords</code> on a number to get an ordinal representation of the number in words! For example:</p>
 
@@ -606,9 +644,14 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p>Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.</p>
 
+<p>Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:</p>
+
+<div class="highlight highlight-C#"><pre><span class="m">10.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">"en-US"</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="s">"tenth"</span>
+<span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">,</span> <span class="k">new</span> <span class="n">CulureInfo</span><span class="p">(</span><span class="s">"pt-BR"</span><span class="p">))</span> <span class="p">=&gt;</span> <span class="s">"primeiro"</span>
+</pre></div>
+
 <h3>
-<a name="roman-numerals" class="anchor" href="#roman-numerals"><span class="octicon octicon-link"></span></a><a>Roman numerals</a>
-</h3>
+<a name="roman-numerals" class="anchor" href="#roman-numerals"><span class="octicon octicon-link"></span></a>Roman numerals</h3>
 
 <p>Humanizer can change numbers to Roman numerals using the <code>ToRoman</code> extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:</p>
 
@@ -634,8 +677,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 </pre></div>
 
 <h3>
-<a name="bytesize" class="anchor" href="#bytesize"><span class="octicon octicon-link"></span></a><a>ByteSize</a>
-</h3>
+<a name="bytesize" class="anchor" href="#bytesize"><span class="octicon octicon-link"></span></a>ByteSize</h3>
 
 <p>Humanizer includes a port of the brilliant <a href="https://github.com/omar/ByteSize">ByteSize</a> library.
 Quite a few changes and additions are made on <code>ByteSize</code> to make the interaction with <code>ByteSize</code> easier and more consistent with the Humanizer API.
@@ -738,8 +780,7 @@ ByteSize.Parse("1.55 tb");
 </code></pre>
 
 <h2>
-<a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a><a>Mix this into your framework to simplify your life</a>
-</h2>
+<a name="mix-this-into-your-framework-to-simplify-your-life" class="anchor" href="#mix-this-into-your-framework-to-simplify-your-life"><span class="octicon octicon-link"></span></a>Mix this into your framework to simplify your life</h2>
 
 <p>This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking <code>Display</code> attribute on ViewModel properties so <code>HtmlHelper</code> can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use <code>"string".Humanize</code> for that?!</p>
 
@@ -835,14 +876,12 @@ Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <c
 </pre></div>
 
 <h2>
-<a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a><a>How to contribute?</a>
-</h2>
+<a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a>How to contribute?</h2>
 
 <p>Please see <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 
 <h2>
-<a name="continuous-integration-from-teamcity" class="anchor" href="#continuous-integration-from-teamcity"><span class="octicon octicon-link"></span></a><a>Continuous Integration from TeamCity</a>
-</h2>
+<a name="continuous-integration-from-teamcity" class="anchor" href="#continuous-integration-from-teamcity"><span class="octicon octicon-link"></span></a>Continuous Integration from TeamCity</h2>
 
 <p>Humanizer project is built &amp; tested continuously by TeamCity (more details <a href="http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity">here</a>). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!</p>
 
@@ -850,26 +889,23 @@ Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <c
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"></a></p>
 
 <h2>
-<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a><a>Author</a>
-</h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
 
 <p>Mehdi Khalili (<a href="http://twitter.com/MehdiKhalili">@MehdiKhalili</a>)</p>
 
 <h2>
-<a name="main-contributors" class="anchor" href="#main-contributors"><span class="octicon octicon-link"></span></a><a>Main contributors</a>
-</h2>
+<a name="main-contributors" class="anchor" href="#main-contributors"><span class="octicon octicon-link"></span></a>Main contributors</h2>
 
-<p>Alexander I. Zaytsev (<a href="https://github.com/hazzik">@hazzik</a>)</p>
+<p>Alexander I. Zaytsev (<a href="https://github.com/hazzik">@hazzik</a>)
+Max Malook (<a href="https://github.com/mexx">@mexx</a>)</p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a><a>License</a>
-</h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Humanizer is released under the MIT License. See the <a href="https://github.com/MehdiK/Humanizer/blob/master/LICENSE">bundled LICENSE</a> file for details.</p>
 
 <h2>
-<a name="icon" class="anchor" href="#icon"><span class="octicon octicon-link"></span></a><a>Icon</a>
-</h2>
+<a name="icon" class="anchor" href="#icon"><span class="octicon octicon-link"></span></a>Icon</h2>
 
 <p>Icon created by <a href="https://twitter.com/Inkventive">Tyrone Rieschiek</a></p>
         </section>
