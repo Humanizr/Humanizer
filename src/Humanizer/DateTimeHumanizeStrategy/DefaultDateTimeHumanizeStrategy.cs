@@ -44,7 +44,10 @@ namespace Humanizer.DateTimeHumanizeStrategy
                 return formatter.DateHumanize(TimeUnit.Hour, tense, ts.Hours);
 
             if (ts.TotalHours < 48)
-                return formatter.DateHumanize(TimeUnit.Day, tense, 1);
+            {
+                var days = Math.Abs((input.Date - comparisonBase.Date).Days);
+                return formatter.DateHumanize(TimeUnit.Day, tense, days);
+            }
 
             if (ts.TotalDays < 28)
                 return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
