@@ -157,6 +157,14 @@ This is an extension method based on `String.Format`, so exact rules applies to 
 If `format` is null, it'll throw `ArgumentNullException`.
 If passed a fewer number for arguments, it'll throw `String.FormatException` exception.
 
+You also can specify the culture to use explicitly as the first parameter for the `FormatWith()` method:
+
+```c#
+"{0:N2}".FormatWith(new CultureInfo("ru-RU"), 6666.66) => "6 666,66"
+```
+
+If a culture is not specified, current thread's current culture is used.
+
 ###<a id="humanize-enums">Humanize Enums</a>
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
 
