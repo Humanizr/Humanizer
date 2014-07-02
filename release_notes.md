@@ -1,7 +1,7 @@
 ###In Development
   - [#306](https://github.com/MehdiK/Humanizer/pull/306): Added Singularize/Pluralize overload without using obsolete plurality enum
   - [#303](https://github.com/MehdiK/Humanizer/pull/303): Added support for all integer types in ByteSize extensions
-  - [#307](https://github.com/MehdiK/Humanizer/pull/307): string.FormatWith: added support for the explicit culture parameter.
+  - [#307](https://github.com/MehdiK/Humanizer/pull/307): Added support to string.FormatWith for the explicit culture parameter.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...master)
 
