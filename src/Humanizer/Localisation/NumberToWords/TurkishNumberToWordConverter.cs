@@ -54,7 +54,7 @@ namespace Humanizer.Localisation.NumberToWords
             var hundred = (number / 100);
             if (hundred > 0)
             {
-                parts.Add(string.Format("{0} yüz", hundred > 1 ? Convert(number / 100) : "").Trim());
+                parts.Add(string.Format("{0} yüz", hundred > 1 ? Convert(hundred) : "").Trim());
                 number %= 100;
             }
 
@@ -78,20 +78,18 @@ namespace Humanizer.Localisation.NumberToWords
         {
             var word = Convert(number);
             var wordSuffix = string.Empty;
-            var wordChars = word.ToCharArray().Reverse().ToArray();
             var suffixFoundOnLastVowel = false;
 
-            for (int i = 0; i < wordChars.Count(); i++)
+            for (var i = word.Length - 1; i >= 0; i--)
             {
-                wordSuffix = (from suffix in OrdinalSuffix where suffix.Key == wordChars[i] select suffix.Value).FirstOrDefault();
-                if (!string.IsNullOrEmpty(wordSuffix))
+                if (OrdinalSuffix.TryGetValue(word[i], out wordSuffix))
                 {
-                    suffixFoundOnLastVowel = i == 0;
+                    suffixFoundOnLastVowel = i == word.Length - 1;
                     break;
                 }
             }
 
-            if (wordChars[0] == 't')
+            if (word[word.Length - 1] == 't')
                 word = word.Substring(0, word.Length - 1) + 'd';
 
             if (suffixFoundOnLastVowel)
@@ -99,7 +97,5 @@ namespace Humanizer.Localisation.NumberToWords
 
             return String.Format("{0}{1}", word, wordSuffix);
         }
-
-
     }
 }
