@@ -21,9 +21,36 @@ namespace Humanizer.Tests.Bytes
             var size = new ByteSize(inputBytes);
             var interval = TimeSpan.FromSeconds(perSeconds);
 
-            var rate = size.Per(interval).ToRatePerSecond();
+            var rate = size.Per(interval).Humanize();
 
             Assert.Equal(expectedValue, rate);
+        }
+
+        [Theory]
+        [InlineData(1, 1, TimeUnit.Second, "1 MB/s")]
+        [InlineData(1, 60, TimeUnit.Minute, "1 MB/min")]
+        [InlineData(1, 60 * 60, TimeUnit.Hour, "1 MB/hour")]
+        [InlineData(10, 1, TimeUnit.Second, "10 MB/s")]
+        [InlineData(10, 60, TimeUnit.Minute, "10 MB/min")]
+        [InlineData(10, 60 * 60, TimeUnit.Hour, "10 MB/hour")]
+        [InlineData(1, 10 * 1, TimeUnit.Second, "102.4 KB/s")]
+        [InlineData(1, 10 * 60, TimeUnit.Minute, "102.4 KB/min")]
+        [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "102.4 KB/hour")]
+        public void TimeUnitTests(long megabytes, double measurementIntervalSeconds, TimeUnit displayInterval, string expectedValue)
+        {
+            var size = ByteSize.FromMegabytes(megabytes);
+            var measurementInterval = TimeSpan.FromSeconds(measurementIntervalSeconds);
+
+            var rate = size.Per(measurementInterval);
+            var text = rate.Humanize(displayInterval);
+
+            text = size.Per(measurementInterval).Humanize(displayInterval);
+
+
+            size = ByteSize.FromMegabytes(10);
+            measurementInterval = TimeSpan.FromSeconds(1);
+                                    
+            Assert.Equal(expectedValue, text);
         }
     }
 }

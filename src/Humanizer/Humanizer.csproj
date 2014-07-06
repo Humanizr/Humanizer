@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
+    <Compile Include="Bytes\TimeUnit.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
     <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />

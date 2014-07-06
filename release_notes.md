@@ -3,6 +3,7 @@
   - [#303](https://github.com/MehdiK/Humanizer/pull/303): Added support for all integer types in ByteSize extensions
   - [#307](https://github.com/MehdiK/Humanizer/pull/307): Added support to string.FormatWith for the explicit culture parameter.
   - [#312](https://github.com/MehdiK/Humanizer/pull/312): Added Turkish ToWord, ToOrdinalWord and Ordinalize implementation
+  - [#314](https://github.com/MehdiK/Humanizer/pull/314): Added ByteRate class and supporting members to facilitate calculation of byte transfer rates
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...master)
 
