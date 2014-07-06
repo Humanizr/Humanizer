@@ -1,4 +1,12 @@
-﻿public struct ByteSize
+﻿public class ByteRate
+{
+    public ByteRate(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
+    public System.TimeSpan Interval { get; set; }
+    public Humanizer.Bytes.ByteSize Size { get; set; }
+    public string Humanize(Humanizer.Localisation.TimeUnit timeUnit) { }
+}
+
+public struct ByteSize
 {
     public long BitsInByte;
     public string BitSymbol;
@@ -85,6 +93,7 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Megabytes(int input) { }
     public Humanizer.Bytes.ByteSize Megabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Megabytes(double input) { }
+    public Humanizer.Bytes.ByteRate Per(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
     public Humanizer.Bytes.ByteSize Terabytes(byte input) { }
     public Humanizer.Bytes.ByteSize Terabytes(sbyte input) { }
     public Humanizer.Bytes.ByteSize Terabytes(short input) { }

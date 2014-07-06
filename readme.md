@@ -762,6 +762,24 @@ ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
 ```
 
+Finally, if you need to calculate the rate at which a quantity of bytes has been transferred, you can use the `Per` method of `ByteSize`. The `Per` method accepts one argument - the measurement interval for the bytes; this is the amount of time it took to transfer the bytes.
+
+The `Per` method returns a `ByteRate` class which has a `Humanize` method. By default, rates are given in seconds (eg, MB/s). However, if desired, a TimeUnit may be passed to `Humanize` for an alternate interval. Valid intervals are `TimeUnit.Second`, `TimeUnit.Minute`, and `TimeUnit.Hour`. Examples of each interval and example byte rate usage is below.
+
+```
+var size = ByteSize.FromMegabytes(10);
+var measurementInterval = TimeSpan.FromSeconds(1);
+
+var text = size.Per(measurementInterval).Humanize();
+// 10 MB/s
+
+text = size.Per(measurementInterval).Humanize(TimeUnit.Minute);
+// 600 MB/min
+
+text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
+// 35.15625 GB/hour
+```
+
 ##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 

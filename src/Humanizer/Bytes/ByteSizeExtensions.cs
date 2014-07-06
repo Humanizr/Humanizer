@@ -1,4 +1,5 @@
-﻿using Humanizer.Bytes;
+﻿using System;
+using Humanizer.Bytes;
 
 // ReSharper disable once CheckNamespace
 namespace Humanizer
@@ -437,6 +438,17 @@ namespace Humanizer
         public static string Humanize(this ByteSize input, string format = null)
         {
             return string.IsNullOrWhiteSpace(format) ? input.ToString() : input.ToString(format);
+        }
+
+        /// <summary>
+        /// Turns a quantity of bytes in a given interval into a rate that can be manipulated
+        /// </summary>
+        /// <param name="size">Quantity of bytes</param>
+        /// <param name="interval">Interval to create rate for</param>
+        /// <returns></returns>
+        public static ByteRate Per(this ByteSize size, TimeSpan interval)
+        {
+            return new ByteRate(size, interval);
         }
     }
 }
