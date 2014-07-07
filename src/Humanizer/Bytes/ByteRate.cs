@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Humanizer.Localisation;
 
 namespace Humanizer.Bytes
 {
@@ -41,18 +39,26 @@ namespace Humanizer.Bytes
         /// <returns></returns>
         public string Humanize(TimeUnit timeUnit = TimeUnit.Second)
         {
-            var displayInterval = TimeSpan.FromSeconds(1);
-            var displayUnit = "s";
+            TimeSpan displayInterval;
+            string displayUnit;
 
-            if (timeUnit == TimeUnit.Minute)
+            if (timeUnit == TimeUnit.Second)
+            {
+                displayInterval = TimeSpan.FromSeconds(1);
+                displayUnit = "s";
+            }
+            else if (timeUnit == TimeUnit.Minute)
             {
                 displayInterval = TimeSpan.FromMinutes(1);
                 displayUnit = "min";
-            } else if(timeUnit == TimeUnit.Hour)
+            }
+            else if (timeUnit == TimeUnit.Hour)
             {
                 displayInterval = TimeSpan.FromHours(1);
                 displayUnit = "hour";
             }
+            else
+                throw new NotSupportedException("timeUnit must be Second, Minute, or Hour");
 
             return (new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)).Humanize() + '/' + displayUnit;
         }

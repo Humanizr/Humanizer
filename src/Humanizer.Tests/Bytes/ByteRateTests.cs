@@ -1,5 +1,6 @@
 ﻿using System;
 using Humanizer.Bytes;
+using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
 
@@ -43,14 +44,24 @@ namespace Humanizer.Tests.Bytes
 
             var rate = size.Per(measurementInterval);
             var text = rate.Humanize(displayInterval);
-
-            text = size.Per(measurementInterval).Humanize(displayInterval);
-
-
-            size = ByteSize.FromMegabytes(10);
-            measurementInterval = TimeSpan.FromSeconds(1);
-                                    
+                        
             Assert.Equal(expectedValue, text);
+        }
+
+        [Theory]
+        [InlineData(TimeUnit.Millisecond)]
+        [InlineData(TimeUnit.Day)]
+        [InlineData(TimeUnit.Month)]
+        [InlineData(TimeUnit.Week)]
+        [InlineData(TimeUnit.Year)]
+        public void ThowsOnUnsupportedData(TimeUnit units)
+        {
+            var dummyRate = ByteSize.FromBits(1).Per(TimeSpan.FromSeconds(1));
+
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                dummyRate.Humanize(units);
+            });
         }
     }
 }

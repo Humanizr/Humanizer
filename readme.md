@@ -765,8 +765,7 @@ var measurementInterval = TimeSpan.FromSeconds(1);
 var text = size.Per(measurementInterval).Humanize();
 // 10 MB/s
 
-var rate = size.Per(measurementInterval);
-text = rate.Humanize(TimeUnit.Minute);
+text = size.Per(measurementInterval).Humanize(TimeUnit.Minute);
 // 600 MB/min
 
 text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
