@@ -885,8 +885,8 @@ The current build status on the CI server is <a href="http://teamcity.ginnivan.n
 Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
 
 ##<a id="main-contributors">Main contributors</a>
-Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
-Max Malook ([@mexx](https://github.com/mexx))
+ - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
+ - Max Malook ([@mexx](https://github.com/mexx))
 
 ##<a id="license">License</a>
 Humanizer is released under the MIT License. See the [bundled LICENSE](https://github.com/MehdiK/Humanizer/blob/master/LICENSE) file for details.

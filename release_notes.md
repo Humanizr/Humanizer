@@ -1,11 +1,16 @@
 ###In Development
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.28.0...master)
+
+###v1.28.0 - 2014-07-06
+  - [#309](https://github.com/MehdiK/Humanizer/pull/309): Fixed the bug with DateTime.Humanize returning tomorrow when it's not actually tomorrow
   - [#306](https://github.com/MehdiK/Humanizer/pull/306): Added Singularize/Pluralize overload without using obsolete plurality enum
   - [#303](https://github.com/MehdiK/Humanizer/pull/303): Added support for all integer types in ByteSize extensions
-  - [#307](https://github.com/MehdiK/Humanizer/pull/307): Added support to string.FormatWith for the explicit culture parameter.
+  - [#307](https://github.com/MehdiK/Humanizer/pull/307): Added support to string.FormatWith for the explicit culture parameter
   - [#312](https://github.com/MehdiK/Humanizer/pull/312): Added Turkish ToWord, ToOrdinalWord and Ordinalize implementation
+  - [#173](https://github.com/MehdiK/Humanizer/pull/173): Added support for Window Phone 8.1
   - [#314](https://github.com/MehdiK/Humanizer/pull/314): Added ByteRate class and supporting members to facilitate calculation of byte transfer rates
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...v1.28.0)
 
 ###v1.27.0 - 2014-06-21
   - [#301](https://github.com/MehdiK/Humanizer/pull/301): Added Bangla (Bangladesh) localisation
