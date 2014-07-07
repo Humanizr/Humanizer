@@ -3,6 +3,7 @@
   - [#303](https://github.com/MehdiK/Humanizer/pull/303): Added support for all integer types in ByteSize extensions
   - [#307](https://github.com/MehdiK/Humanizer/pull/307): Added support to string.FormatWith for the explicit culture parameter.
   - [#312](https://github.com/MehdiK/Humanizer/pull/312): Added Turkish ToWord, ToOrdinalWord and Ordinalize implementation
+  - [#173](https://github.com/MehdiK/Humanizer/pull/173): Added support for Window Phone 8.1
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.27.0...master)
 
