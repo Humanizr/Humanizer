@@ -204,6 +204,13 @@ Default is the right as shown in the examples above. The examples below show how
 If <code>format</code> is null, it'll throw <code>ArgumentNullException</code>.
 If passed a fewer number for arguments, it'll throw <code>String.FormatException</code> exception.</p>
 
+<p>You also can specify the culture to use explicitly as the first parameter for the <code>FormatWith()</code> method:</p>
+
+<div class="highlight highlight-c#"><pre><span class="s">"{0:N2}"</span><span class="p">.</span><span class="n">FormatWith</span><span class="p">(</span><span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">"ru-RU"</span><span class="p">),</span> <span class="m">6666.66</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"6 666,66"</span>
+</pre></div>
+
+<p>If a culture is not specified, current thread's current culture is used.</p>
+
 <h3>
 <a name="humanize-enums" class="anchor" href="#humanize-enums"><span class="octicon octicon-link"></span></a>Humanize Enums</h3>
 
