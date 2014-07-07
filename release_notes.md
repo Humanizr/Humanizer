@@ -1,6 +1,7 @@
 ###In Development
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.28.0...master)
 
+###v1.28.0 - 2014-07-06
   - [#309](https://github.com/MehdiK/Humanizer/pull/309): Fixed the bug with DateTime.Humanize returning tomorrow when it's not actually tomorrow
   - [#306](https://github.com/MehdiK/Humanizer/pull/306): Added Singularize/Pluralize overload without using obsolete plurality enum
   - [#303](https://github.com/MehdiK/Humanizer/pull/303): Added support for all integer types in ByteSize extensions
