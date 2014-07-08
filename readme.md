@@ -54,9 +54,11 @@ The foundation of this was set in the [BDDfy framework](https://github.com/TestS
 
 "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
 
-// acronyms are left intact
+// acronyms are left intact 
 "HTML".Humanize() => "HTML"
 ```
+
+Note that a string that contains only upper case letters, and consists only of one word, is always treated as an acronym (regardless of its length).
 
 You may also specify the desired letter casing:
 
