@@ -53,9 +53,17 @@ The foundation of this was set in the [BDDfy framework](https://github.com/TestS
 "Underscored_input_string_is_turned_into_sentence".Humanize() => "Underscored input string is turned into sentence"
 
 "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
+```
 
-// acronyms are left intact
+Note that a string that contains only upper case letters, and consists only of one word, is always treated as an acronym (regardless of its length). To guarantee that any arbitrary string will always be humanized you must use a transform (see `Transform` method below):
+
+```C#
+// acronyms are left intact 
 "HTML".Humanize() => "HTML"
+
+// any unbroken upper case string is treated as an acronym
+"HUMANIZER".Humanize() => "HUMANIZER"
+"HUMANIZER".Transform(To.LowerCase | To.TitleCase) => "Humanizer"
 ```
 
 You may also specify the desired letter casing:
