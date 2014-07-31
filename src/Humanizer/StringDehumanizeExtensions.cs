@@ -18,7 +18,7 @@ namespace Humanizer
                 (from word in input.Split(' ')
                 select word.Humanize(LetterCasing.Title));
 
-            return string.Join("", titlizedWords);
+            return string.Join("", titlizedWords).Replace(" ", "");
         }
     }
 }

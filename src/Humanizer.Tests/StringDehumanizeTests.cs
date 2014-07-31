@@ -10,6 +10,7 @@ namespace Humanizer.Tests
         [InlineData("Title Case Sentence Is Camelized", "TitleCaseSentenceIsCamelized")]
         [InlineData("Mixed case sentence Is Camelized", "MixedCaseSentenceIsCamelized")]
         [InlineData("lower case sentence is camelized", "LowerCaseSentenceIsCamelized")]
+        [InlineData("AlreadyDehumanizedStringIsUntouched", "AlreadyDehumanizedStringIsUntouched")]
         [InlineData("", "")]
         public void CanDehumanizeIntoAPascalCaseWord(string input, string expectedResult)
         {
