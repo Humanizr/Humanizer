@@ -1,5 +1,5 @@
 ###In Development
-  - [#320](https://github.com/MehdiK/Humanizer/pull/320): Fixed Dehumanize actually humanizing an alreaddy dehumanized string
+  - [#320](https://github.com/MehdiK/Humanizer/pull/320): Fixed Dehumanize actually humanizing an already dehumanized string
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.28.0...master)
 
