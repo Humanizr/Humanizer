@@ -1,5 +1,6 @@
 ###In Development
   - [#320](https://github.com/MehdiK/Humanizer/pull/320): Fixed Dehumanize actually humanizing an already dehumanized string
+  - [#322](https://github.com/MehdiK/Humanizer/pull/322): DefaultFormatter.TimeSpanHumanize throws a more meaningful exception when called with TimeUnits larger than TimeUnit.Week
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.28.0...master)
 
