@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace Humanizer.Localisation.Formatters
 {
@@ -38,7 +39,7 @@ namespace Humanizer.Localisation.Formatters
         {
             return GetResourceForDate(timeUnit, timeUnitTense, unit);
         }
-
+            
         /// <summary>
         /// 0 seconds
         /// </summary>
@@ -51,12 +52,16 @@ namespace Humanizer.Localisation.Formatters
         /// <summary>
         /// Returns the string representation of the provided TimeSpan
         /// </summary>
-        /// <param name="timeUnit"></param>
+        /// <param name="timeUnit">Must be less than or equal to TimeUnit.Week</param>
         /// <param name="unit"></param>
         /// <returns></returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
-            return GetResourceForTimeSpan(timeUnit, unit);
+            if (timeUnit > TimeUnit.Week)
+                throw new ArgumentOutOfRangeException("timeUnit", "There's no meaningful way to humanize passed timeUnit.");
+
+                return GetResourceForTimeSpan(timeUnit, unit);
         }
 
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
