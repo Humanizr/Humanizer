@@ -101,6 +101,12 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Terabytes(int input) { }
     public Humanizer.Bytes.ByteSize Terabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Terabytes(double input) { }
+	public Humanizer.Bytes.ByteRate Per(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
+}
+
+public class ByteRate
+{
+   public string Humanize(Humanizer.Bytes.TimeUnit timeUnit) { }
 }
 
 public class CasingExtensions
