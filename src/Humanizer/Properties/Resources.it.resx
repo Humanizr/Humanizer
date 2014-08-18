@@ -193,22 +193,22 @@
     <value>1 settimana</value>
   </data>
 	<data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} giorni da ora</value>
+    <value>entro {0} giorni</value>
   </data>
 	<data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} ore da adesso</value>
+    <value>entro {0} ore</value>
   </data>
 	<data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} minuti da adesso</value>
+    <value>entro {0} minuti</value>
   </data>
 	<data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} mesi da ora</value>
+    <value>entro {0} mesi</value>
   </data>
 	<data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} secondi da adesso</value>
+    <value>entro {0} secondi</value>
   </data>
 	<data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} anni da ora</value>
+    <value>entro {0} anni</value>
   </data>
 	<data name="DateHumanize_Now" xml:space="preserve">
     <value>adesso</value>
@@ -217,18 +217,18 @@
     <value>domani</value>
   </data>
 	<data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>un'ora da adesso</value>
+    <value>entro un'ora</value>
   </data>
 	<data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>un minuto da adesso</value>
+    <value>entro un minuto</value>
   </data>
 	<data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>un mese da ora</value>
+    <value>entro un mese</value>
   </data>
 	<data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>un secondo da adesso</value>
+    <value>entro un secondo</value>
   </data>
 	<data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>un anno da ora</value>
+    <value>entro un anno</value>
   </data>
 </root>
