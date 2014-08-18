@@ -184,7 +184,7 @@
     <value>1 secondo</value>
   </data>
 	<data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>no time</value>
+    <value>0 secondi</value>
   </data>
 	<data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} settimane</value>
