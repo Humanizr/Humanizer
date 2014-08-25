@@ -94,7 +94,6 @@
     <Compile Include="Localisation\hu\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\id\DateHumanizeTests.cs" />
     <Compile Include="Localisation\id\TimeSpanHumanizeTests.cs" />
-    <Compile Include="Localisation\it\DateHumanizeTests.cs" />
     <Compile Include="Localisation\he\DateHumanizeTests.cs" />
     <Compile Include="Localisation\ar\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\ja\DateHumanizeTests.cs" />
@@ -141,6 +140,7 @@
     <Compile Include="Localisation\tr\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\vi\DateHumanizeTests.cs" />
     <Compile Include="Localisation\vi\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\it\DateHumanizeTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
