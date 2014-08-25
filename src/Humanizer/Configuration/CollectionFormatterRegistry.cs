@@ -8,6 +8,7 @@ namespace Humanizer.Configuration
             : base(new DefaultCollectionFormatter())
         {
             Register("en", new EnglishCollectionFormatter());
+            Register("it", new ItalianCollectionFormatter());
         }
     }
 }
