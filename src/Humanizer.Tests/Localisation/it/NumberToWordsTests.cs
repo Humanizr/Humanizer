@@ -13,13 +13,14 @@ namespace Humanizer.Tests.Localisation.it
         [Theory]
         [InlineData(0, "zero")]
         [InlineData(1, "uno")]
+        [InlineData(-1, "meno uno")]
         [InlineData(10, "dieci")]
         [InlineData(11, "undici")]
         [InlineData(21, "ventuno")]
-        /*
-        [InlineData(-1, "meno uno")]
+        [InlineData(38, "trentotto")]
         [InlineData(122, "centoventidue")]
         [InlineData(3501, "tremilacinquecentouno")]
+        /*
         [InlineData(100, "cento")]
         [InlineData(1000, "mille")]
         [InlineData(100000, "centomila")]

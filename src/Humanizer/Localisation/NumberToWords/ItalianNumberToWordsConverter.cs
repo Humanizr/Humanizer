@@ -8,7 +8,10 @@ namespace Humanizer.Localisation.NumberToWords
         public override string Convert(int number, GrammaticalGender gender)
         {
             if (number == 0) 
-              return "zero";
+                return "zero";
+
+            if (number < 0)
+                return "meno " + Convert(Math.Abs(number), gender);
         
             ItalianNumberCruncher cruncher = new ItalianNumberCruncher(number);
             
@@ -31,7 +34,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 string word = String.Empty;
                 
-                List<int> threeDigitChops = ThreeDigitChop(_number);
+                List<int> threeDigitChops = ChopEveryThreeDigits(_number);
                 
                 ThreeDigitSequenceConverter sequenceConverter = new ThreeDigitSequenceConverter();
                 
@@ -39,20 +42,15 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     Func<int, string> chopToString = sequenceConverter.GetNext();
                     
-                    word += chopToString(chop);
+                    word = chopToString(chop) + word;
                 }
                 
                 return word;
             }
             
-            protected string ThreeDigitConvert(int threeDigit)
-            {
-                return threeDigit.ToString();
-            }
-            
             protected readonly int _number;
             
-            protected static List<int> ThreeDigitChop(int number)
+            protected static List<int> ChopEveryThreeDigits(int number)
             {
                 List<int> chops = new List<int>();
                 int rest = number;
@@ -65,8 +63,6 @@ namespace Humanizer.Localisation.NumberToWords
                     
                     rest = (int)(rest / 1000);
                 }
-                
-                chops.Reverse();
                 
                 return chops;
             }
@@ -90,7 +86,8 @@ namespace Humanizer.Localisation.NumberToWords
                             break;
                             
                         case ThreeDigitSets.Thousands:
-                            converter = null;
+                            converter = ThousandsConverter;
+                            _nextSet = ThreeDigitSets.Millions;
                             break;
                             
                         case ThreeDigitSets.Millions:
@@ -112,7 +109,7 @@ namespace Humanizer.Localisation.NumberToWords
                     return converter;
                 }
                 
-                protected string UnitsConverter(int number)
+                protected static string UnitsConverter(int number)
                 {
                     int tensAndUnits = number % 100;
                     int hundreds = (int)(number / 100);
@@ -145,6 +142,11 @@ namespace Humanizer.Localisation.NumberToWords
                     }
                     
                     return words;
+                }
+                
+                protected static string ThousandsConverter(int number)
+                {
+                    return UnitsConverter(number) + "mila";
                 }
                 
                 protected ThreeDigitSets _nextSet;
