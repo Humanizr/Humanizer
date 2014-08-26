@@ -20,13 +20,16 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(38, "trentotto")]
         [InlineData(122, "centoventidue")]
         [InlineData(3501, "tremilacinquecentouno")]
-        /*
         [InlineData(100, "cento")]
         [InlineData(1000, "mille")]
+        [InlineData(2000, "duemila")]
+        [InlineData(10000, "diecimila")]
         [InlineData(100000, "centomila")]
         [InlineData(1000000, "un milione")]
+        [InlineData(5000000, "cinque milioni")]
         [InlineData(10000000, "dieci milioni")]
         [InlineData(100000000, "cento milioni")]
+        /*
         [InlineData(1000000000, "un miliardo")]
         [InlineData(111, "centoundici")]
         [InlineData(1111, "millecentoundici")]

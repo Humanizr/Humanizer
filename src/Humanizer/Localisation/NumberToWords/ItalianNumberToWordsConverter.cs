@@ -43,7 +43,7 @@ namespace Humanizer.Localisation.NumberToWords
                     word = partToString(part) + word;
                 }
                 
-                return word;
+                return word.Trim();
             }
             
             protected readonly int _number;
@@ -96,7 +96,8 @@ namespace Humanizer.Localisation.NumberToWords
                         break;
                         
                     case ThreeDigitSets.Millions:
-                        converter = null;
+                        converter = MillionsConverter;
+                        _nextSet = ThreeDigitSets.Billions;
                         break;
                         
                     case ThreeDigitSets.Billions:
@@ -161,7 +162,26 @@ namespace Humanizer.Localisation.NumberToWords
             /// <returns>The same three-digit number of thousands expressed as text.</returns>
             protected static string ThousandsConverter(int number)
             {
+                if (number == 0) 
+                    return String.Empty;
+                  
+                if (number == 1)
+                    return "mille";
+                
                 return UnitsConverter(number) + "mila";
+            }
+            
+            /// <summary>
+            /// Converts a millions three-digit number to text.
+            /// </summary>
+            /// <param name="number">The three-digit number, as millions, to convert.</param>
+            /// <returns>The same three-digit number of millions expressed as text.</returns>
+            protected static string MillionsConverter(int number)
+            {
+                if (number == 1)
+                    return "un milione ";
+                  
+                return UnitsConverter(number) + " milioni ";
             }
             
             /// <summary>
