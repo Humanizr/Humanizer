@@ -53,14 +53,22 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             if (tensAndUnits <= 9)
             {
                 // simple case for units, under 10
-                words += _unitsNumberToText[tensAndUnits];
+                words += _unitsUnder10NumberToText[tensAndUnits];
             }
             else if (tensAndUnits <= 19)
             {
                 // special case for 'teens', from 10 to 19
                 words += _teensUnder20NumberToText[tensAndUnits - 10];
             }
-            else
+            else if (units == 0)
+            {
+                // truncate tens/hundreds last vowel
+                words = words.Remove(words.Length - 1);
+                
+                // append suffix '-esimo'
+                words += "esimo";
+            }
+            else 
             {
                 // just append units text, with some corner cases
                 
@@ -70,7 +78,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                     words = words.Remove(words.Length - 1);
                 }
                 
-                words += _unitsNumberToText[units];
+                words += _unitsOver10NumberToText[units];
             }
             
             return words;
@@ -82,7 +90,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
         /// </summary>
-        protected static string[] _unitsNumberToText = new string[]
+        protected static string[] _unitsUnder10NumberToText = new string[]
         {
             String.Empty,
             "primo",
@@ -94,6 +102,23 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "settimo",
             "ottavo",
             "nono"
+        };
+        
+        /// <summary>
+        /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
+        /// </summary>
+        protected static string[] _unitsOver10NumberToText = new string[]
+        {
+            String.Empty,
+            "unesimo",
+            "duesimo",
+            "treesimo",
+            "quattresimo",
+            "cinquesimo",
+            "seiesimo",
+            "settesimo",
+            "ottesimo",
+            "novesimo"
         };
         
         /// <summary>
