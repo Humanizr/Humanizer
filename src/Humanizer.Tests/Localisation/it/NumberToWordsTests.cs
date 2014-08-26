@@ -20,6 +20,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(38, "trentotto")]
         [InlineData(122, "centoventidue")]
         [InlineData(3501, "tremilacinquecentouno")]
+        [InlineData(-3501, "meno tremilacinquecentouno")]
         [InlineData(100, "cento")]
         [InlineData(1000, "mille")]
         [InlineData(2000, "duemila")]
@@ -29,8 +30,11 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(5000000, "cinque milioni")]
         [InlineData(10000000, "dieci milioni")]
         [InlineData(100000000, "cento milioni")]
-        /*
         [InlineData(1000000000, "un miliardo")]
+        //[InlineData(9000000000, "nove miliardi")]  // int = System.Int32, fixed in API, is not big enough
+        //[InlineData(10000000000, "dieci miliardi")]  // int = System.Int32, fixed in API, is not big enough
+        //[InlineData(100000000000, "cento miliardi")]  // int = System.Int32, fixed in API, is not big enough
+        /*
         [InlineData(111, "centoundici")]
         [InlineData(1111, "millecentoundici")]
         [InlineData(111111, "centoundicimilacentoundici")]

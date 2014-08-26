@@ -43,7 +43,8 @@ namespace Humanizer.Localisation.NumberToWords
                     word = partToString(part) + word;
                 }
                 
-                return word.Trim();
+                // remove trailing spaces if there are only thousands, or millions, etc.
+                return word.TrimEnd();
             }
             
             protected readonly int _number;
@@ -101,7 +102,8 @@ namespace Humanizer.Localisation.NumberToWords
                         break;
                         
                     case ThreeDigitSets.Billions:
-                        converter = null;
+                        converter = BillionsConverter;
+                        _nextSet = ThreeDigitSets.More;
                         break;
                         
                     case ThreeDigitSets.More:
@@ -122,28 +124,41 @@ namespace Humanizer.Localisation.NumberToWords
             /// <returns>The same three-digit number expressed as text.</returns>
             protected static string UnitsConverter(int number)
             {
+                if (number == 0) 
+                    return String.Empty;
+                  
+                // grab lowest two digits
                 int tensAndUnits = number % 100;
+                // grab third digit
                 int hundreds = (int)(number / 100);
                 
+                // grab also first and second digits separately
                 int units = tensAndUnits % 10;
                 int tens = (int)(tensAndUnits / 10);
                 
                 string words = String.Empty;
                 
+                // append text for hundreds
                 words += _hundredNumberToText[hundreds];
                 
-                words += _tensNumberToText[tens];
+                // append text for tens, only those from twenty upward
+                words += _tensOver20NumberToText[tens];
                 
                 if (tensAndUnits <= 9)
                 {
+                    // simple case for units, under 10
                     words += _unitsNumberToText[tensAndUnits];
                 }
                 else if (tensAndUnits <= 19)
                 {
-                    words += _teensNumberToText[tensAndUnits - 10];
+                    // special case for 'teens', from 10 to 19
+                    words += _teensUnder20NumberToText[tensAndUnits - 10];
                 }
                 else
                 {
+                    // just append units text, truncating tens last vowel before 
+                    // 'uno' (1) and 'otto' (8)
+                    
                     if (units == 1 || units == 8)
                     {
                         words = words.Remove(words.Length - 1);
@@ -178,10 +193,26 @@ namespace Humanizer.Localisation.NumberToWords
             /// <returns>The same three-digit number of millions expressed as text.</returns>
             protected static string MillionsConverter(int number)
             {
+                if (number == 0) 
+                    return String.Empty;
+                  
                 if (number == 1)
                     return "un milione ";
                   
                 return UnitsConverter(number) + " milioni ";
+            }
+            
+            /// <summary>
+            /// Converts a billions three-digit number to text.
+            /// </summary>
+            /// <param name="number">The three-digit number, as billions, to convert.</param>
+            /// <returns>The same three-digit number of billions expressed as text.</returns>
+            protected static string BillionsConverter(int number)
+            {
+                if (number == 1)
+                    return "un miliardo ";
+                  
+                return UnitsConverter(number) + " miliardi ";
             }
             
             /// <summary>
@@ -204,7 +235,7 @@ namespace Humanizer.Localisation.NumberToWords
             /// <summary>
             /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
             /// </summary>
-            protected static string[] _tensNumberToText = new string[]
+            protected static string[] _tensOver20NumberToText = new string[]
             {
                 String.Empty,
                 String.Empty,
@@ -221,7 +252,7 @@ namespace Humanizer.Localisation.NumberToWords
             /// <summary>
             /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
             /// </summary>
-            protected static string[] _teensNumberToText = new string[]
+            protected static string[] _teensUnder20NumberToText = new string[]
             {
                 "dieci",
                 "undici",
