@@ -28,7 +28,7 @@ namespace Humanizer.Localisation.NumberToWords
             public ItalianNumberCruncher(int number)
             {
                 _number = number;
-                _threeDigitChops = ChopEveryThreeDigits(_number);
+                _threeDigitParts = SplitEveryThreeDigits(_number);
                 _nextSet = ThreeDigitSets.Units;
             }
             
@@ -36,38 +36,49 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 string word = String.Empty;
                 
-                foreach(int chop in _threeDigitChops)
+                foreach(int part in _threeDigitParts)
                 {
-                    Func<int, string> chopToString = GetNextChopConverter();
+                    Func<int, string> partToString = GetNextChopConverter();
                     
-                    word = chopToString(chop) + word;
+                    word = partToString(part) + word;
                 }
                 
                 return word;
             }
             
             protected readonly int _number;
-            protected readonly List<int> _threeDigitChops;
+            protected readonly List<int> _threeDigitParts;
             
             protected ThreeDigitSets _nextSet;
             
-            protected static List<int> ChopEveryThreeDigits(int number)
+            /// <summary>
+            /// Splits a number into a sequence of three-digits numbers, starting 
+            /// from units, then thousands, millions, and so on.
+            /// </summary>
+            /// <param name="number">The number to split.</param>
+            /// <returns>The sequence of three-digit numbers.</returns>
+            protected static List<int> SplitEveryThreeDigits(int number)
             {
-                List<int> chops = new List<int>();
+                List<int> parts = new List<int>();
                 int rest = number;
                 
                 while (rest > 0)
                 {
                     int threeDigit = rest % 1000;
                     
-                    chops.Add(threeDigit);
+                    parts.Add(threeDigit);
                     
                     rest = (int)(rest / 1000);
                 }
                 
-                return chops;
+                return parts;
             }
             
+            /// <summary>
+            /// During number conversion to text, finds out the converter to use
+            /// for the next three-digit pack.
+            /// </summary>
+            /// <returns>The next conversion function to use.</returns>
             public Func<int, string> GetNextChopConverter()
             {
                 Func<int, string> converter;
@@ -103,6 +114,11 @@ namespace Humanizer.Localisation.NumberToWords
                 return converter;
             }
             
+            /// <summary>
+            /// Converts a three-digit number to text.
+            /// </summary>
+            /// <param name="number">The three-digit number to convert.</param>
+            /// <returns>The same three-digit number expressed as text.</returns>
             protected static string UnitsConverter(int number)
             {
                 int tensAndUnits = number % 100;
@@ -113,17 +129,17 @@ namespace Humanizer.Localisation.NumberToWords
                 
                 string words = String.Empty;
                 
-                words += _numberToHundred[hundreds];
+                words += _hundredNumberToText[hundreds];
                 
-                words += _numberToTen[tens];
+                words += _tensNumberToText[tens];
                 
                 if (tensAndUnits <= 9)
                 {
-                    words += _numberToUnit[tensAndUnits];
+                    words += _unitsNumberToText[tensAndUnits];
                 }
                 else if (tensAndUnits <= 19)
                 {
-                    words += _numberToTeens[tensAndUnits - 10];
+                    words += _teensNumberToText[tensAndUnits - 10];
                 }
                 else
                 {
@@ -132,18 +148,26 @@ namespace Humanizer.Localisation.NumberToWords
                         words = words.Remove(words.Length - 1);
                     }
                     
-                    words += _numberToUnit[units];
+                    words += _unitsNumberToText[units];
                 }
                 
                 return words;
             }
             
+            /// <summary>
+            /// Converts a thousands three-digit number to text.
+            /// </summary>
+            /// <param name="number">The three-digit number, as thousands, to convert.</param>
+            /// <returns>The same three-digit number of thousands expressed as text.</returns>
             protected static string ThousandsConverter(int number)
             {
                 return UnitsConverter(number) + "mila";
             }
             
-            protected static string[] _numberToUnit = new string[]
+            /// <summary>
+            /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
+            /// </summary>
+            protected static string[] _unitsNumberToText = new string[]
             {
                 String.Empty,
                 "uno",
@@ -157,7 +181,10 @@ namespace Humanizer.Localisation.NumberToWords
                 "nove"
             };
             
-            protected static string[] _numberToTen = new string[]
+            /// <summary>
+            /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
+            /// </summary>
+            protected static string[] _tensNumberToText = new string[]
             {
                 String.Empty,
                 String.Empty,
@@ -171,7 +198,10 @@ namespace Humanizer.Localisation.NumberToWords
                 "novanta"
             };
             
-            protected static string[] _numberToTeens = new string[]
+            /// <summary>
+            /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
+            /// </summary>
+            protected static string[] _teensNumberToText = new string[]
             {
                 "dieci",
                 "undici",
@@ -185,7 +215,10 @@ namespace Humanizer.Localisation.NumberToWords
                 "diciannove"
             };
             
-            protected static string[] _numberToHundred = new string[]
+            /// <summary>
+            /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
+            /// </summary>
+            protected static string[] _hundredNumberToText = new string[]
             {
                 String.Empty,
                 "cento",
@@ -199,12 +232,34 @@ namespace Humanizer.Localisation.NumberToWords
                 "novecento"
             };
             
+            /// <summary>
+            /// Enumerates sets of three-digits having distinct conversion to text.
+            /// </summary>
             protected enum ThreeDigitSets
             {
+                /// <summary>
+                /// Lowest three-digits set, from 1 to 999.
+                /// </summary>
                 Units,
+                
+                /// <summary>
+                /// Three-digits set counting the thousands, from 1'000 to 999'000.
+                /// </summary>
                 Thousands,
+                
+                /// <summary>
+                /// Three-digits set counting millions, from 1'000'000 to 999'000'000.
+                /// </summary>
                 Millions,
+                
+                /// <summary>
+                /// Three-digits set counting billions, from 1'000'000'000 to 999'000'000'000.
+                /// </summary>
                 Billions,
+                
+                /// <summary>
+                /// Three-digits set beyond 999 billions, from 1'000'000'000'000 onward.
+                /// </summary>
                 More
             }
         }
