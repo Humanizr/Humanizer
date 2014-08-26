@@ -78,6 +78,7 @@
     <Compile Include="Localisation\NumberToWords\ArabicNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\ItalianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\Italian\ItalianCardinalNumberCruncher.cs" />
+    <Compile Include="Localisation\NumberToWords\Italian\ItalianOrdinalNumberCruncher.cs" />
     <Compile Include="Bytes\ByteSize.cs" />
     <Compile Include="Bytes\ByteSizeExtensions.cs" />
     <Compile Include="CasingExtensions.cs" />

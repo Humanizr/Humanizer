@@ -23,7 +23,9 @@ namespace Humanizer.Localisation.NumberToWords
             if (number == 0) 
                 return "zero";
         
-            return String.Empty;
+            ItalianOrdinalNumberCruncher cruncher = new ItalianOrdinalNumberCruncher(number, gender);
+            
+            return cruncher.Convert();
         }
     }
 }
