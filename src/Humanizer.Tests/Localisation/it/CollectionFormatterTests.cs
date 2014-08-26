@@ -29,7 +29,7 @@ namespace Humanizer.Tests.Localisation.it
         public void MoreThanTwoItems()
         {
             var collection = new List<int>(new int[] {1, 2, 3});
-            string humanized = "1, 2, e 3";
+            string humanized = "1, 2 e 3";
             Assert.Equal(humanized, collection.Humanize());
         }
     }
