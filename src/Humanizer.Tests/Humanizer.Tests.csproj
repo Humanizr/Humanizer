@@ -144,6 +144,7 @@
     <Compile Include="Localisation\it\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\it\CollectionFormatterTests.cs" />
     <Compile Include="Localisation\it\OrdinalizerTests.cs" />
+    <Compile Include="Localisation\it\NumberToWordsTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
