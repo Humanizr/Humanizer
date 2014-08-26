@@ -41,43 +41,53 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             // grab also first and second digits separately
             int units = tensAndUnits % 10;
             int tens = (int)(tensAndUnits / 10);
-            
+
+            if (number <= 9)
+            {
+                // it's easier to treat units, from 1 to 9, as a distinct case
+                return _unitsUnder10NumberToText[tensAndUnits];
+            }
+
             string words = String.Empty;
-            
+
             // append text for hundreds
             words += _hundredNumberToText[hundreds];
-            
+
             // append text for tens, only those from twenty upward
             words += _tensOver20NumberToText[tens];
-            
-            if (tensAndUnits <= 9)
+
+            if (tensAndUnits == 0)
             {
-                // simple case for units, under 10
-                words += _unitsUnder10NumberToText[tensAndUnits];
+                // truncate hundreds last vowel
+                words = words.Remove(words.Length - 1);
+
+                // append suffix '-esimo'
+                words += "esimo";
             }
-            else if (tensAndUnits <= 19)
+            else if (10 <= tensAndUnits && tensAndUnits <= 19)
             {
                 // special case for 'teens', from 10 to 19
                 words += _teensUnder20NumberToText[tensAndUnits - 10];
             }
             else if (units == 0)
             {
-                // truncate tens/hundreds last vowel
+                // truncate tens last vowel
                 words = words.Remove(words.Length - 1);
-                
+
                 // append suffix '-esimo'
                 words += "esimo";
             }
-            else 
+            else
             {
                 // just append units text, with some corner cases
-                
-                // truncate tens last vowel before 'uno' (1) and 'otto' (8)                    
-                if (units == 1 || units == 8)
+
+                // truncate tens last vowel before 'uno' (1) and 'otto' (8)
+                // (only tens, not hundreds)
+                if (tens != 0 && (units == 1 || units == 8))
                 {
                     words = words.Remove(words.Length - 1);
                 }
-                
+
                 words += _unitsOver10NumberToText[units];
             }
             
