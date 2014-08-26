@@ -118,11 +118,12 @@ namespace Humanizer.Localisation.NumberToWords
             }
             
             /// <summary>
-            /// Converts a three-digit number to text.
+            /// Converts a three-digit set to text.
             /// </summary>
-            /// <param name="number">The three-digit number to convert.</param>
-            /// <returns>The same three-digit number expressed as text.</returns>
-            protected static string UnitsConverter(int number)
+            /// <param name="number">The three-digit set to convert.</param>
+            /// <param name="thisIsLastSet">True if the current three-digit set is the last in the word.</param>
+            /// <returns>The same three-digit set expressed as text.</returns>
+            protected static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
             {
                 if (number == 0) 
                     return String.Empty;
@@ -156,18 +157,31 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    // just append units text, truncating tens last vowel before 
-                    // 'uno' (1) and 'otto' (8)
+                    // just append units text, with some corner cases
                     
+                    // truncate tens last vowel before 'uno' (1) and 'otto' (8)                    
                     if (units == 1 || units == 8)
                     {
                         words = words.Remove(words.Length - 1);
                     }
                     
-                    words += _unitsNumberToText[units];
+                    // if this is the last set, an accent could be due
+                    string unitsText = (thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units]);
+                    
+                    words += unitsText;
                 }
                 
                 return words;
+            }
+            
+            /// <summary>
+            /// Converts a three-digit number, as units, to text.
+            /// </summary>
+            /// <param name="number">The three-digit number, as units, to convert.</param>
+            /// <returns>The same three-digit number, as units, expressed as text.</returns>
+            protected static string UnitsConverter(int number)
+            {
+                return ThreeDigitSetConverter(number, true);
             }
             
             /// <summary>
@@ -183,7 +197,7 @@ namespace Humanizer.Localisation.NumberToWords
                 if (number == 1)
                     return "mille";
                 
-                return UnitsConverter(number) + "mila";
+                return ThreeDigitSetConverter(number) + "mila";
             }
             
             /// <summary>
@@ -199,7 +213,7 @@ namespace Humanizer.Localisation.NumberToWords
                 if (number == 1)
                     return "un milione ";
                   
-                return UnitsConverter(number) + " milioni ";
+                return ThreeDigitSetConverter(number) + " milioni ";
             }
             
             /// <summary>

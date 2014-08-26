@@ -31,10 +31,11 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(10000000, "dieci milioni")]
         [InlineData(100000000, "cento milioni")]
         [InlineData(1000000000, "un miliardo")]
+        [InlineData(2000000000, "due miliardi")]
+        [InlineData(2147483647, "due miliardi centoquarantasette milioni quattrocentoottantatremilaseicentoquarantasette")]  // int.MaxValue
         //[InlineData(9000000000, "nove miliardi")]  // int = System.Int32, fixed in API, is not big enough
         //[InlineData(10000000000, "dieci miliardi")]  // int = System.Int32, fixed in API, is not big enough
         //[InlineData(100000000000, "cento miliardi")]  // int = System.Int32, fixed in API, is not big enough
-        /*
         [InlineData(111, "centoundici")]
         [InlineData(1111, "millecentoundici")]
         [InlineData(111111, "centoundicimilacentoundici")]
@@ -44,7 +45,9 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(111111111, "centoundici milioni centoundicimilacentoundici")]
         [InlineData(1101111101, "un miliardo centouno milioni centoundicimilacentouno")]
         [InlineData(1111111111, "un miliardo centoundici milioni centoundicimilacentoundici")]
+        [InlineData(43, "quarantatré")]
         [InlineData(123, "centoventitré")]
+        /*
         [InlineData(1234, "milleduecentotrentaquattro")]
         [InlineData(8100, "ottomilacento")]
         [InlineData(12345, "dodicimilatrecentoquarantacinque")]
