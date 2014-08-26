@@ -14,6 +14,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(0, "zero")]
         [InlineData(1, "uno")]
         [InlineData(-1, "meno uno")]
+        [InlineData(3, "tre")]
         [InlineData(10, "dieci")]
         [InlineData(11, "undici")]
         [InlineData(21, "ventuno")]
@@ -36,6 +37,14 @@ namespace Humanizer.Tests.Localisation.it
         //[InlineData(9000000000, "nove miliardi")]  // int = System.Int32, fixed in API, is not big enough
         //[InlineData(10000000000, "dieci miliardi")]  // int = System.Int32, fixed in API, is not big enough
         //[InlineData(100000000000, "cento miliardi")]  // int = System.Int32, fixed in API, is not big enough
+        [InlineData(101, "centouno")]
+        [InlineData(1001, "milleuno")]
+        [InlineData(10001, "diecimilauno")]
+        [InlineData(100001, "centomilauno")]
+        [InlineData(1000001, "un milione uno")]
+        [InlineData(10000001, "dieci milioni uno")]
+        [InlineData(100000001, "cento milioni uno")]
+        [InlineData(1000000001, "un miliardo uno")]
         [InlineData(111, "centoundici")]
         [InlineData(1111, "millecentoundici")]
         [InlineData(111111, "centoundicimilacentoundici")]
@@ -46,7 +55,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1101111101, "un miliardo centouno milioni centoundicimilacentouno")]
         [InlineData(1111111111, "un miliardo centoundici milioni centoundicimilacentoundici")]
         [InlineData(8100, "ottomilacento")]
-        [InlineData(43, "quarantatré")]
+        [InlineData(43, "quarantatré")]  // Ref. http://dizionari.corriere.it/dizionario-si-dice/V/ventitre.shtml
         [InlineData(123, "centoventitré")]
         [InlineData(1234, "milleduecentotrentaquattro")]
         [InlineData(12345, "dodicimilatrecentoquarantacinque")]
@@ -63,8 +72,17 @@ namespace Humanizer.Tests.Localisation.it
             Assert.Equal(expected, number.ToWords());
         }
 
-        /*
         [Theory]
+        [InlineData(0, "zero")]
+        [InlineData(1, "una")]
+        [InlineData(-1, "meno una")]
+        [InlineData(3, "tre")]
+        [InlineData(21, "ventuno")]
+        [InlineData(101, "centouno")]
+        [InlineData(1001, "milleuno")]
+        [InlineData(10001, "diecimilauno")]
+        [InlineData(100001, "centomilauno")]
+        /*
         [InlineData(1, "uma")]
         [InlineData(2, "duas")]
         [InlineData(3, "três")]
@@ -85,11 +103,28 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1234, "mil duzentas e trinta e quatro")]
         [InlineData(8100, "oito mil e cem")]
         [InlineData(12345, "doze mil trezentas e quarenta e cinco")]
+        */
         public void ToFeminineWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
 
+        [Theory]
+        [InlineData(0, "zero")]
+        [InlineData(1, "uno")]
+        [InlineData(-1, "meno uno")]
+        [InlineData(3, "tre")]
+        [InlineData(21, "ventuno")]
+        [InlineData(101, "centouno")]
+        [InlineData(1001, "milleuno")]
+        [InlineData(10001, "diecimilauno")]
+        [InlineData(100001, "centomilauno")]
+        public void ToMasculineWords(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
+        }
+
+        /*
         [Theory]
         [InlineData(0, "zero")]
         [InlineData(1, "primeiro")]

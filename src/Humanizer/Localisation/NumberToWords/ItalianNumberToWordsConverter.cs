@@ -13,7 +13,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (number < 0)
                 return "meno " + Convert(Math.Abs(number), gender);
         
-            ItalianNumberCruncher cruncher = new ItalianNumberCruncher(number);
+            ItalianNumberCruncher cruncher = new ItalianNumberCruncher(number, gender);
             
             return cruncher.Convert();
         }
@@ -25,30 +25,32 @@ namespace Humanizer.Localisation.NumberToWords
         
         class ItalianNumberCruncher
         {
-            public ItalianNumberCruncher(int number)
+            public ItalianNumberCruncher(int number, GrammaticalGender gender)
             {
-                _number = number;
-                _threeDigitParts = SplitEveryThreeDigits(_number);
+                _fullNumber = number;
+                _threeDigitParts = SplitEveryThreeDigits(number);
+                _gender = gender;
                 _nextSet = ThreeDigitSets.Units;
             }
             
             public string Convert()
             {
                 string word = String.Empty;
-                
+                    
                 foreach(int part in _threeDigitParts)
                 {
-                    Func<int, string> partToString = GetNextChopConverter();
+                    Func<int, GrammaticalGender, string> partToString = GetNextChopConverter();
                     
-                    word = partToString(part) + word;
+                    word = partToString(part, _gender) + word;
                 }
                 
-                // remove trailing spaces if there are only thousands, or millions, etc.
+                // remove trailing spaces if there are only millions or billions
                 return word.TrimEnd();
             }
             
-            protected readonly int _number;
+            protected readonly int _fullNumber;
             protected readonly List<int> _threeDigitParts;
+            protected readonly GrammaticalGender _gender;
             
             protected ThreeDigitSets _nextSet;
             
@@ -80,9 +82,9 @@ namespace Humanizer.Localisation.NumberToWords
             /// for the next three-digit pack.
             /// </summary>
             /// <returns>The next conversion function to use.</returns>
-            public Func<int, string> GetNextChopConverter()
+            public Func<int, GrammaticalGender, string> GetNextChopConverter()
             {
-                Func<int, string> converter;
+                Func<int, GrammaticalGender, string> converter;
                 
                 switch (_nextSet)
                 {
@@ -121,9 +123,10 @@ namespace Humanizer.Localisation.NumberToWords
             /// Converts a three-digit set to text.
             /// </summary>
             /// <param name="number">The three-digit set to convert.</param>
+            /// <param name="gender">Gender of noun following number</param>
             /// <param name="thisIsLastSet">True if the current three-digit set is the last in the word.</param>
             /// <returns>The same three-digit set expressed as text.</returns>
-            protected static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
+            protected static string ThreeDigitSetConverter(int number, GrammaticalGender gender, bool thisIsLastSet = false)
             {
                 if (number == 0) 
                     return String.Empty;
@@ -178,18 +181,24 @@ namespace Humanizer.Localisation.NumberToWords
             /// Converts a three-digit number, as units, to text.
             /// </summary>
             /// <param name="number">The three-digit number, as units, to convert.</param>
+            /// <param name="gender">Gender of noun following number</param>
             /// <returns>The same three-digit number, as units, expressed as text.</returns>
-            protected static string UnitsConverter(int number)
+            protected string UnitsConverter(int number, GrammaticalGender gender)
             {
-                return ThreeDigitSetConverter(number, true);
+                // being a unique case, it's easier to treat unity feminine gender as a completely distinct case
+                if (_gender == GrammaticalGender.Feminine && _fullNumber == 1)
+                    return "una";
+                    
+                return ThreeDigitSetConverter(number, gender, true);
             }
             
             /// <summary>
             /// Converts a thousands three-digit number to text.
             /// </summary>
             /// <param name="number">The three-digit number, as thousands, to convert.</param>
+            /// <param name="gender">Gender of noun following number</param>
             /// <returns>The same three-digit number of thousands expressed as text.</returns>
-            protected static string ThousandsConverter(int number)
+            protected static string ThousandsConverter(int number, GrammaticalGender gender)
             {
                 if (number == 0) 
                     return String.Empty;
@@ -197,15 +206,16 @@ namespace Humanizer.Localisation.NumberToWords
                 if (number == 1)
                     return "mille";
                 
-                return ThreeDigitSetConverter(number) + "mila";
+                return ThreeDigitSetConverter(number, gender) + "mila";
             }
             
             /// <summary>
             /// Converts a millions three-digit number to text.
             /// </summary>
             /// <param name="number">The three-digit number, as millions, to convert.</param>
+            /// <param name="gender">Gender of noun following number</param>
             /// <returns>The same three-digit number of millions expressed as text.</returns>
-            protected static string MillionsConverter(int number)
+            protected static string MillionsConverter(int number, GrammaticalGender gender)
             {
                 if (number == 0) 
                     return String.Empty;
@@ -213,20 +223,21 @@ namespace Humanizer.Localisation.NumberToWords
                 if (number == 1)
                     return "un milione ";
                   
-                return ThreeDigitSetConverter(number, true) + " milioni ";
+                return ThreeDigitSetConverter(number, gender, true) + " milioni ";
             }
             
             /// <summary>
             /// Converts a billions three-digit number to text.
             /// </summary>
             /// <param name="number">The three-digit number, as billions, to convert.</param>
+            /// <param name="gender">Gender of noun following number</param>
             /// <returns>The same three-digit number of billions expressed as text.</returns>
-            protected static string BillionsConverter(int number)
+            protected static string BillionsConverter(int number, GrammaticalGender gender)
             {
                 if (number == 1)
                     return "un miliardo ";
                   
-                return UnitsConverter(number) + " miliardi ";
+                return ThreeDigitSetConverter(number, gender) + " miliardi ";
             }
             
             /// <summary>
