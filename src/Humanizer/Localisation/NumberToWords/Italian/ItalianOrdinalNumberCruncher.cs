@@ -42,6 +42,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 int units = _fullNumber % 10;
                 int lowestThreeDigits = _fullNumber % 1000;
                 int lowestSixDigits = _fullNumber % 1000000;
+                int lowestNineDigits = _fullNumber % 1000000000;
 
                 // reintroduce *unaccented* last vowel in some corner cases
                 if (units == 3)
@@ -49,7 +50,18 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 else if (units == 6)
                     words += 'i';
 
-                if (lowestSixDigits == 0)
+                if (lowestNineDigits == 0)
+                {
+                    // if exact billions, cardinal number words are joined
+                    words = words.Replace(" miliard", "miliard");
+
+                    // if 1 billion, numeral prefix is removed completely
+                    if (_fullNumber == 1000000000)
+                    {
+                        words = words.Replace("un", String.Empty);
+                    }
+                }
+                else if (lowestSixDigits == 0)
                 {
                     // if exact millions, cardinal number words are joined
                     words = words.Replace(" milion", "milion");

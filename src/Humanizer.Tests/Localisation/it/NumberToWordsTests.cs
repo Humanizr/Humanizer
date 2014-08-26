@@ -159,10 +159,8 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(2000000, "duemilionesimo")]
         [InlineData(10000000, "diecimilionesimo")]
         [InlineData(100000000, "centomilionesimo")]
-        /*
         [InlineData(1000000000, "miliardesimo")]
         [InlineData(2000000000, "duemiliardesimo")]
-         * */
         public void ToOrdinalWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToOrdinalWords());
