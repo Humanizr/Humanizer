@@ -142,6 +142,7 @@
     <Compile Include="Localisation\vi\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\it\DateHumanizeTests.cs" />
     <Compile Include="Localisation\it\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\it\CollectionFormatterTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />

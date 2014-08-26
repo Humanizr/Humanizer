@@ -7,8 +7,9 @@ namespace Humanizer.Localisation.CollectionFormatters
     internal class ItalianCollectionFormatter : EnglishCollectionFormatter
     {
         public ItalianCollectionFormatter()
+            : base()
         {
-            DefaultSeparator = "and";
+            DefaultSeparator = "e";
         }
     }
 }
