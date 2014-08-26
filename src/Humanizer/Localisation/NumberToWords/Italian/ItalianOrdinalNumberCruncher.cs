@@ -41,6 +41,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
 
                 int units = _fullNumber % 10;
                 int lowestThreeDigits = _fullNumber % 1000;
+                int lowestSixDigits = _fullNumber % 1000000;
 
                 // reintroduce *unaccented* last vowel in some corner cases
                 if (units == 3)
@@ -48,9 +49,22 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 else if (units == 6)
                     words += 'i';
 
-                // double the final 'l' if exact thousands, apart 1000 already having that
-                if (lowestThreeDigits == 0 && _fullNumber > 1000)
+                if (lowestSixDigits == 0)
+                {
+                    // if exact millions, cardinal number words are joined
+                    words = words.Replace(" milion", "milion");
+
+                    // if 1 million, numeral prefix is removed completely
+                    if (_fullNumber == 1000000)
+                    {
+                        words = words.Replace("un", String.Empty);
+                    }
+                }
+                else if (lowestThreeDigits == 0 && _fullNumber > 1000)
+                {
+                    // if exact thousands, double the final 'l', apart from 1000 already having that
                     words += 'l';
+                }
 
                 // append common ordinal suffix
                 words += "esimo";
