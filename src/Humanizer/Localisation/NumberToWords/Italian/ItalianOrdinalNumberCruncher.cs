@@ -40,12 +40,17 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 words = words.Remove(words.Length - 1);
 
                 int units = _fullNumber % 10;
+                int lowestThreeDigits = _fullNumber % 1000;
 
                 // reintroduce *unaccented* last vowel in some corner cases
                 if (units == 3)
                     words += 'e';
                 else if (units == 6)
                     words += 'i';
+
+                // double the final 'l' if exact thousands, apart 1000 already having that
+                if (lowestThreeDigits == 0 && _fullNumber > 1000)
+                    words += 'l';
 
                 // append common ordinal suffix
                 words += "esimo";
