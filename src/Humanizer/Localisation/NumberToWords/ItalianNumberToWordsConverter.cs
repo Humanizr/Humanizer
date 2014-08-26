@@ -7,9 +7,6 @@ namespace Humanizer.Localisation.NumberToWords
     {
         public override string Convert(int number, GrammaticalGender gender)
         {
-            if (number == 0) 
-                return "zero";
-
             if (number < 0)
                 return "meno " + Convert(Math.Abs(number), gender);
         
@@ -20,9 +17,6 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
-            if (number == 0) 
-                return "zero";
-        
             ItalianOrdinalNumberCruncher cruncher = new ItalianOrdinalNumberCruncher(number, gender);
             
             return cruncher.Convert();

@@ -14,6 +14,10 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         public string Convert()
         {
             string words = String.Empty;
+
+            // it's easier to treat zero as a completely distinct case
+            if (_fullNumber == 0)
+                return "zero";
                 
             if (_fullNumber < 1000)
             {

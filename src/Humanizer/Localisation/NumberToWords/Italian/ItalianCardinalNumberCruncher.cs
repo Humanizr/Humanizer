@@ -16,8 +16,12 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         public string Convert()
         {
             string words = String.Empty;
-                
-            foreach(int part in _threeDigitParts)
+
+            // it's easier to treat zero as a completely distinct case
+            if (_fullNumber == 0)
+                return "zero";
+
+            foreach (int part in _threeDigitParts)
             {
                 Func<int, string> partToString = GetNextPartConverter();
                 
