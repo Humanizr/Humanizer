@@ -27,10 +27,13 @@ namespace Humanizer.Localisation.CollectionFormatters
             if (count == 1)
                 return objectFormatter(enumerable.First());
 
+            var frontItems = enumerable.Take(count - 1);
+            var tailItem = enumerable.Skip(count - 1).First();
+
             return String.Format("{0} {1} {2}",
-                String.Join(", ", enumerable.Take(count - 1).Select(objectFormatter)),
+                String.Join(", ", frontItems.Select(objectFormatter)),
                 separator,
-                objectFormatter(enumerable.Skip(count - 1).First()));
+                objectFormatter(tailItem));
         }
     }
 }
