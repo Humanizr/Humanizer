@@ -213,7 +213,7 @@ namespace Humanizer.Localisation.NumberToWords
                 if (number == 1)
                     return "un milione ";
                   
-                return ThreeDigitSetConverter(number) + " milioni ";
+                return ThreeDigitSetConverter(number, true) + " milioni ";
             }
             
             /// <summary>

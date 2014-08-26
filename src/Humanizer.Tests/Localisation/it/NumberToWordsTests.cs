@@ -45,21 +45,19 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(111111111, "centoundici milioni centoundicimilacentoundici")]
         [InlineData(1101111101, "un miliardo centouno milioni centoundicimilacentouno")]
         [InlineData(1111111111, "un miliardo centoundici milioni centoundicimilacentoundici")]
+        [InlineData(8100, "ottomilacento")]
         [InlineData(43, "quarantatré")]
         [InlineData(123, "centoventitré")]
-        /*
         [InlineData(1234, "milleduecentotrentaquattro")]
-        [InlineData(8100, "ottomilacento")]
         [InlineData(12345, "dodicimilatrecentoquarantacinque")]
         [InlineData(123456, "centoventitremilaquattrocentocinquantasei")]
         [InlineData(1234567, "un milione duecentotrentaquattromilacinquecentosessantasette")]
         [InlineData(12345678, "dodici milioni trecentoquarantacinquemilaseicentosettantotto")]
-        [InlineData(123456789, "centoventitrè milioni quattrocentocinquantaseimilasettecentoottantanove")]
-        [InlineData(1234567890, "un miliardo duecentotrentaquattromilioni cinquecentosessantasettemilaottocentonovanta")]
+        [InlineData(123456789, "centoventitré milioni quattrocentocinquantaseimilasettecentoottantanove")]
+        [InlineData(1234567890, "un miliardo duecentotrentaquattro milioni cinquecentosessantasettemilaottocentonovanta")]
         [InlineData(1999, "millenovecentonovantanove")]
         [InlineData(2014, "duemilaquattordici")]
         [InlineData(2048, "duemilaquarantotto")]
-        */
         public void ToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
