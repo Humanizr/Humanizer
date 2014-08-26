@@ -82,28 +82,6 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1001, "milleuno")]
         [InlineData(10001, "diecimilauno")]
         [InlineData(100001, "centomilauno")]
-        /*
-        [InlineData(1, "uma")]
-        [InlineData(2, "duas")]
-        [InlineData(3, "três")]
-        [InlineData(11, "onze")]
-        [InlineData(21, "vinte e uma")]
-        [InlineData(122, "cento e vinte e duas")]
-        [InlineData(232, "duzentas e trinta e duas")]
-        [InlineData(343, "trezentas e quarenta e três")]
-        [InlineData(3501, "três mil quinhentas e uma")]
-        [InlineData(100, "cem")]
-        [InlineData(1000, "mil")]
-        [InlineData(111, "cento e onze")]
-        [InlineData(1111, "mil cento e onze")]
-        [InlineData(111111, "cento e onze mil cento e onze")]
-        [InlineData(1111101, "um milhão cento e onze mil cento e uma")]
-        [InlineData(1111111, "um milhão cento e onze mil cento e onze")]
-        [InlineData(1101111101, "um bilhão cento e um milhões cento e onze mil cento e uma")]
-        [InlineData(1234, "mil duzentas e trinta e quatro")]
-        [InlineData(8100, "oito mil e cem")]
-        [InlineData(12345, "doze mil trezentas e quarenta e cinco")]
-        */
         public void ToFeminineWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
@@ -124,10 +102,10 @@ namespace Humanizer.Tests.Localisation.it
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
         }
 
-        /*
         [Theory]
         [InlineData(0, "zero")]
-        [InlineData(1, "primeiro")]
+        /*
+        [InlineData(1, "primo")]
         [InlineData(2, "segundo")]
         [InlineData(3, "terceiro")]
         [InlineData(4, "quarto")]
@@ -178,11 +156,13 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(100000, "centésimo milésimo")]
         [InlineData(1000000, "milionésimo")]
         [InlineData(1000000000, "bilionésimo")]
-        public void ToOrdinalWords(int number, string words)
+        */
+        public void ToOrdinalWords(int number, string expected)
         {
-            Assert.Equal(words, number.ToOrdinalWords());
+            Assert.Equal(expected, number.ToOrdinalWords());
         }
-
+        
+        /*
         [Theory]
         [InlineData(0, "zero")]
         [InlineData(1, "primeira")]
