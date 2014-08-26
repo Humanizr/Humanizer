@@ -7,7 +7,10 @@ namespace Humanizer.Tests.Localisation.it
 {
     public class CollectionFormatterTests : AmbientCulture
     {
-        public CollectionFormatterTests() : base("it") { }
+        public CollectionFormatterTests() 
+            : base("it") 
+        {
+        }
 
         [Fact]
         public void OneItem()

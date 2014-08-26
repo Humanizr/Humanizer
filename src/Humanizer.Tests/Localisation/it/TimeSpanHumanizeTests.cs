@@ -6,7 +6,10 @@ namespace Humanizer.Tests.Localisation.it
 {
     public class TimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeTests() : base("it") { }
+        public TimeSpanHumanizeTests() 
+            : base("it") 
+        {
+        }
 
         [Theory]
         [InlineData(7, "1 settimana")]
