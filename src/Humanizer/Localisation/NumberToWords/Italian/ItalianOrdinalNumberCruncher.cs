@@ -13,94 +13,50 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         
         public string Convert()
         {
-            string words = String.Empty;
-
             // it's easier to treat zero as a completely distinct case
             if (_fullNumber == 0)
                 return "zero";
-                
-            if (_fullNumber < 1000)
-            {
-                words = UnitsConverter(_fullNumber);
-            }
-            
-            return words;
-        }
-        
-        protected string UnitsConverter(int number)
-        {
-            return ThreeDigitSetConverter(number);
-        }
 
-        protected static string ThreeDigitSetConverter(int number)
-        {
-            if (number == 0) 
-                return String.Empty;
-              
-            // grab lowest two digits
-            int tensAndUnits = number % 100;
-            // grab third digit
-            int hundreds = (int)(number / 100);
-            
-            // grab also first and second digits separately
-            int units = tensAndUnits % 10;
-            int tens = (int)(tensAndUnits / 10);
-
-            if (number <= 9)
+            if (_fullNumber <= 9)
             {
-                // it's easier to treat units, from 1 to 9, as a distinct case
-                return _unitsUnder10NumberToText[tensAndUnits];
+                // units ordinals, 1 to 9, are totally different than the rest: treat them as a distinct case
+                return _unitsUnder10NumberToText[_fullNumber];
             }
 
-            string words = String.Empty;
+            ItalianCardinalNumberCruncher cardinalCruncher = new ItalianCardinalNumberCruncher(_fullNumber, _gender);
 
-            // append text for hundreds
-            words += _hundredNumberToText[hundreds];
+            string words = cardinalCruncher.Convert();
 
-            // append text for tens, only those from twenty upward
-            words += _tensOver20NumberToText[tens];
+            int tensAndUnits = _fullNumber % 100;
 
-            if (tensAndUnits == 0)
+            if (tensAndUnits == 10)
             {
-                // truncate hundreds last vowel
-                words = words.Remove(words.Length - 1);
-
-                // append suffix '-esimo'
-                words += "esimo";
-            }
-            else if (10 <= tensAndUnits && tensAndUnits <= 19)
-            {
-                // special case for 'teens', from 10 to 19
-                words += _teensUnder20NumberToText[tensAndUnits - 10];
-            }
-            else if (units == 0)
-            {
-                // truncate tens last vowel
-                words = words.Remove(words.Length - 1);
-
-                // append suffix '-esimo'
-                words += "esimo";
+                // for numbers ending in 10, cardinal and ordinal endings are different, suffix doesn't work
+                words = words.Remove(words.Length - _lengthOf10AsCardinal) + "decimo";
             }
             else
             {
-                // just append units text, with some corner cases
+                // truncate last vowel
+                words = words.Remove(words.Length - 1);
 
-                // truncate tens last vowel before 'uno' (1) and 'otto' (8)
-                // (only tens, not hundreds)
-                if (tens != 0 && (units == 1 || units == 8))
-                {
-                    words = words.Remove(words.Length - 1);
-                }
+                int units = _fullNumber % 10;
 
-                words += _unitsOver10NumberToText[units];
+                // reintroduce *unaccented* last vowel in some corner cases
+                if (units == 3)
+                    words += 'e';
+                else if (units == 6)
+                    words += 'i';
+
+                // append common ordinal suffix
+                words += "esimo";
             }
-            
+
             return words;
         }
-        
+
         protected readonly int _fullNumber;
         protected readonly GrammaticalGender _gender;
-        
+
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
         /// </summary>
@@ -117,73 +73,8 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "ottavo",
             "nono"
         };
-        
-        /// <summary>
-        /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
-        /// </summary>
-        protected static string[] _unitsOver10NumberToText = new string[]
-        {
-            String.Empty,
-            "unesimo",
-            "duesimo",
-            "treesimo",
-            "quattresimo",
-            "cinquesimo",
-            "seiesimo",
-            "settesimo",
-            "ottesimo",
-            "novesimo"
-        };
-        
-        /// <summary>
-        /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
-        /// </summary>
-        protected static string[] _tensOver20NumberToText = new string[]
-        {
-            String.Empty,
-            String.Empty,
-            "venti",
-            "trenta",
-            "quaranta",
-            "cinquanta",
-            "sessanta",
-            "settanta",
-            "ottanta",
-            "novanta"
-        };
-        
-        /// <summary>
-        /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
-        /// </summary>
-        protected static string[] _teensUnder20NumberToText = new string[]
-        {
-            "decimo",
-            "undicesimo",
-            "dodicesimo",
-            "tredicesimo",
-            "quattordicesimo",
-            "quindicesimo",
-            "sedicesimo",
-            "diciassettesimo",
-            "diciottesimo",
-            "diciannovesimo"
-        };
-        
-        /// <summary>
-        /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
-        /// </summary>
-        protected static string[] _hundredNumberToText = new string[]
-        {
-            String.Empty,
-            "cento",
-            "duecento",
-            "trecento",
-            "quattrocento",
-            "cinquecento",
-            "seicento",
-            "settecento",
-            "ottocento",
-            "novecento"
-        };
+
+        protected static int _lengthOf10AsCardinal = "dieci".Length;
+
     }
 }
