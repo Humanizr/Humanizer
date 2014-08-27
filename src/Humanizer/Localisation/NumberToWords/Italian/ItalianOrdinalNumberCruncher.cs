@@ -9,6 +9,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         {
             _fullNumber = number;
             _gender = gender;
+            _genderSuffix = (gender == GrammaticalGender.Feminine ? "a" : "o");
         }
         
         public string Convert()
@@ -20,7 +21,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             if (_fullNumber <= 9)
             {
                 // units ordinals, 1 to 9, are totally different than the rest: treat them as a distinct case
-                return _unitsUnder10NumberToText[_fullNumber];
+                return _unitsUnder10NumberToText[_fullNumber] + _genderSuffix;
             }
 
             ItalianCardinalNumberCruncher cardinalCruncher = new ItalianCardinalNumberCruncher(_fullNumber, _gender);
@@ -32,7 +33,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             if (tensAndUnits == 10)
             {
                 // for numbers ending in 10, cardinal and ordinal endings are different, suffix doesn't work
-                words = words.Remove(words.Length - _lengthOf10AsCardinal) + "decimo";
+                words = words.Remove(words.Length - _lengthOf10AsCardinal) + "decim" + _genderSuffix;
             }
             else
             {
@@ -79,7 +80,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 }
 
                 // append common ordinal suffix
-                words += "esimo";
+                words += "esim" + _genderSuffix;
             }
 
             return words;
@@ -87,6 +88,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
 
         protected readonly int _fullNumber;
         protected readonly GrammaticalGender _gender;
+        private readonly string _genderSuffix;
 
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
@@ -94,18 +96,17 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         protected static string[] _unitsUnder10NumberToText = new string[]
         {
             String.Empty,
-            "primo",
-            "secondo",
-            "terzo",
-            "quarto",
-            "quinto",
-            "sesto",
-            "settimo",
-            "ottavo",
-            "nono"
+            "prim",
+            "second",
+            "terz",
+            "quart",
+            "quint",
+            "sest",
+            "settim",
+            "ottav",
+            "non"
         };
 
         protected static int _lengthOf10AsCardinal = "dieci".Length;
-
     }
 }
