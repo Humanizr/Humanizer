@@ -41,15 +41,16 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 words = words.Remove(words.Length - 1);
 
                 int units = _fullNumber % 10;
-                int lowestThreeDigits = _fullNumber % 1000;
-                int lowestSixDigits = _fullNumber % 1000000;
-                int lowestNineDigits = _fullNumber % 1000000000;
 
                 // reintroduce *unaccented* last vowel in some corner cases
                 if (units == 3)
                     words += 'e';
                 else if (units == 6)
                     words += 'i';
+
+                int lowestThreeDigits = _fullNumber % 1000;
+                int lowestSixDigits = _fullNumber % 1000000;
+                int lowestNineDigits = _fullNumber % 1000000000;
 
                 if (lowestNineDigits == 0)
                 {

@@ -187,5 +187,27 @@ namespace Humanizer.Tests.Localisation.it
         {
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
         }
+
+        [Theory]
+        [InlineData(0, "zero")]
+        [InlineData(1, "primo")]
+        [InlineData(2, "secondo")]
+        [InlineData(5, "quinto")]
+        [InlineData(9, "nono")]
+        [InlineData(10, "decimo")]
+        [InlineData(11, "undicesimo")]
+        [InlineData(18, "diciottesimo")]
+        [InlineData(20, "ventesimo")]
+        [InlineData(21, "ventunesimo")]
+        [InlineData(100, "centesimo")]
+        [InlineData(101, "centounesimo")]
+        [InlineData(200, "duecentesimo")]
+        [InlineData(1000, "millesimo")]
+        [InlineData(1001, "milleunesimo")]
+        [InlineData(10000, "diecimillesimo")]
+        public void ToMasculineOrdinalWords(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
+        }
     }
 }
