@@ -206,6 +206,22 @@ You can even configure the name of the property of attibute to use as descriptio
 
 `Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info"`
 
+How ever prior possibilities do not provide a way to localize the descriptions, if you need this, please use `DisplayAttribute` data annotation, which is build to support localization and is utilized for this use case.
+
+```C#
+public enum EnumUnderTest
+{
+    [Display(Description = "EnumUnderTest_Member", ResourceType = typeof(Project.Resources))]
+    Member
+}
+```
+
+You will get:
+
+```C#
+EnumUnderTest.Member.Humanize() => "content" // from Project.Resources found under "EnumUnderTest_Member" resource key
+```
+
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
 ###<a id="dehumanize-enums">Dehumanize Enums</a>

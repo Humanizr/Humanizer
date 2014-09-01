@@ -10,6 +10,9 @@ namespace Humanizer
     /// </summary>
     public static class EnumHumanizeExtensions
     {
+        private const string DisplayAttributeTypeName = "System.ComponentModel.DataAnnotations.DisplayAttribute";
+        private const string DisplayAttributeGetDescriptionMethodName = "GetDescription";
+
         private static readonly Func<PropertyInfo, bool> StringTypedProperty = p => p.PropertyType == typeof(string);
 
         /// <summary>
@@ -42,6 +45,12 @@ namespace Humanizer
             foreach (var attr in attrs)
             {
                 var attrType = attr.GetType();
+                if (attrType.FullName == DisplayAttributeTypeName)
+                {
+                    var method = attrType.GetMethod(DisplayAttributeGetDescriptionMethodName);
+                    if (method != null)
+                        return method.Invoke(attr, new object[0]).ToString();
+                }
                 var descriptionProperty =
                     attrType.GetProperties()
                         .Where(StringTypedProperty)

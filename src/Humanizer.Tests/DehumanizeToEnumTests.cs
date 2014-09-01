@@ -72,6 +72,20 @@ namespace Humanizer.Tests
             Assert.Equal(EnumUnderTest.ALLCAPITALS, EnumUnderTest.ALLCAPITALS.ToString().DehumanizeTo(typeof(EnumUnderTest)));
         }
 
+        [Fact]
+        public void HonorsDisplayAttribute()
+        {
+            Assert.Equal(EnumUnderTest.MemberWithDisplayAttribute, EnumTestsResources.MemberWithDisplayAttribute.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.MemberWithDisplayAttribute, EnumTestsResources.MemberWithDisplayAttribute.DehumanizeTo(typeof(EnumUnderTest)));
+        }
+
+        [Fact]
+        public void HonorsLocalizedDisplayAttribute()
+        {
+            Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo<EnumUnderTest>());
+            Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo(typeof(EnumUnderTest)));
+        }
+
         struct DummyStructWithEnumInterfaces : IComparable, IFormattable, IConvertible
         {
             public int CompareTo(object obj)
