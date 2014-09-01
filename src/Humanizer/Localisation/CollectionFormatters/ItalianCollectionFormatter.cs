@@ -17,23 +17,23 @@ namespace Humanizer.Localisation.CollectionFormatters
             if (collection == null)
                 throw new ArgumentException("collection");
 
-            var enumerable = collection as T[] ?? collection.ToArray();
+            T[] itemsArray = collection as T[] ?? collection.ToArray();
 
-            int count = enumerable.Count();
+            int count = itemsArray.Length;
 
             if (count == 0)
                 return "";
 
             if (count == 1)
-                return objectFormatter(enumerable.First());
+                return objectFormatter(itemsArray[0]);
 
-            var frontItems = enumerable.Take(count - 1);
-            var tailItem = enumerable.Skip(count - 1).First();
+            IEnumerable<T> itemsBeforeLast = itemsArray.Take(count - 1);
+            T lastItem = itemsArray.Skip(count - 1).First();
 
             return String.Format("{0} {1} {2}",
-                String.Join(", ", frontItems.Select(objectFormatter)),
+                String.Join(", ", itemsBeforeLast.Select(objectFormatter)),
                 separator,
-                objectFormatter(tailItem));
+                objectFormatter(lastItem));
         }
     }
 }
