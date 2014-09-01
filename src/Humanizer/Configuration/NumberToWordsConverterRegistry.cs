@@ -20,6 +20,7 @@ namespace Humanizer.Configuration
             Register("de", new GermanNumberToWordsConverter());
             Register("bn-BD", new BanglaNumberToWordsConverter());
             Register("tr", new TurkishNumberToWordConverter());
+            Register("it", new ItalianNumberToWordsConverter());
         }
     }
 }

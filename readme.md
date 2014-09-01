@@ -467,12 +467,12 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 
 ```C#
 // for Brazilian Portuguese locale
-1.ToOrdinalWords(GrammaticalGender.Masculine) => "1º"
-1.ToOrdinalWords(GrammaticalGender.Feminine) => "1ª"
-1.ToOrdinalWords(GrammaticalGender.Neuter) => "1º"
-"2".ToOrdinalWords(GrammaticalGender.Masculine) => "2º"
-"2".ToOrdinalWords(GrammaticalGender.Feminine) => "2ª"
-"2".ToOrdinalWords(GrammaticalGender.Neuter) => "2º"
+1.Ordinalize(GrammaticalGender.Masculine) => "1º"
+1.Ordinalize(GrammaticalGender.Feminine) => "1ª"
+1.Ordinalize(GrammaticalGender.Neuter) => "1º"
+"2".Ordinalize(GrammaticalGender.Masculine) => "2º"
+"2".Ordinalize(GrammaticalGender.Feminine) => "2ª"
+"2".Ordinalize(GrammaticalGender.Neuter) => "2º"
 ```
 
 Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.
