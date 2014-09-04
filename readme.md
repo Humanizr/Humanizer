@@ -206,7 +206,7 @@ You can even configure the name of the property of attibute to use as descriptio
 
 `Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info"`
 
-How ever prior possibilities do not provide a way to localize the descriptions, if you need this, please use `DisplayAttribute` data annotation, which is build to support localization and is utilized for this use case.
+If you need to provide localised descriptions you can use `DisplayAttribute` data annotation instead.
 
 ```C#
 public enum EnumUnderTest
