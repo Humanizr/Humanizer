@@ -63,7 +63,7 @@ Note that a string that contains only upper case letters, and consists only of o
 
 // any unbroken upper case string is treated as an acronym
 "HUMANIZER".Humanize() => "HUMANIZER"
-"HUMANIZER".Transform(To.LowerCase | To.TitleCase) => "Humanizer"
+"HUMANIZER".Transform(To.LowerCase, To.TitleCase) => "Humanizer"
 ```
 
 You may also specify the desired letter casing:
