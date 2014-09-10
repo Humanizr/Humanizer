@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Humanizer.Tests
 {
@@ -16,7 +17,11 @@ namespace Humanizer.Tests
         [CustomProperty(EnumTestsResources.MemberWithCustomPropertyAttribute)]
         MemberWithCustomPropertyAttribute,
         MemberWithoutDescriptionAttribute,
-        ALLCAPITALS
+        ALLCAPITALS,
+        [Display(Description = EnumTestsResources.MemberWithDisplayAttribute)]
+        MemberWithDisplayAttribute,
+        [Display(Description = "MemberWithLocalizedDisplayAttribute", ResourceType = typeof(EnumTestsResources))]
+        MemberWithLocalizedDisplayAttribute
     }
 
     public class EnumTestsResources
@@ -29,6 +34,8 @@ namespace Humanizer.Tests
         public const string MemberWithoutDescriptionAttributeSentence = "Member without description attribute";
         public const string MemberWithoutDescriptionAttributeTitle = "Member Without Description Attribute";
         public const string MemberWithoutDescriptionAttributeLowerCase = "member without description attribute";
+        public const string MemberWithDisplayAttribute = "Description from Display attribute";
+        public static string MemberWithLocalizedDisplayAttribute { get { return "Localized description from Display attribute"; } }
     }
 
     public class ImposterDescriptionAttribute : Attribute

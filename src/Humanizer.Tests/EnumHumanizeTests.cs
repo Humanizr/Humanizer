@@ -55,5 +55,17 @@ namespace Humanizer.Tests
         {
             Assert.Equal(EnumUnderTest.ALLCAPITALS.ToString(), EnumUnderTest.ALLCAPITALS.Humanize());
         }
+
+        [Fact]
+        public void HonorsDisplayAttribute()
+        {
+            Assert.Equal(EnumTestsResources.MemberWithDisplayAttribute, EnumUnderTest.MemberWithDisplayAttribute.Humanize());
+        }
+
+        [Fact]
+        public void HonorsLocalizedDisplayAttribute()
+        {
+            Assert.Equal(EnumTestsResources.MemberWithLocalizedDisplayAttribute, EnumUnderTest.MemberWithLocalizedDisplayAttribute.Humanize());
+        }
     }
 }
