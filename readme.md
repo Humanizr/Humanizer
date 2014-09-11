@@ -310,50 +310,59 @@ The default precision is set to .75 but you can pass your desired precision too.
 **No dehumanization for dates as `Humanize` is a lossy transformation and the human friendly date is not reversible**
 
 ###<a id="humanize-timespan">Humanize TimeSpan</a>
-You can call `Humanize` on a `TimeSpan` to a get human friendly representation for it:
+  You can call `Humanize` on a `TimeSpan` to a get human friendly representation for it:
 
-```C#
-TimeSpan.FromMilliseconds(1).Humanize() => "1 millisecond"
-TimeSpan.FromMilliseconds(2).Humanize() => "2 milliseconds"
-TimeSpan.FromDays(1).Humanize() => "1 day"
-TimeSpan.FromDays(16).Humanize() => "2 weeks"
-```
+  ```C#
+  TimeSpan.FromMilliseconds(1).Humanize() => "1 millisecond"
+  TimeSpan.FromMilliseconds(2).Humanize() => "2 milliseconds"
+  TimeSpan.FromDays(1).Humanize() => "1 day"
+  TimeSpan.FromDays(16).Humanize() => "2 weeks"
+  ```
 
-There is an optional `precision` parameter for `TimeSpan.Humanize` which allows you to specify the precision of the returned value.
-The default value of `precision` is 1 which means only the largest time unit is returned like you saw in `TimeSpan.FromDays(16).Humanize()`.
-Here is a few examples of specifying precision:
+  There is an optional `precision` parameter for `TimeSpan.Humanize` which allows you to specify the precision of the returned value.
+  The default value of `precision` is 1 which means only the largest time unit is returned like you saw in `TimeSpan.FromDays(16).Humanize()`.
+  Here is a few examples of specifying precision:
 
-```C#
-TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only one unit in the provided TimeSpan
-TimeSpan.FromDays(16).Humanize(2) => "2 weeks, 2 days"
+  ```C#
+  TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only one unit in the provided TimeSpan
+  TimeSpan.FromDays(16).Humanize(2) => "2 weeks, 2 days"
 
-// the same TimeSpan value with different precision returns different results
-TimeSpan.FromMilliseconds(1299630020).Humanize() => "2 weeks"
-TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
-TimeSpan.FromMilliseconds(1299630020).Humanize(4) => "2 weeks, 1 day, 1 hour, 30 seconds"
-TimeSpan.FromMilliseconds(1299630020).Humanize(5) => "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds"
-```
+  // the same TimeSpan value with different precision returns different results
+  TimeSpan.FromMilliseconds(1299630020).Humanize() => "2 weeks"
+  TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
+  TimeSpan.FromMilliseconds(1299630020).Humanize(4) => "2 weeks, 1 day, 1 hour, 30 seconds"
+  TimeSpan.FromMilliseconds(1299630020).Humanize(5) => "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds"
+  ```
 
-Many localizations are available for this method:
+  There is an optional `strategy` parameter for `TimeSpan.Humanize` which allows you to get short or long time units.
+  The default value of `strategy` is `Long` which provides the default behaviour above.
+  Here is a few examples of specifying strategy with 'strategy:TimeSpanFormatStrategy.Short`:
 
-```C#
-// in de-DE culture
-TimeSpan.FromDays(1).Humanize() => "Ein Tag"
-TimeSpan.FromDays(2).Humanize() => "2 Tage"
+  ```C#
+  TimeSpan.FromDays(1).Humanize(strategy:TimeSpanFormatStrategy.Short) => "1d" // no difference when there is only one unit in the provided TimeSpan
+  TimeSpan.FromMilliseconds(320).Humanize(strategy:TimeSpanFormatStrategy.Short) => "320ms"
+  ```
 
-// in sk-SK culture
-TimeSpan.FromMilliseconds(1).Humanize() => "1 milisekunda"
-TimeSpan.FromMilliseconds(2).Humanize() => "2 milisekundy"
-TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
-```
+  Many localizations are available for this method:
 
-Culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Example:
+  ```C#
+  // in de-DE culture
+  TimeSpan.FromDays(1).Humanize() => "Ein Tag"
+  TimeSpan.FromDays(2).Humanize() => "2 Tage"
 
-```C#
-TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
-```
+  // in sk-SK culture
+  TimeSpan.FromMilliseconds(1).Humanize() => "1 milisekunda"
+  TimeSpan.FromMilliseconds(2).Humanize() => "2 milisekundy"
+  TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
+  ```
 
-###<a id="humanize-collections">Humanize Collections</a>
+  Culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Example:
+
+  ```C#
+  TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
+  ```
+
+  ###<a id="humanize-collections">Humanize Collections</a>
 You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into `Humanize`.
 
 For instance:
