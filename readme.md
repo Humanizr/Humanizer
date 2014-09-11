@@ -339,7 +339,8 @@ The default precision is set to .75 but you can pass your desired precision too.
   Here is a few examples of specifying strategy with 'strategy:TimeSpanFormatStrategy.Short`:
 
   ```C#
-  TimeSpan.FromDays(1).Humanize(strategy:TimeSpanFormatStrategy.Short) => "1d" // no difference when there is only one unit in the provided TimeSpan
+  TimeSpan.FromDays(1).Humanize(strategy:TimeSpanFormatStrategy.Short) => "1d"
+  TimeSpan.FromDays(2).Humanize(strategy:TimeSpanFormatStrategy.Short) => "2d"
   TimeSpan.FromMilliseconds(320).Humanize(strategy:TimeSpanFormatStrategy.Short) => "320ms"
   ```
 
