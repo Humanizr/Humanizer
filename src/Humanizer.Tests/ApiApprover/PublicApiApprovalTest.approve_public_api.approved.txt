@@ -265,7 +265,7 @@ public class DefaultFormatter
     public DefaultFormatter(string localeCode) { }
     public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
     public string DateHumanize_Now() { }
-    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
+    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, Humanizer.Localisation.Formatters.TimeSpanFormatStrategy strategy) { }
     public string TimeSpanHumanize_Zero() { }
 }
 
@@ -273,8 +273,15 @@ public interface IFormatter
 {
     string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
     string DateHumanize_Now();
-    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
+    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, Humanizer.Localisation.Formatters.TimeSpanFormatStrategy strategy);
     string TimeSpanHumanize_Zero();
+}
+
+public enum TimeSpanFormatStrategy
+{
+    Long,
+    Short,
+    value__,
 }
 
 public interface INumberToWordsConverter
@@ -463,7 +470,7 @@ public class StringHumanizeExtensions
 
 public class TimeSpanHumanizeExtensions
 {
-    public string Humanize(System.TimeSpan timeSpan, int precision, System.Globalization.CultureInfo culture) { }
+    public string Humanize(System.TimeSpan timeSpan, int precision, System.Globalization.CultureInfo culture, Humanizer.Localisation.Formatters.TimeSpanFormatStrategy strategy) { }
 }
 
 public class To

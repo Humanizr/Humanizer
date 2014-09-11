@@ -46,22 +46,23 @@ namespace Humanizer.Localisation.Formatters
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
         public virtual string TimeSpanHumanize_Zero()
         {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0);
+            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, TimeSpanFormatStrategy.Long);
         }
 
-        /// <summary>
-        /// Returns the string representation of the provided TimeSpan
-        /// </summary>
-        /// <param name="timeUnit">Must be less than or equal to TimeUnit.Week</param>
-        /// <param name="unit"></param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
+	    /// <summary>
+	    /// Returns the string representation of the provided TimeSpan
+	    /// </summary>
+	    /// <param name="timeUnit">Must be less than or equal to TimeUnit.Week</param>
+	    /// <param name="unit"></param>
+	    /// <param name="strategy">Optional TimeSpanFormatStrategy, default is Long</param>
+	    /// <returns></returns>
+	    /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
+	    public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, TimeSpanFormatStrategy strategy = TimeSpanFormatStrategy.Long)
         {
             if (timeUnit > TimeUnit.Week)
                 throw new ArgumentOutOfRangeException("timeUnit", "There's no meaningful way to humanize passed timeUnit.");
 
-            return GetResourceForTimeSpan(timeUnit, unit);
+            return GetResourceForTimeSpan(timeUnit, unit, strategy);
         }
 
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
@@ -70,9 +71,9 @@ namespace Humanizer.Localisation.Formatters
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count)
+        private string GetResourceForTimeSpan(TimeUnit unit, int count, TimeSpanFormatStrategy strategy)
         {
-            string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
+            string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, strategy);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 

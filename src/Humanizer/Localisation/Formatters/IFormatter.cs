@@ -28,12 +28,29 @@
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
         string TimeSpanHumanize_Zero();
 
-        /// <summary>
-        /// Returns the string representation of the provided TimeSpan
-        /// </summary>
-        /// <param name="timeUnit"></param>
-        /// <param name="unit"></param>
-        /// <returns></returns>
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit);
+	    /// <summary>
+	    /// Returns the string representation of the provided TimeSpan
+	    /// </summary>
+	    /// <param name="timeUnit"></param>
+	    /// <param name="unit"></param>
+	    /// <param name="strategy"></param>
+	    /// <returns></returns>
+	    string TimeSpanHumanize(TimeUnit timeUnit, int unit, TimeSpanFormatStrategy strategy = TimeSpanFormatStrategy.Long);
     }
+
+	/// <summary>
+	/// Alternative strategies for formatting TimeSpan
+	/// </summary>
+	public enum TimeSpanFormatStrategy
+	{
+		/// <summary>
+		/// Default strategy giving "day/s", "minute/s", "millisecond/s", etc
+		/// </summary>
+		Long,
+		/// <summary>
+		/// Optional strategy giving "d", "m", "ms", etc
+		/// </summary>
+		Short,
+	}
+
 }

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
+using Humanizer.Localisation.Formatters;
 
 namespace Humanizer
 {
@@ -11,19 +12,20 @@ namespace Humanizer
     /// </summary>
     public static class TimeSpanHumanizeExtensions
     {
-        /// <summary>
-        /// Turns a TimeSpan into a human readable form. E.g. 1 day.
-        /// </summary>
-        /// <param name="timeSpan"></param>
-        /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
-        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null)
+	    /// <summary>
+	    /// Turns a TimeSpan into a human readable form. E.g. 1 day.
+	    /// </summary>
+	    /// <param name="timeSpan"></param>
+	    /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
+	    /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+		/// <param name="strategy">TimeSpanFormatStrategy to use. Default is TimeSpanFormatStrategy.Long</param>
+	    /// <returns></returns>
+	    public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeSpanFormatStrategy strategy= TimeSpanFormatStrategy.Long)
         {
             var result = new StringBuilder();
             for (int i = 0; i < precision; i++)
             {
-                var timePart = GetTimePart(timeSpan, culture);
+                var timePart = GetTimePart(timeSpan, culture, strategy);
             
                 if (result.Length > 0)
                     result.Append(", ");
@@ -38,26 +40,26 @@ namespace Humanizer
             return result.ToString();
         }
 
-        private static string GetTimePart(TimeSpan timespan, CultureInfo culture)
+        private static string GetTimePart(TimeSpan timespan, CultureInfo culture, TimeSpanFormatStrategy strategy)
         {
             var formatter = Configurator.GetFormatter(culture);
             if (timespan.Days >= 7)
-                return formatter.TimeSpanHumanize(TimeUnit.Week, timespan.Days/7);
+                return formatter.TimeSpanHumanize(TimeUnit.Week, timespan.Days/7, strategy);
 
             if (timespan.Days >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Day, timespan.Days);
+				return formatter.TimeSpanHumanize(TimeUnit.Day, timespan.Days, strategy);
 
             if (timespan.Hours >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Hour, timespan.Hours);
+				return formatter.TimeSpanHumanize(TimeUnit.Hour, timespan.Hours, strategy);
 
             if (timespan.Minutes >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Minute, timespan.Minutes);
+				return formatter.TimeSpanHumanize(TimeUnit.Minute, timespan.Minutes, strategy);
 
             if (timespan.Seconds >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Second, timespan.Seconds);
+				return formatter.TimeSpanHumanize(TimeUnit.Second, timespan.Seconds, strategy);
 
             if (timespan.Milliseconds >= 1)
-                return formatter.TimeSpanHumanize(TimeUnit.Millisecond, timespan.Milliseconds);
+				return formatter.TimeSpanHumanize(TimeUnit.Millisecond, timespan.Milliseconds, strategy);
 
             return formatter.TimeSpanHumanize_Zero();
         }
