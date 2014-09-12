@@ -3,6 +3,7 @@
   - [#322](https://github.com/MehdiK/Humanizer/pull/322): DefaultFormatter.TimeSpanHumanize throws a more meaningful exception when called with TimeUnits larger than TimeUnit.Week
   - [#314](https://github.com/MehdiK/Humanizer/pull/314): Added ByteRate class and supporting members to facilitate calculation of byte transfer rates
   - [#333](https://github.com/MehdiK/Humanizer/pull/333): Added support to humanize enums from resource strings
+  - [#332](https://github.com/MehdiK/Humanizer/pull/332): Added Italian localisation and tests: date and time Resources, CollectionFormatter, NumberToWordsConverter (cardinal and ordinal), Ordinalizer
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.28.0...master)
 
