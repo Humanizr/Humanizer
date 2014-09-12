@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -99,9 +99,16 @@ The foundation of this was set in the <a href="https://github.com/TestStack/Test
 <span class="s">"Underscored_input_string_is_turned_into_sentence"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Underscored input string is turned into sentence"</span>
 
 <span class="s">"Underscored_input_String_is_turned_INTO_sentence"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"Underscored input String is turned INTO sentence"</span>
+</pre></div>
 
-<span class="c1">// acronyms are left intact</span>
+<p>Note that a string that contains only upper case letters, and consists only of one word, is always treated as an acronym (regardless of its length). To guarantee that any arbitrary string will always be humanized you must use a transform (see <code>Transform</code> method below):</p>
+
+<div class="highlight highlight-C#"><pre><span class="c1">// acronyms are left intact </span>
 <span class="s">"HTML"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"HTML"</span>
+
+<span class="c1">// any unbroken upper case string is treated as an acronym</span>
+<span class="s">"HUMANIZER"</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"HUMANIZER"</span>
+<span class="s">"HUMANIZER"</span><span class="p">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">To</span><span class="p">.</span><span class="n">LowerCase</span><span class="p">,</span> <span class="n">To</span><span class="p">.</span><span class="n">TitleCase</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"Humanizer"</span>
 </pre></div>
 
 <p>You may also specify the desired letter casing:</p>
@@ -243,6 +250,20 @@ This is to help with platforms with missing <code>DescriptionAttribute</code> an
 <p>You can even configure the name of the property of attibute to use as description.</p>
 
 <p><code>Configurator.EnumDescriptionPropertyLocator = p =&gt; p.Name == "Info"</code></p>
+
+<p>If you need to provide localised descriptions you can use <code>DisplayAttribute</code> data annotation instead.</p>
+
+<div class="highlight highlight-C#"><pre><span class="k">public</span> <span class="k">enum</span> <span class="n">EnumUnderTest</span>
+<span class="p">{</span>
+<span class="na">    [Display(Description = "EnumUnderTest_Member", ResourceType = typeof(Project.Resources))]</span>
+    <span class="n">Member</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>You will get:</p>
+
+<div class="highlight highlight-C#"><pre><span class="n">EnumUnderTest</span><span class="p">.</span><span class="n">Member</span><span class="p">.</span><span class="n">Humanize</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="s">"content"</span> <span class="c1">// from Project.Resources found under "EnumUnderTest_Member" resource key</span>
+</pre></div>
 
 <p>Hopefully this will help avoid littering enums with unnecessary attributes!</p>
 
@@ -498,12 +519,12 @@ You can pass an argument to <code>Ordinalize</code> to specify which gender the 
 The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="c1">// for Brazilian Portuguese locale</span>
-<span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1º"</span>
-<span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Feminine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1ª"</span>
-<span class="m">1.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Neuter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1º"</span>
-<span class="s">"2"</span><span class="p">.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2º"</span>
-<span class="s">"2"</span><span class="p">.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Feminine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2ª"</span>
-<span class="s">"2"</span><span class="p">.</span><span class="n">ToOrdinalWords</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Neuter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2º"</span>
+<span class="m">1.</span><span class="n">Ordinalize</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1º"</span>
+<span class="m">1.</span><span class="n">Ordinalize</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Feminine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1ª"</span>
+<span class="m">1.</span><span class="n">Ordinalize</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Neuter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"1º"</span>
+<span class="s">"2"</span><span class="p">.</span><span class="n">Ordinalize</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Masculine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2º"</span>
+<span class="s">"2"</span><span class="p">.</span><span class="n">Ordinalize</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Feminine</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2ª"</span>
+<span class="s">"2"</span><span class="p">.</span><span class="n">Ordinalize</span><span class="p">(</span><span class="n">GrammaticalGender</span><span class="p">.</span><span class="n">Neuter</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">"2º"</span>
 </pre></div>
 
 <p>Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.</p>
@@ -784,6 +805,23 @@ ByteSize.Parse("1.55 gb");
 ByteSize.Parse("1.55 TB");
 ByteSize.Parse("1.55 tB");
 ByteSize.Parse("1.55 tb");
+</code></pre>
+
+<p>Finally, if you need to calculate the rate at which a quantity of bytes has been transferred, you can use the <code>Per</code> method of <code>ByteSize</code>. The <code>Per</code> method accepts one argument - the measurement interval for the bytes; this is the amount of time it took to transfer the bytes.</p>
+
+<p>The <code>Per</code> method returns a <code>ByteRate</code> class which has a <code>Humanize</code> method. By default, rates are given in seconds (eg, MB/s). However, if desired, a TimeUnit may be passed to <code>Humanize</code> for an alternate interval. Valid intervals are <code>TimeUnit.Second</code>, <code>TimeUnit.Minute</code>, and <code>TimeUnit.Hour</code>. Examples of each interval and example byte rate usage is below.</p>
+
+<pre><code>var size = ByteSize.FromMegabytes(10);
+var measurementInterval = TimeSpan.FromSeconds(1);
+
+var text = size.Per(measurementInterval).Humanize();
+// 10 MB/s
+
+text = size.Per(measurementInterval).Humanize(TimeUnit.Minute);
+// 600 MB/min
+
+text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
+// 35.15625 GB/hour
 </code></pre>
 
 <h2>
