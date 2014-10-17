@@ -48,7 +48,11 @@ namespace Humanizer
         public static string Humanize(this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
-            if (input.ToCharArray().All(Char.IsUpper))
+            // get all letters only. 
+            var letters = from ch in input.ToCharArray() where Char.IsLetter(ch) select ch;
+            
+            // check for all capitals in our letters only array.
+            if (letters.All(Char.IsUpper))
                 return input;
 
             if (input.Contains("_") || input.Contains("-"))
