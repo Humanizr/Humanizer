@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
+using Humanizer.Localisation.Formatters;
 
 namespace Humanizer
 {
@@ -20,22 +23,47 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null)
         {
-            var result = new StringBuilder();
-            for (int i = 0; i < precision; i++)
-            {
-                var timePart = GetTimePart(timeSpan, culture);
-            
-                if (result.Length > 0)
-                    result.Append(", ");
-                
-                result.Append(timePart);
+            return string.Join(", ", GetTimeParts(timeSpan, culture).Take(precision).Where(x => x != null));
+        }
 
-                timeSpan = TakeOutTheLargestUnit(timeSpan);
-                if (timeSpan == TimeSpan.Zero)
-                    break;
-            }
+        private static IEnumerable<string> GetTimeParts(TimeSpan timespan, CultureInfo culture)
+        {
+            var weeks = timespan.Days / 7;
+            var daysInWeek = timespan.Days % 7;
+            var hours = timespan.Hours;
+            var minutes = timespan.Minutes;
+            var seconds = timespan.Seconds;
+            var milliseconds = timespan.Milliseconds;
 
-            return result.ToString();
+            var outputWeeks = weeks > 0;
+            var outputDays = outputWeeks || daysInWeek > 0;
+            var outputHours = outputDays || hours > 0;
+            var outputMinutes = outputHours || minutes > 0;
+            var outputSeconds = outputMinutes || seconds > 0;
+            var outputMilliseconds = outputSeconds || milliseconds > 0;
+
+            var formatter = Configurator.GetFormatter(culture);
+            if (outputWeeks)
+                yield return GetTimePart(formatter, TimeUnit.Week, weeks);
+            if (outputDays)
+                yield return GetTimePart(formatter, TimeUnit.Day, daysInWeek);
+            if (outputHours)
+                yield return GetTimePart(formatter, TimeUnit.Hour, hours);
+            if (outputMinutes)
+                yield return GetTimePart(formatter, TimeUnit.Minute, minutes);
+            if (outputSeconds)
+                yield return GetTimePart(formatter, TimeUnit.Second, seconds);
+            if (outputMilliseconds)
+                yield return GetTimePart(formatter, TimeUnit.Millisecond, milliseconds);
+            else
+                yield return formatter.TimeSpanHumanize_Zero();
+        }
+
+        private static string GetTimePart(IFormatter formatter, TimeUnit timeUnit, int unit)
+        {
+            return unit != 0
+                ? formatter.TimeSpanHumanize(timeUnit, unit)
+                : null;
         }
 
         private static string GetTimePart(TimeSpan timespan, CultureInfo culture)
