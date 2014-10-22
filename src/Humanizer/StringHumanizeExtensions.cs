@@ -24,15 +24,17 @@ namespace Humanizer
 (?# acronym to number)
 (?<=[A-Z])(?=[0-9])|
 (?# acronym to word)
-(?<=[A-Z])(?=[A-Z][a-z])
+(?<=[A-Z])(?=[A-Z][a-z])|
+(?# words/acronyms/numbers separated by space)
+(?<=[^\s])(?=[\s])
 ", RegexOptions.IgnorePatternWhitespace);
 
             var result = pascalCaseWordBoundaryRegex
                 .Split(input)
                 .Select(word =>
-                    word.ToCharArray().All(Char.IsUpper) && word.Length > 1
-                        ? word
-                        : word.ToLower())
+                    word.Trim().ToCharArray().All(Char.IsUpper) && word.Trim().Length > 1
+                        ? word.Trim()
+                        : word.Trim().ToLower())
                 .Aggregate((res, word) => res + " " + word);
 
             result = Char.ToUpper(result[0]) +
