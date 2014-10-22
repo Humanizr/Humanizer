@@ -32,7 +32,7 @@ namespace Humanizer
             var result = pascalCaseWordBoundaryRegex
                 .Split(input)
                 .Select(word =>
-                    word.Trim().ToCharArray().All(Char.IsUpper) && word.Trim().Length > 1
+                    word.Trim().ToCharArray().All(Char.IsUpper) && word.Length > 1
                         ? word.Trim()
                         : word.Trim().ToLower())
                 .Aggregate((res, word) => res + " " + word);
