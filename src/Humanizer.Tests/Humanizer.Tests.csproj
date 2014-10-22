@@ -136,9 +136,17 @@
     <Compile Include="Localisation\sv\DateHumanizeTests.cs" />
     <Compile Include="Localisation\sv\TimeSpanHumanizeTests.cs" />
     <Compile Include="DateTimeHumanizePrecisionStrategyTests.cs" />
+    <Compile Include="Localisation\uz-Cyrl-UZ\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\uz-Cyrl-UZ\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\uz-Cyrl-UZ\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\uz-Latn-UZ\DateHumanizeTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localisation\uz-Latn-UZ\NumberToWordsTests.cs" />
     <Compile Include="Localisation\tr\DateHumanizeTests.cs" />
     <Compile Include="Localisation\tr\NumberToWordsTests.cs" />
     <Compile Include="Localisation\tr\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\uz-Latn-UZ\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\vi\DateHumanizeTests.cs" />
     <Compile Include="Localisation\vi\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\it\DateHumanizeTests.cs" />
