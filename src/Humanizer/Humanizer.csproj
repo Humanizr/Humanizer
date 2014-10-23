@@ -183,13 +183,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.bn-BD.resx" />
     <EmbeddedResource Include="Properties\Resources.nb.resx" />
-    <EmbeddedResource Include="Properties\Resources.uz-Cyrl-UZ.resx">
-      <LastGenOutput>Resources.uz-Cyrl-UZ.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.uz-Latn-UZ.resx">
-      <LastGenOutput>Resources.uz-Latn-UZ1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.uz-Cyrl-UZ.resx"/>
+    <EmbeddedResource Include="Properties\Resources.uz-Latn-UZ.resx"/>
     <EmbeddedResource Include="Properties\Resources.sl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
