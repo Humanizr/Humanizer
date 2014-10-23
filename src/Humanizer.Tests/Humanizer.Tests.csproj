@@ -139,9 +139,7 @@
     <Compile Include="Localisation\uz-Cyrl-UZ\DateHumanizeTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\NumberToWordsTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\TimeSpanHumanizeTests.cs" />
-    <Compile Include="Localisation\uz-Latn-UZ\DateHumanizeTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Localisation\uz-Latn-UZ\DateHumanizeTests.cs"/>
     <Compile Include="Localisation\uz-Latn-UZ\NumberToWordsTests.cs" />
     <Compile Include="Localisation\tr\DateHumanizeTests.cs" />
     <Compile Include="Localisation\tr\NumberToWordsTests.cs" />
