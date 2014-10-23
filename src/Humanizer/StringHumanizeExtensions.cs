@@ -53,9 +53,9 @@ namespace Humanizer
             if (input.ToCharArray().All(Char.IsUpper))
                 return input;
 
-            // if input contains a dash or hyphen which preceeds or follows a space (or both, i.g. free-standing)
-            // remove the dash/hyphen and run it through FromPascalCase
-            Regex r = new Regex(@"[\s]{1}[-_][\s]{0}|[\s]{0}[-_][\s]{1}", RegexOptions.IgnoreCase);
+            // if input contains a dash or underscore which preceeds or follows a space (or both, i.g. free-standing)
+            // remove the dash/underscore and run it through FromPascalCase
+            Regex r = new Regex(@"[\s]{1}[-_]|[-_][\s]{1}", RegexOptions.IgnoreCase);
             if (r.IsMatch(input))
                 return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
 
