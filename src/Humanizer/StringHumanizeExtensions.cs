@@ -33,9 +33,9 @@ namespace Humanizer
                 .Split(input)
                 .Select(word =>
                     word.Trim().ToCharArray().All(Char.IsUpper) && word.Length > 1
-                        ? word.Trim()
-                        : word.Trim().ToLower())
-                .Aggregate((res, word) => res + " " + word);
+                        ? word
+                        : word.ToLower())
+                .Aggregate((res, word) => res + " " + word.Trim());
 
             result = Char.ToUpper(result[0]) +
                 result.Substring(1, result.Length - 1);
