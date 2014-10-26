@@ -1,11 +1,15 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.29.0...master)
+
+###v1.29.0 - 2014-09-12
   - [#320](https://github.com/MehdiK/Humanizer/pull/320): Fixed Dehumanize actually humanizing an already dehumanized string
   - [#322](https://github.com/MehdiK/Humanizer/pull/322): DefaultFormatter.TimeSpanHumanize throws a more meaningful exception when called with TimeUnits larger than TimeUnit.Week
   - [#314](https://github.com/MehdiK/Humanizer/pull/314): Added ByteRate class and supporting members to facilitate calculation of byte transfer rates
   - [#333](https://github.com/MehdiK/Humanizer/pull/333): Added support to humanize enums from resource strings
   - [#332](https://github.com/MehdiK/Humanizer/pull/332): Added Italian localisation and tests: date and time Resources, CollectionFormatter, NumberToWordsConverter (cardinal and ordinal), Ordinalizer
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.28.0...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.28.0...v1.29.0)
 
 ###v1.28.0 - 2014-07-06
   - [#309](https://github.com/MehdiK/Humanizer/pull/309): Fixed the bug with DateTime.Humanize returning tomorrow when it's not actually tomorrow
