@@ -95,6 +95,8 @@
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
+    <Compile Include="Localisation\NumberToWords\UzbekCyrlNumberToWordConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\UzbekLatnNumberToWordConverter.cs" />
     <Compile Include="Localisation\NumberToWords\TurkishNumberToWordConverter.cs" />
     <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\GermanOrdinalizer.cs" />
@@ -181,6 +183,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.bn-BD.resx" />
     <EmbeddedResource Include="Properties\Resources.nb.resx" />
+    <EmbeddedResource Include="Properties\Resources.uz-Cyrl-UZ.resx"/>
+    <EmbeddedResource Include="Properties\Resources.uz-Latn-UZ.resx"/>
     <EmbeddedResource Include="Properties\Resources.sl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
