@@ -19,7 +19,7 @@ namespace Humanizer.Tests.Localisation.nl
 
         [Theory]
         [InlineData(-2, "2 uur geleden")]
-        [InlineData(-1, "één uur geleden")]
+        [InlineData(-1, "1 uur geleden")]
         public void HoursAgo(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
@@ -27,8 +27,8 @@ namespace Humanizer.Tests.Localisation.nl
 
         [Theory]
         [InlineData(-2, "2 minuten geleden")]
-        [InlineData(-1, "één minuut geleden")]
-        [InlineData(60, "één uur geleden")]
+        [InlineData(-1, "1 minuut geleden")]
+        [InlineData(60, "1 uur geleden")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
@@ -36,7 +36,7 @@ namespace Humanizer.Tests.Localisation.nl
 
         [Theory]
         [InlineData(-2, "2 maanden geleden")]
-        [InlineData(-1, "één maand geleden")]
+        [InlineData(-1, "1 maand geleden")]
         public void MonthsAgo(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
@@ -44,7 +44,7 @@ namespace Humanizer.Tests.Localisation.nl
 
         [Theory]
         [InlineData(-2, "2 seconden geleden")]
-        [InlineData(-1, "één seconde geleden")]
+        [InlineData(-1, "1 seconde geleden")]
         public void SecondsAgo(int seconds, string expected)
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
@@ -52,7 +52,7 @@ namespace Humanizer.Tests.Localisation.nl
 
         [Theory]
         [InlineData(-2, "2 jaar geleden")]
-        [InlineData(-1, "één jaar geleden")]
+        [InlineData(-1, "1 jaar geleden")]
         public void YearsAgo(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
