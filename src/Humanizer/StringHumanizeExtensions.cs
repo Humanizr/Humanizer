@@ -24,16 +24,18 @@ namespace Humanizer
 (?# acronym to number)
 (?<=[A-Z])(?=[0-9])|
 (?# acronym to word)
-(?<=[A-Z])(?=[A-Z][a-z])
+(?<=[A-Z])(?=[A-Z][a-z])|
+(?# words/acronyms/numbers separated by space)
+(?<=[^\s])(?=[\s])
 ", RegexOptions.IgnorePatternWhitespace);
 
             var result = pascalCaseWordBoundaryRegex
                 .Split(input)
                 .Select(word =>
-                    word.ToCharArray().All(Char.IsUpper) && word.Length > 1
+                    word.Trim().ToCharArray().All(Char.IsUpper) && word.Length > 1
                         ? word
                         : word.ToLower())
-                .Aggregate((res, word) => res + " " + word);
+                .Aggregate((res, word) => res + " " + word.Trim());
 
             result = Char.ToUpper(result[0]) +
                 result.Substring(1, result.Length - 1);
@@ -50,6 +52,12 @@ namespace Humanizer
             // if input is all capitals (e.g. an acronym) then return it without change
             if (input.ToCharArray().All(Char.IsUpper))
                 return input;
+
+            // if input contains a dash or underscore which preceeds or follows a space (or both, i.g. free-standing)
+            // remove the dash/underscore and run it through FromPascalCase
+            Regex r = new Regex(@"[\s]{1}[-_]|[-_][\s]{1}", RegexOptions.IgnoreCase);
+            if (r.IsMatch(input))
+                return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
 
             if (input.Contains("_") || input.Contains("-"))
                 return FromUnderscoreDashSeparatedWords(input);

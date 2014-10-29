@@ -1,4 +1,5 @@
 ###In Development
+  - [#341](https://github.com/MehdiK/Humanizer/pull/341): Added logic to properly treat underscores, dashes and spaces.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.29.0...master)
 

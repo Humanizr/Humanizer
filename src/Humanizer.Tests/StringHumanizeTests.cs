@@ -11,6 +11,7 @@ namespace Humanizer.Tests
         [InlineData("10IsInTheBegining", "10 is in the begining")]
         [InlineData("NumberIsAtTheEnd100", "Number is at the end 100")]
         [InlineData("XIsFirstWordInTheSentence", "X is first word in the sentence")]
+        [InlineData("XIsFirstWordInTheSentence ThenThereIsASpace", "X is first word in the sentence then there is a space")]
         public void CanHumanizeStringInPascalCase(string input, string expectedResult)
         {
             Assert.Equal(expectedResult, input.Humanize());
@@ -19,7 +20,15 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData("Underscored_input_string_is_turned_into_sentence", "Underscored input string is turned into sentence")]
         [InlineData("Underscored_input_String_is_turned_INTO_sentence", "Underscored input String is turned INTO sentence")]
-        public void CanHumanizeStringWithUnderscores(string input, string expectedReseult)
+        [InlineData("TEST 1 - THIS IS A TEST", "TEST 1 THIS IS A TEST")]
+        [InlineData("TEST 1 -THIS IS A TEST", "TEST 1 THIS IS A TEST")]
+        [InlineData("TEST 1- THIS IS A TEST", "TEST 1 THIS IS A TEST")]
+        [InlineData("TEST 1_ THIS IS A TEST", "TEST 1 THIS IS A TEST")]
+        [InlineData("TEST 1 _THIS IS A TEST", "TEST 1 THIS IS A TEST")]
+        [InlineData("TEST 1 _ THIS IS A TEST", "TEST 1 THIS IS A TEST")]
+        [InlineData("TEST 1 - THIS_IS_A_TEST", "TEST 1 THIS IS A TEST")]
+        [InlineData("TEST 1 - THIS is A Test", "TEST 1 THIS is A test")]
+        public void CanHumanizeStringWithUnderscoresAndDashes(string input, string expectedReseult)
         {
             Assert.Equal(expectedReseult, input.Humanize());
         }
@@ -28,6 +37,7 @@ namespace Humanizer.Tests
         [InlineData("HTML", "HTML")]
         [InlineData("TheHTMLLanguage", "The HTML language")]
         [InlineData("HTMLIsTheLanguage", "HTML is the language")]
+        [InlineData("TheLanguage IsHTML", "The language is HTML")]
         [InlineData("TheLanguageIsHTML", "The language is HTML")]
         [InlineData("HTML5", "HTML 5")]
         [InlineData("1HTML", "1 HTML")]
