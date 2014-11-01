@@ -16,7 +16,7 @@ namespace Humanizer.Tests.Localisation.nl
         [Fact]
         public void OneWeek()
         {
-            Assert.Equal("één week", TimeSpan.FromDays(7).Humanize());
+            Assert.Equal("1 week", TimeSpan.FromDays(7).Humanize());
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace Humanizer.Tests.Localisation.nl
         [Fact]
         public void OneDay()
         {
-            Assert.Equal("één dag", TimeSpan.FromDays(1).Humanize());
+            Assert.Equal("1 dag", TimeSpan.FromDays(1).Humanize());
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace Humanizer.Tests.Localisation.nl
         [Fact]
         public void OneHour()
         {
-            Assert.Equal("één uur", TimeSpan.FromHours(1).Humanize());
+            Assert.Equal("1 uur", TimeSpan.FromHours(1).Humanize());
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Humanizer.Tests.Localisation.nl
         [Fact]
         public void OneMinute()
         {
-            Assert.Equal("één minuut", TimeSpan.FromMinutes(1).Humanize());
+            Assert.Equal("1 minuut", TimeSpan.FromMinutes(1).Humanize());
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace Humanizer.Tests.Localisation.nl
         [Fact]
         public void OneSecond()
         {
-            Assert.Equal("één seconde", TimeSpan.FromSeconds(1).Humanize());
+            Assert.Equal("1 seconde", TimeSpan.FromSeconds(1).Humanize());
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace Humanizer.Tests.Localisation.nl
         [Fact]
         public void OneMillisecond()
         {
-            Assert.Equal("één milliseconde", TimeSpan.FromMilliseconds(1).Humanize());
+            Assert.Equal("1 milliseconde", TimeSpan.FromMilliseconds(1).Humanize());
         }
 
         [Fact]
