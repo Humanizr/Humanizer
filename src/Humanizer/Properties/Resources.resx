@@ -231,4 +231,40 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>one year from now</value>
   </data>
+  <data name="TimeSpanShortHumanize_MultipleDays" xml:space="preserve">
+    <value>{0}d</value>
+  </data>
+  <data name="TimeSpanShortHumanize_MultipleHours" xml:space="preserve">
+    <value>{0}h</value>
+  </data>
+  <data name="TimeSpanShortHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0}ms</value>
+  </data>
+  <data name="TimeSpanShortHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0}m</value>
+  </data>
+  <data name="TimeSpanShortHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0}s</value>
+  </data>
+  <data name="TimeSpanShortHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0}wk</value>
+  </data>
+  <data name="TimeSpanShortHumanize_SingleDay" xml:space="preserve">
+    <value>1d</value>
+  </data>
+  <data name="TimeSpanShortHumanize_SingleHour" xml:space="preserve">
+    <value>1h</value>
+  </data>
+  <data name="TimeSpanShortHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1ms</value>
+  </data>
+  <data name="TimeSpanShortHumanize_SingleMinute" xml:space="preserve">
+    <value>1m</value>
+  </data>
+  <data name="TimeSpanShortHumanize_SingleSecond" xml:space="preserve">
+    <value>1s</value>
+  </data>
+  <data name="TimeSpanShortHumanize_SingleWeek" xml:space="preserve">
+    <value>1wk</value>
+  </data>
 </root>

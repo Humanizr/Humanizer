@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Humanizer.Localisation.Formatters;
 using Xunit;
 using Xunit.Extensions;
 
@@ -19,12 +20,31 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData(14, "2wk")]
+        [InlineData(7, "1wk")]
+        public void ShortWeeks(int days, string expected)
+        {
+			var actual = TimeSpan.FromDays(days).Humanize(strategy: TimeSpanFormatStrategy.Short);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(6, "6 days")]
         [InlineData(2, "2 days")]
         [InlineData(1, "1 day")]
         public void Days(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize();
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(6, "6d")]
+        [InlineData(2, "2d")]
+        [InlineData(1, "1d")]
+        public void ShortDays(int days, string expected)
+        {
+			var actual = TimeSpan.FromDays(days).Humanize(strategy: TimeSpanFormatStrategy.Short);
             Assert.Equal(expected, actual);
         }
 
@@ -38,11 +58,29 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData(2, "2h")]
+        [InlineData(1, "1h")]
+        public void ShortHours(int hours, string expected)
+        {
+			var actual = TimeSpan.FromHours(hours).Humanize(strategy: TimeSpanFormatStrategy.Short);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(2, "2 minutes")]
         [InlineData(1, "1 minute")]
         public void Minutes(int minutes, string expected)
         {
             var actual = TimeSpan.FromMinutes(minutes).Humanize();
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(2, "2m")]
+        [InlineData(1, "1m")]
+        public void ShortMinutes(int minutes, string expected)
+        {
+			var actual = TimeSpan.FromMinutes(minutes).Humanize(strategy: TimeSpanFormatStrategy.Short);
             Assert.Equal(expected, actual);
         }
 
@@ -58,6 +96,17 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData(135, "2m")]
+        [InlineData(60, "1m")]
+        [InlineData(2, "2s")]
+        [InlineData(1, "1s")]
+        public void ShortSeconds(int seconds, string expected)
+        {
+            var actual = TimeSpan.FromSeconds(seconds).Humanize(strategy:TimeSpanFormatStrategy.Short);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(2500, "2 seconds")]
         [InlineData(1400, "1 second")]
         [InlineData(2, "2 milliseconds")]
@@ -65,6 +114,17 @@ namespace Humanizer.Tests
         public void Milliseconds(int ms, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize();
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(2500, "2s")]
+        [InlineData(1400, "1s")]
+        [InlineData(2, "2ms")]
+        [InlineData(1, "1ms")]
+        public void ShortMilliseconds(int ms, string expected)
+        {
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(strategy:TimeSpanFormatStrategy.Short);
             Assert.Equal(expected, actual);
         }
 
