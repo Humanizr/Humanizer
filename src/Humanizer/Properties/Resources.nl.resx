@@ -172,7 +172,7 @@
     <value>{0} weken</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>één dag</value>
+    <value>1 dag</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
     <value>1 uur</value>

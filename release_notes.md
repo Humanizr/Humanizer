@@ -1,5 +1,6 @@
 ###In Development
   - [#340](https://github.com/MehdiK/Humanizer/pull/340): Fixed TimeSpan humanization precision skips units after the largest one when they're zero until it finds a non-zero unit
+  - [#347](https://github.com/MehdiK/Humanizer/pull/347): Changed één to 1 for dutch language.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.30.0...master)
 
