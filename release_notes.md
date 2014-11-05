@@ -1,4 +1,5 @@
 ###In Development
+  - [#347](https://github.com/MehdiK/Humanizer/pull/347): Changed één to 1 for dutch language.
   - [#341](https://github.com/MehdiK/Humanizer/pull/341): Added logic to properly treat underscores, dashes and spaces.
   - [#342](https://github.com/MehdiK/Humanizer/pull/342): Added complete Uzbek localisation
 
