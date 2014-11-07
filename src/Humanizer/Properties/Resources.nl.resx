@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>één seconde geleden</value>
+    <value>1 seconde geleden</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} seconden geleden</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>één minuut geleden</value>
+    <value>1 minuut geleden</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minuten geleden</value>
   </data>
   <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>één uur geleden</value>
+    <value>1 uur geleden</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} uur geleden</value>
@@ -142,13 +142,13 @@
     <value>{0} dagen geleden</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>één maand geleden</value>
+    <value>1 maand geleden</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} maanden geleden</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>één jaar geleden</value>
+    <value>1 jaar geleden</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} jaar geleden</value>
@@ -172,22 +172,22 @@
     <value>{0} weken</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>één dag</value>
+    <value>1 dag</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>één uur</value>
+    <value>1 uur</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>één milliseconde</value>
+    <value>1 milliseconde</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>één minuut</value>
+    <value>1 minuut</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>één seconde</value>
+    <value>1 seconde</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>één week</value>
+    <value>1 week</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>geen tijd</value>
