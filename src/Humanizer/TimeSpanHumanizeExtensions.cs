@@ -19,15 +19,27 @@ namespace Humanizer
         /// <param name="timeSpan"></param>
         /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <param name="considerEmptyParts">Controls whether empty time units should be considered when calculating the number of time units to return.</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, bool considerEmptyParts = false)
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null)
+        {
+            return Humanize(timeSpan, precision, false, culture);
+        }
+
+        /// <summary>
+        /// Turns a TimeSpan into a human readable form. E.g. 1 day.
+        /// </summary>
+        /// <param name="timeSpan"></param>
+        /// <param name="precision">The maximum number of time units to return.</param>
+        /// <param name="countEmptyUnits">Controls whether empty time units should be counted towards maximum number of time units. Leading empty time units never count.</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns></returns>
+        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null)
         {
             var timeParts = GetTimeParts(timeSpan, culture);
-            if (!considerEmptyParts)
+            if (!countEmptyUnits)
                 timeParts = timeParts.Where(x => x != null);
             timeParts = timeParts.Take(precision);
-            if (considerEmptyParts)
+            if (countEmptyUnits)
                 timeParts = timeParts.Where(x => x != null);
             return string.Join(", ", timeParts);
         }

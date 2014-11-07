@@ -140,9 +140,9 @@ namespace Humanizer.Tests
         [InlineData(1299630020, 4, "2 weeks, 1 day, 1 hour")]
         [InlineData(1299630020, 5, "2 weeks, 1 day, 1 hour, 30 seconds")]
         [InlineData(1299630020, 6, "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds")]
-        public void TimeSpanWithPrecisionAndConsideringEmptyParts(int milliseconds, int precision, string expected)
+        public void TimeSpanWithPrecisionAndCountingEmptyUnits(int milliseconds, int precision, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision: precision, considerEmptyParts: true);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision: precision, countEmptyUnits: true);
             Assert.Equal(expected, actual);
         }
 
