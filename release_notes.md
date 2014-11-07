@@ -1,8 +1,12 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.31.0...master)
+
+###v1.31.0 - 2014-11-08
   - [#340](https://github.com/MehdiK/Humanizer/pull/340): Fixed TimeSpan humanization precision skips units after the largest one when they're zero until it finds a non-zero unit
   - [#347](https://github.com/MehdiK/Humanizer/pull/347): Changed één to 1 for dutch language.
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.30.0...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.30.0...v1.31.0)
 
 ###v1.30.0 - 2014-11-01
   - [#341](https://github.com/MehdiK/Humanizer/pull/341): Added logic to properly treat underscores, dashes and spaces.
