@@ -20,6 +20,9 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
      - [Singularize](#singularize)
      - [ToQuantity](#toquantity)
      - [Ordinalize](#ordinalize)
+     - [Titleize](#titleize)
+     - [Pascalize](#pascalize)
+     - [Camelize](#camelize)
      - [Underscore](#underscore)
      - [Dasherize & Hyphenate](#dasherize--hyphenate)
    - [Fluent date](#fluent-date)
@@ -502,13 +505,34 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 
 Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.
 
+####<a id="titleize">Titleize</a>
+`Titleize` converts the input words to Title casing; equivalent to `"some title".Humanize(LetterCasing.Title)`
+
+####<a id="pascalize">Pascalize</a>
+`Pascalize` converts the input words to UpperCamelCase, also removing underscores: 
+
+```C#
+"some_title".Pascalize() => "SomeTitle"
+```
+
+####<a id="camelize">Camelize</a>
+`Camelize` behaves identically to `Pascalize`, except that the first character is lower case:
+
+```C#
+"some_title".Camelize() => "someTitle"
+```
+
 ####<a id="underscore">Underscore</a>
-`Underscore` separates the input words with underscore; e.g. `"SomeTitle".Underscore()` => `"some_title"`
+`Underscore` separates the input words with underscore: 
+
+```C#
+"SomeTitle".Underscore() => "some_title"
+```
 
 ####<a id="dasherize--hyphenate">Dasherize & Hyphenate</a>
 `Dasherize` and `Hyphenate` replace underscores with dashes in the string:
 
-```C3
+```C#
 "some_title".Dasherize() => "some-title"
 "some_title".Hyphenate() => "some-title"
 ```
