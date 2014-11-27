@@ -11,6 +11,7 @@ namespace Humanizer.Configuration
             Register("es", new SpanishOrdinalizer());
             Register("it", new ItalianOrdinalizer());
             Register("pt-BR", new BrazilianPortugueseOrdinalizer());
+            Register("pt-PT", new PortuguesePortugueseOrdinalizer());
             Register("ru", new RussianOrdinalizer());
             Register("tr", new TurkishOrdinalizer());
         }
