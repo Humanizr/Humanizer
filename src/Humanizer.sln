@@ -27,9 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E02385ED-8473-4553-A2CD-BD9EFD3F00EE}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
