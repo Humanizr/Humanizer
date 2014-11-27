@@ -1,4 +1,5 @@
 ###In Development
+ - [#350](https://github.com/MehdiK/Humanizer/pull/350): Added missing values for nl
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.31.0...master)
 
