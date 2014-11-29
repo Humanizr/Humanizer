@@ -192,4 +192,43 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>geen tijd</value>
   </data>
+  <data name="DateHumanize_MultipleDaysFromNow">
+    <value>over {0} dagen</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow">
+    <value>over {0} uur</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow">
+    <value>over {0} minuten</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow">
+    <value>over {0} maanden</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow">
+    <value>over {0} seconden</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow">
+    <value>over {0} jaar</value>
+  </data>
+  <data name="DateHumanize_Now">
+    <value>nu</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow">
+    <value>morgen</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow">
+    <value>over 1 uur</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow">
+    <value>over 1 minuut</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow">
+    <value>over 1 maand</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow">
+    <value>over 1 seconde</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow">
+    <value>over 1 jaar</value>
+  </data>
 </root>
