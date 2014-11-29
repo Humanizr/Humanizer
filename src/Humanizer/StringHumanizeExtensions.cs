@@ -10,14 +10,13 @@ namespace Humanizer
     public static class StringHumanizeExtensions
     {
         private static readonly Regex PascalCaseWordPartsRegex;
+	    private static readonly Regex FreestandingSpacingCharRegex;
 
         static StringHumanizeExtensions()
         {
-            PascalCaseWordPartsRegex = new Regex(@"
-[A-Z]?[a-z]+|
-[0-9]+|
-[A-Z]+(?=[A-Z][a-z]|[0-9]|\b)
-", RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture);
+            PascalCaseWordPartsRegex = new Regex(@"[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?=[A-Z][a-z]|[0-9]|\b)",
+				RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture);
+	        FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s");
         }
 
         static string FromUnderscoreDashSeparatedWords (string input)
@@ -56,7 +55,7 @@ namespace Humanizer
 
             // if input contains a dash or underscore which preceeds or follows a space (or both, i.g. free-standing)
             // remove the dash/underscore and run it through FromPascalCase
-            if (Regex.IsMatch(input, @"[\s]{1}[-_]|[-_][\s]{1}", RegexOptions.IgnoreCase))
+            if (FreestandingSpacingCharRegex.IsMatch(input))
                 return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
 
             if (input.Contains("_") || input.Contains("-"))
