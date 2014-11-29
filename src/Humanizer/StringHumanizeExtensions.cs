@@ -10,13 +10,13 @@ namespace Humanizer
     public static class StringHumanizeExtensions
     {
         private static readonly Regex PascalCaseWordPartsRegex;
-	    private static readonly Regex FreestandingSpacingCharRegex;
+        private static readonly Regex FreestandingSpacingCharRegex;
 
         static StringHumanizeExtensions()
         {
             PascalCaseWordPartsRegex = new Regex(@"[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?=[A-Z][a-z]|[0-9]|\b)",
-				RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture);
-	        FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s");
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture);
+            FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s");
         }
 
         static string FromUnderscoreDashSeparatedWords (string input)
