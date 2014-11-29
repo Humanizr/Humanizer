@@ -9,14 +9,11 @@ namespace Humanizer
     /// </summary>
     public static class StringHumanizeExtensions
     {
-        static string FromUnderscoreDashSeparatedWords (string input)
-        {
-            return String.Join(" ", input.Split(new[] {'_', '-'}));
-        }
+        private static readonly Regex PascalCaseWordBoundaryRegex;
 
-        static string FromPascalCase(string input)
+        static StringHumanizeExtensions()
         {
-            var pascalCaseWordBoundaryRegex = new Regex(@"
+            PascalCaseWordBoundaryRegex = new Regex(@"
 (?# word to word, number or acronym)
 (?<=[a-z])(?=[A-Z0-9])|
 (?# number to word or acronym)
@@ -28,8 +25,16 @@ namespace Humanizer
 (?# words/acronyms/numbers separated by space)
 (?<=[^\s])(?=[\s])
 ", RegexOptions.IgnorePatternWhitespace);
+        }
 
-            var result = pascalCaseWordBoundaryRegex
+        static string FromUnderscoreDashSeparatedWords (string input)
+        {
+            return String.Join(" ", input.Split(new[] {'_', '-'}));
+        }
+
+        static string FromPascalCase(string input)
+        {
+            var result = PascalCaseWordBoundaryRegex
                 .Split(input)
                 .Select(word =>
                     word.Trim().ToCharArray().All(Char.IsUpper) && word.Length > 1
@@ -55,8 +60,7 @@ namespace Humanizer
 
             // if input contains a dash or underscore which preceeds or follows a space (or both, i.g. free-standing)
             // remove the dash/underscore and run it through FromPascalCase
-            Regex r = new Regex(@"[\s]{1}[-_]|[-_][\s]{1}", RegexOptions.IgnoreCase);
-            if (r.IsMatch(input))
+            if (Regex.IsMatch(input, @"[\s]{1}[-_]|[-_][\s]{1}", RegexOptions.IgnoreCase))
                 return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
 
             if (input.Contains("_") || input.Contains("-"))
