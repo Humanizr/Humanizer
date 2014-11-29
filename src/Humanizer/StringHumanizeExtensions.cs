@@ -9,22 +9,15 @@ namespace Humanizer
     /// </summary>
     public static class StringHumanizeExtensions
     {
-        private static readonly Regex PascalCaseWordBoundaryRegex;
+        private static readonly Regex PascalCaseWordPartsRegex;
 
         static StringHumanizeExtensions()
         {
-            PascalCaseWordBoundaryRegex = new Regex(@"
-(?# word to word, number or acronym)
-(?<=[a-z])(?=[A-Z0-9])|
-(?# number to word or acronym)
-(?<=[0-9])(?=[A-Za-z])|
-(?# acronym to number)
-(?<=[A-Z])(?=[0-9])|
-(?# acronym to word)
-(?<=[A-Z])(?=[A-Z][a-z])|
-(?# words/acronyms/numbers separated by space)
-(?<=[^\s])(?=[\s])
-", RegexOptions.IgnorePatternWhitespace);
+            PascalCaseWordPartsRegex = new Regex(@"
+[A-Z]?[a-z]+|
+[0-9]+|
+[A-Z]+(?=[A-Z][a-z]|[0-9]|\b)
+", RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture);
         }
 
         static string FromUnderscoreDashSeparatedWords (string input)
@@ -34,17 +27,20 @@ namespace Humanizer
 
         static string FromPascalCase(string input)
         {
-            var result = PascalCaseWordBoundaryRegex
-                .Split(input)
-                .Select(word =>
-                    word.Trim().ToCharArray().All(Char.IsUpper) && word.Length > 1
-                        ? word
-                        : word.ToLower())
-                .Aggregate((res, word) => res + " " + word.Trim());
+            if (input.Length == 1)
+                return Char.ToUpper(input[0]).ToString();
+
+            var result = PascalCaseWordPartsRegex
+                .Matches(input).Cast<Match>()
+                .Select(match => match.Value.ToCharArray().All(Char.IsUpper) &&
+                    (match.Value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || match.Value == "I")
+                    ? match.Value
+                    : match.Value.ToLower())
+                .Aggregate((res, word) => res + " " + word);
 
             result = Char.ToUpper(result[0]) +
                 result.Substring(1, result.Length - 1);
-            return result.Replace(" i ", " I "); // I is an exception
+            return result;
         }
 
         /// <summary>
