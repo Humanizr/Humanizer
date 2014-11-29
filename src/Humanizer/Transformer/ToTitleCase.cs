@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Humanizer
 {
@@ -25,7 +25,7 @@ namespace Humanizer
 
         static bool AllCapitals(string input)
         {
-            return Regex.IsMatch(input, @"^[A-Z]+$");
+            return input.ToCharArray().All(Char.IsUpper);
         }
     }
 }
