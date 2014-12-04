@@ -1,8 +1,9 @@
 ﻿using Humanizer.Localisation;
-using Xunit;
 
 namespace Humanizer.Tests.Localisation.roRo
 {
+    using Xunit.Extensions;
+
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral
     /// and the time unit: http://ebooks.unibuc.ro/filologie/NForascu-DGLR/numerale.htm.
@@ -14,70 +15,93 @@ namespace Humanizer.Tests.Localisation.roRo
         {
         }
 
-        [Fact]
-        public void RomanianTranslationIsCorrectForThreeHoursAgo()
+        [Theory]
+        [InlineData(3, "acum 3 ore")]
+        [InlineData(20, "acum 20 de ore")]
+        public void HoursAgo(int hours, string expected)
         {
-            DateHumanize.Verify("acum 3 ore", 3, TimeUnit.Hour, Tense.Past);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
-        [Fact]
-        public void RomanianTranslationIsCorrectFor20HoursAgo()
+        [Theory]
+        [InlineData(19, "acum 19 minute")]
+        [InlineData(60, "acum o oră")]
+        [InlineData(44, "acum 44 de minute")]
+        public void MinutesAgo(int minutes, string expected)
         {
-            DateHumanize.Verify("acum 20 de ore", 20, TimeUnit.Hour, Tense.Past);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
+        }
+        
+        [Theory]
+        [InlineData(2, "acum 2 secunde")]
+        [InlineData(59, "acum 59 de secunde")]
+        public void SecondsAgo(int seconds, string expected)
+        {
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
+        }
+        
+        [Theory]
+        [InlineData(10, "acum 10 zile")]
+        [InlineData(23, "acum 23 de zile")]
+        public void DaysAgo(int seconds, string expected)
+        {
+            DateHumanize.Verify(expected, seconds, TimeUnit.Day, Tense.Past);
+        }
+        
+        [Theory]
+        [InlineData(119, "acum 119 ani")]
+        [InlineData(100, "acum 100 de ani")]
+        public void YearsAgo(int seconds, string expected)
+        {
+            DateHumanize.Verify(expected, seconds, TimeUnit.Year, Tense.Past);
+        }
+        
+        [Theory]
+        [InlineData(1, "acum")]
+        [InlineData(22, "acum")]
+        public void MillisecondsAgo(int milliseconds, string expected)
+        {
+            DateHumanize.Verify(expected, milliseconds, TimeUnit.Millisecond, Tense.Past);
+        }
+        
+        [Theory]
+        [InlineData(19, "peste 19 secunde")]
+        [InlineData(21, "peste 21 de secunde")]
+        public void SecondsFromNow(int seconds, string expected)
+        {
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
+        }
+        
+        [Theory]
+        [InlineData(19, "peste 19 minute")]
+        [InlineData(22, "peste 22 de minute")]
+        public void MinutesFromNow(int minutes, string expected)
+        {
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
+        }
+        
+        [Theory]
+        [InlineData(3, "peste 3 ore")]
+        [InlineData(23, "peste 23 de ore")]
+        public void HoursFromNow(int hours, string expected)
+        {
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
         }
 
-        [Fact]
-        public void RomanianTranslationIsCorrectFor19MinutesAgo()
+        [Theory]
+        [InlineData(5, "peste 5 zile")]
+        [InlineData(23, "peste 23 de zile")]
+        public void DaysFromNow(int days, string expected)
         {
-            DateHumanize.Verify("acum 19 minute", 19, TimeUnit.Minute, Tense.Past);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
         }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor60MinutesAgo()
+        
+        [Theory]
+        [InlineData(5, "peste 5 ani")]
+        [InlineData(21, "peste 21 de ani")]
+        public void YearsFromNow(int years, string expected)
         {
-            DateHumanize.Verify("acum o oră", 60, TimeUnit.Minute, Tense.Past);
-        }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor44MinutesAgo()
-        {
-            DateHumanize.Verify("acum 44 de minute", 44, TimeUnit.Minute, Tense.Past);
-        }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor2SecondsAgo()
-        {
-            DateHumanize.Verify("acum 2 secunde", 2, TimeUnit.Second, Tense.Past);
-        }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor59SecondsAgo()
-        {
-            DateHumanize.Verify("acum 59 de secunde", 59, TimeUnit.Second, Tense.Past);
-        }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor10DaysAgo()
-        {
-            DateHumanize.Verify("acum 10 zile", 10, TimeUnit.Day, Tense.Past);
-        }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor23DaysAgo()
-        {
-            DateHumanize.Verify("acum 23 de zile", 23, TimeUnit.Day, Tense.Past);
-        }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor119YearsAgo()
-        {
-            DateHumanize.Verify("acum 119 ani", 119, TimeUnit.Year, Tense.Past);
-        }
-
-        [Fact]
-        public void RomanianTranslationIsCorrectFor100YearsAgo()
-        {
-            DateHumanize.Verify("acum 100 de ani", 100, TimeUnit.Year, Tense.Past);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
     }
 }
