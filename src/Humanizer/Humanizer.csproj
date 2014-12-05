@@ -109,6 +109,21 @@
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="Properties\Resources.zh-CHT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.zh-CHT.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.zh-CHS.Designer.cs">
+      <DependentUpon>Resources.zh-CHS.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
+    </Compile>
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -181,10 +196,22 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.zh-CHT.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CHT.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CHS.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CHS.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.bn-BD.resx" />
     <EmbeddedResource Include="Properties\Resources.nb.resx" />
-    <EmbeddedResource Include="Properties\Resources.uz-Cyrl-UZ.resx"/>
-    <EmbeddedResource Include="Properties\Resources.uz-Latn-UZ.resx"/>
+    <EmbeddedResource Include="Properties\Resources.uz-Cyrl-UZ.resx" />
+    <EmbeddedResource Include="Properties\Resources.uz-Latn-UZ.resx" />
     <EmbeddedResource Include="Properties\Resources.sl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />

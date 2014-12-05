@@ -139,7 +139,7 @@
     <Compile Include="Localisation\uz-Cyrl-UZ\DateHumanizeTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\NumberToWordsTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\TimeSpanHumanizeTests.cs" />
-    <Compile Include="Localisation\uz-Latn-UZ\DateHumanizeTests.cs"/>
+    <Compile Include="Localisation\uz-Latn-UZ\DateHumanizeTests.cs" />
     <Compile Include="Localisation\uz-Latn-UZ\NumberToWordsTests.cs" />
     <Compile Include="Localisation\tr\DateHumanizeTests.cs" />
     <Compile Include="Localisation\tr\NumberToWordsTests.cs" />
@@ -152,6 +152,12 @@
     <Compile Include="Localisation\it\CollectionFormatterTests.cs" />
     <Compile Include="Localisation\it\OrdinalizerTests.cs" />
     <Compile Include="Localisation\it\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\zh-CHS\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-CHS\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-CHT\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-CHT\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-CN\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-CN\TimeSpanHumanizeTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
