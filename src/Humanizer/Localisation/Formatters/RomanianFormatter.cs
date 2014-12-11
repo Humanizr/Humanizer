@@ -1,24 +1,41 @@
 ﻿namespace Humanizer.Localisation.Formatters
 {
+    using System;
+    using System.Globalization;
+
     internal class RomanianFormatter : DefaultFormatter
     {
-        private const string Above20PostFix = "_Above20";
+        private const int PrepositionIndicatingDecimals = 2;
+        private const int MaxNumeralWithNoPreposition = 19;
+        private const int MinNumeralWithNoPreposition = 1;
+        private const string PrepositionResourceKey = "UnitPreposition";
+        private const string RomanianCultureCode = "ro";
+
+        private static readonly double Divider = Math.Pow(10, PrepositionIndicatingDecimals);
+
+        private readonly CultureInfo romanianCulture;
 
         public RomanianFormatter()
-            : base("ro")
+            : base(RomanianCultureCode)
         {
+            romanianCulture = new CultureInfo(RomanianCultureCode);
         }
 
-        protected override string GetResourceKey(string resourceKey, int number)
+        protected override string Format(string resourceKey, int number)
         {
-            var mod100 = number%100;
+            var format = Resources.GetResource(GetResourceKey(resourceKey, number), romanianCulture);
+            var preposition = ShouldUsePreposition(number)
+                                     ? Resources.GetResource(PrepositionResourceKey, romanianCulture)
+                                     : string.Empty;
 
-            if (0 < mod100 && mod100 < 20)
-            {
-                return resourceKey;
-            }
+            return format.FormatWith(number, preposition);
+        }
 
-            return resourceKey + Above20PostFix;
+        private static bool ShouldUsePreposition(int number)
+        {
+            var prepositionIndicatingNumeral = Math.Abs(number % Divider);
+            return prepositionIndicatingNumeral < MinNumeralWithNoPreposition
+                   || prepositionIndicatingNumeral > MaxNumeralWithNoPreposition;
         }
     }
 }
