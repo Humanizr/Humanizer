@@ -1,4 +1,5 @@
 ###In Development
+ - [#354](https://github.com/MehdiK/Humanizer/pull/354): Removed unnecessary Regex constructors
  - [#356](https://github.com/MehdiK/Humanizer/pull/356): Added missing values for ro and changed the RomanianFormatter implementation so as to avoid duplicate resources
  - [#350](https://github.com/MehdiK/Humanizer/pull/350): Added missing values for nl
 
