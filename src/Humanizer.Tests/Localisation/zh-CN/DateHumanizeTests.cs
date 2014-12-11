@@ -8,8 +8,6 @@ namespace Humanizer.Tests.Localisation.zhCN
         public DateHumanizeTests() : base("zh-CN") { }
 
         [Theory]
-        [InlineData(-2, "2 天前")]
-        [InlineData(-1, "昨天")]
         [InlineData(1, "昨天")]
         [InlineData(0, "今天")]
         public void DaysAgo(int days, string expected)
@@ -18,8 +16,6 @@ namespace Humanizer.Tests.Localisation.zhCN
         }
 
         [Theory]
-        [InlineData(-2, "2 天后")]
-        [InlineData(-1, "明天")]
         [InlineData(1, "明天")]
         [InlineData(0, "今天")]
         public void DaysFromNow(int days, string expected)
@@ -28,8 +24,8 @@ namespace Humanizer.Tests.Localisation.zhCN
         }
 
         [Theory]
-        [InlineData(-2, "2 小时前")]
-        [InlineData(-1, "1 小时前")]
+        [InlineData(2, "2 小时前")]
+        [InlineData(1, "1 小时前")]
         public void HoursAgo(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);

@@ -14,7 +14,9 @@ namespace Humanizer
         /// <returns></returns>
         public static string Dehumanize(this string input)
         {
-            var titlizedWords = input.Split(' ').Select(word => word.Humanize(LetterCasing.Title));
+            var titlizedWords =
+                (from word in input.Split(' ')
+                 select word.Humanize(LetterCasing.Title));
 
             return string.Join("", titlizedWords).Replace(" ", "");
         }

@@ -109,21 +109,6 @@
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
-    <Compile Include="Properties\Resources.zh-CHT.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.zh-CHT.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.zh-CHS.Designer.cs">
-      <DependentUpon>Resources.zh-CHS.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\Resources.zh-CN.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
-    </Compile>
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
