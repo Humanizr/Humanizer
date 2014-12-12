@@ -3,6 +3,7 @@
  - [#356](https://github.com/MehdiK/Humanizer/pull/356): Added missing values for ro and changed the RomanianFormatter implementation so as to avoid duplicate resources
  - [#357](https://github.com/MehdiK/Humanizer/pull/357): Adds Chinese localisation
  - [#350](https://github.com/MehdiK/Humanizer/pull/350): Added missing values for nl
+ - [#359](https://github.com/MehdiK/Humanizer/pull/359): Add special case resources to neutral language. Fixes #317
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.31.0...master)
 
