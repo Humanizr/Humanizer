@@ -103,6 +103,7 @@ namespace Humanizer
             AddIrregular("move", "moves");
             AddIrregular("goose", "geese");
             AddIrregular("alumna", "alumnae");
+            AddIrregular("criterion", "criteria");
 
             AddUncountable("equipment");
             AddUncountable("information");
