@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bytes\ArithmeticTests.cs" />
     <Compile Include="Bytes\ByteRateTests.cs" />
     <Compile Include="Bytes\ComparingTests.cs" />
     <Compile Include="Bytes\CreatingTests.cs" />

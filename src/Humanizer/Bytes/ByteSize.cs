@@ -223,12 +223,12 @@ namespace Humanizer.Bytes
 
         public ByteSize Add(ByteSize bs)
         {
-            return new ByteSize(Bits + bs.Bits);
+            return new ByteSize(Bytes + bs.Bytes);
         }
 
         public ByteSize AddBits(long value)
         {
-            return new ByteSize(Bits + value);
+            return this + FromBits(value);
         }
 
         public ByteSize AddBytes(double value)
@@ -258,27 +258,27 @@ namespace Humanizer.Bytes
 
         public ByteSize Subtract(ByteSize bs)
         {
-            return new ByteSize(Bits - bs.Bits);
+            return new ByteSize(Bytes - bs.Bytes);
         }
 
         public static ByteSize operator +(ByteSize b1, ByteSize b2)
         {
-            return new ByteSize(b1.Bits + b2.Bits);
+            return new ByteSize(b1.Bytes + b2.Bytes);
         }
 
         public static ByteSize operator ++(ByteSize b)
         {
-            return new ByteSize(b.Bits++);
+            return new ByteSize(b.Bytes + 1);
         }
 
         public static ByteSize operator -(ByteSize b)
         {
-            return new ByteSize(-b.Bits);
+            return new ByteSize(-b.Bytes);
         }
 
         public static ByteSize operator --(ByteSize b)
         {
-            return new ByteSize(b.Bits--);
+            return new ByteSize(b.Bytes - 1);
         }
 
         public static bool operator ==(ByteSize b1, ByteSize b2)
