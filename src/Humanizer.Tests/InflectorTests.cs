@@ -220,6 +220,7 @@ namespace Humanizer.Tests
             yield return new object[] {"virus", "viri"};
             yield return new object[] {"alias", "aliases"};
             yield return new object[] {"portfolio", "portfolios"};
+            yield return new object[] {"criterion", "criteria"};
 
             yield return new object[] {"vertex", "vertices"};
             yield return new object[] {"matrix", "matrices"};

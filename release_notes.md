@@ -5,6 +5,7 @@
  - [#350](https://github.com/MehdiK/Humanizer/pull/350): Added missing values for nl
  - [#359](https://github.com/MehdiK/Humanizer/pull/359): Added special case resources to neutral language
  - [#362](https://github.com/MehdiK/Humanizer/pull/362): Fixed arithmatic operations in ByteSize
+ - [#361](https://github.com/MehdiK/Humanizer/pull/361): Added 'criteria' as the irregular plural of 'criterion'
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.31.0...master)
 
