@@ -104,6 +104,7 @@ namespace Humanizer
             AddIrregular("goose", "geese");
             AddIrregular("alumna", "alumnae");
             AddIrregular("criterion", "criteria");
+            AddIrregular("wave","waves");
 
             AddUncountable("equipment");
             AddUncountable("information");
