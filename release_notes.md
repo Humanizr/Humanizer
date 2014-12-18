@@ -1,4 +1,9 @@
 ###In Development
+
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.32.0...master)
+
+###v1.32.0 - 2014-12-18
  - [#354](https://github.com/MehdiK/Humanizer/pull/354): Removed unnecessary Regex constructors
  - [#356](https://github.com/MehdiK/Humanizer/pull/356): Added missing values for ro and changed the RomanianFormatter implementation so as to avoid duplicate resources
  - [#357](https://github.com/MehdiK/Humanizer/pull/357): Added Chinese localisation
@@ -8,7 +13,7 @@
  - [#361](https://github.com/MehdiK/Humanizer/pull/361): Added 'criteria' as the irregular plural of 'criterion'
  - [#355](https://github.com/MehdiK/Humanizer/pull/355): Added 'waves' as plural of 'wave'
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.31.0...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.31.0...v1.32.0)
 
 ###v1.31.0 - 2014-11-08
   - [#340](https://github.com/MehdiK/Humanizer/pull/340): Fixed TimeSpan humanization precision skips units after the largest one when they're zero until it finds a non-zero unit
