@@ -1,5 +1,6 @@
 ###In Development
 
+ - [#364](https://github.com/MehdiK/Humanizer/pull/364): Adding "campuses" as plural of "campus"
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.32.0...master)
 
