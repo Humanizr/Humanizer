@@ -127,7 +127,7 @@ namespace Humanizer
 
             public Rule(string pattern, string replacement)
             {
-                _regex = new Regex(pattern, RegexOptions.IgnoreCase);
+                _regex = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptionsUtil.Compiled);
                 _replacement = replacement;
             }
 
