@@ -1,5 +1,6 @@
 ###In Development
 
+ - [#365](https://github.com/MehdiK/Humanizer/pull/365): Added ByteSizeExtensions method for long inputs
  - [#364](https://github.com/MehdiK/Humanizer/pull/364): Added "campuses" as plural of "campus"
  - [#363](https://github.com/MehdiK/Humanizer/pull/363): Use RegexOptions.Compiled if available
 

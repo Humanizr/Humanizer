@@ -57,6 +57,13 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
         }
 
+        [Fact]
+        public void LongTerabytes()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+        }
+
         [Theory]
         [InlineData(2, null, "2 TB")]
         [InlineData(2, "GB", "2048 GB")]
@@ -112,6 +119,13 @@ namespace Humanizer.Tests.Bytes
         public void DoubleGigabytes()
         {
             const double size = 2;
+            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+        }
+
+        [Fact]
+        public void LongGigabytes()
+        {
+            const long size = 2;
             Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
         }
 
@@ -173,6 +187,13 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
         }
 
+        [Fact]
+        public void LongMegabytes()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+        }
+
         [Theory]
         [InlineData(2, null, "2 MB")]
         [InlineData(2, "KB", "2048 KB")]
@@ -231,6 +252,13 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
         }
 
+        [Fact]
+        public void LongKilobytes()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+        }
+
         [Theory]
         [InlineData(2, null, "2 KB")]
         [InlineData(2, "B", "2048 B")]
@@ -286,6 +314,13 @@ namespace Humanizer.Tests.Bytes
         public void DoubleBytes()
         {
             const double size = 2;
+            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+        }
+
+        [Fact]
+        public void LongBytes()
+        {
+            const long size = 2;
             Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
         }
 
