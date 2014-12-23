@@ -150,6 +150,16 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Considers input as bytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Bytes(this long input)
+        {
+            return ByteSize.FromBytes(input);
+        }
+
+        /// <summary>
         /// Considers input as kilobytes
         /// </summary>
         /// <param name="input"></param>
@@ -215,6 +225,16 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <returns></returns>
         public static ByteSize Kilobytes(this double input)
+        {
+            return ByteSize.FromKilobytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as kilobytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kilobytes(this long input)
         {
             return ByteSize.FromKilobytes(input);
         }
@@ -290,6 +310,16 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Considers input as megabytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Megabytes(this long input)
+        {
+            return ByteSize.FromMegabytes(input);
+        }
+
+        /// <summary>
         /// Considers input as gigabytes
         /// </summary>
         /// <param name="input"></param>
@@ -360,6 +390,16 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Considers input as gigabytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gigabytes(this long input)
+        {
+            return ByteSize.FromGigabytes(input);
+        }
+
+        /// <summary>
         /// Considers input as terabytes
         /// </summary>
         /// <param name="input"></param>
@@ -425,6 +465,16 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <returns></returns>
         public static ByteSize Terabytes(this double input)
+        {
+            return ByteSize.FromTerabytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as terabytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Terabytes(this long input)
         {
             return ByteSize.FromTerabytes(input);
         }

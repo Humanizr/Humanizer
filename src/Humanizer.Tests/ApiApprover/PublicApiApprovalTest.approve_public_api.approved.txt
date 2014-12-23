@@ -71,6 +71,7 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Bytes(int input) { }
     public Humanizer.Bytes.ByteSize Bytes(uint input) { }
     public Humanizer.Bytes.ByteSize Bytes(double input) { }
+    public Humanizer.Bytes.ByteSize Bytes(long input) { }
     public Humanizer.Bytes.ByteSize Gigabytes(byte input) { }
     public Humanizer.Bytes.ByteSize Gigabytes(sbyte input) { }
     public Humanizer.Bytes.ByteSize Gigabytes(short input) { }
@@ -78,6 +79,7 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Gigabytes(int input) { }
     public Humanizer.Bytes.ByteSize Gigabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Gigabytes(double input) { }
+    public Humanizer.Bytes.ByteSize Gigabytes(long input) { }
     public string Humanize(Humanizer.Bytes.ByteSize input, string format) { }
     public Humanizer.Bytes.ByteSize Kilobytes(byte input) { }
     public Humanizer.Bytes.ByteSize Kilobytes(sbyte input) { }
@@ -86,6 +88,7 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Kilobytes(int input) { }
     public Humanizer.Bytes.ByteSize Kilobytes(uint input) { }
     public Humanizer.Bytes.ByteSize Kilobytes(double input) { }
+    public Humanizer.Bytes.ByteSize Kilobytes(long input) { }
     public Humanizer.Bytes.ByteSize Megabytes(byte input) { }
     public Humanizer.Bytes.ByteSize Megabytes(sbyte input) { }
     public Humanizer.Bytes.ByteSize Megabytes(short input) { }
@@ -93,6 +96,7 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Megabytes(int input) { }
     public Humanizer.Bytes.ByteSize Megabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Megabytes(double input) { }
+    public Humanizer.Bytes.ByteSize Megabytes(long input) { }
     public Humanizer.Bytes.ByteRate Per(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
     public Humanizer.Bytes.ByteSize Terabytes(byte input) { }
     public Humanizer.Bytes.ByteSize Terabytes(sbyte input) { }
@@ -101,6 +105,7 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Terabytes(int input) { }
     public Humanizer.Bytes.ByteSize Terabytes(uint input) { }
     public Humanizer.Bytes.ByteSize Terabytes(double input) { }
+    public Humanizer.Bytes.ByteSize Terabytes(long input) { }
 }
 
 public class CasingExtensions
