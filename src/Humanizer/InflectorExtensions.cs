@@ -235,25 +235,28 @@ namespace Humanizer
             return result ?? word;
         }
 
-        private static string ApplyRules(List<Rule> rules, string word)
+        private static string ApplyRules(IList<Rule> rules, string word)
         {
             if (word == null)
                 return null;
+           
+            if (IsUncountable(word))
+                return word;
 
             var result = word;
-
-            if (!Uncountables.Contains(word.ToLower()))
+            for (int i = rules.Count - 1; i >= 0; i--)
             {
-                for (int i = rules.Count - 1; i >= 0; i--)
+                if ((result = rules[i].Apply(word)) != null)
                 {
-                    if ((result = rules[i].Apply(word)) != null)
-                    {
-                        break;
-                    }
+                    break;
                 }
             }
-
             return result;
+        }
+
+        private static bool IsUncountable(string word)
+        {
+            return Uncountables.Contains(word.ToLower());
         }
 
         /// <summary>
