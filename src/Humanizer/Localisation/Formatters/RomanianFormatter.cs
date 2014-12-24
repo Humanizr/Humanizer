@@ -8,24 +8,24 @@
         private const int PrepositionIndicatingDecimals = 2;
         private const int MaxNumeralWithNoPreposition = 19;
         private const int MinNumeralWithNoPreposition = 1;
-        private const string PrepositionResourceKey = "UnitPreposition";
+        private const string UnitPreposition = " de";
         private const string RomanianCultureCode = "ro";
 
         private static readonly double Divider = Math.Pow(10, PrepositionIndicatingDecimals);
 
-        private readonly CultureInfo romanianCulture;
+        private readonly CultureInfo _romanianCulture;
 
         public RomanianFormatter()
             : base(RomanianCultureCode)
         {
-            romanianCulture = new CultureInfo(RomanianCultureCode);
+            _romanianCulture = new CultureInfo(RomanianCultureCode);
         }
 
         protected override string Format(string resourceKey, int number)
         {
-            var format = Resources.GetResource(GetResourceKey(resourceKey, number), romanianCulture);
+            var format = Resources.GetResource(GetResourceKey(resourceKey, number), _romanianCulture);
             var preposition = ShouldUsePreposition(number)
-                                     ? Resources.GetResource(PrepositionResourceKey, romanianCulture)
+                                     ? UnitPreposition
                                      : string.Empty;
 
             return format.FormatWith(number, preposition);
