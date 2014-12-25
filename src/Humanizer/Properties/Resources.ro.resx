@@ -192,9 +192,6 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>peste un an</value>
   </data>
-  <data name="UnitPreposition" xml:space="preserve">
-    <value> de</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0}{1} zile</value>
   </data>

@@ -1,5 +1,5 @@
 ###In Development
-
+ - [#366](https://github.com/MehdiK/Humanizer/pull/366): Removed UnitPreposition to avoid warnings in Win 8.1 apps
  - [#365](https://github.com/MehdiK/Humanizer/pull/365): Added ByteSizeExtensions method for long inputs
  - [#364](https://github.com/MehdiK/Humanizer/pull/364): Added "campuses" as plural of "campus"
  - [#363](https://github.com/MehdiK/Humanizer/pull/363): Use RegexOptions.Compiled if available
