@@ -30,6 +30,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Number to ordinal words](#number-to-ordinal-words)
    - [Roman numerals](#roman-numerals)
    - [ByteSize](#bytesize)
+ - [Related Projects](#related-projects)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
  - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
@@ -43,7 +44,6 @@ You can install Humanizer as [a nuget package](https://nuget.org/packages/Humani
 
 Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications.
 Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
-If you use ReSharper, annotations for Humanizer are available in the [Humanizer.Annotations package](https://resharper-plugins.jetbrains.com/packages/Humanizer.Annotations/), which you can obtain via the ReSharper Extension Manager. These annotations do not yet cover the entire library, but [pull requests are always welcome!](https://github.com/enduracode/humanizer-annotations)
 
 ##<a id="features">Features</a>
 
@@ -829,6 +829,9 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Minute);
 text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
 // 35.15625 GB/hour
 ```
+
+##<a id="related-projects">Related Projects</a>
+ - ReSharper Annotations: If you use ReSharper, annotations for Humanizer are available in the [Humanizer.Annotations package](https://resharper-plugins.jetbrains.com/packages/Humanizer.Annotations/), which you can obtain via the ReSharper Extension Manager. These annotations do not yet cover the entire library, but [pull requests are always welcome!](https://github.com/enduracode/humanizer-annotations)
 
 ##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
