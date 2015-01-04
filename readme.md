@@ -33,6 +33,11 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
  - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
+ - [Related Projects](#related-projects)
+   - [Humanizer ReSharper Annotations](#humanizer-resharper-annotations)
+   - [PowerShell Humanizer](#powershell-humanizer)
+   - [Humanizer JVM](#humanizerjvm)
+   - [Humanizer.JS](#humanizerjs)
  - [Author](#author)
  - [Main contributors](#main-contributors)
  - [License](#license)
@@ -43,7 +48,6 @@ You can install Humanizer as [a nuget package](https://nuget.org/packages/Humani
 
 Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications.
 Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
-If you use ReSharper, annotations for Humanizer are available in the [Humanizer.Annotations package](https://resharper-plugins.jetbrains.com/packages/Humanizer.Annotations/), which you can obtain via the ReSharper Extension Manager. These annotations do not yet cover the entire library, but [pull requests are always welcome!](https://github.com/enduracode/humanizer-annotations)
 
 ##<a id="features">Features</a>
 
@@ -62,7 +66,7 @@ The foundation of this was set in the [BDDfy framework](https://github.com/TestS
 Note that a string that contains only upper case letters, and consists only of one word, is always treated as an acronym (regardless of its length). To guarantee that any arbitrary string will always be humanized you must use a transform (see `Transform` method below):
 
 ```C#
-// acronyms are left intact 
+// acronyms are left intact
 "HTML".Humanize() => "HTML"
 
 // any unbroken upper case string is treated as an acronym
@@ -510,7 +514,7 @@ Obviously this only applies to some cultures. For others passing gender in or no
 `Titleize` converts the input words to Title casing; equivalent to `"some title".Humanize(LetterCasing.Title)`
 
 ####<a id="pascalize">Pascalize</a>
-`Pascalize` converts the input words to UpperCamelCase, also removing underscores: 
+`Pascalize` converts the input words to UpperCamelCase, also removing underscores:
 
 ```C#
 "some_title".Pascalize() => "SomeTitle"
@@ -524,7 +528,7 @@ Obviously this only applies to some cultures. For others passing gender in or no
 ```
 
 ####<a id="underscore">Underscore</a>
-`Underscore` separates the input words with underscore: 
+`Underscore` separates the input words with underscore:
 
 ```C#
 "SomeTitle".Underscore() => "some_title"
@@ -938,6 +942,23 @@ Humanizer project is built & tested continuously by TeamCity (more details [here
 
 The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
 <img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
+
+##<a id="related-projects">Related projects</a>
+Below is a list of related open source projects:
+
+###<a id="humanizer-resharper-annotations">Humanizer ReSharper Annotations</a>
+If you use ReSharper, annotations for Humanizer are available in the [Humanizer.Annotations package](https://resharper-plugins.jetbrains.com/packages/Humanizer.Annotations/), which you can obtain via the ReSharper Extension Manager.
+These annotations do not yet cover the entire library, but [pull requests are always welcome!](https://github.com/enduracode/humanizer-annotations).
+
+###<a id="powershell-humanizer">PowerShell Humanizer</a>
+[PowerShell Humanizer](https://github.com/dfinke/PowerShellHumanizer) is a PowerShell module that wraps Humanizer.
+
+###<a id="humanizerjvm">Humanizer JVM</a>
+[Humanizer.jvm](https://github.com/MehdiK/Humanizer.jvm) is an adaptation of the Humanizer framework for .Net which is made for the jvm and is written in Kotlin.
+Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
+
+###<a id="humanizerjs">Humanizer.JS</a>
+[Humanizer.JS](https://github.com/SamuelEnglard/Humanizer.Js) is a TypeScript port of the Humanizer framework.
 
 ##<a id="author">Author</a>
 Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
