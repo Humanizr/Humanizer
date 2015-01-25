@@ -154,10 +154,10 @@
     <Compile Include="Localisation\it\CollectionFormatterTests.cs" />
     <Compile Include="Localisation\it\OrdinalizerTests.cs" />
     <Compile Include="Localisation\it\NumberToWordsTests.cs" />
-    <Compile Include="Localisation\zh-CHS\DateHumanizeTests.cs" />
-    <Compile Include="Localisation\zh-CHS\TimeSpanHumanizeTests.cs" />
-    <Compile Include="Localisation\zh-CHT\DateHumanizeTests.cs" />
-    <Compile Include="Localisation\zh-CHT\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-Hans\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-Hans\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-Hant\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\zh-Hant\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\zh-CN\DateHumanizeTests.cs" />
     <Compile Include="Localisation\zh-CN\TimeSpanHumanizeTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />

@@ -42,8 +42,8 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("uz-Latn-UZ");
             RegisterDefaultFormatter("uz-Cyrl-UZ");
             RegisterDefaultFormatter("zh-CN");
-            RegisterDefaultFormatter("zh-CHS");
-            RegisterDefaultFormatter("zh-CHT");
+            RegisterDefaultFormatter("zh-Hans");
+            RegisterDefaultFormatter("zh-Hant");
         }
 
         private void RegisterDefaultFormatter(string localeCode)

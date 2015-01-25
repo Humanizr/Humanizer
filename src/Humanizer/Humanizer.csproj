@@ -182,13 +182,11 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.zh-CHT.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.zh-CHT.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="Properties\Resources.zh-Hant.resx">
+      <LastGenOutput>Resources.zh-Hant.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh-CHS.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.zh-CHS.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx">
+      <LastGenOutput>Resources.zh-Hans.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
       <Generator>ResXFileCodeGenerator</Generator>
