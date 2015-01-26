@@ -3,7 +3,7 @@
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.33.0...master)
 
 ###v1.33.0 - 2015-01-26
- - [#374](https://github.com/MehdiK/Humanizer/pull/374): Fixed Chinese locale code: CHS to Hans & CHT to Hant
+ - [#374](https://github.com/MehdiK/Humanizer/pull/374): **BREAKING CHANGE**: Fixed Chinese locale code: CHS to Hans & CHT to Hant
  - [#366](https://github.com/MehdiK/Humanizer/pull/366): Removed UnitPreposition to avoid warnings in Win 8.1 apps
  - [#365](https://github.com/MehdiK/Humanizer/pull/365): Added ByteSizeExtensions method for long inputs
  - [#364](https://github.com/MehdiK/Humanizer/pull/364): Added "campuses" as plural of "campus"
