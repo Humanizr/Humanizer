@@ -2,11 +2,11 @@
 using Xunit;
 using Xunit.Extensions;
 
-namespace Humanizer.Tests.Localisation.zhCHS
+namespace Humanizer.Tests.Localisation.zhHans
 {
     public class TimeSpanHumanizeTests : AmbientCulture
     {
-        public TimeSpanHumanizeTests() : base("zh-CHS") { }
+        public TimeSpanHumanizeTests() : base("zh-Hans") { }
 
         [Theory]
         [InlineData(7, "1 周")]
