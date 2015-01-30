@@ -139,7 +139,7 @@
     <value>вчера</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>преди {0} дена</value>
+    <value>преди {0} дни</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>преди месец</value>
@@ -154,7 +154,7 @@
     <value>преди {0} години</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
-    <value>{0} дена</value>
+    <value>{0} дни</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} часа</value>
@@ -193,7 +193,7 @@
     <value>една седмица</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>след {0} дена</value>
+    <value>след {0} дни</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
     <value>след {0} часа</value>
