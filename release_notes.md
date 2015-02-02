@@ -1,4 +1,5 @@
 ###In Development
+ - [#376](https://github.com/MehdiK/Humanizer/pull/376): Fixes the IConvertible warning thrown on Windows Phone reported on #317
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.33.0...master)
 
