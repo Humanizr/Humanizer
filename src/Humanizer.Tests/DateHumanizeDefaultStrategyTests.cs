@@ -94,7 +94,7 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData(1, "yesterday")]
         [InlineData(10, "10 days ago")]
-        [InlineData(28, "28 days ago")]
+        [InlineData(27, "27 days ago")]
         [InlineData(32, "one month ago")]
         public void DaysAgo(int days, string expected)
         {
@@ -104,7 +104,7 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData(1, "tomorrow")]
         [InlineData(10, "10 days from now")]
-        [InlineData(28, "28 days from now")]
+        [InlineData(27, "27 days from now")]
         [InlineData(32, "one month from now")]
         public void DaysFromNow(int days, string expected)
         {

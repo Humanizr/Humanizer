@@ -17,7 +17,7 @@ namespace Humanizer
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <returns></returns>
         public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
-            where TTargetEnum : struct, IComparable, IFormattable, IConvertible
+            where TTargetEnum : struct, IComparable, IFormattable
         {
             return (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ThrowsException);
         }
