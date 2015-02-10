@@ -12,6 +12,9 @@ namespace Humanizer.Tests
         [InlineData("lower case sentence is camelized", "LowerCaseSentenceIsCamelized")]
         [InlineData("AlreadyDehumanizedStringIsUntouched", "AlreadyDehumanizedStringIsUntouched")]
         [InlineData("", "")]
+        [InlineData("A special character is removed?", "ASpecialCharacterIsRemoved")]
+        [InlineData("A special character is removed after a space ?", "ASpecialCharacterIsRemovedAfterASpace")]
+        [InlineData("Internal special characters ?)@ are removed", "InternalSpecialCharactersAreRemoved")]
         public void CanDehumanizeIntoAPascalCaseWord(string input, string expectedResult)
         {
             Assert.Equal(expectedResult, input.Dehumanize());
