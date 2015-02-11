@@ -1,5 +1,5 @@
 ###In Development
-
+ - [#381](https://github.com/MehdiK/Humanizer/pull/381): Fixes trailing question mark reported in #378.
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.33.7...master)
 
