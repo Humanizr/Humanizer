@@ -26,20 +26,15 @@ namespace Humanizer
 
         static string FromPascalCase(string input)
         {
-            if (input.Length == 1)
-                return Char.ToUpper(input[0]).ToString();
-
-            var result = PascalCaseWordPartsRegex
+            var result = String.Join(" ", PascalCaseWordPartsRegex
                 .Matches(input).Cast<Match>()
                 .Select(match => match.Value.ToCharArray().All(Char.IsUpper) &&
                     (match.Value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || match.Value == "I")
                     ? match.Value
-                    : match.Value.ToLower())
-                .Aggregate((res, word) => res + " " + word);
+                    : match.Value.ToLower()));
 
-            result = Char.ToUpper(result[0]) +
-                result.Substring(1, result.Length - 1);
-            return result;
+            return result.Length > 0 ? Char.ToUpper(result[0]) +
+                result.Substring(1, result.Length - 1) : result;
         }
 
         /// <summary>
@@ -53,7 +48,7 @@ namespace Humanizer
             if (input.ToCharArray().All(Char.IsUpper))
                 return input;
 
-            // if input contains a dash or underscore which preceeds or follows a space (or both, i.g. free-standing)
+            // if input contains a dash or underscore which preceeds or follows a space (or both, e.g. free-standing)
             // remove the dash/underscore and run it through FromPascalCase
             if (FreestandingSpacingCharRegex.IsMatch(input))
                 return FromPascalCase(FromUnderscoreDashSeparatedWords(input));

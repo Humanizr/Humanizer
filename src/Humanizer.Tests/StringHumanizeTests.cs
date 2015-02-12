@@ -12,6 +12,12 @@ namespace Humanizer.Tests
         [InlineData("NumberIsAtTheEnd100", "Number is at the end 100")]
         [InlineData("XIsFirstWordInTheSentence", "X is first word in the sentence")]
         [InlineData("XIsFirstWordInTheSentence ThenThereIsASpace", "X is first word in the sentence then there is a space")]
+        [InlineData("ContainsSpecial?)@Characters", "Contains special characters")]
+        [InlineData("a", "A")]
+        [InlineData("A", "A")]
+        [InlineData("?)@", "")]
+        [InlineData("?", "")]
+        [InlineData("", "")]
         public void CanHumanizeStringInPascalCase(string input, string expectedResult)
         {
             Assert.Equal(expectedResult, input.Humanize());
