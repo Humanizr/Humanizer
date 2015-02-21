@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Humanizer.Localisation;
 using Xunit;
 using Xunit.Extensions;
 
@@ -65,6 +66,18 @@ namespace Humanizer.Tests
         public void Milliseconds(int ms, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize();
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(7 * 24 * 60 * 60 * 1000, "7 days", TimeUnit.Day)]
+        [InlineData(24 * 60 * 60 * 1000, "24 hours", TimeUnit.Hour)]
+        [InlineData(60 * 60 * 1000, "60 minutes", TimeUnit.Minute)]
+        [InlineData(60 * 1000, "60 seconds", TimeUnit.Second)]
+        [InlineData(1000, "1000 milliseconds", TimeUnit.Millisecond)]
+        public void TimeSpanWithMaxTimeUnit(int ms, string expected, TimeUnit maxUnit)
+        {
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(maxUnit: maxUnit);
             Assert.Equal(expected, actual);
         }
 
