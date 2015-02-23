@@ -372,8 +372,8 @@ TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
 
 In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:
 ```C#
-TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Days) => "7 days"    // instead of 1 week
-TimeSpan.FromMilliseconds(2000).Humanize(maxUnit: TimeUnit.Milliseconds) => "2000 milliseconds"    // instead of 2 seconds
+TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day) => "7 days"    // instead of 1 week
+TimeSpan.FromMilliseconds(2000).Humanize(maxUnit: TimeUnit.Millisecond) => "2000 milliseconds"    // instead of 2 seconds
 ```
 
 ###<a id="humanize-collections">Humanize Collections</a>
