@@ -19,7 +19,7 @@ namespace Humanizer
         /// <param name="timeSpan"></param>
         /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <param name="maxUnit">The maximum unit of time to use.</param>
+        /// <param name="maxUnit">The maximum unit of time to output.</param>
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week)
         {
@@ -33,7 +33,7 @@ namespace Humanizer
         /// <param name="precision">The maximum number of time units to return.</param>
         /// <param name="countEmptyUnits">Controls whether empty time units should be counted towards maximum number of time units. Leading empty time units never count.</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <param name="maxUnit">The maximum unit of time to use.</param>
+        /// <param name="maxUnit">The maximum unit of time to output.</param>
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week)
         {
