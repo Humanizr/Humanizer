@@ -74,6 +74,7 @@
     <Compile Include="Localisation\bn-BD\NumberToWordsTests.cs" />
     <Compile Include="Localisation\bn-BD\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\DefaultFormatterTests.cs" />
+    <Compile Include="Localisation\de\CollectionFormatterTests.cs" />
     <Compile Include="Localisation\nb\DateHumanizeTests.cs" />
     <Compile Include="Localisation\nb\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\cs\DateHumanizeTests.cs" />
