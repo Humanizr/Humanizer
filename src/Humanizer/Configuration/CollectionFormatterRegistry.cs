@@ -7,8 +7,9 @@ namespace Humanizer.Configuration
         public CollectionFormatterRegistry()
             : base(new DefaultCollectionFormatter())
         {
-            Register("en", new EnglishCollectionFormatter());
-            Register("it", new ItalianCollectionFormatter());
+            Register("en", new OxfordStyleCollectionFormatter("and"));
+            Register("it", new RegularStyleCollectionFormatter("e"));
+            Register("de", new RegularStyleCollectionFormatter("und"));
         }
     }
 }

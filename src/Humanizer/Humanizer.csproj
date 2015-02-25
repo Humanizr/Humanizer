@@ -53,9 +53,9 @@
     <Compile Include="CollectionHumanizeExtensions.cs" />
     <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
-    <Compile Include="Localisation\CollectionFormatters\EnglishCollectionFormatter.cs" />
-    <Compile Include="Localisation\CollectionFormatters\ItalianCollectionFormatter.cs" />
+    <Compile Include="Localisation\CollectionFormatters\RegularStyleCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
+    <Compile Include="Localisation\CollectionFormatters\OxfordStyleCollectionFormatter.cs" />
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Localisation\Formatters\SlovenianFormatter.cs" />
     <Compile Include="Configuration\LocaliserRegistry.cs" />
