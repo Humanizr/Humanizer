@@ -6,9 +6,9 @@ namespace Humanizer.Localisation.CollectionFormatters
 {
     internal class RegularStyleCollectionFormatter : DefaultCollectionFormatter
     {
-        public RegularStyleCollectionFormatter(string defaultDeparator)
+        public RegularStyleCollectionFormatter(string defaultSeparator)
         {
-            DefaultSeparator = defaultDeparator ?? "and";
+            DefaultSeparator = defaultSeparator ?? "and";
         }
 
         public override string Humanize<T>(IEnumerable<T> collection, Func<T, String> objectFormatter, String separator)
