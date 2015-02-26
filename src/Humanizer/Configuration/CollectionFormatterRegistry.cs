@@ -9,6 +9,7 @@ namespace Humanizer.Configuration
         {
             Register("en", new EnglishCollectionFormatter());
             Register("it", new ItalianCollectionFormatter());
+            Register("pt-BR", new BrazilianPortugueseCollectionFormatter());
         }
     }
 }
