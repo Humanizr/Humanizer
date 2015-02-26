@@ -105,6 +105,7 @@
     <Compile Include="Localisation\pl\DateHumanizeTests.cs" />
     <Compile Include="Localisation\pl\NumberToWordsTests.cs" />
     <Compile Include="Localisation\pl\TimeSpanHumanizeTests.cs" />
+    <Compile Include="Localisation\pt-BR\CollectionFormatterTests.cs" />
     <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
     <Compile Include="Localisation\pt-BR\OrdinalizeTests.cs" />
     <Compile Include="Localisation\ro-Ro\TimeSpanHumanizerTests.cs" />

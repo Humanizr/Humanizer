@@ -56,6 +56,7 @@
     <Compile Include="Localisation\CollectionFormatters\EnglishCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ItalianCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
+    <Compile Include="Localisation\CollectionFormatters\BrazilianPortugueseCollectionFormatter.cs" />
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Localisation\Formatters\SlovenianFormatter.cs" />
     <Compile Include="Configuration\LocaliserRegistry.cs" />
