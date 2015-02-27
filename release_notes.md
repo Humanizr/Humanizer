@@ -1,6 +1,7 @@
 ###In Development
  - [#381](https://github.com/MehdiK/Humanizer/pull/381): Fixes trailing question mark reported in #378.
  - [#382](https://github.com/MehdiK/Humanizer/pull/382): Fix 90000th and -thousandth in RussianNumberToWordsConverter.
+ - [#386](https://github.com/MehdiK/Humanizer/pull/386): Collection formatter support for German, Danish, Dutch, Portuguese and Norwegian
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.33.7...master)
 

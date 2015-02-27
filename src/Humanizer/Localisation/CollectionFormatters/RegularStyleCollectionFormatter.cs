@@ -4,12 +4,11 @@ using System.Linq;
 
 namespace Humanizer.Localisation.CollectionFormatters
 {
-    internal class ItalianCollectionFormatter : EnglishCollectionFormatter
+    internal class RegularStyleCollectionFormatter : DefaultCollectionFormatter
     {
-        public ItalianCollectionFormatter()
-            : base()
+        public RegularStyleCollectionFormatter(string defaultSeparator)
         {
-            DefaultSeparator = "e";
+            DefaultSeparator = defaultSeparator ?? "and";
         }
 
         public override string Humanize<T>(IEnumerable<T> collection, Func<T, String> objectFormatter, String separator)

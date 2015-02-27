@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Xunit;
 
-namespace Humanizer.Tests.Localisation.it
+namespace Humanizer.Tests.Localisation.de
 {
     public class CollectionFormatterTests : AmbientCulture
     {
         public CollectionFormatterTests() 
-            : base("it") 
+            : base("de") 
         {
         }
 
@@ -22,7 +22,7 @@ namespace Humanizer.Tests.Localisation.it
         public void TwoItems()
         {
             var collection = new List<int>(new int[] {1, 2});
-            string humanized = "1 e 2";
+            string humanized = "1 und 2";
             Assert.Equal(humanized, collection.Humanize());
         }
 
@@ -30,7 +30,7 @@ namespace Humanizer.Tests.Localisation.it
         public void MoreThanTwoItems()
         {
             var collection = new List<int>(new int[] {1, 2, 3});
-            string humanized = "1, 2 e 3";
+            string humanized = "1, 2 und 3";
             Assert.Equal(humanized, collection.Humanize());
         }
     }
