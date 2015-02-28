@@ -370,6 +370,12 @@ Culture to use can be specified explicitly. If it is not, current thread's curre
 TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
 ```
 
+In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:
+```C#
+TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day) => "7 days"    // instead of 1 week
+TimeSpan.FromMilliseconds(2000).Humanize(maxUnit: TimeUnit.Millisecond) => "2000 milliseconds"    // instead of 2 seconds
+```
+
 ###<a id="humanize-collections">Humanize Collections</a>
 You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into `Humanize`.
 
