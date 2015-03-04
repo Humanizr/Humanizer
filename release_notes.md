@@ -1,10 +1,14 @@
 ###In Development
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.34.0...master)
+
+###v1.34.0 - 2015-03-04
  - [#381](https://github.com/MehdiK/Humanizer/pull/381): Fixes trailing question mark reported in #378.
  - [#382](https://github.com/MehdiK/Humanizer/pull/382): Fix 90000th and -thousandth in RussianNumberToWordsConverter.
  - [#386](https://github.com/MehdiK/Humanizer/pull/386): Collection formatter support for German, Danish, Dutch, Portuguese and Norwegian
  - [#384](https://github.com/MehdiK/Humanizer/pull/384): Added maximum TimeUnit to TimeSpanHumanizeExtensions.Humanize to enable prevention of rolling up the next largest unit of time.
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.33.7...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.33.7...v1.34.0)
 
 ###v1.33.7 - 2015-02-03
  - [#376](https://github.com/MehdiK/Humanizer/pull/376): Fixes the IConvertible warning thrown on Windows Phone reported on #317
