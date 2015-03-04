@@ -15,6 +15,5 @@
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\**" target="lib\portable-win+net40+sl50+wp8+wpa81" />
-    <file src="Humanizer\**\*.cs" exclude="**\obj\**\*.*" target="src" />
   </files>
 </package>
