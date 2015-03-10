@@ -58,7 +58,6 @@
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeOffsetHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeOffsetHumanizeStrategy.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
-    <Compile Include="Localisation\CollectionFormatters\RegularStyleCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\OxfordStyleCollectionFormatter.cs" />
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
