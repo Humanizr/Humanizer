@@ -462,4 +462,97 @@
   <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
     <value>{0} weeks</value>
   </data>
+  <data name="FrequencyHumanize_From" xml:space="preserve">
+    <value>from {0} of {1} {2}</value>
+  </data>
+  <data name="FrequencyHumanize_Half" xml:space="preserve">
+    <value>and a half</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleDayApproximate" xml:space="preserve">
+    <value>roughly every {0} days</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleHourApproximate" xml:space="preserve">
+    <value>roughly every {0} hours</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleMillisecondApproximate" xml:space="preserve">
+    <value>roughly every {0} milliseconds</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleMinuteApproximate" xml:space="preserve">
+    <value>roughly every {0} minutes</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleMonthApproximate" xml:space="preserve">
+    <value>roughly every {0} months</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleSecondApproximate" xml:space="preserve">
+    <value>roughly every {0} seconds</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleWeekApproximate" xml:space="preserve">
+    <value>roughly every {0} weeks</value>
+  </data>
+  <data name="FrequencyHumanize_MultipleYearApproximate" xml:space="preserve">
+    <value>roughly every {0} years</value>
+  </data>
+  <data name="FrequencyHumanize_Never" xml:space="preserve">
+    <value>never</value>
+  </data>
+  <data name="FrequencyHumanize_OnceOff" xml:space="preserve">
+    <value>once on</value>
+  </data>
+  <data name="FrequencyHumanize_SingleDayApproximate" xml:space="preserve">
+    <value>roughly every day</value>
+  </data>
+  <data name="FrequencyHumanize_SingleDayStandard" xml:space="preserve">
+    <value>every day</value>
+  </data>
+  <data name="FrequencyHumanize_SingleHourApproximate" xml:space="preserve">
+    <value>roughly every hour</value>
+  </data>
+  <data name="FrequencyHumanize_SingleHourStandard" xml:space="preserve">
+    <value>every hour</value>
+  </data>
+  <data name="FrequencyHumanize_SingleMillisecondApproximate" xml:space="preserve">
+    <value>roughly every millisecond</value>
+  </data>
+  <data name="FrequencyHumanize_SingleMillisecondStandard" xml:space="preserve">
+    <value>every millisecond</value>
+  </data>
+  <data name="FrequencyHumanize_SingleMinuteApproximate" xml:space="preserve">
+    <value>roughly every minute</value>
+  </data>
+  <data name="FrequencyHumanize_SingleMinuteStandard" xml:space="preserve">
+    <value>every minute</value>
+  </data>
+  <data name="FrequencyHumanize_SingleMonthApproximate" xml:space="preserve">
+    <value>roughly every month</value>
+  </data>
+  <data name="FrequencyHumanize_SingleMonthStandard" xml:space="preserve">
+    <value>every month</value>
+  </data>
+  <data name="FrequencyHumanize_SingleQuarterStandard" xml:space="preserve">
+    <value>every quarter</value>
+  </data>
+  <data name="FrequencyHumanize_SingleSecondApproximate" xml:space="preserve">
+    <value>roughly every second</value>
+  </data>
+  <data name="FrequencyHumanize_SingleSecondStandard" xml:space="preserve">
+    <value>every second</value>
+  </data>
+  <data name="FrequencyHumanize_SingleWeekApproximate" xml:space="preserve">
+    <value>roughly every week</value>
+  </data>
+  <data name="FrequencyHumanize_SingleWeekStandard" xml:space="preserve">
+    <value>every week</value>
+  </data>
+  <data name="FrequencyHumanize_SingleYearApproximate" xml:space="preserve">
+    <value>roughly every year</value>
+  </data>
+  <data name="FrequencyHumanize_SingleYearStandard" xml:space="preserve">
+    <value>every year</value>
+  </data>
+  <data name="FrequencyHumanize_Till" xml:space="preserve">
+    <value>till {0} of {1} {2}</value>
+  </data>
+  <data name="FrequencyHumanize_On" xml:space="preserve">
+    <value>on {0} of {1}</value>
+  </data>
 </root>

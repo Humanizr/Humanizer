@@ -54,6 +54,7 @@
     <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
     <Compile Include="Frequency.cs" />
     <Compile Include="FrequencyEnum.cs" />
+    <Compile Include="Frequencies.cs" />
     <Compile Include="FrequencyHumanizeExtensions.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\RegularStyleCollectionFormatter.cs" />
@@ -110,9 +111,12 @@
     <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\TurkishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
+    <Compile Include="Localisation\ResourceKeys.FrequencyHumanize.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="NotStandardFrequencyInfo.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
+    <Compile Include="StringValue.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>

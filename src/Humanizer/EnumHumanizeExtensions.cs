@@ -74,5 +74,22 @@ namespace Humanizer
 
             return humanizedEnum.ApplyCase(casing);
         }
+
+        public static string GetStringValue(this Enum value)
+        {
+            string output = null;
+            Type type = value.GetType();
+
+            FieldInfo fi = type.GetField(value.ToString());
+            StringValue[] attrs =
+            fi.GetCustomAttributes(typeof(StringValue),
+                                   false) as StringValue[];
+            if (attrs.Length > 0)
+            {
+                return attrs[0].Value;
+            }
+
+            return value.ToString();
+        }
    }
 }

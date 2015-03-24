@@ -41,6 +41,22 @@ namespace Humanizer.Localisation.Formatters
         }
 
         /// <summary>
+        /// Returns the string representation of the provided Frequency
+        /// </summary>
+        /// <param name="frequency"></param>
+        /// <returns></returns>
+        public virtual string FrequencyHumanize(
+            Frequencies frequency,
+            int count = 1,
+            bool isStandard = true,
+            bool isFrom = false,
+            bool isTill = false,
+            bool isOn = false)
+        {
+            return GetResourceForFrequency(frequency, count, isStandard, isFrom, isTill, isOn);
+        }
+
+        /// <summary>
         /// 0 seconds
         /// </summary>
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
@@ -74,6 +90,27 @@ namespace Humanizer.Localisation.Formatters
         {
             string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+        }
+
+        private string GetResourceForFrequency(Frequencies frequency, int count, bool isStandard, bool isFrom, bool isTill, bool isOn)
+        {
+            if (isFrom)
+            {
+                if (isTill)
+                {
+                    isOn = true;
+                }
+                return Format(ResourceKeys.FrequencyHumanize.GetResourceKeyFrom());
+            }
+            else if (isTill)
+            {
+                return Format(ResourceKeys.FrequencyHumanize.GetResourceKeyTill());
+            }
+            if (isOn)
+            {
+                return Format(ResourceKeys.FrequencyHumanize.GetResourceKeyOn());
+            }
+            return Format(ResourceKeys.FrequencyHumanize.GetResourceKey(frequency, count, isStandard));
         }
 
         /// <summary>

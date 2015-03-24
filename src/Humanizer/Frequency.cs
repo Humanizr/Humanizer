@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Humanizer.Localisation;
 
 namespace Humanizer
 {
@@ -9,10 +10,10 @@ namespace Humanizer
     {
         private DateTime _startDate = DateTime.MinValue;
         private DateTime _endDate = DateTime.MinValue;
-        private FrequencyEnum _occurrenceFrequency;
+        private Frequencies _occurrenceFrequency;
         private List<DateTime> _listOfOccurrences;
         private TimeSpan _timeSpanBetweenOccurrences;
-        private KeyValuePair<TimeUnitEnum, double> _notStandardFrequencyInfo;
+        private NotStandardFrequencyInfo _notStandardFrequencyInfo;
 
         public DateTime StartDate
         {
@@ -32,7 +33,7 @@ namespace Humanizer
                 OnBoundaryDateChanged();
             }
         }
-        public FrequencyEnum OccurrenceFrequency
+        public Frequencies OccurrenceFrequency
         {
             get { return _occurrenceFrequency; }
         }
@@ -40,7 +41,7 @@ namespace Humanizer
         {
             get { return _listOfOccurrences ?? (_listOfOccurrences = new List<DateTime>()); }
         }
-        public KeyValuePair<TimeUnitEnum, double> NotStandardFrequencyInfo
+        public NotStandardFrequencyInfo NotStandardFrequencyInfo
         {
             get { return _notStandardFrequencyInfo; }
             set { _notStandardFrequencyInfo = value; }
@@ -62,7 +63,7 @@ namespace Humanizer
         /// <param name="timespanBetweenOccurrences">Time elapsed between two occurrences</param>
         private Frequency(TimeSpan timespanBetweenOccurrences)
         {
-            _occurrenceFrequency = FrequencyEnum.NotStandard;
+            _occurrenceFrequency = Frequencies.NotStandard;
             _timeSpanBetweenOccurrences = timespanBetweenOccurrences;
             SetupFrequencyFromTimeSpan(timespanBetweenOccurrences);
         }
@@ -74,12 +75,12 @@ namespace Humanizer
         {
             return new Frequency(dateOfOccurrences)
                 {
-                    _occurrenceFrequency = FrequencyEnum.Yearly
+                    _occurrenceFrequency = Frequencies.Yearly
                 };
         }
         public static Frequency Every(TimeSpan timespanBetweenOccurrences)
         {
-            return new Frequency(timespanBetweenOccurrences) { _occurrenceFrequency = FrequencyEnum.NotStandard };
+            return new Frequency(timespanBetweenOccurrences) { _occurrenceFrequency = Frequencies.NotStandard };
         }
         public static Frequency Every()
         {
@@ -89,43 +90,43 @@ namespace Humanizer
         public Frequency Month()
         {
             _timeSpanBetweenOccurrences = new TimeSpan(30, 0, 0, 0, 0);
-            _occurrenceFrequency = FrequencyEnum.Monthly;
+            _occurrenceFrequency = Frequencies.Monthly;
             return this;
         }
         public Frequency Day()
         {
             _timeSpanBetweenOccurrences = new TimeSpan(1, 0, 0, 0, 0);
-            _occurrenceFrequency = FrequencyEnum.Daily;
+            _occurrenceFrequency = Frequencies.Daily;
             return this;
         }
         public Frequency Year()
         {
             _timeSpanBetweenOccurrences = new TimeSpan(365, 0, 0, 0, 0);
-            _occurrenceFrequency = FrequencyEnum.Yearly;
+            _occurrenceFrequency = Frequencies.Yearly;
             return this;
         }
         public Frequency Minute()
         {
             _timeSpanBetweenOccurrences = new TimeSpan(0, 0, 1, 0, 0);
-            _occurrenceFrequency = FrequencyEnum.EveryMinute;
+            _occurrenceFrequency = Frequencies.EveryMinute;
             return this;
         }
         public Frequency Hour()
         {
             _timeSpanBetweenOccurrences = new TimeSpan(0, 1, 0, 0, 0);
-            _occurrenceFrequency = FrequencyEnum.Hourly;
+            _occurrenceFrequency = Frequencies.Hourly;
             return this;
         }
         public Frequency Week()
         {
             _timeSpanBetweenOccurrences = new TimeSpan(7, 0, 0, 0, 0);
-            _occurrenceFrequency = FrequencyEnum.Weekly;
+            _occurrenceFrequency = Frequencies.Weekly;
             return this;
         }
         public Frequency Quarter()
         {
             _timeSpanBetweenOccurrences = new TimeSpan(90, 0, 0, 0, 0);
-            _occurrenceFrequency = FrequencyEnum.Quarterly;
+            _occurrenceFrequency = Frequencies.Quarterly;
             return this;
         }
 
@@ -162,7 +163,7 @@ namespace Humanizer
                 // event will simply never happen
                 if (DateTime.Compare(_startDate, _endDate) > 0)
 	            {
-                    _occurrenceFrequency = FrequencyEnum.Never;
+                    _occurrenceFrequency = Frequencies.Never;
                     return;
 	            }
 
@@ -175,40 +176,41 @@ namespace Humanizer
                                 (DateTime.Compare(_startDate,new DateTime(_startDate.Year, ListOfOccurrences[0].Month, ListOfOccurrences[0].Day)) < 0) &&
                                 (DateTime.Compare(_endDate, new DateTime(_endDate.Year, ListOfOccurrences[0].Month, ListOfOccurrences[0].Day)) >= 0)))
                     {
-                        _occurrenceFrequency = FrequencyEnum.OnceOff;
+                        _occurrenceFrequency = Frequencies.OnceOff;
                     }
                     else
                     {
-                        _occurrenceFrequency = FrequencyEnum.Never;
+                        _occurrenceFrequency = Frequencies.Never;
                     }
                 }   
             }
         }
         private void SetupFrequencyFromTimeSpan(TimeSpan input)
         {
+            NotStandardFrequencyInfo = new NotStandardFrequencyInfo();
             if ((int)input.TotalDays > 364)
             {
-                NotStandardFrequencyInfo = new KeyValuePair<TimeUnitEnum, double>(TimeUnitEnum.Year, SplitTimespan(input, 365, (int)input.TotalDays));
+                NotStandardFrequencyInfo.Frequency = new KeyValuePair<TimeUnit, double>(TimeUnit.Year, SplitTimespan(input, 365, (int)input.TotalDays));
             }
             else if ((int)input.TotalDays > 29)
             {
-                NotStandardFrequencyInfo = new KeyValuePair<TimeUnitEnum, double>(TimeUnitEnum.Month, SplitTimespan(input, 30, (int)input.TotalDays));
+                NotStandardFrequencyInfo.Frequency = new KeyValuePair<TimeUnit, double>(TimeUnit.Month, SplitTimespan(input, 30, (int)input.TotalDays));
             }
             else if ((int)input.TotalDays > 0)
             {
-                NotStandardFrequencyInfo = new KeyValuePair<TimeUnitEnum, double>(TimeUnitEnum.Day, SplitTimespan(input, 24, (int)input.TotalHours));
+                NotStandardFrequencyInfo.Frequency = new KeyValuePair<TimeUnit, double>(TimeUnit.Day, SplitTimespan(input, 24, (int)input.TotalHours));
             }
             else if ((int)input.TotalHours > 0)
 	        {
-                NotStandardFrequencyInfo = new KeyValuePair<TimeUnitEnum, double>(TimeUnitEnum.Hour, SplitTimespan(input, 60, (int)input.TotalMinutes));
+                NotStandardFrequencyInfo.Frequency = new KeyValuePair<TimeUnit, double>(TimeUnit.Hour, SplitTimespan(input, 60, (int)input.TotalMinutes));
 	        }
             else if ((int)input.TotalMinutes > 0)
 	        {
-                NotStandardFrequencyInfo = new KeyValuePair<TimeUnitEnum, double>(TimeUnitEnum.Minute, SplitTimespan(input, 60, (int)input.TotalSeconds));
+                NotStandardFrequencyInfo.Frequency = new KeyValuePair<TimeUnit, double>(TimeUnit.Minute, SplitTimespan(input, 60, (int)input.TotalSeconds));
             }
             else if ((int)input.TotalSeconds > 0)
 	        {
-                NotStandardFrequencyInfo = new KeyValuePair<TimeUnitEnum, double>(TimeUnitEnum.Second, SplitTimespan(input, 1000, (int)input.TotalMilliseconds));
+                NotStandardFrequencyInfo.Frequency = new KeyValuePair<TimeUnit, double>(TimeUnit.Second, SplitTimespan(input, 1000, (int)input.TotalMilliseconds));
             }
         }
 
@@ -219,7 +221,7 @@ namespace Humanizer
             int remainder = referenceAmount - intPart * nbUnit;
             if (remainder == 0)
             {
-                _occurrenceFrequency = FrequencyEnum.Yearly;
+                _occurrenceFrequency = Frequencies.Yearly;
                 return durationAsDouble;
             }
             if (remainder > 3 * nbUnit / 4)
