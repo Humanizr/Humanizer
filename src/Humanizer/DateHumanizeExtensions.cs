@@ -26,5 +26,86 @@ namespace Humanizer
 
             return Configurator.DateTimeHumanizeStrategy.Humanize(input, comparisonBase, culture);
         }
+
+        /// <summary>
+        /// Extracts the month out of a date
+        /// </summary>
+        /// <param name="input">The date of which you want the month</param>
+        /// <returns></returns>
+        public static string ToMonth(this DateTime input)
+        {
+            string output = string.Empty;
+            switch (input.Month)
+            {
+                case 1:
+                    output = "january";
+                    break;
+                case 2:
+                    output = "february";
+                    break;
+                case 3:
+                    output = "march";
+                    break;
+                case 4:
+                    output = "april";
+                    break;
+                case 5:
+                    output = "may";
+                    break;
+                case 6:
+                    output = "june";
+                    break;
+                case 7:
+                    output = "july";
+                    break;
+                case 8:
+                    output = "august";
+                    break;
+                case 9:
+                    output = "september";
+                    break;
+                case 10:
+                    output = "october";
+                    break;
+                case 11:
+                    output = "november";
+                    break;
+                case 12:
+                    output = "december";
+                    break;
+
+                default:
+                    break;
+            }
+            return output;
+        }
+
+        /// <summary>
+        /// Extracts the day out of a date
+        /// </summary>
+        /// <param name="input">The date of which you want the day</param>
+        /// <returns></returns>
+        public static string ToDay(this DateTime input)
+        {
+            string result = input.Day.ToString();
+            char endingNumber = result[result.Length - 1];
+            if (endingNumber == '1')
+            {
+                result += "st";
+            }
+            else if (endingNumber == '2')
+            {
+                result += "nd";
+            }
+            else if (endingNumber == '3')
+            {
+                result += "rd";
+            }
+            else
+            {
+                result += "th";
+            }
+            return result;
+        }
     }
 }

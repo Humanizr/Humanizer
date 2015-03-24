@@ -68,6 +68,7 @@
     <Compile Include="DateHumanize.cs" />
     <Compile Include="CollectionHumanizeTests.cs" />
     <Compile Include="EnumHumanizeWithCustomDescriptionPropertyNamesTests.cs" />
+    <Compile Include="FrequencyHumanizeTest.cs" />
     <Compile Include="Localisation\bg\DateHumanizeTests.cs" />
     <Compile Include="Localisation\bg\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\bn-BD\DateHumanizeTests.cs" />
