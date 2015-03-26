@@ -71,6 +71,7 @@ namespace Humanizer
             AddPlural("^(ox)$", "$1en");
             AddPlural("(quiz)$", "$1zes");
             AddPlural("(campus)$", "$1es");
+            AddPlural("^is$", "are");
 
             AddSingular("s$", "");
             AddSingular("(n)ews$", "$1ews");
@@ -97,6 +98,7 @@ namespace Humanizer
             AddSingular("(matr)ices$", "$1ix");
             AddSingular("(quiz)zes$", "$1");
             AddSingular("(campus)es$", "$1");
+            AddSingular("^are$", "is");
 
             AddIrregular("person", "people");
             AddIrregular("man", "men");
