@@ -8,7 +8,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
     /// <summary>
     /// 
     /// </summary>
-    public class PrecisionDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy
+    public class PrecisionDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy, IDateTimeOffsetHumanizeStrategy
     {
         private readonly double _precision;
 
@@ -69,6 +69,18 @@ namespace Humanizer.DateTimeHumanizeStrategy
             if (minutes > 0) return formatter.DateHumanize(TimeUnit.Minute, tense, minutes);
             if (seconds > 0) return formatter.DateHumanize(TimeUnit.Second, tense, seconds);
             return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
+        }
+
+        /// <summary>
+        /// Calculates the distance of time in words between two provided dates
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="comparisonBase"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo culture)
+        {
+            return Humanize(input.UtcDateTime, comparisonBase.UtcDateTime, culture);
         }
     }
 }

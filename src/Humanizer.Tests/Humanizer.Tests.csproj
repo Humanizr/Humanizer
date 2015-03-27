@@ -67,6 +67,7 @@
     <Compile Include="CasingTests.cs" />
     <Compile Include="DateHumanize.cs" />
     <Compile Include="CollectionHumanizeTests.cs" />
+    <Compile Include="DateTimeOffsetHumanizeTests.cs" />
     <Compile Include="EnumHumanizeWithCustomDescriptionPropertyNamesTests.cs" />
     <Compile Include="Localisation\bg\DateHumanizeTests.cs" />
     <Compile Include="Localisation\bg\TimeSpanHumanizeTests.cs" />

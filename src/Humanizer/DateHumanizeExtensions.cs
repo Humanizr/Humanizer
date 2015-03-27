@@ -26,5 +26,19 @@ namespace Humanizer
 
             return Configurator.DateTimeHumanizeStrategy.Humanize(input, comparisonBase, culture);
         }
+
+        /// <summary>
+        /// Turns the current or provided date into a human readable sentence
+        /// </summary>
+        /// <param name="input">The date to be humanized</param>
+        /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns>distance of time in words</returns>
+        public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
+        {
+            var comparisonBase = dateToCompareAgainst ?? DateTimeOffset.UtcNow;
+
+            return Configurator.DateTimeOffsetHumanizeStrategy.Humanize(input, comparisonBase, culture);
+        }
     }
 }

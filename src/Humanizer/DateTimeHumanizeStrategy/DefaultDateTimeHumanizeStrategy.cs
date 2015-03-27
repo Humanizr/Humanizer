@@ -8,7 +8,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
     /// <summary>
     /// The default 'distance of time' -> words calculator.
     /// </summary>
-    public class DefaultDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy
+    public class DefaultDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy, IDateTimeOffsetHumanizeStrategy
     {
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
         /// <summary>
@@ -69,6 +69,18 @@ namespace Humanizer.DateTimeHumanizeStrategy
             if (years == 0) years = 1;
 
             return formatter.DateHumanize(TimeUnit.Year, tense, years);
+        }
+
+        /// <summary>
+        /// Calculates the distance of time in words between two provided dates
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="comparisonBase"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo culture)
+        {
+            return Humanize(input.UtcDateTime, comparisonBase.UtcDateTime, culture);
         }
     }
 }
