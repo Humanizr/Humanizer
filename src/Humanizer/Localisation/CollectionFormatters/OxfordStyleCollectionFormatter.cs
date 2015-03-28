@@ -7,8 +7,8 @@ namespace Humanizer.Localisation.CollectionFormatters
     internal class OxfordStyleCollectionFormatter : DefaultCollectionFormatter
     {
         public OxfordStyleCollectionFormatter(string defaultSeparator)
+            : base(defaultSeparator ?? "and")
         {
-            DefaultSeparator = defaultSeparator ?? "and";
         }
 
         public override string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, String separator)
