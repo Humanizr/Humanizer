@@ -1,6 +1,7 @@
 ###In Development
  - [#399](https://github.com/MehdiK/Humanizer/pull/399): Added support for humanizing DateTimeOffset
  - [#395](https://github.com/MehdiK/Humanizer/pull/395): Added support for Xamarin platforms to PCL 
+ - [#397](https://github.com/MehdiK/Humanizer/pull/397): Added is/are to inflector rules
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.34.0...master)
 
