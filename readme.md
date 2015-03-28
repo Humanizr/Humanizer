@@ -263,7 +263,7 @@ By default both methods throw a `NoMatchFoundException` when they cannot match t
 In the non-generic method you can also ask the method to return null by setting the second optional parameter to `NoMatch.ReturnsNull`.
 
 ###<a id="humanize-datetime">Humanize DateTime</a>
-You can `Humanize` an instance of `DateTime` and get back a string telling how far back or forward in time that is:
+You can `Humanize` an instance of `DateTime` or `DateTimeOffset` and get back a string telling how far back or forward in time that is:
 
 ```C#
 DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
@@ -271,14 +271,17 @@ DateTime.UtcNow.AddHours(-2).Humanize() => "2 hours ago"
 
 DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
+
+DateTimeOffset.AddHours(1).Humanize() => "an hour from now"
 ```
 
-Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
+Humanizer supports both local and UTC dates as well as dates with offset (`DateTimeOffset`). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
 Here is the API signature:
 
 ```C#
 public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
+public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
 ```
 
 Many localizations are available for this method. Here is a few examples:
@@ -302,7 +305,10 @@ DateTime.UtcNow.AddMinutes(-40).Humanize() => "40 минут назад"
 There are two strategies for `DateTime.Humanize`: the default one as seen above and a precision based one.
 To use the precision based strategy you need to configure it:
 
-`Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75)`.
+```C#
+Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75);
+Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision = .75); // configure when humanizing DateTimeOffset
+```
 
 The default precision is set to .75 but you can pass your desired precision too. With precision set to 0.75:
 

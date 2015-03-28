@@ -52,6 +52,11 @@
     <Compile Include="Bytes\ByteRate.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
     <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\DateTimeHumanizeAlgorithms.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeOffsetHumanizeStrategy.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\IDateTimeOffsetHumanizeStrategy.cs" />
+    <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeOffsetHumanizeStrategy.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\RegularStyleCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
@@ -88,7 +93,6 @@
     <Compile Include="Localisation\NumberToWords\FrenchNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\HebrewNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\CzechSlovakPolishFormatter.cs" />
-    <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeHumanizeStrategy.cs" />
     <Compile Include="Localisation\NumberToWords\INumberToWordsConverter.cs" />

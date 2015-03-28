@@ -1,4 +1,5 @@
 ###In Development
+ - [#399](https://github.com/MehdiK/Humanizer/pull/399): Support for humanizing DateTimeOffset
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.34.0...master)
 

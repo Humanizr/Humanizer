@@ -99,6 +99,16 @@ namespace Humanizer.Configuration
             set { _dateTimeHumanizeStrategy = value; }
         }
 
+        private static IDateTimeOffsetHumanizeStrategy _dateTimeOffsetHumanizeStrategy = new DefaultDateTimeOffsetHumanizeStrategy();
+        /// <summary>
+        /// The strategy to be used for DateTimeOffset.Humanize
+        /// </summary>
+        public static IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy
+        {
+            get { return _dateTimeOffsetHumanizeStrategy; }
+            set { _dateTimeOffsetHumanizeStrategy = value; }
+        }
+
         private static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
         private static Func<PropertyInfo, bool> _enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
         /// <summary>

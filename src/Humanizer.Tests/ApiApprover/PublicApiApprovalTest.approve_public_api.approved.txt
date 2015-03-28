@@ -125,6 +125,7 @@ public class Configurator
 {
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
     public Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
+    public Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
     public System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
     public Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
@@ -144,6 +145,7 @@ public class LocaliserRegistry`1
 public class DateHumanizeExtensions
 {
     public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst, System.Globalization.CultureInfo culture) { }
+    public string Humanize(System.DateTimeOffset input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst, System.Globalization.CultureInfo culture) { }
 }
 
 public class DefaultDateTimeHumanizeStrategy
@@ -152,15 +154,32 @@ public class DefaultDateTimeHumanizeStrategy
     public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
 }
 
+public class DefaultDateTimeOffsetHumanizeStrategy
+{
+    public DefaultDateTimeOffsetHumanizeStrategy() { }
+    public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+}
+
 public interface IDateTimeHumanizeStrategy
 {
     string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
+}
+
+public interface IDateTimeOffsetHumanizeStrategy
+{
+    string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
 }
 
 public class PrecisionDateTimeHumanizeStrategy
 {
     public PrecisionDateTimeHumanizeStrategy(double precision) { }
     public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+}
+
+public class PrecisionDateTimeOffsetHumanizeStrategy
+{
+    public PrecisionDateTimeOffsetHumanizeStrategy(double precision) { }
+    public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
 }
 
 public class EnumDehumanizeExtensions
