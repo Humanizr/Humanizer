@@ -6,7 +6,7 @@ using Humanizer.Localisation;
 namespace Humanizer.DateTimeHumanizeStrategy
 {
     /// <summary>
-    /// A precision-based calculator for distance of time, used for both 
+    /// Algorithms used to convert distance between two dates into words.
     /// </summary>
     internal static class DateTimeHumanizeAlgorithms
     {
