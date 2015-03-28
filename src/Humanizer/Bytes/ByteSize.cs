@@ -326,9 +326,12 @@ namespace Humanizer.Bytes
             int num;
             var found = false;
 
+            // Acquiring culture specific decimal separator
+			char decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
-                if (!(char.IsDigit(s[num]) || s[num] == '.'))
+                if (!(char.IsDigit(s[num]) || s[num] == decSep))
                 {
                     found = true;
                     break;

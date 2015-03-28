@@ -3,6 +3,7 @@
  - [#395](https://github.com/MehdiK/Humanizer/pull/395): Added support for Xamarin platforms to PCL 
  - [#397](https://github.com/MehdiK/Humanizer/pull/397): Added is/are to inflector rules
  - [#392](https://github.com/MehdiK/Humanizer/pull/392): Default implementation for collection formatter using regular style instead of an exception. Default separator is ampercent.
+ - [#377](https://github.com/MehdiK/Humanizer/pull/392): Added culture specific decimal separator
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.34.0...master)
 
