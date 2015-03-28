@@ -6,7 +6,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
     /// <summary>
     /// Precision-based calculator for distance between two times
     /// </summary>
-    public class PrecisionDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy
+    public class PrecisionDateTimeOffsetHumanizeStrategy :  IDateTimeOffsetHumanizeStrategy
     {
         private readonly double _precision;
 
@@ -14,7 +14,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// Constructs a precision-based calculator for distance of time with default precision 0.75.
         /// </summary>
         /// <param name="precision">precision of approximation, if not provided  0.75 will be used as a default precision.</param>
-        public PrecisionDateTimeHumanizeStrategy(double precision = .75)
+        public PrecisionDateTimeOffsetHumanizeStrategy(double precision = .75)
         {
             _precision = precision;
         }
@@ -22,9 +22,9 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
-        public string Humanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
+        public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo culture)
         {
-            return DateTimeHumanizeAlgorithms.PrecisionHumanize(input, comparisonBase, _precision, culture);
+            return DateTimeHumanizeAlgorithms.PrecisionHumanize(input.UtcDateTime, comparisonBase.UtcDateTime, _precision, culture);
         }
     }
 }

@@ -271,6 +271,8 @@ DateTime.UtcNow.AddHours(-2).Humanize() => "2 hours ago"
 
 DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
+
+DateTimeOffset.AddHours(1).Humanize() => "an hour from now"
 ```
 
 Humanizer supports both local and UTC dates as well as dates with offset (`DateTimeOffset`). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
@@ -305,7 +307,7 @@ To use the precision based strategy you need to configure it:
 
 ```C#
 Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75);
-Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75); // configure when humanizing DateTimeOffset
+Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision = .75); // configure when humanizing DateTimeOffset
 ```
 
 The default precision is set to .75 but you can pass your desired precision too. With precision set to 0.75:

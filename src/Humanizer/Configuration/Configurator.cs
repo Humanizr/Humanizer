@@ -99,7 +99,7 @@ namespace Humanizer.Configuration
             set { _dateTimeHumanizeStrategy = value; }
         }
 
-        private static IDateTimeOffsetHumanizeStrategy _dateTimeOffsetHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
+        private static IDateTimeOffsetHumanizeStrategy _dateTimeOffsetHumanizeStrategy = new DefaultDateTimeOffsetHumanizeStrategy();
         /// <summary>
         /// The strategy to be used for DateTimeOffset.Humanize
         /// </summary>

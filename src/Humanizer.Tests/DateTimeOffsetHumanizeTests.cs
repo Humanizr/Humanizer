@@ -17,7 +17,7 @@ namespace Humanizer.Tests
         [Fact]
         public void DefaultStrategy_SameOffset()
         {
-            Configurator.DateTimeOffsetHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
+            Configurator.DateTimeOffsetHumanizeStrategy = new DefaultDateTimeOffsetHumanizeStrategy();
 
             var inputTime = new DateTimeOffset(2015, 07, 05, 04, 0, 0, TimeSpan.Zero);
             var baseTime = new DateTimeOffset(2015, 07, 05, 03, 0, 0, TimeSpan.Zero);
@@ -31,7 +31,7 @@ namespace Humanizer.Tests
         [Fact]
         public void DefaultStrategy_DifferentOffsets()
         {
-            Configurator.DateTimeOffsetHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
+            Configurator.DateTimeOffsetHumanizeStrategy = new DefaultDateTimeOffsetHumanizeStrategy();
 
             var inputTime = new DateTimeOffset(2015, 07, 05, 03, 0, 0, new TimeSpan(2, 0, 0));
             var baseTime = new DateTimeOffset(2015, 07, 05, 02, 30, 0, new TimeSpan(1, 0, 0));
@@ -45,7 +45,7 @@ namespace Humanizer.Tests
         [Fact]
         public void PrecisionStrategy_SameOffset()
         {
-            Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(0.75);
+            Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(0.75);
 
             var inputTime = new DateTimeOffset(2015, 07, 05, 04, 0, 0, TimeSpan.Zero);
             var baseTime = new DateTimeOffset(2015, 07, 04, 05, 0, 0, TimeSpan.Zero);
@@ -59,7 +59,7 @@ namespace Humanizer.Tests
         [Fact]
         public void PrecisionStrategy_DifferentOffsets()
         {
-            Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(0.75);
+            Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(0.75);
 
             var inputTime = new DateTimeOffset(2015, 07, 05, 03, 45, 0, new TimeSpan(2, 0, 0));
             var baseTime = new DateTimeOffset(2015, 07, 05, 02, 30, 0, new TimeSpan(-5, 0, 0));
