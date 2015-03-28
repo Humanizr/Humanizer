@@ -327,7 +327,7 @@ namespace Humanizer.Bytes
             var found = false;
 
             // Acquiring culture specific decimal separator
-			char decSep = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+			char decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                 
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
