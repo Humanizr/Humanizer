@@ -112,30 +112,30 @@ Also Humanizer <a href="http://www.symbolsource.org/Public/Metadata/NuGet/Projec
 <p><code>Humanize</code> string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
 The foundation of this was set in the <a href="https://github.com/TestStack/TestStack.BDDfy">BDDfy framework</a> where class names, method names and properties are turned into human readable sentences.</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>PascalCaseInputStringIsTurnedIntoSentence<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Pascal case input string is turned into sentence<span class="pl-pds">"</span></span>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>PascalCaseInputStringIsTurnedIntoSentence<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Pascal case input string is turned into sentence<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>Underscored_input_string_is_turned_into_sentence<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Underscored input string is turned into sentence<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Underscored_input_string_is_turned_into_sentence<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Underscored input string is turned into sentence<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>Underscored_input_String_is_turned_INTO_sentence<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Underscored input String is turned INTO sentence<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-s"><span class="pl-pds">"</span>Underscored_input_String_is_turned_INTO_sentence<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Underscored input String is turned INTO sentence<span class="pl-pds">"</span></span></pre></div>
 
 <p>Note that a string that contains only upper case letters, and consists only of one word, is always treated as an acronym (regardless of its length). To guarantee that any arbitrary string will always be humanized you must use a transform (see <code>Transform</code> method below):</p>
 
 <div class="highlight highlight-C#"><pre><span class="pl-c">// acronyms are left intact</span>
-<span class="pl-s1"><span class="pl-pds">"</span>HTML<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>HTML<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>HTML<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>HTML<span class="pl-pds">"</span></span>
 
 <span class="pl-c">// any unbroken upper case string is treated as an acronym</span>
-<span class="pl-s1"><span class="pl-pds">"</span>HUMANIZER<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>HUMANIZER<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>HUMANIZER<span class="pl-pds">"</span></span>.Transform(To.LowerCase, To.TitleCase) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Humanizer<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-s"><span class="pl-pds">"</span>HUMANIZER<span class="pl-pds">"</span></span>.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>HUMANIZER<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>HUMANIZER<span class="pl-pds">"</span></span>.Transform(To.LowerCase, To.TitleCase) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Humanizer<span class="pl-pds">"</span></span></pre></div>
 
 <p>You may also specify the desired letter casing:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>CanReturnTitleCase<span class="pl-pds">"</span></span>.Humanize(LetterCasing.Title) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Can Return Title Case<span class="pl-pds">"</span></span>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>CanReturnTitleCase<span class="pl-pds">"</span></span>.Humanize(LetterCasing.Title) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Can Return Title Case<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>Can_return_title_Case<span class="pl-pds">"</span></span>.Humanize(LetterCasing.Title) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Can Return Title Case<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Can_return_title_Case<span class="pl-pds">"</span></span>.Humanize(LetterCasing.Title) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Can Return Title Case<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>CanReturnLowerCase<span class="pl-pds">"</span></span>.Humanize(LetterCasing.LowerCase) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>can return lower case<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>CanReturnLowerCase<span class="pl-pds">"</span></span>.Humanize(LetterCasing.LowerCase) =&gt; <span class="pl-s"><span class="pl-pds">"</span>can return lower case<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>CanHumanizeIntoUpperCase<span class="pl-pds">"</span></span>.Humanize(LetterCasing.AllCaps) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>CAN HUMANIZE INTO UPPER CASE<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-s"><span class="pl-pds">"</span>CanHumanizeIntoUpperCase<span class="pl-pds">"</span></span>.Humanize(LetterCasing.AllCaps) =&gt; <span class="pl-s"><span class="pl-pds">"</span>CAN HUMANIZE INTO UPPER CASE<span class="pl-pds">"</span></span></pre></div>
 
 <blockquote>
 <p>The <code>LetterCasing</code> API and the methods accepting it are legacy from V0.2 era and will be deprecated in the future. Instead of that, you can use <code>Transform</code> method explained below.</p>
@@ -147,7 +147,7 @@ The foundation of this was set in the <a href="https://github.com/TestStack/Test
 
 <p>Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Pascal case input string is turned into sentence<span class="pl-pds">"</span></span>.Dehumanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>PascalCaseInputStringIsTurnedIntoSentence<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Pascal case input string is turned into sentence<span class="pl-pds">"</span></span>.Dehumanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>PascalCaseInputStringIsTurnedIntoSentence<span class="pl-pds">"</span></span></pre></div>
 
 <h3>
 <a id="transform-string" class="anchor" href="#transform-string" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="transform-string">Transform String</a>
@@ -156,14 +156,14 @@ The foundation of this was set in the <a href="https://github.com/TestStack/Test
 <p>There is a <code>Transform</code> method that supersedes <code>LetterCasing</code>, <code>ApplyCase</code> and <code>Humanize</code> overloads that accept <code>LetterCasing</code>.
 Transform method signature is as follows:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-st">string</span> Transform(<span class="pl-c1">this</span> <span class="pl-st">string</span> input, params IStringTransformer[] transformers)</pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-k">string</span> Transform(<span class="pl-c1">this</span> <span class="pl-k">string</span> input, params IStringTransformer[] transformers)</pre></div>
 
 <p>And there are some out of the box implementations of <code>IStringTransformer</code> for letter casing:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.LowerCase) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>sentence casing<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.SentenceCase) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.TitleCase) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Sentence Casing<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.UpperCase) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>SENTENCE CASING<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.LowerCase) =&gt; <span class="pl-s"><span class="pl-pds">"</span>sentence casing<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.SentenceCase) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.TitleCase) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Sentence Casing<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Sentence casing<span class="pl-pds">"</span></span>.Transform(To.UpperCase) =&gt; <span class="pl-s"><span class="pl-pds">"</span>SENTENCE CASING<span class="pl-pds">"</span></span></pre></div>
 
 <p><code>LowerCase</code> is a public static property on <code>To</code> class that returns an instance of private <code>ToLowerCase</code> class that implements <code>IStringTransformer</code> and knows how to turn a string into lower case.</p>
 
@@ -176,39 +176,39 @@ while <code>IStringTransformer</code> is an interface you can implement in your 
 
 <p>You can truncate a <code>string</code> using the <code>Truncate</code> method:</p>
 
-<div class="highlight highlight-c#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Long text…<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-c#"><pre><span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Long text…<span class="pl-pds">"</span></span></pre></div>
 
 <p>By default the <code>'…'</code> character is used to truncate strings. The advantage of using the <code>'…'</code> character instead of <code>"..."</code> is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:</p>
 
-<div class="highlight highlight-c#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, <span class="pl-s1"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Long te---<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-c#"><pre><span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, <span class="pl-s"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Long te---<span class="pl-pds">"</span></span></pre></div>
 
 <p>The default truncation strategy, <code>Truncator.FixedLength</code>, is to truncate the input string to a specific length, including the truncation string length.
 There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words.
 To use a specific truncator when truncating, the two <code>Truncate</code> methods shown in the previous examples all have an overload that allow you to specify the <code>ITruncator</code> instance to use for the truncation.
 Here are examples on how to use the three provided truncators:</p>
 
-<div class="highlight highlight-c#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, Truncator.FixedLength) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Long text…<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, <span class="pl-s1"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedLength) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Long te---<span class="pl-pds">"</span></span>
+<div class="highlight highlight-c#"><pre><span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, Truncator.FixedLength) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Long text…<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, <span class="pl-s"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedLength) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Long te---<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">6</span>, Truncator.FixedNumberOfCharacters) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Long t…<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">6</span>, <span class="pl-s1"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfCharacters) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Lon---<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">6</span>, Truncator.FixedNumberOfCharacters) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Long t…<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">6</span>, <span class="pl-s"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfCharacters) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Lon---<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, Truncator.FixedNumberOfWords) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Long text…<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, <span class="pl-s1"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfWords) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Long text---<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, Truncator.FixedNumberOfWords) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Long text…<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, <span class="pl-s"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfWords) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Long text---<span class="pl-pds">"</span></span></pre></div>
 
 <p>Note that you can also use create your own truncator by implementing the <code>ITruncator</code> interface.</p>
 
 <p>There is also an option to choose whether to truncate the string from the beginning (<code>TruncateFrom.Left</code>) or the end (<code>TruncateFrom.Right</code>).
 Default is the right as shown in the examples above. The examples below show how to truncate from the beginning of the string:</p>
 
-<div class="highlight highlight-c#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, Truncator.FixedLength, TruncateFrom.Left) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>… truncate<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, <span class="pl-s1"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedLength, TruncateFrom.Left) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>---runcate<span class="pl-pds">"</span></span>
+<div class="highlight highlight-c#"><pre><span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, Truncator.FixedLength, TruncateFrom.Left) =&gt; <span class="pl-s"><span class="pl-pds">"</span>… truncate<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, <span class="pl-s"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedLength, TruncateFrom.Left) =&gt; <span class="pl-s"><span class="pl-pds">"</span>---runcate<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, Truncator.FixedNumberOfCharacters, TruncateFrom.Left) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>…o truncate<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">16</span>, <span class="pl-s1"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfCharacters, TruncateFrom.Left) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>---ext to truncate<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">10</span>, Truncator.FixedNumberOfCharacters, TruncateFrom.Left) =&gt; <span class="pl-s"><span class="pl-pds">"</span>…o truncate<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">16</span>, <span class="pl-s"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfCharacters, TruncateFrom.Left) =&gt; <span class="pl-s"><span class="pl-pds">"</span>---ext to truncate<span class="pl-pds">"</span></span>
 
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, Truncator.FixedNumberOfWords, TruncateFrom.Left) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>…to truncate<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, <span class="pl-s1"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfWords, TruncateFrom.Left) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>---to truncate<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, Truncator.FixedNumberOfWords, TruncateFrom.Left) =&gt; <span class="pl-s"><span class="pl-pds">"</span>…to truncate<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Long text to truncate<span class="pl-pds">"</span></span>.Truncate(<span class="pl-c1">2</span>, <span class="pl-s"><span class="pl-pds">"</span>---<span class="pl-pds">"</span></span>, Truncator.FixedNumberOfWords, TruncateFrom.Left) =&gt; <span class="pl-s"><span class="pl-pds">"</span>---to truncate<span class="pl-pds">"</span></span></pre></div>
 
 <h3>
 <a id="format-string" class="anchor" href="#format-string" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="format-string">Format String</a>
@@ -216,7 +216,7 @@ Default is the right as shown in the examples above. The examples below show how
 
 <p>You can format a <code>string</code> using the <code>FormatWith()</code> method:</p>
 
-<div class="highlight highlight-c#"><pre><span class="pl-s1"><span class="pl-pds">"</span>To be formatted -&gt; {0}/{1}.<span class="pl-pds">"</span></span>.FormatWith(<span class="pl-c1">1</span>, <span class="pl-s1"><span class="pl-pds">"</span>A<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>To be formated -&gt; 1/A.<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-c#"><pre><span class="pl-s"><span class="pl-pds">"</span>To be formatted -&gt; {0}/{1}.<span class="pl-pds">"</span></span>.FormatWith(<span class="pl-c1">1</span>, <span class="pl-s"><span class="pl-pds">"</span>A<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>To be formated -&gt; 1/A.<span class="pl-pds">"</span></span></pre></div>
 
 <p>This is an extension method based on <code>String.Format</code>, so exact rules applies to it.
 If <code>format</code> is null, it'll throw <code>ArgumentNullException</code>.
@@ -224,7 +224,7 @@ If passed a fewer number for arguments, it'll throw <code>String.FormatException
 
 <p>You also can specify the culture to use explicitly as the first parameter for the <code>FormatWith()</code> method:</p>
 
-<div class="highlight highlight-c#"><pre><span class="pl-s1"><span class="pl-pds">"</span>{0:N2}<span class="pl-pds">"</span></span>.FormatWith(<span class="pl-s">new</span> CultureInfo(<span class="pl-s1"><span class="pl-pds">"</span>ru-RU<span class="pl-pds">"</span></span>), <span class="pl-c1">6666.66</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>6 666,66<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-c#"><pre><span class="pl-s"><span class="pl-pds">"</span>{0:N2}<span class="pl-pds">"</span></span>.FormatWith(<span class="pl-k">new</span> CultureInfo(<span class="pl-s"><span class="pl-pds">"</span>ru-RU<span class="pl-pds">"</span></span>), <span class="pl-c1">6666.66</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>6 666,66<span class="pl-pds">"</span></span></pre></div>
 
 <p>If a culture is not specified, current thread's current culture is used.</p>
 
@@ -234,9 +234,9 @@ If passed a fewer number for arguments, it'll throw <code>String.FormatException
 
 <p>Calling <code>ToString</code> directly on enum members usually results in less than ideal output for users. The solution to this is usually to use <code>DescriptionAttribute</code> data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what <code>String.Humanize()</code> does well. For an enum like:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">public</span> <span class="pl-s">enum</span> <span class="pl-en">EnumUnderTest</span>
+<div class="highlight highlight-C#"><pre><span class="pl-k">public</span> <span class="pl-k">enum</span> <span class="pl-en">EnumUnderTest</span>
 {
-    [Description(<span class="pl-s1"><span class="pl-pds">"</span>Custom description<span class="pl-pds">"</span></span>)]
+    [Description(<span class="pl-s"><span class="pl-pds">"</span>Custom description<span class="pl-pds">"</span></span>)]
     MemberWithDescriptionAttribute,
     MemberWithoutDescriptionAttribute,
     ALLCAPITALS
@@ -245,13 +245,13 @@ If passed a fewer number for arguments, it'll throw <code>String.FormatException
 <p>You will get:</p>
 
 <div class="highlight highlight-C#"><pre><span class="pl-c">// DescriptionAttribute is honored</span>
-EnumUnderTest.MemberWithDescriptionAttribute.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Custom description<span class="pl-pds">"</span></span>
+EnumUnderTest.MemberWithDescriptionAttribute.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Custom description<span class="pl-pds">"</span></span>
 
 <span class="pl-c">// In the absence of Description attribute string.Humanizer kicks in</span>
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Member without description attribute<span class="pl-pds">"</span></span>
+EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Member without description attribute<span class="pl-pds">"</span></span>
 
 <span class="pl-c">// Of course you can still apply letter casing</span>
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Member Without Description Attribute<span class="pl-pds">"</span></span></pre></div>
+EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Member Without Description Attribute<span class="pl-pds">"</span></span></pre></div>
 
 <p>You are not limited to <code>DescriptionAttribute</code> for custom description. Any attribute applied on enum members with a <code>string Description</code> property counts.
 This is to help with platforms with missing <code>DescriptionAttribute</code> and also for allowing subclasses of the <code>DescriptionAttribute</code>.</p>
@@ -262,15 +262,15 @@ This is to help with platforms with missing <code>DescriptionAttribute</code> an
 
 <p>If you need to provide localised descriptions you can use <code>DisplayAttribute</code> data annotation instead.</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">public</span> <span class="pl-s">enum</span> <span class="pl-en">EnumUnderTest</span>
+<div class="highlight highlight-C#"><pre><span class="pl-k">public</span> <span class="pl-k">enum</span> <span class="pl-en">EnumUnderTest</span>
 {
-    [Display(Description = <span class="pl-s1"><span class="pl-pds">"</span>EnumUnderTest_Member<span class="pl-pds">"</span></span>, ResourceType = typeof(Project.Resources))]
+    [Display(Description = <span class="pl-s"><span class="pl-pds">"</span>EnumUnderTest_Member<span class="pl-pds">"</span></span>, ResourceType = typeof(Project.Resources))]
     Member
 }</pre></div>
 
 <p>You will get:</p>
 
-<div class="highlight highlight-C#"><pre>EnumUnderTest.Member.Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c">// from Project.Resources found under "EnumUnderTest_Member" resource key</span></pre></div>
+<div class="highlight highlight-C#"><pre>EnumUnderTest.Member.Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c">// from Project.Resources found under "EnumUnderTest_Member" resource key</span></pre></div>
 
 <p>Hopefully this will help avoid littering enums with unnecessary attributes!</p>
 
@@ -280,21 +280,21 @@ This is to help with platforms with missing <code>DescriptionAttribute</code> an
 
 <p>Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">public</span> <span class="pl-s">static</span> TTargetEnum DehumanizeTo&lt;TTargetEnum&gt;(<span class="pl-c1">this</span> <span class="pl-st">string</span> input)</pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> TTargetEnum DehumanizeTo&lt;TTargetEnum&gt;(<span class="pl-c1">this</span> <span class="pl-k">string</span> input)</pre></div>
 
 <p>And the usage is:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Member without description attribute<span class="pl-pds">"</span></span>.DehumanizeTo&lt;EnumUnderTest&gt;() =&gt; EnumUnderTest.MemberWithoutDescriptionAttribute</pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Member without description attribute<span class="pl-pds">"</span></span>.DehumanizeTo&lt;EnumUnderTest&gt;() =&gt; EnumUnderTest.MemberWithoutDescriptionAttribute</pre></div>
 
 <p>And just like the Humanize API it honors the <code>Description</code> attribute. You don't have to provide the casing you provided during humanization: it figures it out.</p>
 
 <p>There is also a non-generic counterpart for when the original Enum is not known at compile time:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">public</span> <span class="pl-s">static</span> Enum DehumanizeTo(<span class="pl-c1">this</span> <span class="pl-st">string</span> input, Type targetEnum, NoMatch onNoMatch = NoMatch.ThrowsException)</pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> Enum DehumanizeTo(<span class="pl-c1">this</span> <span class="pl-k">string</span> input, Type targetEnum, NoMatch onNoMatch = NoMatch.ThrowsException)</pre></div>
 
 <p>which can be used like:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Member without description attribute<span class="pl-pds">"</span></span>.DehumanizeTo(<span class="pl-k">typeof</span>(EnumUnderTest)) =&gt; EnumUnderTest.MemberWithoutDescriptionAttribute</pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Member without description attribute<span class="pl-pds">"</span></span>.DehumanizeTo(<span class="pl-k">typeof</span>(EnumUnderTest)) =&gt; EnumUnderTest.MemberWithoutDescriptionAttribute</pre></div>
 
 <p>By default both methods throw a <code>NoMatchFoundException</code> when they cannot match the provided input against the target enum.
 In the non-generic method you can also ask the method to return null by setting the second optional parameter to <code>NoMatch.ReturnsNull</code>.</p>
@@ -303,40 +303,44 @@ In the non-generic method you can also ask the method to return null by setting 
 <a id="humanize-datetime" class="anchor" href="#humanize-datetime" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="humanize-datetime">Humanize DateTime</a>
 </h3>
 
-<p>You can <code>Humanize</code> an instance of <code>DateTime</code> and get back a string telling how far back or forward in time that is:</p>
+<p>You can <code>Humanize</code> an instance of <code>DateTime</code> or <code>DateTimeOffset</code> and get back a string telling how far back or forward in time that is:</p>
 
-<div class="highlight highlight-C#"><pre>DateTime.UtcNow.AddHours(-<span class="pl-c1">30</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>yesterday<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddHours(-<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 hours ago<span class="pl-pds">"</span></span>
+<div class="highlight highlight-C#"><pre>DateTime.UtcNow.AddHours(-<span class="pl-c1">30</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>yesterday<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddHours(-<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 hours ago<span class="pl-pds">"</span></span>
 
-DateTime.UtcNow.AddHours(<span class="pl-c1">30</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>tomorrow<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddHours(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 hours from now<span class="pl-pds">"</span></span></pre></div>
+DateTime.UtcNow.AddHours(<span class="pl-c1">30</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>tomorrow<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddHours(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 hours from now<span class="pl-pds">"</span></span>
 
-<p>Humanizer supports local as well as UTC dates. You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
+DateTimeOffset.AddHours(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>an hour from now<span class="pl-pds">"</span></span></pre></div>
+
+<p>Humanizer supports both local and UTC dates as well as dates with offset (<code>DateTimeOffset</code>). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
 Here is the API signature:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">public</span> <span class="pl-s">static</span> <span class="pl-st">string</span> Humanize(<span class="pl-c1">this</span> DateTime input, <span class="pl-st">bool</span> utcDate = <span class="pl-c1">true</span>, DateTime? dateToCompareAgainst = <span class="pl-c1">null</span>, CultureInfo culture = <span class="pl-c1">null</span>)</pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">string</span> Humanize(<span class="pl-c1">this</span> DateTime input, <span class="pl-k">bool</span> utcDate = <span class="pl-c1">true</span>, DateTime? dateToCompareAgainst = <span class="pl-c1">null</span>, CultureInfo culture = <span class="pl-c1">null</span>)
+<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">string</span> Humanize(<span class="pl-c1">this</span> DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = <span class="pl-c1">null</span>, CultureInfo culture = <span class="pl-c1">null</span>)</pre></div>
 
 <p>Many localizations are available for this method. Here is a few examples:</p>
 
 <div class="highlight highlight-C#"><pre><span class="pl-c">// In ar culture</span>
-DateTime.UtcNow.AddDays(-<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>أمس<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddDays(-<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>منذ يومين<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddDays(-<span class="pl-c1">3</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>منذ 3 أيام<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddDays(-<span class="pl-c1">11</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>منذ 11 يوم<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddDays(-<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>أمس<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddDays(-<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>منذ يومين<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddDays(-<span class="pl-c1">3</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>منذ 3 أيام<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddDays(-<span class="pl-c1">11</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>منذ 11 يوم<span class="pl-pds">"</span></span>
 
 <span class="pl-c">// In ru-RU culture</span>
-DateTime.UtcNow.AddMinutes(-<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>минуту назад<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddMinutes(-<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 минуты назад<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddMinutes(-<span class="pl-c1">10</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>10 минут назад<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddMinutes(-<span class="pl-c1">21</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>21 минуту назад<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddMinutes(-<span class="pl-c1">22</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>22 минуты назад<span class="pl-pds">"</span></span>
-DateTime.UtcNow.AddMinutes(-<span class="pl-c1">40</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>40 минут назад<span class="pl-pds">"</span></span></pre></div>
+DateTime.UtcNow.AddMinutes(-<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>минуту назад<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddMinutes(-<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 минуты назад<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddMinutes(-<span class="pl-c1">10</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>10 минут назад<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddMinutes(-<span class="pl-c1">21</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>21 минуту назад<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddMinutes(-<span class="pl-c1">22</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>22 минуты назад<span class="pl-pds">"</span></span>
+DateTime.UtcNow.AddMinutes(-<span class="pl-c1">40</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>40 минут назад<span class="pl-pds">"</span></span></pre></div>
 
 <p>There are two strategies for <code>DateTime.Humanize</code>: the default one as seen above and a precision based one.
 To use the precision based strategy you need to configure it:</p>
 
-<p><code>Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75)</code>.</p>
+<div class="highlight highlight-C#"><pre>Configurator.DateTimeHumanizeStrategy = <span class="pl-k">new</span> PrecisionDateTimeHumanizeStrategy(precision = .<span class="pl-c1">75</span>);
+Configurator.DateTimeOffsetHumanizeStrategy = <span class="pl-k">new</span> PrecisionDateTimeOffsetHumanizeStrategy(precision = .<span class="pl-c1">75</span>); <span class="pl-c">// configure when humanizing DateTimeOffset</span></pre></div>
 
 <p>The default precision is set to .75 but you can pass your desired precision too. With precision set to 0.75:</p>
 
@@ -355,45 +359,50 @@ To use the precision based strategy you need to configure it:</p>
 
 <p>You can call <code>Humanize</code> on a <code>TimeSpan</code> to a get human friendly representation for it:</p>
 
-<div class="highlight highlight-C#"><pre>TimeSpan.FromMilliseconds(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 millisecond<span class="pl-pds">"</span></span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 milliseconds<span class="pl-pds">"</span></span>
-TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 day<span class="pl-pds">"</span></span>
-TimeSpan.FromDays(<span class="pl-c1">16</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 weeks<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre>TimeSpan.FromMilliseconds(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 millisecond<span class="pl-pds">"</span></span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 milliseconds<span class="pl-pds">"</span></span>
+TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 day<span class="pl-pds">"</span></span>
+TimeSpan.FromDays(<span class="pl-c1">16</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 weeks<span class="pl-pds">"</span></span></pre></div>
 
 <p>There is an optional <code>precision</code> parameter for <code>TimeSpan.Humanize</code> which allows you to specify the precision of the returned value.
 The default value of <code>precision</code> is 1 which means only the largest time unit is returned like you saw in <code>TimeSpan.FromDays(16).Humanize()</code>.
 Here is a few examples of specifying precision:</p>
 
-<div class="highlight highlight-C#"><pre>TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize(precision:<span class="pl-c1">2</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 day<span class="pl-pds">"</span></span> <span class="pl-c">// no difference when there is only one unit in the provided TimeSpan</span>
-TimeSpan.FromDays(<span class="pl-c1">16</span>).Humanize(<span class="pl-c1">2</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 weeks, 2 days<span class="pl-pds">"</span></span>
+<div class="highlight highlight-C#"><pre>TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize(precision:<span class="pl-c1">2</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 day<span class="pl-pds">"</span></span> <span class="pl-c">// no difference when there is only one unit in the provided TimeSpan</span>
+TimeSpan.FromDays(<span class="pl-c1">16</span>).Humanize(<span class="pl-c1">2</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 weeks, 2 days<span class="pl-pds">"</span></span>
 
 <span class="pl-c">// the same TimeSpan value with different precision returns different results</span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 weeks<span class="pl-pds">"</span></span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span class="pl-c1">3</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 weeks, 1 day, 1 hour<span class="pl-pds">"</span></span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span class="pl-c1">4</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 weeks, 1 day, 1 hour, 30 seconds<span class="pl-pds">"</span></span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span class="pl-c1">5</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds<span class="pl-pds">"</span></span></pre></div>
+TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 weeks<span class="pl-pds">"</span></span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span class="pl-c1">3</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 weeks, 1 day, 1 hour<span class="pl-pds">"</span></span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span class="pl-c1">4</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 weeks, 1 day, 1 hour, 30 seconds<span class="pl-pds">"</span></span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span class="pl-c1">5</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds<span class="pl-pds">"</span></span></pre></div>
 
 <p>By default when using <code>precision</code> parameter empty time units are not counted towards the precision of the returned value.
 If this behavior isn't desired for you, you can use the overloaded <code>TimeSpan.Humanize</code> method with <code>countEmptyUnits</code> parameter. Leading empty time units never count.
 Here is an example showing the difference of counting empty units:</p>
 
-<div class="highlight highlight-C#"><pre>TimeSpan.FromMilliseconds(<span class="pl-c1">3603001</span>).Humanize(<span class="pl-c1">3</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 hour, 3 seconds, 1 millisecond<span class="pl-pds">"</span></span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">3603001</span>).Humanize(<span class="pl-c1">3</span>, countEmptyUnits:<span class="pl-c1">true</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 hour, 3 seconds<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre>TimeSpan.FromMilliseconds(<span class="pl-c1">3603001</span>).Humanize(<span class="pl-c1">3</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 hour, 3 seconds, 1 millisecond<span class="pl-pds">"</span></span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">3603001</span>).Humanize(<span class="pl-c1">3</span>, countEmptyUnits:<span class="pl-c1">true</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 hour, 3 seconds<span class="pl-pds">"</span></span></pre></div>
 
 <p>Many localizations are available for this method:</p>
 
 <div class="highlight highlight-C#"><pre><span class="pl-c">// in de-DE culture</span>
-TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Ein Tag<span class="pl-pds">"</span></span>
-TimeSpan.FromDays(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 Tage<span class="pl-pds">"</span></span>
+TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Ein Tag<span class="pl-pds">"</span></span>
+TimeSpan.FromDays(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 Tage<span class="pl-pds">"</span></span>
 
 <span class="pl-c">// in sk-SK culture</span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 milisekunda<span class="pl-pds">"</span></span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 milisekundy<span class="pl-pds">"</span></span>
-TimeSpan.FromMilliseconds(<span class="pl-c1">5</span>).Humanize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>5 milisekúnd<span class="pl-pds">"</span></span></pre></div>
+TimeSpan.FromMilliseconds(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 milisekunda<span class="pl-pds">"</span></span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 milisekundy<span class="pl-pds">"</span></span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">5</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>5 milisekúnd<span class="pl-pds">"</span></span></pre></div>
 
 <p>Culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Example:</p>
 
-<div class="highlight highlight-C#"><pre>TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize(culture: <span class="pl-s1"><span class="pl-pds">"</span>ru-RU<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>один день<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre>TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize(culture: <span class="pl-s"><span class="pl-pds">"</span>ru-RU<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>один день<span class="pl-pds">"</span></span></pre></div>
+
+<p>In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:</p>
+
+<div class="highlight highlight-C#"><pre>TimeSpan.FromDays(<span class="pl-c1">7</span>).Humanize(maxUnit: TimeUnit.Day) =&gt; <span class="pl-s"><span class="pl-pds">"</span>7 days<span class="pl-pds">"</span></span>    <span class="pl-c">// instead of 1 week</span>
+TimeSpan.FromMilliseconds(<span class="pl-c1">2000</span>).Humanize(maxUnit: TimeUnit.Millisecond) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2000 milliseconds<span class="pl-pds">"</span></span>    <span class="pl-c">// instead of 2 seconds</span></pre></div>
 
 <h3>
 <a id="humanize-collections" class="anchor" href="#humanize-collections" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="humanize-collections">Humanize Collections</a>
@@ -403,32 +412,32 @@ TimeSpan.FromMilliseconds(<span class="pl-c1">5</span>).Humanize() =&gt; <span c
 
 <p>For instance:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">class</span> <span class="pl-en">SomeClass</span>
+<div class="highlight highlight-C#"><pre><span class="pl-k">class</span> <span class="pl-en">SomeClass</span>
 {
-    <span class="pl-s">public</span> <span class="pl-st">string</span> SomeString;
-    <span class="pl-s">public</span> <span class="pl-st">int</span> SomeInt;
-    <span class="pl-s">public</span> <span class="pl-s">override</span> <span class="pl-st">string</span> <span class="pl-en">ToString</span>()
+    <span class="pl-k">public</span> <span class="pl-k">string</span> SomeString;
+    <span class="pl-k">public</span> <span class="pl-k">int</span> SomeInt;
+    <span class="pl-k">public</span> <span class="pl-k">override</span> <span class="pl-k">string</span> <span class="pl-en">ToString</span>()
     {
-        <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>Specific String<span class="pl-pds">"</span></span>;
+        <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">"</span>Specific String<span class="pl-pds">"</span></span>;
     }
 }
 
-<span class="pl-st">string</span> FormatSomeClass(SomeClass sc)
+<span class="pl-k">string</span> FormatSomeClass(SomeClass sc)
 {
-    <span class="pl-k">return</span> <span class="pl-st">string</span>.Format(<span class="pl-s1"><span class="pl-pds">"</span>SomeObject #{0} - {1}<span class="pl-pds">"</span></span>, sc.SomeInt, sc.SomeString);
+    <span class="pl-k">return</span> <span class="pl-k">string</span>.Format(<span class="pl-s"><span class="pl-pds">"</span>SomeObject #{0} - {1}<span class="pl-pds">"</span></span>, sc.SomeInt, sc.SomeString);
 }
 
-<span class="pl-k">var</span> collection = <span class="pl-s">new</span> List&lt;SomeClass&gt;
+<span class="pl-k">var</span> collection = <span class="pl-k">new</span> List&lt;SomeClass&gt;
     {
-        <span class="pl-s">new</span> SomeClass { SomeInt = <span class="pl-c1">1</span>, SomeString = <span class="pl-s1"><span class="pl-pds">"</span>One<span class="pl-pds">"</span></span> },
-        <span class="pl-s">new</span> SomeClass { SomeInt = <span class="pl-c1">2</span>, SomeString = <span class="pl-s1"><span class="pl-pds">"</span>Two<span class="pl-pds">"</span></span> },
-        <span class="pl-s">new</span> SomeClass { SomeInt = <span class="pl-c1">3</span>, SomeString = <span class="pl-s1"><span class="pl-pds">"</span>Three<span class="pl-pds">"</span></span> }
+        <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">1</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>One<span class="pl-pds">"</span></span> },
+        <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">2</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>Two<span class="pl-pds">"</span></span> },
+        <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">3</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>Three<span class="pl-pds">"</span></span> }
     };
 
 collection.Humanize()                                    <span class="pl-c">// "Specific String, Specific String, and Specific String"</span>
-collection.Humanize(<span class="pl-s1"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>)                                <span class="pl-c">//"Specific String, Specific String, or Specific String"</span>
+collection.Humanize(<span class="pl-s"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>)                                <span class="pl-c">//"Specific String, Specific String, or Specific String"</span>
 collection.Humanize(FormatSomeClass)                     <span class="pl-c">//"SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"</span>
-collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s1"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>) <span class="pl-c">//"1st, 2nd, or 3rd"</span></pre></div>
+collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>) <span class="pl-c">//"1st, 2nd, or 3rd"</span></pre></div>
 
 <p>You can provide your own collection formatter by implementing <code>ICollectionFormatter</code> and registering it with <code>Configurator.CollectionFormatters</code></p>
 
@@ -444,14 +453,14 @@ collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s1"><span 
 
 <p><code>Pluralize</code> pluralizes the provided input while taking irregular and uncountable words into consideration:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>.Pluralize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>.Pluralize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>.Pluralize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>.Pluralize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span></pre></div>
 
 <p>Normally you would call <code>Pluralize</code> on a singular word but if you're unsure about the singularity of the word you can call the method with the optional <code>inputIsKnownToBeSingular</code> argument:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>.Pluralize(inputIsKnownToBeSingular: <span class="pl-c1">false</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>.Pluralize(inputIsKnownToBeSingular: <span class="pl-c1">false</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>.Pluralize(inputIsKnownToBeSingular: <span class="pl-c1">false</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>.Pluralize(inputIsKnownToBeSingular: <span class="pl-c1">false</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>.Pluralize(inputIsKnownToBeSingular: <span class="pl-c1">false</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span>.Pluralize(inputIsKnownToBeSingular: <span class="pl-c1">false</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span></pre></div>
 
 <p>The overload of <code>Pluralize</code> with <code>plurality</code> argument is obsolete and will be removed in next major release.</p>
 
@@ -461,14 +470,14 @@ collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s1"><span 
 
 <p><code>Singularize</code> singularizes the provided input while taking irregular and uncountable words into consideration:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>.Singularize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span>.Singularize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>.Singularize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span>.Singularize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span></pre></div>
 
 <p>Normally you would call <code>Singularize</code> on a plural word but if you're unsure about the plurality of the word you can call the method with the optional <code>inputIsKnownToBePlural</code> argument:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>.Singularize(inputIsKnownToBePlural: <span class="pl-c1">false</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>.Singularize(inputIsKnownToBePlural: <span class="pl-c1">false</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span>.Singularize(inputIsKnownToBePlural: <span class="pl-c1">false</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>Men<span class="pl-pds">"</span></span>.Singularize(inputIsKnownToBePlural: <span class="pl-c1">false</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>.Singularize(inputIsKnownToBePlural: <span class="pl-c1">false</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>Man<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span>.Singularize(inputIsKnownToBePlural: <span class="pl-c1">false</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span></pre></div>
 
 <p>The overload of <code>Singularize</code> with <code>plurality</code> argument is obsolete and will be removed in next major release.</p>
 
@@ -478,31 +487,31 @@ collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s1"><span 
 
 <p>Many times you want to call <code>Singularize</code> and <code>Pluralize</code> to prefix a word with a number; e.g. "2 requests", "3 men". <code>ToQuantity</code> prefixes the provided word with the number and accordingly pluralizes or singularizes the word:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">0</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>0 cases<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 case<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">5</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>5 cases<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>man<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">0</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>0 men<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>man<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 man<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>man<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 men<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">0</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>0 cases<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 case<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">5</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>5 cases<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>man<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">0</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>0 men<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>man<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 man<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>man<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 men<span class="pl-pds">"</span></span></pre></div>
 
 <p><code>ToQuantity</code> can figure out whether the input word is singular or plural and will singularize or pluralize as necessary:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>men<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 men<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>process<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 processes<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>process<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 process<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>processes<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2 processes<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>processes<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1 process<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>men<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 men<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>process<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 processes<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>process<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 process<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>processes<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 processes<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>processes<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">1</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 process<span class="pl-pds">"</span></span></pre></div>
 
 <p>You can also pass a second argument, <code>ShowQuantityAs</code>, to <code>ToQuantity</code> to specify how you want the provided quantity to be outputted. The default value is <code>ShowQuantityAs.Numeric</code> which is what we saw above. The other two values are <code>ShowQuantityAs.Words</code> and <code>ShowQuantityAs.None</code>.</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">5</span>, ShowQuantityAs.Words) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>five cases<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">5</span>, ShowQuantityAs.None) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>cases<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">5</span>, ShowQuantityAs.Words) =&gt; <span class="pl-s"><span class="pl-pds">"</span>five cases<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>case<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">5</span>, ShowQuantityAs.None) =&gt; <span class="pl-s"><span class="pl-pds">"</span>cases<span class="pl-pds">"</span></span></pre></div>
 
 <p>There is also an overload that allows you to format the number. You can pass in the format and the culture to be used.</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>dollar<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>, <span class="pl-s1"><span class="pl-pds">"</span>C0<span class="pl-pds">"</span></span>, <span class="pl-s">new</span> CultureInfo(<span class="pl-s1"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>$2 dollars<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>dollar<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>, <span class="pl-s1"><span class="pl-pds">"</span>C2<span class="pl-pds">"</span></span>, <span class="pl-s">new</span> CultureInfo(<span class="pl-s1"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>$2.00 dollars<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>cases<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">12000</span>, <span class="pl-s1"><span class="pl-pds">"</span>N0<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>12,000 cases<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>dollar<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>, <span class="pl-s"><span class="pl-pds">"</span>C0<span class="pl-pds">"</span></span>, <span class="pl-k">new</span> CultureInfo(<span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s"><span class="pl-pds">"</span>$2 dollars<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>dollar<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">2</span>, <span class="pl-s"><span class="pl-pds">"</span>C2<span class="pl-pds">"</span></span>, <span class="pl-k">new</span> CultureInfo(<span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s"><span class="pl-pds">"</span>$2.00 dollars<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>cases<span class="pl-pds">"</span></span>.ToQuantity(<span class="pl-c1">12000</span>, <span class="pl-s"><span class="pl-pds">"</span>N0<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>12,000 cases<span class="pl-pds">"</span></span></pre></div>
 
 <h4>
 <a id="ordinalize" class="anchor" href="#ordinalize" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="ordinalize">Ordinalize</a>
@@ -510,8 +519,8 @@ collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s1"><span 
 
 <p><code>Ordinalize</code> turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-c1">1.</span>Ordinalize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1st<span class="pl-pds">"</span></span>
-<span class="pl-c1">5.</span>Ordinalize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>5th<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-c1">1.</span>Ordinalize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>1st<span class="pl-pds">"</span></span>
+<span class="pl-c1">5.</span>Ordinalize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>5th<span class="pl-pds">"</span></span></pre></div>
 
 <p>You can also call <code>Ordinalize</code> on a numeric string and achieve the same result: <code>"21".Ordinalize()</code> =&gt; <code>"21st"</code></p>
 
@@ -520,12 +529,12 @@ You can pass an argument to <code>Ordinalize</code> to specify which gender the 
 The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="pl-c">// for Brazilian Portuguese locale</span>
-<span class="pl-c1">1.</span>Ordinalize(GrammaticalGender.Masculine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1º<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>Ordinalize(GrammaticalGender.Feminine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1ª<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>Ordinalize(GrammaticalGender.Neuter) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>1º<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>.Ordinalize(GrammaticalGender.Masculine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2º<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>.Ordinalize(GrammaticalGender.Feminine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2ª<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>.Ordinalize(GrammaticalGender.Neuter) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>2º<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-c1">1.</span>Ordinalize(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1º<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>Ordinalize(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1ª<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>Ordinalize(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1º<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>.Ordinalize(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2º<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>.Ordinalize(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2ª<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>.Ordinalize(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2º<span class="pl-pds">"</span></span></pre></div>
 
 <p>Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.</p>
 
@@ -541,7 +550,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p><code>Pascalize</code> converts the input words to UpperCamelCase, also removing underscores:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Pascalize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>SomeTitle<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Pascalize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>SomeTitle<span class="pl-pds">"</span></span></pre></div>
 
 <h4>
 <a id="camelize" class="anchor" href="#camelize" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="camelize">Camelize</a>
@@ -549,7 +558,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p><code>Camelize</code> behaves identically to <code>Pascalize</code>, except that the first character is lower case:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Camelize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>someTitle<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Camelize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>someTitle<span class="pl-pds">"</span></span></pre></div>
 
 <h4>
 <a id="underscore" class="anchor" href="#underscore" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="underscore">Underscore</a>
@@ -557,7 +566,7 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p><code>Underscore</code> separates the input words with underscore:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>SomeTitle<span class="pl-pds">"</span></span>.Underscore() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>SomeTitle<span class="pl-pds">"</span></span>.Underscore() =&gt; <span class="pl-s"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span></pre></div>
 
 <h4>
 <a id="dasherize--hyphenate" class="anchor" href="#dasherize--hyphenate" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="dasherize--hyphenate">Dasherize &amp; Hyphenate</a>
@@ -565,8 +574,8 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p><code>Dasherize</code> and <code>Hyphenate</code> replace underscores with dashes in the string:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Dasherize() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>some-title<span class="pl-pds">"</span></span>
-<span class="pl-s1"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Hyphenate() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>some-title<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Dasherize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>some-title<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>some_title<span class="pl-pds">"</span></span>.Hyphenate() =&gt; <span class="pl-s"><span class="pl-pds">"</span>some-title<span class="pl-pds">"</span></span></pre></div>
 
 <h3>
 <a id="fluent-date" class="anchor" href="#fluent-date" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="fluent-date">Fluent Date</a>
@@ -613,7 +622,7 @@ On.February.The(<span class="pl-c1">12</span>) <span class="pl-c">// Returns 12t
 
 <p>and some extension methods:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-k">var</span> someDateTime = <span class="pl-s">new</span> DateTime(<span class="pl-c1">2011</span>, <span class="pl-c1">2</span>, <span class="pl-c1">10</span>, <span class="pl-c1">5</span>, <span class="pl-c1">25</span>, <span class="pl-c1">45</span>, <span class="pl-c1">125</span>);
+<div class="highlight highlight-C#"><pre><span class="pl-k">var</span> someDateTime = <span class="pl-k">new</span> DateTime(<span class="pl-c1">2011</span>, <span class="pl-c1">2</span>, <span class="pl-c1">10</span>, <span class="pl-c1">5</span>, <span class="pl-c1">25</span>, <span class="pl-c1">45</span>, <span class="pl-c1">125</span>);
 
 <span class="pl-c">// Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008</span>
 someDateTime.In(<span class="pl-c1">2008</span>)
@@ -638,26 +647,26 @@ someDateTime.AtMidnight()</pre></div>
 
 <p>Humanizer can change numbers to words using the <code>ToWords</code> extension:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-c1">1.</span>ToWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>one<span class="pl-pds">"</span></span>
-<span class="pl-c1">10.</span>ToWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>ten<span class="pl-pds">"</span></span>
-<span class="pl-c1">11.</span>ToWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>eleven<span class="pl-pds">"</span></span>
-<span class="pl-c1">122.</span>ToWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>one hundred and twenty-two<span class="pl-pds">"</span></span>
-<span class="pl-c1">3501.</span>ToWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>three thousand five hundred and one<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-c1">1.</span>ToWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>one<span class="pl-pds">"</span></span>
+<span class="pl-c1">10.</span>ToWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>ten<span class="pl-pds">"</span></span>
+<span class="pl-c1">11.</span>ToWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>eleven<span class="pl-pds">"</span></span>
+<span class="pl-c1">122.</span>ToWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>one hundred and twenty-two<span class="pl-pds">"</span></span>
+<span class="pl-c1">3501.</span>ToWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>three thousand five hundred and one<span class="pl-pds">"</span></span></pre></div>
 
 <p>You can also pass a second argument, <code>GrammaticalGender</code>, to <code>ToWords</code> to specify which gender the number should be outputted in.
 The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="pl-c">// for Russian locale</span>
-<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>один<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>одна<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>одно<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>один<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>одна<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>одно<span class="pl-pds">"</span></span></pre></div>
 
 <p>Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.</p>
 
 <p>Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-c1">11.</span>ToWords(<span class="pl-s">new</span> CultureInfo(<span class="pl-s1"><span class="pl-pds">"</span>en<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>eleven<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Masculine, <span class="pl-s">new</span> CultureInfo(<span class="pl-s1"><span class="pl-pds">"</span>ru<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>один<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-c1">11.</span>ToWords(<span class="pl-k">new</span> CultureInfo(<span class="pl-s"><span class="pl-pds">"</span>en<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s"><span class="pl-pds">"</span>eleven<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Masculine, <span class="pl-k">new</span> CultureInfo(<span class="pl-s"><span class="pl-pds">"</span>ru<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s"><span class="pl-pds">"</span>один<span class="pl-pds">"</span></span></pre></div>
 
 <h3>
 <a id="number-to-ordinal-words" class="anchor" href="#number-to-ordinal-words" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="number-toordinalwords">Number to ordinal words</a>
@@ -665,35 +674,35 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p>This is kind of mixing <code>ToWords</code> with <code>Ordinalize</code>. You can call <code>ToOrdinalWords</code> on a number to get an ordinal representation of the number in words! For example:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-c1">0.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>zeroth<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>first<span class="pl-pds">"</span></span>
-<span class="pl-c1">2.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>second<span class="pl-pds">"</span></span>
-<span class="pl-c1">8.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>eighth<span class="pl-pds">"</span></span>
-<span class="pl-c1">10.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>tenth<span class="pl-pds">"</span></span>
-<span class="pl-c1">11.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>eleventh<span class="pl-pds">"</span></span>
-<span class="pl-c1">12.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>twelfth<span class="pl-pds">"</span></span>
-<span class="pl-c1">20.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>twentieth<span class="pl-pds">"</span></span>
-<span class="pl-c1">21.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>twenty first<span class="pl-pds">"</span></span>
-<span class="pl-c1">121.</span>ToOrdinalWords() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>hundred and twenty first<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-c1">0.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>zeroth<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>first<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>second<span class="pl-pds">"</span></span>
+<span class="pl-c1">8.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>eighth<span class="pl-pds">"</span></span>
+<span class="pl-c1">10.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>tenth<span class="pl-pds">"</span></span>
+<span class="pl-c1">11.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>eleventh<span class="pl-pds">"</span></span>
+<span class="pl-c1">12.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>twelfth<span class="pl-pds">"</span></span>
+<span class="pl-c1">20.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>twentieth<span class="pl-pds">"</span></span>
+<span class="pl-c1">21.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>twenty first<span class="pl-pds">"</span></span>
+<span class="pl-c1">121.</span>ToOrdinalWords() =&gt; <span class="pl-s"><span class="pl-pds">"</span>hundred and twenty first<span class="pl-pds">"</span></span></pre></div>
 
 <p><code>ToOrdinalWords</code> also supports grammatical gender.
 You can pass a second argument to <code>ToOrdinalWords</code> to specify the gender of the output.
 The possible values are <code>GrammaticalGender.Masculine</code>, <code>GrammaticalGender.Feminine</code> and <code>GrammaticalGender.Neuter</code>:</p>
 
 <div class="highlight highlight-C#"><pre><span class="pl-c">// for Brazilian Portuguese locale</span>
-<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>primeiro<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>primeira<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>primeiro<span class="pl-pds">"</span></span>
-<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>segundo<span class="pl-pds">"</span></span>
-<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>segunda<span class="pl-pds">"</span></span>
-<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>segundo<span class="pl-pds">"</span></span></pre></div>
+<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>primeiro<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>primeira<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>primeiro<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>segundo<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>segunda<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>segundo<span class="pl-pds">"</span></span></pre></div>
 
 <p>Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.</p>
 
 <p>Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-c1">10.</span>ToOrdinalWords(<span class="pl-s">new</span> CultureInfo(<span class="pl-s1"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>tenth<span class="pl-pds">"</span></span>
-<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Masculine, <span class="pl-s">new</span> CulureInfo(<span class="pl-s1"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s1"><span class="pl-pds">"</span>primeiro<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-c1">10.</span>ToOrdinalWords(<span class="pl-k">new</span> CultureInfo(<span class="pl-s"><span class="pl-pds">"</span>en-US<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s"><span class="pl-pds">"</span>tenth<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Masculine, <span class="pl-k">new</span> CulureInfo(<span class="pl-s"><span class="pl-pds">"</span>pt-BR<span class="pl-pds">"</span></span>)) =&gt; <span class="pl-s"><span class="pl-pds">"</span>primeiro<span class="pl-pds">"</span></span></pre></div>
 
 <h3>
 <a id="roman-numerals" class="anchor" href="#roman-numerals" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="roman-numerals">Roman numerals</a>
@@ -701,24 +710,24 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 
 <p>Humanizer can change numbers to Roman numerals using the <code>ToRoman</code> extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-c1">1.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>I<span class="pl-pds">"</span></span>
-<span class="pl-c1">2.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>II<span class="pl-pds">"</span></span>
-<span class="pl-c1">3.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>III<span class="pl-pds">"</span></span>
-<span class="pl-c1">4.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>IV<span class="pl-pds">"</span></span>
-<span class="pl-c1">5.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>V<span class="pl-pds">"</span></span>
-<span class="pl-c1">6.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>VI<span class="pl-pds">"</span></span>
-<span class="pl-c1">7.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>VII<span class="pl-pds">"</span></span>
-<span class="pl-c1">8.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>VIII<span class="pl-pds">"</span></span>
-<span class="pl-c1">9.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>IX<span class="pl-pds">"</span></span>
-<span class="pl-c1">10.</span>ToRoman() =&gt; <span class="pl-s1"><span class="pl-pds">"</span>X<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-c1">1.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>I<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>II<span class="pl-pds">"</span></span>
+<span class="pl-c1">3.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>III<span class="pl-pds">"</span></span>
+<span class="pl-c1">4.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>IV<span class="pl-pds">"</span></span>
+<span class="pl-c1">5.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>V<span class="pl-pds">"</span></span>
+<span class="pl-c1">6.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>VI<span class="pl-pds">"</span></span>
+<span class="pl-c1">7.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>VII<span class="pl-pds">"</span></span>
+<span class="pl-c1">8.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>VIII<span class="pl-pds">"</span></span>
+<span class="pl-c1">9.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>IX<span class="pl-pds">"</span></span>
+<span class="pl-c1">10.</span>ToRoman() =&gt; <span class="pl-s"><span class="pl-pds">"</span>X<span class="pl-pds">"</span></span></pre></div>
 
 <p>Also the reverse operation using the <code>FromRoman</code> extension.</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s1"><span class="pl-pds">"</span>I<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">1</span>
-<span class="pl-s1"><span class="pl-pds">"</span>II<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">2</span>
-<span class="pl-s1"><span class="pl-pds">"</span>III<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">3</span>
-<span class="pl-s1"><span class="pl-pds">"</span>IV<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">4</span>
-<span class="pl-s1"><span class="pl-pds">"</span>V<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">5</span></pre></div>
+<div class="highlight highlight-C#"><pre><span class="pl-s"><span class="pl-pds">"</span>I<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">1</span>
+<span class="pl-s"><span class="pl-pds">"</span>II<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">2</span>
+<span class="pl-s"><span class="pl-pds">"</span>III<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">3</span>
+<span class="pl-s"><span class="pl-pds">"</span>IV<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">4</span>
+<span class="pl-s"><span class="pl-pds">"</span>V<span class="pl-pds">"</span></span>.FromRoman() =&gt; <span class="pl-c1">5</span></pre></div>
 
 <h3>
 <a id="bytesize" class="anchor" href="#bytesize" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="bytesize">ByteSize</a>
@@ -775,21 +784,21 @@ The formatter uses the built in <a href="http://msdn.microsoft.com/en-us/library
 <div class="highlight highlight-C#"><pre><span class="pl-k">var</span> b = (<span class="pl-c1">10.505</span>).Kilobytes();
 
 <span class="pl-c">// Default number format is #.##</span>
-b.ToString(<span class="pl-s1"><span class="pl-pds">"</span>KB<span class="pl-pds">"</span></span>);         <span class="pl-c">// 10.52 KB</span>
-b.Humanize(<span class="pl-s1"><span class="pl-pds">"</span>MB<span class="pl-pds">"</span></span>);         <span class="pl-c">// .01 MB</span>
-b.Humanize(<span class="pl-s1"><span class="pl-pds">"</span>b<span class="pl-pds">"</span></span>);          <span class="pl-c">// 86057 b</span>
+b.ToString(<span class="pl-s"><span class="pl-pds">"</span>KB<span class="pl-pds">"</span></span>);         <span class="pl-c">// 10.52 KB</span>
+b.Humanize(<span class="pl-s"><span class="pl-pds">"</span>MB<span class="pl-pds">"</span></span>);         <span class="pl-c">// .01 MB</span>
+b.Humanize(<span class="pl-s"><span class="pl-pds">"</span>b<span class="pl-pds">"</span></span>);          <span class="pl-c">// 86057 b</span>
 
 <span class="pl-c">// Default symbol is the largest metric prefix value &gt;= 1</span>
-b.ToString(<span class="pl-s1"><span class="pl-pds">"</span>#.#<span class="pl-pds">"</span></span>);        <span class="pl-c">// 10.5 KB</span>
+b.ToString(<span class="pl-s"><span class="pl-pds">"</span>#.#<span class="pl-pds">"</span></span>);        <span class="pl-c">// 10.5 KB</span>
 
 <span class="pl-c">// All valid values of double.ToString(string format) are acceptable</span>
-b.ToString(<span class="pl-s1"><span class="pl-pds">"</span>0.0000<span class="pl-pds">"</span></span>);     <span class="pl-c">// 10.5050 KB</span>
-b.Humanize(<span class="pl-s1"><span class="pl-pds">"</span>000.00<span class="pl-pds">"</span></span>);     <span class="pl-c">// 010.51 KB</span>
+b.ToString(<span class="pl-s"><span class="pl-pds">"</span>0.0000<span class="pl-pds">"</span></span>);     <span class="pl-c">// 10.5050 KB</span>
+b.Humanize(<span class="pl-s"><span class="pl-pds">"</span>000.00<span class="pl-pds">"</span></span>);     <span class="pl-c">// 010.51 KB</span>
 
 <span class="pl-c">// You can include number format and symbols</span>
-b.ToString(<span class="pl-s1"><span class="pl-pds">"</span>#.#### MB<span class="pl-pds">"</span></span>);  <span class="pl-c">// .0103 MB</span>
-b.Humanize(<span class="pl-s1"><span class="pl-pds">"</span>0.00 GB<span class="pl-pds">"</span></span>);    <span class="pl-c">// 0 GB</span>
-b.Humanize(<span class="pl-s1"><span class="pl-pds">"</span>#.## B<span class="pl-pds">"</span></span>);     <span class="pl-c">// 10757.12 B</span></pre></div>
+b.ToString(<span class="pl-s"><span class="pl-pds">"</span>#.#### MB<span class="pl-pds">"</span></span>);  <span class="pl-c">// .0103 MB</span>
+b.Humanize(<span class="pl-s"><span class="pl-pds">"</span>0.00 GB<span class="pl-pds">"</span></span>);    <span class="pl-c">// 0 GB</span>
+b.Humanize(<span class="pl-s"><span class="pl-pds">"</span>#.## B<span class="pl-pds">"</span></span>);     <span class="pl-c">// 10757.12 B</span></pre></div>
 
 <p>There isn't a <code>Dehumanize</code> method to turn a string representation back into a <code>ByteSize</code> instance; but you can use <code>Parse</code> and <code>TryParse</code> on <code>ByteSize</code> to do that.
 Like other <code>TryParse</code> methods, <code>ByteSize.TryParse</code> returns <code>boolean</code> value indicating whether or not the parsing was successful.
@@ -855,14 +864,14 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
 
 <span class="pl-k">namespace</span> <span class="pl-en">YourApp</span>
 {
-    <span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">HumanizerMetadataProvider</span> : <span class="pl-st">DataAnnotationsModelMetadataProvider</span>
+    <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">HumanizerMetadataProvider</span> : <span class="pl-k">DataAnnotationsModelMetadataProvider</span>
     {
-        <span class="pl-s">protected</span> <span class="pl-s">override</span> ModelMetadata <span class="pl-en">CreateMetadata</span>(
+        <span class="pl-k">protected</span> <span class="pl-k">override</span> ModelMetadata <span class="pl-en">CreateMetadata</span>(
             IEnumerable&lt;Attribute&gt; attributes,
-            <span class="pl-st">Type</span> <span class="pl-vpf">containerType</span>,
+            <span class="pl-k">Type</span> <span class="pl-smi">containerType</span>,
             Func&lt;object&gt; modelAccessor,
-            <span class="pl-st">Type</span> <span class="pl-vpf">modelType</span>,
-            <span class="pl-st">string</span> <span class="pl-vpf">propertyName</span>)
+            <span class="pl-k">Type</span> <span class="pl-smi">modelType</span>,
+            <span class="pl-k">string</span> <span class="pl-smi">propertyName</span>)
         {
             <span class="pl-k">var</span> propertyAttributes = attributes.ToList();
             <span class="pl-k">var</span> modelMetadata = <span class="pl-c1">base</span>.CreateMetadata(propertyAttributes, containerType, modelAccessor, modelType, propertyName);
@@ -873,9 +882,9 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
             <span class="pl-k">return</span> modelMetadata;
         }
 
-        <span class="pl-s">private</span> <span class="pl-s">static</span> <span class="pl-st">bool</span> <span class="pl-en">IsTransformRequired</span>(<span class="pl-st">ModelMetadata</span> <span class="pl-vpf">modelMetadata</span>, IList&lt;Attribute&gt; propertyAttributes)
+        <span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">bool</span> <span class="pl-en">IsTransformRequired</span>(<span class="pl-k">ModelMetadata</span> <span class="pl-smi">modelMetadata</span>, IList&lt;Attribute&gt; propertyAttributes)
         {
-            <span class="pl-k">if</span> (<span class="pl-st">string</span>.IsNullOrEmpty(modelMetadata.PropertyName))
+            <span class="pl-k">if</span> (<span class="pl-k">string</span>.IsNullOrEmpty(modelMetadata.PropertyName))
                 <span class="pl-k">return</span> <span class="pl-c1">false</span>;
 
             <span class="pl-k">if</span> (propertyAttributes.OfType&lt;DisplayNameAttribute&gt;().Any())
@@ -896,29 +905,29 @@ For other properties it will Humanize the property name. That is all.</p>
 <p>Now you need to register this metadata provider with Asp.Net MVC.
 Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <code>System.Web.ModelBinding.ModelMetadataProviders</code>:</p>
 
-<div class="highlight highlight-C#"><pre>ModelMetadataProviders.Current = <span class="pl-s">new</span> HumanizerMetadataProvider();</pre></div>
+<div class="highlight highlight-C#"><pre>ModelMetadataProviders.Current = <span class="pl-k">new</span> HumanizerMetadataProvider();</pre></div>
 
 <p>... and now you can replace:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">RegisterModel</span>
+<div class="highlight highlight-C#"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">RegisterModel</span>
 {
-    [Display(Name = <span class="pl-s1"><span class="pl-pds">"</span>User name<span class="pl-pds">"</span></span>)]
-    <span class="pl-s">public</span> <span class="pl-st">string</span> <span class="pl-en">UserName</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
+    [Display(Name = <span class="pl-s"><span class="pl-pds">"</span>User name<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">UserName</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
 
-    [Display(Name = <span class="pl-s1"><span class="pl-pds">"</span>Email address<span class="pl-pds">"</span></span>)]
-    <span class="pl-s">public</span> <span class="pl-st">string</span> <span class="pl-en">EmailAddress</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
+    [Display(Name = <span class="pl-s"><span class="pl-pds">"</span>Email address<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">EmailAddress</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
 
-    [Display(Name = <span class="pl-s1"><span class="pl-pds">"</span>Confirm password<span class="pl-pds">"</span></span>)]
-    <span class="pl-s">public</span> <span class="pl-st">string</span> <span class="pl-en">ConfirmPassword</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
+    [Display(Name = <span class="pl-s"><span class="pl-pds">"</span>Confirm password<span class="pl-pds">"</span></span>)]
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">ConfirmPassword</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
 }</pre></div>
 
 <p>with:</p>
 
-<div class="highlight highlight-C#"><pre><span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">RegisterModel</span>
+<div class="highlight highlight-C#"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">RegisterModel</span>
 {
-    <span class="pl-s">public</span> <span class="pl-st">string</span> <span class="pl-en">UserName</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
-    <span class="pl-s">public</span> <span class="pl-st">string</span> <span class="pl-en">EmailAddress</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
-    <span class="pl-s">public</span> <span class="pl-st">string</span> <span class="pl-en">ConfirmPassword</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">UserName</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">EmailAddress</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
+    <span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-en">ConfirmPassword</span> { <span class="pl-k">get</span>; <span class="pl-k">set</span>; }
 }</pre></div>
 
 <p>... and the "metadata humanizer" will take care of the rest.</p>
