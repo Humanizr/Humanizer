@@ -19,8 +19,9 @@
         /// <param name="timeUnit"></param>
         /// <param name="timeUnitTense"></param>
         /// <param name="unit"></param>
+        /// <param name="showQuantityAs"></param>
         /// <returns></returns>
-        string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit);
+        string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit, ShowQuantityAs showQuantityAs);
 
         /// <summary>
         /// 0 seconds
@@ -33,7 +34,8 @@
         /// </summary>
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
+        /// <param name="showQuantityAs"></param>
         /// <returns></returns>
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit);
+        string TimeSpanHumanize(TimeUnit timeUnit, int unit, ShowQuantityAs showQuantityAs);
     }
 }
