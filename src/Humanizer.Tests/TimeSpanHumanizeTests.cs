@@ -178,7 +178,7 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, ShowQuantityAs.Words, "ten milliseconds")]
+        [InlineData(10, ShowQuantityAs.Words, "ten milliseconds")]
         [InlineData(6 * 24 * 60 * 60 * 1000, ShowQuantityAs.Words, "six days")]
         [InlineData(11 * 60 * 60 * 1000, ShowQuantityAs.Words, "eleven hours")]
         public void CanSpecifyHowToShowQuantity(int ms, ShowQuantityAs showQuantityAs, string expected)
