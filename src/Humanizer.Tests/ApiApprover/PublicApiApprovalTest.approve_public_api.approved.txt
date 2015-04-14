@@ -144,42 +144,42 @@ public class LocaliserRegistry`1
 
 public class DateHumanizeExtensions
 {
-    public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst, System.Globalization.CultureInfo culture) { }
-    public string Humanize(System.DateTimeOffset input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst, System.Globalization.CultureInfo culture) { }
+    public string Humanize(System.DateTime input, bool utcDate, System.Nullable<System.DateTime> dateToCompareAgainst, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs) { }
+    public string Humanize(System.DateTimeOffset input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs) { }
 }
 
 public class DefaultDateTimeHumanizeStrategy
 {
     public DefaultDateTimeHumanizeStrategy() { }
-    public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+    public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs) { }
 }
 
 public class DefaultDateTimeOffsetHumanizeStrategy
 {
     public DefaultDateTimeOffsetHumanizeStrategy() { }
-    public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+    public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs) { }
 }
 
 public interface IDateTimeHumanizeStrategy
 {
-    string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
+    string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs);
 }
 
 public interface IDateTimeOffsetHumanizeStrategy
 {
-    string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
+    string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs);
 }
 
 public class PrecisionDateTimeHumanizeStrategy
 {
     public PrecisionDateTimeHumanizeStrategy(double precision) { }
-    public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+    public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs) { }
 }
 
 public class PrecisionDateTimeOffsetHumanizeStrategy
 {
     public PrecisionDateTimeOffsetHumanizeStrategy(double precision) { }
-    public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+    public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture, Humanizer.ShowQuantityAs showQuantityAs) { }
 }
 
 public class EnumDehumanizeExtensions
@@ -287,7 +287,7 @@ public interface ICollectionFormatter
 public class DefaultFormatter
 {
     public DefaultFormatter(string localeCode) { }
-    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
+    public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit, Humanizer.ShowQuantityAs showQuantityAs) { }
     public string DateHumanize_Now() { }
     public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
     public string TimeSpanHumanize_Zero() { }
@@ -295,9 +295,9 @@ public class DefaultFormatter
 
 public interface IFormatter
 {
-    string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
+    string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit, Humanizer.ShowQuantityAs showQuantityAs);
     string DateHumanize_Now();
-    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
+    string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, Humanizer.ShowQuantityAs showQuantityAs);
     string TimeSpanHumanize_Zero();
 }
 

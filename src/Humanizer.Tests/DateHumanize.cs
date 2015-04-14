@@ -9,30 +9,30 @@ namespace Humanizer.Tests
 {
     public class DateHumanize
     {
-        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
+        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow, CultureInfo culture, ShowQuantityAs showQuantityAs)
         {
             var utcNow = DateTime.UtcNow;
             var localNow = DateTime.Now;
 
             // feels like the only way to avoid breaking tests because CPU ticks over is to inject the base date
-            VerifyWithDate(expectedString, deltaFromNow, culture, localNow, utcNow);
+            VerifyWithDate(expectedString, deltaFromNow, culture, localNow, utcNow, showQuantityAs);
         }
 
-        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
+        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow, CultureInfo culture, ShowQuantityAs showQuantityAs)
         {
             var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
             var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
 
-            VerifyWithDate(expectedString, deltaFromNow, culture, now, utcNow);
+            VerifyWithDate(expectedString, deltaFromNow, culture, now, utcNow, showQuantityAs);
         }
 
-        static void VerifyWithDate(string expectedString, TimeSpan deltaFromBase, CultureInfo culture, DateTime baseDate, DateTime baseDateUtc)
+        static void VerifyWithDate(string expectedString, TimeSpan deltaFromBase, CultureInfo culture, DateTime baseDate, DateTime baseDateUtc,ShowQuantityAs showQuantityAs)
         {
-            Assert.Equal(expectedString, baseDateUtc.Add(deltaFromBase).Humanize(utcDate: true, dateToCompareAgainst: baseDateUtc, culture: culture));
-            Assert.Equal(expectedString, baseDate.Add(deltaFromBase).Humanize(false, baseDate, culture: culture));
+            Assert.Equal(expectedString, baseDateUtc.Add(deltaFromBase).Humanize(utcDate: true, dateToCompareAgainst: baseDateUtc, culture: culture, showQuantityAs: showQuantityAs));
+            Assert.Equal(expectedString, baseDate.Add(deltaFromBase).Humanize(false, baseDate, culture: culture, showQuantityAs: showQuantityAs));
         }
 
-        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null, CultureInfo culture = null, DateTime? baseDate = null, DateTime? baseDateUtc = null)
+        public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null, CultureInfo culture = null, DateTime? baseDate = null, DateTime? baseDateUtc = null, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
             if (precision.HasValue)
                 Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision.Value);
@@ -71,13 +71,13 @@ namespace Humanizer.Tests
             }
 
             if (baseDate == null)
-            { 
-                VerifyWithCurrentDate(expectedString, deltaFromNow, culture);
-                VerifyWithDateInjection(expectedString, deltaFromNow, culture);
+            {
+                VerifyWithCurrentDate(expectedString, deltaFromNow, culture, showQuantityAs);
+                VerifyWithDateInjection(expectedString, deltaFromNow, culture, showQuantityAs);
             }
             else
             {
-                VerifyWithDate(expectedString, deltaFromNow, culture, baseDate.Value, baseDateUtc.Value);
+                VerifyWithDate(expectedString, deltaFromNow, culture, baseDate.Value, baseDateUtc.Value, showQuantityAs);
             }
         }
     }

@@ -176,5 +176,16 @@ namespace Humanizer.Tests
             var actual = TimeSpan.FromMilliseconds(ms).Humanize(culture: new CultureInfo(culture));
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData(1, ShowQuantityAs.Words, "ten milliseconds")]
+        [InlineData(6 * 24 * 60 * 60 * 1000, ShowQuantityAs.Words, "six days")]
+        [InlineData(11 * 60 * 60 * 1000, ShowQuantityAs.Words, "eleven hours")]
+        public void CanSpecifyHowToShowQuantity(int ms, ShowQuantityAs showQuantityAs, string expected)
+        {
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(showQuantityAs: showQuantityAs);
+            Assert.Equal(expected, actual);
+        }
+
     }
 }

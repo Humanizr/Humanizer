@@ -19,7 +19,7 @@ namespace Humanizer.Tests.Localisation
         [InlineData(TimeUnit.Year, 10)]
         public void TimeSpanHumanizeThrowsExceptionForTimeUnitsLargerThanWeek(TimeUnit timeUnit, int unit)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DefaultFormatter(CultureInfo.InvariantCulture.Name).TimeSpanHumanize(timeUnit, unit));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new DefaultFormatter(CultureInfo.InvariantCulture.Name).TimeSpanHumanize(timeUnit, unit,ShowQuantityAs.Numeric));
         }
 
         [Fact]
