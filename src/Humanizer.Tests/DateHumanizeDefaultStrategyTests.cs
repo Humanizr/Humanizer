@@ -165,7 +165,7 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData(1, TimeUnit.Year, Tense.Future, ShowQuantityAs.Words, "one year from now")]
         [InlineData(40, TimeUnit.Second, Tense.Past, ShowQuantityAs.Words, "forty seconds ago")]
-        [InlineData(2, TimeUnit.Day, Tense.Past, ShowQuantityAs.Words, "tow days ago")]
+        [InlineData(2, TimeUnit.Day, Tense.Past, ShowQuantityAs.Words, "two days ago")]
 
         public void CanSpecifyHowToShowQuantity(int unit, TimeUnit timeUnit, Tense tense, ShowQuantityAs showQuantityAs, string expected)
         {
