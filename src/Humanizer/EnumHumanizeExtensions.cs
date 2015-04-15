@@ -12,6 +12,7 @@ namespace Humanizer
     {
         private const string DisplayAttributeTypeName = "System.ComponentModel.DataAnnotations.DisplayAttribute";
         private const string DisplayAttributeGetDescriptionMethodName = "GetDescription";
+        private const string DisplayAttributeGetNameMethodName = "GetName";
 
         private static readonly Func<PropertyInfo, bool> StringTypedProperty = p => p.PropertyType == typeof(string);
 
@@ -49,7 +50,17 @@ namespace Humanizer
                 {
                     var method = attrType.GetMethod(DisplayAttributeGetDescriptionMethodName);
                     if (method != null)
-                        return method.Invoke(attr, new object[0]).ToString();
+                    {
+                        var obj = method.Invoke(attr, new object[0]);
+                        if (obj != null) return obj.ToString();
+                    }
+                    var displayNameMethod = attrType.GetMethod(DisplayAttributeGetNameMethodName);
+                    if (displayNameMethod != null)
+                    {
+                        var obj = displayNameMethod.Invoke(attr, new object[0]);
+                        if (obj != null) return obj.ToString();
+                    }
+                        
                 }
                 var descriptionProperty =
                     attrType.GetProperties()
