@@ -289,7 +289,7 @@ public class DefaultFormatter
     public DefaultFormatter(string localeCode) { }
     public string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit, Humanizer.ShowQuantityAs showQuantityAs) { }
     public string DateHumanize_Now() { }
-    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
+    public string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, Humanizer.ShowQuantityAs showQuantityAs) { }
     public string TimeSpanHumanize_Zero() { }
 }
 
