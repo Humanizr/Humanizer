@@ -1,5 +1,8 @@
 namespace Humanizer.Inflections
 {
+    /// <summary>
+    /// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.
+    /// </summary>
     public class Vocabularies
     {
         private static Vocabulary _default;
