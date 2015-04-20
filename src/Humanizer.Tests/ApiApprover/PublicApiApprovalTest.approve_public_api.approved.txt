@@ -487,8 +487,8 @@ public class StringHumanizeExtensions
 
 public class TimeSpanHumanizeExtensions
 {
-    public string Humanize(System.TimeSpan timeSpan, int precision, System.Globalization.CultureInfo culture, Humanizer.Localisation.TimeUnit maxUnit) { }
-    public string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture, Humanizer.Localisation.TimeUnit maxUnit) { }
+    public string Humanize(System.TimeSpan timeSpan, int precision, System.Globalization.CultureInfo culture, Humanizer.Localisation.TimeUnit maxUnit, Humanizer.ShowQuantityAs showQuantityAs) { }
+    public string Humanize(System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture, Humanizer.Localisation.TimeUnit maxUnit, Humanizer.ShowQuantityAs showQuantityAs) { }
 }
 
 public class To
