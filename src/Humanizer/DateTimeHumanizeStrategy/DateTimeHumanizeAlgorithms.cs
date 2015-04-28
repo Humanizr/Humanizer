@@ -13,7 +13,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
-        public static string PrecisionHumanize(DateTime input, DateTime comparisonBase, double precision, CultureInfo culture)
+        public static string PrecisionHumanize(DateTime input, DateTime comparisonBase, double precision, CultureInfo culture,  ShowQuantityAs showQuantityAs)
         {
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
@@ -47,20 +47,20 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             // start computing result from larger units to smaller ones
             var formatter = Configurator.GetFormatter(culture);
-            if (years > 0) return formatter.DateHumanize(TimeUnit.Year, tense, years);
-            if (months > 0) return formatter.DateHumanize(TimeUnit.Month, tense, months);
-            if (days > 0) return formatter.DateHumanize(TimeUnit.Day, tense, days);
-            if (hours > 0) return formatter.DateHumanize(TimeUnit.Hour, tense, hours);
-            if (minutes > 0) return formatter.DateHumanize(TimeUnit.Minute, tense, minutes);
-            if (seconds > 0) return formatter.DateHumanize(TimeUnit.Second, tense, seconds);
-            return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
+            if (years > 0) return formatter.DateHumanize(TimeUnit.Year, tense, years, showQuantityAs);
+            if (months > 0) return formatter.DateHumanize(TimeUnit.Month, tense, months, showQuantityAs);
+            if (days > 0) return formatter.DateHumanize(TimeUnit.Day, tense, days, showQuantityAs);
+            if (hours > 0) return formatter.DateHumanize(TimeUnit.Hour, tense, hours, showQuantityAs);
+            if (minutes > 0) return formatter.DateHumanize(TimeUnit.Minute, tense, minutes, showQuantityAs);
+            if (seconds > 0) return formatter.DateHumanize(TimeUnit.Second, tense, seconds, showQuantityAs);
+            return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0, showQuantityAs);
         }
 
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
+        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture,  ShowQuantityAs showQuantityAs)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
@@ -68,49 +68,49 @@ namespace Humanizer.DateTimeHumanizeStrategy
             var formatter = Configurator.GetFormatter(culture);
 
             if (ts.TotalMilliseconds < 500)
-                return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
+                return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0, showQuantityAs);
 
             if (ts.TotalSeconds < 60)
-                return formatter.DateHumanize(TimeUnit.Second, tense, ts.Seconds);
+                return formatter.DateHumanize(TimeUnit.Second, tense, ts.Seconds, showQuantityAs);
 
             if (ts.TotalSeconds < 120)
-                return formatter.DateHumanize(TimeUnit.Minute, tense, 1);
+                return formatter.DateHumanize(TimeUnit.Minute, tense, 1, showQuantityAs);
 
             if (ts.TotalMinutes < 60)
-                return formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes);
+                return formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes, showQuantityAs);
 
             if (ts.TotalMinutes < 90)
-                return formatter.DateHumanize(TimeUnit.Hour, tense, 1);
+                return formatter.DateHumanize(TimeUnit.Hour, tense, 1, showQuantityAs);
 
             if (ts.TotalHours < 24)
-                return formatter.DateHumanize(TimeUnit.Hour, tense, ts.Hours);
+                return formatter.DateHumanize(TimeUnit.Hour, tense, ts.Hours, showQuantityAs);
 
             if (ts.TotalHours < 48)
             {
                 var days = Math.Abs((input.Date - comparisonBase.Date).Days);
-                return formatter.DateHumanize(TimeUnit.Day, tense, days);
+                return formatter.DateHumanize(TimeUnit.Day, tense, days, showQuantityAs);
             }
 
             if (ts.TotalDays < 28)
-                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
+                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days, showQuantityAs);
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
                 if (comparisonBase.Date.AddMonths(tense == Tense.Future ? 1 : -1) == input.Date)
-                    return formatter.DateHumanize(TimeUnit.Month, tense, 1);
-                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
+                    return formatter.DateHumanize(TimeUnit.Month, tense, 1, showQuantityAs);
+                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days, showQuantityAs);
             }
 
             if (ts.TotalDays < 345)
             {
                 int months = Convert.ToInt32(Math.Floor(ts.TotalDays / 29.5));
-                return formatter.DateHumanize(TimeUnit.Month, tense, months);
+                return formatter.DateHumanize(TimeUnit.Month, tense, months, showQuantityAs);
             }
 
             int years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
             if (years == 0) years = 1;
 
-            return formatter.DateHumanize(TimeUnit.Year, tense, years);
+            return formatter.DateHumanize(TimeUnit.Year, tense, years, showQuantityAs);
         }
     }
 }

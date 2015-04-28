@@ -20,10 +20,11 @@ namespace Humanizer
         /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <param name="maxUnit">The maximum unit of time to output.</param>
+        /// <param name="showQuantityAs">How to show the quantity. Numeric by default</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week)
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
-            return Humanize(timeSpan, precision, false, culture, maxUnit);
+            return Humanize(timeSpan, precision, false, culture, maxUnit, showQuantityAs );
         }
 
         /// <summary>
@@ -34,10 +35,11 @@ namespace Humanizer
         /// <param name="countEmptyUnits">Controls whether empty time units should be counted towards maximum number of time units. Leading empty time units never count.</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <param name="maxUnit">The maximum unit of time to output.</param>
+        /// <param name="showQuantityAs">How to show the quantity. Numeric by default</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week)
+        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
-            var timeParts = GetTimeParts(timeSpan, culture, maxUnit);
+            var timeParts = GetTimeParts(timeSpan, culture, maxUnit, showQuantityAs);
             if (!countEmptyUnits)
                 timeParts = timeParts.Where(x => x != null);
             timeParts = timeParts.Take(precision);
@@ -46,7 +48,7 @@ namespace Humanizer
             return string.Join(", ", timeParts);
         }
 
-        private static IEnumerable<string> GetTimeParts(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit)
+        private static IEnumerable<string> GetTimeParts(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, ShowQuantityAs showQuantityAs)
         {
             var weeks =  maxUnit > TimeUnit.Day ? timespan.Days / 7 : 0;
             var days = maxUnit > TimeUnit.Day ? timespan.Days % 7 : (int)timespan.TotalDays;
@@ -64,25 +66,25 @@ namespace Humanizer
 
             var formatter = Configurator.GetFormatter(culture);
             if (outputWeeks)
-                yield return GetTimePart(formatter, TimeUnit.Week, weeks);
+                yield return GetTimePart(formatter, TimeUnit.Week, weeks, showQuantityAs);
             if (outputDays)
-                yield return GetTimePart(formatter, TimeUnit.Day, days);
+                yield return GetTimePart(formatter, TimeUnit.Day, days, showQuantityAs);
             if (outputHours)
-                yield return GetTimePart(formatter, TimeUnit.Hour, hours);
+                yield return GetTimePart(formatter, TimeUnit.Hour, hours, showQuantityAs);
             if (outputMinutes)
-                yield return GetTimePart(formatter, TimeUnit.Minute, minutes);
+                yield return GetTimePart(formatter, TimeUnit.Minute, minutes, showQuantityAs);
             if (outputSeconds)
-                yield return GetTimePart(formatter, TimeUnit.Second, seconds);
+                yield return GetTimePart(formatter, TimeUnit.Second, seconds, showQuantityAs);
             if (outputMilliseconds)
-                yield return GetTimePart(formatter, TimeUnit.Millisecond, milliseconds);
+                yield return GetTimePart(formatter, TimeUnit.Millisecond, milliseconds, showQuantityAs);
             else
                 yield return formatter.TimeSpanHumanize_Zero();
         }
 
-        private static string GetTimePart(IFormatter formatter, TimeUnit timeUnit, int unit)
+        private static string GetTimePart(IFormatter formatter, TimeUnit timeUnit, int unit, ShowQuantityAs showQuantityAs )
         {
             return unit != 0
-                ? formatter.TimeSpanHumanize(timeUnit, unit)
+                ? formatter.TimeSpanHumanize(timeUnit, unit, showQuantityAs)
                 : null;
         }
     }

@@ -11,6 +11,6 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Calculates the distance of time in words between two provided dates used for DateTimeOffset.Humanize
         /// </summary>
-        string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo culture);
+        string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo culture, ShowQuantityAs showQuantityAs);
     }
 }
