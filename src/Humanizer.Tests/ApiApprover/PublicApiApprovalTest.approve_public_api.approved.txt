@@ -108,14 +108,6 @@ public class ByteSizeExtensions
     public Humanizer.Bytes.ByteSize Terabytes(long input) { }
 }
 
-public enum ShowQuantityAs
-{
-    None,
-    Numeric,
-    value__,
-    Words,
-}
-
 public class CasingExtensions
 {
     public string ApplyCase(string input, Humanizer.LetterCasing casing) { }
@@ -466,6 +458,14 @@ public class RomanNumeralExtensions
 {
     public int FromRoman(string input) { }
     public string ToRoman(int input) { }
+}
+
+public enum ShowQuantityAs
+{
+    None,
+    Numeric,
+    value__,
+    Words,
 }
 
 public class StringDehumanizeExtensions
