@@ -265,7 +265,7 @@
     <value>одна неделя</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>только что</value>
+    <value>нет времени</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>через {0} дней</value>
