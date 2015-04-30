@@ -112,6 +112,11 @@
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="Properties\Resources.ua1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ua.resx</DependentUpon>
+    </Compile>
     <Compile Include="RegexOptionsUtil.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
@@ -185,6 +190,10 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ua.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ua1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
