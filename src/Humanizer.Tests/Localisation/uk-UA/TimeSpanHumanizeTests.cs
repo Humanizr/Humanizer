@@ -24,7 +24,7 @@ namespace Humanizer.Tests.Localisation.ukUA
         }
 
         [Theory]
-        [InlineData(1, "без часу")]
+        [InlineData(1, "один день")]
         [InlineData(2, "2 дні")]
         [InlineData(3, "3 дні")]
         [InlineData(4, "4 дні")]
@@ -123,7 +123,7 @@ namespace Humanizer.Tests.Localisation.ukUA
         [Fact]
         public void NoTime()
         {
-            Assert.Equal("щойно", TimeSpan.Zero.Humanize());
+            Assert.Equal("без часу", TimeSpan.Zero.Humanize());
         }
     }
 }
