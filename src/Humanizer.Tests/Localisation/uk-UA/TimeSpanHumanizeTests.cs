@@ -24,7 +24,7 @@ namespace Humanizer.Tests.Localisation.ukUA
         }
 
         [Theory]
-        [InlineData(1, "один день")]
+        [InlineData(1, "без часу")]
         [InlineData(2, "2 дні")]
         [InlineData(3, "3 дні")]
         [InlineData(4, "4 дні")]
