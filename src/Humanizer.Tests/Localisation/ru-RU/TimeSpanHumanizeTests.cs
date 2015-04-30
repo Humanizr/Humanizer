@@ -121,7 +121,7 @@ namespace Humanizer.Tests.Localisation.ruRU
         public void NoTime()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("только что", TimeSpan.Zero.Humanize());
+            Assert.Equal("нет времени", TimeSpan.Zero.Humanize());
         }
     }
 }
