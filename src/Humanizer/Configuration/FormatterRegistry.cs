@@ -13,6 +13,7 @@ namespace Humanizer.Configuration
             Register("sl", new SlovenianFormatter());
             Register("sr", new SerbianFormatter("sr"));
             Register("sr-Latn", new SerbianFormatter("sr-Latn"));
+            Register("uk-UA", new UkrainianFormatter());
             RegisterCzechSlovakPolishFormatter("cs");
             RegisterCzechSlovakPolishFormatter("pl");
             RegisterCzechSlovakPolishFormatter("sk");

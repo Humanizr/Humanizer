@@ -82,8 +82,8 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(0, 3, "no time")]
-        [InlineData(0, 2, "no time")]
+        [InlineData(0, 3, "just now")]
+        [InlineData(0, 2, "just now")]
         [InlineData(10, 2, "10 milliseconds")]
         [InlineData(1400, 2, "1 second, 400 milliseconds")]
         [InlineData(2500, 2, "2 seconds, 500 milliseconds")]
@@ -118,8 +118,8 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(0, 3, "no time")]
-        [InlineData(0, 2, "no time")]
+        [InlineData(0, 3, "just now")]
+        [InlineData(0, 2, "just now")]
         [InlineData(10, 2, "10 milliseconds")]
         [InlineData(1400, 2, "1 second, 400 milliseconds")]
         [InlineData(2500, 2, "2 seconds, 500 milliseconds")]
@@ -164,7 +164,7 @@ namespace Humanizer.Tests
         {
             var noTime = TimeSpan.Zero;
             var actual = noTime.Humanize();
-            Assert.Equal("no time", actual);
+            Assert.Equal("just now", actual);
         }
 
         [Theory]

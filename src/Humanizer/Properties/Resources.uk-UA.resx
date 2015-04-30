@@ -169,7 +169,7 @@
     <value>{0} хвилини тому</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
-    <value>{0} хвилини тому</value>
+    <value>{0} хвилину тому</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
     <value>{0} місяці тому</value>
@@ -253,7 +253,7 @@
     <value>одна година</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>одна мілісекудна</value>
+    <value>одна мілісекунда</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>одна хвилина</value>

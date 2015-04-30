@@ -21,6 +21,7 @@ namespace Humanizer.Configuration
             Register("bn-BD", new BanglaNumberToWordsConverter());
             Register("tr", new TurkishNumberToWordConverter());
             Register("it", new ItalianNumberToWordsConverter());
+            Register("uk-UA", new UkrainianNumberToWordsConverter());
             Register("uz-Latn-UZ", new UzbekLatnNumberToWordConverter());
             Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
         }

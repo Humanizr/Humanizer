@@ -60,6 +60,7 @@
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\OxfordStyleCollectionFormatter.cs" />
+    <Compile Include="Localisation\Formatters\UkrainianFormatter.cs" />
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Localisation\Formatters\SlovenianFormatter.cs" />
     <Compile Include="Configuration\LocaliserRegistry.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
     <Compile Include="Localisation\NumberToWords\GenderedNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\GenderlessNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\UkrainianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\SlovenianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DutchNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Localisation\NumberToWords\TurkishNumberToWordConverter.cs" />
     <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\GermanOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\UkrainianOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\RussianOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\SpanishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
@@ -112,11 +115,6 @@
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
-    <Compile Include="Properties\Resources.ua1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ua.resx</DependentUpon>
-    </Compile>
     <Compile Include="RegexOptionsUtil.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
@@ -190,9 +188,8 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.ua.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ua1.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="Properties\Resources.uk-UA.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
