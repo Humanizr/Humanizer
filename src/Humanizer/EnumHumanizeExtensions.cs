@@ -67,7 +67,10 @@ namespace Humanizer
                         .Where(StringTypedProperty)
                         .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
-                    return descriptionProperty.GetValue(attr, null).ToString();
+                {
+                    var obj = descriptionProperty.GetValue(attr, null);
+                    if (obj != null) return obj.ToString();
+                }
             }
 
             return null;

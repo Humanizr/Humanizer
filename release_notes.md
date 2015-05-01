@@ -1,4 +1,5 @@
 ###In Development
+- [#406](https://github.com/MehdiK/Humanizer/pull/406): Fixed exception when humanizing enum with [Display name=""] attribute
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.35.0...master)
 
