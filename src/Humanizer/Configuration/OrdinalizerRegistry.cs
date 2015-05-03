@@ -13,7 +13,7 @@ namespace Humanizer.Configuration
             Register("pt-BR", new BrazilianPortugueseOrdinalizer());
             Register("ru", new RussianOrdinalizer());
             Register("tr", new TurkishOrdinalizer());
-            Register("uk-UA", new UkrainianOrdinalizer());
+            Register("uk", new UkrainianOrdinalizer());
         }
     }
 }

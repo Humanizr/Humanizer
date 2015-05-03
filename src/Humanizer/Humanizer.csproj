@@ -188,7 +188,7 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.uk-UA.resx">
+    <EmbeddedResource Include="Properties\Resources.uk.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />

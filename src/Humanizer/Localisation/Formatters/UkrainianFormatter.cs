@@ -5,7 +5,7 @@ namespace Humanizer.Localisation.Formatters
     internal class UkrainianFormatter : DefaultFormatter
     {
         public UkrainianFormatter()
-            : base("uk-UA")
+            : base("uk")
         {
         }
 
