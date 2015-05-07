@@ -144,23 +144,23 @@ namespace Humanizer
             }
         }
 
-        private static void AddIrregular(string singular, string plural)
+        public static void AddIrregular(string singular, string plural)
         {
             AddPlural("(" + singular[0] + ")" + singular.Substring(1) + "$", "$1" + plural.Substring(1));
             AddSingular("(" + plural[0] + ")" + plural.Substring(1) + "$", "$1" + singular.Substring(1));
         }
 
-        private static void AddUncountable(string word)
+        public static void AddUncountable(string word)
         {
             Uncountables.Add(word.ToLower());
         }
 
-        private static void AddPlural(string rule, string replacement)
+        public static void AddPlural(string rule, string replacement)
         {
             Plurals.Add(new Rule(rule, replacement));
         }
 
-        private static void AddSingular(string rule, string replacement)
+        public static void AddSingular(string rule, string replacement)
         {
             Singulars.Add(new Rule(rule, replacement));
         }
