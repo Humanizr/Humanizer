@@ -144,41 +144,22 @@ namespace Humanizer
             }
         }
 
-        /// <summary>
-        /// Adds pluralization rule for irregular words
-        /// </summary>
-        /// <param name="singular">Regular expression for singular form</param>
-        /// <param name="plural">Plural form ending of irregular word</param>
         public static void AddIrregular(string singular, string plural)
         {
             AddPlural("(" + singular[0] + ")" + singular.Substring(1) + "$", "$1" + plural.Substring(1));
             AddSingular("(" + plural[0] + ")" + plural.Substring(1) + "$", "$1" + singular.Substring(1));
         }
 
-        /// <summary>
-        /// Adds a word to the list of uncountable words
-        /// </summary>
-        /// <param name="word">Uncountable word to add</param>
         public static void AddUncountable(string word)
         {
             Uncountables.Add(word.ToLower());
         }
 
-        /// <summary>
-        /// Adds pluralization rule
-        /// </summary>
-        /// <param name="rule">Regular expression for singular form</param>
-        /// <param name="replacement">Plural form ending of the word</param>
         public static void AddPlural(string rule, string replacement)
         {
             Plurals.Add(new Rule(rule, replacement));
         }
 
-        /// <summary>
-        /// Adds singularization rule
-        /// </summary>
-        /// <param name="rule">Regular expression for plural form</param>
-        /// <param name="replacement">String to replace part or entirety of the word in singular form</param>
         public static void AddSingular(string rule, string replacement)
         {
             Singulars.Add(new Rule(rule, replacement));
