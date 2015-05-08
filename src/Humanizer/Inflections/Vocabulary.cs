@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -46,25 +45,13 @@ namespace Humanizer.Inflections
         }
 
         /// <summary>
-        /// Adds a word to the vocabulary that does not follow trivial rules for singularization, e.g. "vertices/indices -> "vertex/index"
+        /// Adds a rule to the vocabulary that does not follow trivial rules for singularization, e.g. "vertices/indices -> "vertex/index"
         /// </summary>
         /// <param name="rule">RegEx to be matched, case insensitive, e.g. ""(vert|ind)ices$""</param>
         /// <param name="replacement">RegEx replacement  e.g. "$1ex"</param>
         public void AddSingular(string rule, string replacement)
         {
             _singulars.Add(new Rule(rule, replacement));
-        }
-
-        /// <summary>
-        /// Pluralizes the provided input considering irregular words
-        /// </summary>
-        /// <param name="word">Word to be pluralized</param>
-        /// <param name="plurality">Normally you call Pluralize on singular words; but if you're unsure call it with Plurality.CouldBeEither</param>
-        /// <returns></returns>
-        [Obsolete("Use string.Pluralize(bool) instead. This method will be removed in next major release.")]
-        public string Pluralize(string word, Plurality plurality)
-        {
-            return plurality == Plurality.Plural ? word : Pluralize(word, inputIsKnownToBeSingular: false);
         }
 
         /// <summary>
@@ -86,18 +73,6 @@ namespace Humanizer.Inflections
                 return word;
 
             return result;
-        }
-
-        /// <summary>
-        /// Singularizes the provided input considering irregular words
-        /// </summary>
-        /// <param name="word">Word to be singularized</param>
-        /// <param name="plurality">Normally you call Singularize on plural words; but if you're unsure call it with Plurality.CouldBeEither</param>
-        /// <returns></returns>
-        [Obsolete("Use string.Singularize(bool) instead. This method will be removed in next major release.")]
-        public string Singularize(string word, Plurality plurality)
-        {
-            return plurality == Plurality.Singular ? word : Singularize(word, inputIsKnownToBePlural: false);
         }
 
         /// <summary>

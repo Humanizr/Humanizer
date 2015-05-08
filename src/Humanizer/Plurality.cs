@@ -1,4 +1,4 @@
-namespace Humanizer.Inflections
+namespace Humanizer
 {
     /// <summary>
     /// Provides hint for Humanizer as to whether a word is singular, plural or with unknown plurality
