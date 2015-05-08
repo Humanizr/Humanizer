@@ -245,10 +245,6 @@ public class In
 
 public class InflectorExtensions
 {
-    public void AddIrregular(string singular, string plural) { }
-    public void AddPlural(string rule, string replacement) { }
-    public void AddSingular(string rule, string replacement) { }
-    public void AddUncountable(string word) { }
     public string Camelize(string input) { }
     public string Dasherize(string underscoredWord) { }
     public string Hyphenate(string underscoredWord) { }
