@@ -110,6 +110,10 @@
     <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
     <Compile Include="Localisation\pt-BR\OrdinalizeTests.cs" />
     <Compile Include="Localisation\ro-Ro\TimeSpanHumanizerTests.cs" />
+    <Compile Include="Localisation\uk-UA\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\uk-UA\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\uk-UA\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\uk-UA\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\ru-RU\NumberToWordsTests.cs" />
     <Compile Include="Localisation\ru-RU\OrdinalizeTests.cs" />
     <Compile Include="Localisation\ru-RU\TimeSpanHumanizeTests.cs" />
