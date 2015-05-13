@@ -140,6 +140,10 @@
     <Compile Include="Localisation\sv\DateHumanizeTests.cs" />
     <Compile Include="Localisation\sv\TimeSpanHumanizeTests.cs" />
     <Compile Include="DateTimeHumanizePrecisionStrategyTests.cs" />
+    <Compile Include="Localisation\uk-UA\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\uk-UA\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\uk-UA\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\uk-UA\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\DateHumanizeTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\NumberToWordsTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\TimeSpanHumanizeTests.cs" />

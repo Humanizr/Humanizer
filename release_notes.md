@@ -1,6 +1,7 @@
 ###In Development
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.35.0...master)
+ - [#414](https://github.com/MehdiK/Humanizer/pull/414): Add Ukraininan language 
 
 ###v1.35.0 - 2015-03-29
  - [#399](https://github.com/MehdiK/Humanizer/pull/399): Added support for humanizing DateTimeOffset
