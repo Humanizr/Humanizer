@@ -1,6 +1,7 @@
 ###In Development
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.35.0...master)
+- [#408](https://github.com/MehdiK/Humanizer/pull/408): Added support for adding/removing rules from singular/pluralization by adding `Vocabulary` class and `Vocabularies.Default`.
 
 ###v1.35.0 - 2015-03-29
  - [#399](https://github.com/MehdiK/Humanizer/pull/399): Added support for humanizing DateTimeOffset

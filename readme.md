@@ -18,6 +18,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Inflector methods](#inflector-methods)
      - [Pluralize](#pluralize)
      - [Singularize](#singularize)
+     - [Adding Words](#adding-words)
      - [ToQuantity](#toquantity)
      - [Ordinalize](#ordinalize)
      - [Titleize](#titleize)
@@ -458,6 +459,25 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 
 
 The overload of `Singularize` with `plurality` argument is obsolete and will be removed in next major release.
+
+##<a id="adding-words">Adding Words</a>
+Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabluary` used by `Inflector`):
+
+```C#
+// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx:
+Vocabularies.Default.AddIrregular("person", "people");
+
+// Adds an uncountable word to the vocabulary.  Will be ignored when plurality is changed:
+Vocabularies.Default.AddUncountable("fish");
+
+// Adds a rule to the vocabulary that does not follow trivial rules for pluralization, e.g. "bus" -> "buses"
+Vocabularies.Default.AddPlural("bus", "buses");
+
+// Adds a rule to the vocabulary that does not follow trivial rules for singularization
+// (will match both "vertices" -> "vertex" and "indices" -> "index"):
+Vocabularies.Default.AddSingular("(vert|ind)ices$", "$1ex");
+
+```
 
 ####<a id="toquantity">ToQuantity</a>
 Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
