@@ -23,7 +23,8 @@ namespace Humanizer.Configuration
             Register("it", new ItalianNumberToWordsConverter());
             Register("uz-Latn-UZ", new UzbekLatnNumberToWordConverter());
             Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
-            Register("sr", (culture) => new SerbianNumberToWordsConverter(culture));
+			Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
+			Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
         }
     }
 }
