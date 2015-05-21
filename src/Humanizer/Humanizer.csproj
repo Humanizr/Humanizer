@@ -74,6 +74,7 @@
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
     <Compile Include="Localisation\NumberToWords\GenderedNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\GenderlessNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\SerbianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\SlovenianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DutchNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />

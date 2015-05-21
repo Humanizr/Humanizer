@@ -134,6 +134,7 @@
     <Compile Include="Localisation\sl\NumberToWordsTests.cs" />
     <Compile Include="Localisation\sl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sr-Latn\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sr-Latn\NumberToWordsTest.cs" />
     <Compile Include="Localisation\sr-Latn\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sr\DateHumanizeTests.cs" />
     <Compile Include="Localisation\sr\TimeSpanHumanizeTests.cs" />
