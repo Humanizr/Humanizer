@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -10,6 +11,10 @@ namespace Humanizer.Inflections
     /// </summary>
     public class Vocabulary
     {
+        internal Vocabulary()
+        { 
+        }
+
         private readonly List<Rule> _plurals = new List<Rule>();
         private readonly List<Rule> _singulars = new List<Rule>();
         private readonly List<string> _uncountables = new List<string>();
@@ -76,6 +81,18 @@ namespace Humanizer.Inflections
         }
 
         /// <summary>
+        /// Pluralizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be pluralized</param>
+        /// <param name="plurality">Normally you call Pluralize on singular words; but if you're unsure call it with Plurality.CouldBeEither</param>
+        /// <returns></returns>
+        [Obsolete("Use string.Pluralize(bool) instead. This method will be removed in next major release.")]
+        public string Pluralize(string word, Plurality plurality)
+        {
+            return plurality == Plurality.Plural ? word : Pluralize(word, inputIsKnownToBeSingular: false);
+        }
+
+        /// <summary>
         /// Singularizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be singularized</param>
@@ -83,7 +100,6 @@ namespace Humanizer.Inflections
         /// <returns></returns>
         public string Singularize(string word, bool inputIsKnownToBePlural = true)
         {
-
             var result = ApplyRules(_singulars, word);
 
             if (inputIsKnownToBePlural)
@@ -98,6 +114,18 @@ namespace Humanizer.Inflections
             return result ?? word;
         }
 
+        /// <summary>
+        /// Singularizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be singularized</param>
+        /// <param name="plurality">Normally you call Singularize on plural words; but if you're unsure call it with Plurality.CouldBeEither</param>
+        /// <returns></returns>
+        [Obsolete("Use string.Singularize(bool) instead. This method will be removed in next major release.")]
+        public string Singularize(string word, Plurality plurality)
+        {
+            return plurality == Plurality.Singular ? word : Singularize(word, inputIsKnownToBePlural: false);
+        }
+
         private string ApplyRules(IList<Rule> rules, string word)
         {
             if (word == null)
@@ -110,9 +138,7 @@ namespace Humanizer.Inflections
             for (int i = rules.Count - 1; i >= 0; i--)
             {
                 if ((result = rules[i].Apply(word)) != null)
-                {
                     break;
-                }
             }
             return result;
         }
@@ -136,9 +162,7 @@ namespace Humanizer.Inflections
             public string Apply(string word)
             {
                 if (!_regex.IsMatch(word))
-                {
                     return null;
-                }
 
                 return _regex.Replace(word, _replacement);
             }
