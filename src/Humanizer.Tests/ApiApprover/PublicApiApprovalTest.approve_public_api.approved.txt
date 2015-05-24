@@ -243,6 +243,23 @@ public class In
     public System.DateTime TheYear(int year) { }
 }
 
+public class Vocabularies
+{
+    public Humanizer.Inflections.Vocabulary Default { get; }
+}
+
+public class Vocabulary
+{
+    public void AddIrregular(string singular, string plural) { }
+    public void AddPlural(string rule, string replacement) { }
+    public void AddSingular(string rule, string replacement) { }
+    public void AddUncountable(string word) { }
+    public string Pluralize(string word, bool inputIsKnownToBeSingular) { }
+    public string Pluralize(string word, Humanizer.Plurality plurality) { }
+    public string Singularize(string word, bool inputIsKnownToBePlural) { }
+    public string Singularize(string word, Humanizer.Plurality plurality) { }
+}
+
 public class InflectorExtensions
 {
     public string Camelize(string input) { }

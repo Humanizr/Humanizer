@@ -57,6 +57,8 @@
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeOffsetHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeOffsetHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeOffsetHumanizeStrategy.cs" />
+    <Compile Include="Inflections\Vocabularies.cs" />
+    <Compile Include="Inflections\Vocabulary.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\OxfordStyleCollectionFormatter.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Localisation\Ordinalizers\UkrainianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="Plurality.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
