@@ -4,7 +4,8 @@ namespace Humanizer.Configuration
 {
     internal class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
     {
-        public NumberToWordsConverterRegistry() : base((culture) => new DefaultNumberToWordsConverter(culture))
+        public NumberToWordsConverterRegistry()
+            : base((culture) => new DefaultNumberToWordsConverter(culture))
         {
             Register("en", new EnglishNumberToWordsConverter());
             Register("ar", new ArabicNumberToWordsConverter());
@@ -24,8 +25,8 @@ namespace Humanizer.Configuration
             Register("uk", new UkrainianNumberToWordsConverter());
             Register("uz-Latn-UZ", new UzbekLatnNumberToWordConverter());
             Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
-			Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
-			Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
+            Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
+            Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
         }
     }
 }
