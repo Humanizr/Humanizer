@@ -66,6 +66,7 @@
     <Compile Include="Configuration\FormatterRegistry.cs" />
     <Compile Include="Configuration\NumberToWordsConverterRegistry.cs" />
     <Compile Include="Configuration\OrdinalizerRegistry.cs" />
+    <Compile Include="Localisation\Formatters\UkrainianFormatter.cs" />
     <Compile Include="Localisation\NumberToWords\BanglaNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
+    <Compile Include="Localisation\NumberToWords\UkrainianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\UzbekCyrlNumberToWordConverter.cs" />
     <Compile Include="Localisation\NumberToWords\UzbekLatnNumberToWordConverter.cs" />
     <Compile Include="Localisation\NumberToWords\TurkishNumberToWordConverter.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\TurkishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\UkrainianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
@@ -187,6 +190,7 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.uk.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
