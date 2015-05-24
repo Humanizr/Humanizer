@@ -376,6 +376,12 @@ Culture to use can be specified explicitly. If it is not, current thread's curre
 TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
 ```
 
+In addition, a minimum unit of time may be specified to avoid rolling down to a smaller unit. For example:
+  ```C#
+  TimeSpan.FromMilliseconds(122500).Humanize(minUnit: TimeUnit.Second) => "2 minutes, 2 seconds"    // instead of 2 minutes, 2 seconds, 500 milliseconds
+  TimeSpan.FromHours(25).Humanize(minUnit: TimeUnit.Day) => "1 Day"   //instead of 1 Day, 1 Hour
+  ```
+
 In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:
 ```C#
 TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day) => "7 days"    // instead of 1 week
