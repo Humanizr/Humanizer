@@ -1,8 +1,14 @@
 ###In Development
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.35.0...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.36.0...master)
+
+###v1.36.0 - 2015-05-24
+ - [#403](https://github.com/MehdiK/Humanizer/pull/403): Added TimeSpan minUnit option
+ - [#417](https://github.com/MehdiK/Humanizer/pull/417): Support for Serbian language, ToWords()
  - [#414](https://github.com/MehdiK/Humanizer/pull/414): Add Ukraininan language 
  - [#408](https://github.com/MehdiK/Humanizer/pull/408): Added support for adding/removing rules from singular/pluralization by adding `Vocabulary` class and `Vocabularies.Default`
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.35.0...v1.36.0)
 
 ###v1.35.0 - 2015-03-29
  - [#399](https://github.com/MehdiK/Humanizer/pull/399): Added support for humanizing DateTimeOffset
