@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
@@ -57,6 +57,7 @@
 <ul>
 <li><a href="#pluralize">Pluralize</a></li>
 <li><a href="#singularize">Singularize</a></li>
+<li><a href="#adding-words">Adding Words</a></li>
 <li><a href="#toquantity">ToQuantity</a></li>
 <li><a href="#ordinalize">Ordinalize</a></li>
 <li><a href="#titleize">Titleize</a></li>
@@ -399,6 +400,11 @@ TimeSpan.FromMilliseconds(<span class="pl-c1">5</span>).Humanize() =&gt; <span c
 
 <div class="highlight highlight-C#"><pre>TimeSpan.FromDays(<span class="pl-c1">1</span>).Humanize(culture: <span class="pl-s"><span class="pl-pds">"</span>ru-RU<span class="pl-pds">"</span></span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>один день<span class="pl-pds">"</span></span></pre></div>
 
+<p>In addition, a minimum unit of time may be specified to avoid rolling down to a smaller unit. For example:</p>
+
+<div class="highlight highlight-C#"><pre>  TimeSpan.FromMilliseconds(<span class="pl-c1">122500</span>).Humanize(minUnit: TimeUnit.Second) =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 minutes, 2 seconds<span class="pl-pds">"</span></span>    <span class="pl-c">// instead of 2 minutes, 2 seconds, 500 milliseconds</span>
+  TimeSpan.FromHours(<span class="pl-c1">25</span>).Humanize(minUnit: TimeUnit.Day) =&gt; <span class="pl-s"><span class="pl-pds">"</span>1 Day<span class="pl-pds">"</span></span>   <span class="pl-c">//instead of 1 Day, 1 Hour</span></pre></div>
+
 <p>In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:</p>
 
 <div class="highlight highlight-C#"><pre>TimeSpan.FromDays(<span class="pl-c1">7</span>).Humanize(maxUnit: TimeUnit.Day) =&gt; <span class="pl-s"><span class="pl-pds">"</span>7 days<span class="pl-pds">"</span></span>    <span class="pl-c">// instead of 1 week</span>
@@ -480,6 +486,26 @@ collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s"><span c
 <span class="pl-s"><span class="pl-pds">"</span>strings<span class="pl-pds">"</span></span>.Singularize(inputIsKnownToBePlural: <span class="pl-c1">false</span>) =&gt; <span class="pl-s"><span class="pl-pds">"</span>string<span class="pl-pds">"</span></span></pre></div>
 
 <p>The overload of <code>Singularize</code> with <code>plurality</code> argument is obsolete and will be removed in next major release.</p>
+
+<h2>
+<a id="adding-words" class="anchor" href="#adding-words" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="adding-words">Adding Words</a>
+</h2>
+
+<p>Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the <code>DefaultVocabluary</code> used by <code>Inflector</code>):</p>
+
+<div class="highlight highlight-C#"><pre><span class="pl-c">// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx:</span>
+Vocabularies.Default.AddIrregular(<span class="pl-s"><span class="pl-pds">"</span>person<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>people<span class="pl-pds">"</span></span>);
+
+<span class="pl-c">// Adds an uncountable word to the vocabulary.  Will be ignored when plurality is changed:</span>
+Vocabularies.Default.AddUncountable(<span class="pl-s"><span class="pl-pds">"</span>fish<span class="pl-pds">"</span></span>);
+
+<span class="pl-c">// Adds a rule to the vocabulary that does not follow trivial rules for pluralization, e.g. "bus" -&gt; "buses"</span>
+Vocabularies.Default.AddPlural(<span class="pl-s"><span class="pl-pds">"</span>bus<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>buses<span class="pl-pds">"</span></span>);
+
+<span class="pl-c">// Adds a rule to the vocabulary that does not follow trivial rules for singularization</span>
+<span class="pl-c">// (will match both "vertices" -&gt; "vertex" and "indices" -&gt; "index"):</span>
+Vocabularies.Default.AddSingular(<span class="pl-s"><span class="pl-pds">"</span>(vert|ind)ices$<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>$1ex<span class="pl-pds">"</span></span>);
+</pre></div>
 
 <h4>
 <a id="toquantity" class="anchor" href="#toquantity" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="toquantity">ToQuantity</a>
