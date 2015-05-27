@@ -39,7 +39,6 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [PowerShell Humanizer](#powershell-humanizer)
    - [Humanizer JVM](#humanizerjvm)
    - [Humanizer.JS](#humanizerjs)
- - [Author](#author)
  - [Main contributors](#main-contributors)
  - [License](#license)
  - [Icon](#icon)
@@ -998,10 +997,8 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 ###<a id="humanizerjs">Humanizer.JS</a>
 [Humanizer.JS](https://github.com/SamuelEnglard/Humanizer.Js) is a TypeScript port of the Humanizer framework.
 
-##<a id="author">Author</a>
-Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
-
 ##<a id="main-contributors">Main contributors</a>
+ - Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
  - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
  - Max Malook ([@mexx](https://github.com/mexx))
 
