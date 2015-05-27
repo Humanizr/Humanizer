@@ -110,6 +110,7 @@
     <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\GermanOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\RussianOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\DutchOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\SpanishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\EnglishOrdinalizer.cs" />
