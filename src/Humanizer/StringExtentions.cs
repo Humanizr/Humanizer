@@ -5,7 +5,7 @@ namespace Humanizer
     /// <summary>
     /// Extension methods for String type.
     /// </summary>
-    public static class StringExentions
+    public static class StringExtentions
     {
         /// <summary>
         /// Extension method to format string with passed arguments. Current thread's current culture is used
