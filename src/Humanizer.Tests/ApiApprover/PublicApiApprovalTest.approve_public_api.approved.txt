@@ -490,7 +490,7 @@ public class StringDehumanizeExtensions
     public string Dehumanize(string input) { }
 }
 
-public class StringExentions
+public class StringExtentions
 {
     public string FormatWith(string format, object[] args) { }
     public string FormatWith(string format, System.IFormatProvider provider, object[] args) { }
