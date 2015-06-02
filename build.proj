@@ -3,9 +3,11 @@
   <!--Project configuration-->
   <PropertyGroup>
     <XUnitPath>$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\build\portable-net45+win8+wp8+wpa81</XUnitPath>
+    <NuGet Condition=" '$(OS)' != 'Unix' ">&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot;</NuGet>
+    <NuGet Condition=" '$(OS)' == 'Unix' ">mono &quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot;</NuGet>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectToBuild Include="Src\*.sln" />
+    <ProjectToBuild Include="src\*.sln" />
   </ItemGroup>
   <!-- Expand build output files AFTER the build has run. 
        Note that the Build Task MUST BE defined by the file that includes this file. -->
@@ -15,7 +17,7 @@
     </ItemGroup>
   </Target>
   
-  <UsingTask TaskName="xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
+  <UsingTask Condition=" '$(OS)' != 'Unix' " TaskName="xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
 
   <!--Clean-->
   <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
@@ -27,13 +29,14 @@
   </Target>
 
   <!--Compile-->
-  <Target Name="Build" DependsOnTargets="CleanAll;RestorePackages">
-    <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
+  <Target Name="Build" DependsOnTargets="RestorePackages">
+    <MSBuild Projects="@(ProjectToBuild)" Targets="Rebuild" Properties="Configuration=Release"/>
   </Target>
 
   <!--Test. Note that the GetTestAssemblies Task MUST BE defined in the Build.config file. -->
   <Target Name="Test" DependsOnTargets="GetTestAssemblies">
-    <xunit Assemblies="@(TestAssemblies)" />
+    <xunit Condition=" '$(OS)' != 'Unix' " Assemblies="@(TestAssemblies)" />
+    <Exec Condition=" '$(OS)' == 'Unix' " Command="mono &quot;$(XUnitPath)\xunit.console.clr4.exe&quot; /silent @(TestAssemblies)" />
   </Target>
 
   
@@ -43,11 +46,10 @@
   </ItemGroup>
 
   <Target Name="RestorePackages" DependsOnTargets="_DownloadNuGet">
-    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; install xunit.runner.msbuild -SolutionDir &quot;$(MSBuildProjectDirectory)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\')" />
-    
-    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
+    <Exec Command="$(NuGet) install xunit.runner.msbuild -SolutionDir &quot;$(MSBuildProjectDirectory)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\')" />
+    <Exec Command="$(NuGet) restore &quot;%(Solution.Identity)&quot;" />
   </Target>
- 
+
   <Target Name="_DownloadNuGet">
     <MakeDir Directories="$(MSBuildThisFileDirectory)tools\NuGet" />
     <DownloadNuGet OutputFilename="$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe" Condition="!Exists('$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe')" />

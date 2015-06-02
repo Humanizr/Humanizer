@@ -1,0 +1,1 @@
+xbuild build.proj /verbosity:minimal /clp:Verbosity=minimal
