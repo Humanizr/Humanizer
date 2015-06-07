@@ -1,4 +1,5 @@
 ###In Development
+ - [#416](https://github.com/MehdiK/Humanizer/pull/416): Change BrazilianPortugueseOrdinalizer to PortugueseOrdinalizer
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.36.0...master)
 

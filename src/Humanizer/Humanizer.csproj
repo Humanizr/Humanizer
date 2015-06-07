@@ -109,12 +109,12 @@
     <Compile Include="Localisation\NumberToWords\TurkishNumberToWordConverter.cs" />
     <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\GermanOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\PortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\RussianOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\DutchOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\SpanishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\EnglishOrdinalizer.cs" />
-    <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\TurkishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\UkrainianOrdinalizer.cs" />
@@ -194,6 +194,7 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.pt.resx" />
     <EmbeddedResource Include="Properties\Resources.uk.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
@@ -226,7 +227,6 @@
     <EmbeddedResource Include="Properties\Resources.nl.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
-    <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Latn.resx" />
     <EmbeddedResource Include="Properties\Resources.sr.resx" />
