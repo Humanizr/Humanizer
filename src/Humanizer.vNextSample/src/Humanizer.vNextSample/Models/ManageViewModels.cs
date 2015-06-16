@@ -34,11 +34,9 @@ namespace Humanizer.vNextSample.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
@@ -53,11 +51,9 @@ namespace Humanizer.vNextSample.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
@@ -74,12 +70,10 @@ namespace Humanizer.vNextSample.Models
     public class VerifyPhoneNumberViewModel
     {
         [Required]
-        [Display(Name = "Code")]
         public string Code { get; set; }
 
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
 
