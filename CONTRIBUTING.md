@@ -21,7 +21,6 @@ Pull requests are code reviewed. Here is a checklist you should tick through bef
  - Your PR is (re)based on top of the latest commits (more info below)
  - Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
  - Readme is updated if you change an existing feature or add a new one
- - An entry is added in the release_notes.md file in the 'In Development' section with a link to your PR and a description of what's changed. Please follow the wording style for the description.
 
 Please rebase your code on top of the latest commits.
 Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts.

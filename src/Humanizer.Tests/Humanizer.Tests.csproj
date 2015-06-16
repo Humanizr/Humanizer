@@ -108,6 +108,7 @@
     <Compile Include="Localisation\pl\NumberToWordsTests.cs" />
     <Compile Include="Localisation\pl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\nl\OrdinalizeTests.cs" />
     <Compile Include="Localisation\pt-BR\OrdinalizeTests.cs" />
     <Compile Include="Localisation\ro-Ro\TimeSpanHumanizerTests.cs" />
     <Compile Include="Localisation\ru-RU\NumberToWordsTests.cs" />
@@ -134,12 +135,18 @@
     <Compile Include="Localisation\sl\NumberToWordsTests.cs" />
     <Compile Include="Localisation\sl\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sr-Latn\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sr-Latn\NumberToWordsTest.cs" />
     <Compile Include="Localisation\sr-Latn\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sr\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\sr\NumberToWordsTest.cs" />
     <Compile Include="Localisation\sr\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\sv\DateHumanizeTests.cs" />
     <Compile Include="Localisation\sv\TimeSpanHumanizeTests.cs" />
     <Compile Include="DateTimeHumanizePrecisionStrategyTests.cs" />
+    <Compile Include="Localisation\uk-UA\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\uk-UA\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\uk-UA\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\uk-UA\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\DateHumanizeTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\NumberToWordsTests.cs" />
     <Compile Include="Localisation\uz-Cyrl-UZ\TimeSpanHumanizeTests.cs" />
@@ -206,7 +213,9 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Inflections\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

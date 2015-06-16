@@ -18,6 +18,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Inflector methods](#inflector-methods)
      - [Pluralize](#pluralize)
      - [Singularize](#singularize)
+     - [Adding Words](#adding-words)
      - [ToQuantity](#toquantity)
      - [Ordinalize](#ordinalize)
      - [Titleize](#titleize)
@@ -38,7 +39,6 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [PowerShell Humanizer](#powershell-humanizer)
    - [Humanizer JVM](#humanizerjvm)
    - [Humanizer.JS](#humanizerjs)
- - [Author](#author)
  - [Main contributors](#main-contributors)
  - [License](#license)
  - [Icon](#icon)
@@ -376,6 +376,12 @@ Culture to use can be specified explicitly. If it is not, current thread's curre
 TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
 ```
 
+In addition, a minimum unit of time may be specified to avoid rolling down to a smaller unit. For example:
+  ```C#
+  TimeSpan.FromMilliseconds(122500).Humanize(minUnit: TimeUnit.Second) => "2 minutes, 2 seconds"    // instead of 2 minutes, 2 seconds, 500 milliseconds
+  TimeSpan.FromHours(25).Humanize(minUnit: TimeUnit.Day) => "1 Day"   //instead of 1 Day, 1 Hour
+  ```
+
 In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:
 ```C#
 TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day) => "7 days"    // instead of 1 week
@@ -458,6 +464,25 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 
 
 The overload of `Singularize` with `plurality` argument is obsolete and will be removed in next major release.
+
+##<a id="adding-words">Adding Words</a>
+Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabluary` used by `Inflector`):
+
+```C#
+// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx:
+Vocabularies.Default.AddIrregular("person", "people");
+
+// Adds an uncountable word to the vocabulary.  Will be ignored when plurality is changed:
+Vocabularies.Default.AddUncountable("fish");
+
+// Adds a rule to the vocabulary that does not follow trivial rules for pluralization, e.g. "bus" -> "buses"
+Vocabularies.Default.AddPlural("bus", "buses");
+
+// Adds a rule to the vocabulary that does not follow trivial rules for singularization
+// (will match both "vertices" -> "vertex" and "indices" -> "index"):
+Vocabularies.Default.AddSingular("(vert|ind)ices$", "$1ex");
+
+```
 
 ####<a id="toquantity">ToQuantity</a>
 Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
@@ -972,10 +997,8 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 ###<a id="humanizerjs">Humanizer.JS</a>
 [Humanizer.JS](https://github.com/SamuelEnglard/Humanizer.Js) is a TypeScript port of the Humanizer framework.
 
-##<a id="author">Author</a>
-Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
-
 ##<a id="main-contributors">Main contributors</a>
+ - Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
  - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
  - Max Malook ([@mexx](https://github.com/mexx))
 

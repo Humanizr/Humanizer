@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</description>
     <copyright>Copyright 2012-2014  Mehdi Khalili</copyright>
-    <licenseUrl>https://github.com/MehdiK/Humanizer/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\**" target="lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />

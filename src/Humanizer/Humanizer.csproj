@@ -57,6 +57,8 @@
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeOffsetHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\IDateTimeOffsetHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\PrecisionDateTimeOffsetHumanizeStrategy.cs" />
+    <Compile Include="Inflections\Vocabularies.cs" />
+    <Compile Include="Inflections\Vocabulary.cs" />
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\OxfordStyleCollectionFormatter.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Configuration\FormatterRegistry.cs" />
     <Compile Include="Configuration\NumberToWordsConverterRegistry.cs" />
     <Compile Include="Configuration\OrdinalizerRegistry.cs" />
+    <Compile Include="Localisation\Formatters\UkrainianFormatter.cs" />
     <Compile Include="Localisation\NumberToWords\BanglaNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
@@ -74,6 +77,8 @@
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
     <Compile Include="Localisation\NumberToWords\GenderedNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\GenderlessNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\SerbianCyrlNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\SerbianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\SlovenianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DutchNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\DefaultNumberToWordsConverter.cs" />
@@ -98,20 +103,24 @@
     <Compile Include="Localisation\NumberToWords\PolishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\RussianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\Formatters\HebrewFormatter.cs" />
+    <Compile Include="Localisation\NumberToWords\UkrainianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\UzbekCyrlNumberToWordConverter.cs" />
     <Compile Include="Localisation\NumberToWords\UzbekLatnNumberToWordConverter.cs" />
     <Compile Include="Localisation\NumberToWords\TurkishNumberToWordConverter.cs" />
     <Compile Include="Localisation\Ordinalizers\IOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\GermanOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\PortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\RussianOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\DutchOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\SpanishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\DefaultOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\EnglishOrdinalizer.cs" />
-    <Compile Include="Localisation\Ordinalizers\BrazilianPortugueseOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\TurkishOrdinalizer.cs" />
     <Compile Include="Localisation\Ordinalizers\ItalianOrdinalizer.cs" />
+    <Compile Include="Localisation\Ordinalizers\UkrainianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="Plurality.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
@@ -134,7 +143,7 @@
     <Compile Include="OnNoMatch.cs" />
     <Compile Include="NoMatchFoundException.cs" />
     <Compile Include="RomanNumeralExtensions.cs" />
-    <Compile Include="StringExentions.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
@@ -185,6 +194,8 @@
     <None Include="Humanizer.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.pt.resx" />
+    <EmbeddedResource Include="Properties\Resources.uk.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
@@ -216,7 +227,6 @@
     <EmbeddedResource Include="Properties\Resources.nl.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
-    <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.sk.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Latn.resx" />
     <EmbeddedResource Include="Properties\Resources.sr.resx" />
