@@ -75,6 +75,7 @@
     <Compile Include="Configuration\NumberToWordsConverterRegistry.cs" />
     <Compile Include="Configuration\OrdinalizerRegistry.cs" />
     <Compile Include="Localisation\Formatters\UkrainianFormatter.cs" />
+    <Compile Include="Localisation\NumberToWords\AfrikaansNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\BanglaNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\BrazilianPortugueseNumberToWordsConverter.cs" />
     <Compile Include="GrammaticalCase.cs" />
@@ -243,7 +244,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetPortable)' == 'false' ">    
+  <ItemGroup Condition=" '$(TargetPortable)' == 'false' ">
     <Reference Include="System" />
   </ItemGroup>
   <Import Condition=" '$(TargetPortable)' == 'false' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
