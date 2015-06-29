@@ -7,6 +7,7 @@ namespace Humanizer.Configuration
         public NumberToWordsConverterRegistry()
             : base((culture) => new DefaultNumberToWordsConverter(culture))
         {
+            Register("af", new AfrikaansNumberToWordsConverter());
             Register("en", new EnglishNumberToWordsConverter());
             Register("ar", new ArabicNumberToWordsConverter());
             Register("fa", new FarsiNumberToWordsConverter());
