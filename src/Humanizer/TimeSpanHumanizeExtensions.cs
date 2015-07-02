@@ -155,8 +155,9 @@ namespace Humanizer
 
         private static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits)
         {
+            // Always use positive units to account for negative timespans
             return amountOfTimeUnits != 0
-                ? cultureFormatter.TimeSpanHumanize(timeUnitType, amountOfTimeUnits)
+                ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits))
                 : null;
         }
 
