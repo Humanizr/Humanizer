@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+
 namespace Humanizer.Inflections
 {
     /// <summary>
@@ -5,7 +8,12 @@ namespace Humanizer.Inflections
     /// </summary>
     public static class Vocabularies
     {
-        private static Vocabulary _default;
+        private static Lazy<Vocabulary> _instance;
+
+        static Vocabularies()
+        {
+            _instance = new Lazy<Vocabulary>(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
+        }
 
         /// <summary>
         /// The default vocabulary used for singular/plural irregularities.
@@ -16,16 +24,13 @@ namespace Humanizer.Inflections
         {
             get
             {
-                if (_default == null)
-                    BuildDefault();
-
-                return _default;
+                return _instance.Value;
             }
         }
 
-        private static void BuildDefault()
+        private static Vocabulary BuildDefault()
         {
-            _default = new Vocabulary();
+            var _default = new Vocabulary();
 
             _default.AddPlural("$", "s");
             _default.AddPlural("s$", "s");
@@ -99,6 +104,8 @@ namespace Humanizer.Inflections
             _default.AddUncountable("tbsp");
             _default.AddUncountable("ml");
             _default.AddUncountable("l");
+
+            return _default;
         }
     }
 }
