@@ -142,7 +142,7 @@ namespace Humanizer
             {
                 try
                 {
-                    return Convert.ToInt32(totalTimeNumberOfUnits);
+                    return (int)totalTimeNumberOfUnits;
                 }
                 catch
                 {

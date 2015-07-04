@@ -56,6 +56,7 @@ namespace Humanizer.Tests
             Assert.Equal(expected, actual);
         }
 
+
         [Theory]
         [InlineData(135, "2 minutes")]
         [InlineData(60, "1 minute")]
@@ -174,6 +175,16 @@ namespace Humanizer.Tests
         public void TimeSpanWithPrecesion(int milliseconds, int precesion, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precesion);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(50)]
+        [InlineData(52)]
+        public void TimeSpanWithMinAndMaxUnits_DoesNotReportExcessiveTime(int minutes)
+        {
+            var actual = TimeSpan.FromMinutes(minutes).Humanize(2, null, TimeUnit.Hour, TimeUnit.Minute);
+            var expected = TimeSpan.FromMinutes(minutes).Humanize(2);
             Assert.Equal(expected, actual);
         }
 
