@@ -336,6 +336,9 @@ namespace Humanizer.Tests.Bytes
         [InlineData(2, null, "2 B")]
         [InlineData(2000, "KB", "1.95 KB")]
         [InlineData(2123, "#.##", "2.07 KB")]
+        [InlineData(10000000, "KB", "9765.63 KB")]
+        [InlineData(10000000, "#,##0 KB", "9,766 KB")]
+        [InlineData(10000000, "#,##0.# KB", "9,765.6 KB")]
         public void HumanizesBytes(double input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, input.Bytes().Humanize(format));
