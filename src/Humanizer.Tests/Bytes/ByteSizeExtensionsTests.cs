@@ -130,6 +130,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
+        [InlineData(0, null, "0 b")]
+        [InlineData(0, "GB", "0 GB")]
         [InlineData(2, null, "2 GB")]
         [InlineData(2, "MB", "2048 MB")]
         [InlineData(2.123, "#.##", "2.12 GB")]
@@ -195,6 +197,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
+        [InlineData(0, null, "0 b")]
+        [InlineData(0, "MB", "0 MB")]
         [InlineData(2, null, "2 MB")]
         [InlineData(2, "KB", "2048 KB")]
         [InlineData(2.123, "#", "2 MB")]
@@ -260,6 +264,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
+        [InlineData(0, null, "0 b")]
+        [InlineData(0, "KB", "0 KB")]
         [InlineData(2, null, "2 KB")]
         [InlineData(2, "B", "2048 B")]
         [InlineData(2.123, "#.####", "2.123 KB")]
@@ -325,9 +331,14 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
+        [InlineData(0, null, "0 b")]
+        [InlineData(0, "B", "0 B")]
         [InlineData(2, null, "2 B")]
         [InlineData(2000, "KB", "1.95 KB")]
         [InlineData(2123, "#.##", "2.07 KB")]
+        [InlineData(10000000, "KB", "9765.63 KB")]
+        [InlineData(10000000, "#,##0 KB", "9,766 KB")]
+        [InlineData(10000000, "#,##0.# KB", "9,765.6 KB")]
         public void HumanizesBytes(double input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, input.Bytes().Humanize(format));
@@ -383,6 +394,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
+        [InlineData(0, null, "0 b")]
+        [InlineData(0, "b", "0 b")]
         [InlineData(2, null, "2 b")]
         [InlineData(12, "B", "1.5 B")]
         [InlineData(10000, "#.# KB", "1.2 KB")]
