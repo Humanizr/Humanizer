@@ -66,7 +66,7 @@ namespace Humanizer.Tests.Bytes
 
         [Theory]
         [InlineData(2, null, "2 TB")]
-        [InlineData(2, "GB", "2048 GB")]
+        [InlineData(2, "GB", "2,048 GB")]
         [InlineData(2.123, "#.#", "2.1 TB")]
         public void HumanizesTerabytes(double input, string format, string expectedValue)
         {
@@ -133,7 +133,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "0 b")]
         [InlineData(0, "GB", "0 GB")]
         [InlineData(2, null, "2 GB")]
-        [InlineData(2, "MB", "2048 MB")]
+        [InlineData(2, "MB", "2,048 MB")]
         [InlineData(2.123, "#.##", "2.12 GB")]
         public void HumanizesGigabytes(double input, string format, string expectedValue)
         {
@@ -200,7 +200,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "0 b")]
         [InlineData(0, "MB", "0 MB")]
         [InlineData(2, null, "2 MB")]
-        [InlineData(2, "KB", "2048 KB")]
+        [InlineData(2, "KB", "2,048 KB")]
         [InlineData(2.123, "#", "2 MB")]
         public void HumanizesMegabytes(double input, string format, string expectedValue)
         {
@@ -267,7 +267,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "0 b")]
         [InlineData(0, "KB", "0 KB")]
         [InlineData(2, null, "2 KB")]
-        [InlineData(2, "B", "2048 B")]
+        [InlineData(2, "B", "2,048 B")]
         [InlineData(2.123, "#.####", "2.123 KB")]
         public void HumanizesKilobytes(double input, string format, string expectedValue)
         {
@@ -336,7 +336,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(2, null, "2 B")]
         [InlineData(2000, "KB", "1.95 KB")]
         [InlineData(2123, "#.##", "2.07 KB")]
-        [InlineData(10000000, "KB", "9765.63 KB")]
+        [InlineData(10000000, "KB", "9,765.63 KB")]
         [InlineData(10000000, "#,##0 KB", "9,766 KB")]
         [InlineData(10000000, "#,##0.# KB", "9,765.6 KB")]
         public void HumanizesBytes(double input, string format, string expectedValue)
