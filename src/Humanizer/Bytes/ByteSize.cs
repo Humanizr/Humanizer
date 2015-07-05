@@ -157,7 +157,7 @@ namespace Humanizer.Bytes
         public string ToString(string format)
         {
             if (!format.Contains("#") && !format.Contains("0"))
-                format = "0.## " + format;
+                format = "###,###,###,###,##0.## " + format;
 
             Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             Func<double, string> output = n => n.ToString(format);
