@@ -245,6 +245,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(TargetPortable)' == 'false' ">
+    <Reference Include="System" />
+  </ItemGroup>
   <Import Condition=" '$(TargetPortable)' == 'false' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition=" '$(TargetPortable)' == 'true' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>
