@@ -25,36 +25,36 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(number/1000000000 == 1
+                parts.Add(number / 1000000000 == 1
                     ? "miljardi "
-                    : string.Format("{0}miljardia ", Convert(number/1000000000)));
+                    : string.Format("{0}miljardia ", Convert(number / 1000000000)));
 
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(number/1000000 == 1
+                parts.Add(number / 1000000 == 1
                     ? "miljoona "
-                    : string.Format("{0}miljoonaa ", Convert(number/1000000)));
+                    : string.Format("{0}miljoonaa ", Convert(number / 1000000)));
 
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(number/1000 == 1
+                parts.Add(number / 1000 == 1
                     ? "tuhat "
-                    : string.Format("{0}tuhatta ", Convert(number/1000)));
+                    : string.Format("{0}tuhatta ", Convert(number / 1000)));
 
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(number/100 == 1
+                parts.Add(number / 100 == 1
                     ? "sata"
-                    : string.Format("{0}sataa", Convert(number/100)));
+                    : string.Format("{0}sataa", Convert(number / 100)));
 
                 number %= 100;
             }
@@ -65,7 +65,7 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= 10;
             }
             else if (number > 10 && number < 20)
-                parts.Add(string.Format("{0}toista", UnitsMap[number%10]));
+                parts.Add(string.Format("{0}toista", UnitsMap[number % 10]));
 
             if (number > 0 && number <= 10)
                 parts.Add(UnitsMap[number]);
@@ -92,33 +92,25 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((number / 1000000000) > 0)
             {
-                var fraction = number / 1000000000;
-                parts.Add(string.Format("{0}miljardis", fraction == 1 ? "" : ToOrdinal(fraction, true)));
-
+                parts.Add(string.Format("{0}miljardis", (number / 1000000000) == 1 ? "" : ToOrdinal(number / 1000000000, true)));
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                var fraction = number / 1000000;
-                parts.Add(string.Format("{0}miljoonas", fraction == 1 ? "" : ToOrdinal(fraction, true)));
-
+                parts.Add(string.Format("{0}miljoonas", (number / 1000000) == 1 ? "" : ToOrdinal(number / 1000000, true)));
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                var fraction = number / 1000;
-                parts.Add(string.Format("{0}tuhannes", fraction == 1 ? "" : ToOrdinal(fraction, true)));
-
+                parts.Add(string.Format("{0}tuhannes", (number / 1000) == 1 ? "" : ToOrdinal(number / 1000, true)));
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                var fraction = number / 100;
-                parts.Add(string.Format("{0}sadas", fraction == 1 ? "" : ToOrdinal(fraction, true)));
-
+                parts.Add(string.Format("{0}sadas", (number / 100) == 1 ? "" : ToOrdinal(number / 100, true)));
                 number %= 100;
             }
 
