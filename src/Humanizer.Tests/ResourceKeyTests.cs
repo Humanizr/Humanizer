@@ -84,16 +84,22 @@ namespace Humanizer.Tests
             get
             {
                 return new[] {
+                    new object[]{ "TimeSpanHumanize_SingleMillisecond", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Millisecond) },
                     new object[]{ "TimeSpanHumanize_SingleSecond", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Second) },
                     new object[]{ "TimeSpanHumanize_SingleMinute", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Minute) },
                     new object[]{ "TimeSpanHumanize_SingleHour", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Hour) },
                     new object[]{ "TimeSpanHumanize_SingleDay", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Day) },
                     new object[]{ "TimeSpanHumanize_SingleWeek", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Week) },
+                    new object[]{ "TimeSpanHumanize_SingleMonth", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Month) },
+                    new object[]{ "TimeSpanHumanize_SingleYear", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Year) },
+                    new object[]{ "TimeSpanHumanize_MultipleMilliseconds", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Millisecond, 10) },
                     new object[]{ "TimeSpanHumanize_MultipleSeconds", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Second, 10) },
                     new object[]{ "TimeSpanHumanize_MultipleMinutes", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Minute, 10) },
                     new object[]{ "TimeSpanHumanize_MultipleHours", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Hour, 10) },
                     new object[]{ "TimeSpanHumanize_MultipleDays", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Day, 10) },
                     new object[]{ "TimeSpanHumanize_MultipleWeeks", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Week, 10) },
+                    new object[]{ "TimeSpanHumanize_MultipleMonths", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Month, 10) },
+                    new object[]{ "TimeSpanHumanize_MultipleYears", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Year, 10) },
 
                     new object[]{ "TimeSpanHumanize_Zero", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Millisecond, 0) },
                     new object[]{ "TimeSpanHumanize_Zero", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Second, 0) },
