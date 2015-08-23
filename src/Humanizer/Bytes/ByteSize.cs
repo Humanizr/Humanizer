@@ -180,7 +180,7 @@ namespace Humanizer.Bytes
 
             var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format);
 
-            formattedLargeWholeNumberValue = (formattedLargeWholeNumberValue.Equals(string.Empty))
+            formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
                                               ? "0"
                                               : formattedLargeWholeNumberValue;
 
