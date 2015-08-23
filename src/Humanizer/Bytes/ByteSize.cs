@@ -178,7 +178,13 @@ namespace Humanizer.Bytes
             if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
                 return output(Bits);
 
-            return string.Format("{0} {1}", LargestWholeNumberValue.ToString(format), LargestWholeNumberSymbol);
+            var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format);
+
+            formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
+                                              ? "0"
+                                              : formattedLargeWholeNumberValue;
+
+            return string.Format("{0} {1}", formattedLargeWholeNumberValue, LargestWholeNumberSymbol);
         }
 
         public override bool Equals(object value)
