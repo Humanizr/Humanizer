@@ -332,9 +332,9 @@ namespace Humanizer.Tests.Bytes
 
         [Theory]
         [InlineData(0, null, "0 b")]
+        [InlineData(0, "#.##", "0 b")]
         [InlineData(0, "B", "0 B")]
         [InlineData(2, null, "2 B")]
-        [InlineData(0, "#.##", "0 b")]
         [InlineData(2000, "KB", "1.95 KB")]
         [InlineData(2123, "#.##", "2.07 KB")]
         [InlineData(10000000, "KB", "9765.63 KB")]
