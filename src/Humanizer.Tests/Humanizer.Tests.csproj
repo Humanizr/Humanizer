@@ -131,7 +131,9 @@
     <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
     <Compile Include="Localisation\nl\OrdinalizeTests.cs" />
     <Compile Include="Localisation\pt-BR\OrdinalizeTests.cs" />
-    <Compile Include="Localisation\ro-Ro\TimeSpanHumanizerTests.cs" />
+    <Compile Include="Localisation\ro-RO\NumberToWordsTests.cs" />
+    <Compile Include="Localisation\ro-RO\OrdinalizerTests.cs" />
+    <Compile Include="Localisation\ro-RO\TimeSpanHumanizerTests.cs" />
     <Compile Include="Localisation\ru-RU\NumberToWordsTests.cs" />
     <Compile Include="Localisation\ru-RU\OrdinalizeTests.cs" />
     <Compile Include="Localisation\ru-RU\TimeSpanHumanizeTests.cs" />
@@ -195,7 +197,7 @@
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="ToQuantityTests.cs" />
     <Compile Include="TransformersTests.cs" />
-    <Compile Include="Localisation\ro-Ro\DateHumanizeTests.cs" />
+    <Compile Include="Localisation\ro-RO\DateHumanizeTests.cs" />
     <Compile Include="DateHumanizeDefaultStrategyTests.cs" />
     <Compile Include="DehumanizeToEnumTests.cs" />
     <Compile Include="EnumHumanizeTests.cs" />
