@@ -243,7 +243,6 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(20000000, "al douăzeci milioanelea")]
         [InlineData(1000000000, "al un miliardulea")]
         [InlineData(2000000000, "al două miliardelea")]
-        //[InlineData(2000000000, "al două miliardelea")] // exceed int.MaxValue
         public void ToOrdinalWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToOrdinalWords());
@@ -297,7 +296,6 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(20000000, "al douăzeci milioanelea")]
         [InlineData(1000000000, "al un miliardulea")]
         [InlineData(2000000000, "al două miliardelea")]
-        //[InlineData(20000000000, "a douăzeci miliardelea")] // exceed int.MaxValue
         public void ToMasculineOrdinalWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
@@ -351,7 +349,6 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(20000000, "a douăzecea milioana")]
         [InlineData(1000000000, "a miliarda")]
         [InlineData(2000000000, "a două miliarda")]
-        //[InlineData(20000000000, "a douăzecea miliarda")] // exceed int.MaxValue
         public void ToFeminineOrdinalWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
