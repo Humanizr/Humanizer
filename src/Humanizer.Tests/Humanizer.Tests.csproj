@@ -192,6 +192,7 @@
     <Compile Include="Localisation\zh-Hant\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\zh-CN\DateHumanizeTests.cs" />
     <Compile Include="Localisation\zh-CN\TimeSpanHumanizeTests.cs" />
+    <Compile Include="MetricNumeralTests.cs" />
     <Compile Include="ResourceKeyTests.cs" />
     <Compile Include="RomanNumeralTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
