@@ -30,6 +30,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Number to words](#number-to-words)
    - [Number to ordinal words](#number-to-ordinal-words)
    - [Roman numerals](#roman-numerals)
+   - [Metric numerals](#metric-numerals)
    - [ByteSize](#bytesize)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
@@ -743,6 +744,27 @@ Also the reverse operation using the `FromRoman` extension.
 "III".FromRoman() => 3
 "IV".FromRoman() => 4
 "V".FromRoman() => 5
+```
+
+###<a id="metric-numerals">Metric numerals</a>
+Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
+
+```C#
+1d.ToMetric() => "1"
+1230d.ToMetric() => "1.23k"
+0.1d.ToMetric() => "100m"
+```
+
+Also the reverse operation using the `FromMetric` extension.
+
+```C#
+1d.ToMetric() => "1"
+1230d.ToMetric() => "1.23k"
+0.1d.ToMetric() => "100m"
+
+"1".FromMetric() => 1
+"1.23k".FromMetric() => 1230
+"100m".FromMetric() => 0.1
 ```
 
 ###<a id="bytesize">ByteSize</a>
