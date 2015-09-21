@@ -115,9 +115,11 @@ namespace Humanizer
                         if (input.IsOutOfRange()) throw new ArgumentOutOfRangeException("input");
                         var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
                         if (exponent == 0) return input.ToString();
-                        return input * Math.Pow(1000, -exponent)
+	                var number = input*Math.Pow(1000, -exponent);
+	                var symbol = Math.Sign(exponent) == 1 ? Symbols[0][exponent - 1] : Symbols[1][-exponent - 1];
+                        return number
                                 + (isSplitedBySpace ? " " : String.Empty)
-                                + GetUnit((Math.Sign(exponent) == 1 ? Symbols[0][exponent - 1] : Symbols[1][-exponent - 1]), useSymbol);
+                                + GetUnit(symbol, useSymbol);
                 }
 
                 /// <summary>
