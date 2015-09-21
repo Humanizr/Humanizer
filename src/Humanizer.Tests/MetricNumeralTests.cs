@@ -38,7 +38,9 @@ namespace Humanizer.Tests
                 [InlineData(123d, "123")]
                 [InlineData(-123d, "-123")]
                 [InlineData(1230d, "1.23k")]
-                [InlineData(1000d, "1 k")]
+		[InlineData(1000d, "1 k")]
+		[InlineData(1000d, "1 kilo")]
+		[InlineData(1E-3, "1milli")]
                 public void FromMetric(double expected, string input)
                 {
                         Assert.Equal(expected, input.FromMetric());
@@ -51,7 +53,9 @@ namespace Humanizer.Tests
                 [InlineData("12yy")]
                 [InlineData("-8e")]
                 [InlineData("0.12c")]
-                [InlineData("0.02l")]
+		[InlineData("0.02l")]
+		[InlineData("0.12kilkilo")]
+		[InlineData("0.02alois")]
                 public void FromMetricOnInvalid(string input)
                 {
                         Assert.Throws<ArgumentException>(() => input.FromMetric());

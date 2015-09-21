@@ -76,6 +76,7 @@ namespace Humanizer
                 {
                         if (input == null) throw new ArgumentNullException("input");
                         input = input.Trim();
+                        input = ReplaceNameBySymbol(input);
                         if (input.Length == 0 || input.IsInvalidMetricNumeral())
                                 throw new ArgumentException("Empty or invalid Metric string.", "input");
                         input = input.Replace(" ", String.Empty);
@@ -85,6 +86,11 @@ namespace Humanizer
                         var number = Double.Parse(input.Remove(input.Length - 1));
                         var exponent = Math.Pow(10, Symbols[0].Contains(last) ? getExponent(Symbols[0]) : -getExponent(Symbols[1]));
                         return number * exponent;
+                }
+
+                private static string ReplaceNameBySymbol(string input)
+                {
+                        return Names.Aggregate(input, (current, name) => current.Replace(name.Value, name.Key.ToString()));
                 }
 
                 /// <summary>
