@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using Xunit;
 using Xunit.Extensions;
 
@@ -21,6 +20,16 @@ namespace Humanizer.Tests
                 }
 
                 [Theory]
+                [InlineData(1E+27)]
+                [InlineData(1E-27)]
+                [InlineData(-1E+27)]
+                [InlineData(-1E-27)]
+                public void ToMetricOnInvalid(double input)
+                {
+                       Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
+                }
+
+                [Theory]
                 [InlineData(0, "0")]
                 [InlineData(123d, "123")]
                 [InlineData(-123d, "-123")]
@@ -31,6 +40,25 @@ namespace Humanizer.Tests
                         Assert.Equal(expected, input.FromMetric());
                 }
 
+                [Theory]
+                [InlineData("")]
+                [InlineData(" ")]
+                [InlineData("\t")]
+                [InlineData("12yy")]
+                [InlineData("-8e")]
+                [InlineData("0.12c")]
+                [InlineData("0.02l")]
+                public void FromMetricOnInvalid(string input)
+                {
+                        Assert.Throws<ArgumentException>(() => input.FromMetric());
+                }
+
+                [Fact]
+                public void FromMetricOnNull()
+                {
+                        Assert.Throws<ArgumentNullException>(() =>
+                                MetricNumeralExtensions.FromMetric(null));
+                }
 
 
                 [Fact]
