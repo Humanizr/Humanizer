@@ -66,8 +66,6 @@ namespace Humanizer
                 //         {"y", "yocto" }
                 //};
 
-
-
                 /// <summary>
                 /// Converts a Metric representation into a number.
                 /// </summary>
@@ -117,6 +115,26 @@ namespace Humanizer
                         return input * Math.Pow(1000, -exponent)
                                 + (isSplitedBySpace ? " " : String.Empty)
                                 + (Math.Sign(exponent) == 1 ? Symbols[0][exponent - 1] : Symbols[1][-exponent - 1]);
+                }
+
+                /// <summary>
+                /// Converts a number into a valid and Human-readable Metric representation.
+                /// </summary>
+                /// <remarks>
+                /// Inspired by a snippet from Thom Smith.
+                /// <see cref="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix"/>
+                /// </remarks>
+                /// <param name="input">Number to convert to a Metric representation.</param>
+                /// <param name="isSplitedBySpace">True will split the number and the symbol with a whitespace.</param>
+                /// <example>
+                /// 1000.ToMetric() => "1k"
+                /// 123.ToMetric() => "123"
+                /// 1E-1.ToMetric() => "100m"
+                /// </example>
+                /// <returns>A valid Metric representation</returns>
+                public static string ToMetric(this int input, bool isSplitedBySpace = false)
+                {
+                        return Convert.ToDouble(input).ToMetric(isSplitedBySpace);
                 }
 
                 /// <summary>
