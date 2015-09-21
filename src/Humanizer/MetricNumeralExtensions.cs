@@ -42,27 +42,31 @@ namespace Humanizer
                         new[] { 'm', '\u03bc', 'n', 'p', 'f', 'a', 'z', 'y' }
                 };
 
-//                yotta Y 1000 8 10 24 1 000 000 000 000 000 000 000000 septillion quadrillion 1991
-//zetta Z 1000 7 10 21 1 000 000 000 000 000 000 000 sextillion thousand trillion 1991
-//exa E 1000 6 10 18 1 000 000 000 000 000 000 quintillion trillion 1975
-//peta P 1000 5 10 15 1 000 000 000 000 000 quadrillion thousand billion 1975
-//tera T 1000 4 10 12 1 000 000000 000 trillion billion 1960
-//giga G 1000 3 10 9 1 000 000000 billion thousand million 1960
-//mega M 1000 2 10 6 1 000 000 million 1960 (1873)
-//kilo k 1000 1 10 3 1 000 thousand 1960 (1795)
-//hecto h 1000 2/3 10 2 100 hundred 1960 (1795)
-//deca da 1000 1/3 10 1 10 ten 1960 (1795)
-//1000 0 10 0 1 one –
-//deci d 1000 −1/3 10 −1 0.1 tenth 1960 (1795)
-//centi c 1000 −2/3 10 −2 0.01 hundredth 1960 (1795)
-//milli m 1000 −1 10 −3 0.001 thousandth 1960 (1795)
-//micro μ 1000 −2 10 −6 0.000 001 millionth 1960 (1873)
-//nano n 1000 −3 10 −9 0.000 000 001 billionth thousand millionth 1960
-//pico p 1000 −4 10 −12 0.000 000 000001 trillionth billionth 1960
-//femto f 1000 −5 10 −15 0.000 000 000000 001 quadrillionth thousand billionth 1964
-//atto a 1000 −6 10 −18 0.000 000 000000 000 001 quintillionth trillionth 1964
-//zepto z 1000 −7 10 −21 0.000 000 000000 000 000 001 sextillionth thousand trillionth 1991
-//yocto y
+                //private static readonly Dictionary<char, string> Names = new Dictionary<char, string>()
+                //{
+                //         {"Y", "yotta" },
+                //         {"Z", "zetta" },
+                //         {"E", "exa" },
+                //         {"P", "peta" },
+                //         {"T", "tera" },
+                //         {"G", "giga" },
+                //         {"M", "mega" },
+                //         {"k", "kilo" },
+                //         //{"h", "hecto"},
+                //         //{"e", "deca" }, // "da" is read as 'e'
+                //         //{"d", "deci" },
+                //         //{"c", "centi"},
+                //         {"m", "milli" },
+                //         {"μ", "micro" },
+                //         {"n", "nano" },
+                //         {"p", "pico" },
+                //         {"f", "femto" },
+                //         {"a", "atto" },
+                //         {"z", "zepto" },
+                //         {"y", "yocto" }
+                //};
+
+
 
                 /// <summary>
                 /// Converts a Metric representation into a number.
