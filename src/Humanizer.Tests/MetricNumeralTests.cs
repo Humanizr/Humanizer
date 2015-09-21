@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using Xunit;
 using Xunit.Extensions;
 
@@ -30,6 +31,8 @@ namespace Humanizer.Tests
                         Assert.Equal(expected, input.FromMetric());
                 }
 
+
+
                 [Fact]
                 public void TestAllSymbols()
                 {
@@ -49,6 +52,27 @@ namespace Humanizer.Tests
                                 b &= c;
                         }
                         Assert.True(b);
+                }
+
+                [Theory]
+                [InlineData(-9)]
+                [InlineData(-3)]
+                [InlineData(-2)]
+                [InlineData(-1)]
+                [InlineData(0)]
+                [InlineData(1)]
+                [InlineData(2)]
+                [InlineData(3)]
+                [InlineData(9)]
+                public void TestAllSymbolsAsInt(int exponent)
+                {
+                        var origin = Convert.ToInt32(Math.Pow(10, exponent));
+                        var isEquals = Equals(
+                                origin.ToString("0.##E+0", CultureInfo.InvariantCulture),
+                                origin.ToMetric().FromMetric().ToString("0.##E+0", CultureInfo.InvariantCulture));
+                        if (!isEquals)
+                                Debugger.Break();
+                        Assert.True(isEquals);
                 }
         }
 }
