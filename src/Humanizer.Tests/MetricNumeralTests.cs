@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Net.Configuration;
 using Xunit;
 using Xunit.Extensions;
 
@@ -9,14 +10,17 @@ namespace Humanizer.Tests
         public class MetricNumeralTests
         {
                 [Theory]
-                [InlineData("0", 0d, false)]
-                [InlineData("123", 123d, false)]
-                [InlineData("-123", (-123d), false)]
-                [InlineData("1.23k", 1230d, false)]
-                [InlineData("1 k", 1000d, true)]
-                public void ToMetric(string expected, double input, bool isSplitedBySpace = false)
+                [InlineData("0", 0d, false, true)]
+                [InlineData("123", 123d, false, true)]
+                [InlineData("-123", (-123d), false, true)]
+                [InlineData("1.23k", 1230d, false, true)]
+                [InlineData("1 k", 1000d, true, true)]
+                [InlineData("1 kilo", 1000d, true, false)]
+                [InlineData("1milli", 1E-3, false, false)]
+                public void ToMetric(string expected, double input,
+                        bool isSplitedBySpace, bool useSymbol)
                 {
-                        Assert.Equal(expected, input.ToMetric(isSplitedBySpace));
+                        Assert.Equal(expected, input.ToMetric(isSplitedBySpace, useSymbol));
                 }
 
                 [Theory]
@@ -26,7 +30,7 @@ namespace Humanizer.Tests
                 [InlineData(-1E-27)]
                 public void ToMetricOnInvalid(double input)
                 {
-                       Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
+                        Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
                 }
 
                 [Theory]

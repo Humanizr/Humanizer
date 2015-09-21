@@ -42,33 +42,29 @@ namespace Humanizer
                         new[] { 'm', '\u03bc', 'n', 'p', 'f', 'a', 'z', 'y' }
                 };
 
-                //private static readonly Dictionary<char, string> Names = new Dictionary<char, string>()
-                //{
-                //         {"Y", "yotta" },
-                //         {"Z", "zetta" },
-                //         {"E", "exa" },
-                //         {"P", "peta" },
-                //         {"T", "tera" },
-                //         {"G", "giga" },
-                //         {"M", "mega" },
-                //         {"k", "kilo" },
-                //         //{"h", "hecto"},
-                //         //{"e", "deca" }, // "da" is read as 'e'
-                //         //{"d", "deci" },
-                //         //{"c", "centi"},
-                //         {"m", "milli" },
-                //         {"μ", "micro" },
-                //         {"n", "nano" },
-                //         {"p", "pico" },
-                //         {"f", "femto" },
-                //         {"a", "atto" },
-                //         {"z", "zepto" },
-                //         {"y", "yocto" }
-                //};
+                /// <summary>
+                /// Names link a Metric symbol (as key) to its name (as value).
+                /// </summary>
+                /// <remarks>
+                /// We dont support :
+                /// {'h', "hecto"},
+                /// {'da', "deca" }, // !string
+                /// {'d', "deci" },
+                /// {'c', "centi"},
+                /// </remarks>
+                private static readonly Dictionary<char, string> Names = new Dictionary<char, string>()
+                {
+                         {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
+                         {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
+                };
 
                 /// <summary>
                 /// Converts a Metric representation into a number.
                 /// </summary>
+                /// <remarks>
+                /// We don't support input in the format {number}{name} nor {number} {name}.
+                /// We only provide a solution for {number}{symbol} and {number} {symbol}.
+                /// </remarks>
                 /// <param name="input">Metric representation to convert to a number</param>
                 /// <example>
                 /// "1k".FromMetric() => 1000d
@@ -100,13 +96,14 @@ namespace Humanizer
                 /// </remarks>
                 /// <param name="input">Number to convert to a Metric representation.</param>
                 /// <param name="isSplitedBySpace">True will split the number and the symbol with a whitespace.</param>
+                /// <param name="useSymbol">True will use symbol instead of name</param>
                 /// <example>
                 /// 1000d.ToMetric() => "1k"
                 /// 123d.ToMetric() => "123"
                 /// 1E-1.ToMetric() => "100m"
                 /// </example>
                 /// <returns>A valid Metric representation</returns>
-                public static string ToMetric(this double input, bool isSplitedBySpace = false)
+                public static string ToMetric(this double input, bool isSplitedBySpace = false, bool useSymbol = true)
                 {
                         if (input.Equals(0)) return input.ToString();
                         if (input.IsOutOfRange()) throw new ArgumentOutOfRangeException("input");
@@ -114,7 +111,7 @@ namespace Humanizer
                         if (exponent == 0) return input.ToString();
                         return input * Math.Pow(1000, -exponent)
                                 + (isSplitedBySpace ? " " : String.Empty)
-                                + (Math.Sign(exponent) == 1 ? Symbols[0][exponent - 1] : Symbols[1][-exponent - 1]);
+                                + GetUnit((Math.Sign(exponent) == 1 ? Symbols[0][exponent - 1] : Symbols[1][-exponent - 1]), useSymbol);
                 }
 
                 /// <summary>
@@ -126,15 +123,27 @@ namespace Humanizer
                 /// </remarks>
                 /// <param name="input">Number to convert to a Metric representation.</param>
                 /// <param name="isSplitedBySpace">True will split the number and the symbol with a whitespace.</param>
+                /// <param name="useSymbol">True will use symbol instead of name</param>
                 /// <example>
                 /// 1000.ToMetric() => "1k"
                 /// 123.ToMetric() => "123"
                 /// 1E-1.ToMetric() => "100m"
                 /// </example>
                 /// <returns>A valid Metric representation</returns>
-                public static string ToMetric(this int input, bool isSplitedBySpace = false)
+                public static string ToMetric(this int input, bool isSplitedBySpace = false, bool useSymbol = true)
                 {
-                        return Convert.ToDouble(input).ToMetric(isSplitedBySpace);
+                        return Convert.ToDouble(input).ToMetric(isSplitedBySpace, useSymbol);
+                }
+
+                /// <summary>
+                /// Get the unit from a symbol of from the symbol's name.
+                /// </summary>
+                /// <param name="symbol">The symbol linked to the unit</param>
+                /// <param name="useSymbol">True will use symbol instead of name</param>
+                /// <returns>A symbol or a symbol's name</returns>
+                private static string GetUnit(char symbol, bool useSymbol)
+                {
+                        return useSymbol ? symbol.ToString() : Names[symbol];
                 }
 
                 /// <summary>
