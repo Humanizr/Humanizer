@@ -52,7 +52,7 @@ namespace Humanizer
 		/// {'d', "deci" },
 		/// {'c', "centi"},
 		/// </remarks>
-		private static readonly Dictionary<char, string> Names = new Dictionary<char, string>()
+		private static readonly Dictionary<char, string> Names = new Dictionary<char, string>
                 {
                          {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
                          {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
@@ -67,24 +67,114 @@ namespace Humanizer
 		/// </remarks>
 		/// <param name="input">Metric representation to convert to a number</param>
 		/// <example>
+		/// <code>
 		/// "1k".FromMetric() => 1000d
 		/// "123".FromMetric() => 123d
 		/// "100m".FromMetric() => 1E-1
+		/// </code>
 		/// </example>
 		/// <returns>A number after a conversion from a Metric representation.</returns>
 		public static double FromMetric(this string input)
 		{
-			if (input == null) throw new ArgumentNullException("input");
+			input = CleanRepresentation(input);
+			return BuildNumber(input, input[input.Length - 1]);
+		}
+
+		/// <summary>
+		/// Converts a number into a valid and Human-readable Metric representation.
+		/// </summary>
+		/// <remarks>
+		/// Inspired by a snippet from Thom Smith.
+		/// <see cref="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix"/>
+		/// </remarks>
+		/// <param name="input">Number to convert to a Metric representation.</param>
+		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
+		/// <param name="useSymbol">True will use symbol instead of name</param>
+		/// <example>
+		/// <code>
+		/// 1000.ToMetric() => "1k"
+		/// 123.ToMetric() => "123"
+		/// 1E-1.ToMetric() => "100m"
+		/// </code>
+		/// </example>
+		/// <returns>A valid Metric representation</returns>
+		public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true)
+		{
+			return Convert.ToDouble(input).ToMetric(hasSpace, useSymbol);
+		}
+
+		/// <summary>
+		/// Converts a number into a valid and Human-readable Metric representation.
+		/// </summary>
+		/// <remarks>
+		/// Inspired by a snippet from Thom Smith.
+		/// <see cref="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix"/>
+		/// </remarks>
+		/// <param name="input">Number to convert to a Metric representation.</param>
+		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
+		/// <param name="useSymbol">True will use symbol instead of name</param>
+		/// <example>
+		/// <code>
+		/// 1000d.ToMetric() => "1k"
+		/// 123d.ToMetric() => "123"
+		/// 1E-1.ToMetric() => "100m"
+		/// </code>
+		/// </example>
+		/// <returns>A valid Metric representation</returns>
+		public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true)
+		{
+			if (input.Equals(0))
+				return input.ToString();
+			if (input.IsOutOfRange())
+				throw new ArgumentOutOfRangeException("input");
+
+			return BuildRepresentation(input, hasSpace, useSymbol);
+		}
+
+		/// <summary>
+		/// Clean or handle any wrong input
+		/// </summary>
+		/// <param name="input">Metric representation to clean</param>
+		/// <returns>A cleaned representation</returns>
+		private static string CleanRepresentation(string input)
+		{
+			if (input == null)
+				throw new ArgumentNullException("input");
+
 			input = input.Trim();
 			input = ReplaceNameBySymbol(input);
 			if (input.Length == 0 || input.IsInvalidMetricNumeral())
 				throw new ArgumentException("Empty or invalid Metric string.", "input");
-			input = input.Replace(" ", String.Empty);
-			var last = input[input.Length - 1];
-			if (!Char.IsLetter(last)) return Double.Parse(input);
+
+			return input.Replace(" ", String.Empty);
+		}
+
+		/// <summary>
+		/// Build a number from a metric representation or from a number
+		/// </summary>
+		/// <param name="input">A Metric representation to parse to a number</param>
+		/// <param name="last">The last character of input</param>
+		/// <returns>A number build from a Metric representation</returns>
+		private static double BuildNumber(string input, char last)
+		{
+			return Char.IsLetter(last)
+				? BuildMetricNumber(input, last)
+				: Double.Parse(input);
+		}
+
+		/// <summary>
+		/// Build a number from a metric representation
+		/// </summary>
+		/// <param name="input">A Metric representation to parse to a number</param>
+		/// <param name="last">The last character of input</param>
+		/// <returns>A number build from a Metric representation</returns>
+		private static double BuildMetricNumber(string input, char last)
+		{
 			Func<char[], double> getExponent = symbols => (symbols.IndexOf(last) + 1) * 3;
 			var number = Double.Parse(input.Remove(input.Length - 1));
-			var exponent = Math.Pow(10, Symbols[0].Contains(last) ? getExponent(Symbols[0]) : -getExponent(Symbols[1]));
+			var exponent = Math.Pow(10, Symbols[0].Contains(last)
+				? getExponent(Symbols[0])
+				: -getExponent(Symbols[1]));
 			return number * exponent;
 		}
 
@@ -95,57 +185,42 @@ namespace Humanizer
 		/// <returns>A metric representation with a symbol</returns>
 		private static string ReplaceNameBySymbol(string input)
 		{
-			return Names.Aggregate(input, (current, name) => current.Replace(name.Value, name.Key.ToString()));
+			return Names.Aggregate(input, (current, name) =>
+				current.Replace(name.Value, name.Key.ToString()));
 		}
 
 		/// <summary>
-		/// Converts a number into a valid and Human-readable Metric representation.
+		/// Build a Metric representation of the number.
 		/// </summary>
-		/// <remarks>
-		/// Inspired by a snippet from Thom Smith.
-		/// <see cref="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix"/>
-		/// </remarks>
 		/// <param name="input">Number to convert to a Metric representation.</param>
-		/// <param name="isSplitedBySpace">True will split the number and the symbol with a whitespace.</param>
+		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
 		/// <param name="useSymbol">True will use symbol instead of name</param>
-		/// <example>
-		/// 1000d.ToMetric() => "1k"
-		/// 123d.ToMetric() => "123"
-		/// 1E-1.ToMetric() => "100m"
-		/// </example>
-		/// <returns>A valid Metric representation</returns>
-		public static string ToMetric(this double input, bool isSplitedBySpace = false, bool useSymbol = true)
+		/// <returns>A number in a Metric representation</returns>
+		private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol)
 		{
-			if (input.Equals(0)) return input.ToString();
-			if (input.IsOutOfRange()) throw new ArgumentOutOfRangeException("input");
 			var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
-			if (exponent == 0) return input.ToString();
-			var number = input * Math.Pow(1000, -exponent);
-			var symbol = Math.Sign(exponent) == 1 ? Symbols[0][exponent - 1] : Symbols[1][-exponent - 1];
-			return number
-				+ (isSplitedBySpace ? " " : String.Empty)
-				+ GetUnit(symbol, useSymbol);
+			return exponent.Equals(0)
+				? input.ToString()
+				: BuildMetricRepresentation(input, exponent, hasSpace, useSymbol);
 		}
 
 		/// <summary>
-		/// Converts a number into a valid and Human-readable Metric representation.
+		/// Build a Metric representation of the number.
 		/// </summary>
-		/// <remarks>
-		/// Inspired by a snippet from Thom Smith.
-		/// <see cref="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix"/>
-		/// </remarks>
 		/// <param name="input">Number to convert to a Metric representation.</param>
-		/// <param name="isSplitedBySpace">True will split the number and the symbol with a whitespace.</param>
+		/// <param name="exponent">Exponent of the number in a scientific notation</param>
+		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
 		/// <param name="useSymbol">True will use symbol instead of name</param>
-		/// <example>
-		/// 1000.ToMetric() => "1k"
-		/// 123.ToMetric() => "123"
-		/// 1E-1.ToMetric() => "100m"
-		/// </example>
-		/// <returns>A valid Metric representation</returns>
-		public static string ToMetric(this int input, bool isSplitedBySpace = false, bool useSymbol = true)
+		/// <returns>A number in a Metric representation</returns>
+		private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol)
 		{
-			return Convert.ToDouble(input).ToMetric(isSplitedBySpace, useSymbol);
+			var number = input * Math.Pow(1000, -exponent);
+			var symbol = Math.Sign(exponent) == 1
+				? Symbols[0][exponent - 1]
+				: Symbols[1][-exponent - 1];
+			return number
+				+ (hasSpace ? " " : String.Empty)
+				+ GetUnit(symbol, useSymbol);
 		}
 
 		/// <summary>

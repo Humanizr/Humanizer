@@ -18,9 +18,9 @@ namespace Humanizer.Tests
                 [InlineData("1 kilo", 1000d, true, false)]
                 [InlineData("1milli", 1E-3, false, false)]
                 public void ToMetric(string expected, double input,
-                        bool isSplitedBySpace, bool useSymbol)
+                        bool hasSpace, bool useSymbol)
                 {
-                        Assert.Equal(expected, input.ToMetric(isSplitedBySpace, useSymbol));
+                        Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol));
                 }
 
                 [Theory]
