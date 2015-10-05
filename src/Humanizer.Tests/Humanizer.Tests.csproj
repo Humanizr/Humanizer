@@ -119,6 +119,7 @@
     <Compile Include="Localisation\bn-BD\TimeSpanHumanizeTests.cs" />
     <Compile Include="Localisation\DefaultFormatterTests.cs" />
     <Compile Include="Localisation\de\CollectionFormatterTests.cs" />
+    <Compile Include="Localisation\es\NumberToWordsFeminineTest.cs" />
     <Compile Include="Localisation\fi-FI\NumberToWordsTests.cs" />
     <Compile Include="Localisation\hr\DateHumanizeTests.cs" />
     <Compile Include="Localisation\nb\DateHumanizeTests.cs" />
