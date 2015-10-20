@@ -221,6 +221,9 @@
   <ItemGroup>
     <Compile Include="Localisation\fi-FI\DateHumanizeTests.cs" />
     <None Include="packages.config" />
+    <Content Include="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Humanizer\Humanizer.csproj">
