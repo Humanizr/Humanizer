@@ -1,8 +1,7 @@
 param(
     [string]$target = "CopyToReleaseFolder",
     [string]$verbosity = "minimal",    
-    [int]$maxCpuCount = 0,
-    [string]$buildPortable = "true"
+    [int]$maxCpuCount = 0
 )
 
 
@@ -39,5 +38,5 @@ if ($maxCpuCount -lt 1) {
 }
 
 
-$allArgs = @("build.proj", "/m$maxCpuCountText", "/nologo", "/verbosity:$verbosity", "/t:$target", "/property:RequestedVerbosity=$verbosity", "/property:TargetPortable=$buildPortable", $args)
+$allArgs = @("build.proj", "/m$maxCpuCountText", "/nologo", "/verbosity:$verbosity", "/t:$target", "/property:RequestedVerbosity=$verbosity", $args)
 & $msbuild $allArgs
