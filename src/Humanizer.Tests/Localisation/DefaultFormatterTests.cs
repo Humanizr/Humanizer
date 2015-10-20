@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using System.Threading;
 using Humanizer.Localisation;
 using Humanizer.Localisation.Formatters;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation
 {

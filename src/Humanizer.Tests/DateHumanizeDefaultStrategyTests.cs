@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Humanizer.Localisation;
 using Xunit;
-using Xunit.Extensions;
 using System;
 
 namespace Humanizer.Tests

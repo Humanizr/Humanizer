@@ -2,7 +2,6 @@
 using Humanizer.Bytes;
 using Humanizer.Localisation;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Humanizer.Tests.Bytes
 {

@@ -2,7 +2,7 @@
 
 namespace Humanizer.Tests.Localisation.roRo
 {
-    using Xunit.Extensions;
+    using Xunit;
 
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral

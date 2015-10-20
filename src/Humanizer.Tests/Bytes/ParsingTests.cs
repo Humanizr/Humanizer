@@ -24,7 +24,6 @@ using System;
 
 using Humanizer.Bytes;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Humanizer.Tests.Bytes
 {

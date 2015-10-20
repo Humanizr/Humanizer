@@ -1,5 +1,4 @@
 using Xunit;
-using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {

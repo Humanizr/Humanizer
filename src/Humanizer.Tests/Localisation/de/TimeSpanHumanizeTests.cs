@@ -1,7 +1,5 @@
 ﻿using System;
 using Xunit;
-using Xunit.Extensions;
-
 namespace Humanizer.Tests.Localisation.de
 {
     public class TimeSpanHumanizeTests : AmbientCulture

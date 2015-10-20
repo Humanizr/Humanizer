@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Humanizer.Tests.Localisation.invariant
 {
