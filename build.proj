@@ -35,12 +35,15 @@
     <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(ReleaseFolder)" />
   </Target>
   
+  
   <!--Nuget restore-->
   <ItemGroup>
     <Solution Include="$(MSBuildThisFileDirectory)src\*.sln" />
   </ItemGroup>
 
   <Target Name="RestorePackages">
+    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; install xunit.runner.msbuild -SolutionDir &quot;$(SolutionDir)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(SolutionDir)\packages\xunit.runner.msbuild\')" />
+    
     <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
   </Target>
 
