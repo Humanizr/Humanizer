@@ -41,10 +41,46 @@
     <Solution Include="$(MSBuildThisFileDirectory)src\*.sln" />
   </ItemGroup>
 
-  <Target Name="RestorePackages">
+  <Target Name="RestorePackages" DependsOnTargets="_DownloadNuGet">
     <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; install xunit.runner.msbuild -SolutionDir &quot;$(SolutionDir)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(SolutionDir)\packages\xunit.runner.msbuild\')" />
     
     <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
   </Target>
+ 
+  <Target Name="_DownloadNuGet">
+    <MakeDir Directories="$(MSBuildThisFileDirectory)tools\NuGet" />
+    <DownloadNuGet OutputFilename="$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe" Condition="!Exists('$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe')" />
+  </Target>
+
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <OutputFilename ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Net" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+          try {
+              OutputFilename = Path.GetFullPath(OutputFilename);
+
+              Log.LogMessage("Downloading latest version of NuGet.exe...");
+              WebClient webClient = new WebClient();
+              webClient.DownloadFile("https://dist.nuget.org/win-x86-commandline/latest/nuget.exe", OutputFilename);
+
+              return true;
+          }
+          catch (Exception ex) {
+              Log.LogErrorFromException(ex);
+              return false;
+          }
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 
 </Project>
