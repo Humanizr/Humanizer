@@ -1,21 +1,90 @@
-_ReSharper.*
-bin/
-obj/
-*.user
+## --------------------------------------------
+##  xUnit.net specific ignores
+
+Test*.html
+Test*.xml
+*.zip
+nuget.exe
+*.nuget.props
+*.nuget.targets
+
+## --------------------------------------------
+##  Adapted from https://raw.githubusercontent.com/github/gitignore/a4ec7f03ca5ae0bf09fad42c0fb7d1e8346bcf25/VisualStudio.gitignore
+
+# User-specific files
 *.suo
-*~
-*.swp
-*.orig
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+# Visual Studio test runner
+[Tt]est[Rr]esult*/
+Index.dat
+Storage.dat
+
+# DNX
+project.lock.json
+*.project.lock.json
+artifacts/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# JustCode is a .NET coding add-in
+.JustCode
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+
+# NuGet Packages
 *.nupkg
-*ncrunch*
-*crunch*.local.xml
-*.cache
-src/packages/*
-PackageBuild/*
-Build/*
-Release/*
+**/packages/*
+#!**/packages/build/
+
+# Windows Store app package directory
+AppPackages/
+
+# Visual Studio cache files
+*.[Cc]ache
+!*.[Cc]ache/
+
+# Backup & report files from converting an old project file
+# to a newer Visual Studio version. Backup files are not needed,
+# because we have git ;-)
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+
+
 src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.received.txt
-*.tss
-src/TestResults/*
-# Roslyn's metadata directory
-*.sln.ide/
