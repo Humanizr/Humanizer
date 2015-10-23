@@ -4,16 +4,16 @@
     <id>Humanizer</id>
     <version>$version$</version>
     <title>Humanizer</title>
-    <authors>Mehdi Khalili</authors>
-    <owners>Mehdi Khalili</owners>
+    <authors>Mehdi Khalili, Oren Novotny</authors>
+    <owners>Mehdi Khalili, onovotny</owners>
     <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
     <iconUrl>https://raw.github.com/MehdiK/Humanizer/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</description>
-    <copyright>Copyright 2012-2014  Mehdi Khalili</copyright>
+    <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
     <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\**" target="lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
+    <file src="Humanizer\bin\Release\**" exclude="**\*.srcsrv" target="lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
   </files>
 </package>
