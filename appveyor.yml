@@ -19,8 +19,8 @@ build:
   
 after_build:
   - ps: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/MehdiK/Humanizer -s $env:APPVEYOR_REPO_COMMIT;if($lastexitcode -ne 0){$lastexitcode = 0}'
-  - cmd: nuget pack src\Humanizer.nuspec -version "%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%" -prop "target=%CONFIGURATION%" -NoPackageAnalysis
-  - cmd: appveyor PushArtifact "Humanizer.%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%.nupkg"  
+  - cmd: nuget pack src\Humanizer.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%" -NoPackageAnalysis
+  - cmd: appveyor PushArtifact "Humanizer.%GitVersion_NuGetVersion%.nupkg"  
   
 test:
   assemblies:
