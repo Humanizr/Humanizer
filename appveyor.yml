@@ -22,6 +22,10 @@ after_build:
   - cmd: nuget pack src\Humanizer.nuspec -version "%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%" -prop "target=%CONFIGURATION%" -NoPackageAnalysis
   - cmd: appveyor PushArtifact "Humanizer.%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%.nupkg"  
   
+test:
+  assemblies:
+    - '**\*.Tests.dll'
+  
 deploy:
   provider: NuGet
   server: https://www.myget.org/F/humanizer/api/v2/package
