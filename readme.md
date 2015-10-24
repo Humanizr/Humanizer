@@ -46,10 +46,15 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 ##<a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
-Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications.
-Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
+Humanizer is a Portable Class Library with support for .Net 4.5+, Windows Phone 8, Win Store, and ASP.NET 5 (CoreCLR) applications.
+Also Humanizer symbols are source indexed with [GitLink](https://github.com/GitTools/GitLink) and are included in the package so you can [step through Humanizer code](https://github.com/GitTools/GitLink) while debugging your code.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/4do8v1ukkp4usf6p/branch/master?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/master)
+For pre-release builds, [MyGet feed](https://www.myget.org/) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
+
+  - `https://www.myget.org/F/humanizer/api/v2` for VS 2012+
+  - `https://www.myget.org/F/humanizer/api/v3/index.json` for VS 2015+
+
+[![Build status](https://ci.appveyor.com/api/projects/status/4do8v1ukkp4usf6p/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
 
 ##<a id="features">Features</a>
 
