@@ -24,11 +24,11 @@ namespace Humanizer
         {
             Type type = input.GetType();
             var caseName = input.ToString();
-            var memInfo = type.GetMember(caseName);
+            var memInfo = type.GetTypeInfo().GetDeclaredField(caseName);
 
-            if (memInfo.Length > 0)
+            if (memInfo != null)
             {
-                var customDescription = GetCustomDescription(memInfo[0]);
+                var customDescription = GetCustomDescription(memInfo);
 
                 if (customDescription != null)
                     return customDescription;
@@ -47,12 +47,12 @@ namespace Humanizer
                 var attrType = attr.GetType();
                 if (attrType.FullName == DisplayAttributeTypeName)
                 {
-                    var method = attrType.GetMethod(DisplayAttributeGetDescriptionMethodName);
+                    var method = attrType.GetRuntimeMethod(DisplayAttributeGetDescriptionMethodName, new Type[0]);
                     if (method != null)
                         return method.Invoke(attr, new object[0]).ToString();
                 }
                 var descriptionProperty =
-                    attrType.GetProperties()
+                    attrType.GetRuntimeProperties()
                         .Where(StringTypedProperty)
                         .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
