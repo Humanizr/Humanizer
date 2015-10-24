@@ -1,5 +1,5 @@
 param(
-    [string]$target = "CopyToReleaseFolder",
+    [string]$target = "Test",
     [string]$verbosity = "minimal",    
     [int]$maxCpuCount = 0
 )
