@@ -1,6 +1,6 @@
 ﻿using Humanizer.Localisation;
 
-namespace Humanizer.Tests.Localisation.roRo
+namespace Humanizer.Tests.Localisation.roRO
 {
     using Xunit.Extensions;
 
