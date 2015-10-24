@@ -7,7 +7,7 @@ Some of the issues are labeled as as `jump in`. These issues are generally low h
 
 ###<a id="contribution-guideline">Contribution guideline</a>
 This project uses [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests.
-So if you want to contribute, fork the repo, preferably create a local branch to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
+So if you want to contribute, fork the repo, preferably create a local branch, based off of the `dev` branch, to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
 
 Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
 
@@ -18,7 +18,7 @@ Pull requests are code reviewed. Here is a checklist you should tick through bef
  - If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
  - There are very few or no comments (because comments shouldn't be needed if you write clean code)
  - Xml documentation is added/updated for the addition/change
- - Your PR is (re)based on top of the latest commits (more info below)
+ - Your PR is (re)based on top of the latest commits from the `dev` branch (more info below)
  - Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
  - Readme is updated if you change an existing feature or add a new one
 
