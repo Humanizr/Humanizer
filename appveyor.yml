@@ -17,8 +17,8 @@ build:
   parallel: true
   project: src\Humanizer.sln
   
-after_build:
-  - ps: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/MehdiK/Humanizer -s $env:APPVEYOR_REPO_COMMIT;if($lastexitcode -ne 0){$lastexitcode = 0}'
+after_build:  
+  - cmd: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/MehdiK/Humanizer -s %APPVEYOR_REPO_COMMIT% -errorsaswarnings'
   - cmd: nuget pack src\Humanizer.nuspec -version "%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%" -prop "target=%CONFIGURATION%" -NoPackageAnalysis
   - cmd: appveyor PushArtifact "Humanizer.%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%.nupkg"  
   
