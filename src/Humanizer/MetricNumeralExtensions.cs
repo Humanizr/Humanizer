@@ -33,6 +33,16 @@ namespace Humanizer
 	/// </summary>
 	public static class MetricNumeralExtensions
 	{
+        static readonly double BigLimit;
+        static readonly double SmallLimit;
+
+	    static MetricNumeralExtensions()
+	    {
+            const int limit = 27;
+            BigLimit = Math.Pow(10, limit);
+            SmallLimit = Math.Pow(10, -limit);
+        }
+
 		/// <summary>
 		/// Symbols is a list of every symbols for the Metric system.
 		/// </summary>
@@ -241,12 +251,10 @@ namespace Humanizer
 		/// <returns>True if input is out of the valid range.</returns>
 		private static bool IsOutOfRange(this double input)
 		{
-			const int limit = 27;
-			var bigLimit = Math.Pow(10, limit);
-			var smallLimit = Math.Pow(10, -limit);
 			Func<double, double, bool> outside = (min, max) => !(max > input && input > min);
-			return (Math.Sign(input) == 1 && outside(smallLimit, bigLimit))
-			       || (Math.Sign(input) == -1 && outside(-bigLimit, -smallLimit));
+
+			return (Math.Sign(input) == 1 && outside(SmallLimit, BigLimit))
+			       || (Math.Sign(input) == -1 && outside(-BigLimit, -SmallLimit));
 		}
 
 		/// <summary>
