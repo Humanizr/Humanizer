@@ -1,11 +1,14 @@
-##<a id="how-to-contribute">How to contribute?</a>
+## <a id="how-to-contribute">How to contribute?</a>
 Your contributions to Humanizer are very welcome.
 If you find a bug, please raise it as an issue.
 Even better fix it and send a pull request.
 If you like to help out with existing bugs and feature requests just check out the list of [issues](https://github.com/MehdiK/Humanizer/issues) and grab and fix one.
 Some of the issues are labeled as as `jump in`. These issues are generally low hanging fruit so you can start with easier tasks.
 
-###<a id="contribution-guideline">Contribution guideline</a>
+### <a id="getting-started">Getting started</a>
+This project uses C# 6 language features, so you'll need any edition of [Visual Studio 2015](https://www.visualstudio.com/downloads/download-visual-studio-vs) to open and compile the project. The free [Community Edition](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409) will work.
+
+### <a id="contribution-guideline">Contribution guideline</a>
 This project uses [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests.
 So if you want to contribute, fork the repo, preferably create a local branch, based off of the `dev` branch, to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
 
@@ -21,13 +24,14 @@ Pull requests are code reviewed. Here is a checklist you should tick through bef
  - Your PR is (re)based on top of the latest commits from the `dev` branch (more info below)
  - Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
  - Readme is updated if you change an existing feature or add a new one
+ - Run either `build.cmd` or `build.ps1` and ensure there are no test failures
 
-Please rebase your code on top of the latest commits.
+Please rebase your code on top of the latest `dev` branch commits.
 Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts.
 Also before sending the pull request please rebase your code as there is a chance there have been new commits pushed after you pulled last.
 Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912#the-workflow) if you're new to git.
 
-###<a id="need-your-help-with-localisation">Need your help with localisation</a>
+### <a id="need-your-help-with-localisation">Need your help with localisation</a>
 One area where Humanizer can always use your help is localisation.
 Currently Humanizer supports quite a few localisations for `DateTime.Humanize`, `TimeSpan.Humanize`, `ToWords` and `ToOrdinalWords`.
 
