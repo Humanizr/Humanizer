@@ -46,10 +46,10 @@ namespace Humanizer
 		/// <summary>
 		/// Symbols is a list of every symbols for the Metric system.
 		/// </summary>
-		private static readonly char[][] Symbols =
+		private static readonly List<char>[] Symbols =
                 {
-                        new[] { 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y' },
-                        new[] { 'm', '\u03bc', 'n', 'p', 'f', 'a', 'z', 'y' }
+                    new List<char> { 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y' },
+                    new List<char> { 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y' }
                 };
 
 		/// <summary>
@@ -180,9 +180,9 @@ namespace Humanizer
 		/// <returns>A number build from a Metric representation</returns>
 		private static double BuildMetricNumber(string input, char last)
 		{
-			Func<char[], double> getExponent = symbols => (symbols.IndexOf(last) + 1) * 3;
+			Func<List<char>, double> getExponent = symbols => (symbols.IndexOf(last) + 1) * 3;
 			var number = Double.Parse(input.Remove(input.Length - 1));
-			var exponent = Math.Pow(10, Symbols[0].Contains(last)
+            var exponent = Math.Pow(10, Symbols[0].Contains(last)
 				? getExponent(Symbols[0])
 				: -getExponent(Symbols[1]));
 			return number * exponent;
@@ -274,23 +274,6 @@ namespace Humanizer
 			var last = input[index];
 			var isSymbol = Symbols[0].Contains(last) || Symbols[1].Contains(last);
 			return !Double.TryParse(isSymbol ? input.Remove(index) : input, out number);
-		}
-
-		/// <summary>
-		/// Reports the zero-based index of the first occurrence of the specified Unicode
-		/// character in this string.
-		/// </summary>
-		/// <param name="chars">The string containing the value.</param>
-		/// <param name="value">A Unicode character to seek.</param>
-		/// <returns>
-		/// The zero-based index position of value if that character is found, or -1 if it is not.
-		/// </returns>
-		private static int IndexOf(this ICollection<char> chars, char value)
-		{
-			for (var i = 0; i < chars.Count; i++)
-				if (chars.ElementAt(i).Equals(value))
-					return i;
-			return -1;
 		}
 	}
 }
