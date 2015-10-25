@@ -85,7 +85,7 @@ namespace Humanizer
 		/// </summary>
 		/// <remarks>
 		/// Inspired by a snippet from Thom Smith.
-		/// <see cref="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix"/>
+		/// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
 		/// </remarks>
 		/// <param name="input">Number to convert to a Metric representation.</param>
 		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
@@ -103,25 +103,25 @@ namespace Humanizer
 			return Convert.ToDouble(input).ToMetric(hasSpace, useSymbol);
 		}
 
-		/// <summary>
-		/// Converts a number into a valid and Human-readable Metric representation.
-		/// </summary>
-		/// <remarks>
-		/// Inspired by a snippet from Thom Smith.
-		/// <see cref="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix"/>
-		/// </remarks>
-		/// <param name="input">Number to convert to a Metric representation.</param>
-		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-		/// <param name="useSymbol">True will use symbol instead of name</param>
-		/// <example>
-		/// <code>
-		/// 1000d.ToMetric() => "1k"
-		/// 123d.ToMetric() => "123"
-		/// 1E-1.ToMetric() => "100m"
-		/// </code>
-		/// </example>
-		/// <returns>A valid Metric representation</returns>
-		public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true)
+        /// <summary>
+        /// Converts a number into a valid and Human-readable Metric representation.
+        /// </summary>
+        /// <remarks>
+        /// Inspired by a snippet from Thom Smith.
+        /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
+        /// </remarks>
+        /// <param name="input">Number to convert to a Metric representation.</param>
+        /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
+        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <example>
+        /// <code>
+        /// 1000d.ToMetric() => "1k"
+        /// 123d.ToMetric() => "123"
+        /// 1E-1.ToMetric() => "100m"
+        /// </code>
+        /// </example>
+        /// <returns>A valid Metric representation</returns>
+        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true)
 		{
 			if (input.Equals(0))
 				return input.ToString();

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Net.Configuration;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Humanizer.Tests
 {
@@ -17,8 +15,7 @@ namespace Humanizer.Tests
                 [InlineData("1 k", 1000d, true, true)]
                 [InlineData("1 kilo", 1000d, true, false)]
                 [InlineData("1milli", 1E-3, false, false)]
-                public void ToMetric(string expected, double input,
-                        bool hasSpace, bool useSymbol)
+                public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol)
                 {
                         Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol));
                 }
@@ -38,9 +35,9 @@ namespace Humanizer.Tests
                 [InlineData(123d, "123")]
                 [InlineData(-123d, "-123")]
                 [InlineData(1230d, "1.23k")]
-		[InlineData(1000d, "1 k")]
-		[InlineData(1000d, "1 kilo")]
-		[InlineData(1E-3, "1milli")]
+		        [InlineData(1000d, "1 k")]
+		        [InlineData(1000d, "1 kilo")]
+		        [InlineData(1E-3, "1milli")]
                 public void FromMetric(double expected, string input)
                 {
                         Assert.Equal(expected, input.FromMetric());
@@ -53,9 +50,9 @@ namespace Humanizer.Tests
                 [InlineData("12yy")]
                 [InlineData("-8e")]
                 [InlineData("0.12c")]
-		[InlineData("0.02l")]
-		[InlineData("0.12kilkilo")]
-		[InlineData("0.02alois")]
+		        [InlineData("0.02l")]
+		        [InlineData("0.12kilkilo")]
+		        [InlineData("0.02alois")]
                 public void FromMetricOnInvalid(string input)
                 {
                         Assert.Throws<ArgumentException>(() => input.FromMetric());
