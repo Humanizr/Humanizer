@@ -321,7 +321,7 @@ namespace Humanizer.Bytes
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
-                throw new ArgumentNullException("s", "String is null or whitespace");
+                throw new ArgumentNullException(nameof(s), "String is null or whitespace");
 
             // Setup the result
             result = new ByteSize();

@@ -202,7 +202,7 @@ namespace Humanizer.Localisation.NumberToWords
                         return "є";
                     return "е";
                 default:
-                    throw new ArgumentOutOfRangeException("gender");
+                    throw new ArgumentOutOfRangeException(nameof(gender));
             }
         }
     }

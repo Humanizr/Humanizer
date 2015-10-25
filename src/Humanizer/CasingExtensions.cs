@@ -30,7 +30,7 @@ namespace Humanizer
                     return input.Transform(To.SentenceCase);
 
                 default:
-                    throw new ArgumentOutOfRangeException("casing");
+                    throw new ArgumentOutOfRangeException(nameof(casing));
             }
         }
     }

@@ -28,7 +28,7 @@ namespace Humanizer
         public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter)
         {
             if (displayFormatter == null)
-                throw new ArgumentNullException("displayFormatter");
+                throw new ArgumentNullException(nameof(displayFormatter));
 
             return Configurator.CollectionFormatter.Humanize(collection, displayFormatter);
         }
@@ -52,7 +52,7 @@ namespace Humanizer
         public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter, string separator)
         {
             if (displayFormatter == null)
-                throw new ArgumentNullException("displayFormatter");
+                throw new ArgumentNullException(nameof(displayFormatter));
 
             return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, separator);
         }

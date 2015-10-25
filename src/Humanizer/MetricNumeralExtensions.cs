@@ -136,7 +136,7 @@ namespace Humanizer
 			if (input.Equals(0))
 				return input.ToString();
 			if (input.IsOutOfRange())
-				throw new ArgumentOutOfRangeException("input");
+				throw new ArgumentOutOfRangeException(nameof(input));
 
 			return BuildRepresentation(input, hasSpace, useSymbol);
 		}
@@ -149,12 +149,12 @@ namespace Humanizer
 		private static string CleanRepresentation(string input)
 		{
 			if (input == null)
-				throw new ArgumentNullException("input");
+				throw new ArgumentNullException(nameof(input));
 
 			input = input.Trim();
 			input = ReplaceNameBySymbol(input);
 			if (input.Length == 0 || input.IsInvalidMetricNumeral())
-				throw new ArgumentException("Empty or invalid Metric string.", "input");
+				throw new ArgumentException("Empty or invalid Metric string.", nameof(input));
 
 			return input.Replace(" ", string.Empty);
 		}

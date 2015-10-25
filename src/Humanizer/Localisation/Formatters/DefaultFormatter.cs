@@ -59,7 +59,7 @@ namespace Humanizer.Localisation.Formatters
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
             if (timeUnit > TimeUnit.Week)
-                throw new ArgumentOutOfRangeException("timeUnit", "There's no meaningful way to humanize passed timeUnit.");
+                throw new ArgumentOutOfRangeException(nameof(timeUnit), "There's no meaningful way to humanize passed timeUnit.");
 
             return GetResourceForTimeSpan(timeUnit, unit);
         }
