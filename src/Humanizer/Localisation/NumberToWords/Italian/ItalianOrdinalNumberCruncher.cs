@@ -60,7 +60,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                     // if 1 billion, numeral prefix is removed completely
                     if (_fullNumber == 1000000000)
                     {
-                        words = words.Replace("un", String.Empty);
+                        words = words.Replace("un", string.Empty);
                     }
                 }
                 else if (lowestSixDigits == 0)
@@ -71,7 +71,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                     // if 1 million, numeral prefix is removed completely
                     if (_fullNumber == 1000000)
                     {
-                        words = words.Replace("un", String.Empty);
+                        words = words.Replace("un", string.Empty);
                     }
                 }
                 else if (lowestThreeDigits == 0 && _fullNumber > 1000)
@@ -96,7 +96,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         protected static string[] _unitsUnder10NumberToText = new string[]
         {
-            String.Empty,
+            string.Empty,
             "prim",
             "second",
             "terz",

@@ -6,7 +6,7 @@ namespace Humanizer.Localisation.CollectionFormatters
 {
     class DefaultCollectionFormatter : ICollectionFormatter
     {
-        protected String DefaultSeparator = "";
+        protected string DefaultSeparator = "";
 
         public DefaultCollectionFormatter(string defaultSeparator)
         {
@@ -18,17 +18,17 @@ namespace Humanizer.Localisation.CollectionFormatters
             return Humanize(collection, o => o.ToString(), DefaultSeparator);
         }
 
-        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, String> objectFormatter)
+        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter)
         {
             return Humanize(collection, objectFormatter, DefaultSeparator);
         }
 
-        public virtual string Humanize<T>(IEnumerable<T> collection, String separator)
+        public virtual string Humanize<T>(IEnumerable<T> collection, string separator)
         {
             return Humanize(collection, o => o.ToString(), separator);
         }
 
-        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, String> objectFormatter, String separator)
+        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
         {
             if (collection == null)
                 throw new ArgumentException("collection");
@@ -46,8 +46,8 @@ namespace Humanizer.Localisation.CollectionFormatters
             IEnumerable<T> itemsBeforeLast = itemsArray.Take(count - 1);
             T lastItem = itemsArray.Skip(count - 1).First();
 
-            return String.Format("{0} {1} {2}",
-                String.Join(", ", itemsBeforeLast.Select(objectFormatter)),
+            return string.Format("{0} {1} {2}",
+                string.Join(", ", itemsBeforeLast.Select(objectFormatter)),
                 separator,
                 objectFormatter(lastItem));
         }

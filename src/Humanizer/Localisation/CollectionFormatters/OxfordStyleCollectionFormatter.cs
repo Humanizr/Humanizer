@@ -11,7 +11,7 @@ namespace Humanizer.Localisation.CollectionFormatters
         {
         }
 
-        public override string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, String separator)
+        public override string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
         {
             if (collection == null)
                 throw new ArgumentException("collection");
@@ -28,8 +28,8 @@ namespace Humanizer.Localisation.CollectionFormatters
 
             string formatString = count > 2 ? "{0}, {1} {2}" : "{0} {1} {2}";
 
-            return String.Format(formatString,
-                String.Join(", ", enumerable.Take(count - 1).Select(objectFormatter)),
+            return string.Format(formatString,
+                string.Join(", ", enumerable.Take(count - 1).Select(objectFormatter)),
                 separator,
                 objectFormatter(enumerable.Skip(count - 1).First()));
         }

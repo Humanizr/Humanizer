@@ -20,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (number == 0)
                 return "صفر";
 
-            string result = String.Empty;
+            string result = string.Empty;
             int groupLevel = 0;
 
             while (number >= 1)
@@ -30,7 +30,7 @@ namespace Humanizer.Localisation.NumberToWords
 
                 int tens = groupNumber % 100;
                 int hundreds = groupNumber / 100;
-                string process = String.Empty;
+                string process = string.Empty;
 
                 if (hundreds > 0)
                 {
@@ -53,7 +53,7 @@ namespace Humanizer.Localisation.NumberToWords
                         }
                         else
                         {
-                            if (process != String.Empty)
+                            if (process != string.Empty)
                                 process += " و ";
 
                             if (tens == 1 && groupLevel > 0 && hundreds == 0)
@@ -69,41 +69,41 @@ namespace Humanizer.Localisation.NumberToWords
 
                         if (ones > 0)
                         {
-                            if (process != String.Empty)
+                            if (process != string.Empty)
                                 process += " و ";
 
                             process += OnesGroup[ones];
                         }
 
-                        if (process != String.Empty)
+                        if (process != string.Empty)
                             process += " و ";
 
                         process += TensGroup[tens];
                     }
                 }
 
-                if (process != String.Empty)
+                if (process != string.Empty)
                 {
                     if (groupLevel > 0)
                     {
-                        if (result != String.Empty)
-                            result = String.Format("{0} {1}", "و", result);
+                        if (result != string.Empty)
+                            result = string.Format("{0} {1}", "و", result);
 
                         if (groupNumber != 2)
                         {
                             if (groupNumber % 100 != 1)
                             {
                                 if (groupNumber >= 3 && groupNumber <= 10)
-                                    result = String.Format("{0} {1}", PluralGroups[groupLevel], result);
+                                    result = string.Format("{0} {1}", PluralGroups[groupLevel], result);
                                 else
-                                    result = String.Format("{0} {1}", result != String.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel], result);
+                                    result = string.Format("{0} {1}", result != string.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel], result);
                             }
                             else
-                                result = String.Format("{0} {1}", Groups[groupLevel], result);
+                                result = string.Format("{0} {1}", Groups[groupLevel], result);
                         }
                     }
 
-                    result = String.Format("{0} {1}", process, result);
+                    result = string.Format("{0} {1}", process, result);
                 }
 
                 groupLevel++;

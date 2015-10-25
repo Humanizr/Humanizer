@@ -19,7 +19,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             if (_fullNumber == 0)
                 return "zero";
 
-            string words = String.Empty;
+            string words = string.Empty;
 
             foreach (int part in _threeDigitParts)
             {
@@ -112,7 +112,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         protected static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
         {
             if (number == 0) 
-                return String.Empty;
+                return string.Empty;
               
             // grab lowest two digits
             int tensAndUnits = number % 100;
@@ -123,7 +123,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             int units = tensAndUnits % 10;
             int tens = (int)(tensAndUnits / 10);
             
-            string words = String.Empty;
+            string words = string.Empty;
             
             // append text for hundreds
             words += _hundredNumberToText[hundreds];
@@ -182,7 +182,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         protected static string ThousandsConverter(int number)
         {
             if (number == 0) 
-                return String.Empty;
+                return string.Empty;
               
             if (number == 1)
                 return "mille";
@@ -198,7 +198,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         protected static string MillionsConverter(int number)
         {
             if (number == 0) 
-                return String.Empty;
+                return string.Empty;
               
             if (number == 1)
                 return "un milione ";
@@ -224,7 +224,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         protected static string[] _unitsNumberToText = new string[]
         {
-            String.Empty,
+            string.Empty,
             "uno",
             "due",
             "tre",
@@ -241,8 +241,8 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         protected static string[] _tensOver20NumberToText = new string[]
         {
-            String.Empty,
-            String.Empty,
+            string.Empty,
+            string.Empty,
             "venti",
             "trenta",
             "quaranta",
@@ -275,7 +275,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         protected static string[] _hundredNumberToText = new string[]
         {
-            String.Empty,
+            string.Empty,
             "cento",
             "duecento",
             "trecento",

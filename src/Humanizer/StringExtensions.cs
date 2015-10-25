@@ -15,7 +15,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string FormatWith(this string format, params object[] args)
         {
-            return String.Format(format, args);
+            return string.Format(format, args);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string FormatWith(this string format, IFormatProvider provider, params object[] args)
         {
-            return String.Format(provider, format, args);
+            return string.Format(provider, format, args);
         }
     }
 }

@@ -156,7 +156,7 @@ namespace Humanizer
 			if (input.Length == 0 || input.IsInvalidMetricNumeral())
 				throw new ArgumentException("Empty or invalid Metric string.", "input");
 
-			return input.Replace(" ", String.Empty);
+			return input.Replace(" ", string.Empty);
 		}
 
 		/// <summary>
@@ -167,9 +167,9 @@ namespace Humanizer
 		/// <returns>A number build from a Metric representation</returns>
 		private static double BuildNumber(string input, char last)
 		{
-			return Char.IsLetter(last)
+			return char.IsLetter(last)
 				? BuildMetricNumber(input, last)
-				: Double.Parse(input);
+				: double.Parse(input);
 		}
 
 		/// <summary>
@@ -181,7 +181,7 @@ namespace Humanizer
 		private static double BuildMetricNumber(string input, char last)
 		{
 			Func<List<char>, double> getExponent = symbols => (symbols.IndexOf(last) + 1) * 3;
-			var number = Double.Parse(input.Remove(input.Length - 1));
+			var number = double.Parse(input.Remove(input.Length - 1));
             var exponent = Math.Pow(10, Symbols[0].Contains(last)
 				? getExponent(Symbols[0])
 				: -getExponent(Symbols[1]));
@@ -229,7 +229,7 @@ namespace Humanizer
 				? Symbols[0][exponent - 1]
 				: Symbols[1][-exponent - 1];
 			return number
-				+ (hasSpace ? " " : String.Empty)
+				+ (hasSpace ? " " : string.Empty)
 				+ GetUnit(symbol, useSymbol);
 		}
 
@@ -273,7 +273,7 @@ namespace Humanizer
 			var index = input.Length - 1;
 			var last = input[index];
 			var isSymbol = Symbols[0].Contains(last) || Symbols[1].Contains(last);
-			return !Double.TryParse(isSymbol ? input.Remove(index) : input, out number);
+			return !double.TryParse(isSymbol ? input.Remove(index) : input, out number);
 		}
 	}
 }

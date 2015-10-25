@@ -32,10 +32,10 @@ namespace Humanizer.Localisation.Ordinalizers
 
             if (gender == GrammaticalGender.Feminine)
             {
-                return String.Format("a {0}-a", numberString);
+                return string.Format("a {0}-a", numberString);
             }
 
-            return String.Format("al {0}-lea", numberString);
+            return string.Format("al {0}-lea", numberString);
 
         }
     }

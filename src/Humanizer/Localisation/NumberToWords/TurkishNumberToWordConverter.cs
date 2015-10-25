@@ -95,7 +95,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (suffixFoundOnLastVowel)
                 word = word.Substring(0, word.Length - 1);
 
-            return String.Format("{0}{1}", word, wordSuffix);
+            return string.Format("{0}{1}", word, wordSuffix);
         }
     }
 }

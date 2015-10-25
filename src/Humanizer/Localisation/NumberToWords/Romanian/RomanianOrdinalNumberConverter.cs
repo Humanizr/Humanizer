@@ -36,14 +36,14 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 return this.getPartByGender(_ordinalsUnder10[number], gender);
             else if (number <= 9)
                 // units ordinals, 2 to 9, are totally different than the rest: treat them as a distinct case
-                return String.Format("{0} {1}",
+                return string.Format("{0} {1}",
                                         gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
                                         this.getPartByGender(_ordinalsUnder10[number], gender)
                                      );
             else
             {
                 RomanianCardinalNumberConverter coverter = new RomanianCardinalNumberConverter();
-                String words = coverter.Convert(number, gender);
+                string words = coverter.Convert(number, gender);
 
                 // remove 'de' preposition
                 words = words.Replace(" de ", " ");
@@ -68,7 +68,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                         words = words.Substring(0, words.Length - 8) + "milioana";
                 }
 
-                String customMasculineSuffix = _masculineSuffix;
+                string customMasculineSuffix = _masculineSuffix;
                 if (words.EndsWith("milion"))
                 {
                     if (gender == GrammaticalGender.Feminine)
@@ -93,7 +93,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                     words = words.Substring(0, words.Length - 1);
                 }
 
-                return String.Format("{0} {1}{2}",
+                return string.Format("{0} {1}{2}",
                                         gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
                                         words,
                                         gender == GrammaticalGender.Feminine ? _feminineSuffix : customMasculineSuffix
@@ -101,11 +101,11 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             }
         }
 
-        private string getPartByGender(String multiGenderPart, GrammaticalGender gender)
+        private string getPartByGender(string multiGenderPart, GrammaticalGender gender)
         {
             if (multiGenderPart.Contains("|"))
             {
-                String[] parts = multiGenderPart.Split('|');
+                string[] parts = multiGenderPart.Split('|');
                 if (gender == GrammaticalGender.Feminine)
                     return parts[1];
 
