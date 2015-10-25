@@ -362,6 +362,13 @@ public enum TimeUnit
     Year,
 }
 
+public class MetricNumeralExtensions
+{
+    public double FromMetric(string input) { }
+    public string ToMetric(int input, bool hasSpace, bool useSymbol) { }
+    public string ToMetric(double input, bool hasSpace, bool useSymbol) { }
+}
+
 public class NoMatchFoundException
 {
     public NoMatchFoundException() { }
