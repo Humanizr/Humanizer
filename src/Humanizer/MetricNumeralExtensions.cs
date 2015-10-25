@@ -100,7 +100,7 @@ namespace Humanizer
 		/// <returns>A valid Metric representation</returns>
 		public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true)
 		{
-			return Convert.ToDouble(input).ToMetric(hasSpace, useSymbol);
+			return ((double)input).ToMetric(hasSpace, useSymbol);
 		}
 
         /// <summary>
