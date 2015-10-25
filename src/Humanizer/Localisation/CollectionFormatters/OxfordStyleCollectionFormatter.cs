@@ -18,7 +18,7 @@ namespace Humanizer.Localisation.CollectionFormatters
 
             var enumerable = collection as T[] ?? collection.ToArray();
 
-            int count = enumerable.Count();
+            var count = enumerable.Count();
 
             if (count == 0)
                 return "";
@@ -26,7 +26,7 @@ namespace Humanizer.Localisation.CollectionFormatters
             if (count == 1)
                 return objectFormatter(enumerable.First());
 
-            string formatString = count > 2 ? "{0}, {1} {2}" : "{0} {1} {2}";
+            var formatString = count > 2 ? "{0}, {1} {2}" : "{0} {1} {2}";
 
             return string.Format(formatString,
                 string.Join(", ", enumerable.Take(count - 1).Select(objectFormatter)),

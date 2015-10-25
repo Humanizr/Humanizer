@@ -22,7 +22,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this Enum input)
         {
-            Type type = input.GetType();
+            var type = input.GetType();
             var caseName = input.ToString();
             var memInfo = type.GetTypeInfo().GetDeclaredField(caseName);
 

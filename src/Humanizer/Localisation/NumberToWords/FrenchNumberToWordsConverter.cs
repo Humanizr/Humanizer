@@ -69,7 +69,7 @@ namespace Humanizer.Localisation.NumberToWords
                     string lastPart;
                     if (number >= 70 && (number < 80 || number >= 90))
                     {
-                        int baseNumber = number < 80 ? 60 : 80;
+                        var baseNumber = number < 80 ? 60 : 80;
                         lastPart = string.Format("{0}-{1}", TensMap[baseNumber/10], Convert(number - baseNumber));
                     }
                     else

@@ -69,7 +69,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(UnitsMap[number]);
             }
 
-            string toWords = string.Join(" ", parts.ToArray());
+            var toWords = string.Join(" ", parts.ToArray());
 
             return toWords;
         }

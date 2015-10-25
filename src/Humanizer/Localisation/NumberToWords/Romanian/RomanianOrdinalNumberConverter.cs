@@ -42,8 +42,8 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                                      );
             else
             {
-                RomanianCardinalNumberConverter coverter = new RomanianCardinalNumberConverter();
-                string words = coverter.Convert(number, gender);
+                var coverter = new RomanianCardinalNumberConverter();
+                var words = coverter.Convert(number, gender);
 
                 // remove 'de' preposition
                 words = words.Replace(" de ", " ");
@@ -68,7 +68,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                         words = words.Substring(0, words.Length - 8) + "milioana";
                 }
 
-                string customMasculineSuffix = _masculineSuffix;
+                var customMasculineSuffix = _masculineSuffix;
                 if (words.EndsWith("milion"))
                 {
                     if (gender == GrammaticalGender.Feminine)
@@ -105,7 +105,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         {
             if (multiGenderPart.Contains("|"))
             {
-                string[] parts = multiGenderPart.Split('|');
+                var parts = multiGenderPart.Split('|');
                 if (gender == GrammaticalGender.Feminine)
                     return parts[1];
 

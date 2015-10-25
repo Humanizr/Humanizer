@@ -20,17 +20,17 @@ namespace Humanizer.Localisation.NumberToWords
             if (number == 0)
                 return "صفر";
 
-            string result = string.Empty;
-            int groupLevel = 0;
+            var result = string.Empty;
+            var groupLevel = 0;
 
             while (number >= 1)
             {
-                int groupNumber = number % 1000;
+                var groupNumber = number % 1000;
                 number /= 1000;
 
-                int tens = groupNumber % 100;
-                int hundreds = groupNumber / 100;
-                string process = string.Empty;
+                var tens = groupNumber % 100;
+                var hundreds = groupNumber / 100;
+                var process = string.Empty;
 
                 if (hundreds > 0)
                 {
@@ -64,7 +64,7 @@ namespace Humanizer.Localisation.NumberToWords
                     }
                     else
                     {
-                        int ones = tens % 10;
+                        var ones = tens % 10;
                         tens = (tens / 10);
 
                         if (ones > 0)
@@ -172,7 +172,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 var parts = word.Split(' ');
                 var newParts = new string[parts.Length];
-                int count = 0;
+                var count = 0;
 
                 foreach (var part in parts)
                 {

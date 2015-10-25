@@ -33,9 +33,9 @@ namespace Humanizer.Localisation.CollectionFormatters
             if (collection == null)
                 throw new ArgumentException("collection");
 
-            T[] itemsArray = collection as T[] ?? collection.ToArray();
+            var itemsArray = collection as T[] ?? collection.ToArray();
 
-            int count = itemsArray.Length;
+            var count = itemsArray.Length;
 
             if (count == 0)
                 return "";
@@ -43,8 +43,8 @@ namespace Humanizer.Localisation.CollectionFormatters
             if (count == 1)
                 return objectFormatter(itemsArray[0]);
 
-            IEnumerable<T> itemsBeforeLast = itemsArray.Take(count - 1);
-            T lastItem = itemsArray.Skip(count - 1).First();
+            var itemsBeforeLast = itemsArray.Take(count - 1);
+            var lastItem = itemsArray.Skip(count - 1).First();
 
             return string.Format("{0} {1} {2}",
                 string.Join(", ", itemsBeforeLast.Select(objectFormatter)),

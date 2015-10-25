@@ -66,13 +66,13 @@ namespace Humanizer.Localisation.Formatters
 
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
-            string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
+            var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
         private string GetResourceForTimeSpan(TimeUnit unit, int count)
         {
-            string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
+            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 

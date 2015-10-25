@@ -7,13 +7,13 @@ namespace Humanizer.Localisation.NumberToWords
     {
         public override string Convert(int number, GrammaticalGender gender)
         {
-            RomanianCardinalNumberConverter converter = new RomanianCardinalNumberConverter();
+            var converter = new RomanianCardinalNumberConverter();
             return converter.Convert(number, gender);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
-            RomanianOrdinalNumberConverter converter = new RomanianOrdinalNumberConverter();
+            var converter = new RomanianOrdinalNumberConverter();
             return converter.Convert(number, gender);
         }
     }

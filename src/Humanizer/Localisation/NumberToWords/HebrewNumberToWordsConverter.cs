@@ -73,18 +73,18 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number > 0)
             {
-                bool appendAnd = parts.Count != 0;
+                var appendAnd = parts.Count != 0;
 
                 if (number <= 10)
                 {
-                    string unit = gender == GrammaticalGender.Masculine ? UnitsMasculine[number] : UnitsFeminine[number];
+                    var unit = gender == GrammaticalGender.Masculine ? UnitsMasculine[number] : UnitsFeminine[number];
                     if (appendAnd)
                         unit = "ו" + unit;
                     parts.Add(unit);
                 }
                 else if (number < 20)
                 {
-                    string unit = Convert(number % 10, gender);
+                    var unit = Convert(number % 10, gender);
                     unit = unit.Replace("יי", "י");
                     unit = string.Format("{0} {1}", unit, gender == GrammaticalGender.Masculine ? "עשר" : "עשרה");
                     if (appendAnd)
@@ -93,12 +93,12 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    string tenUnit = TensUnit[number / 10 - 1];
+                    var tenUnit = TensUnit[number / 10 - 1];
                     if (number % 10 == 0)
                         parts.Add(tenUnit);
                     else
                     {
-                        string unit = Convert(number % 10, gender);
+                        var unit = Convert(number % 10, gender);
                         parts.Add(string.Format("{0} ו{1}", tenUnit, unit));
                     }
                 }
@@ -117,7 +117,7 @@ namespace Humanizer.Localisation.NumberToWords
             // Big numbers (million and above) always use the masculine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php
 
-            int digits = number / (int)@group;
+            var digits = number / (int)@group;
             if (digits == 2)
                 parts.Add("שני");
             else if (digits > 2)
@@ -127,7 +127,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private void ToThousands(int number, List<string> parts)
         {
-            int thousands = number / (int)Group.Thousands;
+            var thousands = number / (int)Group.Thousands;
 
             if (thousands == 1)
                 parts.Add("אלף");
@@ -144,7 +144,7 @@ namespace Humanizer.Localisation.NumberToWords
             // For hundreds, Hebrew is using the feminine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php
 
-            int hundreds = number / (int)Group.Hundreds;
+            var hundreds = number / (int)Group.Hundreds;
 
             if (hundreds == 1)
                 parts.Add("מאה");

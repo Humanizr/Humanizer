@@ -19,11 +19,11 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             if (_fullNumber == 0)
                 return "zero";
 
-            string words = string.Empty;
+            var words = string.Empty;
 
-            foreach (int part in _threeDigitParts)
+            foreach (var part in _threeDigitParts)
             {
-                Func<int, string> partToString = GetNextPartConverter();
+                var partToString = GetNextPartConverter();
                 
                 words = partToString(part) + words;
             }
@@ -46,12 +46,12 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <returns>The sequence of three-digit numbers.</returns>
         protected static List<int> SplitEveryThreeDigits(int number)
         {
-            List<int> parts = new List<int>();
-            int rest = number;
+            var parts = new List<int>();
+            var rest = number;
             
             while (rest > 0)
             {
-                int threeDigit = rest % 1000;
+                var threeDigit = rest % 1000;
                 
                 parts.Add(threeDigit);
                 
@@ -115,15 +115,15 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 return string.Empty;
               
             // grab lowest two digits
-            int tensAndUnits = number % 100;
+            var tensAndUnits = number % 100;
             // grab third digit
-            int hundreds = (int)(number / 100);
+            var hundreds = (int)(number / 100);
             
             // grab also first and second digits separately
-            int units = tensAndUnits % 10;
-            int tens = (int)(tensAndUnits / 10);
+            var units = tensAndUnits % 10;
+            var tens = (int)(tensAndUnits / 10);
             
-            string words = string.Empty;
+            var words = string.Empty;
             
             // append text for hundreds
             words += _hundredNumberToText[hundreds];
@@ -152,7 +152,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 }
                 
                 // if this is the last set, an accent could be due
-                string unitsText = (thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units]);
+                var unitsText = (thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units]);
                 
                 words += unitsText;
             }

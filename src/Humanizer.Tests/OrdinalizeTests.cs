@@ -83,8 +83,8 @@ namespace Humanizer.Tests
         [InlineData(8)]
         public void OrdinalizeNumberGenderIsImmaterial(int number)
         {
-            string masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
-            string feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
+            var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
+            var feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
             Assert.Equal(masculineOrdinalized, feminineOrdinalized);
         }
 
@@ -94,8 +94,8 @@ namespace Humanizer.Tests
         [InlineData("8")]
         public void OrdinalizeStringGenderIsImmaterial(string number)
         {
-            string masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
-            string feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
+            var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
+            var feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
             Assert.Equal(masculineOrdinalized, feminineOrdinalized);
         }
     }

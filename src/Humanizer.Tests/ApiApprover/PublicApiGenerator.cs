@@ -157,7 +157,7 @@ namespace ApiApprover
 
             var methodParameters = member.GetParameters().ToList();
             var parameterCollection = new CodeParameterDeclarationExpressionCollection();
-            foreach (ParameterInfo info in methodParameters)
+            foreach (var info in methodParameters)
             {
                 var expresion = new CodeParameterDeclarationExpression(info.ParameterType, info.Name);
                 parameterCollection.Add(expresion);

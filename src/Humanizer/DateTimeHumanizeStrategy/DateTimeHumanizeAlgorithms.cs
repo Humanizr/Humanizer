@@ -31,8 +31,8 @@ namespace Humanizer.DateTimeHumanizeStrategy
             if (days >= 30 * precision & days <= 31) months = 1;
             if (days > 31 && days < 365 * precision)
             {
-                int factor = Convert.ToInt32(Math.Floor((double)days / 30));
-                int maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 30));
+                var factor = Convert.ToInt32(Math.Floor((double)days / 30));
+                var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 30));
                 months = (days >= 30 * (factor + precision)) ? maxMonths : maxMonths - 1;
             }
 
@@ -40,8 +40,8 @@ namespace Humanizer.DateTimeHumanizeStrategy
             if (days >= 365 * precision && days <= 366) years = 1;
             if (days > 365)
             {
-                int factor = Convert.ToInt32(Math.Floor((double)days / 365));
-                int maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 365));
+                var factor = Convert.ToInt32(Math.Floor((double)days / 365));
+                var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 365));
                 years = (days >= 365 * (factor + precision)) ? maxMonths : maxMonths - 1;
             }
 
@@ -103,11 +103,11 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             if (ts.TotalDays < 345)
             {
-                int months = Convert.ToInt32(Math.Floor(ts.TotalDays / 29.5));
+                var months = Convert.ToInt32(Math.Floor(ts.TotalDays / 29.5));
                 return formatter.DateHumanize(TimeUnit.Month, tense, months);
             }
 
-            int years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
+            var years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
             if (years == 0) years = 1;
 
             return formatter.DateHumanize(TimeUnit.Year, tense, years);

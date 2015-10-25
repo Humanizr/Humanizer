@@ -24,11 +24,11 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 return _unitsUnder10NumberToText[_fullNumber] + _genderSuffix;
             }
 
-            ItalianCardinalNumberCruncher cardinalCruncher = new ItalianCardinalNumberCruncher(_fullNumber, _gender);
+            var cardinalCruncher = new ItalianCardinalNumberCruncher(_fullNumber, _gender);
 
-            string words = cardinalCruncher.Convert();
+            var words = cardinalCruncher.Convert();
 
-            int tensAndUnits = _fullNumber % 100;
+            var tensAndUnits = _fullNumber % 100;
 
             if (tensAndUnits == 10)
             {
@@ -40,7 +40,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 // truncate last vowel
                 words = words.Remove(words.Length - 1);
 
-                int units = _fullNumber % 10;
+                var units = _fullNumber % 10;
 
                 // reintroduce *unaccented* last vowel in some corner cases
                 if (units == 3)
@@ -48,9 +48,9 @@ namespace Humanizer.Localisation.NumberToWords.Italian
                 else if (units == 6)
                     words += 'i';
 
-                int lowestThreeDigits = _fullNumber % 1000;
-                int lowestSixDigits = _fullNumber % 1000000;
-                int lowestNineDigits = _fullNumber % 1000000000;
+                var lowestThreeDigits = _fullNumber % 1000;
+                var lowestSixDigits = _fullNumber % 1000000;
+                var lowestNineDigits = _fullNumber % 1000000000;
 
                 if (lowestNineDigits == 0)
                 {

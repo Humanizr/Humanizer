@@ -105,7 +105,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Camelize(this string input)
         {
-            string word = Pascalize(input);
+            var word = Pascalize(input);
             return word.Substring(0, 1).ToLower() + word.Substring(1);
         }
 

@@ -103,9 +103,9 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 return "zero";
             }
 
-            string words = string.Empty;
+            var words = string.Empty;
 
-            bool prefixMinusSign = false;
+            var prefixMinusSign = false;
 
             if (number < 0)
             {
@@ -113,14 +113,14 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 number = -number;
             }
 
-            List<int> _threeDigitParts = SplitEveryThreeDigits(number);
+            var _threeDigitParts = SplitEveryThreeDigits(number);
 
-            for (int i = 0; i < _threeDigitParts.Count; i++)
+            for (var i = 0; i < _threeDigitParts.Count; i++)
             {
 
-                ThreeDigitSets currentSet = (ThreeDigitSets)Enum.ToObject(typeof(ThreeDigitSets), i);
+                var currentSet = (ThreeDigitSets)Enum.ToObject(typeof(ThreeDigitSets), i);
 
-                Func<int, GrammaticalGender, string> partToString = GetNextPartConverter(currentSet);
+                var partToString = GetNextPartConverter(currentSet);
 
                 words = partToString(_threeDigitParts[i], gender).Trim() + " " + words.Trim();
             }
@@ -142,12 +142,12 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// <returns>The sequence of three-digit numbers.</returns>
         private List<int> SplitEveryThreeDigits(int number)
         {
-            List<int> parts = new List<int>();
-            int rest = number;
+            var parts = new List<int>();
+            var rest = number;
 
             while (rest > 0)
             {
-                int threeDigit = rest % 1000;
+                var threeDigit = rest % 1000;
 
                 parts.Add(threeDigit);
 
@@ -208,15 +208,15 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 return string.Empty;
 
             // grab lowest two digits
-            int tensAndUnits = number % 100;
+            var tensAndUnits = number % 100;
             // grab third digit
-            int hundreds = (int)(number / 100);
+            var hundreds = (int)(number / 100);
 
             // grab also first and second digits separately
-            int units = tensAndUnits % 10;
-            int tens = (int)(tensAndUnits / 10);
+            var units = tensAndUnits % 10;
+            var tens = (int)(tensAndUnits / 10);
 
-            string words = string.Empty;
+            var words = string.Empty;
 
             // append text for hundreds
             words += HundredsToText(hundreds);
@@ -237,7 +237,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             else
             {
                 // exception for zero
-                string unitsText = (units == 0 ? string.Empty : " " + (_joinGroups + " " + getPartByGender(_units[units], gender)));
+                var unitsText = (units == 0 ? string.Empty : " " + (_joinGroups + " " + getPartByGender(_units[units], gender)));
 
                 words += unitsText;
             }
@@ -249,7 +249,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         {
             if (multiGenderPart.Contains("|"))
             {
-                string[] parts = multiGenderPart.Split('|');
+                var parts = multiGenderPart.Split('|');
                 if (gender == GrammaticalGender.Feminine)
                     return parts[1];
 

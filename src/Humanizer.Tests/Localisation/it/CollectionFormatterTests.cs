@@ -14,7 +14,7 @@ namespace Humanizer.Tests.Localisation.it
         public void OneItem()
         {
             var collection = new List<int>(new int[] {1});
-            string humanized = "1";
+            var humanized = "1";
             Assert.Equal(humanized, collection.Humanize());
         }
 
@@ -22,7 +22,7 @@ namespace Humanizer.Tests.Localisation.it
         public void TwoItems()
         {
             var collection = new List<int>(new int[] {1, 2});
-            string humanized = "1 e 2";
+            var humanized = "1 e 2";
             Assert.Equal(humanized, collection.Humanize());
         }
 
@@ -30,7 +30,7 @@ namespace Humanizer.Tests.Localisation.it
         public void MoreThanTwoItems()
         {
             var collection = new List<int>(new int[] {1, 2, 3});
-            string humanized = "1, 2 e 3";
+            var humanized = "1, 2 e 3";
             Assert.Equal(humanized, collection.Humanize());
         }
     }

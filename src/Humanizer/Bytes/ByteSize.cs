@@ -333,7 +333,7 @@ namespace Humanizer.Bytes
             var found = false;
 
             // Acquiring culture specific decimal separator
-			char decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+			var decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                 
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
@@ -346,11 +346,11 @@ namespace Humanizer.Bytes
             if (found == false)
                 return false;
 
-            int lastNumber = num;
+            var lastNumber = num;
 
             // Cut the input string in half
-            string numberPart = s.Substring(0, lastNumber).Trim();
-            string sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
+            var numberPart = s.Substring(0, lastNumber).Trim();
+            var sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part
             double number;
