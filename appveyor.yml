@@ -26,10 +26,6 @@ test:
   assemblies:
     - '**\*.Tests.dll'
   
-test:
-  assemblies:
-    - '**\*.Tests.dll'
-  
 deploy:
   provider: NuGet
   server: https://www.myget.org/F/humanizer/api/v2/package
