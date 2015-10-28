@@ -19,7 +19,7 @@ build:
   
 after_build:
   - cmd: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/MehdiK/Humanizer -s %APPVEYOR_REPO_COMMIT% -errorsaswarnings'
-  - ps: 'ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$env:GitVersion_NuGetVersion" -BasePath "src" }'
+  - ps: 'ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$env:GitVersion_NuGetVersion-build$env:GitVersion_BuildMetaDataPadded" -BasePath "src" }'
   - ps: 'ls *.nupkg | %{ appveyor PushArtifact $_.Name}'
   
 test:
