@@ -17,7 +17,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\af\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\portable-win+net45+wp8+wpa81\af" />
-    <file src="Humanizer\bin\Release\af\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\dotnet\af" />
+    <file src="Humanizer\bin\Release\af\*.*" target="lib\portable-win+net45+wp8+wpa81\af" />
+    <file src="Humanizer\bin\Release\af\*.*" target="lib\dotnet\af" />
   </files>
 </package>
