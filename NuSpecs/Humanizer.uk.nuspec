@@ -12,6 +12,7 @@
     <description>Humanizer Locale (uk)</description>
     <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
     <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>
+    <language>uk</language>
     <dependencies>
        <dependency id="Humanizer" version="[$version$]" />
     </dependencies>
