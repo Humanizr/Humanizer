@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Humanizer.All</id>
+    <version>$version$</version>
+    <title>Humanizer (all locales)</title>
+    <authors>Mehdi Khalili, Oren Novotny</authors>
+    <owners>Mehdi Khalili, onovotny</owners>    
+    <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
+    <iconUrl>https://raw.github.com/MehdiK/Humanizer/master/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer meta-package that brings in all </description>
+    <copyright>Copyright 2012-2015 Mehdi Khalili</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>    
+    <dependencies>
+      <dependency id="Humanizer.af" version="$version$" />
+      <dependency id="Humanizer.ar" version="$version$" />
+      <dependency id="Humanizer.bg" version="$version$" />
+      <dependency id="Humanizer.bn-BD" version="$version$" />
+      <dependency id="Humanizer.cs" version="$version$" />
+      <dependency id="Humanizer.da" version="$version$" />
+      <dependency id="Humanizer.de" version="$version$" />
+      <dependency id="Humanizer.el" version="$version$" />
+      <dependency id="Humanizer.es" version="$version$" />
+      <dependency id="Humanizer.fa" version="$version$" />
+      <dependency id="Humanizer.fi-FI" version="$version$" />
+      <dependency id="Humanizer.fr" version="$version$" />
+      <dependency id="Humanizer.fr-BE" version="$version$" />
+      <dependency id="Humanizer.he" version="$version$" />
+      <dependency id="Humanizer.hr" version="$version$" />
+      <dependency id="Humanizer.hu" version="$version$" />
+      <dependency id="Humanizer.id" version="$version$" />
+      <dependency id="Humanizer.it" version="$version$" />
+      <dependency id="Humanizer.ja" version="$version$" />
+      <dependency id="Humanizer.nb" version="$version$" />
+      <dependency id="Humanizer.nb-NO" version="$version$" />
+      <dependency id="Humanizer.nl" version="$version$" />
+      <dependency id="Humanizer.pl" version="$version$" />
+      <dependency id="Humanizer.pt" version="$version$" />
+      <dependency id="Humanizer.ro" version="$version$" />
+      <dependency id="Humanizer.ru" version="$version$" />
+      <dependency id="Humanizer.sk" version="$version$" />
+      <dependency id="Humanizer.sl" version="$version$" />
+      <dependency id="Humanizer.sr" version="$version$" />
+      <dependency id="Humanizer.sr-Latn" version="$version$" />
+      <dependency id="Humanizer.sv" version="$version$" />
+      <dependency id="Humanizer.tr" version="$version$" />
+      <dependency id="Humanizer.uk" version="$version$" />
+      <dependency id="Humanizer.uz-Cyrl-UZ" version="$version$" />
+      <dependency id="Humanizer.uz-Latn-UZ" version="$version$" />
+      <dependency id="Humanizer.vi" version="$version$" />
+      <dependency id="Humanizer.zh-CN" version="$version$" />
+      <dependency id="Humanizer.zh-Hans" version="$version$" />
+      <dependency id="Humanizer.zh-Hant" version="$version$" />
+    </dependencies>
+  </metadata>
+</package>
