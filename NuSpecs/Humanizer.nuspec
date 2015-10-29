@@ -54,4 +54,5 @@
       <dependency id="Humanizer.Core.zh-Hant" version="$version$" />
     </dependencies>
   </metadata>
+  <files />  
 </package>
