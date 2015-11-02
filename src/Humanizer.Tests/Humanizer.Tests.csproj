@@ -156,6 +156,7 @@
     <Compile Include="Localisation\pt-BR\NumberToWordsTests.cs" />
     <Compile Include="Localisation\nl\OrdinalizeTests.cs" />
     <Compile Include="Localisation\pt-BR\OrdinalizeTests.cs" />
+    <Compile Include="Localisation\ro-RO\CollectionFormatterTests.cs" />
     <Compile Include="Localisation\ro-RO\NumberToWordsTests.cs" />
     <Compile Include="Localisation\ro-RO\OrdinalizerTests.cs" />
     <Compile Include="Localisation\ro-RO\TimeSpanHumanizerTests.cs" />
