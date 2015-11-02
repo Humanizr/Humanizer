@@ -23,9 +23,9 @@ namespace Humanizer.Tests
         [InlineData("process", 1, "1 process")]
         [InlineData("processes", 2, "2 processes")]
         [InlineData("processes", 1, "1 process")]
-        public void ToQuantity(string word, int quatity, string expected)
+        public void ToQuantity(string word, int quantity, string expected)
         {
-            Assert.Equal(expected, word.ToQuantity(quatity));
+            Assert.Equal(expected, word.ToQuantity(quantity));
         }
         
         [Theory]
@@ -40,9 +40,9 @@ namespace Humanizer.Tests
         [InlineData("process", 1, "process")]
         [InlineData("processes", 2, "processes")]
         [InlineData("processes", 1, "process")]
-        public void ToQuantityWithNoQuantity(string word, int quatity, string expected)
+        public void ToQuantityWithNoQuantity(string word, int quantity, string expected)
         {
-            Assert.Equal(expected, word.ToQuantity(quatity, ShowQuantityAs.None));
+            Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.None));
         }
         
         [Theory]
@@ -57,10 +57,10 @@ namespace Humanizer.Tests
         [InlineData("process", 1, "1 process")]
         [InlineData("processes", 2, "2 processes")]
         [InlineData("processes", 1, "1 process")]
-        public void ToQuantityNumeric(string word, int quatity, string expected)
+        public void ToQuantityNumeric(string word, int quantity, string expected)
         {
 // ReSharper disable once RedundantArgumentDefaultValue
-            Assert.Equal(expected, word.ToQuantity(quatity, ShowQuantityAs.Numeric));
+            Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Numeric));
         }
         
         [Theory]
@@ -76,9 +76,9 @@ namespace Humanizer.Tests
         [InlineData("processes", 2, "two processes")]
         [InlineData("processes", 1200, "one thousand two hundred processes")]
         [InlineData("processes", 1, "one process")]
-        public void ToQuantityWords(string word, int quatity, string expected)
+        public void ToQuantityWords(string word, int quantity, string expected)
         {
-            Assert.Equal(expected, word.ToQuantity(quatity, ShowQuantityAs.Words));
+            Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Words));
         }
 
         [Theory]
