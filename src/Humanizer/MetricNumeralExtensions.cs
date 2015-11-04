@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Humanizer
@@ -181,7 +182,7 @@ namespace Humanizer
 		private static double BuildMetricNumber(string input, char last)
 		{
 			Func<List<char>, double> getExponent = symbols => (symbols.IndexOf(last) + 1) * 3;
-			var number = double.Parse(input.Remove(input.Length - 1));
+			var number = double.Parse(input.Remove(input.Length - 1), CultureInfo.InvariantCulture);
             var exponent = Math.Pow(10, Symbols[0].Contains(last)
 				? getExponent(Symbols[0])
 				: -getExponent(Symbols[1]));
@@ -228,7 +229,7 @@ namespace Humanizer
 			var symbol = Math.Sign(exponent) == 1
 				? Symbols[0][exponent - 1]
 				: Symbols[1][-exponent - 1];
-			return number
+			return number.ToString(CultureInfo.InvariantCulture)
 				+ (hasSpace ? " " : string.Empty)
 				+ GetUnit(symbol, useSymbol);
 		}
