@@ -34,7 +34,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [ByteSize](#bytesize)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
- - [Continuous Integration from AppVeyor(#continuous-integration)
+ - [Continuous Integration from AppVeyor](#continuous-integration)
  - [Related Projects](#related-projects)
    - [Humanizer ReSharper Annotations](#humanizer-resharper-annotations)
    - [PowerShell Humanizer](#powershell-humanizer)
@@ -1004,7 +1004,7 @@ Please see <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING
 ##<a id="continuous-integration">Continuous Integration from AppVeyor</a>
 Humanizer project is built & tested continuously by AppVeyor (more details [here](https://ci.appveyor.com/project/onovotny/humanizer)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
 
-The current build status on the CI server is [![Build status](https://ci.appveyor.com/api/projects/status/4do8v1ukkp4usf6p/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
+The current build status on the CI server is [![Build status](https://ci.appveyor.com/api/projects/status/wsp2of3r7otw01c5/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
 
 ##<a id="related-projects">Related projects</a>
 Below is a list of related open source projects:
