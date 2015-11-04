@@ -10,6 +10,7 @@ using Microsoft.CSharp;
 using Mono.Cecil;
 using Mono.Cecil.Rocks;
 using TypeAttributes = System.Reflection.TypeAttributes;
+using System.Globalization;
 
 // ReSharper disable CheckNamespace
 // ReSharper disable BitwiseOperatorOnEnumWithoutFlags
@@ -530,7 +531,7 @@ namespace ApiApprover
                 }
 
                 var name = parameter.HasConstant
-                    ? string.Format("{0} = {1}", parameter.Name, FormatParameterConstant(parameter))
+                    ? string.Format(CultureInfo.InvariantCulture, "{0} = {1}", parameter.Name, FormatParameterConstant(parameter))
                     : parameter.Name;
                 var expression = new CodeParameterDeclarationExpression(type, name)
                 {
