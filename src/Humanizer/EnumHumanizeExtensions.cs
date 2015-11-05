@@ -41,7 +41,7 @@ namespace Humanizer
                     }
                 }
 
-                return String.Join(", ", humanizedEnumValues);
+                return CollectionHumanizeExtensions.Humanize<string>(humanizedEnumValues);
             }
 
             var caseName = input.ToString();

@@ -21,6 +21,6 @@ namespace Humanizer.Tests
         public const string MemberWithSingleWordDescriptionAttribute = "Red";
         public const string MemberWithMultipleWordDescriptionAttribute = "Dark Gray";
 
-        public const string ExpectedResultWhenBothValuesXored = "Red, Dark Gray";
+        public const string ExpectedResultWhenBothValuesXored = "Red and Dark Gray";
     }
 }
