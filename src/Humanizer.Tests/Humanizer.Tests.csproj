@@ -97,6 +97,8 @@
   <ItemGroup>
     <Compile Include="App_Packages\ApiApprover.3.0.1\PublicApiApprover.cs" />
     <Compile Include="App_Packages\ApiApprover.3.0.1\PublicApiGenerator.cs" />
+    <Compile Include="BitFieldEnumHumanizeTests.cs" />
+    <Compile Include="BitFieldEnumUnderTest.cs" />
     <Compile Include="Bytes\ArithmeticTests.cs" />
     <Compile Include="Bytes\ByteRateTests.cs" />
     <Compile Include="Bytes\ComparingTests.cs" />
