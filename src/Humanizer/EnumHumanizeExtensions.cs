@@ -61,7 +61,6 @@ namespace Humanizer
         /// <summary>
         /// Checks whether the given enum is to be used as a bit field type.
         /// </summary>
-        /// <seealso cref="https://msdn.microsoft.com/en-us/library/system.flagsattribute(v=vs.110).aspx" />
         /// <param name="input">An enum</param>
         /// <returns>True if the given enum is a bit field enum, false otherwise.</returns>
         private static bool IsBitFieldEnum(Enum input)
@@ -80,22 +79,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">An instance of an enum.</param>
         /// <returns>True, if the instance maps directly to a single enum property, false if otherwise.</returns>
-        /// <example>
-        /// <code>
-        /// [FlagsAttribute] 
-        /// enum MultiHue : short
-        /// {
-        ///     None = 0,
-        ///     Black = 1,
-        ///     Red = 2,
-        ///     Green = 4,
-        ///     Blue = 8
-        /// };
-        /// 
-        /// var matches = (MultiHue) 1; // Same as "MultieHue.Black" and maps directly to an enum property.
-        /// var doesntMatch = (MultieHue) 3; // Equivalent to "MultieHue.Black | MultieHue.Red" but doesn't map directly to any single enum property.
-        /// </code>
-        /// </example>
         private static bool DirectlyMapsToEnumConstant(Enum input)
         {
             bool exactMatch = false;
