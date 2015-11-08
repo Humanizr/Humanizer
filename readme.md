@@ -168,7 +168,7 @@ Default is the right as shown in the examples above. The examples below show how
 You can format a `string` using the `FormatWith()` method:
 
 ```c#
-"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formated -> 1/A."
+"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formatted -> 1/A."
 ```
 
 This is an extension method based on `String.Format`, so exact rules applies to it.
