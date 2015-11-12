@@ -6,7 +6,6 @@
 #pragma warning disable 1591
     public enum TimeUnit
     {
-        Never,
         Millisecond,
         Second,
         Minute,
@@ -14,7 +13,8 @@
         Day,
         Week,
         Month,
-        Year
+        Year,
+        Never
     }
 #pragma warning restore 1591
 }
