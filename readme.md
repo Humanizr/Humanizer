@@ -283,10 +283,13 @@ DateTimeOffset.AddHours(1).Humanize() => "an hour from now"
 
 Humanizer supports both local and UTC dates as well as dates with offset (`DateTimeOffset`). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
+
+In addition when applied to `DateTime` a threshold may be specified (`dateNeverThreshold`). If the measured time is smaller than the threshold, the returned value will default to *never*.
+
 Here is the API signature:
 
 ```C#
-public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
+public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null, DateTime? dateNeverThreshold = null)
 public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
 ```
 
