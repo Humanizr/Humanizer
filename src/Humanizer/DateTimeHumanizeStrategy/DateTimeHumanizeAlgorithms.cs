@@ -60,12 +60,15 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
+        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture, DateTime? dateNeverThreshold = null)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
 
             var formatter = Configurator.GetFormatter(culture);
+
+            if (dateNeverThreshold.HasValue && tense == Tense.Past && comparisonBase.Subtract(ts) < dateNeverThreshold)
+                return formatter.DateHumanize(TimeUnit.Never, tense, 0);
 
             if (ts.TotalMilliseconds < 500)
                 return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);

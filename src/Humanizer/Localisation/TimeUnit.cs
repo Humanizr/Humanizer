@@ -6,6 +6,7 @@
 #pragma warning disable 1591
     public enum TimeUnit
     {
+        Never,
         Millisecond,
         Second,
         Minute,
