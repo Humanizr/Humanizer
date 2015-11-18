@@ -8,7 +8,7 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class SerbianCyrlNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шестнаест", "седамнаест", "осамнаест", "деветнаест" };
+        private static readonly string[] UnitsMap = { "нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест" };
         private static readonly string[] TensMap = { "нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет" };
 
         private readonly CultureInfo _culture;
