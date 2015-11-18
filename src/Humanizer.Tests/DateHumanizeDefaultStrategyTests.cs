@@ -145,6 +145,27 @@ namespace Humanizer.Tests
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
+        
+        [Fact]
+        public void NeverWithoutBaseDate()
+        {
+            var dateNeverThresholdUtc = DateTime.UtcNow.Subtract(TimeSpan.FromDays(1));
+            var dateNeverThreshold = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+
+            DateHumanize.Verify("never", 2, TimeUnit.Day, Tense.Past, null, null, null, null, dateNeverThreshold, dateNeverThresholdUtc);
+        }
+
+        [Fact]
+        public void NeverWithBaseDate()
+        {
+            var baseDateUtc = DateTime.UtcNow.Subtract(TimeSpan.FromDays(1));
+            var baseDate = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+
+            var dateNeverThresholdUtc = DateTime.UtcNow.Subtract(TimeSpan.FromDays(1));
+            var dateNeverThreshold = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+
+            DateHumanize.Verify("never", 2, TimeUnit.Day, Tense.Past, null, null, baseDate, baseDateUtc, dateNeverThreshold, dateNeverThresholdUtc);
+        }
 
         [Fact]
         public void Now()

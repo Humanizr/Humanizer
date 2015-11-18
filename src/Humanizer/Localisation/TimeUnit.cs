@@ -13,7 +13,8 @@
         Day,
         Week,
         Month,
-        Year
+        Year,
+        Never
     }
 #pragma warning restore 1591
 }

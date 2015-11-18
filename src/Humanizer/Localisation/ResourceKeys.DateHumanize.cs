@@ -13,6 +13,11 @@
             public const string Now = "DateHumanize_Now";
 
             /// <summary>
+            /// Resource key for Never.
+            /// </summary>
+            public const string Never = "DateHumanize_Never";
+
+            /// <summary>
             /// Examples: DateHumanize_SingleMinuteAgo, DateHumanize_MultipleHoursAgo
             /// Note: "s" for plural served separately by third part.
             /// </summary>
@@ -32,9 +37,12 @@
             {
                 ValidateRange(count);
 
+                if (timeUnit == TimeUnit.Never)
+                    return Never;
+
                 if (count == 0) 
                     return Now;
-
+                
                 var singularity = count == 1 ? Single : Multiple;
                 var tense = timeUnitTense == Tense.Future ? FromNow : Ago;
                 var unit = timeUnit.ToString().ToQuantity(count, ShowQuantityAs.None);

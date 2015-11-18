@@ -16,15 +16,21 @@ namespace Humanizer
         /// <param name="utcDate">Boolean value indicating whether the date is in UTC or local</param>
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <param name="dateNeverThreshold">Threshold date to indicate 'never' if input is before it.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null, DateTime? dateNeverThreshold = null)
         {
             var comparisonBase = dateToCompareAgainst ?? DateTime.UtcNow;
 
             if (!utcDate)
+            {
                 comparisonBase = comparisonBase.ToLocalTime();
+                if (dateNeverThreshold.HasValue)
+                    dateNeverThreshold = dateNeverThreshold.Value.ToLocalTime();
+            }
+                
 
-            return Configurator.DateTimeHumanizeStrategy.Humanize(input, comparisonBase, culture);
+            return Configurator.DateTimeHumanizeStrategy.Humanize(input, comparisonBase, culture, dateNeverThreshold);
         }
 
         /// <summary>
