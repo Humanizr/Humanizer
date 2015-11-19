@@ -25,11 +25,6 @@ namespace Humanizer.Tests
         CultureInfo originalCulture;
         CultureInfo originalUICulture;
 
-#if WINDOWS_UWP
-        CultureInfo defaultCulture;
-        CultureInfo defaultUICulture;
-        string primaryLang;
-#endif
 
         /// <summary>
         /// Replaces the culture and UI culture of the current thread with
@@ -69,7 +64,7 @@ namespace Humanizer.Tests
         public CultureInfo UICulture { get { return uiCulture.Value; } }
 
         /// <summary>
-        /// Stores the current <see cref="Thread.CurrentPrincipal" />
+        /// Stores the current <see cref="CultureInfo.CurrentCulture" />
         /// <see cref="CultureInfo.CurrentCulture" /> and <see cref="CultureInfo.CurrentUICulture" />
         /// and replaces them with the new cultures defined in the constructor.
         /// </summary>
@@ -79,41 +74,20 @@ namespace Humanizer.Tests
             originalCulture = CultureInfo.CurrentCulture;
             originalUICulture = CultureInfo.CurrentUICulture;
 
-#if !WINDOWS_UWP
-            
-            Thread.CurrentThread.CurrentCulture = Culture;
-            Thread.CurrentThread.CurrentUICulture = UICulture;
-#else
-            defaultUICulture = CultureInfo.DefaultThreadCurrentUICulture;
-            defaultCulture = CultureInfo.DefaultThreadCurrentCulture;
-            primaryLang = Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride;
 
             CultureInfo.CurrentCulture = Culture;
             CultureInfo.CurrentUICulture = UICulture;
-
-            CultureInfo.DefaultThreadCurrentCulture = Culture;
-            CultureInfo.DefaultThreadCurrentUICulture = UICulture;
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = UICulture.Name;
-#endif
         }
 
         /// <summary>
         /// Restores the original <see cref="CultureInfo.CurrentCulture" /> and
-        /// <see cref="CultureInfo.CurrentUICulture" /> to <see cref="Thread.CurrentPrincipal" />
+        /// <see cref="CultureInfo.CurrentUICulture" /> to <see cref="CultureInfo.CurrentCulture" />
         /// </summary>
         /// <param name="methodUnderTest">The method under test</param>
         public override void After(MethodInfo methodUnderTest)
         {
-#if !WINDOWS_UWP
-            Thread.CurrentThread.CurrentCulture = originalCulture;
-            Thread.CurrentThread.CurrentUICulture = originalUICulture;
-#else
             CultureInfo.CurrentCulture = originalCulture;
             CultureInfo.CurrentUICulture = originalUICulture;
-            CultureInfo.DefaultThreadCurrentCulture = defaultCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = defaultUICulture;
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = primaryLang;
-#endif
         }
     }
 
