@@ -2,12 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.ukUA
 {
-    public class OrdinalizeTests : AmbientCulture
+    [UseCulture("uk-UA")]
+    public class OrdinalizeTests 
     {
-        public OrdinalizeTests()
-            : base("uk-UA")
-        {
-        }
 
         [Theory]
         [InlineData("0", "0-й")]

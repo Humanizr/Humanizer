@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.hr
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("hr-HR")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests() : base("hr-HR") { }
 
         [Theory]
         [InlineData(-22, "prije 22 godine")]

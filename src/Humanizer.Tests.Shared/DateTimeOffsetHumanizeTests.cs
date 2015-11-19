@@ -8,11 +8,9 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class DateTimeOffsetHumanizeTests : AmbientCulture
+    [UseCulture("en-US")]
+    public class DateTimeOffsetHumanizeTests
     {
-        public DateTimeOffsetHumanizeTests() : base("en-US")
-        {
-        }
 
         [Fact]
         public void DefaultStrategy_SameOffset()

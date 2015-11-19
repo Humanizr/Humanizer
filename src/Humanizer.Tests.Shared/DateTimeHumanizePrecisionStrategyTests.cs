@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class DateTimeHumanizePrecisionStrategyTests : AmbientCulture
+    [UseCulture("en-US")]
+    public class DateTimeHumanizePrecisionStrategyTests
     {
-        public DateTimeHumanizePrecisionStrategyTests() : base("en-US") { }
 
         private const double DefaultPrecision = .75;
 

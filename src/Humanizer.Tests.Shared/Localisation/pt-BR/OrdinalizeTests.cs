@@ -2,12 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.ptBR
 {
-    public class OrdinalizeTests : AmbientCulture
+    [UseCulture("pt-BR")]
+    public class OrdinalizeTests 
     {
-        public OrdinalizeTests()
-            : base("pt-BR")
-        {
-        }
 
         [Theory]
         [InlineData("0", "0")]

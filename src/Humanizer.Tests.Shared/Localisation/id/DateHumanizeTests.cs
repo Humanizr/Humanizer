@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.id
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("id-ID")]
+    public class DateHumanizeTests
     {
-        public DateHumanizeTests() : base("id-ID") { }
 
         [Theory]
         [InlineData(1, "sedetik yang lalu")]

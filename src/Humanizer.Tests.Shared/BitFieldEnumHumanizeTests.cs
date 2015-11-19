@@ -7,10 +7,9 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class BitFieldEnumHumanizeTests : AmbientCulture
+    [UseCulture("en")]
+    public class BitFieldEnumHumanizeTests 
     {
-        public BitFieldEnumHumanizeTests() : base("en") { }
-
         [Fact]
         public void CanHumanizeSingleWordDescriptionAttribute()
         {

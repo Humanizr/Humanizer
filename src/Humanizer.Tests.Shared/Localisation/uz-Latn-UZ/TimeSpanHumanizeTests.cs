@@ -3,10 +3,10 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.uzLatn
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("uz-Latn-UZ")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("uz-Latn-UZ") { }
-
+        
         [Theory]
         [InlineData(14, "2 hafta")]
         [InlineData(7, "1 hafta")]

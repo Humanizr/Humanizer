@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.uzCyrl
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("uz-Cyrl-UZ")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("uz-Cyrl-UZ") { }
-
         [Theory]
         [InlineData(14, "2 ҳафта")]
         [InlineData(7, "1 ҳафта")]

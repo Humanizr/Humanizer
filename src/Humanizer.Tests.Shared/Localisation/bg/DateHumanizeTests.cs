@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.bg
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("bg-BG")]
+    public class DateHumanizeTests
     {
-        public DateHumanizeTests() : base("bg-BG")
-        {
-        }
-
         [Theory]
         [InlineData(1, "преди секунда")]
         [InlineData(2, "преди 2 секунди")]

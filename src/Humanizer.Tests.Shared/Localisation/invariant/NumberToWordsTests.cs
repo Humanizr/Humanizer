@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.invariant
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base(CultureInfo.InvariantCulture) { }
 
         [Theory]
         [InlineData(1)]

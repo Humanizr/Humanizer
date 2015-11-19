@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.nbNO
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("nb-NO")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("nb-NO") { }
 
         [Theory]
         [InlineData(7, "en uke")]

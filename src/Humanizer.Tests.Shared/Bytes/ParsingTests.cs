@@ -27,9 +27,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ParsingTests : AmbientCulture
+    [UseCulture("en")]
+    public class ParsingTests
     {
-        public ParsingTests() : base("en") { }
 
         [Fact]
         public void Parse()

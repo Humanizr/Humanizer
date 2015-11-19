@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ja
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("ja")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("ja") { }
 
         [Theory]
         [InlineData(7, "1 週間")]

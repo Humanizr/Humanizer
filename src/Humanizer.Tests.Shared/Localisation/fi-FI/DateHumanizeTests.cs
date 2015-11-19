@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.fiFI
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("fi-FI")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests()
-            : base("fi-Fi")
-        {
-        }
 
         [Theory]
         [InlineData(2, "2 päivää sitten")]

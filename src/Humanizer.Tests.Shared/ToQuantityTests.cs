@@ -5,13 +5,9 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class ToQuantityTests : AmbientCulture
+    [UseCulture("en-US")]
+    public class ToQuantityTests
     {
-        public ToQuantityTests()
-            : base("en-US")
-        {
-        }
-
         [Theory]
         [InlineData("case", 0, "0 cases")]
         [InlineData("case", 1, "1 case")]

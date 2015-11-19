@@ -2,13 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.ukUA
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("uk-UA")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests()
-            : base("uk-UA")
-        {
-        }
-
         [Theory]
         [InlineData(0, "нуль")]
         [InlineData(1, "один")]

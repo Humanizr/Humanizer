@@ -1,5 +1,6 @@
 ﻿{
     "diagnosticMessages": true,
     "methodDisplay": "method",
-    "parallelizeAssembly": true
+    "parallelizeAssembly": false,
+    "maxParallelThreads": 1
 }

@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.vi
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("vi")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("vi") { }
-
         [Theory]
         [InlineData(14, "2 tuần")]
         [InlineData(7, "1 tuần")]

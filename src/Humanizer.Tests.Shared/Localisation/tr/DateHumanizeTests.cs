@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.tr
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("tr")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests()
-            : base("tr")
-        {
-        }
 
         [Theory]
         [InlineData(1, "bir saniye önce")]

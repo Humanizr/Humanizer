@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.sl
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("sl-SI")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests() : base("sl-SI") { }
-
         [Theory]
         [InlineData(-10, "pred 10 leti")]
         [InlineData(-5, "pred 5 leti")]

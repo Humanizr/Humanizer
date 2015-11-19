@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.bnBD
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("bn-BD")]
+    public class DateHumanizeTests
     {
-        public DateHumanizeTests() : base("bn-BD") { }
-
         [Theory]
         [InlineData(1, "আগামিকাল")]
         [InlineData(13, "13 দিন পর")]

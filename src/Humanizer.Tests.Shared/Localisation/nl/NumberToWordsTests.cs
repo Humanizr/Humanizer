@@ -2,9 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.nl
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("nl-NL")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base("nl-NL") { }
 
         [Theory]
         [InlineData(0, "nul")]

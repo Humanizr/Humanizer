@@ -5,10 +5,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ByteRateTests : AmbientCulture
+    [UseCulture("en")]
+    public class ByteRateTests
     {
-        public ByteRateTests() : base("en") { }
-        
         [Theory]
         [InlineData(400, 1, "400 B/s")]
         [InlineData(4 * 1024, 1, "4 KB/s")]

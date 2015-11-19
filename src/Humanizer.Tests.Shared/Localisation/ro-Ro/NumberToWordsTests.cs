@@ -2,13 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.roRO
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("ro-RO")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests()
-            : base("ro-RO")
-        {
-        }
-
         [Theory]
         [InlineData(-1, "minus unu")]
         [InlineData(0, "zero")]

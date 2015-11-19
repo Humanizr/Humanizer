@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ptBR
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("pt-BR")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests() : base("pt-BR") { }
 
         [Theory]
         [InlineData(-2, "2 segundos atrás")]

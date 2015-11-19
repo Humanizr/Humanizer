@@ -2,12 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.ptBR
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("pt-BR")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests()
-            : base("pt-BR")
-        {
-        }
 
         [Theory]
         [InlineData(1, "um")]

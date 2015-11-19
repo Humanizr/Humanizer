@@ -4,12 +4,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.it
 {
-    public class OrdinalizerTests : AmbientCulture
+    [UseCulture("it")]
+    public class OrdinalizerTests 
     {
-        public OrdinalizerTests() 
-            : base("it") 
-        {
-        }
 
         [Theory]
         [InlineData(0, "0")]  // No ordinal for 0 in italian (neologism apart)

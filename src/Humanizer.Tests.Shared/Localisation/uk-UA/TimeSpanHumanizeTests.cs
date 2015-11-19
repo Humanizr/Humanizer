@@ -3,13 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ukUA
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("uk-UA")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests()
-            : base("uk-UA")
-        {
-        }
-
         [Theory]
         [InlineData(7, "один тиждень")]
         [InlineData(14, "2 тижні")]

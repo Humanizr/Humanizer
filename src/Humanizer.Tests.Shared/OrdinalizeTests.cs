@@ -2,12 +2,9 @@
 
 namespace Humanizer.Tests
 {
-    public class OrdinalizeTests : AmbientCulture
+    [UseCulture("en-US")]
+    public class OrdinalizeTests
     {
-        public OrdinalizeTests()
-            : base("en-US")
-        {
-        }
 
         [Theory]
         [InlineData("0", "0th")]

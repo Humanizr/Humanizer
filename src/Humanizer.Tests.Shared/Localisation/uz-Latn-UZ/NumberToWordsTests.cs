@@ -2,10 +2,10 @@
 
 namespace Humanizer.Tests.Localisation.uzLatn
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("uz-Latn-UZ")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base("uz-Latn-UZ") { }
-
+        
         [Theory]
         [InlineData(0, "nol")]
         [InlineData(1, "bir")]

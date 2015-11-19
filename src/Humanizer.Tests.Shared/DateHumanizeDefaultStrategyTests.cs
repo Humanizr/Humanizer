@@ -5,13 +5,9 @@ using System;
 
 namespace Humanizer.Tests
 {
-    public class DateHumanizeDefaultStrategyTests : AmbientCulture
+    [UseCulture("en-US")]
+    public class DateHumanizeDefaultStrategyTests
     {
-        public DateHumanizeDefaultStrategyTests()
-            : base("en-US")
-        {
-        }
-
         [Theory]
         [InlineData(1, "one second ago")]
         [InlineData(10, "10 seconds ago")]

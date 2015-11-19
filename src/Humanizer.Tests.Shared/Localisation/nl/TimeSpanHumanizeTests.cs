@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.nl
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("nl-NL")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("nl-NL") { }
 
         [Fact]
         public void TwoWeeks()

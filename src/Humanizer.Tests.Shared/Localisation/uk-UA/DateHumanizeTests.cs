@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ukUA
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("uk-UA")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests()
-            : base("uk-UA")
-        {
-        }
 
         [Theory]
         [InlineData(1, "секунду тому")]

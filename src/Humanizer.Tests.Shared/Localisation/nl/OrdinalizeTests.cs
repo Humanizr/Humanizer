@@ -2,12 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.nl
 {
-    public class OrdinalizeTests : AmbientCulture
+    [UseCulture("nl")]
+    public class OrdinalizeTests 
     {
-        public OrdinalizeTests()
-            : base("nl")
-        {
-        }
 
         [Theory]
         [InlineData("0", "0")]

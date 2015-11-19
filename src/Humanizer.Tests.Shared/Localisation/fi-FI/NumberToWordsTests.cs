@@ -2,9 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.fiFI
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("fi-FI")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base("fi-Fi") { }
 
         [Theory]
         [InlineData(0, "nolla")]

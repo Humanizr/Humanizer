@@ -2,9 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.es
 {
-    public class NumberToWordsFeminineTests : AmbientCulture
+    [UseCulture("es-ES")]
+    public class NumberToWordsFeminineTests 
     {
-        public NumberToWordsFeminineTests() : base("es-ES") { }
 
         [Theory]
         [InlineData(1, "una")]

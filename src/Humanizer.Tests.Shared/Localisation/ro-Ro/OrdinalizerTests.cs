@@ -2,12 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.roRO
 {
-    public class OrdinalizerTests : AmbientCulture
+    [UseCulture("ro-RO")]
+    public class OrdinalizerTests 
     {
-        public OrdinalizerTests() 
-            : base("ro-RO") 
-        {
-        }
 
         [Theory]
         [InlineData(0, "0")]  // No ordinal for 0 (zero) in Romanian.
