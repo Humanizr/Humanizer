@@ -25,12 +25,14 @@ namespace Humanizer.Tests
             Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
         }
 
+#if !NETFX_CORE
         [Fact]
         public void HonorsDescriptionAttribute()
         {
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<EnumUnderTest>());
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(EnumUnderTest)));
         }
+#endif
 
         [Fact]
         public void HonorsDescriptionAttributeSubclasses()

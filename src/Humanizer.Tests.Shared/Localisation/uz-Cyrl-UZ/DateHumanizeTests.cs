@@ -15,7 +15,6 @@ namespace Humanizer.Tests.Localisation.uzCyrl
         [InlineData(10, "10 секунд аввал")]
         public void SecondsAgo(int seconds, string expected)
         {
-            var cul = System.Threading.Thread.CurrentThread.CurrentCulture;
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 

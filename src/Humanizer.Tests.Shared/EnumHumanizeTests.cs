@@ -4,11 +4,13 @@ namespace Humanizer.Tests
 {
     public class EnumHumanizeTests
     {
+#if !NETFX_CORE
         [Fact] 
         public void HonorsDescriptionAttribute()
         {
             Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
         }
+#endif
 
         [Fact]
         public void HonorsDescriptionAttributeSubclasses()

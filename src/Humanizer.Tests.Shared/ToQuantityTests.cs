@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.InteropServices.ComTypes;
 using Xunit;
 
 namespace Humanizer.Tests
@@ -111,7 +112,17 @@ namespace Humanizer.Tests
         public void ToQuantityWordsWithCustomCultureFormatting(string word, int quantity, string format, string cultureCode, string expected)
         {
             var culture = new CultureInfo(cultureCode);
-            Assert.Equal(expected, word.ToQuantity(quantity, format, culture), StringComparer.Create(culture, false));
+            
+            Assert.Equal(expected, word.ToQuantity(quantity, format, culture), GetStringComparer(culture));
+        }
+
+        internal static StringComparer GetStringComparer(CultureInfo culture)
+        {
+#if NETFX_CORE
+            return culture.CompareInfo.GetStringComparer(CompareOptions.None);
+#else
+            return StringComparer.Create(culture, false);
+#endif
         }
     }
 }
