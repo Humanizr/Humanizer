@@ -14,13 +14,13 @@ namespace Humanizer.Tests
         [Fact]
         public void CanHumanizeSingleWordDescriptionAttribute()
         {
-            Assert.Equal(BitFlagEnumTestsResources.MemberWithSingleWordDescriptionAttribute, BitFieldEnumUnderTest.RED.Humanize());
+            Assert.Equal(BitFlagEnumTestsResources.MemberWithSingleWordDisplayAttribute, BitFieldEnumUnderTest.RED.Humanize());
         }
 
         [Fact]
         public void CanHumanizeMultipleWordDescriptionAttribute()
         {
-            Assert.Equal(BitFlagEnumTestsResources.MemberWithMultipleWordDescriptionAttribute, BitFieldEnumUnderTest.DARK_GRAY.Humanize());
+            Assert.Equal(BitFlagEnumTestsResources.MemberWithMultipleWordDisplayAttribute, BitFieldEnumUnderTest.DARK_GRAY.Humanize());
         }
 
         [Fact]

@@ -15,7 +15,6 @@ namespace Humanizer.Tests.Localisation.uzLatn
         [InlineData(10, "10 sekund avval")]
         public void SecondsAgo(int seconds, string expected)
         {
-            var cul = System.Threading.Thread.CurrentThread.CurrentCulture;
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
