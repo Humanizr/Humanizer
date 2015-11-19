@@ -2,5 +2,6 @@
     "diagnosticMessages": true,
     "methodDisplay": "method",
     "parallelizeAssembly": false,
+    "parallelizeTestCollections": false,
     "maxParallelThreads": 1
 }
