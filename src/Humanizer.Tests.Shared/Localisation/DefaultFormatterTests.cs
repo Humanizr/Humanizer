@@ -21,15 +21,13 @@ namespace Humanizer.Tests.Localisation
         }
 
         [Fact]
+        [UseCulture("es")]
         public void HandlesNotImplementedCollectionFormattersGracefully()
         {
-            using (new AmbientCulture("es"))
-            {
-                var a = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };
-                var b = a.Humanize(); 
+            var a = new[] {DateTime.UtcNow, DateTime.UtcNow.AddDays(10)};
+            var b = a.Humanize();
 
-                Assert.Equal(a[0] + " & " + a[1], b);
-            }
+            Assert.Equal(a[0] + " & " + a[1], b);
         }
     }
 }

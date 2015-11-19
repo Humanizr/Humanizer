@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ptBR
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("pt-BR")]
+    public class TimeSpanHumanizeTests
     {
-        public TimeSpanHumanizeTests() : base("pt-BR") { }
-
         [Fact]
         public void TwoWeeks()
         {

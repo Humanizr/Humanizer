@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.hu
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("hu-HU")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests(): base("hu-HU")
-        {
-        }
-
         [Theory]
         [InlineData(1, "egy másodperce")]
         [InlineData(10, "10 másodperce")]

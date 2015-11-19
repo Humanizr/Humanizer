@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ByteSizeExtensionsTests : AmbientCulture
+    [UseCulture("en")]
+    public class ByteSizeExtensionsTests
     {
-        public ByteSizeExtensionsTests() : base("en") { }
 
         [Fact]
         public void ByteTerabytes()

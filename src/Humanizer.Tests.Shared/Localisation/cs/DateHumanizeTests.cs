@@ -3,13 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.cs
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("cs-CZ")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests()
-            : base("cs-CZ")
-        {
-        }
-
         [Theory]
         [InlineData(1, "za sekundu")]
         [InlineData(2, "za 2 sekundy")]

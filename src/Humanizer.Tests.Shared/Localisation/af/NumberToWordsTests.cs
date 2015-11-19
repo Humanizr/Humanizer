@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.af
 {
-    public class AfrikaansNumberToWordsTests : AmbientCulture
+    [UseCulture("af")]
+    public class AfrikaansNumberToWordsTests
     {
-        public AfrikaansNumberToWordsTests()
-            : base("af")
-        {
-        }
 
         [InlineData(1, "een")]
         [InlineData(10, "tien")]

@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.frBE
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("fr-BE")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("fr-BE") { }
-
         [Theory]
         [InlineData(14, "2 semaines")]
         [InlineData(7, "1 semaine")]

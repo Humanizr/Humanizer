@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ruRU
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("ru-RU")]
+    public class TimeSpanHumanizeTests 
     {
-        public TimeSpanHumanizeTests() : base("ru-RU") { }
 
         [Theory]
         [InlineData(7, "одна неделя")]

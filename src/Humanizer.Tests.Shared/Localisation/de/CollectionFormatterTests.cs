@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.de
 {
-    public class CollectionFormatterTests : AmbientCulture
+    [UseCulture("de")]
+    public class CollectionFormatterTests 
     {
-        public CollectionFormatterTests() 
-            : base("de") 
-        {
-        }
 
         [Fact]
         public void OneItem()

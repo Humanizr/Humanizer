@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.zhHant
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("zh-Hant")]
+    public class TimeSpanHumanizeTests
     {
-        public TimeSpanHumanizeTests() : base("zh-Hant") { }
-
         [Theory]
         [InlineData(7, "1 周")]
         [InlineData(14, "2 周")]

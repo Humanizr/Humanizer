@@ -2,10 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.de
 {
-    public class OrdinalizeTests : AmbientCulture
+    [UseCulture("de-DE")]
+    public class OrdinalizeTests
     {
-        public OrdinalizeTests() : base("de-DE") { }
-
         [Theory]
         [InlineData("0", "0.")]
         [InlineData("1", "1.")]

@@ -3,11 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ar
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("ar")]
+    public class DateHumanizeTests
     {
-        public DateHumanizeTests() : base("ar") { }
-
-
         [Theory]
         [InlineData(-1, "أمس")]
         [InlineData(-2, "منذ يومين")]

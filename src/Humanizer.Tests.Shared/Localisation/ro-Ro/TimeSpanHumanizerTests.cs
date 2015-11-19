@@ -10,11 +10,9 @@ namespace Humanizer.Tests.Localisation.roRO
     /// and the time unit: http://ebooks.unibuc.ro/filologie/NForascu-DGLR/numerale.htm.
     /// There is no test for months since there are only 12 of them in a year.
     /// </summary>
-    public class TimeSpanHumanizerTests : AmbientCulture
+    [UseCulture("ro-RO")]
+    public class TimeSpanHumanizerTests 
     {
-        public TimeSpanHumanizerTests() : base("ro-RO")
-        {
-        }
 
         [Theory]
         [InlineData(1, "1 milisecundă")]

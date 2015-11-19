@@ -3,10 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.invariant
 {
-    public class ToQuantityTests : AmbientCulture
+    [UseCulture("")]
+    public class ToQuantityTests 
     {
-        public ToQuantityTests() : base(CultureInfo.InvariantCulture) { }
-
         [Theory]
         [InlineData("case", 0, "0 cases")]
         [InlineData("case", 1, "1 case")]

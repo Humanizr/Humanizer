@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.sk
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("sk-SK")]
+    public class TimeSpanHumanizeTests
     {
-        public TimeSpanHumanizeTests()
-            : base("sk-SK")
-        {
-        }        
 
         [Theory]
         [InlineData(1, "1 milisekunda")]

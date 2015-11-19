@@ -2,9 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.ruRU
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("ru-RU")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base("ru-RU") { }
 
         [Theory]
         [InlineData(0, "ноль")]

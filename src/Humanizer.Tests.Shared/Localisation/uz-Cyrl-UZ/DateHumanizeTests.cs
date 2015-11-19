@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.uzCyrl
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("uz-Cyrl-UZ")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests()
-            : base("uz-Cyrl-UZ")
-        {
-        }
 
         [Theory]
         [InlineData(1, "бир сония аввал")]

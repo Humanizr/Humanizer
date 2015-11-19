@@ -13,10 +13,9 @@ namespace Humanizer.Tests
         }
     }
 
-    public class CollectionHumanizeTests : AmbientCulture
+    [UseCulture("en")]
+    public class CollectionHumanizeTests 
     {
-        public CollectionHumanizeTests() : base("en") { }
-
         [Fact]
         public void HumanizeReturnsOnlyNameWhenCollectionContainsOneItem()
         {

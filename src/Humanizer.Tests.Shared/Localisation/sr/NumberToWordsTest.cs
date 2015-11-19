@@ -6,9 +6,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.sr
 {
-    public class NumberToWordsTest : AmbientCulture
+    [UseCulture("sr")]
+    public class NumberToWordsTest 
     {
-        public NumberToWordsTest() : base("sr") { }
 
         [Theory]
         [InlineData(0, "нула")]

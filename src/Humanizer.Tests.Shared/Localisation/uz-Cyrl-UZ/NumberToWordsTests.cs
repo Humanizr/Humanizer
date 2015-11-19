@@ -2,9 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.uzCyrl
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("uz-Cyrl-UZ")]
+    public class NumberToWordsTests
     {
-        public NumberToWordsTests() : base("uz-Cyrl-UZ") { }
 
         [Theory]
         [InlineData(0, "нол")]

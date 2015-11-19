@@ -2,10 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.fa
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("fa")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base("fa") { }
-
         [Theory]
         [InlineData(1, "یک")]
         [InlineData(10, "ده")]

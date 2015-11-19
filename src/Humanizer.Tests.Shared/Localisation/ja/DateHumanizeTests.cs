@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ja
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("ja")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests() : base("ja") { }
 
         [Theory]
         [InlineData(1, "1 秒前")]

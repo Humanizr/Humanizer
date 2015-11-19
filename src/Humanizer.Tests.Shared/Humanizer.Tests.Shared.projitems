@@ -6,10 +6,9 @@
     <SharedGUID>fdec244b-f07e-4a5e-bb80-fbc6ac77a9aa</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Humanizer.Tests.Shared</Import_RootNamespace>
+    <Import_RootNamespace>Humanizer.Tests</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AmbientCulture.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitFieldEnumHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitFieldEnumUnderTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bytes\ArithmeticTests.cs" />
@@ -158,5 +157,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ToQuantityTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TransformersTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TruncatorTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UseCultureAttribute.cs" />
   </ItemGroup>
 </Project>

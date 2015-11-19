@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.roRO
 {
-    public class CollectionFormatterTests : AmbientCulture
+    [UseCulture("ro-RO")]
+    public class CollectionFormatterTests
     {
-        public CollectionFormatterTests()
-            : base("ro-RO")
-        {
-        }
 
         [Fact]
         public void OneItem()

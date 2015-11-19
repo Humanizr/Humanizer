@@ -3,13 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.nbNO
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("nb-NO")]
+    public class DateHumanizeTests 
     {
-        public DateHumanizeTests()
-            : base("nb-NO")
-        {
-        }
-
         [Theory]
         [InlineData(-2, "2 dager siden")]
 		[InlineData(-1, "i går")]

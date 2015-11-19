@@ -2,10 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.ar
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("ar")]
+    public class NumberToWordsTests
     {
-        public NumberToWordsTests() : base("ar") { }
-
         [Theory]
         [InlineData("صفر", 0)]
         [InlineData("واحد", 1)]

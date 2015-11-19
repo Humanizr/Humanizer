@@ -3,12 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.srLatn
 {
-    public class DateHumanizeDefaultStrategyTests : AmbientCulture
+    [UseCulture("sr-Latn")]
+    public class DateHumanizeDefaultStrategyTests
     {
-        public DateHumanizeDefaultStrategyTests()
-            : base("sr-Latn")
-        {
-        }
 
         [Theory]
         [InlineData(1, "pre sekund")]

@@ -2,9 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.fr
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("fr-FR")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base("fr-FR") { }
 
         [Theory]
         [InlineData(0, "zéro")]

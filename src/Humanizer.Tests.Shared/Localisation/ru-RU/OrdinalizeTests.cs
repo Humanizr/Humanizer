@@ -2,12 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.ruRU
 {
-    public class OrdinalizeTests : AmbientCulture
+    [UseCulture("ru-RU")]
+    public class OrdinalizeTests
     {
-        public OrdinalizeTests()
-            : base("ru-RU")
-        {
-        }
 
         [Theory]
         [InlineData("0", "0-й")]

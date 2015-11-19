@@ -2,9 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.sl
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("sl-SI")]
+    public class NumberToWordsTests
     {
-        public NumberToWordsTests() : base("sl-SI") { }
 
         [Theory]
         [InlineData(0, "nič")]

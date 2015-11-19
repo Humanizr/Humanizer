@@ -2,10 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.tr
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("tr")]
+    public class NumberToWordsTests 
     {
-        public NumberToWordsTests() : base("tr") { }
-
         [Theory]
         [InlineData("sıfır", 0)]
         [InlineData("bir", 1)]

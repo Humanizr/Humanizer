@@ -7,13 +7,11 @@ namespace Humanizer.Tests.Localisation
     public class ResourcesTests
     {
         [Fact]
+        [UseCulture("ro")]
         public void CanGetCultureSpecificTranslationsWithImplicitCulture()
         {
-            using (new AmbientCulture("ro"))
-            {
-                var format = Resources.GetResource("DateHumanize_MultipleYearsAgo");
-                Assert.Equal("acum {0}{1} ani", format);
-            }
+            var format = Resources.GetResource("DateHumanize_MultipleYearsAgo");
+            Assert.Equal("acum {0}{1} ani", format);
         }
 
         [Fact]

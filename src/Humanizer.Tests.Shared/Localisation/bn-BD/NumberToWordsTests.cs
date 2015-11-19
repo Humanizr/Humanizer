@@ -2,10 +2,9 @@
 
 namespace Humanizer.Tests.Localisation.bnBD
 {
-    public class NumberToWordsTests : AmbientCulture
+    [UseCulture("bn-BD")]
+    public class NumberToWordsTests
     {
-        public NumberToWordsTests() : base("bn-BD") { }
-
         [InlineData(0, "শূন্য")]
         [InlineData(1, "এক")]
         [InlineData(10, "দশ")]

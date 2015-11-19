@@ -3,11 +3,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Localisation.ruRU
 {
-    public class DateHumanizeTests : AmbientCulture
+    [UseCulture("ru-RU")]
+    public class DateHumanizeTests
     {
-        public DateHumanizeTests() : base("ru-RU")
-        {
-        }
 
         [Theory]
         [InlineData(1, "секунду назад")]

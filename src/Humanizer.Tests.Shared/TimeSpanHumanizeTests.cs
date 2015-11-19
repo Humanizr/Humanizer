@@ -5,10 +5,9 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class TimeSpanHumanizeTests : AmbientCulture
+    [UseCulture("en-US")]
+    public class TimeSpanHumanizeTests
     {
-        public TimeSpanHumanizeTests() : base("en-US") { }
-
         [Theory]
         [InlineData(14, "2 weeks")]
         [InlineData(7, "1 week")]

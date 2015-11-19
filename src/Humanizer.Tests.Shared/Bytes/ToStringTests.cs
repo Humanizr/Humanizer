@@ -25,10 +25,9 @@ using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {
-    public class ToStringTests : AmbientCulture
+    [UseCulture("en")]
+    public class ToStringTests
     {
-        public ToStringTests() : base("en") { }
-
         [Fact]
         public void ReturnsLargestMetricSuffix()
         {
