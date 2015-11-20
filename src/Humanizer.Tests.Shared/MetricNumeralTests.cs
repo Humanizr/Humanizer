@@ -8,10 +8,9 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class MetricNumeralTests : AmbientCulture
+    [UseCulture("en-US")]
+    public class MetricNumeralTests
     {
-        public MetricNumeralTests() : base(CultureInfo.InvariantCulture) { }
-
         // Return a sequence of -24 -> 26
         public static IEnumerable<object[]> SymbolRange => Enumerable.Range(-24, 51).Select(e => new object[] { e });
 
