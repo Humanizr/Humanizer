@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
 using System.Text;
+using System.Threading;
+using Xunit.Sdk;
 
 namespace Humanizer.Tests
 {
-    using System;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading;
-    using Xunit.Sdk;
-
+   
     /// <summary>
     /// Apply this attribute to your test method to replace the
     /// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
