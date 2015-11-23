@@ -4,7 +4,7 @@ init:
   - cmd: set
   
 install:
-  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe  
   - cmd: nuget install GitVersion.CommandLine -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre  
   - cmd: nuget install gitlink -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre
      
@@ -17,8 +17,8 @@ build:
   parallel: true
   project: src\Humanizer.sln
   
-after_build:
-  - cmd: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/MehdiK/Humanizer -s %APPVEYOR_REPO_COMMIT% -errorsaswarnings'
+after_build:  
+  - cmd: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/Humanizr/Humanizer -s %APPVEYOR_REPO_COMMIT% -errorsaswarnings'
   - cmd: nuget pack src\Humanizer.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%" -NoPackageAnalysis
   - cmd: appveyor PushArtifact "Humanizer.%GitVersion_NuGetVersion%.nupkg"  
   
