@@ -5,6 +5,7 @@ using System.Text;
 using Humanizer.Configuration;
 using Humanizer.DateTimeHumanizeStrategy;
 using Xunit;
+using Humanizer.Localisation;
 
 namespace Humanizer.Tests
 {
@@ -68,6 +69,19 @@ namespace Humanizer.Tests
             var actualResult = inputTime.Humanize(baseTime);
 
             Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void DefaultStrategy_Never()
+        {
+            Configurator.DateTimeOffsetHumanizeStrategy = new DefaultDateTimeOffsetHumanizeStrategy();
+
+            var inputTime = new DateTimeOffset(2015, 11, 23, 01, 30, 0, new TimeSpan(1, 0, 0));
+            var thresholdTime = new DateTimeOffset(2015, 11, 23, 02, 45, 0, new TimeSpan(2, 0, 0));
+
+            var actualResult = inputTime.Humanize(dateNeverThreshold: thresholdTime);
+
+            Assert.Equal("never", actualResult);            
         }
     }
 }

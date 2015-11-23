@@ -39,12 +39,13 @@ namespace Humanizer
         /// <param name="input">The date to be humanized</param>
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <param name="dateNeverThreshold">Threshold date to indicate 'never' if input is before it.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null, DateTimeOffset? dateNeverThreshold = null)
         {
             var comparisonBase = dateToCompareAgainst ?? DateTimeOffset.UtcNow;
 
-            return Configurator.DateTimeOffsetHumanizeStrategy.Humanize(input, comparisonBase, culture);
+            return Configurator.DateTimeOffsetHumanizeStrategy.Humanize(input, comparisonBase, culture, dateNeverThreshold.Value);
         }
     }
 }
