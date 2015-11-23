@@ -44,8 +44,9 @@ namespace Humanizer
         public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null, DateTimeOffset? dateNeverThreshold = null)
         {
             var comparisonBase = dateToCompareAgainst ?? DateTimeOffset.UtcNow;
+            var neverThreshold = dateNeverThreshold ?? new DateTimeOffset();
 
-            return Configurator.DateTimeOffsetHumanizeStrategy.Humanize(input, comparisonBase, culture, dateNeverThreshold.Value);
+            return Configurator.DateTimeOffsetHumanizeStrategy.Humanize(input, comparisonBase, culture, neverThreshold);
         }
     }
 }
