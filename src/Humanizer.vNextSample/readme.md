@@ -7,7 +7,7 @@ vNext changes things slightly from [previous versions](https://github.com/MehdiK
 
 Basically this means implementing your own `IDisplayMetadataProvider` and adding it to options in during startup. Doing this allows the default `DataAnnotationsMetadataProvider` to do its thing and then runs the `HumanizerMetadataProvider` to do its magic. The order of runs depends on the order of adding them to options.
 
-Without further adieu, Here's the code:
+Without further ado, Here's the code:
 
 ```csharp
 public class HumanizerMetadataProvider : IDisplayMetadataProvider
