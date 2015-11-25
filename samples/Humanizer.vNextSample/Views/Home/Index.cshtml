@@ -1,0 +1,37 @@
+﻿@model Humanizer.vNextSample.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Password change was unsuccessful. Please correct the errors and try again.")
+
+    <fieldset>
+        <legend>Form labels powered by <code>Humanizer Metadata Provider</code></legend>
+        <ul class="list-unstyled">
+            <li>
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber)
+                @Html.ValidationMessageFor(m => m.PhoneNumber)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.NewPassword)
+                @Html.PasswordFor(m => m.NewPassword)
+                @Html.ValidationMessageFor(m => m.NewPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.BrowserRemembered)
+                @Html.CheckBoxFor(m => m.BrowserRemembered)
+                @Html.ValidationMessageFor(m => m.BrowserRemembered)
+            </li>
+        </ul>
+    </fieldset>
+}
+
