@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "Humanizer.vNextSample"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-Humanizer.vNextSample-3f698cdc-f817-4778-b847-157b82bfaf01;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}
