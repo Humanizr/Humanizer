@@ -462,4 +462,16 @@
   <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
     <value>{0} weeks</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} months</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} years</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 month</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 year</value>
+  </data>
 </root>

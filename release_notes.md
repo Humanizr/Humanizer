@@ -1,19 +1,29 @@
 ###In Development
- - [#416](https://github.com/MehdiK/Humanizer/pull/416): Change BrazilianPortugueseOrdinalizer to PortugueseOrdinalizer
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.36.0...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.37.0...master)
+
+###v1.37.0 - 2015-07-03
+ - [#416](https://github.com/MehdiK/Humanizer/pull/416): Change BrazilianPortugueseOrdinalizer to PortugueseOrdinalizer
+ - [#419](https://github.com/MehdiK/Humanizer/pull/419): Added Dutch Ordinalizer
+ - [#432](https://github.com/MehdiK/Humanizer/pull/432): Added the 'xunit.runner.visualstudio' nuget package to the test project
+ - [#431](https://github.com/MehdiK/Humanizer/pull/431): Added build target for .NET 4.0 Client Profile
+ - [#435](https://github.com/MehdiK/Humanizer/pull/435): Added Afrikaans localization
+ - [#438](https://github.com/MehdiK/Humanizer/pull/438): Fixed the bug with negative TimeSpan Humanize
+ - [#421](https://github.com/MehdiK/Humanizer/pull/421) & [#425](https://github.com/MehdiK/Humanizer/pull/425): Fixed StringExentions -> StringExtensions
+
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.36.0...v1.37.0)
 
 ###v1.36.0 - 2015-05-24
  - [#403](https://github.com/MehdiK/Humanizer/pull/403): Added TimeSpan minUnit option
  - [#417](https://github.com/MehdiK/Humanizer/pull/417): Support for Serbian language, ToWords()
- - [#414](https://github.com/MehdiK/Humanizer/pull/414): Add Ukraininan language 
+ - [#414](https://github.com/MehdiK/Humanizer/pull/414): Add Ukraininan language
  - [#408](https://github.com/MehdiK/Humanizer/pull/408): Added support for adding/removing rules from singular/pluralization by adding `Vocabulary` class and `Vocabularies.Default`
 
 [Commits](https://github.com/MehdiK/Humanizer/compare/v1.35.0...v1.36.0)
 
 ###v1.35.0 - 2015-03-29
  - [#399](https://github.com/MehdiK/Humanizer/pull/399): Added support for humanizing DateTimeOffset
- - [#395](https://github.com/MehdiK/Humanizer/pull/395): Added support for Xamarin platforms to PCL 
+ - [#395](https://github.com/MehdiK/Humanizer/pull/395): Added support for Xamarin platforms to PCL
  - [#397](https://github.com/MehdiK/Humanizer/pull/397): Added is/are to inflector rules
  - [#392](https://github.com/MehdiK/Humanizer/pull/394): Default implementation for collection formatter using regular style instead of an exception. Default separator is ampercent.
  - [#377](https://github.com/MehdiK/Humanizer/pull/377): Added culture specific decimal separator
@@ -314,4 +324,3 @@ fix it based on your requirements.
 
 ###v1.0.0 - 2013-11-10
 No release history before this point: check out http://www.mehdi-khalili.com/humanizer-v1 for the feature-set at V1
-

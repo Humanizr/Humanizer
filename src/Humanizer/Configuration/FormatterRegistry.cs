@@ -11,6 +11,7 @@ namespace Humanizer.Configuration
             Register("ro", new RomanianFormatter());
             Register("ru", new RussianFormatter());
             Register("sl", new SlovenianFormatter());
+            Register("hr", new CroatianFormatter());
             Register("sr", new SerbianFormatter("sr"));
             Register("sr-Latn", new SerbianFormatter("sr-Latn"));
             Register("uk", new UkrainianFormatter());

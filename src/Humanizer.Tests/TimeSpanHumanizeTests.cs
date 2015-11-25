@@ -13,6 +13,8 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData(14, "2 weeks")]
         [InlineData(7, "1 week")]
+        [InlineData(-14, "2 weeks")]
+        [InlineData(-7, "1 week")]
         public void Weeks(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize();
@@ -23,6 +25,9 @@ namespace Humanizer.Tests
         [InlineData(6, "6 days")]
         [InlineData(2, "2 days")]
         [InlineData(1, "1 day")]
+        [InlineData(-6, "6 days")]
+        [InlineData(-2, "2 days")]
+        [InlineData(-1, "1 day")]
         public void Days(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize();
@@ -32,6 +37,8 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData(2, "2 hours")]
         [InlineData(1, "1 hour")]
+        [InlineData(-2, "2 hours")]
+        [InlineData(-1, "1 hour")]
         public void Hours(int hours, string expected)
         {
             var actual = TimeSpan.FromHours(hours).Humanize();
@@ -41,17 +48,24 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData(2, "2 minutes")]
         [InlineData(1, "1 minute")]
+        [InlineData(-2, "2 minutes")]
+        [InlineData(-1, "1 minute")]
         public void Minutes(int minutes, string expected)
         {
             var actual = TimeSpan.FromMinutes(minutes).Humanize();
             Assert.Equal(expected, actual);
         }
 
+
         [Theory]
         [InlineData(135, "2 minutes")]
         [InlineData(60, "1 minute")]
         [InlineData(2, "2 seconds")]
         [InlineData(1, "1 second")]
+        [InlineData(-135, "2 minutes")]
+        [InlineData(-60, "1 minute")]
+        [InlineData(-2, "2 seconds")]
+        [InlineData(-1, "1 second")]
         public void Seconds(int seconds, string expected)
         {
             var actual = TimeSpan.FromSeconds(seconds).Humanize();
@@ -63,6 +77,10 @@ namespace Humanizer.Tests
         [InlineData(1400, "1 second")]
         [InlineData(2, "2 milliseconds")]
         [InlineData(1, "1 millisecond")]
+        [InlineData(-2500, "2 seconds")]
+        [InlineData(-1400, "1 second")]
+        [InlineData(-2, "2 milliseconds")]
+        [InlineData(-1, "1 millisecond")]
         public void Milliseconds(int ms, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize();
@@ -157,6 +175,16 @@ namespace Humanizer.Tests
         public void TimeSpanWithPrecesion(int milliseconds, int precesion, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precesion);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(50)]
+        [InlineData(52)]
+        public void TimeSpanWithMinAndMaxUnits_DoesNotReportExcessiveTime(int minutes)
+        {
+            var actual = TimeSpan.FromMinutes(minutes).Humanize(2, null, TimeUnit.Hour, TimeUnit.Minute);
+            var expected = TimeSpan.FromMinutes(minutes).Humanize(2);
             Assert.Equal(expected, actual);
         }
 

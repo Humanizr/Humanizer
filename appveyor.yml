@@ -1,0 +1,34 @@
+configuration: Release
+
+init:
+  - cmd: set
+  
+install:
+  - cmd: choco install gitversion.portable -pre -y
+  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe  
+     
+before_build:
+  - cmd: nuget install gitlink -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre
+  - cmd: nuget restore src\Humanizer.sln
+  - cmd: gitversion /l console /output buildserver /updateAssemblyInfo
+  
+build:
+  verbosity: normal
+  parallel: true
+  project: src\Humanizer.sln
+  
+after_build:  
+  - cmd: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/Humanizr/Humanizer -s %APPVEYOR_REPO_COMMIT% -errorsaswarnings'
+  - cmd: nuget pack src\Humanizer.nuspec -version "%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%" -prop "target=%CONFIGURATION%" -NoPackageAnalysis
+  - cmd: appveyor PushArtifact "Humanizer.%GitVersion_NuGetVersion%-build%GitVersion_BuildMetaDataPadded%.nupkg"  
+  
+test:
+  assemblies:
+    - '**\*.Tests.dll'
+  
+deploy:
+  provider: NuGet
+  server: https://www.myget.org/F/humanizer/api/v2/package
+  api_key:
+    secure: bmqlJK8a5HYiUXOT99HXT1j7JiM5+fpR4kHhxIC30oaaEXbv94f0fKdiKlU1QC/l
+  artifact: /.*\.nupkg/
