@@ -1,0 +1,16 @@
+﻿{
+    "dependencies": {
+        "ApiApprover": "3.0.1",
+        "ApprovalTests": "3.0.10",
+        "ApprovalUtilities": "3.0.10",
+        "Mono.Cecil": "0.9.6.1",
+        "xunit": "2.1.0",
+        "xunit.runner.visualstudio": "2.1.0"
+    },
+  "frameworks": {
+    "net46": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}
