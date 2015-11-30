@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Humanizer.Configuration;
+using System.Collections.Generic;
 
 namespace Humanizer
 {
@@ -22,9 +23,20 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this Enum input)
         {
-            var type = input.GetType();
+            var enumType = input.GetType();
+            var enumTypeInfo = enumType.GetTypeInfo();
+
+            if (IsBitFieldEnum(enumTypeInfo) && !Enum.IsDefined(enumType, input))
+            {
+                return Enum.GetValues(enumType)
+                           .Cast<Enum>()
+                           .Where(e => input.HasFlag(e))
+                           .Select(e => e.Humanize())
+                           .Humanize();
+            }
+
             var caseName = input.ToString();
-            var memInfo = type.GetTypeInfo().GetDeclaredField(caseName);
+            var memInfo = enumTypeInfo.GetDeclaredField(caseName);
 
             if (memInfo != null)
             {
@@ -35,6 +47,16 @@ namespace Humanizer
             }
 
             return caseName.Humanize();
+        }
+
+        /// <summary>
+        /// Checks whether the given enum is to be used as a bit field type.
+        /// </summary>
+        /// <param name="typeInfo"></param>
+        /// <returns>True if the given enum is a bit field enum, false otherwise.</returns>
+        private static bool IsBitFieldEnum(TypeInfo typeInfo)
+        {
+            return typeInfo.GetCustomAttribute(typeof(FlagsAttribute)) != null;
         }
 
         // I had to add this method because PCL doesn't have DescriptionAttribute & I didn't want two versions of the code & thus the reflection

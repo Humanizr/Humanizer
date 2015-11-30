@@ -1,6 +1,15 @@
-###In Development
+###In Development for v2.0.0
 
-[Commits](https://github.com/MehdiK/Humanizer/compare/v1.37.0...master)
+[Commits](https://github.com/MehdiK/Humanizer/compare/v1.37.0...dev)
+
+###v2.0.0-beta0001 - 2015-11-01
+ - [#451](https://github.com/MehdiK/Humanizer/issues/451): Support `dotnet` TFM. Includes support for CoreCLR
+ - [#465](https://github.com/MehdiK/Humanizer/issues/465): Dropped .NET 4 and Silverlight 5 support.
+ - [#462](https://github.com/MehdiK/Humanizer/pull/462): Implemented Spanish cardinal feminines
+ - [#459](https://github.com/MehdiK/Humanizer/pull/459): Add support of metric numeral expressions
+ - Enable source debugging via [GitLink](https://github.com/GitTools/GitLink)
+ 
+ [Commits]()
 
 ###v1.37.0 - 2015-07-03
  - [#416](https://github.com/MehdiK/Humanizer/pull/416): Change BrazilianPortugueseOrdinalizer to PortugueseOrdinalizer

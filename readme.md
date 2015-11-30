@@ -2,6 +2,8 @@
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
+[![Join the chat at https://gitter.im/Humanizr/Humanizer](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Humanizr/Humanizer)
+
 ###Table of contents
  - [Install](#install)
  - [Features](#features)
@@ -34,7 +36,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [ByteSize](#bytesize)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
- - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
+ - [Continuous Integration from AppVeyor](#continuous-integration)
  - [Related Projects](#related-projects)
    - [Humanizer ReSharper Annotations](#humanizer-resharper-annotations)
    - [PowerShell Humanizer](#powershell-humanizer)
@@ -43,7 +45,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
  - [Main contributors](#main-contributors)
  - [License](#license)
  - [Icon](#icon)
-
+  
 ##<a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
@@ -54,8 +56,6 @@ For pre-release builds, [MyGet feed](https://www.myget.org/) is available where 
 
   - `https://www.myget.org/F/humanizer/api/v2` for VS 2012+
   - `https://www.myget.org/F/humanizer/api/v3/index.json` for VS 2015+
-
-[![Build status](https://ci.appveyor.com/api/projects/status/4do8v1ukkp4usf6p/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
 
 ##<a id="features">Features</a>
 
@@ -174,7 +174,7 @@ Default is the right as shown in the examples above. The examples below show how
 You can format a `string` using the `FormatWith()` method:
 
 ```c#
-"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formated -> 1/A."
+"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formatted -> 1/A."
 ```
 
 This is an extension method based on `String.Format`, so exact rules applies to it.
@@ -1003,11 +1003,10 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 
 Please see <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.
 
-##<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
-Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
+##<a id="continuous-integration">Continuous Integration from AppVeyor</a>
+Humanizer project is built & tested continuously by AppVeyor (more details [here](https://ci.appveyor.com/project/onovotny/humanizer)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
 
-The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
-<img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
+The current build status on the CI server is [![Build status](https://ci.appveyor.com/api/projects/status/wsp2of3r7otw01c5/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
 
 ##<a id="related-projects">Related projects</a>
 Below is a list of related open source projects:
