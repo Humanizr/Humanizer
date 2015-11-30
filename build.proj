@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build;CopyToReleaseFolder" ToolsVersion="4.0">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build;Test" ToolsVersion="14.0">
   <!--Project configuration-->
-  <Import Project="Build.config" />
+  <PropertyGroup>
+    <XUnitPath>$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\build\portable-net45+win8+wp8+wpa81</XUnitPath>
+    <NuGet Condition=" '$(OS)' != 'Unix' ">&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot;</NuGet>
+    <NuGet Condition=" '$(OS)' == 'Unix' ">mono &quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot;</NuGet>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectToBuild Include="src\*.sln" />
+  </ItemGroup>
+  <!-- Expand build output files AFTER the build has run. 
+       Note that the Build Task MUST BE defined by the file that includes this file. -->
+  <Target Name="GetTestAssemblies" DependsOnTargets="Build">
+    <ItemGroup>
+      <TestAssemblies Include="**\bin\Release\*.Tests.dll" />
+    </ItemGroup>
+  </Target>
   
-  <UsingTask TaskName="xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
+  <UsingTask Condition=" '$(OS)' != 'Unix' " TaskName="xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
 
   <!--Clean-->
   <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
@@ -15,33 +29,61 @@
   </Target>
 
   <!--Compile-->
-  <Target Name="Build" DependsOnTargets="CleanAll;RestorePackages">
-    <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
+  <Target Name="Build" DependsOnTargets="RestorePackages">
+    <MSBuild Projects="@(ProjectToBuild)" Targets="Rebuild" Properties="Configuration=Release"/>
   </Target>
 
   <!--Test. Note that the GetTestAssemblies Task MUST BE defined in the Build.config file. -->
   <Target Name="Test" DependsOnTargets="GetTestAssemblies">
-    <xunit Assemblies="@(TestAssemblies)" />
+    <xunit Condition=" '$(OS)' != 'Unix' " Assemblies="@(TestAssemblies)" />
+    <Exec Condition=" '$(OS)' == 'Unix' " Command="mono &quot;$(XUnitPath)\xunit.console.clr4.exe&quot; /silent @(TestAssemblies)" />
   </Target>
 
-  <!--Release-->
-  <Target Name="DeleteReleaseFolder">
-    <RemoveDir Directories="$(ReleaseFolder)" />
-  </Target>
-  <Target Name="MakeReleaseFolder" DependsOnTargets="DeleteReleaseFolder">
-    <MakeDir Directories="$(ReleaseFolder)" Condition="!Exists($(ReleaseFolder))" />
-  </Target>
-  <Target Name="CopyToReleaseFolder" DependsOnTargets="Test">
-    <Copy SourceFiles="@(BuildOutput)" DestinationFolder="$(ReleaseFolder)" />
-  </Target>
   
   <!--Nuget restore-->
   <ItemGroup>
     <Solution Include="$(MSBuildThisFileDirectory)src\*.sln" />
   </ItemGroup>
 
-  <Target Name="RestorePackages">
-    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
+  <Target Name="RestorePackages" DependsOnTargets="_DownloadNuGet">
+    <Exec Command="$(NuGet) install xunit.runner.msbuild -SolutionDir &quot;$(MSBuildProjectDirectory)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\')" />
+    <Exec Command="$(NuGet) restore &quot;%(Solution.Identity)&quot;" />
   </Target>
+
+  <Target Name="_DownloadNuGet">
+    <MakeDir Directories="$(MSBuildThisFileDirectory)tools\NuGet" />
+    <DownloadNuGet OutputFilename="$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe" Condition="!Exists('$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe')" />
+  </Target>
+
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <OutputFilename ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Core" />
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Net" />
+      <Using Namespace="Microsoft.Build.Framework" />
+      <Using Namespace="Microsoft.Build.Utilities" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+          try {
+              OutputFilename = Path.GetFullPath(OutputFilename);
+
+              Log.LogMessage("Downloading latest version of NuGet.exe...");
+              WebClient webClient = new WebClient();
+              webClient.DownloadFile("https://dist.nuget.org/win-x86-commandline/latest/nuget.exe", OutputFilename);
+
+              return true;
+          }
+          catch (Exception ex) {
+              Log.LogErrorFromException(ex);
+              return false;
+          }
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
 
 </Project>

@@ -14,6 +14,7 @@ namespace Humanizer.Configuration
             Register("es", new SpanishNumberToWordsConverter());
             Register("pl", (culture) => new PolishNumberToWordsConverter(culture));
             Register("pt-BR", new BrazilianPortugueseNumberToWordsConverter());
+            Register("ro", new RomanianNumberToWordsConverter());
             Register("ru", new RussianNumberToWordsConverter());
             Register("fi", new FinnishNumberToWordsConverter());
             Register("fr", new FrenchNumberToWordsConverter());
@@ -29,6 +30,7 @@ namespace Humanizer.Configuration
             Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
             Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
             Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
+            Register("nb", new NorwegianBokmalNumberToWordsConverter());
         }
     }
 }

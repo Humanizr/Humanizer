@@ -135,7 +135,7 @@ namespace Humanizer.Inflections
                 return word;
 
             var result = word;
-            for (int i = rules.Count - 1; i >= 0; i--)
+            for (var i = rules.Count - 1; i >= 0; i--)
             {
                 if ((result = rules[i].Apply(word)) != null)
                     break;

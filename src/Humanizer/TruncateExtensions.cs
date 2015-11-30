@@ -56,7 +56,7 @@ namespace Humanizer
         public static string Truncate(this string input, int length, string truncationString, ITruncator truncator, TruncateFrom from = TruncateFrom.Right)
         {
             if (truncator == null)
-                throw new ArgumentNullException("truncator");
+                throw new ArgumentNullException(nameof(truncator));
 
             if (input == null)
                 return null;

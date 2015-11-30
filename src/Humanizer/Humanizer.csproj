@@ -1,28 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{511A7984-F455-4A6E-ADB9-9CAAC47EA079}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Humanizer</RootNamespace>
     <AssemblyName>Humanizer</AssemblyName>
-    <TargetPortable Condition=" '$(TargetPortable)' == '' ">true</TargetPortable>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetPortable)' == 'true' ">
-    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetPortable)' == 'false' ">
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,9 +44,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
@@ -83,9 +74,14 @@
     <Compile Include="GrammaticalGender.cs" />
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
+    <Compile Include="Localisation\NumberToWords\NorwegianBokmalNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FinnishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\GenderedNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\GenderlessNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\RomanianNumberToWordsConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\Romanian\RomanianCardinalNumberConverter.cs" />
+    <Compile Include="Localisation\NumberToWords\Romanian\RomanianOrdinalNumberConverter.cs" />
+    <Compile Include="Localisation\Ordinalizers\RomanianOrdinalizer.cs" />
     <Compile Include="Localisation\NumberToWords\SerbianCyrlNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\SerbianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\SlovenianNumberToWordsConverter.cs" />
@@ -129,6 +125,7 @@
     <Compile Include="Localisation\Ordinalizers\UkrainianOrdinalizer.cs" />
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
+    <Compile Include="MetricNumeralExtensions.cs" />
     <Compile Include="Plurality.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
@@ -201,6 +198,7 @@
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
     <None Include="Humanizer.snk" />
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.hr.resx" />
@@ -247,11 +245,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetPortable)' == 'false' ">
-    <Reference Include="System" />
-  </ItemGroup>
-  <Import Condition=" '$(TargetPortable)' == 'false' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Condition=" '$(TargetPortable)' == 'true' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

@@ -94,7 +94,7 @@ namespace Humanizer.Localisation.NumberToWords
             else if (isOrdinal)
                 parts[parts.Count - 1] += "ste";
 
-            string toWords = string.Join(" ", parts.ToArray());
+            var toWords = string.Join(" ", parts.ToArray());
 
             if (isOrdinal)
                 toWords = RemoveOnePrefix(toWords);

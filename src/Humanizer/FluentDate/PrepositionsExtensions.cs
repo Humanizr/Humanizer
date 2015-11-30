@@ -2,7 +2,7 @@
 namespace Humanizer
 {
     /// <summary>
-    /// <see cref="DateTime"/> extensions related to spacial or temporal relations
+    /// <see cref="DateTime"/> extensions related to spatial or temporal relations
     /// </summary>
     public static class PrepositionsExtensions
     {

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Reflection;
 using System.Resources;
 
 namespace Humanizer.Localisation
@@ -8,7 +9,7 @@ namespace Humanizer.Localisation
     /// </summary>
     public static class Resources
     {
-        static readonly ResourceManager ResourceManager = new ResourceManager("Humanizer.Properties.Resources", typeof(Resources).Assembly);
+        static readonly ResourceManager ResourceManager = new ResourceManager("Humanizer.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
 
         /// <summary>
         /// Returns the value of the specified string resource

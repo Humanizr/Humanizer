@@ -59,20 +59,20 @@ namespace Humanizer.Localisation.Formatters
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
             if (timeUnit > TimeUnit.Week)
-                throw new ArgumentOutOfRangeException("timeUnit", "There's no meaningful way to humanize passed timeUnit.");
+                throw new ArgumentOutOfRangeException(nameof(timeUnit), "There's no meaningful way to humanize passed timeUnit.");
 
             return GetResourceForTimeSpan(timeUnit, unit);
         }
 
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
-            string resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
+            var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
         private string GetResourceForTimeSpan(TimeUnit unit, int count)
         {
-            string resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
+            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 

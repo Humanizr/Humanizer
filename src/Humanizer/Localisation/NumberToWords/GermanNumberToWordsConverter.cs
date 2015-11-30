@@ -153,7 +153,7 @@ namespace Humanizer.Localisation.NumberToWords
                 case GrammaticalGender.Neuter:
                     return "tes";
                 default:
-                    throw new ArgumentOutOfRangeException("gender");
+                    throw new ArgumentOutOfRangeException(nameof(gender));
             }
         }
     }

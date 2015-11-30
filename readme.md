@@ -32,10 +32,11 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Number to words](#number-to-words)
    - [Number to ordinal words](#number-to-ordinal-words)
    - [Roman numerals](#roman-numerals)
+   - [Metric numerals](#metric-numerals)
    - [ByteSize](#bytesize)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life)
  - [How to contribute?](#how-to-contribute)
- - [Continuous Integration from TeamCity](#continuous-integration-from-teamcity)
+ - [Continuous Integration from AppVeyor](#continuous-integration)
  - [Related Projects](#related-projects)
    - [Humanizer ReSharper Annotations](#humanizer-resharper-annotations)
    - [PowerShell Humanizer](#powershell-humanizer)
@@ -48,10 +49,13 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 ##<a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
 
-Humanizer is a Portable Class Library with support for .Net 4+, SilverLight 5, Windows Phone 8 and Win Store applications.
-Also Humanizer [symbols nuget package](http://www.symbolsource.org/Public/Metadata/NuGet/Project/Humanizer) is published so you can [step through Humanizer code](http://www.symbolsource.org/Public/Home/VisualStudio) while debugging your code.
+Humanizer is a Portable Class Library with support for .Net 4.5+, Windows Phone 8, Win Store, and ASP.NET 5 (CoreCLR) applications.
+Also Humanizer symbols are source indexed with [GitLink](https://github.com/GitTools/GitLink) and are included in the package so you can [step through Humanizer code](https://github.com/GitTools/GitLink) while debugging your code.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/4do8v1ukkp4usf6p/branch/master?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/master)
+For pre-release builds, [MyGet feed](https://www.myget.org/) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
+
+  - `https://www.myget.org/F/humanizer/api/v2` for VS 2012+
+  - `https://www.myget.org/F/humanizer/api/v3/index.json` for VS 2015+
 
 ##<a id="features">Features</a>
 
@@ -170,7 +174,7 @@ Default is the right as shown in the examples above. The examples below show how
 You can format a `string` using the `FormatWith()` method:
 
 ```c#
-"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formated -> 1/A."
+"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formatted -> 1/A."
 ```
 
 This is an extension method based on `String.Format`, so exact rules applies to it.
@@ -749,6 +753,27 @@ Also the reverse operation using the `FromRoman` extension.
 "V".FromRoman() => 5
 ```
 
+###<a id="metric-numerals">Metric numerals</a>
+Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
+
+```C#
+1d.ToMetric() => "1"
+1230d.ToMetric() => "1.23k"
+0.1d.ToMetric() => "100m"
+```
+
+Also the reverse operation using the `FromMetric` extension.
+
+```C#
+1d.ToMetric() => "1"
+1230d.ToMetric() => "1.23k"
+0.1d.ToMetric() => "100m"
+
+"1".FromMetric() => 1
+"1.23k".FromMetric() => 1230
+"100m".FromMetric() => 0.1
+```
+
 ###<a id="bytesize">ByteSize</a>
 Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
 Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
@@ -978,11 +1003,10 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 
 Please see <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.
 
-##<a id="continuous-integration-from-teamcity">Continuous Integration from TeamCity</a>
-Humanizer project is built & tested continuously by TeamCity (more details [here](http://www.mehdi-khalili.com/continuous-integration-delivery-github-teamcity)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
+##<a id="continuous-integration">Continuous Integration from AppVeyor</a>
+Humanizer project is built & tested continuously by AppVeyor (more details [here](https://ci.appveyor.com/project/onovotny/humanizer)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/MehdiK/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
 
-The current build status on the CI server is <a href="http://teamcity.ginnivan.net/viewType.html?buildTypeId=Humanizer_CI&guest=1">
-<img src="http://teamcity.ginnivan.net/app/rest/builds/buildType:(id:Humanizer_CI)/statusIcon"/></a>
+The current build status on the CI server is [![Build status](https://ci.appveyor.com/api/projects/status/wsp2of3r7otw01c5/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
 
 ##<a id="related-projects">Related projects</a>
 Below is a list of related open source projects:
@@ -1003,6 +1027,7 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 
 ##<a id="main-contributors">Main contributors</a>
  - Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
+ - Oren Novotny ([@onovotny](http://twitter.com/onovotny))
  - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
  - Max Malook ([@mexx](https://github.com/mexx))
 

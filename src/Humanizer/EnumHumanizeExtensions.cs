@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Humanizer.Configuration;
+using System.Collections.Generic;
 
 namespace Humanizer
 {
@@ -22,19 +23,76 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this Enum input)
         {
-            Type type = input.GetType();
-            var caseName = input.ToString();
-            var memInfo = type.GetMember(caseName);
+            var type = input.GetType();
 
-            if (memInfo.Length > 0)
+            if (IsBitFieldEnum(input) && !DirectlyMapsToEnumConstant(input))
             {
-                var customDescription = GetCustomDescription(memInfo[0]);
+                var inputIntValue = Convert.ToInt32(input);
+
+                var humanizedEnumValues = new List<string>();
+
+                foreach (var enumValue in Enum.GetValues(type))
+                {
+                    var enumIntValue = (int)enumValue;
+
+                    if ((inputIntValue & enumIntValue) != 0)
+                    {
+                        humanizedEnumValues.Add(EnumHumanizeExtensions.Humanize((Enum)enumValue));
+                    }
+                }
+
+                return CollectionHumanizeExtensions.Humanize<string>(humanizedEnumValues);
+            }
+
+            var caseName = input.ToString();
+            var memInfo = type.GetTypeInfo().GetDeclaredField(caseName);
+
+            if (memInfo != null)
+            {
+                var customDescription = GetCustomDescription(memInfo);
 
                 if (customDescription != null)
                     return customDescription;
             }
 
             return caseName.Humanize();
+        }
+
+        /// <summary>
+        /// Checks whether the given enum is to be used as a bit field type.
+        /// </summary>
+        /// <param name="input">An enum</param>
+        /// <returns>True if the given enum is a bit field enum, false otherwise.</returns>
+        private static bool IsBitFieldEnum(Enum input)
+        {
+            var type = input.GetType();
+
+            var hasFlagsAttribute = type.GetTypeInfo().GetCustomAttribute(typeof(FlagsAttribute)) != null;
+            var underlyingTypeIsInt = Enum.GetUnderlyingType(type) == typeof(int);
+
+            return hasFlagsAttribute && underlyingTypeIsInt;
+        }
+
+        /// <summary>
+        /// Returns true if the given enum instance can map exactly to one of the enum's constants.
+        /// This doesn't always happen when using BitField enums.
+        /// </summary>
+        /// <param name="input">An instance of an enum.</param>
+        /// <returns>True, if the instance maps directly to a single enum property, false if otherwise.</returns>
+        private static bool DirectlyMapsToEnumConstant(Enum input)
+        {
+            bool exactMatch = false;
+
+            foreach (var raw in Enum.GetValues(input.GetType()))
+            {
+                if (input.Equals(raw))
+                {
+                    exactMatch = true;
+                    break;
+                }
+            }
+
+            return exactMatch;
         }
 
         // I had to add this method because PCL doesn't have DescriptionAttribute & I didn't want two versions of the code & thus the reflection
@@ -47,12 +105,12 @@ namespace Humanizer
                 var attrType = attr.GetType();
                 if (attrType.FullName == DisplayAttributeTypeName)
                 {
-                    var method = attrType.GetMethod(DisplayAttributeGetDescriptionMethodName);
+                    var method = attrType.GetRuntimeMethod(DisplayAttributeGetDescriptionMethodName, new Type[0]);
                     if (method != null)
                         return method.Invoke(attr, new object[0]).ToString();
                 }
                 var descriptionProperty =
-                    attrType.GetProperties()
+                    attrType.GetRuntimeProperties()
                         .Where(StringTypedProperty)
                         .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)

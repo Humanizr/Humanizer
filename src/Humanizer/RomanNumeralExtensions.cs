@@ -44,14 +44,14 @@ namespace Humanizer
         public static int FromRoman(this string input)
         {
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             input = input.Trim().ToUpperInvariant();
 
             var length = input.Length;
 
             if ((length == 0) || IsInvalidRomanNumeral(input))
-                throw new ArgumentException("Empty or invalid Roman numeral string.", "input");
+                throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(input));
 
             var total = 0;
             var i     = length;

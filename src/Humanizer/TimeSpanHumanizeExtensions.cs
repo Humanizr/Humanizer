@@ -42,7 +42,7 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond)
         {
-            IEnumerable<string> timeParts = CreateTheTimePartsWithUperAndLowerLimits(timeSpan, culture, maxUnit, minUnit);
+            var timeParts = CreateTheTimePartsWithUperAndLowerLimits(timeSpan, culture, maxUnit, minUnit);
             timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
 
             return ConcatenateTimeSpanParts(timeParts);
@@ -51,9 +51,9 @@ namespace Humanizer
         private static IEnumerable<string> CreateTheTimePartsWithUperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
-            bool firstValueFound = false;
-            IEnumerable<TimeUnit> timeUnitsEnumTypes = GetEnumTypesForTimeUnit();
-            List<string> timeParts = new List<string>();
+            var firstValueFound = false;
+            var timeUnitsEnumTypes = GetEnumTypesForTimeUnit();
+            var timeParts = new List<string>();
 
             foreach (var timeUnitType in timeUnitsEnumTypes)
             {
@@ -67,7 +67,7 @@ namespace Humanizer
             }
             if (IsContainingOnlyNullValue(timeParts))
             {
-                string noTimeValueCultureFarmated = cultureFormatter.TimeSpanHumanize_Zero();
+                var noTimeValueCultureFarmated = cultureFormatter.TimeSpanHumanize_Zero();
                 timeParts = CreateTimePartsWithNoTimeValue(noTimeValueCultureFarmated);
             }
             return timeParts;
@@ -75,7 +75,7 @@ namespace Humanizer
 
         private static IEnumerable<TimeUnit> GetEnumTypesForTimeUnit()
         {
-            IEnumerable<TimeUnit> enumTypeEnumerator = (IEnumerable<TimeUnit>)Enum.GetValues(typeof(TimeUnit));
+            var enumTypeEnumerator = (IEnumerable<TimeUnit>)Enum.GetValues(typeof(TimeUnit));
             enumTypeEnumerator = enumTypeEnumerator.Take(_lastTimeUnitTypeIndexImplemented + 1);
 
             return enumTypeEnumerator.Reverse();

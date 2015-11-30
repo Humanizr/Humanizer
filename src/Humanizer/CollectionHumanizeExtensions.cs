@@ -25,10 +25,10 @@ namespace Humanizer
         /// and using the default separator for the current culture.
         /// </summary>
         /// <returns></returns>
-        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, String> displayFormatter)
+        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter)
         {
             if (displayFormatter == null)
-                throw new ArgumentNullException("displayFormatter");
+                throw new ArgumentNullException(nameof(displayFormatter));
 
             return Configurator.CollectionFormatter.Humanize(collection, displayFormatter);
         }
@@ -38,7 +38,7 @@ namespace Humanizer
         /// and using the provided separator.
         /// </summary>
         /// <returns></returns>
-        public static string Humanize<T>(this IEnumerable<T> collection, String separator)
+        public static string Humanize<T>(this IEnumerable<T> collection, string separator)
         {
 
             return Configurator.CollectionFormatter.Humanize(collection, separator);
@@ -49,10 +49,10 @@ namespace Humanizer
         /// and using the provided separator.
         /// </summary>
         /// <returns></returns>
-        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, String> displayFormatter, String separator)
+        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter, string separator)
         {
             if (displayFormatter == null)
-                throw new ArgumentNullException("displayFormatter");
+                throw new ArgumentNullException(nameof(displayFormatter));
 
             return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, separator);
         }

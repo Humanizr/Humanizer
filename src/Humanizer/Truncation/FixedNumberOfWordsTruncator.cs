@@ -31,7 +31,7 @@ namespace Humanizer
             var numberOfWordsProcessed = 0;
             for (var i = 0; i < value.Length; i++)
             {
-                if (Char.IsWhiteSpace(value[i]))
+                if (char.IsWhiteSpace(value[i]))
                 {
                     if (!lastCharactersWasWhiteSpace)
                         numberOfWordsProcessed++;
@@ -54,7 +54,7 @@ namespace Humanizer
             var numberOfWordsProcessed = 0;
             for (var i = value.Length - 1; i > 0; i--)
             {
-                if (Char.IsWhiteSpace(value[i]))
+                if (char.IsWhiteSpace(value[i]))
                 {
                     if (!lastCharactersWasWhiteSpace)
                         numberOfWordsProcessed++;

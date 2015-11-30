@@ -80,7 +80,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (lastChar == 'и' || lastChar == 'а')
                 i = 1;
 
-            return String.Format("{0}{1}", word, OrdinalSuffixes[i]);
+            return string.Format("{0}{1}", word, OrdinalSuffixes[i]);
         }
     }
 }

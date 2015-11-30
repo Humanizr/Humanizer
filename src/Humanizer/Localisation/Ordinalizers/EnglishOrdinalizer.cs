@@ -4,7 +4,7 @@
     {
         public override string Convert(int number, string numberString)
         {
-            int nMod100 = number % 100;
+            var nMod100 = number % 100;
 
             if (nMod100 >= 11 && nMod100 <= 13)
                 return numberString + "th";

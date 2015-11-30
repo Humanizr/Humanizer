@@ -11,7 +11,7 @@
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
-            int mod10 = number % 10;
+            var mod10 = number % 10;
 
             if (mod10 > 1 && mod10 < 5)            
                 return resourceKey + PaucalPostfix;
