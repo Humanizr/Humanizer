@@ -3,6 +3,11 @@
   <!--Project configuration-->
   <PropertyGroup>
     <XUnitPath>$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\build\portable-net45+win8+wp8+wpa81</XUnitPath>
+    <CodeTaskAssembly Condition="'$(MSBuildAssemblyVersion)' == ''">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll</CodeTaskAssembly>
+    <!-- In VS2013, the assembly contains the VS version. -->
+    <CodeTaskAssembly Condition="'$(MSBuildAssemblyVersion)' == '12.0'">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll</CodeTaskAssembly>
+    <!-- In VS2015+, the assembly was renamed -->
+    <CodeTaskAssembly Condition="'$(MSBuildAssemblyVersion)' != '' and '$(MSBuildAssemblyVersion)' &gt;= '14.0'">$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll</CodeTaskAssembly>
   </PropertyGroup>
   <ItemGroup>
     <ProjectToBuild Include="Src\*.sln" />
@@ -53,7 +58,7 @@
     <DownloadNuGet OutputFilename="$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe" Condition="!Exists('$(MSBuildThisFileDirectory)tools\NuGet\nuget.exe')" />
   </Target>
 
-  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+  <UsingTask TaskName="DownloadNuGet" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskAssembly)">
     <ParameterGroup>
       <OutputFilename ParameterType="System.String" Required="true" />
     </ParameterGroup>
