@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
-    <id>Humanizer</id>
+    <id>Humanizer.Core</id>
     <version>$version$</version>
     <title>Humanizer</title>
     <authors>Mehdi Khalili, Oren Novotny</authors>
@@ -9,9 +9,10 @@
     <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
     <iconUrl>https://raw.github.com/MehdiK/Humanizer/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</description>
+    <description>Humanizer core package that contains the library and the neutral language (English) resources</description>
     <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
     <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>
+    <language>en</language>
     <dependencies>
       <group targetFramework="dotnet">
         <dependency id="System.Collections" version="4.0.0" />
@@ -28,7 +29,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\**" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\portable-win+net45+wp8+wpa81" />
-    <file src="Humanizer\bin\Release\**" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\dotnet" />
+    <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\portable-win+net45+wp8+wpa81" />
+    <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\dotnet" />
   </files>
 </package>

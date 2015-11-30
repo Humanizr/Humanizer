@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Humanizer.Core.ru</id>
+    <version>$version$</version>
+    <title>Humanizer Locale (ru)</title>
+    <authors>Mehdi Khalili, Oren Novotny</authors>
+    <owners>Mehdi Khalili, onovotny</owners>
+    <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
+    <iconUrl>https://raw.github.com/MehdiK/Humanizer/master/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer Locale (ru)</description>
+    <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>
+    <language>ru</language>
+    <dependencies>
+       <dependency id="Humanizer.Core" version="[$version$]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Humanizer\bin\Release\ru\*.*" target="lib\portable-win+net45+wp8+wpa81\ru" />
+    <file src="Humanizer\bin\Release\ru\*.*" target="lib\dotnet\ru" />
+  </files>
+</package>

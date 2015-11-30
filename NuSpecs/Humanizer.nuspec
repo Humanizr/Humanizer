@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Humanizer</id>
+    <version>$version$</version>
+    <title>Humanizer (all locales)</title>
+    <authors>Mehdi Khalili, Oren Novotny</authors>
+    <owners>Mehdi Khalili, onovotny</owners>    
+    <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
+    <iconUrl>https://raw.github.com/MehdiK/Humanizer/master/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</description>
+    <copyright>Copyright 2012-2015 Mehdi Khalili</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>    
+    <dependencies>
+      <dependency id="Humanizer.Core.af" version="$version$" />
+      <dependency id="Humanizer.Core.ar" version="$version$" />
+      <dependency id="Humanizer.Core.bg" version="$version$" />
+      <dependency id="Humanizer.Core.bn-BD" version="$version$" />
+      <dependency id="Humanizer.Core.cs" version="$version$" />
+      <dependency id="Humanizer.Core.da" version="$version$" />
+      <dependency id="Humanizer.Core.de" version="$version$" />
+      <dependency id="Humanizer.Core.el" version="$version$" />
+      <dependency id="Humanizer.Core.es" version="$version$" />
+      <dependency id="Humanizer.Core.fa" version="$version$" />
+      <dependency id="Humanizer.Core.fi-FI" version="$version$" />
+      <dependency id="Humanizer.Core.fr" version="$version$" />
+      <dependency id="Humanizer.Core.fr-BE" version="$version$" />
+      <dependency id="Humanizer.Core.he" version="$version$" />
+      <dependency id="Humanizer.Core.hr" version="$version$" />
+      <dependency id="Humanizer.Core.hu" version="$version$" />
+      <dependency id="Humanizer.Core.id" version="$version$" />
+      <dependency id="Humanizer.Core.it" version="$version$" />
+      <dependency id="Humanizer.Core.ja" version="$version$" />
+      <dependency id="Humanizer.Core.nb" version="$version$" />
+      <dependency id="Humanizer.Core.nb-NO" version="$version$" />
+      <dependency id="Humanizer.Core.nl" version="$version$" />
+      <dependency id="Humanizer.Core.pl" version="$version$" />
+      <dependency id="Humanizer.Core.pt" version="$version$" />
+      <dependency id="Humanizer.Core.ro" version="$version$" />
+      <dependency id="Humanizer.Core.ru" version="$version$" />
+      <dependency id="Humanizer.Core.sk" version="$version$" />
+      <dependency id="Humanizer.Core.sl" version="$version$" />
+      <dependency id="Humanizer.Core.sr" version="$version$" />
+      <dependency id="Humanizer.Core.sr-Latn" version="$version$" />
+      <dependency id="Humanizer.Core.sv" version="$version$" />
+      <dependency id="Humanizer.Core.tr" version="$version$" />
+      <dependency id="Humanizer.Core.uk" version="$version$" />
+      <dependency id="Humanizer.Core.uz-Cyrl-UZ" version="$version$" />
+      <dependency id="Humanizer.Core.uz-Latn-UZ" version="$version$" />
+      <dependency id="Humanizer.Core.vi" version="$version$" />
+      <dependency id="Humanizer.Core.zh-CN" version="$version$" />
+      <dependency id="Humanizer.Core.zh-Hans" version="$version$" />
+      <dependency id="Humanizer.Core.zh-Hant" version="$version$" />
+    </dependencies>
+  </metadata>
+  <files />  
+</package>

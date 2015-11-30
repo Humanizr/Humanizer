@@ -13,7 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
 		..\CNAME = ..\CNAME
-		Humanizer.nuspec = Humanizer.nuspec
+		..\NuSpecs\Humanizer.Core.nuspec = ..\NuSpecs\Humanizer.Core.nuspec
+		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
 		..\LICENSE = ..\LICENSE
 		..\readme.md = ..\readme.md
 		..\release_notes.md = ..\release_notes.md
@@ -27,8 +28,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{1ABFDC1F-EAB0-48E1-B27E-388619899018}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.MvcSample", "..\samples\Humanizer.MvcSample\Humanizer.MvcSample.csproj", "{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Humanizer.Tests.Shared", "Humanizer.Tests.Shared\Humanizer.Tests.Shared.shproj", "{FDEC244B-F07E-4A5E-BB80-FBC6AC77A9AA}"
 EndProject
@@ -108,30 +107,6 @@ Global
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.ReleaseNET35|x64.Build.0 = Release|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.ReleaseNET35|x86.ActiveCfg = Release|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.ReleaseNET35|x86.Build.0 = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|ARM.Build.0 = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|x64.Build.0 = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Debug|x86.Build.0 = Debug|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|ARM.ActiveCfg = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|ARM.Build.0 = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|x64.ActiveCfg = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|x64.Build.0 = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|x86.ActiveCfg = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.Release|x86.Build.0 = Release|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|Any CPU.ActiveCfg = ReleaseNET35|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|Any CPU.Build.0 = ReleaseNET35|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|ARM.ActiveCfg = ReleaseNET35|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|ARM.Build.0 = ReleaseNET35|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|x64.ActiveCfg = ReleaseNET35|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|x64.Build.0 = ReleaseNET35|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|x86.ActiveCfg = ReleaseNET35|Any CPU
-		{1DB8CFA5-5552-4FA7-8F0E-8DF364C2AA91}.ReleaseNET35|x86.Build.0 = ReleaseNET35|Any CPU
 		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|Any CPU.Build.0 = Debug|x86
 		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|Any CPU.Deploy.0 = Debug|x86
