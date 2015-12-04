@@ -129,7 +129,9 @@ namespace Humanizer
     public class static DateHumanizeExtensions
     {
         public static string Humanize(this System.DateTime input, bool utcDate = True, System.Nullable<System.DateTime> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
+        public static string Humanize(this System.Nullable<System.DateTime> input, bool utcDate = True, System.Nullable<System.DateTime> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
         public static string Humanize(this System.DateTimeOffset input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
+        public static string Humanize(this System.Nullable<System.DateTimeOffset> input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
     }
     public class static EnumDehumanizeExtensions
     {
@@ -1012,29 +1014,35 @@ namespace Humanizer.DateTimeHumanizeStrategy
     {
         public DefaultDateTimeHumanizeStrategy() { }
         public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.Nullable<System.DateTime> input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
     }
     public class DefaultDateTimeOffsetHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
     {
         public DefaultDateTimeOffsetHumanizeStrategy() { }
         public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.Nullable<System.DateTimeOffset> input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
     }
     public interface IDateTimeHumanizeStrategy
     {
         string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
+        string Humanize(System.Nullable<System.DateTime> input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
     }
     public interface IDateTimeOffsetHumanizeStrategy
     {
         string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
+        string Humanize(System.Nullable<System.DateTimeOffset> input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
     }
     public class PrecisionDateTimeHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
     {
         public PrecisionDateTimeHumanizeStrategy(double precision = 0.75) { }
         public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.Nullable<System.DateTime> input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
     }
     public class PrecisionDateTimeOffsetHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
     {
         public PrecisionDateTimeOffsetHumanizeStrategy(double precision = 0.75) { }
         public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.Nullable<System.DateTimeOffset> input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
     }
 }
 namespace Humanizer.Inflections
@@ -1078,6 +1086,7 @@ namespace Humanizer.Localisation.Formatters
     {
         public DefaultFormatter(string localeCode) { }
         public virtual string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
+        public virtual string DateHumanize_Never() { }
         public virtual string DateHumanize_Now() { }
         protected virtual string Format(string resourceKey) { }
         protected virtual string Format(string resourceKey, int number) { }
@@ -1089,6 +1098,7 @@ namespace Humanizer.Localisation.Formatters
     public interface IFormatter
     {
         string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
+        string DateHumanize_Never();
         string DateHumanize_Now();
         string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
         string TimeSpanHumanize_Zero();
@@ -1122,6 +1132,7 @@ namespace Humanizer.Localisation
         public ResourceKeys() { }
         public class static DateHumanize
         {
+            public const string Never = "DateHumanize_Never";
             public const string Now = "DateHumanize_Now";
             public static string GetResourceKey(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int count = 1) { }
         }

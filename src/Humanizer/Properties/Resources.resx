@@ -519,4 +519,7 @@
   <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
     <value>{0} weeks</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>never</value>
+  </data>
 </root>

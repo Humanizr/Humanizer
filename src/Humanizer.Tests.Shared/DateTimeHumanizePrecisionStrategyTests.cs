@@ -1,4 +1,7 @@
-﻿using Humanizer.Localisation;
+﻿using Humanizer.Configuration;
+using Humanizer.DateTimeHumanizeStrategy;
+using Humanizer.Localisation;
+using System;
 using Xunit;
 
 namespace Humanizer.Tests
@@ -186,6 +189,27 @@ namespace Humanizer.Tests
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future, DefaultPrecision);
+        }
+
+        [Fact]
+        public void DateTimeOffsetNullable_ExpectingNever()
+        {
+            Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(DefaultPrecision);
+
+            DateTimeOffset? date = null;
+
+            Assert.Equal("never", date.Humanize());
+        }
+
+        [Fact]
+        public void DateTimeOffsetNullable_ExpectingSameHumanizeOutput()
+        {
+            Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(DefaultPrecision);
+
+            DateTimeOffset? dateNullable = new DateTimeOffset(2015, 12, 2, 17, 28, 30, TimeSpan.Zero);
+            DateTimeOffset date = new DateTimeOffset(2015, 12, 2, 17, 28, 30, TimeSpan.Zero);
+
+            Assert.Equal(dateNullable.Humanize(), date.Humanize());
         }
     }
 }

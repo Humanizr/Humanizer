@@ -231,4 +231,7 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>pas de temps</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>jamais</value>
+  </data>
 </root>
