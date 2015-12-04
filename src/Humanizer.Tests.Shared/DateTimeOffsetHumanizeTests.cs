@@ -67,5 +67,22 @@ namespace Humanizer.Tests
 
             Assert.Equal(expectedResult, actualResult);
         }
+
+        [Fact]
+        public void DateTimeOffsetNullable_ExpectingNever()
+        {
+            DateTimeOffset? date = null;
+
+            Assert.Equal("never", date.Humanize());
+        }
+
+        [Fact]
+        public void DateTimeOffsetNullable_ExpectingSameHumanizeOutput()
+        {
+            DateTimeOffset? dateNullable = new DateTimeOffset(2015, 12, 2, 17, 28, 30, TimeSpan.Zero);
+            DateTimeOffset date = new DateTimeOffset(2015, 12, 2, 17, 28, 30, TimeSpan.Zero);
+
+            Assert.Equal(dateNullable.Humanize(), date.Humanize());
+        }
     }
 }
