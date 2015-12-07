@@ -14,12 +14,6 @@
         string DateHumanize_Now();
 
         /// <summary>
-        /// Never
-        /// </summary>
-        /// <returns>Returns Never</returns>
-        string DateHumanize_Never();
-
-        /// <summary>
         /// Returns the string representation of the provided DateTime
         /// </summary>
         /// <param name="timeUnit"></param>

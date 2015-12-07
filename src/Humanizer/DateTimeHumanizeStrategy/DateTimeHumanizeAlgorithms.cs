@@ -56,20 +56,6 @@ namespace Humanizer.DateTimeHumanizeStrategy
             return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
         }
 
-        /// <summary>
-        /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
-        /// </summary>
-        public static string PrecisionHumanize(DateTime? input, DateTime comparisonBase, double precision, CultureInfo culture)
-        {
-            if (input.HasValue)
-                return PrecisionHumanize(input.Value, comparisonBase, precision, culture);
-            else
-            {
-                var formatter = Configurator.GetFormatter(culture);
-                return formatter.DateHumanize_Never();
-            }                
-        }
-
         // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
@@ -125,20 +111,6 @@ namespace Humanizer.DateTimeHumanizeStrategy
             if (years == 0) years = 1;
 
             return formatter.DateHumanize(TimeUnit.Year, tense, years);
-        }
-
-        /// <summary>
-        /// Overload for DateTime? 
-        /// </summary>
-        public static string DefaultHumanize(DateTime? input, DateTime comparisonDate, CultureInfo culture)
-        {
-            if (input.HasValue)
-                return DefaultHumanize(input.Value, comparisonDate, culture);
-            else
-            {
-                var formatter = Configurator.GetFormatter(culture);
-                return formatter.DateHumanize_Never();
-            }
         }
     }
 }
