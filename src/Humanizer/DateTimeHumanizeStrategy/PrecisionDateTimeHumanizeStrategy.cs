@@ -26,13 +26,5 @@ namespace Humanizer.DateTimeHumanizeStrategy
         {
             return DateTimeHumanizeAlgorithms.PrecisionHumanize(input, comparisonBase, _precision, culture);
         }
-
-        /// <summary>
-        /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
-        /// </summary>
-        public string Humanize(DateTime? input, DateTime comparisonBase, CultureInfo culture)
-        {
-            return DateTimeHumanizeAlgorithms.PrecisionHumanize(input, comparisonBase, _precision, culture);
-        }
     }
 }
