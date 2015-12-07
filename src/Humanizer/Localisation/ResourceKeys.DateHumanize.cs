@@ -13,6 +13,11 @@
             public const string Now = "DateHumanize_Now";
 
             /// <summary>
+            /// Resource key for Never.
+            /// </summary>
+            public const string Never = "DateHumanize_Never";
+
+            /// <summary>
             /// Examples: DateHumanize_SingleMinuteAgo, DateHumanize_MultipleHoursAgo
             /// Note: "s" for plural served separately by third part.
             /// </summary>

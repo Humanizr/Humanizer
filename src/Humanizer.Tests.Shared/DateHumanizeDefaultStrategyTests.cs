@@ -148,6 +148,21 @@ namespace Humanizer.Tests
             DateHumanize.Verify("now", 0, TimeUnit.Year, Tense.Future);
         }
 
+        [Fact]
+        public void Never()
+        {
+            DateTime? never = null;
+            Assert.Equal("never", never.Humanize());
+        }
+
+        [Fact]
+        public void Nullable_ExpectSame()
+        {
+            DateTime? never = new DateTime(2015, 12, 7, 9, 0, 0);
+
+            Assert.Equal(never.Value.Humanize(), never.Humanize());
+        }
+
         [Theory]
         [InlineData(1, TimeUnit.Year, Tense.Future, "en-US", "one year from now")]
         [InlineData(40, TimeUnit.Second, Tense.Past, "ru-RU", "40 секунд назад")]

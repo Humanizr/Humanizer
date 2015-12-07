@@ -231,4 +231,7 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>in einem Jahr</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nie</value>
+  </data>
 </root>
