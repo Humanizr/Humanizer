@@ -1030,12 +1030,12 @@ namespace Humanizer.DateTimeHumanizeStrategy
     }
     public class PrecisionDateTimeHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
     {
-        public PrecisionDateTimeHumanizeStrategy(double precision = 0,75) { }
+        public PrecisionDateTimeHumanizeStrategy(double precision = 0.75) { }
         public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
     }
     public class PrecisionDateTimeOffsetHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
     {
-        public PrecisionDateTimeOffsetHumanizeStrategy(double precision = 0,75) { }
+        public PrecisionDateTimeOffsetHumanizeStrategy(double precision = 0.75) { }
         public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
     }
 }

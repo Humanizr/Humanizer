@@ -40,6 +40,6 @@
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
         /// <returns></returns>
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit);        
+        string TimeSpanHumanize(TimeUnit timeUnit, int unit);
     }
 }
