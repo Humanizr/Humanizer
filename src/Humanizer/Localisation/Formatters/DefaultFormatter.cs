@@ -29,6 +29,15 @@ namespace Humanizer.Localisation.Formatters
         }
 
         /// <summary>
+        /// Never
+        /// </summary>
+        /// <returns>Returns Never</returns>
+        public virtual string DateHumanize_Never()
+        {
+            return Format(ResourceKeys.DateHumanize.Never);
+        }
+
+        /// <summary>
         /// Returns the string representation of the provided DateTime
         /// </summary>
         /// <param name="timeUnit"></param>

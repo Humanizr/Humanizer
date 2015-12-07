@@ -14,6 +14,12 @@
         string DateHumanize_Now();
 
         /// <summary>
+        /// Never
+        /// </summary>
+        /// <returns>Returns Never</returns>
+        string DateHumanize_Never();
+
+        /// <summary>
         /// Returns the string representation of the provided DateTime
         /// </summary>
         /// <param name="timeUnit"></param>
@@ -34,6 +40,6 @@
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
         /// <returns></returns>
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit);
+        string TimeSpanHumanize(TimeUnit timeUnit, int unit);        
     }
 }
