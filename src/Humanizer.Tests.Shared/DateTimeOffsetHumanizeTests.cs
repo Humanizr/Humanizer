@@ -67,5 +67,20 @@ namespace Humanizer.Tests
 
             Assert.Equal(expectedResult, actualResult);
         }
+
+        [Fact]
+        public void Never()
+        {
+            DateTimeOffset? never = null;
+            Assert.Equal("never", never.Humanize());
+        }
+
+        [Fact]
+        public void Nullable_ExpectSame()
+        {
+            DateTimeOffset? never = new DateTimeOffset(2015, 12, 7, 9, 0, 0, TimeSpan.FromHours(1));
+
+            Assert.Equal(never.Value.Humanize(), never.Humanize());
+        }
     }
 }
