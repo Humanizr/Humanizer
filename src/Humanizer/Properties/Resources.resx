@@ -474,6 +474,51 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 year</value>
   </data>
+  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} hours ago</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} hours from now</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} minutes ago</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} minutes from now</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} months ago</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} months from now</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} seconds ago</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} seconds from now</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} years from ago</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} years from now</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
+    <value>{0} hours</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
+    <value>{0} milliseconds</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
+    <value>{0} minutes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
+    <value>{0} seconds</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
+    <value>{0} weeks</value>
+  </data>
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>never</value>
   </data>
