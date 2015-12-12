@@ -6,8 +6,8 @@
     <title>Humanizer</title>
     <authors>Mehdi Khalili, Oren Novotny</authors>
     <owners>Mehdi Khalili, onovotny</owners>
-    <projectUrl>https://github.com/MehdiK/Humanizer</projectUrl>
-    <iconUrl>https://raw.github.com/MehdiK/Humanizer/master/logo.png</iconUrl>
+    <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
+    <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer core package that contains the library and the neutral language (English) resources</description>
     <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
