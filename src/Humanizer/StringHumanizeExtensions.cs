@@ -14,7 +14,7 @@ namespace Humanizer
 
         static StringHumanizeExtensions()
         {
-            PascalCaseWordPartsRegex = new Regex(@"[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?=[A-Z][a-z]|[0-9]|\b)",
+            PascalCaseWordPartsRegex = new Regex(@"[A-Z]?[a-z]+|[0-9]+[a-z]*|[A-Z]+(?=[A-Z][a-z]|[0-9]|\b)",
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptionsUtil.Compiled);
             FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
         }

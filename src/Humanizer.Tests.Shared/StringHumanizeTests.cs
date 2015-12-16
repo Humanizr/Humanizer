@@ -8,6 +8,7 @@ namespace Humanizer.Tests
         [InlineData("PascalCaseInputStringIsTurnedIntoSentence", "Pascal case input string is turned into sentence")]
         [InlineData("WhenIUseAnInputAHere", "When I use an input a here")]
         [InlineData("10IsInTheBegining", "10 is in the begining")]
+        [InlineData("NumberIsFollowedByLowerCase5th", "Number Is Followed By Lower Case 5th")]
         [InlineData("NumberIsAtTheEnd100", "Number is at the end 100")]
         [InlineData("XIsFirstWordInTheSentence", "X is first word in the sentence")]
         [InlineData("XIsFirstWordInTheSentence ThenThereIsASpace", "X is first word in the sentence then there is a space")]
