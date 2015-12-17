@@ -146,6 +146,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\zh-Hant\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\zh-Hant\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MetricNumeralTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DateToOrdinalWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NumberToTimeSpanTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OrdinalizeTests.cs" />
