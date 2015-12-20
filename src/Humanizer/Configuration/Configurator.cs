@@ -7,6 +7,7 @@ using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
 using Humanizer.Localisation.Ordinalizers;
 using Humanizer.Localisation.CollectionFormatters;
+using Humanizer.Localisation.DateToOrdinalWords;
 
 namespace Humanizer.Configuration
 {
@@ -52,6 +53,15 @@ namespace Humanizer.Configuration
             get { return _ordinalizers; }
         }
 
+        private static readonly LocaliserRegistry<IDateToOrdinalWordConverter> _dateToOrdinalWordConverters = new DateToOrdinalWordsConverterRegistry();
+        /// <summary>
+        /// A registry of ordinalizers used to localise Ordinalize method
+        /// </summary>
+        public static LocaliserRegistry<IDateToOrdinalWordConverter> DateToOrdinalWordsConverters
+        {
+            get { return _dateToOrdinalWordConverters; }
+        }
+
         internal static ICollectionFormatter CollectionFormatter
         {
             get
@@ -86,6 +96,17 @@ namespace Humanizer.Configuration
             get
             {
                 return Ordinalizers.ResolveForUiCulture();
+            }
+        }
+
+        /// <summary>
+        /// The ordinalizer to be used
+        /// </summary>
+        internal static IDateToOrdinalWordConverter DateToOrdinalWordsConverter
+        {
+            get
+            {
+                return DateToOrdinalWordsConverters.ResolveForUiCulture();
             }
         }
 

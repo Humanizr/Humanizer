@@ -36,6 +36,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Number to Numbers](#number-to-numbers)
    - [Number to words](#number-to-words)
    - [Number to ordinal words](#number-to-ordinal-words)
+   - [DateTime to ordinal words](#date-time-to-ordinal-words)
    - [Roman numerals](#roman-numerals)
    - [Metric numerals](#metric-numerals)
    - [ByteSize](#bytesize)
@@ -816,6 +817,29 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 10.ToOrdinalWords(new CultureInfo("en-US")) => "tenth"
 1.ToOrdinalWords(GrammaticalGender.Masculine, new CulureInfo("pt-BR")) => "primeiro"
 ```
+
+
+###<a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
+This is kind of an extension of Ordinalize
+```C#
+// for English UK locale
+new DateTime(2015, 1, 1).ToOrdinalWords() => "1st January 2015"
+new DateTime(2015, 2, 12).ToOrdinalWords() => "12th February 2015"
+new DateTime(2015, 3, 22).ToOrdinalWords() => "22nd March 2015"
+// for English US locale
+new DateTime(2015, 1, 1).ToOrdinalWords() => "January 1st, 2015"
+new DateTime(2015, 2, 12).ToOrdinalWords() => "February 12th, 2015"
+new DateTime(2015, 3, 22).ToOrdinalWords() => "March 22nd, 2015"
+```
+
+`ToOrdinalWords` also supports grammatical case.
+You can pass a second argument to `ToOrdinalWords` to specify the case of the output.
+The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`, `GrammaticalCase.Dative`, `GrammaticalCase.Accusative`, `GrammaticalCase.Instrumental` and `GrammaticalGender.Prepositional`:
+
+```C#
+```
+
+Obviously this only applies to some cultures. For others passing case in doesn't make any difference in the result.
 
 ### <a id="roman-numerals">Roman numerals</a>
 Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
