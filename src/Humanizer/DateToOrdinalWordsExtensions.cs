@@ -16,17 +16,17 @@ namespace Humanizer
         /// <returns>The date in ordinal words</returns>
         public static string ToOrdinalWords(this DateTime input)
         {
-            return input.Day.Ordinalize() + input.ToString(" MMMM yyyy");
+            return Configurator.DateToOrdinalWordsConverter.Convert(input);
         }
         /// <summary>
         /// Turns the provided date into ordinal words
         /// </summary>
         /// <param name="input">The date to be made into ordinal words</param>
-        /// <param name="gender">The grammatical gender to use for output words</param>
+        /// 
         /// <returns>The date in ordinal words</returns>
-        public static string ToOrdinalWords(this DateTime input, GrammaticalGender gender)
+        public static string ToOrdinalWords(this DateTime input, GrammaticalCase grammaticalCase)
         {
-            return input.Day.Ordinalize(gender) + input.ToString(" MMMM yyyy");
+            return Configurator.DateToOrdinalWordsConverter.Convert(input, grammaticalCase);
         }
     }
 }

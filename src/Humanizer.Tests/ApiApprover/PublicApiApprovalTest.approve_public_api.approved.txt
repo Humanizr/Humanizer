@@ -134,7 +134,7 @@ namespace Humanizer
     public class static DateToOrdinalWordsExtensions
     {
         public static string ToOrdinalWords(this System.DateTime input) { }
-        public static string ToOrdinalWords(this System.DateTime input, Humanizer.GrammaticalGender gender) { }
+        public static string ToOrdinalWords(this System.DateTime input, Humanizer.GrammaticalCase grammaticalCase) { }
     }
     public class static EnumDehumanizeExtensions
     {
@@ -994,6 +994,7 @@ namespace Humanizer.Configuration
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
         public static Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
         public static Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.DateToOrdinalWords.IDateToOrdinalWordConverter> DateToOrdinalWordsConverters { get; }
         public static System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
@@ -1074,6 +1075,15 @@ namespace Humanizer.Localisation.CollectionFormatters
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
+    }
+}
+namespace Humanizer.Localisation.DateToOrdinalWords
+{
+    
+    public interface IDateToOrdinalWordConverter
+    {
+        string Convert(System.DateTime date);
+        string Convert(System.DateTime date, Humanizer.GrammaticalCase grammaticalCase);
     }
 }
 namespace Humanizer.Localisation.Formatters
