@@ -23,6 +23,7 @@ namespace Humanizer.Tests
         public void ToQuantity(string word, int quantity, string expected)
         {
             Assert.Equal(expected, word.ToQuantity(quantity));
+            Assert.Equal(expected, word.ToQuantity((long)quantity));
         }
         
         [Theory]
@@ -40,6 +41,7 @@ namespace Humanizer.Tests
         public void ToQuantityWithNoQuantity(string word, int quantity, string expected)
         {
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.None));
+            Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.None));
         }
         
         [Theory]
@@ -58,6 +60,7 @@ namespace Humanizer.Tests
         {
 // ReSharper disable once RedundantArgumentDefaultValue
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Numeric));
+            Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.Numeric));
         }
         
         [Theory]
@@ -76,6 +79,11 @@ namespace Humanizer.Tests
         public void ToQuantityWords(string word, int quantity, string expected)
         {
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Words));
+            Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.Words));
+        }
+        public void ToQuantityWordsThrowsErrorIfGreaterThanInt32()
+        {
+            Assert.Throws<NotImplementedException>(() => "case".ToQuantity(10000000000, ShowQuantityAs.Words));
         }
 
         [Theory]
@@ -93,6 +101,7 @@ namespace Humanizer.Tests
         public void ToQuantityWordsWithCurrentCultureFormatting(string word, int quantity, string format, string expected)
         {
             Assert.Equal(expected, word.ToQuantity(quantity, format));
+            Assert.Equal(expected, word.ToQuantity((long)quantity, format));
         }
 
         [Theory]
@@ -110,6 +119,7 @@ namespace Humanizer.Tests
             var culture = new CultureInfo(cultureCode);
             
             Assert.Equal(expected, word.ToQuantity(quantity, format, culture), GetStringComparer(culture));
+            Assert.Equal(expected, word.ToQuantity((long)quantity, format, culture), GetStringComparer(culture));
         }
 
         internal static StringComparer GetStringComparer(CultureInfo culture)
