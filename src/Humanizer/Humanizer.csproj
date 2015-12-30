@@ -153,6 +153,7 @@
     <Compile Include="NoMatchFoundException.cs" />
     <Compile Include="RomanNumeralExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="TransformToPossessive.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
