@@ -10,7 +10,7 @@ obj/
 *ncrunch*
 *crunch*.local.xml
 *.cache
-src/packages/*
+**/packages/*
 PackageBuild/*
 Build/*
 Release/*
