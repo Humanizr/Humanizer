@@ -6,6 +6,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 
 ###Table of contents
  - [Install](#install)
+   - [Specifying Languages (Optional)](#specify-lang)
  - [Features](#features)
    - [Humanize String](#humanize-string)
    - [Dehumanize String](#dehumanize-string)
@@ -56,6 +57,20 @@ For pre-release builds, [MyGet feed](https://www.myget.org/) is available where 
 
   - `https://www.myget.org/F/humanizer/api/v2` for VS 2012+
   - `https://www.myget.org/F/humanizer/api/v3/index.json` for VS 2015+
+
+###<a id="specify-lang">Specify Languages (Optional)</a>
+New in Humanizer 2.0 is the option to choose which localization packages you wish to use. You choose which packages
+based on what NuGet package(s) you install. By default, the main `Humanizer` 2.0 package installs all supported languages
+exactly like it does in 1.x. If you're not sure, then just use the main `Humanizer` package.
+
+Here are the options:
+
+  - All languages: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
+  - English: use the `Humanizer.Core` package. Only the English language resources will be available
+  - Specific langauges: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include
+  multiple languages by installing however many language packages you want. 
+  
+The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
 ##<a id="features">Features</a>
 
