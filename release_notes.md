@@ -2,6 +2,15 @@
 
 [Commits](https://github.com/Humanizr/Humanizer/compare/v1.37.0...dev)
 
+###v2.0.0-beta02 - 2015-12-31
+  - [#59](https://github.com/Humanizr/Humanizer/issues/59) Getting only needed resources on nuget install 
+  - [#101](https://github.com/Humanizr/Humanizer/issues/101) Add precision to DateTime.Humanize 
+  - [#234](https://github.com/Humanizr/Humanizer/issues/234) Remove Plurality enum 
+  - [#238](https://github.com/Humanizr/Humanizer/issues/238) Change DefaultDateTimeHumanizeStrategy to turn 60 min to one hour not 45 
+  - [#470](https://github.com/Humanizr/Humanizer/issues/470) & [#492](https://github.com/Humanizr/Humanizer/issues/492): Build warning fixes 
+
+ [Commits](https://github.com/Humanizr/Humanizer/compare/v2.0.0-beta01...v2.0.0-beta02)
+
 ###v2.0.0-beta0001 - 2015-11-01
  - [#451](https://github.com/Humanizr/Humanizer/issues/451): Support `dotnet` TFM. Includes support for CoreCLR
  - [#465](https://github.com/Humanizr/Humanizer/issues/465): Dropped .NET 4 and Silverlight 5 support.
@@ -9,7 +18,7 @@
  - [#459](https://github.com/Humanizr/Humanizer/pull/459): Add support of metric numeral expressions
  - Enable source debugging via [GitLink](https://github.com/GitTools/GitLink)
  
- [Commits]()
+ [Commits](https://github.com/Humanizr/Humanizer/compare/v1.37.0...v2.0.0-beta01)
 
 ###v1.37.0 - 2015-07-03
  - [#416](https://github.com/Humanizr/Humanizer/pull/416): Change BrazilianPortugueseOrdinalizer to PortugueseOrdinalizer
