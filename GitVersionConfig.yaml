@@ -6,7 +6,7 @@ next-version: 2.0.0
 major-version-bump-message: '\+semver:\s?(breaking|major)'
 minor-version-bump-message: '\+semver:\s?(feature|minor)'
 patch-version-bump-message: '\+semver:\s?(fix|patch)'
-legacy-semver-padding: 4
+legacy-semver-padding: 2
 build-metadata-padding: 4
 commit-message-incrementing: Enabled
 branches:
@@ -48,8 +48,8 @@ branches:
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
   dev(elop)?(ment)?$:
-    mode: ContinuousDeployment
-    tag: dev
+    mode: ContinuousDelivery
+    tag: beta
     increment: Minor
     prevent-increment-of-merged-branch-version: false
     track-merge-target: true
