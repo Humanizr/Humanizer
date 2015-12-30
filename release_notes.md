@@ -2,7 +2,7 @@
 
 [Commits](https://github.com/Humanizr/Humanizer/compare/v1.37.0...dev)
 
-###v2.0.0-beta02 - 2015-12-31
+###v2.0.0-beta02 - 2015-12-30
   - [#59](https://github.com/Humanizr/Humanizer/issues/59) Getting only needed resources on nuget install 
   - [#101](https://github.com/Humanizr/Humanizer/issues/101) Add precision to DateTime.Humanize 
   - [#234](https://github.com/Humanizr/Humanizer/issues/234) Remove Plurality enum 

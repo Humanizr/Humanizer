@@ -65,9 +65,9 @@ exactly like it does in 1.x. If you're not sure, then just use the main `Humaniz
 
 Here are the options:
 
-  - All languages: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
-  - English: use the `Humanizer.Core` package. Only the English language resources will be available
-  - Specific langauges: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include
+  - **All languages**: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
+  - **English**: use the `Humanizer.Core` package. Only the English language resources will be available
+  - **Specific langauges**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include
   multiple languages by installing however many language packages you want. 
   
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
