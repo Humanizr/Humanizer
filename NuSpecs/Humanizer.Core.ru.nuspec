@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer Locale (ru)</description>
     <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
-    <licenseUrl>https://raw.githubusercontent.com/MehdiK/Humanizer/master/LICENSE</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
     <language>ru</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
