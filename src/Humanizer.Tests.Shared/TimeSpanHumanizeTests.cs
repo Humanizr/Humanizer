@@ -170,9 +170,9 @@ namespace Humanizer.Tests
         [InlineData(1299630020, 3, "2 weeks, 1 day, 1 hour")]
         [InlineData(1299630020, 4, "2 weeks, 1 day, 1 hour, 30 seconds")]
         [InlineData(1299630020, 5, "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds")]
-        public void TimeSpanWithPrecesion(int milliseconds, int precesion, string expected)
+        public void TimeSpanWithPrecision(int milliseconds, int precision, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precesion);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision);
             Assert.Equal(expected, actual);
         }
 
@@ -225,6 +225,42 @@ namespace Humanizer.Tests
         public void TimeSpanWithPrecisionAndCountingEmptyUnits(int milliseconds, int precision, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision: precision, countEmptyUnits: true);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(0, 3, "no time")]
+        [InlineData(0, 2, "no time")]
+        [InlineData(10, 2, "10 milliseconds")]
+        [InlineData(1400, 2, "1 second and 400 milliseconds")]
+        [InlineData(2500, 2, "2 seconds and 500 milliseconds")]
+        [InlineData(120000, 2, "2 minutes")]
+        [InlineData(62000, 2, "1 minute and 2 seconds")]
+        [InlineData(62020, 2, "1 minute and 2 seconds")]
+        [InlineData(62020, 3, "1 minute, 2 seconds, and 20 milliseconds")]
+        [InlineData(3600020, 4, "1 hour and 20 milliseconds")]
+        [InlineData(3600020, 3, "1 hour and 20 milliseconds")]
+        [InlineData(3600020, 2, "1 hour and 20 milliseconds")]
+        [InlineData(3600020, 1, "1 hour")]
+        [InlineData(3603001, 2, "1 hour and 3 seconds")]
+        [InlineData(3603001, 3, "1 hour, 3 seconds, and 1 millisecond")]
+        [InlineData(86400000, 3, "1 day")]
+        [InlineData(86400000, 2, "1 day")]
+        [InlineData(86400000, 1, "1 day")]
+        [InlineData(86401000, 1, "1 day")]
+        [InlineData(86401000, 2, "1 day and 1 second")]
+        [InlineData(86401200, 2, "1 day and 1 second")]
+        [InlineData(86401200, 3, "1 day, 1 second, and 200 milliseconds")]
+        [InlineData(1296000000, 1, "2 weeks")]
+        [InlineData(1296000000, 2, "2 weeks and 1 day")]
+        [InlineData(1299600000, 2, "2 weeks and 1 day")]
+        [InlineData(1299600000, 3, "2 weeks, 1 day, and 1 hour")]
+        [InlineData(1299630020, 3, "2 weeks, 1 day, and 1 hour")]
+        [InlineData(1299630020, 4, "2 weeks, 1 day, 1 hour, and 30 seconds")]
+        [InlineData(1299630020, 5, "2 weeks, 1 day, 1 hour, 30 seconds, and 20 milliseconds")]
+        public void TimeSpanWithPrecisionAndAlternativeCollectionFormatter(int milliseconds, int precision, string expected)
+        {
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, collectionSeparator: null);
             Assert.Equal(expected, actual);
         }
 

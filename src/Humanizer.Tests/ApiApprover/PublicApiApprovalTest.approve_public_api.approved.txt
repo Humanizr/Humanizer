@@ -948,8 +948,8 @@ namespace Humanizer
     }
     public class static TimeSpanHumanizeExtensions
     {
-        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0) { }
-        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ") { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ") { }
     }
     public class static To
     {
