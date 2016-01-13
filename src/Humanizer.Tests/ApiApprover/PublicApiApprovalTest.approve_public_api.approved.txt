@@ -489,6 +489,8 @@ namespace Humanizer
         public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this long number, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this long number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
     }
     public class On
     {
@@ -1123,8 +1125,8 @@ namespace Humanizer.Localisation.NumberToWords
     
     public interface INumberToWordsConverter
     {
-        string Convert(int number);
-        string Convert(int number, Humanizer.GrammaticalGender gender);
+        string Convert(long number);
+        string Convert(long number, Humanizer.GrammaticalGender gender);
         string ConvertToOrdinal(int number);
         string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
     }
