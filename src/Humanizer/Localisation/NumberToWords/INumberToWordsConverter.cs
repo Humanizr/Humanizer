@@ -23,7 +23,7 @@
         /// <summary>
         /// Converts the number to ordinal string using the locale's default grammatical gender
         /// </summary>
-        /// <param name="number>"</param>
+        /// <param name="number"></param>
         /// <returns></returns>
         string ConvertToOrdinal(int number);
 
