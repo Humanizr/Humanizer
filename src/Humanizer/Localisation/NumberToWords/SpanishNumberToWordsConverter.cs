@@ -28,8 +28,13 @@ namespace Humanizer.Localisation.NumberToWords
             {10, "décimo"}
         };
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
             if (number == 0)
                 return "cero";
 

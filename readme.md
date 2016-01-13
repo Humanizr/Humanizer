@@ -414,7 +414,7 @@ class SomeClass
 
 string FormatSomeClass(SomeClass sc)
 {
-	return string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString);
+    return string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString);
 }
 
 var collection = new List<SomeClass>
