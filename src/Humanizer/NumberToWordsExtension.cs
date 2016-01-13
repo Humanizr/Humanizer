@@ -14,7 +14,7 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public static string ToWords(this int number, CultureInfo culture = null)
+        public static string ToWords(this long number, CultureInfo culture = null)
         {
             return Configurator.GetNumberToWordsConverter(culture).Convert(number);
         }
@@ -39,7 +39,7 @@ namespace Humanizer
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public static string ToWords(this int number, GrammaticalGender gender, CultureInfo culture = null)
+        public static string ToWords(this long number, GrammaticalGender gender, CultureInfo culture = null)
         {
             return Configurator.GetNumberToWordsConverter(culture).Convert(number, gender);
         }
