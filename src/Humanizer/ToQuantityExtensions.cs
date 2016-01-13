@@ -116,14 +116,8 @@ namespace Humanizer
             if (showQuantityAs == ShowQuantityAs.Numeric)
                 return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
 
-            try
-            {
-                return string.Format("{0} {1}", Convert.ToInt32(quantity).ToWords(), transformedInput);
-            }
-            catch (OverflowException e)
-            {
-                throw new NotImplementedException("ToQuantity words doesn't support long numbers", e);
-            }
+            
+            return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
         }
     }
 }
