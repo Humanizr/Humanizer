@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public abstract string Convert(int number);
+        public abstract string Convert(long number);
 
         /// <summary>
         /// Converts the number to string ignoring the provided grammatical gender
@@ -15,7 +15,7 @@
         /// <param name="number"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public string Convert(int number, GrammaticalGender gender)
+        public string Convert(long number, GrammaticalGender gender)
         {
             return Convert(number);
         }

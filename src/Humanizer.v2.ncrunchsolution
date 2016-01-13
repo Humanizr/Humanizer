@@ -1,0 +1,13 @@
+<SolutionConfiguration>
+  <FileVersion>1</FileVersion>
+  <InferProjectReferencesUsingAssemblyNames>false</InferProjectReferencesUsingAssemblyNames>
+  <AllowParallelTestExecution>false</AllowParallelTestExecution>
+  <AllowTestsToRunInParallelWithThemselves>true</AllowTestsToRunInParallelWithThemselves>
+  <FrameworkUtilisationTypeForNUnit>UseDynamicAnalysis</FrameworkUtilisationTypeForNUnit>
+  <FrameworkUtilisationTypeForGallio>UseStaticAnalysis</FrameworkUtilisationTypeForGallio>
+  <FrameworkUtilisationTypeForMSpec>UseStaticAnalysis</FrameworkUtilisationTypeForMSpec>
+  <FrameworkUtilisationTypeForMSTest>UseStaticAnalysis</FrameworkUtilisationTypeForMSTest>
+  <FrameworkUtilisationTypeForXUnitV2>UseStaticAnalysis</FrameworkUtilisationTypeForXUnitV2>
+  <MetricsExclusionList>
+</MetricsExclusionList>
+</SolutionConfiguration>

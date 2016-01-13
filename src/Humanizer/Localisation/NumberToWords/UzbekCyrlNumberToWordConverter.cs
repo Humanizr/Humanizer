@@ -12,8 +12,13 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly string[] OrdinalSuffixes = new string[] { "инчи", "нчи" };
 
-        public override string Convert(int number)
+        public override string Convert(long input)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
             if (number < 0)
                 return string.Format("минус {0}", Convert(-number, true));
             return Convert(number, true);
