@@ -42,13 +42,13 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((number / 1000000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} quadrillion", Convert(number / 1000000000000000000)));
+                parts.Add(string.Format("{0} quintillion", Convert(number / 1000000000000000000)));
                 number %= 1000000000000000000;
             }
 
             if ((number / 1000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} trillion", Convert(number / 1000000000000000)));
+                parts.Add(string.Format("{0} quadrillion", Convert(number / 1000000000000000)));
                 number %= 1000000000000000;
             }
 

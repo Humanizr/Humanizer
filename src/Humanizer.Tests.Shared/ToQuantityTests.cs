@@ -81,10 +81,6 @@ namespace Humanizer.Tests
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Words));
             Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.Words));
         }
-        public void ToQuantityWordsThrowsErrorIfGreaterThanInt32()
-        {
-            Assert.Throws<NotImplementedException>(() => "case".ToQuantity(10000000000, ShowQuantityAs.Words));
-        }
 
         [Theory]
         [InlineData("case", 0, null, "0 cases")]

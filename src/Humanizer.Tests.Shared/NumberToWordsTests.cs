@@ -59,7 +59,6 @@ namespace Humanizer.Tests
         [InlineData(11111111111111111L, "eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
         [InlineData(111111111111111111L, "one hundred and eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
         [InlineData(1111111111111111111L, "one quintillion one hundred and eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
-        [InlineData(11111111111111111111L, "eleven quintillion one hundred and eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
         [Theory]
         public void ToWords(long number, string expected)
         {
