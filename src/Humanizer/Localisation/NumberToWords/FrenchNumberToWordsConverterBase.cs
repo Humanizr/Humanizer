@@ -1,14 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
     abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = new string[] { "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"};
-        private static readonly string[] TensMap = new string[] { "zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "septante", "octante", "nonante" };
+        static readonly string[] UnitsMap = { "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"};
+        static readonly string[] TensMap = { "zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "septante", "octante", "nonante" };
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
+
             if (number == 0)
                 return UnitsMap[0];
             var parts = new List<string>();
@@ -63,7 +70,7 @@ namespace Humanizer.Localisation.NumberToWords
             return UnitsMap[number];
         }
 
-        private static void CollectHundreds(ICollection<string> parts, ref int number, int d, string form, bool pluralize)
+        static void CollectHundreds(ICollection<string> parts, ref int number, int d, string form, bool pluralize)
         {
             if (number < d) return;
 
@@ -88,7 +95,7 @@ namespace Humanizer.Localisation.NumberToWords
             number %= d;
         }
 
-        private void CollectParts(ICollection<string> parts, ref int number, int d, string form)
+        void CollectParts(ICollection<string> parts, ref int number, int d, string form)
         {
             if (number < d) return;
 
@@ -108,7 +115,7 @@ namespace Humanizer.Localisation.NumberToWords
             number %= d;
         }
 
-        private void CollectPartsUnderAThousand(ICollection<string> parts, int number, GrammaticalGender gender, bool pluralize)
+        void CollectPartsUnderAThousand(ICollection<string> parts, int number, GrammaticalGender gender, bool pluralize)
         {
             CollectHundreds(parts, ref number, 100, "cent", pluralize);
 
@@ -118,7 +125,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private void CollectThousands(ICollection<string> parts, ref int number, int d, string form)
+        void CollectThousands(ICollection<string> parts, ref int number, int d, string form)
         {
             if (number < d) return;
 
@@ -155,7 +162,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    parts.Add(string.Format("{0}-{1}", tens, GetUnits(units, gender)));
+                    parts.Add($"{tens}-{GetUnits(units, gender)}");
                 }
             }
         }

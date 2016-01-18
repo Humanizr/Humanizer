@@ -2,9 +2,9 @@
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class FrenchNumberToWordsConverter : FrenchNumberToWordsConverterBase
+    class FrenchNumberToWordsConverter : FrenchNumberToWordsConverterBase
     {
-        protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
+        protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref int number, GrammaticalGender gender, bool pluralize)
         {
             if (number == 71)
                 parts.Add("soixante et onze");
@@ -15,7 +15,7 @@ namespace Humanizer.Localisation.NumberToWords
                 var @base = number < 80 ? 60 : 80;
                 int units = number - @base;
                 var tens = @base/10;
-                parts.Add(string.Format("{0}-{1}", GetTens(tens), GetUnits(units, gender)));
+                parts.Add($"{GetTens(tens)}-{GetUnits(units, gender)}");
             }
             else
                 base.CollectPartsUnderAHundred(parts, ref number, gender, pluralize);
