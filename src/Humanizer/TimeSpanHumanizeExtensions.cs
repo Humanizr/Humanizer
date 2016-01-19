@@ -24,10 +24,11 @@ namespace Humanizer
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <param name="maxUnit">The maximum unit of time to output.</param>
         /// <param name="minUnit">The minimum unit of time to output.</param>
+        /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond)
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ")
         {
-            return Humanize(timeSpan, precision, false, culture, maxUnit, minUnit);
+            return Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator);
         }
 
         /// <summary>
@@ -39,13 +40,14 @@ namespace Humanizer
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <param name="maxUnit">The maximum unit of time to output.</param>
         /// <param name="minUnit">The minimum unit of time to output.</param>
+        /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond)
+        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ")
         {
             var timeParts = CreateTheTimePartsWithUperAndLowerLimits(timeSpan, culture, maxUnit, minUnit);
             timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
 
-            return ConcatenateTimeSpanParts(timeParts);
+            return ConcatenateTimeSpanParts(timeParts, collectionSeparator);
         }
 
         private static IEnumerable<string> CreateTheTimePartsWithUperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit)
@@ -182,9 +184,14 @@ namespace Humanizer
             return timeParts;
         }
 
-        private static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts)
+        private static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, string collectionSeparator)
         {
-            return string.Join(", ", timeSpanParts);
+            if (collectionSeparator == null)
+            {
+                return Configurator.CollectionFormatter.Humanize(timeSpanParts);
+            }
+
+            return string.Join(collectionSeparator, timeSpanParts);
         }
     }
 }
