@@ -22,7 +22,7 @@ namespace Humanizer
         /// Turns the provided date into ordinal words
         /// </summary>
         /// <param name="input">The date to be made into ordinal words</param>
-        /// 
+        /// <param name="grammaticalCase">The grammatical case to use for output words</param>
         /// <returns>The date in ordinal words</returns>
         public static string ToOrdinalWords(this DateTime input, GrammaticalCase grammaticalCase)
         {
