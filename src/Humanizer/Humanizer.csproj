@@ -48,9 +48,9 @@
   <ItemGroup>
     <!-- example NuSpec file that must be specified -->
     <NuSpecFile Include="$(SolutionDir)..\NuSpecs\Humanizer.Core.nuspec">
-        <Visible>False</Visible>
-    </NuSpecFile> 
-</ItemGroup>
+      <Visible>False</Visible>
+    </NuSpecFile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
@@ -133,6 +133,26 @@
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="MetricNumeralExtensions.cs" />
     <Compile Include="Plurality.cs" />
+    <Compile Include="Properties\Resources.fil-PH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.fil-PH.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ko-KR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ko-KR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ms-MY.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ms-MY.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.th-TH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.th-TH.resx</DependentUpon>
+    </Compile>
     <Compile Include="RegexOptionsUtil.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
@@ -207,8 +227,24 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.fil-PH.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fil-PH.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.hr.resx" />
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ko-KR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ms-MY.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ms-MY.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.pt.resx" />
+    <EmbeddedResource Include="Properties\Resources.th-TH.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.th-TH.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.uk.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
