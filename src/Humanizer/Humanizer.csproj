@@ -48,9 +48,9 @@
   <ItemGroup>
     <!-- example NuSpec file that must be specified -->
     <NuSpecFile Include="$(SolutionDir)..\NuSpecs\Humanizer.Core.nuspec">
-        <Visible>False</Visible>
-    </NuSpecFile> 
-</ItemGroup>
+      <Visible>False</Visible>
+    </NuSpecFile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
@@ -134,6 +134,7 @@
     <Compile Include="MetricNumeralExtensions.cs" />
     <Compile Include="Plurality.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
+    <Compile Include="TimeSpanData.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -255,6 +256,10 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -67,7 +67,7 @@ namespace Humanizer.Localisation.Formatters
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
-            if (timeUnit > TimeUnit.Week)
+            if (timeUnit > TimeUnit.Year)
                 throw new ArgumentOutOfRangeException(nameof(timeUnit), "There's no meaningful way to humanize passed timeUnit.");
 
             return GetResourceForTimeSpan(timeUnit, unit);
