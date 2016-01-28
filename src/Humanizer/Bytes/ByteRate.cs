@@ -39,6 +39,17 @@ namespace Humanizer.Bytes
         /// <returns></returns>
         public string Humanize(TimeUnit timeUnit = TimeUnit.Second)
         {
+            return Humanize(null, timeUnit);
+        }
+
+        /// <summary>
+        /// Calculate rate for the quantity of bytes and interval defined by this instance
+        /// </summary>
+        /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
+        /// <param name="format">The string format to use for the number of bytes</param>
+        /// <returns></returns>
+        public string Humanize(string format, TimeUnit timeUnit = TimeUnit.Second)
+        {
             TimeSpan displayInterval;
             string displayUnit;
 
@@ -60,7 +71,8 @@ namespace Humanizer.Bytes
             else
                 throw new NotSupportedException("timeUnit must be Second, Minute, or Hour");
 
-            return (new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)).Humanize() + '/' + displayUnit;
+            return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
+                .Humanize(format) + '/' + displayUnit;
         }
     }
 }
