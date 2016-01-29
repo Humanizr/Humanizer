@@ -937,6 +937,13 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
 // 35.15625 GB/hour
 ```
 
+You can specify a format for the bytes part of the humanized output:
+
+```
+19854651984.Bytes().Per(1.Seconds()).Humanize("#.##");
+// 18.49 GB/s
+```
+
 ##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
