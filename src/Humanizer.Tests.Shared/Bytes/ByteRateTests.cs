@@ -42,9 +42,24 @@ namespace Humanizer.Tests.Bytes
 
             var rate = size.Per(measurementInterval);
             var text = rate.Humanize(displayInterval);
-                        
+
             Assert.Equal(expectedValue, text);
         }
+
+        [Theory]
+        [InlineData(19854651984, 1, TimeUnit.Second, null, "18.4910856038332 GB/s")]
+        [InlineData(19854651984, 1, TimeUnit.Second, "#.##", "18.49 GB/s")]
+        public void FormattedTimeUnitTests(long bytes, int measurementIntervalSeconds, TimeUnit displayInterval, string format, string expectedValue)
+        {
+            var size = ByteSize.FromBytes(bytes);
+            var measurementInterval = TimeSpan.FromSeconds(measurementIntervalSeconds);
+            var rate = size.Per(measurementInterval);
+            var text = rate.Humanize(format, displayInterval);
+
+            Assert.Equal(expectedValue, text);
+        }
+
+
 
         [Theory]
         [InlineData(TimeUnit.Millisecond)]
@@ -61,5 +76,6 @@ namespace Humanizer.Tests.Bytes
                 dummyRate.Humanize(units);
             });
         }
+
     }
 }
