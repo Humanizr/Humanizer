@@ -36,35 +36,11 @@ namespace Humanizer
         /// Pluralizes the provided input considering irregular words
         /// </summary>
         /// <param name="word">Word to be pluralized</param>
-        /// <param name="plurality">Normally you call Pluralize on singular words; but if you're unsure call it with Plurality.CouldBeEither</param>
-        /// <returns></returns>
-        [Obsolete("Use string.Pluralize(bool) instead. This method will be removed in next major release.")]
-        public static string Pluralize(this string word, Plurality plurality)
-        {
-            return plurality == Plurality.Plural ? word : word.Pluralize(inputIsKnownToBeSingular: false);
-        }
-
-        /// <summary>
-        /// Pluralizes the provided input considering irregular words
-        /// </summary>
-        /// <param name="word">Word to be pluralized</param>
         /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
         /// <returns></returns>
         public static string Pluralize(this string word, bool inputIsKnownToBeSingular = true)
         {
             return Vocabularies.Default.Pluralize(word, inputIsKnownToBeSingular);
-        }
-
-        /// <summary>
-        /// Singularizes the provided input considering irregular words
-        /// </summary>
-        /// <param name="word">Word to be singularized</param>
-        /// <param name="plurality">Normally you call Singularize on plural words; but if you're unsure call it with Plurality.CouldBeEither</param>
-        /// <returns></returns>
-        [Obsolete("Use string.Singularize(bool) instead. This method will be removed in next major release.")]
-        public static string Singularize(this string word, Plurality plurality)
-        {
-            return plurality == Plurality.Singular ? word : word.Singularize(inputIsKnownToBePlural: false);
         }
 
         /// <summary>

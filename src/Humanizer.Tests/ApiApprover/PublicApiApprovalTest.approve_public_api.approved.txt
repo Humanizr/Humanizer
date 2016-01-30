@@ -365,13 +365,7 @@ namespace Humanizer
         public static string Dasherize(this string underscoredWord) { }
         public static string Hyphenate(this string underscoredWord) { }
         public static string Pascalize(this string input) { }
-        [System.ObsoleteAttribute("Use string.Pluralize(bool) instead. This method will be removed in next major rel" +
-            "ease.")]
-        public static string Pluralize(this string word, Humanizer.Plurality plurality) { }
         public static string Pluralize(this string word, bool inputIsKnownToBeSingular = True) { }
-        [System.ObsoleteAttribute("Use string.Singularize(bool) instead. This method will be removed in next major r" +
-            "elease.")]
-        public static string Singularize(this string word, Humanizer.Plurality plurality) { }
         public static string Singularize(this string word, bool inputIsKnownToBePlural = True) { }
         public static string Titleize(this string input) { }
         public static string Underscore(this string input) { }
@@ -1054,13 +1048,7 @@ namespace Humanizer.Inflections
         public void AddSingular(string rule, string replacement) { }
         public void AddUncountable(string word) { }
         public string Pluralize(string word, bool inputIsKnownToBeSingular = True) { }
-        [System.ObsoleteAttribute("Use string.Pluralize(bool) instead. This method will be removed in next major rel" +
-            "ease.")]
-        public string Pluralize(string word, Humanizer.Plurality plurality) { }
         public string Singularize(string word, bool inputIsKnownToBePlural = True) { }
-        [System.ObsoleteAttribute("Use string.Singularize(bool) instead. This method will be removed in next major r" +
-            "elease.")]
-        public string Singularize(string word, Humanizer.Plurality plurality) { }
     }
 }
 namespace Humanizer.Localisation.CollectionFormatters
