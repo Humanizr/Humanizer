@@ -47,6 +47,12 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <!-- example NuSpec file that must be specified -->
+    <NuSpecFile Include="$(SolutionDir)..\NuSpecs\Humanizer.Core.nuspec">
+      <Visible>False</Visible>
+    </NuSpecFile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
     <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
@@ -130,6 +136,7 @@
     <Compile Include="Localisation\Tense.cs" />
     <Compile Include="Localisation\NumberToWords\SpanishNumberToWordsConverter.cs" />
     <Compile Include="MetricNumeralExtensions.cs" />
+    <Compile Include="NumberToNumberExtensions.cs" />
     <Compile Include="Plurality.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
