@@ -25,7 +25,7 @@ after_build:
   - cmd: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/Humanizr/Humanizer -s %APPVEYOR_REPO_COMMIT% -errorsaswarnings'
   - ps: |
       $nugetVer = $env:GitVersion_NuGetVersion
-      if(!$env:GitVersion_BuildMetaDataPadded) {
+      if(![string]::IsNullOrWhiteSpace($env:GitVersion_BuildMetaDataPadded)) {
         $nugetVer = $nugetVer + "-build$env:GitVersion_BuildMetaDataPadded"
       }  
       ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
