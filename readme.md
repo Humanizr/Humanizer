@@ -32,6 +32,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
      - [Underscore](#underscore)
      - [Dasherize & Hyphenate](#dasherize--hyphenate)
    - [Fluent date](#fluent-date)
+   - [Number to Numbers](#number-to-numbers)
    - [Number to words](#number-to-words)
    - [Number to ordinal words](#number-to-ordinal-words)
    - [Roman numerals](#roman-numerals)
@@ -704,6 +705,14 @@ someDateTime.AtMidnight()
 ```
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
+
+###<a id="number-to-numbers">Number to numbers</a>
+Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:
+
+```C#
+1.25.Billions() => 1250000000
+3.Hundreds().Thousands() => 300000
+```
 
 ### <a id="number-towords">Number to words</a>
 Humanizer can change numbers to words using the `ToWords` extension:
