@@ -489,7 +489,7 @@ Normally you would call `Pluralize` on a singular word but if you're unsure abou
 ```
 
 
-The overload of `Pluralize` with `plurality` argument is obsolete and will be removed in next major release.
+The overload of `Pluralize` with `plurality` argument is obsolete and was removed in version 2.0.
 
 ####<a id="singularize">Singularize</a>
 `Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
@@ -508,7 +508,7 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 ```
 
 
-The overload of `Singularize` with `plurality` argument is obsolete and will be removed in next major release.
+The overload of `Singularize` with `plurality` argument is obsolete and was removed in version 2.0.
 
 ##<a id="adding-words">Adding Words</a>
 Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabluary` used by `Inflector`):
@@ -935,6 +935,13 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Minute);
 
 text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
 // 35.15625 GB/hour
+```
+
+You can specify a format for the bytes part of the humanized output:
+
+```
+19854651984.Bytes().Per(1.Seconds()).Humanize("#.##");
+// 18.49 GB/s
 ```
 
 ##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
