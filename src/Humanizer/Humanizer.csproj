@@ -48,13 +48,15 @@
   <ItemGroup>
     <!-- example NuSpec file that must be specified -->
     <NuSpecFile Include="$(SolutionDir)..\NuSpecs\Humanizer.Core.nuspec">
-        <Visible>False</Visible>
-    </NuSpecFile> 
-</ItemGroup>
+      <Visible>False</Visible>
+    </NuSpecFile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
     <Compile Include="Configuration\CollectionFormatterRegistry.cs" />
+    <Compile Include="Configuration\DateToOrdinalWordsConverterRegistry.cs" />
+    <Compile Include="DateToOrdinalWordsExtensions.cs" />
     <Compile Include="DateTimeHumanizeStrategy\DateTimeHumanizeAlgorithms.cs" />
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeHumanizeStrategy.cs" />
     <Compile Include="DateTimeHumanizeStrategy\DefaultDateTimeOffsetHumanizeStrategy.cs" />
@@ -65,6 +67,8 @@
     <Compile Include="Localisation\CollectionFormatters\DefaultCollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\ICollectionFormatter.cs" />
     <Compile Include="Localisation\CollectionFormatters\OxfordStyleCollectionFormatter.cs" />
+    <Compile Include="Localisation\DateToOrdinalWords\UsDateToOrdinalWordsConverter.cs" />
+    <Compile Include="Localisation\DateToOrdinalWords\DefaultDateToOrdinalWordConverter.cs" />
     <Compile Include="Localisation\Formatters\CroatianFormatter.cs" />
     <Compile Include="Localisation\Formatters\SerbianFormatter.cs" />
     <Compile Include="Localisation\Formatters\SlovenianFormatter.cs" />
@@ -87,6 +91,7 @@
     <Compile Include="Localisation\NumberToWords\RomanianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\Romanian\RomanianCardinalNumberConverter.cs" />
     <Compile Include="Localisation\NumberToWords\Romanian\RomanianOrdinalNumberConverter.cs" />
+    <Compile Include="Localisation\DateToOrdinalWords\IDateToOrdinalWordConverter.cs" />
     <Compile Include="Localisation\Ordinalizers\RomanianOrdinalizer.cs" />
     <Compile Include="Localisation\NumberToWords\SerbianCyrlNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\SerbianNumberToWordsConverter.cs" />
