@@ -13,20 +13,18 @@
     <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
     <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
     <language>en</language>
-    <dependencies>
-      <group targetFramework="dotnet">
-        <dependency id="System.Collections" version="4.0.0" />
-        <dependency id="System.Diagnostics.Debug" version="4.0.0" />
-        <dependency id="System.Globalization" version="4.0.0" />
-        <dependency id="System.Linq" version="4.0.0" />
-        <dependency id="System.Reflection" version="4.0.0" />
-        <dependency id="System.Reflection.Extensions" version="4.0.0" />
-        <dependency id="System.Resources.ResourceManager" version="4.0.0" />
-        <dependency id="System.Runtime" version="4.0.0" />
-        <dependency id="System.Runtime.Extensions" version="4.0.0" />
-        <dependency id="System.Text.RegularExpressions" version="4.0.0" />
-      </group>
-    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Collections" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Diagnostics.Debug" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Globalization" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Linq" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Reflection" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Reflection.Extensions" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Resources.ResourceManager" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Runtime" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Runtime.Extensions" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System.Text.RegularExpressions" targetFramework="net40" />
+    </frameworkAssemblies>
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\portable-win+net45+wp8+wpa81" />
