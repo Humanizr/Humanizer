@@ -72,6 +72,13 @@ Here are the options:
   
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
+###<a id="known-issues">Known installation issues and workaround</a>
+Humanizer 2.0 adds support for the dotnet CLI and `project.json`-based build systems. NuGet has a known issue where it will recommend upgrades of installed packages to versions of the package that are incompatible with your target framework. The upgrades will fail, but the upgrade notifications cause undesirable noise in the NuGet user interface. This is normal and happens if, for example, a package drops support for .NET 4.5 in favor of .NET 4.6. In that scenario you would actually want to keep the older package version since you want to keep targeting 4.5. It's a general problem that NuGet should be aware of, but at this point you just have to work around it.
+
+The result is that Humanizer's `System.*` dependencies will appear out of date when targeting .NET 4.x when in fact they are not out of date and the upgrades should be ignored. **The workaround** to alleviate this noise is to use `project.json`. ([It's easy to switch.](https://oren.codes/2016/02/08/project-json-all-the-things/)) If you use `project.json`, the `System.*` packages are not listed at all and do not show updates, using the package.json transitive dependency feature. `project.json` is available for Visual Studio 2015 Update 1 for any project type. The experience is much more refined than the old `packages.config` experience. 
+
+With either `packages.config` or `project.json`, NuGet must be configured to install the *lowest* dependency available (which is default) rather than the highest.
+
 ##<a id="features">Features</a>
 
 ###<a id="humanize-string">Humanize String</a>
