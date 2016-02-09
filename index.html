@@ -43,6 +43,7 @@
 
 <ul>
 <li><a href="#specify-lang">Specifying Languages (Optional)</a></li>
+<li><a href="#known-issues">Known Installation Issues</a></li>
 </ul>
 </li>
 <li>
@@ -83,7 +84,8 @@
 <li><a href="#bytesize">ByteSize</a></li>
 </ul>
 </li>
-<li><a href="#mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a></li>
+<li>
+<a href="#mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a> - </li>
 <li><a href="#how-to-contribute">How to contribute?</a></li>
 <li><a href="#continuous-integration">Continuous Integration from AppVeyor</a></li>
 <li>
@@ -135,7 +137,7 @@ exactly like it does in 1.x. If you're not sure, then just use the main <code>Hu
 <li>
 <strong>English</strong>: use the <code>Humanizer.Core</code> package. Only the English language resources will be available</li>
 <li>
-<strong>Specific langauges</strong>: Use the language specific packages you'd like. For example for French, use <code>Humanizer.Core.fr</code>. You can include
+<strong>Specific languages</strong>: Use the language specific packages you'd like. For example for French, use <code>Humanizer.Core.fr</code>. You can include
 multiple languages by installing however many language packages you want. </li>
 </ul>
 
@@ -1042,6 +1044,16 @@ Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <c
 <p>No need to mention that if you want title casing for your labels you can chain the method with <code>Transform</code>:</p>
 
 <div class="highlight highlight-source-cs"><pre>modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.TitleCase);</pre></div>
+
+<h2>
+<a id="known-installation-issues-and-workarounds" class="anchor" href="#known-installation-issues-and-workarounds" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="known-issues">Known installation issues and workarounds</a>
+</h2>
+
+<p>Humanizer 2.0 adds support for the dotnet CLI and <code>project.json</code>-based build systems. NuGet's current client design does not filter the package upgrade list of installed packages based on compatibility with the target project. The upgrades will fail, but the upgrade notifications cause undesirable noise in the NuGet user interface. This is normal and happens if, for example, a package drops support for .NET 4.5 in favor of .NET 4.6. In that scenario you would actually want to keep the older package version since you want to keep targeting 4.5. It's a general problem that NuGet should be aware of, but at this point you just have to ignore the upgrade messages for those packages. There's an issue tracking it <a href="https://github.com/NuGet/Home/issues/2084">here</a>.</p>
+
+<p>The result is that Humanizer's <code>System.*</code> dependencies will appear out of date when targeting .NET 4.x when in fact they are not out of date and the upgrades should be ignored. <strong>The workaround</strong> to alleviate this noise is to use <code>project.json</code>. (<a href="https://oren.codes/2016/02/08/project-json-all-the-things/">It's easy to switch.</a>) If you use <code>project.json</code>, the <code>System.*</code> packages are not listed at all and do not show updates, using the package.json transitive dependency feature. <code>project.json</code> is available for Visual Studio 2015 Update 1 for any project type. The experience is much more refined than the old <code>packages.config</code> experience. </p>
+
+<p>With either <code>packages.config</code> or <code>project.json</code>, NuGet must be configured to install the <em>lowest</em> dependency available (which is default) rather than the highest.</p>
 
 <h2>
 <a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="how-to-contribute">How to contribute?</a>
