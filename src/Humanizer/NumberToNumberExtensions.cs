@@ -188,7 +188,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// 1.Billions() == 1000000000
+        /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Billions(this int input)
@@ -197,7 +197,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// 1.Billions() == 1000000000
+        /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Billions(this uint input)
@@ -206,7 +206,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// 1.Billions() == 1000000000
+        /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Billions(this long input)
@@ -215,7 +215,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// 1.Billions() == 1000000000
+        /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Billions(this ulong input)
@@ -224,7 +224,7 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// 1.Billions() == 1000000000
+        /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Billions(this double input)
