@@ -104,6 +104,10 @@ namespace Humanizer.Inflections
             _default.AddUncountable("tbsp");
             _default.AddUncountable("ml");
             _default.AddUncountable("l");
+            _default.AddUncountable("water");
+            _default.AddUncountable("waters");
+            _default.AddUncountable("semen");
+            _default.AddUncountable("sperm");
 
             return _default;
         }
