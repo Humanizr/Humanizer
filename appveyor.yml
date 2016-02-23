@@ -3,6 +3,7 @@ branches:
   only:
   - master
   - dev
+  - /hotfix\/.*/
 
 init:
   - cmd: set

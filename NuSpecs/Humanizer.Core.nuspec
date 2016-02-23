@@ -10,7 +10,7 @@
     <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer core package that contains the library and the neutral language (English) resources</description>
-    <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
+    <copyright>Copyright 2012-2016</copyright>
     <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
     <language>en</language>
     <dependencies>
@@ -26,6 +26,9 @@
         <dependency id="System.Runtime.Extensions" version="4.0.0" />
         <dependency id="System.Text.RegularExpressions" version="4.0.0" />
       </group>
+      <group targetFramework="xamarin.ios" />
+      <group targetFramework="monotouch" />
+      <group targetFramework="monoandroid" />
     </dependencies>
   </metadata>
   <files>
