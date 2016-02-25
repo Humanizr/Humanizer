@@ -1,3 +1,8 @@
+### v2.0.1 - 2016-02-07
+  - [#520](https://github.com/Humanizr/Humanizer/issues/520) Humanizer.Core package does not install on Xamarin
+  
+[Commits](https://github.com/Humanizr/Humanizer/compare/v2.0...v2.0.1)
+
 ### v2.0.0 - 2016-01-30
   - [#507](https://github.com/Humanizr/Humanizer/issues/507) Remove obsolete members
   - [#517](https://github.com/Humanizr/Humanizer/pull/517) Allow formatted byte size when humanizing `ByteRate`
