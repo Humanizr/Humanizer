@@ -4,7 +4,7 @@ using Humanizer.Localisation;
 
 namespace Humanizer
 {
-    public struct TimeSpanData
+    public struct TimeSpanAnalysisParameters
     {
         /// <summary>
         /// The duration to be interpreted.
@@ -69,7 +69,7 @@ namespace Humanizer
         /// <param name="isBeforeReference">Denotes whether the <paramref name="timeSpan"/> given happens before or after the <paramref name="timeReference"/> provided.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection 
         /// formatter for the current culture is used.</param>
-        public TimeSpanData(TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maximumTimeUnit = TimeUnit.Year, TimeUnit minimumTimeUnit = TimeUnit.Millisecond, DateTime timeReference = default(DateTime), bool isBeforeReference = false, bool countEmptyUnits = false,  string collectionSeparator = ", ")
+        public TimeSpanAnalysisParameters(TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maximumTimeUnit = TimeUnit.Year, TimeUnit minimumTimeUnit = TimeUnit.Millisecond, DateTime timeReference = default(DateTime), bool isBeforeReference = false, bool countEmptyUnits = false,  string collectionSeparator = ", ")
         {
             TimeSpan = timeSpan;
             Precision = precision;

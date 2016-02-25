@@ -7,6 +7,7 @@ using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
 using Humanizer.Localisation.Ordinalizers;
 using Humanizer.Localisation.CollectionFormatters;
+using Humanizer.TimeSpanHumanizeStrategy;
 
 namespace Humanizer.Configuration
 {
@@ -107,6 +108,16 @@ namespace Humanizer.Configuration
         {
             get { return _dateTimeOffsetHumanizeStrategy; }
             set { _dateTimeOffsetHumanizeStrategy = value; }
+        }
+
+        private static ITimeSpanHumanizeStrategy _timeSpanHumanizeStrategy = new DefaultTimeSpanHumanizeStrategy();
+        /// <summary>
+        /// The strategy to be used for TimeSpan.Humanize
+        /// </summary>
+        public static ITimeSpanHumanizeStrategy TimeSpanHumanizeStrategy
+        {
+            get { return _timeSpanHumanizeStrategy; }
+            set { _timeSpanHumanizeStrategy = value; }
         }
 
         private static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
