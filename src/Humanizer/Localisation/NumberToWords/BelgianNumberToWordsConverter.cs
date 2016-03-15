@@ -10,6 +10,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly Dictionary<int, string> NumberExceptions = new Dictionary<int, string>
         {
+            {80, "quatre-vingts"},
             {81, "quatre-vingt-un"}
         };
 

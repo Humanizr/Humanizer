@@ -16,6 +16,7 @@ namespace Humanizer.Tests.Localisation.frBE
         [InlineData(25, "vingt-cinq")]
         [InlineData(31, "trente et un")]
         [InlineData(71, "septante et un")]
+        [InlineData(80, "quatre-vingts")]
         [InlineData(81, "quatre-vingt-un")]
         [InlineData(122, "cent vingt-deux")]
         [InlineData(3501, "trois mille cinq cent un")]
