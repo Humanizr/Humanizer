@@ -53,7 +53,13 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((number / 100) > 0)
             {
-                parts.Add(number < 200 ? "cent" : string.Format("{0} cent", Convert(number / 100)));
+                if (number < 200)
+                    parts.Add("cent");
+                else if (number % 100 == 0)
+                    parts.Add(string.Format("{0} cents", Convert(number / 100)));
+                else
+                    parts.Add(string.Format("{0} cent", Convert(number / 100)));
+
                 number %= 100;
             }
 
