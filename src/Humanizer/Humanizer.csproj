@@ -48,9 +48,9 @@
   <ItemGroup>
     <!-- example NuSpec file that must be specified -->
     <NuSpecFile Include="$(SolutionDir)..\NuSpecs\Humanizer.Core.nuspec">
-        <Visible>False</Visible>
-    </NuSpecFile> 
-</ItemGroup>
+      <Visible>False</Visible>
+    </NuSpecFile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
@@ -80,6 +80,7 @@
     <Compile Include="GrammaticalGender.cs" />
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
+    <Compile Include="Localisation\NumberToWords\BelgianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\NorwegianBokmalNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FinnishNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\GenderedNumberToWordsConverter.cs" />
