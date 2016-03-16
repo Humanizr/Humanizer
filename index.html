@@ -44,6 +44,7 @@
 <ul>
 <li><a href="#specify-lang">Specifying Languages (Optional)</a></li>
 <li><a href="#known-issues">Known Installation Issues</a></li>
+<li><a href="#aspnet4mvc">Use in ASP.NET 4.x MVC Views</a></li>
 </ul>
 </li>
 <li>
@@ -1054,6 +1055,14 @@ Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <c
 <p>The result is that Humanizer's <code>System.*</code> dependencies will appear out of date when targeting .NET 4.x when in fact they are not out of date and the upgrades should be ignored. <strong>The workaround</strong> to alleviate this noise is to use <code>project.json</code>. (<a href="https://oren.codes/2016/02/08/project-json-all-the-things/">It's easy to switch.</a>) If you use <code>project.json</code>, the <code>System.*</code> packages are not listed at all and do not show updates, using the package.json transitive dependency feature. <code>project.json</code> is available for Visual Studio 2015 Update 1 for any project type. The experience is much more refined than the old <code>packages.config</code> experience. </p>
 
 <p>With either <code>packages.config</code> or <code>project.json</code>, NuGet must be configured to install the <em>lowest</em> dependency available (which is default) rather than the highest.</p>
+
+<h2>
+<a id="use-in-aspnet-4x-mvc-views" class="anchor" href="#use-in-aspnet-4x-mvc-views" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="aspnet4mvc">Use in ASP.NET 4.x MVC Views</a>
+</h2>
+
+<p>Humanizer is a Portable Class Library. There is currently <a href="http://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do">an issue</a> if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the <code>web.config</code> file, including ones the project system normally automatically adds. </p>
+
+<p>If you encounter errors saying that you must add a reference to either <code>System.Runtime</code> or <code>System.Globalization</code>, this applies to you. The solution is to add the contract references to your <code>web.config</code> as listed <a href="http://stackoverflow.com/a/19942274/738188">here</a>. Note that this applies to any PCL you use in an MVC view, not just Humanizer.</p>
 
 <h2>
 <a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="how-to-contribute">How to contribute?</a>
