@@ -30,7 +30,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Humanizer.Tests.Shared", "H
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{04B74BEC-A645-4D1A-BE21-F4EB4413A903}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Humanizer.Tests.NetCore", "Humanizer.Tests.NetCore\Humanizer.Tests.NetCore.xproj", "{50D97972-236C-46A0-B912-1310CE636569}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Humanizer.Tests.DotNet", "Humanizer.Tests.DotNet\Humanizer.Tests.DotNet.xproj", "{50D97972-236C-46A0-B912-1310CE636569}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Humanizer.DotNet", "Humanizer\Humanizer.DotNet.xproj", "{1BC6AAA7-0C86-4454-AC4B-621B1A017D96}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -54,6 +56,10 @@ Global
 		{50D97972-236C-46A0-B912-1310CE636569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50D97972-236C-46A0-B912-1310CE636569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50D97972-236C-46A0-B912-1310CE636569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC6AAA7-0C86-4454-AC4B-621B1A017D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC6AAA7-0C86-4454-AC4B-621B1A017D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC6AAA7-0C86-4454-AC4B-621B1A017D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC6AAA7-0C86-4454-AC4B-621B1A017D96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

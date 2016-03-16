@@ -10,14 +10,14 @@ namespace Humanizer.Tests
         {
             Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
         }
-#endif
+
 
         [Fact]
         public void HonorsDescriptionAttributeSubclasses()
         {
             Assert.Equal("Overridden " + EnumTestsResources.MemberWithDescriptionAttributeSubclass, EnumUnderTest.MemberWithDescriptionAttributeSubclass.Humanize());
         }
-
+#endif
         [Fact]
         public void HonorsAnyAttributeWithDescriptionStringProperty()
         {

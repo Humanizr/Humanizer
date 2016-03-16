@@ -48,9 +48,9 @@
   <ItemGroup>
     <!-- example NuSpec file that must be specified -->
     <NuSpecFile Include="$(SolutionDir)..\NuSpecs\Humanizer.Core.nuspec">
-        <Visible>False</Visible>
-    </NuSpecFile> 
-</ItemGroup>
+      <Visible>False</Visible>
+    </NuSpecFile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Bytes\ByteRate.cs" />
     <Compile Include="CollectionHumanizeExtensions.cs" />
@@ -203,8 +203,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
+    <None Include="Humanizer.project.json" />
     <None Include="Humanizer.snk" />
-    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.hr.resx" />
