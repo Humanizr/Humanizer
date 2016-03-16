@@ -37,41 +37,41 @@ namespace Humanizer.Localisation.NumberToWords
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if ((number/1000000000) > 0)
             {
                 parts.Add(string.Format("{0} milliard{1}",
-                    Convert(number / 1000000000),
-                    number / 1000000000 == 1 ? "" : "s"));
+                    Convert(number/1000000000),
+                    number/1000000000 == 1 ? "" : "s"));
 
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if ((number/1000000) > 0)
             {
                 parts.Add(string.Format("{0} million{1}",
-                   Convert(number / 1000000),
-                   number / 1000000 == 1 ? "" : "s"));
+                   Convert(number/1000000),
+                   number/1000000 == 1 ? "" : "s"));
 
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if ((number/1000) > 0)
             {
-                parts.Add(number / 1000 == 1
+                parts.Add(number/1000 == 1
                     ? string.Format("mille")
-                    : string.Format("{0} mille", Convert(number / 1000)));
+                    : string.Format("{0} mille", Convert(number/1000)));
 
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if ((number/100) > 0)
             {
                 if (number < 200)
                     parts.Add("cent");
-                else if (number % 100 == 0)
-                    parts.Add(string.Format("{0} cents", Convert(number / 100)));
+                else if (number%100 == 0)
+                    parts.Add(string.Format("{0} cents", Convert(number/100)));
                 else
-                    parts.Add(string.Format("{0} cent", Convert(number / 100)));
+                    parts.Add(string.Format("{0} cent", Convert(number/100)));
 
                 number %= 100;
             }
@@ -88,17 +88,17 @@ namespace Humanizer.Localisation.NumberToWords
                     if (number >= 70 && (number < 80 || number >= 90) && !_cultureExceptions.Any(item => item == _culture.Name))
                     {
                         var baseNumber = number < 80 ? 60 : 80;
-                        lastPart = string.Format("{0}-{1}", TensMap[baseNumber / 10], Convert(number - baseNumber));
+                        lastPart = string.Format("{0}-{1}", TensMap[baseNumber/10], Convert(number - baseNumber));
                     }
                     else
                     {
-                        lastPart = TensMap[number / 10];
-                        if ((number % 10) > 0)
+                        lastPart = TensMap[number/10];
+                        if ((number%10) > 0)
                         {
-                            if ((number - 1) % 10 == 0)
+                            if ((number - 1)%10 == 0)
                                 lastPart += " et un";
                             else
-                                lastPart += string.Format("-{0}", UnitsMap[number % 10]);
+                                lastPart += string.Format("-{0}", UnitsMap[number%10]);
                         }
                     }
                     parts.Add(lastPart);
