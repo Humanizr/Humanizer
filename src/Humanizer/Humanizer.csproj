@@ -203,8 +203,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
+    <None Include="Humanizer.project.json" />
     <None Include="Humanizer.snk" />
-    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.hr.resx" />

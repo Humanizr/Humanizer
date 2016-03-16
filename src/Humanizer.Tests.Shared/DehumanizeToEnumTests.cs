@@ -32,7 +32,6 @@ namespace Humanizer.Tests
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<EnumUnderTest>());
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(EnumUnderTest)));
         }
-#endif
 
         [Fact]
         public void HonorsDescriptionAttributeSubclasses()
@@ -41,6 +40,7 @@ namespace Humanizer.Tests
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttributeSubclass, calculatedDescription.DehumanizeTo<EnumUnderTest>());
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttributeSubclass, calculatedDescription.DehumanizeTo(typeof(EnumUnderTest)));
         }
+#endif
 
         [Fact]
         public void HonorsAnyAttributeWithDescriptionStringProperty()
