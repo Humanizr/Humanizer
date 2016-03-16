@@ -8,6 +8,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
  - [Install](#install)
    - [Specifying Languages (Optional)](#specify-lang)
    - [Known Installation Issues](#known-issues)
+   - [Use in ASP.NET 4.x MVC Views](#aspnet4mvc)
  - [Features](#features)
    - [Humanize String](#humanize-string)
    - [Dehumanize String](#dehumanize-string)
@@ -1050,6 +1051,11 @@ Humanizer 2.0 adds support for the dotnet CLI and `project.json`-based build sys
 The result is that Humanizer's `System.*` dependencies will appear out of date when targeting .NET 4.x when in fact they are not out of date and the upgrades should be ignored. **The workaround** to alleviate this noise is to use `project.json`. ([It's easy to switch.](https://oren.codes/2016/02/08/project-json-all-the-things/)) If you use `project.json`, the `System.*` packages are not listed at all and do not show updates, using the package.json transitive dependency feature. `project.json` is available for Visual Studio 2015 Update 1 for any project type. The experience is much more refined than the old `packages.config` experience. 
 
 With either `packages.config` or `project.json`, NuGet must be configured to install the *lowest* dependency available (which is default) rather than the highest.
+
+## <a id="aspnet4mvc">Use in ASP.NET 4.x MVC Views</a>
+Humanizer is a Portable Class Library. There is currently [an issue](http://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do) if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the `web.config` file, including ones the project system normally automatically adds. 
+
+If you encounter errors saying that you must add a reference to either `System.Runtime` or `System.Globalization`, this applies to you. The solution is to add the contract references to your `web.config` as listed [here](http://stackoverflow.com/a/19942274/738188). Note that this applies to any PCL you use in an MVC view, not just Humanizer.
 
 ## <a id="how-to-contribute">How to contribute?</a>
 
