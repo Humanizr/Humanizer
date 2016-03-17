@@ -58,6 +58,7 @@ namespace Humanizer.Tests.Localisation.fr
 
         [Theory]
         [InlineData(1, "hier")]
+        [InlineData(2, "avant-hier")]
         [InlineData(10, "il y a 10 jours")]
         public void DaysAgo(int days, string expected)
         {
