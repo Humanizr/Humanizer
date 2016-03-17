@@ -67,6 +67,7 @@ namespace Humanizer.Tests.Localisation.fr
 
         [Theory]
         [InlineData(1, "demain")]
+        [InlineData(2, "après-demain")]
         [InlineData(10, "dans 10 jours")]
         public void DaysFromNow(int days, string expected)
         {
