@@ -88,7 +88,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("alumna", "alumnae");
             _default.AddIrregular("criterion", "criteria");
             _default.AddIrregular("wave", "waves");
-
+            
             _default.AddUncountable("equipment");
             _default.AddUncountable("information");
             _default.AddUncountable("rice");
@@ -108,6 +108,21 @@ namespace Humanizer.Inflections
             _default.AddUncountable("waters");
             _default.AddUncountable("semen");
             _default.AddUncountable("sperm");
+            _default.AddUncountable("bison");
+            _default.AddUncountable("grass");
+            _default.AddUncountable("hair");
+            _default.AddUncountable("mud");
+            _default.AddUncountable("elk");
+            _default.AddUncountable("luggage");
+            _default.AddUncountable("moose");
+            _default.AddUncountable("offspring");
+            _default.AddUncountable("salmon");
+            _default.AddUncountable("shrimp");
+            _default.AddUncountable("someone");
+            _default.AddUncountable("swine");
+            _default.AddUncountable("trout");
+            _default.AddUncountable("tuna");
+            _default.AddUncountable("corps");
 
             return _default;
         }
