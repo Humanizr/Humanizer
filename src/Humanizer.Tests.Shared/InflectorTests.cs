@@ -254,7 +254,81 @@ namespace Humanizer.Tests
 
             yield return new object[] {"campus", "campuses"};
 
-            yield return new object[] { "is", "are" };
+            yield return new object[] {"is", "are"};
+
+
+            yield return new object[] {"addendum","addenda"};
+            yield return new object[] {"alga","algae"};
+            yield return new object[] {"apparatus","apparatuses"};
+            yield return new object[] {"appendix","appendices"};
+            yield return new object[] {"bias","biases"};
+            yield return new object[] {"bison","bison"};
+            yield return new object[] {"blitz","blitzes"};
+            yield return new object[] {"buzz","buzzes"};
+            yield return new object[] {"cactus","cacti"};
+            yield return new object[] {"codex","codices"};
+            yield return new object[] {"corps","corps"};
+            yield return new object[] {"corpus","corpora"};
+            yield return new object[] {"curriculum","curricula"};
+            yield return new object[] {"database","databases"};
+            yield return new object[] {"die","dice"};
+            yield return new object[] {"echo","echoes"};
+            yield return new object[] {"ellipsis","ellipses"};
+            yield return new object[] {"elk","elk"};
+            yield return new object[] {"emphasis","emphases"};
+            yield return new object[] {"embargo","embargoes"};
+            yield return new object[] {"focus","foci"};
+            yield return new object[] {"foot","feet"};
+            yield return new object[] {"genus","genera"};
+            yield return new object[] {"grass","grass"};
+            yield return new object[] {"hair","hair"};
+            yield return new object[] {"hero","heroes"};
+            yield return new object[] {"hippopotamus","hippopotami"};
+            yield return new object[] {"hoof","hooves"};
+            yield return new object[] {"iris","irises"};
+            yield return new object[] {"larva","larvae"};
+            yield return new object[] {"leaf","leaves"};
+            yield return new object[] {"loaf","loaves"};
+            yield return new object[] {"luggage","luggage"};
+            yield return new object[] {"means","means"};
+            yield return new object[] {"millennium","milennia"};
+            yield return new object[] {"minutia","minutiae"};
+            yield return new object[] {"moose","moose"};
+            yield return new object[] {"mosquito","mosquitoes"};
+            yield return new object[] {"mud","mud"};
+            yield return new object[] {"nucleus","nuclei"};
+            yield return new object[] {"neurosis","neuroses"};
+            yield return new object[] {"oasis","oases"};
+            yield return new object[] {"offspring","offspring"};
+            yield return new object[] {"paralysis","paralyses"};
+            yield return new object[] {"phenomenon","phenomena"};
+            yield return new object[] {"potato","potatoes"};
+            yield return new object[] {"radius","radii"};
+            yield return new object[] {"salmon","salmon"};
+            yield return new object[] {"scissors","scissors"};
+            yield return new object[] {"shoe","shoees"};
+            yield return new object[] {"shrimp","shrimp"};
+            yield return new object[] {"someone","someone"};
+            yield return new object[] {"stimulus","stimuli"};
+            yield return new object[] {"swine","swine"};
+            yield return new object[] {"syllabus","syllabi"};
+            yield return new object[] {"terminus","termini"};
+            yield return new object[] {"that","those"};
+            yield return new object[] {"thief","thieves"};
+            yield return new object[] {"this","these"};
+            yield return new object[] {"tooth","teeth"};
+            yield return new object[] {"torpedo","torpedoes"};
+            yield return new object[] {"trellis","trellises"};
+            yield return new object[] {"trout","trout"};
+            yield return new object[] {"tuna","tuna"};
+            yield return new object[] {"vertebra","vertebrae"};
+            yield return new object[] {"veto","vetoes"};
+            yield return new object[] {"virus","viruses"};
+            yield return new object[] {"vita","vitae"};
+            yield return new object[] {"walrus","walruses"};
+            yield return new object[] {"waltz","waltzes"};
+            yield return new object[] {"water","water"};
+            yield return new object[] {"zombie","zombies"};
         }
 
         IEnumerator IEnumerable.GetEnumerator()
