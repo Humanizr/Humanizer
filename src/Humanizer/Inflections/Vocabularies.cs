@@ -35,7 +35,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("$", "s");
             _default.AddPlural("s$", "s");
             _default.AddPlural("(ax|test)is$", "$1es");
-            _default.AddPlural("(octop|vir|alumn|fung)us$", "$1i");
+            _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab)us$", "$1i");
             _default.AddPlural("(alias|status)$", "$1es");
             _default.AddPlural("(bu)s$", "$1ses");
             _default.AddPlural("(buffal|tomat|volcan)o$", "$1oes");
@@ -70,7 +70,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("(o)es$", "$1");
             _default.AddSingular("(shoe)s$", "$1");
             _default.AddSingular("(cris|ax|test)es$", "$1is");
-            _default.AddSingular("(octop|vir|alumn|fung)i$", "$1us");
+            _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab})i$", "$1us");
             _default.AddSingular("(alias|status)es$", "$1");
             _default.AddSingular("^(ox)en", "$1");
             _default.AddSingular("(vert|ind)ices$", "$1ex");

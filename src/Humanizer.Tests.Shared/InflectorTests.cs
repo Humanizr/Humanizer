@@ -312,7 +312,6 @@ namespace Humanizer.Tests
             yield return new object[] {"stimulus","stimuli"};
             yield return new object[] {"swine","swine"};
             yield return new object[] {"syllabus","syllabi"};
-            yield return new object[] {"terminus","termini"};
             yield return new object[] {"that","those"};
             yield return new object[] {"thief","thieves"};
             yield return new object[] {"this","these"};
