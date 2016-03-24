@@ -41,7 +41,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
             _default.AddPlural("([ti])um$", "$1a");
             _default.AddPlural("sis$", "ses");
-            _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves");
+            _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves"); //e.g. 'safe' or 'dwarf'
             _default.AddPlural("(hive)$", "$1s");
             _default.AddPlural("([^aeiouy]|qu)y$", "$1ies");
             _default.AddPlural("(x|ch|ss|sh)$", "$1es");
@@ -52,6 +52,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("(buz|blit|walt)z$", "$1zes");
             _default.AddPlural("(campus)$", "$1es");
             _default.AddPlural("^is$", "are");
+            _default.AddPlural("(hoo|lea|loa|thie)f$", "$1ves");
 
             _default.AddSingular("s$", "");
             _default.AddSingular("(n)ews$", "$1ews");
@@ -61,7 +62,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("([^f])ves$", "$1fe");
             _default.AddSingular("(hive)s$", "$1");
             _default.AddSingular("(tive)s$", "$1");
-            _default.AddSingular("([lr])ves$", "$1f");
+            _default.AddSingular("([lr]|hoo|lea|loa|thie)ves$", "$1f");
             _default.AddSingular("([^aeiouy]|qu)ies$", "$1y");
             _default.AddSingular("(s)eries$", "$1eries");
             _default.AddSingular("(m)ovies$", "$1ovie");
