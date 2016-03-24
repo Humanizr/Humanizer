@@ -33,7 +33,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("(alias|status)$", "$1es");
             _default.AddPlural("(bu)s$", "$1ses");
             _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
-            _default.AddPlural("([ti])um$", "$1a");
+            _default.AddPlural("([dti])um$", "$1a");
             _default.AddPlural("sis$", "ses");
             _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves");
             _default.AddPlural("(hive)$", "$1s");
@@ -50,7 +50,7 @@ namespace Humanizer.Inflections
 
             _default.AddSingular("s$", "");
             _default.AddSingular("(n)ews$", "$1ews");
-            _default.AddSingular("([ti])a$", "$1um");
+            _default.AddSingular("([dti])a$", "$1um");
             _default.AddSingular("((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$", "$1$2sis");
             _default.AddSingular("(^analy)ses$", "$1sis");
             _default.AddSingular("([^f])ves$", "$1fe");
@@ -88,6 +88,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("die", "dice");
             _default.AddIrregular("foot", "feet");
             _default.AddIrregular("tooth", "teeth");
+            _default.AddIrregular("curriculum", "curricula");
 
             _default.AddUncountable("equipment");
             _default.AddUncountable("information");
