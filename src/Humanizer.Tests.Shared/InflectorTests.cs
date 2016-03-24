@@ -255,7 +255,7 @@ namespace Humanizer.Tests
 
             yield return new object[] {"is", "are"};
 
-
+            /* Tests added by Chad Sowald */
             yield return new object[] {"addendum","addenda"};
             yield return new object[] {"alga","algae"};
             yield return new object[] {"apparatus","apparatuses"};

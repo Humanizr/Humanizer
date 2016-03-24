@@ -516,13 +516,17 @@ The overload of `Singularize` with `plurality` argument is obsolete and was remo
 Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabluary` used by `Inflector`):
 
 ```C#
-// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx:
+// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx.
+// Will match both "salesperson" and "person".
 Vocabularies.Default.AddIrregular("person", "people");
+
+// To only match "person" and not "salesperson" you would pass false for the 'matchEnding' parameter.
+Vocabularies.Default.AddIrregular("person", "people", matchEnding: false);
 
 // Adds an uncountable word to the vocabulary.  Will be ignored when plurality is changed:
 Vocabularies.Default.AddUncountable("fish");
 
-// Adds a rule to the vocabulary that does not follow trivial rules for pluralization, e.g. "bus" -> "buses"
+// Adds a rule to the vocabulary that does not follow trivial rules for pluralization:
 Vocabularies.Default.AddPlural("bus", "buses");
 
 // Adds a rule to the vocabulary that does not follow trivial rules for singularization
