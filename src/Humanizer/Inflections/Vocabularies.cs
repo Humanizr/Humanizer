@@ -45,6 +45,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("(buz|blit|walt)z$", "$1zes");
             _default.AddPlural("(hoo|lea|loa|thie)f$", "$1ves");
             _default.AddPlural("(alumn|alg|larv|minuti|vertebr|vit)a$", "$1ae");
+            _default.AddPlural("(criteri|phenomen)on$", "$1a");
 
             _default.AddSingular("s$", "");
             _default.AddSingular("(n)ews$", "$1ews");
@@ -71,6 +72,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("(quiz)zes$", "$1");
             _default.AddSingular("(buz|blit|walt)zes$", "$1z");
             _default.AddSingular("(alumn|alg|larv|minuti|vertebr|vit)ae$", "$1a");
+            _default.AddSingular("(criteri|phenomen)a$", "$1on");
 
             _default.AddIrregular("person", "people");
             _default.AddIrregular("man", "men");
@@ -78,7 +80,6 @@ namespace Humanizer.Inflections
             _default.AddIrregular("sex", "sexes");
             _default.AddIrregular("move", "moves");
             _default.AddIrregular("goose", "geese");
-            _default.AddIrregular("criterion", "criteria");
             _default.AddIrregular("wave", "waves");
             _default.AddIrregular("die", "dice");
             _default.AddIrregular("foot", "feet");
