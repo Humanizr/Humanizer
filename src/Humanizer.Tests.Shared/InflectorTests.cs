@@ -268,7 +268,6 @@ namespace Humanizer.Tests
             yield return new object[] {"cactus","cacti"};
             yield return new object[] {"codex","codices"};
             yield return new object[] {"corps","corps"};
-            yield return new object[] {"corpus","corpora"};
             yield return new object[] {"curriculum","curricula"};
             yield return new object[] {"database","databases"};
             yield return new object[] {"die","dice"};
@@ -291,7 +290,7 @@ namespace Humanizer.Tests
             yield return new object[] {"loaf","loaves"};
             yield return new object[] {"luggage","luggage"};
             yield return new object[] {"means","means"};
-            yield return new object[] {"millennium","milennia"};
+            yield return new object[] {"millennium","millennia"};
             yield return new object[] {"minutia","minutiae"};
             yield return new object[] {"moose","moose"};
             yield return new object[] {"mosquito","mosquitoes"};
