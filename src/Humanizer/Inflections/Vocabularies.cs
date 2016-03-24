@@ -50,7 +50,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("s$", "");
             _default.AddSingular("(n)ews$", "$1ews");
             _default.AddSingular("([dti])a$", "$1um");
-            _default.AddSingular("((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$", "$1$2sis");
+            _default.AddSingular("(analy|ba|diagno|parenthe|progno|synop|the|ellip|empha|neuro|oa|paraly)ses$", "$1sis");
             _default.AddSingular("(^analy)ses$", "$1sis");
             _default.AddSingular("([^f])ves$", "$1fe");
             _default.AddSingular("(hive)s$", "$1");
