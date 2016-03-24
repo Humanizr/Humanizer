@@ -303,7 +303,6 @@ namespace Humanizer.Tests
             yield return new object[] {"radius","radii"};
             yield return new object[] {"salmon","salmon"};
             yield return new object[] {"scissors","scissors"};
-            yield return new object[] {"shoe","shoees"};
             yield return new object[] {"shrimp","shrimp"};
             yield return new object[] {"someone","someone"};
             yield return new object[] {"stimulus","stimuli"};
