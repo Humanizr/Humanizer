@@ -49,6 +49,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("([m|l])ouse$", "$1ice");
             _default.AddPlural("^(ox)$", "$1en");
             _default.AddPlural("(quiz)$", "$1zes");
+            _default.AddPlural("(buz|blit|walt)z$", "$1zes");
             _default.AddPlural("(campus)$", "$1es");
             _default.AddPlural("^is$", "are");
 
@@ -76,6 +77,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("(vert|ind)ices$", "$1ex");
             _default.AddSingular("(matr)ices$", "$1ix");
             _default.AddSingular("(quiz)zes$", "$1");
+            _default.AddSingular("(buz|blit|walt)zes$", "$1z");
             _default.AddSingular("(campus)es$", "$1");
             _default.AddSingular("^are$", "is");
 
