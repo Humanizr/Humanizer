@@ -29,9 +29,8 @@ namespace Humanizer.Inflections
             _default.AddPlural("$", "s");
             _default.AddPlural("s$", "s");
             _default.AddPlural("(ax|test)is$", "$1es");
-            _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab)us$", "$1i");
+            _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)us$", "$1i");
             _default.AddPlural("(alias|status|campus|apparatus|virus|walrus)$", "$1es");
-            _default.AddPlural("(bu)s$", "$1ses");
             _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
             _default.AddPlural("([dti])um$", "$1a");
             _default.AddPlural("sis$", "ses");
@@ -60,11 +59,10 @@ namespace Humanizer.Inflections
             _default.AddSingular("(m)ovies$", "$1ovie");
             _default.AddSingular("(x|ch|ss|sh)es$", "$1");
             _default.AddSingular("([m|l])ice$", "$1ouse");
-            _default.AddSingular("(bus)es$", "$1");
             _default.AddSingular("(o)es$", "$1");
             _default.AddSingular("(shoe)s$", "$1");
             _default.AddSingular("(cris|ax|test)es$", "$1is");
-            _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab})i$", "$1us");
+            _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)i$", "$1us");
             _default.AddSingular("(alias|status|campus|apparatus|virus|walrus)es$", "$1");
             _default.AddSingular("^(ox)en", "$1");
             _default.AddSingular("(vert|ind)ices$", "$1ex");
@@ -89,6 +87,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("is", "are", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);
             _default.AddIrregular("this", "these", matchEnding: false);
+            _default.AddIrregular("bus", "buses", matchEnding: false);
 
             _default.AddUncountable("equipment");
             _default.AddUncountable("information");

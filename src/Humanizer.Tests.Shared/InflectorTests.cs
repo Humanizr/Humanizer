@@ -216,7 +216,6 @@ namespace Humanizer.Tests
             yield return new object[] {"louse", "lice"};
             yield return new object[] {"house", "houses"};
             yield return new object[] {"octopus", "octopi"};
-            yield return new object[] {"virus", "viri"};
             yield return new object[] {"alias", "aliases"};
             yield return new object[] {"portfolio", "portfolios"};
             yield return new object[] {"criterion", "criteria"};
