@@ -8,11 +8,11 @@ namespace Humanizer.Inflections
     /// </summary>
     public static class Vocabularies
     {
-        private static Lazy<Vocabulary> _instance;
+        private static readonly Lazy<Vocabulary> Instance;
 
         static Vocabularies()
         {
-            _instance = new Lazy<Vocabulary>(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
+            Instance = new Lazy<Vocabulary>(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
         }
 
         /// <summary>
@@ -20,13 +20,7 @@ namespace Humanizer.Inflections
         /// Rules can be added to this vocabulary and will be picked up by called to Singularize() and Pluralize().
         /// At this time, multiple vocabularies and removing existing rules are not supported.
         /// </summary>
-        public static Vocabulary Default
-        {
-            get
-            {
-                return _instance.Value;
-            }
-        }
+        public static Vocabulary Default => Instance.Value;
 
         private static Vocabulary BuildDefault()
         {
