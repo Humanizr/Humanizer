@@ -265,7 +265,6 @@ namespace Humanizer.Tests
             yield return new object[] {"blitz","blitzes"};
             yield return new object[] {"buzz","buzzes"};
             yield return new object[] {"cactus","cacti"};
-            yield return new object[] {"codex","codices"};
             yield return new object[] {"corps","corps"};
             yield return new object[] {"curriculum","curricula"};
             yield return new object[] {"database","databases"};
@@ -277,6 +276,7 @@ namespace Humanizer.Tests
             yield return new object[] {"embargo","embargoes"};
             yield return new object[] {"focus","foci"};
             yield return new object[] {"foot","feet"};
+            yield return new object[] {"fuse", "fuses" };
             yield return new object[] {"grass","grass"};
             yield return new object[] {"hair","hair"};
             yield return new object[] {"hero","heroes"};
@@ -289,7 +289,6 @@ namespace Humanizer.Tests
             yield return new object[] {"luggage","luggage"};
             yield return new object[] {"means","means"};
             yield return new object[] {"millennium","millennia"};
-            yield return new object[] {"minutia","minutiae"};
             yield return new object[] {"moose","moose"};
             yield return new object[] {"mosquito","mosquitoes"};
             yield return new object[] {"mud","mud"};
@@ -319,7 +318,6 @@ namespace Humanizer.Tests
             yield return new object[] {"vertebra","vertebrae"};
             yield return new object[] {"veto","vetoes"};
             yield return new object[] {"virus","viruses"};
-            yield return new object[] {"vita","vitae"};
             yield return new object[] {"walrus","walruses"};
             yield return new object[] {"waltz","waltzes"};
             yield return new object[] {"water","water"};

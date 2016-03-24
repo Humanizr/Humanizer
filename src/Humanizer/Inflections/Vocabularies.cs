@@ -44,19 +44,18 @@ namespace Humanizer.Inflections
             _default.AddPlural("(quiz)$", "$1zes");
             _default.AddPlural("(buz|blit|walt)z$", "$1zes");
             _default.AddPlural("(hoo|lea|loa|thie)f$", "$1ves");
-            _default.AddPlural("(alumn|alg|larv|minuti|vertebr|vit)a$", "$1ae");
+            _default.AddPlural("(alumn|alg|larv|vertebr)a$", "$1ae");
             _default.AddPlural("(criteri|phenomen)on$", "$1a");
 
             _default.AddSingular("s$", "");
             _default.AddSingular("(n)ews$", "$1ews");
             _default.AddSingular("([dti])a$", "$1um");
             _default.AddSingular("(analy|ba|diagno|parenthe|progno|synop|the|ellip|empha|neuro|oa|paraly)ses$", "$1sis");
-            _default.AddSingular("(^analy)ses$", "$1sis");
             _default.AddSingular("([^f])ves$", "$1fe");
             _default.AddSingular("(hive)s$", "$1");
             _default.AddSingular("(tive)s$", "$1");
             _default.AddSingular("([lr]|hoo|lea|loa|thie)ves$", "$1f");
-            _default.AddSingular("([^aeiouy]|qu)ies$", "$1y");
+            _default.AddSingular("(^zomb)?([^aeiouy]|qu)ies$", "$2y");
             _default.AddSingular("(s)eries$", "$1eries");
             _default.AddSingular("(m)ovies$", "$1ovie");
             _default.AddSingular("(x|ch|ss|sh)es$", "$1");
@@ -67,11 +66,11 @@ namespace Humanizer.Inflections
             _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)i$", "$1us");
             _default.AddSingular("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis)es$", "$1");
             _default.AddSingular("^(ox)en", "$1");
-            _default.AddSingular("(vert|ind)ices$", "$1ex");
             _default.AddSingular("(matr|d)ices$", "$1ix");
+            _default.AddSingular("(vert|ind)ices$", "$1ex");
             _default.AddSingular("(quiz)zes$", "$1");
             _default.AddSingular("(buz|blit|walt)zes$", "$1z");
-            _default.AddSingular("(alumn|alg|larv|minuti|vertebr|vit)ae$", "$1a");
+            _default.AddSingular("(alumn|alg|larv|vertebr)ae$", "$1a");
             _default.AddSingular("(criteri|phenomen)a$", "$1on");
 
             _default.AddIrregular("person", "people");
@@ -85,6 +84,8 @@ namespace Humanizer.Inflections
             _default.AddIrregular("foot", "feet");
             _default.AddIrregular("tooth", "teeth");
             _default.AddIrregular("curriculum", "curricula");
+            _default.AddIrregular("database", "databases");
+            _default.AddIrregular("zombie", "zombies");
 
             _default.AddIrregular("is", "are", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);
@@ -125,6 +126,8 @@ namespace Humanizer.Inflections
             _default.AddUncountable("trout");
             _default.AddUncountable("tuna");
             _default.AddUncountable("corps");
+            _default.AddUncountable("scissors");
+            _default.AddUncountable("means");
 
             return _default;
         }
