@@ -45,7 +45,6 @@ namespace Humanizer.Inflections
             _default.AddPlural("(quiz)$", "$1zes");
             _default.AddPlural("(buz|blit|walt)z$", "$1zes");
             _default.AddPlural("(campus)$", "$1es");
-            _default.AddPlural("^is$", "are");
             _default.AddPlural("(hoo|lea|loa|thie)f$", "$1ves");
 
             _default.AddSingular("s$", "");
@@ -74,7 +73,6 @@ namespace Humanizer.Inflections
             _default.AddSingular("(quiz)zes$", "$1");
             _default.AddSingular("(buz|blit|walt)zes$", "$1z");
             _default.AddSingular("(campus)es$", "$1");
-            _default.AddSingular("^are$", "is");
 
             _default.AddIrregular("person", "people");
             _default.AddIrregular("man", "men");
@@ -89,6 +87,10 @@ namespace Humanizer.Inflections
             _default.AddIrregular("foot", "feet");
             _default.AddIrregular("tooth", "teeth");
             _default.AddIrregular("curriculum", "curricula");
+
+            _default.AddIrregular("is", "are", matchEnding: false);
+            _default.AddIrregular("that", "those", matchEnding: false);
+            _default.AddIrregular("this", "these", matchEnding: false);
 
             _default.AddUncountable("equipment");
             _default.AddUncountable("information");
