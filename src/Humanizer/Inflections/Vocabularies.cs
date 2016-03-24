@@ -38,7 +38,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab)us$", "$1i");
             _default.AddPlural("(alias|status)$", "$1es");
             _default.AddPlural("(bu)s$", "$1ses");
-            _default.AddPlural("(buffal|tomat|volcan)o$", "$1oes");
+            _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
             _default.AddPlural("([ti])um$", "$1a");
             _default.AddPlural("sis$", "ses");
             _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves");
