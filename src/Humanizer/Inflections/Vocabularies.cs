@@ -30,7 +30,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("s$", "s");
             _default.AddPlural("(ax|test)is$", "$1es");
             _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)us$", "$1i");
-            _default.AddPlural("(alias|status|campus|apparatus|virus|walrus)$", "$1es");
+            _default.AddPlural("(alias|bias|iris|status|campus|apparatus|virus|walrus)$", "$1es");
             _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
             _default.AddPlural("([dti])um$", "$1a");
             _default.AddPlural("sis$", "ses");
@@ -63,7 +63,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("(shoe)s$", "$1");
             _default.AddSingular("(cris|ax|test)es$", "$1is");
             _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)i$", "$1us");
-            _default.AddSingular("(alias|status|campus|apparatus|virus|walrus)es$", "$1");
+            _default.AddSingular("(alias|bias|iris|status|campus|apparatus|virus|walrus)es$", "$1");
             _default.AddSingular("^(ox)en", "$1");
             _default.AddSingular("(vert|ind)ices$", "$1ex");
             _default.AddSingular("(matr)ices$", "$1ix");
