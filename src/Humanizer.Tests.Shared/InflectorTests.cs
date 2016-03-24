@@ -277,7 +277,6 @@ namespace Humanizer.Tests
             yield return new object[] {"embargo","embargoes"};
             yield return new object[] {"focus","foci"};
             yield return new object[] {"foot","feet"};
-            yield return new object[] {"genus","genera"};
             yield return new object[] {"grass","grass"};
             yield return new object[] {"hair","hair"};
             yield return new object[] {"hero","heroes"};
