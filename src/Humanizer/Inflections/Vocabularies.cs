@@ -88,7 +88,10 @@ namespace Humanizer.Inflections
             _default.AddIrregular("alumna", "alumnae");
             _default.AddIrregular("criterion", "criteria");
             _default.AddIrregular("wave", "waves");
-            
+            _default.AddIrregular("die", "dice");
+            _default.AddIrregular("foot", "feet");
+            _default.AddIrregular("tooth", "teeth");
+
             _default.AddUncountable("equipment");
             _default.AddUncountable("information");
             _default.AddUncountable("rice");
