@@ -35,7 +35,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
             _default.AddPlural("([ti])um$", "$1a");
             _default.AddPlural("sis$", "ses");
-            _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves"); //e.g. 'safe' or 'dwarf'
+            _default.AddPlural("(?:([^f])fe|([lr])f)$", "$1$2ves");
             _default.AddPlural("(hive)$", "$1s");
             _default.AddPlural("([^aeiouy]|qu)y$", "$1ies");
             _default.AddPlural("(x|ch|ss|sh)$", "$1es");
