@@ -11,18 +11,19 @@
 
     "dependencies": {
         "xunit": "2.1.0",
-        "NETStandard.Library": "1.5.0-rc2-23911",
+        "NETStandard.Library": "1.5.0-rc2-23925",
         "Humanizer": { "target": "project" },
         
-        "System.Globalization.Extensions": "4.0.1-rc2-23911"
+        "System.Globalization.Extensions": "4.0.1-rc2-23925"
     },
 
     "frameworks": {
         "netstandardapp1.5": {
             "imports": [ "dnxcore50", "portable-net45+win8" ],
             "dependencies": {
-                "System.ComponentModel.Annotations": "4.1.0-rc2-23911",
-                "dotnet-test-xunit": "1.0.0-dev-91790-12"
+                "System.ComponentModel.Annotations": "4.1.0-rc2-23925",
+                "dotnet-test-xunit": "1.0.0-dev-121895-16",
+                "System.Runtime.Serialization.Primitives": "4.1.1-rc2-23925"
 
             },
             "compilationOptions": {
