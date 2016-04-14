@@ -20,7 +20,7 @@
     "frameworks": {
         "netstandard1.3": {
             "dependencies": {
-                "NETStandard.Library": "1.5.0-rc2-23931"
+                "NETStandard.Library": "1.5.0-rc2-24008"
             }
         }
     }
