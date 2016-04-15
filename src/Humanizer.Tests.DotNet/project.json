@@ -20,7 +20,7 @@
             "imports": [ "dnxcore50", "portable-net45+win8" ],
             "dependencies": {
                 "Microsoft.NETCore.App": "1.0.0-rc2-24008",
-                "dotnet-test-xunit": "1.0.0-dev-140469-38"
+                "dotnet-test-xunit": "1.0.0-rc2-*"
 
             },
             "compilationOptions": {
