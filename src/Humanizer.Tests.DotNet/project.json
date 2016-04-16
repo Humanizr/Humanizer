@@ -24,26 +24,31 @@
 
             },
             "compilationOptions": {
-                "define": ["NETFX_CORE"],
+                "define": [ "NETFX_CORE" ],
 
                 "debugType": "full"
             }
         },
         "net46": {
             "dependencies": {
-           
+
             },
             "frameworkAssemblies": {
-               "System.ComponentModel.DataAnnotations": ""
+                "System.ComponentModel.DataAnnotations": ""
             },
-            "compilationOptions": {                
+            "compilationOptions": {
                 "debugType": "full"
             }
         }
     },
 
     "testRunner": "xunit",
-    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ]
+    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ],
+
+    "runtimes": {
+        "win7-x64": { }
+    }
+
 
 
 }
