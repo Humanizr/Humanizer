@@ -19,7 +19,10 @@
         "netcoreapp1.0": {
             "imports": [ "dnxcore50", "portable-net45+win8" ],
             "dependencies": {
-                "Microsoft.NETCore.App": "1.0.0-rc2-24008",
+                "Microsoft.NETCore.App": {
+                    "version": "1.0.0-rc2-24008",
+                    "type": "platform"
+                },
                 "dotnet-test-xunit": "1.0.0-rc2-*"
 
             },
@@ -43,12 +46,5 @@
     },
 
     "testRunner": "xunit",
-    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ],
-
-    "runtimes": {
-        "win7-x64": { }
-    }
-
-
-
+    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ]
 }
