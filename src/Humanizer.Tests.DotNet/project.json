@@ -2,34 +2,50 @@
     "version": "1.0.0-*",
     "description": "Humanizer.Tests.DotNet Class Library",
     "authors": [ "oren" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
-    "compilationOptions": {
+    "packOptions": {
+        "tags": [ "" ],
+        "projectUrl": "",
+        "licenseUrl": ""
+    },
+
+    "buildOptions": {
         "emitEntryPoint": true
     },
 
     "dependencies": {
         "xunit": "2.1.0",
-        "NETStandard.Library": "1.5.0-rc2-24008",
-        "Humanizer": { "target": "project" }
+        "Humanizer": { "target": "project" },
+        "dotnet-test-xunit": "1.0.0-rc2-*"
     },
 
+    "testRunner": "xunit",
+    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ],
+    
     "frameworks": {
         "netcoreapp1.0": {
             "imports": [ "dnxcore50", "portable-net45+win8" ],
             "dependencies": {
                 "Microsoft.NETCore.App": {
-                    "version": "1.0.0-rc2-24008",
+                    "version": "1.0.0-rc2-3002543",
                     "type": "platform"
                 },
-                "dotnet-test-xunit": "1.0.0-rc2-*"
+              
 
             },
-            "compilationOptions": {
-                "define": [ "NETFX_CORE" ],
-
-                "debugType": "full"
+            "buildOptions": {
+                "define": [ "NETFX_CORE" ]
+            }
+        },
+        "netstandardapp1.5": {
+            "imports": [ "dnxcore50", "portable-net45+win8" ],
+            "dependencies": {
+                "Microsoft.NETCore.App": {
+                    "version": "1.0.0-rc2-3002543",
+                    "type": "platform"
+                }
+            },
+            "buildOptions": {
+                "define": [ "NETFX_CORE" ]
             }
         },
         "net46": {
@@ -38,13 +54,7 @@
             },
             "frameworkAssemblies": {
                 "System.ComponentModel.DataAnnotations": ""
-            },
-            "compilationOptions": {
-                "debugType": "full"
             }
         }
-    },
-
-    "testRunner": "xunit",
-    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ]
+    }
 }
