@@ -339,4 +339,7 @@
   <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
     <value>{0} tedne</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nikoli</value>
+  </data>
 </root>
