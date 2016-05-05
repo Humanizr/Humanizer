@@ -9,7 +9,8 @@
     },
 
     "buildOptions": {
-        "emitEntryPoint": true
+        "emitEntryPoint": true,
+        "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ]
     },
 
     "dependencies": {
@@ -19,18 +20,18 @@
     },
 
     "testRunner": "xunit",
-    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ],
     
     "frameworks": {
         "netcoreapp1.0": {
-            "imports": [ "dnxcore50", "portable-net45+win8" ],
+            "imports": [
+        "dotnet5.4",
+        "portable-net451+win8"
+      ],
             "dependencies": {
                 "Microsoft.NETCore.App": {
                     "version": "1.0.0-rc2-3002543",
                     "type": "platform"
-                },
-              
-
+                }
             },
             "buildOptions": {
                 "define": [ "NETFX_CORE" ]
