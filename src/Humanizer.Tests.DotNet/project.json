@@ -29,7 +29,7 @@
       ],
             "dependencies": {
                 "Microsoft.NETCore.App": {
-                    "version": "1.0.0-rc2-3002543",
+                    "version": "1.0.0-rc2-3002677",
                     "type": "platform"
                 }
             },
