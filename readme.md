@@ -718,6 +718,13 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 1.ToWords(GrammaticalGender.Neuter) => "одно"
 ```
 
+```C#
+// for Arabic locale
+1.ToWords(GrammaticalGender.Masculine) => "واحد"
+1.ToWords(GrammaticalGender.Feminine) => "واحدة"
+1.ToWords(GrammaticalGender.Neuter) => "واحد"
+```
+
 Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
 
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
@@ -755,6 +762,16 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 2.ToOrdinalWords(GrammaticalGender.Masculine) => "segundo"
 2.ToOrdinalWords(GrammaticalGender.Feminine) => "segunda"
 2.ToOrdinalWords(GrammaticalGender.Neuter) => "segundo"
+```
+
+```C#
+// for Brazilian Portuguese locale
+1.ToOrdinalWords(GrammaticalGender.Masculine) => "الأول"
+1.ToOrdinalWords(GrammaticalGender.Feminine) => "الأولى"
+1.ToOrdinalWords(GrammaticalGender.Neuter) => "الأول"
+2.ToOrdinalWords(GrammaticalGender.Masculine) => "الثاني"
+2.ToOrdinalWords(GrammaticalGender.Feminine) => "الثانية"
+2.ToOrdinalWords(GrammaticalGender.Neuter) => "الثاني"
 ```
 
 Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
