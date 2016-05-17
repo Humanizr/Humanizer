@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
@@ -15,9 +16,14 @@ namespace Humanizer.Localisation.NumberToWords
             _culture = culture;
         }
 
-        public override string Convert(int number)
-      {
-         if (number == 0)
+        public override string Convert(long input)
+        {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
+            if (number == 0)
             return "nič";
 
          if (number < 0)

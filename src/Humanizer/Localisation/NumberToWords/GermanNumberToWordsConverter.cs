@@ -13,8 +13,14 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] BillionOrdinalSingular = {"einmilliard", "einemilliarde"};
         private static readonly string[] BillionOrdinalPlural = {"{0}milliard", "{0}milliarden"};
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
+
             if (number == 0)
                 return "null";
 

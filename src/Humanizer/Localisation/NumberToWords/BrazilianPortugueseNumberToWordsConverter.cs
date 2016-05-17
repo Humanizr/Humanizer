@@ -13,8 +13,14 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] PortugueseOrdinalTensMap = { "zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo" };
         private static readonly string[] PortugueseOrdinalHundredsMap = { "zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo" };
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
+
             if (number == 0)
                 return "zero";
 

@@ -40,6 +40,31 @@ namespace Humanizer.Tests
             Assert.Equal(expected, number.ToWords());
         }
 
+        [InlineData(1L, "one")]
+        [InlineData(11L, "eleven")]
+        [InlineData(111L, "one hundred and eleven")]
+        [InlineData(1111L, "one thousand one hundred and eleven")]
+        [InlineData(11111L, "eleven thousand one hundred and eleven")]
+        [InlineData(111111L, "one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(1111111L, "one million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(11111111L, "eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(111111111L, "one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(1111111111L, "one billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(11111111111L, "eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(111111111111L, "one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(1111111111111L, "one trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(11111111111111L, "eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(111111111111111L, "one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(1111111111111111L, "one quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(11111111111111111L, "eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(111111111111111111L, "one hundred and eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [InlineData(1111111111111111111L, "one quintillion one hundred and eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
+        [Theory]
+        public void ToWords(long number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords());
+        }
+
         [Theory]
         [InlineData(0, "zeroth")]
         [InlineData(1, "first")]

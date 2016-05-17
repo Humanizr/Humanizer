@@ -8,7 +8,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] UnitsMap = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
         private static readonly string[] TensMap = { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
+        private static readonly Dictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
         {
             {1, "first"},
             {2, "second"},
@@ -20,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
             {12, "twelfth"},
         };
 
-        public override string Convert(int number)
+        public override string Convert(long number)
         {
             return Convert(number, false);
         }
@@ -30,7 +30,7 @@ namespace Humanizer.Localisation.NumberToWords
             return Convert(number, true);
         }
 
-        private string Convert(int number, bool isOrdinal)
+        private string Convert(long number, bool isOrdinal)
         {
             if (number == 0)
                 return GetUnitValue(0, isOrdinal);
@@ -39,6 +39,24 @@ namespace Humanizer.Localisation.NumberToWords
                 return string.Format("minus {0}", Convert(-number));
 
             var parts = new List<string>();
+
+            if ((number / 1000000000000000000) > 0)
+            {
+                parts.Add(string.Format("{0} quintillion", Convert(number / 1000000000000000000)));
+                number %= 1000000000000000000;
+            }
+
+            if ((number / 1000000000000000) > 0)
+            {
+                parts.Add(string.Format("{0} quadrillion", Convert(number / 1000000000000000)));
+                number %= 1000000000000000;
+            }
+
+            if ((number / 1000000000000) > 0)
+            {
+                parts.Add(string.Format("{0} trillion", Convert(number / 1000000000000)));
+                number %= 1000000000000;
+            }
 
             if ((number / 1000000000) > 0)
             {
@@ -93,7 +111,7 @@ namespace Humanizer.Localisation.NumberToWords
             return toWords;
         }
 
-        private static string GetUnitValue(int number, bool isOrdinal)
+        private static string GetUnitValue(long number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -116,7 +134,7 @@ namespace Humanizer.Localisation.NumberToWords
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words)
+        private static bool ExceptionNumbersToWords(long number, out string words)
         {
             return OrdinalExceptions.TryGetValue(number, out words);
         }

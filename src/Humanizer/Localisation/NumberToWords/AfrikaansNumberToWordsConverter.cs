@@ -22,9 +22,13 @@ namespace Humanizer.Localisation.NumberToWords
             {19, "negentiende"}
         };
 
-        public override string Convert(int number)
+        public override string Convert(long number)
         {
-            return Convert(number, false);
+            if(number > Int32.MaxValue|| number < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            return Convert((int)number, false);
         }
 
         public override string ConvertToOrdinal(int number)

@@ -14,8 +14,13 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] TensOrdinal = { string.Empty, "десят", "двадцат", "тридцат", "сороков", "пятидесят", "шестидесят", "семидесят", "восьмидесят", "девяност" };
         private static readonly string[] UnitsOrdinal = { string.Empty, "перв", "втор", "трет", "четверт", "пят", "шест", "седьм", "восьм", "девят", "десят", "одиннадцат", "двенадцат", "тринадцат", "четырнадцат", "пятнадцат", "шестнадцат", "семнадцат", "восемнадцат", "девятнадцат" };
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
             if (number == 0)
                 return "ноль";
 
