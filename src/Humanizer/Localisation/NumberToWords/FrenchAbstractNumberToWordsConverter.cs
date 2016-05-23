@@ -1,0 +1,96 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Humanizer.Localisation.NumberToWords
+{
+    internal abstract class FrenchAbstractNumberToWordsConverter : GenderedNumberToWordsConverter
+    {
+        protected static readonly string[] UnitsMap = new string[] { "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf" };
+
+        protected FrenchAbstractNumberToWordsConverter()
+        {
+
+        }
+
+        public override string Convert(int number, GrammaticalGender gender)
+        {
+            if (number == 0)
+                return UnitsMap[0];
+
+            if (number < 0)
+                return string.Format("moins {0}", Convert(Math.Abs(number)));
+
+            var parts = new List<string>();
+
+            if ((number/1000000000) > 0)
+            {
+                parts.Add(string.Format("{0} milliard{1}",
+                    Convert(number/1000000000),
+                    number/1000000000 == 1 ? "" : "s"));
+
+                number %= 1000000000;
+            }
+
+            if ((number/1000000) > 0)
+            {
+                parts.Add(string.Format("{0} million{1}",
+                   Convert(number/1000000),
+                   number/1000000 == 1 ? "" : "s"));
+
+                number %= 1000000;
+            }
+
+            if ((number/1000) > 0)
+            {
+                parts.Add(number/1000 == 1
+                    ? string.Format("mille")
+                    : string.Format("{0} mille", Convert(number/1000)));
+
+                number %= 1000;
+            }
+
+            if ((number/100) > 0)
+            {
+                if (number < 200)
+                    parts.Add("cent");
+                else if (number%100 == 0)
+                    parts.Add(string.Format("{0} cents", Convert(number/100)));
+                else
+                    parts.Add(string.Format("{0} cent", Convert(number/100)));
+
+                number %= 100;
+            }
+
+            if (number > 0)
+            {
+                LastPart(ref parts, ref number);
+            }
+
+            return string.Join(" ", parts.ToArray());
+        }
+
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+        {
+            if (number == 1)
+                return gender == GrammaticalGender.Feminine ? "première" : "premier";
+
+            var convertedNumber = Convert(number);
+
+            if (convertedNumber.EndsWith("s") && !convertedNumber.EndsWith("trois"))
+                convertedNumber = convertedNumber.TrimEnd('s');
+            else if (convertedNumber.EndsWith("cinq"))
+                convertedNumber += "u";
+            else if (convertedNumber.EndsWith("neuf"))
+                convertedNumber = convertedNumber.TrimEnd('f') + "v";
+
+            if (convertedNumber.StartsWith("un "))
+                convertedNumber = convertedNumber.Remove(0, 3);
+
+            convertedNumber = convertedNumber.TrimEnd('e');
+            convertedNumber += "ième";
+            return convertedNumber;
+        }
+
+        protected abstract void LastPart(ref List<string> parts, ref int number);
+    }
+}

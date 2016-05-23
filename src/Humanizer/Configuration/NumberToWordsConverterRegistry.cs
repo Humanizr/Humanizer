@@ -17,7 +17,9 @@ namespace Humanizer.Configuration
             Register("ro", new RomanianNumberToWordsConverter());
             Register("ru", new RussianNumberToWordsConverter());
             Register("fi", new FinnishNumberToWordsConverter());
-            Register("fr", (culture) => new FrenchNumberToWordsConverter(culture));
+            Register("fr-BE", new FrenchBelgianNumberToWordsConverter());
+            Register("fr-CH", new FrenchSwissNumberToWordsConverter());
+            Register("fr", new FrenchNumberToWordsConverter());
             Register("nl", new DutchNumberToWordsConverter());
             Register("he", (culture) => new HebrewNumberToWordsConverter(culture));
             Register("sl", (culture) => new SlovenianNumberToWordsConverter(culture));
