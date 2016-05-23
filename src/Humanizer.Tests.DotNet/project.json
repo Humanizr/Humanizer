@@ -2,50 +2,47 @@
     "version": "1.0.0-*",
     "description": "Humanizer.Tests.DotNet Class Library",
     "authors": [ "oren" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
-    "compilationOptions": {
-        "emitEntryPoint": true
+    "packOptions": {
+        "tags": [ "" ],
+        "projectUrl": "",
+        "licenseUrl": ""
+    },
+
+    "buildOptions": {
+        "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ]
     },
 
     "dependencies": {
         "xunit": "2.1.0",
-        "NETStandard.Library": "1.5.0-rc2-23911",
         "Humanizer": { "target": "project" },
-        
-        "System.Globalization.Extensions": "4.0.1-rc2-23911"
+        "dotnet-test-xunit": "1.0.0-rc2-*"
     },
 
+    "testRunner": "xunit",
+    
     "frameworks": {
-        "netstandardapp1.5": {
-            "imports": [ "dnxcore50", "portable-net45+win8" ],
+        "netcoreapp1.0": {
+            "imports": [
+        "dotnet5.4",
+        "portable-net451+win8"
+      ],
             "dependencies": {
-                "System.ComponentModel.Annotations": "4.1.0-rc2-23911",
-                "dotnet-test-xunit": "1.0.0-dev-91790-12"
-
+                "Microsoft.NETCore.App": {
+                    "version": "1.0.0-rc2-3002702",
+                    "type": "platform"
+                }
             },
-            "compilationOptions": {
-                "define": ["NETFX_CORE"],
-
-                "debugType": "full"
+            "buildOptions": {
+                "define": [ "NETFX_CORE" ]
             }
         },
         "net46": {
             "dependencies": {
-           
+
             },
             "frameworkAssemblies": {
-               "System.ComponentModel.DataAnnotations": ""
-            },
-            "compilationOptions": {                
-                "debugType": "full"
+                "System.ComponentModel.DataAnnotations": ""
             }
         }
-    },
-
-    "testRunner": "xunit",
-    "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ]
-
-
+    }
 }
