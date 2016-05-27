@@ -27,7 +27,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(string.Format("{0} milliard{1}",
                     Convert(number/1000000000),
-                    number/1000000000 == 1 ? "" : "s"));
+                    number/1000000000 == 1 ? string.Empty : "s"));
 
                 number %= 1000000000;
             }
@@ -36,16 +36,15 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(string.Format("{0} million{1}",
                    Convert(number/1000000),
-                   number/1000000 == 1 ? "" : "s"));
+                   number/1000000 == 1 ? string.Empty : "s"));
 
                 number %= 1000000;
             }
 
             if ((number/1000) > 0)
             {
-                parts.Add(number/1000 == 1
-                    ? string.Format("mille")
-                    : string.Format("{0} mille", Convert(number/1000)));
+                parts.Add(string.Format("{0}mille",
+                number/1000 != 1 ? (" " + Convert(number/1000)) : string.Empty));
 
                 number %= 1000;
             }
@@ -54,10 +53,10 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 if (number < 200)
                     parts.Add("cent");
-                else if (number%100 == 0)
-                    parts.Add(string.Format("{0} cents", Convert(number/100)));
                 else
-                    parts.Add(string.Format("{0} cent", Convert(number/100)));
+                    parts.Add(string.Format("{0} cent{1}",
+                    Convert(number/100),
+                    number%100 == 0 ? "s" : string.Empty));
 
                 number %= 100;
             }
