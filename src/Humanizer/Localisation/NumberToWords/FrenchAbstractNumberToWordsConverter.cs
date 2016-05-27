@@ -91,6 +91,9 @@ namespace Humanizer.Localisation.NumberToWords
             if (convertedNumber.StartsWith("un "))
                 convertedNumber = convertedNumber.Remove(0, 3);
 
+            if (number == 0)
+                convertedNumber += "t";
+
             convertedNumber = convertedNumber.TrimEnd('e');
             convertedNumber += "ième";
             return convertedNumber;

@@ -62,7 +62,7 @@ namespace Humanizer.Tests.Localisation.frCH
         }
 
         [Theory]
-        [InlineData(0, "zéroième")]
+        [InlineData(0, "zérotième")]
         [InlineData(1, "premier")]
         [InlineData(2, "deuxième")]
         [InlineData(3, "troisième")]
