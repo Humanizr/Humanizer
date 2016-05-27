@@ -5,13 +5,13 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten" };
-        private static readonly string[] TensMap = { "null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti" };
+        private static readonly string[] UnitsMap = { "null", "en", "to", "tre", "fire", "fem", "seks", "sju", "Ã¥tte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten" };
+        private static readonly string[] TensMap = { "null", "ti", "tjue", "tretti", "fÃ¸rti", "femti", "seksti", "sytti", "Ã¥tti", "nitti" };
 
         private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
         {
             {0, "nullte"},
-            {1, "første"},
+            {1, "fÃ¸rste"},
             {2, "andre"},
             {3, "tredje"},
             {4, "fjerde"},
