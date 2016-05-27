@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.fr
 {
     [UseCulture("fr-FR")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]
@@ -56,6 +56,20 @@ namespace Humanizer.Tests.Localisation.fr
         public void ToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(1, "une", GrammaticalGender.Feminine)]
+        [InlineData(1, "un", GrammaticalGender.Masculine)]
+        [InlineData(2, "deux", GrammaticalGender.Feminine)]
+        [InlineData(2, "deux", GrammaticalGender.Masculine)]
+        [InlineData(121, "cent vingt et une", GrammaticalGender.Feminine)]
+        [InlineData(121, "cent vingt et un", GrammaticalGender.Masculine)]
+        [InlineData(10121, "dix mille cent vingt et une", GrammaticalGender.Feminine)]
+        [InlineData(10121, "dix mille cent vingt et un", GrammaticalGender.Masculine)]
+        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
+        {
+            Assert.Equal(expected, number.ToWords(gender));
         }
 
         [Theory]

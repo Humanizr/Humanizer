@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -64,6 +65,10 @@ namespace Humanizer.Localisation.NumberToWords
             if (number > 0)
             {
                 LastPart(ref parts, ref number);
+
+                // only 'un' agrees with gender, and its feminine form is 'une'
+                if (gender == GrammaticalGender.Feminine && parts.Last().EndsWith("un"))
+                    parts[parts.Count - 1] += "e";
             }
 
             return string.Join(" ", parts.ToArray());
