@@ -16,7 +16,10 @@ namespace Humanizer
             if (value.Length == 0)
                 return value;
 
-            if (truncationString == null || truncationString.Length > length)
+            if (truncationString == null)
+                truncationString = string.Empty;
+
+            if (truncationString.Length > length)
                 return truncateFrom == TruncateFrom.Right ? value.Substring(0, length) : value.Substring(value.Length - length);
 
             var alphaNumericalCharactersProcessed = 0;
