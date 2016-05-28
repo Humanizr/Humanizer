@@ -10,6 +10,7 @@ namespace Humanizer.Tests.ApiApprover
     public class PublicApiApprovalTest
     {
         [Fact]
+        [UseCulture("en-US")]
         [UseReporter(typeof(DiffReporter))] 
         [IgnoreLineEndings(true)]
         public void approve_public_api()
