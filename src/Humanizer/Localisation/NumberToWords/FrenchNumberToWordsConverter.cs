@@ -60,13 +60,14 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number > 0)
             {
+                string lastPart;
+
                 if (NumberExceptions.ContainsKey(number))
-                    parts.Add(NumberExceptions[number]);
+                    lastPart = NumberExceptions[number];
                 else if (number < 20)
-                    parts.Add(UnitsMap[number]);
+                    lastPart = UnitsMap[number];
                 else
                 {
-                    string lastPart;
                     if (number >= 70 && (number < 80 || number >= 90))
                     {
                         var baseNumber = number < 80 ? 60 : 80;
@@ -83,8 +84,13 @@ namespace Humanizer.Localisation.NumberToWords
                                 lastPart += string.Format("-{0}", UnitsMap[number%10]);
                         }
                     }
-                    parts.Add(lastPart);
                 }
+
+                // only 'un' agrees with gender, and its feminine form is 'une'
+                if (gender == GrammaticalGender.Feminine && lastPart.EndsWith("un"))
+                    lastPart += "e";
+
+                parts.Add(lastPart);
             }
 
             return string.Join(" ", parts.ToArray());
