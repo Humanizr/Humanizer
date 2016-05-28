@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -12,7 +11,7 @@ namespace Humanizer.Inflections
     public class Vocabulary
     {
         internal Vocabulary()
-        { 
+        {
         }
 
         private readonly List<Rule> _plurals = new List<Rule>();
@@ -24,10 +23,19 @@ namespace Humanizer.Inflections
         /// </summary>
         /// <param name="singular">The singular form of the irregular word, e.g. "person".</param>
         /// <param name="plural">The plural form of the irregular word, e.g. "people".</param>
-        public void AddIrregular(string singular, string plural)
+        /// <param name="matchEnding">True to match these words on their own as well as at the end of longer words. False, otherwise.</param>
+        public void AddIrregular(string singular, string plural, bool matchEnding = true)
         {
-            AddPlural("(" + singular[0] + ")" + singular.Substring(1) + "$", "$1" + plural.Substring(1));
-            AddSingular("(" + plural[0] + ")" + plural.Substring(1) + "$", "$1" + singular.Substring(1));
+            if (matchEnding)
+            {
+                AddPlural("(" + singular[0] + ")" + singular.Substring(1) + "$", "$1" + plural.Substring(1));
+                AddSingular("(" + plural[0] + ")" + plural.Substring(1) + "$", "$1" + singular.Substring(1));
+            }
+            else
+            {
+                AddPlural($"^{singular}$", plural);
+                AddSingular($"^{plural}$", singular);
+            }
         }
 
         /// <summary>

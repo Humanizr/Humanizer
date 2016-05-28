@@ -1043,7 +1043,7 @@ namespace Humanizer.Inflections
     }
     public class Vocabulary
     {
-        public void AddIrregular(string singular, string plural) { }
+        public void AddIrregular(string singular, string plural, bool matchEnding = True) { }
         public void AddPlural(string rule, string replacement) { }
         public void AddSingular(string rule, string replacement) { }
         public void AddUncountable(string word) { }
