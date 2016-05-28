@@ -1,8 +1,8 @@
 ﻿using Xunit;
 
-namespace Humanizer.Tests.Localisation.fr
+namespace Humanizer.Tests.Localisation.frCH
 {
-    [UseCulture("fr-FR")]
+    [UseCulture("fr-CH")]
     public class NumberToWordsTests
     {
 
@@ -15,8 +15,9 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(17, "dix-sept")]
         [InlineData(25, "vingt-cinq")]
         [InlineData(31, "trente et un")]
-        [InlineData(71, "soixante et onze")]
-        [InlineData(81, "quatre-vingt-un")]
+        [InlineData(71, "septante et un")]
+        [InlineData(80, "octante")]
+        [InlineData(81, "octante et un")]
         [InlineData(122, "cent vingt-deux")]
         [InlineData(3501, "trois mille cinq cent un")]
         [InlineData(100, "cent")]
@@ -25,6 +26,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(1000000, "un million")]
         [InlineData(10000000, "dix millions")]
         [InlineData(100000000, "cent millions")]
+        [InlineData(200000000, "deux cents millions")]
         [InlineData(1000000000, "un milliard")]
         [InlineData(111, "cent onze")]
         [InlineData(1111, "mille cent onze")]
@@ -38,38 +40,25 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(12345, "douze mille trois cent quarante-cinq")]
         [InlineData(123456, "cent vingt-trois mille quatre cent cinquante-six")]
         [InlineData(1234567, "un million deux cent trente-quatre mille cinq cent soixante-sept")]
-        [InlineData(12345678, "douze millions trois cent quarante-cinq mille six cent soixante-dix-huit")]
-        [InlineData(123456789, "cent vingt-trois millions quatre cent cinquante-six mille sept cent quatre-vingt-neuf")]
-        [InlineData(1234567890, "un milliard deux cent trente-quatre millions cinq cent soixante-sept mille huit cent quatre-vingt-dix")]
-        [InlineData(1234567899, "un milliard deux cent trente-quatre millions cinq cent soixante-sept mille huit cent quatre-vingt-dix-neuf")]
+        [InlineData(12345678, "douze millions trois cent quarante-cinq mille six cent septante-huit")]
+        [InlineData(123456789, "cent vingt-trois millions quatre cent cinquante-six mille sept cent octante-neuf")]
+        [InlineData(1234567890, "un milliard deux cent trente-quatre millions cinq cent soixante-sept mille huit cent nonante")]
+        [InlineData(1234567899, "un milliard deux cent trente-quatre millions cinq cent soixante-sept mille huit cent nonante-neuf")]
         [InlineData(223, "deux cent vingt-trois")]
         [InlineData(2234, "deux mille deux cent trente-quatre")]
         [InlineData(22345, "vingt-deux mille trois cent quarante-cinq")]
+        [InlineData(200456, "deux cents mille quatre cent cinquante-six")]
         [InlineData(223456, "deux cent vingt-trois mille quatre cent cinquante-six")]
         [InlineData(2234567, "deux millions deux cent trente-quatre mille cinq cent soixante-sept")]
-        [InlineData(22345678, "vingt-deux millions trois cent quarante-cinq mille six cent soixante-dix-huit")]
-        [InlineData(223456789, "deux cent vingt-trois millions quatre cent cinquante-six mille sept cent quatre-vingt-neuf")]
-        [InlineData(2147483646, "deux milliards cent quarante-sept millions quatre cent quatre-vingt-trois mille six cent quarante-six")]
-        [InlineData(1999, "mille neuf cent quatre-vingt-dix-neuf")]
+        [InlineData(22345678, "vingt-deux millions trois cent quarante-cinq mille six cent septante-huit")]
+        [InlineData(223456789, "deux cent vingt-trois millions quatre cent cinquante-six mille sept cent octante-neuf")]
+        [InlineData(2147483646, "deux milliards cent quarante-sept millions quatre cent octante-trois mille six cent quarante-six")]
+        [InlineData(1999, "mille neuf cent nonante-neuf")]
         [InlineData(2014, "deux mille quatorze")]
         [InlineData(2048, "deux mille quarante-huit")]
         public void ToWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
-        }
-
-        [Theory]
-        [InlineData(1, "une", GrammaticalGender.Feminine)]
-        [InlineData(1, "un", GrammaticalGender.Masculine)]
-        [InlineData(2, "deux", GrammaticalGender.Feminine)]
-        [InlineData(2, "deux", GrammaticalGender.Masculine)]
-        [InlineData(121, "cent vingt et une", GrammaticalGender.Feminine)]
-        [InlineData(121, "cent vingt et un", GrammaticalGender.Masculine)]
-        [InlineData(10121, "dix mille cent vingt et une", GrammaticalGender.Feminine)]
-        [InlineData(10121, "dix mille cent vingt et un", GrammaticalGender.Masculine)]
-        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
-        {
-            Assert.Equal(expected, number.ToWords(gender));
         }
 
         [Theory]
@@ -100,11 +89,11 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(40, "quarantième")]
         [InlineData(50, "cinquantième")]
         [InlineData(60, "soixantième")]
-        [InlineData(70, "soixante-dixième")]
-        [InlineData(80, "quatre-vingtième")]
-        [InlineData(90, "quatre-vingt-dixième")]
-        [InlineData(95, "quatre-vingt-quinzième")]
-        [InlineData(96, "quatre-vingt-seizième")]
+        [InlineData(70, "septantième")]
+        [InlineData(80, "octantième")]
+        [InlineData(90, "nonantième")]
+        [InlineData(95, "nonante-cinquième")]
+        [InlineData(96, "nonante-sixième")]
         [InlineData(100, "centième")]
         [InlineData(120, "cent vingtième")]
         [InlineData(121, "cent vingt et unième")]
