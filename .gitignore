@@ -40,7 +40,7 @@ Storage.dat
 
 # DNX
 project.lock.json
-*.project.lock.json
+*.lock.json
 artifacts/
 
 # Visual Studio profiler

@@ -1,29 +1,9 @@
 ﻿{
-    "version": "2.1.0-*",
-    "title": "Humanizer",
-    "description": "Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities",
-    "authors": [ "Mehdi Khalili", "Oren Novotny" ],
-    "packOptions": {
-        "licenseUrl": "https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE",
-        "projectUrl": "https://github.com/Humanizr/Humanizer",
-        "iconUrl": "https://raw.github.com/Humanizr/Humanizer/master/logo.png",
-        "requireLicenseAcceptance": false
-    },
-    "copyright": "Copyright 2012-2016 Mehdi Khalili, Oren Novotny",
-    "dependencies": {
-        "NuSpec.ReferenceGenerator": {
-            "type": "build",
-            "version": "1.4.2"
-        }
-    },
-    "buildOptions": {
-        "keyFile" : "Humanizer.snk" 
-    },
-    "frameworks": {
-        "netstandard1.0": {
-            "dependencies": {
-                "NETStandard.Library": "1.5.0-rc2-24027"
-            }
-        }
-    }
+  "dependencies": {
+    "NETStandard.Library": "1.5.0-rc2-24027",
+    "NuSpec.ReferenceGenerator": "1.4.2"
+  },
+  "frameworks": {
+    "netstandard1.0": {}
+  }
 }

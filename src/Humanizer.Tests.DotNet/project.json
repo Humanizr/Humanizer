@@ -14,7 +14,6 @@
 
     "dependencies": {
         "xunit": "2.1.0",
-        "Humanizer": { "target": "project" },
         "dotnet-test-xunit": "1.0.0-rc2-*"
     },
 
@@ -27,19 +26,24 @@
         "portable-net451+win8"
       ],
             "dependencies": {
-                "Microsoft.NETCore.App": {
-                    "version": "1.0.0-rc2-3002702",
-                    "type": "platform"
-                }
+              "Humanizer": {
+                "target": "project"
+              },
+              "Microsoft.NETCore.App": {
+                "version": "1.0.0-rc2-3002702",
+                "type": "platform"
+              }
             },
             "buildOptions": {
                 "define": [ "NETFX_CORE" ]
             }
         },
         "net46": {
-            "dependencies": {
-
-            },
+          "dependencies": {
+            "Humanizer": {
+              "target": "project"
+            }
+          },
             "frameworkAssemblies": {
                 "System.ComponentModel.DataAnnotations": ""
             }

@@ -1,5 +1,5 @@
 ﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETPortable,Version=v4.5,Profile=Profile259", FrameworkDisplayName=".NET Portable Subset")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETPortable,Version=v5.0", FrameworkDisplayName=".NET Portable Subset")]
 
 namespace Humanizer.Bytes
 {

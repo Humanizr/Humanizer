@@ -12,10 +12,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Humanizer</RootNamespace>
     <AssemblyName>Humanizer</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -206,8 +207,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>In.Months.cs</LastGenOutput>
     </None>
-    <None Include="Humanizer.project.json" />
     <None Include="Humanizer.snk" />
+    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.hr.resx" />

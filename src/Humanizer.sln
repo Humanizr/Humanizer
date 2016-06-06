@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{04B74BEC-A645-4D1A-BE21-F4EB4413A903}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests.Uwp.Runner", "Humanizer.Tests.Uwp.Runner\Humanizer.Tests.Uwp.Runner.csproj", "{F0DC7771-CE59-4F3C-B160-56F661F5D220}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Humanizer.Tests.DotNet", "Humanizer.Tests.DotNet\Humanizer.Tests.DotNet.xproj", "{50D97972-236C-46A0-B912-1310CE636569}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -131,6 +133,22 @@ Global
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.ActiveCfg = Release|x86
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.Build.0 = Release|x86
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.Deploy.0 = Release|x86
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|ARM.Build.0 = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x64.Build.0 = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x86.Build.0 = Debug|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|ARM.ActiveCfg = Release|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|ARM.Build.0 = Release|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|x64.ActiveCfg = Release|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|x64.Build.0 = Release|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|x86.ActiveCfg = Release|Any CPU
+		{50D97972-236C-46A0-B912-1310CE636569}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,5 +159,6 @@ Global
 		{FDEC244B-F07E-4A5E-BB80-FBC6AC77A9AA} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
 		{261367CA-00C7-4832-BD26-200CFF8F575F} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
+		{50D97972-236C-46A0-B912-1310CE636569} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
 	EndGlobalSection
 EndGlobal
