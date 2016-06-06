@@ -1,6 +1,7 @@
 ﻿<#@ template debug="true" hostSpecific="true" culture="en-US"#>
 <#@ output extension=".cs" #>
 <#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Globalization" #>
 <#@ Assembly Name="System.Windows.Forms" #>
 <#@ assembly name="$(TargetPath)" #>
 <#@ import namespace="System" #>
