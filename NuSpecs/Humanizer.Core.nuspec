@@ -30,6 +30,6 @@
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\portable-win+net45+wp8+wpa81" />
-    <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\dotnet" />
+    <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\netstandard1.0" />
   </files>
 </package>
