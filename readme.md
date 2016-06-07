@@ -50,7 +50,11 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
  - [Icon](#icon)
   
 ## <a id="install">Install</a>
-You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): `Install-Package Humanizer`
+You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): 
+
+**English only**: `Install-Package Humanizer.Core`
+
+All languages: `Install-Package Humanizer`
 
 Humanizer is a Portable Class Library with support for .Net 4.5+, Windows Phone 8, Win Store, and ASP.NET 5 (CoreCLR) applications.
 Also Humanizer symbols are source indexed with [GitLink](https://github.com/GitTools/GitLink) and are included in the package so you can [step through Humanizer code](https://github.com/GitTools/GitLink) while debugging your code.
