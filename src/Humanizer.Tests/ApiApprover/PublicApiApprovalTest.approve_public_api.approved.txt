@@ -397,6 +397,34 @@ namespace Humanizer
         public NoMatchFoundException(string message) { }
         public NoMatchFoundException(string message, System.Exception inner) { }
     }
+    public class static NumberToNumberExtensions
+    {
+        public static int Billions(this int input) { }
+        public static uint Billions(this uint input) { }
+        public static long Billions(this long input) { }
+        public static ulong Billions(this ulong input) { }
+        public static double Billions(this double input) { }
+        public static int Hundreds(this int input) { }
+        public static uint Hundreds(this uint input) { }
+        public static long Hundreds(this long input) { }
+        public static ulong Hundreds(this ulong input) { }
+        public static double Hundreds(this double input) { }
+        public static int Millions(this int input) { }
+        public static uint Millions(this uint input) { }
+        public static long Millions(this long input) { }
+        public static ulong Millions(this ulong input) { }
+        public static double Millions(this double input) { }
+        public static int Tens(this int input) { }
+        public static uint Tens(this uint input) { }
+        public static long Tens(this long input) { }
+        public static ulong Tens(this ulong input) { }
+        public static double Tens(this double input) { }
+        public static int Thousands(this int input) { }
+        public static uint Thousands(this uint input) { }
+        public static long Thousands(this long input) { }
+        public static ulong Thousands(this ulong input) { }
+        public static double Thousands(this double input) { }
+    }
     public class static NumberToTimeSpanExtensions
     {
         public static System.TimeSpan Days(this byte days) { }
