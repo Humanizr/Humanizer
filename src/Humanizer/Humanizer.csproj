@@ -137,6 +137,7 @@
     <Compile Include="MetricNumeralExtensions.cs" />
     <Compile Include="Plurality.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
+    <Compile Include="TimeSpanHumanizeStrategy\TimeSpanAnalysisParameters.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>
@@ -159,6 +160,9 @@
     <Compile Include="NoMatchFoundException.cs" />
     <Compile Include="RomanNumeralExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="TimeSpanHumanizeStrategy\DefaultTimeSpanHumanizeStrategy.cs" />
+    <Compile Include="TimeSpanHumanizeStrategy\GregorianTimeSpanHumanizeStrategy.cs" />
+    <Compile Include="TimeSpanHumanizeStrategy\ITimeSpanHumanizeStrategy.cs" />
     <Compile Include="ToQuantityExtensions.cs" />
     <Compile Include="Transformer\To.cs" />
     <Compile Include="Transformer\IStringTransformer.cs" />
@@ -258,6 +262,10 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
