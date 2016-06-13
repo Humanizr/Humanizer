@@ -15,41 +15,66 @@ namespace Humanizer.Localisation.CollectionFormatters
 
         public virtual string Humanize<T>(IEnumerable<T> collection)
         {
-            return Humanize(collection, o => o?.ToString(), DefaultSeparator);
+            return Humanize(collection, o => o?.ToString(), DefaultSeparator, StringJoinOptions.Default);
+        }
+
+        public virtual string Humanize<T>(IEnumerable<T> collection, StringJoinOptions options)
+        {
+            return Humanize(collection, o => o?.ToString(), DefaultSeparator, options);
         }
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter)
         {
-            return Humanize(collection, objectFormatter, DefaultSeparator);
+            return Humanize(collection, objectFormatter, DefaultSeparator, StringJoinOptions.Default);
+        }
+
+        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, StringJoinOptions options)
+        {
+            return Humanize(collection, objectFormatter, DefaultSeparator, options);
         }
 
         public virtual string Humanize<T>(IEnumerable<T> collection, string separator)
         {
-            return Humanize(collection, o => o?.ToString(), separator);
+            return Humanize(collection, o => o?.ToString(), separator, StringJoinOptions.Default);
+        }
+
+        public virtual string Humanize<T>(IEnumerable<T> collection, string separator, StringJoinOptions options)
+        {
+            return Humanize(collection, o => o?.ToString(), separator, options);
         }
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
         {
+            return Humanize(collection, objectFormatter, separator, StringJoinOptions.Default);
+        }
+
+        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator, StringJoinOptions options)
+        {
             if (collection == null)
                 throw new ArgumentException("collection");
 
-            var itemsArray = collection as T[] ?? collection.ToArray();
+            var items = collection.Select(objectFormatter);
+            if ((options & StringJoinOptions.TrimEntries) != 0) items = items.Select(item => item == null ? string.Empty : item.Trim());
+            if ((options & StringJoinOptions.RemoveBlankEntries) != 0) items = items.Where(item => !string.IsNullOrWhiteSpace(item));
 
+            var itemsArray = items.ToArray();
             var count = itemsArray.Length;
 
             if (count == 0)
                 return "";
 
             if (count == 1)
-                return objectFormatter(itemsArray[0]);
+                return itemsArray[0];
 
             var itemsBeforeLast = itemsArray.Take(count - 1);
             var lastItem = itemsArray.Skip(count - 1).First();
 
-            return string.Format("{0} {1} {2}",
-                string.Join(", ", itemsBeforeLast.Select(objectFormatter)),
+            return string.Format(GetConjunctionFormatString(count),
+                string.Join(", ", itemsBeforeLast),
                 separator,
-                objectFormatter(lastItem));
+                lastItem);
         }
+
+        protected virtual string GetConjunctionFormatString(int itemCount) => "{0} {1} {2}";
     }
 }

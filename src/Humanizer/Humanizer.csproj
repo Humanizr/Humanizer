@@ -137,6 +137,7 @@
     <Compile Include="MetricNumeralExtensions.cs" />
     <Compile Include="Plurality.cs" />
     <Compile Include="RegexOptionsUtil.cs" />
+    <Compile Include="StringJoinOptions.cs" />
     <Compile Include="TimeSpanHumanizeExtensions.cs" />
     <Compile Include="FluentDate\In.SomeTimeFrom.cs">
       <AutoGen>True</AutoGen>

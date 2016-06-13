@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -99,5 +100,46 @@ namespace Humanizer.Tests
         {
             new[] { "A", "B", "C" }.Humanize(_ => null);
         }
+
+        [Fact]
+        public void HumanizeRunsFormatterOnNulls()
+        {
+            Assert.Equal("1, (null), and 3", new int?[] { 1, null, 3 }.Humanize(_ => _?.ToString() ?? "(null)"));
+        }
+
+        [Fact]
+        public void HumanizeRemovesEmptyItemsByDefault()
+        {
+            Assert.Equal("A and C", new[] { "A", " ", "C" }.Humanize(dummyFormatter));
+        }
+
+        [Fact]
+        public void HumanizeTrimsItemsByDefault()
+        {
+            Assert.Equal("A, B, and C", new[] { "A", "  B  ", "C" }.Humanize(dummyFormatter));
+        }
+
+        [Fact]
+        public void HumanizeCanLeaveBlanksAndSkipTrimming()
+        {
+            Assert.Equal("A,   B  , and  ", new[] { "A", "  B  ", " " }.Humanize(dummyFormatter, StringJoinOptions.None));
+        }
+
+        [Fact]
+        public void HumanizeCanRemoveBlanksAndSkipTrimming()
+        {
+            Assert.Equal("A and   B  ", new[] { "A", "  B  ", " " }.Humanize(dummyFormatter, StringJoinOptions.RemoveBlankEntries));
+        }
+
+        [Fact]
+        public void HumanizeCanLeaveBlanksAndTrim()
+        {
+            Assert.Equal("A, B, and ", new[] { "A", "  B  ", " " }.Humanize(dummyFormatter, StringJoinOptions.TrimEntries));
+        }
+
+        /// <summary>
+        /// Use the dummy formatter to ensure tests are testing formatter output rather than input
+        /// </summary>
+        private static readonly Func<string, string> dummyFormatter = input => input;
     }
 }

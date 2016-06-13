@@ -21,6 +21,16 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Formats the collection for display, calling ToString() on each object and
+        /// using the default separator for the current culture.
+        /// </summary>
+        /// <returns></returns>
+        public static string Humanize<T>(this IEnumerable<T> collection, StringJoinOptions options)
+        {
+            return Configurator.CollectionFormatter.Humanize(collection, options);
+        }
+
+        /// <summary>
         /// Formats the collection for display, calling `objectFormatter` on each object
         /// and using the default separator for the current culture.
         /// </summary>
@@ -34,14 +44,36 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Formats the collection for display, calling `objectFormatter` on each object
+        /// and using the default separator for the current culture.
+        /// </summary>
+        /// <returns></returns>
+        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter, StringJoinOptions options)
+        {
+            if (displayFormatter == null)
+                throw new ArgumentNullException(nameof(displayFormatter));
+
+            return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, options);
+        }
+
+        /// <summary>
         /// Formats the collection for display, calling ToString() on each object
         /// and using the provided separator.
         /// </summary>
         /// <returns></returns>
         public static string Humanize<T>(this IEnumerable<T> collection, string separator)
         {
-
             return Configurator.CollectionFormatter.Humanize(collection, separator);
+        }
+
+        /// <summary>
+        /// Formats the collection for display, calling ToString() on each object
+        /// and using the provided separator.
+        /// </summary>
+        /// <returns></returns>
+        public static string Humanize<T>(this IEnumerable<T> collection, string separator, StringJoinOptions options)
+        {
+            return Configurator.CollectionFormatter.Humanize(collection, separator, options);
         }
 
         /// <summary>
@@ -55,6 +87,19 @@ namespace Humanizer
                 throw new ArgumentNullException(nameof(displayFormatter));
 
             return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, separator);
+        }
+
+        /// <summary>
+        /// Formats the collection for display, calling `objectFormatter` on each object
+        /// and using the provided separator.
+        /// </summary>
+        /// <returns></returns>
+        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter, string separator, StringJoinOptions options)
+        {
+            if (displayFormatter == null)
+                throw new ArgumentNullException(nameof(displayFormatter));
+
+            return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, separator, options);
         }
     }
 }

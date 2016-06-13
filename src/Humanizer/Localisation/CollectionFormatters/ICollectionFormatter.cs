@@ -15,10 +15,22 @@ namespace Humanizer.Localisation.CollectionFormatters
         string Humanize<T>(IEnumerable<T> collection);
 
         /// <summary>
+        /// Formats the collection for display, calling ToString() on each object.
+        /// </summary>
+        /// <returns></returns>
+        string Humanize<T>(IEnumerable<T> collection, StringJoinOptions options);
+
+        /// <summary>
         /// Formats the collection for display, calling `objectFormatter` on each object.
         /// </summary>
         /// <returns></returns>
         string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter);
+
+        /// <summary>
+        /// Formats the collection for display, calling `objectFormatter` on each object.
+        /// </summary>
+        /// <returns></returns>
+        string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, StringJoinOptions options);
 
         /// <summary>
         /// Formats the collection for display, calling ToString() on each object
@@ -28,10 +40,24 @@ namespace Humanizer.Localisation.CollectionFormatters
         string Humanize<T>(IEnumerable<T> collection, string separator);
 
         /// <summary>
+        /// Formats the collection for display, calling ToString() on each object
+        /// and using `separator` before the final item.
+        /// </summary>
+        /// <returns></returns>
+        string Humanize<T>(IEnumerable<T> collection, string separator, StringJoinOptions options);
+
+        /// <summary>
         /// Formats the collection for display, calling `objectFormatter` on each object
         /// and using `separator` before the final item.
         /// </summary>
         /// <returns></returns>
         string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator);
+
+        /// <summary>
+        /// Formats the collection for display, calling `objectFormatter` on each object
+        /// and using `separator` before the final item.
+        /// </summary>
+        /// <returns></returns>
+        string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator, StringJoinOptions options);
     }
 }

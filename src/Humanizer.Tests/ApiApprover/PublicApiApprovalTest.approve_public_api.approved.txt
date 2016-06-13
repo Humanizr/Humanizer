@@ -123,9 +123,13 @@ namespace Humanizer
     public class static CollectionHumanizeExtensions
     {
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, Humanizer.StringJoinOptions options) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter, Humanizer.StringJoinOptions options) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, string separator) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, string separator, Humanizer.StringJoinOptions options) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter, string separator) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter, string separator, Humanizer.StringJoinOptions options) { }
     }
     public class static DateHumanizeExtensions
     {
@@ -941,6 +945,14 @@ namespace Humanizer
         public static string Humanize(this string input) { }
         public static string Humanize(this string input, Humanizer.LetterCasing casing) { }
     }
+    [System.FlagsAttribute()]
+    public enum StringJoinOptions
+    {
+        None = 0,
+        TrimEntries = 1,
+        RemoveBlankEntries = 2,
+        Default = 3,
+    }
     public class static TimeSpanHumanizeExtensions
     {
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ") { }
@@ -1057,9 +1069,13 @@ namespace Humanizer.Localisation.CollectionFormatters
     public interface ICollectionFormatter
     {
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, Humanizer.StringJoinOptions options);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, Humanizer.StringJoinOptions options);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator, Humanizer.StringJoinOptions options);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator, Humanizer.StringJoinOptions options);
     }
 }
 namespace Humanizer.Localisation.Formatters
