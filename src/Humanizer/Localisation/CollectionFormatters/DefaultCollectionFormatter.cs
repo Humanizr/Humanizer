@@ -15,7 +15,7 @@ namespace Humanizer.Localisation.CollectionFormatters
 
         public virtual string Humanize<T>(IEnumerable<T> collection)
         {
-            return Humanize(collection, o => o.ToString(), DefaultSeparator);
+            return Humanize(collection, o => o?.ToString(), DefaultSeparator);
         }
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter)
@@ -25,7 +25,7 @@ namespace Humanizer.Localisation.CollectionFormatters
 
         public virtual string Humanize<T>(IEnumerable<T> collection, string separator)
         {
-            return Humanize(collection, o => o.ToString(), separator);
+            return Humanize(collection, o => o?.ToString(), separator);
         }
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
