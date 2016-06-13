@@ -87,5 +87,17 @@ namespace Humanizer.Tests
             var humanized = _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString), "or");
             Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, or SomeObject #3 - Three", humanized);
         }
+
+        [Fact]
+        public void HumanizeHandlesNullItemsWithoutAnException()
+        {
+            Assert.Null(Record.Exception(() => new object[] { null, null }.Humanize()));
+        }
+
+        [Fact]
+        public void HumanizeHandlesNullFormatterReturnsWithoutAnException()
+        {
+            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => null)));
+        }
     }
 }
