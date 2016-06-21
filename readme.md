@@ -440,7 +440,7 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => 
 ```
 
 ### <a id="humanize-collections">Humanize Collections</a>
-You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into `Humanize`.
+You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided ("and" in English), but a different separator may be passed into `Humanize`.
 
 For instance:
 
@@ -457,24 +457,26 @@ class SomeClass
 
 string FormatSomeClass(SomeClass sc)
 {
-	return string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString);
+    return string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString);
 }
 
 var collection = new List<SomeClass>
-    {
-        new SomeClass { SomeInt = 1, SomeString = "One" },
-        new SomeClass { SomeInt = 2, SomeString = "Two" },
-        new SomeClass { SomeInt = 3, SomeString = "Three" }
-    };
+{
+    new SomeClass { SomeInt = 1, SomeString = "One" },
+    new SomeClass { SomeInt = 2, SomeString = "Two" },
+    new SomeClass { SomeInt = 3, SomeString = "Three" }
+};
 
 collection.Humanize()                                    // "Specific String, Specific String, and Specific String"
-collection.Humanize("or")                                //"Specific String, Specific String, or Specific String"
-collection.Humanize(FormatSomeClass)                     //"SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"
-collection.Humanize(sc => sc.SomeInt.Ordinalize(), "or") //"1st, 2nd, or 3rd"
+collection.Humanize("or")                                // "Specific String, Specific String, or Specific String"
+collection.Humanize(FormatSomeClass)                     // "SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"
+collection.Humanize(sc => sc.SomeInt.Ordinalize(), "or") // "1st, 2nd, or 3rd"
 ```
 
-You can provide your own collection formatter by implementing `ICollectionFormatter` and registering it with `Configurator.CollectionFormatters`
+By default, items are trimmed and blank (NullOrWhitespace) items are skipped. This results in clean comma punctuation. (You can override this with the StringJoinOptions optional parameter. If there is a custom formatter function, this applies only to the formatter's output.)
 
+You can provide your own collection formatter by implementing `ICollectionFormatter` and registering it with `Configurator.CollectionFormatters`.
+ 
 ### <a id="inflector-methods">Inflector methods</a>
 There are also a few inflector methods:
 
