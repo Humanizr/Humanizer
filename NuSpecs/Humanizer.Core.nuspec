@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
-  <metadata>
+  <metadata minClientVersion="2.12">
     <id>Humanizer.Core</id>
     <version>$version$</version>
     <title>Humanizer Locale (en)</title>
@@ -15,21 +15,11 @@
     <language>en</language>
     <dependencies>
       <group targetFramework="netstandard1.0">
-        <dependency id="System.Collections" version="4.0.11-rc2-24027" />
-        <dependency id="System.Diagnostics.Debug" version="4.0.11-rc2-24027" />
-        <dependency id="System.Globalization" version="4.0.11-rc2-24027" />
-        <dependency id="System.Linq" version="4.1.0-rc2-24027" />
-        <dependency id="System.Reflection" version="4.1.0-rc2-24027" />
-        <dependency id="System.Reflection.Extensions" version="4.0.1-rc2-24027" />
-        <dependency id="System.Resources.ResourceManager" version="4.0.1-rc2-24027" />
-        <dependency id="System.Runtime" version="4.1.0-rc2-24027" />
-        <dependency id="System.Runtime.Extensions" version="4.1.0-rc2-24027" />
-        <dependency id="System.Text.RegularExpressions" version="4.0.12-rc2-24027" />
+        <dependency id="NETStandard.Library" version="1.6.0" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\portable-win+net45+wp8+wpa81" />
     <file src="Humanizer\bin\Release\*.*" exclude="**\*.srcsrv;**\*.CodeAnalysisLog.xml;**\*.lastcodeanalysissucceeded" target="lib\netstandard1.0" />
   </files>
 </package>

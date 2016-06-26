@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
-  <metadata>
+  <metadata minClientVersion="2.12">
     <id>Humanizer</id>
     <version>$version$</version>
     <title>Humanizer</title>

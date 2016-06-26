@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
-  <metadata>
+  <metadata minClientVersion="2.12">
     <id>Humanizer.Core.ja</id>
     <version>$version$</version>
     <title>Humanizer Locale (ja)</title>
@@ -18,7 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\ja\*.*" target="lib\portable-win+net45+wp8+wpa81\ja" />
-    <file src="Humanizer\bin\Release\ja\*.*" target="lib\dotnet\ja" />
+    <file src="Humanizer\bin\Release\ja\*.*" target="lib\netstandard1.0\ja" />
   </files>
 </package>
