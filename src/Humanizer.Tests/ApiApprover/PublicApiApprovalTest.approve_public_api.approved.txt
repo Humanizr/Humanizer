@@ -1,0 +1,1147 @@
+﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETPortable,Version=v5.0", FrameworkDisplayName=".NET Portable Subset")]
+
+namespace Humanizer.Bytes
+{
+    
+    public class ByteRate
+    {
+        public ByteRate(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
+        public System.TimeSpan Interval { get; }
+        public Humanizer.Bytes.ByteSize Size { get; }
+        public string Humanize(Humanizer.Localisation.TimeUnit timeUnit = 1) { }
+        public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1) { }
+    }
+    public struct ByteSize : System.IComparable, System.IComparable<Humanizer.Bytes.ByteSize>, System.IEquatable<Humanizer.Bytes.ByteSize>
+    {
+        public const long BitsInByte = 8;
+        public const string BitSymbol = "b";
+        public const long BytesInGigabyte = 1073741824;
+        public const long BytesInKilobyte = 1024;
+        public const long BytesInMegabyte = 1048576;
+        public const long BytesInTerabyte = 1099511627776;
+        public const string ByteSymbol = "B";
+        public const string GigabyteSymbol = "GB";
+        public const string KilobyteSymbol = "KB";
+        public static readonly Humanizer.Bytes.ByteSize MaxValue;
+        public const string MegabyteSymbol = "MB";
+        public static readonly Humanizer.Bytes.ByteSize MinValue;
+        public const string TerabyteSymbol = "TB";
+        public ByteSize(double byteSize) { }
+        public long Bits { get; }
+        public double Bytes { get; }
+        public double Gigabytes { get; }
+        public double Kilobytes { get; }
+        public string LargestWholeNumberSymbol { get; }
+        public double LargestWholeNumberValue { get; }
+        public double Megabytes { get; }
+        public double Terabytes { get; }
+        public Humanizer.Bytes.ByteSize Add(Humanizer.Bytes.ByteSize bs) { }
+        public Humanizer.Bytes.ByteSize AddBits(long value) { }
+        public Humanizer.Bytes.ByteSize AddBytes(double value) { }
+        public Humanizer.Bytes.ByteSize AddGigabytes(double value) { }
+        public Humanizer.Bytes.ByteSize AddKilobytes(double value) { }
+        public Humanizer.Bytes.ByteSize AddMegabytes(double value) { }
+        public Humanizer.Bytes.ByteSize AddTerabytes(double value) { }
+        public int CompareTo(object obj) { }
+        public int CompareTo(Humanizer.Bytes.ByteSize other) { }
+        public override bool Equals(object value) { }
+        public bool Equals(Humanizer.Bytes.ByteSize value) { }
+        public static Humanizer.Bytes.ByteSize FromBits(long value) { }
+        public static Humanizer.Bytes.ByteSize FromBytes(double value) { }
+        public static Humanizer.Bytes.ByteSize FromGigabytes(double value) { }
+        public static Humanizer.Bytes.ByteSize FromKilobytes(double value) { }
+        public static Humanizer.Bytes.ByteSize FromMegabytes(double value) { }
+        public static Humanizer.Bytes.ByteSize FromTerabytes(double value) { }
+        public override int GetHashCode() { }
+        public static Humanizer.Bytes.ByteSize Parse(string s) { }
+        public Humanizer.Bytes.ByteSize Subtract(Humanizer.Bytes.ByteSize bs) { }
+        public override string ToString() { }
+        public string ToString(string format) { }
+        public static bool TryParse(string s, out Humanizer.Bytes.ByteSize result) { }
+    }
+}
+namespace Humanizer
+{
+    
+    public class static ByteSizeExtensions
+    {
+        public static Humanizer.Bytes.ByteSize Bits(this byte input) { }
+        public static Humanizer.Bytes.ByteSize Bits(this sbyte input) { }
+        public static Humanizer.Bytes.ByteSize Bits(this short input) { }
+        public static Humanizer.Bytes.ByteSize Bits(this ushort input) { }
+        public static Humanizer.Bytes.ByteSize Bits(this int input) { }
+        public static Humanizer.Bytes.ByteSize Bits(this uint input) { }
+        public static Humanizer.Bytes.ByteSize Bits(this long input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this byte input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this sbyte input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this short input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this ushort input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this int input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this uint input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this double input) { }
+        public static Humanizer.Bytes.ByteSize Bytes(this long input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this byte input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this sbyte input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this short input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this ushort input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this int input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this uint input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this double input) { }
+        public static Humanizer.Bytes.ByteSize Gigabytes(this long input) { }
+        public static string Humanize(this Humanizer.Bytes.ByteSize input, string format = null) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this byte input) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this sbyte input) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this short input) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this ushort input) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this int input) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this uint input) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this double input) { }
+        public static Humanizer.Bytes.ByteSize Kilobytes(this long input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this byte input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this sbyte input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this short input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this ushort input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this int input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this uint input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this double input) { }
+        public static Humanizer.Bytes.ByteSize Megabytes(this long input) { }
+        public static Humanizer.Bytes.ByteRate Per(this Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this byte input) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this sbyte input) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this short input) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this ushort input) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this int input) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this uint input) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this double input) { }
+        public static Humanizer.Bytes.ByteSize Terabytes(this long input) { }
+    }
+    public class static CasingExtensions
+    {
+        public static string ApplyCase(this string input, Humanizer.LetterCasing casing) { }
+    }
+    public class static CollectionHumanizeExtensions
+    {
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, string separator) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter, string separator) { }
+    }
+    public class static DateHumanizeExtensions
+    {
+        public static string Humanize(this System.DateTime input, bool utcDate = True, System.Nullable<System.DateTime> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
+        public static string Humanize(this System.Nullable<System.DateTime> input, bool utcDate = True, System.Nullable<System.DateTime> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
+        public static string Humanize(this System.DateTimeOffset input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
+        public static string Humanize(this System.Nullable<System.DateTimeOffset> input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
+    }
+    public class static EnumDehumanizeExtensions
+    {
+        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
+            where TTargetEnum :  struct, System.IComparable, System.IFormattable { }
+        public static System.Enum DehumanizeTo(this string input, System.Type targetEnum, Humanizer.OnNoMatch onNoMatch = 0) { }
+    }
+    public class static EnumHumanizeExtensions
+    {
+        public static string Humanize(this System.Enum input) { }
+        public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing) { }
+    }
+    public enum GrammaticalCase
+    {
+        Nominative = 0,
+        Genitive = 1,
+        Dative = 2,
+        Accusative = 3,
+        Instrumental = 4,
+        Prepositional = 5,
+    }
+    public enum GrammaticalGender
+    {
+        Masculine = 0,
+        Feminine = 1,
+        Neuter = 2,
+    }
+    public class In
+    {
+        public In() { }
+        public static System.DateTime April { get; }
+        public static System.DateTime August { get; }
+        public static System.DateTime December { get; }
+        public static System.DateTime February { get; }
+        public static System.DateTime January { get; }
+        public static System.DateTime July { get; }
+        public static System.DateTime June { get; }
+        public static System.DateTime March { get; }
+        public static System.DateTime May { get; }
+        public static System.DateTime November { get; }
+        public static System.DateTime October { get; }
+        public static System.DateTime September { get; }
+        public static System.DateTime AprilOf(int year) { }
+        public static System.DateTime AugustOf(int year) { }
+        public static System.DateTime DecemberOf(int year) { }
+        public static System.DateTime FebruaryOf(int year) { }
+        public static System.DateTime JanuaryOf(int year) { }
+        public static System.DateTime JulyOf(int year) { }
+        public static System.DateTime JuneOf(int year) { }
+        public static System.DateTime MarchOf(int year) { }
+        public static System.DateTime MayOf(int year) { }
+        public static System.DateTime NovemberOf(int year) { }
+        public static System.DateTime OctoberOf(int year) { }
+        public static System.DateTime SeptemberOf(int year) { }
+        public static System.DateTime TheYear(int year) { }
+        public class static Eight
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static Five
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static Four
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static Nine
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static One
+        {
+            public static System.DateTime Day { get; }
+            public static System.DateTime Hour { get; }
+            public static System.DateTime Minute { get; }
+            public static System.DateTime Month { get; }
+            public static System.DateTime Second { get; }
+            public static System.DateTime Week { get; }
+            public static System.DateTime Year { get; }
+            public static System.DateTime DayFrom(System.DateTime date) { }
+            public static System.DateTime HourFrom(System.DateTime date) { }
+            public static System.DateTime MinuteFrom(System.DateTime date) { }
+            public static System.DateTime MonthFrom(System.DateTime date) { }
+            public static System.DateTime SecondFrom(System.DateTime date) { }
+            public static System.DateTime WeekFrom(System.DateTime date) { }
+            public static System.DateTime YearFrom(System.DateTime date) { }
+        }
+        public class static Seven
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static Six
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static Ten
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static Three
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+        public class static Two
+        {
+            public static System.DateTime Days { get; }
+            public static System.DateTime Hours { get; }
+            public static System.DateTime Minutes { get; }
+            public static System.DateTime Months { get; }
+            public static System.DateTime Seconds { get; }
+            public static System.DateTime Weeks { get; }
+            public static System.DateTime Years { get; }
+            public static System.DateTime DaysFrom(System.DateTime date) { }
+            public static System.DateTime HoursFrom(System.DateTime date) { }
+            public static System.DateTime MinutesFrom(System.DateTime date) { }
+            public static System.DateTime MonthsFrom(System.DateTime date) { }
+            public static System.DateTime SecondsFrom(System.DateTime date) { }
+            public static System.DateTime WeeksFrom(System.DateTime date) { }
+            public static System.DateTime YearsFrom(System.DateTime date) { }
+        }
+    }
+    public class static InflectorExtensions
+    {
+        public static string Camelize(this string input) { }
+        public static string Dasherize(this string underscoredWord) { }
+        public static string Hyphenate(this string underscoredWord) { }
+        public static string Pascalize(this string input) { }
+        public static string Pluralize(this string word, bool inputIsKnownToBeSingular = True) { }
+        public static string Singularize(this string word, bool inputIsKnownToBePlural = True) { }
+        public static string Titleize(this string input) { }
+        public static string Underscore(this string input) { }
+    }
+    public interface IStringTransformer
+    {
+        string Transform(string input);
+    }
+    public interface ITruncator
+    {
+        string Truncate(string value, int length, string truncationString, Humanizer.TruncateFrom truncateFrom = 1);
+    }
+    public enum LetterCasing
+    {
+        Title = 0,
+        AllCaps = 1,
+        LowerCase = 2,
+        Sentence = 3,
+    }
+    public class static MetricNumeralExtensions
+    {
+        public static double FromMetric(this string input) { }
+        public static string ToMetric(this int input, bool hasSpace = False, bool useSymbol = True) { }
+        public static string ToMetric(this double input, bool hasSpace = False, bool useSymbol = True) { }
+    }
+    public class NoMatchFoundException : System.Exception
+    {
+        public NoMatchFoundException() { }
+        public NoMatchFoundException(string message) { }
+        public NoMatchFoundException(string message, System.Exception inner) { }
+    }
+    public class static NumberToTimeSpanExtensions
+    {
+        public static System.TimeSpan Days(this byte days) { }
+        public static System.TimeSpan Days(this sbyte days) { }
+        public static System.TimeSpan Days(this short days) { }
+        public static System.TimeSpan Days(this ushort days) { }
+        public static System.TimeSpan Days(this int days) { }
+        public static System.TimeSpan Days(this uint days) { }
+        public static System.TimeSpan Days(this long days) { }
+        public static System.TimeSpan Days(this ulong days) { }
+        public static System.TimeSpan Days(this double days) { }
+        public static System.TimeSpan Hours(this byte hours) { }
+        public static System.TimeSpan Hours(this sbyte hours) { }
+        public static System.TimeSpan Hours(this short hours) { }
+        public static System.TimeSpan Hours(this ushort hours) { }
+        public static System.TimeSpan Hours(this int hours) { }
+        public static System.TimeSpan Hours(this uint hours) { }
+        public static System.TimeSpan Hours(this long hours) { }
+        public static System.TimeSpan Hours(this ulong hours) { }
+        public static System.TimeSpan Hours(this double hours) { }
+        public static System.TimeSpan Milliseconds(this byte ms) { }
+        public static System.TimeSpan Milliseconds(this sbyte ms) { }
+        public static System.TimeSpan Milliseconds(this short ms) { }
+        public static System.TimeSpan Milliseconds(this ushort ms) { }
+        public static System.TimeSpan Milliseconds(this int ms) { }
+        public static System.TimeSpan Milliseconds(this uint ms) { }
+        public static System.TimeSpan Milliseconds(this long ms) { }
+        public static System.TimeSpan Milliseconds(this ulong ms) { }
+        public static System.TimeSpan Milliseconds(this double ms) { }
+        public static System.TimeSpan Minutes(this byte minutes) { }
+        public static System.TimeSpan Minutes(this sbyte minutes) { }
+        public static System.TimeSpan Minutes(this short minutes) { }
+        public static System.TimeSpan Minutes(this ushort minutes) { }
+        public static System.TimeSpan Minutes(this int minutes) { }
+        public static System.TimeSpan Minutes(this uint minutes) { }
+        public static System.TimeSpan Minutes(this long minutes) { }
+        public static System.TimeSpan Minutes(this ulong minutes) { }
+        public static System.TimeSpan Minutes(this double minutes) { }
+        public static System.TimeSpan Seconds(this byte seconds) { }
+        public static System.TimeSpan Seconds(this sbyte seconds) { }
+        public static System.TimeSpan Seconds(this short seconds) { }
+        public static System.TimeSpan Seconds(this ushort seconds) { }
+        public static System.TimeSpan Seconds(this int seconds) { }
+        public static System.TimeSpan Seconds(this uint seconds) { }
+        public static System.TimeSpan Seconds(this long seconds) { }
+        public static System.TimeSpan Seconds(this ulong seconds) { }
+        public static System.TimeSpan Seconds(this double seconds) { }
+        public static System.TimeSpan Weeks(this byte input) { }
+        public static System.TimeSpan Weeks(this sbyte input) { }
+        public static System.TimeSpan Weeks(this short input) { }
+        public static System.TimeSpan Weeks(this ushort input) { }
+        public static System.TimeSpan Weeks(this int input) { }
+        public static System.TimeSpan Weeks(this uint input) { }
+        public static System.TimeSpan Weeks(this long input) { }
+        public static System.TimeSpan Weeks(this ulong input) { }
+        public static System.TimeSpan Weeks(this double input) { }
+    }
+    public class static NumberToWordsExtension
+    {
+        public static string ToOrdinalWords(this int number, System.Globalization.CultureInfo culture = null) { }
+        public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this int number, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+    }
+    public class On
+    {
+        public On() { }
+        public class April
+        {
+            public April() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class August
+        {
+            public August() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The31st { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class December
+        {
+            public December() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The31st { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class February
+        {
+            public February() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class January
+        {
+            public January() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The31st { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class July
+        {
+            public July() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The31st { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class June
+        {
+            public June() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class March
+        {
+            public March() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The31st { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class May
+        {
+            public May() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The31st { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class November
+        {
+            public November() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class October
+        {
+            public October() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The31st { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+        public class September
+        {
+            public September() { }
+            public static System.DateTime The10th { get; }
+            public static System.DateTime The11th { get; }
+            public static System.DateTime The12th { get; }
+            public static System.DateTime The13th { get; }
+            public static System.DateTime The14th { get; }
+            public static System.DateTime The15th { get; }
+            public static System.DateTime The16th { get; }
+            public static System.DateTime The17th { get; }
+            public static System.DateTime The18th { get; }
+            public static System.DateTime The19th { get; }
+            public static System.DateTime The1st { get; }
+            public static System.DateTime The20th { get; }
+            public static System.DateTime The21st { get; }
+            public static System.DateTime The22nd { get; }
+            public static System.DateTime The23rd { get; }
+            public static System.DateTime The24th { get; }
+            public static System.DateTime The25th { get; }
+            public static System.DateTime The26th { get; }
+            public static System.DateTime The27th { get; }
+            public static System.DateTime The28th { get; }
+            public static System.DateTime The29th { get; }
+            public static System.DateTime The2nd { get; }
+            public static System.DateTime The30th { get; }
+            public static System.DateTime The3rd { get; }
+            public static System.DateTime The4th { get; }
+            public static System.DateTime The5th { get; }
+            public static System.DateTime The6th { get; }
+            public static System.DateTime The7th { get; }
+            public static System.DateTime The8th { get; }
+            public static System.DateTime The9th { get; }
+            public static System.DateTime The(int dayNumber) { }
+        }
+    }
+    public enum OnNoMatch
+    {
+        ThrowsException = 0,
+        ReturnsNull = 1,
+    }
+    public class static OrdinalizeExtensions
+    {
+        public static string Ordinalize(this string numberString) { }
+        public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender) { }
+        public static string Ordinalize(this int number) { }
+        public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender) { }
+    }
+    public enum Plurality
+    {
+        Singular = 0,
+        Plural = 1,
+        CouldBeEither = 2,
+    }
+    public class static PrepositionsExtensions
+    {
+        public static System.DateTime At(this System.DateTime date, int hour, int min = 0, int second = 0, int millisecond = 0) { }
+        public static System.DateTime AtMidnight(this System.DateTime date) { }
+        public static System.DateTime AtNoon(this System.DateTime date) { }
+        public static System.DateTime In(this System.DateTime date, int year) { }
+    }
+    public class static RomanNumeralExtensions
+    {
+        public static int FromRoman(this string input) { }
+        public static string ToRoman(this int input) { }
+    }
+    public enum ShowQuantityAs
+    {
+        None = 0,
+        Numeric = 1,
+        Words = 2,
+    }
+    public class static StringDehumanizeExtensions
+    {
+        public static string Dehumanize(this string input) { }
+    }
+    public class static StringExtensions
+    {
+        public static string FormatWith(this string format, params object[] args) { }
+        public static string FormatWith(this string format, System.IFormatProvider provider, params object[] args) { }
+    }
+    public class static StringHumanizeExtensions
+    {
+        public static string Humanize(this string input) { }
+        public static string Humanize(this string input, Humanizer.LetterCasing casing) { }
+    }
+    public class static TimeSpanHumanizeExtensions
+    {
+        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ") { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ") { }
+    }
+    public class static To
+    {
+        public static Humanizer.IStringTransformer LowerCase { get; }
+        public static Humanizer.IStringTransformer SentenceCase { get; }
+        public static Humanizer.IStringTransformer TitleCase { get; }
+        public static Humanizer.IStringTransformer UpperCase { get; }
+        public static string Transform(this string input, params Humanizer.IStringTransformer[] transformers) { }
+    }
+    public class static ToQuantityExtensions
+    {
+        public static string ToQuantity(this string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs = 1) { }
+        public static string ToQuantity(this string input, int quantity, string format, System.IFormatProvider formatProvider = null) { }
+    }
+    public class static TruncateExtensions
+    {
+        public static string Truncate(this string input, int length) { }
+        public static string Truncate(this string input, int length, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from = 1) { }
+        public static string Truncate(this string input, int length, string truncationString, Humanizer.TruncateFrom from = 1) { }
+        public static string Truncate(this string input, int length, string truncationString, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from = 1) { }
+    }
+    public enum TruncateFrom
+    {
+        Left = 0,
+        Right = 1,
+    }
+    public class static Truncator
+    {
+        public static Humanizer.ITruncator FixedLength { get; }
+        public static Humanizer.ITruncator FixedNumberOfCharacters { get; }
+        public static Humanizer.ITruncator FixedNumberOfWords { get; }
+    }
+}
+namespace Humanizer.Configuration
+{
+    
+    public class static Configurator
+    {
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
+        public static Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
+        public static Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
+        public static System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }
+    }
+    public class LocaliserRegistry<TLocaliser>
+        where TLocaliser :  class
+    {
+        public LocaliserRegistry(TLocaliser defaultLocaliser) { }
+        public LocaliserRegistry(System.Func<System.Globalization.CultureInfo, TLocaliser> defaultLocaliser) { }
+        public void Register(string localeCode, TLocaliser localiser) { }
+        public void Register(string localeCode, System.Func<System.Globalization.CultureInfo, TLocaliser> localiser) { }
+        public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
+        public TLocaliser ResolveForUiCulture() { }
+    }
+}
+namespace Humanizer.DateTimeHumanizeStrategy
+{
+    
+    public class DefaultDateTimeHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
+    {
+        public DefaultDateTimeHumanizeStrategy() { }
+        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
+    public class DefaultDateTimeOffsetHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
+    {
+        public DefaultDateTimeOffsetHumanizeStrategy() { }
+        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
+    public interface IDateTimeHumanizeStrategy
+    {
+        string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
+    }
+    public interface IDateTimeOffsetHumanizeStrategy
+    {
+        string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
+    }
+    public class PrecisionDateTimeHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
+    {
+        public PrecisionDateTimeHumanizeStrategy(double precision = 0.75) { }
+        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
+    public class PrecisionDateTimeOffsetHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
+    {
+        public PrecisionDateTimeOffsetHumanizeStrategy(double precision = 0.75) { }
+        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
+}
+namespace Humanizer.Inflections
+{
+    
+    public class static Vocabularies
+    {
+        public static Humanizer.Inflections.Vocabulary Default { get; }
+    }
+    public class Vocabulary
+    {
+        public void AddIrregular(string singular, string plural, bool matchEnding = True) { }
+        public void AddPlural(string rule, string replacement) { }
+        public void AddSingular(string rule, string replacement) { }
+        public void AddUncountable(string word) { }
+        public string Pluralize(string word, bool inputIsKnownToBeSingular = True) { }
+        public string Singularize(string word, bool inputIsKnownToBePlural = True) { }
+    }
+}
+namespace Humanizer.Localisation.CollectionFormatters
+{
+    
+    public interface ICollectionFormatter
+    {
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
+    }
+}
+namespace Humanizer.Localisation.Formatters
+{
+    
+    public class DefaultFormatter : Humanizer.Localisation.Formatters.IFormatter
+    {
+        public DefaultFormatter(string localeCode) { }
+        public virtual string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
+        public virtual string DateHumanize_Never() { }
+        public virtual string DateHumanize_Now() { }
+        protected virtual string Format(string resourceKey) { }
+        protected virtual string Format(string resourceKey, int number) { }
+        protected virtual string GetResourceKey(string resourceKey, int number) { }
+        protected virtual string GetResourceKey(string resourceKey) { }
+        public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
+        public virtual string TimeSpanHumanize_Zero() { }
+    }
+    public interface IFormatter
+    {
+        string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
+        string DateHumanize_Never();
+        string DateHumanize_Now();
+        string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
+        string TimeSpanHumanize_Zero();
+    }
+}
+namespace Humanizer.Localisation.NumberToWords
+{
+    
+    public interface INumberToWordsConverter
+    {
+        string Convert(int number);
+        string Convert(int number, Humanizer.GrammaticalGender gender);
+        string ConvertToOrdinal(int number);
+        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
+    }
+}
+namespace Humanizer.Localisation.Ordinalizers
+{
+    
+    public interface IOrdinalizer
+    {
+        string Convert(int number, string numberString);
+        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
+    }
+}
+namespace Humanizer.Localisation
+{
+    
+    public class ResourceKeys
+    {
+        public ResourceKeys() { }
+        public class static DateHumanize
+        {
+            public const string Never = "DateHumanize_Never";
+            public const string Now = "DateHumanize_Now";
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int count = 1) { }
+        }
+        public class static TimeSpanHumanize
+        {
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1) { }
+        }
+    }
+    public class static Resources
+    {
+        public static string GetResource(string resourceKey, System.Globalization.CultureInfo culture = null) { }
+    }
+    public enum Tense
+    {
+        Future = 0,
+        Past = 1,
+    }
+    public enum TimeUnit
+    {
+        Millisecond = 0,
+        Second = 1,
+        Minute = 2,
+        Hour = 3,
+        Day = 4,
+        Week = 5,
+        Month = 6,
+        Year = 7,
+    }
+}
