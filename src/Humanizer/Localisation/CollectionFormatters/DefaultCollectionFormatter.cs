@@ -15,7 +15,7 @@ namespace Humanizer.Localisation.CollectionFormatters
 
         public virtual string Humanize<T>(IEnumerable<T> collection)
         {
-            return Humanize(collection, o => o.ToString(), DefaultSeparator);
+            return Humanize(collection, o => o?.ToString(), DefaultSeparator);
         }
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter)
@@ -25,7 +25,7 @@ namespace Humanizer.Localisation.CollectionFormatters
 
         public virtual string Humanize<T>(IEnumerable<T> collection, string separator)
         {
-            return Humanize(collection, o => o.ToString(), separator);
+            return Humanize(collection, o => o?.ToString(), separator);
         }
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
@@ -33,23 +33,29 @@ namespace Humanizer.Localisation.CollectionFormatters
             if (collection == null)
                 throw new ArgumentException("collection");
 
-            var itemsArray = collection as T[] ?? collection.ToArray();
+            var items = collection
+                .Select(objectFormatter)
+                .Select(item => item == null ? string.Empty : item.Trim())
+                .Where(item => !string.IsNullOrWhiteSpace(item));
 
+            var itemsArray = items.ToArray();
             var count = itemsArray.Length;
 
             if (count == 0)
                 return "";
 
             if (count == 1)
-                return objectFormatter(itemsArray[0]);
+                return itemsArray[0];
 
             var itemsBeforeLast = itemsArray.Take(count - 1);
             var lastItem = itemsArray.Skip(count - 1).First();
 
-            return string.Format("{0} {1} {2}",
-                string.Join(", ", itemsBeforeLast.Select(objectFormatter)),
+            return string.Format(GetConjunctionFormatString(count),
+                string.Join(", ", itemsBeforeLast),
                 separator,
-                objectFormatter(lastItem));
+                lastItem);
         }
+
+        protected virtual string GetConjunctionFormatString(int itemCount) => "{0} {1} {2}";
     }
 }
