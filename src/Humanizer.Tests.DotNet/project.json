@@ -1,52 +1,44 @@
 {
-    "version": "1.0.0-*",
-    "description": "Humanizer.Tests.DotNet Class Library",
-    "authors": [ "oren" ],
-    "packOptions": {
-        "tags": [ "" ],
-        "projectUrl": "",
-        "licenseUrl": ""
-    },
+  "version": "1.0.0-*",
+  "description": "Humanizer.Tests.DotNet Class Library",
+  "authors": ["oren"],
+  "packOptions": {
+    "tags": [""],
+    "projectUrl": "",
+    "licenseUrl": ""
+  },
 
-    "buildOptions": {
-        "compile": [ "**/*.cs", "../Humanizer.Tests.Shared/**/*.cs" ]
-    },
+  "buildOptions": {
+    "compile": ["**/*.cs", "../Humanizer.Tests.Shared/**/*.cs"]
+  },
 
-    "dependencies": {
-        "xunit": "2.1.0",
-        "dotnet-test-xunit": "1.0.0-rc2-*"
-    },
+  "dependencies": {
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Humanizer.xproj": "2.1.0-beta01-build0092"
+  },
 
-    "testRunner": "xunit",
-    
-    "frameworks": {
-        "netcoreapp1.0": {
-            "imports": [
-        "dotnet5.4",
-        "portable-net451+win8"
-      ],
-            "dependencies": {
-              "Humanizer": {
-                "target": "project"
-              },
-              "Microsoft.NETCore.App": {
-                "version": "1.0.0",
-                "type": "platform"
-              }
-            },
-            "buildOptions": {
-                "define": [ "NETFX_CORE" ]
-            }
-        },
-        "net46": {
-          "dependencies": {
-            "Humanizer": {
-              "target": "project"
-            }
-          },
-            "frameworkAssemblies": {
-                "System.ComponentModel.DataAnnotations": ""
-            }
+  "testRunner": "xunit",
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
         }
+      },
+      "buildOptions": {
+        "define": ["NETFX_CORE"]
+      }
+    },
+    "net46": {
+      "dependencies": {
+          
+      },
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": ""
+      }
     }
+  }
 }
