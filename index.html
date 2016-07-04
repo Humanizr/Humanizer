@@ -78,6 +78,7 @@
 </ul>
 </li>
 <li><a href="#fluent-date">Fluent date</a></li>
+<li><a href="#number-to-numbers">Number to Numbers</a></li>
 <li><a href="#number-to-words">Number to words</a></li>
 <li><a href="#number-to-ordinal-words">Number to ordinal words</a></li>
 <li><a href="#roman-numerals">Roman numerals</a></li>
@@ -108,10 +109,17 @@
 <a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="install">Install</a>
 </h2>
 
-<p>You can install Humanizer as <a href="https://nuget.org/packages/Humanizer">a nuget package</a>: <code>Install-Package Humanizer</code></p>
+<p>You can install Humanizer as <a href="https://nuget.org/packages/Humanizer">a nuget package</a>: </p>
 
-<p>Humanizer is a Portable Class Library with support for .Net 4.5+, Windows Phone 8, Win Store, and ASP.NET 5 (CoreCLR) applications.
-Also Humanizer symbols are source indexed with <a href="https://github.com/GitTools/GitLink">GitLink</a> and are included in the package so you can <a href="https://github.com/GitTools/GitLink">step through Humanizer code</a> while debugging your code.</p>
+<p><strong>XPROJ / <code>project.json</code></strong>: <code>Humanizer.xproj</code></p>
+
+<p><strong>English only</strong>: <code>Humanizer.Core</code></p>
+
+<p>All languages: <code>Humanizer</code></p>
+
+<p>Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (.Net 4.5+, Windows Phone 8, Win Store, and .NET Core).</p>
+
+<p>Also Humanizer symbols are source indexed with <a href="https://github.com/GitTools/GitLink">GitLink</a> and are included in the package so you can <a href="https://github.com/GitTools/GitLink">step through Humanizer code</a> while debugging your code.</p>
 
 <p>For pre-release builds, <a href="https://www.myget.org/">MyGet feed</a> is available where you can pull down CI packages from the latest codebase. The feed URL is: </p>
 
@@ -121,6 +129,8 @@ Also Humanizer symbols are source indexed with <a href="https://github.com/GitTo
 <li>
 <code>https://www.myget.org/F/humanizer/api/v3/index.json</code> for VS 2015+</li>
 </ul>
+
+<p><em>Note</em>: Humanizer requires at least NuGet <a href="https://docs.nuget.org/release-notes/nuget-2.12">2.12</a> when on VS 2012/2013 and 3.4+ on VS 2015.</p>
 
 <h3>
 <a id="specify-languages-optional" class="anchor" href="#specify-languages-optional" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="specify-lang">Specify Languages (Optional)</a>
@@ -141,6 +151,8 @@ exactly like it does in 1.x. If you're not sure, then just use the main <code>Hu
 <strong>Specific languages</strong>: Use the language specific packages you'd like. For example for French, use <code>Humanizer.Core.fr</code>. You can include
 multiple languages by installing however many language packages you want. </li>
 </ul>
+
+<p><strong>XPROJ / <code>project.json</code></strong>: Due to a <a href="https://github.com/dotnet/cli/issues/3396">bug</a> in the CLI tools, the main <code>Humanizer</code> package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use <code>Humanizer.xproj</code> instead. It contains all of the languages.</p>
 
 <p>The detailed explanation for how this works is in the comments <a href="https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079">here</a>.</p>
 
@@ -472,7 +484,7 @@ TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span 
 <a id="humanize-collections" class="anchor" href="#humanize-collections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="humanize-collections">Humanize Collections</a>
 </h3>
 
-<p>You can call <code>Humanize</code> on any <code>IEnumerable</code> to get a nicely formatted string representing the objects in the collection. By default <code>ToString()</code> will be called on each item to get its representation but a formatting function may be passed to <code>Humanize</code> instead. Additionally, a default separator is provided("and" in English), but a different separator may be passed into <code>Humanize</code>.</p>
+<p>You can call <code>Humanize</code> on any <code>IEnumerable</code> to get a nicely formatted string representing the objects in the collection. By default <code>ToString()</code> will be called on each item to get its representation but a formatting function may be passed to <code>Humanize</code> instead. Additionally, a default separator is provided ("and" in English), but a different separator may be passed into <code>Humanize</code>.</p>
 
 <p>For instance:</p>
 
@@ -492,18 +504,20 @@ TimeSpan.FromMilliseconds(<span class="pl-c1">1299630020</span>).Humanize(<span 
 }
 
 <span class="pl-k">var</span> collection = <span class="pl-k">new</span> List&lt;SomeClass&gt;
-    {
-        <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">1</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>One<span class="pl-pds">"</span></span> },
-        <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">2</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>Two<span class="pl-pds">"</span></span> },
-        <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">3</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>Three<span class="pl-pds">"</span></span> }
-    };
+{
+    <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">1</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>One<span class="pl-pds">"</span></span> },
+    <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">2</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>Two<span class="pl-pds">"</span></span> },
+    <span class="pl-k">new</span> SomeClass { SomeInt = <span class="pl-c1">3</span>, SomeString = <span class="pl-s"><span class="pl-pds">"</span>Three<span class="pl-pds">"</span></span> }
+};
 
 collection.Humanize()                                    <span class="pl-c">// "Specific String, Specific String, and Specific String"</span>
-collection.Humanize(<span class="pl-s"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>)                                <span class="pl-c">//"Specific String, Specific String, or Specific String"</span>
-collection.Humanize(FormatSomeClass)                     <span class="pl-c">//"SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"</span>
-collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>) <span class="pl-c">//"1st, 2nd, or 3rd"</span></pre></div>
+collection.Humanize(<span class="pl-s"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>)                                <span class="pl-c">// "Specific String, Specific String, or Specific String"</span>
+collection.Humanize(FormatSomeClass)                     <span class="pl-c">// "SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three"</span>
+collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s"><span class="pl-pds">"</span>or<span class="pl-pds">"</span></span>) <span class="pl-c">// "1st, 2nd, or 3rd"</span></pre></div>
 
-<p>You can provide your own collection formatter by implementing <code>ICollectionFormatter</code> and registering it with <code>Configurator.CollectionFormatters</code></p>
+<p>Items are trimmed and blank (NullOrWhitespace) items are skipped. This results in clean comma punctuation. (If there is a custom formatter function, this applies only to the formatter's output.)</p>
+
+<p>You can provide your own collection formatter by implementing <code>ICollectionFormatter</code> and registering it with <code>Configurator.CollectionFormatters</code>.</p>
 
 <h3>
 <a id="inflector-methods" class="anchor" href="#inflector-methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="inflector-methods">Inflector methods</a>
@@ -551,13 +565,17 @@ collection.Humanize(sc =&gt; sc.SomeInt.Ordinalize(), <span class="pl-s"><span c
 
 <p>Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the <code>DefaultVocabluary</code> used by <code>Inflector</code>):</p>
 
-<div class="highlight highlight-source-cs"><pre><span class="pl-c">// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx:</span>
+<div class="highlight highlight-source-cs"><pre><span class="pl-c">// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx.</span>
+<span class="pl-c">// Will match both "salesperson" and "person".</span>
 Vocabularies.Default.AddIrregular(<span class="pl-s"><span class="pl-pds">"</span>person<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>people<span class="pl-pds">"</span></span>);
+
+<span class="pl-c">// To only match "person" and not "salesperson" you would pass false for the 'matchEnding' parameter.</span>
+Vocabularies.Default.AddIrregular(<span class="pl-s"><span class="pl-pds">"</span>person<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>people<span class="pl-pds">"</span></span>, matchEnding: <span class="pl-c1">false</span>);
 
 <span class="pl-c">// Adds an uncountable word to the vocabulary.  Will be ignored when plurality is changed:</span>
 Vocabularies.Default.AddUncountable(<span class="pl-s"><span class="pl-pds">"</span>fish<span class="pl-pds">"</span></span>);
 
-<span class="pl-c">// Adds a rule to the vocabulary that does not follow trivial rules for pluralization, e.g. "bus" -&gt; "buses"</span>
+<span class="pl-c">// Adds a rule to the vocabulary that does not follow trivial rules for pluralization:</span>
 Vocabularies.Default.AddPlural(<span class="pl-s"><span class="pl-pds">"</span>bus<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>buses<span class="pl-pds">"</span></span>);
 
 <span class="pl-c">// Adds a rule to the vocabulary that does not follow trivial rules for singularization</span>
@@ -726,6 +744,15 @@ someDateTime.AtMidnight()</pre></div>
 <p>Obviously you could chain the methods too; e.g. <code>On.November.The13th.In(2010).AtNoon + 5.Minutes()</code></p>
 
 <h3>
+<a id="number-to-numbers" class="anchor" href="#number-to-numbers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="number-to-numbers">Number to numbers</a>
+</h3>
+
+<p>Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:</p>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-c1">1.25</span>.Billions() =&gt; <span class="pl-c1">1250000000</span>
+<span class="pl-c1">3.</span>Hundreds().Thousands() =&gt; <span class="pl-c1">300000</span></pre></div>
+
+<h3>
 <a id="number-to-words" class="anchor" href="#number-to-words" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="number-towords">Number to words</a>
 </h3>
 
@@ -744,6 +771,11 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <span class="pl-c1">1.</span>ToWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>один<span class="pl-pds">"</span></span>
 <span class="pl-c1">1.</span>ToWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>одна<span class="pl-pds">"</span></span>
 <span class="pl-c1">1.</span>ToWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>одно<span class="pl-pds">"</span></span></pre></div>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-c">// for Arabic locale</span>
+<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>واحد<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>واحدة<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>واحد<span class="pl-pds">"</span></span></pre></div>
 
 <p>Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.</p>
 
@@ -780,6 +812,14 @@ The possible values are <code>GrammaticalGender.Masculine</code>, <code>Grammati
 <span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>segundo<span class="pl-pds">"</span></span>
 <span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>segunda<span class="pl-pds">"</span></span>
 <span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>segundo<span class="pl-pds">"</span></span></pre></div>
+
+<div class="highlight highlight-source-cs"><pre><span class="pl-c">// for Brazilian Portuguese locale</span>
+<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>الأول<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>الأولى<span class="pl-pds">"</span></span>
+<span class="pl-c1">1.</span>ToOrdinalWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>الأول<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Masculine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>الثاني<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Feminine) =&gt; <span class="pl-s"><span class="pl-pds">"</span>الثانية<span class="pl-pds">"</span></span>
+<span class="pl-c1">2.</span>ToOrdinalWords(GrammaticalGender.Neuter) =&gt; <span class="pl-s"><span class="pl-pds">"</span>الثاني<span class="pl-pds">"</span></span></pre></div>
 
 <p>Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.</p>
 
@@ -1050,11 +1090,7 @@ Make sure you use <code>System.Web.Mvc.ModelMetadataProviders</code>, and not <c
 <a id="known-installation-issues-and-workarounds" class="anchor" href="#known-installation-issues-and-workarounds" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="known-issues">Known installation issues and workarounds</a>
 </h2>
 
-<p>Humanizer 2.0 adds support for the dotnet CLI and <code>project.json</code>-based build systems. NuGet's current client design does not filter the package upgrade list of installed packages based on compatibility with the target project. The upgrades will fail, but the upgrade notifications cause undesirable noise in the NuGet user interface. This is normal and happens if, for example, a package drops support for .NET 4.5 in favor of .NET 4.6. In that scenario you would actually want to keep the older package version since you want to keep targeting 4.5. It's a general problem that NuGet should be aware of, but at this point you just have to ignore the upgrade messages for those packages. There's an issue tracking it <a href="https://github.com/NuGet/Home/issues/2084">here</a>.</p>
-
-<p>The result is that Humanizer's <code>System.*</code> dependencies will appear out of date when targeting .NET 4.x when in fact they are not out of date and the upgrades should be ignored. <strong>The workaround</strong> to alleviate this noise is to use <code>project.json</code>. (<a href="https://oren.codes/2016/02/08/project-json-all-the-things/">It's easy to switch.</a>) If you use <code>project.json</code>, the <code>System.*</code> packages are not listed at all and do not show updates, using the package.json transitive dependency feature. <code>project.json</code> is available for Visual Studio 2015 Update 1 for any project type. The experience is much more refined than the old <code>packages.config</code> experience. </p>
-
-<p>With either <code>packages.config</code> or <code>project.json</code>, NuGet must be configured to install the <em>lowest</em> dependency available (which is default) rather than the highest.</p>
+<p>Due to a <a href="https://github.com/dotnet/cli/issues/3396">bug</a> in the CLI tools, the main <code>Humanizer</code> package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use <code>Humanizer.xproj</code> instead. It contains all of the languages.</p>
 
 <h2>
 <a id="use-in-aspnet-4x-mvc-views" class="anchor" href="#use-in-aspnet-4x-mvc-views" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a id="aspnet4mvc">Use in ASP.NET 4.x MVC Views</a>
