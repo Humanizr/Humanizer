@@ -53,17 +53,22 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 ## <a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): 
 
-**English only**: `Install-Package Humanizer.Core`
+**XPROJ / `project.json`**: `Humanizer.xproj`
 
-All languages: `Install-Package Humanizer`
+**English only**: `Humanizer.Core`
 
-Humanizer is a Portable Class Library with support for .Net 4.5+, Windows Phone 8, Win Store, and ASP.NET 5 (CoreCLR) applications.
+All languages: `Humanizer`
+
+Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (.Net 4.5+, Windows Phone 8, Win Store, and .NET Core).
+
 Also Humanizer symbols are source indexed with [GitLink](https://github.com/GitTools/GitLink) and are included in the package so you can [step through Humanizer code](https://github.com/GitTools/GitLink) while debugging your code.
 
 For pre-release builds, [MyGet feed](https://www.myget.org/) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
 
   - `https://www.myget.org/F/humanizer/api/v2` for VS 2012+
   - `https://www.myget.org/F/humanizer/api/v3/index.json` for VS 2015+
+
+*Note*: Humanizer requires at least NuGet [2.12](https://docs.nuget.org/release-notes/nuget-2.12) when on VS 2012/2013 and 3.4+ on VS 2015.
 
 ### <a id="specify-lang">Specify Languages (Optional)</a>
 New in Humanizer 2.0 is the option to choose which localization packages you wish to use. You choose which packages
@@ -76,6 +81,8 @@ Here are the options:
   - **English**: use the `Humanizer.Core` package. Only the English language resources will be available
   - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include
   multiple languages by installing however many language packages you want. 
+
+**XPROJ / `project.json`**: Due to a [bug](https://github.com/dotnet/cli/issues/3396) in the CLI tools, the main `Humanizer` package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use `Humanizer.xproj` instead. It contains all of the languages.
   
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
@@ -1082,11 +1089,7 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 ```
 
 ## <a id="known-issues">Known installation issues and workarounds</a>
-Humanizer 2.0 adds support for the dotnet CLI and `project.json`-based build systems. NuGet's current client design does not filter the package upgrade list of installed packages based on compatibility with the target project. The upgrades will fail, but the upgrade notifications cause undesirable noise in the NuGet user interface. This is normal and happens if, for example, a package drops support for .NET 4.5 in favor of .NET 4.6. In that scenario you would actually want to keep the older package version since you want to keep targeting 4.5. It's a general problem that NuGet should be aware of, but at this point you just have to ignore the upgrade messages for those packages. There's an issue tracking it [here](https://github.com/NuGet/Home/issues/2084).
-
-The result is that Humanizer's `System.*` dependencies will appear out of date when targeting .NET 4.x when in fact they are not out of date and the upgrades should be ignored. **The workaround** to alleviate this noise is to use `project.json`. ([It's easy to switch.](https://oren.codes/2016/02/08/project-json-all-the-things/)) If you use `project.json`, the `System.*` packages are not listed at all and do not show updates, using the package.json transitive dependency feature. `project.json` is available for Visual Studio 2015 Update 1 for any project type. The experience is much more refined than the old `packages.config` experience. 
-
-With either `packages.config` or `project.json`, NuGet must be configured to install the *lowest* dependency available (which is default) rather than the highest.
+Due to a [bug](https://github.com/dotnet/cli/issues/3396) in the CLI tools, the main `Humanizer` package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use `Humanizer.xproj` instead. It contains all of the languages.
 
 ## <a id="aspnet4mvc">Use in ASP.NET 4.x MVC Views</a>
 Humanizer is a Portable Class Library. There is currently [an issue](http://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do) if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the `web.config` file, including ones the project system normally automatically adds. 
