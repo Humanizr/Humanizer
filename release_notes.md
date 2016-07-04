@@ -1,3 +1,8 @@
+### v2.1 - 2016-07-04
+
+[Fixed issues](https://github.com/Humanizr/Humanizer/issues?q=is%3Aclosed+milestone%3Av2.1)
+[Commits](https://github.com/Humanizr/Humanizer/compare/v2.0.1...v2.1)
+
 ### v2.0.1 - 2016-02-07
   - [#520](https://github.com/Humanizr/Humanizer/issues/520) Humanizer.Core package does not install on Xamarin
   
