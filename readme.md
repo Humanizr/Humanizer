@@ -791,7 +791,7 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 ```
 
 ```C#
-// for Brazilian Portuguese locale
+// for Arabic locale
 1.ToOrdinalWords(GrammaticalGender.Masculine) => "الأول"
 1.ToOrdinalWords(GrammaticalGender.Feminine) => "الأولى"
 1.ToOrdinalWords(GrammaticalGender.Neuter) => "الأول"
