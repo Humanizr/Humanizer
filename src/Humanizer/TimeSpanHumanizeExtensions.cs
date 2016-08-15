@@ -44,13 +44,13 @@ namespace Humanizer
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ")
         {
-            var timeParts = CreateTheTimePartsWithUperAndLowerLimits(timeSpan, culture, maxUnit, minUnit);
+            var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit);
             timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
 
             return ConcatenateTimeSpanParts(timeParts, collectionSeparator);
         }
 
-        private static IEnumerable<string> CreateTheTimePartsWithUperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit)
+        private static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
             var firstValueFound = false;
