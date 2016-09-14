@@ -373,6 +373,10 @@
     <value>בעוד {0} שנים</value>
     <comment>in {0} years</comment>
   </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>כעת</value>
+    <comment>now</comment>
+  </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>מחר</value>
     <comment>tomorrow</comment>
