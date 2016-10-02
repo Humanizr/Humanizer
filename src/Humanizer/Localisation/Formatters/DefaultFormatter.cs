@@ -88,22 +88,33 @@ namespace Humanizer.Localisation.Formatters
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="resourceKey"></param>
+        /// <param name="resourceKey">The resource key.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey), _culture);
+            var resourceString = Resources.GetResource(GetResourceKey(resourceKey), _culture);
+
+            if (string.IsNullOrEmpty(resourceString))
+                throw new ArgumentException(string.Format("The resource object with key '{0}' was not found"), nameof(resourceKey));
+
+            return resourceString;
         }
 
         /// <summary>
-        /// 
+        /// Formats the specified resource key.
         /// </summary>
-        /// <param name="resourceKey"></param>
-        /// <param name="number"></param>
+        /// <param name="resourceKey">The resource key.</param>
+        /// <param name="number">The number.</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey, int number)
         {
-            return Resources.GetResource(GetResourceKey(resourceKey, number), _culture).FormatWith(number);
+            var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture).FormatWith(number);
+            if (string.IsNullOrEmpty(resourceString))
+                throw new ArgumentException(string.Format("The resource object with key '{0}' was not found"), nameof(resourceKey));
+
+            return resourceString;
         }
 
         /// <summary>
