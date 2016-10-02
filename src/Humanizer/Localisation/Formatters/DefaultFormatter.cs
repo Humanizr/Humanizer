@@ -110,11 +110,12 @@ namespace Humanizer.Localisation.Formatters
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey, int number)
         {
-            var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture).FormatWith(number);
+            var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture);
+
             if (string.IsNullOrEmpty(resourceString))
                 throw new ArgumentException(string.Format("The resource object with key '{0}' was not found", resourceKey), nameof(resourceKey));
 
-            return resourceString;
+            return resourceString.FormatWith(number);
         }
 
         /// <summary>
