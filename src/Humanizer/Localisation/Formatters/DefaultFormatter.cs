@@ -86,7 +86,7 @@ namespace Humanizer.Localisation.Formatters
         }
 
         /// <summary>
-        /// 
+        /// Formats the specified resource key.
         /// </summary>
         /// <param name="resourceKey">The resource key.</param>
         /// <returns></returns>
