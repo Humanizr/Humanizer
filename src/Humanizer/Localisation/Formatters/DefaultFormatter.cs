@@ -96,7 +96,7 @@ namespace Humanizer.Localisation.Formatters
             var resourceString = Resources.GetResource(GetResourceKey(resourceKey), _culture);
 
             if (string.IsNullOrEmpty(resourceString))
-                throw new ArgumentException(string.Format("The resource object with key '{0}' was not found", resourceKey), nameof(resourceKey));
+                throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
 
             return resourceString;
         }
@@ -113,7 +113,7 @@ namespace Humanizer.Localisation.Formatters
             var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture);
 
             if (string.IsNullOrEmpty(resourceString))
-                throw new ArgumentException(string.Format("The resource object with key '{0}' was not found", resourceKey), nameof(resourceKey));
+                throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
 
             return resourceString.FormatWith(number);
         }
