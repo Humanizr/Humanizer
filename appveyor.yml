@@ -23,7 +23,6 @@ build:
   project: src\Humanizer.sln
   
 after_build:
-  - cmd: '.\packages\gitlink\lib\net45\GitLink.exe . -f src\Humanizer.sln -u https://github.com/Humanizr/Humanizer -s %APPVEYOR_REPO_COMMIT% -errorsaswarnings'
   - ps: |
       $nugetVer = $env:GitVersion_NuGetVersion
       if(![string]::IsNullOrWhiteSpace($env:GitVersion_BuildMetaDataPadded)) {
