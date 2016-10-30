@@ -30,13 +30,13 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void Constructor()
         {
-            var result = new ByteSize(1099511627776);
+            var result = new ByteSize(1e12);
             
-            Assert.Equal(8.796093022208e12, result.Bits);
-            Assert.Equal(1099511627776, result.Bytes);
-            Assert.Equal(1073741824, result.Kilobytes);
-            Assert.Equal(1048576, result.Megabytes);
-            Assert.Equal(1024, result.Gigabytes);
+            Assert.Equal(8e12, result.Bits);
+            Assert.Equal(1e12, result.Bytes);
+            Assert.Equal(1e9, result.Kilobytes);
+            Assert.Equal(1e6, result.Megabytes);
+            Assert.Equal(1000, result.Gigabytes);
             Assert.Equal(1, result.Terabytes);
         }
 
@@ -63,7 +63,7 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromKilobytes(1.5);
 
-            Assert.Equal(1536, result.Bytes);
+            Assert.Equal(1500, result.Bytes);
             Assert.Equal(1.5, result.Kilobytes);
         }
 
@@ -72,7 +72,7 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromMegabytes(1.5);
 
-            Assert.Equal(1572864, result.Bytes);
+            Assert.Equal(1500000, result.Bytes);
             Assert.Equal(1.5, result.Megabytes);
         }
 
@@ -81,7 +81,7 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromGigabytes(1.5);
 
-            Assert.Equal(1610612736, result.Bytes);
+            Assert.Equal(1500000000, result.Bytes);
             Assert.Equal(1.5, result.Gigabytes);
         }
 
@@ -90,7 +90,7 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromTerabytes(1.5);
 
-            Assert.Equal(1649267441664, result.Bytes);
+            Assert.Equal(1500000000000, result.Bytes);
             Assert.Equal(1.5, result.Terabytes);
         }
     }
