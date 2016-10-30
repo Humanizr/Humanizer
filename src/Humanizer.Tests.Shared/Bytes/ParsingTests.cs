@@ -87,13 +87,13 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ParseThrowsOnNull()
         {
-            Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(null); });
+            Assert.Throws<FormatException>(() => { ByteSize.Parse(null); });
         }
 
         [Fact]
         public void ParseThrowsOnEmptyString()
         {
-            Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(""); });
+            Assert.Throws<FormatException>(() => { ByteSize.Parse(""); });
         }
 
         [Fact]
@@ -130,6 +130,12 @@ namespace Humanizer.Tests.Bytes
         public void ParseTerabytes()
         {
             Assert.Equal(ByteSize.FromTerabytes(100), ByteSize.Parse("100TB"));
+        }
+
+        [Fact]
+        public void ParseNegativeBytes()
+        {
+            Assert.Equal(ByteSize.FromMegabytes(-100.5), ByteSize.Parse("-100.5MB"));
         }
     }
 }

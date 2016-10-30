@@ -359,7 +359,7 @@ namespace Humanizer.Bytes
             result = new ByteSize();
 
             if (string.IsNullOrWhiteSpace(s))
-                throw new ArgumentNullException(nameof(s), "String is null or whitespace");
+                return false;
 
             s = s.TrimStart();
             var firstNonDigit = FindIndexOfFirstNonDigit(s);
@@ -420,7 +420,7 @@ namespace Humanizer.Bytes
 
             for (var index = 0; index < s.Length; index++)
             {
-                if (!(char.IsDigit(s[index]) || s[index] == decimalSeparator))
+                if (!(char.IsDigit(s[index]) || s[index] == decimalSeparator || s[index] == '-'))
                     return index;
             }
 
