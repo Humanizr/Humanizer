@@ -10,11 +10,11 @@ namespace Humanizer.Tests.Bytes
     {
         [Theory]
         [InlineData(400, 1, "400 B/s")]
-        [InlineData(4 * 1024, 1, "4 KB/s")]
-        [InlineData(4 * 1024 * 1024, 1, "4 MB/s")]
-        [InlineData(4 * 2 * 1024 * 1024, 2, "4 MB/s")]
-        [InlineData(4 * 1024, 0.1, "40 KB/s")]
-        [InlineData(15 * 60 * 1024 * 1024, 60, "15 MB/s")]
+        [InlineData(4 * 1000, 1, "4 kB/s")]
+        [InlineData(4 * 1000 * 1000, 1, "4 MB/s")]
+        [InlineData(4 * 2 * 1000 * 1000, 2, "4 MB/s")]
+        [InlineData(4 * 1000, 0.1, "40 kB/s")]
+        [InlineData(15 * 60 * 1000 * 1000, 60, "15 MB/s")]
         public void HumanizesRates(long inputBytes, double perSeconds, string expectedValue)
         {
             var size = new ByteSize(inputBytes);
@@ -32,9 +32,9 @@ namespace Humanizer.Tests.Bytes
         [InlineData(10, 1, TimeUnit.Second, "10 MB/s")]
         [InlineData(10, 60, TimeUnit.Minute, "10 MB/min")]
         [InlineData(10, 60 * 60, TimeUnit.Hour, "10 MB/hour")]
-        [InlineData(1, 10 * 1, TimeUnit.Second, "102.4 KB/s")]
-        [InlineData(1, 10 * 60, TimeUnit.Minute, "102.4 KB/min")]
-        [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "102.4 KB/hour")]
+        [InlineData(1, 10 * 1, TimeUnit.Second, "100 kB/s")]
+        [InlineData(1, 10 * 60, TimeUnit.Minute, "100 kB/min")]
+        [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "100 kB/hour")]
         public void TimeUnitTests(long megabytes, double measurementIntervalSeconds, TimeUnit displayInterval, string expectedValue)
         {
             var size = ByteSize.FromMegabytes(megabytes);
@@ -47,8 +47,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
-        [InlineData(19854651984, 1, TimeUnit.Second, null, "18.4910856038332 GB/s")]
-        [InlineData(19854651984, 1, TimeUnit.Second, "#.##", "18.49 GB/s")]
+        [InlineData(19854651984, 1, TimeUnit.Second, null, "19.854651984 GB/s")]
+        [InlineData(19854651984, 1, TimeUnit.Second, "#.##", "19.85 GB/s")]
         public void FormattedTimeUnitTests(long bytes, int measurementIntervalSeconds, TimeUnit displayInterval, string format, string expectedValue)
         {
             var size = ByteSize.FromBytes(bytes);

@@ -31,19 +31,19 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ReturnsLargestMetricSuffix()
         {
-            Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.5).ToString());
+            Assert.Equal("10.5 kB", ByteSize.FromKilobytes(10.5).ToString());
         }
 
         [Fact]
         public void ReturnsDefaultNumberFormat()
         {
-            Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.5).ToString("KB"));
+            Assert.Equal("10.5 kB", ByteSize.FromKilobytes(10.5).ToString("kB"));
         }
 
         [Fact]
         public void ReturnsProvidedNumberFormat()
         {
-            Assert.Equal("10.1234 KB", ByteSize.FromKilobytes(10.1234).ToString("#.#### KB"));
+            Assert.Equal("10.1234 kB", ByteSize.FromKilobytes(10.1234).ToString("#.#### kB"));
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ReturnsKilobytes()
         {
-            Assert.Equal("10 KB", ByteSize.FromKilobytes(10).ToString("##.#### KB"));
+            Assert.Equal("10 kB", ByteSize.FromKilobytes(10).ToString("##.#### kB"));
         }
 
         [Fact]
@@ -91,13 +91,13 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZero()
         {
-            Assert.Equal("512 KB", ByteSize.FromMegabytes(.5).ToString("#.#"));
+            Assert.Equal("500 kB", ByteSize.FromMegabytes(.5).ToString("#.#"));
         }
 
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZeroForNegativeValues()
         {
-            Assert.Equal("-512 KB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
+            Assert.Equal("-500 kB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
         }
     }
 }

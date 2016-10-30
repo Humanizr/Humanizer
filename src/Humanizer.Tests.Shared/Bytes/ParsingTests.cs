@@ -91,6 +91,12 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
+        public void ParseThrowsOnEmptyString()
+        {
+            Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(""); });
+        }
+
+        [Fact]
         public void ParseBits()
         {
             Assert.Equal(ByteSize.FromBits(1), ByteSize.Parse("1b"));
