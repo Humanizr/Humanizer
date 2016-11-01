@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Globalization;
+using Xunit;
 
 namespace Humanizer.Tests
 {
@@ -94,6 +95,14 @@ namespace Humanizer.Tests
             var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
             var feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
             Assert.Equal(masculineOrdinalized, feminineOrdinalized);
+        }
+        
+        [Theory]
+        [InlineData("en-US", 1, "1st")]
+        [InlineData("nl-NL", 1, "1e")]
+        public void OrdinalizeWithCultureOverridesCurrentCulture(CultureInfo culture, int number, string ordinalized)
+        {
+            Assert.Equal(number.Ordinalize(culture), ordinalized);
         }
     }
 }

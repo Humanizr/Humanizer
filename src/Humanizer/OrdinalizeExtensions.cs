@@ -44,6 +44,17 @@ namespace Humanizer
 
         /// <summary>
         /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+        /// </summary>
+        /// <param name="number">The number to be ordinalized</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns></returns>
+        public static string Ordinalize(this int number, CultureInfo culture)
+        {
+            return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, number.ToString(culture));
+        }
+
+        /// <summary>
+        /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
         /// Gender for Brazilian Portuguese locale
         /// 1.Ordinalize(GrammaticalGender.Masculine) -> "1º"
         /// 1.Ordinalize(GrammaticalGender.Feminine) -> "1ª"
