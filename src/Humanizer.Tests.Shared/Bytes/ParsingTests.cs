@@ -63,6 +63,8 @@ namespace Humanizer.Tests.Bytes
         [InlineData("Unexpected Value")]
         [InlineData("1000")]
         [InlineData("kb")]
+        [InlineData("10-0kb")]
+        [InlineData("10-kb")]
         public void TryParseReturnsFalseOnBadValue(string input)
         {
             ByteSize resultByteSize;
