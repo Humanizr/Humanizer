@@ -55,7 +55,7 @@ namespace Humanizer.Bytes
         public const string GigabyteSymbol = "GB";
         public const string TerabyteSymbol = "TB";
 
-        public const string KibibyteSymbol = "kiB";
+        public const string KibibyteSymbol = "KiB";
         public const string MebibyteSymbol = "MiB";
         public const string GibibyteSymbol = "GiB";
         public const string TebibyteSymbol = "TiB";
@@ -89,6 +89,11 @@ namespace Humanizer.Bytes
         public double Megabytes { get; }
         public double Gigabytes { get; }
         public double Terabytes { get; }
+
+        public double Kibibytes { get; }
+        public double Mebibytes { get; }
+        public double Gibibytes { get; }
+        public double Tebibytes { get; }
 
         public string LargestWholeNumberSymbol
         {
@@ -148,6 +153,10 @@ namespace Humanizer.Bytes
             Megabytes = byteSize / BytesInMegabyte;
             Gigabytes = byteSize / BytesInGigabyte;
             Terabytes = byteSize / BytesInTerabyte;
+            Kibibytes = byteSize/BytesInKibibyte;
+            Mebibytes = byteSize / BytesInMebibyte;
+            Gibibytes = byteSize / BytesInGibibyte;
+            Tebibytes = byteSize / BytesInTebibyte;
         }
 
         public static ByteSize FromBits(long value)
@@ -179,6 +188,25 @@ namespace Humanizer.Bytes
         {
             return new ByteSize(value * BytesInTerabyte);
         }
+        public static ByteSize FromKibibytes(double value)
+        {
+            return new ByteSize(value * BytesInKibibyte);
+        }
+
+        public static ByteSize FromMebibytes(double value)
+        {
+            return new ByteSize(value * BytesInMebibyte);
+        }
+
+        public static ByteSize FromGibibytes(double value)
+        {
+            return new ByteSize(value * BytesInGibibyte);
+        }
+
+        public static ByteSize FromTebibytes(double value)
+        {
+            return new ByteSize(value * BytesInTebibyte);
+        }
 
         /// <summary>
         /// Converts the value of the current ByteSize object to a string.
@@ -188,7 +216,7 @@ namespace Humanizer.Bytes
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberSymbol);
+            return $"{LargestWholeNumberValue} {LargestWholeNumberSymbol}";
         }
 
         public string ToString(string format)
@@ -196,23 +224,31 @@ namespace Humanizer.Bytes
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
 
-            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) >= 0;
             Func<double, string> output = n => n.ToString(format);
 
             if (has(TerabyteSymbol))
                 return output(Terabytes);
+            if (has(TebibyteSymbol))
+                return output(Tebibytes);
             if (has(GigabyteSymbol))
                 return output(Gigabytes);
+            if (has(GibibyteSymbol))
+                return output(Gibibytes);
             if (has(MegabyteSymbol))
                 return output(Megabytes);
+            if (has(MebibyteSymbol))
+                return output(Mebibytes);
             if (has(KilobyteSymbol))
                 return output(Kilobytes);
+            if (has(KibibyteSymbol))
+                return output(Kibibytes);
 
             // Byte and Bit symbol look must be case-sensitive
-            if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
+            if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) >= 0)
                 return output(Bytes);
 
-            if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
+            if (format.IndexOf(BitSymbol, StringComparison.Ordinal) >= 0)
                 return output(Bits);
 
             var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format);
@@ -221,7 +257,7 @@ namespace Humanizer.Bytes
                                               ? "0"
                                               : formattedLargeWholeNumberValue;
 
-            return string.Format("{0} {1}", formattedLargeWholeNumberValue, LargestWholeNumberSymbol);
+            return $"{formattedLargeWholeNumberValue} {LargestWholeNumberSymbol}";
         }
 
         public override bool Equals(object value)
@@ -284,9 +320,19 @@ namespace Humanizer.Bytes
             return this + FromKilobytes(value);
         }
 
+        public ByteSize AddKibibytes(double value)
+        {
+            return this + FromKibibytes(value);
+        }
+
         public ByteSize AddMegabytes(double value)
         {
             return this + FromMegabytes(value);
+        }
+
+        public ByteSize AddMebibytes(double value)
+        {
+            return this + FromMebibytes(value);
         }
 
         public ByteSize AddGigabytes(double value)
@@ -294,9 +340,19 @@ namespace Humanizer.Bytes
             return this + FromGigabytes(value);
         }
 
+        public ByteSize AddGibibytes(double value)
+        {
+            return this + FromGibibytes(value);
+        }
+
         public ByteSize AddTerabytes(double value)
         {
             return this + FromTerabytes(value);
+        }
+
+        public ByteSize AddTebibytes(double value)
+        {
+            return this + FromTebibytes(value);
         }
 
         public ByteSize Subtract(ByteSize bs)

@@ -159,6 +159,7 @@ namespace Humanizer
             return ByteSize.FromBytes(input);
         }
 
+        #region Si-unit extensions (kilo, Mega, Giga, etc.)
         /// <summary>
         /// Considers input as kilobytes
         /// </summary>
@@ -478,6 +479,329 @@ namespace Humanizer
         {
             return ByteSize.FromTerabytes(input);
         }
+        #endregion
+
+        #region IEC-unit extensions (kibi, Mebi, Gibi, etc.)
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this byte input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this sbyte input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this short input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this ushort input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this int input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this uint input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this double input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Kibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Kibibytes(this long input)
+        {
+            return ByteSize.FromKibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this byte input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this sbyte input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this short input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this ushort input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this int input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this uint input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this double input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Mebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Mebibytes(this long input)
+        {
+            return ByteSize.FromMebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this byte input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this sbyte input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this short input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this ushort input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this int input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this uint input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this double input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Gibibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Gibibytes(this long input)
+        {
+            return ByteSize.FromGibibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this byte input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this sbyte input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this short input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this ushort input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this int input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this uint input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this double input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+
+        /// <summary>
+        /// Considers input as Tebibytes
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static ByteSize Tebibytes(this long input)
+        {
+            return ByteSize.FromTebibytes(input);
+        }
+        #endregion
 
         /// <summary>
         /// Turns a byte quantity into human readable form, eg 2 GB
