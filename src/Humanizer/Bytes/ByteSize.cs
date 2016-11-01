@@ -476,7 +476,7 @@ namespace Humanizer.Bytes
 
             for (var index = 0; index < s.Length; index++)
             {
-                if (!(char.IsDigit(s[index]) || s[index] == decimalSeparator || s[index] == '-'))
+                if (!(char.IsDigit(s[index]) || s[index] == decimalSeparator || (index == 0 && s[index] == '-')))
                     return index;
             }
 
