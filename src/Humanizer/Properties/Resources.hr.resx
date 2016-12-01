@@ -171,6 +171,9 @@
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} dana</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleDays_DualTrialQuadral" xml:space="preserve">
+    <value>{0} dana</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} sati</value>
   </data>
