@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
-    "ApiApprover": "3.0.1",
-    "ApprovalTests": "3.0.10",
-    "ApprovalUtilities": "3.0.10",
-    "Mono.Cecil": "0.9.6.1",
+    "ApiApprover": "5.0.0",
+    "ApprovalTests": "3.0.13",
+    "ApprovalUtilities": "3.0.13",
+    "Mono.Cecil": "0.9.6.4",
     "xunit": "2.2.0-beta4-build3444",
     "xunit.runner.visualstudio": "2.2.0-beta4-build1194"
   },

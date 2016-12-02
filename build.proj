@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <Target Name="RestorePackages" DependsOnTargets="_DownloadNuGet">
-    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; install xunit.runner.msbuild -SolutionDir &quot;$(MSBuildProjectDirectory)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\')" />
+    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; install xunit.runner.msbuild -pre -SolutionDir &quot;$(MSBuildProjectDirectory)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\')" />
     
     <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
   </Target>
