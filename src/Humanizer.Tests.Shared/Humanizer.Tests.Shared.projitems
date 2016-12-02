@@ -53,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\OrdinalizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\TimeSpanHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\eo\NumberToWordTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\es\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\es\NumberToWordsFeminineTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\es\NumberToWordsTests.cs" />
