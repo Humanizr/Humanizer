@@ -75,7 +75,6 @@
     <Compile Include="GrammaticalGender.cs" />
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumber.cs" />
     <Compile Include="Localisation\GrammaticalNumber\RussianGrammaticalNumberDetector.cs" />
-    <Compile Include="Localisation\NumberToWords\EsperantoNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FrenchSwissNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FrenchBelgianNumberToWordsConverter.cs" />
     <Compile Include="Localisation\NumberToWords\FrenchNumberToWordsConverterBase.cs" />
