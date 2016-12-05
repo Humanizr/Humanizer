@@ -1,0 +1,13 @@
+{
+  "SignClient": {
+    "AzureAd": {
+      "AADInstance": "https://login.microsoftonline.com/",
+      "ClientId": "eedcc7e7-c92c-42ff-9217-3ec939207bd8",
+      "TenantId": "71048637-3782-41a3-b6b2-6f4ac8a25ae0"
+    },
+    "Service": {
+      "Url": "https://oren-sign-service.azurewebsites.net/",
+      "ResourceId": "https://novotny.org/SignService"
+    }
+  }
+}
