@@ -104,6 +104,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\pt-BR\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\pt-BR\OrdinalizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\pt-BR\TimeSpanHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\pt\OrdinalizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\pt\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ResourcesTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ro-Ro\CollectionFormatterTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ro-Ro\DateHumanizeTests.cs" />
