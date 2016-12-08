@@ -343,8 +343,8 @@ There are two strategies for `DateTime.Humanize`: the default one as seen above 
 To use the precision based strategy you need to configure it:
 
 ```C#
-Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75);
-Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision = .75); // configure when humanizing DateTimeOffset
+Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision: .75);
+Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision: .75); // configure when humanizing DateTimeOffset
 ```
 
 The default precision is set to .75 but you can pass your desired precision too. With precision set to 0.75:
