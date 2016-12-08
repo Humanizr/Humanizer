@@ -100,8 +100,9 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData("en-US", 1, "1st")]
         [InlineData("nl-NL", 1, "1e")]
-        public void OrdinalizeWithCultureOverridesCurrentCulture(CultureInfo culture, int number, string ordinalized)
+        public void OrdinalizeWithCultureOverridesCurrentCulture(string cultureName, int number, string ordinalized)
         {
+            var culture = new CultureInfo(cultureName);
             Assert.Equal(number.Ordinalize(culture), ordinalized);
         }
     }
