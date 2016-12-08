@@ -19,7 +19,7 @@ namespace Humanizer.Configuration
             RegisterCzechSlovakPolishFormatter("pl");
             RegisterCzechSlovakPolishFormatter("sk");
             RegisterDefaultFormatter("bg");
-            RegisterDefaultFormatter("pt-BR");
+            RegisterDefaultFormatter("pt");
             RegisterDefaultFormatter("sv");
             RegisterDefaultFormatter("tr");
             RegisterDefaultFormatter("vi");
