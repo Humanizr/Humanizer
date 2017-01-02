@@ -77,7 +77,7 @@ namespace Humanizer
                         if (executedMethod != null) return executedMethod.ToString();
                     }
                     var methodGetName = attrType.GetRuntimeMethod(DisplayAttributeGetNameMethodName, new Type[0]);
-                    if(methodGetName != null)
+                    if (methodGetName != null)
                     {
                         var executedMethod = methodGetName.Invoke(attr, new object[0]);
                         if (executedMethod != null) return executedMethod.ToString();
