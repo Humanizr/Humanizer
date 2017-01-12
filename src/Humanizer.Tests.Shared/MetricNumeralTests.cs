@@ -88,17 +88,24 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData("0", 0d, false, true)]
-        [InlineData("123", 123d, false, true)]
-        [InlineData("-123", (-123d), false, true)]
-        [InlineData("1.23k", 1230d, false, true)]
-        [InlineData("1 k", 1000d, true, true)]
-        [InlineData("1 kilo", 1000d, true, false)]
-        [InlineData("1milli", 1E-3, false, false)]
-        public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol)
+        [InlineData("0", 0d, false, true, null)]
+        [InlineData("123", 123d, false, true, null)]
+        [InlineData("-123", (-123d), false, true, null)]
+        [InlineData("1.23k", 1230d, false, true, null)]
+        [InlineData("1 k", 1000d, true, true, null)]
+        [InlineData("1 kilo", 1000d, true, false, null)]
+        [InlineData("1milli", 1E-3, false, false, null)]
+        [InlineData("1milli", 1E-3, false, false, null)]
+        [InlineData("1.23milli", 1.234E-3, false, false, 2)]
+        [InlineData("12.34k", 12345, false, true, 2)]
+        [InlineData("12k", 12345, false, true, 0)]
+        [InlineData("-3.9m", -3.91e-3, false, true, 1)]
+        public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals)
         {
-            Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol));
+            Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals));
         }
+
+        
 
         [Theory]
         [InlineData(1E+27)]
