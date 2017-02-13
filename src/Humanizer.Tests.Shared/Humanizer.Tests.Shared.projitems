@@ -127,6 +127,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\sr\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\sr\NumberToWordsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\sr\TimeSpanHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\sv\CollectionFormatterTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\sv\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\sv\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\tr\DateHumanizeTests.cs" />
