@@ -21,6 +21,9 @@
 //THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace Humanizer.Bytes
 {
@@ -34,24 +37,63 @@ namespace Humanizer.Bytes
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
-        public const long BytesInKilobyte = 1024;
-        public const long BytesInMegabyte = 1048576;
-        public const long BytesInGigabyte = 1073741824;
-        public const long BytesInTerabyte = 1099511627776;
+        public static readonly long BytesInKilobyte = Base10Pow(3);
+        public static readonly long BytesInMegabyte = Base10Pow(6);
+        public static readonly long BytesInGigabyte = Base10Pow(9);
+        public static readonly long BytesInTerabyte = Base10Pow(12);
+
+        public static readonly long BytesInKibibyte = Base2Pow(10);
+        public static readonly long BytesInMebibyte = Base2Pow(20);
+        public static readonly long BytesInGibibyte = Base2Pow(30);
+        public static readonly long BytesInTebibyte = Base2Pow(40);
 
         public const string BitSymbol = "b";
         public const string ByteSymbol = "B";
-        public const string KilobyteSymbol = "KB";
+
+        public const string KilobyteSymbol = "kB";
         public const string MegabyteSymbol = "MB";
         public const string GigabyteSymbol = "GB";
         public const string TerabyteSymbol = "TB";
 
-        public long Bits { get; private set; }
-        public double Bytes { get; private set; }
-        public double Kilobytes { get; private set; }
-        public double Megabytes { get; private set; }
-        public double Gigabytes { get; private set; }
-        public double Terabytes { get; private set; }
+        public const string KibibyteSymbol = "KiB";
+        public const string MebibyteSymbol = "MiB";
+        public const string GibibyteSymbol = "GiB";
+        public const string TebibyteSymbol = "TiB";
+
+        private static readonly Dictionary<string, long> UppercasePrefixToMultiplicatorMap = new Dictionary<string, long>
+        {
+            {"", 1 },
+
+            {"K", BytesInKilobyte },
+            {"M", BytesInMegabyte },
+            {"G", BytesInGigabyte },
+            {"T", BytesInTerabyte },
+
+            {"KI", BytesInKibibyte },
+            {"MI", BytesInMebibyte },
+            {"GI", BytesInGibibyte },
+            {"TI", BytesInTebibyte },
+        };
+        private static long Base10Pow(int exponent)
+        {
+            return (long)Math.Pow(10, exponent);
+        }
+        private static long Base2Pow(int exponent)
+        {
+            return (long)Math.Pow(2, exponent);
+        }
+
+        public long Bits { get; }
+        public double Bytes { get; }
+        public double Kilobytes { get; }
+        public double Megabytes { get; }
+        public double Gigabytes { get; }
+        public double Terabytes { get; }
+
+        public double Kibibytes { get; }
+        public double Mebibytes { get; }
+        public double Gibibytes { get; }
+        public double Tebibytes { get; }
 
         public string LargestWholeNumberSymbol
         {
@@ -111,6 +153,10 @@ namespace Humanizer.Bytes
             Megabytes = byteSize / BytesInMegabyte;
             Gigabytes = byteSize / BytesInGigabyte;
             Terabytes = byteSize / BytesInTerabyte;
+            Kibibytes = byteSize/BytesInKibibyte;
+            Mebibytes = byteSize / BytesInMebibyte;
+            Gibibytes = byteSize / BytesInGibibyte;
+            Tebibytes = byteSize / BytesInTebibyte;
         }
 
         public static ByteSize FromBits(long value)
@@ -142,6 +188,25 @@ namespace Humanizer.Bytes
         {
             return new ByteSize(value * BytesInTerabyte);
         }
+        public static ByteSize FromKibibytes(double value)
+        {
+            return new ByteSize(value * BytesInKibibyte);
+        }
+
+        public static ByteSize FromMebibytes(double value)
+        {
+            return new ByteSize(value * BytesInMebibyte);
+        }
+
+        public static ByteSize FromGibibytes(double value)
+        {
+            return new ByteSize(value * BytesInGibibyte);
+        }
+
+        public static ByteSize FromTebibytes(double value)
+        {
+            return new ByteSize(value * BytesInTebibyte);
+        }
 
         /// <summary>
         /// Converts the value of the current ByteSize object to a string.
@@ -151,7 +216,7 @@ namespace Humanizer.Bytes
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberSymbol);
+            return $"{LargestWholeNumberValue} {LargestWholeNumberSymbol}";
         }
 
         public string ToString(string format)
@@ -159,23 +224,31 @@ namespace Humanizer.Bytes
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
 
-            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) >= 0;
             Func<double, string> output = n => n.ToString(format);
 
             if (has(TerabyteSymbol))
                 return output(Terabytes);
+            if (has(TebibyteSymbol))
+                return output(Tebibytes);
             if (has(GigabyteSymbol))
                 return output(Gigabytes);
+            if (has(GibibyteSymbol))
+                return output(Gibibytes);
             if (has(MegabyteSymbol))
                 return output(Megabytes);
+            if (has(MebibyteSymbol))
+                return output(Mebibytes);
             if (has(KilobyteSymbol))
                 return output(Kilobytes);
+            if (has(KibibyteSymbol))
+                return output(Kibibytes);
 
             // Byte and Bit symbol look must be case-sensitive
-            if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
+            if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) >= 0)
                 return output(Bytes);
 
-            if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
+            if (format.IndexOf(BitSymbol, StringComparison.Ordinal) >= 0)
                 return output(Bits);
 
             var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format);
@@ -184,7 +257,7 @@ namespace Humanizer.Bytes
                                               ? "0"
                                               : formattedLargeWholeNumberValue;
 
-            return string.Format("{0} {1}", formattedLargeWholeNumberValue, LargestWholeNumberSymbol);
+            return $"{formattedLargeWholeNumberValue} {LargestWholeNumberSymbol}";
         }
 
         public override bool Equals(object value)
@@ -247,9 +320,19 @@ namespace Humanizer.Bytes
             return this + FromKilobytes(value);
         }
 
+        public ByteSize AddKibibytes(double value)
+        {
+            return this + FromKibibytes(value);
+        }
+
         public ByteSize AddMegabytes(double value)
         {
             return this + FromMegabytes(value);
+        }
+
+        public ByteSize AddMebibytes(double value)
+        {
+            return this + FromMebibytes(value);
         }
 
         public ByteSize AddGigabytes(double value)
@@ -257,9 +340,19 @@ namespace Humanizer.Bytes
             return this + FromGigabytes(value);
         }
 
+        public ByteSize AddGibibytes(double value)
+        {
+            return this + FromGibibytes(value);
+        }
+
         public ByteSize AddTerabytes(double value)
         {
             return this + FromTerabytes(value);
+        }
+
+        public ByteSize AddTebibytes(double value)
+        {
+            return this + FromTebibytes(value);
         }
 
         public ByteSize Subtract(ByteSize bs)
@@ -316,82 +409,78 @@ namespace Humanizer.Bytes
         {
             return b1.Bits >= b2.Bits;
         }
-
+        
         public static bool TryParse(string s, out ByteSize result)
         {
-            // Arg checking
-            if (string.IsNullOrWhiteSpace(s))
-                throw new ArgumentNullException(nameof(s), "String is null or whitespace");
-
-            // Setup the result
             result = new ByteSize();
 
-            // Get the index of the first non-digit character
-            s = s.TrimStart(); // Protect against leading spaces
-
-            int num;
-            var found = false;
-
-            // Acquiring culture specific decimal separator
-			var decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-                
-            // Pick first non-digit number
-            for (num = 0; num < s.Length; num++)
-                if (!(char.IsDigit(s[num]) || s[num] == decSep))
-                {
-                    found = true;
-                    break;
-                }
-
-            if (found == false)
+            if (string.IsNullOrWhiteSpace(s))
                 return false;
 
-            var lastNumber = num;
-
-            // Cut the input string in half
-            var numberPart = s.Substring(0, lastNumber).Trim();
-            var sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
-
-            // Get the numeric part
-            double number;
-            if (!double.TryParse(numberPart, out number))
-                return false;
-
-            // Get the magnitude part
-            switch (sizePart.ToUpper())
+            s = s.TrimStart();
+            var firstNonDigit = FindIndexOfFirstNonDigit(s);
+            if (firstNonDigit < 0)
             {
-                case ByteSymbol:
-                    if (sizePart == BitSymbol)
-                    { // Bits
-                        if (number % 1 != 0) // Can't have partial bits
-                            return false;
-
-                        result = FromBits((long)number);
-                    }
-                    else
-                    { // Bytes
-                        result = FromBytes(number);
-                    }
-                    break;
-
-                case KilobyteSymbol:
-                    result = FromKilobytes(number);
-                    break;
-
-                case MegabyteSymbol:
-                    result = FromMegabytes(number);
-                    break;
-
-                case GigabyteSymbol:
-                    result = FromGigabytes(number);
-                    break;
-
-                case TerabyteSymbol:
-                    result = FromTerabytes(number);
-                    break;
+                // If no unit is specified, we don't know how to parse the value
+                // Although it would be reasonable to assume bytes
+                return false;
             }
 
+            var rawNumber = s.Substring(0, firstNonDigit);
+            var rawUnit = s.Substring(firstNonDigit, s.Length - firstNonDigit).Trim();
+
+            double value;
+            if (!double.TryParse(rawNumber, out value))
+                return false;
+
+            var prefixAndUnit = SplitToPrefixAndUnit(rawUnit);
+
+            if (prefixAndUnit == null)
+                return false; // unable to determine unit or prefix
+
+            var isByte = prefixAndUnit.Item2 == ByteSymbol;
+            var uppercasePrefix = prefixAndUnit.Item1.ToUpperInvariant();
+
+            // No fractional bits
+            if (!isByte && value % 1 != 0)
+                return false;
+
+            long prefixMultiplicator;
+            if (!UppercasePrefixToMultiplicatorMap
+                    .TryGetValue(uppercasePrefix, out prefixMultiplicator))
+                return false;
+
+            result = isByte
+                ? FromBytes(prefixMultiplicator * value)
+                : FromBits(prefixMultiplicator * (long)value);
+
             return true;
+        }
+
+        private static Tuple<string, string> SplitToPrefixAndUnit(string unit)
+        {
+            if (unit.EndsWith(BitSymbol))
+                return Tuple.Create(unit.Substring(0, unit.Length - 1).Trim(), BitSymbol);
+            if (unit.EndsWith(ByteSymbol))
+                return Tuple.Create(unit.Substring(0, unit.Length - 1).Trim(), ByteSymbol);
+            
+            return null;
+        }
+
+        private static int FindIndexOfFirstNonDigit(string s)
+        {
+            // Make the assumption that the decimal separator is always exactly one char explicit
+            Debug.Assert(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.Length == 1);
+
+            var decimalSeparator = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            for (var index = 0; index < s.Length; index++)
+            {
+                if (!(char.IsDigit(s[index]) || s[index] == decimalSeparator || (index == 0 && s[index] == '-')))
+                    return index;
+            }
+
+            return -1;
         }
 
         public static ByteSize Parse(string s)

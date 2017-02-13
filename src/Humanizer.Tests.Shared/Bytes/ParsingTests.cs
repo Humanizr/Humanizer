@@ -34,16 +34,22 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void Parse()
         {
-            Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020KB"));
+            Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020kB"));
+            Assert.Equal(ByteSize.FromKibibytes(1020), ByteSize.Parse("1020KiB"));
         }
 
-        [Fact]
-        public void TryParse()
+        [Theory]
+        [InlineData("1020kB")]
+        [InlineData("1020 kB")]
+        [InlineData("1020 KB")]
+        [InlineData("1020 kB ")]
+        [InlineData(" 1020 kB")]
+        public void TryParse(string rawValue)
         {
             ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse("1020KB", out resultByteSize);
+            var parseSuccess = ByteSize.TryParse(rawValue, out resultByteSize);
 
-            Assert.True(resultBool);
+            Assert.True(parseSuccess);
             Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
         }
 
@@ -56,7 +62,9 @@ namespace Humanizer.Tests.Bytes
         [Theory]
         [InlineData("Unexpected Value")]
         [InlineData("1000")]
-        [InlineData("KB")]
+        [InlineData("kb")]
+        [InlineData("10-0kb")]
+        [InlineData("10-kb")]
         public void TryParseReturnsFalseOnBadValue(string input)
         {
             ByteSize resultByteSize;
@@ -69,7 +77,7 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void TryParseWorksWithLotsOfSpaces()
         {
-            Assert.Equal(ByteSize.FromKilobytes(100), ByteSize.Parse(" 100 KB "));
+            Assert.Equal(ByteSize.FromKilobytes(100), ByteSize.Parse(" 100 kB "));
         }
 
         [Fact]
@@ -87,7 +95,13 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ParseThrowsOnNull()
         {
-            Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(null); });
+            Assert.Throws<FormatException>(() => { ByteSize.Parse(null); });
+        }
+
+        [Fact]
+        public void ParseThrowsOnEmptyString()
+        {
+            Assert.Throws<FormatException>(() => { ByteSize.Parse(""); });
         }
 
         [Fact]
@@ -105,13 +119,25 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ParseKilobytes()
         {
-            Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020KB"));
+            Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020kB"));
+        }
+
+        [Fact]
+        public void ParseKibibytes()
+        {
+            Assert.Equal(ByteSize.FromKibibytes(1020), ByteSize.Parse("1020kiB"));
         }
 
         [Fact]
         public void ParseMegabytes()
         {
             Assert.Equal(ByteSize.FromMegabytes(1000), ByteSize.Parse("1000MB"));
+        }
+        
+        [Fact]
+        public void ParseMebibytes()
+        {
+            Assert.Equal(ByteSize.FromMebibytes(1000), ByteSize.Parse("1000MiB"));
         }
 
         [Fact]
@@ -121,9 +147,27 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
+        public void ParseGibibytes()
+        {
+            Assert.Equal(ByteSize.FromGibibytes(805), ByteSize.Parse("805GiB"));
+        }
+
+        [Fact]
         public void ParseTerabytes()
         {
             Assert.Equal(ByteSize.FromTerabytes(100), ByteSize.Parse("100TB"));
+        }
+
+        [Fact]
+        public void ParseTebibytes()
+        {
+            Assert.Equal(ByteSize.FromTebibytes(100), ByteSize.Parse("100TiB"));
+        }
+
+        [Fact]
+        public void ParseNegativeBytes()
+        {
+            Assert.Equal(ByteSize.FromMegabytes(-100.5), ByteSize.Parse("-100.5MB"));
         }
     }
 }

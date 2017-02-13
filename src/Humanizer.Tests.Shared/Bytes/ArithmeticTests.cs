@@ -38,9 +38,18 @@ namespace Humanizer.Tests.Bytes
         {
             var size = ByteSize.FromKilobytes(2).AddKilobytes(2);
 
+            Assert.Equal(4 * 1000 * 8, size.Bits);
+            Assert.Equal(4 * 1000, size.Bytes);
+            Assert.Equal(4, size.Kilobytes);
+        }
+        [Fact]
+        public void AddKibibytes()
+        {
+            var size = ByteSize.FromKibibytes(2).AddKibibytes(2);
+
             Assert.Equal(4 * 1024 * 8, size.Bits);
             Assert.Equal(4 * 1024, size.Bytes);
-            Assert.Equal(4, size.Kilobytes);
+            Assert.Equal(4, size.Kibibytes);
         }
 
         [Fact]
@@ -48,10 +57,21 @@ namespace Humanizer.Tests.Bytes
         {
             var size = ByteSize.FromMegabytes(2).AddMegabytes(2);
 
+            Assert.Equal(4 * 1000 * 1000 * 8, size.Bits);
+            Assert.Equal(4 * 1000 * 1000, size.Bytes);
+            Assert.Equal(4 * 1000, size.Kilobytes);
+            Assert.Equal(4, size.Megabytes);
+        }
+
+        [Fact]
+        public void AddMebibytes()
+        {
+            var size = ByteSize.FromMebibytes(2).AddMebibytes(2);
+
             Assert.Equal(4 * 1024 * 1024 * 8, size.Bits);
             Assert.Equal(4 * 1024 * 1024, size.Bytes);
-            Assert.Equal(4 * 1024, size.Kilobytes);
-            Assert.Equal(4, size.Megabytes);
+            Assert.Equal(4 * 1024, size.Kibibytes);
+            Assert.Equal(4, size.Mebibytes);
         }
 
         [Fact]
@@ -59,11 +79,23 @@ namespace Humanizer.Tests.Bytes
         {
             var size = ByteSize.FromGigabytes(2).AddGigabytes(2);
 
+            Assert.Equal(4d * 1000 * 1000 * 1000 * 8, size.Bits);
+            Assert.Equal(4d * 1000 * 1000 * 1000, size.Bytes);
+            Assert.Equal(4d * 1000 * 1000, size.Kilobytes);
+            Assert.Equal(4d * 1000, size.Megabytes);
+            Assert.Equal(4d, size.Gigabytes);
+        }
+
+        [Fact]
+        public void AddGibibytes()
+        {
+            var size = ByteSize.FromGibibytes(2).AddGibibytes(2);
+
             Assert.Equal(4d * 1024 * 1024 * 1024 * 8, size.Bits);
             Assert.Equal(4d * 1024 * 1024 * 1024, size.Bytes);
-            Assert.Equal(4d * 1024 * 1024, size.Kilobytes);
-            Assert.Equal(4d * 1024, size.Megabytes);
-            Assert.Equal(4d, size.Gigabytes);
+            Assert.Equal(4d * 1024 * 1024, size.Kibibytes);
+            Assert.Equal(4d * 1024, size.Mebibytes);
+            Assert.Equal(4d, size.Gibibytes);
         }
 
         [Fact]
@@ -71,12 +103,25 @@ namespace Humanizer.Tests.Bytes
         {
             var size = ByteSize.FromTerabytes(2).AddTerabytes(2);
 
+            Assert.Equal(4d * 1000 * 1000 * 1000 * 1000 * 8, size.Bits);
+            Assert.Equal(4d * 1000 * 1000 * 1000 * 1000, size.Bytes);
+            Assert.Equal(4d * 1000 * 1000 * 1000, size.Kilobytes);
+            Assert.Equal(4d * 1000 * 1000, size.Megabytes);
+            Assert.Equal(4d * 1000, size.Gigabytes);
+            Assert.Equal(4d, size.Terabytes);
+        }
+
+        [Fact]
+        public void AddTebibytes()
+        {
+            var size = ByteSize.FromTebibytes(2).AddTebibytes(2);
+
             Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
             Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Bytes);
-            Assert.Equal(4d * 1024 * 1024 * 1024, size.Kilobytes);
-            Assert.Equal(4d * 1024 * 1024, size.Megabytes);
-            Assert.Equal(4d * 1024, size.Gigabytes);
-            Assert.Equal(4d, size.Terabytes);
+            Assert.Equal(4d * 1024 * 1024 * 1024, size.Kibibytes);
+            Assert.Equal(4d * 1024 * 1024, size.Mebibytes);
+            Assert.Equal(4d * 1024, size.Gibibytes);
+            Assert.Equal(4d, size.Tebibytes);
         }
 
         [Fact]

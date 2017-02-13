@@ -7,6 +7,7 @@ namespace Humanizer.Tests.Bytes
     public class ByteSizeExtensionsTests
     {
 
+        #region SI-unit extensions (kilo, mega, giga, etc.)
         [Fact]
         public void ByteTerabytes()
         {
@@ -65,7 +66,7 @@ namespace Humanizer.Tests.Bytes
 
         [Theory]
         [InlineData(2, null, "2 TB")]
-        [InlineData(2, "GB", "2048 GB")]
+        [InlineData(2, "GB", "2000 GB")]
         [InlineData(2.123, "#.#", "2.1 TB")]
         public void HumanizesTerabytes(double input, string format, string expectedValue)
         {
@@ -132,7 +133,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "0 b")]
         [InlineData(0, "GB", "0 GB")]
         [InlineData(2, null, "2 GB")]
-        [InlineData(2, "MB", "2048 MB")]
+        [InlineData(2, "MB", "2000 MB")]
         [InlineData(2.123, "#.##", "2.12 GB")]
         public void HumanizesGigabytes(double input, string format, string expectedValue)
         {
@@ -199,7 +200,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "0 b")]
         [InlineData(0, "MB", "0 MB")]
         [InlineData(2, null, "2 MB")]
-        [InlineData(2, "KB", "2048 KB")]
+        [InlineData(2, "kB", "2000 kB")]
         [InlineData(2.123, "#", "2 MB")]
         public void HumanizesMegabytes(double input, string format, string expectedValue)
         {
@@ -264,14 +265,241 @@ namespace Humanizer.Tests.Bytes
 
         [Theory]
         [InlineData(0, null, "0 b")]
-        [InlineData(0, "KB", "0 KB")]
-        [InlineData(2, null, "2 KB")]
-        [InlineData(2, "B", "2048 B")]
-        [InlineData(2.123, "#.####", "2.123 KB")]
+        [InlineData(0, "kB", "0 kB")]
+        [InlineData(2, null, "2 kB")]
+        [InlineData(2, "B", "2000 B")]
+        [InlineData(2.123, "#.####", "2.123 kB")]
         public void HumanizesKilobytes(double input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, input.Kilobytes().Humanize(format));
         }
+        #endregion
+
+        #region IEC-unit extensions (kibi, mebi, gibi, etc.)
+        [Fact]
+        public void ByteTebibytes()
+        {
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void SbyteTebibytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void ShortTebibytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void UshortTebibytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void IntTebibytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void UintTebibytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void DoubleTebibytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void LongTebibytes()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromTebibytes(size), size.Tebibytes());
+        }
+
+        [Fact]
+        public void ByteGibibytes()
+        {
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void SbyteGibibytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void ShortGibibytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void UshortGibibytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void IntGibibytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void UintGibibytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void DoubleGibibytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void LongGibibytes()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromGibibytes(size), size.Gibibytes());
+        }
+
+        [Fact]
+        public void ByteMebibytes()
+        {
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void SbyteMebibytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void ShortMebibytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void UshortMebibytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void IntMebibytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void UintMebibytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void DoubleMebibytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void LongMebibytes()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromMebibytes(size), size.Mebibytes());
+        }
+
+        [Fact]
+        public void ByteKibibytes()
+        {
+            const byte size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+
+        [Fact]
+        public void SbyteKibibytes()
+        {
+            const sbyte size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+
+        [Fact]
+        public void ShortKibibytes()
+        {
+            const short size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+
+        [Fact]
+        public void UshortKibibytes()
+        {
+            const ushort size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+
+        [Fact]
+        public void IntKibibytes()
+        {
+            const int size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+
+        [Fact]
+        public void UintKibibytes()
+        {
+            const uint size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+
+        [Fact]
+        public void DoubleKibibytes()
+        {
+            const double size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+
+        [Fact]
+        public void LongKibibytes()
+        {
+            const long size = 2;
+            Assert.Equal(ByteSize.FromKibibytes(size), size.Kibibytes());
+        }
+        #endregion
 
         [Fact]
         public void ByteBytes()
@@ -334,11 +562,11 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, "#.##", "0 b")]
         [InlineData(0, "B", "0 B")]
         [InlineData(2, null, "2 B")]
-        [InlineData(2000, "KB", "1.95 KB")]
-        [InlineData(2123, "#.##", "2.07 KB")]
-        [InlineData(10000000, "KB", "9765.63 KB")]
-        [InlineData(10000000, "#,##0 KB", "9,766 KB")]
-        [InlineData(10000000, "#,##0.# KB", "9,765.6 KB")]
+        [InlineData(2000, "kB", "2 kB")]
+        [InlineData(2123, "#.##", "2.12 kB")]
+        [InlineData(10000000, "kB", "10000 kB")]
+        [InlineData(10000000, "#,##0 kB", "10,000 kB")]
+        [InlineData(10000700, "#,##0.# kB", "10,000.7 kB")]
         public void HumanizesBytes(double input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, input.Bytes().Humanize(format));
@@ -398,7 +626,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, "b", "0 b")]
         [InlineData(2, null, "2 b")]
         [InlineData(12, "B", "1.5 B")]
-        [InlineData(10000, "#.# KB", "1.2 KB")]
+        [InlineData(10000, "#.# kB", "1.3 kB")]
         public void HumanizesBits(long input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, input.Bits().Humanize(format));
