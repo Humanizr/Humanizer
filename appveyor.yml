@@ -1,3 +1,4 @@
+image: Visual Studio 2017 RC
 configuration: Release
 branches:
   only:
@@ -10,14 +11,14 @@ environment:
     secure: S26+NphAhj/vo5ZdHd/N/4toty3ztdNGmuNdvAB57W1oIVQEHVKqAVuhTD8B9ATy
 
 install:
-  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v3.5.0/NuGet.exe
+  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.0.0-rc4/NuGet.exe
   - cmd: nuget install GitVersion.CommandLine -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre  
   - cmd: nuget install gitlink -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre
   - cmd: nuget install SignClient -Version 0.5.0-beta4 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre
      
 before_build:
-  - cmd: nuget restore src\Humanizer.sln
-  - cmd: '.\packages\GitVersion.CommandLine\tools\GitVersion.exe /l console /output buildserver /updateAssemblyInfo'
+  - cmd: msbuild /t:restore restore src\Humanizer.sln
+  - cmd: '.\packages\GitVersion.CommandLine\tools\GitVersion.exe /l console /output buildserver'
   
 build:
   verbosity: normal
@@ -26,10 +27,7 @@ build:
   
 after_build:
   - ps: |
-      $nugetVer = $env:GitVersion_NuGetVersion
-      if(![string]::IsNullOrWhiteSpace($env:GitVersion_BuildMetaDataPadded)) {
-        $nugetVer = $nugetVer + "-build$env:GitVersion_BuildMetaDataPadded"
-      }  
+      $nugetVer = $env:GitVersion_FullSemVer
       ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
   - ps: '.\scripts\Sign-Package.ps1'        
   - ps: 'ls *.nupkg | %{ appveyor PushArtifact $_.Name}'

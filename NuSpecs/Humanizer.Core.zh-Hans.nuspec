@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\zh-Hans\*.*" target="lib\netstandard1.0\zh-Hans" />
+    <file src="Humanizer\bin\Release\netstandard1.0\zh-Hans\*.*" target="lib\netstandard1.0\zh-Hans" />
   </files>
 </package>

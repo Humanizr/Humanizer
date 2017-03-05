@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET46
+using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -792,3 +793,4 @@ namespace ApiApprover
 }
 // ReSharper restore BitwiseOperatorOnEnumWihtoutFlags
 // ReSharper restore CheckNamespace
+#endif

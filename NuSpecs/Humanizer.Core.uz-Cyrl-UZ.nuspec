@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\uz-Cyrl-UZ\*.*" target="lib\netstandard1.0\uz-Cyrl-UZ" />
+    <file src="Humanizer\bin\Release\netstandard1.0\uz-Cyrl-UZ\*.*" target="lib\netstandard1.0\uz-Cyrl-UZ" />
   </files>
 </package>

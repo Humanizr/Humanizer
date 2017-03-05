@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\vi\*.*" target="lib\netstandard1.0\vi" />
+    <file src="Humanizer\bin\Release\netstandard1.0\vi\*.*" target="lib\netstandard1.0\vi" />
   </files>
 </package>

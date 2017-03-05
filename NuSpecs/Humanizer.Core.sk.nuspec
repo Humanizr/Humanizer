@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\sk\*.*" target="lib\netstandard1.0\sk" />
+    <file src="Humanizer\bin\Release\netstandard1.0\sk\*.*" target="lib\netstandard1.0\sk" />
   </files>
 </package>

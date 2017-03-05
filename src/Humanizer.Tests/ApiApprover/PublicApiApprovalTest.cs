@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#if NET46
+using System.IO;
 using ApiApprover;
 using ApprovalTests;
 using ApprovalTests.Reporters;
@@ -7,6 +8,7 @@ using Xunit;
 
 namespace Humanizer.Tests.ApiApprover
 {
+
     public class PublicApiApprovalTest
     {
         [Fact]
@@ -32,3 +34,4 @@ namespace Humanizer.Tests.ApiApprover
         }
     }
 }
+#endif
