@@ -17,7 +17,7 @@ install:
   - cmd: nuget install SignClient -Version 0.5.0-beta4 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre
      
 before_build:
-  - cmd: msbuild /t:restore restore src\Humanizer.sln
+  - cmd: msbuild /t:restore src\Humanizer.sln
   - cmd: '.\packages\GitVersion.CommandLine\tools\GitVersion.exe /l console /output buildserver'
   
 build:
