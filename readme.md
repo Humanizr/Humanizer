@@ -309,7 +309,7 @@ DateTime.UtcNow.AddHours(-2).Humanize() => "2 hours ago"
 DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
 
-DateTimeOffset.AddHours(1).Humanize() => "an hour from now"
+DateTimeOffset.UtcNow.AddHours(1).Humanize() => "an hour from now"
 ```
 
 Humanizer supports both local and UTC dates as well as dates with offset (`DateTimeOffset`). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
