@@ -90,27 +90,28 @@ namespace Humanizer
 			return BuildNumber(input, input[input.Length - 1]);
 		}
 
-		/// <summary>
-		/// Converts a number into a valid and Human-readable Metric representation.
-		/// </summary>
-		/// <remarks>
-		/// Inspired by a snippet from Thom Smith.
-		/// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
-		/// </remarks>
-		/// <param name="input">Number to convert to a Metric representation.</param>
-		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-		/// <param name="useSymbol">True will use symbol instead of name</param>
-		/// <example>
-		/// <code>
-		/// 1000.ToMetric() => "1k"
-		/// 123.ToMetric() => "123"
-		/// 1E-1.ToMetric() => "100m"
-		/// </code>
-		/// </example>
-		/// <returns>A valid Metric representation</returns>
-		public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true)
+        /// <summary>
+        /// Converts a number into a valid and Human-readable Metric representation.
+        /// </summary>
+        /// <remarks>
+        /// Inspired by a snippet from Thom Smith.
+        /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
+        /// </remarks>
+        /// <param name="input">Number to convert to a Metric representation.</param>
+        /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
+        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <example>
+        /// <code>
+        /// 1000.ToMetric() => "1k"
+        /// 123.ToMetric() => "123"
+        /// 1E-1.ToMetric() => "100m"
+        /// </code>
+        /// </example>
+        /// <returns>A valid Metric representation</returns>
+        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
 		{
-			return ((double)input).ToMetric(hasSpace, useSymbol);
+			return ((double)input).ToMetric(hasSpace, useSymbol, decimals);
 		}
 
         /// <summary>
@@ -123,6 +124,7 @@ namespace Humanizer
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <example>
         /// <code>
         /// 1000d.ToMetric() => "1k"
@@ -131,14 +133,14 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true)
+        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
 		{
 			if (input.Equals(0))
 				return input.ToString();
 			if (input.IsOutOfRange())
 				throw new ArgumentOutOfRangeException(nameof(input));
 
-			return BuildRepresentation(input, hasSpace, useSymbol);
+			return BuildRepresentation(input, hasSpace, useSymbol, decimals);
 		}
 
 		/// <summary>
@@ -199,19 +201,20 @@ namespace Humanizer
 				current.Replace(name.Value, name.Key.ToString()));
 		}
 
-		/// <summary>
-		/// Build a Metric representation of the number.
-		/// </summary>
-		/// <param name="input">Number to convert to a Metric representation.</param>
-		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-		/// <param name="useSymbol">True will use symbol instead of name</param>
-		/// <returns>A number in a Metric representation</returns>
-		private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol)
+        /// <summary>
+        /// Build a Metric representation of the number.
+        /// </summary>
+        /// <param name="input">Number to convert to a Metric representation.</param>
+        /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
+        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <returns>A number in a Metric representation</returns>
+        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals)
 		{
 			var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
-			return exponent.Equals(0)
+            return exponent.Equals(0)
 				? input.ToString()
-				: BuildMetricRepresentation(input, exponent, hasSpace, useSymbol);
+				: BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
 		}
 
 		/// <summary>
@@ -221,10 +224,13 @@ namespace Humanizer
 		/// <param name="exponent">Exponent of the number in a scientific notation</param>
 		/// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
 		/// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
 		/// <returns>A number in a Metric representation</returns>
-		private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol)
+		private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals)
 		{
 			var number = input * Math.Pow(1000, -exponent);
+            if (decimals.HasValue)
+                number = Math.Round(number, decimals.Value);
 			var symbol = Math.Sign(exponent) == 1
 				? Symbols[0][exponent - 1]
 				: Symbols[1][-exponent - 1];
