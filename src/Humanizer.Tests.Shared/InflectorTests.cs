@@ -129,9 +129,23 @@ namespace Humanizer.Tests
         [InlineData("some title", "some_title")]
         [InlineData("some title that will be underscored", "some_title_that_will_be_underscored")]
         [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
+        [InlineData("SomeForeignWordsLikeÄgyptenÑu", "some_foreign_words_like_ägypten_ñu")]
+        [InlineData("Some wordsTo be Underscored", "some_words_to_be_underscored")]
         public void Underscore(string input, string expectedOuput)
         {
             Assert.Equal(expectedOuput, input.Underscore());
+        }
+
+        // transform words into lowercase and separate with a -
+        [Theory]
+        [InlineData("SomeWords", "some-words")]
+        [InlineData("SOME words TOGETHER", "some-words-together")]
+        [InlineData("A spanish word EL niño", "a-spanish-word-el-niño")]
+        [InlineData("SomeForeignWords ÆgÑuÄgypten", "some-foreign-words-æg-ñu-ägypten")]
+        [InlineData("A VeryShortSENTENCE", "a-very-short-sentence")]
+        public void Kebaberize(string input, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.Kebaberize());
         }
     }
 

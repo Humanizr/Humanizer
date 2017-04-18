@@ -31,6 +31,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
      - [Camelize](#camelize)
      - [Underscore](#underscore)
      - [Dasherize & Hyphenate](#dasherize--hyphenate)
+	 - [Kebaberize](#kebaberize) 
    - [Fluent date](#fluent-date)
    - [Number to Numbers](#number-to-numbers)
    - [Number to words](#number-to-words)
@@ -642,6 +643,13 @@ Obviously this only applies to some cultures. For others passing gender in or no
 ```C#
 "some_title".Dasherize() => "some-title"
 "some_title".Hyphenate() => "some-title"
+```
+
+#### <a id="kebaberize">Kebaberize</a>
+`Kebaberize` separates the input words with hyphens and all words are converted to lowercase 
+
+```C#
+"SomeText".Kebaberize() => "some-text"
 ```
 
 ### <a id="fluent-date">Fluent Date</a>

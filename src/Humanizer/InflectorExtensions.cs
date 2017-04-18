@@ -94,7 +94,7 @@ namespace Humanizer
         {
             return Regex.Replace(
                 Regex.Replace(
-                    Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1_$2"), @"([a-z\d])([A-Z])", "$1_$2"), @"[-\s]", "_").ToLower();
+                    Regex.Replace(input, @"([\p{Lu}]+)([\p{Lu}][\p{Ll}])", "$1_$2"), @"([\p{Ll}\d])([\p{Lu}])", "$1_$2"), @"[-\s]", "_").ToLower();
         }
 
         /// <summary>
@@ -115,6 +115,16 @@ namespace Humanizer
         public static string Hyphenate(this string underscoredWord)
         {
             return Dasherize(underscoredWord);
+        }
+
+        /// <summary>
+        /// Separates the input words with hyphens and all the words are converted to lowercase
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string Kebaberize(this string input)
+        {
+            return Underscore(input).Dasherize();
         }
     }
 }
