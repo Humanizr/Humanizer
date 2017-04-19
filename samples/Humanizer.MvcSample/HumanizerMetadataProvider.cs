@@ -30,10 +30,10 @@ namespace Humanizer.MvcSample
             if (string.IsNullOrEmpty(modelMetadata.PropertyName))
                 return false;
 
-            if (propertyAttributes.OfType<DisplayNameAttribute>().Any())
+            if (propertyAttributes.IsDefined(typeof(DisplayNameAttribute), true))
                 return false;
 
-            if (propertyAttributes.OfType<DisplayAttribute>().Any())
+            if (propertyAttributes.IsDefined(typeof(DisplayAttribute), true))
                 return false;
 
             return true;
