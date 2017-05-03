@@ -522,4 +522,34 @@
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>never</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
+    <value>{0} months</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_DualTrialQuadral" xml:space="preserve">
+    <value>{0} months</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} months</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
+    <value>{0} months</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_TrialQuadral" xml:space="preserve">
+    <value>{0} months</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
+    <value>{0} years</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_DualTrialQuadral" xml:space="preserve">
+    <value>{0} years</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} years</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0} years</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_TrialQuadral" xml:space="preserve">
+    <value>{0} years</value>
+  </data>
 </root>

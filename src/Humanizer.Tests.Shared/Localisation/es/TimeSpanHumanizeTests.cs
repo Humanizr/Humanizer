@@ -6,6 +6,27 @@ namespace Humanizer.Tests.Localisation.es
     [UseCulture("es-ES")]
     public class TimeSpanHumanizeTests
     {
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "un año")]
+        [InlineData(731, "2 años")]
+        [InlineData(1096, "3 años")]
+        [InlineData(4018, "11 años")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "un mes")]
+        [InlineData(61, "2 meses")]
+        [InlineData(92, "3 meses")]
+        [InlineData(335, "11 meses")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
 
         [Fact]
         public void TwoWeeks()

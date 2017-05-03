@@ -61,15 +61,12 @@ namespace Humanizer.Localisation.Formatters
         /// <summary>
         /// Returns the string representation of the provided TimeSpan
         /// </summary>
-        /// <param name="timeUnit">Must be less than or equal to TimeUnit.Week</param>
+        /// <param name="timeUnit">A time unit to represent.</param>
         /// <param name="unit"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
         {
-            if (timeUnit > TimeUnit.Week)
-                throw new ArgumentOutOfRangeException(nameof(timeUnit), "There's no meaningful way to humanize passed timeUnit.");
-
             return GetResourceForTimeSpan(timeUnit, unit);
         }
 

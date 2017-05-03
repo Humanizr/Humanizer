@@ -192,43 +192,55 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>geen tijd</value>
   </data>
-  <data name="DateHumanize_MultipleDaysFromNow">
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>over {0} dagen</value>
   </data>
-  <data name="DateHumanize_MultipleHoursFromNow">
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
     <value>over {0} uur</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesFromNow">
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
     <value>over {0} minuten</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow">
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
     <value>over {0} maanden</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsFromNow">
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>over {0} seconden</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow">
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
     <value>over {0} jaar</value>
   </data>
-  <data name="DateHumanize_Now">
+  <data name="DateHumanize_Now" xml:space="preserve">
     <value>nu</value>
   </data>
-  <data name="DateHumanize_SingleDayFromNow">
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>morgen</value>
   </data>
-  <data name="DateHumanize_SingleHourFromNow">
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
     <value>over 1 uur</value>
   </data>
-  <data name="DateHumanize_SingleMinuteFromNow">
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
     <value>over 1 minuut</value>
   </data>
-  <data name="DateHumanize_SingleMonthFromNow">
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
     <value>over 1 maand</value>
   </data>
-  <data name="DateHumanize_SingleSecondFromNow">
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>over 1 seconde</value>
   </data>
-  <data name="DateHumanize_SingleYearFromNow">
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>over 1 jaar</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} maanden</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} jaar</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 maand</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 jaar</value>
   </data>
 </root>
