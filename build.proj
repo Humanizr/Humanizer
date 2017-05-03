@@ -2,7 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build;Test" ToolsVersion="14.0">
   <!--Project configuration-->
   <PropertyGroup>
-    <XUnitPath>$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\build\portable-net45+win8+wp8+wpa81</XUnitPath>
+    <XUnitPath>$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\build\net452</XUnitPath>
     <CodeTaskAssembly Condition="'$(MSBuildAssemblyVersion)' == ''">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll</CodeTaskAssembly>
     <!-- In VS2013, the assembly contains the VS version. -->
     <CodeTaskAssembly Condition="'$(MSBuildAssemblyVersion)' == '12.0'">$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll</CodeTaskAssembly>
@@ -50,7 +50,7 @@
   <Target Name="RestorePackages" DependsOnTargets="_DownloadNuGet">
     <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; install xunit.runner.msbuild -pre -SolutionDir &quot;$(MSBuildProjectDirectory)&quot; -Verbosity quiet -ExcludeVersion" Condition="!Exists('$(MSBuildThisFileDirectory)packages\xunit.runner.msbuild\')" />
     
-    <Exec Command="&quot;$(MSBuildThisFileDirectory)tools\NuGet\NuGet.exe&quot; restore &quot;%(Solution.Identity)&quot;" />
+    <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" Targets="Restore" />
   </Target>
  
   <Target Name="_DownloadNuGet">
@@ -76,7 +76,7 @@
 
               Log.LogMessage("Downloading latest version of NuGet.exe...");
               WebClient webClient = new WebClient();
-              webClient.DownloadFile("https://dist.nuget.org/win-x86-commandline/latest/nuget.exe", OutputFilename);
+              webClient.DownloadFile("https://dist.nuget.org/win-x86-commandline/v4.1.0/nuget.exe", OutputFilename);
 
               return true;
           }

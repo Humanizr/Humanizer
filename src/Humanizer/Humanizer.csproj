@@ -2,15 +2,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>    
     <Authors>Mehdi Khalili, Oren Novotny</Authors>
-    <PackageLicenseUrl>http://opensource.org/licenses/ms-pl</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/onovotny/Zeroconf</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
-    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>
-    <Summary>MSAL provides a library with easy to use authentication functionality for your .NET client on various platforms including Windows desktop, Windows Store, Xamarin iOS and Xamarin Android by taking advantage of Azure Active Directory and MSA.</Summary>
-    <Copyright>Copyright © 2012-2015 Mehdi Khalili</Copyright>
-    <PackageTags>zeroconf;bonjour;mdns;service;discovery;pcl;xamarin;netstandard;universal</PackageTags>
-    <Product>Zeroconf ($(TargetFramework))</Product>
-    <IncludeSymbols>true</IncludeSymbols>
+    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
+    <Copyright>Copyright © 2012-2017 Mehdi Khalili</Copyright>    
+    <Product>Humanizer ($(TargetFramework))</Product>    
     <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
