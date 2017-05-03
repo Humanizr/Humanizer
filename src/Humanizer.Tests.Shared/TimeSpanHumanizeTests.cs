@@ -2,12 +2,28 @@
 using System.Globalization;
 using Humanizer.Localisation;
 using Xunit;
+using System.Linq;
 
 namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class TimeSpanHumanizeTests
     {
+        [Fact]
+        public void AllTimeSpansMustBeUniqueForASequenceOfDays()
+        {
+            var culture = new CultureInfo("en-US");
+            var qry = from i in Enumerable.Range(0, 100000)
+                      let ts = TimeSpan.FromDays(i)
+                      let text = ts.Humanize(precision: 3, culture: culture, maxUnit: TimeUnit.Year)
+                      select text;
+            var grouping = from t in qry
+                           group t by t into g
+                           select new { Key = g.Key, Count = g.Count() };
+            var allUnique = grouping.All(g => g.Count == 1);
+            Assert.True(allUnique);
+        }
+
         [Theory]
         [InlineData(365, "11 months, 30 days")]
         [InlineData(365 + 1, "1 year")]
