@@ -8,7 +8,7 @@ namespace Humanizer.Tests.Localisation.nbNO
     {
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(366, "ett år")]
         [InlineData(731, "2 år")]
         [InlineData(1096, "3 år")]
@@ -19,7 +19,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         }
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(31, "en måned")]
         [InlineData(61, "2 måneder")]
         [InlineData(92, "3 måneder")]

@@ -8,7 +8,7 @@ namespace Humanizer.Tests.Localisation.fa
     {
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(366, "یک سال")]
         [InlineData(731, "2 سال")]
         [InlineData(1096, "3 سال")]
@@ -19,7 +19,7 @@ namespace Humanizer.Tests.Localisation.fa
         }
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(31, "یک ماه")]
         [InlineData(61, "2 ماه")]
         [InlineData(92, "3 ماه")]

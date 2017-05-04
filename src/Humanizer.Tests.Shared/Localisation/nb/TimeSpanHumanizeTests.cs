@@ -18,7 +18,6 @@ namespace Humanizer.Tests.Localisation.nb
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
         }
 
-
         [Theory]
         [Trait("Translation", "Native speaker")]
         [InlineData(31, "en måned")]

@@ -8,7 +8,7 @@ namespace Humanizer.Tests.Localisation.nl
     {
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(366, "1 jaar")]
         [InlineData(731, "2 jaar")]
         [InlineData(1096, "3 jaar")]
@@ -20,7 +20,7 @@ namespace Humanizer.Tests.Localisation.nl
 
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(31, "1 maand")]
         [InlineData(61, "2 maanden")]
         [InlineData(92, "3 maanden")]
