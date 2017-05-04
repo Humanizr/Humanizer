@@ -238,9 +238,9 @@
     <value>{0} år</value>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>1 månad</value>
+    <value>en månad</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>1 år</value>
+    <value>ett år</value>
   </data>
 </root>

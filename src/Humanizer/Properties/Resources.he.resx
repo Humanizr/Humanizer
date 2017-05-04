@@ -417,7 +417,7 @@
     <value>{0} חודשים</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
-    <value>חודשים</value>
+    <value>חודשיים</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
     <value>{0} חודשים</value>
@@ -426,7 +426,7 @@
     <value>{0} שנים</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
-    <value>שנים</value>
+    <value>שנתיים</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
     <value>{0} שנים</value>
@@ -435,6 +435,6 @@
     <value>חודש</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>שנה אחת</value>
+    <value>שנה</value>
   </data>
 </root>

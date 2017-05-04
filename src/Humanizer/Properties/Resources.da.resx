@@ -241,6 +241,6 @@
     <value>en måned</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>en år</value>
+    <value>et år</value>
   </data>
 </root>

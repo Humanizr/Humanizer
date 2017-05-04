@@ -8,7 +8,7 @@ namespace Humanizer.Tests.Localisation.zhHant
     {
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(366, "1 年")]
         [InlineData(731, "2 年")]
         [InlineData(1096, "3 年")]
@@ -20,7 +20,7 @@ namespace Humanizer.Tests.Localisation.zhHant
         }
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(31, "1 個月")]
         [InlineData(61, "2 個月")]
         [InlineData(92, "3 個月")]

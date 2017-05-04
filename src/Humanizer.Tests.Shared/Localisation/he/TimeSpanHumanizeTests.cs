@@ -8,9 +8,9 @@ namespace Humanizer.Tests.Localisation.he
     {
 
         [Theory]
-        [Trait("Translation", "Google")]
-        [InlineData(366, "שנה אחת")]
-        [InlineData(731, "שנים")]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(366, "שנה")]
+        [InlineData(731, "שנתיים")]
         [InlineData(1096, "3 שנים")]
         [InlineData(4018, "11 שנים")]
         public void Years(int days, string expected)
@@ -19,9 +19,9 @@ namespace Humanizer.Tests.Localisation.he
         }
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(31, "חודש")]
-        [InlineData(61, "חודשים")]
+        [InlineData(61, "חודשיים")]
         [InlineData(92, "3 חודשים")]
         [InlineData(335, "11 חודשים")]
         public void Months(int days, string expected)
