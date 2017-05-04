@@ -22,6 +22,5 @@
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\netstandard1.0\*.dll" target="lib\netstandard1.0" />
-    <file src="Humanizer\bin\Release\netstandard1.0\*.pdb" target="lib\netstandard1.0" />
   </files>
 </package>
