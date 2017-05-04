@@ -4,8 +4,30 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.da
 {
     [UseCulture("da-DK")]
-    public class TimeSpanHumanizeTests 
+    public class TimeSpanHumanizeTests
     {
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(366, "et år")]
+        [InlineData(731, "2 år")]
+        [InlineData(1096, "3 år")]
+        [InlineData(4018, "11 år")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(31, "en måned")]
+        [InlineData(61, "2 måneder")]
+        [InlineData(92, "3 måneder")]
+        [InlineData(335, "11 måneder")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
 
         [Theory]
         [InlineData(7, "en uge")]

@@ -279,4 +279,22 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>za godinu dana</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} mjeseci</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_DualTrialQuadral" xml:space="preserve">
+    <value>{0} mjeseca</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} godina</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_DualTrialQuadral" xml:space="preserve">
+    <value>{0} godine</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 mjesec</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 godina</value>
+  </data>
 </root>

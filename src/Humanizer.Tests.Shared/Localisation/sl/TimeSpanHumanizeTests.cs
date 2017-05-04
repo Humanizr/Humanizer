@@ -4,8 +4,30 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.sl
 {
     [UseCulture("sl-SI")]
-    public class TimeSpanHumanizeTests 
+    public class TimeSpanHumanizeTests
     {
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "1 leto")]
+        [InlineData(731, "2 leti")]
+        [InlineData(1096, "3 leta")]
+        [InlineData(4018, "11 let")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "1 mesec")]
+        [InlineData(61, "2 meseca")]
+        [InlineData(92, "3 mesece")]
+        [InlineData(335, "11 mesecev")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
 
         [Theory]
         [InlineData(7, "1 teden")]

@@ -231,4 +231,16 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>egy év múlva</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} hónap</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} év</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>egy hónap</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>egy év</value>
+  </data>
 </root>

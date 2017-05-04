@@ -13,8 +13,9 @@ namespace Humanizer
     /// </summary>
     public static class TimeSpanHumanizeExtensions
     {
-        private const int _lastTimeUnitTypeIndexImplemented = (int)TimeUnit.Week;
         private const int _daysInAWeek = 7;
+        private const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
+        private const double _daysInAMonth = _daysInAYear / 12;
 
         /// <summary>
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
@@ -22,7 +23,7 @@ namespace Humanizer
         /// <param name="timeSpan"></param>
         /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <param name="maxUnit">The maximum unit of time to output.</param>
+        /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Week"/>. The time units <see cref="TimeUnit.Month"/> and <see cref="TimeUnit.Year"/> will give approximations for time spans bigger 30 days by calculating with 365.2425 days a year and 30.4369 days a month.</param>
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
@@ -38,7 +39,7 @@ namespace Humanizer
         /// <param name="precision">The maximum number of time units to return.</param>
         /// <param name="countEmptyUnits">Controls whether empty time units should be counted towards maximum number of time units. Leading empty time units never count.</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <param name="maxUnit">The maximum unit of time to output.</param>
+        /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Week"/>. The time units <see cref="TimeUnit.Month"/> and <see cref="TimeUnit.Year"/> will give approximations for time spans bigger than 30 days by calculating with 365.2425 days a year and 30.4369 days a month.</param>
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
@@ -78,14 +79,12 @@ namespace Humanizer
         private static IEnumerable<TimeUnit> GetEnumTypesForTimeUnit()
         {
             var enumTypeEnumerator = (IEnumerable<TimeUnit>)Enum.GetValues(typeof(TimeUnit));
-            enumTypeEnumerator = enumTypeEnumerator.Take(_lastTimeUnitTypeIndexImplemented + 1);
-
             return enumTypeEnumerator.Reverse();
         }
 
         private static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, CultureInfo culture, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter)
         {
-            if(timeUnitToGet <= maximumTimeUnit && timeUnitToGet >= minimumTimeUnit)
+            if (timeUnitToGet <= maximumTimeUnit && timeUnitToGet >= minimumTimeUnit)
             {
                 var isTimeUnitToGetTheMaximumTimeUnit = (timeUnitToGet == maximumTimeUnit);
                 var numberOfTimeUnits = GetTimeUnitNumericalValue(timeUnitToGet, timespan, isTimeUnitToGetTheMaximumTimeUnit);
@@ -111,21 +110,38 @@ namespace Humanizer
                 case TimeUnit.Week:
                     return GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
                 case TimeUnit.Month:
-                    // To be implemented
+                    return GetSpecialCaseMonthAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
                 case TimeUnit.Year:
-                    // To be implemented
+                    return GetSpecialCaseYearAsInteger(timespan);
                 default:
                     return 0;
             }
         }
 
-        private static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        private static int GetSpecialCaseMonthAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
         {
             if (isTimeUnitToGetTheMaximumTimeUnit)
             {
+                return (int)((double)timespan.Days / _daysInAMonth);
+            }
+            else
+            {
+                var remainingDays = (double)timespan.Days % _daysInAYear;
+                return (int)(remainingDays / _daysInAMonth);
+            }
+        }
+
+        private static int GetSpecialCaseYearAsInteger(TimeSpan timespan)
+        {
+            return (int)((double)timespan.Days / _daysInAYear);
+        }
+
+        private static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        {
+            if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < _daysInAMonth)
+            {
                 return timespan.Days / _daysInAWeek;
             }
-            // To be implemented with the implementation of Month and Year
             return 0;
         }
 
@@ -135,7 +151,12 @@ namespace Humanizer
             {
                 return timespan.Days;
             }
-            return timespan.Days % _daysInAWeek;
+            if (timespan.Days < _daysInAMonth)
+            {
+                var remainingDays = timespan.Days % _daysInAWeek;
+                return remainingDays;
+            }
+            return (int)((double)timespan.Days % _daysInAMonth);
         }
 
         private static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)

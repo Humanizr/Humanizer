@@ -6,6 +6,29 @@ namespace Humanizer.Tests.Localisation.bnBD
     [UseCulture("bn-BD")]
     public class TimeSpanHumanizeTests
     {
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "এক বছর")]
+        [InlineData(731, "2 বছর")]
+        [InlineData(1096, "3 বছর")]
+        [InlineData(4018, "11 বছর")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "এক মাসের")]
+        [InlineData(61, "2 মাস")]
+        [InlineData(92, "3 মাস")]
+        [InlineData(335, "11 মাস")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
         [Theory]
         [InlineData(7, "এক সপ্তাহ")]
         [InlineData(14, "2 সপ্তাহ")]

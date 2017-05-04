@@ -7,6 +7,28 @@ namespace Humanizer.Tests.Localisation.bg
     public class TimeSpanHumanizeTests
     {
         [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "една година")]
+        [InlineData(731, "2 години")]
+        [InlineData(1096, "3 години")]
+        [InlineData(4018, "11 години")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "един месец")]
+        [InlineData(61, "2 месеца")]
+        [InlineData(92, "3 месеца")]
+        [InlineData(335, "11 месеца")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
         [InlineData(7, "една седмица")]
         [InlineData(14, "2 седмици")]
         public void Weeks(int days, string expected)

@@ -2,17 +2,70 @@
 using System.Globalization;
 using Humanizer.Localisation;
 using Xunit;
+using System.Linq;
 
 namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class TimeSpanHumanizeTests
     {
+        [Fact]
+        public void AllTimeSpansMustBeUniqueForASequenceOfDays()
+        {
+            var culture = new CultureInfo("en-US");
+            var qry = from i in Enumerable.Range(0, 100000)
+                      let ts = TimeSpan.FromDays(i)
+                      let text = ts.Humanize(precision: 3, culture: culture, maxUnit: TimeUnit.Year)
+                      select text;
+            var grouping = from t in qry
+                           group t by t into g
+                           select new { Key = g.Key, Count = g.Count() };
+            var allUnique = grouping.All(g => g.Count == 1);
+            Assert.True(allUnique);
+        }
+
+        [Theory]
+        [InlineData(365, "11 months, 30 days")]
+        [InlineData(365 + 1, "1 year")]
+        [InlineData(365 + 365, "1 year, 11 months, 29 days")]
+        [InlineData(365 + 365 + 1, "2 years")]
+        [InlineData(365 + 365 + 365, "2 years, 11 months, 29 days")]
+        [InlineData(365 + 365 + 365 + 1, "3 years")]
+        [InlineData(365 + 365 + 365 + 365, "3 years, 11 months, 29 days")]
+        [InlineData(365 + 365 + 365 + 365 + 1, "4 years")]
+        [InlineData(365 + 365 + 365 + 365 + 366, "4 years, 11 months, 30 days")]
+        [InlineData(365 + 365 + 365 + 365 + 366 + 1, "5 years")]
+        public void Year(int days, string expected)
+        {
+            string actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(30, "4 weeks, 2 days")]
+        [InlineData(30 + 1, "1 month")]
+        [InlineData(30 + 30, "1 month, 29 days")]
+        [InlineData(30 + 30 + 1, "2 months")]
+        [InlineData(30 + 30 + 31, "2 months, 30 days")]
+        [InlineData(30 + 30 + 31 + 1, "3 months")]
+        [InlineData(30 + 30 + 31 + 30, "3 months, 29 days")]
+        [InlineData(30 + 30 + 31 + 30 + 1, "4 months")]
+        [InlineData(30 + 30 + 31 + 30 + 31, "4 months, 30 days")]
+        [InlineData(30 + 30 + 31 + 30 + 31 + 1, "5 months")]
+        [InlineData(365, "11 months, 30 days")]
+        [InlineData(366, "1 year")]
+        public void Month(int days, string expected)
+        {
+            string actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
+            Assert.Equal(expected, actual);
+        }
+
         [Theory]
         [InlineData(14, "2 weeks")]
         [InlineData(7, "1 week")]
         [InlineData(-14, "2 weeks")]
         [InlineData(-7, "1 week")]
+        [InlineData(730, "104 weeks")]
         public void Weeks(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize();
@@ -86,12 +139,14 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData((long)366 * 24 * 60 * 60 * 1000, "12 months", TimeUnit.Month)]
+        [InlineData((long)6 * 7 * 24 * 60 * 60 * 1000, "6 weeks", TimeUnit.Week)]
         [InlineData(7 * 24 * 60 * 60 * 1000, "7 days", TimeUnit.Day)]
         [InlineData(24 * 60 * 60 * 1000, "24 hours", TimeUnit.Hour)]
         [InlineData(60 * 60 * 1000, "60 minutes", TimeUnit.Minute)]
         [InlineData(60 * 1000, "60 seconds", TimeUnit.Second)]
         [InlineData(1000, "1000 milliseconds", TimeUnit.Millisecond)]
-        public void TimeSpanWithMaxTimeUnit(int ms, string expected, TimeUnit maxUnit)
+        public void TimeSpanWithMaxTimeUnit(long ms, string expected, TimeUnit maxUnit)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize(maxUnit: maxUnit);
             Assert.Equal(expected, actual);
@@ -134,9 +189,25 @@ namespace Humanizer.Tests
         [InlineData(694922500, "1 week, 1 day, 1 hour", TimeUnit.Hour)]
         [InlineData(694922500, "1 week, 1 day", TimeUnit.Day)]
         [InlineData(694922500, "1 week", TimeUnit.Week)]
-        public void TimeSpanWithMinTimeUnit(int ms, string expected, TimeUnit minUnit)
+        [InlineData(2768462500, "1 month, 1 day, 1 hour, 1 minute, 2 seconds, 500 milliseconds", TimeUnit.Millisecond)]
+        [InlineData(2768462500, "1 month, 1 day, 1 hour, 1 minute, 2 seconds", TimeUnit.Second)]
+        [InlineData(2768462500, "1 month, 1 day, 1 hour, 1 minute", TimeUnit.Minute)]
+        [InlineData(2768462500, "1 month, 1 day, 1 hour", TimeUnit.Hour)]
+        [InlineData(2768462500, "1 month, 1 day", TimeUnit.Day)]
+        [InlineData(2768462500, "1 month", TimeUnit.Week)]
+        [InlineData(2768462500, "1 month", TimeUnit.Month)]
+        [InlineData(2768462500, "no time", TimeUnit.Year)]
+        [InlineData(34390862500, "1 year, 1 month, 2 days, 1 hour, 1 minute, 2 seconds, 500 milliseconds", TimeUnit.Millisecond)]
+        [InlineData(34390862500, "1 year, 1 month, 2 days, 1 hour, 1 minute, 2 seconds", TimeUnit.Second)]
+        [InlineData(34390862500, "1 year, 1 month, 2 days, 1 hour, 1 minute", TimeUnit.Minute)]
+        [InlineData(34390862500, "1 year, 1 month, 2 days, 1 hour", TimeUnit.Hour)]
+        [InlineData(34390862500, "1 year, 1 month, 2 days", TimeUnit.Day)]
+        [InlineData(34390862500, "1 year, 1 month", TimeUnit.Week)]
+        [InlineData(34390862500, "1 year, 1 month", TimeUnit.Month)]
+        [InlineData(34390862500, "1 year", TimeUnit.Year)]
+        public void TimeSpanWithMinTimeUnit(long ms, string expected, TimeUnit minUnit)
         {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize(minUnit: minUnit, precision: 6);
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(minUnit: minUnit, precision: 7, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
         }
 
@@ -170,9 +241,22 @@ namespace Humanizer.Tests
         [InlineData(1299630020, 3, "2 weeks, 1 day, 1 hour")]
         [InlineData(1299630020, 4, "2 weeks, 1 day, 1 hour, 30 seconds")]
         [InlineData(1299630020, 5, "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds")]
-        public void TimeSpanWithPrecision(int milliseconds, int precision, string expected)
+        [InlineData(2768462500, 6, "1 month, 1 day, 1 hour, 1 minute, 2 seconds, 500 milliseconds")]
+        [InlineData(2768462500, 5, "1 month, 1 day, 1 hour, 1 minute, 2 seconds")]
+        [InlineData(2768462500, 4, "1 month, 1 day, 1 hour, 1 minute")]
+        [InlineData(2768462500, 3, "1 month, 1 day, 1 hour")]
+        [InlineData(2768462500, 2, "1 month, 1 day")]
+        [InlineData(2768462500, 1, "1 month")]
+        [InlineData(34390862500, 7, "1 year, 1 month, 2 days, 1 hour, 1 minute, 2 seconds, 500 milliseconds")]
+        [InlineData(34390862500, 6, "1 year, 1 month, 2 days, 1 hour, 1 minute, 2 seconds")]
+        [InlineData(34390862500, 5, "1 year, 1 month, 2 days, 1 hour, 1 minute")]
+        [InlineData(34390862500, 4, "1 year, 1 month, 2 days, 1 hour")]
+        [InlineData(34390862500, 3, "1 year, 1 month, 2 days")]
+        [InlineData(34390862500, 2, "1 year, 1 month")]
+        [InlineData(34390862500, 1, "1 year")]
+        public void TimeSpanWithPrecision(long milliseconds, int precision, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
         }
 

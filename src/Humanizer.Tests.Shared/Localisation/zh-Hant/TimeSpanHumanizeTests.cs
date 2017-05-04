@@ -6,6 +6,30 @@ namespace Humanizer.Tests.Localisation.zhHant
     [UseCulture("zh-Hant")]
     public class TimeSpanHumanizeTests
     {
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(366, "1 年")]
+        [InlineData(731, "2 年")]
+        [InlineData(1096, "3 年")]
+        [InlineData(4018, "11 年")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(31, "1 個月")]
+        [InlineData(61, "2 個月")]
+        [InlineData(92, "3 個月")]
+        [InlineData(335, "11 個月")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
         [Theory]
         [InlineData(7, "1 周")]
         [InlineData(14, "2 周")]

@@ -11,7 +11,7 @@ namespace Humanizer.Tests.Localisation.roRO
     /// There is no test for months since there are only 12 of them in a year.
     /// </summary>
     [UseCulture("ro-RO")]
-    public class TimeSpanHumanizerTests 
+    public class TimeSpanHumanizerTests
     {
 
         [Theory]
@@ -57,7 +57,7 @@ namespace Humanizer.Tests.Localisation.roRO
             var actual = TimeSpan.FromHours(hours).Humanize();
             Assert.Equal(expected, actual);
         }
-        
+
         [Theory]
         [InlineData(1, "1 zi")]
         [InlineData(6, "6 zile")]
@@ -78,6 +78,29 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             var actual = TimeSpan.FromDays(7 * weeks).Humanize();
             Assert.Equal(expected, actual);
+        }
+
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "1 luna")]
+        [InlineData(61, "2 luni")]
+        [InlineData(92, "3 luni")]
+        [InlineData(335, "11 luni")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "1 ani")]
+        [InlineData(731, "2 ani")]
+        [InlineData(1096, "3 ani")]
+        [InlineData(4018, "11 ani")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
         }
     }
 }

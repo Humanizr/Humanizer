@@ -4,8 +4,30 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.ruRU
 {
     [UseCulture("ru-RU")]
-    public class TimeSpanHumanizeTests 
+    public class TimeSpanHumanizeTests
     {
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(366, "один год")]
+        [InlineData(731, "2 года")]
+        [InlineData(1096, "3 года")]
+        [InlineData(4018, "11 лет")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(31, "один месяц")]
+        [InlineData(61, "2 месяца")]
+        [InlineData(92, "3 месяца")]
+        [InlineData(335, "11 месяцев")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
 
         [Theory]
         [InlineData(7, "одна неделя")]
