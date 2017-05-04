@@ -117,40 +117,439 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>πριν από ένα δευτερόλεπτο</value>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>πριν από {0} ημέρες</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>πριν από {0} δευτερόλεπτα</value>
+  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
+    <value>πριν από {0} ημέρες</value>
   </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>πριν από ένα λεπτό</value>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>πριν από {0} ημέρες</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>πριν από {0} λεπτά</value>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>πριν από {0} ημέρες</value>
   </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>πριν από μία ώρα</value>
+  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
+    <value>πριν από {0} ημέρα</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_TrialQuadral" xml:space="preserve">
+    <value>πριν από {0} ημέρες</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} ημέρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>{0} ημέρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>{0} ημέρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
+    <value>{0} ημέρα από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} ημέρες από τώρα</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>πριν από {0} ώρες</value>
   </data>
-  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
-    <value>χθες</value>
+  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
+    <value>πριν από {0} ώρες</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>πριν από {0} ημέρες</value>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>πριν από {0} ώρες</value>
   </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>πριν από έναν μήνα</value>
+  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
+    <value>πριν από {0} ώρες</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>πριν από {0} ώρες</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
+    <value>πριν από {0} ώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_TrialQuadral" xml:space="preserve">
+    <value>πριν από {0} ώρες</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>{0} ώρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>{0} ώρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} ώρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>{0} ώρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
+    <value>{0} ώρα από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} ώρες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>πριν από {0} λεπτά</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
+    <value>πριν από {0} λεπτά</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>πριν από {0} λεπτά</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
+    <value>πριν από {0} λεπτά</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>πριν από {0} λεπτά</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
+    <value>πριν από {0} λεπτό</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_TrialQuadral" xml:space="preserve">
+    <value>πριν από {0} λεπτά</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>{0} λεπτά από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>{0} λεπτά από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} λεπτά από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>{0} λεπτά από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
+    <value>{0} λεπτό από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} λεπτά από τώρα</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>πριν από {0} μήνες</value>
   </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>πριν από έναν χρόνο</value>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>πριν από {0} μήνες</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>πριν από {0} μήνες</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>πριν από {0} μήνες</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
+    <value>πριν από {0} μήνα</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_TrialQuadral" xml:space="preserve">
+    <value>πριν από {0} μήνες</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>{0} μήνες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>{0} μήνες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} μήνες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>{0} μήνες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
+    <value>{0} μήνα από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} μήνες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτο</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_TrialQuadral" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>{0} δευτερόλεπτα από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>{0} δευτερόλεπτα από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} δευτερόλεπτα από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>{0} δευτερόλεπτο από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
+    <value>{0} δευτερόλεπτα από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} δευτερόλεπτα από τώρα</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>πριν από {0} χρόνια</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
+    <value>πριν από {0} χρόνια</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>πριν από {0} χρόνια</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>πριν από {0} χρόνια</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>πριν από {0} χρόνια</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
+    <value>πριν από {0} χρόνο</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_TrialQuadral" xml:space="preserve">
+    <value>πριν από {0} χρόνια</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>{0} χρόνια από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>{0} χρόνια από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} χρόνια από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>{0} χρόνια από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
+    <value>{0} χρόνο από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} χρόνια από τώρα</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>ποτέ</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>χθες</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>αύριο</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>πριν από μία ώρα</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>πρίν από μία ώρα από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>πριν από ένα λεπτό</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>πρίν από ένα λεπτό από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>πριν από έναν μήνα</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>πριν από έναν μήνα από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>πριν από ένα δευτερόλεπτο</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>πριν από ένα δευτερόλεπτο από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>πριν από έναν χρόνο</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>πριν από έναν χρόνο από τώρα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} μέρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>{0} μέρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} μέρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
+    <value>{0} μέρα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_TrialQuadral" xml:space="preserve">
+    <value>{0} days</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} ώρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>{0} ώρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
+    <value>{0} ώρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} ώρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
+    <value>{0} ώρα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_TrialQuadral" xml:space="preserve">
+    <value>{0} ώρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} χιλιοστά του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>{0} χιλιοστά του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
+    <value>{0} χιλιοστά του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} χιλιοστά του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>{0} χιλιοσtό του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_TrialQuadral" xml:space="preserve">
+    <value>{0} χιλιοστά του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} λεπτά</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>{0} λεπτά</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
+    <value>{0} λεπτά</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} λεπτά</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} λεπτό</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_TrialQuadral" xml:space="preserve">
+    <value>{0} λεπτά</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} μήνες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
+    <value>{0} μήνες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_DualTrialQuadral" xml:space="preserve">
+    <value>{0} μήνες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} μήνες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
+    <value>{0} μήνα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_TrialQuadral" xml:space="preserve">
+    <value>{0} μήνες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} δευτερόλεπτα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>{0} δευτερόλεπτα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
+    <value>{0} δευτερόλεπτα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} δευτερόλεπτα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>{0} δευτερόλεπτο</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_TrialQuadral" xml:space="preserve">
+    <value>{0} δευτερόλεπτα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} βδομάδες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>{0} βδομάδες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
+    <value>{0} βδομάδες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} βδομάδες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>{0} βδομάδα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
+    <value>{0} βδομάδες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} χρόνια</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
+    <value>{0} χρόνια</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_DualTrialQuadral" xml:space="preserve">
+    <value>{0} χρόνια</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} χρόνια</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0} χρόνο</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_TrialQuadral" xml:space="preserve">
+    <value>{0} χρόνια</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>1 μέρα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>1 ώρα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1 χιλιοσtό του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>1 λεπτό</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 μήνα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>1 δευτερόλεπτο</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>1 βδομάδα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 χρόνο</value>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>μηδέν χρόνος</value>
   </data>
 </root>
