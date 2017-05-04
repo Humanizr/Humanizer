@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">  
+﻿<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>    
     <Authors>Mehdi Khalili, Oren Novotny</Authors>
@@ -12,9 +12,11 @@
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="GitVersionTask" Version="4.0.0-beta0011" PrivateAssets="All" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.1.1" PrivateAssets="All" />
   </ItemGroup>
 </Project>
