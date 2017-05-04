@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.pl
 {
     [UseCulture("pl")]
-    public class TimeSpanHumanizeTests 
+    public class TimeSpanHumanizeTests
     {
         [Theory]
         [InlineData(1, "1 milisekunda")]
@@ -80,6 +80,29 @@ namespace Humanizer.Tests.Localisation.pl
         public void Weeks(int number, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
+        }
+
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "1 miesiąc")]
+        [InlineData(61, "2 miesiące")]
+        [InlineData(92, "3 miesiące")]
+        [InlineData(335, "11 miesięcy")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "1 rok")]
+        [InlineData(731, "2 lata")]
+        [InlineData(1096, "3 lata")]
+        [InlineData(4018, "11 lat")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
         }
 
         [Fact]

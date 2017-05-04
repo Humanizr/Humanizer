@@ -285,4 +285,22 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} tygodnie</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} miesięcy</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
+    <value>{0} miesiące</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} lat</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
+    <value>{0} lata</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 miesiąc</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 rok</value>
+  </data>
 </root>
