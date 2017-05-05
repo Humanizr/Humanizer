@@ -26,6 +26,7 @@ namespace Humanizer.Tests.Localisation.roRO
         }
 
         [Theory]
+        [InlineData(0, "0 secunde")]
         [InlineData(1, "1 secundă")]
         [InlineData(14, "14 secunde")]
         [InlineData(21, "21 de secunde")]
@@ -102,6 +103,14 @@ namespace Humanizer.Tests.Localisation.roRO
         public void Years(int days, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Fact, CustomDescription("The name of this test is confusing because has no sense. Instead should be read as an interval with duration zero and not the absence of time.")]
+        public void NoTime()
+        {
+            // Usage in Romanian: "Timp execuție: 0 secunde."
+            // Should be equivalent with TimeSpan.FromSeconds(0).Humanize()
+            Assert.Equal("0 secunde", TimeSpan.Zero.Humanize());
         }
     }
 }
