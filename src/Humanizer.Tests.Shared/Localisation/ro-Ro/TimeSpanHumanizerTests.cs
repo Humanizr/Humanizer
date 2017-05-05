@@ -82,7 +82,7 @@ namespace Humanizer.Tests.Localisation.roRO
 
 
         [Theory]
-        [Trait("Translation", "Google")]
+        [Trait("Translation", "Native speaker")]
         [InlineData(31, "1 luna")]
         [InlineData(61, "2 luni")]
         [InlineData(92, "3 luni")]
@@ -93,8 +93,8 @@ namespace Humanizer.Tests.Localisation.roRO
         }
 
         [Theory]
-        [Trait("Translation", "Google")]
-        [InlineData(366, "1 ani")]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(366, "1 an")]
         [InlineData(731, "2 ani")]
         [InlineData(1096, "3 ani")]
         [InlineData(4018, "11 ani")]
