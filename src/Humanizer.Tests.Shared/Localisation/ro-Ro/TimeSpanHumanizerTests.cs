@@ -83,7 +83,7 @@ namespace Humanizer.Tests.Localisation.roRO
 
         [Theory]
         [Trait("Translation", "Native speaker")]
-        [InlineData(31, "1 luna")]
+        [InlineData(31, "1 lună")]
         [InlineData(61, "2 luni")]
         [InlineData(92, "3 luni")]
         [InlineData(335, "11 luni")]

@@ -238,7 +238,7 @@
     <value>{0}{1} ani</value>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>1 luna</value>
+    <value>1 lună</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 an</value>
