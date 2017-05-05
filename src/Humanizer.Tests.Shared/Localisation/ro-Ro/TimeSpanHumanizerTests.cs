@@ -98,6 +98,7 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(731, "2 ani")]
         [InlineData(1096, "3 ani")]
         [InlineData(4018, "11 ani")]
+        [InlineData(7500, "20 de ani")]
         public void Years(int days, string expected)
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
