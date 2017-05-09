@@ -19,9 +19,9 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(14, "14 milisecunde")]
         [InlineData(21, "21 de milisecunde")]
         [InlineData(3000, "3 secunde")]
-        public void Milliseconds(int millisSeconds, string expected)
+        public void Milliseconds(int milliseconds, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(millisSeconds).Humanize();
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize();
             Assert.Equal(expected, actual);
         }
 
