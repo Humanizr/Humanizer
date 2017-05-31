@@ -16,7 +16,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0011" PrivateAssets="All" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.1.1" PrivateAssets="All" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="2.0.4-beta" PrivateAssets="all" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 </Project>
