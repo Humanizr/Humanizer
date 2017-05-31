@@ -50,17 +50,18 @@ namespace Humanizer.Tests.Localisation.es
             Assert.Equal(expected, number.ToWords());
         }
 
+        // TODO: This data is suspect since null cannot go into GramaticalGender
         [Theory]
-        [InlineData(1, "primer", null)]
+       // [InlineData(1, "primer", null)]
         [InlineData(1, "primer", GrammaticalGender.Masculine)]
         [InlineData(1, "primera", GrammaticalGender.Feminine)]
         [InlineData(2, "segundo", GrammaticalGender.Masculine)]
         [InlineData(2, "segunda", GrammaticalGender.Feminine)]
         [InlineData(2, "segundo", GrammaticalGender.Neuter)]
-        [InlineData(3, "tercer", null)]
+       // [InlineData(3, "tercer", null)]
         [InlineData(3, "tercer", GrammaticalGender.Masculine)]
         [InlineData(3, "tercera", GrammaticalGender.Feminine)]
-        [InlineData(11, "once", null)]
+      //  [InlineData(11, "once", null)]
         public void ToOrdinalWords(int number, string words, GrammaticalGender gender)
         {
             Assert.Equal(words, number.ToOrdinalWords(gender));

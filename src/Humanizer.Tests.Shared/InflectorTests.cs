@@ -333,7 +333,6 @@ namespace Humanizer.Tests
             yield return new object[] {"virus","viruses"};
             yield return new object[] {"walrus","walruses"};
             yield return new object[] {"waltz","waltzes"};
-            yield return new object[] {"water","water"};
             yield return new object[] {"zombie","zombies"};
         }
 
