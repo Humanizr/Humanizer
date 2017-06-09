@@ -27,7 +27,7 @@ build:
   
 after_build:
   - ps: |
-      $vers = & $env:UserProfile\.nuget\packages\nerdbank.gitversioning\2.0.4-beta\tools\Get-Version.ps1
+      $vers = & $env:UserProfile\.nuget\packages\nerdbank.gitversioning\2.0.21-beta\tools\Get-Version.ps1
       $nugetVer = $vers.NuGetPackageVersion
       ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
   - ps: '.\scripts\Sign-Package.ps1'        

@@ -5,6 +5,9 @@
     "^refs/heads/dev$", // we release out of develop
     "^refs/tags/v\\d+\\.\\d+" // we also release tags starting with vN.N
   ],
+  "nugetPackageVersion":{
+    "semVer": 2
+  },
   "cloudBuild": {
     "buildNumber": {
       "enabled": true,
