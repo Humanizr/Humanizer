@@ -729,7 +729,7 @@ someDateTime.AtMidnight()
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
-###<a id="number-to-numbers">Number to numbers</a>
+### <a id="number-to-numbers">Number to numbers</a>
 Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:
 
 ```C#
@@ -824,7 +824,7 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 ```
 
 
-###<a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
+### <a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
 This is kind of an extension of Ordinalize
 ```C#
 // for English UK locale
@@ -1026,7 +1026,7 @@ You can specify a format for the bytes part of the humanized output:
 // 18.49 GB/s
 ```
 
-##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
+## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
 You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
