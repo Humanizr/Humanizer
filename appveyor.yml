@@ -8,14 +8,16 @@ branches:
 
 environment:
   SignClientSecret:
-    secure: S26+NphAhj/vo5ZdHd/N/4toty3ztdNGmuNdvAB57W1oIVQEHVKqAVuhTD8B9ATy
+    secure: EvUuRb2cdsB5h7dJ49CkDDsZHHbwomGvMbcVcRsCSIp58IxVHFzAZrJSE+qpihtU
+  SignClientUser:
+    secure: 9nw9iBguE89m36udK51REeCIHSi5lAXmFIfS5LuAXio=
 
 init:
   - git config --global core.autocrlf input
 
 install:
-  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.1.0/NuGet.exe
-  - cmd: nuget install SignClient -Version 0.7.0 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion
+  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.3.0/NuGet.exe
+  - cmd: nuget install SignClient -Version 0.9.0 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion
      
 before_build:
   - cmd: msbuild /t:restore src\Humanizer.sln
@@ -27,7 +29,7 @@ build:
   
 after_build:
   - ps: |
-      $vers = & $env:UserProfile\.nuget\packages\nerdbank.gitversioning\2.0.21-beta\tools\Get-Version.ps1
+      $vers = & $env:UserProfile\.nuget\packages\nerdbank.gitversioning\2.0.41\tools\Get-Version.ps1
       $nugetVer = $vers.NuGetPackageVersion
       ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
   - ps: '.\scripts\Sign-Package.ps1'        

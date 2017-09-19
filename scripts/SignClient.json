@@ -2,7 +2,7 @@
   "SignClient": {
     "AzureAd": {
       "AADInstance": "https://login.microsoftonline.com/",
-      "ClientId": "eedcc7e7-c92c-42ff-9217-3ec939207bd8",
+      "ClientId": "9c12553e-c68e-419e-abe3-e7ef24a9e2ef",
       "TenantId": "71048637-3782-41a3-b6b2-6f4ac8a25ae0"
     },
     "Service": {

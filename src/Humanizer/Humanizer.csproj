@@ -16,7 +16,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="2.0.21-beta" PrivateAssets="all" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="2.0.41" PrivateAssets="all" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.2.1" PrivateAssets="All" />
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.1.0-beta.69" PrivateAssets="All" />
   </ItemGroup>
 </Project>
