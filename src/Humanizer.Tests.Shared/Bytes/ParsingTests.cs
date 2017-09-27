@@ -37,20 +37,32 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020kB"));
             Assert.Equal(ByteSize.FromKibibytes(1020), ByteSize.Parse("1020KiB"));
         }
-
         [Theory]
         [InlineData("1020kB")]
         [InlineData("1020 kB")]
         [InlineData("1020 KB")]
         [InlineData("1020 kB ")]
         [InlineData(" 1020 kB")]
-        public void TryParse(string rawValue)
+        public void TryParseKilobytes(string rawValue)
         {
-            ByteSize resultByteSize;
-            var parseSuccess = ByteSize.TryParse(rawValue, out resultByteSize);
+            var parseSuccess = ByteSize.TryParse(rawValue, out ByteSize resultByteSize);
 
             Assert.True(parseSuccess);
             Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
+        }
+
+        [Theory]
+        [InlineData("1020kiB")]
+        [InlineData("1020 kiB")]
+        [InlineData("1020 KiB")]
+        [InlineData("1020 kiB ")]
+        [InlineData(" 1020 kiB")]
+        public void TryParseKibibytes(string rawValue)
+        {
+            var parseSuccess = ByteSize.TryParse(rawValue, out ByteSize resultByteSize);
+
+            Assert.True(parseSuccess);
+            Assert.Equal(ByteSize.FromKibibytes(1020), resultByteSize);
         }
 
         [Fact]
@@ -164,10 +176,13 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(ByteSize.FromTebibytes(100), ByteSize.Parse("100TiB"));
         }
 
-        [Fact]
-        public void ParseNegativeBytes()
+
+        [Theory]
+        [InlineData(-1024, "-1KB")]
+        [InlineData(-1000, "-1KiB")]
+        public void ParseNegativeBytes(int expectedBytes, string bytesToParse)
         {
-            Assert.Equal(ByteSize.FromMegabytes(-100.5), ByteSize.Parse("-100.5MB"));
+            Assert.Equal(ByteSize.FromBytes(expectedBytes), ByteSize.Parse(bytesToParse));
         }
     }
 }
