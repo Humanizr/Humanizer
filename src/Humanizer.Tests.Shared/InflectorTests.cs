@@ -335,11 +335,11 @@ namespace Humanizer.Tests
             yield return new object[] {"waltz","waltzes"};
             yield return new object[] {"zombie","zombies"};
 
-            yield return new object[] { "cookie", "cookies" };
-            yield return new object[] { "bookie", "bookies" };
-            yield return new object[] { "rookie", "rookies" };
-            yield return new object[] { "roomie", "roomies" };
-            yield return new object[] { "smoothie", "smoothies" };
+            yield return new object[] {"cookie","cookies"};
+            yield return new object[] {"bookie","bookies"};
+            yield return new object[] {"rookie","rookies"};
+            yield return new object[] {"roomie","roomies"};
+            yield return new object[] {"smoothie","smoothies"};
         }
 
         IEnumerator IEnumerable.GetEnumerator()
