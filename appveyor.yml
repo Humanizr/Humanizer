@@ -8,9 +8,9 @@ branches:
 
 environment:
   SignClientSecret:
-    secure: EvUuRb2cdsB5h7dJ49CkDDsZHHbwomGvMbcVcRsCSIp58IxVHFzAZrJSE+qpihtU
+    secure: mn/Un/p3QvEv5TKe2f1NGmppCIMk0jslsTaw8P4+pBQ=
   SignClientUser:
-    secure: 9nw9iBguE89m36udK51REeCIHSi5lAXmFIfS5LuAXio=
+    secure: q9qZlA/a+Z3wQbRlcjWok/PkfODgpKNECOBCzu2yIGE=
 
 init:
   - git config --global core.autocrlf input
