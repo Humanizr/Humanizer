@@ -39,7 +39,8 @@
         /// </summary>
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
+        /// <param name="numbersToWords"></param>
         /// <returns></returns>
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit);
+        string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool numbersToWords = false);
     }
 }

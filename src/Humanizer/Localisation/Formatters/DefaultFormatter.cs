@@ -63,11 +63,12 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="timeUnit">A time unit to represent.</param>
         /// <param name="unit"></param>
+        /// <param name="numbersToWords"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit)
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool numbersToWords = false)
         {
-            return GetResourceForTimeSpan(timeUnit, unit);
+            return GetResourceForTimeSpan(timeUnit, unit, numbersToWords);
         }
 
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
@@ -76,10 +77,10 @@ namespace Humanizer.Localisation.Formatters
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count)
+        private string GetResourceForTimeSpan(TimeUnit unit, int count, bool numbersToWords = false)
         {
             var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
-            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+            return count == 1 ? Format(resourceKey + (numbersToWords ? "_Words" : "")) : Format(resourceKey, count, numbersToWords);
         }
 
         /// <summary>
@@ -103,16 +104,19 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="resourceKey">The resource key.</param>
         /// <param name="number">The number.</param>
+        /// <param name="numbersToWords"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
-        protected virtual string Format(string resourceKey, int number)
+        protected virtual string Format(string resourceKey, int number, bool numbersToWords = false)
         {
             var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture);
 
             if (string.IsNullOrEmpty(resourceString))
                 throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
 
-            return resourceString.FormatWith(number);
+            return numbersToWords
+                ? resourceString.FormatWith(number.ToWords())
+                : resourceString.FormatWith(number);
         }
 
         /// <summary>
