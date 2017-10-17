@@ -348,6 +348,42 @@ namespace Humanizer.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData(0, 3, "no time")]
+        [InlineData(0, 2, "no time")]
+        [InlineData(10, 2, "ten milliseconds")]
+        [InlineData(1400, 2, "one second, four hundred milliseconds")]
+        [InlineData(2500, 2, "two seconds, five hundred milliseconds")]
+        [InlineData(120000, 2, "two minutes")]
+        [InlineData(62000, 2, "one minute, two seconds")]
+        [InlineData(62020, 2, "one minute, two seconds")]
+        [InlineData(62020, 3, "one minute, two seconds, twenty milliseconds")]
+        [InlineData(3600020, 4, "one hour, twenty milliseconds")]
+        [InlineData(3600020, 3, "one hour, twenty milliseconds")]
+        [InlineData(3600020, 2, "one hour, twenty milliseconds")]
+        [InlineData(3600020, 1, "one hour")]
+        [InlineData(3603001, 2, "one hour, three seconds")]
+        [InlineData(3603001, 3, "one hour, three seconds, one millisecond")]
+        [InlineData(86400000, 3, "one day")]
+        [InlineData(86400000, 2, "one day")]
+        [InlineData(86400000, 1, "one day")]
+        [InlineData(86401000, 1, "one day")]
+        [InlineData(86401000, 2, "one day, one second")]
+        [InlineData(86401200, 2, "one day, one second")]
+        [InlineData(86401200, 3, "one day, one second, two hundred milliseconds")]
+        [InlineData(1296000000, 1, "two weeks")]
+        [InlineData(1296000000, 2, "two weeks, one day")]
+        [InlineData(1299600000, 2, "two weeks, one day")]
+        [InlineData(1299600000, 3, "two weeks, one day, one hour")]
+        [InlineData(1299630020, 3, "two weeks, one day, one hour")]
+        [InlineData(1299630020, 4, "two weeks, one day, one hour, thirty seconds")]
+        [InlineData(1299630020, 5, "two weeks, one day, one hour, thirty seconds, twenty milliseconds")]
+        public void TimeSpanWithNumbersConvertedToWords(int milliseconds, int precision, string expected)
+        {
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, numbersToWords: true);
+            Assert.Equal(expected, actual);
+        }
+
         [Fact]
         public void NoTime()
         {

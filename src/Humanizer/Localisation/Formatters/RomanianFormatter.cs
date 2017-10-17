@@ -21,7 +21,7 @@
             _romanianCulture = new CultureInfo(RomanianCultureCode);
         }
 
-        protected override string Format(string resourceKey, int number)
+        protected override string Format(string resourceKey, int number, bool numbersToWords = false)
         {
             var format = Resources.GetResource(GetResourceKey(resourceKey, number), _romanianCulture);
             var preposition = ShouldUsePreposition(number)
