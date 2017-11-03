@@ -116,6 +116,7 @@ namespace Humanizer.Tests
         [InlineData("customer_first_name", "customerFirstName")]
         [InlineData("customer_first_name_goes_here", "customerFirstNameGoesHere")]
         [InlineData("customer name", "customer name")]
+        [InlineData("", "")]
         public void Camelize(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Camelize());
