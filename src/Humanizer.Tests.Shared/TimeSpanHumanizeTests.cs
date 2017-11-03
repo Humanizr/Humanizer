@@ -357,12 +357,13 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "en-US", "1 millisecond")]
-        [InlineData(6 * 24 * 60 * 60 * 1000, "ru-RU", "6 дней")]
-        [InlineData(11 * 60 * 60 * 1000, "ar", "11 ساعة")]
-        public void CanSpecifyCultureExplicitly(int ms, string culture, string expected)
+        [InlineData(1, 1, "en-US", "1 millisecond", ", ")]
+        [InlineData(6 * 24 * 60 * 60 * 1000, 1, "ru-RU", "6 дней", ", ")]
+        [InlineData(11 * 60 * 60 * 1000, 1, "ar", "11 ساعة", ", ")]
+        [InlineData(3603001, 2, "it-IT", "1 ora e 3 secondi", null)]
+        public void CanSpecifyCultureExplicitly(int ms, int precision, string culture, string expected, string collectionSeparator)
         {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize(culture: new CultureInfo(culture));
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(precision: precision, culture: new CultureInfo(culture), collectionSeparator: collectionSeparator);
             Assert.Equal(expected, actual);
         }
     }
