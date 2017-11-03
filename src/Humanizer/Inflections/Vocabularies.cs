@@ -72,6 +72,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("(buz|blit|walt)zes$", "$1z");
             _default.AddSingular("(alumn|alg|larv|vertebr)ae$", "$1a");
             _default.AddSingular("(criteri|phenomen)a$", "$1on");
+            _default.AddSingular("([b|r|c]ook|room|smooth)ies$", "$1ie");
 
             _default.AddIrregular("person", "people");
             _default.AddIrregular("man", "men");
