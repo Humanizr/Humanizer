@@ -126,8 +126,7 @@ namespace Humanizer.Localisation.NumberToWords
         {
             if (isOrdinal)
             {
-                string exceptionString;
-                if (ExceptionNumbersToWords(number, out exceptionString))
+                if (ExceptionNumbersToWords(number, out var exceptionString))
                     return exceptionString;
                 else if (number < 13)
                     return UnitsMap[number].TrimEnd('e') + "ende";

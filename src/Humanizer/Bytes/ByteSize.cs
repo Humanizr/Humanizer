@@ -353,8 +353,7 @@ namespace Humanizer.Bytes
             var sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part
-            double number;
-            if (!double.TryParse(numberPart, out number))
+            if (!double.TryParse(numberPart, out var number))
                 return false;
 
             // Get the magnitude part
@@ -396,9 +395,7 @@ namespace Humanizer.Bytes
 
         public static ByteSize Parse(string s)
         {
-            ByteSize result;
-
-            if (TryParse(s, out result))
+            if (TryParse(s, out var result))
                 return result;
 
             throw new FormatException("Value is not in the correct format");
