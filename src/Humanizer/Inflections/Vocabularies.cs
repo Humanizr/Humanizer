@@ -76,6 +76,7 @@ namespace Humanizer.Inflections
 
             _default.AddIrregular("person", "people");
             _default.AddIrregular("man", "men");
+            _default.AddIrregular("human", "humans");
             _default.AddIrregular("child", "children");
             _default.AddIrregular("sex", "sexes");
             _default.AddIrregular("move", "moves");
