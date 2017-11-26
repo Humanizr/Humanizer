@@ -32,7 +32,7 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000000) > 0)
             {
                 // gender is not applied for billions
-                parts.Add(number / 1000000000 > 2
+                parts.Add(number / 1000000000 >= 2
                     ? string.Format("{0} bilhões", Convert(number / 1000000000, GrammaticalGender.Masculine))
                     : string.Format("{0} bilhão", Convert(number / 1000000000, GrammaticalGender.Masculine)));
 
@@ -42,7 +42,7 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000) > 0)
             {
                 // gender is not applied for millions
-                parts.Add(number / 1000000 > 2
+                parts.Add(number / 1000000 >= 2
                     ? string.Format("{0} milhões", Convert(number / 1000000, GrammaticalGender.Masculine))
                     : string.Format("{0} milhão", Convert(number / 1000000, GrammaticalGender.Masculine)));
 
