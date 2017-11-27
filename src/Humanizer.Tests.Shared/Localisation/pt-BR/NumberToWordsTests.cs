@@ -125,7 +125,6 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(3111101, "três milhões cento e onze mil cento e uma")]
         [InlineData(1101111101, "um bilhão cento e um milhões cento e onze mil cento e uma")]
         [InlineData(2101111101, "dois bilhões cento e um milhões cento e onze mil cento e uma")]
-        [InlineData(3000000000, "três bilhões")]
         [InlineData(1234, "mil duzentas e trinta e quatro")]
         [InlineData(8100, "oito mil e cem")]
         [InlineData(12345, "doze mil trezentas e quarenta e cinco")]
