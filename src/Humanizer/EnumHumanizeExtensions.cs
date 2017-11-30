@@ -26,7 +26,7 @@ namespace Humanizer
         [Pure]
         [NotNull]
         [PublicAPI]
-        public static string Humanize(this Enum input)
+        public static string Humanize([NotNull] this Enum input)
         {
             var enumType = input.GetType();
             var enumTypeInfo = enumType.GetTypeInfo();
@@ -110,7 +110,7 @@ namespace Humanizer
         [Pure]
         [NotNull]
         [PublicAPI]
-        public static string Humanize(this Enum input, LetterCasing casing)
+        public static string Humanize([NotNull] this Enum input, LetterCasing casing)
         {
             var humanizedEnum = Humanize(input);
 
