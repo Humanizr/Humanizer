@@ -14,6 +14,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Ordinalize([NotNull] this string numberString)
@@ -30,6 +31,7 @@ namespace Humanizer
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Ordinalize([NotNull] this string numberString, GrammaticalGender gender)
@@ -42,6 +44,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">The number to be ordinalized</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Ordinalize(this int number)
@@ -58,6 +61,7 @@ namespace Humanizer
         /// <param name="number">The number to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Ordinalize(this int number, GrammaticalGender gender)

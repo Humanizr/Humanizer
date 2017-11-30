@@ -15,6 +15,7 @@ namespace Humanizer
         /// Formats the collection for display, calling ToString() on each object and
         /// using the default separator for the current culture.
         /// </summary>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize<T>([NotNull] this IEnumerable<T> collection)
@@ -26,6 +27,7 @@ namespace Humanizer
         /// Formats the collection for display, calling <paramref name="displayFormatter"/> on each element
         /// and using the default separator for the current culture.
         /// </summary>
+        [Pure]
         [NotNull]
         [PublicAPI]
         [ContractAnnotation("displayFormatter:null => halt")]
@@ -53,6 +55,7 @@ namespace Humanizer
         /// Formats the collection for display, calling ToString() on each object
         /// and using the provided separator.
         /// </summary>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize<T>([NotNull] this IEnumerable<T> collection, [NotNull] string separator)
@@ -65,6 +68,7 @@ namespace Humanizer
         /// Formats the collection for display, calling <paramref name="displayFormatter"/> on each element
         /// and using the provided separator.
         /// </summary>
+        [Pure]
         [NotNull]
         [PublicAPI]
         [ContractAnnotation("displayFormatter:null => halt")]

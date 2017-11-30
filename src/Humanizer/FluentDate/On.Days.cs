@@ -17,6 +17,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of January of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -311,6 +312,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of February of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -587,6 +589,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of March of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -881,6 +884,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of April of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -1166,6 +1170,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of May of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -1460,6 +1465,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of June of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -1745,6 +1751,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of July of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -2039,6 +2046,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of August of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -2333,6 +2341,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of September of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -2618,6 +2627,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of October of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -2912,6 +2922,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of November of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
@@ -3197,6 +3208,7 @@ namespace Humanizer
 	        /// <summary>
 			/// The nth day of December of the current year
 	        /// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{

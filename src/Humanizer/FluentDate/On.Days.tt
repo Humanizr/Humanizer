@@ -29,12 +29,13 @@ namespace Humanizer
         /// <summary>
 		/// Provides fluent date accessors for <#= monthName #>
         /// </summary>
-        [PublicAPI]
 		public class <#= monthName #>
 		{
 	        /// <summary>
 			/// The nth day of <#= monthName #> of the current year
 	        /// </summary>
+	        [Pure]
+			[PublicAPI]
 			public static DateTime The(int dayNumber)
 			{
 				return new DateTime(DateTime.Now.Year, <#= month #>, dayNumber);

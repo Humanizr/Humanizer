@@ -114,36 +114,42 @@ namespace Humanizer.Bytes
             Terabytes = byteSize / BytesInTerabyte;
         }
 
+        [Pure]
         [PublicAPI]
         public static ByteSize FromBits(long value)
         {
             return new ByteSize(value / (double)BitsInByte);
         }
 
+        [Pure]
         [PublicAPI]
         public static ByteSize FromBytes(double value)
         {
             return new ByteSize(value);
         }
 
+        [Pure]
         [PublicAPI]
         public static ByteSize FromKilobytes(double value)
         {
             return new ByteSize(value * BytesInKilobyte);
         }
 
+        [Pure]
         [PublicAPI]
         public static ByteSize FromMegabytes(double value)
         {
             return new ByteSize(value * BytesInMegabyte);
         }
 
+        [Pure]
         [PublicAPI]
         public static ByteSize FromGigabytes(double value)
         {
             return new ByteSize(value * BytesInGigabyte);
         }
 
+        [Pure]
         [PublicAPI]
         public static ByteSize FromTerabytes(double value)
         {
@@ -162,6 +168,7 @@ namespace Humanizer.Bytes
         }
 
         [NotNull]
+        [Pure]
         [PublicAPI]
         public string ToString([NotNull] string format)
         {
@@ -278,6 +285,7 @@ namespace Humanizer.Bytes
             return this + FromTerabytes(value);
         }
 
+        [Pure]
         [PublicAPI]
         public ByteSize Subtract(ByteSize bs)
         {
@@ -334,6 +342,7 @@ namespace Humanizer.Bytes
             return b1.Bits >= b2.Bits;
         }
 
+        [Pure]
         [PublicAPI]
         [ContractAnnotation("s:null => halt")]
         public static bool TryParse([NotNull] string s, out ByteSize result)
@@ -412,6 +421,7 @@ namespace Humanizer.Bytes
             return true;
         }
 
+        [Pure]
         [PublicAPI]
         public static ByteSize Parse([NotNull] string s)
         {

@@ -11,6 +11,7 @@ namespace Humanizer
         /// <summary>
         /// 5.Tens == 50
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Tens(this int input)
@@ -21,6 +22,7 @@ namespace Humanizer
         /// <summary>
         /// 5.Tens == 50
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Tens(this uint input)
@@ -31,6 +33,7 @@ namespace Humanizer
         /// <summary>
         /// 5.Tens == 50
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Tens(this long input)
@@ -41,6 +44,7 @@ namespace Humanizer
         /// <summary>
         /// 5.Tens == 50
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Tens(this ulong input)
@@ -51,6 +55,7 @@ namespace Humanizer
         /// <summary>
         /// 5.Tens == 50
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Tens(this double input)
@@ -61,6 +66,7 @@ namespace Humanizer
         /// <summary>
         /// 4.Hundreds() == 400
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Hundreds(this int input)
@@ -71,6 +77,7 @@ namespace Humanizer
         /// <summary>
         /// 4.Hundreds() == 400
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Hundreds(this uint input)
@@ -81,6 +88,7 @@ namespace Humanizer
         /// <summary>
         /// 4.Hundreds() == 400
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Hundreds(this long input)
@@ -91,6 +99,7 @@ namespace Humanizer
         /// <summary>
         /// 4.Hundreds() == 400
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Hundreds(this ulong input)
@@ -101,6 +110,7 @@ namespace Humanizer
         /// <summary>
         /// 4.Hundreds() == 400
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Hundreds(this double input)
@@ -111,6 +121,7 @@ namespace Humanizer
         /// <summary>
         /// 3.Thousands() == 3000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Thousands(this int input)
@@ -121,6 +132,7 @@ namespace Humanizer
         /// <summary>
         /// 3.Thousands() == 3000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Thousands(this uint input)
@@ -131,6 +143,7 @@ namespace Humanizer
         /// <summary>
         /// 3.Thousands() == 3000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Thousands(this long input)
@@ -141,6 +154,7 @@ namespace Humanizer
         /// <summary>
         /// 3.Thousands() == 3000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Thousands(this ulong input)
@@ -151,6 +165,7 @@ namespace Humanizer
         /// <summary>
         /// 3.Thousands() == 3000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Thousands(this double input)
@@ -161,6 +176,7 @@ namespace Humanizer
         /// <summary>
         /// 2.Millions() == 2000000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Millions(this int input)
@@ -171,6 +187,7 @@ namespace Humanizer
         /// <summary>
         /// 2.Millions() == 2000000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Millions(this uint input)
@@ -181,6 +198,7 @@ namespace Humanizer
         /// <summary>
         /// 2.Millions() == 2000000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Millions(this long input)
@@ -191,6 +209,7 @@ namespace Humanizer
         /// <summary>
         /// 2.Millions() == 2000000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Millions(this ulong input)
@@ -201,6 +220,7 @@ namespace Humanizer
         /// <summary>
         /// 2.Millions() == 2000000
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Millions(this double input)
@@ -211,6 +231,7 @@ namespace Humanizer
         /// <summary>
         /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Billions(this int input)
@@ -221,6 +242,7 @@ namespace Humanizer
         /// <summary>
         /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Billions(this uint input)
@@ -231,6 +253,7 @@ namespace Humanizer
         /// <summary>
         /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Billions(this long input)
@@ -241,6 +264,7 @@ namespace Humanizer
         /// <summary>
         /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Billions(this ulong input)
@@ -251,6 +275,7 @@ namespace Humanizer
         /// <summary>
         /// 1.Billions() == 1000000000 (short scale)
         /// </summary>
+        [Pure]
         [PublicAPI]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Billions(this double input)

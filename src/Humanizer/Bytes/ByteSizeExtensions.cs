@@ -15,6 +15,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bits(this byte input)
         {
@@ -26,6 +27,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bits(this sbyte input)
         {
@@ -37,6 +39,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bits(this short input)
         {
@@ -48,6 +51,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bits(this ushort input)
         {
@@ -59,6 +63,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bits(this int input)
         {
@@ -70,6 +75,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bits(this uint input)
         {
@@ -81,6 +87,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bits(this long input)
         {
@@ -92,6 +99,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this byte input)
         {
@@ -103,6 +111,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this sbyte input)
         {
@@ -114,6 +123,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this short input)
         {
@@ -125,6 +135,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this ushort input)
         {
@@ -136,6 +147,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this int input)
         {
@@ -147,6 +159,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this uint input)
         {
@@ -158,6 +171,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this double input)
         {
@@ -169,6 +183,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Bytes(this long input)
         {
@@ -180,6 +195,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this byte input)
         {
@@ -191,6 +207,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this sbyte input)
         {
@@ -202,6 +219,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this short input)
         {
@@ -213,6 +231,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this ushort input)
         {
@@ -224,6 +243,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this int input)
         {
@@ -235,6 +255,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this uint input)
         {
@@ -246,6 +267,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this double input)
         {
@@ -257,6 +279,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Kilobytes(this long input)
         {
@@ -268,6 +291,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this byte input)
         {
@@ -279,6 +303,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this sbyte input)
         {
@@ -290,6 +315,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this short input)
         {
@@ -301,6 +327,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this ushort input)
         {
@@ -312,6 +339,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this int input)
         {
@@ -323,6 +351,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this uint input)
         {
@@ -334,6 +363,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this double input)
         {
@@ -345,6 +375,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Megabytes(this long input)
         {
@@ -356,6 +387,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this byte input)
         {
@@ -367,6 +399,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this sbyte input)
         {
@@ -378,6 +411,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this short input)
         {
@@ -389,6 +423,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this ushort input)
         {
@@ -400,6 +435,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this int input)
         {
@@ -411,6 +447,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this uint input)
         {
@@ -422,6 +459,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this double input)
         {
@@ -433,6 +471,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Gigabytes(this long input)
         {
@@ -444,6 +483,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this byte input)
         {
@@ -455,6 +495,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this sbyte input)
         {
@@ -466,6 +507,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this short input)
         {
@@ -477,6 +519,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this ushort input)
         {
@@ -488,6 +531,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this int input)
         {
@@ -499,6 +543,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this uint input)
         {
@@ -510,6 +555,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this double input)
         {
@@ -521,6 +567,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteSize Terabytes(this long input)
         {
@@ -534,6 +581,7 @@ namespace Humanizer
         /// <param name="format">The string format to use</param>
         /// <returns></returns>
         [NotNull]
+        [Pure]
         [PublicAPI]
         public static string Humanize(this ByteSize input, [CanBeNull] string format = null)
         {
@@ -546,6 +594,7 @@ namespace Humanizer
         /// <param name="size">Quantity of bytes</param>
         /// <param name="interval">Interval to create rate for</param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static ByteRate Per(this ByteSize size, TimeSpan interval)
         {

@@ -15,6 +15,7 @@ namespace Humanizer
         /// <param name="truncationString">The string used to truncate with</param>
         /// <param name="truncateFrom">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         [ContractAnnotation("value:null => null")]

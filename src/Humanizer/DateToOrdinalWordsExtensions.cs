@@ -15,6 +15,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The date to be made into ordinal words</param>
         /// <returns>The date in ordinal words</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToOrdinalWords(this DateTime input)
@@ -27,6 +28,7 @@ namespace Humanizer
         /// <param name="input">The date to be made into ordinal words</param>
         /// <param name="grammaticalCase">The grammatical case to use for output words</param>
         /// <returns>The date in ordinal words</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToOrdinalWords(this DateTime input, GrammaticalCase grammaticalCase)

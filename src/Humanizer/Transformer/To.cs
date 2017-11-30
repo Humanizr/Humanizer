@@ -14,6 +14,7 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <param name="transformers"></param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Transform([NotNull] this string input, [NotNull] params IStringTransformer[] transformers)

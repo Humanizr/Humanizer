@@ -14,6 +14,7 @@ namespace Humanizer
         /// <param name="input">The string to be truncated</param>
         /// <param name="length">The length to truncate to</param>
         /// <returns>The truncated string</returns>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         public static string Truncate([NotNull] this string input, int length)
@@ -29,6 +30,7 @@ namespace Humanizer
         /// <param name="truncator">The truncate to use</param>
         /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         public static string Truncate([NotNull] this string input, int length, [NotNull] ITruncator truncator, TruncateFrom from = TruncateFrom.Right)
@@ -44,6 +46,7 @@ namespace Humanizer
         /// <param name="truncationString">The string used to truncate with</param>
         /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         public static string Truncate([NotNull] this string input, int length, [NotNull] string truncationString, TruncateFrom from = TruncateFrom.Right)
@@ -60,6 +63,7 @@ namespace Humanizer
         /// <param name="truncator">The truncator to use</param>
         /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         [ContractAnnotation("truncator:null => halt; input:null => null")]

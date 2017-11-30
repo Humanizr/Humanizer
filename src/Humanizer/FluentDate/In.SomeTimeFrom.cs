@@ -25,6 +25,7 @@ namespace Humanizer
 			/// <summary>
 			/// 1 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondFrom(DateTime date)
 			{
@@ -43,6 +44,7 @@ namespace Humanizer
 			/// <summary>
 			/// 1 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinuteFrom(DateTime date)
 			{
@@ -61,6 +63,7 @@ namespace Humanizer
 			/// <summary>
 			/// 1 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HourFrom(DateTime date)
 			{
@@ -79,6 +82,7 @@ namespace Humanizer
 			/// <summary>
 			/// 1 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DayFrom(DateTime date)
 			{
@@ -97,6 +101,7 @@ namespace Humanizer
 			/// <summary>
 			/// 1 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeekFrom(DateTime date)
 			{
@@ -115,6 +120,7 @@ namespace Humanizer
 			/// <summary>
 			/// 1 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthFrom(DateTime date)
 			{
@@ -133,6 +139,7 @@ namespace Humanizer
 			/// <summary>
 			/// 1 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearFrom(DateTime date)
 			{
@@ -156,6 +163,7 @@ namespace Humanizer
 			/// <summary>
 			/// 2 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -174,6 +182,7 @@ namespace Humanizer
 			/// <summary>
 			/// 2 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -192,6 +201,7 @@ namespace Humanizer
 			/// <summary>
 			/// 2 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -210,6 +220,7 @@ namespace Humanizer
 			/// <summary>
 			/// 2 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -228,6 +239,7 @@ namespace Humanizer
 			/// <summary>
 			/// 2 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -246,6 +258,7 @@ namespace Humanizer
 			/// <summary>
 			/// 2 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -264,6 +277,7 @@ namespace Humanizer
 			/// <summary>
 			/// 2 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -287,6 +301,7 @@ namespace Humanizer
 			/// <summary>
 			/// 3 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -305,6 +320,7 @@ namespace Humanizer
 			/// <summary>
 			/// 3 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -323,6 +339,7 @@ namespace Humanizer
 			/// <summary>
 			/// 3 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -341,6 +358,7 @@ namespace Humanizer
 			/// <summary>
 			/// 3 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -359,6 +377,7 @@ namespace Humanizer
 			/// <summary>
 			/// 3 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -377,6 +396,7 @@ namespace Humanizer
 			/// <summary>
 			/// 3 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -395,6 +415,7 @@ namespace Humanizer
 			/// <summary>
 			/// 3 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -418,6 +439,7 @@ namespace Humanizer
 			/// <summary>
 			/// 4 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -436,6 +458,7 @@ namespace Humanizer
 			/// <summary>
 			/// 4 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -454,6 +477,7 @@ namespace Humanizer
 			/// <summary>
 			/// 4 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -472,6 +496,7 @@ namespace Humanizer
 			/// <summary>
 			/// 4 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -490,6 +515,7 @@ namespace Humanizer
 			/// <summary>
 			/// 4 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -508,6 +534,7 @@ namespace Humanizer
 			/// <summary>
 			/// 4 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -526,6 +553,7 @@ namespace Humanizer
 			/// <summary>
 			/// 4 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -549,6 +577,7 @@ namespace Humanizer
 			/// <summary>
 			/// 5 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -567,6 +596,7 @@ namespace Humanizer
 			/// <summary>
 			/// 5 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -585,6 +615,7 @@ namespace Humanizer
 			/// <summary>
 			/// 5 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -603,6 +634,7 @@ namespace Humanizer
 			/// <summary>
 			/// 5 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -621,6 +653,7 @@ namespace Humanizer
 			/// <summary>
 			/// 5 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -639,6 +672,7 @@ namespace Humanizer
 			/// <summary>
 			/// 5 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -657,6 +691,7 @@ namespace Humanizer
 			/// <summary>
 			/// 5 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -680,6 +715,7 @@ namespace Humanizer
 			/// <summary>
 			/// 6 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -698,6 +734,7 @@ namespace Humanizer
 			/// <summary>
 			/// 6 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -716,6 +753,7 @@ namespace Humanizer
 			/// <summary>
 			/// 6 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -734,6 +772,7 @@ namespace Humanizer
 			/// <summary>
 			/// 6 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -752,6 +791,7 @@ namespace Humanizer
 			/// <summary>
 			/// 6 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -770,6 +810,7 @@ namespace Humanizer
 			/// <summary>
 			/// 6 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -788,6 +829,7 @@ namespace Humanizer
 			/// <summary>
 			/// 6 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -811,6 +853,7 @@ namespace Humanizer
 			/// <summary>
 			/// 7 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -829,6 +872,7 @@ namespace Humanizer
 			/// <summary>
 			/// 7 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -847,6 +891,7 @@ namespace Humanizer
 			/// <summary>
 			/// 7 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -865,6 +910,7 @@ namespace Humanizer
 			/// <summary>
 			/// 7 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -883,6 +929,7 @@ namespace Humanizer
 			/// <summary>
 			/// 7 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -901,6 +948,7 @@ namespace Humanizer
 			/// <summary>
 			/// 7 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -919,6 +967,7 @@ namespace Humanizer
 			/// <summary>
 			/// 7 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -942,6 +991,7 @@ namespace Humanizer
 			/// <summary>
 			/// 8 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -960,6 +1010,7 @@ namespace Humanizer
 			/// <summary>
 			/// 8 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -978,6 +1029,7 @@ namespace Humanizer
 			/// <summary>
 			/// 8 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -996,6 +1048,7 @@ namespace Humanizer
 			/// <summary>
 			/// 8 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -1014,6 +1067,7 @@ namespace Humanizer
 			/// <summary>
 			/// 8 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -1032,6 +1086,7 @@ namespace Humanizer
 			/// <summary>
 			/// 8 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -1050,6 +1105,7 @@ namespace Humanizer
 			/// <summary>
 			/// 8 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -1073,6 +1129,7 @@ namespace Humanizer
 			/// <summary>
 			/// 9 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -1091,6 +1148,7 @@ namespace Humanizer
 			/// <summary>
 			/// 9 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -1109,6 +1167,7 @@ namespace Humanizer
 			/// <summary>
 			/// 9 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -1127,6 +1186,7 @@ namespace Humanizer
 			/// <summary>
 			/// 9 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -1145,6 +1205,7 @@ namespace Humanizer
 			/// <summary>
 			/// 9 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -1163,6 +1224,7 @@ namespace Humanizer
 			/// <summary>
 			/// 9 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -1181,6 +1243,7 @@ namespace Humanizer
 			/// <summary>
 			/// 9 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{
@@ -1204,6 +1267,7 @@ namespace Humanizer
 			/// <summary>
 			/// 10 seconds from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime SecondsFrom(DateTime date)
 			{
@@ -1222,6 +1286,7 @@ namespace Humanizer
 			/// <summary>
 			/// 10 minutes from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MinutesFrom(DateTime date)
 			{
@@ -1240,6 +1305,7 @@ namespace Humanizer
 			/// <summary>
 			/// 10 hours from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime HoursFrom(DateTime date)
 			{
@@ -1258,6 +1324,7 @@ namespace Humanizer
 			/// <summary>
 			/// 10 days from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime DaysFrom(DateTime date)
 			{
@@ -1276,6 +1343,7 @@ namespace Humanizer
 			/// <summary>
 			/// 10 weeks from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime WeeksFrom(DateTime date)
 			{
@@ -1294,6 +1362,7 @@ namespace Humanizer
 			/// <summary>
 			/// 10 months from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime MonthsFrom(DateTime date)
 			{
@@ -1312,6 +1381,7 @@ namespace Humanizer
 			/// <summary>
 			/// 10 years from the provided date
 			/// </summary>
+			[Pure]
 			[PublicAPI]
 			public static DateTime YearsFrom(DateTime date)
 			{

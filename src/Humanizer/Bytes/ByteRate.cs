@@ -38,6 +38,7 @@ namespace Humanizer.Bytes
         /// </summary>
         /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public string Humanize(TimeUnit timeUnit = TimeUnit.Second)
@@ -51,6 +52,7 @@ namespace Humanizer.Bytes
         /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
         /// <param name="format">The string format to use for the number of bytes</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public string Humanize([CanBeNull] string format, TimeUnit timeUnit = TimeUnit.Second)

@@ -10,7 +10,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of January of the current year
         /// </summary>
-		[PublicAPI]
+        [PublicAPI]
         public static DateTime January
 		{
 			get { return new DateTime(DateTime.UtcNow.Year, 1, 1); }
@@ -19,6 +19,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of January of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime JanuaryOf(int year)
 		{
@@ -37,6 +38,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of February of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime FebruaryOf(int year)
 		{
@@ -55,6 +57,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of March of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime MarchOf(int year)
 		{
@@ -73,6 +76,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of April of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime AprilOf(int year)
 		{
@@ -91,6 +95,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of May of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime MayOf(int year)
 		{
@@ -109,6 +114,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of June of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime JuneOf(int year)
 		{
@@ -127,6 +133,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of July of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime JulyOf(int year)
 		{
@@ -145,6 +152,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of August of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime AugustOf(int year)
 		{
@@ -163,6 +171,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of September of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime SeptemberOf(int year)
 		{
@@ -181,6 +190,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of October of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime OctoberOf(int year)
 		{
@@ -199,6 +209,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of November of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime NovemberOf(int year)
 		{
@@ -217,6 +228,7 @@ namespace Humanizer
         /// <summary>
         /// Returns 1st of December of the year passed in
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime DecemberOf(int year)
 		{

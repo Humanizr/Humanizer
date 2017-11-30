@@ -42,6 +42,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Roman number</param>
         /// <returns>Human-readable number</returns>
+        [Pure]
         [PublicAPI]
         public static int FromRoman([NotNull] this string input)
         {
@@ -84,6 +85,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Integer input</param>
         /// <returns>Roman number</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToRoman(this int input)

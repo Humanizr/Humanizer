@@ -12,6 +12,7 @@ namespace Humanizer
         /// Returns a new <see cref="DateTime"/> with the specifed hour and, optionally
         /// provided minutes, seconds, and milliseconds.
         /// </summary>
+        [Pure]
         [PublicAPI]
         public static DateTime At(this DateTime date, int hour, int min = 0, int second = 0, int millisecond = 0)
         {
@@ -23,6 +24,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static DateTime AtMidnight(this DateTime date)
         {
@@ -34,6 +36,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static DateTime AtNoon(this DateTime date)
         {
@@ -46,6 +49,7 @@ namespace Humanizer
         /// <param name="date"></param>
         /// <param name="year"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static DateTime In(this DateTime date, int year)
         {

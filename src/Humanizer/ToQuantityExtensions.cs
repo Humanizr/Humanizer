@@ -46,6 +46,7 @@ namespace Humanizer
         /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToQuantity([NotNull] this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
@@ -66,6 +67,7 @@ namespace Humanizer
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToQuantity([NotNull] this string input, int quantity, [NotNull] string format, [CanBeNull] IFormatProvider formatProvider = null)
@@ -87,6 +89,7 @@ namespace Humanizer
         /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToQuantity([NotNull] this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
@@ -107,6 +110,7 @@ namespace Humanizer
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToQuantity([NotNull] this string input, long quantity, [NotNull] string format, [CanBeNull] IFormatProvider formatProvider = null)

@@ -10,6 +10,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static DateTime TheYear(int year)
         {

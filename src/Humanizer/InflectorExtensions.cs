@@ -39,6 +39,7 @@ namespace Humanizer
         /// <param name="word">Word to be pluralized</param>
         /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
         /// <returns></returns>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         public static string Pluralize([CanBeNull] this string word, bool inputIsKnownToBeSingular = true)
@@ -52,6 +53,7 @@ namespace Humanizer
         /// <param name="word">Word to be singularized</param>
         /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
         /// <returns></returns>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         public static string Singularize([CanBeNull] this string word, bool inputIsKnownToBePlural = true)
@@ -64,6 +66,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be titleized</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Titleize([NotNull] this string input)
@@ -76,6 +79,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Pascalize([NotNull] this string input)
@@ -88,6 +92,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Camelize([NotNull] this string input)
@@ -101,6 +106,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be underscored</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Underscore([NotNull] this string input)
@@ -115,6 +121,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="underscoredWord"></param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Dasherize([NotNull] this string underscoredWord)
@@ -127,6 +134,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="underscoredWord"></param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Hyphenate([NotNull] this string underscoredWord)
@@ -139,6 +147,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Kebaberize([NotNull] this string input)

@@ -18,6 +18,7 @@ namespace Humanizer
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize(this DateTime input, bool utcDate = true, [CanBeNull] DateTime? dateToCompareAgainst = null, [CanBeNull] CultureInfo culture = null)
@@ -38,6 +39,7 @@ namespace Humanizer
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize(this DateTime? input, bool utcDate = true, [CanBeNull] DateTime? dateToCompareAgainst = null, [CanBeNull] CultureInfo culture = null)
@@ -55,6 +57,7 @@ namespace Humanizer
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize(this DateTimeOffset input, [CanBeNull] DateTimeOffset? dateToCompareAgainst = null, [CanBeNull] CultureInfo culture = null)
@@ -71,6 +74,7 @@ namespace Humanizer
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize([CanBeNull] this DateTimeOffset? input, [CanBeNull] DateTimeOffset? dateToCompareAgainst = null, [CanBeNull] CultureInfo culture = null)

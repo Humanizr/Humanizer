@@ -85,6 +85,7 @@ namespace Humanizer
 		/// </code>
 		/// </example>
 		/// <returns>A number after a conversion from a Metric representation.</returns>
+		[Pure]
 		[PublicAPI]
 		public static double FromMetric([NotNull] this string input)
 		{
@@ -111,6 +112,8 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
+        [Pure]
+        [NotNull]
         [PublicAPI]
         public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, [CanBeNull] int? decimals = null)
 		{
@@ -136,6 +139,7 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, [CanBeNull] int? decimals = null)

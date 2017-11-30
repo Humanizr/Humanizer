@@ -14,6 +14,7 @@ namespace Humanizer
         /// <param name="format">string format</param>
         /// <param name="args">arguments</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string FormatWith([NotNull] this string format, [NotNull] params object[] args)
@@ -28,6 +29,7 @@ namespace Humanizer
         /// <param name="provider">An object that supplies culture-specific formatting information</param>
         /// <param name="args">arguments</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string FormatWith([NotNull] this string format, [NotNull] IFormatProvider provider, [NotNull] params object[] args)

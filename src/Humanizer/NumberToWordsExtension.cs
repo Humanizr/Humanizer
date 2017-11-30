@@ -15,6 +15,7 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToWords(this int number, [CanBeNull] CultureInfo culture = null)
@@ -42,6 +43,7 @@ namespace Humanizer
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToWords(this int number, GrammaticalGender gender, [CanBeNull] CultureInfo culture = null)
@@ -55,6 +57,7 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToWords(this long number, [CanBeNull] CultureInfo culture = null)
@@ -82,6 +85,7 @@ namespace Humanizer
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToWords(this long number, GrammaticalGender gender, [CanBeNull] CultureInfo culture = null)
@@ -95,6 +99,7 @@ namespace Humanizer
         /// <param name="number">Number to be turned to ordinal words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToOrdinalWords(this int number, [CanBeNull] CultureInfo culture = null)
@@ -111,6 +116,7 @@ namespace Humanizer
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ToOrdinalWords(this int number, GrammaticalGender gender, [CanBeNull] CultureInfo culture = null)

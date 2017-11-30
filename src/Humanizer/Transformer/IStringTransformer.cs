@@ -12,6 +12,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">String to be transformed</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         string Transform([NotNull] string input);

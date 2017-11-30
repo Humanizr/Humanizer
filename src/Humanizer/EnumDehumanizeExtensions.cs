@@ -17,6 +17,7 @@ namespace Humanizer
         /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TTargetEnum DehumanizeTo<TTargetEnum>([NotNull] this string input)
             where TTargetEnum : struct, IComparable, IFormattable
@@ -33,6 +34,7 @@ namespace Humanizer
         /// <returns></returns>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <exception cref="ArgumentException">If targetEnum is not an enum</exception>
+        [Pure]
         [CanBeNull]
         [PublicAPI]
         public static Enum DehumanizeTo([NotNull] this string input, [NotNull] Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
@@ -40,6 +42,7 @@ namespace Humanizer
             return (Enum)DehumanizeToPrivate(input, targetEnum, onNoMatch);
         }
 
+        [Pure]
         [CanBeNull]
         private static object DehumanizeToPrivate([NotNull] string input, [NotNull] Type targetEnum, OnNoMatch onNoMatch)
         {

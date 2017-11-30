@@ -14,6 +14,7 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <param name="casing"></param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string ApplyCase([NotNull] this string input, LetterCasing casing)

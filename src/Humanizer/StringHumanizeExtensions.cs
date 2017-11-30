@@ -43,6 +43,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be humanized</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize([NotNull] this string input)
@@ -68,6 +69,7 @@ namespace Humanizer
         /// <param name="input">The string to be humanized</param>
         /// <param name="casing">The desired casing for the output</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize([NotNull] this string input, LetterCasing casing)

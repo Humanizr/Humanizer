@@ -23,6 +23,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The enum member to be humanized</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize(this Enum input)
@@ -106,6 +107,7 @@ namespace Humanizer
         /// <param name="input">The enum member to be humanized</param>
         /// <param name="casing">The casing to use for humanizing the enum member</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize(this Enum input, LetterCasing casing)

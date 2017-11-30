@@ -13,6 +13,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be dehumanized</param>
         /// <returns></returns>
+        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Dehumanize([NotNull] this string input)

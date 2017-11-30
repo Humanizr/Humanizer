@@ -13,6 +13,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this byte ms)
         {
@@ -24,6 +25,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this sbyte ms)
         {
@@ -35,6 +37,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this short ms)
         {
@@ -46,6 +49,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this ushort ms)
         {
@@ -57,6 +61,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this int ms)
         {
@@ -68,6 +73,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this uint ms)
         {
@@ -79,6 +85,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this long ms)
         {
@@ -90,6 +97,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this ulong ms)
         {
@@ -101,6 +109,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="ms"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Milliseconds(this double ms)
         {
@@ -112,6 +121,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this byte seconds)
         {
@@ -123,6 +133,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this sbyte seconds)
         {
@@ -134,6 +145,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this short seconds)
         {
@@ -145,6 +157,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this ushort seconds)
         {
@@ -156,6 +169,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this int seconds)
         {
@@ -167,6 +181,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this uint seconds)
         {
@@ -178,6 +193,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this long seconds)
         {
@@ -189,6 +205,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this ulong seconds)
         {
@@ -200,6 +217,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="seconds"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Seconds(this double seconds)
         {
@@ -211,6 +229,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this byte minutes)
         {
@@ -222,6 +241,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this sbyte minutes)
         {
@@ -233,6 +253,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this short minutes)
         {
@@ -244,6 +265,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this ushort minutes)
         {
@@ -255,6 +277,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this int minutes)
         {
@@ -266,6 +289,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this uint minutes)
         {
@@ -277,6 +301,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this long minutes)
         {
@@ -288,6 +313,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this ulong minutes)
         {
@@ -299,6 +325,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="minutes"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Minutes(this double minutes)
         {
@@ -310,6 +337,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this byte hours)
         {
@@ -321,6 +349,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this sbyte hours)
         {
@@ -332,6 +361,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this short hours)
         {
@@ -343,6 +373,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this ushort hours)
         {
@@ -354,6 +385,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this int hours)
         {
@@ -365,6 +397,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this uint hours)
         {
@@ -376,6 +409,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this long hours)
         {
@@ -387,6 +421,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this ulong hours)
         {
@@ -398,6 +433,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="hours"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Hours(this double hours)
         {
@@ -409,6 +445,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this byte days)
         {
@@ -420,6 +457,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this sbyte days)
         {
@@ -431,6 +469,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this short days)
         {
@@ -442,6 +481,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this ushort days)
         {
@@ -453,6 +493,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this int days)
         {
@@ -464,6 +505,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this uint days)
         {
@@ -475,6 +517,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this long days)
         {
@@ -486,6 +529,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this ulong days)
         {
@@ -497,6 +541,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="days"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Days(this double days)
         {
@@ -508,6 +553,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this byte input)
         {
@@ -519,6 +565,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this sbyte input)
         {
@@ -530,6 +577,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this short input)
         {
@@ -541,6 +589,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this ushort input)
         {
@@ -552,6 +601,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this int input)
         {
@@ -563,6 +613,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this uint input)
         {
@@ -574,6 +625,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this long input)
         {
@@ -585,6 +637,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this ulong input)
         {
@@ -596,6 +649,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Pure]
         [PublicAPI]
         public static TimeSpan Weeks(this double input)
         {
