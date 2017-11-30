@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -13,7 +14,9 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <param name="casing"></param>
         /// <returns></returns>
-        public static string ApplyCase(this string input, LetterCasing casing)
+        [NotNull]
+        [PublicAPI]
+        public static string ApplyCase([NotNull] this string input, LetterCasing casing)
         {
             switch (casing)
             {

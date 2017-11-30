@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -13,7 +14,9 @@ namespace Humanizer
         /// <param name="format">string format</param>
         /// <param name="args">arguments</param>
         /// <returns></returns>
-        public static string FormatWith(this string format, params object[] args)
+        [NotNull]
+        [PublicAPI]
+        public static string FormatWith([NotNull] this string format, [NotNull] params object[] args)
         {
             return string.Format(format, args);
         }
@@ -25,7 +28,9 @@ namespace Humanizer
         /// <param name="provider">An object that supplies culture-specific formatting information</param>
         /// <param name="args">arguments</param>
         /// <returns></returns>
-        public static string FormatWith(this string format, IFormatProvider provider, params object[] args)
+        [NotNull]
+        [PublicAPI]
+        public static string FormatWith([NotNull] this string format, [NotNull] IFormatProvider provider, [NotNull] params object[] args)
         {
             return string.Format(provider, format, args);
         }

@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿using JetBrains.Annotations;
+
+namespace Humanizer.Localisation.Ordinalizers
 {
     /// <summary>
     /// The interface used to localise the Ordinalize method
@@ -6,12 +8,14 @@
     public interface IOrdinalizer
     {
         /// <summary>
-        /// Ordinalizes the number 
+        /// Ordinalizes the number
         /// </summary>
         /// <param name="number"></param>
         /// <param name="numberString"></param>
         /// <returns></returns>
-        string Convert(int number, string numberString);
+        [NotNull]
+        [PublicAPI]
+        string Convert(int number, [NotNull] string numberString);
 
         /// <summary>
         /// Ordinalizes the number using the provided grammatical gender
@@ -20,6 +24,8 @@
         /// <param name="numberString"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        string Convert(int number, string numberString, GrammaticalGender gender);
+        [NotNull]
+        [PublicAPI]
+        string Convert(int number, [NotNull] string numberString, GrammaticalGender gender);
     }
 }

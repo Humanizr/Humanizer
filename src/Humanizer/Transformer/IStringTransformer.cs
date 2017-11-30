@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+
 namespace Humanizer
 {
     /// <summary>
@@ -10,6 +12,8 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">String to be transformed</param>
         /// <returns></returns>
-        string Transform(string input);
+        [NotNull]
+        [PublicAPI]
+        string Transform([NotNull] string input);
     }
 }

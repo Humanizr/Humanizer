@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Humanizer.Configuration;
+using JetBrains.Annotations;
 
 
 namespace Humanizer
@@ -14,7 +15,9 @@ namespace Humanizer
         /// Formats the collection for display, calling ToString() on each object and
         /// using the default separator for the current culture.
         /// </summary>
-        public static string Humanize<T>(this IEnumerable<T> collection)
+        [NotNull]
+        [PublicAPI]
+        public static string Humanize<T>([NotNull] this IEnumerable<T> collection)
         {
             return Configurator.CollectionFormatter.Humanize(collection);
         }
@@ -23,7 +26,10 @@ namespace Humanizer
         /// Formats the collection for display, calling <paramref name="displayFormatter"/> on each element
         /// and using the default separator for the current culture.
         /// </summary>
-        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter)
+        [NotNull]
+        [PublicAPI]
+        [ContractAnnotation("displayFormatter:null => halt")]
+        public static string Humanize<T>([NotNull] this IEnumerable<T> collection, [NotNull] Func<T, string> displayFormatter)
         {
             if (displayFormatter == null)
                 throw new ArgumentNullException(nameof(displayFormatter));
@@ -47,7 +53,9 @@ namespace Humanizer
         /// Formats the collection for display, calling ToString() on each object
         /// and using the provided separator.
         /// </summary>
-        public static string Humanize<T>(this IEnumerable<T> collection, string separator)
+        [NotNull]
+        [PublicAPI]
+        public static string Humanize<T>([NotNull] this IEnumerable<T> collection, [NotNull] string separator)
         {
 
             return Configurator.CollectionFormatter.Humanize(collection, separator);
@@ -57,7 +65,10 @@ namespace Humanizer
         /// Formats the collection for display, calling <paramref name="displayFormatter"/> on each element
         /// and using the provided separator.
         /// </summary>
-        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter, string separator)
+        [NotNull]
+        [PublicAPI]
+        [ContractAnnotation("displayFormatter:null => halt")]
+        public static string Humanize<T>([NotNull] this IEnumerable<T> collection, [NotNull] Func<T, string> displayFormatter, [NotNull] string separator)
         {
             if (displayFormatter == null)
                 throw new ArgumentNullException(nameof(displayFormatter));

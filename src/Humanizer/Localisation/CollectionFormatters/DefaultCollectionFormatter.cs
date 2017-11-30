@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.CollectionFormatters
 {
@@ -13,26 +14,31 @@ namespace Humanizer.Localisation.CollectionFormatters
             DefaultSeparator = defaultSeparator;
         }
 
+        [ContractAnnotation("collection:null => halt")]
         public virtual string Humanize<T>(IEnumerable<T> collection)
         {
             return Humanize(collection, o => o?.ToString(), DefaultSeparator);
         }
 
+        [ContractAnnotation("collection:null => halt")]
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter)
         {
             return Humanize(collection, objectFormatter, DefaultSeparator);
         }
 
+        [ContractAnnotation("collection:null => halt")]
         public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter)
         {
             return Humanize(collection, objectFormatter, DefaultSeparator);
         }
 
+        [ContractAnnotation("collection:null => halt")]
         public virtual string Humanize<T>(IEnumerable<T> collection, string separator)
         {
             return Humanize(collection, o => o?.ToString(), separator);
         }
 
+        [ContractAnnotation("collection:null => halt")]
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -77,6 +83,7 @@ namespace Humanizer.Localisation.CollectionFormatters
                 lastItem);
         }
 
+        [NotNull]
         protected virtual string GetConjunctionFormatString(int itemCount) => "{0} {1} {2}";
     }
 }

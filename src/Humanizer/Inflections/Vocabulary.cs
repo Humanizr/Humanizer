@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 
 namespace Humanizer.Inflections
 {
@@ -24,7 +25,8 @@ namespace Humanizer.Inflections
         /// <param name="singular">The singular form of the irregular word, e.g. "person".</param>
         /// <param name="plural">The plural form of the irregular word, e.g. "people".</param>
         /// <param name="matchEnding">True to match these words on their own as well as at the end of longer words. False, otherwise.</param>
-        public void AddIrregular(string singular, string plural, bool matchEnding = true)
+        [PublicAPI]
+        public void AddIrregular([NotNull] string singular, [NotNull] string plural, bool matchEnding = true)
         {
             if (matchEnding)
             {
@@ -42,7 +44,8 @@ namespace Humanizer.Inflections
         /// Adds an uncountable word to the vocabulary, e.g. "fish".  Will be ignored when plurality is changed.
         /// </summary>
         /// <param name="word">Word to be added to the list of uncountables.</param>
-        public void AddUncountable(string word)
+        [PublicAPI]
+        public void AddUncountable([NotNull] string word)
         {
             _uncountables.Add(word.ToLower());
         }
@@ -52,7 +55,8 @@ namespace Humanizer.Inflections
         /// </summary>
         /// <param name="rule">RegEx to be matched, case insensitive, e.g. "(bus)es$"</param>
         /// <param name="replacement">RegEx replacement  e.g. "$1"</param>
-        public void AddPlural(string rule, string replacement)
+        [PublicAPI]
+        public void AddPlural([NotNull] string rule, [NotNull] string replacement)
         {
             _plurals.Add(new Rule(rule, replacement));
         }
@@ -62,7 +66,8 @@ namespace Humanizer.Inflections
         /// </summary>
         /// <param name="rule">RegEx to be matched, case insensitive, e.g. ""(vert|ind)ices$""</param>
         /// <param name="replacement">RegEx replacement  e.g. "$1ex"</param>
-        public void AddSingular(string rule, string replacement)
+        [PublicAPI]
+        public void AddSingular([NotNull] string rule, [NotNull] string replacement)
         {
             _singulars.Add(new Rule(rule, replacement));
         }
@@ -73,7 +78,10 @@ namespace Humanizer.Inflections
         /// <param name="word">Word to be pluralized</param>
         /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
         /// <returns></returns>
-        public string Pluralize(string word, bool inputIsKnownToBeSingular = true)
+        [CanBeNull]
+        [PublicAPI]
+        [ContractAnnotation("word:null => null")]
+        public string Pluralize([CanBeNull] string word, bool inputIsKnownToBeSingular = true)
         {
             var result = ApplyRules(_plurals, word);
 
@@ -94,7 +102,10 @@ namespace Humanizer.Inflections
         /// <param name="word">Word to be singularized</param>
         /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
         /// <returns></returns>
-        public string Singularize(string word, bool inputIsKnownToBePlural = true)
+        [CanBeNull]
+        [PublicAPI]
+        [ContractAnnotation("word:null => null")]
+        public string Singularize([CanBeNull] string word, bool inputIsKnownToBePlural = true)
         {
             var result = ApplyRules(_singulars, word);
 
@@ -110,7 +121,9 @@ namespace Humanizer.Inflections
             return result ?? word;
         }
 
-        private string ApplyRules(IList<Rule> rules, string word)
+        [CanBeNull]
+        [ContractAnnotation("word:null => null")]
+        private string ApplyRules([NotNull] IList<Rule> rules, [CanBeNull] string word)
         {
             if (word == null)
                 return null;
@@ -127,7 +140,7 @@ namespace Humanizer.Inflections
             return result;
         }
 
-        private bool IsUncountable(string word)
+        private bool IsUncountable([NotNull] string word)
         {
             return _uncountables.Contains(word.ToLower());
         }

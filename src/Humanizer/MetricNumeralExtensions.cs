@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -84,7 +85,8 @@ namespace Humanizer
 		/// </code>
 		/// </example>
 		/// <returns>A number after a conversion from a Metric representation.</returns>
-		public static double FromMetric(this string input)
+		[PublicAPI]
+		public static double FromMetric([NotNull] this string input)
 		{
 			input = CleanRepresentation(input);
 			return BuildNumber(input, input[input.Length - 1]);
@@ -109,7 +111,8 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        [PublicAPI]
+        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, [CanBeNull] int? decimals = null)
 		{
 			return ((double)input).ToMetric(hasSpace, useSymbol, decimals);
 		}
@@ -133,7 +136,9 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        [NotNull]
+        [PublicAPI]
+        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, [CanBeNull] int? decimals = null)
 		{
 			if (input.Equals(0))
 				return input.ToString();

@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.DateToOrdinalWords
 {
@@ -8,10 +9,12 @@ namespace Humanizer.Localisation.DateToOrdinalWords
     public interface IDateToOrdinalWordConverter
     {
         /// <summary>
-        /// Converts the date to Ordinal Words 
+        /// Converts the date to Ordinal Words
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         string Convert(DateTime date);
 
         /// <summary>
@@ -20,6 +23,8 @@ namespace Humanizer.Localisation.DateToOrdinalWords
         /// <param name="date"></param>
         /// <param name="grammaticalCase"></param>
         /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         string Convert(DateTime date, GrammaticalCase grammaticalCase);
     }
 }

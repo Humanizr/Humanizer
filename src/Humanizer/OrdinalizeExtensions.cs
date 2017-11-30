@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Humanizer.Configuration;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -13,7 +14,9 @@ namespace Humanizer
         /// </summary>
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <returns></returns>
-        public static string Ordinalize(this string numberString)
+        [NotNull]
+        [PublicAPI]
+        public static string Ordinalize([NotNull] this string numberString)
         {
             return Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString);
         }
@@ -27,7 +30,9 @@ namespace Humanizer
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <returns></returns>
-        public static string Ordinalize(this string numberString, GrammaticalGender gender)
+        [NotNull]
+        [PublicAPI]
+        public static string Ordinalize([NotNull] this string numberString, GrammaticalGender gender)
         {
             return Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString, gender);
         }
@@ -37,6 +42,8 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">The number to be ordinalized</param>
         /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         public static string Ordinalize(this int number)
         {
             return Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture));
@@ -51,6 +58,8 @@ namespace Humanizer
         /// <param name="number">The number to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         public static string Ordinalize(this int number, GrammaticalGender gender)
         {
             return Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);

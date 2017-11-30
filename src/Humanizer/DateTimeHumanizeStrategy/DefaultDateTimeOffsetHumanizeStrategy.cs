@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using JetBrains.Annotations;
 
 namespace Humanizer.DateTimeHumanizeStrategy
 {
@@ -11,7 +12,9 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo culture)
+        [NotNull]
+        [PublicAPI]
+        public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, [NotNull] CultureInfo culture)
         {
             return DateTimeHumanizeAlgorithms.DefaultHumanize(input.UtcDateTime, comparisonBase.UtcDateTime, culture);
         }

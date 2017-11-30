@@ -1,4 +1,6 @@
 ﻿using System;
+using JetBrains.Annotations;
+
 namespace Humanizer
 {
     /// <summary>
@@ -44,7 +46,9 @@ namespace Humanizer
         /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
         /// <returns></returns>
-        public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
+        [NotNull]
+        [PublicAPI]
+        public static string ToQuantity([NotNull] this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
             return input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
         }
@@ -62,7 +66,9 @@ namespace Humanizer
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
         /// <returns></returns>
-        public static string ToQuantity(this string input, int quantity, string format, IFormatProvider formatProvider = null)
+        [NotNull]
+        [PublicAPI]
+        public static string ToQuantity([NotNull] this string input, int quantity, [NotNull] string format, [CanBeNull] IFormatProvider formatProvider = null)
         {
             return input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
         }
@@ -81,7 +87,9 @@ namespace Humanizer
         /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
         /// <returns></returns>
-        public static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
+        [NotNull]
+        [PublicAPI]
+        public static string ToQuantity([NotNull] this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
             return input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
         }
@@ -99,7 +107,9 @@ namespace Humanizer
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
         /// <returns></returns>
-        public static string ToQuantity(this string input, long quantity, string format, IFormatProvider formatProvider = null)
+        [NotNull]
+        [PublicAPI]
+        public static string ToQuantity([NotNull] this string input, long quantity, [NotNull] string format, [CanBeNull] IFormatProvider formatProvider = null)
         {
             return input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
         }
@@ -116,7 +126,7 @@ namespace Humanizer
             if (showQuantityAs == ShowQuantityAs.Numeric)
                 return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
 
-            
+
             return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
         }
     }

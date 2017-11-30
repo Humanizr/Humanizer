@@ -9,8 +9,9 @@
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Collections.Generic" #>
 using System;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -18,16 +19,17 @@ namespace Humanizer
     /// </summary>
     public partial class On
     {
-	<#    
+	<#
 	const int leapYear = 2012;
     for (int month = 1; month <= 12; month++)
     {
 		var firstDayOfMonth = new DateTime(leapYear, month, 1);
 		var monthName = firstDayOfMonth.ToString("MMMM");#>
-	    
+
         /// <summary>
 		/// Provides fluent date accessors for <#= monthName #>
         /// </summary>
+        [PublicAPI]
 		public class <#= monthName #>
 		{
 	        /// <summary>
@@ -35,15 +37,16 @@ namespace Humanizer
 	        /// </summary>
 			public static DateTime The(int dayNumber)
 			{
-				return new DateTime(DateTime.Now.Year, <#= month #>, dayNumber); 
+				return new DateTime(DateTime.Now.Year, <#= month #>, dayNumber);
 			}
         <#for (int day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
         {
 		var ordinalDay = day.Ordinalize();#>
- 
+
 	        /// <summary>
 			/// The <#= ordinalDay #> day of <#= monthName #> of the current year
 	        /// </summary>
+	        [PublicAPI]
 			public static DateTime The<#= ordinalDay #>
 			{
 				get { return new DateTime(DateTime.Now.Year, <#= month #>, <#= day #>); }

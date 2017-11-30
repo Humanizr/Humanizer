@@ -5,6 +5,7 @@ using System.Linq;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 using Humanizer.Localisation.Formatters;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -27,7 +28,9 @@ namespace Humanizer
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
+        [NotNull]
+        [PublicAPI]
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, [CanBeNull] CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, [NotNull] string collectionSeparator = ", ", bool toWords = false)
         {
             return Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords);
         }
@@ -43,7 +46,9 @@ namespace Humanizer
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
+        [NotNull]
+        [PublicAPI]
+        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, [CanBeNull] CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, [NotNull] string collectionSeparator = ", ", bool toWords = false)
         {
             var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit, toWords);
             timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);

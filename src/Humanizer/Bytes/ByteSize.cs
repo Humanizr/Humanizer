@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using System;
+using JetBrains.Annotations;
 
 namespace Humanizer.Bytes
 {
@@ -113,31 +114,37 @@ namespace Humanizer.Bytes
             Terabytes = byteSize / BytesInTerabyte;
         }
 
+        [PublicAPI]
         public static ByteSize FromBits(long value)
         {
             return new ByteSize(value / (double)BitsInByte);
         }
 
+        [PublicAPI]
         public static ByteSize FromBytes(double value)
         {
             return new ByteSize(value);
         }
 
+        [PublicAPI]
         public static ByteSize FromKilobytes(double value)
         {
             return new ByteSize(value * BytesInKilobyte);
         }
 
+        [PublicAPI]
         public static ByteSize FromMegabytes(double value)
         {
             return new ByteSize(value * BytesInMegabyte);
         }
 
+        [PublicAPI]
         public static ByteSize FromGigabytes(double value)
         {
             return new ByteSize(value * BytesInGigabyte);
         }
 
+        [PublicAPI]
         public static ByteSize FromTerabytes(double value)
         {
             return new ByteSize(value * BytesInTerabyte);
@@ -154,7 +161,9 @@ namespace Humanizer.Bytes
             return string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberSymbol);
         }
 
-        public string ToString(string format)
+        [NotNull]
+        [PublicAPI]
+        public string ToString([NotNull] string format)
         {
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
@@ -227,41 +236,49 @@ namespace Humanizer.Bytes
             return Bits.CompareTo(other.Bits);
         }
 
+        [PublicAPI]
         public ByteSize Add(ByteSize bs)
         {
             return new ByteSize(Bytes + bs.Bytes);
         }
 
+        [PublicAPI]
         public ByteSize AddBits(long value)
         {
             return this + FromBits(value);
         }
 
+        [PublicAPI]
         public ByteSize AddBytes(double value)
         {
             return this + FromBytes(value);
         }
 
+        [PublicAPI]
         public ByteSize AddKilobytes(double value)
         {
             return this + FromKilobytes(value);
         }
 
+        [PublicAPI]
         public ByteSize AddMegabytes(double value)
         {
             return this + FromMegabytes(value);
         }
 
+        [PublicAPI]
         public ByteSize AddGigabytes(double value)
         {
             return this + FromGigabytes(value);
         }
 
+        [PublicAPI]
         public ByteSize AddTerabytes(double value)
         {
             return this + FromTerabytes(value);
         }
 
+        [PublicAPI]
         public ByteSize Subtract(ByteSize bs)
         {
             return new ByteSize(Bytes - bs.Bytes);
@@ -317,7 +334,9 @@ namespace Humanizer.Bytes
             return b1.Bits >= b2.Bits;
         }
 
-        public static bool TryParse(string s, out ByteSize result)
+        [PublicAPI]
+        [ContractAnnotation("s:null => halt")]
+        public static bool TryParse([NotNull] string s, out ByteSize result)
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
@@ -334,7 +353,7 @@ namespace Humanizer.Bytes
 
             // Acquiring culture specific decimal separator
 			var decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-                
+
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
                 if (!(char.IsDigit(s[num]) || s[num] == decSep))
@@ -393,7 +412,8 @@ namespace Humanizer.Bytes
             return true;
         }
 
-        public static ByteSize Parse(string s)
+        [PublicAPI]
+        public static ByteSize Parse([NotNull] string s)
         {
             if (TryParse(s, out var result))
                 return result;

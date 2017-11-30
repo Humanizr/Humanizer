@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -16,7 +17,8 @@ namespace Humanizer
         /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <returns></returns>
-        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
+        [PublicAPI]
+        public static TTargetEnum DehumanizeTo<TTargetEnum>([NotNull] this string input)
             where TTargetEnum : struct, IComparable, IFormattable
         {
             return (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ThrowsException);
@@ -31,12 +33,15 @@ namespace Humanizer
         /// <returns></returns>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <exception cref="ArgumentException">If targetEnum is not an enum</exception>
-        public static Enum DehumanizeTo(this string input, Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
+        [CanBeNull]
+        [PublicAPI]
+        public static Enum DehumanizeTo([NotNull] this string input, [NotNull] Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
         {
             return (Enum)DehumanizeToPrivate(input, targetEnum, onNoMatch);
         }
 
-        private static object DehumanizeToPrivate(string input, Type targetEnum, OnNoMatch onNoMatch)
+        [CanBeNull]
+        private static object DehumanizeToPrivate([NotNull] string input, [NotNull] Type targetEnum, OnNoMatch onNoMatch)
         {
             var match = Enum.GetValues(targetEnum).Cast<Enum>().FirstOrDefault(value => string.Equals(value.Humanize(), input, StringComparison.OrdinalIgnoreCase));
 

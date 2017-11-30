@@ -1,4 +1,6 @@
-﻿namespace Humanizer
+﻿using JetBrains.Annotations;
+
+namespace Humanizer
 {
     /// <summary>
     /// Can truncate a string.
@@ -13,6 +15,9 @@
         /// <param name="truncationString">The string used to truncate with</param>
         /// <param name="truncateFrom">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
-        string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right);
+        [CanBeNull]
+        [PublicAPI]
+        [ContractAnnotation("value:null => null")]
+        string Truncate([CanBeNull] string value, int length, [CanBeNull] string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right);
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿using JetBrains.Annotations;
+
+namespace Humanizer.Localisation.Formatters
 {
     /// <summary>
-    /// Implement this interface if your language has complex rules around dealing with numbers. 
-    /// For example in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and 
+    /// Implement this interface if your language has complex rules around dealing with numbers.
+    /// For example in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and
     /// in Arabic 2 days is يومين not 2 يوم
     /// </summary>
     public interface IFormatter
@@ -11,12 +13,16 @@
         /// Now
         /// </summary>
         /// <returns>Returns Now</returns>
+        [NotNull]
+        [PublicAPI]
         string DateHumanize_Now();
 
         /// <summary>
         /// Never
         /// </summary>
         /// <returns>Returns Never</returns>
+        [NotNull]
+        [PublicAPI]
         string DateHumanize_Never();
 
         /// <summary>
@@ -26,12 +32,16 @@
         /// <param name="timeUnitTense"></param>
         /// <param name="unit"></param>
         /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit);
 
         /// <summary>
         /// 0 seconds
         /// </summary>
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
+        [NotNull]
+        [PublicAPI]
         string TimeSpanHumanize_Zero();
 
         /// <summary>
@@ -40,7 +50,8 @@
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
         /// <param name="toWords"></param>
-        /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false);
     }
 }

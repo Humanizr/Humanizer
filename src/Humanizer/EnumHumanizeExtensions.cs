@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Humanizer.Configuration;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -22,6 +23,8 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The enum member to be humanized</param>
         /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         public static string Humanize(this Enum input)
         {
             var enumType = input.GetType();
@@ -103,6 +106,8 @@ namespace Humanizer
         /// <param name="input">The enum member to be humanized</param>
         /// <param name="casing">The casing to use for humanizing the enum member</param>
         /// <returns></returns>
+        [NotNull]
+        [PublicAPI]
         public static string Humanize(this Enum input, LetterCasing casing)
         {
             var humanizedEnum = Humanize(input);

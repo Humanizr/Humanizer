@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -12,7 +13,9 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be dehumanized</param>
         /// <returns></returns>
-        public static string Dehumanize(this string input)
+        [NotNull]
+        [PublicAPI]
+        public static string Dehumanize([NotNull] this string input)
         {
             var titlizedWords = input.Split(' ').Select(word => word.Humanize(LetterCasing.Title));
             return string.Join("", titlizedWords).Replace(" ", "");

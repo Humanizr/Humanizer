@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using JetBrains.Annotations;
 
 namespace Humanizer.DateTimeHumanizeStrategy
 {
@@ -22,7 +23,9 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
-        public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo culture)
+        [NotNull]
+        [PublicAPI]
+        public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, [NotNull] CultureInfo culture)
         {
             return DateTimeHumanizeAlgorithms.PrecisionHumanize(input.UtcDateTime, comparisonBase.UtcDateTime, _precision, culture);
         }

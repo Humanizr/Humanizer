@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -31,7 +32,7 @@ namespace Humanizer
                 { "I",  1 }
             };
 
-        private static readonly Regex ValidRomanNumeral = 
+        private static readonly Regex ValidRomanNumeral =
             new Regex(
                 "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
                 RegexOptionsUtil.Compiled);
@@ -41,7 +42,8 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Roman number</param>
         /// <returns>Human-readable number</returns>
-        public static int FromRoman(this string input)
+        [PublicAPI]
+        public static int FromRoman([NotNull] this string input)
         {
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
@@ -82,6 +84,8 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Integer input</param>
         /// <returns>Roman number</returns>
+        [NotNull]
+        [PublicAPI]
         public static string ToRoman(this int input)
         {
             const int minValue              = 1;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -42,7 +43,9 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be humanized</param>
         /// <returns></returns>
-        public static string Humanize(this string input)
+        [NotNull]
+        [PublicAPI]
+        public static string Humanize([NotNull] this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
             if (input.ToCharArray().All(char.IsUpper))
@@ -65,7 +68,9 @@ namespace Humanizer
         /// <param name="input">The string to be humanized</param>
         /// <param name="casing">The desired casing for the output</param>
         /// <returns></returns>
-        public static string Humanize(this string input, LetterCasing casing)
+        [NotNull]
+        [PublicAPI]
+        public static string Humanize([NotNull] this string input, LetterCasing casing)
         {
             return input.Humanize().ApplyCase(casing);
         }

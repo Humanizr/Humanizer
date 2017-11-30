@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Humanizer.Configuration;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -14,6 +15,8 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The date to be made into ordinal words</param>
         /// <returns>The date in ordinal words</returns>
+        [NotNull]
+        [PublicAPI]
         public static string ToOrdinalWords(this DateTime input)
         {
             return Configurator.DateToOrdinalWordsConverter.Convert(input);
@@ -24,6 +27,8 @@ namespace Humanizer
         /// <param name="input">The date to be made into ordinal words</param>
         /// <param name="grammaticalCase">The grammatical case to use for output words</param>
         /// <returns>The date in ordinal words</returns>
+        [NotNull]
+        [PublicAPI]
         public static string ToOrdinalWords(this DateTime input, GrammaticalCase grammaticalCase)
         {
             return Configurator.DateToOrdinalWordsConverter.Convert(input, grammaticalCase);

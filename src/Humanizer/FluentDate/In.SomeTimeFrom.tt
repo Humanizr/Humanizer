@@ -10,8 +10,9 @@
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
+<#@ import namespace="System.Collections.Generic" #>
 using System;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -28,7 +29,7 @@ namespace Humanizer
 		var week = "Week" + plural;
 		var month = "Month" + plural;
 		var year = "Year" + plural;
-  #> 
+  #>
         /// <summary>
         /// </summary>
 		public static class <#= i.ToWords().Dehumanize() #>
@@ -36,6 +37,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> seconds from now
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= second #>
 			{
 				get { return DateTime.UtcNow.AddSeconds(<#= i #>); }
@@ -44,6 +46,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> seconds from the provided date
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= second #>From(DateTime date)
 			{
 				return date.AddSeconds(<#= i #>);
@@ -52,6 +55,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> minutes from now
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= minute #>
 			{
 				get { return DateTime.UtcNow.AddMinutes(<#= i #>); }
@@ -60,6 +64,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> minutes from the provided date
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= minute #>From(DateTime date)
 			{
 				return date.AddMinutes(<#= i #>);
@@ -68,6 +73,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> hours from now
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= hour #>
 			{
 				get { return DateTime.UtcNow.AddHours(<#= i #>); }
@@ -76,6 +82,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> hours from the provided date
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= hour #>From(DateTime date)
 			{
 				return date.AddHours(<#= i #>);
@@ -84,6 +91,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> days from now
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= day #>
 			{
 				get { return DateTime.UtcNow.AddDays(<#= i #>); }
@@ -92,6 +100,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> days from the provided date
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= day #>From(DateTime date)
 			{
 				return date.AddDays(<#= i #>);
@@ -100,6 +109,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> weeks from now
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= week #>
 			{
 				get { return DateTime.UtcNow.AddDays(<#= i * 7 #>); }
@@ -108,6 +118,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> weeks from the provided date
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= week #>From(DateTime date)
 			{
 				return date.AddDays(<#= i * 7 #>);
@@ -116,6 +127,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> months from now
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= month #>
 			{
 				get { return DateTime.UtcNow.AddMonths(<#= i #>); }
@@ -124,6 +136,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> months from the provided date
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= month #>From(DateTime date)
 			{
 				return date.AddMonths(<#= i #>);
@@ -132,6 +145,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> years from now
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= year #>
 			{
 				get { return DateTime.UtcNow.AddYears(<#= i #>); }
@@ -140,6 +154,7 @@ namespace Humanizer
 			/// <summary>
 			/// <#= i #> years from the provided date
 			/// </summary>
+			[PublicAPI]
 			public static DateTime <#= year #>From(DateTime date)
 			{
 				return date.AddYears(<#= i #>);
