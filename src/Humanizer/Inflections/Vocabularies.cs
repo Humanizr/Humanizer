@@ -88,6 +88,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("curriculum", "curricula");
             _default.AddIrregular("database", "databases");
             _default.AddIrregular("zombie", "zombies");
+            _default.AddIrregular("personnel", "personnel");
 
             _default.AddIrregular("is", "are", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);

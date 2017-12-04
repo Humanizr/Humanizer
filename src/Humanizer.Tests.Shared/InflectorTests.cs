@@ -190,6 +190,7 @@ namespace Humanizer.Tests
             yield return new object[] { "freshman", "freshmen" };
             yield return new object[] { "chairman", "chairmen" };
             yield return new object[] { "human", "humans" };
+            yield return new object[] { "personnel", "personnel" };
 
             yield return new object[] {"basis", "bases"};
             yield return new object[] {"diagnosis", "diagnoses"};
