@@ -110,8 +110,7 @@ namespace Humanizer.Localisation.NumberToWords
         {
             if (isOrdinal)
             {
-                string exceptionString;
-                if (ExceptionNumbersToWords(number, out exceptionString))
+                if (ExceptionNumbersToWords(number, out var exceptionString))
                     return exceptionString;
                 else if (number > 19)
                     return TensMap[number/10] + "ste";

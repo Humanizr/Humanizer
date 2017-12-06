@@ -115,8 +115,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
-            string towords;
-            if (!Ordinals.TryGetValue(number, out towords))
+            if (!Ordinals.TryGetValue(number, out var towords))
                 towords = Convert(number);
 
             if (gender == GrammaticalGender.Feminine)

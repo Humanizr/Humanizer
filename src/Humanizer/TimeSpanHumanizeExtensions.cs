@@ -48,7 +48,7 @@ namespace Humanizer
             var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit);
             timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
 
-            return ConcatenateTimeSpanParts(timeParts, collectionSeparator);
+            return ConcatenateTimeSpanParts(timeParts, culture, collectionSeparator);
         }
 
         private static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit)
@@ -205,11 +205,11 @@ namespace Humanizer
             return timeParts;
         }
 
-        private static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, string collectionSeparator)
+        private static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, CultureInfo culture, string collectionSeparator)
         {
             if (collectionSeparator == null)
             {
-                return Configurator.CollectionFormatter.Humanize(timeSpanParts);
+                return Configurator.CollectionFormatters.ResolveForCulture(culture).Humanize(timeSpanParts);
             }
 
             return string.Join(collectionSeparator, timeSpanParts);

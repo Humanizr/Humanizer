@@ -116,6 +116,7 @@ namespace Humanizer.Tests
         [InlineData("customer_first_name", "customerFirstName")]
         [InlineData("customer_first_name_goes_here", "customerFirstNameGoesHere")]
         [InlineData("customer name", "customer name")]
+        [InlineData("", "")]
         public void Camelize(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Camelize());
@@ -186,6 +187,10 @@ namespace Humanizer.Tests
             yield return new object[] {"spokesman", "spokesmen"};
             yield return new object[] {"man", "men"};
             yield return new object[] {"woman", "women"};
+            yield return new object[] { "freshman", "freshmen" };
+            yield return new object[] { "chairman", "chairmen" };
+            yield return new object[] { "human", "humans" };
+            yield return new object[] { "personnel", "personnel" };
 
             yield return new object[] {"basis", "bases"};
             yield return new object[] {"diagnosis", "diagnoses"};
@@ -334,6 +339,12 @@ namespace Humanizer.Tests
             yield return new object[] {"walrus","walruses"};
             yield return new object[] {"waltz","waltzes"};
             yield return new object[] {"zombie","zombies"};
+
+            yield return new object[] {"cookie","cookies"};
+            yield return new object[] {"bookie","bookies"};
+            yield return new object[] {"rookie","rookies"};
+            yield return new object[] {"roomie","roomies"};
+            yield return new object[] {"smoothie","smoothies"};
         }
 
         IEnumerator IEnumerable.GetEnumerator()
