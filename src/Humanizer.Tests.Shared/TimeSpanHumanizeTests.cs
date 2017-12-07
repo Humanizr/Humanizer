@@ -380,7 +380,7 @@ namespace Humanizer.Tests
         [InlineData(1299630020, 5, "two weeks, one day, one hour, thirty seconds, twenty milliseconds")]
         public void TimeSpanWithNumbersConvertedToWords(int milliseconds, int precision, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, numbersToWords: true);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, toWords: true);
             Assert.Equal(expected, actual);
         }
 
