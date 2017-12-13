@@ -58,14 +58,19 @@ namespace Humanizer
             var timeUnitsEnumTypes = GetEnumTypesForTimeUnit();
             var timeParts = new List<string>();
 
+            var timespanToSubtract = new TimeSpan();
+
             foreach (var timeUnitType in timeUnitsEnumTypes)
             {
-                var timepart = GetTimeUnitPart(timeUnitType, timespan, culture, maxUnit, minUnit, cultureFormatter, toWords);
+                var remainingTimespan = timespan - timespanToSubtract;
+                var timepart = GetTimeUnitPart(timeUnitType, remainingTimespan, culture, maxUnit, minUnit, cultureFormatter, toWords);
 
                 if (timepart != null || firstValueFound)
                 {
                     firstValueFound = true;
                     timeParts.Add(timepart);
+                    var toSubtract = GetTimeUnitNumericalValue(timeUnitType, remainingTimespan, timeUnitType == maxUnit);
+                    timespanToSubtract += GetTimeSpanRepresentingTimetUnitFromNumericalValue(timeUnitType, toSubtract);
                 }
             }
             if (IsContainingOnlyNullValue(timeParts))
@@ -91,6 +96,31 @@ namespace Humanizer
                 return BuildFormatTimePart(cultureFormatter, timeUnitToGet, numberOfTimeUnits, toWords);
             }
             return null;
+        }
+
+        private static TimeSpan GetTimeSpanRepresentingTimetUnitFromNumericalValue(TimeUnit timeUnit, int timeValue)
+        {
+            switch (timeUnit)
+            {
+                case TimeUnit.Millisecond:
+                    return TimeSpan.FromMilliseconds(timeValue);
+                case TimeUnit.Second:
+                    return TimeSpan.FromSeconds(timeValue);
+                case TimeUnit.Minute:
+                    return TimeSpan.FromMinutes(timeValue);
+                case TimeUnit.Hour:
+                    return TimeSpan.FromHours(timeValue);
+                case TimeUnit.Day:
+                    return TimeSpan.FromDays(timeValue);
+                case TimeUnit.Week:
+                    return TimeSpan.FromDays(timeValue * _daysInAWeek);
+                case TimeUnit.Month:
+                    return TimeSpan.FromDays(Math.Ceiling(timeValue * _daysInAMonth));
+                case TimeUnit.Year:
+                    return TimeSpan.FromDays(Math.Ceiling(timeValue * _daysInAYear));
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, null);
+            }
         }
 
         private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
@@ -198,6 +228,13 @@ namespace Humanizer
         {
             if (!countEmptyUnits)
                 timeParts = timeParts.Where(x => x != null);
+
+            //var count = timeParts.Count();
+            //if (precision < count)
+            //{
+                
+            //}
+
             timeParts = timeParts.Take(precision);
             if (countEmptyUnits)
                 timeParts = timeParts.Where(x => x != null);
