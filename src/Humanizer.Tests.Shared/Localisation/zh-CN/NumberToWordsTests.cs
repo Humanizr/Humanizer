@@ -16,6 +16,8 @@ namespace Humanizer.Tests.Localisation.zhCN
         [InlineData(8, "八")]
         [InlineData(9, "九")]
         [InlineData(10, "十")]
+        [InlineData(13, "十三")]
+        [InlineData(15, "十五")]
         [InlineData(19, "十九")]
         [InlineData(28, "二十八")]
         [InlineData(37, "三十七")]
@@ -47,8 +49,11 @@ namespace Humanizer.Tests.Localisation.zhCN
             Assert.Equal(expected, number.ToWords());
         }        
 
-        [Theory]        
-        [InlineData(10000, "第 一万")]       
+        [Theory]
+        [InlineData(1, "第 一")]
+        [InlineData(15, "第 十五")]
+        [InlineData(10000, "第 一万")]
+        [InlineData(31234, "第 三万一千二百三十四")]
         public void ToOrdinalWords(int number, string words)
         {
             Assert.Equal(words, number.ToOrdinalWords());
