@@ -1,3 +1,54 @@
+# v2.2
+
+ - [#634](https://github.com/Humanizr/Humanizer/pull/634) - Added support for Greek language in resources contributed by Christos Matskas ([cmatskas](https://github.com/cmatskas))
+ - [#633](https://github.com/Humanizr/Humanizer/pull/633) - #632 Continued: Fuzzy month years logic for time span humanize extensions contributed by Oren Novotny ([onovotny](https://github.com/onovotny)) +enhancement
+ - [#632](https://github.com/Humanizr/Humanizer/pull/632) - Fuzzy month years logic for time span humanize extensions contributed by Martin Strecker ([MaStr11](https://github.com/MaStr11))
+ - [#631](https://github.com/Humanizr/Humanizer/pull/631) - Latvian localization contributed by Dmitry Bogatykh ([bogatykh](https://github.com/bogatykh))
+ - [#630](https://github.com/Humanizr/Humanizer/pull/630) - billions and millions greater than 2 contributed by Rafael Bianchi ([rafaellfontana](https://github.com/rafaellfontana))
+ - [#628](https://github.com/Humanizr/Humanizer/pull/628) - IsDefined is prefered contributed by Shimmy ([weitzhandler](https://github.com/weitzhandler))
+ - [#623](https://github.com/Humanizr/Humanizer/issues/623) - Wrongful commit to master. What to do?
+ - [#620](https://github.com/Humanizr/Humanizer/issues/620) - Double Barrel Name conversion
+ - [#619](https://github.com/Humanizr/Humanizer/pull/619) - Update readme.md contributed by Tyler Brinkley ([TylerBrinkley](https://github.com/TylerBrinkley))
+ - [#617](https://github.com/Humanizr/Humanizer/pull/617) - issue 611: added the method Kebaberize contributed by ([klaus78](https://github.com/klaus78))
+ - [#616](https://github.com/Humanizr/Humanizer/issues/616) - English verb (Past Participle) tense conversion "x" => "xed" feasibility?
+ - [#613](https://github.com/Humanizr/Humanizer/issues/613) - Humanizer.Core not working correctly, show localized strings instead of english
+ - [#612](https://github.com/Humanizr/Humanizer/pull/612) - Added Swedish collection formatter contributed by Māris Brenčuks ([brencuks](https://github.com/brencuks))
+ - [#610](https://github.com/Humanizr/Humanizer/pull/610) - adding parameter decimals toMetric(). Fixes #609 contributed by ([klaus78](https://github.com/klaus78))
+ - [#609](https://github.com/Humanizr/Humanizer/issues/609) - add .ToMetric() rounding +enhancement
+ - [#608](https://github.com/Humanizr/Humanizer/pull/608) - 605: Fix enum no display attrib contributed by Thomas Bo Nielsen ([basildk](https://github.com/basildk))
+ - [#605](https://github.com/Humanizr/Humanizer/issues/605) - enum with DisplayAttribute but no Description attribute fails +fix
+ - [#603](https://github.com/Humanizr/Humanizer/pull/603) - Syntax correction in readme.md contributed by Brian MacKay ([kinetiq](https://github.com/kinetiq))
+ - [#602](https://github.com/Humanizr/Humanizer/pull/602) - Register Portuguese translations as `pt` contributed by ([hangy](https://github.com/hangy))
+ - [#601](https://github.com/Humanizr/Humanizer/issues/601) - Humanize pt-PT problem
+ - [#600](https://github.com/Humanizr/Humanizer/pull/600) - Revert "Add Esperanto support to NumberToWords. Fixes #558" contributed by Oren Novotny ([onovotny](https://github.com/onovotny))
+ - [#598](https://github.com/Humanizr/Humanizer/pull/598) - Workaround for Croatian TimeSpan localization bug contributed by ([hangy](https://github.com/hangy))
+ - [#597](https://github.com/Humanizr/Humanizer/issues/597) - Croatian localization of TimeSpan fails with >1 day
+ - [#596](https://github.com/Humanizr/Humanizer/issues/596) - Can not add Humanizer 2.1.0 in Class library (.Net Core)
+ - [#595](https://github.com/Humanizr/Humanizer/pull/595) - Add new overload for Ordinalize that accepts a CultureInfo contributed by Thijs Brobbel ([tiesmaster](https://github.com/tiesmaster))
+ - [#590](https://github.com/Humanizr/Humanizer/pull/590) - English contributed by ([stevotennis](https://github.com/stevotennis))
+ - [#589](https://github.com/Humanizr/Humanizer/pull/589) - Fix CONTRIBUTING.md of broken links. contributed by Sho Sato ([cssho](https://github.com/cssho))
+ - [#588](https://github.com/Humanizr/Humanizer/pull/588) - Add resource value validation for DefaultFormatter contributed by Krisztián Bodrogi ([Chrissx](https://github.com/Chrissx))
+ - [#586](https://github.com/Humanizr/Humanizer/pull/586) - added translation for DateHumanize_Now contributed by Daniel Katz ([danielkatz](https://github.com/danielkatz))
+ - [#583](https://github.com/Humanizr/Humanizer/issues/583) - TimeSpan.Humanize does not behave as expected +enhancement
+ - [#582](https://github.com/Humanizr/Humanizer/pull/582) - Pass through the content of the "Letter, other" Unicode category. contributed by ([hangy](https://github.com/hangy))
+ - [#581](https://github.com/Humanizr/Humanizer/pull/581) - Fix misspelling contributed by Cameron Sjo ([cameron-sjo](https://github.com/cameron-sjo))
+ - [#578](https://github.com/Humanizr/Humanizer/issues/578) - .Humanize() on "Arabic" letters returns empty string (or any other casing)
+ - [#577](https://github.com/Humanizr/Humanizer/issues/577) - .NET Core 1.0 Support?
+ - [#576](https://github.com/Humanizr/Humanizer/pull/576) - Fixed incorrect locale in readme contributed by ([fishchisel](https://github.com/fishchisel))
+ - [#575](https://github.com/Humanizr/Humanizer/issues/575) - not installable for projects that targets .NET client profile
+ - [#574](https://github.com/Humanizr/Humanizer/issues/574) - Difference Dasherize and Hyphenate
+ - [#573](https://github.com/Humanizr/Humanizer/issues/573) - Humanizer.Core 2.1.0 breaks compatibility with PCL Profile 259
+ - [#569](https://github.com/Humanizr/Humanizer/pull/569) - Add Esperanto support to NumberToWords. Fixes #558 contributed by Alois ([aloisdg](https://github.com/aloisdg))
+ - [#558](https://github.com/Humanizr/Humanizer/issues/558) - Add Esperanto support for NumberToWords
+ - [#504](https://github.com/Humanizr/Humanizer/pull/504) - Add support for long to ToQuantity contributed by Robert Pethick ([RobPethick](https://github.com/RobPethick)) +enhancement
+ - [#503](https://github.com/Humanizr/Humanizer/issues/503) - ToQuantity does not support long quantities +enhancement
+ - [#500](https://github.com/Humanizr/Humanizer/pull/500) - Add ToOrdinalWords extension with gender overload contributed by Robert Pethick ([RobPethick](https://github.com/RobPethick))
+ - [#328](https://github.com/Humanizr/Humanizer/issues/328) - Ordinal number suffixes
+
+[Commits](https://github.com/Humanizr/Humanizer/compare/v2.1...v2.2)
+
+# vNext
+
 ### v2.1 - 2016-07-04
 
 [Fixed issues](https://github.com/Humanizr/Humanizer/issues?q=is%3Aclosed+milestone%3Av2.1)
@@ -5,7 +56,7 @@
 
 ### v2.0.1 - 2016-02-07
   - [#520](https://github.com/Humanizr/Humanizer/issues/520) Humanizer.Core package does not install on Xamarin
-  
+
 [Commits](https://github.com/Humanizr/Humanizer/compare/v2.0...v2.0.1)
 
 ### v2.0.0 - 2016-01-30
@@ -30,7 +81,7 @@
  - [#462](https://github.com/Humanizr/Humanizer/pull/462): Implemented Spanish cardinal feminines
  - [#459](https://github.com/Humanizr/Humanizer/pull/459): Add support of metric numeral expressions
  - Enable source debugging via [GitLink](https://github.com/GitTools/GitLink)
- 
+
  [Commits](https://github.com/Humanizr/Humanizer/compare/v1.37.0...v2.0.0-beta01)
 
 ### v1.37.0 - 2015-07-03
@@ -355,3 +406,5 @@ fix it based on your requirements.
 
 ### v1.0.0 - 2013-11-10
 No release history before this point: check out http://www.mehdi-khalili.com/humanizer-v1 for the feature-set at V1
+
+Commits: ...

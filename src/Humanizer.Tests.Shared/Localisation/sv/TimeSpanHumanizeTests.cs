@@ -54,5 +54,28 @@ namespace Humanizer.Tests.Localisation.sv
         {
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
         }
+
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(31, "en månad")]
+        [InlineData(61, "2 månader")]
+        [InlineData(92, "3 månader")]
+        [InlineData(335, "11 månader")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(366, "ett år")]
+        [InlineData(731, "2 år")]
+        [InlineData(1096, "3 år")]
+        [InlineData(4018, "11 år")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
     }
 }

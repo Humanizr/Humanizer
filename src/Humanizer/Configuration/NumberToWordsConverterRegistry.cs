@@ -33,6 +33,7 @@ namespace Humanizer.Configuration
             Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
             Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
             Register("nb", new NorwegianBokmalNumberToWordsConverter());
+            Register("zh-CN", new ChineseNumberToWordsConverter());
         }
     }
 }

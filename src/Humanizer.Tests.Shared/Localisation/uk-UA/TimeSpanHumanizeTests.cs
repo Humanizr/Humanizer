@@ -4,8 +4,31 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
-    public class TimeSpanHumanizeTests 
+    public class TimeSpanHumanizeTests
     {
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "один рік")]
+        [InlineData(731, "2 роки")]
+        [InlineData(1096, "3 роки")]
+        [InlineData(4018, "11 років")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "один місяць")]
+        [InlineData(61, "2 місяці")]
+        [InlineData(92, "3 місяці")]
+        [InlineData(335, "11 місяців")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
         [Theory]
         [InlineData(7, "один тиждень")]
         [InlineData(14, "2 тижні")]

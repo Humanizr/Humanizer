@@ -32,6 +32,13 @@ namespace Humanizer.Tests
             Assert.Equal(expectedResult, input.Humanize());
         }
 
+        [Theory, UseCulture("ar")]
+        [InlineData("جمهورية ألمانيا الاتحادية", "جمهورية ألمانيا الاتحادية")]
+        public void CanHumanizeOtherUnicodeLetter(string input, string expectedResult)
+        {
+            Assert.Equal(expectedResult, input.Humanize());
+        }
+
         [Theory]
         [InlineData("Underscored_input_string_is_turned_into_sentence", "Underscored input string is turned into sentence")]
         [InlineData("Underscored_input_String_is_turned_INTO_sentence", "Underscored input String is turned INTO sentence")]

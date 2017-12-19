@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -13,8 +14,14 @@ namespace Humanizer.Localisation.NumberToWords
             {2, "kahdes" }
         };
 
-        public override string Convert(int number)
+        public override string Convert(long input)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
+
             if (number < 0)
                 return string.Format("miinus {0}", Convert(-number));
 

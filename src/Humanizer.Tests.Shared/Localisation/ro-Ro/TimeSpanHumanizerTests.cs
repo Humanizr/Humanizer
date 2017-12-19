@@ -11,7 +11,7 @@ namespace Humanizer.Tests.Localisation.roRO
     /// There is no test for months since there are only 12 of them in a year.
     /// </summary>
     [UseCulture("ro-RO")]
-    public class TimeSpanHumanizerTests 
+    public class TimeSpanHumanizerTests
     {
 
         [Theory]
@@ -19,13 +19,14 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(14, "14 milisecunde")]
         [InlineData(21, "21 de milisecunde")]
         [InlineData(3000, "3 secunde")]
-        public void Milliseconds(int millisSeconds, string expected)
+        public void Milliseconds(int milliseconds, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(millisSeconds).Humanize();
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize();
             Assert.Equal(expected, actual);
         }
 
         [Theory]
+        [InlineData(0, "0 secunde")]
         [InlineData(1, "1 secundă")]
         [InlineData(14, "14 secunde")]
         [InlineData(21, "21 de secunde")]
@@ -57,7 +58,7 @@ namespace Humanizer.Tests.Localisation.roRO
             var actual = TimeSpan.FromHours(hours).Humanize();
             Assert.Equal(expected, actual);
         }
-        
+
         [Theory]
         [InlineData(1, "1 zi")]
         [InlineData(6, "6 zile")]
@@ -78,6 +79,38 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             var actual = TimeSpan.FromDays(7 * weeks).Humanize();
             Assert.Equal(expected, actual);
+        }
+
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(31, "1 lună")]
+        [InlineData(61, "2 luni")]
+        [InlineData(92, "3 luni")]
+        [InlineData(335, "11 luni")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Native speaker")]
+        [InlineData(366, "1 an")]
+        [InlineData(731, "2 ani")]
+        [InlineData(1096, "3 ani")]
+        [InlineData(4018, "11 ani")]
+        [InlineData(7500, "20 de ani")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Fact, CustomDescription("The name of this test is confusing because has no sense. Instead should be read as an interval with duration zero and not the absence of time.")]
+        public void NoTime()
+        {
+            // Usage in Romanian: "Timp execuție: 0 secunde."
+            // Should be equivalent with TimeSpan.FromSeconds(0).Humanize()
+            Assert.Equal("0 secunde", TimeSpan.Zero.Humanize());
         }
     }
 }

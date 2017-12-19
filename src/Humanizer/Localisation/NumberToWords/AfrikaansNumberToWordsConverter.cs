@@ -22,9 +22,13 @@ namespace Humanizer.Localisation.NumberToWords
             {19, "negentiende"}
         };
 
-        public override string Convert(int number)
+        public override string Convert(long number)
         {
-            return Convert(number, false);
+            if(number > Int32.MaxValue|| number < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            return Convert((int)number, false);
         }
 
         public override string ConvertToOrdinal(int number)
@@ -106,8 +110,7 @@ namespace Humanizer.Localisation.NumberToWords
         {
             if (isOrdinal)
             {
-                string exceptionString;
-                if (ExceptionNumbersToWords(number, out exceptionString))
+                if (ExceptionNumbersToWords(number, out var exceptionString))
                     return exceptionString;
                 else if (number > 19)
                     return TensMap[number/10] + "ste";

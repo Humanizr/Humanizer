@@ -14,7 +14,7 @@
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public string Convert(int number)
+        public string Convert(long number)
         {
             return Convert(number, _defaultGender);
         }
@@ -25,7 +25,7 @@
         /// <param name="number"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public abstract string Convert(int number, GrammaticalGender gender);
+        public abstract string Convert(long number, GrammaticalGender gender);
 
         /// <summary>
         /// Converts the number to ordinal string using the locale's default grammatical gender

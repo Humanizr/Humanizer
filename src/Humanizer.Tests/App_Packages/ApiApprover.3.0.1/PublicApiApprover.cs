@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#if NET46
+using System.IO;
 using ApprovalTests;
 using ApprovalTests.Namers;
 using Mono.Cecil;
@@ -41,3 +42,4 @@ namespace ApiApprover
         }
     }
 }
+#endif

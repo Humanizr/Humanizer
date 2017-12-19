@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Humanizer.Localisation.NumberToWords
@@ -31,8 +32,14 @@ namespace Humanizer.Localisation.NumberToWords
             new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
         };
 
-        public override string Convert(int number)
+        public override string Convert(long input)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
+
             if (number == 0)
                 return UnitsMap[0];
 

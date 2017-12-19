@@ -13,6 +13,7 @@ namespace Humanizer
     {
         private const string DisplayAttributeTypeName = "System.ComponentModel.DataAnnotations.DisplayAttribute";
         private const string DisplayAttributeGetDescriptionMethodName = "GetDescription";
+        private const string DisplayAttributeGetNameMethodName = "GetName";
 
         private static readonly Func<PropertyInfo, bool> StringTypedProperty = p => p.PropertyType == typeof(string);
 
@@ -69,10 +70,21 @@ namespace Humanizer
                 var attrType = attr.GetType();
                 if (attrType.FullName == DisplayAttributeTypeName)
                 {
-                    var method = attrType.GetRuntimeMethod(DisplayAttributeGetDescriptionMethodName, new Type[0]);
-                    if (method != null)
-                        return method.Invoke(attr, new object[0]).ToString();
+                    var methodGetDescription = attrType.GetRuntimeMethod(DisplayAttributeGetDescriptionMethodName, new Type[0]);
+                    if (methodGetDescription != null)
+                    {
+                        var executedMethod = methodGetDescription.Invoke(attr, new object[0]);
+                        if (executedMethod != null) return executedMethod.ToString();
+                    }
+                    var methodGetName = attrType.GetRuntimeMethod(DisplayAttributeGetNameMethodName, new Type[0]);
+                    if (methodGetName != null)
+                    {
+                        var executedMethod = methodGetName.Invoke(attr, new object[0]);
+                        if (executedMethod != null) return executedMethod.ToString();
+                    }
+                    return null;
                 }
+
                 var descriptionProperty =
                     attrType.GetRuntimeProperties()
                         .Where(StringTypedProperty)

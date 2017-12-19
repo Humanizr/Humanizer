@@ -20,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <returns></returns>
-        public override string Convert(int number)
+        public override string Convert(long number)
         {
             return number.ToString(_culture);
         }

@@ -42,17 +42,17 @@ namespace Humanizer.Tests.Localisation.roRO
         [Theory]
         [InlineData(10, "acum 10 zile")]
         [InlineData(23, "acum 23 de zile")]
-        public void DaysAgo(int seconds, string expected)
+        public void DaysAgo(int days, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Day, Tense.Past);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
         
         [Theory]
         [InlineData(119, "acum 119 ani")]
         [InlineData(100, "acum 100 de ani")]
-        public void YearsAgo(int seconds, string expected)
+        public void YearsAgo(int years, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Year, Tense.Past);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
         
         [Theory]

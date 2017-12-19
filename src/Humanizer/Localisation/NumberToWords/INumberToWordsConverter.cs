@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        string Convert(int number);
+        string Convert(long number);
 
         /// <summary>
         /// Converts the number to string using the provided grammatical gender
@@ -18,7 +18,7 @@
         /// <param name="number"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        string Convert(int number, GrammaticalGender gender);
+        string Convert(long number, GrammaticalGender gender);
 
         /// <summary>
         /// Converts the number to ordinal string using the locale's default grammatical gender

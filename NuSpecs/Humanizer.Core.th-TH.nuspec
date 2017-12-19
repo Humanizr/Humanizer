@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata minClientVersion="2.12">
+    <id>Humanizer.Core.th-TH</id>
+    <version>$version$</version>
+    <title>Humanizer Locale (th-TH)</title>
+    <authors>Mehdi Khalili, Oren Novotny</authors>
+    <owners>Mehdi Khalili, onovotny</owners>
+    <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
+    <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer Locale (th-TH)</description>
+    <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
+    <language>th-TH</language>
+    <dependencies>
+       <dependency id="Humanizer.Core" version="[$version$]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Humanizer\bin\Release\netstandard1.0\th-TH\*.*" target="lib\netstandard1.0\th-TH" />
+  </files>
+</package>

@@ -1,0 +1,13 @@
+{
+  "SignClient": {
+    "AzureAd": {
+      "AADInstance": "https://login.microsoftonline.com/",
+      "ClientId": "6632f806-5a64-4bc6-87cf-b622b2ec62d3",
+      "TenantId": "71048637-3782-41a3-b6b2-6f4ac8a25ae0"
+    },
+    "Service": {
+      "Url": "https://codesign.novotny.org/",
+      "ResourceId": "https://SignService/0263d4ba-331b-46d1-85e1-bee9898a65a6"
+    }
+  }
+}

@@ -13,8 +13,14 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] PortugueseOrdinalTensMap = { "zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo" };
         private static readonly string[] PortugueseOrdinalHundredsMap = { "zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo" };
 
-        public override string Convert(int number, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
+
             if (number == 0)
                 return "zero";
 
@@ -26,7 +32,7 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000000) > 0)
             {
                 // gender is not applied for billions
-                parts.Add(number / 1000000000 > 2
+                parts.Add(number / 1000000000 >= 2
                     ? string.Format("{0} bilhões", Convert(number / 1000000000, GrammaticalGender.Masculine))
                     : string.Format("{0} bilhão", Convert(number / 1000000000, GrammaticalGender.Masculine)));
 
@@ -36,7 +42,7 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000) > 0)
             {
                 // gender is not applied for millions
-                parts.Add(number / 1000000 > 2
+                parts.Add(number / 1000000 >= 2
                     ? string.Format("{0} milhões", Convert(number / 1000000, GrammaticalGender.Masculine))
                     : string.Format("{0} milhão", Convert(number / 1000000, GrammaticalGender.Masculine)));
 

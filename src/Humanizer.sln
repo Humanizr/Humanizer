@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer", "Humanizer\Humanizer.csproj", "{511A7984-F455-4A6E-ADB9-9CAAC47EA079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer", "Humanizer\Humanizer.csproj", "{511A7984-F455-4A6E-ADB9-9CAAC47EA079}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}"
 	ProjectSection(SolutionItems) = preProject
@@ -37,7 +37,51 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{04B74BEC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests.Uwp.Runner", "Humanizer.Tests.Uwp.Runner\Humanizer.Tests.Uwp.Runner.csproj", "{F0DC7771-CE59-4F3C-B160-56F661F5D220}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Humanizer.Tests.DotNet", "Humanizer.Tests.DotNet\Humanizer.Tests.DotNet.xproj", "{50D97972-236C-46A0-B912-1310CE636569}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA449265-E001-486D-A0F4-04ACF0C83DC1}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuSpecs\Humanizer.Core.af.nuspec = ..\NuSpecs\Humanizer.Core.af.nuspec
+		..\NuSpecs\Humanizer.Core.ar.nuspec = ..\NuSpecs\Humanizer.Core.ar.nuspec
+		..\NuSpecs\Humanizer.Core.bg.nuspec = ..\NuSpecs\Humanizer.Core.bg.nuspec
+		..\NuSpecs\Humanizer.Core.bn-BD.nuspec = ..\NuSpecs\Humanizer.Core.bn-BD.nuspec
+		..\NuSpecs\Humanizer.Core.cs.nuspec = ..\NuSpecs\Humanizer.Core.cs.nuspec
+		..\NuSpecs\Humanizer.Core.da.nuspec = ..\NuSpecs\Humanizer.Core.da.nuspec
+		..\NuSpecs\Humanizer.Core.de.nuspec = ..\NuSpecs\Humanizer.Core.de.nuspec
+		..\NuSpecs\Humanizer.Core.el.nuspec = ..\NuSpecs\Humanizer.Core.el.nuspec
+		..\NuSpecs\Humanizer.Core.es.nuspec = ..\NuSpecs\Humanizer.Core.es.nuspec
+		..\NuSpecs\Humanizer.Core.fa.nuspec = ..\NuSpecs\Humanizer.Core.fa.nuspec
+		..\NuSpecs\Humanizer.Core.fi-FI.nuspec = ..\NuSpecs\Humanizer.Core.fi-FI.nuspec
+		..\NuSpecs\Humanizer.Core.fr-BE.nuspec = ..\NuSpecs\Humanizer.Core.fr-BE.nuspec
+		..\NuSpecs\Humanizer.Core.fr.nuspec = ..\NuSpecs\Humanizer.Core.fr.nuspec
+		..\NuSpecs\Humanizer.Core.he.nuspec = ..\NuSpecs\Humanizer.Core.he.nuspec
+		..\NuSpecs\Humanizer.Core.hr.nuspec = ..\NuSpecs\Humanizer.Core.hr.nuspec
+		..\NuSpecs\Humanizer.Core.hu.nuspec = ..\NuSpecs\Humanizer.Core.hu.nuspec
+		..\NuSpecs\Humanizer.Core.id.nuspec = ..\NuSpecs\Humanizer.Core.id.nuspec
+		..\NuSpecs\Humanizer.Core.it.nuspec = ..\NuSpecs\Humanizer.Core.it.nuspec
+		..\NuSpecs\Humanizer.Core.ja.nuspec = ..\NuSpecs\Humanizer.Core.ja.nuspec
+		..\NuSpecs\Humanizer.Core.lv.nuspec = ..\NuSpecs\Humanizer.Core.lv.nuspec
+		..\NuSpecs\Humanizer.Core.nb-NO.nuspec = ..\NuSpecs\Humanizer.Core.nb-NO.nuspec
+		..\NuSpecs\Humanizer.Core.nb.nuspec = ..\NuSpecs\Humanizer.Core.nb.nuspec
+		..\NuSpecs\Humanizer.Core.nl.nuspec = ..\NuSpecs\Humanizer.Core.nl.nuspec
+		..\NuSpecs\Humanizer.Core.nuspec = ..\NuSpecs\Humanizer.Core.nuspec
+		..\NuSpecs\Humanizer.Core.pl.nuspec = ..\NuSpecs\Humanizer.Core.pl.nuspec
+		..\NuSpecs\Humanizer.Core.pt.nuspec = ..\NuSpecs\Humanizer.Core.pt.nuspec
+		..\NuSpecs\Humanizer.Core.ro.nuspec = ..\NuSpecs\Humanizer.Core.ro.nuspec
+		..\NuSpecs\Humanizer.Core.ru.nuspec = ..\NuSpecs\Humanizer.Core.ru.nuspec
+		..\NuSpecs\Humanizer.Core.sk.nuspec = ..\NuSpecs\Humanizer.Core.sk.nuspec
+		..\NuSpecs\Humanizer.Core.sl.nuspec = ..\NuSpecs\Humanizer.Core.sl.nuspec
+		..\NuSpecs\Humanizer.Core.sr-Latn.nuspec = ..\NuSpecs\Humanizer.Core.sr-Latn.nuspec
+		..\NuSpecs\Humanizer.Core.sr.nuspec = ..\NuSpecs\Humanizer.Core.sr.nuspec
+		..\NuSpecs\Humanizer.Core.sv.nuspec = ..\NuSpecs\Humanizer.Core.sv.nuspec
+		..\NuSpecs\Humanizer.Core.tr.nuspec = ..\NuSpecs\Humanizer.Core.tr.nuspec
+		..\NuSpecs\Humanizer.Core.uk.nuspec = ..\NuSpecs\Humanizer.Core.uk.nuspec
+		..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec = ..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec
+		..\NuSpecs\Humanizer.Core.uz-Latn-UZ.nuspec = ..\NuSpecs\Humanizer.Core.uz-Latn-UZ.nuspec
+		..\NuSpecs\Humanizer.Core.vi.nuspec = ..\NuSpecs\Humanizer.Core.vi.nuspec
+		..\NuSpecs\Humanizer.Core.zh-CN.nuspec = ..\NuSpecs\Humanizer.Core.zh-CN.nuspec
+		..\NuSpecs\Humanizer.Core.zh-Hans.nuspec = ..\NuSpecs\Humanizer.Core.zh-Hans.nuspec
+		..\NuSpecs\Humanizer.Core.zh-Hant.nuspec = ..\NuSpecs\Humanizer.Core.zh-Hant.nuspec
+		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -133,22 +177,6 @@ Global
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.ActiveCfg = Release|x86
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.Build.0 = Release|x86
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.Deploy.0 = Release|x86
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|ARM.Build.0 = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x64.Build.0 = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Debug|x86.Build.0 = Debug|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|ARM.ActiveCfg = Release|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|ARM.Build.0 = Release|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|x64.ActiveCfg = Release|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|x64.Build.0 = Release|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|x86.ActiveCfg = Release|Any CPU
-		{50D97972-236C-46A0-B912-1310CE636569}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +187,6 @@ Global
 		{FDEC244B-F07E-4A5E-BB80-FBC6AC77A9AA} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
 		{261367CA-00C7-4832-BD26-200CFF8F575F} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
-		{50D97972-236C-46A0-B912-1310CE636569} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
+		{AA449265-E001-486D-A0F4-04ACF0C83DC1} = {4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}
 	EndGlobalSection
 EndGlobal

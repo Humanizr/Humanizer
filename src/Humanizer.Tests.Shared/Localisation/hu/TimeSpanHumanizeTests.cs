@@ -4,8 +4,30 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.hu
 {
     [UseCulture("hu-HU")]
-    public class TimeSpanHumanizeTests 
+    public class TimeSpanHumanizeTests
     {
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "egy év")]
+        [InlineData(731, "2 év")]
+        [InlineData(1096, "3 év")]
+        [InlineData(4018, "11 év")]
+        public void Years(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
+
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(31, "egy hónap")]
+        [InlineData(61, "2 hónap")]
+        [InlineData(92, "3 hónap")]
+        [InlineData(335, "11 hónap")]
+        public void Months(int days, string expected)
+        {
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+        }
 
         [Theory]
         [InlineData(14, "2 hét")]

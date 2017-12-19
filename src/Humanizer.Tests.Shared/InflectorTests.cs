@@ -116,6 +116,7 @@ namespace Humanizer.Tests
         [InlineData("customer_first_name", "customerFirstName")]
         [InlineData("customer_first_name_goes_here", "customerFirstNameGoesHere")]
         [InlineData("customer name", "customer name")]
+        [InlineData("", "")]
         public void Camelize(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Camelize());
@@ -129,9 +130,23 @@ namespace Humanizer.Tests
         [InlineData("some title", "some_title")]
         [InlineData("some title that will be underscored", "some_title_that_will_be_underscored")]
         [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
+        [InlineData("SomeForeignWordsLikeÄgyptenÑu", "some_foreign_words_like_ägypten_ñu")]
+        [InlineData("Some wordsTo be Underscored", "some_words_to_be_underscored")]
         public void Underscore(string input, string expectedOuput)
         {
             Assert.Equal(expectedOuput, input.Underscore());
+        }
+
+        // transform words into lowercase and separate with a -
+        [Theory]
+        [InlineData("SomeWords", "some-words")]
+        [InlineData("SOME words TOGETHER", "some-words-together")]
+        [InlineData("A spanish word EL niño", "a-spanish-word-el-niño")]
+        [InlineData("SomeForeignWords ÆgÑuÄgypten", "some-foreign-words-æg-ñu-ägypten")]
+        [InlineData("A VeryShortSENTENCE", "a-very-short-sentence")]
+        public void Kebaberize(string input, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, input.Kebaberize());
         }
     }
 
@@ -172,6 +187,10 @@ namespace Humanizer.Tests
             yield return new object[] {"spokesman", "spokesmen"};
             yield return new object[] {"man", "men"};
             yield return new object[] {"woman", "women"};
+            yield return new object[] { "freshman", "freshmen" };
+            yield return new object[] { "chairman", "chairmen" };
+            yield return new object[] { "human", "humans" };
+            yield return new object[] { "personnel", "personnel" };
 
             yield return new object[] {"basis", "bases"};
             yield return new object[] {"diagnosis", "diagnoses"};
@@ -319,8 +338,13 @@ namespace Humanizer.Tests
             yield return new object[] {"virus","viruses"};
             yield return new object[] {"walrus","walruses"};
             yield return new object[] {"waltz","waltzes"};
-            yield return new object[] {"water","water"};
             yield return new object[] {"zombie","zombies"};
+
+            yield return new object[] {"cookie","cookies"};
+            yield return new object[] {"bookie","bookies"};
+            yield return new object[] {"rookie","rookies"};
+            yield return new object[] {"roomie","roomies"};
+            yield return new object[] {"smoothie","smoothies"};
         }
 
         IEnumerator IEnumerable.GetEnumerator()

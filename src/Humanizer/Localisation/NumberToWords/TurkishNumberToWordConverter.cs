@@ -22,8 +22,13 @@ namespace Humanizer.Localisation.NumberToWords
             {'a', "ıncı"},
         };
 
-        public override string Convert(int number)
+        public override string Convert(long input)
         {
+            if (input > Int32.MaxValue || input < Int32.MinValue)
+            {
+                throw new NotImplementedException();
+            }
+            var number = (int)input;
             if (number == 0)
                 return UnitsMap[0];
 

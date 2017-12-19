@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\nl\*.*" target="lib\netstandard1.0\nl" />
+    <file src="Humanizer\bin\Release\netstandard1.0\nl\*.*" target="lib\netstandard1.0\nl" />
   </files>
 </package>

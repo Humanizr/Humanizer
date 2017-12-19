@@ -1,5 +1,5 @@
 ﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETPortable,Version=v5.0", FrameworkDisplayName=".NET Portable Subset")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETStandard,Version=v1.0", FrameworkDisplayName="")]
 
 namespace Humanizer.Bytes
 {
@@ -133,6 +133,11 @@ namespace Humanizer
         public static string Humanize(this System.Nullable<System.DateTime> input, bool utcDate = True, System.Nullable<System.DateTime> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
         public static string Humanize(this System.DateTimeOffset input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
         public static string Humanize(this System.Nullable<System.DateTimeOffset> input, System.Nullable<System.DateTimeOffset> dateToCompareAgainst = null, System.Globalization.CultureInfo culture = null) { }
+    }
+    public class static DateToOrdinalWordsExtensions
+    {
+        public static string ToOrdinalWords(this System.DateTime input) { }
+        public static string ToOrdinalWords(this System.DateTime input, Humanizer.GrammaticalCase grammaticalCase) { }
     }
     public class static EnumDehumanizeExtensions
     {
@@ -364,6 +369,7 @@ namespace Humanizer
         public static string Camelize(this string input) { }
         public static string Dasherize(this string underscoredWord) { }
         public static string Hyphenate(this string underscoredWord) { }
+        public static string Kebaberize(this string input) { }
         public static string Pascalize(this string input) { }
         public static string Pluralize(this string word, bool inputIsKnownToBeSingular = True) { }
         public static string Singularize(this string word, bool inputIsKnownToBePlural = True) { }
@@ -388,8 +394,8 @@ namespace Humanizer
     public class static MetricNumeralExtensions
     {
         public static double FromMetric(this string input) { }
-        public static string ToMetric(this int input, bool hasSpace = False, bool useSymbol = True) { }
-        public static string ToMetric(this double input, bool hasSpace = False, bool useSymbol = True) { }
+        public static string ToMetric(this int input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null) { }
+        public static string ToMetric(this double input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null) { }
     }
     public class NoMatchFoundException : System.Exception
     {
@@ -488,6 +494,8 @@ namespace Humanizer
         public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this long number, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this long number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
     }
     public class On
     {
@@ -986,6 +994,8 @@ namespace Humanizer
     {
         public static string ToQuantity(this string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs = 1) { }
         public static string ToQuantity(this string input, int quantity, string format, System.IFormatProvider formatProvider = null) { }
+        public static string ToQuantity(this string input, long quantity, Humanizer.ShowQuantityAs showQuantityAs = 1) { }
+        public static string ToQuantity(this string input, long quantity, string format, System.IFormatProvider formatProvider = null) { }
     }
     public class static TruncateExtensions
     {
@@ -1014,6 +1024,7 @@ namespace Humanizer.Configuration
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
         public static Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
         public static Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.DateToOrdinalWords.IDateToOrdinalWordConverter> DateToOrdinalWordsConverters { get; }
         public static System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
@@ -1090,6 +1101,15 @@ namespace Humanizer.Localisation.CollectionFormatters
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
     }
 }
+namespace Humanizer.Localisation.DateToOrdinalWords
+{
+    
+    public interface IDateToOrdinalWordConverter
+    {
+        string Convert(System.DateTime date);
+        string Convert(System.DateTime date, Humanizer.GrammaticalCase grammaticalCase);
+    }
+}
 namespace Humanizer.Localisation.Formatters
 {
     
@@ -1120,8 +1140,8 @@ namespace Humanizer.Localisation.NumberToWords
     
     public interface INumberToWordsConverter
     {
-        string Convert(int number);
-        string Convert(int number, Humanizer.GrammaticalGender gender);
+        string Convert(long number);
+        string Convert(long number, Humanizer.GrammaticalGender gender);
         string ConvertToOrdinal(int number);
         string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
     }

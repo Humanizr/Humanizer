@@ -31,10 +31,12 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
      - [Camelize](#camelize)
      - [Underscore](#underscore)
      - [Dasherize & Hyphenate](#dasherize--hyphenate)
+	 - [Kebaberize](#kebaberize) 
    - [Fluent date](#fluent-date)
    - [Number to Numbers](#number-to-numbers)
    - [Number to words](#number-to-words)
    - [Number to ordinal words](#number-to-ordinal-words)
+   - [DateTime to ordinal words](#date-time-to-ordinal-words)
    - [Roman numerals](#roman-numerals)
    - [Metric numerals](#metric-numerals)
    - [ByteSize](#bytesize)
@@ -309,7 +311,7 @@ DateTime.UtcNow.AddHours(-2).Humanize() => "2 hours ago"
 DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
 
-DateTimeOffset.AddHours(1).Humanize() => "an hour from now"
+DateTimeOffset.UtcNow.AddHours(1).Humanize() => "an hour from now"
 ```
 
 Humanizer supports both local and UTC dates as well as dates with offset (`DateTimeOffset`). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
@@ -343,8 +345,8 @@ There are two strategies for `DateTime.Humanize`: the default one as seen above 
 To use the precision based strategy you need to configure it:
 
 ```C#
-Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision = .75);
-Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision = .75); // configure when humanizing DateTimeOffset
+Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision: .75);
+Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision: .75); // configure when humanizing DateTimeOffset
 ```
 
 The default precision is set to .75 but you can pass your desired precision too. With precision set to 0.75:
@@ -423,6 +425,11 @@ In addition, a maximum unit of time may be specified to avoid rolling up to the 
 ```C#
 TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day) => "7 days"    // instead of 1 week
 TimeSpan.FromMilliseconds(2000).Humanize(maxUnit: TimeUnit.Millisecond) => "2000 milliseconds"    // instead of 2 seconds
+```
+The default maxUnit is `TimeUnit.Week` because it gives exact results. You can increase this value to `TimeUnit.Month` or `TimeUnit.Year` which will give you an approximation based on 365.2425 days a year and 30.436875 days a month. Therefore the months are alternating between 30 and 31 days in length and every fourth year is 366 days long.
+```C#
+TimeSpan.FromDays(486).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year, 3 months, 29 days" // One day further is 1 year, 4 month
+TimeSpan.FromDays(517).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year, 4 months, 30 days" // This month has 30 days and one day further is 1 year, 5 months
 ```
 
 When there are multiple time units, they are combined using the `", "` string: 
@@ -644,6 +651,13 @@ Obviously this only applies to some cultures. For others passing gender in or no
 "some_title".Hyphenate() => "some-title"
 ```
 
+#### <a id="kebaberize">Kebaberize</a>
+`Kebaberize` separates the input words with hyphens and all words are converted to lowercase 
+
+```C#
+"SomeText".Kebaberize() => "some-text"
+```
+
 ### <a id="fluent-date">Fluent Date</a>
 Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follows:
 
@@ -715,7 +729,7 @@ someDateTime.AtMidnight()
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
-###<a id="number-to-numbers">Number to numbers</a>
+### <a id="number-to-numbers">Number to numbers</a>
 Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:
 
 ```C#
@@ -791,7 +805,7 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 ```
 
 ```C#
-// for Brazilian Portuguese locale
+// for Arabic locale
 1.ToOrdinalWords(GrammaticalGender.Masculine) => "الأول"
 1.ToOrdinalWords(GrammaticalGender.Feminine) => "الأولى"
 1.ToOrdinalWords(GrammaticalGender.Neuter) => "الأول"
@@ -808,6 +822,29 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 10.ToOrdinalWords(new CultureInfo("en-US")) => "tenth"
 1.ToOrdinalWords(GrammaticalGender.Masculine, new CulureInfo("pt-BR")) => "primeiro"
 ```
+
+
+### <a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
+This is kind of an extension of Ordinalize
+```C#
+// for English UK locale
+new DateTime(2015, 1, 1).ToOrdinalWords() => "1st January 2015"
+new DateTime(2015, 2, 12).ToOrdinalWords() => "12th February 2015"
+new DateTime(2015, 3, 22).ToOrdinalWords() => "22nd March 2015"
+// for English US locale
+new DateTime(2015, 1, 1).ToOrdinalWords() => "January 1st, 2015"
+new DateTime(2015, 2, 12).ToOrdinalWords() => "February 12th, 2015"
+new DateTime(2015, 3, 22).ToOrdinalWords() => "March 22nd, 2015"
+```
+
+`ToOrdinalWords` also supports grammatical case.
+You can pass a second argument to `ToOrdinalWords` to specify the case of the output.
+The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`, `GrammaticalCase.Dative`, `GrammaticalCase.Accusative`, `GrammaticalCase.Instrumental` and `GrammaticalGender.Prepositional`:
+
+```C#
+```
+
+Obviously this only applies to some cultures. For others passing case in doesn't make any difference in the result.
 
 ### <a id="roman-numerals">Roman numerals</a>
 Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
@@ -989,7 +1026,7 @@ You can specify a format for the bytes part of the humanized output:
 // 18.49 GB/s
 ```
 
-##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
+## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
 You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).

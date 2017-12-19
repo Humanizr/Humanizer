@@ -63,11 +63,17 @@ namespace Humanizer.Tests
         {
             Assert.Equal(EnumTestsResources.MemberWithDisplayAttribute, EnumUnderTest.MemberWithDisplayAttribute.Humanize());
         }
+        [Fact]
+        public void HandlesDisplayAttributeWithNoDescription()
+        {
+            Assert.Equal(EnumTestsResources.MemberWithDisplayAttributeWithoutDescription, EnumUnderTest.MemberWithDisplayAttributeWithoutDescription.Humanize());
+        }
 
         [Fact]
         public void HonorsLocalizedDisplayAttribute()
         {
             Assert.Equal(EnumTestsResources.MemberWithLocalizedDisplayAttribute, EnumUnderTest.MemberWithLocalizedDisplayAttribute.Humanize());
         }
+        
     }
 }

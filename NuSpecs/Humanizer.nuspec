@@ -10,7 +10,7 @@
     <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</description>
-    <copyright>Copyright 2012-2016 Mehdi Khalili</copyright>
+    <copyright>Copyright 2012-2017 Mehdi Khalili</copyright>
     <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>    
     <dependencies>
       <dependency id="Humanizer.Core.af" version="$version$" />
@@ -32,6 +32,7 @@
       <dependency id="Humanizer.Core.id" version="$version$" />
       <dependency id="Humanizer.Core.it" version="$version$" />
       <dependency id="Humanizer.Core.ja" version="$version$" />
+      <dependency id="Humanizer.Core.lv" version="$version$" />
       <dependency id="Humanizer.Core.nb" version="$version$" />
       <dependency id="Humanizer.Core.nb-NO" version="$version$" />
       <dependency id="Humanizer.Core.nl" version="$version$" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET46
+using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -115,8 +116,7 @@ namespace ApiApprover
 
         static void AddMemberToTypeDeclaration(CodeTypeDeclaration typeDeclaration, IMemberDefinition memberInfo)
         {
-            var methodDefinition = memberInfo as MethodDefinition;
-            if (methodDefinition != null)
+            if (memberInfo is MethodDefinition methodDefinition)
             {
                 if (methodDefinition.IsConstructor)
                     AddCtorToTypeDeclaration(typeDeclaration, methodDefinition);
@@ -125,7 +125,7 @@ namespace ApiApprover
             }
             else if (memberInfo is PropertyDefinition)
             {
-                AddPropertyToTypeDeclaration(typeDeclaration, (PropertyDefinition) memberInfo);
+                AddPropertyToTypeDeclaration(typeDeclaration, (PropertyDefinition)memberInfo);
             }
             else if (memberInfo is EventDefinition)
             {
@@ -133,7 +133,7 @@ namespace ApiApprover
             }
             else if (memberInfo is FieldDefinition)
             {
-                AddFieldToTypeDeclaration(typeDeclaration, (FieldDefinition) memberInfo);
+                AddFieldToTypeDeclaration(typeDeclaration, (FieldDefinition)memberInfo);
             }
         }
 
@@ -792,3 +792,4 @@ namespace ApiApprover
 }
 // ReSharper restore BitwiseOperatorOnEnumWihtoutFlags
 // ReSharper restore CheckNamespace
+#endif

@@ -117,40 +117,133 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>πριν από ένα δευτερόλεπτο</value>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>πριν από {0} ημέρες</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>πριν από {0} δευτερόλεπτα</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>πριν από ένα λεπτό</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>πριν από {0} λεπτά</value>
-  </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>πριν από μία ώρα</value>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} ημέρες από τώρα</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>πριν από {0} ώρες</value>
   </data>
-  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
-    <value>χθες</value>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>{0} ώρες από τώρα</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>πριν από {0} ημέρες</value>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>πριν από {0} λεπτά</value>
   </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>πριν από έναν μήνα</value>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>{0} λεπτά από τώρα</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>πριν από {0} μήνες</value>
   </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>πριν από έναν χρόνο</value>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>{0} μήνες από τώρα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>πριν από {0} δευτερόλεπτα</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>{0} δευτερόλεπτα από τώρα</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>πριν από {0} χρόνια</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>{0} χρόνια από τώρα</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>ποτέ</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>χθες</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>αύριο</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>πριν από μία ώρα</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>πρίν από μία ώρα από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>πριν από ένα λεπτό</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>πρίν από ένα λεπτό από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>πριν από έναν μήνα</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>πριν από έναν μήνα από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>πριν από ένα δευτερόλεπτο</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>πριν από ένα δευτερόλεπτο από τώρα</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>πριν από έναν χρόνο</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>πριν από έναν χρόνο από τώρα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} μέρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} ώρες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} χιλιοστά του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} λεπτά</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} μήνες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} δευτερόλεπτα</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} βδομάδες</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} χρόνια</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>1 μέρα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>1 ώρα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1 χιλιοσtό του δευτερολέπτου</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>1 λεπτό</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 μήνα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>1 δευτερόλεπτο</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>1 βδομάδα</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 χρόνο</value>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>μηδέν χρόνος</value>
   </data>
 </root>

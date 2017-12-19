@@ -231,4 +231,16 @@
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
     <value>یک سال بعد</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} ماه</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} سال</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>یک ماه</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>یک سال</value>
+  </data>
 </root>
