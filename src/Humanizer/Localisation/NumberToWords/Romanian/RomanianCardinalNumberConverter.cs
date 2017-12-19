@@ -11,10 +11,10 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9 for 9.
         /// </summary>
         private readonly string[] _units =
-            { 
+            {
                 string.Empty,
-                "unu|una",
-                "doi|două",
+                "unu|una|unu",
+                "doi|două|două",
                 "trei",
                 "patru",
                 "cinci",
@@ -31,7 +31,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             {
                 "zece",
                 "unsprezece",
-                "doisprezece|douăsprezece",
+                "doisprezece|douăsprezece|douăsprezece",
                 "treisprezece",
                 "paisprezece",
                 "cincisprezece",
@@ -45,7 +45,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
         /// </summary>
         private readonly string[] _tensOver20NumberToText =
-            { 
+            {
                 string.Empty,
                 string.Empty,
                 "douăzeci",
@@ -55,7 +55,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 "șaizeci",
                 "șaptezeci",
                 "optzeci",
-                "nouăzeci" 
+                "nouăzeci"
             };
 
         private readonly string _feminineSingular = "o";
@@ -252,6 +252,8 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 var parts = multiGenderPart.Split('|');
                 if (gender == GrammaticalGender.Feminine)
                     return parts[1];
+                if (gender == GrammaticalGender.Neuter)
+                    return parts[2];
 
                 else
                     return parts[0];
@@ -308,7 +310,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         }
 
         // Large numbers (above 10^6) use a combined form of the long and short scales.
-        /*    
+        /*
                 Singular    Plural            Order     Scale
                 -----------------------------------------------
                 zece        zeci              10^1      -
