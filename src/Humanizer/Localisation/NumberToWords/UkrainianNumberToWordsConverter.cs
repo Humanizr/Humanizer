@@ -32,8 +32,8 @@ namespace Humanizer.Localisation.NumberToWords
                 number = -number;
             }
 
-            CollectParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "мільярд", "мільярда", "мільярдів");
-            CollectParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "мільйон", "мільйона", "мільйонів");
+            CollectParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "мільярд", "мільярди", "мільярдів");
+            CollectParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "мільйон", "мільйони", "мільйонів");
             CollectParts(parts, ref number, 1000, GrammaticalGender.Feminine, "тисяча", "тисячі", "тисяч");
 
             if (number > 0)
@@ -55,8 +55,8 @@ namespace Humanizer.Localisation.NumberToWords
                 number = -number;
             }
 
-            CollectOrdinalParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "мільярдн" + GetEndingForGender(gender, number), "мільярд", "мільярда", "мільярдів");
-            CollectOrdinalParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "мільйонн" + GetEndingForGender(gender, number), "мільйон", "мільйона", "мільйонів");
+            CollectOrdinalParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "мільярдн" + GetEndingForGender(gender, number), "мільярд", "мільярди", "мільярдів");
+            CollectOrdinalParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "мільйонн" + GetEndingForGender(gender, number), "мільйон", "мільйони", "мільйонів");
             CollectOrdinalParts(parts, ref number, 1000, GrammaticalGender.Feminine, "тисячн" + GetEndingForGender(gender, number), "тисяча", "тисячі", "тисяч");
 
             if (number >= 100)
