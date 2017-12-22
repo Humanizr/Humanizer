@@ -1,0 +1,25 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="2.1.7" PrivateAssets="all" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.6.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <!-- https://github.com/NuGet/Home/issues/4337 -->
+
+  <PropertyGroup>
+    <NerdbankGitVersioningVersion>2.1.7</NerdbankGitVersioningVersion>
+  </PropertyGroup>
+
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' == 'true' ">
+    <Import Project="$(NuGetPackageRoot)nerdbank.gitversioning\$(NerdbankGitVersioningVersion)\buildCrossTargeting\Nerdbank.GitVersioning.targets"
+            Condition="Exists('$(NuGetPackageRoot)nerdbank.gitversioning\$(NerdbankGitVersioningVersion)\buildCrossTargeting\Nerdbank.GitVersioning.targets')" />
+  </ImportGroup>
+  <Target Name="FixUpVersion"
+          BeforeTargets="_GenerateRestoreProjectSpec"
+          DependsOnTargets="GetBuildVersion"
+          Condition=" '$(NerdbankGitVersioningTasksPath)' != '' " />
+</Project>

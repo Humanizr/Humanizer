@@ -12,11 +12,5 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="2.0.41" PrivateAssets="all" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.5.0" PrivateAssets="All" />
-  </ItemGroup>
 </Project>
