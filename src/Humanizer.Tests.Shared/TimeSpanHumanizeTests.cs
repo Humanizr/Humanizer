@@ -19,7 +19,7 @@ namespace Humanizer.Tests
                       select text;
             var grouping = from t in qry
                            group t by t into g
-                           select new { Key = g.Key, Count = g.Count() };
+                           select new {  g.Key, Count = g.Count() };
             var allUnique = grouping.All(g => g.Count == 1);
             Assert.True(allUnique);
         }
@@ -37,7 +37,7 @@ namespace Humanizer.Tests
         [InlineData(365 + 365 + 365 + 365 + 366 + 1, "5 years")]
         public void Year(int days, string expected)
         {
-            string actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
+            var actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
         }
 
@@ -56,7 +56,7 @@ namespace Humanizer.Tests
         [InlineData(366, "1 year")]
         public void Month(int days, string expected)
         {
-            string actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
+            var actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
         }
 

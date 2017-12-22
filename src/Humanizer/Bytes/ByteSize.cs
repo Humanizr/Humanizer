@@ -1,4 +1,4 @@
-//The MIT License (MIT)
+﻿//The MIT License (MIT)
 
 //Copyright (c) 2013-2014 Omar Khudeira (http://omar.io)
 
@@ -159,8 +159,8 @@ namespace Humanizer.Bytes
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
 
-            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            Func<double, string> output = n => n.ToString(format);
+            bool has(string s) => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            string output(double n) => n.ToString(format);
 
             if (has(TerabyteSymbol))
                 return output(Terabytes);
