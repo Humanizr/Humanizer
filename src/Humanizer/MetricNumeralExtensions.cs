@@ -182,8 +182,8 @@ namespace Humanizer
 		/// <returns>A number build from a Metric representation</returns>
 		private static double BuildMetricNumber(string input, char last)
 		{
-			Func<List<char>, double> getExponent = symbols => (symbols.IndexOf(last) + 1) * 3;
-			var number = double.Parse(input.Remove(input.Length - 1));
+            double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3;
+            var number = double.Parse(input.Remove(input.Length - 1));
             var exponent = Math.Pow(10, Symbols[0].Contains(last)
 				? getExponent(Symbols[0])
 				: -getExponent(Symbols[1]));
@@ -257,9 +257,9 @@ namespace Humanizer
 		/// <returns>True if input is out of the valid range.</returns>
 		private static bool IsOutOfRange(this double input)
 		{
-			Func<double, double, bool> outside = (min, max) => !(max > input && input > min);
+            bool outside(double min, double max) => !(max > input && input > min);
 
-			return (Math.Sign(input) == 1 && outside(SmallLimit, BigLimit))
+            return (Math.Sign(input) == 1 && outside(SmallLimit, BigLimit))
 			       || (Math.Sign(input) == -1 && outside(-BigLimit, -SmallLimit));
 		}
 
