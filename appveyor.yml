@@ -30,7 +30,7 @@ build:
 after_build:
   - ps: |
       dotnet test -c Release .\src\Humanizer.Tests\Humanizer.Tests.csproj
-      nuget install nerdbank.gitversioning -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion
+      nuget install nerdbank.gitversioning -Version 2.1.7 -SolutionDir $Env:APPVEYOR_BUILD_FOLDER -Verbosity quiet -ExcludeVersion
       $vers = & .\packages\nerdbank.gitversioning\tools\Get-Version.ps1
       $nugetVer = $vers.NuGetPackageVersion
       ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
