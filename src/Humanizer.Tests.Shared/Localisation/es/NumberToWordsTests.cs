@@ -62,6 +62,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(3, "tercero", GrammaticalGender.Masculine)]
         [InlineData(3, "tercera", GrammaticalGender.Feminine)]
         //  [InlineData(11, "once", null)]
+        [InlineData(4, "cuarto", GrammaticalGender.Masculine)]
         [InlineData(4, "cuarta", GrammaticalGender.Feminine)]
         [InlineData(5, "quinto", GrammaticalGender.Masculine)]
         [InlineData(5, "quinta", GrammaticalGender.Feminine)]
