@@ -13,19 +13,20 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] TensMap = { "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
         private static readonly string[] HundredsMap = { "cero", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos" };
         private static readonly string[] FeminineHundredsMap = { "cero", "ciento", "doscientas", "trescientas", "cuatrocientas", "quinientas", "seiscientas", "setecientas", "ochocientas", "novecientas" };
-
+        private static readonly string[] TensMapOrdinal = { "", "décimo", "vigésimo", "trigésimo", "cuadragésimo", "quincuagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo" };
+        private static readonly string[] HundredsMapOrdinal = { "", "centésimo", "ducentésimo", "tricentésimo", "cuadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo" };
+        private static readonly string[] ThousandsMapOrdinal = { "", "milésimo", "dosmilésimo", "tresmilésimo", "cuatromilésimo", "cincomilésimo", "seismilésimo", "sietemilésimo", "ochomilésimo", "nuevemilésimo" };
         private static readonly Dictionary<int, string> Ordinals = new Dictionary<int, string>
         {
             {1, "primero"},
             {2, "segundo"},
             {3, "tercero"},
-            {4, "quarto"},
+            {4, "cuarto"},
             {5, "quinto"},
             {6, "sexto"},
             {7, "séptimo"},
             {8, "octavo"},
             {9, "noveno"},
-            {10, "décimo"}
         };
 
         public override string Convert(long input, GrammaticalGender gender)
@@ -115,15 +116,50 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
-            if (!Ordinals.TryGetValue(number, out var towords))
-                towords = Convert(number);
+            var parts = new List<string>();
 
-            if (gender == GrammaticalGender.Feminine)
-                towords = towords.TrimEnd('o') + "a";
-            else if(number % 10 == 1 || number % 10 == 3)
-                towords = towords.TrimEnd('o');
+            if (number > 9999) // @mihemihe: Implemented only up to 9999 - Dec-2017
+            {
+                return Convert(number, gender);
+            }
 
-            return towords;
+            if (number < 0)
+                return string.Format("menos {0}", Convert(Math.Abs(number)));
+
+            if (number == 0)
+                return string.Format("cero");
+
+            if ((number / 1000) > 0)
+            {
+                var thousandsPart = ThousandsMapOrdinal[(number / 1000)];
+                if (gender == GrammaticalGender.Feminine) thousandsPart = thousandsPart.TrimEnd('o') + "a";
+                parts.Add(thousandsPart);
+                number %= 1000;
+            }
+
+            if ((number / 100) > 0)
+            {
+                var hundredsPart = HundredsMapOrdinal[(number / 100)];
+                if (gender == GrammaticalGender.Feminine) hundredsPart = hundredsPart.TrimEnd('o') + "a";
+                parts.Add(hundredsPart);
+                number %= 100;
+            }
+
+            if ((number / 10) > 0)
+            {
+                var tensPart = TensMapOrdinal[(number / 10)];
+                if (gender == GrammaticalGender.Feminine) tensPart = tensPart.TrimEnd('o') + "a";
+                parts.Add(tensPart);
+                number %= 10;
+            }
+
+            if (Ordinals.TryGetValue(number, out var towords))
+            {
+                if (gender == GrammaticalGender.Feminine) towords = towords.TrimEnd('o') + "a";
+                parts.Add(towords);
+            }
+
+            return string.Join(" ", parts.ToArray());
         }
     }
 }
