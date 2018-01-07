@@ -4,8 +4,8 @@
     {
         private const string DualPostfix = "_Dual";
         
-        public FrenchFormatter()
-            : base("fr")
+        public FrenchFormatter(string localeCode)
+            : base(localeCode)
         {
         }
 
