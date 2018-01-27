@@ -2,12 +2,12 @@
   "SignClient": {
     "AzureAd": {
       "AADInstance": "https://login.microsoftonline.com/",
-      "ClientId": "6632f806-5a64-4bc6-87cf-b622b2ec62d3",
-      "TenantId": "71048637-3782-41a3-b6b2-6f4ac8a25ae0"
+      "ClientId": "c248d68a-ba6f-4aa9-8a68-71fe872063f8",
+      "TenantId": "16076fdc-fcc1-4a15-b1ca-32c9a255900e"
     },
     "Service": {
-      "Url": "https://codesign.novotny.org/",
-      "ResourceId": "https://SignService/0263d4ba-331b-46d1-85e1-bee9898a65a6"
+      "Url": "https://codesign.dotnetfoundation.org/",
+      "ResourceId": "https://SignService/3c30251f-36f3-490b-a955-520addb85001"
     }
   }
 }

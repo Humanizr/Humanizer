@@ -8,15 +8,15 @@ branches:
 
 environment:
   SignClientSecret:
-    secure: mn/Un/p3QvEv5TKe2f1NGmppCIMk0jslsTaw8P4+pBQ=
+    secure: M1FsBBfB/2sEzx7+qsRyI33ROJeJDj2xMWegE3DdTSY=
   SignClientUser:
-    secure: q9qZlA/a+Z3wQbRlcjWok/PkfODgpKNECOBCzu2yIGE=
+    secure: aHMEZLZM2oqzByNcU5EaByQVhoJom3iPgM4ipDZtzh7DCHAF5mkZdE6VWlPCmczD
 
 init:
   - git config --global core.autocrlf input
 
 install:
-  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.3.0/NuGet.exe
+  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.5.0/NuGet.exe
   - cmd: nuget install SignClient -Version 0.9.1 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion
      
 before_build:
@@ -30,7 +30,7 @@ build:
 after_build:
   - ps: |
       dotnet test -c Release .\src\Humanizer.Tests\Humanizer.Tests.csproj
-      nuget install nerdbank.gitversioning -Version 2.1.7 -SolutionDir $Env:APPVEYOR_BUILD_FOLDER -Verbosity quiet -ExcludeVersion
+      nuget install nerdbank.gitversioning -Version 2.1.16 -SolutionDir $Env:APPVEYOR_BUILD_FOLDER -Verbosity quiet -ExcludeVersion
       $vers = & .\packages\nerdbank.gitversioning\tools\Get-Version.ps1
       $nugetVer = $vers.NuGetPackageVersion
       ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
@@ -45,7 +45,7 @@ deploy:
   on:
     branch: master
   api_key:
-    secure: bmqlJK8a5HYiUXOT99HXT1j7JiM5+fpR4kHhxIC30oaaEXbv94f0fKdiKlU1QC/l
+    secure: fAHleWvVZqxJRljDCgwYIbn/RXvbKDacgSEYMfk0VvWhpl6L/gu+OVqS0n7YO7TS
   artifact: /.*\.nupkg/
   
 - provider: NuGet
@@ -53,5 +53,5 @@ deploy:
   on:
     branch: dev
   api_key:
-    secure: bmqlJK8a5HYiUXOT99HXT1j7JiM5+fpR4kHhxIC30oaaEXbv94f0fKdiKlU1QC/l
+    secure: fAHleWvVZqxJRljDCgwYIbn/RXvbKDacgSEYMfk0VvWhpl6L/gu+OVqS0n7YO7TS
   artifact: /.*\.nupkg/  
