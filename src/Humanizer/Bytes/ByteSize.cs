@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using System;
+using System.Globalization;
 
 namespace Humanizer.Bytes
 {
@@ -151,16 +152,40 @@ namespace Humanizer.Bytes
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberSymbol);
+            return ToString(NumberFormatInfo.CurrentInfo);
+        }
+
+        public string ToString(IFormatProvider provider)
+        {
+            if (provider == null)
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            return string.Format("{0} {1}", LargestWholeNumberValue.ToString(provider), LargestWholeNumberSymbol);
         }
 
         public string ToString(string format)
         {
+            return ToString(format, NumberFormatInfo.CurrentInfo);
+        }
+
+        public string ToString(string format, IFormatProvider provider)
+        {
+            if (format == null)
+            {
+                throw new ArgumentNullException(nameof(format));
+            }
+            if (provider == null)
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
 
             bool has(string s) => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            string output(double n) => n.ToString(format);
+            string output(double n) => n.ToString(format, provider);
 
             if (has(TerabyteSymbol))
                 return output(Terabytes);
@@ -178,7 +203,7 @@ namespace Humanizer.Bytes
             if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
                 return output(Bits);
 
-            var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format);
+            var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format, provider);
 
             formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
                                               ? "0"
@@ -333,7 +358,7 @@ namespace Humanizer.Bytes
             var found = false;
 
             // Acquiring culture specific decimal separator
-			var decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+			var decSep = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                 
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)

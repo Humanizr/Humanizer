@@ -1,4 +1,5 @@
-﻿using Humanizer.Bytes;
+﻿using System.Globalization;
+using Humanizer.Bytes;
 using Xunit;
 
 namespace Humanizer.Tests.Bytes
@@ -70,6 +71,18 @@ namespace Humanizer.Tests.Bytes
         public void HumanizesTerabytes(double input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, input.Terabytes().Humanize(format));
+        }
+
+        [Theory]
+        [InlineData(2.1, null, "en-US", "2.1 TB")]
+        [InlineData(2.123, "#.#", "en-US", "2.1 TB")]
+        [InlineData(2.1, null, "ru-RU", "2,1 TB")]
+        [InlineData(2.123, "#.#", "ru-RU", "2,1 TB")]
+        public void HumanizeWithFormatProvider(double input, string format, string cultureName, string expectedValue)
+        {
+            var culture = new CultureInfo(cultureName);
+
+            Assert.Equal(expectedValue, input.Terabytes().Humanize(format, culture));
         }
 
         [Fact]
