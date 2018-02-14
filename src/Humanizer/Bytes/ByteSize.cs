@@ -173,13 +173,9 @@ namespace Humanizer.Bytes
         public string ToString(string format, IFormatProvider provider)
         {
             if (format == null)
-            {
                 throw new ArgumentNullException(nameof(format));
-            }
             if (provider == null)
-            {
                 throw new ArgumentNullException(nameof(provider));
-            }
 
             if (!format.Contains("#") && !format.Contains("0"))
                 format = "0.## " + format;
