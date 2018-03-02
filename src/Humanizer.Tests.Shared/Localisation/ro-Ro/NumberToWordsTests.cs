@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.roRO
 {
     [UseCulture("ro-RO")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
         [Theory]
         [InlineData(-1, "minus unu")]
@@ -188,6 +188,19 @@ namespace Humanizer.Tests.Localisation.roRO
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
 
+        [Theory]
+        [InlineData(-1, "minus unu")]
+        [InlineData(0, "zero")]
+        [InlineData(1, "unu")]
+        [InlineData(2, "două")]
+        [InlineData(3, "trei")]
+        [InlineData(4, "patru")]
+        [InlineData(5, "cinci")]
+        public void ToNeuterWords(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(GrammaticalGender.Neuter));
+        }
+
         // Test cases taken from Romanian Grammar, Mika Sarlin.
 
         [Theory]
@@ -347,6 +360,18 @@ namespace Humanizer.Tests.Localisation.roRO
         public void ToFeminineOrdinalWords(int number, string expected)
         {
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
+        }
+
+        [Theory]
+        [InlineData(0, "zero")]
+        [InlineData(1, "primul")]
+        [InlineData(2, "al doilea")]
+        [InlineData(3, "al treilea")]
+        [InlineData(4, "al patrulea")]
+        [InlineData(5, "al cincilea")]
+        public void ToNeuterOrdinalWords(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
         }
     }
 }
