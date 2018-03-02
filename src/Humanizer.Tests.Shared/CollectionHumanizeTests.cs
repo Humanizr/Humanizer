@@ -86,7 +86,7 @@ namespace Humanizer.Tests
         public void HumanizeUsesObjectDisplayFormatter()
         {
             var humanized = _testCollection.Humanize(sc => sc.SomeInt);
-            Assert.Equal("1, 2, 3", humanized);
+            Assert.Equal("1, 2, and 3", humanized);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ namespace Humanizer.Tests
         public void HumanizeUsesObjectDisplayFormatterWhenSeparatorIsProvided()
         {
             var humanized = _testCollection.Humanize(sc => sc.SomeInt, "or");
-            Assert.Equal("1, 2, or3", humanized);
+            Assert.Equal("1, 2, or 3", humanized);
         }
 
         [Fact]
