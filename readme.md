@@ -1,6 +1,8 @@
 <p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
 
-Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
+[<img align="right" width="100px" src="https://dotnetfoundation.org/images/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
+
+Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities. It is part of the [.NET Foundation](https://www.dotnetfoundation.org/), and operates under their [code of conduct](https://www.dotnetfoundation.org/code-of-conduct). It is licensed under the [MIT](https://opensource.org/licenses/MIT) (an OSI approved license).
 
 [![Join the chat at https://gitter.im/Humanizr/Humanizer](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Humanizr/Humanizer)
 

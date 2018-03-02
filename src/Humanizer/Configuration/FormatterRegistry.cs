@@ -15,6 +15,8 @@ namespace Humanizer.Configuration
             Register("sr", new SerbianFormatter("sr"));
             Register("sr-Latn", new SerbianFormatter("sr-Latn"));
             Register("uk", new UkrainianFormatter());
+            Register("fr", new FrenchFormatter("fr"));
+            Register("fr-BE", new FrenchFormatter("fr-BE"));
             RegisterCzechSlovakPolishFormatter("cs");
             RegisterCzechSlovakPolishFormatter("pl");
             RegisterCzechSlovakPolishFormatter("sk");
@@ -31,8 +33,6 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("es");
             RegisterDefaultFormatter("fa");
             RegisterDefaultFormatter("fi-FI");
-            RegisterDefaultFormatter("fr");
-            RegisterDefaultFormatter("fr-BE");
             RegisterDefaultFormatter("hu");
             RegisterDefaultFormatter("id");
             RegisterDefaultFormatter("ja");
