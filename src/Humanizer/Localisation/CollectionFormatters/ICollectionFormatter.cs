@@ -11,27 +11,34 @@ namespace Humanizer.Localisation.CollectionFormatters
         /// <summary>
         /// Formats the collection for display, calling ToString() on each object.
         /// </summary>
-        /// <returns></returns>
         string Humanize<T>(IEnumerable<T> collection);
 
         /// <summary>
-        /// Formats the collection for display, calling `objectFormatter` on each object.
+        /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
         /// </summary>
-        /// <returns></returns>
         string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter);
 
         /// <summary>
-        /// Formats the collection for display, calling ToString() on each object
-        /// and using `separator` before the final item.
+        /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
         /// </summary>
-        /// <returns></returns>
+        string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter);
+
+        /// <summary>
+        /// Formats the collection for display, calling ToString() on each object
+        /// and using <paramref name="separator"/> before the final item.
+        /// </summary>
         string Humanize<T>(IEnumerable<T> collection, string separator);
 
         /// <summary>
-        /// Formats the collection for display, calling `objectFormatter` on each object
-        /// and using `separator` before the final item.
+        /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
+        /// and using <paramref name="separator"/> before the final item.
         /// </summary>
-        /// <returns></returns>
         string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator);
+
+        /// <summary>
+        /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
+        /// and using <paramref name="separator"/> before the final item.
+        /// </summary>
+        string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator);
     }
 }
