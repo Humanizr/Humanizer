@@ -17,17 +17,17 @@ namespace Humanizer.Localisation.NumberToWords
         private readonly string[] BillionOrdinalSingular = { "einmilliard", "einemilliarde" };
         private readonly string[] BillionOrdinalPlural = { "{0}milliard", "{0}milliarden" };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long number, GrammaticalGender gender)
         {
-            var number = input;
-
             if (number == 0)
                 return UnitsMap[number];
 
-            if (number < 0)
-                return string.Format("minus {0}", Convert(-number));
-
             var parts = new List<string>();
+            if (number < 0)
+            {
+                parts.Add("minus ");
+                number = -number;
+            }
 
             CollectParts(parts, ref number, 1000000000000000000, true, "{0} Trillionen", "eine Trillion");
             CollectParts(parts, ref number, 1000000000000000, true, "{0} Billiarden", "eine Billiarde");
@@ -62,7 +62,7 @@ namespace Humanizer.Localisation.NumberToWords
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             if (number == 0)
-                return "null" + GetEndingForGender(gender);
+                return UnitsMap[number] + GetEndingForGender(gender);
 
             var parts = new List<string>();
             if (number < 0)
