@@ -22,7 +22,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (number == 0)
                 return "صفر";
             if (number < 0)
-                return string.Format("سالب {0}", Convert(-number, gender));
+                return string.Format("ناقص {0}", Convert(-number, gender));
 
             var result = string.Empty;
             var groupLevel = 0;

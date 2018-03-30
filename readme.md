@@ -770,7 +770,7 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 1.ToWords(GrammaticalGender.Masculine) => "واحد"
 1.ToWords(GrammaticalGender.Feminine) => "واحدة"
 1.ToWords(GrammaticalGender.Neuter) => "واحد"
-(-1).ToWords() => "سالب واحد"
+(-1).ToWords() => "ناقص واحد"
 ```
 
 Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
