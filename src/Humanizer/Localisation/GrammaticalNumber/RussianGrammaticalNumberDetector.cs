@@ -2,7 +2,7 @@
 {
     internal static class RussianGrammaticalNumberDetector
     {
-        public static RussianGrammaticalNumber Detect(int number)
+        public static RussianGrammaticalNumber Detect(long number)
         {
             var tens = number % 100 / 10;
             if (tens != 1)
