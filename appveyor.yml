@@ -2,15 +2,7 @@ image: Visual Studio 2017
 configuration: Release
 branches:
   only:
-  - master
-  - dev
-  - /hotfix\/.*/
-
-environment:
-  SignClientSecret:
-    secure: M1FsBBfB/2sEzx7+qsRyI33ROJeJDj2xMWegE3DdTSY=
-  SignClientUser:
-    secure: aHMEZLZM2oqzByNcU5EaByQVhoJom3iPgM4ipDZtzh7DCHAF5mkZdE6VWlPCmczD
+  - none
 
 init:
   - git config --global core.autocrlf input
@@ -33,25 +25,8 @@ after_build:
       nuget install nerdbank.gitversioning -Version 2.1.16 -SolutionDir $Env:APPVEYOR_BUILD_FOLDER -Verbosity quiet -ExcludeVersion
       $vers = & .\packages\nerdbank.gitversioning\tools\Get-Version.ps1
       $nugetVer = $vers.NuGetPackageVersion
-      ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
-  - ps: '.\scripts\Sign-Package.ps1'        
+      ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }   
   - ps: 'ls *.nupkg | %{ appveyor PushArtifact $_.Name}'
   
 test: off  
   
-deploy:
-- provider: NuGet
-  server: https://www.myget.org/F/humanizer/api/v2/package
-  on:
-    branch: master
-  api_key:
-    secure: fAHleWvVZqxJRljDCgwYIbn/RXvbKDacgSEYMfk0VvWhpl6L/gu+OVqS0n7YO7TS
-  artifact: /.*\.nupkg/
-  
-- provider: NuGet
-  server: https://www.myget.org/F/humanizer/api/v2/package
-  on:
-    branch: dev
-  api_key:
-    secure: fAHleWvVZqxJRljDCgwYIbn/RXvbKDacgSEYMfk0VvWhpl6L/gu+OVqS0n7YO7TS
-  artifact: /.*\.nupkg/  
