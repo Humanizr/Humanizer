@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp1.1' ">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0' ">
     <DefineConstants>$(DefineConstants);NETFX_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="xunit" Version="2.4.0-beta.2.build3981" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0-beta.2.build3981" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.4.0-beta.2.build3981" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0" />
     <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46' ">
