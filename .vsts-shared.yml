@@ -34,7 +34,8 @@ steps:
     command: test
     projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
     arguments: -c $(BuildConfiguration)   
-    
+  displayName: Run Tests
+  
 - ${{ parameters.signSteps }}
 
 - task: PublishBuildArtifacts@1
