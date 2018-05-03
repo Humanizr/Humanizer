@@ -1,0 +1,55 @@
+parameters: 
+  signSteps: []
+  
+steps:
+- task: BatchScript@1
+  inputs:
+    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
+    arguments: -no_logo
+    modifyEnvironment: true
+  displayName: Setup Environment Variables
+
+- task: NuGetToolInstaller@0
+  displayName: Use NuGet 4.6.2
+  inputs:
+    versionSpec: 4.6.2
+
+- powershell: |    
+    mkdir $(Build.ArtifactStagingDirectory)\Logs
+    mkdir $(Build.ArtifactStagingDirectory)\Packages
+    msbuild .\src\Humanizer.sln /restore /m /bl:$(Build.ArtifactStagingDirectory)\Logs\restore.binlog /p:Configuration=$(BuildConfiguration)
+  displayName: Build
+  
+- powershell: |
+    # version    
+    nuget install NerdBank.GitVersioning -SolutionDir $(Build.SourcesDirectory) -Verbosity quiet -ExcludeVersion    
+    $vers = & $(Build.SourcesDirectory)\packages\nerdbank.gitversioning\tools\Get-Version.ps1
+    $nugetVer = $vers.NuGetPackageVersion       
+    
+    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages }
+  displayName: Create packages
+  
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
+    arguments: -c $(BuildConfiguration)   
+  displayName: Run Tests
+  
+- ${{ parameters.signSteps }}
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Package Artifacts
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)\Packages
+    artifactType: container
+    artifactName: Packages
+  condition: always()
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Log Artifacts
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)\Logs
+    artifactType: container
+    artifactName: Logs
+  condition: always()
