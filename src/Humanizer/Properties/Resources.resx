@@ -552,4 +552,28 @@
   <data name="TimeSpanHumanize_MultipleYears_TrialQuadral" xml:space="preserve">
     <value>{0} years</value>
   </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>one day</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>one hour</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>one millisecond</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>one minute</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>one month</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>one second</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>one week</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>one year</value>
+  </data>
 </root>

@@ -72,9 +72,11 @@ namespace Humanizer.Inflections
             _default.AddSingular("(buz|blit|walt)zes$", "$1z");
             _default.AddSingular("(alumn|alg|larv|vertebr)ae$", "$1a");
             _default.AddSingular("(criteri|phenomen)a$", "$1on");
+            _default.AddSingular("([b|r|c]ook|room|smooth)ies$", "$1ie");
 
             _default.AddIrregular("person", "people");
             _default.AddIrregular("man", "men");
+            _default.AddIrregular("human", "humans");
             _default.AddIrregular("child", "children");
             _default.AddIrregular("sex", "sexes");
             _default.AddIrregular("move", "moves");
@@ -86,6 +88,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("curriculum", "curricula");
             _default.AddIrregular("database", "databases");
             _default.AddIrregular("zombie", "zombies");
+            _default.AddIrregular("personnel", "personnel");
 
             _default.AddIrregular("is", "are", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);

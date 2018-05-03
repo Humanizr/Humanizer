@@ -52,9 +52,7 @@ namespace Humanizer.Localisation.NumberToWords
         
         public override string ConvertToOrdinal(int number)
         {
-            string exceptionString;
-
-            if (ExceptionNumbersToWords(number, out exceptionString))
+            if (ExceptionNumbersToWords(number, out var exceptionString))
                 return exceptionString;
 
             return Convert(number) + " তম";

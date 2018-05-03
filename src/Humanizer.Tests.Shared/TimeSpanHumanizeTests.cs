@@ -19,7 +19,7 @@ namespace Humanizer.Tests
                       select text;
             var grouping = from t in qry
                            group t by t into g
-                           select new { Key = g.Key, Count = g.Count() };
+                           select new {  g.Key, Count = g.Count() };
             var allUnique = grouping.All(g => g.Count == 1);
             Assert.True(allUnique);
         }
@@ -37,7 +37,7 @@ namespace Humanizer.Tests
         [InlineData(365 + 365 + 365 + 365 + 366 + 1, "5 years")]
         public void Year(int days, string expected)
         {
-            string actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
+            var actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
         }
 
@@ -56,7 +56,7 @@ namespace Humanizer.Tests
         [InlineData(366, "1 year")]
         public void Month(int days, string expected)
         {
-            string actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
+            var actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
         }
 
@@ -348,6 +348,42 @@ namespace Humanizer.Tests
             Assert.Equal(expected, actual);
         }
 
+        [Theory]
+        [InlineData(0, 3, "no time")]
+        [InlineData(0, 2, "no time")]
+        [InlineData(10, 2, "ten milliseconds")]
+        [InlineData(1400, 2, "one second, four hundred milliseconds")]
+        [InlineData(2500, 2, "two seconds, five hundred milliseconds")]
+        [InlineData(120000, 2, "two minutes")]
+        [InlineData(62000, 2, "one minute, two seconds")]
+        [InlineData(62020, 2, "one minute, two seconds")]
+        [InlineData(62020, 3, "one minute, two seconds, twenty milliseconds")]
+        [InlineData(3600020, 4, "one hour, twenty milliseconds")]
+        [InlineData(3600020, 3, "one hour, twenty milliseconds")]
+        [InlineData(3600020, 2, "one hour, twenty milliseconds")]
+        [InlineData(3600020, 1, "one hour")]
+        [InlineData(3603001, 2, "one hour, three seconds")]
+        [InlineData(3603001, 3, "one hour, three seconds, one millisecond")]
+        [InlineData(86400000, 3, "one day")]
+        [InlineData(86400000, 2, "one day")]
+        [InlineData(86400000, 1, "one day")]
+        [InlineData(86401000, 1, "one day")]
+        [InlineData(86401000, 2, "one day, one second")]
+        [InlineData(86401200, 2, "one day, one second")]
+        [InlineData(86401200, 3, "one day, one second, two hundred milliseconds")]
+        [InlineData(1296000000, 1, "two weeks")]
+        [InlineData(1296000000, 2, "two weeks, one day")]
+        [InlineData(1299600000, 2, "two weeks, one day")]
+        [InlineData(1299600000, 3, "two weeks, one day, one hour")]
+        [InlineData(1299630020, 3, "two weeks, one day, one hour")]
+        [InlineData(1299630020, 4, "two weeks, one day, one hour, thirty seconds")]
+        [InlineData(1299630020, 5, "two weeks, one day, one hour, thirty seconds, twenty milliseconds")]
+        public void TimeSpanWithNumbersConvertedToWords(int milliseconds, int precision, string expected)
+        {
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, toWords: true);
+            Assert.Equal(expected, actual);
+        }
+
         [Fact]
         public void NoTime()
         {
@@ -357,12 +393,13 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "en-US", "1 millisecond")]
-        [InlineData(6 * 24 * 60 * 60 * 1000, "ru-RU", "6 дней")]
-        [InlineData(11 * 60 * 60 * 1000, "ar", "11 ساعة")]
-        public void CanSpecifyCultureExplicitly(int ms, string culture, string expected)
+        [InlineData(1, 1, "en-US", "1 millisecond", ", ")]
+        [InlineData(6 * 24 * 60 * 60 * 1000, 1, "ru-RU", "6 дней", ", ")]
+        [InlineData(11 * 60 * 60 * 1000, 1, "ar", "11 ساعة", ", ")]
+        [InlineData(3603001, 2, "it-IT", "1 ora e 3 secondi", null)]
+        public void CanSpecifyCultureExplicitly(int ms, int precision, string culture, string expected, string collectionSeparator)
         {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize(culture: new CultureInfo(culture));
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(precision: precision, culture: new CultureInfo(culture), collectionSeparator: collectionSeparator);
             Assert.Equal(expected, actual);
         }
     }

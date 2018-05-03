@@ -1,0 +1,17 @@
+{
+  "version": "2.2.1-preview.{height}",
+  "publicReleaseRefSpec": [
+    "^refs/heads/master$", // we release out of master
+    "^refs/heads/dev$", // we release out of develop
+    "^refs/tags/v\\d+\\.\\d+" // we also release tags starting with vN.N
+  ],
+  "nugetPackageVersion":{
+    "semVer": 2
+  },
+  "cloudBuild": {
+    "buildNumber": {
+      "enabled": true,
+      "setVersionVariables": true
+    }
+  }
+}

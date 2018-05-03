@@ -8,15 +8,9 @@
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
     <Copyright>Copyright © 2012-2017 Mehdi Khalili</Copyright>    
     <Product>Humanizer ($(TargetFramework))</Product>    
-    <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
-    <DebugType>embedded</DebugType>
+    <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0011" PrivateAssets="All" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.1.2" PrivateAssets="All" />
-  </ItemGroup>
 </Project>

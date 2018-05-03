@@ -2,25 +2,17 @@ image: Visual Studio 2017
 configuration: Release
 branches:
   only:
-  - master
-  - dev
-  - /hotfix\/.*/
-
-environment:
-  SignClientSecret:
-    secure: S26+NphAhj/vo5ZdHd/N/4toty3ztdNGmuNdvAB57W1oIVQEHVKqAVuhTD8B9ATy
+  - none
 
 init:
   - git config --global core.autocrlf input
 
 install:
-  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.1.0/NuGet.exe
-  - cmd: nuget install GitVersion.CommandLine -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre  
-  - cmd: nuget install SignClient -Version 0.7.0 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion
+  - cmd: appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.5.0/NuGet.exe
+  - cmd: nuget install SignClient -Version 0.9.1 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion
      
 before_build:
   - cmd: msbuild /t:restore src\Humanizer.sln
-  - cmd: '.\packages\GitVersion.CommandLine\tools\GitVersion.exe /l console /output buildserver'
   
 build:
   verbosity: normal
@@ -29,18 +21,12 @@ build:
   
 after_build:
   - ps: |
-      $nugetVer = $env:GitVersion_FullSemVer
-      ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }
-  - ps: '.\scripts\Sign-Package.ps1'        
+      dotnet test -c Release .\src\Humanizer.Tests\Humanizer.Tests.csproj
+      nuget install nerdbank.gitversioning -Version 2.1.16 -SolutionDir $Env:APPVEYOR_BUILD_FOLDER -Verbosity quiet -ExcludeVersion
+      $vers = & .\packages\nerdbank.gitversioning\tools\Get-Version.ps1
+      $nugetVer = $vers.NuGetPackageVersion
+      ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis }   
   - ps: 'ls *.nupkg | %{ appveyor PushArtifact $_.Name}'
   
-test:
-  assemblies:
-    - '**\*.Tests.dll'
+test: off  
   
-deploy:
-  provider: NuGet
-  server: https://www.myget.org/F/humanizer/api/v2/package
-  api_key:
-    secure: bmqlJK8a5HYiUXOT99HXT1j7JiM5+fpR4kHhxIC30oaaEXbv94f0fKdiKlU1QC/l
-  artifact: /.*\.nupkg/

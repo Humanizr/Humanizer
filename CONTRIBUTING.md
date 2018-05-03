@@ -5,8 +5,12 @@ Even better fix it and send a pull request.
 If you like to help out with existing bugs and feature requests just check out the list of [issues](https://github.com/Humanizr/Humanizer/issues) and grab and fix one.
 Some of the issues are labeled as as `jump in`. These issues are generally low hanging fruit so you can start with easier tasks.
 
+This project has adopted the code of conduct defined by the [Contributor Covenant](http://contributor-covenant.org/)
+to clarify expected behavior in our community. 
+For more information see the [.NET Foundation Code of Conduct](http://www.dotnetfoundation.org/code-of-conduct).
+
 ### <a id="getting-started">Getting started</a>
-This project uses C# 6 language features, so you'll need any edition of [Visual Studio 2015](https://www.visualstudio.com/downloads/download-visual-studio-vs) to open and compile the project. The free [Community Edition](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409) will work.
+This project uses C# 7 language features and SDK-style projects, so you'll need any edition of [Visual Studio 2017](https://www.visualstudio.com/downloads/download-visual-studio-vs) to open and compile the project. The free [Community Edition](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409) will work.
 
 ### <a id="contribution-guideline">Contribution guideline</a>
 This project uses [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests.
@@ -15,7 +19,7 @@ So if you want to contribute, fork the repo, preferably create a local branch, b
 Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
 
  - Implementation is clean
- - Code adheres to the existing coding standards; e.g. no curlies for one-line blocks, no redundant empty lines between methods or code blocks, spaces rather than tabs, etc.
+ - Code adheres to the existing coding standards; e.g. no curlies for one-line blocks, no redundant empty lines between methods or code blocks, spaces rather than tabs, etc. There is an `.editorconfig` file that must be respected.
  - No ReSharper warnings
  - There is proper unit test coverage
  - If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution

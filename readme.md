@@ -1,6 +1,8 @@
 <p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
 
-Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
+[<img align="right" width="100px" src="https://dotnetfoundation.org/images/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
+
+Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities. It is part of the [.NET Foundation](https://www.dotnetfoundation.org/), and operates under their [code of conduct](https://www.dotnetfoundation.org/code-of-conduct). It is licensed under the [MIT](https://opensource.org/licenses/MIT) (an OSI approved license).
 
 [![Join the chat at https://gitter.im/Humanizr/Humanizer](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Humanizr/Humanizer)
 
@@ -454,6 +456,11 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => 
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => "2 Wochen, Ein Tag und Eine Stunde"
 ```
 
+If words are preferred to numbers, a `toWords: true` parameter can be set to convert the numbers in a humanized TimeSpan to words:
+```C#
+TimeSpan.FromMilliseconds(1299630020).Humanize(3, toWords: true) => "two weeks, one day, one hour"
+````
+
 ### <a id="humanize-collections">Humanize Collections</a>
 You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided ("and" in English), but a different separator may be passed into `Humanize`.
 
@@ -729,7 +736,7 @@ someDateTime.AtMidnight()
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
-###<a id="number-to-numbers">Number to numbers</a>
+### <a id="number-to-numbers">Number to numbers</a>
 Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:
 
 ```C#
@@ -824,7 +831,7 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 ```
 
 
-###<a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
+### <a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
 This is kind of an extension of Ordinalize
 ```C#
 // for English UK locale
@@ -1026,7 +1033,7 @@ You can specify a format for the bytes part of the humanized output:
 // 18.49 GB/s
 ```
 
-##<a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
+## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
 You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).

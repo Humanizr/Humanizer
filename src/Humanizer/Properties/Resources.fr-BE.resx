@@ -243,4 +243,10 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 année</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>avant-hier</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>après-demain</value>
+  </data>
 </root>

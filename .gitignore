@@ -88,3 +88,5 @@ UpgradeLog*.htm
 
 
 src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.received.txt
+
+.DS_Store

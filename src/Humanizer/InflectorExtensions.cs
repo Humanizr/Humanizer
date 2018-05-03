@@ -82,7 +82,7 @@ namespace Humanizer
         public static string Camelize(this string input)
         {
             var word = Pascalize(input);
-            return word.Substring(0, 1).ToLower() + word.Substring(1);
+            return word.Length > 0 ? word.Substring(0, 1).ToLower() + word.Substring(1) : word;
         }
 
         /// <summary>

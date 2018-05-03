@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp1.1' ">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0' ">
     <DefineConstants>$(DefineConstants);NETFX_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-beta1-build1309" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+    <PackageReference Include="xunit" Version="2.4.0-beta.2.build3981" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0-beta.2.build3981" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.4.0-beta.2.build3981" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0" />
     <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46' ">
@@ -18,15 +19,15 @@
     <PackageReference Include="ApprovalTests" Version="3.0.13" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Humanizer.Tests.Shared\**\*.cs">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ApiApprover\PublicApiApprovalTest.approve_public_api.approved.txt" />
     <Content Include="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
-  </ItemGroup>
-
-  <Import Project="..\Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems" Label="Shared" />
 
 </Project>

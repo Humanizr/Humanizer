@@ -124,8 +124,10 @@ namespace Humanizer
     {
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> displayFormatter) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, string separator) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter, string separator) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> displayFormatter, string separator) { }
     }
     public class static DateHumanizeExtensions
     {
@@ -979,8 +981,8 @@ namespace Humanizer
     }
     public class static TimeSpanHumanizeExtensions
     {
-        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ") { }
-        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ") { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
     }
     public class static To
     {
@@ -1097,8 +1099,10 @@ namespace Humanizer.Localisation.CollectionFormatters
     {
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter, string separator);
     }
 }
 namespace Humanizer.Localisation.DateToOrdinalWords
@@ -1120,10 +1124,10 @@ namespace Humanizer.Localisation.Formatters
         public virtual string DateHumanize_Never() { }
         public virtual string DateHumanize_Now() { }
         protected virtual string Format(string resourceKey) { }
-        protected virtual string Format(string resourceKey, int number) { }
+        protected virtual string Format(string resourceKey, int number, bool toWords = False) { }
         protected virtual string GetResourceKey(string resourceKey, int number) { }
         protected virtual string GetResourceKey(string resourceKey) { }
-        public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit) { }
+        public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False) { }
         public virtual string TimeSpanHumanize_Zero() { }
     }
     public interface IFormatter
@@ -1131,7 +1135,7 @@ namespace Humanizer.Localisation.Formatters
         string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
         string DateHumanize_Never();
         string DateHumanize_Now();
-        string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit);
+        string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False);
         string TimeSpanHumanize_Zero();
     }
 }
