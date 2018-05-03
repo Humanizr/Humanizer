@@ -29,11 +29,11 @@ steps:
     ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages }
   displayName: Create packages
   
-- powershell: | 
-    dotnet test -c Release .\src\Humanizer.Tests\Humanizer.Tests.csproj
-  displayName: Run Tests
-  env:
-    VSTS_ACCESS_TOKEN: $(System.AccessToken)    
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
+    arguments: -c $(BuildConfiguration)   
     
 - ${{ parameters.signSteps }}
 
