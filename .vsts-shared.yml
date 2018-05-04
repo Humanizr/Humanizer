@@ -14,6 +14,14 @@ steps:
   inputs:
     versionSpec: 4.6.2
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+    projects: scripts/setversion.csproj
+    arguments: -c $(BuildConfiguration)   
+  displayName: Set Version
+  condition: eq(variables['system.pullrequest.isfork'], false)
+
 - powershell: |    
     mkdir $(Build.ArtifactStagingDirectory)\Logs
     mkdir $(Build.ArtifactStagingDirectory)\Packages
@@ -44,7 +52,7 @@ steps:
     pathToPublish: $(Build.ArtifactStagingDirectory)\Packages
     artifactType: container
     artifactName: Packages
-  condition: always()
+  condition: eq(variables['system.pullrequest.isfork'], false)
 
 - task: PublishBuildArtifacts@1
   displayName: Publish Log Artifacts
@@ -52,4 +60,4 @@ steps:
     pathToPublish: $(Build.ArtifactStagingDirectory)\Logs
     artifactType: container
     artifactName: Logs
-  condition: always()
+  condition: eq(variables['system.pullrequest.isfork'], false)

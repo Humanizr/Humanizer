@@ -2,7 +2,7 @@ image: Visual Studio 2017
 configuration: Release
 branches:
   only:
-  - none
+  - master
 
 init:
   - git config --global core.autocrlf input
