@@ -128,8 +128,10 @@ namespace Humanizer
     {
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> displayFormatter) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, string separator) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter, string separator) { }
+        public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> displayFormatter, string separator) { }
     }
     public class static DateHumanizeExtensions
     {
@@ -1101,8 +1103,10 @@ namespace Humanizer.Localisation.CollectionFormatters
     {
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator);
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter, string separator);
     }
 }
 namespace Humanizer.Localisation.DateToOrdinalWords

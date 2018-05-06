@@ -10,8 +10,7 @@
   },
   "cloudBuild": {
     "buildNumber": {
-      "enabled": true,
-      "setVersionVariables": true
+      "enabled": false
     }
   }
 }

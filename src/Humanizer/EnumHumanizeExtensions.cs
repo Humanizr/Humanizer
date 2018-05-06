@@ -31,7 +31,8 @@ namespace Humanizer
             {
                 return Enum.GetValues(enumType)
                            .Cast<Enum>()
-                           .Where(e => input.HasFlag(e))
+                           .Where(e => e.CompareTo(Convert.ChangeType(Enum.ToObject(enumType, 0), enumType)) != 0)
+                           .Where(input.HasFlag)
                            .Select(e => e.Humanize())
                            .Humanize();
             }
@@ -108,5 +109,5 @@ namespace Humanizer
 
             return humanizedEnum.ApplyCase(casing);
         }
-   }
+    }
 }

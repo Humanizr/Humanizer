@@ -8,7 +8,7 @@ using Xunit;
 namespace Humanizer.Tests
 {
     [UseCulture("en")]
-    public class BitFieldEnumHumanizeTests 
+    public class BitFieldEnumHumanizeTests
     {
         [Fact]
         public void CanHumanizeSingleWordDescriptionAttribute()
@@ -46,6 +46,12 @@ namespace Humanizer.Tests
         {
             var xoredBitFlag = (ShortBitFieldEnumUnderTest.RED | ShortBitFieldEnumUnderTest.DARK_GRAY);
             Assert.Equal(BitFlagEnumTestsResources.ExpectedResultWhenBothValuesXored, xoredBitFlag.Humanize());
+        }
+
+        [Fact]
+        public void CanHumanizeBitFieldEnumWithZeroValue()
+        {
+            Assert.Equal(BitFlagEnumTestsResources.None, BitFieldEnumUnderTest.NONE.Humanize());
         }
     }
 }
