@@ -43,5 +43,13 @@ namespace Humanizer.Localisation.CollectionFormatters
         [NotNull]
         [PublicAPI]
         string Humanize<T>([NotNull] IEnumerable<T> collection, [NotNull] Func<T, string> objectFormatter, [NotNull] string separator);
+
+        /// <summary>
+        /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
+        /// and using <paramref name="separator"/> before the final item.
+        /// </summary>
+        [NotNull]
+        [PublicAPI]
+        string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator);
     }
 }

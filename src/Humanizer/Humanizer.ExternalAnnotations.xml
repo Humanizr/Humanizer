@@ -1189,6 +1189,10 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:Humanizer.Localisation.CollectionFormatters.ICollectionFormatter.Humanize``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object},System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+  </member>
   <member name="M:Humanizer.Localisation.CollectionFormatters.ICollectionFormatter.Humanize``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
@@ -1242,7 +1246,7 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
-  <member name="M:Humanizer.Localisation.Formatters.IFormatter.TimeSpanHumanize(Humanizer.Localisation.TimeUnit,System.Int32)">
+  <member name="M:Humanizer.Localisation.Formatters.IFormatter.TimeSpanHumanize(Humanizer.Localisation.TimeUnit,System.Int32,System.Boolean)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
   </member>
@@ -2900,7 +2904,7 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:Humanizer.TimeSpanHumanizeExtensions.Humanize(System.TimeSpan,System.Int32,System.Boolean,System.Globalization.CultureInfo,Humanizer.Localisation.TimeUnit,Humanizer.Localisation.TimeUnit,System.String)">
+  <member name="M:Humanizer.TimeSpanHumanizeExtensions.Humanize(System.TimeSpan,System.Int32,System.Boolean,System.Globalization.CultureInfo,Humanizer.Localisation.TimeUnit,Humanizer.Localisation.TimeUnit,System.String,System.Boolean)">
     <attribute ctor="M:JetBrains.Annotations.PureAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
@@ -2911,7 +2915,7 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:Humanizer.TimeSpanHumanizeExtensions.Humanize(System.TimeSpan,System.Int32,System.Globalization.CultureInfo,Humanizer.Localisation.TimeUnit,Humanizer.Localisation.TimeUnit,System.String)">
+  <member name="M:Humanizer.TimeSpanHumanizeExtensions.Humanize(System.TimeSpan,System.Int32,System.Globalization.CultureInfo,Humanizer.Localisation.TimeUnit,Humanizer.Localisation.TimeUnit,System.String,System.Boolean)">
     <attribute ctor="M:JetBrains.Annotations.PureAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
