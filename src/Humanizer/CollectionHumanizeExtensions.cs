@@ -84,7 +84,11 @@ namespace Humanizer
         /// Formats the collection for display, calling <paramref name="displayFormatter"/> on each element
         /// and using the provided separator.
         /// </summary>
-        public static string Humanize<T>(this IEnumerable<T> collection, Func<T, object> displayFormatter, string separator)
+        [Pure]
+        [NotNull]
+        [PublicAPI]
+        [ContractAnnotation("displayFormatter:null => halt")]
+        public static string Humanize<T>([NotNull] this IEnumerable<T> collection, [NotNull] Func<T, object> displayFormatter, [NotNull] string separator)
         {
             if (displayFormatter == null)
                 throw new ArgumentNullException(nameof(displayFormatter));
