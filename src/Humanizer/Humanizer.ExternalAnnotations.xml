@@ -303,6 +303,23 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:Humanizer.CollectionHumanizeExtensions.Humanize``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Object},System.String)">
+    <attribute ctor="M:JetBrains.Annotations.PureAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.PublicAPIAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>displayFormatter:null =&gt; halt</argument>
+    </attribute>
+    <parameter name="collection">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="displayFormatter">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="separator">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:Humanizer.CollectionHumanizeExtensions.Humanize``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String})">
     <attribute ctor="M:JetBrains.Annotations.PureAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

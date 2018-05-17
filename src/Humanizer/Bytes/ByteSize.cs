@@ -29,6 +29,7 @@ namespace Humanizer.Bytes
     /// Represents a byte size value.
     /// </summary>
 #pragma warning disable 1591
+    [PublicAPI]
     public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
@@ -54,6 +55,8 @@ namespace Humanizer.Bytes
         public double Gigabytes { get; private set; }
         public double Terabytes { get; private set; }
 
+        [NotNull]
+        [PublicAPI]
         public string LargestWholeNumberSymbol
         {
             get
@@ -77,6 +80,8 @@ namespace Humanizer.Bytes
                 return BitSymbol;
             }
         }
+
+        [PublicAPI]
         public double LargestWholeNumberValue
         {
             get
@@ -101,6 +106,7 @@ namespace Humanizer.Bytes
             }
         }
 
+        [PublicAPI]
         public ByteSize(double byteSize)
             : this()
         {
@@ -203,7 +209,7 @@ namespace Humanizer.Bytes
             return string.Format("{0} {1}", formattedLargeWholeNumberValue, LargestWholeNumberSymbol);
         }
 
-        public override bool Equals(object value)
+        public override bool Equals([CanBeNull] object value)
         {
             if (value == null)
                 return false;
@@ -227,7 +233,7 @@ namespace Humanizer.Bytes
             return Bits.GetHashCode();
         }
 
-        public int CompareTo(object obj)
+        public int CompareTo([CanBeNull] object obj)
         {
             if (obj == null)
                 return 1;
@@ -292,51 +298,71 @@ namespace Humanizer.Bytes
             return new ByteSize(Bytes - bs.Bytes);
         }
 
+        [Pure]
+        [PublicAPI]
         public static ByteSize operator +(ByteSize b1, ByteSize b2)
         {
             return new ByteSize(b1.Bytes + b2.Bytes);
         }
 
+        [Pure]
+        [PublicAPI]
         public static ByteSize operator ++(ByteSize b)
         {
             return new ByteSize(b.Bytes + 1);
         }
 
+        [Pure]
+        [PublicAPI]
         public static ByteSize operator -(ByteSize b)
         {
             return new ByteSize(-b.Bytes);
         }
 
+        [Pure]
+        [PublicAPI]
         public static ByteSize operator --(ByteSize b)
         {
             return new ByteSize(b.Bytes - 1);
         }
 
+        [Pure]
+        [PublicAPI]
         public static bool operator ==(ByteSize b1, ByteSize b2)
         {
             return b1.Bits == b2.Bits;
         }
 
+        [Pure]
+        [PublicAPI]
         public static bool operator !=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits != b2.Bits;
         }
 
+        [Pure]
+        [PublicAPI]
         public static bool operator <(ByteSize b1, ByteSize b2)
         {
             return b1.Bits < b2.Bits;
         }
 
+        [Pure]
+        [PublicAPI]
         public static bool operator <=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits <= b2.Bits;
         }
 
+        [Pure]
+        [PublicAPI]
         public static bool operator >(ByteSize b1, ByteSize b2)
         {
             return b1.Bits > b2.Bits;
         }
 
+        [Pure]
+        [PublicAPI]
         public static bool operator >=(ByteSize b1, ByteSize b2)
         {
             return b1.Bits >= b2.Bits;

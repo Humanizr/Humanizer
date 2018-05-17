@@ -28,6 +28,7 @@ namespace Humanizer
         /// <example>
         /// "INvalid caSEs arE corrected" -> "Invalid Cases Are Corrected"
         /// </example>
+        [NotNull]
         public static IStringTransformer TitleCase
         {
             get
@@ -42,6 +43,7 @@ namespace Humanizer
         /// <example>
         /// "Sentence casing" -> "sentence casing"
         /// </example>
+        [NotNull]
         public static IStringTransformer LowerCase
         {
             get
@@ -56,6 +58,7 @@ namespace Humanizer
         /// <example>
         /// "lower case statement" -> "LOWER CASE STATEMENT"
         /// </example>
+        [NotNull]
         public static IStringTransformer UpperCase
         {
             get
@@ -70,6 +73,7 @@ namespace Humanizer
         /// <example>
         /// "lower case statement" -> "Lower case statement"
         /// </example>
+        [NotNull]
         public static IStringTransformer SentenceCase
         {
             get

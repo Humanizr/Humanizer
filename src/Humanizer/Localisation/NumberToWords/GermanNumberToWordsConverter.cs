@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -148,6 +149,7 @@ namespace Humanizer.Localisation.NumberToWords
             return number == 0 ? 0 : 1;
         }
 
+        [NotNull]
         private static string GetEndingForGender(GrammaticalGender gender)
         {
             switch (gender)

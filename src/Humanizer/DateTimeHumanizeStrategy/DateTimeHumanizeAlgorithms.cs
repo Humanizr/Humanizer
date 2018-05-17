@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
+using JetBrains.Annotations;
 
 namespace Humanizer.DateTimeHumanizeStrategy
 {
@@ -13,6 +14,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
+        [NotNull]
         public static string PrecisionHumanize(DateTime input, DateTime comparisonBase, double precision, CultureInfo culture)
         {
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
@@ -60,6 +62,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
+        [NotNull]
         public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;

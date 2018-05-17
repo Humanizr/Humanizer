@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using JetBrains.Annotations;
 
 namespace Humanizer.Configuration
 {
@@ -44,7 +45,7 @@ namespace Humanizer.Configuration
         /// Gets the localiser for the specified culture 
         /// </summary>
         /// <param name="culture">The culture to retrieve localiser for. If not specified, current thread's UI culture is used.</param>
-        public TLocaliser ResolveForCulture(CultureInfo culture)
+        public TLocaliser ResolveForCulture([CanBeNull] CultureInfo culture)
         {
             return FindLocaliser(culture ?? CultureInfo.CurrentUICulture)(culture);
         }

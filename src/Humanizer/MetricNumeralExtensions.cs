@@ -189,7 +189,7 @@ namespace Humanizer
 		/// <param name="input">A Metric representation to parse to a number</param>
 		/// <param name="last">The last character of input</param>
 		/// <returns>A number build from a Metric representation</returns>
-		private static double BuildMetricNumber(string input, char last)
+		private static double BuildMetricNumber([NotNull] string input, char last)
 		{
             double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3;
             var number = double.Parse(input.Remove(input.Length - 1));
@@ -235,6 +235,7 @@ namespace Humanizer
 		/// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
 		/// <returns>A number in a Metric representation</returns>
+		[NotNull]
 		private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals)
 		{
 			var number = input * Math.Pow(1000, -exponent);
@@ -282,7 +283,7 @@ namespace Humanizer
 		/// </remarks>
 		/// <param name="input">A string who might contain a invalid Metric representation.</param>
 		/// <returns>True if input is not a valid Metric representation.</returns>
-		private static bool IsInvalidMetricNumeral(this string input)
+		private static bool IsInvalidMetricNumeral([NotNull] this string input)
 		{
 			var index = input.Length - 1;
 			var last = input[index];

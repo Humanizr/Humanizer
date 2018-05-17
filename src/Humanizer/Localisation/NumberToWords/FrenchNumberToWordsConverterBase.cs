@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -35,6 +36,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts);
         }
 
+        [NotNull]
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             if (number == 1)
@@ -140,7 +142,7 @@ namespace Humanizer.Localisation.NumberToWords
             number %= d;
         }
 
-        protected virtual void CollectPartsUnderAHundred(ICollection<string> parts, ref int number, GrammaticalGender gender, bool pluralize)
+        protected virtual void CollectPartsUnderAHundred([NotNull] ICollection<string> parts, ref int number, GrammaticalGender gender, bool pluralize)
         {
             if (number < 20)
             {

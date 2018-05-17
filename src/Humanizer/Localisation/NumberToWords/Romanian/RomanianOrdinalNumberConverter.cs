@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords.Romanian
 {
@@ -100,7 +101,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             }
         }
 
-        private string getPartByGender(string multiGenderPart, GrammaticalGender gender)
+        private string getPartByGender([NotNull] string multiGenderPart, GrammaticalGender gender)
         {
             if (multiGenderPart.Contains("|"))
             {

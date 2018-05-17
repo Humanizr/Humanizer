@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -17,6 +18,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly string[] FeminineOnesGroup = { "", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة" };
 
+        [NotNull]
         public override string Convert(long input, GrammaticalGender gender)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)

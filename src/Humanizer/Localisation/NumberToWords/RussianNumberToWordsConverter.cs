@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Humanizer.Localisation.GrammaticalNumber;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -185,11 +186,12 @@ namespace Humanizer.Localisation.NumberToWords
             return 2;
         }
 
-        private static string ChooseOneForGrammaticalNumber(int number, string[] forms)
+        private static string ChooseOneForGrammaticalNumber(int number, [NotNull] string[] forms)
         {
             return forms[GetIndex(RussianGrammaticalNumberDetector.Detect(number))];
         }
 
+        [NotNull]
         private static string GetEndingForGender(GrammaticalGender gender, int number)
         {
             switch (gender)

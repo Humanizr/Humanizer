@@ -26,6 +26,7 @@ namespace Humanizer.Localisation.CollectionFormatters
             return Humanize(collection, objectFormatter, DefaultSeparator);
         }
 
+        [NotNull]
         [ContractAnnotation("collection:null => halt")]
         public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter)
         {
@@ -49,7 +50,8 @@ namespace Humanizer.Localisation.CollectionFormatters
                 separator);
         }
 
-        public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator)
+        [ContractAnnotation("collection:null => halt; objectFormatter:null => halt")]
+        public string Humanize<T>([NotNull] IEnumerable<T> collection, [NotNull] Func<T, object> objectFormatter, string separator)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             if (objectFormatter == null) throw new ArgumentNullException(nameof(objectFormatter));
@@ -59,7 +61,7 @@ namespace Humanizer.Localisation.CollectionFormatters
                 separator);
         }
 
-        private string HumanizeDisplayStrings(IEnumerable<string> strings, string separator)
+        private string HumanizeDisplayStrings([NotNull] IEnumerable<string> strings, string separator)
         {
             var itemsArray = strings
                 .Select(item => item == null ? string.Empty : item.Trim())

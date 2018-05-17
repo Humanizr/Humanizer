@@ -150,13 +150,14 @@ namespace Humanizer.Inflections
             private readonly Regex _regex;
             private readonly string _replacement;
 
-            public Rule(string pattern, string replacement)
+            public Rule([NotNull] string pattern, string replacement)
             {
                 _regex = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptionsUtil.Compiled);
                 _replacement = replacement;
             }
 
-            public string Apply(string word)
+            [CanBeNull]
+            public string Apply([NotNull] string word)
             {
                 if (!_regex.IsMatch(word))
                     return null;

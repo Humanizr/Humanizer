@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using JetBrains.Annotations;
 
 namespace Humanizer.Inflections
 {
@@ -22,6 +23,7 @@ namespace Humanizer.Inflections
         /// </summary>
         public static Vocabulary Default => Instance.Value;
 
+        [NotNull]
         private static Vocabulary BuildDefault()
         {
             var _default = new Vocabulary();

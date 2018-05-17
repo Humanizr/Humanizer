@@ -20,12 +20,13 @@ namespace Humanizer
             FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
         }
 
-        static string FromUnderscoreDashSeparatedWords (string input)
+        static string FromUnderscoreDashSeparatedWords ([NotNull] string input)
         {
             return string.Join(" ", input.Split(new[] {'_', '-'}));
         }
 
-        static string FromPascalCase(string input)
+        [NotNull]
+        static string FromPascalCase([NotNull] string input)
         {
             var result = string.Join(" ", PascalCaseWordPartsRegex
                 .Matches(input).Cast<Match>()

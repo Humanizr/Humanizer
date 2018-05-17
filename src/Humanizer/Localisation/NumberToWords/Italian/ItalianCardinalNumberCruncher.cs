@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords.Italian
 {
@@ -44,6 +45,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         /// <param name="number">The number to split.</param>
         /// <returns>The sequence of three-digit numbers.</returns>
+        [NotNull]
         protected static List<int> SplitEveryThreeDigits(int number)
         {
             var parts = new List<int>();
@@ -66,6 +68,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// for the next three-digit set.
         /// </summary>
         /// <returns>The next conversion function to use.</returns>
+        [CanBeNull]
         public Func<int, string> GetNextPartConverter()
         {
             Func<int, string> converter;
@@ -109,6 +112,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <param name="number">The three-digit set to convert.</param>
         /// <param name="thisIsLastSet">True if the current three-digit set is the last in the word.</param>
         /// <returns>The same three-digit set expressed as text.</returns>
+        [NotNull]
         protected static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
         {
             if (number == 0) 
@@ -165,6 +169,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         /// <param name="number">The three-digit number, as units, to convert.</param>
         /// <returns>The same three-digit number, as units, expressed as text.</returns>
+        [NotNull]
         protected string UnitsConverter(int number)
         {
             // being a unique case, it's easier to treat unity feminine gender as a completely distinct case
@@ -179,6 +184,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         /// <param name="number">The three-digit number, as thousands, to convert.</param>
         /// <returns>The same three-digit number of thousands expressed as text.</returns>
+        [NotNull]
         protected static string ThousandsConverter(int number)
         {
             if (number == 0) 
@@ -195,6 +201,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         /// <param name="number">The three-digit number, as millions, to convert.</param>
         /// <returns>The same three-digit number of millions expressed as text.</returns>
+        [NotNull]
         protected static string MillionsConverter(int number)
         {
             if (number == 0) 
@@ -211,6 +218,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// </summary>
         /// <param name="number">The three-digit number, as billions, to convert.</param>
         /// <returns>The same three-digit number of billions expressed as text.</returns>
+        [NotNull]
         protected static string BillionsConverter(int number)
         {
             if (number == 1)

@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation
+﻿using JetBrains.Annotations;
+
+namespace Humanizer.Localisation
 {
     public partial class ResourceKeys
     {
@@ -33,6 +35,7 @@
             /// <param name="timeUnitTense">Is time unit in future or past</param>
             /// <param name="count">Number of units, default is One.</param>
             /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
+            [NotNull]
             public static string GetResourceKey(TimeUnit timeUnit, Tense timeUnitTense, int count = 1)
             {
                 ValidateRange(count);

@@ -580,8 +580,8 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <param name="format">The string format to use</param>
         /// <returns></returns>
-        [NotNull]
         [Pure]
+        [NotNull]
         [PublicAPI]
         public static string Humanize(this ByteSize input, [CanBeNull] string format = null)
         {
@@ -595,6 +595,7 @@ namespace Humanizer
         /// <param name="interval">Interval to create rate for</param>
         /// <returns></returns>
         [Pure]
+        [NotNull]
         [PublicAPI]
         public static ByteRate Per(this ByteSize size, TimeSpan interval)
         {

@@ -28,7 +28,6 @@ namespace Humanizer
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
-        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize(this TimeSpan timeSpan, int precision = 1, [CanBeNull] CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, [NotNull] string collectionSeparator = ", ", bool toWords = false)
@@ -47,7 +46,6 @@ namespace Humanizer
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <returns></returns>
-        [Pure]
         [NotNull]
         [PublicAPI]
         public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, [CanBeNull] CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, [NotNull] string collectionSeparator = ", ", bool toWords = false)
@@ -83,6 +81,7 @@ namespace Humanizer
             return timeParts;
         }
 
+        [NotNull]
         private static IEnumerable<TimeUnit> GetEnumTypesForTimeUnit()
         {
             var enumTypeEnumerator = (IEnumerable<TimeUnit>)Enum.GetValues(typeof(TimeUnit));
@@ -183,6 +182,7 @@ namespace Humanizer
             return timeNumberOfUnits;
         }
 
+        [CanBeNull]
         private static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false)
         {
             // Always use positive units to account for negative timespans
@@ -191,16 +191,18 @@ namespace Humanizer
                 : null;
         }
 
+        [NotNull]
         private static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue)
         {
             return new List<string>() { noTimeValue };
         }
 
-        private static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts)
+        private static bool IsContainingOnlyNullValue([NotNull] IEnumerable<string> timeParts)
         {
             return (timeParts.Count(x => x != null) == 0);
         }
 
+        [NotNull]
         private static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
         {
             if (!countEmptyUnits)
@@ -212,7 +214,7 @@ namespace Humanizer
             return timeParts;
         }
 
-        private static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, CultureInfo culture, string collectionSeparator)
+        private static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, CultureInfo culture, [CanBeNull] string collectionSeparator)
         {
             if (collectionSeparator == null)
             {

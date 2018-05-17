@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -118,7 +119,7 @@ namespace Humanizer.Localisation.NumberToWords
             return number.ToString(_culture);
         }
 
-        private void ToBigNumber(int number, Group group, List<string> parts)
+        private void ToBigNumber(int number, Group group, [NotNull] List<string> parts)
         {
             // Big numbers (million and above) always use the masculine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php
@@ -131,7 +132,7 @@ namespace Humanizer.Localisation.NumberToWords
             parts.Add(@group.Humanize());
         }
 
-        private void ToThousands(int number, List<string> parts)
+        private void ToThousands(int number, [NotNull] List<string> parts)
         {
             var thousands = number / (int)Group.Thousands;
 
@@ -145,7 +146,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(Convert(thousands) + " אלף");
         }
 
-        private static void ToHundreds(int number, List<string> parts)
+        private static void ToHundreds(int number, [NotNull] List<string> parts)
         {
             // For hundreds, Hebrew is using the feminine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php

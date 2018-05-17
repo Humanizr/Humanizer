@@ -4,22 +4,24 @@ using JetBrains.Annotations;
 
 namespace Humanizer.Bytes
 {
-
     /// <summary>
     /// Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
     /// </summary>
+    [PublicAPI]
     public class ByteRate
     {
         /// <summary>
         /// Quantity of bytes
         /// </summary>
         /// <returns></returns>
+        [PublicAPI]
         public ByteSize Size { get; private set;}
 
         /// <summary>
         /// Interval that bytes were transferred in
         /// </summary>
         /// <returns></returns>
+        [PublicAPI]
         public TimeSpan Interval { get; private set; }
 
         /// <summary>
@@ -27,6 +29,7 @@ namespace Humanizer.Bytes
         /// </summary>
         /// <param name="size"></param>
         /// <param name="interval"></param>
+        [PublicAPI]
         public ByteRate(ByteSize size, TimeSpan interval)
         {
             this.Size = size;

@@ -1,4 +1,6 @@
-﻿namespace Humanizer
+﻿using JetBrains.Annotations;
+
+namespace Humanizer
 {
     /// <summary>
     /// Gets a ITruncator
@@ -8,6 +10,7 @@
         /// <summary>
         /// Fixed length truncator
         /// </summary>
+        [NotNull]
         public static ITruncator FixedLength
         {
             get
@@ -19,6 +22,7 @@
         /// <summary>
         /// Fixed number of characters truncator
         /// </summary>
+        [NotNull]
         public static ITruncator FixedNumberOfCharacters
         {
             get
@@ -30,6 +34,7 @@
         /// <summary>
         /// Fixed number of words truncator
         /// </summary>
+        [NotNull]
         public static ITruncator FixedNumberOfWords
         {
             get

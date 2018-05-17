@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -96,6 +97,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly char[] EndingCharForSte = {'t', 'g', 'd'};
 
+        [NotNull]
         public override string ConvertToOrdinal(int number)
         {
             var word = Convert(number);

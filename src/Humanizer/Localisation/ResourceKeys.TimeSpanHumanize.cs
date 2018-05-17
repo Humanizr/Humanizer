@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation
+﻿using JetBrains.Annotations;
+
+namespace Humanizer.Localisation
 {
     public partial class ResourceKeys
     {
@@ -20,6 +22,7 @@
             /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
             /// <param name="count">Number of units, default is One.</param>
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
+            [NotNull]
             public static string GetResourceKey(TimeUnit unit, int count = 1)
             {
                 ValidateRange(count);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.Formatters
 {
@@ -89,6 +90,7 @@ namespace Humanizer.Localisation.Formatters
         /// <param name="resourceKey">The resource key.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
+        [NotNull]
         protected virtual string Format(string resourceKey)
         {
             var resourceString = Resources.GetResource(GetResourceKey(resourceKey), _culture);
@@ -107,6 +109,7 @@ namespace Humanizer.Localisation.Formatters
         /// <param name="toWords"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
+        [NotNull]
         protected virtual string Format(string resourceKey, int number, bool toWords = false)
         {
             var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture);

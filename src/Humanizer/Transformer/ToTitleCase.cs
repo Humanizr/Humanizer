@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 
 namespace Humanizer
 {
@@ -23,7 +24,7 @@ namespace Humanizer
             return string.Join(" ", result);
         }
 
-        static bool AllCapitals(string input)
+        static bool AllCapitals([NotNull] string input)
         {
             return input.ToCharArray().All(char.IsUpper);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords.Italian
 {
@@ -12,6 +13,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             _genderSuffix = (gender == GrammaticalGender.Feminine ? "a" : "o");
         }
         
+        [NotNull]
         public string Convert()
         {
             // it's easier to treat zero as a completely distinct case

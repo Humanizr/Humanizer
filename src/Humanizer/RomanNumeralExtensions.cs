@@ -111,7 +111,7 @@ namespace Humanizer
             return sb.ToString();
         }
 
-        private static bool IsInvalidRomanNumeral(string input)
+        private static bool IsInvalidRomanNumeral([NotNull] string input)
         {
             return !ValidRomanNumeral.IsMatch(input);
         }

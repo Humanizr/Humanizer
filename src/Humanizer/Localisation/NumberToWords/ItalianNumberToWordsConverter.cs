@@ -1,5 +1,6 @@
 ﻿using System;
 using Humanizer.Localisation.NumberToWords.Italian;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -21,6 +22,7 @@ namespace Humanizer.Localisation.NumberToWords
             return cruncher.Convert();
         }
 
+        [NotNull]
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             var cruncher = new ItalianOrdinalNumberCruncher(number, gender);

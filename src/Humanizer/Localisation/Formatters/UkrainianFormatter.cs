@@ -1,4 +1,5 @@
 ﻿using Humanizer.Localisation.GrammaticalNumber;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.Formatters
 {
@@ -9,6 +10,7 @@ namespace Humanizer.Localisation.Formatters
         {
         }
 
+        [NotNull]
         protected override string GetResourceKey(string resourceKey, int number)
         {
             var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(number);
@@ -16,6 +18,7 @@ namespace Humanizer.Localisation.Formatters
             return resourceKey + suffix;
         }
 
+        [NotNull]
         private string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
         {
             if (grammaticalNumber == RussianGrammaticalNumber.Singular)

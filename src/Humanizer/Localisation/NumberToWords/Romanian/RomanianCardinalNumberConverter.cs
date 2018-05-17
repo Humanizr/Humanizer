@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Humanizer.Localisation.NumberToWords.Romanian
 {
@@ -140,6 +141,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// </summary>
         /// <param name="number">The number to split.</param>
         /// <returns>The sequence of three-digit numbers.</returns>
+        [NotNull]
         private List<int> SplitEveryThreeDigits(int number)
         {
             var parts = new List<int>();
@@ -162,6 +164,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// to use for the next three-digit set.
         /// </summary>
         /// <returns>The next conversion function to use.</returns>
+        [CanBeNull]
         private Func<int, GrammaticalGender, string> GetNextPartConverter(ThreeDigitSets currentSet)
         {
             Func<int, GrammaticalGender, string> converter;
@@ -202,6 +205,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <param name="thisIsLastSet">True if the current three-digit set is the last in the word.</param>
         /// <returns>The same three-digit set expressed as text.</returns>
+        [NotNull]
         private string ThreeDigitSetConverter(int number, GrammaticalGender gender, bool thisIsLastSet = false)
         {
             if (number == 0)
@@ -245,7 +249,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             return words;
         }
 
-        private string getPartByGender(string multiGenderPart, GrammaticalGender gender)
+        private string getPartByGender([NotNull] string multiGenderPart, GrammaticalGender gender)
         {
             if (multiGenderPart.Contains("|"))
             {
@@ -267,6 +271,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             return (number >= 20);
         }
 
+        [NotNull]
         private string HundredsToText(int hundreds)
         {
             if (hundreds == 0)
@@ -285,6 +290,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// <param name="number">The three-digit number, as units, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number, as units, expressed as text.</returns>
+        [NotNull]
         private string UnitsConverter(int number, GrammaticalGender gender)
         {
             return ThreeDigitSetConverter(number, gender, true);
@@ -297,6 +303,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// <param name="number">The three-digit number, as thousands, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number of thousands expressed as text.</returns>
+        [NotNull]
         private string ThousandsConverter(int number, GrammaticalGender gender)
         {
             if (number == 0)
@@ -327,6 +334,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// <param name="number">The three-digit number, as millions, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number of millions expressed as text.</returns>
+        [NotNull]
         private string MillionsConverter(int number, GrammaticalGender gender)
         {
             if (number == 0)
@@ -345,6 +353,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// <param name="number">The three-digit number, as billions, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number of billions expressed as text.</returns>
+        [NotNull]
         private string BillionsConverter(int number, GrammaticalGender gender)
         {
             if (number == 1)
