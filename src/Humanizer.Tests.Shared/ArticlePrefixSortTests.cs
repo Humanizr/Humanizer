@@ -7,7 +7,7 @@ namespace Humanizer.Tests
     {
         [Theory]
         [InlineData(new string[] { "an ant", "The Theater", "The apple", "Fox", "Bear" }, new string[] { "an ant", "The apple", "Bear", "Fox", "The Theater" })]
-        public void Test1(string[] input, string[] expectedOutput)
+        public void SortStringArrayIgnoringArticlePrefixes(string[] input, string[] expectedOutput)
         {
             Assert.Equal(expectedOutput, EnglishArticle.PrependArticleSuffix(EnglishArticle.AppendArticlePrefix(input)));
         }
