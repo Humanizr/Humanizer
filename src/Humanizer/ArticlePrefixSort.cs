@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace Humanizer
 {
     /// <summary>
-    /// 
+    /// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
     /// </summary>
     public static class EnglishArticle
     {
