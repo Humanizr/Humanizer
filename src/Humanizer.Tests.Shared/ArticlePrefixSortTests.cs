@@ -6,7 +6,7 @@ namespace Humanizer.Tests
     public class ArticlePrefixSortTests
     {
         [Theory]
-        [InlineData(new string[] { "an ant", "The Theater", "The apple", "Fox", "Bear" }, new string[] { "an ant", "The apple", "Bear", "Fox", "The Theater" })]
+        [InlineData(new string[] { "Ant", "The Theater", "The apple", "Fox", "Bear" }, new string[] { "Ant", "The apple", "Bear", "Fox", "The Theater" })]
         public void SortStringArrayIgnoringArticlePrefixes(string[] input, string[] expectedOutput)
         {
             Assert.Equal(expectedOutput, EnglishArticle.PrependArticleSuffix(EnglishArticle.AppendArticlePrefix(input)));
