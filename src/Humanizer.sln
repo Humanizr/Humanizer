@@ -22,7 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D-0488-42AE-A585-86D882F23D5F}"
 	ProjectSection(SolutionItems) = preProject
 		..\build.cmd = ..\build.cmd
-		..\build.proj = ..\build.proj
 		Humanizer.ruleset = Humanizer.ruleset
 	EndProjectSection
 EndProject

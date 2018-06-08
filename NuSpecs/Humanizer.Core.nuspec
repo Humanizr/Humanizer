@@ -13,14 +13,17 @@
     <copyright>Copyright 2012-2016</copyright>
     <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
     <language>en</language>
+    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <dependencies>
       <group targetFramework="portable-net45+win8+wpa81+wp8" />
       <group targetFramework="netstandard1.0">
         <dependency id="NETStandard.Library" version="1.6.1" />
       </group>
+      <group targetFramework="netstandard2.0" />
     </dependencies>
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\netstandard1.0\*.dll" target="lib\netstandard1.0" />
+    <file src="Humanizer\bin\Release\netstandard2.0\*.dll" target="lib\netstandard2.0" />
   </files>
 </package>

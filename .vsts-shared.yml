@@ -31,9 +31,10 @@ steps:
     # version    
     nuget install NerdBank.GitVersioning -SolutionDir $(Build.SourcesDirectory) -Verbosity quiet -ExcludeVersion    
     $vers = & $(Build.SourcesDirectory)\packages\nerdbank.gitversioning\tools\Get-Version.ps1
-    $nugetVer = $vers.NuGetPackageVersion       
+    $nugetVer = $vers.NuGetPackageVersion  
+    $commitId = $vers.GitCommitId 
     
-    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages }
+    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages -Properties RepositoryType=git;RepositoryUrl=https://github.com/Humanizr/Humanizer;RepositoryCommit=$commitId}
   displayName: Create packages
   
 - task: DotNetCoreCLI@2
