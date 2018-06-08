@@ -18,7 +18,7 @@ namespace Humanizer
             if (items.Length == 0)
                 throw new ArgumentOutOfRangeException(nameof(items));
 
-            Regex regex = new Regex("^((The)|(the)|(a)|(A)|(An)|(an))");
+            Regex regex = new Regex("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+");
             string[] transformed = new string[items.Length];
             string article, removed, appended;
 
