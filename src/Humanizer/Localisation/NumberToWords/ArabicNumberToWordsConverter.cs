@@ -17,16 +17,12 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly string[] FeminineOnesGroup = { "", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة" };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long number, GrammaticalGender gender)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
-
             if (number == 0)
                 return "صفر";
+            if (number < 0)
+                return string.Format("ناقص {0}", Convert(-number, gender));
 
             var result = string.Empty;
             var groupLevel = 0;
