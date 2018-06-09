@@ -24,6 +24,8 @@ namespace Humanizer.Configuration
             Register("he", (culture) => new HebrewNumberToWordsConverter(culture));
             Register("sl", (culture) => new SlovenianNumberToWordsConverter(culture));
             Register("de", new GermanNumberToWordsConverter());
+            Register("de-CH", new GermanSwissLiechtensteinNumberToWordsConverter());
+            Register("de-LI", new GermanSwissLiechtensteinNumberToWordsConverter());
             Register("bn-BD", new BanglaNumberToWordsConverter());
             Register("tr", new TurkishNumberToWordConverter());
             Register("it", new ItalianNumberToWordsConverter());
