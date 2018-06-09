@@ -14,8 +14,8 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <PackageReference Include="ApiApprover" Version="5.0.0" />
-    <PackageReference Include="ApprovalTests" Version="3.0.13" />
+    <PackageReference Include="PublicApiGenerator" Version="7.0.1" />
+    <PackageReference Include="ApiApprover" Version="7.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Humanizer.Tests.Shared\**\*.cs">
