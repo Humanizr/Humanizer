@@ -10,9 +10,9 @@ steps:
   displayName: Setup Environment Variables
 
 - task: NuGetToolInstaller@0
-  displayName: Use NuGet 4.6.2
+  displayName: Use NuGet 4.7.0
   inputs:
-    versionSpec: 4.6.2
+    versionSpec: 4.7.0
 
 - task: DotNetCoreCLI@2
   inputs:
