@@ -1,9 +1,9 @@
 ﻿#if NET46
-using System.IO;
-using ApiApprover;
+using System;
+using System.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
-using Mono.Cecil;
+using PublicApiGenerator;
 using Xunit;
 
 namespace Humanizer.Tests.ApiApprover
@@ -17,20 +17,23 @@ namespace Humanizer.Tests.ApiApprover
         [IgnoreLineEndings(true)]
         public void approve_public_api()
         {
-            var assemblyPath = typeof(StringHumanizeExtensions).Assembly.Location;
 
-            var assemblyResolver = new DefaultAssemblyResolver();
-            assemblyResolver.AddSearchDirectory(Path.GetDirectoryName(assemblyPath));
-
-            var readSymbols = File.Exists(Path.ChangeExtension(assemblyPath, ".pdb"));
-            var asm = AssemblyDefinition.ReadAssembly(assemblyPath, new ReaderParameters(ReadingMode.Deferred)
-            {
-                ReadSymbols = readSymbols,
-                AssemblyResolver = assemblyResolver
-            });
-
-            var publicApi = PublicApiGenerator.CreatePublicApiForAssembly(asm);
+            var publicApi = Filter(ApiGenerator.GeneratePublicApi(typeof(StringHumanizeExtensions).Assembly));
             Approvals.Verify(publicApi);
+        }
+
+        private static string Filter(string text)
+        {
+            return string.Join(Environment.NewLine, text.Split(new[]
+                                                        {
+                                                            Environment.NewLine
+                                                        }, StringSplitOptions.RemoveEmptyEntries)
+                                                        .Where(l => !l.StartsWith("[assembly: AssemblyVersion("))
+                                                        .Where(l => !l.StartsWith("[assembly: AssemblyFileVersion("))
+                                                        .Where(l => !l.StartsWith("[assembly: AssemblyInformationalVersion("))
+                                                        .Where(l => !l.StartsWith("[assembly: System.Reflection.AssemblyMetadataAttribute(\"CommitHash\""))
+                                                        .Where(l => !string.IsNullOrWhiteSpace(l))
+            );
         }
     }
 }
