@@ -164,6 +164,12 @@ namespace Humanizer
         Feminine = 1,
         Neuter = 2,
     }
+    public class static HeadingExtensions
+    {
+        public static double FromShortHeading(this string heading) { }
+        public static string ToHeading(this double heading, bool shortResult = False, System.Globalization.CultureInfo culture = null) { }
+        public static char ToHeadingArrow(this double heading) { }
+    }
     public class In
     {
         public In() { }
