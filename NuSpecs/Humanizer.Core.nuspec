@@ -15,7 +15,6 @@
     <language>en</language>
     <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <dependencies>
-      <group targetFramework="portable-net45+win8+wpa81+wp8" />
       <group targetFramework="netstandard1.0">
         <dependency id="NETStandard.Library" version="1.6.1" />
       </group>
