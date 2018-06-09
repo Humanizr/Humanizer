@@ -42,6 +42,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Roman numerals](#roman-numerals)
    - [Metric numerals](#metric-numerals)
    - [ByteSize](#bytesize)
+   - [Heading to words](#heading-to-words)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life) - 
  - [How to contribute?](#how-to-contribute)
  - [Continuous Integration from AppVeyor](#continuous-integration)
@@ -1031,6 +1032,49 @@ You can specify a format for the bytes part of the humanized output:
 ```
 19854651984.Bytes().Per(1.Seconds()).Humanize("#.##");
 // 18.49 GB/s
+```
+
+### <a id="heading-to-words">Heading to words</a>
+Humanizer includes methods to change a numeric heading to words. The heading can be a `double` whereas the result will be a string. You can choose whether to return a full representation of the heading (e.g. north, east, south or west), a short representation (e.g. N, E, S, W) or a unicode arrow character (e.g. ↑, →, ↓, ←).
+
+```C#
+360.ToHeading();
+// north
+720.ToHeading();
+// north
+```
+
+In order to retrieve a short version of the heading you can use the following call:
+
+```C#
+180.ToHeading(true);
+// S
+360.ToHeading(true);
+// N
+```
+
+Please note that a textual representation has a maximum deviation of 11.25°.
+
+The methods above all have an overload with which you can provide a `CultureInfo` object in order to determine the localized result to return.
+
+To retrieve an arrow representing the heading use the following method:
+
+```C#
+90.ToHeadingArrow();
+// →
+225.ToHeadingArrow();
+// ↙
+```
+
+The arrow representation of the heading has a maximum deviation of 22.5°.
+
+In order to retrieve a heading based on the short text representation (e.g. N, E, S, W), the following method can be used:
+
+```C#
+"S".FromShortHeading();
+// 180
+"SW".FromShortHeading();
+// 225
 ```
 
 ## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>

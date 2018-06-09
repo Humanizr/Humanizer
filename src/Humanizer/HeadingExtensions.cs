@@ -50,7 +50,7 @@ namespace Humanizer
         /// </summary>
         /// <returns>The heading. -1 if the heading could not be parsed.</returns>
         public static double FromShortHeading(this string heading) {
-            var index = Array.IndexOf(headings, heading);
+            var index = Array.IndexOf(headings, heading.ToUpperInvariant());
 
             if (index == -1) return -1;
 
