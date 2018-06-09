@@ -12,12 +12,13 @@
     <description>Humanizer Locale (el)</description>
     <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
     <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
+    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <language>el</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\netstandard1.0\el\*.*" target="lib\netstandard1.0\el" />
+    <file src="Humanizer\bin\Release\netstandard2.0\el\*.*" target="lib\netstandard2.0\el" />
   </files>
 </package>
