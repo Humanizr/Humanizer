@@ -10,9 +10,9 @@ steps:
   displayName: Setup Environment Variables
 
 - task: NuGetToolInstaller@0
-  displayName: Use NuGet 4.6.2
+  displayName: Use NuGet 4.7.0
   inputs:
-    versionSpec: 4.6.2
+    versionSpec: 4.7.0
 
 - task: DotNetCoreCLI@2
   inputs:
@@ -23,18 +23,18 @@ steps:
   condition: eq(variables['system.pullrequest.isfork'], false)
 
 - powershell: |    
-    mkdir $(Build.ArtifactStagingDirectory)\Logs
     mkdir $(Build.ArtifactStagingDirectory)\Packages
-    msbuild .\src\Humanizer.sln /restore /m /bl:$(Build.ArtifactStagingDirectory)\Logs\restore.binlog /p:Configuration=$(BuildConfiguration)
+    msbuild .\src\Humanizer.sln /restore /m /p:Configuration=$(BuildConfiguration)
   displayName: Build
   
 - powershell: |
     # version    
     nuget install NerdBank.GitVersioning -SolutionDir $(Build.SourcesDirectory) -Verbosity quiet -ExcludeVersion    
     $vers = & $(Build.SourcesDirectory)\packages\nerdbank.gitversioning\tools\Get-Version.ps1
-    $nugetVer = $vers.NuGetPackageVersion       
+    $nugetVer = $vers.NuGetPackageVersion  
+    $commitId = $vers.GitCommitId 
     
-    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages }
+    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages -Properties "RepositoryType=git;RepositoryCommit=$commitId;RepositoryUrl=https://github.com/Humanizr/Humanizer"}
   displayName: Create packages
   
 - task: DotNetCoreCLI@2
@@ -53,11 +53,4 @@ steps:
     artifactType: container
     artifactName: Packages
   condition: eq(variables['system.pullrequest.isfork'], false)
-
-- task: PublishBuildArtifacts@1
-  displayName: Publish Log Artifacts
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)\Logs
-    artifactType: container
-    artifactName: Logs
-  condition: eq(variables['system.pullrequest.isfork'], false)
+  
