@@ -1014,6 +1014,21 @@ namespace Humanizer
         public static Humanizer.ITruncator FixedNumberOfCharacters { get; }
         public static Humanizer.ITruncator FixedNumberOfWords { get; }
     }
+    public enum EnglishArticles
+    {
+        a,
+        an,
+        the,
+        A,
+        An,
+        The
+    }
+    public static class EnglishArticle
+    {
+        public static string[] AppendArticlePrefix(string[] items) { }
+        public static string[] PrependArticleSuffix(string[] appended) { }
+        private static string ToOriginalFormat(string[] appended, string suffix, int i) { }
+    }
 }
 namespace Humanizer.Configuration
 {
