@@ -20,15 +20,14 @@ namespace Humanizer
 
             Regex regex = new Regex("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+");
             string[] transformed = new string[items.Length];
-            string article, removed, appended;
 
-            for (int i = 0; i < items.Length; i++)
+            for (var i = 0; i < items.Length; i++)
             {
                 if (regex.IsMatch(items[i]))
                 {
-                    article = items[i].Substring(0, items[i].IndexOf(" "));
-                    removed = items[i].Remove(0, items[i].IndexOf(" "));
-                    appended = $"{removed} {article}";
+                    string article = items[i].Substring(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
+                    string removed = items[i].Remove(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
+                    string appended = $"{removed} {article}";
                     transformed[i] = appended.Trim();
                 }
                 else
@@ -48,43 +47,44 @@ namespace Humanizer
         public static string[] PrependArticleSuffix(string[] appended)
         {
             string[] inserted = new string[appended.Length];
-            string suffix, original;
 
             for (int i = 0; i < appended.Length; i++)
             {
+                string suffix;
+                string original;
                 if (appended[i].EndsWith(EnglishArticles.The.ToString()))
                 {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" The"));
+                    suffix = appended[i].Substring(appended[i].IndexOf(" The", StringComparison.CurrentCulture));
                     original = ToOriginalFormat(appended, suffix, i);
                     inserted[i] = original;
                 }
                 else if (appended[i].EndsWith(EnglishArticles.A.ToString()))
                 {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" A"));
+                    suffix = appended[i].Substring(appended[i].IndexOf(" A", StringComparison.CurrentCulture));
                     original = ToOriginalFormat(appended, suffix, i);
                     inserted[i] = original;
                 }
                 else if (appended[i].EndsWith(EnglishArticles.An.ToString()))
                 {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" An"));
+                    suffix = appended[i].Substring(appended[i].IndexOf(" An", StringComparison.CurrentCulture));
                     original = ToOriginalFormat(appended, suffix, i);
                     inserted[i] = original;
                 }
-                else if (appended[i].EndsWith(EnglishArticles.a.ToString()))
+                else if (appended[i].EndsWith(EnglishArticles.A.ToString().ToLowerInvariant()))
                 {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" a"));
+                    suffix = appended[i].Substring(appended[i].IndexOf(" a", StringComparison.CurrentCulture));
                     original = ToOriginalFormat(appended, suffix, i);
                     inserted[i] = original;
                 }
-                else if (appended[i].EndsWith(EnglishArticles.an.ToString()))
+                else if (appended[i].EndsWith(EnglishArticles.An.ToString().ToLowerInvariant()))
                 {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" an"));
+                    suffix = appended[i].Substring(appended[i].IndexOf(" an", StringComparison.CurrentCulture));
                     original = ToOriginalFormat(appended, suffix, i);
                     inserted[i] = original;
                 }
-                else if (appended[i].EndsWith(EnglishArticles.the.ToString()))
+                else if (appended[i].EndsWith(EnglishArticles.The.ToString().ToLowerInvariant()))
                 {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" the"));
+                    suffix = appended[i].Substring(appended[i].IndexOf(" the", StringComparison.CurrentCulture));
                     original = ToOriginalFormat(appended, suffix, i);
                     inserted[i] = original;
                 }
@@ -98,7 +98,7 @@ namespace Humanizer
 
         private static string ToOriginalFormat(string[] appended, string suffix, int i)
         {
-            string insertion = appended[i].Remove(appended[i].IndexOf(suffix));
+            string insertion = appended[i].Remove(appended[i].IndexOf(suffix, StringComparison.CurrentCulture));
             string original = $"{suffix} {insertion}";
             return original.Trim();
         }
