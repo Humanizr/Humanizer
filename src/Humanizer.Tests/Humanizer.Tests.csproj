@@ -23,7 +23,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PublicApiApprovalTest.approve_public_api.approved.txt">
+    <Content Include="ApiApprover\PublicApiApprovalTest.approve_public_api.approved.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="xunit.runner.json">
