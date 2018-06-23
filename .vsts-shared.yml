@@ -27,15 +27,10 @@ steps:
   displayName: Build  
   
 - powershell: |
-    mkdir $(Build.ArtifactStagingDirectory)\Packages
-    # version    
-    nuget install NerdBank.GitVersioning -SolutionDir $(Build.SourcesDirectory) -Verbosity quiet -ExcludeVersion    
-    $vers = & $(Build.SourcesDirectory)\packages\nerdbank.gitversioning\tools\Get-Version.ps1
-    $nugetVer = $vers.NuGetPackageVersion  
-    $commitId = $vers.GitCommitId 
-    
-    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$nugetVer" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages -Properties "RepositoryType=git;RepositoryCommit=$commitId;RepositoryUrl=https://github.com/Humanizr/Humanizer"}
+    mkdir $(Build.ArtifactStagingDirectory)\Packages     
+    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$(NBGV_NuGetPackageVersion)" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages -Properties "RepositoryType=git;RepositoryCommit=$(NBGV_GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer"}
   displayName: Create packages
+  condition: eq(variables['system.pullrequest.isfork'], false)
   
 - task: DotNetCoreCLI@2
   inputs:
