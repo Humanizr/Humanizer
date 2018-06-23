@@ -2,12 +2,9 @@ parameters:
   signSteps: []
   
 steps:
-- task: BatchScript@1
+- task: DotNetCoreInstaller@0
   inputs:
-    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
-    arguments: -no_logo
-    modifyEnvironment: true
-  displayName: Setup Environment Variables
+    version: '2.1.400-preview-008975'
 
 - task: NuGetToolInstaller@0
   displayName: Use NuGet 4.7.0
@@ -21,13 +18,16 @@ steps:
     arguments: -c $(BuildConfiguration)   
   displayName: Set Version
   condition: eq(variables['system.pullrequest.isfork'], false)
-
-- powershell: |    
-    mkdir $(Build.ArtifactStagingDirectory)\Packages
-    msbuild .\src\Humanizer.sln /restore /m /p:Configuration=$(BuildConfiguration)
-  displayName: Build
+ 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+    projects: .\src\Humanizer.sln
+    arguments: -c $(BuildConfiguration)   
+  displayName: Build  
   
 - powershell: |
+    mkdir $(Build.ArtifactStagingDirectory)\Packages
     # version    
     nuget install NerdBank.GitVersioning -SolutionDir $(Build.SourcesDirectory) -Verbosity quiet -ExcludeVersion    
     $vers = & $(Build.SourcesDirectory)\packages\nerdbank.gitversioning\tools\Get-Version.ps1
@@ -41,7 +41,7 @@ steps:
   inputs:
     command: test
     projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-    arguments: -c $(BuildConfiguration)   
+    arguments: -c $(BuildConfiguration) --collect:"Code Coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings /p:DebugType=portable
   displayName: Run Tests
   
 - ${{ parameters.signSteps }}
