@@ -5,9 +5,6 @@
     /// </summary>
     public enum EnglishArticles
     {
-        a,
-        an,
-        the,
         A,
         An,
         The

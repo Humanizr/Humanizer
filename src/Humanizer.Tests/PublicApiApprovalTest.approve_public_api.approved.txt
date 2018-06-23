@@ -138,6 +138,17 @@ namespace Humanizer
         public static string ToOrdinalWords(this System.DateTime input) { }
         public static string ToOrdinalWords(this System.DateTime input, Humanizer.GrammaticalCase grammaticalCase) { }
     }
+    public class static EnglishArticle
+    {
+        public static string[] AppendArticlePrefix(string[] items) { }
+        public static string[] PrependArticleSuffix(string[] appended) { }
+    }
+    public enum EnglishArticles
+    {
+        A = 0,
+        An = 1,
+        The = 2,
+    }
     public class static EnumDehumanizeExtensions
     {
         public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
@@ -1013,21 +1024,6 @@ namespace Humanizer
         public static Humanizer.ITruncator FixedLength { get; }
         public static Humanizer.ITruncator FixedNumberOfCharacters { get; }
         public static Humanizer.ITruncator FixedNumberOfWords { get; }
-    }
-    public enum EnglishArticles
-    {
-        a,
-        an,
-        the,
-        A,
-        An,
-        The
-    }
-    public static class EnglishArticle
-    {
-        public static string[] AppendArticlePrefix(string[] items) { }
-        public static string[] PrependArticleSuffix(string[] appended) { }
-        private static string ToOriginalFormat(string[] appended, string suffix, int i) { }
     }
 }
 namespace Humanizer.Configuration
