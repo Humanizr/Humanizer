@@ -1,9 +1,7 @@
 ﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
 [assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETStandard,Version=v1.0", FrameworkDisplayName="")]
-
 namespace Humanizer.Bytes
 {
-    
     public class ByteRate
     {
         public ByteRate(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
@@ -65,7 +63,6 @@ namespace Humanizer.Bytes
 }
 namespace Humanizer
 {
-    
     public class static ByteSizeExtensions
     {
         public static Humanizer.Bytes.ByteSize Bits(this byte input) { }
@@ -1024,7 +1021,6 @@ namespace Humanizer
 }
 namespace Humanizer.Configuration
 {
-    
     public class static Configurator
     {
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
@@ -1049,7 +1045,6 @@ namespace Humanizer.Configuration
 }
 namespace Humanizer.DateTimeHumanizeStrategy
 {
-    
     public class DefaultDateTimeHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
     {
         public DefaultDateTimeHumanizeStrategy() { }
@@ -1081,7 +1076,6 @@ namespace Humanizer.DateTimeHumanizeStrategy
 }
 namespace Humanizer.Inflections
 {
-    
     public class static Vocabularies
     {
         public static Humanizer.Inflections.Vocabulary Default { get; }
@@ -1098,7 +1092,6 @@ namespace Humanizer.Inflections
 }
 namespace Humanizer.Localisation.CollectionFormatters
 {
-    
     public interface ICollectionFormatter
     {
         string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection);
@@ -1111,7 +1104,6 @@ namespace Humanizer.Localisation.CollectionFormatters
 }
 namespace Humanizer.Localisation.DateToOrdinalWords
 {
-    
     public interface IDateToOrdinalWordConverter
     {
         string Convert(System.DateTime date);
@@ -1120,7 +1112,6 @@ namespace Humanizer.Localisation.DateToOrdinalWords
 }
 namespace Humanizer.Localisation.Formatters
 {
-    
     public class DefaultFormatter : Humanizer.Localisation.Formatters.IFormatter
     {
         public DefaultFormatter(string localeCode) { }
@@ -1145,7 +1136,6 @@ namespace Humanizer.Localisation.Formatters
 }
 namespace Humanizer.Localisation.NumberToWords
 {
-    
     public interface INumberToWordsConverter
     {
         string Convert(long number);
@@ -1156,7 +1146,6 @@ namespace Humanizer.Localisation.NumberToWords
 }
 namespace Humanizer.Localisation.Ordinalizers
 {
-    
     public interface IOrdinalizer
     {
         string Convert(int number, string numberString);
@@ -1165,7 +1154,6 @@ namespace Humanizer.Localisation.Ordinalizers
 }
 namespace Humanizer.Localisation
 {
-    
     public class ResourceKeys
     {
         public ResourceKeys() { }
