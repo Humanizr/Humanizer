@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Humanizer.Localisation.NumberToWords;
+using Xunit;
 
 namespace Humanizer.Tests.Localisation.ar
 {
@@ -19,6 +20,47 @@ namespace Humanizer.Tests.Localisation.ar
         }
 
         [Theory]
+        [InlineData("ناقص واحد", -1)]
+        [InlineData("ناقص اثنان", -2)]
+        [InlineData("ناقص اثنان و عشرون", -22)]
+        [InlineData("ناقص أحد عشر", -11)]
+        [InlineData("ناقص ثلاثة آلاف و خمس مئة و واحد", -3501)]
+        [InlineData("ناقص مليون و واحد", -1000001)]
+        public void ToWordsArabicNegative(string expected, int number)
+        {
+            Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(1L, "واحد")]
+        [InlineData(11L, "أحد عشر")]
+        [InlineData(111L, "مئة و أحد عشر")]
+        [InlineData(1111L, "ألف و مئة و أحد عشر")]
+        [InlineData(11111L, "أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(111111L, "مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(1111111L, "مليون و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(11111111L, "أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(111111111L, "مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(1111111111L, "مليار و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(11111111111L, "أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(111111111111L, "مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(1111111111111L, "تريليون و مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(11111111111111L, "أحد عشر تريليوناً و مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(111111111111111L, "مئة و أحد عشر تريليوناً و مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(1111111111111111L, "كوادريليون و مئة و أحد عشر تريليوناً و مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(11111111111111111L, "أحد عشر كوادريليوناً و مئة و أحد عشر تريليوناً و مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(111111111111111111L, "مئة و أحد عشر كوادريليوناً و مئة و أحد عشر تريليوناً و مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(1111111111111111111L, "كوينتليون و مئة و أحد عشر كوادريليوناً و مئة و أحد عشر تريليوناً و مئة و أحد عشر ملياراً و مئة و أحد عشر مليوناً و مئة و أحد عشر ألفاً و مئة و أحد عشر")]
+        [InlineData(10000000001L, "عشرة مليارات و واحد")]
+        [InlineData(8750000500001L, "ثمانية تريليونات و سبع مئة و خمسون ملياراً و خمس مئة ألفاً و واحد")]
+        [InlineData(-10000000001L, "ناقص عشرة مليارات و واحد")]
+        [InlineData(-8750000500001L, "ناقص ثمانية تريليونات و سبع مئة و خمسون ملياراً و خمس مئة ألفاً و واحد")]
+        public void ToWordsArabicLong(long number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
         [InlineData("صفر", 0)]
         [InlineData("واحدة", 1)]
         [InlineData("اثنتان", 2)]
@@ -26,7 +68,15 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData("إحدى عشرة", 11)]
         [InlineData("ثلاثة آلاف و خمس مئة و واحدة", 3501)]
         [InlineData("مليون و واحدة", 1000001)]
-        public void ToWordsArabicFeminine(string expected, int number)
+        public void ToWordsArabicFeminine(string expected, long number)
+        {
+            Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
+        }
+
+        [Theory]
+        [InlineData("عشرة مليارات و واحدة", 10000000001)]
+        [InlineData("ثمانية تريليونات و سبع مئة و خمسون ملياراً و خمس مئة ألفاً و واحدة", 8750000500001)]
+        public void ToWordsArabicLongFeminine(string expected, long number)
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
@@ -35,7 +85,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(122, "مئة و اثنتان و عشرون", GrammaticalGender.Feminine)]
         [InlineData(3501, "ثلاثة آلاف و خمس مئة و واحدة", GrammaticalGender.Feminine)]
         [InlineData(3501, "ثلاثة آلاف و خمس مئة و واحد", GrammaticalGender.Neuter)]
-        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
+        public void ToWordsWithGender(long number, string expected, GrammaticalGender gender)
         {
             Assert.Equal(expected, number.ToWords(gender));
         }
