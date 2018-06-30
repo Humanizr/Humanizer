@@ -3,11 +3,11 @@
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information. 
 
+using System.IO;
 using ApprovalTests.Core;
 using DiffPlex;
 using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
-using System.IO;
 using Xunit.Abstractions;
 
 namespace Humanizer.Tests.ApiApprover
@@ -28,7 +28,10 @@ namespace Humanizer.Tests.ApiApprover
 
             foreach (var line in diff.Lines)
             {
-                if (line.Type == ChangeType.Unchanged) continue;
+                if (line.Type == ChangeType.Unchanged)
+                {
+                    continue;
+                }
 
                 var prefix = "  ";
                 switch (line.Type)

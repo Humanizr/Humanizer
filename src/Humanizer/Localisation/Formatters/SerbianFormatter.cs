@@ -13,9 +13,11 @@
         {
             var mod10 = number % 10;
 
-            if (mod10 > 1 && mod10 < 5)            
+            if (mod10 > 1 && mod10 < 5)
+            {
                 return resourceKey + PaucalPostfix;
-            
+            }
+
             return resourceKey;
         }
     }

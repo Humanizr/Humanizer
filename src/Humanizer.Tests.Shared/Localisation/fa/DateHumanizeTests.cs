@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.fa
 {
     [UseCulture("fa")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
         [Theory]
         [InlineData(1, "فردا")]
@@ -49,7 +49,7 @@ namespace Humanizer.Tests.Localisation.fa
         [Theory]
         [InlineData(-1, "یک دقیقه پیش")]
         [InlineData(-13, "13 دقیقه پیش")]
-        [InlineData(60,"یک ساعت پیش")]
+        [InlineData(60, "یک ساعت پیش")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);

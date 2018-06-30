@@ -22,7 +22,9 @@ namespace Humanizer
             var comparisonBase = dateToCompareAgainst ?? DateTime.UtcNow;
 
             if (!utcDate)
+            {
                 comparisonBase = comparisonBase.ToLocalTime();
+            }
 
             return Configurator.DateTimeHumanizeStrategy.Humanize(input, comparisonBase, culture);
         }
@@ -38,11 +40,15 @@ namespace Humanizer
         public static string Humanize(this DateTime? input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
         {
             if (input.HasValue)
+            {
                 return Humanize(input.Value, utcDate, dateToCompareAgainst, culture);
+            }
             else
-                return Configurator.GetFormatter(culture).DateHumanize_Never();            
+            {
+                return Configurator.GetFormatter(culture).DateHumanize_Never();
+            }
         }
-        
+
         /// <summary>
         /// Turns the current or provided date into a human readable sentence
         /// </summary>
@@ -67,9 +73,13 @@ namespace Humanizer
         public static string Humanize(this DateTimeOffset? input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
         {
             if (input.HasValue)
+            {
                 return Humanize(input.Value, dateToCompareAgainst, culture);
+            }
             else
+            {
                 return Configurator.GetFormatter(culture).DateHumanize_Never();
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.pt
 {
     [UseCulture("pt")]
-    public class OrdinalizeTests 
+    public class OrdinalizeTests
     {
 
         [Theory]

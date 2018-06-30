@@ -31,7 +31,7 @@ namespace Humanizer
                 { "I",  1 }
             };
 
-        private static readonly Regex ValidRomanNumeral = 
+        private static readonly Regex ValidRomanNumeral =
             new Regex(
                 "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
                 RegexOptionsUtil.Compiled);
@@ -44,17 +44,21 @@ namespace Humanizer
         public static int FromRoman(this string input)
         {
             if (input == null)
+            {
                 throw new ArgumentNullException(nameof(input));
+            }
 
             input = input.Trim().ToUpperInvariant();
 
             var length = input.Length;
 
             if ((length == 0) || IsInvalidRomanNumeral(input))
+            {
                 throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(input));
+            }
 
             var total = 0;
-            var i     = length;
+            var i = length;
 
             while (i > 0)
             {
@@ -84,12 +88,14 @@ namespace Humanizer
         /// <returns>Roman number</returns>
         public static string ToRoman(this int input)
         {
-            const int minValue              = 1;
-            const int maxValue              = 3999;
+            const int minValue = 1;
+            const int maxValue = 3999;
             const int maxRomanNumeralLength = 15;
 
             if ((input < minValue) || (input > maxValue))
+            {
                 throw new ArgumentOutOfRangeException();
+            }
 
             var sb = new StringBuilder(maxRomanNumeralLength);
 

@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.ptBR
 {
     [UseCulture("pt-BR")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]

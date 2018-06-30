@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.it
 {
     [UseCulture("it")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]
@@ -161,7 +161,7 @@ namespace Humanizer.Tests.Localisation.it
         {
             Assert.Equal(expected, number.ToOrdinalWords());
         }
-        
+
         [Theory]
         [InlineData(0, "zero")]
         [InlineData(1, "prima")]

@@ -3,9 +3,9 @@
 namespace Humanizer.Tests.Localisation.uzLatn
 {
     [UseCulture("uz-Latn-UZ")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
-        
+
         [Theory]
         [InlineData(0, "nol")]
         [InlineData(1, "bir")]

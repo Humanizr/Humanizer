@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
-    public class OrdinalizeTests 
+    public class OrdinalizeTests
     {
 
         [Theory]

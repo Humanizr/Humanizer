@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
+    internal abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
         private readonly string[] UnitsMap = { "null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn" };
         private readonly string[] TensMap = { "null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig" };
@@ -20,7 +20,9 @@ namespace Humanizer.Localisation.NumberToWords
         public override string Convert(long number, GrammaticalGender gender)
         {
             if (number == 0)
+            {
                 return UnitsMap[number];
+            }
 
             var parts = new List<string>();
             if (number < 0)
@@ -42,15 +44,21 @@ namespace Humanizer.Localisation.NumberToWords
                 if (number < 20)
                 {
                     if (number == 1 && gender == GrammaticalGender.Feminine)
+                    {
                         parts.Add("eine");
+                    }
                     else
+                    {
                         parts.Add(UnitsMap[number]);
+                    }
                 }
                 else
                 {
                     var units = number % 10;
                     if (units > 0)
+                    {
                         parts.Add(string.Format("{0}und", UnitsMap[units]));
+                    }
 
                     parts.Add(GetTens(number / 10));
                 }
@@ -62,7 +70,9 @@ namespace Humanizer.Localisation.NumberToWords
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             if (number == 0)
+            {
                 return UnitsMap[number] + GetEndingForGender(gender);
+            }
 
             var parts = new List<string>();
             if (number < 0)
@@ -77,10 +87,14 @@ namespace Humanizer.Localisation.NumberToWords
             CollectOrdinalParts(parts, ref number, 100, false, HundredOrdinalPlural, HundredOrdinalSingular);
 
             if (number > 0)
+            {
                 parts.Add(number < 20 ? UnitsOrdinal[number] : Convert(number));
+            }
 
             if (number == 0 || number >= 20)
+            {
                 parts.Add("s");
+            }
 
             parts.Add(GetEndingForGender(gender));
 
@@ -94,7 +108,9 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(Part(pluralFormat, singular, number / divisor));
                 number %= divisor;
                 if (addSpaceBeforeNextPart && number > 0)
+                {
                     parts.Add(" ");
+                }
             }
         }
 
@@ -111,7 +127,10 @@ namespace Humanizer.Localisation.NumberToWords
         private string Part(string pluralFormat, string singular, long number)
         {
             if (number == 1)
+            {
                 return singular;
+            }
+
             return string.Format(pluralFormat, Convert(number));
         }
 

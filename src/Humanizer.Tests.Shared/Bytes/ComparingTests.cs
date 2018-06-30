@@ -34,8 +34,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
-        [InlineData(new[] { "1GB", "3KB", "5MB" }, new[] { "3KB", "5MB", "1GB"})]
-        [InlineData(new[] { "1MB", "3KB", "5MB" }, new[] { "3KB", "1MB", "5MB"})]
+        [InlineData(new[] { "1GB", "3KB", "5MB" }, new[] { "3KB", "5MB", "1GB" })]
+        [InlineData(new[] { "1MB", "3KB", "5MB" }, new[] { "3KB", "1MB", "5MB" })]
         public void SortList(IEnumerable<string> values, IEnumerable<string> expected)
         {
             var list = values.Select(ByteSize.Parse).ToList();

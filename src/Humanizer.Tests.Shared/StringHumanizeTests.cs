@@ -96,7 +96,7 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.Sentence));
         }
-        
+
         [Theory]
         [InlineData("CanHumanizeIntoUpperCase", "CAN HUMANIZE INTO UPPER CASE")]
         [InlineData("Can_Humanize_into_Upper_case", "CAN HUMANIZE INTO UPPER CASE")]

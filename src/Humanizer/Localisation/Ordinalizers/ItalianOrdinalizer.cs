@@ -11,10 +11,14 @@
         {
             // No ordinal for 0 in italian (neologism apart)
             if (number == 0)
+            {
                 return "0";
+            }
 
             if (gender == GrammaticalGender.Feminine)
+            {
                 return numberString + "ª";
+            }
 
             return numberString + "°";
         }

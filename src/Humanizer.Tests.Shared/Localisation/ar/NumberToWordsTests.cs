@@ -1,5 +1,4 @@
-﻿using Humanizer.Localisation.NumberToWords;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Localisation.ar
 {

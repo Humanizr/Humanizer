@@ -6,19 +6,25 @@ namespace Humanizer
     /// <summary>
     /// Truncate a string to a fixed number of words
     /// </summary>
-    class FixedNumberOfWordsTruncator : ITruncator
+    internal class FixedNumberOfWordsTruncator : ITruncator
     {
         public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {
             if (value == null)
+            {
                 return null;
+            }
 
             if (value.Length == 0)
+            {
                 return value;
+            }
 
             var numberOfWords = value.Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Count();
             if (numberOfWords <= length)
+            {
                 return value;
+            }
 
             return truncateFrom == TruncateFrom.Left
                 ? TruncateFromLeft(value, length, truncationString)
@@ -34,16 +40,21 @@ namespace Humanizer
                 if (char.IsWhiteSpace(value[i]))
                 {
                     if (!lastCharactersWasWhiteSpace)
+                    {
                         numberOfWordsProcessed++;
+                    }
 
                     lastCharactersWasWhiteSpace = true;
 
                     if (numberOfWordsProcessed == length)
+                    {
                         return value.Substring(0, i) + truncationString;
+                    }
                 }
                 else
+                {
                     lastCharactersWasWhiteSpace = false;
-
+                }
             }
             return value + truncationString;
         }
@@ -57,16 +68,21 @@ namespace Humanizer
                 if (char.IsWhiteSpace(value[i]))
                 {
                     if (!lastCharactersWasWhiteSpace)
+                    {
                         numberOfWordsProcessed++;
+                    }
 
                     lastCharactersWasWhiteSpace = true;
 
                     if (numberOfWordsProcessed == length)
+                    {
                         return truncationString + value.Substring(i + 1).TrimEnd();
+                    }
                 }
                 else
+                {
                     lastCharactersWasWhiteSpace = false;
-
+                }
             }
             return truncationString + value;
         }

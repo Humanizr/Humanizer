@@ -24,8 +24,10 @@
             {
                 ValidateRange(count);
 
-                if (count == 0) 
+                if (count == 0)
+                {
                     return Zero;
+                }
 
                 return TimeSpanFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s");
             }

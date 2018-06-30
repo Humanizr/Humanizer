@@ -24,12 +24,12 @@ namespace Humanizer.Localisation.NumberToWords
 
         private enum Group
         {
-            Hundreds  = 100,
+            Hundreds = 100,
             Thousands = 1000,
             [Description("מיליון")]
-            Millions  = 1000000,
+            Millions = 1000000,
             [Description("מיליארד")]
-            Billions  = 1000000000
+            Billions = 1000000000
         }
 
         public HebrewNumberToWordsConverter(CultureInfo culture)
@@ -47,10 +47,14 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
 
             if (number < 0)
+            {
                 return string.Format("מינוס {0}", Convert(-number, gender));
+            }
 
             if (number == 0)
+            {
                 return UnitsFeminine[0];
+            }
 
             var parts = new List<string>();
             if (number >= (int)Group.Billions)
@@ -85,7 +89,10 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     var unit = gender == GrammaticalGender.Masculine ? UnitsMasculine[number] : UnitsFeminine[number];
                     if (appendAnd)
+                    {
                         unit = "ו" + unit;
+                    }
+
                     parts.Add(unit);
                 }
                 else if (number < 20)
@@ -94,14 +101,19 @@ namespace Humanizer.Localisation.NumberToWords
                     unit = unit.Replace("יי", "י");
                     unit = string.Format("{0} {1}", unit, gender == GrammaticalGender.Masculine ? "עשר" : "עשרה");
                     if (appendAnd)
+                    {
                         unit = "ו" + unit;
+                    }
+
                     parts.Add(unit);
                 }
                 else
                 {
                     var tenUnit = TensUnit[number / 10 - 1];
                     if (number % 10 == 0)
+                    {
                         parts.Add(tenUnit);
+                    }
                     else
                     {
                         var unit = Convert(number % 10, gender);
@@ -125,9 +137,14 @@ namespace Humanizer.Localisation.NumberToWords
 
             var digits = number / (int)@group;
             if (digits == 2)
+            {
                 parts.Add("שני");
+            }
             else if (digits > 2)
+            {
                 parts.Add(Convert(digits, GrammaticalGender.Masculine));
+            }
+
             parts.Add(@group.Humanize());
         }
 
@@ -136,13 +153,21 @@ namespace Humanizer.Localisation.NumberToWords
             var thousands = number / (int)Group.Thousands;
 
             if (thousands == 1)
+            {
                 parts.Add("אלף");
+            }
             else if (thousands == 2)
+            {
                 parts.Add("אלפיים");
+            }
             else if (thousands <= 10)
+            {
                 parts.Add(UnitsFeminine[thousands] + "ת" + " אלפים");
+            }
             else
+            {
                 parts.Add(Convert(thousands) + " אלף");
+            }
         }
 
         private static void ToHundreds(int number, List<string> parts)
@@ -153,11 +178,17 @@ namespace Humanizer.Localisation.NumberToWords
             var hundreds = number / (int)Group.Hundreds;
 
             if (hundreds == 1)
+            {
                 parts.Add("מאה");
+            }
             else if (hundreds == 2)
+            {
                 parts.Add("מאתיים");
+            }
             else
+            {
                 parts.Add(UnitsFeminine[hundreds] + " מאות");
+            }
         }
     }
 }
