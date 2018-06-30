@@ -54,8 +54,10 @@ namespace Humanizer.Tests
         [InlineData(348.7, "NNW")]
         [InlineData(348.8, "N")]
         [InlineData(720, "N")]
-        public void ToHeadingShort(double heading, string expected) {
-            Assert.Equal(heading.ToHeading(true), expected);
+        [Theory]
+        public void ToHeadingAbbreviated(double heading, string expected)
+        {
+            Assert.Equal(expected, heading.ToHeading());
         }
 
         [InlineData(0,     "north")]
@@ -75,8 +77,10 @@ namespace Humanizer.Tests
         [InlineData(315,   "northwest")]
         [InlineData(337.5, "north-northwest")]
         [InlineData(720,   "north")]
-        public void ToHeading(double heading, string expected) {
-            Assert.Equal(heading.ToHeading(), expected);
+        [Theory]
+        public void ToHeading(double heading, string expected)
+        {
+            Assert.Equal(expected, heading.ToHeading(HeadingStyle.Full));
         }
 
         [InlineData("N"  , 0)]
@@ -95,8 +99,10 @@ namespace Humanizer.Tests
         [InlineData("WNW", 292.5)]
         [InlineData("NW" , 315)]
         [InlineData("NNW", 337.5)]
-        public void FromShortHeading(string heading, double expected) {
-            Assert.Equal(heading.FromShortHeading(), expected);
+        [Theory]
+        public void FromShortHeading(string heading, double expected)
+        {
+            Assert.Equal(expected, heading.FromAbbreviatedHeading());
         }
 
         [InlineData(0,     '↑')]
@@ -147,8 +153,10 @@ namespace Humanizer.Tests
         [InlineData(337.5, '↑')]
         [InlineData(348.7, '↑')]
         [InlineData(348.8, '↑')]
-        public void ToHeadignArrow(double heading, char expected) {
-            Assert.Equal(heading.ToHeadingArrow(), expected);
+        [Theory]
+        public void ToHeadignArrow(double heading, char expected)
+        {
+            Assert.Equal(expected, heading.ToHeadingArrow());
         }
     }
 }
