@@ -1,11 +1,10 @@
-﻿using System;
-using Humanizer.Localisation;
+﻿using Humanizer.Localisation;
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.it
 {
     [UseCulture("it")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]
@@ -16,7 +15,7 @@ namespace Humanizer.Tests.Localisation.it
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
-				[Theory]
+        [Theory]
         [InlineData(2, "tra 2 giorni")]
         [InlineData(1, "domani")]
         public void DaysFromNow(int days, string expected)

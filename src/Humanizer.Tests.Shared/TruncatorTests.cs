@@ -39,7 +39,7 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfCharacters));
         }
-        
+
         [Theory]
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
@@ -111,8 +111,8 @@ namespace Humanizer.Tests
         public void TruncateWithTruncationStringAndFixedNumberOfWordsTruncator(string input, int length, string truncationString, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords));
-        }        
-        
+        }
+
         [Theory]
         [InlineData(null, 10, null)]
         [InlineData("", 10, "")]
@@ -123,7 +123,7 @@ namespace Humanizer.Tests
         public void TruncateWithFixedLengthTruncatorTruncateFromLeft(string input, int length, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedLength, TruncateFrom.Left));
-        }              
+        }
 
         [Theory]
         [InlineData(null, 10, null)]

@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
         [InlineData(1, "one")]
         [InlineData(10, "ten")]

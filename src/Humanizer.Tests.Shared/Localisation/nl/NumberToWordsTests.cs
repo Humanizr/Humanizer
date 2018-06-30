@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.nl
 {
     [UseCulture("nl-NL")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]

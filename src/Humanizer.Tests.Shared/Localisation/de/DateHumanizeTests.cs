@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.de
 {
     [UseCulture("de-DE")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]

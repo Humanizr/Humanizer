@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.zhHans
 {
     [UseCulture("zh-Hans")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
         [Theory]
         [InlineData(2, "2 天前")]

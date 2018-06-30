@@ -37,8 +37,10 @@
             {
                 ValidateRange(count);
 
-                if (count == 0) 
+                if (count == 0)
+                {
                     return Now;
+                }
 
                 var singularity = count == 1 ? Single : Multiple;
                 var tense = timeUnitTense == Tense.Future ? FromNow : Ago;

@@ -1,10 +1,9 @@
-﻿using System.Globalization;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Localisation.ptBR
 {
     [UseCulture("pt-BR")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]

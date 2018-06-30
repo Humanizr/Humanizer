@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Humanizer.Localisation.NumberToWords
@@ -20,17 +18,24 @@ namespace Humanizer.Localisation.NumberToWords
             }
             var number = (int)input;
             if (number < 0)
+            {
                 return string.Format("minus {0}", Convert(-number, true));
+            }
+
             return Convert(number, true);
         }
 
         private string Convert(int number, bool checkForHoundredRule)
         {
             if (number == 0)
+            {
                 return UnitsMap[0];
+            }
 
             if (checkForHoundredRule && number == 100)
+            {
                 return "yuz";
+            }
 
             var sb = new StringBuilder();
 
@@ -79,11 +84,15 @@ namespace Humanizer.Localisation.NumberToWords
             var word = Convert(number);
             var i = 0;
             if (string.IsNullOrEmpty(word))
+            {
                 return string.Empty;
+            }
 
             var lastChar = word[word.Length - 1];
             if (lastChar == 'i' || lastChar == 'a')
+            {
                 i = 1;
+            }
 
             return string.Format("{0}{1}", word, OrdinalSuffixes[i]);
         }

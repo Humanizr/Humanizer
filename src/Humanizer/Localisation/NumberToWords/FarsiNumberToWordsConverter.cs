@@ -18,13 +18,17 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
 
             if (number < 0)
+            {
                 return string.Format("منفی {0}", Convert(-number));
+            }
 
             if (number == 0)
+            {
                 return "صفر";
+            }
 
-            var farsiGroupsMap = new Dictionary<int, Func<int, string>> 
-            { 
+            var farsiGroupsMap = new Dictionary<int, Func<int, string>>
+            {
                 {(int)Math.Pow(10, 9), n => string.Format("{0} میلیارد", Convert(n)) },
                 {(int)Math.Pow(10, 6), n => string.Format("{0} میلیون", Convert(n)) },
                 {(int)Math.Pow(10, 3), n => string.Format("{0} هزار", Convert(n)) },
@@ -48,7 +52,9 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             if (number > 0)
+            {
                 parts.Add(FarsiUnitsMap[number]);
+            }
 
             return string.Join(" و ", parts);
         }
@@ -56,13 +62,19 @@ namespace Humanizer.Localisation.NumberToWords
         public override string ConvertToOrdinal(int number)
         {
             if (number == 1)
+            {
                 return "اول";
+            }
 
             if (number == 3)
+            {
                 return "سوم";
+            }
 
             if (number % 10 == 3 && number != 13)
+            {
                 return Convert((number / 10) * 10) + " و سوم";
+            }
 
             var word = Convert(number);
             return string.Format("{0}{1}", word, word.EndsWith("ی") ? " ام" : "م");

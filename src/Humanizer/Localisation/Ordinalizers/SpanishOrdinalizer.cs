@@ -11,12 +11,18 @@
         {
             // N/A in Spanish
             if (number == 0)
+            {
                 return "0";
+            }
 
             if (gender == GrammaticalGender.Feminine)
-                return numberString + ".ª";           
+            {
+                return numberString + ".ª";
+            }
             else
+            {
                 return numberString + ".º";
+            }
         }
     }
 }

@@ -5,15 +5,25 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using PublicApiGenerator;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Humanizer.Tests.ApiApprover
 {
 
     public class PublicApiApprovalTest
     {
+        public PublicApiApprovalTest(ITestOutputHelper output)
+        {
+            DiffPlexReporter.Instance.Output = output;
+        }
+
         [Fact]
         [UseCulture("en-US")]
-        [UseReporter(typeof(DiffReporter))] 
+#if DEBUG
+        [UseReporter(typeof(DiffReporter))]
+#else
+        [UseReporter(typeof(DiffPlexReporter))]
+#endif
         [IgnoreLineEndings(true)]
         public void approve_public_api()
         {

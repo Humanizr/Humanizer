@@ -112,7 +112,7 @@ namespace Humanizer.Tests
         [Fact]
         public void HumanizeHandlesNullStringDisplayFormatterReturnsWithoutAnException()
         {
-            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => (string)null)));
+            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => null)));
         }
 
         [Fact]

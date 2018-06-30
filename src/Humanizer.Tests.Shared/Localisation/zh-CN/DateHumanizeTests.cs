@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.zhCN
 {
     [UseCulture("zh-CN")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]

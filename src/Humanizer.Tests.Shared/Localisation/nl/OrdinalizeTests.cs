@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.nl
 {
     [UseCulture("nl")]
-    public class OrdinalizeTests 
+    public class OrdinalizeTests
     {
 
         [Theory]
@@ -23,6 +23,6 @@ namespace Humanizer.Tests.Localisation.nl
         public void OrdinalizeString(string number, string ordinalized)
         {
             Assert.Equal(number.Ordinalize(), ordinalized);
-        }        
-     }
+        }
+    }
 }

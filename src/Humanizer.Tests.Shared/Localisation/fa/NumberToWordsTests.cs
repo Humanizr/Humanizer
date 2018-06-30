@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.fa
 {
     [UseCulture("fa")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
         [Theory]
         [InlineData(1, "یک")]
@@ -43,7 +43,7 @@ namespace Humanizer.Tests.Localisation.fa
         [InlineData(1, "اول")]
         [InlineData(2, "دوم")]
         [InlineData(3, "سوم")]
-        [InlineData(4,"چهارم")]
+        [InlineData(4, "چهارم")]
         [InlineData(5, "پنجم")]
         [InlineData(6, "ششم")]
         [InlineData(7, "هفتم")]

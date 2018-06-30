@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.fiFI
 {
     [UseCulture("fi-FI")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]

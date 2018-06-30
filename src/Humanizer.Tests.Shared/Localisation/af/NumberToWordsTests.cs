@@ -87,7 +87,7 @@ namespace Humanizer.Tests.Localisation.af
         [InlineData(1000000, "miljoenste")]
         public void ToOrdinalWords(int number, string words)
         {
-                Assert.Equal(words, number.ToOrdinalWords());
+            Assert.Equal(words, number.ToOrdinalWords());
         }
 
         [Theory]

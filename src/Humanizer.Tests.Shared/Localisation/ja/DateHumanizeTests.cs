@@ -4,13 +4,13 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.ja
 {
     [UseCulture("ja")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]
         [InlineData(1, "1 秒前")]
         [InlineData(2, "2 秒前")]
-        public void SecondsAgo(int seconds, string expected) 
+        public void SecondsAgo(int seconds, string expected)
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }

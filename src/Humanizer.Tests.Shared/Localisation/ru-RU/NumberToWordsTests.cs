@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.ruRU
 {
     [UseCulture("ru-RU")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]
@@ -150,7 +150,7 @@ namespace Humanizer.Tests.Localisation.ruRU
         {
             Assert.Equal(expected, number.ToOrdinalWords());
         }
-        
+
         [Theory]
         [InlineData(0, "нулевая")]
         [InlineData(1, "первая")]

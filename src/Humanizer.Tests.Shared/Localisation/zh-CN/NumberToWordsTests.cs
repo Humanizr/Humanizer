@@ -1,10 +1,9 @@
-﻿using System.Globalization;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Localisation.zhCN
 {
     [UseCulture("zh-CN")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
         [InlineData(1, "一")]
         [InlineData(2, "二")]
@@ -37,17 +36,17 @@ namespace Humanizer.Tests.Localisation.zhCN
         [InlineData(-54367865, "负 五千四百三十六万七千八百六十五")]
         [InlineData(650004076, "六亿五千万四千零七十六")]
         [InlineData(7156404367L, "七十一亿五千六百四十万四千三百六十七")]
-        [InlineData(89043267890L,"八百九十亿四千三百二十六万七千八百九十")]
-        [InlineData(500007893401L,"五千亿零七百八十九万三千四百零一")]
+        [InlineData(89043267890L, "八百九十亿四千三百二十六万七千八百九十")]
+        [InlineData(500007893401L, "五千亿零七百八十九万三千四百零一")]
         [InlineData(500000003401L, "五千亿零三千四百零一")]
         [InlineData(500000000001L, "五千亿零一")]
         [InlineData(500000000000L, "五千亿")]
-        [InlineData(6067823149088L,"六兆零六百七十八亿二千三百一十四万九千零八十八")]
+        [InlineData(6067823149088L, "六兆零六百七十八亿二千三百一十四万九千零八十八")]
         [Theory]
         public void ToWords(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
-        }        
+        }
 
         [Theory]
         [InlineData(1, "第 一")]
@@ -57,6 +56,6 @@ namespace Humanizer.Tests.Localisation.zhCN
         public void ToOrdinalWords(int number, string words)
         {
             Assert.Equal(words, number.ToOrdinalWords());
-        }        
+        }
     }
 }

@@ -4,7 +4,7 @@
 Test*.html
 Test*.xml
 *.zip
-nuget.exe
+*.exe
 *.nuget.props
 *.nuget.targets
 
@@ -86,6 +86,8 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
+# local tools
+.store/
 
 src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.received.txt
 

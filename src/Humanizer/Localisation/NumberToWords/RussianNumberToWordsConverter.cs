@@ -22,7 +22,9 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             if (input == 0)
+            { 
                 return "ноль";
+            }
 
             var parts = new List<string>();
 
@@ -37,7 +39,9 @@ namespace Humanizer.Localisation.NumberToWords
             CollectParts(parts, ref input, 1000, GrammaticalGender.Feminine, "тысяча", "тысячи", "тысяч");
 
             if (input > 0)
+            { 
                 CollectPartsUnderOneThousand(parts, input, gender);
+            }
 
             return string.Join(" ", parts);
         }
@@ -45,7 +49,9 @@ namespace Humanizer.Localisation.NumberToWords
         public override string ConvertToOrdinal(int input, GrammaticalGender gender)
         {
             if (input == 0)
+            { 
                 return "нулев" + GetEndingForGender(gender, input);
+            }
 
             var parts = new List<string>();
 
@@ -63,27 +69,37 @@ namespace Humanizer.Localisation.NumberToWords
             if (number >= 100)
             {
                 var ending = GetEndingForGender(gender, number);
-                var hundreds = number/100;
+                var hundreds = number / 100;
                 number %= 100;
                 if (number == 0)
+                {
                     parts.Add(UnitsOrdinalPrefixes[hundreds] + "сот" + ending);
+                }
                 else
+                {
                     parts.Add(HundredsMap[hundreds]);
+                }
             }
 
             if (number >= 20)
             {
                 var ending = GetEndingForGender(gender, number);
-                var tens = number/10;
+                var tens = number / 10;
                 number %= 10;
                 if (number == 0)
+                {
                     parts.Add(TensOrdinal[tens] + ending);
+                }
                 else
+                {
                     parts.Add(TensMap[tens]);
+                }
             }
 
             if (number > 0)
+            {
                 parts.Add(UnitsOrdinal[number] + GetEndingForGender(gender, number));
+            }
 
             return string.Join(" ", parts);
         }
@@ -92,14 +108,14 @@ namespace Humanizer.Localisation.NumberToWords
         {
             if (number >= 100)
             {
-                var hundreds = number/100;
+                var hundreds = number / 100;
                 number %= 100;
                 parts.Add(HundredsMap[hundreds]);
             }
 
             if (number >= 20)
             {
-                var tens = number/10;
+                var tens = number / 10;
                 parts.Add(TensMap[tens]);
                 number %= 10;
             }
@@ -107,13 +123,21 @@ namespace Humanizer.Localisation.NumberToWords
             if (number > 0)
             {
                 if (number == 1 && gender == GrammaticalGender.Feminine)
+                {
                     parts.Add("одна");
+                }
                 else if (number == 1 && gender == GrammaticalGender.Neuter)
+                {
                     parts.Add("одно");
+                }
                 else if (number == 2 && gender == GrammaticalGender.Feminine)
+                {
                     parts.Add("две");
+                }
                 else if (number < 20)
+                {
                     parts.Add(UnitsMap[number]);
+                }
             }
         }
 
@@ -123,17 +147,21 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number >= 100)
             {
-                var hundreds = number/100;
+                var hundreds = number / 100;
                 number %= 100;
                 if (hundreds != 1)
+                {
                     parts.Add(UnitsOrdinalPrefixes[hundreds] + "сот");
+                }
                 else
+                {
                     parts.Add("сто");
+                }
             }
 
             if (number >= 20)
             {
-                var tens = number/10;
+                var tens = number / 10;
                 number %= 10;
                 parts.Add(TensOrdinalPrefixes[tens]);
             }
@@ -148,8 +176,12 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static void CollectParts(ICollection<string> parts, ref long number, int divisor, GrammaticalGender gender, params string[] forms)
         {
-            if (number < divisor) return;
-            var result = number/divisor;
+            if (number < divisor)
+            {
+                return;
+            }
+
+            var result = number / divisor;
             number %= divisor;
 
             CollectPartsUnderOneThousand(parts, result, gender);
@@ -158,15 +190,23 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static void CollectOrdinalParts(ICollection<string> parts, ref long number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
         {
-            if (number < divisor) return;
-            var result = number/divisor;
+            if (number < divisor)
+            {
+                return;
+            }
+
+            var result = number / divisor;
             number %= divisor;
             if (number == 0)
             {
                 if (result == 1)
+                {
                     parts.Add(prefixedForm);
+                }
                 else
+                {
                     parts.Add(GetPrefix(result) + prefixedForm);
+                }
             }
             else
             {
@@ -178,10 +218,14 @@ namespace Humanizer.Localisation.NumberToWords
         private static int GetIndex(RussianGrammaticalNumber number)
         {
             if (number == RussianGrammaticalNumber.Singular)
+            {
                 return 0;
+            }
 
             if (number == RussianGrammaticalNumber.Paucal)
+            {
                 return 1;
+            }
 
             return 2;
         }
@@ -197,17 +241,29 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 case GrammaticalGender.Masculine:
                     if (number == 0 || number == 2 || number == 6 || number == 7 || number == 8 || number == 40)
+                    {
                         return "ой";
+                    }
+
                     if (number == 3)
+                    {
                         return "ий";
+                    }
+
                     return "ый";
                 case GrammaticalGender.Feminine:
                     if (number == 3)
+                    {
                         return "ья";
+                    }
+
                     return "ая";
                 case GrammaticalGender.Neuter:
                     if (number == 3)
+                    {
                         return "ье";
+                    }
+
                     return "ое";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gender));

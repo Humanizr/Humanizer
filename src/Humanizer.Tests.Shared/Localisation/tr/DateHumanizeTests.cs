@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.tr
 {
     [UseCulture("tr")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]

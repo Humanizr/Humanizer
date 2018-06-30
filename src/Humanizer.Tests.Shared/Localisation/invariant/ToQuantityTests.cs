@@ -1,10 +1,9 @@
-﻿using System.Globalization;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Localisation.invariant
 {
     [UseCulture("")]
-    public class ToQuantityTests 
+    public class ToQuantityTests
     {
         [Theory]
         [InlineData("case", 0, "0 cases")]
@@ -22,7 +21,7 @@ namespace Humanizer.Tests.Localisation.invariant
         {
             Assert.Equal(expected, word.ToQuantity(quantity));
         }
-        
+
         [Theory]
         [InlineData("case", 0, "cases")]
         [InlineData("case", 1, "case")]
@@ -39,7 +38,7 @@ namespace Humanizer.Tests.Localisation.invariant
         {
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.None));
         }
-        
+
         [Theory]
         [InlineData("case", 0, "0 cases")]
         [InlineData("case", 1, "1 case")]
@@ -54,10 +53,10 @@ namespace Humanizer.Tests.Localisation.invariant
         [InlineData("processes", 1, "1 process")]
         public void ToQuantityNumeric(string word, int quantity, string expected)
         {
-// ReSharper disable once RedundantArgumentDefaultValue
+            // ReSharper disable once RedundantArgumentDefaultValue
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Numeric));
         }
-        
+
         [Theory]
         [InlineData("case", 0, "0 cases")]
         [InlineData("case", 1, "1 case")]
