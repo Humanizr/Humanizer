@@ -16,18 +16,20 @@ namespace Humanizer
         public static string[] AppendArticlePrefix(string[] items)
         {
             if (items.Length == 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(items));
+            }
 
-            Regex regex = new Regex("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+");
-            string[] transformed = new string[items.Length];
+            var regex = new Regex("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+");
+            var transformed = new string[items.Length];
 
             for (var i = 0; i < items.Length; i++)
             {
                 if (regex.IsMatch(items[i]))
                 {
-                    string article = items[i].Substring(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
-                    string removed = items[i].Remove(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
-                    string appended = $"{removed} {article}";
+                    var article = items[i].Substring(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
+                    var removed = items[i].Remove(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
+                    var appended = $"{removed} {article}";
                     transformed[i] = appended.Trim();
                 }
                 else
@@ -46,9 +48,9 @@ namespace Humanizer
         /// <returns>String array</returns>
         public static string[] PrependArticleSuffix(string[] appended)
         {
-            string[] inserted = new string[appended.Length];
+            var inserted = new string[appended.Length];
 
-            for (int i = 0; i < appended.Length; i++)
+            for (var i = 0; i < appended.Length; i++)
             {
                 string suffix;
                 string original;
@@ -98,8 +100,8 @@ namespace Humanizer
 
         private static string ToOriginalFormat(string[] appended, string suffix, int i)
         {
-            string insertion = appended[i].Remove(appended[i].IndexOf(suffix, StringComparison.CurrentCulture));
-            string original = $"{suffix} {insertion}";
+            var insertion = appended[i].Remove(appended[i].IndexOf(suffix, StringComparison.CurrentCulture));
+            var original = $"{suffix} {insertion}";
             return original.Trim();
         }
     }
