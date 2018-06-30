@@ -628,51 +628,51 @@
     <value>north-northwest</value>
   </data>
   <data name="N_Short" xml:space="preserve">
-    <value>n</value>
+    <value>N</value>
   </data>
   <data name="NNE_Short" xml:space="preserve">
-    <value>nne</value>
+    <value>NNE</value>
   </data>
   <data name="NE_Short" xml:space="preserve">
-    <value>ne</value>
+    <value>NE</value>
   </data>
   <data name="ENE_Short" xml:space="preserve">
-    <value>ene</value>
+    <value>ENE</value>
   </data>
   <data name="E_Short" xml:space="preserve">
-    <value>e</value>
+    <value>E</value>
   </data>
   <data name="ESE_Short" xml:space="preserve">
-    <value>ese</value>
+    <value>ESE</value>
   </data>
   <data name="SE_Short" xml:space="preserve">
-    <value>se</value>
+    <value>SE</value>
   </data>
   <data name="SSE_Short" xml:space="preserve">
-    <value>sse</value>
+    <value>SSE</value>
   </data>
   <data name="S_Short" xml:space="preserve">
-    <value>s</value>
+    <value>S</value>
   </data>
   <data name="SSW_Short" xml:space="preserve">
-    <value>ssw</value>
+    <value>SSW</value>
   </data>
   <data name="SW_Short" xml:space="preserve">
-    <value>sw</value>
+    <value>SW</value>
   </data>
   <data name="WSW_Short" xml:space="preserve">
-    <value>wsw</value>
+    <value>WSW</value>
   </data>
   <data name="W_Short" xml:space="preserve">
-    <value>w</value>
+    <value>W</value>
   </data>
   <data name="WNW_Short" xml:space="preserve">
-    <value>wnw</value>
+    <value>WNW</value>
   </data>
   <data name="NW_Short" xml:space="preserve">
-    <value>nw</value>
+    <value>NW</value>
   </data>
   <data name="NNW_Short" xml:space="preserve">
-    <value>nnw</value>
+    <value>NNW</value>
   </data>
 </root>

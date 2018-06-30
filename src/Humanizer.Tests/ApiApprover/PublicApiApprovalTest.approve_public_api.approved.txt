@@ -166,9 +166,14 @@ namespace Humanizer
     }
     public class static HeadingExtensions
     {
-        public static double FromShortHeading(this string heading) { }
-        public static string ToHeading(this double heading, bool shortResult = False, System.Globalization.CultureInfo culture = null) { }
+        public static double FromAbbreviatedHeading(this string heading) { }
+        public static string ToHeading(this double heading, Humanizer.HeadingStyle style = 0, System.Globalization.CultureInfo culture = null) { }
         public static char ToHeadingArrow(this double heading) { }
+    }
+    public enum HeadingStyle
+    {
+        Abbreviated = 0,
+        Full = 1,
     }
     public class In
     {
