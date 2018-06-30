@@ -15,7 +15,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] UnitsMap = { "nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien" };
         private static readonly string[] TensMap = { "nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig" };
 
-        class Fact
+        private class Fact
         {
             public int Value { get; set; }
             public string Name { get; set; }
@@ -41,10 +41,14 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
 
             if (number == 0)
+            {
                 return UnitsMap[0];
+            }
 
             if (number < 0)
+            {
                 return string.Format("min {0}", Convert(-number));
+            }
 
             var word = "";
 
@@ -52,23 +56,33 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 var divided = number / m.Value;
 
-                if (divided <= 0) 
+                if (divided <= 0)
+                {
                     continue;
+                }
 
                 if (divided == 1 && !m.DisplayOneUnit)
+                {
                     word += m.Name;
+                }
                 else
+                {
                     word += Convert(divided) + m.Prefix + m.Name;
+                }
 
                 number %= m.Value;
                 if (number > 0)
+                {
                     word += m.Postfix;
+                }
             }
 
             if (number > 0)
             {
                 if (number < 20)
+                {
                     word += UnitsMap[number];
+                }
                 else
                 {
                     var tens = TensMap[number / 10];
@@ -80,7 +94,9 @@ namespace Humanizer.Localisation.NumberToWords
                         word += units + (trema ? "ën" : "en") + tens;
                     }
                     else
+                    {
                         word += tens;
+                    }
                 }
             }
 
@@ -94,7 +110,7 @@ namespace Humanizer.Localisation.NumberToWords
             {"miljoen", "miljoenste"},
         };
 
-        private static readonly char[] EndingCharForSte = {'t', 'g', 'd'};
+        private static readonly char[] EndingCharForSte = { 't', 'g', 'd' };
 
         public override string ConvertToOrdinal(int number)
         {
@@ -110,7 +126,9 @@ namespace Humanizer.Localisation.NumberToWords
             // twintigste, dertigste, veertigste, ...
             // honderdste, duizendste, ...
             if (word.LastIndexOfAny(EndingCharForSte) == (word.Length - 1))
+            {
                 return word + "ste";
+            }
 
             return word + "de";
         }

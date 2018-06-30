@@ -14,6 +14,6 @@ namespace Humanizer.Localisation.DateToOrdinalWords
         {
             return Convert(date);
         }
-        
+
     }
 }

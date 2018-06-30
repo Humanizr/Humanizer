@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]

@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.roRO
 {
     [UseCulture("ro-RO")]
-    public class OrdinalizerTests 
+    public class OrdinalizerTests
     {
 
         [Theory]

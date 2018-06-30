@@ -5,7 +5,7 @@ namespace Humanizer.Tests
     public class EnumHumanizeTests
     {
 #if !NETFX_CORE
-        [Fact] 
+        [Fact]
         public void HonorsDescriptionAttribute()
         {
             Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
@@ -30,29 +30,29 @@ namespace Humanizer.Tests
             Assert.Equal(EnumTestsResources.MemberWithImposterDescriptionAttribute, EnumUnderTest.MemberWithImposterDescriptionAttribute.Humanize());
         }
 
-        [Fact] 
+        [Fact]
         public void CanHumanizeMembersWithoutDescriptionAttribute()
         {
             Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
         }
 
-        [Fact] 
+        [Fact]
         public void CanApplyTitleCasingOnEnumHumanization()
         {
             Assert.Equal(
-                EnumTestsResources.MemberWithoutDescriptionAttributeTitle, 
+                EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
                 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title));
         }
 
-        [Fact] 
+        [Fact]
         public void CanApplyLowerCaseCasingOnEnumHumanization()
         {
             Assert.Equal(
-                EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase, 
+                EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase,
                 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.LowerCase));
         }
 
-        [Fact] 
+        [Fact]
         public void AllCapitalMembersAreReturnedAsIs()
         {
             Assert.Equal(EnumUnderTest.ALLCAPITALS.ToString(), EnumUnderTest.ALLCAPITALS.Humanize());
@@ -74,6 +74,6 @@ namespace Humanizer.Tests
         {
             Assert.Equal(EnumTestsResources.MemberWithLocalizedDisplayAttribute, EnumUnderTest.MemberWithLocalizedDisplayAttribute.Humanize());
         }
-        
+
     }
 }

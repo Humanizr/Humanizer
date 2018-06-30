@@ -87,7 +87,7 @@ namespace Humanizer.Tests
             Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo(typeof(EnumUnderTest)));
         }
 
-        struct DummyStructWithEnumInterfaces : IComparable, IFormattable
+        private struct DummyStructWithEnumInterfaces : IComparable, IFormattable
         {
             public int CompareTo(object obj)
             {
@@ -185,13 +185,13 @@ namespace Humanizer.Tests
             }
         }
 
-        enum DummyEnum
+        private enum DummyEnum
         {
             First,
             Second
         }
     }
 
-    
+
 
 }

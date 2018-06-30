@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using Humanizer.Localisation;
 using Xunit;
-using System.Linq;
 
 namespace Humanizer.Tests
 {
@@ -19,7 +19,7 @@ namespace Humanizer.Tests
                       select text;
             var grouping = from t in qry
                            group t by t into g
-                           select new {  g.Key, Count = g.Count() };
+                           select new { g.Key, Count = g.Count() };
             var allUnique = grouping.All(g => g.Count == 1);
             Assert.True(allUnique);
         }

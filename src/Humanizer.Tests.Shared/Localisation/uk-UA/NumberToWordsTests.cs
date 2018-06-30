@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
         [Theory]
         [InlineData(0, "нуль")]

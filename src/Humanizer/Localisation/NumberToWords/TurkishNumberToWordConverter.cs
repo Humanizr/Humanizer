@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -30,10 +28,14 @@ namespace Humanizer.Localisation.NumberToWords
             }
             var number = (int)input;
             if (number == 0)
+            {
                 return UnitsMap[0];
+            }
 
             if (number < 0)
+            {
                 return string.Format("eksi {0}", Convert(-number));
+            }
 
             var parts = new List<string>();
 
@@ -95,10 +97,14 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             if (word[word.Length - 1] == 't')
+            {
                 word = word.Substring(0, word.Length - 1) + 'd';
+            }
 
             if (suffixFoundOnLastVowel)
+            {
                 word = word.Substring(0, word.Length - 1);
+            }
 
             return string.Format("{0}{1}", word, wordSuffix);
         }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Localisation.it
 {
     [UseCulture("it")]
-    public class OrdinalizerTests 
+    public class OrdinalizerTests
     {
 
         [Theory]

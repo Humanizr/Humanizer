@@ -19,9 +19,15 @@ namespace Humanizer.Localisation.Formatters
         private string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
         {
             if (grammaticalNumber == RussianGrammaticalNumber.Singular)
+            {
                 return "_Singular";
+            }
+
             if (grammaticalNumber == RussianGrammaticalNumber.Paucal)
+            {
                 return "_Paucal";
+            }
+
             return "";
         }
     }

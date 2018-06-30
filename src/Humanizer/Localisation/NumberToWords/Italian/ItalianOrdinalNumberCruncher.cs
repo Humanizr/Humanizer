@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords.Italian
+﻿namespace Humanizer.Localisation.NumberToWords.Italian
 {
-    class ItalianOrdinalNumberCruncher
+    internal class ItalianOrdinalNumberCruncher
     {
         public ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
         {
@@ -11,12 +8,14 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             _gender = gender;
             _genderSuffix = (gender == GrammaticalGender.Feminine ? "a" : "o");
         }
-        
+
         public string Convert()
         {
             // it's easier to treat zero as a completely distinct case
             if (_fullNumber == 0)
+            {
                 return "zero";
+            }
 
             if (_fullNumber <= 9)
             {
@@ -44,9 +43,13 @@ namespace Humanizer.Localisation.NumberToWords.Italian
 
                 // reintroduce *unaccented* last vowel in some corner cases
                 if (units == 3)
+                {
                     words += 'e';
+                }
                 else if (units == 6)
+                {
                     words += 'i';
+                }
 
                 var lowestThreeDigits = _fullNumber % 1000;
                 var lowestSixDigits = _fullNumber % 1000000;

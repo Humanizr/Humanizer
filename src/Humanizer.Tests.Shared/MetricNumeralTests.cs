@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Humanizer.Tests
@@ -83,7 +82,10 @@ namespace Humanizer.Tests
                       .FromMetric()
                       .ToString("0.##E+0", CultureInfo.InvariantCulture));
             if (!isEquals)
+            {
                 Debugger.Break();
+            }
+
             Assert.True(isEquals);
         }
 
@@ -104,7 +106,7 @@ namespace Humanizer.Tests
             Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals));
         }
 
-        
+
 
         [Theory]
         [InlineData(1E+27)]

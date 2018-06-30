@@ -49,11 +49,13 @@ namespace Humanizer.Localisation.NumberToWords
                 {100000, "লক্ষ তম"},
                 {10000000, "কোটি তম"},
             };
-        
+
         public override string ConvertToOrdinal(int number)
         {
             if (ExceptionNumbersToWords(number, out var exceptionString))
+            {
                 return exceptionString;
+            }
 
             return Convert(number) + " তম";
         }
@@ -67,39 +69,45 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
 
             if (number == 0)
+            {
                 return UnitsMap[0];
+            }
 
             if (number < 0)
+            {
                 return string.Format("ঋণাত্মক {0}", Convert(-number));
+            }
 
             var parts = new List<string>();
 
-            if ((number/10000000) > 0)
+            if ((number / 10000000) > 0)
             {
-                parts.Add(string.Format("{0} কোটি", Convert(number/10000000)));
+                parts.Add(string.Format("{0} কোটি", Convert(number / 10000000)));
                 number %= 10000000;
             }
 
-            if ((number/100000) > 0)
+            if ((number / 100000) > 0)
             {
-                parts.Add(string.Format("{0} লক্ষ", Convert(number/100000)));
+                parts.Add(string.Format("{0} লক্ষ", Convert(number / 100000)));
                 number %= 100000;
             }
 
-            if ((number/1000) > 0)
+            if ((number / 1000) > 0)
             {
-                parts.Add(string.Format("{0} হাজার", Convert(number/1000)));
+                parts.Add(string.Format("{0} হাজার", Convert(number / 1000)));
                 number %= 1000;
             }
 
-            if ((number/100) > 0)
+            if ((number / 100) > 0)
             {
-                parts.Add(string.Format("{0}", HundredsMap[number/100]));
+                parts.Add(string.Format("{0}", HundredsMap[number / 100]));
                 number %= 100;
             }
 
             if (number > 0)
+            {
                 parts.Add(UnitsMap[number]);
+            }
 
             return string.Join(" ", parts.ToArray());
         }

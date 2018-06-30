@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Humanizer.Localisation.CollectionFormatters
+﻿namespace Humanizer.Localisation.CollectionFormatters
 {
     internal class OxfordStyleCollectionFormatter : DefaultCollectionFormatter
     {

@@ -6,7 +6,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
     /// <summary>
     /// Precision-based calculator for distance between two times
     /// </summary>
-    public class PrecisionDateTimeOffsetHumanizeStrategy :  IDateTimeOffsetHumanizeStrategy
+    public class PrecisionDateTimeOffsetHumanizeStrategy : IDateTimeOffsetHumanizeStrategy
     {
         private readonly double _precision;
 

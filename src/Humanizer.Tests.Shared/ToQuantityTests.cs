@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Runtime.InteropServices.ComTypes;
 using Xunit;
 
 namespace Humanizer.Tests
@@ -25,7 +24,7 @@ namespace Humanizer.Tests
             Assert.Equal(expected, word.ToQuantity(quantity));
             Assert.Equal(expected, word.ToQuantity((long)quantity));
         }
-        
+
         [Theory]
         [InlineData("case", 0, "cases")]
         [InlineData("case", 1, "case")]
@@ -43,7 +42,7 @@ namespace Humanizer.Tests
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.None));
             Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.None));
         }
-        
+
         [Theory]
         [InlineData("case", 0, "0 cases")]
         [InlineData("case", 1, "1 case")]
@@ -58,11 +57,11 @@ namespace Humanizer.Tests
         [InlineData("processes", 1, "1 process")]
         public void ToQuantityNumeric(string word, int quantity, string expected)
         {
-// ReSharper disable once RedundantArgumentDefaultValue
+            // ReSharper disable once RedundantArgumentDefaultValue
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Numeric));
             Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.Numeric));
         }
-        
+
         [Theory]
         [InlineData("case", 0, "zero cases")]
         [InlineData("case", 1, "one case")]
@@ -113,7 +112,7 @@ namespace Humanizer.Tests
         public void ToQuantityWordsWithCustomCultureFormatting(string word, int quantity, string format, string cultureCode, string expected)
         {
             var culture = new CultureInfo(cultureCode);
-            
+
             Assert.Equal(expected, word.ToQuantity(quantity, format, culture), GetStringComparer(culture));
             Assert.Equal(expected, word.ToQuantity((long)quantity, format, culture), GetStringComparer(culture));
         }

@@ -2,7 +2,7 @@
 
 namespace Humanizer.Localisation.NumberToWords.Romanian
 {
-    class RomanianOrdinalNumberConverter
+    internal class RomanianOrdinalNumberConverter
     {
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
@@ -29,16 +29,22 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         {
             // it's easier to treat zero as a completely distinct case
             if (number == 0)
+            {
                 return "zero";
+            }
             else if (number == 1)
+            {
                 // no prefixes for primul/prima
                 return this.getPartByGender(_ordinalsUnder10[number], gender);
+            }
             else if (number <= 9)
+            {
                 // units ordinals, 2 to 9, are totally different than the rest: treat them as a distinct case
                 return string.Format("{0} {1}",
                                         gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
                                         this.getPartByGender(_ordinalsUnder10[number], gender)
                                      );
+            }
             else
             {
                 var coverter = new RomanianCardinalNumberConverter();
@@ -64,22 +70,29 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 if (words.EndsWith("milioane"))
                 {
                     if (gender == GrammaticalGender.Feminine)
+                    {
                         words = words.Substring(0, words.Length - 8) + "milioana";
+                    }
                 }
 
                 var customMasculineSuffix = _masculineSuffix;
                 if (words.EndsWith("milion"))
                 {
                     if (gender == GrammaticalGender.Feminine)
+                    {
                         words = words.Substring(0, words.Length - 6) + "milioana";
-
+                    }
                     else
+                    {
                         customMasculineSuffix = "u" + _masculineSuffix;
+                    }
                 }
                 else if (words.EndsWith("miliard"))
                 {
                     if (gender == GrammaticalGender.Masculine)
+                    {
                         customMasculineSuffix = "u" + _masculineSuffix;
+                    }
                 }
 
                 // trim last letter
@@ -106,13 +119,18 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             {
                 var parts = multiGenderPart.Split('|');
                 if (gender == GrammaticalGender.Feminine)
+                {
                     return parts[1];
-
+                }
                 else
+                {
                     return parts[0];
+                }
             }
             else
+            {
                 return multiGenderPart;
+            }
         }
     }
 }

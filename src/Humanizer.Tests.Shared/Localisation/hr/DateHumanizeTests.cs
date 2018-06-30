@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.hr
 {
     [UseCulture("hr-HR")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]

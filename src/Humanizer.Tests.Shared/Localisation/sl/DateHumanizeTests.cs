@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.sl
 {
     [UseCulture("sl-SI")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
         [Theory]
         [InlineData(-10, "pred 10 leti")]
