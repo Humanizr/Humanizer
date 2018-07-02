@@ -4,12 +4,12 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.fiFI
 {
     [UseCulture("fi-FI")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]
         [InlineData(2, "2 päivää sitten")]
-		[InlineData(1, "eilen")]
+        [InlineData(1, "eilen")]
         public void DaysAgo(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);

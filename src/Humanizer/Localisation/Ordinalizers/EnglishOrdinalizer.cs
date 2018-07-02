@@ -7,7 +7,9 @@
             var nMod100 = number % 100;
 
             if (nMod100 >= 11 && nMod100 <= 13)
+            {
                 return numberString + "th";
+            }
 
             switch (number % 10)
             {

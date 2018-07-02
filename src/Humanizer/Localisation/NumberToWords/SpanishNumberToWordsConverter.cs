@@ -5,7 +5,7 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", 
+        private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
                                                         "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
                                                         "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
         private const string Feminine1 = "una";
@@ -37,10 +37,14 @@ namespace Humanizer.Localisation.NumberToWords
             }
             var number = (int)input;
             if (number == 0)
+            {
                 return "cero";
+            }
 
             if (number < 0)
+            {
                 return string.Format("menos {0}", Convert(Math.Abs(number)));
+            }
 
             var parts = new List<string>();
 
@@ -73,9 +77,9 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((number / 100) > 0)
             {
-                parts.Add(number == 100 
+                parts.Add(number == 100
                     ? "cien"
-                    : gender == GrammaticalGender.Feminine 
+                    : gender == GrammaticalGender.Feminine
                         ? FeminineHundredsMap[(number / 100)]
                         : HundredsMap[(number / 100)]);
                 number %= 100;
@@ -96,8 +100,8 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    var lastPart = TensMap[number/10];
-                    int units = number%10;
+                    var lastPart = TensMap[number / 10];
+                    var units = number % 10;
                     if (units == 1 && gender == GrammaticalGender.Feminine)
                     {
                         lastPart += " y una";
@@ -124,15 +128,23 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             if (number < 0)
+            {
                 return string.Format("menos {0}", Convert(Math.Abs(number)));
+            }
 
             if (number == 0)
+            {
                 return string.Format("cero");
+            }
 
             if ((number / 1000) > 0)
             {
                 var thousandsPart = ThousandsMapOrdinal[(number / 1000)];
-                if (gender == GrammaticalGender.Feminine) thousandsPart = thousandsPart.TrimEnd('o') + "a";
+                if (gender == GrammaticalGender.Feminine)
+                {
+                    thousandsPart = thousandsPart.TrimEnd('o') + "a";
+                }
+
                 parts.Add(thousandsPart);
                 number %= 1000;
             }
@@ -140,7 +152,11 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 100) > 0)
             {
                 var hundredsPart = HundredsMapOrdinal[(number / 100)];
-                if (gender == GrammaticalGender.Feminine) hundredsPart = hundredsPart.TrimEnd('o') + "a";
+                if (gender == GrammaticalGender.Feminine)
+                {
+                    hundredsPart = hundredsPart.TrimEnd('o') + "a";
+                }
+
                 parts.Add(hundredsPart);
                 number %= 100;
             }
@@ -148,14 +164,22 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 10) > 0)
             {
                 var tensPart = TensMapOrdinal[(number / 10)];
-                if (gender == GrammaticalGender.Feminine) tensPart = tensPart.TrimEnd('o') + "a";
+                if (gender == GrammaticalGender.Feminine)
+                {
+                    tensPart = tensPart.TrimEnd('o') + "a";
+                }
+
                 parts.Add(tensPart);
                 number %= 10;
             }
 
             if (Ordinals.TryGetValue(number, out var towords))
             {
-                if (gender == GrammaticalGender.Feminine) towords = towords.TrimEnd('o') + "a";
+                if (gender == GrammaticalGender.Feminine)
+                {
+                    towords = towords.TrimEnd('o') + "a";
+                }
+
                 parts.Add(towords);
             }
 

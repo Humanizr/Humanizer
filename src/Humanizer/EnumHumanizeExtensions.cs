@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using Humanizer.Configuration;
-using System.Collections.Generic;
 
 namespace Humanizer
 {
@@ -45,7 +44,9 @@ namespace Humanizer
                 var customDescription = GetCustomDescription(memInfo);
 
                 if (customDescription != null)
+                {
                     return customDescription;
+                }
             }
 
             return caseName.Humanize();
@@ -75,13 +76,19 @@ namespace Humanizer
                     if (methodGetDescription != null)
                     {
                         var executedMethod = methodGetDescription.Invoke(attr, new object[0]);
-                        if (executedMethod != null) return executedMethod.ToString();
+                        if (executedMethod != null)
+                        {
+                            return executedMethod.ToString();
+                        }
                     }
                     var methodGetName = attrType.GetRuntimeMethod(DisplayAttributeGetNameMethodName, new Type[0]);
                     if (methodGetName != null)
                     {
                         var executedMethod = methodGetName.Invoke(attr, new object[0]);
-                        if (executedMethod != null) return executedMethod.ToString();
+                        if (executedMethod != null)
+                        {
+                            return executedMethod.ToString();
+                        }
                     }
                     return null;
                 }
@@ -91,7 +98,9 @@ namespace Humanizer
                         .Where(StringTypedProperty)
                         .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
+                {
                     return descriptionProperty.GetValue(attr, null).ToString();
+                }
             }
 
             return null;

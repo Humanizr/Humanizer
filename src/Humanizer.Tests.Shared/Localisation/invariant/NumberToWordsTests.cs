@@ -1,10 +1,9 @@
-﻿using System.Globalization;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Localisation.invariant
 {
     [UseCulture("")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]

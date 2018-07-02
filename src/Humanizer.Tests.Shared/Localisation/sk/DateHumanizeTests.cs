@@ -45,13 +45,13 @@ namespace Humanizer.Tests.Localisation.sk
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
         }
- 
+
         [Theory]
         [InlineData(1, "zajtra")]
         [InlineData(2, "o 2 dni")]
         [InlineData(3, "o 3 dni")]
         [InlineData(4, "o 4 dni")]
-        [InlineData(9, "o 9 dní")]        
+        [InlineData(9, "o 9 dní")]
         [InlineData(10, "o 10 dní")]
         public void DaysFromNow(int days, string expected)
         {

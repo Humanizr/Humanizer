@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Humanizer
@@ -19,12 +18,12 @@ namespace Humanizer
             FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
         }
 
-        static string FromUnderscoreDashSeparatedWords (string input)
+        private static string FromUnderscoreDashSeparatedWords(string input)
         {
-            return string.Join(" ", input.Split(new[] {'_', '-'}));
+            return string.Join(" ", input.Split(new[] { '_', '-' }));
         }
 
-        static string FromPascalCase(string input)
+        private static string FromPascalCase(string input)
         {
             var result = string.Join(" ", PascalCaseWordPartsRegex
                 .Matches(input).Cast<Match>()
@@ -46,15 +45,21 @@ namespace Humanizer
         {
             // if input is all capitals (e.g. an acronym) then return it without change
             if (input.ToCharArray().All(char.IsUpper))
+            {
                 return input;
+            }
 
             // if input contains a dash or underscore which preceeds or follows a space (or both, e.g. free-standing)
             // remove the dash/underscore and run it through FromPascalCase
             if (FreestandingSpacingCharRegex.IsMatch(input))
+            {
                 return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
+            }
 
             if (input.Contains("_") || input.Contains("-"))
+            {
                 return FromUnderscoreDashSeparatedWords(input);
+            }
 
             return FromPascalCase(input);
         }

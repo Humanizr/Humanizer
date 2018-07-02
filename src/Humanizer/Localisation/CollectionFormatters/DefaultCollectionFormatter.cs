@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Humanizer.Localisation.CollectionFormatters
 {
-    class DefaultCollectionFormatter : ICollectionFormatter
+    internal class DefaultCollectionFormatter : ICollectionFormatter
     {
         protected string DefaultSeparator = "";
 
@@ -35,8 +35,15 @@ namespace Humanizer.Localisation.CollectionFormatters
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
         {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (objectFormatter == null) throw new ArgumentNullException(nameof(objectFormatter));
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            if (objectFormatter == null)
+            {
+                throw new ArgumentNullException(nameof(objectFormatter));
+            }
 
             return HumanizeDisplayStrings(
                 collection.Select(objectFormatter),
@@ -45,8 +52,15 @@ namespace Humanizer.Localisation.CollectionFormatters
 
         public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator)
         {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (objectFormatter == null) throw new ArgumentNullException(nameof(objectFormatter));
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            if (objectFormatter == null)
+            {
+                throw new ArgumentNullException(nameof(objectFormatter));
+            }
 
             return HumanizeDisplayStrings(
                 collection.Select(objectFormatter).Select(o => o?.ToString()),
@@ -63,10 +77,14 @@ namespace Humanizer.Localisation.CollectionFormatters
             var count = itemsArray.Length;
 
             if (count == 0)
+            {
                 return "";
+            }
 
             if (count == 1)
+            {
                 return itemsArray[0];
+            }
 
             var itemsBeforeLast = itemsArray.Take(count - 1);
             var lastItem = itemsArray.Skip(count - 1).First();

@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.hu
 {
     [UseCulture("hu-HU")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
         [Theory]
         [InlineData(1, "egy másodperce")]

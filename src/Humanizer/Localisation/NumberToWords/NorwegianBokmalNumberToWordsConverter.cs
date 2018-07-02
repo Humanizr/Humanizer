@@ -39,10 +39,14 @@ namespace Humanizer.Localisation.NumberToWords
         private string Convert(int number, bool isOrdinal, GrammaticalGender gender)
         {
             if (number == 0)
+            {
                 return GetUnitValue(0, isOrdinal);
+            }
 
             if (number < 0)
+            {
                 return string.Format("minus {0}", Convert(-number, isOrdinal, gender));
+            }
 
             if (number == 1)
             {
@@ -96,26 +100,40 @@ namespace Humanizer.Localisation.NumberToWords
             if (number > 0)
             {
                 if (parts.Count != 0)
+                {
                     if (millionOrMore && !hundred && !thousand)
+                    {
                         parts.Add("og ");
+                    }
                     else
+                    {
                         parts.Add("og");
+                    }
+                }
 
                 if (number < 20)
+                {
                     parts.Add(GetUnitValue(number, isOrdinal));
+                }
                 else
                 {
                     var lastPart = TensMap[number / 10];
                     if ((number % 10) > 0)
+                    {
                         lastPart += string.Format("{0}", GetUnitValue(number % 10, isOrdinal));
+                    }
                     else if (isOrdinal)
+                    {
                         lastPart = lastPart.TrimEnd('e') + "ende";
+                    }
 
                     parts.Add(lastPart);
                 }
             }
             else if (isOrdinal)
+            {
                 parts[parts.Count - 1] += (number == 0 ? "" : "en") + (millionOrMore ? "te" : "de");
+            }
 
             var toWords = string.Join("", parts.ToArray()).Trim();
 
@@ -127,14 +145,22 @@ namespace Humanizer.Localisation.NumberToWords
             if (isOrdinal)
             {
                 if (ExceptionNumbersToWords(number, out var exceptionString))
+                {
                     return exceptionString;
+                }
                 else if (number < 13)
+                {
                     return UnitsMap[number].TrimEnd('e') + "ende";
+                }
                 else
+                {
                     return UnitsMap[number] + "de";
+                }
             }
             else
+            {
                 return UnitsMap[number];
+            }
         }
 
         private static bool ExceptionNumbersToWords(int number, out string words)
@@ -146,7 +172,10 @@ namespace Humanizer.Localisation.NumberToWords
         {
             var postfix = postfixSpace ? " " : "";
             if (number == 1)
+            {
                 return singular + postfix;
+            }
+
             return string.Format(pluralFormat, Convert(number)) + postfix;
         }
     }

@@ -111,12 +111,15 @@ namespace Humanizer
                 : input.Pluralize(inputIsKnownToBeSingular: false);
 
             if (showQuantityAs == ShowQuantityAs.None)
+            {
                 return transformedInput;
+            }
 
             if (showQuantityAs == ShowQuantityAs.Numeric)
+            {
                 return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+            }
 
-            
             return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
         }
     }

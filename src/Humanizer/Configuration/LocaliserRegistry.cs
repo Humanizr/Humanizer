@@ -65,12 +65,14 @@ namespace Humanizer.Configuration
             _localisers[localeCode] = localiser;
         }
 
-        Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
+        private Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
         {
             for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
             {
                 if (_localisers.TryGetValue(c.Name, out var localiser))
+                {
                     return localiser;
+                }
             }
 
             return _defaultLocaliser;

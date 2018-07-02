@@ -31,7 +31,7 @@ namespace Humanizer.Tests.Bytes
         public void Constructor()
         {
             var result = new ByteSize(1099511627776);
-            
+
             Assert.Equal(8.796093022208e12, result.Bits);
             Assert.Equal(1099511627776, result.Bytes);
             Assert.Equal(1073741824, result.Kilobytes);

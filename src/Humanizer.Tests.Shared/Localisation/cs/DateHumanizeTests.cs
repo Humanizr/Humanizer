@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.cs
 {
     [UseCulture("cs-CZ")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
         [Theory]
         [InlineData(1, "za sekundu")]

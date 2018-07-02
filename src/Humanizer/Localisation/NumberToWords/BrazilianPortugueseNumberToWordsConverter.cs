@@ -22,10 +22,14 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
 
             if (number == 0)
+            {
                 return "zero";
+            }
 
             if (number < 0)
+            {
                 return string.Format("menos {0}", Convert(Math.Abs(number), gender));
+            }
 
             var parts = new List<string>();
 
@@ -59,10 +63,14 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 100) > 0)
             {
                 if (number == 100)
+                {
                     parts.Add(parts.Count > 0 ? "e cem" : "cem");
+                }
                 else
+                {
                     // Gender is applied to hundreds starting from 200
                     parts.Add(ApplyGender(PortugueseHundredsMap[(number / 100)], gender));
+                }
 
                 number %= 100;
             }
@@ -70,15 +78,21 @@ namespace Humanizer.Localisation.NumberToWords
             if (number > 0)
             {
                 if (parts.Count != 0)
+                {
                     parts.Add("e");
+                }
 
                 if (number < 20)
+                {
                     parts.Add(ApplyGender(PortugueseUnitsMap[number], gender));
+                }
                 else
                 {
                     var lastPart = PortugueseTensMap[number / 10];
                     if ((number % 10) > 0)
+                    {
                         lastPart += string.Format(" e {0}", ApplyGender(PortugueseUnitsMap[number % 10], gender));
+                    }
 
                     parts.Add(lastPart);
                 }
@@ -91,7 +105,9 @@ namespace Humanizer.Localisation.NumberToWords
         {
             // N/A in Portuguese ordinal
             if (number == 0)
+            {
                 return "zero";
+            }
 
             var parts = new List<string>();
 
@@ -135,24 +151,34 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             if (number > 0)
+            {
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalUnitsMap[number], gender));
+            }
 
             return string.Join(" ", parts.ToArray());
         }
 
         private static string ApplyGender(string toWords, GrammaticalGender gender)
         {
-            if (gender != GrammaticalGender.Feminine) 
+            if (gender != GrammaticalGender.Feminine)
+            {
                 return toWords;
+            }
 
             if (toWords.EndsWith("os"))
+            {
                 return toWords.Substring(0, toWords.Length - 2) + "as";
+            }
 
             if (toWords.EndsWith("um"))
+            {
                 return toWords.Substring(0, toWords.Length - 2) + "uma";
+            }
 
             if (toWords.EndsWith("dois"))
+            {
                 return toWords.Substring(0, toWords.Length - 4) + "duas";
+            }
 
             return toWords;
         }
@@ -160,7 +186,9 @@ namespace Humanizer.Localisation.NumberToWords
         private static string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
         {
             if (gender == GrammaticalGender.Feminine)
+            {
                 return toWords.TrimEnd('o') + 'a';
+            }
 
             return toWords;
         }

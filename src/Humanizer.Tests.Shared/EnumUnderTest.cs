@@ -66,7 +66,7 @@ namespace Humanizer.Tests
 #if !NETFX_CORE
     public class DescriptionSubclassAttribute : DescriptionAttribute
     {
-        public DescriptionSubclassAttribute(string description):base(description)
+        public DescriptionSubclassAttribute(string description) : base(description)
         {
         }
 

@@ -13,7 +13,7 @@ namespace Humanizer.Bytes
         /// Quantity of bytes
         /// </summary>
         /// <returns></returns>
-        public ByteSize Size { get; private set;}
+        public ByteSize Size { get; private set; }
 
         /// <summary>
         /// Interval that bytes were transferred in
@@ -69,7 +69,9 @@ namespace Humanizer.Bytes
                 displayUnit = "hour";
             }
             else
+            {
                 throw new NotSupportedException("timeUnit must be Second, Minute, or Hour");
+            }
 
             return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
                 .Humanize(format) + '/' + displayUnit;

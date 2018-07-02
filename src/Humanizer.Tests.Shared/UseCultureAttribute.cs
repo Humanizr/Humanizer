@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using Xunit.Sdk;
 
 namespace Humanizer.Tests
 {
-   
+
     /// <summary>
     /// Apply this attribute to your test method to replace the
     /// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
@@ -17,11 +15,10 @@ namespace Humanizer.Tests
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class UseCultureAttribute : BeforeAfterTestAttribute
     {
-        readonly Lazy<CultureInfo> culture;
-        readonly Lazy<CultureInfo> uiCulture;
-
-        CultureInfo originalCulture;
-        CultureInfo originalUICulture;
+        private readonly Lazy<CultureInfo> culture;
+        private readonly Lazy<CultureInfo> uiCulture;
+        private CultureInfo originalCulture;
+        private CultureInfo originalUICulture;
 
 
         /// <summary>

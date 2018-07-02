@@ -22,13 +22,32 @@ namespace Humanizer.DateTimeHumanizeStrategy
             int years = 0, months = 0;
 
             // start approximate from smaller units towards bigger ones
-            if (ts.Milliseconds >= 999 * precision) seconds += 1;
-            if (seconds >= 59 * precision) minutes += 1;
-            if (minutes >= 59 * precision) hours += 1;
-            if (hours >= 23 * precision) days += 1;
+            if (ts.Milliseconds >= 999 * precision)
+            {
+                seconds += 1;
+            }
+
+            if (seconds >= 59 * precision)
+            {
+                minutes += 1;
+            }
+
+            if (minutes >= 59 * precision)
+            {
+                hours += 1;
+            }
+
+            if (hours >= 23 * precision)
+            {
+                days += 1;
+            }
 
             // month calculation 
-            if (days >= 30 * precision & days <= 31) months = 1;
+            if (days >= 30 * precision & days <= 31)
+            {
+                months = 1;
+            }
+
             if (days > 31 && days < 365 * precision)
             {
                 var factor = Convert.ToInt32(Math.Floor((double)days / 30));
@@ -37,7 +56,11 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             // year calculation
-            if (days >= 365 * precision && days <= 366) years = 1;
+            if (days >= 365 * precision && days <= 366)
+            {
+                years = 1;
+            }
+
             if (days > 365)
             {
                 var factor = Convert.ToInt32(Math.Floor((double)days / 365));
@@ -47,12 +70,36 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             // start computing result from larger units to smaller ones
             var formatter = Configurator.GetFormatter(culture);
-            if (years > 0) return formatter.DateHumanize(TimeUnit.Year, tense, years);
-            if (months > 0) return formatter.DateHumanize(TimeUnit.Month, tense, months);
-            if (days > 0) return formatter.DateHumanize(TimeUnit.Day, tense, days);
-            if (hours > 0) return formatter.DateHumanize(TimeUnit.Hour, tense, hours);
-            if (minutes > 0) return formatter.DateHumanize(TimeUnit.Minute, tense, minutes);
-            if (seconds > 0) return formatter.DateHumanize(TimeUnit.Second, tense, seconds);
+            if (years > 0)
+            {
+                return formatter.DateHumanize(TimeUnit.Year, tense, years);
+            }
+
+            if (months > 0)
+            {
+                return formatter.DateHumanize(TimeUnit.Month, tense, months);
+            }
+
+            if (days > 0)
+            {
+                return formatter.DateHumanize(TimeUnit.Day, tense, days);
+            }
+
+            if (hours > 0)
+            {
+                return formatter.DateHumanize(TimeUnit.Hour, tense, hours);
+            }
+
+            if (minutes > 0)
+            {
+                return formatter.DateHumanize(TimeUnit.Minute, tense, minutes);
+            }
+
+            if (seconds > 0)
+            {
+                return formatter.DateHumanize(TimeUnit.Second, tense, seconds);
+            }
+
             return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
         }
 
@@ -68,22 +115,34 @@ namespace Humanizer.DateTimeHumanizeStrategy
             var formatter = Configurator.GetFormatter(culture);
 
             if (ts.TotalMilliseconds < 500)
+            {
                 return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
+            }
 
             if (ts.TotalSeconds < 60)
+            {
                 return formatter.DateHumanize(TimeUnit.Second, tense, ts.Seconds);
+            }
 
             if (ts.TotalSeconds < 120)
+            {
                 return formatter.DateHumanize(TimeUnit.Minute, tense, 1);
+            }
 
             if (ts.TotalMinutes < 60)
+            {
                 return formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes);
+            }
 
             if (ts.TotalMinutes < 90)
+            {
                 return formatter.DateHumanize(TimeUnit.Hour, tense, 1);
+            }
 
             if (ts.TotalHours < 24)
+            {
                 return formatter.DateHumanize(TimeUnit.Hour, tense, ts.Hours);
+            }
 
             if (ts.TotalHours < 48)
             {
@@ -92,12 +151,17 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             if (ts.TotalDays < 28)
+            {
                 return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
+            }
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
                 if (comparisonBase.Date.AddMonths(tense == Tense.Future ? 1 : -1) == input.Date)
+                {
                     return formatter.DateHumanize(TimeUnit.Month, tense, 1);
+                }
+
                 return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
             }
 
@@ -108,7 +172,10 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             var years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
-            if (years == 0) years = 1;
+            if (years == 0)
+            {
+                years = 1;
+            }
 
             return formatter.DateHumanize(TimeUnit.Year, tense, years);
         }

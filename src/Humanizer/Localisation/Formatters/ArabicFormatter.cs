@@ -14,11 +14,15 @@
         {
             //In Arabic pluralization 2 entities gets a different word.
             if (number == 2)
+            {
                 return resourceKey + DualPostfix;
+            }
 
             //In Arabic pluralization entities where the count is between 3 and 10 gets a different word.
-            if (number >= 3 && number <= 10 )
+            if (number >= 3 && number <= 10)
+            {
                 return resourceKey + PluralPostfix;
+            }
 
             return resourceKey;
         }

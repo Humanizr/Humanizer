@@ -168,6 +168,17 @@ namespace Humanizer
         Feminine = 1,
         Neuter = 2,
     }
+    public class static HeadingExtensions
+    {
+        public static double FromAbbreviatedHeading(this string heading) { }
+        public static string ToHeading(this double heading, Humanizer.HeadingStyle style = 0, System.Globalization.CultureInfo culture = null) { }
+        public static char ToHeadingArrow(this double heading) { }
+    }
+    public enum HeadingStyle
+    {
+        Abbreviated = 0,
+        Full = 1,
+    }
     public class In
     {
         public In() { }

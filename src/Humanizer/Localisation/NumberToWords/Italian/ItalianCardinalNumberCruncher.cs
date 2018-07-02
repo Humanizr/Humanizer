@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords.Italian
 {
-    class ItalianCardinalNumberCruncher
+    internal class ItalianCardinalNumberCruncher
     {
         public ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
         {
@@ -12,32 +12,34 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             _gender = gender;
             _nextSet = ThreeDigitSets.Units;
         }
-        
+
         public string Convert()
         {
             // it's easier to treat zero as a completely distinct case
             if (_fullNumber == 0)
+            {
                 return "zero";
+            }
 
             var words = string.Empty;
 
             foreach (var part in _threeDigitParts)
             {
                 var partToString = GetNextPartConverter();
-                
+
                 words = partToString(part) + words;
             }
-            
+
             // remove trailing spaces if there are only millions or billions
             return words.TrimEnd();
         }
-        
+
         protected readonly int _fullNumber;
         protected readonly List<int> _threeDigitParts;
         protected readonly GrammaticalGender _gender;
-        
+
         protected ThreeDigitSets _nextSet;
-        
+
         /// <summary>
         /// Splits a number into a sequence of three-digits numbers, starting 
         /// from units, then thousands, millions, and so on.
@@ -48,19 +50,19 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         {
             var parts = new List<int>();
             var rest = number;
-            
+
             while (rest > 0)
             {
                 var threeDigit = rest % 1000;
-                
+
                 parts.Add(threeDigit);
-                
-                rest = (int)(rest / 1000);
+
+                rest = rest / 1000;
             }
-            
+
             return parts;
         }
-        
+
         /// <summary>
         /// During number conversion to text, finds out the converter to use
         /// for the next three-digit set.
@@ -69,40 +71,40 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         public Func<int, string> GetNextPartConverter()
         {
             Func<int, string> converter;
-            
+
             switch (_nextSet)
             {
                 case ThreeDigitSets.Units:
                     converter = UnitsConverter;
                     _nextSet = ThreeDigitSets.Thousands;
                     break;
-                    
+
                 case ThreeDigitSets.Thousands:
                     converter = ThousandsConverter;
                     _nextSet = ThreeDigitSets.Millions;
                     break;
-                    
+
                 case ThreeDigitSets.Millions:
                     converter = MillionsConverter;
                     _nextSet = ThreeDigitSets.Billions;
                     break;
-                    
+
                 case ThreeDigitSets.Billions:
                     converter = BillionsConverter;
                     _nextSet = ThreeDigitSets.More;
                     break;
-                    
+
                 case ThreeDigitSets.More:
                     converter = null;
                     break;
-                    
+
                 default:
                     throw new ArgumentOutOfRangeException("Unknow ThreeDigitSet: " + _nextSet);
             }
-            
+
             return converter;
         }
-        
+
         /// <summary>
         /// Converts a three-digit set to text.
         /// </summary>
@@ -111,26 +113,28 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <returns>The same three-digit set expressed as text.</returns>
         protected static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
         {
-            if (number == 0) 
+            if (number == 0)
+            {
                 return string.Empty;
-              
+            }
+
             // grab lowest two digits
             var tensAndUnits = number % 100;
             // grab third digit
-            var hundreds = (int)(number / 100);
-            
+            var hundreds = number / 100;
+
             // grab also first and second digits separately
             var units = tensAndUnits % 10;
-            var tens = (int)(tensAndUnits / 10);
-            
+            var tens = tensAndUnits / 10;
+
             var words = string.Empty;
-            
+
             // append text for hundreds
             words += _hundredNumberToText[hundreds];
-            
+
             // append text for tens, only those from twenty upward
             words += _tensOver20NumberToText[tens];
-            
+
             if (tensAndUnits <= 9)
             {
                 // simple case for units, under 10
@@ -144,22 +148,22 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             else
             {
                 // just append units text, with some corner cases
-                
+
                 // truncate tens last vowel before 'uno' (1) and 'otto' (8)                    
                 if (units == 1 || units == 8)
                 {
                     words = words.Remove(words.Length - 1);
                 }
-                
+
                 // if this is the last set, an accent could be due
                 var unitsText = (thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units]);
-                
+
                 words += unitsText;
             }
-            
+
             return words;
         }
-        
+
         /// <summary>
         /// Converts a three-digit number, as units, to text.
         /// </summary>
@@ -169,11 +173,13 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         {
             // being a unique case, it's easier to treat unity feminine gender as a completely distinct case
             if (_gender == GrammaticalGender.Feminine && _fullNumber == 1)
+            {
                 return "una";
-                
+            }
+
             return ThreeDigitSetConverter(number, true);
         }
-        
+
         /// <summary>
         /// Converts a thousands three-digit number to text.
         /// </summary>
@@ -181,15 +187,19 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <returns>The same three-digit number of thousands expressed as text.</returns>
         protected static string ThousandsConverter(int number)
         {
-            if (number == 0) 
+            if (number == 0)
+            {
                 return string.Empty;
-              
+            }
+
             if (number == 1)
+            {
                 return "mille";
-            
+            }
+
             return ThreeDigitSetConverter(number) + "mila";
         }
-        
+
         /// <summary>
         /// Converts a millions three-digit number to text.
         /// </summary>
@@ -197,15 +207,19 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <returns>The same three-digit number of millions expressed as text.</returns>
         protected static string MillionsConverter(int number)
         {
-            if (number == 0) 
+            if (number == 0)
+            {
                 return string.Empty;
-              
+            }
+
             if (number == 1)
+            {
                 return "un milione ";
-              
+            }
+
             return ThreeDigitSetConverter(number, true) + " milioni ";
         }
-        
+
         /// <summary>
         /// Converts a billions three-digit number to text.
         /// </summary>
@@ -214,11 +228,13 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         protected static string BillionsConverter(int number)
         {
             if (number == 1)
+            {
                 return "un miliardo ";
-              
+            }
+
             return ThreeDigitSetConverter(number) + " miliardi ";
         }
-        
+
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
         /// </summary>
@@ -235,7 +251,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "otto",
             "nove"
         };
-        
+
         /// <summary>
         /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
         /// </summary>
@@ -252,7 +268,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "ottanta",
             "novanta"
         };
-        
+
         /// <summary>
         /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
         /// </summary>
@@ -269,7 +285,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "diciotto",
             "diciannove"
         };
-        
+
         /// <summary>
         /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
         /// </summary>
@@ -286,7 +302,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "ottocento",
             "novecento"
         };
-        
+
         /// <summary>
         /// Enumerates sets of three-digits having distinct conversion to text.
         /// </summary>
@@ -296,22 +312,22 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             /// Lowest three-digits set, from 1 to 999.
             /// </summary>
             Units,
-            
+
             /// <summary>
             /// Three-digits set counting the thousands, from 1'000 to 999'000.
             /// </summary>
             Thousands,
-            
+
             /// <summary>
             /// Three-digits set counting millions, from 1'000'000 to 999'000'000.
             /// </summary>
             Millions,
-            
+
             /// <summary>
             /// Three-digits set counting billions, from 1'000'000'000 to 999'000'000'000.
             /// </summary>
             Billions,
-            
+
             /// <summary>
             /// Three-digits set beyond 999 billions, from 1'000'000'000'000 onward.
             /// </summary>

@@ -78,12 +78,16 @@ namespace Humanizer.Inflections
             var result = ApplyRules(_plurals, word);
 
             if (inputIsKnownToBeSingular)
+            {
                 return result;
+            }
 
             var asSingular = ApplyRules(_singulars, word);
             var asSingularAsPlural = ApplyRules(_plurals, asSingular);
             if (asSingular != null && asSingular != word && asSingular + "s" != word && asSingularAsPlural == word && result != word)
+            {
                 return word;
+            }
 
             return result;
         }
@@ -99,13 +103,17 @@ namespace Humanizer.Inflections
             var result = ApplyRules(_singulars, word);
 
             if (inputIsKnownToBePlural)
+            {
                 return result;
+            }
 
             // the Plurality is unknown so we should check all possibilities
             var asPlural = ApplyRules(_plurals, word);
             var asPluralAsSingular = ApplyRules(_singulars, asPlural);
             if (asPlural != word && word + "s" != asPlural && asPluralAsSingular == word && result != word)
+            {
                 return word;
+            }
 
             return result ?? word;
         }
@@ -113,16 +121,22 @@ namespace Humanizer.Inflections
         private string ApplyRules(IList<Rule> rules, string word)
         {
             if (word == null)
+            {
                 return null;
+            }
 
             if (IsUncountable(word))
+            {
                 return word;
+            }
 
             var result = word;
             for (var i = rules.Count - 1; i >= 0; i--)
             {
                 if ((result = rules[i].Apply(word)) != null)
+                {
                     break;
+                }
             }
             return result;
         }
@@ -146,7 +160,9 @@ namespace Humanizer.Inflections
             public string Apply(string word)
             {
                 if (!_regex.IsMatch(word))
+                {
                     return null;
+                }
 
                 return _regex.Replace(word, _replacement);
             }

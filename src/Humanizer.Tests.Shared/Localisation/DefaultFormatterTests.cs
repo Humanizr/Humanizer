@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using Humanizer.Localisation;
-using Humanizer.Localisation.Formatters;
 using Xunit;
 
 namespace Humanizer.Tests.Localisation
@@ -13,7 +10,7 @@ namespace Humanizer.Tests.Localisation
         [UseCulture("es")]
         public void HandlesNotImplementedCollectionFormattersGracefully()
         {
-            var a = new[] {DateTime.UtcNow, DateTime.UtcNow.AddDays(10)};
+            var a = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };
             var b = a.Humanize();
 
             Assert.Equal(a[0] + " & " + a[1], b);
