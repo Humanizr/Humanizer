@@ -20,11 +20,11 @@
             /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
             /// <param name="count">Number of units, default is One.</param>
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
-            public static string GetResourceKey(TimeUnit unit, int count = 1)
+            public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false)
             {
                 ValidateRange(count);
 
-                if (count == 0)
+                if (count == 0 && toWords)
                 {
                     return Zero;
                 }
