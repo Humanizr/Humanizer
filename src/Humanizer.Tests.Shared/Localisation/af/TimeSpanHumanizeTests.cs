@@ -110,7 +110,13 @@ namespace Humanizer.Tests.Localisation.af
         [Fact]
         public void NoTime()
         {
-            Assert.Equal("geen tyd", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 millisekondes", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            Assert.Equal("geen tyd", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }
