@@ -289,8 +289,10 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(0, 3, "no time")]
-        [InlineData(0, 2, "no time")]
+        [InlineData(0, 3, "no time", true)]
+        [InlineData(0, 2, "no time", true)]
+        [InlineData(0, 3, "0 milliseconds")]
+        [InlineData(0, 2, "0 milliseconds")]
         [InlineData(10, 2, "10 milliseconds")]
         [InlineData(1400, 2, "1 second, 400 milliseconds")]
         [InlineData(2500, 2, "2 seconds, 500 milliseconds")]
@@ -324,9 +326,9 @@ namespace Humanizer.Tests
         [InlineData(1299630020, 4, "2 weeks, 1 day, 1 hour")]
         [InlineData(1299630020, 5, "2 weeks, 1 day, 1 hour, 30 seconds")]
         [InlineData(1299630020, 6, "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds")]
-        public void TimeSpanWithPrecisionAndCountingEmptyUnits(int milliseconds, int precision, string expected)
+        public void TimeSpanWithPrecisionAndCountingEmptyUnits(int milliseconds, int precision, string expected, bool toWords = false)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision: precision, countEmptyUnits: true);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision: precision, countEmptyUnits: true, toWords: toWords);
             Assert.Equal(expected, actual);
         }
 
