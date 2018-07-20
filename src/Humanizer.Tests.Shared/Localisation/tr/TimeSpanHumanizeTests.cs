@@ -88,6 +88,14 @@ namespace Humanizer.Tests.Localisation.tr
         {
             var noTime = TimeSpan.Zero;
             var actual = noTime.Humanize();
+            Assert.Equal("0 milisaniye", actual);
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            var noTime = TimeSpan.Zero;
+            var actual = noTime.Humanize(toWords: true);
             Assert.Equal("zaman farkı yok", actual);
         }
     }

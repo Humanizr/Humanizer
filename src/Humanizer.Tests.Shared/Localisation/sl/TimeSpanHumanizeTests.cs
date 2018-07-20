@@ -100,7 +100,13 @@ namespace Humanizer.Tests.Localisation.sl
         [Fact]
         public void NoTime()
         {
-            Assert.Equal("nič časa", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 milisekund", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            Assert.Equal("nič časa", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }
