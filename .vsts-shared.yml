@@ -16,7 +16,7 @@ steps:
 
 - task: DotNetCoreInstaller@0
   inputs:
-    version: '2.1.400-preview-008975'
+    version: '2.1.400-preview-009063'
 
 - task: NuGetToolInstaller@0
   displayName: Use NuGet 4.7.0
