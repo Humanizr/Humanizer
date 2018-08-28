@@ -21,7 +21,6 @@
 //THE SOFTWARE.
 
 using System;
-
 using Humanizer.Bytes;
 using Xunit;
 
