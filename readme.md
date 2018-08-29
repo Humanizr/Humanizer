@@ -903,7 +903,7 @@ Also the reverse operation using the `FromMetric` extension.
 ```
 
 ### <a id="bytesize">ByteSize</a>
-Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
+Humanizer includes a part of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
 Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
@@ -948,8 +948,8 @@ maxFileSize.LargestWholeNumberValue;   // 10
 If you want a string representation you can call `ToString` or `Humanize` interchangeably on the `ByteSize` instance:
 
 ```C#
-7.Bits().ToString();         // 7 b
-8.Bits().ToString();         // 1 B
+7.Bits().ToString();           // 7 b
+8.Bits().ToString();           // 1 B
 (.5).Kilobytes().Humanize();   // 512 B
 (1000).Kilobytes().ToString(); // 1000 KB
 (1024).Kilobytes().Humanize(); // 1 MB
@@ -980,6 +980,18 @@ b.Humanize("000.00");     // 010.51 KB
 b.ToString("#.#### MB");  // .0103 MB
 b.Humanize("0.00 GB");    // 0 GB
 b.Humanize("#.## B");     // 10757.12 B
+```
+
+If you want a string representation with full words you can call `ToFullWords` on the `ByteSize` instance:
+
+```C#
+7.Bits().ToFullWords();           // 7 bits
+8.Bits().ToFullWords();           // 1 Byte
+(.5).Kilobytes().ToFullWords();   // 512 Bytes
+(1000).Kilobytes().ToFullWords(); // 1000 Kilobytes
+(1024).Kilobytes().ToFullWords(); // 1 Megabyte
+(.5).Gigabytes().ToFullWords();   // 512 Megabytes
+(1024).Gigabytes().ToFullWords(); // 1 Terabyte
 ```
 
 There isn't a `Dehumanize` method to turn a string representation back into a `ByteSize` instance; but you can use `Parse` and `TryParse` on `ByteSize` to do that.
