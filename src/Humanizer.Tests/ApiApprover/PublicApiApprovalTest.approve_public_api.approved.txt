@@ -12,24 +12,31 @@ namespace Humanizer.Bytes
     }
     public struct ByteSize : System.IComparable, System.IComparable<Humanizer.Bytes.ByteSize>, System.IEquatable<Humanizer.Bytes.ByteSize>
     {
+        public const string Bit = "bit";
         public const long BitsInByte = 8;
         public const string BitSymbol = "b";
+        public const string Byte = "Byte";
         public const long BytesInGigabyte = 1073741824;
         public const long BytesInKilobyte = 1024;
         public const long BytesInMegabyte = 1048576;
         public const long BytesInTerabyte = 1099511627776;
         public const string ByteSymbol = "B";
+        public const string Gigabyte = "Gigabyte";
         public const string GigabyteSymbol = "GB";
+        public const string Kilobyte = "Kilobyte";
         public const string KilobyteSymbol = "KB";
         public static readonly Humanizer.Bytes.ByteSize MaxValue;
+        public const string Megabyte = "Megabyte";
         public const string MegabyteSymbol = "MB";
         public static readonly Humanizer.Bytes.ByteSize MinValue;
+        public const string Terabyte = "Terabyte";
         public const string TerabyteSymbol = "TB";
         public ByteSize(double byteSize) { }
         public long Bits { get; }
         public double Bytes { get; }
         public double Gigabytes { get; }
         public double Kilobytes { get; }
+        public string LargestWholeNumberFullWord { get; }
         public string LargestWholeNumberSymbol { get; }
         public double LargestWholeNumberValue { get; }
         public double Megabytes { get; }
@@ -54,6 +61,7 @@ namespace Humanizer.Bytes
         public override int GetHashCode() { }
         public static Humanizer.Bytes.ByteSize Parse(string s) { }
         public Humanizer.Bytes.ByteSize Subtract(Humanizer.Bytes.ByteSize bs) { }
+        public string ToFullWords() { }
         public override string ToString() { }
         public string ToString(string format) { }
         public static bool TryParse(string s, out Humanizer.Bytes.ByteSize result) { }
