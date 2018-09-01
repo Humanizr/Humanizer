@@ -1025,6 +1025,10 @@ namespace Humanizer
         public static Humanizer.ITruncator FixedNumberOfCharacters { get; }
         public static Humanizer.ITruncator FixedNumberOfWords { get; }
     }
+    public class static TupleizeExtensions
+    {
+        public static string Tupleize(this int input) { }
+    }
 }
 namespace Humanizer.Configuration
 {
