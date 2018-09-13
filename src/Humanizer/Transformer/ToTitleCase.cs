@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
@@ -7,30 +7,29 @@ namespace Humanizer
     {
         public string Transform(string input)
         {
-            var words = input.Split(' ');
-            var result = new List<string>();
-            foreach (var word in words)
+            var result = input;
+            var matches = Regex.Matches(input, @"\w+");
+            foreach (Match word in matches)
             {
-                if (word.Length == 0 || AllCapitals(word))
+                if (!AllCapitals(word.Value))
                 {
-                    result.Add(word);
-                }
-                else if (word.Length == 1)
-                {
-                    result.Add(word.ToUpper());
-                }
-                else
-                {
-                    result.Add(char.ToUpper(word[0]) + word.Remove(0, 1).ToLower());
+                    result = ReplaceWithTitleCase(word, result);
                 }
             }
 
-            return string.Join(" ", result);
+            return result;
         }
 
         private static bool AllCapitals(string input)
         {
             return input.ToCharArray().All(char.IsUpper);
+        }
+
+        private static string ReplaceWithTitleCase(Match word, string source)
+        {
+            var wordToConvert = word.Value;
+            var replacement = char.ToUpper(wordToConvert[0]) + wordToConvert.Remove(0, 1).ToLower();
+            return source.Substring(0, word.Index) + replacement + source.Substring(word.Index + word.Length);
         }
     }
 }
