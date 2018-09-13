@@ -42,15 +42,15 @@ namespace Humanizer.Bytes
         public const string BitSymbol = "b";
         public const string Bit = "bit";
         public const string ByteSymbol = "B";
-        public const string Byte = "Byte";
+        public const string Byte = "byte";
         public const string KilobyteSymbol = "KB";
-        public const string Kilobyte = "Kilobyte";
+        public const string Kilobyte = "kilobyte";
         public const string MegabyteSymbol = "MB";
-        public const string Megabyte = "Megabyte";
+        public const string Megabyte = "megabyte";
         public const string GigabyteSymbol = "GB";
-        public const string Gigabyte = "Gigabyte";
+        public const string Gigabyte = "gigabyte";
         public const string TerabyteSymbol = "TB";
-        public const string Terabyte = "Terabyte";
+        public const string Terabyte = "terabyte";
 
         public long Bits { get; private set; }
         public double Bytes { get; private set; }

@@ -15,21 +15,21 @@ namespace Humanizer.Bytes
         public const string Bit = "bit";
         public const long BitsInByte = 8;
         public const string BitSymbol = "b";
-        public const string Byte = "Byte";
+        public const string Byte = "byte";
         public const long BytesInGigabyte = 1073741824;
         public const long BytesInKilobyte = 1024;
         public const long BytesInMegabyte = 1048576;
         public const long BytesInTerabyte = 1099511627776;
         public const string ByteSymbol = "B";
-        public const string Gigabyte = "Gigabyte";
+        public const string Gigabyte = "gigabyte";
         public const string GigabyteSymbol = "GB";
-        public const string Kilobyte = "Kilobyte";
+        public const string Kilobyte = "kilobyte";
         public const string KilobyteSymbol = "KB";
         public static readonly Humanizer.Bytes.ByteSize MaxValue;
-        public const string Megabyte = "Megabyte";
+        public const string Megabyte = "megabyte";
         public const string MegabyteSymbol = "MB";
         public static readonly Humanizer.Bytes.ByteSize MinValue;
-        public const string Terabyte = "Terabyte";
+        public const string Terabyte = "terabyte";
         public const string TerabyteSymbol = "TB";
         public ByteSize(double byteSize) { }
         public long Bits { get; }

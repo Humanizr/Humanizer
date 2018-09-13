@@ -1,4 +1,4 @@
-<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
+﻿<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
 
 [<img align="right" width="100px" src="https://dotnetfoundation.org/images/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
 
@@ -903,7 +903,7 @@ Also the reverse operation using the `FromMetric` extension.
 ```
 
 ### <a id="bytesize">ByteSize</a>
-Humanizer includes a part of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
+Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
 Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
