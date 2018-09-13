@@ -24,9 +24,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ContentWithTargetPath Include="ApiApprover\PublicApiApprovalTest.approve_public_api.approved.txt">
+    <Content Include="ApiApprover\PublicApiApprovalTest.approve_public_api.approved.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </ContentWithTargetPath>
+    </Content>
     <Content Include="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
