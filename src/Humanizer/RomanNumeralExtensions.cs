@@ -86,6 +86,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Integer input</param>
         /// <returns>Roman number</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the input is smaller than 1 or larger than 3999</exception>
         public static string ToRoman(this int input)
         {
             const int minValue = 1;
