@@ -439,7 +439,14 @@ When there are multiple time units, they are combined using the `", "` string:
 
 ```C#
 TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
-````
+```
+
+When `TimeSpan` is zero, the default behavior will return "0" plus whatever the minimum time unit is. However, if you assign `true` to `toWords` when calling `Humanize`, then the method returns "no time". For example:
+```C#
+TimeSpan.Zero.Humanize(1) => "0 milliseconds"
+TimeSpan.Zero.Humanize(1, toWords: true) => "no time"
+TimeSpan.Zero.Humanize(1, minUnit: Humanizer.Localisation.TimeUnit.Second) => "0 seconds"
+```
 
 Using the `collectionSeparator` parameter, you can specify your own separator string:
 
