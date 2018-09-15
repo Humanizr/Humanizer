@@ -80,8 +80,14 @@ namespace Humanizer.Tests.Localisation.bnBD
         [Fact]
         public void NoTime()
         {
+            Assert.Equal("0 মিলিসেকেন্ড", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
             // This one really doesn't make a lot of sense but again... w/e
-            Assert.Equal("শূন্য সময়", TimeSpan.Zero.Humanize());
+            Assert.Equal("শূন্য সময়", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }

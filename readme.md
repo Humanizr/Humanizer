@@ -1,4 +1,4 @@
-<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
+﻿<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
 
 [<img align="right" width="100px" src="https://dotnetfoundation.org/images/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
 
@@ -43,6 +43,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Metric numerals](#metric-numerals)
    - [ByteSize](#bytesize)
    - [Heading to words](#heading-to-words)
+   - [Tupleize](#tupleize)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life) - 
  - [How to contribute?](#how-to-contribute)
  - [Continuous Integration from AppVeyor](#continuous-integration)
@@ -439,7 +440,14 @@ When there are multiple time units, they are combined using the `", "` string:
 
 ```C#
 TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
-````
+```
+
+When `TimeSpan` is zero, the default behavior will return "0" plus whatever the minimum time unit is. However, if you assign `true` to `toWords` when calling `Humanize`, then the method returns "no time". For example:
+```C#
+TimeSpan.Zero.Humanize(1) => "0 milliseconds"
+TimeSpan.Zero.Humanize(1, toWords: true) => "no time"
+TimeSpan.Zero.Humanize(1, minUnit: Humanizer.Localisation.TimeUnit.Second) => "0 seconds"
+```
 
 Using the `collectionSeparator` parameter, you can specify your own separator string:
 
@@ -880,6 +888,7 @@ Also the reverse operation using the `FromRoman` extension.
 "IV".FromRoman() => 4
 "V".FromRoman() => 5
 ```
+Note that only integers smaller than 4000 can be converted to Roman numberals. 
 
 ### <a id="metric-numerals">Metric numerals</a>
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
@@ -948,8 +957,8 @@ maxFileSize.LargestWholeNumberValue;   // 10
 If you want a string representation you can call `ToString` or `Humanize` interchangeably on the `ByteSize` instance:
 
 ```C#
-7.Bits().ToString();         // 7 b
-8.Bits().ToString();         // 1 B
+7.Bits().ToString();           // 7 b
+8.Bits().ToString();           // 1 B
 (.5).Kilobytes().Humanize();   // 512 B
 (1000).Kilobytes().ToString(); // 1000 KB
 (1024).Kilobytes().Humanize(); // 1 MB
@@ -980,6 +989,18 @@ b.Humanize("000.00");     // 010.51 KB
 b.ToString("#.#### MB");  // .0103 MB
 b.Humanize("0.00 GB");    // 0 GB
 b.Humanize("#.## B");     // 10757.12 B
+```
+
+If you want a string representation with full words you can call `ToFullWords` on the `ByteSize` instance:
+
+```C#
+7.Bits().ToFullWords();           // 7 bits
+8.Bits().ToFullWords();           // 1 Byte
+(.5).Kilobytes().ToFullWords();   // 512 Bytes
+(1000).Kilobytes().ToFullWords(); // 1000 Kilobytes
+(1024).Kilobytes().ToFullWords(); // 1 Megabyte
+(.5).Gigabytes().ToFullWords();   // 512 Megabytes
+(1024).Gigabytes().ToFullWords(); // 1 Terabyte
 ```
 
 There isn't a `Dehumanize` method to turn a string representation back into a `ByteSize` instance; but you can use `Parse` and `TryParse` on `ByteSize` to do that.
@@ -1077,6 +1098,20 @@ In order to retrieve a heading based on the short text representation (e.g. N, E
 "SW".FromShortHeading();
 // 225
 ```
+
+### <a id="tupleize">Tupleize</a>
+Humanizer can change whole numbers into their 'tuple'  using `Tupleize`. For example:
+
+```C#
+1.Tupleize();
+// single
+3.Tupleize();
+// triple
+100.Tupleize();
+// centuple
+```
+
+The numbers 1-10, 100 and 1000 will be converted into a 'named' tuple (i.e. "single", "double" etc.). Any other number "n" will be converted to "n-tuple".
 
 ## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!

@@ -1,6 +1,0 @@
-trigger: none
-queue: Hosted VS2017
-variables: 
-  BuildConfiguration: Release
-steps:
-- template: .vsts-shared.yml

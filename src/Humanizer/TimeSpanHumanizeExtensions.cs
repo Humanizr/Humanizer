@@ -70,8 +70,9 @@ namespace Humanizer
             }
             if (IsContainingOnlyNullValue(timeParts))
             {
-                var noTimeValueCultureFarmated = cultureFormatter.TimeSpanHumanize_Zero();
-                timeParts = CreateTimePartsWithNoTimeValue(noTimeValueCultureFarmated);
+                var noTimeValueCultureFormatted = toWords ? cultureFormatter.TimeSpanHumanize_Zero()
+                    : cultureFormatter.TimeSpanHumanize(minUnit, 0, toWords);
+                timeParts = CreateTimePartsWithNoTimeValue(noTimeValueCultureFormatted);
             }
             return timeParts;
         }

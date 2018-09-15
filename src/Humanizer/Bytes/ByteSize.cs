@@ -41,11 +41,17 @@ namespace Humanizer.Bytes
         public const long BytesInTerabyte = 1099511627776;
 
         public const string BitSymbol = "b";
+        public const string Bit = "bit";
         public const string ByteSymbol = "B";
+        public const string Byte = "byte";
         public const string KilobyteSymbol = "KB";
+        public const string Kilobyte = "kilobyte";
         public const string MegabyteSymbol = "MB";
+        public const string Megabyte = "megabyte";
         public const string GigabyteSymbol = "GB";
+        public const string Gigabyte = "gigabyte";
         public const string TerabyteSymbol = "TB";
+        public const string Terabyte = "terabyte";
 
         public long Bits { get; private set; }
         public double Bytes { get; private set; }
@@ -87,6 +93,41 @@ namespace Humanizer.Bytes
                 return BitSymbol;
             }
         }
+
+        public string LargestWholeNumberFullWord
+        {
+            get
+            {
+                // Absolute value is used to deal with negative values
+                if (Math.Abs(Terabytes) >= 1)
+                {
+                    return Terabyte;
+                }
+
+                if (Math.Abs(Gigabytes) >= 1)
+                {
+                    return Gigabyte;
+                }
+
+                if (Math.Abs(Megabytes) >= 1)
+                {
+                    return Megabyte;
+                }
+
+                if (Math.Abs(Kilobytes) >= 1)
+                {
+                    return Kilobyte;
+                }
+
+                if (Math.Abs(Bytes) >= 1)
+                {
+                    return Byte;
+                }
+
+                return Bit;
+            }
+        }
+
         public double LargestWholeNumberValue
         {
             get
@@ -243,6 +284,20 @@ namespace Humanizer.Bytes
                                               : formattedLargeWholeNumberValue;
 
             return string.Format("{0} {1}", formattedLargeWholeNumberValue, LargestWholeNumberSymbol);
+        }
+
+        /// <summary>
+        /// Converts the value of the current ByteSize object to a string with 
+        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga, 
+        /// tera) used is the largest metric prefix such that the corresponding 
+        /// value is greater than or equal to one.
+        /// </summary>
+        public string ToFullWords()
+        {
+            var byteSizeAsFullWords = string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberFullWord);
+
+            // If there is more than one unit, make the word plural
+            return LargestWholeNumberValue > 1 ? byteSizeAsFullWords + "s" : byteSizeAsFullWords;
         }
 
         public override bool Equals(object value)

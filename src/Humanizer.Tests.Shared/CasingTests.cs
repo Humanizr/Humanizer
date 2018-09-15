@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests
 {
@@ -9,6 +9,7 @@ namespace Humanizer.Tests
         [InlineData("Sentence casing", "Sentence Casing")]
         [InlineData("honors UPPER case", "Honors UPPER Case")]
         [InlineData("Title Case", "Title Case")]
+        [InlineData("title case (with parenthesis)", "Title Case (With Parenthesis)")]
         public void ApplyCaseTitle(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.ApplyCase(LetterCasing.Title));

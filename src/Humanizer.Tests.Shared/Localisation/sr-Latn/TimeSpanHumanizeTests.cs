@@ -89,6 +89,14 @@ namespace Humanizer.Tests.Localisation.srLatn
         {
             var noTime = TimeSpan.Zero;
             var actual = noTime.Humanize();
+            Assert.Equal("0 milisekundi", actual);
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            var noTime = TimeSpan.Zero;
+            var actual = noTime.Humanize(toWords: true);
             Assert.Equal("bez proteklog vremena", actual);
         }
     }

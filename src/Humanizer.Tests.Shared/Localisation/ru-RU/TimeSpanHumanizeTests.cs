@@ -141,8 +141,14 @@ namespace Humanizer.Tests.Localisation.ruRU
         [Fact]
         public void NoTime()
         {
+            Assert.Equal("0 миллисекунд", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("нет времени", TimeSpan.Zero.Humanize());
+            Assert.Equal("нет времени", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }

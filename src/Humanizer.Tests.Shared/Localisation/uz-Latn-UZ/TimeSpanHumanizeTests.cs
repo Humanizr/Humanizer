@@ -88,6 +88,14 @@ namespace Humanizer.Tests.Localisation.uzLatn
         {
             var noTime = TimeSpan.Zero;
             var actual = noTime.Humanize();
+            Assert.Equal("0 millisekund", actual);
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            var noTime = TimeSpan.Zero;
+            var actual = noTime.Humanize(toWords: true);
             Assert.Equal("vaqt yo`q", actual);
         }
     }

@@ -26,14 +26,16 @@ namespace Humanizer.Tests.Localisation.roRO
         }
 
         [Theory]
-        [InlineData(0, "0 secunde")]
+        [InlineData(0, "0 secunde", true)]
+        [InlineData(0, "0 de secunde")]
         [InlineData(1, "1 secundă")]
         [InlineData(14, "14 secunde")]
         [InlineData(21, "21 de secunde")]
         [InlineData(156, "2 minute")]
-        public void Seconds(int seconds, string expected)
+        public void Seconds(int seconds, string expected, bool toWords = false)
         {
-            var actual = TimeSpan.FromSeconds(seconds).Humanize();
+            var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: Humanizer.Localisation.TimeUnit.Second,
+                toWords: toWords);
             Assert.Equal(expected, actual);
         }
 
@@ -105,12 +107,18 @@ namespace Humanizer.Tests.Localisation.roRO
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
         }
 
-        [Fact, CustomDescription("The name of this test is confusing because has no sense. Instead should be read as an interval with duration zero and not the absence of time.")]
+        [Fact]
         public void NoTime()
+        {
+            Assert.Equal("0 de milisecunde", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact, CustomDescription("The name of this test is confusing because has no sense. Instead should be read as an interval with duration zero and not the absence of time.")]
+        public void NoTimeToWords()
         {
             // Usage in Romanian: "Timp execuție: 0 secunde."
             // Should be equivalent with TimeSpan.FromSeconds(0).Humanize()
-            Assert.Equal("0 secunde", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 secunde", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }
