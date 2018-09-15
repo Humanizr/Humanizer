@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bytes\ComparingTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bytes\CreatingTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bytes\ParsingTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bytes\ToFullWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bytes\ToStringTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CasingTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollectionHumanizeTests.cs" />
