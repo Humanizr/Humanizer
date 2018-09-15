@@ -55,7 +55,7 @@ namespace Humanizer.Localisation.Formatters
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
         public virtual string TimeSpanHumanize_Zero()
         {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0);
+            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, true);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Humanizer.Localisation.Formatters
 
         private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
         {
-            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count);
+            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
             return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
         }
 

@@ -83,8 +83,14 @@ namespace Humanizer.Tests.Localisation.de
         [Fact]
         public void NoTime()
         {
+            Assert.Equal("0 Millisekunden", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("Keine Zeit", TimeSpan.Zero.Humanize());
+            Assert.Equal("Keine Zeit", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }

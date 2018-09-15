@@ -110,7 +110,14 @@ namespace Humanizer.Tests.Localisation.es
         public void NoTime()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("0 segundos", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 milisegundos", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            // This one doesn't make a lot of sense but ... w/e
+            Assert.Equal("0 segundos", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }

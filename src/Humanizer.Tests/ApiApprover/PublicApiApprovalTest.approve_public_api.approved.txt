@@ -1184,7 +1184,7 @@ namespace Humanizer.Localisation
         }
         public class static TimeSpanHumanize
         {
-            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1) { }
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1, bool toWords = False) { }
         }
     }
     public class static Resources
