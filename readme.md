@@ -995,12 +995,12 @@ If you want a string representation with full words you can call `ToFullWords` o
 
 ```C#
 7.Bits().ToFullWords();           // 7 bits
-8.Bits().ToFullWords();           // 1 Byte
-(.5).Kilobytes().ToFullWords();   // 512 Bytes
-(1000).Kilobytes().ToFullWords(); // 1000 Kilobytes
-(1024).Kilobytes().ToFullWords(); // 1 Megabyte
-(.5).Gigabytes().ToFullWords();   // 512 Megabytes
-(1024).Gigabytes().ToFullWords(); // 1 Terabyte
+8.Bits().ToFullWords();           // 1 byte
+(.5).Kilobytes().ToFullWords();   // 512 bytes
+(1000).Kilobytes().ToFullWords(); // 1000 kilobytes
+(1024).Kilobytes().ToFullWords(); // 1 megabyte
+(.5).Gigabytes().ToFullWords();   // 512 megabytes
+(1024).Gigabytes().ToFullWords(); // 1 terabyte
 ```
 
 There isn't a `Dehumanize` method to turn a string representation back into a `ByteSize` instance; but you can use `Parse` and `TryParse` on `ByteSize` to do that.
