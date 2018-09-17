@@ -1,0 +1,66 @@
+trigger:
+- master
+- rel/*
+
+pool:
+  vmImage: vs2017-win2016
+
+variables: 
+  BuildConfiguration: Release
+
+steps:
+- task: DotNetCoreCLI@2  
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --tool-path . nbgv
+  displayName: Install NBGV tool
+  condition: and(succeeded(), eq(variables['system.pullrequest.isfork'], false))
+
+- script: nbgv cloud
+  displayName: Set Version
+  condition: and(succeeded(), eq(variables['system.pullrequest.isfork'], false))
+
+- task: NuGetToolInstaller@0
+  displayName: Use NuGet 4.7.0
+  inputs:
+    versionSpec: 4.7.0
+ 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+    projects: .\src\Humanizer.sln
+    arguments: -c $(BuildConfiguration)   
+  displayName: Build  
+  
+- powershell: |
+    mkdir $(Build.ArtifactStagingDirectory)\Packages     
+    $version = .\nbgv get-version -f json | ConvertFrom-Json
+    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$($version.NuGetPackageVersion)" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages -Properties "RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer"}
+  displayName: Create packages
+  condition: and(succeeded(), eq(variables['system.pullrequest.isfork'], false))
+  
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
+    arguments: -c $(BuildConfiguration) --collect:"Code Coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings /p:DebugType=portable
+  displayName: Run Tests
+  
+- task: PowerShell@2
+  displayName: Authenticode Sign artifacts
+  inputs:
+    filePath: scripts/Sign-Package.ps1
+  env:
+    SignClientUser: $(SignClientUser)
+    SignClientSecret: $(SignClientSecret)
+    ArtifactDirectory: $(Build.ArtifactStagingDirectory)\Packages
+  condition: and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')), not(eq(variables['SignClientSecret'], '')), not(eq(variables['SignClientUser'], '')))
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Package Artifacts
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)\Packages
+    artifactType: container
+    artifactName: Packages
+  condition: and(succeeded(), eq(variables['system.pullrequest.isfork'], false))
