@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests
 {
@@ -12,6 +12,8 @@ namespace Humanizer.Tests
         [InlineData("Can deal w 1 letter words as i do", "Can Deal W 1 Letter Words As I Do")]
         [InlineData("  random spaces   are HONORED    too ", "  Random Spaces   Are HONORED    Too ")]
         [InlineData("Title Case", "Title Case")]
+        [InlineData("apostrophe's aren't capitalized", "Apostrophe's Aren't Capitalized")]
+        [InlineData("titles with, commas work too", "Titles With, Commas Work Too")]
         public void TransformToTitleCase(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
