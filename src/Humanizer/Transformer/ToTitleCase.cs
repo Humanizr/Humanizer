@@ -8,7 +8,7 @@ namespace Humanizer
         public string Transform(string input)
         {
             var result = input;
-            var matches = Regex.Matches(input, "([A-Za-z]|[^\u0000-\u007F])+('[A-Za-z]|[^\u0000-\u007F]+)*");
+            var matches = Regex.Matches(input, @"(\w|[^\u0000-\u007F])+'?\w*");
             foreach (Match word in matches)
             {
                 if (!AllCapitals(word.Value))
