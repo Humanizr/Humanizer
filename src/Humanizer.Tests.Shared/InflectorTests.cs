@@ -246,6 +246,8 @@ namespace Humanizer.Tests
             yield return new object[] { "testis", "testes" };
             yield return new object[] { "crisis", "crises" };
 
+            yield return new object[] { "corn", "corn" };
+            yield return new object[] { "milk", "milk" };
             yield return new object[] { "rice", "rice" };
             yield return new object[] { "shoe", "shoes" };
 
@@ -306,6 +308,7 @@ namespace Humanizer.Tests
             yield return new object[] { "loaf", "loaves" };
             yield return new object[] { "luggage", "luggage" };
             yield return new object[] { "means", "means" };
+            yield return new object[] { "mail", "mail" };
             yield return new object[] { "millennium", "millennia" };
             yield return new object[] { "moose", "moose" };
             yield return new object[] { "mosquito", "mosquitoes" };
