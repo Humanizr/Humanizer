@@ -1,4 +1,4 @@
-﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
+﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en-US")]
 [assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETStandard,Version=v1.0", FrameworkDisplayName="")]
 namespace Humanizer.Bytes
 {
