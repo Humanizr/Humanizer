@@ -11,7 +11,7 @@
     <description>Humanizer core package that contains the library and the neutral language (English) resources</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
-    <language>en</language>
+    <language>en-US</language>
     <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <dependencies>
       <group targetFramework="netstandard1.0">
