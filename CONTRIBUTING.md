@@ -42,7 +42,7 @@ Currently Humanizer supports quite a few localisations for `DateTime.Humanize`, 
 Humanizer could definitely do with more translations.
 To add a translation for `DateTime.Humanize` and `TimeSpan.Humanize`,
 fork the repository if you haven't done yet, duplicate the [resources.resx](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer/Properties/Resources.resx) file, add your target [locale code](http://msdn.microsoft.com/en-us/library/hh441729.aspx)
-to the end (e.g. resources.ru.resx for Russian), translate the values to your language, write unit tests for the translation, commit, and send a pull request for it. Thanks.
+to the end (e.g. resources.ru.resx for Russian), translate the values to your language, register your formatter in [FormatterRegistry.cs](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer/Configuration/FormatterRegistry.cs), write unit tests for the translation, commit, and send a pull request for it. Thanks.
 
 Some languages have complex rules when it comes to dealing with numbers; for example, in Romanian "5 days" is "5 zile", while "24 days" is "24 de zile" and in Arabic "2 days" is "يومان" not "2 يوم".
 Obviously a normal resource file doesn't cut it in these cases as a more complex mapping is required.
