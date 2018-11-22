@@ -13,6 +13,10 @@ variables:
   BuildConfiguration: Release
 
 steps:
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: '2.1.500'
+
 - task: DotNetCoreCLI@2  
   inputs:
     command: custom
@@ -22,10 +26,6 @@ steps:
 
 - script: nbgv cloud
   displayName: Set Version
-
-- task: DotNetCoreInstaller@0
-  inputs:
-    version: '2.1.500'
 
 - task: DotNetCoreCLI@2
   inputs:
