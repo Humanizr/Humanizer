@@ -23,22 +23,21 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
-- task: NuGetToolInstaller@0
-  displayName: Use latest NuGet
+- task: DotNetCoreInstaller@0
   inputs:
-    versionSpec: 4.9.0-rc1
- 
+    version: '2.1.500'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: build
     projects: .\src\Humanizer.sln
-    arguments: -c $(BuildConfiguration)   
+    arguments: -c $(BuildConfiguration)
   displayName: Build  
   
 - powershell: |
     mkdir $(Build.ArtifactStagingDirectory)\Packages     
     $version = .\nbgv get-version -f json | ConvertFrom-Json
-    ls .\NuSpecs\*.nuspec | %{ nuget pack $_.FullName -version "$($version.NuGetPackageVersion)" -BasePath "src" -NoPackageAnalysis -OutputDirectory $(Build.ArtifactStagingDirectory)\Packages -Properties "RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer"}
+    ls .\NuSpecs\*.nuspec | %{ dotnet pack .\src\Humanizer\Humanizer.csproj --no-build -o $(Build.ArtifactStagingDirectory)\Packages /p:NuspecFile=$_.FullName /p:NuspecBasePath=..\ /p:NuspecProperties="version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" }
   displayName: Create packages
   
 - task: DotNetCoreCLI@2
