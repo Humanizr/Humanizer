@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer Locale (th-TH)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
-    <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
+    <license type="expression">MIT</license>
     <language>th-TH</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
