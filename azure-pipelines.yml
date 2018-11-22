@@ -38,7 +38,7 @@ steps:
 - powershell: |
     mkdir $(Build.ArtifactStagingDirectory)\Packages     
     $version = .\nbgv get-version -f json | ConvertFrom-Json
-    ls .\NuSpecs\*.nuspec | %{ dotnet pack .\src\Humanizer\Humanizer.csproj --no-build -o $(Build.ArtifactStagingDirectory)\Packages /p:NuspecFile=$_.FullName /p:NuspecBasePath=..\ /p:NuspecProperties="version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" }
+    ls .\NuSpecs\*.nuspec | %{ dotnet pack .\src\Humanizer\Humanizer.csproj --no-build -o $(Build.ArtifactStagingDirectory)\Packages /bl=:$(Build.ArtifactStagingDirectory)\logs\$_.Name.binlog /p:NuspecFile=$_.FullName /p:NuspecBasePath=..\ /p:NuspecProperties="version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" }
   displayName: Create packages
   
 - task: DotNetCoreCLI@2
@@ -64,3 +64,11 @@ steps:
     pathToPublish: $(Build.ArtifactStagingDirectory)\Packages
     artifactType: container
     artifactName: Packages
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Log Artifacts
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)\Logs
+    artifactType: container
+    artifactName: Logs
+  condition: always()
