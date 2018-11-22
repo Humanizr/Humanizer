@@ -24,9 +24,9 @@ steps:
   displayName: Set Version
 
 - task: NuGetToolInstaller@0
-  displayName: Use NuGet 4.7.0
+  displayName: Use latest NuGet
   inputs:
-    versionSpec: 4.7.0
+    versionSpec: 4.9.0-rc1
  
 - task: DotNetCoreCLI@2
   inputs:
