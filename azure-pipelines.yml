@@ -37,11 +37,10 @@ steps:
   
 - powershell: |
     mkdir $(Build.ArtifactStagingDirectory)\Packages
-    mkdir $(Build.ArtifactStagingDirectory)\Logs
     $version = .\nbgv get-version -f json | ConvertFrom-Json
     $nuspecs = gci .\NuSpecs\*.nuspec 
     foreach ($item in $nuspecs) {
-      dotnet pack .\src\Humanizer\Humanizer.csproj --no-build -o $(Build.ArtifactStagingDirectory)\Packages /bl:$(Build.ArtifactStagingDirectory)\logs\$($item.BaseName).binlog /p:NuspecFile=$($item.FullName) /p:NuspecBasePath=..\ /p:NuspecProperties="version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" 
+      dotnet pack .\src\Humanizer\Humanizer.csproj --no-build -o $(Build.ArtifactStagingDirectory)\Packages /p:NuspecFile=$($item.FullName) /p:NuspecBasePath=..\ /p:NuspecProperties="version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" 
     }
   displayName: Create packages
   
@@ -68,11 +67,3 @@ steps:
     pathToPublish: $(Build.ArtifactStagingDirectory)\Packages
     artifactType: container
     artifactName: Packages
-
-- task: PublishBuildArtifacts@1
-  displayName: Publish Log Artifacts
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)\Logs
-    artifactType: container
-    artifactName: Logs
-  condition: always()
