@@ -30,15 +30,23 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] PrefixMap =
         {
             string.Empty, string.Empty, string.Empty, "tlett", "erbat", "ħamest", "sitt", "sebat", "tmint", "disat",
-            "għaxart", "ħdax il-", "tnax il-", "tletax il-", "erbatax il-", "ħmistax il-", "sittax il-", "sbatax il-",
-            "tmintax il-", "dsatax il-"
+            "għaxart", "ħdax-il", "tnax-il", "tletax-il", "erbatax-il", "ħmistax-il", "sittax-il", "sbatax-il",
+            "tmintax-il", "dsatax-il"
         };
 
         public override string Convert(long input, GrammaticalGender gender)
         {
+            bool negativeNumber = false;
+
+            if (input < 0)
+            {
+                negativeNumber = true;
+                input = input * -1;
+            }
+
             if (input < 1000000000)
             {
-                return GetMillions(input, gender);
+                return GetMillions(input, gender) + (negativeNumber ? " inqas minn żero" : String.Empty);
             }
 
             var billions = input / 1000000000;
@@ -53,7 +61,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return billionsText;
             }
 
-            return $"{billionsText} u {millionsText}";
+            return $"{billionsText} u {millionsText}" + (negativeNumber ? " inqas minn żero" : String.Empty);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
@@ -211,12 +219,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return dual;
             }
 
-            if (tensInThousands > 10 && tensInThousands < 20)
-            {
-                return $"{GetHundreds(thousands, true, usePrefixMapForLowerValueDigits, gender)}{singular}";
-            }
-
-            if (tensInThousands > 20)
+            if (tensInThousands > 10)
             {
                 return $"{GetHundreds(thousands, true, usePrefixMapForLowerValueDigits, gender)} {singular}";
             }
