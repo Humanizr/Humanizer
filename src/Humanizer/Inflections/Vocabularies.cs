@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 
 namespace Humanizer.Inflections
@@ -94,9 +94,12 @@ namespace Humanizer.Inflections
             _default.AddIrregular("that", "those", matchEnding: false);
             _default.AddIrregular("this", "these", matchEnding: false);
             _default.AddIrregular("bus", "buses", matchEnding: false);
+			 _default.AddIrregular("staff", "staff", matchEnding: false);
 
             _default.AddUncountable("equipment");
             _default.AddUncountable("information");
+            _default.AddUncountable("corn");
+            _default.AddUncountable("milk");
             _default.AddUncountable("rice");
             _default.AddUncountable("money");
             _default.AddUncountable("species");
@@ -131,6 +134,7 @@ namespace Humanizer.Inflections
             _default.AddUncountable("corps");
             _default.AddUncountable("scissors");
             _default.AddUncountable("means");
+            _default.AddUncountable("mail");
 
             return _default;
         }

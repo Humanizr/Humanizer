@@ -1,15 +1,10 @@
 {
-  "version": "2.4",
+  "version": "2.5",
   "publicReleaseRefSpec": [
     "^refs/heads/master$", // we release out of master
     "^refs/heads/rel/v\\d+\\.\\d+" // we also release branches starting with rel/vN.N
   ],
   "nugetPackageVersion":{
     "semVer": 2
-  },
-  "cloudBuild": {
-    "buildNumber": {
-      "enabled": false
-    }
   }
 }
