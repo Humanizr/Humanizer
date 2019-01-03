@@ -270,12 +270,17 @@ namespace Humanizer
         {
             // TODO largestPrefix = largestPrefix.Trim(); When changed to string
 
-            if (!(Symbols[0].Contains(largestPrefix) || Symbols[1].Contains(largestPrefix)))
-                throw new ArgumentException("Empty or invalid Metric prefix character.", nameof(largestPrefix)); // TODO change to "string".
+            int maxPrefix;
+            if (Symbols[0].Contains(largestPrefix))
+                maxPrefix = (Symbols[0].IndexOf(largestPrefix) + 1);
 
-            var maxExponent = (Symbols[0].IndexOf(largestPrefix) + 1); // TODO check symbols[1]
+            else if (Symbols[1].Contains(largestPrefix))
+                maxPrefix = -(Symbols[1].IndexOf(largestPrefix) + 1);
 
-            return maxExponent < numericPrefix ? maxExponent : numericPrefix;
+            else
+                throw new ArgumentException("Invalid Metric prefix character.", nameof(largestPrefix)); // TODO change to "string".
+
+            return maxPrefix < numericPrefix ? maxPrefix : numericPrefix;
         }
 
         /// <summary>
