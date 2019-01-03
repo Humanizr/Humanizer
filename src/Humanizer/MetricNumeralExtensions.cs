@@ -235,25 +235,25 @@ namespace Humanizer
         /// Build a Metric representation of the number.
         /// </summary>
         /// <param name="input">Number to convert to a Metric representation.</param>
-        /// <param name="exponent">Exponent of the number in a scientific notation</param>
+        /// <param name="numericPrefix">Metric prefix expressed as a number.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <param name="largestPrefix">If not null it is the largest prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals, char? largestPrefix = null)
+        private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, char? largestPrefix = null)
         {
             if (largestPrefix.HasValue)
-                exponent = LimitExponent(exponent, (char)largestPrefix);
+                numericPrefix = LimitNumericPrefix(numericPrefix, (char)largestPrefix);
 
-            var number = input * Math.Pow(1000, -exponent);
+            var number = input * Math.Pow(1000, -numericPrefix);
 
             if (decimals.HasValue)
                 number = Math.Round(number, decimals.Value);
 
-            var symbol = Math.Sign(exponent) == 1
-                ? Symbols[0][exponent - 1]
-                : Symbols[1][-exponent - 1];
+            var symbol = Math.Sign(numericPrefix) == 1
+                ? Symbols[0][numericPrefix - 1]
+                : Symbols[1][-numericPrefix - 1];
 
             return number
                 + (hasSpace ? " " : string.Empty)
@@ -261,12 +261,12 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// Limit upper size of exponent value to that corresponding to a metric prefix symbol. TODO synbol or name.
+        /// Limit upper size of a numeric representation of metric prefix.
         /// </summary>
-        /// <param name="exponent">The exponent to limit.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
-        /// <returns>A symbol or a symbol's name</returns>
-        private static int LimitExponent(int exponent, char largestPrefix)
+        /// <param name="numericPrefix">Metric prefix, expressed as a number, to limit.</param>
+        /// <param name="largestPrefix">Metric prefix symbol of upper limit.</param> // TODO symbol or name.
+        /// <returns>Upper limited numeric prefix represenation</returns>
+        private static int LimitNumericPrefix(int numericPrefix, char largestPrefix)
         {
             // TODO largestPrefix = largestPrefix.Trim(); When changed to string
 
@@ -275,7 +275,7 @@ namespace Humanizer
 
             var maxExponent = (Symbols[0].IndexOf(largestPrefix) + 1); // TODO check symbols[1]
 
-            return maxExponent < exponent ? maxExponent : exponent;
+            return maxExponent < numericPrefix ? maxExponent : numericPrefix;
         }
 
         /// <summary>
@@ -318,11 +318,6 @@ namespace Humanizer
             var last = input[index];
             var isSymbol = Symbols[0].Contains(last) || Symbols[1].Contains(last);
             return !double.TryParse(isSymbol ? input.Remove(index) : input, out var number);
-        }
-
-        private static bool IsInvalidMetricPrefix(this string input)
-        {
-            return false; //TODO
         }
     }
 }
