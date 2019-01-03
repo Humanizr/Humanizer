@@ -243,24 +243,29 @@ namespace Humanizer
         /// <returns>A number in a Metric representation</returns>
         private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals, char? largestPrefix = null)
         {
-            if (largestPrefix != null)
+            if (largestPrefix.HasValue)
                 exponent = LimitExponent(exponent, (char)largestPrefix);
 
             var number = input * Math.Pow(1000, -exponent);
+
             if (decimals.HasValue)
-            {
                 number = Math.Round(number, decimals.Value);
-            }
 
             var symbol = Math.Sign(exponent) == 1
                 ? Symbols[0][exponent - 1]
                 : Symbols[1][-exponent - 1];
+
             return number
                 + (hasSpace ? " " : string.Empty)
                 + GetUnit(symbol, useSymbol);
         }
 
-        // TODO docs
+        /// <summary>
+        /// Limit upper size of exponent value to that corresponding to a metric prefix symbol. TODO synbol or name.
+        /// </summary>
+        /// <param name="exponent">The exponent to limit.</param>
+        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <returns>A symbol or a symbol's name</returns>
         private static int LimitExponent(int exponent, char largestPrefix)
         {
             // TODO largestPrefix = largestPrefix.Trim(); When changed to string
@@ -268,9 +273,10 @@ namespace Humanizer
             if (!(Symbols[0].Contains(largestPrefix) || Symbols[1].Contains(largestPrefix)))
                 throw new ArgumentException("Empty or invalid Metric prefix character.", nameof(largestPrefix)); // TODO change to "string".
 
-            return exponent; // TODO
-        }
+            var maxExponent = (Symbols[0].IndexOf(largestPrefix) + 1); // TODO check symbols[1]
 
+            return maxExponent < exponent ? maxExponent : exponent;
+        }
 
         /// <summary>
         /// Get the unit from a symbol of from the symbol's name.
