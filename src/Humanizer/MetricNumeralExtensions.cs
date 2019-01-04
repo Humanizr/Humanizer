@@ -111,7 +111,7 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, char? largestPrefix = null)
+        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix largestPrefix = MetricPrefix.None)
         {
             return ((double)input).ToMetric(hasSpace, useSymbol, decimals, largestPrefix);
         }
@@ -137,7 +137,7 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, char? largestPrefix = null)
+        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix largestPrefix = MetricPrefix.None)
         {
             if (input.Equals(0))
             {
@@ -223,7 +223,7 @@ namespace Humanizer
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <param name="largestPrefix">If not null it is the largest prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals, char? largestPrefix = null)
+        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix largestPrefix)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
             return exponent.Equals(0)
@@ -241,10 +241,10 @@ namespace Humanizer
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <param name="largestPrefix">If not null it is the largest prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, char? largestPrefix = null)
+        private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix largestPrefix)
         {
-            if (largestPrefix.HasValue)
-                numericPrefix = LimitNumericPrefix(numericPrefix, (char)largestPrefix);
+            if (largestPrefix != MetricPrefix.None)
+                numericPrefix = LimitNumericPrefix(numericPrefix, largestPrefix);
 
             var number = input * Math.Pow(1000, -numericPrefix);
 
@@ -266,19 +266,20 @@ namespace Humanizer
         /// <param name="numericPrefix">Metric prefix, expressed as a number, to limit.</param>
         /// <param name="largestPrefix">Metric prefix symbol of upper limit.</param> // TODO symbol or name.
         /// <returns>Upper limited numeric prefix represenation</returns>
-        private static int LimitNumericPrefix(int numericPrefix, char largestPrefix)
+        private static int LimitNumericPrefix(int numericPrefix, MetricPrefix largestPrefix)
         {
             // TODO largestPrefix = largestPrefix.Trim(); When changed to string
 
-            int maxPrefix;
-            if (Symbols[0].Contains(largestPrefix))
+            int maxPrefix = (int)largestPrefix / 3;
+
+            /* if (Symbols[0].Contains(largestPrefix))
                 maxPrefix = (Symbols[0].IndexOf(largestPrefix) + 1);
 
             else if (Symbols[1].Contains(largestPrefix))
                 maxPrefix = -(Symbols[1].IndexOf(largestPrefix) + 1);
 
             else
-                throw new ArgumentException("Invalid Metric prefix character.", nameof(largestPrefix)); // TODO change to "string".
+                throw new ArgumentException("Invalid Metric prefix character.", nameof(largestPrefix)); // TODO change to "string".*/
 
             return maxPrefix < numericPrefix ? maxPrefix : numericPrefix;
         }
