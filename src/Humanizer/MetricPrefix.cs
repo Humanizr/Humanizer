@@ -2,10 +2,14 @@
 {
     /// <summary>
     /// MetricPrefix contains all supported metric prefixes and their corresponding powers of ten as underlying values.
-    /// Unsupported: hecto, deca, deci and centi.
     /// </summary>
+    /// <remarks>
+    /// "None" represents no prefix, use "Undefined" as null equivalent.
+    /// Unsupported values: hecto, deca, deci and centi.
+    /// </remarks>
     public enum MetricPrefix
     {
+        Undefined = -100,
         Yocto = -24,
         Zepto = -21,
         Atto = -18,

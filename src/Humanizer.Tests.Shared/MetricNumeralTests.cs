@@ -90,24 +90,25 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData("0",         0d,          false, true,  null, MetricPrefix.None)]
-        [InlineData("123",       123d,        false, true,  null, MetricPrefix.None)]
-        [InlineData("-123",      (-123d),     false, true,  null, MetricPrefix.None)]
-        [InlineData("1.23k",     1230d,       false, true,  null, MetricPrefix.None)]
-        [InlineData("1 k",       1000d,       true,  true,  null, MetricPrefix.None)]
-        [InlineData("1 kilo",    1000d,       true,  false, null, MetricPrefix.None)]
-        [InlineData("1milli",    1E-3,        false, false, null, MetricPrefix.None)]
-        [InlineData("1.23milli", 1.234E-3,    false, false, 2,    MetricPrefix.None)]
-        [InlineData("12.34k",    12345,       false, true,  2,    MetricPrefix.None)]
-        [InlineData("12k",       12345,       false, true,  0,    MetricPrefix.None)]
-        [InlineData("-3.9m",     -3.91e-3,    false, true,  1,    MetricPrefix.None)]
+        [InlineData("0",         0d,          false, true,  null, MetricPrefix.Undefined)]
+        [InlineData("123",       123d,        false, true,  null, MetricPrefix.Undefined)]
+        [InlineData("-123",      (-123d),     false, true,  null, MetricPrefix.Undefined)]
+        [InlineData("1.23k",     1230d,       false, true,  null, MetricPrefix.Undefined)]
+        [InlineData("1 k",       1000d,       true,  true,  null, MetricPrefix.Undefined)]
+        [InlineData("1 kilo",    1000d,       true,  false, null, MetricPrefix.Undefined)]
+        [InlineData("1milli",    1E-3,        false, false, null, MetricPrefix.Undefined)]
+        [InlineData("1.23milli", 1.234E-3,    false, false, 2,    MetricPrefix.Undefined)]
+        [InlineData("12.34k",    12345,       false, true,  2,    MetricPrefix.Undefined)]
+        [InlineData("12k",       12345,       false, true,  0,    MetricPrefix.Undefined)]
+        [InlineData("-3.9m",     -3.91e-3,    false, true,  1,    MetricPrefix.Undefined)]
         [InlineData("-3.9m",     -3.91e-3,    false, true,  1,    MetricPrefix.Mega)]
-        [InlineData("1M",       1_000_000,    false, true,  null, MetricPrefix.Giga)]
-        [InlineData("1000k",    1_000_000,    false, true,  null, MetricPrefix.Kilo)]
-        [InlineData("1234.56k", 1_234_560,    false, true,  null, MetricPrefix.Kilo)]
-        [InlineData("1m",       1E-3,         false, true,  null, MetricPrefix.None)]
-        [InlineData("1000μ",    1E-3,         false, true,  null, MetricPrefix.Micro)]
-        public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix largestPrefix = MetricPrefix.None)
+        [InlineData("1M",        1_000_000,   false, true,  null, MetricPrefix.Giga)]
+        [InlineData("1000k",     1_000_000,   false, true,  null, MetricPrefix.Kilo)]
+        [InlineData("1234.56k",  1_234_560,   false, true,  null, MetricPrefix.Kilo)]
+        [InlineData("1m",        1E-3,        false, true,  null, MetricPrefix.Undefined)]
+        [InlineData("1000μ",     1E-3,        false, true,  null, MetricPrefix.Micro)]
+        [InlineData("1000",      1000,        false, true,  null, MetricPrefix.None)]            
+        public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix largestPrefix)
         {
             Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals, largestPrefix));
         }

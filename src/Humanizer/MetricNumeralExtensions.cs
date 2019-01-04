@@ -101,17 +101,17 @@ namespace Humanizer
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
-        /// <param name="largestPrefix">If not null it is the largest prefix used in result.</param>
+        /// <param name="largestPrefix">Largest metric prefix used in result.</param>
         /// <example>
         /// <code>
         /// 1000.ToMetric() => "1k"
         /// 123.ToMetric() => "123"
         /// 1E-1.ToMetric() => "100m"
-        /// 1_000_000.ToMetric(largestPrefix = 'k') => "1000k"
+        /// 1_000_000.ToMetric(largestPrefix = MetricPrefix.Kilo) => "1000k"
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix largestPrefix = MetricPrefix.None)
+        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix largestPrefix = MetricPrefix.Undefined)
         {
             return ((double)input).ToMetric(hasSpace, useSymbol, decimals, largestPrefix);
         }
@@ -127,17 +127,17 @@ namespace Humanizer
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
-        /// <param name="largestPrefix">If not null it is the largest prefix used in result.</param>
+        /// <param name="largestPrefix">Largest metric prefix used in result.</param>
         /// <example>
         /// <code>
         /// 1000d.ToMetric() => "1k"
         /// 123d.ToMetric() => "123"
         /// 1E-1.ToMetric() => "100m"
-        /// 1_000_000.ToMetric(largestPrefix = 'k') => "1000k"
+        /// 1_000_000.ToMetric(largestPrefix = MetricPrefix.Kilo) => "1000k"
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix largestPrefix = MetricPrefix.None)
+        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix largestPrefix = MetricPrefix.Undefined)
         {
             if (input.Equals(0))
             {
@@ -221,7 +221,7 @@ namespace Humanizer
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
-        /// <param name="largestPrefix">If not null it is the largest prefix used in result.</param>
+        /// <param name="largestPrefix">Largest metric prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
         private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix largestPrefix)
         {
@@ -239,12 +239,15 @@ namespace Humanizer
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
-        /// <param name="largestPrefix">If not null it is the largest prefix used in result.</param>
+        /// <param name="largestPrefix">Largest metric prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
         private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix largestPrefix)
         {
-            if (largestPrefix != MetricPrefix.None)
+            if (largestPrefix != MetricPrefix.Undefined)
                 numericPrefix = LimitNumericPrefix(numericPrefix, largestPrefix);
+
+            if (numericPrefix == 0)
+                return input.ToString();
 
             var number = input * Math.Pow(1000, -numericPrefix);
 
@@ -264,22 +267,11 @@ namespace Humanizer
         /// Limit upper size of a numeric representation of metric prefix.
         /// </summary>
         /// <param name="numericPrefix">Metric prefix, expressed as a number, to limit.</param>
-        /// <param name="largestPrefix">Metric prefix symbol of upper limit.</param> // TODO symbol or name.
-        /// <returns>Upper limited numeric prefix represenation</returns>
+        /// <param name="largestPrefix">Upper limit.</param>
+        /// <returns>Upper limited numeric prefix representation</returns>
         private static int LimitNumericPrefix(int numericPrefix, MetricPrefix largestPrefix)
         {
-            // TODO largestPrefix = largestPrefix.Trim(); When changed to string
-
-            int maxPrefix = (int)largestPrefix / 3;
-
-            /* if (Symbols[0].Contains(largestPrefix))
-                maxPrefix = (Symbols[0].IndexOf(largestPrefix) + 1);
-
-            else if (Symbols[1].Contains(largestPrefix))
-                maxPrefix = -(Symbols[1].IndexOf(largestPrefix) + 1);
-
-            else
-                throw new ArgumentException("Invalid Metric prefix character.", nameof(largestPrefix)); // TODO change to "string".*/
+            var maxPrefix = (int)largestPrefix / 3;
 
             return maxPrefix < numericPrefix ? maxPrefix : numericPrefix;
         }
