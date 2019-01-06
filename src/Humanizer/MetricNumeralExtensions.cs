@@ -240,11 +240,11 @@ namespace Humanizer
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <param name="maxPrefix">Largest metric prefix used in result.</param>
+        /// <param name="minPrefix">Smallest metric prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
         private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix, MetricPrefix minPrefix)
         {
-            if (maxPrefix != MetricPrefix.Undefined)
-                numericPrefix = LimitNumericPrefix(numericPrefix, maxPrefix, minPrefix);
+            numericPrefix = numericPrefix.Clamp(minPrefix, maxPrefix);
 
             if (numericPrefix == 0)
                 return input.ToString();
@@ -256,7 +256,7 @@ namespace Humanizer
 
             var symbol = Math.Sign(numericPrefix) == 1
                 ? Symbols[0][numericPrefix - 1]
-                : Symbols[1][-numericPrefix - 1];
+                : Symbols[1][-numericPrefix - 1]; 
 
             return number
                 + (hasSpace ? " " : string.Empty)
@@ -264,16 +264,29 @@ namespace Humanizer
         }
 
         /// <summary>
-        /// Limit upper size of a numeric representation of metric prefix.
+        /// Clamps a numeric representation of metric prefix.
         /// </summary>
         /// <param name="numericPrefix">Metric prefix, expressed as a number, to limit.</param>
+        /// <param name="minPrefix">Lower limit.</param>
         /// <param name="maxPrefix">Upper limit.</param>
-        /// <returns>Upper limited numeric prefix representation</returns>
-        private static int LimitNumericPrefix(int numericPrefix, MetricPrefix maxPrefix, MetricPrefix minPrefix)
+        /// <returns>Clamped numeric prefix representation</returns>
+        private static int Clamp(this int numericPrefix, MetricPrefix minPrefix, MetricPrefix maxPrefix)
         {
-            var maxNumericPrefix = (int)maxPrefix / 3;
+            if (maxPrefix == MetricPrefix.Undefined && minPrefix == MetricPrefix.Undefined)
+                return numericPrefix;
 
-            return maxNumericPrefix < numericPrefix ? maxNumericPrefix : numericPrefix;
+            if (maxPrefix != MetricPrefix.Undefined && minPrefix != MetricPrefix.Undefined && maxPrefix < minPrefix)
+                throw new ArgumentException($"{nameof(maxPrefix)} can't be smaller than {nameof(minPrefix)}.");
+
+            var maxNumericPrefix = (int)maxPrefix / 3;
+            var minNumericPrefix = (int)minPrefix / 3;
+
+            if (maxPrefix != MetricPrefix.Undefined && maxNumericPrefix < numericPrefix)
+                return maxNumericPrefix;
+            else if (minPrefix != MetricPrefix.Undefined && minNumericPrefix > numericPrefix)
+                return minNumericPrefix;
+            else
+                return numericPrefix;
         }
 
         /// <summary>
