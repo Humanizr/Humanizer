@@ -108,9 +108,9 @@ namespace Humanizer.Tests
         [InlineData("1m",        1E-3,        false, true,  null, MetricPrefix.Undefined)]
         [InlineData("1000μ",     1E-3,        false, true,  null, MetricPrefix.Micro)]
         [InlineData("1000",      1000,        false, true,  null, MetricPrefix.None)]            
-        public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix largestPrefix)
+        public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix)
         {
-            Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals, largestPrefix));
+            Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals, maxPrefix));
         }
 
         [Theory]
