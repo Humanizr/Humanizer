@@ -111,7 +111,7 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix maxPrefix = MetricPrefix.Undefined)
+        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix maxPrefix = MetricPrefix.Undefined, MetricPrefix minPrefix = MetricPrefix.Undefined)
         {
             return ((double)input).ToMetric(hasSpace, useSymbol, decimals, maxPrefix);
         }
@@ -137,7 +137,7 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix maxPrefix = MetricPrefix.Undefined)
+        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix maxPrefix = MetricPrefix.Undefined, MetricPrefix minPrefix = MetricPrefix.Undefined)
         {
             if (input.Equals(0))
             {
@@ -149,7 +149,7 @@ namespace Humanizer
                 throw new ArgumentOutOfRangeException(nameof(input));
             }
 
-            return BuildRepresentation(input, hasSpace, useSymbol, decimals, maxPrefix);
+            return BuildRepresentation(input, hasSpace, useSymbol, decimals, maxPrefix, minPrefix);
         }
 
         /// <summary>
@@ -223,12 +223,12 @@ namespace Humanizer
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <param name="maxPrefix">Largest metric prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix)
+        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix, MetricPrefix minPrefix)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
             return exponent.Equals(0)
                 ? input.ToString()
-                : BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals, maxPrefix);
+                : BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals, maxPrefix, minPrefix);
         }
 
         /// <summary>
@@ -241,10 +241,10 @@ namespace Humanizer
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <param name="maxPrefix">Largest metric prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix)
+        private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix, MetricPrefix minPrefix)
         {
             if (maxPrefix != MetricPrefix.Undefined)
-                numericPrefix = LimitNumericPrefix(numericPrefix, maxPrefix);
+                numericPrefix = LimitNumericPrefix(numericPrefix, maxPrefix, minPrefix);
 
             if (numericPrefix == 0)
                 return input.ToString();
@@ -269,7 +269,7 @@ namespace Humanizer
         /// <param name="numericPrefix">Metric prefix, expressed as a number, to limit.</param>
         /// <param name="maxPrefix">Upper limit.</param>
         /// <returns>Upper limited numeric prefix representation</returns>
-        private static int LimitNumericPrefix(int numericPrefix, MetricPrefix maxPrefix)
+        private static int LimitNumericPrefix(int numericPrefix, MetricPrefix maxPrefix, MetricPrefix minPrefix)
         {
             var maxNumericPrefix = (int)maxPrefix / 3;
 
