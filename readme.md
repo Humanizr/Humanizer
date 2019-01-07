@@ -899,7 +899,17 @@ Humanizer can change numbers to Metric numerals using the `ToMetric` extension. 
 0.1d.ToMetric() => "100m"
 ```
 
-Also the reverse operation using the `FromMetric` extension.
+`ToMetric` accepts a several named optional parameters:
+
+Type | Name | Default | Description
+------------ | ------------- | ------------- | ------------- 
+bool | hasSpace | false | True adds a space between the number and metric prefix.
+bool | useSymbol | true | False adds the full name of the metric prefix.
+int? | decimals | null | Max number of decimals in the numeric part of the output. 
+MetricPrefix | maxPrefix | Undefined | Sets an upper limit to the used metric prefix.
+MetricPrefix | minPrefix | Undefined | Sets a lower limit to the used metric prefix.
+
+Humanizer also has the reverse operation using the `FromMetric` extension.
 
 ```C#
 1d.ToMetric() => "1"
