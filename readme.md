@@ -909,6 +909,15 @@ int? | decimals | null | Max number of decimals in the numeric part of the outpu
 MetricPrefix | maxPrefix | Undefined | Sets an upper limit to the used metric prefix.
 MetricPrefix | minPrefix | Undefined | Sets a lower limit to the used metric prefix.
 
+Examples:
+```C#
+1000.ToMetric(hasSpace: true) => "1 k"
+1000.ToMetric(useSymbol: false) => "1kilo"
+1234.ToMetric(decimals: 1) => "1.2k"
+1E6.ToMetric(maxPrefix: MetricPrefix.Kilo) => "1000k"
+1E-6.ToMetric(minPrefix: MetricPrefix.Milli) => "0.001m"
+```
+
 Humanizer also has the reverse operation using the `FromMetric` extension.
 
 ```C#
