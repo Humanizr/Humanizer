@@ -110,12 +110,10 @@ namespace Humanizer.Tests
         [InlineData("1000μ",     1E-3,      false, true,  null, MetricPrefix.Micro,     MetricPrefix.Undefined)]
         [InlineData("1000",      1000,      false, true,  null, MetricPrefix.None,      MetricPrefix.Undefined)]
         [InlineData("0.001m",    1E-6,      false, true,  null, MetricPrefix.Undefined, MetricPrefix.Milli)]
-        [InlineData("0m",        1E-6,      false, true,  0,    MetricPrefix.Undefined, MetricPrefix.Milli)]
-        [InlineData("0.01m",     1.234E-5,   false, true,  2,   MetricPrefix.Undefined, MetricPrefix.Milli)]
+        [InlineData("0m",        1E-6,      false, true,  0,    MetricPrefix.Undefined, MetricPrefix.Milli)] // Decimals and minPrefix options combined give value 0. Exponent remains. 
+        [InlineData("0.01m",     1.234E-5,  false, true,  2,    MetricPrefix.Undefined, MetricPrefix.Milli)]
         [InlineData("12.34μ",    1.2345E-5, false, true,  2,    MetricPrefix.Undefined, MetricPrefix.Micro)]
         [InlineData("0.01μ",     1.2345E-8, false, true,  2,    MetricPrefix.Undefined, MetricPrefix.Micro)]
-
-
         public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix, MetricPrefix minPrefix)
         {
             Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals, maxPrefix, minPrefix));

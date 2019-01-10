@@ -1,8 +1,8 @@
-﻿// Wrote by Alois de Gouvello https://github.com/aloisdg
+﻿// Written by Alois de Gouvello https://github.com/aloisdg with additions by Jonas Barkå https://github.com/JonasBarka.
 
 // The MIT License (MIT)
 
-// Copyright (c) 2015 Alois de Gouvello
+// Copyright (c) 2015-2019 Alois de Gouvello and each other contributor for their respective work.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in

@@ -894,8 +894,8 @@ Note that only integers smaller than 4000 can be converted to Roman numberals.
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
 
 ```C#
-1d.ToMetric() => "1"
-1230d.ToMetric() => "1.23k"
+1.ToMetric() => "1"
+1230.ToMetric() => "1.23k"
 0.1d.ToMetric() => "100m"
 ```
 
