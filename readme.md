@@ -894,12 +894,31 @@ Note that only integers smaller than 4000 can be converted to Roman numberals.
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
 
 ```C#
-1d.ToMetric() => "1"
-1230d.ToMetric() => "1.23k"
+1.ToMetric() => "1"
+1230.ToMetric() => "1.23k"
 0.1d.ToMetric() => "100m"
 ```
 
-Also the reverse operation using the `FromMetric` extension.
+`ToMetric` accepts a several named optional parameters:
+
+Type | Name | Default | Description
+------------ | ------------- | ------------- | ------------- 
+bool | hasSpace | false | True adds a space between the number and metric prefix.
+bool | useSymbol | true | False adds the full name of the metric prefix.
+int? | decimals | null | Max number of decimals in the numeric part of the output. 
+MetricPrefix | maxPrefix | Undefined | Sets an upper limit to the used metric prefix.
+MetricPrefix | minPrefix | Undefined | Sets a lower limit to the used metric prefix.
+
+Examples:
+```C#
+1000.ToMetric(hasSpace: true) => "1 k"
+1000.ToMetric(useSymbol: false) => "1kilo"
+1234.ToMetric(decimals: 1) => "1.2k"
+1E6.ToMetric(maxPrefix: MetricPrefix.Kilo) => "1000k"
+1E-6.ToMetric(minPrefix: MetricPrefix.Milli) => "0.001m"
+```
+
+Humanizer also has the reverse operation using the `FromMetric` extension.
 
 ```C#
 1d.ToMetric() => "1"

@@ -1,8 +1,8 @@
-﻿// Wrote by Alois de Gouvello https://github.com/aloisdg
+﻿// Written by Alois de Gouvello https://github.com/aloisdg with additions by Jonas Barkå https://github.com/JonasBarka.
 
 // The MIT License (MIT)
 
-// Copyright (c) 2015 Alois de Gouvello
+// Copyright (c) 2015-2019 Alois de Gouvello and each other contributor for their respective work.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -101,17 +101,19 @@ namespace Humanizer
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <param name="maxPrefix">Largest metric prefix used in result.</param>
         /// <example>
         /// <code>
         /// 1000.ToMetric() => "1k"
         /// 123.ToMetric() => "123"
         /// 1E-1.ToMetric() => "100m"
+        /// 1_000_000.ToMetric(largestPrefix = MetricPrefix.Kilo) => "1000k"
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix maxPrefix = MetricPrefix.Undefined, MetricPrefix minPrefix = MetricPrefix.Undefined)
         {
-            return ((double)input).ToMetric(hasSpace, useSymbol, decimals);
+            return ((double)input).ToMetric(hasSpace, useSymbol, decimals, maxPrefix);
         }
 
         /// <summary>
@@ -125,15 +127,17 @@ namespace Humanizer
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <param name="maxPrefix">Largest metric prefix used in result.</param>
         /// <example>
         /// <code>
         /// 1000d.ToMetric() => "1k"
         /// 123d.ToMetric() => "123"
         /// 1E-1.ToMetric() => "100m"
+        /// 1_000_000.ToMetric(largestPrefix = MetricPrefix.Kilo) => "1000k"
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null, MetricPrefix maxPrefix = MetricPrefix.Undefined, MetricPrefix minPrefix = MetricPrefix.Undefined)
         {
             if (input.Equals(0))
             {
@@ -145,7 +149,7 @@ namespace Humanizer
                 throw new ArgumentOutOfRangeException(nameof(input));
             }
 
-            return BuildRepresentation(input, hasSpace, useSymbol, decimals);
+            return BuildRepresentation(input, hasSpace, useSymbol, decimals, maxPrefix, minPrefix);
         }
 
         /// <summary>
@@ -217,38 +221,72 @@ namespace Humanizer
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <param name="maxPrefix">Largest metric prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix, MetricPrefix minPrefix)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
             return exponent.Equals(0)
                 ? input.ToString()
-                : BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+                : BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals, maxPrefix, minPrefix);
         }
 
         /// <summary>
         /// Build a Metric representation of the number.
         /// </summary>
         /// <param name="input">Number to convert to a Metric representation.</param>
-        /// <param name="exponent">Exponent of the number in a scientific notation</param>
+        /// <param name="numericPrefix">Metric prefix expressed as a number.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <param name="maxPrefix">Largest metric prefix used in result.</param>
+        /// <param name="minPrefix">Smallest metric prefix used in result.</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildMetricRepresentation(double input, int numericPrefix, bool hasSpace, bool useSymbol, int? decimals, MetricPrefix maxPrefix, MetricPrefix minPrefix)
         {
-            var number = input * Math.Pow(1000, -exponent);
-            if (decimals.HasValue)
-            {
-                number = Math.Round(number, decimals.Value);
-            }
+            numericPrefix = numericPrefix.Clamp(minPrefix, maxPrefix);
 
-            var symbol = Math.Sign(exponent) == 1
-                ? Symbols[0][exponent - 1]
-                : Symbols[1][-exponent - 1];
+            if (numericPrefix == 0)
+                return input.ToString();
+
+            var number = input * Math.Pow(1000, -numericPrefix);
+
+            if (decimals.HasValue)
+                number = Math.Round(number, decimals.Value);
+
+            var symbol = Math.Sign(numericPrefix) == 1
+                ? Symbols[0][numericPrefix - 1]
+                : Symbols[1][-numericPrefix - 1]; 
+
             return number
                 + (hasSpace ? " " : string.Empty)
                 + GetUnit(symbol, useSymbol);
+        }
+
+        /// <summary>
+        /// Clamps a numeric representation of metric prefix.
+        /// </summary>
+        /// <param name="numericPrefix">Metric prefix, expressed as a number, to limit.</param>
+        /// <param name="minPrefix">Lower limit.</param>
+        /// <param name="maxPrefix">Upper limit.</param>
+        /// <returns>Clamped numeric prefix representation</returns>
+        private static int Clamp(this int numericPrefix, MetricPrefix minPrefix, MetricPrefix maxPrefix)
+        {
+            if (maxPrefix == MetricPrefix.Undefined && minPrefix == MetricPrefix.Undefined)
+                return numericPrefix;
+
+            if (maxPrefix != MetricPrefix.Undefined && minPrefix != MetricPrefix.Undefined && maxPrefix < minPrefix)
+                throw new ArgumentException($"{nameof(maxPrefix)} can't be smaller than {nameof(minPrefix)}.");
+
+            var maxNumericPrefix = (int)maxPrefix / 3;
+            var minNumericPrefix = (int)minPrefix / 3;
+
+            if (maxPrefix != MetricPrefix.Undefined && maxNumericPrefix < numericPrefix)
+                return maxNumericPrefix;
+            else if (minPrefix != MetricPrefix.Undefined && minNumericPrefix > numericPrefix)
+                return minNumericPrefix;
+            else
+                return numericPrefix;
         }
 
         /// <summary>
@@ -265,7 +303,7 @@ namespace Humanizer
         /// <summary>
         /// Check if a Metric representation is out of the valid range.
         /// </summary>
-        /// <param name="input">A Metric representation who might be out of the valid range.</param>
+        /// <param name="input">A Metric representation that may be out of the valid range.</param>
         /// <returns>True if input is out of the valid range.</returns>
         private static bool IsOutOfRange(this double input)
         {
@@ -283,7 +321,7 @@ namespace Humanizer
         /// <remarks>
         /// ToDo: Performance: Use (string input, out number) to escape the double use of Parse()
         /// </remarks>
-        /// <param name="input">A string who might contain a invalid Metric representation.</param>
+        /// <param name="input">A string that may contain an invalid Metric representation.</param>
         /// <returns>True if input is not a valid Metric representation.</returns>
         private static bool IsInvalidMetricNumeral(this string input)
         {

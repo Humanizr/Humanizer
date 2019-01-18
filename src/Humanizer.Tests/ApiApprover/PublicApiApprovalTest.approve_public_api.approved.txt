@@ -412,8 +412,29 @@ namespace Humanizer
     public class static MetricNumeralExtensions
     {
         public static double FromMetric(this string input) { }
-        public static string ToMetric(this int input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null) { }
-        public static string ToMetric(this double input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null) { }
+        public static string ToMetric(this int input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null, Humanizer.MetricPrefix maxPrefix = -100, Humanizer.MetricPrefix minPrefix = -100) { }
+        public static string ToMetric(this double input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null, Humanizer.MetricPrefix maxPrefix = -100, Humanizer.MetricPrefix minPrefix = -100) { }
+    }
+    public enum MetricPrefix
+    {
+        Undefined = -100,
+        Yocto = -24,
+        Zepto = -21,
+        Atto = -18,
+        Femto = -15,
+        Pico = -12,
+        Nano = -9,
+        Micro = -6,
+        Milli = -3,
+        None = 0,
+        Kilo = 3,
+        Mega = 6,
+        Giga = 9,
+        Tera = 12,
+        Peta = 15,
+        Exa = 18,
+        Zetta = 21,
+        Yotta = 24,
     }
     public class NoMatchFoundException : System.Exception
     {
