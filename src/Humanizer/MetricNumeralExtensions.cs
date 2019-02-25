@@ -1,4 +1,4 @@
-// Wrote by Alois de Gouvello https://github.com/aloisdg
+﻿// Wrote by Alois de Gouvello https://github.com/aloisdg
 
 // The MIT License (MIT)
 
@@ -126,9 +126,10 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        public static string ToMetric(this int input, bool hasSpace = false, MetricPrefix prefixType = MetricPrefix.Symbol, int? 
+        decimals = null)
         {
-            return ((double)input).ToMetric(hasSpace, useSymbol, decimals);
+            return ((double)input).ToMetric(hasSpace, prefixType, decimals);
         }
 
         /// <summary>
@@ -150,7 +151,7 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        public static string ToMetric(this double input, bool hasSpace = false, MetricPrefix prefixType = MetricPrefix.Symbol, int? decimals = null)
         {
             if (input.Equals(0))
             {
@@ -162,7 +163,7 @@ namespace Humanizer
                 throw new ArgumentOutOfRangeException(nameof(input));
             }
 
-            return BuildRepresentation(input, hasSpace, useSymbol, decimals);
+            return BuildRepresentation(input, hasSpace, prefixType, decimals);
         }
 
         /// <summary>
@@ -235,12 +236,12 @@ namespace Humanizer
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildRepresentation(double input, bool hasSpace, MetricPrefix prefixType, int? decimals)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
             return exponent.Equals(0)
                 ? input.ToString()
-                : BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+                : BuildMetricRepresentation(input, exponent, hasSpace, prefixType, decimals);
         }
 
         /// <summary>
@@ -252,7 +253,7 @@ namespace Humanizer
         /// <param name="useSymbol">True will use symbol instead of name</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, MetricPrefix prefixType, int? decimals)
         {
             var number = input * Math.Pow(1000, -exponent);
             if (decimals.HasValue)
@@ -265,18 +266,28 @@ namespace Humanizer
                 : Symbols[1][-exponent - 1];
             return number
                 + (hasSpace ? " " : string.Empty)
-                + GetUnit(symbol, useSymbol);
+                + GetUnit(symbol, prefixType);
         }
 
         /// <summary>
-        /// Get the unit from a symbol of from the symbol's name.
+        /// Get the unit from a symbol
         /// </summary>
         /// <param name="symbol">The symbol linked to the unit</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
-        /// <returns>A symbol or a symbol's name</returns>
-        private static string GetUnit(char symbol, bool useSymbol)
+        /// <param name="prefixType">Enum of prefix type to be returned</param>
+        /// <returns>String of the prefix</returns>
+        private static string GetUnit(char symbol, MetricPrefix prefixType)
         {
-            return useSymbol ? symbol.ToString() : Names[symbol];
+            switch (prefixType)
+            {
+                case MetricPrefix.Long:
+                    return LongScaleWords[symbol];
+                case MetricPrefix.Short:
+                    return ShortScaleWords[symbol];
+                case MetricPrefix.Word:
+                    return Names[symbol];
+                default:
+                    return symbol.ToString();
+            }
         }
 
         /// <summary>
