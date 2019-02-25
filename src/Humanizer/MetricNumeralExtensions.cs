@@ -116,7 +116,7 @@ namespace Humanizer
         /// </remarks>
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <example>
         /// <code>
@@ -141,7 +141,7 @@ namespace Humanizer
         /// </remarks>
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <example>
         /// <code>
@@ -233,7 +233,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
         private static string BuildRepresentation(double input, bool hasSpace, MetricPrefix prefixType, int? decimals)
@@ -250,7 +250,7 @@ namespace Humanizer
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="exponent">Exponent of the number in a scientific notation</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
         private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, MetricPrefix prefixType, int? decimals)
