@@ -67,6 +67,23 @@ namespace Humanizer
                          {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
                          {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
                 };
+        /// <summary>
+        /// Short scale English words linking Metric symbol (as key) to it's word (as value).
+        /// </summary>
+        private static readonly Dictionary<char, string> ShortScaleWords = new Dictionary<char, string>
+                {
+                        {'Y', "Septillion" }, {'Z', "Sextillion" }, {'E', "Quintillion" }, {'P', "Quadrillion" }, {'T', "Trillion" }, {'G', "Billion" }, {'M', "Million" }, {'k', "Thousand" },
+                        {'m', "Thousandth" }, {'μ', "Millionth" }, {'n', "Billionth" }, {'p', "Trillionth" }, {'f', "Quadrillionth" }, {'a', "Quintillionth" }, {'z', "Sextillionth" }, {'y', "Septillionth" }
+                };
+        
+        /// <summary>
+        /// Long scale English words linking Metric symbol (as key) to it's word (as value).
+        /// </summary>
+        private static readonly Dictionary<char, string> LongScaleWords = new Dictionary<char, string>
+        {
+            {'Y', "Quadrillion" }, {'Z', "Trilliard" }, {'E', "Trillion" }, {'P', "Billiard" }, {'T', "Billion" }, {'G', "Milliard" }, {'M', "Million" }, {'k', "Thousand" },
+            {'m', "Thousandth" }, {'μ', "Millionth" }, {'n', "Milliardth" }, {'p', "Billionth" }, {'f', "Billiardth" }, {'a', "Trillionth" }, {'z', "Trilliardth" }, {'y', "Quadrillionth" }
+        };
 
         /// <summary>
         /// Converts a Metric representation into a number.
