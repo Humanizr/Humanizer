@@ -412,8 +412,15 @@ namespace Humanizer
     public class static MetricNumeralExtensions
     {
         public static double FromMetric(this string input) { }
-        public static string ToMetric(this int input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null) { }
-        public static string ToMetric(this double input, bool hasSpace = False, bool useSymbol = True, System.Nullable<int> decimals = null) { }
+        public static string ToMetric(this int input, bool hasSpace = False, Humanizer.MetricPrefix prefixType = 0, System.Nullable<int> decimals = null) { }
+        public static string ToMetric(this double input, bool hasSpace = False, Humanizer.MetricPrefix prefixType = 0, System.Nullable<int> decimals = null) { }
+    }
+    public enum MetricPrefix
+    {
+        Symbol = 0,
+        Word = 1,
+        Short = 2,
+        Long = 3,
     }
     public class NoMatchFoundException : System.Exception
     {

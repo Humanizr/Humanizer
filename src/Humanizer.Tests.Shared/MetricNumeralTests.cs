@@ -90,20 +90,26 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData("0", 0d, false, true, null)]
-        [InlineData("123", 123d, false, true, null)]
-        [InlineData("-123", (-123d), false, true, null)]
-        [InlineData("1.23k", 1230d, false, true, null)]
-        [InlineData("1 k", 1000d, true, true, null)]
-        [InlineData("1 kilo", 1000d, true, false, null)]
-        [InlineData("1milli", 1E-3, false, false, null)]
-        [InlineData("1.23milli", 1.234E-3, false, false, 2)]
-        [InlineData("12.34k", 12345, false, true, 2)]
-        [InlineData("12k", 12345, false, true, 0)]
-        [InlineData("-3.9m", -3.91e-3, false, true, 1)]
-        public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals)
+        [InlineData("0", 0d, false, MetricPrefix.Symbol, null)]
+        [InlineData("123", 123d, false, MetricPrefix.Symbol, null)]
+        [InlineData("-123", (-123d), false, MetricPrefix.Symbol, null)]
+        [InlineData("1.23k", 1230d, false, MetricPrefix.Symbol, null)]
+        [InlineData("1 k", 1000d, true, MetricPrefix.Symbol, null)]
+        [InlineData("1 kilo", 1000d, true, MetricPrefix.Word, null)]
+        [InlineData("1milli", 1E-3, false, MetricPrefix.Word, null)]
+        [InlineData("1.23milli", 1.234E-3, false, MetricPrefix.Word, 2)]
+        [InlineData("12.34k", 12345, false, MetricPrefix.Symbol, 2)]
+        [InlineData("12k", 12345, false, MetricPrefix.Symbol, 0)]
+        [InlineData("-3.9m", -3.91e-3, false, MetricPrefix.Symbol, 1)]
+        [InlineData("1.3 Million", 1.3e6d, true, MetricPrefix.Long, null)]
+        [InlineData("1.3 Million", 1.3e6d, true, MetricPrefix.Short, null)]
+        [InlineData("1.3 Trilliard", 1.3e21d, true, MetricPrefix.Long, null)]
+        [InlineData("1.3 Sextillion", 1.3e21d, true, MetricPrefix.Short, null)]
+        [InlineData("1.3 Trilliardth", 1.3e-21d, true, MetricPrefix.Long, null)]
+        [InlineData("1.3 Sextillionth", 1.3e-21d, true, MetricPrefix.Short, null)]
+        public void ToMetric(string expected, double input, bool hasSpace, MetricPrefix prefixType, int? decimals)
         {
-            Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals));
+            Assert.Equal(expected, input.ToMetric(hasSpace, prefixType, decimals));
         }
 
 
