@@ -1,4 +1,4 @@
-﻿// Wrote by Alois de Gouvello https://github.com/aloisdg
+// Wrote by Alois de Gouvello https://github.com/aloisdg
 
 // The MIT License (MIT)
 
@@ -47,10 +47,10 @@ namespace Humanizer
         /// Symbols is a list of every symbols for the Metric system.
         /// </summary>
         private static readonly List<char>[] Symbols =
-                {
-                    new List<char> { 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y' },
-                    new List<char> { 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y' }
-                };
+            {
+                new List<char> { 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y' },
+                new List<char> { 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y' }
+            };
 
         /// <summary>
         /// Names link a Metric symbol (as key) to its name (as value).
@@ -63,18 +63,18 @@ namespace Humanizer
         /// {'c', "centi"},
         /// </remarks>
         private static readonly Dictionary<char, string> Names = new Dictionary<char, string>
-                {
-                         {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
-                         {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
-                };
+        {
+            {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
+            {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
+        };
         /// <summary>
         /// Short scale English words linking Metric symbol (as key) to it's word (as value).
         /// </summary>
         private static readonly Dictionary<char, string> ShortScaleWords = new Dictionary<char, string>
-                {
-                        {'Y', "Septillion" }, {'Z', "Sextillion" }, {'E', "Quintillion" }, {'P', "Quadrillion" }, {'T', "Trillion" }, {'G', "Billion" }, {'M', "Million" }, {'k', "Thousand" },
-                        {'m', "Thousandth" }, {'μ', "Millionth" }, {'n', "Billionth" }, {'p', "Trillionth" }, {'f', "Quadrillionth" }, {'a', "Quintillionth" }, {'z', "Sextillionth" }, {'y', "Septillionth" }
-                };
+        {
+            {'Y', "Septillion" }, {'Z', "Sextillion" }, {'E', "Quintillion" }, {'P', "Quadrillion" }, {'T', "Trillion" }, {'G', "Billion" }, {'M', "Million" }, {'k', "Thousand" },
+            {'m', "Thousandth" }, {'μ', "Millionth" }, {'n', "Billionth" }, {'p', "Trillionth" }, {'f', "Quadrillionth" }, {'a', "Quintillionth" }, {'z', "Sextillionth" }, {'y', "Septillionth" }
+        };
         
         /// <summary>
         /// Long scale English words linking Metric symbol (as key) to it's word (as value).
