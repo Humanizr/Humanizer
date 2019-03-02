@@ -30,43 +30,7 @@ namespace Humanizer
     /// </summary>
     public static class ToQuantityExtensions
     {
-        /// <summary>
-        /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
-        /// </summary>
-        /// <param name="input">The word to be prefixed</param>
-        /// <param name="quantity">The quantity of the word</param>
-        /// <param name="showQuantityAs">How to show the quantity. Numeric by default</param>
-        /// <example>
-        /// "request".ToQuantity(0) => "0 requests"
-        /// "request".ToQuantity(1) => "1 request"
-        /// "request".ToQuantity(2) => "2 requests"
-        /// "men".ToQuantity(2) => "2 men"
-        /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
-        /// </example>
-        /// <returns></returns>
-        public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
-        {
-            return input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
-        }
-
-        /// <summary>
-        /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
-        /// </summary>
-        /// <param name="input">The word to be prefixed</param>
-        /// <param name="quantity">The quantity of the word</param>
-        /// <param name="format">A standard or custom numeric format string.</param>
-        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
-        /// <example>
-        /// "request".ToQuantity(0) => "0 requests"
-        /// "request".ToQuantity(10000, format: "N0") => "10,000 requests"
-        /// "request".ToQuantity(1, format: "N0") => "1 request"
-        /// </example>
-        /// <returns></returns>
-        public static string ToQuantity(this string input, int quantity, string format, IFormatProvider formatProvider = null)
-        {
-            return input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
-        }
-
+        
         /// <summary>
         /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
         /// </summary>

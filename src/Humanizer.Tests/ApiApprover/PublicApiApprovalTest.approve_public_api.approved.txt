@@ -1010,8 +1010,6 @@ namespace Humanizer
     }
     public class static ToQuantityExtensions
     {
-        public static string ToQuantity(this string input, int quantity, Humanizer.ShowQuantityAs showQuantityAs = 1) { }
-        public static string ToQuantity(this string input, int quantity, string format, System.IFormatProvider formatProvider = null) { }
         public static string ToQuantity(this string input, long quantity, Humanizer.ShowQuantityAs showQuantityAs = 1) { }
         public static string ToQuantity(this string input, long quantity, string format, System.IFormatProvider formatProvider = null) { }
     }
