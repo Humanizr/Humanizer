@@ -349,6 +349,9 @@ namespace Humanizer.Tests
             yield return new object[] { "rookie", "rookies" };
             yield return new object[] { "roomie", "roomies" };
             yield return new object[] { "smoothie", "smoothies" };
+            
+            //Issue #789
+            yield return new object[] { "cache", "caches" };
         }
 
         IEnumerator IEnumerable.GetEnumerator()
