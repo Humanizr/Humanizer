@@ -101,6 +101,7 @@ namespace Humanizer.Tests
         [InlineData("12.34k", 12345, false, true, 2)]
         [InlineData("12k", 12345, false, true, 0)]
         [InlineData("-3.9m", -3.91e-3, false, true, 1)]
+        [InlineData("1.2", 1.23, false, false, 1)]
         public void ToMetric(string expected, double input, bool hasSpace, bool useSymbol, int? decimals)
         {
             Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals));
