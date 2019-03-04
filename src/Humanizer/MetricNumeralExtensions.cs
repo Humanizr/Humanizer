@@ -47,10 +47,10 @@ namespace Humanizer
         /// Symbols is a list of every symbols for the Metric system.
         /// </summary>
         private static readonly List<char>[] Symbols =
-                {
-                    new List<char> { 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y' },
-                    new List<char> { 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y' }
-                };
+            {
+                new List<char> { 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y' },
+                new List<char> { 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y' }
+            };
 
         /// <summary>
         /// Names link a Metric symbol (as key) to its name (as value).
@@ -63,10 +63,27 @@ namespace Humanizer
         /// {'c', "centi"},
         /// </remarks>
         private static readonly Dictionary<char, string> Names = new Dictionary<char, string>
-                {
-                         {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
-                         {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
-                };
+        {
+            {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
+            {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
+        };
+        /// <summary>
+        /// Short scale English words linking Metric symbol (as key) to it's word (as value).
+        /// </summary>
+        private static readonly Dictionary<char, string> ShortScaleWords = new Dictionary<char, string>
+        {
+            {'Y', "Septillion" }, {'Z', "Sextillion" }, {'E', "Quintillion" }, {'P', "Quadrillion" }, {'T', "Trillion" }, {'G', "Billion" }, {'M', "Million" }, {'k', "Thousand" },
+            {'m', "Thousandth" }, {'μ', "Millionth" }, {'n', "Billionth" }, {'p', "Trillionth" }, {'f', "Quadrillionth" }, {'a', "Quintillionth" }, {'z', "Sextillionth" }, {'y', "Septillionth" }
+        };
+        
+        /// <summary>
+        /// Long scale English words linking Metric symbol (as key) to it's word (as value).
+        /// </summary>
+        private static readonly Dictionary<char, string> LongScaleWords = new Dictionary<char, string>
+        {
+            {'Y', "Quadrillion" }, {'Z', "Trilliard" }, {'E', "Trillion" }, {'P', "Billiard" }, {'T', "Billion" }, {'G', "Milliard" }, {'M', "Million" }, {'k', "Thousand" },
+            {'m', "Thousandth" }, {'μ', "Millionth" }, {'n', "Milliardth" }, {'p', "Billionth" }, {'f', "Billiardth" }, {'a', "Trillionth" }, {'z', "Trilliardth" }, {'y', "Quadrillionth" }
+        };
 
         /// <summary>
         /// Converts a Metric representation into a number.
@@ -99,7 +116,7 @@ namespace Humanizer
         /// </remarks>
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <example>
         /// <code>
@@ -109,9 +126,10 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        public static string ToMetric(this int input, bool hasSpace = false, MetricPrefix prefixType = MetricPrefix.Symbol, int? 
+        decimals = null)
         {
-            return ((double)input).ToMetric(hasSpace, useSymbol, decimals);
+            return ((double)input).ToMetric(hasSpace, prefixType, decimals);
         }
 
         /// <summary>
@@ -123,7 +141,7 @@ namespace Humanizer
         /// </remarks>
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <example>
         /// <code>
@@ -133,7 +151,7 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        public static string ToMetric(this double input, bool hasSpace = false, MetricPrefix prefixType = MetricPrefix.Symbol, int? decimals = null)
         {
             if (input.Equals(0))
             {
@@ -145,7 +163,7 @@ namespace Humanizer
                 throw new ArgumentOutOfRangeException(nameof(input));
             }
 
-            return BuildRepresentation(input, hasSpace, useSymbol, decimals);
+            return BuildRepresentation(input, hasSpace, prefixType, decimals);
         }
 
         /// <summary>
@@ -215,15 +233,15 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildRepresentation(double input, bool hasSpace, MetricPrefix prefixType, int? decimals)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
             return exponent.Equals(0)
                 ? input.ToString()
-                : BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+                : BuildMetricRepresentation(input, exponent, hasSpace, prefixType, decimals);
         }
 
         /// <summary>
@@ -232,10 +250,10 @@ namespace Humanizer
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="exponent">Exponent of the number in a scientific notation</param>
         /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="prefixType">Type of prefix to append</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, MetricPrefix prefixType, int? decimals)
         {
             var number = input * Math.Pow(1000, -exponent);
             if (decimals.HasValue)
@@ -248,18 +266,28 @@ namespace Humanizer
                 : Symbols[1][-exponent - 1];
             return number
                 + (hasSpace ? " " : string.Empty)
-                + GetUnit(symbol, useSymbol);
+                + GetUnit(symbol, prefixType);
         }
 
         /// <summary>
-        /// Get the unit from a symbol of from the symbol's name.
+        /// Get the unit from a symbol
         /// </summary>
         /// <param name="symbol">The symbol linked to the unit</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
-        /// <returns>A symbol or a symbol's name</returns>
-        private static string GetUnit(char symbol, bool useSymbol)
+        /// <param name="prefixType">Enum of prefix type to be returned</param>
+        /// <returns>String of the prefix</returns>
+        private static string GetUnit(char symbol, MetricPrefix prefixType)
         {
-            return useSymbol ? symbol.ToString() : Names[symbol];
+            switch (prefixType)
+            {
+                case MetricPrefix.Long:
+                    return LongScaleWords[symbol];
+                case MetricPrefix.Short:
+                    return ShortScaleWords[symbol];
+                case MetricPrefix.Word:
+                    return Names[symbol];
+                default:
+                    return symbol.ToString();
+            }
         }
 
         /// <summary>
