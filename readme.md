@@ -219,7 +219,7 @@ If passed a fewer number for arguments, it'll throw `String.FormatException` exc
 You also can specify the culture to use explicitly as the first parameter for the `FormatWith()` method:
 
 ```c#
-"{0:N2}".FormatWith(new CultureInfo("ru-RU"), 6666.66) => "6 666,66"
+"{0:N2}".FormatWith(new CultureInfo("ru-RU"), 6666.66) => "6 666,66"
 ```
 
 If a culture is not specified, current thread's current culture is used.
@@ -639,17 +639,17 @@ Obviously this only applies to some cultures. For others passing gender in or no
 `Titleize` converts the input words to Title casing; equivalent to `"some title".Humanize(LetterCasing.Title)`
 
 #### <a id="pascalize">Pascalize</a>
-`Pascalize` converts the input words to UpperCamelCase, also removing underscores:
+`Pascalize` converts the input words to UpperCamelCase, also removing underscores and spaces:
 
 ```C#
-"some_title".Pascalize() => "SomeTitle"
+"some_title for something".Pascalize() => "SomeTitleForSomething"
 ```
 
 #### <a id="camelize">Camelize</a>
 `Camelize` behaves identically to `Pascalize`, except that the first character is lower case:
 
 ```C#
-"some_title".Camelize() => "someTitle"
+"some_title for something".Camelize() => "someTitleForSomething"
 ```
 
 #### <a id="underscore">Underscore</a>
