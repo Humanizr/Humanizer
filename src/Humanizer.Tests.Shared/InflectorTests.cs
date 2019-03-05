@@ -102,6 +102,7 @@ namespace Humanizer.Tests
         [InlineData("customer_first_name", "CustomerFirstName")]
         [InlineData("customer_first_name goes here", "CustomerFirstNameGoesHere")]
         [InlineData("customer name", "CustomerName")]
+        [InlineData("customer   name", "CustomerName")]
         public void Pascalize(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Pascalize());
@@ -116,6 +117,7 @@ namespace Humanizer.Tests
         [InlineData("customer_first_name", "customerFirstName")]
         [InlineData("customer_first_name goes here", "customerFirstNameGoesHere")]
         [InlineData("customer name", "customerName")]
+        [InlineData("customer   name", "customerName")]
         [InlineData("", "")]
         public void Camelize(string input, string expectedOutput)
         {
