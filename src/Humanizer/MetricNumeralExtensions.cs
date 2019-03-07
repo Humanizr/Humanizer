@@ -222,11 +222,13 @@ namespace Humanizer
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
 
-            if (exponent.Equals(0))
+            if (!exponent.Equals(0)) return BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+            var representation = decimals.HasValue ? Math.Round(input, decimals.Value).ToString() : input.ToString();
+            if (hasSpace)
             {
-                return hasSpace ? string.Concat(input, " ") : input.ToString();
+                representation += " ";
             }
-            return BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+            return representation;
         }
 
         /// <summary>
