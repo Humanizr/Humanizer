@@ -8,7 +8,7 @@
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
     <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Humanizer Locale (ko-KR)</description>
+    <description>Humanizer Locale Korean (South Korea) (ko-KR)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
     <language>ko-KR</language>
