@@ -70,11 +70,8 @@ namespace Humanizer
         /// <param name="removeWhiteSpace">"This has a space" -> "ThisHasASpace" if true</param>
         /// <returns></returns>
         public static string Pascalize(this string input)
-        {
-            
+        {   
             return Regex.Replace(input, "(?:^|_| +)(.)", match => match.Groups[1].Value.ToUpper());
-            
-            //return Regex.Replace(input, @"\s+", "");
         }
 
         /// <summary>
