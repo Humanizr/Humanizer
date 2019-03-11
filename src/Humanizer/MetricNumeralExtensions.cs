@@ -221,10 +221,14 @@ namespace Humanizer
         private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
-            if (exponent.Equals(0))
-                return decimals.HasValue?Math.Round(input, decimals.Value).ToString():input.ToString();
-                
-            return BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+
+            if (!exponent.Equals(0)) return BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+            var representation = decimals.HasValue ? Math.Round(input, decimals.Value).ToString() : input.ToString();
+            if (hasSpace)
+            {
+                representation += " ";
+            }
+            return representation;
         }
 
         /// <summary>
