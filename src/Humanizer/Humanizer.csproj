@@ -6,7 +6,7 @@
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
-    <Copyright>Copyright © 2012-2018 Mehdi Khalili</Copyright>    
+    <Copyright>Copyright © 2012-2019 .NET Foundation and Contributors</Copyright>    
     <Product>Humanizer ($(TargetFramework))</Product>    
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
