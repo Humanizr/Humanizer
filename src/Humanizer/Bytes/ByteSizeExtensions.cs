@@ -491,6 +491,29 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Turns a byte quantity into human readable form, eg 2 GB
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="formatProvider">The format provider to use</param>
+        /// <returns></returns>
+        public static string Humanize(this ByteSize input, IFormatProvider formatProvider)
+        {
+            return input.ToString(formatProvider);
+        }
+
+        /// <summary>
+        /// Turns a byte quantity into human readable form, eg 2 GB
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="format">The string format to use</param>
+        /// <param name="formatProvider">The format provider to use</param>
+        /// <returns></returns>
+        public static string Humanize(this ByteSize input, string format, IFormatProvider formatProvider)
+        {
+            return string.IsNullOrWhiteSpace(format) ? input.ToString(formatProvider) : input.ToString(format, formatProvider);
+        }
+
+        /// <summary>
         /// Turns a quantity of bytes in a given interval into a rate that can be manipulated
         /// </summary>
         /// <param name="size">Quantity of bytes</param>

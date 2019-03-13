@@ -63,7 +63,9 @@ namespace Humanizer.Bytes
         public Humanizer.Bytes.ByteSize Subtract(Humanizer.Bytes.ByteSize bs) { }
         public string ToFullWords() { }
         public override string ToString() { }
+        public string ToString(System.IFormatProvider provider) { }
         public string ToString(string format) { }
+        public string ToString(string format, System.IFormatProvider provider) { }
         public static bool TryParse(string s, out Humanizer.Bytes.ByteSize result) { }
     }
 }
@@ -95,6 +97,8 @@ namespace Humanizer
         public static Humanizer.Bytes.ByteSize Gigabytes(this double input) { }
         public static Humanizer.Bytes.ByteSize Gigabytes(this long input) { }
         public static string Humanize(this Humanizer.Bytes.ByteSize input, string format = null) { }
+        public static string Humanize(this Humanizer.Bytes.ByteSize input, System.IFormatProvider formatProvider) { }
+        public static string Humanize(this Humanizer.Bytes.ByteSize input, string format, System.IFormatProvider formatProvider) { }
         public static Humanizer.Bytes.ByteSize Kilobytes(this byte input) { }
         public static Humanizer.Bytes.ByteSize Kilobytes(this sbyte input) { }
         public static Humanizer.Bytes.ByteSize Kilobytes(this short input) { }
