@@ -59,6 +59,16 @@ namespace Humanizer.Bytes
         public static Humanizer.Bytes.ByteSize FromMegabytes(double value) { }
         public static Humanizer.Bytes.ByteSize FromTerabytes(double value) { }
         public override int GetHashCode() { }
+        public static Humanizer.Bytes.ByteSize +(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
+        public static Humanizer.Bytes.ByteSize --(Humanizer.Bytes.ByteSize b) { }
+        public static bool ==(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
+        public static bool >(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
+        public static bool >=(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
+        public static Humanizer.Bytes.ByteSize ++(Humanizer.Bytes.ByteSize b) { }
+        public static bool !=(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
+        public static bool <(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
+        public static bool <=(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
+        public static Humanizer.Bytes.ByteSize -(Humanizer.Bytes.ByteSize b) { }
         public static Humanizer.Bytes.ByteSize Parse(string s) { }
         public Humanizer.Bytes.ByteSize Subtract(Humanizer.Bytes.ByteSize bs) { }
         public string ToFullWords() { }
@@ -149,6 +159,17 @@ namespace Humanizer
     {
         public static string ToOrdinalWords(this System.DateTime input) { }
         public static string ToOrdinalWords(this System.DateTime input, Humanizer.GrammaticalCase grammaticalCase) { }
+    }
+    public class static EnglishArticle
+    {
+        public static string[] AppendArticlePrefix(string[] items) { }
+        public static string[] PrependArticleSuffix(string[] appended) { }
+    }
+    public enum EnglishArticles
+    {
+        A = 0,
+        An = 1,
+        The = 2,
     }
     public class static EnumDehumanizeExtensions
     {

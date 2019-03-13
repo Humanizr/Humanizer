@@ -16,7 +16,7 @@ variables:
 steps:
 - task: DotNetCoreInstaller@0
   inputs:
-    version: '2.1.500'
+    version: '2.2.105'
 
 - task: DotNetCoreCLI@2  
   inputs:

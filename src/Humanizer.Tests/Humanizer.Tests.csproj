@@ -7,16 +7,16 @@
     <DefineConstants>$(DefineConstants);NETFX_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.4.0-beta.2.build4010" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0-beta.2.build4010" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0-preview-20180610-02" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <PackageReference Include="PublicApiGenerator" Version="7.0.1" />
-    <PackageReference Include="ApiApprover" Version="7.0.1" />
-    <PackageReference Include="DiffPlex" Version="1.4.1" />
+    <PackageReference Include="PublicApiGenerator" Version="8.1.0" />
+    <PackageReference Include="ApiApprover" Version="8.1.0" />
+    <PackageReference Include="DiffPlex" Version="1.4.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Humanizer.Tests.Shared\**\*.cs">
