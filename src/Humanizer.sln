@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28711.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
 EndProject
@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.editorconfig = ..\.editorconfig
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
+		Directory.build.props = Directory.build.props
 		..\NuSpecs\Humanizer.Core.nuspec = ..\NuSpecs\Humanizer.Core.nuspec
 		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
 		..\LICENSE = ..\LICENSE
@@ -21,9 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D-0488-42AE-A585-86D882F23D5F}"
 	ProjectSection(SolutionItems) = preProject
-		..\.vsts-ci.yml = ..\.vsts-ci.yml
-		..\.vsts-pr.yml = ..\.vsts-pr.yml
-		..\.vsts-shared.yml = ..\.vsts-shared.yml
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		..\build.cmd = ..\build.cmd
 		Humanizer.ruleset = Humanizer.ruleset
 	EndProjectSection
