@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Compare = System.Web.Mvc.CompareAttribute;
+using Compare = System.ComponentModel.DataAnnotations;
 
 namespace Humanizer.MvcSample.Models
 {
@@ -18,7 +18,7 @@ namespace Humanizer.MvcSample.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -51,7 +51,7 @@ namespace Humanizer.MvcSample.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

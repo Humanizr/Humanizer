@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace Humanizer.MvcSample
@@ -31,7 +30,7 @@ namespace Humanizer.MvcSample
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
-
+        
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -41,7 +40,7 @@ namespace Humanizer.MvcSample
 
             ModelMetadataProviders.Current = new HumanizerMetadataProvider();
 
-            BundleTable.Bundles.RegisterTemplateBundles();
+            // TODO: For production use, do optimization and registration of template bundles yourself. 
         }
     }
 }

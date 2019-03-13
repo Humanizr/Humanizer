@@ -106,8 +106,7 @@ namespace Humanizer.MvcSample.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out var createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -134,8 +133,7 @@ namespace Humanizer.MvcSample.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out var createStatus);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
@@ -174,7 +172,7 @@ namespace Humanizer.MvcSample.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
+                    var currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
                     changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
                 }
                 catch (Exception)
@@ -206,7 +204,7 @@ namespace Humanizer.MvcSample.Controllers
 
         private ActionResult ContextDependentView()
         {
-            string actionName = ControllerContext.RouteData.GetRequiredString("action");
+            var actionName = ControllerContext.RouteData.GetRequiredString("action");
             if (Request.QueryString["content"] != null)
             {
                 ViewBag.FormAction = "Json" + actionName;
