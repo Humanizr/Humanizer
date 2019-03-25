@@ -71,6 +71,69 @@ namespace Humanizer.Tests
             var actual = TimeSpan.FromDays(days).Humanize();
             Assert.Equal(expected, actual);
         }
+        
+        [Theory]
+        [InlineData(7, "1 week")]
+        [InlineData(8, "1 week, 1 day")]
+        [InlineData(9, "1 week, 2 days")]
+        [InlineData(14, "2 weeks")]
+        [InlineData(15, "2 weeks, 1 day")]
+        [InlineData(16, "2 weeks, 2 days")]
+        [InlineData(730, "104 weeks, 2 days")]
+        public void WeeksAndDays(int days, string expected)
+        {
+            var actual = TimeSpan.FromDays(days)
+                                 .Humanize(2, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Week);
+            Assert.Equal(expected, actual);
+
+        }
+
+        [Theory]
+        [InlineData(7, "1 week")]
+        [InlineData(8, "1 week, 1 day")]
+        [InlineData(9, "1 week, 2 days")]
+        [InlineData(14, "2 weeks")]
+        [InlineData(15, "2 weeks, 1 day")]
+        [InlineData(16, "2 weeks, 2 days")]
+        [InlineData(30, "1 month")]
+        [InlineData(31, "1 month, 1 day")]
+        [InlineData(32, "1 month, 2 days")]
+        [InlineData(37, "1 month, 1 week")]
+        [InlineData(38, "1 month, 1 week, 1 day")]
+        [InlineData(44, "1 month, 2 weeks")]
+        [InlineData(46, "1 month, 2 weeks, 2 days")]
+        [InlineData(61, "2 months")]
+        [InlineData(62, "2 months, 1 day")]
+        [InlineData(68, "2 months, 1 week")]
+        [InlineData(91, "3 months")]
+        [InlineData(183, "6 months")]
+        [InlineData(335, "11 months")]
+        [InlineData(364, "11 months, 4 weeks, 1 day")]
+        public void MonthsAndWeeksAndDays(int days, string expected)
+        {
+            var actual = TimeSpan.FromDays(days)
+                                 .Humanize(3, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Month);
+            Assert.Equal(expected, actual);
+
+        }
+
+
+        [Theory]
+        [InlineData(366, "1 year")]
+        [InlineData(395, "1 year, 1 month")]
+        [InlineData(402, "1 year, 1 month, 1 week")]
+        [InlineData(403, "1 year, 1 month, 1 week, 1 day")]
+        [InlineData(730, "2 years")]
+        [InlineData(1095, "3 years")]
+        [InlineData(1460, "3 years, 11 months, 4 weeks, 2 days")]
+        [InlineData(1461, "4 years")]
+        public void YearsAndMonthsAndWeeksAndDays(int days, string expected)
+        {
+            var actual = TimeSpan.FromDays(days)
+                                 .Humanize(4, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Year);
+            Assert.Equal(expected, actual);
+
+        }
 
         [Theory]
         [InlineData(6, "6 days")]
