@@ -63,6 +63,16 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData("hour", 1, "1 hour")]
+        [InlineData("hour", 0.5, "0.5 hours")]
+        [InlineData("hour", 22.4, "22.4 hours")]
+        public void ToDoubleQuantityNumeric(string word, double quantity, string expected)
+        {
+            // ReSharper disable once RedundantArgumentDefaultValue
+            Assert.Equal(expected, word.ToQuantity(quantity));
+        }
+
+        [Theory]
         [InlineData("case", 0, "zero cases")]
         [InlineData("case", 1, "one case")]
         [InlineData("case", 5, "five cases")]
