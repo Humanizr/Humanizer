@@ -7,7 +7,7 @@ namespace Humanizer.Bytes
     /// <summary>
     /// Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
     /// </summary>
-    public class ByteRate
+    public class ByteRate : IComparable<ByteRate>, IEquatable<ByteRate>, IComparable
     {
         /// <summary>
         /// Quantity of bytes
@@ -75,6 +75,36 @@ namespace Humanizer.Bytes
 
             return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
                 .Humanize(format) + '/' + displayUnit;
+        }
+
+        public override string ToString()
+        {
+            return Humanize();
+        }
+
+        public string ToString(string format, TimeUnit timeUnit = TimeUnit.Second)
+        {
+            return Humanize(format, timeUnit);
+        }
+
+        public int CompareTo(ByteRate other)
+        {
+            var left = Size.Bytes / Interval.TotalSeconds;
+            var right = other.Size.Bytes / other.Interval.TotalSeconds;
+            if (left < right) return -1;
+            return right < left ? 1 : 0;
+        }
+
+        public bool Equals(ByteRate other)
+        {
+            return CompareTo(other) == 0;
+        }
+
+        public int CompareTo(Object obj)
+        {
+            if (obj == null) return 1;
+            var cmp = (ByteRate)obj;
+            return CompareTo(cmp);
         }
     }
 }
