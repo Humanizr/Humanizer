@@ -9,6 +9,7 @@ namespace Humanizer.MvcSample
 {
     public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
     {
+    //Adjsuting the master again 2
         protected override ModelMetadata CreateMetadata(
             IEnumerable<Attribute> attributes,
             Type containerType,
