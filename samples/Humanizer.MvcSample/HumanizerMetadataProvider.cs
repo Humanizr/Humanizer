@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Humanizer.MvcSample
 {
+//sample edit 1
     public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
     {
         protected override ModelMetadata CreateMetadata(
