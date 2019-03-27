@@ -2,6 +2,7 @@
 
 namespace Humanizer.Tests
 {
+//Adjsut for branch feature 1
     public class CasingTests
     {
         [Theory]
