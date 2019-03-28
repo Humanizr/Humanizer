@@ -2,13 +2,18 @@
 [assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETStandard,Version=v1.0", FrameworkDisplayName="")]
 namespace Humanizer.Bytes
 {
-    public class ByteRate
+    public class ByteRate : System.IComparable, System.IComparable<Humanizer.Bytes.ByteRate>, System.IEquatable<Humanizer.Bytes.ByteRate>
     {
         public ByteRate(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
         public System.TimeSpan Interval { get; }
         public Humanizer.Bytes.ByteSize Size { get; }
+        public int CompareTo(Humanizer.Bytes.ByteRate other) { }
+        public int CompareTo(object obj) { }
+        public bool Equals(Humanizer.Bytes.ByteRate other) { }
         public string Humanize(Humanizer.Localisation.TimeUnit timeUnit = 1) { }
         public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1) { }
+        public override string ToString() { }
+        public string ToString(string format, Humanizer.Localisation.TimeUnit timeUnit = 1) { }
     }
     public struct ByteSize : System.IComparable, System.IComparable<Humanizer.Bytes.ByteSize>, System.IEquatable<Humanizer.Bytes.ByteSize>
     {
