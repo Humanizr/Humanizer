@@ -76,17 +76,33 @@ namespace Humanizer.Bytes
             return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
                 .Humanize(format) + '/' + displayUnit;
         }
-
+        /// <summary>
+        /// Returns the humanized string with default parameters.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return Humanize();
         }
 
+        /// <summary>
+        /// Returns a humanized string of the current rate object using the supplied parameters
+        /// </summary>
+        /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
+        /// <param name="format">The string format to use for the number of bytes</param>
+        /// <returns></returns>
         public string ToString(string format, TimeUnit timeUnit = TimeUnit.Second)
         {
             return Humanize(format, timeUnit);
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Compares the current ByteRate object to another supplied ByteRate object.
+        /// Rates are normalized before comparing, e.g. 60Mb/Min is equal to 1024KB/sec
+        /// </summary>
+        /// <param name="other">The ByteRate object to use for the comparison</param>
+        /// <returns>0 if the rates are equivalent, -1 if lower than the 'other' object, 1 if higher than the 'other' object</returns>
         public int CompareTo(ByteRate other)
         {
             var left = Size.Bytes / Interval.TotalSeconds;
@@ -95,11 +111,18 @@ namespace Humanizer.Bytes
             return right < left ? 1 : 0;
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Checks if two ByteRate objects have the same equivalent rate
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns>True if rates are equivalent, otherwise false</returns>
         public bool Equals(ByteRate other)
         {
             return CompareTo(other) == 0;
         }
 
+        /// <inheritdoc />
         public int CompareTo(Object obj)
         {
             if (obj == null) return 1;

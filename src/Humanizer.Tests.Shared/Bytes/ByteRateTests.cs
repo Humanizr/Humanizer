@@ -67,7 +67,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(TimeUnit.Month)]
         [InlineData(TimeUnit.Week)]
         [InlineData(TimeUnit.Year)]
-        public void ThrowsOnUnsupportedData(TimeUnit units)
+        public void ThowsOnUnsupportedData(TimeUnit units)
         {
             var dummyRate = ByteSize.FromBits(1).Per(TimeSpan.FromSeconds(1));
 
@@ -78,13 +78,13 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
-        [InlineData(400, 10, 400, 10, 0)]  // 40.CompareTo(40)
-        [InlineData(400, 10, 800, 20, 0)]  // 40.CompareTo(40)
-        [InlineData(800, 20, 400, 10, 0)]  // 40.CompareTo(40)
-        [InlineData(400, 10, 800, 10, -1)] // 40.CompareTo(80)
-        [InlineData(800, 10, 400, 10, 1)]  // 80.CompareTo(40)
-        [InlineData(800, 10, 400, 20, 1)]  // 80.CompareTo(20)
-        [InlineData(400, 20, 800, 10, -1)] // 20.CompareTo(80)
+        [InlineData(400, 10, 400, 10, 0)]
+        [InlineData(400, 10, 800, 20, 0)]
+        [InlineData(800, 20, 400, 10, 0)]
+        [InlineData(400, 10, 800, 10, -1)]
+        [InlineData(800, 10, 400, 10, 1)]
+        [InlineData(800, 10, 400, 20, 1)]
+        [InlineData(400, 20, 800, 10, -1)]
         public void ComparisonTests_SameTypes(long leftBytes, int leftIntervalSeconds, long rightBytes, int rightIntervalSeconds, int expectedValue)
         {
             var leftSize = ByteSize.FromBytes(leftBytes);
@@ -98,13 +98,13 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
-        [InlineData(1024, 10, 6, 1, 0)]   // 1024.CompareTo(1024)
-        [InlineData(1024, 10, 12, 2, 0)]  // 1024.CompareTo(1024)
-        [InlineData(2048, 20, 6, 1, 0)]   // 1024.CompareTo(1024)
-        [InlineData(1024, 10, 12, 1, -1)] // 1024.CompareTo(2048)
-        [InlineData(2048, 10, 6, 1, 1)]   // 2048.CompareTo(1024)
-        [InlineData(2048, 10, 6, 2, 1)]   // 2048.CompareTo(512)
-        [InlineData(1024, 20, 12, 1, -1)] // 512.CompareTo(2048)
+        [InlineData(1024, 10, 6, 1, 0)]
+        [InlineData(1024, 10, 12, 2, 0)]
+        [InlineData(2048, 20, 6, 1, 0)]
+        [InlineData(1024, 10, 12, 1, -1)]
+        [InlineData(2048, 10, 6, 1, 1)]
+        [InlineData(2048, 10, 6, 2, 1)]
+        [InlineData(1024, 20, 12, 1, -1)]
         public void ComparisonTests_DifferingTypes(long leftKiloBytes, int leftIntervalSeconds, long rightMegaBytes, int rightIntervalMinutes, int expectedValue)
         {
             var leftSize      = ByteSize.FromKilobytes(leftKiloBytes);
