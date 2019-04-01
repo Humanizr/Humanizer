@@ -141,6 +141,9 @@
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} days ago</value>
   </data>
+  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
+    <value>{0} weeks ago</value>
+  </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>one month ago</value>
   </data>
