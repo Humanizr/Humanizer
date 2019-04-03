@@ -978,10 +978,13 @@ namespace Humanizer
     public class static OrdinalizeExtensions
     {
         public static string Ordinalize(this string numberString) { }
+        public static string Ordinalize(this string numberString, System.Globalization.CultureInfo culture) { }
         public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender) { }
+        public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture) { }
         public static string Ordinalize(this int number) { }
         public static string Ordinalize(this int number, System.Globalization.CultureInfo culture) { }
         public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender) { }
+        public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture) { }
     }
     public enum Plurality
     {
