@@ -1007,7 +1007,7 @@ There isn't a `Dehumanize` method to turn a string representation back into a `B
 Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful.
 If the value is parsed it is output to the `out` parameter supplied:
 
-```
+```C#
 ByteSize output;
 ByteSize.TryParse("1.5mb", out output);
 
@@ -1035,7 +1035,7 @@ Finally, if you need to calculate the rate at which a quantity of bytes has been
 
 The `Per` method returns a `ByteRate` class which has a `Humanize` method. By default, rates are given in seconds (eg, MB/s). However, if desired, a TimeUnit may be passed to `Humanize` for an alternate interval. Valid intervals are `TimeUnit.Second`, `TimeUnit.Minute`, and `TimeUnit.Hour`. Examples of each interval and example byte rate usage is below.
 
-```
+```C#
 var size = ByteSize.FromMegabytes(10);
 var measurementInterval = TimeSpan.FromSeconds(1);
 
@@ -1051,7 +1051,7 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
 
 You can specify a format for the bytes part of the humanized output:
 
-```
+```C#
 19854651984.Bytes().Per(1.Seconds()).Humanize("#.##");
 // 18.49 GB/s
 ```
