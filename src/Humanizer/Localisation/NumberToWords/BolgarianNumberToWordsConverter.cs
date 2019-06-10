@@ -39,10 +39,6 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(HundredsMap[input / 100]);
                 input %= 100;
-                if (hundreds > 0)
-                {
-                    parts.Add("");
-                }
             }
 
             if (input > 0)

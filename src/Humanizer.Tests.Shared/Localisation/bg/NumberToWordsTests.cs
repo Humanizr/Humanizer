@@ -7,7 +7,7 @@ namespace Humanizer.Tests.Localisation.bg
     {
 
         [Theory]
-        [InlineData(0, "noly")]
+        [InlineData(0, "нула")]
         [InlineData(1, "един")]
         [InlineData(10, "десет")]
         [InlineData(11, "единадесет")]
@@ -36,11 +36,11 @@ namespace Humanizer.Tests.Localisation.bg
         [InlineData(700, "седемстотин")]
         [InlineData(800, "осемстотин")]
         [InlineData(900, "деветстотин")]
-        [InlineData(122, " сто двадесет и две")]
+        [InlineData(122, "сто двадесет и две")]
         [InlineData(111, "сто единадесет")]
         [InlineData(55, "петдесет и пет")]
 
-        public void ToWords(long number, string expected)
+        public void ToWordsBg(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }
