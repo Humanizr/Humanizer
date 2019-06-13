@@ -58,3 +58,7 @@ Check out [Dutch](https://github.com/Humanizr/Humanizer/blob/master/src/Humanize
 You should then register your converter in the [ConverterFactory](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer/NumberToWordsExtension.cs#L13) for it to kick in on your locale.
 
 Don't forget to write tests for your localisations. Check out the existing [DateHumanizeTests](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer.Tests.Shared/Localisation/ru-RU/DateHumanizeTests.cs), [TimeSpanHumanizeTests](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer.Tests.Shared/Localisation/ru-RU/TimeSpanHumanizeTests.cs) and [NumberToWordsTests](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer.Tests.Shared/Localisation/ru-RU/NumberToWordsTests.cs).
+
+### Issue triage [![Open Source Helpers](https://www.codetriage.com/humanizr/humanizer/badges/users.svg)](https://www.codetriage.com/humanizr/humanizer)
+
+You can contribute by triaging issues which may include reproducing bug reports or asking for vital information, such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to [subscribe to humanizer on CodeTriage](https://www.codetriage.com/humanizr/humanizer).
