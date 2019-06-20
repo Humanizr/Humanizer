@@ -157,7 +157,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             if (ts.TotalDays < 28)
             {
-                return formatter.DateHumanize(TimeUnit.Week, tense, ts.Days);
+                return formatter.DateHumanize(TimeUnit.Week, tense, ts.Days / 7);
             }
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
