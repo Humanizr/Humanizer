@@ -22,6 +22,7 @@
 
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Humanizer.Bytes
 {
@@ -242,6 +243,8 @@ namespace Humanizer.Bytes
             {
                 format = "0.## " + format;
             }
+
+            format = format.Replace("#.##", "0.##");
 
             bool has(string s) => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             string output(double n) => n.ToString(format, provider);

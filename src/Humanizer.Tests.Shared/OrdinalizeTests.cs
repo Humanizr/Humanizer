@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Globalization;
+using Xunit;
 
 namespace Humanizer.Tests
 {
@@ -93,6 +94,48 @@ namespace Humanizer.Tests
         {
             var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine);
             var feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine);
+            Assert.Equal(masculineOrdinalized, feminineOrdinalized);
+        }
+
+        [Theory]
+        [InlineData("en-US", "1", "1st")]
+        [InlineData("nl-NL", "1", "1e")]
+        public void OrdinalizeStringWithCultureOverridesCurrentCulture(string cultureName, string number, string ordinalized)
+        {
+            var culture = new CultureInfo(cultureName);
+            Assert.Equal(number.Ordinalize(culture), ordinalized);
+        }
+
+        [Theory]
+        [InlineData("en-US", 1, "1st")]
+        [InlineData("nl-NL", 1, "1e")]
+        public void OrdinalizeNumberWithCultureOverridesCurrentCulture(string cultureName, int number, string ordinalized)
+        {
+            var culture = new CultureInfo(cultureName);
+            Assert.Equal(number.Ordinalize(culture), ordinalized);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(8)]
+        public void OrdinalizeNumberWithOverridenCultureGenderIsImmaterial(int number)
+        {
+            var culture = new CultureInfo("nl-NL");
+            var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine, culture);
+            var feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine, culture);
+            Assert.Equal(masculineOrdinalized, feminineOrdinalized);
+        }
+
+        [Theory]
+        [InlineData("0")]
+        [InlineData("1")]
+        [InlineData("8")]
+        public void OrdinalizeStringWithOverridenGenderIsImmaterial(string number)
+        {
+            var culture = new CultureInfo("nl-NL");
+            var masculineOrdinalized = number.Ordinalize(GrammaticalGender.Masculine, culture);
+            var feminineOrdinalized = number.Ordinalize(GrammaticalGender.Feminine, culture);
             Assert.Equal(masculineOrdinalized, feminineOrdinalized);
         }
     }

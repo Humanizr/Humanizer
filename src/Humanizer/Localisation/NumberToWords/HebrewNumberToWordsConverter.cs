@@ -160,6 +160,10 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add("אלפיים");
             }
+            else if (thousands == 8)
+            {
+                parts.Add("שמונת אלפים");
+            }
             else if (thousands <= 10)
             {
                 parts.Add(UnitsFeminine[thousands] + "ת" + " אלפים");
