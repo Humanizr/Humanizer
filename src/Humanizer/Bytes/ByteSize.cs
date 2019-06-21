@@ -398,6 +398,11 @@ namespace Humanizer.Bytes
             return new ByteSize(b1.Bytes + b2.Bytes);
         }
 
+        public static ByteSize operator -(ByteSize b1, ByteSize b2)
+        {
+            return new ByteSize(b1.Bytes - b2.Bytes);
+        }
+
         public static ByteSize operator ++(ByteSize b)
         {
             return new ByteSize(b.Bytes + 1);
