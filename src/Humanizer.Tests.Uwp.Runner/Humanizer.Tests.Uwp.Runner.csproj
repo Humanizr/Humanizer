@@ -121,7 +121,7 @@
       <Name>Humanizer</Name>
     </ProjectReference>
     <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.devices" Version="2.3.0" />
+    <PackageReference Include="xunit.runner.devices" Version="2.5.25" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.8" />
   </ItemGroup>
   <Import Project="..\Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems" Label="Shared" />
