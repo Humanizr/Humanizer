@@ -15,7 +15,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net46' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <PackageReference Include="PublicApiGenerator" Version="8.1.0" />
-    <PackageReference Include="ApiApprover" Version="8.1.0" />
+    <PackageReference Include="ApiApprover" Version="9.0.0" />
     <PackageReference Include="DiffPlex" Version="1.4.4" />
   </ItemGroup>
   <ItemGroup>
