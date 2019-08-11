@@ -18,7 +18,9 @@ foreach ($nupkg in $nupgks){
 	Write-Host "Submitting $nupkg for signing"
 
 	.\SignClient 'sign' -c $appSettings -i $nupkg -r $env:SignClientUser -s $env:SignClientSecret -n 'Humanizer' -d 'Humanizer' -u 'https://github.com/Humanizr/Humanizer' 
-
+  if ($LASTEXITCODE -ne 0) {
+    exit 1
+  }
 	Write-Host "Finished signing $nupkg"
 }
 
