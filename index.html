@@ -366,7 +366,7 @@ DateTime.UtcNow.AddHours(-<span class="pl-c1">2</span>).Humanize() =&gt; <span c
 DateTime.UtcNow.AddHours(<span class="pl-c1">30</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>tomorrow<span class="pl-pds">"</span></span>
 DateTime.UtcNow.AddHours(<span class="pl-c1">2</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>2 hours from now<span class="pl-pds">"</span></span>
 
-DateTimeOffset.AddHours(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>an hour from now<span class="pl-pds">"</span></span></pre></div>
+DateTimeOffset.UtcNow.AddHours(<span class="pl-c1">1</span>).Humanize() =&gt; <span class="pl-s"><span class="pl-pds">"</span>an hour from now<span class="pl-pds">"</span></span></pre></div>
 
 <p>Humanizer supports both local and UTC dates as well as dates with offset (<code>DateTimeOffset</code>). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
