@@ -20,6 +20,13 @@ steps:
     version: 3.x
     includePreviewVersions: true
 
+- task: UseDotNet@2
+  displayName: 'Use .NET Core Runtime 2.1.x'
+  inputs:
+    version: 2.1.x
+    packageType: runtime
+    
+
 - task: DotNetCoreCLI@2  
   inputs:
     command: custom
