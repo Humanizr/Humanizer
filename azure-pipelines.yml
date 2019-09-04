@@ -14,9 +14,11 @@ variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 steps:
-- task: DotNetCoreInstaller@0
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.x'
   inputs:
-    version: '2.2.105'
+    version: 3.x
+    includePreviewVersions: true
 
 - task: DotNetCoreCLI@2  
   inputs:
@@ -48,8 +50,24 @@ steps:
   inputs:
     command: test
     projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-    arguments: -c $(BuildConfiguration) --collect:"Code Coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings /p:DebugType=portable
+    arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
   displayName: Run Tests
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --tool-path . dotnet-reportgenerator-globaltool
+  displayName: Install ReportGenerator tool
+
+- script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/Rx.NET/Source/coverlet/reports -reporttypes:"Cobertura"
+  displayName: Create reports
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(Build.SourcesDirectory)/Rx.NET/Source/coverlet/reports/Cobertura.xml
   
 - task: PowerShell@2
   displayName: Authenticode Sign artifacts
