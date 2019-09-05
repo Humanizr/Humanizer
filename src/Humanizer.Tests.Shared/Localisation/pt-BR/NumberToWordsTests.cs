@@ -98,7 +98,9 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(221, "duzentos e vinte e um")]
         [InlineData(3501, "três mil quinhentos e um")]
         [InlineData(8100, "oito mil e cem")]
-        public void ToWords(int number, string expected)
+        [InlineData(999999999999, "novecentos e noventa e nove bilhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
+        [InlineData(-999999999999, "menos novecentos e noventa e nove bilhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
+        public void ToWords(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }

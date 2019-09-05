@@ -15,11 +15,12 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input, GrammaticalGender gender)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
+            if (input > 999999999999 || input < -999999999999)
             {
                 throw new NotImplementedException();
             }
-            var number = (int)input;
+
+            var number = input;
 
             if (number == 0)
             {
