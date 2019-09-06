@@ -16,11 +16,6 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input, GrammaticalGender gender)
         {
-            if (input > 999999999999 || input < -999999999999)
-            {
-                throw new NotImplementedException();
-            }
-
             if (input == 0)
             { 
                 return "ноль";
@@ -31,9 +26,11 @@ namespace Humanizer.Localisation.NumberToWords
             if (input < 0)
             {
                 parts.Add("минус");
-                input = -input;
             }
 
+            CollectParts(parts, ref input, 1000000000000000000, GrammaticalGender.Masculine, "квинтиллион", "квинтиллиона", "квинтиллионов");
+            CollectParts(parts, ref input, 1000000000000000, GrammaticalGender.Masculine, "квадриллион", "квадриллиона", "квадриллионов");
+            CollectParts(parts, ref input, 1000000000000, GrammaticalGender.Masculine, "триллион", "триллиона", "триллионов");
             CollectParts(parts, ref input, 1000000000, GrammaticalGender.Masculine, "миллиард", "миллиарда", "миллиардов");
             CollectParts(parts, ref input, 1000000, GrammaticalGender.Masculine, "миллион", "миллиона", "миллионов");
             CollectParts(parts, ref input, 1000, GrammaticalGender.Feminine, "тысяча", "тысячи", "тысяч");
@@ -174,15 +171,15 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join("", parts);
         }
 
-        private static void CollectParts(ICollection<string> parts, ref long number, int divisor, GrammaticalGender gender, params string[] forms)
+        private static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
         {
-            if (number < divisor)
+            var result = Math.Abs(number / divisor);
+            if (result == 0)
             {
                 return;
             }
 
-            var result = number / divisor;
-            number %= divisor;
+            number = Math.Abs(number % divisor);
 
             CollectPartsUnderOneThousand(parts, result, gender);
             parts.Add(ChooseOneForGrammaticalNumber(result, forms));

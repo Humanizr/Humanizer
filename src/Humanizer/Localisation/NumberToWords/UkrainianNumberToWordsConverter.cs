@@ -16,31 +16,28 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input, GrammaticalGender gender)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
-            if (number == 0)
+            if (input == 0)
             {
                 return "нуль";
             }
 
             var parts = new List<string>();
 
-            if (number < 0)
+            if (input < 0)
             {
                 parts.Add("мінус");
-                number = -number;
             }
 
-            CollectParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "мільярд", "мільярда", "мільярдів");
-            CollectParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "мільйон", "мільйона", "мільйонів");
-            CollectParts(parts, ref number, 1000, GrammaticalGender.Feminine, "тисяча", "тисячі", "тисяч");
+            CollectParts(parts, ref input, 1000000000000000000, GrammaticalGender.Masculine, "квінтильйон", "квінтильйона", "квінтильйонів");
+            CollectParts(parts, ref input, 1000000000000000, GrammaticalGender.Masculine, "квадрильйон", "квадрильйона", "квадрильйонів");
+            CollectParts(parts, ref input, 1000000000000, GrammaticalGender.Masculine, "трильйон", "трильйона", "трильйонів");
+            CollectParts(parts, ref input, 1000000000, GrammaticalGender.Masculine, "мільярд", "мільярда", "мільярдів");
+            CollectParts(parts, ref input, 1000000, GrammaticalGender.Masculine, "мільйон", "мільйона", "мільйонів");
+            CollectParts(parts, ref input, 1000, GrammaticalGender.Feminine, "тисяча", "тисячі", "тисяч");
 
-            if (number > 0)
+            if (input > 0)
             {
-                CollectPartsUnderOneThousand(parts, number, gender);
+                CollectPartsUnderOneThousand(parts, input, gender);
             }
 
             return string.Join(" ", parts);
@@ -103,7 +100,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts);
         }
 
-        private static void CollectPartsUnderOneThousand(ICollection<string> parts, int number, GrammaticalGender gender)
+        private static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
         {
             if (number >= 100)
             {
@@ -173,15 +170,15 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join("", parts);
         }
 
-        private static void CollectParts(ICollection<string> parts, ref int number, int divisor, GrammaticalGender gender, params string[] forms)
+        private static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
         {
-            if (number < divisor)
+            var result = Math.Abs(number / divisor);
+            if (result == 0)
             {
                 return;
             }
 
-            var result = number / divisor;
-            number %= divisor;
+            number = Math.Abs(number % divisor);
 
             CollectPartsUnderOneThousand(parts, result, gender);
             parts.Add(ChooseOneForGrammaticalNumber(result, forms));
@@ -229,7 +226,7 @@ namespace Humanizer.Localisation.NumberToWords
             return 2;
         }
 
-        private static string ChooseOneForGrammaticalNumber(int number, string[] forms)
+        private static string ChooseOneForGrammaticalNumber(long number, string[] forms)
         {
             return forms[GetIndex(RussianGrammaticalNumberDetector.Detect(number))];
         }
