@@ -59,22 +59,17 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 ## <a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): 
 
-**XPROJ / `project.json`**: `Humanizer.xproj`
-
 **English only**: `Humanizer.Core`
 
 All languages: `Humanizer`
 
-Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (.Net 4.5+, Windows Phone 8, Win Store, and .NET Core).
+Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (.Net 4.5+, UWP, Xamarin, and .NET Core).
 
-Also Humanizer symbols are source indexed with [GitLink](https://github.com/GitTools/GitLink) and are included in the package so you can [step through Humanizer code](https://github.com/GitTools/GitLink) while debugging your code.
+Also Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
 
-For pre-release builds, [MyGet feed](https://www.myget.org/) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
+For pre-release builds, [Azure Artifacts feed](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=feed&feed=Humanizer) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
 
-  - `https://www.myget.org/F/humanizer/api/v2` for VS 2012+
-  - `https://www.myget.org/F/humanizer/api/v3/index.json` for VS 2015+
-
-*Note*: Humanizer requires at least NuGet [2.12](https://docs.nuget.org/release-notes/nuget-2.12) when on VS 2012/2013 and 3.4+ on VS 2015.
+  - [![Humanizer package in Humanizer feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet/5829eea4-55e5-4a15-ba8d-1de5daaafcea/_apis/public/Packaging/Feeds/b39738c7-8e60-4bfb-825f-29c47261a5cc/Packages/db81f806-d0b5-43a3-99f4-3d27606376b8/Badge)](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=package&feed=b39738c7-8e60-4bfb-825f-29c47261a5cc&package=db81f806-d0b5-43a3-99f4-3d27606376b8&preferRelease=true) `https://pkgs.dev.azure.com/dotnet/Humanizer/_packaging/Humanizer/nuget/v3/index.json`
 
 ### <a id="specify-lang">Specify Languages (Optional)</a>
 New in Humanizer 2.0 is the option to choose which localization packages you wish to use. You choose which packages
@@ -85,10 +80,7 @@ Here are the options:
 
   - **All languages**: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
   - **English**: use the `Humanizer.Core` package. Only the English language resources will be available
-  - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include
-  multiple languages by installing however many language packages you want. 
-
-**XPROJ / `project.json`**: Due to a [bug](https://github.com/dotnet/cli/issues/3396) in the CLI tools, the main `Humanizer` package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use `Humanizer.xproj` instead. It contains all of the languages.
+  - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include multiple languages by installing however many language packages you want. 
   
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
