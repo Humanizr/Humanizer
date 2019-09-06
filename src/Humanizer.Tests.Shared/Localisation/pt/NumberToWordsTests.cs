@@ -1,11 +1,10 @@
 ﻿using Xunit;
 
-namespace Humanizer.Tests.Localisation.ptBR
+namespace Humanizer.Tests.Localisation.pt
 {
-    [UseCulture("pt-BR")]
+    [UseCulture("pt")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(1, "um")]
         [InlineData(2, "dois")]
@@ -57,7 +56,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(10000, "dez mil")]
         [InlineData(100000, "cem mil")]
         [InlineData(1000000, "um milhão")]
-        [InlineData(1000000000, "um bilhão")]
+        [InlineData(1000000000, "mil milhões")]
         [InlineData(37, "trinta e sete")]
         [InlineData(637, "seiscentos e trinta e sete")]
         [InlineData(1637, "mil seiscentos e trinta e sete")]
@@ -68,7 +67,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(425961637, "quatrocentos e vinte e cinco milhões novecentos e sessenta e um mil seiscentos e trinta e sete")]
         [InlineData(10000000, "dez milhões")]
         [InlineData(100000000, "cem milhões")]
-        [InlineData(1101111101, "um bilhão cento e um milhões cento e onze mil cento e um")]
+        [InlineData(1101111101, "mil milhões cento e um milhões cento e onze mil cento e um")]
         [InlineData(111, "cento e onze")]
         [InlineData(1111, "mil cento e onze")]
         [InlineData(1111101, "um milhão cento e onze mil cento e um")]
@@ -76,7 +75,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(1111111, "um milhão cento e onze mil cento e onze")]
         [InlineData(11111111, "onze milhões cento e onze mil cento e onze")]
         [InlineData(111111111, "cento e onze milhões cento e onze mil cento e onze")]
-        [InlineData(1111111111, "um bilhão cento e onze milhões cento e onze mil cento e onze")]
+        [InlineData(1111111111, "mil milhões cento e onze milhões cento e onze mil cento e onze")]
         [InlineData(122, "cento e vinte e dois")]
         [InlineData(123, "cento e vinte e três")]
         [InlineData(1234, "mil duzentos e trinta e quatro")]
@@ -85,11 +84,11 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(1234567, "um milhão duzentos e trinta e quatro mil quinhentos e sessenta e sete")]
         [InlineData(12345678, "doze milhões trezentos e quarenta e cinco mil seiscentos e setenta e oito")]
         [InlineData(123456789, "cento e vinte e três milhões quatrocentos e cinquenta e seis mil setecentos e oitenta e nove")]
-        [InlineData(1234567890, "um bilhão duzentos e trinta e quatro milhões quinhentos e sessenta e sete mil oitocentos e noventa")]
+        [InlineData(1234567890, "mil milhões duzentos e trinta e quatro milhões quinhentos e sessenta e sete mil oitocentos e noventa")]
         [InlineData(1999, "mil novecentos e noventa e nove")]
         [InlineData(2000000, "dois milhões")]
-        [InlineData(2000000000, "dois bilhões")]
-        [InlineData(2001000000, "dois bilhões um milhão")]
+        [InlineData(2000000000, "dois mil milhões")]
+        [InlineData(2001000000, "dois mil milhões um milhão")]
         [InlineData(2014, "dois mil e quatorze")]
         [InlineData(2048, "dois mil e quarenta e oito")]
         [InlineData(21, "vinte e um")]
@@ -98,8 +97,8 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(221, "duzentos e vinte e um")]
         [InlineData(3501, "três mil quinhentos e um")]
         [InlineData(8100, "oito mil e cem")]
-        [InlineData(999999999999, "novecentos e noventa e nove bilhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
-        [InlineData(-999999999999, "menos novecentos e noventa e nove bilhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
+        [InlineData(999999999999, "novecentos e noventa e nove mil milhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
+        [InlineData(-999999999999, "menos novecentos e noventa e nove mil milhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
         public void ToWords(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
@@ -124,8 +123,8 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(1111111, "um milhão cento e onze mil cento e onze")]
         [InlineData(2111102, "dois milhões cento e onze mil cento e duas")]
         [InlineData(3111101, "três milhões cento e onze mil cento e uma")]
-        [InlineData(1101111101, "um bilhão cento e um milhões cento e onze mil cento e uma")]
-        [InlineData(2101111101, "dois bilhões cento e um milhões cento e onze mil cento e uma")]
+        [InlineData(1101111101, "mil milhões cento e um milhões cento e onze mil cento e uma")]
+        [InlineData(2101111101, "dois mil milhões cento e um milhões cento e onze mil cento e uma")]
         [InlineData(1234, "mil duzentas e trinta e quatro")]
         [InlineData(8100, "oito mil e cem")]
         [InlineData(12345, "doze mil trezentas e quarenta e cinco")]
@@ -186,7 +185,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(10121, "décimo milésimo centésimo vigésimo primeiro")]
         [InlineData(100000, "centésimo milésimo")]
         [InlineData(1000000, "milionésimo")]
-        [InlineData(1000000000, "bilionésimo")]
+        [InlineData(1000000000, "milésimo milionésimo")]
         public void ToOrdinalWords(int number, string words)
         {
             Assert.Equal(words, number.ToOrdinalWords());
@@ -244,7 +243,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         [InlineData(10121, "décima milésima centésima vigésima primeira")]
         [InlineData(100000, "centésima milésima")]
         [InlineData(1000000, "milionésima")]
-        [InlineData(1000000000, "bilionésima")]
+        [InlineData(1000000000, "milésima milionésima")]
         public void ToFeminineOrdinalWords(int number, string words)
         {
             Assert.Equal(words, number.ToOrdinalWords(GrammaticalGender.Feminine));

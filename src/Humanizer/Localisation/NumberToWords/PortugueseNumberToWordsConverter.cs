@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class BrazilianPortugueseNumberToWordsConverter : GenderedNumberToWordsConverter
+    internal class PortugueseNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] PortugueseUnitsMap = { "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove" };
         private static readonly string[] PortugueseTensMap = { "zero", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa" };
@@ -37,9 +37,9 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000000) > 0)
             {
                 // gender is not applied for billions
-                parts.Add(number / 1000000000 >= 2
-                    ? string.Format("{0} bilhões", Convert(number / 1000000000, GrammaticalGender.Masculine))
-                    : string.Format("{0} bilhão", Convert(number / 1000000000, GrammaticalGender.Masculine)));
+                parts.Add(number / 1000000000 == 1
+                    ? "mil milhões"
+                    : string.Format("{0} mil milhões", Convert(number / 1000000000)));
 
                 number %= 1000000000;
             }
@@ -115,8 +115,8 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000000) > 0)
             {
                 parts.Add(number / 1000000000 == 1
-                    ? ApplyOrdinalGender("bilionésimo", gender)
-                    : string.Format("{0} " + ApplyOrdinalGender("bilionésimo", gender), ConvertToOrdinal(number / 1000000000, gender)));
+                    ? string.Format("{0} {1}", ApplyOrdinalGender("milésimo", gender), ApplyOrdinalGender("milionésimo", gender))
+                    : string.Format("{0} {1} {2}", Convert(number / 1000000000), ApplyOrdinalGender("milésimo", gender), ApplyOrdinalGender("milionésimo", gender)));
 
                 number %= 1000000000;
             }
@@ -125,7 +125,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(number / 1000000 == 1
                     ? ApplyOrdinalGender("milionésimo", gender)
-                    : string.Format("{0}" + ApplyOrdinalGender("milionésimo", gender), ConvertToOrdinal(number / 1000000000, gender)));
+                    : string.Format("{0} " + ApplyOrdinalGender("milionésimo", gender), ConvertToOrdinal(number / 1000000000, gender)));
 
                 number %= 1000000;
             }
