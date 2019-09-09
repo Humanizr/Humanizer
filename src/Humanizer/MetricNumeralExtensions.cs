@@ -135,11 +135,6 @@ namespace Humanizer
         /// <returns>A valid Metric representation</returns>
         public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
         {
-            if (input.Equals(0))
-            {
-                return input.ToString();
-            }
-
             if (input.IsOutOfRange())
             {
                 throw new ArgumentOutOfRangeException(nameof(input));
