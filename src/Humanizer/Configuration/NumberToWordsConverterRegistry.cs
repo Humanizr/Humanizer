@@ -34,6 +34,7 @@ namespace Humanizer.Configuration
             Register("uk", new UkrainianNumberToWordsConverter());
             Register("uz-Latn-UZ", new UzbekLatnNumberToWordConverter());
             Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
+            Register("sv", new SwedishNumberToWordsConverter());
             Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
             Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
             Register("nb", new NorwegianBokmalNumberToWordsConverter());
