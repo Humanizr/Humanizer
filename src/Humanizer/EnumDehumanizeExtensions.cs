@@ -13,13 +13,14 @@ namespace Humanizer
         /// </summary>
         /// <typeparam name="TTargetEnum">The target enum</typeparam>
         /// <param name="input">The string to be converted</param>
+        /// <param name="onNoMatch">What to do when input is not matched to the enum</param>
         /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <returns></returns>
-        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
+        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
             where TTargetEnum : struct, IComparable, IFormattable
         {
-            return (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ThrowsException);
+            return (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), onNoMatch);
         }
 
         /// <summary>
