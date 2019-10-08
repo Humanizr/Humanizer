@@ -22,6 +22,7 @@ namespace Humanizer.Tests
         [Fact]
         public void CanReturnNullForEnumNoMatch()
         {
+            Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyEnum>(OnNoMatch.ReturnsNull));
             Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
         }
 
