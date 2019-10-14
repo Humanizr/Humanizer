@@ -1216,10 +1216,10 @@ If you encounter errors saying that you must add a reference to either `System.R
 
 Please see <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.
 
-## <a id="continuous-integration">Continuous Integration from AppVeyor</a>
-Humanizer project is built & tested continuously by AppVeyor (more details [here](https://ci.appveyor.com/project/onovotny/humanizer)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
+## <a id="continuous-integration">Continuous Integration from Azure DevOps</a>
+Humanizer project is built & tested continuously by Azure DevOps (more details [here](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
 
-The current build status on the CI server is [![Build status](https://ci.appveyor.com/api/projects/status/wsp2of3r7otw01c5/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
+The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=master)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 
 ## <a id="related-projects">Related projects</a>
 Below is a list of related open source projects:
