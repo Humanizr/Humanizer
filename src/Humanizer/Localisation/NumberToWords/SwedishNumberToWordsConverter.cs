@@ -27,7 +27,7 @@ namespace Humanizer.Localisation.NumberToWords
             new Fact {Value = 100,        Name = "hundra", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
         };
 
-        public string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)
             {
