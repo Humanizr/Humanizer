@@ -37,6 +37,16 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
+- task: DotNetCoreCLI@2  
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --tool-path . dotnet-format
+  displayName: Install dotnet format tool (https://github.com/dotnet/format)
+
+- script: dotnet format --dry-run --check -w .\src\Humanizer.sln
+  displayName: Check code format
+
 - task: DotNetCoreCLI@2
   inputs:
     command: build
