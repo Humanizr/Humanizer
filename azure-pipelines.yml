@@ -44,7 +44,7 @@ steps:
     arguments: install --tool-path . dotnet-format
   displayName: Install dotnet format tool (https://github.com/dotnet/format)
 
-- script: dotnet format --dry-run --check -w .\src\Humanizer.sln
+- script: dotnet-format --dry-run --check -w .\src\Humanizer.sln
   displayName: Check code format
 
 - task: DotNetCoreCLI@2
