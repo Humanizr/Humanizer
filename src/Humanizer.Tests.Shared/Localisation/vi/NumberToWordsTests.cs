@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.vi
 {
@@ -50,6 +50,29 @@ namespace Humanizer.Tests.vi
         public void ToWords(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(0, "thứ không")]
+        [InlineData(1, "thứ nhất")]
+        [InlineData(2, "thứ nhì")]
+        [InlineData(3, "thứ ba")]
+        [InlineData(4, "thứ tư")]
+        [InlineData(5, "thứ năm")]
+        [InlineData(6, "thứ sáu")]
+        [InlineData(7, "thứ bảy")]
+        [InlineData(8, "thứ tám")]
+        [InlineData(9, "thứ chín")]
+        [InlineData(10, "thứ mười")]
+        [InlineData(11, "thứ mười một")]
+        [InlineData(14, "thứ mười bốn")]
+        [InlineData(15, "thứ mười lăm")]
+        [InlineData(21, "thứ hai mươi mốt")]
+        [InlineData(24, "thứ hai mươi tư")]
+        [InlineData(25, "thứ hai mươi lăm")]
+        public void ToOrdinalWords(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords());
         }
     }
 }

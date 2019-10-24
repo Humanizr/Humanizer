@@ -21,7 +21,22 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToOrdinal(int number)
         {
-            throw new NotImplementedException();
+            return $"thứ {ConvertToOrdinalImpl(number)}";
+        }
+
+        private string ConvertToOrdinalImpl(int number)
+        {
+            switch (number)
+            {
+                case 1:
+                    return "nhất";
+                case 2:
+                    return "nhì";
+                case 4:
+                    return "tư";
+                default:
+                    return Convert(number);
+            }
         }
 
         private static string ConvertImpl(long number, bool hasTens = false, bool isGreaterThanOneHundred = false)
