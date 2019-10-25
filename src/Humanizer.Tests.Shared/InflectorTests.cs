@@ -61,6 +61,15 @@ namespace Humanizer.Tests
             Assert.Equal(singular, plural.Singularize(false));
         }
 
+        [Theory]
+        [InlineData("tires", "tires")]
+        [InlineData("body", "bodies")]
+        [InlineData("traxxas", "traxxas")]
+        public void SingularizeSkipSimpleWords(string singular, string plural)
+        {
+            Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
+        }
+
         //Uppercases individual words and removes some characters 
         [Theory]
         [InlineData("some title", "Some Title")]
