@@ -44,9 +44,9 @@ namespace Humanizer.Localisation.Formatters
         /// <param name="timeUnitTense"></param>
         /// <param name="unit"></param>
         /// <returns></returns>
-        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit)
+        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit, DateTimeExpressionProvider dateTimeTextProvider = null)
         {
-            return GetResourceForDate(timeUnit, timeUnitTense, unit);
+            return GetResourceForDate(timeUnit, timeUnitTense, unit, dateTimeTextProvider);
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace Humanizer.Localisation.Formatters
             return GetResourceForTimeSpan(timeUnit, unit, toWords);
         }
 
-        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
+        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count, DateTimeExpressionProvider dateTimeTextProvider = null)
         {
-            var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
+            var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count, dateTimeTextProvider: dateTimeTextProvider);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 

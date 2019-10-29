@@ -675,4 +675,283 @@
   <data name="NNW_Short" xml:space="preserve">
     <value>NNW</value>
   </data>
+  <data name="DateHumanize_MultipleDaysFor" xml:space="preserve">
+    <value>for {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFor_Above20" xml:space="preserve">
+    <value>for {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFor_Dual" xml:space="preserve">
+    <value>for {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFor_Plural" xml:space="preserve">
+    <value>for {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFor_Singular" xml:space="preserve">
+    <value>for {0} day</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFor_TrialQuadral" xml:space="preserve">
+    <value>for {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFor" xml:space="preserve">
+    <value>for {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFor_Above20" xml:space="preserve">
+    <value>for {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFor_Dual" xml:space="preserve">
+    <value>for {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFor_DualTrialQuadral" xml:space="preserve">
+    <value>for {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFor_Plural" xml:space="preserve">
+    <value>for {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFor_Singular" xml:space="preserve">
+    <value>for {0} hour</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFor_TrialQuadral" xml:space="preserve">
+    <value>for {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFor" xml:space="preserve">
+    <value>for {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFor_Above20" xml:space="preserve">
+    <value>for {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFor_Dual" xml:space="preserve">
+    <value>for {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFor_DualTrialQuadral" xml:space="preserve">
+    <value>for {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFor_Plural" xml:space="preserve">
+    <value>for {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFor_Singular" xml:space="preserve">
+    <value>for {0} minute</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFor_TrialQuadral" xml:space="preserve">
+    <value>for {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFor" xml:space="preserve">
+    <value>for {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFor_Dual" xml:space="preserve">
+    <value>for {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFor_DualTrialQuadral" xml:space="preserve">
+    <value>for {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFor_Plural" xml:space="preserve">
+    <value>for {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFor_Singular" xml:space="preserve">
+    <value>for {0} month</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFor_TrialQuadral" xml:space="preserve">
+    <value>for {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFor" xml:space="preserve">
+    <value>for {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFor_Above20" xml:space="preserve">
+    <value>for {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFor_Dual" xml:space="preserve">
+    <value>for {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFor_DualTrialQuadral" xml:space="preserve">
+    <value>for {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFor_Plural" xml:space="preserve">
+    <value>for {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFor_Singular" xml:space="preserve">
+    <value>for {0} second</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFor_TrialQuadral" xml:space="preserve">
+    <value>for {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFor" xml:space="preserve">
+    <value>for {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFor_Above20" xml:space="preserve">
+    <value>for {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFor_Dual" xml:space="preserve">
+    <value>for {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFor_DualTrialQuadral" xml:space="preserve">
+    <value>for {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFor_Plural" xml:space="preserve">
+    <value>for {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFor_Singular" xml:space="preserve">
+    <value>for {0} year</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFor_TrialQuadral" xml:space="preserve">
+    <value>for {0} years</value>
+  </data>
+  <data name="324234" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DateHumanize_MultipleDaysIn" xml:space="preserve">
+    <value>in {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysIn_Dual" xml:space="preserve">
+    <value>in {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysIn_Plural" xml:space="preserve">
+    <value>in {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysIn_Singular" xml:space="preserve">
+    <value>in {0} day</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysIn_TrialQuadral" xml:space="preserve">
+    <value>in {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleDays_Above20" xml:space="preserve">
+    <value>in {0} days</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursIn" xml:space="preserve">
+    <value>in {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursIn_Above20" xml:space="preserve">
+    <value>in {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursIn_Dual" xml:space="preserve">
+    <value>in {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursIn_DualTrialQuadral" xml:space="preserve">
+    <value>in {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursIn_Plural" xml:space="preserve">
+    <value>in {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursIn_Singular" xml:space="preserve">
+    <value>in {0} hour</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursIn_TrialQuadral" xml:space="preserve">
+    <value>in {0} hours</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesIn" xml:space="preserve">
+    <value>in {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesIn_Above20" xml:space="preserve">
+    <value>in {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesIn_Dual" xml:space="preserve">
+    <value>in {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesIn_DualTrialQuadral" xml:space="preserve">
+    <value>in {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesIn_Plural" xml:space="preserve">
+    <value>in {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesIn_Singular" xml:space="preserve">
+    <value>in {0} minute</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesIn_TrialQuadral" xml:space="preserve">
+    <value>in {0} minutes</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsIn" xml:space="preserve">
+    <value>in {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsIn_Dual" xml:space="preserve">
+    <value>in {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsIn_DualTrialQuadral" xml:space="preserve">
+    <value>in {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsIn_Plural" xml:space="preserve">
+    <value>in {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsIn_Singular" xml:space="preserve">
+    <value>in {0} month</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsIn_TrialQuadral" xml:space="preserve">
+    <value>in {0} months</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsIn" xml:space="preserve">
+    <value>in {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsIn_Above20" xml:space="preserve">
+    <value>in {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsIn_Dual" xml:space="preserve">
+    <value>in {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsIn_DualTrialQuadral" xml:space="preserve">
+    <value>in {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsIn_Plural" xml:space="preserve">
+    <value>in {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsIn_Singular" xml:space="preserve">
+    <value>in {0} second</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsIn_TrialQuadral" xml:space="preserve">
+    <value>in {0} seconds</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsIn" xml:space="preserve">
+    <value>in {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsIn_Above20" xml:space="preserve">
+    <value>in {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsIn_Dual" xml:space="preserve">
+    <value>in {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsIn_DualTrialQuadral" xml:space="preserve">
+    <value>in {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsIn_Plural" xml:space="preserve">
+    <value>in {0} years</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsIn_Singular" xml:space="preserve">
+    <value>in {0} year</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsIn_TrialQuadral" xml:space="preserve">
+    <value>in {0} years</value>
+  </data>
+  <data name="DateHumanize_SingleDayFor" xml:space="preserve">
+    <value>for one day</value>
+  </data>
+  <data name="DateHumanize_SingleDayIn" xml:space="preserve">
+    <value>in one day</value>
+  </data>
+  <data name="DateHumanize_SingleHourFor" xml:space="preserve">
+    <value>for an hour</value>
+  </data>
+  <data name="DateHumanize_SingleHourIn" xml:space="preserve">
+    <value>in an hour</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFor" xml:space="preserve">
+    <value>for a minute</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteIn" xml:space="preserve">
+    <value>in a minute</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFor" xml:space="preserve">
+    <value>for one month</value>
+  </data>
+  <data name="DateHumanize_SingleMonthIn" xml:space="preserve">
+    <value>in one month</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFor" xml:space="preserve">
+    <value>for one second</value>
+  </data>
+  <data name="DateHumanize_SingleSecondIn" xml:space="preserve">
+    <value>in one second</value>
+  </data>
+  <data name="DateHumanize_SingleYearFor" xml:space="preserve">
+    <value>for one year</value>
+  </data>
+  <data name="DateHumanize_SingleYearIn" xml:space="preserve">
+    <value>in one year</value>
+  </data>
 </root>

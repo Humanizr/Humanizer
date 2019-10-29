@@ -12,5 +12,8 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
-  </PropertyGroup>
+  </PropertyGroup>  
+  <ItemGroup>
+    <None Remove="Localisation\NewFile1.txt" />
+  </ItemGroup>
 </Project>

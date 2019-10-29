@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
@@ -107,7 +107,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
+        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture, DateTimeExpressionProvider dateTimeTextProvider = null)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
@@ -116,59 +116,59 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             if (ts.TotalMilliseconds < 500)
             {
-                return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0);
+                return formatter.DateHumanize(TimeUnit.Millisecond, tense, 0, dateTimeTextProvider);
             }
 
             if (ts.TotalSeconds < 60)
             {
-                return formatter.DateHumanize(TimeUnit.Second, tense, ts.Seconds);
+                return formatter.DateHumanize(TimeUnit.Second, tense, ts.Seconds, dateTimeTextProvider);
             }
 
             if (ts.TotalSeconds < 120)
             {
-                return formatter.DateHumanize(TimeUnit.Minute, tense, 1);
+                return formatter.DateHumanize(TimeUnit.Minute, tense, 1, dateTimeTextProvider);
             }
 
             if (ts.TotalMinutes < 60)
             {
-                return formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes);
+                return formatter.DateHumanize(TimeUnit.Minute, tense, ts.Minutes, dateTimeTextProvider);
             }
 
             if (ts.TotalMinutes < 90)
             {
-                return formatter.DateHumanize(TimeUnit.Hour, tense, 1);
+                return formatter.DateHumanize(TimeUnit.Hour, tense, 1, dateTimeTextProvider);
             }
 
             if (ts.TotalHours < 24)
             {
-                return formatter.DateHumanize(TimeUnit.Hour, tense, ts.Hours);
+                return formatter.DateHumanize(TimeUnit.Hour, tense, ts.Hours, dateTimeTextProvider);
             }
 
             if (ts.TotalHours < 48)
             {
                 var days = Math.Abs((input.Date - comparisonBase.Date).Days);
-                return formatter.DateHumanize(TimeUnit.Day, tense, days);
+                return formatter.DateHumanize(TimeUnit.Day, tense, days, dateTimeTextProvider);
             }
 
             if (ts.TotalDays < 28)
             {
-                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
+                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days, dateTimeTextProvider);
             }
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
                 if (comparisonBase.Date.AddMonths(tense == Tense.Future ? 1 : -1) == input.Date)
                 {
-                    return formatter.DateHumanize(TimeUnit.Month, tense, 1);
+                    return formatter.DateHumanize(TimeUnit.Month, tense, 1, dateTimeTextProvider);
                 }
 
-                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
+                return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days, dateTimeTextProvider);
             }
 
             if (ts.TotalDays < 345)
             {
                 var months = Convert.ToInt32(Math.Floor(ts.TotalDays / 29.5));
-                return formatter.DateHumanize(TimeUnit.Month, tense, months);
+                return formatter.DateHumanize(TimeUnit.Month, tense, months, dateTimeTextProvider);
             }
 
             var years = Convert.ToInt32(Math.Floor(ts.TotalDays / 365));
@@ -177,7 +177,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
                 years = 1;
             }
 
-            return formatter.DateHumanize(TimeUnit.Year, tense, years);
+            return formatter.DateHumanize(TimeUnit.Year, tense, years, dateTimeTextProvider);
         }
     }
 }
