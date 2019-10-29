@@ -188,4 +188,5 @@ namespace Humanizer.Tests
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future, DefaultPrecision);
         }
     }
+
 }
