@@ -26,7 +26,7 @@
         /// <param name="timeUnitTense"></param>
         /// <param name="unit"></param>
         /// <returns></returns>
-        string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit, DateTimeExpressionProvider dateTimeTextProvider = null);
+        string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit, DateTimeExpressionProvider dateTimeExpressionProvider = null);
 
         /// <summary>
         /// 0 seconds

@@ -71,9 +71,9 @@ namespace Humanizer.Localisation.Formatters
             return GetResourceForTimeSpan(timeUnit, unit, toWords);
         }
 
-        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count, DateTimeExpressionProvider dateTimeTextProvider = null)
+        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count, DateTimeExpressionProvider dateTimeExpressionProvider = null)
         {
-            var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count, dateTimeTextProvider: dateTimeTextProvider);
+            var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count, dateTimeExpressionProvider: dateTimeExpressionProvider);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 

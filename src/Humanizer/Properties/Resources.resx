@@ -922,7 +922,7 @@
     <value>for one day</value>
   </data>
   <data name="DateHumanize_SingleDayIn" xml:space="preserve">
-    <value>in one day</value>
+    <value>tomorrow</value>
   </data>
   <data name="DateHumanize_SingleHourFor" xml:space="preserve">
     <value>for an hour</value>
