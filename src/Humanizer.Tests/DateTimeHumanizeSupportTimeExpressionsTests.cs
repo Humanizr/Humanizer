@@ -9,7 +9,7 @@ namespace Humanizer.Tests
     public class DateTimeHumanizeSupportTimeExpressionsTests
     {
 
-        private static readonly NewTimeExpression timeExpressionProvider = new NewTimeExpression();
+        private static readonly TimeExpressionProviderToTest TimeExpressionProvider = new TimeExpressionProviderToTest();
 
         [Theory]
         [InlineData(1, "for one second")]
@@ -18,7 +18,7 @@ namespace Humanizer.Tests
         [InlineData(60, "for a minute")]
         public void SecondsFor(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -28,7 +28,7 @@ namespace Humanizer.Tests
         [InlineData(60, "in a minute")]
         public void SecondsIn(int seconds, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -42,7 +42,7 @@ namespace Humanizer.Tests
         [InlineData(120, "for 2 hours")]
         public void MinutesFor(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -56,7 +56,7 @@ namespace Humanizer.Tests
         [InlineData(120, "in 2 hours")]
         public void MinutesIn(int minutes, string expected)
         {
-            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -66,17 +66,17 @@ namespace Humanizer.Tests
         [InlineData(24, "for one day")]
         public void HoursFor(int hours, string expected)
         {
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
         [InlineData(1, "in an hour")]
         [InlineData(10, "in 10 hours")]
         [InlineData(23, "in 23 hours")]
-        [InlineData(24, "in one day")]
+        [InlineData(24, "tomorrow")]
         public void HoursIn(int hours, string expected)
         {
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -86,17 +86,17 @@ namespace Humanizer.Tests
         [InlineData(32, "for one month")]
         public void DaysFor(int days, string expected)
         {
-            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
-        [InlineData(1, "in one day")]
+        [InlineData(1, "tomorrow")]
         [InlineData(10, "in 10 days")]
         [InlineData(27, "in 27 days")]
         [InlineData(32, "in one month")]
         public void DaysIn(int days, string expected)
         {
-            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -106,7 +106,7 @@ namespace Humanizer.Tests
         [InlineData(12, "for one year")]
         public void MonthsFor(int months, string expected)
         {
-            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -116,7 +116,7 @@ namespace Humanizer.Tests
         [InlineData(12, "in one year")]
         public void MonthsIn(int months, string expected)
         {
-            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -124,7 +124,7 @@ namespace Humanizer.Tests
         [InlineData(2, "for 2 years")]
         public void YearsFor(int years, string expected)
         {
-            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past, dateTimeExpressionProvider: timeExpressionProvider);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past, dateTimeExpressionProvider: TimeExpressionProvider);
         }
 
         [Theory]
@@ -132,20 +132,7 @@ namespace Humanizer.Tests
         [InlineData(2, "in 2 years")]
         public void YearsIn(int years, string expected)
         {
-            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future, dateTimeExpressionProvider: timeExpressionProvider);
-        }
-    }
-
-    public class NewTimeExpression : DateTimeExpressionProvider
-    {
-        public override TimeExpressionPast GetPastTimeExpression()
-        {
-            return TimeExpressionPast.For;
-        }
-
-        public override TimeExpressionFuture GetFutureTimeExpression()
-        {
-            return TimeExpressionFuture.In;
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future, dateTimeExpressionProvider: TimeExpressionProvider);
         }
     }
 }
