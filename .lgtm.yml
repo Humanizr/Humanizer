@@ -1,0 +1,6 @@
+extraction:
+  csharp:
+    index:
+      dotnet:
+        version: 3.0.100
+      solution: src/Humanizer/Humanizer.csproj
