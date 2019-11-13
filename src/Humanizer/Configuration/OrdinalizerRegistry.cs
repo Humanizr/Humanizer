@@ -9,6 +9,7 @@ namespace Humanizer.Configuration
             Register("de", new GermanOrdinalizer());
             Register("en", new EnglishOrdinalizer());
             Register("es", new SpanishOrdinalizer());
+            Register("fr", new FrenchOrdinalizer());
             Register("it", new ItalianOrdinalizer());
             Register("nl", new DutchOrdinalizer());
             Register("pt", new PortugueseOrdinalizer());
