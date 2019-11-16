@@ -40,7 +40,7 @@ namespace Humanizer.Configuration
             Register("nb", new NorwegianBokmalNumberToWordsConverter());
             Register("vi", new VietnameseNumberToWordsConverter());
             Register("zh-CN", new ChineseNumberToWordsConverter());
-            Register("bg", new BolgarianNumberToWordsConverter());
+            Register("bg", new BulgarianNumberToWordsConverter());
         }
     }
 }
