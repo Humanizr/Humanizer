@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class BolgarianNumberToWordsConverter : GenderedNumberToWordsConverter
+    internal class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "нула", "един", "две", "три", "четири", "пет", "шест", "седем", "осем", "девет", "десет", "единадесет", "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет", "осемнадесет", "деветнадесет" };
         private static readonly string[] TensMap = { "нула", "десет", "двадесет", "тридесет", "четиридесет", "петдесет", "шейсет", "седемдесет", "осемдесет", "деветдесет" };
