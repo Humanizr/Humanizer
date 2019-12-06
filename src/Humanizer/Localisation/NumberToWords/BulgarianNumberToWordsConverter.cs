@@ -69,28 +69,30 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((input / 1000000000000) > 0)
             {
-                parts.Add(Convert(input / 1000000000000, gender, false));
-                parts.Add($"{(input < 2000000000000 ? "трилион" : "трилиона")}");
                 if (isOrdinal)
-                    lastOrdinalSubstitution = "трилион" + GetEndingForGender(gender, input);
+                    lastOrdinalSubstitution = Convert(input / 1000000000000, gender, false) + " трилион" +
+                                              GetEndingForGender(gender, input);
                 input %= 1000000000000;
             }
 
             if ((input / 1000000000) > 0)
             {
-                parts.Add(Convert(input / 1000000000, gender, false));
-                parts.Add($"{(input < 2000000000 ? "милиард" : "милиарда")}");
+                parts.Add(Convert(input / 1000000000, gender, false) +
+                          $" {(input < 2000000000 ? "милиард" : "милиарда")}");
+
                 if (isOrdinal)
-                    lastOrdinalSubstitution = "милиард" + GetEndingForGender(gender, input);
+                    lastOrdinalSubstitution = Convert(input / 1000000000, gender, false) + " милиард" +
+                                              GetEndingForGender(gender, input);
                 input %= 1000000000;
             }
 
             if ((input / 1000000) > 0)
             {
-                parts.Add(Convert(input / 1000000, gender, false));
-                parts.Add($"{(input < 2000000 ? "милион" : "милиона")}");
+                parts.Add(Convert(input / 1000000, gender, false) + $" {(input < 2000000 ? "милион" : "милиона")}");
+
                 if (isOrdinal)
-                    lastOrdinalSubstitution = "милион" + GetEndingForGender(gender, input);
+                    lastOrdinalSubstitution = Convert(input / 1000000, gender, false) + " милион" +
+                                              GetEndingForGender(gender, input);
 
                 input %= 1000000;
             }
@@ -101,23 +103,23 @@ namespace Humanizer.Localisation.NumberToWords
                     parts.Add("хиляда");
                 else
                 {
-                    parts.Add(Convert(input / 1000, gender, false));
-                    parts.Add("хиляди");
+                    parts.Add(Convert(input / 1000, gender, false) + " хиляди");
                 }
 
                 if (isOrdinal)
-                    lastOrdinalSubstitution = "хиляд" + GetEndingForGender(gender, input);
-                
+                    lastOrdinalSubstitution = Convert(input / 1000, gender, false) + " хиляд" +
+                                              GetEndingForGender(gender, input);
+
                 input %= 1000;
             }
 
             if (input / 100 > 0)
             {
                 parts.Add(HundredsMap[(int)input / 100]);
-                
+
                 if (isOrdinal)
                     lastOrdinalSubstitution = HundredsOrdinalMap[(int)input / 100] + GetEndingForGender(gender, input);
-                
+
                 input %= 100;
             }
 
@@ -125,23 +127,26 @@ namespace Humanizer.Localisation.NumberToWords
             if (input > 19)
             {
                 parts.Add(TensMap[input / 10]);
-                
+
                 if (isOrdinal)
                     lastOrdinalSubstitution = TensMap[(int)input / 10] + GetEndingForGender(gender, input);
-                
+
                 input %= 10;
             }
 
             if (input > 0)
             {
-                if(parts.Count > 0)
-                    parts.Add("и");
-                
                 parts.Add(UnitsMap[input]);
-                
+
                 if (isOrdinal)
                     lastOrdinalSubstitution = UnitsOrdinal[input] + GetEndingForGender(gender, input);
             }
+
+            if (parts.Count > 1)
+            {
+                parts.Insert(parts.Count - 1, "и");
+            }
+
 
             if (isOrdinal && !string.IsNullOrWhiteSpace(lastOrdinalSubstitution))
                 parts[parts.Count - 1] = lastOrdinalSubstitution;

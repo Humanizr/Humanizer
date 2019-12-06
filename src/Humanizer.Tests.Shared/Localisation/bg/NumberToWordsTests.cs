@@ -46,6 +46,8 @@ namespace Humanizer.Tests.Localisation.bg
         [InlineData(35000, "тридесет и пет хиляди")]
         [InlineData(352192, "триста петдесет и две хиляди сто деветдесет и две")]
         [InlineData(4000210, "четири милиона двеста и десет")]
+        [InlineData(5200, "пет хиляди и двеста")]
+        [InlineData(1125000, "един милион и сто двадесет и пет хиляди")]
         public void ToWordsBg(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
