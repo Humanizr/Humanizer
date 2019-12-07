@@ -10,6 +10,7 @@ namespace Humanizer.Configuration
             Register("af", new AfrikaansNumberToWordsConverter());
             Register("en", new EnglishNumberToWordsConverter());
             Register("ar", new ArabicNumberToWordsConverter());
+            Register("cs", (culture) => new CzechNumberToWordsConverter(culture));
             Register("fa", new FarsiNumberToWordsConverter());
             Register("es", new SpanishNumberToWordsConverter());
             Register("pl", (culture) => new PolishNumberToWordsConverter(culture));
