@@ -15,7 +15,7 @@
         /// <param name="number"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public string Convert(long number, GrammaticalGender gender)
+        public virtual string Convert(long number, GrammaticalGender gender)
         {
             return Convert(number);
         }
