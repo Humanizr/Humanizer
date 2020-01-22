@@ -42,6 +42,7 @@ namespace Humanizer.Configuration
             Register("vi", new VietnameseNumberToWordsConverter());
             Register("zh-CN", new ChineseNumberToWordsConverter());
             Register("bg", new BulgarianNumberToWordsConverter());
+            Register("lv", new LatvianNumberToWordsConverter());
         }
     }
 }
