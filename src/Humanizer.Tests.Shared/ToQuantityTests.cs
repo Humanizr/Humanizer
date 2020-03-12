@@ -19,6 +19,10 @@ namespace Humanizer.Tests
         [InlineData("process", 1, "1 process")]
         [InlineData("processes", 2, "2 processes")]
         [InlineData("processes", 1, "1 process")]
+        [InlineData("slice", 1, "1 slice")]
+        [InlineData("slice", 2, "2 slices")]
+        [InlineData("slices", 1, "1 slice")]
+        [InlineData("slices", 2, "2 slices")]
         public void ToQuantity(string word, int quantity, string expected)
         {
             Assert.Equal(expected, word.ToQuantity(quantity));

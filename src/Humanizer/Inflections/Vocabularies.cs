@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 
 namespace Humanizer.Inflections
@@ -39,7 +39,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("([^aeiouy]|qu)y$", "$1ies");
             _default.AddPlural("(x|ch|ss|sh)$", "$1es");
             _default.AddPlural("(matr|vert|ind|d)ix|ex$", "$1ices");
-            _default.AddPlural("([m|l])ouse$", "$1ice");
+            _default.AddPlural("(^[m|l])ouse$", "$1ice");
             _default.AddPlural("^(ox)$", "$1en");
             _default.AddPlural("(quiz)$", "$1zes");
             _default.AddPlural("(buz|blit|walt)z$", "$1zes");
@@ -59,7 +59,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("(s)eries$", "$1eries");
             _default.AddSingular("(m)ovies$", "$1ovie");
             _default.AddSingular("(x|ch|ss|sh)es$", "$1");
-            _default.AddSingular("([m|l])ice$", "$1ouse");
+            _default.AddSingular("(^[m|l])ice$", "$1ouse");
             _default.AddSingular("(o)es$", "$1");
             _default.AddSingular("(shoe)s$", "$1");
             _default.AddSingular("(cris|ax|test)es$", "$1is");
