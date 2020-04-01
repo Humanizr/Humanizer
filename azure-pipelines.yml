@@ -42,13 +42,15 @@ steps:
     projects: .\src\Humanizer.sln
     arguments: -c $(BuildConfiguration)
   displayName: Build  
-  
+
+- task: NuGetToolInstaller@1  
+
 - pwsh: |
     mkdir $(Build.ArtifactStagingDirectory)\Packages
     $version = .\nbgv get-version -f json | ConvertFrom-Json
     $nuspecs = gci .\NuSpecs\*.nuspec 
     foreach ($item in $nuspecs) {
-      nugetpack $($item.FullName) `
+      nuget pack $($item.FullName) `
                 -outputdirectory $(Build.ArtifactStagingDirectory)\Packages `
                 -basepath $(System.DefaultWorkingDirectory)\src\ `
                 -Properties "version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" 
