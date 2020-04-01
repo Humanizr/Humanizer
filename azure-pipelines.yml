@@ -18,7 +18,6 @@ steps:
   displayName: 'Use .NET Core SDK 3.x'
   inputs:
     version: 3.x
-    includePreviewVersions: true
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core Runtime 2.1.x'

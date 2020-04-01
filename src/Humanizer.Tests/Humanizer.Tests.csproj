@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net48;netcoreapp2.1</TargetFrameworks>
+    <Deterministic>false</Deterministic> <!-- Approver doesn't support this yet -->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1' ">
