@@ -1240,7 +1240,7 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 
 ## <a id="main-contributors">Main contributors</a>
  - Mehdi Khalili ([@MehdiKhalili](https://twitter.com/MehdiKhalili))
- - Oren Novotny ([@onovotny](https://twitter.com/onovotny))
+ - Claire Novotny ([@clairernovotny](https://twitter.com/clairernovotny))
  - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
  - Max Malook ([@mexx](https://github.com/mexx))
 

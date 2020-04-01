@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;netstandard2.0</TargetFrameworks>    
-    <Authors>Mehdi Khalili, Oren Novotny</Authors>
+    <Authors>Mehdi Khalili, Claire Novotny</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
-    <Copyright>Copyright © 2012-2019 .NET Foundation and Contributors</Copyright>    
+    <Copyright>Copyright © .NET Foundation and Contributors</Copyright>    
     <Product>Humanizer ($(TargetFramework))</Product>    
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
