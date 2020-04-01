@@ -18,7 +18,6 @@ steps:
   displayName: 'Use .NET Core SDK 3.x'
   inputs:
     version: 3.x
-    includePreviewVersions: true
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core Runtime 2.1.x'
@@ -43,13 +42,19 @@ steps:
     projects: .\src\Humanizer.sln
     arguments: -c $(BuildConfiguration)
   displayName: Build  
-  
-- powershell: |
+
+- task: NuGetToolInstaller@1  
+
+- pwsh: |
     mkdir $(Build.ArtifactStagingDirectory)\Packages
     $version = .\nbgv get-version -f json | ConvertFrom-Json
     $nuspecs = gci .\NuSpecs\*.nuspec 
     foreach ($item in $nuspecs) {
-      dotnet pack .\src\Humanizer\Humanizer.csproj --no-build -o $(Build.ArtifactStagingDirectory)\Packages /p:NuspecFile=$($item.FullName) /p:NuspecBasePath=..\ /p:NuspecProperties="version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" 
+      nuget pack $($item.FullName) `
+                -outputdirectory $(Build.ArtifactStagingDirectory)\Packages `
+                -basepath $(System.DefaultWorkingDirectory)\src\ `
+                -NoPackageAnalysis `
+                -Properties "version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" 
     }
   displayName: Create packages
   

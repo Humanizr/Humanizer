@@ -38,6 +38,7 @@ namespace Humanizer.Configuration
             Register("sv", new SwedishNumberToWordsConverter());
             Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
             Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
+            Register("hr", (culture) => new CroatianNumberToWordsConverter(culture));
             Register("nb", new NorwegianBokmalNumberToWordsConverter());
             Register("vi", new VietnameseNumberToWordsConverter());
             Register("zh-CN", new ChineseNumberToWordsConverter());

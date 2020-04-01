@@ -4,14 +4,14 @@ using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class SerbianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    internal class CroatianNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset", "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šestnaest", "sedemnaest", "osemnaest", "devetnaest" };
         private static readonly string[] TensMap = { "nula", "deset", "dvadeset", "trideset", "četrdeset", "petdeset", "šestdeset", "sedamdeset", "osamdeset", "devetdeset" };
 
         private readonly CultureInfo _culture;
 
-        public SerbianNumberToWordsConverter(CultureInfo culture)
+        public CroatianNumberToWordsConverter(CultureInfo culture)
         {
             _culture = culture;
         }
@@ -38,7 +38,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (billions > 0)
             {
-                parts.Add(Part("milijarda", "dve milijarde", "{0} milijarde", "{0} milijarda", billions));
+                parts.Add(Part("milijarda", "dvije milijarde", "{0} milijarde", "{0} milijarda", billions));
                 number %= 1000000000;
 
                 if (number > 0)
@@ -51,7 +51,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (millions > 0)
             {
-                parts.Add(Part("milion", "dva miliona", "{0} miliona", "{0} miliona", millions));
+                parts.Add(Part("milijun", "dva milijuna", "{0} milijuna", "{0} milijuna", millions));
                 number %= 1000000;
 
                 if (number > 0)
@@ -64,7 +64,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (thousands > 0)
             {
-                parts.Add(Part("hiljadu", "dve hiljade", "{0} hiljade", "{0} hiljada", thousands));
+                parts.Add(Part("tisuću", "dvije tisuće", "{0} tisuće", "{0} tisuća", thousands));
                 number %= 1000;
 
                 if (number > 0)
@@ -77,7 +77,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (hundreds > 0)
             {
-                parts.Add(Part("sto", "dvesto", "{0}sto", "{0}sto", hundreds));
+                parts.Add(Part("sto", "dvijesto", "{0}sto", "{0}sto", hundreds));
                 number %= 100;
 
                 if (number > 0)

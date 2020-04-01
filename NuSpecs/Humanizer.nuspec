@@ -4,9 +4,9 @@
     <id>Humanizer</id>
     <version>$version$</version>
     <title>Humanizer</title>
-    <authors>Mehdi Khalili, Oren Novotny</authors>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
-    <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
+    <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
@@ -57,5 +57,7 @@
       <dependency id="Humanizer.Core.zh-Hant" version="$version$" />
     </dependencies>
   </metadata>
-  <files />  
+  <files>  
+    <file src="..\logo.png" target="logo.png" />
+  </files>
 </package>
