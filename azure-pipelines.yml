@@ -118,7 +118,7 @@ stages:
               .\SignClient "Sign" `
               --baseDirectory "$(Pipeline.Workspace)\BuildPackages" `
               --input "**/*.nupkg" `
-              --config "$(Pipeline.Workspace)\SignClient.json" `
+              --config "$(Pipeline.Workspace)\config\SignClient.json" `
               --user "$(SignClientUser)" `
               --secret "$(SignClientSecret)" `
               --name "Humanizer" `
