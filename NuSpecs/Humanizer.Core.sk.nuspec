@@ -4,9 +4,9 @@
     <id>Humanizer.Core.sk</id>
     <version>$version$</version>
     <title>Humanizer Locale (sk)</title>
-    <authors>Mehdi Khalili, Oren Novotny</authors>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
-    <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
+    <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Humanizer Locale Slovak (sk)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
@@ -20,5 +20,6 @@
   <files>
     <file src="Humanizer\bin\Release\netstandard1.0\sk\*.*" target="lib\netstandard1.0\sk" />
     <file src="Humanizer\bin\Release\netstandard2.0\sk\*.*" target="lib\netstandard2.0\sk" />
+    <file src="..\logo.png" target="logo.png" />
   </files>
 </package>
