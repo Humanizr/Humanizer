@@ -179,6 +179,10 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     towords = towords.TrimEnd('o') + "a";
                 }
+                else if (gender == GrammaticalGender.Neuter && (number == 1 || number == 3))
+                {
+                    towords = towords.TrimEnd('o');
+                }
 
                 parts.Add(towords);
             }

@@ -52,13 +52,13 @@ namespace Humanizer.Tests.Localisation.es
 
         // TODO: This data is suspect since null cannot go into GramaticalGender
         [Theory]
-        // [InlineData(1, "primer", null)]
+        [InlineData(1, "primer", GrammaticalGender.Neuter)]
         [InlineData(1, "primero", GrammaticalGender.Masculine)]
         [InlineData(1, "primera", GrammaticalGender.Feminine)]
         [InlineData(2, "segundo", GrammaticalGender.Masculine)]
         [InlineData(2, "segunda", GrammaticalGender.Feminine)]
         [InlineData(2, "segundo", GrammaticalGender.Neuter)]
-        // [InlineData(3, "tercer", null)]
+        [InlineData(3, "tercer", GrammaticalGender.Neuter)]
         [InlineData(3, "tercero", GrammaticalGender.Masculine)]
         [InlineData(3, "tercera", GrammaticalGender.Feminine)]
         //  [InlineData(11, "once", null)]
