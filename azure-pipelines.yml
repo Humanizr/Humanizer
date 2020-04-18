@@ -66,7 +66,7 @@ stages:
       inputs:
         command: test
         projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings /t:rebuild /p:ContinuousIntegrationBuild=false -- RunConfiguration.DisableAppDomain=true
+        arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
       displayName: Run Tests
 
     - task: DotNetCoreCLI@2

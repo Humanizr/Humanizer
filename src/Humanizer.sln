@@ -82,7 +82,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{f886a8da-3efc-4a89-91dd-06faf13da172}*SharedItemsImports = 4
 		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{fdec244b-f07e-4a5e-bb80-fbc6ac77a9aa}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
