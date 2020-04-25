@@ -34,6 +34,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("fa");
             RegisterDefaultFormatter("fi-FI");
             RegisterDefaultFormatter("hu");
+            RegisterDefaultFormatter("hy");
             RegisterDefaultFormatter("id");
             RegisterDefaultFormatter("ja");
             Register("mt", new MalteseFormatter("mt"));
