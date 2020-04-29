@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata minClientVersion="2.12">
-    <id>Humanizer.Core.ru</id>
+    <id>Humanizer.Core.hy</id>
     <version>$version$</version>
     <title>Humanizer Locale (hy)</title>
     <authors>Mehdi Khalili, Claire Novotny</authors>
