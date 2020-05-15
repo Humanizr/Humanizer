@@ -30,7 +30,7 @@ namespace Humanizer.Bytes
     /// Represents a byte size value.
     /// </summary>
 #pragma warning disable 1591
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable
+    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable, IFormattable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
