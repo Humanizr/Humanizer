@@ -17,7 +17,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net48' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <PackageReference Include="ApiApprover" Version="9.3.0" />
-    <PackageReference Include="DiffPlex" Version="1.6.2" />
+    <PackageReference Include="DiffPlex" Version="1.6.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Humanizer.Tests.Shared\**\*.cs">
