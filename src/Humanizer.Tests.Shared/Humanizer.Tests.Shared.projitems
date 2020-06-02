@@ -40,6 +40,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ar\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ar\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ar\TimeSpanHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\az\DateHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\az\NumberToWordsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\az\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\bg\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\bg\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\bn-BD\DateHumanizeTests.cs" />

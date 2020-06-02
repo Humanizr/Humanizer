@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
 EndProject
@@ -87,7 +87,6 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{261367ca-00c7-4832-bd26-200cff8f575f}*SharedItemsImports = 4
 		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{f0dc7771-ce59-4f3c-b160-56f661f5d220}*SharedItemsImports = 4
-		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{f886a8da-3efc-4a89-91dd-06faf13da172}*SharedItemsImports = 4
 		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{fdec244b-f07e-4a5e-bb80-fbc6ac77a9aa}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -188,5 +187,8 @@ Global
 		{261367CA-00C7-4832-BD26-200CFF8F575F} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
 		{F0DC7771-CE59-4F3C-B160-56F661F5D220} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
 		{AA449265-E001-486D-A0F4-04ACF0C83DC1} = {4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4063A70-EE14-49AE-A6C4-3108B1CA70EF}
 	EndGlobalSection
 EndGlobal
