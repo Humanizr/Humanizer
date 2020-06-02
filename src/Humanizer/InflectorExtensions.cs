@@ -68,7 +68,6 @@ namespace Humanizer
         /// By default, pascalize converts strings to UpperCamelCase also removing underscores
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="removeWhiteSpace">"This has a space" -> "ThisHasASpace" if true</param>
         /// <returns></returns>
         public static string Pascalize(this string input)
         {   
@@ -79,7 +78,6 @@ namespace Humanizer
         /// Same as Pascalize except that the first character is lower case
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="removeWhiteSpace">"This has a space" -> "thisHasASpace" if true</param>
         /// <returns></returns>
         public static string Camelize(this string input)
         {
