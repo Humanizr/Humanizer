@@ -15,6 +15,7 @@
     <dependencies>
       <dependency id="Humanizer.Core.af" version="$version$" />
       <dependency id="Humanizer.Core.ar" version="$version$" />
+      <dependency id="Humanizer.Core.az" version="$version$" />
       <dependency id="Humanizer.Core.bg" version="$version$" />
       <dependency id="Humanizer.Core.bn-BD" version="$version$" />
       <dependency id="Humanizer.Core.cs" version="$version$" />
