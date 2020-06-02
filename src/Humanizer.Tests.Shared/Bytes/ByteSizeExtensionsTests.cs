@@ -357,6 +357,13 @@ namespace Humanizer.Tests.Bytes
         {
             Assert.Equal(expectedValue, input.Bytes().Humanize(format));
         }
+        
+        [Fact]
+        public void HumanizesBytesInterpolatedShorthand()
+        {
+            Assert.Equal("2.07 KB", $"{2123.Bytes():#.##}"); // fails
+            //Assert.Equal("2.07 KB", size.Bytes().Humanize("#.##")); // ok
+        }
 
         [Fact]
         public void ByteBits()
