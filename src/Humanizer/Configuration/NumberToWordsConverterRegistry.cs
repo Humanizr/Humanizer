@@ -44,6 +44,7 @@ namespace Humanizer.Configuration
             Register("zh-CN", new ChineseNumberToWordsConverter());
             Register("bg", new BulgarianNumberToWordsConverter());
             Register("hy", new ArmenianNumberToWordsConverter());
+            Register("az", new AzerbaijaniNumberToWordsConverter());
         }
     }
 }
