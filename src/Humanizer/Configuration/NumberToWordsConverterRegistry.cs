@@ -5,14 +5,16 @@ namespace Humanizer.Configuration
     internal class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
     {
         public NumberToWordsConverterRegistry()
-            : base((culture) => new DefaultNumberToWordsConverter(culture))
+            : base((culture) => new EnglishNumberToWordsConverter())
         {
             Register("af", new AfrikaansNumberToWordsConverter());
             Register("en", new EnglishNumberToWordsConverter());
             Register("ar", new ArabicNumberToWordsConverter());
+            Register("cs", (culture) => new CzechNumberToWordsConverter(culture));
             Register("fa", new FarsiNumberToWordsConverter());
             Register("es", new SpanishNumberToWordsConverter());
             Register("pl", (culture) => new PolishNumberToWordsConverter(culture));
+            Register("pt", new PortugueseNumberToWordsConverter());
             Register("pt-BR", new BrazilianPortugueseNumberToWordsConverter());
             Register("ro", new RomanianNumberToWordsConverter());
             Register("ru", new RussianNumberToWordsConverter());
@@ -33,10 +35,16 @@ namespace Humanizer.Configuration
             Register("uk", new UkrainianNumberToWordsConverter());
             Register("uz-Latn-UZ", new UzbekLatnNumberToWordConverter());
             Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
+            Register("sv", new SwedishNumberToWordsConverter());
             Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
             Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
+            Register("hr", (culture) => new CroatianNumberToWordsConverter(culture));
             Register("nb", new NorwegianBokmalNumberToWordsConverter());
+            Register("vi", new VietnameseNumberToWordsConverter());
             Register("zh-CN", new ChineseNumberToWordsConverter());
+            Register("bg", new BulgarianNumberToWordsConverter());
+            Register("hy", new ArmenianNumberToWordsConverter());
+            Register("az", new AzerbaijaniNumberToWordsConverter());
         }
     }
 }

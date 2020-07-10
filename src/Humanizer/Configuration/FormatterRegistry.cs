@@ -27,6 +27,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("vi");
             RegisterDefaultFormatter("en-US");
             RegisterDefaultFormatter("af");
+            RegisterDefaultFormatter("az");
             RegisterDefaultFormatter("da");
             RegisterDefaultFormatter("de");
             RegisterDefaultFormatter("el");
@@ -34,6 +35,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("fa");
             RegisterDefaultFormatter("fi-FI");
             RegisterDefaultFormatter("hu");
+            RegisterDefaultFormatter("hy");
             RegisterDefaultFormatter("id");
             RegisterDefaultFormatter("ja");
             Register("mt", new MalteseFormatter("mt"));

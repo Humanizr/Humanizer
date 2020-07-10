@@ -1,22 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net48;netcoreapp2.1</TargetFrameworks>
+    <Deterministic>false</Deterministic> <!-- Approver doesn't support this yet -->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1' ">
     <DefineConstants>$(DefineConstants);NETFX_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="1.3.0" PrivateAssets="all" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net46' ">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <PackageReference Include="PublicApiGenerator" Version="8.1.0" />
-    <PackageReference Include="ApiApprover" Version="8.1.0" />
-    <PackageReference Include="DiffPlex" Version="1.4.3" />
+    <PackageReference Include="ApiApprover" Version="9.3.0" />
+    <PackageReference Include="DiffPlex" Version="1.6.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Humanizer.Tests.Shared\**\*.cs">

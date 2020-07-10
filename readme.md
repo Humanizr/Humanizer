@@ -1,6 +1,6 @@
 ﻿<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
 
-[<img align="right" width="100px" src="https://dotnetfoundation.org/images/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
+[<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities. It is part of the [.NET Foundation](https://www.dotnetfoundation.org/), and operates under their [code of conduct](https://www.dotnetfoundation.org/code-of-conduct). It is licensed under the [MIT](https://opensource.org/licenses/MIT) (an OSI approved license).
 
@@ -59,22 +59,17 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 ## <a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): 
 
-**XPROJ / `project.json`**: `Humanizer.xproj`
-
 **English only**: `Humanizer.Core`
 
 All languages: `Humanizer`
 
-Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (.Net 4.5+, Windows Phone 8, Win Store, and .NET Core).
+Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (.Net 4.5+, UWP, Xamarin, and .NET Core).
 
-Also Humanizer symbols are source indexed with [GitLink](https://github.com/GitTools/GitLink) and are included in the package so you can [step through Humanizer code](https://github.com/GitTools/GitLink) while debugging your code.
+Also Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
 
-For pre-release builds, [MyGet feed](https://www.myget.org/) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
+For pre-release builds, [Azure Artifacts feed](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=feed&feed=Humanizer) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
 
-  - `https://www.myget.org/F/humanizer/api/v2` for VS 2012+
-  - `https://www.myget.org/F/humanizer/api/v3/index.json` for VS 2015+
-
-*Note*: Humanizer requires at least NuGet [2.12](https://docs.nuget.org/release-notes/nuget-2.12) when on VS 2012/2013 and 3.4+ on VS 2015.
+  - [![Humanizer package in Humanizer feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet/5829eea4-55e5-4a15-ba8d-1de5daaafcea/_apis/public/Packaging/Feeds/b39738c7-8e60-4bfb-825f-29c47261a5cc/Packages/db81f806-d0b5-43a3-99f4-3d27606376b8/Badge)](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=package&feed=b39738c7-8e60-4bfb-825f-29c47261a5cc&package=db81f806-d0b5-43a3-99f4-3d27606376b8&preferRelease=true) `https://pkgs.dev.azure.com/dotnet/Humanizer/_packaging/Humanizer/nuget/v3/index.json`
 
 ### <a id="specify-lang">Specify Languages (Optional)</a>
 New in Humanizer 2.0 is the option to choose which localization packages you wish to use. You choose which packages
@@ -85,10 +80,7 @@ Here are the options:
 
   - **All languages**: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
   - **English**: use the `Humanizer.Core` package. Only the English language resources will be available
-  - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include
-  multiple languages by installing however many language packages you want. 
-
-**XPROJ / `project.json`**: Due to a [bug](https://github.com/dotnet/cli/issues/3396) in the CLI tools, the main `Humanizer` package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use `Humanizer.xproj` instead. It contains all of the languages.
+  - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include multiple languages by installing however many language packages you want. 
   
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
@@ -888,7 +880,7 @@ Also the reverse operation using the `FromRoman` extension.
 "IV".FromRoman() => 4
 "V".FromRoman() => 5
 ```
-Note that only integers smaller than 4000 can be converted to Roman numberals. 
+Note that only integers smaller than 4000 can be converted to Roman numerals. 
 
 ### <a id="metric-numerals">Metric numerals</a>
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
@@ -968,7 +960,7 @@ If you want a string representation you can call `ToString` or `Humanize` interc
 
 You can also optionally provide a format for the expected string representation.
 The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`.
-The formatter uses the built in [`double.ToString` method](http://msdn.microsoft.com/en-us/library/kfsatb94\(v=vs.110\).aspx) with `#.##` as the default format which rounds the number to two decimal places:
+The formatter uses the built in [`double.ToString` method](https://docs.microsoft.com/dotnet/api/system.double.tostring) with `#.##` as the default format which rounds the number to two decimal places:
 
 ```C#
 var b = (10.505).Kilobytes();
@@ -1007,7 +999,7 @@ There isn't a `Dehumanize` method to turn a string representation back into a `B
 Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful.
 If the value is parsed it is output to the `out` parameter supplied:
 
-```
+```C#
 ByteSize output;
 ByteSize.TryParse("1.5mb", out output);
 
@@ -1035,7 +1027,7 @@ Finally, if you need to calculate the rate at which a quantity of bytes has been
 
 The `Per` method returns a `ByteRate` class which has a `Humanize` method. By default, rates are given in seconds (eg, MB/s). However, if desired, a TimeUnit may be passed to `Humanize` for an alternate interval. Valid intervals are `TimeUnit.Second`, `TimeUnit.Minute`, and `TimeUnit.Hour`. Examples of each interval and example byte rate usage is below.
 
-```
+```C#
 var size = ByteSize.FromMegabytes(10);
 var measurementInterval = TimeSpan.FromSeconds(1);
 
@@ -1051,7 +1043,7 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
 
 You can specify a format for the bytes part of the humanized output:
 
-```
+```C#
 19854651984.Bytes().Per(1.Seconds()).Humanize("#.##");
 // 18.49 GB/s
 ```
@@ -1216,18 +1208,18 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 Due to a [bug](https://github.com/dotnet/cli/issues/3396) in the CLI tools, the main `Humanizer` package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use `Humanizer.xproj` instead. It contains all of the languages.
 
 ## <a id="aspnet4mvc">Use in ASP.NET 4.x MVC Views</a>
-Humanizer is a Portable Class Library. There is currently [an issue](http://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do) if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the `web.config` file, including ones the project system normally automatically adds. 
+Humanizer is a Portable Class Library. There is currently [an issue](https://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do) if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the `web.config` file, including ones the project system normally automatically adds. 
 
-If you encounter errors saying that you must add a reference to either `System.Runtime` or `System.Globalization`, this applies to you. The solution is to add the contract references to your `web.config` as listed [here](http://stackoverflow.com/a/19942274/738188). Note that this applies to any PCL you use in an MVC view, not just Humanizer.
+If you encounter errors saying that you must add a reference to either `System.Runtime` or `System.Globalization`, this applies to you. The solution is to add the contract references to your `web.config` as listed [here](https://stackoverflow.com/a/19942274/738188). Note that this applies to any PCL you use in an MVC view, not just Humanizer.
 
 ## <a id="how-to-contribute">How to contribute?</a>
 
 Please see <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.
 
-## <a id="continuous-integration">Continuous Integration from AppVeyor</a>
-Humanizer project is built & tested continuously by AppVeyor (more details [here](https://ci.appveyor.com/project/onovotny/humanizer)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
+## <a id="continuous-integration">Continuous Integration from Azure DevOps</a>
+Humanizer project is built & tested continuously by Azure DevOps (more details [here](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
 
-The current build status on the CI server is [![Build status](https://ci.appveyor.com/api/projects/status/wsp2of3r7otw01c5/branch/dev?svg=true)](https://ci.appveyor.com/project/onovotny/humanizer/branch/dev)
+The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=master)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 
 ## <a id="related-projects">Related projects</a>
 Below is a list of related open source projects:
@@ -1247,8 +1239,8 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 [Humanizer.JS](https://github.com/SamuelEnglard/Humanizer.Js) is a TypeScript port of the Humanizer framework.
 
 ## <a id="main-contributors">Main contributors</a>
- - Mehdi Khalili ([@MehdiKhalili](http://twitter.com/MehdiKhalili))
- - Oren Novotny ([@onovotny](http://twitter.com/onovotny))
+ - Mehdi Khalili ([@MehdiKhalili](https://twitter.com/MehdiKhalili))
+ - Claire Novotny ([@clairernovotny](https://twitter.com/clairernovotny))
  - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
  - Max Malook ([@mexx](https://github.com/mexx))
 

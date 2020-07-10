@@ -22,6 +22,7 @@
 
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Humanizer.Bytes
 {
@@ -29,7 +30,7 @@ namespace Humanizer.Bytes
     /// Represents a byte size value.
     /// </summary>
 #pragma warning disable 1591
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable
+    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable, IFormattable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
@@ -243,6 +244,8 @@ namespace Humanizer.Bytes
                 format = "0.## " + format;
             }
 
+            format = format.Replace("#.##", "0.##");
+
             bool has(string s) => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
             string output(double n) => n.ToString(format, provider);
 
@@ -393,6 +396,11 @@ namespace Humanizer.Bytes
         public static ByteSize operator +(ByteSize b1, ByteSize b2)
         {
             return new ByteSize(b1.Bytes + b2.Bytes);
+        }
+
+        public static ByteSize operator -(ByteSize b1, ByteSize b2)
+        {
+            return new ByteSize(b1.Bytes - b2.Bytes);
         }
 
         public static ByteSize operator ++(ByteSize b)

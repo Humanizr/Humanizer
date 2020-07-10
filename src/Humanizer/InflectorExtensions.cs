@@ -47,10 +47,11 @@ namespace Humanizer
         /// </summary>
         /// <param name="word">Word to be singularized</param>
         /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
+        /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
         /// <returns></returns>
-        public static string Singularize(this string word, bool inputIsKnownToBePlural = true)
+        public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
         {
-            return Vocabularies.Default.Singularize(word, inputIsKnownToBePlural);
+            return Vocabularies.Default.Singularize(word, inputIsKnownToBePlural, skipSimpleWords);
         }
 
         /// <summary>
@@ -67,7 +68,6 @@ namespace Humanizer
         /// By default, pascalize converts strings to UpperCamelCase also removing underscores
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="removeWhiteSpace">"This has a space" -> "ThisHasASpace" if true</param>
         /// <returns></returns>
         public static string Pascalize(this string input)
         {   
@@ -78,7 +78,6 @@ namespace Humanizer
         /// Same as Pascalize except that the first character is lower case
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="removeWhiteSpace">"This has a space" -> "thisHasASpace" if true</param>
         /// <returns></returns>
         public static string Camelize(this string input)
         {

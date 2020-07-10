@@ -118,6 +118,7 @@ namespace Humanizer.Tests
         [InlineData(11, "en-US", "eleven")]
         [InlineData(22, "ar", "اثنان و عشرون")]
         [InlineData(40, "ru", "сорок")]
+        [InlineData(1021, "hr", "tisuću dvadeset jedan")]
         public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
         {
             Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));

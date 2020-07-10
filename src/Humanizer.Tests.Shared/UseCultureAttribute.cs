@@ -85,6 +85,4 @@ namespace Humanizer.Tests
             CultureInfo.CurrentUICulture = originalUICulture;
         }
     }
-
-
 }
