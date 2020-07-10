@@ -119,7 +119,7 @@ namespace Humanizer.Bytes
         /// <returns>True if rates are equivalent, otherwise false</returns>
         public bool Equals(ByteRate other)
         {
-            return CompareTo(other) == 0;
+            return (Size.Bytes / Interval.TotalSeconds) - (other.Size.Bytes / other.Interval.TotalSeconds) == 0;
         }
 
         /// <inheritdoc />
