@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using Humanizer.Bytes;
+
 using Xunit;
 
 namespace Humanizer.Tests.Bytes
@@ -103,7 +104,7 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ReturnsBytesViaGeneralFormat()
         {
-            Assert.Equal("10 B", $"{10.Bytes()}");
+            Assert.Equal("10 B", $"{ByteSize.FromBytes(10)}");
         }
     }
 }
