@@ -220,9 +220,7 @@ namespace Humanizer.Bytes
         public string ToString(IFormatProvider provider)
         {
             if (provider == null)
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
+                provider = CultureInfo.CurrentCulture;
 
             return string.Format("{0} {1}", LargestWholeNumberValue.ToString(provider), LargestWholeNumberSymbol);
         }
@@ -235,9 +233,13 @@ namespace Humanizer.Bytes
         public string ToString(string format, IFormatProvider provider)
         {
             if (format == null)
-                throw new ArgumentNullException(nameof(format));
+                format = "G";
+
             if (provider == null)
-                throw new ArgumentNullException(nameof(provider));
+                provider = CultureInfo.CurrentCulture;
+
+            if (format == "G")
+                format = "0.##";
 
             if (!format.Contains("#") && !format.Contains("0"))
             {
