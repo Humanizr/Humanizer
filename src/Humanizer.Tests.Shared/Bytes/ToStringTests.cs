@@ -21,7 +21,6 @@
 //THE SOFTWARE.
 
 using Humanizer.Bytes;
-
 using Xunit;
 
 namespace Humanizer.Tests.Bytes
