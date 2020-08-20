@@ -166,7 +166,8 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     word += tens + "de";
                 }
-                else {
+                else
+                {
                     word += tens + "nde";
                 }
 
@@ -192,8 +193,10 @@ namespace Humanizer.Localisation.NumberToWords
                     word += Convert(divided, m.Gender) + m.Prefix + m.Name;
                 }
 
+                number %= m.Value;
+
                 // suffix -de/-te
-                if (divided > 0)
+                if (divided > 0 && number == 0)
                 {
                     switch (number)
                     {
@@ -206,10 +209,9 @@ namespace Humanizer.Localisation.NumberToWords
                     }
                 }
 
-                number %= m.Value;
                 if (number > 0)
                 {
-                    word += m.Postfix;
+                    word += ConvertToOrdinal(number);
                 }
             }
 
