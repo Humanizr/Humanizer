@@ -193,10 +193,8 @@ namespace Humanizer.Localisation.NumberToWords
                     word += Convert(divided, m.Gender) + m.Prefix + m.Name;
                 }
 
-                number %= m.Value;
-
                 // suffix -de/-te
-                if (divided > 0 && number == 0)
+                if (divided > 0 && (number % m.Value) == 0)
                 {
                     switch (number)
                     {
@@ -209,6 +207,7 @@ namespace Humanizer.Localisation.NumberToWords
                     }
                 }
 
+                number %= m.Value;
                 if (number > 0)
                 {
                     word += ConvertToOrdinal(number);
