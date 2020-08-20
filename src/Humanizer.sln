@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 	ProjectSection(SolutionItems) = preProject
 		..\NuSpecs\Humanizer.Core.af.nuspec = ..\NuSpecs\Humanizer.Core.af.nuspec
 		..\NuSpecs\Humanizer.Core.ar.nuspec = ..\NuSpecs\Humanizer.Core.ar.nuspec
+		..\NuSpecs\Humanizer.Core.az.nuspec = ..\NuSpecs\Humanizer.Core.az.nuspec
 		..\NuSpecs\Humanizer.Core.bg.nuspec = ..\NuSpecs\Humanizer.Core.bg.nuspec
 		..\NuSpecs\Humanizer.Core.bn-BD.nuspec = ..\NuSpecs\Humanizer.Core.bn-BD.nuspec
 		..\NuSpecs\Humanizer.Core.cs.nuspec = ..\NuSpecs\Humanizer.Core.cs.nuspec
@@ -52,6 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.he.nuspec = ..\NuSpecs\Humanizer.Core.he.nuspec
 		..\NuSpecs\Humanizer.Core.hr.nuspec = ..\NuSpecs\Humanizer.Core.hr.nuspec
 		..\NuSpecs\Humanizer.Core.hu.nuspec = ..\NuSpecs\Humanizer.Core.hu.nuspec
+		..\NuSpecs\Humanizer.Core.hy.nuspec = ..\NuSpecs\Humanizer.Core.hy.nuspec
 		..\NuSpecs\Humanizer.Core.id.nuspec = ..\NuSpecs\Humanizer.Core.id.nuspec
 		..\NuSpecs\Humanizer.Core.it.nuspec = ..\NuSpecs\Humanizer.Core.it.nuspec
 		..\NuSpecs\Humanizer.Core.ja.nuspec = ..\NuSpecs\Humanizer.Core.ja.nuspec
@@ -82,7 +84,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{f886a8da-3efc-4a89-91dd-06faf13da172}*SharedItemsImports = 4
 		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{fdec244b-f07e-4a5e-bb80-fbc6ac77a9aa}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

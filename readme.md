@@ -880,7 +880,7 @@ Also the reverse operation using the `FromRoman` extension.
 "IV".FromRoman() => 4
 "V".FromRoman() => 5
 ```
-Note that only integers smaller than 4000 can be converted to Roman numberals. 
+Note that only integers smaller than 4000 can be converted to Roman numerals. 
 
 ### <a id="metric-numerals">Metric numerals</a>
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
@@ -1240,7 +1240,7 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 
 ## <a id="main-contributors">Main contributors</a>
  - Mehdi Khalili ([@MehdiKhalili](https://twitter.com/MehdiKhalili))
- - Oren Novotny ([@onovotny](https://twitter.com/onovotny))
+ - Claire Novotny ([@clairernovotny](https://twitter.com/clairernovotny))
  - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
  - Max Malook ([@mexx](https://github.com/mexx))
 

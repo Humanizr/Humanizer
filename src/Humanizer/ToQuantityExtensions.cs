@@ -145,7 +145,16 @@ namespace Humanizer
             return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
 
         }
-        
+
+        /// <summary>
+        /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
+        /// </summary>
+        /// <param name="input">The word to be prefixed</param>
+        /// <param name="quantity">The quantity of the word</param>
+        /// <example>
+        /// "request".ToQuantity(0.2) => "0.2 requests"
+        /// </example>
+        /// <returns></returns>
         public static string ToQuantity(this string input, double quantity)
         {
             return ToQuantity(input, quantity, null, null);

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata minClientVersion="2.12">
+    <id>Humanizer.Core.hy</id>
+    <version>$version$</version>
+    <title>Humanizer Locale (hy)</title>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
+    <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
+    <icon>logo.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer Locale Armenian (hy)</description>
+    <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
+    <license type="expression">MIT</license>
+    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
+    <language>ru</language>
+    <dependencies>
+       <dependency id="Humanizer.Core" version="[$version$]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Humanizer\bin\Release\netstandard1.0\hy\*.*" target="lib\netstandard1.0\hy" />
+    <file src="Humanizer\bin\Release\netstandard2.0\hy\*.*" target="lib\netstandard2.0\hy" />
+    <file src="..\logo.png" target="logo.png" />
+  </files>
+</package>
