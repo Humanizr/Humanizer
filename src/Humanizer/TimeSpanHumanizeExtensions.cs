@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -145,7 +145,14 @@ namespace Humanizer
             {
                 return timespan.Days / _daysInAWeek;
             }
-            return 0;
+            else
+            {
+                var timespanRemaining = timespan - TimeSpan.FromDays(GetSpecialCaseYearAsInteger(timespan) * _daysInAYear)
+                                             - TimeSpan.FromDays(
+                                                 GetSpecialCaseMonthAsInteger(timespan, false) * _daysInAMonth);
+
+                return timespanRemaining.Days / _daysInAWeek;
+            }
         }
 
         private static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
@@ -154,12 +161,17 @@ namespace Humanizer
             {
                 return timespan.Days;
             }
-            if (timespan.Days < _daysInAMonth)
+            else
             {
-                var remainingDays = timespan.Days % _daysInAWeek;
+                var timespanRemaining = timespan - TimeSpan.FromDays(
+                                                     GetSpecialCaseYearAsInteger(timespan) * _daysInAYear) 
+                                                 - TimeSpan.FromDays(
+                                                     GetSpecialCaseMonthAsInteger(timespan, false) * _daysInAMonth)
+                                                 - TimeSpan.FromDays(
+                                                     GetSpecialCaseWeeksAsInteger(timespan, false) * _daysInAWeek);
+                var remainingDays = timespanRemaining.Days;
                 return remainingDays;
             }
-            return (int)(timespan.Days % _daysInAMonth);
         }
 
         private static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)
