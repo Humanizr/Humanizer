@@ -89,15 +89,15 @@ namespace Humanizer
         {
             if (timeUnitToGet <= maximumTimeUnit && timeUnitToGet >= minimumTimeUnit)
             {
-                var isTimeUnitToGetTheMaximumTimeUnit = (timeUnitToGet == maximumTimeUnit);
-                var numberOfTimeUnits = GetTimeUnitNumericalValue(timeUnitToGet, timespan, isTimeUnitToGetTheMaximumTimeUnit);
+                var numberOfTimeUnits = GetTimeUnitNumericalValue(timeUnitToGet, timespan, maximumTimeUnit);
                 return BuildFormatTimePart(cultureFormatter, timeUnitToGet, numberOfTimeUnits, toWords);
             }
             return null;
         }
 
-        private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
+            var isTimeUnitToGetTheMaximumTimeUnit = (timeUnitToGet == maximumTimeUnit);
             switch (timeUnitToGet)
             {
                 case TimeUnit.Millisecond:
@@ -109,7 +109,7 @@ namespace Humanizer
                 case TimeUnit.Hour:
                     return GetNormalCaseTimeAsInteger(timespan.Hours, timespan.TotalHours, isTimeUnitToGetTheMaximumTimeUnit);
                 case TimeUnit.Day:
-                    return GetSpecialCaseDaysAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
+                    return GetSpecialCaseDaysAsInteger(timespan, maximumTimeUnit);
                 case TimeUnit.Week:
                     return GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
                 case TimeUnit.Month:
@@ -148,13 +148,13 @@ namespace Humanizer
             return 0;
         }
 
-        private static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        private static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
-            if (isTimeUnitToGetTheMaximumTimeUnit)
+            if (maximumTimeUnit == TimeUnit.Day)
             {
                 return timespan.Days;
             }
-            if (timespan.Days < _daysInAMonth)
+            if (timespan.Days < _daysInAMonth || maximumTimeUnit == TimeUnit.Week)
             {
                 var remainingDays = timespan.Days % _daysInAWeek;
                 return remainingDays;
