@@ -279,6 +279,16 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData(3 * 7 + 4, 2, "3 weeks, 4 days")]
+        [InlineData(6 * 7 + 3, 2, "6 weeks, 3 days")]
+        [InlineData(72 * 7 + 6, 2, "72 weeks, 6 days")]
+        public void DaysWithPrecision(int days, int precision, string expected)
+        {
+            var actual = TimeSpan.FromDays(days).Humanize(precision: precision);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(50)]
         [InlineData(52)]
         public void TimeSpanWithMinAndMaxUnits_DoesNotReportExcessiveTime(int minutes)
