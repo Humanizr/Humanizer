@@ -119,7 +119,7 @@ namespace Humanizer.Localisation.Formatters
             }
 
             return toWords
-                ? resourceString.FormatWith(number.ToWords())
+                ? resourceString.FormatWith(number.ToWords(_culture))
                 : resourceString.FormatWith(number);
         }
 
