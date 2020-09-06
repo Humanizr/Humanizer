@@ -229,7 +229,7 @@
     <value>1 semaine</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>pas de temps</value>
+    <value>temps nul</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
     <value>{0} mois</value>
@@ -241,7 +241,7 @@
     <value>1 mois</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>1 année</value>
+    <value>1 an</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>avant-hier</value>
