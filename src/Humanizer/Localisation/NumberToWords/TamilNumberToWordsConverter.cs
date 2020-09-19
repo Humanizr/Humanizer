@@ -44,7 +44,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number));
+                return string.Format("கழித்தல் {0}", Convert(-number));
             }
 
             var parts = new List<string>();
@@ -94,7 +94,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
             else if (isOrdinal)
             {
-                parts[parts.Count - 1] += "th";
+                parts[parts.Count - 1] += "வது";
             }
 
             var toWords = string.Join(" ", parts.ToArray());
@@ -117,7 +117,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    return UnitsMap[number] + "th";
+                    return UnitsMap[number] + "வது";
                 }
             }
             else
@@ -234,9 +234,9 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 local_word = "ஒரு ";
             }
-            else local_word += GetTensValue((number / 10000000), false)+ " "  ;
+            else if(num_above_10>0) local_word += GetTensValue(num_above_10, false)+ " "  ;
 
-            local_word +=  str_crore;
+            local_word =local_word.TrimEnd()+" "+  str_crore;
             if (number % 10000000 == 0 || number % 100000000 == 0)
             {
                 local_word += "";
