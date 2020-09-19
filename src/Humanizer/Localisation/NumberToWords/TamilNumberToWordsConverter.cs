@@ -38,14 +38,10 @@ namespace Humanizer.Localisation.NumberToWords
         private string Convert(long number, bool isOrdinal)
         {
             if (number == 0)
-            {
                 return GetUnitValue(0, isOrdinal);
-            }
 
             if (number < 0)
-            {
                 return string.Format("கழித்தல் {0}", Convert(-number));
-            }
 
             var parts = new List<string>();
 
@@ -88,21 +84,14 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 100) > 0) parts.Add(GetHundredsValue(ref number));
 
             if (number > 0)
-            {
-             
                 parts.Add(GetTensValue(number, isOrdinal));
-            }
             else if (isOrdinal)
-            {
                 parts[parts.Count - 1] += "வது";
-            }
 
             var toWords = string.Join(" ", parts.ToArray());
 
             if (isOrdinal)
-            {
                 toWords = RemoveOnePrefix(toWords);
-            }
 
             return toWords;
         }
@@ -112,43 +101,32 @@ namespace Humanizer.Localisation.NumberToWords
             if (isOrdinal)
             {
                 if (ExceptionNumbersToWords(number, out var exceptionString))
-                {
                     return exceptionString;
-                }
                 else
-                {
                     return UnitsMap[number] + "வது";
-                }
             }
             else
-            {
                 return UnitsMap[number];
-            }
         }
 
         private static string GetTensValue(long number, bool isOrdinal, bool isThousand = false)
         {
             var local_word = "";
-            if (number < 20)
-            {
+            if (number < 20) 
                 local_word = GetUnitValue(number, isOrdinal);
-            }
             else if ((number >= 20) && (number <= 99))
             {
                 var lastPart = TensMap[number / 10];
                 var quot = number / 10;
                 if ((number % 10) > 0)
                 {
-                    if (quot == 9)
-                    {
+                    if (quot == 9) 
                         lastPart += "ற்றி ";
-                    }
                     else if (quot == 7 || quot == 8 || quot == 4)
-                    {
                         lastPart += "த்தி ";
-                    }
                     else
                         lastPart += "த்து ";
+                    
                     if (!isThousand) lastPart += string.Format("{0}", GetUnitValue(number % 10, isOrdinal));
                 }
                 else if (number % 10 == 0)
@@ -169,9 +147,7 @@ namespace Humanizer.Localisation.NumberToWords
                     }
                 }
                 else if (isOrdinal)
-                {
                     lastPart = lastPart.TrimEnd('y') + "ieth";
-                }
 
                 local_word = lastPart;
             }
@@ -187,18 +163,14 @@ namespace Humanizer.Localisation.NumberToWords
                 local_word += " " + LakhsMap[0];
             }
             else if (num_above_10 == 1)
-            {
                 local_word = "ஒரு " + LakhsMap[0];
-            }
             else local_word += GetTensValue((number / 100000), isOrdinal) + " " + LakhsMap[0];
 
             if (number % 1000000 == 0 || number % 100000 == 0)
-            {
                 local_word += "ம்";
-            }
             else
                 local_word += "த்து";
-            
+
             number %= 100000;
             return local_word;
         }
@@ -210,7 +182,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (num_above_10 > 99999 && num_above_10 <= 9999999)
             {
-                local_word = GetLakhsValue(ref num_above_10,false);
+                local_word = GetLakhsValue(ref num_above_10, false);
                 local_word += " ";
             }
 
@@ -219,7 +191,7 @@ namespace Humanizer.Localisation.NumberToWords
                 local_word += GetThousandsValue(ref num_above_10);
                 local_word += " ";
             }
-            if (num_above_10 > 99 && num_above_10<=999)
+            if (num_above_10 > 99 && num_above_10 <= 999)
             {
                 local_word += GetHundredsValue(ref num_above_10);
                 local_word += " ";
@@ -228,22 +200,17 @@ namespace Humanizer.Localisation.NumberToWords
             if (num_above_10 >= 20)
             {
                 local_word += GetTensValue(num_above_10, false, false);
-                local_word += " " ;
+                local_word += " ";
             }
             else if (num_above_10 == 1)
-            {
                 local_word = "ஒரு ";
-            }
-            else if(num_above_10>0) local_word += GetTensValue(num_above_10, false)+ " "  ;
+            else if (num_above_10 > 0) local_word += GetTensValue(num_above_10, false) + " ";
 
-            local_word =local_word.TrimEnd()+" "+  str_crore;
+            local_word = local_word.TrimEnd() + " " + str_crore;
             if (number % 10000000 == 0 || number % 100000000 == 0)
-            {
                 local_word += "";
-            }
             else
                 local_word += "யே";
-
 
             number %= 10000000;
             return local_word;
@@ -268,19 +235,11 @@ namespace Humanizer.Localisation.NumberToWords
                 local_word += ThousandsMap[(number / 1000) - 1];
 
             number %= 1000;
-            if (number > 10)
-            {
-
-            }
+            
             if (number > 0)
-            {
                 local_word = local_word + "யிரத்து";
-            }
             else
-            {
                 local_word = local_word + "யிரம்";
-            }
-
 
             return local_word;
         }
@@ -295,19 +254,14 @@ namespace Humanizer.Localisation.NumberToWords
                     if (number % 100 == 0)
                         local_word += "ம்";
                     else
-                    {
                         local_word += "த்து";
-                    }
                 }
                 else if (number % 100 >= 1)
-                {
                     local_word += "ற்று";
-                }
                 else
                     local_word += "று";
 
                 number %= 100;
-                //parts.Add(local_word);
 
                 return local_word;
             }
@@ -317,9 +271,7 @@ namespace Humanizer.Localisation.NumberToWords
         {
             // one hundred => hundredth
             if (toWords.IndexOf("one", StringComparison.Ordinal) == 0)
-            {
                 toWords = toWords.Remove(0, 4);
-            }
 
             return toWords;
         }
