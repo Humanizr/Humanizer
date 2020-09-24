@@ -45,6 +45,7 @@ namespace Humanizer.Configuration
             Register("bg", new BulgarianNumberToWordsConverter());
             Register("hy", new ArmenianNumberToWordsConverter());
             Register("az", new AzerbaijaniNumberToWordsConverter());
+            Register("ja", new JapaneseNumberToWordsConverter());
         }
     }
 }
