@@ -190,5 +190,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)TransformersTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TruncatorTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UseCultureAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\NumberToWordsTests.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
 </Project>
