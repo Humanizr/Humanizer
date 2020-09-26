@@ -128,7 +128,7 @@ namespace Humanizer.Inflections
 
             if (word.Length < 1)
             {
-                return null;
+                return word;
             }
 
             if (IsUncountable(word))
