@@ -32,6 +32,10 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expectedString, baseDateUtc.Add(deltaFromBase).Humanize(utcDate: true, dateToCompareAgainst: baseDateUtc, culture: culture));
             Assert.Equal(expectedString, baseDate.Add(deltaFromBase).Humanize(false, baseDate, culture: culture));
+
+            // Compared with default utcDate
+            Assert.Equal(expectedString, baseDateUtc.Add(deltaFromBase).Humanize(utcDate: null, dateToCompareAgainst: baseDateUtc, culture: culture));
+            Assert.Equal(expectedString, baseDate.Add(deltaFromBase).Humanize(null, baseDate, culture: culture));
         }
 
         public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null, CultureInfo culture = null, DateTime? baseDate = null, DateTime? baseDateUtc = null)

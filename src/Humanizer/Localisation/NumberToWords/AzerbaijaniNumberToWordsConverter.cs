@@ -6,7 +6,7 @@ namespace Humanizer.Localisation.NumberToWords
     internal class AzerbaijaniNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz" };
-        private static readonly string[] TensMap = { "sıfır", "on", "yirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan" };
+        private static readonly string[] TensMap = { "sıfır", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan" };
 
         private static readonly Dictionary<char, string> OrdinalSuffix = new Dictionary<char, string>
         {

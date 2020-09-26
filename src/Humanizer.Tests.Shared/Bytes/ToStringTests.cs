@@ -99,5 +99,11 @@ namespace Humanizer.Tests.Bytes
         {
             Assert.Equal("-512 KB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
         }
+
+        [Fact]
+        public void ReturnsBytesViaGeneralFormat()
+        {
+            Assert.Equal("10 B", $"{ByteSize.FromBytes(10)}");
+        }
     }
 }
