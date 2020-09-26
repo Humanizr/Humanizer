@@ -93,7 +93,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("cache", "caches");
 
             //Fix 975
-            _default.AddIrregular("ex", "exes");
+            _default.AddIrregular("ex", "exes", matchEnding: false);
 
             _default.AddIrregular("is", "are", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);
