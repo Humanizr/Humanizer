@@ -59,8 +59,6 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(expectedValue, text);
         }
 
-
-
         [Theory]
         [InlineData(TimeUnit.Millisecond)]
         [InlineData(TimeUnit.Day)]
@@ -116,6 +114,5 @@ namespace Humanizer.Tests.Bytes
 
             Assert.Equal(leftByteRate.CompareTo(rightByteRate), expectedValue);
         }
-
     }
 }

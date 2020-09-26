@@ -76,6 +76,7 @@ namespace Humanizer.Bytes
             return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
                 .Humanize(format) + '/' + displayUnit;
         }
+        
         /// <summary>
         /// Returns the humanized string with default parameters.
         /// </summary>
