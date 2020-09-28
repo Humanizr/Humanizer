@@ -17,7 +17,7 @@ namespace Humanizer.Localisation.NumberToWords
         private readonly string[] BillionOrdinalSingular = { "einmilliard", "einemilliarde" };
         private readonly string[] BillionOrdinalPlural = { "{0}milliard", "{0}milliarden" };
 
-        public override string Convert(long number, GrammaticalGender gender)
+        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
             if (number == 0)
             {

@@ -29,7 +29,7 @@ namespace Humanizer.Localisation.NumberToWords
             {9, "noveno"},
         };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)
             {

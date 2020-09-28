@@ -26,7 +26,7 @@ namespace Humanizer.Localisation.NumberToWords
             _culture = culture;
         }
 
-        public override string Convert(long number, GrammaticalGender gender)
+        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
             if (number == 0)
             {

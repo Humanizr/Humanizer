@@ -38,7 +38,7 @@ namespace Humanizer.Localisation.NumberToWords
             _culture = culture;
         }
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)
             {

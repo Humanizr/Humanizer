@@ -39,12 +39,12 @@ namespace Humanizer.Localisation.NumberToWords
             "осемнадесет", "деветнадесет"
         };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             return Convert(input, gender, false);
         }
 
-        private string Convert(long input, GrammaticalGender gender, bool isOrdinal)
+        private string Convert(long input, GrammaticalGender gender, bool isOrdinal, bool addAnd = true)
         {
             if (input > int.MaxValue || input < int.MinValue)
             {

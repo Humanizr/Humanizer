@@ -5,7 +5,7 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class RomanianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        public override string Convert(long number, GrammaticalGender gender)
+        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
             if (number > Int32.MaxValue || number < Int32.MinValue)
             {
