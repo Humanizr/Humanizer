@@ -542,7 +542,7 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 The overload of `Singularize` with `plurality` argument is obsolete and was removed in version 2.0.
 
 ## <a id="adding-words">Adding Words</a>
-Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabluary` used by `Inflector`):
+Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabulary` used by `Inflector`):
 
 ```C#
 // Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx.
