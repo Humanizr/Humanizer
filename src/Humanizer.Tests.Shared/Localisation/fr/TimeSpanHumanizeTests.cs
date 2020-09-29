@@ -1,4 +1,6 @@
 ﻿using System;
+using Humanizer.Localisation;
+
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.fr
@@ -7,15 +9,15 @@ namespace Humanizer.Tests.Localisation.fr
     public class TimeSpanHumanizeTests
     {
 
-        [InlineData(366, "1 année")]
+        [Theory]
+        [Trait("Translation", "Google")]
+        [InlineData(366, "1 an")]
         [InlineData(731, "2 ans")]
         [InlineData(1096, "3 ans")]
         [InlineData(4018, "11 ans")]
-        [Theory]
-        [Trait("Translation", "Google")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -26,7 +28,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(335, "11 mois")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -83,12 +85,20 @@ namespace Humanizer.Tests.Localisation.fr
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void NoTime()
+        [Theory]
+        [InlineData(TimeUnit.Year, "0 an")]
+        [InlineData(TimeUnit.Month, "0 mois")]
+        [InlineData(TimeUnit.Week, "0 semaine")]
+        [InlineData(TimeUnit.Day, "0 jour")]
+        [InlineData(TimeUnit.Hour, "0 heure")]
+        [InlineData(TimeUnit.Minute, "0 minute")]
+        [InlineData(TimeUnit.Second, "0 seconde")]
+        [InlineData(TimeUnit.Millisecond, "0 milliseconde")]
+        public void NoTime(TimeUnit minUnit, string expected)
         {
             var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize();
-            Assert.Equal("0 millisecondes", actual);
+            var actual = noTime.Humanize(minUnit: minUnit);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -96,7 +106,7 @@ namespace Humanizer.Tests.Localisation.fr
         {
             var noTime = TimeSpan.Zero;
             var actual = noTime.Humanize(toWords: true);
-            Assert.Equal("pas de temps", actual);
+            Assert.Equal("temps nul", actual);
         }
     }
 }
