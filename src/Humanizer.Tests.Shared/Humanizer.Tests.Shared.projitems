@@ -104,6 +104,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\it\OrdinalizerTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\it\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\DateHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\mt\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\mt\NumberToWordsTests.cs" />
@@ -190,6 +191,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)TransformersTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TruncatorTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UseCultureAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\NumberToWordsTests.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
 </Project>
