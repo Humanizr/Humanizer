@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//Author:Mohamed Mahir - mahir78@gmail.com
 
 namespace Humanizer.Localisation.NumberToWords
 {
