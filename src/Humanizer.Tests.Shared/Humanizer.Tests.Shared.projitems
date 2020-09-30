@@ -104,6 +104,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\it\OrdinalizerTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\it\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\DateHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\ja\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\mt\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\mt\NumberToWordsTests.cs" />
