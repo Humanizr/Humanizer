@@ -14,7 +14,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] TensOrdinal = { string.Empty, "десят", "двадцят", "тридцят", "сороков", "п'ятдесят", "шістдесят", "сімдесят", "вісімдесят", "дев'яност" };
         private static readonly string[] UnitsOrdinal = { "нульов", "перш", "друг", "трет", "четверт", "п'ят", "шост", "сьом", "восьм", "дев'ят", "десят", "одинадцят", "дванадцят", "тринадцят", "чотирнадцят", "п'ятнадцят", "шістнадцят", "сімнадцят", "вісімнадцят", "дев'ятнадцят" };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input == 0)
             {

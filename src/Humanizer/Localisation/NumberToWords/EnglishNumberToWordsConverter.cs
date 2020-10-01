@@ -25,12 +25,17 @@ namespace Humanizer.Localisation.NumberToWords
             return Convert(number, false);
         }
 
+        public override string Convert(long number, bool addAnd = true)
+        {
+            return Convert(number, false, addAnd);
+        }
+
         public override string ConvertToOrdinal(int number)
         {
             return Convert(number, true);
         }
 
-        private string Convert(long number, bool isOrdinal)
+        private string Convert(long number, bool isOrdinal, bool addAnd = true)
         {
             if (number == 0)
             {
@@ -88,7 +93,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number > 0)
             {
-                if (parts.Count != 0)
+                if (parts.Count != 0 && addAnd)
                 {
                     parts.Add("and");
                 }

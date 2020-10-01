@@ -783,6 +783,14 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru")) => "один"
 ```
 
+Another overload of the method allow you to pass a bool to remove the "And" that can be added before the last number:
+
+```C#
+3501.ToWords(false) => "three thousand five hundred one"
+102.ToWords(false) => "one hundred two" 
+``` 
+This method can be useful for writing checks for example.
+
 ### <a id="number-toordinalwords">Number to ordinal words</a>
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
 

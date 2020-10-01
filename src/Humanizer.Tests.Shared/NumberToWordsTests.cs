@@ -40,6 +40,13 @@ namespace Humanizer.Tests
             Assert.Equal(expected, number.ToWords());
         }
 
+        [InlineData(3501L, "three thousand five hundred one", false)]
+        [Theory]
+        public void ToWordsWithoutAnd(int number, string expected, bool addAnd)
+        {
+            Assert.Equal(expected, number.ToWords(addAnd));
+        }
+
         [InlineData(1L, "one")]
         [InlineData(11L, "eleven")]
         [InlineData(111L, "one hundred and eleven")]
