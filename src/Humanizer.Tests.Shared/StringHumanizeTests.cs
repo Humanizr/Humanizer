@@ -92,6 +92,8 @@
         [InlineData("CanReturnSentenceCase", "Can return sentence case")]
         [InlineData("", "")]
         [InlineData("égoïste", "Égoïste")]
+        [InlineData("Normal; Normal and PascalCase", "Normal; normal and pascal case")]
+        [InlineData("I,and No One else", "I, and no one else")]
         public void CanHumanizeIntoSentenceCase(string input, string expectedResult)
         {
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.Sentence));
