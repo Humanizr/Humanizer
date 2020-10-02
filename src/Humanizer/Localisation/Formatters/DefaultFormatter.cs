@@ -66,9 +66,9 @@ namespace Humanizer.Localisation.Formatters
         /// <param name="toWords"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false)
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false, bool abbreviated = false)
         {
-            return GetResourceForTimeSpan(timeUnit, unit, toWords);
+            return GetResourceForTimeSpan(timeUnit, unit, toWords, abbreviated);
         }
 
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
@@ -77,10 +77,10 @@ namespace Humanizer.Localisation.Formatters
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
+        private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false, bool abbreviated = false)
         {
-            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
-            return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
+            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords, abbreviated);
+            return count == 1 && !abbreviated ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
         }
 
         /// <summary>

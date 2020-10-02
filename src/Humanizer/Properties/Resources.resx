@@ -675,4 +675,28 @@
   <data name="NNW_Short" xml:space="preserve">
     <value>NNW</value>
   </data>
+  <data name="TimeSpanHumanize_AbbSecond" xml:space="preserve">
+    <value>{0} s</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbDay" xml:space="preserve">
+    <value>{0} d</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbHour" xml:space="preserve">
+    <value>{0} h</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbMillisecond" xml:space="preserve">
+    <value>{0} ms</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbMinute" xml:space="preserve">
+    <value>{0} m</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbWeek" xml:space="preserve">
+    <value>{0} W</value>
+  </data>  
+  <data name="TimeSpanHumanize_AbbMonth" xml:space="preserve">
+    <value>{0} M</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbYear" xml:space="preserve">
+    <value>{0} Y</value>
+  </data>
 </root>

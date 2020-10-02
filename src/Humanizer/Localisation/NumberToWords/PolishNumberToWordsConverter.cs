@@ -43,7 +43,7 @@ namespace Humanizer.Localisation.NumberToWords
             _culture = culture;
         }
         
-        public override string Convert(long input, GrammaticalGender gender)
+        public string Convert(long input, GrammaticalGender gender)
         {
             if (input == 0)
             {
@@ -55,7 +55,12 @@ namespace Humanizer.Localisation.NumberToWords
 
             return string.Join(" ", parts);
         }
-        
+
+        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
+        {
+            return Convert(number, gender);
+        }
+
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             return number.ToString(_culture);

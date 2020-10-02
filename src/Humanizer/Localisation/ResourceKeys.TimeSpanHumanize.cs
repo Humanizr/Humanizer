@@ -20,8 +20,9 @@
             /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
             /// <param name="count">Number of units, default is One.</param>
             /// <param name="toWords">Result to words, default is false.</param>
+            /// <param name="abbreviate">Resulting units abbreviated => seconds: s. Default false</param>
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
-            public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false)
+            public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false, bool abbreviate = false)
             {
                 ValidateRange(count);
 
@@ -30,6 +31,8 @@
                     return Zero;
                 }
 
+                if (abbreviate) return TimeSpanFormat.FormatWith(Abbreviate, unit, "");
+                
                 return TimeSpanFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s");
             }
         }
