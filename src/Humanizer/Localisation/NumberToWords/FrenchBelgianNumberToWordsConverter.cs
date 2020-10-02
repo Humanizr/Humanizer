@@ -4,7 +4,7 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class FrenchBelgianNumberToWordsConverter : FrenchNumberToWordsConverterBase
     {
-        protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref int number, GrammaticalGender gender, bool pluralize)
+        protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
         {
             if (number == 80)
             {
@@ -20,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        protected override string GetTens(int tens)
+        protected override string GetTens(long tens)
         {
             if (tens == 8)
             {

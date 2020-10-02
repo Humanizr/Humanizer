@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -8,14 +7,8 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] UnitsMap = { "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf" };
         private static readonly string[] TensMap = { "zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "septante", "octante", "nonante" };
 
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
-
             if (number == 0)
             {
                 return UnitsMap[0];
@@ -29,6 +22,9 @@ namespace Humanizer.Localisation.NumberToWords
                 number = -number;
             }
 
+            CollectParts(parts, ref number, 1000000000000000000, "trillion");
+            CollectParts(parts, ref number, 1000000000000000, "billiard");
+            CollectParts(parts, ref number, 1000000000000, "billion");
             CollectParts(parts, ref number, 1000000000, "milliard");
             CollectParts(parts, ref number, 1000000, "million");
             CollectThousands(parts, ref number, 1000, "mille");
@@ -75,7 +71,7 @@ namespace Humanizer.Localisation.NumberToWords
             return convertedNumber;
         }
 
-        protected static string GetUnits(int number, GrammaticalGender gender)
+        protected static string GetUnits(long number, GrammaticalGender gender)
         {
             if (number == 1 && gender == GrammaticalGender.Feminine)
             {
@@ -85,7 +81,7 @@ namespace Humanizer.Localisation.NumberToWords
             return UnitsMap[number];
         }
 
-        private static void CollectHundreds(ICollection<string> parts, ref int number, int d, string form, bool pluralize)
+        private static void CollectHundreds(ICollection<string> parts, ref long number, long d, string form, bool pluralize)
         {
             if (number < d)
             {
@@ -113,7 +109,7 @@ namespace Humanizer.Localisation.NumberToWords
             number %= d;
         }
 
-        private void CollectParts(ICollection<string> parts, ref int number, int d, string form)
+        private void CollectParts(ICollection<string> parts, ref long number, long d, string form)
         {
             if (number < d)
             {
@@ -136,7 +132,7 @@ namespace Humanizer.Localisation.NumberToWords
             number %= d;
         }
 
-        private void CollectPartsUnderAThousand(ICollection<string> parts, int number, GrammaticalGender gender, bool pluralize)
+        private void CollectPartsUnderAThousand(ICollection<string> parts, long number, GrammaticalGender gender, bool pluralize)
         {
             CollectHundreds(parts, ref number, 100, "cent", pluralize);
 
@@ -146,7 +142,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private void CollectThousands(ICollection<string> parts, ref int number, int d, string form)
+        private void CollectThousands(ICollection<string> parts, ref long number, int d, string form)
         {
             if (number < d)
             {
@@ -164,7 +160,7 @@ namespace Humanizer.Localisation.NumberToWords
             number %= d;
         }
 
-        protected virtual void CollectPartsUnderAHundred(ICollection<string> parts, ref int number, GrammaticalGender gender, bool pluralize)
+        protected virtual void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
         {
             if (number < 20)
             {
@@ -191,7 +187,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        protected virtual string GetTens(int tens)
+        protected virtual string GetTens(long tens)
         {
             return TensMap[tens];
         }
