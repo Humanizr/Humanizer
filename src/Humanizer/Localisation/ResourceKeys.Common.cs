@@ -9,6 +9,7 @@ namespace Humanizer.Localisation
     {
         private const string Single = "Single";
         private const string Multiple = "Multiple";
+        private const string Abbreviate = "Abb";
 
         private static void ValidateRange(int count)
         {

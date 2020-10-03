@@ -276,4 +276,76 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
     <value>{0} milliseconde</value>
   </data>
+  <data name="TimeSpanHumanize_AbbDay" xml:space="preserve">
+    <value>{0} j</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbHour" xml:space="preserve">
+    <value>{0} h</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbMillisecond" xml:space="preserve">
+    <value>{0} ms</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbMinute" xml:space="preserve">
+    <value>{0} m</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbMonth" xml:space="preserve">
+    <value>{0} M</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbSecond" xml:space="preserve">
+    <value>{0} s</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbWeek" xml:space="preserve">
+    <value>{0} W</value>
+  </data>
+  <data name="TimeSpanHumanize_AbbYear" xml:space="preserve">
+    <value>{0} Y</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>un jour</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>une heure</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>une milliseconde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>une minute</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>un mois</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>une seconde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>une semaine</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>un an</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} semaines</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} jours</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} heures</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} millisecondes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} minutes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} mois</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} secondes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} ans</value>
+  </data>
 </root>

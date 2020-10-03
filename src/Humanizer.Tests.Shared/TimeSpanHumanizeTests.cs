@@ -228,6 +228,15 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData(34390862500, "1 Y, 1 M, 2 d, 1 h, 1 m, 2 s, 500 ms", TimeUnit.Millisecond)]
+        [InlineData(604800000, "1 W", TimeUnit.Millisecond)]
+        public void TimeSpanWithAllUnitsAbb(long ms, string expected, TimeUnit minUnit)
+        {
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(7, maxUnit: TimeUnit.Year,toWords: false, abbreviated: true);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(0, 3, "no time", true)]
         [InlineData(0, 2, "no time", true)]
         [InlineData(0, 3, "0 milliseconds")]
