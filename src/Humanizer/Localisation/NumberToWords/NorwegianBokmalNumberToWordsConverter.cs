@@ -21,7 +21,7 @@ namespace Humanizer.Localisation.NumberToWords
             {12, "tolvte"}
         };
 
-        public override string Convert(long number, GrammaticalGender gender)
+        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
             if (number > Int32.MaxValue || number < Int32.MinValue)
             {

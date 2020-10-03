@@ -34,7 +34,7 @@ namespace Humanizer.Localisation.NumberToWords
             "tmintax-il", "dsatax-il"
         };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             bool negativeNumber = false;
 

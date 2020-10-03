@@ -9,16 +9,22 @@
         /// <returns></returns>
         public abstract string Convert(long number);
 
+        public virtual string Convert(long number, bool addAnd)
+        {
+            return Convert(number);
+        }
+
         /// <summary>
         /// Converts the number to string ignoring the provided grammatical gender
         /// </summary>
         /// <param name="number"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public virtual string Convert(long number, GrammaticalGender gender)
+        public virtual string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
             return Convert(number);
         }
+
 
         /// <summary>
         /// Converts the number to ordinal string
