@@ -44,6 +44,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("nl");
             RegisterDefaultFormatter("bn-BD");
             RegisterDefaultFormatter("it");
+            RegisterDefaultFormatter("ta");
             RegisterDefaultFormatter("uz-Latn-UZ");
             RegisterDefaultFormatter("uz-Cyrl-UZ");
             RegisterDefaultFormatter("zh-CN");

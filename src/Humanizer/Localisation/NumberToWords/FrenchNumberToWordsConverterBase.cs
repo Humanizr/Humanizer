@@ -8,7 +8,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] UnitsMap = { "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf" };
         private static readonly string[] TensMap = { "zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "septante", "octante", "nonante" };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)
             {

@@ -364,6 +364,10 @@ namespace Humanizer.Tests
             
             //Issue #789
             yield return new object[] { "cache", "caches" };
+
+            //Issue #975, added by Alex Boutin
+            yield return new object[] { "ex", "exes" };
+            yield return new object[] { "", "" };
         }
 
         IEnumerator IEnumerable.GetEnumerator()

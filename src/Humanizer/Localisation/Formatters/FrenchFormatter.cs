@@ -16,6 +16,11 @@
                 return resourceKey + DualPostfix;
             }
 
+            if (number == 0 && resourceKey.StartsWith("TimeSpanHumanize_Multiple"))
+            {
+                return resourceKey + "_Singular";
+            }
+
             return resourceKey;
         }
     }

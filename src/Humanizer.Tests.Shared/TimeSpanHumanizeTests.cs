@@ -279,6 +279,16 @@ namespace Humanizer.Tests
         }
 
         [Theory]
+        [InlineData(3 * 7 + 4, 2, "3 weeks, 4 days")]
+        [InlineData(6 * 7 + 3, 2, "6 weeks, 3 days")]
+        [InlineData(72 * 7 + 6, 2, "72 weeks, 6 days")]
+        public void DaysWithPrecision(int days, int precision, string expected)
+        {
+            var actual = TimeSpan.FromDays(days).Humanize(precision: precision);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(50)]
         [InlineData(52)]
         public void TimeSpanWithMinAndMaxUnits_DoesNotReportExcessiveTime(int minutes)
@@ -364,7 +374,7 @@ namespace Humanizer.Tests
         [InlineData(1299630020, 3, "2 weeks, 1 day, and 1 hour")]
         [InlineData(1299630020, 4, "2 weeks, 1 day, 1 hour, and 30 seconds")]
         [InlineData(1299630020, 5, "2 weeks, 1 day, 1 hour, 30 seconds, and 20 milliseconds")]
-        public void TimeSpanWithPrecisionAndAlternativeCollectionFormatter(int milliseconds, int precision, 
+        public void TimeSpanWithPrecisionAndAlternativeCollectionFormatter(int milliseconds, int precision,
             string expected, bool toWords = false)
         {
             var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, collectionSeparator: null, toWords: toWords);
@@ -432,6 +442,16 @@ namespace Humanizer.Tests
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize(precision: precision, culture: new CultureInfo(culture), collectionSeparator: collectionSeparator);
             Assert.Equal(expected, actual);
+        }
+        [Theory]
+        [InlineData(31 * 4, 1, "en-US", "four months")]
+        [InlineData(236,2,"ar", "سبعة أشهر, اثنان و عشرون يوم")]
+        [InlineData(321, 2,"es", "diez meses, dieciséis días")]
+        public void CanSpecifyCultureExplicitlyToWords(int days, int precision,string culture, string expected)
+        {
+            var timeSpan = new TimeSpan(days, 0, 0, 0);
+            var actual = timeSpan.Humanize(precision: precision, culture: new CultureInfo(culture), maxUnit: TimeUnit.Year, toWords: true);
+            Assert.Equal(expected: expected, actual);
         }
     }
 }

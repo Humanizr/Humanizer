@@ -42,9 +42,12 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(2000, "dwa tysiące")]
         [InlineData(5000, "pięć tysięcy")]
         [InlineData(10000, "dziesięć tysięcy")]
+        [InlineData(12000, "dwanaście tysięcy")]
         [InlineData(20000, "dwadzieścia tysięcy")]
         [InlineData(22000, "dwadzieścia dwa tysiące")]
         [InlineData(25000, "dwadzieścia pięć tysięcy")]
+        [InlineData(31000, "trzydzieści jeden tysięcy")]
+        [InlineData(34000, "trzydzieści cztery tysiące")]
         [InlineData(100000, "sto tysięcy")]
         [InlineData(500000, "pięćset tysięcy")]
         [InlineData(1000000, "milion")]
@@ -55,9 +58,57 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(1501001892, "miliard pięćset jeden milionów tysiąc osiemset dziewięćdziesiąt dwa")]
         [InlineData(2147483647, "dwa miliardy sto czterdzieści siedem milionów czterysta osiemdziesiąt trzy tysiące sześćset czterdzieści siedem")]
         [InlineData(-1501001892, "minus miliard pięćset jeden milionów tysiąc osiemset dziewięćdziesiąt dwa")]
-        public void ToWordsPolish(int number, string expected)
+        [InlineData(long.MaxValue, 
+            "dziewięć trylionów " +
+            "dwieście dwadzieścia trzy biliardy " +
+            "trzysta siedemdziesiąt dwa biliony " + 
+            "trzydzieści sześć miliardów " +
+            "osiemset pięćdziesiąt cztery miliony " +
+            "siedemset siedemdziesiąt pięć tysięcy " +
+            "osiemset siedem")]
+        [InlineData(long.MinValue, 
+            "minus dziewięć trylionów " +
+            "dwieście dwadzieścia trzy biliardy " +
+            "trzysta siedemdziesiąt dwa biliony " + 
+            "trzydzieści sześć miliardów " +
+            "osiemset pięćdziesiąt cztery miliony " +
+            "siedemset siedemdziesiąt pięć tysięcy " +
+            "osiemset osiem")]
+        public void ToWordsPolish(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(-1, "minus jeden", GrammaticalGender.Masculine)]
+        [InlineData(-1, "minus jedna", GrammaticalGender.Feminine)]
+        [InlineData(-1, "minus jedno", GrammaticalGender.Neuter)]
+        [InlineData(-2, "minus dwa", GrammaticalGender.Masculine)]
+        [InlineData(-2, "minus dwie", GrammaticalGender.Feminine)]
+        [InlineData(-2, "minus dwa", GrammaticalGender.Neuter)]
+        [InlineData(1, "jeden", GrammaticalGender.Masculine)]
+        [InlineData(1, "jedna", GrammaticalGender.Feminine)]
+        [InlineData(1, "jedno", GrammaticalGender.Neuter)]
+        [InlineData(2, "dwa", GrammaticalGender.Masculine)]
+        [InlineData(2, "dwie", GrammaticalGender.Feminine)]
+        [InlineData(2, "dwa", GrammaticalGender.Neuter)]
+        [InlineData(121, "sto dwadzieścia jeden", GrammaticalGender.Masculine)]
+        [InlineData(121, "sto dwadzieścia jeden", GrammaticalGender.Feminine)]
+        [InlineData(121, "sto dwadzieścia jeden", GrammaticalGender.Neuter)]
+        [InlineData(122, "sto dwadzieścia dwa", GrammaticalGender.Masculine)]
+        [InlineData(122, "sto dwadzieścia dwie", GrammaticalGender.Feminine)]
+        [InlineData(122, "sto dwadzieścia dwa", GrammaticalGender.Neuter)]
+        [InlineData(-2542, "minus dwa tysiące pięćset czterdzieści dwa", GrammaticalGender.Masculine)]
+        [InlineData(-2542, "minus dwa tysiące pięćset czterdzieści dwie", GrammaticalGender.Feminine)]
+        [InlineData(-2542, "minus dwa tysiące pięćset czterdzieści dwa", GrammaticalGender.Neuter)]
+        [InlineData(1000001, "milion jeden", GrammaticalGender.Feminine)]
+        [InlineData(-1000001, "minus milion jeden", GrammaticalGender.Feminine)]
+        [InlineData(1000002, "milion dwa", GrammaticalGender.Masculine)]
+        [InlineData(1000002, "milion dwie", GrammaticalGender.Feminine)]
+        [InlineData(1000002, "milion dwa", GrammaticalGender.Neuter)]
+        public void ToWordsPolishWithGender(int number, string expected, GrammaticalGender gender)
+        {
+            Assert.Equal(expected, number.ToWords(gender));
         }
     }
 }
