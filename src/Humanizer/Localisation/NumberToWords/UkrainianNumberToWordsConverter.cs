@@ -28,11 +28,11 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add("мінус");
             }
 
-            CollectParts(parts, ref input, 1000000000000000000, GrammaticalGender.Masculine, "квінтильйон", "квінтильйона", "квінтильйонів");
-            CollectParts(parts, ref input, 1000000000000000, GrammaticalGender.Masculine, "квадрильйон", "квадрильйона", "квадрильйонів");
-            CollectParts(parts, ref input, 1000000000000, GrammaticalGender.Masculine, "трильйон", "трильйона", "трильйонів");
-            CollectParts(parts, ref input, 1000000000, GrammaticalGender.Masculine, "мільярд", "мільярда", "мільярдів");
-            CollectParts(parts, ref input, 1000000, GrammaticalGender.Masculine, "мільйон", "мільйона", "мільйонів");
+            CollectParts(parts, ref input, 1000000000000000000, GrammaticalGender.Masculine, "квінтильйон", "квінтильйони", "квінтильйонів");
+            CollectParts(parts, ref input, 1000000000000000, GrammaticalGender.Masculine, "квадрильйон", "квадрильйони", "квадрильйонів");
+            CollectParts(parts, ref input, 1000000000000, GrammaticalGender.Masculine, "трильйон", "трильйони", "трильйонів");
+            CollectParts(parts, ref input, 1000000000, GrammaticalGender.Masculine, "мільярд", "мільярди", "мільярдів");
+            CollectParts(parts, ref input, 1000000, GrammaticalGender.Masculine, "мільйон", "мільйони", "мільйонів");
             CollectParts(parts, ref input, 1000, GrammaticalGender.Feminine, "тисяча", "тисячі", "тисяч");
 
             if (input > 0)
