@@ -5,8 +5,8 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class FinnishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "nolla", "yksi", "kaksi", "kolme", "neljä", "viisi", "kuusi", "seitsemän", "kahdeksan", "yhdeksän", "kymmenen"};
-        private static readonly string[] OrdinalUnitsMap = {"nollas", "ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes", "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"};
+        private static readonly string[] UnitsMap = { "nolla", "yksi", "kaksi", "kolme", "neljä", "viisi", "kuusi", "seitsemän", "kahdeksan", "yhdeksän", "kymmenen" };
+        private static readonly string[] OrdinalUnitsMap = { "nollas", "ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes", "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes" };
 
         private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
         {
@@ -23,10 +23,14 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
 
             if (number < 0)
+            {
                 return string.Format("miinus {0}", Convert(-number));
+            }
 
             if (number == 0)
+            {
                 return UnitsMap[0];
+            }
 
             var parts = new List<string>();
 
@@ -72,10 +76,14 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= 10;
             }
             else if (number > 10 && number < 20)
+            {
                 parts.Add(string.Format("{0}toista", UnitsMap[number % 10]));
+            }
 
             if (number > 0 && number <= 10)
+            {
                 parts.Add(UnitsMap[number]);
+            }
 
             return string.Join("", parts).Trim();
         }
@@ -93,7 +101,9 @@ namespace Humanizer.Localisation.NumberToWords
         private string ToOrdinal(int number, bool useExceptions)
         {
             if (number == 0)
+            {
                 return OrdinalUnitsMap[0];
+            }
 
             var parts = new List<string>();
 
@@ -127,10 +137,14 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= 10;
             }
             else if (number > 10 && number < 20)
+            {
                 parts.Add(string.Format("{0}toista", GetOrdinalUnit(number % 10, true)));
+            }
 
             if (number > 0 && number <= 10)
+            {
                 parts.Add(GetOrdinalUnit(number, useExceptions));
+            }
 
             return string.Join("", parts);
         }

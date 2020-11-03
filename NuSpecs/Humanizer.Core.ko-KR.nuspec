@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata minClientVersion="2.12">
+    <id>Humanizer.Core.ko-KR</id>
+    <version>$version$</version>
+    <title>Humanizer Locale (ko-KR)</title>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
+    <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
+    <icon>logo.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer Locale Korean (South Korea) (ko-KR)</description>
+    <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
+    <license type="expression">MIT</license>
+    <language>ko-KR</language>
+    <dependencies>
+       <dependency id="Humanizer.Core" version="[$version$]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Humanizer\bin\Release\netstandard1.0\ko-KR\*.*" target="lib\netstandard1.0\ko-KR" />
+    <file src="Humanizer\bin\Release\netstandard2.0\ko-KR\*.*" target="lib\netstandard2.0\ko-KR" />
+    <file src="..\logo.png" target="logo.png" />
+  </files>
+</package>

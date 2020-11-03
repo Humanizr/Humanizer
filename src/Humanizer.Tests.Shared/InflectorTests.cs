@@ -27,7 +27,7 @@ using Xunit;
 
 namespace Humanizer.Tests
 {
-    public class InflectorTests 
+    public class InflectorTests
     {
         public readonly IList<object[]> PluralTestData = new List<object[]>();
 
@@ -59,6 +59,15 @@ namespace Humanizer.Tests
         {
             Assert.Equal(singular, singular.Singularize(false));
             Assert.Equal(singular, plural.Singularize(false));
+        }
+
+        [Theory]
+        [InlineData("tires", "tires")]
+        [InlineData("body", "bodies")]
+        [InlineData("traxxas", "traxxas")]
+        public void SingularizeSkipSimpleWords(string singular, string plural)
+        {
+            Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
         }
 
         //Uppercases individual words and removes some characters 
@@ -100,8 +109,9 @@ namespace Humanizer.Tests
         [InlineData("CUStomer", "CUStomer")]
         [InlineData("customer_name", "CustomerName")]
         [InlineData("customer_first_name", "CustomerFirstName")]
-        [InlineData("customer_first_name_goes_here", "CustomerFirstNameGoesHere")]
-        [InlineData("customer name", "Customer name")]
+        [InlineData("customer_first_name goes here", "CustomerFirstNameGoesHere")]
+        [InlineData("customer name", "CustomerName")]
+        [InlineData("customer   name", "CustomerName")]
         public void Pascalize(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Pascalize());
@@ -114,8 +124,10 @@ namespace Humanizer.Tests
         [InlineData("CUStomer", "cUStomer")]
         [InlineData("customer_name", "customerName")]
         [InlineData("customer_first_name", "customerFirstName")]
-        [InlineData("customer_first_name_goes_here", "customerFirstNameGoesHere")]
-        [InlineData("customer name", "customer name")]
+        [InlineData("customer_first_name goes here", "customerFirstNameGoesHere")]
+        [InlineData("customer name", "customerName")]
+        [InlineData("customer   name", "customerName")]
+        [InlineData("", "")]
         public void Camelize(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Camelize());
@@ -149,192 +161,214 @@ namespace Humanizer.Tests
         }
     }
 
-    class PluralTestSource : IEnumerable<object[]>
+    internal class PluralTestSource : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
         {
-            yield return new object[] {"search", "searches"};
-            yield return new object[] {"switch", "switches"};
-            yield return new object[] {"fix", "fixes"};
-            yield return new object[] {"box", "boxes"};
-            yield return new object[] {"process", "processes"};
-            yield return new object[] {"address", "addresses"};
-            yield return new object[] {"case", "cases"};
-            yield return new object[] {"stack", "stacks"};
-            yield return new object[] {"wish", "wishes"};
-            yield return new object[] {"fish", "fish"};
+            yield return new object[] { "search", "searches" };
+            yield return new object[] { "switch", "switches" };
+            yield return new object[] { "fix", "fixes" };
+            yield return new object[] { "box", "boxes" };
+            yield return new object[] { "process", "processes" };
+            yield return new object[] { "address", "addresses" };
+            yield return new object[] { "case", "cases" };
+            yield return new object[] { "stack", "stacks" };
+            yield return new object[] { "wish", "wishes" };
+            yield return new object[] { "fish", "fish" };
 
-            yield return new object[] {"category", "categories"};
-            yield return new object[] {"query", "queries"};
-            yield return new object[] {"ability", "abilities"};
-            yield return new object[] {"agency", "agencies"};
-            yield return new object[] {"movie", "movies"};
+            yield return new object[] { "category", "categories" };
+            yield return new object[] { "query", "queries" };
+            yield return new object[] { "ability", "abilities" };
+            yield return new object[] { "agency", "agencies" };
+            yield return new object[] { "movie", "movies" };
 
-            yield return new object[] {"archive", "archives"};
+            yield return new object[] { "archive", "archives" };
 
-            yield return new object[] {"index", "indices"};
+            yield return new object[] { "index", "indices" };
 
-            yield return new object[] {"wife", "wives"};
-            yield return new object[] {"safe", "saves"};
-            yield return new object[] {"half", "halves"};
+            yield return new object[] { "wife", "wives" };
+            yield return new object[] { "safe", "saves" };
+            yield return new object[] { "half", "halves" };
 
-            yield return new object[] {"move", "moves"};
+            yield return new object[] { "glove", "gloves" };
+            yield return new object[] { "move", "moves" };
 
-            yield return new object[] {"salesperson", "salespeople"};
-            yield return new object[] {"person", "people"};
+            yield return new object[] { "salesperson", "salespeople" };
+            yield return new object[] { "person", "people" };
 
-            yield return new object[] {"spokesman", "spokesmen"};
-            yield return new object[] {"man", "men"};
-            yield return new object[] {"woman", "women"};
+            yield return new object[] { "spokesman", "spokesmen" };
+            yield return new object[] { "man", "men" };
+            yield return new object[] { "woman", "women" };
+            yield return new object[] { "freshman", "freshmen" };
+            yield return new object[] { "chairman", "chairmen" };
+            yield return new object[] { "human", "humans" };
+            yield return new object[] { "personnel", "personnel" };
+			 yield return new object[] { "staff", "staff" };
+			 yield return new object[] { "training", "training" };
 
-            yield return new object[] {"basis", "bases"};
-            yield return new object[] {"diagnosis", "diagnoses"};
+            yield return new object[] { "basis", "bases" };
+            yield return new object[] { "diagnosis", "diagnoses" };
 
-            yield return new object[] {"datum", "data"};
-            yield return new object[] {"medium", "media"};
-            yield return new object[] {"analysis", "analyses"};
+            yield return new object[] { "datum", "data" };
+            yield return new object[] { "medium", "media" };
+            yield return new object[] { "analysis", "analyses" };
 
-            yield return new object[] {"node_child", "node_children"};
-            yield return new object[] {"child", "children"};
+            yield return new object[] { "node_child", "node_children" };
+            yield return new object[] { "child", "children" };
 
-            yield return new object[] {"experience", "experiences"};
-            yield return new object[] {"day", "days"};
+            yield return new object[] { "experience", "experiences" };
+            yield return new object[] { "day", "days" };
 
-            yield return new object[] {"comment", "comments"};
-            yield return new object[] {"foobar", "foobars"};
-            yield return new object[] {"newsletter", "newsletters"};
+            yield return new object[] { "comment", "comments" };
+            yield return new object[] { "foobar", "foobars" };
+            yield return new object[] { "newsletter", "newsletters" };
 
-            yield return new object[] {"old_news", "old_news"};
-            yield return new object[] {"news", "news"};
+            yield return new object[] { "old_news", "old_news" };
+            yield return new object[] { "news", "news" };
 
-            yield return new object[] {"series", "series"};
-            yield return new object[] {"species", "species"};
+            yield return new object[] { "series", "series" };
+            yield return new object[] { "species", "species" };
 
-            yield return new object[] {"quiz", "quizzes"};
+            yield return new object[] { "quiz", "quizzes" };
 
-            yield return new object[] {"perspective", "perspectives"};
+            yield return new object[] { "perspective", "perspectives" };
 
-            yield return new object[] {"ox", "oxen"};
-            yield return new object[] {"photo", "photos"};
-            yield return new object[] {"buffalo", "buffaloes"};
-            yield return new object[] {"tomato", "tomatoes"};
-            yield return new object[] {"dwarf", "dwarves"};
-            yield return new object[] {"elf", "elves"};
-            yield return new object[] {"information", "information"};
-            yield return new object[] {"equipment", "equipment"};
-            yield return new object[] {"bus", "buses"};
-            yield return new object[] {"status", "statuses"};
-            yield return new object[] {"status_code", "status_codes"};
-            yield return new object[] {"mouse", "mice"};
+            yield return new object[] { "ox", "oxen" };
+            yield return new object[] { "photo", "photos" };
+            yield return new object[] { "buffalo", "buffaloes" };
+            yield return new object[] { "tomato", "tomatoes" };
+            yield return new object[] { "dwarf", "dwarves" };
+            yield return new object[] { "elf", "elves" };
+            yield return new object[] { "information", "information" };
+            yield return new object[] { "equipment", "equipment" };
+            yield return new object[] { "bus", "buses" };
+            yield return new object[] { "status", "statuses" };
+            yield return new object[] { "status_code", "status_codes" };
+            yield return new object[] { "mouse", "mice" };
 
-            yield return new object[] {"louse", "lice"};
-            yield return new object[] {"house", "houses"};
-            yield return new object[] {"octopus", "octopi"};
-            yield return new object[] {"alias", "aliases"};
-            yield return new object[] {"portfolio", "portfolios"};
-            yield return new object[] {"criterion", "criteria"};
+            yield return new object[] { "louse", "lice" };
+            yield return new object[] { "house", "houses" };
+            yield return new object[] { "octopus", "octopi" };
+            yield return new object[] { "alias", "aliases" };
+            yield return new object[] { "portfolio", "portfolios" };
+            yield return new object[] { "criterion", "criteria" };
 
-            yield return new object[] {"vertex", "vertices"};
-            yield return new object[] {"matrix", "matrices"};
+            yield return new object[] { "vertex", "vertices" };
+            yield return new object[] { "matrix", "matrices" };
 
-            yield return new object[] {"axis", "axes"};
-            yield return new object[] {"testis", "testes"};
-            yield return new object[] {"crisis", "crises"};
+            yield return new object[] { "axis", "axes" };
+            yield return new object[] { "testis", "testes" };
+            yield return new object[] { "crisis", "crises" };
 
-            yield return new object[] {"rice", "rice"};
-            yield return new object[] {"shoe", "shoes"};
+            yield return new object[] { "corn", "corn" };
+            yield return new object[] { "milk", "milk" };
+            yield return new object[] { "rice", "rice" };
+            yield return new object[] { "shoe", "shoes" };
 
-            yield return new object[] {"horse", "horses"};
-            yield return new object[] {"prize", "prizes"};
-            yield return new object[] {"edge", "edges"};
+            yield return new object[] { "horse", "horses" };
+            yield return new object[] { "prize", "prizes" };
+            yield return new object[] { "edge", "edges" };
 
             /* Tests added by Bas Jansen */
-            yield return new object[] {"goose", "geese"};
-            yield return new object[] {"deer", "deer"};
-            yield return new object[] {"sheep", "sheep"};
-            yield return new object[] {"wolf", "wolves"};
-            yield return new object[] {"volcano", "volcanoes"};
-            yield return new object[] {"aircraft", "aircraft"};
-            yield return new object[] {"alumna", "alumnae"};
-            yield return new object[] {"alumnus", "alumni"};
-            yield return new object[] {"fungus", "fungi"};
-            yield return new object[] {"water", "water"};
-            yield return new object[] {"waters", "waters"};
-            yield return new object[] {"semen", "semen"};
-            yield return new object[] {"sperm", "sperm"};
+            yield return new object[] { "goose", "geese" };
+            yield return new object[] { "deer", "deer" };
+            yield return new object[] { "sheep", "sheep" };
+            yield return new object[] { "wolf", "wolves" };
+            yield return new object[] { "volcano", "volcanoes" };
+            yield return new object[] { "aircraft", "aircraft" };
+            yield return new object[] { "alumna", "alumnae" };
+            yield return new object[] { "alumnus", "alumni" };
+            yield return new object[] { "fungus", "fungi" };
+            yield return new object[] { "water", "water" };
+            yield return new object[] { "waters", "waters" };
+            yield return new object[] { "semen", "semen" };
+            yield return new object[] { "sperm", "sperm" };
 
-            yield return new object[] {"wave","waves"};
+            yield return new object[] { "wave", "waves" };
 
-            yield return new object[] {"campus", "campuses"};
+            yield return new object[] { "campus", "campuses" };
 
-            yield return new object[] {"is", "are"};
+            yield return new object[] { "is", "are" };
 
-            yield return new object[] {"addendum","addenda"};
-            yield return new object[] {"alga","algae"};
-            yield return new object[] {"apparatus","apparatuses"};
-            yield return new object[] {"appendix","appendices"};
-            yield return new object[] {"bias","biases"};
-            yield return new object[] {"bison","bison"};
-            yield return new object[] {"blitz","blitzes"};
-            yield return new object[] {"buzz","buzzes"};
-            yield return new object[] {"cactus","cacti"};
-            yield return new object[] {"corps","corps"};
-            yield return new object[] {"curriculum","curricula"};
-            yield return new object[] {"database","databases"};
-            yield return new object[] {"die","dice"};
-            yield return new object[] {"echo","echoes"};
-            yield return new object[] {"ellipsis","ellipses"};
-            yield return new object[] {"elk","elk"};
-            yield return new object[] {"emphasis","emphases"};
-            yield return new object[] {"embargo","embargoes"};
-            yield return new object[] {"focus","foci"};
-            yield return new object[] {"foot","feet"};
-            yield return new object[] {"fuse", "fuses" };
-            yield return new object[] {"grass","grass"};
-            yield return new object[] {"hair","hair"};
-            yield return new object[] {"hero","heroes"};
-            yield return new object[] {"hippopotamus","hippopotami"};
-            yield return new object[] {"hoof","hooves"};
-            yield return new object[] {"iris","irises"};
-            yield return new object[] {"larva","larvae"};
-            yield return new object[] {"leaf","leaves"};
-            yield return new object[] {"loaf","loaves"};
-            yield return new object[] {"luggage","luggage"};
-            yield return new object[] {"means","means"};
-            yield return new object[] {"millennium","millennia"};
-            yield return new object[] {"moose","moose"};
-            yield return new object[] {"mosquito","mosquitoes"};
-            yield return new object[] {"mud","mud"};
-            yield return new object[] {"nucleus","nuclei"};
-            yield return new object[] {"neurosis","neuroses"};
-            yield return new object[] {"oasis","oases"};
-            yield return new object[] {"offspring","offspring"};
-            yield return new object[] {"paralysis","paralyses"};
-            yield return new object[] {"phenomenon","phenomena"};
-            yield return new object[] {"potato","potatoes"};
-            yield return new object[] {"radius","radii"};
-            yield return new object[] {"salmon","salmon"};
-            yield return new object[] {"scissors","scissors"};
-            yield return new object[] {"shrimp","shrimp"};
-            yield return new object[] {"someone","someone"};
-            yield return new object[] {"stimulus","stimuli"};
-            yield return new object[] {"swine","swine"};
-            yield return new object[] {"syllabus","syllabi"};
-            yield return new object[] {"that","those"};
-            yield return new object[] {"thief","thieves"};
-            yield return new object[] {"this","these"};
-            yield return new object[] {"tooth","teeth"};
-            yield return new object[] {"torpedo","torpedoes"};
-            yield return new object[] {"trellis","trellises"};
-            yield return new object[] {"trout","trout"};
-            yield return new object[] {"tuna","tuna"};
-            yield return new object[] {"vertebra","vertebrae"};
-            yield return new object[] {"veto","vetoes"};
-            yield return new object[] {"virus","viruses"};
-            yield return new object[] {"walrus","walruses"};
-            yield return new object[] {"waltz","waltzes"};
-            yield return new object[] {"water","water"};
-            yield return new object[] {"zombie","zombies"};
+            yield return new object[] { "addendum", "addenda" };
+            yield return new object[] { "alga", "algae" };
+            yield return new object[] { "apparatus", "apparatuses" };
+            yield return new object[] { "appendix", "appendices" };
+            yield return new object[] { "bias", "biases" };
+            yield return new object[] { "bison", "bison" };
+            yield return new object[] { "blitz", "blitzes" };
+            yield return new object[] { "buzz", "buzzes" };
+            yield return new object[] { "cactus", "cacti" };
+            yield return new object[] { "corps", "corps" };
+            yield return new object[] { "curriculum", "curricula" };
+            yield return new object[] { "database", "databases" };
+            yield return new object[] { "die", "dice" };
+            yield return new object[] { "echo", "echoes" };
+            yield return new object[] { "ellipsis", "ellipses" };
+            yield return new object[] { "elk", "elk" };
+            yield return new object[] { "emphasis", "emphases" };
+            yield return new object[] { "embargo", "embargoes" };
+            yield return new object[] { "focus", "foci" };
+            yield return new object[] { "foot", "feet" };
+            yield return new object[] { "fuse", "fuses" };
+            yield return new object[] { "grass", "grass" };
+            yield return new object[] { "hair", "hair" };
+            yield return new object[] { "hero", "heroes" };
+            yield return new object[] { "hippopotamus", "hippopotami" };
+            yield return new object[] { "hoof", "hooves" };
+            yield return new object[] { "iris", "irises" };
+            yield return new object[] { "larva", "larvae" };
+            yield return new object[] { "leaf", "leaves" };
+            yield return new object[] { "loaf", "loaves" };
+            yield return new object[] { "luggage", "luggage" };
+            yield return new object[] { "means", "means" };
+            yield return new object[] { "mail", "mail" };
+            yield return new object[] { "millennium", "millennia" };
+            yield return new object[] { "moose", "moose" };
+            yield return new object[] { "mosquito", "mosquitoes" };
+            yield return new object[] { "mud", "mud" };
+            yield return new object[] { "nucleus", "nuclei" };
+            yield return new object[] { "neurosis", "neuroses" };
+            yield return new object[] { "oasis", "oases" };
+            yield return new object[] { "offspring", "offspring" };
+            yield return new object[] { "paralysis", "paralyses" };
+            yield return new object[] { "phenomenon", "phenomena" };
+            yield return new object[] { "potato", "potatoes" };
+            yield return new object[] { "radius", "radii" };
+            yield return new object[] { "salmon", "salmon" };
+            yield return new object[] { "scissors", "scissors" };
+            yield return new object[] { "shrimp", "shrimp" };
+            yield return new object[] { "someone", "someone" };
+            yield return new object[] { "stimulus", "stimuli" };
+            yield return new object[] { "swine", "swine" };
+            yield return new object[] { "syllabus", "syllabi" };
+            yield return new object[] { "that", "those" };
+            yield return new object[] { "thief", "thieves" };
+            yield return new object[] { "this", "these" };
+            yield return new object[] { "tooth", "teeth" };
+            yield return new object[] { "torpedo", "torpedoes" };
+            yield return new object[] { "trellis", "trellises" };
+            yield return new object[] { "trout", "trout" };
+            yield return new object[] { "tuna", "tuna" };
+            yield return new object[] { "vertebra", "vertebrae" };
+            yield return new object[] { "veto", "vetoes" };
+            yield return new object[] { "virus", "viruses" };
+            yield return new object[] { "walrus", "walruses" };
+            yield return new object[] { "waltz", "waltzes" };
+            yield return new object[] { "zombie", "zombies" };
+
+            yield return new object[] { "cookie", "cookies" };
+            yield return new object[] { "bookie", "bookies" };
+            yield return new object[] { "rookie", "rookies" };
+            yield return new object[] { "roomie", "roomies" };
+            yield return new object[] { "smoothie", "smoothies" };
+            
+            //Issue #789
+            yield return new object[] { "cache", "caches" };
+
+            //Issue #975, added by Alex Boutin
+            yield return new object[] { "ex", "exes" };
+            yield return new object[] { "", "" };
         }
 
         IEnumerator IEnumerable.GetEnumerator()

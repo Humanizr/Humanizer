@@ -1,22 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>    
-    <Authors>Mehdi Khalili, Oren Novotny</Authors>
+    <TargetFrameworks>netstandard1.0;netstandard2.0</TargetFrameworks>    
+    <Authors>Mehdi Khalili, Claire Novotny</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
-    <Copyright>Copyright © 2012-2017 Mehdi Khalili</Copyright>    
+    <Copyright>Copyright © .NET Foundation and Contributors</Copyright>    
     <Product>Humanizer ($(TargetFramework))</Product>    
-    <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
-    <DebugType>embedded</DebugType>
+    <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0011" PrivateAssets="All" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.1.2" PrivateAssets="All" />
-  </ItemGroup>
 </Project>

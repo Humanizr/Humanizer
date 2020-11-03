@@ -4,7 +4,7 @@
 Test*.html
 Test*.xml
 *.zip
-nuget.exe
+*.exe
 *.nuget.props
 *.nuget.targets
 
@@ -53,6 +53,9 @@ _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
+# JetBrains IDE
+.idea/
+
 # JustCode is a .NET coding add-in
 .JustCode
 
@@ -86,5 +89,10 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
+# local tools
+.store/
 
 src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.received.txt
+
+.DS_Store
+/samples/Humanizer.MvcSample/Humanizer.MvcSample.sln

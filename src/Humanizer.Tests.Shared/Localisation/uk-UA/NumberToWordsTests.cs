@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
         [Theory]
         [InlineData(0, "нуль")]
@@ -59,7 +59,29 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData(751633617, "сімсот п'ятдесят один мільйон шістсот тридцять три тисячі шістсот сімнадцять")]
         [InlineData(1111111118, "один мільярд сто одинадцять мільйонів сто одинадцять тисяч сто вісімнадцять")]
         [InlineData(-751633617, "мінус сімсот п'ятдесят один мільйон шістсот тридцять три тисячі шістсот сімнадцять")]
-        public void ToWords(int number, string expected)
+        [InlineData(1_000_000_000_000, "один трильйон")]
+        [InlineData(3_000_000_000_000, "три трильйона")]
+        [InlineData(5_000_000_000_000, "п'ять трильйонів")]
+        [InlineData(999_000_000_000_000, "дев'ятсот дев'яносто дев'ять трильйонів")]
+        [InlineData(
+            long.MaxValue,
+            "дев'ять квінтильйонів " +
+            "двісті двадцять три квадрильйона " +
+            "триста сімдесят два трильйона " +
+            "тридцять шість мільярдів " +
+            "вісімсот п'ятдесят чотири мільйона " +
+            "сімсот сімдесят п'ять тисяч " +
+            "вісімсот сім")]
+        [InlineData(
+            long.MinValue,
+            "мінус дев'ять квінтильйонів " +
+            "двісті двадцять три квадрильйона " +
+            "триста сімдесят два трильйона " +
+            "тридцять шість мільярдів " +
+            "вісімсот п'ятдесят чотири мільйона " +
+            "сімсот сімдесят п'ять тисяч " +
+            "вісімсот вісім")]
+        public void ToWords(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }

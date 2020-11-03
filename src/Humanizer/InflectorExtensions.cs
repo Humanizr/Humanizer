@@ -21,7 +21,6 @@
 //IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Text.RegularExpressions;
 using Humanizer.Inflections;
 
@@ -48,10 +47,11 @@ namespace Humanizer
         /// </summary>
         /// <param name="word">Word to be singularized</param>
         /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
+        /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
         /// <returns></returns>
-        public static string Singularize(this string word, bool inputIsKnownToBePlural = true)
+        public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
         {
-            return Vocabularies.Default.Singularize(word, inputIsKnownToBePlural);
+            return Vocabularies.Default.Singularize(word, inputIsKnownToBePlural, skipSimpleWords);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <returns></returns>
         public static string Pascalize(this string input)
-        {
-            return Regex.Replace(input, "(?:^|_)(.)", match => match.Groups[1].Value.ToUpper());
+        {   
+            return Regex.Replace(input, "(?:^|_| +)(.)", match => match.Groups[1].Value.ToUpper());
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace Humanizer
         /// <returns></returns>
         public static string Camelize(this string input)
         {
-            var word = Pascalize(input);
-            return word.Substring(0, 1).ToLower() + word.Substring(1);
+            var word = input.Pascalize();
+            return word.Length > 0 ? word.Substring(0, 1).ToLower() + word.Substring(1) : word;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Humanizer
         {
             return underscoredWord.Replace('_', '-');
         }
-		
+
         /// <summary>
         /// Replaces underscores with hyphens in the string
         /// </summary>

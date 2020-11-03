@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.nl
 {
     [UseCulture("nl-NL")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
 
         [Theory]
@@ -46,7 +46,20 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData(415618, "vierhonderdvijftienduizend zeshonderdachttien")]
         [InlineData(16415618, "zestien miljoen vierhonderdvijftienduizend zeshonderdachttien")]
         [InlineData(322, "driehonderdtweeëntwintig")]
-        public void ToWords(int number, string expected)
+        public void IntToWords(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(100_000_000_000L, "honderd miljard")]
+        [InlineData(1_000_000_000_000L, "een biljoen")]
+        [InlineData(100_000_000_000_000L, "honderd biljoen")]
+        [InlineData(1_000_000_000_000_000L, "een biljard")]
+        [InlineData(100_000_000_000_000_000L, "honderd biljard")]
+        [InlineData(1_000_000_000_000_000_000L, "een triljoen")]
+        [InlineData(9_223_372_036_854_775_807L, "negen triljoen tweehonderddrieëntwintig biljard driehonderdtweeënzeventig biljoen zesendertig miljard achthonderdvierenvijftig miljoen zevenhonderdvijfenzeventigduizend achthonderdzeven")]
+        public void LongToWords(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }

@@ -67,13 +67,13 @@ namespace Humanizer.Configuration
 
         private Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
         {
-            Func<CultureInfo, TLocaliser> localiser;
-
-            if (_localisers.TryGetValue(culture.Name, out localiser))
-                return localiser;
-
-            if (_localisers.TryGetValue(culture.TwoLetterISOLanguageName, out localiser))
-                return localiser;
+            for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
+            {
+                if (_localisers.TryGetValue(c.Name, out var localiser))
+                {
+                    return localiser;
+                }
+            }
 
             return _defaultLocaliser;
         }

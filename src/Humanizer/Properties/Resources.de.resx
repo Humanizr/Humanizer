@@ -169,19 +169,19 @@
     <value>{0} Sekunden</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>Ein Tag</value>
+    <value>1 Tag</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>Eine Stunde</value>
+    <value>1 Stunde</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>Eine Millisekunde</value>
+    <value>1 Millisekunde</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>Eine Minute</value>
+    <value>1 Minute</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>Eine Sekunde</value>
+    <value>1 Sekunde</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>Keine Zeit</value>
@@ -190,7 +190,7 @@
     <value>{0} Wochen</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>Eine Woche</value>
+    <value>1 Woche</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>in {0} Tagen</value>
@@ -241,9 +241,33 @@
     <value>{0} Jahre</value>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>Ein Monat</value>
+    <value>1 Monat</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>Ein Jahr</value>
+    <value>1 Jahr</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>ein Tag</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>eine Stunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>eine Millisekunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>eine Minute</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>ein Monat</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>eine Sekunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>eine Woche</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>ein Jahr</value>
   </data>
 </root>

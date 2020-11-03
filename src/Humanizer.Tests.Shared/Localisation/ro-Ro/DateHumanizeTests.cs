@@ -11,7 +11,7 @@ namespace Humanizer.Tests.Localisation.roRO
     /// There is no test for months since there are only 12 of them in a year.
     /// </summary>
     [UseCulture("ro-RO")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]
@@ -30,7 +30,7 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
-        
+
         [Theory]
         [InlineData(2, "acum 2 secunde")]
         [InlineData(59, "acum 59 de secunde")]
@@ -38,23 +38,23 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
-        
+
         [Theory]
         [InlineData(10, "acum 10 zile")]
         [InlineData(23, "acum 23 de zile")]
-        public void DaysAgo(int seconds, string expected)
+        public void DaysAgo(int days, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Day, Tense.Past);
+            DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
-        
+
         [Theory]
         [InlineData(119, "acum 119 ani")]
         [InlineData(100, "acum 100 de ani")]
-        public void YearsAgo(int seconds, string expected)
+        public void YearsAgo(int years, string expected)
         {
-            DateHumanize.Verify(expected, seconds, TimeUnit.Year, Tense.Past);
+            DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
-        
+
         [Theory]
         [InlineData(1, "acum")]
         [InlineData(22, "acum")]
@@ -62,7 +62,7 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             DateHumanize.Verify(expected, milliseconds, TimeUnit.Millisecond, Tense.Past);
         }
-        
+
         [Theory]
         [InlineData(19, "peste 19 secunde")]
         [InlineData(21, "peste 21 de secunde")]
@@ -70,7 +70,7 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
         }
-        
+
         [Theory]
         [InlineData(19, "peste 19 minute")]
         [InlineData(22, "peste 22 de minute")]
@@ -78,7 +78,7 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
         }
-        
+
         [Theory]
         [InlineData(3, "peste 3 ore")]
         [InlineData(23, "peste 23 de ore")]
@@ -94,7 +94,7 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
         }
-        
+
         [Theory]
         [InlineData(5, "peste 5 ani")]
         [InlineData(21, "peste 21 de ani")]

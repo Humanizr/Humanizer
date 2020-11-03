@@ -1,7 +1,7 @@
 # v2.2
 
  - [#634](https://github.com/Humanizr/Humanizer/pull/634) - Added support for Greek language in resources contributed by Christos Matskas ([cmatskas](https://github.com/cmatskas))
- - [#633](https://github.com/Humanizr/Humanizer/pull/633) - #632 Continued: Fuzzy month years logic for time span humanize extensions contributed by Oren Novotny ([onovotny](https://github.com/onovotny)) +enhancement
+ - [#633](https://github.com/Humanizr/Humanizer/pull/633) - #632 Continued: Fuzzy month years logic for time span humanize extensions contributed by Claire Novotny ([onovotny](https://github.com/onovotny)) +enhancement
  - [#632](https://github.com/Humanizr/Humanizer/pull/632) - Fuzzy month years logic for time span humanize extensions contributed by Martin Strecker ([MaStr11](https://github.com/MaStr11))
  - [#631](https://github.com/Humanizr/Humanizer/pull/631) - Latvian localization contributed by Dmitry Bogatykh ([bogatykh](https://github.com/bogatykh))
  - [#630](https://github.com/Humanizr/Humanizer/pull/630) - billions and millions greater than 2 contributed by Rafael Bianchi ([rafaellfontana](https://github.com/rafaellfontana))
@@ -20,7 +20,7 @@
  - [#603](https://github.com/Humanizr/Humanizer/pull/603) - Syntax correction in readme.md contributed by Brian MacKay ([kinetiq](https://github.com/kinetiq))
  - [#602](https://github.com/Humanizr/Humanizer/pull/602) - Register Portuguese translations as `pt` contributed by ([hangy](https://github.com/hangy))
  - [#601](https://github.com/Humanizr/Humanizer/issues/601) - Humanize pt-PT problem
- - [#600](https://github.com/Humanizr/Humanizer/pull/600) - Revert "Add Esperanto support to NumberToWords. Fixes #558" contributed by Oren Novotny ([onovotny](https://github.com/onovotny))
+ - [#600](https://github.com/Humanizr/Humanizer/pull/600) - Revert "Add Esperanto support to NumberToWords. Fixes #558" contributed by Claire Novotny ([onovotny](https://github.com/onovotny))
  - [#598](https://github.com/Humanizr/Humanizer/pull/598) - Workaround for Croatian TimeSpan localization bug contributed by ([hangy](https://github.com/hangy))
  - [#597](https://github.com/Humanizr/Humanizer/issues/597) - Croatian localization of TimeSpan fails with >1 day
  - [#596](https://github.com/Humanizr/Humanizer/issues/596) - Can not add Humanizer 2.1.0 in Class library (.Net Core)

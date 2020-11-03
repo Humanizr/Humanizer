@@ -15,9 +15,9 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] UnitsMap = { "nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien" };
         private static readonly string[] TensMap = { "nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig" };
 
-        class Fact
+        private class Fact
         {
-            public int Value { get; set; }
+            public long Value { get; set; }
             public string Name { get; set; }
             public string Prefix { get; set; }
             public string Postfix { get; set; }
@@ -26,25 +26,28 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly Fact[] Hunderds =
         {
-            new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new Fact {Value = 1000000,    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new Fact {Value = 1000,       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
-            new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
+            new Fact {Value = 1_000_000_000_000_000_000L, Name = "triljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1_000_000_000_000_000L,     Name = "biljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1_000_000_000_000L,         Name = "biljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000000000,                 Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000000,                    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000,                       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
+            new Fact {Value = 100,                        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
         };
 
         public override string Convert(long input)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
+            var number = input;
 
             if (number == 0)
+            {
                 return UnitsMap[0];
+            }
 
             if (number < 0)
+            {
                 return string.Format("min {0}", Convert(-number));
+            }
 
             var word = "";
 
@@ -52,23 +55,33 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 var divided = number / m.Value;
 
-                if (divided <= 0) 
+                if (divided <= 0)
+                {
                     continue;
+                }
 
                 if (divided == 1 && !m.DisplayOneUnit)
+                {
                     word += m.Name;
+                }
                 else
+                {
                     word += Convert(divided) + m.Prefix + m.Name;
+                }
 
                 number %= m.Value;
                 if (number > 0)
+                {
                     word += m.Postfix;
+                }
             }
 
             if (number > 0)
             {
                 if (number < 20)
+                {
                     word += UnitsMap[number];
+                }
                 else
                 {
                     var tens = TensMap[number / 10];
@@ -80,7 +93,9 @@ namespace Humanizer.Localisation.NumberToWords
                         word += units + (trema ? "ën" : "en") + tens;
                     }
                     else
+                    {
                         word += tens;
+                    }
                 }
             }
 
@@ -94,7 +109,7 @@ namespace Humanizer.Localisation.NumberToWords
             {"miljoen", "miljoenste"},
         };
 
-        private static readonly char[] EndingCharForSte = {'t', 'g', 'd'};
+        private static readonly char[] EndingCharForSte = { 't', 'g', 'd' };
 
         public override string ConvertToOrdinal(int number)
         {
@@ -110,7 +125,9 @@ namespace Humanizer.Localisation.NumberToWords
             // twintigste, dertigste, veertigste, ...
             // honderdste, duizendste, ...
             if (word.LastIndexOfAny(EndingCharForSte) == (word.Length - 1))
+            {
                 return word + "ste";
+            }
 
             return word + "de";
         }

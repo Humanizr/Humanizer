@@ -4,7 +4,7 @@ using Xunit;
 namespace Humanizer.Tests.Localisation.he
 {
     [UseCulture("he")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
         [Theory]
         [InlineData(1, "אתמול")]

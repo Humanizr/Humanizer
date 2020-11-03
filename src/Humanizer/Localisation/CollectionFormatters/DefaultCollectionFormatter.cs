@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Humanizer.Localisation.CollectionFormatters
 {
-    class DefaultCollectionFormatter : ICollectionFormatter
+    internal class DefaultCollectionFormatter : ICollectionFormatter
     {
         protected string DefaultSeparator = "";
 
@@ -23,6 +23,11 @@ namespace Humanizer.Localisation.CollectionFormatters
             return Humanize(collection, objectFormatter, DefaultSeparator);
         }
 
+        public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter)
+        {
+            return Humanize(collection, objectFormatter, DefaultSeparator);
+        }
+
         public virtual string Humanize<T>(IEnumerable<T> collection, string separator)
         {
             return Humanize(collection, o => o?.ToString(), separator);
@@ -31,21 +36,55 @@ namespace Humanizer.Localisation.CollectionFormatters
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
         {
             if (collection == null)
-                throw new ArgumentException("collection");
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
 
-            var items = collection
-                .Select(objectFormatter)
+            if (objectFormatter == null)
+            {
+                throw new ArgumentNullException(nameof(objectFormatter));
+            }
+
+            return HumanizeDisplayStrings(
+                collection.Select(objectFormatter),
+                separator);
+        }
+
+        public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            if (objectFormatter == null)
+            {
+                throw new ArgumentNullException(nameof(objectFormatter));
+            }
+
+            return HumanizeDisplayStrings(
+                collection.Select(objectFormatter).Select(o => o?.ToString()),
+                separator);
+        }
+
+        private string HumanizeDisplayStrings(IEnumerable<string> strings, string separator)
+        {
+            var itemsArray = strings
                 .Select(item => item == null ? string.Empty : item.Trim())
-                .Where(item => !string.IsNullOrWhiteSpace(item));
+                .Where(item => !string.IsNullOrWhiteSpace(item))
+                .ToArray();
 
-            var itemsArray = items.ToArray();
             var count = itemsArray.Length;
 
             if (count == 0)
+            {
                 return "";
+            }
 
             if (count == 1)
+            {
                 return itemsArray[0];
+            }
 
             var itemsBeforeLast = itemsArray.Take(count - 1);
             var lastItem = itemsArray.Skip(count - 1).First();

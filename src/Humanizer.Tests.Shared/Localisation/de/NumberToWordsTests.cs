@@ -7,7 +7,7 @@ namespace Humanizer.Tests.Localisation.de
     {
         [Theory]
         [InlineData(0, "null")]
-        [InlineData(1, "eins")]
+        [InlineData(1, "ein")]
         [InlineData(2, "zwei")]
         [InlineData(3, "drei")]
         [InlineData(4, "vier")]
@@ -36,7 +36,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(1000000000, "eine Milliarde")]
         [InlineData(2000000000, "zwei Milliarden")]
         [InlineData(122, "einhundertzweiundzwanzig")]
-        [InlineData(3501, "dreitausendfünfhunderteins")]
+        [InlineData(3501, "dreitausendfünfhundertein")]
         [InlineData(111, "einhundertelf")]
         [InlineData(1112, "eintausendeinhundertzwölf")]
         [InlineData(11213, "elftausendzweihundertdreizehn")]
@@ -45,10 +45,21 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(12345516, "zwölf Millionen dreihundertfünfundvierzigtausendfünfhundertsechzehn")]
         [InlineData(751633617, "siebenhunderteinundfünfzig Millionen sechshundertdreiunddreißigtausendsechshundertsiebzehn")]
         [InlineData(1111111118, "eine Milliarde einhundertelf Millionen einhundertelftausendeinhundertachtzehn")]
+        [InlineData(35484694489515, "fünfunddreißig Billionen vierhundertvierundachtzig Milliarden sechshundertvierundneunzig Millionen vierhundertneunundachtzigtausendfünfhundertfünfzehn")]
+        [InlineData(8183162164626926, "acht Billiarden einhundertdreiundachtzig Billionen einhundertzweiundsechzig Milliarden einhundertvierundsechzig Millionen sechshundertsechsundzwanzigtausendneunhundertsechsundzwanzig")]
+        [InlineData(4564121926659524672, "vier Trillionen fünfhundertvierundsechzig Billiarden einhunderteinundzwanzig Billionen neunhundertsechsundzwanzig Milliarden sechshundertneunundfünfzig Millionen fünfhundertvierundzwanzigtausendsechshundertzweiundsiebzig")]
         [InlineData(-751633619, "minus siebenhunderteinundfünfzig Millionen sechshundertdreiunddreißigtausendsechshundertneunzehn")]
-        public void ToWords(int number, string expected)
+        public void ToWords(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
+        }
+
+        [Theory]
+        [InlineData(1, "eine")]
+        [InlineData(3501, "dreitausendfünfhunderteine")]
+        public void ToWordsFeminine(long number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
 
         [Theory]

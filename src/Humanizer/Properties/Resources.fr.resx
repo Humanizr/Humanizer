@@ -229,7 +229,7 @@
     <value>1 semaine</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>pas de temps</value>
+    <value>temps nul</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>jamais</value>
@@ -244,6 +244,36 @@
     <value>1 mois</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>1 année</value>
+    <value>1 an</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>avant-hier</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>après-demain</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0} an</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
+    <value>{0} mois</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>{0} semaine</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
+    <value>{0} jour</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
+    <value>{0} heure</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} minute</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>{0} seconde</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>{0} milliseconde</value>
   </data>
 </root>

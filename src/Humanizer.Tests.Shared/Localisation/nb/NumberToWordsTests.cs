@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using Xunit;
 
 namespace Humanizer.Tests.Localisation.nb
 {
@@ -32,7 +29,6 @@ namespace Humanizer.Tests.Localisation.nb
         [InlineData(99, "nittini")]
         [InlineData(100, "hundre")]
         [InlineData(200, "tohundre")]
-        [InlineData(100, "hundre")]
         [InlineData(1000, "tusen")]
         [InlineData(100000, "hundretusen")]
         [InlineData(1000000, "en million")]

@@ -9,6 +9,7 @@ namespace Humanizer.Configuration
             Register("de", new GermanOrdinalizer());
             Register("en", new EnglishOrdinalizer());
             Register("es", new SpanishOrdinalizer());
+            Register("fr", new FrenchOrdinalizer());
             Register("it", new ItalianOrdinalizer());
             Register("nl", new DutchOrdinalizer());
             Register("pt", new PortugueseOrdinalizer());
@@ -16,6 +17,8 @@ namespace Humanizer.Configuration
             Register("ru", new RussianOrdinalizer());
             Register("tr", new TurkishOrdinalizer());
             Register("uk", new UkrainianOrdinalizer());
+            Register("hy", new ArmenianOrdinalizer());
+            Register("az", new AzerbaijaniOrdinalizer());
         }
     }
 }

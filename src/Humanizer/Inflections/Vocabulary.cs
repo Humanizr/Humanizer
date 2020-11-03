@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Humanizer.Inflections
@@ -75,15 +75,19 @@ namespace Humanizer.Inflections
         /// <returns></returns>
         public string Pluralize(string word, bool inputIsKnownToBeSingular = true)
         {
-            var result = ApplyRules(_plurals, word);
+            var result = ApplyRules(_plurals, word, false);
 
             if (inputIsKnownToBeSingular)
-                return result;
+            {
+                return result ?? word;
+            }
 
-            var asSingular = ApplyRules(_singulars, word);
-            var asSingularAsPlural = ApplyRules(_plurals, asSingular);
+            var asSingular = ApplyRules(_singulars, word, false);
+            var asSingularAsPlural = ApplyRules(_plurals, asSingular, false);
             if (asSingular != null && asSingular != word && asSingular + "s" != word && asSingularAsPlural == word && result != word)
+            {
                 return word;
+            }
 
             return result;
         }
@@ -93,36 +97,53 @@ namespace Humanizer.Inflections
         /// </summary>
         /// <param name="word">Word to be singularized</param>
         /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
+        /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
         /// <returns></returns>
-        public string Singularize(string word, bool inputIsKnownToBePlural = true)
+        public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
         {
-            var result = ApplyRules(_singulars, word);
+            var result = ApplyRules(_singulars, word, skipSimpleWords);
 
             if (inputIsKnownToBePlural)
-                return result;
+            {
+                return result ?? word;
+            }
 
             // the Plurality is unknown so we should check all possibilities
-            var asPlural = ApplyRules(_plurals, word);
-            var asPluralAsSingular = ApplyRules(_singulars, asPlural);
+            var asPlural = ApplyRules(_plurals, word, false);
+            var asPluralAsSingular = ApplyRules(_singulars, asPlural, false);
             if (asPlural != word && word + "s" != asPlural && asPluralAsSingular == word && result != word)
+            {
                 return word;
+            }
 
             return result ?? word;
         }
 
-        private string ApplyRules(IList<Rule> rules, string word)
+        private string ApplyRules(IList<Rule> rules, string word, bool skipFirstRule)
         {
             if (word == null)
+            {
                 return null;
+            }
+
+            if (word.Length < 1)
+            {
+                return word;
+            }
 
             if (IsUncountable(word))
+            {
                 return word;
+            }
 
             var result = word;
-            for (var i = rules.Count - 1; i >= 0; i--)
+            var end = skipFirstRule ? 1 : 0;
+            for (var i = rules.Count - 1; i >= end; i--)
             {
                 if ((result = rules[i].Apply(word)) != null)
+                {
                     break;
+                }
             }
             return result;
         }
@@ -146,7 +167,9 @@ namespace Humanizer.Inflections
             public string Apply(string word)
             {
                 if (!_regex.IsMatch(word))
+                {
                     return null;
+                }
 
                 return _regex.Replace(word, _replacement);
             }

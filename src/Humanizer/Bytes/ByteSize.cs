@@ -1,4 +1,4 @@
-//The MIT License (MIT)
+﻿//The MIT License (MIT)
 
 //Copyright (c) 2013-2014 Omar Khudeira (http://omar.io)
 
@@ -21,6 +21,8 @@
 //THE SOFTWARE.
 
 using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Humanizer.Bytes
 {
@@ -28,7 +30,7 @@ namespace Humanizer.Bytes
     /// Represents a byte size value.
     /// </summary>
 #pragma warning disable 1591
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable
+    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable, IFormattable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
@@ -40,11 +42,17 @@ namespace Humanizer.Bytes
         public const long BytesInTerabyte = 1099511627776;
 
         public const string BitSymbol = "b";
+        public const string Bit = "bit";
         public const string ByteSymbol = "B";
+        public const string Byte = "byte";
         public const string KilobyteSymbol = "KB";
+        public const string Kilobyte = "kilobyte";
         public const string MegabyteSymbol = "MB";
+        public const string Megabyte = "megabyte";
         public const string GigabyteSymbol = "GB";
+        public const string Gigabyte = "gigabyte";
         public const string TerabyteSymbol = "TB";
+        public const string Terabyte = "terabyte";
 
         public long Bits { get; private set; }
         public double Bytes { get; private set; }
@@ -59,42 +67,97 @@ namespace Humanizer.Bytes
             {
                 // Absolute value is used to deal with negative values
                 if (Math.Abs(Terabytes) >= 1)
+                {
                     return TerabyteSymbol;
+                }
 
                 if (Math.Abs(Gigabytes) >= 1)
+                {
                     return GigabyteSymbol;
+                }
 
                 if (Math.Abs(Megabytes) >= 1)
+                {
                     return MegabyteSymbol;
+                }
 
                 if (Math.Abs(Kilobytes) >= 1)
+                {
                     return KilobyteSymbol;
+                }
 
                 if (Math.Abs(Bytes) >= 1)
+                {
                     return ByteSymbol;
+                }
 
                 return BitSymbol;
             }
         }
+
+        public string LargestWholeNumberFullWord
+        {
+            get
+            {
+                // Absolute value is used to deal with negative values
+                if (Math.Abs(Terabytes) >= 1)
+                {
+                    return Terabyte;
+                }
+
+                if (Math.Abs(Gigabytes) >= 1)
+                {
+                    return Gigabyte;
+                }
+
+                if (Math.Abs(Megabytes) >= 1)
+                {
+                    return Megabyte;
+                }
+
+                if (Math.Abs(Kilobytes) >= 1)
+                {
+                    return Kilobyte;
+                }
+
+                if (Math.Abs(Bytes) >= 1)
+                {
+                    return Byte;
+                }
+
+                return Bit;
+            }
+        }
+
         public double LargestWholeNumberValue
         {
             get
             {
                 // Absolute value is used to deal with negative values
                 if (Math.Abs(Terabytes) >= 1)
+                {
                     return Terabytes;
+                }
 
                 if (Math.Abs(Gigabytes) >= 1)
+                {
                     return Gigabytes;
+                }
 
                 if (Math.Abs(Megabytes) >= 1)
+                {
                     return Megabytes;
+                }
 
                 if (Math.Abs(Kilobytes) >= 1)
+                {
                     return Kilobytes;
+                }
 
                 if (Math.Abs(Bytes) >= 1)
+                {
                     return Bytes;
+                }
 
                 return Bits;
             }
@@ -151,34 +214,75 @@ namespace Humanizer.Bytes
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberSymbol);
+            return ToString(NumberFormatInfo.CurrentInfo);
+        }
+
+        public string ToString(IFormatProvider provider)
+        {
+            if (provider == null)
+                provider = CultureInfo.CurrentCulture;
+
+            return string.Format("{0} {1}", LargestWholeNumberValue.ToString(provider), LargestWholeNumberSymbol);
         }
 
         public string ToString(string format)
         {
-            if (!format.Contains("#") && !format.Contains("0"))
-                format = "0.## " + format;
+            return ToString(format, NumberFormatInfo.CurrentInfo);
+        }
 
-            Func<string, bool> has = s => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
-            Func<double, string> output = n => n.ToString(format);
+        public string ToString(string format, IFormatProvider provider)
+        {
+            if (format == null)
+                format = "G";
+
+            if (provider == null)
+                provider = CultureInfo.CurrentCulture;
+
+            if (format == "G")
+                format = "0.##";
+
+            if (!format.Contains("#") && !format.Contains("0"))
+            {
+                format = "0.## " + format;
+            }
+
+            format = format.Replace("#.##", "0.##");
+
+            bool has(string s) => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            string output(double n) => n.ToString(format, provider);
 
             if (has(TerabyteSymbol))
+            {
                 return output(Terabytes);
+            }
+
             if (has(GigabyteSymbol))
+            {
                 return output(Gigabytes);
+            }
+
             if (has(MegabyteSymbol))
+            {
                 return output(Megabytes);
+            }
+
             if (has(KilobyteSymbol))
+            {
                 return output(Kilobytes);
+            }
 
             // Byte and Bit symbol look must be case-sensitive
             if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
+            {
                 return output(Bytes);
+            }
 
             if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
+            {
                 return output(Bits);
+            }
 
-            var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format);
+            var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format, provider);
 
             formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
                                               ? "0"
@@ -187,16 +291,36 @@ namespace Humanizer.Bytes
             return string.Format("{0} {1}", formattedLargeWholeNumberValue, LargestWholeNumberSymbol);
         }
 
+        /// <summary>
+        /// Converts the value of the current ByteSize object to a string with 
+        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga, 
+        /// tera) used is the largest metric prefix such that the corresponding 
+        /// value is greater than or equal to one.
+        /// </summary>
+        public string ToFullWords()
+        {
+            var byteSizeAsFullWords = string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberFullWord);
+
+            // If there is more than one unit, make the word plural
+            return LargestWholeNumberValue > 1 ? byteSizeAsFullWords + "s" : byteSizeAsFullWords;
+        }
+
         public override bool Equals(object value)
         {
             if (value == null)
+            {
                 return false;
+            }
 
             ByteSize other;
             if (value is ByteSize)
+            {
                 other = (ByteSize)value;
+            }
             else
+            {
                 return false;
+            }
 
             return Equals(other);
         }
@@ -214,12 +338,16 @@ namespace Humanizer.Bytes
         public int CompareTo(object obj)
         {
             if (obj == null)
+            {
                 return 1;
+            }
 
             if (!(obj is ByteSize))
+            {
                 throw new ArgumentException("Object is not a ByteSize");
+            }
 
-            return CompareTo((ByteSize) obj);
+            return CompareTo((ByteSize)obj);
         }
 
         public int CompareTo(ByteSize other)
@@ -272,6 +400,11 @@ namespace Humanizer.Bytes
             return new ByteSize(b1.Bytes + b2.Bytes);
         }
 
+        public static ByteSize operator -(ByteSize b1, ByteSize b2)
+        {
+            return new ByteSize(b1.Bytes - b2.Bytes);
+        }
+
         public static ByteSize operator ++(ByteSize b)
         {
             return new ByteSize(b.Bytes + 1);
@@ -321,7 +454,9 @@ namespace Humanizer.Bytes
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
+            {
                 throw new ArgumentNullException(nameof(s), "String is null or whitespace");
+            }
 
             // Setup the result
             result = new ByteSize();
@@ -333,18 +468,23 @@ namespace Humanizer.Bytes
             var found = false;
 
             // Acquiring culture specific decimal separator
-			var decSep = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+      			var decSep = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                 
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
+            {
                 if (!(char.IsDigit(s[num]) || s[num] == decSep))
                 {
                     found = true;
                     break;
                 }
+            }
 
             if (found == false)
+            {
                 return false;
+            }
 
             var lastNumber = num;
 
@@ -353,9 +493,10 @@ namespace Humanizer.Bytes
             var sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part
-            double number;
-            if (!double.TryParse(numberPart, out number))
+            if (!double.TryParse(numberPart, out var number))
+            {
                 return false;
+            }
 
             // Get the magnitude part
             switch (sizePart.ToUpper())
@@ -364,7 +505,9 @@ namespace Humanizer.Bytes
                     if (sizePart == BitSymbol)
                     { // Bits
                         if (number % 1 != 0) // Can't have partial bits
+                        {
                             return false;
+                        }
 
                         result = FromBits((long)number);
                     }
@@ -396,10 +539,10 @@ namespace Humanizer.Bytes
 
         public static ByteSize Parse(string s)
         {
-            ByteSize result;
-
-            if (TryParse(s, out result))
+            if (TryParse(s, out var result))
+            {
                 return result;
+            }
 
             throw new FormatException("Value is not in the correct format");
         }

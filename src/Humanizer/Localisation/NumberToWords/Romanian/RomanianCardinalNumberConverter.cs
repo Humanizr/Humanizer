@@ -3,18 +3,17 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords.Romanian
 {
-
-    class RomanianCardinalNumberConverter
+    internal class RomanianCardinalNumberConverter
     {
 
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9 for 9.
         /// </summary>
         private readonly string[] _units =
-            { 
+            {
                 string.Empty,
-                "unu|una",
-                "doi|două",
+                "unu|una|unu",
+                "doi|două|două",
                 "trei",
                 "patru",
                 "cinci",
@@ -31,7 +30,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             {
                 "zece",
                 "unsprezece",
-                "doisprezece|douăsprezece",
+                "doisprezece|douăsprezece|douăsprezece",
                 "treisprezece",
                 "paisprezece",
                 "cincisprezece",
@@ -45,7 +44,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
         /// </summary>
         private readonly string[] _tensOver20NumberToText =
-            { 
+            {
                 string.Empty,
                 string.Empty,
                 "douăzeci",
@@ -55,7 +54,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
                 "șaizeci",
                 "șaptezeci",
                 "optzeci",
-                "nouăzeci" 
+                "nouăzeci"
             };
 
         private readonly string _feminineSingular = "o";
@@ -151,7 +150,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
 
                 parts.Add(threeDigit);
 
-                rest = (int)(rest / 1000);
+                rest = rest / 1000;
             }
 
             return parts;
@@ -205,16 +204,18 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         private string ThreeDigitSetConverter(int number, GrammaticalGender gender, bool thisIsLastSet = false)
         {
             if (number == 0)
+            {
                 return string.Empty;
+            }
 
             // grab lowest two digits
             var tensAndUnits = number % 100;
             // grab third digit
-            var hundreds = (int)(number / 100);
+            var hundreds = number / 100;
 
             // grab also first and second digits separately
             var units = tensAndUnits % 10;
-            var tens = (int)(tensAndUnits / 10);
+            var tens = tensAndUnits / 10;
 
             var words = string.Empty;
 
@@ -222,7 +223,7 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             words += HundredsToText(hundreds);
 
             // append text for tens, only those from twenty upward
-            words +=  ((tens >= 2) ? " " : string.Empty) + _tensOver20NumberToText[tens];
+            words += ((tens >= 2) ? " " : string.Empty) + _tensOver20NumberToText[tens];
 
             if (tensAndUnits <= 9)
             {
@@ -251,13 +252,23 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
             {
                 var parts = multiGenderPart.Split('|');
                 if (gender == GrammaticalGender.Feminine)
+                {
                     return parts[1];
+                }
 
+                if (gender == GrammaticalGender.Neuter)
+                {
+                    return parts[2];
+                }
                 else
+                {
                     return parts[0];
+                }
             }
             else
+            {
                 return multiGenderPart;
+            }
         }
 
         private bool IsAbove20(int number)
@@ -268,13 +279,17 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         private string HundredsToText(int hundreds)
         {
             if (hundreds == 0)
+            {
                 return string.Empty;
-
+            }
             else if (hundreds == 1)
+            {
                 return _feminineSingular + " sută";
-
+            }
             else
+            {
                 return getPartByGender(_units[hundreds], GrammaticalGender.Feminine) + " sute";
+            }
         }
 
         /// <summary>
@@ -298,17 +313,21 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         private string ThousandsConverter(int number, GrammaticalGender gender)
         {
             if (number == 0)
+            {
                 return string.Empty;
-
+            }
             else if (number == 1)
+            {
                 return _feminineSingular + " mie";
-
+            }
             else
+            {
                 return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " mii";
+            }
         }
 
         // Large numbers (above 10^6) use a combined form of the long and short scales.
-        /*    
+        /*
                 Singular    Plural            Order     Scale
                 -----------------------------------------------
                 zece        zeci              10^1      -
@@ -328,13 +347,17 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         private string MillionsConverter(int number, GrammaticalGender gender)
         {
             if (number == 0)
+            {
                 return string.Empty;
-
+            }
             else if (number == 1)
+            {
                 return _masculineSingular + " milion";
-
+            }
             else
+            {
                 return ThreeDigitSetConverter(number, GrammaticalGender.Feminine, true) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " milioane";
+            }
         }
 
         /// <summary>
@@ -346,9 +369,13 @@ namespace Humanizer.Localisation.NumberToWords.Romanian
         private string BillionsConverter(int number, GrammaticalGender gender)
         {
             if (number == 1)
+            {
                 return _masculineSingular + " miliard";
+            }
             else
+            {
                 return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " miliarde";
+            }
         }
     }
 }

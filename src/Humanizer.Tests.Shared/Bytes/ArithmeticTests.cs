@@ -99,7 +99,7 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void MinusOperator()
+        public void NegativeOperator()
         {
             var size = ByteSize.FromBytes(2);
 
@@ -128,6 +128,17 @@ namespace Humanizer.Tests.Bytes
             var result = size1 + size2;
 
             Assert.Equal(2, result.Bytes);
+        }
+
+        [Fact]
+        public void MinusOperator()
+        {
+            var size1 = ByteSize.FromBytes(2);
+            var size2 = ByteSize.FromBytes(1);
+
+            var result = size1 - size2;
+
+            Assert.Equal(1, result.Bytes);
         }
     }
 }

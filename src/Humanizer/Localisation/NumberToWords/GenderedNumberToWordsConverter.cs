@@ -1,6 +1,6 @@
 ﻿namespace Humanizer.Localisation.NumberToWords
 {
-    abstract class GenderedNumberToWordsConverter : INumberToWordsConverter
+    internal abstract class GenderedNumberToWordsConverter : INumberToWordsConverter
     {
         private readonly GrammaticalGender _defaultGender;
 
@@ -19,13 +19,19 @@
             return Convert(number, _defaultGender);
         }
 
+        public string Convert(long number, bool addAnd)
+        {
+            return Convert(number, _defaultGender);
+        }
+
         /// <summary>
         /// Converts the number to string using the provided grammatical gender
         /// </summary>
         /// <param name="number"></param>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public abstract string Convert(long number, GrammaticalGender gender);
+        public abstract string Convert(long number, GrammaticalGender gender, bool addAnd = true);
+
 
         /// <summary>
         /// Converts the number to ordinal string using the locale's default grammatical gender

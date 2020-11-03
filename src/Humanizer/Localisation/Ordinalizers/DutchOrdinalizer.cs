@@ -11,7 +11,9 @@
         {
             // N/A in Dutch
             if (number == 0)
+            {
                 return "0";
+            }
 
             return numberString + "e";
         }

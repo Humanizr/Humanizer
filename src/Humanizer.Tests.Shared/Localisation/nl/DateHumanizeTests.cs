@@ -1,11 +1,10 @@
-﻿using System;
-using Humanizer.Localisation;
+﻿using Humanizer.Localisation;
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.nl
 {
     [UseCulture("nl-NL")]
-    public class DateHumanizeTests 
+    public class DateHumanizeTests
     {
 
         [Theory]

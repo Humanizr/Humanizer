@@ -9,8 +9,9 @@ namespace Humanizer.Tests
 {
     public class DateHumanize
     {
-        readonly static object LockObject = new object();
-        static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
+        private static readonly object LockObject = new object();
+
+        private static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
         {
             var utcNow = DateTime.UtcNow;
             var localNow = DateTime.Now;
@@ -19,7 +20,7 @@ namespace Humanizer.Tests
             VerifyWithDate(expectedString, deltaFromNow, culture, localNow, utcNow);
         }
 
-        static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
+        private static void VerifyWithDateInjection(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
         {
             var utcNow = new DateTime(2013, 6, 20, 9, 58, 22, DateTimeKind.Utc);
             var now = new DateTime(2013, 6, 20, 11, 58, 22, DateTimeKind.Local);
@@ -27,10 +28,14 @@ namespace Humanizer.Tests
             VerifyWithDate(expectedString, deltaFromNow, culture, now, utcNow);
         }
 
-        static void VerifyWithDate(string expectedString, TimeSpan deltaFromBase, CultureInfo culture, DateTime baseDate, DateTime baseDateUtc)
+        private static void VerifyWithDate(string expectedString, TimeSpan deltaFromBase, CultureInfo culture, DateTime baseDate, DateTime baseDateUtc)
         {
             Assert.Equal(expectedString, baseDateUtc.Add(deltaFromBase).Humanize(utcDate: true, dateToCompareAgainst: baseDateUtc, culture: culture));
             Assert.Equal(expectedString, baseDate.Add(deltaFromBase).Humanize(false, baseDate, culture: culture));
+
+            // Compared with default utcDate
+            Assert.Equal(expectedString, baseDateUtc.Add(deltaFromBase).Humanize(utcDate: null, dateToCompareAgainst: baseDateUtc, culture: culture));
+            Assert.Equal(expectedString, baseDate.Add(deltaFromBase).Humanize(null, baseDate, culture: culture));
         }
 
         public static void Verify(string expectedString, int unit, TimeUnit timeUnit, Tense tense, double? precision = null, CultureInfo culture = null, DateTime? baseDate = null, DateTime? baseDateUtc = null)
@@ -39,15 +44,21 @@ namespace Humanizer.Tests
             lock (LockObject)
             {
                 if (precision.HasValue)
+                {
                     Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision.Value);
+                }
                 else
+                {
                     Configurator.DateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
+                }
 
                 var deltaFromNow = new TimeSpan();
                 unit = Math.Abs(unit);
 
                 if (tense == Tense.Past)
+                {
                     unit = -unit;
+                }
 
                 switch (timeUnit)
                 {
@@ -67,10 +78,10 @@ namespace Humanizer.Tests
                         deltaFromNow = TimeSpan.FromDays(unit);
                         break;
                     case TimeUnit.Month:
-                        deltaFromNow = TimeSpan.FromDays(unit*31);
+                        deltaFromNow = TimeSpan.FromDays(unit * 31);
                         break;
                     case TimeUnit.Year:
-                        deltaFromNow = TimeSpan.FromDays(unit*366);
+                        deltaFromNow = TimeSpan.FromDays(unit * 366);
                         break;
                 }
 

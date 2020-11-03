@@ -111,13 +111,53 @@ namespace Humanizer
                 : input.Pluralize(inputIsKnownToBeSingular: false);
 
             if (showQuantityAs == ShowQuantityAs.None)
+            {
                 return transformedInput;
+            }
 
             if (showQuantityAs == ShowQuantityAs.Numeric)
+            {
                 return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+            }
 
-            
             return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
+        }
+        
+        /// <summary>
+        /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
+        /// </summary>
+        /// <param name="input">The word to be prefixed</param>
+        /// <param name="quantity">The quantity of the word</param>
+        /// <param name="format">A standard or custom numeric format string.</param>
+        /// <param name="formatProvider">An object that supplies culture-specific formatting information.</param>
+        /// <example>
+        /// "request".ToQuantity(0.2) => "0.2 requests"
+        /// "request".ToQuantity(10.6, format: "N0") => "10.6 requests"
+        /// "request".ToQuantity(1.0, format: "N0") => "1 request"
+        /// </example>
+        /// <returns></returns>
+        public static string ToQuantity(this string input, double quantity, string format = null, IFormatProvider formatProvider = null)
+        {
+            var transformedInput = quantity == 1
+                ? input.Singularize(inputIsKnownToBePlural: false)
+                : input.Pluralize(inputIsKnownToBeSingular: false);
+
+            return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+
+        }
+
+        /// <summary>
+        /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
+        /// </summary>
+        /// <param name="input">The word to be prefixed</param>
+        /// <param name="quantity">The quantity of the word</param>
+        /// <example>
+        /// "request".ToQuantity(0.2) => "0.2 requests"
+        /// </example>
+        /// <returns></returns>
+        public static string ToQuantity(this string input, double quantity)
+        {
+            return ToQuantity(input, quantity, null, null);
         }
     }
 }

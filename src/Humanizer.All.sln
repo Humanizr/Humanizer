@@ -1,0 +1,194 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer", "Humanizer\Humanizer.csproj", "{511A7984-F455-4A6E-ADB9-9CAAC47EA079}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\.gitattributes = ..\.gitattributes
+		..\.gitignore = ..\.gitignore
+		..\appveyor.yml = ..\appveyor.yml
+		..\NuSpecs\Humanizer.Core.nuspec = ..\NuSpecs\Humanizer.Core.nuspec
+		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
+		..\LICENSE = ..\LICENSE
+		..\readme.md = ..\readme.md
+		..\release_notes.md = ..\release_notes.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D-0488-42AE-A585-86D882F23D5F}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.cmd = ..\build.cmd
+		..\build.proj = ..\build.proj
+		Humanizer.ruleset = Humanizer.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{1ABFDC1F-EAB0-48E1-B27E-388619899018}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Humanizer.Tests.Shared", "Humanizer.Tests.Shared\Humanizer.Tests.Shared.shproj", "{FDEC244B-F07E-4A5E-BB80-FBC6AC77A9AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests.Uwp", "Humanizer.Tests.Uwp\Humanizer.Tests.Uwp.csproj", "{261367CA-00C7-4832-BD26-200CFF8F575F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{04B74BEC-A645-4D1A-BE21-F4EB4413A903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Humanizer.Tests.Uwp.Runner", "Humanizer.Tests.Uwp.Runner\Humanizer.Tests.Uwp.Runner.csproj", "{F0DC7771-CE59-4F3C-B160-56F661F5D220}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA449265-E001-486D-A0F4-04ACF0C83DC1}"
+	ProjectSection(SolutionItems) = preProject
+		..\NuSpecs\Humanizer.Core.af.nuspec = ..\NuSpecs\Humanizer.Core.af.nuspec
+		..\NuSpecs\Humanizer.Core.ar.nuspec = ..\NuSpecs\Humanizer.Core.ar.nuspec
+		..\NuSpecs\Humanizer.Core.bg.nuspec = ..\NuSpecs\Humanizer.Core.bg.nuspec
+		..\NuSpecs\Humanizer.Core.bn-BD.nuspec = ..\NuSpecs\Humanizer.Core.bn-BD.nuspec
+		..\NuSpecs\Humanizer.Core.cs.nuspec = ..\NuSpecs\Humanizer.Core.cs.nuspec
+		..\NuSpecs\Humanizer.Core.da.nuspec = ..\NuSpecs\Humanizer.Core.da.nuspec
+		..\NuSpecs\Humanizer.Core.de.nuspec = ..\NuSpecs\Humanizer.Core.de.nuspec
+		..\NuSpecs\Humanizer.Core.el.nuspec = ..\NuSpecs\Humanizer.Core.el.nuspec
+		..\NuSpecs\Humanizer.Core.es.nuspec = ..\NuSpecs\Humanizer.Core.es.nuspec
+		..\NuSpecs\Humanizer.Core.fa.nuspec = ..\NuSpecs\Humanizer.Core.fa.nuspec
+		..\NuSpecs\Humanizer.Core.fi-FI.nuspec = ..\NuSpecs\Humanizer.Core.fi-FI.nuspec
+		..\NuSpecs\Humanizer.Core.fr-BE.nuspec = ..\NuSpecs\Humanizer.Core.fr-BE.nuspec
+		..\NuSpecs\Humanizer.Core.fr.nuspec = ..\NuSpecs\Humanizer.Core.fr.nuspec
+		..\NuSpecs\Humanizer.Core.he.nuspec = ..\NuSpecs\Humanizer.Core.he.nuspec
+		..\NuSpecs\Humanizer.Core.hr.nuspec = ..\NuSpecs\Humanizer.Core.hr.nuspec
+		..\NuSpecs\Humanizer.Core.hu.nuspec = ..\NuSpecs\Humanizer.Core.hu.nuspec
+		..\NuSpecs\Humanizer.Core.id.nuspec = ..\NuSpecs\Humanizer.Core.id.nuspec
+		..\NuSpecs\Humanizer.Core.it.nuspec = ..\NuSpecs\Humanizer.Core.it.nuspec
+		..\NuSpecs\Humanizer.Core.ja.nuspec = ..\NuSpecs\Humanizer.Core.ja.nuspec
+		..\NuSpecs\Humanizer.Core.lv.nuspec = ..\NuSpecs\Humanizer.Core.lv.nuspec
+		..\NuSpecs\Humanizer.Core.nb-NO.nuspec = ..\NuSpecs\Humanizer.Core.nb-NO.nuspec
+		..\NuSpecs\Humanizer.Core.nb.nuspec = ..\NuSpecs\Humanizer.Core.nb.nuspec
+		..\NuSpecs\Humanizer.Core.nl.nuspec = ..\NuSpecs\Humanizer.Core.nl.nuspec
+		..\NuSpecs\Humanizer.Core.nuspec = ..\NuSpecs\Humanizer.Core.nuspec
+		..\NuSpecs\Humanizer.Core.pl.nuspec = ..\NuSpecs\Humanizer.Core.pl.nuspec
+		..\NuSpecs\Humanizer.Core.pt.nuspec = ..\NuSpecs\Humanizer.Core.pt.nuspec
+		..\NuSpecs\Humanizer.Core.ro.nuspec = ..\NuSpecs\Humanizer.Core.ro.nuspec
+		..\NuSpecs\Humanizer.Core.ru.nuspec = ..\NuSpecs\Humanizer.Core.ru.nuspec
+		..\NuSpecs\Humanizer.Core.sk.nuspec = ..\NuSpecs\Humanizer.Core.sk.nuspec
+		..\NuSpecs\Humanizer.Core.sl.nuspec = ..\NuSpecs\Humanizer.Core.sl.nuspec
+		..\NuSpecs\Humanizer.Core.sr-Latn.nuspec = ..\NuSpecs\Humanizer.Core.sr-Latn.nuspec
+		..\NuSpecs\Humanizer.Core.sr.nuspec = ..\NuSpecs\Humanizer.Core.sr.nuspec
+		..\NuSpecs\Humanizer.Core.sv.nuspec = ..\NuSpecs\Humanizer.Core.sv.nuspec
+		..\NuSpecs\Humanizer.Core.tr.nuspec = ..\NuSpecs\Humanizer.Core.tr.nuspec
+		..\NuSpecs\Humanizer.Core.uk.nuspec = ..\NuSpecs\Humanizer.Core.uk.nuspec
+		..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec = ..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec
+		..\NuSpecs\Humanizer.Core.uz-Latn-UZ.nuspec = ..\NuSpecs\Humanizer.Core.uz-Latn-UZ.nuspec
+		..\NuSpecs\Humanizer.Core.vi.nuspec = ..\NuSpecs\Humanizer.Core.vi.nuspec
+		..\NuSpecs\Humanizer.Core.zh-CN.nuspec = ..\NuSpecs\Humanizer.Core.zh-CN.nuspec
+		..\NuSpecs\Humanizer.Core.zh-Hans.nuspec = ..\NuSpecs\Humanizer.Core.zh-Hans.nuspec
+		..\NuSpecs\Humanizer.Core.zh-Hant.nuspec = ..\NuSpecs\Humanizer.Core.zh-Hant.nuspec
+		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{261367ca-00c7-4832-bd26-200cff8f575f}*SharedItemsImports = 4
+		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{f0dc7771-ce59-4f3c-b160-56f661f5d220}*SharedItemsImports = 4
+		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{fdec244b-f07e-4a5e-bb80-fbc6ac77a9aa}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|x64.Build.0 = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Debug|x86.Build.0 = Debug|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|ARM.Build.0 = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|x64.ActiveCfg = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|x64.Build.0 = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|x86.ActiveCfg = Release|Any CPU
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}.Release|x86.Build.0 = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|ARM.Build.0 = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|x64.Build.0 = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Debug|x86.Build.0 = Debug|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|ARM.ActiveCfg = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|ARM.Build.0 = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|x64.ActiveCfg = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|x64.Build.0 = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|x86.ActiveCfg = Release|Any CPU
+		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|x86.Build.0 = Release|Any CPU
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|Any CPU.Build.0 = Debug|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|ARM.Build.0 = Debug|ARM
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|x64.ActiveCfg = Debug|x64
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|x64.Build.0 = Debug|x64
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|x64.Deploy.0 = Debug|x64
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|x86.ActiveCfg = Debug|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|x86.Build.0 = Debug|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Debug|x86.Deploy.0 = Debug|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|Any CPU.ActiveCfg = Release|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|ARM.ActiveCfg = Release|ARM
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|ARM.Build.0 = Release|ARM
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|ARM.Deploy.0 = Release|ARM
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|x64.ActiveCfg = Release|x64
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|x64.Build.0 = Release|x64
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|x64.Deploy.0 = Release|x64
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|x86.ActiveCfg = Release|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|x86.Build.0 = Release|x86
+		{261367CA-00C7-4832-BD26-200CFF8F575F}.Release|x86.Deploy.0 = Release|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|Any CPU.Build.0 = Debug|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|ARM.Build.0 = Debug|ARM
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|x64.ActiveCfg = Debug|x64
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|x64.Build.0 = Debug|x64
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|x64.Deploy.0 = Debug|x64
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|x86.ActiveCfg = Debug|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|x86.Build.0 = Debug|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Debug|x86.Deploy.0 = Debug|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|Any CPU.ActiveCfg = Release|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|ARM.ActiveCfg = Release|ARM
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|ARM.Build.0 = Release|ARM
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|ARM.Deploy.0 = Release|ARM
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x64.ActiveCfg = Release|x64
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x64.Build.0 = Release|x64
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x64.Deploy.0 = Release|x64
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.ActiveCfg = Release|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.Build.0 = Release|x86
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F886A8DA-3EFC-4A89-91DD-06FAF13DA172} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
+		{97AAE24D-0488-42AE-A585-86D882F23D5F} = {4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}
+		{FDEC244B-F07E-4A5E-BB80-FBC6AC77A9AA} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
+		{261367CA-00C7-4832-BD26-200CFF8F575F} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
+		{F0DC7771-CE59-4F3C-B160-56F661F5D220} = {04B74BEC-A645-4D1A-BE21-F4EB4413A903}
+		{AA449265-E001-486D-A0F4-04ACF0C83DC1} = {4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4063A70-EE14-49AE-A6C4-3108B1CA70EF}
+	EndGlobalSection
+EndGlobal

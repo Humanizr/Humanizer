@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -15,7 +15,7 @@ namespace Humanizer.Tests
     }
 
     [UseCulture("en")]
-    public class CollectionHumanizeTests 
+    public class CollectionHumanizeTests
     {
         [Fact]
         public void HumanizeReturnsOnlyNameWhenCollectionContainsOneItem()
@@ -76,17 +76,31 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void HumanizeUsesObjectFormatter()
+        public void HumanizeUsesStringDisplayFormatter()
         {
             var humanized = _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString));
             Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three", humanized);
         }
 
         [Fact]
-        public void HumanizeUsesObjectFormatterWhenSeparatorIsProvided()
+        public void HumanizeUsesObjectDisplayFormatter()
+        {
+            var humanized = _testCollection.Humanize(sc => sc.SomeInt);
+            Assert.Equal("1, 2, and 3", humanized);
+        }
+
+        [Fact]
+        public void HumanizeUsesStringDisplayFormatterWhenSeparatorIsProvided()
         {
             var humanized = _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString), "or");
             Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, or SomeObject #3 - Three", humanized);
+        }
+
+        [Fact]
+        public void HumanizeUsesObjectDisplayFormatterWhenSeparatorIsProvided()
+        {
+            var humanized = _testCollection.Humanize(sc => sc.SomeInt, "or");
+            Assert.Equal("1, 2, or 3", humanized);
         }
 
         [Fact]
@@ -96,15 +110,27 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void HumanizeHandlesNullFormatterReturnsWithoutAnException()
+        public void HumanizeHandlesNullStringDisplayFormatterReturnsWithoutAnException()
         {
             Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => null)));
         }
 
         [Fact]
-        public void HumanizeRunsFormatterOnNulls()
+        public void HumanizeHandlesNullObjectDisplayFormatterReturnsWithoutAnException()
+        {
+            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => (object)null)));
+        }
+
+        [Fact]
+        public void HumanizeRunsStringDisplayFormatterOnNulls()
         {
             Assert.Equal("1, (null), and 3", new int?[] { 1, null, 3 }.Humanize(_ => _?.ToString() ?? "(null)"));
+        }
+
+        [Fact]
+        public void HumanizeRunsObjectDisplayFormatterOnNulls()
+        {
+            Assert.Equal("1, 2, and 3", new int?[] { 1, null, 3 }.Humanize(_ => _ ?? 2));
         }
 
         [Fact]

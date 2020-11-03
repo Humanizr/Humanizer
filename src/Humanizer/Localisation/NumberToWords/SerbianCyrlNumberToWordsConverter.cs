@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -27,10 +25,14 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
 
             if (number == 0)
+            {
                 return "нула";
+            }
 
             if (number < 0)
+            {
                 return string.Format("- {0}", Convert(-number));
+            }
 
             var parts = new List<string>();
             var billions = number / 1000000000;
@@ -41,7 +43,9 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= 1000000000;
 
                 if (number > 0)
+                {
                     parts.Add(" ");
+                }
             }
 
             var millions = number / 1000000;
@@ -52,7 +56,9 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= 1000000;
 
                 if (number > 0)
+                {
                     parts.Add(" ");
+                }
             }
 
             var thousands = number / 1000;
@@ -63,7 +69,9 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= 1000;
 
                 if (number > 0)
+                {
                     parts.Add(" ");
+                }
             }
 
             var hundreds = number / 100;
@@ -74,13 +82,17 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= 100;
 
                 if (number > 0)
+                {
                     parts.Add(" ");
+                }
             }
 
             if (number > 0)
             {
                 if (number < 20)
+                {
                     parts.Add(UnitsMap[number]);
+                }
                 else
                 {
                     parts.Add(TensMap[number / 10]);
@@ -88,7 +100,9 @@ namespace Humanizer.Localisation.NumberToWords
                     var units = number % 10;
 
                     if (units > 0)
+                    {
                         parts.Add(string.Format(" {0}", UnitsMap[units]));
+                    }
                 }
             }
 

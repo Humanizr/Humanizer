@@ -1,7 +1,7 @@
 Here is a checklist you should tick through before submitting a pull request: 
  - [ ] Implementation is clean
  - [ ] Code adheres to the existing coding standards; e.g. no curlies for one-line blocks, no redundant empty lines between methods or code blocks, spaces rather than tabs, etc.
- - [ ] No ReSharper warnings
+ - [ ] No Code Analysis warnings
  - [ ] There is proper unit test coverage
  - [ ] If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
  - [ ] There are very few or no comments (because comments shouldn't be needed if you write clean code)

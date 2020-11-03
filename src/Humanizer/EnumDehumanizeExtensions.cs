@@ -41,7 +41,9 @@ namespace Humanizer
             var match = Enum.GetValues(targetEnum).Cast<Enum>().FirstOrDefault(value => string.Equals(value.Humanize(), input, StringComparison.OrdinalIgnoreCase));
 
             if (match == null && onNoMatch == OnNoMatch.ThrowsException)
+            {
                 throw new NoMatchFoundException("Couldn't find any enum member that matches the string " + input);
+            }
 
             return match;
         }

@@ -21,7 +21,6 @@
 //THE SOFTWARE.
 
 using System;
-
 using Humanizer.Bytes;
 using Xunit;
 
@@ -40,8 +39,7 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void TryParse()
         {
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse("1020KB", out resultByteSize);
+            var resultBool = ByteSize.TryParse("1020KB", out var resultByteSize);
 
             Assert.True(resultBool);
             Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
@@ -59,8 +57,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData("KB")]
         public void TryParseReturnsFalseOnBadValue(string input)
         {
-            ByteSize resultByteSize;
-            var resultBool = ByteSize.TryParse(input, out resultByteSize);
+            var resultBool = ByteSize.TryParse(input, out var resultByteSize);
 
             Assert.False(resultBool);
             Assert.Equal(new ByteSize(), resultByteSize);

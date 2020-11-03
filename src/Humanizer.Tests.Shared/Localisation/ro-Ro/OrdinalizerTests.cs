@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.roRO
 {
     [UseCulture("ro-RO")]
-    public class OrdinalizerTests 
+    public class OrdinalizerTests
     {
 
         [Theory]
@@ -39,6 +39,7 @@ namespace Humanizer.Tests.Localisation.roRO
             Assert.Equal(expected, number.Ordinalize(GrammaticalGender.Masculine));
         }
 
+        [Theory]
         [InlineData("0", "0")]  // No ordinal for 0 (zero) in Romanian.
         [InlineData("1", "primul")]
         [InlineData("2", "al 2-lea")]

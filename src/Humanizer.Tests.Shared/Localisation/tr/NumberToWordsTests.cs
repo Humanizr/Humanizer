@@ -3,7 +3,7 @@
 namespace Humanizer.Tests.Localisation.tr
 {
     [UseCulture("tr")]
-    public class NumberToWordsTests 
+    public class NumberToWordsTests
     {
         [Theory]
         [InlineData("sıfır", 0)]

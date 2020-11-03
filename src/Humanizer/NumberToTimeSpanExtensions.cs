@@ -54,7 +54,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Milliseconds(this int ms)
         {
-            return Milliseconds((double) ms);
+            return Milliseconds((double)ms);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Milliseconds(this uint ms)
         {
-            return Milliseconds((double) ms);
+            return Milliseconds((double)ms);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Milliseconds(this long ms)
         {
-            return Milliseconds((double) ms);
+            return Milliseconds((double)ms);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Seconds(this int seconds)
         {
-            return Seconds((double) seconds);
+            return Seconds((double)seconds);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Seconds(this uint seconds)
         {
-            return Seconds((double) seconds);
+            return Seconds((double)seconds);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Seconds(this long seconds)
         {
-            return Seconds((double) seconds);
+            return Seconds((double)seconds);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Minutes(this int minutes)
         {
-            return Minutes((double) minutes);
+            return Minutes((double)minutes);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Minutes(this uint minutes)
         {
-            return Minutes((double) minutes);
+            return Minutes((double)minutes);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Minutes(this long minutes)
         {
-            return Minutes((double) minutes);
+            return Minutes((double)minutes);
         }
 
         /// <summary>
@@ -324,7 +324,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Hours(this int hours)
         {
-            return Hours((double) hours);
+            return Hours((double)hours);
         }
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Hours(this uint hours)
         {
-            return Hours((double) hours);
+            return Hours((double)hours);
         }
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Hours(this long hours)
         {
-            return Hours((double) hours);
+            return Hours((double)hours);
         }
 
         /// <summary>
@@ -414,7 +414,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Days(this int days)
         {
-            return Days((double) days);
+            return Days((double)days);
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Days(this uint days)
         {
-            return Days((double) days);
+            return Days((double)days);
         }
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Days(this long days)
         {
-            return Days((double) days);
+            return Days((double)days);
         }
 
         /// <summary>
@@ -504,7 +504,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Weeks(this int input)
         {
-            return Weeks((double) input);
+            return Weeks((double)input);
         }
 
         /// <summary>
@@ -514,7 +514,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Weeks(this uint input)
         {
-            return Weeks((double) input);
+            return Weeks((double)input);
         }
 
         /// <summary>
@@ -524,9 +524,9 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Weeks(this long input)
         {
-            return Weeks((double) input);
+            return Weeks((double)input);
         }
-        
+
         /// <summary>
         /// 2.Weeks() == new TimeSpan(14, 0, 0, 0)
         /// </summary>
@@ -544,7 +544,7 @@ namespace Humanizer
         /// <returns></returns>
         public static TimeSpan Weeks(this double input)
         {
-            return Days(7*input);
+            return Days(7 * input);
         }
     }
 }

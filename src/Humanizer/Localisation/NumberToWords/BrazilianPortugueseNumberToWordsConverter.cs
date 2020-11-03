@@ -13,26 +13,31 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] PortugueseOrdinalTensMap = { "zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo" };
         private static readonly string[] PortugueseOrdinalHundredsMap = { "zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo" };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
+            if (input > 999999999999 || input < -999999999999)
             {
                 throw new NotImplementedException();
             }
-            var number = (int)input;
+
+            var number = input;
 
             if (number == 0)
+            {
                 return "zero";
+            }
 
             if (number < 0)
+            {
                 return string.Format("menos {0}", Convert(Math.Abs(number), gender));
+            }
 
             var parts = new List<string>();
 
             if ((number / 1000000000) > 0)
             {
                 // gender is not applied for billions
-                parts.Add(number / 1000000000 > 2
+                parts.Add(number / 1000000000 >= 2
                     ? string.Format("{0} bilhões", Convert(number / 1000000000, GrammaticalGender.Masculine))
                     : string.Format("{0} bilhão", Convert(number / 1000000000, GrammaticalGender.Masculine)));
 
@@ -42,7 +47,7 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000000) > 0)
             {
                 // gender is not applied for millions
-                parts.Add(number / 1000000 > 2
+                parts.Add(number / 1000000 >= 2
                     ? string.Format("{0} milhões", Convert(number / 1000000, GrammaticalGender.Masculine))
                     : string.Format("{0} milhão", Convert(number / 1000000, GrammaticalGender.Masculine)));
 
@@ -59,10 +64,14 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 100) > 0)
             {
                 if (number == 100)
+                {
                     parts.Add(parts.Count > 0 ? "e cem" : "cem");
+                }
                 else
+                {
                     // Gender is applied to hundreds starting from 200
                     parts.Add(ApplyGender(PortugueseHundredsMap[(number / 100)], gender));
+                }
 
                 number %= 100;
             }
@@ -70,15 +79,21 @@ namespace Humanizer.Localisation.NumberToWords
             if (number > 0)
             {
                 if (parts.Count != 0)
+                {
                     parts.Add("e");
+                }
 
                 if (number < 20)
+                {
                     parts.Add(ApplyGender(PortugueseUnitsMap[number], gender));
+                }
                 else
                 {
                     var lastPart = PortugueseTensMap[number / 10];
                     if ((number % 10) > 0)
+                    {
                         lastPart += string.Format(" e {0}", ApplyGender(PortugueseUnitsMap[number % 10], gender));
+                    }
 
                     parts.Add(lastPart);
                 }
@@ -91,7 +106,9 @@ namespace Humanizer.Localisation.NumberToWords
         {
             // N/A in Portuguese ordinal
             if (number == 0)
+            {
                 return "zero";
+            }
 
             var parts = new List<string>();
 
@@ -135,24 +152,34 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             if (number > 0)
+            {
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalUnitsMap[number], gender));
+            }
 
             return string.Join(" ", parts.ToArray());
         }
 
         private static string ApplyGender(string toWords, GrammaticalGender gender)
         {
-            if (gender != GrammaticalGender.Feminine) 
+            if (gender != GrammaticalGender.Feminine)
+            {
                 return toWords;
+            }
 
             if (toWords.EndsWith("os"))
+            {
                 return toWords.Substring(0, toWords.Length - 2) + "as";
+            }
 
             if (toWords.EndsWith("um"))
+            {
                 return toWords.Substring(0, toWords.Length - 2) + "uma";
+            }
 
             if (toWords.EndsWith("dois"))
+            {
                 return toWords.Substring(0, toWords.Length - 4) + "duas";
+            }
 
             return toWords;
         }
@@ -160,7 +187,9 @@ namespace Humanizer.Localisation.NumberToWords
         private static string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
         {
             if (gender == GrammaticalGender.Feminine)
+            {
                 return toWords.TrimEnd('o') + 'a';
+            }
 
             return toWords;
         }

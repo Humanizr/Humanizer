@@ -63,7 +63,7 @@ namespace Humanizer.Tests.Localisation.bnBD
         [InlineData(18, "অষ্টাদশ")]
         [InlineData(19, "উনিশ তম")]
         [InlineData(20, "বিশ তম")]
-        [InlineData(21, "একুশ তম")]        
+        [InlineData(21, "একুশ তম")]
         [InlineData(100, "শত তম")]
         [InlineData(112, "একশ বারো তম")]
         [InlineData(118, "একশ আঠারো তম")]

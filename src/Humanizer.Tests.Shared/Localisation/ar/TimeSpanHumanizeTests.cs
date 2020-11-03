@@ -92,7 +92,13 @@ namespace Humanizer.Tests.Localisation.ar
         [Fact]
         public void NoTime()
         {
-            Assert.Equal("حالاً", TimeSpan.Zero.Humanize());
+            Assert.Equal("0 جزء من الثانية", TimeSpan.Zero.Humanize());
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            Assert.Equal("حالاً", TimeSpan.Zero.Humanize(toWords: true));
         }
     }
 }

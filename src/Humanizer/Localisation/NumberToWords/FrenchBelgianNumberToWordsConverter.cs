@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -8,17 +7,25 @@ namespace Humanizer.Localisation.NumberToWords
         protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref int number, GrammaticalGender gender, bool pluralize)
         {
             if (number == 80)
+            {
                 parts.Add(pluralize ? "quatre-vingts" : "quatre-vingt");
+            }
             else if (number == 81)
+            {
                 parts.Add(gender == GrammaticalGender.Feminine ? "quatre-vingt-une" : "quatre-vingt-un");
+            }
             else
+            {
                 base.CollectPartsUnderAHundred(parts, ref number, gender, pluralize);
+            }
         }
 
         protected override string GetTens(int tens)
         {
             if (tens == 8)
+            {
                 return "quatre-vingt";
+            }
 
             return base.GetTens(tens);
         }

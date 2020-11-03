@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata minClientVersion="2.12">
+    <id>Humanizer.Core.ms-MY</id>
+    <version>$version$</version>
+    <title>Humanizer Locale (ms-MY)</title>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
+    <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
+    <icon>logo.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer Locale Malay (Malaysia) (ms-MY)</description>
+    <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
+    <license type="expression">MIT</license>
+    <language>ms-MY</language>
+    <dependencies>
+       <dependency id="Humanizer.Core" version="[$version$]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Humanizer\bin\Release\netstandard1.0\ms-MY\*.*" target="lib\netstandard1.0\ms-MY" />
+    <file src="Humanizer\bin\Release\netstandard2.0\ms-MY\*.*" target="lib\netstandard2.0\ms-MY" />
+    <file src="..\logo.png" target="logo.png" />
+  </files>
+</package>

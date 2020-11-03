@@ -89,6 +89,14 @@ namespace Humanizer.Tests.Localisation.uzCyrl
         {
             var noTime = TimeSpan.Zero;
             var actual = noTime.Humanize();
+            Assert.Equal("0 миллисекунд", actual);
+        }
+
+        [Fact]
+        public void NoTimeToWords()
+        {
+            var noTime = TimeSpan.Zero;
+            var actual = noTime.Humanize(toWords: true);
             Assert.Equal("вақт йўқ", actual);
         }
     }

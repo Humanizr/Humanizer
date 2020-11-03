@@ -4,14 +4,14 @@
     <id>Humanizer.Core.he</id>
     <version>$version$</version>
     <title>Humanizer Locale (he)</title>
-    <authors>Mehdi Khalili, Oren Novotny</authors>
-    <owners>Mehdi Khalili, onovotny</owners>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
-    <iconUrl>https://raw.github.com/Humanizr/Humanizer/master/logo.png</iconUrl>
+    <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Humanizer Locale (he)</description>
-    <copyright>Copyright 2012-2015  Mehdi Khalili</copyright>
-    <licenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</licenseUrl>
+    <description>Humanizer Locale Hebrew (he)</description>
+    <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
+    <license type="expression">MIT</license>
+    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <language>he</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
@@ -19,5 +19,7 @@
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\netstandard1.0\he\*.*" target="lib\netstandard1.0\he" />
+    <file src="Humanizer\bin\Release\netstandard2.0\he\*.*" target="lib\netstandard2.0\he" />
+    <file src="..\logo.png" target="logo.png" />
   </files>
 </package>
