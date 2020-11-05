@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 
 namespace Humanizer.Inflections
@@ -79,6 +79,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("human", "humans");
             _default.AddIrregular("child", "children");
             _default.AddIrregular("sex", "sexes");
+            _default.AddIrregular("glove", "gloves");
             _default.AddIrregular("move", "moves");
             _default.AddIrregular("goose", "geese");
             _default.AddIrregular("wave", "waves");
