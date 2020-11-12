@@ -26,13 +26,13 @@ using Xunit;
 namespace Humanizer.Tests.Bytes
 {
     public class ToFullWordsTests
-    { 
+    {
         [Fact]
         public void ReturnsSingularBit()
         {
             Assert.Equal("1 bit", ByteSize.FromBits(1).ToFullWords());
         }
-        
+
         [Fact]
         public void ReturnsPluralBits()
         {
@@ -97,6 +97,14 @@ namespace Humanizer.Tests.Bytes
         public void ReturnsPluralTerabytes()
         {
             Assert.Equal("10 terabytes", ByteSize.FromTerabytes(10).ToFullWords());
+        }
+
+        [Theory]
+        [InlineData(229376, "B", "229376 bytes")]
+        [InlineData(229376, "# KB", "224 kilobytes")]
+        public void ToFullWordsFormatted(double input, string format, string expectedValue)
+        {
+            Assert.Equal(expectedValue, ByteSize.FromBytes(input).ToFullWords(format));
         }
     }
 }
