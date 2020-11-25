@@ -51,7 +51,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Humanizer ReSharper Annotations](#humanizer-resharper-annotations)
    - [PowerShell Humanizer](#powershell-humanizer)
    - [Humanizer JVM](#humanizerjvm)
-   - [Humanizer.JS](#humanizerjs)
+   - [Humanizer.node](#humanizernode)
  - [Main contributors](#main-contributors)
  - [License](#license)
  - [Icon](#icon)
@@ -1243,8 +1243,8 @@ These annotations do not yet cover the entire library, but [pull requests are al
 [Humanizer.jvm](https://github.com/Humanizr/Humanizer.jvm) is an adaptation of the Humanizer framework for .Net which is made for the jvm and is written in Kotlin.
 Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
-### <a id="humanizerjs">Humanizer.JS</a>
-[Humanizer.JS](https://github.com/SamuelEnglard/Humanizer.Js) is a TypeScript port of the Humanizer framework.
+### <a id="humanizernode">Humanizer.node</a>
+[Humanizer.node](https://github.com/fakoua/humanizer.node) is a TypeScript port of the Humanizer framework.
 
 ## <a id="main-contributors">Main contributors</a>
  - Mehdi Khalili ([@MehdiKhalili](https://twitter.com/MehdiKhalili))
