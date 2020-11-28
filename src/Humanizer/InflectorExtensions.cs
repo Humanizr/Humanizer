@@ -47,6 +47,17 @@ namespace Humanizer
         /// </summary>
         /// <param name="word">Word to be singularized</param>
         /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
+        /// <returns></returns>
+        public static string Singularize(this string word, bool inputIsKnownToBePlural = true)
+        {
+            return Vocabularies.Default.Singularize(word, inputIsKnownToBePlural, false);
+        }
+
+        /// <summary>
+        /// Singularizes the provided input considering irregular words
+        /// </summary>
+        /// <param name="word">Word to be singularized</param>
+        /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
         /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
         /// <returns></returns>
         public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
