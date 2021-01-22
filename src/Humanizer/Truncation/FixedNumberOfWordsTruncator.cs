@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 
 namespace Humanizer
@@ -10,12 +10,7 @@ namespace Humanizer
     {
         public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {
-            if (value == null)
-            {
-                return null;
-            }
-
-            if (value.Length == 0)
+            if (string.IsNullOrEmpty(value))
             {
                 return value;
             }
