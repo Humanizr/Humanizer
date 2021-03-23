@@ -57,6 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.id.nuspec = ..\NuSpecs\Humanizer.Core.id.nuspec
 		..\NuSpecs\Humanizer.Core.it.nuspec = ..\NuSpecs\Humanizer.Core.it.nuspec
 		..\NuSpecs\Humanizer.Core.ja.nuspec = ..\NuSpecs\Humanizer.Core.ja.nuspec
+		..\NuSpecs\Humanizer.Core.ku.nuspec = ..\NuSpecs\Humanizer.Core.ku.nuspec
 		..\NuSpecs\Humanizer.Core.lv.nuspec = ..\NuSpecs\Humanizer.Core.lv.nuspec
 		..\NuSpecs\Humanizer.Core.nb-NO.nuspec = ..\NuSpecs\Humanizer.Core.nb-NO.nuspec
 		..\NuSpecs\Humanizer.Core.nb.nuspec = ..\NuSpecs\Humanizer.Core.nb.nuspec
