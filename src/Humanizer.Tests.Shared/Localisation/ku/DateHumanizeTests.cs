@@ -1,7 +1,7 @@
 ﻿using Humanizer.Localisation;
 using Xunit;
 
-namespace Humanizer.Tests.Localisation.ckb
+namespace Humanizer.Tests.Localisation.ku
 {
     [UseCulture("ku")]
     public class DateHumanizeTests
@@ -48,10 +48,10 @@ namespace Humanizer.Tests.Localisation.ckb
 
         [Theory]
         [InlineData(-2, "2 خولەک لەمەوبەر")]
-        [InlineData(-1, "یەک خولەک لەمەوبەر")]
+        [InlineData(-1, "خولەکێک لەمەوبەر")]
         [InlineData(-3, "3 خولەک لەمەوبەر")]
         [InlineData(-11, "11 خولەک لەمەوبەر")]
-        [InlineData(60, "یەک کاتژمێر لەمەوبەر")]
+        [InlineData(60, "کاتژمێرێک لەمەوبەر")]
         public void MinutesAgo(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
@@ -69,7 +69,7 @@ namespace Humanizer.Tests.Localisation.ckb
 
         [Theory]
         [InlineData(-2, "2 مانگ لەمەوبەر")]
-        [InlineData(-1, "یەک مانگ لەمەوبەر")]
+        [InlineData(-1, "مانگێک لەمەوبەر")]
         [InlineData(-3, "3 مانگ لەمەوبەر")]
         [InlineData(-11, "11 مانگ لەمەوبەر")]
         public void MonthsAgo(int months, string expected)
@@ -88,7 +88,7 @@ namespace Humanizer.Tests.Localisation.ckb
 
         [Theory]
         [InlineData(-2, "2 چرکە لەمەوبەر")]
-        [InlineData(-1, "یەک چرکە لەمەوبەر")]
+        [InlineData(-1, "چرکەیەک لەمەوبەر")]
         [InlineData(-3, "3 چرکە لەمەوبەر")]
         [InlineData(-11, "11 چرکە لەمەوبەر")]
         public void SecondsAgo(int seconds, string expected)
@@ -98,10 +98,10 @@ namespace Humanizer.Tests.Localisation.ckb
 
         [Theory]
         [InlineData(0, "ئێستا")]
-        [InlineData(1, "یەک چرکەی دیکە")]
-        [InlineData(2, "2 چرکەی دیکە")]
-        [InlineData(10, "10 چرکەی دیکە")]
-        [InlineData(24, "2٤ چرکەی دیکە")]
+        [InlineData(1, "دوای چرکەیەکی دیکە")]
+        [InlineData(2, "دوای 2 چرکەی دیکە")]
+        [InlineData(10, "دوای 10 چرکەی دیکە")]
+        [InlineData(24, "دوای 24 چرکەی دیکە")]
         public void SecondsFromNow(int seconds, string expected)
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
@@ -109,7 +109,7 @@ namespace Humanizer.Tests.Localisation.ckb
 
         [Theory]
         [InlineData(-2, "2 ساڵ لەمەوبەر")]
-        [InlineData(-1, "یەک ساڵ لەمەوبەر")]
+        [InlineData(-1, "ساڵێک لەمەوبەر")]
         [InlineData(-3, "3 ساڵ لەمەوبەر")]
         [InlineData(-11, "11 ساڵ لەمەوبەر")]
         public void YearsAgo(int years, string expected)
@@ -118,10 +118,10 @@ namespace Humanizer.Tests.Localisation.ckb
         }
 
         [Theory]
-        [InlineData(1, "یەک ساڵی دیکە")]
-        [InlineData(2, "2 ساڵی دیکە")]
-        [InlineData(7, "7 ساڵی دیکە")]
-        [InlineData(55, "55 ساڵی دیکە")]
+        [InlineData(1, "دوای ساڵێکی دیکە")]
+        [InlineData(2, "دوای 2 ساڵی دیکە")]
+        [InlineData(7, "دوای 7 ساڵی دیکە")]
+        [InlineData(55, "دوای 55 ساڵی دیکە")]
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
