@@ -58,7 +58,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(KurdishUnitsMap[number]);
             }
 
-            return string.Join(" و ", parts);
+            return string.Join(" و ", parts).Replace("یەک هەزار", "هەزار");
         }
 
         public override string ConvertToOrdinal(int number)

@@ -18,9 +18,9 @@ namespace Humanizer.Tests.Localisation.ku
 
         [Theory]
         [InlineData(1, "بەیانی")]
-        [InlineData(2, "دوای 2 ڕۆژی دیکە")]
-        [InlineData(10, "دوای 10 ڕۆژی دیکە")]
-        [InlineData(17, "دوای 17 ڕۆژی دیکە")]
+        [InlineData(2, "2 ڕۆژی دیکە")]
+        [InlineData(10, "10 ڕۆژی دیکە")]
+        [InlineData(17, "17 ڕۆژی دیکە")]
         public void DaysFromNow(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
@@ -37,10 +37,10 @@ namespace Humanizer.Tests.Localisation.ku
         }
 
         [Theory]
-        [InlineData(1, "دوای کاتژمێرێکی دیکە")]
-        [InlineData(2, "دوای 2 کاتژمێری دیکە")]
-        [InlineData(10, "دوای 10 کاتژمێری دیکە")]
-        [InlineData(23, "دوای 23 کاتژمێری دیکە")]
+        [InlineData(1, "کاتژمێرێکی دیکە")]
+        [InlineData(2, "2 کاتژمێری دیکە")]
+        [InlineData(10, "10 کاتژمێری دیکە")]
+        [InlineData(23, "23 کاتژمێری دیکە")]
         public void HoursFromNow(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
@@ -58,10 +58,10 @@ namespace Humanizer.Tests.Localisation.ku
         }
 
         [Theory]
-        [InlineData(1, "دوای خولەکێکی دیکە")]
-        [InlineData(2, "دوای 2 خولەکی دیکە")]
-        [InlineData(10, "دوای 10 خولەکی دیکە")]
-        [InlineData(23, "دوای 23 خولەکی دیکە")]
+        [InlineData(1, "خولەکێکی دیکە")]
+        [InlineData(2, "2 خولەکی دیکە")]
+        [InlineData(10, "10 خولەکی دیکە")]
+        [InlineData(23, "23 خولەکی دیکە")]
         public void MinutesFromNow(int minutes, string expected)
         {
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
@@ -78,9 +78,9 @@ namespace Humanizer.Tests.Localisation.ku
         }
 
         [Theory]
-        [InlineData(1, "دوای مانگێکی دیکە")]
-        [InlineData(2, "دوای 2 مانگی دیکە")]
-        [InlineData(10, "دوای 10 مانگی دیکە")]
+        [InlineData(1, "مانگێکی دیکە")]
+        [InlineData(2, "2 مانگی دیکە")]
+        [InlineData(10, "10 مانگی دیکە")]
         public void MonthsFromNow(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
@@ -98,10 +98,10 @@ namespace Humanizer.Tests.Localisation.ku
 
         [Theory]
         [InlineData(0, "ئێستا")]
-        [InlineData(1, "دوای چرکەیەکی دیکە")]
-        [InlineData(2, "دوای 2 چرکەی دیکە")]
-        [InlineData(10, "دوای 10 چرکەی دیکە")]
-        [InlineData(24, "دوای 24 چرکەی دیکە")]
+        [InlineData(1, "چرکەیەکی دیکە")]
+        [InlineData(2, "2 چرکەی دیکە")]
+        [InlineData(10, "10 چرکەی دیکە")]
+        [InlineData(24, "24 چرکەی دیکە")]
         public void SecondsFromNow(int seconds, string expected)
         {
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
@@ -118,10 +118,10 @@ namespace Humanizer.Tests.Localisation.ku
         }
 
         [Theory]
-        [InlineData(1, "دوای ساڵێکی دیکە")]
-        [InlineData(2, "دوای 2 ساڵی دیکە")]
-        [InlineData(7, "دوای 7 ساڵی دیکە")]
-        [InlineData(55, "دوای 55 ساڵی دیکە")]
+        [InlineData(1, "ساڵێکی دیکە")]
+        [InlineData(2, "2 ساڵی دیکە")]
+        [InlineData(7, "7 ساڵی دیکە")]
+        [InlineData(55, "55 ساڵی دیکە")]
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
