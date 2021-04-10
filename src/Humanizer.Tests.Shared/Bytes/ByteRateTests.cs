@@ -59,8 +59,6 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(expectedValue, text);
         }
 
-
-
         [Theory]
         [InlineData(TimeUnit.Millisecond)]
         [InlineData(TimeUnit.Day)]
@@ -77,5 +75,44 @@ namespace Humanizer.Tests.Bytes
             });
         }
 
+        [Theory]
+        [InlineData(400, 10, 400, 10, 0)]
+        [InlineData(400, 10, 800, 20, 0)]
+        [InlineData(800, 20, 400, 10, 0)]
+        [InlineData(400, 10, 800, 10, -1)]
+        [InlineData(800, 10, 400, 10, 1)]
+        [InlineData(800, 10, 400, 20, 1)]
+        [InlineData(400, 20, 800, 10, -1)]
+        public void ComparisonTests_SameTypes(long leftBytes, int leftIntervalSeconds, long rightBytes, int rightIntervalSeconds, int expectedValue)
+        {
+            var leftSize = ByteSize.FromBytes(leftBytes);
+            var leftInterval = TimeSpan.FromSeconds(leftIntervalSeconds);
+            var leftByteRate = new ByteRate(leftSize, leftInterval);
+            var rightSize = ByteSize.FromBytes(rightBytes);
+            var rightInterval = TimeSpan.FromSeconds(rightIntervalSeconds);
+            var rightByteRate = new ByteRate(rightSize, rightInterval);
+
+            Assert.Equal(leftByteRate.CompareTo(rightByteRate), expectedValue);
+        }
+
+        [Theory]
+        [InlineData(1024, 10, 6, 1, 0)]
+        [InlineData(1024, 10, 12, 2, 0)]
+        [InlineData(2048, 20, 6, 1, 0)]
+        [InlineData(1024, 10, 12, 1, -1)]
+        [InlineData(2048, 10, 6, 1, 1)]
+        [InlineData(2048, 10, 6, 2, 1)]
+        [InlineData(1024, 20, 12, 1, -1)]
+        public void ComparisonTests_DifferingTypes(long leftKiloBytes, int leftIntervalSeconds, long rightMegaBytes, int rightIntervalMinutes, int expectedValue)
+        {
+            var leftSize      = ByteSize.FromKilobytes(leftKiloBytes);
+            var leftInterval  = TimeSpan.FromSeconds(leftIntervalSeconds);
+            var leftByteRate  = new ByteRate(leftSize, leftInterval);
+            var rightSize     = ByteSize.FromMegabytes(rightMegaBytes);
+            var rightInterval = TimeSpan.FromMinutes(rightIntervalMinutes);
+            var rightByteRate = new ByteRate(rightSize, rightInterval);
+
+            Assert.Equal(leftByteRate.CompareTo(rightByteRate), expectedValue);
+        }
     }
 }
