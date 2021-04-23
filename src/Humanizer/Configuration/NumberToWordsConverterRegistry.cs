@@ -48,6 +48,7 @@ namespace Humanizer.Configuration
             Register("az", new AzerbaijaniNumberToWordsConverter());
             Register("ja", new JapaneseNumberToWordsConverter());
             Register("el", new GreekNumberToWordsConverter());
+            Register("th-TH", new ThaiNumberToWordsConverter());
         }
     }
 }
