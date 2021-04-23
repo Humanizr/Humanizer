@@ -19,16 +19,15 @@ stages:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Use .NET Core SDK 3.x'
+      displayName: 'Use .NET Core SDK 5.x'
       inputs:
-        version: 3.x
+        version: 5.x
 
     - task: UseDotNet@2
-      displayName: 'Use .NET Core Runtime 2.1.x'
+      displayName: 'Use .NET Core Runtime 3.x'
       inputs:
-        version: 2.1.x
-        packageType: runtime
-        
+        version: 3.x
+        packageType: runtime 
 
     - task: DotNetCoreCLI@2  
       inputs:
@@ -76,14 +75,14 @@ stages:
         arguments: install --tool-path . dotnet-reportgenerator-globaltool
       displayName: Install ReportGenerator tool
 
-    - script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/Rx.NET/Source/coverlet/reports -reporttypes:"Cobertura"
+    - script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
       displayName: Create reports
 
     - task: PublishCodeCoverageResults@1
       displayName: 'Publish code coverage'
       inputs:
         codeCoverageTool: Cobertura
-        summaryFileLocation: $(Build.SourcesDirectory)/Rx.NET/Source/coverlet/reports/Cobertura.xml
+        summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml
       
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
