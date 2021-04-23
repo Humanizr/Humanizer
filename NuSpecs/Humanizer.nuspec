@@ -58,6 +58,7 @@
       <dependency id="Humanizer.Core.zh-CN" version="$version$" />
       <dependency id="Humanizer.Core.zh-Hans" version="$version$" />
       <dependency id="Humanizer.Core.zh-Hant" version="$version$" />
+      <dependency id="Humanizer.Core.ku" version="$version$" />
     </dependencies>
   </metadata>
   <files>  

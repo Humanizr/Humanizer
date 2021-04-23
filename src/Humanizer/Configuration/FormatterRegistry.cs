@@ -21,6 +21,7 @@ namespace Humanizer.Configuration
             RegisterCzechSlovakPolishFormatter("pl");
             RegisterCzechSlovakPolishFormatter("sk");
             RegisterDefaultFormatter("bg");
+            RegisterDefaultFormatter("ku");
             RegisterDefaultFormatter("pt");
             RegisterDefaultFormatter("sv");
             RegisterDefaultFormatter("tr");
