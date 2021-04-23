@@ -1,9 +1,9 @@
 trigger:
-- master
+- main
 - rel/*
 
 pr:
-- master
+- main
 - rel/*
 
 variables: 
