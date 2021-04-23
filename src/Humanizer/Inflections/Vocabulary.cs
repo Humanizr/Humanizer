@@ -145,12 +145,17 @@ namespace Humanizer.Inflections
                     break;
                 }
             }
-            return result;
+            return result != null ? MatchUpperCase(word, result) : result;
         }
 
         private bool IsUncountable(string word)
         {
             return _uncountables.Contains(word.ToLower());
+        }
+
+        private string MatchUpperCase(string word, string replacement)
+        {
+            return char.IsUpper(word[0]) && char.IsLower(replacement[0]) ? char.ToUpper(replacement[0]) + replacement.Substring(1) : replacement;
         }
 
         private class Rule
