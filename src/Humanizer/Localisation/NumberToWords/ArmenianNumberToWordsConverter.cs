@@ -19,7 +19,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long number)
         {
-            return Convert(number, false);
+            return ConvertImpl(number, false);
         }
 
         public override string ConvertToOrdinal(int number)
@@ -29,10 +29,10 @@ namespace Humanizer.Localisation.NumberToWords
                 return exceptionString;
             }
 
-            return Convert(number, true);
+            return ConvertImpl(number, true);
         }
 
-        private string Convert(long number, bool isOrdinal)
+        private string ConvertImpl(long number, bool isOrdinal)
         {
             if (number == 0)
             {
@@ -52,7 +52,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("մինուս {0}", Convert(-number, isOrdinal));
+                return string.Format("մինուս {0}", ConvertImpl(-number, isOrdinal));
             }
 
             var parts = new List<string>();

@@ -16,6 +16,7 @@
         /// Converts the number to string using the locale's default grammatical gender with or without adding 'And'
         /// </summary>
         /// <param name="number"></param>
+        /// <param name="addAnd">Specify with our without adding "And"</param>
         /// <returns></returns>
         string Convert(long number, bool addAnd);
 
@@ -24,6 +25,7 @@
         /// </summary>
         /// <param name="number"></param>
         /// <param name="gender"></param>
+        /// <param name="addAnd"></param>
         /// <returns></returns>
         string Convert(long number, GrammaticalGender gender, bool addAnd = true);
 

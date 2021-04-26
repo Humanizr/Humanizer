@@ -323,7 +323,7 @@ namespace Humanizer
             var symbol = Math.Sign(exponent) == 1
                 ? Symbols[0][exponent - 1]
                 : Symbols[1][-exponent - 1];
-            return number
+            return number.ToString("G15")
                    + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
                    + GetUnitText(symbol, formats);
         }
