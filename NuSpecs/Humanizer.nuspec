@@ -25,6 +25,7 @@
       <dependency id="Humanizer.Core.es" version="$version$" />
       <dependency id="Humanizer.Core.fa" version="$version$" />
       <dependency id="Humanizer.Core.fi-FI" version="$version$" />
+      <dependency id="Humanizer.Core.fil-PH" version="$version$" />
       <dependency id="Humanizer.Core.fr" version="$version$" />
       <dependency id="Humanizer.Core.fr-BE" version="$version$" />
       <dependency id="Humanizer.Core.he" version="$version$" />
@@ -34,6 +35,8 @@
       <dependency id="Humanizer.Core.id" version="$version$" />
       <dependency id="Humanizer.Core.it" version="$version$" />
       <dependency id="Humanizer.Core.ja" version="$version$" />
+      <dependency id="Humanizer.Core.ko-KR" version="$version$" />
+      <dependency id="Humanizer.Core.ku" version="$version$" />
       <dependency id="Humanizer.Core.lv" version="$version$" />
       <dependency id="Humanizer.Core.ms-MY" version="$version$" />
       <dependency id="Humanizer.Core.mt" version="$version$" />
@@ -49,7 +52,7 @@
       <dependency id="Humanizer.Core.sr" version="$version$" />
       <dependency id="Humanizer.Core.sr-Latn" version="$version$" />
       <dependency id="Humanizer.Core.sv" version="$version$" />
-      <dependency id="Humanizer.Core.ta" version="$version$" />
+      <!--<dependency id="Humanizer.Core.ta" version="$version$" /> no resources yet -->
       <dependency id="Humanizer.Core.tr" version="$version$" />
       <dependency id="Humanizer.Core.uk" version="$version$" />
       <dependency id="Humanizer.Core.uz-Cyrl-UZ" version="$version$" />
