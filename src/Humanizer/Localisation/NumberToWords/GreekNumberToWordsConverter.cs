@@ -21,7 +21,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long number)
         {
-            return Convert(number, false);
+            return ConvertImpl(number, false);
         }
 
         public override string ConvertToOrdinal(int number)
@@ -29,7 +29,7 @@ namespace Humanizer.Localisation.NumberToWords
             return null;
         }
 
-        private string Convert(long number, bool returnPluralized)
+        private string ConvertImpl(long number, bool returnPluralized)
         {
             if (number < 13)
             {
@@ -75,7 +75,7 @@ namespace Humanizer.Localisation.NumberToWords
                     result += " ";
                 }
 
-                result += Convert(number % 10, returnPluralized).ToLower();
+                result += ConvertImpl(number % 10, returnPluralized).ToLower();
             }
 
             return result;
@@ -101,7 +101,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number % 100 != 0)
             {
-                result += $" {Convert(number % 100, returnPluralized).ToLower()}";
+                result += $" {ConvertImpl(number % 100, returnPluralized).ToLower()}";
             }
 
             return result;
@@ -116,14 +116,14 @@ namespace Humanizer.Localisation.NumberToWords
                     return "χίλια";
                 }
 
-                return $"χίλια {Convert(number % 1000, false).ToLower()}";
+                return $"χίλια {ConvertImpl(number % 1000, false).ToLower()}";
             }
 
-            var result = $"{Convert(number / 1000, true)} χιλιάδες";
+            var result = $"{ConvertImpl(number / 1000, true)} χιλιάδες";
 
             if (number % 1000 != 0)
             {
-                result += $" {Convert(number % 1000, false).ToLower()}";
+                result += $" {ConvertImpl(number % 1000, false).ToLower()}";
             }
 
             return result;
@@ -138,14 +138,14 @@ namespace Humanizer.Localisation.NumberToWords
                     return "ένα εκατομμύριο";
                 }
 
-                return $"ένα εκατομμύριο {Convert(number % 1000000, true).ToLower()}";
+                return $"ένα εκατομμύριο {ConvertImpl(number % 1000000, true).ToLower()}";
             }
 
-            var result = $"{Convert(number / 1000000, false)} εκατομμύρια";
+            var result = $"{ConvertImpl(number / 1000000, false)} εκατομμύρια";
 
             if (number % 1000000 != 0)
             {
-                result += $" {Convert(number % 1000000, false).ToLower()}";
+                result += $" {ConvertImpl(number % 1000000, false).ToLower()}";
             }
 
             return result;
@@ -160,14 +160,14 @@ namespace Humanizer.Localisation.NumberToWords
                     return "ένα δισεκατομμύριο";
                 }
 
-                return $"ένα δισεκατομμύριο {Convert(number % 1000000000, true).ToLower()}";
+                return $"ένα δισεκατομμύριο {ConvertImpl(number % 1000000000, true).ToLower()}";
             }
 
-            var result = $"{Convert(number / 1000000000, false)} δισεκατομμύρια";
+            var result = $"{ConvertImpl(number / 1000000000, false)} δισεκατομμύρια";
 
             if (number % 1000000000 != 0)
             {
-                result += $" {Convert(number % 1000000000, false).ToLower()}";
+                result += $" {ConvertImpl(number % 1000000000, false).ToLower()}";
             }
 
             return result;
