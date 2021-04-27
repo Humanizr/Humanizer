@@ -53,6 +53,7 @@
       <dependency id="Humanizer.Core.sr-Latn" version="$version$" />
       <dependency id="Humanizer.Core.sv" version="$version$" />
       <!--<dependency id="Humanizer.Core.ta" version="$version$" /> no resources yet -->
+      <dependency id="Humanizer.Core.th-TH" version="$version$" />
       <dependency id="Humanizer.Core.tr" version="$version$" />
       <dependency id="Humanizer.Core.uk" version="$version$" />
       <dependency id="Humanizer.Core.uz-Cyrl-UZ" version="$version$" />
