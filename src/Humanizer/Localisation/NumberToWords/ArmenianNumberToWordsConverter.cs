@@ -167,7 +167,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
-            if (toWords.IndexOf("մեկ", StringComparison.Ordinal) == 0)
+            if (toWords.StartsWith("մեկ", StringComparison.Ordinal))
             {
                 toWords = toWords.Remove(0, 4);
             }

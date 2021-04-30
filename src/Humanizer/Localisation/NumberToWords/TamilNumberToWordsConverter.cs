@@ -269,7 +269,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
-            if (toWords.IndexOf("one", StringComparison.Ordinal) == 0)
+            if (toWords.StartsWith("one", StringComparison.Ordinal))
                 toWords = toWords.Remove(0, 4);
 
             return toWords;
