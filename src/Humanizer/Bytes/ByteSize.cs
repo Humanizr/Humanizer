@@ -248,7 +248,9 @@ namespace Humanizer.Bytes
 
             format = format.Replace("#.##", "0.##");
 
-            bool has(string s) => format.IndexOf(s, StringComparison.CurrentCultureIgnoreCase) != -1;
+            var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
+
+            bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
             string output(double n) => n.ToString(format, provider);
 
             if (has(TerabyteSymbol))

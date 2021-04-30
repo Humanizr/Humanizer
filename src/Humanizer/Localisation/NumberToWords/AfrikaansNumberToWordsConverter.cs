@@ -149,7 +149,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
-            if (toWords.IndexOf("een", StringComparison.Ordinal) == 0)
+            if (toWords.StartsWith("een", StringComparison.Ordinal))
             {
                 if (toWords.IndexOf("een en", StringComparison.Ordinal) != 0)
                 {
