@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using System;
+using System.Globalization;
 using Humanizer.Bytes;
 using Xunit;
 
@@ -43,6 +44,36 @@ namespace Humanizer.Tests.Bytes
 
             Assert.True(resultBool);
             Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
+        }
+
+        [Theory]
+        [InlineData("2000.01KB", "")] // Invariant
+        [InlineData("2000.01KB", "en")]
+        [InlineData("2000,01KB", "de")]
+        public void TryParseWithCultureInfo(string value, string cultureName)
+        {
+            var culture = new CultureInfo(cultureName);
+
+            Assert.True(ByteSize.TryParse(value, culture, out var resultByteSize));
+            Assert.Equal(ByteSize.FromKilobytes(2000.01), resultByteSize);
+
+            Assert.Equal(resultByteSize, ByteSize.Parse(value, culture));
+        }
+
+        [Fact]
+        public void TryParseWithNumberFormatInfo()
+        {
+            var numberFormat = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = "_",
+            };
+
+            var value = "2000_01KB";
+
+            Assert.True(ByteSize.TryParse(value, numberFormat, out var resultByteSize));
+            Assert.Equal(ByteSize.FromKilobytes(2000.01), resultByteSize);
+
+            Assert.Equal(resultByteSize, ByteSize.Parse(value, numberFormat));
         }
 
         [Fact]
