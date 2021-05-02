@@ -478,7 +478,8 @@ namespace Humanizer.Bytes
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
             {
-                throw new ArgumentNullException(nameof(s), "String is null or whitespace");
+                result = default;
+                return false;
             }
 
             // Acquiring culture-specific parsing info
@@ -586,6 +587,11 @@ namespace Humanizer.Bytes
 
         public static ByteSize Parse(string s, IFormatProvider formatProvider)
         {
+            if (s == null)
+            {
+                throw new ArgumentNullException(nameof(s));
+            }
+
             if (TryParse(s, formatProvider, out var result))
             {
                 return result;

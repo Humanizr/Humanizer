@@ -38,9 +38,10 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void TryParseThrowsOnNull()
+        public void TryParseReturnsFalseOnNull()
         {
-            Assert.Throws<ArgumentNullException>(() => { ByteSize.TryParse(null, out var result); });
+            Assert.False(ByteSize.TryParse(null, out var result));
+            Assert.Equal(default, result);
         }
 
         [Fact]
@@ -93,6 +94,9 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("\t")]
         [InlineData("Unexpected Value")]
         [InlineData("1000")]
         [InlineData(" 1000 ")]
