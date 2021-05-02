@@ -38,6 +38,12 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
+        public void TryParseThrowsOnNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => { ByteSize.TryParse(null, out var result); });
+        }
+
+        [Fact]
         public void TryParse()
         {
             var resultBool = ByteSize.TryParse("1020KB", out var resultByteSize);
@@ -89,31 +95,24 @@ namespace Humanizer.Tests.Bytes
         [Theory]
         [InlineData("Unexpected Value")]
         [InlineData("1000")]
+        [InlineData(" 1000 ")]
         [InlineData("KB")]
+        [InlineData("1000.5b")] // Partial bits
+        [InlineData("1000KBB")] // Bad suffix
         public void TryParseReturnsFalseOnBadValue(string input)
         {
             var resultBool = ByteSize.TryParse(input, out var resultByteSize);
 
             Assert.False(resultBool);
             Assert.Equal(new ByteSize(), resultByteSize);
+
+            Assert.Throws<FormatException>(() => { ByteSize.Parse(input); });
         }
 
         [Fact]
         public void TryParseWorksWithLotsOfSpaces()
         {
             Assert.Equal(ByteSize.FromKilobytes(100), ByteSize.Parse(" 100 KB "));
-        }
-
-        [Fact]
-        public void ParseThrowsOnPartialBits()
-        {
-            Assert.Throws<FormatException>(() => { ByteSize.Parse("10.5b"); });
-        }
-
-        [Fact]
-        public void ParseThrowsOnInvalid()
-        {
-            Assert.Throws<FormatException>(() => { ByteSize.Parse("Unexpected Value"); });
         }
 
         [Fact]

@@ -561,6 +561,9 @@ namespace Humanizer.Bytes
                 case TerabyteSymbol:
                     result = FromTerabytes(number);
                     break;
+
+                default:
+                    return false;
             }
 
             return true;
