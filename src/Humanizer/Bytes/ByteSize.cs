@@ -22,7 +22,8 @@
 
 using System;
 using System.Globalization;
-using System.Text.RegularExpressions;
+using Humanizer.Configuration;
+using Humanizer.Localisation;
 
 namespace Humanizer.Bytes
 {
@@ -61,72 +62,74 @@ namespace Humanizer.Bytes
         public double Gigabytes { get; private set; }
         public double Terabytes { get; private set; }
 
-        public string LargestWholeNumberSymbol
+        public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
+
+        public string GetLargestWholeNumberSymbol(IFormatProvider provider = null)
         {
-            get
+            var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+
+            // Absolute value is used to deal with negative values
+            if (Math.Abs(Terabytes) >= 1)
             {
-                // Absolute value is used to deal with negative values
-                if (Math.Abs(Terabytes) >= 1)
-                {
-                    return TerabyteSymbol;
-                }
-
-                if (Math.Abs(Gigabytes) >= 1)
-                {
-                    return GigabyteSymbol;
-                }
-
-                if (Math.Abs(Megabytes) >= 1)
-                {
-                    return MegabyteSymbol;
-                }
-
-                if (Math.Abs(Kilobytes) >= 1)
-                {
-                    return KilobyteSymbol;
-                }
-
-                if (Math.Abs(Bytes) >= 1)
-                {
-                    return ByteSymbol;
-                }
-
-                return BitSymbol;
+                return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: true);
             }
+
+            if (Math.Abs(Gigabytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol: true);
+            }
+
+            if (Math.Abs(Megabytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol: true);
+            }
+
+            if (Math.Abs(Kilobytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol: true);
+            }
+
+            if (Math.Abs(Bytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol: true);
+            }
+
+            return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: true);
         }
 
-        public string LargestWholeNumberFullWord
+        public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
+
+        public string GetLargestWholeNumberFullWord(IFormatProvider provider = null)
         {
-            get
+            var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+
+            // Absolute value is used to deal with negative values
+            if (Math.Abs(Terabytes) >= 1)
             {
-                // Absolute value is used to deal with negative values
-                if (Math.Abs(Terabytes) >= 1)
-                {
-                    return Terabyte;
-                }
-
-                if (Math.Abs(Gigabytes) >= 1)
-                {
-                    return Gigabyte;
-                }
-
-                if (Math.Abs(Megabytes) >= 1)
-                {
-                    return Megabyte;
-                }
-
-                if (Math.Abs(Kilobytes) >= 1)
-                {
-                    return Kilobyte;
-                }
-
-                if (Math.Abs(Bytes) >= 1)
-                {
-                    return Byte;
-                }
-
-                return Bit;
+                return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: false);
             }
+
+            if (Math.Abs(Gigabytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol: false);
+            }
+
+            if (Math.Abs(Megabytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol: false);
+            }
+
+            if (Math.Abs(Kilobytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol: false);
+            }
+
+            if (Math.Abs(Bytes) >= 1)
+            {
+                return cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol: false);
+            }
+
+            return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: false);
         }
 
         public double LargestWholeNumberValue
@@ -222,7 +225,7 @@ namespace Humanizer.Bytes
             if (provider == null)
                 provider = CultureInfo.CurrentCulture;
 
-            return string.Format("{0} {1}", LargestWholeNumberValue.ToString(provider), LargestWholeNumberSymbol);
+            return string.Format("{0} {1}", LargestWholeNumberValue.ToString(provider), GetLargestWholeNumberSymbol(provider));
         }
 
         public string ToString(string format)
@@ -231,6 +234,11 @@ namespace Humanizer.Bytes
         }
 
         public string ToString(string format, IFormatProvider provider)
+        {
+            return ToString(format, provider, toSymbol: true);
+        }
+
+        private string ToString(string format, IFormatProvider provider, bool toSymbol)
         {
             if (format == null)
                 format = "G";
@@ -253,34 +261,42 @@ namespace Humanizer.Bytes
             bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
             string output(double n) => n.ToString(format, provider);
 
+            var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+
             if (has(TerabyteSymbol))
             {
+                format = format.Replace(TerabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol));
                 return output(Terabytes);
             }
 
             if (has(GigabyteSymbol))
             {
+                format = format.Replace(GigabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol));
                 return output(Gigabytes);
             }
 
             if (has(MegabyteSymbol))
             {
+                format = format.Replace(MegabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol));
                 return output(Megabytes);
             }
 
             if (has(KilobyteSymbol))
             {
+                format = format.Replace(KilobyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol));
                 return output(Kilobytes);
             }
 
             // Byte and Bit symbol look must be case-sensitive
             if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
             {
+                format = format.Replace(ByteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol));
                 return output(Bytes);
             }
 
             if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
             {
+                format = format.Replace(BitSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol));
                 return output(Bits);
             }
 
@@ -290,7 +306,7 @@ namespace Humanizer.Bytes
                                               ? "0"
                                               : formattedLargeWholeNumberValue;
 
-            return string.Format("{0} {1}", formattedLargeWholeNumberValue, LargestWholeNumberSymbol);
+            return string.Format("{0} {1}", formattedLargeWholeNumberValue, toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider));
         }
 
         /// <summary>
@@ -299,12 +315,9 @@ namespace Humanizer.Bytes
         /// tera) used is the largest metric prefix such that the corresponding 
         /// value is greater than or equal to one.
         /// </summary>
-        public string ToFullWords()
+        public string ToFullWords(string format = null, IFormatProvider provider = null)
         {
-            var byteSizeAsFullWords = string.Format("{0} {1}", LargestWholeNumberValue, LargestWholeNumberFullWord);
-
-            // If there is more than one unit, make the word plural
-            return LargestWholeNumberValue > 1 ? byteSizeAsFullWords + "s" : byteSizeAsFullWords;
+            return ToString(format, provider, toSymbol: false);
         }
 
         public override bool Equals(object value)
@@ -471,8 +484,8 @@ namespace Humanizer.Bytes
 
             // Acquiring culture specific decimal separator
 
-      			var decSep = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-                
+            var decSep = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
             {
