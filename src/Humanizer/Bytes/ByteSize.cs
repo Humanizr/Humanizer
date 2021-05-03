@@ -22,8 +22,11 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
+
+using static System.Globalization.NumberStyles;
 
 namespace Humanizer.Bytes
 {
@@ -467,11 +470,29 @@ namespace Humanizer.Bytes
 
         public static bool TryParse(string s, out ByteSize result)
         {
+            return TryParse(s, null, out result);
+        }
+
+        public static bool TryParse(string s, IFormatProvider formatProvider, out ByteSize result)
+        {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
             {
-                throw new ArgumentNullException(nameof(s), "String is null or whitespace");
+                result = default;
+                return false;
             }
+
+            // Acquiring culture-specific parsing info
+            var numberFormat = GetNumberFormatInfo(formatProvider);
+
+            const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign;
+            var numberSpecialChars = new[]
+            {
+                 Convert.ToChar(numberFormat.NumberDecimalSeparator),
+                 Convert.ToChar(numberFormat.NumberGroupSeparator),
+                 Convert.ToChar(numberFormat.PositiveSign),
+                 Convert.ToChar(numberFormat.NegativeSign),
+            };
 
             // Setup the result
             result = new ByteSize();
@@ -482,14 +503,10 @@ namespace Humanizer.Bytes
             int num;
             var found = false;
 
-            // Acquiring culture specific decimal separator
-
-            var decSep = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-
             // Pick first non-digit number
             for (num = 0; num < s.Length; num++)
             {
-                if (!(char.IsDigit(s[num]) || s[num] == decSep))
+                if (!(char.IsDigit(s[num]) || numberSpecialChars.Contains(s[num])))
                 {
                     found = true;
                     break;
@@ -508,7 +525,7 @@ namespace Humanizer.Bytes
             var sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part
-            if (!double.TryParse(numberPart, out var number))
+            if (!double.TryParse(numberPart, numberStyles, formatProvider, out var number))
             {
                 return false;
             }
@@ -547,14 +564,37 @@ namespace Humanizer.Bytes
                 case TerabyteSymbol:
                     result = FromTerabytes(number);
                     break;
+
+                default:
+                    return false;
             }
 
             return true;
         }
 
+        private static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+        {
+            if (formatProvider is NumberFormatInfo numberFormat)
+                return numberFormat;
+
+            var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
+
+            return culture.NumberFormat;
+        }
+
         public static ByteSize Parse(string s)
         {
-            if (TryParse(s, out var result))
+            return Parse(s, null);
+        }
+
+        public static ByteSize Parse(string s, IFormatProvider formatProvider)
+        {
+            if (s == null)
+            {
+                throw new ArgumentNullException(nameof(s));
+            }
+
+            if (TryParse(s, formatProvider, out var result))
             {
                 return result;
             }
