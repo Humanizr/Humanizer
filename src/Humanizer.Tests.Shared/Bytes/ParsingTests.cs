@@ -56,10 +56,13 @@ namespace Humanizer.Tests.Bytes
         [Theory]
         [InlineData("2000.01KB", "")] // Invariant
         [InlineData("2,000.01KB", "")]
+        [InlineData("+2000.01KB", "")]
         [InlineData("2000.01KB", "en")]
         [InlineData("2,000.01KB", "en")]
+        [InlineData("+2000.01KB", "en")]
         [InlineData("2000,01KB", "de")]
         [InlineData("2.000,01KB", "de")]
+        [InlineData("+2000,01KB", "de")]
         public void TryParseWithCultureInfo(string value, string cultureName)
         {
             var culture = new CultureInfo(cultureName);
@@ -77,12 +80,13 @@ namespace Humanizer.Tests.Bytes
             {
                 NumberDecimalSeparator = "_",
                 NumberGroupSeparator = ";",
+                NegativeSign = "−", // proper minus, not hyphen-minus
             };
 
-            var value = "2;000_01KB";
+            var value = "−2;000_01KB";
 
             Assert.True(ByteSize.TryParse(value, numberFormat, out var resultByteSize));
-            Assert.Equal(ByteSize.FromKilobytes(2000.01), resultByteSize);
+            Assert.Equal(ByteSize.FromKilobytes(-2000.01), resultByteSize);
 
             Assert.Equal(resultByteSize, ByteSize.Parse(value, numberFormat));
         }

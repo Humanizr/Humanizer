@@ -485,11 +485,13 @@ namespace Humanizer.Bytes
             // Acquiring culture-specific parsing info
             var numberFormat = GetNumberFormatInfo(formatProvider);
 
-            const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands;
+            const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign;
             var numberSpecialChars = new[]
             {
                  Convert.ToChar(numberFormat.NumberDecimalSeparator),
                  Convert.ToChar(numberFormat.NumberGroupSeparator),
+                 Convert.ToChar(numberFormat.PositiveSign),
+                 Convert.ToChar(numberFormat.NegativeSign),
             };
 
             // Setup the result
