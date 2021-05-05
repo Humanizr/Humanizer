@@ -1,4 +1,6 @@
-﻿using Humanizer.Localisation.Formatters;
+﻿using System.Globalization;
+
+using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Configuration
 {
@@ -56,7 +58,14 @@ namespace Humanizer.Configuration
 
         private void RegisterDefaultFormatter(string localeCode)
         {
-            Register(localeCode, new DefaultFormatter(localeCode));
+            try
+            {
+                Register(localeCode, new DefaultFormatter(localeCode));
+            }
+            catch (CultureNotFoundException)
+            {
+                // Some OS's may not support the particular culture. Not much we can do for those.
+            }            
         }
 
         private void RegisterCzechSlovakPolishFormatter(string localeCode)
