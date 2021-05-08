@@ -53,6 +53,28 @@ namespace Humanizer
             return ConcatenateTimeSpanParts(timeParts, culture, collectionSeparator);
         }
 
+        public static string ToAge(this TimeSpan timeSpan, CultureInfo culture = null)
+        {
+            culture ??= CultureInfo.CurrentUICulture;
+
+            var ageExpression = timeSpan.Humanize(maxUnit: TimeUnit.Year);
+            if (culture.UsesEnglishLanguage())
+                ageExpression += " old";
+
+            return ageExpression;
+        }
+
+        public static string ToHyphenatedAge(this TimeSpan timeSpan, CultureInfo culture = null)
+        {
+            culture ??= CultureInfo.CurrentUICulture;
+
+            if (!culture.UsesEnglishLanguage())
+                return string.Empty;
+
+            var ageExpression = timeSpan.Humanize(maxUnit: TimeUnit.Year);
+            return (ageExpression.Singularize() + " old").Replace(' ', '-');
+        }
+
         private static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
@@ -221,6 +243,13 @@ namespace Humanizer
             }
 
             return string.Join(collectionSeparator, timeSpanParts);
+        }
+
+        private static bool UsesEnglishLanguage(this CultureInfo culture)
+        {
+            if (culture is null)
+                throw new ArgumentNullException(nameof(culture));
+            return culture.TwoLetterISOLanguageName.Equals("en", StringComparison.Ordinal);
         }
     }
 }

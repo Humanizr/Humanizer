@@ -156,6 +156,30 @@ namespace Humanizer.Tests.Localisation.fr
         }
 
         [Theory]
+        [InlineData(4, "4 jours")]
+        [InlineData(23, "3 semaines")]
+        [InlineData(64, "2 mois")]
+        [InlineData(367, "1 an")]
+        [InlineData(750, "2 ans")]
+        public void Age(int days, string expected)
+        {
+            var actual = TimeSpan.FromDays(days).ToAge();
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(4, "")]
+        [InlineData(23, "")]
+        [InlineData(64, "")]
+        [InlineData(367, "")]
+        [InlineData(750, "")]
+        public void HyphenatedAge(int days, string expected)
+        {
+            var actual = TimeSpan.FromDays(days).ToHyphenatedAge();
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(TimeUnit.Year, "0 an")]
         [InlineData(TimeUnit.Month, "0 mois")]
         [InlineData(TimeUnit.Week, "0 semaine")]
