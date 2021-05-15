@@ -1,6 +1,5 @@
 ﻿using System;
 using Humanizer.Localisation;
-
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.fr
