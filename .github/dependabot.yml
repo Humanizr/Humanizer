@@ -5,8 +5,3 @@ updates:
   schedule:
     interval: daily
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: coverlet.collector
-    versions:
-    - 3.0.2
-    - 3.0.3
