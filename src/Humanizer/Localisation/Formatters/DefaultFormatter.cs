@@ -71,6 +71,18 @@ namespace Humanizer.Localisation.Formatters
             return GetResourceForTimeSpan(timeUnit, unit, toWords);
         }
 
+        /// <inheritdoc cref="IFormatter.DataUnitHumanize(DataUnit, double, bool)"/>
+        public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
+        {
+            var resourceKey = toSymbol ? $"DataUnit_{dataUnit}Symbol" : $"DataUnit_{dataUnit}";
+            var resourceValue = Format(resourceKey);
+
+            if (!toSymbol && count > 1)
+                resourceValue += 's';
+
+            return resourceValue;
+        }
+
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
             var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);

@@ -1,7 +1,7 @@
 namespace Humanizer
 {
     /// <summary>
-    /// Can tranform a string
+    /// Can transform a string
     /// </summary>
     public interface IStringTransformer
     {
