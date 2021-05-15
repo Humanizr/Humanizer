@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 
 namespace Humanizer
 {
@@ -19,12 +20,24 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Transforms a string using the provided transformers. Transformations are applied in the provided order.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="culture"></param>
+        /// <param name="transformers"></param>
+        /// <returns></returns>
+        public static string Transform(this string input, CultureInfo culture, params ICulturedStringTransformer[] transformers)
+        {
+            return transformers.Aggregate(input, (current, stringTransformer) => stringTransformer.Transform(current, culture));
+        }
+
+        /// <summary>
         /// Changes string to title case
         /// </summary>
         /// <example>
         /// "INvalid caSEs arE corrected" -> "Invalid Cases Are Corrected"
         /// </example>
-        public static IStringTransformer TitleCase
+        public static ICulturedStringTransformer TitleCase
         {
             get
             {
@@ -38,7 +51,7 @@ namespace Humanizer
         /// <example>
         /// "Sentence casing" -> "sentence casing"
         /// </example>
-        public static IStringTransformer LowerCase
+        public static ICulturedStringTransformer LowerCase
         {
             get
             {
@@ -52,7 +65,7 @@ namespace Humanizer
         /// <example>
         /// "lower case statement" -> "LOWER CASE STATEMENT"
         /// </example>
-        public static IStringTransformer UpperCase
+        public static ICulturedStringTransformer UpperCase
         {
             get
             {
@@ -66,7 +79,7 @@ namespace Humanizer
         /// <example>
         /// "lower case statement" -> "Lower case statement"
         /// </example>
-        public static IStringTransformer SentenceCase
+        public static ICulturedStringTransformer SentenceCase
         {
             get
             {
