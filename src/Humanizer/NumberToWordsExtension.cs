@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using Humanizer.Configuration;
 
 namespace Humanizer
@@ -62,6 +62,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <param name="addAnd">Whether "and" should be included or not.</param>
         /// <returns></returns>
         public static string ToWords(this long number, CultureInfo culture = null, bool addAnd = true)
         {

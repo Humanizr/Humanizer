@@ -19,6 +19,12 @@
             return Convert(number, _defaultGender);
         }
 
+        /// <summary>
+        /// Converts the number to string using the locale's default gramatical gender and adds "and"
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="addAnd">Whether "and" should be included.</param>
+        /// <returns></returns>
         public string Convert(long number, bool addAnd)
         {
             return Convert(number, _defaultGender);
@@ -29,6 +35,7 @@
         /// </summary>
         /// <param name="number"></param>
         /// <param name="gender"></param>
+        /// <param name="addAnd"></param>
         /// <returns></returns>
         public abstract string Convert(long number, GrammaticalGender gender, bool addAnd = true);
 
