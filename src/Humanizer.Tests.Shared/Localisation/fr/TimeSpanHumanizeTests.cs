@@ -156,26 +156,26 @@ namespace Humanizer.Tests.Localisation.fr
         }
 
         [Theory]
-        [InlineData(4, "4 jours")]
-        [InlineData(23, "3 semaines")]
-        [InlineData(64, "2 mois")]
-        [InlineData(367, "1 an")]
-        [InlineData(750, "2 ans")]
-        public void Age(int days, string expected)
+        [InlineData(4, false, "4 jours")]
+        [InlineData(23, false, "3 semaines")]
+        [InlineData(64, false, "2 mois")]
+        [InlineData(367, true, "un an")]
+        [InlineData(750, true, "deux ans")]
+        public void Age(int days, bool toWords, string expected)
         {
-            var actual = TimeSpan.FromDays(days).ToAge();
+            var actual = TimeSpan.FromDays(days).ToAge(toWords: toWords);
             Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData(4, "")]
-        [InlineData(23, "")]
-        [InlineData(64, "")]
-        [InlineData(367, "")]
-        [InlineData(750, "")]
-        public void HyphenatedAge(int days, string expected)
+        [InlineData(4, true, "")]
+        [InlineData(23, true, "")]
+        [InlineData(64, true, "")]
+        [InlineData(367, false, "")]
+        [InlineData(750, false, "")]
+        public void HyphenatedAge(int days, bool toWords, string expected)
         {
-            var actual = TimeSpan.FromDays(days).ToHyphenatedAge();
+            var actual = TimeSpan.FromDays(days).ToHyphenatedAge(toWords: toWords);
             Assert.Equal(expected, actual);
         }
 

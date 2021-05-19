@@ -711,4 +711,10 @@
   <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
     <value>TB</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="TimeSpanHumanize_PreHyphenatedAge" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

@@ -71,6 +71,18 @@ namespace Humanizer.Localisation.Formatters
             return GetResourceForTimeSpan(timeUnit, unit, toWords);
         }
 
+        /// <inheritdoc/>
+        public virtual string TimeSpanHumanize_Age()
+        {
+            return Resources.GetResource("TimeSpanHumanize_Age", _culture);
+        }
+
+        /// <inheritdoc/>
+        public virtual string TimeSpanHumanize_PreHyphenatedAge()
+        {
+            return Resources.GetResource("TimeSpanHumanize_PreHyphenatedAge", _culture);
+        }
+
         /// <inheritdoc cref="IFormatter.DataUnitHumanize(DataUnit, double, bool)"/>
         public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
         {

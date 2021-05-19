@@ -139,37 +139,27 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(4, "4 days old", null, "en", "en-CA", "en-GB")]
-        [InlineData(23, "3 weeks old", null, "en", "en-CA", "en-GB")]
-        [InlineData(64, "2 months old", null, "en", "en-CA", "en-GB")]
-        [InlineData(367, "1 year old", null, "en", "en-CA", "en-GB")]
-        [InlineData(750, "2 years old", null, "en", "en-CA", "en-GB")]
-        public void Age(int days, string expected, params string[] englishCultureNames)
+        [InlineData(4, false, "4 days old")]
+        [InlineData(23, false, "3 weeks old")]
+        [InlineData(64, false, "2 months old")]
+        [InlineData(367, true, "one year old")]
+        [InlineData(750, true, "two years old")]
+        public void Age(int days, bool toWords, string expected)
         {
-            foreach (var cultureName in englishCultureNames)
-            {
-                var actual = cultureName is null ?
-                    TimeSpan.FromDays(days).ToAge() :
-                    TimeSpan.FromDays(days).ToAge(new CultureInfo(cultureName));
-                Assert.Equal(expected, actual);
-            }
+            var actual = TimeSpan.FromDays(days).ToAge(toWords: toWords);
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData(4, "4-day-old", null, "en", "en-CA", "en-GB")]
-        [InlineData(23, "3-week-old", null, "en", "en-CA", "en-GB")]
-        [InlineData(64, "2-month-old", null, "en", "en-CA", "en-GB")]
-        [InlineData(367, "1-year-old", null, "en", "en-CA", "en-GB")]
-        [InlineData(750, "2-year-old", null, "en", "en-CA", "en-GB")]
-        public void HyphenatedAge(int days, string expected, params string[] englishCultureNames)
+        [InlineData(4, true, "four-day-old")]
+        [InlineData(23, true, "three-week-old")]
+        [InlineData(64, true, "two-month-old")]
+        [InlineData(367, false, "1-year-old")]
+        [InlineData(750, false, "2-year-old")]
+        public void HyphenatedAge(int days, bool toWords, string expected)
         {
-            foreach (var cultureName in englishCultureNames)
-            {
-                var actual = cultureName is null ?
-                    TimeSpan.FromDays(days).ToHyphenatedAge() :
-                    TimeSpan.FromDays(days).ToHyphenatedAge(new CultureInfo(cultureName));
-                Assert.Equal(expected, actual);
-            }
+            var actual = TimeSpan.FromDays(days).ToHyphenatedAge(toWords: toWords);
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -479,9 +469,9 @@ namespace Humanizer.Tests
         }
         [Theory]
         [InlineData(31 * 4, 1, "en-US", "four months")]
-        [InlineData(236,2,"ar", "سبعة أشهر, اثنان و عشرون يوم")]
-        [InlineData(321, 2,"es", "diez meses, dieciséis días")]
-        public void CanSpecifyCultureExplicitlyToWords(int days, int precision,string culture, string expected)
+        [InlineData(236, 2, "ar", "سبعة أشهر, اثنان و عشرون يوم")]
+        [InlineData(321, 2, "es", "diez meses, dieciséis días")]
+        public void CanSpecifyCultureExplicitlyToWords(int days, int precision, string culture, string expected)
         {
             var timeSpan = new TimeSpan(days, 0, 0, 0);
             var actual = timeSpan.Humanize(precision: precision, culture: new CultureInfo(culture), maxUnit: TimeUnit.Year, toWords: true);
