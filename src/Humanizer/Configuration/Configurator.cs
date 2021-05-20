@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Reflection;
 using Humanizer.DateTimeHumanizeStrategy;
@@ -35,12 +35,20 @@ namespace Humanizer.Configuration
         }
 
         private static readonly LocaliserRegistry<INumberToWordsConverter> _numberToWordsConverters = new NumberToWordsConverterRegistry();
+
+        private static readonly LocaliserRegistry<IWordsToNumberConverter> _wordsToNumberConverters = new WordsToNumberConverterRegistry();
+
         /// <summary>
         /// A registry of number to words converters used to localise ToWords and ToOrdinalWords methods
         /// </summary>
         public static LocaliserRegistry<INumberToWordsConverter> NumberToWordsConverters
         {
             get { return _numberToWordsConverters; }
+        }
+
+        public static LocaliserRegistry<IWordsToNumberConverter> WordsToNumberConverters
+        {
+            get { return _wordsToNumberConverters; }
         }
 
         private static readonly LocaliserRegistry<IOrdinalizer> _ordinalizers = new OrdinalizerRegistry();
@@ -87,6 +95,11 @@ namespace Humanizer.Configuration
             return NumberToWordsConverters.ResolveForCulture(culture);
         }
 
+        internal static IWordsToNumberConverter GetWordsToNumberConverter(CultureInfo culture)
+        {
+            return WordsToNumberConverters.ResolveForCulture(culture);
+        }
+
         /// <summary>
         /// The ordinalizer to be used
         /// </summary>
@@ -131,6 +144,8 @@ namespace Humanizer.Configuration
 
         private static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
         private static Func<PropertyInfo, bool> _enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
+        
+
         /// <summary>
         /// A predicate function for description property of attribute to use for Enum.Humanize
         /// </summary>
@@ -139,5 +154,7 @@ namespace Humanizer.Configuration
             get { return _enumDescriptionPropertyLocator; }
             set { _enumDescriptionPropertyLocator = value ?? DefaultEnumDescriptionPropertyLocator; }
         }
+
+        
     }
 }
