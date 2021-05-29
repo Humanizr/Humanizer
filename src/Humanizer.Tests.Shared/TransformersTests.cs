@@ -9,7 +9,7 @@ namespace Humanizer.Tests
         [InlineData("Sentence casing", "Sentence Casing")]
         [InlineData("honors UPPER case", "Honors UPPER Case")]
         [InlineData("INvalid caSEs arE corrected", "Invalid Cases Are Corrected")]
-        [InlineData("Can deal w 1 letter words as i do", "Can Deal W 1 Letter Words As I Do")]
+        [InlineData("Can deal w 1 letter words as i do", "Can Deal W 1 Letter Words as I Do")]
         [InlineData("  random spaces   are HONORED    too ", "  Random Spaces   Are HONORED    Too ")]
         [InlineData("Title Case", "Title Case")]
         [InlineData("apostrophe's aren't capitalized", "Apostrophe's Aren't Capitalized")]
