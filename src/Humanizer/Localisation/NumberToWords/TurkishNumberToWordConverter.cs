@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -22,11 +21,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
+            var number = input;
             if (number == 0)
             {
                 return UnitsMap[0];
@@ -38,6 +33,24 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             var parts = new List<string>();
+
+            if ((number / 1000000000000000000) > 0)
+            {
+                parts.Add(string.Format("{0} kentilyon", Convert(number / 1000000000000000000)));
+                number %= 1000000000000000000;
+            }
+
+            if ((number / 1000000000000000) > 0)
+            {
+                parts.Add(string.Format("{0} katrilyon", Convert(number / 1000000000000000)));
+                number %= 1000000000000000;
+            }
+
+            if ((number / 1000000000000) > 0)
+            {
+                parts.Add(string.Format("{0} trilyon", Convert(number / 1000000000000)));
+                number %= 1000000000000;
+            }
 
             if ((number / 1000000000) > 0)
             {
