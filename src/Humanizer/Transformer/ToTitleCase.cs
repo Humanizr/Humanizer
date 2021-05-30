@@ -17,11 +17,22 @@ namespace Humanizer
 
             var result = input;
             var matches = Regex.Matches(input, @"(\w|[^\u0000-\u007F])+'?\w*");
+
+            //While these arrays could be combined into a single array or list, they are kept separate to make list localization easier
+            string[] articleList = { "a", "an", "the" };
+            string[] prepositionList = { "at", "as", "but", "by", "for", "in", "of", "off", "on", "out", "per", "til", "to", "up", "via" };
+
             foreach (Match word in matches)
             {
                 if (!AllCapitals(word.Value))
                 {
-                    result = ReplaceWithTitleCase(word, result, culture);
+                    if (!WordCheck(word.Value, articleList))
+                    {
+                        if (!WordCheck(word.Value, prepositionList))
+                        {
+                            result = ReplaceWithTitleCase(word, result, culture);
+                        }
+                    }
                 }
             }
 
@@ -31,6 +42,19 @@ namespace Humanizer
         private static bool AllCapitals(string input)
         {
             return input.ToCharArray().All(char.IsUpper);
+        }
+
+        private static bool WordCheck(string input, string[] wordList)
+        {
+            bool wordMatch = false;
+
+            for (int i = 0; i > wordList.Length; i++)
+            {
+                if (input == wordList[i])
+                    wordMatch = true;
+            }
+
+            return wordMatch;
         }
 
         private static string ReplaceWithTitleCase(Match word, string source, CultureInfo culture)
