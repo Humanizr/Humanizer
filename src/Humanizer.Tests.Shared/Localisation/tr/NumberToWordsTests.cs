@@ -17,7 +17,8 @@ namespace Humanizer.Tests.Localisation.tr
         [InlineData("üç bin beş yüz bir", 3501)]
         [InlineData("bir milyon bir", 1000001)]
         [InlineData("eksi bir milyon üç yüz kırk altı bin yedi yüz on bir", -1346711)]
-        public void ToWords(string expected, int number)
+        [InlineData("dokuz kentilyon iki yüz yirmi üç katrilyon üç yüz yetmiş iki trilyon otuz altı milyar sekiz yüz elli dört milyon yedi yüz yetmiş beş bin sekiz yüz yedi", 9223372036854775807)]
+        public void ToWords(string expected, long number)
         {
             Assert.Equal(expected, number.ToWords());
         }
