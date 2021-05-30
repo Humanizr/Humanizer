@@ -243,4 +243,94 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>et år</value>
   </data>
+  <data name="E" xml:space="preserve">
+    <value>øst</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>østnordøst</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>ØNØ</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>østsydøst</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>ØSØ</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>Ø</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>nord</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>nordøst</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NØ</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>nordnordøst</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>NNØ</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>nordnordvest</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>NNV</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>nordvest</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NV</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>syd</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>sydøst</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SØ</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>sydsydøst</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>SSØ</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>sydsydvest</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>SSV</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>sydvest</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SV</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>vest</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>vestnordvest</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>VNV</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>vestsydvest</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>VSV</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>V</value>
+  </data>
 </root>

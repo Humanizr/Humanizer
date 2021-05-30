@@ -10,15 +10,28 @@
         public abstract string Convert(long number);
 
         /// <summary>
+        /// Converts the number to string
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="addAnd">Whether "and" should be included.</param>
+        /// <returns></returns>
+        public virtual string Convert(long number, bool addAnd)
+        {
+            return Convert(number);
+        }
+
+        /// <summary>
         /// Converts the number to string ignoring the provided grammatical gender
         /// </summary>
         /// <param name="number"></param>
         /// <param name="gender"></param>
+        /// <param name="addAnd"></param>
         /// <returns></returns>
-        public virtual string Convert(long number, GrammaticalGender gender)
+        public virtual string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
             return Convert(number);
         }
+
 
         /// <summary>
         /// Converts the number to ordinal string

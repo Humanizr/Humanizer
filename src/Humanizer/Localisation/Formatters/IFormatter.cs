@@ -42,5 +42,14 @@
         /// <param name="toWords"></param>
         /// <returns></returns>
         string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false);
+
+        /// <summary>
+        /// Returns the string representation of the provided DataUnit, either as a symbol or full word
+        /// </summary>
+        /// <param name="dataUnit">Data unit</param>
+        /// <param name="count">Number of said units, to adjust for singular/plural forms</param>
+        /// <param name="toSymbol">Indicates whether the data unit should be expressed as symbol or full word</param>
+        /// <returns>String representation of the provided DataUnit</returns>
+        string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true);
     }
 }

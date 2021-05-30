@@ -10,11 +10,11 @@ to clarify expected behavior in our community.
 For more information see the [.NET Foundation Code of Conduct](http://www.dotnetfoundation.org/code-of-conduct).
 
 ### <a id="getting-started">Getting started</a>
-This project uses C# 7 language features and SDK-style projects, so you'll need any edition of [Visual Studio 2017](https://www.visualstudio.com/downloads/download-visual-studio-vs) to open and compile the project. The free [Community Edition](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409) will work.
+This project uses C# 8 language features and SDK-style projects, so you'll need any edition of [Visual Studio 2019](https://www.visualstudio.com/downloads/download-visual-studio-vs) to open and compile the project. The free [Community Edition](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409) will work.
 
 ### <a id="contribution-guideline">Contribution guideline</a>
 This project uses [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests.
-So if you want to contribute, fork the repo, preferably create a local branch, based off of the `dev` branch, to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
+So if you want to contribute, fork the repo, preferably create a local branch, based off of the `master` branch, to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
 
 Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
 

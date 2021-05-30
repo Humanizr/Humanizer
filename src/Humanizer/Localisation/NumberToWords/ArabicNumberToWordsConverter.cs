@@ -16,7 +16,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly string[] FeminineOnesGroup = { "", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة" };
 
-        public override string Convert(long number, GrammaticalGender gender)
+        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
             if (number == 0)
             {

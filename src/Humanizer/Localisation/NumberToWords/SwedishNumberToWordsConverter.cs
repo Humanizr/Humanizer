@@ -26,8 +26,8 @@ namespace Humanizer.Localisation.NumberToWords
             new Fact {Value = 1000,       Name = "tusen", Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
             new Fact {Value = 100,        Name = "hundra", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
         };
-
-        public override string Convert(long input, GrammaticalGender gender)
+         
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)
             {
@@ -166,7 +166,8 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     word += tens + "de";
                 }
-                else {
+                else
+                {
                     word += tens + "nde";
                 }
 
@@ -193,7 +194,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
 
                 // suffix -de/-te
-                if (divided > 0)
+                if (divided > 0 && (number % m.Value) == 0)
                 {
                     switch (number)
                     {
@@ -209,7 +210,7 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= m.Value;
                 if (number > 0)
                 {
-                    word += m.Postfix;
+                    word += ConvertToOrdinal(number);
                 }
             }
 

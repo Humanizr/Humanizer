@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>چرکەیەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>خولەکێک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>کاتژمێرێک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>دوێنێ</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>مانگێک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
+    <value>{0} مانگ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>ساڵێک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} ڕۆژ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} میلیچرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>1 ڕۆژ</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>1 کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1 میلیچرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>1 خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>1 چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>ئێستا</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} هەفتە</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>1 هەفتە</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} ڕۆژی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>{0} کاتژمێری دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>{0} خولەکی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>{0} مانگی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>{0} چرکەی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>{0} ساڵی دیکە</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>ئێستا</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>بەیانی</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>کاتژمێرێکی دیکە</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>خولەکێکی دیکە</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>مانگێکی دیکە</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>چرکەیەکی دیکە</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>ساڵێکی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>{0} کاتژمێری دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>{0} خولەکی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>{0} چرکەی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>{0} ساڵی دیکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>{0} ڕۆژ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} ڕۆژ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>{0} میلیچرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>{0} خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} میلیچرکە</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>{0} ڕۆژی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>{0} ڕۆژی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
+    <value>{0} ڕۆژی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} ڕۆژی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>{0} کاتژمێری دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
+    <value>{0} کاتژمێری دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێری دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>{0} خولەکی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
+    <value>{0} خولەکی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} خولەکی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>{0} مانگ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>{0} مانگ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
+    <value>{0} مانگ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} مانگ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>{0} مانگی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>{0} مانگی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
+    <value>{0} مانگی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} مانگی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>{0} چرکەی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
+    <value>{0} چرکەی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} چرکەی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>{0} ساڵی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
+    <value>{0} ساڵی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} ساڵی دیکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
+    <value>{0} ڕۆژ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_TrialQuadral" xml:space="preserve">
+    <value>{0} ڕۆژ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>{0} کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
+    <value>{0} کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_TrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>{0} میلیچرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_TrialQuadral" xml:space="preserve">
+    <value>{0} میلیچرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_TrialQuadral" xml:space="preserve">
+    <value>{0} خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>{0} چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>{0} چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_TrialQuadral" xml:space="preserve">
+    <value>{0} چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>{0} هەفتە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} هەفتە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>{0} هەفتە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
+    <value>{0} هەفتە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 ساڵ</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێری دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} خولەکی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} مانگ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} مانگی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} چرکەی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
+    <value>{0} ساڵی دیکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
+    <value>{0} میلیچرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
+    <value>{0} خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
+    <value>{0} چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
+    <value>{0} هەفتە</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>هەرگیز</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
+    <value>{0} مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_DualTrialQuadral" xml:space="preserve">
+    <value>{0} مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
+    <value>{0} مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_TrialQuadral" xml:space="preserve">
+    <value>{0} مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
+    <value>{0} ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_DualTrialQuadral" xml:space="preserve">
+    <value>{0} ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0} ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_TrialQuadral" xml:space="preserve">
+    <value>{0} ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>یەک ڕۆژ</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>یەک کاتژمێر</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>یەک میلیچرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>یەک خولەک</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>یەک مانگ</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>یەک چرکە</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>یەک هەفتە</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>یەک ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_DualTrialQuadral" xml:space="preserve">
+    <value>{0} ڕۆژ</value>
+  </data>
+</root>

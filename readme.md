@@ -51,7 +51,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Humanizer ReSharper Annotations](#humanizer-resharper-annotations)
    - [PowerShell Humanizer](#powershell-humanizer)
    - [Humanizer JVM](#humanizerjvm)
-   - [Humanizer.JS](#humanizerjs)
+   - [Humanizer.node](#humanizernode)
  - [Main contributors](#main-contributors)
  - [License](#license)
  - [Icon](#icon)
@@ -542,7 +542,7 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 The overload of `Singularize` with `plurality` argument is obsolete and was removed in version 2.0.
 
 ## <a id="adding-words">Adding Words</a>
-Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabluary` used by `Inflector`):
+Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabulary` used by `Inflector`):
 
 ```C#
 // Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx.
@@ -782,6 +782,14 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 11.ToWords(new CultureInfo("en")) => "eleven"
 1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru")) => "один"
 ```
+
+Another overload of the method allow you to pass a bool to remove the "And" that can be added before the last number:
+
+```C#
+3501.ToWords(false) => "three thousand five hundred one"
+102.ToWords(false) => "one hundred two" 
+``` 
+This method can be useful for writing checks for example.
 
 ### <a id="number-toordinalwords">Number to ordinal words</a>
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
@@ -1232,11 +1240,11 @@ These annotations do not yet cover the entire library, but [pull requests are al
 [PowerShell Humanizer](https://github.com/dfinke/PowerShellHumanizer) is a PowerShell module that wraps Humanizer.
 
 ### <a id="humanizerjvm">Humanizer JVM</a>
-[Humanizer.jvm](https://github.com/Humanizr/Humanizer.jvm) is an adaptation of the Humanizer framework for .Net which is made for the jvm and is written in Kotlin.
+[Humanizer.jvm](https://github.com/MehdiK/Humanizer.jvm) is an adaptation of the Humanizer framework for .Net which is made for the jvm and is written in Kotlin.
 Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
-### <a id="humanizerjs">Humanizer.JS</a>
-[Humanizer.JS](https://github.com/SamuelEnglard/Humanizer.Js) is a TypeScript port of the Humanizer framework.
+### <a id="humanizernode">Humanizer.node</a>
+[Humanizer.node](https://github.com/fakoua/humanizer.node) is a TypeScript port of the Humanizer framework.
 
 ## <a id="main-contributors">Main contributors</a>
  - Mehdi Khalili ([@MehdiKhalili](https://twitter.com/MehdiKhalili))

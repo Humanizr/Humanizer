@@ -26,6 +26,7 @@ namespace Humanizer
         /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Week"/>. The time units <see cref="TimeUnit.Month"/> and <see cref="TimeUnit.Year"/> will give approximations for time spans bigger 30 days by calculating with 365.2425 days a year and 30.4369 days a month.</param>
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
+        /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
         {
@@ -42,6 +43,7 @@ namespace Humanizer
         /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Week"/>. The time units <see cref="TimeUnit.Month"/> and <see cref="TimeUnit.Year"/> will give approximations for time spans bigger than 30 days by calculating with 365.2425 days a year and 30.4369 days a month.</param>
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
+        /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
         /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
         {
@@ -60,7 +62,7 @@ namespace Humanizer
 
             foreach (var timeUnitType in timeUnitsEnumTypes)
             {
-                var timepart = GetTimeUnitPart(timeUnitType, timespan, culture, maxUnit, minUnit, cultureFormatter, toWords);
+                var timepart = GetTimeUnitPart(timeUnitType,timespan, maxUnit, minUnit, cultureFormatter, toWords); 
 
                 if (timepart != null || firstValueFound)
                 {
@@ -83,19 +85,19 @@ namespace Humanizer
             return enumTypeEnumerator.Reverse();
         }
 
-        private static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, CultureInfo culture, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)
+        private static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)
         {
             if (timeUnitToGet <= maximumTimeUnit && timeUnitToGet >= minimumTimeUnit)
             {
-                var isTimeUnitToGetTheMaximumTimeUnit = (timeUnitToGet == maximumTimeUnit);
-                var numberOfTimeUnits = GetTimeUnitNumericalValue(timeUnitToGet, timespan, isTimeUnitToGetTheMaximumTimeUnit);
+                var numberOfTimeUnits = GetTimeUnitNumericalValue(timeUnitToGet, timespan, maximumTimeUnit);
                 return BuildFormatTimePart(cultureFormatter, timeUnitToGet, numberOfTimeUnits, toWords);
             }
             return null;
         }
 
-        private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
+            var isTimeUnitToGetTheMaximumTimeUnit = (timeUnitToGet == maximumTimeUnit);
             switch (timeUnitToGet)
             {
                 case TimeUnit.Millisecond:
@@ -107,7 +109,7 @@ namespace Humanizer
                 case TimeUnit.Hour:
                     return GetNormalCaseTimeAsInteger(timespan.Hours, timespan.TotalHours, isTimeUnitToGetTheMaximumTimeUnit);
                 case TimeUnit.Day:
-                    return GetSpecialCaseDaysAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
+                    return GetSpecialCaseDaysAsInteger(timespan, maximumTimeUnit);
                 case TimeUnit.Week:
                     return GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
                 case TimeUnit.Month:
@@ -146,13 +148,13 @@ namespace Humanizer
             return 0;
         }
 
-        private static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        private static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
-            if (isTimeUnitToGetTheMaximumTimeUnit)
+            if (maximumTimeUnit == TimeUnit.Day)
             {
                 return timespan.Days;
             }
-            if (timespan.Days < _daysInAMonth)
+            if (timespan.Days < _daysInAMonth || maximumTimeUnit == TimeUnit.Week)
             {
                 var remainingDays = timespan.Days % _daysInAWeek;
                 return remainingDays;

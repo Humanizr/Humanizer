@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28711.165
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31223.326
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
 EndProject
@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 	ProjectSection(SolutionItems) = preProject
 		..\NuSpecs\Humanizer.Core.af.nuspec = ..\NuSpecs\Humanizer.Core.af.nuspec
 		..\NuSpecs\Humanizer.Core.ar.nuspec = ..\NuSpecs\Humanizer.Core.ar.nuspec
+		..\NuSpecs\Humanizer.Core.az.nuspec = ..\NuSpecs\Humanizer.Core.az.nuspec
 		..\NuSpecs\Humanizer.Core.bg.nuspec = ..\NuSpecs\Humanizer.Core.bg.nuspec
 		..\NuSpecs\Humanizer.Core.bn-BD.nuspec = ..\NuSpecs\Humanizer.Core.bn-BD.nuspec
 		..\NuSpecs\Humanizer.Core.cs.nuspec = ..\NuSpecs\Humanizer.Core.cs.nuspec
@@ -47,14 +48,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.es.nuspec = ..\NuSpecs\Humanizer.Core.es.nuspec
 		..\NuSpecs\Humanizer.Core.fa.nuspec = ..\NuSpecs\Humanizer.Core.fa.nuspec
 		..\NuSpecs\Humanizer.Core.fi-FI.nuspec = ..\NuSpecs\Humanizer.Core.fi-FI.nuspec
+		..\NuSpecs\Humanizer.Core.fil-PH.nuspec = ..\NuSpecs\Humanizer.Core.fil-PH.nuspec
 		..\NuSpecs\Humanizer.Core.fr-BE.nuspec = ..\NuSpecs\Humanizer.Core.fr-BE.nuspec
 		..\NuSpecs\Humanizer.Core.fr.nuspec = ..\NuSpecs\Humanizer.Core.fr.nuspec
 		..\NuSpecs\Humanizer.Core.he.nuspec = ..\NuSpecs\Humanizer.Core.he.nuspec
 		..\NuSpecs\Humanizer.Core.hr.nuspec = ..\NuSpecs\Humanizer.Core.hr.nuspec
 		..\NuSpecs\Humanizer.Core.hu.nuspec = ..\NuSpecs\Humanizer.Core.hu.nuspec
+		..\NuSpecs\Humanizer.Core.hy.nuspec = ..\NuSpecs\Humanizer.Core.hy.nuspec
 		..\NuSpecs\Humanizer.Core.id.nuspec = ..\NuSpecs\Humanizer.Core.id.nuspec
 		..\NuSpecs\Humanizer.Core.it.nuspec = ..\NuSpecs\Humanizer.Core.it.nuspec
 		..\NuSpecs\Humanizer.Core.ja.nuspec = ..\NuSpecs\Humanizer.Core.ja.nuspec
+		..\NuSpecs\Humanizer.Core.ku.nuspec = ..\NuSpecs\Humanizer.Core.ku.nuspec
 		..\NuSpecs\Humanizer.Core.lv.nuspec = ..\NuSpecs\Humanizer.Core.lv.nuspec
 		..\NuSpecs\Humanizer.Core.nb-NO.nuspec = ..\NuSpecs\Humanizer.Core.nb-NO.nuspec
 		..\NuSpecs\Humanizer.Core.nb.nuspec = ..\NuSpecs\Humanizer.Core.nb.nuspec
@@ -69,6 +73,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.sr-Latn.nuspec = ..\NuSpecs\Humanizer.Core.sr-Latn.nuspec
 		..\NuSpecs\Humanizer.Core.sr.nuspec = ..\NuSpecs\Humanizer.Core.sr.nuspec
 		..\NuSpecs\Humanizer.Core.sv.nuspec = ..\NuSpecs\Humanizer.Core.sv.nuspec
+		..\NuSpecs\Humanizer.Core.ta.nuspec.unused = ..\NuSpecs\Humanizer.Core.ta.nuspec.unused
 		..\NuSpecs\Humanizer.Core.tr.nuspec = ..\NuSpecs\Humanizer.Core.tr.nuspec
 		..\NuSpecs\Humanizer.Core.uk.nuspec = ..\NuSpecs\Humanizer.Core.uk.nuspec
 		..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec = ..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec
@@ -82,7 +87,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{f886a8da-3efc-4a89-91dd-06faf13da172}*SharedItemsImports = 4
 		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{fdec244b-f07e-4a5e-bb80-fbc6ac77a9aa}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

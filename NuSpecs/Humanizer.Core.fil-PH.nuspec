@@ -11,6 +11,7 @@
     <description>Humanizer Locale Filipino (Philippines) (fil-PH)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
+    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <language>fil-PH</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />

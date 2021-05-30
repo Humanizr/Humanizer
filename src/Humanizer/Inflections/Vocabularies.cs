@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 
 namespace Humanizer.Inflections
@@ -38,7 +38,7 @@ namespace Humanizer.Inflections
             _default.AddPlural("(hive)$", "$1s");
             _default.AddPlural("([^aeiouy]|qu)y$", "$1ies");
             _default.AddPlural("(x|ch|ss|sh)$", "$1es");
-            _default.AddPlural("(matr|vert|ind|d)ix|ex$", "$1ices");
+            _default.AddPlural("(matr|vert|ind|d)(ix|ex)$", "$1ices");
             _default.AddPlural("(^[m|l])ouse$", "$1ice");
             _default.AddPlural("^(ox)$", "$1en");
             _default.AddPlural("(quiz)$", "$1zes");
@@ -79,10 +79,10 @@ namespace Humanizer.Inflections
             _default.AddIrregular("human", "humans");
             _default.AddIrregular("child", "children");
             _default.AddIrregular("sex", "sexes");
+            _default.AddIrregular("glove", "gloves");
             _default.AddIrregular("move", "moves");
             _default.AddIrregular("goose", "geese");
             _default.AddIrregular("wave", "waves");
-            _default.AddIrregular("die", "dice");
             _default.AddIrregular("foot", "feet");
             _default.AddIrregular("tooth", "teeth");
             _default.AddIrregular("curriculum", "curricula");
@@ -92,13 +92,17 @@ namespace Humanizer.Inflections
             //Fix #789
             _default.AddIrregular("cache", "caches");
 
+            //Fix 975
+            _default.AddIrregular("ex", "exes", matchEnding: false);
             _default.AddIrregular("is", "are", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);
             _default.AddIrregular("this", "these", matchEnding: false);
             _default.AddIrregular("bus", "buses", matchEnding: false);
-			 _default.AddIrregular("staff", "staff", matchEnding: false);
-			 _default.AddIrregular("training", "training", matchEnding: false);
+            _default.AddIrregular("die", "dice", matchEnding: false);
+            _default.AddIrregular("tie", "ties", matchEnding: false);
 
+            _default.AddUncountable("staff");
+            _default.AddUncountable("training");
             _default.AddUncountable("equipment");
             _default.AddUncountable("information");
             _default.AddUncountable("corn");

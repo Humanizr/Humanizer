@@ -38,11 +38,18 @@ namespace Humanizer.Configuration
             Register("sv", new SwedishNumberToWordsConverter());
             Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
             Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
+            Register("ta", new TamilNumberToWordsConverter());
             Register("hr", (culture) => new CroatianNumberToWordsConverter(culture));
             Register("nb", new NorwegianBokmalNumberToWordsConverter());
             Register("vi", new VietnameseNumberToWordsConverter());
             Register("zh-CN", new ChineseNumberToWordsConverter());
             Register("bg", new BulgarianNumberToWordsConverter());
+            Register("hy", new ArmenianNumberToWordsConverter());
+            Register("az", new AzerbaijaniNumberToWordsConverter());
+            Register("ja", new JapaneseNumberToWordsConverter());
+            Register("ku", new CentralKurdishNumberToWordsConverter());
+            Register("el", new GreekNumberToWordsConverter());
+            Register("th-TH", new ThaiNumberToWordsConverter());
             Register("lv", new LatvianNumberToWordsConverter());
         }
     }

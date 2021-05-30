@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using Humanizer.Configuration;
 
 namespace Humanizer
@@ -17,6 +17,19 @@ namespace Humanizer
         public static string ToWords(this int number, CultureInfo culture = null)
         {
             return ((long)number).ToWords(culture);
+        }
+
+
+        /// <summary>
+        /// 3501.ToWords(false) -> "three thousand five hundred one"
+        /// </summary>
+        /// <param name="number">Number to be turned to words</param>
+        /// <param name="addAnd">To add 'and' before the last number.</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns></returns>
+        public static string ToWords(this int number,bool addAnd, CultureInfo culture = null)
+        {
+            return ((long)number).ToWords(culture, addAnd);
         }
 
         /// <summary>
@@ -49,10 +62,11 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <param name="addAnd">Whether "and" should be included or not.</param>
         /// <returns></returns>
-        public static string ToWords(this long number, CultureInfo culture = null)
+        public static string ToWords(this long number, CultureInfo culture = null, bool addAnd = true)
         {
-            return Configurator.GetNumberToWordsConverter(culture).Convert(number);
+            return Configurator.GetNumberToWordsConverter(culture).Convert(number, addAnd);
         }
 
         /// <summary>

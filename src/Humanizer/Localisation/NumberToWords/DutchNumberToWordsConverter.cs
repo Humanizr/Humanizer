@@ -17,7 +17,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private class Fact
         {
-            public int Value { get; set; }
+            public long Value { get; set; }
             public string Name { get; set; }
             public string Prefix { get; set; }
             public string Postfix { get; set; }
@@ -26,19 +26,18 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static readonly Fact[] Hunderds =
         {
-            new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new Fact {Value = 1000000,    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new Fact {Value = 1000,       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
-            new Fact {Value = 100,        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
+            new Fact {Value = 1_000_000_000_000_000_000L, Name = "triljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1_000_000_000_000_000L,     Name = "biljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1_000_000_000_000L,         Name = "biljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000000000,                 Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000000,                    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+            new Fact {Value = 1000,                       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
+            new Fact {Value = 100,                        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
         };
 
         public override string Convert(long input)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
+            var number = input;
 
             if (number == 0)
             {

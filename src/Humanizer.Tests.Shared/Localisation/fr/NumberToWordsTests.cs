@@ -64,7 +64,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(80080080, "quatre-vingts millions quatre-vingt mille quatre-vingts")]
         [InlineData(200200200, "deux cents millions deux cent mille deux cents")]
         [InlineData(200200202, "deux cents millions deux cent mille deux cent deux")]
-        public void ToWords(int number, string expected)
+        public void ToWordsInt(int number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
         }
@@ -98,9 +98,34 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(10121, "dix mille cent vingt et un", GrammaticalGender.Masculine)]
         [InlineData(81000, "quatre-vingt-un mille", GrammaticalGender.Feminine)]
         [InlineData(81000, "quatre-vingt-un mille", GrammaticalGender.Masculine)]
-        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
+        public void ToWordsIntWithGender(int number, string expected, GrammaticalGender gender)
         {
             Assert.Equal(expected, number.ToWords(gender));
+        }
+
+        [Theory]
+        [InlineData(1L, "un")]
+        [InlineData(11L, "onze")]
+        [InlineData(111L, "cent onze")]
+        [InlineData(1111L, "mille cent onze")]
+        [InlineData(11111L, "onze mille cent onze")]
+        [InlineData(111111L, "cent onze mille cent onze")]
+        [InlineData(1111111L, "un million cent onze mille cent onze")]
+        [InlineData(11111111L, "onze millions cent onze mille cent onze")]
+        [InlineData(111111111L, "cent onze millions cent onze mille cent onze")]
+        [InlineData(1111111111L, "un milliard cent onze millions cent onze mille cent onze")]
+        [InlineData(11111111111L, "onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(111111111111L, "cent onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(1111111111111L, "un billion cent onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(11111111111111L, "onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(111111111111111L, "cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(1111111111111111L, "un billiard cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(11111111111111111L, "onze billiards cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(111111111111111111L, "cent onze billiards cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
+        [InlineData(1111111111111111111L, "un trillion cent onze billiards cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
+        public void ToWordsLong(long number, string expected)
+        {
+            Assert.Equal(expected, number.ToWords());
         }
 
         [Theory]

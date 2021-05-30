@@ -1,4 +1,6 @@
-﻿using Humanizer.Localisation.Formatters;
+﻿using System.Globalization;
+
+using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Configuration
 {
@@ -21,12 +23,14 @@ namespace Humanizer.Configuration
             RegisterCzechSlovakPolishFormatter("pl");
             RegisterCzechSlovakPolishFormatter("sk");
             RegisterDefaultFormatter("bg");
+            RegisterDefaultFormatter("ku");
             RegisterDefaultFormatter("pt");
             RegisterDefaultFormatter("sv");
             RegisterDefaultFormatter("tr");
             RegisterDefaultFormatter("vi");
             RegisterDefaultFormatter("en-US");
             RegisterDefaultFormatter("af");
+            RegisterDefaultFormatter("az");
             RegisterDefaultFormatter("da");
             RegisterDefaultFormatter("de");
             RegisterDefaultFormatter("el");
@@ -34,6 +38,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("fa");
             RegisterDefaultFormatter("fi-FI");
             RegisterDefaultFormatter("hu");
+            RegisterDefaultFormatter("hy");
             RegisterDefaultFormatter("id");
             RegisterDefaultFormatter("ja");
             Register("mt", new MalteseFormatter("mt"));
@@ -42,16 +47,25 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("nl");
             RegisterDefaultFormatter("bn-BD");
             RegisterDefaultFormatter("it");
+            RegisterDefaultFormatter("ta");
             RegisterDefaultFormatter("uz-Latn-UZ");
             RegisterDefaultFormatter("uz-Cyrl-UZ");
             RegisterDefaultFormatter("zh-CN");
             RegisterDefaultFormatter("zh-Hans");
             RegisterDefaultFormatter("zh-Hant");
+            RegisterDefaultFormatter("th-TH");
         }
 
         private void RegisterDefaultFormatter(string localeCode)
         {
-            Register(localeCode, new DefaultFormatter(localeCode));
+            try
+            {
+                Register(localeCode, new DefaultFormatter(localeCode));
+            }
+            catch (CultureNotFoundException)
+            {
+                // Some OS's may not support the particular culture. Not much we can do for those.
+            }            
         }
 
         private void RegisterCzechSlovakPolishFormatter(string localeCode)

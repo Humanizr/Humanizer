@@ -190,6 +190,7 @@ namespace Humanizer.Tests
             yield return new object[] { "safe", "saves" };
             yield return new object[] { "half", "halves" };
 
+            yield return new object[] { "glove", "gloves" };
             yield return new object[] { "move", "moves" };
 
             yield return new object[] { "salesperson", "salespeople" };
@@ -344,6 +345,7 @@ namespace Humanizer.Tests
             yield return new object[] { "that", "those" };
             yield return new object[] { "thief", "thieves" };
             yield return new object[] { "this", "these" };
+            yield return new object[] { "tie", "ties" };
             yield return new object[] { "tooth", "teeth" };
             yield return new object[] { "torpedo", "torpedoes" };
             yield return new object[] { "trellis", "trellises" };
@@ -364,6 +366,10 @@ namespace Humanizer.Tests
             
             //Issue #789
             yield return new object[] { "cache", "caches" };
+
+            //Issue #975, added by Alex Boutin
+            yield return new object[] { "ex", "exes" };
+            yield return new object[] { "", "" };
         }
 
         IEnumerator IEnumerable.GetEnumerator()
