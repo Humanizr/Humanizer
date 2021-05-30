@@ -99,6 +99,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("this", "these", matchEnding: false);
             _default.AddIrregular("bus", "buses", matchEnding: false);
             _default.AddIrregular("die", "dice", matchEnding: false);
+            _default.AddIrregular("tie", "ties", matchEnding: false);
 
             _default.AddUncountable("staff");
             _default.AddUncountable("training");
