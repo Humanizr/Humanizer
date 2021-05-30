@@ -345,6 +345,7 @@ namespace Humanizer.Tests
             yield return new object[] { "that", "those" };
             yield return new object[] { "thief", "thieves" };
             yield return new object[] { "this", "these" };
+            yield return new object[] { "tie", "ties" };
             yield return new object[] { "tooth", "teeth" };
             yield return new object[] { "torpedo", "torpedoes" };
             yield return new object[] { "trellis", "trellises" };
