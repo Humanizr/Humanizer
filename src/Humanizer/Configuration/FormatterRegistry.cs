@@ -1,4 +1,6 @@
-﻿using Humanizer.Localisation.Formatters;
+﻿using System.Globalization;
+
+using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Configuration
 {
@@ -21,6 +23,7 @@ namespace Humanizer.Configuration
             RegisterCzechSlovakPolishFormatter("pl");
             RegisterCzechSlovakPolishFormatter("sk");
             RegisterDefaultFormatter("bg");
+            RegisterDefaultFormatter("ku");
             RegisterDefaultFormatter("pt");
             RegisterDefaultFormatter("sv");
             RegisterDefaultFormatter("tr");
@@ -50,11 +53,19 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("zh-CN");
             RegisterDefaultFormatter("zh-Hans");
             RegisterDefaultFormatter("zh-Hant");
+            RegisterDefaultFormatter("th-TH");
         }
 
         private void RegisterDefaultFormatter(string localeCode)
         {
-            Register(localeCode, new DefaultFormatter(localeCode));
+            try
+            {
+                Register(localeCode, new DefaultFormatter(localeCode));
+            }
+            catch (CultureNotFoundException)
+            {
+                // Some OS's may not support the particular culture. Not much we can do for those.
+            }            
         }
 
         private void RegisterCzechSlovakPolishFormatter(string localeCode)

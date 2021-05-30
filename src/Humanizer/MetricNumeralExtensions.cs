@@ -53,7 +53,7 @@ namespace Humanizer
                 };
 
         /// <summary>
-        /// Names link a Metric symbol (as key) to its name (as value).
+        /// UnitPrefixes link a Metric symbol (as key) to its prefix (as value).
         /// </summary>
         /// <remarks>
         /// We dont support :
@@ -62,11 +62,26 @@ namespace Humanizer
         /// {'d', "deci" },
         /// {'c', "centi"},
         /// </remarks>
-        private static readonly Dictionary<char, string> Names = new Dictionary<char, string>
-                {
-                         {'Y', "yotta" }, {'Z', "zetta" }, {'E', "exa" }, {'P', "peta" }, {'T', "tera" }, {'G', "giga" }, {'M', "mega" }, {'k', "kilo" },
-                         {'m', "milli" }, {'μ', "micro" }, {'n', "nano" }, {'p', "pico" }, {'f', "femto" }, {'a', "atto" }, {'z', "zepto" }, {'y', "yocto" }
-                };
+        private static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new Dictionary<char, UnitPrefix>
+        {
+             {'Y', new UnitPrefix("yotta", "septillion", "quadrillion")}, 
+             {'Z', new UnitPrefix("zetta", "sextillion", "trilliard")}, 
+             {'E', new UnitPrefix("exa", "quintillion", "trillion")}, 
+             {'P', new UnitPrefix("peta", "quadrillion", "billiard")},
+             {'T', new UnitPrefix("tera", "trillion", "billion")}, 
+             {'G', new UnitPrefix("giga", "billion", "milliard")}, 
+             {'M', new UnitPrefix("mega", "million")}, 
+             {'k', new UnitPrefix("kilo", "thousand")}, 
+
+             {'m', new UnitPrefix("milli", "thousandth")}, 
+             {'μ', new UnitPrefix("micro", "millionth")}, 
+             {'n', new UnitPrefix("nano", "billionth", "milliardth")}, 
+             {'p', new UnitPrefix("pico", "trillionth", "billionth")}, 
+             {'f', new UnitPrefix("femto", "quadrillionth", "billiardth")}, 
+             {'a', new UnitPrefix("atto", "quintillionth", "trillionth")}, 
+             {'z', new UnitPrefix("zepto", "sextillionth", "trilliardth")}, 
+             {'y', new UnitPrefix("yocto", "septillionth", "quadrillionth")}
+        };
 
         /// <summary>
         /// Converts a Metric representation into a number.
@@ -109,9 +124,34 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        [Obsolete("Please use overload with MetricNumeralFormats")]
+        public static string ToMetric(this int input, bool hasSpace, bool useSymbol = true, int? decimals = null)
         {
             return ((double)input).ToMetric(hasSpace, useSymbol, decimals);
+        }
+
+
+        /// <summary>
+        /// Converts a number into a valid and Human-readable Metric representation.
+        /// </summary>
+        /// <remarks>
+        /// Inspired by a snippet from Thom Smith.
+        /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
+        /// </remarks>
+        /// <param name="input">Number to convert to a Metric representation.</param>
+        /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
+        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <example>
+        /// <code>
+        /// 1000.ToMetric() => "1k"
+        /// 123.ToMetric() => "123"
+        /// 1E-1.ToMetric() => "100m"
+        /// </code>
+        /// </example>
+        /// <returns>A valid Metric representation</returns>
+        public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null)
+        {
+            return ((double)input).ToMetric(formats, decimals);
         }
 
         /// <summary>
@@ -133,7 +173,41 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this double input, bool hasSpace = false, bool useSymbol = true, int? decimals = null)
+        [Obsolete("Please use overload with MetricNumeralFormats")]
+        public static string ToMetric(this double input, bool hasSpace, bool useSymbol = true, int? decimals = null)
+        {
+            var formats = (MetricNumeralFormats?)null;
+            if (hasSpace)
+            {
+                formats = MetricNumeralFormats.WithSpace;
+            }
+            if (!useSymbol)
+            {
+                formats = formats.HasValue ? formats | MetricNumeralFormats.UseName
+                    : MetricNumeralFormats.UseName;
+            }
+            return ToMetric(input, formats, decimals);
+        }
+
+        /// <summary>
+        /// Converts a number into a valid and Human-readable Metric representation.
+        /// </summary>
+        /// <remarks>
+        /// Inspired by a snippet from Thom Smith.
+        /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
+        /// </remarks>
+        /// <param name="input">Number to convert to a Metric representation.</param>
+        /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
+        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+        /// <example>
+        /// <code>
+        /// 1000d.ToMetric() => "1k"
+        /// 123d.ToMetric() => "123"
+        /// 1E-1.ToMetric() => "100m"
+        /// </code>
+        /// </example>
+        /// <returns>A valid Metric representation</returns>
+        public static string ToMetric(this double input, MetricNumeralFormats? formats = null, int? decimals = null)
         {
             if (input.Equals(0))
             {
@@ -145,7 +219,7 @@ namespace Humanizer
                 throw new ArgumentOutOfRangeException(nameof(input));
             }
 
-            return BuildRepresentation(input, hasSpace, useSymbol, decimals);
+            return BuildRepresentation(input, formats, decimals);
         }
 
         /// <summary>
@@ -206,25 +280,24 @@ namespace Humanizer
         /// <returns>A metric representation with a symbol</returns>
         private static string ReplaceNameBySymbol(string input)
         {
-            return Names.Aggregate(input, (current, name) =>
-                current.Replace(name.Value, name.Key.ToString()));
+            return UnitPrefixes.Aggregate(input, (current, unitPrefix) =>
+                current.Replace(unitPrefix.Value.Name, unitPrefix.Key.ToString()));
         }
 
         /// <summary>
         /// Build a Metric representation of the number.
         /// </summary>
         /// <param name="input">Number to convert to a Metric representation.</param>
-        /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildRepresentation(double input, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildRepresentation(double input, MetricNumeralFormats? formats, int? decimals)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
 
-            if (!exponent.Equals(0)) return BuildMetricRepresentation(input, exponent, hasSpace, useSymbol, decimals);
+            if (!exponent.Equals(0)) return BuildMetricRepresentation(input, exponent, formats, decimals);
             var representation = decimals.HasValue ? Math.Round(input, decimals.Value).ToString() : input.ToString();
-            if (hasSpace)
+            if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
             {
                 representation += " ";
             }
@@ -236,11 +309,10 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="exponent">Exponent of the number in a scientific notation</param>
-        /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
+        /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int exponent, bool hasSpace, bool useSymbol, int? decimals)
+        private static string BuildMetricRepresentation(double input, int exponent, MetricNumeralFormats? formats, int? decimals)
         {
             var number = input * Math.Pow(1000, -exponent);
             if (decimals.HasValue)
@@ -251,20 +323,35 @@ namespace Humanizer
             var symbol = Math.Sign(exponent) == 1
                 ? Symbols[0][exponent - 1]
                 : Symbols[1][-exponent - 1];
-            return number
-                + (hasSpace ? " " : string.Empty)
-                + GetUnit(symbol, useSymbol);
+            return number.ToString("G15")
+                   + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
+                   + GetUnitText(symbol, formats);
         }
 
         /// <summary>
         /// Get the unit from a symbol of from the symbol's name.
         /// </summary>
         /// <param name="symbol">The symbol linked to the unit</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
-        /// <returns>A symbol or a symbol's name</returns>
-        private static string GetUnit(char symbol, bool useSymbol)
+        /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
+        /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
+        private static string GetUnitText(char symbol, MetricNumeralFormats? formats)
         {
-            return useSymbol ? symbol.ToString() : Names[symbol];
+            if (formats.HasValue 
+                && formats.Value.HasFlag(MetricNumeralFormats.UseName))
+            {
+                return UnitPrefixes[symbol].Name;
+            }
+            if (formats.HasValue 
+                && formats.Value.HasFlag(MetricNumeralFormats.UseShortScaleWord))
+            {
+                return UnitPrefixes[symbol].ShortScaleWord;
+            }
+            if (formats.HasValue 
+                && formats.Value.HasFlag(MetricNumeralFormats.UseLongScaleWord))
+            {
+                return UnitPrefixes[symbol].LongScaleWord;
+            }
+            return symbol.ToString();
         }
 
         /// <summary>
@@ -296,6 +383,22 @@ namespace Humanizer
             var last = input[index];
             var isSymbol = Symbols[0].Contains(last) || Symbols[1].Contains(last);
             return !double.TryParse(isSymbol ? input.Remove(index) : input, out var number);
+        }
+
+        private struct UnitPrefix
+        {
+            private readonly string _longScaleWord;
+
+            public string Name { get; }
+            public string ShortScaleWord { get; }
+            public string LongScaleWord => _longScaleWord ?? ShortScaleWord;
+
+            public UnitPrefix(string name, string shortScaleWord, string longScaleWord = null)
+            {
+                Name = name;
+                ShortScaleWord = shortScaleWord;
+                _longScaleWord = longScaleWord;
+            }
         }
     }
 }

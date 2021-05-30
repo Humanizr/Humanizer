@@ -26,15 +26,15 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long number)
         {
-            return Convert(number, false);
+            return ConvertImpl(number, false);
         }
 
         public override string ConvertToOrdinal(int number)
         {
-            return Convert(number, true);
+            return ConvertImpl(number, true);
         }
 
-        private string Convert(long number, bool isOrdinal)
+        private string ConvertImpl(long number, bool isOrdinal)
         {
             if (number == 0)
                 return GetUnitValue(0, isOrdinal);
@@ -269,7 +269,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
-            if (toWords.IndexOf("one", StringComparison.Ordinal) == 0)
+            if (toWords.StartsWith("one", StringComparison.Ordinal))
                 toWords = toWords.Remove(0, 4);
 
             return toWords;
