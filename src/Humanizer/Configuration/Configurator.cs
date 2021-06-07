@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Reflection;
 using Humanizer.DateTimeHumanizeStrategy;
@@ -128,6 +128,28 @@ namespace Humanizer.Configuration
             get { return _dateTimeOffsetHumanizeStrategy; }
             set { _dateTimeOffsetHumanizeStrategy = value; }
         }
+
+#if NET6_0_OR_GREATER
+        private static IDateOnlyHumanizeStrategy _dateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
+        /// <summary>
+        /// The strategy to be used for DateOnly.Humanize
+        /// </summary>
+        public static IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy
+        {
+            get { return _dateOnlyHumanizeStrategy; }
+            set { _dateOnlyHumanizeStrategy = value; }
+        }
+
+        private static ITimeOnlyHumanizeStrategy _timeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
+        /// <summary>
+        /// The strategy to be used for TimeOnly.Humanize
+        /// </summary>
+        public static ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy
+        {
+            get { return _timeOnlyHumanizeStrategy; }
+            set { _timeOnlyHumanizeStrategy = value; }
+        }
+#endif
 
         private static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
         private static Func<PropertyInfo, bool> _enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;

@@ -23,7 +23,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)CollectionHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateHumanize.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateHumanizeDefaultStrategyTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TimeOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeHumanizePrecisionStrategyTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DateOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeOffsetHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DehumanizeToEnumTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EnumHumanizeTests.cs" />
