@@ -61,6 +61,17 @@ namespace Humanizer.Configuration
             get { return _dateToOrdinalWordConverters; }
         }
 
+#if NET6_0_OR_GREATER
+        private static readonly LocaliserRegistry<IDateOnlyToOrdinalWordConverter> _dateOnlyToOrdinalWordConverters = new DateOnlyToOrdinalWordsConverterRegistry();
+        /// <summary>
+        /// A registry of ordinalizers used to localise Ordinalize method
+        /// </summary>
+        public static LocaliserRegistry<IDateOnlyToOrdinalWordConverter> DateOnlyToOrdinalWordsConverters
+        {
+            get { return _dateOnlyToOrdinalWordConverters; }
+        }
+#endif
+
         internal static ICollectionFormatter CollectionFormatter
         {
             get
@@ -108,6 +119,19 @@ namespace Humanizer.Configuration
                 return DateToOrdinalWordsConverters.ResolveForUiCulture();
             }
         }
+
+#if NET6_0_OR_GREATER
+        /// <summary>
+        /// The ordinalizer to be used
+        /// </summary>
+        internal static IDateOnlyToOrdinalWordConverter DateOnlyToOrdinalWordsConverter
+        {
+            get
+            {
+                return DateOnlyToOrdinalWordsConverters.ResolveForUiCulture();
+            }
+        }
+#endif
 
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
         /// <summary>
