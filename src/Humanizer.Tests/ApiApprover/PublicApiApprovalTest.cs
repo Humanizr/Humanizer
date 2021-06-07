@@ -1,4 +1,4 @@
-﻿#if NET48
+﻿#if NET6_0_OR_GREATER
 using System;
 using System.Linq;
 using ApprovalTests;

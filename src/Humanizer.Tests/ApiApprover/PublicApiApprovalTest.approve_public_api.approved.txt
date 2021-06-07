@@ -1,5 +1,5 @@
 ﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETStandard,Version=v2.0", FrameworkDisplayName="")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v6.0", FrameworkDisplayName="")]
 namespace Humanizer
 {
     public class static ByteSizeExtensions
@@ -1040,14 +1040,20 @@ namespace Humanizer.Bytes
         public const string Terabyte = "terabyte";
         public const string TerabyteSymbol = "TB";
         public ByteSize(double byteSize) { }
+        [get: System.Runtime.CompilerServices.IsReadOnlyAttribute()]
         public long Bits { get; }
+        [get: System.Runtime.CompilerServices.IsReadOnlyAttribute()]
         public double Bytes { get; }
+        [get: System.Runtime.CompilerServices.IsReadOnlyAttribute()]
         public double Gigabytes { get; }
+        [get: System.Runtime.CompilerServices.IsReadOnlyAttribute()]
         public double Kilobytes { get; }
         public string LargestWholeNumberFullWord { get; }
         public string LargestWholeNumberSymbol { get; }
         public double LargestWholeNumberValue { get; }
+        [get: System.Runtime.CompilerServices.IsReadOnlyAttribute()]
         public double Megabytes { get; }
+        [get: System.Runtime.CompilerServices.IsReadOnlyAttribute()]
         public double Terabytes { get; }
         public Humanizer.Bytes.ByteSize Add(Humanizer.Bytes.ByteSize bs) { }
         public Humanizer.Bytes.ByteSize AddBits(long value) { }

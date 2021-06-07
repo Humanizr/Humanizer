@@ -16,6 +16,8 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net48' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
     <PackageReference Include="ApiApprover" Version="9.3.0" />
     <PackageReference Include="DiffPlex" Version="1.7.0" />
   </ItemGroup>
