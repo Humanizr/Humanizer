@@ -25,7 +25,7 @@ namespace Humanizer.Tests.ApiApprover
         [UseReporter(typeof(DiffPlexReporter))]
 #endif
         [IgnoreLineEndings(true)]
-        public void approve_public_api()
+        public void Approve_Public_Api()
         {
 
             var publicApi = Filter(ApiGenerator.GeneratePublicApi(typeof(StringHumanizeExtensions).Assembly));
