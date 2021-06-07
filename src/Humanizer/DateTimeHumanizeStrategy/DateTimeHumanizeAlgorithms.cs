@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
@@ -18,6 +18,11 @@ namespace Humanizer.DateTimeHumanizeStrategy
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
 
+            return PrecisionHumanize(ts, tense, precision, culture);
+        }
+
+        private static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
+        {
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
 
@@ -112,6 +117,15 @@ namespace Humanizer.DateTimeHumanizeStrategy
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
 
+            var sameMonth = comparisonBase.Date.AddMonths(tense == Tense.Future ? 1 : -1) == input.Date;
+
+            var days = Math.Abs((input.Date - comparisonBase.Date).Days);
+
+            return DefaultHumanize(ts, sameMonth, days, tense, culture);
+        }
+
+        private static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
+        {
             var formatter = Configurator.GetFormatter(culture);
 
             if (ts.TotalMilliseconds < 500)
@@ -145,8 +159,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             if (ts.TotalHours < 48)
-            {
-                var days = Math.Abs((input.Date - comparisonBase.Date).Days);
+            {   
                 return formatter.DateHumanize(TimeUnit.Day, tense, days);
             }
 
@@ -157,7 +170,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
-                if (comparisonBase.Date.AddMonths(tense == Tense.Future ? 1 : -1) == input.Date)
+                if (sameMonth)
                 {
                     return formatter.DateHumanize(TimeUnit.Month, tense, 1);
                 }
