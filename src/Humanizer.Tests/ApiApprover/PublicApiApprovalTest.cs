@@ -1,4 +1,4 @@
-﻿#if NET46
+﻿#if NET48
 using System;
 using System.Linq;
 using ApprovalTests;
@@ -42,6 +42,7 @@ namespace Humanizer.Tests.ApiApprover
                                                         .Where(l => !l.StartsWith("[assembly: AssemblyFileVersion("))
                                                         .Where(l => !l.StartsWith("[assembly: AssemblyInformationalVersion("))
                                                         .Where(l => !l.StartsWith("[assembly: System.Reflection.AssemblyMetadataAttribute(\"CommitHash\""))
+                                                        .Where(l => !l.StartsWith("[assembly: System.Reflection.AssemblyMetadataAttribute(\"RepositoryUrl\""))
                                                         .Where(l => !string.IsNullOrWhiteSpace(l))
             );
         }
