@@ -18,6 +18,7 @@
         <dependency id="NETStandard.Library" version="1.6.1" />
       </group>
       <group targetFramework="netstandard2.0" />
+      <group targetFramework="net6.0" />
     </dependencies>
   </metadata>
   <files>
@@ -25,6 +26,8 @@
     <file src="Humanizer\bin\Release\netstandard1.0\*.xml" target="lib\netstandard1.0" />
     <file src="Humanizer\bin\Release\netstandard2.0\*.dll" target="lib\netstandard2.0" />
     <file src="Humanizer\bin\Release\netstandard2.0\*.xml" target="lib\netstandard2.0" />
+    <file src="Humanizer\bin\Release\net6.0\*.dll" target="lib\net6.0" />
+    <file src="Humanizer\bin\Release\net6.0\*.xml" target="lib\net6.0" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

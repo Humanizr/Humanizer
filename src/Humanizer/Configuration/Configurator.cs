@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Reflection;
 using Humanizer.DateTimeHumanizeStrategy;
@@ -61,6 +61,17 @@ namespace Humanizer.Configuration
             get { return _dateToOrdinalWordConverters; }
         }
 
+#if NET6_0_OR_GREATER
+        private static readonly LocaliserRegistry<IDateOnlyToOrdinalWordConverter> _dateOnlyToOrdinalWordConverters = new DateOnlyToOrdinalWordsConverterRegistry();
+        /// <summary>
+        /// A registry of ordinalizers used to localise Ordinalize method
+        /// </summary>
+        public static LocaliserRegistry<IDateOnlyToOrdinalWordConverter> DateOnlyToOrdinalWordsConverters
+        {
+            get { return _dateOnlyToOrdinalWordConverters; }
+        }
+#endif
+
         internal static ICollectionFormatter CollectionFormatter
         {
             get
@@ -109,6 +120,19 @@ namespace Humanizer.Configuration
             }
         }
 
+#if NET6_0_OR_GREATER
+        /// <summary>
+        /// The ordinalizer to be used
+        /// </summary>
+        internal static IDateOnlyToOrdinalWordConverter DateOnlyToOrdinalWordsConverter
+        {
+            get
+            {
+                return DateOnlyToOrdinalWordsConverters.ResolveForUiCulture();
+            }
+        }
+#endif
+
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
         /// <summary>
         /// The strategy to be used for DateTime.Humanize
@@ -128,6 +152,28 @@ namespace Humanizer.Configuration
             get { return _dateTimeOffsetHumanizeStrategy; }
             set { _dateTimeOffsetHumanizeStrategy = value; }
         }
+
+#if NET6_0_OR_GREATER
+        private static IDateOnlyHumanizeStrategy _dateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
+        /// <summary>
+        /// The strategy to be used for DateOnly.Humanize
+        /// </summary>
+        public static IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy
+        {
+            get { return _dateOnlyHumanizeStrategy; }
+            set { _dateOnlyHumanizeStrategy = value; }
+        }
+
+        private static ITimeOnlyHumanizeStrategy _timeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
+        /// <summary>
+        /// The strategy to be used for TimeOnly.Humanize
+        /// </summary>
+        public static ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy
+        {
+            get { return _timeOnlyHumanizeStrategy; }
+            set { _timeOnlyHumanizeStrategy = value; }
+        }
+#endif
 
         private static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
         private static Func<PropertyInfo, bool> _enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;

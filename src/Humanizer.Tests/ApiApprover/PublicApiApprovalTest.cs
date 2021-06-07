@@ -1,4 +1,4 @@
-﻿#if NET46
+﻿#if NET6_0_OR_GREATER
 using System;
 using System.Linq;
 using ApprovalTests;
@@ -25,7 +25,7 @@ namespace Humanizer.Tests.ApiApprover
         [UseReporter(typeof(DiffPlexReporter))]
 #endif
         [IgnoreLineEndings(true)]
-        public void approve_public_api()
+        public void Approve_Public_Api()
         {
 
             var publicApi = Filter(ApiGenerator.GeneratePublicApi(typeof(StringHumanizeExtensions).Assembly));
@@ -42,6 +42,7 @@ namespace Humanizer.Tests.ApiApprover
                                                         .Where(l => !l.StartsWith("[assembly: AssemblyFileVersion("))
                                                         .Where(l => !l.StartsWith("[assembly: AssemblyInformationalVersion("))
                                                         .Where(l => !l.StartsWith("[assembly: System.Reflection.AssemblyMetadataAttribute(\"CommitHash\""))
+                                                        .Where(l => !l.StartsWith("[assembly: System.Reflection.AssemblyMetadataAttribute(\"RepositoryUrl\""))
                                                         .Where(l => !string.IsNullOrWhiteSpace(l))
             );
         }

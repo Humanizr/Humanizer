@@ -19,9 +19,16 @@ stages:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Use .NET Core SDK 5.x'
+      displayName: 'Use .NET Core SDK 6.x'
+      inputs:
+        version: 6.x
+        includePreviewVersions: true
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core Runtime 5.x'
       inputs:
         version: 5.x
+        packageType: runtime 
 
     - task: UseDotNet@2
       displayName: 'Use .NET Core Runtime 3.x'

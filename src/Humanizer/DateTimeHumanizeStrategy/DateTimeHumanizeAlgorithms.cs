@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
@@ -18,6 +18,35 @@ namespace Humanizer.DateTimeHumanizeStrategy
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
 
+            return PrecisionHumanize(ts, tense, precision, culture);
+        }
+
+#if NET6_0_OR_GREATER
+        /// <summary>
+        /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
+        /// </summary>
+        public static string PrecisionHumanize(DateOnly input, DateOnly comparisonBase, double precision, CultureInfo culture)
+        {
+            var diffDays = Math.Abs(comparisonBase.DayOfYear - input.DayOfYear);
+            var ts = new TimeSpan(diffDays, 0, 0, 0);
+            var tense = input > comparisonBase ? Tense.Future : Tense.Past;
+
+            return PrecisionHumanize(ts, tense, precision, culture);
+        }
+
+        /// <summary>
+        /// Returns localized &amp; humanized distance of time between two times; given a specific precision.
+        /// </summary>
+        public static string PrecisionHumanize(TimeOnly input, TimeOnly comparisonBase, double precision, CultureInfo culture)
+        {
+            var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
+            var tense = input > comparisonBase ? Tense.Future : Tense.Past;
+
+            return PrecisionHumanize(ts, tense, precision, culture);
+        }
+#endif
+        private static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
+        {
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
 
@@ -112,6 +141,44 @@ namespace Humanizer.DateTimeHumanizeStrategy
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
 
+            var sameMonth = comparisonBase.Date.AddMonths(tense == Tense.Future ? 1 : -1) == input.Date;
+
+            var days = Math.Abs((input.Date - comparisonBase.Date).Days);
+
+            return DefaultHumanize(ts, sameMonth, days, tense, culture);
+        }
+
+#if NET6_0_OR_GREATER
+        /// <summary>
+        /// Calculates the distance of time in words between two provided dates
+        /// </summary>
+        public static string DefaultHumanize(DateOnly input, DateOnly comparisonBase, CultureInfo culture)
+        {
+            var tense = input > comparisonBase ? Tense.Future : Tense.Past;
+            var diffDays = Math.Abs(comparisonBase.DayOfYear - input.DayOfYear);
+            var ts = new TimeSpan(diffDays, 0, 0, 0);
+
+            var sameMonth = comparisonBase.AddMonths(tense == Tense.Future ? 1 : -1) == input;
+
+            var days = Math.Abs(input.DayOfYear - comparisonBase.DayOfYear);
+
+            return DefaultHumanize(ts, sameMonth, days, tense, culture);
+        }
+
+        /// <summary>
+        /// Calculates the distance of time in words between two provided times
+        /// </summary>
+        public static string DefaultHumanize(TimeOnly input, TimeOnly comparisonBase, CultureInfo culture)
+        {
+            var tense = input > comparisonBase ? Tense.Future : Tense.Past;
+            var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
+
+            return DefaultHumanize(ts, true, 0, tense, culture);
+        }
+#endif
+
+        private static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
+        {
             var formatter = Configurator.GetFormatter(culture);
 
             if (ts.TotalMilliseconds < 500)
@@ -145,8 +212,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             if (ts.TotalHours < 48)
-            {
-                var days = Math.Abs((input.Date - comparisonBase.Date).Days);
+            {   
                 return formatter.DateHumanize(TimeUnit.Day, tense, days);
             }
 
@@ -157,7 +223,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
 
             if (ts.TotalDays >= 28 && ts.TotalDays < 30)
             {
-                if (comparisonBase.Date.AddMonths(tense == Tense.Future ? 1 : -1) == input.Date)
+                if (sameMonth)
                 {
                     return formatter.DateHumanize(TimeUnit.Month, tense, 1);
                 }
