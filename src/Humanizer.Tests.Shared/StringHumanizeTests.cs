@@ -74,6 +74,7 @@ namespace Humanizer.Tests
         [InlineData("Title_humanization_Honors_ALLCAPS", "Title Humanization Honors ALLCAPS")]
         [InlineData("MühldorferStraße23", "Mühldorfer Straße 23")]
         [InlineData("mühldorfer_STRAẞE_23", "Mühldorfer STRAẞE 23")]
+        [InlineData("CAN RETURN TITLE CASE", "Can Return Title Case")]
         public void CanHumanizeIntoTitleCase(string input, string expectedResult)
         {
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.Title));
