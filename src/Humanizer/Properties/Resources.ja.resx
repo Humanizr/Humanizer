@@ -241,6 +241,6 @@
     <value>1 ヶ月</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>1 年間の</value>
+    <value>1 年</value>
   </data>
 </root>
