@@ -1,201 +1,204 @@
 ﻿ 
+#if NET6_0_OR_GREATER
+
 using System;
 
 namespace Humanizer
 {
-    public partial class In
+    public partial class InDate
     {
    
         /// <summary>
         /// Returns 1st of January of the current year
         /// </summary>
-		public static DateTime January
+		public static DateOnly January
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 1, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 1, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of January of the year passed in
         /// </summary>
-        public static DateTime JanuaryOf(int year)
+        public static DateOnly JanuaryOf(int year)
 		{
-			return new DateTime(year, 1, 1);
+			return new DateOnly(year, 1, 1);
 		}
      
         /// <summary>
         /// Returns 1st of February of the current year
         /// </summary>
-		public static DateTime February
+		public static DateOnly February
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 2, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 2, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of February of the year passed in
         /// </summary>
-        public static DateTime FebruaryOf(int year)
+        public static DateOnly FebruaryOf(int year)
 		{
-			return new DateTime(year, 2, 1);
+			return new DateOnly(year, 2, 1);
 		}
      
         /// <summary>
         /// Returns 1st of March of the current year
         /// </summary>
-		public static DateTime March
+		public static DateOnly March
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 3, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 3, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of March of the year passed in
         /// </summary>
-        public static DateTime MarchOf(int year)
+        public static DateOnly MarchOf(int year)
 		{
-			return new DateTime(year, 3, 1);
+			return new DateOnly(year, 3, 1);
 		}
      
         /// <summary>
         /// Returns 1st of April of the current year
         /// </summary>
-		public static DateTime April
+		public static DateOnly April
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 4, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 4, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of April of the year passed in
         /// </summary>
-        public static DateTime AprilOf(int year)
+        public static DateOnly AprilOf(int year)
 		{
-			return new DateTime(year, 4, 1);
+			return new DateOnly(year, 4, 1);
 		}
      
         /// <summary>
         /// Returns 1st of May of the current year
         /// </summary>
-		public static DateTime May
+		public static DateOnly May
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 5, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 5, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of May of the year passed in
         /// </summary>
-        public static DateTime MayOf(int year)
+        public static DateOnly MayOf(int year)
 		{
-			return new DateTime(year, 5, 1);
+			return new DateOnly(year, 5, 1);
 		}
      
         /// <summary>
         /// Returns 1st of June of the current year
         /// </summary>
-		public static DateTime June
+		public static DateOnly June
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 6, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 6, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of June of the year passed in
         /// </summary>
-        public static DateTime JuneOf(int year)
+        public static DateOnly JuneOf(int year)
 		{
-			return new DateTime(year, 6, 1);
+			return new DateOnly(year, 6, 1);
 		}
      
         /// <summary>
         /// Returns 1st of July of the current year
         /// </summary>
-		public static DateTime July
+		public static DateOnly July
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 7, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 7, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of July of the year passed in
         /// </summary>
-        public static DateTime JulyOf(int year)
+        public static DateOnly JulyOf(int year)
 		{
-			return new DateTime(year, 7, 1);
+			return new DateOnly(year, 7, 1);
 		}
      
         /// <summary>
         /// Returns 1st of August of the current year
         /// </summary>
-		public static DateTime August
+		public static DateOnly August
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 8, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 8, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of August of the year passed in
         /// </summary>
-        public static DateTime AugustOf(int year)
+        public static DateOnly AugustOf(int year)
 		{
-			return new DateTime(year, 8, 1);
+			return new DateOnly(year, 8, 1);
 		}
      
         /// <summary>
         /// Returns 1st of September of the current year
         /// </summary>
-		public static DateTime September
+		public static DateOnly September
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 9, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 9, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of September of the year passed in
         /// </summary>
-        public static DateTime SeptemberOf(int year)
+        public static DateOnly SeptemberOf(int year)
 		{
-			return new DateTime(year, 9, 1);
+			return new DateOnly(year, 9, 1);
 		}
      
         /// <summary>
         /// Returns 1st of October of the current year
         /// </summary>
-		public static DateTime October
+		public static DateOnly October
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 10, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 10, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of October of the year passed in
         /// </summary>
-        public static DateTime OctoberOf(int year)
+        public static DateOnly OctoberOf(int year)
 		{
-			return new DateTime(year, 10, 1);
+			return new DateOnly(year, 10, 1);
 		}
      
         /// <summary>
         /// Returns 1st of November of the current year
         /// </summary>
-		public static DateTime November
+		public static DateOnly November
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 11, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 11, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of November of the year passed in
         /// </summary>
-        public static DateTime NovemberOf(int year)
+        public static DateOnly NovemberOf(int year)
 		{
-			return new DateTime(year, 11, 1);
+			return new DateOnly(year, 11, 1);
 		}
      
         /// <summary>
         /// Returns 1st of December of the current year
         /// </summary>
-		public static DateTime December
+		public static DateOnly December
 		{
-			get { return new DateTime(DateTime.UtcNow.Year, 12, 1); }
+			get { return new DateOnly(DateTime.UtcNow.Year, 12, 1); }
 		}
 
         /// <summary>
         /// Returns 1st of December of the year passed in
         /// </summary>
-        public static DateTime DecemberOf(int year)
+        public static DateOnly DecemberOf(int year)
 		{
-			return new DateTime(year, 12, 1);
+			return new DateOnly(year, 12, 1);
 		}
       }
 }
+#endif

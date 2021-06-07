@@ -23,6 +23,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)CollectionHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateHumanize.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateHumanizeDefaultStrategyTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FluentDate\InDateTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FluentDate\OnDateTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TimeOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeHumanizePrecisionStrategyTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateOnlyHumanizeTests.cs" />
