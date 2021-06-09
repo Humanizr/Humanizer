@@ -66,6 +66,7 @@ namespace Humanizer.Tests.Bytes
 
         [Theory]
         [InlineData(2, null, "en", "2 TB")]
+        [InlineData(2, null, "fr", "2 To")]
         [InlineData(2, "GB", "en", "2048 GB")]
         [InlineData(2.1, null, "en", "2.1 TB")]
         [InlineData(2.123, "#.#", "en", "2.1 TB")]
@@ -138,6 +139,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "en", "0 b")]
         [InlineData(0, "GB", "en", "0 GB")]
         [InlineData(2, null, "en", "2 GB")]
+        [InlineData(2, null, "fr", "2 Go")]
         [InlineData(2, "MB", "en", "2048 MB")]
         [InlineData(2.123, "#.##", "en", "2.12 GB")]
         public void HumanizesGigabytes(double input, string format, string cultureName, string expectedValue)
@@ -207,6 +209,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "en", "0 b")]
         [InlineData(0, "MB", "en", "0 MB")]
         [InlineData(2, null, "en", "2 MB")]
+        [InlineData(2, null, "fr", "2 Mo")]
         [InlineData(2, "KB", "en", "2048 KB")]
         [InlineData(2.123, "#", "en", "2 MB")]
         public void HumanizesMegabytes(double input, string format, string cultureName, string expectedValue)
@@ -276,6 +279,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "en", "0 b")]
         [InlineData(0, "KB", "en", "0 KB")]
         [InlineData(2, null, "en", "2 KB")]
+        [InlineData(2, null, "fr", "2 Ko")]
         [InlineData(2, "B", "en", "2048 B")]
         [InlineData(2.123, "#.####", "en", "2.123 KB")]
         public void HumanizesKilobytes(double input, string format, string cultureName, string expectedValue)
@@ -347,6 +351,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, "#.## B", "en", "0 B")]
         [InlineData(0, "B", "en", "0 B")]
         [InlineData(2, null, "en", "2 B")]
+        [InlineData(2, null, "fr", "2 o")]
         [InlineData(2000, "KB", "en", "1.95 KB")]
         [InlineData(2123, "#.##", "en", "2.07 KB")]
         [InlineData(10000000, "KB", "en", "9765.63 KB")]
@@ -412,6 +417,7 @@ namespace Humanizer.Tests.Bytes
         [InlineData(0, null, "en", "0 b")]
         [InlineData(0, "b", "en", "0 b")]
         [InlineData(2, null, "en", "2 b")]
+        [InlineData(2, null, "fr", "2 b")]
         [InlineData(12, "B", "en", "1.5 B")]
         [InlineData(10000, "#.# KB", "en", "1.2 KB")]
         public void HumanizesBits(long input, string format, string cultureName, string expectedValue)
