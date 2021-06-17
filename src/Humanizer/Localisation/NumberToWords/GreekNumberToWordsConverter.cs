@@ -18,6 +18,39 @@ namespace Humanizer.Localisation.NumberToWords
 
         private readonly string[] HundredsMap = { "", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "Εενιακόσιες" };
 
+        private static readonly Dictionary<long, string> ΟrdinalMap = new()
+        {
+            { 0, string.Empty },
+            { 1, "πρώτος" },
+            { 2, "δεύτερος" },
+            { 3, "τρίτος" },
+            { 4, "τέταρτος" },
+            { 5, "πέμπτος" },
+            { 6, "έκτος" },
+            { 7, "έβδομος" },
+            { 8, "όγδοος" },
+            { 9, "ένατος" },
+            { 10, "δέκατος" },
+            { 20, "εικοστός" },
+            { 30, "τριακοστός" },
+            { 40, "τεσσαρακοστός" },
+            { 50, "πεντηκοστός" },
+            { 60, "εξηκοστός" },
+            { 70, "εβδομηκοστός" },
+            { 80, "ογδοηκοστός" },
+            { 90, "ενενηκοστός" },
+            { 100, "εκατοστός" },
+            { 200, "διακοσιοστός" },
+            { 300, "τριακοσιοστός" },
+            { 400, "τετρακοσιστός" },
+            { 500, "πεντακοσιοστός" },
+            { 600, "εξακοσιοστός" },
+            { 700, "εφτακοσιοστός" },
+            { 800, "οχτακοσιοστός" },
+            { 900, "εννιακοσιοστός" },
+            { 1000, "χιλιοστός" }
+        };
+
 
         public override string Convert(long number)
         {
@@ -26,7 +59,99 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToOrdinal(int number)
         {
-            return null;
+            if (number / 10 == 0)
+            {
+                return GetOneDigitOrdinal(number);
+            }
+
+            if (number / 10 > 0 && number / 10 < 10)
+            {
+                return GetTwoDigigOrdinal(number);
+
+            }
+
+            if (number / 100 > 0 && number / 100 < 10)
+            {
+                return GetThreeDigitOrdinal(number);
+            }
+
+            if (number / 1000 > 0 && number / 1000 < 10)
+            {
+                return GetFourDigitOrdinal(number);
+            }
+
+            return string.Empty;
+        }
+
+       
+        private string GetOneDigitOrdinal(int number)
+        {
+            if (!ΟrdinalMap.TryGetValue(number, out var output)) return string.Empty;
+
+            return output;
+        }
+
+        private string GetTwoDigigOrdinal(int number)
+        {
+            if (number == 11) return "ενδέκατος";
+            if (number == 12) return "δωδέκατος";
+
+            var decades = number / 10;
+
+            if (!ΟrdinalMap.TryGetValue(decades*10, out var decadesString)) return string.Empty;
+
+            if(number -decades*10 > 0)
+            {
+                return decadesString + " " + GetOneDigitOrdinal(number - decades * 10);
+            }
+
+            return decadesString;
+        }
+
+        private string GetThreeDigitOrdinal(int number)
+        {
+
+            var hundrends = number / 100;
+
+            if (!ΟrdinalMap.TryGetValue(hundrends*100, out var hundrentsString)) return string.Empty;
+
+            if (number - hundrends*100> 10)
+            {
+                return hundrentsString + " " + GetTwoDigigOrdinal(number - hundrends*100);
+            }
+
+            if(number - hundrends * 100 > 0)
+            {
+                return hundrentsString + " " + GetOneDigitOrdinal(number - hundrends*100);
+            }
+
+            return hundrentsString;
+        }
+
+        private string GetFourDigitOrdinal(int number)
+        {
+
+            var thousands = number / 1000;
+
+            if (!ΟrdinalMap.TryGetValue(thousands*1000, out var thousandsString)) return string.Empty;
+
+            if (number - thousands * 1000 > 100)
+            {
+                return thousandsString + " " + GetThreeDigitOrdinal(number - thousands*1000);
+            }
+
+            if (number - thousands * 1000 > 10)
+            {
+                return thousandsString + " " + GetTwoDigigOrdinal(number - thousands * 1000);
+            }
+
+            if (number - thousands * 1000 > 0)
+            {
+                return thousandsString + " " + GetOneDigitOrdinal(number - thousands * 1000);
+            }
+
+            return thousandsString;
+
         }
 
         private string ConvertImpl(long number, bool returnPluralized)
