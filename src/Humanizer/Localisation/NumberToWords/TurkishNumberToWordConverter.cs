@@ -19,6 +19,19 @@ namespace Humanizer.Localisation.NumberToWords
             {'a', "ıncı"},
         };
 
+        private static readonly Dictionary<char, string> TupleSuffix = new Dictionary<char, string>
+        {
+            {'ı', "lı"},
+            {'i', "li"},
+            {'u', "lu"},
+            {'ü', "lü"},
+            {'o', "lu"},
+            {'ö', "lü"},
+            {'e', "li"},
+            {'a', "lı"},
+        };
+
+
         public override string Convert(long input)
         {
             var number = input;
@@ -120,6 +133,30 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return string.Format("{0}{1}", word, wordSuffix);
+        }
+
+        public override string ConvertToTuple(int number)
+        {
+            switch (number)
+            {
+                case 1:
+                    return "tek";
+                case 2:
+                    return "çift";
+                default:
+                    var word = Convert(number);
+                    var wordSuffix = string.Empty;
+
+                    for (var i = word.Length - 1; i >= 0; i--)
+                    {
+                        if (TupleSuffix.TryGetValue(word[i], out wordSuffix))
+                        {
+                            break;
+                        }
+                    }
+
+                    return string.Format("{0}{1}", word, wordSuffix);
+            }
         }
     }
 }

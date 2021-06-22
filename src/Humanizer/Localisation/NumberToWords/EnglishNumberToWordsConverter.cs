@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
@@ -165,6 +165,39 @@ namespace Humanizer.Localisation.NumberToWords
         private static bool ExceptionNumbersToWords(long number, out string words)
         {
             return OrdinalExceptions.TryGetValue(number, out words);
+        }
+
+        public override string ConvertToTuple(int number)
+        {
+            switch (number)
+            {
+                case 1:
+                    return "single";
+                case 2:
+                    return "double";
+                case 3:
+                    return "triple";
+                case 4:
+                    return "quadruple";
+                case 5:
+                    return "quintuple";
+                case 6:
+                    return "sextuple";
+                case 7:
+                    return "septuple";
+                case 8:
+                    return "octuple";
+                case 9:
+                    return "nonuple";
+                case 10:
+                    return "decuple";
+                case 100:
+                    return "centuple";
+                case 1000:
+                    return "milluple";
+                default:
+                    return $"{number}-tuple";
+            }
         }
     }
 }
