@@ -118,5 +118,16 @@ namespace Humanizer
         {
             return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
         }
+
+        /// <summary>
+        /// 1.ToTuple() -> "single"
+        /// </summary>
+        /// <param name="number">Number to be turned to tuple</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns></returns>
+        public static string ToTuple(this int number, CultureInfo culture = null)
+        {
+            return Configurator.GetNumberToWordsConverter(culture).ConvertToTuple(number);
+        }
     }
 }

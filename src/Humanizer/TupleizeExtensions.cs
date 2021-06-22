@@ -1,5 +1,9 @@
-// ReSharper disable IdentifierTypo 
+﻿// ReSharper disable IdentifierTypo 
 // ReSharper disable StringLiteralTypo
+using System.Globalization;
+
+using Humanizer.Configuration;
+
 namespace Humanizer
 {
     /// <summary>
@@ -8,6 +12,18 @@ namespace Humanizer
     /// </summary>
     public static class TupleizeExtensions
     {
+
+        /// <summary>
+        /// Converts integer to named tuple (e.g. 'single', 'double' etc.).
+        /// </summary>
+        /// <param name="input">Integer</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns>Named tuple</returns>
+        public static string Tupleize(this int input, CultureInfo culture = null)
+        {
+            return Configurator.GetNumberToWordsConverter(culture).ConvertToTuple(input);
+        }
+            
         /// <summary>
         /// Converts integer to named tuple (e.g. 'single', 'double' etc.).
         /// </summary>
