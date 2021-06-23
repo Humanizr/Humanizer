@@ -902,10 +902,6 @@ Humanizer can change numbers to Metric numerals using the `ToMetric` extension. 
 Also the reverse operation using the `FromMetric` extension.
 
 ```C#
-1d.ToMetric() => "1"
-1230d.ToMetric() => "1.23k"
-0.1d.ToMetric() => "100m"
-
 "1".FromMetric() => 1
 "1.23k".FromMetric() => 1230
 "100m".FromMetric() => 0.1
