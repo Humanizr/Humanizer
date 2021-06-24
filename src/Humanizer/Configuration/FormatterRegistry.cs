@@ -43,6 +43,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("id");
             RegisterDefaultFormatter("ja");
             RegisterDefaultFormatter("ko-KR");
+            RegisterDefaultFormatter("lv");
             Register("mt", new MalteseFormatter("mt"));
             RegisterDefaultFormatter("ms-MY");
             RegisterDefaultFormatter("nb");
