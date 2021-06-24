@@ -42,6 +42,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("id");
             RegisterDefaultFormatter("ja");
             Register("mt", new MalteseFormatter("mt"));
+            RegisterDefaultFormatter("ms-MY");
             RegisterDefaultFormatter("nb");
             RegisterDefaultFormatter("nb-NO");
             RegisterDefaultFormatter("nl");
@@ -65,7 +66,7 @@ namespace Humanizer.Configuration
             catch (CultureNotFoundException)
             {
                 // Some OS's may not support the particular culture. Not much we can do for those.
-            }            
+            }
         }
 
         private void RegisterCzechSlovakPolishFormatter(string localeCode)
