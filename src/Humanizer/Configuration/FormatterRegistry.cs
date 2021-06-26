@@ -37,6 +37,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("es");
             RegisterDefaultFormatter("fa");
             RegisterDefaultFormatter("fi-FI");
+            RegisterDefaultFormatter("fil-PH");
             RegisterDefaultFormatter("hu");
             RegisterDefaultFormatter("hy");
             RegisterDefaultFormatter("id");
