@@ -9,6 +9,7 @@ namespace Humanizer.Configuration
         public FormatterRegistry() : base(new DefaultFormatter("en-US"))
         {
             Register("ar", new ArabicFormatter());
+            Register("de", new GermanFormatter());
             Register("he", new HebrewFormatter());
             Register("ro", new RomanianFormatter());
             Register("ru", new RussianFormatter());
@@ -32,7 +33,6 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("af");
             RegisterDefaultFormatter("az");
             RegisterDefaultFormatter("da");
-            RegisterDefaultFormatter("de");
             RegisterDefaultFormatter("el");
             RegisterDefaultFormatter("es");
             RegisterDefaultFormatter("fa");

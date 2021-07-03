@@ -16,7 +16,7 @@ namespace Humanizer.Tests.Localisation.de.Bytes
         [Fact]
         public void ReturnsPluralBits()
         {
-            Assert.Equal("2 Bits", ByteSize.FromBits(2).ToFullWords());
+            Assert.Equal("2 Bit", ByteSize.FromBits(2).ToFullWords());
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Humanizer.Tests.Localisation.de.Bytes
         [Fact]
         public void ReturnsPluralBytes()
         {
-            Assert.Equal("10 Bytes", ByteSize.FromBytes(10).ToFullWords());
+            Assert.Equal("10 Byte", ByteSize.FromBytes(10).ToFullWords());
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Humanizer.Tests.Localisation.de.Bytes
         [Fact]
         public void ReturnsPluralKilobytes()
         {
-            Assert.Equal("10 Kilobytes", ByteSize.FromKilobytes(10).ToFullWords());
+            Assert.Equal("10 Kilobyte", ByteSize.FromKilobytes(10).ToFullWords());
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace Humanizer.Tests.Localisation.de.Bytes
         [Fact]
         public void ReturnsPluralMegabytes()
         {
-            Assert.Equal("10 Megabytes", ByteSize.FromMegabytes(10).ToFullWords());
+            Assert.Equal("10 Megabyte", ByteSize.FromMegabytes(10).ToFullWords());
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Humanizer.Tests.Localisation.de.Bytes
         [Fact]
         public void ReturnsPluralGigabytes()
         {
-            Assert.Equal("10 Gigabytes", ByteSize.FromGigabytes(10).ToFullWords());
+            Assert.Equal("10 Gigabyte", ByteSize.FromGigabytes(10).ToFullWords());
         }
 
         [Fact]
@@ -76,12 +76,12 @@ namespace Humanizer.Tests.Localisation.de.Bytes
         [Fact]
         public void ReturnsPluralTerabytes()
         {
-            Assert.Equal("10 Terabytes", ByteSize.FromTerabytes(10).ToFullWords());
+            Assert.Equal("10 Terabyte", ByteSize.FromTerabytes(10).ToFullWords());
         }
 
         [Theory]
-        [InlineData(229376, "B", "229376 Bytes")]
-        [InlineData(229376, "# KB", "224 Kilobytes")]
+        [InlineData(229376, "B", "229376 Byte")]
+        [InlineData(229376, "# KB", "224 Kilobyte")]
         public void ToFullWordsFormatted(double input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, ByteSize.FromBytes(input).ToFullWords(format));
