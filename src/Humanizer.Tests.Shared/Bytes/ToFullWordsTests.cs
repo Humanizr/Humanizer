@@ -25,6 +25,7 @@ using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {
+    [UseCulture("en")]
     public class ToFullWordsTests
     {
         [Fact]
