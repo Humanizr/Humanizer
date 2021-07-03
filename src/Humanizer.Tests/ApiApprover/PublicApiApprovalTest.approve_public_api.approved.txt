@@ -657,6 +657,7 @@ namespace Humanizer
     {
         public static string ToOrdinalWords(this int number, System.Globalization.CultureInfo culture = null) { }
         public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+        public static string ToTuple(this int number, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, bool addAnd, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
@@ -1921,6 +1922,7 @@ namespace Humanizer.Localisation.NumberToWords
         string Convert(long number, Humanizer.GrammaticalGender gender, bool addAnd = True);
         string ConvertToOrdinal(int number);
         string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
+        string ConvertToTuple(int number);
     }
 }
 namespace Humanizer.Localisation.Ordinalizers
