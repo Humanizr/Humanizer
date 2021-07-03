@@ -1583,6 +1583,10 @@ namespace Humanizer
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
         public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
     }
+    public class static TimeUnitToSymbolExtensions
+    {
+        public static string ToSymbol(this Humanizer.Localisation.TimeUnit unit, System.Globalization.CultureInfo culture = null) { }
+    }
     public class static To
     {
         public static Humanizer.ICulturedStringTransformer LowerCase { get; }
@@ -1852,6 +1856,10 @@ namespace Humanizer.Localisation
         {
             public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1, bool toWords = False) { }
         }
+        public class static TimeUnitSymbol
+        {
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit) { }
+        }
     }
     public class static Resources
     {
@@ -1902,6 +1910,7 @@ namespace Humanizer.Localisation.Formatters
         protected virtual string GetResourceKey(string resourceKey) { }
         public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False) { }
         public virtual string TimeSpanHumanize_Zero() { }
+        public virtual string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit) { }
     }
     public interface IFormatter
     {
@@ -1911,6 +1920,7 @@ namespace Humanizer.Localisation.Formatters
         string DateHumanize_Now();
         string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False);
         string TimeSpanHumanize_Zero();
+        string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit);
     }
 }
 namespace Humanizer.Localisation.NumberToWords
