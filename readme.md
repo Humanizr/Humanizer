@@ -44,6 +44,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [ByteSize](#bytesize)
    - [Heading to words](#heading-to-words)
    - [Tupleize](#tupleize)
+   - [Time unit to symbol](#timeunit-to-symbol)
  - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life) - 
  - [How to contribute?](#how-to-contribute)
  - [Continuous Integration from AppVeyor](#continuous-integration)
@@ -1108,6 +1109,18 @@ Humanizer can change whole numbers into their 'tuple'  using `Tupleize`. For exa
 ```
 
 The numbers 1-10, 100 and 1000 will be converted into a 'named' tuple (i.e. "single", "double" etc.). Any other number "n" will be converted to "n-tuple".
+
+### <a id="timeunit-to-symbol">Time unit to symbol</a>
+Humanizer can translate time units to their symbols:
+
+```C#
+TimeUnit.Day.ToSymbol();
+// d
+TimeUnit.Week.ToSymbol();
+// week
+TimeUnit.Year.ToSymbol();
+// a
+```
 
 ## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
