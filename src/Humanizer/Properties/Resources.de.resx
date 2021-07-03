@@ -270,4 +270,100 @@
   <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
     <value>ein Jahr</value>
   </data>
+  <data name="N" xml:space="preserve">
+    <value>Nord</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>Nordnordost</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>Nordost</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>Ostnordost</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>Ost</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>Ostsüdost</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>Südost</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>Südsüdost</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>Süd</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>Südsüdwest</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>Südwest</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>Westsüdwest</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>West</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>Westnordwest</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>Nordwest</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>Nordnordwest</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>NNO</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>ONO</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>OSO</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SO</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>SSO</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>SSW</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SW</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>WSW</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>WNW</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NW</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>NNW</value>
+  </data>
 </root>
