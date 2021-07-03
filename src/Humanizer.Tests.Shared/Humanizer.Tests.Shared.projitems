@@ -61,6 +61,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de-CH\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de-LI\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\DefaultFormatterTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\Bytes\ByteSizeExtensionsTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\Bytes\ToFullWordsTest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\Bytes\ToStringTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\CollectionFormatterTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\NumberToWordsTests.cs" />
