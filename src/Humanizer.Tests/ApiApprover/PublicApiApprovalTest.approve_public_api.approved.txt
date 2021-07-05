@@ -1639,7 +1639,7 @@ namespace Humanizer.Bytes
         public System.TimeSpan Interval { get; }
         public Humanizer.Bytes.ByteSize Size { get; }
         public string Humanize(Humanizer.Localisation.TimeUnit timeUnit = 1) { }
-        public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1) { }
+        public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1, System.Globalization.CultureInfo culture = null) { }
     }
     public struct ByteSize : System.IComparable, System.IComparable<Humanizer.Bytes.ByteSize>, System.IEquatable<Humanizer.Bytes.ByteSize>, System.IFormattable
     {
