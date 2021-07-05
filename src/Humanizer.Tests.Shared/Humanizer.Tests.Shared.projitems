@@ -61,6 +61,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de-CH\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de-LI\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\DefaultFormatterTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\Bytes\ByteRateTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\Bytes\ByteSizeExtensionsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\Bytes\ToFullWordsTest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\Bytes\ToStringTests.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\HeadingTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\OrdinalizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\TimeSpanHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\de\TimeUnitToSymbolTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\el\DateHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\el\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\en\DateToOrdinalWordsTests.cs" />
@@ -203,6 +205,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)StringExtensionsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StringHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TimeSpanHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TimeUnitToSymbolTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ToQuantityTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TransformersTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TruncatorTests.cs" />

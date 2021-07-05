@@ -1,19 +1,21 @@
 ﻿using System;
+
 using Humanizer.Bytes;
 using Humanizer.Localisation;
+
 using Xunit;
 
-namespace Humanizer.Tests.Bytes
+namespace Humanizer.Tests.Localisation.de.Bytes
 {
-    [UseCulture("en")]
+    [UseCulture("de-DE")]
     public class ByteRateTests
     {
         [Theory]
         [InlineData(400, 1, "400 B/s")]
-        [InlineData(4 * 1024, 1, "4 KB/s")]
+        [InlineData(4 * 1024, 1, "4 kB/s")]
         [InlineData(4 * 1024 * 1024, 1, "4 MB/s")]
         [InlineData(4 * 2 * 1024 * 1024, 2, "4 MB/s")]
-        [InlineData(4 * 1024, 0.1, "40 KB/s")]
+        [InlineData(4 * 1024, 0.1, "40 kB/s")]
         [InlineData(15 * 60 * 1024 * 1024, 60, "15 MB/s")]
         public void HumanizesRates(long inputBytes, double perSeconds, string expectedValue)
         {
@@ -32,9 +34,9 @@ namespace Humanizer.Tests.Bytes
         [InlineData(10, 1, TimeUnit.Second, "10 MB/s")]
         [InlineData(10, 60, TimeUnit.Minute, "10 MB/min")]
         [InlineData(10, 60 * 60, TimeUnit.Hour, "10 MB/h")]
-        [InlineData(1, 10 * 1, TimeUnit.Second, "102.4 KB/s")]
-        [InlineData(1, 10 * 60, TimeUnit.Minute, "102.4 KB/min")]
-        [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "102.4 KB/h")]
+        [InlineData(1, 10 * 1, TimeUnit.Second, "102,4 kB/s")]
+        [InlineData(1, 10 * 60, TimeUnit.Minute, "102,4 kB/min")]
+        [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "102,4 kB/h")]
         public void TimeUnitTests(long megabytes, double measurementIntervalSeconds, TimeUnit displayInterval, string expectedValue)
         {
             var size = ByteSize.FromMegabytes(megabytes);
@@ -47,8 +49,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
-        [InlineData(19854651984, 1, TimeUnit.Second, null, "18.4910856038332 GB/s")]
-        [InlineData(19854651984, 1, TimeUnit.Second, "#.##", "18.49 GB/s")]
+        [InlineData(19854651984, 1, TimeUnit.Second, null, "18,4910856038332 GB/s")]
+        [InlineData(19854651984, 1, TimeUnit.Second, "#.##", "18,49 GB/s")]
         public void FormattedTimeUnitTests(long bytes, int measurementIntervalSeconds, TimeUnit displayInterval, string format, string expectedValue)
         {
             var size = ByteSize.FromBytes(bytes);
@@ -58,8 +60,6 @@ namespace Humanizer.Tests.Bytes
 
             Assert.Equal(expectedValue, text);
         }
-
-
 
         [Theory]
         [InlineData(TimeUnit.Millisecond)]
@@ -76,6 +76,5 @@ namespace Humanizer.Tests.Bytes
                 dummyRate.Humanize(units);
             });
         }
-
     }
 }
