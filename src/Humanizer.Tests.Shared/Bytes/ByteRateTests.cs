@@ -28,13 +28,13 @@ namespace Humanizer.Tests.Bytes
         [Theory]
         [InlineData(1, 1, TimeUnit.Second, "1 MB/s")]
         [InlineData(1, 60, TimeUnit.Minute, "1 MB/min")]
-        [InlineData(1, 60 * 60, TimeUnit.Hour, "1 MB/hour")]
+        [InlineData(1, 60 * 60, TimeUnit.Hour, "1 MB/h")]
         [InlineData(10, 1, TimeUnit.Second, "10 MB/s")]
         [InlineData(10, 60, TimeUnit.Minute, "10 MB/min")]
-        [InlineData(10, 60 * 60, TimeUnit.Hour, "10 MB/hour")]
+        [InlineData(10, 60 * 60, TimeUnit.Hour, "10 MB/h")]
         [InlineData(1, 10 * 1, TimeUnit.Second, "102.4 KB/s")]
         [InlineData(1, 10 * 60, TimeUnit.Minute, "102.4 KB/min")]
-        [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "102.4 KB/hour")]
+        [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "102.4 KB/h")]
         public void TimeUnitTests(long megabytes, double measurementIntervalSeconds, TimeUnit displayInterval, string expectedValue)
         {
             var size = ByteSize.FromMegabytes(megabytes);
