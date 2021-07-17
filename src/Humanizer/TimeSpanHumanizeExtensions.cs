@@ -53,6 +53,40 @@ namespace Humanizer
             return ConcatenateTimeSpanParts(timeParts, culture, collectionSeparator);
         }
 
+        /// <summary>
+        /// Turns a TimeSpan into an age expression, e.g. "40 years old"
+        /// </summary>
+        /// <param name="timeSpan">Elapsed time</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <param name="toWords">Uses words instead of numbers if true. E.g. "forty years old".</param>
+        /// <returns>Age expression in the given culture/language</returns>
+        public static string ToAge(this TimeSpan timeSpan, CultureInfo culture = null, bool toWords = false)
+        {
+            var timeSpanExpression = timeSpan.Humanize(maxUnit: TimeUnit.Year, culture: culture, toWords: toWords);
+
+            var cultureFormatter = Configurator.GetFormatter(culture);
+            var ageExpression = string.Format(cultureFormatter.TimeSpanHumanize_Age(), timeSpanExpression);
+
+            return ageExpression;
+        }
+
+        /// <summary>
+        /// Turns a TimeSpan into an hyphenated age expression, e.g. a "40-year-old"
+        /// </summary>
+        /// <param name="timeSpan">Elapsed time</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <param name="toWords">Uses words instead of numbers if true. E.g. a "forty-year-old".</param>
+        /// <returns>Hyphenated age expression if the given language is English, empty string otherwise</returns>
+        public static string ToHyphenatedAge(this TimeSpan timeSpan, CultureInfo culture = null, bool toWords = false)
+        {
+            var timeSpanExpression = timeSpan.Humanize(maxUnit: TimeUnit.Year, culture: culture, toWords: toWords);
+
+            var cultureFormatter = Configurator.GetFormatter(culture);
+            var ageExpression = string.Format(cultureFormatter.TimeSpanHumanize_PreHyphenatedAge(), timeSpanExpression.Singularize());
+
+            return ageExpression.Replace(' ', '-');
+        }
+
         private static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
@@ -62,7 +96,7 @@ namespace Humanizer
 
             foreach (var timeUnitType in timeUnitsEnumTypes)
             {
-                var timepart = GetTimeUnitPart(timeUnitType,timespan, maxUnit, minUnit, cultureFormatter, toWords); 
+                var timepart = GetTimeUnitPart(timeUnitType, timespan, maxUnit, minUnit, cultureFormatter, toWords);
 
                 if (timepart != null || firstValueFound)
                 {

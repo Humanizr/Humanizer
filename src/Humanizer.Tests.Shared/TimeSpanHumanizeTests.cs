@@ -35,7 +35,7 @@ namespace Humanizer.Tests
         [InlineData(365 + 365 + 365 + 365 + 1, "4 years")]
         [InlineData(365 + 365 + 365 + 365 + 366, "4 years, 11 months, 30 days")]
         [InlineData(365 + 365 + 365 + 365 + 366 + 1, "5 years")]
-        public void Year(int days, string expected)
+        public void Years(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
@@ -54,7 +54,7 @@ namespace Humanizer.Tests
         [InlineData(30 + 30 + 31 + 30 + 31 + 1, "5 months")]
         [InlineData(365, "11 months, 30 days")]
         [InlineData(366, "1 year")]
-        public void Month(int days, string expected)
+        public void Months(int days, string expected)
         {
             var actual = TimeSpan.FromDays(days).Humanize(precision: 7, maxUnit: TimeUnit.Year);
             Assert.Equal(expected, actual);
@@ -135,6 +135,30 @@ namespace Humanizer.Tests
         public void Milliseconds(int ms, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize();
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(4, false, "4 days old")]
+        [InlineData(23, false, "3 weeks old")]
+        [InlineData(64, false, "2 months old")]
+        [InlineData(367, true, "one year old")]
+        [InlineData(750, true, "two years old")]
+        public void Age(int days, bool toWords, string expected)
+        {
+            var actual = TimeSpan.FromDays(days).ToAge(toWords: toWords);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(4, true, "four-day-old")]
+        [InlineData(23, true, "three-week-old")]
+        [InlineData(64, true, "two-month-old")]
+        [InlineData(367, false, "1-year-old")]
+        [InlineData(750, false, "2-year-old")]
+        public void HyphenatedAge(int days, bool toWords, string expected)
+        {
+            var actual = TimeSpan.FromDays(days).ToHyphenatedAge(toWords: toWords);
             Assert.Equal(expected, actual);
         }
 
@@ -445,9 +469,9 @@ namespace Humanizer.Tests
         }
         [Theory]
         [InlineData(31 * 4, 1, "en-US", "four months")]
-        [InlineData(236,2,"ar", "سبعة أشهر, اثنان و عشرون يوم")]
-        [InlineData(321, 2,"es", "diez meses, dieciséis días")]
-        public void CanSpecifyCultureExplicitlyToWords(int days, int precision,string culture, string expected)
+        [InlineData(236, 2, "ar", "سبعة أشهر, اثنان و عشرون يوم")]
+        [InlineData(321, 2, "es", "diez meses, dieciséis días")]
+        public void CanSpecifyCultureExplicitlyToWords(int days, int precision, string culture, string expected)
         {
             var timeSpan = new TimeSpan(days, 0, 0, 0);
             var actual = timeSpan.Humanize(precision: precision, culture: new CultureInfo(culture), maxUnit: TimeUnit.Year, toWords: true);
