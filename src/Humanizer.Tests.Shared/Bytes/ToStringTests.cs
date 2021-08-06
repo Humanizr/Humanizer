@@ -37,6 +37,7 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void ReturnsDefaultNumberFormat()
         {
+            Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.501).ToString());
             Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.5).ToString("KB"));
         }
 
