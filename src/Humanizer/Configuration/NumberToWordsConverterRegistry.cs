@@ -30,6 +30,7 @@ namespace Humanizer.Configuration
             Register("de-LI", new GermanSwissLiechtensteinNumberToWordsConverter());
             Register("bn-BD", new BanglaNumberToWordsConverter());
             Register("tr", new TurkishNumberToWordConverter());
+            Register("is", new IcelandicNumberToWordsConverter());
             Register("it", new ItalianNumberToWordsConverter());
             Register("mt", new MalteseNumberToWordsConvertor());
             Register("uk", new UkrainianNumberToWordsConverter());
