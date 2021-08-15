@@ -29,7 +29,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ToFullWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ToStringTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\CollectionFormatterTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\DateHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\HeadingTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\ResourcesTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\TimeOnlyHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\TimeSpanHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TimeOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeHumanizePrecisionStrategyTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateOnlyHumanizeTests.cs" />
