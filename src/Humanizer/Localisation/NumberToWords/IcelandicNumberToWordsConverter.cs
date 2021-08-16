@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-
 using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
@@ -23,7 +21,7 @@ namespace Humanizer.Localisation.NumberToWords
             public string Single { get; set; }
             public string OrdinalPrefix { get; set; }
         }
-        private static readonly Dictionary<int, Fact> PowerOfTenMap = new Dictionary<int, Fact>
+        private static readonly Dictionary<int, Fact> PowerOfTenMap = new()
         {
             {0,     new Fact{Power = 0                      , Single = string.Empty,        Plural = string.Empty,  OrdinalPrefix = string.Empty,   Gender = GrammaticalGender.Neuter    }},
             {2,     new Fact{Power = 2                      , Single = "hundrað",           Plural = "hundruð",     OrdinalPrefix = "hundruðast",   Gender = GrammaticalGender.Neuter    }},
@@ -39,14 +37,10 @@ namespace Humanizer.Localisation.NumberToWords
         private static bool IsAndSplitNeeded(int number) =>
             (((number <= 20) || (number % 10 == 0) && (number < 100)) || (number % 100 == 0));
         private static string GetOrdinalEnding(GrammaticalGender gender) =>
-            gender switch
-            {
-                GrammaticalGender.Masculine => "i",
-                _ => "a"
-            };
+            gender == GrammaticalGender.Masculine ? "i" : "a";
         private static void GetUnits(ICollection<string> builder, long number, GrammaticalGender gender)
         {
-            if (number > 0 && number < 5)
+            if (number is > 0 and < 5)
             {
                 var genderedForm = gender switch
                 {
@@ -130,7 +124,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static string CollectOrdinalPartsUnderAHundred(int number, GrammaticalGender gender)
         {
             string returnValue = null;
-            if (number >= 0 && number < 20)
+            if (number is >= 0 and < 20)
             {
                 if (number == 2)
                 {
@@ -153,18 +147,13 @@ namespace Humanizer.Localisation.NumberToWords
             }
             return returnValue;
         }
-        private static void CollectParts(IList<string> parts, ref long number, ref bool needsAnd, Fact rule)
+        private static void CollectParts(ICollection<string> parts, ref long number, ref bool needsAnd, Fact rule)
         {
             var remainder = number / rule.Power;
             if (remainder > 0)
             {
                 number %= rule.Power;
-                var prevLen = parts.Count;
                 CollectPart(parts, remainder, rule);
-                if (number == 0 && needsAnd && false == parts.Skip(prevLen).Contains(AndSplit))
-                {
-                    parts.Insert(prevLen, AndSplit);
-                }
                 needsAnd = true;
             }
         }
@@ -226,8 +215,7 @@ namespace Humanizer.Localisation.NumberToWords
             if (remainder > 0)
             {
                 number %= (int)rule.Power;
-                // https://malfar.arnastofnun.is/grein/65658
-                if (number > 0 && (number > 19 || (number % 100 > 10 && number % 100 % 10 == 0)))
+                if (number > 0 && (number > 19 || (number % 100 > 10 && number % 100 % 10 == 0))) // https://malfar.arnastofnun.is/grein/65658
                 {
                     CollectPartUnderOneThousand(parts, remainder, ChooseOrdinalGender(gender, rule, false));
                     if (rule.Power > 0)

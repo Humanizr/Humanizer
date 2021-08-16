@@ -1,8 +1,10 @@
 ﻿#if NET6_0_OR_GREATER
 
 using System;
+
 using Humanizer.Configuration;
 using Humanizer.DateTimeHumanizeStrategy;
+
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.@is
@@ -45,15 +47,7 @@ namespace Humanizer.Tests.Localisation.@is
         [Fact]
         public void TestNever()
         {
-            TimeOnly? never = null;
-            Assert.Equal("aldrei", never.Humanize());
-        }
-
-        [Fact]
-        public void Nullable_ExpectSame()
-        {
-            TimeOnly? never = new TimeOnly(23, 12, 7);
-            Assert.Equal(never.Value.Humanize(), never.Humanize());
+            Assert.Equal("aldrei", ((TimeOnly?)null).Humanize());
         }
     }
 }
