@@ -127,6 +127,8 @@ namespace Humanizer
     public class static HeadingExtensions
     {
         public static double FromAbbreviatedHeading(this string heading, System.Globalization.CultureInfo culture = null) { }
+        public static double FromHeadingArrow(this char heading) { }
+        public static double FromHeadingArrow(this string heading) { }
         public static string ToHeading(this double heading, Humanizer.HeadingStyle style = 0, System.Globalization.CultureInfo culture = null) { }
         public static char ToHeadingArrow(this double heading) { }
     }

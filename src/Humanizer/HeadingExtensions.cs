@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+
 using Humanizer.Localisation;
 
 namespace Humanizer
@@ -92,6 +93,39 @@ namespace Humanizer
             }
 
             return -1;
+        }
+
+        /// <summary>
+        /// Returns a heading based on the heading arrow.
+        /// </summary>
+        public static double FromHeadingArrow(this char heading)
+        {
+            var index = Array.IndexOf(headingArrows, heading);
+            
+            if (index == -1)
+            {
+                return -1;
+            }
+
+            return (index * 45.0);
+        }
+
+        /// <summary>
+        /// Returns a heading based on the heading arrow.
+        /// </summary>
+        public static double FromHeadingArrow(this string heading)
+        {
+            if (heading == null)
+            {
+                throw new ArgumentNullException(nameof(heading));
+            }
+
+            if (heading.Length != 1)
+            {
+                return -1;
+            }
+
+            return heading[0].FromHeadingArrow();
         }
     }
 }

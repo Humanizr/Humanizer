@@ -158,5 +158,36 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expected, heading.ToHeadingArrow());
         }
+
+        [InlineData('↑', 0)]
+        [InlineData('↗', 45)]
+        [InlineData('→', 90)]
+        [InlineData('↘', 135)]
+        [InlineData('↓', 180)]
+        [InlineData('↙', 225)]
+        [InlineData('←', 270)]
+        [InlineData('↖', 315)]
+        [InlineData('\n', -1)]
+        [Theory]
+        public void FromHeadingArrow(char heading, double expected)
+        {
+            Assert.Equal(expected, heading.FromHeadingArrow());
+        }
+
+        [InlineData("↑", 0)]
+        [InlineData("↗", 45)]
+        [InlineData("→", 90)]
+        [InlineData("↘", 135)]
+        [InlineData("↓", 180)]
+        [InlineData("↙", 225)]
+        [InlineData("←", 270)]
+        [InlineData("↖", 315)]
+        [InlineData("", -1)]
+        [InlineData("xyz", -1)]
+        [Theory]
+        public void FromHeadingArrow_Also_Works_With_Strings(string heading, double expected)
+        {
+            Assert.Equal(expected, heading.FromHeadingArrow());
+        }
     }
 }
