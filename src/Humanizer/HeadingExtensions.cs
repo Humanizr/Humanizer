@@ -70,17 +70,28 @@ namespace Humanizer
         /// <summary>
         /// Returns a heading based on the short textual representation of the heading.
         /// </summary>
+        /// <param name="culture">The culture of the heading</param>
         /// <returns>The heading. -1 if the heading could not be parsed.</returns>
-        public static double FromAbbreviatedHeading(this string heading)
+        public static double FromAbbreviatedHeading(this string heading, CultureInfo culture = null)
         {
-            var index = Array.IndexOf(headings, heading.ToUpperInvariant());
-
-            if (index == -1)
+            if (heading == null)
             {
-                return -1;
+                throw new ArgumentNullException(nameof(heading));
             }
 
-            return (index * 22.5);
+            culture ??= CultureInfo.CurrentCulture;
+
+            var upperCaseHeading = culture.TextInfo.ToUpper(heading);
+            for (var index = 0; index < headings.Length; ++index)
+            {
+                var localizedShortHeading = Resources.GetResource($"{headings[index]}_Short", culture);
+                if (culture.CompareInfo.Compare(upperCaseHeading, localizedShortHeading) == 0)
+                {
+                    return (index * 22.5);
+                }
+            }
+
+            return -1;
         }
     }
 }

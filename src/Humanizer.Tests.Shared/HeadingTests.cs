@@ -154,7 +154,7 @@ namespace Humanizer.Tests
         [InlineData(348.7, '↑')]
         [InlineData(348.8, '↑')]
         [Theory]
-        public void ToHeadignArrow(double heading, char expected)
+        public void ToHeadingArrow(double heading, char expected)
         {
             Assert.Equal(expected, heading.ToHeadingArrow());
         }
