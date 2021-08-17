@@ -32,8 +32,6 @@ namespace Humanizer.Localisation.NumberToWords
             {15,    new Fact{Power = 1000000000000000       , Single = "einn billjarður",   Plural = "billjarðar",  OrdinalPrefix = "billjarðast",  Gender = GrammaticalGender.Masculine }},
             {18,    new Fact{Power = 1000000000000000000    , Single = "ein trilljón",      Plural = "trilljónir",  OrdinalPrefix = "trilljónast",  Gender = GrammaticalGender.Feminine  }}
         };
-        private static GrammaticalGender ChooseOrdinalGender(GrammaticalGender gender, Fact powerRule, bool isLastPart) =>
-            powerRule.Power > 0 || isLastPart != true ? powerRule.Gender : gender;
         private static bool IsAndSplitNeeded(int number) =>
             (((number <= 20) || (number % 10 == 0) && (number < 100)) || (number % 100 == 0));
         private static string GetOrdinalEnding(GrammaticalGender gender) =>
@@ -217,7 +215,7 @@ namespace Humanizer.Localisation.NumberToWords
                 number %= (int)rule.Power;
                 if (number > 0 && (number > 19 || (number % 100 > 10 && number % 100 % 10 == 0))) // https://malfar.arnastofnun.is/grein/65658
                 {
-                    CollectPartUnderOneThousand(parts, remainder, ChooseOrdinalGender(gender, rule, false));
+                    CollectPartUnderOneThousand(parts, remainder, rule.Gender);
                     if (rule.Power > 0)
                     {
                         parts.Add(rule.Plural);
@@ -225,7 +223,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    CollectOrdinalParts(parts, (int)remainder, rule, ChooseOrdinalGender(gender, rule, number == 0), gender);
+                    CollectOrdinalParts(parts, (int)remainder, rule, rule.Gender, gender);
                 }
                 needsAnd = true;
             }
