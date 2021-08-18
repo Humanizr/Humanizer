@@ -250,7 +250,7 @@
     <value>{0} millisekúndur</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
-    <value>{0} days ago</value>
+    <value>fyrir {0} dögum</value>
   </data>
     <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
     <value>fyrir {0} dögum</value>
@@ -304,7 +304,7 @@
     <value>eftir {0} mánuð</value>
   </data>
     <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
-    <value>{0} seconds ago</value>
+    <value>fyrir {0} sekúndum</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
     <value>fyrir {0} sekúndu</value>
@@ -319,7 +319,7 @@
     <value>eftir {0} sekúndu</value>
   </data>
     <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
-    <value>{0} years ago</value>
+    <value>fyrir {0} árum</value>
   </data>
     <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
     <value>fyrir {0} árum</value>

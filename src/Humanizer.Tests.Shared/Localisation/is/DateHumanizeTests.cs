@@ -92,8 +92,10 @@ namespace Humanizer.Tests.Localisation.@is
         }
 
         [Theory]
-        [InlineData(2, "fyrir 2 árum")]
-        [InlineData(1, "fyrir einu ári")]
+        //[InlineData(2, "fyrir 2 árum")]
+        //[InlineData(1, "fyrir einu ári")]
+        [InlineData(20, "fyrir 20 árum")]
+        [InlineData(30, "fyrir 30 árum")]
         public void YearsAgo(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
@@ -106,6 +108,7 @@ namespace Humanizer.Tests.Localisation.@is
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
+
 
         [Theory]
         [InlineData(0, "núna")]
