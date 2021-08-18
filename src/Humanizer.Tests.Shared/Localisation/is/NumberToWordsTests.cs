@@ -176,6 +176,8 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(1044, "eitt þúsund fertugasti og fjórði")]
         [InlineData(315, "þrjú hundruðasti og fimmtándi")]
         [InlineData(777, "sjö hundruð sjötugasta og sjöunda", GrammaticalGender.Neuter)]
+        [InlineData(102000, "eitt hundrað og tvö þúsundasti")]
+        [InlineData(1002000, "ein milljón og tvö þúsundasti")]
         public void ToOrdinalWords(int number, string words, GrammaticalGender gender = GrammaticalGender.Masculine)
         {
             Assert.Equal(words, number.ToOrdinalWords(gender));

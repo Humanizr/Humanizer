@@ -213,23 +213,36 @@ namespace Humanizer.Localisation.NumberToWords
                 GetUnits(builder, hundredRemainder, gender);
             }
         }
-        private static void CollectOrdinal(ICollection<string> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
+        private static void CollectOrdinal(IList<string> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
         {
             var remainder = number / rule.Power;
             if (remainder > 0)
             {
                 number %= (int)rule.Power;
+
                 if (number > 0 && (number > 19 || (number % 100 > 10 && number % 100 % 10 == 0))) // https://malfar.arnastofnun.is/grein/65658
                 {
-                    CollectPartUnderOneThousand(parts, remainder, rule.Gender);
-                    if (rule.Power > 0)
+                    if (remainder == 1)
                     {
-                        parts.Add(rule.Plural);
+                        parts.Add(rule.Single);
+                    }
+                    else
+                    {
+                        CollectPartUnderOneThousand(parts, remainder, rule.Gender);
+                        if (rule.Power > 0)
+                        {
+                            parts.Add(rule.Plural);
+                        }
                     }
                 }
                 else
                 {
+                    var prevLen = parts.Count;
                     CollectOrdinalParts(parts, (int)remainder, rule, rule.Gender, gender);
+                    if (number == 0 && needsAnd && false == parts.Skip(prevLen).Contains(AndSplit))
+                    {
+                        parts.Insert(prevLen, AndSplit);
+                    }
                 }
                 needsAnd = true;
             }
