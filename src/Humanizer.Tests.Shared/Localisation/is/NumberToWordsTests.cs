@@ -20,6 +20,17 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(1000000, "ein milljón")]
         [InlineData(10000000, "tíu milljónir")]
         [InlineData(100000000, "eitt hundrað milljónir")]
+        [InlineData(100000001L, "eitt hundrað milljónir og einn")]
+        [InlineData(100000001L, "eitt hundrað milljónir og ein", GrammaticalGender.Feminine)]
+        [InlineData(100000001L, "eitt hundrað milljónir og eitt", GrammaticalGender.Neuter)]
+        [InlineData(100000002L, "eitt hundrað milljónir og tveir")]
+        [InlineData(100001999L, "eitt hundrað milljónir eitt þúsund níu hundruð níutíu og níu")]
+        [InlineData(100002000L, "eitt hundrað milljónir og tvö þúsund")]
+        [InlineData(100002000L, "eitt hundrað milljónir og tvö þúsund", GrammaticalGender.Feminine)]
+        [InlineData(100002000L, "eitt hundrað milljónir og tvö þúsund", GrammaticalGender.Neuter)]
+        [InlineData(100002001L, "eitt hundrað milljónir tvö þúsund og einn")]
+        [InlineData(100002002L, "eitt hundrað milljónir tvö þúsund og tveir")]
+        [InlineData(100031999L, "eitt hundrað milljónir þrjátíu og eitt þúsund níu hundruð níutíu og níu")]
         [InlineData(1000000000, "einn milljarður")]
         [InlineData(111, "eitt hundrað og ellefu")]
         [InlineData(1111, "eitt þúsund eitt hundrað og ellefu")]
@@ -28,6 +39,9 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(11111111, "ellefu milljónir eitt hundrað og ellefu þúsund eitt hundrað og ellefu")]
         [InlineData(111111111, "eitt hundrað og ellefu milljónir eitt hundrað og ellefu þúsund eitt hundrað og ellefu")]
         [InlineData(1111111111, "einn milljarður eitt hundrað og ellefu milljónir eitt hundrað og ellefu þúsund eitt hundrað og ellefu")]
+        [InlineData(10000000000L, "tíu milljarðar")]
+        [InlineData(10000000001L, "tíu milljarðar og einn")]
+        [InlineData(10000000002L, "tíu milljarðar og tveir")]
         [InlineData(123, "eitt hundrað tuttugu og þrír")]
         [InlineData(124, "eitt hundrað tuttugu og fjórir")]
         [InlineData(1234, "eitt þúsund tvö hundruð þrjátíu og fjórir")]
@@ -47,7 +61,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(16415618, "sextán milljónir fjögur hundruð og fimmtán þúsund sex hundruð og átján")]
         [InlineData(322, "þrjú hundruð tuttugu og tveir")]
         [InlineData(322, "þrjú hundruð tuttugu og tvær", GrammaticalGender.Feminine)]
-        public void IntToWords(int number, string expected, GrammaticalGender gender = GrammaticalGender.Masculine)
+        public void IntToWords(long number, string expected, GrammaticalGender gender = GrammaticalGender.Masculine)
         {
             Assert.Equal(expected, number.ToWords(gender));
         }

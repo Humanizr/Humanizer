@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
@@ -145,13 +146,18 @@ namespace Humanizer.Localisation.NumberToWords
             }
             return returnValue;
         }
-        private static void CollectParts(ICollection<string> parts, ref long number, ref bool needsAnd, Fact rule)
+        private static void CollectParts(IList<string> parts, ref long number, ref bool needsAnd, Fact rule)
         {
             var remainder = number / rule.Power;
             if (remainder > 0)
             {
                 number %= rule.Power;
+                var prevLen = parts.Count;
                 CollectPart(parts, remainder, rule);
+                if (number == 0 && needsAnd && false == parts.Skip(prevLen).Contains(AndSplit))
+                {
+                    parts.Insert(prevLen, AndSplit);
+                }
                 needsAnd = true;
             }
         }
