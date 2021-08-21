@@ -33,6 +33,7 @@
       <dependency id="Humanizer.Core.hu" version="$version$" />
       <dependency id="Humanizer.Core.hy" version="$version$" />
       <dependency id="Humanizer.Core.id" version="$version$" />
+      <dependency id="Humanizer.Core.is" version="$version$" />
       <dependency id="Humanizer.Core.it" version="$version$" />
       <dependency id="Humanizer.Core.ja" version="$version$" />
       <dependency id="Humanizer.Core.ko-KR" version="$version$" />
