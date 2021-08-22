@@ -41,6 +41,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("hu");
             RegisterDefaultFormatter("hy");
             RegisterDefaultFormatter("id");
+            Register("is", new IcelandicFormatter());
             RegisterDefaultFormatter("ja");
             RegisterDefaultFormatter("ko-KR");
             RegisterDefaultFormatter("lv");

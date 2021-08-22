@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>fyrir einni sekúndu</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>fyrir {0} sekúndum</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>fyrir einni mínútu</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>fyrir {0} mínútum</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>fyrir einni klukkustund</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>fyrir {0} klukkustundum</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>í gær</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>fyrir {0} dögum</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>fyrir einum mánuði</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
+    <value>fyrir {0} mánuðum</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>fyrir einu ári</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>fyrir {0} árum</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} dagar</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} klukkustundir</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} millisekúndur</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} mínútur</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} sekúndur</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>einn dagur</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>ein klukkustund</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>ein millisekúnda</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>ein mínúta</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>ein sekúnda</value>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>engin stund</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} vikur</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>ein vika</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>eftir {0} daga</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>eftir {0} klukkustundir</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>eftir {0} mínútur</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>eftir {0} mánuði</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>eftir {0} sekúndur</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>eftir {0} ár</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>núna</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>á morgun</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>eftir eina klukkustund</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>eftir eina mínútu</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>eftir einn mánuð</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>eftir eina sekúndu</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>eftir eitt ár</value>
+  </data>
+    <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>eftir {0} mínútur</value>
+  </data>
+          <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} dagar</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} klukkustundir</value>
+  </data>
+      <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} mínútur</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} sekúndur</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} millisekúndur</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
+    <value>fyrir {0} dögum</value>
+  </data>
+    <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>fyrir {0} dögum</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
+    <value>fyrir {0} degi</value>
+  </data>
+      <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>eftir {0} daga</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
+    <value>eftir {0} dag</value>
+  </data>
+    <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
+    <value>fyrir {0} klukkustundum</value>
+  </data>
+    <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>fyrir {0} klukkustundum</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
+    <value>fyrir {0} klukkustund</value>
+  </data>
+    <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>eftir {0} klukkustundir</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
+    <value>eftir {0} klukkustund</value>
+  </data>
+    <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
+    <value>fyrir {0} klukkustundum</value>
+  </data>
+    <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>fyrir {0} mínútum</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
+    <value>fyrir {0} mínútu</value>
+  </data>
+      <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
+    <value>eftir {0} mínútu</value>
+  </data>
+      <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>fyrir {0} mánuðum</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
+    <value>fyrir {0} mánuði</value>
+  </data>
+      <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>eftir {0} mánuði</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
+    <value>eftir {0} mánuð</value>
+  </data>
+    <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
+    <value>fyrir {0} sekúndum</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>fyrir {0} sekúndu</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
+    <value>fyrir {0} sekúndu</value>
+  </data>
+    <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>eftir {0} sekúndur</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
+    <value>eftir {0} sekúndu</value>
+  </data>
+    <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
+    <value>fyrir {0} árum</value>
+  </data>
+    <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>fyrir {0} árum</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
+    <value>fyrir {0} ári</value>
+  </data>
+    <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>eftir {0} ár</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
+    <value>eftir {0} ár</value>
+  </data>
+    <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
+    <value>{0} dagur</value>
+  </data>
+      <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
+    <value>{0} klukkustund</value>
+  </data>
+    <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>{0} millisekúnda</value>
+  </data>
+    <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} mínúta</value>
+  </data>
+      <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>{0} sekúnda</value>
+  </data>
+      <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} vikur</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>{0} vika</value>
+  </data>
+    <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} mánuðir</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} ár</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 mánuður</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 ár</value>
+  </data>
+                                <data name="DateHumanize_Never" xml:space="preserve">
+    <value>aldrei</value>
+  </data>
+      <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} mánuðir</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
+    <value>{0} mánuðir</value>
+  </data>
+        <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} ár</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0} ár</value>
+  </data>
+    <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>einn dagur</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>ein klukkustund</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>ein millisekúnda</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>ein mínúta</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>einn mánuður</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>ein sekúnda</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>ein vika</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>eitt ár</value>
+  </data>
+    <data name="N" xml:space="preserve">
+    <value>norður</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>norðnorðaustur</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>norðaustur</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>austnorðaustur</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>austur</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>austsuðaustur</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>suðaustur</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>suðsuðaustur</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>suður</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>suðsuðvestur</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>suðvestur</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>vestsuðvestur</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>vestur</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>vestnorðvestur</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>norðvestur</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>norðnorðvestur</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>NNA</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>ANA</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>ASA</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SA</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>SSA</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>SSV</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SV</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>VSV</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>VNV</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NV</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>NNV</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>biti</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bæti</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kílóbæti</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>kB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabæti</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gígabæti</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabæti</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+</root>
