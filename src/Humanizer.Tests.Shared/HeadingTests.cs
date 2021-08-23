@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System.Globalization;
+
+using Xunit;
 
 namespace Humanizer.Tests
 {
@@ -188,6 +190,15 @@ namespace Humanizer.Tests
         public void FromHeadingArrow_Also_Works_With_Strings(string heading, double expected)
         {
             Assert.Equal(expected, heading.FromHeadingArrow());
+        }
+
+        [InlineData("NNW", "en-US", 337.5)]
+        [InlineData("ØNØ", "da", 67.5)]
+        [InlineData("O", "de-DE", 90.0)]
+        [Theory]
+        public void FromShortHeading_CanSpecifyCultureExplicitly(string heading, string culture, double expected)
+        {
+            Assert.Equal(expected, heading.FromAbbreviatedHeading(new CultureInfo(culture)));
         }
     }
 }
