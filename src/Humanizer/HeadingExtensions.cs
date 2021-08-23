@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+
 using Humanizer.Localisation;
 
 namespace Humanizer
@@ -73,14 +74,67 @@ namespace Humanizer
         /// <returns>The heading. -1 if the heading could not be parsed.</returns>
         public static double FromAbbreviatedHeading(this string heading)
         {
-            var index = Array.IndexOf(headings, heading.ToUpperInvariant());
+            return heading.FromAbbreviatedHeading(null);
+        }
 
+        /// <summary>
+        /// Returns a heading based on the short textual representation of the heading.
+        /// </summary>
+        /// <param name="culture">The culture of the heading</param>
+        /// <returns>The heading. -1 if the heading could not be parsed.</returns>
+        public static double FromAbbreviatedHeading(this string heading, CultureInfo culture = null)
+        {
+            if (heading == null)
+            {
+                throw new ArgumentNullException(nameof(heading));
+            }
+
+            culture ??= CultureInfo.CurrentCulture;
+
+            var upperCaseHeading = culture.TextInfo.ToUpper(heading);
+            for (var index = 0; index < headings.Length; ++index)
+            {
+                var localizedShortHeading = Resources.GetResource($"{headings[index]}_Short", culture);
+                if (culture.CompareInfo.Compare(upperCaseHeading, localizedShortHeading) == 0)
+                {
+                    return (index * 22.5);
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Returns a heading based on the heading arrow.
+        /// </summary>
+        public static double FromHeadingArrow(this char heading)
+        {
+            var index = Array.IndexOf(headingArrows, heading);
+            
             if (index == -1)
             {
                 return -1;
             }
 
-            return (index * 22.5);
+            return (index * 45.0);
+        }
+
+        /// <summary>
+        /// Returns a heading based on the heading arrow.
+        /// </summary>
+        public static double FromHeadingArrow(this string heading)
+        {
+            if (heading == null)
+            {
+                throw new ArgumentNullException(nameof(heading));
+            }
+
+            if (heading.Length != 1)
+            {
+                return -1;
+            }
+
+            return heading[0].FromHeadingArrow();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System.Globalization;
+
+using Xunit;
 
 namespace Humanizer.Tests
 {
@@ -154,9 +156,49 @@ namespace Humanizer.Tests
         [InlineData(348.7, '↑')]
         [InlineData(348.8, '↑')]
         [Theory]
-        public void ToHeadignArrow(double heading, char expected)
+        public void ToHeadingArrow(double heading, char expected)
         {
             Assert.Equal(expected, heading.ToHeadingArrow());
+        }
+
+        [InlineData('↑', 0)]
+        [InlineData('↗', 45)]
+        [InlineData('→', 90)]
+        [InlineData('↘', 135)]
+        [InlineData('↓', 180)]
+        [InlineData('↙', 225)]
+        [InlineData('←', 270)]
+        [InlineData('↖', 315)]
+        [InlineData('\n', -1)]
+        [Theory]
+        public void FromHeadingArrow(char heading, double expected)
+        {
+            Assert.Equal(expected, heading.FromHeadingArrow());
+        }
+
+        [InlineData("↑", 0)]
+        [InlineData("↗", 45)]
+        [InlineData("→", 90)]
+        [InlineData("↘", 135)]
+        [InlineData("↓", 180)]
+        [InlineData("↙", 225)]
+        [InlineData("←", 270)]
+        [InlineData("↖", 315)]
+        [InlineData("", -1)]
+        [InlineData("xyz", -1)]
+        [Theory]
+        public void FromHeadingArrow_Also_Works_With_Strings(string heading, double expected)
+        {
+            Assert.Equal(expected, heading.FromHeadingArrow());
+        }
+
+        [InlineData("NNW", "en-US", 337.5)]
+        [InlineData("ØNØ", "da", 67.5)]
+        [InlineData("O", "de-DE", 90.0)]
+        [Theory]
+        public void FromShortHeading_CanSpecifyCultureExplicitly(string heading, string culture, double expected)
+        {
+            Assert.Equal(expected, heading.FromAbbreviatedHeading(new CultureInfo(culture)));
         }
     }
 }
