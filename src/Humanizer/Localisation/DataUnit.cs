@@ -5,11 +5,34 @@
     /// </summary>
     public enum DataUnit
     {
+        /// <summary>
+        /// Bit
+        /// </summary>
         Bit,
+
+        /// <summary>
+        /// Byte
+        /// </summary>
         Byte,
+
+        /// <summary>
+        /// Kilobyte
+        /// </summary>
         Kilobyte,
+
+        /// <summary>
+        /// Megabyte
+        /// </summary>
         Megabyte,
+
+        /// <summary>
+        /// Gigabyte
+        /// </summary>
         Gigabyte,
-        Terabyte,
+
+        /// <summary>
+        /// Terrabyte
+        /// </summary>
+        Terabyte
     }
 }

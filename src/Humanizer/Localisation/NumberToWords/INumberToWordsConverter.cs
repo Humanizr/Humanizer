@@ -43,5 +43,12 @@
         /// <param name="gender"></param>
         /// <returns></returns>
         string ConvertToOrdinal(int number, GrammaticalGender gender);
+
+        /// <summary>
+        /// Converts integer to named tuple (e.g. 'single', 'double' etc.).
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        string ConvertToTuple(int number);
     }
 }

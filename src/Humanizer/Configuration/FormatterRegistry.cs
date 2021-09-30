@@ -9,6 +9,7 @@ namespace Humanizer.Configuration
         public FormatterRegistry() : base(new DefaultFormatter("en-US"))
         {
             Register("ar", new ArabicFormatter());
+            Register("de", new GermanFormatter());
             Register("he", new HebrewFormatter());
             Register("ro", new RomanianFormatter());
             Register("ru", new RussianFormatter());
@@ -32,16 +33,20 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("af");
             RegisterDefaultFormatter("az");
             RegisterDefaultFormatter("da");
-            RegisterDefaultFormatter("de");
             RegisterDefaultFormatter("el");
             RegisterDefaultFormatter("es");
             RegisterDefaultFormatter("fa");
             RegisterDefaultFormatter("fi-FI");
+            RegisterDefaultFormatter("fil-PH");
             RegisterDefaultFormatter("hu");
             RegisterDefaultFormatter("hy");
             RegisterDefaultFormatter("id");
+            Register("is", new IcelandicFormatter());
             RegisterDefaultFormatter("ja");
+            RegisterDefaultFormatter("ko-KR");
+            RegisterDefaultFormatter("lv");
             Register("mt", new MalteseFormatter("mt"));
+            RegisterDefaultFormatter("ms-MY");
             RegisterDefaultFormatter("nb");
             RegisterDefaultFormatter("nb-NO");
             RegisterDefaultFormatter("nl");
@@ -65,7 +70,7 @@ namespace Humanizer.Configuration
             catch (CultureNotFoundException)
             {
                 // Some OS's may not support the particular culture. Not much we can do for those.
-            }            
+            }
         }
 
         private void RegisterCzechSlovakPolishFormatter(string localeCode)

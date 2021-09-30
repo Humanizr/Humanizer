@@ -75,9 +75,9 @@ namespace Humanizer.Tests
         [InlineData("some title", "Some Title")]
         [InlineData("some-title", "Some Title")]
         [InlineData("sometitle", "Sometitle")]
-        [InlineData("some-title: The begining", "Some Title: The Begining")]
-        [InlineData("some_title:_the_begining", "Some Title: The Begining")]
-        [InlineData("some title: The_begining", "Some Title: The Begining")]
+        [InlineData("some-title: The beginning", "Some Title: The Beginning")]
+        [InlineData("some_title:_the_beginning", "Some Title: the Beginning")]
+        [InlineData("some title: The_beginning", "Some Title: The Beginning")]
         public void Titleize(string input, string expectedOuput)
         {
             Assert.Equal(expectedOuput, input.Titleize());

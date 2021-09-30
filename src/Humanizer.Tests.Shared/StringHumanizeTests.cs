@@ -71,9 +71,11 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData("CanReturnTitleCase", "Can Return Title Case")]
         [InlineData("Can_return_title_Case", "Can Return Title Case")]
+        [InlineData("In titles use lower case for prepositions an article or conjunctions", "In Titles Use Lower Case for Prepositions an Article or Conjunctions")]
         [InlineData("Title_humanization_Honors_ALLCAPS", "Title Humanization Honors ALLCAPS")]
         [InlineData("MühldorferStraße23", "Mühldorfer Straße 23")]
         [InlineData("mühldorfer_STRAẞE_23", "Mühldorfer STRAẞE 23")]
+        [InlineData("CAN RETURN TITLE CASE", "Can Return Title Case")]
         public void CanHumanizeIntoTitleCase(string input, string expectedResult)
         {
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.Title));

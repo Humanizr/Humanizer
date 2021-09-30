@@ -32,6 +32,12 @@ namespace Humanizer
                     ? match.Value
                     : match.Value.ToLower()));
 
+            if (result.Replace(" ", "").ToCharArray().All(c => char.IsUpper(c)) &&
+                result.Contains(" "))
+            {
+                result = result.ToLower();
+            }
+
             return result.Length > 0 ? char.ToUpper(result[0]) +
                 result.Substring(1, result.Length - 1) : result;
         }

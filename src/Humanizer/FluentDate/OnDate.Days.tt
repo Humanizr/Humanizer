@@ -1,0 +1,59 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ assembly name="$(TargetPath)" #>
+<#@ import namespace="System" #>
+<#@ import namespace="Humanizer" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+
+#if NET6_0_OR_GREATER
+using System;
+
+namespace Humanizer
+{
+    /// <summary>
+    /// </summary>
+    public partial class OnDate
+    {
+	<#    
+	const int leapYear = 2012;
+    for (int month = 1; month <= 12; month++)
+    {
+		var firstDayOfMonth = new DateTime(leapYear, month, 1);
+		var monthName = firstDayOfMonth.ToString("MMMM");#>
+	    
+        /// <summary>
+		/// Provides fluent date accessors for <#= monthName #>
+        /// </summary>
+		public class <#= monthName #>
+		{
+	        /// <summary>
+			/// The nth day of <#= monthName #> of the current year
+	        /// </summary>
+			public static DateOnly The(int dayNumber)
+			{
+				return new DateOnly(DateTime.Now.Year, <#= month #>, dayNumber); 
+			}
+        <#for (int day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
+        {
+		var ordinalDay = day.Ordinalize();#>
+ 
+	        /// <summary>
+			/// The <#= ordinalDay #> day of <#= monthName #> of the current year
+	        /// </summary>
+			public static DateOnly The<#= ordinalDay #>
+			{
+				get { return new DateOnly(DateTime.Now.Year, <#= month #>, <#= day #>); }
+			}
+	    <#}#>
+}
+    <#}#>
+	}
+}
+
+#endif
