@@ -10,7 +10,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] HundredsMap = { "nulle", "simt", "divsimt", "trīssimt", "četrsimt", "piecsimt", "sešsimt", "septiņsimt", "astoņsimt", "deviņsimt" };
         private static readonly string[] UnitsOrdinal = { string.Empty, "pirm", "otr", "treš", "ceturt", "piekt", "sest", "septīt", "astot", "devīt", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit", "divdesmit" };
 
-        public override string Convert(long input, GrammaticalGender gender)
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input > int.MaxValue || input < int.MinValue)
             {
