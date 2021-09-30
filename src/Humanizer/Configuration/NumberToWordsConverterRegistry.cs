@@ -51,6 +51,7 @@ namespace Humanizer.Configuration
             Register("ku", new CentralKurdishNumberToWordsConverter());
             Register("el", new GreekNumberToWordsConverter());
             Register("th-TH", new ThaiNumberToWordsConverter());
+            Register("lv", new LatvianNumberToWordsConverter());
         }
     }
 }
