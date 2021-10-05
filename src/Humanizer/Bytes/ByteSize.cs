@@ -220,7 +220,7 @@ namespace Humanizer.Bytes
         /// </summary>
         public override string ToString()
         {
-            return ToString(provider: null);
+            return ToString(NumberFormatInfo.CurrentInfo);
         }
 
         public string ToString(IFormatProvider provider)
@@ -228,7 +228,7 @@ namespace Humanizer.Bytes
             if (provider == null)
                 provider = CultureInfo.CurrentCulture;
 
-            return string.Format("{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
+            return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
         }
 
         public string ToString(string format)
