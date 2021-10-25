@@ -10,6 +10,13 @@ namespace Humanizer.DateTimeHumanizeStrategy
     /// </summary>
     internal static class DateTimeHumanizeAlgorithms
     {
+#if NET6_0_OR_GREATER
+        public static string ClockTimeHumanize(TimeOnly input, CultureInfo culture)
+        {
+            return "3 o'clock";
+        }
+#endif
+
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
