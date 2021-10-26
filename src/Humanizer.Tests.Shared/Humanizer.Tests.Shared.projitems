@@ -36,8 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\ResourcesTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\TimeOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\TimeSpanHumanizeTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TimeOnlyHumanizeClockTimeStrategyTests.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TimeOnlyHumanizeDefaultStrategyTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TimeOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeHumanizePrecisionStrategyTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeOffsetHumanizeTests.cs" />

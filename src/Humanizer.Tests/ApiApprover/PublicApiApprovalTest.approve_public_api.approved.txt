@@ -1581,6 +1581,10 @@ namespace Humanizer
         public static string Humanize(this string input) { }
         public static string Humanize(this string input, Humanizer.LetterCasing casing) { }
     }
+    public class static TimeOnlyToClockNotationExtensions
+    {
+        public static string ToClockNotation(this System.TimeOnly input) { }
+    }
     public class static TimeSpanHumanizeExtensions
     {
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
@@ -1736,6 +1740,7 @@ namespace Humanizer.Configuration
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }
         public static Humanizer.DateTimeHumanizeStrategy.ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy { get; set; }
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; }
     }
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser :  class
@@ -1750,11 +1755,6 @@ namespace Humanizer.Configuration
 }
 namespace Humanizer.DateTimeHumanizeStrategy
 {
-    public class ClockTimeTimeOnlyHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.ITimeOnlyHumanizeStrategy
-    {
-        public ClockTimeTimeOnlyHumanizeStrategy() { }
-        public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalization.CultureInfo culture) { }
-    }
     public class DefaultDateOnlyHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateOnlyHumanizeStrategy
     {
         public DefaultDateOnlyHumanizeStrategy() { }
@@ -1949,5 +1949,17 @@ namespace Humanizer.Localisation.Ordinalizers
     {
         string Convert(int number, string numberString);
         string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
+    }
+}
+namespace Humanizer.Localisation.TimeToClockNotation
+{
+    public interface ITimeOnlyToClockNotationConverter
+    {
+        string Convert(System.TimeOnly time);
+    }
+    public class TimeOnlyToClockNotationConverter : Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter
+    {
+        public TimeOnlyToClockNotationConverter() { }
+        public virtual string Convert(System.TimeOnly time) { }
     }
 }

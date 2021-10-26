@@ -8,11 +8,11 @@ using Xunit;
 namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
-    public class TimeOnlyHumanizeDefaultStrategyTests
+    public class TimeOnlyHumanizeTests
     {
 
         [Fact]
-        public void SameTime()
+        public void DefaultStrategy_SameTime()
         {
             Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
 
@@ -26,7 +26,7 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void HoursApart()
+        public void DefaultStrategy_HoursApart()
         {
             Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
 
@@ -40,7 +40,7 @@ namespace Humanizer.Tests
         }
 
         [Fact]
-        public void HoursAgo()
+        public void DefaultStrategy_HoursAgo()
         {
             Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
 
