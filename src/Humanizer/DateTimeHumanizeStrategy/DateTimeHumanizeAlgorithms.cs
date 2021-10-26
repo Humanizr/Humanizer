@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
@@ -13,7 +14,25 @@ namespace Humanizer.DateTimeHumanizeStrategy
 #if NET6_0_OR_GREATER
         public static string ClockTimeHumanize(TimeOnly input, CultureInfo culture)
         {
-            return "3 o'clock";
+            switch (input)
+            {
+                case { Hour: 0, Minute: 0 }:
+                    return "midnight";
+                case { Hour: 12, Minute: 0 }:
+                    return "noon";
+            }
+
+            var normalizedHour = input.Hour % 12;
+
+            return input switch
+            {
+                { Minute: 0 } => $"{normalizedHour.ToWords(culture)} o'clock",
+                { Minute: 15 } => $"a quarter past {normalizedHour.ToWords(culture)}",
+                { Minute: 30 } => $"half past {normalizedHour.ToWords(culture)}",
+                { Minute: 45 } => $"a quarter to {(normalizedHour + 1).ToWords(culture)}",
+                { Minute: < 30 } => $"{input.Minute.ToWords(culture)} past {normalizedHour.ToWords(culture)}",
+                { Minute: > 30 } => $"{(60 - input.Minute).ToWords(culture)} to {(normalizedHour + 1).ToWords(culture)}"
+            };
         }
 #endif
 
@@ -219,7 +238,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             if (ts.TotalHours < 48)
-            {   
+            {
                 return formatter.DateHumanize(TimeUnit.Day, tense, days);
             }
 

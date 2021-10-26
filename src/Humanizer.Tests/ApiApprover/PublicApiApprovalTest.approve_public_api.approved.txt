@@ -1750,6 +1750,11 @@ namespace Humanizer.Configuration
 }
 namespace Humanizer.DateTimeHumanizeStrategy
 {
+    public class ClockTimeTimeOnlyHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.ITimeOnlyHumanizeStrategy
+    {
+        public ClockTimeTimeOnlyHumanizeStrategy() { }
+        public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
     public class DefaultDateOnlyHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateOnlyHumanizeStrategy
     {
         public DefaultDateOnlyHumanizeStrategy() { }
