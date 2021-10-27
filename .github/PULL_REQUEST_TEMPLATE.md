@@ -6,7 +6,7 @@ Here is a checklist you should tick through before submitting a pull request:
  - [ ] If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
  - [ ] There are very few or no comments (because comments shouldn't be needed if you write clean code)
  - [ ] Xml documentation is added/updated for the addition/change
- - [ ] Your PR is (re)based on top of the latest commits from the `dev` branch (more info below)
+ - [ ] Your PR is (re)based on top of the latest commits from the `main` branch (more info below)
  - [ ] Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
  - [ ] Readme is updated if you change an existing feature or add a new one
  - [ ] Run either `build.cmd` or `build.ps1` and ensure there are no test failures
