@@ -7,12 +7,12 @@ using System.Text;
 namespace Humanizer.Localisation.TimeToClockNotation
 {
     /// <summary>
-    /// The interface used to localise the ToClockWords method.
+    /// The interface used to localise the ToClockNotation method.
     /// </summary>
     public interface ITimeOnlyToClockNotationConverter
     {
         /// <summary>
-        /// Converts the time to Clock Words 
+        /// Converts the time to Clock Notation 
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>

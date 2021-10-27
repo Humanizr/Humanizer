@@ -76,7 +76,7 @@ namespace Humanizer.Configuration
 
         private static readonly LocaliserRegistry<ITimeOnlyToClockNotationConverter> _timeOnlyToClockNotationConverters = new TimeOnlyToClockNotationConvertersRegistry();
         /// <summary>
-        /// A registry of ordinalizers used to localise Ordinalize method
+        /// A registry of time to clock notation converters used to localise ToClockNotation methods
         /// </summary>
         public static LocaliserRegistry<ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters
         {

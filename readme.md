@@ -39,6 +39,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Number to words](#number-to-words)
    - [Number to ordinal words](#number-to-ordinal-words)
    - [DateTime to ordinal words](#date-time-to-ordinal-words)
+   - [TimeOnly to Clock Notation](#time-only-to-clock-notation)
    - [Roman numerals](#roman-numerals)
    - [Metric numerals](#metric-numerals)
    - [ByteSize](#bytesize)
@@ -863,6 +864,20 @@ The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`
 ```
 
 Obviously this only applies to some cultures. For others passing case in doesn't make any difference in the result.
+
+### <a id="time-only-to-clock-notation">TimeOnly to Clock Notation</a>
+Extends TimeOnly to allow humanizing it to a clock notation
+```C#
+// for English US locale
+new TimeOnly(3, 0).ToClockNotation() => "three o'clock"
+new TimeOnly(12, 0).ToClockNotation() => "noon"
+new TimeOnly(14, 30).ToClockNotation() => "half past two"
+
+// for Brazilian Portuguese locale
+new TimeOnly(3, 0).ToClockNotation() => "três em ponto"
+new TimeOnly(12, 0).ToClockNotation() => "meio-dia"
+new TimeOnly(14, 30).ToClockNotation() => "duas e meia"
+```
 
 ### <a id="roman-numerals">Roman numerals</a>
 Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:

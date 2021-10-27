@@ -6,7 +6,7 @@ using Humanizer.Configuration;
 namespace Humanizer
 {
     /// <summary>
-    /// Humanizes DateTime into human readable sentence
+    /// Humanizes TimeOnly into human readable sentence
     /// </summary>
     public static class TimeOnlyToClockNotationExtensions
     {
