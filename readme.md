@@ -1119,7 +1119,7 @@ TimeUnit.Day.ToSymbol();
 TimeUnit.Week.ToSymbol();
 // week
 TimeUnit.Year.ToSymbol();
-// a
+// y
 ```
 
 ## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>

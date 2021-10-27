@@ -15,7 +15,7 @@ namespace Humanizer.Tests
         [InlineData(TimeUnit.Day, "d")]
         [InlineData(TimeUnit.Week, "week")]
         [InlineData(TimeUnit.Month, "mo")]
-        [InlineData(TimeUnit.Year, "a")]
+        [InlineData(TimeUnit.Year, "y")]
         public void ToSymbol(TimeUnit unit, string expected)
         {
             Assert.Equal(expected, unit.ToSymbol());
