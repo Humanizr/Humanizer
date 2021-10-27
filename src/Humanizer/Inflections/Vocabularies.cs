@@ -60,7 +60,7 @@ namespace Humanizer.Inflections
             _default.AddSingular("(m)ovies$", "$1ovie");
             _default.AddSingular("(x|ch|ss|sh)es$", "$1");
             _default.AddSingular("(^[m|l])ice$", "$1ouse");
-            _default.AddSingular("(o)es$", "$1");
+            _default.AddSingular("(?<!^[a-z])(o)es$", "$1");
             _default.AddSingular("(shoe)s$", "$1");
             _default.AddSingular("(cris|ax|test)es$", "$1is");
             _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)i$", "$1us");
