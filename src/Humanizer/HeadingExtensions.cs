@@ -71,6 +71,7 @@ namespace Humanizer
         /// <summary>
         /// Returns a heading based on the short textual representation of the heading.
         /// </summary>
+        /// <param name="heading">The short textual representation of a heading</param>
         /// <returns>The heading. -1 if the heading could not be parsed.</returns>
         public static double FromAbbreviatedHeading(this string heading)
         {
@@ -80,6 +81,7 @@ namespace Humanizer
         /// <summary>
         /// Returns a heading based on the short textual representation of the heading.
         /// </summary>
+        /// <param name="heading">The short textual representation of a heading</param>
         /// <param name="culture">The culture of the heading</param>
         /// <returns>The heading. -1 if the heading could not be parsed.</returns>
         public static double FromAbbreviatedHeading(this string heading, CultureInfo culture = null)
