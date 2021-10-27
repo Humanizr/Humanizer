@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DateHumanizeDefaultStrategyTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FluentDate\InDateTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FluentDate\OnDateTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\en\TimeToClockNotationTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ByteSizeExtensionsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ToFullWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ToStringTests.cs" />
@@ -36,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\ResourcesTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\TimeOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\TimeSpanHumanizeTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\pt-BR\TimeToClockNotationTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TimeOnlyHumanizeTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateTimeHumanizePrecisionStrategyTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DateOnlyHumanizeTests.cs" />
