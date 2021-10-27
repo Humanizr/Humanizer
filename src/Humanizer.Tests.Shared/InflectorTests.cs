@@ -23,6 +23,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+
 using Xunit;
 
 namespace Humanizer.Tests
@@ -203,8 +204,8 @@ namespace Humanizer.Tests
             yield return new object[] { "chairman", "chairmen" };
             yield return new object[] { "human", "humans" };
             yield return new object[] { "personnel", "personnel" };
-			 yield return new object[] { "staff", "staff" };
-			 yield return new object[] { "training", "training" };
+            yield return new object[] { "staff", "staff" };
+            yield return new object[] { "training", "training" };
 
             yield return new object[] { "basis", "bases" };
             yield return new object[] { "diagnosis", "diagnoses" };
@@ -363,13 +364,16 @@ namespace Humanizer.Tests
             yield return new object[] { "rookie", "rookies" };
             yield return new object[] { "roomie", "roomies" };
             yield return new object[] { "smoothie", "smoothies" };
-            
+
             //Issue #789
             yield return new object[] { "cache", "caches" };
 
             //Issue #975, added by Alex Boutin
             yield return new object[] { "ex", "exes" };
             yield return new object[] { "", "" };
+
+            //Issue 1132
+            yield return new object[] { "metadata", "metadata" };
         }
 
         IEnumerator IEnumerable.GetEnumerator()
