@@ -83,6 +83,13 @@ namespace Humanizer.Localisation.Formatters
             return resourceValue;
         }
 
+        /// <inheritdoc />
+        public virtual string TimeUnitHumanize(TimeUnit timeUnit)
+        {
+            var resourceKey = ResourceKeys.TimeUnitSymbol.GetResourceKey(timeUnit);
+            return Format(resourceKey);
+        }
+
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
             var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);

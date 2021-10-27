@@ -51,5 +51,12 @@
         /// <param name="toSymbol">Indicates whether the data unit should be expressed as symbol or full word</param>
         /// <returns>String representation of the provided DataUnit</returns>
         string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true);
+
+        /// <summary>
+        /// Returns the symbol for the given TimeUnit
+        /// </summary>
+        /// <param name="timeUnit">Time unit</param>
+        /// <returns>String representation of the provided TimeUnit</returns>
+        string TimeUnitHumanize(TimeUnit timeUnit);
     }
 }
