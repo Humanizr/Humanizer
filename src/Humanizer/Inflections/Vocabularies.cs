@@ -143,6 +143,9 @@ namespace Humanizer.Inflections
             _default.AddUncountable("means");
             _default.AddUncountable("mail");
 
+            //Fix 1132
+            _default.AddUncountable("metadata");
+
             return _default;
         }
     }
