@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
@@ -213,7 +212,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             if (ts.TotalHours < 48)
-            {
+            {   
                 return formatter.DateHumanize(TimeUnit.Day, tense, days);
             }
 
