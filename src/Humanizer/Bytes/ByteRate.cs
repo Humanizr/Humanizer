@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+
 using Humanizer.Localisation;
 
 namespace Humanizer.Bytes
@@ -47,34 +49,19 @@ namespace Humanizer.Bytes
         /// </summary>
         /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
         /// <param name="format">The string format to use for the number of bytes</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns></returns>
-        public string Humanize(string format, TimeUnit timeUnit = TimeUnit.Second)
+        public string Humanize(string format, TimeUnit timeUnit = TimeUnit.Second, CultureInfo culture = null)
         {
-            TimeSpan displayInterval;
-            string displayUnit;
-
-            if (timeUnit == TimeUnit.Second)
+            var displayInterval = timeUnit switch
             {
-                displayInterval = TimeSpan.FromSeconds(1);
-                displayUnit = "s";
-            }
-            else if (timeUnit == TimeUnit.Minute)
-            {
-                displayInterval = TimeSpan.FromMinutes(1);
-                displayUnit = "min";
-            }
-            else if (timeUnit == TimeUnit.Hour)
-            {
-                displayInterval = TimeSpan.FromHours(1);
-                displayUnit = "hour";
-            }
-            else
-            {
-                throw new NotSupportedException("timeUnit must be Second, Minute, or Hour");
-            }
-
+                TimeUnit.Second => TimeSpan.FromSeconds(1),
+                TimeUnit.Minute => TimeSpan.FromMinutes(1),
+                TimeUnit.Hour => TimeSpan.FromHours(1),
+                _ => throw new NotSupportedException("timeUnit must be Second, Minute, or Hour"),
+            };
             return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
-                .Humanize(format) + '/' + displayUnit;
+                .Humanize(format, culture) + '/' + timeUnit.ToSymbol(culture);
         }
     }
 }
