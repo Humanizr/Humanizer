@@ -372,6 +372,9 @@ namespace Humanizer.Tests
             yield return new object[] { "ex", "exes" };
             yield return new object[] { "", "" };
 
+            //Issue #1100
+            yield return new object[] { "toe", "toes" };
+
             //Issue 1132
             yield return new object[] { "metadata", "metadata" };
         }
