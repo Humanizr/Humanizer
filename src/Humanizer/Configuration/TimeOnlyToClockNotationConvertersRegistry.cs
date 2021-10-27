@@ -6,12 +6,12 @@ namespace Humanizer.Configuration
 {
     internal class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToClockNotationConverter>
     {
-        public TimeOnlyToClockNotationConvertersRegistry() : base(new TimeOnlyToClockNotationConverter())
+        public TimeOnlyToClockNotationConvertersRegistry() : base(new DefaultTimeOnlyToClockNotationConverter())
         {
-            Register("en-US", new TimeOnlyToClockNotationConverter());
-            Register("en-UK", new TimeOnlyToClockNotationConverter());
-            Register("de",    new TimeOnlyToClockNotationConverter());
-            Register("pt-BR", new TimeOnlyToClockNotationConverter());
+            Register("en-US", new DefaultTimeOnlyToClockNotationConverter());
+            Register("en-UK", new DefaultTimeOnlyToClockNotationConverter());
+            Register("de",    new DefaultTimeOnlyToClockNotationConverter());
+            Register("pt-BR", new PtBrTimeOnlyToClockNotationConverter());
         }
     }
 }

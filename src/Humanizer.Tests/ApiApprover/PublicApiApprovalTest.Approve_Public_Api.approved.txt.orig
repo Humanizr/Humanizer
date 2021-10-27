@@ -1590,10 +1590,6 @@ namespace Humanizer
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
         public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
     }
-    public class static TimeUnitToSymbolExtensions
-    {
-        public static string ToSymbol(this Humanizer.Localisation.TimeUnit unit, System.Globalization.CultureInfo culture = null) { }
-    }
     public class static To
     {
         public static Humanizer.ICulturedStringTransformer LowerCase { get; }
@@ -1643,7 +1639,7 @@ namespace Humanizer.Bytes
         public System.TimeSpan Interval { get; }
         public Humanizer.Bytes.ByteSize Size { get; }
         public string Humanize(Humanizer.Localisation.TimeUnit timeUnit = 1) { }
-        public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1, System.Globalization.CultureInfo culture = null) { }
+        public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1) { }
     }
     public struct ByteSize : System.IComparable, System.IComparable<Humanizer.Bytes.ByteSize>, System.IEquatable<Humanizer.Bytes.ByteSize>, System.IFormattable
     {
@@ -1864,10 +1860,6 @@ namespace Humanizer.Localisation
         {
             public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1, bool toWords = False) { }
         }
-        public class static TimeUnitSymbol
-        {
-            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit) { }
-        }
     }
     public class static Resources
     {
@@ -1918,7 +1910,6 @@ namespace Humanizer.Localisation.Formatters
         protected virtual string GetResourceKey(string resourceKey) { }
         public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False) { }
         public virtual string TimeSpanHumanize_Zero() { }
-        public virtual string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit) { }
     }
     public interface IFormatter
     {
@@ -1928,7 +1919,6 @@ namespace Humanizer.Localisation.Formatters
         string DateHumanize_Now();
         string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False);
         string TimeSpanHumanize_Zero();
-        string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit);
     }
 }
 namespace Humanizer.Localisation.NumberToWords
@@ -1953,18 +1943,13 @@ namespace Humanizer.Localisation.Ordinalizers
 }
 namespace Humanizer.Localisation.TimeToClockNotation
 {
-    public class DefaultTimeOnlyToClockNotationConverter : Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter
-    {
-        public DefaultTimeOnlyToClockNotationConverter() { }
-        public virtual string Convert(System.TimeOnly time) { }
-    }
     public interface ITimeOnlyToClockNotationConverter
     {
         string Convert(System.TimeOnly time);
     }
-    public class PtBrTimeOnlyToClockNotationConverter : Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter
+    public class TimeOnlyToClockNotationConverter : Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter
     {
-        public PtBrTimeOnlyToClockNotationConverter() { }
+        public TimeOnlyToClockNotationConverter() { }
         public virtual string Convert(System.TimeOnly time) { }
     }
 }
