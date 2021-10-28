@@ -4,7 +4,7 @@ using System;
 
 namespace Humanizer.Localisation.TimeToClockNotation
 {
-    public class BrazilianPortugueseTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
+    internal class BrazilianPortugueseTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
         public virtual string Convert(TimeOnly time)
         {

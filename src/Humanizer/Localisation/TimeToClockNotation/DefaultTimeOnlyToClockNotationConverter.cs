@@ -4,7 +4,7 @@ using System;
 
 namespace Humanizer.Localisation.TimeToClockNotation
 {
-    public class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
+    internal class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
         public virtual string Convert(TimeOnly time)
         {
