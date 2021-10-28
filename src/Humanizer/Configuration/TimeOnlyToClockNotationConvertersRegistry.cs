@@ -10,7 +10,6 @@ namespace Humanizer.Configuration
         {
             Register("en-US", new DefaultTimeOnlyToClockNotationConverter());
             Register("en-UK", new DefaultTimeOnlyToClockNotationConverter());
-            Register("de",    new DefaultTimeOnlyToClockNotationConverter());
             Register("pt-BR", new BrazilianPortugueseTimeOnlyToClockNotationConverter());
         }
     }
