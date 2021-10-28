@@ -7,7 +7,7 @@ namespace Humanizer.Tests.Localisation.en
 {
     public class TimeToClockNotationTests
     {
-        [UseCulture("en-US")]
+        [UseCulture("en")]
         [Theory]
         [InlineData(00, 00, "midnight")]
         [InlineData(04, 00, "four o'clock")]

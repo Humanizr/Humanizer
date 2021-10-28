@@ -8,8 +8,6 @@ namespace Humanizer.Configuration
     {
         public TimeOnlyToClockNotationConvertersRegistry() : base(new DefaultTimeOnlyToClockNotationConverter())
         {
-            Register("en-US", new DefaultTimeOnlyToClockNotationConverter());
-            Register("en-UK", new DefaultTimeOnlyToClockNotationConverter());
             Register("pt-BR", new BrazilianPortugueseTimeOnlyToClockNotationConverter());
         }
     }
