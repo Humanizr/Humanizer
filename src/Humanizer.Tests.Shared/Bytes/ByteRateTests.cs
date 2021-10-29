@@ -47,7 +47,7 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Theory]
-        [InlineData(19854651984, 1, TimeUnit.Second, null, "18.4910856038332 GB/s")]
+        [InlineData(19854651984, 1, TimeUnit.Second, null, "18.49 GB/s")]
         [InlineData(19854651984, 1, TimeUnit.Second, "#.##", "18.49 GB/s")]
         public void FormattedTimeUnitTests(long bytes, int measurementIntervalSeconds, TimeUnit displayInterval, string format, string expectedValue)
         {
