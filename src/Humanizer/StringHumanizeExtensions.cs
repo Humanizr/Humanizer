@@ -80,5 +80,19 @@ namespace Humanizer
         {
             return input.Humanize().ApplyCase(casing);
         }
+        
+        /// <summary>
+        /// Srcamble the input string in a random order; e.g. 'jumble' -> 'blujem'
+        /// </summary>
+        /// <param name="text">The string to be shuffled</param>
+        /// <returns></returns>
+        public static string Shuffle (this string text)
+        {
+            var charsInText = text.ToCharArray ();
+            Random rnd = new Random();
+            var shuffledArray = charsInText.OrderBy(x => rnd.Next()).ToArray();
+            return string.Join("", shuffledArray);
+        }
+
     }
 }
