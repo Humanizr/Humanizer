@@ -13,8 +13,9 @@ namespace Humanizer.Localisation.TimeToClockNotation
         /// Converts the time to Clock Notation 
         /// </summary>
         /// <param name="time"></param>
+        /// <param name="roundToNearestFive"></param>
         /// <returns></returns>
-        string Convert(TimeOnly time);
+        string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive);
     }
 }
 

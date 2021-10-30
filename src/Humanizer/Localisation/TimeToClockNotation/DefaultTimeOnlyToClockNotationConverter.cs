@@ -6,7 +6,7 @@ namespace Humanizer.Localisation.TimeToClockNotation
 {
     internal class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
-        public virtual string Convert(TimeOnly time)
+        public virtual string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
         {
             switch (time)
             {
@@ -17,21 +17,25 @@ namespace Humanizer.Localisation.TimeToClockNotation
             }
 
             var normalizedHour = time.Hour % 12;
+            var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
+                ? 5 * Math.Round(time.Minute / 5.0)
+                : time.Minute);
 
-            return time switch
+            return normalizedMinutes switch
             {
-                { Minute: 00 } => $"{normalizedHour.ToWords()} o'clock",
-                { Minute: 05 } => $"five past {normalizedHour.ToWords()}",
-                { Minute: 10 } => $"ten past {normalizedHour.ToWords()}",
-                { Minute: 15 } => $"a quarter past {normalizedHour.ToWords()}",
-                { Minute: 20 } => $"twenty past {normalizedHour.ToWords()}",
-                { Minute: 25 } => $"twenty-five past {normalizedHour.ToWords()}",
-                { Minute: 30 } => $"half past {normalizedHour.ToWords()}",
-                { Minute: 40 } => $"twenty to {(normalizedHour + 1).ToWords()}",
-                { Minute: 45 } => $"a quarter to {(normalizedHour + 1).ToWords()}",
-                { Minute: 50 } => $"ten to {(normalizedHour + 1).ToWords()}",
-                { Minute: 55 } => $"five to {(normalizedHour + 1).ToWords()}",
-                _ => $"{normalizedHour.ToWords()} {time.Minute.ToWords()}"
+                00 => $"{normalizedHour.ToWords()} o'clock",
+                05 => $"five past {normalizedHour.ToWords()}",
+                10 => $"ten past {normalizedHour.ToWords()}",
+                15 => $"a quarter past {normalizedHour.ToWords()}",
+                20 => $"twenty past {normalizedHour.ToWords()}",
+                25 => $"twenty-five past {normalizedHour.ToWords()}",
+                30 => $"half past {normalizedHour.ToWords()}",
+                40 => $"twenty to {(normalizedHour + 1).ToWords()}",
+                45 => $"a quarter to {(normalizedHour + 1).ToWords()}",
+                50 => $"ten to {(normalizedHour + 1).ToWords()}",
+                55 => $"five to {(normalizedHour + 1).ToWords()}",
+                60 => $"{(normalizedHour + 1).ToWords()} o'clock",
+                _ => $"{normalizedHour.ToWords()} {normalizedMinutes.ToWords()}"
             };
         }
     }

@@ -1583,7 +1583,7 @@ namespace Humanizer
     }
     public class static TimeOnlyToClockNotationExtensions
     {
-        public static string ToClockNotation(this System.TimeOnly input) { }
+        public static string ToClockNotation(this System.TimeOnly input, Humanizer.Localisation.TimeToClockNotation.ClockNotationRounding roundToNearestFive = 0) { }
     }
     public class static TimeSpanHumanizeExtensions
     {
@@ -1953,8 +1953,13 @@ namespace Humanizer.Localisation.Ordinalizers
 }
 namespace Humanizer.Localisation.TimeToClockNotation
 {
+    public enum ClockNotationRounding
+    {
+        None = 0,
+        NearestFiveMinutes = 1,
+    }
     public interface ITimeOnlyToClockNotationConverter
     {
-        string Convert(System.TimeOnly time);
+        string Convert(System.TimeOnly time, Humanizer.Localisation.TimeToClockNotation.ClockNotationRounding roundToNearestFive);
     }
 }
