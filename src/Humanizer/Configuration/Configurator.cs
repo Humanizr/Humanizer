@@ -7,6 +7,9 @@ using Humanizer.Localisation.DateToOrdinalWords;
 using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
 using Humanizer.Localisation.Ordinalizers;
+#if NET6_0_OR_GREATER
+using Humanizer.Localisation.TimeToClockNotation;
+#endif
 
 namespace Humanizer.Configuration
 {
@@ -70,6 +73,15 @@ namespace Humanizer.Configuration
         {
             get { return _dateOnlyToOrdinalWordConverters; }
         }
+
+        private static readonly LocaliserRegistry<ITimeOnlyToClockNotationConverter> _timeOnlyToClockNotationConverters = new TimeOnlyToClockNotationConvertersRegistry();
+        /// <summary>
+        /// A registry of time to clock notation converters used to localise ToClockNotation methods
+        /// </summary>
+        public static LocaliserRegistry<ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters
+        {
+            get { return _timeOnlyToClockNotationConverters; }
+        }
 #endif
 
         internal static ICollectionFormatter CollectionFormatter
@@ -129,6 +141,14 @@ namespace Humanizer.Configuration
             get
             {
                 return DateOnlyToOrdinalWordsConverters.ResolveForUiCulture();
+            }
+        }
+
+        internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter
+        {
+            get
+            {
+                return TimeOnlyToClockNotationConverters.ResolveForUiCulture();
             }
         }
 #endif

@@ -60,6 +60,11 @@ namespace Humanizer
     {
         public static string ApplyCase(this string input, Humanizer.LetterCasing casing) { }
     }
+    public enum ClockNotationRounding
+    {
+        None = 0,
+        NearestFiveMinutes = 1,
+    }
     public class static CollectionHumanizeExtensions
     {
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection) { }
@@ -1581,6 +1586,10 @@ namespace Humanizer
         public static string Humanize(this string input) { }
         public static string Humanize(this string input, Humanizer.LetterCasing casing) { }
     }
+    public class static TimeOnlyToClockNotationExtensions
+    {
+        public static string ToClockNotation(this System.TimeOnly input, Humanizer.ClockNotationRounding roundToNearestFive = 0) { }
+    }
     public class static TimeSpanHumanizeExtensions
     {
         public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
@@ -1736,6 +1745,7 @@ namespace Humanizer.Configuration
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
         public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }
         public static Humanizer.DateTimeHumanizeStrategy.ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy { get; set; }
+        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; }
     }
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser :  class
@@ -1944,5 +1954,12 @@ namespace Humanizer.Localisation.Ordinalizers
     {
         string Convert(int number, string numberString);
         string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
+    }
+}
+namespace Humanizer.Localisation.TimeToClockNotation
+{
+    public interface ITimeOnlyToClockNotationConverter
+    {
+        string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive);
     }
 }
