@@ -2,6 +2,8 @@
 
 using System;
 
+using Humanizer;
+
 namespace Humanizer.Localisation.TimeToClockNotation
 {
     internal class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter

@@ -60,6 +60,11 @@ namespace Humanizer
     {
         public static string ApplyCase(this string input, Humanizer.LetterCasing casing) { }
     }
+    public enum ClockNotationRounding
+    {
+        None = 0,
+        NearestFiveMinutes = 1,
+    }
     public class static CollectionHumanizeExtensions
     {
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection) { }
@@ -1583,7 +1588,7 @@ namespace Humanizer
     }
     public class static TimeOnlyToClockNotationExtensions
     {
-        public static string ToClockNotation(this System.TimeOnly input, Humanizer.Localisation.TimeToClockNotation.ClockNotationRounding roundToNearestFive = 0) { }
+        public static string ToClockNotation(this System.TimeOnly input, Humanizer.ClockNotationRounding roundToNearestFive = 0) { }
     }
     public class static TimeSpanHumanizeExtensions
     {
@@ -1953,13 +1958,8 @@ namespace Humanizer.Localisation.Ordinalizers
 }
 namespace Humanizer.Localisation.TimeToClockNotation
 {
-    public enum ClockNotationRounding
-    {
-        None = 0,
-        NearestFiveMinutes = 1,
-    }
     public interface ITimeOnlyToClockNotationConverter
     {
-        string Convert(System.TimeOnly time, Humanizer.Localisation.TimeToClockNotation.ClockNotationRounding roundToNearestFive);
+        string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive);
     }
 }

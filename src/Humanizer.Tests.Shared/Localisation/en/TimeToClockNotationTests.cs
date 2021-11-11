@@ -3,6 +3,7 @@
 using System;
 using Xunit;
 using Humanizer.Localisation.TimeToClockNotation;
+using Humanizer;
 
 namespace Humanizer.Tests.Localisation.en
 {

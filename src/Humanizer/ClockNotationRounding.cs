@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.TimeToClockNotation
+﻿namespace Humanizer
 {
     public enum ClockNotationRounding
     {

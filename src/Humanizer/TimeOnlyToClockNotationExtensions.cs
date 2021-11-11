@@ -1,6 +1,8 @@
 ﻿#if NET6_0_OR_GREATER
 
 using System;
+
+using Humanizer;
 using Humanizer.Configuration;
 using Humanizer.Localisation.TimeToClockNotation;
 
