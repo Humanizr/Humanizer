@@ -10,7 +10,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] HundredsMap = { "നൂ", "ഇരുന്നു", "മുന്നൂ", "നാനൂ", "അഞ്ഞൂ", "അറുന്നൂ", "എഴുന്നൂ", "എണ്ണൂ", "തൊള്ളായിര", };
         private static readonly string[] ThousandsMap = { "ആ", "രണ്ടാ", "മൂവാ", "നാലാ", "അയ്യാ", "ആറാ", "ഏഴാ", "എട്ടാ", "ഒന്‍പതാ", "പത്താ", "പതിനൊന്നാ", "പന്ത്രണ്ടാ", "പതിമൂന്നാ", "പതിനാലാ", "പതിനഞ്ചാ", "പതിനാറാ", "പതിനേഴാ", "പതിനെട്ടാ", "പത്തൊമ്പതാ" };
 
-        private static readonly string[] LakhsMap = { "இலட்ச" };
+        private static readonly string[] LakhsMap = { "ലക്ഷ" };
 
         private static readonly Dictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
         {
