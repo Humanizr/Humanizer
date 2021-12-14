@@ -1,8 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
 using System;
-using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.fr
@@ -13,8 +11,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Fact]
         public void DefaultStrategy_SameTime()
         {
-            Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
-
             var inputTime = new TimeOnly(13, 07, 05);
             var baseTime = new TimeOnly(13, 07, 05);
 
@@ -27,8 +23,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Fact]
         public void DefaultStrategy_HoursApart()
         {
-            Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
-
             var inputTime = new TimeOnly(13, 08, 05);
             var baseTime = new TimeOnly(1, 08, 05);
 
@@ -41,8 +35,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Fact]
         public void DefaultStrategy_HoursAgo()
         {
-            Configurator.TimeOnlyHumanizeStrategy = new DefaultTimeOnlyHumanizeStrategy();
-
             var inputTime = new TimeOnly(13, 07, 02);
             var baseTime = new TimeOnly(17, 07, 05);
 
@@ -55,8 +47,6 @@ namespace Humanizer.Tests.Localisation.fr
         [Fact]
         public void PrecisionStrategy_NextDay()
         {
-            Configurator.TimeOnlyHumanizeStrategy = new PrecisionTimeOnlyHumanizeStrategy(0.75);
-
             var inputTime = new TimeOnly(18, 10, 49);
             var baseTime = new TimeOnly(13, 07, 04);
 
