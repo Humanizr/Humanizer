@@ -169,19 +169,19 @@
     <value>{0} sekunder</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>en dag</value>
+    <value>1 dag</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>en time</value>
+    <value>1 time</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>ett millisekund</value>
+    <value>1 millisekund</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>ett minutt</value>
+    <value>1 minutt</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>ett sekund</value>
+    <value>1 sekund</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ingen tid</value>
@@ -190,7 +190,7 @@
     <value>{0} uker</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>en uke</value>
+    <value>1 uke</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>{0} dager fra nå</value>
@@ -238,9 +238,33 @@
     <value>{0} år</value>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>en måned</value>
+    <value>1 måned</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 år</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>en dag</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>en time</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>ett millisekund</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>ett minutt</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>en måned</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>ett sekund</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>en uke</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
     <value>ett år</value>
   </data>
 </root>

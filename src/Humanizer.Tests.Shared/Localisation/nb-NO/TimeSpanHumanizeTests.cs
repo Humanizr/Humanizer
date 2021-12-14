@@ -9,7 +9,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [Trait("Translation", "Native speaker")]
-        [InlineData(366, "ett år")]
+        [InlineData(366, "1 år")]
         [InlineData(731, "2 år")]
         [InlineData(1096, "3 år")]
         [InlineData(4018, "11 år")]
@@ -20,7 +20,7 @@ namespace Humanizer.Tests.Localisation.nbNO
 
         [Theory]
         [Trait("Translation", "Native speaker")]
-        [InlineData(31, "en måned")]
+        [InlineData(31, "1 måned")]
         [InlineData(61, "2 måneder")]
         [InlineData(92, "3 måneder")]
         [InlineData(335, "11 måneder")]
@@ -30,7 +30,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         }
 
         [Theory]
-        [InlineData(7, "en uke")]
+        [InlineData(7, "1 uke")]
         [InlineData(14, "2 uker")]
         public void Weeks(int days, string expected)
         {
@@ -38,7 +38,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         }
 
         [Theory]
-        [InlineData(1, "en dag")]
+        [InlineData(1, "1 dag")]
         [InlineData(2, "2 dager")]
         public void Days(int days, string expected)
         {
@@ -46,7 +46,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         }
 
         [Theory]
-        [InlineData(1, "en time")]
+        [InlineData(1, "1 time")]
         [InlineData(2, "2 timer")]
         public void Hours(int hours, string expected)
         {
@@ -54,7 +54,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         }
 
         [Theory]
-        [InlineData(1, "ett minutt")]
+        [InlineData(1, "1 minutt")]
         [InlineData(2, "2 minutter")]
         public void Minutes(int minutes, string expected)
         {
@@ -62,7 +62,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         }
 
         [Theory]
-        [InlineData(1, "ett sekund")]
+        [InlineData(1, "1 sekund")]
         [InlineData(2, "2 sekunder")]
         public void Seconds(int seconds, string expected)
         {
@@ -70,7 +70,7 @@ namespace Humanizer.Tests.Localisation.nbNO
         }
 
         [Theory]
-        [InlineData(1, "ett millisekund")]
+        [InlineData(1, "1 millisekund")]
         [InlineData(2, "2 millisekunder")]
         public void Milliseconds(int milliseconds, string expected)
         {
