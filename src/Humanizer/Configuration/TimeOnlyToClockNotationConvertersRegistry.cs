@@ -9,6 +9,7 @@ namespace Humanizer.Configuration
         public TimeOnlyToClockNotationConvertersRegistry() : base(new DefaultTimeOnlyToClockNotationConverter())
         {
             Register("pt-BR", new BrazilianPortugueseTimeOnlyToClockNotationConverter());
+            Register("fr", new FrTimeOnlyToClockNotationConverter());
         }
     }
 }
