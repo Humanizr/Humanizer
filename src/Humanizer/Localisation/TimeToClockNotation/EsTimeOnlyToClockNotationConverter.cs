@@ -15,7 +15,7 @@ namespace Humanizer.Localisation.TimeToClockNotation
                 case { Hour: 12, Minute: 0 }:
                     return "mediodía";
             }
-                      
+
             var article = GetArticle(time);
             var articleNextHour = GetArticle(time.AddHours(1));
             var hour = NormalizeHour(time).ToWords(GrammaticalGender.Feminine);
@@ -56,14 +56,15 @@ namespace Humanizer.Localisation.TimeToClockNotation
         {
             const int MORNING = 6;
             const int NOON = 12;
-            const int AFTERNOON = 20;
-                       
+            const int AFTERNOON = 21;
+
             return time.Hour switch
             {
-                int h when h is >= 0 and < MORNING => "de la madrugada",
-                int h when h is >= MORNING  and < NOON => "de la mañana",
+                int h when h is 0 => "de la noche",
+                int h when h is >= 1 and < MORNING => "de la madrugada",
+                int h when h is >= MORNING and < NOON => "de la mañana",
                 int h when h is >= NOON and < AFTERNOON => "de la tarde",
-                int h when h is >= AFTERNOON and < 24 => "de la noche",
+                int h when h is >= AFTERNOON and <= 24 => "de la noche",
                 _ => ""
             };
         }

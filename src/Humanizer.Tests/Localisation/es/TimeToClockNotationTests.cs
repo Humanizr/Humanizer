@@ -11,7 +11,7 @@ namespace Humanizer.Tests.Localisation.es
     {
         [Theory]
         [InlineData(0, 0, "medianoche")]
-        [InlineData(0, 7, "las doce y siete de la madrugada")]
+        [InlineData(0, 7, "las doce y siete de la noche")]
         [InlineData(1, 11, "la una y once de la madrugada")]
         [InlineData(4, 0, "las cuatro de la madrugada")]
         [InlineData(5, 1, "las cinco y uno de la madrugada")]
@@ -40,7 +40,7 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(0, 0, "medianoche")]
-        [InlineData(0, 7, "las doce y cinco de la madrugada")]
+        [InlineData(0, 7, "las doce y cinco de la noche")]
         [InlineData(1, 11, "la una y diez de la madrugada")]
         [InlineData(4, 0, "las cuatro de la madrugada")]
         [InlineData(5, 1, "las cinco de la madrugada")]
