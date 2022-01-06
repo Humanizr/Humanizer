@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Xunit;
 
 namespace Humanizer.Tests.Localisation
@@ -7,7 +8,7 @@ namespace Humanizer.Tests.Localisation
     {
 
         [Fact]
-        [UseCulture("es")]
+        [UseCulture("iv")]
         public void HandlesNotImplementedCollectionFormattersGracefully()
         {
             var a = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };

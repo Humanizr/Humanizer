@@ -377,7 +377,8 @@ namespace Humanizer.Tests
             yield return new object[] { "hoe", "hoes" };
             yield return new object[] { "toe", "toes" };
             yield return new object[] { "woe", "woes" };
-            yield return new object[] { "potato", "potatoes" };
+            // Duplicated test case - Already added by Bas Jansen
+            // yield return new object[] { "potato", "potatoes" };
 
             //Issue 1132
             yield return new object[] { "metadata", "metadata" };
