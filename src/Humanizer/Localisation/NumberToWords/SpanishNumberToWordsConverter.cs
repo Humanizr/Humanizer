@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -50,7 +51,7 @@ namespace Humanizer.Localisation.NumberToWords
             const long ONE_TRILLION = 1_000_000_000_000_000_000;
             const long ONE_BILLION = 1_000_000_000_000;
             const long ONE_MILLION = 1_000_000;
-            
+
             var parts = new List<string>();
 
             if ((input / ONE_TRILLION) > 0)
@@ -123,8 +124,8 @@ namespace Humanizer.Localisation.NumberToWords
                     parts.Add("mil");
                 }
                 else
-                {                    
-                    if ((input % 10 == 1) && (gender == GrammaticalGender.Feminine))
+                {
+                    if (gender == GrammaticalGender.Feminine)
                     {
                         parts.Add($"{Convert(input / 1000, GrammaticalGender.Feminine)} mil");
                     }
@@ -221,24 +222,65 @@ namespace Humanizer.Localisation.NumberToWords
         {
             var parts = new List<string>();
 
-            if (number > 9999) // @mihemihe: Implemented only up to 9999 - Dec-2017
+            if (number == 0 || number == int.MinValue)
             {
-                return Convert(number, gender);
+                return "ceroésimo";
             }
-
+            
             if (number < 0)
             {
-                return string.Format("menos {0}", Convert(Math.Abs(number)));
+                return ConvertToOrdinal(Math.Abs(number), gender);
             }
 
-            if (number == 0)
+            if (number >= 1000_000_000 && number % 1_000_000 == 0)
             {
-                return string.Format("cero");
+                var normalizedGender = gender == GrammaticalGender.Masculine ? GrammaticalGender.Neuter : GrammaticalGender.Feminine;
+                var cardinalPart = Convert(number / 1_000_000, normalizedGender);
+                var sep = number == 1_000_000_000 ? "" : " ";
+                var ordinalPart = ConvertToOrdinal(1_000_000, gender);
+                return cardinalPart + sep + ordinalPart;
+            }
+
+            if (number >= 1000000 && number % 1000000 == 0)
+            {
+                return ConvertToOrdinal(number / 1000, gender).Replace("milésim", "millonésim");             
+            }
+
+            if ((number / 10000) > 0)
+            {
+                var part = Convert((number / 1000) * 1000, gender);
+
+                if (number < 30000
+                    || (number % 10000 == 0 && number < 100000)
+                    || (number % 100000 == 0 && number < 1000000)
+                    || (number % 1000000 == 0 && number < 10000000)
+                    || (number % 10000000 == 0 && number < 100000000)
+                    || (number % 100000000 == 0 && number < 1000000000)
+                    || (number % 1000000000 == 0 && number < int.MaxValue)
+                    )
+                {
+                    if (number == 21000)
+                    {
+                        part = part.Replace("a", "");
+                    }
+
+                    part = part.Replace("ú", "u");
+                    part = part.TrimEnd(' ', 'm', 'i', 'l');
+                }
+                else
+                {
+                    part = part.TrimEnd('m', 'i', 'l');
+                }
+
+                part += "milésim" + (gender == GrammaticalGender.Masculine ? "o" : "a");
+
+                parts.Add(part);
+                number %= 1000;
             }
 
             if ((number / 1000) > 0)
             {
-                var thousandsPart = ThousandsMapOrdinal[(number / 1000)];
+                var thousandsPart = ThousandsMapOrdinal[number / 1000];
                 if (gender == GrammaticalGender.Feminine)
                 {
                     thousandsPart = thousandsPart.TrimEnd('o') + "a";
@@ -250,7 +292,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((number / 100) > 0)
             {
-                var hundredsPart = HundredsMapOrdinal[(number / 100)];
+                var hundredsPart = HundredsMapOrdinal[number / 100];
                 if (gender == GrammaticalGender.Feminine)
                 {
                     hundredsPart = hundredsPart.TrimEnd('o') + "a";
@@ -262,7 +304,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((number / 10) > 0)
             {
-                var tensPart = TensMapOrdinal[(number / 10)];
+                var tensPart = TensMapOrdinal[number / 10];
                 if (gender == GrammaticalGender.Feminine)
                 {
                     tensPart = tensPart.TrimEnd('o') + "a";
