@@ -226,7 +226,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 return "ceroésimo";
             }
-            
+
             if (number < 0)
             {
                 return ConvertToOrdinal(Math.Abs(number), gender);
@@ -243,7 +243,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number >= 1000000 && number % 1000000 == 0)
             {
-                return ConvertToOrdinal(number / 1000, gender).Replace("milésim", "millonésim");             
+                return ConvertToOrdinal(number / 1000, gender).Replace("milésim", "millonésim");
             }
 
             if ((number / 10000) > 0)
@@ -329,6 +329,18 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return string.Join(" ", parts.ToArray());
+        }
+
+        public override string ConvertToTuple(int number)
+        {
+            string[] map = {"0 veces", "1 vez", "doble", "triple", "cuádruple", "quíntuble", "séxtuple", "séptuple", "óctuple", "nonupla", "décuplo", "undécuplo", "duodécuplo", "terciodécuplpo"};
+
+            number = Math.Abs(number);
+
+            if (number < 14)
+                return map[number];
+
+            return Convert(number) + " veces";
         }
     }
 }

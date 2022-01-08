@@ -229,7 +229,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(9620, "nuevemilésimo sexcentésimo vigésimo", GrammaticalGender.Masculine)]
         [InlineData(9620, "nuevemilésima sexcentésima vigésima", GrammaticalGender.Feminine)]
         [InlineData(9999, "nuevemilésimo noningentésimo nonagésimo noveno", GrammaticalGender.Masculine)]
-        [InlineData(9999, "nuevemilésima noningentésima nonagésima novena", GrammaticalGender.Feminine)]   
+        [InlineData(9999, "nuevemilésima noningentésima nonagésima novena", GrammaticalGender.Feminine)]
         [InlineData(10000, "diezmilésimo", GrammaticalGender.Masculine)]
         [InlineData(10000, "diezmilésima", GrammaticalGender.Feminine)]
         [InlineData(11000, "oncemilésimo", GrammaticalGender.Masculine)]
@@ -251,7 +251,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(850000, "ochocientos cincuenta milésimo", GrammaticalGender.Masculine)]
         [InlineData(850000, "ochocientas cincuenta milésima", GrammaticalGender.Feminine)]
         [InlineData(214748, "doscientos catorce milésimo septingentésimo cuadragésimo octavo", GrammaticalGender.Masculine)]
-        [InlineData(214748, "doscientas catorce milésima septingentésima cuadragésima octava", GrammaticalGender.Feminine)]        
+        [InlineData(214748, "doscientas catorce milésima septingentésima cuadragésima octava", GrammaticalGender.Feminine)]
         [InlineData(221221, "doscientos veintiún milésimo ducentésimo vigésimo primero", GrammaticalGender.Masculine)]
         [InlineData(221221, "doscientas veintiuna milésima ducentésima vigésima primera", GrammaticalGender.Feminine)]
         [InlineData(1000000, "millonésimo", GrammaticalGender.Masculine)]
@@ -286,6 +286,14 @@ namespace Humanizer.Tests.Localisation.es
         public void ToOrdinalWords(int number, string words, GrammaticalGender gender)
         {
             Assert.Equal(words, number.ToOrdinalWords(gender));
+        }
+
+        [Theory]
+        [InlineData(2, "doble")]
+        [InlineData(100, "cien veces")]
+        public void ToTuple(int number, string expected)
+        {
+            Assert.Equal(expected, number.ToTuple());
         }
     }
 }
