@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -18,7 +17,7 @@ namespace Humanizer.Localisation.NumberToWords
         private static readonly string[] TensMapOrdinal = { "", "décimo", "vigésimo", "trigésimo", "cuadragésimo", "quincuagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo" };
         private static readonly string[] HundredsMapOrdinal = { "", "centésimo", "ducentésimo", "tricentésimo", "cuadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo" };
         private static readonly string[] ThousandsMapOrdinal = { "", "milésimo", "dosmilésimo", "tresmilésimo", "cuatromilésimo", "cincomilésimo", "seismilésimo", "sietemilésimo", "ochomilésimo", "nuevemilésimo" };
-        private static readonly Dictionary<int, string> Ordinals = new Dictionary<int, string>
+        private static readonly Dictionary<int, string> Ordinals = new()
         {
             {1, "primero"},
             {2, "segundo"},
@@ -48,73 +47,73 @@ namespace Humanizer.Localisation.NumberToWords
                 return $"menos {Convert(-input)}";
             }
 
-            const long ONE_TRILLION = 1_000_000_000_000_000_000;
-            const long ONE_BILLION = 1_000_000_000_000;
-            const long ONE_MILLION = 1_000_000;
+            const long oneTrillion = 1_000_000_000_000_000_000;
+            const long oneBillion = 1_000_000_000_000;
+            const long oneMillion = 1_000_000;
 
             var parts = new List<string>();
 
-            if ((input / ONE_TRILLION) > 0)
+            if ((input / oneTrillion) > 0)
             {
-                if (input / ONE_TRILLION == 1)
+                if (input / oneTrillion == 1)
                 {
                     parts.Add("un trillón");
                 }
                 else
                 {
-                    if ((input / ONE_TRILLION) % 10 == 1)
+                    if ((input / oneTrillion) % 10 == 1)
                     {
-                        parts.Add($"{Convert(input / ONE_TRILLION, GrammaticalGender.Neuter)} trillones");
+                        parts.Add($"{Convert(input / oneTrillion, GrammaticalGender.Neuter)} trillones");
                     }
                     else
                     {
-                        parts.Add($"{Convert(input / ONE_TRILLION)} trillones");
+                        parts.Add($"{Convert(input / oneTrillion)} trillones");
                     }
                 }
 
-                input %= ONE_TRILLION;
+                input %= oneTrillion;
             }
 
-            if ((input / ONE_BILLION) > 0)
+            if ((input / oneBillion) > 0)
             {
-                if (input / ONE_BILLION == 1)
+                if (input / oneBillion == 1)
                 {
                     parts.Add("un billón");
                 }
                 else
                 {
-                    if ((input / ONE_BILLION) % 10 == 1)
+                    if ((input / oneBillion) % 10 == 1)
                     {
-                        parts.Add($"{Convert(input / ONE_BILLION, GrammaticalGender.Neuter)} billones");
+                        parts.Add($"{Convert(input / oneBillion, GrammaticalGender.Neuter)} billones");
                     }
                     else
                     {
-                        parts.Add($"{Convert(input / ONE_BILLION)} billones");
+                        parts.Add($"{Convert(input / oneBillion)} billones");
                     }
                 }
 
-                input %= ONE_BILLION;
+                input %= oneBillion;
             }
 
-            if ((input / ONE_MILLION) > 0)
+            if ((input / oneMillion) > 0)
             {
-                if (input / ONE_MILLION == 1)
+                if (input / oneMillion == 1)
                 {
                     parts.Add("un millón");
                 }
                 else
                 {
-                    if ((input / ONE_MILLION) % 10 == 1)
+                    if ((input / oneMillion) % 10 == 1)
                     {
-                        parts.Add($"{Convert(input / ONE_MILLION, GrammaticalGender.Neuter)} millones");
+                        parts.Add($"{Convert(input / oneMillion, GrammaticalGender.Neuter)} millones");
                     }
                     else
                     {
-                        parts.Add($"{Convert(input / ONE_MILLION)} millones");
+                        parts.Add($"{Convert(input / oneMillion)} millones");
                     }
                 }
 
-                input %= ONE_MILLION;
+                input %= oneMillion;
             }
 
             if ((input / 1000) > 0)
@@ -140,11 +139,11 @@ namespace Humanizer.Localisation.NumberToWords
 
             if ((input / 100) > 0)
             {
-                parts.Add((string)(input == 100
+                parts.Add(input == 100
                     ? "cien"
                     : gender == GrammaticalGender.Feminine
                         ? FeminineHundredsMap[input / 100]
-                        : HundredsMap[input / 100]));
+                        : HundredsMap[input / 100]);
                 input %= 100;
             }
 
@@ -208,7 +207,7 @@ namespace Humanizer.Localisation.NumberToWords
                     }
                     else if (units > 0)
                     {
-                        lastPart += string.Format(" y {0}", UnitsMap[input % 10]);
+                        lastPart += $" y {UnitsMap[input % 10]}";
                     }
 
                     parts.Add(lastPart);
