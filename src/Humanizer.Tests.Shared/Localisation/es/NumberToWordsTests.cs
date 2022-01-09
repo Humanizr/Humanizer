@@ -289,6 +289,7 @@ namespace Humanizer.Tests.Localisation.es
         }
 
         [Theory]
+        [InlineData(0, "cero veces")]
         [InlineData(2, "doble")]
         [InlineData(100, "cien veces")]
         public void ToTuple(int number, string expected)

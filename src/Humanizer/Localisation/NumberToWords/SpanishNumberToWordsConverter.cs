@@ -332,11 +332,11 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToTuple(int number)
         {
-            string[] map = {"0 veces", "1 vez", "doble", "triple", "cuádruple", "quíntuble", "séxtuple", "séptuple", "óctuple", "nonupla", "décuplo", "undécuplo", "duodécuplo", "terciodécuplpo"};
+            string[] map = {"cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuble", "séxtuple", "séptuple", "óctuple", "nonupla", "décuplo", "undécuplo", "duodécuplo", "terciodécuplpo"};
 
             number = Math.Abs(number);
 
-            if (number < 14)
+            if (number < map.Length)
                 return map[number];
 
             return Convert(number) + " veces";
