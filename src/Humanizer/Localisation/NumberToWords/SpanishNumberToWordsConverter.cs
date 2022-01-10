@@ -1,37 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
-                                                        "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
-                                                        "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
-        private const string Feminine1 = "una";
-        private const string Feminine21 = "veintiuna";
-        private const string LongMinValue = "menos nueve trillones doscientos veintitrés mil trescientos setenta y dos billones treinta y seis mil ochocientos cincuenta y cuatro millones setecientos setenta y cinco mil ochocientos ocho";
-        private static readonly string[] TensMap = { "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
-        private static readonly string[] HundredsMap = { "cero", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos" };
-        private static readonly string[] FeminineHundredsMap = { "cero", "ciento", "doscientas", "trescientas", "cuatrocientas", "quinientas", "seiscientas", "setecientas", "ochocientas", "novecientas" };
-        private static readonly string[] TensMapOrdinal = { "", "décimo", "vigésimo", "trigésimo", "cuadragésimo", "quincuagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo" };
-        private static readonly string[] HundredsMapOrdinal = { "", "centésimo", "ducentésimo", "tricentésimo", "cuadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo" };
-        private static readonly string[] ThousandsMapOrdinal = { "", "milésimo", "dosmilésimo", "tresmilésimo", "cuatromilésimo", "cincomilésimo", "seismilésimo", "sietemilésimo", "ochomilésimo", "nuevemilésimo" };
+        private static readonly string[] HundredsMapOrdinal = {
+            "", "centésimo", "ducentésimo", "tricentésimo", "cuadringentésimo", "quingentésimo", "sexcentésimo",
+            "septingentésimo", "octingentésimo", "noningentésimo" };
+
         private static readonly Dictionary<int, string> Ordinals = new()
         {
-            {1, "primero"},
-            {2, "segundo"},
-            {3, "tercero"},
-            {4, "cuarto"},
-            {5, "quinto"},
-            {6, "sexto"},
-            {7, "séptimo"},
-            {8, "octavo"},
-            {9, "noveno"},
+            { 1, "primero" },
+            { 2, "segundo" },
+            { 3, "tercero" },
+            { 4, "cuarto" },
+            { 5, "quinto" },
+            { 6, "sexto" },
+            { 7, "séptimo" },
+            { 8, "octavo" },
+            { 9, "noveno" },
         };
+
+        private static readonly string[] TensMapOrdinal = {
+            "", "décimo", "vigésimo", "trigésimo", "cuadragésimo", "quincuagésimo", "sexagésimo", "septuagésimo",
+            "octogésimo", "nonagésimo" };
+
+        private static readonly string[] ThousandsMapOrdinal = {
+            "", "milésimo", "dosmilésimo", "tresmilésimo", "cuatromilésimo", "cincomilésimo", "seismilésimo",
+            "sietemilésimo", "ochomilésimo", "nuevemilésimo" };
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
+            List<string> wordBuilder = new();
+
             if (input == 0)
             {
                 return "cero";
@@ -39,7 +42,9 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (input == long.MinValue)
             {
-                return LongMinValue;
+                return
+                    "menos nueve trillones doscientos veintitrés mil trescientos setenta y dos billones treinta y seis mil " +
+                    "ochocientos cincuenta y cuatro millones setecientos setenta y cinco mil ochocientos ocho";
             }
 
             if (input < 0)
@@ -47,174 +52,12 @@ namespace Humanizer.Localisation.NumberToWords
                 return $"menos {Convert(-input)}";
             }
 
-            const long oneTrillion = 1_000_000_000_000_000_000;
-            const long oneBillion = 1_000_000_000_000;
-            const long oneMillion = 1_000_000;
+            wordBuilder.Add(ConvertGreaterThanMillion(input, out var remainder));
+            wordBuilder.Add(ConvertThousands(remainder, out remainder, gender));
+            wordBuilder.Add(ConvertHundreds(remainder, out remainder, gender));
+            wordBuilder.Add(ConvertUnits(remainder, gender));
 
-            var parts = new List<string>();
-
-            if ((input / oneTrillion) > 0)
-            {
-                if (input / oneTrillion == 1)
-                {
-                    parts.Add("un trillón");
-                }
-                else
-                {
-                    if ((input / oneTrillion) % 10 == 1)
-                    {
-                        parts.Add($"{Convert(input / oneTrillion, GrammaticalGender.Neuter)} trillones");
-                    }
-                    else
-                    {
-                        parts.Add($"{Convert(input / oneTrillion)} trillones");
-                    }
-                }
-
-                input %= oneTrillion;
-            }
-
-            if ((input / oneBillion) > 0)
-            {
-                if (input / oneBillion == 1)
-                {
-                    parts.Add("un billón");
-                }
-                else
-                {
-                    if ((input / oneBillion) % 10 == 1)
-                    {
-                        parts.Add($"{Convert(input / oneBillion, GrammaticalGender.Neuter)} billones");
-                    }
-                    else
-                    {
-                        parts.Add($"{Convert(input / oneBillion)} billones");
-                    }
-                }
-
-                input %= oneBillion;
-            }
-
-            if ((input / oneMillion) > 0)
-            {
-                if (input / oneMillion == 1)
-                {
-                    parts.Add("un millón");
-                }
-                else
-                {
-                    if ((input / oneMillion) % 10 == 1)
-                    {
-                        parts.Add($"{Convert(input / oneMillion, GrammaticalGender.Neuter)} millones");
-                    }
-                    else
-                    {
-                        parts.Add($"{Convert(input / oneMillion)} millones");
-                    }
-                }
-
-                input %= oneMillion;
-            }
-
-            if ((input / 1000) > 0)
-            {
-                if (input / 1000 == 1)
-                {
-                    parts.Add("mil");
-                }
-                else
-                {
-                    if (gender == GrammaticalGender.Feminine)
-                    {
-                        parts.Add($"{Convert(input / 1000, GrammaticalGender.Feminine)} mil");
-                    }
-                    else
-                    {
-                        parts.Add(string.Format($"{Convert(input / 1000, GrammaticalGender.Neuter)} mil"));
-                    }
-                }
-
-                input %= 1000;
-            }
-
-            if ((input / 100) > 0)
-            {
-                parts.Add(input == 100
-                    ? "cien"
-                    : gender == GrammaticalGender.Feminine
-                        ? FeminineHundredsMap[input / 100]
-                        : HundredsMap[input / 100]);
-                input %= 100;
-            }
-
-            if (input > 0)
-            {
-                if (input < 30)
-                {
-                    if (input == 1)
-                    {
-                        if (gender == GrammaticalGender.Feminine)
-                        {
-                            parts.Add(Feminine1);
-                        }
-                        else if (gender == GrammaticalGender.Neuter)
-                        {
-                            parts.Add("un");
-                        }
-                        else
-                        {
-                            parts.Add(UnitsMap[input]);
-                        }
-                    }
-                    else if (input == 21)
-                    {
-                        if (gender == GrammaticalGender.Feminine)
-                        {
-                            parts.Add(Feminine21);
-                        }
-                        else if (gender == GrammaticalGender.Neuter)
-                        {
-                            parts.Add("veintiún");
-                        }
-                        else
-                        {
-                            parts.Add(UnitsMap[input]);
-                        }
-                    }
-                    else
-                    {
-                        parts.Add(UnitsMap[input]);
-                    }
-                }
-                else
-                {
-                    var lastPart = TensMap[input / 10];
-                    var units = input % 10;
-                    if (units == 1)
-                    {
-                        if (gender == GrammaticalGender.Feminine)
-                        {
-                            lastPart += " y una";
-                        }
-                        else if (gender == GrammaticalGender.Neuter)
-                        {
-                            lastPart += " y un";
-                        }
-                        else
-                        {
-                            lastPart += " y uno";
-                        }
-                    }
-                    else if (units > 0)
-                    {
-                        lastPart += $" y {UnitsMap[input % 10]}";
-                    }
-
-                    parts.Add(lastPart);
-                }
-            }
-
-            return string.Join(" ", parts.ToArray());
+            return BuildWord(wordBuilder);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
@@ -327,12 +170,14 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(towords);
             }
 
-            return string.Join(" ", parts.ToArray());
+            return BuildWord(parts);
         }
 
         public override string ConvertToTuple(int number)
         {
-            string[] map = {"cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuble", "séxtuple", "séptuple", "óctuple", "nonupla", "décuplo", "undécuplo", "duodécuplo", "terciodécuplpo"};
+            string[] map = {
+                "cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuble", "séxtuple", "séptuple", "óctuple",
+                "nonupla", "décuplo", "undécuplo", "duodécuplo", "terciodécuplpo" };
 
             number = Math.Abs(number);
 
@@ -340,6 +185,167 @@ namespace Humanizer.Localisation.NumberToWords
                 return map[number];
 
             return Convert(number) + " veces";
+        }
+
+        private static string BuildWord(IReadOnlyList<string> wordParts)
+        {
+            var parts = wordParts.ToList();
+            parts.RemoveAll(l => string.IsNullOrEmpty(l));
+            return string.Join(" ", parts);
+        }
+
+        private static string ConvertHundreds(in long inputNumber, out long remainder, GrammaticalGender gender)
+        {
+            var wordPart = string.Empty;
+            remainder = inputNumber;
+
+            if ((inputNumber / 100) > 0)
+            {
+                wordPart = inputNumber == 100 ?
+                    "cien" :
+                    GetGenderedHundredsMap(gender)[(int)(inputNumber / 100)];
+
+                remainder = inputNumber % 100;
+            }
+
+            return wordPart;
+        }
+
+        private static string ConvertUnits(long inputNumber, GrammaticalGender gender)
+        {
+            var genderedOne = new Dictionary<GrammaticalGender, string>()
+            {
+                { GrammaticalGender.Feminine, "una" },
+                { GrammaticalGender.Masculine, "uno" },
+                { GrammaticalGender.Neuter, "un"}
+            };
+
+            var genderedtwentyOne = new Dictionary<GrammaticalGender, string>()
+            {
+                { GrammaticalGender.Feminine, "veintiuna" },
+                { GrammaticalGender.Masculine, "veintiuno" },
+                { GrammaticalGender.Neuter, "veintiún"}
+            };
+
+            string[] UnitsMap = {
+                "cero", genderedOne[gender], "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
+                "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", genderedtwentyOne[gender],
+                "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
+
+            string[] TensMap = {
+                "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
+
+            var wordPart = string.Empty;
+
+            if (inputNumber > 0)
+            {
+                if (inputNumber < 30)
+                {
+                    wordPart = UnitsMap[inputNumber];
+                }
+                else
+                {
+                    wordPart = TensMap[inputNumber / 10];
+                    if (inputNumber % 10 > 0)
+                    {
+                        wordPart += $" y {UnitsMap[inputNumber % 10]}";
+                    }
+                }
+            }
+
+            return wordPart;
+        }
+
+        private static IReadOnlyList<string> GetGenderedHundredsMap(GrammaticalGender gender)
+        {
+            var genderedEnding = gender == GrammaticalGender.Feminine ? "as" : "os";
+
+            string[] HundredsRootMap = {
+                "cero", "ciento", "doscient", "trescient", "cuatrocient", "quinient", "seiscient", "setecient",
+                "ochocient", "novecient" };
+
+            var map = new List<string>();
+            map.AddRange(HundredsRootMap.Take(2));
+
+            for (var i = 2; i < HundredsRootMap.Length; i++)
+            {
+                map.Add(HundredsRootMap[i] + genderedEnding);
+            }
+
+            return map;
+        }
+
+        private static string PluralizeWord(string singularWord)
+        {
+            if (singularWord.EndsWith("ón"))
+            {
+                return singularWord.TrimEnd('ó', 'n') + "ones";
+            }
+
+            return singularWord;
+        }
+
+        private string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
+        {
+            List<string> wordBuilder = new();
+
+            const long oneTrillion = 1_000_000_000_000_000_000;
+            const long oneBillion = 1_000_000_000_000;
+            const long oneMillion = 1_000_000;
+
+            remainder = inputNumber;
+
+            var numbersAndWordsDict = new Dictionary<string, long>()
+            {
+                { "trillón", oneTrillion },
+                { "billón", oneBillion },
+                { "millón", oneMillion }
+            };
+
+            foreach (var numberAndWord in numbersAndWordsDict)
+            {
+                if ((remainder / numberAndWord.Value) > 0)
+                {
+                    if (remainder / numberAndWord.Value == 1)
+                    {
+                        wordBuilder.Add($"un {numberAndWord.Key}");
+                    }
+                    else
+                    {
+                        wordBuilder.Add((remainder / numberAndWord.Value % 10 == 1) ?
+                            $"{Convert(remainder / numberAndWord.Value, GrammaticalGender.Neuter)} {PluralizeWord(numberAndWord.Key)}" :
+                            $"{Convert(remainder / numberAndWord.Value)} {PluralizeWord(numberAndWord.Key)}");
+                    }
+
+                    remainder %= numberAndWord.Value;
+                }
+            }
+
+            return BuildWord(wordBuilder);
+        }
+
+        private string ConvertThousands(in long inputNumber, out long remainder, GrammaticalGender gender)
+        {
+            var wordPart = string.Empty;
+            remainder = inputNumber;
+
+            if ((inputNumber / 1000) > 0)
+            {
+                if (inputNumber / 1000 == 1)
+                {
+                    wordPart = "mil";
+                }
+                else
+                {
+                    wordPart = (gender == GrammaticalGender.Feminine) ?
+                        $"{Convert(inputNumber / 1000, GrammaticalGender.Feminine)} mil" :
+                        $"{Convert(inputNumber / 1000, GrammaticalGender.Neuter)} mil";
+                }
+
+                remainder = inputNumber % 1000;
+            }
+
+            return wordPart;
         }
     }
 }
