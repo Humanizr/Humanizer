@@ -5,9 +5,35 @@ namespace Humanizer.Tests.Localisation.es
     [UseCulture("es-ES")]
     public class OrdinalizeTests
     {
+        [Theory]
+        [InlineData(1, "1.º")]
+        [InlineData(3, "3.º")]
+        public void OrdinalizeDefaultGender(int number, string ordinalized)
+        {
+            Assert.Equal(number.Ordinalize(), ordinalized);
+        }
 
         [Theory]
-        [InlineData("0", "0")]
+        [InlineData(-1, "1.º")]
+        [InlineData(int.MinValue, "0")]
+        public void OrdinalizeZeroOrNegativeNumber(int number, string ordinalized)
+        {
+            Assert.Equal(number.Ordinalize(), ordinalized);
+        }
+
+        [Theory]
+        [InlineData(1, "1.er")]
+        [InlineData(2, "2.º")]
+        [InlineData(3, "3.er")]
+        [InlineData(21, "21.er")]
+        [InlineData(22, "22.º")]
+        [InlineData(23, "23.er")]
+        public void OrdinalizeNeuterGender(int number, string ordinalized)
+        {
+            Assert.Equal(number.Ordinalize(GrammaticalGender.Neuter), ordinalized);
+        }
+
+        [Theory]
         [InlineData("1", "1.º")]
         [InlineData("2", "2.º")]
         [InlineData("3", "3.º")]
