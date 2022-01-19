@@ -1,17 +1,23 @@
 ﻿#if NET6_0_OR_GREATER
 
 using System;
+using System.Collections.Generic;
 
 namespace Humanizer.Localisation.TimeToClockNotation
 {
     internal class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
+        private const int MORNING = 6;
+        private const int NOON = 12;
+        private const int AFTERNOON = 21;
+
         public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
         {
             switch (time)
             {
                 case { Hour: 0, Minute: 0 }:
                     return "medianoche";
+
                 case { Hour: 12, Minute: 0 }:
                     return "mediodía";
             }
@@ -27,19 +33,22 @@ namespace Humanizer.Localisation.TimeToClockNotation
                 ? 5 * Math.Round(time.Minute / 5.0)
                 : time.Minute);
 
-            return normalizedMinutes switch
+            var clockNotationMap = new Dictionary<int, string>()
             {
-                00 => $"{article} {hour} {dayPeriod}",
-                15 => $"{article} {hour} y cuarto {dayPeriod}",
-                30 => $"{article} {hour} y media {dayPeriod}",
-                35 => $"{articleNextHour} {nextHour} menos veinticinco {dayPeriodNextHour}",
-                40 => $"{articleNextHour} {nextHour} menos veinte {dayPeriodNextHour}",
-                45 => $"{articleNextHour} {nextHour} menos cuarto {dayPeriodNextHour}",
-                50 => $"{articleNextHour} {nextHour} menos diez {dayPeriodNextHour}",
-                55 => $"{articleNextHour} {nextHour} menos cinco {dayPeriodNextHour}",
-                60 => $"{articleNextHour} {nextHour} {dayPeriodNextHour}",
-                _ => $"{article} {hour} y {normalizedMinutes.ToWords()} {dayPeriod}"
+                { 0, $"{article} {hour} {dayPeriod}" },
+                { 15 , $"{article} {hour} y cuarto {dayPeriod}" },
+                { 30 , $"{article} {hour} y media {dayPeriod}"},
+                { 35 , $"{articleNextHour} {nextHour} menos veinticinco {dayPeriodNextHour}"},
+                { 40 , $"{articleNextHour} {nextHour} menos veinte {dayPeriodNextHour}"},
+                { 45 , $"{articleNextHour} {nextHour} menos cuarto {dayPeriodNextHour}"},
+                { 50 , $"{articleNextHour} {nextHour} menos diez {dayPeriodNextHour}"},
+                { 55 , $"{articleNextHour} {nextHour} menos cinco {dayPeriodNextHour}"},
+                { 60 , $"{articleNextHour} {nextHour} {dayPeriodNextHour}"},
             };
+
+            return clockNotationMap.GetValueOrDefault(
+                normalizedMinutes,
+                $"{article} {hour} y {normalizedMinutes.ToWords()} {dayPeriod}");
         }
 
         private static int NormalizeHour(TimeOnly time)
@@ -54,19 +63,37 @@ namespace Humanizer.Localisation.TimeToClockNotation
 
         private static string GetDayPeriod(TimeOnly time)
         {
-            const int MORNING = 6;
-            const int NOON = 12;
-            const int AFTERNOON = 21;
-
-            return time.Hour switch
+            if (IsEarlyMorning(time))
             {
-                int h when h is 0 => "de la noche",
-                int h when h is >= 1 and < MORNING => "de la madrugada",
-                int h when h is >= MORNING and < NOON => "de la mañana",
-                int h when h is >= NOON and < AFTERNOON => "de la tarde",
-                int h when h is >= AFTERNOON and <= 24 => "de la noche",
-                _ => ""
-            };
+                return "de la madrugada";
+            }
+
+            if (IsMorning(time))
+            {
+                return "de la mañana";
+            }
+
+            if (IsAfternoon(time))
+            {
+                return "de la tarde";
+            }
+
+            return "de la noche";
+        }
+
+        private static bool IsEarlyMorning(TimeOnly time)
+        {
+            return time.Hour >= 1 && time.Hour < MORNING;
+        }
+
+        private static bool IsMorning(TimeOnly time)
+        {
+            return time.Hour >= MORNING && time.Hour < NOON;
+        }
+
+        private static bool IsAfternoon(TimeOnly time)
+        {
+            return time.Hour >= NOON && time.Hour < AFTERNOON;
         }
     }
 }
