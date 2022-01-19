@@ -49,12 +49,12 @@ namespace Humanizer.Localisation.NumberToWords
                 return ConvertToOrdinal(Math.Abs(number), gender);
             }
 
-            if (number >= 1000_000_000 && number % 1_000_000 == 0)
+            if (IsRoundBillion(number))
             {
                 return ConvertRoundBillionths(number, gender);
             }
 
-            if (number >= 1000000 && number % 1000000 == 0)
+            if (IsRoundMillion(number))
             {
                 return ConvertToOrdinal(number / 1000, gender).Replace("milésim", "millonésim");
             }
@@ -235,14 +235,19 @@ namespace Humanizer.Localisation.NumberToWords
             return map;
         }
 
-        private static string PluralizeWord(string singularWord)
+        private static bool IsRoundBillion(int number)
         {
-            if (singularWord.EndsWith("ón"))
-            {
-                return singularWord.TrimEnd('ó', 'n') + "ones";
-            }
+            return number >= 1000_000_000 && number % 1_000_000 == 0;
+        }
 
-            return singularWord;
+        private static bool IsRoundMillion(int number)
+        {
+            return number >= 1000000 && number % 1000000 == 0;
+        }
+
+        private static string PluralizeGreaterThanMillion(string singularWord)
+        {
+            return singularWord.TrimEnd('ó', 'n') + "ones";
         }
 
         private string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
@@ -273,8 +278,8 @@ namespace Humanizer.Localisation.NumberToWords
                     else
                     {
                         wordBuilder.Add((remainder / numberAndWord.Value % 10 == 1) ?
-                            $"{Convert(remainder / numberAndWord.Value, GrammaticalGender.Neuter)} {PluralizeWord(numberAndWord.Key)}" :
-                            $"{Convert(remainder / numberAndWord.Value)} {PluralizeWord(numberAndWord.Key)}");
+                            $"{Convert(remainder / numberAndWord.Value, GrammaticalGender.Neuter)} {PluralizeGreaterThanMillion(numberAndWord.Key)}" :
+                            $"{Convert(remainder / numberAndWord.Value)} {PluralizeGreaterThanMillion(numberAndWord.Key)}");
                     }
 
                     remainder %= numberAndWord.Value;

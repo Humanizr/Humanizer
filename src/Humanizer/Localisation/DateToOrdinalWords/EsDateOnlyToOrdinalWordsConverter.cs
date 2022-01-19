@@ -2,13 +2,16 @@
 
 using System;
 
+using Humanizer.Configuration;
+
 namespace Humanizer.Localisation.DateToOrdinalWords
 {
     internal class EsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
     {
         public override string Convert(DateOnly date)
         {
-            return date.ToString("d 'de' MMMM 'de' yyyy");
+            var equivalentDateTime = date.ToDateTime(TimeOnly.MinValue);
+            return Configurator.DateToOrdinalWordsConverter.Convert(equivalentDateTime);
         }
     }
 }
