@@ -43,6 +43,8 @@ namespace Humanizer.Tests.Localisation.enIN
         [InlineData(12345678, "one crore twenty three lakh forty five thousand six hundred and seventy eight")]
         [InlineData(123456789, "twelve crore thirty four lakh fifty six thousand seven hundred and eighty nine")]
         [InlineData(1234567890, "one hundred and twenty three crore forty five lakh sixty seven thousand eight hundred and ninety")]
+        [InlineData(1000000000000, "one lakh crore")]
+        [InlineData(45678912345678, "forty five lakh sixty seven thousand eight hundred and ninety one crore twenty three lakh forty five thousand six hundred and seventy eight")]
         [InlineData(-7516, "(Negative) seven thousand five hundred and sixteen")]
 
         public void ToWords(long number, string expected)
