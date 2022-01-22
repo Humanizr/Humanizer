@@ -232,7 +232,6 @@ namespace Humanizer.Tests.Localisation.es
         [Theory]
         [InlineData(0, "cero")]
         [InlineData(1, "uno")]
-        [InlineData(1, "un", GrammaticalGender.Neuter)]
         [InlineData(1, "una", GrammaticalGender.Feminine)]
         [InlineData(10, "diez")]
         [InlineData(11, "once")]
@@ -302,6 +301,60 @@ namespace Humanizer.Tests.Localisation.es
         public void ToWords(long number, string expected, GrammaticalGender gender = GrammaticalGender.Masculine)
         {
             Assert.Equal(expected, number.ToWords(gender));
+        }
+
+        [Theory]
+        [InlineData(1, WordForm.Abbreviation, "un")]
+        [InlineData(1, WordForm.Normal, "uno")]
+        [InlineData(21, WordForm.Abbreviation, "veintiún")]
+        [InlineData(21, WordForm.Normal, "veintiuno")]
+        [InlineData(21501, WordForm.Abbreviation, "veintiún mil quinientos un")]
+        [InlineData(21501, WordForm.Normal, "veintiún mil quinientos uno")]
+        public void ToWordsIntWithWordForm(int number, WordForm wordForm, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(wordForm));
+            Assert.Equal(expected, number.ToWords(wordForm: wordForm, addAnd: false));
+            Assert.Equal(expected, number.ToWords(wordForm: wordForm, addAnd: true));
+        }
+
+        [Theory]
+        [InlineData(1, WordForm.Abbreviation, GrammaticalGender.Masculine, "un")]
+        [InlineData(1, WordForm.Abbreviation, GrammaticalGender.Feminine, "una")]
+        [InlineData(21, WordForm.Abbreviation, GrammaticalGender.Masculine, "veintiún")]
+        [InlineData(21, WordForm.Abbreviation, GrammaticalGender.Feminine, "veintiuna")]
+        [InlineData(21501, WordForm.Abbreviation, GrammaticalGender.Masculine, "veintiún mil quinientos un")]
+        [InlineData(21501, WordForm.Normal, GrammaticalGender.Masculine, "veintiún mil quinientos uno")]
+        [InlineData(21501, WordForm.Abbreviation, GrammaticalGender.Feminine, "veintiuna mil quinientas una")]
+        public void ToWordsIntWithWordFormAndGender(int number, WordForm wordForm, GrammaticalGender gender, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(wordForm, gender));
+        }
+
+        [Theory]
+        [InlineData((long)1, WordForm.Abbreviation, "un")]
+        [InlineData((long)1, WordForm.Normal, "uno")]
+        [InlineData((long)21, WordForm.Abbreviation, "veintiún")]
+        [InlineData((long)21, WordForm.Normal, "veintiuno")]
+        [InlineData((long)21501, WordForm.Abbreviation, "veintiún mil quinientos un")]
+        [InlineData((long)21501, WordForm.Normal, "veintiún mil quinientos uno")]
+        public void ToWordsLongWithWordForm(long number, WordForm wordForm, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(wordForm));
+            Assert.Equal(expected, number.ToWords(wordForm: wordForm, addAnd: false));
+            Assert.Equal(expected, number.ToWords(wordForm: wordForm, addAnd: true));
+        }
+
+        [Theory]
+        [InlineData((long)1, WordForm.Abbreviation, GrammaticalGender.Masculine, "un")]
+        [InlineData((long)1, WordForm.Abbreviation, GrammaticalGender.Feminine, "una")]
+        [InlineData((long)21, WordForm.Abbreviation, GrammaticalGender.Masculine, "veintiún")]
+        [InlineData((long)21, WordForm.Abbreviation, GrammaticalGender.Feminine, "veintiuna")]
+        [InlineData((long)21501, WordForm.Abbreviation, GrammaticalGender.Masculine, "veintiún mil quinientos un")]
+        [InlineData((long)21501, WordForm.Normal, GrammaticalGender.Masculine, "veintiún mil quinientos uno")]
+        [InlineData((long)21501, WordForm.Abbreviation, GrammaticalGender.Feminine, "veintiuna mil quinientas una")]
+        public void ToWordsLongWithWordFormAndGender(long number, WordForm wordForm, GrammaticalGender gender, string expected)
+        {
+            Assert.Equal(expected, number.ToWords(wordForm, gender));
         }
     }
 }
