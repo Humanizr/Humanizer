@@ -8,29 +8,34 @@ namespace Humanizer.Localisation.NumberToWords
     {
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
+            return Convert(input, WordForm.Normal, gender, addAnd);
+        }
+
+        public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
+        {
             List<string> wordBuilder = new();
 
-            if (input == 0)
+            if (number == 0)
             {
                 return "cero";
             }
 
-            if (input == long.MinValue)
+            if (number == long.MinValue)
             {
                 return
                     "menos nueve trillones doscientos veintitrés mil trescientos setenta y dos billones treinta y seis mil " +
                     "ochocientos cincuenta y cuatro millones setecientos setenta y cinco mil ochocientos ocho";
             }
 
-            if (input < 0)
+            if (number < 0)
             {
-                return $"menos {Convert(-input)}";
+                return $"menos {Convert(-number)}";
             }
 
-            wordBuilder.Add(ConvertGreaterThanMillion(input, out var remainder));
+            wordBuilder.Add(ConvertGreaterThanMillion(number, out var remainder));
             wordBuilder.Add(ConvertThousands(remainder, out remainder, gender));
             wordBuilder.Add(ConvertHundreds(remainder, out remainder, gender));
-            wordBuilder.Add(ConvertUnits(remainder, gender));
+            wordBuilder.Add(ConvertUnits(remainder, gender, wordForm));
 
             return BuildWord(wordBuilder);
         }
@@ -171,21 +176,23 @@ namespace Humanizer.Localisation.NumberToWords
             return ConvertMappedOrdinalNumber(number, 1000, thousandthsRootMap, out remainder, gender);
         }
 
-        private static string ConvertUnits(long inputNumber, GrammaticalGender gender)
+        private static string ConvertUnits(long inputNumber, GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
             var genderedOne = new Dictionary<GrammaticalGender, string>()
             {
                 { GrammaticalGender.Feminine, "una" },
-                { GrammaticalGender.Masculine, "uno" },
-                { GrammaticalGender.Neuter, "un"}
+                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "un" : "uno" }
             };
+
+            genderedOne.Add(GrammaticalGender.Neuter, genderedOne[GrammaticalGender.Masculine]);
 
             var genderedtwentyOne = new Dictionary<GrammaticalGender, string>()
             {
                 { GrammaticalGender.Feminine, "veintiuna" },
-                { GrammaticalGender.Masculine, "veintiuno" },
-                { GrammaticalGender.Neuter, "veintiún"}
+                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno" }
             };
+
+            genderedtwentyOne.Add(GrammaticalGender.Neuter, genderedtwentyOne[GrammaticalGender.Masculine]);
 
             string[] unitsMap = {
                 "cero", genderedOne[gender], "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
@@ -278,7 +285,7 @@ namespace Humanizer.Localisation.NumberToWords
                     else
                     {
                         wordBuilder.Add((remainder / numberAndWord.Value % 10 == 1) ?
-                            $"{Convert(remainder / numberAndWord.Value, GrammaticalGender.Neuter)} {PluralizeGreaterThanMillion(numberAndWord.Key)}" :
+                            $"{Convert(remainder / numberAndWord.Value, WordForm.Abbreviation, GrammaticalGender.Masculine)} {PluralizeGreaterThanMillion(numberAndWord.Key)}" :
                             $"{Convert(remainder / numberAndWord.Value)} {PluralizeGreaterThanMillion(numberAndWord.Key)}");
                     }
 
@@ -291,8 +298,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private string ConvertRoundBillionths(int number, GrammaticalGender gender)
         {
-            var normalizedGender = gender == GrammaticalGender.Masculine ? GrammaticalGender.Neuter : GrammaticalGender.Feminine;
-            var cardinalPart = Convert(number / 1_000_000, normalizedGender);
+            var cardinalPart = Convert(number / 1_000_000, WordForm.Abbreviation, gender);
             var sep = number == 1_000_000_000 ? "" : " ";
             var ordinalPart = ConvertToOrdinal(1_000_000, gender);
             return cardinalPart + sep + ordinalPart;
@@ -352,7 +358,7 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     wordPart = (gender == GrammaticalGender.Feminine) ?
                         $"{Convert(inputNumber / 1000, GrammaticalGender.Feminine)} mil" :
-                        $"{Convert(inputNumber / 1000, GrammaticalGender.Neuter)} mil";
+                        $"{Convert(inputNumber / 1000, WordForm.Abbreviation, gender)} mil";
                 }
 
                 remainder = inputNumber % 1000;
