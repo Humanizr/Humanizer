@@ -19,6 +19,11 @@
             return Convert(number, _defaultGender);
         }
 
+        public string Convert(long number, WordForm wordForm)
+        {
+            return Convert(number, wordForm, _defaultGender);
+        }
+
         /// <summary>
         /// Converts the number to string using the locale's default gramatical gender and adds "and"
         /// </summary>
@@ -30,6 +35,11 @@
             return Convert(number, _defaultGender);
         }
 
+        public string Convert(long number, bool addAnd, WordForm wordForm)
+        {
+            return Convert(number, wordForm, _defaultGender, addAnd);
+        }
+
         /// <summary>
         /// Converts the number to string using the provided grammatical gender
         /// </summary>
@@ -39,6 +49,10 @@
         /// <returns></returns>
         public abstract string Convert(long number, GrammaticalGender gender, bool addAnd = true);
 
+        public virtual string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
+        {
+            return Convert(number, gender, addAnd);
+        }
 
         /// <summary>
         /// Converts the number to ordinal string using the locale's default grammatical gender

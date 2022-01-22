@@ -9,6 +9,11 @@
         /// <returns></returns>
         public abstract string Convert(long number);
 
+        public virtual string Convert(long number, WordForm wordForm)
+        {
+            return Convert(number);
+        }
+
         /// <summary>
         /// Converts the number to string
         /// </summary>
@@ -18,6 +23,11 @@
         public virtual string Convert(long number, bool addAnd)
         {
             return Convert(number);
+        }
+
+        public virtual string Convert(long number, bool addAnd, WordForm wordForm)
+        {
+            return Convert(number, wordForm);
         }
 
         /// <summary>
@@ -32,6 +42,10 @@
             return Convert(number);
         }
 
+        public virtual string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
+        {
+            return Convert(number, gender, addAnd);
+        }
 
         /// <summary>
         /// Converts the number to ordinal string

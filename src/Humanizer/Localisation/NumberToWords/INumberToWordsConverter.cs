@@ -12,6 +12,8 @@
         /// <returns></returns>
         string Convert(long number);
 
+        string Convert(long number, WordForm wordForm);
+
         /// <summary>
         /// Converts the number to string using the locale's default grammatical gender with or without adding 'And'
         /// </summary>
@@ -19,6 +21,8 @@
         /// <param name="addAnd">Specify with our without adding "And"</param>
         /// <returns></returns>
         string Convert(long number, bool addAnd);
+
+        string Convert(long number, bool addAnd, WordForm wordForm);
 
         /// <summary>
         /// Converts the number to string using the provided grammatical gender
@@ -28,6 +32,8 @@
         /// <param name="addAnd"></param>
         /// <returns></returns>
         string Convert(long number, GrammaticalGender gender, bool addAnd = true);
+
+        string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true);
 
         /// <summary>
         /// Converts the number to ordinal string using the locale's default grammatical gender
