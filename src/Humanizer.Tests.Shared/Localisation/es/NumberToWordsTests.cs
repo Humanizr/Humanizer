@@ -6,14 +6,14 @@ namespace Humanizer.Tests.Localisation.es
     public class NumberToWordsTests
     {
         [Theory]
-        [InlineData(-1, "primer", GrammaticalGender.Neuter)]
+        [InlineData(-1, "primero", GrammaticalGender.Neuter)]
         [InlineData(0, "cero", GrammaticalGender.Neuter)]
-        [InlineData(1, "primer", GrammaticalGender.Neuter)]
+        [InlineData(1, "primero", GrammaticalGender.Neuter)]
         [InlineData(1, "primero", GrammaticalGender.Masculine)]
         [InlineData(1, "primera", GrammaticalGender.Feminine)]
         [InlineData(2, "segundo", GrammaticalGender.Masculine)]
         [InlineData(2, "segunda", GrammaticalGender.Feminine)]
-        [InlineData(3, "tercer", GrammaticalGender.Neuter)]
+        [InlineData(3, "tercero", GrammaticalGender.Neuter)]
         [InlineData(3, "tercero", GrammaticalGender.Masculine)]
         [InlineData(3, "tercera", GrammaticalGender.Feminine)]
         [InlineData(4, "cuarto", GrammaticalGender.Masculine)]
@@ -218,6 +218,43 @@ namespace Humanizer.Tests.Localisation.es
         public void ToOrdinalWords(int number, string words, GrammaticalGender gender)
         {
             Assert.Equal(words, number.ToOrdinalWords(gender));
+        }
+
+        [Theory]
+        [InlineData(1, WordForm.Normal, "primero")]
+        [InlineData(1, WordForm.Abbreviation, "primer")]
+        [InlineData(2, WordForm.Normal, "segundo")]
+        [InlineData(2, WordForm.Abbreviation, "segundo")]
+        [InlineData(3, WordForm.Normal, "tercero")]
+        [InlineData(3, WordForm.Abbreviation, "tercer")]
+        [InlineData(21, WordForm.Normal, "vigésimo primero")]
+        [InlineData(21, WordForm.Abbreviation, "vigésimo primer")]
+        [InlineData(43, WordForm.Normal, "cuadragésimo tercero")]
+        [InlineData(43, WordForm.Abbreviation, "cuadragésimo tercer")]
+        public void ToOrdinalWordsWithWordForm(int number, WordForm wordForm, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(wordForm));
+        }
+
+        [Theory]
+        [InlineData(1, WordForm.Normal, GrammaticalGender.Masculine, "primero")]
+        [InlineData(1, WordForm.Abbreviation, GrammaticalGender.Masculine, "primer")]
+        [InlineData(1, WordForm.Abbreviation, GrammaticalGender.Feminine, "primera")]
+        [InlineData(2, WordForm.Normal, GrammaticalGender.Masculine, "segundo")]
+        [InlineData(2, WordForm.Abbreviation, GrammaticalGender.Masculine, "segundo")]
+        [InlineData(2, WordForm.Abbreviation, GrammaticalGender.Feminine, "segunda")]
+        [InlineData(3, WordForm.Normal, GrammaticalGender.Masculine, "tercero")]
+        [InlineData(3, WordForm.Abbreviation, GrammaticalGender.Masculine, "tercer")]
+        [InlineData(3, WordForm.Abbreviation, GrammaticalGender.Feminine, "tercera")]
+        [InlineData(21, WordForm.Normal, GrammaticalGender.Masculine, "vigésimo primero")]
+        [InlineData(21, WordForm.Abbreviation, GrammaticalGender.Masculine, "vigésimo primer")]
+        [InlineData(21, WordForm.Abbreviation, GrammaticalGender.Feminine, "vigésima primera")]
+        [InlineData(43, WordForm.Normal, GrammaticalGender.Masculine, "cuadragésimo tercero")]
+        [InlineData(43, WordForm.Abbreviation, GrammaticalGender.Masculine, "cuadragésimo tercer")]
+        [InlineData(43, WordForm.Abbreviation, GrammaticalGender.Feminine, "cuadragésima tercera")]
+        public void ToOrdinalWordsWithWordFormAndGender(int number, WordForm wordForm, GrammaticalGender gender, string expected)
+        {
+            Assert.Equal(expected, number.ToOrdinalWords(gender, wordForm));
         }
 
         [Theory]
