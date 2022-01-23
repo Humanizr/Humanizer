@@ -7,16 +7,21 @@ namespace Humanizer.Localisation.Ordinalizers
     {
         public override string Convert(int number, string numberString)
         {
-            return Convert(number, numberString, GrammaticalGender.Masculine);
+            return Convert(number, numberString, GrammaticalGender.Masculine, WordForm.Normal);
         }
 
         public override string Convert(int number, string numberString, GrammaticalGender gender)
         {
+            return Convert(number, numberString, gender, WordForm.Normal);
+        }
+
+        public override string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm)
+        {
             var genderMap = new Dictionary<GrammaticalGender, string>()
             {
-                { GrammaticalGender.Masculine, ".º" },
                 { GrammaticalGender.Feminine, ".ª" },
-                { GrammaticalGender.Neuter, GetNeuterMap(number) }
+                { GrammaticalGender.Masculine, GetWordForm(number, wordForm) },
+                { GrammaticalGender.Neuter, GetWordForm(number, wordForm) }
             };
 
             // N/A in Spanish
@@ -33,14 +38,14 @@ namespace Humanizer.Localisation.Ordinalizers
             return $"{numberString}{genderMap[gender]}";
         }
 
-        private static string GetNeuterMap(int number)
-        {
-            return (number % 10 == 1 || number % 10 == 3) ? ".er" : ".º";
-        }
-
         private static string GetNumberString(int number)
         {
-            return number.ToString(CultureInfo.InvariantCulture);
+            return number.ToString(new CultureInfo("es-ES"));
+        }
+
+        private static string GetWordForm(int number, WordForm wordForm)
+        {
+            return (number % 10 == 1 || number % 10 == 3) && wordForm == WordForm.Abbreviation ? ".er" : ".º";
         }
     }
 }
