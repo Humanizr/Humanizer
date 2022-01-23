@@ -21,6 +21,25 @@ namespace Humanizer
         }
 
         /// <summary>
+        /// Converts a number to ordinal words supporting locale's specific variations.
+        /// </summary>
+        /// <example>
+        /// In Spanish:
+        /// <code>
+        /// 1.ToOrdinalWords(WordForm.Normal) -> "primero" // As in "He llegado el primero".
+        /// 3.ToOrdinalWords(WordForm.Abbreviation) -> "tercer" // As in "Vivo en el tercer piso"
+        /// </code>
+        /// </example>
+        /// <param name="number">Number to be turned to ordinal words</param>
+        /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns>The number converted into ordinal words</returns>
+        public static string ToOrdinalWords(this int number, WordForm wordForm, CultureInfo culture = null)
+        {
+            return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, wordForm);
+        }
+
+        /// <summary>
         /// for Brazilian Portuguese locale
         /// 1.ToOrdinalWords(GrammaticalGender.Masculine) -> "primeiro"
         /// 1.ToOrdinalWords(GrammaticalGender.Feminine) -> "primeira"
@@ -32,6 +51,28 @@ namespace Humanizer
         public static string ToOrdinalWords(this int number, GrammaticalGender gender, CultureInfo culture = null)
         {
             return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
+        }
+
+        /// <summary>
+        /// Converts a number to ordinal words supporting locale's specific variations.
+        /// </summary>
+        /// <example>
+        /// In Spanish:
+        /// <code>
+        /// 3.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Normal) -> "tercero"
+        /// 3.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Abbreviation) -> "tercer"
+        /// 3.ToOrdinalWords(GrammaticalGender.Feminine, WordForm.Normal) -> "tercera"
+        /// 3.ToOrdinalWords(GrammaticalGender.Feminine, WordForm.Abbreviation) -> "tercera"
+        /// </code>
+        /// </example>
+        /// <param name="number">Number to be turned to ordinal words</param>
+        /// <param name="gender">The grammatical gender to use for output words</param>
+        /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <returns>The number converted into ordinal words</returns>
+        public static string ToOrdinalWords(this int number, GrammaticalGender gender, WordForm wordForm, CultureInfo culture = null)
+        {
+            return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender, wordForm);
         }
 
         /// <summary>
