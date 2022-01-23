@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System.Globalization;
+
+using Xunit;
 
 namespace Humanizer.Tests.Localisation.es
 {
@@ -22,15 +24,31 @@ namespace Humanizer.Tests.Localisation.es
         }
 
         [Theory]
-        [InlineData(1, "1.er")]
-        [InlineData(2, "2.º")]
-        [InlineData(3, "3.er")]
-        [InlineData(21, "21.er")]
-        [InlineData(22, "22.º")]
-        [InlineData(23, "23.er")]
-        public void OrdinalizeNeuterGender(int number, string ordinalized)
+        [InlineData(1, WordForm.Abbreviation, "1.er")]
+        [InlineData(1, WordForm.Normal, "1.º")]
+        [InlineData(2, WordForm.Abbreviation, "2.º")]
+        [InlineData(2, WordForm.Normal, "2.º")]
+        [InlineData(3, WordForm.Abbreviation, "3.er")]
+        [InlineData(3, WordForm.Normal, "3.º")]
+        [InlineData(21, WordForm.Abbreviation, "21.er")]
+        [InlineData(21, WordForm.Normal, "21.º")]
+        public void OrdinalizeWithWordForm(int number, WordForm wordForm, string expected)
         {
-            Assert.Equal(number.Ordinalize(GrammaticalGender.Neuter), ordinalized);
+            Assert.Equal(expected, number.Ordinalize(wordForm));
+            Assert.Equal(expected, number.ToString(CultureInfo.CurrentUICulture).Ordinalize(wordForm));
+        }
+
+        [Theory]
+        [InlineData(1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1.er")]
+        [InlineData(1, GrammaticalGender.Masculine, WordForm.Normal, "1.º")]
+        [InlineData(1, GrammaticalGender.Feminine, WordForm.Abbreviation, "1.ª")]
+        [InlineData(1, GrammaticalGender.Feminine, WordForm.Normal, "1.ª")]
+        [InlineData(1, GrammaticalGender.Neuter, WordForm.Abbreviation, "1.er")]
+        [InlineData(1, GrammaticalGender.Neuter, WordForm.Normal, "1.º")]
+        public void OrdinalizeWithWordFormAndGender(int number, GrammaticalGender gender, WordForm wordForm, string expected)
+        {
+            Assert.Equal(expected, number.Ordinalize(gender, wordForm));
+            Assert.Equal(expected, number.ToString(CultureInfo.CurrentUICulture).Ordinalize(gender, wordForm));
         }
 
         [Theory]
