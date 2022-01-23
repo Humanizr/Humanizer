@@ -42,6 +42,11 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
+            return ConvertToOrdinal(number, gender, WordForm.Normal);
+        }
+
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm)
+        {
             List<string> wordBuilder = new();
 
             if (number == 0 || number == int.MinValue)
@@ -67,7 +72,8 @@ namespace Humanizer.Localisation.NumberToWords
             wordBuilder.Add(ConvertTensAndHunderdsOfThousandths(number, out var remainder, gender));
             wordBuilder.Add(ConvertThousandths(remainder, out remainder, gender));
             wordBuilder.Add(ConvertHundredths(remainder, out remainder, gender));
-            wordBuilder.Add(ConvertTenths(remainder, gender));
+            wordBuilder.Add(ConvertTenths(remainder, out remainder, gender));
+            wordBuilder.Add(ConvertOrdinalUnits(remainder, gender, wordForm));
 
             return BuildWord(wordBuilder);
         }
@@ -139,32 +145,34 @@ namespace Humanizer.Localisation.NumberToWords
             return wordPart;
         }
 
-        private static string ConvertTenths(in int number, GrammaticalGender gender)
+        private static string ConvertOrdinalUnits(in int number, GrammaticalGender gender, WordForm wordForm)
         {
-            List<string> wordBuilder = new();
+            if (number is > 0 and < 10)
+            {
+                string[] ordinalsRootMap = { "" , "primer", "segund", "tercer", "cuart", "quint", "sext", "séptim",
+                "octav", "noven"};
 
+                Dictionary<GrammaticalGender, string> genderedEndingDict = new()
+                {
+                    { GrammaticalGender.Feminine, "a" },
+                    { GrammaticalGender.Masculine, HasOrdinalAbbreviation(number, wordForm) ? string.Empty : "o" },
+                };
+
+                genderedEndingDict.Add(GrammaticalGender.Neuter, genderedEndingDict[GrammaticalGender.Masculine]);
+
+                return ordinalsRootMap[number] + genderedEndingDict[gender];
+            }
+
+            return string.Empty;
+        }
+
+        private static string ConvertTenths(in int number, out int remainder, GrammaticalGender gender)
+        {
             string[] tenthsRootMap = {
                 "", "décim", "vigésim", "trigésim", "cuadragésim", "quincuagésim", "sexagésim", "septuagésim",
                 "octogésim", "nonagésim" };
 
-            string[] ordinalsRootMap = { "" , "primer", "segund", "tercer", "cuart", "quint", "sext", "séptim",
-                "octav", "noven"};
-
-            Dictionary<GrammaticalGender, string> genderedEndingDict = new()
-            {
-                { GrammaticalGender.Feminine, "a" },
-                { GrammaticalGender.Masculine, "o" },
-                { GrammaticalGender.Neuter, number != 1 && number != 3 ? "o" : string.Empty }
-            };
-
-            wordBuilder.Add(ConvertMappedOrdinalNumber(number, 10, tenthsRootMap, out var remainder, gender));
-
-            if (remainder > 0)
-            {
-                wordBuilder.Add(ordinalsRootMap[remainder] + genderedEndingDict[gender]);
-            }
-
-            return BuildWord(wordBuilder);
+            return ConvertMappedOrdinalNumber(number, 10, tenthsRootMap, out remainder, gender);
         }
 
         private static string ConvertThousandths(in int number, out int remainder, GrammaticalGender gender)
@@ -240,6 +248,11 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return map;
+        }
+
+        private static bool HasOrdinalAbbreviation(int number, WordForm wordForm)
+        {
+            return (number == 1 || number == 3) && wordForm == WordForm.Abbreviation;
         }
 
         private static bool IsRoundBillion(int number)
