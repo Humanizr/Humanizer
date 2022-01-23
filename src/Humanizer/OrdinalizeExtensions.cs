@@ -136,7 +136,7 @@ namespace Humanizer
         /// <returns>The number ordinalized</returns>
         public static string Ordinalize(this string numberString, GrammaticalGender gender, CultureInfo culture, WordForm wordForm)
         {
-            return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString, gender);
+            return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString, gender, wordForm);
         }
 
         /// <summary>
