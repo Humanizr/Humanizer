@@ -53,6 +53,8 @@ namespace Humanizer.Configuration
             Register("th-TH", new ThaiNumberToWordsConverter());
             Register("lv", new LatvianNumberToWordsConverter());
             Register("ko-KR", new KoreanNumberToWordsConverter());
+            Register("en-IN", new IndianNumberToWordsConverter());
+
         }
     }
 }
