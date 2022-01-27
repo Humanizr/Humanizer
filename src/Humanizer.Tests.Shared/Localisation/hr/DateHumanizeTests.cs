@@ -52,8 +52,13 @@ namespace Humanizer.Tests.Localisation.hr
         }
 
         [Theory]
+        [InlineData(-24, "prije 24 dana")]
+        [InlineData(-22, "prije 22 dana")]
         [InlineData(-10, "prije 10 dana")]
         [InlineData(-5, "prije 5 dana")]
+        [InlineData(-4, "prije 4 dana")]
+        [InlineData(-3, "prije 3 dana")]
+        [InlineData(-2, "prije 2 dana")]
         [InlineData(-1, "jučer")]
         public void DaysAgo(int days, string expected)
         {

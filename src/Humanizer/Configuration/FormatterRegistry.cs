@@ -59,6 +59,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("zh-Hans");
             RegisterDefaultFormatter("zh-Hant");
             RegisterDefaultFormatter("th-TH");
+            RegisterDefaultFormatter("en-IN");
         }
 
         private void RegisterDefaultFormatter(string localeCode)

@@ -297,4 +297,7 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 godina</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_DualTrialQuadral" xml:space="preserve">
+    <value>prije {0} dana</value>
+  </data>
 </root>
