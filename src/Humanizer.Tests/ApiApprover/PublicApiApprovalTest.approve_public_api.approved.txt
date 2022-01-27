@@ -664,13 +664,20 @@ namespace Humanizer
     public class static NumberToWordsExtension
     {
         public static string ToOrdinalWords(this int number, System.Globalization.CultureInfo culture = null) { }
+        public static string ToOrdinalWords(this int number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
         public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+        public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
         public static string ToTuple(this int number, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this int number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, bool addAnd, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this int number, bool addAnd, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this int number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
         public static string ToWords(this long number, System.Globalization.CultureInfo culture = null, bool addAnd = True) { }
+        public static string ToWords(this long number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null, bool addAnd = False) { }
         public static string ToWords(this long number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
+        public static string ToWords(this long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
     }
     public class On
     {
@@ -1540,13 +1547,21 @@ namespace Humanizer
     public class static OrdinalizeExtensions
     {
         public static string Ordinalize(this string numberString) { }
+        public static string Ordinalize(this string numberString, Humanizer.WordForm wordForm) { }
         public static string Ordinalize(this string numberString, System.Globalization.CultureInfo culture) { }
+        public static string Ordinalize(this string numberString, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm) { }
         public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender) { }
+        public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm) { }
         public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture) { }
+        public static string Ordinalize(this string numberString, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm) { }
         public static string Ordinalize(this int number) { }
+        public static string Ordinalize(this int number, Humanizer.WordForm wordForm) { }
         public static string Ordinalize(this int number, System.Globalization.CultureInfo culture) { }
+        public static string Ordinalize(this int number, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm) { }
         public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender) { }
+        public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm) { }
         public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture) { }
+        public static string Ordinalize(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture, Humanizer.WordForm wordForm) { }
     }
     public enum Plurality
     {
@@ -1638,6 +1653,11 @@ namespace Humanizer
     public class static TupleizeExtensions
     {
         public static string Tupleize(this int input) { }
+    }
+    public enum WordForm
+    {
+        Normal = 0,
+        Abbreviation = 1,
     }
 }
 namespace Humanizer.Bytes
@@ -1941,10 +1961,15 @@ namespace Humanizer.Localisation.NumberToWords
     public interface INumberToWordsConverter
     {
         string Convert(long number);
+        string Convert(long number, Humanizer.WordForm wordForm);
         string Convert(long number, bool addAnd);
+        string Convert(long number, bool addAnd, Humanizer.WordForm wordForm);
         string Convert(long number, Humanizer.GrammaticalGender gender, bool addAnd = True);
+        string Convert(long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, bool addAnd = True);
         string ConvertToOrdinal(int number);
+        string ConvertToOrdinal(int number, Humanizer.WordForm wordForm);
         string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
+        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
         string ConvertToTuple(int number);
     }
 }
@@ -1953,7 +1978,9 @@ namespace Humanizer.Localisation.Ordinalizers
     public interface IOrdinalizer
     {
         string Convert(int number, string numberString);
+        string Convert(int number, string numberString, Humanizer.WordForm wordForm);
         string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
+        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
     }
 }
 namespace Humanizer.Localisation.TimeToClockNotation
