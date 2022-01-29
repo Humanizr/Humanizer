@@ -6,6 +6,37 @@ namespace Humanizer.Localisation.NumberToWords
 {
     internal class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     {
+        private static readonly string[] HundredsRootMap = {
+            "cero", "ciento", "doscient", "trescient", "cuatrocient", "quinient", "seiscient", "setecient",
+            "ochocient", "novecient" };
+
+        private static readonly string[] HundredthsRootMap = {
+            "", "centésim", "ducentésim", "tricentésim", "cuadringentésim", "quingentésim", "sexcentésim",
+            "septingentésim", "octingentésim", "noningentésim" };
+
+        private static readonly string[] OrdinalsRootMap = { "" , "primer", "segund", "tercer", "cuart", "quint", "sext",
+            "séptim", "octav", "noven"};
+
+        private static readonly string[] TensMap = {
+            "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
+
+        private static readonly string[] TenthsRootMap = {
+            "", "décim", "vigésim", "trigésim", "cuadragésim", "quincuagésim", "sexagésim", "septuagésim",
+            "octogésim", "nonagésim" };
+
+        private static readonly string[] ThousandthsRootMap = {
+            "", "milésim", "dosmilésim", "tresmilésim", "cuatromilésim", "cincomilésim", "seismilésim",
+            "sietemilésim", "ochomilésim", "nuevemilésim" };
+
+        private static readonly string[] TupleMap = {
+            "cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuple", "séxtuple", "séptuple", "óctuple",
+            "nonuplo", "décuplo", "undécuplo", "duodécuplo", "terciodécuplo" };
+
+        private static readonly string[] UnitsMap = {
+            "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
+            "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
+            "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
+
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             return Convert(input, WordForm.Normal, gender, addAnd);
@@ -80,14 +111,10 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string ConvertToTuple(int number)
         {
-            string[] map = {
-                "cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuble", "séxtuple", "séptuple", "óctuple",
-                "nonupla", "décuplo", "undécuplo", "duodécuplo", "terciodécuplpo" };
-
             number = Math.Abs(number);
 
-            if (number < map.Length)
-                return map[number];
+            if (number < TupleMap.Length)
+                return TupleMap[number];
 
             return Convert(number) + " veces";
         }
@@ -118,11 +145,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static string ConvertHundredths(in int number, out int remainder, GrammaticalGender gender)
         {
-            string[] hundredthsRootMap = {
-                 "", "centésim", "ducentésim", "tricentésim", "cuadringentésim", "quingentésim", "sexcentésim",
-                 "septingentésim", "octingentésim", "noningentésim" };
-
-            return ConvertMappedOrdinalNumber(number, 100, hundredthsRootMap, out remainder, gender);
+            return ConvertMappedOrdinalNumber(number, 100, HundredthsRootMap, out remainder, gender);
         }
 
         private static string ConvertMappedOrdinalNumber(
@@ -149,9 +172,6 @@ namespace Humanizer.Localisation.NumberToWords
         {
             if (number is > 0 and < 10)
             {
-                string[] ordinalsRootMap = { "" , "primer", "segund", "tercer", "cuart", "quint", "sext", "séptim",
-                "octav", "noven"};
-
                 Dictionary<GrammaticalGender, string> genderedEndingDict = new()
                 {
                     { GrammaticalGender.Feminine, "a" },
@@ -160,7 +180,7 @@ namespace Humanizer.Localisation.NumberToWords
 
                 genderedEndingDict.Add(GrammaticalGender.Neuter, genderedEndingDict[GrammaticalGender.Masculine]);
 
-                return ordinalsRootMap[number] + genderedEndingDict[gender];
+                return OrdinalsRootMap[number] + genderedEndingDict[gender];
             }
 
             return string.Empty;
@@ -168,62 +188,33 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static string ConvertTenths(in int number, out int remainder, GrammaticalGender gender)
         {
-            string[] tenthsRootMap = {
-                "", "décim", "vigésim", "trigésim", "cuadragésim", "quincuagésim", "sexagésim", "septuagésim",
-                "octogésim", "nonagésim" };
-
-            return ConvertMappedOrdinalNumber(number, 10, tenthsRootMap, out remainder, gender);
+            return ConvertMappedOrdinalNumber(number, 10, TenthsRootMap, out remainder, gender);
         }
 
         private static string ConvertThousandths(in int number, out int remainder, GrammaticalGender gender)
         {
-            string[] thousandthsRootMap = {
-                "", "milésim", "dosmilésim", "tresmilésim", "cuatromilésim", "cincomilésim", "seismilésim",
-                "sietemilésim", "ochomilésim", "nuevemilésim" };
-
-            return ConvertMappedOrdinalNumber(number, 1000, thousandthsRootMap, out remainder, gender);
+            return ConvertMappedOrdinalNumber(number, 1000, ThousandthsRootMap, out remainder, gender);
         }
 
         private static string ConvertUnits(long inputNumber, GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
-            var genderedOne = new Dictionary<GrammaticalGender, string>()
-            {
-                { GrammaticalGender.Feminine, "una" },
-                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "un" : "uno" }
-            };
-
-            genderedOne.Add(GrammaticalGender.Neuter, genderedOne[GrammaticalGender.Masculine]);
-
-            var genderedtwentyOne = new Dictionary<GrammaticalGender, string>()
-            {
-                { GrammaticalGender.Feminine, "veintiuna" },
-                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno" }
-            };
-
-            genderedtwentyOne.Add(GrammaticalGender.Neuter, genderedtwentyOne[GrammaticalGender.Masculine]);
-
-            string[] unitsMap = {
-                "cero", genderedOne[gender], "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
-                "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", genderedtwentyOne[gender],
-                "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
-
-            string[] tensMap = {
-                "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
-
             var wordPart = string.Empty;
 
             if (inputNumber > 0)
             {
+                UnitsMap[1] = GetGenderedOne(gender, wordForm);
+                UnitsMap[21] = GetGenderedTwentyOne(gender, wordForm);
+
                 if (inputNumber < 30)
                 {
-                    wordPart = unitsMap[inputNumber];
+                    wordPart = UnitsMap[inputNumber];
                 }
                 else
                 {
-                    wordPart = tensMap[inputNumber / 10];
+                    wordPart = TensMap[inputNumber / 10];
                     if (inputNumber % 10 > 0)
                     {
-                        wordPart += $" y {unitsMap[inputNumber % 10]}";
+                        wordPart += $" y {UnitsMap[inputNumber % 10]}";
                     }
                 }
             }
@@ -234,20 +225,39 @@ namespace Humanizer.Localisation.NumberToWords
         private static IReadOnlyList<string> GetGenderedHundredsMap(GrammaticalGender gender)
         {
             var genderedEnding = gender == GrammaticalGender.Feminine ? "as" : "os";
-
-            string[] hundredsRootMap = {
-                "cero", "ciento", "doscient", "trescient", "cuatrocient", "quinient", "seiscient", "setecient",
-                "ochocient", "novecient" };
-
             var map = new List<string>();
-            map.AddRange(hundredsRootMap.Take(2));
+            map.AddRange(HundredsRootMap.Take(2));
 
-            for (var i = 2; i < hundredsRootMap.Length; i++)
+            for (var i = 2; i < HundredsRootMap.Length; i++)
             {
-                map.Add(hundredsRootMap[i] + genderedEnding);
+                map.Add(HundredsRootMap[i] + genderedEnding);
             }
 
             return map;
+        }
+
+        private static string GetGenderedOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
+        {
+            var genderedOne = new Dictionary<GrammaticalGender, string>()
+            {
+                { GrammaticalGender.Feminine, "una" },
+                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "un" : "uno" }
+            };
+
+            genderedOne.Add(GrammaticalGender.Neuter, genderedOne[GrammaticalGender.Masculine]);
+            return genderedOne[gender];
+        }
+
+        private static string GetGenderedTwentyOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
+        {
+            var genderedtwentyOne = new Dictionary<GrammaticalGender, string>()
+            {
+                { GrammaticalGender.Feminine, "veintiuna" },
+                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno" }
+            };
+
+            genderedtwentyOne.Add(GrammaticalGender.Neuter, genderedtwentyOne[GrammaticalGender.Masculine]);
+            return genderedtwentyOne[gender];
         }
 
         private static bool HasOrdinalAbbreviation(int number, WordForm wordForm)

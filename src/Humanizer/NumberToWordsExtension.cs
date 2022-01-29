@@ -263,6 +263,7 @@ namespace Humanizer
         /// </example>
         /// <param name="number">Number to be turned to words</param>
         /// <param name="wordForm">Form of the word, i.e. abbreviation</param>
+        /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>The number converted to words</returns>
         public static string ToWords(this long number, WordForm wordForm, GrammaticalGender gender, CultureInfo culture = null)
