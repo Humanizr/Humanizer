@@ -9,6 +9,7 @@ namespace Humanizer.Configuration
         {
             Register("en-US", new UsDateOnlyToOrdinalWordsConverter());
             Register("fr", new FrDateOnlyToOrdinalWordsConverter());
+            Register("es", new EsDateOnlyToOrdinalWordsConverter());
         }
     }
 }

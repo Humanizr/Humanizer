@@ -18,6 +18,7 @@ namespace Humanizer.Configuration
             Register("nb", new DefaultCollectionFormatter("og"));
             Register("sv", new DefaultCollectionFormatter("och"));
             Register("is", new DefaultCollectionFormatter("og"));
+            Register("es", new DefaultCollectionFormatter("y"));
         }
     }
 }

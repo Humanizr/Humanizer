@@ -33,7 +33,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
      - [Camelize](#camelize)
      - [Underscore](#underscore)
      - [Dasherize & Hyphenate](#dasherize--hyphenate)
-	 - [Kebaberize](#kebaberize) 
+	 - [Kebaberize](#kebaberize)
    - [Fluent date](#fluent-date)
    - [Number to Numbers](#number-to-numbers)
    - [Number to words](#number-to-words)
@@ -46,7 +46,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Heading to words](#heading-to-words)
    - [Tupleize](#tupleize)
    - [Time unit to symbol](#timeunit-to-symbol)
- - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life) - 
+ - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life) -
  - [How to contribute?](#how-to-contribute)
  - [Continuous Integration from AppVeyor](#continuous-integration)
  - [Related Projects](#related-projects)
@@ -57,9 +57,9 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
  - [Main contributors](#main-contributors)
  - [License](#license)
  - [Icon](#icon)
-  
+
 ## <a id="install">Install</a>
-You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer): 
+You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer):
 
 **English only**: `Humanizer.Core`
 
@@ -69,7 +69,7 @@ Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (
 
 Also Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
 
-For pre-release builds, [Azure Artifacts feed](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=feed&feed=Humanizer) is available where you can pull down CI packages from the latest codebase. The feed URL is: 
+For pre-release builds, [Azure Artifacts feed](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=feed&feed=Humanizer) is available where you can pull down CI packages from the latest codebase. The feed URL is:
 
   - [![Humanizer package in Humanizer feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet/5829eea4-55e5-4a15-ba8d-1de5daaafcea/_apis/public/Packaging/Feeds/b39738c7-8e60-4bfb-825f-29c47261a5cc/Packages/db81f806-d0b5-43a3-99f4-3d27606376b8/Badge)](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=package&feed=b39738c7-8e60-4bfb-825f-29c47261a5cc&package=db81f806-d0b5-43a3-99f4-3d27606376b8&preferRelease=true) `https://pkgs.dev.azure.com/dotnet/Humanizer/_packaging/Humanizer/nuget/v3/index.json`
 
@@ -82,8 +82,8 @@ Here are the options:
 
   - **All languages**: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
   - **English**: use the `Humanizer.Core` package. Only the English language resources will be available
-  - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include multiple languages by installing however many language packages you want. 
-  
+  - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include multiple languages by installing however many language packages you want.
+
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
 ## <a id="features">Features</a>
@@ -430,7 +430,7 @@ TimeSpan.FromDays(486).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year
 TimeSpan.FromDays(517).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year, 4 months, 30 days" // This month has 30 days and one day further is 1 year, 5 months
 ```
 
-When there are multiple time units, they are combined using the `", "` string: 
+When there are multiple time units, they are combined using the `", "` string:
 
 ```C#
 TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
@@ -501,7 +501,7 @@ collection.Humanize(sc => sc.SomeInt.Ordinalize(), "or") // "1st, 2nd, or 3rd"
 Items are trimmed and blank (NullOrWhitespace) items are skipped. This results in clean comma punctuation. (If there is a custom formatter function, this applies only to the formatter's output.)
 
 You can provide your own collection formatter by implementing `ICollectionFormatter` and registering it with `Configurator.CollectionFormatters`.
- 
+
 ### <a id="inflector-methods">Inflector methods</a>
 There are also a few inflector methods:
 
@@ -629,6 +629,20 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 
 Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.
 
+In addition, `Ordinalize` supports variations some cultures apply depending on the position of the ordinalized number in a sentence.
+Use the argument `wordForm` to get one result or another. Possible values are `WordForm.Abbreviation` and `WordForm.Normal`.
+You can combine `wordForm` argument with gender but passing this argument in when it is not applicable will not make any difference in the result.
+
+```C#
+// Spanish locale
+1.Ordinalize(WordForm.Abbreviation) => "1.er" // As in "Vivo en el 1.er piso"
+1.Ordinalize(WordForm.Normal) => "1.º" // As in "He llegado el 1º"
+"3".Ordinalize(GrammaticalGender.Feminine, WordForm.Abbreviation) => "3.ª"
+"3".Ordinalize(GrammaticalGender.Feminine, WordForm.Normal) => "3.ª"
+"3".Ordinalize(GrammaticalGender.Masculine, WordForm.Abbreviation) => "3.er"
+"3".Ordinalize(GrammaticalGender.Masculine, WordForm.Normal) => "3.º"
+```
+
 #### <a id="titleize">Titleize</a>
 `Titleize` converts the input words to Title casing; equivalent to `"some title".Humanize(LetterCasing.Title)`
 
@@ -662,7 +676,7 @@ Obviously this only applies to some cultures. For others passing gender in or no
 ```
 
 #### <a id="kebaberize">Kebaberize</a>
-`Kebaberize` separates the input words with hyphens and all words are converted to lowercase 
+`Kebaberize` separates the input words with hyphens and all words are converted to lowercase
 
 ```C#
 "SomeText".Kebaberize() => "some-text"
@@ -789,9 +803,23 @@ Another overload of the method allow you to pass a bool to remove the "And" that
 
 ```C#
 3501.ToWords(false) => "three thousand five hundred one"
-102.ToWords(false) => "one hundred two" 
-``` 
+102.ToWords(false) => "one hundred two"
+```
 This method can be useful for writing checks for example.
+
+Furthermore, `ToWords` supports variations some cultures apply depending on the position of the number in a sentence.
+Use the argument `wordForm` to get one result or another. Possible values are `WordForm.Abbreviation` and `WordForm.Normal`.
+This argument can be combined with the rest of the arguments presented above.
+Passing `wordForm` argument in when it is not applicable will not make any difference in the result.
+
+```C#
+// Spanish locale
+21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Masculine) => "veintiún mil quinientos un"
+21501.ToWords(WordForm.Normal, GrammaticalGender.Masculine) => "veintiún mil quinientos uno"
+21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Feminine) => "veintiuna mil quinientas una"
+// English US locale
+21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Masculine, new CultureInfo("en-US")) => "twenty-one thousand five hundred and one"
+```
 
 ### <a id="number-toordinalwords">Number to ordinal words</a>
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
@@ -842,6 +870,19 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 1.ToOrdinalWords(GrammaticalGender.Masculine, new CulureInfo("pt-BR")) => "primeiro"
 ```
 
+`ToOrdinalWords` also supports variations some cultures apply depending on the position of the ordinalized number in a sentence.
+Use the argument `wordForm` to get one result or another. Possible values are `WordForm.Abbreviation` and `WordForm.Normal`.
+Combine this argument with the rest of the arguments presented above.
+Passing `wordForm` argument in when it is not applicable will not make any difference in the result.
+
+```C#
+// Spanish locale
+43.ToOrdinalWords(WordForm.Normal, GrammaticalGender.Masculine) => "cuadragésimo tercero"
+43.ToOrdinalWords(WordForm.Abbreviation, GrammaticalGender.Masculine) => "cuadragésimo tercer"
+43.ToOrdinalWords(WordForm.Abbreviation, GrammaticalGender.Feminine) => "cuadragésima tercera"
+// English locale
+43.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Abbreviation, new CultureInfo("en")) => "forty-third"
+```
 
 ### <a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
 This is kind of an extension of Ordinalize
@@ -904,7 +945,7 @@ Also the reverse operation using the `FromRoman` extension.
 "IV".FromRoman() => 4
 "V".FromRoman() => 5
 ```
-Note that only integers smaller than 4000 can be converted to Roman numerals. 
+Note that only integers smaller than 4000 can be converted to Roman numerals.
 
 ### <a id="metric-numerals">Metric numerals</a>
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
@@ -1240,7 +1281,7 @@ modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.T
 Due to a [bug](https://github.com/dotnet/cli/issues/3396) in the CLI tools, the main `Humanizer` package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use `Humanizer.xproj` instead. It contains all of the languages.
 
 ## <a id="aspnet4mvc">Use in ASP.NET 4.x MVC Views</a>
-Humanizer is a Portable Class Library. There is currently [an issue](https://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do) if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the `web.config` file, including ones the project system normally automatically adds. 
+Humanizer is a Portable Class Library. There is currently [an issue](https://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do) if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the `web.config` file, including ones the project system normally automatically adds.
 
 If you encounter errors saying that you must add a reference to either `System.Runtime` or `System.Globalization`, this applies to you. The solution is to add the contract references to your `web.config` as listed [here](https://stackoverflow.com/a/19942274/738188). Note that this applies to any PCL you use in an MVC view, not just Humanizer.
 
