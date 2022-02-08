@@ -15,7 +15,7 @@ stages:
   jobs:
   - job: Build
     pool:
-      vmImage: windows-latest
+      vmImage: windows-2019
 
     steps:
     - task: UseDotNet@2
