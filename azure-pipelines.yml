@@ -48,13 +48,16 @@ stages:
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: build
+        command: restore
         projects: .\src\Humanizer.sln
         arguments: -c $(BuildConfiguration)
-      displayName: Build  
+      displayName: Restore
 
-    - task: NuGetToolInstaller@1  
+    - task: VSBuild@1
+      inputs:
+        solution: .\src\Humanizer.sln
 
+    - task: NuGetToolInstaller@1
     - pwsh: |
         mkdir $(Build.ArtifactStagingDirectory)\Packages
         $version = .\nbgv get-version -f json | ConvertFrom-Json
