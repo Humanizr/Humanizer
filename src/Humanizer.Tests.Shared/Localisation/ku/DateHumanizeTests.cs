@@ -6,7 +6,7 @@ namespace Humanizer.Tests.Localisation.ku
     [UseCulture("ku")]
     public class DateHumanizeTests
     {
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(-1, "دوێنێ")]
         [InlineData(-2, "2 ڕۆژ لەمەوبەر")]
         [InlineData(-3, "3 ڕۆژ لەمەوبەر")]
@@ -16,7 +16,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(1, "بەیانی")]
         [InlineData(2, "2 ڕۆژی دیکە")]
         [InlineData(10, "10 ڕۆژی دیکە")]
@@ -26,7 +26,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(-2, "2 کاتژمێر لەمەوبەر")]
         [InlineData(-1, "کاتژمێرێک لەمەوبەر")]
         [InlineData(-3, "3 کاتژمێر لەمەوبەر")]
@@ -36,7 +36,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(1, "کاتژمێرێکی دیکە")]
         [InlineData(2, "2 کاتژمێری دیکە")]
         [InlineData(10, "10 کاتژمێری دیکە")]
@@ -46,7 +46,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(-2, "2 خولەک لەمەوبەر")]
         [InlineData(-1, "خولەکێک لەمەوبەر")]
         [InlineData(-3, "3 خولەک لەمەوبەر")]
@@ -57,7 +57,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(1, "خولەکێکی دیکە")]
         [InlineData(2, "2 خولەکی دیکە")]
         [InlineData(10, "10 خولەکی دیکە")]
@@ -67,7 +67,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(-2, "2 مانگ لەمەوبەر")]
         [InlineData(-1, "مانگێک لەمەوبەر")]
         [InlineData(-3, "3 مانگ لەمەوبەر")]
@@ -77,7 +77,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(1, "مانگێکی دیکە")]
         [InlineData(2, "2 مانگی دیکە")]
         [InlineData(10, "10 مانگی دیکە")]
@@ -86,7 +86,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(-2, "2 چرکە لەمەوبەر")]
         [InlineData(-1, "چرکەیەک لەمەوبەر")]
         [InlineData(-3, "3 چرکە لەمەوبەر")]
@@ -96,7 +96,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(0, "ئێستا")]
         [InlineData(1, "چرکەیەکی دیکە")]
         [InlineData(2, "2 چرکەی دیکە")]
@@ -107,7 +107,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(-2, "2 ساڵ لەمەوبەر")]
         [InlineData(-1, "ساڵێک لەمەوبەر")]
         [InlineData(-3, "3 ساڵ لەمەوبەر")]
@@ -117,7 +117,7 @@ namespace Humanizer.Tests.Localisation.ku
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
         }
 
-        [Theory(Skip = "ku not supported on VS 2022")]
+        [Theory]
         [InlineData(1, "ساڵێکی دیکە")]
         [InlineData(2, "2 ساڵی دیکە")]
         [InlineData(7, "7 ساڵی دیکە")]
