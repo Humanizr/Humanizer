@@ -59,6 +59,7 @@ stages:
         configuration: $(BuildConfiguration)
 
     - task: NuGetToolInstaller@1
+
     - pwsh: |
         mkdir $(Build.ArtifactStagingDirectory)\Packages
         $version = .\nbgv get-version -f json | ConvertFrom-Json
