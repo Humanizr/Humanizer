@@ -11,7 +11,7 @@
     <PackageReference Include="coverlet.collector" Version="3.1.1" PrivateAssets="all" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net48' ">
