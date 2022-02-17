@@ -14,7 +14,7 @@ This project uses C# 8 language features and SDK-style projects, so you'll need 
 
 ### <a id="contribution-guideline">Contribution guideline</a>
 This project uses [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests.
-So if you want to contribute, fork the repo, preferably create a local branch, based off of the `master` branch, to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
+So if you want to contribute, fork the repo, preferably create a local branch, based off of the `main` branch, to avoid conflicts with other activities, fix an issue, run build.cmd from the root of the project, and send a PR if all is green.
 
 Pull requests are code reviewed. Here is a checklist you should tick through before submitting a pull request:
 
@@ -25,12 +25,12 @@ Pull requests are code reviewed. Here is a checklist you should tick through bef
  - If the code is copied from StackOverflow (or a blog or OSS) full disclosure is included. That includes required license files and/or file headers explaining where the code came from with proper attribution
  - There are very few or no comments (because comments shouldn't be needed if you write clean code)
  - Xml documentation is added/updated for the addition/change
- - Your PR is (re)based on top of the latest commits from the `dev` branch (more info below)
+ - Your PR is (re)based on top of the latest commits from the `main` branch (more info below)
  - Link to the issue(s) you're fixing from your PR description. Use `fixes #<the issue number>`
  - Readme is updated if you change an existing feature or add a new one
  - Run either `build.cmd` or `build.ps1` and ensure there are no test failures
 
-Please rebase your code on top of the latest `dev` branch commits.
+Please rebase your code on top of the latest `main` branch commits.
 Before working on your fork make sure you pull the latest so you work on top of the latest commits to avoid merge conflicts.
 Also before sending the pull request please rebase your code as there is a chance there have been new commits pushed after you pulled last.
 Please refer to [this guide](https://gist.github.com/jbenet/ee6c9ac48068889b0912#the-workflow) if you're new to git.
