@@ -48,12 +48,17 @@ stages:
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: build
+        command: restore
         projects: .\src\Humanizer.sln
         arguments: -c $(BuildConfiguration)
-      displayName: Build  
+      displayName: Restore
 
-    - task: NuGetToolInstaller@1  
+    - task: VSBuild@1
+      inputs:
+        solution: .\src\Humanizer.sln
+        configuration: $(BuildConfiguration)
+
+    - task: NuGetToolInstaller@1
 
     - pwsh: |
         mkdir $(Build.ArtifactStagingDirectory)\Packages
@@ -72,7 +77,7 @@ stages:
       inputs:
         command: test
         projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
+        arguments: -c $(BuildConfiguration) --no-build --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
       displayName: Run Tests
 
     - task: DotNetCoreCLI@2

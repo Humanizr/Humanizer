@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D
 	ProjectSection(SolutionItems) = preProject
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		..\build.cmd = ..\build.cmd
+		..\build.ps1 = ..\build.ps1
 		Humanizer.ruleset = Humanizer.ruleset
 	EndProjectSection
 EndProject
