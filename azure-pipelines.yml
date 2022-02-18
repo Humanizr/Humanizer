@@ -53,10 +53,12 @@ stages:
         arguments: -c $(BuildConfiguration)
       displayName: Restore
 
-    - task: VSBuild@1
+    - task: DotNetCoreCLI@2
       inputs:
-        solution: .\src\Humanizer.sln
-        configuration: $(BuildConfiguration)
+        command: build
+        projects: .\src\Humanizer.sln
+        arguments: -c $(BuildConfiguration) --no-restore
+      displayName: Build
 
     - task: NuGetToolInstaller@1
 
