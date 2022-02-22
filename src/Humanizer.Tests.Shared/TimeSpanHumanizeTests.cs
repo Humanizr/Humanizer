@@ -107,20 +107,20 @@ namespace Humanizer.Tests
             Assert.Equal(expected, actual);
         }
 
-
         [Theory]
-        [InlineData(135, "2 minutes")]
-        [InlineData(60, "1 minute")]
-        [InlineData(2, "2 seconds")]
-        [InlineData(1, "1 second")]
-        [InlineData(-135, "2 minutes")]
-        [InlineData(-60, "1 minute")]
-        [InlineData(-2, "2 seconds")]
-        [InlineData(-1, "1 second")]
-        public void Seconds(int seconds, string expected)
+        [InlineData(135, "2 minutes", "2 mins", "2s")]
+        [InlineData(60, "1 minute", "1 min", "1m")]
+        [InlineData(2, "2 seconds", "2 secs", "2s")]
+        [InlineData(1, "1 second", "1 sec", "1s")]
+        [InlineData(-135, "2 minutes", "2 mins", "2m")]
+        [InlineData(-60, "1 minute", "1 min", "1m")]
+        [InlineData(-2, "2 seconds", "2 secs", "2s")]
+        [InlineData(-1, "1 second", "1 sec", "1s")]
+        public void Seconds(int seconds, string expectedNormal, string expectedShort, string expectedSingle)
         {
-            var actual = TimeSpan.FromSeconds(seconds).Humanize();
-            Assert.Equal(expected, actual);
+            Assert.Equal(expectedNormal, TimeSpan.FromSeconds(seconds).Humanize());
+            Assert.Equal(expectedShort, TimeSpan.FromSeconds(seconds).Humanize(timeSpanFormat: TimeSpanFormat.Short));
+            Assert.Equal(expectedSingle, TimeSpan.FromSeconds(seconds).Humanize(timeSpanFormat: TimeSpanFormat.Single));
         }
 
         [Theory]
