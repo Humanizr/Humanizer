@@ -13,9 +13,9 @@ namespace Humanizer
     /// </summary>
     public static class TimeSpanHumanizeExtensions
     {
-        private const int _daysInAWeek = 7;
-        private const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
-        private const double _daysInAMonth = _daysInAYear / 12;
+        private const int DaysInAWeek = 7;
+        private const double DaysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
+        private const double DaysInAMonth = DaysInAYear / 12;
 
         /// <summary>
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
@@ -125,25 +125,25 @@ namespace Humanizer
         {
             if (isTimeUnitToGetTheMaximumTimeUnit)
             {
-                return (int)(timespan.Days / _daysInAMonth);
+                return (int)(timespan.Days / DaysInAMonth);
             }
             else
             {
-                var remainingDays = timespan.Days % _daysInAYear;
-                return (int)(remainingDays / _daysInAMonth);
+                var remainingDays = timespan.Days % DaysInAYear;
+                return (int)(remainingDays / DaysInAMonth);
             }
         }
 
         private static int GetSpecialCaseYearAsInteger(TimeSpan timespan)
         {
-            return (int)(timespan.Days / _daysInAYear);
+            return (int)(timespan.Days / DaysInAYear);
         }
 
         private static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
         {
-            if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < _daysInAMonth)
+            if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < DaysInAMonth)
             {
-                return timespan.Days / _daysInAWeek;
+                return timespan.Days / DaysInAWeek;
             }
             return 0;
         }
@@ -154,12 +154,12 @@ namespace Humanizer
             {
                 return timespan.Days;
             }
-            if (timespan.Days < _daysInAMonth || maximumTimeUnit == TimeUnit.Week)
+            if (timespan.Days < DaysInAMonth || maximumTimeUnit == TimeUnit.Week)
             {
-                var remainingDays = timespan.Days % _daysInAWeek;
+                var remainingDays = timespan.Days % DaysInAWeek;
                 return remainingDays;
             }
-            return (int)(timespan.Days % _daysInAMonth);
+            return (int)(timespan.Days % DaysInAMonth);
         }
 
         private static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)
