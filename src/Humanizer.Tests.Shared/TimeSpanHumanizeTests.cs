@@ -119,8 +119,8 @@ namespace Humanizer.Tests
         public void Seconds(int seconds, string expectedNormal, string expectedShort, string expectedSingle)
         {
             Assert.Equal(expectedNormal, TimeSpan.FromSeconds(seconds).Humanize());
-            Assert.Equal(expectedShort, TimeSpan.FromSeconds(seconds).Humanize(timeSpanFormat: TimeSpanFormat.Short));
-            Assert.Equal(expectedSingle, TimeSpan.FromSeconds(seconds).Humanize(timeSpanFormat: TimeSpanFormat.Single));
+            Assert.Equal(expectedShort, TimeSpan.FromSeconds(seconds).Humanize(timeSpanStyle: TimeSpanStyle.Abbreviated));
+            Assert.Equal(expectedSingle, TimeSpan.FromSeconds(seconds).Humanize(timeSpanStyle: TimeSpanStyle.Short));
         }
 
         [Theory]

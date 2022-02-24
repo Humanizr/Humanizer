@@ -10,6 +10,27 @@ using Humanizer.Localisation.Formatters;
 namespace Humanizer
 {
     /// <summary>
+    /// Style for the time span unit humanization
+    /// </summary>
+    public enum TimeSpanStyle
+    {
+        /// <summary>
+        /// Returns the full format, eg 1 year, 2 months, 2 days, 5 hours, 56 minutes, 12 seconds
+        /// </summary>
+        Full,
+
+        /// <summary>
+        /// Returns an abbreviated format, eg 1 yr, 2 mos, 2 days, 5 hrs, 56 mins, 12 secs
+        /// </summary>
+        Abbreviated,
+
+        /// <summary>
+        /// Returns a short format, eg 1y, 2m, 2d, 5h, 56m, 12s
+        /// </summary>
+        Short
+    }
+
+    /// <summary>
     /// Humanizes TimeSpan into human readable form
     /// </summary>
     public static class TimeSpanHumanizeExtensions
@@ -28,9 +49,9 @@ namespace Humanizer
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
-        /// <param name="timeSpanFormat">Use normal, short or single unit verbosity</param>
+        /// <param name="timeSpanStyle">Use full, abbreviated or short time unit style</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false, TimeSpanFormat timeSpanFormat = TimeSpanFormat.Normal)
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
             return Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords);
         }
@@ -46,9 +67,9 @@ namespace Humanizer
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
-        /// <param name="timeSpanFormat">Use normal, short or single unit verbosity</param>
+        /// <param name="timeSpanStyle">Use full, abbreviated or short time unit style</param>
         /// <returns></returns>
-        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false, TimeSpanFormat timeSpanFormat = TimeSpanFormat.Normal)
+        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
             var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit, toWords);
             timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
