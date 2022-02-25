@@ -1883,6 +1883,9 @@ namespace Humanizer.Localisation
         {
             public const string Never = "DateHumanize_Never";
             public const string Now = "DateHumanize_Now";
+            public const string SingleDay = "DateHumanize_SingleDay";
+            public const string SingleDayAgo = "DateHumanize_SingleDayAgo";
+            public const string SingleDayFromNow = "DateHumanize_SingleDayFromNow";
             public static string GetResourceKey(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int count = 1) { }
         }
         public class static TimeSpanHumanize

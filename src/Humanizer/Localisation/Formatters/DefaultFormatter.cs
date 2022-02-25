@@ -93,7 +93,18 @@ namespace Humanizer.Localisation.Formatters
         private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
             var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
-            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+            if (resourceKey == ResourceKeys.DateHumanize.SingleDay)
+            {
+                return Format(timeUnitTense == Tense.Future ? ResourceKeys.DateHumanize.SingleDayFromNow : ResourceKeys.DateHumanize.SingleDayAgo);
+            }
+            var unitValue = count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+            if (resourceKey == ResourceKeys.DateHumanize.Now)
+            {
+                return unitValue;
+            }
+            var tenseKey = timeUnitTense == Tense.Future ? "DateHumanize_FromNow" : "DateHumanize_Ago";
+            var tenseValue = Format(tenseKey);
+            return tenseValue.FormatWith(unitValue);
         }
 
         private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
