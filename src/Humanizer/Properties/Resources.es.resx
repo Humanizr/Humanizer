@@ -117,41 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>hace un segundo</value>
+  <data name="DateHumanize_Ago" xml:space="preserve">
+    <value>hace {0}</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>hace {0} segundos</value>
+  <data name="DateHumanize_SingleSecond" xml:space="preserve">
+    <value>un segundo</value>
   </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>hace un minuto</value>
+  <data name="DateHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} segundos</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>hace {0} minutos</value>
+  <data name="DateHumanize_SingleMinute" xml:space="preserve">
+    <value>un minuto</value>
   </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>hace una hora</value>
+  <data name="DateHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} minutos</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>hace {0} horas</value>
+  <data name="DateHumanize_SingleHour" xml:space="preserve">
+    <value>una hora</value>
+  </data>
+  <data name="DateHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} horas</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ayer</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>hace {0} días</value>
+  <data name="DateHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} días</value>
   </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>hace un mes</value>
+  <data name="DateHumanize_SingleMonth" xml:space="preserve">
+    <value>un mes</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
-    <value>hace {0} meses</value>
+  <data name="DateHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} meses</value>
   </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>hace un año</value>
+  <data name="DateHumanize_SingleYear" xml:space="preserve">
+    <value>un año</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
-    <value>hace {0} años</value>
+  <data name="DateHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} años</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} días</value>
@@ -192,41 +195,11 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>nada</value>
   </data>
-  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>en {0} días</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>en {0} horas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>en {0} minutos</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>en {0} meses</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>en {0} segundos</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>en {0} años</value>
+  <data name="DateHumanize_FromNow" xml:space="preserve">
+    <value>en {0}</value>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>mañana</value>
-  </data>
-  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>en una hora</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>en un minuto</value>
-  </data>
-  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>en un mes</value>
-  </data>
-  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>en un segundo</value>
-  </data>
-  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>en un año</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>ahora</value>
