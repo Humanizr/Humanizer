@@ -71,6 +71,19 @@ namespace Humanizer.Tests
             Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
         }
 
+        [Theory]
+        [InlineData("a")]
+        [InlineData("A")]
+        [InlineData("s")]
+        [InlineData("S")]
+        [InlineData("z")]
+        [InlineData("Z")]
+        [InlineData("1")]
+        public void SingularizeSingleLetter(string input)
+        {
+            Assert.Equal(input, input.Singularize());
+        }
+
         //Uppercases individual words and removes some characters 
         [Theory]
         [InlineData("some title", "Some Title")]
@@ -280,6 +293,7 @@ namespace Humanizer.Tests
             yield return new object[] { "alumna", "alumnae" };
             yield return new object[] { "alumnus", "alumni" };
             yield return new object[] { "fungus", "fungi" };
+
             yield return new object[] { "water", "water" };
             yield return new object[] { "waters", "waters" };
             yield return new object[] { "semen", "semen" };
@@ -377,11 +391,18 @@ namespace Humanizer.Tests
             yield return new object[] { "hoe", "hoes" };
             yield return new object[] { "toe", "toes" };
             yield return new object[] { "woe", "woes" };
-            // Duplicated test case - Already added by Bas Jansen
-            // yield return new object[] { "potato", "potatoes" };
 
-            //Issue 1132
+            //Issue #1132
             yield return new object[] { "metadata", "metadata" };
+
+            //Issue #1154
+            yield return new object[] { "a", "as" };
+            yield return new object[] { "A", "As" };
+            yield return new object[] { "s", "ss" };
+            yield return new object[] { "S", "Ss" };
+            yield return new object[] { "z", "zs" };
+            yield return new object[] { "Z", "Zs" };
+            yield return new object[] { "1", "1s" };
         }
 
         IEnumerator IEnumerable.GetEnumerator()

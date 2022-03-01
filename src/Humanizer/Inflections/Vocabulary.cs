@@ -17,6 +17,7 @@ namespace Humanizer.Inflections
         private readonly List<Rule> _plurals = new List<Rule>();
         private readonly List<Rule> _singulars = new List<Rule>();
         private readonly List<string> _uncountables = new List<string>();
+        private readonly Regex _letterS = new Regex("^([sS])[sS]*$");
 
         /// <summary>
         /// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx, e.g. "person" and "people".
@@ -75,6 +76,12 @@ namespace Humanizer.Inflections
         /// <returns></returns>
         public string Pluralize(string word, bool inputIsKnownToBeSingular = true)
         {
+            var s = LetterS(word);
+            if (s != null)
+            {
+                return s + "s";
+            }
+
             var result = ApplyRules(_plurals, word, false);
 
             if (inputIsKnownToBeSingular)
@@ -101,6 +108,12 @@ namespace Humanizer.Inflections
         /// <returns></returns>
         public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
         {
+            var s = LetterS(word);
+            if (s != null)
+            {
+                return s;
+            }
+
             var result = ApplyRules(_singulars, word, skipSimpleWords);
 
             if (inputIsKnownToBePlural)
@@ -156,6 +169,15 @@ namespace Humanizer.Inflections
         private string MatchUpperCase(string word, string replacement)
         {
             return char.IsUpper(word[0]) && char.IsLower(replacement[0]) ? char.ToUpper(replacement[0]) + replacement.Substring(1) : replacement;
+        }
+
+        /// <summary>
+        /// If the word is the letter s, singular or plural, return the letter s singular
+        /// </summary>
+        private string LetterS(string word)
+        {
+            var s = _letterS.Match(word);
+            return s.Groups.Count > 1 ? s.Groups[1].Value : null;
         }
 
         private class Rule
