@@ -55,7 +55,7 @@ namespace Humanizer.Localisation.Formatters
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
         public virtual string TimeSpanHumanize_Zero()
         {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, true);
+            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, true, TimeSpanStyle.Full);
         }
 
         /// <summary>
@@ -64,11 +64,12 @@ namespace Humanizer.Localisation.Formatters
         /// <param name="timeUnit">A time unit to represent.</param>
         /// <param name="unit"></param>
         /// <param name="toWords"></param>
+        /// <param name="timeSpanStyle"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false)
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
-            return GetResourceForTimeSpan(timeUnit, unit, toWords);
+            return GetResourceForTimeSpan(timeUnit, unit, toWords, timeSpanStyle);
         }
 
         /// <inheritdoc cref="IFormatter.DataUnitHumanize(DataUnit, double, bool)"/>
@@ -96,9 +97,13 @@ namespace Humanizer.Localisation.Formatters
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
+        private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords, TimeSpanStyle timeSpanStyle)
         {
-            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
+            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords, timeSpanStyle);
+
+            // TODO I think toWords and timeSpanStyle are exclusive, so short combine into TimeSpanStyle.Words instead
+            // That can be done in the method above, not below
+
             return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
         }
 
