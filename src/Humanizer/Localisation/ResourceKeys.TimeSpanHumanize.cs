@@ -38,8 +38,8 @@
                     {
                         TimeSpanStyle.Short => "_Short",
                         TimeSpanStyle.Abbreviated => "_Abb",
-                        TimeSpanStyle.Words => "_Words",
-                        _ => string.Empty
+                        TimeSpanStyle.Words => count == 1 ? "_Words" : "", // only Single has _Words resource
+                        _ => ""
                     });
             }
         }
