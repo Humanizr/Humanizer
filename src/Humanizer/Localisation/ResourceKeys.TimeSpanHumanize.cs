@@ -19,14 +19,13 @@
             /// </summary>
             /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
             /// <param name="count">Number of units, default is One.</param>
-            /// <param name="toWords">Result to words, default is false.</param>
             /// <param name="timeSpanStyle"></param>
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
-            public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
+            public static string GetResourceKey(TimeUnit unit, int count = 1, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
             {
                 ValidateRange(count);
 
-                if (count == 0 && toWords)
+                if (count == 0 && timeSpanStyle == TimeSpanStyle.Words)
                 {
                     return Zero;
                 }
@@ -39,6 +38,7 @@
                     {
                         TimeSpanStyle.Short => "_Short",
                         TimeSpanStyle.Abbreviated => "_Abb",
+                        TimeSpanStyle.Words => "_Words",
                         _ => string.Empty
                     });
             }

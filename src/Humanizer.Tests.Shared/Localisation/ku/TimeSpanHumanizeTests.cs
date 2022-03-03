@@ -85,7 +85,7 @@ namespace Humanizer.Tests.Localisation.ku
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("ئێستا", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("ئێستا", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

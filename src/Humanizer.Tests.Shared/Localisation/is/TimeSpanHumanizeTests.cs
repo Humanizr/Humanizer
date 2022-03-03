@@ -26,7 +26,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(4018, "ellefu ár")]
         public void YearsToWords(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year,toWords:true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year, timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
@@ -48,7 +48,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(335, "ellefu mánuðir")]
         public void MonthsToWords(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year,toWords:true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year, timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
@@ -68,7 +68,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(77, "ellefu vikur")]
         public void WeeksToWords(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords: true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
 
@@ -85,7 +85,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(2, "tveir dagar")]
         public void DaysToWords(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords: true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
@@ -101,7 +101,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(2, "tvær klukkustundir")]
         public void HoursToWords(int hours, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize(toWords: true));
+            Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
@@ -117,7 +117,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(2, "tvær mínútur")]
         public void MinutesToWords(int minutes, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize(toWords: true));
+            Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
 
@@ -134,7 +134,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(2, "tvær sekúndur")]
         public void SecondsToWords(int seconds, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize(toWords: true));
+            Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
@@ -150,7 +150,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(2, "tvær millisekúndur")]
         public void MillisecondsToWords(int milliseconds, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize(toWords: true));
+            Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Fact]
@@ -163,14 +163,14 @@ namespace Humanizer.Tests.Localisation.@is
         public void NoTimeToWords()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("engin stund", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("engin stund", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
         [InlineData(1299630020, 5, "tvær vikur, einn dagur, ein klukkustund, þrjátíu sekúndur, tuttugu millisekúndur")]
         public void TimeSpanWithNumbersConvertedToWords(int milliseconds, int precision, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, toWords: true);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
     }

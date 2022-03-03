@@ -117,7 +117,7 @@ namespace Humanizer.Tests.Localisation.nl
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("geen tijd", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("geen tijd", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

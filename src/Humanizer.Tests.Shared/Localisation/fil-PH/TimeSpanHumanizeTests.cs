@@ -93,7 +93,7 @@ namespace Humanizer.Tests.Localisation.filPH
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("walang oras", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("walang oras", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

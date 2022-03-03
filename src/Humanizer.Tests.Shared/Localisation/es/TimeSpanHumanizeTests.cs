@@ -118,7 +118,7 @@ namespace Humanizer.Tests.Localisation.es
         public void ComplexTimeSpan(int days, int hours, int minutes, int seconds, int precision, string expected)
         {
             var timeSpan = new TimeSpan(days, hours, minutes, seconds);
-            Assert.Equal(expected, timeSpan.Humanize(precision, toWords: true));
+            Assert.Equal(expected, timeSpan.Humanize(precision, timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Fact]
@@ -132,7 +132,7 @@ namespace Humanizer.Tests.Localisation.es
         public void NoTimeToWords()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("nada", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("nada", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Fact]
@@ -280,11 +280,11 @@ namespace Humanizer.Tests.Localisation.es
 
         [Theory]
         [InlineData(10, "10 milisegundos", TimeUnit.Millisecond)]
-        [InlineData(10, "nada", TimeUnit.Second, true)]
-        [InlineData(10, "nada", TimeUnit.Minute, true)]
-        [InlineData(10, "nada", TimeUnit.Hour, true)]
-        [InlineData(10, "nada", TimeUnit.Day, true)]
-        [InlineData(10, "nada", TimeUnit.Week, true)]
+        [InlineData(10, "nada", TimeUnit.Second, TimeSpanStyle.Words)]
+        [InlineData(10, "nada", TimeUnit.Minute, TimeSpanStyle.Words)]
+        [InlineData(10, "nada", TimeUnit.Hour, TimeSpanStyle.Words)]
+        [InlineData(10, "nada", TimeUnit.Day, TimeSpanStyle.Words)]
+        [InlineData(10, "nada", TimeUnit.Week, TimeSpanStyle.Words)]
         [InlineData(10, "0 segundos", TimeUnit.Second)]
         [InlineData(10, "0 minutos", TimeUnit.Minute)]
         [InlineData(10, "0 horas", TimeUnit.Hour)]
@@ -292,10 +292,10 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(10, "0 semanas", TimeUnit.Week)]
         [InlineData(2500, "2 segundos, 500 milisegundos", TimeUnit.Millisecond)]
         [InlineData(2500, "2 segundos", TimeUnit.Second)]
-        [InlineData(2500, "nada", TimeUnit.Minute, true)]
-        [InlineData(2500, "nada", TimeUnit.Hour, true)]
-        [InlineData(2500, "nada", TimeUnit.Day, true)]
-        [InlineData(2500, "nada", TimeUnit.Week, true)]
+        [InlineData(2500, "nada", TimeUnit.Minute, TimeSpanStyle.Words)]
+        [InlineData(2500, "nada", TimeUnit.Hour, TimeSpanStyle.Words)]
+        [InlineData(2500, "nada", TimeUnit.Day, TimeSpanStyle.Words)]
+        [InlineData(2500, "nada", TimeUnit.Week, TimeSpanStyle.Words)]
         [InlineData(2500, "0 minutos", TimeUnit.Minute)]
         [InlineData(2500, "0 horas", TimeUnit.Hour)]
         [InlineData(2500, "0 días", TimeUnit.Day)]
@@ -303,9 +303,9 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(122500, "2 minutos, 2 segundos, 500 milisegundos", TimeUnit.Millisecond)]
         [InlineData(122500, "2 minutos, 2 segundos", TimeUnit.Second)]
         [InlineData(122500, "2 minutos", TimeUnit.Minute)]
-        [InlineData(122500, "nada", TimeUnit.Hour, true)]
-        [InlineData(122500, "nada", TimeUnit.Day, true)]
-        [InlineData(122500, "nada", TimeUnit.Week, true)]
+        [InlineData(122500, "nada", TimeUnit.Hour, TimeSpanStyle.Words)]
+        [InlineData(122500, "nada", TimeUnit.Day, TimeSpanStyle.Words)]
+        [InlineData(122500, "nada", TimeUnit.Week, TimeSpanStyle.Words)]
         [InlineData(122500, "0 horas", TimeUnit.Hour)]
         [InlineData(122500, "0 días", TimeUnit.Day)]
         [InlineData(122500, "0 semanas", TimeUnit.Week)]
@@ -313,8 +313,8 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(3722500, "1 hora, 2 minutos, 2 segundos", TimeUnit.Second)]
         [InlineData(3722500, "1 hora, 2 minutos", TimeUnit.Minute)]
         [InlineData(3722500, "1 hora", TimeUnit.Hour)]
-        [InlineData(3722500, "nada", TimeUnit.Day, true)]
-        [InlineData(3722500, "nada", TimeUnit.Week, true)]
+        [InlineData(3722500, "nada", TimeUnit.Day, TimeSpanStyle.Words)]
+        [InlineData(3722500, "nada", TimeUnit.Week, TimeSpanStyle.Words)]
         [InlineData(3722500, "0 días", TimeUnit.Day)]
         [InlineData(3722500, "0 semanas", TimeUnit.Week)]
         [InlineData(90122500, "1 día, 1 hora, 2 minutos, 2 segundos, 500 milisegundos", TimeUnit.Millisecond)]
@@ -322,7 +322,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(90122500, "1 día, 1 hora, 2 minutos", TimeUnit.Minute)]
         [InlineData(90122500, "1 día, 1 hora", TimeUnit.Hour)]
         [InlineData(90122500, "1 día", TimeUnit.Day)]
-        [InlineData(90122500, "nada", TimeUnit.Week, true)]
+        [InlineData(90122500, "nada", TimeUnit.Week, TimeSpanStyle.Words)]
         [InlineData(90122500, "0 semanas", TimeUnit.Week)]
         [InlineData(694922500, "1 semana, 1 día, 1 hora, 2 minutos, 2 segundos, 500 milisegundos", TimeUnit.Millisecond)]
         [InlineData(694922500, "1 semana, 1 día, 1 hora, 2 minutos, 2 segundos", TimeUnit.Second)]
@@ -337,7 +337,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(2768462500, "1 mes, 1 día", TimeUnit.Day)]
         [InlineData(2768462500, "1 mes", TimeUnit.Week)]
         [InlineData(2768462500, "1 mes", TimeUnit.Month)]
-        [InlineData(2768462500, "nada", TimeUnit.Year, true)]
+        [InlineData(2768462500, "nada", TimeUnit.Year, TimeSpanStyle.Words)]
         [InlineData(2768462500, "0 años", TimeUnit.Year)]
         [InlineData(34390862500, "1 año, 1 mes, 2 días, 1 hora, 1 minuto, 2 segundos, 500 milisegundos", TimeUnit.Millisecond)]
         [InlineData(34390862500, "1 año, 1 mes, 2 días, 1 hora, 1 minuto, 2 segundos", TimeUnit.Second)]
@@ -347,15 +347,15 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(34390862500, "1 año, 1 mes", TimeUnit.Week)]
         [InlineData(34390862500, "1 año, 1 mes", TimeUnit.Month)]
         [InlineData(34390862500, "1 año", TimeUnit.Year)]
-        public void TimeSpanWithMinTimeUnit(long ms, string expected, TimeUnit minUnit, bool toWords = false)
+        public void TimeSpanWithMinTimeUnit(long ms, string expected, TimeUnit minUnit, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize(minUnit: minUnit, precision: 7, maxUnit: TimeUnit.Year, toWords: toWords);
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(minUnit: minUnit, precision: 7, maxUnit: TimeUnit.Year, timeSpanStyle: timeSpanStyle);
             Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData(0, 3, "nada", true)]
-        [InlineData(0, 2, "nada", true)]
+        [InlineData(0, 3, "nada", TimeSpanStyle.Words)]
+        [InlineData(0, 2, "nada", TimeSpanStyle.Words)]
         [InlineData(0, 3, "0 milisegundos")]
         [InlineData(0, 2, "0 milisegundos")]
         [InlineData(10, 2, "10 milisegundos")]
@@ -398,9 +398,9 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(34390862500, 3, "1 año, 1 mes, 2 días")]
         [InlineData(34390862500, 2, "1 año, 1 mes")]
         [InlineData(34390862500, 1, "1 año")]
-        public void TimeSpanWithPrecision(long milliseconds, int precision, string expected, bool toWords = false)
+        public void TimeSpanWithPrecision(long milliseconds, int precision, string expected, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, maxUnit: TimeUnit.Year, toWords: toWords);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, maxUnit: TimeUnit.Year, timeSpanStyle: timeSpanStyle);
             Assert.Equal(expected, actual);
         }
 
@@ -425,8 +425,8 @@ namespace Humanizer.Tests.Localisation.es
         }
 
         [Theory]
-        [InlineData(0, 3, "nada", true)]
-        [InlineData(0, 2, "nada", true)]
+        [InlineData(0, 3, "nada", TimeSpanStyle.Words)]
+        [InlineData(0, 2, "nada", TimeSpanStyle.Words)]
         [InlineData(0, 3, "0 milisegundos")]
         [InlineData(0, 2, "0 milisegundos")]
         [InlineData(10, 2, "10 milisegundos")]
@@ -462,15 +462,15 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(1299630020, 4, "2 semanas, 1 día, 1 hora")]
         [InlineData(1299630020, 5, "2 semanas, 1 día, 1 hora, 30 segundos")]
         [InlineData(1299630020, 6, "2 semanas, 1 día, 1 hora, 30 segundos, 20 milisegundos")]
-        public void TimeSpanWithPrecisionAndCountingEmptyUnits(int milliseconds, int precision, string expected, bool toWords = false)
+        public void TimeSpanWithPrecisionAndCountingEmptyUnits(int milliseconds, int precision, string expected, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision: precision, countEmptyUnits: true, toWords: toWords);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision: precision, countEmptyUnits: true, timeSpanStyle: timeSpanStyle);
             Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData(0, 3, "nada", true)]
-        [InlineData(0, 2, "nada", true)]
+        [InlineData(0, 3, "nada", TimeSpanStyle.Words)]
+        [InlineData(0, 2, "nada", TimeSpanStyle.Words)]
         [InlineData(0, 3, "0 milisegundos")]
         [InlineData(0, 2, "0 milisegundos")]
         [InlineData(10, 2, "10 milisegundos")]
@@ -501,9 +501,9 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(1299630020, 4, "2 semanas, 1 día, 1 hora y 30 segundos")]
         [InlineData(1299630020, 5, "2 semanas, 1 día, 1 hora, 30 segundos y 20 milisegundos")]
         public void TimeSpanWithPrecisionAndAlternativeCollectionFormatter(int milliseconds, int precision,
-            string expected, bool toWords = false)
+            string expected, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, collectionSeparator: null, toWords: toWords);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, collectionSeparator: null, timeSpanStyle: timeSpanStyle);
             Assert.Equal(expected, actual);
         }
 
@@ -539,7 +539,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(1299630020, 5, "dos semanas, un día, una hora, treinta segundos, veinte milisegundos")]
         public void TimeSpanWithNumbersConvertedToWords(int milliseconds, int precision, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, toWords: true);
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
     }

@@ -94,7 +94,7 @@ namespace Humanizer.Tests.Localisation.mt
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("xejn", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("xejn", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

@@ -86,7 +86,7 @@ namespace Humanizer.Tests.Localisation.bg
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("няма време", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("няма време", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

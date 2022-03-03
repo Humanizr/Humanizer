@@ -88,7 +88,7 @@ namespace Humanizer.Tests.Localisation.it
         public void NoTimeToWords()
         {
             // This does not make much sense in italian, anyway
-            Assert.Equal("0 secondi", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("0 secondi", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

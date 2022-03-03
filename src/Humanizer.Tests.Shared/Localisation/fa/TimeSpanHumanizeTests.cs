@@ -86,7 +86,7 @@ namespace Humanizer.Tests.Localisation.fa
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("الآن", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("الآن", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

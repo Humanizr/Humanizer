@@ -106,7 +106,7 @@ namespace Humanizer.Tests.Localisation.sl
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("nič časa", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("nič časa", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

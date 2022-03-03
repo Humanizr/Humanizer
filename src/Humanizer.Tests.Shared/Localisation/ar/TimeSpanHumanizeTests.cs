@@ -98,7 +98,7 @@ namespace Humanizer.Tests.Localisation.ar
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("حالاً", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("حالاً", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

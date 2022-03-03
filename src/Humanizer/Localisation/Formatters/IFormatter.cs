@@ -39,10 +39,9 @@
         /// </summary>
         /// <param name="timeUnit"></param>
         /// <param name="unit"></param>
-        /// <param name="toWords"></param>
         /// <param name="timeSpanStyle"></param>
         /// <returns></returns>
-        string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full);
+        string TimeSpanHumanize(TimeUnit timeUnit, int unit, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full);
 
         /// <summary>
         /// Returns the string representation of the provided DataUnit, either as a symbol or full word

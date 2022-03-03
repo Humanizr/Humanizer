@@ -89,7 +89,7 @@ namespace Humanizer.Tests.Localisation.el
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("μηδέν χρόνος", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("μηδέν χρόνος", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

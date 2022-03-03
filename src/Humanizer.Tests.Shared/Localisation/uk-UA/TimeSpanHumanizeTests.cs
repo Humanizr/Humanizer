@@ -147,7 +147,7 @@ namespace Humanizer.Tests.Localisation.ukUA
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("без часу", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("без часу", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

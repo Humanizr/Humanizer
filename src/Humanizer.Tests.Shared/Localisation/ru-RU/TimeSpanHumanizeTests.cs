@@ -148,7 +148,7 @@ namespace Humanizer.Tests.Localisation.ruRU
         public void NoTimeToWords()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("нет времени", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("нет времени", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }
