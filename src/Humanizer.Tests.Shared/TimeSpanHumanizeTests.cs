@@ -108,20 +108,17 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(135, "2 minutes", "2 minutes", "2 mins", "2s")]
-        [InlineData(60, "1 minute", "one minute", "1 min", "1m")]
-        [InlineData(2, "2 seconds", "2 seconds", "2 secs", "2s")]
-        [InlineData(1, "1 second", "one second", "1 sec", "1s")]
-        [InlineData(-135, "2 minutes", "2 minutes", "2 mins", "2m")]
-        [InlineData(-60, "1 minute", "one minute", "1 min", "1m")]
-        [InlineData(-2, "2 seconds", "2 seconds", "2 secs", "2s")]
-        [InlineData(-1, "1 second", "one second", "1 sec", "1s")]
-        public void Seconds(int seconds, string expectedFull, string expectedWords, string expectedShort, string expectedSingle)
+        [InlineData(135, "2 minutes")]
+        [InlineData(60, "1 minute")]
+        [InlineData(2, "2 seconds")]
+        [InlineData(1, "1 second")]
+        [InlineData(-135, "2 minutes")]
+        [InlineData(-60, "1 minute")]
+        [InlineData(-2, "2 seconds")]
+        [InlineData(-1, "1 second")]
+        public void Seconds(int seconds, string expected)
         {
-            Assert.Equal(expectedFull, TimeSpan.FromSeconds(seconds).Humanize());
-            Assert.Equal(expectedWords, TimeSpan.FromSeconds(seconds).Humanize(timeSpanStyle: TimeSpanStyle.Words));
-            Assert.Equal(expectedShort, TimeSpan.FromSeconds(seconds).Humanize(timeSpanStyle: TimeSpanStyle.Abbreviated));
-            Assert.Equal(expectedSingle, TimeSpan.FromSeconds(seconds).Humanize(timeSpanStyle: TimeSpanStyle.Short));
+            Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
         }
 
         [Theory]
@@ -415,6 +412,18 @@ namespace Humanizer.Tests
         public void TimeSpanWithNumbersConvertedToWords(int milliseconds, int precision, string expected)
         {
             var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, timeSpanStyle: TimeSpanStyle.Words);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(1000, TimeSpanStyle.Full, "1 second")]
+        [InlineData(1000, TimeSpanStyle.Words, "one second")]
+        [InlineData(1000, TimeSpanStyle.Abbreviated, "1 sec")]
+        [InlineData(1000, TimeSpanStyle.Short, "1s")]
+        // TODO lots more
+        public void TimeSpanWithStyle(int milliseconds, TimeSpanStyle timeSpanStyle, string expected)
+        {
+            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(timeSpanStyle: timeSpanStyle);
             Assert.Equal(expected, actual);
         }
 
