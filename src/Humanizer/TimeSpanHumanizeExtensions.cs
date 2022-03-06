@@ -30,7 +30,7 @@ namespace Humanizer
         Abbreviated,
 
         /// <summary>
-        /// Returns a short format, eg 1y, 2m, 2d, 5h, 56m, 12s
+        /// Returns a short format, eg 1y, 2M, 2d, 5h, 56m, 12s
         /// </summary>
         Short
     }

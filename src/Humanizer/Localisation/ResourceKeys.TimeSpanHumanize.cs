@@ -37,7 +37,7 @@
                     timeSpanStyle switch
                     {
                         TimeSpanStyle.Short => "_Short",
-                        TimeSpanStyle.Abbreviated => "_Abb",
+                        TimeSpanStyle.Abbreviated => "_Abbr",
                         TimeSpanStyle.Words => count == 1 ? "_Words" : "", // only Single has _Words resource
                         _ => ""
                     });
