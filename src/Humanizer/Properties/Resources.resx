@@ -543,9 +543,6 @@
   <data name="TimeSpanHumanize_SingleMonth_Short" xml:space="preserve">
     <value>1M</value>
   </data>
-  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>1 month</value>
-  </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 year</value>
   </data>
