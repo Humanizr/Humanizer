@@ -1,19 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">  
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netstandard2.0;net6.0</TargetFrameworks>    
+    <TargetFrameworks>netstandard1.0;netstandard2.0;net6.0</TargetFrameworks>
     <Authors>Mehdi Khalili, Claire Novotny</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
-    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
-    <Copyright>Copyright © .NET Foundation and Contributors</Copyright>    
-    <Product>Humanizer ($(TargetFramework))</Product>    
+    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields etc into a human friendly format</Description>
+    <Copyright>Copyright © .NET Foundation and Contributors</Copyright>
+    <Product>Humanizer ($(TargetFramework))</Product>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
     <LangVersion>preview</LangVersion>
-  </PropertyGroup>  
+  </PropertyGroup>
   <ItemGroup>
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
@@ -21,24 +21,23 @@
     </None>
     <None Update="FluentDate\OnDate.Days.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="OnDate.Days.cs" />
     <Compile Update="FluentDate\OnDate.Days.cs" DesignTime="True" AutoGen="True" DependentUpon="OnDate.Days.tt" />
-    
+
     <None Update="FluentDate\On.Days.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="On.Days.cs" />
     <Compile Update="FluentDate\On.Days.cs" DesignTime="True" AutoGen="True" DependentUpon="On.Days.tt" />
 
     <None Update="FluentDate\In.Months.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="In.Months.cs" />
     <Compile Update="FluentDate\In.Months.cs" DesignTime="True" AutoGen="True" DependentUpon="In.Months.tt" />
-    
+
     <None Update="FluentDate\InDate.Months.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.Months.cs" />
     <Compile Update="FluentDate\InDate.Months.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.Months.tt" />
-
 
     <None Update="FluentDate\In.SomeTimeFrom.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="In.SomeTimeFrom.cs" />
     <Compile Update="FluentDate\In.SomeTimeFrom.cs" DesignTime="True" AutoGen="True" DependentUpon="In.SomeTimeFrom.tt" />
 
     <None Update="FluentDate\InDate.SomeTimeFrom.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.SomeTimeFrom.cs" />
     <Compile Update="FluentDate\InDate.SomeTimeFrom.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.SomeTimeFrom.tt" />
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>  
+  </ItemGroup>
 </Project>
