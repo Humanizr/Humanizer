@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+
 using Humanizer.Localisation;
+
 using Xunit;
 
 namespace Humanizer.Tests
@@ -467,57 +467,42 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [ClassData(typeof(TimeSpanStyleTestSource))]
+        [InlineData(1, "1 millisecond", TimeSpanStyle.Full)]
+        [InlineData(1, "one millisecond", TimeSpanStyle.Words)]
+        [InlineData(1, "1 ms", TimeSpanStyle.Abbreviated)]
+        [InlineData(1, "1ms", TimeSpanStyle.Short)]
+        [InlineData(2, "2 milliseconds", TimeSpanStyle.Full)]
+        [InlineData(2, "two milliseconds", TimeSpanStyle.Words)]
+        [InlineData(2, "2 ms", TimeSpanStyle.Abbreviated)]
+        [InlineData(2, "2ms", TimeSpanStyle.Short)]
+        [InlineData(1000, "1 second", TimeSpanStyle.Full)]
+        [InlineData(1000, "one second", TimeSpanStyle.Words)]
+        [InlineData(1000, "1 sec", TimeSpanStyle.Abbreviated)]
+        [InlineData(1000, "1s", TimeSpanStyle.Short)]
+        [InlineData(2000, "2 seconds", TimeSpanStyle.Full)]
+        [InlineData(2000, "two seconds", TimeSpanStyle.Words)]
+        [InlineData(2000, "2 secs", TimeSpanStyle.Abbreviated)]
+        [InlineData(2000, "2s", TimeSpanStyle.Short)]
+        [InlineData(60_000, "1 minute", TimeSpanStyle.Full)]
+        [InlineData(60_000, "one minute", TimeSpanStyle.Words)]
+        [InlineData(60_000, "1 min", TimeSpanStyle.Abbreviated)]
+        [InlineData(60_000, "1m", TimeSpanStyle.Short)]
+        [InlineData(120_000, "2 minutes", TimeSpanStyle.Full)]
+        [InlineData(120_000, "two minutes", TimeSpanStyle.Words)]
+        [InlineData(120_000, "2 mins", TimeSpanStyle.Abbreviated)]
+        [InlineData(120_000, "2m", TimeSpanStyle.Short)]
+        [InlineData(3_600_000, "1 hour", TimeSpanStyle.Full)]
+        [InlineData(3_600_000, "one hour", TimeSpanStyle.Words)]
+        [InlineData(3_600_000, "1 hr", TimeSpanStyle.Abbreviated)]
+        [InlineData(3_600_000, "1h", TimeSpanStyle.Short)]
+        [InlineData(7_200_000, "2 hours", TimeSpanStyle.Full)]
+        [InlineData(7_200_000, "two hours", TimeSpanStyle.Words)]
+        [InlineData(7_200_000, "2 hrs", TimeSpanStyle.Abbreviated)]
+        [InlineData(7_200_000, "2h", TimeSpanStyle.Short)]
         public void TimeSpanWithStyle(int milliseconds, string expected, TimeSpanStyle timeSpanStyle)
         {
             var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(timeSpanStyle: timeSpanStyle);
             Assert.Equal(expected, actual);
-        }
-
-        internal class TimeSpanStyleTestSource : IEnumerable<object[]>
-        {
-            public IEnumerator<object[]> GetEnumerator()
-            {
-                // can't return TimeSpan as the first object because then XUnit can't expand the test cases
-                yield return new object[] { 1, "1 millisecond", TimeSpanStyle.Full };
-                yield return new object[] { 1, "one millisecond", TimeSpanStyle.Words };
-                yield return new object[] { 1, "1 ms", TimeSpanStyle.Abbreviated };
-                yield return new object[] { 1, "1ms", TimeSpanStyle.Short };
-                yield return new object[] { 2, "2 milliseconds", TimeSpanStyle.Full };
-                yield return new object[] { 2, "two milliseconds", TimeSpanStyle.Words };
-                yield return new object[] { 2, "2 ms", TimeSpanStyle.Abbreviated };
-                yield return new object[] { 2, "2ms", TimeSpanStyle.Short };
-                yield return new object[] { TimeSpan.FromSeconds(1).TotalMilliseconds, "1 second", TimeSpanStyle.Full };
-                yield return new object[] { TimeSpan.FromSeconds(1).TotalMilliseconds, "one second", TimeSpanStyle.Words };
-                yield return new object[] { TimeSpan.FromSeconds(1).TotalMilliseconds, "1 sec", TimeSpanStyle.Abbreviated };
-                yield return new object[] { TimeSpan.FromSeconds(1).TotalMilliseconds, "1s", TimeSpanStyle.Short };
-                yield return new object[] { TimeSpan.FromSeconds(2).TotalMilliseconds, "2 seconds", TimeSpanStyle.Full };
-                yield return new object[] { TimeSpan.FromSeconds(2).TotalMilliseconds, "two seconds", TimeSpanStyle.Words };
-                yield return new object[] { TimeSpan.FromSeconds(2).TotalMilliseconds, "2 secs", TimeSpanStyle.Abbreviated };
-                yield return new object[] { TimeSpan.FromSeconds(2).TotalMilliseconds, "2s", TimeSpanStyle.Short };
-                yield return new object[] { TimeSpan.FromMinutes(1).TotalMilliseconds, "1 minute", TimeSpanStyle.Full };
-                yield return new object[] { TimeSpan.FromMinutes(1).TotalMilliseconds, "one minute", TimeSpanStyle.Words };
-                yield return new object[] { TimeSpan.FromMinutes(1).TotalMilliseconds, "1 min", TimeSpanStyle.Abbreviated };
-                yield return new object[] { TimeSpan.FromMinutes(1).TotalMilliseconds, "1m", TimeSpanStyle.Short };
-                yield return new object[] { TimeSpan.FromMinutes(2).TotalMilliseconds, "2 minutes", TimeSpanStyle.Full };
-                yield return new object[] { TimeSpan.FromMinutes(2).TotalMilliseconds, "two minutes", TimeSpanStyle.Words };
-                yield return new object[] { TimeSpan.FromMinutes(2).TotalMilliseconds, "2 mins", TimeSpanStyle.Abbreviated };
-                yield return new object[] { TimeSpan.FromMinutes(2).TotalMilliseconds, "2m", TimeSpanStyle.Short };
-                yield return new object[] { TimeSpan.FromHours(1).TotalMilliseconds, "1 hour", TimeSpanStyle.Full };
-                yield return new object[] { TimeSpan.FromHours(1).TotalMilliseconds, "one hour", TimeSpanStyle.Words };
-                yield return new object[] { TimeSpan.FromHours(1).TotalMilliseconds, "1 hr", TimeSpanStyle.Abbreviated };
-                yield return new object[] { TimeSpan.FromHours(1).TotalMilliseconds, "1h", TimeSpanStyle.Short };
-                yield return new object[] { TimeSpan.FromHours(2).TotalMilliseconds, "2 hours", TimeSpanStyle.Full };
-                yield return new object[] { TimeSpan.FromHours(2).TotalMilliseconds, "two hours", TimeSpanStyle.Words };
-                yield return new object[] { TimeSpan.FromHours(2).TotalMilliseconds, "2 hrs", TimeSpanStyle.Abbreviated };
-                yield return new object[] { TimeSpan.FromHours(2).TotalMilliseconds, "2h", TimeSpanStyle.Short };
-                // TODO lots more
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
         }
     }
 }
