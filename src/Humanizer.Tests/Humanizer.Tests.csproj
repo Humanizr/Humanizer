@@ -19,7 +19,7 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' ">
     <PackageReference Include="ApiApprover" Version="9.3.0" />
-    <PackageReference Include="DiffPlex" Version="1.7.0" />
+    <PackageReference Include="DiffPlex" Version="1.7.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Humanizer.Tests.Shared\**\*.cs">
