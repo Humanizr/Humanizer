@@ -100,7 +100,7 @@ namespace Humanizer.Localisation.Formatters
         {
             var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, timeSpanStyle);
 
-            return count == 1 ? Format(resourceKey) : Format(resourceKey, count, timeSpanStyle == TimeSpanStyle.Words);
+            return count == 1 ? Format(resourceKey) : Format(resourceKey, count, timeSpanStyle);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Humanizer.Localisation.Formatters
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey)
         {
-            var resourceString = Resources.GetResource(GetResourceKey(resourceKey), _culture);
+            var resourceString = Resources.GetResource(GetResourceKey(resourceKey, 0), _culture);
 
             if (string.IsNullOrEmpty(resourceString))
             {
@@ -126,19 +126,23 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="resourceKey">The resource key.</param>
         /// <param name="number">The number.</param>
-        /// <param name="toWords"></param>
+        /// <param name="timeSpanStyle">Time span style</param>
         /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
-        protected virtual string Format(string resourceKey, int number, bool toWords = false)
+        protected virtual string Format(string resourceKey, int number, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
-            var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture);
+            if (timeSpanStyle == TimeSpanStyle.Full || timeSpanStyle == TimeSpanStyle.Words)
+            {
+                resourceKey = GetResourceKey(resourceKey, number);
+            }
+            var resourceString = Resources.GetResource(resourceKey, _culture);
 
             if (string.IsNullOrEmpty(resourceString))
             {
                 throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
             }
 
-            return toWords
+            return timeSpanStyle == TimeSpanStyle.Words
                 ? resourceString.FormatWith(number.ToWords(_culture))
                 : resourceString.FormatWith(number);
         }
@@ -150,16 +154,6 @@ namespace Humanizer.Localisation.Formatters
         /// <param name="number">The number of the units being used in formatting</param>
         /// <returns></returns>
         protected virtual string GetResourceKey(string resourceKey, int number)
-        {
-            return resourceKey;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="resourceKey"></param>
-        /// <returns></returns>
-        protected virtual string GetResourceKey(string resourceKey)
         {
             return resourceKey;
         }

@@ -1945,9 +1945,8 @@ namespace Humanizer.Localisation.Formatters
         public virtual string DateHumanize_Never() { }
         public virtual string DateHumanize_Now() { }
         protected virtual string Format(string resourceKey) { }
-        protected virtual string Format(string resourceKey, int number, bool toWords = False) { }
+        protected virtual string Format(string resourceKey, int number, Humanizer.TimeSpanStyle timeSpanStyle = 0) { }
         protected virtual string GetResourceKey(string resourceKey, int number) { }
-        protected virtual string GetResourceKey(string resourceKey) { }
         public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, Humanizer.TimeSpanStyle timeSpanStyle = 0) { }
         public virtual string TimeSpanHumanize_Zero() { }
         public virtual string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit) { }

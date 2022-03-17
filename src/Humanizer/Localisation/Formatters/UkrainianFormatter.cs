@@ -16,7 +16,7 @@ namespace Humanizer.Localisation.Formatters
             return resourceKey + suffix;
         }
 
-        private string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
+        private static string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
         {
             if (grammaticalNumber == RussianGrammaticalNumber.Singular)
             {
