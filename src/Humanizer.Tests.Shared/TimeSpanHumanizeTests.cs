@@ -120,7 +120,8 @@ namespace Humanizer.Tests
         [InlineData(-1, "1 second")]
         public void Seconds(int seconds, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
+            var actual = TimeSpan.FromSeconds(seconds).Humanize();
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
