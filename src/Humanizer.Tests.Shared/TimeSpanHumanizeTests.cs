@@ -300,7 +300,7 @@ namespace Humanizer.Tests
         [InlineData(52)]
         public void TimeSpanWithMinAndMaxUnits_DoesNotReportExcessiveTime(int minutes)
         {
-            var actual = TimeSpan.FromMinutes(minutes).Humanize(2, null, TimeUnit.Hour, TimeUnit.Minute);
+            var actual = TimeSpan.FromMinutes(minutes).Humanize(2, maxUnit: TimeUnit.Hour, minUnit: TimeUnit.Minute);
             var expected = TimeSpan.FromMinutes(minutes).Humanize(2);
             Assert.Equal(expected, actual);
         }
