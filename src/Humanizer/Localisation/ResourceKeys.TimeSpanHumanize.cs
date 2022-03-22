@@ -19,7 +19,7 @@
             /// </summary>
             /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
             /// <param name="count">Number of units, default is One.</param>
-            /// <param name="timeSpanStyle"></param>
+            /// <param name="timeSpanStyle">Time span style, default is <see cref="TimeSpanStyle.Full">.</param>
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
             public static string GetResourceKey(TimeUnit unit, int count = 1, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
             {
