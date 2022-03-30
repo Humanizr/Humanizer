@@ -55,6 +55,7 @@ namespace Humanizer.Tests
         [InlineData(337.5, "NNW")]
         [InlineData(348.7, "NNW")]
         [InlineData(348.8, "N")]
+        [InlineData(360, "N")]
         [InlineData(720, "N")]
         [Theory]
         public void ToHeadingAbbreviated(double heading, string expected)
@@ -78,6 +79,7 @@ namespace Humanizer.Tests
         [InlineData(292.5, "west-northwest")]
         [InlineData(315, "northwest")]
         [InlineData(337.5, "north-northwest")]
+        [InlineData(360, "north")]
         [InlineData(720, "north")]
         [Theory]
         public void ToHeading(double heading, string expected)
@@ -155,6 +157,8 @@ namespace Humanizer.Tests
         [InlineData(337.5, '↑')]
         [InlineData(348.7, '↑')]
         [InlineData(348.8, '↑')]
+        [InlineData(360, '↑')]
+        [InlineData(720, '↑')]
         [Theory]
         public void ToHeadingArrow(double heading, char expected)
         {
