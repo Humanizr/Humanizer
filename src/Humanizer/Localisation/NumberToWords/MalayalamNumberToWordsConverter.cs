@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Humanizer.Localisation.NumberToWords
 {
-    internal class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
+    internal class MalayalamNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = { "പൂജ്യം", "ഒന്ന്", "രണ്ട്", "മൂന്ന്", "നാല്", "അഞ്ച്", "ആറ്", "ഏഴ്", "എട്ട്", "ഒമ്പത്", "പത്ത്", "പതിനൊന്ന്", "പന്ത്രണ്ട്" ,"പതിമൂന്ന്","പതിനാല്","പതിനഞ്ച്","പതിനാറ്","പതിനേഴ്","പതിനെട്ട്","പത്തൊമ്പത്" };
         private static readonly string[] TensMap = { "സീറോ", "പ", "ഇരുപ", "മുപ്പ", "നാൽപ്പ", "അമ്പ", "അറുപ", "എഴുപ", "എൺപ", "തൊണ്ണൂ" };
