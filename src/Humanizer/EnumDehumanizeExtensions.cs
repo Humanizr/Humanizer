@@ -21,6 +21,19 @@ namespace Humanizer
         {
             return (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ThrowsException);
         }
+        
+        /// <summary>
+        /// Tries to dehumanizes a string into the Enum it was originally Humanized from!  Returns null if no match is found.
+        /// </summary>
+        /// <typeparam name="TTargetEnum">The target enum</typeparam>
+        /// <param name="input">The string to be converted</param>
+        /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
+        /// <returns></returns>
+        public static TTargetEnum? TryDehumanizeTo<TTargetEnum>(this string input)
+            where TTargetEnum : struct, IComparable, IFormattable
+        {
+            return (TTargetEnum?)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ReturnsNull);
+        }
 
         /// <summary>
         /// Dehumanizes a string into the Enum it was originally Humanized from!

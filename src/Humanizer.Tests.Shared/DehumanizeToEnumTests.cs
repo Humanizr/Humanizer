@@ -24,6 +24,12 @@ namespace Humanizer.Tests
         {
             Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
         }
+        
+        [Fact]
+        public void TryCanReturnNullForEnumNoMatch()
+        {
+            Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.TryDehumanizeTo<DummyEnum>());
+        }
 
 #if !NETFX_CORE
         [Fact]
@@ -78,6 +84,12 @@ namespace Humanizer.Tests
         {
             Assert.Equal(EnumUnderTest.MemberWithDisplayAttribute, EnumTestsResources.MemberWithDisplayAttribute.DehumanizeTo<EnumUnderTest>());
             Assert.Equal(EnumUnderTest.MemberWithDisplayAttribute, EnumTestsResources.MemberWithDisplayAttribute.DehumanizeTo(typeof(EnumUnderTest)));
+        }
+        
+        [Fact]
+        public void TryHonorsDisplayAttribute()
+        {
+            Assert.Equal(EnumUnderTest.MemberWithDisplayAttribute, EnumTestsResources.MemberWithDisplayAttribute.TryDehumanizeTo<EnumUnderTest>());
         }
 
         [Fact]
