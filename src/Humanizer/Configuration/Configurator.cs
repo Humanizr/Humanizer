@@ -4,6 +4,7 @@ using System.Reflection;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation.CollectionFormatters;
 using Humanizer.Localisation.DateToOrdinalWords;
+using Humanizer.Localisation.DateToWords;
 using Humanizer.Localisation.Formatters;
 using Humanizer.Localisation.NumberToWords;
 using Humanizer.Localisation.Ordinalizers;
@@ -64,6 +65,15 @@ namespace Humanizer.Configuration
             get { return _dateToOrdinalWordConverters; }
         }
 
+        private static readonly LocaliserRegistry<IDateToWordConverter> _dateToWordConverters = new DateToWordsConverterRegistry();
+        /// <summary>
+        /// A registry of date to words converters used to localise ToWords method
+        /// </summary>
+        public static LocaliserRegistry<IDateToWordConverter> DateToWordsConverters
+        {
+            get { return _dateToWordConverters; }
+        }
+
 #if NET6_0_OR_GREATER
         private static readonly LocaliserRegistry<IDateOnlyToOrdinalWordConverter> _dateOnlyToOrdinalWordConverters = new DateOnlyToOrdinalWordsConverterRegistry();
         /// <summary>
@@ -72,6 +82,15 @@ namespace Humanizer.Configuration
         public static LocaliserRegistry<IDateOnlyToOrdinalWordConverter> DateOnlyToOrdinalWordsConverters
         {
             get { return _dateOnlyToOrdinalWordConverters; }
+        }
+
+        private static readonly LocaliserRegistry<IDateOnlyToWordConverter> _dateOnlyToWordConverters = new DateOnlyToWordsConverterRegistry();
+        /// <summary>
+        /// A registry of date to words converters used to localise ToWords method
+        /// </summary>
+        public static LocaliserRegistry<IDateOnlyToWordConverter> DateOnlyToWordsConverters
+        {
+            get { return _dateOnlyToWordConverters; }
         }
 
         private static readonly LocaliserRegistry<ITimeOnlyToClockNotationConverter> _timeOnlyToClockNotationConverters = new TimeOnlyToClockNotationConvertersRegistry();
@@ -132,6 +151,17 @@ namespace Humanizer.Configuration
             }
         }
 
+        /// <summary>
+        /// The converter of date to Words to be used
+        /// </summary>
+        internal static IDateToWordConverter DateToWordsConverter
+        {
+            get
+            {
+                return DateToWordsConverters.ResolveForUiCulture();
+            }
+        }
+
 #if NET6_0_OR_GREATER
         /// <summary>
         /// The ordinalizer to be used
@@ -151,6 +181,25 @@ namespace Humanizer.Configuration
                 return TimeOnlyToClockNotationConverters.ResolveForUiCulture();
             }
         }
+
+        /// <summary>
+        /// The converter of date to Words to be used
+        /// </summary>
+        internal static IDateOnlyToWordConverter DateOnlyToWordsConverter
+        {
+            get
+            {
+                return DateOnlyToWordsConverters.ResolveForUiCulture();
+            }
+        }
+
+        //internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter
+        //{
+        //    get
+        //    {
+        //        return TimeOnlyToClockNotationConverters.ResolveForUiCulture();
+        //    }
+        //}
 #endif
 
         private static IDateTimeHumanizeStrategy _dateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
