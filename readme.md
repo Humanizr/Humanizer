@@ -889,13 +889,15 @@ Passing `wordForm` argument in when it is not applicable will not make any diffe
 This is kind of an extension of ToWords and Ordinalize
 ```C#
 // for Spanish locale
-new DateTime(2022, 1, 1).ToOrdinalWords() => "uno de enero de dos mil veintidós"
-new DateOnly(2020, 6, 10).ToOrdinalWords() => "diez de junio de dos mil veinte"
-new DateOnly(1999, 12, 31).ToOrdinalWords() => "treinta y uno de diciembre de mil novecientos noventa y nueve"
+new DateTime(2022, 1, 1).ToWords() => "uno de enero de dos mil veintidós"
+new DateOnly(2020, 6, 10).ToWords() => "diez de junio de dos mil veinte"
+new DateOnly(1999, 12, 31).ToWords() => "treinta y uno de diciembre de mil novecientos noventa y nueve"
 // for English UK locale
-new DateTime(2022, 1, 1).ToOrdinalWords() => "the first of January two thousand and twenty-two"
+new DateTime(2022, 1, 1).ToWords() => "the first of January two thousand and twenty-two"
+new DateOnly(1999, 12, 31).ToWords() => "the thirty-first of December one thousand nine hundred and ninety-nine"
 // for English US locale
-new DateTime(2022, 1, 1).ToOrdinalWords() => "January first, two thousand and twenty-two"
+new DateTime(2022, 1, 1).ToWords() => "January first, two thousand and twenty-two"
+new DateOnly(1999, 12, 31).ToWords() => "December thirty-first, one thousand nine hundred and ninety-nine"
 ```
 
 The ToWords method of `DateTime` or `DateOnly` also supports grammatical case.
