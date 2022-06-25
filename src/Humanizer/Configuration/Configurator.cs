@@ -28,7 +28,7 @@ namespace Humanizer.Configuration
             get { return _collectionFormatters; }
         }
 
-        private static readonly LocaliserRegistry<IFormatter> _formatters = new FormatterRegistry();
+        private static readonly LocaliserRegistry<IFormatter> _formatters = FormatterRegistry.CreateInstance();
         /// <summary>
         /// A registry of formatters used to format strings based on the current locale
         /// </summary>

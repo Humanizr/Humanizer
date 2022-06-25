@@ -6,8 +6,27 @@ namespace Humanizer.Configuration
 {
     internal class FormatterRegistry : LocaliserRegistry<IFormatter>
     {
-        public FormatterRegistry() : base(new DefaultFormatter("en-US"))
+        public static FormatterRegistry CreateInstance()
         {
+            try
+            {
+                return new FormatterRegistry(new DefaultFormatter("en-US"), false);
+            }
+            catch (CultureNotFoundException)
+            {
+                // InvariantGlobalization is enabled, there is only one culture.
+                return new FormatterRegistry(new DefaultFormatter(CultureInfo.InvariantCulture), true);
+            }
+        }
+
+        private FormatterRegistry(IFormatter defaultFormatter, bool globalizationInvariant)
+            : base(defaultFormatter)
+        {
+            if (globalizationInvariant)
+            {
+                return;
+            }
+
             Register("ar", new ArabicFormatter());
             Register("de", new GermanFormatter());
             Register("he", new HebrewFormatter());

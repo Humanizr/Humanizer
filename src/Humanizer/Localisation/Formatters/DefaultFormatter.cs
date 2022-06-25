@@ -20,6 +20,15 @@ namespace Humanizer.Localisation.Formatters
         }
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="culture">Culture to use.</param>
+        internal DefaultFormatter(CultureInfo culture)
+        {
+            _culture = culture;
+        }
+
+        /// <summary>
         /// Now
         /// </summary>
         /// <returns>Returns Now</returns>
