@@ -258,8 +258,8 @@
     <comment>a minute from now</comment>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>sebulan dari sekarang</value>
-    <comment>one month from now</comment>
+    <value>sebulan dari hari ini</value>
+    <comment>one month from today</comment>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>sedetik dari sekarang</value>

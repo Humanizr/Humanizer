@@ -33,7 +33,7 @@ namespace Humanizer.Tests
             var inputTime = new DateOnly(2015, 08, 05);
             var baseTime = new DateOnly(2015, 07, 05);
 
-            const string expectedResult = "one month from now";
+            const string expectedResult = "one month from today";
             var actualResult = inputTime.Humanize(baseTime);
 
             Assert.Equal(expectedResult, actualResult);

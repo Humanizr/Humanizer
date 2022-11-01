@@ -223,7 +223,7 @@
     <value>a minute from now</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>one month from now</value>
+    <value>one month from today</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>one second from now</value>
