@@ -211,7 +211,7 @@
     <value>{0} 年後</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
-    <value>今天</value>
+    <value>現在</value>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>明天</value>
