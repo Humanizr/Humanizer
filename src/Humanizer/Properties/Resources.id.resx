@@ -242,8 +242,8 @@
     <comment>{0} years from now</comment>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
-    <value>sekarang</value>
-    <comment>now</comment>
+    <value>hari ini</value>
+    <comment>today</comment>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>besok</value>

@@ -211,7 +211,7 @@
     <value>{0} years from now</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
-    <value>now</value>
+    <value>today</value>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>tomorrow</value>

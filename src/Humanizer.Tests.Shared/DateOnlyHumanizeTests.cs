@@ -19,7 +19,7 @@ namespace Humanizer.Tests
             var inputTime = new DateOnly(2015, 07, 05);
             var baseTime = new DateOnly(2015, 07, 05);
 
-            const string expectedResult = "now";
+            const string expectedResult = "today";
             var actualResult = inputTime.Humanize(baseTime);
 
             Assert.Equal(expectedResult, actualResult);
