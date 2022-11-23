@@ -120,7 +120,7 @@
       <Project>{511a7984-f455-4a6e-adb9-9caac47ea079}</Project>
       <Name>Humanizer</Name>
     </ProjectReference>
-    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.devices" Version="2.5.25" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.13" />
   </ItemGroup>
