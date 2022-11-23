@@ -100,7 +100,7 @@ namespace Humanizer.Tests
         [InlineData(1, "tomorrow")]
         [InlineData(10, "10 days from now")]
         [InlineData(27, "27 days from now")]
-        [InlineData(32, "one month from today")]
+        [InlineData(32, "one month from now")]
         public void DaysFromNow(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
@@ -117,7 +117,7 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "one month from today")]
+        [InlineData(1, "one month from now")]
         [InlineData(10, "10 months from now")]
         [InlineData(11, "11 months from now")]
         [InlineData(12, "one year from now")]

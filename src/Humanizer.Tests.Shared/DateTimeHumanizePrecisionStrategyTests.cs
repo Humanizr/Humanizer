@@ -137,9 +137,9 @@ namespace Humanizer.Tests
         [InlineData(10, "10 days from now")]
         [InlineData(20, "20 days from now")]
         [InlineData(22, "22 days from now")]
-        [InlineData(23, "one month from today")]
-        [InlineData(31, "one month from today")]
-        [InlineData(43, "one month from today")]
+        [InlineData(23, "one month from now")]
+        [InlineData(31, "one month from now")]
+        [InlineData(43, "one month from now")]
         [InlineData(53, "2 months from now")]
         public void DaysFromNow(int days, string expected)
         {
@@ -160,7 +160,7 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "one month from today")]
+        [InlineData(1, "one month from now")]
         [InlineData(8, "8 months from now")]
         [InlineData(9, "one year from now")]
         [InlineData(12, "one year from now")]
