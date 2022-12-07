@@ -95,6 +95,7 @@ namespace Humanizer.Inflections
             //Fix 975
             _default.AddIrregular("ex", "exes", matchEnding: false);
             _default.AddIrregular("is", "are", matchEnding: false);
+            _default.AddIrregular("was", "were", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);
             _default.AddIrregular("this", "these", matchEnding: false);
             _default.AddIrregular("bus", "buses", matchEnding: false);
