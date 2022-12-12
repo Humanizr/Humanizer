@@ -158,7 +158,7 @@ namespace Humanizer.Localisation.NumberToWords
         {
             if (number < 13)
             {
-                return ConvertIntΒ13(number, returnPluralized);
+                return ConvertIntB13(number, returnPluralized);
             }
             else if (number < 100)
             {
@@ -184,7 +184,7 @@ namespace Humanizer.Localisation.NumberToWords
             return "";
         }
 
-        private string ConvertIntΒ13(long number, bool returnPluralized)
+        private string ConvertIntB13(long number, bool returnPluralized)
         {
             return returnPluralized ? UnitsMap[number] : UnitMap[number];
         }
