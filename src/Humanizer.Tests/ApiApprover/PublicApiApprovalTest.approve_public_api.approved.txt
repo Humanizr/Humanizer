@@ -1,5 +1,5 @@
 ﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v6.0", FrameworkDisplayName="")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v6.0", FrameworkDisplayName=".NET 6.0")]
 namespace Humanizer
 {
     public class static ByteSizeExtensions
@@ -1985,6 +1985,22 @@ namespace Humanizer.Localisation.Ordinalizers
 }
 namespace Humanizer.Localisation.TimeToClockNotation
 {
+    public class DeTimeOnlyToClockNotationConverter : Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter
+    {
+        public bool AsWords;
+        public System.Nullable<bool> PrePendQuarter;
+        public DeTimeOnlyToClockNotationConverter() { }
+        public string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive) { }
+    }
+    public class static German
+    {
+        public const string MidDay = "Mittag";
+        public const string MidNight = "Mitternacht";
+        public static readonly System.Collections.Generic.IReadOnlyList<string> QuarterDay;
+        public static string AsClockDe(this System.TimeOnly time, Humanizer.ClockNotationRounding round, bool asWords = False) { }
+        public static string GetDayQuarterGerman(this System.TimeOnly time) { }
+        public static string GetDayQuarterGermanGenitive(this System.TimeOnly time) { }
+    }
     public interface ITimeOnlyToClockNotationConverter
     {
         string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive);
