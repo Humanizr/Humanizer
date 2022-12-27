@@ -11,6 +11,7 @@ namespace Humanizer.Configuration
             Register("pt-BR", new BrazilianPortugueseTimeOnlyToClockNotationConverter());
             Register("fr", new FrTimeOnlyToClockNotationConverter());
             Register("es", new EsTimeOnlyToClockNotationConverter());
+            Register("de", new DeTimeOnlyToClockNotationConverter());
         }
     }
 }
