@@ -130,7 +130,7 @@ namespace Humanizer.Tests
         [InlineData(11, "ta", "பதினொன்று")]
         [InlineData(12, "ta", "பனிரெண்டு")]
         [InlineData(555, "ta", "ஐந்நூற்று ஐம்பத்து ஐந்து")]
-        public void b(int number, string culture, string expected)
+        public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
         {
             Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
         }

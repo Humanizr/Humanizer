@@ -1985,13 +1985,6 @@ namespace Humanizer.Localisation.Ordinalizers
 }
 namespace Humanizer.Localisation.TimeToClockNotation
 {
-    public class DeTimeOnlyToClockNotationConverter : Humanizer.Localisation.TimeToClockNotation.ITimeOnlyToClockNotationConverter
-    {
-        public bool AsWords;
-        public System.Nullable<bool> PrePendQuarter;
-        public DeTimeOnlyToClockNotationConverter() { }
-        public string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive) { }
-    }
     public class static German
     {
         public const string MidDay = "Mittag";

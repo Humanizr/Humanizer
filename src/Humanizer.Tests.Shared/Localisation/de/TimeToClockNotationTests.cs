@@ -3,12 +3,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-using Humanizer;
-using Humanizer.Tests;
-
 using Xunit;
 
-namespace org.SpocWeb.root.NaturalLang.Tests.de;
+namespace Humanizer.Tests.Localisation.de;
 
 [UseCulture("de-DE")]
 [SuppressMessage("ReSharper", "StringLiteralTypo")]
