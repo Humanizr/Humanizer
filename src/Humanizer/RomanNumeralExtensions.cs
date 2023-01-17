@@ -1,4 +1,4 @@
-// Done by Jesse Slicer https://github.com/jslicer
+﻿// Done by Jesse Slicer https://github.com/jslicer
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +14,7 @@ namespace Humanizer
         private const int NumberOfRomanNumeralMaps = 13;
 
         private static readonly IDictionary<string, int> RomanNumerals =
-            new Dictionary<string, int>(NumberOfRomanNumeralMaps)
+            new Dictionary<string, int>(NumberOfRomanNumeralMaps, StringComparer.OrdinalIgnoreCase)
             {
                 { "M",  1000 },
                 { "CM", 900 },
@@ -48,7 +48,7 @@ namespace Humanizer
                 throw new ArgumentNullException(nameof(input));
             }
 
-            input = input.Trim().ToUpperInvariant();
+            input = input.Trim();
 
             var length = input.Length;
 
