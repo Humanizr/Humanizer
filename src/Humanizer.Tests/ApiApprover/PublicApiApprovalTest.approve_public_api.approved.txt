@@ -1,5 +1,5 @@
 ﻿[assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]
-[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v6.0", FrameworkDisplayName="")]
+[assembly: System.Runtime.Versioning.TargetFrameworkAttribute(".NETCoreApp,Version=v6.0", FrameworkDisplayName=".NET 6.0")]
 namespace Humanizer
 {
     public class static ByteSizeExtensions
@@ -1658,6 +1658,7 @@ namespace Humanizer
     {
         Normal = 0,
         Abbreviation = 1,
+        Eifeler = 2,
     }
 }
 namespace Humanizer.Bytes
