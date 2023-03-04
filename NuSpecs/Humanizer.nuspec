@@ -38,6 +38,7 @@
       <dependency id="Humanizer.Core.ja" version="$version$" />
       <dependency id="Humanizer.Core.ko-KR" version="$version$" />
       <dependency id="Humanizer.Core.ku" version="$version$" />
+      <dependency id="Humanizer.Core.lb" version="$version$" />
       <dependency id="Humanizer.Core.lv" version="$version$" />
       <dependency id="Humanizer.Core.ms-MY" version="$version$" />
       <dependency id="Humanizer.Core.mt" version="$version$" />
