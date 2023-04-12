@@ -92,9 +92,13 @@ namespace Humanizer.Tests
         [InlineData("some-title: The beginning", "Some Title: The Beginning")]
         [InlineData("some_title:_the_beginning", "Some Title: the Beginning")]
         [InlineData("some title: The_beginning", "Some Title: The Beginning")]
-        public void Titleize(string input, string expectedOuput)
+        [InlineData("thisIs3.5mmLong", "This Is 3.5mm Long")]
+        [InlineData("thisIs3..5mmLong", "This Is 3.5mm Long")]
+        [InlineData("this Is 3..5mm Long", "This Is 3.5mm Long")]
+        [InlineData("this is 3.5mm long", "This Is 3.5mm Long")]
+        public void Titleize(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOuput, input.Titleize());
+            Assert.Equal(expectedOutput, input.Titleize());
         }
 
         [InlineData("some_title", "some-title")]
