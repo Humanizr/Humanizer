@@ -110,9 +110,9 @@ namespace Humanizer.Tests
         [InlineData(18, "tomorrow")]
         [InlineData(24, "tomorrow")]
         [InlineData(41, "tomorrow")]
-        [InlineData(42, "2 days from now")]
-        [InlineData(48, "2 days from now")]
-        [InlineData(60, "2 days from now")]
+        [InlineData(42, "2 days from today")]
+        [InlineData(48, "2 days from today")]
+        [InlineData(60, "2 days from today")]
         public void HoursFromNow(int hours, string expected)
         {
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future, DefaultPrecision);
@@ -134,13 +134,13 @@ namespace Humanizer.Tests
 
         [Theory]
         [InlineData(1, "tomorrow")]
-        [InlineData(10, "10 days from now")]
-        [InlineData(20, "20 days from now")]
-        [InlineData(22, "22 days from now")]
-        [InlineData(23, "one month from now")]
-        [InlineData(31, "one month from now")]
-        [InlineData(43, "one month from now")]
-        [InlineData(53, "2 months from now")]
+        [InlineData(10, "10 days from today")]
+        [InlineData(20, "20 days from today")]
+        [InlineData(22, "22 days from today")]
+        [InlineData(23, "one month from today")]
+        [InlineData(31, "one month from today")]
+        [InlineData(43, "one month from today")]
+        [InlineData(53, "2 months from today")]
         public void DaysFromNow(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future, DefaultPrecision);
@@ -160,13 +160,13 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "one month from now")]
-        [InlineData(8, "8 months from now")]
-        [InlineData(9, "one year from now")]
-        [InlineData(12, "one year from now")]
-        [InlineData(19, "one year from now")]
-        [InlineData(21, "2 years from now")]
-        [InlineData(24, "2 years from now")]
+        [InlineData(1, "one month from today")]
+        [InlineData(8, "8 months from today")]
+        [InlineData(9, "one year from today")]
+        [InlineData(12, "one year from today")]
+        [InlineData(19, "one year from today")]
+        [InlineData(21, "2 years from today")]
+        [InlineData(24, "2 years from today")]
         public void MonthsFromNow(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future, DefaultPrecision);
@@ -181,8 +181,8 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "one year from now")]
-        [InlineData(2, "2 years from now")]
+        [InlineData(1, "one year from today")]
+        [InlineData(2, "2 years from today")]
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future, DefaultPrecision);

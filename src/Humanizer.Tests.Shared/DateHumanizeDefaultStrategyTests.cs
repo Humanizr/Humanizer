@@ -76,7 +76,7 @@ namespace Humanizer.Tests
 
         [Theory]
         [InlineData(38, "tomorrow")]
-        [InlineData(40, "2 days from now")]
+        [InlineData(40, "2 days from today")]
         public void HoursFromNowNotTomorrow(int hours, string expected)
         {
             //Only test with injected date, as results are dependent on time of day
@@ -98,9 +98,9 @@ namespace Humanizer.Tests
 
         [Theory]
         [InlineData(1, "tomorrow")]
-        [InlineData(10, "10 days from now")]
-        [InlineData(27, "27 days from now")]
-        [InlineData(32, "one month from now")]
+        [InlineData(10, "10 days from today")]
+        [InlineData(27, "27 days from today")]
+        [InlineData(32, "one month from today")]
         public void DaysFromNow(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
@@ -117,10 +117,10 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "one month from now")]
-        [InlineData(10, "10 months from now")]
-        [InlineData(11, "11 months from now")]
-        [InlineData(12, "one year from now")]
+        [InlineData(1, "one month from today")]
+        [InlineData(10, "10 months from today")]
+        [InlineData(11, "11 months from today")]
+        [InlineData(12, "one year from today")]
         public void MonthsFromNow(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
@@ -135,8 +135,8 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, "one year from now")]
-        [InlineData(2, "2 years from now")]
+        [InlineData(1, "one year from today")]
+        [InlineData(2, "2 years from today")]
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
@@ -164,7 +164,7 @@ namespace Humanizer.Tests
         }
 
         [Theory]
-        [InlineData(1, TimeUnit.Year, Tense.Future, "en-US", "one year from now")]
+        [InlineData(1, TimeUnit.Year, Tense.Future, "en-US", "one year from today")]
         [InlineData(40, TimeUnit.Second, Tense.Past, "ru-RU", "40 секунд назад")]
         [InlineData(2, TimeUnit.Day, Tense.Past, "sv-SE", "för 2 dagar sedan")]
         public void CanSpecifyCultureExplicitly(int unit, TimeUnit timeUnit, Tense tense, string culture, string expected)

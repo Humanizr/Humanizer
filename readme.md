@@ -355,7 +355,7 @@ The default precision is set to .75 but you can pass your desired precision too.
 104 seconds => one minute ago/from now
 105 seconds => two minutes ago/from now
 
-25 days => a month ago/from now
+25 days => a month ago/from today
 ```
 
 **No dehumanization for dates as `Humanize` is a lossy transformation and the human friendly date is not reversible**
