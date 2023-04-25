@@ -315,7 +315,7 @@
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>בעוד {0} יום</value>
-    <comment>{0} days from now</comment>
+    <comment>in {0} days</comment>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
     <value>בעוד יומיים</value>
@@ -323,7 +323,7 @@
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
     <value>בעוד {0} ימים</value>
-    <comment>{0} days from now</comment>
+    <comment>in {0} days</comment>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
     <value>בעוד {0} שעות</value>

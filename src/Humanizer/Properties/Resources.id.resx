@@ -218,8 +218,8 @@
     <comment>1 week</comment>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} hari dari sekarang</value>
-    <comment>{0} days from now</comment>
+    <value>{0} hari dari hari ini</value>
+    <comment>{0} days from today</comment>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
     <value>{0} jam dari sekarang</value>
@@ -230,16 +230,16 @@
     <comment>{0} minutes from now</comment>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} bulan dari sekarang</value>
-    <comment>{0} months from now</comment>
+    <value>{0} bulan dari hari ini</value>
+    <comment>{0} months from today</comment>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>{0} detik dari sekarang</value>
     <comment>{0} seconds from now</comment>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} tahun dari sekarang</value>
-    <comment>{0} years from now</comment>
+    <value>{0} tahun dari hari ini</value>
+    <comment>{0} years from today</comment>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>sekarang</value>
@@ -258,16 +258,16 @@
     <comment>a minute from now</comment>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>sebulan dari sekarang</value>
-    <comment>one month from now</comment>
+    <value>sebulan dari hari ini</value>
+    <comment>one month from today</comment>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>sedetik dari sekarang</value>
     <comment>one second from now</comment>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>setahun dari sekarang</value>
-    <comment>one year from now</comment>
+    <value>setahun dari hari ini</value>
+    <comment>one year from today</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
     <value>{0} bulan</value>
