@@ -314,15 +314,16 @@
     <comment>{0} years ago</comment>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>في غضون {0} يوم من الآن</value>
+    <value>في غضون {0} يوم من اليوم</value>
+    <comment>Within {0} days from today</comment>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
     <value>في غضون يومين من الآن</value>
     <comment>in 2 days</comment>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
-    <value>في غضون {0} أيام من الآن</value>
-    <comment>{0} days from now</comment>
+    <value>في غضون {0} يوم من اليوم</value>
+    <comment>Within {0} days from today</comment>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
     <value>في غضون {0} ساعة من الآن</value>
