@@ -34,7 +34,7 @@ namespace Humanizer
 		public static class <#= i.ToWords().Dehumanize() #>
 		{
 			/// <summary>
-			/// <#= i #> days from now
+			/// <#= i #> days from today
 			/// </summary>
 			public static DateOnly <#= day #>
 			{
@@ -58,7 +58,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// <#= i #> weeks from now
+			/// <#= i #> weeks from today
 			/// </summary>
 			public static DateOnly <#= week #>
 			{
@@ -82,7 +82,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// <#= i #> months from now
+			/// <#= i #> months from today
 			/// </summary>
 			public static DateOnly <#= month #>
 			{
@@ -106,7 +106,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// <#= i #> years from now
+			/// <#= i #> years from today
 			/// </summary>
 			public static DateOnly <#= year #>
 			{

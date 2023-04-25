@@ -61,7 +61,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 1 days from now
+			/// 1 days from today
 			/// </summary>
 			public static DateTime Day
 			{
@@ -77,7 +77,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 1 weeks from now
+			/// 1 weeks from today
 			/// </summary>
 			public static DateTime Week
 			{
@@ -93,7 +93,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 1 months from now
+			/// 1 months from today
 			/// </summary>
 			public static DateTime Month
 			{
@@ -109,7 +109,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 1 years from now
+			/// 1 years from today
 			/// </summary>
 			public static DateTime Year
 			{
@@ -178,7 +178,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 2 days from now
+			/// 2 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -194,7 +194,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 2 weeks from now
+			/// 2 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -210,7 +210,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 2 months from now
+			/// 2 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -226,7 +226,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 2 years from now
+			/// 2 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -295,7 +295,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 3 days from now
+			/// 3 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -311,7 +311,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 3 weeks from now
+			/// 3 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -327,7 +327,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 3 months from now
+			/// 3 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -343,7 +343,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 3 years from now
+			/// 3 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -412,7 +412,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 4 days from now
+			/// 4 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -428,7 +428,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 4 weeks from now
+			/// 4 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -444,7 +444,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 4 months from now
+			/// 4 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -460,7 +460,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 4 years from now
+			/// 4 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -529,7 +529,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 5 days from now
+			/// 5 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -545,7 +545,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 5 weeks from now
+			/// 5 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -561,7 +561,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 5 months from now
+			/// 5 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -577,7 +577,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 5 years from now
+			/// 5 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -646,7 +646,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 6 days from now
+			/// 6 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -662,7 +662,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 6 weeks from now
+			/// 6 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -678,7 +678,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 6 months from now
+			/// 6 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -694,7 +694,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 6 years from now
+			/// 6 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -763,7 +763,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 7 days from now
+			/// 7 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -779,7 +779,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 7 weeks from now
+			/// 7 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -795,7 +795,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 7 months from now
+			/// 7 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -811,7 +811,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 7 years from now
+			/// 7 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -880,7 +880,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 8 days from now
+			/// 8 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -896,7 +896,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 8 weeks from now
+			/// 8 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -912,7 +912,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 8 months from now
+			/// 8 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -928,7 +928,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 8 years from now
+			/// 8 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -997,7 +997,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 9 days from now
+			/// 9 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -1013,7 +1013,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 9 weeks from now
+			/// 9 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -1029,7 +1029,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 9 months from now
+			/// 9 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -1045,7 +1045,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 9 years from now
+			/// 9 years from today
 			/// </summary>
 			public static DateTime Years
 			{
@@ -1114,7 +1114,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 10 days from now
+			/// 10 days from today
 			/// </summary>
 			public static DateTime Days
 			{
@@ -1130,7 +1130,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 10 weeks from now
+			/// 10 weeks from today
 			/// </summary>
 			public static DateTime Weeks
 			{
@@ -1146,7 +1146,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 10 months from now
+			/// 10 months from today
 			/// </summary>
 			public static DateTime Months
 			{
@@ -1162,7 +1162,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// 10 years from now
+			/// 10 years from today
 			/// </summary>
 			public static DateTime Years
 			{

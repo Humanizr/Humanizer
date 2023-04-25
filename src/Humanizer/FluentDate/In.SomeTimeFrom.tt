@@ -82,7 +82,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// <#= i #> days from now
+			/// <#= i #> days from today
 			/// </summary>
 			public static DateTime <#= day #>
 			{
@@ -98,7 +98,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// <#= i #> weeks from now
+			/// <#= i #> weeks from today
 			/// </summary>
 			public static DateTime <#= week #>
 			{
@@ -114,7 +114,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// <#= i #> months from now
+			/// <#= i #> months from today
 			/// </summary>
 			public static DateTime <#= month #>
 			{
@@ -130,7 +130,7 @@ namespace Humanizer
 			}
 
 			/// <summary>
-			/// <#= i #> years from now
+			/// <#= i #> years from today
 			/// </summary>
 			public static DateTime <#= year #>
 			{
