@@ -9,7 +9,7 @@ namespace Humanizer.Tests.Localisation.zhHant
         [Theory]
         [InlineData(2, "2 天前")]
         [InlineData(1, "昨天")]
-        [InlineData(0, "今天")]
+        [InlineData(0, "現在")]
         public void DaysAgo(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
@@ -18,7 +18,7 @@ namespace Humanizer.Tests.Localisation.zhHant
         [Theory]
         [InlineData(2, "2 天後")]
         [InlineData(1, "明天")]
-        [InlineData(0, "今天")]
+        [InlineData(0, "現在")]
         public void DaysFromNow(int days, string expected)
         {
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
