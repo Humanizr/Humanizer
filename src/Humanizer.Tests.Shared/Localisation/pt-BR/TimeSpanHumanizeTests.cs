@@ -117,7 +117,7 @@ namespace Humanizer.Tests.Localisation.ptBR
         public void NoTimeToWords()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("sem horário", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("sem horário", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

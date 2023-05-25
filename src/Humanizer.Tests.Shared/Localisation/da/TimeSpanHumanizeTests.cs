@@ -86,7 +86,7 @@ namespace Humanizer.Tests.Localisation.da
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("ingen tid", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("ingen tid", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

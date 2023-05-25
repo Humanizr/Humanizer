@@ -436,10 +436,10 @@ When there are multiple time units, they are combined using the `", "` string:
 TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
 ```
 
-When `TimeSpan` is zero, the default behavior will return "0" plus whatever the minimum time unit is. However, if you assign `true` to `toWords` when calling `Humanize`, then the method returns "no time". For example:
+When `TimeSpan` is zero, the default behavior will return "0" plus whatever the minimum time unit is. However, if you assign `TimeSpanStyle.Words` to `timeSpanStyle` when calling `Humanize`, then the method returns "no time". For example:
 ```C#
 TimeSpan.Zero.Humanize(1) => "0 milliseconds"
-TimeSpan.Zero.Humanize(1, toWords: true) => "no time"
+TimeSpan.Zero.Humanize(1, timeSpanStyle: TimeSpanStyle.Words) => "no time"
 TimeSpan.Zero.Humanize(1, minUnit: Humanizer.Localisation.TimeUnit.Second) => "0 seconds"
 ```
 
@@ -459,9 +459,17 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => 
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => "2 Wochen, Ein Tag und Eine Stunde"
 ```
 
-If words are preferred to numbers, a `toWords: true` parameter can be set to convert the numbers in a humanized TimeSpan to words:
+If words are preferred to numbers, a `timeSpanStyle: TimeSpanStyle.Words` parameter can be set to convert the numbers in a humanized TimeSpan to words:
 ```C#
-TimeSpan.FromMilliseconds(1299630020).Humanize(3, toWords: true) => "two weeks, one day, one hour"
+TimeSpan.FromMilliseconds(1299630020).Humanize(3, timeSpanStyle: TimeSpanStyle.Words) => "two weeks, one day, one hour"
+````
+
+It is also possible to choose to return an abbreviated or short representation of the time span
+(English only).
+This is done by specifying `timeSpanStyle: TimeSpanStyle.Abbreviated` or `timeSpanStyle: TimeSpanStyle.Short` as a parameter:
+```C#
+TimeSpan.FromWeeks(1).Humanize(timeSpanStyle: TimeSpanStyle.Abbreviated) => "1 wk"
+TimeSpan.FromWeeks(1).Humanize(timeSpanStyle: TimeSpanStyle.Short) => "1w"
 ````
 
 ### <a id="humanize-collections">Humanize Collections</a>

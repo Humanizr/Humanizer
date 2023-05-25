@@ -92,7 +92,7 @@ namespace Humanizer.Tests.Localisation.zhHant
         public void NoTimeToWords()
         {
             // This one doesn't make a lot of sense but ... w/e
-            Assert.Equal("沒有時間", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("沒有時間", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

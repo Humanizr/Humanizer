@@ -24,7 +24,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(4018, "onze ans")]
         public void YearsToWord(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
@@ -44,7 +44,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(335, "onze mois")]
         public void MonthsToWords(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, timeSpanStyle: TimeSpanStyle.Words));
         }
 
         [Theory]
@@ -61,7 +61,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(7, "une semaine")]
         public void WeeksToWords(int days, string expected)
         {
-            var actual = TimeSpan.FromDays(days).Humanize(toWords: true);
+            var actual = TimeSpan.FromDays(days).Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
 
@@ -79,7 +79,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(1, "un jour")]
         public void DaysToWords(int days, string expected)
         {
-            var actual = TimeSpan.FromDays(days).Humanize(toWords: true);
+            var actual = TimeSpan.FromDays(days).Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
 
@@ -97,7 +97,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(1, "une heure")]
         public void HoursToWords(int hours, string expected)
         {
-            var actual = TimeSpan.FromHours(hours).Humanize(toWords: true);
+            var actual = TimeSpan.FromHours(hours).Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
 
@@ -115,7 +115,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(1, "une minute")]
         public void MinutesToWords(int minutes, string expected)
         {
-            var actual = TimeSpan.FromMinutes(minutes).Humanize(toWords: true);
+            var actual = TimeSpan.FromMinutes(minutes).Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
 
@@ -133,7 +133,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(1, "une seconde")]
         public void SecondsToWords(int seconds, string expected)
         {
-            var actual = TimeSpan.FromSeconds(seconds).Humanize(toWords: true);
+            var actual = TimeSpan.FromSeconds(seconds).Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
 
@@ -151,7 +151,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(1, "une milliseconde")]
         public void MillisecondsToWords(int ms, string expected)
         {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize(toWords: true);
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal(expected, actual);
         }
 
@@ -175,7 +175,7 @@ namespace Humanizer.Tests.Localisation.fr
         public void NoTimeToWords()
         {
             var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize(toWords: true);
+            var actual = noTime.Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal("temps nul", actual);
         }
     }

@@ -97,7 +97,7 @@ namespace Humanizer.Tests.Localisation.he
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("אין זמן", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("אין זמן", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

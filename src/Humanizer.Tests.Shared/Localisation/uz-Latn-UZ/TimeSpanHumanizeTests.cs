@@ -95,7 +95,7 @@ namespace Humanizer.Tests.Localisation.uzLatn
         public void NoTimeToWords()
         {
             var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize(toWords: true);
+            var actual = noTime.Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal("vaqt yo`q", actual);
         }
     }

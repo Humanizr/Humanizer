@@ -86,7 +86,7 @@ namespace Humanizer.Tests.Localisation.ja
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("0 秒", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("0 秒", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

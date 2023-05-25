@@ -29,8 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D
 		Humanizer.ruleset = Humanizer.ruleset
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{1ABFDC1F-EAB0-48E1-B27E-388619899018}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Humanizer.Tests.Shared", "Humanizer.Tests.Shared\Humanizer.Tests.Shared.shproj", "{FDEC244B-F07E-4A5E-BB80-FBC6AC77A9AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{04B74BEC-A645-4D1A-BE21-F4EB4413A903}"

@@ -27,8 +27,8 @@ namespace Humanizer
     /// </summary>
     public static class HeadingExtensions
     {
-        internal static readonly string[] headings = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
-        internal static readonly char[] headingArrows = { '↑', '↗', '→', '↘', '↓', '↙', '←', '↖' };
+        internal static readonly string[] Headings = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
+        internal static readonly char[] HeadingArrows = { '↑', '↗', '→', '↘', '↓', '↙', '←', '↖' };
 
         // https://stackoverflow.com/a/7490772/1720761
         /// <summary>
@@ -44,7 +44,7 @@ namespace Humanizer
         {
             var val = (int)((heading / 22.5) + .5);
 
-            var result = headings[val % 16];
+            var result = Headings[val % 16];
 
             if (style == HeadingStyle.Abbreviated)
             {
@@ -65,7 +65,7 @@ namespace Humanizer
         {
             var val = (int)((heading / 45) + .5);
 
-            return headingArrows[val % 8];
+            return HeadingArrows[val % 8];
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace Humanizer
             culture ??= CultureInfo.CurrentCulture;
 
             var upperCaseHeading = culture.TextInfo.ToUpper(heading);
-            for (var index = 0; index < headings.Length; ++index)
+            for (var index = 0; index < Headings.Length; ++index)
             {
-                var localizedShortHeading = Resources.GetResource($"{headings[index]}_Short", culture);
+                var localizedShortHeading = Resources.GetResource($"{Headings[index]}_Short", culture);
                 if (culture.CompareInfo.Compare(upperCaseHeading, localizedShortHeading) == 0)
                 {
                     return (index * 22.5);
@@ -111,7 +111,7 @@ namespace Humanizer
         /// </summary>
         public static double FromHeadingArrow(this char heading)
         {
-            var index = Array.IndexOf(headingArrows, heading);
+            var index = Array.IndexOf(HeadingArrows, heading);
             
             if (index == -1)
             {

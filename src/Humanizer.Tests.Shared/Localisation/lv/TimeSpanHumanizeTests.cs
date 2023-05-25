@@ -92,7 +92,7 @@ namespace Humanizer.Tests.Localisation.lv
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("bez laika", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("bez laika", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

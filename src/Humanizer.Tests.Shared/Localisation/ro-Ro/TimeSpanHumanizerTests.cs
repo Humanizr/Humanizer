@@ -26,16 +26,16 @@ namespace Humanizer.Tests.Localisation.roRO
         }
 
         [Theory]
-        [InlineData(0, "0 secunde", true)]
+        [InlineData(0, "0 secunde", TimeSpanStyle.Words)]
         [InlineData(0, "0 de secunde")]
         [InlineData(1, "1 secundă")]
         [InlineData(14, "14 secunde")]
         [InlineData(21, "21 de secunde")]
         [InlineData(156, "2 minute")]
-        public void Seconds(int seconds, string expected, bool toWords = false)
+        public void Seconds(int seconds, string expected, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
             var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: Humanizer.Localisation.TimeUnit.Second,
-                toWords: toWords);
+                timeSpanStyle: timeSpanStyle);
             Assert.Equal(expected, actual);
         }
 
@@ -118,7 +118,7 @@ namespace Humanizer.Tests.Localisation.roRO
         {
             // Usage in Romanian: "Timp execuție: 0 secunde."
             // Should be equivalent with TimeSpan.FromSeconds(0).Humanize()
-            Assert.Equal("0 secunde", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("0 secunde", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

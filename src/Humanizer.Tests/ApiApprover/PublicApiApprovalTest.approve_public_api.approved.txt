@@ -1607,8 +1607,15 @@ namespace Humanizer
     }
     public class static TimeSpanHumanizeExtensions
     {
-        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
-        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = False) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", Humanizer.TimeSpanStyle timeSpanStyle = 0) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", Humanizer.TimeSpanStyle timeSpanStyle = 0) { }
+    }
+    public enum TimeSpanStyle
+    {
+        Full = 0,
+        Words = 1,
+        Abbreviated = 2,
+        Short = 3,
     }
     public class static TimeUnitToSymbolExtensions
     {
@@ -1887,7 +1894,7 @@ namespace Humanizer.Localisation
         }
         public class static TimeSpanHumanize
         {
-            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1, bool toWords = False) { }
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1, Humanizer.TimeSpanStyle timeSpanStyle = 0) { }
         }
         public class static TimeUnitSymbol
         {
@@ -1938,10 +1945,9 @@ namespace Humanizer.Localisation.Formatters
         public virtual string DateHumanize_Never() { }
         public virtual string DateHumanize_Now() { }
         protected virtual string Format(string resourceKey) { }
-        protected virtual string Format(string resourceKey, int number, bool toWords = False) { }
+        protected virtual string Format(string resourceKey, int number, Humanizer.TimeSpanStyle timeSpanStyle = 0) { }
         protected virtual string GetResourceKey(string resourceKey, int number) { }
-        protected virtual string GetResourceKey(string resourceKey) { }
-        public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False) { }
+        public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, Humanizer.TimeSpanStyle timeSpanStyle = 0) { }
         public virtual string TimeSpanHumanize_Zero() { }
         public virtual string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit) { }
     }
@@ -1951,7 +1957,7 @@ namespace Humanizer.Localisation.Formatters
         string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
         string DateHumanize_Never();
         string DateHumanize_Now();
-        string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False);
+        string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, Humanizer.TimeSpanStyle timeSpanStyle = 0);
         string TimeSpanHumanize_Zero();
         string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit);
     }

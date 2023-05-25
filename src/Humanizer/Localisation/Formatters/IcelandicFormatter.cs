@@ -17,13 +17,13 @@ namespace Humanizer.Localisation.Formatters
         {
             return base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');
         }
-        protected override string Format(string resourceKey, int number, bool toWords = false)
+        protected override string Format(string resourceKey, int number, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
         {
             var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _localCulture);
 
             if (string.IsNullOrEmpty(resourceString))
             {
-                throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
+                throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
             }
             var words = resourceString.Split(' ');
 
@@ -35,7 +35,7 @@ namespace Humanizer.Localisation.Formatters
                 _ => GrammaticalGender.Feminine
             };
 
-            return toWords ? 
+            return timeSpanStyle == TimeSpanStyle.Words ?
                 resourceString.FormatWith(number.ToWords(unitGender, _localCulture)) :
                 resourceString.FormatWith(number);
         }

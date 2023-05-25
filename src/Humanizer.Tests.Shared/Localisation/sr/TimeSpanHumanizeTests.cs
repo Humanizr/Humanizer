@@ -98,7 +98,7 @@ namespace Humanizer.Tests.Localisation.sr
         public void NoTimeToWords()
         {
             var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize(toWords: true);
+            var actual = noTime.Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal("без протеклог времена", actual);
         }
     }

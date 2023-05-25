@@ -92,7 +92,7 @@ namespace Humanizer.Tests.Localisation.msMY
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("tiada masa", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("tiada masa", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

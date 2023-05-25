@@ -11,7 +11,7 @@
             /// Examples: TimeSpanHumanize_SingleMinute, TimeSpanHumanize_MultipleHours.
             /// Note: "s" for plural served separately by third part.
             /// </summary>
-            private const string TimeSpanFormat = "TimeSpanHumanize_{0}{1}{2}";
+            private const string TimeSpanFormat = "TimeSpanHumanize_{0}{1}{2}{3}";
             private const string Zero = "TimeSpanHumanize_Zero";
 
             /// <summary>
@@ -19,18 +19,28 @@
             /// </summary>
             /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
             /// <param name="count">Number of units, default is One.</param>
-            /// <param name="toWords">Result to words, default is false.</param>
+            /// <param name="timeSpanStyle">Time span style, default is <see cref="TimeSpanStyle.Full">.</param>
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
-            public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false)
+            public static string GetResourceKey(TimeUnit unit, int count = 1, TimeSpanStyle timeSpanStyle = TimeSpanStyle.Full)
             {
                 ValidateRange(count);
 
-                if (count == 0 && toWords)
+                if (count == 0 && timeSpanStyle == TimeSpanStyle.Words)
                 {
                     return Zero;
                 }
 
-                return TimeSpanFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s");
+                return TimeSpanFormat.FormatWith(
+                    count == 1 ? Single : Multiple,
+                    unit,
+                    count == 1 ? "" : "s",
+                    timeSpanStyle switch
+                    {
+                        TimeSpanStyle.Short => "_Short",
+                        TimeSpanStyle.Abbreviated => "_Abbr",
+                        TimeSpanStyle.Words => count == 1 ? "_Words" : "", // only Single has _Words resource
+                        _ => ""
+                    });
             }
         }
     }

@@ -92,7 +92,7 @@ namespace Humanizer.Tests.Localisation.koKR
         [Fact]
         public void NoTimeToWords()
         {
-            Assert.Equal("방금", TimeSpan.Zero.Humanize(toWords: true));
+            Assert.Equal("방금", TimeSpan.Zero.Humanize(timeSpanStyle: TimeSpanStyle.Words));
         }
     }
 }

@@ -95,7 +95,7 @@ namespace Humanizer.Tests.Localisation.vi
         public void NoTimeToWords()
         {
             var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize(toWords: true);
+            var actual = noTime.Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal("không giờ", actual);
         }
     }

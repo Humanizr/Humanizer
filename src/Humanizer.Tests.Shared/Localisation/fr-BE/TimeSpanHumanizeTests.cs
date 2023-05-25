@@ -105,7 +105,7 @@ namespace Humanizer.Tests.Localisation.frBE
         public void NoTimeToWords()
         {
             var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize(toWords: true);
+            var actual = noTime.Humanize(timeSpanStyle: TimeSpanStyle.Words);
             Assert.Equal("temps nul", actual);
         }
     }
