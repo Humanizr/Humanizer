@@ -82,7 +82,7 @@ namespace Humanizer.Tests.Localisation.id
 
         [Theory]
         [InlineData(1, "sebulan dari sekarang")]
-        [InlineData(10, "10 bulan dari sekarang")]
+        [InlineData(10, "sebulan dari hari ini")]
         public void MonthsFromNow(int months, string expected)
         {
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
@@ -97,8 +97,8 @@ namespace Humanizer.Tests.Localisation.id
         }
 
         [Theory]
-        [InlineData(1, "setahun dari sekarang")]
-        [InlineData(2, "2 tahun dari sekarang")]
+        [InlineData(1, "setahun dari hari ini")]
+        [InlineData(2, "2 tahun dari hari ini")]
         public void YearsFromNow(int years, string expected)
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
