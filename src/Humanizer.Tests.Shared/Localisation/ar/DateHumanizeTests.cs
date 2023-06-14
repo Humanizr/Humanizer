@@ -19,7 +19,7 @@ namespace Humanizer.Tests.Localisation.ar
         [Theory]
         [InlineData(1, "في غضون يوم واحد من الآن")]
         [InlineData(2, "في غضون يومين من الآن")]
-        [InlineData(10, "في غضون 10 أيام من الآن")]
+        [InlineData(10, "في غضون 10 يوم من اليوم")]
         [InlineData(17, "في غضون 17 يوم من اليوم")]
         public void DaysFromNow(int days, string expected)
         {
