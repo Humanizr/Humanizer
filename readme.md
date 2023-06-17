@@ -38,6 +38,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
    - [Number to Numbers](#number-to-numbers)
    - [Number to words](#number-to-words)
    - [Number to ordinal words](#number-to-ordinal-words)
+   - [Date to words](#date-to-words)
    - [DateTime to ordinal words](#date-time-to-ordinal-words)
    - [TimeOnly to Clock Notation](#time-only-to-clock-notation)
    - [Roman numerals](#roman-numerals)
@@ -883,6 +884,25 @@ Passing `wordForm` argument in when it is not applicable will not make any diffe
 // English locale
 43.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Abbreviation, new CultureInfo("en")) => "forty-third"
 ```
+
+### <a id="date-to-words">Date to words</a>
+This is kind of an extension of ToWords and Ordinalize
+```C#
+// for Spanish locale
+new DateTime(2022, 1, 1).ToWords() => "uno de enero de dos mil veintidós"
+new DateOnly(2020, 6, 10).ToWords() => "diez de junio de dos mil veinte"
+new DateOnly(1999, 12, 31).ToWords() => "treinta y uno de diciembre de mil novecientos noventa y nueve"
+// for English UK locale
+new DateTime(2022, 1, 1).ToWords() => "the first of January two thousand and twenty-two"
+new DateOnly(1999, 12, 31).ToWords() => "the thirty-first of December one thousand nine hundred and ninety-nine"
+// for English US locale
+new DateTime(2022, 1, 1).ToWords() => "January first, two thousand and twenty-two"
+new DateOnly(1999, 12, 31).ToWords() => "December thirty-first, one thousand nine hundred and ninety-nine"
+```
+
+The ToWords method of `DateTime` or `DateOnly` also supports grammatical case.
+You can pass a second argument to `ToWords` to specify the case of the output.
+The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`, `GrammaticalCase.Dative`, `GrammaticalCase.Accusative`, `GrammaticalCase.Instrumental` and `GrammaticalGender.Prepositional`
 
 ### <a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
 This is kind of an extension of Ordinalize
