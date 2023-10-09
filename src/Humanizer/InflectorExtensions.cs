@@ -70,8 +70,8 @@ namespace Humanizer
         /// <param name="input"></param>
         /// <returns></returns>
         public static string Pascalize(this string input)
-        {   
-            return Regex.Replace(input, "(?:^|_| +)(.)", match => match.Groups[1].Value.ToUpper());
+        {
+            return Regex.Replace(input, "(?:_+|-+|^| +)(.)", match => match.Groups[1].Value.ToUpper());
         }
 
         /// <summary>
