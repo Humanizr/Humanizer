@@ -169,7 +169,7 @@
     <value>tunnin päästä</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>minuutin  päästä</value>
+    <value>minuutin päästä</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
     <value>kuukauden päästä</value>
