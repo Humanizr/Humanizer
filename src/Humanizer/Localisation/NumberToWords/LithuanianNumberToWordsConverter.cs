@@ -17,6 +17,11 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
+            if (gender == GrammaticalGender.Neuter)
+            {
+                throw new NotSupportedException();
+            }
+
             var parts = new List<string>();
             var number = input;
 
@@ -60,7 +65,8 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
+        private static void CollectParts(ICollection<string> parts, ref long number, long divisor,
+            GrammaticalGender gender, params string[] forms)
         {
             var result = number / divisor;
             if (result == 0)
@@ -78,7 +84,8 @@ namespace Humanizer.Localisation.NumberToWords
             parts.Add(ChooseOneForGrammaticalNumber(result, forms));
         }
 
-        private static void CollectOrdinalParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
+        private static void CollectOrdinalParts(ICollection<string> parts, ref long number, long divisor,
+            GrammaticalGender gender, string prefixedForm, params string[] forms)
         {
             var result = number / divisor;
             if (result == 0)
@@ -114,11 +121,12 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number > 0 || parts.Count == 0)
             {
-                parts.Add(UnitsMap[number]);
+                parts.Add(GetCardinalEndingForGender(UnitsMap[number], gender));
             }
         }
 
-        private static void CollectOrdinalPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender, bool lastNumber = false)
+        private static void CollectOrdinalPartsUnderOneThousand(ICollection<string> parts, long number,
+            GrammaticalGender gender, bool lastNumber = false)
         {
             if (number >= 100)
             {
@@ -157,7 +165,8 @@ namespace Humanizer.Localisation.NumberToWords
             return forms[GetFormIndex(number)];
         }
 
-        private static string ChooseCardinalOrOrdinalForm(long number, string ordinalForm, string[] cardinalForms, bool useOrdinalForm = false)
+        private static string ChooseCardinalOrOrdinalForm(long number, string ordinalForm, string[] cardinalForms,
+            bool useOrdinalForm = false)
         {
             if (useOrdinalForm)
             {
@@ -188,6 +197,36 @@ namespace Humanizer.Localisation.NumberToWords
                 default:
                     throw new ArgumentOutOfRangeException(nameof(form));
             }
+        }
+
+        private static string GetCardinalEndingForGender(string number, GrammaticalGender gender)
+        {
+            if (gender == GrammaticalGender.Masculine)
+            {
+                return number;
+            }
+
+            if (gender == GrammaticalGender.Feminine)
+            {
+                if (number == "du")
+                {
+                    return "dvi";
+                }
+
+                if (number.EndsWith("as"))
+                {
+                    return number.Substring(0, number.Length - 1);
+                }
+
+                if (number.EndsWith("i"))
+                {
+                    return number + "os";
+                }
+
+                return number;
+            }
+
+            throw new ArgumentOutOfRangeException(nameof(gender));
         }
 
         private static string GetOrdinalEndingForGender(GrammaticalGender gender)
