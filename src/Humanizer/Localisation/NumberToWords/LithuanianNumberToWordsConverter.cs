@@ -121,7 +121,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number > 0 || parts.Count == 0)
             {
-                parts.Add(GetCardinalEndingForGender(UnitsMap[number], gender));
+                parts.Add(GetCardinalNumberForGender(UnitsMap[number], gender));
             }
         }
 
@@ -199,7 +199,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static string GetCardinalEndingForGender(string number, GrammaticalGender gender)
+        private static string GetCardinalNumberForGender(string number, GrammaticalGender gender)
         {
             if (gender == GrammaticalGender.Masculine)
             {
