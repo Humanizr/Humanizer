@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Humanizer.Localisation.GrammaticalNumber;
+
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
@@ -167,23 +169,25 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static int GetFormIndex(long number)
         {
-            var tens = number % 100 / 10;
-            if (tens != 1)
+            var form = LithuanianNumberFormDetector.Detect(number);
+
+            switch (form)
             {
-                var units = number % 10;
-
-                if (units == 1) // 1, 21, 31, 41 ... 91, 101, 121 ...
-                {
-                    return 0;
-                }
-
-                if (units != 0 && units < 10) // 2, 3, 4, 5, 6, 7, 8, 9
-                {
-                    return 1;
-                }
+                case LithuanianNumberForm.Singular:
+                    {
+                        return 0;
+                    }
+                case LithuanianNumberForm.Plural:
+                    {
+                        return 1;
+                    }
+                case LithuanianNumberForm.GenitivePlural:
+                    {
+                        return 2;
+                    }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(form));
             }
-
-            return 2;
         }
 
         private static string GetOrdinalEndingForGender(GrammaticalGender gender)
