@@ -5,23 +5,20 @@
         public static LithuanianNumberForm Detect(long number)
         {
             var tens = number % 100 / 10;
-            if (tens != 1)
+            var units = number % 10;
+
+            if (tens == 1 || units == 0) // 10-19, 20, 30, 40 ... 100, 110 ..
             {
-                var units = number % 10;
-
-                if (units == 1) // 1, 21, 31, 41 ... 91, 101, 121 ...
-                {
-                    return LithuanianNumberForm.Singular;
-                }
-
-                if (units != 0 && units < 10) // 2, 3, 4, 5, 6, 7, 8, 9
-                {
-                    return LithuanianNumberForm.Plural;
-                }
+                return LithuanianNumberForm.GenitivePlural;
             }
 
-            return LithuanianNumberForm.GenitivePlural;
+            if (units == 1) // 1, 21, 31, 41 ... 91, 101, 121 ...
+            {
+                return LithuanianNumberForm.Singular;
+            }
+
+            // 2-9, 22-29, 32 ...
+            return LithuanianNumberForm.Plural;
         }
     }
 }
-

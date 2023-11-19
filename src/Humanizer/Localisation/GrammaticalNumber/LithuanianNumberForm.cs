@@ -1,8 +1,9 @@
-﻿namespace Humanizer.Localisation.GrammaticalNumber;
-
-public enum LithuanianNumberForm
+﻿namespace Humanizer.Localisation.GrammaticalNumber
 {
-    Singular,
-    Plural,
-    GenitivePlural
+    internal enum LithuanianNumberForm
+    {
+        Singular,
+        Plural,
+        GenitivePlural
+    }
 }
