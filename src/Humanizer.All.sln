@@ -81,6 +81,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.zh-Hans.nuspec = ..\NuSpecs\Humanizer.Core.zh-Hans.nuspec
 		..\NuSpecs\Humanizer.Core.zh-Hant.nuspec = ..\NuSpecs\Humanizer.Core.zh-Hant.nuspec
 		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
+		..\NuSpecs\Humanizer.Core.lt.nuspec = ..\NuSpecs\Humanizer.Core.lt.nuspec
 	EndProjectSection
 EndProject
 Global
