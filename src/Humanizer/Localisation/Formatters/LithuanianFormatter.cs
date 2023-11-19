@@ -2,7 +2,7 @@
 
 namespace Humanizer.Localisation.Formatters
 {
-    public class LithuanianFormatter : DefaultFormatter
+    internal class LithuanianFormatter : DefaultFormatter
     {
         public LithuanianFormatter()
             : base("lt")
