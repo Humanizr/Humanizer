@@ -81,11 +81,11 @@ namespace Humanizer.Localisation.NumberToWords
                 CollectPartsUnderOneThousand(parts, result, gender);
             }
 
-            parts.Add(ChooseOneForGrammaticalNumber(result, forms));
+            parts.Add(ChooseForm(result, forms));
         }
 
         private static void CollectOrdinalParts(ICollection<string> parts, ref long number, long divisor,
-            GrammaticalGender gender, string prefixedForm, params string[] forms)
+            GrammaticalGender gender, string ordinalForm, params string[] forms)
         {
             var result = number / divisor;
             if (result == 0)
@@ -100,7 +100,7 @@ namespace Humanizer.Localisation.NumberToWords
                 CollectOrdinalPartsUnderOneThousand(parts, result, gender);
             }
 
-            parts.Add(ChooseCardinalOrOrdinalForm(result, prefixedForm, forms, useOrdinalForm: number == 0));
+            parts.Add(ChooseCardinalOrOrdinalForm(result, ordinalForm, forms, useOrdinalForm: number == 0));
         }
 
         private static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
@@ -160,7 +160,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static string ChooseOneForGrammaticalNumber(long number, string[] forms)
+        private static string ChooseForm(long number, string[] forms)
         {
             return forms[GetFormIndex(number)];
         }
@@ -173,7 +173,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return ordinalForm;
             }
 
-            return ChooseOneForGrammaticalNumber(number, cardinalForms);
+            return ChooseForm(number, cardinalForms);
         }
 
         private static int GetFormIndex(long number)
