@@ -142,7 +142,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts[parts.Count - 1] += "երորդ";
             }
 
-            var toWords = string.Join(" ", parts.ToArray());
+            var toWords = string.Join(" ", parts);
 
             //if (isOrdinal)
             //{
