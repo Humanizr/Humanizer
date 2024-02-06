@@ -18,8 +18,6 @@ namespace Humanizer
         /// <summary>
         /// Returns a new instance of DateTime based on the provided date where the time is set to midnight
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
         public static DateTime AtMidnight(this DateTime date)
         {
             return date.At(0);
@@ -28,8 +26,6 @@ namespace Humanizer
         /// <summary>
         /// Returns a new instance of DateTime based on the provided date where the time is set to noon
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
         public static DateTime AtNoon(this DateTime date)
         {
             return date.At(12);
@@ -38,9 +34,6 @@ namespace Humanizer
         /// <summary>
         /// Returns a new instance of DateTime based on the provided date where the year is set to the provided year
         /// </summary>
-        /// <param name="date"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         public static DateTime In(this DateTime date, int year)
         {
             return new DateTime(year, date.Month, date.Day, date.Hour, date.Minute, date.Second, date.Millisecond);

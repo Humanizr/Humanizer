@@ -46,7 +46,6 @@ namespace Humanizer
         /// Humanizes the input string; e.g. Underscored_input_String_is_turned_INTO_sentence -> 'Underscored input String is turned INTO sentence'
         /// </summary>
         /// <param name="input">The string to be humanized</param>
-        /// <returns></returns>
         public static string Humanize(this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
@@ -75,7 +74,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be humanized</param>
         /// <param name="casing">The desired casing for the output</param>
-        /// <returns></returns>
         public static string Humanize(this string input, LetterCasing casing)
         {
             return input.Humanize().ApplyCase(casing);

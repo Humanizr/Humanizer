@@ -12,7 +12,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">String to be transformed</param>
         /// <param name="culture">The culture</param>
-        /// <returns></returns>
         string Transform(string input, CultureInfo culture);
     }
 }
