@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Humanizer.Localisation.Ordinalizers
@@ -17,13 +18,6 @@ namespace Humanizer.Localisation.Ordinalizers
 
         public override string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm)
         {
-            var genderMap = new Dictionary<GrammaticalGender, string>()
-            {
-                { GrammaticalGender.Feminine, ".ª" },
-                { GrammaticalGender.Masculine, GetWordForm(number, wordForm) },
-                { GrammaticalGender.Neuter, GetWordForm(number, wordForm) }
-            };
-
             // N/A in Spanish
             if (number == 0 || number == int.MinValue)
             {
@@ -35,7 +29,16 @@ namespace Humanizer.Localisation.Ordinalizers
                 return Convert(-number, GetNumberString(-number), gender);
             }
 
-            return $"{numberString}{genderMap[gender]}";
+            switch (gender)
+            {
+                case GrammaticalGender.Masculine:
+                case GrammaticalGender.Neuter:
+                    return numberString + GetWordForm(number, wordForm);
+                case GrammaticalGender.Feminine:
+                    return numberString + ".ª";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
         }
 
         private static string GetNumberString(int number)

@@ -170,20 +170,26 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static string ConvertOrdinalUnits(in int number, GrammaticalGender gender, WordForm wordForm)
         {
-            if (number is > 0 and < 10)
+            if (number is <= 0 or >= 10)
             {
-                Dictionary<GrammaticalGender, string> genderedEndingDict = new()
-                {
-                    { GrammaticalGender.Feminine, "a" },
-                    { GrammaticalGender.Masculine, HasOrdinalAbbreviation(number, wordForm) ? string.Empty : "o" },
-                };
-
-                genderedEndingDict.Add(GrammaticalGender.Neuter, genderedEndingDict[GrammaticalGender.Masculine]);
-
-                return OrdinalsRootMap[number] + genderedEndingDict[gender];
+                return string.Empty;
             }
 
-            return string.Empty;
+            switch (gender)
+            {
+                case GrammaticalGender.Masculine:
+                case GrammaticalGender.Neuter:
+                    if (HasOrdinalAbbreviation(number, wordForm))
+                    {
+                        return OrdinalsRootMap[number];
+                    }
+
+                    return OrdinalsRootMap[number] + 'o';
+                case GrammaticalGender.Feminine:
+                    return OrdinalsRootMap[number] + "a";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
         }
 
         private static string ConvertTenths(in int number, out int remainder, GrammaticalGender gender)
@@ -198,28 +204,26 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static string ConvertUnits(long inputNumber, GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
-            var wordPart = string.Empty;
-
-            if (inputNumber > 0)
+            if (inputNumber <= 0)
             {
-                UnitsMap[1] = GetGenderedOne(gender, wordForm);
-                UnitsMap[21] = GetGenderedTwentyOne(gender, wordForm);
-
-                if (inputNumber < 30)
-                {
-                    wordPart = UnitsMap[inputNumber];
-                }
-                else
-                {
-                    wordPart = TensMap[inputNumber / 10];
-                    if (inputNumber % 10 > 0)
-                    {
-                        wordPart += $" y {UnitsMap[inputNumber % 10]}";
-                    }
-                }
+                return string.Empty;
             }
 
-            return wordPart;
+            UnitsMap[1] = GetGenderedOne(gender, wordForm);
+            UnitsMap[21] = GetGenderedTwentyOne(gender, wordForm);
+
+            if (inputNumber < 30)
+            {
+                return UnitsMap[inputNumber];
+            }
+
+            var wordPart = TensMap[inputNumber / 10];
+            if (inputNumber % 10 <= 0)
+            {
+                return wordPart;
+            }
+
+            return wordPart + $" y {UnitsMap[inputNumber % 10]}";
         }
 
         private static IReadOnlyList<string> GetGenderedHundredsMap(GrammaticalGender gender)
@@ -238,26 +242,30 @@ namespace Humanizer.Localisation.NumberToWords
 
         private static string GetGenderedOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
-            var genderedOne = new Dictionary<GrammaticalGender, string>()
+            switch (gender)
             {
-                { GrammaticalGender.Feminine, "una" },
-                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "un" : "uno" }
-            };
-
-            genderedOne.Add(GrammaticalGender.Neuter, genderedOne[GrammaticalGender.Masculine]);
-            return genderedOne[gender];
+                case GrammaticalGender.Masculine:
+                case GrammaticalGender.Neuter:
+                    return wordForm == WordForm.Abbreviation ? "un" : "uno";
+                case GrammaticalGender.Feminine:
+                    return "una";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
         }
 
         private static string GetGenderedTwentyOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
-            var genderedtwentyOne = new Dictionary<GrammaticalGender, string>()
+            switch (gender)
             {
-                { GrammaticalGender.Feminine, "veintiuna" },
-                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno" }
-            };
-
-            genderedtwentyOne.Add(GrammaticalGender.Neuter, genderedtwentyOne[GrammaticalGender.Masculine]);
-            return genderedtwentyOne[gender];
+                case GrammaticalGender.Masculine:
+                case GrammaticalGender.Neuter:
+                    return wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno";
+                case GrammaticalGender.Feminine:
+                    return "veintiuna";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
         }
 
         private static bool HasOrdinalAbbreviation(int number, WordForm wordForm)
