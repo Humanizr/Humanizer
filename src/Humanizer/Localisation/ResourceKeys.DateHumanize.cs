@@ -1,4 +1,6 @@
-﻿namespace Humanizer.Localisation
+﻿using System;
+
+namespace Humanizer.Localisation
 {
     public partial class ResourceKeys
     {
@@ -42,9 +44,19 @@
                     return Now;
                 }
 
-                var singularity = count == 1 ? Single : Multiple;
+                string singularity;
+                var unit = timeUnit.ToString();
+                if (count == 1)
+                {
+                    singularity = Single;
+                }
+                else
+                {
+                    unit += "s";
+                    singularity = Multiple;
+                }
+
                 var tense = timeUnitTense == Tense.Future ? FromNow : Ago;
-                var unit = timeUnit.ToString().ToQuantity(count, ShowQuantityAs.None);
                 return DateTimeFormat.FormatWith(singularity, unit, tense);
             }
         }
