@@ -17,6 +17,11 @@ namespace Humanizer
         private const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
         private const double _daysInAMonth = _daysInAYear / 12;
 
+        static TimeUnit[] _timeUnits = Enum.GetValues(typeof(TimeUnit))
+            .Cast<TimeUnit>()
+            .Reverse()
+            .ToArray();
+
         /// <summary>
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
         /// </summary>
@@ -53,17 +58,16 @@ namespace Humanizer
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
             var firstValueFound = false;
-            var timeUnitsEnumTypes = GetEnumTypesForTimeUnit();
             var timeParts = new List<string>();
 
-            foreach (var timeUnitType in timeUnitsEnumTypes)
+            foreach (var timeUnit in _timeUnits)
             {
-                var timepart = GetTimeUnitPart(timeUnitType,timespan, maxUnit, minUnit, cultureFormatter, toWords); 
+                var timePart = GetTimeUnitPart(timeUnit, timespan, maxUnit, minUnit, cultureFormatter, toWords);
 
-                if (timepart != null || firstValueFound)
+                if (timePart != null || firstValueFound)
                 {
                     firstValueFound = true;
-                    timeParts.Add(timepart);
+                    timeParts.Add(timePart);
                 }
             }
             if (IsContainingOnlyNullValue(timeParts))
@@ -73,12 +77,6 @@ namespace Humanizer
                 timeParts = CreateTimePartsWithNoTimeValue(noTimeValueCultureFormatted);
             }
             return timeParts;
-        }
-
-        private static IEnumerable<TimeUnit> GetEnumTypesForTimeUnit()
-        {
-            var enumTypeEnumerator = (IEnumerable<TimeUnit>)Enum.GetValues(typeof(TimeUnit));
-            return enumTypeEnumerator.Reverse();
         }
 
         private static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)
