@@ -4,7 +4,6 @@ namespace Humanizer.Tests
 {
     public class EnumHumanizeTests
     {
-#if !NETFX_CORE
         [Fact]
         public void HonorsDescriptionAttribute()
         {
@@ -17,7 +16,7 @@ namespace Humanizer.Tests
         {
             Assert.Equal("Overridden " + EnumTestsResources.MemberWithDescriptionAttributeSubclass, EnumUnderTest.MemberWithDescriptionAttributeSubclass.Humanize());
         }
-#endif
+
         [Fact]
         public void HonorsAnyAttributeWithDescriptionStringProperty()
         {

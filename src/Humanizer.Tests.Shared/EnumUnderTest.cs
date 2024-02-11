@@ -6,11 +6,9 @@ namespace Humanizer.Tests
 {
     public enum EnumUnderTest
     {
-#if !NETFX_CORE
         [Description(EnumTestsResources.MemberWithDescriptionAttribute)]
         MemberWithDescriptionAttribute,
         [DescriptionSubclass(EnumTestsResources.MemberWithDescriptionAttributeSubclass)]
-#endif
         MemberWithDescriptionAttributeSubclass,
         [CustomDescription(EnumTestsResources.MemberWithCustomDescriptionAttribute)]
         MemberWithCustomDescriptionAttribute,
@@ -63,7 +61,6 @@ namespace Humanizer.Tests
         }
     }
 
-#if !NETFX_CORE
     public class DescriptionSubclassAttribute : DescriptionAttribute
     {
         public DescriptionSubclassAttribute(string description) : base(description)
@@ -75,7 +72,6 @@ namespace Humanizer.Tests
             get { return "Overridden " + base.Description; }
         }
     }
-#endif
 
     public class CustomPropertyAttribute : Attribute
     {
