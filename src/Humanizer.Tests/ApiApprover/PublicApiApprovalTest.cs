@@ -38,6 +38,7 @@ namespace Humanizer.Tests.ApiApprover
                                                         {
                                                             Environment.NewLine
                                                         }, StringSplitOptions.RemoveEmptyEntries)
+                                                        .Where(l => !l.StartsWith("[assembly: System.Runtime.Versioning.TargetFrameworkAttribute("))
                                                         .Where(l => !l.StartsWith("[assembly: AssemblyVersion("))
                                                         .Where(l => !l.StartsWith("[assembly: AssemblyFileVersion("))
                                                         .Where(l => !l.StartsWith("[assembly: AssemblyInformationalVersion("))
