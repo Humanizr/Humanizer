@@ -109,7 +109,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(UnitsMap[number]);
             }
 
-            return string.Join(" ", parts.ToArray());
+            return string.Join(" ", parts);
         }
 
         private static bool ExceptionNumbersToWords(int number, out string words)

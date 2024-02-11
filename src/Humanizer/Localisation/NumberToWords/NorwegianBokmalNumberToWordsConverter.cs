@@ -135,7 +135,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts[parts.Count - 1] += (number == 0 ? "" : "en") + (millionOrMore ? "te" : "de");
             }
 
-            var toWords = string.Join("", parts.ToArray()).Trim();
+            var toWords = string.Concat(parts).Trim();
 
             return toWords;
         }
