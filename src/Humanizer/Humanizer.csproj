@@ -13,7 +13,7 @@
     <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
     <LangVersion>preview</LangVersion>
-    <NoWarn>CS1573</NoWarn>
+    <NoWarn>CS1573;CS1591</NoWarn>
   </PropertyGroup>  
   <ItemGroup>
     <None Update="FluentDate\InDate.Months.tt">
