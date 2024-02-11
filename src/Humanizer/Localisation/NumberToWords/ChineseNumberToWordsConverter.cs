@@ -110,7 +110,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
             }
 
-            var toWords = string.Join("", parts.ToArray());
+            var toWords = string.Concat(parts);
 
             if (isSpecial)
             {

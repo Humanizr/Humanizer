@@ -87,7 +87,7 @@ namespace Humanizer.Localisation.NumberToWords
             else if (isOrdinal)
                 parts[parts.Count - 1] += "வது";
 
-            var toWords = string.Join(" ", parts.ToArray());
+            var toWords = string.Join(" ", parts);
 
             if (isOrdinal)
                 toWords = RemoveOnePrefix(toWords);

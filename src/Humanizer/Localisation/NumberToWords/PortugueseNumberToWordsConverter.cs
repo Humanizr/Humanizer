@@ -99,7 +99,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
             }
 
-            return string.Join(" ", parts.ToArray());
+            return string.Join(" ", parts);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
@@ -156,7 +156,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalUnitsMap[number], gender));
             }
 
-            return string.Join(" ", parts.ToArray());
+            return string.Join(" ", parts);
         }
 
         private static string ApplyGender(string toWords, GrammaticalGender gender)
