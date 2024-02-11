@@ -1,11 +1,7 @@
 ﻿using System.Threading.Tasks;
-
 using PublicApiGenerator;
-
 using VerifyTests;
-
 using VerifyXunit;
-
 using Xunit;
 
 namespace Humanizer.Tests.ApiApprover
