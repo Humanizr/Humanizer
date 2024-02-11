@@ -7,7 +7,7 @@ namespace Humanizer.Localisation.TimeToClockNotation
 {
     internal class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
-        public virtual string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
+        public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
         {
             var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
                 ? 5 * Math.Round(time.Minute / 5.0)
