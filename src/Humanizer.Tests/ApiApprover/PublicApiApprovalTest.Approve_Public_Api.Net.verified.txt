@@ -1,5 +1,4 @@
-﻿[assembly: System.Reflection.AssemblyMetadata("CommitHash", "035ebc091377d183ec407e4c306dfee546a34a86")]
-[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/Humanizr/Humanizer.git")]
+﻿[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/Humanizr/Humanizer.git")]
 [assembly: System.Resources.NeutralResourcesLanguage("en")]
 [assembly: System.Runtime.Versioning.TargetFramework(".NETStandard,Version=v2.0", FrameworkDisplayName=".NET Standard 2.0")]
 namespace Humanizer

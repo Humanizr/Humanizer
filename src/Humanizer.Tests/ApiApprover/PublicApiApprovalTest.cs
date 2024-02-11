@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using PublicApiGenerator;
-using VerifyTests;
 using VerifyXunit;
 using Xunit;
 
@@ -15,6 +14,7 @@ namespace Humanizer.Tests.ApiApprover
             var publicApi = typeof(StringHumanizeExtensions).Assembly.GeneratePublicApi();
 
             return Verifier.Verify(publicApi)
+                .ScrubLinesContaining("CommitHash")
                 .UniqueForRuntime();
         }
     }
