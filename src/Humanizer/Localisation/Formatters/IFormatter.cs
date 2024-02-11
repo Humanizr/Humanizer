@@ -22,10 +22,6 @@
         /// <summary>
         /// Returns the string representation of the provided DateTime
         /// </summary>
-        /// <param name="timeUnit"></param>
-        /// <param name="timeUnitTense"></param>
-        /// <param name="unit"></param>
-        /// <returns></returns>
         string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit);
 
         /// <summary>
@@ -37,10 +33,6 @@
         /// <summary>
         /// Returns the string representation of the provided TimeSpan
         /// </summary>
-        /// <param name="timeUnit"></param>
-        /// <param name="unit"></param>
-        /// <param name="toWords"></param>
-        /// <returns></returns>
         string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false);
 
         /// <summary>

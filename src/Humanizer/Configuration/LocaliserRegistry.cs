@@ -17,7 +17,6 @@ namespace Humanizer.Configuration
         /// <summary>
         /// Creates a localiser registry with the default localiser set to the provided value
         /// </summary>
-        /// <param name="defaultLocaliser"></param>
         public LocaliserRegistry(TLocaliser defaultLocaliser)
         {
             _defaultLocaliser = (culture) => defaultLocaliser;
@@ -26,7 +25,6 @@ namespace Humanizer.Configuration
         /// <summary>
         /// Creates a localiser registry with the default localiser factory set to the provided value
         /// </summary>
-        /// <param name="defaultLocaliser"></param>
         public LocaliserRegistry(Func<CultureInfo, TLocaliser> defaultLocaliser)
         {
             _defaultLocaliser = defaultLocaliser;

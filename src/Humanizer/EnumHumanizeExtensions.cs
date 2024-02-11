@@ -20,7 +20,6 @@ namespace Humanizer
         /// Turns an enum member into a human readable string; e.g. AnonymousUser -> Anonymous user. It also honors DescriptionAttribute data annotation
         /// </summary>
         /// <param name="input">The enum member to be humanized</param>
-        /// <returns></returns>
         public static string Humanize(this Enum input)
         {
             var enumType = input.GetType();
@@ -55,7 +54,6 @@ namespace Humanizer
         /// <summary>
         /// Checks whether the given enum is to be used as a bit field type.
         /// </summary>
-        /// <param name="typeInfo"></param>
         /// <returns>True if the given enum is a bit field enum, false otherwise.</returns>
         private static bool IsBitFieldEnum(TypeInfo typeInfo)
         {
@@ -111,7 +109,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The enum member to be humanized</param>
         /// <param name="casing">The casing to use for humanizing the enum member</param>
-        /// <returns></returns>
         public static string Humanize(this Enum input, LetterCasing casing)
         {
             var humanizedEnum = Humanize(input);
