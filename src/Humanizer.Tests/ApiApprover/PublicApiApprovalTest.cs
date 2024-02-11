@@ -15,7 +15,7 @@ namespace Humanizer.Tests.ApiApprover
 
             return Verifier.Verify(publicApi)
                 .ScrubLinesContaining("CommitHash", "RepositoryUrl")
-                .UniqueForRuntime();
+                .UniqueForTargetFrameworkAndVersion();
         }
     }
 }
