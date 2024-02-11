@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-
-namespace Humanizer.Inflections
+﻿namespace Humanizer.Inflections
 {
     /// <summary>
     /// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.

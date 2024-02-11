@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Humanizer.Localisation.GrammaticalNumber;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
     {

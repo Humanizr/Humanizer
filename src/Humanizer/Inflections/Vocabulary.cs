@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
-namespace Humanizer.Inflections
+﻿namespace Humanizer.Inflections
 {
     /// <summary>
     /// A container for exceptions to simple pluralization/singularization rules.

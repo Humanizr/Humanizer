@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.fr.Bytes
+﻿namespace Humanizer.Tests.Localisation.fr.Bytes
 {
     [UseCulture("fr-FR")]
     public class ByteSizeExtensionsTests

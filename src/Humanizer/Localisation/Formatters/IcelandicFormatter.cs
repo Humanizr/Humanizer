@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer.Localisation.Formatters
 {
     internal class IcelandicFormatter : DefaultFormatter
     {

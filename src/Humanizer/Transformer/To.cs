@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using System.Linq;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// A portal to string transformation using IStringTransformer

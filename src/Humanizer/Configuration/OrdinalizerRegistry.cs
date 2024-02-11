@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.Ordinalizers;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer.Configuration
 {
     internal class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
     {

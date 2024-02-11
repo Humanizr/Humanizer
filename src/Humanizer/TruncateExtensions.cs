@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Allow strings to be truncated

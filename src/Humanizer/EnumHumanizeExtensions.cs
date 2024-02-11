@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Humanizer.Configuration;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Contains extension methods for humanizing Enums

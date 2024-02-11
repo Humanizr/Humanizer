@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.es
+﻿namespace Humanizer.Tests.Localisation.es
 {
     [UseCulture("es-ES")]
     public class NumberToWordsFeminineTests

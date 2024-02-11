@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Localisation.Formatters;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer.Configuration
 {
     internal class FormatterRegistry : LocaliserRegistry<IFormatter>
     {

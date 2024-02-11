@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     internal class ToTitleCase : ICulturedStringTransformer
     {

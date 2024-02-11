@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {

@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.uzCyrl
+﻿namespace Humanizer.Tests.Localisation.uzCyrl
 {
     [UseCulture("uz-Cyrl-UZ")]
     public class NumberToWordsTests

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Reflection;
-using Humanizer.DateTimeHumanizeStrategy;
-using Humanizer.Localisation.CollectionFormatters;
-using Humanizer.Localisation.DateToOrdinalWords;
-using Humanizer.Localisation.Formatters;
-using Humanizer.Localisation.NumberToWords;
-using Humanizer.Localisation.Ordinalizers;
-#if NET6_0_OR_GREATER
+﻿#if NET6_0_OR_GREATER
 using Humanizer.Localisation.TimeToClockNotation;
 #endif
 

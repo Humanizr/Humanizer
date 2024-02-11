@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class UzbekLatnNumberToWordConverter : GenderlessNumberToWordsConverter
     {

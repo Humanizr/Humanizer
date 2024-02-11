@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.CollectionFormatters;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer.Configuration
 {
     internal class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
     {

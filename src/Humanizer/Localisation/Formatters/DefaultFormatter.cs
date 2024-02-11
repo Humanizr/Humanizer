@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer.Localisation.Formatters
 {
     /// <summary>
     /// Default implementation of IFormatter interface.

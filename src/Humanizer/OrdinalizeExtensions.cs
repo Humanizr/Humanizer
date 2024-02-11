@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Configuration;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Ordinalize extensions

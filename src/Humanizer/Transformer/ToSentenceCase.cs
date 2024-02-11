@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     internal class ToSentenceCase : ICulturedStringTransformer
     {

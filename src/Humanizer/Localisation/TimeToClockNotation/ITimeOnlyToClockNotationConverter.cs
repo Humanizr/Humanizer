@@ -1,9 +1,5 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-
-using Humanizer;
-
 namespace Humanizer.Localisation.TimeToClockNotation
 {
     /// <summary>

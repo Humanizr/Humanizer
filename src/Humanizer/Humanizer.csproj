@@ -15,6 +15,7 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>  
   <ItemGroup>
+    <Using Remove="System.Net.Http" />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>

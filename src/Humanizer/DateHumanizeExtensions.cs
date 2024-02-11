@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using Humanizer.Configuration;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Humanizes DateTime into human readable sentence

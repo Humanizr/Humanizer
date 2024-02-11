@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Number to Number extensions

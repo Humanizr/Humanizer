@@ -1,9 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-using Humanizer.Localisation;
-
-namespace Humanizer.Bytes
+﻿namespace Humanizer.Bytes
 {
 
     /// <summary>

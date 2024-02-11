@@ -1,7 +1,4 @@
-﻿using System;
-using Humanizer.Localisation.NumberToWords.Italian;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class ItalianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
