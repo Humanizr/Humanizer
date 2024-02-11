@@ -14,7 +14,7 @@ namespace Humanizer.Tests.ApiApprover
             var publicApi = typeof(StringHumanizeExtensions).Assembly.GeneratePublicApi();
 
             return Verifier.Verify(publicApi)
-                .ScrubLinesContaining("CommitHash")
+                .ScrubLinesContaining("CommitHash", "RepositoryUrl")
                 .UniqueForRuntime();
         }
     }
