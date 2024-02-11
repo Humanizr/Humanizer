@@ -38,9 +38,11 @@ namespace Humanizer.Localisation.Ordinalizers
             return $"{numberString}{genderMap[gender]}";
         }
 
+        static CultureInfo _spanishCulture = new("es-ES");
+
         private static string GetNumberString(int number)
         {
-            return number.ToString(new CultureInfo("es-ES"));
+            return number.ToString(_spanishCulture);
         }
 
         private static string GetWordForm(int number, WordForm wordForm)
