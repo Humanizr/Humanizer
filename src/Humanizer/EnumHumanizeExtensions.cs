@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Humanizer.Configuration;
+using System.ComponentModel.DataAnnotations;
 
 namespace Humanizer
 {
@@ -8,12 +9,6 @@ namespace Humanizer
     /// </summary>
     public static class EnumHumanizeExtensions
     {
-        private const string DisplayAttributeTypeName = "System.ComponentModel.DataAnnotations.DisplayAttribute";
-        private const string DisplayAttributeGetDescriptionMethodName = "GetDescription";
-        private const string DisplayAttributeGetNameMethodName = "GetName";
-
-        private static readonly Func<PropertyInfo, bool> StringTypedProperty = p => p.PropertyType == typeof(string);
-
         /// <summary>
         /// Turns an enum member into a human readable string; e.g. AnonymousUser -> Anonymous user. It also honors DescriptionAttribute data annotation
         /// </summary>
@@ -21,9 +16,8 @@ namespace Humanizer
         public static string Humanize(this Enum input)
         {
             var enumType = input.GetType();
-            var enumTypeInfo = enumType.GetTypeInfo();
 
-            if (IsBitFieldEnum(enumTypeInfo) && !Enum.IsDefined(enumType, input))
+            if (IsBitFieldEnum(enumType) && !Enum.IsDefined(enumType, input))
             {
                 return Enum.GetValues(enumType)
                            .Cast<Enum>()
@@ -34,7 +28,7 @@ namespace Humanizer
             }
 
             var caseName = input.ToString();
-            var memInfo = enumTypeInfo.GetDeclaredField(caseName);
+            var memInfo = enumType.GetTypeInfo().GetDeclaredField(caseName);
 
             if (memInfo != null)
             {
@@ -53,45 +47,31 @@ namespace Humanizer
         /// Checks whether the given enum is to be used as a bit field type.
         /// </summary>
         /// <returns>True if the given enum is a bit field enum, false otherwise.</returns>
-        private static bool IsBitFieldEnum(TypeInfo typeInfo)
+        private static bool IsBitFieldEnum(Type type)
         {
-            return typeInfo.GetCustomAttribute(typeof(FlagsAttribute)) != null;
+            return type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
         }
 
-        // I had to add this method because PCL doesn't have DescriptionAttribute & I didn't want two versions of the code & thus the reflection
         private static string GetCustomDescription(MemberInfo memberInfo)
         {
-            var attrs = memberInfo.GetCustomAttributes(true);
-
-            foreach (var attr in attrs)
+            var displayAttribute = memberInfo.GetCustomAttribute<DisplayAttribute>();
+            if (displayAttribute != null)
             {
-                var attrType = attr.GetType();
-                if (attrType.FullName == DisplayAttributeTypeName)
+                var description = displayAttribute.GetDescription();
+                if (description != null)
                 {
-                    var methodGetDescription = attrType.GetRuntimeMethod(DisplayAttributeGetDescriptionMethodName, new Type[0]);
-                    if (methodGetDescription != null)
-                    {
-                        var executedMethod = methodGetDescription.Invoke(attr, new object[0]);
-                        if (executedMethod != null)
-                        {
-                            return executedMethod.ToString();
-                        }
-                    }
-                    var methodGetName = attrType.GetRuntimeMethod(DisplayAttributeGetNameMethodName, new Type[0]);
-                    if (methodGetName != null)
-                    {
-                        var executedMethod = methodGetName.Invoke(attr, new object[0]);
-                        if (executedMethod != null)
-                        {
-                            return executedMethod.ToString();
-                        }
-                    }
-                    return null;
+                    return description;
                 }
 
+                return displayAttribute.GetName();
+            }
+
+            foreach (var attr in memberInfo.GetCustomAttributes())
+            {
+                var attrType = attr.GetType();
                 var descriptionProperty =
                     attrType.GetRuntimeProperties()
-                        .Where(StringTypedProperty)
+                        .Where(p => p.PropertyType == typeof(string))
                         .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
                 {

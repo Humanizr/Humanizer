@@ -16,6 +16,7 @@
   </PropertyGroup>  
   <ItemGroup>
     <Using Remove="System.Net.Http" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" Condition="'$(TargetFramework)' == 'netstandard2.0' " />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -46,5 +47,5 @@
   </ItemGroup>  
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>  
+  </ItemGroup>
 </Project>
