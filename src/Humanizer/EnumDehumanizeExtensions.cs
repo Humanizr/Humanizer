@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Contains extension methods for dehumanizing Enum string values.

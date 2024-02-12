@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Humanizer.Bytes;
-using Xunit;
+﻿using Humanizer.Bytes;
 
 namespace Humanizer.Tests.Bytes
 {

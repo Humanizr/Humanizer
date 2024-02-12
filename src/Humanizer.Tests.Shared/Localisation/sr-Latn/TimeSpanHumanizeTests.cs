@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.srLatn
+﻿namespace Humanizer.Tests.Localisation.srLatn
 {
     [UseCulture("sr-Latn")]
     public class TimeSpanHumanizeTests

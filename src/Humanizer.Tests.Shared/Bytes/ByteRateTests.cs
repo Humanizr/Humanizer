@@ -1,7 +1,5 @@
-﻿using System;
-using Humanizer.Bytes;
+﻿using Humanizer.Bytes;
 using Humanizer.Localisation;
-using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {

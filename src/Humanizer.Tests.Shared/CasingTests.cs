@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     public class CasingTests
     {

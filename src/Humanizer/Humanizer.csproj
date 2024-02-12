@@ -15,6 +15,7 @@
     <NoWarn>CS1573;CS1591</NoWarn>
   </PropertyGroup>  
   <ItemGroup>
+    <Using Remove="System.Net.Http" />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -25,8 +26,13 @@
     <None Update="FluentDate\On.Days.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="On.Days.cs" />
     <Compile Update="FluentDate\On.Days.cs" DesignTime="True" AutoGen="True" DependentUpon="On.Days.tt" />
 
-    <None Update="FluentDate\In.Months.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="In.Months.cs" />
-    <Compile Update="FluentDate\In.Months.cs" DesignTime="True" AutoGen="True" DependentUpon="In.Months.tt" />
+    <None Update="FluentDate\In.Months.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>In.Months.cs</LastGenOutput>
+    </None>
+    <Compile Update="FluentDate\In.Months.cs" DesignTime="True" AutoGen="True">
+      <DependentUpon>In.Months.tt</DependentUpon>
+    </Compile>
     
     <None Update="FluentDate\InDate.Months.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.Months.cs" />
     <Compile Update="FluentDate\InDate.Months.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.Months.tt" />

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-
-using Humanizer;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Contains extension methods for dehumanizing strings.

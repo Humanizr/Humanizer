@@ -1,9 +1,7 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.DateTimeHumanizeStrategy;
 using Humanizer.Localisation;
-using Xunit;
 
 namespace Humanizer.Tests
 {

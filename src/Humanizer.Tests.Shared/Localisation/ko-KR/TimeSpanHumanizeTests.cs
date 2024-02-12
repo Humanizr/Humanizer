@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.koKR
+﻿namespace Humanizer.Tests.Localisation.koKR
 {
     [UseCulture("ko-KR")]
     public class TimeSpanHumanizeTests

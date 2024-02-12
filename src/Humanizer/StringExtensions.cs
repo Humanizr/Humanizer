@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Extension methods for String type.

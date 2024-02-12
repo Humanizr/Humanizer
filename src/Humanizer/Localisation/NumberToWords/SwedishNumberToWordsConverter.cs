@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {

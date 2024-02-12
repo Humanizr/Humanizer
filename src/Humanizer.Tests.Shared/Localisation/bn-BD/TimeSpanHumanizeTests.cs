@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.bnBD
+﻿namespace Humanizer.Tests.Localisation.bnBD
 {
     [UseCulture("bn-BD")]
     public class TimeSpanHumanizeTests
