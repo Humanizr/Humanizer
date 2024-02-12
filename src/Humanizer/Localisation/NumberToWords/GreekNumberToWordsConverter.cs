@@ -79,7 +79,6 @@
             return string.Empty;
         }
 
-       
         private string GetOneDigitOrdinal(int number)
         {
             if (!ΟrdinalMap.TryGetValue(number, out var output)) return string.Empty;

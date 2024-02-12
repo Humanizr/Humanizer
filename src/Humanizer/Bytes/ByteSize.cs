@@ -312,9 +312,9 @@ namespace Humanizer.Bytes
         }
 
         /// <summary>
-        /// Converts the value of the current ByteSize object to a string with 
-        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga, 
-        /// tera) used is the largest metric prefix such that the corresponding 
+        /// Converts the value of the current ByteSize object to a string with
+        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga,
+        /// tera) used is the largest metric prefix such that the corresponding
         /// value is greater than or equal to one.
         /// </summary>
         public string ToFullWords(string format = null, IFormatProvider provider = null)

@@ -157,6 +157,6 @@
         public void ToOrdinalWordsNeuter(int number, string expected)
         {
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-        }        
+        }
     }
 }

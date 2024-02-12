@@ -6,7 +6,7 @@
     public interface IDateToOrdinalWordConverter
     {
         /// <summary>
-        /// Converts the date to Ordinal Words 
+        /// Converts the date to Ordinal Words
         /// </summary>
         string Convert(DateTime date);
 

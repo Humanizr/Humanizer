@@ -12,7 +12,7 @@ namespace Humanizer.Localisation.TimeToClockNotation
     public interface ITimeOnlyToClockNotationConverter
     {
         /// <summary>
-        /// Converts the time to Clock Notation 
+        /// Converts the time to Clock Notation
         /// </summary>
         string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive);
     }
