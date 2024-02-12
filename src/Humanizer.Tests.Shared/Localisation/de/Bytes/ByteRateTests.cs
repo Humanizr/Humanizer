@@ -67,7 +67,7 @@ namespace Humanizer.Tests.Localisation.de.Bytes
         [InlineData(TimeUnit.Month)]
         [InlineData(TimeUnit.Week)]
         [InlineData(TimeUnit.Year)]
-        public void ThowsOnUnsupportedData(TimeUnit units)
+        public void ThrowsOnUnsupportedData(TimeUnit units)
         {
             var dummyRate = ByteSize.FromBits(1).Per(TimeSpan.FromSeconds(1));
 

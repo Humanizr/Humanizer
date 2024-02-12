@@ -66,7 +66,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number / 10 > 0 && number / 10 < 10)
             {
-                return GetTwoDigigOrdinal(number);
+                return GetTwoDigitOrdinal(number);
 
             }
 
@@ -91,7 +91,7 @@ namespace Humanizer.Localisation.NumberToWords
             return output;
         }
 
-        private string GetTwoDigigOrdinal(int number)
+        private string GetTwoDigitOrdinal(int number)
         {
             if (number == 11) return "ενδέκατος";
             if (number == 12) return "δωδέκατος";
@@ -110,14 +110,13 @@ namespace Humanizer.Localisation.NumberToWords
 
         private string GetThreeDigitOrdinal(int number)
         {
-
             var hundrends = number / 100;
 
             if (!ΟrdinalMap.TryGetValue(hundrends*100, out var hundrentsString)) return string.Empty;
 
             if (number - hundrends*100> 10)
             {
-                return hundrentsString + " " + GetTwoDigigOrdinal(number - hundrends*100);
+                return hundrentsString + " " + GetTwoDigitOrdinal(number - hundrends*100);
             }
 
             if(number - hundrends * 100 > 0)
@@ -142,7 +141,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number - thousands * 1000 > 10)
             {
-                return thousandsString + " " + GetTwoDigigOrdinal(number - thousands * 1000);
+                return thousandsString + " " + GetTwoDigitOrdinal(number - thousands * 1000);
             }
 
             if (number - thousands * 1000 > 0)
