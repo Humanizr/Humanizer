@@ -1119,7 +1119,7 @@ Humanizer includes methods to change a numeric heading to words. The heading can
 // N
 ```
 
-In order to retrieve a full version of the heading you can use the following call:
+In order to retrieve a full version of the heading, use the following call:
 
 ```C#
 180.ToHeading(HeadingStyle.Full);
