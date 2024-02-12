@@ -22,7 +22,7 @@
             new Fact {Value = 1000,       Name = "tusen", Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
             new Fact {Value = 100,        Name = "hundra", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
         };
-         
+
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)

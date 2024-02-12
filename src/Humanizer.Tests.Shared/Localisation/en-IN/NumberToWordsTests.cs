@@ -57,6 +57,6 @@
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
-        
+
     }
 }

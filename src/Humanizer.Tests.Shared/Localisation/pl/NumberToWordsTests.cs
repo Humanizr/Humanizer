@@ -56,18 +56,18 @@
         [InlineData(1501001892, "miliard pięćset jeden milionów tysiąc osiemset dziewięćdziesiąt dwa")]
         [InlineData(2147483647, "dwa miliardy sto czterdzieści siedem milionów czterysta osiemdziesiąt trzy tysiące sześćset czterdzieści siedem")]
         [InlineData(-1501001892, "minus miliard pięćset jeden milionów tysiąc osiemset dziewięćdziesiąt dwa")]
-        [InlineData(long.MaxValue, 
+        [InlineData(long.MaxValue,
             "dziewięć trylionów " +
             "dwieście dwadzieścia trzy biliardy " +
-            "trzysta siedemdziesiąt dwa biliony " + 
+            "trzysta siedemdziesiąt dwa biliony " +
             "trzydzieści sześć miliardów " +
             "osiemset pięćdziesiąt cztery miliony " +
             "siedemset siedemdziesiąt pięć tysięcy " +
             "osiemset siedem")]
-        [InlineData(long.MinValue, 
+        [InlineData(long.MinValue,
             "minus dziewięć trylionów " +
             "dwieście dwadzieścia trzy biliardy " +
-            "trzysta siedemdziesiąt dwa biliony " + 
+            "trzysta siedemdziesiąt dwa biliony " +
             "trzydzieści sześć miliardów " +
             "osiemset pięćdziesiąt cztery miliony " +
             "siedemset siedemdziesiąt pięć tysięcy " +

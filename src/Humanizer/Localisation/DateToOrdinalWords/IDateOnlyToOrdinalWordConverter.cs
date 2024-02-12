@@ -10,7 +10,7 @@ namespace Humanizer.Localisation.DateToOrdinalWords
     public interface IDateOnlyToOrdinalWordConverter
     {
         /// <summary>
-        /// Converts the date to Ordinal Words 
+        /// Converts the date to Ordinal Words
         /// </summary>
         string Convert(DateOnly date);
 

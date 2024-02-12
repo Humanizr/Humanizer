@@ -117,7 +117,7 @@
 
             return $"{quantity.ToWords()} {transformedInput}";
         }
-        
+
         /// <summary>
         /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
         /// </summary>

@@ -6,7 +6,7 @@
     public static class NumberToTimeSpanExtensions
     {
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this byte ms)
         {
@@ -14,7 +14,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this sbyte ms)
         {
@@ -22,7 +22,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this short ms)
         {
@@ -30,7 +30,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this ushort ms)
         {
@@ -38,7 +38,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this int ms)
         {
@@ -46,7 +46,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this uint ms)
         {
@@ -54,7 +54,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this long ms)
         {
@@ -62,7 +62,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this ulong ms)
         {
@@ -70,7 +70,7 @@
         }
 
         /// <summary>
-        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5) 
+        /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
         /// </summary>
         public static TimeSpan Milliseconds(this double ms)
         {
@@ -78,7 +78,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this byte seconds)
         {
@@ -86,7 +86,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this sbyte seconds)
         {
@@ -94,7 +94,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this short seconds)
         {
@@ -102,7 +102,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this ushort seconds)
         {
@@ -110,7 +110,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this int seconds)
         {
@@ -118,7 +118,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this uint seconds)
         {
@@ -126,7 +126,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this long seconds)
         {
@@ -134,7 +134,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this ulong seconds)
         {
@@ -142,7 +142,7 @@
         }
 
         /// <summary>
-        /// 5.Seconds() == TimeSpan.FromSeconds(5) 
+        /// 5.Seconds() == TimeSpan.FromSeconds(5)
         /// </summary>
         public static TimeSpan Seconds(this double seconds)
         {
@@ -150,7 +150,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this byte minutes)
         {
@@ -158,7 +158,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this sbyte minutes)
         {
@@ -166,7 +166,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this short minutes)
         {
@@ -174,7 +174,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this ushort minutes)
         {
@@ -182,7 +182,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this int minutes)
         {
@@ -190,7 +190,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this uint minutes)
         {
@@ -198,7 +198,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this long minutes)
         {
@@ -206,7 +206,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this ulong minutes)
         {
@@ -214,7 +214,7 @@
         }
 
         /// <summary>
-        /// 4.Minutes() == TimeSpan.FromMinutes(4) 
+        /// 4.Minutes() == TimeSpan.FromMinutes(4)
         /// </summary>
         public static TimeSpan Minutes(this double minutes)
         {
