@@ -46,7 +46,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("min {0}", Convert(-number));
+                return $"min {Convert(-number)}";
             }
 
             var word = "";
