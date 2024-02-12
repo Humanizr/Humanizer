@@ -1,8 +1,5 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-using Xunit;
-
 namespace Humanizer.Tests.FluentDate
 {
     public class OnDateTests
