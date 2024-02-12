@@ -32,11 +32,11 @@ namespace Humanizer
 
             if (member != null)
             {
-                var customDescription = GetCustomDescription(member);
+                var description = GetCustomDescription(member);
 
-                if (customDescription != null)
+                if (description != null)
                 {
-                    return customDescription;
+                    return description;
                 }
             }
 
