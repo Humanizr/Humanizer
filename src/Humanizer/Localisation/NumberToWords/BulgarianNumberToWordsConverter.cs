@@ -24,13 +24,11 @@ namespace Humanizer.Localisation.NumberToWords
             "осемстотин", "деветстотин"
         };
 
-
         private static readonly string[] HundredsOrdinalMap =
         {
             String.Empty, "стот", "двест", "трист", "четиристот", "петстот", "шестстот", "седемстот", "осемстот",
             "деветстот"
         };
-
 
         private static readonly string[] UnitsOrdinal =
         {
