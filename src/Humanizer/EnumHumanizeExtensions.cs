@@ -15,24 +15,24 @@ namespace Humanizer
         /// <param name="input">The enum member to be humanized</param>
         public static string Humanize(this Enum input)
         {
-            var enumType = input.GetType();
+            var type = input.GetType();
 
-            if (IsBitFieldEnum(enumType) && !Enum.IsDefined(enumType, input))
+            if (IsBitFieldEnum(type) && !Enum.IsDefined(type, input))
             {
-                return Enum.GetValues(enumType)
+                return Enum.GetValues(type)
                            .Cast<Enum>()
-                           .Where(e => e.CompareTo(Convert.ChangeType(Enum.ToObject(enumType, 0), enumType)) != 0)
+                           .Where(e => e.CompareTo(Convert.ChangeType(Enum.ToObject(type, 0), type)) != 0)
                            .Where(input.HasFlag)
                            .Select(e => e.Humanize())
                            .Humanize();
             }
 
             var caseName = input.ToString();
-            var memInfo = enumType.GetTypeInfo().GetDeclaredField(caseName);
+            var member = type.GetTypeInfo().GetDeclaredField(caseName);
 
-            if (memInfo != null)
+            if (member != null)
             {
-                var customDescription = GetCustomDescription(memInfo);
+                var customDescription = GetCustomDescription(member);
 
                 if (customDescription != null)
                 {
