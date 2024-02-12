@@ -5,8 +5,6 @@
 <#@ assembly name="$(TargetPath)" #>
 <#@ import namespace="System" #>
 <#@ import namespace="Humanizer" #>
-using System;
-
 namespace Humanizer;
 
 /// <summary>
