@@ -4,7 +4,7 @@
     {
         private static readonly string[] UnitsMap =
         {
-            "нула", "един", "две", "три", "четири", "пет", "шест", "седем", "осем", "девет", "десет", "единадесет",
+            "нула", "едно", "две", "три", "четири", "пет", "шест", "седем", "осем", "девет", "десет", "единадесет",
             "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет", "осемнадесет",
             "деветнадесет"
         };
@@ -21,13 +21,11 @@
             "осемстотин", "деветстотин"
         };
 
-
         private static readonly string[] HundredsOrdinalMap =
         {
             String.Empty, "стот", "двест", "трист", "четиристот", "петстот", "шестстот", "седемстот", "осемстот",
             "деветстот"
         };
-
 
         private static readonly string[] UnitsOrdinal =
         {
@@ -74,8 +72,7 @@
 
             if ((input / 1000000000) > 0)
             {
-                parts.Add(Convert(input / 1000000000, gender, false) +
-                          $" {(input < 2000000000 ? "милиард" : "милиарда")}");
+                parts.Add(input < 2000000000 ? "един милиард" : Convert(input / 1000000000, gender, false) + " милиарда");
 
                 if (isOrdinal)
                     lastOrdinalSubstitution = Convert(input / 1000000000, gender, false) + " милиард" +
@@ -85,7 +82,7 @@
 
             if ((input / 1000000) > 0)
             {
-                parts.Add(Convert(input / 1000000, gender, false) + $" {(input < 2000000 ? "милион" : "милиона")}");
+                parts.Add(input < 2000000 ? "един милион" : Convert(input / 1000000, gender, false) + " милиона");
 
                 if (isOrdinal)
                     lastOrdinalSubstitution = Convert(input / 1000000, gender, false) + " милион" +

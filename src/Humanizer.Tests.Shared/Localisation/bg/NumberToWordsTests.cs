@@ -6,7 +6,7 @@
 
         [Theory]
         [InlineData(0, "нула")]
-        [InlineData(1, "един")]
+        [InlineData(1, "едно")]
         [InlineData(10, "десет")]
         [InlineData(11, "единадесет")]
         [InlineData(12, "дванадесет")]
@@ -46,6 +46,7 @@
         [InlineData(4000210, "четири милиона двеста и десет")]
         [InlineData(5200, "пет хиляди и двеста")]
         [InlineData(1125000, "един милион и сто двадесет и пет хиляди")]
+        [InlineData(1000000000, "един милиард")]
         public void ToWordsBg(long number, string expected)
         {
             Assert.Equal(expected, number.ToWords());
