@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.el
+﻿namespace Humanizer.Tests.Localisation.el
 {
   
         [UseCulture("el")]

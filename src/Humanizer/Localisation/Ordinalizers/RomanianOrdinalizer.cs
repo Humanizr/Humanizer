@@ -29,10 +29,10 @@
 
             if (gender == GrammaticalGender.Feminine)
             {
-                return string.Format("a {0}-a", numberString);
+                return $"a {numberString}-a";
             }
 
-            return string.Format("al {0}-lea", numberString);
+            return $"al {numberString}-lea";
 
         }
     }

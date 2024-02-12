@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
@@ -45,7 +42,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number, isOrdinal, gender));
+                return $"minus {Convert(-number, isOrdinal, gender)}";
             }
 
             if (number == 1)
@@ -120,7 +117,7 @@ namespace Humanizer.Localisation.NumberToWords
                     var lastPart = TensMap[number / 10];
                     if ((number % 10) > 0)
                     {
-                        lastPart += string.Format("{0}", GetUnitValue(number % 10, isOrdinal));
+                        lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
                     }
                     else if (isOrdinal)
                     {

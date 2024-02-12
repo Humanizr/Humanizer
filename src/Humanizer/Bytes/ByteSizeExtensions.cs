@@ -1,5 +1,4 @@
-﻿using System;
-using Humanizer.Bytes;
+﻿using Humanizer.Bytes;
 
 // ReSharper disable once CheckNamespace
 namespace Humanizer

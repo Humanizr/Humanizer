@@ -1,4 +1,3 @@
-using Xunit;
 // ReSharper disable IdentifierTypo 
 // ReSharper disable StringLiteralTypo
 

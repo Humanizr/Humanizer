@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.id
+﻿namespace Humanizer.Tests.Localisation.id
 {
     [UseCulture("id-ID")]
     public class TimeSpanHumanizeTests

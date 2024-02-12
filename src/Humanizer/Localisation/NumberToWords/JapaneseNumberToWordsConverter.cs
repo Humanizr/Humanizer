@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class JapaneseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -28,7 +26,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("マイナス {0}", ConvertImpl(-number, false));
+                return $"マイナス {ConvertImpl(-number, false)}";
             }
 
             var parts = new List<string>();
@@ -59,7 +57,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (isOrdinal)
             {
-                toWords = string.Format("{0}番目", toWords);
+                toWords = $"{toWords}番目";
             }
 
             return toWords;

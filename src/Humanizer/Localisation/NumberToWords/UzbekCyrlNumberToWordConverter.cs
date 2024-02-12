@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -19,7 +18,7 @@ namespace Humanizer.Localisation.NumberToWords
             var number = (int)input;
             if (number < 0)
             {
-                return string.Format("минус {0}", Convert(-number, true));
+                return $"минус {Convert(-number, true)}";
             }
 
             return Convert(number, true);
@@ -94,7 +93,7 @@ namespace Humanizer.Localisation.NumberToWords
                 i = 1;
             }
 
-            return string.Format("{0}{1}", word, OrdinalSuffixes[i]);
+            return $"{word}{OrdinalSuffixes[i]}";
         }
     }
 }

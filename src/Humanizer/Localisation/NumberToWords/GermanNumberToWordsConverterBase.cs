@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
@@ -57,7 +54,7 @@ namespace Humanizer.Localisation.NumberToWords
                     var units = number % 10;
                     if (units > 0)
                     {
-                        parts.Add(string.Format("{0}und", UnitsMap[units]));
+                        parts.Add($"{UnitsMap[units]}und");
                     }
 
                     parts.Add(GetTens(number / 10));

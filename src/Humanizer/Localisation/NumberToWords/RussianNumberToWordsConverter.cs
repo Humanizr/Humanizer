@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Humanizer.Localisation.GrammaticalNumber;
+﻿using Humanizer.Localisation.GrammaticalNumber;
 
 namespace Humanizer.Localisation.NumberToWords
 {

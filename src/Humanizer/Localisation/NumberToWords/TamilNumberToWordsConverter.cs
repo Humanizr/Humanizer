@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -40,19 +37,19 @@ namespace Humanizer.Localisation.NumberToWords
                 return GetUnitValue(0, isOrdinal);
 
             if (number < 0)
-                return string.Format("கழித்தல் {0}", Convert(-number));
+                return $"கழித்தல் {Convert(-number)}";
 
             var parts = new List<string>();
 
             if ((number / 1000000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} quintillion", Convert(number / 1000000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000000)} quintillion");
                 number %= 1000000000000000000;
             }
 
             if ((number / 1000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} quadrillion", Convert(number / 1000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000)} quadrillion");
                 number %= 1000000000000000;
             }
 
@@ -126,7 +123,7 @@ namespace Humanizer.Localisation.NumberToWords
                     else
                         lastPart += "த்து ";
                     
-                    if (!isThousand) lastPart += string.Format("{0}", GetUnitValue(number % 10, isOrdinal));
+                    if (!isThousand) lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
                 }
                 else if (number % 10 == 0)
                 {

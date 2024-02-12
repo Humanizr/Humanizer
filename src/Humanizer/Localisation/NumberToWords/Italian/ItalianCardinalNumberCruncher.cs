@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords.Italian
+﻿namespace Humanizer.Localisation.NumberToWords.Italian
 {
     internal class ItalianCardinalNumberCruncher
     {

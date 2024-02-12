@@ -20,10 +20,8 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-using System;
 using System.Globalization;
 using Humanizer.Bytes;
-using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {

@@ -1,6 +1,4 @@
-using System;
 using Humanizer.Configuration;
-using Xunit;
 
 namespace Humanizer.Tests
 {
