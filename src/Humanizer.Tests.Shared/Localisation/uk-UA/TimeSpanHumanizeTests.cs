@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.ukUA
+﻿namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
     public class TimeSpanHumanizeTests

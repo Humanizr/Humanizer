@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -48,7 +46,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("מינוס {0}", Convert(-number, gender));
+                return $"מינוס {Convert(-number, gender)}";
             }
 
             if (number == 0)
@@ -99,7 +97,7 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     var unit = Convert(number % 10, gender);
                     unit = unit.Replace("יי", "י");
-                    unit = string.Format("{0} {1}", unit, gender == GrammaticalGender.Masculine ? "עשר" : "עשרה");
+                    unit = $"{unit} {(gender == GrammaticalGender.Masculine ? "עשר" : "עשרה")}";
                     if (appendAnd)
                     {
                         unit = "ו" + unit;
@@ -117,7 +115,7 @@ namespace Humanizer.Localisation.NumberToWords
                     else
                     {
                         var unit = Convert(number % 10, gender);
-                        parts.Add(string.Format("{0} ו{1}", tenUnit, unit));
+                        parts.Add($"{tenUnit} ו{unit}");
                     }
                 }
             }

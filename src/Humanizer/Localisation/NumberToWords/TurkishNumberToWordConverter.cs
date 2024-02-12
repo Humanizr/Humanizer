@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class TurkishNumberToWordConverter : GenderlessNumberToWordsConverter
     {
@@ -42,52 +40,52 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("eksi {0}", Convert(-number));
+                return $"eksi {Convert(-number)}";
             }
 
             var parts = new List<string>();
 
             if ((number / 1000000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} kentilyon", Convert(number / 1000000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000000)} kentilyon");
                 number %= 1000000000000000000;
             }
 
             if ((number / 1000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} katrilyon", Convert(number / 1000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000)} katrilyon");
                 number %= 1000000000000000;
             }
 
             if ((number / 1000000000000) > 0)
             {
-                parts.Add(string.Format("{0} trilyon", Convert(number / 1000000000000)));
+                parts.Add($"{Convert(number / 1000000000000)} trilyon");
                 number %= 1000000000000;
             }
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0} milyar", Convert(number / 1000000000)));
+                parts.Add($"{Convert(number / 1000000000)} milyar");
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0} milyon", Convert(number / 1000000)));
+                parts.Add($"{Convert(number / 1000000)} milyon");
                 number %= 1000000;
             }
 
             var thousand = (number / 1000);
             if (thousand > 0)
             {
-                parts.Add(string.Format("{0} bin", thousand > 1 ? Convert(thousand) : "").Trim());
+                parts.Add($"{(thousand > 1 ? Convert(thousand) : "")} bin".Trim());
                 number %= 1000;
             }
 
             var hundred = (number / 100);
             if (hundred > 0)
             {
-                parts.Add(string.Format("{0} yüz", hundred > 1 ? Convert(hundred) : "").Trim());
+                parts.Add($"{(hundred > 1 ? Convert(hundred) : "")} yüz".Trim());
                 number %= 100;
             }
 
@@ -132,7 +130,7 @@ namespace Humanizer.Localisation.NumberToWords
                 word = word.Substring(0, word.Length - 1);
             }
 
-            return string.Format("{0}{1}", word, wordSuffix);
+            return $"{word}{wordSuffix}";
         }
 
         public override string ConvertToTuple(int number)
@@ -155,7 +153,7 @@ namespace Humanizer.Localisation.NumberToWords
                         }
                     }
 
-                    return string.Format("{0}{1}", word, wordSuffix);
+                    return $"{word}{wordSuffix}";
             }
         }
     }

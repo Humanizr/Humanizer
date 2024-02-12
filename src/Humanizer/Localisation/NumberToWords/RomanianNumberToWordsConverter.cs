@@ -1,5 +1,4 @@
-﻿using System;
-using Humanizer.Localisation.NumberToWords.Romanian;
+﻿using Humanizer.Localisation.NumberToWords.Romanian;
 
 namespace Humanizer.Localisation.NumberToWords
 {

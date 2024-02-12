@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.nl
+﻿namespace Humanizer.Tests.Localisation.nl
 {
     [UseCulture("nl")]
     public class OrdinalizeTests

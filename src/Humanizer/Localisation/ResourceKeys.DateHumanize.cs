@@ -27,7 +27,7 @@
             private const string FromNow = "FromNow";
 
             /// <summary>
-            /// Generates Resource Keys accordning to convention.
+            /// Generates Resource Keys according to convention.
             /// </summary>
             /// <param name="timeUnit">Time unit</param>
             /// <param name="timeUnitTense">Is time unit in future or past</param>

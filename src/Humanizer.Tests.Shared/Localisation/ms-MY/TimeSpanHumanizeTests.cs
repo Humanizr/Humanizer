@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.msMY
+﻿namespace Humanizer.Tests.Localisation.msMY
 {
     [UseCulture("ms-MY")]
     public class TimeSpanHumanizeTests

@@ -1,7 +1,5 @@
 ﻿using Humanizer.Localisation;
 
-using Xunit;
-
 namespace Humanizer.Tests
 {
     [UseCulture("en-US")]

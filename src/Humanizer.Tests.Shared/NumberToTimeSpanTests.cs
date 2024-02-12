@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     public class NumberToTimeSpanTests
     {
