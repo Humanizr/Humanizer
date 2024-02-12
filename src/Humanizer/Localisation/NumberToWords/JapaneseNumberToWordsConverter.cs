@@ -26,7 +26,7 @@
 
             if (number < 0)
             {
-                return string.Format("マイナス {0}", ConvertImpl(-number, false));
+                return $"マイナス {ConvertImpl(-number, false)}";
             }
 
             var parts = new List<string>();
@@ -57,7 +57,7 @@
 
             if (isOrdinal)
             {
-                toWords = string.Format("{0}番目", toWords);
+                toWords = $"{toWords}番目";
             }
 
             return toWords;

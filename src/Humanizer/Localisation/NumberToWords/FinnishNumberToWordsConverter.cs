@@ -21,7 +21,7 @@
 
             if (number < 0)
             {
-                return string.Format("miinus {0}", Convert(-number));
+                return $"miinus {Convert(-number)}";
             }
 
             if (number == 0)
@@ -35,7 +35,7 @@
             {
                 parts.Add(number / 1000000000 == 1
                     ? "miljardi "
-                    : string.Format("{0}miljardia ", Convert(number / 1000000000)));
+                    : $"{Convert(number / 1000000000)}miljardia ");
 
                 number %= 1000000000;
             }
@@ -44,7 +44,7 @@
             {
                 parts.Add(number / 1000000 == 1
                     ? "miljoona "
-                    : string.Format("{0}miljoonaa ", Convert(number / 1000000)));
+                    : $"{Convert(number / 1000000)}miljoonaa ");
 
                 number %= 1000000;
             }
@@ -53,7 +53,7 @@
             {
                 parts.Add(number / 1000 == 1
                     ? "tuhat "
-                    : string.Format("{0}tuhatta ", Convert(number / 1000)));
+                    : $"{Convert(number / 1000)}tuhatta ");
 
                 number %= 1000;
             }
@@ -62,19 +62,19 @@
             {
                 parts.Add(number / 100 == 1
                     ? "sata"
-                    : string.Format("{0}sataa", Convert(number / 100)));
+                    : $"{Convert(number / 100)}sataa");
 
                 number %= 100;
             }
 
             if (number >= 20 && (number / 10) > 0)
             {
-                parts.Add(string.Format("{0}kymmentä", Convert(number / 10)));
+                parts.Add($"{Convert(number / 10)}kymmentä");
                 number %= 10;
             }
             else if (number > 10 && number < 20)
             {
-                parts.Add(string.Format("{0}toista", UnitsMap[number % 10]));
+                parts.Add($"{UnitsMap[number % 10]}toista");
             }
 
             if (number > 0 && number <= 10)
@@ -106,36 +106,36 @@
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0}miljardis", (number / 1000000000) == 1 ? "" : ToOrdinal(number / 1000000000, true)));
+                parts.Add($"{((number / 1000000000) == 1 ? "" : ToOrdinal(number / 1000000000, true))}miljardis");
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0}miljoonas", (number / 1000000) == 1 ? "" : ToOrdinal(number / 1000000, true)));
+                parts.Add($"{((number / 1000000) == 1 ? "" : ToOrdinal(number / 1000000, true))}miljoonas");
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(string.Format("{0}tuhannes", (number / 1000) == 1 ? "" : ToOrdinal(number / 1000, true)));
+                parts.Add($"{((number / 1000) == 1 ? "" : ToOrdinal(number / 1000, true))}tuhannes");
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(string.Format("{0}sadas", (number / 100) == 1 ? "" : ToOrdinal(number / 100, true)));
+                parts.Add($"{((number / 100) == 1 ? "" : ToOrdinal(number / 100, true))}sadas");
                 number %= 100;
             }
 
             if (number >= 20 && (number / 10) > 0)
             {
-                parts.Add(string.Format("{0}kymmenes", ToOrdinal(number / 10, true)));
+                parts.Add($"{ToOrdinal(number / 10, true)}kymmenes");
                 number %= 10;
             }
             else if (number > 10 && number < 20)
             {
-                parts.Add(string.Format("{0}toista", GetOrdinalUnit(number % 10, true)));
+                parts.Add($"{GetOrdinalUnit(number % 10, true)}toista");
             }
 
             if (number > 0 && number <= 10)

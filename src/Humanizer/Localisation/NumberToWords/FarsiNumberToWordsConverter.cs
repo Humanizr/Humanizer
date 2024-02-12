@@ -10,7 +10,7 @@
         {
             if (number < 0)
             {
-                return string.Format("منفی {0}", Convert(-number));
+                return $"منفی {Convert(-number)}";
             }
 
             if (number == 0)
@@ -20,12 +20,12 @@
 
             var farsiGroupsMap = new Dictionary<long, Func<long, string>>
             {
-                {(long)Math.Pow(10, 18), n => string.Format("{0} تریلیون", Convert(n)) },
-                {(long)Math.Pow(10, 15), n => string.Format("{0} بیلیارد", Convert(n)) },
-                {(long)Math.Pow(10, 12), n => string.Format("{0} بیلیون", Convert(n)) },
-                {(long)Math.Pow(10, 9), n => string.Format("{0} میلیارد", Convert(n)) },
-                {(long)Math.Pow(10, 6), n => string.Format("{0} میلیون", Convert(n)) },
-                {(long)Math.Pow(10, 3), n => string.Format("{0} هزار", Convert(n)) },
+                {(long)Math.Pow(10, 18), n => $"{Convert(n)} تریلیون"},
+                {(long)Math.Pow(10, 15), n => $"{Convert(n)} بیلیارد"},
+                {(long)Math.Pow(10, 12), n => $"{Convert(n)} بیلیون"},
+                {(long)Math.Pow(10, 9), n => $"{Convert(n)} میلیارد"},
+                {(long)Math.Pow(10, 6), n => $"{Convert(n)} میلیون"},
+                {(long)Math.Pow(10, 3), n => $"{Convert(n)} هزار"},
                 {(long)Math.Pow(10, 2), n => FarsiHundredsMap[n]}
             };
 
@@ -71,7 +71,7 @@
             }
 
             var word = Convert(number);
-            return string.Format("{0}{1}", word, word.EndsWith("ی") ? " ام" : "م");
+            return $"{word}{(word.EndsWith("ی") ? " ام" : "م")}";
         }
     }
 }

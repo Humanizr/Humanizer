@@ -115,7 +115,7 @@
                 return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
             }
 
-            return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
+            return $"{quantity.ToWords()} {transformedInput}";
         }
         
         /// <summary>

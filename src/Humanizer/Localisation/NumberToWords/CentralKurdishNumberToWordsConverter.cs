@@ -16,7 +16,7 @@
 
             if (number < 0)
             {
-                return string.Format("نێگەتیڤ {0}", Convert(-number));
+                return $"نێگەتیڤ {Convert(-number)}";
             }
 
             if (number == 0)
@@ -26,11 +26,11 @@
 
             var kurdishGroupsMap = new Dictionary<long, Func<long, string>>
             {
-                {(long)Math.Pow(10, 15), n => string.Format("{0} کوادریلیۆن", Convert(n)) },
-                {(long)Math.Pow(10, 12), n => string.Format("{0} تریلیۆن", Convert(n)) },
-                {(long)Math.Pow(10, 9), n => string.Format("{0} میلیارد", Convert(n)) },
-                {(long)Math.Pow(10, 6), n => string.Format("{0} میلیۆن", Convert(n)) },
-                {(long)Math.Pow(10, 3), n => string.Format("{0} هەزار", Convert(n)) },
+                {(long)Math.Pow(10, 15), n => $"{Convert(n)} کوادریلیۆن"},
+                {(long)Math.Pow(10, 12), n => $"{Convert(n)} تریلیۆن"},
+                {(long)Math.Pow(10, 9), n => $"{Convert(n)} میلیارد"},
+                {(long)Math.Pow(10, 6), n => $"{Convert(n)} میلیۆن"},
+                {(long)Math.Pow(10, 3), n => $"{Convert(n)} هەزار"},
                 {(long)Math.Pow(10, 2), n => KurdishHundredsMap[n]}
             };
 
@@ -65,7 +65,7 @@
         public override string ConvertToOrdinal(int number)
         {
             var word = Convert(number);
-            return string.Format("{0}{1}", word, IsVowel(word[word.Length - 1]) ? "یەم" : "ەم");
+            return $"{word}{(IsVowel(word[word.Length - 1]) ? "یەم" : "ەم")}";
         }
 
         private bool IsVowel(char c)

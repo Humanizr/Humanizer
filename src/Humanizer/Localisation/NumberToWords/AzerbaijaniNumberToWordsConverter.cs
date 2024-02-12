@@ -32,34 +32,34 @@
 
             if (number < 0)
             {
-                return string.Format("mənfi {0}", Convert(-number));
+                return $"mənfi {Convert(-number)}";
             }
 
             var parts = new List<string>();
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0} milyard", Convert(number / 1000000000)));
+                parts.Add($"{Convert(number / 1000000000)} milyard");
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0} milyon", Convert(number / 1000000)));
+                parts.Add($"{Convert(number / 1000000)} milyon");
                 number %= 1000000;
             }
 
             var thousand = (number / 1000);
             if (thousand > 0)
             {
-                parts.Add(string.Format("{0} min", thousand > 1 ? Convert(thousand) : "").Trim());
+                parts.Add($"{(thousand > 1 ? Convert(thousand) : "")} min".Trim());
                 number %= 1000;
             }
 
             var hundred = (number / 100);
             if (hundred > 0)
             {
-                parts.Add(string.Format("{0} yüz", hundred > 1 ? Convert(hundred) : "").Trim());
+                parts.Add($"{(hundred > 1 ? Convert(hundred) : "")} yüz".Trim());
                 number %= 100;
             }
 
@@ -104,7 +104,7 @@
                 word = word.Substring(0, word.Length - 1);
             }
 
-            return string.Format("{0}{1}", word, wordSuffix);
+            return $"{word}{wordSuffix}";
         }
     }
 }

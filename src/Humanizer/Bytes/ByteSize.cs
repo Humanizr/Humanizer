@@ -308,7 +308,7 @@ namespace Humanizer.Bytes
                                               ? "0"
                                               : formattedLargeWholeNumberValue;
 
-            return string.Format("{0} {1}", formattedLargeWholeNumberValue, toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider));
+            return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
         }
 
         /// <summary>

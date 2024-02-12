@@ -28,7 +28,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number));
+                return $"minus {Convert(-number)}";
             }
 
             var parts = new List<string>();
@@ -95,7 +95,7 @@ namespace Humanizer.Localisation.NumberToWords
                     var units = number % 10;
                     if (units > 0)
                     {
-                        parts.Add(string.Format("{0}in", UnitsMap[units]));
+                        parts.Add($"{UnitsMap[units]}in");
                     }
 
                     parts.Add(TensMap[number / 10]);

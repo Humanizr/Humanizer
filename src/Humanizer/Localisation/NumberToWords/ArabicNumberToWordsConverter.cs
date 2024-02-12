@@ -22,7 +22,7 @@
 
             if (number < 0)
             {
-                return string.Format("ناقص {0}", Convert(-number, gender));
+                return $"ناقص {Convert(-number, gender)}";
             }
 
             var result = string.Empty;
@@ -111,7 +111,7 @@
                     {
                         if (result != string.Empty)
                         {
-                            result = string.Format("{0} {1}", "و", result);
+                            result = $"{"و"} {result}";
                         }
 
                         if (groupNumber != 2)
@@ -120,21 +120,21 @@
                             {
                                 if (groupNumber >= 3 && groupNumber <= 10)
                                 {
-                                    result = string.Format("{0} {1}", PluralGroups[groupLevel], result);
+                                    result = $"{PluralGroups[groupLevel]} {result}";
                                 }
                                 else
                                 {
-                                    result = string.Format("{0} {1}", result != string.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel], result);
+                                    result = $"{(result != string.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel])} {result}";
                                 }
                             }
                             else
                             {
-                                result = string.Format("{0} {1}", Groups[groupLevel], result);
+                                result = $"{Groups[groupLevel]} {result}";
                             }
                         }
                     }
 
-                    result = string.Format("{0} {1}", process, result);
+                    result = $"{process} {result}";
                 }
 
                 groupLevel++;
