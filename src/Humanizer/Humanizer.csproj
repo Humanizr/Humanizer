@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netstandard2.0;net6.0</TargetFrameworks>    
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>    
     <Authors>Mehdi Khalili, Claire Novotny</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
