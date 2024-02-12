@@ -57,7 +57,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("마이너스 {0}", ConvertImpl(-number, false));
+                return $"마이너스 {ConvertImpl(-number, false)}";
             }
 
             var parts = new List<string>();
@@ -88,7 +88,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (isOrdinal)
             {
-                toWords = string.Format("{0}번째", toWords);
+                toWords = $"{toWords}번째";
             }
 
             return toWords;

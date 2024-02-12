@@ -31,7 +31,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("- {0}", Convert(-number));
+                return $"- {Convert(-number)}";
             }
 
             var parts = new List<string>();
@@ -101,7 +101,7 @@ namespace Humanizer.Localisation.NumberToWords
 
                     if (units > 0)
                     {
-                        parts.Add(string.Format(" {0}", UnitsMap[units]));
+                        parts.Add($" {UnitsMap[units]}");
                     }
                 }
             }

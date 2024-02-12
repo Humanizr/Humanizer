@@ -44,50 +44,50 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number));
+                return $"minus {Convert(-number)}";
             }
 
             var parts = new List<string>();
 
             if ((number / 1000000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} quintillion", Convert(number / 1000000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000000)} quintillion");
                 number %= 1000000000000000000;
             }
 
             if ((number / 1000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} quadrillion", Convert(number / 1000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000)} quadrillion");
                 number %= 1000000000000000;
             }
 
             if ((number / 1000000000000) > 0)
             {
-                parts.Add(string.Format("{0} trillion", Convert(number / 1000000000000)));
+                parts.Add($"{Convert(number / 1000000000000)} trillion");
                 number %= 1000000000000;
             }
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0} billion", Convert(number / 1000000000)));
+                parts.Add($"{Convert(number / 1000000000)} billion");
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0} million", Convert(number / 1000000)));
+                parts.Add($"{Convert(number / 1000000)} million");
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(string.Format("{0} thousand", Convert(number / 1000)));
+                parts.Add($"{Convert(number / 1000)} thousand");
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(string.Format("{0} hundred", Convert(number / 100)));
+                parts.Add($"{Convert(number / 100)} hundred");
                 number %= 100;
             }
 
@@ -107,7 +107,7 @@ namespace Humanizer.Localisation.NumberToWords
                     var lastPart = TensMap[number / 10];
                     if ((number % 10) > 0)
                     {
-                        lastPart += string.Format("-{0}", GetUnitValue(number % 10, isOrdinal));
+                        lastPart += $"-{GetUnitValue(number % 10, isOrdinal)}";
                     }
                     else if (isOrdinal)
                     {

@@ -29,7 +29,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("menos {0}", Convert(Math.Abs(number), gender));
+                return $"menos {Convert(Math.Abs(number), gender)}";
             }
 
             var parts = new List<string>();
@@ -38,8 +38,8 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 // gender is not applied for billions
                 parts.Add(number / 1000000000 >= 2
-                    ? string.Format("{0} bilhões", Convert(number / 1000000000, GrammaticalGender.Masculine))
-                    : string.Format("{0} bilhão", Convert(number / 1000000000, GrammaticalGender.Masculine)));
+                    ? $"{Convert(number / 1000000000, GrammaticalGender.Masculine)} bilhões"
+                    : $"{Convert(number / 1000000000, GrammaticalGender.Masculine)} bilhão");
 
                 number %= 1000000000;
             }
@@ -48,8 +48,8 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 // gender is not applied for millions
                 parts.Add(number / 1000000 >= 2
-                    ? string.Format("{0} milhões", Convert(number / 1000000, GrammaticalGender.Masculine))
-                    : string.Format("{0} milhão", Convert(number / 1000000, GrammaticalGender.Masculine)));
+                    ? $"{Convert(number / 1000000, GrammaticalGender.Masculine)} milhões"
+                    : $"{Convert(number / 1000000, GrammaticalGender.Masculine)} milhão");
 
                 number %= 1000000;
             }
@@ -57,7 +57,7 @@ namespace Humanizer.Localisation.NumberToWords
             if ((number / 1000) > 0)
             {
                 // gender is not applied for thousands
-                parts.Add(number / 1000 == 1 ? "mil" : string.Format("{0} mil", Convert(number / 1000, GrammaticalGender.Masculine)));
+                parts.Add(number / 1000 == 1 ? "mil" : $"{Convert(number / 1000, GrammaticalGender.Masculine)} mil");
                 number %= 1000;
             }
 
@@ -92,7 +92,7 @@ namespace Humanizer.Localisation.NumberToWords
                     var lastPart = PortugueseTensMap[number / 10];
                     if ((number % 10) > 0)
                     {
-                        lastPart += string.Format(" e {0}", ApplyGender(PortugueseUnitsMap[number % 10], gender));
+                        lastPart += $" e {ApplyGender(PortugueseUnitsMap[number % 10], gender)}";
                     }
 
                     parts.Add(lastPart);

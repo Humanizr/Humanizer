@@ -52,39 +52,39 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("մինուս {0}", ConvertImpl(-number, isOrdinal));
+                return $"մինուս {ConvertImpl(-number, isOrdinal)}";
             }
 
             var parts = new List<string>();
 
             if ((number / 1000000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} քվինտիլիոն", Convert(number / 1000000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000000)} քվինտիլիոն");
                 number %= 1000000000000000000;
             }
 
             if ((number / 1000000000000000) > 0)
             {
-                parts.Add(string.Format("{0} կվադրիլիոն", Convert(number / 1000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000)} կվադրիլիոն");
                 number %= 1000000000000000;
             }
 
             if ((number / 1000000000000) > 0)
 
             {
-                parts.Add(string.Format("{0} տրիլիոն", Convert(number / 1000000000000)));
+                parts.Add($"{Convert(number / 1000000000000)} տրիլիոն");
                 number %= 1000000000000;
             }
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0} միլիարդ", Convert(number / 1000000000)));
+                parts.Add($"{Convert(number / 1000000000)} միլիարդ");
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0} միլիոն", Convert(number / 1000000)));
+                parts.Add($"{Convert(number / 1000000)} միլիոն");
                 number %= 1000000;
             }
 
@@ -96,7 +96,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    parts.Add(string.Format("{0} հազար", Convert(number / 1000)));
+                    parts.Add($"{Convert(number / 1000)} հազար");
                 }
 
                 number %= 1000;
@@ -110,7 +110,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    parts.Add(string.Format("{0} հարյուր", Convert(number / 100)));
+                    parts.Add($"{Convert(number / 100)} հարյուր");
                 }
 
                 number %= 100;
@@ -127,7 +127,7 @@ namespace Humanizer.Localisation.NumberToWords
                     var lastPart = TensMap[number / 10];
                     if ((number % 10) > 0)
                     {
-                        lastPart += string.Format("{0}", GetUnitValue(number % 10, isOrdinal));
+                        lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
                     }
                     else if (isOrdinal)
                     {

@@ -42,7 +42,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number, gender));
+                return $"minus {Convert(-number, gender)}";
             }
 
             var word = "";
