@@ -89,9 +89,9 @@ namespace Humanizer.Tests
         [InlineData("some-title: The beginning", "Some Title: The Beginning")]
         [InlineData("some_title:_the_beginning", "Some Title: the Beginning")]
         [InlineData("some title: The_beginning", "Some Title: The Beginning")]
-        public void Titleize(string input, string expectedOuput)
+        public void Titleize(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOuput, input.Titleize());
+            Assert.Equal(expectedOutput, input.Titleize());
         }
 
         [InlineData("some_title", "some-title")]
@@ -154,9 +154,9 @@ namespace Humanizer.Tests
         [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
         [InlineData("SomeForeignWordsLikeÄgyptenÑu", "some_foreign_words_like_ägypten_ñu")]
         [InlineData("Some wordsTo be Underscored", "some_words_to_be_underscored")]
-        public void Underscore(string input, string expectedOuput)
+        public void Underscore(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOuput, input.Underscore());
+            Assert.Equal(expectedOutput, input.Underscore());
         }
 
         // transform words into lowercase and separate with a -

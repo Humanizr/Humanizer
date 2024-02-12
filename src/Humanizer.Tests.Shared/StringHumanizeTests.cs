@@ -48,9 +48,9 @@
         [InlineData("TEST 1 _ THIS IS A TEST", "TEST 1 THIS IS A TEST")]
         [InlineData("TEST 1 - THIS_IS_A_TEST", "TEST 1 THIS IS A TEST")]
         [InlineData("TEST 1 - THIS is A Test", "TEST 1 THIS is A test")]
-        public void CanHumanizeStringWithUnderscoresAndDashes(string input, string expectedReseult)
+        public void CanHumanizeStringWithUnderscoresAndDashes(string input, string expectedResult)
         {
-            Assert.Equal(expectedReseult, input.Humanize());
+            Assert.Equal(expectedResult, input.Humanize());
         }
 
         [Theory]

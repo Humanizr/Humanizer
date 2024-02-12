@@ -35,7 +35,7 @@
         }
 
         /// <summary>
-        /// Converts the number to a specific string form using the locale's default gramatical gender and adds "and"
+        /// Converts the number to a specific string form using the locale's default grammatical gender and adds "and"
         /// </summary>
         public string Convert(long number, bool addAnd, WordForm wordForm)
         {

@@ -53,7 +53,7 @@ namespace Humanizer
                 return input;
             }
 
-            // if input contains a dash or underscore which preceeds or follows a space (or both, e.g. free-standing)
+            // if input contains a dash or underscore which precedes or follows a space (or both, e.g. free-standing)
             // remove the dash/underscore and run it through FromPascalCase
             if (FreestandingSpacingCharRegex.IsMatch(input))
             {

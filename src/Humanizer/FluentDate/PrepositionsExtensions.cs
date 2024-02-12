@@ -6,7 +6,7 @@
     public static class PrepositionsExtensions
     {
         /// <summary>
-        /// Returns a new <see cref="DateTime"/> with the specifed hour and, optionally
+        /// Returns a new <see cref="DateTime"/> with the specified hour and, optionally
         /// provided minutes, seconds, and milliseconds.
         /// </summary>
         public static DateTime At(this DateTime date, int hour, int min = 0, int second = 0, int millisecond = 0)
