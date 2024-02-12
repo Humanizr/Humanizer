@@ -4,13 +4,7 @@
 <#@ Assembly Name="System.Globalization" #>
 <#@ Assembly Name="System.Windows.Forms" #>
 <#@ assembly name="$(TargetPath)" #>
-<#@ import namespace="System" #>
 <#@ import namespace="Humanizer" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Diagnostics" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #>
 using System;
 
 namespace Humanizer;

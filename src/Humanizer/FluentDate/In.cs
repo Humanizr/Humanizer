@@ -1,5 +1,4 @@
-﻿using System;
-namespace Humanizer
+﻿namespace Humanizer
 {
     public partial class In
     {

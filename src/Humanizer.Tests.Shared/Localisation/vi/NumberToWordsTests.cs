@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.vi
+﻿namespace Humanizer.Tests.vi
 {
     [UseCulture("vi")]
     public class NumberToWordsTests

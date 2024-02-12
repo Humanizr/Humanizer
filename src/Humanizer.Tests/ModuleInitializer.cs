@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using VerifyTests;
+
 using VerifyTests.DiffPlex;
 
 public static class ModuleInitializer

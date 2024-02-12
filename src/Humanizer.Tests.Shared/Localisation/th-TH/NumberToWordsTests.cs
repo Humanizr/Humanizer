@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.thTH
+﻿namespace Humanizer.Tests.Localisation.thTH
 {
     [UseCulture("th-TH")]
     public class NumberToWordsTests

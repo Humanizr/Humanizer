@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords.Romanian
+﻿namespace Humanizer.Localisation.NumberToWords.Romanian
 {
     internal class RomanianCardinalNumberConverter
     {

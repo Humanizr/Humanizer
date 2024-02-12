@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ruRU
+﻿namespace Humanizer.Tests.Localisation.ruRU
 {
     [UseCulture("ru-RU")]
     public class OrdinalizeTests

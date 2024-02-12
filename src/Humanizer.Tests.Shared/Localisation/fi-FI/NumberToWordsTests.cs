@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.fiFI
+﻿namespace Humanizer.Tests.Localisation.fiFI
 {
     [UseCulture("fi-FI")]
     public class NumberToWordsTests
