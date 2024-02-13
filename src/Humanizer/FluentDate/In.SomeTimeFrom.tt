@@ -5,8 +5,6 @@
 <#@ Assembly Name="System.Windows.Forms" #>
 <#@ assembly name="$(TargetPath)" #>
 <#@ import namespace="Humanizer" #>
-using System;
-
 namespace Humanizer;
 
 /// <summary>
