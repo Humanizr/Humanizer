@@ -21,7 +21,7 @@ namespace Humanizer
     }
 
     /// <summary>
-    /// Contains extensions to transform a number indicating a heading into the 
+    /// Contains extensions to transform a number indicating a heading into the
     /// textual representation of the heading.
     /// </summary>
     public static class HeadingExtensions

@@ -1,6 +1,6 @@
 ﻿namespace Humanizer.Tests.Localisation.el
 {
-  
+
         [UseCulture("el")]
         public class NumberToOrdinalWordsTests
         {

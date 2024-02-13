@@ -15,7 +15,7 @@ namespace Humanizer.Localisation.NumberToWords
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input == 0)
-            { 
+            {
                 return "ноль";
             }
 
@@ -34,7 +34,7 @@ namespace Humanizer.Localisation.NumberToWords
             CollectParts(parts, ref input, 1000, GrammaticalGender.Feminine, "тысяча", "тысячи", "тысяч");
 
             if (input > 0)
-            { 
+            {
                 CollectPartsUnderOneThousand(parts, input, gender);
             }
 
@@ -44,7 +44,7 @@ namespace Humanizer.Localisation.NumberToWords
         public override string ConvertToOrdinal(int input, GrammaticalGender gender)
         {
             if (input == 0)
-            { 
+            {
                 return "нулев" + GetEndingForGender(gender, input);
             }
 

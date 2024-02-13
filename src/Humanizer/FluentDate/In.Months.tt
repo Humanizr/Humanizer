@@ -3,8 +3,6 @@
 <#@ Assembly Name="System.Core" #>
 <#@ Assembly Name="System.Windows.Forms" #>
 <#@ import namespace="System" #>
-using System;
-
 namespace Humanizer;
 
 public partial class In
