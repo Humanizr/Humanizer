@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using Humanizer.Bytes;
-using Xunit;
 
 namespace Humanizer.Tests.Bytes
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using Humanizer.Configuration;
+﻿using Humanizer.Configuration;
 
 namespace Humanizer
 {

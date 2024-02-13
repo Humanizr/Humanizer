@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
+
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 using Humanizer.Localisation.Formatters;
@@ -17,17 +15,20 @@ namespace Humanizer
         private const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
         private const double _daysInAMonth = _daysInAYear / 12;
 
+        static TimeUnit[] _timeUnits = Enum.GetValues(typeof(TimeUnit))
+            .Cast<TimeUnit>()
+            .Reverse()
+            .ToArray();
+
         /// <summary>
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
         /// </summary>
-        /// <param name="timeSpan"></param>
         /// <param name="precision">The maximum number of time units to return. Defaulted is 1 which means the largest unit is returned</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Week"/>. The time units <see cref="TimeUnit.Month"/> and <see cref="TimeUnit.Year"/> will give approximations for time spans bigger 30 days by calculating with 365.2425 days a year and 30.4369 days a month.</param>
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
-        /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
         {
             return Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords);
@@ -36,7 +37,6 @@ namespace Humanizer
         /// <summary>
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
         /// </summary>
-        /// <param name="timeSpan"></param>
         /// <param name="precision">The maximum number of time units to return.</param>
         /// <param name="countEmptyUnits">Controls whether empty time units should be counted towards maximum number of time units. Leading empty time units never count.</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
@@ -44,7 +44,6 @@ namespace Humanizer
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
-        /// <returns></returns>
         public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
         {
             var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit, toWords);
@@ -57,17 +56,16 @@ namespace Humanizer
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
             var firstValueFound = false;
-            var timeUnitsEnumTypes = GetEnumTypesForTimeUnit();
             var timeParts = new List<string>();
 
-            foreach (var timeUnitType in timeUnitsEnumTypes)
+            foreach (var timeUnit in _timeUnits)
             {
-                var timepart = GetTimeUnitPart(timeUnitType,timespan, maxUnit, minUnit, cultureFormatter, toWords); 
+                var timePart = GetTimeUnitPart(timeUnit, timespan, maxUnit, minUnit, cultureFormatter, toWords);
 
-                if (timepart != null || firstValueFound)
+                if (timePart != null || firstValueFound)
                 {
                     firstValueFound = true;
-                    timeParts.Add(timepart);
+                    timeParts.Add(timePart);
                 }
             }
             if (IsContainingOnlyNullValue(timeParts))
@@ -77,12 +75,6 @@ namespace Humanizer
                 timeParts = CreateTimePartsWithNoTimeValue(noTimeValueCultureFormatted);
             }
             return timeParts;
-        }
-
-        private static IEnumerable<TimeUnit> GetEnumTypesForTimeUnit()
-        {
-            var enumTypeEnumerator = (IEnumerable<TimeUnit>)Enum.GetValues(typeof(TimeUnit));
-            return enumTypeEnumerator.Reverse();
         }
 
         private static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)

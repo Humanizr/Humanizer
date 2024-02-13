@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer.Localisation.Formatters
 {
     internal class MalteseFormatter : DefaultFormatter
     {

@@ -1,5 +1,4 @@
 ﻿using Humanizer.Bytes;
-using Xunit;
 
 namespace Humanizer.Tests.Localisation.fr.Bytes
 {

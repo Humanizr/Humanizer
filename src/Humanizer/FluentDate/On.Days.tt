@@ -5,51 +5,39 @@
 <#@ assembly name="$(TargetPath)" #>
 <#@ import namespace="System" #>
 <#@ import namespace="Humanizer" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Diagnostics" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
-using System;
+namespace Humanizer;
 
-namespace Humanizer
+/// <summary>
+/// </summary>
+public partial class On
 {
+<#
+const int leapYear = 2012;
+for (int month = 1; month <= 12; month++)
+{
+    var firstDayOfMonth = new DateTime(leapYear, month, 1);
+    var monthName = firstDayOfMonth.ToString("MMMM");#>
     /// <summary>
+    /// Provides fluent date accessors for <#= monthName #>
     /// </summary>
-    public partial class On
+    public class <#= monthName #>
     {
-	<#    
-	const int leapYear = 2012;
-    for (int month = 1; month <= 12; month++)
-    {
-		var firstDayOfMonth = new DateTime(leapYear, month, 1);
-		var monthName = firstDayOfMonth.ToString("MMMM");#>
-	    
         /// <summary>
-		/// Provides fluent date accessors for <#= monthName #>
+        /// The nth day of <#= monthName #> of the current year
         /// </summary>
-		public class <#= monthName #>
-		{
-	        /// <summary>
-			/// The nth day of <#= monthName #> of the current year
-	        /// </summary>
-			public static DateTime The(int dayNumber)
-			{
-				return new DateTime(DateTime.Now.Year, <#= month #>, dayNumber); 
-			}
-        <#for (int day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
-        {
-		var ordinalDay = day.Ordinalize();#>
- 
-	        /// <summary>
-			/// The <#= ordinalDay #> day of <#= monthName #> of the current year
-	        /// </summary>
-			public static DateTime The<#= ordinalDay #>
-			{
-				get { return new DateTime(DateTime.Now.Year, <#= month #>, <#= day #>); }
-			}
-	    <#}#>
-}
-    <#}#>
-	}
+        public static DateTime The(int dayNumber)
+            => new(DateTime.Now.Year, <#= month #>, dayNumber);
+
+<#for (int day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
+    {
+        var ordinalDay = day.Ordinalize();#>
+
+        /// <summary>
+        /// The <#= ordinalDay #> day of <#= monthName #> of the current year
+        /// </summary>
+        public static DateTime The<#= ordinalDay #>
+            => new(DateTime.Now.Year, <#= month #>, <#= day #>);
+<#}#>
+    }
+<#}#>
 }

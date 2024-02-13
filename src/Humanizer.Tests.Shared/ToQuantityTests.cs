@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using Xunit;
+﻿using System.Globalization;
 
 namespace Humanizer.Tests
 {
@@ -133,11 +131,7 @@ namespace Humanizer.Tests
 
         internal static StringComparer GetStringComparer(CultureInfo culture)
         {
-#if NETFX_CORE
-            return culture.CompareInfo.GetStringComparer(CompareOptions.None);
-#else
             return StringComparer.Create(culture, false);
-#endif
         }
     }
 }

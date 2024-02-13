@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     public class DehumanizeToEnumTests
     {
@@ -25,7 +22,6 @@ namespace Humanizer.Tests
             Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
         }
 
-#if !NETFX_CORE
         [Fact]
         public void HonorsDescriptionAttribute()
         {
@@ -40,7 +36,6 @@ namespace Humanizer.Tests
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttributeSubclass, calculatedDescription.DehumanizeTo<EnumUnderTest>());
             Assert.Equal(EnumUnderTest.MemberWithDescriptionAttributeSubclass, calculatedDescription.DehumanizeTo(typeof(EnumUnderTest)));
         }
-#endif
 
         [Fact]
         public void HonorsAnyAttributeWithDescriptionStringProperty()

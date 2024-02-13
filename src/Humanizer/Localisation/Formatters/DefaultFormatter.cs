@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Humanizer.Localisation.Formatters
 {
@@ -40,10 +39,6 @@ namespace Humanizer.Localisation.Formatters
         /// <summary>
         /// Returns the string representation of the provided DateTime
         /// </summary>
-        /// <param name="timeUnit"></param>
-        /// <param name="timeUnitTense"></param>
-        /// <param name="unit"></param>
-        /// <returns></returns>
         public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit)
         {
             return GetResourceForDate(timeUnit, timeUnitTense, unit);
@@ -62,9 +57,6 @@ namespace Humanizer.Localisation.Formatters
         /// Returns the string representation of the provided TimeSpan
         /// </summary>
         /// <param name="timeUnit">A time unit to represent.</param>
-        /// <param name="unit"></param>
-        /// <param name="toWords"></param>
-        /// <returns></returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false)
         {
@@ -106,7 +98,6 @@ namespace Humanizer.Localisation.Formatters
         /// Formats the specified resource key.
         /// </summary>
         /// <param name="resourceKey">The resource key.</param>
-        /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey)
         {
@@ -125,8 +116,6 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="resourceKey">The resource key.</param>
         /// <param name="number">The number.</param>
-        /// <param name="toWords"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey, int number, bool toWords = false)
         {
@@ -147,17 +136,11 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="resourceKey">The resource key that's being in formatting</param>
         /// <param name="number">The number of the units being used in formatting</param>
-        /// <returns></returns>
         protected virtual string GetResourceKey(string resourceKey, int number)
         {
             return resourceKey;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="resourceKey"></param>
-        /// <returns></returns>
         protected virtual string GetResourceKey(string resourceKey)
         {
             return resourceKey;

@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.filPH
+﻿namespace Humanizer.Tests.Localisation.filPH
 {
     [UseCulture("fil-PH")]
     public class TimeSpanHumanizeTests

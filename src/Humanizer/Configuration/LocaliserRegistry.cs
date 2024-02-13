@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Humanizer.Configuration
 {
@@ -17,7 +15,6 @@ namespace Humanizer.Configuration
         /// <summary>
         /// Creates a localiser registry with the default localiser set to the provided value
         /// </summary>
-        /// <param name="defaultLocaliser"></param>
         public LocaliserRegistry(TLocaliser defaultLocaliser)
         {
             _defaultLocaliser = (culture) => defaultLocaliser;
@@ -26,14 +23,13 @@ namespace Humanizer.Configuration
         /// <summary>
         /// Creates a localiser registry with the default localiser factory set to the provided value
         /// </summary>
-        /// <param name="defaultLocaliser"></param>
         public LocaliserRegistry(Func<CultureInfo, TLocaliser> defaultLocaliser)
         {
             _defaultLocaliser = defaultLocaliser;
         }
 
         /// <summary>
-        /// Gets the localiser for the current thread's UI culture 
+        /// Gets the localiser for the current thread's UI culture
         /// </summary>
         public TLocaliser ResolveForUiCulture()
         {
@@ -41,7 +37,7 @@ namespace Humanizer.Configuration
         }
 
         /// <summary>
-        /// Gets the localiser for the specified culture 
+        /// Gets the localiser for the specified culture
         /// </summary>
         /// <param name="culture">The culture to retrieve localiser for. If not specified, current thread's UI culture is used.</param>
         public TLocaliser ResolveForCulture(CultureInfo culture)
@@ -50,7 +46,7 @@ namespace Humanizer.Configuration
         }
 
         /// <summary>
-        /// Registers the localiser for the culture provided 
+        /// Registers the localiser for the culture provided
         /// </summary>
         public void Register(string localeCode, TLocaliser localiser)
         {

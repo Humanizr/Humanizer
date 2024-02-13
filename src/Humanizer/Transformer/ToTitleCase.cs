@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Humanizer
@@ -41,18 +39,18 @@ namespace Humanizer
             var articles = new List<string> { "a", "an", "the" };
             var conjunctions = new List<string> { "and", "as", "but", "if", "nor", "or", "so", "yet" };
             var prepositions = new List<string> { "as", "at", "by", "for", "in", "of", "off", "on", "to", "up", "via" };
-            
+
             var wordToConvert = word.Value;
             string replacement;
 
-            
-            if (firstWord || 
+
+            if (firstWord ||
                 (!articles.Contains(wordToConvert) &&
                 !conjunctions.Contains(wordToConvert) &&
                 !prepositions.Contains(wordToConvert)))
             {
                 replacement = culture.TextInfo.ToUpper(wordToConvert[0]) + culture.TextInfo.ToLower(wordToConvert.Remove(0, 1));
-                
+
             }
             else
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
@@ -71,7 +70,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
                 days += 1;
             }
 
-            // month calculation 
+            // month calculation
             if (days >= 30 * precision & days <= 31)
             {
                 months = 1;
@@ -212,7 +211,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             if (ts.TotalHours < 48)
-            {   
+            {
                 return formatter.DateHumanize(TimeUnit.Day, tense, days);
             }
 

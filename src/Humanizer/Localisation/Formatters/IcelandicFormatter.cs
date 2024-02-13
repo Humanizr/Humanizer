@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 
 namespace Humanizer.Localisation.Formatters
 {
@@ -35,7 +33,7 @@ namespace Humanizer.Localisation.Formatters
                 _ => GrammaticalGender.Feminine
             };
 
-            return toWords ? 
+            return toWords ?
                 resourceString.FormatWith(number.ToWords(unitGender, _localCulture)) :
                 resourceString.FormatWith(number);
         }

@@ -22,9 +22,6 @@
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Collections;
-using System.Collections.Generic;
-
-using Xunit;
 
 namespace Humanizer.Tests
 {
@@ -84,7 +81,7 @@ namespace Humanizer.Tests
             Assert.Equal(input, input.Singularize());
         }
 
-        //Uppercases individual words and removes some characters 
+        //Uppercases individual words and removes some characters
         [Theory]
         [InlineData("some title", "Some Title")]
         [InlineData("some-title", "Some Title")]
@@ -161,9 +158,9 @@ namespace Humanizer.Tests
         [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
         [InlineData("SomeForeignWordsLikeÄgyptenÑu", "some_foreign_words_like_ägypten_ñu")]
         [InlineData("Some wordsTo be Underscored", "some_words_to_be_underscored")]
-        public void Underscore(string input, string expectedOuput)
+        public void Underscore(string input, string expectedOutput)
         {
-            Assert.Equal(expectedOuput, input.Underscore());
+            Assert.Equal(expectedOutput, input.Underscore());
         }
 
         // transform words into lowercase and separate with a -

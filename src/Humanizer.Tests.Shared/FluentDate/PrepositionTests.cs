@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.FluentDate
+﻿namespace Humanizer.Tests.FluentDate
 {
     public class PrepositionTests
     {

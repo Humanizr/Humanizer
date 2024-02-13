@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     /// <summary>
     /// Dutch spelling of numbers is not really officially regulated.
@@ -46,7 +42,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("min {0}", Convert(-number));
+                return $"min {Convert(-number)}";
             }
 
             var word = "";

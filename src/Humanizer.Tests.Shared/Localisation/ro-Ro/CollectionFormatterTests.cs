@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.roRO
+﻿namespace Humanizer.Tests.Localisation.roRO
 {
     [UseCulture("ro-RO")]
     public class CollectionFormatterTests

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class ChineseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -27,7 +25,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("负 {0}", Convert(-number, false, false));
+                return $"负 {Convert(-number, false, false)}";
             }
 
             var parts = new List<string>();
@@ -100,17 +98,17 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    var lastPart = string.Format("{0}十", UnitsMap[number / 10]);
+                    var lastPart = $"{UnitsMap[number / 10]}十";
                     if ((number % 10) > 0)
                     {
-                        lastPart += string.Format("{0}", UnitsMap[number % 10]);
+                        lastPart += $"{UnitsMap[number % 10]}";
                     }
 
                     parts.Add(lastPart);
                 }
             }
 
-            var toWords = string.Join("", parts.ToArray());
+            var toWords = string.Concat(parts);
 
             if (isSpecial)
             {
@@ -119,7 +117,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (isOrdinal)
             {
-                toWords = string.Format("第 {0}", toWords);
+                toWords = $"第 {toWords}";
             }
 
             return toWords;

@@ -1,4 +1,4 @@
-// ReSharper disable IdentifierTypo 
+// ReSharper disable IdentifierTypo
 // ReSharper disable StringLiteralTypo
 namespace Humanizer
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -26,7 +22,7 @@ namespace Humanizer.Localisation.NumberToWords
             new Fact {Value = 1000,       Name = "tusen", Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
             new Fact {Value = 100,        Name = "hundra", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
         };
-         
+
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input > Int32.MaxValue || input < Int32.MinValue)
@@ -42,7 +38,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number, gender));
+                return $"minus {Convert(-number, gender)}";
             }
 
             var word = "";

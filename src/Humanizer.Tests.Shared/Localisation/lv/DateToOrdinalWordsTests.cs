@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.lv
+﻿namespace Humanizer.Tests.Localisation.lv
 {
     [UseCulture("lv")]
     public class DateToOrdinalWordsTests

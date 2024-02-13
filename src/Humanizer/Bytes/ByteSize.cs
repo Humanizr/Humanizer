@@ -20,9 +20,8 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-using System;
 using System.Globalization;
-using System.Linq;
+
 using Humanizer.Configuration;
 using Humanizer.Localisation;
 
@@ -309,13 +308,13 @@ namespace Humanizer.Bytes
                                               ? "0"
                                               : formattedLargeWholeNumberValue;
 
-            return string.Format("{0} {1}", formattedLargeWholeNumberValue, toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider));
+            return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
         }
 
         /// <summary>
-        /// Converts the value of the current ByteSize object to a string with 
-        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga, 
-        /// tera) used is the largest metric prefix such that the corresponding 
+        /// Converts the value of the current ByteSize object to a string with
+        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga,
+        /// tera) used is the largest metric prefix such that the corresponding
         /// value is greater than or equal to one.
         /// </summary>
         public string ToFullWords(string format = null, IFormatProvider provider = null)

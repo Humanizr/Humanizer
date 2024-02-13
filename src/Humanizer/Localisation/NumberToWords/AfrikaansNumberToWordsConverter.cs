@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Humanizer.Localisation.NumberToWords
 {
     internal class AfrikaansNumberToWordsConverter : GenderlessNumberToWordsConverter
@@ -45,32 +42,32 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number));
+                return $"minus {Convert(-number)}";
             }
 
             var parts = new List<string>();
 
             if ((number / 1000000000) > 0)
             {
-                parts.Add(string.Format("{0} miljard", Convert(number / 1000000000)));
+                parts.Add($"{Convert(number / 1000000000)} miljard");
                 number %= 1000000000;
             }
 
             if ((number / 1000000) > 0)
             {
-                parts.Add(string.Format("{0} miljoen", Convert(number / 1000000)));
+                parts.Add($"{Convert(number / 1000000)} miljoen");
                 number %= 1000000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(string.Format("{0} duisend", Convert(number / 1000)));
+                parts.Add($"{Convert(number / 1000)} duisend");
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(string.Format("{0} honderd", Convert(number / 100)));
+                parts.Add($"{Convert(number / 100)} honderd");
                 number %= 100;
             }
 
@@ -94,11 +91,11 @@ namespace Humanizer.Localisation.NumberToWords
                     var lastPart = TensMap[number / 10];
                     if ((number % 10) > 0)
                     {
-                        lastPart = string.Format("{0} en {1}", GetUnitValue(number % 10, false), isOrdinal ? GetUnitValue(lastPartValue, isOrdinal) : lastPart);
+                        lastPart = $"{GetUnitValue(number % 10, false)} en {(isOrdinal ? GetUnitValue(lastPartValue, isOrdinal) : lastPart)}";
                     }
                     else if ((number % 10) == 0)
                     {
-                        lastPart = string.Format("{0}{1}{2}", parts.Count > 0 ? "en " : "", lastPart, isOrdinal ? "ste" : "");
+                        lastPart = $"{(parts.Count > 0 ? "en " : "")}{lastPart}{(isOrdinal ? "ste" : "")}";
                     }
                     else if (isOrdinal)
                     {
@@ -113,7 +110,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts[parts.Count - 1] += "ste";
             }
 
-            var toWords = string.Join(" ", parts.ToArray());
+            var toWords = string.Join(" ", parts);
 
             if (isOrdinal)
             {

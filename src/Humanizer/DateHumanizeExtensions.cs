@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using Humanizer.Configuration;
 
 namespace Humanizer
@@ -19,7 +18,7 @@ namespace Humanizer
         /// <returns>distance of time in words</returns>
         public static string Humanize(this DateTime input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
         {
-            var comparisonBase = dateToCompareAgainst.HasValue ? dateToCompareAgainst.Value : DateTime.UtcNow;
+            var comparisonBase = dateToCompareAgainst ?? DateTime.UtcNow;
             utcDate ??= input.Kind != DateTimeKind.Local;
             comparisonBase = utcDate.Value ? comparisonBase.ToUniversalTime() : comparisonBase.ToLocalTime();
 
@@ -89,8 +88,7 @@ namespace Humanizer
         /// <returns>distance of time in words</returns>
         public static string Humanize(this DateOnly input, DateOnly? dateToCompareAgainst = null, CultureInfo culture = null)
         {
-            var comparisonBase = dateToCompareAgainst.HasValue ? dateToCompareAgainst.Value : DateOnly.FromDateTime(DateTime.UtcNow);                        
-
+            var comparisonBase = dateToCompareAgainst ?? DateOnly.FromDateTime(DateTime.UtcNow);
             return Configurator.DateOnlyHumanizeStrategy.Humanize(input, comparisonBase, culture);
         }
 
@@ -123,7 +121,7 @@ namespace Humanizer
         /// <returns>distance of time in words</returns>
         public static string Humanize(this TimeOnly input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo culture = null)
         {
-            var comparisonBase = timeToCompareAgainst.HasValue ? timeToCompareAgainst.Value : TimeOnly.FromDateTime(useUtc ? DateTime.UtcNow : DateTime.Now);
+            var comparisonBase = timeToCompareAgainst ?? TimeOnly.FromDateTime(useUtc ? DateTime.UtcNow : DateTime.Now);
 
             return Configurator.TimeOnlyHumanizeStrategy.Humanize(input, comparisonBase, culture);
         }

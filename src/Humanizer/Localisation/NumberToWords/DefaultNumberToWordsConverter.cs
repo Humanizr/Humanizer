@@ -19,7 +19,6 @@ namespace Humanizer.Localisation.NumberToWords
         /// 3501.ToWords() -> "three thousand five hundred and one"
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
-        /// <returns></returns>
         public override string Convert(long number)
         {
             return number.ToString(_culture);
@@ -29,7 +28,6 @@ namespace Humanizer.Localisation.NumberToWords
         /// 1.ToOrdinalWords() -> "first"
         /// </summary>
         /// <param name="number">Number to be turned to ordinal words</param>
-        /// <returns></returns>
         public override string ConvertToOrdinal(int number)
         {
             return number.ToString(_culture);

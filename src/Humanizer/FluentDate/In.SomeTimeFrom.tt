@@ -4,147 +4,111 @@
 <#@ Assembly Name="System.Globalization" #>
 <#@ Assembly Name="System.Windows.Forms" #>
 <#@ assembly name="$(TargetPath)" #>
-<#@ import namespace="System" #>
 <#@ import namespace="Humanizer" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Diagnostics" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
-using System;
+namespace Humanizer;
 
-namespace Humanizer
+/// <summary>
+/// </summary>
+public partial class In
 {
+<#for (int i = 1; i <= 10; i++){
+    var plural = ( i > 1 ? "s" : "");
+    var second = "Second" + plural;
+    var minute = "Minute" + plural;
+    var hour = "Hour" + plural;
+    var day = "Day" + plural;
+    var week = "Week" + plural;
+    var month = "Month" + plural;
+    var year = "Year" + plural;
+#>
     /// <summary>
     /// </summary>
-    public partial class In
+    public static class <#= i.ToWords().Dehumanize() #>
     {
-  <#for (int i = 1; i <= 10; i++){
-		var plural = ( i > 1 ? "s" : "");
-		var second = "Second" + plural;
-		var minute = "Minute" + plural;
-		var hour = "Hour" + plural;
-		var day = "Day" + plural;
-		var week = "Week" + plural;
-		var month = "Month" + plural;
-		var year = "Year" + plural;
-  #> 
         /// <summary>
+        /// <#= i #> seconds from now
         /// </summary>
-		public static class <#= i.ToWords().Dehumanize() #>
-		{
-			/// <summary>
-			/// <#= i #> seconds from now
-			/// </summary>
-			public static DateTime <#= second #>
-			{
-				get { return DateTime.UtcNow.AddSeconds(<#= i #>); }
-			}
+        public static DateTime <#= second #>
+            => DateTime.UtcNow.AddSeconds(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> seconds from the provided date
-			/// </summary>
-			public static DateTime <#= second #>From(DateTime date)
-			{
-				return date.AddSeconds(<#= i #>);
-			}
+        /// <summary>
+        /// <#= i #> seconds from the provided date
+        /// </summary>
+        public static DateTime <#= second #>From(DateTime date)
+            => date.AddSeconds(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> minutes from now
-			/// </summary>
-			public static DateTime <#= minute #>
-			{
-				get { return DateTime.UtcNow.AddMinutes(<#= i #>); }
-			}
+        /// <summary>
+        /// <#= i #> minutes from now
+        /// </summary>
+        public static DateTime <#= minute #>
+            => DateTime.UtcNow.AddMinutes(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> minutes from the provided date
-			/// </summary>
-			public static DateTime <#= minute #>From(DateTime date)
-			{
-				return date.AddMinutes(<#= i #>);
-			}
+        /// <summary>
+        /// <#= i #> minutes from the provided date
+        /// </summary>
+        public static DateTime <#= minute #>From(DateTime date)
+            => date.AddMinutes(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> hours from now
-			/// </summary>
-			public static DateTime <#= hour #>
-			{
-				get { return DateTime.UtcNow.AddHours(<#= i #>); }
-			}
+        /// <summary>
+        /// <#= i #> hours from now
+        /// </summary>
+        public static DateTime <#= hour #>
+            => DateTime.UtcNow.AddHours(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> hours from the provided date
-			/// </summary>
-			public static DateTime <#= hour #>From(DateTime date)
-			{
-				return date.AddHours(<#= i #>);
-			}
+        /// <summary>
+        /// <#= i #> hours from the provided date
+        /// </summary>
+        public static DateTime <#= hour #>From(DateTime date)
+            => date.AddHours(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> days from now
-			/// </summary>
-			public static DateTime <#= day #>
-			{
-				get { return DateTime.UtcNow.AddDays(<#= i #>); }
-			}
+        /// <summary>
+        /// <#= i #> days from now
+        /// </summary>
+        public static DateTime <#= day #>
+            => DateTime.UtcNow.AddDays(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> days from the provided date
-			/// </summary>
-			public static DateTime <#= day #>From(DateTime date)
-			{
-				return date.AddDays(<#= i #>);
-			}
+        /// <summary>
+        /// <#= i #> days from the provided date
+        /// </summary>
+        public static DateTime <#= day #>From(DateTime date)
+            => date.AddDays(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> weeks from now
-			/// </summary>
-			public static DateTime <#= week #>
-			{
-				get { return DateTime.UtcNow.AddDays(<#= i * 7 #>); }
-			}
+        /// <summary>
+        /// <#= i #> weeks from now
+        /// </summary>
+        public static DateTime <#= week #>
+            => DateTime.UtcNow.AddDays(<#= i * 7 #>);
 
-			/// <summary>
-			/// <#= i #> weeks from the provided date
-			/// </summary>
-			public static DateTime <#= week #>From(DateTime date)
-			{
-				return date.AddDays(<#= i * 7 #>);
-			}
+        /// <summary>
+        /// <#= i #> weeks from the provided date
+        /// </summary>
+        public static DateTime <#= week #>From(DateTime date)
+            => date.AddDays(<#= i * 7 #>);
 
-			/// <summary>
-			/// <#= i #> months from now
-			/// </summary>
-			public static DateTime <#= month #>
-			{
-				get { return DateTime.UtcNow.AddMonths(<#= i #>); }
-			}
+        /// <summary>
+        /// <#= i #> months from now
+        /// </summary>
+        public static DateTime <#= month #>
+            => DateTime.UtcNow.AddMonths(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> months from the provided date
-			/// </summary>
-			public static DateTime <#= month #>From(DateTime date)
-			{
-				return date.AddMonths(<#= i #>);
-			}
+        /// <summary>
+        /// <#= i #> months from the provided date
+        /// </summary>
+        public static DateTime <#= month #>From(DateTime date)
+            => date.AddMonths(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> years from now
-			/// </summary>
-			public static DateTime <#= year #>
-			{
-				get { return DateTime.UtcNow.AddYears(<#= i #>); }
-			}
+        /// <summary>
+        /// <#= i #> years from now
+        /// </summary>
+        public static DateTime <#= year #>
+            => DateTime.UtcNow.AddYears(<#= i #>);
 
-			/// <summary>
-			/// <#= i #> years from the provided date
-			/// </summary>
-			public static DateTime <#= year #>From(DateTime date)
-			{
-				return date.AddYears(<#= i #>);
-			}
-		}
-    <#}#>
-  }
+        /// <summary>
+        /// <#= i #> years from the provided date
+        /// </summary>
+        public static DateTime <#= year #>From(DateTime date)
+            => date.AddYears(<#= i #>);
+    }
+
+<#}#>
 }

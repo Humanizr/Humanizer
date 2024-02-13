@@ -1,5 +1,4 @@
-﻿using Xunit;
-namespace Humanizer.Tests.Localisation.mt
+﻿namespace Humanizer.Tests.Localisation.mt
 {
     [UseCulture("mt")]
     public class NumberToWordsTests
@@ -98,7 +97,7 @@ namespace Humanizer.Tests.Localisation.mt
         {
             Assert.Equal(expected, number.ToWords());
         }
-        
+
         [Theory]
         [InlineData(1, "waħda")]
         [InlineData(1001, "elf u waħda")]
@@ -108,7 +107,7 @@ namespace Humanizer.Tests.Localisation.mt
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
-        
+
         [Theory]
         [InlineData(0, "żero")]
         [InlineData(1, "wieħed")]

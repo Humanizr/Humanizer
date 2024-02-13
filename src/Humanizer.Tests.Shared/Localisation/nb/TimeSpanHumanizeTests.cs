@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.nb
+﻿namespace Humanizer.Tests.Localisation.nb
 {
     [UseCulture("nb")]
     public class TimeSpanHumanizeTests

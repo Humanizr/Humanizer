@@ -1,5 +1,4 @@
-﻿using System;
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Enumerates the ways of displaying a quantity value when converting
@@ -43,7 +42,6 @@ namespace Humanizer
         /// "men".ToQuantity(2) => "2 men"
         /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
-        /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
             return input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
@@ -61,7 +59,6 @@ namespace Humanizer
         /// "request".ToQuantity(10000, format: "N0") => "10,000 requests"
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
-        /// <returns></returns>
         public static string ToQuantity(this string input, int quantity, string format, IFormatProvider formatProvider = null)
         {
             return input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
@@ -80,7 +77,6 @@ namespace Humanizer
         /// "men".ToQuantity(2) => "2 men"
         /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
-        /// <returns></returns>
         public static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
         {
             return input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
@@ -98,7 +94,6 @@ namespace Humanizer
         /// "request".ToQuantity(10000, format: "N0") => "10,000 requests"
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
-        /// <returns></returns>
         public static string ToQuantity(this string input, long quantity, string format, IFormatProvider formatProvider = null)
         {
             return input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
@@ -120,9 +115,9 @@ namespace Humanizer
                 return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
             }
 
-            return string.Format("{0} {1}", quantity.ToWords(), transformedInput);
+            return $"{quantity.ToWords()} {transformedInput}";
         }
-        
+
         /// <summary>
         /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
         /// </summary>
@@ -135,7 +130,6 @@ namespace Humanizer
         /// "request".ToQuantity(10.6, format: "N0") => "10.6 requests"
         /// "request".ToQuantity(1.0, format: "N0") => "1 request"
         /// </example>
-        /// <returns></returns>
         public static string ToQuantity(this string input, double quantity, string format = null, IFormatProvider formatProvider = null)
         {
             var transformedInput = quantity == 1
@@ -154,7 +148,6 @@ namespace Humanizer
         /// <example>
         /// "request".ToQuantity(0.2) => "0.2 requests"
         /// </example>
-        /// <returns></returns>
         public static string ToQuantity(this string input, double quantity)
         {
             return ToQuantity(input, quantity, null, null);

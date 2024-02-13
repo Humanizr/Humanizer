@@ -13,7 +13,6 @@ namespace Humanizer
         /// Turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
         /// </summary>
         /// <param name="numberString">The number, in string, to be ordinalized</param>
-        /// <returns></returns>
         public static string Ordinalize(this string numberString)
         {
             return Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString);
@@ -42,7 +41,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string Ordinalize(this string numberString, CultureInfo culture)
         {
             return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString);
@@ -75,7 +73,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
-        /// <returns></returns>
         public static string Ordinalize(this string numberString, GrammaticalGender gender)
         {
             return Configurator.Ordinalizer.Convert(int.Parse(numberString), numberString, gender);
@@ -111,7 +108,6 @@ namespace Humanizer
         /// <param name="numberString">The number, in string, to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string Ordinalize(this string numberString, GrammaticalGender gender, CultureInfo culture)
         {
             return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(int.Parse(numberString, culture), numberString, gender);
@@ -143,7 +139,6 @@ namespace Humanizer
         /// Turns a number into an ordinal number used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
         /// </summary>
         /// <param name="number">The number to be ordinalized</param>
-        /// <returns></returns>
         public static string Ordinalize(this int number)
         {
             return Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture));
@@ -172,7 +167,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">The number to be ordinalized</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string Ordinalize(this int number, CultureInfo culture)
         {
             return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, number.ToString(culture));
@@ -205,7 +199,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">The number to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
-        /// <returns></returns>
         public static string Ordinalize(this int number, GrammaticalGender gender)
         {
             return Configurator.Ordinalizer.Convert(number, number.ToString(CultureInfo.InvariantCulture), gender);
@@ -241,7 +234,6 @@ namespace Humanizer
         /// <param name="number">The number to be ordinalized</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string Ordinalize(this int number, GrammaticalGender gender, CultureInfo culture)
         {
             return Configurator.Ordinalizers.ResolveForCulture(culture).Convert(number, number.ToString(culture), gender);

@@ -1,11 +1,7 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-
 using Humanizer.Configuration;
 using Humanizer.DateTimeHumanizeStrategy;
-
-using Xunit;
 
 namespace Humanizer.Tests.Localisation.@is
 {
