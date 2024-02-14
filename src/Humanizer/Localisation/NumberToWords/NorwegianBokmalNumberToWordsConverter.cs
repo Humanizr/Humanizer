@@ -20,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
-            if (number > Int32.MaxValue || number < Int32.MinValue)
+            if (number > int.MaxValue || number < int.MinValue)
             {
                 throw new NotImplementedException();
             }
