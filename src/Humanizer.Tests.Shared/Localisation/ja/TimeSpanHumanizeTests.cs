@@ -6,7 +6,7 @@
 
         [Theory]
         [Trait("Translation", "Google")]
-        [InlineData(366, "1 年間の")]
+        [InlineData(366, "1 年")]
         [InlineData(731, "2 年")]
         [InlineData(1096, "3 年")]
         [InlineData(4018, "11 年")]
