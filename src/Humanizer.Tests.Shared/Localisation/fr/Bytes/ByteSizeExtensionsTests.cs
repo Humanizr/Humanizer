@@ -54,8 +54,8 @@
         [InlineData(2000, "KB", "1,95 Ko")]
         [InlineData(2123, "#.##", "2,07 Ko")]
         [InlineData(10000000, "KB", "9765,63 Ko")]
-        [InlineData(10000000, "#,##0 KB", "9 766 Ko")]
-        [InlineData(10000000, "#,##0.# KB", "9 765,6 Ko")]
+        [InlineData(10000000, "#,##0 KB", "9766 Ko")]
+        [InlineData(10000000, "#,##0.# KB", "9765,6 Ko")]
         public void HumanizesBytes(double input, string format, string expectedValue)
         {
             Assert.Equal(expectedValue, input.Bytes().Humanize(format));

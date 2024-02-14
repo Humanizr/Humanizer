@@ -5,7 +5,7 @@ using System;
 using Xunit;
 
 namespace Humanizer.Tests.Localisation.lb;
-    
+
 [UseCulture("lb-LU")]
 public class TimeOnlyHumanizeTests
 {
