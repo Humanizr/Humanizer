@@ -20,7 +20,7 @@
 
         public override string Convert(long input)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
+            if (input > int.MaxValue || input < int.MinValue)
             {
                 throw new NotImplementedException();
             }
