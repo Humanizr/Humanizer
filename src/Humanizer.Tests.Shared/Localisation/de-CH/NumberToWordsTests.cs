@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.deCH
+﻿namespace Humanizer.Tests.Localisation.deCH
 {
     [UseCulture("de-CH")]
     public class NumberToWordsTests

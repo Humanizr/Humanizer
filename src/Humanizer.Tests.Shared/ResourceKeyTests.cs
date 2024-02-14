@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Humanizer.Localisation;
-using Xunit;
+﻿using Humanizer.Localisation;
 
 namespace Humanizer.Tests
 {

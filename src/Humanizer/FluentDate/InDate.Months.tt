@@ -3,42 +3,30 @@
 <#@ Assembly Name="System.Core" #>
 <#@ Assembly Name="System.Windows.Forms" #>
 <#@ import namespace="System" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Diagnostics" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Collections" #>
-<#@ import namespace="System.Collections.Generic" #> 
 #if NET6_0_OR_GREATER
+namespace Humanizer;
 
-using System;
-
-namespace Humanizer
+public partial class InDate
 {
-    public partial class InDate
-    {
-  <#var now = DateTime.Now;
-    for (int i = 0; i < 12; i++){
-		var monthName = new DateTime(now.Year, i + 1, 1).ToString("MMMM");
-	#> 
-        /// <summary>
-        /// Returns 1st of <#= monthName #> of the current year
-        /// </summary>
-		public static DateOnly <#= monthName #>
-		{
-			get { return new DateOnly(DateTime.UtcNow.Year, <#= i + 1 #>, 1); }
-		}
+<#var now = DateTime.Now;
+for (int i = 0; i < 12; i++){
+    var monthName = new DateTime(now.Year, i + 1, 1).ToString("MMMM");
+#>
+    /// <summary>
+    /// Returns 1st of <#= monthName #> of the current year
+    /// </summary>
+    public static DateOnly <#= monthName #>
+        => new(DateTime.UtcNow.Year, <#= i + 1 #>, 1);
 
-        /// <summary>
-        /// Returns 1st of <#= monthName #> of the year passed in
-        /// </summary>
-        public static DateOnly <#= monthName#>Of(int year)
-		{
-			return new DateOnly(year, <#= i + 1 #>, 1);
-		}
-    <#
-	}
+    /// <summary>
+    /// Returns 1st of <#= monthName #> of the year passed in
+    /// </summary>
+    public static DateOnly <#= monthName#>Of(int year)
+        => new(year, <#= i + 1 #>, 1);
 
-   #>
-  }
+<#
+}
+
+#>
 }
 #endif

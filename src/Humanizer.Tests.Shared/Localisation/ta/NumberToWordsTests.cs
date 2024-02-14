@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ta
+﻿namespace Humanizer.Tests.Localisation.ta
 {
     [UseCulture("ta")]
     public class NumberToWordsTests
@@ -71,7 +69,7 @@ namespace Humanizer.Tests.Localisation.ta
         [InlineData(6000, "ஆறாயிரம்")]
         [InlineData(7000, "ஏழாயிரம்")]
         [InlineData(8000, "எட்டாயிரம்")]
-        [InlineData(8888, "எட்டாயிரத்து எண்ணூற்று எண்பத்தி எட்டு")]  
+        [InlineData(8888, "எட்டாயிரத்து எண்ணூற்று எண்பத்தி எட்டு")]
         [InlineData(9000, "ஒன்பதாயிரம்")]
         [InlineData(9999, "ஒன்பதாயிரத்து தொள்ளாயிரத்து தொண்ணூற்றி ஒன்பது")]
 
@@ -115,7 +113,5 @@ namespace Humanizer.Tests.Localisation.ta
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
-    
-
     }
 }

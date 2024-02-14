@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ukUA
+﻿namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
     public class OrdinalizeTests

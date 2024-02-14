@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     public class SomeClass
     {
@@ -78,7 +74,7 @@ namespace Humanizer.Tests
         [Fact]
         public void HumanizeUsesStringDisplayFormatter()
         {
-            var humanized = _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString));
+            var humanized = _testCollection.Humanize(sc => $"SomeObject #{sc.SomeInt} - {sc.SomeString}");
             Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three", humanized);
         }
 
@@ -92,7 +88,7 @@ namespace Humanizer.Tests
         [Fact]
         public void HumanizeUsesStringDisplayFormatterWhenSeparatorIsProvided()
         {
-            var humanized = _testCollection.Humanize(sc => string.Format("SomeObject #{0} - {1}", sc.SomeInt, sc.SomeString), "or");
+            var humanized = _testCollection.Humanize(sc => $"SomeObject #{sc.SomeInt} - {sc.SomeString}", "or");
             Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, or SomeObject #3 - Three", humanized);
         }
 

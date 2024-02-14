@@ -1,8 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using Humanizer.Localisation;
-using Xunit;
 
 namespace Humanizer.Tests
 {

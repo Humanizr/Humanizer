@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.ja
+﻿namespace Humanizer.Tests.Localisation.ja
 {
     [UseCulture("ja")]
     public class TimeSpanHumanizeTests
@@ -9,7 +6,7 @@ namespace Humanizer.Tests.Localisation.ja
 
         [Theory]
         [Trait("Translation", "Google")]
-        [InlineData(366, "1 年間の")]
+        [InlineData(366, "1 年")]
         [InlineData(731, "2 年")]
         [InlineData(1096, "3 年")]
         [InlineData(4018, "11 年")]

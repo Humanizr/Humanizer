@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace Humanizer.Inflections
 {
@@ -16,7 +15,7 @@ namespace Humanizer.Inflections
 
         private readonly List<Rule> _plurals = new List<Rule>();
         private readonly List<Rule> _singulars = new List<Rule>();
-        private readonly List<string> _uncountables = new List<string>();
+        private readonly HashSet<string> _uncountables = new(StringComparer.CurrentCultureIgnoreCase);
         private readonly Regex _letterS = new Regex("^([sS])[sS]*$");
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace Humanizer.Inflections
         /// <param name="word">Word to be added to the list of uncountables.</param>
         public void AddUncountable(string word)
         {
-            _uncountables.Add(word.ToLower());
+            _uncountables.Add(word);
         }
 
         /// <summary>
@@ -73,7 +72,6 @@ namespace Humanizer.Inflections
         /// </summary>
         /// <param name="word">Word to be pluralized</param>
         /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
-        /// <returns></returns>
         public string Pluralize(string word, bool inputIsKnownToBeSingular = true)
         {
             var s = LetterS(word);
@@ -105,7 +103,6 @@ namespace Humanizer.Inflections
         /// <param name="word">Word to be singularized</param>
         /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
         /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
-        /// <returns></returns>
         public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
         {
             var s = LetterS(word);
@@ -163,7 +160,7 @@ namespace Humanizer.Inflections
 
         private bool IsUncountable(string word)
         {
-            return _uncountables.Contains(word.ToLower());
+            return _uncountables.Contains(word);
         }
 
         private string MatchUpperCase(string word, string replacement)

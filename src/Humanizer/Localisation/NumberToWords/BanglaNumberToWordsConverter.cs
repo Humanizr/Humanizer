@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class BanglaNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -75,32 +72,32 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("ঋণাত্মক {0}", Convert(-number));
+                return $"ঋণাত্মক {Convert(-number)}";
             }
 
             var parts = new List<string>();
 
             if ((number / 10000000) > 0)
             {
-                parts.Add(string.Format("{0} কোটি", Convert(number / 10000000)));
+                parts.Add($"{Convert(number / 10000000)} কোটি");
                 number %= 10000000;
             }
 
             if ((number / 100000) > 0)
             {
-                parts.Add(string.Format("{0} লক্ষ", Convert(number / 100000)));
+                parts.Add($"{Convert(number / 100000)} লক্ষ");
                 number %= 100000;
             }
 
             if ((number / 1000) > 0)
             {
-                parts.Add(string.Format("{0} হাজার", Convert(number / 1000)));
+                parts.Add($"{Convert(number / 1000)} হাজার");
                 number %= 1000;
             }
 
             if ((number / 100) > 0)
             {
-                parts.Add(string.Format("{0}", HundredsMap[number / 100]));
+                parts.Add($"{HundredsMap[number / 100]}");
                 number %= 100;
             }
 
@@ -109,7 +106,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(UnitsMap[number]);
             }
 
-            return string.Join(" ", parts.ToArray());
+            return string.Join(" ", parts);
         }
 
         private static bool ExceptionNumbersToWords(int number, out string words)

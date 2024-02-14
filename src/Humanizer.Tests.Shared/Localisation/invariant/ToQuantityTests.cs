@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.invariant
+﻿namespace Humanizer.Tests.Localisation.invariant
 {
     [UseCulture("")]
     public class ToQuantityTests

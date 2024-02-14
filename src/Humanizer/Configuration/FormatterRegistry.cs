@@ -60,6 +60,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("zh-Hant");
             RegisterDefaultFormatter("th-TH");
             RegisterDefaultFormatter("en-IN");
+            Register("lt", new LithuanianFormatter());
             Register("lb", new LuxembourgishFormatter());
         }
 

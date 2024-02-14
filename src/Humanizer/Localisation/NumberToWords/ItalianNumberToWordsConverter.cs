@@ -1,5 +1,4 @@
-﻿using System;
-using Humanizer.Localisation.NumberToWords.Italian;
+﻿using Humanizer.Localisation.NumberToWords.Italian;
 
 namespace Humanizer.Localisation.NumberToWords
 {

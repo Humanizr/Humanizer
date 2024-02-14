@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Humanizer.Localisation.NumberToWords
 {
@@ -10,17 +8,17 @@ namespace Humanizer.Localisation.NumberToWords
         {
             "zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset"
         };
-        
+
         private static readonly string[] TensMap =
         {
-            "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", 
+            "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt",
             "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt"
         };
-        
+
         private static readonly string[] UnitsMap =
         {
-            "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", 
-            "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", 
+            "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć",
+            "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście",
             "osiemnaście", "dziewiętnaście"
         };
 
@@ -42,7 +40,7 @@ namespace Humanizer.Localisation.NumberToWords
         {
             _culture = culture;
         }
-        
+
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input == 0)
@@ -55,7 +53,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             return string.Join(" ", parts);
         }
-        
+
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
         {
             return number.ToString(_culture);
@@ -108,12 +106,12 @@ namespace Humanizer.Localisation.NumberToWords
             var hundredsDigit = number / 100;
             var tensDigit = (number % 100) / 10;
             var unitsDigit = number % 10;
-            
+
             if (hundredsDigit >= 1)
             {
                 parts.Add(HundredsMap[hundredsDigit]);
             }
-            
+
             if (tensDigit >= 2)
             {
                 parts.Add(TensMap[tensDigit]);
@@ -154,7 +152,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 return PowersOfThousandMap[power][singularIndex];
             }
- 
+
             var multiplierUnitsDigit = multiplier % 10;
             var multiplierTensDigit = (multiplier % 100) / 10;
             if (multiplierTensDigit == 1 || multiplierUnitsDigit <= 1 || multiplierUnitsDigit >= 5)

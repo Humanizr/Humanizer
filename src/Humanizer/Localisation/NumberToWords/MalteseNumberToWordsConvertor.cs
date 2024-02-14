@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class MalteseNumberToWordsConvertor : GenderedNumberToWordsConverter
     {
@@ -91,7 +88,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
             return $"il-{Convert(number, gender)}";
         }
-        
+
         private static string GetTens(long value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
         {
             if (value == 1 && gender == GrammaticalGender.Feminine)

@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
 
-using Xunit;
-
 namespace Humanizer.Tests.Localisation.es
 {
     [UseCulture("es-ES")]

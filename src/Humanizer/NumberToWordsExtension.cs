@@ -14,7 +14,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">Number to be turned to ordinal words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string ToOrdinalWords(this int number, CultureInfo culture = null)
         {
             return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number);
@@ -47,7 +46,6 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string ToOrdinalWords(this int number, GrammaticalGender gender, CultureInfo culture = null)
         {
             return Configurator.GetNumberToWordsConverter(culture).ConvertToOrdinal(number, gender);
@@ -80,7 +78,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">Number to be turned to tuple</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string ToTuple(this int number, CultureInfo culture = null)
         {
             return Configurator.GetNumberToWordsConverter(culture).ConvertToTuple(number);
@@ -91,7 +88,6 @@ namespace Humanizer
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string ToWords(this int number, CultureInfo culture = null)
         {
             return ((long)number).ToWords(culture);
@@ -122,7 +118,6 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="addAnd">To add 'and' before the last number.</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string ToWords(this int number, bool addAnd, CultureInfo culture = null)
         {
             return ((long)number).ToWords(culture, addAnd);
@@ -166,7 +161,6 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string ToWords(this int number, GrammaticalGender gender, CultureInfo culture = null)
         {
             return ((long)number).ToWords(gender, culture);
@@ -199,7 +193,6 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <param name="addAnd">Whether "and" should be included or not.</param>
-        /// <returns></returns>
         public static string ToWords(this long number, CultureInfo culture = null, bool addAnd = true)
         {
             return Configurator.GetNumberToWordsConverter(culture).Convert(number, addAnd);
@@ -244,7 +237,6 @@ namespace Humanizer
         /// <param name="number">Number to be turned to words</param>
         /// <param name="gender">The grammatical gender to use for output words</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public static string ToWords(this long number, GrammaticalGender gender, CultureInfo culture = null)
         {
             return Configurator.GetNumberToWordsConverter(culture).Convert(number, gender);

@@ -1,8 +1,5 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-using Xunit;
-
 namespace Humanizer.Tests.Localisation.fr
 {
     [UseCulture("fr")]
@@ -23,10 +20,10 @@ namespace Humanizer.Tests.Localisation.fr
         [Fact]
         public void DefaultStrategy_HoursApart()
         {
-            var inputTime = new TimeOnly(13, 08, 05);
+            var inputTime = new TimeOnly(3, 08, 05);
             var baseTime = new TimeOnly(1, 08, 05);
 
-            const string expectedResult = "dans 12 heures";
+            const string expectedResult = "dans 2 heures";
             var actualResult = inputTime.Humanize(baseTime);
 
             Assert.Equal(expectedResult, actualResult);

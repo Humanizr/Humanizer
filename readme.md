@@ -1114,18 +1114,18 @@ Humanizer includes methods to change a numeric heading to words. The heading can
 
 ```C#
 360.ToHeading();
-// north
+// N
 720.ToHeading();
-// north
+// N
 ```
 
-In order to retrieve a short version of the heading you can use the following call:
+In order to retrieve a full version of the heading, use the following call:
 
 ```C#
-180.ToHeading(true);
-// S
-360.ToHeading(true);
-// N
+180.ToHeading(HeadingStyle.Full);
+// south
+360.ToHeading(HeadingStyle.Full);
+// north
 ```
 
 Please note that a textual representation has a maximum deviation of 11.25°.

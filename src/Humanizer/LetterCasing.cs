@@ -1,7 +1,7 @@
 namespace Humanizer
 {
     /// <summary>
-    /// Options for specifying the desired letter casing for the output string 
+    /// Options for specifying the desired letter casing for the output string
     /// </summary>
     public enum LetterCasing
     {

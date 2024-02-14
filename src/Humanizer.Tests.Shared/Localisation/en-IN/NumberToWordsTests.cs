@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.enIN
+﻿namespace Humanizer.Tests.Localisation.enIN
 {
     [UseCulture("en-IN")]
     public class NumberToWordsTests
@@ -59,6 +57,6 @@ namespace Humanizer.Tests.Localisation.enIN
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
-        
+
     }
 }

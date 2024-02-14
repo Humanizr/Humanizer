@@ -1,14 +1,10 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-
-using Humanizer;
-
 namespace Humanizer.Localisation.TimeToClockNotation
 {
     internal class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
-        public virtual string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
+        public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
         {
             switch (time)
             {
