@@ -54,7 +54,7 @@ namespace Humanizer.Configuration
             Register("lv", new LatvianNumberToWordsConverter());
             Register("ko-KR", new KoreanNumberToWordsConverter());
             Register("en-IN", new IndianNumberToWordsConverter());
-
+            Register("lt", new LithuanianNumberToWordsConverter());
         }
     }
 }
