@@ -11,7 +11,7 @@
         [InlineData(4018, "11 Jahre")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -22,7 +22,7 @@
         [InlineData(4018, "elf Jahre")]
         public void YearsToWords(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year,toWords:true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
         }
 
         [Theory]
@@ -33,7 +33,7 @@
         [InlineData(335, "11 Monate")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -44,7 +44,7 @@
         [InlineData(335, "elf Monate")]
         public void MonthsToWords(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year,toWords:true));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
         }
 
         [Theory]

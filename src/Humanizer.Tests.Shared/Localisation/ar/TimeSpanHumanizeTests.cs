@@ -11,7 +11,7 @@
         [InlineData(4018, "11 سنة")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -22,7 +22,7 @@
         [InlineData(335, "11 أشهر")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]

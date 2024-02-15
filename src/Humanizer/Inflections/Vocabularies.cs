@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Inflections
+﻿namespace Humanizer
 {
     /// <summary>
     /// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.

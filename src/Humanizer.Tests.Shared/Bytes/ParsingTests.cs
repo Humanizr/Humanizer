@@ -21,7 +21,6 @@
 //THE SOFTWARE.
 
 using System.Globalization;
-using Humanizer.Bytes;
 
 namespace Humanizer.Tests.Bytes
 {

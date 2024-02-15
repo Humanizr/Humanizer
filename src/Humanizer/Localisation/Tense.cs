@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation
+﻿namespace Humanizer
 {
     /// <summary>
     /// Enumerates the possible time references; past or future.

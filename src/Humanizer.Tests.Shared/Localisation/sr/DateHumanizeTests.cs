@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.sr
+﻿namespace Humanizer.Tests.Localisation.sr
 {
     [UseCulture("sr")]
     public class DateHumanizeDefaultStrategyTests

@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.ptBR
+﻿namespace Humanizer.Tests.Localisation.ptBR
 {
     [UseCulture("pt-BR")]
     public class DateHumanizeTests

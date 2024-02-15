@@ -20,12 +20,9 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-using Humanizer.Configuration;
-using Humanizer.Localisation;
-
 using static System.Globalization.NumberStyles;
 
-namespace Humanizer.Bytes
+namespace Humanizer
 {
     /// <summary>
     /// Represents a byte size value.

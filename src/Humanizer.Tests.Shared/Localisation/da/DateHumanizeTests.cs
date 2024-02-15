@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.da
+﻿namespace Humanizer.Tests.Localisation.da
 {
     [UseCulture("da-DK")]
     public class DateHumanizeTests

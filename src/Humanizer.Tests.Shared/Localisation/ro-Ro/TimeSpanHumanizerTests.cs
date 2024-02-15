@@ -28,7 +28,7 @@
         [InlineData(156, "2 minute")]
         public void Seconds(int seconds, string expected, bool toWords = false)
         {
-            var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: Humanizer.Localisation.TimeUnit.Second,
+            var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: TimeUnit.Second,
                 toWords: toWords);
             Assert.Equal(expected, actual);
         }
@@ -85,7 +85,7 @@
         [InlineData(335, "11 luni")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -97,7 +97,7 @@
         [InlineData(7500, "20 de ani")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Fact]

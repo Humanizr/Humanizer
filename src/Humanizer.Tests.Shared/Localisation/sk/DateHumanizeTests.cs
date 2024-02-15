@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.sk
+﻿namespace Humanizer.Tests.Localisation.sk
 {
     [UseCulture("sk-SK")]
     public class DateHumanizeTests

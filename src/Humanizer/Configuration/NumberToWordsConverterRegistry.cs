@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.NumberToWords;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
     internal class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
     {

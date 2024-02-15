@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.NumberToWords.Romanian;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class RomanianNumberToWordsConverter : GenderedNumberToWordsConverter
     {

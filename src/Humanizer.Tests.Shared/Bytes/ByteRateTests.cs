@@ -1,7 +1,4 @@
-﻿using Humanizer.Bytes;
-using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Bytes
+﻿namespace Humanizer.Tests.Bytes
 {
     [UseCulture("en")]
     public class ByteRateTests

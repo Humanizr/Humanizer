@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
     /// <summary>
     /// Default implementation of IFormatter interface.

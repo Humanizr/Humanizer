@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.ukUA
+﻿namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
     public class DateHumanizeTests

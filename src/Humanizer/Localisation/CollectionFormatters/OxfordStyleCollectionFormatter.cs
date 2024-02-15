@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.CollectionFormatters
+﻿namespace Humanizer
 {
     internal class OxfordStyleCollectionFormatter(string defaultSeparator) :
         DefaultCollectionFormatter(defaultSeparator ?? "and")

@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.GrammaticalNumber;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
     internal class LithuanianFormatter() :
         DefaultFormatter("lt")

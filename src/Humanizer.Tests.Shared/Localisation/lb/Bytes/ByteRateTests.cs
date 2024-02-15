@@ -1,7 +1,4 @@
-﻿using Humanizer.Bytes;
-using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.lb.Bytes;
+﻿namespace Humanizer.Tests.Localisation.lb.Bytes;
 
 [UseCulture("lb-LU")]
 public class ByteRateTests

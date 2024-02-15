@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.uzCyrl
+﻿namespace Humanizer.Tests.Localisation.uzCyrl
 {
     [UseCulture("uz-Cyrl-UZ")]
     public class DateHumanizeTests

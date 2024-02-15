@@ -1,4 +1,4 @@
-namespace Humanizer.DateTimeHumanizeStrategy
+namespace Humanizer
 {
     /// <summary>
     /// Precision-based calculator for distance between two times

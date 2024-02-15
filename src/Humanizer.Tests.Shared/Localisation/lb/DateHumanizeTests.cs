@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.lb;
+﻿namespace Humanizer.Tests.Localisation.lb;
 
 [UseCulture("lb-LU")]
 public class DateHumanizeTests

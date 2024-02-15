@@ -1,6 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer.Localisation.TimeToClockNotation
+namespace Humanizer
 {
     internal class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {

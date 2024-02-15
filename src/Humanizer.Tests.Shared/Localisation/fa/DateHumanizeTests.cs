@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.fa
+﻿namespace Humanizer.Tests.Localisation.fa
 {
     [UseCulture("fa")]
     public class DateHumanizeTests

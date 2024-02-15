@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
     internal class ArabicFormatter() :
         DefaultFormatter("ar")
