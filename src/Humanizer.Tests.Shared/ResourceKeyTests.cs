@@ -1,8 +1,5 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
-
 #pragma warning disable xUnit1026 // Theory methods should use all of their parameters
     public class ResourceKeyTests
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Humanizer.Localisation.NumberToWords
+namespace Humanizer
 {
     internal class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
     {

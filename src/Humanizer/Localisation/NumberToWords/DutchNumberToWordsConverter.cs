@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     /// <summary>
     /// Dutch spelling of numbers is not really officially regulated.

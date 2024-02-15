@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Style for the cardinal direction humanization

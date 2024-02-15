@@ -1,10 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-
-using Humanizer.Localisation.Formatters;
-
-namespace Humanizer.Localisation.TimeToClockNotation;
+namespace Humanizer;
 
 internal class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {

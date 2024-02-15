@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Humanizer.Inflections
+namespace Humanizer
 {
     /// <summary>
     /// A container for exceptions to simple pluralization/singularization rules.

@@ -3,59 +3,140 @@
 [assembly: System.Runtime.Versioning.TargetFramework(".NETStandard,Version=v2.0", FrameworkDisplayName=".NET Standard 2.0")]
 namespace Humanizer
 {
+    public class ByteRate
+    {
+        public ByteRate(Humanizer.ByteSize size, System.TimeSpan interval) { }
+        public System.TimeSpan Interval { get; }
+        public Humanizer.ByteSize Size { get; }
+        public string Humanize(Humanizer.TimeUnit timeUnit = 1) { }
+        public string Humanize(string format, Humanizer.TimeUnit timeUnit = 1, System.Globalization.CultureInfo culture = null) { }
+    }
+    public struct ByteSize : System.IComparable, System.IComparable<Humanizer.ByteSize>, System.IEquatable<Humanizer.ByteSize>, System.IFormattable
+    {
+        public const string Bit = "bit";
+        public const string BitSymbol = "b";
+        public const long BitsInByte = 8;
+        public const string Byte = "byte";
+        public const string ByteSymbol = "B";
+        public const long BytesInGigabyte = 1073741824;
+        public const long BytesInKilobyte = 1024;
+        public const long BytesInMegabyte = 1048576;
+        public const long BytesInTerabyte = 1099511627776;
+        public const string Gigabyte = "gigabyte";
+        public const string GigabyteSymbol = "GB";
+        public const string Kilobyte = "kilobyte";
+        public const string KilobyteSymbol = "KB";
+        public const string Megabyte = "megabyte";
+        public const string MegabyteSymbol = "MB";
+        public const string Terabyte = "terabyte";
+        public const string TerabyteSymbol = "TB";
+        public static readonly Humanizer.ByteSize MaxValue;
+        public static readonly Humanizer.ByteSize MinValue;
+        public ByteSize(double byteSize) { }
+        public long Bits { get; }
+        public double Bytes { get; }
+        public double Gigabytes { get; }
+        public double Kilobytes { get; }
+        public string LargestWholeNumberFullWord { get; }
+        public string LargestWholeNumberSymbol { get; }
+        public double LargestWholeNumberValue { get; }
+        public double Megabytes { get; }
+        public double Terabytes { get; }
+        public Humanizer.ByteSize Add(Humanizer.ByteSize bs) { }
+        public Humanizer.ByteSize AddBits(long value) { }
+        public Humanizer.ByteSize AddBytes(double value) { }
+        public Humanizer.ByteSize AddGigabytes(double value) { }
+        public Humanizer.ByteSize AddKilobytes(double value) { }
+        public Humanizer.ByteSize AddMegabytes(double value) { }
+        public Humanizer.ByteSize AddTerabytes(double value) { }
+        public int CompareTo(Humanizer.ByteSize other) { }
+        public int CompareTo(object obj) { }
+        public bool Equals(Humanizer.ByteSize value) { }
+        public override bool Equals(object value) { }
+        public override int GetHashCode() { }
+        public string GetLargestWholeNumberFullWord(System.IFormatProvider provider = null) { }
+        public string GetLargestWholeNumberSymbol(System.IFormatProvider provider = null) { }
+        public Humanizer.ByteSize Subtract(Humanizer.ByteSize bs) { }
+        public string ToFullWords(string format = null, System.IFormatProvider provider = null) { }
+        public override string ToString() { }
+        public string ToString(System.IFormatProvider provider) { }
+        public string ToString(string format) { }
+        public string ToString(string format, System.IFormatProvider provider) { }
+        public static Humanizer.ByteSize FromBits(long value) { }
+        public static Humanizer.ByteSize FromBytes(double value) { }
+        public static Humanizer.ByteSize FromGigabytes(double value) { }
+        public static Humanizer.ByteSize FromKilobytes(double value) { }
+        public static Humanizer.ByteSize FromMegabytes(double value) { }
+        public static Humanizer.ByteSize FromTerabytes(double value) { }
+        public static Humanizer.ByteSize Parse(string s) { }
+        public static Humanizer.ByteSize Parse(string s, System.IFormatProvider formatProvider) { }
+        public static bool TryParse(string s, out Humanizer.ByteSize result) { }
+        public static bool TryParse(string s, System.IFormatProvider formatProvider, out Humanizer.ByteSize result) { }
+        public static bool operator !=(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+        public static Humanizer.ByteSize operator +(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+        public static Humanizer.ByteSize operator ++(Humanizer.ByteSize b) { }
+        public static Humanizer.ByteSize operator -(Humanizer.ByteSize b) { }
+        public static Humanizer.ByteSize operator -(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+        public static Humanizer.ByteSize operator --(Humanizer.ByteSize b) { }
+        public static bool operator <(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+        public static bool operator <=(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+        public static bool operator ==(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+        public static bool operator >(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+        public static bool operator >=(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
+    }
     public static class ByteSizeExtensions
     {
-        public static Humanizer.Bytes.ByteSize Bits(this byte input) { }
-        public static Humanizer.Bytes.ByteSize Bits(this int input) { }
-        public static Humanizer.Bytes.ByteSize Bits(this long input) { }
-        public static Humanizer.Bytes.ByteSize Bits(this sbyte input) { }
-        public static Humanizer.Bytes.ByteSize Bits(this short input) { }
-        public static Humanizer.Bytes.ByteSize Bits(this uint input) { }
-        public static Humanizer.Bytes.ByteSize Bits(this ushort input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this byte input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this double input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this int input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this long input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this sbyte input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this short input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this uint input) { }
-        public static Humanizer.Bytes.ByteSize Bytes(this ushort input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this byte input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this double input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this int input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this long input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this sbyte input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this short input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this uint input) { }
-        public static Humanizer.Bytes.ByteSize Gigabytes(this ushort input) { }
-        public static string Humanize(this Humanizer.Bytes.ByteSize input, System.IFormatProvider formatProvider) { }
-        public static string Humanize(this Humanizer.Bytes.ByteSize input, string format = null) { }
-        public static string Humanize(this Humanizer.Bytes.ByteSize input, string format, System.IFormatProvider formatProvider) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this byte input) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this double input) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this int input) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this long input) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this sbyte input) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this short input) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this uint input) { }
-        public static Humanizer.Bytes.ByteSize Kilobytes(this ushort input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this byte input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this double input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this int input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this long input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this sbyte input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this short input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this uint input) { }
-        public static Humanizer.Bytes.ByteSize Megabytes(this ushort input) { }
-        public static Humanizer.Bytes.ByteRate Per(this Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this byte input) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this double input) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this int input) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this long input) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this sbyte input) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this short input) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this uint input) { }
-        public static Humanizer.Bytes.ByteSize Terabytes(this ushort input) { }
+        public static Humanizer.ByteSize Bits(this byte input) { }
+        public static Humanizer.ByteSize Bits(this int input) { }
+        public static Humanizer.ByteSize Bits(this long input) { }
+        public static Humanizer.ByteSize Bits(this sbyte input) { }
+        public static Humanizer.ByteSize Bits(this short input) { }
+        public static Humanizer.ByteSize Bits(this uint input) { }
+        public static Humanizer.ByteSize Bits(this ushort input) { }
+        public static Humanizer.ByteSize Bytes(this byte input) { }
+        public static Humanizer.ByteSize Bytes(this double input) { }
+        public static Humanizer.ByteSize Bytes(this int input) { }
+        public static Humanizer.ByteSize Bytes(this long input) { }
+        public static Humanizer.ByteSize Bytes(this sbyte input) { }
+        public static Humanizer.ByteSize Bytes(this short input) { }
+        public static Humanizer.ByteSize Bytes(this uint input) { }
+        public static Humanizer.ByteSize Bytes(this ushort input) { }
+        public static Humanizer.ByteSize Gigabytes(this byte input) { }
+        public static Humanizer.ByteSize Gigabytes(this double input) { }
+        public static Humanizer.ByteSize Gigabytes(this int input) { }
+        public static Humanizer.ByteSize Gigabytes(this long input) { }
+        public static Humanizer.ByteSize Gigabytes(this sbyte input) { }
+        public static Humanizer.ByteSize Gigabytes(this short input) { }
+        public static Humanizer.ByteSize Gigabytes(this uint input) { }
+        public static Humanizer.ByteSize Gigabytes(this ushort input) { }
+        public static string Humanize(this Humanizer.ByteSize input, System.IFormatProvider formatProvider) { }
+        public static string Humanize(this Humanizer.ByteSize input, string format = null) { }
+        public static string Humanize(this Humanizer.ByteSize input, string format, System.IFormatProvider formatProvider) { }
+        public static Humanizer.ByteSize Kilobytes(this byte input) { }
+        public static Humanizer.ByteSize Kilobytes(this double input) { }
+        public static Humanizer.ByteSize Kilobytes(this int input) { }
+        public static Humanizer.ByteSize Kilobytes(this long input) { }
+        public static Humanizer.ByteSize Kilobytes(this sbyte input) { }
+        public static Humanizer.ByteSize Kilobytes(this short input) { }
+        public static Humanizer.ByteSize Kilobytes(this uint input) { }
+        public static Humanizer.ByteSize Kilobytes(this ushort input) { }
+        public static Humanizer.ByteSize Megabytes(this byte input) { }
+        public static Humanizer.ByteSize Megabytes(this double input) { }
+        public static Humanizer.ByteSize Megabytes(this int input) { }
+        public static Humanizer.ByteSize Megabytes(this long input) { }
+        public static Humanizer.ByteSize Megabytes(this sbyte input) { }
+        public static Humanizer.ByteSize Megabytes(this short input) { }
+        public static Humanizer.ByteSize Megabytes(this uint input) { }
+        public static Humanizer.ByteSize Megabytes(this ushort input) { }
+        public static Humanizer.ByteRate Per(this Humanizer.ByteSize size, System.TimeSpan interval) { }
+        public static Humanizer.ByteSize Terabytes(this byte input) { }
+        public static Humanizer.ByteSize Terabytes(this double input) { }
+        public static Humanizer.ByteSize Terabytes(this int input) { }
+        public static Humanizer.ByteSize Terabytes(this long input) { }
+        public static Humanizer.ByteSize Terabytes(this sbyte input) { }
+        public static Humanizer.ByteSize Terabytes(this short input) { }
+        public static Humanizer.ByteSize Terabytes(this uint input) { }
+        public static Humanizer.ByteSize Terabytes(this ushort input) { }
     }
     public static class CasingExtensions
     {
@@ -75,6 +156,26 @@ namespace Humanizer
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> displayFormatter, string separator) { }
         public static string Humanize<T>(this System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> displayFormatter, string separator) { }
     }
+    public static class Configurator
+    {
+        public static Humanizer.LocaliserRegistry<Humanizer.ICollectionFormatter> CollectionFormatters { get; }
+        public static Humanizer.LocaliserRegistry<Humanizer.IDateToOrdinalWordConverter> DateToOrdinalWordsConverters { get; }
+        public static Humanizer.LocaliserRegistry<Humanizer.IFormatter> Formatters { get; }
+        public static Humanizer.LocaliserRegistry<Humanizer.INumberToWordsConverter> NumberToWordsConverters { get; }
+        public static Humanizer.LocaliserRegistry<Humanizer.IOrdinalizer> Ordinalizers { get; }
+        public static Humanizer.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
+        public static Humanizer.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
+        public static System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
+    }
+    public enum DataUnit
+    {
+        Bit = 0,
+        Byte = 1,
+        Kilobyte = 2,
+        Megabyte = 3,
+        Gigabyte = 4,
+        Terabyte = 5,
+    }
     public static class DateHumanizeExtensions
     {
         public static string Humanize(this System.DateTimeOffset input, System.DateTimeOffset? dateToCompareAgainst = default, System.Globalization.CultureInfo culture = null) { }
@@ -86,6 +187,31 @@ namespace Humanizer
     {
         public static string ToOrdinalWords(this System.DateTime input) { }
         public static string ToOrdinalWords(this System.DateTime input, Humanizer.GrammaticalCase grammaticalCase) { }
+    }
+    public class DefaultDateTimeHumanizeStrategy : Humanizer.IDateTimeHumanizeStrategy
+    {
+        public DefaultDateTimeHumanizeStrategy() { }
+        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
+    public class DefaultDateTimeOffsetHumanizeStrategy : Humanizer.IDateTimeOffsetHumanizeStrategy
+    {
+        public DefaultDateTimeOffsetHumanizeStrategy() { }
+        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
+    public class DefaultFormatter : Humanizer.IFormatter
+    {
+        public DefaultFormatter(string localeCode) { }
+        public virtual string DataUnitHumanize(Humanizer.DataUnit dataUnit, double count, bool toSymbol = true) { }
+        public virtual string DateHumanize(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int unit) { }
+        public virtual string DateHumanize_Never() { }
+        public virtual string DateHumanize_Now() { }
+        protected virtual string Format(string resourceKey) { }
+        protected virtual string Format(string resourceKey, int number, bool toWords = false) { }
+        protected virtual string GetResourceKey(string resourceKey) { }
+        protected virtual string GetResourceKey(string resourceKey, int number) { }
+        public virtual string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords = false) { }
+        public virtual string TimeSpanHumanize_Zero() { }
+        public virtual string TimeUnitHumanize(Humanizer.TimeUnit timeUnit) { }
     }
     public static class EnglishArticle
     {
@@ -138,9 +264,62 @@ namespace Humanizer
         Abbreviated = 0,
         Full = 1,
     }
+    public interface ICollectionFormatter
+    {
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter, string separator);
+        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
+    }
     public interface ICulturedStringTransformer : Humanizer.IStringTransformer
     {
         string Transform(string input, System.Globalization.CultureInfo culture);
+    }
+    public interface IDateTimeHumanizeStrategy
+    {
+        string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
+    }
+    public interface IDateTimeOffsetHumanizeStrategy
+    {
+        string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
+    }
+    public interface IDateToOrdinalWordConverter
+    {
+        string Convert(System.DateTime date);
+        string Convert(System.DateTime date, Humanizer.GrammaticalCase grammaticalCase);
+    }
+    public interface IFormatter
+    {
+        string DataUnitHumanize(Humanizer.DataUnit dataUnit, double count, bool toSymbol = true);
+        string DateHumanize(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int unit);
+        string DateHumanize_Never();
+        string DateHumanize_Now();
+        string TimeSpanHumanize(Humanizer.TimeUnit timeUnit, int unit, bool toWords = false);
+        string TimeSpanHumanize_Zero();
+        string TimeUnitHumanize(Humanizer.TimeUnit timeUnit);
+    }
+    public interface INumberToWordsConverter
+    {
+        string Convert(long number);
+        string Convert(long number, Humanizer.WordForm wordForm);
+        string Convert(long number, bool addAnd);
+        string Convert(long number, Humanizer.GrammaticalGender gender, bool addAnd = true);
+        string Convert(long number, bool addAnd, Humanizer.WordForm wordForm);
+        string Convert(long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, bool addAnd = true);
+        string ConvertToOrdinal(int number);
+        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
+        string ConvertToOrdinal(int number, Humanizer.WordForm wordForm);
+        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
+        string ConvertToTuple(int number);
+    }
+    public interface IOrdinalizer
+    {
+        string Convert(int number, string numberString);
+        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
+        string Convert(int number, string numberString, Humanizer.WordForm wordForm);
+        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
     }
     public interface IStringTransformer
     {
@@ -367,6 +546,16 @@ namespace Humanizer
         AllCaps = 1,
         LowerCase = 2,
         Sentence = 3,
+    }
+    public class LocaliserRegistry<TLocaliser>
+        where TLocaliser :  class
+    {
+        public LocaliserRegistry(System.Func<System.Globalization.CultureInfo, TLocaliser> defaultLocaliser) { }
+        public LocaliserRegistry(TLocaliser defaultLocaliser) { }
+        public void Register(string localeCode, System.Func<System.Globalization.CultureInfo, TLocaliser> localiser) { }
+        public void Register(string localeCode, TLocaliser localiser) { }
+        public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
+        public TLocaliser ResolveForUiCulture() { }
     }
     public static class MetricNumeralExtensions
     {
@@ -955,12 +1144,44 @@ namespace Humanizer
         Plural = 1,
         CouldBeEither = 2,
     }
+    public class PrecisionDateTimeHumanizeStrategy : Humanizer.IDateTimeHumanizeStrategy
+    {
+        public PrecisionDateTimeHumanizeStrategy(double precision = 0.75) { }
+        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
+    public class PrecisionDateTimeOffsetHumanizeStrategy : Humanizer.IDateTimeOffsetHumanizeStrategy
+    {
+        public PrecisionDateTimeOffsetHumanizeStrategy(double precision = 0.75) { }
+        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+    }
     public static class PrepositionsExtensions
     {
         public static System.DateTime At(this System.DateTime date, int hour, int min = 0, int second = 0, int millisecond = 0) { }
         public static System.DateTime AtMidnight(this System.DateTime date) { }
         public static System.DateTime AtNoon(this System.DateTime date) { }
         public static System.DateTime In(this System.DateTime date, int year) { }
+    }
+    public class ResourceKeys
+    {
+        public ResourceKeys() { }
+        public static class DateHumanize
+        {
+            public const string Never = "DateHumanize_Never";
+            public const string Now = "DateHumanize_Now";
+            public static string GetResourceKey(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int count = 1) { }
+        }
+        public static class TimeSpanHumanize
+        {
+            public static string GetResourceKey(Humanizer.TimeUnit unit, int count = 1, bool toWords = false) { }
+        }
+        public static class TimeUnitSymbol
+        {
+            public static string GetResourceKey(Humanizer.TimeUnit unit) { }
+        }
+    }
+    public static class Resources
+    {
+        public static string GetResource(string resourceKey, System.Globalization.CultureInfo culture = null) { }
     }
     public static class RomanNumeralExtensions
     {
@@ -987,14 +1208,30 @@ namespace Humanizer
         public static string Humanize(this string input) { }
         public static string Humanize(this string input, Humanizer.LetterCasing casing) { }
     }
+    public enum Tense
+    {
+        Future = 0,
+        Past = 1,
+    }
     public static class TimeSpanHumanizeExtensions
     {
-        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = false) { }
-        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.Localisation.TimeUnit maxUnit = 5, Humanizer.Localisation.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = false) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = false) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = false) { }
+    }
+    public enum TimeUnit
+    {
+        Millisecond = 0,
+        Second = 1,
+        Minute = 2,
+        Hour = 3,
+        Day = 4,
+        Week = 5,
+        Month = 6,
+        Year = 7,
     }
     public static class TimeUnitToSymbolExtensions
     {
-        public static string ToSymbol(this Humanizer.Localisation.TimeUnit unit, System.Globalization.CultureInfo culture = null) { }
+        public static string ToSymbol(this Humanizer.TimeUnit unit, System.Globalization.CultureInfo culture = null) { }
     }
     public static class To
     {
@@ -1034,157 +1271,9 @@ namespace Humanizer
     {
         public static string Tupleize(this int input) { }
     }
-    public enum WordForm
-    {
-        Normal = 0,
-        Abbreviation = 1,
-        Eifeler = 2,
-    }
-}
-namespace Humanizer.Bytes
-{
-    public class ByteRate
-    {
-        public ByteRate(Humanizer.Bytes.ByteSize size, System.TimeSpan interval) { }
-        public System.TimeSpan Interval { get; }
-        public Humanizer.Bytes.ByteSize Size { get; }
-        public string Humanize(Humanizer.Localisation.TimeUnit timeUnit = 1) { }
-        public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1, System.Globalization.CultureInfo culture = null) { }
-    }
-    public struct ByteSize : System.IComparable, System.IComparable<Humanizer.Bytes.ByteSize>, System.IEquatable<Humanizer.Bytes.ByteSize>, System.IFormattable
-    {
-        public const string Bit = "bit";
-        public const string BitSymbol = "b";
-        public const long BitsInByte = 8;
-        public const string Byte = "byte";
-        public const string ByteSymbol = "B";
-        public const long BytesInGigabyte = 1073741824;
-        public const long BytesInKilobyte = 1024;
-        public const long BytesInMegabyte = 1048576;
-        public const long BytesInTerabyte = 1099511627776;
-        public const string Gigabyte = "gigabyte";
-        public const string GigabyteSymbol = "GB";
-        public const string Kilobyte = "kilobyte";
-        public const string KilobyteSymbol = "KB";
-        public const string Megabyte = "megabyte";
-        public const string MegabyteSymbol = "MB";
-        public const string Terabyte = "terabyte";
-        public const string TerabyteSymbol = "TB";
-        public static readonly Humanizer.Bytes.ByteSize MaxValue;
-        public static readonly Humanizer.Bytes.ByteSize MinValue;
-        public ByteSize(double byteSize) { }
-        public long Bits { get; }
-        public double Bytes { get; }
-        public double Gigabytes { get; }
-        public double Kilobytes { get; }
-        public string LargestWholeNumberFullWord { get; }
-        public string LargestWholeNumberSymbol { get; }
-        public double LargestWholeNumberValue { get; }
-        public double Megabytes { get; }
-        public double Terabytes { get; }
-        public Humanizer.Bytes.ByteSize Add(Humanizer.Bytes.ByteSize bs) { }
-        public Humanizer.Bytes.ByteSize AddBits(long value) { }
-        public Humanizer.Bytes.ByteSize AddBytes(double value) { }
-        public Humanizer.Bytes.ByteSize AddGigabytes(double value) { }
-        public Humanizer.Bytes.ByteSize AddKilobytes(double value) { }
-        public Humanizer.Bytes.ByteSize AddMegabytes(double value) { }
-        public Humanizer.Bytes.ByteSize AddTerabytes(double value) { }
-        public int CompareTo(Humanizer.Bytes.ByteSize other) { }
-        public int CompareTo(object obj) { }
-        public bool Equals(Humanizer.Bytes.ByteSize value) { }
-        public override bool Equals(object value) { }
-        public override int GetHashCode() { }
-        public string GetLargestWholeNumberFullWord(System.IFormatProvider provider = null) { }
-        public string GetLargestWholeNumberSymbol(System.IFormatProvider provider = null) { }
-        public Humanizer.Bytes.ByteSize Subtract(Humanizer.Bytes.ByteSize bs) { }
-        public string ToFullWords(string format = null, System.IFormatProvider provider = null) { }
-        public override string ToString() { }
-        public string ToString(System.IFormatProvider provider) { }
-        public string ToString(string format) { }
-        public string ToString(string format, System.IFormatProvider provider) { }
-        public static Humanizer.Bytes.ByteSize FromBits(long value) { }
-        public static Humanizer.Bytes.ByteSize FromBytes(double value) { }
-        public static Humanizer.Bytes.ByteSize FromGigabytes(double value) { }
-        public static Humanizer.Bytes.ByteSize FromKilobytes(double value) { }
-        public static Humanizer.Bytes.ByteSize FromMegabytes(double value) { }
-        public static Humanizer.Bytes.ByteSize FromTerabytes(double value) { }
-        public static Humanizer.Bytes.ByteSize Parse(string s) { }
-        public static Humanizer.Bytes.ByteSize Parse(string s, System.IFormatProvider formatProvider) { }
-        public static bool TryParse(string s, out Humanizer.Bytes.ByteSize result) { }
-        public static bool TryParse(string s, System.IFormatProvider formatProvider, out Humanizer.Bytes.ByteSize result) { }
-        public static bool operator !=(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-        public static Humanizer.Bytes.ByteSize operator +(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-        public static Humanizer.Bytes.ByteSize operator ++(Humanizer.Bytes.ByteSize b) { }
-        public static Humanizer.Bytes.ByteSize operator -(Humanizer.Bytes.ByteSize b) { }
-        public static Humanizer.Bytes.ByteSize operator -(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-        public static Humanizer.Bytes.ByteSize operator --(Humanizer.Bytes.ByteSize b) { }
-        public static bool operator <(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-        public static bool operator <=(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-        public static bool operator ==(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-        public static bool operator >(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-        public static bool operator >=(Humanizer.Bytes.ByteSize b1, Humanizer.Bytes.ByteSize b2) { }
-    }
-}
-namespace Humanizer.Configuration
-{
-    public static class Configurator
-    {
-        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.CollectionFormatters.ICollectionFormatter> CollectionFormatters { get; }
-        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.DateToOrdinalWords.IDateToOrdinalWordConverter> DateToOrdinalWordsConverters { get; }
-        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Formatters.IFormatter> Formatters { get; }
-        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.NumberToWords.INumberToWordsConverter> NumberToWordsConverters { get; }
-        public static Humanizer.Configuration.LocaliserRegistry<Humanizer.Localisation.Ordinalizers.IOrdinalizer> Ordinalizers { get; }
-        public static Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
-        public static Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
-        public static System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
-    }
-    public class LocaliserRegistry<TLocaliser>
-        where TLocaliser :  class
-    {
-        public LocaliserRegistry(System.Func<System.Globalization.CultureInfo, TLocaliser> defaultLocaliser) { }
-        public LocaliserRegistry(TLocaliser defaultLocaliser) { }
-        public void Register(string localeCode, System.Func<System.Globalization.CultureInfo, TLocaliser> localiser) { }
-        public void Register(string localeCode, TLocaliser localiser) { }
-        public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
-        public TLocaliser ResolveForUiCulture() { }
-    }
-}
-namespace Humanizer.DateTimeHumanizeStrategy
-{
-    public class DefaultDateTimeHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
-    {
-        public DefaultDateTimeHumanizeStrategy() { }
-        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
-    }
-    public class DefaultDateTimeOffsetHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
-    {
-        public DefaultDateTimeOffsetHumanizeStrategy() { }
-        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
-    }
-    public interface IDateTimeHumanizeStrategy
-    {
-        string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
-    }
-    public interface IDateTimeOffsetHumanizeStrategy
-    {
-        string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
-    }
-    public class PrecisionDateTimeHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
-    {
-        public PrecisionDateTimeHumanizeStrategy(double precision = 0.75) { }
-        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
-    }
-    public class PrecisionDateTimeOffsetHumanizeStrategy : Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
-    {
-        public PrecisionDateTimeOffsetHumanizeStrategy(double precision = 0.75) { }
-        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
-    }
-}
-namespace Humanizer.Inflections
-{
     public static class Vocabularies
     {
-        public static Humanizer.Inflections.Vocabulary Default { get; }
+        public static Humanizer.Vocabulary Default { get; }
     }
     public class Vocabulary
     {
@@ -1195,129 +1284,10 @@ namespace Humanizer.Inflections
         public string Pluralize(string word, bool inputIsKnownToBeSingular = true) { }
         public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
     }
-}
-namespace Humanizer.Localisation.CollectionFormatters
-{
-    public interface ICollectionFormatter
+    public enum WordForm
     {
-        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection);
-        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter);
-        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter);
-        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, string separator);
-        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, object> objectFormatter, string separator);
-        string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, string> objectFormatter, string separator);
-    }
-}
-namespace Humanizer.Localisation
-{
-    public enum DataUnit
-    {
-        Bit = 0,
-        Byte = 1,
-        Kilobyte = 2,
-        Megabyte = 3,
-        Gigabyte = 4,
-        Terabyte = 5,
-    }
-    public class ResourceKeys
-    {
-        public ResourceKeys() { }
-        public static class DateHumanize
-        {
-            public const string Never = "DateHumanize_Never";
-            public const string Now = "DateHumanize_Now";
-            public static string GetResourceKey(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int count = 1) { }
-        }
-        public static class TimeSpanHumanize
-        {
-            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1, bool toWords = false) { }
-        }
-        public static class TimeUnitSymbol
-        {
-            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit) { }
-        }
-    }
-    public static class Resources
-    {
-        public static string GetResource(string resourceKey, System.Globalization.CultureInfo culture = null) { }
-    }
-    public enum Tense
-    {
-        Future = 0,
-        Past = 1,
-    }
-    public enum TimeUnit
-    {
-        Millisecond = 0,
-        Second = 1,
-        Minute = 2,
-        Hour = 3,
-        Day = 4,
-        Week = 5,
-        Month = 6,
-        Year = 7,
-    }
-}
-namespace Humanizer.Localisation.DateToOrdinalWords
-{
-    public interface IDateToOrdinalWordConverter
-    {
-        string Convert(System.DateTime date);
-        string Convert(System.DateTime date, Humanizer.GrammaticalCase grammaticalCase);
-    }
-}
-namespace Humanizer.Localisation.Formatters
-{
-    public class DefaultFormatter : Humanizer.Localisation.Formatters.IFormatter
-    {
-        public DefaultFormatter(string localeCode) { }
-        public virtual string DataUnitHumanize(Humanizer.Localisation.DataUnit dataUnit, double count, bool toSymbol = true) { }
-        public virtual string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
-        public virtual string DateHumanize_Never() { }
-        public virtual string DateHumanize_Now() { }
-        protected virtual string Format(string resourceKey) { }
-        protected virtual string Format(string resourceKey, int number, bool toWords = false) { }
-        protected virtual string GetResourceKey(string resourceKey) { }
-        protected virtual string GetResourceKey(string resourceKey, int number) { }
-        public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = false) { }
-        public virtual string TimeSpanHumanize_Zero() { }
-        public virtual string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit) { }
-    }
-    public interface IFormatter
-    {
-        string DataUnitHumanize(Humanizer.Localisation.DataUnit dataUnit, double count, bool toSymbol = true);
-        string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
-        string DateHumanize_Never();
-        string DateHumanize_Now();
-        string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = false);
-        string TimeSpanHumanize_Zero();
-        string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit);
-    }
-}
-namespace Humanizer.Localisation.NumberToWords
-{
-    public interface INumberToWordsConverter
-    {
-        string Convert(long number);
-        string Convert(long number, Humanizer.WordForm wordForm);
-        string Convert(long number, bool addAnd);
-        string Convert(long number, Humanizer.GrammaticalGender gender, bool addAnd = true);
-        string Convert(long number, bool addAnd, Humanizer.WordForm wordForm);
-        string Convert(long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, bool addAnd = true);
-        string ConvertToOrdinal(int number);
-        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
-        string ConvertToOrdinal(int number, Humanizer.WordForm wordForm);
-        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
-        string ConvertToTuple(int number);
-    }
-}
-namespace Humanizer.Localisation.Ordinalizers
-{
-    public interface IOrdinalizer
-    {
-        string Convert(int number, string numberString);
-        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
-        string Convert(int number, string numberString, Humanizer.WordForm wordForm);
-        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
+        Normal = 0,
+        Abbreviation = 1,
+        Eifeler = 2,
     }
 }

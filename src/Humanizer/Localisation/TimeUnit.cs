@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation
+﻿namespace Humanizer
 {
     /// <summary>
     /// Units of time.

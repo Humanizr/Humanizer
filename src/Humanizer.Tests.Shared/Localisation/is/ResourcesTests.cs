@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
 
-using Humanizer.Localisation;
-
 namespace Humanizer.Tests.Localisation.@is
 {
     public class ResourcesTests

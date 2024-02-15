@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     /// <summary>
     /// An interface you should implement to localise ToWords and ToOrdinalWords methods

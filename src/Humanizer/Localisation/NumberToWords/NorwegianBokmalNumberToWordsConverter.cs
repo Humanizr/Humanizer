@@ -1,4 +1,4 @@
-namespace Humanizer.Localisation.NumberToWords
+namespace Humanizer
 {
     internal class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
     {

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Resources;
 
-namespace Humanizer.Localisation
+namespace Humanizer
 {
     /// <summary>
     /// Provides access to the resources of Humanizer

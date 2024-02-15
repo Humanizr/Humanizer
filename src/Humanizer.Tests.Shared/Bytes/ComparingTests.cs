@@ -1,5 +1,4 @@
-﻿using Humanizer.Bytes;
-
+﻿
 namespace Humanizer.Tests.Bytes
 {
     public class ComparingTests

@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.zhHans
+﻿namespace Humanizer.Tests.Localisation.zhHans
 {
     [UseCulture("zh-Hans")]
     public class DateHumanizeTests

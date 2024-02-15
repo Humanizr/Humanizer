@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.Formatters;
-
-namespace Humanizer.Localisation.NumberToWords;
+﻿namespace Humanizer;
 
 internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
 {

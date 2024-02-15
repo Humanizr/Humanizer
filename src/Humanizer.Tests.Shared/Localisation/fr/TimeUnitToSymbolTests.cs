@@ -1,5 +1,3 @@
-using Humanizer.Localisation;
-
 namespace Humanizer.Tests.Localisation.fr
 {
     [UseCulture("fr")]

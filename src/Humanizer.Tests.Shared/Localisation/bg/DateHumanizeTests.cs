@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.bg
+﻿namespace Humanizer.Tests.Localisation.bg
 {
     [UseCulture("bg-BG")]
     public class DateHumanizeTests

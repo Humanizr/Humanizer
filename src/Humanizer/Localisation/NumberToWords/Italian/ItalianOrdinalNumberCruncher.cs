@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords.Italian
+﻿namespace Humanizer
 {
     internal class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
     {

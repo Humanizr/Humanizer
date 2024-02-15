@@ -1,6 +1,4 @@
-﻿using Humanizer.Configuration;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Humanizes an IEnumerable into a human readable list

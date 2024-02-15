@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.GrammaticalNumber;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
     {

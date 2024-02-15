@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.DateToOrdinalWords
+﻿namespace Humanizer
 {
     internal class EsDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
     {

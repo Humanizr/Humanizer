@@ -1,7 +1,4 @@
-﻿using Humanizer.Configuration;
-using Humanizer.Localisation;
-
-namespace Humanizer.DateTimeHumanizeStrategy
+﻿namespace Humanizer
 {
     /// <summary>
     /// Algorithms used to convert distance between two dates into words.

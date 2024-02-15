@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.hu
+﻿namespace Humanizer.Tests.Localisation.hu
 {
     [UseCulture("hu-HU")]
     public class DateHumanizeTests

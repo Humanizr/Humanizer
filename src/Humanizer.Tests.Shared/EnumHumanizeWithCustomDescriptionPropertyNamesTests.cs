@@ -1,5 +1,3 @@
-using Humanizer.Configuration;
-
 namespace Humanizer.Tests
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",

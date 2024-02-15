@@ -1,8 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-using Humanizer.Localisation.TimeToClockNotation;
-
-namespace Humanizer.Configuration
+namespace Humanizer
 {
     internal class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToClockNotationConverter>
     {

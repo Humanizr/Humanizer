@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords.Romanian
+﻿namespace Humanizer
 {
     internal class RomanianCardinalNumberConverter
     {

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
     internal class FrenchFormatter(string localeCode) :
         DefaultFormatter(localeCode)

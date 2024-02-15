@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
