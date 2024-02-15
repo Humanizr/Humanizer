@@ -13,7 +13,7 @@ public partial class On
 {
 <#
 const int leapYear = 2012;
-for (int month = 1; month <= 12; month++)
+for (var month = 1; month <= 12; month++)
 {
     var firstDayOfMonth = new DateTime(leapYear, month, 1);
     var monthName = firstDayOfMonth.ToString("MMMM");#>
@@ -28,7 +28,7 @@ for (int month = 1; month <= 12; month++)
         public static DateTime The(int dayNumber)
             => new(DateTime.Now.Year, <#= month #>, dayNumber);
 
-<#for (int day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
+<#for (var day = 1; day <= DateTime.DaysInMonth(leapYear, month); day++)
     {
         var ordinalDay = day.Ordinalize();#>
 

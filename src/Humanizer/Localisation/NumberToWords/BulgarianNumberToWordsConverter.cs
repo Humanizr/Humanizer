@@ -60,7 +60,7 @@
                 input = -input;
             }
 
-            string lastOrdinalSubstitution = "";
+            var lastOrdinalSubstitution = "";
 
             if ((input / 1000000000000) > 0)
             {

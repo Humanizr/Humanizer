@@ -33,7 +33,7 @@
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
-            bool negativeNumber = false;
+            var negativeNumber = false;
 
             if (input < 0)
             {
