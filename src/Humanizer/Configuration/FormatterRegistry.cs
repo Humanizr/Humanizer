@@ -61,6 +61,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("th-TH");
             RegisterDefaultFormatter("en-IN");
             Register("lt", new LithuanianFormatter());
+            Register("lb", new LuxembourgishFormatter());
         }
 
         private void RegisterDefaultFormatter(string localeCode)

@@ -20,6 +20,7 @@ namespace Humanizer.Configuration
             Register("uk", new UkrainianOrdinalizer());
             Register("hy", new ArmenianOrdinalizer());
             Register("az", new AzerbaijaniOrdinalizer());
+            Register("lb", new LuxembourgishOrdinalizer());
         }
     }
 }

@@ -1656,6 +1656,7 @@ namespace Humanizer
     {
         Normal = 0,
         Abbreviation = 1,
+        Eifeler = 2,
     }
 }
 namespace Humanizer.Bytes
