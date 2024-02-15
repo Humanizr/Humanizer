@@ -1,14 +1,10 @@
 ﻿namespace Humanizer.Localisation.Formatters
 {
-    internal class ArabicFormatter : DefaultFormatter
+    internal class ArabicFormatter() :
+        DefaultFormatter("ar")
     {
         private const string DualPostfix = "_Dual";
         private const string PluralPostfix = "_Plural";
-
-        public ArabicFormatter()
-            : base("ar")
-        {
-        }
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

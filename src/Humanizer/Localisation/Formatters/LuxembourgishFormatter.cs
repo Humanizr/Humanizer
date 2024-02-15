@@ -4,21 +4,16 @@ using System.Linq;
 
 namespace Humanizer.Localisation.Formatters;
 
-internal class LuxembourgishFormatter : DefaultFormatter
+internal class LuxembourgishFormatter() :
+    DefaultFormatter(LocaleCode)
 {
     private const string LocaleCode = "lb";
-    private readonly CultureInfo _localCulture;
+    private readonly CultureInfo _localCulture = new(LocaleCode);
     private const string DualPostfix = "_Dual";
     // https://lb.wikipedia.org/wiki/Eifeler_Reegel
     private const char EifelerRuleSuffix = 'n';
     private const string EifelerRuleCharacters = "unitedzohay";
 
-    public LuxembourgishFormatter()
-        : base(LocaleCode)
-    {
-        _localCulture = new CultureInfo(LocaleCode);
-    }
-    
     public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
     {
         return base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');

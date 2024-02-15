@@ -40,45 +40,30 @@ namespace Humanizer.Tests
         public static string MemberWithLocalizedDisplayAttribute { get { return "Localized description from Display attribute"; } }
     }
 
-    public class ImposterDescriptionAttribute : Attribute
+    public class ImposterDescriptionAttribute(int description) :
+        Attribute
     {
-        public int Description { get; set; }
-
-        public ImposterDescriptionAttribute(int description)
-        {
-            Description = description;
-        }
+        public int Description { get; set; } = description;
     }
 
-    public class CustomDescriptionAttribute : Attribute
+    public class CustomDescriptionAttribute(string description) :
+        Attribute
     {
-        public string Description { get; set; }
-
-        public CustomDescriptionAttribute(string description)
-        {
-            Description = description;
-        }
+        public string Description { get; set; } = description;
     }
 
-    public class DescriptionSubclassAttribute : DescriptionAttribute
+    public class DescriptionSubclassAttribute(string description) :
+        DescriptionAttribute(description)
     {
-        public DescriptionSubclassAttribute(string description) : base(description)
-        {
-        }
-
         public override string Description
         {
             get { return "Overridden " + base.Description; }
         }
     }
 
-    public class CustomPropertyAttribute : Attribute
+    public class CustomPropertyAttribute(string info) :
+        Attribute
     {
-        public string Info { get; set; }
-
-        public CustomPropertyAttribute(string info)
-        {
-            Info = info;
-        }
+        public string Info { get; set; } = info;
     }
 }

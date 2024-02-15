@@ -2,13 +2,9 @@
 
 namespace Humanizer.Localisation.Formatters
 {
-    internal class LithuanianFormatter : DefaultFormatter
+    internal class LithuanianFormatter() :
+        DefaultFormatter("lt")
     {
-        public LithuanianFormatter()
-            : base("lt")
-        {
-        }
-
         protected override string GetResourceKey(string resourceKey, int number)
         {
             if (resourceKey == "TimeSpanHumanize_Zero")

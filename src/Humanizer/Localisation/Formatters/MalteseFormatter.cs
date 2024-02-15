@@ -1,6 +1,7 @@
 ﻿namespace Humanizer.Localisation.Formatters
 {
-    internal class MalteseFormatter : DefaultFormatter
+    internal class MalteseFormatter(string localeCode) :
+        DefaultFormatter(localeCode)
     {
         private const string DualPostfix = "_Dual";
 
@@ -11,11 +12,6 @@
             "TimeSpanHumanize_MultipleDays", "TimeSpanHumanize_MultipleYears", "TimeSpanHumanize_MultipleMonths", "TimeSpanHumanize_MultipleHours",
             "TimeSpanHumanize_MultipleWeeks"
         };
-
-        public MalteseFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

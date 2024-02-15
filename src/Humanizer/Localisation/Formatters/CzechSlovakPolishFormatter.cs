@@ -1,13 +1,9 @@
 ﻿namespace Humanizer.Localisation.Formatters
 {
-    internal class CzechSlovakPolishFormatter : DefaultFormatter
+    internal class CzechSlovakPolishFormatter(string localeCode) :
+        DefaultFormatter(localeCode)
     {
         private const string PaucalPostfix = "_Paucal";
-
-        public CzechSlovakPolishFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
