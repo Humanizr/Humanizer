@@ -2,13 +2,8 @@
 
 namespace Humanizer.Localisation.Formatters
 {
-    internal class UkrainianFormatter : DefaultFormatter
+    internal class UkrainianFormatter() : DefaultFormatter("uk")
     {
-        public UkrainianFormatter()
-            : base("uk")
-        {
-        }
-
         protected override string GetResourceKey(string resourceKey, int number)
         {
             var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(number);

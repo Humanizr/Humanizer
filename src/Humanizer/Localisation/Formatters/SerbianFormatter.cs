@@ -1,13 +1,9 @@
 ﻿namespace Humanizer.Localisation.Formatters
 {
-    internal class SerbianFormatter : DefaultFormatter
+    internal class SerbianFormatter(string localeCode) :
+        DefaultFormatter(localeCode)
     {
         private const string PaucalPostfix = "_Paucal";
-
-        public SerbianFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

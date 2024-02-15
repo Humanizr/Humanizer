@@ -3,7 +3,8 @@
     using System;
     using System.Globalization;
 
-    internal class RomanianFormatter : DefaultFormatter
+    internal class RomanianFormatter() :
+        DefaultFormatter(RomanianCultureCode)
     {
         private const int PrepositionIndicatingDecimals = 2;
         private const int MaxNumeralWithNoPreposition = 19;
@@ -13,13 +14,7 @@
 
         private static readonly double Divider = Math.Pow(10, PrepositionIndicatingDecimals);
 
-        private readonly CultureInfo _romanianCulture;
-
-        public RomanianFormatter()
-            : base(RomanianCultureCode)
-        {
-            _romanianCulture = new CultureInfo(RomanianCultureCode);
-        }
+        private readonly CultureInfo _romanianCulture = new(RomanianCultureCode);
 
         protected override string Format(string resourceKey, int number, bool toWords = false)
         {

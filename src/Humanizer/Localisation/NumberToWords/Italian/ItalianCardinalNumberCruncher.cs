@@ -1,15 +1,7 @@
 ﻿namespace Humanizer.Localisation.NumberToWords.Italian
 {
-    internal class ItalianCardinalNumberCruncher
+    internal class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     {
-        public ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
-        {
-            _fullNumber = number;
-            _threeDigitParts = SplitEveryThreeDigits(number);
-            _gender = gender;
-            _nextSet = ThreeDigitSets.Units;
-        }
-
         public string Convert()
         {
             // it's easier to treat zero as a completely distinct case
@@ -31,11 +23,11 @@
             return words.TrimEnd();
         }
 
-        protected readonly int _fullNumber;
-        protected readonly List<int> _threeDigitParts;
-        protected readonly GrammaticalGender _gender;
+        protected readonly int _fullNumber = number;
+        protected readonly List<int> _threeDigitParts = SplitEveryThreeDigits(number);
+        protected readonly GrammaticalGender _gender = gender;
 
-        protected ThreeDigitSets _nextSet;
+        protected ThreeDigitSets _nextSet = ThreeDigitSets.Units;
 
         /// <summary>
         /// Splits a number into a sequence of three-digits numbers, starting
