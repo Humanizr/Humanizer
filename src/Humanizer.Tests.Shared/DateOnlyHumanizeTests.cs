@@ -52,6 +52,21 @@ namespace Humanizer.Tests
         }
 
         [Fact]
+        public void DefaultStrategy_YearsAgo()
+        {
+            Configurator.DateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
+
+            var baseDate = DateTime.Now;
+            var inputTime = DateOnly.FromDateTime(baseDate.AddMonths(-24));
+            var baseTime = DateOnly.FromDateTime(baseDate);
+
+            const string expectedResult = "2 years ago";
+            var actualResult = inputTime.Humanize(baseTime);
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
         public void PrecisionStrategy_NextDay()
         {
             Configurator.DateOnlyHumanizeStrategy = new PrecisionDateOnlyHumanizeStrategy(0.75);
