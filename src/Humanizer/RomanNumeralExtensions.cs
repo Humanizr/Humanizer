@@ -92,7 +92,7 @@ namespace Humanizer
             const int maxValue = 3999;
             const int maxRomanNumeralLength = 15;
 
-            if ((input < minValue) || (input > maxValue))
+            if (input is < minValue or > maxValue)
             {
                 throw new ArgumentOutOfRangeException();
             }

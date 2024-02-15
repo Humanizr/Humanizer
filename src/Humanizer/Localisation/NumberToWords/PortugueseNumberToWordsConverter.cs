@@ -12,7 +12,7 @@
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
-            if (input > 999999999999 || input < -999999999999)
+            if (input is > 999999999999 or < -999999999999)
             {
                 throw new NotImplementedException();
             }

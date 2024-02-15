@@ -76,7 +76,7 @@
         {
             List<string> wordBuilder = new();
 
-            if (number == 0 || number == int.MinValue)
+            if (number is 0 or int.MinValue)
             {
                 return "cero";
             }
@@ -266,7 +266,7 @@
 
         private static bool HasOrdinalAbbreviation(int number, WordForm wordForm)
         {
-            return (number == 1 || number == 3) && wordForm == WordForm.Abbreviation;
+            return number is 1 or 3 && wordForm == WordForm.Abbreviation;
         }
 
         private static bool IsRoundBillion(int number)

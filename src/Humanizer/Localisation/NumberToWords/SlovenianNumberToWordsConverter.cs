@@ -16,7 +16,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input)
         {
-            if (input > int.MaxValue || input < int.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
@@ -122,7 +122,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return dual;
             }
 
-            if (number == 3 || number == 4)
+            if (number is 3 or 4)
             {
                 return string.Format(trialQuadral, Convert(number));
             }

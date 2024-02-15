@@ -235,7 +235,7 @@ namespace Humanizer.Localisation.NumberToWords
             switch (gender)
             {
                 case GrammaticalGender.Masculine:
-                    if (number == 0 || number == 2 || number == 6 || number == 7 || number == 8 || number == 40)
+                    if (number is 0 or 2 or 6 or 7 or 8 or 40)
                     {
                         return "ой";
                     }

@@ -147,7 +147,7 @@
                 // just append units text, with some corner cases
 
                 // truncate tens last vowel before 'uno' (1) and 'otto' (8)
-                if (units == 1 || units == 8)
+                if (units is 1 or 8)
                 {
                     words = words.Remove(words.Length - 1);
                 }

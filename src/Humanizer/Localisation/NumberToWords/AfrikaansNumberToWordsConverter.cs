@@ -21,7 +21,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long number)
         {
-            if (number > int.MaxValue || number < int.MinValue)
+            if (number is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }

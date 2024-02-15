@@ -34,8 +34,7 @@
         private static bool ShouldUsePreposition(int number)
         {
             var prepositionIndicatingNumeral = Math.Abs(number % Divider);
-            return prepositionIndicatingNumeral < MinNumeralWithNoPreposition
-                   || prepositionIndicatingNumeral > MaxNumeralWithNoPreposition;
+            return prepositionIndicatingNumeral is < MinNumeralWithNoPreposition or > MaxNumeralWithNoPreposition;
         }
     }
 }
