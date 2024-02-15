@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.ptBR
     [UseCulture("pt-BR")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(-2, "2 segundos atrás")]
         [InlineData(-1, "um segundo atrás")]

@@ -6,7 +6,6 @@ namespace Humanizer.Tests.Localisation.lb;
 [UseCulture("lb-LU")]
 public class DateHumanizeTests
 {
-
     [Theory]
     [InlineData(1, "virun enger Sekonn")]
     [InlineData(2, "virun 2 Sekonnen")]

@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.sk
     [UseCulture("sk-SK")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "o sekundu")]
         [InlineData(2, "o 2 sekundy")]

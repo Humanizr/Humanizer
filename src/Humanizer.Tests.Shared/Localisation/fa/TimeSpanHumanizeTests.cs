@@ -3,7 +3,6 @@
     [UseCulture("fa")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Native speaker")]
         [InlineData(366, "یک سال")]

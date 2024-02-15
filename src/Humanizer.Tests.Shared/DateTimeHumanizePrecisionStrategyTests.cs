@@ -5,7 +5,6 @@ namespace Humanizer.Tests
     [UseCulture("en-US")]
     public class DateTimeHumanizePrecisionStrategyTests
     {
-
         private const double DefaultPrecision = .75;
 
         [Theory]

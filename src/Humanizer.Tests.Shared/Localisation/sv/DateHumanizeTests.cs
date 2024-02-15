@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.sv
     [UseCulture("sv-SE")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "om en sekund")]
         [InlineData(2, "om 2 sekunder")]

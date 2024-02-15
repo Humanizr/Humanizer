@@ -8,7 +8,6 @@ namespace Humanizer.Tests
     [UseCulture("en-US")]
     public class DateOnlyHumanizeTests
     {
-
         [Fact]
         public void DefaultStrategy_SameDate()
         {
@@ -79,7 +78,6 @@ namespace Humanizer.Tests
 
             Assert.Equal(expectedResult, actualResult);
         }
-
 
         [Fact]
         public void Never()

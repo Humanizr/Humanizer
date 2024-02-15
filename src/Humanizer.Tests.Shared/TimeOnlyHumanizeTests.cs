@@ -8,7 +8,6 @@ namespace Humanizer.Tests
     [UseCulture("en-US")]
     public class TimeOnlyHumanizeTests
     {
-
         [Fact]
         public void DefaultStrategy_SameTime()
         {
@@ -64,7 +63,6 @@ namespace Humanizer.Tests
 
             Assert.Equal(expectedResult, actualResult);
         }
-
 
         [Fact]
         public void Never()

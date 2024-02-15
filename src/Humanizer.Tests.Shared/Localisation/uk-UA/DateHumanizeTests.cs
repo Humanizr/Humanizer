@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.ukUA
     [UseCulture("uk-UA")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "секунду тому")]
         [InlineData(2, "2 секунди тому")]

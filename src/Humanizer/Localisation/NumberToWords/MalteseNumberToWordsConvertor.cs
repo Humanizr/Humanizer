@@ -120,7 +120,6 @@
             var numberOfTens = value / 10;
             if (single == 0)
             {
-
                 return TensMap[numberOfTens];
             }
 

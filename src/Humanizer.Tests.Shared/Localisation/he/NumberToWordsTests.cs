@@ -3,7 +3,6 @@
     [UseCulture("he")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "אפס")]
         [InlineData(1, "אחת")]

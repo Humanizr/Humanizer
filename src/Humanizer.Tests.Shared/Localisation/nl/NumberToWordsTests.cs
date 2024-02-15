@@ -3,7 +3,6 @@
     [UseCulture("nl-NL")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "nul")]
         [InlineData(1, "een")]

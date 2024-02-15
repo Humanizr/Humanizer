@@ -229,7 +229,6 @@ namespace Humanizer.Tests.Localisation.es
             Assert.Equal(expected, actual);
         }
 
-
         [Theory]
         [InlineData(135, "2 minutos")]
         [InlineData(60, "1 minuto")]

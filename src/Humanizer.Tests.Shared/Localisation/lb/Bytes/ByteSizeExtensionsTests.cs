@@ -64,7 +64,7 @@ public class ByteSizeExtensionsTests
         Assert.Equal(expectedValue, input.Bytes().Humanize(format));
     }
 #endif
-    
+
     [Theory]
     [InlineData(0, null, "0 bit")]
     [InlineData(0, "b", "0 bit")]

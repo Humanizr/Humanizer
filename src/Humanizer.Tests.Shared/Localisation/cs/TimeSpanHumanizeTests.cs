@@ -3,7 +3,6 @@
     [UseCulture("cs-CZ")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "1 rok")]

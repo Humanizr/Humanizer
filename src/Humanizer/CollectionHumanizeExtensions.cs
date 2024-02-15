@@ -1,6 +1,5 @@
 ﻿using Humanizer.Configuration;
 
-
 namespace Humanizer
 {
     /// <summary>
@@ -51,7 +50,6 @@ namespace Humanizer
         /// </summary>
         public static string Humanize<T>(this IEnumerable<T> collection, string separator)
         {
-
             return Configurator.CollectionFormatter.Humanize(collection, separator);
         }
 

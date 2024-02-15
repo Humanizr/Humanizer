@@ -43,7 +43,6 @@ namespace Humanizer
             var wordToConvert = word.Value;
             string replacement;
 
-
             if (firstWord ||
                 (!articles.Contains(wordToConvert) &&
                 !conjunctions.Contains(wordToConvert) &&

@@ -6,7 +6,6 @@ namespace Humanizer.Tests.Localisation.lb;
 [UseCulture("lb-LU")]
 public class CollectionFormatterTests
 {
-
     [Fact]
     public void OneItem()
     {

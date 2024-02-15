@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.uzCyrl
     [UseCulture("uz-Cyrl-UZ")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "бир сония аввал")]
         [InlineData(10, "10 секунд аввал")]

@@ -100,6 +100,5 @@ namespace Humanizer.Tests.Localisation.vi
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
-
     }
 }

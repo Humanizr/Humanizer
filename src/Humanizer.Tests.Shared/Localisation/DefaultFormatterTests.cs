@@ -2,7 +2,6 @@
 {
     public class DefaultFormatterTests
     {
-
         [Fact]
         [UseCulture("iv")]
         public void HandlesNotImplementedCollectionFormattersGracefully()

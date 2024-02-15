@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.it
     [UseCulture("it")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(-2, "2 giorni fa")]
         [InlineData(-1, "ieri")]

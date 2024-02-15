@@ -3,7 +3,6 @@
     [UseCulture("sv-SE")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "1 millisekund")]
         [InlineData(2, "2 millisekunder")]
@@ -51,7 +50,6 @@
         {
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
         }
-
 
         [Theory]
         [Trait("Translation", "Native speaker")]

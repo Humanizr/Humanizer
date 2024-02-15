@@ -3,7 +3,6 @@
     [UseCulture("de-DE")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Native speaker")]
         [InlineData(366, "1 Jahr")]
@@ -68,7 +67,6 @@
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords: true));
         }
 
-
         [Theory]
         [InlineData(1, "1 Tag")]
         [InlineData(2, "2 Tage")]
@@ -116,7 +114,6 @@
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize(toWords: true));
         }
-
 
         [Theory]
         [InlineData(1, "1 Sekunde")]
