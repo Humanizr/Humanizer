@@ -330,9 +330,9 @@ namespace Humanizer.Bytes
             }
 
             ByteSize other;
-            if (value is ByteSize)
+            if (value is ByteSize size)
             {
-                other = (ByteSize)value;
+                other = size;
             }
             else
             {
@@ -359,12 +359,12 @@ namespace Humanizer.Bytes
                 return 1;
             }
 
-            if (!(obj is ByteSize))
+            if (obj is ByteSize size)
             {
-                throw new ArgumentException("Object is not a ByteSize");
+                return CompareTo(size);
             }
 
-            return CompareTo((ByteSize)obj);
+            throw new ArgumentException("Object is not a ByteSize");
         }
 
         public int CompareTo(ByteSize other)
