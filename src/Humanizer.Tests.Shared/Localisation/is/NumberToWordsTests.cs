@@ -3,7 +3,6 @@
     [UseCulture("is")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "núll")]
         [InlineData(1, "einn")]

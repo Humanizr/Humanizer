@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-using Humanizer.Configuration;
-using Humanizer.Localisation;
-
-namespace Humanizer.DateTimeHumanizeStrategy
+﻿namespace Humanizer
 {
     /// <summary>
     /// Algorithms used to convert distance between two dates into words.
@@ -154,12 +150,12 @@ namespace Humanizer.DateTimeHumanizeStrategy
         public static string DefaultHumanize(DateOnly input, DateOnly comparisonBase, CultureInfo culture)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
-            var diffDays = Math.Abs(comparisonBase.DayOfYear - input.DayOfYear);
+            var diffDays = Math.Abs(comparisonBase.DayNumber - input.DayNumber);
             var ts = new TimeSpan(diffDays, 0, 0, 0);
 
             var sameMonth = comparisonBase.AddMonths(tense == Tense.Future ? 1 : -1) == input;
 
-            var days = Math.Abs(input.DayOfYear - comparisonBase.DayOfYear);
+            var days = Math.Abs(input.DayNumber - comparisonBase.DayNumber);
 
             return DefaultHumanize(ts, sameMonth, days, tense, culture);
         }

@@ -1,16 +1,11 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class IcelandicFormatter : DefaultFormatter
+    internal class IcelandicFormatter() :
+        DefaultFormatter(LocaleCode)
     {
         private const string LocaleCode = "is";
-        private readonly CultureInfo _localCulture;
-        public IcelandicFormatter()
-            : base(LocaleCode)
-        {
-            _localCulture = new CultureInfo(LocaleCode);
-        }
+        private readonly CultureInfo _localCulture = new(LocaleCode);
+
         public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
         {
             return base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');

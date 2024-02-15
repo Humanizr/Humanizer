@@ -4,7 +4,6 @@ using Xunit.Sdk;
 
 namespace Humanizer.Tests
 {
-
     /// <summary>
     /// Apply this attribute to your test method to replace the
     /// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
@@ -17,7 +16,6 @@ namespace Humanizer.Tests
         private readonly Lazy<CultureInfo> uiCulture;
         private CultureInfo originalCulture;
         private CultureInfo originalUICulture;
-
 
         /// <summary>
         /// Replaces the culture and UI culture of the current thread with
@@ -66,7 +64,6 @@ namespace Humanizer.Tests
         {
             originalCulture = CultureInfo.CurrentCulture;
             originalUICulture = CultureInfo.CurrentUICulture;
-
 
             CultureInfo.CurrentCulture = Culture;
             CultureInfo.CurrentUICulture = UICulture;

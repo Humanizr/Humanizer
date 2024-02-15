@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Humanizer.Configuration;
 using System.ComponentModel.DataAnnotations;
 
 namespace Humanizer

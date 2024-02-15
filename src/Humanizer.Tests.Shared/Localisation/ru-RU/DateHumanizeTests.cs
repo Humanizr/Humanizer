@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.ruRU
+﻿namespace Humanizer.Tests.Localisation.ruRU
 {
     [UseCulture("ru-RU")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "секунду назад")]
         [InlineData(2, "2 секунды назад")]

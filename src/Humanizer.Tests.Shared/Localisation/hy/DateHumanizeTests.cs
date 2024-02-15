@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.hy
+﻿namespace Humanizer.Tests.Localisation.hy
 {
     [UseCulture("hy")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "մեկ վայրկյան առաջ")]
         [InlineData(2, "2 վայրկյան առաջ")]

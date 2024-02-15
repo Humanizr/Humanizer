@@ -20,14 +20,9 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-using System.Globalization;
-
-using Humanizer.Configuration;
-using Humanizer.Localisation;
-
 using static System.Globalization.NumberStyles;
 
-namespace Humanizer.Bytes
+namespace Humanizer
 {
     /// <summary>
     /// Represents a byte size value.
@@ -330,9 +325,9 @@ namespace Humanizer.Bytes
             }
 
             ByteSize other;
-            if (value is ByteSize)
+            if (value is ByteSize size)
             {
-                other = (ByteSize)value;
+                other = size;
             }
             else
             {
@@ -359,12 +354,12 @@ namespace Humanizer.Bytes
                 return 1;
             }
 
-            if (!(obj is ByteSize))
+            if (obj is ByteSize size)
             {
-                throw new ArgumentException("Object is not a ByteSize");
+                return CompareTo(size);
             }
 
-            return CompareTo((ByteSize)obj);
+            throw new ArgumentException("Object is not a ByteSize");
         }
 
         public int CompareTo(ByteSize other)

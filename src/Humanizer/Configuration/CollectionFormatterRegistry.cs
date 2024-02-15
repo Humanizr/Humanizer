@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.CollectionFormatters;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
     internal class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
     {
@@ -19,6 +17,7 @@ namespace Humanizer.Configuration
             Register("sv", new DefaultCollectionFormatter("och"));
             Register("is", new DefaultCollectionFormatter("og"));
             Register("es", new DefaultCollectionFormatter("y"));
+            Register("lb", new DefaultCollectionFormatter("an"));
         }
     }
 }

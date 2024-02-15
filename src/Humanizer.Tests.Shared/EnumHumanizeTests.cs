@@ -8,7 +8,6 @@
             Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
         }
 
-
         [Fact]
         public void HonorsDescriptionAttributeSubclasses()
         {
@@ -71,6 +70,5 @@
         {
             Assert.Equal(EnumTestsResources.MemberWithLocalizedDisplayAttribute, EnumUnderTest.MemberWithLocalizedDisplayAttribute.Humanize());
         }
-
     }
 }

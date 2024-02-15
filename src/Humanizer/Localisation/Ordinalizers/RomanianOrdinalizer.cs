@@ -1,6 +1,5 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer
 {
-
     internal class RomanianOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString)

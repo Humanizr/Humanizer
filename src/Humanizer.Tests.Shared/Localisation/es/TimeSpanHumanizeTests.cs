@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
 
-using Humanizer.Localisation;
-
 namespace Humanizer.Tests.Localisation.es
 {
     [UseCulture("es-ES")]
@@ -15,7 +13,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(4018, "11 años")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -26,7 +24,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(335, "11 meses")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Fact]
@@ -228,7 +226,6 @@ namespace Humanizer.Tests.Localisation.es
             var actual = TimeSpan.FromMinutes(minutes).Humanize();
             Assert.Equal(expected, actual);
         }
-
 
         [Theory]
         [InlineData(135, "2 minutos")]

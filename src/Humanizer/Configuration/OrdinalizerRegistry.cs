@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.Ordinalizers;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
     internal class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
     {
@@ -20,6 +18,7 @@ namespace Humanizer.Configuration
             Register("uk", new UkrainianOrdinalizer());
             Register("hy", new ArmenianOrdinalizer());
             Register("az", new AzerbaijaniOrdinalizer());
+            Register("lb", new LuxembourgishOrdinalizer());
         }
     }
 }

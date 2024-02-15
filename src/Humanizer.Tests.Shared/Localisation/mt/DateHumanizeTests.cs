@@ -1,12 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.mt
+﻿namespace Humanizer.Tests.Localisation.mt
 {
-
     [UseCulture("mt")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(-3, "3 jiem ilu")]
         [InlineData(-2, "jumejn ilu")]

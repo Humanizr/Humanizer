@@ -1,8 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-using Humanizer.Configuration;
-
-namespace Humanizer.Localisation.DateToOrdinalWords
+namespace Humanizer
 {
     internal class EsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
     {

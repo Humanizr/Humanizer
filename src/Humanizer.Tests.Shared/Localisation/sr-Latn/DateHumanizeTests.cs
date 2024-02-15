@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.srLatn
+﻿namespace Humanizer.Tests.Localisation.srLatn
 {
     [UseCulture("sr-Latn")]
     public class DateHumanizeDefaultStrategyTests
     {
-
         [Theory]
         [InlineData(1, "pre sekund")]
         [InlineData(10, "pre 10 sekundi")]

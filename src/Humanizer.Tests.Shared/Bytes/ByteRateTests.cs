@@ -1,7 +1,4 @@
-﻿using Humanizer.Bytes;
-using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Bytes
+﻿namespace Humanizer.Tests.Bytes
 {
     [UseCulture("en")]
     public class ByteRateTests
@@ -56,8 +53,6 @@ namespace Humanizer.Tests.Bytes
 
             Assert.Equal(expectedValue, text);
         }
-
-
 
         [Theory]
         [InlineData(TimeUnit.Millisecond)]

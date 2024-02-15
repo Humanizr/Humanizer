@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class DateTimeHumanizePrecisionStrategyTests
     {
-
         private const double DefaultPrecision = .75;
 
         [Theory]

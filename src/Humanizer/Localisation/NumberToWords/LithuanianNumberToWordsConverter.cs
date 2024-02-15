@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Humanizer.Localisation.GrammaticalNumber;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
     {

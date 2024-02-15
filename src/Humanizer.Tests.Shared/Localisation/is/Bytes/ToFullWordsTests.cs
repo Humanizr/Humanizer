@@ -1,6 +1,4 @@
-﻿using Humanizer.Bytes;
-
-namespace Humanizer.Tests.Localisation.@is.Bytes
+﻿namespace Humanizer.Tests.Localisation.@is.Bytes
 {
     [UseCulture("is")]
     public class ToFullWordsTests

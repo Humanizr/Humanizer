@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class CroatianNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -16,7 +14,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input)
         {
-            if (input > int.MaxValue || input < int.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }

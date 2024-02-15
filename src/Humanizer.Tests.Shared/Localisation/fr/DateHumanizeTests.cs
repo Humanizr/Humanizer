@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.fr
+﻿namespace Humanizer.Tests.Localisation.fr
 {
     [UseCulture("fr")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "il y a une seconde")]
         [InlineData(2, "il y a 2 secondes")]
@@ -112,6 +109,5 @@ namespace Humanizer.Tests.Localisation.fr
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
-
     }
 }

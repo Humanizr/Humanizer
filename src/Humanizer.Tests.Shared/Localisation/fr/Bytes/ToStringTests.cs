@@ -1,6 +1,4 @@
-﻿using Humanizer.Bytes;
-
-namespace Humanizer.Tests.Localisation.fr.Bytes
+﻿namespace Humanizer.Tests.Localisation.fr.Bytes
 {
     [UseCulture("fr-FR")]
     public class ToStringTests

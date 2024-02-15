@@ -3,7 +3,6 @@
     [UseCulture("el")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Native speaker")]
         [InlineData(366, "1 χρόνο")]
@@ -12,7 +11,7 @@
         [InlineData(4018, "11 χρόνια")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -23,7 +22,7 @@
         [InlineData(335, "11 μήνες")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -35,7 +34,6 @@
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
         }
-
 
         [Theory]
         [InlineData(1, "1 μέρα")]
@@ -60,7 +58,6 @@
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
         }
-
 
         [Theory]
         [InlineData(1, "1 δευτερόλεπτο")]

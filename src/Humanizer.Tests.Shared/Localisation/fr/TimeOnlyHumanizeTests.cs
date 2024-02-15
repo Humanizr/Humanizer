@@ -53,7 +53,6 @@ namespace Humanizer.Tests.Localisation.fr
             Assert.Equal(expectedResult, actualResult);
         }
 
-
         [Fact]
         public void Never()
         {

@@ -1,14 +1,8 @@
-﻿using Humanizer.Localisation.GrammaticalNumber;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class LithuanianFormatter : DefaultFormatter
+    internal class LithuanianFormatter() :
+        DefaultFormatter("lt")
     {
-        public LithuanianFormatter()
-            : base("lt")
-        {
-        }
-
         protected override string GetResourceKey(string resourceKey, int number)
         {
             if (resourceKey == "TimeSpanHumanize_Zero")

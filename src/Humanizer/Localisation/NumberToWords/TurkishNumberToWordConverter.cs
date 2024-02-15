@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class TurkishNumberToWordConverter : GenderlessNumberToWordsConverter
     {
@@ -28,7 +28,6 @@
             {'e', "li"},
             {'a', "lı"},
         };
-
 
         public override string Convert(long input)
         {

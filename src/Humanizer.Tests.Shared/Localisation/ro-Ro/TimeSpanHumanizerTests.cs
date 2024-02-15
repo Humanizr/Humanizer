@@ -1,7 +1,5 @@
 ﻿namespace Humanizer.Tests.Localisation.roRO
 {
-
-
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral
     /// and the time unit: http://ebooks.unibuc.ro/filologie/NForascu-DGLR/numerale.htm.
@@ -10,7 +8,6 @@
     [UseCulture("ro-RO")]
     public class TimeSpanHumanizerTests
     {
-
         [Theory]
         [InlineData(1, "1 milisecundă")]
         [InlineData(14, "14 milisecunde")]
@@ -31,7 +28,7 @@
         [InlineData(156, "2 minute")]
         public void Seconds(int seconds, string expected, bool toWords = false)
         {
-            var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: Humanizer.Localisation.TimeUnit.Second,
+            var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: TimeUnit.Second,
                 toWords: toWords);
             Assert.Equal(expected, actual);
         }
@@ -80,7 +77,6 @@
             Assert.Equal(expected, actual);
         }
 
-
         [Theory]
         [Trait("Translation", "Native speaker")]
         [InlineData(31, "1 lună")]
@@ -89,7 +85,7 @@
         [InlineData(335, "11 luni")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -101,7 +97,7 @@
         [InlineData(7500, "20 de ani")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Fact]

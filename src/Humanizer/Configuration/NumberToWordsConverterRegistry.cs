@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.NumberToWords;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
     internal class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
     {
@@ -55,6 +53,7 @@ namespace Humanizer.Configuration
             Register("ko-KR", new KoreanNumberToWordsConverter());
             Register("en-IN", new IndianNumberToWordsConverter());
             Register("lt", new LithuanianNumberToWordsConverter());
+            Register("lb", new LuxembourgishNumberToWordsConverter());
         }
     }
 }

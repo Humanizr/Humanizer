@@ -1,7 +1,4 @@
-﻿using Humanizer.Configuration;
-
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Humanizes an IEnumerable into a human readable list
@@ -51,7 +48,6 @@ namespace Humanizer
         /// </summary>
         public static string Humanize<T>(this IEnumerable<T> collection, string separator)
         {
-
             return Configurator.CollectionFormatter.Humanize(collection, separator);
         }
 

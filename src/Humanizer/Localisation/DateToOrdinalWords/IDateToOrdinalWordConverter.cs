@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.DateToOrdinalWords
+﻿namespace Humanizer
 {
     /// <summary>
     /// The interface used to localise the ToOrdinalWords method.

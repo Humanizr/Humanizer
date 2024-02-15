@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
@@ -42,7 +41,6 @@ namespace Humanizer
 
             var wordToConvert = word.Value;
             string replacement;
-
 
             if (firstWord ||
                 (!articles.Contains(wordToConvert) &&

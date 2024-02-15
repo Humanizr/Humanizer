@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.vi
+﻿namespace Humanizer.Tests.Localisation.vi
 {
     [UseCulture("vi")]
     public class DateHumanizeTests
@@ -100,6 +98,5 @@ namespace Humanizer.Tests.Localisation.vi
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
-
     }
 }

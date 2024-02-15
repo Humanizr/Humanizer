@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.frBE
+﻿namespace Humanizer.Tests.Localisation.frBE
 {
     [UseCulture("fr-BE")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "il y a une seconde")]
         [InlineData(2, "il y a 2 secondes")]

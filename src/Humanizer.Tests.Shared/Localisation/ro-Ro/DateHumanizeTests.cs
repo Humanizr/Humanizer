@@ -1,9 +1,5 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.roRO
+﻿namespace Humanizer.Tests.Localisation.roRO
 {
-
-
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral
     /// and the time unit: http://ebooks.unibuc.ro/filologie/NForascu-DGLR/numerale.htm.
@@ -12,7 +8,6 @@ namespace Humanizer.Tests.Localisation.roRO
     [UseCulture("ro-RO")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(3, "acum 3 ore")]
         [InlineData(20, "acum 20 de ore")]

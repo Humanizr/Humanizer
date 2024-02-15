@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.az
+﻿namespace Humanizer.Tests.Localisation.az
 {
     [UseCulture("az")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "bir saniyə əvvəl")]
         [InlineData(10, "10 saniyə əvvəl")]

@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.nl
+﻿namespace Humanizer.Tests.Localisation.nl
 {
     [UseCulture("nl-NL")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(2, "2 dagen geleden")]
         [InlineData(1, "gisteren")]

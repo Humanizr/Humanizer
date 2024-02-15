@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer
 {
     internal class SpanishOrdinalizer : DefaultOrdinalizer
     {
@@ -17,7 +15,7 @@ namespace Humanizer.Localisation.Ordinalizers
         public override string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm)
         {
             // N/A in Spanish
-            if (number == 0 || number == int.MinValue)
+            if (number is 0 or int.MinValue)
             {
                 return "0";
             }

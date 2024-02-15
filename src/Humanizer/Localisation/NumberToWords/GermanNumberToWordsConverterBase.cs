@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
@@ -88,7 +88,7 @@
                 parts.Add(number < 20 ? UnitsOrdinal[number] : Convert(number));
             }
 
-            if (number == 0 || number >= 20)
+            if (number is 0 or >= 20)
             {
                 parts.Add("s");
             }

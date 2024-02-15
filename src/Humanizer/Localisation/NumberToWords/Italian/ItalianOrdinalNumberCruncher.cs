@@ -1,14 +1,7 @@
-﻿namespace Humanizer.Localisation.NumberToWords.Italian
+﻿namespace Humanizer
 {
-    internal class ItalianOrdinalNumberCruncher
+    internal class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
     {
-        public ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
-        {
-            _fullNumber = number;
-            _gender = gender;
-            _genderSuffix = (gender == GrammaticalGender.Feminine ? "a" : "o");
-        }
-
         public string Convert()
         {
             // it's easier to treat zero as a completely distinct case
@@ -90,9 +83,9 @@
             return words;
         }
 
-        protected readonly int _fullNumber;
-        protected readonly GrammaticalGender _gender;
-        private readonly string _genderSuffix;
+        protected readonly int _fullNumber = number;
+        protected readonly GrammaticalGender _gender = gender;
+        private readonly string _genderSuffix = (gender == GrammaticalGender.Feminine ? "a" : "o");
 
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.

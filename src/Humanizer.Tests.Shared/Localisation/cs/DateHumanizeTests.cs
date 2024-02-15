@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.cs
+﻿namespace Humanizer.Tests.Localisation.cs
 {
     [UseCulture("cs-CZ")]
     public class DateHumanizeTests

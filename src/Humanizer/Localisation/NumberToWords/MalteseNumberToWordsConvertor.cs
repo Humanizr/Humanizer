@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class MalteseNumberToWordsConvertor : GenderedNumberToWordsConverter
     {
@@ -33,7 +33,7 @@
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
-            bool negativeNumber = false;
+            var negativeNumber = false;
 
             if (input < 0)
             {
@@ -120,7 +120,6 @@
             var numberOfTens = value / 10;
             if (single == 0)
             {
-
                 return TensMap[numberOfTens];
             }
 

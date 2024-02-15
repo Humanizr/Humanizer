@@ -3,7 +3,6 @@
     [UseCulture("is")]
     public class CollectionFormatterTests
     {
-
         [Fact]
         public void OneItem()
         {

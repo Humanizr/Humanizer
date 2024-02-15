@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class CentralKurdishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -70,11 +70,7 @@
 
         private bool IsVowel(char c)
         {
-            return c == 'ا' ||
-                c == 'ێ' ||
-                c == 'ۆ' ||
-                c == 'ە' ||
-                c == 'ی';
+            return c is 'ا' or 'ێ' or 'ۆ' or 'ە' or 'ی';
         }
     }
 }

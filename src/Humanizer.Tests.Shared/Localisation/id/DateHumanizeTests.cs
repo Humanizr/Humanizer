@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.id
+﻿namespace Humanizer.Tests.Localisation.id
 {
     [UseCulture("id-ID")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "sedetik yang lalu")]
         [InlineData(10, "10 detik yang lalu")]

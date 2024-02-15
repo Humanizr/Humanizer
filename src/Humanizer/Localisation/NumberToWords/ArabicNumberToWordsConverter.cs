@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class ArabicNumberToWordsConverter : GenderedNumberToWordsConverter
     {
@@ -55,7 +55,7 @@
                     {
                         if (tens == 2 && hundreds == 0 && groupLevel > 0)
                         {
-                            if (number == 2000 || number == 2000000 || number == 2000000000)
+                            if (number is 2000 or 2000000 or 2000000000)
                             {
                                 process = AppendedTwos[groupLevel];
                             }

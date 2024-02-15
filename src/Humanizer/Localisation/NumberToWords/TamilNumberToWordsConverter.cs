@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -118,7 +118,7 @@
                 {
                     if (quot == 9)
                         lastPart += "ற்றி ";
-                    else if (quot == 7 || quot == 8 || quot == 4)
+                    else if (quot is 7 or 8 or 4)
                         lastPart += "த்தி ";
                     else
                         lastPart += "த்து ";
@@ -214,7 +214,6 @@
         }
         private static string GetThousandsValue(ref long number)
         {
-
             var num_above_10 = number / 1000;
             var local_word = "";
             if (num_above_10 >= 20)
@@ -241,8 +240,7 @@
         }
         private static string GetHundredsValue(ref long number)
         {
-            string local_word = "";
-
+            var local_word = "";
             {
                 local_word = HundredsMap[(number / 100) - 1];
                 if (number / 100 == 9)

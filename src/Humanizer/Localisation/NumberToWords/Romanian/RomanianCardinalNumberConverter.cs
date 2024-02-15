@@ -1,8 +1,7 @@
-﻿namespace Humanizer.Localisation.NumberToWords.Romanian
+﻿namespace Humanizer
 {
     internal class RomanianCardinalNumberConverter
     {
-
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9 for 9.
         /// </summary>
@@ -113,7 +112,6 @@
 
             for (var i = 0; i < _threeDigitParts.Count; i++)
             {
-
                 var currentSet = (ThreeDigitSets)Enum.ToObject(typeof(ThreeDigitSets), i);
 
                 var partToString = GetNextPartConverter(currentSet);
@@ -299,7 +297,6 @@
         {
             return ThreeDigitSetConverter(number, gender, true);
         }
-
 
         /// <summary>
         /// Converts a thousands three-digit number to text.

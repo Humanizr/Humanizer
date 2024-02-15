@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Humanizer.Localisation.NumberToWords
+namespace Humanizer
 {
     internal class UzbekLatnNumberToWordConverter : GenderlessNumberToWordsConverter
     {
@@ -11,7 +11,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long input)
         {
-            if (input > int.MaxValue || input < int.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
@@ -88,7 +88,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             var lastChar = word[word.Length - 1];
-            if (lastChar == 'i' || lastChar == 'a')
+            if (lastChar is 'i' or 'a')
             {
                 i = 1;
             }

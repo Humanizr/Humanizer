@@ -1,8 +1,5 @@
 ﻿#if NET6_0_OR_GREATER
 
-using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
-
 namespace Humanizer.Tests.Localisation.@is
 {
     [UseCulture("is")]
@@ -38,7 +35,6 @@ namespace Humanizer.Tests.Localisation.@is
 
             Assert.Equal(expectedResult, actualResult);
         }
-
 
         [Fact]
         public void TestNever()

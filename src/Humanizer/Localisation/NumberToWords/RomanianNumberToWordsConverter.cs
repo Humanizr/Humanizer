@@ -1,12 +1,10 @@
-﻿using Humanizer.Localisation.NumberToWords.Romanian;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class RomanianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
-            if (number > int.MaxValue || number < int.MinValue)
+            if (number is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }

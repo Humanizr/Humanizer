@@ -1,7 +1,4 @@
 ﻿using System.Globalization;
-using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
-using Humanizer.Localisation;
 
 namespace Humanizer.Tests
 {

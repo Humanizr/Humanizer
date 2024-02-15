@@ -1,10 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Configuration;
-using Humanizer.Localisation;
-using Humanizer.Localisation.Formatters;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Humanizes TimeSpan into human readable form

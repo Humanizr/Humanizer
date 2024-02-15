@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer
 {
     /// <summary>
     /// The interface used to localise the Ordinalize method

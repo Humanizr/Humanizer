@@ -1,6 +1,4 @@
-﻿using Humanizer.Localisation.DateToOrdinalWords;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
     internal class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWordConverter>
     {

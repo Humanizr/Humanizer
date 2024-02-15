@@ -1,14 +1,10 @@
 ﻿#if NET6_0_OR_GREATER
 
-using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
-
 namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class TimeOnlyHumanizeTests
     {
-
         [Fact]
         public void DefaultStrategy_SameTime()
         {
@@ -64,7 +60,6 @@ namespace Humanizer.Tests
 
             Assert.Equal(expectedResult, actualResult);
         }
-
 
         [Fact]
         public void Never()

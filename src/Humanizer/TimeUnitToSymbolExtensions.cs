@@ -1,9 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Localisation;
-using Humanizer.Configuration;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Transform a time unit into a symbol; e.g. <see cref="TimeUnit.Year"/> => "a"

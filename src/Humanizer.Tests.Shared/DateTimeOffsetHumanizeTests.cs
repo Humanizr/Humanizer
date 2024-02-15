@@ -1,12 +1,8 @@
-﻿using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class DateTimeOffsetHumanizeTests
     {
-
         [Fact]
         public void DefaultStrategy_SameOffset()
         {

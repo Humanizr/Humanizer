@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using Humanizer.Localisation;
 
 namespace Humanizer.Tests
 {
@@ -103,7 +102,6 @@ namespace Humanizer.Tests
             var actual = TimeSpan.FromMinutes(minutes).Humanize();
             Assert.Equal(expected, actual);
         }
-
 
         [Theory]
         [InlineData(135, "2 minutes")]

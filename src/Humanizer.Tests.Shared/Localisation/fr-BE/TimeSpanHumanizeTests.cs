@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.frBE
+﻿namespace Humanizer.Tests.Localisation.frBE
 {
     [UseCulture("fr-BE")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "1 an")]

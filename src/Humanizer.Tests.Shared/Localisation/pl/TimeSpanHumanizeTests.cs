@@ -79,7 +79,6 @@
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
         }
 
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(31, "1 miesiąc")]
@@ -88,7 +87,7 @@
         [InlineData(335, "11 miesięcy")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -99,7 +98,7 @@
         [InlineData(4018, "11 lat")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Fact]

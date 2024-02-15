@@ -123,6 +123,9 @@ namespace Humanizer.Tests
         [InlineData("customer_first_name goes here", "CustomerFirstNameGoesHere")]
         [InlineData("customer name", "CustomerName")]
         [InlineData("customer   name", "CustomerName")]
+        [InlineData("customer-first-name", "CustomerFirstName")]
+        [InlineData("_customer-first-name", "CustomerFirstName")]
+        [InlineData(" customer__first--name", "CustomerFirstName")]
         public void Pascalize(string input, string expectedOutput)
         {
             Assert.Equal(expectedOutput, input.Pascalize());
@@ -143,7 +146,6 @@ namespace Humanizer.Tests
         {
             Assert.Equal(expectedOutput, input.Camelize());
         }
-
 
         //Makes an underscored lowercase string
         [Theory]

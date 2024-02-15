@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.el
+﻿namespace Humanizer.Tests.Localisation.el
 {
     [UseCulture("el")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(-2, "πριν από 2 ημέρες")]
         [InlineData(-1, "χθες")]

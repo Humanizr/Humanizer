@@ -1,6 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer.Localisation.DateToOrdinalWords
+namespace Humanizer
 {
     /// <summary>
     /// The interface used to localise the ToOrdinalWords method.

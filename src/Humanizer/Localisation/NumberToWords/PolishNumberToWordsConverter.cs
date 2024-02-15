@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class PolishNumberToWordsConverter : GenderedNumberToWordsConverter
     {

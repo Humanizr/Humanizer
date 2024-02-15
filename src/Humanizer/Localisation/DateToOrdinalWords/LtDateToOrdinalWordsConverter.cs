@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer.Localisation.DateToOrdinalWords
+﻿namespace Humanizer
 {
     internal class LtDateToOrdinalWordsConverter : IDateToOrdinalWordConverter
     {

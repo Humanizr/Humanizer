@@ -1,11 +1,8 @@
-﻿using Humanizer.Localisation;
-
-namespace Humanizer.Tests.Localisation.fiFI
+﻿namespace Humanizer.Tests.Localisation.fiFI
 {
     [UseCulture("fi-FI")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(2, "2 päivää sitten")]
         [InlineData(1, "eilen")]

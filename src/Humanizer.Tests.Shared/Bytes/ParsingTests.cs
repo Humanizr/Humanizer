@@ -21,14 +21,12 @@
 //THE SOFTWARE.
 
 using System.Globalization;
-using Humanizer.Bytes;
 
 namespace Humanizer.Tests.Bytes
 {
     [UseCulture("en")]
     public class ParsingTests
     {
-
         [Fact]
         public void Parse()
         {

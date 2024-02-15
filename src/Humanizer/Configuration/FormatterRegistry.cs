@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Localisation.Formatters;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
     internal class FormatterRegistry : LocaliserRegistry<IFormatter>
     {
@@ -61,6 +57,7 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("th-TH");
             RegisterDefaultFormatter("en-IN");
             Register("lt", new LithuanianFormatter());
+            Register("lb", new LuxembourgishFormatter());
         }
 
         private void RegisterDefaultFormatter(string localeCode)

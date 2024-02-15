@@ -1,12 +1,8 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class GermanFormatter : DefaultFormatter
+    internal class GermanFormatter() :
+        DefaultFormatter("de")
     {
-        public GermanFormatter()
-            : base("de")
-        {
-        }
-
         /// <inheritdoc />
         public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
         {

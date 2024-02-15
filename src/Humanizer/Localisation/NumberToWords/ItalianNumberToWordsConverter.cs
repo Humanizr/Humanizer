@@ -1,12 +1,10 @@
-﻿using Humanizer.Localisation.NumberToWords.Italian;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
     internal class ItalianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
-            if (input > int.MaxValue || input < int.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }

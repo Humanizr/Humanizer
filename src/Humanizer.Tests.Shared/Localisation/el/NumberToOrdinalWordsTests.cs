@@ -1,9 +1,8 @@
 ﻿namespace Humanizer.Tests.Localisation.el
 {
-
-        [UseCulture("el")]
-        public class NumberToOrdinalWordsTests
-        {
+    [UseCulture("el")]
+    public class NumberToOrdinalWordsTests
+    {
         [InlineData(-1, "")]
         [InlineData(0, "")]
         [InlineData(1, "πρώτος")]
@@ -27,8 +26,8 @@
 
         [Theory]
         public void ToOrdinalWordsInt(int number, string expected)
-            {
-                Assert.Equal(expected, number.ToOrdinalWords());
-            }
+        {
+            Assert.Equal(expected, number.ToOrdinalWords());
+        }
     }
 }

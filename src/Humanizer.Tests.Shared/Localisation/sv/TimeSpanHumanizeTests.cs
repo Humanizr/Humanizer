@@ -3,7 +3,6 @@
     [UseCulture("sv-SE")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "1 millisekund")]
         [InlineData(2, "2 millisekunder")]
@@ -52,7 +51,6 @@
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
         }
 
-
         [Theory]
         [Trait("Translation", "Native speaker")]
         [InlineData(31, "en månad")]
@@ -61,7 +59,7 @@
         [InlineData(335, "11 månader")]
         public void Months(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
 
         [Theory]
@@ -72,7 +70,7 @@
         [InlineData(4018, "11 år")]
         public void Years(int days, string expected)
         {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
         }
     }
 }

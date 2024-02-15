@@ -1,6 +1,4 @@
-using System.Globalization;
-
-namespace Humanizer.DateTimeHumanizeStrategy
+namespace Humanizer
 {
     /// <summary>
     /// The default 'distance of time' -> words calculator.

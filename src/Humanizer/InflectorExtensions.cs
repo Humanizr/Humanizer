@@ -22,7 +22,6 @@
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Text.RegularExpressions;
-using Humanizer.Inflections;
 
 namespace Humanizer
 {
@@ -65,8 +64,8 @@ namespace Humanizer
         /// By default, pascalize converts strings to UpperCamelCase also removing underscores
         /// </summary>
         public static string Pascalize(this string input)
-        {   
-            return Regex.Replace(input, "(?:^|_| +)(.)", match => match.Groups[1].Value.ToUpper());
+        {
+            return Regex.Replace(input, @"(?:[ _-]+|^)([a-zA-Z])", match => match.Groups[1].Value.ToUpper());
         }
 
         /// <summary>
