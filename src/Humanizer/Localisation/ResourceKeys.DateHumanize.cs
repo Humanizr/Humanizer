@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer.Localisation
+﻿namespace Humanizer.Localisation
 {
     public partial class ResourceKeys
     {

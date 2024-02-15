@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer.Localisation.Ordinalizers
 {
     internal class SpanishOrdinalizer : DefaultOrdinalizer
     {

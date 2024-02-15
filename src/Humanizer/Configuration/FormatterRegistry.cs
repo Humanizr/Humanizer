@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Localisation.Formatters;
+﻿using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Configuration
 {

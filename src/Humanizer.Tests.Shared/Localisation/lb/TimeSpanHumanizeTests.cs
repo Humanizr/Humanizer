@@ -1,8 +1,4 @@
-﻿using System;
-
-using Humanizer.Localisation;
-
-using Xunit;
+﻿using Humanizer.Localisation;
 
 namespace Humanizer.Tests.Localisation.lb;
 

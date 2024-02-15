@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Humanizer.Localisation.Formatters;
+﻿using Humanizer.Localisation.Formatters;
 
 namespace Humanizer.Localisation.NumberToWords;
 

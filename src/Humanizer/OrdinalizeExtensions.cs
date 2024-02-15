@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Configuration;
+﻿using Humanizer.Configuration;
 
 namespace Humanizer
 {
