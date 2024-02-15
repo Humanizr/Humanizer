@@ -89,10 +89,7 @@ namespace Humanizer.Inflections
             _default.AddIrregular("database", "databases");
             _default.AddIrregular("zombie", "zombies");
             _default.AddIrregular("personnel", "personnel");
-            //Fix #789
             _default.AddIrregular("cache", "caches");
-
-            //Fix 975
             _default.AddIrregular("ex", "exes", matchEnding: false);
             _default.AddIrregular("is", "are", matchEnding: false);
             _default.AddIrregular("was", "were", matchEnding: false);
