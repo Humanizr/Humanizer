@@ -8,7 +8,7 @@ namespace Humanizer.Tests
         [Theory]
         [InlineData(new[] { "Ant", "The Theater", "The apple", "Fox", "Bear" }, new[] { "Ant", "The apple", "Bear", "Fox", "The Theater" })]
         [InlineData(new[] { "An Ant", "The Theater", "the apple", "a Fox", "Bear" }, new[] { "An Ant", "the apple", "Bear", "a Fox", "The Theater" })]
-        [InlineData(new[] { "Ant", "A Theater", "an apple", "Fox", "Bear" }, new[] { "Ant", "an apple", "Bear", "Fox", "A Theater" })]
+        [InlineData(new[] { "Ant", "A Theater", "an apple", "Fox", "Bear" }, new[] { "Ant", "an apple", "Bear", "Fox", "A Theater" })] 
         public void SortStringArrayIgnoringArticlePrefixes(string[] input, string[] expectedOutput)
         {
             Assert.Equal(expectedOutput, EnglishArticle.PrependArticleSuffix(EnglishArticle.AppendArticlePrefix(input)));
