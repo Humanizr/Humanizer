@@ -118,7 +118,7 @@
                 {
                     if (quot == 9)
                         lastPart += "ற்றி ";
-                    else if (quot == 7 || quot == 8 || quot == 4)
+                    else if (quot is 7 or 8 or 4)
                         lastPart += "த்தி ";
                     else
                         lastPart += "த்து ";

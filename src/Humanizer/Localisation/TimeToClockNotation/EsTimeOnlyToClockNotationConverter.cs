@@ -55,7 +55,7 @@ namespace Humanizer.Localisation.TimeToClockNotation
 
         private static string GetArticle(TimeOnly time)
         {
-            return (time.Hour == 1 || time.Hour == 13) ? "la" : "las";
+            return time.Hour is 1 or 13 ? "la" : "las";
         }
 
         private static string GetDayPeriod(TimeOnly time)

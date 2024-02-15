@@ -41,7 +41,7 @@
 
         private string Convert(long input, GrammaticalGender gender, bool isOrdinal, bool addAnd = true)
         {
-            if (input > int.MaxValue || input < int.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }

@@ -59,7 +59,7 @@
 
         public override string Convert(long input)
         {
-            if (input > int.MaxValue || input < int.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
