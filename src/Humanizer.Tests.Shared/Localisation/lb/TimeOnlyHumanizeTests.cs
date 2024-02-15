@@ -24,10 +24,10 @@ public class TimeOnlyHumanizeTests
     [Fact]
     public void DefaultStrategy_HoursApart()
     {
-        var inputTime = new TimeOnly(13, 08, 05);
+        var inputTime = new TimeOnly(3, 08, 05);
         var baseTime = new TimeOnly(1, 08, 05);
 
-        const string expectedResult = "an 12 Stonnen";
+        const string expectedResult = "an 2 Stonnen";
         var actualResult = inputTime.Humanize(baseTime);
 
         Assert.Equal(expectedResult, actualResult);
