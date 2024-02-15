@@ -241,8 +241,7 @@
         }
         private static string GetHundredsValue(ref long number)
         {
-            string local_word = "";
-
+            var local_word = "";
             {
                 local_word = HundredsMap[(number / 100) - 1];
                 if (number / 100 == 9)

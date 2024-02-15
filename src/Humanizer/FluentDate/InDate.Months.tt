@@ -9,7 +9,7 @@ namespace Humanizer;
 public partial class InDate
 {
 <#var now = DateTime.Now;
-for (int i = 0; i < 12; i++){
+for (var i = 0; i < 12; i++){
     var monthName = new DateTime(now.Year, i + 1, 1).ToString("MMMM");
 #>
     /// <summary>
