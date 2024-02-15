@@ -57,8 +57,6 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(expectedValue, text);
         }
 
-
-
         [Theory]
         [InlineData(TimeUnit.Millisecond)]
         [InlineData(TimeUnit.Day)]

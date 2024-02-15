@@ -1,7 +1,5 @@
 ﻿namespace Humanizer.Tests.Localisation.roRO
 {
-
-
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral
     /// and the time unit: http://ebooks.unibuc.ro/filologie/NForascu-DGLR/numerale.htm.
@@ -10,7 +8,6 @@
     [UseCulture("ro-RO")]
     public class TimeSpanHumanizerTests
     {
-
         [Theory]
         [InlineData(1, "1 milisecundă")]
         [InlineData(14, "14 milisecunde")]
@@ -79,7 +76,6 @@
             var actual = TimeSpan.FromDays(7 * weeks).Humanize();
             Assert.Equal(expected, actual);
         }
-
 
         [Theory]
         [Trait("Translation", "Native speaker")]

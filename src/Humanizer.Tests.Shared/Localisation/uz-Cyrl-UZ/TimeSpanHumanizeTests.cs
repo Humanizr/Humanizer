@@ -3,7 +3,6 @@
     [UseCulture("uz-Cyrl-UZ")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "1 йил")]
@@ -14,7 +13,6 @@
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
         }
-
 
         [Theory]
         [Trait("Translation", "Google")]

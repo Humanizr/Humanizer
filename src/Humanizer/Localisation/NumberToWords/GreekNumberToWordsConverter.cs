@@ -47,7 +47,6 @@
             { 1000, "χιλιοστός" }
         };
 
-
         public override string Convert(long number)
         {
             return ConvertImpl(number, false);
@@ -124,7 +123,6 @@
 
         private string GetFourDigitOrdinal(int number)
         {
-
             var thousands = number / 1000;
 
             if (!ΟrdinalMap.TryGetValue(thousands*1000, out var thousandsString)) return string.Empty;

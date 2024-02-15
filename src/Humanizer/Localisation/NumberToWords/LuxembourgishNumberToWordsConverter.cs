@@ -24,7 +24,6 @@ internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConver
 
     public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
     {
-        
         if (number == 0)
         {
             return UnitsMap[number];
@@ -36,7 +35,7 @@ internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConver
             parts.Add("minus ");
             number = -number;
         }
-        
+
         CollectParts(parts, ref number, 1000000000000000000, true, "{0} Trilliounen", "eng Trillioun");
         CollectParts(parts, ref number, 1000000000000000, true, "{0} Billiarden", "eng Billiard");
         CollectParts(parts, ref number, 1000000000000, true, "{0} Billiounen", "eng Billioun");
@@ -74,7 +73,7 @@ internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConver
         {
             var units = number % 10;
             var tens = TensMap[number / 10];
-                
+
             if (units > 0)
             {
                 var andPart = LuxembourgishFormatter.CheckForAndApplyEifelerRule("an", tens);
@@ -127,7 +126,7 @@ internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConver
         {
             return;
         }
-        
+
         parts.Add(Part(pluralFormat, singular, number / divisor, divisor));
         number %= divisor;
         if (addSpaceBeforeNextPart && number > 0)
@@ -142,7 +141,7 @@ internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConver
         {
             return;
         }
-        
+
         var noRest = evaluateNoRest ? NoRestIndex(number % divisor) : 0;
         parts.Add(Part(pluralFormats[noRest], singulars[noRest], number / divisor, divisor));
         number %= divisor;

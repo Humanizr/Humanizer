@@ -1,10 +1,8 @@
 ﻿namespace Humanizer.Tests.Localisation.mt
 {
-
     [UseCulture("mt")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "sena")]
@@ -15,7 +13,6 @@
         {
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
         }
-
 
         [Theory]
         [Trait("Translation", "Google")]

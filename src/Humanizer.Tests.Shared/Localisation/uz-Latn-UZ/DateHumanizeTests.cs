@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.uzLatn
     [UseCulture("uz-Latn-UZ")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "bir soniya avval")]
         [InlineData(10, "10 sekund avval")]

@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.hr
     [UseCulture("hr-HR")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(-22, "prije 22 godine")]
         [InlineData(-5, "prije 5 godina")]

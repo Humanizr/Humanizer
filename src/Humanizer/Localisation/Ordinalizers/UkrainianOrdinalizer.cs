@@ -9,7 +9,6 @@
 
         public override string Convert(int number, string numberString, GrammaticalGender gender)
         {
-
             if (gender == GrammaticalGender.Masculine)
             {
                 return numberString + "-й";

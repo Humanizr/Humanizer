@@ -3,7 +3,6 @@
     [UseCulture("sl-SI")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "1 leto")]
@@ -70,7 +69,6 @@
         {
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
         }
-
 
         [Theory]
         [InlineData(1, "1 sekunda")]

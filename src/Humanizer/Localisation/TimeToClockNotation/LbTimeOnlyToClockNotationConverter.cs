@@ -13,7 +13,7 @@ internal class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConv
         var roundedTime = roundToNearestFive is ClockNotationRounding.NearestFiveMinutes
             ? GetRoundedTime(time)
             : time;
-        
+
         return roundedTime switch
         {
             { Hour: 0, Minute: 0 } => "Mëtternuecht",

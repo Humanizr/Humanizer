@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.af
     [UseCulture("af")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(2, "2 dae gelede")]
         [InlineData(1, "gister")]

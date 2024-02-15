@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.@is
     [UseCulture("is")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(2, "fyrir 2 dögum")]
         [InlineData(1, "í gær")]
@@ -107,7 +106,6 @@ namespace Humanizer.Tests.Localisation.@is
         {
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
         }
-
 
         [Theory]
         [InlineData(0, "núna")]

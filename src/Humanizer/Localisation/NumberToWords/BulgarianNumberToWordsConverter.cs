@@ -51,7 +51,6 @@
                 return isOrdinal ? "нулев" + GetEndingForGender(gender, input) : "нула";
             }
 
-
             var parts = new List<string>();
 
             if (input < 0)
@@ -117,7 +116,6 @@
                 input %= 100;
             }
 
-
             if (input > 19)
             {
                 parts.Add(TensMap[input / 10]);
@@ -140,7 +138,6 @@
             {
                 parts.Insert(parts.Count - 1, "и");
             }
-
 
             if (isOrdinal && !string.IsNullOrWhiteSpace(lastOrdinalSubstitution))
                 parts[parts.Count - 1] = lastOrdinalSubstitution;

@@ -3,7 +3,6 @@
     [UseCulture("sr")]
     public class NumberToWordsTest
     {
-
         [Theory]
         [InlineData(0, "нула")]
         [InlineData(1, "један")]

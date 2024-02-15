@@ -3,7 +3,6 @@
     [UseCulture("")]
     public class NumberToWordsTests
     {
-
         [InlineData(1, "one")]
         [InlineData(10, "ten")]
         [InlineData(11, "eleven")]

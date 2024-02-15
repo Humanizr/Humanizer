@@ -3,7 +3,6 @@
     [UseCulture("bg")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "нула")]
         [InlineData(1, "едно")]
@@ -51,7 +50,6 @@
         {
             Assert.Equal(expected, number.ToWords());
         }
-
 
         [Theory]
         [InlineData(0, "нулев")]
@@ -122,7 +120,6 @@
         {
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
         }
-
 
         [Theory]
         [InlineData(0, "нулево")]

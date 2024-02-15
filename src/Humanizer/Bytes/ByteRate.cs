@@ -4,7 +4,6 @@ using Humanizer.Localisation;
 
 namespace Humanizer.Bytes
 {
-
     /// <summary>
     /// Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
     /// </summary>

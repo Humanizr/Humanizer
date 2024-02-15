@@ -3,7 +3,6 @@
     [UseCulture("es-ES")]
     public class NumberToWordsFeminineTests
     {
-
         [Theory]
         [InlineData(1, "una")]
         [InlineData(21, "veintiuna")]
@@ -19,6 +18,5 @@
         {
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
         }
-
     }
 }

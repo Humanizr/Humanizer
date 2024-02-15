@@ -5,7 +5,6 @@ namespace Humanizer.Tests.Localisation.zhCN
     [UseCulture("zh-CN")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(2, "2 天前")]
         [InlineData(1, "昨天")]

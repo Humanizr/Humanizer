@@ -2,7 +2,6 @@
 {
     internal class DefaultDateToOrdinalWordConverter : IDateToOrdinalWordConverter
     {
-
         public virtual string Convert(DateTime date)
         {
             return date.Day.Ordinalize() + date.ToString(" MMMM yyyy");
@@ -12,6 +11,5 @@
         {
             return Convert(date);
         }
-
     }
 }

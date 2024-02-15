@@ -3,7 +3,6 @@
     [UseCulture("fr-CH")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "zéro")]
         [InlineData(1, "un")]
