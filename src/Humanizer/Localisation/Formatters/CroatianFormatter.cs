@@ -1,13 +1,9 @@
 namespace Humanizer.Localisation.Formatters
 {
-    internal class CroatianFormatter : DefaultFormatter
+    internal class CroatianFormatter() :
+        DefaultFormatter("hr")
     {
         private const string DualTrialQuadralPostfix = "_DualTrialQuadral";
-
-        public CroatianFormatter()
-            : base("hr")
-        {
-        }
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

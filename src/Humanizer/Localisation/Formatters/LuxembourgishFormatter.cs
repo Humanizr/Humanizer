@@ -4,20 +4,15 @@ using System.Linq;
 
 namespace Humanizer.Localisation.Formatters;
 
-internal class LuxembourgishFormatter : DefaultFormatter
+internal class LuxembourgishFormatter() :
+    DefaultFormatter(LocaleCode)
 {
     private const string LocaleCode = "lb";
-    private readonly CultureInfo _localCulture;
+    private readonly CultureInfo _localCulture = new(LocaleCode);
     private const string DualPostfix = "_Dual";
     // https://lb.wikipedia.org/wiki/Eifeler_Reegel
     private const char EifelerRuleSuffix = 'n';
     private const string EifelerRuleCharacters = "unitedzohay";
-
-    public LuxembourgishFormatter()
-        : base(LocaleCode)
-    {
-        _localCulture = new CultureInfo(LocaleCode);
-    }
 
     public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
     {
@@ -35,7 +30,7 @@ internal class LuxembourgishFormatter : DefaultFormatter
     public static bool DoesEifelerRuleApply(string nextWord)
         => !string.IsNullOrWhiteSpace(nextWord)
            && !EifelerRuleCharacters.Contains(nextWord.Substring(0, 1));
-
+    
     protected override string Format(string resourceKey, int number, bool toWords = false)
     {
         var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _localCulture);
@@ -54,7 +49,7 @@ internal class LuxembourgishFormatter : DefaultFormatter
             ? resourceString.FormatWith(numberAsWord, doesEifelerRuleApply ? string.Empty : EifelerRuleSuffix)
             : resourceString.FormatWith(number, doesEifelerRuleApply ? string.Empty : EifelerRuleSuffix);
     }
-
+    
     protected override string GetResourceKey(string resourceKey, int number)
     {
         return number switch
@@ -69,11 +64,11 @@ internal class LuxembourgishFormatter : DefaultFormatter
         var words = resourceString.Split(' ');
         return words.Last() switch
         {
-            var x when
+            var x when 
                 x.StartsWith("Millisekonnen")
-                || x.StartsWith("Sekonnen")
-                || x.StartsWith("Minutten")
-                || x.StartsWith("Stonnen")
+                || x.StartsWith("Sekonnen") 
+                || x.StartsWith("Minutten") 
+                || x.StartsWith("Stonnen") 
                 || x.StartsWith("Wochen") => GrammaticalGender.Feminine,
             _ => GrammaticalGender.Masculine
         };

@@ -1,13 +1,9 @@
 ﻿namespace Humanizer.Localisation.Formatters
 {
-    internal class FrenchFormatter : DefaultFormatter
+    internal class FrenchFormatter(string localeCode) :
+        DefaultFormatter(localeCode)
     {
         private const string DualPostfix = "_Dual";
-
-        public FrenchFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
