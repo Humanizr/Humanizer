@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer.Localisation.Formatters
 {
     internal class IcelandicFormatter() :
         DefaultFormatter(LocaleCode)

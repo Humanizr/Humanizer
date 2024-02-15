@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer.Configuration
 {
     /// <summary>
     /// A registry of localised system components with their associated locales

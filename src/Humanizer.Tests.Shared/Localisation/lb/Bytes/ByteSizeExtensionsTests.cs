@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.lb.Bytes;
+﻿namespace Humanizer.Tests.Localisation.lb.Bytes;
 
 [UseCulture("lb-LU")]
 public class ByteSizeExtensionsTests

@@ -1,7 +1,5 @@
 ﻿using Humanizer.Bytes;
 
-using Xunit;
-
 namespace Humanizer.Tests.Localisation.lb.Bytes;
 
 [UseCulture("lb-LU")]

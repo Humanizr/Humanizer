@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer.Localisation.NumberToWords
 {
     internal class CzechNumberToWordsConverter : GenderedNumberToWordsConverter
     {

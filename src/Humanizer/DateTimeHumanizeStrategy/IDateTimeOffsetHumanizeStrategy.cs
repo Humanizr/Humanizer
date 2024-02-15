@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.DateTimeHumanizeStrategy
+﻿namespace Humanizer.DateTimeHumanizeStrategy
 {
     /// <summary>
     /// Implement this interface to create a new strategy for DateTime.Humanize and hook it in the Configurator.DateTimeOffsetHumanizeStrategy
