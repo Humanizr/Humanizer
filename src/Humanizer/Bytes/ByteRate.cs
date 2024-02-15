@@ -13,12 +13,12 @@ namespace Humanizer.Bytes
         /// <summary>
         /// Quantity of bytes
         /// </summary>
-        public ByteSize Size { get; private set; }
+        public ByteSize Size { get; }
 
         /// <summary>
         /// Interval that bytes were transferred in
         /// </summary>
-        public TimeSpan Interval { get; private set; }
+        public TimeSpan Interval { get; }
 
         /// <summary>
         /// Create a ByteRate with given quantity of bytes across an interval

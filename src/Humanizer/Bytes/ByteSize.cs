@@ -57,12 +57,12 @@ namespace Humanizer.Bytes
         public const string TerabyteSymbol = "TB";
         public const string Terabyte = "terabyte";
 
-        public long Bits { get; private set; }
-        public double Bytes { get; private set; }
-        public double Kilobytes { get; private set; }
-        public double Megabytes { get; private set; }
-        public double Gigabytes { get; private set; }
-        public double Terabytes { get; private set; }
+        public long Bits { get; }
+        public double Bytes { get; }
+        public double Kilobytes { get; }
+        public double Megabytes { get; }
+        public double Gigabytes { get; }
+        public double Terabytes { get; }
 
         public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
