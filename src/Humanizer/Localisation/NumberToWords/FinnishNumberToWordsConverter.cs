@@ -87,9 +87,9 @@
 
         private static string GetOrdinalUnit(int number, bool useExceptions)
         {
-            if (useExceptions && OrdinalExceptions.ContainsKey(number))
+            if (useExceptions && OrdinalExceptions.TryGetValue(number, out var unit))
             {
-                return OrdinalExceptions[number];
+                return unit;
             }
 
             return OrdinalUnitsMap[number];
