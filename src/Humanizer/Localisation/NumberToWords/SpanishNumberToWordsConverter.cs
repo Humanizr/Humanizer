@@ -123,7 +123,7 @@
             var wordPart = string.Empty;
             remainder = inputNumber;
 
-            if ((inputNumber / 100) > 0)
+            if (inputNumber / 100 > 0)
             {
                 wordPart = inputNumber == 100 ?
                     "cien" :
@@ -148,7 +148,7 @@
             var wordPart = string.Empty;
             remainder = number;
 
-            if ((number / divisor) > 0)
+            if (number / divisor > 0)
             {
                 var genderedEnding = gender == GrammaticalGender.Feminine ? "a" : "o";
                 wordPart = map[number / divisor] + genderedEnding;
@@ -285,7 +285,7 @@
 
             foreach (var numberAndWord in numbersAndWordsDict)
             {
-                if ((remainder / numberAndWord.Value) > 0)
+                if (remainder / numberAndWord.Value > 0)
                 {
                     if (remainder / numberAndWord.Value == 1)
                     {
@@ -293,7 +293,7 @@
                     }
                     else
                     {
-                        wordBuilder.Add((remainder / numberAndWord.Value % 10 == 1) ?
+                        wordBuilder.Add(remainder / numberAndWord.Value % 10 == 1 ?
                             $"{Convert(remainder / numberAndWord.Value, WordForm.Abbreviation, GrammaticalGender.Masculine)} {PluralizeGreaterThanMillion(numberAndWord.Key)}" :
                             $"{Convert(remainder / numberAndWord.Value)} {PluralizeGreaterThanMillion(numberAndWord.Key)}");
                     }
@@ -318,9 +318,9 @@
             var wordPart = string.Empty;
             remainder = number;
 
-            if ((number / 10000) > 0)
+            if (number / 10000 > 0)
             {
-                wordPart = Convert((number / 1000) * 1000, gender);
+                wordPart = Convert(number / 1000 * 1000, gender);
 
                 if (number < 30000 || IsRoundNumber(number))
                 {
@@ -355,7 +355,7 @@
             var wordPart = string.Empty;
             remainder = inputNumber;
 
-            if ((inputNumber / 1000) > 0)
+            if (inputNumber / 1000 > 0)
             {
                 if (inputNumber / 1000 == 1)
                 {
@@ -363,7 +363,7 @@
                 }
                 else
                 {
-                    wordPart = (gender == GrammaticalGender.Feminine) ?
+                    wordPart = gender == GrammaticalGender.Feminine ?
                         $"{Convert(inputNumber / 1000, GrammaticalGender.Feminine)} mil" :
                         $"{Convert(inputNumber / 1000, WordForm.Abbreviation, gender)} mil";
                 }

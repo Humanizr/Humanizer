@@ -45,25 +45,25 @@ namespace Humanizer
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000)} miljard");
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000)} miljoen");
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 parts.Add($"{Convert(number / 1000)} duisend");
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 parts.Add($"{Convert(number / 100)} honderd");
                 number %= 100;
@@ -85,13 +85,13 @@ namespace Humanizer
                 }
                 else
                 {
-                    var lastPartValue = (number / 10) * 10;
+                    var lastPartValue = number / 10 * 10;
                     var lastPart = TensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
                         lastPart = $"{GetUnitValue(number % 10, false)} en {(isOrdinal ? GetUnitValue(lastPartValue, isOrdinal) : lastPart)}";
                     }
-                    else if ((number % 10) == 0)
+                    else if (number % 10 == 0)
                     {
                         lastPart = $"{(parts.Count > 0 ? "en " : "")}{lastPart}{(isOrdinal ? "ste" : "")}";
                     }

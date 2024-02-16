@@ -120,7 +120,7 @@
             // achtste
             // twintigste, dertigste, veertigste, ...
             // honderdste, duizendste, ...
-            if (word.LastIndexOfAny(EndingCharForSte) == (word.Length - 1))
+            if (word.LastIndexOfAny(EndingCharForSte) == word.Length - 1)
             {
                 return word + "ste";
             }

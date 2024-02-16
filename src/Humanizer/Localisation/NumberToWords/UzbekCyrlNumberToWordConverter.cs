@@ -36,33 +36,33 @@
 
             var sb = new StringBuilder();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 sb.AppendFormat("{0} миллиард ", Convert(number / 1000000000, false));
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 sb.AppendFormat("{0} миллион ", Convert(number / 1000000, true));
                 number %= 1000000;
             }
 
-            var thousand = (number / 1000);
+            var thousand = number / 1000;
             if (thousand > 0)
             {
                 sb.AppendFormat("{0} минг ", Convert(thousand, true));
                 number %= 1000;
             }
 
-            var hundred = (number / 100);
+            var hundred = number / 100;
             if (hundred > 0)
             {
                 sb.AppendFormat("{0} юз ", Convert(hundred, false));
                 number %= 100;
             }
 
-            if ((number / 10) > 0)
+            if (number / 10 > 0)
             {
                 sb.AppendFormat("{0} ", TensMap[number / 10]);
                 number %= 10;

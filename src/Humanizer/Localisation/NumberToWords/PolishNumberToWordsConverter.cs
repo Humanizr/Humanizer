@@ -98,7 +98,7 @@
         private static void CollectPartsUnderThousand(ICollection<string> parts, int number, GrammaticalGender gender)
         {
             var hundredsDigit = number / 100;
-            var tensDigit = (number % 100) / 10;
+            var tensDigit = number % 100 / 10;
             var unitsDigit = number % 10;
 
             if (hundredsDigit >= 1)
@@ -148,7 +148,7 @@
             }
 
             var multiplierUnitsDigit = multiplier % 10;
-            var multiplierTensDigit = (multiplier % 100) / 10;
+            var multiplierTensDigit = multiplier % 100 / 10;
             if (multiplierTensDigit == 1 || multiplierUnitsDigit <= 1 || multiplierUnitsDigit >= 5)
             {
                 return PowersOfThousandMap[power][genitiveIndex];

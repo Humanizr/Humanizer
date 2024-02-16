@@ -51,16 +51,16 @@
                 // remove 'de' preposition
                 words = words.Replace(" de ", " ");
 
-                if ((gender == GrammaticalGender.Feminine) && words.EndsWith("zeci"))
+                if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci"))
                 {
                     words = words.Substring(0, words.Length - 4) + "zece";
                 }
-                else if ((gender == GrammaticalGender.Feminine) && words.Contains("zeci") && (words.Contains("milioane") || words.Contains("miliarde")))
+                else if (gender == GrammaticalGender.Feminine && words.Contains("zeci") && (words.Contains("milioane") || words.Contains("miliarde")))
                 {
                     words = words.Replace("zeci", "zecea");
                 }
 
-                if ((gender == GrammaticalGender.Feminine) && words.StartsWith("un "))
+                if (gender == GrammaticalGender.Feminine && words.StartsWith("un "))
                 {
                     words = words.Substring(2).TrimStart();
                 }
@@ -94,11 +94,11 @@
                 }
 
                 // trim last letter
-                if ((gender == GrammaticalGender.Feminine) && (!words.EndsWith("zece") &&
-                                                               (words.EndsWith("a") ||
-                                                               words.EndsWith("ă") ||
-                                                               words.EndsWith("e") ||
-                                                               words.EndsWith("i"))))
+                if (gender == GrammaticalGender.Feminine && !words.EndsWith("zece") &&
+                    (words.EndsWith("a") ||
+                     words.EndsWith("ă") ||
+                     words.EndsWith("e") ||
+                     words.EndsWith("i")))
                 {
                     words = words.Substring(0, words.Length - 1);
                 }

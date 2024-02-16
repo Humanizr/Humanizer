@@ -218,7 +218,7 @@
             words += HundredsToText(hundreds);
 
             // append text for tens, only those from twenty upward
-            words += ((tens >= 2) ? " " : string.Empty) + _tensOver20NumberToText[tens];
+            words += (tens >= 2 ? " " : string.Empty) + _tensOver20NumberToText[tens];
 
             if (tensAndUnits <= 9)
             {
@@ -233,7 +233,7 @@
             else
             {
                 // exception for zero
-                var unitsText = (units == 0 ? string.Empty : " " + (_joinGroups + " " + GetPartByGender(_units[units], gender)));
+                var unitsText = units == 0 ? string.Empty : " " + _joinGroups + " " + GetPartByGender(_units[units], gender);
 
                 words += unitsText;
             }

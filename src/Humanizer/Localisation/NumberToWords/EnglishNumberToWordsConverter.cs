@@ -40,43 +40,43 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000000000000) > 0)
+            if (number / 1000000000000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000000000000)} quintillion");
                 number %= 1000000000000000000;
             }
 
-            if ((number / 1000000000000000) > 0)
+            if (number / 1000000000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000000000)} quadrillion");
                 number %= 1000000000000000;
             }
 
-            if ((number / 1000000000000) > 0)
+            if (number / 1000000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000000)} trillion");
                 number %= 1000000000000;
             }
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000)} billion");
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000)} million");
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 parts.Add($"{Convert(number / 1000)} thousand");
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 parts.Add($"{Convert(number / 100)} hundred");
                 number %= 100;
@@ -96,7 +96,7 @@
                 else
                 {
                     var lastPart = TensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
                         lastPart += $"-{GetUnitValue(number % 10, isOrdinal)}";
                     }

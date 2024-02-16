@@ -81,7 +81,7 @@
 
         private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
-            var isTimeUnitToGetTheMaximumTimeUnit = (timeUnitToGet == maximumTimeUnit);
+            var isTimeUnitToGetTheMaximumTimeUnit = timeUnitToGet == maximumTimeUnit;
             switch (timeUnitToGet)
             {
                 case TimeUnit.Millisecond:
@@ -171,7 +171,7 @@
             new() { noTimeValue };
 
         private static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts) =>
-            (timeParts.Count(x => x != null) == 0);
+            timeParts.Count(x => x != null) == 0;
 
         private static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
         {

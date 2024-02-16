@@ -49,7 +49,7 @@ namespace Humanizer
         }
 
         private static int NormalizeHour(TimeOnly time) =>
-            time.Hour % 12 != 0 ? (time.Hour % 12) : 12;
+            time.Hour % 12 != 0 ? time.Hour % 12 : 12;
 
         private static string GetArticle(TimeOnly time) =>
             time.Hour is 1 or 13 ? "la" : "las";

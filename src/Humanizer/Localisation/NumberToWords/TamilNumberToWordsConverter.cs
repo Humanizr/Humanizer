@@ -37,13 +37,13 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000000000000) > 0)
+            if (number / 1000000000000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000000000000)} quintillion");
                 number %= 1000000000000000000;
             }
 
-            if ((number / 1000000000000000) > 0)
+            if (number / 1000000000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000000000)} quadrillion");
                 number %= 1000000000000000;
@@ -67,13 +67,13 @@
             //    number %= 1000000;
             //}
 
-            if ((number / 10000000) > 0) parts.Add(GetCroresValue(ref number));
+            if (number / 10000000 > 0) parts.Add(GetCroresValue(ref number));
 
-            if ((number / 100000) > 0) parts.Add(GetLakhsValue(ref number, isOrdinal));
+            if (number / 100000 > 0) parts.Add(GetLakhsValue(ref number, isOrdinal));
 
-            if ((number / 1000) > 0) parts.Add(GetThousandsValue(ref number));
+            if (number / 1000 > 0) parts.Add(GetThousandsValue(ref number));
 
-            if ((number / 100) > 0) parts.Add(GetHundredsValue(ref number));
+            if (number / 100 > 0) parts.Add(GetHundredsValue(ref number));
 
             if (number > 0)
                 parts.Add(GetTensValue(number, isOrdinal));
@@ -106,11 +106,11 @@
             var local_word = "";
             if (number < 20)
                 local_word = GetUnitValue(number, isOrdinal);
-            else if ((number >= 20) && (number <= 99))
+            else if (number >= 20 && number <= 99)
             {
                 var lastPart = TensMap[number / 10];
                 var quot = number / 10;
-                if ((number % 10) > 0)
+                if (number % 10 > 0)
                 {
                     if (quot == 9)
                         lastPart += "ற்றி ";
@@ -156,7 +156,7 @@
             }
             else if (num_above_10 == 1)
                 local_word = "ஒரு " + LakhsMap[0];
-            else local_word += GetTensValue((number / 100000), isOrdinal) + " " + LakhsMap[0];
+            else local_word += GetTensValue(number / 100000, isOrdinal) + " " + LakhsMap[0];
 
             if (number % 1000000 == 0 || number % 100000 == 0)
                 local_word += "ம்";
@@ -219,11 +219,11 @@
                 if (num_above_10 % 10 == 1)
                     local_word += "ஓரா";
                 else if (num_above_10 % 10 > 1)
-                    local_word += ThousandsMap[(num_above_10 % 10) - 1];
+                    local_word += ThousandsMap[num_above_10 % 10 - 1];
 
             }
             else
-                local_word += ThousandsMap[(number / 1000) - 1];
+                local_word += ThousandsMap[number / 1000 - 1];
 
             number %= 1000;
 
@@ -238,7 +238,7 @@
         {
             var local_word = "";
             {
-                local_word = HundredsMap[(number / 100) - 1];
+                local_word = HundredsMap[number / 100 - 1];
                 if (number / 100 == 9)
                 {
                     if (number % 100 == 0)

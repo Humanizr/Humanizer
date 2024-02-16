@@ -13,31 +13,31 @@ namespace Humanizer
             if (numbermoney < 0)
             {
                 Textreturn = "ลบ";
-                numbermoney = -(numbermoney);
+                numbermoney = -numbermoney;
             }
 
-            if ((numbermoney / 1000000) > 0)
+            if (numbermoney / 1000000 > 0)
             {
                 Textreturn += Convert(numbermoney / 1000000) + "ล้าน";
                 numbermoney %= 1000000;
             }
-            if ((numbermoney / 100000) > 0)
+            if (numbermoney / 100000 > 0)
             {
                 Textreturn += Convert(numbermoney / 100000) + "แสน";
                 numbermoney %= 100000;
             }
-            if ((numbermoney / 10000) > 0)
+            if (numbermoney / 10000 > 0)
             {
                 Textreturn += Convert(numbermoney / 10000) + "หมื่น";
                 numbermoney %= 10000;
             }
-            if ((numbermoney / 1000) > 0)
+            if (numbermoney / 1000 > 0)
             {
                 Textreturn += Convert(numbermoney / 1000) + "พัน";
                 numbermoney %= 1000;
             }
 
-            if ((numbermoney / 100) > 0)
+            if (numbermoney / 100 > 0)
             {
                 Textreturn += Convert(numbermoney / 100) + "ร้อย";
                 numbermoney %= 100;
@@ -60,7 +60,7 @@ namespace Humanizer
                 else
                 {
                     Textreturn += tensMap[numbermoney / 10];
-                    if ((numbermoney % 10) > 0)
+                    if (numbermoney % 10 > 0)
                     {
                         Textreturn += "" + unitsMap[numbermoney % 10];
                     }
