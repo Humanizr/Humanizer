@@ -1,8 +1,5 @@
 ﻿namespace Humanizer
 {
-    /// <summary>
-    ///
-    /// </summary>
     public partial class ResourceKeys
     {
         const string Single = "Single";
