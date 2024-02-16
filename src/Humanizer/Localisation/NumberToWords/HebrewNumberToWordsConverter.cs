@@ -118,7 +118,7 @@
             // Big numbers (million and above) always use the masculine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php
 
-            var digits = number / (int)@group;
+            var digits = number / (int)group;
             if (digits == 2)
             {
                 parts.Add("שני");
@@ -128,7 +128,7 @@
                 parts.Add(Convert(digits, GrammaticalGender.Masculine));
             }
 
-            parts.Add(@group.Humanize());
+            parts.Add(group.Humanize());
         }
 
         private void ToThousands(int number, List<string> parts)
