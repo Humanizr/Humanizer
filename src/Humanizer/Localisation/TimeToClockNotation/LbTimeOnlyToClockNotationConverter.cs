@@ -55,15 +55,13 @@ internal class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConv
         return GetFormattedExpression(hourExpression, nextWord);
     }
 
-    private static string GetFormattedExpression(int number, string nextWord)
-    {
-        return (number switch
+    private static string GetFormattedExpression(int number, string nextWord) =>
+        (number switch
         {
             1 or 2 => $"{number.ToWords(GrammaticalGender.Feminine)} {nextWord}",
             7 => $"{number.ToWords(LuxembourgishFormatter.DoesEifelerRuleApply(nextWord) ? WordForm.Eifeler : WordForm.Normal)} {nextWord}",
             _ => $"{number.ToWords()} {nextWord}"
         }).TrimEnd();
-    }
 }
 
 #endif

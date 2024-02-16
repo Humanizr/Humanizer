@@ -28,10 +28,8 @@ namespace Humanizer
             return Convert((int)number, false);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return Convert(number, true);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            Convert(number, true);
 
         private string Convert(int number, bool isOrdinal)
         {
@@ -157,9 +155,7 @@ namespace Humanizer
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        private static bool ExceptionNumbersToWords(int number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
     }
 }

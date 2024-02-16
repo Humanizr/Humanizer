@@ -14,9 +14,7 @@
         [InlineData(200121, "doscientas mil ciento veintiuna")]
         [InlineData(200000121, "doscientos millones ciento veintiuna")]
         [InlineData(1000001, "un millón una")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
     }
 }

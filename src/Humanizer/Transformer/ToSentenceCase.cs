@@ -2,10 +2,8 @@
 {
     internal class ToSentenceCase : ICulturedStringTransformer
     {
-        public string Transform(string input)
-        {
-            return Transform(input, null);
-        }
+        public string Transform(string input) =>
+            Transform(input, null);
 
         public string Transform(string input, CultureInfo culture)
         {

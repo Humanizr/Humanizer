@@ -17,10 +17,8 @@
         [InlineData("102", "102º")]
         [InlineData("103", "103º")]
         [InlineData("1001", "1001º")]
-        public void OrdinalizeString(string number, string ordinalized)
-        {
+        public void OrdinalizeString(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData("0", "0")]
@@ -36,10 +34,8 @@
         [InlineData("102", "102ª")]
         [InlineData("103", "103ª")]
         [InlineData("1001", "1001ª")]
-        public void OrdinalizeStringFeminine(string number, string ordinalized)
-        {
+        public void OrdinalizeStringFeminine(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0")]
@@ -56,10 +52,8 @@
         [InlineData(102, "102º")]
         [InlineData(103, "103º")]
         [InlineData(1001, "1001º")]
-        public void OrdinalizeNumber(int number, string ordinalized)
-        {
+        public void OrdinalizeNumber(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0")]
@@ -76,9 +70,7 @@
         [InlineData(102, "102ª")]
         [InlineData(103, "103ª")]
         [InlineData(1001, "1001ª")]
-        public void OrdinalizeNumberFeminine(int number, string ordinalized)
-        {
+        public void OrdinalizeNumberFeminine(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
     }
 }

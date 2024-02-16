@@ -5,9 +5,7 @@
         /// <summary>
         /// Returns the first of January of the provided year
         /// </summary>
-        public static DateTime TheYear(int year)
-        {
-            return new DateTime(year, 1, 1);
-        }
+        public static DateTime TheYear(int year) =>
+            new(year, 1, 1);
     }
 }

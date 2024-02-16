@@ -13,9 +13,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(TimeUnit.Week, "semaine")]
         [InlineData(TimeUnit.Month, "mois")]
         [InlineData(TimeUnit.Year, "a")]
-        public void ToSymbol(TimeUnit unit, string expected)
-        {
+        public void ToSymbol(TimeUnit unit, string expected) =>
             Assert.Equal(expected, unit.ToSymbol());
-        }
     }
 }

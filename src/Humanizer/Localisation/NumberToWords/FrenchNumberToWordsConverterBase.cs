@@ -185,9 +185,7 @@
             }
         }
 
-        protected virtual string GetTens(long tens)
-        {
-            return TensMap[tens];
-        }
+        protected virtual string GetTens(long tens) =>
+            TensMap[tens];
     }
 }

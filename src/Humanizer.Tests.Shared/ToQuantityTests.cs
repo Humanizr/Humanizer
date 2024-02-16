@@ -68,11 +68,9 @@ namespace Humanizer.Tests
         [InlineData("hour", 1, "1 hour")]
         [InlineData("hour", 0.5, "0.5 hours")]
         [InlineData("hour", 22.4, "22.4 hours")]
-        public void ToDoubleQuantityNumeric(string word, double quantity, string expected)
-        {
+        public void ToDoubleQuantityNumeric(string word, double quantity, string expected) =>
             // ReSharper disable once RedundantArgumentDefaultValue
             Assert.Equal(expected, word.ToQuantity(quantity));
-        }
 
         [Theory]
         [InlineData("case", 0, "zero cases")]
@@ -129,9 +127,7 @@ namespace Humanizer.Tests
             Assert.Equal(expected, word.ToQuantity((long)quantity, format, culture), GetStringComparer(culture));
         }
 
-        internal static StringComparer GetStringComparer(CultureInfo culture)
-        {
-            return StringComparer.Create(culture, false);
-        }
+        internal static StringComparer GetStringComparer(CultureInfo culture) =>
+            StringComparer.Create(culture, false);
     }
 }

@@ -4,16 +4,12 @@
     public class BitFieldEnumHumanizeTests
     {
         [Fact]
-        public void CanHumanizeSingleWordDescriptionAttribute()
-        {
+        public void CanHumanizeSingleWordDescriptionAttribute() =>
             Assert.Equal(BitFlagEnumTestsResources.MemberWithSingleWordDisplayAttribute, BitFieldEnumUnderTest.RED.Humanize());
-        }
 
         [Fact]
-        public void CanHumanizeMultipleWordDescriptionAttribute()
-        {
+        public void CanHumanizeMultipleWordDescriptionAttribute() =>
             Assert.Equal(BitFlagEnumTestsResources.MemberWithMultipleWordDisplayAttribute, BitFieldEnumUnderTest.DARK_GRAY.Humanize());
-        }
 
         [Fact]
         public void CanHumanizeMultipleValueBitFieldEnum()
@@ -23,16 +19,12 @@
         }
 
         [Fact]
-        public void CanHumanizeShortSingleWordDescriptionAttribute()
-        {
+        public void CanHumanizeShortSingleWordDescriptionAttribute() =>
             Assert.Equal(BitFlagEnumTestsResources.MemberWithSingleWordDisplayAttribute, ShortBitFieldEnumUnderTest.RED.Humanize());
-        }
 
         [Fact]
-        public void CanHumanizeShortMultipleWordDescriptionAttribute()
-        {
+        public void CanHumanizeShortMultipleWordDescriptionAttribute() =>
             Assert.Equal(BitFlagEnumTestsResources.MemberWithMultipleWordDisplayAttribute, ShortBitFieldEnumUnderTest.DARK_GRAY.Humanize());
-        }
 
         [Fact]
         public void CanHumanizeShortMultipleValueBitFieldEnum()
@@ -42,9 +34,7 @@
         }
 
         [Fact]
-        public void CanHumanizeBitFieldEnumWithZeroValue()
-        {
+        public void CanHumanizeBitFieldEnumWithZeroValue() =>
             Assert.Equal(BitFlagEnumTestsResources.None, BitFieldEnumUnderTest.NONE.Humanize());
-        }
     }
 }

@@ -17,15 +17,13 @@ namespace Humanizer
                 _ => $"{GetHourExpression(time.Hour)} {normalizedMinutes.ToWords(GrammaticalGender.Feminine)}"
             };
 
-            static string GetHourExpression(int hour)
-            {
-                return hour switch
+            static string GetHourExpression(int hour) =>
+                hour switch
                 {
                     0 => "minuit",
                     12 => "midi",
                     _ => hour.ToWords(GrammaticalGender.Feminine) + (hour > 1 ? " heures" : " heure")
                 };
-            }
         }
     }
 }

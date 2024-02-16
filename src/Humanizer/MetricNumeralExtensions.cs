@@ -121,10 +121,8 @@ namespace Humanizer
         /// </example>
         /// <returns>A valid Metric representation</returns>
         [Obsolete("Please use overload with MetricNumeralFormats")]
-        public static string ToMetric(this int input, bool hasSpace, bool useSymbol = true, int? decimals = null)
-        {
-            return ((double)input).ToMetric(hasSpace, useSymbol, decimals);
-        }
+        public static string ToMetric(this int input, bool hasSpace, bool useSymbol = true, int? decimals = null) =>
+            ((double)input).ToMetric(hasSpace, useSymbol, decimals);
 
         /// <summary>
         /// Converts a number into a valid and Human-readable Metric representation.
@@ -144,10 +142,8 @@ namespace Humanizer
         /// </code>
         /// </example>
         /// <returns>A valid Metric representation</returns>
-        public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null)
-        {
-            return ((double)input).ToMetric(formats, decimals);
-        }
+        public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null) =>
+            ((double)input).ToMetric(formats, decimals);
 
         /// <summary>
         /// Converts a number into a valid and Human-readable Metric representation.
@@ -245,12 +241,10 @@ namespace Humanizer
         /// <param name="input">A Metric representation to parse to a number</param>
         /// <param name="last">The last character of input</param>
         /// <returns>A number build from a Metric representation</returns>
-        private static double BuildNumber(string input, char last)
-        {
-            return char.IsLetter(last)
+        private static double BuildNumber(string input, char last) =>
+            char.IsLetter(last)
                 ? BuildMetricNumber(input, last)
                 : double.Parse(input);
-        }
 
         /// <summary>
         /// Build a number from a metric representation
@@ -273,11 +267,9 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Metric representation with a name or a symbol</param>
         /// <returns>A metric representation with a symbol</returns>
-        private static string ReplaceNameBySymbol(string input)
-        {
-            return UnitPrefixes.Aggregate(input, (current, unitPrefix) =>
+        private static string ReplaceNameBySymbol(string input) =>
+            UnitPrefixes.Aggregate(input, (current, unitPrefix) =>
                 current.Replace(unitPrefix.Value.Name, unitPrefix.Key.ToString()));
-        }
 
         /// <summary>
         /// Build a Metric representation of the number.

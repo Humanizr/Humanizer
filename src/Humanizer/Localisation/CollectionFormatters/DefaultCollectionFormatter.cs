@@ -4,30 +4,20 @@
     {
         protected string DefaultSeparator = "";
 
-        public DefaultCollectionFormatter(string defaultSeparator)
-        {
+        public DefaultCollectionFormatter(string defaultSeparator) =>
             DefaultSeparator = defaultSeparator;
-        }
 
-        public virtual string Humanize<T>(IEnumerable<T> collection)
-        {
-            return Humanize(collection, o => o?.ToString(), DefaultSeparator);
-        }
+        public virtual string Humanize<T>(IEnumerable<T> collection) =>
+            Humanize(collection, o => o?.ToString(), DefaultSeparator);
 
-        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter)
-        {
-            return Humanize(collection, objectFormatter, DefaultSeparator);
-        }
+        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter) =>
+            Humanize(collection, objectFormatter, DefaultSeparator);
 
-        public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter)
-        {
-            return Humanize(collection, objectFormatter, DefaultSeparator);
-        }
+        public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter) =>
+            Humanize(collection, objectFormatter, DefaultSeparator);
 
-        public virtual string Humanize<T>(IEnumerable<T> collection, string separator)
-        {
-            return Humanize(collection, o => o?.ToString(), separator);
-        }
+        public virtual string Humanize<T>(IEnumerable<T> collection, string separator) =>
+            Humanize(collection, o => o?.ToString(), separator);
 
         public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
         {

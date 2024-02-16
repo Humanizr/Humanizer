@@ -30,15 +30,11 @@
             {19, "열아홉째"},
         };
 
-        public override string Convert(long number)
-        {
-            return ConvertImpl(number, false);
-        }
+        public override string Convert(long number) =>
+            ConvertImpl(number, false);
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return ConvertImpl(number, true);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            ConvertImpl(number, true);
 
         private string ConvertImpl(long number, bool isOrdinal)
         {

@@ -21,15 +21,11 @@
             {12, "பனிரெண்டாவது"},
         };
 
-        public override string Convert(long number)
-        {
-            return ConvertImpl(number, false);
-        }
+        public override string Convert(long number) =>
+            ConvertImpl(number, false);
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return ConvertImpl(number, true);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            ConvertImpl(number, true);
 
         private string ConvertImpl(long number, bool isOrdinal)
         {
@@ -270,9 +266,7 @@
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(long number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        private static bool ExceptionNumbersToWords(long number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
     }
 }

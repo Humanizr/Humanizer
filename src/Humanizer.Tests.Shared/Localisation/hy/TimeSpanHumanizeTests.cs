@@ -9,10 +9,8 @@
         [InlineData(731, "2 տարի")]
         [InlineData(1096, "3 տարի")]
         [InlineData(4018, "11 տարի")]
-        public void Years(int days, string expected)
-        {
+        public void Years(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [Trait("Translation", "Native speaker")]
@@ -20,10 +18,8 @@
         [InlineData(61, "2 ամիս")]
         [InlineData(92, "3 ամիս")]
         [InlineData(335, "11 ամիս")]
-        public void Months(int days, string expected)
-        {
+        public void Months(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [InlineData(7, "մեկ շաբաթ")]
@@ -32,10 +28,8 @@
         [InlineData(28, "4 շաբաթ")]
         [InlineData(35, "5 շաբաթ")]
         [InlineData(77, "11 շաբաթ")]
-        public void Weeks(int days, string expected)
-        {
+        public void Weeks(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "մեկ օր")]
@@ -44,10 +38,8 @@
         [InlineData(4, "4 օր")]
         [InlineData(5, "5 օր")]
         [InlineData(6, "6 օր")]
-        public void Days(int days, string expected)
-        {
+        public void Days(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "մեկ ժամ")]
@@ -63,10 +55,8 @@
         [InlineData(21, "21 ժամ")]
         [InlineData(22, "22 ժամ")]
         [InlineData(23, "23 ժամ")]
-        public void Hours(int hours, string expected)
-        {
+        public void Hours(int hours, string expected) =>
             Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "մեկ րոպե")]
@@ -85,10 +75,8 @@
         [InlineData(24, "24 րոպե")]
         [InlineData(25, "25 րոպե")]
         [InlineData(40, "40 րոպե")]
-        public void Minutes(int minutes, string expected)
-        {
+        public void Minutes(int minutes, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "մեկ վայրկյան")]
@@ -107,10 +95,8 @@
         [InlineData(24, "24 վայրկյան")]
         [InlineData(25, "25 վայրկյան")]
         [InlineData(40, "40 վայրկյան")]
-        public void Seconds(int seconds, string expected)
-        {
+        public void Seconds(int seconds, string expected) =>
             Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "մեկ միլիվայրկյան")]
@@ -129,22 +115,16 @@
         [InlineData(24, "24 միլիվայրկյան")]
         [InlineData(25, "25 միլիվայրկյան")]
         [InlineData(40, "40 միլիվայրկյան")]
-        public void Milliseconds(int milliseconds, string expected)
-        {
+        public void Milliseconds(int milliseconds, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
-        }
 
         [Fact]
-        public void NoTime()
-        {
+        public void NoTime() =>
             Assert.Equal("0 միլիվայրկյան", TimeSpan.Zero.Humanize());
-        }
 
         [Fact]
-        public void NoTimeToWords()
-        {
+        public void NoTimeToWords() =>
             // This one doesn't make a lot of sense but ... w/e
             Assert.Equal("ժամանակը բացակայում է", TimeSpan.Zero.Humanize(toWords: true));
-        }
     }
 }

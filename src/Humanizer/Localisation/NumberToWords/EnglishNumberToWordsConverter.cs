@@ -17,20 +17,14 @@
             {12, "twelfth"},
         };
 
-        public override string Convert(long number)
-        {
-            return Convert(number, false);
-        }
+        public override string Convert(long number) =>
+            Convert(number, false);
 
-        public override string Convert(long number, bool addAnd = true)
-        {
-            return Convert(number, false, addAnd);
-        }
+        public override string Convert(long number, bool addAnd = true) =>
+            Convert(number, false, addAnd);
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return Convert(number, true);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            Convert(number, true);
 
         private string Convert(long number, bool isOrdinal, bool addAnd = true)
         {
@@ -159,10 +153,8 @@
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(long number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        private static bool ExceptionNumbersToWords(long number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
 
         public override string ConvertToTuple(int number)
         {

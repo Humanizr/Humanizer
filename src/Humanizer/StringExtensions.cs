@@ -10,10 +10,8 @@
         /// </summary>
         /// <param name="format">string format</param>
         /// <param name="args">arguments</param>
-        public static string FormatWith(this string format, params object[] args)
-        {
-            return string.Format(format, args);
-        }
+        public static string FormatWith(this string format, params object[] args) =>
+            string.Format(format, args);
 
         /// <summary>
         /// Extension method to format string with passed arguments using specified format provider (i.e. CultureInfo)
@@ -21,9 +19,7 @@
         /// <param name="format">string format</param>
         /// <param name="provider">An object that supplies culture-specific formatting information</param>
         /// <param name="args">arguments</param>
-        public static string FormatWith(this string format, IFormatProvider provider, params object[] args)
-        {
-            return string.Format(provider, format, args);
-        }
+        public static string FormatWith(this string format, IFormatProvider provider, params object[] args) =>
+            string.Format(provider, format, args);
     }
 }

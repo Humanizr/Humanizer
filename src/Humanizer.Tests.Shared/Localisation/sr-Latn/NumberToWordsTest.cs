@@ -38,9 +38,7 @@
         [InlineData(81, "osamdeset jedan")]
         [InlineData(213, "dvesto trinaest")]
         [InlineData(547, "petsto četrdeset sedam")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
     }
 }

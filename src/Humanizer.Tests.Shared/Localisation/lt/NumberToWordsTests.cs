@@ -136,10 +136,8 @@
         [InlineData(100000000, "šimtas milijonų")]
         [InlineData(800000000, "aštuoni šimtai milijonų")]
         [InlineData(9223372036854775807, "devyni kvintilijonai du šimtai dvidešimt trys kvadrilijonai trys šimtai septyniasdešimt du trilijonai trisdešimt šeši milijardai aštuoni šimtai penkiasdešimt keturi milijonai septyni šimtai septyniasdešimt penki tūkstančiai aštuoni šimtai septyni")]
-        public void ToWordsMasculine(long number, string expected)
-        {
+        public void ToWordsMasculine(long number, string expected) =>
             Assert.Equal(expected, number.ToWords(gender: GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(-1, "minus viena")]
@@ -274,10 +272,8 @@
         [InlineData(100000000, "šimtas milijonų")]
         [InlineData(800000000, "aštuoni šimtai milijonų")]
         [InlineData(9223372036854775807, "devyni kvintilijonai du šimtai dvidešimt trys kvadrilijonai trys šimtai septyniasdešimt du trilijonai trisdešimt šeši milijardai aštuoni šimtai penkiasdešimt keturi milijonai septyni šimtai septyniasdešimt penki tūkstančiai aštuoni šimtai septynios")]
-        public void ToWordsFeminine(long number, string expected)
-        {
+        public void ToWordsFeminine(long number, string expected) =>
             Assert.Equal(expected, number.ToWords(gender: GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(-1, "minus pirmas")]
@@ -410,10 +406,8 @@
         [InlineData(70000000, "septyniasdešimt milijonas")]
         [InlineData(100000000, "šimtas milijonas")]
         [InlineData(800000000, "aštuoni šimtai milijonas")]
-        public void ToOrdinalWordsMasculine(int number, string expected)
-        {
+        public void ToOrdinalWordsMasculine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(-1, "minus pirma")]
@@ -546,9 +540,7 @@
         [InlineData(70000000, "septyniasdešimt milijona")]
         [InlineData(100000000, "šimtas milijona")]
         [InlineData(800000000, "aštuoni šimtai milijona")]
-        public void ToOrdinalWordsFeminine(int number, string expected)
-        {
+        public void ToOrdinalWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
     }
 }

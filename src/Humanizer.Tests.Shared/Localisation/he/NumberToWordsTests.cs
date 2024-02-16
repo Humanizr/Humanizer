@@ -47,10 +47,8 @@
         [InlineData(1000000000, "מיליארד")]
         [InlineData(1000000001, "מיליארד ואחת")]
         [InlineData(int.MaxValue /* 2147483647 */, "שני מיליארד מאה ארבעים ושבעה מיליון ארבע מאות שמונים ושלוש אלף שש מאות ארבעים ושבע")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "אפס")]
@@ -96,16 +94,12 @@
         [InlineData(1000000000, "מיליארד")]
         [InlineData(1000000001, "מיליארד ואחד")]
         [InlineData(int.MaxValue /* 2147483647 */, "שני מיליארד מאה ארבעים ושבעה מיליון ארבע מאות שמונים ושלוש אלף שש מאות ארבעים ושבעה")]
-        public void ToWordsMasculine(int number, string expected)
-        {
+        public void ToWordsMasculine(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(-2, "מינוס שתיים")]
-        public void NegativeToWords(int number, string expected)
-        {
+        public void NegativeToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
     }
 }

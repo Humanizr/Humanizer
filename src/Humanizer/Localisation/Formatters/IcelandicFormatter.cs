@@ -6,10 +6,9 @@
         private const string LocaleCode = "is";
         private readonly CultureInfo _localCulture = new(LocaleCode);
 
-        public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
-        {
-            return base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');
-        }
+        public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
+            base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');
+
         protected override string Format(string resourceKey, int number, bool toWords = false)
         {
             var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _localCulture);

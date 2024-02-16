@@ -13,10 +13,8 @@
         /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
-            where TTargetEnum : struct, IComparable, IFormattable
-        {
-            return (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ThrowsException);
-        }
+            where TTargetEnum : struct, IComparable, IFormattable =>
+            (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ThrowsException);
 
         /// <summary>
         /// Dehumanizes a string into the Enum it was originally Humanized from!
@@ -26,10 +24,8 @@
         /// <param name="onNoMatch">What to do when input is not matched to the enum.</param>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <exception cref="ArgumentException">If targetEnum is not an enum</exception>
-        public static Enum DehumanizeTo(this string input, Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
-        {
-            return (Enum)DehumanizeToPrivate(input, targetEnum, onNoMatch);
-        }
+        public static Enum DehumanizeTo(this string input, Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException) =>
+            (Enum)DehumanizeToPrivate(input, targetEnum, onNoMatch);
 
         private static object DehumanizeToPrivate(string input, Type targetEnum, OnNoMatch onNoMatch)
         {

@@ -23,10 +23,8 @@
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
-        {
-            return Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords);
-        }
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false) =>
+            Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords);
 
         /// <summary>
         /// Turns a TimeSpan into a human readable form. E.g. 1 day.
@@ -120,10 +118,8 @@
             }
         }
 
-        private static int GetSpecialCaseYearAsInteger(TimeSpan timespan)
-        {
-            return (int)(timespan.Days / _daysInAYear);
-        }
+        private static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
+            (int)(timespan.Days / _daysInAYear);
 
         private static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
         {
@@ -165,23 +161,17 @@
             return timeNumberOfUnits;
         }
 
-        private static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false)
-        {
+        private static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
             // Always use positive units to account for negative timespans
-            return amountOfTimeUnits != 0
+            amountOfTimeUnits != 0
                 ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
                 : null;
-        }
 
-        private static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue)
-        {
-            return new List<string>() { noTimeValue };
-        }
+        private static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
+            new() { noTimeValue };
 
-        private static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts)
-        {
-            return (timeParts.Count(x => x != null) == 0);
-        }
+        private static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts) =>
+            (timeParts.Count(x => x != null) == 0);
 
         private static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
         {

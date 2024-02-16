@@ -47,10 +47,8 @@
             { 1000, "χιλιοστός" }
         };
 
-        public override string Convert(long number)
-        {
-            return ConvertImpl(number, false);
-        }
+        public override string Convert(long number) =>
+            ConvertImpl(number, false);
 
         public override string ConvertToOrdinal(int number)
         {
@@ -176,10 +174,8 @@
             return "";
         }
 
-        private string ConvertIntB13(long number, bool returnPluralized)
-        {
-            return returnPluralized ? UnitsMap[number] : UnitMap[number];
-        }
+        private string ConvertIntB13(long number, bool returnPluralized) =>
+            returnPluralized ? UnitsMap[number] : UnitMap[number];
 
         private string ConvertIntBH(long number, bool returnPluralized)
         {

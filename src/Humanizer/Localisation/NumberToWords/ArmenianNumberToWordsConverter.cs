@@ -14,10 +14,8 @@
             {4, "չորրորդ"}
         };
 
-        public override string Convert(long number)
-        {
-            return ConvertImpl(number, false);
-        }
+        public override string Convert(long number) =>
+            ConvertImpl(number, false);
 
         public override string ConvertToOrdinal(int number)
         {
@@ -172,9 +170,7 @@
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(long number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        private static bool ExceptionNumbersToWords(long number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
     }
 }

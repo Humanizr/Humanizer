@@ -68,9 +68,7 @@
             return $"{word}{(IsVowel(word[word.Length - 1]) ? "یەم" : "ەم")}";
         }
 
-        private bool IsVowel(char c)
-        {
-            return c is 'ا' or 'ێ' or 'ۆ' or 'ە' or 'ی';
-        }
+        private bool IsVowel(char c) =>
+            c is 'ا' or 'ێ' or 'ۆ' or 'ە' or 'ی';
     }
 }

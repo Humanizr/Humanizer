@@ -47,12 +47,12 @@ namespace Humanizer.Tests
         /// <summary>
         /// Gets the culture.
         /// </summary>
-        public CultureInfo Culture { get { return culture.Value; } }
+        public CultureInfo Culture => culture.Value;
 
         /// <summary>
         /// Gets the UI culture.
         /// </summary>
-        public CultureInfo UICulture { get { return uiCulture.Value; } }
+        public CultureInfo UICulture => uiCulture.Value;
 
         /// <summary>
         /// Stores the current <see cref="CultureInfo.CurrentCulture" />

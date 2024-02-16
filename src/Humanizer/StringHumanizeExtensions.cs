@@ -24,10 +24,8 @@ namespace Humanizer
             FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
         }
 
-        private static string FromUnderscoreDashSeparatedWords(string input)
-        {
-            return string.Join(" ", input.Split(new[] { '_', '-' }));
-        }
+        private static string FromUnderscoreDashSeparatedWords(string input) =>
+            string.Join(" ", input.Split(new[] { '_', '-' }));
 
         private static string FromPascalCase(string input)
         {
@@ -80,9 +78,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">The string to be humanized</param>
         /// <param name="casing">The desired casing for the output</param>
-        public static string Humanize(this string input, LetterCasing casing)
-        {
-            return input.Humanize().ApplyCase(casing);
-        }
+        public static string Humanize(this string input, LetterCasing casing) =>
+            input.Humanize().ApplyCase(casing);
     }
 }

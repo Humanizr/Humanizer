@@ -9,10 +9,8 @@
         [InlineData(731, "2 roky")]
         [InlineData(1096, "3 roky")]
         [InlineData(4018, "11 let")]
-        public void Years(int days, string expected)
-        {
+        public void Years(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [Trait("Translation", "Google")]
@@ -20,10 +18,8 @@
         [InlineData(61, "2 měsíce")]
         [InlineData(92, "3 měsíce")]
         [InlineData(335, "11 měsíců")]
-        public void Months(int days, string expected)
-        {
+        public void Months(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [InlineData(1, "1 milisekunda")]
@@ -33,10 +29,8 @@
         [InlineData(5, "5 milisekund")]
         [InlineData(6, "6 milisekund")]
         [InlineData(10, "10 milisekund")]
-        public void Milliseconds(int number, string expected)
-        {
+        public void Milliseconds(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMilliseconds(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 sekunda")]
@@ -46,10 +40,8 @@
         [InlineData(5, "5 sekund")]
         [InlineData(6, "6 sekund")]
         [InlineData(10, "10 sekund")]
-        public void Seconds(int number, string expected)
-        {
+        public void Seconds(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromSeconds(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 minuta")]
@@ -59,10 +51,8 @@
         [InlineData(5, "5 minut")]
         [InlineData(6, "6 minut")]
         [InlineData(10, "10 minut")]
-        public void Minutes(int number, string expected)
-        {
+        public void Minutes(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMinutes(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 hodina")]
@@ -72,10 +62,8 @@
         [InlineData(5, "5 hodin")]
         [InlineData(6, "6 hodin")]
         [InlineData(10, "10 hodin")]
-        public void Hours(int number, string expected)
-        {
+        public void Hours(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromHours(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 den")]
@@ -84,10 +72,8 @@
         [InlineData(4, "4 dny")]
         [InlineData(5, "5 dnů")]
         [InlineData(6, "6 dnů")]
-        public void Days(int number, string expected)
-        {
+        public void Days(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 týden")]
@@ -96,9 +82,7 @@
         [InlineData(4, "4 týdny")]
         [InlineData(5, "5 týdnů")]
         [InlineData(6, "6 týdnů")]
-        public void Weeks(int number, string expected)
-        {
+        public void Weeks(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
-        }
     }
 }

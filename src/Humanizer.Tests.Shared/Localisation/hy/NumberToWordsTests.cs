@@ -83,10 +83,8 @@
             "ութ հարյուր հիսունչորս միլիոն " +
             "յոթ հարյուր յոթանասունհինգ հազար " +
             "ութ հարյուր ութ")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "զրոյական")]
@@ -152,9 +150,7 @@
         [InlineData(1111111000, "մեկ միլիարդ հարյուր տասնմեկ միլիոն հարյուր տասնմեկ հազարերորդ")]
         [InlineData(1234567000, "մեկ միլիարդ երկու հարյուր երեսունչորս միլիոն հինգ հարյուր վաթսունյոթ հազարերորդ")]
         [InlineData(-751633617, "մինուս յոթ հարյուր հիսունմեկ միլիոն վեց հարյուր երեսուներեք հազար վեց հարյուր տասնյոթերորդ")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
     }
 }

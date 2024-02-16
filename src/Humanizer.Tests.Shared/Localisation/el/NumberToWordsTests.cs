@@ -26,9 +26,7 @@
         [InlineData(1190, "χίλια εκατόν ενενήντα")]
 
         [Theory]
-        public void ToWordsInt(int number, string expected)
-        {
+        public void ToWordsInt(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
     }
 }

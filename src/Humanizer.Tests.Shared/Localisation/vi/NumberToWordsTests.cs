@@ -45,10 +45,8 @@
         [InlineData(1000000000, "một tỉ")]
         [InlineData(1111111111111111, "một triệu một trăm mười một nghìn một trăm mười một tỉ một trăm mười một triệu một trăm mười một nghìn một trăm mười một")]
         [InlineData(5101101101101151101, "năm tỉ một trăm linh một triệu một trăm linh một nghìn một trăm linh một tỉ một trăm linh một triệu một trăm năm mươi mốt nghìn một trăm linh một")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "thứ không")]
@@ -68,9 +66,7 @@
         [InlineData(21, "thứ hai mươi mốt")]
         [InlineData(24, "thứ hai mươi tư")]
         [InlineData(25, "thứ hai mươi lăm")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
     }
 }

@@ -9,10 +9,8 @@
         [InlineData(731, "2 metai")]
         [InlineData(1096, "3 metai")]
         [InlineData(4018, "11 metų")]
-        public void Years(int days, string expected)
-        {
+        public void Years(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [Trait("Translation", "Native speaker")]
@@ -20,10 +18,8 @@
         [InlineData(61, "2 mėnesiai")]
         [InlineData(280, "9 mėnesiai")]
         [InlineData(330, "10 mėnesių")]
-        public void Months(int days, string expected)
-        {
+        public void Months(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [InlineData(7, "1 savaitė")]
@@ -31,10 +27,8 @@
         [InlineData(21, "3 savaitės")]
         [InlineData(77, "11 savaičių")]
         [InlineData(147, "21 savaitė")]
-        public void Weeks(int days, string expected)
-        {
+        public void Weeks(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 diena")]
@@ -43,10 +37,8 @@
         [InlineData(10, "10 dienų")]
         [InlineData(17, "17 dienų")]
         [InlineData(21, "21 diena")]
-        public void Days(int days, string expected)
-        {
+        public void Days(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Day));
-        }
 
         [Theory]
         [InlineData(1, "1 valanda")]
@@ -56,10 +48,8 @@
         [InlineData(10, "10 valandų")]
         [InlineData(19, "19 valandų")]
         [InlineData(21, "21 valanda")]
-        public void Hours(int hours, string expected)
-        {
+        public void Hours(int hours, string expected) =>
             Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 minutė")]
@@ -69,10 +59,8 @@
         [InlineData(10, "10 minučių")]
         [InlineData(19, "19 minučių")]
         [InlineData(21, "21 minutė")]
-        public void Minutes(int minutes, string expected)
-        {
+        public void Minutes(int minutes, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 sekundė")]
@@ -82,10 +70,8 @@
         [InlineData(10, "10 sekundžių")]
         [InlineData(19, "19 sekundžių")]
         [InlineData(21, "21 sekundė")]
-        public void Seconds(int seconds, string expected)
-        {
+        public void Seconds(int seconds, string expected) =>
             Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 milisekundė")]
@@ -95,21 +81,15 @@
         [InlineData(10, "10 milisekundžių")]
         [InlineData(19, "19 milisekundžių")]
         [InlineData(21, "21 milisekundė")]
-        public void Milliseconds(int milliseconds, string expected)
-        {
+        public void Milliseconds(int milliseconds, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
-        }
 
         [Fact]
-        public void NoTime()
-        {
+        public void NoTime() =>
             Assert.Equal("0 milisekundžių", TimeSpan.Zero.Humanize());
-        }
 
         [Fact]
-        public void NoTimeToWords()
-        {
+        public void NoTimeToWords() =>
             Assert.Equal("nėra laiko", TimeSpan.Zero.Humanize(toWords: true));
-        }
     }
 }

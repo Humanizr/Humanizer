@@ -37,7 +37,7 @@ namespace Humanizer.Tests
         public const string MemberWithoutDescriptionAttributeLowerCase = "member without description attribute";
         public const string MemberWithDisplayAttribute = "Description from Display attribute";
         public const string MemberWithDisplayAttributeWithoutDescription = "Displayattribute without description";
-        public static string MemberWithLocalizedDisplayAttribute { get { return "Localized description from Display attribute"; } }
+        public static string MemberWithLocalizedDisplayAttribute => "Localized description from Display attribute";
     }
 
     public class ImposterDescriptionAttribute(int description) :
@@ -55,10 +55,7 @@ namespace Humanizer.Tests
     public class DescriptionSubclassAttribute(string description) :
         DescriptionAttribute(description)
     {
-        public override string Description
-        {
-            get { return "Overridden " + base.Description; }
-        }
+        public override string Description => "Overridden " + base.Description;
     }
 
     public class CustomPropertyAttribute(string info) :

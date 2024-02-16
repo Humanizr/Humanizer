@@ -105,10 +105,8 @@
 
             return word;
         }
-        public override string Convert(long input)
-        {
-            return Convert(input, GrammaticalGender.Neuter);
-        }
+        public override string Convert(long input) =>
+            Convert(input, GrammaticalGender.Neuter);
 
         private static string[] ordinalNumbers = new[]
         {

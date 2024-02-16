@@ -28,10 +28,8 @@ namespace Humanizer
             return Convert((int)number, false, gender);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return Convert(number, true, gender);
-        }
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            Convert(number, true, gender);
 
         private string Convert(int number, bool isOrdinal, GrammaticalGender gender)
         {
@@ -160,10 +158,8 @@ namespace Humanizer
             }
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        private static bool ExceptionNumbersToWords(int number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
 
         private string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)
         {

@@ -12,10 +12,8 @@
         {
             public string Description { get; set; }
 
-            public DescriptionAttribute(string description)
-            {
+            public DescriptionAttribute(string description) =>
                 Description = description;
-            }
         }
 
         private enum Group
@@ -29,10 +27,8 @@
         }
 
         public HebrewNumberToWordsConverter(CultureInfo culture)
-            : base(GrammaticalGender.Feminine)
-        {
+            : base(GrammaticalGender.Feminine) =>
             _culture = culture;
-        }
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
@@ -121,10 +117,8 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return number.ToString(_culture);
-        }
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            number.ToString(_culture);
 
         private void ToBigNumber(int number, Group group, List<string> parts)
         {

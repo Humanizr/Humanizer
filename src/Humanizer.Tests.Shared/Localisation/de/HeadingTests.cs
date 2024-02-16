@@ -53,10 +53,8 @@
         [InlineData(348.8, "N")]
         [InlineData(720, "N")]
         [Theory]
-        public void ToHeadingAbbreviated(double heading, string expected)
-        {
+        public void ToHeadingAbbreviated(double heading, string expected) =>
             Assert.Equal(expected, heading.ToHeading());
-        }
 
         [InlineData(0, "Nord")]
         [InlineData(22.5, "Nordnordost")]
@@ -76,10 +74,8 @@
         [InlineData(337.5, "Nordnordwest")]
         [InlineData(720, "Nord")]
         [Theory]
-        public void ToHeading(double heading, string expected)
-        {
+        public void ToHeading(double heading, string expected) =>
             Assert.Equal(expected, heading.ToHeading(HeadingStyle.Full));
-        }
 
         [InlineData("N", 0)]
         [InlineData("NNO", 22.5)]
@@ -98,9 +94,7 @@
         [InlineData("NW", 315)]
         [InlineData("NNW", 337.5)]
         [Theory]
-        public void FromShortHeading(string heading, double expected)
-        {
+        public void FromShortHeading(string heading, double expected) =>
             Assert.Equal(expected, heading.FromAbbreviatedHeading());
-        }
     }
 }

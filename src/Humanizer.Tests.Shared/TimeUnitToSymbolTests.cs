@@ -12,9 +12,7 @@
         [InlineData(TimeUnit.Week, "week")]
         [InlineData(TimeUnit.Month, "mo")]
         [InlineData(TimeUnit.Year, "y")]
-        public void ToSymbol(TimeUnit unit, string expected)
-        {
+        public void ToSymbol(TimeUnit unit, string expected) =>
             Assert.Equal(expected, unit.ToSymbol());
-        }
     }
 }

@@ -2,15 +2,11 @@
 {
     internal class SpanishOrdinalizer : DefaultOrdinalizer
     {
-        public override string Convert(int number, string numberString)
-        {
-            return Convert(number, numberString, GrammaticalGender.Masculine, WordForm.Normal);
-        }
+        public override string Convert(int number, string numberString) =>
+            Convert(number, numberString, GrammaticalGender.Masculine, WordForm.Normal);
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
-        {
-            return Convert(number, numberString, gender, WordForm.Normal);
-        }
+        public override string Convert(int number, string numberString, GrammaticalGender gender) =>
+            Convert(number, numberString, gender, WordForm.Normal);
 
         public override string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm)
         {
@@ -39,14 +35,10 @@
 
         static CultureInfo _spanishCulture = new("es-ES");
 
-        private static string GetNumberString(int number)
-        {
-            return number.ToString(_spanishCulture);
-        }
+        private static string GetNumberString(int number) =>
+            number.ToString(_spanishCulture);
 
-        private static string GetWordForm(int number, WordForm wordForm)
-        {
-            return (number % 10 == 1 || number % 10 == 3) && wordForm == WordForm.Abbreviation ? ".er" : ".º";
-        }
+        private static string GetWordForm(int number, WordForm wordForm) =>
+            (number % 10 == 1 || number % 10 == 3) && wordForm == WordForm.Abbreviation ? ".er" : ".º";
     }
 }

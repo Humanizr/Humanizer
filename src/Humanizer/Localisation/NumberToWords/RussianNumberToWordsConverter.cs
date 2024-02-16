@@ -223,10 +223,8 @@
             return 2;
         }
 
-        private static string ChooseOneForGrammaticalNumber(long number, string[] forms)
-        {
-            return forms[GetIndex(RussianGrammaticalNumberDetector.Detect(number))];
-        }
+        private static string ChooseOneForGrammaticalNumber(long number, string[] forms) =>
+            forms[GetIndex(RussianGrammaticalNumberDetector.Detect(number))];
 
         private static string GetEndingForGender(GrammaticalGender gender, long number)
         {
