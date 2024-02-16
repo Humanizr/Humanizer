@@ -369,7 +369,7 @@ namespace Humanizer
             var index = input.Length - 1;
             var last = input[index];
             var isSymbol = Symbols[0].Contains(last) || Symbols[1].Contains(last);
-            return !double.TryParse(isSymbol ? input.Remove(index) : input, out var number);
+            return !double.TryParse(isSymbol ? input.Remove(index) : input, out _);
         }
 
         private struct UnitPrefix(string name, string shortScaleWord, string longScaleWord = null)
