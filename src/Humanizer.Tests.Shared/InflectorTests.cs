@@ -402,6 +402,18 @@ namespace Humanizer.Tests
             yield return new object[] { "z", "zs" };
             yield return new object[] { "Z", "Zs" };
             yield return new object[] { "1", "1s" };
+
+            //Issue #1252
+            yield return new object[] { "pliers", "pliers" };
+            yield return new object[] { "sheers", "sheers" };
+            yield return new object[] { "valve", "valves" };
+            yield return new object[] { "clothes", "clothes" };
+            yield return new object[] { "lens", "lenses" };
+            yield return new object[] { "apparatus", "apparatus" };
+            yield return new object[] { "clove", "cloves" };
+            yield return new object[] { "chassis", "chassis" };
+            yield return new object[] { "explosive", "explosives" };
+            yield return new object[] { "debris", "debris" };
         }
 
         IEnumerator IEnumerable.GetEnumerator()
