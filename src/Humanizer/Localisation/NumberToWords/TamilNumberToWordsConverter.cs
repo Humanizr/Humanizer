@@ -206,8 +206,8 @@
 
             number %= 10000000;
             return local_word;
-
         }
+
         private static string GetThousandsValue(ref long number)
         {
             var num_above_10 = number / 1000;

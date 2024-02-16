@@ -30,7 +30,6 @@
             }
 
             return $"al {numberString}-lea";
-
         }
     }
 }

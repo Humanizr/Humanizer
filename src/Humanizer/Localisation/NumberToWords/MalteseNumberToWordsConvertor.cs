@@ -231,7 +231,6 @@
             }
 
             return $"{GetHundreds(thousands, true, usePrefixMapForLowerValueDigits, gender)} {plural}";
-
         }
     }
 }
