@@ -100,7 +100,7 @@
         /// <param name="number">The three-digit set to convert.</param>
         /// <param name="thisIsLastSet">True if the current three-digit set is the last in the word.</param>
         /// <returns>The same three-digit set expressed as text.</returns>
-        protected static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
+        static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
         {
             if (number == 0)
             {
