@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class CzechSlovakPolishFormatter(string localeCode) :
+    class CzechSlovakPolishFormatter(string localeCode) :
         DefaultFormatter(localeCode)
     {
         private const string PaucalPostfix = "_Paucal";

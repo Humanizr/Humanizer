@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
+    class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"];
         private static readonly string[] TensMap = ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"];

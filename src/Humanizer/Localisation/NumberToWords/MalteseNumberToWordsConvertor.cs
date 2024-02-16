@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class MalteseNumberToWordsConvertor : GenderedNumberToWordsConverter
+    class MalteseNumberToWordsConvertor : GenderedNumberToWordsConverter
     {
         private static readonly string[] OrdinalOverrideMap =
         [

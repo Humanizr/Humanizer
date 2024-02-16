@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class MalteseFormatter(string localeCode) :
+    class MalteseFormatter(string localeCode) :
         DefaultFormatter(localeCode)
     {
         private const string DualPostfix = "_Dual";

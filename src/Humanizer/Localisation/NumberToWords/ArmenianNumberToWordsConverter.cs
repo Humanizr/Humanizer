@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class ArmenianNumberToWordsConverter :
+    class ArmenianNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];

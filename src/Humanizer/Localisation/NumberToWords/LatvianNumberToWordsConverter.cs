@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class LatvianNumberToWordsConverter : GenderedNumberToWordsConverter
+    class LatvianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["nulle", "vien", "div", "trīs", "četr", "piec", "seš", "septiņ", "astoņ", "deviņ", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit"];
         private static readonly string[] TensMap = ["nulle", "desmit", "divdesmit", "trīsdesmit", "četrdesmit", "piecdesmit", "sešdesmit", "septiņdesmit", "astoņdesmit", "deviņdesmit"];

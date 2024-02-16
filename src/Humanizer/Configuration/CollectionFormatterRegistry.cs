@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
+    class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
     {
         public CollectionFormatterRegistry()
             : base(new DefaultCollectionFormatter("&"))

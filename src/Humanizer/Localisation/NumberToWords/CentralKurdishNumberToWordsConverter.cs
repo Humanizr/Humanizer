@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class CentralKurdishNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class CentralKurdishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] KurdishHundredsMap = ["سفر", "سەد", "دوو سەد", "سێ سەد", "چوار سەد", "پێنج سەد", "شەش سەد", "حەوت سەد", "هەشت سەد", "نۆ سەد"];
         private static readonly string[] KurdishTensMap = ["سفر", "دە", "بیست", "سی", "چل", "پەنجا", "شەست", "حەفتا", "هەشتا", "نەوەد"];

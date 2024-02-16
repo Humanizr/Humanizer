@@ -1,6 +1,6 @@
 namespace Humanizer
 {
-    internal class ToLowerCase : ICulturedStringTransformer
+    class ToLowerCase : ICulturedStringTransformer
     {
         public string Transform(string input) =>
             Transform(input, null);

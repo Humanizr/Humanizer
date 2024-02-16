@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWordConverter>
+    class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWordConverter>
     {
         public DateToOrdinalWordsConverterRegistry() : base(new DefaultDateToOrdinalWordConverter())
         {

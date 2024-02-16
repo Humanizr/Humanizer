@@ -2,7 +2,7 @@
 
 namespace Humanizer
 {
-    internal class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
+    class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
         private const int MORNING = 6;
         private const int NOON = 12;

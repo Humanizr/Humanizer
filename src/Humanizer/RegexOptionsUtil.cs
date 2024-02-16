@@ -1,6 +1,6 @@
 namespace Humanizer
 {
-    internal static class RegexOptionsUtil
+    static class RegexOptionsUtil
     {
         static RegexOptionsUtil() =>
             Compiled = Enum.TryParse("Compiled", out RegexOptions compiled) ? compiled : RegexOptions.None;

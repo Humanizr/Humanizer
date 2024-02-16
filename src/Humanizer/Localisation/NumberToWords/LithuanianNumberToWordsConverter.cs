@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
+    class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["nulis", "vienas", "du", "trys", "keturi", "penki", "šeši", "septyni", "aštuoni", "devyni", "dešimt", "vienuolika", "dvylika", "trylika", "keturiolika", "penkiolika", "šešiolika", "septyniolika", "aštuoniolika", "devyniolika"];
         private static readonly string[] TensMap = [string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"];

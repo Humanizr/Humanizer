@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal enum LithuanianNumberForm
+    enum LithuanianNumberForm
     {
         Singular,
         Plural,

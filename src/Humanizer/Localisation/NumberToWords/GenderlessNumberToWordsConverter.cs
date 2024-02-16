@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal abstract class GenderlessNumberToWordsConverter : INumberToWordsConverter
+    abstract class GenderlessNumberToWordsConverter : INumberToWordsConverter
     {
         /// <summary>
         /// Converts the number to string

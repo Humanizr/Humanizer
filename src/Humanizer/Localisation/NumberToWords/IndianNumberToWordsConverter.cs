@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly Dictionary<long, string> OrdinalExceptions = new()
         {

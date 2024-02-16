@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class ArabicFormatter() :
+    class ArabicFormatter() :
         DefaultFormatter("ar")
     {
         private const string DualPostfix = "_Dual";

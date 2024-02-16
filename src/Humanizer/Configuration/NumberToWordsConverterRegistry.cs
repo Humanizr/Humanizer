@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
+    class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
     {
         public NumberToWordsConverterRegistry()
             : base(_ => new EnglishNumberToWordsConverter())

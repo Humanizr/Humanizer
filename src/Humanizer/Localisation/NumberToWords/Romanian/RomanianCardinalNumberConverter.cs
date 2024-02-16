@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class RomanianCardinalNumberConverter
+    class RomanianCardinalNumberConverter
     {
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9 for 9.

@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
+    abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"];
         private static readonly string[] TensMap = ["zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "septante", "octante", "nonante"];

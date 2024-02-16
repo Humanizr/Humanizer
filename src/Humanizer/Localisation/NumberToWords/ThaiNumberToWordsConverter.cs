@@ -1,6 +1,6 @@
 namespace Humanizer
 {
-    internal class ThaiNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class ThaiNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         public override string Convert(long numbermoney)
         {

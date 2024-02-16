@@ -3,7 +3,7 @@
     /// <summary>
     /// Algorithms used to convert distance between two dates into words.
     /// </summary>
-    internal static class DateTimeHumanizeAlgorithms
+    static class DateTimeHumanizeAlgorithms
     {
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.

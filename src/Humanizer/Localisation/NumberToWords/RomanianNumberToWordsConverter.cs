@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class RomanianNumberToWordsConverter : GenderedNumberToWordsConverter
+    class RomanianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {

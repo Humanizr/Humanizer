@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class ArmenianOrdinalizer : DefaultOrdinalizer
+    class ArmenianOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString)
         {

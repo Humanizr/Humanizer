@@ -1,6 +1,6 @@
 namespace Humanizer
 {
-    internal class AfrikaansNumberToWordsConverter :
+    class AfrikaansNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege", "tien", "elf", "twaalf", "dertien", "veertien", "vyftien", "sestien", "sewentien", "agtien", "negentien"];

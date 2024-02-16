@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class DefaultDateToOrdinalWordConverter : IDateToOrdinalWordConverter
+    class DefaultDateToOrdinalWordConverter : IDateToOrdinalWordConverter
     {
         public virtual string Convert(DateTime date) =>
             date.Day.Ordinalize() + date.ToString(" MMMM yyyy");

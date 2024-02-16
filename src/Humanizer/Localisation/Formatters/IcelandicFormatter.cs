@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class IcelandicFormatter() :
+    class IcelandicFormatter() :
         DefaultFormatter(LocaleCode)
     {
         private const string LocaleCode = "is";

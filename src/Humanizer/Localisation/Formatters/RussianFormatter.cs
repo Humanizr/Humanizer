@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class RussianFormatter() :
+    class RussianFormatter() :
         DefaultFormatter("ru")
     {
         protected override string GetResourceKey(string resourceKey, int number)

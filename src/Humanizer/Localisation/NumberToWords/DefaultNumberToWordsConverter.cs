@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private readonly CultureInfo _culture;
 

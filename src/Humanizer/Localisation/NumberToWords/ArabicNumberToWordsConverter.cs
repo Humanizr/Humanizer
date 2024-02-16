@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class ArabicNumberToWordsConverter :
+    class ArabicNumberToWordsConverter :
         GenderedNumberToWordsConverter
     {
         private static readonly string[] Groups = ["مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون"];

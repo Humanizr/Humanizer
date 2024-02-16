@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
+    class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["núll", string.Empty, string.Empty, string.Empty, string.Empty, "fimm", "sex", "sjö", "átta", "níu", "tíu", "ellefu", "tólf", "þrettán", "fjórtán", "fimmtán", "sextán", "sautján", "átján", "nítján"];
         private static readonly string[] FeminineUnitsMap = [string.Empty, "ein", "tvær", "þrjár", "fjórar"];

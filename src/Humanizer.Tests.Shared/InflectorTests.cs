@@ -152,7 +152,7 @@ namespace Humanizer.Tests
             Assert.Equal(expectedOutput, input.Kebaberize());
     }
 
-    internal class PluralTestSource : IEnumerable<object[]>
+    class PluralTestSource : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
         {

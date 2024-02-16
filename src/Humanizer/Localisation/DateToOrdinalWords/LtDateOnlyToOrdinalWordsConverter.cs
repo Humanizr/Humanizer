@@ -2,7 +2,7 @@
 
 namespace Humanizer
 {
-    internal class LtDateOnlyToOrdinalWordsConverter : IDateOnlyToOrdinalWordConverter
+    class LtDateOnlyToOrdinalWordsConverter : IDateOnlyToOrdinalWordConverter
     {
         public string Convert(DateOnly date) =>
             date.ToString("yyyy 'm.' MMMM d 'd.'");

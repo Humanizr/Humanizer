@@ -2,7 +2,7 @@
 
 namespace Humanizer
 {
-    internal class EsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
+    class EsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
     {
         public override string Convert(DateOnly date)
         {

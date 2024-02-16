@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class BanglaNumberToWordsConverter :
+    class BanglaNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap =

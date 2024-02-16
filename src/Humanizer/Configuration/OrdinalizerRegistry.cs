@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
+    class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
     {
         public OrdinalizerRegistry() : base(new DefaultOrdinalizer())
         {

@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class FrenchSwissNumberToWordsConverter : FrenchNumberToWordsConverterBase
+    class FrenchSwissNumberToWordsConverter : FrenchNumberToWordsConverterBase
     {
     }
 }

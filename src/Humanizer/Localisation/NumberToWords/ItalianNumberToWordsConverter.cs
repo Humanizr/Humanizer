@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class ItalianNumberToWordsConverter : GenderedNumberToWordsConverter
+    class ItalianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {

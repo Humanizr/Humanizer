@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class FormatterRegistry : LocaliserRegistry<IFormatter>
+    class FormatterRegistry : LocaliserRegistry<IFormatter>
     {
         public FormatterRegistry() : base(new DefaultFormatter("en-US"))
         {

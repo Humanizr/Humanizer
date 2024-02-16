@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap1 = ["", "", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
         private static readonly string[] UnitsMap2 = ["", "십", "백", "천"];

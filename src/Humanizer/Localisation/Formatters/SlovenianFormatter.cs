@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class SlovenianFormatter() :
+    class SlovenianFormatter() :
         DefaultFormatter("sl")
     {
         private const string DualPostfix = "_Dual";
