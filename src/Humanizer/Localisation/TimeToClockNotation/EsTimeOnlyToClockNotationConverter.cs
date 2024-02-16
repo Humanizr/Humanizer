@@ -75,13 +75,13 @@ namespace Humanizer
         }
 
         private static bool IsEarlyMorning(TimeOnly time) =>
-            time.Hour >= 1 && time.Hour < MORNING;
+            time.Hour is >= 1 and < MORNING;
 
         private static bool IsMorning(TimeOnly time) =>
-            time.Hour >= MORNING && time.Hour < NOON;
+            time.Hour is >= MORNING and < NOON;
 
         private static bool IsAfternoon(TimeOnly time) =>
-            time.Hour >= NOON && time.Hour < AFTERNOON;
+            time.Hour is >= NOON and < AFTERNOON;
     }
 }
 

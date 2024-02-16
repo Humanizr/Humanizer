@@ -95,7 +95,7 @@
             {
                 parts.Add(map[0]);
             }
-            else if (units > 1 && units < 5)
+            else if (units is > 1 and < 5)
             {
                 parts.Add(map[1]);
             }

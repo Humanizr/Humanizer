@@ -106,7 +106,7 @@
             var local_word = "";
             if (number < 20)
                 local_word = GetUnitValue(number, isOrdinal);
-            else if (number >= 20 && number <= 99)
+            else if (number is >= 20 and <= 99)
             {
                 var lastPart = TensMap[number / 10];
                 var quot = number / 10;
@@ -172,18 +172,18 @@
             var num_above_10 = number / 10000000;
             var str_crore = "கோடி";
 
-            if (num_above_10 > 99999 && num_above_10 <= 9999999)
+            if (num_above_10 is > 99999 and <= 9999999)
             {
                 local_word = GetLakhsValue(ref num_above_10, false);
                 local_word += " ";
             }
 
-            if (num_above_10 > 999 && num_above_10 <= 99999)
+            if (num_above_10 is > 999 and <= 99999)
             {
                 local_word += GetThousandsValue(ref num_above_10);
                 local_word += " ";
             }
-            if (num_above_10 > 99 && num_above_10 <= 999)
+            if (num_above_10 is > 99 and <= 999)
             {
                 local_word += GetHundredsValue(ref num_above_10);
                 local_word += " ";

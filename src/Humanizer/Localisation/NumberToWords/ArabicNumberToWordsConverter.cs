@@ -119,7 +119,7 @@
                         {
                             if (groupNumber % 100 != 1)
                             {
-                                if (groupNumber >= 3 && groupNumber <= 10)
+                                if (groupNumber is >= 3 and <= 10)
                                 {
                                     result = $"{PluralGroups[groupLevel]} {result}";
                                 }
@@ -223,7 +223,7 @@
                     return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
                 }
             }
-            else if (number > 10 && number < 100)
+            else if (number is > 10 and < 100)
             {
                 var parts = word.Split(' ');
                 var newParts = new string[parts.Length];
