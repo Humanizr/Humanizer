@@ -1,6 +1,3 @@
-﻿namespace Humanizer
-{
-    class GermanNumberToWordsConverter : GermanNumberToWordsConverterBase
-    {
-    }
-}
+﻿namespace Humanizer;
+
+class GermanNumberToWordsConverter : GermanNumberToWordsConverterBase;
