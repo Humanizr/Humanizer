@@ -7,8 +7,8 @@
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser : class
     {
-        private readonly IDictionary<string, Func<CultureInfo, TLocaliser>> _localisers = new Dictionary<string, Func<CultureInfo, TLocaliser>>();
-        private readonly Func<CultureInfo, TLocaliser> _defaultLocaliser;
+        readonly IDictionary<string, Func<CultureInfo, TLocaliser>> _localisers = new Dictionary<string, Func<CultureInfo, TLocaliser>>();
+        readonly Func<CultureInfo, TLocaliser> _defaultLocaliser;
 
         /// <summary>
         /// Creates a localiser registry with the default localiser set to the provided value
@@ -47,7 +47,7 @@
         public void Register(string localeCode, Func<CultureInfo, TLocaliser> localiser) =>
             _localisers[localeCode] = localiser;
 
-        private Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
+        Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
         {
             for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
             {

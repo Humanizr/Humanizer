@@ -3,7 +3,7 @@
     class CzechSlovakPolishFormatter(string localeCode) :
         DefaultFormatter(localeCode)
     {
-        private const string PaucalPostfix = "_Paucal";
+        const string PaucalPostfix = "_Paucal";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

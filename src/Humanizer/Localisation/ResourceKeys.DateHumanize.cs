@@ -21,10 +21,10 @@
             /// Examples: DateHumanize_SingleMinuteAgo, DateHumanize_MultipleHoursAgo
             /// Note: "s" for plural served separately by third part.
             /// </summary>
-            private const string DateTimeFormat = "DateHumanize_{0}{1}{2}";
+            const string DateTimeFormat = "DateHumanize_{0}{1}{2}";
 
-            private const string Ago = "Ago";
-            private const string FromNow = "FromNow";
+            const string Ago = "Ago";
+            const string FromNow = "FromNow";
 
             /// <summary>
             /// Generates Resource Keys according to convention.

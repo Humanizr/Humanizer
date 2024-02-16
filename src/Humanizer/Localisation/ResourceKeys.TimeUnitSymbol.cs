@@ -10,7 +10,7 @@
             /// <summary>
             /// Examples: TimeUnit_Minute, TimeUnit_Hour.
             /// </summary>
-            private const string TimeUnitFormat = "TimeUnit_{0}";
+            const string TimeUnitFormat = "TimeUnit_{0}";
 
             /// <summary>
             /// Generates Resource Keys according to convention.

@@ -9,10 +9,10 @@
     class DutchNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien"];
-        private static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig"];
+        static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien"];
+        static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig"];
 
-        private class Fact
+        class Fact
         {
             public long Value { get; set; }
             public string Name { get; set; }
@@ -21,7 +21,7 @@
             public bool DisplayOneUnit { get; set; }
         }
 
-        private static readonly Fact[] Hunderds =
+        static readonly Fact[] Hunderds =
         [
             new() {Value = 1_000_000_000_000_000_000L, Name = "triljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
             new() {Value = 1_000_000_000_000_000L,     Name = "biljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
@@ -99,14 +99,14 @@
             return word;
         }
 
-        private static readonly Dictionary<string, string> OrdinalExceptions = new()
+        static readonly Dictionary<string, string> OrdinalExceptions = new()
         {
             {"een", "eerste"},
             {"drie", "derde"},
             {"miljoen", "miljoenste"},
         };
 
-        private static readonly char[] EndingCharForSte = ['t', 'g', 'd'];
+        static readonly char[] EndingCharForSte = ['t', 'g', 'd'];
 
         public override string ConvertToOrdinal(int number)
         {

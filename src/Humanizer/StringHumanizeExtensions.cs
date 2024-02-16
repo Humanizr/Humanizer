@@ -5,14 +5,14 @@
     /// </summary>
     public static class StringHumanizeExtensions
     {
-        private static readonly Regex PascalCaseWordPartsRegex;
-        private static readonly Regex FreestandingSpacingCharRegex;
+        static readonly Regex PascalCaseWordPartsRegex;
+        static readonly Regex FreestandingSpacingCharRegex;
 
-        private const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";
-        private const string IntegerAndOptionalLowercaseLetters = @"[0-9]+\p{Ll}*";
-        private const string Acronym = @"\p{Lu}+(?=\p{Lu}|[0-9]|\b)";
-        private const string SequenceOfOtherLetters = @"\p{Lo}+";
-        private const string MidSentencePunctuation = "[,;]?";
+        const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";
+        const string IntegerAndOptionalLowercaseLetters = @"[0-9]+\p{Ll}*";
+        const string Acronym = @"\p{Lu}+(?=\p{Lu}|[0-9]|\b)";
+        const string SequenceOfOtherLetters = @"\p{Lo}+";
+        const string MidSentencePunctuation = "[,;]?";
 
         static StringHumanizeExtensions()
         {
@@ -22,10 +22,10 @@
             FreestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
         }
 
-        private static string FromUnderscoreDashSeparatedWords(string input) =>
+        static string FromUnderscoreDashSeparatedWords(string input) =>
             string.Join(" ", input.Split(['_', '-']));
 
-        private static string FromPascalCase(string input)
+        static string FromPascalCase(string input)
         {
             var result = string.Join(" ", PascalCaseWordPartsRegex
                 .Matches(input).Cast<Match>()

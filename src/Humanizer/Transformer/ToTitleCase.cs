@@ -24,10 +24,10 @@
             return result;
         }
 
-        private static bool AllCapitals(string input) =>
+        static bool AllCapitals(string input) =>
             input.All(char.IsUpper);
 
-        private static string ReplaceWithTitleCase(Match word, string source, CultureInfo culture, bool firstWord)
+        static string ReplaceWithTitleCase(Match word, string source, CultureInfo culture, bool firstWord)
         {
             var articles = new List<string> { "a", "an", "the" };
             var conjunctions = new List<string> { "and", "as", "but", "if", "nor", "or", "so", "yet" };

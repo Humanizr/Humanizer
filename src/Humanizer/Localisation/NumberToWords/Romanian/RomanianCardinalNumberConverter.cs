@@ -5,7 +5,7 @@
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9 for 9.
         /// </summary>
-        private readonly string[] _units =
+        readonly string[] _units =
         [
             string.Empty,
             "unu|una|unu",
@@ -22,7 +22,7 @@
         /// <summary>
         /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
         /// </summary>
-        private readonly string[] _teensUnder20NumberToText =
+        readonly string[] _teensUnder20NumberToText =
         [
             "zece",
                 "unsprezece",
@@ -39,7 +39,7 @@
         /// <summary>
         /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
         /// </summary>
-        private readonly string[] _tensOver20NumberToText =
+        readonly string[] _tensOver20NumberToText =
         [
             string.Empty,
                 string.Empty,
@@ -53,17 +53,17 @@
                 "nouăzeci"
         ];
 
-        private readonly string _feminineSingular = "o";
-        private readonly string _masculineSingular = "un";
+        readonly string _feminineSingular = "o";
+        readonly string _masculineSingular = "un";
 
-        private readonly string _joinGroups = "și";
-        private readonly string _joinAbove20 = "de";
-        private readonly string _minusSign = "minus";
+        readonly string _joinGroups = "și";
+        readonly string _joinAbove20 = "de";
+        readonly string _minusSign = "minus";
 
         /// <summary>
         /// Enumerates sets of three-digits having distinct conversion to text.
         /// </summary>
-        private enum ThreeDigitSets
+        enum ThreeDigitSets
         {
             /// <summary>
             /// Lowest three-digits set, from 1 to 999.
@@ -134,7 +134,7 @@
         /// </summary>
         /// <param name="number">The number to split.</param>
         /// <returns>The sequence of three-digit numbers.</returns>
-        private static List<int> SplitEveryThreeDigits(int number)
+        static List<int> SplitEveryThreeDigits(int number)
         {
             var parts = new List<int>();
             var rest = number;
@@ -156,7 +156,7 @@
         /// to use for the next three-digit set.
         /// </summary>
         /// <returns>The next conversion function to use.</returns>
-        private Func<int, GrammaticalGender, string> GetNextPartConverter(ThreeDigitSets currentSet)
+        Func<int, GrammaticalGender, string> GetNextPartConverter(ThreeDigitSets currentSet)
         {
             Func<int, GrammaticalGender, string> converter;
 
@@ -195,7 +195,7 @@
         /// <param name="number">The three-digit set to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit set expressed as text.</returns>
-        private string ThreeDigitSetConverter(int number, GrammaticalGender gender)
+        string ThreeDigitSetConverter(int number, GrammaticalGender gender)
         {
             if (number == 0)
             {
@@ -240,7 +240,7 @@
             return words;
         }
 
-        private static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
+        static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
         {
             if (multiGenderPart.Contains("|"))
             {
@@ -265,10 +265,10 @@
             }
         }
 
-        private static bool IsAbove20(int number) =>
+        static bool IsAbove20(int number) =>
             number >= 20;
 
-        private string HundredsToText(int hundreds)
+        string HundredsToText(int hundreds)
         {
             if (hundreds == 0)
             {
@@ -290,7 +290,7 @@
         /// <param name="number">The three-digit number, as units, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number, as units, expressed as text.</returns>
-        private string UnitsConverter(int number, GrammaticalGender gender) =>
+        string UnitsConverter(int number, GrammaticalGender gender) =>
             ThreeDigitSetConverter(number, gender);
 
         /// <summary>
@@ -299,7 +299,7 @@
         /// <param name="number">The three-digit number, as thousands, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number of thousands expressed as text.</returns>
-        private string ThousandsConverter(int number, GrammaticalGender gender)
+        string ThousandsConverter(int number, GrammaticalGender gender)
         {
             if (number == 0)
             {
@@ -333,7 +333,7 @@
         /// <param name="number">The three-digit number, as millions, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number of millions expressed as text.</returns>
-        private string MillionsConverter(int number, GrammaticalGender gender)
+        string MillionsConverter(int number, GrammaticalGender gender)
         {
             if (number == 0)
             {
@@ -355,7 +355,7 @@
         /// <param name="number">The three-digit number, as billions, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number of billions expressed as text.</returns>
-        private string BillionsConverter(int number, GrammaticalGender gender)
+        string BillionsConverter(int number, GrammaticalGender gender)
         {
             if (number == 1)
             {

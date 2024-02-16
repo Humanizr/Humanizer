@@ -3,17 +3,17 @@
     class HebrewNumberToWordsConverter(CultureInfo culture) :
         GenderedNumberToWordsConverter(GrammaticalGender.Feminine)
     {
-        private static readonly string[] UnitsFeminine = ["אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר"];
-        private static readonly string[] UnitsMasculine = ["אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה"];
-        private static readonly string[] TensUnit = ["עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים"];
+        static readonly string[] UnitsFeminine = ["אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר"];
+        static readonly string[] UnitsMasculine = ["אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה"];
+        static readonly string[] TensUnit = ["עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים"];
 
-        private class DescriptionAttribute(string description) :
+        class DescriptionAttribute(string description) :
             Attribute
         {
             public string Description { get; set; } = description;
         }
 
-        private enum Group
+        enum Group
         {
             Hundreds = 100,
             Thousands = 1000,
@@ -113,7 +113,7 @@
         public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
             number.ToString(culture);
 
-        private void ToBigNumber(int number, Group group, List<string> parts)
+        void ToBigNumber(int number, Group group, List<string> parts)
         {
             // Big numbers (million and above) always use the masculine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php
@@ -131,7 +131,7 @@
             parts.Add(group.Humanize());
         }
 
-        private void ToThousands(int number, List<string> parts)
+        void ToThousands(int number, List<string> parts)
         {
             var thousands = number / (int)Group.Thousands;
 
@@ -157,7 +157,7 @@
             }
         }
 
-        private static void ToHundreds(int number, List<string> parts)
+        static void ToHundreds(int number, List<string> parts)
         {
             // For hundreds, Hebrew is using the feminine form
             // See https://www.safa-ivrit.org/dikduk/numbers.php

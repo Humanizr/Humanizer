@@ -3,10 +3,10 @@ namespace Humanizer
     class AfrikaansNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege", "tien", "elf", "twaalf", "dertien", "veertien", "vyftien", "sestien", "sewentien", "agtien", "negentien"];
-        private static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vyftig", "sestig", "sewentig", "tagtig", "negentig"];
+        static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege", "tien", "elf", "twaalf", "dertien", "veertien", "vyftien", "sestien", "sewentien", "agtien", "negentien"];
+        static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vyftig", "sestig", "sewentig", "tagtig", "negentig"];
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new()
+        static readonly Dictionary<int, string> OrdinalExceptions = new()
         {
             {0, "nulste"},
             {1, "eerste"},
@@ -32,7 +32,7 @@ namespace Humanizer
         public override string ConvertToOrdinal(int number) =>
             Convert(number, true);
 
-        private string Convert(int number, bool isOrdinal)
+        string Convert(int number, bool isOrdinal)
         {
             if (number == 0)
             {
@@ -119,7 +119,7 @@ namespace Humanizer
             return toWords;
         }
 
-        private static string GetUnitValue(int number, bool isOrdinal)
+        static string GetUnitValue(int number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -142,7 +142,7 @@ namespace Humanizer
             }
         }
 
-        private static string RemoveOnePrefix(string toWords)
+        static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
             if (toWords.StartsWith("een", StringComparison.Ordinal))
@@ -156,7 +156,7 @@ namespace Humanizer
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words) =>
+        static bool ExceptionNumbersToWords(int number, out string words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }

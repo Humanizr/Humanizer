@@ -5,7 +5,7 @@ namespace Humanizer
     /// </summary>
     public class PrecisionDateTimeHumanizeStrategy : IDateTimeHumanizeStrategy
     {
-        private readonly double _precision;
+        readonly double _precision;
 
         /// <summary>
         /// Constructs a precision-based calculator for distance of time with default precision 0.75.

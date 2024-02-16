@@ -2,10 +2,10 @@
 {
     class FinnishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["nolla", "yksi", "kaksi", "kolme", "neljä", "viisi", "kuusi", "seitsemän", "kahdeksan", "yhdeksän", "kymmenen"];
-        private static readonly string[] OrdinalUnitsMap = ["nollas", "ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes", "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"];
+        static readonly string[] UnitsMap = ["nolla", "yksi", "kaksi", "kolme", "neljä", "viisi", "kuusi", "seitsemän", "kahdeksan", "yhdeksän", "kymmenen"];
+        static readonly string[] OrdinalUnitsMap = ["nollas", "ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes", "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"];
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new()
+        static readonly Dictionary<int, string> OrdinalExceptions = new()
         {
             {1, "yhdes" },
             {2, "kahdes" }
@@ -85,7 +85,7 @@
             return string.Join("", parts).Trim();
         }
 
-        private static string GetOrdinalUnit(int number, bool useExceptions)
+        static string GetOrdinalUnit(int number, bool useExceptions)
         {
             if (useExceptions && OrdinalExceptions.TryGetValue(number, out var unit))
             {
@@ -95,7 +95,7 @@
             return OrdinalUnitsMap[number];
         }
 
-        private static string ToOrdinal(int number, bool useExceptions)
+        static string ToOrdinal(int number, bool useExceptions)
         {
             if (number == 0)
             {

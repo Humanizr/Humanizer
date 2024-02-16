@@ -217,7 +217,7 @@ namespace Humanizer
         public string ToString(string format, IFormatProvider provider) =>
             ToString(format, provider, toSymbol: true);
 
-        private string ToString(string format, IFormatProvider provider, bool toSymbol)
+        string ToString(string format, IFormatProvider provider, bool toSymbol)
         {
             if (format == null)
                 format = "G";
@@ -500,7 +500,7 @@ namespace Humanizer
             return true;
         }
 
-        private static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+        static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
         {
             if (formatProvider is NumberFormatInfo numberFormat)
                 return numberFormat;

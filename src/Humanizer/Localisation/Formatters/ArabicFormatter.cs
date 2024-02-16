@@ -3,8 +3,8 @@
     class ArabicFormatter() :
         DefaultFormatter("ar")
     {
-        private const string DualPostfix = "_Dual";
-        private const string PluralPostfix = "_Plural";
+        const string DualPostfix = "_Dual";
+        const string PluralPostfix = "_Plural";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

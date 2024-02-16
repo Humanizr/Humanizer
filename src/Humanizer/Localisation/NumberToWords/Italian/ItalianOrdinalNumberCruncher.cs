@@ -85,7 +85,7 @@
 
         protected readonly int _fullNumber = number;
         protected readonly GrammaticalGender _gender = gender;
-        private readonly string _genderSuffix = gender == GrammaticalGender.Feminine ? "a" : "o";
+        readonly string _genderSuffix = gender == GrammaticalGender.Feminine ? "a" : "o";
 
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.

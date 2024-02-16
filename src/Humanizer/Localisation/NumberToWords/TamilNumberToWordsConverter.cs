@@ -2,14 +2,14 @@
 {
     class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["சுழியம்", "ஒன்று", "இரண்டு", "மூன்று", "நான்கு", "ஐந்து", "ஆறு", "ஏழு", "எட்டு", "ஒன்பது", "பத்து", "பதினொன்று", "பனிரெண்டு", "பதிமூன்று", "பதினான்கு", "பதினைந்து", "பதினாறு", "பதினேழு", "பதினெட்டு", "பத்தொன்பது"];
-        private static readonly string[] TensMap = ["சுழியம்", "பத்து", "இருப", "முப்ப", "நாற்ப", "ஐம்ப", "அறுப", "எழுப", "எண்ப", "தொண்ணூ"];
-        private static readonly string[] HundredsMap = ["நூ", "இருநூ", "முன்னூ", "நானூ", "ஐந்நூ", "அறுநூ", "எழுநூ", "எண்ணூ", "தொள்ளாயிர"];
-        private static readonly string[] ThousandsMap = ["ஆ", "இரண்டா", "மூன்றா", "நான்கா", "ஐந்தா", "ஆறா", "ஏழா", "எட்டா", "ஒன்பதா", "பத்தா", "பதினொன்றா", "பனிரெண்டா", "பதிமூன்றா", "பதினான்கா", "பதினைந்தா", "பதினாறா", "பதினேழா", "பதினெட்டா", "பத்தொன்பதா"];
+        static readonly string[] UnitsMap = ["சுழியம்", "ஒன்று", "இரண்டு", "மூன்று", "நான்கு", "ஐந்து", "ஆறு", "ஏழு", "எட்டு", "ஒன்பது", "பத்து", "பதினொன்று", "பனிரெண்டு", "பதிமூன்று", "பதினான்கு", "பதினைந்து", "பதினாறு", "பதினேழு", "பதினெட்டு", "பத்தொன்பது"];
+        static readonly string[] TensMap = ["சுழியம்", "பத்து", "இருப", "முப்ப", "நாற்ப", "ஐம்ப", "அறுப", "எழுப", "எண்ப", "தொண்ணூ"];
+        static readonly string[] HundredsMap = ["நூ", "இருநூ", "முன்னூ", "நானூ", "ஐந்நூ", "அறுநூ", "எழுநூ", "எண்ணூ", "தொள்ளாயிர"];
+        static readonly string[] ThousandsMap = ["ஆ", "இரண்டா", "மூன்றா", "நான்கா", "ஐந்தா", "ஆறா", "ஏழா", "எட்டா", "ஒன்பதா", "பத்தா", "பதினொன்றா", "பனிரெண்டா", "பதிமூன்றா", "பதினான்கா", "பதினைந்தா", "பதினாறா", "பதினேழா", "பதினெட்டா", "பத்தொன்பதா"];
 
-        private static readonly string[] LakhsMap = ["இலட்ச"];
+        static readonly string[] LakhsMap = ["இலட்ச"];
 
-        private static readonly Dictionary<long, string> OrdinalExceptions = new()
+        static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {1, "முதலாவது"},
             {2, "இரண்டாவது"},
@@ -27,7 +27,7 @@
         public override string ConvertToOrdinal(int number) =>
             ConvertImpl(number, true);
 
-        private string ConvertImpl(long number, bool isOrdinal)
+        string ConvertImpl(long number, bool isOrdinal)
         {
             if (number == 0)
                 return GetUnitValue(0, isOrdinal);
@@ -88,7 +88,7 @@
             return toWords;
         }
 
-        private static string GetUnitValue(long number, bool isOrdinal)
+        static string GetUnitValue(long number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -101,7 +101,7 @@
                 return UnitsMap[number];
         }
 
-        private static string GetTensValue(long number, bool isOrdinal, bool isThousand = false)
+        static string GetTensValue(long number, bool isOrdinal, bool isThousand = false)
         {
             var local_word = "";
             if (number < 20)
@@ -145,7 +145,7 @@
             }
             return local_word;
         }
-        private static string GetLakhsValue(ref long number, bool isOrdinal)
+        static string GetLakhsValue(ref long number, bool isOrdinal)
         {
             var num_above_10 = number / 100000;
             var local_word = "";
@@ -166,7 +166,7 @@
             number %= 100000;
             return local_word;
         }
-        private static string GetCroresValue(ref long number)
+        static string GetCroresValue(ref long number)
         {
             var local_word = "";
             var num_above_10 = number / 10000000;
@@ -208,7 +208,7 @@
             return local_word;
         }
 
-        private static string GetThousandsValue(ref long number)
+        static string GetThousandsValue(ref long number)
         {
             var num_above_10 = number / 1000;
             var local_word = "";
@@ -234,7 +234,7 @@
 
             return local_word;
         }
-        private static string GetHundredsValue(ref long number)
+        static string GetHundredsValue(ref long number)
         {
             var local_word = HundredsMap[number / 100 - 1];
             if (number / 100 == 9)
@@ -254,7 +254,7 @@
             return local_word;
         }
 
-        private static string RemoveOnePrefix(string toWords)
+        static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
             if (toWords.StartsWith("one", StringComparison.Ordinal))
@@ -263,7 +263,7 @@
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(long number, out string words) =>
+        static bool ExceptionNumbersToWords(long number, out string words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }

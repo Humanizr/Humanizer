@@ -7,9 +7,9 @@ namespace Humanizer
     /// </summary>
     public static class RomanNumeralExtensions
     {
-        private const int NumberOfRomanNumeralMaps = 13;
+        const int NumberOfRomanNumeralMaps = 13;
 
-        private static readonly IDictionary<string, int> RomanNumerals =
+        static readonly IDictionary<string, int> RomanNumerals =
             new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
                 { "M",  1000 },
@@ -27,7 +27,7 @@ namespace Humanizer
                 { "I",  1 }
             };
 
-        private static readonly Regex ValidRomanNumeral =
+        static readonly Regex ValidRomanNumeral =
             new(
                 "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
                 RegexOptionsUtil.Compiled);
@@ -108,7 +108,7 @@ namespace Humanizer
             return sb.ToString();
         }
 
-        private static bool IsInvalidRomanNumeral(string input) =>
+        static bool IsInvalidRomanNumeral(string input) =>
             !ValidRomanNumeral.IsMatch(input);
     }
 }

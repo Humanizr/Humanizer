@@ -187,7 +187,7 @@ public class Vocabulary
 
     class Rule(string pattern, string replacement)
     {
-        private readonly Regex regex = new(pattern, RegexOptions.IgnoreCase | RegexOptionsUtil.Compiled);
+        readonly Regex regex = new(pattern, RegexOptions.IgnoreCase | RegexOptionsUtil.Compiled);
 
         public string Apply(string word)
         {

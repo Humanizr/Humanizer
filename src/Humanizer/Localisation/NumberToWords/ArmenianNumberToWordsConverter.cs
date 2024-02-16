@@ -3,10 +3,10 @@
     class ArmenianNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];
-        private static readonly string[] TensMap = ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"];
+        static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];
+        static readonly string[] TensMap = ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"];
 
-        private static readonly Dictionary<long, string> OrdinalExceptions = new()
+        static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {0, "զրոյական"},
             {1, "առաջին"},
@@ -28,7 +28,7 @@
             return ConvertImpl(number, true);
         }
 
-        private string ConvertImpl(long number, bool isOrdinal)
+        string ConvertImpl(long number, bool isOrdinal)
         {
             if (number == 0)
             {
@@ -148,7 +148,7 @@
             return toWords;
         }
 
-        private static string GetUnitValue(long number, bool isOrdinal)
+        static string GetUnitValue(long number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -160,7 +160,7 @@
             }
         }
 
-        private static string RemoveOnePrefix(string toWords)
+        static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
             if (toWords.StartsWith("մեկ", StringComparison.Ordinal))
@@ -171,7 +171,7 @@
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(long number, out string words) =>
+        static bool ExceptionNumbersToWords(long number, out string words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }

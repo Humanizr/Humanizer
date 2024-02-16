@@ -11,8 +11,8 @@
             /// Examples: TimeSpanHumanize_SingleMinute, TimeSpanHumanize_MultipleHours.
             /// Note: "s" for plural served separately by third part.
             /// </summary>
-            private const string TimeSpanFormat = "TimeSpanHumanize_{0}{1}{2}";
-            private const string Zero = "TimeSpanHumanize_Zero";
+            const string TimeSpanFormat = "TimeSpanHumanize_{0}{1}{2}";
+            const string Zero = "TimeSpanHumanize_Zero";
 
             /// <summary>
             /// Generates Resource Keys according to convention.

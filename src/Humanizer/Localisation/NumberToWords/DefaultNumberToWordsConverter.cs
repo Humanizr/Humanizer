@@ -2,7 +2,7 @@
 {
     class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private readonly CultureInfo _culture;
+        readonly CultureInfo _culture;
 
         /// <summary>
         /// Constructor.

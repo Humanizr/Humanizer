@@ -2,29 +2,29 @@
 {
     class MalteseNumberToWordsConvertor : GenderedNumberToWordsConverter
     {
-        private static readonly string[] OrdinalOverrideMap =
+        static readonly string[] OrdinalOverrideMap =
         [
             "0", "l-ewwel", "it-tieni", "it-tielet", "ir-raba'", "il-ħames", "is-sitt", "is-seba'", "it-tmien", "id-disa'",
             "l-għaxar", "il-ħdax", "it-tnax", "it-tlettax", "l-erbatax", "il-ħmistax", "is-sittax", "is-sbatax",
             "it-tmintax", "id-dsatax", "l-għoxrin"
         ];
 
-        private static readonly string[] UnitsMap =
+        static readonly string[] UnitsMap =
         [
             "żero", "wieħed", "tnejn", "tlieta", "erbgħa", "ħamsa", "sitta", "sebgħa", "tmienja", "disgħa", "għaxra",
             "ħdax", "tnax", "tlettax", "erbatax", "ħmistax", "sittax", "sbatax", "tmintax", "dsatax"
         ];
 
-        private static readonly string[] TensMap =
+        static readonly string[] TensMap =
             ["zero", "għaxra", "għoxrin", "tletin", "erbgħin", "ħamsin", "sittin", "sebgħin", "tmenin", "disgħin"];
 
-        private static readonly string[] HundredsMap =
+        static readonly string[] HundredsMap =
         [
             string.Empty, string.Empty, string.Empty, "tlett", "erbgħa", "ħames", "sitt", "sebgħa", "tminn", "disgħa",
             "għaxar"
         ];
 
-        private static readonly string[] PrefixMap =
+        static readonly string[] PrefixMap =
         [
             string.Empty, string.Empty, string.Empty, "tlett", "erbat", "ħamest", "sitt", "sebat", "tmint", "disat",
             "għaxart", "ħdax-il", "tnax-il", "tletax-il", "erbatax-il", "ħmistax-il", "sittax-il", "sbatax-il",
@@ -89,7 +89,7 @@
             return $"il-{Convert(number, gender)}";
         }
 
-        private static string GetTens(long value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
+        static string GetTens(long value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
         {
             if (value == 1 && gender == GrammaticalGender.Feminine)
             {
@@ -126,7 +126,7 @@
             return $"{UnitsMap[single]} u {TensMap[numberOfTens]}";
         }
 
-        private static string GetHundreds(long value, bool usePrefixMap, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
+        static string GetHundreds(long value, bool usePrefixMap, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
         {
             if (value < 100)
             {
@@ -158,7 +158,7 @@
             return $"{hundredsText} u {GetTens(tens, usePrefixMap, usePrefixMapForLowerValueDigits, gender)}";
         }
 
-        private static string GetThousands(long value, GrammaticalGender gender)
+        static string GetThousands(long value, GrammaticalGender gender)
         {
             if (value < 1000)
             {
@@ -181,7 +181,7 @@
             return $"{thousandsInText} u {hundredsInText}";
         }
 
-        private static string GetMillions(long value, GrammaticalGender gender)
+        static string GetMillions(long value, GrammaticalGender gender)
         {
             if (value < 1000000)
             {
@@ -203,7 +203,7 @@
             return $"{millionsText} u {thousandsText}";
         }
 
-        private static string GetPrefixText(long thousands, long tensInThousands, string singular, string dual, string plural, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
+        static string GetPrefixText(long thousands, long tensInThousands, string singular, string dual, string plural, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
         {
             if (thousands == 1)
             {

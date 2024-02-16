@@ -2,9 +2,9 @@
 {
     class CentralKurdishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] KurdishHundredsMap = ["سفر", "سەد", "دوو سەد", "سێ سەد", "چوار سەد", "پێنج سەد", "شەش سەد", "حەوت سەد", "هەشت سەد", "نۆ سەد"];
-        private static readonly string[] KurdishTensMap = ["سفر", "دە", "بیست", "سی", "چل", "پەنجا", "شەست", "حەفتا", "هەشتا", "نەوەد"];
-        private static readonly string[] KurdishUnitsMap = ["سفر", "یەک", "دوو", "سێ", "چوار", "پێنج", "شەش", "حەوت", "هەشت", "نۆ", "دە", "یازدە", "دوازدە", "سێزدە", "چواردە", "پازدە", "شازدە", "حەڤدە", "هەژدە", "نۆزدە"];
+        static readonly string[] KurdishHundredsMap = ["سفر", "سەد", "دوو سەد", "سێ سەد", "چوار سەد", "پێنج سەد", "شەش سەد", "حەوت سەد", "هەشت سەد", "نۆ سەد"];
+        static readonly string[] KurdishTensMap = ["سفر", "دە", "بیست", "سی", "چل", "پەنجا", "شەست", "حەفتا", "هەشتا", "نەوەد"];
+        static readonly string[] KurdishUnitsMap = ["سفر", "یەک", "دوو", "سێ", "چوار", "پێنج", "شەش", "حەوت", "هەشت", "نۆ", "دە", "یازدە", "دوازدە", "سێزدە", "چواردە", "پازدە", "شازدە", "حەڤدە", "هەژدە", "نۆزدە"];
 
         public override string Convert(long number)
         {
@@ -68,7 +68,7 @@
             return $"{word}{(IsVowel(word[word.Length - 1]) ? "یەم" : "ەم")}";
         }
 
-        private static bool IsVowel(char c) =>
+        static bool IsVowel(char c) =>
             c is 'ا' or 'ێ' or 'ۆ' or 'ە' or 'ی';
     }
 }

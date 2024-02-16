@@ -10,7 +10,7 @@
             return resourceKey + suffix;
         }
 
-        private static string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
+        static string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
         {
             if (grammaticalNumber == RussianGrammaticalNumber.Singular)
             {

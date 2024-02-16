@@ -2,10 +2,10 @@
 {
     class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
-        private static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];
+        static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
+        static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];
 
-        private class Fact
+        class Fact
         {
             public int Value { get; set; }
             public string Name { get; set; }
@@ -15,7 +15,7 @@
             public GrammaticalGender Gender { get; set; } = GrammaticalGender.Neuter;
         }
 
-        private static readonly Fact[] Hunderds =
+        static readonly Fact[] Hunderds =
         [
             new(){Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
             new(){Value = 1000000,    Name = "miljon", Prefix = " ",  Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
@@ -108,7 +108,7 @@
         public override string Convert(long input) =>
             Convert(input, GrammaticalGender.Neuter);
 
-        private static string[] ordinalNumbers =
+        static string[] ordinalNumbers =
         [
             "nollte",
             "första",

@@ -4,9 +4,9 @@ namespace Humanizer
 {
     class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
-        private const int MORNING = 6;
-        private const int NOON = 12;
-        private const int AFTERNOON = 21;
+        const int MORNING = 6;
+        const int NOON = 12;
+        const int AFTERNOON = 21;
 
         public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
         {
@@ -48,13 +48,13 @@ namespace Humanizer
                 $"{article} {hour} y {normalizedMinutes.ToWords()} {dayPeriod}");
         }
 
-        private static int NormalizeHour(TimeOnly time) =>
+        static int NormalizeHour(TimeOnly time) =>
             time.Hour % 12 != 0 ? time.Hour % 12 : 12;
 
-        private static string GetArticle(TimeOnly time) =>
+        static string GetArticle(TimeOnly time) =>
             time.Hour is 1 or 13 ? "la" : "las";
 
-        private static string GetDayPeriod(TimeOnly time)
+        static string GetDayPeriod(TimeOnly time)
         {
             if (IsEarlyMorning(time))
             {
@@ -74,13 +74,13 @@ namespace Humanizer
             return "de la noche";
         }
 
-        private static bool IsEarlyMorning(TimeOnly time) =>
+        static bool IsEarlyMorning(TimeOnly time) =>
             time.Hour is >= 1 and < MORNING;
 
-        private static bool IsMorning(TimeOnly time) =>
+        static bool IsMorning(TimeOnly time) =>
             time.Hour is >= MORNING and < NOON;
 
-        private static bool IsAfternoon(TimeOnly time) =>
+        static bool IsAfternoon(TimeOnly time) =>
             time.Hour is >= NOON and < AFTERNOON;
     }
 }

@@ -2,19 +2,19 @@
 {
     class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+        readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
 
-        private readonly string[] UnitsMap = ["μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+        readonly string[] UnitsMap = ["μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
 
-        private readonly string[] TensMap = ["", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα"];
+        readonly string[] TensMap = ["", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα"];
 
-        private readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
+        readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
 
-        private readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
+        readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
 
-        private readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
+        readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
 
-        private static readonly Dictionary<long, string> ΟrdinalMap = new()
+        static readonly Dictionary<long, string> ΟrdinalMap = new()
         {
             { 0, string.Empty },
             { 1, "πρώτος" },
@@ -76,7 +76,7 @@
             return string.Empty;
         }
 
-        private static string GetOneDigitOrdinal(int number)
+        static string GetOneDigitOrdinal(int number)
         {
             if (ΟrdinalMap.TryGetValue(number, out var output))
             {
@@ -86,7 +86,7 @@
             return string.Empty;
         }
 
-        private static string GetTwoDigitOrdinal(int number)
+        static string GetTwoDigitOrdinal(int number)
         {
             if (number == 11) return "ενδέκατος";
             if (number == 12) return "δωδέκατος";
@@ -103,7 +103,7 @@
             return decadesString;
         }
 
-        private static string GetThreeDigitOrdinal(int number)
+        static string GetThreeDigitOrdinal(int number)
         {
             var hundreds = number / 100;
 
@@ -122,7 +122,7 @@
             return hundredsString;
         }
 
-        private static string GetFourDigitOrdinal(int number)
+        static string GetFourDigitOrdinal(int number)
         {
             var thousands = number / 1000;
 
@@ -146,7 +146,7 @@
             return thousandsString;
         }
 
-        private string ConvertImpl(long number, bool returnPluralized)
+        string ConvertImpl(long number, bool returnPluralized)
         {
             if (number < 13)
             {
@@ -176,10 +176,10 @@
             return "";
         }
 
-        private string ConvertIntB13(long number, bool returnPluralized) =>
+        string ConvertIntB13(long number, bool returnPluralized) =>
             returnPluralized ? UnitsMap[number] : UnitMap[number];
 
-        private string ConvertIntBH(long number, bool returnPluralized)
+        string ConvertIntBH(long number, bool returnPluralized)
         {
             var result = number / 10 == 1 ? TensNoDiacriticsMap[number / 10] : TensMap[number / 10];
 
@@ -196,7 +196,7 @@
             return result;
         }
 
-        private string ConvertIntBT(long number, bool returnPluralized)
+        string ConvertIntBT(long number, bool returnPluralized)
         {
             string result;
 
@@ -222,7 +222,7 @@
             return result;
         }
 
-        private string ConvertIntBM(long number)
+        string ConvertIntBM(long number)
         {
             if (number / 1000 == 1)
             {
@@ -244,7 +244,7 @@
             return result;
         }
 
-        private string ConvertIntBB(long number)
+        string ConvertIntBB(long number)
         {
             if (number / 1000000 == 1)
             {
@@ -266,7 +266,7 @@
             return result;
         }
 
-        private string ConvertIntBTR(long number)
+        string ConvertIntBTR(long number)
         {
             if (number / 1000000000 == 1)
             {

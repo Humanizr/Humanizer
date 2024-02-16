@@ -2,7 +2,7 @@
 {
     abstract class GenderedNumberToWordsConverter : INumberToWordsConverter
     {
-        private readonly GrammaticalGender _defaultGender;
+        readonly GrammaticalGender _defaultGender;
 
         protected GenderedNumberToWordsConverter(GrammaticalGender defaultGender = GrammaticalGender.Masculine) =>
             _defaultGender = defaultGender;

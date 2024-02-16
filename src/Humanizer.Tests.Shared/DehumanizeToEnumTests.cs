@@ -80,7 +80,7 @@
             Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo(typeof(EnumUnderTest)));
         }
 
-        private struct DummyStructWithEnumInterfaces : IComparable, IFormattable
+        struct DummyStructWithEnumInterfaces : IComparable, IFormattable
         {
             public int CompareTo(object obj) =>
                 throw new NotImplementedException();
@@ -140,7 +140,7 @@
                 throw new NotImplementedException();
         }
 
-        private enum DummyEnum
+        enum DummyEnum
         {
             First,
             Second

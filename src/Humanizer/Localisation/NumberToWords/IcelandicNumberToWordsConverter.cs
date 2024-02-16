@@ -2,15 +2,15 @@
 {
     class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["núll", string.Empty, string.Empty, string.Empty, string.Empty, "fimm", "sex", "sjö", "átta", "níu", "tíu", "ellefu", "tólf", "þrettán", "fjórtán", "fimmtán", "sextán", "sautján", "átján", "nítján"];
-        private static readonly string[] FeminineUnitsMap = [string.Empty, "ein", "tvær", "þrjár", "fjórar"];
-        private static readonly string[] MasculineUnitsMap = [string.Empty, "einn", "tveir", "þrír", "fjórir"];
-        private static readonly string[] NeuterUnitsMap = [string.Empty, "eitt", "tvö", "þrjú", "fjögur"];
-        private static readonly string[] TensMap = [string.Empty, "tíu", "tuttugu", "þrjátíu", "fjörutíu", "fimmtíu", "sextíu", "sjötíu", "áttatíu", "níutíu"];
-        private static readonly string[] UnitsOrdinalPrefixes = ["núllt", "fyrst", string.Empty, "þriðj", "fjórð", "fimmt", "sjött", "sjöund", "áttund", "níund", "tíund", "elleft", "tólft", "þrettánd", "fjórtánd", "fimmtánd", "sextánd", "sautjánd", "átjánd", "nítjánd"];
-        private static readonly string[] TensOrdinalPrefixes = [string.Empty, "tíund", "tuttugast", "þrítugast", "fertugast", "fimmtugast", "sextugast", "sjötugast", "áttugast", "nítugast"];
-        private const string AndSplit = "og";
-        private class Fact
+        static readonly string[] UnitsMap = ["núll", string.Empty, string.Empty, string.Empty, string.Empty, "fimm", "sex", "sjö", "átta", "níu", "tíu", "ellefu", "tólf", "þrettán", "fjórtán", "fimmtán", "sextán", "sautján", "átján", "nítján"];
+        static readonly string[] FeminineUnitsMap = [string.Empty, "ein", "tvær", "þrjár", "fjórar"];
+        static readonly string[] MasculineUnitsMap = [string.Empty, "einn", "tveir", "þrír", "fjórir"];
+        static readonly string[] NeuterUnitsMap = [string.Empty, "eitt", "tvö", "þrjú", "fjögur"];
+        static readonly string[] TensMap = [string.Empty, "tíu", "tuttugu", "þrjátíu", "fjörutíu", "fimmtíu", "sextíu", "sjötíu", "áttatíu", "níutíu"];
+        static readonly string[] UnitsOrdinalPrefixes = ["núllt", "fyrst", string.Empty, "þriðj", "fjórð", "fimmt", "sjött", "sjöund", "áttund", "níund", "tíund", "elleft", "tólft", "þrettánd", "fjórtánd", "fimmtánd", "sextánd", "sautjánd", "átjánd", "nítjánd"];
+        static readonly string[] TensOrdinalPrefixes = [string.Empty, "tíund", "tuttugast", "þrítugast", "fertugast", "fimmtugast", "sextugast", "sjötugast", "áttugast", "nítugast"];
+        const string AndSplit = "og";
+        class Fact
         {
             public long Power { get; set; }
             public GrammaticalGender Gender { get; set; }
@@ -18,7 +18,7 @@
             public string Single { get; set; }
             public string OrdinalPrefix { get; set; }
         }
-        private static readonly Dictionary<int, Fact> PowerOfTenMap = new()
+        static readonly Dictionary<int, Fact> PowerOfTenMap = new()
         {
             {0,     new(){Power = 0                      , Single = string.Empty,        Plural = string.Empty,  OrdinalPrefix = string.Empty,   Gender = GrammaticalGender.Neuter    }},
             {2,     new(){Power = 2                      , Single = "hundrað",           Plural = "hundruð",     OrdinalPrefix = "hundruðast",   Gender = GrammaticalGender.Neuter    }},
@@ -29,11 +29,11 @@
             {15,    new(){Power = 1000000000000000       , Single = "einn billjarður",   Plural = "billjarðar",  OrdinalPrefix = "billjarðast",  Gender = GrammaticalGender.Masculine }},
             {18,    new(){Power = 1000000000000000000    , Single = "ein trilljón",      Plural = "trilljónir",  OrdinalPrefix = "trilljónast",  Gender = GrammaticalGender.Feminine  }}
         };
-        private static bool IsAndSplitNeeded(int number) =>
+        static bool IsAndSplitNeeded(int number) =>
             number <= 20 || number % 10 == 0 && number < 100 || number % 100 == 0;
-        private static string GetOrdinalEnding(GrammaticalGender gender) =>
+        static string GetOrdinalEnding(GrammaticalGender gender) =>
             gender == GrammaticalGender.Masculine ? "i" : "a";
-        private static void GetUnits(ICollection<string> builder, long number, GrammaticalGender gender)
+        static void GetUnits(ICollection<string> builder, long number, GrammaticalGender gender)
         {
             if (number is > 0 and < 5)
             {
@@ -51,7 +51,7 @@
                 builder.Add(UnitsMap[number]);
             }
         }
-        private static void CollectOrdinalParts(ICollection<string> builder, int threeDigitPart, Fact conversionRule, GrammaticalGender partGender, GrammaticalGender ordinalGender)
+        static void CollectOrdinalParts(ICollection<string> builder, int threeDigitPart, Fact conversionRule, GrammaticalGender partGender, GrammaticalGender ordinalGender)
         {
             var hundreds = threeDigitPart / 100;
             var hundredRemainder = threeDigitPart % 100;
@@ -116,7 +116,7 @@
                 builder.Add(conversionRule.OrdinalPrefix + GetOrdinalEnding(ordinalGender));
             }
         }
-        private static string CollectOrdinalPartsUnderAHundred(int number, GrammaticalGender gender)
+        static string CollectOrdinalPartsUnderAHundred(int number, GrammaticalGender gender)
         {
             string returnValue = null;
             if (number is >= 0 and < 20)
@@ -142,7 +142,7 @@
             }
             return returnValue;
         }
-        private static void CollectParts(IList<string> parts, ref long number, ref bool needsAnd, Fact rule)
+        static void CollectParts(IList<string> parts, ref long number, ref bool needsAnd, Fact rule)
         {
             var remainder = number / rule.Power;
             if (remainder > 0)
@@ -157,7 +157,7 @@
                 needsAnd = true;
             }
         }
-        private static void CollectPart(ICollection<string> parts, long number, Fact rule)
+        static void CollectPart(ICollection<string> parts, long number, Fact rule)
         {
             if (number == 1)
             {
@@ -169,7 +169,7 @@
                 parts.Add(rule.Plural);
             }
         }
-        private static void CollectPartUnderOneThousand(ICollection<string> builder, long number, GrammaticalGender gender)
+        static void CollectPartUnderOneThousand(ICollection<string> builder, long number, GrammaticalGender gender)
         {
             var hundreds = number / 100;
             var hundredRemainder = number % 100;
@@ -209,7 +209,7 @@
                 GetUnits(builder, hundredRemainder, gender);
             }
         }
-        private static void CollectOrdinal(IList<string> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
+        static void CollectOrdinal(IList<string> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
         {
             var remainder = number / rule.Power;
             if (remainder > 0)

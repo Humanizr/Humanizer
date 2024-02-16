@@ -2,10 +2,10 @@
 {
     class LatvianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["nulle", "vien", "div", "trīs", "četr", "piec", "seš", "septiņ", "astoņ", "deviņ", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit"];
-        private static readonly string[] TensMap = ["nulle", "desmit", "divdesmit", "trīsdesmit", "četrdesmit", "piecdesmit", "sešdesmit", "septiņdesmit", "astoņdesmit", "deviņdesmit"];
-        private static readonly string[] HundredsMap = ["nulle", "simt", "divsimt", "trīssimt", "četrsimt", "piecsimt", "sešsimt", "septiņsimt", "astoņsimt", "deviņsimt"];
-        private static readonly string[] UnitsOrdinal = [string.Empty, "pirm", "otr", "treš", "ceturt", "piekt", "sest", "septīt", "astot", "devīt", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit", "divdesmit"];
+        static readonly string[] UnitsMap = ["nulle", "vien", "div", "trīs", "četr", "piec", "seš", "septiņ", "astoņ", "deviņ", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit"];
+        static readonly string[] TensMap = ["nulle", "desmit", "divdesmit", "trīsdesmit", "četrdesmit", "piecdesmit", "sešdesmit", "septiņdesmit", "astoņdesmit", "deviņdesmit"];
+        static readonly string[] HundredsMap = ["nulle", "simt", "divsimt", "trīssimt", "četrsimt", "piecsimt", "sešsimt", "septiņsimt", "astoņsimt", "deviņsimt"];
+        static readonly string[] UnitsOrdinal = [string.Empty, "pirm", "otr", "treš", "ceturt", "piekt", "sest", "septīt", "astot", "devīt", "desmit", "vienpadsmit", "divpadsmit", "trīspadsmit", "četrpadsmit", "piecpadsmit", "sešpadsmit", "septiņpadsmit", "astoņpadsmit", "deviņpadsmit", "divdesmit"];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
@@ -187,7 +187,7 @@
             return string.Join(" ", parts);
         }
 
-        private static string GetOrdinalEndingForGender(GrammaticalGender gender)
+        static string GetOrdinalEndingForGender(GrammaticalGender gender)
         {
             switch (gender)
             {
@@ -204,7 +204,7 @@
             }
         }
 
-        private static string GetCardinalEndingForGender(GrammaticalGender gender, long number)
+        static string GetCardinalEndingForGender(GrammaticalGender gender, long number)
         {
             switch (gender)
             {

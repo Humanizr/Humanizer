@@ -3,9 +3,9 @@
     class MalteseFormatter(string localeCode) :
         DefaultFormatter(localeCode)
     {
-        private const string DualPostfix = "_Dual";
+        const string DualPostfix = "_Dual";
 
-        private static readonly string[] DualResourceKeys =
+        static readonly string[] DualResourceKeys =
         [
             "DateHumanize_MultipleDaysAgo", "DateHumanize_MultipleDaysFromNow", "DateHumanize_MultipleHoursAgo", "DateHumanize_MultipleHoursFromNow" ,
             "DateHumanize_MultipleMonthsAgo", "DateHumanize_MultipleMonthsFromNow", "DateHumanize_MultipleYearsAgo", "DateHumanize_MultipleYearsFromNow",
