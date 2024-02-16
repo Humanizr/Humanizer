@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     public class StringExtensionsTests
     {

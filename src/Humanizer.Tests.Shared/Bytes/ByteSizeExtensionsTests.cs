@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Tests.Bytes
+﻿namespace Humanizer.Tests.Bytes
 {
     [UseCulture("en")]
     public class ByteSizeExtensionsTests
