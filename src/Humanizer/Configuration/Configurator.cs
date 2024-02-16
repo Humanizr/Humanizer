@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Provides a configuration point for Humanizer
