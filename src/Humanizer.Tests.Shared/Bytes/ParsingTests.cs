@@ -102,7 +102,7 @@ namespace Humanizer.Tests.Bytes
             var resultBool = ByteSize.TryParse(input, out var resultByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new(), resultByteSize);
 
             Assert.Throws<FormatException>(() => { ByteSize.Parse(input); });
         }

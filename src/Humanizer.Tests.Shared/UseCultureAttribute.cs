@@ -39,8 +39,8 @@ namespace Humanizer.Tests
         /// <param name="uiCulture">The name of the UI culture.</param>
         public UseCultureAttribute(string culture, string uiCulture)
         {
-            this.culture = new Lazy<CultureInfo>(() => new CultureInfo(culture));
-            this.uiCulture = new Lazy<CultureInfo>(() => new CultureInfo(uiCulture));
+            this.culture = new(() => new(culture));
+            this.uiCulture = new(() => new(uiCulture));
         }
 
         /// <summary>

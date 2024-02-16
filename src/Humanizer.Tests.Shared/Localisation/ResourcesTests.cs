@@ -13,7 +13,7 @@
         [Fact]
         public void CanGetCultureSpecificTranslationsWithExplicitCulture()
         {
-            var format = Resources.GetResource("DateHumanize_MultipleYearsAgo", new CultureInfo("ro"));
+            var format = Resources.GetResource("DateHumanize_MultipleYearsAgo", new("ro"));
             Assert.Equal("acum {0}{1} ani", format);
         }
     }

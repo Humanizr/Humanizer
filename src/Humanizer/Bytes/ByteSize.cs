@@ -423,7 +423,7 @@ namespace Humanizer
             };
 
             // Setup the result
-            result = new ByteSize();
+            result = new();
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
