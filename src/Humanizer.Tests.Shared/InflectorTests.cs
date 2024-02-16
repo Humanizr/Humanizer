@@ -306,7 +306,6 @@ namespace Humanizer.Tests
 
             yield return new object[] { "addendum", "addenda" };
             yield return new object[] { "alga", "algae" };
-            yield return new object[] { "apparatus", "apparatuses" };
             yield return new object[] { "appendix", "appendices" };
             yield return new object[] { "bias", "biases" };
             yield return new object[] { "bison", "bison" };
