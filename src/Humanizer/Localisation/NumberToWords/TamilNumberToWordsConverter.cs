@@ -228,9 +228,9 @@
             number %= 1000;
 
             if (number > 0)
-                local_word = local_word + "யிரத்து";
+                local_word += "யிரத்து";
             else
-                local_word = local_word + "யிரம்";
+                local_word += "யிரம்";
 
             return local_word;
         }

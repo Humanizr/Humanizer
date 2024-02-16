@@ -145,7 +145,7 @@
 
                 parts.Add(threeDigit);
 
-                rest = rest / 1000;
+                rest /= 1000;
             }
 
             return parts;

@@ -38,7 +38,7 @@
             if (input < 0)
             {
                 negativeNumber = true;
-                input = input * -1;
+                input *= -1;
             }
 
             if (input < 1000000000)
