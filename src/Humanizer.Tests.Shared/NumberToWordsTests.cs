@@ -136,7 +136,7 @@
             var abbrFrom3 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender));
 
             Assert.All(
-                new[] { normalForm1, abbrForm1, normalForm2, abbrForm2, normalForm3, normalForm3 },
+                new[] { normalForm1, abbrForm1, normalForm2, abbrForm2, normalForm3, normalForm3, abbrFrom3 },
                 item => Assert.Equal(expected, item));
         }
 
