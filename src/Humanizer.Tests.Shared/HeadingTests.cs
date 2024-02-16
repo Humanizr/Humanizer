@@ -185,6 +185,6 @@
         [InlineData("O", "de-DE", 90.0)]
         [Theory]
         public void FromShortHeading_CanSpecifyCultureExplicitly(string heading, string culture, double expected) =>
-            Assert.Equal(expected, heading.FromAbbreviatedHeading(new CultureInfo(culture)));
+            Assert.Equal(expected, heading.FromAbbreviatedHeading(new(culture)));
     }
 }

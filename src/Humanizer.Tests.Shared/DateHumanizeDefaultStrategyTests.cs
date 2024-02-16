@@ -137,6 +137,6 @@
         [InlineData(40, TimeUnit.Second, Tense.Past, "ru-RU", "40 секунд назад")]
         [InlineData(2, TimeUnit.Day, Tense.Past, "sv-SE", "för 2 dagar sedan")]
         public void CanSpecifyCultureExplicitly(int unit, TimeUnit timeUnit, Tense tense, string culture, string expected) =>
-            DateHumanize.Verify(expected, unit, timeUnit, tense, culture: new CultureInfo(culture));
+            DateHumanize.Verify(expected, unit, timeUnit, tense, culture: new(culture));
     }
 }

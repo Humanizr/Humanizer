@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="localeCode">Name of the culture to use.</param>
         public DefaultFormatter(string localeCode) =>
-            _culture = new CultureInfo(localeCode);
+            _culture = new(localeCode);
 
         /// <summary>
         /// Now

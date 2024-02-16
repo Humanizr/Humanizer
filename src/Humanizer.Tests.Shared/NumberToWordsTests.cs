@@ -55,7 +55,7 @@
         [InlineData(21, "ar", "الحادي و العشرون")]
         [InlineData(1112, "ru", "одна тысяча сто двенадцатый")]
         public void ToOrdinalWords_CanSpecifyCultureExplicitly(int number, string culture, string expected) =>
-            Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo(culture)));
+            Assert.Equal(expected, number.ToOrdinalWords(new(culture)));
 
         [Theory]
         [InlineData(1, "first")]
@@ -121,7 +121,7 @@
         [InlineData(12, "ta", "பனிரெண்டு")]
         [InlineData(555, "ta", "ஐந்நூற்று ஐம்பத்து ஐந்து")]
         public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected) =>
-            Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
+            Assert.Equal(expected, number.ToWords(new(culture)));
 
         [Theory]
         [InlineData(1, "one")]

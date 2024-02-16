@@ -60,23 +60,23 @@ namespace Humanizer
         /// </remarks>
         private static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new()
         {
-             {'Y', new UnitPrefix("yotta", "septillion", "quadrillion")},
-             {'Z', new UnitPrefix("zetta", "sextillion", "trilliard")},
-             {'E', new UnitPrefix("exa", "quintillion", "trillion")},
-             {'P', new UnitPrefix("peta", "quadrillion", "billiard")},
-             {'T', new UnitPrefix("tera", "trillion", "billion")},
-             {'G', new UnitPrefix("giga", "billion", "milliard")},
-             {'M', new UnitPrefix("mega", "million")},
-             {'k', new UnitPrefix("kilo", "thousand")},
+             {'Y', new("yotta", "septillion", "quadrillion")},
+             {'Z', new("zetta", "sextillion", "trilliard")},
+             {'E', new("exa", "quintillion", "trillion")},
+             {'P', new("peta", "quadrillion", "billiard")},
+             {'T', new("tera", "trillion", "billion")},
+             {'G', new("giga", "billion", "milliard")},
+             {'M', new("mega", "million")},
+             {'k', new("kilo", "thousand")},
 
-             {'m', new UnitPrefix("milli", "thousandth")},
-             {'μ', new UnitPrefix("micro", "millionth")},
-             {'n', new UnitPrefix("nano", "billionth", "milliardth")},
-             {'p', new UnitPrefix("pico", "trillionth", "billionth")},
-             {'f', new UnitPrefix("femto", "quadrillionth", "billiardth")},
-             {'a', new UnitPrefix("atto", "quintillionth", "trillionth")},
-             {'z', new UnitPrefix("zepto", "sextillionth", "trilliardth")},
-             {'y', new UnitPrefix("yocto", "septillionth", "quadrillionth")}
+             {'m', new("milli", "thousandth")},
+             {'μ', new("micro", "millionth")},
+             {'n', new("nano", "billionth", "milliardth")},
+             {'p', new("pico", "trillionth", "billionth")},
+             {'f', new("femto", "quadrillionth", "billiardth")},
+             {'a', new("atto", "quintillionth", "trillionth")},
+             {'z', new("zepto", "sextillionth", "trilliardth")},
+             {'y', new("yocto", "septillionth", "quadrillionth")}
         };
 
         /// <summary>

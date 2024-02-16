@@ -16,10 +16,10 @@
 
         static StringHumanizeExtensions()
         {
-            PascalCaseWordPartsRegex = new Regex(
+            PascalCaseWordPartsRegex = new(
                 $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptionsUtil.Compiled);
-            FreestandingSpacingCharRegex = new Regex(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
+            FreestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
         }
 
         private static string FromUnderscoreDashSeparatedWords(string input) =>

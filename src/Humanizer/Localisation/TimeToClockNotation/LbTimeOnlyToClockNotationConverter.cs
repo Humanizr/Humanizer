@@ -41,7 +41,7 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         var tempRoundedMinutes = (int)(5 * Math.Round(time.Minute / 5.0));
         var roundedHours = tempRoundedMinutes == 60 ? time.Hour + 1 : time.Hour;
         var roundedMinutes = tempRoundedMinutes == 60 ? 0 : tempRoundedMinutes;
-        return new TimeOnly(roundedHours, roundedMinutes);
+        return new(roundedHours, roundedMinutes);
     }
 
     private static string GetMinuteExpression(int minute, string nextWord = "")
