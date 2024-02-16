@@ -69,7 +69,7 @@
             var abbrForm2 = number.ToOrdinalWords(default, WordForm.Abbreviation);
 
             Assert.All(
-                new string[] { normalForm1, abbrForm1, normalForm2, abbrForm2 },
+                new[] { normalForm1, abbrForm1, normalForm2, abbrForm2 },
                 item => Assert.Equal(expected, item));
         }
 
@@ -91,7 +91,7 @@
             var abbrForm2 = number.ToOrdinalWords(default, WordForm.Abbreviation, cultureInfo);
 
             Assert.All(
-                new string[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
+                new[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
                 item => Assert.Equal(expected, item));
         }
 
@@ -136,7 +136,7 @@
             var abbrFrom3 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender));
 
             Assert.All(
-                new string[] { normalForm1, abbrForm1, normalForm2, abbrForm2, normalForm3, normalForm3 },
+                new[] { normalForm1, abbrForm1, normalForm2, abbrForm2, normalForm3, normalForm3 },
                 item => Assert.Equal(expected, item));
         }
 
@@ -158,7 +158,7 @@
             var abbrForm2 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender), cultureInfo);
 
             Assert.All(
-                new string[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
+                new[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
                 item => Assert.Equal(expected, item));
         }
 
