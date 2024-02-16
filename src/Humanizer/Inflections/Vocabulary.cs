@@ -118,10 +118,14 @@ public class Vocabulary
 
         // the Plurality is unknown so we should check all possibilities
         var asPlural = ApplyRules(plurals, word, false);
-        var asPluralAsSingular = ApplyRules(singulars, asPlural, false);
         if (asPlural == word ||
-            word + "s" == asPlural ||
-            asPluralAsSingular != word ||
+            word + "s" == asPlural)
+        {
+            return result ?? word;
+        }
+
+        var asPluralAsSingular = ApplyRules(singulars, asPlural, false);
+        if (asPluralAsSingular != word ||
             result == word)
         {
             return result ?? word;
