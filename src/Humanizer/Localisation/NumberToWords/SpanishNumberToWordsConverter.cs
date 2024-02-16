@@ -283,23 +283,18 @@
         private static string PluralizeGreaterThanMillion(string singularWord) =>
             singularWord.TrimEnd('ó', 'n') + "ones";
 
+        static Dictionary<string,long> numbersAndWordsDict = new()
+        {
+            { "trillón", 1_000_000_000_000_000_000 },
+            { "billón", 1_000_000_000_000 },
+            { "millón", 1_000_000 }
+        };
+
         private string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
         {
             List<string> wordBuilder = [];
 
-            const long oneTrillion = 1_000_000_000_000_000_000;
-            const long oneBillion = 1_000_000_000_000;
-            const long oneMillion = 1_000_000;
-
             remainder = inputNumber;
-
-            var numbersAndWordsDict = new Dictionary<string, long>()
-            {
-                { "trillón", oneTrillion },
-                { "billón", oneBillion },
-                { "millón", oneMillion }
-            };
-
             foreach (var numberAndWord in numbersAndWordsDict)
             {
                 if (remainder / numberAndWord.Value > 0)
