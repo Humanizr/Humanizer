@@ -14,7 +14,7 @@
         /// Creates a localiser registry with the default localiser set to the provided value
         /// </summary>
         public LocaliserRegistry(TLocaliser defaultLocaliser) =>
-            _defaultLocaliser = (culture) => defaultLocaliser;
+            _defaultLocaliser = _ => defaultLocaliser;
 
         /// <summary>
         /// Creates a localiser registry with the default localiser factory set to the provided value
@@ -39,7 +39,7 @@
         /// Registers the localiser for the culture provided
         /// </summary>
         public void Register(string localeCode, TLocaliser localiser) =>
-            _localisers[localeCode] = (culture) => localiser;
+            _localisers[localeCode] = _ => localiser;
 
         /// <summary>
         /// Registers the localiser factory for the culture provided
