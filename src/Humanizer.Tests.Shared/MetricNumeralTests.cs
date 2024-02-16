@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class MetricNumeralTests

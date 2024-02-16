@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     internal class ToTitleCase : ICulturedStringTransformer
     {

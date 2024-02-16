@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     internal class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
     {

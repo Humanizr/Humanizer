@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Contains extension methods for humanizing string values.
