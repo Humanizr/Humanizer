@@ -67,7 +67,7 @@
 
             if (number % 10 == 3 && number != 13)
             {
-                return Convert((number / 10) * 10) + " و سوم";
+                return Convert(number / 10 * 10) + " و سوم";
             }
 
             var word = Convert(number);

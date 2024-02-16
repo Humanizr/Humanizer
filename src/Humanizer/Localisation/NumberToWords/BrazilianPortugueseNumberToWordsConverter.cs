@@ -32,7 +32,7 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 // gender is not applied for billions
                 parts.Add(number / 1000000000 >= 2
@@ -42,7 +42,7 @@
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 // gender is not applied for millions
                 parts.Add(number / 1000000 >= 2
@@ -52,14 +52,14 @@
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 // gender is not applied for thousands
                 parts.Add(number / 1000 == 1 ? "mil" : $"{Convert(number / 1000, GrammaticalGender.Masculine)} mil");
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 if (number == 100)
                 {
@@ -68,7 +68,7 @@
                 else
                 {
                     // Gender is applied to hundreds starting from 200
-                    parts.Add(ApplyGender(PortugueseHundredsMap[(number / 100)], gender));
+                    parts.Add(ApplyGender(PortugueseHundredsMap[number / 100], gender));
                 }
 
                 number %= 100;
@@ -88,7 +88,7 @@
                 else
                 {
                     var lastPart = PortugueseTensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
                         lastPart += $" e {ApplyGender(PortugueseUnitsMap[number % 10], gender)}";
                     }
@@ -110,7 +110,7 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 parts.Add(number / 1000000000 == 1
                     ? ApplyOrdinalGender("bilionésimo", gender)
@@ -119,7 +119,7 @@
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 parts.Add(number / 1000000 == 1
                     ? ApplyOrdinalGender("milionésimo", gender)
@@ -128,7 +128,7 @@
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 parts.Add(number / 1000 == 1
                     ? ApplyOrdinalGender("milésimo", gender)
@@ -137,13 +137,13 @@
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalHundredsMap[number / 100], gender));
                 number %= 100;
             }
 
-            if ((number / 10) > 0)
+            if (number / 10 > 0)
             {
                 parts.Add(ApplyOrdinalGender(PortugueseOrdinalTensMap[number / 10], gender));
                 number %= 10;

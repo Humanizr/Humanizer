@@ -59,7 +59,7 @@
 
             var lastOrdinalSubstitution = "";
 
-            if ((input / 1000000000000) > 0)
+            if (input / 1000000000000 > 0)
             {
                 if (isOrdinal)
                     lastOrdinalSubstitution = Convert(input / 1000000000000, gender, false) + " трилион" +
@@ -67,7 +67,7 @@
                 input %= 1000000000000;
             }
 
-            if ((input / 1000000000) > 0)
+            if (input / 1000000000 > 0)
             {
                 parts.Add(input < 2000000000 ? "един милиард" : Convert(input / 1000000000, gender, false) + " милиарда");
 
@@ -77,7 +77,7 @@
                 input %= 1000000000;
             }
 
-            if ((input / 1000000) > 0)
+            if (input / 1000000 > 0)
             {
                 parts.Add(input < 2000000 ? "един милион" : Convert(input / 1000000, gender, false) + " милиона");
 
@@ -88,7 +88,7 @@
                 input %= 1000000;
             }
 
-            if ((input / 1000) > 0)
+            if (input / 1000 > 0)
             {
                 if (input < 2000)
                     parts.Add("хиляда");

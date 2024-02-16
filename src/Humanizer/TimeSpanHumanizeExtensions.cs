@@ -81,7 +81,7 @@
 
         private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
-            var isTimeUnitToGetTheMaximumTimeUnit = (timeUnitToGet == maximumTimeUnit);
+            var isTimeUnitToGetTheMaximumTimeUnit = timeUnitToGet == maximumTimeUnit;
             switch (timeUnitToGet)
             {
                 case TimeUnit.Millisecond:

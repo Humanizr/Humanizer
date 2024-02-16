@@ -76,7 +76,7 @@
             {
                 var factor = Convert.ToInt32(Math.Floor((double)days / 30));
                 var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 30));
-                months = (days >= 30 * (factor + precision)) ? maxMonths : maxMonths - 1;
+                months = days >= 30 * (factor + precision) ? maxMonths : maxMonths - 1;
             }
 
             // year calculation
@@ -89,7 +89,7 @@
             {
                 var factor = Convert.ToInt32(Math.Floor((double)days / 365));
                 var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 365));
-                years = (days >= 365 * (factor + precision)) ? maxMonths : maxMonths - 1;
+                years = days >= 365 * (factor + precision) ? maxMonths : maxMonths - 1;
             }
 
             // start computing result from larger units to smaller ones

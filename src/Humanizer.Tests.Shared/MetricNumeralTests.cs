@@ -79,7 +79,7 @@
         [Theory]
         [InlineData("0", 0d, false, true, null)]
         [InlineData("123", 123d, false, true, null)]
-        [InlineData("-123", (-123d), false, true, null)]
+        [InlineData("-123", -123d, false, true, null)]
         [InlineData("1.23k", 1230d, false, true, null)]
         [InlineData("1 k", 1000d, true, true, null)]
         [InlineData("1 kilo", 1000d, true, false, null)]

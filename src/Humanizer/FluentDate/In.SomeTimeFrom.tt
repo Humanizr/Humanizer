@@ -12,7 +12,7 @@ namespace Humanizer;
 public partial class In
 {
 <#for (var i = 1; i <= 10; i++){
-    var plural = ( i > 1 ? "s" : "");
+    var plural = i > 1 ? "s" : "";
     var second = "Second" + plural;
     var minute = "Minute" + plural;
     var hour = "Hour" + plural;

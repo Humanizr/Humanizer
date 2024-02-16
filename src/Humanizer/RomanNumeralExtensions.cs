@@ -48,7 +48,7 @@ namespace Humanizer
 
             var length = input.Length;
 
-            if ((length == 0) || IsInvalidRomanNumeral(input))
+            if (length == 0 || IsInvalidRomanNumeral(input))
             {
                 throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(input));
             }

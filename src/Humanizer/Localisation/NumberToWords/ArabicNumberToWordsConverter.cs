@@ -85,7 +85,7 @@
                     else
                     {
                         var ones = tens % 10;
-                        tens = (tens / 10);
+                        tens = tens / 10;
 
                         if (ones > 0)
                         {

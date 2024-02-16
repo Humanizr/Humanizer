@@ -38,33 +38,33 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000)} milyard");
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000)} milyon");
                 number %= 1000000;
             }
 
-            var thousand = (number / 1000);
+            var thousand = number / 1000;
             if (thousand > 0)
             {
                 parts.Add($"{(thousand > 1 ? Convert(thousand) : "")} min".Trim());
                 number %= 1000;
             }
 
-            var hundred = (number / 100);
+            var hundred = number / 100;
             if (hundred > 0)
             {
                 parts.Add($"{(hundred > 1 ? Convert(hundred) : "")} yüz".Trim());
                 number %= 100;
             }
 
-            if ((number / 10) > 0)
+            if (number / 10 > 0)
             {
                 parts.Add(TensMap[number / 10]);
                 number %= 10;

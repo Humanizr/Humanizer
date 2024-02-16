@@ -145,7 +145,7 @@
                 }
 
                 // if this is the last set, an accent could be due
-                var unitsText = (thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units]);
+                var unitsText = thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units];
 
                 words += unitsText;
             }

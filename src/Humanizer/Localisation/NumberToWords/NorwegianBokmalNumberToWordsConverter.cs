@@ -59,7 +59,7 @@ namespace Humanizer
             var millionOrMore = false;
 
             const int billion = 1000000000;
-            if ((number / billion) > 0)
+            if (number / billion > 0)
             {
                 millionOrMore = true;
                 var isExactOrdinal = isOrdinal && number % billion == 0;
@@ -68,7 +68,7 @@ namespace Humanizer
             }
 
             const int million = 1000000;
-            if ((number / million) > 0)
+            if (number / million > 0)
             {
                 millionOrMore = true;
                 var isExactOrdinal = isOrdinal && number % million == 0;
@@ -77,7 +77,7 @@ namespace Humanizer
             }
 
             var thousand = false;
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 thousand = true;
                 parts.Add(Part("{0}tusen", number % 1000 < 100 ? "tusen" : "ettusen", number / 1000));
@@ -85,7 +85,7 @@ namespace Humanizer
             }
 
             var hundred = false;
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 hundred = true;
                 parts.Add(Part("{0}hundre", thousand || millionOrMore ? "ethundre" : "hundre", number / 100));
@@ -113,7 +113,7 @@ namespace Humanizer
                 else
                 {
                     var lastPart = TensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
                         lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
                     }

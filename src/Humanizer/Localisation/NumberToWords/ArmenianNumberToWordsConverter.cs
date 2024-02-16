@@ -53,40 +53,40 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000000000000) > 0)
+            if (number / 1000000000000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000000000000)} քվինտիլիոն");
                 number %= 1000000000000000000;
             }
 
-            if ((number / 1000000000000000) > 0)
+            if (number / 1000000000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000000000)} կվադրիլիոն");
                 number %= 1000000000000000;
             }
 
-            if ((number / 1000000000000) > 0)
+            if (number / 1000000000000 > 0)
 
             {
                 parts.Add($"{Convert(number / 1000000000000)} տրիլիոն");
                 number %= 1000000000000;
             }
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000000)} միլիարդ");
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 parts.Add($"{Convert(number / 1000000)} միլիոն");
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
-                if ((number / 1000) == 1)
+                if (number / 1000 == 1)
                 {
                     parts.Add("հազար");
                 }
@@ -98,9 +98,9 @@
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
-                if ((number / 100) == 1)
+                if (number / 100 == 1)
                 {
                     parts.Add("հարյուր");
                 }
@@ -121,7 +121,7 @@
                 else
                 {
                     var lastPart = TensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
                         lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
                     }

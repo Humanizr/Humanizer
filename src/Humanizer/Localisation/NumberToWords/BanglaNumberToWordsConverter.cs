@@ -78,25 +78,25 @@
 
             var parts = new List<string>();
 
-            if ((number / 10000000) > 0)
+            if (number / 10000000 > 0)
             {
                 parts.Add($"{Convert(number / 10000000)} কোটি");
                 number %= 10000000;
             }
 
-            if ((number / 100000) > 0)
+            if (number / 100000 > 0)
             {
                 parts.Add($"{Convert(number / 100000)} লক্ষ");
                 number %= 100000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 parts.Add($"{Convert(number / 1000)} হাজার");
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 parts.Add($"{HundredsMap[number / 100]}");
                 number %= 100;

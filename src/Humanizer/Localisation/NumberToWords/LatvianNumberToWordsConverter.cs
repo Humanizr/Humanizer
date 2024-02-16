@@ -17,7 +17,7 @@
             var parts = new List<string>();
             var number = (long)input;
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 var millionPart = "";
                 if (number == 1000000)
@@ -32,7 +32,7 @@
                 parts.Add(millionPart);
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 var thousandsPart = "";
                 if (number == 1000)
@@ -51,7 +51,7 @@
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 var hundredsPart = "";
                 if (number == 100)
@@ -72,7 +72,7 @@
 
             if (number > 19)
             {
-                var tensPart = TensMap[(number / 10)];
+                var tensPart = TensMap[number / 10];
                 parts.Add(tensPart);
                 number %= 10;
             }
@@ -102,7 +102,7 @@
 
             var number = (long)input;
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 var millionPart = "";
                 if (number == 1000000)
@@ -117,10 +117,10 @@
                 parts.Add(millionPart);
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 var thousandsPart = "";
-                if ((number % 1000) == 0)
+                if (number % 1000 == 0)
                 {
                     if (number == 1000)
                     {
@@ -146,12 +146,12 @@
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 var hundredsPart = "";
-                if ((number % 100) == 0)
+                if (number % 100 == 0)
                 {
-                    hundredsPart = HundredsMap[(number / 100)] + GetOrdinalEndingForGender(gender);
+                    hundredsPart = HundredsMap[number / 100] + GetOrdinalEndingForGender(gender);
                 }
                 else
                 {
@@ -170,8 +170,8 @@
 
             if (number > 19)
             {
-                var tensPart = TensMap[(number / 10)];
-                if ((number % 10) == 0)
+                var tensPart = TensMap[number / 10];
+                if (number % 10 == 0)
                 {
                     tensPart += GetOrdinalEndingForGender(gender);
                 }

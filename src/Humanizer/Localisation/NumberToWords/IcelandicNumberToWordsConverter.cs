@@ -30,7 +30,7 @@
             {18,    new(){Power = 1000000000000000000    , Single = "ein trilljón",      Plural = "trilljónir",  OrdinalPrefix = "trilljónast",  Gender = GrammaticalGender.Feminine  }}
         };
         private static bool IsAndSplitNeeded(int number) =>
-            (((number <= 20) || (number % 10 == 0) && (number < 100)) || (number % 100 == 0));
+            number <= 20 || number % 10 == 0 && number < 100 || number % 100 == 0;
         private static string GetOrdinalEnding(GrammaticalGender gender) =>
             gender == GrammaticalGender.Masculine ? "i" : "a";
         private static void GetUnits(ICollection<string> builder, long number, GrammaticalGender gender)

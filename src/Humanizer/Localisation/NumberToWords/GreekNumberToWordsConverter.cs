@@ -182,7 +182,7 @@
 
         private string ConvertIntBH(long number, bool returnPluralized)
         {
-            var result = (number / 10 == 1) ? TensNoDiacriticsMap[number / 10] : TensMap[number / 10];
+            var result = number / 10 == 1 ? TensNoDiacriticsMap[number / 10] : TensMap[number / 10];
 
             if (number % 10 != 0)
             {

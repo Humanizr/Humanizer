@@ -31,7 +31,7 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 parts.Add(number / 1000000000 == 1
                     ? "miljardi "
@@ -40,7 +40,7 @@
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 parts.Add(number / 1000000 == 1
                     ? "miljoona "
@@ -49,7 +49,7 @@
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 parts.Add(number / 1000 == 1
                     ? "tuhat "
@@ -58,7 +58,7 @@
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 parts.Add(number / 100 == 1
                     ? "sata"
@@ -67,7 +67,7 @@
                 number %= 100;
             }
 
-            if (number >= 20 && (number / 10) > 0)
+            if (number >= 20 && number / 10 > 0)
             {
                 parts.Add($"{Convert(number / 10)}kymmentä");
                 number %= 10;
@@ -104,31 +104,31 @@
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
-                parts.Add($"{((number / 1000000000) == 1 ? "" : ToOrdinal(number / 1000000000, true))}miljardis");
+                parts.Add($"{(number / 1000000000 == 1 ? "" : ToOrdinal(number / 1000000000, true))}miljardis");
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
-                parts.Add($"{((number / 1000000) == 1 ? "" : ToOrdinal(number / 1000000, true))}miljoonas");
+                parts.Add($"{(number / 1000000 == 1 ? "" : ToOrdinal(number / 1000000, true))}miljoonas");
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
-                parts.Add($"{((number / 1000) == 1 ? "" : ToOrdinal(number / 1000, true))}tuhannes");
+                parts.Add($"{(number / 1000 == 1 ? "" : ToOrdinal(number / 1000, true))}tuhannes");
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
-                parts.Add($"{((number / 100) == 1 ? "" : ToOrdinal(number / 100, true))}sadas");
+                parts.Add($"{(number / 100 == 1 ? "" : ToOrdinal(number / 100, true))}sadas");
                 number %= 100;
             }
 
-            if (number >= 20 && (number / 10) > 0)
+            if (number >= 20 && number / 10 > 0)
             {
                 parts.Add($"{ToOrdinal(number / 10, true)}kymmenes");
                 number %= 10;
