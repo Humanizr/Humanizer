@@ -144,7 +144,6 @@
             }
 
             return thousandsString;
-
         }
 
         private string ConvertImpl(long number, bool returnPluralized)
