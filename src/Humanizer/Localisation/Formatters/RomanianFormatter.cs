@@ -1,7 +1,5 @@
 ﻿namespace Humanizer
 {
-    using System;
-
     internal class RomanianFormatter() :
         DefaultFormatter(RomanianCultureCode)
     {
