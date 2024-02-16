@@ -29,7 +29,7 @@
             return result;
         }
 
-         public string NumberToText( long number)
+         public static string NumberToText( long number)
          {
              if (number < 0)
                  return "(Negative) " + NumberToText(-number);

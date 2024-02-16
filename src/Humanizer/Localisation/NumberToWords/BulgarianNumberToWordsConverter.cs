@@ -37,7 +37,7 @@
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
             Convert(input, gender, false);
 
-        private string Convert(long input, GrammaticalGender gender, bool isOrdinal, bool addAnd = true)
+        private static string Convert(long input, GrammaticalGender gender, bool isOrdinal, bool addAnd = true)
         {
             if (input is > int.MaxValue or < int.MinValue)
             {
