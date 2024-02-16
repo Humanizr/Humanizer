@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class OrdinalizeTests

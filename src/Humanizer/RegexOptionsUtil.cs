@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace Humanizer
 {
     internal static class RegexOptionsUtil

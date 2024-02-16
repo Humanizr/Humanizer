@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Reflection;
+﻿using System.Reflection;
 using Xunit.Sdk;
 
 namespace Humanizer.Tests
