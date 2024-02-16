@@ -19,7 +19,7 @@
 
             if (number / 1000000 > 0)
             {
-                var millionPart = "";
+                string millionPart;
                 if (number == 1000000)
                 {
                     millionPart = "miljons";
@@ -34,7 +34,7 @@
 
             if (number / 1000 > 0)
             {
-                var thousandsPart = "";
+                string thousandsPart;
                 if (number == 1000)
                 {
                     thousandsPart = "tūkstotis";
@@ -53,7 +53,7 @@
 
             if (number / 100 > 0)
             {
-                var hundredsPart = "";
+                string hundredsPart;
                 if (number == 100)
                 {
                     hundredsPart = parts.Contains("tūkstoš") ? "viens simts" : "simts";
@@ -104,7 +104,7 @@
 
             if (number / 1000000 > 0)
             {
-                var millionPart = "";
+                string millionPart;
                 if (number == 1000000)
                 {
                     millionPart = "miljon" + GetOrdinalEndingForGender(gender);
@@ -119,7 +119,7 @@
 
             if (number / 1000 > 0)
             {
-                var thousandsPart = "";
+                string thousandsPart;
                 if (number % 1000 == 0)
                 {
                     if (number == 1000)
@@ -148,7 +148,7 @@
 
             if (number / 100 > 0)
             {
-                var hundredsPart = "";
+                string hundredsPart;
                 if (number % 100 == 0)
                 {
                     hundredsPart = HundredsMap[number / 100] + GetOrdinalEndingForGender(gender);

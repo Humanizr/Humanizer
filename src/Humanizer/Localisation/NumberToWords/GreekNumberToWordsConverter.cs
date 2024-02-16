@@ -199,7 +199,7 @@
 
         private string ConvertIntBT(long number, bool returnPluralized)
         {
-            var result = "";
+            string result;
 
             if (number / 100 == 1)
             {

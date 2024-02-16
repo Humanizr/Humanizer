@@ -236,25 +236,22 @@
         }
         private static string GetHundredsValue(ref long number)
         {
-            var local_word = "";
+            var local_word = HundredsMap[number / 100 - 1];
+            if (number / 100 == 9)
             {
-                local_word = HundredsMap[number / 100 - 1];
-                if (number / 100 == 9)
-                {
-                    if (number % 100 == 0)
-                        local_word += "ம்";
-                    else
-                        local_word += "த்து";
-                }
-                else if (number % 100 >= 1)
-                    local_word += "ற்று";
+                if (number % 100 == 0)
+                    local_word += "ம்";
                 else
-                    local_word += "று";
-
-                number %= 100;
-
-                return local_word;
+                    local_word += "த்து";
             }
+            else if (number % 100 >= 1)
+                local_word += "ற்று";
+            else
+                local_word += "று";
+
+            number %= 100;
+
+            return local_word;
         }
 
         private static string RemoveOnePrefix(string toWords)
