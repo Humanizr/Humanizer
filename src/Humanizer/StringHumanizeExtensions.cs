@@ -29,12 +29,16 @@
         {
             var result = string.Join(" ", PascalCaseWordPartsRegex
                 .Matches(input).Cast<Match>()
-                .Select(match => match.Value.ToCharArray().All(char.IsUpper) &&
-                    (match.Value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || match.Value == "I")
-                    ? match.Value
-                    : match.Value.ToLower()));
+                .Select(match =>
+                {
+                    var value = match.Value;
+                    return value.All(char.IsUpper) &&
+                           (value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || value == "I")
+                        ? value
+                        : value.ToLower();
+                }));
 
-            if (result.Replace(" ", "").ToCharArray().All(c => char.IsUpper(c)) &&
+            if (result.Replace(" ", "").All(char.IsUpper) &&
                 result.Contains(" "))
             {
                 result = result.ToLower();
@@ -51,7 +55,7 @@
         public static string Humanize(this string input)
         {
             // if input is all capitals (e.g. an acronym) then return it without change
-            if (input.ToCharArray().All(char.IsUpper))
+            if (input.All(char.IsUpper))
             {
                 return input;
             }

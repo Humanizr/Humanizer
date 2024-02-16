@@ -29,7 +29,7 @@ namespace Humanizer
 
             var alphaNumericalCharactersProcessed = 0;
 
-            if (value.ToCharArray().Count(char.IsLetterOrDigit) <= length)
+            if (value.Count(char.IsLetterOrDigit) <= length)
             {
                 return value;
             }

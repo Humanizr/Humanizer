@@ -25,7 +25,7 @@
         }
 
         private static bool AllCapitals(string input) =>
-            input.ToCharArray().All(char.IsUpper);
+            input.All(char.IsUpper);
 
         private static string ReplaceWithTitleCase(Match word, string source, CultureInfo culture, bool firstWord)
         {
