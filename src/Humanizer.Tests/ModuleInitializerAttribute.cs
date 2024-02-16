@@ -2,7 +2,5 @@
 namespace System.Runtime.CompilerServices;
 
 [AttributeUsage(AttributeTargets.Method, Inherited = false)]
-sealed class ModuleInitializerAttribute : Attribute
-{
-}
+sealed class ModuleInitializerAttribute : Attribute;
 #endif
