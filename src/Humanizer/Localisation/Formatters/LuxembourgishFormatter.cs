@@ -10,10 +10,8 @@ internal class LuxembourgishFormatter() :
     private const char EifelerRuleSuffix = 'n';
     private const string EifelerRuleCharacters = "unitedzohay";
 
-    public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
-    {
-        return base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');
-    }
+    public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
+        base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');
 
     public static string ApplyEifelerRule(string word)
         => word.TrimEnd(EifelerRuleSuffix);
@@ -46,21 +44,19 @@ internal class LuxembourgishFormatter() :
             : resourceString.FormatWith(number, doesEifelerRuleApply ? string.Empty : EifelerRuleSuffix);
     }
 
-    protected override string GetResourceKey(string resourceKey, int number)
-    {
-        return number switch
+    protected override string GetResourceKey(string resourceKey, int number) =>
+        number switch
         {
             2 when resourceKey is "DateHumanize_MultipleDaysAgo" or "DateHumanize_MultipleDaysFromNow" => resourceKey + DualPostfix,
             _ => resourceKey
         };
-    }
 
     private static GrammaticalGender GetUnitGender(string resourceString)
     {
         var words = resourceString.Split(' ');
         return words.Last() switch
         {
-            var x when 
+            var x when
                 x.StartsWith("Millisekonnen")
                 || x.StartsWith("Sekonnen")
                 || x.StartsWith("Minutten")

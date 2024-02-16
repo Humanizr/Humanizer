@@ -70,9 +70,7 @@ namespace Humanizer
             return Textreturn;
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return Convert(number);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            Convert(number);
     }
 }

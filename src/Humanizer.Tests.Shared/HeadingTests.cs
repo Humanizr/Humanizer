@@ -56,10 +56,8 @@ namespace Humanizer.Tests
         [InlineData(360, "N")]
         [InlineData(720, "N")]
         [Theory]
-        public void ToHeadingAbbreviated(double heading, string expected)
-        {
+        public void ToHeadingAbbreviated(double heading, string expected) =>
             Assert.Equal(expected, heading.ToHeading());
-        }
 
         [InlineData(0, "north")]
         [InlineData(22.5, "north-northeast")]
@@ -80,10 +78,8 @@ namespace Humanizer.Tests
         [InlineData(360, "north")]
         [InlineData(720, "north")]
         [Theory]
-        public void ToHeading(double heading, string expected)
-        {
+        public void ToHeading(double heading, string expected) =>
             Assert.Equal(expected, heading.ToHeading(HeadingStyle.Full));
-        }
 
         [InlineData("N", 0)]
         [InlineData("NNE", 22.5)]
@@ -102,10 +98,8 @@ namespace Humanizer.Tests
         [InlineData("NW", 315)]
         [InlineData("NNW", 337.5)]
         [Theory]
-        public void FromShortHeading(string heading, double expected)
-        {
+        public void FromShortHeading(string heading, double expected) =>
             Assert.Equal(expected, heading.FromAbbreviatedHeading());
-        }
 
         [InlineData(0, '↑')]
         [InlineData(11.2, '↑')]
@@ -158,10 +152,8 @@ namespace Humanizer.Tests
         [InlineData(360, '↑')]
         [InlineData(720, '↑')]
         [Theory]
-        public void ToHeadingArrow(double heading, char expected)
-        {
+        public void ToHeadingArrow(double heading, char expected) =>
             Assert.Equal(expected, heading.ToHeadingArrow());
-        }
 
         [InlineData('↑', 0)]
         [InlineData('↗', 45)]
@@ -173,10 +165,8 @@ namespace Humanizer.Tests
         [InlineData('↖', 315)]
         [InlineData('\n', -1)]
         [Theory]
-        public void FromHeadingArrow(char heading, double expected)
-        {
+        public void FromHeadingArrow(char heading, double expected) =>
             Assert.Equal(expected, heading.FromHeadingArrow());
-        }
 
         [InlineData("↑", 0)]
         [InlineData("↗", 45)]
@@ -189,18 +179,14 @@ namespace Humanizer.Tests
         [InlineData("", -1)]
         [InlineData("xyz", -1)]
         [Theory]
-        public void FromHeadingArrow_Also_Works_With_Strings(string heading, double expected)
-        {
+        public void FromHeadingArrow_Also_Works_With_Strings(string heading, double expected) =>
             Assert.Equal(expected, heading.FromHeadingArrow());
-        }
 
         [InlineData("NNW", "en-US", 337.5)]
         [InlineData("ØNØ", "da", 67.5)]
         [InlineData("O", "de-DE", 90.0)]
         [Theory]
-        public void FromShortHeading_CanSpecifyCultureExplicitly(string heading, string culture, double expected)
-        {
+        public void FromShortHeading_CanSpecifyCultureExplicitly(string heading, string culture, double expected) =>
             Assert.Equal(expected, heading.FromAbbreviatedHeading(new CultureInfo(culture)));
-        }
     }
 }

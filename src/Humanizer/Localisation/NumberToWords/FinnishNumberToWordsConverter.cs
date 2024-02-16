@@ -146,9 +146,7 @@
             return string.Join("", parts);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return ToOrdinal(number, false);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            ToOrdinal(number, false);
     }
 }

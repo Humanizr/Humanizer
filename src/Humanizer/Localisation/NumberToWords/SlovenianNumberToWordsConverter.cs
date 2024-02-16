@@ -7,10 +7,8 @@
 
         private readonly CultureInfo _culture;
 
-        public SlovenianNumberToWordsConverter(CultureInfo culture)
-        {
+        public SlovenianNumberToWordsConverter(CultureInfo culture) =>
             _culture = culture;
-        }
 
         public override string Convert(long input)
         {
@@ -103,10 +101,8 @@
             return string.Join("", parts);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return number.ToString(_culture);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            number.ToString(_culture);
 
         private string Part(string singular, string dual, string trialQuadral, string plural, int number)
         {

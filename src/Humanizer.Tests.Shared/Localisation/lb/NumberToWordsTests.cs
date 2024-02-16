@@ -47,20 +47,16 @@ public class NumberToWordsTests
     [InlineData(8183162164626926, "aacht Billiarden eenhonnertdräianachtzeg Billiounen eenhonnertzweeasechzeg Milliarden eenhonnertvéierasechzeg Milliounen sechshonnertsechsanzwanzegdausendnénghonnertsechsanzwanzeg")]
     [InlineData(4564121926659524672, "véier Trilliounen fënnefhonnertvéierasechzeg Billiarden eenhonnerteenanzwanzeg Billiounen nénghonnertsechsanzwanzeg Milliarden sechshonnertnéngafofzeg Milliounen fënnefhonnertvéieranzwanzegdausendsechshonnertzweeasiwwenzeg")]
     [InlineData(-751633619, "minus siwenhonnerteenafofzeg Milliounen sechshonnertdräiandrëssegdausendsechshonnertnonzéng")]
-    public void ToWords(long number, string expected)
-    {
+    public void ToWords(long number, string expected) =>
         Assert.Equal(expected, number.ToWords());
-    }
 
     [Theory]
     [InlineData(1, "eng")]
     [InlineData(2, "zwou")]
     [InlineData(3501, "dräidausendfënnefhonnerteng")]
     [InlineData(3502, "dräidausendfënnefhonnertzwou")]
-    public void ToWordsFeminine(long number, string expected)
-    {
+    public void ToWordsFeminine(long number, string expected) =>
         Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-    }
 
     [Theory]
     [InlineData(0, "nullten")]
@@ -103,10 +99,8 @@ public class NumberToWordsTests
     [InlineData(751633617, "siwenhonnerteenafofzegmilliounensechshonnertdräiandrëssegdausendsechshonnertsiwwenzéngten")]
     [InlineData(1111111118, "engmilliardeenhonnerteelefmilliouneneenhonnerteelefdausendeenhonnertuechtzéngten")]
     [InlineData(-751633619, "minus siwenhonnerteenafofzegmilliounensechshonnertdräiandrëssegdausendsechshonnertnonzéngten")]
-    public void ToOrdinalWords(int number, string expected)
-    {
+    public void ToOrdinalWords(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords());
-    }
 
     [Theory]
     [InlineData(0, "nullt")]
@@ -129,10 +123,8 @@ public class NumberToWordsTests
     [InlineData(751633617, "siwenhonnerteenafofzegmilliounensechshonnertdräiandrëssegdausendsechshonnertsiwwenzéngt")]
     [InlineData(1111111118, "engmilliardeenhonnerteelefmilliouneneenhonnerteelefdausendeenhonnertuechtzéngt")]
     [InlineData(-751633619, "minus siwenhonnerteenafofzegmilliounensechshonnertdräiandrëssegdausendsechshonnertnonzéngt")]
-    public void ToOrdinalWordsFeminine(int number, string expected)
-    {
+    public void ToOrdinalWordsFeminine(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-    }
 
     [Theory]
     [InlineData(0, "nullt")]
@@ -155,8 +147,6 @@ public class NumberToWordsTests
     [InlineData(751633617, "siwenhonnerteenafofzegmilliounensechshonnertdräiandrëssegdausendsechshonnertsiwwenzéngt")]
     [InlineData(1111111118, "engmilliardeenhonnerteelefmilliouneneenhonnerteelefdausendeenhonnertuechtzéngt")]
     [InlineData(-751633619, "minus siwenhonnerteenafofzegmilliounensechshonnertdräiandrëssegdausendsechshonnertnonzéngt")]
-    public void ToOrdinalWordsNeuter(int number, string expected)
-    {
+    public void ToOrdinalWordsNeuter(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-    }
 }

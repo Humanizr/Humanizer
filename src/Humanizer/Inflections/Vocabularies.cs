@@ -7,10 +7,8 @@
     {
         private static readonly Lazy<Vocabulary> Instance;
 
-        static Vocabularies()
-        {
+        static Vocabularies() =>
             Instance = new Lazy<Vocabulary>(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
-        }
 
         /// <summary>
         /// The default vocabulary used for singular/plural irregularities.

@@ -23,9 +23,7 @@
         [InlineData("OneYetTwo", "OneYetTwo")]
         [InlineData("OneNorTwo", "OneNorTwo")]
         [InlineData("WordSoTwo", "WordSoTwo")]
-        public void CanDehumanizeIntoAPascalCaseWord(string input, string expectedResult)
-        {
+        public void CanDehumanizeIntoAPascalCaseWord(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Dehumanize());
-        }
     }
 }

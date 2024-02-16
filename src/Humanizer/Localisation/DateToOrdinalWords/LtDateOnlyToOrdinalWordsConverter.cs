@@ -4,15 +4,11 @@ namespace Humanizer
 {
     internal class LtDateOnlyToOrdinalWordsConverter : IDateOnlyToOrdinalWordConverter
     {
-        public string Convert(DateOnly date)
-        {
-            return date.ToString("yyyy 'm.' MMMM d 'd.'");
-        }
+        public string Convert(DateOnly date) =>
+            date.ToString("yyyy 'm.' MMMM d 'd.'");
 
-        public string Convert(DateOnly date, GrammaticalCase grammaticalCase)
-        {
-            return Convert(date);
-        }
+        public string Convert(DateOnly date, GrammaticalCase grammaticalCase) =>
+            Convert(date);
     }
 }
 #endif

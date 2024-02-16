@@ -15,10 +15,8 @@
         [InlineData("process", 1, "1 process")]
         [InlineData("processes", 2, "2 processes")]
         [InlineData("processes", 1, "1 process")]
-        public void ToQuantity(string word, int quantity, string expected)
-        {
+        public void ToQuantity(string word, int quantity, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity));
-        }
 
         [Theory]
         [InlineData("case", 0, "cases")]
@@ -32,10 +30,8 @@
         [InlineData("process", 1, "process")]
         [InlineData("processes", 2, "processes")]
         [InlineData("processes", 1, "process")]
-        public void ToQuantityWithNoQuantity(string word, int quantity, string expected)
-        {
+        public void ToQuantityWithNoQuantity(string word, int quantity, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.None));
-        }
 
         [Theory]
         [InlineData("case", 0, "0 cases")]
@@ -49,11 +45,9 @@
         [InlineData("process", 1, "1 process")]
         [InlineData("processes", 2, "2 processes")]
         [InlineData("processes", 1, "1 process")]
-        public void ToQuantityNumeric(string word, int quantity, string expected)
-        {
+        public void ToQuantityNumeric(string word, int quantity, string expected) =>
             // ReSharper disable once RedundantArgumentDefaultValue
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Numeric));
-        }
 
         [Theory]
         [InlineData("case", 0, "zero cases")]
@@ -68,9 +62,7 @@
         [InlineData("processes", 2, "two processes")]
         [InlineData("processes", 1200, "one thousand two hundred processes")]
         [InlineData("processes", 1, "one process")]
-        public void ToQuantityWords(string word, int quantity, string expected)
-        {
+        public void ToQuantityWords(string word, int quantity, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Words));
-        }
     }
 }

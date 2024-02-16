@@ -8,40 +8,32 @@
         [InlineData(731, "2 ans")]
         [InlineData(1096, "3 ans")]
         [InlineData(4018, "11 ans")]
-        public void Years(int days, string expected)
-        {
+        public void Years(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [InlineData(366, "un an")]
         [InlineData(731, "deux ans")]
         [InlineData(1096, "trois ans")]
         [InlineData(4018, "onze ans")]
-        public void YearsToWord(int days, string expected)
-        {
+        public void YearsToWord(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
-        }
 
         [Theory]
         [InlineData(31, "1 mois")]
         [InlineData(61, "2 mois")]
         [InlineData(92, "3 mois")]
         [InlineData(335, "11 mois")]
-        public void Months(int days, string expected)
-        {
+        public void Months(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [InlineData(31, "un mois")]
         [InlineData(61, "deux mois")]
         [InlineData(92, "trois mois")]
         [InlineData(335, "onze mois")]
-        public void MonthsToWords(int days, string expected)
-        {
+        public void MonthsToWords(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
-        }
 
         [Theory]
         [InlineData(14, "2 semaines")]

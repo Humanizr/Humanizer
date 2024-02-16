@@ -53,10 +53,8 @@
         [InlineData(1000099, "en million og nittini")]
         [InlineData(1000000010, "en milliard og ti")]
         [InlineData(1000110, "en million ethundreogti")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "nullte")]
@@ -106,10 +104,8 @@
         [InlineData(1000099, "en million og nittiniende")]
         [InlineData(1000000010, "en milliard og tiende")]
         [InlineData(1000110, "en million ethundreogtiende")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(2, "to")]
@@ -117,10 +113,8 @@
         [InlineData(0, "null")]
         [InlineData(-1, "minus ei")]
         [InlineData(-2, "minus to")]
-        public void ToWordsFeminine(int number, string expected)
-        {
+        public void ToWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(2, "to")]
@@ -128,9 +122,7 @@
         [InlineData(0, "null")]
         [InlineData(-1, "minus et")]
         [InlineData(-2, "minus to")]
-        public void ToWordsNeuter(int number, string expected)
-        {
+        public void ToWordsNeuter(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Neuter));
-        }
     }
 }

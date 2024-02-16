@@ -25,9 +25,7 @@
         [InlineData(2000, "")]
 
         [Theory]
-        public void ToOrdinalWordsInt(int number, string expected)
-        {
+        public void ToOrdinalWordsInt(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
     }
 }

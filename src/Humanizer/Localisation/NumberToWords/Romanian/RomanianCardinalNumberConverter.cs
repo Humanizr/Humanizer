@@ -266,10 +266,8 @@
             }
         }
 
-        private bool IsAbove20(int number)
-        {
-            return (number >= 20);
-        }
+        private bool IsAbove20(int number) =>
+            (number >= 20);
 
         private string HundredsToText(int hundreds)
         {
@@ -293,10 +291,8 @@
         /// <param name="number">The three-digit number, as units, to convert.</param>
         /// <param name="gender">The grammatical gender to convert to.</param>
         /// <returns>The same three-digit number, as units, expressed as text.</returns>
-        private string UnitsConverter(int number, GrammaticalGender gender)
-        {
-            return ThreeDigitSetConverter(number, gender, true);
-        }
+        private string UnitsConverter(int number, GrammaticalGender gender) =>
+            ThreeDigitSetConverter(number, gender, true);
 
         /// <summary>
         /// Converts a thousands three-digit number to text.

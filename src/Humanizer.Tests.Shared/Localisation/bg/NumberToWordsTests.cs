@@ -46,10 +46,8 @@
         [InlineData(5200, "пет хиляди и двеста")]
         [InlineData(1125000, "един милион и сто двадесет и пет хиляди")]
         [InlineData(1000000000, "един милиард")]
-        public void ToWordsBg(long number, string expected)
-        {
+        public void ToWordsBg(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "нулев")]
@@ -81,10 +79,8 @@
         [InlineData(21, "двадесет и първи")]
         [InlineData(22, "двадесет и втори")]
         [InlineData(35, "тридесет и пети")]
-        public void ToOrdinalWordsMasculine(int number, string expected)
-        {
+        public void ToOrdinalWordsMasculine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(0, "нулева")]
@@ -116,10 +112,8 @@
         [InlineData(21, "двадесет и първа")]
         [InlineData(22, "двадесет и втора")]
         [InlineData(35, "тридесет и пета")]
-        public void ToOrdinalWordsFeminine(int number, string expected)
-        {
+        public void ToOrdinalWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "нулево")]
@@ -151,9 +145,7 @@
         [InlineData(21, "двадесет и първо")]
         [InlineData(22, "двадесет и второ")]
         [InlineData(35, "тридесет и пето")]
-        public void ToOrdinalWordsNeuter(int number, string expected)
-        {
+        public void ToOrdinalWordsNeuter(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-        }
     }
 }

@@ -155,10 +155,8 @@
             }
         }
 
-        private static string ChooseForm(long number, string[] forms)
-        {
-            return forms[GetFormIndex(number)];
-        }
+        private static string ChooseForm(long number, string[] forms) =>
+            forms[GetFormIndex(number)];
 
         private static string ChooseCardinalOrOrdinalForm(long number, string ordinalForm, string[] cardinalForms,
             bool useOrdinalForm = false)

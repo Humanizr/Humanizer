@@ -17,10 +17,8 @@ namespace Humanizer.Tests
         [InlineData(1000d, "1 k")]
         [InlineData(1000d, "1 kilo")]
         [InlineData(1E-3, "1milli")]
-        public void FromMetric(double expected, string input)
-        {
+        public void FromMetric(double expected, string input) =>
             Assert.Equal(expected, input.FromMetric());
-        }
 
         [Theory]
         [InlineData("")]
@@ -32,17 +30,13 @@ namespace Humanizer.Tests
         [InlineData("0.02l")]
         [InlineData("0.12kilkilo")]
         [InlineData("0.02alois")]
-        public void FromMetricOnInvalid(string input)
-        {
+        public void FromMetricOnInvalid(string input) =>
             Assert.Throws<ArgumentException>(() => input.FromMetric());
-        }
 
         [Fact]
-        public void FromMetricOnNull()
-        {
+        public void FromMetricOnNull() =>
             Assert.Throws<ArgumentNullException>(() =>
-                                                 MetricNumeralExtensions.FromMetric(null));
-        }
+                MetricNumeralExtensions.FromMetric(null));
 
         [Theory]
         [MemberData(nameof(SymbolRange))]
@@ -189,19 +183,15 @@ namespace Humanizer.Tests
         [InlineData("1 milli", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseName, null)]
         [InlineData("1 thousandth", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseShortScaleWord, null)]
         [InlineData("1 thousandth", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseLongScaleWord, null)]
-        public void ToMetric(string expected, double input, MetricNumeralFormats? format, int? decimals)
-        {
+        public void ToMetric(string expected, double input, MetricNumeralFormats? format, int? decimals) =>
             Assert.Equal(expected, input.ToMetric(format, decimals));
-        }
 
         [Theory]
         [InlineData(1E+27)]
         [InlineData(1E-27)]
         [InlineData(-1E+27)]
         [InlineData(-1E-27)]
-        public void ToMetricOnInvalid(double input)
-        {
+        public void ToMetricOnInvalid(double input) =>
             Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
-        }
     }
 }

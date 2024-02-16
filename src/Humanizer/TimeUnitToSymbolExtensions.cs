@@ -10,9 +10,7 @@
         /// </summary>
         /// <param name="unit">Unit of time to be turned to a symbol</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        public static string ToSymbol(this TimeUnit unit, CultureInfo culture = null)
-        {
-            return Configurator.GetFormatter(culture).TimeUnitHumanize(unit);
-        }
+        public static string ToSymbol(this TimeUnit unit, CultureInfo culture = null) =>
+            Configurator.GetFormatter(culture).TimeUnitHumanize(unit);
     }
 }

@@ -11,55 +11,43 @@
         /// Constructor.
         /// </summary>
         /// <param name="localeCode">Name of the culture to use.</param>
-        public DefaultFormatter(string localeCode)
-        {
+        public DefaultFormatter(string localeCode) =>
             _culture = new CultureInfo(localeCode);
-        }
 
         /// <summary>
         /// Now
         /// </summary>
         /// <returns>Returns Now</returns>
-        public virtual string DateHumanize_Now()
-        {
-            return GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
-        }
+        public virtual string DateHumanize_Now() =>
+            GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
 
         /// <summary>
         /// Never
         /// </summary>
         /// <returns>Returns Never</returns>
-        public virtual string DateHumanize_Never()
-        {
-            return Format(ResourceKeys.DateHumanize.Never);
-        }
+        public virtual string DateHumanize_Never() =>
+            Format(ResourceKeys.DateHumanize.Never);
 
         /// <summary>
         /// Returns the string representation of the provided DateTime
         /// </summary>
-        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit)
-        {
-            return GetResourceForDate(timeUnit, timeUnitTense, unit);
-        }
+        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit) =>
+            GetResourceForDate(timeUnit, timeUnitTense, unit);
 
         /// <summary>
         /// 0 seconds
         /// </summary>
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
-        public virtual string TimeSpanHumanize_Zero()
-        {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, true);
-        }
+        public virtual string TimeSpanHumanize_Zero() =>
+            GetResourceForTimeSpan(TimeUnit.Millisecond, 0, true);
 
         /// <summary>
         /// Returns the string representation of the provided TimeSpan
         /// </summary>
         /// <param name="timeUnit">A time unit to represent.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false)
-        {
-            return GetResourceForTimeSpan(timeUnit, unit, toWords);
-        }
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false) =>
+            GetResourceForTimeSpan(timeUnit, unit, toWords);
 
         /// <inheritdoc cref="IFormatter.DataUnitHumanize(DataUnit, double, bool)"/>
         public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
@@ -134,14 +122,10 @@
         /// </summary>
         /// <param name="resourceKey">The resource key that's being in formatting</param>
         /// <param name="number">The number of the units being used in formatting</param>
-        protected virtual string GetResourceKey(string resourceKey, int number)
-        {
-            return resourceKey;
-        }
+        protected virtual string GetResourceKey(string resourceKey, int number) =>
+            resourceKey;
 
-        protected virtual string GetResourceKey(string resourceKey)
-        {
-            return resourceKey;
-        }
+        protected virtual string GetResourceKey(string resourceKey) =>
+            resourceKey;
     }
 }

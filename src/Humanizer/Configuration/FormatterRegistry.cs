@@ -72,9 +72,7 @@
             }
         }
 
-        private void RegisterCzechSlovakPolishFormatter(string localeCode)
-        {
+        private void RegisterCzechSlovakPolishFormatter(string localeCode) =>
             Register(localeCode, new CzechSlovakPolishFormatter(localeCode));
-        }
     }
 }

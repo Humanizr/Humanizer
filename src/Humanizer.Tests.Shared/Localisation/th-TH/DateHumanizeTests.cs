@@ -8,9 +8,7 @@
         [InlineData(10, "10 วินาทีที่แล้ว")]
         [InlineData(59, "59 วินาทีที่แล้ว")]
         [InlineData(60, "หนึ่งนาทีที่แล้ว")]
-        public void SecondsAgo(int seconds, string expected)
-        {
+        public void SecondsAgo(int seconds, string expected) =>
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
-        }
     }
 }

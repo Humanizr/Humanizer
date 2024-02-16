@@ -83,10 +83,8 @@
         [InlineData(61, "2 luni")]
         [InlineData(92, "3 luni")]
         [InlineData(335, "11 luni")]
-        public void Months(int days, string expected)
-        {
+        public void Months(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [Trait("Translation", "Native speaker")]
@@ -95,23 +93,17 @@
         [InlineData(1096, "3 ani")]
         [InlineData(4018, "11 ani")]
         [InlineData(7500, "20 de ani")]
-        public void Years(int days, string expected)
-        {
+        public void Years(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Fact]
-        public void NoTime()
-        {
+        public void NoTime() =>
             Assert.Equal("0 de milisecunde", TimeSpan.Zero.Humanize());
-        }
 
         [Fact, CustomDescription("The name of this test is confusing because has no sense. Instead should be read as an interval with duration zero and not the absence of time.")]
-        public void NoTimeToWords()
-        {
+        public void NoTimeToWords() =>
             // Usage in Romanian: "Timp execuție: 0 secunde."
             // Should be equivalent with TimeSpan.FromSeconds(0).Humanize()
             Assert.Equal("0 secunde", TimeSpan.Zero.Humanize(toWords: true));
-        }
     }
 }

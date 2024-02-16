@@ -28,7 +28,7 @@
         // https://stackoverflow.com/a/7490772/1720761
         /// <summary>
         /// Returns a textual representation of the heading.
-        /// 
+        ///
         /// This representation has a maximum deviation of 11.25 degrees.
         /// </summary>
         /// <returns>A textual representation of the heading</returns>
@@ -52,7 +52,7 @@
 
         /// <summary>
         /// Returns a char arrow indicating the heading.
-        /// 
+        ///
         /// This representation has a maximum deviation of 22.5 degrees.
         /// </summary>
         /// <returns>The heading arrow.</returns>
@@ -68,10 +68,8 @@
         /// </summary>
         /// <param name="heading">The short textual representation of a heading</param>
         /// <returns>The heading. -1 if the heading could not be parsed.</returns>
-        public static double FromAbbreviatedHeading(this string heading)
-        {
-            return heading.FromAbbreviatedHeading(null);
-        }
+        public static double FromAbbreviatedHeading(this string heading) =>
+            heading.FromAbbreviatedHeading(null);
 
         /// <summary>
         /// Returns a heading based on the short textual representation of the heading.

@@ -17,10 +17,8 @@
         [InlineData("102", "102ème")]
         [InlineData("103", "103ème")]
         [InlineData("1001", "1001ème")]
-        public void OrdinalizeString(string number, string ordinalized)
-        {
+        public void OrdinalizeString(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData("0", "0ème")]
@@ -36,10 +34,8 @@
         [InlineData("102", "102ème")]
         [InlineData("103", "103ème")]
         [InlineData("1001", "1001ème")]
-        public void OrdinalizeStringFeminine(string number, string ordinalized)
-        {
+        public void OrdinalizeStringFeminine(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
 
         [Theory]
         [InlineData("0", "0ème")]
@@ -55,10 +51,8 @@
         [InlineData("102", "102ème")]
         [InlineData("103", "103ème")]
         [InlineData("1001", "1001ème")]
-        public void OrdinalizeStringNeuter(string number, string ordinalized)
-        {
+        public void OrdinalizeStringNeuter(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Neuter), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0ème")]
@@ -75,10 +69,8 @@
         [InlineData(102, "102ème")]
         [InlineData(103, "103ème")]
         [InlineData(1001, "1001ème")]
-        public void OrdinalizeNumber(int number, string ordinalized)
-        {
+        public void OrdinalizeNumber(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0ème")]
@@ -95,10 +87,8 @@
         [InlineData(102, "102ème")]
         [InlineData(103, "103ème")]
         [InlineData(1001, "1001ème")]
-        public void OrdinalizeNumberFeminine(int number, string ordinalized)
-        {
+        public void OrdinalizeNumberFeminine(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0ème")]
@@ -115,9 +105,7 @@
         [InlineData(102, "102ème")]
         [InlineData(103, "103ème")]
         [InlineData(1001, "1001ème")]
-        public void OrdinalizeNumberNeuter(int number, string ordinalized)
-        {
+        public void OrdinalizeNumberNeuter(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Neuter), ordinalized);
-        }
     }
 }

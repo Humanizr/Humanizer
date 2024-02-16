@@ -71,10 +71,8 @@
             "osiemset pięćdziesiąt cztery miliony " +
             "siedemset siedemdziesiąt pięć tysięcy " +
             "osiemset osiem")]
-        public void ToWordsPolish(long number, string expected)
-        {
+        public void ToWordsPolish(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(-1, "minus jeden", GrammaticalGender.Masculine)]
@@ -103,9 +101,7 @@
         [InlineData(1000002, "milion dwa", GrammaticalGender.Masculine)]
         [InlineData(1000002, "milion dwie", GrammaticalGender.Feminine)]
         [InlineData(1000002, "milion dwa", GrammaticalGender.Neuter)]
-        public void ToWordsPolishWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToWordsPolishWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
     }
 }

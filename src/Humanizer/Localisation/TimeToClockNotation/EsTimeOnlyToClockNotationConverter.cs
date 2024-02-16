@@ -48,15 +48,11 @@ namespace Humanizer
                 $"{article} {hour} y {normalizedMinutes.ToWords()} {dayPeriod}");
         }
 
-        private static int NormalizeHour(TimeOnly time)
-        {
-            return time.Hour % 12 != 0 ? (time.Hour % 12) : 12;
-        }
+        private static int NormalizeHour(TimeOnly time) =>
+            time.Hour % 12 != 0 ? (time.Hour % 12) : 12;
 
-        private static string GetArticle(TimeOnly time)
-        {
-            return time.Hour is 1 or 13 ? "la" : "las";
-        }
+        private static string GetArticle(TimeOnly time) =>
+            time.Hour is 1 or 13 ? "la" : "las";
 
         private static string GetDayPeriod(TimeOnly time)
         {
@@ -78,20 +74,14 @@ namespace Humanizer
             return "de la noche";
         }
 
-        private static bool IsEarlyMorning(TimeOnly time)
-        {
-            return time.Hour >= 1 && time.Hour < MORNING;
-        }
+        private static bool IsEarlyMorning(TimeOnly time) =>
+            time.Hour >= 1 && time.Hour < MORNING;
 
-        private static bool IsMorning(TimeOnly time)
-        {
-            return time.Hour >= MORNING && time.Hour < NOON;
-        }
+        private static bool IsMorning(TimeOnly time) =>
+            time.Hour >= MORNING && time.Hour < NOON;
 
-        private static bool IsAfternoon(TimeOnly time)
-        {
-            return time.Hour >= NOON && time.Hour < AFTERNOON;
-        }
+        private static bool IsAfternoon(TimeOnly time) =>
+            time.Hour >= NOON && time.Hour < AFTERNOON;
     }
 }
 

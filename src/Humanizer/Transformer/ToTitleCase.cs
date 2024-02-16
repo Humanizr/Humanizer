@@ -4,10 +4,8 @@ namespace Humanizer
 {
     internal class ToTitleCase : ICulturedStringTransformer
     {
-        public string Transform(string input)
-        {
-            return Transform(input, null);
-        }
+        public string Transform(string input) =>
+            Transform(input, null);
 
         public string Transform(string input, CultureInfo culture)
         {
@@ -28,10 +26,8 @@ namespace Humanizer
             return result;
         }
 
-        private static bool AllCapitals(string input)
-        {
-            return input.ToCharArray().All(char.IsUpper);
-        }
+        private static bool AllCapitals(string input) =>
+            input.ToCharArray().All(char.IsUpper);
 
         private static string ReplaceWithTitleCase(Match word, string source, CultureInfo culture, bool firstWord)
         {

@@ -109,9 +109,7 @@
             return string.Join(" ", parts);
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        private static bool ExceptionNumbersToWords(int number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
     }
 }

@@ -131,10 +131,8 @@
             return string.Format(pluralFormat, Convert(number));
         }
 
-        private int NoRestIndex(int number)
-        {
-            return number == 0 ? 0 : 1;
-        }
+        private int NoRestIndex(int number) =>
+            number == 0 ? 0 : 1;
 
         private string GetEndingForGender(GrammaticalGender gender)
         {
@@ -151,9 +149,7 @@
             }
         }
 
-        protected virtual string GetTens(long tens)
-        {
-            return TensMap[tens];
-        }
+        protected virtual string GetTens(long tens) =>
+            TensMap[tens];
     }
 }

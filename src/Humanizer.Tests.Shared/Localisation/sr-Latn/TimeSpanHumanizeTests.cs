@@ -9,10 +9,8 @@
         [InlineData(731, "2 godine")]
         [InlineData(1096, "3 godine")]
         [InlineData(4018, "11 godina")]
-        public void Years(int days, string expected)
-        {
+        public void Years(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [Trait("Translation", "Google")]
@@ -20,10 +18,8 @@
         [InlineData(61, "2 meseca")]
         [InlineData(92, "3 meseca")]
         [InlineData(335, "11 meseci")]
-        public void Months(int days, string expected)
-        {
+        public void Months(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
-        }
 
         [Theory]
         [InlineData(35, "5 nedelja")]

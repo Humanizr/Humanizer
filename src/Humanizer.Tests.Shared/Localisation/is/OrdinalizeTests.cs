@@ -17,9 +17,7 @@
         [InlineData("102", "102.")]
         [InlineData("103", "103.")]
         [InlineData("1001", "1001.")]
-        public void OrdinalizeString(string number, string ordinalized)
-        {
+        public void OrdinalizeString(string number, string ordinalized) =>
             Assert.Equal(ordinalized, number.Ordinalize());
-        }
     }
 }

@@ -87,17 +87,13 @@
         //[InlineData(8183162164626926, "எட்டு quadrillion கோடியே நாற்பத்தி ஆறு இலட்சத்து இருபத்து ஆறாயிரத்து தொள்ளாயிரத்து இருபத்து ஆறு")]
         //[InlineData(4564121926659524672, "நான்கு quintillion ஐந்நூற்று அறுபத்து நான்கு quadrillion கோடியே தொண்ணூற்றி ஐந்து இலட்சத்து இருபத்து நான்காயிரத்து அறுநூற்று எழுபத்தி இரண்டு")]
         [InlineData(-751633619, "கழித்தல் எழுபத்தி ஐந்து கோடியே பதினாறு இலட்சத்து முப்பத்து மூன்றாயிரத்து அறுநூற்று பத்தொன்பது")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1, "ஒன்று")]
         [InlineData(3501, "மூன்றாயிரத்து ஐந்நூற்று ஒன்று")]
-        public void ToWordsFeminine(long number, string expected)
-        {
+        public void ToWordsFeminine(long number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
     }
 }

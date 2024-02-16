@@ -61,10 +61,8 @@
         [InlineData(80080080, "quatre-vingts millions quatre-vingt mille quatre-vingts")]
         [InlineData(200200200, "deux cents millions deux cent mille deux cents")]
         [InlineData(200200202, "deux cents millions deux cent mille deux cent deux")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1, "une", GrammaticalGender.Feminine)]
@@ -93,10 +91,8 @@
         [InlineData(121, "cent vingt et un", GrammaticalGender.Masculine)]
         [InlineData(10121, "dix mille cent vingt et une", GrammaticalGender.Feminine)]
         [InlineData(10121, "dix mille cent vingt et un", GrammaticalGender.Masculine)]
-        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
 
         [Theory]
         [InlineData(0, "zérotième")]
@@ -142,10 +138,8 @@
         [InlineData(100000, "cent millième")]
         [InlineData(1000000, "millionième")]
         [InlineData(1000000000, "milliardième")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(1, "première", GrammaticalGender.Feminine)]
@@ -156,9 +150,7 @@
         [InlineData(121, "cent vingt et unième", GrammaticalGender.Masculine)]
         [InlineData(10121, "dix mille cent vingt et unième", GrammaticalGender.Feminine)]
         [InlineData(10121, "dix mille cent vingt et unième", GrammaticalGender.Masculine)]
-        public void ToOrdinalWordsWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToOrdinalWordsWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToOrdinalWords(gender));
-        }
     }
 }

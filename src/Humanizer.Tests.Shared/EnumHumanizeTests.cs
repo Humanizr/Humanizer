@@ -3,72 +3,51 @@
     public class EnumHumanizeTests
     {
         [Fact]
-        public void HonorsDescriptionAttribute()
-        {
+        public void HonorsDescriptionAttribute() =>
             Assert.Equal(EnumTestsResources.MemberWithDescriptionAttribute, EnumUnderTest.MemberWithDescriptionAttribute.Humanize());
-        }
 
         [Fact]
-        public void HonorsDescriptionAttributeSubclasses()
-        {
+        public void HonorsDescriptionAttributeSubclasses() =>
             Assert.Equal("Overridden " + EnumTestsResources.MemberWithDescriptionAttributeSubclass, EnumUnderTest.MemberWithDescriptionAttributeSubclass.Humanize());
-        }
 
         [Fact]
-        public void HonorsAnyAttributeWithDescriptionStringProperty()
-        {
+        public void HonorsAnyAttributeWithDescriptionStringProperty() =>
             Assert.Equal(EnumTestsResources.MemberWithCustomDescriptionAttribute, EnumUnderTest.MemberWithCustomDescriptionAttribute.Humanize());
-        }
 
         [Fact]
-        public void OnlyStringDescriptionsApply()
-        {
+        public void OnlyStringDescriptionsApply() =>
             Assert.Equal(EnumTestsResources.MemberWithImposterDescriptionAttribute, EnumUnderTest.MemberWithImposterDescriptionAttribute.Humanize());
-        }
 
         [Fact]
-        public void CanHumanizeMembersWithoutDescriptionAttribute()
-        {
+        public void CanHumanizeMembersWithoutDescriptionAttribute() =>
             Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
-        }
 
         [Fact]
-        public void CanApplyTitleCasingOnEnumHumanization()
-        {
+        public void CanApplyTitleCasingOnEnumHumanization() =>
             Assert.Equal(
                 EnumTestsResources.MemberWithoutDescriptionAttributeTitle,
                 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.Title));
-        }
 
         [Fact]
-        public void CanApplyLowerCaseCasingOnEnumHumanization()
-        {
+        public void CanApplyLowerCaseCasingOnEnumHumanization() =>
             Assert.Equal(
                 EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase,
                 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize(LetterCasing.LowerCase));
-        }
 
         [Fact]
-        public void AllCapitalMembersAreReturnedAsIs()
-        {
+        public void AllCapitalMembersAreReturnedAsIs() =>
             Assert.Equal(EnumUnderTest.ALLCAPITALS.ToString(), EnumUnderTest.ALLCAPITALS.Humanize());
-        }
 
         [Fact]
-        public void HonorsDisplayAttribute()
-        {
+        public void HonorsDisplayAttribute() =>
             Assert.Equal(EnumTestsResources.MemberWithDisplayAttribute, EnumUnderTest.MemberWithDisplayAttribute.Humanize());
-        }
-        [Fact]
-        public void HandlesDisplayAttributeWithNoDescription()
-        {
-            Assert.Equal(EnumTestsResources.MemberWithDisplayAttributeWithoutDescription, EnumUnderTest.MemberWithDisplayAttributeWithoutDescription.Humanize());
-        }
 
         [Fact]
-        public void HonorsLocalizedDisplayAttribute()
-        {
+        public void HandlesDisplayAttributeWithNoDescription() =>
+            Assert.Equal(EnumTestsResources.MemberWithDisplayAttributeWithoutDescription, EnumUnderTest.MemberWithDisplayAttributeWithoutDescription.Humanize());
+
+        [Fact]
+        public void HonorsLocalizedDisplayAttribute() =>
             Assert.Equal(EnumTestsResources.MemberWithLocalizedDisplayAttribute, EnumUnderTest.MemberWithLocalizedDisplayAttribute.Humanize());
-        }
     }
 }

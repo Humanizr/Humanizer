@@ -28,10 +28,8 @@
         /// Calculate rate for the quantity of bytes and interval defined by this instance
         /// </summary>
         /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
-        public string Humanize(TimeUnit timeUnit = TimeUnit.Second)
-        {
-            return Humanize(null, timeUnit);
-        }
+        public string Humanize(TimeUnit timeUnit = TimeUnit.Second) =>
+            Humanize(null, timeUnit);
 
         /// <summary>
         /// Calculate rate for the quantity of bytes and interval defined by this instance

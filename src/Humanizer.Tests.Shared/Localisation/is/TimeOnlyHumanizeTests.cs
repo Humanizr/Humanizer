@@ -37,10 +37,8 @@ namespace Humanizer.Tests.Localisation.@is
         }
 
         [Fact]
-        public void TestNever()
-        {
+        public void TestNever() =>
             Assert.Equal("aldrei", ((TimeOnly?)null).Humanize());
-        }
     }
 }
 

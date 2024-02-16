@@ -42,10 +42,8 @@
         /// "men".ToQuantity(2) => "2 men"
         /// "process".ToQuantity(1200, ShowQuantityAs.Words) => "one thousand two hundred processes"
         /// </example>
-        public static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric)
-        {
-            return input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
-        }
+        public static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric) =>
+            input.ToQuantity(quantity, showQuantityAs, format: null, formatProvider: null);
 
         /// <summary>
         /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
@@ -59,10 +57,8 @@
         /// "request".ToQuantity(10000, format: "N0") => "10,000 requests"
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
-        public static string ToQuantity(this string input, long quantity, string format, IFormatProvider formatProvider = null)
-        {
-            return input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
-        }
+        public static string ToQuantity(this string input, long quantity, string format, IFormatProvider formatProvider = null) =>
+            input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
 
         private static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string format = null, IFormatProvider formatProvider = null)
         {
@@ -113,9 +109,7 @@
         /// <example>
         /// "request".ToQuantity(0.2) => "0.2 requests"
         /// </example>
-        public static string ToQuantity(this string input, double quantity)
-        {
-            return ToQuantity(input, quantity, null, null);
-        }
+        public static string ToQuantity(this string input, double quantity) =>
+            ToQuantity(input, quantity, null, null);
     }
 }

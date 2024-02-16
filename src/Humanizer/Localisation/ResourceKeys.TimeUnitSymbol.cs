@@ -17,10 +17,8 @@
             /// </summary>
             /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
             /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
-            public static string GetResourceKey(TimeUnit unit)
-            {
-                return TimeUnitFormat.FormatWith(unit);
-            }
+            public static string GetResourceKey(TimeUnit unit) =>
+                TimeUnitFormat.FormatWith(unit);
         }
     }
 }

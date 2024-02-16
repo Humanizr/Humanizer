@@ -43,10 +43,8 @@
         [InlineData(415618, "vierhonderdvijftienduizend zeshonderdachttien")]
         [InlineData(16415618, "zestien miljoen vierhonderdvijftienduizend zeshonderdachttien")]
         [InlineData(322, "driehonderdtweeëntwintig")]
-        public void IntToWords(int number, string expected)
-        {
+        public void IntToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(100_000_000_000L, "honderd miljard")]
@@ -56,10 +54,8 @@
         [InlineData(100_000_000_000_000_000L, "honderd biljard")]
         [InlineData(1_000_000_000_000_000_000L, "een triljoen")]
         [InlineData(9_223_372_036_854_775_807L, "negen triljoen tweehonderddrieëntwintig biljard driehonderdtweeënzeventig biljoen zesendertig miljard achthonderdvierenvijftig miljoen zevenhonderdvijfenzeventigduizend achthonderdzeven")]
-        public void LongToWords(long number, string expected)
-        {
+        public void LongToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "nulde")]
@@ -113,9 +109,7 @@
         [InlineData(100001, "honderdduizend eerste")]
         [InlineData(1000000, "een miljoenste")]
         [InlineData(1000001, "een miljoen eerste")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

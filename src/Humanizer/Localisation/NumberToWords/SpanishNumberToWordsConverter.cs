@@ -33,10 +33,8 @@
             "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
             "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
 
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
-            return Convert(input, WordForm.Normal, gender, addAnd);
-        }
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
+            Convert(input, WordForm.Normal, gender, addAnd);
 
         public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
         {
@@ -67,10 +65,8 @@
             return BuildWord(wordBuilder);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return ConvertToOrdinal(number, gender, WordForm.Normal);
-        }
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            ConvertToOrdinal(number, gender, WordForm.Normal);
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm)
         {
@@ -139,10 +135,8 @@
             return wordPart;
         }
 
-        private static string ConvertHundredths(in int number, out int remainder, GrammaticalGender gender)
-        {
-            return ConvertMappedOrdinalNumber(number, 100, HundredthsRootMap, out remainder, gender);
-        }
+        private static string ConvertHundredths(in int number, out int remainder, GrammaticalGender gender) =>
+            ConvertMappedOrdinalNumber(number, 100, HundredthsRootMap, out remainder, gender);
 
         private static string ConvertMappedOrdinalNumber(
             in int number,
@@ -188,15 +182,11 @@
             }
         }
 
-        private static string ConvertTenths(in int number, out int remainder, GrammaticalGender gender)
-        {
-            return ConvertMappedOrdinalNumber(number, 10, TenthsRootMap, out remainder, gender);
-        }
+        private static string ConvertTenths(in int number, out int remainder, GrammaticalGender gender) =>
+            ConvertMappedOrdinalNumber(number, 10, TenthsRootMap, out remainder, gender);
 
-        private static string ConvertThousandths(in int number, out int remainder, GrammaticalGender gender)
-        {
-            return ConvertMappedOrdinalNumber(number, 1000, ThousandthsRootMap, out remainder, gender);
-        }
+        private static string ConvertThousandths(in int number, out int remainder, GrammaticalGender gender) =>
+            ConvertMappedOrdinalNumber(number, 1000, ThousandthsRootMap, out remainder, gender);
 
         private static string ConvertUnits(long inputNumber, GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
@@ -264,25 +254,17 @@
             }
         }
 
-        private static bool HasOrdinalAbbreviation(int number, WordForm wordForm)
-        {
-            return number is 1 or 3 && wordForm == WordForm.Abbreviation;
-        }
+        private static bool HasOrdinalAbbreviation(int number, WordForm wordForm) =>
+            number is 1 or 3 && wordForm == WordForm.Abbreviation;
 
-        private static bool IsRoundBillion(int number)
-        {
-            return number >= 1000_000_000 && number % 1_000_000 == 0;
-        }
+        private static bool IsRoundBillion(int number) =>
+            number >= 1000_000_000 && number % 1_000_000 == 0;
 
-        private static bool IsRoundMillion(int number)
-        {
-            return number >= 1000000 && number % 1000000 == 0;
-        }
+        private static bool IsRoundMillion(int number) =>
+            number >= 1000000 && number % 1000000 == 0;
 
-        private static string PluralizeGreaterThanMillion(string singularWord)
-        {
-            return singularWord.TrimEnd('ó', 'n') + "ones";
-        }
+        private static string PluralizeGreaterThanMillion(string singularWord) =>
+            singularWord.TrimEnd('ó', 'n') + "ones";
 
         private string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
         {
@@ -359,15 +341,13 @@
 
             return wordPart;
 
-            static bool IsRoundNumber(int number)
-            {
-                return (number % 10000 == 0 && number < 100000)
-                       || (number % 100000 == 0 && number < 1000000)
-                       || (number % 1000000 == 0 && number < 10000000)
-                       || (number % 10000000 == 0 && number < 100000000)
-                       || (number % 100000000 == 0 && number < 1000000000)
-                       || (number % 1000000000 == 0 && number < int.MaxValue);
-            }
+            static bool IsRoundNumber(int number) =>
+                (number % 10000 == 0 && number < 100000)
+                || (number % 100000 == 0 && number < 1000000)
+                || (number % 1000000 == 0 && number < 10000000)
+                || (number % 10000000 == 0 && number < 100000000)
+                || (number % 100000000 == 0 && number < 1000000000)
+                || (number % 1000000000 == 0 && number < int.MaxValue);
         }
 
         private string ConvertThousands(in long inputNumber, out long remainder, GrammaticalGender gender)

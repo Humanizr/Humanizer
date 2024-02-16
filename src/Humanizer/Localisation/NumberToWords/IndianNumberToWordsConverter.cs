@@ -20,10 +20,8 @@
         private static readonly string[] Tens = {"twenty", "thirty", "forty", "fifty", "sixty", "seventy",
             "eighty", "ninety" };
 
-        public override string Convert(long number)
-        {
-            return NumberToText(number).Trim();
-        }
+        public override string Convert(long number) =>
+            NumberToText(number).Trim();
 
         public override string ConvertToOrdinal(int number)
         {
@@ -58,9 +56,7 @@
              return NumberToText(number / 10000000).Trim() + " crore " + NumberToText(number % 10000000);
          }
 
-        private static bool ExceptionNumbersToWords(long number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        private static bool ExceptionNumbersToWords(long number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
     }
 }

@@ -4,15 +4,11 @@
     {
         private static readonly string[] UnitsMap = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
 
-        public override string Convert(long number)
-        {
-            return Convert(number, false, IsSpecial(number));
-        }
+        public override string Convert(long number) =>
+            Convert(number, false, IsSpecial(number));
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return Convert(number, true, IsSpecial(number));
-        }
+        public override string ConvertToOrdinal(int number) =>
+            Convert(number, true, IsSpecial(number));
 
         private bool IsSpecial(long number) => number > 10 && number < 20;
 

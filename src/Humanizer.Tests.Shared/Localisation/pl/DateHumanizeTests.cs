@@ -11,10 +11,8 @@
         [InlineData(5, "za 5 sekund")]
         [InlineData(6, "za 6 sekund")]
         [InlineData(10, "za 10 sekund")]
-        public void SecondsFromNow(int seconds, string expected)
-        {
+        public void SecondsFromNow(int seconds, string expected) =>
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za minutę")]
@@ -24,10 +22,8 @@
         [InlineData(5, "za 5 minut")]
         [InlineData(6, "za 6 minut")]
         [InlineData(10, "za 10 minut")]
-        public void MinutesFromNow(int minutes, string expected)
-        {
+        public void MinutesFromNow(int minutes, string expected) =>
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za godzinę")]
@@ -37,10 +33,8 @@
         [InlineData(5, "za 5 godzin")]
         [InlineData(6, "za 6 godzin")]
         [InlineData(10, "za 10 godzin")]
-        public void HoursFromNow(int hours, string expected)
-        {
+        public void HoursFromNow(int hours, string expected) =>
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "jutro")]
@@ -50,10 +44,8 @@
         [InlineData(5, "za 5 dni")]
         [InlineData(6, "za 6 dni")]
         [InlineData(10, "za 10 dni")]
-        public void DayFromNow(int days, string expected)
-        {
+        public void DayFromNow(int days, string expected) =>
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za miesiąc")]
@@ -63,10 +55,8 @@
         [InlineData(5, "za 5 miesięcy")]
         [InlineData(6, "za 6 miesięcy")]
         [InlineData(10, "za 10 miesięcy")]
-        public void MonthsFromNow(int months, string expected)
-        {
+        public void MonthsFromNow(int months, string expected) =>
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za rok")]
@@ -76,10 +66,8 @@
         [InlineData(5, "za 5 lat")]
         [InlineData(6, "za 6 lat")]
         [InlineData(10, "za 10 lat")]
-        public void YearsFromNow(int years, string expected)
-        {
+        public void YearsFromNow(int years, string expected) =>
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "przed sekundą")]
@@ -89,10 +77,8 @@
         [InlineData(5, "przed 5 sekundami")]
         [InlineData(6, "przed 6 sekundami")]
         [InlineData(10, "przed 10 sekundami")]
-        public void SecondsAgo(int seconds, string expected)
-        {
+        public void SecondsAgo(int seconds, string expected) =>
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "przed minutą")]
@@ -103,10 +89,8 @@
         [InlineData(6, "przed 6 minutami")]
         [InlineData(10, "przed 10 minutami")]
         [InlineData(60, "przed godziną")]
-        public void MinutesAgo(int minutes, string expected)
-        {
+        public void MinutesAgo(int minutes, string expected) =>
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "przed godziną")]
@@ -116,10 +100,8 @@
         [InlineData(5, "przed 5 godzinami")]
         [InlineData(6, "przed 6 godzinami")]
         [InlineData(10, "przed 10 godzinami")]
-        public void HoursAgo(int hours, string expected)
-        {
+        public void HoursAgo(int hours, string expected) =>
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "wczoraj")]
@@ -128,10 +110,8 @@
         [InlineData(4, "przed 4 dniami")]
         [InlineData(9, "przed 9 dniami")]
         [InlineData(10, "przed 10 dniami")]
-        public void DayAgo(int days, string expected)
-        {
+        public void DayAgo(int days, string expected) =>
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "przed miesiącem")]
@@ -141,10 +121,8 @@
         [InlineData(5, "przed 5 miesiącami")]
         [InlineData(6, "przed 6 miesiącami")]
         [InlineData(10, "przed 10 miesiącami")]
-        public void MonthsAgo(int months, string expected)
-        {
+        public void MonthsAgo(int months, string expected) =>
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "przed rokiem")]
@@ -154,15 +132,11 @@
         [InlineData(5, "przed 5 laty")]
         [InlineData(6, "przed 6 laty")]
         [InlineData(10, "przed 10 laty")]
-        public void YearsAgo(int years, string expected)
-        {
+        public void YearsAgo(int years, string expected) =>
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
-        }
 
         [Fact]
-        public void Now()
-        {
+        public void Now() =>
             DateHumanize.Verify("teraz", 0, TimeUnit.Day, Tense.Past);
-        }
     }
 }

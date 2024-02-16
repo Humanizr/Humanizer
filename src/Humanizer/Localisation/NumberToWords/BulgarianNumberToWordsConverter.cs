@@ -34,10 +34,8 @@
             "осемнадесет", "деветнадесет"
         };
 
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
-            return Convert(input, gender, false);
-        }
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
+            Convert(input, gender, false);
 
         private string Convert(long input, GrammaticalGender gender, bool isOrdinal, bool addAnd = true)
         {
@@ -145,10 +143,8 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int input, GrammaticalGender gender)
-        {
-            return Convert(input, gender, true);
-        }
+        public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
+            Convert(input, gender, true);
 
         private static string GetEndingForGender(GrammaticalGender gender, long input)
         {

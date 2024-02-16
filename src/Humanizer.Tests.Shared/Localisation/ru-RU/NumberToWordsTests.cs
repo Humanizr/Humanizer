@@ -83,19 +83,15 @@
             "восемьсот пятьдесят четыре миллиона " +
             "семьсот семьдесят пять тысяч " +
             "восемьсот восемь")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(122, "сто двадцать две", GrammaticalGender.Feminine)]
         [InlineData(3501, "три тысячи пятьсот одна", GrammaticalGender.Feminine)]
         [InlineData(3501, "три тысячи пятьсот одно", GrammaticalGender.Neuter)]
-        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
 
         [Theory]
         [InlineData(0, "нулевой")]
@@ -165,10 +161,8 @@
         [InlineData(1111111000, "один миллиард сто одиннадцать миллионов стоодиннадцатитысячный")]
         [InlineData(1234567000, "один миллиард двести тридцать четыре миллиона пятисотшестидесятисемитысячный")]
         [InlineData(-751633617, "минус семьсот пятьдесят один миллион шестьсот тридцать три тысячи шестьсот семнадцатый")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "нулевая")]
@@ -233,10 +227,8 @@
         [InlineData(751633617, "семьсот пятьдесят один миллион шестьсот тридцать три тысячи шестьсот семнадцатая")]
         [InlineData(1111111118, "один миллиард сто одиннадцать миллионов сто одиннадцать тысяч сто восемнадцатая")]
         [InlineData(-751633617, "минус семьсот пятьдесят один миллион шестьсот тридцать три тысячи шестьсот семнадцатая")]
-        public void ToOrdinalWordsFeminine(int number, string expected)
-        {
+        public void ToOrdinalWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(3, "третье")]
@@ -249,9 +241,7 @@
         [InlineData(751633617, "семьсот пятьдесят один миллион шестьсот тридцать три тысячи шестьсот семнадцатое")]
         [InlineData(1111111118, "один миллиард сто одиннадцать миллионов сто одиннадцать тысяч сто восемнадцатое")]
         [InlineData(-751633617, "минус семьсот пятьдесят один миллион шестьсот тридцать три тысячи шестьсот семнадцатое")]
-        public void ToOrdinalWordsNeuter(int number, string expected)
-        {
+        public void ToOrdinalWordsNeuter(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-        }
     }
 }

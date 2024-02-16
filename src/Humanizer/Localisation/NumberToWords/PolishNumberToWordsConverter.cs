@@ -34,10 +34,8 @@
 
         private readonly CultureInfo _culture;
 
-        public PolishNumberToWordsConverter(CultureInfo culture)
-        {
+        public PolishNumberToWordsConverter(CultureInfo culture) =>
             _culture = culture;
-        }
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
@@ -52,10 +50,8 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return number.ToString(_culture);
-        }
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            number.ToString(_culture);
 
         private static void CollectParts(ICollection<string> parts, long input, GrammaticalGender gender)
         {

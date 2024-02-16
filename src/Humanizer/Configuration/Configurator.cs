@@ -44,73 +44,39 @@ namespace Humanizer
         public static LocaliserRegistry<ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; } = new TimeOnlyToClockNotationConvertersRegistry();
 #endif
 
-        internal static ICollectionFormatter CollectionFormatter
-        {
-            get
-            {
-                return CollectionFormatters.ResolveForUiCulture();
-            }
-        }
+        internal static ICollectionFormatter CollectionFormatter => CollectionFormatters.ResolveForUiCulture();
 
         /// <summary>
         /// The formatter to be used
         /// </summary>
         /// <param name="culture">The culture to retrieve formatter for. Null means that current thread's UI culture should be used.</param>
-        internal static IFormatter GetFormatter(CultureInfo culture)
-        {
-            return Formatters.ResolveForCulture(culture);
-        }
+        internal static IFormatter GetFormatter(CultureInfo culture) =>
+            Formatters.ResolveForCulture(culture);
 
         /// <summary>
         /// The converter to be used
         /// </summary>
         /// <param name="culture">The culture to retrieve number to words converter for. Null means that current thread's UI culture should be used.</param>
-        internal static INumberToWordsConverter GetNumberToWordsConverter(CultureInfo culture)
-        {
-            return NumberToWordsConverters.ResolveForCulture(culture);
-        }
+        internal static INumberToWordsConverter GetNumberToWordsConverter(CultureInfo culture) =>
+            NumberToWordsConverters.ResolveForCulture(culture);
 
         /// <summary>
         /// The ordinalizer to be used
         /// </summary>
-        internal static IOrdinalizer Ordinalizer
-        {
-            get
-            {
-                return Ordinalizers.ResolveForUiCulture();
-            }
-        }
+        internal static IOrdinalizer Ordinalizer => Ordinalizers.ResolveForUiCulture();
 
         /// <summary>
         /// The ordinalizer to be used
         /// </summary>
-        internal static IDateToOrdinalWordConverter DateToOrdinalWordsConverter
-        {
-            get
-            {
-                return DateToOrdinalWordsConverters.ResolveForUiCulture();
-            }
-        }
+        internal static IDateToOrdinalWordConverter DateToOrdinalWordsConverter => DateToOrdinalWordsConverters.ResolveForUiCulture();
 
 #if NET6_0_OR_GREATER
         /// <summary>
         /// The ordinalizer to be used
         /// </summary>
-        internal static IDateOnlyToOrdinalWordConverter DateOnlyToOrdinalWordsConverter
-        {
-            get
-            {
-                return DateOnlyToOrdinalWordsConverters.ResolveForUiCulture();
-            }
-        }
+        internal static IDateOnlyToOrdinalWordConverter DateOnlyToOrdinalWordsConverter => DateOnlyToOrdinalWordsConverters.ResolveForUiCulture();
 
-        internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter
-        {
-            get
-            {
-                return TimeOnlyToClockNotationConverters.ResolveForUiCulture();
-            }
-        }
+        internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter => TimeOnlyToClockNotationConverters.ResolveForUiCulture();
 #endif
 
         /// <summary>
@@ -142,8 +108,8 @@ namespace Humanizer
         /// </summary>
         public static Func<PropertyInfo, bool> EnumDescriptionPropertyLocator
         {
-            get { return _enumDescriptionPropertyLocator; }
-            set { _enumDescriptionPropertyLocator = value ?? DefaultEnumDescriptionPropertyLocator; }
+            get => _enumDescriptionPropertyLocator;
+            set => _enumDescriptionPropertyLocator = value ?? DefaultEnumDescriptionPropertyLocator;
         }
     }
 }

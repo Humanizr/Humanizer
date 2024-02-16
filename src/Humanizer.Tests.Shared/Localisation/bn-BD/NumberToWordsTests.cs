@@ -34,10 +34,8 @@
         [InlineData(1234567890, "একশ তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশ নব্বই")]
         [InlineData(-1234567890, "ঋণাত্মক একশ তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতষট্টি হাজার আটশ নব্বই")]
         [Theory]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "শূন্য তম")]
@@ -73,9 +71,7 @@
         [InlineData(100000, "লক্ষ তম")]
         [InlineData(1000000, "দশ লক্ষ তম")]
         [InlineData(10000000, "কোটি তম")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

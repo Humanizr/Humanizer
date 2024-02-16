@@ -142,32 +142,26 @@ internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConver
         number %= divisor;
     }
 
-    private string Part(string pluralFormat, string singular, long number, long divisor)
-    {
-        return number switch
+    private string Part(string pluralFormat, string singular, long number, long divisor) =>
+        number switch
         {
             1 => singular,
             2 when divisor >= 1000000 => string.Format(pluralFormat, Convert(number, GrammaticalGender.Feminine)),
             7 => GetPartWithEifelerRule(pluralFormat, number, GrammaticalGender.Masculine),
             _ => string.Format(pluralFormat, Convert(number))
         };
-    }
 
-    private static int NoRestIndex(int number)
-    {
-        return number == 0 ? 0 : 1;
-    }
+    private static int NoRestIndex(int number) =>
+        number == 0 ? 0 : 1;
 
-    private static string GetEndingForGender(GrammaticalGender gender)
-    {
-        return gender switch
+    private static string GetEndingForGender(GrammaticalGender gender) =>
+        gender switch
         {
             GrammaticalGender.Masculine => "ten",
             GrammaticalGender.Feminine => "t",
             GrammaticalGender.Neuter => "t",
             _ => throw new ArgumentOutOfRangeException(nameof(gender))
         };
-    }
 
     private string GetPartWithEifelerRule(string pluralFormat, long number, GrammaticalGender gender)
     {

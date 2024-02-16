@@ -10,17 +10,13 @@
             "", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"
         };
 
-        public override string Convert(long number)
-        {
-            return number == 0
+        public override string Convert(long number) =>
+            number == 0
                 ? "không"
                 : ConvertImpl(number);
-        }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return $"thứ {ConvertToOrdinalImpl(number)}";
-        }
+        public override string ConvertToOrdinal(int number) =>
+            $"thứ {ConvertToOrdinalImpl(number)}";
 
         private string ConvertToOrdinalImpl(int number)
         {

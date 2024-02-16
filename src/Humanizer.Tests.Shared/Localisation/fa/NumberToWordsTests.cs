@@ -35,10 +35,8 @@
         [InlineData(123456789, "صد و بیست و سه میلیون و چهارصد و پنجاه و شش هزار و هفتصد و هشتاد و نه")]
         [InlineData(1234567890, "یک میلیارد و دویست و سی و چهار میلیون و پانصد و شصت و هفت هزار و هشتصد و نود")]
         [InlineData(long.MaxValue, "نه تریلیون و دویست و بیست و سه بیلیارد و سیصد و هفتاد و دو بیلیون و سی و شش میلیارد و هشتصد و پنجاه و چهار میلیون و هفتصد و هفتاد و پنج هزار و هشتصد و هفت")]
-        public void ToWordsFarsi(long number, string expected)
-        {
+        public void ToWordsFarsi(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "صفرم")]
@@ -72,9 +70,7 @@
         [InlineData(1000, "یک هزارم")]
         [InlineData(1333, "یک هزار و سیصد و سی و سوم")]
         [InlineData(1000000, "یک میلیونم")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

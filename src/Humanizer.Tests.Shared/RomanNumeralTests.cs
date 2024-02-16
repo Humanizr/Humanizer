@@ -22,10 +22,8 @@
         [InlineData(400, "CD")]
         [InlineData(500, "D")]
         [InlineData(3999, "MMMCMXCIX")]
-        public void ToRoman(int input, string expected)
-        {
+        public void ToRoman(int input, string expected) =>
             Assert.Equal(expected, input.ToRoman());
-        }
 
         [Theory]
         [InlineData(1, "I")]
@@ -47,9 +45,7 @@
         [InlineData(400, "CD")]
         [InlineData(500, "D")]
         [InlineData(3999, "MMMCMXCIX")]
-        public void FromRoman(int expected, string input)
-        {
+        public void FromRoman(int expected, string input) =>
             Assert.Equal(expected, input.FromRoman());
-        }
     }
 }
