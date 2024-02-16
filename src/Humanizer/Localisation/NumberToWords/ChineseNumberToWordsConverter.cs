@@ -2,7 +2,7 @@
 {
     internal class ChineseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
+        private static readonly string[] UnitsMap = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
 
         public override string Convert(long number) =>
             Convert(number, false, IsSpecial(number));

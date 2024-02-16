@@ -2,7 +2,7 @@
 {
     public class DateHumanize
     {
-        private static readonly object LockObject = new object();
+        private static readonly object LockObject = new();
 
         private static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow, CultureInfo culture)
         {

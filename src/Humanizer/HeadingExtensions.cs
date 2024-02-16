@@ -22,8 +22,8 @@
     /// </summary>
     public static class HeadingExtensions
     {
-        internal static readonly string[] Headings = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
-        internal static readonly char[] HeadingArrows = { '↑', '↗', '→', '↘', '↓', '↙', '←', '↖' };
+        internal static readonly string[] Headings = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+        internal static readonly char[] HeadingArrows = ['↑', '↗', '→', '↘', '↓', '↙', '←', '↖'];
 
         // https://stackoverflow.com/a/7490772/1720761
         /// <summary>
@@ -46,8 +46,7 @@
                 return Resources.GetResource($"{result}_Short", culture);
             }
 
-            result = Resources.GetResource(result, culture);
-            return result;
+            return Resources.GetResource(result, culture);
         }
 
         /// <summary>

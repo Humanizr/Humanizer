@@ -168,10 +168,10 @@
                 : null;
 
         private static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
-            new() { noTimeValue };
+            [noTimeValue];
 
         private static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts) =>
-            (timeParts.Count(x => x != null) == 0);
+            timeParts.Count(x => x != null) == 0;
 
         private static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
         {

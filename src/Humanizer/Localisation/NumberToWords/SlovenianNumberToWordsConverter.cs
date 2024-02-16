@@ -1,14 +1,10 @@
 ﻿namespace Humanizer
 {
-    internal class SlovenianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    internal class SlovenianNumberToWordsConverter(CultureInfo culture) :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst" };
-        private static readonly string[] TensMap = { "nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset" };
-
-        private readonly CultureInfo _culture;
-
-        public SlovenianNumberToWordsConverter(CultureInfo culture) =>
-            _culture = culture;
+        private static readonly string[] UnitsMap = ["nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"];
+        private static readonly string[] TensMap = ["nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"];
 
         public override string Convert(long input)
         {
@@ -102,7 +98,7 @@
         }
 
         public override string ConvertToOrdinal(int number) =>
-            number.ToString(_culture);
+            number.ToString(culture);
 
         private string Part(string singular, string dual, string trialQuadral, string plural, int number)
         {

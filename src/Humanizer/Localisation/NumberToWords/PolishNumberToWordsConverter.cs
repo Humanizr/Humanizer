@@ -1,41 +1,37 @@
 ﻿namespace Humanizer
 {
-    internal class PolishNumberToWordsConverter : GenderedNumberToWordsConverter
+    internal class PolishNumberToWordsConverter(CultureInfo culture) :
+        GenderedNumberToWordsConverter
     {
         private static readonly string[] HundredsMap =
-        {
+        [
             "zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset"
-        };
+        ];
 
         private static readonly string[] TensMap =
-        {
+        [
             "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt",
             "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt"
-        };
+        ];
 
         private static readonly string[] UnitsMap =
-        {
+        [
             "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć",
             "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście",
             "osiemnaście", "dziewiętnaście"
-        };
+        ];
 
         private static readonly string[][] PowersOfThousandMap =
-        {
-            new []{"tysiąc", "tysiące", "tysięcy"},
-            new []{"milion", "miliony", "milionów"},
-            new []{"miliard", "miliardy", "miliardów"},
-            new []{"bilion", "biliony", "bilionów"},
-            new []{"biliard", "biliardy", "biliardów"},
-            new []{"trylion", "tryliony", "trylionów"}
-        };
+        [
+            ["tysiąc", "tysiące", "tysięcy"],
+            ["milion", "miliony", "milionów"],
+            ["miliard", "miliardy", "miliardów"],
+            ["bilion", "biliony", "bilionów"],
+            ["biliard", "biliardy", "biliardów"],
+            ["trylion", "tryliony", "trylionów"]
+        ];
 
         private const long MaxPossibleDivisor = 1_000_000_000_000_000_000;
-
-        private readonly CultureInfo _culture;
-
-        public PolishNumberToWordsConverter(CultureInfo culture) =>
-            _culture = culture;
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
@@ -51,7 +47,7 @@
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-            number.ToString(_culture);
+            number.ToString(culture);
 
         private static void CollectParts(ICollection<string> parts, long input, GrammaticalGender gender)
         {

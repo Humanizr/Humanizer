@@ -2,7 +2,7 @@
 {
     internal class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly Dictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
+        private static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {1, "first"},
             {2, "second"},
@@ -13,12 +13,18 @@
             {9, "ninth"},
             {12, "twelfth"},
         };
-        private static readonly string[] Tillnineteen =  {"one", "two", "three", "four", "five", "six", "seven", "eight",
+        private static readonly string[] Tillnineteen =
+        [
+            "one", "two", "three", "four", "five", "six", "seven", "eight",
             "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
-            "seventeen", "eighteen", "nineteen" };
+            "seventeen", "eighteen", "nineteen"
+        ];
 
-        private static readonly string[] Tens = {"twenty", "thirty", "forty", "fifty", "sixty", "seventy",
-            "eighty", "ninety" };
+        private static readonly string[] Tens =
+        [
+            "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
+            "eighty", "ninety"
+        ];
 
         public override string Convert(long number) =>
             NumberToText(number).Trim();

@@ -2,8 +2,8 @@
 {
     internal class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton" };
-        private static readonly string[] TensMap = { "noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra" };
+        private static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
+        private static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];
 
         private class Fact
         {
@@ -16,12 +16,12 @@
         }
 
         private static readonly Fact[] Hunderds =
-        {
-            new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new Fact {Value = 1000000,    Name = "miljon", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new Fact {Value = 1000,       Name = "tusen", Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
-            new Fact {Value = 100,        Name = "hundra", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
-        };
+        [
+            new(){Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
+            new(){Value = 1000000,    Name = "miljon", Prefix = " ",  Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
+            new(){Value = 1000,       Name = "tusen",  Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
+            new(){Value = 100,        Name = "hundra", Prefix = "",   Postfix = "",  DisplayOneUnit = false}
+        ];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
@@ -108,8 +108,8 @@
         public override string Convert(long input) =>
             Convert(input, GrammaticalGender.Neuter);
 
-        private static string[] ordinalNumbers = new[]
-        {
+        private static string[] ordinalNumbers =
+        [
             "nollte",
             "första",
             "andra",
@@ -130,8 +130,8 @@
             "sjuttonde",
             "artonde",
             "nittonde",
-            "tjugonde",
-        };
+            "tjugonde"
+        ];
 
         public override string ConvertToOrdinal(int number)
         {

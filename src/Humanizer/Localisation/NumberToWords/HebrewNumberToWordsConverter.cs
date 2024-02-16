@@ -1,19 +1,16 @@
 ﻿namespace Humanizer
 {
-    internal class HebrewNumberToWordsConverter : GenderedNumberToWordsConverter
+    internal class HebrewNumberToWordsConverter(CultureInfo culture) :
+        GenderedNumberToWordsConverter(GrammaticalGender.Feminine)
     {
-        private static readonly string[] UnitsFeminine = { "אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר" };
-        private static readonly string[] UnitsMasculine = { "אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה" };
-        private static readonly string[] TensUnit = { "עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים" };
+        private static readonly string[] UnitsFeminine = ["אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר"];
+        private static readonly string[] UnitsMasculine = ["אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה"];
+        private static readonly string[] TensUnit = ["עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים"];
 
-        private readonly CultureInfo _culture;
-
-        private class DescriptionAttribute : Attribute
+        private class DescriptionAttribute(string description) :
+            Attribute
         {
-            public string Description { get; set; }
-
-            public DescriptionAttribute(string description) =>
-                Description = description;
+            public string Description { get; set; } = description;
         }
 
         private enum Group
@@ -25,10 +22,6 @@
             [Description("מיליארד")]
             Billions = 1000000000
         }
-
-        public HebrewNumberToWordsConverter(CultureInfo culture)
-            : base(GrammaticalGender.Feminine) =>
-            _culture = culture;
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
@@ -118,7 +111,7 @@
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-            number.ToString(_culture);
+            number.ToString(culture);
 
         private void ToBigNumber(int number, Group group, List<string> parts)
         {

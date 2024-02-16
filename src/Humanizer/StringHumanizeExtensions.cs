@@ -23,7 +23,7 @@
         }
 
         private static string FromUnderscoreDashSeparatedWords(string input) =>
-            string.Join(" ", input.Split(new[] { '_', '-' }));
+            string.Join(" ", input.Split(['_', '-']));
 
         private static string FromPascalCase(string input)
         {

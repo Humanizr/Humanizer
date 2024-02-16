@@ -2,13 +2,13 @@
 {
     internal class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "núll", string.Empty, string.Empty, string.Empty, string.Empty, "fimm", "sex", "sjö", "átta", "níu", "tíu", "ellefu", "tólf", "þrettán", "fjórtán", "fimmtán", "sextán", "sautján", "átján", "nítján" };
-        private static readonly string[] FeminineUnitsMap = { string.Empty, "ein", "tvær", "þrjár", "fjórar" };
-        private static readonly string[] MasculineUnitsMap = { string.Empty, "einn", "tveir", "þrír", "fjórir" };
-        private static readonly string[] NeuterUnitsMap = { string.Empty, "eitt", "tvö", "þrjú", "fjögur" };
-        private static readonly string[] TensMap = { string.Empty, "tíu", "tuttugu", "þrjátíu", "fjörutíu", "fimmtíu", "sextíu", "sjötíu", "áttatíu", "níutíu" };
-        private static readonly string[] UnitsOrdinalPrefixes = { "núllt", "fyrst", string.Empty, "þriðj", "fjórð", "fimmt", "sjött", "sjöund", "áttund", "níund", "tíund", "elleft", "tólft", "þrettánd", "fjórtánd", "fimmtánd", "sextánd", "sautjánd", "átjánd", "nítjánd" };
-        private static readonly string[] TensOrdinalPrefixes = { string.Empty, "tíund", "tuttugast", "þrítugast", "fertugast", "fimmtugast", "sextugast", "sjötugast", "áttugast", "nítugast" };
+        private static readonly string[] UnitsMap = ["núll", string.Empty, string.Empty, string.Empty, string.Empty, "fimm", "sex", "sjö", "átta", "níu", "tíu", "ellefu", "tólf", "þrettán", "fjórtán", "fimmtán", "sextán", "sautján", "átján", "nítján"];
+        private static readonly string[] FeminineUnitsMap = [string.Empty, "ein", "tvær", "þrjár", "fjórar"];
+        private static readonly string[] MasculineUnitsMap = [string.Empty, "einn", "tveir", "þrír", "fjórir"];
+        private static readonly string[] NeuterUnitsMap = [string.Empty, "eitt", "tvö", "þrjú", "fjögur"];
+        private static readonly string[] TensMap = [string.Empty, "tíu", "tuttugu", "þrjátíu", "fjörutíu", "fimmtíu", "sextíu", "sjötíu", "áttatíu", "níutíu"];
+        private static readonly string[] UnitsOrdinalPrefixes = ["núllt", "fyrst", string.Empty, "þriðj", "fjórð", "fimmt", "sjött", "sjöund", "áttund", "níund", "tíund", "elleft", "tólft", "þrettánd", "fjórtánd", "fimmtánd", "sextánd", "sautjánd", "átjánd", "nítjánd"];
+        private static readonly string[] TensOrdinalPrefixes = [string.Empty, "tíund", "tuttugast", "þrítugast", "fertugast", "fimmtugast", "sextugast", "sjötugast", "áttugast", "nítugast"];
         private const string AndSplit = "og";
         private class Fact
         {
@@ -20,14 +20,14 @@
         }
         private static readonly Dictionary<int, Fact> PowerOfTenMap = new()
         {
-            {0,     new Fact{Power = 0                      , Single = string.Empty,        Plural = string.Empty,  OrdinalPrefix = string.Empty,   Gender = GrammaticalGender.Neuter    }},
-            {2,     new Fact{Power = 2                      , Single = "hundrað",           Plural = "hundruð",     OrdinalPrefix = "hundruðast",   Gender = GrammaticalGender.Neuter    }},
-            {3,     new Fact{Power = 1000                   , Single = "eitt þúsund",       Plural = "þúsund",      OrdinalPrefix = "þúsundast",    Gender = GrammaticalGender.Neuter    }},
-            {6,     new Fact{Power = 1000000                , Single = "ein milljón",       Plural = "milljónir",   OrdinalPrefix = "milljónast",   Gender = GrammaticalGender.Feminine  }},
-            {9,     new Fact{Power = 1000000000             , Single = "einn milljarður",   Plural = "milljarðar",  OrdinalPrefix = "milljarðast",  Gender = GrammaticalGender.Masculine }},
-            {12,    new Fact{Power = 1000000000000          , Single = "ein billjón",       Plural = "billjónir",   OrdinalPrefix = "billjónast",   Gender = GrammaticalGender.Feminine  }},
-            {15,    new Fact{Power = 1000000000000000       , Single = "einn billjarður",   Plural = "billjarðar",  OrdinalPrefix = "billjarðast",  Gender = GrammaticalGender.Masculine }},
-            {18,    new Fact{Power = 1000000000000000000    , Single = "ein trilljón",      Plural = "trilljónir",  OrdinalPrefix = "trilljónast",  Gender = GrammaticalGender.Feminine  }}
+            {0,     new(){Power = 0                      , Single = string.Empty,        Plural = string.Empty,  OrdinalPrefix = string.Empty,   Gender = GrammaticalGender.Neuter    }},
+            {2,     new(){Power = 2                      , Single = "hundrað",           Plural = "hundruð",     OrdinalPrefix = "hundruðast",   Gender = GrammaticalGender.Neuter    }},
+            {3,     new(){Power = 1000                   , Single = "eitt þúsund",       Plural = "þúsund",      OrdinalPrefix = "þúsundast",    Gender = GrammaticalGender.Neuter    }},
+            {6,     new(){Power = 1000000                , Single = "ein milljón",       Plural = "milljónir",   OrdinalPrefix = "milljónast",   Gender = GrammaticalGender.Feminine  }},
+            {9,     new(){Power = 1000000000             , Single = "einn milljarður",   Plural = "milljarðar",  OrdinalPrefix = "milljarðast",  Gender = GrammaticalGender.Masculine }},
+            {12,    new(){Power = 1000000000000          , Single = "ein billjón",       Plural = "billjónir",   OrdinalPrefix = "billjónast",   Gender = GrammaticalGender.Feminine  }},
+            {15,    new(){Power = 1000000000000000       , Single = "einn billjarður",   Plural = "billjarðar",  OrdinalPrefix = "billjarðast",  Gender = GrammaticalGender.Masculine }},
+            {18,    new(){Power = 1000000000000000000    , Single = "ein trilljón",      Plural = "trilljónir",  OrdinalPrefix = "trilljónast",  Gender = GrammaticalGender.Feminine  }}
         };
         private static bool IsAndSplitNeeded(int number) =>
             (((number <= 20) || (number % 10 == 0) && (number < 100)) || (number % 100 == 0));

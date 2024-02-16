@@ -1,23 +1,19 @@
 ﻿namespace Humanizer
 {
-    internal class CzechNumberToWordsConverter : GenderedNumberToWordsConverter
+    internal class CzechNumberToWordsConverter(CultureInfo culture) :
+        GenderedNumberToWordsConverter
     {
-        private static readonly string[] BillionsMap = { "miliarda", "miliardy", "miliard" };
-        private static readonly string[] MillionsMap = { "milion", "miliony", "milionů" };
-        private static readonly string[] ThousandsMap = { "tisíc", "tisíce", "tisíc" };
-        private static readonly string[] HundredsMap = { "nula", "sto", "dvě stě", "tři sta", "čtyři sta", "pět set", "šest set", "sedm set", "osm set", "devět set" };
-        private static readonly string[] TensMap = { "nula", "deset", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát" };
-        private static readonly string[] UnitsMap = { "nula", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct" };
+        private static readonly string[] BillionsMap = ["miliarda", "miliardy", "miliard"];
+        private static readonly string[] MillionsMap = ["milion", "miliony", "milionů"];
+        private static readonly string[] ThousandsMap = ["tisíc", "tisíce", "tisíc"];
+        private static readonly string[] HundredsMap = ["nula", "sto", "dvě stě", "tři sta", "čtyři sta", "pět set", "šest set", "sedm set", "osm set", "devět set"];
+        private static readonly string[] TensMap = ["nula", "deset", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát"];
+        private static readonly string[] UnitsMap = ["nula", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"];
 
-        private static readonly string[] UnitsMasculineOverrideMap = { "jeden", "dva" };
-        private static readonly string[] UnitsFeminineOverrideMap = { "jedna", "dvě" };
-        private static readonly string[] UnitsNeuterOverride = { "jedno", "dvě" };
-        private static readonly string[] UnitsIntraOverride = { "jedna", "dva" };
-
-        private readonly CultureInfo _culture;
-
-        public CzechNumberToWordsConverter(CultureInfo culture) =>
-            _culture = culture;
+        private static readonly string[] UnitsMasculineOverrideMap = ["jeden", "dva"];
+        private static readonly string[] UnitsFeminineOverrideMap = ["jedna", "dvě"];
+        private static readonly string[] UnitsNeuterOverride = ["jedno", "dvě"];
+        private static readonly string[] UnitsIntraOverride = ["jedna", "dva"];
 
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
@@ -43,7 +39,7 @@
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-            number.ToString(_culture);
+            number.ToString(culture);
 
         private static string UnitByGender(long number, GrammaticalGender? gender)
         {

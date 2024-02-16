@@ -2,10 +2,10 @@
 {
     internal class FinnishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "nolla", "yksi", "kaksi", "kolme", "neljä", "viisi", "kuusi", "seitsemän", "kahdeksan", "yhdeksän", "kymmenen" };
-        private static readonly string[] OrdinalUnitsMap = { "nollas", "ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes", "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes" };
+        private static readonly string[] UnitsMap = ["nolla", "yksi", "kaksi", "kolme", "neljä", "viisi", "kuusi", "seitsemän", "kahdeksan", "yhdeksän", "kymmenen"];
+        private static readonly string[] OrdinalUnitsMap = ["nollas", "ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes", "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"];
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
+        private static readonly Dictionary<int, string> OrdinalExceptions = new()
         {
             {1, "yhdes" },
             {2, "kahdes" }

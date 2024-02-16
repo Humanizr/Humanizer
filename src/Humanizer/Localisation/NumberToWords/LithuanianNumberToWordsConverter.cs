@@ -2,13 +2,13 @@
 {
     internal class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "nulis", "vienas", "du", "trys", "keturi", "penki", "šeši", "septyni", "aštuoni", "devyni", "dešimt", "vienuolika", "dvylika", "trylika", "keturiolika", "penkiolika", "šešiolika", "septyniolika", "aštuoniolika", "devyniolika" };
-        private static readonly string[] TensMap = { string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt" };
-        private static readonly string[] HundredsMap = { string.Empty, "šimtas", "du šimtai", "trys šimtai", "keturi šimtai", "penki šimtai", "šeši šimtai", "septyni šimtai", "aštuoni šimtai", "devyni šimtai" };
+        private static readonly string[] UnitsMap = ["nulis", "vienas", "du", "trys", "keturi", "penki", "šeši", "septyni", "aštuoni", "devyni", "dešimt", "vienuolika", "dvylika", "trylika", "keturiolika", "penkiolika", "šešiolika", "septyniolika", "aštuoniolika", "devyniolika"];
+        private static readonly string[] TensMap = [string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"];
+        private static readonly string[] HundredsMap = [string.Empty, "šimtas", "du šimtai", "trys šimtai", "keturi šimtai", "penki šimtai", "šeši šimtai", "septyni šimtai", "aštuoni šimtai", "devyni šimtai"];
 
-        private static readonly string[] OrdinalUnitsMap = { string.Empty, "pirm", "antr", "treči", "ketvirt", "penkt", "šešt", "septint", "aštunt", "devint", "dešimt", "vienuolikt", "dvylikt", "trylikt", "keturiolikt", "penkiolikt", "šešiolikt", "septyniolikt", "aštuoniolikt", "devyniolikt", "dvidešimt" };
-        private static readonly string[] OrdinalTensMap = { string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt" };
-        private static readonly string[] OrdinalHundredsMap = { string.Empty, "šimt", "du šimt", "trys šimt", "keturi šimt", "penki šimt", "šeši šimt", "septyni šimt", "aštuoni šimt", "devyni šimt" };
+        private static readonly string[] OrdinalUnitsMap = [string.Empty, "pirm", "antr", "treči", "ketvirt", "penkt", "šešt", "septint", "aštunt", "devint", "dešimt", "vienuolikt", "dvylikt", "trylikt", "keturiolikt", "penkiolikt", "šešiolikt", "septyniolikt", "aštuoniolikt", "devyniolikt", "dvidešimt"];
+        private static readonly string[] OrdinalTensMap = [string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"];
+        private static readonly string[] OrdinalHundredsMap = [string.Empty, "šimt", "du šimt", "trys šimt", "keturi šimt", "penki šimt", "šeši šimt", "septyni šimt", "aštuoni šimt", "devyni šimt"];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
