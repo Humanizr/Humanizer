@@ -112,7 +112,7 @@
                     {
                         if (result != string.Empty)
                         {
-                            result = $"{"و"} {result}";
+                            result = $"و {result}";
                         }
 
                         if (groupNumber != 2)
