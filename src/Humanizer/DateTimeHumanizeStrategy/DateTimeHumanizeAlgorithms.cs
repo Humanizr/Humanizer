@@ -216,7 +216,7 @@
                 return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
             }
 
-            if (ts.TotalDays >= 28 && ts.TotalDays < 30)
+            if (ts.TotalDays is >= 28 and < 30)
             {
                 if (sameMonth)
                 {

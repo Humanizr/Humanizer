@@ -39,7 +39,7 @@
                 {
                     thousandsPart = "tūkstotis";
                 }
-                else if (number > 1000 && number < 2000)
+                else if (number is > 1000 and < 2000)
                 {
                     thousandsPart = "tūkstoš";
                 }
@@ -58,7 +58,7 @@
                 {
                     hundredsPart = parts.Contains("tūkstoš") ? "viens simts" : "simts";
                 }
-                else if (number > 100 && number < 200)
+                else if (number is > 100 and < 200)
                 {
                     hundredsPart = "simtu";
                 }
@@ -133,7 +133,7 @@
                 }
                 else
                 {
-                    if (number > 1000 && number < 2000)
+                    if (number is > 1000 and < 2000)
                     {
                         thousandsPart = "tūkstoš";
                     }
@@ -155,7 +155,7 @@
                 }
                 else
                 {
-                    if (number > 100 && number < 200)
+                    if (number is > 100 and < 200)
                     {
                         hundredsPart = "simtu";
                     }

@@ -106,7 +106,7 @@
                 return HundredsMap[value];
             }
 
-            if (value > 10 && value < 20 && usePrefixMap)
+            if (value is > 10 and < 20 && usePrefixMap)
             {
                 return PrefixMap[value];
             }

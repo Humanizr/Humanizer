@@ -15,7 +15,7 @@
             }
 
             //In Arabic pluralization entities where the count is between 3 and 10 gets a different word.
-            if (number >= 3 && number <= 10)
+            if (number is >= 3 and <= 10)
             {
                 return resourceKey + PluralPostfix;
             }

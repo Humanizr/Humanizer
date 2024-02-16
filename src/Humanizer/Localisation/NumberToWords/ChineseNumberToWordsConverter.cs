@@ -10,7 +10,7 @@
         public override string ConvertToOrdinal(int number) =>
             Convert(number, true, IsSpecial(number));
 
-        private static bool IsSpecial(long number) => number > 10 && number < 20;
+        private static bool IsSpecial(long number) => number is > 10 and < 20;
 
         private static string Convert(long number, bool isOrdinal, bool isSpecial)
         {
