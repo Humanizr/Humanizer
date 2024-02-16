@@ -2,10 +2,10 @@
 {
     class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"];
-        private static readonly string[] TensMap = ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"];
+        static readonly string[] UnitsMap = ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"];
+        static readonly string[] TensMap = ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"];
 
-        private static readonly string[] OrdinalSuffixes = ["инчи", "нчи"];
+        static readonly string[] OrdinalSuffixes = ["инчи", "нчи"];
 
         public override string Convert(long input)
         {
@@ -22,7 +22,7 @@
             return Convert(number, true);
         }
 
-        private static string Convert(int number, bool checkForHundredRule)
+        static string Convert(int number, bool checkForHundredRule)
         {
             if (number == 0)
             {

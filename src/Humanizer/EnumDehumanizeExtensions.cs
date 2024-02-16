@@ -27,7 +27,7 @@
         public static Enum DehumanizeTo(this string input, Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException) =>
             (Enum)DehumanizeToPrivate(input, targetEnum, onNoMatch);
 
-        private static object DehumanizeToPrivate(string input, Type targetEnum, OnNoMatch onNoMatch)
+        static object DehumanizeToPrivate(string input, Type targetEnum, OnNoMatch onNoMatch)
         {
             var match = Enum.GetValues(targetEnum).Cast<Enum>().FirstOrDefault(value => string.Equals(value.Humanize(), input, StringComparison.OrdinalIgnoreCase));
 

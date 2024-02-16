@@ -3,8 +3,8 @@
     class IcelandicFormatter() :
         DefaultFormatter(LocaleCode)
     {
-        private const string LocaleCode = "is";
-        private readonly CultureInfo _localCulture = new(LocaleCode);
+        const string LocaleCode = "is";
+        readonly CultureInfo _localCulture = new(LocaleCode);
 
         public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
             base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');

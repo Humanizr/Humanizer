@@ -60,7 +60,7 @@
         public static string ToQuantity(this string input, long quantity, string format, IFormatProvider formatProvider = null) =>
             input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
 
-        private static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string format = null, IFormatProvider formatProvider = null)
+        static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string format = null, IFormatProvider formatProvider = null)
         {
             var transformedInput = quantity == 1
                 ? input.Singularize(inputIsKnownToBePlural: false)

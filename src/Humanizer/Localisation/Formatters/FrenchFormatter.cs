@@ -3,7 +3,7 @@
     class FrenchFormatter(string localeCode) :
         DefaultFormatter(localeCode)
     {
-        private const string DualPostfix = "_Dual";
+        const string DualPostfix = "_Dual";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

@@ -5,9 +5,9 @@
     /// </summary>
     public static class TimeSpanHumanizeExtensions
     {
-        private const int _daysInAWeek = 7;
-        private const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
-        private const double _daysInAMonth = _daysInAYear / 12;
+        const int _daysInAWeek = 7;
+        const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
+        const double _daysInAMonth = _daysInAYear / 12;
 
         static TimeUnit[] _timeUnits = Enum.GetValues(typeof(TimeUnit))
             .Cast<TimeUnit>()
@@ -44,7 +44,7 @@
             return ConcatenateTimeSpanParts(timeParts, culture, collectionSeparator);
         }
 
-        private static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
+        static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
             var firstValueFound = false;
@@ -69,7 +69,7 @@
             return timeParts;
         }
 
-        private static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)
+        static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)
         {
             if (timeUnitToGet <= maximumTimeUnit && timeUnitToGet >= minimumTimeUnit)
             {
@@ -79,7 +79,7 @@
             return null;
         }
 
-        private static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
+        static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
             var isTimeUnitToGetTheMaximumTimeUnit = timeUnitToGet == maximumTimeUnit;
             switch (timeUnitToGet)
@@ -105,7 +105,7 @@
             }
         }
 
-        private static int GetSpecialCaseMonthAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        static int GetSpecialCaseMonthAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
         {
             if (isTimeUnitToGetTheMaximumTimeUnit)
             {
@@ -118,10 +118,10 @@
             }
         }
 
-        private static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
+        static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
             (int)(timespan.Days / _daysInAYear);
 
-        private static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+        static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
         {
             if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < _daysInAMonth)
             {
@@ -130,7 +130,7 @@
             return 0;
         }
 
-        private static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
+        static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
         {
             if (maximumTimeUnit == TimeUnit.Day)
             {
@@ -144,7 +144,7 @@
             return (int)(timespan.Days % _daysInAMonth);
         }
 
-        private static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)
+        static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)
         {
             if (isTimeUnitToGetTheMaximumTimeUnit)
             {
@@ -161,19 +161,19 @@
             return timeNumberOfUnits;
         }
 
-        private static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
+        static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
             // Always use positive units to account for negative timespans
             amountOfTimeUnits != 0
                 ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
                 : null;
 
-        private static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
+        static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
             [noTimeValue];
 
-        private static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts) =>
+        static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts) =>
             timeParts.Count(x => x != null) == 0;
 
-        private static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
+        static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
         {
             if (!countEmptyUnits)
             {
@@ -189,7 +189,7 @@
             return timeParts;
         }
 
-        private static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, CultureInfo culture, string collectionSeparator)
+        static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, CultureInfo culture, string collectionSeparator)
         {
             if (collectionSeparator == null)
             {

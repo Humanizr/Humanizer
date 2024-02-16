@@ -3,10 +3,10 @@
     class TurkishNumberToWordConverter :
         GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];
-        private static readonly string[] TensMap = ["sıfır", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"];
+        static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];
+        static readonly string[] TensMap = ["sıfır", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"];
 
-        private static readonly Dictionary<char, string> OrdinalSuffix = new()
+        static readonly Dictionary<char, string> OrdinalSuffix = new()
         {
             {'ı', "ıncı"},
             {'i', "inci"},
@@ -18,7 +18,7 @@
             {'a', "ıncı"},
         };
 
-        private static readonly Dictionary<char, string> TupleSuffix = new()
+        static readonly Dictionary<char, string> TupleSuffix = new()
         {
             {'ı', "lı"},
             {'i', "li"},

@@ -5,7 +5,7 @@
     /// </summary>
     public class DefaultFormatter : IFormatter
     {
-        private readonly CultureInfo _culture;
+        readonly CultureInfo _culture;
 
         /// <summary>
         /// Constructor.
@@ -68,13 +68,13 @@
             return Format(resourceKey);
         }
 
-        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
+        string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
             var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
+        string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
         {
             var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
             return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);

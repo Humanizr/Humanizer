@@ -2,10 +2,10 @@
 {
     class UzbekLatnNumberToWordConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["nol", "bir", "ikki", "uch", "to`rt", "besh", "olti", "yetti", "sakkiz", "to`qqiz"];
-        private static readonly string[] TensMap = ["nol", "o`n", "yigirma", "o`ttiz", "qirq", "ellik", "oltmish", "yetmish", "sakson", "to`qson"];
+        static readonly string[] UnitsMap = ["nol", "bir", "ikki", "uch", "to`rt", "besh", "olti", "yetti", "sakkiz", "to`qqiz"];
+        static readonly string[] TensMap = ["nol", "o`n", "yigirma", "o`ttiz", "qirq", "ellik", "oltmish", "yetmish", "sakson", "to`qson"];
 
-        private static readonly string[] OrdinalSuffixes = ["inchi", "nchi"];
+        static readonly string[] OrdinalSuffixes = ["inchi", "nchi"];
 
         public override string Convert(long input)
         {
@@ -22,7 +22,7 @@
             return Convert(number, true);
         }
 
-        private static string Convert(int number, bool checkForHundredRule)
+        static string Convert(int number, bool checkForHundredRule)
         {
             if (number == 0)
             {

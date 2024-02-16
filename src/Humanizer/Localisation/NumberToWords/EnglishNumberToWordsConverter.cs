@@ -2,10 +2,10 @@
 {
     class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-        private static readonly string[] TensMap = ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        static readonly string[] UnitsMap = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        static readonly string[] TensMap = ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 
-        private static readonly Dictionary<long, string> OrdinalExceptions = new()
+        static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {1, "first"},
             {2, "second"},
@@ -26,7 +26,7 @@
         public override string ConvertToOrdinal(int number) =>
             Convert(number, true);
 
-        private string Convert(long number, bool isOrdinal, bool addAnd = true)
+        string Convert(long number, bool isOrdinal, bool addAnd = true)
         {
             if (number == 0)
             {
@@ -123,7 +123,7 @@
             return toWords;
         }
 
-        private static string GetUnitValue(long number, bool isOrdinal)
+        static string GetUnitValue(long number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -142,7 +142,7 @@
             }
         }
 
-        private static string RemoveOnePrefix(string toWords)
+        static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
             if (toWords.StartsWith("one", StringComparison.Ordinal))
@@ -153,7 +153,7 @@
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(long number, out string words) =>
+        static bool ExceptionNumbersToWords(long number, out string words) =>
             OrdinalExceptions.TryGetValue(number, out words);
 
         public override string ConvertToTuple(int number)

@@ -3,8 +3,8 @@
     class SerbianCyrlNumberToWordsConverter(CultureInfo culture) :
         GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест"];
-        private static readonly string[] TensMap = ["нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет"];
+        static readonly string[] UnitsMap = ["нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест"];
+        static readonly string[] TensMap = ["нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет"];
 
         public override string Convert(long input)
         {
@@ -103,7 +103,7 @@
             //TODO: In progress
             number.ToString(culture);
 
-        private string Part(string singular, string dual, string trialQuadral, string plural, int number)
+        string Part(string singular, string dual, string trialQuadral, string plural, int number)
         {
             switch (number)
             {

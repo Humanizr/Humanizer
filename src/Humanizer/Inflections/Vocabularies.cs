@@ -5,7 +5,7 @@
     /// </summary>
     public static class Vocabularies
     {
-        private static readonly Lazy<Vocabulary> Instance;
+        static readonly Lazy<Vocabulary> Instance;
 
         static Vocabularies() =>
             Instance = new(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
@@ -17,7 +17,7 @@
         /// </summary>
         public static Vocabulary Default => Instance.Value;
 
-        private static Vocabulary BuildDefault()
+        static Vocabulary BuildDefault()
         {
             var _default = new Vocabulary();
 

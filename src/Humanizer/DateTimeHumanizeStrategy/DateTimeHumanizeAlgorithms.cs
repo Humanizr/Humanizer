@@ -40,7 +40,7 @@
             return PrecisionHumanize(ts, tense, precision, culture);
         }
 #endif
-        private static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
+        static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
         {
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
@@ -172,7 +172,7 @@
         }
 #endif
 
-        private static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
+        static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
         {
             var formatter = Configurator.GetFormatter(culture);
 

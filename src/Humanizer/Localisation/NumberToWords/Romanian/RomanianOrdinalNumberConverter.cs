@@ -5,7 +5,7 @@
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
         /// </summary>
-        private readonly Dictionary<int, string> _ordinalsUnder10 = new()
+        readonly Dictionary<int, string> _ordinalsUnder10 = new()
         {
             {1, "primul|prima"},
             {2, "doilea|doua"},
@@ -18,10 +18,10 @@
             {9, "nouălea|noua"},
         };
 
-        private readonly string _femininePrefix = "a";
-        private readonly string _masculinePrefix = "al";
-        private readonly string _feminineSuffix = "a";
-        private readonly string _masculineSuffix = "lea";
+        readonly string _femininePrefix = "a";
+        readonly string _masculinePrefix = "al";
+        readonly string _feminineSuffix = "a";
+        readonly string _masculineSuffix = "lea";
 
         public string Convert(int number, GrammaticalGender gender)
         {
@@ -111,7 +111,7 @@
             }
         }
 
-        private static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
+        static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
         {
             if (multiGenderPart.Contains("|"))
             {

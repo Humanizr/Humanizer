@@ -53,7 +53,7 @@
                 separator);
         }
 
-        private string HumanizeDisplayStrings(IEnumerable<string> strings, string separator)
+        string HumanizeDisplayStrings(IEnumerable<string> strings, string separator)
         {
             var itemsArray = strings
                 .Select(item => item == null ? string.Empty : item.Trim())

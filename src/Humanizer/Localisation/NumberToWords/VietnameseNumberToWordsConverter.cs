@@ -2,10 +2,10 @@
 {
     class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private const int OneBillion = 1000000000;
-        private const int OneMillion = 1000000;
+        const int OneBillion = 1000000000;
+        const int OneMillion = 1000000;
 
-        private static readonly string[] NumberVerbalPairs =
+        static readonly string[] NumberVerbalPairs =
         [
             "", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"
         ];
@@ -18,7 +18,7 @@
         public override string ConvertToOrdinal(int number) =>
             $"thứ {ConvertToOrdinalImpl(number)}";
 
-        private string ConvertToOrdinalImpl(int number)
+        string ConvertToOrdinalImpl(int number)
         {
             switch (number)
             {
@@ -33,7 +33,7 @@
             }
         }
 
-        private static string ConvertImpl(long number, bool hasTens = false, bool isGreaterThanOneHundred = false)
+        static string ConvertImpl(long number, bool hasTens = false, bool isGreaterThanOneHundred = false)
         {
             if (number >= OneBillion)
             {

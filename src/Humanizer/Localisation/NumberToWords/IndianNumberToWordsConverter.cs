@@ -2,7 +2,7 @@
 {
     class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly Dictionary<long, string> OrdinalExceptions = new()
+        static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {1, "first"},
             {2, "second"},
@@ -13,14 +13,14 @@
             {9, "ninth"},
             {12, "twelfth"},
         };
-        private static readonly string[] Tillnineteen =
+        static readonly string[] Tillnineteen =
         [
             "one", "two", "three", "four", "five", "six", "seven", "eight",
             "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
             "seventeen", "eighteen", "nineteen"
         ];
 
-        private static readonly string[] Tens =
+        static readonly string[] Tens =
         [
             "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
             "eighty", "ninety"
@@ -62,7 +62,7 @@
              return NumberToText(number / 10000000).Trim() + " crore " + NumberToText(number % 10000000);
          }
 
-        private static bool ExceptionNumbersToWords(long number, out string words) =>
+        static bool ExceptionNumbersToWords(long number, out string words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }

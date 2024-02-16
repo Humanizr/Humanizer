@@ -2,8 +2,8 @@
 {
     public class StringExtensionsTests
     {
-        private const string Format = "This is a format with three numbers: {0}-{1}-{2}.";
-        private const string Expected = "This is a format with three numbers: 1-2-3.";
+        const string Format = "This is a format with three numbers: {0}-{1}-{2}.";
+        const string Expected = "This is a format with three numbers: 1-2-3.";
 
         [Fact]
         public void CanFormatStringWithExactNumberOfArguments() =>

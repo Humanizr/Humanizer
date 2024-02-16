@@ -2,10 +2,10 @@ namespace Humanizer
 {
     class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten"];
-        private static readonly string[] TensMap = ["null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti"];
+        static readonly string[] UnitsMap = ["null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten"];
+        static readonly string[] TensMap = ["null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti"];
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new()
+        static readonly Dictionary<int, string> OrdinalExceptions = new()
         {
             {0, "nullte"},
             {1, "første"},
@@ -31,7 +31,7 @@ namespace Humanizer
         public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
             Convert(number, true, gender);
 
-        private string Convert(int number, bool isOrdinal, GrammaticalGender gender)
+        string Convert(int number, bool isOrdinal, GrammaticalGender gender)
         {
             if (number == 0)
             {
@@ -135,7 +135,7 @@ namespace Humanizer
             return toWords;
         }
 
-        private static string GetUnitValue(int number, bool isOrdinal)
+        static string GetUnitValue(int number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -158,10 +158,10 @@ namespace Humanizer
             }
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words) =>
+        static bool ExceptionNumbersToWords(int number, out string words) =>
             OrdinalExceptions.TryGetValue(number, out words);
 
-        private string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)
+        string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)
         {
             var postfix = postfixSpace ? " " : "";
             if (number == 1)

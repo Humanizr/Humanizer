@@ -97,7 +97,7 @@
             return inserted;
         }
 
-        private static string ToOriginalFormat(string[] appended, string suffix, int i)
+        static string ToOriginalFormat(string[] appended, string suffix, int i)
         {
             var insertion = appended[i].Remove(appended[i].IndexOf(suffix, StringComparison.CurrentCulture));
             var original = $"{suffix} {insertion}";

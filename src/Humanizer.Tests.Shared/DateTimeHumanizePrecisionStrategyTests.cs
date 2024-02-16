@@ -3,7 +3,7 @@
     [UseCulture("en-US")]
     public class DateTimeHumanizePrecisionStrategyTests
     {
-        private const double DefaultPrecision = .75;
+        const double DefaultPrecision = .75;
 
         [Theory]
         [InlineData(1, "now")]

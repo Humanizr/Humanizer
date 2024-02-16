@@ -3,7 +3,7 @@
     class BanglaNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap =
+        static readonly string[] UnitsMap =
         [
             "শূন্য", "এক", "দুই", "তিন", "চার", "পাঁচ", "ছয়", "সাত", "আট", "নয়", "দশ",
             "এগারো", "বারো", "তেরো", "চোদ্দ", "পনেরো", "ষোল", "সতেরো", "আঠারো", "উনিশ", "বিশ",
@@ -17,12 +17,12 @@
             "একানব্বই", "বিরানব্বই", "তিরানব্বিই", "চুরানব্বই", "পঁচানব্বই", "ছিয়ানব্বই", "সাতানব্বই", "আটানব্বই","নিরানব্বই"
         ];
 
-        private static readonly string[] HundredsMap =
+        static readonly string[] HundredsMap =
         [
             "শূন্য", "একশ", "দুইশ", "তিনশ", "চারশ", "পাঁচশ", "ছয়শ", "সাতশ","আটশ", "নয়শ"
         ];
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new()
+        static readonly Dictionary<int, string> OrdinalExceptions = new()
         {
             {1, "প্রথম"},
             {2, "দ্বিতীয়"},
@@ -110,7 +110,7 @@
             return string.Join(" ", parts);
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words) =>
+        static bool ExceptionNumbersToWords(int number, out string words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }

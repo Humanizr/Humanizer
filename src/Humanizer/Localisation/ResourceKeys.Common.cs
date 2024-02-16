@@ -1,14 +1,14 @@
 ﻿namespace Humanizer
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public partial class ResourceKeys
     {
-        private const string Single = "Single";
-        private const string Multiple = "Multiple";
+        const string Single = "Single";
+        const string Multiple = "Multiple";
 
-        private static void ValidateRange(int count)
+        static void ValidateRange(int count)
         {
             if (count < 0)
             {

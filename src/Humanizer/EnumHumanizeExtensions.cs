@@ -45,10 +45,10 @@ namespace Humanizer
         /// Checks whether the given enum is to be used as a bit field type.
         /// </summary>
         /// <returns>True if the given enum is a bit field enum, false otherwise.</returns>
-        private static bool IsBitFieldEnum(Type type) =>
+        static bool IsBitFieldEnum(Type type) =>
             type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
 
-        private static string GetCustomDescription(MemberInfo memberInfo)
+        static string GetCustomDescription(MemberInfo memberInfo)
         {
             var displayAttribute = memberInfo.GetCustomAttribute<DisplayAttribute>();
             if (displayAttribute != null)

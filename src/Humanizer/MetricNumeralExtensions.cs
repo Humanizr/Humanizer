@@ -29,8 +29,8 @@ namespace Humanizer
     /// </summary>
     public static class MetricNumeralExtensions
     {
-        private static readonly double BigLimit;
-        private static readonly double SmallLimit;
+        static readonly double BigLimit;
+        static readonly double SmallLimit;
 
         static MetricNumeralExtensions()
         {
@@ -42,7 +42,7 @@ namespace Humanizer
         /// <summary>
         /// Symbols is a list of every symbols for the Metric system.
         /// </summary>
-        private static readonly List<char>[] Symbols =
+        static readonly List<char>[] Symbols =
         [
             ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
             ['m', 'μ', 'n', 'p', 'f', 'a', 'z', 'y']
@@ -58,7 +58,7 @@ namespace Humanizer
         /// {'d', "deci" },
         /// {'c', "centi"},
         /// </remarks>
-        private static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new()
+        static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new()
         {
              {'Y', new("yotta", "septillion", "quadrillion")},
              {'Z', new("zetta", "sextillion", "trilliard")},
@@ -218,7 +218,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Metric representation to clean</param>
         /// <returns>A cleaned representation</returns>
-        private static string CleanRepresentation(string input)
+        static string CleanRepresentation(string input)
         {
             if (input == null)
             {
@@ -241,7 +241,7 @@ namespace Humanizer
         /// <param name="input">A Metric representation to parse to a number</param>
         /// <param name="last">The last character of input</param>
         /// <returns>A number build from a Metric representation</returns>
-        private static double BuildNumber(string input, char last) =>
+        static double BuildNumber(string input, char last) =>
             char.IsLetter(last)
                 ? BuildMetricNumber(input, last)
                 : double.Parse(input);
@@ -252,7 +252,7 @@ namespace Humanizer
         /// <param name="input">A Metric representation to parse to a number</param>
         /// <param name="last">The last character of input</param>
         /// <returns>A number build from a Metric representation</returns>
-        private static double BuildMetricNumber(string input, char last)
+        static double BuildMetricNumber(string input, char last)
         {
             double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3;
             var number = double.Parse(input.Remove(input.Length - 1));
@@ -267,7 +267,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">Metric representation with a name or a symbol</param>
         /// <returns>A metric representation with a symbol</returns>
-        private static string ReplaceNameBySymbol(string input) =>
+        static string ReplaceNameBySymbol(string input) =>
             UnitPrefixes.Aggregate(input, (current, unitPrefix) =>
                 current.Replace(unitPrefix.Value.Name, unitPrefix.Key.ToString()));
 
@@ -278,7 +278,7 @@ namespace Humanizer
         /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildRepresentation(double input, MetricNumeralFormats? formats, int? decimals)
+        static string BuildRepresentation(double input, MetricNumeralFormats? formats, int? decimals)
         {
             var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
 
@@ -299,7 +299,7 @@ namespace Humanizer
         /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <returns>A number in a Metric representation</returns>
-        private static string BuildMetricRepresentation(double input, int exponent, MetricNumeralFormats? formats, int? decimals)
+        static string BuildMetricRepresentation(double input, int exponent, MetricNumeralFormats? formats, int? decimals)
         {
             var number = input * Math.Pow(1000, -exponent);
             if (decimals.HasValue)
@@ -321,7 +321,7 @@ namespace Humanizer
         /// <param name="symbol">The symbol linked to the unit</param>
         /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
         /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
-        private static string GetUnitText(char symbol, MetricNumeralFormats? formats)
+        static string GetUnitText(char symbol, MetricNumeralFormats? formats)
         {
             if (formats.HasValue
                 && formats.Value.HasFlag(MetricNumeralFormats.UseName))
@@ -346,7 +346,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="input">A Metric representation who might be out of the valid range.</param>
         /// <returns>True if input is out of the valid range.</returns>
-        private static bool IsOutOfRange(this double input)
+        static bool IsOutOfRange(this double input)
         {
             bool outside(double min, double max) => !(max > input && input > min);
 
@@ -364,7 +364,7 @@ namespace Humanizer
         /// </remarks>
         /// <param name="input">A string who might contain a invalid Metric representation.</param>
         /// <returns>True if input is not a valid Metric representation.</returns>
-        private static bool IsInvalidMetricNumeral(this string input)
+        static bool IsInvalidMetricNumeral(this string input)
         {
             var index = input.Length - 1;
             var last = input[index];
@@ -372,7 +372,7 @@ namespace Humanizer
             return !double.TryParse(isSymbol ? input.Remove(index) : input, out _);
         }
 
-        private struct UnitPrefix(string name, string shortScaleWord, string longScaleWord = null)
+        struct UnitPrefix(string name, string shortScaleWord, string longScaleWord = null)
         {
             public string Name { get; } = name;
             public string ShortScaleWord { get; } = shortScaleWord;

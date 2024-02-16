@@ -3,8 +3,8 @@
     class SlovenianFormatter() :
         DefaultFormatter("sl")
     {
-        private const string DualPostfix = "_Dual";
-        private const string TrialQuadralPostfix = "_TrialQuadral";
+        const string DualPostfix = "_Dual";
+        const string TrialQuadralPostfix = "_TrialQuadral";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

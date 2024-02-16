@@ -3,8 +3,8 @@
     class CroatianNumberToWordsConverter(CultureInfo culture) :
         GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset", "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šestnaest", "sedemnaest", "osemnaest", "devetnaest"];
-        private static readonly string[] TensMap = ["nula", "deset", "dvadeset", "trideset", "četrdeset", "petdeset", "šestdeset", "sedamdeset", "osamdeset", "devetdeset"];
+        static readonly string[] UnitsMap = ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset", "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šestnaest", "sedemnaest", "osemnaest", "devetnaest"];
+        static readonly string[] TensMap = ["nula", "deset", "dvadeset", "trideset", "četrdeset", "petdeset", "šestdeset", "sedamdeset", "osamdeset", "devetdeset"];
 
         public override string Convert(long input)
         {
@@ -101,7 +101,7 @@
             //TODO: In progress
             number.ToString(culture);
 
-        private string Part(string singular, string dual, string trialQuadral, string plural, int number)
+        string Part(string singular, string dual, string trialQuadral, string plural, int number)
         {
             switch (number)
             {

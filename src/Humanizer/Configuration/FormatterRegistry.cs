@@ -60,7 +60,7 @@
             Register("lb", new LuxembourgishFormatter());
         }
 
-        private void RegisterDefaultFormatter(string localeCode)
+        void RegisterDefaultFormatter(string localeCode)
         {
             try
             {
@@ -72,7 +72,7 @@
             }
         }
 
-        private void RegisterCzechSlovakPolishFormatter(string localeCode) =>
+        void RegisterCzechSlovakPolishFormatter(string localeCode) =>
             Register(localeCode, new CzechSlovakPolishFormatter(localeCode));
     }
 }

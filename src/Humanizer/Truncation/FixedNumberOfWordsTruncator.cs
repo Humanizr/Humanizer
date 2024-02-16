@@ -28,7 +28,7 @@ namespace Humanizer
                 : TruncateFromRight(value, length, truncationString);
         }
 
-        private static string TruncateFromRight(string value, int length, string truncationString)
+        static string TruncateFromRight(string value, int length, string truncationString)
         {
             var lastCharactersWasWhiteSpace = true;
             var numberOfWordsProcessed = 0;
@@ -56,7 +56,7 @@ namespace Humanizer
             return value + truncationString;
         }
 
-        private static string TruncateFromLeft(string value, int length, string truncationString)
+        static string TruncateFromLeft(string value, int length, string truncationString)
         {
             var lastCharactersWasWhiteSpace = true;
             var numberOfWordsProcessed = 0;

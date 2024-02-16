@@ -15,7 +15,7 @@
             return resourceKey + suffix;
         }
 
-        private static string GetSuffix(LithuanianNumberForm form)
+        static string GetSuffix(LithuanianNumberForm form)
         {
             if (form == LithuanianNumberForm.Singular)
             {

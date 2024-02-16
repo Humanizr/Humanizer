@@ -2,17 +2,17 @@
 {
     abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
-        private readonly string[] UnitsMap = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
-        private readonly string[] TensMap = ["null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];
-        private readonly string[] UnitsOrdinal = [string.Empty, "ers", "zwei", "drit", "vier", "fünf", "sechs", "sieb", "ach", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
-        private readonly string[] HundredOrdinalSingular = ["einhundert"];
-        private readonly string[] HundredOrdinalPlural = ["{0}hundert"];
-        private readonly string[] ThousandOrdinalSingular = ["eintausend"];
-        private readonly string[] ThousandOrdinalPlural = ["{0}tausend"];
-        private readonly string[] MillionOrdinalSingular = ["einmillion", "einemillion"];
-        private readonly string[] MillionOrdinalPlural = ["{0}million", "{0}millionen"];
-        private readonly string[] BillionOrdinalSingular = ["einmilliard", "einemilliarde"];
-        private readonly string[] BillionOrdinalPlural = ["{0}milliard", "{0}milliarden"];
+        readonly string[] UnitsMap = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
+        readonly string[] TensMap = ["null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];
+        readonly string[] UnitsOrdinal = [string.Empty, "ers", "zwei", "drit", "vier", "fünf", "sechs", "sieb", "ach", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
+        readonly string[] HundredOrdinalSingular = ["einhundert"];
+        readonly string[] HundredOrdinalPlural = ["{0}hundert"];
+        readonly string[] ThousandOrdinalSingular = ["eintausend"];
+        readonly string[] ThousandOrdinalPlural = ["{0}tausend"];
+        readonly string[] MillionOrdinalSingular = ["einmillion", "einemillion"];
+        readonly string[] MillionOrdinalPlural = ["{0}million", "{0}millionen"];
+        readonly string[] BillionOrdinalSingular = ["einmilliard", "einemilliarde"];
+        readonly string[] BillionOrdinalPlural = ["{0}milliard", "{0}milliarden"];
 
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
@@ -98,7 +98,7 @@
             return string.Join("", parts);
         }
 
-        private void CollectParts(ICollection<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)
+        void CollectParts(ICollection<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)
         {
             if (number / divisor > 0)
             {
@@ -111,7 +111,7 @@
             }
         }
 
-        private void CollectOrdinalParts(ICollection<string> parts, ref int number, int divisor, bool evaluateNoRest, string[] pluralFormats, string[] singulars)
+        void CollectOrdinalParts(ICollection<string> parts, ref int number, int divisor, bool evaluateNoRest, string[] pluralFormats, string[] singulars)
         {
             if (number / divisor > 0)
             {
@@ -121,7 +121,7 @@
             }
         }
 
-        private string Part(string pluralFormat, string singular, long number)
+        string Part(string pluralFormat, string singular, long number)
         {
             if (number == 1)
             {
@@ -131,10 +131,10 @@
             return string.Format(pluralFormat, Convert(number));
         }
 
-        private static int NoRestIndex(int number) =>
+        static int NoRestIndex(int number) =>
             number == 0 ? 0 : 1;
 
-        private static string GetEndingForGender(GrammaticalGender gender)
+        static string GetEndingForGender(GrammaticalGender gender)
         {
             switch (gender)
             {

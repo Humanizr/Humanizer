@@ -56,7 +56,7 @@
             Assert.Equal("A String, Another String, or A Third String", collection.Humanize("or"));
         }
 
-        private readonly List<SomeClass> _testCollection =
+        readonly List<SomeClass> _testCollection =
         [
             new() { SomeInt = 1, SomeString = "One" },
             new() { SomeInt = 2, SomeString = "Two" },
@@ -126,6 +126,6 @@
         /// <summary>
         /// Use the dummy formatter to ensure tests are testing formatter output rather than input
         /// </summary>
-        private static readonly Func<string, string> dummyFormatter = input => input;
+        static readonly Func<string, string> dummyFormatter = input => input;
     }
 }

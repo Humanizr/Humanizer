@@ -35,10 +35,10 @@
 
         static CultureInfo _spanishCulture = new("es-ES");
 
-        private static string GetNumberString(int number) =>
+        static string GetNumberString(int number) =>
             number.ToString(_spanishCulture);
 
-        private static string GetWordForm(int number, WordForm wordForm) =>
+        static string GetWordForm(int number, WordForm wordForm) =>
             (number % 10 == 1 || number % 10 == 3) && wordForm == WordForm.Abbreviation ? ".er" : ".º";
     }
 }

@@ -3,7 +3,7 @@ namespace Humanizer
     class CroatianFormatter() :
         DefaultFormatter("hr")
     {
-        private const string DualTrialQuadralPostfix = "_DualTrialQuadral";
+        const string DualTrialQuadralPostfix = "_DualTrialQuadral";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

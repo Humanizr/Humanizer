@@ -2,7 +2,7 @@
 {
     class ChineseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+        static readonly string[] UnitsMap = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
 
         public override string Convert(long number) =>
             Convert(number, false, IsSpecial(number));
@@ -10,9 +10,9 @@
         public override string ConvertToOrdinal(int number) =>
             Convert(number, true, IsSpecial(number));
 
-        private static bool IsSpecial(long number) => number is > 10 and < 20;
+        static bool IsSpecial(long number) => number is > 10 and < 20;
 
-        private static string Convert(long number, bool isOrdinal, bool isSpecial)
+        static string Convert(long number, bool isOrdinal, bool isSpecial)
         {
             if (number == 0)
             {
