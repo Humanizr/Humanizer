@@ -19,11 +19,8 @@
         [InlineData("slice", 2, "2 slices")]
         [InlineData("slices", 1, "1 slice")]
         [InlineData("slices", 2, "2 slices")]
-        public void ToQuantity(string word, int quantity, string expected)
-        {
+        public void ToQuantity(string word, int quantity, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity));
-            Assert.Equal(expected, word.ToQuantity((long)quantity));
-        }
 
         [Theory]
         [InlineData("case", 0, "cases")]
@@ -37,11 +34,8 @@
         [InlineData("process", 1, "process")]
         [InlineData("processes", 2, "processes")]
         [InlineData("processes", 1, "process")]
-        public void ToQuantityWithNoQuantity(string word, int quantity, string expected)
-        {
+        public void ToQuantityWithNoQuantity(string word, int quantity, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.None));
-            Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.None));
-        }
 
         [Theory]
         [InlineData("case", 0, "0 cases")]
@@ -55,12 +49,8 @@
         [InlineData("process", 1, "1 process")]
         [InlineData("processes", 2, "2 processes")]
         [InlineData("processes", 1, "1 process")]
-        public void ToQuantityNumeric(string word, int quantity, string expected)
-        {
-            // ReSharper disable once RedundantArgumentDefaultValue
-            Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Numeric));
-            Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.Numeric));
-        }
+        public void ToQuantityNumeric(string word, int quantity, string expected) =>
+            Assert.Equal(expected, word.ToQuantity(quantity));
 
         [Theory]
         [InlineData("hour", 1, "1 hour")]
@@ -83,11 +73,8 @@
         [InlineData("processes", 2, "two processes")]
         [InlineData("processes", 1200, "one thousand two hundred processes")]
         [InlineData("processes", 1, "one process")]
-        public void ToQuantityWords(string word, int quantity, string expected)
-        {
+        public void ToQuantityWords(string word, int quantity, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity, ShowQuantityAs.Words));
-            Assert.Equal(expected, word.ToQuantity((long)quantity, ShowQuantityAs.Words));
-        }
 
         [Theory]
         [InlineData("case", 0, null, "0 cases")]
@@ -101,11 +88,8 @@
         [InlineData("dollar", 1, "C0", "$1 dollar")]
         [InlineData("dollar", 2, "C0", "$2 dollars")]
         [InlineData("dollar", 2, "C2", "$2.00 dollars")]
-        public void ToQuantityWordsWithCurrentCultureFormatting(string word, int quantity, string format, string expected)
-        {
+        public void ToQuantityWordsWithCurrentCultureFormatting(string word, int quantity, string format, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity, format));
-            Assert.Equal(expected, word.ToQuantity((long)quantity, format));
-        }
 
         [Theory]
         [InlineData("case", 0, "N0", "it-IT", "0 cases")]
@@ -122,7 +106,6 @@
             var culture = new CultureInfo(cultureCode);
 
             Assert.Equal(expected, word.ToQuantity(quantity, format, culture), GetStringComparer(culture));
-            Assert.Equal(expected, word.ToQuantity((long)quantity, format, culture), GetStringComparer(culture));
         }
 
         internal static StringComparer GetStringComparer(CultureInfo culture) =>
