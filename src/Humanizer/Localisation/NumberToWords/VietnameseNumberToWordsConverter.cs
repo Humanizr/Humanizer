@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private const int OneBillion = 1000000000;
         private const int OneMillion = 1000000;

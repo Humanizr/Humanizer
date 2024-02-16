@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class GermanFormatter() :
+    class GermanFormatter() :
         DefaultFormatter("de")
     {
         /// <inheritdoc />

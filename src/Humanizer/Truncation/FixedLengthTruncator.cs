@@ -3,7 +3,7 @@
     /// <summary>
     /// Truncate a string to a fixed length
     /// </summary>
-    internal class FixedLengthTruncator : ITruncator
+    class FixedLengthTruncator : ITruncator
     {
         public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {

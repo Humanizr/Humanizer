@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal static class RussianGrammaticalNumberDetector
+    static class RussianGrammaticalNumberDetector
     {
         public static RussianGrammaticalNumber Detect(long number)
         {

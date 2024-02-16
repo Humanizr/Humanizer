@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class RomanianFormatter() :
+    class RomanianFormatter() :
         DefaultFormatter(RomanianCultureCode)
     {
         private const int PrepositionIndicatingDecimals = 2;

@@ -1,6 +1,6 @@
 namespace Humanizer
 {
-    internal class CroatianFormatter() :
+    class CroatianFormatter() :
         DefaultFormatter("hr")
     {
         private const string DualTrialQuadralPostfix = "_DualTrialQuadral";

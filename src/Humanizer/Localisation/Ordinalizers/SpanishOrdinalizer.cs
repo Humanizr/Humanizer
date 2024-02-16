@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class SpanishOrdinalizer : DefaultOrdinalizer
+    class SpanishOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString) =>
             Convert(number, numberString, GrammaticalGender.Masculine, WordForm.Normal);

@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class JapaneseNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class JapaneseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap1 = ["", "", "二", "三", "四", "五", "六", "七", "八", "九"];
         private static readonly string[] UnitsMap2 = ["", "十", "百", "千"];

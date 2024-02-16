@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal abstract class GenderedNumberToWordsConverter : INumberToWordsConverter
+    abstract class GenderedNumberToWordsConverter : INumberToWordsConverter
     {
         private readonly GrammaticalGender _defaultGender;
 

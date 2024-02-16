@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class DefaultCollectionFormatter : ICollectionFormatter
+    class DefaultCollectionFormatter : ICollectionFormatter
     {
         protected string DefaultSeparator = "";
 

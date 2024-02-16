@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
+    class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
     {
         public string Convert()
         {

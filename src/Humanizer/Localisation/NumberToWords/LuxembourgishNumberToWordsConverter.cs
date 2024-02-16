@@ -1,6 +1,6 @@
 ﻿namespace Humanizer;
 
-internal class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
+class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
 {
     private readonly string[] UnitsMap = ["null", "een", "zwee", "dräi", "véier", "fënnef", "sechs", "siwen", "aacht", "néng", "zéng", "eelef", "zwielef", "dräizéng", "véierzéng", "fofzéng", "siechzéng", "siwwenzéng", "uechtzéng", "nonzéng"];
     private readonly string[] TensMap = ["null", "zéng", "zwanzeg", "drësseg", "véierzeg", "fofzeg", "sechzeg", "siwwenzeg", "achtzeg", "nonzeg"];

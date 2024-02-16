@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["சுழியம்", "ஒன்று", "இரண்டு", "மூன்று", "நான்கு", "ஐந்து", "ஆறு", "ஏழு", "எட்டு", "ஒன்பது", "பத்து", "பதினொன்று", "பனிரெண்டு", "பதிமூன்று", "பதினான்கு", "பதினைந்து", "பதினாறு", "பதினேழு", "பதினெட்டு", "பத்தொன்பது"];
         private static readonly string[] TensMap = ["சுழியம்", "பத்து", "இருப", "முப்ப", "நாற்ப", "ஐம்ப", "அறுப", "எழுப", "எண்ப", "தொண்ணூ"];

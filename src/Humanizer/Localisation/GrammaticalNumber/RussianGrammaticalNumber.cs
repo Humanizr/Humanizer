@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal enum RussianGrammaticalNumber
+    enum RussianGrammaticalNumber
     {
         Singular,
         Paucal,

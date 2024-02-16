@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class DutchOrdinalizer : DefaultOrdinalizer
+    class DutchOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString) =>
             Convert(number, numberString, GrammaticalGender.Masculine);

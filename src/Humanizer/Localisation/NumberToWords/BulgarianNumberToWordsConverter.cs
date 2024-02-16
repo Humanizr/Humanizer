@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
+    class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap =
         [

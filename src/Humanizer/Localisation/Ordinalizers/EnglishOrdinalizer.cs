@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class EnglishOrdinalizer : DefaultOrdinalizer
+    class EnglishOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Humanizer;
 
-internal class LuxembourgishFormatter() :
+class LuxembourgishFormatter() :
     DefaultFormatter(LocaleCode)
 {
     private const string LocaleCode = "lb";

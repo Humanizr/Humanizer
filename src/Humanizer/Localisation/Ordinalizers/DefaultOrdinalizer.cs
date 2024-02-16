@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class DefaultOrdinalizer : IOrdinalizer
+    class DefaultOrdinalizer : IOrdinalizer
     {
         public virtual string Convert(int number, string numberString, GrammaticalGender gender) =>
             Convert(number, numberString);

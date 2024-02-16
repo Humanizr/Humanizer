@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] FarsiHundredsMap = ["صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"];
         private static readonly string[] FarsiTensMap = ["صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"];

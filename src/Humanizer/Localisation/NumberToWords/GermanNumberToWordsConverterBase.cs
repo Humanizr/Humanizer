@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
+    abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     {
         private readonly string[] UnitsMap = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
         private readonly string[] TensMap = ["null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];

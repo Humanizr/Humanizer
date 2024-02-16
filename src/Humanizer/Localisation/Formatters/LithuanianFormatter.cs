@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class LithuanianFormatter() :
+    class LithuanianFormatter() :
         DefaultFormatter("lt")
     {
         protected override string GetResourceKey(string resourceKey, int number)

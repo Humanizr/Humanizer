@@ -3,7 +3,7 @@ namespace Humanizer
     /// <summary>
     /// Truncate a string to a fixed number of words
     /// </summary>
-    internal class FixedNumberOfWordsTruncator : ITruncator
+    class FixedNumberOfWordsTruncator : ITruncator
     {
         public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {

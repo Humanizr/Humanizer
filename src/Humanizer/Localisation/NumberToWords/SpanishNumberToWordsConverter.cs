@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
+    class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] HundredsRootMap =
         [

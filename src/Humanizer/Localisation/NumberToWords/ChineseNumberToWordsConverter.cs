@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class ChineseNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class ChineseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
 

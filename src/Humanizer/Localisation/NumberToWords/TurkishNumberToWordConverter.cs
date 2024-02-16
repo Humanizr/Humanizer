@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class TurkishNumberToWordConverter :
+    class TurkishNumberToWordConverter :
         GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];

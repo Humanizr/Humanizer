@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
 

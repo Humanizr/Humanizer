@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal static class LithuanianNumberFormDetector
+    static class LithuanianNumberFormDetector
     {
         public static LithuanianNumberForm Detect(long number)
         {

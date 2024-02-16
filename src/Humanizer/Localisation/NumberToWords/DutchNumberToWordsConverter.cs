@@ -6,7 +6,7 @@
     /// Used the rules as stated here.
     /// http://www.beterspellen.nl/website/?pag=110
     /// </summary>
-    internal class DutchNumberToWordsConverter :
+    class DutchNumberToWordsConverter :
         GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien"];

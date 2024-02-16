@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
+    class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] HundredsMap = ["нуль", "сто", "двісті", "триста", "чотириста", "п'ятсот", "шістсот", "сімсот", "вісімсот", "дев'ятсот"];
         private static readonly string[] TensMap = ["нуль", "десять", "двадцять", "тридцять", "сорок", "п'ятдесят", "шістдесят", "сімдесят", "вісімдесят", "дев'яносто"];

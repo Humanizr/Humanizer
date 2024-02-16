@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class PolishNumberToWordsConverter(CultureInfo culture) :
+    class PolishNumberToWordsConverter(CultureInfo culture) :
         GenderedNumberToWordsConverter
     {
         private static readonly string[] HundredsMap =

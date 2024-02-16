@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
         private static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];

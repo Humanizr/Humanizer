@@ -2,7 +2,7 @@
 
 namespace Humanizer
 {
-    internal class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
+    class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
         public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
         {

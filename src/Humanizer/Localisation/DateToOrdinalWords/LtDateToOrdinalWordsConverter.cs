@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class LtDateToOrdinalWordsConverter : IDateToOrdinalWordConverter
+    class LtDateToOrdinalWordsConverter : IDateToOrdinalWordConverter
     {
         public string Convert(DateTime date) =>
             date.ToString("yyyy 'm.' MMMM d 'd.'");

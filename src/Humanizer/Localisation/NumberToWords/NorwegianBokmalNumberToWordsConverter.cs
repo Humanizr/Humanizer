@@ -1,6 +1,6 @@
 namespace Humanizer
 {
-    internal class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
+    class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten"];
         private static readonly string[] TensMap = ["null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti"];

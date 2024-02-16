@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class SerbianNumberToWordsConverter(CultureInfo culture) :
+    class SerbianNumberToWordsConverter(CultureInfo culture) :
         GenderlessNumberToWordsConverter
     {
         private static readonly string[] UnitsMap = ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset", "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šestnaest", "sedemnaest", "osemnaest", "devetnaest"];

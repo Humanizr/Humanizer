@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class RussianOrdinalizer : DefaultOrdinalizer
+    class RussianOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString) =>
             Convert(number, numberString, GrammaticalGender.Masculine);

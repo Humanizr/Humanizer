@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    internal class GermanNumberToWordsConverter : GermanNumberToWordsConverterBase
+    class GermanNumberToWordsConverter : GermanNumberToWordsConverterBase
     {
     }
 }
