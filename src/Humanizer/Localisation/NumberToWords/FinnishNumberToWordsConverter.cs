@@ -85,7 +85,7 @@
             return string.Join("", parts).Trim();
         }
 
-        private string GetOrdinalUnit(int number, bool useExceptions)
+        private static string GetOrdinalUnit(int number, bool useExceptions)
         {
             if (useExceptions && OrdinalExceptions.ContainsKey(number))
             {
@@ -95,7 +95,7 @@
             return OrdinalUnitsMap[number];
         }
 
-        private string ToOrdinal(int number, bool useExceptions)
+        private static string ToOrdinal(int number, bool useExceptions)
         {
             if (number == 0)
             {

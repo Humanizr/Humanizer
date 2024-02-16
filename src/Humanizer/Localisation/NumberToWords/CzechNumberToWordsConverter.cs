@@ -45,7 +45,7 @@
         public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
             number.ToString(_culture);
 
-        private string UnitByGender(long number, GrammaticalGender? gender)
+        private static string UnitByGender(long number, GrammaticalGender? gender)
         {
             if (number != 1 && number != 2)
             {
@@ -62,7 +62,7 @@
             };
         }
 
-        private void CollectLessThanThousand(List<string> parts, long number, GrammaticalGender? gender)
+        private static void CollectLessThanThousand(List<string> parts, long number, GrammaticalGender? gender)
         {
             if (number >= 100)
             {

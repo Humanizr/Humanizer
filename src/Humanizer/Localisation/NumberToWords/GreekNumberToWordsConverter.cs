@@ -76,14 +76,17 @@
             return string.Empty;
         }
 
-        private string GetOneDigitOrdinal(int number)
+        private static string GetOneDigitOrdinal(int number)
         {
-            if (!ΟrdinalMap.TryGetValue(number, out var output)) return string.Empty;
+            if (ΟrdinalMap.TryGetValue(number, out var output))
+            {
+                return output;
+            }
 
-            return output;
+            return string.Empty;
         }
 
-        private string GetTwoDigitOrdinal(int number)
+        private static string GetTwoDigitOrdinal(int number)
         {
             if (number == 11) return "ενδέκατος";
             if (number == 12) return "δωδέκατος";
@@ -100,26 +103,26 @@
             return decadesString;
         }
 
-        private string GetThreeDigitOrdinal(int number)
+        private static string GetThreeDigitOrdinal(int number)
         {
-            var hundrends = number / 100;
+            var hundreds = number / 100;
 
-            if (!ΟrdinalMap.TryGetValue(hundrends*100, out var hundrentsString)) return string.Empty;
+            if (!ΟrdinalMap.TryGetValue(hundreds*100, out var hundredsString)) return string.Empty;
 
-            if (number - hundrends*100> 10)
+            if (number - hundreds*100> 10)
             {
-                return hundrentsString + " " + GetTwoDigitOrdinal(number - hundrends*100);
+                return hundredsString + " " + GetTwoDigitOrdinal(number - hundreds*100);
             }
 
-            if(number - hundrends * 100 > 0)
+            if(number - hundreds * 100 > 0)
             {
-                return hundrentsString + " " + GetOneDigitOrdinal(number - hundrends*100);
+                return hundredsString + " " + GetOneDigitOrdinal(number - hundreds*100);
             }
 
-            return hundrentsString;
+            return hundredsString;
         }
 
-        private string GetFourDigitOrdinal(int number)
+        private static string GetFourDigitOrdinal(int number)
         {
             var thousands = number / 1000;
 

@@ -131,10 +131,10 @@
             return string.Format(pluralFormat, Convert(number));
         }
 
-        private int NoRestIndex(int number) =>
+        private static int NoRestIndex(int number) =>
             number == 0 ? 0 : 1;
 
-        private string GetEndingForGender(GrammaticalGender gender)
+        private static string GetEndingForGender(GrammaticalGender gender)
         {
             switch (gender)
             {

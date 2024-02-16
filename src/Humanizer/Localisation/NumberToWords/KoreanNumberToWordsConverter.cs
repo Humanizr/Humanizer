@@ -36,7 +36,7 @@
         public override string ConvertToOrdinal(int number) =>
             ConvertImpl(number, true);
 
-        private string ConvertImpl(long number, bool isOrdinal)
+        private static string ConvertImpl(long number, bool isOrdinal)
         {
             if (isOrdinal && number < 20)
             {

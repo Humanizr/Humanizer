@@ -22,14 +22,14 @@
             return Convert(number, true);
         }
 
-        private string Convert(int number, bool checkForHoundredRule)
+        private static string Convert(int number, bool checkForHundredRule)
         {
             if (number == 0)
             {
                 return UnitsMap[0];
             }
 
-            if (checkForHoundredRule && number == 100)
+            if (checkForHundredRule && number == 100)
             {
                 return "юз";
             }
