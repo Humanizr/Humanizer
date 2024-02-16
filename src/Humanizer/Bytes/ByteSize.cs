@@ -28,7 +28,11 @@ namespace Humanizer
     /// Represents a byte size value.
     /// </summary>
 #pragma warning disable 1591
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable, IFormattable
+    public struct ByteSize(double byteSize) :
+        IComparable<ByteSize>,
+        IEquatable<ByteSize>,
+        IComparable,
+        IFormattable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
@@ -52,12 +56,12 @@ namespace Humanizer
         public const string TerabyteSymbol = "TB";
         public const string Terabyte = "terabyte";
 
-        public long Bits { get; }
-        public double Bytes { get; }
-        public double Kilobytes { get; }
-        public double Megabytes { get; }
-        public double Gigabytes { get; }
-        public double Terabytes { get; }
+        public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
+        public double Bytes { get; } = byteSize;
+        public double Kilobytes { get; } = byteSize / BytesInKilobyte;
+        public double Megabytes { get; } = byteSize / BytesInMegabyte;
+        public double Gigabytes { get; } = byteSize / BytesInGigabyte;
+        public double Terabytes { get; } = byteSize / BytesInTerabyte;
 
         public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
@@ -163,18 +167,7 @@ namespace Humanizer
             }
         }
 
-        public ByteSize(double byteSize)
-            : this()
-        {
-            // Get ceiling because bis are whole units
-            Bits = (long)Math.Ceiling(byteSize * BitsInByte);
-
-            Bytes = byteSize;
-            Kilobytes = byteSize / BytesInKilobyte;
-            Megabytes = byteSize / BytesInMegabyte;
-            Gigabytes = byteSize / BytesInGigabyte;
-            Terabytes = byteSize / BytesInTerabyte;
-        }
+        // Get ceiling because bis are whole units
 
         public static ByteSize FromBits(long value) =>
             new(value / (double) BitsInByte);
