@@ -1,9 +1,7 @@
 ﻿#if NET6_0_OR_GREATER
 namespace Humanizer;
 
-/// <summary>
-/// </summary>
-public partial class OnDate
+public class OnDate
 {
     /// <summary>
     /// Provides fluent date accessors for January

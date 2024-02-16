@@ -2,7 +2,7 @@
 
 /// <summary>
 /// </summary>
-public partial class On
+public class On
 {
     /// <summary>
     /// Provides fluent date accessors for January
@@ -213,7 +213,6 @@ public partial class On
         public static DateTime The(int dayNumber)
             => new(DateTime.Now.Year, 2, dayNumber);
 
-
         /// <summary>
         /// The 1st day of February of the current year
         /// </summary>
@@ -398,7 +397,6 @@ public partial class On
         /// </summary>
         public static DateTime The(int dayNumber)
             => new(DateTime.Now.Year, 3, dayNumber);
-
 
         /// <summary>
         /// The 1st day of March of the current year

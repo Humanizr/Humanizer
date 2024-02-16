@@ -8,9 +8,7 @@
 #if NET6_0_OR_GREATER
 namespace Humanizer;
 
-/// <summary>
-/// </summary>
-public partial class OnDate
+public class OnDate
 {
 <#
 const int leapYear = 2012;

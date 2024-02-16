@@ -9,7 +9,7 @@ namespace Humanizer;
 
 /// <summary>
 /// </summary>
-public partial class On
+public class On
 {
 <#
 const int leapYear = 2012;
