@@ -67,12 +67,12 @@
                 number %= 100;
             }
 
-            if (number >= 20 && number / 10 > 0)
+            if (number >= 20)
             {
                 parts.Add($"{Convert(number / 10)}kymmentä");
                 number %= 10;
             }
-            else if (number > 10 && number < 20)
+            else if (number > 10)
             {
                 parts.Add($"{UnitsMap[number % 10]}toista");
             }
@@ -128,12 +128,12 @@
                 number %= 100;
             }
 
-            if (number >= 20 && number / 10 > 0)
+            if (number >= 20)
             {
                 parts.Add($"{ToOrdinal(number / 10, true)}kymmenes");
                 number %= 10;
             }
-            else if (number > 10 && number < 20)
+            else if (number > 10)
             {
                 parts.Add($"{GetOrdinalUnit(number % 10, true)}toista");
             }

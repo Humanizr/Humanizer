@@ -106,7 +106,7 @@
             var local_word = "";
             if (number < 20)
                 local_word = GetUnitValue(number, isOrdinal);
-            else if (number >= 20 && number <= 99)
+            else if (number <= 99)
             {
                 var lastPart = TensMap[number / 10];
                 var quot = number / 10;

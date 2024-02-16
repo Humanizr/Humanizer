@@ -223,7 +223,7 @@
                     return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
                 }
             }
-            else if (number > 10 && number < 100)
+            else if (number < 100)
             {
                 var parts = word.Split(' ');
                 var newParts = new string[parts.Length];

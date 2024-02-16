@@ -188,7 +188,7 @@
                 }
 
                 // suffix -de/-te
-                if (divided > 0 && number % m.Value == 0)
+                if (number % m.Value == 0)
                 {
                     switch (number)
                     {
