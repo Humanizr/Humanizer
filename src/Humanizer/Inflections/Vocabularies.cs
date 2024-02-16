@@ -95,6 +95,10 @@
             _default.AddIrregular("bus", "buses", matchEnding: false);
             _default.AddIrregular("die", "dice", matchEnding: false);
             _default.AddIrregular("tie", "ties", matchEnding: false);
+            _default.AddIrregular("lens", "lenses");
+            _default.AddIrregular("clove", "cloves");
+            _default.AddIrregular("valve", "valves");
+            _default.AddIrregular("explosive", "explosives");
 
             _default.AddUncountable("staff");
             _default.AddUncountable("training");
@@ -137,6 +141,12 @@
             _default.AddUncountable("scissors");
             _default.AddUncountable("means");
             _default.AddUncountable("mail");
+            _default.AddUncountable("pliers");
+            _default.AddUncountable("sheers");
+            _default.AddUncountable("clothes");
+            _default.AddUncountable("apparatus");
+            _default.AddUncountable("chassis");
+            _default.AddUncountable("debris");
 
             //Fix 1132
             _default.AddUncountable("metadata");
