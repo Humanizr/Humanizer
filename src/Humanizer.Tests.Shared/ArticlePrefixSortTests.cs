@@ -12,7 +12,7 @@
         [Fact]
         public void An_Empty_String_Array_Throws_ArgumentOutOfRangeException()
         {
-            string[] items = { };
+            string[] items = [];
             void action() => EnglishArticle.AppendArticlePrefix(items);
             Assert.Throws<ArgumentOutOfRangeException>(action);
         }

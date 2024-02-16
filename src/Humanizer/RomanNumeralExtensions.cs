@@ -28,7 +28,7 @@ namespace Humanizer
             };
 
         private static readonly Regex ValidRomanNumeral =
-            new Regex(
+            new(
                 "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
                 RegexOptionsUtil.Compiled);
 

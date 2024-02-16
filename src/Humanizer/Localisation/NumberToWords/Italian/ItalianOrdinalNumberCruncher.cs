@@ -90,8 +90,8 @@
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
         /// </summary>
-        protected static string[] _unitsUnder10NumberToText = new string[]
-        {
+        protected static string[] _unitsUnder10NumberToText =
+        [
             string.Empty,
             "prim",
             "second",
@@ -102,7 +102,7 @@
             "settim",
             "ottav",
             "non"
-        };
+        ];
 
         protected static int _lengthOf10AsCardinal = "dieci".Length;
     }

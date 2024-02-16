@@ -3,36 +3,36 @@
     internal class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         private static readonly string[] UnitsMap =
-        {
+        [
             "нула", "едно", "две", "три", "четири", "пет", "шест", "седем", "осем", "девет", "десет", "единадесет",
             "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет", "осемнадесет",
             "деветнадесет"
-        };
+        ];
 
         private static readonly string[] TensMap =
-        {
+        [
             "нула", "десет", "двадесет", "тридесет", "четиридесет", "петдесет", "шестдесет", "седемдесет",
             "осемдесет", "деветдесет"
-        };
+        ];
 
         private static readonly string[] HundredsMap =
-        {
+        [
             "нула", "сто", "двеста", "триста", "четиристотин", "петстотин", "шестстотин", "седемстотин",
             "осемстотин", "деветстотин"
-        };
+        ];
 
         private static readonly string[] HundredsOrdinalMap =
-        {
+        [
             string.Empty, "стот", "двест", "трист", "четиристот", "петстот", "шестстот", "седемстот", "осемстот",
             "деветстот"
-        };
+        ];
 
         private static readonly string[] UnitsOrdinal =
-        {
+        [
             string.Empty, "първ", "втор", "трет", "четвърт", "пет", "шест", "седм", "осм", "девeт", "десeт",
             "единадесет", "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет",
             "осемнадесет", "деветнадесет"
-        };
+        ];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
             Convert(input, gender, false);

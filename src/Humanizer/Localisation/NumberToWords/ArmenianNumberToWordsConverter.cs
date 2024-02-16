@@ -1,11 +1,12 @@
 ﻿namespace Humanizer
 {
-    internal class ArmenianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    internal class ArmenianNumberToWordsConverter :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը" };
-        private static readonly string[] TensMap = { "զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն" };
+        private static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];
+        private static readonly string[] TensMap = ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"];
 
-        private static readonly Dictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
+        private static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {0, "զրոյական"},
             {1, "առաջին"},

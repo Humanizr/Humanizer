@@ -2,11 +2,11 @@
 {
     internal class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap1 = { "", "", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
-        private static readonly string[] UnitsMap2 = { "", "십", "백", "천" };
-        private static readonly string[] UnitsMap3 = { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항하사", "아승기", "나유타", "불가사의", "무량대수"};
+        private static readonly string[] UnitsMap1 = ["", "", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+        private static readonly string[] UnitsMap2 = ["", "십", "백", "천"];
+        private static readonly string[] UnitsMap3 = ["", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항하사", "아승기", "나유타", "불가사의", "무량대수"];
 
-        private static readonly Dictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
+        private static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {0, "영번째"},
             {1, "첫번째"},

@@ -1,11 +1,12 @@
 ﻿namespace Humanizer
 {
-    internal class AzerbaijaniNumberToWordsConverter : GenderlessNumberToWordsConverter
+    internal class AzerbaijaniNumberToWordsConverter :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz" };
-        private static readonly string[] TensMap = { "sıfır", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan" };
+        private static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz"];
+        private static readonly string[] TensMap = ["sıfır", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan"];
 
-        private static readonly Dictionary<char, string> OrdinalSuffix = new Dictionary<char, string>
+        private static readonly Dictionary<char, string> OrdinalSuffix = new()
         {
             {'ı', "ıncı"},
             {'i', "inci"},

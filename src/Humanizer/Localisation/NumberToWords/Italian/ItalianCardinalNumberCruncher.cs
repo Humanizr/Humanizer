@@ -227,8 +227,8 @@
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
         /// </summary>
-        protected static string[] _unitsNumberToText = new string[]
-        {
+        protected static string[] _unitsNumberToText =
+        [
             string.Empty,
             "uno",
             "due",
@@ -239,13 +239,13 @@
             "sette",
             "otto",
             "nove"
-        };
+        ];
 
         /// <summary>
         /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
         /// </summary>
-        protected static string[] _tensOver20NumberToText = new string[]
-        {
+        protected static string[] _tensOver20NumberToText =
+        [
             string.Empty,
             string.Empty,
             "venti",
@@ -256,13 +256,13 @@
             "settanta",
             "ottanta",
             "novanta"
-        };
+        ];
 
         /// <summary>
         /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
         /// </summary>
-        protected static string[] _teensUnder20NumberToText = new string[]
-        {
+        protected static string[] _teensUnder20NumberToText =
+        [
             "dieci",
             "undici",
             "dodici",
@@ -273,13 +273,13 @@
             "diciassette",
             "diciotto",
             "diciannove"
-        };
+        ];
 
         /// <summary>
         /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
         /// </summary>
-        protected static string[] _hundredNumberToText = new string[]
-        {
+        protected static string[] _hundredNumberToText =
+        [
             string.Empty,
             "cento",
             "duecento",
@@ -290,7 +290,7 @@
             "settecento",
             "ottocento",
             "novecento"
-        };
+        ];
 
         /// <summary>
         /// Enumerates sets of three-digits having distinct conversion to text.

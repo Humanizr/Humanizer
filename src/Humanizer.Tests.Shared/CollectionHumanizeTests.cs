@@ -56,12 +56,12 @@
             Assert.Equal("A String, Another String, or A Third String", collection.Humanize("or"));
         }
 
-        private readonly List<SomeClass> _testCollection = new List<SomeClass>
-            {
-                new SomeClass { SomeInt = 1, SomeString = "One" },
-                new SomeClass { SomeInt = 2, SomeString = "Two" },
-                new SomeClass { SomeInt = 3, SomeString = "Three" }
-            };
+        private readonly List<SomeClass> _testCollection =
+        [
+            new() { SomeInt = 1, SomeString = "One" },
+            new() { SomeInt = 2, SomeString = "Two" },
+            new() { SomeInt = 3, SomeString = "Three" }
+        ];
 
         [Fact]
         public void HumanizeDefaultsToToString() =>

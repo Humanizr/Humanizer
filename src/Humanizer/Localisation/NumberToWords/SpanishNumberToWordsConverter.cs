@@ -2,43 +2,60 @@
 {
     internal class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] HundredsRootMap = {
+        private static readonly string[] HundredsRootMap =
+        [
             "cero", "ciento", "doscient", "trescient", "cuatrocient", "quinient", "seiscient", "setecient",
-            "ochocient", "novecient" };
+            "ochocient", "novecient"
+        ];
 
-        private static readonly string[] HundredthsRootMap = {
+        private static readonly string[] HundredthsRootMap =
+        [
             "", "centésim", "ducentésim", "tricentésim", "cuadringentésim", "quingentésim", "sexcentésim",
-            "septingentésim", "octingentésim", "noningentésim" };
+            "septingentésim", "octingentésim", "noningentésim"
+        ];
 
-        private static readonly string[] OrdinalsRootMap = { "" , "primer", "segund", "tercer", "cuart", "quint", "sext",
-            "séptim", "octav", "noven"};
+        private static readonly string[] OrdinalsRootMap =
+        [
+            "" , "primer", "segund", "tercer", "cuart", "quint", "sext",
+            "séptim", "octav", "noven"
+        ];
 
-        private static readonly string[] TensMap = {
-            "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
+        private static readonly string[] TensMap =
+        [
+            "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"
+        ];
 
-        private static readonly string[] TenthsRootMap = {
+        private static readonly string[] TenthsRootMap =
+        [
             "", "décim", "vigésim", "trigésim", "cuadragésim", "quincuagésim", "sexagésim", "septuagésim",
-            "octogésim", "nonagésim" };
+            "octogésim", "nonagésim"
+        ];
 
-        private static readonly string[] ThousandthsRootMap = {
+        private static readonly string[] ThousandthsRootMap =
+        [
             "", "milésim", "dosmilésim", "tresmilésim", "cuatromilésim", "cincomilésim", "seismilésim",
-            "sietemilésim", "ochomilésim", "nuevemilésim" };
+            "sietemilésim", "ochomilésim", "nuevemilésim"
+        ];
 
-        private static readonly string[] TupleMap = {
+        private static readonly string[] TupleMap =
+        [
             "cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuple", "séxtuple", "séptuple", "óctuple",
-            "nonuplo", "décuplo", "undécuplo", "duodécuplo", "terciodécuplo" };
+            "nonuplo", "décuplo", "undécuplo", "duodécuplo", "terciodécuplo"
+        ];
 
-        private static readonly string[] UnitsMap = {
+        private static readonly string[] UnitsMap =
+        [
             "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
             "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
-            "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
+            "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"
+        ];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
             Convert(input, WordForm.Normal, gender, addAnd);
 
         public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
         {
-            List<string> wordBuilder = new();
+            List<string> wordBuilder = [];
 
             if (number == 0)
             {
@@ -70,7 +87,7 @@
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm)
         {
-            List<string> wordBuilder = new();
+            List<string> wordBuilder = [];
 
             if (number is 0 or int.MinValue)
             {
@@ -268,7 +285,7 @@
 
         private string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
         {
-            List<string> wordBuilder = new();
+            List<string> wordBuilder = [];
 
             const long oneTrillion = 1_000_000_000_000_000_000;
             const long oneBillion = 1_000_000_000_000;

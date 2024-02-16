@@ -6,9 +6,9 @@
         private const int OneMillion = 1000000;
 
         private static readonly string[] NumberVerbalPairs =
-        {
+        [
             "", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"
-        };
+        ];
 
         public override string Convert(long number) =>
             number == 0

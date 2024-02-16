@@ -43,10 +43,10 @@ namespace Humanizer
         /// Symbols is a list of every symbols for the Metric system.
         /// </summary>
         private static readonly List<char>[] Symbols =
-                {
-                    new List<char> { 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y' },
-                    new List<char> { 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y' }
-                };
+        [
+            ['k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
+            ['m', 'μ', 'n', 'p', 'f', 'a', 'z', 'y']
+        ];
 
         /// <summary>
         /// UnitPrefixes link a Metric symbol (as key) to its prefix (as value).
@@ -58,7 +58,7 @@ namespace Humanizer
         /// {'d', "deci" },
         /// {'c', "centi"},
         /// </remarks>
-        private static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new Dictionary<char, UnitPrefix>
+        private static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new()
         {
              {'Y', new UnitPrefix("yotta", "septillion", "quadrillion")},
              {'Z', new UnitPrefix("zetta", "sextillion", "trilliard")},
@@ -372,20 +372,11 @@ namespace Humanizer
             return !double.TryParse(isSymbol ? input.Remove(index) : input, out var number);
         }
 
-        private struct UnitPrefix
+        private struct UnitPrefix(string name, string shortScaleWord, string longScaleWord = null)
         {
-            private readonly string _longScaleWord;
-
-            public string Name { get; }
-            public string ShortScaleWord { get; }
-            public string LongScaleWord => _longScaleWord ?? ShortScaleWord;
-
-            public UnitPrefix(string name, string shortScaleWord, string longScaleWord = null)
-            {
-                Name = name;
-                ShortScaleWord = shortScaleWord;
-                _longScaleWord = longScaleWord;
-            }
+            public string Name { get; } = name;
+            public string ShortScaleWord { get; } = shortScaleWord;
+            public string LongScaleWord => longScaleWord ?? ShortScaleWord;
         }
     }
 }

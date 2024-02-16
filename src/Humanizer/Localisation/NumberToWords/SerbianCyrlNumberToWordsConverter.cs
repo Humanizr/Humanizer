@@ -1,14 +1,10 @@
 ﻿namespace Humanizer
 {
-    internal class SerbianCyrlNumberToWordsConverter : GenderlessNumberToWordsConverter
+    internal class SerbianCyrlNumberToWordsConverter(CultureInfo culture) :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест" };
-        private static readonly string[] TensMap = { "нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет" };
-
-        private readonly CultureInfo _culture;
-
-        public SerbianCyrlNumberToWordsConverter(CultureInfo culture) =>
-            _culture = culture;
+        private static readonly string[] UnitsMap = ["нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест"];
+        private static readonly string[] TensMap = ["нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет"];
 
         public override string Convert(long input)
         {
@@ -105,7 +101,7 @@
 
         public override string ConvertToOrdinal(int number) =>
             //TODO: In progress
-            number.ToString(_culture);
+            number.ToString(culture);
 
         private string Part(string singular, string dual, string trialQuadral, string plural, int number)
         {
