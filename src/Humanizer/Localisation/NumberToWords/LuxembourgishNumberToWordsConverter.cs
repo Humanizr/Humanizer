@@ -41,7 +41,7 @@ class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
 
         if (number <= 0)
         {
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
         if (number < 20)
@@ -78,7 +78,7 @@ class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
             parts.Add(tens);
         }
 
-        return string.Join("", parts);
+        return string.Concat(parts);
     }
 
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
@@ -112,7 +112,7 @@ class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
 
         parts.Add(GetEndingForGender(gender));
 
-        return string.Join("", parts);
+        return string.Concat(parts);
     }
 
     private void CollectParts(ICollection<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)

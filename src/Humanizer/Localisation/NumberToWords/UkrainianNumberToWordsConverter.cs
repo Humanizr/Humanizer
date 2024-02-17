@@ -163,7 +163,7 @@
                 parts.Add(number == 1 ? "одно" : UnitsOrdinalPrefixes[number]);
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
         static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)

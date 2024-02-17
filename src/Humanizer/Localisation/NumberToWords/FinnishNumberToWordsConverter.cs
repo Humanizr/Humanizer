@@ -82,7 +82,7 @@
                 parts.Add(UnitsMap[number]);
             }
 
-            return string.Join("", parts).Trim();
+            return string.Concat( parts).Trim();
         }
 
         static string GetOrdinalUnit(int number, bool useExceptions)
@@ -143,7 +143,7 @@
                 parts.Add(GetOrdinalUnit(number, useExceptions));
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
         public override string ConvertToOrdinal(int number) =>
