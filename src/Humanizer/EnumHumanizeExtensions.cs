@@ -19,23 +19,18 @@ namespace Humanizer
             {
                 return Enum.GetValues(type)
                            .Cast<Enum>()
-                           .Where(e => e.CompareTo(Convert.ChangeType(Enum.ToObject(type, 0), type)) != 0)
-                           .Where(input.HasFlag)
-                           .Select(e => e.Humanize())
+                           .Where(_ =>  input.HasFlag(_) &&
+                                        _.CompareTo(Convert.ChangeType(Enum.ToObject(type, 0), type)) != 0)
+                           .Select(_ => _.Humanize())
                            .Humanize();
             }
 
             var caseName = input.ToString();
-            var member = type.GetTypeInfo().GetDeclaredField(caseName);
+            var member = type.GetField(caseName)!;
 
-            if (member != null)
+            if (TryGetDescription(member, out var description))
             {
-                var description = GetCustomDescription(member);
-
-                if (description != null)
-                {
-                    return description;
-                }
+                return description;
             }
 
             return caseName.Humanize();
@@ -48,21 +43,21 @@ namespace Humanizer
         static bool IsBitFieldEnum(Type type) =>
             type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
 
-        static string GetCustomDescription(MemberInfo memberInfo)
+        static bool TryGetDescription(MemberInfo member, out string description)
         {
-            var displayAttribute = memberInfo.GetCustomAttribute<DisplayAttribute>();
+            var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
             if (displayAttribute != null)
             {
-                var description = displayAttribute.GetDescription();
-                if (description != null)
+                description = displayAttribute.GetDescription();
+                if (description == null)
                 {
-                    return description;
+                    description = displayAttribute.GetName();
                 }
 
-                return displayAttribute.GetName();
+                return true;
             }
 
-            foreach (var attr in memberInfo.GetCustomAttributes())
+            foreach (var attr in member.GetCustomAttributes())
             {
                 var attrType = attr.GetType();
                 var descriptionProperty =
@@ -71,11 +66,13 @@ namespace Humanizer
                         .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
                 {
-                    return descriptionProperty.GetValue(attr, null).ToString();
+                    description = descriptionProperty.GetValue(attr, null)!.ToString();
+                    return true;
                 }
             }
 
-            return null;
+            description = null;
+            return false;
         }
 
         /// <summary>
