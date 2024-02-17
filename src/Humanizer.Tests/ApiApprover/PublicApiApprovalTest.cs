@@ -1,18 +1,15 @@
-﻿using PublicApiGenerator;
+﻿using Humanizer;
+using PublicApiGenerator;
 
-namespace Humanizer.Tests.ApiApprover
+public class PublicApiApprovalTest
 {
-    public class PublicApiApprovalTest
+    [Fact]
+    public Task Approve_Public_Api()
     {
-        [Fact]
-        [UseCulture("en-US")]
-        public Task Approve_Public_Api()
-        {
-            var publicApi = typeof(StringHumanizeExtensions).Assembly.GeneratePublicApi();
+        var publicApi = typeof(StringHumanizeExtensions).Assembly.GeneratePublicApi();
 
-            return Verifier.Verify(publicApi)
-                .ScrubLinesContaining("CommitHash", "RepositoryUrl")
-                .UniqueForTargetFrameworkAndVersion();
-        }
+        return Verify(publicApi)
+            .ScrubLinesContaining("CommitHash", "RepositoryUrl")
+            .UniqueForTargetFrameworkAndVersion();
     }
 }
