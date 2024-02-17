@@ -12,7 +12,6 @@
             /// Note: "s" for plural served separately by third part.
             /// </summary>
             const string TimeSpanFormat = "TimeSpanHumanize_{0}{1}{2}";
-            const string Zero = "TimeSpanHumanize_Zero";
 
             /// <summary>
             /// Generates Resource Keys according to convention.
@@ -27,10 +26,16 @@
 
                 if (count == 0 && toWords)
                 {
-                    return Zero;
+                    return "TimeSpanHumanize_Zero";
                 }
 
-                return TimeSpanFormat.FormatWith(count == 1 ? Single : Multiple, unit, count == 1 ? "" : "s");
+                if (count == 1)
+                {
+                    return string.Format(TimeSpanFormat, Single, unit, "");
+                }
+
+                var empty = "s";
+                return string.Format(TimeSpanFormat, Multiple, unit, empty);
             }
         }
     }
