@@ -18,15 +18,6 @@ public partial class ResourceKeys
         public const string Never = "DateHumanize_Never";
 
         /// <summary>
-        /// Examples: DateHumanize_SingleMinuteAgo, DateHumanize_MultipleHoursAgo
-        /// Note: "s" for plural served separately by third part.
-        /// </summary>
-        const string DateTimeFormat = "DateHumanize_{0}{1}{2}";
-
-        const string Ago = "Ago";
-        const string FromNow = "FromNow";
-
-        /// <summary>
         /// Generates Resource Keys according to convention.
         /// </summary>
         /// <param name="timeUnit">Time unit</param>
@@ -42,24 +33,22 @@ public partial class ResourceKeys
                 return Now;
             }
 
-            string singularity;
-            var unit = timeUnit.ToString();
             if (count == 1)
             {
-                singularity = Single;
-            }
-            else
-            {
-                unit += "s";
-                singularity = Multiple;
+                if (timeUnitTense == Tense.Future)
+                {
+                    return $"DateHumanize_Single{timeUnit}FromNow";
+                }
+
+                return $"DateHumanize_Single{timeUnit}Ago";
             }
 
             if (timeUnitTense == Tense.Future)
             {
-                return string.Format(DateTimeFormat, singularity, unit, FromNow);
+                return $"DateHumanize_Multiple{timeUnit}sFromNow";
             }
 
-            return string.Format(DateTimeFormat, singularity, unit, Ago);
+            return $"DateHumanize_Multiple{timeUnit}sAgo";
         }
     }
 }

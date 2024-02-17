@@ -1,42 +1,35 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+public partial class ResourceKeys
 {
-    public partial class ResourceKeys
+    /// <summary>
+    /// Encapsulates the logic required to get the resource keys for TimeSpan.Humanize
+    /// Examples: TimeSpanHumanize_SingleMinute, TimeSpanHumanize_MultipleHours.
+    /// </summary>
+    public static class TimeSpanHumanize
     {
         /// <summary>
-        /// Encapsulates the logic required to get the resource keys for TimeSpan.Humanize
+        /// Generates Resource Keys according to convention.
         /// </summary>
-        public static class TimeSpanHumanize
+        /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
+        /// <param name="count">Number of units, default is One.</param>
+        /// <param name="toWords">Result to words, default is false.</param>
+        /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
+        public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false)
         {
-            /// <summary>
-            /// Examples: TimeSpanHumanize_SingleMinute, TimeSpanHumanize_MultipleHours.
-            /// Note: "s" for plural served separately by third part.
-            /// </summary>
-            const string TimeSpanFormat = "TimeSpanHumanize_{0}{1}{2}";
+            ValidateRange(count);
 
-            /// <summary>
-            /// Generates Resource Keys according to convention.
-            /// </summary>
-            /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
-            /// <param name="count">Number of units, default is One.</param>
-            /// <param name="toWords">Result to words, default is false.</param>
-            /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
-            public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false)
+            if (count == 0 && toWords)
             {
-                ValidateRange(count);
-
-                if (count == 0 && toWords)
-                {
-                    return "TimeSpanHumanize_Zero";
-                }
-
-                if (count == 1)
-                {
-                    return string.Format(TimeSpanFormat, Single, unit, "");
-                }
-
-                var empty = "s";
-                return string.Format(TimeSpanFormat, Multiple, unit, empty);
+                return "TimeSpanHumanize_Zero";
             }
+
+            if (count == 1)
+            {
+                return $"TimeSpanHumanize_Single{unit}";
+            }
+
+            return $"TimeSpanHumanize_Multiple{unit}s";
         }
     }
 }
