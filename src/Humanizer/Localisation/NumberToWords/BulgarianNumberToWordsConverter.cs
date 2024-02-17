@@ -59,14 +59,6 @@
 
             var lastOrdinalSubstitution = "";
 
-            if (input / 1000000000000 > 0)
-            {
-                if (isOrdinal)
-                    lastOrdinalSubstitution = Convert(input / 1000000000000, gender, false) + " трилион" +
-                                              GetEndingForGender(gender, input);
-                input %= 1000000000000;
-            }
-
             if (input / 1000000000 > 0)
             {
                 parts.Add(input < 2000000000 ? "един милиард" : Convert(input / 1000000000, gender, false) + " милиарда");
