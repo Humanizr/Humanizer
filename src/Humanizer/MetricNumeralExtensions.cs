@@ -109,29 +109,6 @@ namespace Humanizer
         /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
         /// </remarks>
         /// <param name="input">Number to convert to a Metric representation.</param>
-        /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
-        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
-        /// <example>
-        /// <code>
-        /// 1000.ToMetric() => "1k"
-        /// 123.ToMetric() => "123"
-        /// 1E-1.ToMetric() => "100m"
-        /// </code>
-        /// </example>
-        /// <returns>A valid Metric representation</returns>
-        [Obsolete("Please use overload with MetricNumeralFormats")]
-        public static string ToMetric(this int input, bool hasSpace, bool useSymbol = true, int? decimals = null) =>
-            ((double)input).ToMetric(hasSpace, useSymbol, decimals);
-
-        /// <summary>
-        /// Converts a number into a valid and Human-readable Metric representation.
-        /// </summary>
-        /// <remarks>
-        /// Inspired by a snippet from Thom Smith.
-        /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
-        /// </remarks>
-        /// <param name="input">Number to convert to a Metric representation.</param>
         /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
         /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
         /// <example>
@@ -144,41 +121,6 @@ namespace Humanizer
         /// <returns>A valid Metric representation</returns>
         public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null) =>
             ((double)input).ToMetric(formats, decimals);
-
-        /// <summary>
-        /// Converts a number into a valid and Human-readable Metric representation.
-        /// </summary>
-        /// <remarks>
-        /// Inspired by a snippet from Thom Smith.
-        /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
-        /// </remarks>
-        /// <param name="input">Number to convert to a Metric representation.</param>
-        /// <param name="hasSpace">True will split the number and the symbol with a whitespace.</param>
-        /// <param name="useSymbol">True will use symbol instead of name</param>
-        /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
-        /// <example>
-        /// <code>
-        /// 1000d.ToMetric() => "1k"
-        /// 123d.ToMetric() => "123"
-        /// 1E-1.ToMetric() => "100m"
-        /// </code>
-        /// </example>
-        /// <returns>A valid Metric representation</returns>
-        [Obsolete("Please use overload with MetricNumeralFormats")]
-        public static string ToMetric(this double input, bool hasSpace, bool useSymbol = true, int? decimals = null)
-        {
-            var formats = (MetricNumeralFormats?)null;
-            if (hasSpace)
-            {
-                formats = MetricNumeralFormats.WithSpace;
-            }
-            if (!useSymbol)
-            {
-                formats = formats.HasValue ? formats | MetricNumeralFormats.UseName
-                    : MetricNumeralFormats.UseName;
-            }
-            return ToMetric(input, formats, decimals);
-        }
 
         /// <summary>
         /// Converts a number into a valid and Human-readable Metric representation.
