@@ -77,27 +77,6 @@
         }
 
         [Theory]
-        [InlineData("0", 0d, false, true, null)]
-        [InlineData("123", 123d, false, true, null)]
-        [InlineData("-123", -123d, false, true, null)]
-        [InlineData("1.23k", 1230d, false, true, null)]
-        [InlineData("1 k", 1000d, true, true, null)]
-        [InlineData("1 kilo", 1000d, true, false, null)]
-        [InlineData("1milli", 1E-3, false, false, null)]
-        [InlineData("1.23milli", 1.234E-3, false, false, 2)]
-        [InlineData("12.34k", 12345, false, true, 2)]
-        [InlineData("12k", 12345, false, true, 0)]
-        [InlineData("-3.9m", -3.91e-3, false, true, 1)]
-        [InlineData("10 ", 10, true, false, 0)]
-        [InlineData("1.2", 1.23, false, false, 1)]
-        public void ToMetricObsolete(string expected, double input, bool hasSpace, bool useSymbol, int? decimals)
-        {
-#pragma warning disable CS0618 // Type or member is obsolete
-            Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals));
-#pragma warning restore CS0618 // Type or member is obsolete
-        }
-
-        [Theory]
         [InlineData("1.3M", 1300000, null, null)]
         [InlineData("1.3million", 1300000, MetricNumeralFormats.UseShortScaleWord, null)]
         [InlineData("1.3 million", 1300000, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseShortScaleWord, null)]
