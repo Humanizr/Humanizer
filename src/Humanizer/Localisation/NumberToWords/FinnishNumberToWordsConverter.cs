@@ -67,7 +67,7 @@
                 number %= 100;
             }
 
-            if (number >= 20 && number / 10 > 0)
+            if (number >= 20)
             {
                 parts.Add($"{Convert(number / 10)}kymmentä");
                 number %= 10;
@@ -128,7 +128,7 @@
                 number %= 100;
             }
 
-            if (number >= 20 && number / 10 > 0)
+            if (number >= 20)
             {
                 parts.Add($"{ToOrdinal(number / 10, true)}kymmenes");
                 number %= 10;

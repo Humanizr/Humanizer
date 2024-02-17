@@ -63,7 +63,7 @@
             if (IsContainingOnlyNullValue(timeParts))
             {
                 var noTimeValueCultureFormatted = toWords ? cultureFormatter.TimeSpanHumanize_Zero()
-                    : cultureFormatter.TimeSpanHumanize(minUnit, 0, toWords);
+                    : cultureFormatter.TimeSpanHumanize(minUnit, 0);
                 timeParts = CreateTimePartsWithNoTimeValue(noTimeValueCultureFormatted);
             }
             return timeParts;

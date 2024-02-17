@@ -90,7 +90,7 @@ namespace Humanizer
                     var lastPart = TensMap[number / 10];
                     if (number % 10 > 0)
                     {
-                        lastPart = $"{GetUnitValue(number % 10, false)} en {(isOrdinal ? GetUnitValue(lastPartValue, isOrdinal) : lastPart)}";
+                        lastPart = $"{GetUnitValue(number % 10, false)} en {(isOrdinal ? GetUnitValue(lastPartValue, true) : lastPart)}";
                     }
                     else if (number % 10 == 0)
                     {
