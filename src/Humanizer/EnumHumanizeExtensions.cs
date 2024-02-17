@@ -30,16 +30,15 @@ namespace Humanizer
 
             if (member != null)
             {
-                var description = GetCustomDescription(member);
-
-                if (description != null)
+                if (TryGetDescription(member, out var s))
                 {
-                    return description;
+                    return s;
                 }
             }
 
             return caseName.Humanize();
         }
+
 
         /// <summary>
         /// Checks whether the given enum is to be used as a bit field type.
@@ -48,34 +47,31 @@ namespace Humanizer
         static bool IsBitFieldEnum(Type type) =>
             type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
 
-        static string GetCustomDescription(MemberInfo memberInfo)
+        static bool TryGetDescription(MemberInfo memberInfo, out string description)
         {
             var displayAttribute = memberInfo.GetCustomAttribute<DisplayAttribute>();
             if (displayAttribute != null)
             {
-                var description = displayAttribute.GetDescription();
-                if (description != null)
-                {
-                    return description;
-                }
-
-                return displayAttribute.GetName();
+                description = displayAttribute.GetDescription() ??
+                              displayAttribute.GetName();
+                return true;
             }
 
-            foreach (var attr in memberInfo.GetCustomAttributes())
+            foreach (var attribute in memberInfo.GetCustomAttributes())
             {
-                var attrType = attr.GetType();
                 var descriptionProperty =
-                    attrType.GetRuntimeProperties()
+                    attribute.GetType().GetRuntimeProperties()
                         .Where(p => p.PropertyType == typeof(string))
                         .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
                 if (descriptionProperty != null)
                 {
-                    return descriptionProperty.GetValue(attr, null).ToString();
+                    description = descriptionProperty.GetValue(attribute, null)!.ToString();
+                    return true;
                 }
             }
 
-            return null;
+            description = null;
+            return false;
         }
 
         /// <summary>
