@@ -13,7 +13,7 @@
         public static string Dehumanize(this string input)
         {
             var pascalizedWords = input.Split(' ').Select(word => word.Humanize().Pascalize());
-            return string.Join("", pascalizedWords).Replace(" ", "");
+            return string.Concat(pascalizedWords).Replace(" ", "");
         }
     }
 }

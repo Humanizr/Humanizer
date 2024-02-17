@@ -61,7 +61,7 @@
                 }
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
@@ -95,7 +95,7 @@
 
             parts.Add(GetEndingForGender(gender));
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
         void CollectParts(ICollection<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)

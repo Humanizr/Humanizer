@@ -94,7 +94,7 @@
                 }
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
         public override string ConvertToOrdinal(int number) =>
