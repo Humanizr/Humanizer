@@ -3,12 +3,12 @@
 class LuxembourgishFormatter() :
     DefaultFormatter(LocaleCode)
 {
-    private const string LocaleCode = "lb";
-    private readonly CultureInfo _localCulture = new(LocaleCode);
-    private const string DualPostfix = "_Dual";
+    const string LocaleCode = "lb";
+    readonly CultureInfo localCulture = new(LocaleCode);
+    const string DualPostfix = "_Dual";
     // https://lb.wikipedia.org/wiki/Eifeler_Reegel
-    private const char EifelerRuleSuffix = 'n';
-    private const string EifelerRuleCharacters = "unitedzohay";
+    const char EifelerRuleSuffix = 'n';
+    const string EifelerRuleCharacters = "unitedzohay";
 
     public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
         base.DataUnitHumanize(dataUnit, count, toSymbol)?.TrimEnd('s');
@@ -23,11 +23,11 @@ class LuxembourgishFormatter() :
 
     public static bool DoesEifelerRuleApply(string nextWord)
         => !string.IsNullOrWhiteSpace(nextWord)
-           && !EifelerRuleCharacters.Contains(nextWord.Substring(0, 1));
+           && !EifelerRuleCharacters.Contains(nextWord[0]);
 
     protected override string Format(string resourceKey, int number, bool toWords = false)
     {
-        var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _localCulture);
+        var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), localCulture);
 
         if (string.IsNullOrEmpty(resourceString))
         {
@@ -36,33 +36,48 @@ class LuxembourgishFormatter() :
 
         var unitGender = GetUnitGender(resourceString);
 
-        var numberAsWord = number.ToWords(unitGender, _localCulture);
-        var doesEifelerRuleApply = DoesEifelerRuleApply(numberAsWord);
+        var numberAsWord = number.ToWords(unitGender, localCulture);
 
-        return toWords
-            ? resourceString.FormatWith(numberAsWord, doesEifelerRuleApply ? string.Empty : EifelerRuleSuffix)
-            : resourceString.FormatWith(number, doesEifelerRuleApply ? string.Empty : EifelerRuleSuffix);
+        if (DoesEifelerRuleApply(numberAsWord))
+        {
+            if (toWords)
+            {
+                return string.Format(resourceString, numberAsWord, string.Empty);
+            }
+
+            return string.Format(resourceString, number, string.Empty);
+        }
+
+        if (toWords)
+        {
+            return string.Format(resourceString, numberAsWord, EifelerRuleSuffix);
+        }
+
+        return string.Format(resourceString, number, EifelerRuleSuffix);
     }
 
-    protected override string GetResourceKey(string resourceKey, int number) =>
-        number switch
-        {
-            2 when resourceKey is "DateHumanize_MultipleDaysAgo" or "DateHumanize_MultipleDaysFromNow" => resourceKey + DualPostfix,
-            _ => resourceKey
-        };
-
-    private static GrammaticalGender GetUnitGender(string resourceString)
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        var words = resourceString.Split(' ');
-        return words.Last() switch
+        if (number == 2 &&
+            resourceKey is "DateHumanize_MultipleDaysAgo" or "DateHumanize_MultipleDaysFromNow")
         {
-            var x when
-                x.StartsWith("Millisekonnen")
-                || x.StartsWith("Sekonnen")
-                || x.StartsWith("Minutten")
-                || x.StartsWith("Stonnen")
-                || x.StartsWith("Wochen") => GrammaticalGender.Feminine,
-            _ => GrammaticalGender.Masculine
-        };
+            return resourceKey + DualPostfix;
+        }
+
+        return resourceKey;
+    }
+
+    static GrammaticalGender GetUnitGender(string resourceString)
+    {
+        if (resourceString.EndsWith(" Millisekonnen") ||
+            resourceString.EndsWith(" Sekonnen") ||
+            resourceString.EndsWith(" Minutten") ||
+            resourceString.EndsWith(" Stonnen") ||
+            resourceString.EndsWith(" Wochen"))
+        {
+            return GrammaticalGender.Feminine;
+        }
+
+        return GrammaticalGender.Masculine;
     }
 }
