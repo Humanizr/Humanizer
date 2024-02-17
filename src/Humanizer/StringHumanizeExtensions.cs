@@ -18,8 +18,8 @@
         {
             PascalCaseWordPartsRegex = new(
                 $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
-                RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptionsUtil.Compiled);
-            FreestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptionsUtil.Compiled);
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+            FreestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
         }
 
         static string FromUnderscoreDashSeparatedWords(string input) =>
