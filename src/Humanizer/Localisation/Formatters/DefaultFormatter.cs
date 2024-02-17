@@ -112,9 +112,12 @@
                 throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
             }
 
-            return toWords
-                ? resourceString.FormatWith(number.ToWords(_culture))
-                : resourceString.FormatWith(number);
+            if (toWords)
+            {
+                return string.Format(resourceString, number.ToWords(_culture));
+            }
+
+            return string.Format(resourceString, number);
         }
 
         /// <summary>

@@ -20,7 +20,7 @@
                                      ? UnitPreposition
                                      : string.Empty;
 
-            return format.FormatWith(number, preposition);
+            return string.Format(format, number, preposition);
         }
 
         static bool ShouldUsePreposition(int number)

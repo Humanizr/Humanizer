@@ -1850,11 +1850,6 @@ namespace Humanizer
     {
         public static string Dehumanize(this string input) { }
     }
-    public static class StringExtensions
-    {
-        public static string FormatWith(this string format, params object[] args) { }
-        public static string FormatWith(this string format, System.IFormatProvider provider, params object[] args) { }
-    }
     public static class StringHumanizeExtensions
     {
         public static string Humanize(this string input) { }
