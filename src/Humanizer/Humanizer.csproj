@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>    
+    <TargetFrameworks>netstandard2.0;net462;net472;net48;net6.0;net7.0;net8.0</TargetFrameworks>    
     <Authors>Mehdi Khalili, Claire Novotny</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
@@ -16,7 +16,10 @@
   </PropertyGroup>  
   <ItemGroup>
     <Using Remove="System.Net.Http" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" Condition="'$(TargetFramework)' == 'netstandard2.0' " />
+    <PackageReference Include="Polyfill" Version="2.3.0" PrivateAssets="all" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="$(TargetFramework.StartsWith('net46')) or (TargetFramework) != '.NETStandard'" />
+    <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFramework) != '.NETStandard' or $(TargetFrameworkIdentifier) == '.NETFramework' or $(TargetFramework.StartsWith('netcoreapp'))" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
