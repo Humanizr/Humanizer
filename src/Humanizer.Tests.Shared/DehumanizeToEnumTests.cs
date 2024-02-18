@@ -3,13 +3,6 @@
     public class DehumanizeToEnumTests
     {
         [Fact]
-        public void ThrowsForNonEnums()
-        {
-            Assert.Throws<ArgumentException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyStructWithEnumInterfaces>());
-            Assert.Throws<ArgumentException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyStructWithEnumInterfaces)));
-        }
-
-        [Fact]
         public void ThrowsForEnumNoMatch()
         {
             Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyEnum>());
@@ -78,15 +71,6 @@
         {
             Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo<EnumUnderTest>());
             Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo(typeof(EnumUnderTest)));
-        }
-
-        struct DummyStructWithEnumInterfaces : IComparable, IFormattable
-        {
-            public int CompareTo(object obj) =>
-                throw new NotImplementedException();
-
-            public string ToString(string format, IFormatProvider formatProvider) =>
-                throw new NotImplementedException();
         }
 
         enum DummyEnum

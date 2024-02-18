@@ -13,8 +13,10 @@
         /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
-            where TTargetEnum : struct, IComparable, IFormattable =>
-            (TTargetEnum)DehumanizeToPrivate(input, typeof(TTargetEnum), OnNoMatch.ThrowsException);
+            where TTargetEnum : struct, Enum =>
+            DehumanizeToPrivate<TTargetEnum>(input, OnNoMatch.ThrowsException)!.Value;
+
+        static MethodInfo dehumanizeToMethod = typeof(EnumDehumanizeExtensions).GetMethod("DehumanizeTo", [typeof(string)]);
 
         /// <summary>
         /// Dehumanizes a string into the Enum it was originally Humanized from!
@@ -25,18 +27,26 @@
         /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
         /// <exception cref="ArgumentException">If targetEnum is not an enum</exception>
         public static Enum DehumanizeTo(this string input, Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException) =>
-            (Enum)DehumanizeToPrivate(input, targetEnum, onNoMatch);
+            (Enum) dehumanizeToMethod
+                .MakeGenericMethod(targetEnum)
+                .Invoke(null, [input]);
 
-        static object DehumanizeToPrivate(string input, Type targetEnum, OnNoMatch onNoMatch)
+        static TTargetEnum? DehumanizeToPrivate<TTargetEnum>(string input, OnNoMatch onNoMatch)
+            where TTargetEnum : struct, Enum
         {
-            var match = Enum.GetValues(targetEnum).Cast<Enum>().FirstOrDefault(value => string.Equals(value.Humanize(), input, StringComparison.OrdinalIgnoreCase));
-
-            if (match == null && onNoMatch == OnNoMatch.ThrowsException)
+            foreach (var value in EnumPolyfill.GetValues<TTargetEnum>())
+            {
+                if (string.Equals(value.Humanize(), input, StringComparison.OrdinalIgnoreCase))
+                {
+                    return value;
+                }
+            }
+            if (onNoMatch == OnNoMatch.ThrowsException)
             {
                 throw new NoMatchFoundException("Couldn't find any enum member that matches the string " + input);
             }
 
-            return match;
+            return null;
         }
     }
 }
