@@ -54,7 +54,7 @@ public class ToFullWordsTests
     [Theory]
     [InlineData(229376, "B", "229376 Byte")]
     [InlineData(229376, "# KB", "229 Kilobyte")]
-    [InlineData(229376, "# KiB", "224 Kibibyte")]
+    [InlineData(229376, "# KiB", "224 kibibyte")]
     public void ToFullWordsFormatted(double input, string format, string expectedValue) =>
         Assert.Equal(expectedValue, ByteSize.FromBytes(input).ToFullWords(format));
 }

@@ -29,7 +29,7 @@
         [InlineData(0, null, "0 bit")]
         [InlineData(0, "GiB", "0 GiB")]
         [InlineData(2, "MiB", "2048 MiB")]
-        [InlineData(2.123, "#.## GiB", "2,28 GiB")]
+        [InlineData(2.123, "#.## GiB", "2,12 GiB")]
         public void HumanizesGibibytes(double input, string format, string expectedValue) =>
             Assert.Equal(expectedValue, input.Gibibytes().Humanize(format));
 
@@ -63,7 +63,7 @@
         [InlineData(0, null, "0 bit")]
         [InlineData(0, "KiB", "0 KiB")]
         [InlineData(2, "B", "2048 B")]
-        [InlineData(2.123, "#.#### KiB", "2,174 KiB")]
+        [InlineData(2.123, "#.#### KiB", "2,123 KiB")]
         public void HumanizesKibibytes(double input, string format, string expectedValue) =>
             Assert.Equal(expectedValue, input.Kibibytes().Humanize(format));
 
