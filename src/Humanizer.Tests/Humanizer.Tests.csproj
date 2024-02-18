@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net8.0;net48</TargetFrameworks>
+    <NoWarn>$(NoWarn);xUnit1013</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

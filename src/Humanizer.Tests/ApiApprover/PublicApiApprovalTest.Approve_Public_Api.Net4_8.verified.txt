@@ -165,7 +165,7 @@ namespace Humanizer
         public static Humanizer.LocaliserRegistry<Humanizer.IOrdinalizer> Ordinalizers { get; }
         public static Humanizer.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
         public static Humanizer.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
-        public static System.Func<System.Reflection.PropertyInfo, bool> EnumDescriptionPropertyLocator { get; set; }
+        public static Humanizer.EnumDescriptionPropertyLocator EnumDescriptionPropertyLocator { get; set; }
     }
     public enum DataUnit
     {
@@ -230,6 +230,7 @@ namespace Humanizer
         public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
             where TTargetEnum :  struct, System.IComparable, System.IFormattable { }
     }
+    public delegate bool EnumDescriptionPropertyLocator(System.Type enumType, System.Reflection.PropertyInfo property);
     public static class EnumHumanizeExtensions
     {
         public static string Humanize(this System.Enum input) { }

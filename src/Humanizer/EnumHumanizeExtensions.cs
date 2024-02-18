@@ -28,7 +28,7 @@ namespace Humanizer
             var caseName = input.ToString();
             var member = type.GetField(caseName)!;
 
-            if (TryGetDescription(member, out var description))
+            if (TryGetDescription(type, member, out var description))
             {
                 return description;
             }
@@ -43,7 +43,7 @@ namespace Humanizer
         static bool IsBitFieldEnum(Type type) =>
             type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
 
-        static bool TryGetDescription(MemberInfo member, out string description)
+        static bool TryGetDescription(Type type, MemberInfo member, out string description)
         {
             var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
             if (displayAttribute != null)
@@ -63,7 +63,7 @@ namespace Humanizer
                 var descriptionProperty =
                     attrType.GetRuntimeProperties()
                         .Where(p => p.PropertyType == typeof(string))
-                        .FirstOrDefault(Configurator.EnumDescriptionPropertyLocator);
+                        .FirstOrDefault(_ => Configurator.EnumDescriptionPropertyLocator(type, _));
                 if (descriptionProperty != null)
                 {
                     description = descriptionProperty.GetValue(attr, null)!.ToString();

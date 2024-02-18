@@ -1,23 +1,32 @@
-namespace Humanizer.Tests
+namespace Humanizer.Tests;
+
+public class EnumHumanizeWithCustomDescriptionPropertyNamesTests
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-        Justification = "This is a test only class, and doesn't need a 'proper' IDisposable implementation.")]
-    public class EnumHumanizeWithCustomDescriptionPropertyNamesTests : IDisposable
-    {
-        public EnumHumanizeWithCustomDescriptionPropertyNamesTests() =>
-            Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info";
+    [ModuleInitializer]
+    public static void Initializer() =>
+        Configurator.EnumDescriptionPropertyLocator = (enumType, property) =>
+        {
+            if (enumType == typeof(TargetEnum))
+            {
+                return property.Name == "Info";
+            }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly",
-            Justification = "This is a test only class, and doesn't need a 'proper' IDisposable implementation.")]
-        public void Dispose() =>
-            Configurator.EnumDescriptionPropertyLocator = null;
+            return property.Name == "Description";
+        };
 
-        [Fact]
-        public void HonorsCustomPropertyAttribute() =>
-            Assert.Equal(EnumTestsResources.MemberWithCustomPropertyAttribute, EnumUnderTest.MemberWithCustomPropertyAttribute.Humanize());
+    [Fact]
+    public void HonorsCustomPropertyAttribute() =>
+        Assert.Equal(EnumTestsResources.MemberWithCustomPropertyAttribute, TargetEnum.MemberWithCustomPropertyAttribute.Humanize());
 
-        [Fact]
-        public void CanHumanizeMembersWithoutDescriptionAttribute() =>
-            Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize());
-    }
+    [Fact]
+    public void CanHumanizeMembersWithoutDescriptionAttribute() =>
+        Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, TargetEnum.MemberWithoutDescriptionAttribute.Humanize());
+}
+
+
+public enum TargetEnum
+{
+    [CustomProperty(EnumTestsResources.MemberWithCustomPropertyAttribute)]
+    MemberWithCustomPropertyAttribute,
+    MemberWithoutDescriptionAttribute,
 }
