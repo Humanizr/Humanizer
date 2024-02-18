@@ -6,18 +6,15 @@ namespace Humanizer;
 static class EnumCache<T>
     where T : struct, Enum
 {
-    static Type type;
     public static FrozenSet<T> Values { get; }
     public static FrozenDictionary<T, string> Humanized { get; }
-    static bool isBitFieldEnum;
     public static T ZeroValue { get; }
 
     static EnumCache()
     {
         Values = EnumPolyfill.GetValues<T>().ToFrozenSet();
-        type = typeof(T);
+        var type = typeof(T);
         ZeroValue = (T)Convert.ChangeType(Enum.ToObject(type, 0), type);
-        isBitFieldEnum = type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
         var dictionary = new Dictionary<T, string>();
         foreach (var value in Values)
         {
@@ -29,7 +26,8 @@ static class EnumCache<T>
 
     public static bool TreatAsFlags(T input)
     {
-        if (!isBitFieldEnum)
+        var type = typeof(T);
+        if (type.GetCustomAttribute(typeof(FlagsAttribute)) == null)
         {
             return false;
         }
@@ -39,6 +37,7 @@ static class EnumCache<T>
 
     static string GetDescription(T input)
     {
+        var type = typeof(T);
         var caseName = input.ToString();
         var member = type.GetField(caseName)!;
 
