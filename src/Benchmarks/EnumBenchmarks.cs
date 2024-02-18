@@ -11,6 +11,9 @@ public class EnumBenchmarks
         MemberWithDisplayAttribute,
     }
 
-    [Benchmark]
+    [Benchmark(Description = "Enum.Humanize")]
     public string Humanize() => EnumUnderTest.MemberWithDisplayAttribute.Humanize();
+
+    [Benchmark(Description = "Enum.DehumanizeTo")]
+    public EnumUnderTest Dehumanize() => "Display value".DehumanizeTo<EnumUnderTest>();
 }
