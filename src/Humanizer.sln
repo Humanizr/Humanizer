@@ -17,7 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\LICENSE = ..\LICENSE
 		..\readme.md = ..\readme.md
 		..\release_notes.md = ..\release_notes.md
-		..\version.json = ..\version.json
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
@@ -89,6 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{6ACDB92B-AC86-4C59-9114-5DCF9543D945}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Humanizer.Tests.Shared\Humanizer.Tests.Shared.projitems*{fdec244b-f07e-4a5e-bb80-fbc6ac77a9aa}*SharedItemsImports = 13
@@ -136,6 +137,22 @@ Global
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|x64.Build.0 = Release|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|x86.ActiveCfg = Release|Any CPU
 		{511A7984-F455-4A6E-ADB9-9CAAC47EA079}.Release|x86.Build.0 = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|x64.Build.0 = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Debug|x86.Build.0 = Debug|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|ARM.Build.0 = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|x64.ActiveCfg = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|x64.Build.0 = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|x86.ActiveCfg = Release|Any CPU
+		{6ACDB92B-AC86-4C59-9114-5DCF9543D945}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
