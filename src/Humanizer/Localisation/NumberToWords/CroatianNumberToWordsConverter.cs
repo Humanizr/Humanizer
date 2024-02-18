@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 
-namespace Humanizer.Localisation.NumberToWords
+namespace Humanizer
 {
-    internal class CroatianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class CroatianNumberToWordsConverter(CultureInfo culture)
+        : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap =
-        {
+        static readonly string[] UnitsMap =
+        [
             "nula",
             "jedan",
             "dva",
@@ -27,10 +27,10 @@ namespace Humanizer.Localisation.NumberToWords
             "sedamnaest",
             "osamnaest",
             "devetnaest"
-        };
+        ];
 
-        private static readonly string[] TensMap =
-        {
+        static readonly string[] TensMap =
+        [
             "nula",
             "deset",
             "dvadeset",
@@ -41,14 +41,7 @@ namespace Humanizer.Localisation.NumberToWords
             "sedamdeset",
             "osamdeset",
             "devedeset"
-        };
-
-        private readonly CultureInfo _culture;
-
-        public CroatianNumberToWordsConverter(CultureInfo culture)
-        {
-            _culture = culture;
-        }
+        ];
 
         public override string Convert(long number)
         {
@@ -57,7 +50,7 @@ namespace Humanizer.Localisation.NumberToWords
                 case 0: return "nula";
                 case < 0:
                     return number != long.MinValue
-                        ? string.Format("minus {0}", Convert(-number))
+                        ? $"minus {Convert(-number)}"
                         : "minus devet trilijuna dvjesto dvadeset tri bilijarde tristo sedamdeset dva bilijuna trideset šest milijardi osamsto pedeset četiri milijuna sedamsto sedamdeset pet tisuća osamsto osam";
             }
 
@@ -66,16 +59,11 @@ namespace Humanizer.Localisation.NumberToWords
             var quintillions = number / 1000000000000000000;
             if (quintillions > 0)
             {
-                string part;
-                switch (quintillions)
+                var part = quintillions switch
                 {
-                    case 1:
-                        part = "trilijun";
-                        break;
-                    default:
-                        part = string.Format("{0} trilijuna", Convert(quintillions));
-                        break;
-                }
+                    1 => "trilijun",
+                    _ => $"{Convert(quintillions)} trilijuna"
+                };
 
                 parts.Add(part);
                 number %= 1000000000000000000;
@@ -100,30 +88,30 @@ namespace Humanizer.Localisation.NumberToWords
                         break;
                     case 3:
                     case 4:
-                        part = string.Format("{0} bilijarde", Convert(quadrillions));
+                        part = $"{Convert(quadrillions)} bilijarde";
                         break;
                     default:
                     {
                         if (quadrillions % 100 > 4 && quadrillions % 100 < 21)
                         {
-                            part = string.Format("{0} bilijardi", Convert(quadrillions));
+                            part = $"{Convert(quadrillions)} bilijardi";
                             break;
                         }
 
                         switch (quadrillions % 10)
                         {
                             case 1:
-                                part = string.Format("{0} jedna bilijarda", Convert(quadrillions - 1));
+                                part = $"{Convert(quadrillions - 1)} jedna bilijarda";
                                 break;
                             case 2:
-                                part = string.Format("{0} dvije bilijarde", Convert(quadrillions - 2));
+                                part = $"{Convert(quadrillions - 2)} dvije bilijarde";
                                 break;
                             case 3:
                             case 4:
-                                part = string.Format("{0} bilijarde", Convert(quadrillions));
+                                part = $"{Convert(quadrillions)} bilijarde";
                                 break;
                             default:
-                                part = string.Format("{0} bilijardi", Convert(quadrillions));
+                                part = $"{Convert(quadrillions)} bilijardi";
                                 break;
                         }
 
@@ -153,11 +141,11 @@ namespace Humanizer.Localisation.NumberToWords
                     {
                         if (trillions % 100 == 11 || trillions % 10 != 1)
                         {
-                            part = string.Format("{0} bilijuna", Convert(trillions));
+                            part = $"{Convert(trillions)} bilijuna";
                             break;
                         }
 
-                        part = string.Format("{0} bilijun", Convert(trillions));
+                        part = $"{Convert(trillions)} bilijun";
                         break;
                     }
                 }
@@ -185,30 +173,30 @@ namespace Humanizer.Localisation.NumberToWords
                         break;
                     case 3:
                     case 4:
-                        part = string.Format("{0} milijarde", Convert(billions));
+                        part = $"{Convert(billions)} milijarde";
                         break;
                     default:
                     {
                         if (billions % 100 > 4 && billions % 100 < 21)
                         {
-                            part = string.Format("{0} milijardi", Convert(billions));
+                            part = $"{Convert(billions)} milijardi";
                             break;
                         }
 
                         switch (billions % 10)
                         {
                             case 1:
-                                part = string.Format("{0} jedna milijarda", Convert(billions - 1));
+                                part = $"{Convert(billions - 1)} jedna milijarda";
                                 break;
                             case 2:
-                                part = string.Format("{0} dvije milijarde", Convert(billions - 2));
+                                part = $"{Convert(billions - 2)} dvije milijarde";
                                 break;
                             case 3:
                             case 4:
-                                part = string.Format("{0} milijarde", Convert(billions));
+                                part = $"{Convert(billions)} milijarde";
                                 break;
                             default:
-                                part = string.Format("{0} milijardi", Convert(billions));
+                                part = $"{Convert(billions)} milijardi";
                                 break;
                         }
 
@@ -238,11 +226,11 @@ namespace Humanizer.Localisation.NumberToWords
                     {
                         if (millions % 100 == 11 || millions % 10 != 1)
                         {
-                            part = string.Format("{0} milijuna", Convert(millions));
+                            part = $"{Convert(millions)} milijuna";
                             break;
                         }
 
-                        part = string.Format("{0} milijun", Convert(millions));
+                        part = $"{Convert(millions)} milijun";
                         break;
                     }
                 }
@@ -270,30 +258,30 @@ namespace Humanizer.Localisation.NumberToWords
                         break;
                     case 3:
                     case 4:
-                        part = string.Format("{0} tisuće", Convert(thousands));
+                        part = $"{Convert(thousands)} tisuće";
                         break;
                     default:
                     {
                         if (thousands % 100 > 4 && thousands % 100 < 21)
                         {
-                            part = string.Format("{0} tisuća", Convert(thousands));
+                            part = $"{Convert(thousands)} tisuća";
                             break;
                         }
 
                         switch (thousands % 10)
                         {
                             case 1:
-                                part = string.Format("{0} jedna tisuća", Convert(thousands - 1));
+                                part = $"{Convert(thousands - 1)} jedna tisuća";
                                 break;
                             case 2:
-                                part = string.Format("{0} dvije tisuće", Convert(thousands - 2));
+                                part = $"{Convert(thousands - 2)} dvije tisuće";
                                 break;
                             case 3:
                             case 4:
-                                part = string.Format("{0} tisuće", Convert(thousands));
+                                part = $"{Convert(thousands)} tisuće";
                                 break;
                             default:
-                                part = string.Format("{0} tisuća", Convert(thousands));
+                                part = $"{Convert(thousands)} tisuća";
                                 break;
                         }
 
@@ -313,19 +301,12 @@ namespace Humanizer.Localisation.NumberToWords
             var hundreds = number / 100;
             if (hundreds > 0)
             {
-                string part;
-                switch (hundreds)
+                var part = hundreds switch
                 {
-                    case 1:
-                        part = "sto";
-                        break;
-                    case 2:
-                        part = "dvjesto";
-                        break;
-                    default:
-                        part = string.Format("{0}sto", Convert(hundreds));
-                        break;
-                }
+                    1 => "sto",
+                    2 => "dvjesto",
+                    _ => $"{Convert(hundreds)}sto"
+                };
 
                 parts.Add(part);
                 number %= 100;
@@ -336,31 +317,32 @@ namespace Humanizer.Localisation.NumberToWords
                 }
             }
 
-            if (number > 0)
+            switch (number)
             {
-                if (number < 20)
-                {
+                case <= 0:
+                    return string.Concat(parts);
+                case < 20:
                     parts.Add(UnitsMap[number]);
-                }
-                else
+                    break;
+                default:
                 {
                     parts.Add(TensMap[number / 10]);
                     var units = number % 10;
 
                     if (units > 0)
                     {
-                        parts.Add(string.Format(" {0}", UnitsMap[units]));
+                        parts.Add($" {UnitsMap[units]}");
                     }
+
+                    break;
                 }
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
+        public override string ConvertToOrdinal(int number) =>
             //TODO: In progress
-            return number.ToString(_culture);
-        }
+            number.ToString(culture);
     }
 }
