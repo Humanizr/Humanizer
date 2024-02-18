@@ -38,30 +38,46 @@ namespace Humanizer
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
 
         public const long BitsInByte = 8;
-        public const long BytesInKilobyte = 1024;
-        public const long BytesInMegabyte = 1048576;
-        public const long BytesInGigabyte = 1073741824;
-        public const long BytesInTerabyte = 1099511627776;
+        public const long BytesInKilobyte = 1000;
+        public const long BytesInKibibyte = 1024;
+        public const long BytesInMegabyte = 1_000_000;
+        public const long BytesInMebibyte = 1_048_576;
+        public const long BytesInGigabyte = 1_000_000_000;
+        public const long BytesInGibibyte = 1_073_741_824;
+        public const long BytesInTerabyte = 1_000_000_000_000;
+        public const long BytesInTebibyte = 1_099_511_627_776;
 
         public const string BitSymbol = "b";
         public const string Bit = "bit";
         public const string ByteSymbol = "B";
         public const string Byte = "byte";
         public const string KilobyteSymbol = "KB";
+        public const string KibibyteSymbol = "KiB";
         public const string Kilobyte = "kilobyte";
+        public const string Kibibyte = "kibibyte";
         public const string MegabyteSymbol = "MB";
+        public const string MebibyteSymbol = "MiB";
         public const string Megabyte = "megabyte";
+        public const string Mebibyte = "mebibyte";
         public const string GigabyteSymbol = "GB";
+        public const string GibibyteSymbol = "GiB";
         public const string Gigabyte = "gigabyte";
+        public const string Gibibyte = "gibibyte";
         public const string TerabyteSymbol = "TB";
+        public const string TebibyteSymbol = "TiB";
         public const string Terabyte = "terabyte";
+        public const string Tebibyte = "tebibyte";
 
         public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
         public double Bytes { get; } = byteSize;
         public double Kilobytes { get; } = byteSize / BytesInKilobyte;
+        public double Kibibytes { get; } = byteSize / BytesInKibibyte;
         public double Megabytes { get; } = byteSize / BytesInMegabyte;
+        public double Mebibytes { get; } = byteSize / BytesInMebibyte;
         public double Gigabytes { get; } = byteSize / BytesInGigabyte;
+        public double Gibibytes { get; } = byteSize / BytesInGibibyte;
         public double Terabytes { get; } = byteSize / BytesInTerabyte;
+        public double Tebibytes { get; } = byteSize / BytesInTebibyte;
 
         public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
@@ -178,14 +194,26 @@ namespace Humanizer
         public static ByteSize FromKilobytes(double value) =>
             new(value * BytesInKilobyte);
 
+        public static ByteSize FromKibibytes(double value) =>
+            new(value * BytesInKibibyte);
+
         public static ByteSize FromMegabytes(double value) =>
             new(value * BytesInMegabyte);
+
+        public static ByteSize FromMebibytes(double value) =>
+            new(value * BytesInMebibyte);
 
         public static ByteSize FromGigabytes(double value) =>
             new(value * BytesInGigabyte);
 
+        public static ByteSize FromGibibytes(double value) =>
+            new(value * BytesInGibibyte);
+
         public static ByteSize FromTerabytes(double value) =>
             new(value * BytesInTerabyte);
+
+        public static ByteSize FromTebibytes(double value) =>
+            new(value * BytesInTebibyte);
 
         /// <summary>
         /// Converts the value of the current ByteSize object to a string.
@@ -241,10 +269,22 @@ namespace Humanizer
                 return output(Terabytes);
             }
 
+            if (has(TebibyteSymbol))
+            {
+                format = format.Replace(TebibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Tebibyte, Tebibytes, toSymbol));
+                return output(Tebibytes);
+            }
+
             if (has(GigabyteSymbol))
             {
                 format = format.Replace(GigabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol));
                 return output(Gigabytes);
+            }
+
+            if (has(GibibyteSymbol))
+            {
+                format = format.Replace(GibibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gibibyte, Gibibytes, toSymbol));
+                return output(Gibibytes);
             }
 
             if (has(MegabyteSymbol))
@@ -253,10 +293,22 @@ namespace Humanizer
                 return output(Megabytes);
             }
 
+            if (has(MebibyteSymbol))
+            {
+                format = format.Replace(MebibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Mebibyte, Mebibytes, toSymbol));
+                return output(Mebibytes);
+            }
+
             if (has(KilobyteSymbol))
             {
                 format = format.Replace(KilobyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol));
                 return output(Kilobytes);
+            }
+
+            if (has(KibibyteSymbol))
+            {
+                format = format.Replace(KibibyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kibibyte, Kibibytes, toSymbol));
+                return output(Kibibytes);
             }
 
             // Byte and Bit symbol look must be case-sensitive
@@ -346,14 +398,26 @@ namespace Humanizer
         public ByteSize AddKilobytes(double value) =>
             this + FromKilobytes(value);
 
+        public ByteSize AddKibibytes(double value) =>
+            this + FromKibibytes(value);
+
         public ByteSize AddMegabytes(double value) =>
             this + FromMegabytes(value);
+
+        public ByteSize AddMebibytes(double value) =>
+            this + FromMebibytes(value);
 
         public ByteSize AddGigabytes(double value) =>
             this + FromGigabytes(value);
 
+        public ByteSize AddGibibytes(double value) =>
+            this + FromGibibytes(value);
+
         public ByteSize AddTerabytes(double value) =>
             this + FromTerabytes(value);
+
+        public ByteSize AddTebibytes(double value) =>
+            this + FromTebibytes(value);
 
         public ByteSize Subtract(ByteSize bs) =>
             new(Bytes - bs.Bytes);
@@ -474,16 +538,32 @@ namespace Humanizer
                     result = FromKilobytes(number);
                     break;
 
+                case KibibyteSymbol:
+                    result = FromKibibytes(number);
+                    break;
+
                 case MegabyteSymbol:
                     result = FromMegabytes(number);
+                    break;
+
+                case MebibyteSymbol:
+                    result = FromMebibytes(number);
                     break;
 
                 case GigabyteSymbol:
                     result = FromGigabytes(number);
                     break;
 
+                case GibibyteSymbol:
+                    result = FromGibibytes(number);
+                    break;
+
                 case TerabyteSymbol:
                     result = FromTerabytes(number);
+                    break;
+
+                case TebibyteSymbol:
+                    result = FromTebibytes(number);
                     break;
 
                 default:

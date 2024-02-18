@@ -381,11 +381,17 @@
   <data name="DataUnit_Kilobyte" xml:space="preserve">
     <value>Kilobyte</value>
   </data>
+  <data name="DataUnit_Kibibyte" xml:space="preserve">
+    <value>Kibibyte</value>
+  </data>
   <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
     <value>kB</value>
   </data>
   <data name="DataUnit_Megabyte" xml:space="preserve">
     <value>Megabyte</value>
+  </data>
+  <data name="DataUnit_Mebibyte" xml:space="preserve">
+    <value>Mebibyte</value>
   </data>
   <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
     <value>MB</value>
@@ -393,11 +399,17 @@
   <data name="DataUnit_Gigabyte" xml:space="preserve">
     <value>Gigabyte</value>
   </data>
+  <data name="DataUnit_Gibibyte" xml:space="preserve">
+    <value>Gibibyte</value>
+  </data>
   <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
     <value>GB</value>
   </data>
   <data name="DataUnit_Terabyte" xml:space="preserve">
     <value>Terabyte</value>
+  </data>
+  <data name="DataUnit_Tebibyte" xml:space="preserve">
+    <value>Tebibyte</value>
   </data>
   <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
     <value>TB</value>

@@ -21,9 +21,19 @@
         Kilobyte,
 
         /// <summary>
+        /// Kibibyte
+        /// </summary>
+        Kibibyte,
+
+        /// <summary>
         /// Megabyte
         /// </summary>
         Megabyte,
+
+        /// <summary>
+        /// Mebibyte
+        /// </summary>
+        Mebibyte,
 
         /// <summary>
         /// Gigabyte
@@ -31,8 +41,18 @@
         Gigabyte,
 
         /// <summary>
-        /// Terrabyte
+        /// Gibibyte
         /// </summary>
-        Terabyte
+        Gibibyte,
+
+        /// <summary>
+        /// Terabyte
+        /// </summary>
+        Terabyte,
+
+        /// <summary>
+        /// Tebibyte
+        /// </summary>
+        Tebibyte
     }
 }

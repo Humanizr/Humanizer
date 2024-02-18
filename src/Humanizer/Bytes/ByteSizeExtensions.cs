@@ -145,6 +145,54 @@ namespace Humanizer
             ByteSize.FromKilobytes(input);
 
         /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this byte input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this sbyte input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this short input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this ushort input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this int input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this uint input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this double input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
+        /// Considers input as kibibytes
+        /// </summary>
+        public static ByteSize Kibibytes(this long input) =>
+            ByteSize.FromKibibytes(input);
+
+        /// <summary>
         /// Considers input as megabytes
         /// </summary>
         public static ByteSize Megabytes(this byte input) =>
@@ -191,6 +239,54 @@ namespace Humanizer
         /// </summary>
         public static ByteSize Megabytes(this long input) =>
             ByteSize.FromMegabytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this byte input) =>
+            ByteSize.FromMebibytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this sbyte input) =>
+            ByteSize.FromMebibytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this short input) =>
+            ByteSize.FromMebibytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this ushort input) =>
+            ByteSize.FromMebibytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this int input) =>
+            ByteSize.FromMebibytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this uint input) =>
+            ByteSize.FromMebibytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this double input) =>
+            ByteSize.FromMebibytes(input);
+
+        /// <summary>
+        /// Considers input as mebibytes
+        /// </summary>
+        public static ByteSize Mebibytes(this long input) =>
+            ByteSize.FromMebibytes(input);
 
         /// <summary>
         /// Considers input as gigabytes
@@ -241,6 +337,54 @@ namespace Humanizer
             ByteSize.FromGigabytes(input);
 
         /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this byte input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this sbyte input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this short input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this ushort input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this int input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this uint input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this double input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
+        /// Considers input as gibibytes
+        /// </summary>
+        public static ByteSize Gibibytes(this long input) =>
+            ByteSize.FromGibibytes(input);
+
+        /// <summary>
         /// Considers input as terabytes
         /// </summary>
         public static ByteSize Terabytes(this byte input) =>
@@ -287,6 +431,54 @@ namespace Humanizer
         /// </summary>
         public static ByteSize Terabytes(this long input) =>
             ByteSize.FromTerabytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this byte input) =>
+            ByteSize.FromTebibytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this sbyte input) =>
+            ByteSize.FromTebibytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this short input) =>
+            ByteSize.FromTebibytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this ushort input) =>
+            ByteSize.FromTebibytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this int input) =>
+            ByteSize.FromTebibytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this uint input) =>
+            ByteSize.FromTebibytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this double input) =>
+            ByteSize.FromTebibytes(input);
+
+        /// <summary>
+        /// Considers input as tebibytes
+        /// </summary>
+        public static ByteSize Tebibytes(this long input) =>
+            ByteSize.FromTebibytes(input);
 
         /// <summary>
         /// Turns a byte quantity into human readable form, eg 2 GB
