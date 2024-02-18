@@ -7,22 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
-
-  <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">
-    <ItemGroup>
-      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition=" '$(SourceRevisionId)' != '' ">
-        <_Parameter1>CommitHash</_Parameter1>
-        <_Parameter2>$(SourceRevisionId)</_Parameter2>
-      </AssemblyAttribute>
-    </ItemGroup>
-  </Target>
-
-  </Project>
+</Project>
