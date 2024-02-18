@@ -12,20 +12,19 @@ public static class EnumHumanizeExtensions
     public static string Humanize<T>(this T input)
         where T : struct, Enum
     {
-        var type = typeof(T);
-
-        if (EnumCache<T>.IsBitFieldEnum && !Enum.IsDefined(type, input))
+        if (EnumCache<T>.TreatAsFlags(input))
         {
             return EnumCache<T>
                 .Values
                 .Where(_ => input.HasFlag(_) &&
-                            _.CompareTo(Convert.ChangeType(Enum.ToObject(type, 0), type)) != 0)
+                            _.CompareTo(EnumCache<T>.ZeroValue) != 0)
                 .Select(_ => _.Humanize())
                 .Humanize();
         }
 
         return EnumCache<T>.Humanized[input];
     }
+
 
     /// <summary>
     /// Turns an enum member into a human readable string with the provided casing; e.g. AnonymousUser with Title casing -> Anonymous User. It also honors DescriptionAttribute data annotation

@@ -6,27 +6,38 @@ namespace Humanizer;
 static class EnumCache<T>
     where T : struct, Enum
 {
-    public static T[] Values { get; }
+    static Type type;
+    public static FrozenSet<T> Values { get; }
     public static FrozenDictionary<T, string> Humanized { get; }
-    public static bool IsBitFieldEnum { get; set; }
+    static bool isBitFieldEnum;
+    public static T ZeroValue { get; }
 
     static EnumCache()
     {
-
-        Values = EnumPolyfill.GetValues<T>();
-        var type = typeof(T);
-        IsBitFieldEnum = type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
+        Values = EnumPolyfill.GetValues<T>().ToFrozenSet();
+        type = typeof(T);
+        ZeroValue = (T)Convert.ChangeType(Enum.ToObject(type, 0), type);
+        isBitFieldEnum = type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
         var dictionary = new Dictionary<T, string>();
         foreach (var value in Values)
         {
-            dictionary[value] = GetDescription(value,type);
+            dictionary[value] = GetDescription(value);
         }
 
         Humanized = dictionary.ToFrozenDictionary();
     }
 
+    public static bool TreatAsFlags(T input)
+    {
+        if (!isBitFieldEnum)
+        {
+            return false;
+        }
 
-    static string GetDescription(T input, Type type)
+        return !Enum.IsDefined(type, input);
+    }
+
+    static string GetDescription(T input)
     {
         var caseName = input.ToString();
         var member = type.GetField(caseName)!;
