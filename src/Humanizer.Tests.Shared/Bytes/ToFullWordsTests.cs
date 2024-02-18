@@ -75,7 +75,8 @@ namespace Humanizer.Tests.Bytes
 
         [Theory]
         [InlineData(229376, "B", "229376 bytes")]
-        [InlineData(229376, "# KB", "224 kilobytes")]
+        [InlineData(229376, "# KB", "229 kilobytes")]
+        [InlineData(229376, "# KiB", "224 kibibytes")]
         public void ToFullWordsFormatted(double input, string format, string expectedValue) =>
             Assert.Equal(expectedValue, ByteSize.FromBytes(input).ToFullWords(format));
     }

@@ -27,14 +27,27 @@ namespace Humanizer.Tests.Bytes
         [Fact]
         public void Constructor()
         {
+            var result = new ByteSize(1000000000000);
+
+            Assert.Equal(8000000000000, result.Bits);
+            Assert.Equal(1000000000000, result.Bytes);
+            Assert.Equal(1000000000, result.Kilobytes);
+            Assert.Equal(1000000, result.Megabytes);
+            Assert.Equal(1000, result.Gigabytes);
+            Assert.Equal(1, result.Terabytes);
+        }
+
+        [Fact]
+        public void Constructor_Binary()
+        {
             var result = new ByteSize(1099511627776);
 
             Assert.Equal(8.796093022208e12, result.Bits);
             Assert.Equal(1099511627776, result.Bytes);
-            Assert.Equal(1073741824, result.Kilobytes);
-            Assert.Equal(1048576, result.Megabytes);
-            Assert.Equal(1024, result.Gigabytes);
-            Assert.Equal(1, result.Terabytes);
+            Assert.Equal(1073741824, result.Kibibytes);
+            Assert.Equal(1048576, result.Mebibytes);
+            Assert.Equal(1024, result.Gibibytes);
+            Assert.Equal(1, result.Tebibytes);
         }
 
         [Fact]
@@ -60,8 +73,17 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromKilobytes(1.5);
 
-            Assert.Equal(1536, result.Bytes);
+            Assert.Equal(1500, result.Bytes);
             Assert.Equal(1.5, result.Kilobytes);
+        }
+
+        [Fact]
+        public void FromKibibytes()
+        {
+            var result = ByteSize.FromKibibytes(1.5);
+
+            Assert.Equal(1536, result.Bytes);
+            Assert.Equal(1.5, result.Kibibytes);
         }
 
         [Fact]
@@ -69,8 +91,17 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromMegabytes(1.5);
 
-            Assert.Equal(1572864, result.Bytes);
+            Assert.Equal(1500000, result.Bytes);
             Assert.Equal(1.5, result.Megabytes);
+        }
+
+        [Fact]
+        public void FromMebibytes()
+        {
+            var result = ByteSize.FromMebibytes(1.5);
+
+            Assert.Equal(1572864, result.Bytes);
+            Assert.Equal(1.5, result.Mebibytes);
         }
 
         [Fact]
@@ -78,8 +109,17 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromGigabytes(1.5);
 
-            Assert.Equal(1610612736, result.Bytes);
+            Assert.Equal(1500000000, result.Bytes);
             Assert.Equal(1.5, result.Gigabytes);
+        }
+
+        [Fact]
+        public void FromGibibytes()
+        {
+            var result = ByteSize.FromGibibytes(1.5);
+
+            Assert.Equal(1610612736, result.Bytes);
+            Assert.Equal(1.5, result.Gibibytes);
         }
 
         [Fact]
@@ -87,8 +127,17 @@ namespace Humanizer.Tests.Bytes
         {
             var result = ByteSize.FromTerabytes(1.5);
 
-            Assert.Equal(1649267441664, result.Bytes);
+            Assert.Equal(1500000000000, result.Bytes);
             Assert.Equal(1.5, result.Terabytes);
+        }
+
+        [Fact]
+        public void FromTebibytes()
+        {
+            var result = ByteSize.FromTebibytes(1.5);
+
+            Assert.Equal(1649267441664, result.Bytes);
+            Assert.Equal(1.5, result.Tebibytes);
         }
     }
 }

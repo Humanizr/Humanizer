@@ -45,11 +45,11 @@ public class ToStringTests
 
     [Fact]
     public void ReturnsLargestMetricPrefixLargerThanZero() =>
-        Assert.Equal("512 KB", ByteSize.FromMegabytes(.5).ToString("#.#"));
+        Assert.Equal("500 KB", ByteSize.FromMegabytes(.5).ToString("#.#"));
 
     [Fact]
     public void ReturnsLargestMetricPrefixLargerThanZeroForNegativeValues() =>
-        Assert.Equal("-512 KB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
+        Assert.Equal("-500 KB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
 
     [Fact]
     public void ReturnsBytesViaGeneralFormat() =>

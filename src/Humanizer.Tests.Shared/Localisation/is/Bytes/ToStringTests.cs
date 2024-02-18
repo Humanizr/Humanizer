@@ -45,11 +45,11 @@
 
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZero() =>
-            Assert.Equal("512 kB", ByteSize.FromMegabytes(.5).ToString("#.#"));
+            Assert.Equal("500 kB", ByteSize.FromMegabytes(.5).ToString("#.#"));
 
         [Fact]
         public void ReturnsLargestMetricPrefixLargerThanZeroForNegativeValues() =>
-            Assert.Equal("-512 kB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
+            Assert.Equal("-500 kB", ByteSize.FromMegabytes(-.5).ToString("#.#"));
 
         [Fact]
         public void ReturnsBytesViaGeneralFormat() =>

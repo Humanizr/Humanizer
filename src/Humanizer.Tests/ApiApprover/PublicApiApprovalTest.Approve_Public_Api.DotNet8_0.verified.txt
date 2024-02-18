@@ -61,9 +61,13 @@ namespace Humanizer
         public Humanizer.ByteSize Add(Humanizer.ByteSize bs) { }
         public Humanizer.ByteSize AddBits(long value) { }
         public Humanizer.ByteSize AddBytes(double value) { }
+        public Humanizer.ByteSize AddGibibytes(double value) { }
         public Humanizer.ByteSize AddGigabytes(double value) { }
+        public Humanizer.ByteSize AddKibibytes(double value) { }
         public Humanizer.ByteSize AddKilobytes(double value) { }
+        public Humanizer.ByteSize AddMebibytes(double value) { }
         public Humanizer.ByteSize AddMegabytes(double value) { }
+        public Humanizer.ByteSize AddTebibytes(double value) { }
         public Humanizer.ByteSize AddTerabytes(double value) { }
         public int CompareTo(Humanizer.ByteSize other) { }
         public int CompareTo(object obj) { }
@@ -121,6 +125,14 @@ namespace Humanizer
         public static Humanizer.ByteSize Bytes(this short input) { }
         public static Humanizer.ByteSize Bytes(this uint input) { }
         public static Humanizer.ByteSize Bytes(this ushort input) { }
+        public static Humanizer.ByteSize Gibibytes(this byte input) { }
+        public static Humanizer.ByteSize Gibibytes(this double input) { }
+        public static Humanizer.ByteSize Gibibytes(this int input) { }
+        public static Humanizer.ByteSize Gibibytes(this long input) { }
+        public static Humanizer.ByteSize Gibibytes(this sbyte input) { }
+        public static Humanizer.ByteSize Gibibytes(this short input) { }
+        public static Humanizer.ByteSize Gibibytes(this uint input) { }
+        public static Humanizer.ByteSize Gibibytes(this ushort input) { }
         public static Humanizer.ByteSize Gigabytes(this byte input) { }
         public static Humanizer.ByteSize Gigabytes(this double input) { }
         public static Humanizer.ByteSize Gigabytes(this int input) { }
@@ -132,6 +144,14 @@ namespace Humanizer
         public static string Humanize(this Humanizer.ByteSize input, System.IFormatProvider formatProvider) { }
         public static string Humanize(this Humanizer.ByteSize input, string format = null) { }
         public static string Humanize(this Humanizer.ByteSize input, string format, System.IFormatProvider formatProvider) { }
+        public static Humanizer.ByteSize Kibibytes(this byte input) { }
+        public static Humanizer.ByteSize Kibibytes(this double input) { }
+        public static Humanizer.ByteSize Kibibytes(this int input) { }
+        public static Humanizer.ByteSize Kibibytes(this long input) { }
+        public static Humanizer.ByteSize Kibibytes(this sbyte input) { }
+        public static Humanizer.ByteSize Kibibytes(this short input) { }
+        public static Humanizer.ByteSize Kibibytes(this uint input) { }
+        public static Humanizer.ByteSize Kibibytes(this ushort input) { }
         public static Humanizer.ByteSize Kilobytes(this byte input) { }
         public static Humanizer.ByteSize Kilobytes(this double input) { }
         public static Humanizer.ByteSize Kilobytes(this int input) { }
@@ -140,6 +160,14 @@ namespace Humanizer
         public static Humanizer.ByteSize Kilobytes(this short input) { }
         public static Humanizer.ByteSize Kilobytes(this uint input) { }
         public static Humanizer.ByteSize Kilobytes(this ushort input) { }
+        public static Humanizer.ByteSize Mebibytes(this byte input) { }
+        public static Humanizer.ByteSize Mebibytes(this double input) { }
+        public static Humanizer.ByteSize Mebibytes(this int input) { }
+        public static Humanizer.ByteSize Mebibytes(this long input) { }
+        public static Humanizer.ByteSize Mebibytes(this sbyte input) { }
+        public static Humanizer.ByteSize Mebibytes(this short input) { }
+        public static Humanizer.ByteSize Mebibytes(this uint input) { }
+        public static Humanizer.ByteSize Mebibytes(this ushort input) { }
         public static Humanizer.ByteSize Megabytes(this byte input) { }
         public static Humanizer.ByteSize Megabytes(this double input) { }
         public static Humanizer.ByteSize Megabytes(this int input) { }
@@ -149,6 +177,14 @@ namespace Humanizer
         public static Humanizer.ByteSize Megabytes(this uint input) { }
         public static Humanizer.ByteSize Megabytes(this ushort input) { }
         public static Humanizer.ByteRate Per(this Humanizer.ByteSize size, System.TimeSpan interval) { }
+        public static Humanizer.ByteSize Tebibytes(this byte input) { }
+        public static Humanizer.ByteSize Tebibytes(this double input) { }
+        public static Humanizer.ByteSize Tebibytes(this int input) { }
+        public static Humanizer.ByteSize Tebibytes(this long input) { }
+        public static Humanizer.ByteSize Tebibytes(this sbyte input) { }
+        public static Humanizer.ByteSize Tebibytes(this short input) { }
+        public static Humanizer.ByteSize Tebibytes(this uint input) { }
+        public static Humanizer.ByteSize Tebibytes(this ushort input) { }
         public static Humanizer.ByteSize Terabytes(this byte input) { }
         public static Humanizer.ByteSize Terabytes(this double input) { }
         public static Humanizer.ByteSize Terabytes(this int input) { }
