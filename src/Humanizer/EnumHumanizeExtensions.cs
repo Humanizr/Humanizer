@@ -12,17 +12,17 @@ public static class EnumHumanizeExtensions
     public static string Humanize<T>(this T input)
         where T : struct, Enum
     {
+        var (zero, humanized, values) = EnumCache<T>.GetInfo();
         if (EnumCache<T>.TreatAsFlags(input))
         {
-            return EnumCache<T>
-                .Values
-                .Where(_ => input.HasFlag(_) &&
-                            _.CompareTo(EnumCache<T>.ZeroValue) != 0)
+            return values
+                .Where(_ => _.CompareTo(zero) != 0 &&
+                            input.HasFlag(_))
                 .Select(_ => _.Humanize())
                 .Humanize();
         }
 
-        return EnumCache<T>.Humanized[input];
+        return humanized[input];
     }
 
 
