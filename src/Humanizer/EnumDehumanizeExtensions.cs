@@ -51,21 +51,20 @@ public static class EnumDehumanizeExtensions
         }
     }
 
-    static TTargetEnum? DehumanizeToPrivate<TTargetEnum>(string input, OnNoMatch onNoMatch)
-        where TTargetEnum : struct, Enum
+    static T? DehumanizeToPrivate<T>(string input, OnNoMatch onNoMatch)
+        where T : struct, Enum
     {
-        foreach (var value in EnumPolyfill.GetValues<TTargetEnum>())
+        var dehumanized = EnumCache<T>.GetDehumanized();
+        if (dehumanized.TryGetValue(input, out var value))
         {
-            if (string.Equals(value.Humanize(), input, StringComparison.OrdinalIgnoreCase))
-            {
-                return value;
-            }
-        }
-        if (onNoMatch == OnNoMatch.ThrowsException)
-        {
-            throw new NoMatchFoundException("Couldn't find any enum member that matches the string " + input);
+            return value;
         }
 
-        return null;
+        if (onNoMatch != OnNoMatch.ThrowsException)
+        {
+            return null;
+        }
+
+        throw new NoMatchFoundException($"Couldn't find any enum member that matches the string '{input}'");
     }
 }
