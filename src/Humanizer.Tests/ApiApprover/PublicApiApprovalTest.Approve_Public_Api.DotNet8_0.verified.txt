@@ -247,13 +247,15 @@ namespace Humanizer
     public static class EnumDehumanizeExtensions
     {
         public static System.Enum DehumanizeTo(this string input, System.Type targetEnum, Humanizer.OnNoMatch onNoMatch = 0) { }
-        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
-            where TTargetEnum :  struct, System.IComparable, System.IFormattable { }
+        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input, Humanizer.OnNoMatch onNoMatch = 0)
+            where TTargetEnum :  struct, System.Enum { }
     }
     public static class EnumHumanizeExtensions
     {
-        public static string Humanize(this System.Enum input) { }
-        public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing) { }
+        public static string Humanize<T>(this T input)
+            where T :  struct, System.Enum { }
+        public static string Humanize<T>(this T input, Humanizer.LetterCasing casing)
+            where T :  struct, System.Enum { }
     }
     public enum GrammaticalCase
     {
