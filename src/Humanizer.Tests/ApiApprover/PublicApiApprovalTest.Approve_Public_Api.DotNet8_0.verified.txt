@@ -247,7 +247,7 @@ namespace Humanizer
     public static class EnumDehumanizeExtensions
     {
         public static System.Enum DehumanizeTo(this string input, System.Type targetEnum, Humanizer.OnNoMatch onNoMatch = 0) { }
-        public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input, Humanizer.OnNoMatch onNoMatch = 0)
+        public static TTargetEnum? DehumanizeTo<TTargetEnum>(this string input, Humanizer.OnNoMatch onNoMatch = 0)
             where TTargetEnum :  struct, System.Enum { }
     }
     public static class EnumHumanizeExtensions

@@ -12,6 +12,17 @@ public static class EnumDehumanizeExtensions
     /// <param name="input">The string to be converted</param>
     /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
     /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
+    public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
+        where TTargetEnum : struct, Enum =>
+        DehumanizeToPrivate<TTargetEnum>(input, OnNoMatch.ThrowsException)!.Value;
+
+    /// <summary>
+    /// Dehumanizes a string into the Enum it was originally Humanized from!
+    /// </summary>
+    /// <typeparam name="TTargetEnum">The target enum</typeparam>
+    /// <param name="input">The string to be converted</param>
+    /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
+    /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
     public static TTargetEnum? DehumanizeTo<TTargetEnum>(this string input, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
         where TTargetEnum : struct, Enum =>
         DehumanizeToPrivate<TTargetEnum>(input, onNoMatch);

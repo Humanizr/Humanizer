@@ -14,7 +14,7 @@ public static class EnumHumanizeExtensions
     {
         var type = typeof(T);
 
-        if (IsBitFieldEnum(type) && !Enum.IsDefined(type, input))
+        if (EnumCache<T>.IsBitFieldEnum && !Enum.IsDefined(type, input))
         {
             return EnumCache<T>
                 .Values
@@ -26,13 +26,6 @@ public static class EnumHumanizeExtensions
 
         return EnumCache<T>.Humanized[input];
     }
-
-    /// <summary>
-    /// Checks whether the given enum is to be used as a bit field type.
-    /// </summary>
-    /// <returns>True if the given enum is a bit field enum, false otherwise.</returns>
-    static bool IsBitFieldEnum(Type type) =>
-        type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
 
     /// <summary>
     /// Turns an enum member into a human readable string with the provided casing; e.g. AnonymousUser with Title casing -> Anonymous User. It also honors DescriptionAttribute data annotation

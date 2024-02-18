@@ -8,11 +8,14 @@ static class EnumCache<T>
 {
     public static T[] Values { get; }
     public static FrozenDictionary<T, string> Humanized { get; }
+    public static bool IsBitFieldEnum { get; set; }
 
     static EnumCache()
     {
+
         Values = EnumPolyfill.GetValues<T>();
         var type = typeof(T);
+        IsBitFieldEnum = type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
         var dictionary = new Dictionary<T, string>();
         foreach (var value in Values)
         {
@@ -21,6 +24,7 @@ static class EnumCache<T>
 
         Humanized = dictionary.ToFrozenDictionary();
     }
+
 
     static string GetDescription(T input, Type type)
     {
