@@ -25,6 +25,13 @@ public enum EnumUnderTest
     MemberWithDisplayAttributeWithoutDescription
 }
 
+public enum EnumForCustomLocator
+{
+    [CustomProperty(EnumTestsResources.MemberWithCustomPropertyAttribute)]
+    MemberWithCustomPropertyAttribute,
+    MemberWithoutDescriptionAttribute,
+}
+
 public class EnumTestsResources
 {
     public const string MemberWithDescriptionAttribute = "Some Description";
