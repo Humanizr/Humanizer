@@ -13,7 +13,7 @@
         /// <summary>
         /// A registry of formatters used to format strings based on the current locale
         /// </summary>
-        public static LocaliserRegistry<IFormatter> Formatters { get; } = new FormatterRegistry();
+        public static LocaliserRegistry<IFormatter> Formatters { get; } = FormatterRegistry.CreateInstance();
 
         /// <summary>
         /// A registry of number to words converters used to localise ToWords and ToOrdinalWords methods
