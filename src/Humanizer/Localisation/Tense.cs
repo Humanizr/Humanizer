@@ -5,14 +5,7 @@
     /// </summary>
     public enum Tense
     {
-        /// <summary>
-        /// Indicates the future.
-        /// </summary>
         Future,
-
-        /// <summary>
-        /// Indicates the past.
-        /// </summary>
         Past
     }
 }

@@ -83,7 +83,9 @@
             var toWords = string.Join(" ", parts);
 
             if (isOrdinal)
+            {
                 toWords = RemoveOnePrefix(toWords);
+            }
 
             return toWords;
         }
@@ -93,12 +95,13 @@
             if (isOrdinal)
             {
                 if (ExceptionNumbersToWords(number, out var exceptionString))
+                {
                     return exceptionString;
-                else
-                    return UnitsMap[number] + "வது";
+                }
+                return UnitsMap[number] + "வது";
             }
-            else
-                return UnitsMap[number];
+
+            return UnitsMap[number];
         }
 
         static string GetTensValue(long number, bool isOrdinal, bool isThousand = false)

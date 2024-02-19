@@ -143,19 +143,16 @@ namespace Humanizer
                 {
                     return exceptionString;
                 }
-                else if (number < 13)
+
+                if (number < 13)
                 {
                     return UnitsMap[number].TrimEnd('e') + "ende";
                 }
-                else
-                {
-                    return UnitsMap[number] + "de";
-                }
+
+                return UnitsMap[number] + "de";
             }
-            else
-            {
-                return UnitsMap[number];
-            }
+
+            return UnitsMap[number];
         }
 
         static bool ExceptionNumbersToWords(int number, out string words) =>

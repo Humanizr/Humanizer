@@ -24,9 +24,6 @@ using static System.Globalization.NumberStyles;
 
 namespace Humanizer
 {
-    /// <summary>
-    /// Represents a byte size value.
-    /// </summary>
 #pragma warning disable 1591
     public struct ByteSize(double byteSize) :
         IComparable<ByteSize>,

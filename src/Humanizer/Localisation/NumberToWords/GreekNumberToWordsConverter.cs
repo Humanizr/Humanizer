@@ -152,23 +152,24 @@
             {
                 return ConvertIntB13(number, returnPluralized);
             }
-            else if (number < 100)
+
+            if (number < 100)
             {
                 return ConvertIntBH(number, returnPluralized);
             }
-            else if (number < 1000)
+            if (number < 1000)
             {
                 return ConvertIntBT(number, returnPluralized);
             }
-            else if (number < 1000000)
+            if (number < 1000000)
             {
                 return ConvertIntBM(number);
             }
-            else if (number < 1000000000)
+            if (number < 1000000000)
             {
                 return ConvertIntBB(number);
             }
-            else if (number < 1000000000000)
+            if (number < 1000000000000)
             {
                 return ConvertIntBTR(number);
             }

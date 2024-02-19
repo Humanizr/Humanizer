@@ -9,7 +9,6 @@
         /// Transform the input
         /// </summary>
         /// <param name="input">String to be transformed</param>
-        /// <param name="culture">The culture</param>
         string Transform(string input, CultureInfo culture);
     }
 }

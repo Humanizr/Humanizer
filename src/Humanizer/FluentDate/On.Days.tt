@@ -7,8 +7,6 @@
 <#@ import namespace="Humanizer" #>
 namespace Humanizer;
 
-/// <summary>
-/// </summary>
 public class On
 {
 <#

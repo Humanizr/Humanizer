@@ -36,10 +36,8 @@
             {
                 return Humanize(input.Value, utcDate, dateToCompareAgainst, culture);
             }
-            else
-            {
-                return Configurator.GetFormatter(culture).DateHumanize_Never();
-            }
+
+            return Configurator.GetFormatter(culture).DateHumanize_Never();
         }
 
         /// <summary>
@@ -69,10 +67,8 @@
             {
                 return Humanize(input.Value, dateToCompareAgainst, culture);
             }
-            else
-            {
-                return Configurator.GetFormatter(culture).DateHumanize_Never();
-            }
+
+            return Configurator.GetFormatter(culture).DateHumanize_Never();
         }
 
 #if NET6_0_OR_GREATER
@@ -102,10 +98,8 @@
             {
                 return Humanize(input.Value, dateToCompareAgainst, culture);
             }
-            else
-            {
-                return Configurator.GetFormatter(culture).DateHumanize_Never();
-            }
+
+            return Configurator.GetFormatter(culture).DateHumanize_Never();
         }
 
         /// <summary>
@@ -137,10 +131,8 @@
             {
                 return Humanize(input.Value, timeToCompareAgainst, useUtc, culture);
             }
-            else
-            {
-                return Configurator.GetFormatter(culture).DateHumanize_Never();
-            }
+
+            return Configurator.GetFormatter(culture).DateHumanize_Never();
         }
 
 #endif

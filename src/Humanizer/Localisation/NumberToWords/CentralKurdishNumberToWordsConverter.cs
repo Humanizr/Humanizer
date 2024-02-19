@@ -58,8 +58,7 @@
             var sentence = string.Join(" و ", parts);
             if (sentence.StartsWith("یەک هەزار"))
                 return sentence.Substring(" یەک".Length);
-            else
-                return sentence;
+            return sentence;
         }
 
         public override string ConvertToOrdinal(int number)
