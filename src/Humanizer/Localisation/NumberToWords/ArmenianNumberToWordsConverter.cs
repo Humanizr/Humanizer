@@ -154,10 +154,8 @@
             {
                 return UnitsMap[number] + "երորդ";
             }
-            else
-            {
-                return UnitsMap[number];
-            }
+
+            return UnitsMap[number];
         }
 
         static string RemoveOnePrefix(string toWords)

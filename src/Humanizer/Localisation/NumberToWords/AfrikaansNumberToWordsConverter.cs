@@ -127,19 +127,15 @@ namespace Humanizer
                 {
                     return exceptionString;
                 }
-                else if (number > 19)
+
+                if (number > 19)
                 {
                     return TensMap[number / 10] + "ste";
                 }
-                else
-                {
-                    return UnitsMap[number] + "de";
-                }
+                return UnitsMap[number] + "de";
             }
-            else
-            {
-                return UnitsMap[number];
-            }
+
+            return UnitsMap[number];
         }
 
         static string RemoveOnePrefix(string toWords)

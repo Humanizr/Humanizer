@@ -254,15 +254,11 @@
                 {
                     return parts[2];
                 }
-                else
-                {
-                    return parts[0];
-                }
+
+                return parts[0];
             }
-            else
-            {
-                return multiGenderPart;
-            }
+
+            return multiGenderPart;
         }
 
         static bool IsAbove20(int number) =>
@@ -274,14 +270,13 @@
             {
                 return string.Empty;
             }
-            else if (hundreds == 1)
+
+            if (hundreds == 1)
             {
                 return _feminineSingular + " sută";
             }
-            else
-            {
-                return GetPartByGender(_units[hundreds], GrammaticalGender.Feminine) + " sute";
-            }
+
+            return GetPartByGender(_units[hundreds], GrammaticalGender.Feminine) + " sute";
         }
 
         /// <summary>
@@ -305,14 +300,13 @@
             {
                 return string.Empty;
             }
-            else if (number == 1)
+
+            if (number == 1)
             {
                 return _feminineSingular + " mie";
             }
-            else
-            {
-                return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " mii";
-            }
+
+            return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " mii";
         }
 
         // Large numbers (above 10^6) use a combined form of the long and short scales.
@@ -339,14 +333,13 @@
             {
                 return string.Empty;
             }
-            else if (number == 1)
+
+            if (number == 1)
             {
                 return _masculineSingular + " milion";
             }
-            else
-            {
-                return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " milioane";
-            }
+
+            return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " milioane";
         }
 
         /// <summary>
@@ -361,10 +354,8 @@
             {
                 return _masculineSingular + " miliard";
             }
-            else
-            {
-                return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " miliarde";
-            }
+
+            return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " miliarde";
         }
     }
 }

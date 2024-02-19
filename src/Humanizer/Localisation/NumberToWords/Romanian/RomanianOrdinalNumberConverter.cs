@@ -30,85 +30,85 @@
             {
                 return "zero";
             }
-            else if (number == 1)
+
+            if (number == 1)
             {
                 // no prefixes for primul/prima
                 return GetPartByGender(_ordinalsUnder10[number], gender);
             }
-            else if (number <= 9)
+
+            if (number <= 9)
             {
                 // units ordinals, 2 to 9, are totally different than the rest: treat them as a distinct case
                 return string.Format("{0} {1}",
-                                        gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
-                                        GetPartByGender(_ordinalsUnder10[number], gender)
-                                     );
+                    gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
+                    GetPartByGender(_ordinalsUnder10[number], gender)
+                );
             }
-            else
+
+            var coverter = new RomanianCardinalNumberConverter();
+            var words = coverter.Convert(number, gender);
+
+            // remove 'de' preposition
+            words = words.Replace(" de ", " ");
+
+            if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci"))
             {
-                var coverter = new RomanianCardinalNumberConverter();
-                var words = coverter.Convert(number, gender);
-
-                // remove 'de' preposition
-                words = words.Replace(" de ", " ");
-
-                if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci"))
-                {
-                    words = words.Substring(0, words.Length - 4) + "zece";
-                }
-                else if (gender == GrammaticalGender.Feminine && words.Contains("zeci") && (words.Contains("milioane") || words.Contains("miliarde")))
-                {
-                    words = words.Replace("zeci", "zecea");
-                }
-
-                if (gender == GrammaticalGender.Feminine && words.StartsWith("un "))
-                {
-                    words = words.Substring(2).TrimStart();
-                }
-
-                if (words.EndsWith("milioane"))
-                {
-                    if (gender == GrammaticalGender.Feminine)
-                    {
-                        words = words.Substring(0, words.Length - 8) + "milioana";
-                    }
-                }
-
-                var customMasculineSuffix = _masculineSuffix;
-                if (words.EndsWith("milion"))
-                {
-                    if (gender == GrammaticalGender.Feminine)
-                    {
-                        words = words.Substring(0, words.Length - 6) + "milioana";
-                    }
-                    else
-                    {
-                        customMasculineSuffix = "u" + _masculineSuffix;
-                    }
-                }
-                else if (words.EndsWith("miliard"))
-                {
-                    if (gender == GrammaticalGender.Masculine)
-                    {
-                        customMasculineSuffix = "u" + _masculineSuffix;
-                    }
-                }
-
-                // trim last letter
-                if (gender == GrammaticalGender.Feminine && !words.EndsWith("zece") &&
-                    (words.EndsWith("a") ||
-                     words.EndsWith("ă") ||
-                     words.EndsWith("e") ||
-                     words.EndsWith("i")))
-                {
-                    words = words.Substring(0, words.Length - 1);
-                }
-
-                return string.Format("{0} {1}{2}",
-                                        gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
-                                        words,
-                                        gender == GrammaticalGender.Feminine ? _feminineSuffix : customMasculineSuffix
-                                    );
+                words = words.Substring(0, words.Length - 4) + "zece";
             }
+            else if (gender == GrammaticalGender.Feminine && words.Contains("zeci") && (words.Contains("milioane") || words.Contains("miliarde")))
+            {
+                words = words.Replace("zeci", "zecea");
+            }
+
+            if (gender == GrammaticalGender.Feminine && words.StartsWith("un "))
+            {
+                words = words.Substring(2).TrimStart();
+            }
+
+            if (words.EndsWith("milioane"))
+            {
+                if (gender == GrammaticalGender.Feminine)
+                {
+                    words = words.Substring(0, words.Length - 8) + "milioana";
+                }
+            }
+
+            var customMasculineSuffix = _masculineSuffix;
+            if (words.EndsWith("milion"))
+            {
+                if (gender == GrammaticalGender.Feminine)
+                {
+                    words = words.Substring(0, words.Length - 6) + "milioana";
+                }
+                else
+                {
+                    customMasculineSuffix = "u" + _masculineSuffix;
+                }
+            }
+            else if (words.EndsWith("miliard"))
+            {
+                if (gender == GrammaticalGender.Masculine)
+                {
+                    customMasculineSuffix = "u" + _masculineSuffix;
+                }
+            }
+
+            // trim last letter
+            if (gender == GrammaticalGender.Feminine && !words.EndsWith("zece") &&
+                (words.EndsWith("a") ||
+                 words.EndsWith("ă") ||
+                 words.EndsWith("e") ||
+                 words.EndsWith("i")))
+            {
+                words = words.Substring(0, words.Length - 1);
+            }
+
+            return string.Format("{0} {1}{2}",
+                gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
+                words,
+                gender == GrammaticalGender.Feminine ? _feminineSuffix : customMasculineSuffix
+            );
         }
 
         static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
@@ -120,15 +120,11 @@
                 {
                     return parts[1];
                 }
-                else
-                {
-                    return parts[0];
-                }
+
+                return parts[0];
             }
-            else
-            {
-                return multiGenderPart;
-            }
+
+            return multiGenderPart;
         }
     }
 }

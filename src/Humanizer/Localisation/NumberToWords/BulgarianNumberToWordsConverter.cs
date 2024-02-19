@@ -161,16 +161,14 @@
                     _ => throw new ArgumentOutOfRangeException(nameof(gender))
                 };
             }
-            else
+
+            return gender switch
             {
-                return gender switch
-                {
-                    GrammaticalGender.Masculine => "ен",
-                    GrammaticalGender.Feminine => "на",
-                    GrammaticalGender.Neuter => "но",
-                    _ => throw new ArgumentOutOfRangeException(nameof(gender))
-                };
-            }
+                GrammaticalGender.Masculine => "ен",
+                GrammaticalGender.Feminine => "на",
+                GrammaticalGender.Neuter => "но",
+                _ => throw new ArgumentOutOfRangeException(nameof(gender))
+            };
         }
     }
 }
