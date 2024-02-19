@@ -29,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\en\TimeToClockNotationTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\es\DateToOrdinalWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\es\TimeToClockNotationTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localisation\hr\NumberToWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ByteSizeExtensionsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ToFullWordsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Localisation\is\Bytes\ToStringTests.cs" />
