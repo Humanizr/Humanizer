@@ -31,7 +31,7 @@
         Gigabyte,
 
         /// <summary>
-        /// Terrabyte
+        /// Terabyte
         /// </summary>
         Terabyte
     }
