@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.sr_Latn
+﻿namespace Humanizer.Tests.Localisation.sr_Latn
 {
     [UseCulture("sr-Latn")]
     public class NumberToWordsTest
     {
-
         [Theory]
         [InlineData(0, "nula")]
         [InlineData(1, "jedan")]
@@ -41,9 +38,7 @@ namespace Humanizer.Tests.Localisation.sr_Latn
         [InlineData(81, "osamdeset jedan")]
         [InlineData(213, "dvesto trinaest")]
         [InlineData(547, "petsto četrdeset sedam")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
     }
 }

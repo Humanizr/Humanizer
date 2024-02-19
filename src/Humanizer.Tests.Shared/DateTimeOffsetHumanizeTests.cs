@@ -1,14 +1,8 @@
-﻿using System;
-using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class DateTimeOffsetHumanizeTests
     {
-
         [Fact]
         public void DefaultStrategy_SameOffset()
         {
@@ -28,8 +22,8 @@ namespace Humanizer.Tests
         {
             Configurator.DateTimeOffsetHumanizeStrategy = new DefaultDateTimeOffsetHumanizeStrategy();
 
-            var inputTime = new DateTimeOffset(2015, 07, 05, 03, 0, 0, new TimeSpan(2, 0, 0));
-            var baseTime = new DateTimeOffset(2015, 07, 05, 02, 30, 0, new TimeSpan(1, 0, 0));
+            var inputTime = new DateTimeOffset(2015, 07, 05, 03, 0, 0, new(2, 0, 0));
+            var baseTime = new DateTimeOffset(2015, 07, 05, 02, 30, 0, new(1, 0, 0));
 
             const string expectedResult = "30 minutes ago";
             var actualResult = inputTime.Humanize(baseTime);
@@ -56,8 +50,8 @@ namespace Humanizer.Tests
         {
             Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(0.75);
 
-            var inputTime = new DateTimeOffset(2015, 07, 05, 03, 45, 0, new TimeSpan(2, 0, 0));
-            var baseTime = new DateTimeOffset(2015, 07, 05, 02, 30, 0, new TimeSpan(-5, 0, 0));
+            var inputTime = new DateTimeOffset(2015, 07, 05, 03, 45, 0, new(2, 0, 0));
+            var baseTime = new DateTimeOffset(2015, 07, 05, 02, 30, 0, new(-5, 0, 0));
 
             const string expectedResult = "6 hours ago";
             var actualResult = inputTime.Humanize(baseTime);

@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Can transform a string with the given culture
@@ -11,8 +9,6 @@ namespace Humanizer
         /// Transform the input
         /// </summary>
         /// <param name="input">String to be transformed</param>
-        /// <param name="culture">The culture</param>
-        /// <returns></returns>
         string Transform(string input, CultureInfo culture);
     }
 }

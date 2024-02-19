@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.thTH
+﻿namespace Humanizer.Tests.Localisation.thTH
 {
     [UseCulture("th-TH")]
     public class NumberToWordsTests
@@ -28,9 +25,7 @@ namespace Humanizer.Tests.Localisation.thTH
         [InlineData(111111111, "หนึ่งร้อยสิบเอ็ดล้านหนึ่งแสนหนึ่งหมื่นหนึ่งพันหนึ่งร้อยสิบเอ็ด")]
         [InlineData(1111111111, "หนึ่งพันหนึ่งร้อยสิบเอ็ดล้านหนึ่งแสนหนึ่งหมื่นหนึ่งพันหนึ่งร้อยสิบเอ็ด")]
         [Theory]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
     }
 }

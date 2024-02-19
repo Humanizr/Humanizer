@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.zhCN
+﻿namespace Humanizer.Tests.Localisation.zhCN
 {
     [UseCulture("zh-CN")]
     public class NumberToWordsTests
@@ -43,19 +41,15 @@ namespace Humanizer.Tests.Localisation.zhCN
         [InlineData(500000000000L, "五千亿")]
         [InlineData(6067823149088L, "六兆零六百七十八亿二千三百一十四万九千零八十八")]
         [Theory]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1, "第 一")]
         [InlineData(15, "第 十五")]
         [InlineData(10000, "第 一万")]
         [InlineData(31234, "第 三万一千二百三十四")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.CollectionFormatters
+﻿namespace Humanizer
 {
     /// <summary>
     /// An interface you should implement to localize Humanize for collections

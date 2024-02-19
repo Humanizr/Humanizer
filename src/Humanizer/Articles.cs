@@ -5,17 +5,8 @@
     /// </summary>
     public enum EnglishArticles
     {
-        /// <summary>
-        /// A
-        /// </summary>
         A,
-        /// <summary>
-        /// An
-        /// </summary>
         An,
-        /// <summary>
-        /// The
-        /// </summary>
         The
     }
 }

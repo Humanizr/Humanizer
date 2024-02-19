@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.pt
+﻿namespace Humanizer.Tests.Localisation.pt
 {
     [UseCulture("pt")]
     public class NumberToWordsTests
@@ -99,10 +97,8 @@ namespace Humanizer.Tests.Localisation.pt
         [InlineData(8100, "oito mil e cem")]
         [InlineData(999999999999, "novecentos e noventa e nove mil milhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
         [InlineData(-999999999999, "menos novecentos e noventa e nove mil milhões novecentos e noventa e nove milhões novecentos e noventa e nove mil novecentos e noventa e nove")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1, "uma")]
@@ -128,10 +124,8 @@ namespace Humanizer.Tests.Localisation.pt
         [InlineData(1234, "mil duzentas e trinta e quatro")]
         [InlineData(8100, "oito mil e cem")]
         [InlineData(12345, "doze mil trezentas e quarenta e cinco")]
-        public void ToFeminineWords(int number, string expected)
-        {
+        public void ToFeminineWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -186,10 +180,8 @@ namespace Humanizer.Tests.Localisation.pt
         [InlineData(100000, "centésimo milésimo")]
         [InlineData(1000000, "milionésimo")]
         [InlineData(1000000000, "milésimo milionésimo")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -244,10 +236,8 @@ namespace Humanizer.Tests.Localisation.pt
         [InlineData(100000, "centésima milésima")]
         [InlineData(1000000, "milionésima")]
         [InlineData(1000000000, "milésima milionésima")]
-        public void ToFeminineOrdinalWords(int number, string words)
-        {
+        public void ToFeminineOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
     }
 }
 

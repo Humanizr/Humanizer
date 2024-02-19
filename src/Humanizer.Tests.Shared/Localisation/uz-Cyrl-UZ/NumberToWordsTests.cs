@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.uzCyrl
+﻿namespace Humanizer.Tests.Localisation.uzCyrl
 {
     [UseCulture("uz-Cyrl-UZ")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "нол")]
         [InlineData(1, "бир")]
@@ -63,10 +60,8 @@ namespace Humanizer.Tests.Localisation.uzCyrl
         [InlineData(751633617, "етти юз эллик бир миллион олти юз ўттиз уч минг олти юз ўн етти")]
         [InlineData(1111111118, "бир миллиард бир юз ўн бир миллион бир юз ўн бир минг бир юз ўн саккиз")]
         [InlineData(-751633617, "минус етти юз эллик бир миллион олти юз ўттиз уч минг олти юз ўн етти")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "нолинчи")]
@@ -100,9 +95,7 @@ namespace Humanizer.Tests.Localisation.uzCyrl
         [InlineData(751633617, "етти юз эллик бир миллион олти юз ўттиз уч минг олти юз ўн еттинчи")]
         [InlineData(1111111118, "бир миллиард бир юз ўн бир миллион бир юз ўн бир минг бир юз ўн саккизинчи")]
         [InlineData(-751633617, "минус етти юз эллик бир миллион олти юз ўттиз уч минг олти юз ўн еттинчи")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

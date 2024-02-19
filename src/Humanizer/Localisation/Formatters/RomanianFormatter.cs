@@ -1,25 +1,17 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    using System;
-    using System.Globalization;
-
-    internal class RomanianFormatter : DefaultFormatter
+    class RomanianFormatter() :
+        DefaultFormatter(RomanianCultureCode)
     {
-        private const int PrepositionIndicatingDecimals = 2;
-        private const int MaxNumeralWithNoPreposition = 19;
-        private const int MinNumeralWithNoPreposition = 1;
-        private const string UnitPreposition = " de";
-        private const string RomanianCultureCode = "ro";
+        const int PrepositionIndicatingDecimals = 2;
+        const int MaxNumeralWithNoPreposition = 19;
+        const int MinNumeralWithNoPreposition = 1;
+        const string UnitPreposition = " de";
+        const string RomanianCultureCode = "ro";
 
-        private static readonly double Divider = Math.Pow(10, PrepositionIndicatingDecimals);
+        static readonly double Divider = Math.Pow(10, PrepositionIndicatingDecimals);
 
-        private readonly CultureInfo _romanianCulture;
-
-        public RomanianFormatter()
-            : base(RomanianCultureCode)
-        {
-            _romanianCulture = new CultureInfo(RomanianCultureCode);
-        }
+        readonly CultureInfo _romanianCulture = new(RomanianCultureCode);
 
         protected override string Format(string resourceKey, int number, bool toWords = false)
         {
@@ -28,14 +20,13 @@
                                      ? UnitPreposition
                                      : string.Empty;
 
-            return format.FormatWith(number, preposition);
+            return string.Format(format, number, preposition);
         }
 
-        private static bool ShouldUsePreposition(int number)
+        static bool ShouldUsePreposition(int number)
         {
             var prepositionIndicatingNumeral = Math.Abs(number % Divider);
-            return prepositionIndicatingNumeral < MinNumeralWithNoPreposition
-                   || prepositionIndicatingNumeral > MaxNumeralWithNoPreposition;
+            return prepositionIndicatingNumeral is < MinNumeralWithNoPreposition or > MaxNumeralWithNoPreposition;
         }
     }
 }

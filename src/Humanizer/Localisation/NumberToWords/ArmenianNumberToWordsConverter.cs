@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class ArmenianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class ArmenianNumberToWordsConverter :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը" };
-        private static readonly string[] TensMap = { "զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն" };
+        static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];
+        static readonly string[] TensMap = ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"];
 
-        private static readonly Dictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
+        static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {0, "զրոյական"},
             {1, "առաջին"},
@@ -17,10 +15,8 @@ namespace Humanizer.Localisation.NumberToWords
             {4, "չորրորդ"}
         };
 
-        public override string Convert(long number)
-        {
-            return ConvertImpl(number, false);
-        }
+        public override string Convert(long number) =>
+            ConvertImpl(number, false);
 
         public override string ConvertToOrdinal(int number)
         {
@@ -32,7 +28,7 @@ namespace Humanizer.Localisation.NumberToWords
             return ConvertImpl(number, true);
         }
 
-        private string ConvertImpl(long number, bool isOrdinal)
+        string ConvertImpl(long number, bool isOrdinal)
         {
             if (number == 0)
             {
@@ -52,65 +48,65 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("մինուս {0}", ConvertImpl(-number, isOrdinal));
+                return $"մինուս {ConvertImpl(-number, isOrdinal)}";
             }
 
             var parts = new List<string>();
 
-            if ((number / 1000000000000000000) > 0)
+            if (number / 1000000000000000000 > 0)
             {
-                parts.Add(string.Format("{0} քվինտիլիոն", Convert(number / 1000000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000000)} քվինտիլիոն");
                 number %= 1000000000000000000;
             }
 
-            if ((number / 1000000000000000) > 0)
+            if (number / 1000000000000000 > 0)
             {
-                parts.Add(string.Format("{0} կվադրիլիոն", Convert(number / 1000000000000000)));
+                parts.Add($"{Convert(number / 1000000000000000)} կվադրիլիոն");
                 number %= 1000000000000000;
             }
 
-            if ((number / 1000000000000) > 0)
+            if (number / 1000000000000 > 0)
 
             {
-                parts.Add(string.Format("{0} տրիլիոն", Convert(number / 1000000000000)));
+                parts.Add($"{Convert(number / 1000000000000)} տրիլիոն");
                 number %= 1000000000000;
             }
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
-                parts.Add(string.Format("{0} միլիարդ", Convert(number / 1000000000)));
+                parts.Add($"{Convert(number / 1000000000)} միլիարդ");
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
-                parts.Add(string.Format("{0} միլիոն", Convert(number / 1000000)));
+                parts.Add($"{Convert(number / 1000000)} միլիոն");
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
-                if ((number / 1000) == 1)
+                if (number / 1000 == 1)
                 {
                     parts.Add("հազար");
                 }
                 else
                 {
-                    parts.Add(string.Format("{0} հազար", Convert(number / 1000)));
+                    parts.Add($"{Convert(number / 1000)} հազար");
                 }
 
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
-                if ((number / 100) == 1)
+                if (number / 100 == 1)
                 {
                     parts.Add("հարյուր");
                 }
                 else
                 {
-                    parts.Add(string.Format("{0} հարյուր", Convert(number / 100)));
+                    parts.Add($"{Convert(number / 100)} հարյուր");
                 }
 
                 number %= 100;
@@ -125,9 +121,9 @@ namespace Humanizer.Localisation.NumberToWords
                 else
                 {
                     var lastPart = TensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
-                        lastPart += string.Format("{0}", GetUnitValue(number % 10, isOrdinal));
+                        lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
                     }
                     else if (isOrdinal)
                     {
@@ -142,7 +138,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts[parts.Count - 1] += "երորդ";
             }
 
-            var toWords = string.Join(" ", parts.ToArray());
+            var toWords = string.Join(" ", parts);
 
             //if (isOrdinal)
             //{
@@ -152,19 +148,17 @@ namespace Humanizer.Localisation.NumberToWords
             return toWords;
         }
 
-        private static string GetUnitValue(long number, bool isOrdinal)
+        static string GetUnitValue(long number, bool isOrdinal)
         {
             if (isOrdinal)
             {
                 return UnitsMap[number] + "երորդ";
             }
-            else
-            {
-                return UnitsMap[number];
-            }
+
+            return UnitsMap[number];
         }
 
-        private static string RemoveOnePrefix(string toWords)
+        static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
             if (toWords.StartsWith("մեկ", StringComparison.Ordinal))
@@ -175,9 +169,7 @@ namespace Humanizer.Localisation.NumberToWords
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(long number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        static bool ExceptionNumbersToWords(long number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
     }
 }

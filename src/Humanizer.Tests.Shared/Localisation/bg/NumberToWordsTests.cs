@@ -1,14 +1,11 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.bg
+﻿namespace Humanizer.Tests.Localisation.bg
 {
     [UseCulture("bg")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "нула")]
-        [InlineData(1, "един")]
+        [InlineData(1, "едно")]
         [InlineData(10, "десет")]
         [InlineData(11, "единадесет")]
         [InlineData(12, "дванадесет")]
@@ -48,11 +45,9 @@ namespace Humanizer.Tests.Localisation.bg
         [InlineData(4000210, "четири милиона двеста и десет")]
         [InlineData(5200, "пет хиляди и двеста")]
         [InlineData(1125000, "един милион и сто двадесет и пет хиляди")]
-        public void ToWordsBg(long number, string expected)
-        {
+        [InlineData(1000000000, "един милиард")]
+        public void ToWordsBg(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
-
 
         [Theory]
         [InlineData(0, "нулев")]
@@ -84,10 +79,8 @@ namespace Humanizer.Tests.Localisation.bg
         [InlineData(21, "двадесет и първи")]
         [InlineData(22, "двадесет и втори")]
         [InlineData(35, "тридесет и пети")]
-        public void ToOrdinalWordsMasculine(int number, string expected)
-        {
+        public void ToOrdinalWordsMasculine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(0, "нулева")]
@@ -119,11 +112,8 @@ namespace Humanizer.Tests.Localisation.bg
         [InlineData(21, "двадесет и първа")]
         [InlineData(22, "двадесет и втора")]
         [InlineData(35, "тридесет и пета")]
-        public void ToOrdinalWordsFeminine(int number, string expected)
-        {
+        public void ToOrdinalWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
-
 
         [Theory]
         [InlineData(0, "нулево")]
@@ -155,9 +145,7 @@ namespace Humanizer.Tests.Localisation.bg
         [InlineData(21, "двадесет и първо")]
         [InlineData(22, "двадесет и второ")]
         [InlineData(35, "тридесет и пето")]
-        public void ToOrdinalWordsNeuter(int number, string expected)
-        {
+        public void ToOrdinalWordsNeuter(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-        }        
     }
 }

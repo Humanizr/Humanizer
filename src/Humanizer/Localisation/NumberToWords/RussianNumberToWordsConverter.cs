@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Humanizer.Localisation.GrammaticalNumber;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
+    class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] HundredsMap = { "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот" };
-        private static readonly string[] TensMap = { "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто" };
-        private static readonly string[] UnitsMap = { "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать" };
-        private static readonly string[] UnitsOrdinalPrefixes = { string.Empty, string.Empty, "двух", "трёх", "четырёх", "пяти", "шести", "семи", "восьми", "девяти", "десяти", "одиннадцати", "двенадцати", "тринадцати", "четырнадцати", "пятнадцати", "шестнадцати", "семнадцати", "восемнадцати", "девятнадцати" };
-        private static readonly string[] TensOrdinalPrefixes = { string.Empty, "десяти", "двадцати", "тридцати", "сорока", "пятидесяти", "шестидесяти", "семидесяти", "восьмидесяти", "девяносто" };
-        private static readonly string[] TensOrdinal = { string.Empty, "десят", "двадцат", "тридцат", "сороков", "пятидесят", "шестидесят", "семидесят", "восьмидесят", "девяност" };
-        private static readonly string[] UnitsOrdinal = { string.Empty, "перв", "втор", "трет", "четверт", "пят", "шест", "седьм", "восьм", "девят", "десят", "одиннадцат", "двенадцат", "тринадцат", "четырнадцат", "пятнадцат", "шестнадцат", "семнадцат", "восемнадцат", "девятнадцат" };
+        static readonly string[] HundredsMap = ["ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"];
+        static readonly string[] TensMap = ["ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"];
+        static readonly string[] UnitsMap = ["ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"];
+        static readonly string[] UnitsOrdinalPrefixes = [string.Empty, string.Empty, "двух", "трёх", "четырёх", "пяти", "шести", "семи", "восьми", "девяти", "десяти", "одиннадцати", "двенадцати", "тринадцати", "четырнадцати", "пятнадцати", "шестнадцати", "семнадцати", "восемнадцати", "девятнадцати"];
+        static readonly string[] TensOrdinalPrefixes = [string.Empty, "десяти", "двадцати", "тридцати", "сорока", "пятидесяти", "шестидесяти", "семидесяти", "восьмидесяти", "девяносто"];
+        static readonly string[] TensOrdinal = [string.Empty, "десят", "двадцат", "тридцат", "сороков", "пятидесят", "шестидесят", "семидесят", "восьмидесят", "девяност"];
+        static readonly string[] UnitsOrdinal = [string.Empty, "перв", "втор", "трет", "четверт", "пят", "шест", "седьм", "восьм", "девят", "десят", "одиннадцат", "двенадцат", "тринадцат", "четырнадцат", "пятнадцат", "шестнадцат", "семнадцат", "восемнадцат", "девятнадцат"];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input == 0)
-            { 
+            {
                 return "ноль";
             }
 
@@ -36,7 +32,7 @@ namespace Humanizer.Localisation.NumberToWords
             CollectParts(parts, ref input, 1000, GrammaticalGender.Feminine, "тысяча", "тысячи", "тысяч");
 
             if (input > 0)
-            { 
+            {
                 CollectPartsUnderOneThousand(parts, input, gender);
             }
 
@@ -46,7 +42,7 @@ namespace Humanizer.Localisation.NumberToWords
         public override string ConvertToOrdinal(int input, GrammaticalGender gender)
         {
             if (input == 0)
-            { 
+            {
                 return "нулев" + GetEndingForGender(gender, input);
             }
 
@@ -101,7 +97,7 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts);
         }
 
-        private static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
+        static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
         {
             if (number >= 100)
             {
@@ -138,7 +134,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static string GetPrefix(long number)
+        static string GetPrefix(long number)
         {
             var parts = new List<string>();
 
@@ -168,10 +164,10 @@ namespace Humanizer.Localisation.NumberToWords
                 parts.Add(number == 1 ? "одно" : UnitsOrdinalPrefixes[number]);
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
-        private static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
+        static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
         {
             var result = Math.Abs(number / divisor);
             if (result == 0)
@@ -185,7 +181,7 @@ namespace Humanizer.Localisation.NumberToWords
             parts.Add(ChooseOneForGrammaticalNumber(result, forms));
         }
 
-        private static void CollectOrdinalParts(ICollection<string> parts, ref long number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
+        static void CollectOrdinalParts(ICollection<string> parts, ref long number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
         {
             if (number < divisor)
             {
@@ -212,7 +208,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static int GetIndex(RussianGrammaticalNumber number)
+        static int GetIndex(RussianGrammaticalNumber number)
         {
             if (number == RussianGrammaticalNumber.Singular)
             {
@@ -227,17 +223,15 @@ namespace Humanizer.Localisation.NumberToWords
             return 2;
         }
 
-        private static string ChooseOneForGrammaticalNumber(long number, string[] forms)
-        {
-            return forms[GetIndex(RussianGrammaticalNumberDetector.Detect(number))];
-        }
+        static string ChooseOneForGrammaticalNumber(long number, string[] forms) =>
+            forms[GetIndex(RussianGrammaticalNumberDetector.Detect(number))];
 
-        private static string GetEndingForGender(GrammaticalGender gender, long number)
+        static string GetEndingForGender(GrammaticalGender gender, long number)
         {
             switch (gender)
             {
                 case GrammaticalGender.Masculine:
-                    if (number == 0 || number == 2 || number == 6 || number == 7 || number == 8 || number == 40)
+                    if (number is 0 or 2 or 6 or 7 or 8 or 40)
                     {
                         return "ой";
                     }

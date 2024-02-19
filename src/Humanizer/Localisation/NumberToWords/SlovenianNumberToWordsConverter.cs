@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class SlovenianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class SlovenianNumberToWordsConverter(CultureInfo culture) :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst" };
-        private static readonly string[] TensMap = { "nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset" };
-
-        private readonly CultureInfo _culture;
-
-        public SlovenianNumberToWordsConverter(CultureInfo culture)
-        {
-            _culture = culture;
-        }
+        static readonly string[] UnitsMap = ["nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"];
+        static readonly string[] TensMap = ["nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"];
 
         public override string Convert(long input)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
@@ -30,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number));
+                return $"minus {Convert(-number)}";
             }
 
             var parts = new List<string>();
@@ -97,22 +87,20 @@ namespace Humanizer.Localisation.NumberToWords
                     var units = number % 10;
                     if (units > 0)
                     {
-                        parts.Add(string.Format("{0}in", UnitsMap[units]));
+                        parts.Add($"{UnitsMap[units]}in");
                     }
 
                     parts.Add(TensMap[number / 10]);
                 }
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return number.ToString(_culture);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            number.ToString(culture);
 
-        private string Part(string singular, string dual, string trialQuadral, string plural, int number)
+        string Part(string singular, string dual, string trialQuadral, string plural, int number)
         {
             if (number == 1)
             {
@@ -124,7 +112,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return dual;
             }
 
-            if (number == 3 || number == 4)
+            if (number is 3 or 4)
             {
                 return string.Format(trialQuadral, Convert(number));
             }

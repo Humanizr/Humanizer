@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ku
+﻿namespace Humanizer.Tests.Localisation.ku
 {
     [UseCulture("ku")]
     public class NumberToWordsTests
@@ -44,10 +42,8 @@ namespace Humanizer.Tests.Localisation.ku
         [InlineData(12345678, "دوازدە میلیۆن و سێ سەد و چل و پێنج هەزار و شەش سەد و حەفتا و هەشت")]
         [InlineData(123456789, "سەد و بیست و سێ میلیۆن و چوار سەد و پەنجا و شەش هەزار و حەوت سەد و هەشتا و نۆ")]
         [InlineData(1234567890, "یەک میلیارد و دوو سەد و سی و چوار میلیۆن و پێنج سەد و شەست و حەوت هەزار و هەشت سەد و نەوەد")]
-        public void ToWordsKurdish(int number, string expected)
-        {
+        public void ToWordsKurdish(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "سفرەم")]
@@ -82,9 +78,7 @@ namespace Humanizer.Tests.Localisation.ku
         [InlineData(1001, "هەزار و یەکەم")]
         [InlineData(1333, "هەزار و سێ سەد و سی و سێیەم")]
         [InlineData(1000000, "یەک میلیۆنەم")]
-        public void ToOrdinalWordsKurdish(int number, string words)
-        {
+        public void ToOrdinalWordsKurdish(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

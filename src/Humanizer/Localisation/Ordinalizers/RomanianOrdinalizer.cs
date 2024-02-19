@@ -1,12 +1,9 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer
 {
-
-    internal class RomanianOrdinalizer : DefaultOrdinalizer
+    class RomanianOrdinalizer : DefaultOrdinalizer
     {
-        public override string Convert(int number, string numberString)
-        {
-            return Convert(number, numberString, GrammaticalGender.Masculine);
-        }
+        public override string Convert(int number, string numberString) =>
+            Convert(number, numberString, GrammaticalGender.Masculine);
 
         public override string Convert(int number, string numberString, GrammaticalGender gender)
         {
@@ -29,11 +26,10 @@
 
             if (gender == GrammaticalGender.Feminine)
             {
-                return string.Format("a {0}-a", numberString);
+                return $"a {numberString}-a";
             }
 
-            return string.Format("al {0}-lea", numberString);
-
+            return $"al {numberString}-lea";
         }
     }
 }

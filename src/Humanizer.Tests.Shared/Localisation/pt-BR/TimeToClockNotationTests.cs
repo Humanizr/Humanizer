@@ -1,10 +1,5 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-using Xunit;
-using Humanizer.Localisation.TimeToClockNotation;
-using Humanizer;
-
 namespace Humanizer.Tests.Localisation.ptBR
 {
     [UseCulture("pt-BR")]

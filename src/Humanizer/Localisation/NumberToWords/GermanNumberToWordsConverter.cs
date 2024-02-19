@@ -1,6 +1,3 @@
-﻿namespace Humanizer.Localisation.NumberToWords
-{
-    internal class GermanNumberToWordsConverter : GermanNumberToWordsConverterBase
-    {
-    }
-}
+﻿namespace Humanizer;
+
+class GermanNumberToWordsConverter : GermanNumberToWordsConverterBase;

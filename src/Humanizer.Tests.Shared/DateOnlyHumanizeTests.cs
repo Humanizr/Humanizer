@@ -1,16 +1,10 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
-using Xunit;
-
 namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class DateOnlyHumanizeTests
     {
-
         [Fact]
         public void DefaultStrategy_SameDate()
         {
@@ -54,6 +48,21 @@ namespace Humanizer.Tests
         }
 
         [Fact]
+        public void DefaultStrategy_YearsAgo()
+        {
+            Configurator.DateOnlyHumanizeStrategy = new DefaultDateOnlyHumanizeStrategy();
+
+            var baseDate = DateTime.Now;
+            var inputTime = DateOnly.FromDateTime(baseDate.AddMonths(-24));
+            var baseTime = DateOnly.FromDateTime(baseDate);
+
+            const string expectedResult = "2 years ago";
+            var actualResult = inputTime.Humanize(baseTime);
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
         public void PrecisionStrategy_NextDay()
         {
             Configurator.DateOnlyHumanizeStrategy = new PrecisionDateOnlyHumanizeStrategy(0.75);
@@ -66,7 +75,6 @@ namespace Humanizer.Tests
 
             Assert.Equal(expectedResult, actualResult);
         }
-
 
         [Fact]
         public void Never()

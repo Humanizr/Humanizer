@@ -1,71 +1,68 @@
-﻿using System;
-using System.Text;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
+    class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз" };
-        private static readonly string[] TensMap = { "нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон" };
+        static readonly string[] UnitsMap = ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"];
+        static readonly string[] TensMap = ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"];
 
-        private static readonly string[] OrdinalSuffixes = new string[] { "инчи", "нчи" };
+        static readonly string[] OrdinalSuffixes = ["инчи", "нчи"];
 
         public override string Convert(long input)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
             var number = (int)input;
             if (number < 0)
             {
-                return string.Format("минус {0}", Convert(-number, true));
+                return $"минус {Convert(-number, true)}";
             }
 
             return Convert(number, true);
         }
 
-        private string Convert(int number, bool checkForHoundredRule)
+        static string Convert(int number, bool checkForHundredRule)
         {
             if (number == 0)
             {
                 return UnitsMap[0];
             }
 
-            if (checkForHoundredRule && number == 100)
+            if (checkForHundredRule && number == 100)
             {
                 return "юз";
             }
 
             var sb = new StringBuilder();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
                 sb.AppendFormat("{0} миллиард ", Convert(number / 1000000000, false));
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
                 sb.AppendFormat("{0} миллион ", Convert(number / 1000000, true));
                 number %= 1000000;
             }
 
-            var thousand = (number / 1000);
+            var thousand = number / 1000;
             if (thousand > 0)
             {
                 sb.AppendFormat("{0} минг ", Convert(thousand, true));
                 number %= 1000;
             }
 
-            var hundred = (number / 100);
+            var hundred = number / 100;
             if (hundred > 0)
             {
                 sb.AppendFormat("{0} юз ", Convert(hundred, false));
                 number %= 100;
             }
 
-            if ((number / 10) > 0)
+            if (number / 10 > 0)
             {
                 sb.AppendFormat("{0} ", TensMap[number / 10]);
                 number %= 10;
@@ -89,12 +86,12 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             var lastChar = word[word.Length - 1];
-            if (lastChar == 'и' || lastChar == 'а')
+            if (lastChar is 'и' or 'а')
             {
                 i = 1;
             }
 
-            return string.Format("{0}{1}", word, OrdinalSuffixes[i]);
+            return $"{word}{OrdinalSuffixes[i]}";
         }
     }
 }

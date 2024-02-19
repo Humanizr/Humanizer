@@ -1,38 +1,28 @@
-﻿using System.Globalization;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private readonly CultureInfo _culture;
+        readonly CultureInfo _culture;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="culture">Culture to use.</param>
-        public DefaultNumberToWordsConverter(CultureInfo culture)
-        {
+        public DefaultNumberToWordsConverter(CultureInfo culture) =>
             _culture = culture;
-        }
 
         /// <summary>
         /// 3501.ToWords() -> "three thousand five hundred and one"
         /// </summary>
         /// <param name="number">Number to be turned to words</param>
-        /// <returns></returns>
-        public override string Convert(long number)
-        {
-            return number.ToString(_culture);
-        }
+        public override string Convert(long number) =>
+            number.ToString(_culture);
 
         /// <summary>
         /// 1.ToOrdinalWords() -> "first"
         /// </summary>
         /// <param name="number">Number to be turned to ordinal words</param>
-        /// <returns></returns>
-        public override string ConvertToOrdinal(int number)
-        {
-            return number.ToString(_culture);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            number.ToString(_culture);
     }
 }

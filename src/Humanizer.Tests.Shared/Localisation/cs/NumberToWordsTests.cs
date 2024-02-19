@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.cs
+﻿namespace Humanizer.Tests.Localisation.cs
 {
     [UseCulture("cs-CZ")]
     public class NumberToWordsTests
@@ -57,10 +55,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(1501001892, "jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dva")]
         [InlineData(2147483647, "dvě miliardy sto čtyřicet sedm milionů čtyři sta osmdesát tři tisíc šest set čtyřicet sedm")]
         [InlineData(-1501001892, "mínus jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dva")]
-        public void ToWordsCzech(int number, string expected)
-        {
+        public void ToWordsCzech(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "nula")]
@@ -114,10 +110,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(1501001892, "jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dvě")]
         [InlineData(2147483647, "dvě miliardy sto čtyřicet sedm milionů čtyři sta osmdesát tři tisíc šest set čtyřicet sedm")]
         [InlineData(-1501001892, "mínus jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dvě")]
-        public void ToWordsCzechFeminine(int number, string expected)
-        {
+        public void ToWordsCzechFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "nula")]
@@ -171,9 +165,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(1501001892, "jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dvě")]
         [InlineData(2147483647, "dvě miliardy sto čtyřicet sedm milionů čtyři sta osmdesát tři tisíc šest set čtyřicet sedm")]
         [InlineData(-1501001892, "mínus jedna miliarda pět set jedna milionů jeden tisíc osm set devadesát dvě")]
-        public void ToWordsCzechNeuter(int number, string expected)
-        {
+        public void ToWordsCzechNeuter(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Neuter));
-        }
     }
 }

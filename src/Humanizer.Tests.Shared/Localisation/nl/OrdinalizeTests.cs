@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.nl
+﻿namespace Humanizer.Tests.Localisation.nl
 {
     [UseCulture("nl")]
     public class OrdinalizeTests
     {
-
         [Theory]
         [InlineData("0", "0")]
         [InlineData("1", "1e")]
@@ -20,9 +17,7 @@ namespace Humanizer.Tests.Localisation.nl
         [InlineData("102", "102e")]
         [InlineData("103", "103e")]
         [InlineData("1001", "1001e")]
-        public void OrdinalizeString(string number, string ordinalized)
-        {
+        public void OrdinalizeString(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(), ordinalized);
-        }
     }
 }

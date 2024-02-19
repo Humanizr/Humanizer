@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.fa
+﻿namespace Humanizer.Tests.Localisation.fa
 {
     [UseCulture("fa")]
     public class NumberToWordsTests
@@ -18,6 +16,9 @@ namespace Humanizer.Tests.Localisation.fa
         [InlineData(10000000, "ده میلیون")]
         [InlineData(100000000, "صد میلیون")]
         [InlineData(1000000000, "یک میلیارد")]
+        [InlineData(1000000000000, "یک بیلیون")]
+        [InlineData(1000000000000000, "یک بیلیارد")]
+        [InlineData(1000000000000000000, "یک تریلیون")]
         [InlineData(111, "صد و یازده")]
         [InlineData(1111, "یک هزار و صد و یازده")]
         [InlineData(111111, "صد و یازده هزار و صد و یازده")]
@@ -33,10 +34,9 @@ namespace Humanizer.Tests.Localisation.fa
         [InlineData(12345678, "دوازده میلیون و سیصد و چهل و پنج هزار و ششصد و هفتاد و هشت")]
         [InlineData(123456789, "صد و بیست و سه میلیون و چهارصد و پنجاه و شش هزار و هفتصد و هشتاد و نه")]
         [InlineData(1234567890, "یک میلیارد و دویست و سی و چهار میلیون و پانصد و شصت و هفت هزار و هشتصد و نود")]
-        public void ToWordsFarsi(int number, string expected)
-        {
+        [InlineData(long.MaxValue, "نه تریلیون و دویست و بیست و سه بیلیارد و سیصد و هفتاد و دو بیلیون و سی و شش میلیارد و هشتصد و پنجاه و چهار میلیون و هفتصد و هفتاد و پنج هزار و هشتصد و هفت")]
+        public void ToWordsFarsi(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "صفرم")]
@@ -70,9 +70,7 @@ namespace Humanizer.Tests.Localisation.fa
         [InlineData(1000, "یک هزارم")]
         [InlineData(1333, "یک هزار و سیصد و سی و سوم")]
         [InlineData(1000000, "یک میلیونم")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

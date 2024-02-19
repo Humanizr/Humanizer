@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+namespace Humanizer
 {
-    internal class AfrikaansNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class AfrikaansNumberToWordsConverter :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "nul", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege", "tien", "elf", "twaalf", "dertien", "veertien", "vyftien", "sestien", "sewentien", "agtien", "negentien" };
-        private static readonly string[] TensMap = { "nul", "tien", "twintig", "dertig", "veertig", "vyftig", "sestig", "sewentig", "tagtig", "negentig" };
+        static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege", "tien", "elf", "twaalf", "dertien", "veertien", "vyftien", "sestien", "sewentien", "agtien", "negentien"];
+        static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vyftig", "sestig", "sewentig", "tagtig", "negentig"];
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
+        static readonly Dictionary<int, string> OrdinalExceptions = new()
         {
             {0, "nulste"},
             {1, "eerste"},
@@ -24,19 +22,17 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long number)
         {
-            if (number > Int32.MaxValue || number < Int32.MinValue)
+            if (number is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
             return Convert((int)number, false);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return Convert(number, true);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            Convert(number, true);
 
-        private string Convert(int number, bool isOrdinal)
+        string Convert(int number, bool isOrdinal)
         {
             if (number == 0)
             {
@@ -45,32 +41,32 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number));
+                return $"minus {Convert(-number)}";
             }
 
             var parts = new List<string>();
 
-            if ((number / 1000000000) > 0)
+            if (number / 1000000000 > 0)
             {
-                parts.Add(string.Format("{0} miljard", Convert(number / 1000000000)));
+                parts.Add($"{Convert(number / 1000000000)} miljard");
                 number %= 1000000000;
             }
 
-            if ((number / 1000000) > 0)
+            if (number / 1000000 > 0)
             {
-                parts.Add(string.Format("{0} miljoen", Convert(number / 1000000)));
+                parts.Add($"{Convert(number / 1000000)} miljoen");
                 number %= 1000000;
             }
 
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
-                parts.Add(string.Format("{0} duisend", Convert(number / 1000)));
+                parts.Add($"{Convert(number / 1000)} duisend");
                 number %= 1000;
             }
 
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
-                parts.Add(string.Format("{0} honderd", Convert(number / 100)));
+                parts.Add($"{Convert(number / 100)} honderd");
                 number %= 100;
             }
 
@@ -90,15 +86,15 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    var lastPartValue = (number / 10) * 10;
+                    var lastPartValue = number / 10 * 10;
                     var lastPart = TensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
-                        lastPart = string.Format("{0} en {1}", GetUnitValue(number % 10, false), isOrdinal ? GetUnitValue(lastPartValue, isOrdinal) : lastPart);
+                        lastPart = $"{GetUnitValue(number % 10, false)} en {(isOrdinal ? GetUnitValue(lastPartValue, true) : lastPart)}";
                     }
-                    else if ((number % 10) == 0)
+                    else if (number % 10 == 0)
                     {
-                        lastPart = string.Format("{0}{1}{2}", parts.Count > 0 ? "en " : "", lastPart, isOrdinal ? "ste" : "");
+                        lastPart = $"{(parts.Count > 0 ? "en " : "")}{lastPart}{(isOrdinal ? "ste" : "")}";
                     }
                     else if (isOrdinal)
                     {
@@ -113,7 +109,7 @@ namespace Humanizer.Localisation.NumberToWords
                 parts[parts.Count - 1] += "ste";
             }
 
-            var toWords = string.Join(" ", parts.ToArray());
+            var toWords = string.Join(" ", parts);
 
             if (isOrdinal)
             {
@@ -123,7 +119,7 @@ namespace Humanizer.Localisation.NumberToWords
             return toWords;
         }
 
-        private static string GetUnitValue(int number, bool isOrdinal)
+        static string GetUnitValue(int number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -131,22 +127,18 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     return exceptionString;
                 }
-                else if (number > 19)
+
+                if (number > 19)
                 {
                     return TensMap[number / 10] + "ste";
                 }
-                else
-                {
-                    return UnitsMap[number] + "de";
-                }
+                return UnitsMap[number] + "de";
             }
-            else
-            {
-                return UnitsMap[number];
-            }
+
+            return UnitsMap[number];
         }
 
-        private static string RemoveOnePrefix(string toWords)
+        static string RemoveOnePrefix(string toWords)
         {
             // one hundred => hundredth
             if (toWords.StartsWith("een", StringComparison.Ordinal))
@@ -160,9 +152,7 @@ namespace Humanizer.Localisation.NumberToWords
             return toWords;
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        static bool ExceptionNumbersToWords(int number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
     }
 }

@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.lv
+﻿namespace Humanizer.Tests.Localisation.lv
 {
     [UseCulture("lv-LV")]
     public class NumberToWordsTests
@@ -133,10 +131,8 @@ namespace Humanizer.Tests.Localisation.lv
         [InlineData(70000000, "septiņdesmit miljoni")]
         [InlineData(100000000, "simts miljoni")]
         [InlineData(800000000, "astoņi simti miljoni")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(21, "divdesmit pirmais")]
@@ -266,10 +262,8 @@ namespace Humanizer.Tests.Localisation.lv
         [InlineData(70000000, "septiņdesmit miljonais")]
         [InlineData(100000000, "simts miljonais")]
         [InlineData(800000000, "astoņi simti miljonais")]
-        public void ToOrdinalWordsMasculine(int number, string expected)
-        {
+        public void ToOrdinalWordsMasculine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(21, "divdesmit pirmā")]
@@ -399,9 +393,7 @@ namespace Humanizer.Tests.Localisation.lv
         [InlineData(70000000, "septiņdesmit miljonā")]
         [InlineData(100000000, "simts miljonā")]
         [InlineData(800000000, "astoņi simti miljonā")]
-        public void ToOrdinalWordsFeminine(int number, string expected)
-        {
+        public void ToOrdinalWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
     }
 }

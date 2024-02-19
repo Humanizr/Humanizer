@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.el
+﻿namespace Humanizer.Tests.Localisation.el
 {
     [UseCulture("el")]
     public class NumberToWordsTests
@@ -28,9 +26,7 @@ namespace Humanizer.Tests.Localisation.el
         [InlineData(1190, "χίλια εκατόν ενενήντα")]
 
         [Theory]
-        public void ToWordsInt(int number, string expected)
-        {
+        public void ToWordsInt(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
     }
 }

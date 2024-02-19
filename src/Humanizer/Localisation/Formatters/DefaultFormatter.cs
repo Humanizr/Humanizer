@@ -1,84 +1,46 @@
-﻿using System;
-using System.Globalization;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
     /// <summary>
     /// Default implementation of IFormatter interface.
     /// </summary>
     public class DefaultFormatter : IFormatter
     {
-        private readonly CultureInfo _culture;
+        readonly CultureInfo _culture;
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         /// <param name="localeCode">Name of the culture to use.</param>
-        public DefaultFormatter(string localeCode)
-        {
-            _culture = new CultureInfo(localeCode);
-        }
+        public DefaultFormatter(string localeCode) =>
+            _culture = new(localeCode);
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         /// <param name="culture">Culture to use.</param>
-        internal DefaultFormatter(CultureInfo culture)
-        {
+        internal DefaultFormatter(CultureInfo culture) =>
             _culture = culture;
-        }
 
-        /// <summary>
-        /// Now
-        /// </summary>
-        /// <returns>Returns Now</returns>
-        public virtual string DateHumanize_Now()
-        {
-            return GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
-        }
+        public virtual string DateHumanize_Now() =>
+            GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
 
-        /// <summary>
-        /// Never
-        /// </summary>
-        /// <returns>Returns Never</returns>
-        public virtual string DateHumanize_Never()
-        {
-            return Format(ResourceKeys.DateHumanize.Never);
-        }
+        public virtual string DateHumanize_Never() =>
+            Format(ResourceKeys.DateHumanize.Never);
 
         /// <summary>
         /// Returns the string representation of the provided DateTime
         /// </summary>
-        /// <param name="timeUnit"></param>
-        /// <param name="timeUnitTense"></param>
-        /// <param name="unit"></param>
-        /// <returns></returns>
-        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit)
-        {
-            return GetResourceForDate(timeUnit, timeUnitTense, unit);
-        }
+        public virtual string DateHumanize(TimeUnit timeUnit, Tense timeUnitTense, int unit) =>
+            GetResourceForDate(timeUnit, timeUnitTense, unit);
 
         /// <summary>
         /// 0 seconds
         /// </summary>
         /// <returns>Returns 0 seconds as the string representation of Zero TimeSpan</returns>
-        public virtual string TimeSpanHumanize_Zero()
-        {
-            return GetResourceForTimeSpan(TimeUnit.Millisecond, 0, true);
-        }
+        public virtual string TimeSpanHumanize_Zero() =>
+            GetResourceForTimeSpan(TimeUnit.Millisecond, 0, true);
 
         /// <summary>
         /// Returns the string representation of the provided TimeSpan
         /// </summary>
         /// <param name="timeUnit">A time unit to represent.</param>
-        /// <param name="unit"></param>
-        /// <param name="toWords"></param>
-        /// <returns></returns>
         /// <exception cref="System.ArgumentOutOfRangeException">Is thrown when timeUnit is larger than TimeUnit.Week</exception>
-        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false)
-        {
-            return GetResourceForTimeSpan(timeUnit, unit, toWords);
-        }
+        public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false) =>
+            GetResourceForTimeSpan(timeUnit, unit, toWords);
 
         /// <inheritdoc cref="IFormatter.DataUnitHumanize(DataUnit, double, bool)"/>
         public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
@@ -99,13 +61,13 @@ namespace Humanizer.Localisation.Formatters
             return Format(resourceKey);
         }
 
-        private string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
+        string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
         {
             var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
             return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
         }
 
-        private string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
+        string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
         {
             var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
             return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
@@ -115,7 +77,6 @@ namespace Humanizer.Localisation.Formatters
         /// Formats the specified resource key.
         /// </summary>
         /// <param name="resourceKey">The resource key.</param>
-        /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey)
         {
@@ -134,8 +95,6 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="resourceKey">The resource key.</param>
         /// <param name="number">The number.</param>
-        /// <param name="toWords"></param>
-        /// <returns></returns>
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey, int number, bool toWords = false)
         {
@@ -146,9 +105,12 @@ namespace Humanizer.Localisation.Formatters
                 throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
             }
 
-            return toWords
-                ? resourceString.FormatWith(number.ToWords(_culture))
-                : resourceString.FormatWith(number);
+            if (toWords)
+            {
+                return string.Format(resourceString, number.ToWords(_culture));
+            }
+
+            return string.Format(resourceString, number);
         }
 
         /// <summary>
@@ -156,20 +118,10 @@ namespace Humanizer.Localisation.Formatters
         /// </summary>
         /// <param name="resourceKey">The resource key that's being in formatting</param>
         /// <param name="number">The number of the units being used in formatting</param>
-        /// <returns></returns>
-        protected virtual string GetResourceKey(string resourceKey, int number)
-        {
-            return resourceKey;
-        }
+        protected virtual string GetResourceKey(string resourceKey, int number) =>
+            resourceKey;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="resourceKey"></param>
-        /// <returns></returns>
-        protected virtual string GetResourceKey(string resourceKey)
-        {
-            return resourceKey;
-        }
+        protected virtual string GetResourceKey(string resourceKey) =>
+            resourceKey;
     }
 }

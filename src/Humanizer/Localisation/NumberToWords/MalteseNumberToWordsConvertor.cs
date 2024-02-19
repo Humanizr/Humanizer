@@ -1,52 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class MalteseNumberToWordsConvertor : GenderedNumberToWordsConverter
+    class MalteseNumberToWordsConvertor : GenderedNumberToWordsConverter
     {
-        private static readonly string[] OrdinalOverrideMap =
-        {
+        static readonly string[] OrdinalOverrideMap =
+        [
             "0", "l-ewwel", "it-tieni", "it-tielet", "ir-raba'", "il-ħames", "is-sitt", "is-seba'", "it-tmien", "id-disa'",
             "l-għaxar", "il-ħdax", "it-tnax", "it-tlettax", "l-erbatax", "il-ħmistax", "is-sittax", "is-sbatax",
             "it-tmintax", "id-dsatax", "l-għoxrin"
-        };
+        ];
 
-        private static readonly string[] UnitsMap =
-        {
+        static readonly string[] UnitsMap =
+        [
             "żero", "wieħed", "tnejn", "tlieta", "erbgħa", "ħamsa", "sitta", "sebgħa", "tmienja", "disgħa", "għaxra",
             "ħdax", "tnax", "tlettax", "erbatax", "ħmistax", "sittax", "sbatax", "tmintax", "dsatax"
-        };
+        ];
 
-        private static readonly string[] TensMap =
-            {"zero", "għaxra", "għoxrin", "tletin", "erbgħin", "ħamsin", "sittin", "sebgħin", "tmenin", "disgħin"};
+        static readonly string[] TensMap =
+            ["zero", "għaxra", "għoxrin", "tletin", "erbgħin", "ħamsin", "sittin", "sebgħin", "tmenin", "disgħin"];
 
-        private static readonly string[] HundredsMap =
-        {
+        static readonly string[] HundredsMap =
+        [
             string.Empty, string.Empty, string.Empty, "tlett", "erbgħa", "ħames", "sitt", "sebgħa", "tminn", "disgħa",
             "għaxar"
-        };
+        ];
 
-        private static readonly string[] PrefixMap =
-        {
+        static readonly string[] PrefixMap =
+        [
             string.Empty, string.Empty, string.Empty, "tlett", "erbat", "ħamest", "sitt", "sebat", "tmint", "disat",
             "għaxart", "ħdax-il", "tnax-il", "tletax-il", "erbatax-il", "ħmistax-il", "sittax-il", "sbatax-il",
             "tmintax-il", "dsatax-il"
-        };
+        ];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
-            bool negativeNumber = false;
+            var negativeNumber = false;
 
             if (input < 0)
             {
                 negativeNumber = true;
-                input = input * -1;
+                input *= -1;
             }
 
             if (input < 1000000000)
             {
-                return GetMillions(input, gender) + (negativeNumber ? " inqas minn żero" : String.Empty);
+                return GetMillions(input, gender) + (negativeNumber ? " inqas minn żero" : string.Empty);
             }
 
             var billions = input / 1000000000;
@@ -61,7 +58,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return billionsText;
             }
 
-            return $"{billionsText} u {millionsText}" + (negativeNumber ? " inqas minn żero" : String.Empty);
+            return $"{billionsText} u {millionsText}" + (negativeNumber ? " inqas minn żero" : string.Empty);
         }
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender)
@@ -91,8 +88,8 @@ namespace Humanizer.Localisation.NumberToWords
             }
             return $"il-{Convert(number, gender)}";
         }
-        
-        private static string GetTens(long value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
+
+        static string GetTens(long value, bool usePrefixMap, bool usePrefixMapForLowerDigits, GrammaticalGender gender)
         {
             if (value == 1 && gender == GrammaticalGender.Feminine)
             {
@@ -109,7 +106,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return HundredsMap[value];
             }
 
-            if (value > 10 && value < 20 && usePrefixMap)
+            if (value is > 10 and < 20 && usePrefixMap)
             {
                 return PrefixMap[value];
             }
@@ -123,14 +120,13 @@ namespace Humanizer.Localisation.NumberToWords
             var numberOfTens = value / 10;
             if (single == 0)
             {
-
                 return TensMap[numberOfTens];
             }
 
             return $"{UnitsMap[single]} u {TensMap[numberOfTens]}";
         }
 
-        private static string GetHundreds(long value, bool usePrefixMap, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
+        static string GetHundreds(long value, bool usePrefixMap, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
         {
             if (value < 100)
             {
@@ -140,7 +136,7 @@ namespace Humanizer.Localisation.NumberToWords
             var tens = value % 100;
             var numberOfHundreds = value / 100;
 
-            var hundredsText = string.Empty;
+            string hundredsText;
             if (numberOfHundreds == 1)
             {
                 hundredsText = "mija";
@@ -162,7 +158,7 @@ namespace Humanizer.Localisation.NumberToWords
             return $"{hundredsText} u {GetTens(tens, usePrefixMap, usePrefixMapForLowerValueDigits, gender)}";
         }
 
-        private static string GetThousands(long value, GrammaticalGender gender)
+        static string GetThousands(long value, GrammaticalGender gender)
         {
             if (value < 1000)
             {
@@ -185,7 +181,7 @@ namespace Humanizer.Localisation.NumberToWords
             return $"{thousandsInText} u {hundredsInText}";
         }
 
-        private static string GetMillions(long value, GrammaticalGender gender)
+        static string GetMillions(long value, GrammaticalGender gender)
         {
             if (value < 1000000)
             {
@@ -207,7 +203,7 @@ namespace Humanizer.Localisation.NumberToWords
             return $"{millionsText} u {thousandsText}";
         }
 
-        private static string GetPrefixText(long thousands, long tensInThousands, string singular, string dual, string plural, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
+        static string GetPrefixText(long thousands, long tensInThousands, string singular, string dual, string plural, bool usePrefixMapForLowerValueDigits, GrammaticalGender gender)
         {
             if (thousands == 1)
             {
@@ -235,7 +231,6 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return $"{GetHundreds(thousands, true, usePrefixMapForLowerValueDigits, gender)} {plural}";
-
         }
     }
 }

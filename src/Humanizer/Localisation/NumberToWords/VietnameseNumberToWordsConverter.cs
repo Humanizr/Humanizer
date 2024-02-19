@@ -1,30 +1,24 @@
-﻿using System;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private const int OneBillion = 1000000000;
-        private const int OneMillion = 1000000;
+        const int OneBillion = 1000000000;
+        const int OneMillion = 1000000;
 
-        private static readonly string[] NumberVerbalPairs =
-        {
+        static readonly string[] NumberVerbalPairs =
+        [
             "", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"
-        };
+        ];
 
-        public override string Convert(long number)
-        {
-            return number == 0
+        public override string Convert(long number) =>
+            number == 0
                 ? "không"
                 : ConvertImpl(number);
-        }
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return $"thứ {ConvertToOrdinalImpl(number)}";
-        }
+        public override string ConvertToOrdinal(int number) =>
+            $"thứ {ConvertToOrdinalImpl(number)}";
 
-        private string ConvertToOrdinalImpl(int number)
+        string ConvertToOrdinalImpl(int number)
         {
             switch (number)
             {
@@ -39,7 +33,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static string ConvertImpl(long number, bool hasTens = false, bool isGreaterThanOneHundred = false)
+        static string ConvertImpl(long number, bool hasTens = false, bool isGreaterThanOneHundred = false)
         {
             if (number >= OneBillion)
             {

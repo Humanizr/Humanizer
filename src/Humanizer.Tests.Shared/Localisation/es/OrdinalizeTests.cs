@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.es
+﻿namespace Humanizer.Tests.Localisation.es
 {
     [UseCulture("es-ES")]
     public class OrdinalizeTests
@@ -10,18 +6,14 @@ namespace Humanizer.Tests.Localisation.es
         [Theory]
         [InlineData(1, "1.º")]
         [InlineData(3, "3.º")]
-        public void OrdinalizeDefaultGender(int number, string ordinalized)
-        {
+        public void OrdinalizeDefaultGender(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(), ordinalized);
-        }
 
         [Theory]
         [InlineData(-1, "1.º")]
         [InlineData(int.MinValue, "0")]
-        public void OrdinalizeZeroOrNegativeNumber(int number, string ordinalized)
-        {
+        public void OrdinalizeZeroOrNegativeNumber(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(), ordinalized);
-        }
 
         [Theory]
         [InlineData(1, WordForm.Abbreviation, "1.er")]
@@ -64,10 +56,8 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData("102", "102.º")]
         [InlineData("103", "103.º")]
         [InlineData("1001", "1001.º")]
-        public void OrdinalizeString(string number, string ordinalized)
-        {
+        public void OrdinalizeString(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData("0", "0")]
@@ -83,10 +73,8 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData("102", "102.ª")]
         [InlineData("103", "103.ª")]
         [InlineData("1001", "1001.ª")]
-        public void OrdinalizeStringFeminine(string number, string ordinalized)
-        {
+        public void OrdinalizeStringFeminine(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0")]
@@ -103,10 +91,8 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(102, "102.º")]
         [InlineData(103, "103.º")]
         [InlineData(1001, "1001.º")]
-        public void OrdinalizeNumber(int number, string ordinalized)
-        {
+        public void OrdinalizeNumber(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0")]
@@ -123,9 +109,7 @@ namespace Humanizer.Tests.Localisation.es
         [InlineData(102, "102.ª")]
         [InlineData(103, "103.ª")]
         [InlineData(1001, "1001.ª")]
-        public void OrdinalizeNumberFeminine(int number, string ordinalized)
-        {
+        public void OrdinalizeNumberFeminine(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
     }
 }

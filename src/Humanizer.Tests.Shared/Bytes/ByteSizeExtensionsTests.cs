@@ -1,13 +1,8 @@
-﻿using System.Globalization;
-using Humanizer.Bytes;
-using Xunit;
-
-namespace Humanizer.Tests.Bytes
+﻿namespace Humanizer.Tests.Bytes
 {
     [UseCulture("en")]
     public class ByteSizeExtensionsTests
     {
-
         [Fact]
         public void ByteTerabytes()
         {

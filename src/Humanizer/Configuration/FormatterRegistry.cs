@@ -1,10 +1,6 @@
-﻿using System.Globalization;
-
-using Humanizer.Localisation.Formatters;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
-    internal class FormatterRegistry : LocaliserRegistry<IFormatter>
+    class FormatterRegistry : LocaliserRegistry<IFormatter>
     {
         public static FormatterRegistry CreateInstance()
         {
@@ -79,9 +75,11 @@ namespace Humanizer.Configuration
             RegisterDefaultFormatter("zh-Hant");
             RegisterDefaultFormatter("th-TH");
             RegisterDefaultFormatter("en-IN");
+            Register("lt", new LithuanianFormatter());
+            Register("lb", new LuxembourgishFormatter());
         }
 
-        private void RegisterDefaultFormatter(string localeCode)
+        void RegisterDefaultFormatter(string localeCode)
         {
             try
             {
@@ -93,9 +91,7 @@ namespace Humanizer.Configuration
             }
         }
 
-        private void RegisterCzechSlovakPolishFormatter(string localeCode)
-        {
+        void RegisterCzechSlovakPolishFormatter(string localeCode) =>
             Register(localeCode, new CzechSlovakPolishFormatter(localeCode));
-        }
     }
 }

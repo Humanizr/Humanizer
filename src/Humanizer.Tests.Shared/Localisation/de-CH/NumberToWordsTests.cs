@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.deCH
+﻿namespace Humanizer.Tests.Localisation.deCH
 {
     [UseCulture("de-CH")]
     public class NumberToWordsTests
@@ -49,18 +47,14 @@ namespace Humanizer.Tests.Localisation.deCH
         [InlineData(8183162164626926, "acht Billiarden einhundertdreiundachtzig Billionen einhundertzweiundsechzig Milliarden einhundertvierundsechzig Millionen sechshundertsechsundzwanzigtausendneunhundertsechsundzwanzig")]
         [InlineData(4564121926659524672, "vier Trillionen fünfhundertvierundsechzig Billiarden einhunderteinundzwanzig Billionen neunhundertsechsundzwanzig Milliarden sechshundertneunundfünfzig Millionen fünfhundertvierundzwanzigtausendsechshundertzweiundsiebzig")]
         [InlineData(-751633619, "minus siebenhunderteinundfünfzig Millionen sechshundertdreiunddreissigtausendsechshundertneunzehn")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1, "eine")]
         [InlineData(3501, "dreitausendfünfhunderteine")]
-        public void ToWordsFeminine(long number, string expected)
-        {
+        public void ToWordsFeminine(long number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "nullter")]
@@ -103,10 +97,8 @@ namespace Humanizer.Tests.Localisation.deCH
         [InlineData(751633617, "siebenhunderteinundfünfzigmillionensechshundertdreiunddreissigtausendsechshundertsiebzehnter")]
         [InlineData(1111111118, "einemilliardeeinhundertelfmillioneneinhundertelftausendeinhundertachtzehnter")]
         [InlineData(-751633619, "minus siebenhunderteinundfünfzigmillionensechshundertdreiunddreissigtausendsechshundertneunzehnter")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "nullte")]
@@ -129,10 +121,8 @@ namespace Humanizer.Tests.Localisation.deCH
         [InlineData(751633617, "siebenhunderteinundfünfzigmillionensechshundertdreiunddreissigtausendsechshundertsiebzehnte")]
         [InlineData(1111111118, "einemilliardeeinhundertelfmillioneneinhundertelftausendeinhundertachtzehnte")]
         [InlineData(-751633619, "minus siebenhunderteinundfünfzigmillionensechshundertdreiunddreissigtausendsechshundertneunzehnte")]
-        public void ToOrdinalWordsFeminine(int number, string expected)
-        {
+        public void ToOrdinalWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "nulltes")]
@@ -155,9 +145,7 @@ namespace Humanizer.Tests.Localisation.deCH
         [InlineData(751633617, "siebenhunderteinundfünfzigmillionensechshundertdreiunddreissigtausendsechshundertsiebzehntes")]
         [InlineData(1111111118, "einemilliardeeinhundertelfmillioneneinhundertelftausendeinhundertachtzehntes")]
         [InlineData(-751633619, "minus siebenhunderteinundfünfzigmillionensechshundertdreiunddreissigtausendsechshundertneunzehntes")]
-        public void ToOrdinalWordsNeuter(int number, string expected)
-        {
+        public void ToOrdinalWordsNeuter(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-        }
     }
 }

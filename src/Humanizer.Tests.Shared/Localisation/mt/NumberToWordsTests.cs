@@ -1,10 +1,8 @@
-﻿using Xunit;
-namespace Humanizer.Tests.Localisation.mt
+﻿namespace Humanizer.Tests.Localisation.mt
 {
     [UseCulture("mt")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "żero")]
         [InlineData(1, "wieħed")]
@@ -94,21 +92,17 @@ namespace Humanizer.Tests.Localisation.mt
         [InlineData(2000000000, "żewġ biljuni")]
         [InlineData(2147483647, "żewġ biljuni u mija u sebgħa u erbgħin miljun u erbgħa mija u tlieta u tmenin elf u sitt mija u sebgħa u erbgħin")]
         [InlineData(-2147483647, "żewġ biljuni u mija u sebgħa u erbgħin miljun u erbgħa mija u tlieta u tmenin elf u sitt mija u sebgħa u erbgħin inqas minn żero")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
-        
+
         [Theory]
         [InlineData(1, "waħda")]
         [InlineData(1001, "elf u waħda")]
         [InlineData(100001, "mitt elf u waħda")]
         [InlineData(1000000001, "biljun u waħda")]
-        public void ToFeminineWords(int number, string expected)
-        {
+        public void ToFeminineWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
-        
+
         [Theory]
         [InlineData(0, "żero")]
         [InlineData(1, "wieħed")]
@@ -195,10 +189,8 @@ namespace Humanizer.Tests.Localisation.mt
         [InlineData(1101111101, "biljun u mija u miljun u mija u ħdax-il elf u mija u wieħed")]
         [InlineData(2000000000, "żewġ biljuni")]
         [InlineData(2147483647, "żewġ biljuni u mija u sebgħa u erbgħin miljun u erbgħa mija u tlieta u tmenin elf u sitt mija u sebgħa u erbgħin")]
-        public void ToMasculineWords(int number, string expected)
-        {
+        public void ToMasculineWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(0, "0")]
@@ -223,10 +215,8 @@ namespace Humanizer.Tests.Localisation.mt
         [InlineData(1001, "l-elf u wieħed")]
         [InlineData(2000, "l-elfejn")]
         [InlineData(3000, "it-tlett elef")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "0")]
@@ -251,10 +241,8 @@ namespace Humanizer.Tests.Localisation.mt
         [InlineData(1001, "l-elf u waħda")]
         [InlineData(2000, "l-elfejn")]
         [InlineData(3000, "it-tlett elef")]
-        public void ToFeminineOrdinalWords(int number, string expected)
-        {
+        public void ToFeminineOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "0")]
@@ -279,9 +267,7 @@ namespace Humanizer.Tests.Localisation.mt
         [InlineData(1001, "l-elf u wieħed")]
         [InlineData(2000, "l-elfejn")]
         [InlineData(3000, "it-tlett elef")]
-        public void ToMasculineOrdinalWords(int number, string expected)
-        {
+        public void ToMasculineOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
-        }
     }
 }

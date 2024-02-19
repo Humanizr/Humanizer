@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.pl
+﻿namespace Humanizer.Tests.Localisation.pl
 {
     [UseCulture("pl")]
     public class TimeSpanHumanizeTests
@@ -14,10 +11,8 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(5, "5 milisekund")]
         [InlineData(6, "6 milisekund")]
         [InlineData(10, "10 milisekund")]
-        public void Milliseconds(int number, string expected)
-        {
+        public void Milliseconds(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMilliseconds(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 sekunda")]
@@ -27,10 +22,8 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(5, "5 sekund")]
         [InlineData(6, "6 sekund")]
         [InlineData(10, "10 sekund")]
-        public void Seconds(int number, string expected)
-        {
+        public void Seconds(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromSeconds(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 minuta")]
@@ -40,10 +33,8 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(5, "5 minut")]
         [InlineData(6, "6 minut")]
         [InlineData(10, "10 minut")]
-        public void Minutes(int number, string expected)
-        {
+        public void Minutes(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMinutes(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 godzina")]
@@ -53,10 +44,8 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(5, "5 godzin")]
         [InlineData(6, "6 godzin")]
         [InlineData(10, "10 godzin")]
-        public void Hours(int number, string expected)
-        {
+        public void Hours(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromHours(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 dzień")]
@@ -65,10 +54,8 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(4, "4 dni")]
         [InlineData(5, "5 dni")]
         [InlineData(6, "6 dni")]
-        public void Days(int number, string expected)
-        {
+        public void Days(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 tydzień")]
@@ -77,11 +64,8 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(4, "4 tygodnie")]
         [InlineData(5, "5 tygodni")]
         [InlineData(6, "6 tygodni")]
-        public void Weeks(int number, string expected)
-        {
+        public void Weeks(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
-        }
-
 
         [Theory]
         [Trait("Translation", "Google")]
@@ -89,10 +73,8 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(61, "2 miesiące")]
         [InlineData(92, "3 miesiące")]
         [InlineData(335, "11 miesięcy")]
-        public void Months(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Months(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [Trait("Translation", "Google")]
@@ -100,21 +82,15 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(731, "2 lata")]
         [InlineData(1096, "3 lata")]
         [InlineData(4018, "11 lat")]
-        public void Years(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Years(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Fact]
-        public void NoTime()
-        {
+        public void NoTime() =>
             Assert.Equal("0 milisekund", TimeSpan.Zero.Humanize());
-        }
 
         [Fact]
-        public void NoTimeToWords()
-        {
+        public void NoTimeToWords() =>
             Assert.Equal("brak czasu", TimeSpan.Zero.Humanize(toWords: true));
-        }
     }
 }

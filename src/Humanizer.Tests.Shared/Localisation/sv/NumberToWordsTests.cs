@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.sv
+﻿namespace Humanizer.Tests.Localisation.sv
 {
     [UseCulture("sv-SE")]
     public class NumberToWordsTests
@@ -43,10 +41,8 @@ namespace Humanizer.Tests.Localisation.sv
         [InlineData(111, "hundraelva")]
         [InlineData(1112, "ett tusen hundratolv")]
         [InlineData(11213, "elva tusen tvåhundratretton")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "nollte")]
@@ -77,9 +73,7 @@ namespace Humanizer.Tests.Localisation.sv
         [InlineData(10000, "tio tusende")]
         [InlineData(100000, "hundra tusende")]
         [InlineData(1000000, "en miljonte")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
     }
 }

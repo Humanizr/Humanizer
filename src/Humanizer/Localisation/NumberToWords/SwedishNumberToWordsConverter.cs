@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton" };
-        private static readonly string[] TensMap = { "noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra" };
+        static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
+        static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];
 
-        private class Fact
+        class Fact
         {
             public int Value { get; set; }
             public string Name { get; set; }
@@ -19,17 +15,17 @@ namespace Humanizer.Localisation.NumberToWords
             public GrammaticalGender Gender { get; set; } = GrammaticalGender.Neuter;
         }
 
-        private static readonly Fact[] Hunderds =
-        {
-            new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new Fact {Value = 1000000,    Name = "miljon", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new Fact {Value = 1000,       Name = "tusen", Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
-            new Fact {Value = 100,        Name = "hundra", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
-        };
-         
+        static readonly Fact[] Hunderds =
+        [
+            new(){Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
+            new(){Value = 1000000,    Name = "miljon", Prefix = " ",  Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
+            new(){Value = 1000,       Name = "tusen",  Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
+            new(){Value = 100,        Name = "hundra", Prefix = "",   Postfix = "",  DisplayOneUnit = false}
+        ];
+
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
@@ -42,7 +38,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number, gender));
+                return $"minus {Convert(-number, gender)}";
             }
 
             var word = "";
@@ -109,13 +105,11 @@ namespace Humanizer.Localisation.NumberToWords
 
             return word;
         }
-        public override string Convert(long input)
-        {
-            return Convert(input, GrammaticalGender.Neuter);
-        }
+        public override string Convert(long input) =>
+            Convert(input, GrammaticalGender.Neuter);
 
-        private static string[] ordinalNumbers = new[]
-        {
+        static string[] ordinalNumbers =
+        [
             "nollte",
             "första",
             "andra",
@@ -136,8 +130,8 @@ namespace Humanizer.Localisation.NumberToWords
             "sjuttonde",
             "artonde",
             "nittonde",
-            "tjugonde",
-        };
+            "tjugonde"
+        ];
 
         public override string ConvertToOrdinal(int number)
         {
@@ -194,7 +188,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
 
                 // suffix -de/-te
-                if (divided > 0 && (number % m.Value) == 0)
+                if (number % m.Value == 0)
                 {
                     switch (number)
                     {

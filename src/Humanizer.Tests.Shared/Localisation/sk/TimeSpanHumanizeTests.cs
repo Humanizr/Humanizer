@@ -1,22 +1,16 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.sk
+﻿namespace Humanizer.Tests.Localisation.sk
 {
     [UseCulture("sk-SK")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "1 rok")]
         [InlineData(731, "2 roky")]
         [InlineData(1096, "3 roky")]
         [InlineData(4018, "11 rokov")]
-        public void Years(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Years(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [Trait("Translation", "Google")]
@@ -24,10 +18,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(61, "2 mesiace")]
         [InlineData(92, "3 mesiace")]
         [InlineData(335, "11 mesiacov")]
-        public void Months(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Months(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [InlineData(1, "1 milisekunda")]
@@ -37,10 +29,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "5 milisekúnd")]
         [InlineData(6, "6 milisekúnd")]
         [InlineData(10, "10 milisekúnd")]
-        public void Milliseconds(int number, string expected)
-        {
+        public void Milliseconds(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMilliseconds(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 sekunda")]
@@ -50,10 +40,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "5 sekúnd")]
         [InlineData(6, "6 sekúnd")]
         [InlineData(10, "10 sekúnd")]
-        public void Seconds(int number, string expected)
-        {
+        public void Seconds(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromSeconds(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 minúta")]
@@ -63,10 +51,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "5 minút")]
         [InlineData(6, "6 minút")]
         [InlineData(10, "10 minút")]
-        public void Minutes(int number, string expected)
-        {
+        public void Minutes(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromMinutes(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 hodina")]
@@ -76,10 +62,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "5 hodín")]
         [InlineData(6, "6 hodín")]
         [InlineData(10, "10 hodín")]
-        public void Hours(int number, string expected)
-        {
+        public void Hours(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromHours(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 deň")]
@@ -88,10 +72,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(4, "4 dni")]
         [InlineData(5, "5 dní")]
         [InlineData(6, "6 dní")]
-        public void Days(int number, string expected)
-        {
+        public void Days(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(number).Humanize());
-        }
 
         [Theory]
         [InlineData(1, "1 týždeň")]
@@ -100,9 +82,7 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(4, "4 týždne")]
         [InlineData(5, "5 týždňov")]
         [InlineData(6, "6 týždňov")]
-        public void Weeks(int number, string expected)
-        {
+        public void Weeks(int number, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
-        }
     }
 }

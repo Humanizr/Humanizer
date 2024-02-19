@@ -1,14 +1,8 @@
-﻿using Humanizer.Localisation.GrammaticalNumber;
-
-namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class RussianFormatter : DefaultFormatter
+    class RussianFormatter() :
+        DefaultFormatter("ru")
     {
-        public RussianFormatter()
-            : base("ru")
-        {
-        }
-
         protected override string GetResourceKey(string resourceKey, int number)
         {
             var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(number);
@@ -16,7 +10,7 @@ namespace Humanizer.Localisation.Formatters
             return resourceKey + suffix;
         }
 
-        private string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
+        static string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
         {
             if (grammaticalNumber == RussianGrammaticalNumber.Singular)
             {

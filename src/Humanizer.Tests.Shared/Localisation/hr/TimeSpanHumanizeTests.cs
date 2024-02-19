@@ -1,22 +1,16 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.hr
+﻿namespace Humanizer.Tests.Localisation.hr
 {
     [UseCulture("hr-HR")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "1 godina")]
         [InlineData(731, "2 godine")]
         [InlineData(1096, "3 godine")]
         [InlineData(4018, "11 godina")]
-        public void Years(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Years(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [Trait("Translation", "Google")]
@@ -24,10 +18,8 @@ namespace Humanizer.Tests.Localisation.hr
         [InlineData(61, "2 mjeseca")]
         [InlineData(92, "3 mjeseca")]
         [InlineData(335, "11 mjeseci")]
-        public void Months(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Months(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [InlineData(1, "1 dan")]
@@ -37,9 +29,7 @@ namespace Humanizer.Tests.Localisation.hr
         [InlineData(5, "5 dana")]
         [InlineData(7, "1 tjedan")]
         [InlineData(14, "2 tjedna")]
-        public void Days(int days, string expected)
-        {
+        public void Days(int days, string expected) =>
             Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
-        }
     }
 }

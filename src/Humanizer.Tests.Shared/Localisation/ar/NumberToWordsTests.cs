@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ar
+﻿namespace Humanizer.Tests.Localisation.ar
 {
     [UseCulture("ar")]
     public class NumberToWordsTests
@@ -13,10 +11,8 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData("أحد عشر", 11)]
         [InlineData("ثلاثة آلاف و خمس مئة و واحد", 3501)]
         [InlineData("مليون و واحد", 1000001)]
-        public void ToWordsArabic(string expected, int number)
-        {
+        public void ToWordsArabic(string expected, int number) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData("ناقص واحد", -1)]
@@ -25,10 +21,8 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData("ناقص أحد عشر", -11)]
         [InlineData("ناقص ثلاثة آلاف و خمس مئة و واحد", -3501)]
         [InlineData("ناقص مليون و واحد", -1000001)]
-        public void ToWordsArabicNegative(string expected, int number)
-        {
+        public void ToWordsArabicNegative(string expected, int number) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1L, "واحد")]
@@ -54,10 +48,8 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(8750000500001L, "ثمانية تريليونات و سبع مئة و خمسون ملياراً و خمس مئة ألفاً و واحد")]
         [InlineData(-10000000001L, "ناقص عشرة مليارات و واحد")]
         [InlineData(-8750000500001L, "ناقص ثمانية تريليونات و سبع مئة و خمسون ملياراً و خمس مئة ألفاً و واحد")]
-        public void ToWordsArabicLong(long number, string expected)
-        {
+        public void ToWordsArabicLong(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData("صفر", 0)]
@@ -67,27 +59,21 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData("إحدى عشرة", 11)]
         [InlineData("ثلاثة آلاف و خمس مئة و واحدة", 3501)]
         [InlineData("مليون و واحدة", 1000001)]
-        public void ToWordsArabicFeminine(string expected, long number)
-        {
+        public void ToWordsArabicFeminine(string expected, long number) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData("عشرة مليارات و واحدة", 10000000001)]
         [InlineData("ثمانية تريليونات و سبع مئة و خمسون ملياراً و خمس مئة ألفاً و واحدة", 8750000500001)]
-        public void ToWordsArabicLongFeminine(string expected, long number)
-        {
+        public void ToWordsArabicLongFeminine(string expected, long number) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(122, "مئة و اثنتان و عشرون", GrammaticalGender.Feminine)]
         [InlineData(3501, "ثلاثة آلاف و خمس مئة و واحدة", GrammaticalGender.Feminine)]
         [InlineData(3501, "ثلاثة آلاف و خمس مئة و واحد", GrammaticalGender.Neuter)]
-        public void ToWordsWithGender(long number, string expected, GrammaticalGender gender)
-        {
+        public void ToWordsWithGender(long number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
 
         [Theory]
         [InlineData(0, "الصفر")]
@@ -138,10 +124,8 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(100000, "المئة ألف")]
         [InlineData(1000000, "المليون")]
         [InlineData(1020135, "الخامس و الثلاثون بعد المليون و عشرون ألفاً و مئة")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "الصفر")]
@@ -192,9 +176,7 @@ namespace Humanizer.Tests.Localisation.ar
         [InlineData(100000, "المئة ألف")]
         [InlineData(1000000, "المليون")]
         [InlineData(1020135, "الخامسة و الثلاثون بعد المليون و عشرون ألفاً و مئة")]
-        public void ToOrdinalWordsWithFeminineGender(int number, string words)
-        {
+        public void ToOrdinalWordsWithFeminineGender(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
     }
 }

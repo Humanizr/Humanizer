@@ -1,6 +1,6 @@
-﻿namespace Humanizer.Localisation.GrammaticalNumber
+﻿namespace Humanizer
 {
-    internal static class RussianGrammaticalNumberDetector
+    static class RussianGrammaticalNumberDetector
     {
         public static RussianGrammaticalNumber Detect(long number)
         {
@@ -14,7 +14,7 @@
                     return RussianGrammaticalNumber.Singular;
                 }
 
-                if (unity > 1 && unity < 5) // 2, 3, 4, 22, 23, 24 ...
+                if (unity is > 1 and < 5) // 2, 3, 4, 22, 23, 24 ...
                 {
                     return RussianGrammaticalNumber.Paucal;
                 }

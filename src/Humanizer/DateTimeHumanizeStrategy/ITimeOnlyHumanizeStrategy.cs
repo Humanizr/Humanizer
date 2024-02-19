@@ -1,9 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-using System.Globalization;
-
-namespace Humanizer.DateTimeHumanizeStrategy
+namespace Humanizer
 {
     /// <summary>
     /// Implement this interface to create a new strategy for TimeOnly.Humanize and hook it in the Configurator.TimeOnlyHumanizeStrategy

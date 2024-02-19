@@ -1,10 +1,8 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer
 {
-    internal class GermanOrdinalizer : DefaultOrdinalizer
+    class GermanOrdinalizer : DefaultOrdinalizer
     {
-        public override string Convert(int number, string numberString)
-        {
-            return numberString + ".";
-        }
+        public override string Convert(int number, string numberString) =>
+            numberString + ".";
     }
 }

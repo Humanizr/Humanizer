@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class OrdinalizeTests
@@ -36,10 +32,8 @@ namespace Humanizer.Tests
         [InlineData("110", "110th")]
         [InlineData("1000", "1000th")]
         [InlineData("1001", "1001st")]
-        public void OrdinalizeString(string number, string ordinalized)
-        {
+        public void OrdinalizeString(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0th")]
@@ -70,10 +64,8 @@ namespace Humanizer.Tests
         [InlineData(110, "110th")]
         [InlineData(1000, "1000th")]
         [InlineData(1001, "1001st")]
-        public void OrdinalizeNumber(int number, string ordinalized)
-        {
+        public void OrdinalizeNumber(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(), ordinalized);
-        }
 
         [Theory]
         [InlineData(0)]

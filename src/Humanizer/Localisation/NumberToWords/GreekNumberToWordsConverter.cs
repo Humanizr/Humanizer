@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private readonly string[] UnitMap = { "μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα" };
+        readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
 
-        private readonly string[] UnitsMap = { "μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα" };
+        readonly string[] UnitsMap = ["μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
 
-        private readonly string[] TensMap = { "", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα" };
+        readonly string[] TensMap = ["", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα"];
 
-        private readonly string[] TensNoDiacriticsMap = { "", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα" };
+        readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
 
-        private readonly string[] HundredMap = { "", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια" };
+        readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
 
-        private readonly string[] HundredsMap = { "", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "Εενιακόσιες" };
+        readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
 
-        private static readonly Dictionary<long, string> ΟrdinalMap = new()
+        static readonly Dictionary<long, string> ΟrdinalMap = new()
         {
             { 0, string.Empty },
             { 1, "πρώτος" },
@@ -51,11 +47,8 @@ namespace Humanizer.Localisation.NumberToWords
             { 1000, "χιλιοστός" }
         };
 
-
-        public override string Convert(long number)
-        {
-            return ConvertImpl(number, false);
-        }
+        public override string Convert(long number) =>
+            ConvertImpl(number, false);
 
         public override string ConvertToOrdinal(int number)
         {
@@ -66,7 +59,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number / 10 > 0 && number / 10 < 10)
             {
-                return GetTwoDigigOrdinal(number);
+                return GetTwoDigitOrdinal(number);
 
             }
 
@@ -83,15 +76,17 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Empty;
         }
 
-       
-        private string GetOneDigitOrdinal(int number)
+        static string GetOneDigitOrdinal(int number)
         {
-            if (!ΟrdinalMap.TryGetValue(number, out var output)) return string.Empty;
+            if (ΟrdinalMap.TryGetValue(number, out var output))
+            {
+                return output;
+            }
 
-            return output;
+            return string.Empty;
         }
 
-        private string GetTwoDigigOrdinal(int number)
+        static string GetTwoDigitOrdinal(int number)
         {
             if (number == 11) return "ενδέκατος";
             if (number == 12) return "δωδέκατος";
@@ -108,29 +103,27 @@ namespace Humanizer.Localisation.NumberToWords
             return decadesString;
         }
 
-        private string GetThreeDigitOrdinal(int number)
+        static string GetThreeDigitOrdinal(int number)
         {
+            var hundreds = number / 100;
 
-            var hundrends = number / 100;
+            if (!ΟrdinalMap.TryGetValue(hundreds*100, out var hundredsString)) return string.Empty;
 
-            if (!ΟrdinalMap.TryGetValue(hundrends*100, out var hundrentsString)) return string.Empty;
-
-            if (number - hundrends*100> 10)
+            if (number - hundreds*100> 10)
             {
-                return hundrentsString + " " + GetTwoDigigOrdinal(number - hundrends*100);
+                return hundredsString + " " + GetTwoDigitOrdinal(number - hundreds*100);
             }
 
-            if(number - hundrends * 100 > 0)
+            if(number - hundreds * 100 > 0)
             {
-                return hundrentsString + " " + GetOneDigitOrdinal(number - hundrends*100);
+                return hundredsString + " " + GetOneDigitOrdinal(number - hundreds*100);
             }
 
-            return hundrentsString;
+            return hundredsString;
         }
 
-        private string GetFourDigitOrdinal(int number)
+        static string GetFourDigitOrdinal(int number)
         {
-
             var thousands = number / 1000;
 
             if (!ΟrdinalMap.TryGetValue(thousands*1000, out var thousandsString)) return string.Empty;
@@ -142,7 +135,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number - thousands * 1000 > 10)
             {
-                return thousandsString + " " + GetTwoDigigOrdinal(number - thousands * 1000);
+                return thousandsString + " " + GetTwoDigitOrdinal(number - thousands * 1000);
             }
 
             if (number - thousands * 1000 > 0)
@@ -151,32 +144,32 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             return thousandsString;
-
         }
 
-        private string ConvertImpl(long number, bool returnPluralized)
+        string ConvertImpl(long number, bool returnPluralized)
         {
             if (number < 13)
             {
-                return ConvertIntΒ13(number, returnPluralized);
+                return ConvertIntB13(number, returnPluralized);
             }
-            else if (number < 100)
+
+            if (number < 100)
             {
                 return ConvertIntBH(number, returnPluralized);
             }
-            else if (number < 1000)
+            if (number < 1000)
             {
                 return ConvertIntBT(number, returnPluralized);
             }
-            else if (number < 1000000)
+            if (number < 1000000)
             {
                 return ConvertIntBM(number);
             }
-            else if (number < 1000000000)
+            if (number < 1000000000)
             {
                 return ConvertIntBB(number);
             }
-            else if (number < 1000000000000)
+            if (number < 1000000000000)
             {
                 return ConvertIntBTR(number);
             }
@@ -184,14 +177,12 @@ namespace Humanizer.Localisation.NumberToWords
             return "";
         }
 
-        private string ConvertIntΒ13(long number, bool returnPluralized)
-        {
-            return returnPluralized ? UnitsMap[number] : UnitMap[number];
-        }
+        string ConvertIntB13(long number, bool returnPluralized) =>
+            returnPluralized ? UnitsMap[number] : UnitMap[number];
 
-        private string ConvertIntBH(long number, bool returnPluralized)
+        string ConvertIntBH(long number, bool returnPluralized)
         {
-            var result = (number / 10 == 1) ? TensNoDiacriticsMap[number / 10] : TensMap[number / 10];
+            var result = number / 10 == 1 ? TensNoDiacriticsMap[number / 10] : TensMap[number / 10];
 
             if (number % 10 != 0)
             {
@@ -206,9 +197,9 @@ namespace Humanizer.Localisation.NumberToWords
             return result;
         }
 
-        private string ConvertIntBT(long number, bool returnPluralized)
+        string ConvertIntBT(long number, bool returnPluralized)
         {
-            var result = "";
+            string result;
 
             if (number / 100 == 1)
             {
@@ -232,7 +223,7 @@ namespace Humanizer.Localisation.NumberToWords
             return result;
         }
 
-        private string ConvertIntBM(long number)
+        string ConvertIntBM(long number)
         {
             if (number / 1000 == 1)
             {
@@ -254,7 +245,7 @@ namespace Humanizer.Localisation.NumberToWords
             return result;
         }
 
-        private string ConvertIntBB(long number)
+        string ConvertIntBB(long number)
         {
             if (number / 1000000 == 1)
             {
@@ -276,7 +267,7 @@ namespace Humanizer.Localisation.NumberToWords
             return result;
         }
 
-        private string ConvertIntBTR(long number)
+        string ConvertIntBTR(long number)
         {
             if (number / 1000000000 == 1)
             {

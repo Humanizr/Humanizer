@@ -1,10 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-
-using Humanizer;
-
-namespace Humanizer.Localisation.TimeToClockNotation
+namespace Humanizer
 {
     /// <summary>
     /// The interface used to localise the ToClockNotation method.
@@ -12,11 +8,8 @@ namespace Humanizer.Localisation.TimeToClockNotation
     public interface ITimeOnlyToClockNotationConverter
     {
         /// <summary>
-        /// Converts the time to Clock Notation 
+        /// Converts the time to Clock Notation
         /// </summary>
-        /// <param name="time"></param>
-        /// <param name="roundToNearestFive"></param>
-        /// <returns></returns>
         string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive);
     }
 }

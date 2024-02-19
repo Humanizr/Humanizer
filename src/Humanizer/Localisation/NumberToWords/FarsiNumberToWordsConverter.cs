@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] FarsiHundredsMap = { "صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد" };
-        private static readonly string[] FarsiTensMap = { "صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود" };
-        private static readonly string[] FarsiUnitsMap = { "صفر", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه", "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده" };
+        static readonly string[] FarsiHundredsMap = ["صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"];
+        static readonly string[] FarsiTensMap = ["صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"];
+        static readonly string[] FarsiUnitsMap = ["صفر", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه", "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده"];
 
-        public override string Convert(long input)
+        public override string Convert(long number)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
-
             if (number < 0)
             {
-                return string.Format("منفی {0}", Convert(-number));
+                return $"منفی {Convert(-number)}";
             }
 
             if (number == 0)
@@ -27,12 +18,15 @@ namespace Humanizer.Localisation.NumberToWords
                 return "صفر";
             }
 
-            var farsiGroupsMap = new Dictionary<int, Func<int, string>>
+            var farsiGroupsMap = new Dictionary<long, Func<long, string>>
             {
-                {(int)Math.Pow(10, 9), n => string.Format("{0} میلیارد", Convert(n)) },
-                {(int)Math.Pow(10, 6), n => string.Format("{0} میلیون", Convert(n)) },
-                {(int)Math.Pow(10, 3), n => string.Format("{0} هزار", Convert(n)) },
-                {(int)Math.Pow(10, 2), n => FarsiHundredsMap[n]}
+                {(long)Math.Pow(10, 18), n => $"{Convert(n)} تریلیون"},
+                {(long)Math.Pow(10, 15), n => $"{Convert(n)} بیلیارد"},
+                {(long)Math.Pow(10, 12), n => $"{Convert(n)} بیلیون"},
+                {(long)Math.Pow(10, 9), n => $"{Convert(n)} میلیارد"},
+                {(long)Math.Pow(10, 6), n => $"{Convert(n)} میلیون"},
+                {(long)Math.Pow(10, 3), n => $"{Convert(n)} هزار"},
+                {(long)Math.Pow(10, 2), n => FarsiHundredsMap[n]}
             };
 
             var parts = new List<string>();
@@ -73,11 +67,11 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number % 10 == 3 && number != 13)
             {
-                return Convert((number / 10) * 10) + " و سوم";
+                return Convert(number / 10 * 10) + " و سوم";
             }
 
             var word = Convert(number);
-            return string.Format("{0}{1}", word, word.EndsWith("ی") ? " ام" : "م");
+            return $"{word}{(word.EndsWith("ی") ? " ام" : "م")}";
         }
     }
 }

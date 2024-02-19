@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// ApplyCase method to allow changing the case of a sentence easily
@@ -10,9 +8,6 @@ namespace Humanizer
         /// <summary>
         /// Changes the casing of the provided input
         /// </summary>
-        /// <param name="input"></param>
-        /// <param name="casing"></param>
-        /// <returns></returns>
         public static string ApplyCase(this string input, LetterCasing casing)
         {
             switch (casing)

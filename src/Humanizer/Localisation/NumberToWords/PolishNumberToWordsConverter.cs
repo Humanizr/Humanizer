@@ -1,48 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class PolishNumberToWordsConverter : GenderedNumberToWordsConverter
+    class PolishNumberToWordsConverter(CultureInfo culture) :
+        GenderedNumberToWordsConverter
     {
-        private static readonly string[] HundredsMap =
-        {
+        static readonly string[] HundredsMap =
+        [
             "zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset"
-        };
-        
-        private static readonly string[] TensMap =
-        {
-            "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt", 
+        ];
+
+        static readonly string[] TensMap =
+        [
+            "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt",
             "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt"
-        };
-        
-        private static readonly string[] UnitsMap =
-        {
-            "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", 
-            "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", 
+        ];
+
+        static readonly string[] UnitsMap =
+        [
+            "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć",
+            "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście",
             "osiemnaście", "dziewiętnaście"
-        };
+        ];
 
-        private static readonly string[][] PowersOfThousandMap =
-        {
-            new []{"tysiąc", "tysiące", "tysięcy"},
-            new []{"milion", "miliony", "milionów"},
-            new []{"miliard", "miliardy", "miliardów"},
-            new []{"bilion", "biliony", "bilionów"},
-            new []{"biliard", "biliardy", "biliardów"},
-            new []{"trylion", "tryliony", "trylionów"}
-        };
+        static readonly string[][] PowersOfThousandMap =
+        [
+            ["tysiąc", "tysiące", "tysięcy"],
+            ["milion", "miliony", "milionów"],
+            ["miliard", "miliardy", "miliardów"],
+            ["bilion", "biliony", "bilionów"],
+            ["biliard", "biliardy", "biliardów"],
+            ["trylion", "tryliony", "trylionów"]
+        ];
 
-        private const long MaxPossibleDivisor = 1_000_000_000_000_000_000;
+        const long MaxPossibleDivisor = 1_000_000_000_000_000_000;
 
-        private readonly CultureInfo _culture;
-
-        public PolishNumberToWordsConverter(CultureInfo culture)
-        {
-            _culture = culture;
-        }
-        
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
         {
             if (input == 0)
@@ -55,13 +45,11 @@ namespace Humanizer.Localisation.NumberToWords
 
             return string.Join(" ", parts);
         }
-        
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return number.ToString(_culture);
-        }
 
-        private static void CollectParts(ICollection<string> parts, long input, GrammaticalGender gender)
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            number.ToString(culture);
+
+        static void CollectParts(ICollection<string> parts, long input, GrammaticalGender gender)
         {
             var inputSign = 1;
             if (input < 0)
@@ -103,17 +91,17 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static void CollectPartsUnderThousand(ICollection<string> parts, int number, GrammaticalGender gender)
+        static void CollectPartsUnderThousand(ICollection<string> parts, int number, GrammaticalGender gender)
         {
             var hundredsDigit = number / 100;
-            var tensDigit = (number % 100) / 10;
+            var tensDigit = number % 100 / 10;
             var unitsDigit = number % 10;
-            
+
             if (hundredsDigit >= 1)
             {
                 parts.Add(HundredsMap[hundredsDigit]);
             }
-            
+
             if (tensDigit >= 2)
             {
                 parts.Add(TensMap[tensDigit]);
@@ -145,7 +133,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private static string GetPowerOfThousandNameForm(int multiplier, int power)
+        static string GetPowerOfThousandNameForm(int multiplier, int power)
         {
             const int singularIndex = 0;
             const int pluralIndex = 1;
@@ -154,9 +142,9 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 return PowersOfThousandMap[power][singularIndex];
             }
- 
+
             var multiplierUnitsDigit = multiplier % 10;
-            var multiplierTensDigit = (multiplier % 100) / 10;
+            var multiplierTensDigit = multiplier % 100 / 10;
             if (multiplierTensDigit == 1 || multiplierUnitsDigit <= 1 || multiplierUnitsDigit >= 5)
             {
                 return PowersOfThousandMap[power][genitiveIndex];

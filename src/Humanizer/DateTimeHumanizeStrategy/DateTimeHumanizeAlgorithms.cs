@@ -1,14 +1,9 @@
-﻿using System;
-using System.Globalization;
-using Humanizer.Configuration;
-using Humanizer.Localisation;
-
-namespace Humanizer.DateTimeHumanizeStrategy
+﻿namespace Humanizer
 {
     /// <summary>
     /// Algorithms used to convert distance between two dates into words.
     /// </summary>
-    internal static class DateTimeHumanizeAlgorithms
+    static class DateTimeHumanizeAlgorithms
     {
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
@@ -45,7 +40,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             return PrecisionHumanize(ts, tense, precision, culture);
         }
 #endif
-        private static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
+        static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
         {
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
@@ -71,7 +66,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
                 days += 1;
             }
 
-            // month calculation 
+            // month calculation
             if (days >= 30 * precision & days <= 31)
             {
                 months = 1;
@@ -81,7 +76,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             {
                 var factor = Convert.ToInt32(Math.Floor((double)days / 30));
                 var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 30));
-                months = (days >= 30 * (factor + precision)) ? maxMonths : maxMonths - 1;
+                months = days >= 30 * (factor + precision) ? maxMonths : maxMonths - 1;
             }
 
             // year calculation
@@ -94,7 +89,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             {
                 var factor = Convert.ToInt32(Math.Floor((double)days / 365));
                 var maxMonths = Convert.ToInt32(Math.Ceiling((double)days / 365));
-                years = (days >= 365 * (factor + precision)) ? maxMonths : maxMonths - 1;
+                years = days >= 365 * (factor + precision) ? maxMonths : maxMonths - 1;
             }
 
             // start computing result from larger units to smaller ones
@@ -155,12 +150,12 @@ namespace Humanizer.DateTimeHumanizeStrategy
         public static string DefaultHumanize(DateOnly input, DateOnly comparisonBase, CultureInfo culture)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
-            var diffDays = Math.Abs(comparisonBase.DayOfYear - input.DayOfYear);
+            var diffDays = Math.Abs(comparisonBase.DayNumber - input.DayNumber);
             var ts = new TimeSpan(diffDays, 0, 0, 0);
 
             var sameMonth = comparisonBase.AddMonths(tense == Tense.Future ? 1 : -1) == input;
 
-            var days = Math.Abs(input.DayOfYear - comparisonBase.DayOfYear);
+            var days = Math.Abs(input.DayNumber - comparisonBase.DayNumber);
 
             return DefaultHumanize(ts, sameMonth, days, tense, culture);
         }
@@ -177,7 +172,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         }
 #endif
 
-        private static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
+        static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
         {
             var formatter = Configurator.GetFormatter(culture);
 
@@ -212,7 +207,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
             }
 
             if (ts.TotalHours < 48)
-            {   
+            {
                 return formatter.DateHumanize(TimeUnit.Day, tense, days);
             }
 
@@ -221,7 +216,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
                 return formatter.DateHumanize(TimeUnit.Day, tense, ts.Days);
             }
 
-            if (ts.TotalDays >= 28 && ts.TotalDays < 30)
+            if (ts.TotalDays is >= 28 and < 30)
             {
                 if (sameMonth)
                 {

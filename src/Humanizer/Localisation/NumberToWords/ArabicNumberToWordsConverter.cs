@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class ArabicNumberToWordsConverter : GenderedNumberToWordsConverter
+    class ArabicNumberToWordsConverter :
+        GenderedNumberToWordsConverter
     {
-        private static readonly string[] Groups = { "مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون" };
-        private static readonly string[] AppendedGroups = { "", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً" };
-        private static readonly string[] PluralGroups = { "", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات", "كوينتليونات", "سكستيليونات" };
-        private static readonly string[] OnesGroup = { "", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر" };
-        private static readonly string[] TensGroup = { "", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون" };
-        private static readonly string[] HundredsGroup = { "", "مئة", "مئتان", "ثلاث مئة", "أربع مئة", "خمس مئة", "ست مئة", "سبع مئة", "ثمان مئة", "تسع مئة" };
-        private static readonly string[] AppendedTwos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن" };
-        private static readonly string[] Twos = { "مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان" };
+        static readonly string[] Groups = ["مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون"];
+        static readonly string[] AppendedGroups = ["", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً"];
+        static readonly string[] PluralGroups = ["", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات", "كوينتليونات", "سكستيليونات"];
+        static readonly string[] OnesGroup = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
+        static readonly string[] TensGroup = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
+        static readonly string[] HundredsGroup = ["", "مئة", "مئتان", "ثلاث مئة", "أربع مئة", "خمس مئة", "ست مئة", "سبع مئة", "ثمان مئة", "تسع مئة"];
+        static readonly string[] AppendedTwos = ["مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن"];
+        static readonly string[] Twos = ["مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان"];
 
-        private static readonly string[] FeminineOnesGroup = { "", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة" };
+        static readonly string[] FeminineOnesGroup = ["", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة"];
 
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
@@ -25,7 +23,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("ناقص {0}", Convert(-number, gender));
+                return $"ناقص {Convert(-number, gender)}";
             }
 
             var result = string.Empty;
@@ -58,7 +56,7 @@ namespace Humanizer.Localisation.NumberToWords
                     {
                         if (tens == 2 && hundreds == 0 && groupLevel > 0)
                         {
-                            if (number == 2000 || number == 2000000 || number == 2000000000)
+                            if (number is 2000 or 2000000 or 2000000000)
                             {
                                 process = AppendedTwos[groupLevel];
                             }
@@ -87,7 +85,7 @@ namespace Humanizer.Localisation.NumberToWords
                     else
                     {
                         var ones = tens % 10;
-                        tens = (tens / 10);
+                        tens /= 10;
 
                         if (ones > 0)
                         {
@@ -114,30 +112,30 @@ namespace Humanizer.Localisation.NumberToWords
                     {
                         if (result != string.Empty)
                         {
-                            result = string.Format("{0} {1}", "و", result);
+                            result = $"و {result}";
                         }
 
                         if (groupNumber != 2)
                         {
                             if (groupNumber % 100 != 1)
                             {
-                                if (groupNumber >= 3 && groupNumber <= 10)
+                                if (groupNumber is >= 3 and <= 10)
                                 {
-                                    result = string.Format("{0} {1}", PluralGroups[groupLevel], result);
+                                    result = $"{PluralGroups[groupLevel]} {result}";
                                 }
                                 else
                                 {
-                                    result = string.Format("{0} {1}", result != string.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel], result);
+                                    result = $"{(result != string.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel])} {result}";
                                 }
                             }
                             else
                             {
-                                result = string.Format("{0} {1}", Groups[groupLevel], result);
+                                result = $"{Groups[groupLevel]} {result}";
                             }
                         }
                     }
 
-                    result = string.Format("{0} {1}", process, result);
+                    result = $"{process} {result}";
                 }
 
                 groupLevel++;
@@ -146,7 +144,7 @@ namespace Humanizer.Localisation.NumberToWords
             return result.Trim();
         }
 
-        private static readonly Dictionary<string, string> OrdinalExceptions = new Dictionary<string, string>
+        static readonly Dictionary<string, string> OrdinalExceptions = new()
         {
             {"واحد", "الحادي"},
             {"أحد", "الحادي"},
@@ -162,7 +160,7 @@ namespace Humanizer.Localisation.NumberToWords
             {"عشرة", "العاشر"},
         };
 
-        private static readonly Dictionary<string, string> FeminineOrdinalExceptions = new Dictionary<string, string>
+        static readonly Dictionary<string, string> FeminineOrdinalExceptions = new()
         {
             {"واحدة", "الحادية"},
             {"إحدى", "الحادية"},
@@ -209,7 +207,7 @@ namespace Humanizer.Localisation.NumberToWords
             return word.Trim();
         }
 
-        private static string ParseNumber(string word, int number, GrammaticalGender gender)
+        static string ParseNumber(string word, int number, GrammaticalGender gender)
         {
             if (number == 1)
             {
@@ -225,7 +223,7 @@ namespace Humanizer.Localisation.NumberToWords
                     return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
                 }
             }
-            else if (number > 10 && number < 100)
+            else if (number is > 10 and < 100)
             {
                 var parts = word.Split(' ');
                 var newParts = new string[parts.Length];

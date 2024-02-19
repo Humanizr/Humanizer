@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.@is
+﻿namespace Humanizer.Tests.Localisation.@is
 {
     [UseCulture("is")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "núll")]
         [InlineData(1, "einn")]
@@ -61,10 +58,8 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(16415618, "sextán milljónir fjögur hundruð og fimmtán þúsund sex hundruð og átján")]
         [InlineData(322, "þrjú hundruð tuttugu og tveir")]
         [InlineData(322, "þrjú hundruð tuttugu og tvær", GrammaticalGender.Feminine)]
-        public void IntToWords(long number, string expected, GrammaticalGender gender = GrammaticalGender.Masculine)
-        {
+        public void IntToWords(long number, string expected, GrammaticalGender gender = GrammaticalGender.Masculine) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
 
         [Theory]
         [InlineData(100_000_000_000L, "eitt hundrað milljarðar")]
@@ -74,10 +69,8 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(100_000_000_000_000_000L, "eitt hundrað billjarðar")]
         [InlineData(1_000_000_000_000_000_000L, "ein trilljón")]
         [InlineData(9_223_372_036_854_775_807L, "níu trilljónir tvö hundruð tuttugu og þrír billjarðar þrjú hundruð sjötíu og tvær billjónir þrjátíu og sex milljarðar átta hundruð fimmtíu og fjórar milljónir sjö hundruð sjötíu og fimm þúsund átta hundruð og sjö")]
-        public void LongToWords(long number, string expected)
-        {
+        public void LongToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "núllti")]
@@ -178,9 +171,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(777, "sjö hundruð sjötugasta og sjöunda", GrammaticalGender.Neuter)]
         [InlineData(102000, "eitt hundrað og tvö þúsundasti")]
         [InlineData(1002000, "ein milljón og tvö þúsundasti")]
-        public void ToOrdinalWords(int number, string words, GrammaticalGender gender = GrammaticalGender.Masculine)
-        {
+        public void ToOrdinalWords(int number, string words, GrammaticalGender gender = GrammaticalGender.Masculine) =>
             Assert.Equal(words, number.ToOrdinalWords(gender));
-        }
     }
 }

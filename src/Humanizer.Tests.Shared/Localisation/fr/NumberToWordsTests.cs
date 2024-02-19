@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.fr
+﻿namespace Humanizer.Tests.Localisation.fr
 {
     [UseCulture("fr-FR")]
     public class NumberToWordsTests
@@ -64,10 +62,8 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(80080080, "quatre-vingts millions quatre-vingt mille quatre-vingts")]
         [InlineData(200200200, "deux cents millions deux cent mille deux cents")]
         [InlineData(200200202, "deux cents millions deux cent mille deux cent deux")]
-        public void ToWordsInt(int number, string expected)
-        {
+        public void ToWordsInt(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1, "une", GrammaticalGender.Feminine)]
@@ -98,10 +94,8 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(10121, "dix mille cent vingt et un", GrammaticalGender.Masculine)]
         [InlineData(81000, "quatre-vingt-un mille", GrammaticalGender.Feminine)]
         [InlineData(81000, "quatre-vingt-un mille", GrammaticalGender.Masculine)]
-        public void ToWordsIntWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToWordsIntWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
 
         [Theory]
         [InlineData(1L, "un")]
@@ -123,10 +117,8 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(11111111111111111L, "onze billiards cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
         [InlineData(111111111111111111L, "cent onze billiards cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
         [InlineData(1111111111111111111L, "un trillion cent onze billiards cent onze billions cent onze milliards cent onze millions cent onze mille cent onze")]
-        public void ToWordsLong(long number, string expected)
-        {
+        public void ToWordsLong(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "zérotième")]
@@ -172,10 +164,8 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(100000, "cent millième")]
         [InlineData(1000000, "millionième")]
         [InlineData(1000000000, "milliardième")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(1, "première", GrammaticalGender.Feminine)]
@@ -186,9 +176,7 @@ namespace Humanizer.Tests.Localisation.fr
         [InlineData(121, "cent vingt et unième", GrammaticalGender.Masculine)]
         [InlineData(10121, "dix mille cent vingt et unième", GrammaticalGender.Feminine)]
         [InlineData(10121, "dix mille cent vingt et unième", GrammaticalGender.Masculine)]
-        public void ToOrdinalWordsWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToOrdinalWordsWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToOrdinalWords(gender));
-        }
     }
 }

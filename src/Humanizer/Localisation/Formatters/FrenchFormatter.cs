@@ -1,17 +1,13 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class FrenchFormatter : DefaultFormatter
+    class FrenchFormatter(string localeCode) :
+        DefaultFormatter(localeCode)
     {
-        private const string DualPostfix = "_Dual";
-
-        public FrenchFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
+        const string DualPostfix = "_Dual";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
-            if (number == 2 && (resourceKey == "DateHumanize_MultipleDaysAgo" || resourceKey == "DateHumanize_MultipleDaysFromNow"))
+            if (number == 2 && resourceKey is "DateHumanize_MultipleDaysAgo" or "DateHumanize_MultipleDaysFromNow")
             {
                 return resourceKey + DualPostfix;
             }

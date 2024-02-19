@@ -1,10 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using Humanizer.Localisation;
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class TimeSpanHumanizeTests
@@ -106,7 +100,6 @@ namespace Humanizer.Tests
             var actual = TimeSpan.FromMinutes(minutes).Humanize();
             Assert.Equal(expected, actual);
         }
-
 
         [Theory]
         [InlineData(135, "2 minutes")]
@@ -440,7 +433,7 @@ namespace Humanizer.Tests
         [InlineData(3603001, 2, "it-IT", "1 ora e 3 secondi", null)]
         public void CanSpecifyCultureExplicitly(int ms, int precision, string culture, string expected, string collectionSeparator)
         {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize(precision: precision, culture: new CultureInfo(culture), collectionSeparator: collectionSeparator);
+            var actual = TimeSpan.FromMilliseconds(ms).Humanize(precision: precision, culture: new(culture), collectionSeparator: collectionSeparator);
             Assert.Equal(expected, actual);
         }
         [Theory]
@@ -450,7 +443,7 @@ namespace Humanizer.Tests
         public void CanSpecifyCultureExplicitlyToWords(int days, int precision,string culture, string expected)
         {
             var timeSpan = new TimeSpan(days, 0, 0, 0);
-            var actual = timeSpan.Humanize(precision: precision, culture: new CultureInfo(culture), maxUnit: TimeUnit.Year, toWords: true);
+            var actual = timeSpan.Humanize(precision: precision, culture: new(culture), maxUnit: TimeUnit.Year, toWords: true);
             Assert.Equal(expected: expected, actual);
         }
     }

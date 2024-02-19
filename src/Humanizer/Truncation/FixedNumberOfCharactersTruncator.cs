@@ -1,11 +1,9 @@
-using System.Linq;
-
 namespace Humanizer
 {
     /// <summary>
     /// Truncate a string to a fixed number of letters or digits
     /// </summary>
-    internal class FixedNumberOfCharactersTruncator : ITruncator
+    class FixedNumberOfCharactersTruncator : ITruncator
     {
         public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {
@@ -31,7 +29,7 @@ namespace Humanizer
 
             var alphaNumericalCharactersProcessed = 0;
 
-            if (value.ToCharArray().Count(char.IsLetterOrDigit) <= length)
+            if (value.Count(char.IsLetterOrDigit) <= length)
             {
                 return value;
             }

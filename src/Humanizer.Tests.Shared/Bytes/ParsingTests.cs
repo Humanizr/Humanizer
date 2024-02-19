@@ -20,22 +20,14 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-using System;
-using System.Globalization;
-using Humanizer.Bytes;
-using Xunit;
-
 namespace Humanizer.Tests.Bytes
 {
     [UseCulture("en")]
     public class ParsingTests
     {
-
         [Fact]
-        public void Parse()
-        {
+        public void Parse() =>
             Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020KB"));
-        }
 
         [Fact]
         public void TryParseReturnsFalseOnNull()
@@ -92,10 +84,8 @@ namespace Humanizer.Tests.Bytes
         }
 
         [Fact]
-        public void ParseDecimalMegabytes()
-        {
+        public void ParseDecimalMegabytes() =>
             Assert.Equal(ByteSize.FromMegabytes(100.5), ByteSize.Parse("100.5MB"));
-        }
 
         [Theory]
         [InlineData("")]
@@ -112,57 +102,41 @@ namespace Humanizer.Tests.Bytes
             var resultBool = ByteSize.TryParse(input, out var resultByteSize);
 
             Assert.False(resultBool);
-            Assert.Equal(new ByteSize(), resultByteSize);
+            Assert.Equal(new(), resultByteSize);
 
             Assert.Throws<FormatException>(() => { ByteSize.Parse(input); });
         }
 
         [Fact]
-        public void TryParseWorksWithLotsOfSpaces()
-        {
+        public void TryParseWorksWithLotsOfSpaces() =>
             Assert.Equal(ByteSize.FromKilobytes(100), ByteSize.Parse(" 100 KB "));
-        }
 
         [Fact]
-        public void ParseThrowsOnNull()
-        {
+        public void ParseThrowsOnNull() =>
             Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(null); });
-        }
 
         [Fact]
-        public void ParseBits()
-        {
+        public void ParseBits() =>
             Assert.Equal(ByteSize.FromBits(1), ByteSize.Parse("1b"));
-        }
 
         [Fact]
-        public void ParseBytes()
-        {
+        public void ParseBytes() =>
             Assert.Equal(ByteSize.FromBytes(1), ByteSize.Parse("1B"));
-        }
 
         [Fact]
-        public void ParseKilobytes()
-        {
+        public void ParseKilobytes() =>
             Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020KB"));
-        }
 
         [Fact]
-        public void ParseMegabytes()
-        {
+        public void ParseMegabytes() =>
             Assert.Equal(ByteSize.FromMegabytes(1000), ByteSize.Parse("1000MB"));
-        }
 
         [Fact]
-        public void ParseGigabytes()
-        {
+        public void ParseGigabytes() =>
             Assert.Equal(ByteSize.FromGigabytes(805), ByteSize.Parse("805GB"));
-        }
 
         [Fact]
-        public void ParseTerabytes()
-        {
+        public void ParseTerabytes() =>
             Assert.Equal(ByteSize.FromTerabytes(100), ByteSize.Parse("100TB"));
-        }
     }
 }

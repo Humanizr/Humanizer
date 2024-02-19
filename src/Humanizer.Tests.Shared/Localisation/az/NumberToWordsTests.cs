@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.az
+﻿namespace Humanizer.Tests.Localisation.az
 {
     [UseCulture("az")]
     public class NumberToWordsTests
@@ -17,10 +15,8 @@ namespace Humanizer.Tests.Localisation.az
         [InlineData("üç min beş yüz bir", 3501)]
         [InlineData("bir milyon bir", 1000001)]
         [InlineData("mənfi bir milyon üç yüz qırx altı min yeddi yüz on bir", -1346711)]
-        public void ToWords(string expected, int number)
-        {
+        public void ToWords(string expected, int number) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "sıfırıncı")]
@@ -65,9 +61,7 @@ namespace Humanizer.Tests.Localisation.az
         [InlineData(100000, "yüz mininci")]
         [InlineData(1000000, "bir milyonuncu")]
         [InlineData(1022135, "bir milyon iyirmi iki min yüz otuz beşinci")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

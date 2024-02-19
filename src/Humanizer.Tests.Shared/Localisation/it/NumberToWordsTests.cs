@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.it
+﻿namespace Humanizer.Tests.Localisation.it
 {
     [UseCulture("it")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "zero")]
         [InlineData(1, "uno")]
@@ -63,10 +60,8 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1999, "millenovecentonovantanove")]
         [InlineData(2014, "duemilaquattordici")]
         [InlineData(2048, "duemilaquarantotto")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -78,10 +73,8 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1001, "milleuno")]
         [InlineData(10001, "diecimilauno")]
         [InlineData(100001, "centomilauno")]
-        public void ToFeminineWords(int number, string expected)
-        {
+        public void ToFeminineWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -93,10 +86,8 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1001, "milleuno")]
         [InlineData(10001, "diecimilauno")]
         [InlineData(100001, "centomilauno")]
-        public void ToMasculineWords(int number, string expected)
-        {
+        public void ToMasculineWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -157,10 +148,8 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(100000000, "centomilionesimo")]
         [InlineData(1000000000, "miliardesimo")]
         [InlineData(2000000000, "duemiliardesimo")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -179,10 +168,8 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1000, "millesima")]
         [InlineData(1001, "milleunesima")]
         [InlineData(10000, "diecimillesima")]
-        public void ToFeminineOrdinalWords(int number, string expected)
-        {
+        public void ToFeminineOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -201,9 +188,7 @@ namespace Humanizer.Tests.Localisation.it
         [InlineData(1000, "millesimo")]
         [InlineData(1001, "milleunesimo")]
         [InlineData(10000, "diecimillesimo")]
-        public void ToMasculineOrdinalWords(int number, string expected)
-        {
+        public void ToMasculineOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
-        }
     }
 }

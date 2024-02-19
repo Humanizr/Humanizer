@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+namespace Humanizer
 {
-    internal class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
+    class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten" };
-        private static readonly string[] TensMap = { "null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti" };
+        static readonly string[] UnitsMap = ["null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten"];
+        static readonly string[] TensMap = ["null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti"];
 
-        private static readonly Dictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
+        static readonly Dictionary<int, string> OrdinalExceptions = new()
         {
             {0, "nullte"},
             {1, "første"},
@@ -23,7 +20,7 @@ namespace Humanizer.Localisation.NumberToWords
 
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
-            if (number > Int32.MaxValue || number < Int32.MinValue)
+            if (number is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
@@ -31,12 +28,10 @@ namespace Humanizer.Localisation.NumberToWords
             return Convert((int)number, false, gender);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return Convert(number, true, gender);
-        }
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            Convert(number, true, gender);
 
-        private string Convert(int number, bool isOrdinal, GrammaticalGender gender)
+        string Convert(int number, bool isOrdinal, GrammaticalGender gender)
         {
             if (number == 0)
             {
@@ -45,7 +40,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("minus {0}", Convert(-number, isOrdinal, gender));
+                return $"minus {Convert(-number, isOrdinal, gender)}";
             }
 
             if (number == 1)
@@ -64,7 +59,7 @@ namespace Humanizer.Localisation.NumberToWords
             var millionOrMore = false;
 
             const int billion = 1000000000;
-            if ((number / billion) > 0)
+            if (number / billion > 0)
             {
                 millionOrMore = true;
                 var isExactOrdinal = isOrdinal && number % billion == 0;
@@ -73,7 +68,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             const int million = 1000000;
-            if ((number / million) > 0)
+            if (number / million > 0)
             {
                 millionOrMore = true;
                 var isExactOrdinal = isOrdinal && number % million == 0;
@@ -82,7 +77,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             var thousand = false;
-            if ((number / 1000) > 0)
+            if (number / 1000 > 0)
             {
                 thousand = true;
                 parts.Add(Part("{0}tusen", number % 1000 < 100 ? "tusen" : "ettusen", number / 1000));
@@ -90,7 +85,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             var hundred = false;
-            if ((number / 100) > 0)
+            if (number / 100 > 0)
             {
                 hundred = true;
                 parts.Add(Part("{0}hundre", thousand || millionOrMore ? "ethundre" : "hundre", number / 100));
@@ -118,9 +113,9 @@ namespace Humanizer.Localisation.NumberToWords
                 else
                 {
                     var lastPart = TensMap[number / 10];
-                    if ((number % 10) > 0)
+                    if (number % 10 > 0)
                     {
-                        lastPart += string.Format("{0}", GetUnitValue(number % 10, isOrdinal));
+                        lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
                     }
                     else if (isOrdinal)
                     {
@@ -135,12 +130,12 @@ namespace Humanizer.Localisation.NumberToWords
                 parts[parts.Count - 1] += (number == 0 ? "" : "en") + (millionOrMore ? "te" : "de");
             }
 
-            var toWords = string.Join("", parts.ToArray()).Trim();
+            var toWords = string.Concat(parts).Trim();
 
             return toWords;
         }
 
-        private static string GetUnitValue(int number, bool isOrdinal)
+        static string GetUnitValue(int number, bool isOrdinal)
         {
             if (isOrdinal)
             {
@@ -148,27 +143,22 @@ namespace Humanizer.Localisation.NumberToWords
                 {
                     return exceptionString;
                 }
-                else if (number < 13)
+
+                if (number < 13)
                 {
                     return UnitsMap[number].TrimEnd('e') + "ende";
                 }
-                else
-                {
-                    return UnitsMap[number] + "de";
-                }
+
+                return UnitsMap[number] + "de";
             }
-            else
-            {
-                return UnitsMap[number];
-            }
+
+            return UnitsMap[number];
         }
 
-        private static bool ExceptionNumbersToWords(int number, out string words)
-        {
-            return OrdinalExceptions.TryGetValue(number, out words);
-        }
+        static bool ExceptionNumbersToWords(int number, out string words) =>
+            OrdinalExceptions.TryGetValue(number, out words);
 
-        private string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)
+        string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)
         {
             var postfix = postfixSpace ? " " : "";
             if (number == 1)

@@ -1,14 +1,10 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class ArabicFormatter : DefaultFormatter
+    class ArabicFormatter() :
+        DefaultFormatter("ar")
     {
-        private const string DualPostfix = "_Dual";
-        private const string PluralPostfix = "_Plural";
-
-        public ArabicFormatter()
-            : base("ar")
-        {
-        }
+        const string DualPostfix = "_Dual";
+        const string PluralPostfix = "_Plural";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
@@ -19,7 +15,7 @@
             }
 
             //In Arabic pluralization entities where the count is between 3 and 10 gets a different word.
-            if (number >= 3 && number <= 10)
+            if (number is >= 3 and <= 10)
             {
                 return resourceKey + PluralPostfix;
             }

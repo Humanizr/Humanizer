@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Humanizer.Localisation.DateToOrdinalWords
+﻿namespace Humanizer
 {
-    internal class FrDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
+    class FrDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
     {
         public override string Convert(DateTime date)
         {

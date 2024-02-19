@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords.Italian
+﻿namespace Humanizer
 {
-    internal class ItalianCardinalNumberCruncher
+    class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     {
-        public ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
-        {
-            _fullNumber = number;
-            _threeDigitParts = SplitEveryThreeDigits(number);
-            _gender = gender;
-            _nextSet = ThreeDigitSets.Units;
-        }
-
         public string Convert()
         {
             // it's easier to treat zero as a completely distinct case
@@ -34,14 +23,14 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             return words.TrimEnd();
         }
 
-        protected readonly int _fullNumber;
-        protected readonly List<int> _threeDigitParts;
-        protected readonly GrammaticalGender _gender;
+        protected readonly int _fullNumber = number;
+        protected readonly List<int> _threeDigitParts = SplitEveryThreeDigits(number);
+        protected readonly GrammaticalGender _gender = gender;
 
-        protected ThreeDigitSets _nextSet;
+        protected ThreeDigitSets _nextSet = ThreeDigitSets.Units;
 
         /// <summary>
-        /// Splits a number into a sequence of three-digits numbers, starting 
+        /// Splits a number into a sequence of three-digits numbers, starting
         /// from units, then thousands, millions, and so on.
         /// </summary>
         /// <param name="number">The number to split.</param>
@@ -57,7 +46,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
 
                 parts.Add(threeDigit);
 
-                rest = rest / 1000;
+                rest /= 1000;
             }
 
             return parts;
@@ -111,7 +100,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <param name="number">The three-digit set to convert.</param>
         /// <param name="thisIsLastSet">True if the current three-digit set is the last in the word.</param>
         /// <returns>The same three-digit set expressed as text.</returns>
-        protected static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
+        static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
         {
             if (number == 0)
             {
@@ -149,14 +138,14 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             {
                 // just append units text, with some corner cases
 
-                // truncate tens last vowel before 'uno' (1) and 'otto' (8)                    
-                if (units == 1 || units == 8)
+                // truncate tens last vowel before 'uno' (1) and 'otto' (8)
+                if (units is 1 or 8)
                 {
                     words = words.Remove(words.Length - 1);
                 }
 
                 // if this is the last set, an accent could be due
-                var unitsText = (thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units]);
+                var unitsText = thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units];
 
                 words += unitsText;
             }
@@ -238,8 +227,8 @@ namespace Humanizer.Localisation.NumberToWords.Italian
         /// <summary>
         /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
         /// </summary>
-        protected static string[] _unitsNumberToText = new string[]
-        {
+        protected static string[] _unitsNumberToText =
+        [
             string.Empty,
             "uno",
             "due",
@@ -250,13 +239,13 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "sette",
             "otto",
             "nove"
-        };
+        ];
 
         /// <summary>
         /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
         /// </summary>
-        protected static string[] _tensOver20NumberToText = new string[]
-        {
+        protected static string[] _tensOver20NumberToText =
+        [
             string.Empty,
             string.Empty,
             "venti",
@@ -267,13 +256,13 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "settanta",
             "ottanta",
             "novanta"
-        };
+        ];
 
         /// <summary>
         /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
         /// </summary>
-        protected static string[] _teensUnder20NumberToText = new string[]
-        {
+        protected static string[] _teensUnder20NumberToText =
+        [
             "dieci",
             "undici",
             "dodici",
@@ -284,13 +273,13 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "diciassette",
             "diciotto",
             "diciannove"
-        };
+        ];
 
         /// <summary>
         /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
         /// </summary>
-        protected static string[] _hundredNumberToText = new string[]
-        {
+        protected static string[] _hundredNumberToText =
+        [
             string.Empty,
             "cento",
             "duecento",
@@ -301,7 +290,7 @@ namespace Humanizer.Localisation.NumberToWords.Italian
             "settecento",
             "ottocento",
             "novecento"
-        };
+        ];
 
         /// <summary>
         /// Enumerates sets of three-digits having distinct conversion to text.

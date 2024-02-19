@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.uzLatn
+﻿namespace Humanizer.Tests.Localisation.uzLatn
 {
     [UseCulture("uz-Latn-UZ")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "nol")]
         [InlineData(1, "bir")]
@@ -63,10 +60,8 @@ namespace Humanizer.Tests.Localisation.uzLatn
         [InlineData(751633617, "yetti yuz ellik bir million olti yuz o`ttiz uch ming olti yuz o`n yetti")]
         [InlineData(1111111118, "bir milliard bir yuz o`n bir million bir yuz o`n bir ming bir yuz o`n sakkiz")]
         [InlineData(-751633617, "minus yetti yuz ellik bir million olti yuz o`ttiz uch ming olti yuz o`n yetti")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "nolinchi")]
@@ -100,9 +95,7 @@ namespace Humanizer.Tests.Localisation.uzLatn
         [InlineData(751633617, "yetti yuz ellik bir million olti yuz o`ttiz uch ming olti yuz o`n yettinchi")]
         [InlineData(1111111118, "bir milliard bir yuz o`n bir million bir yuz o`n bir ming bir yuz o`n sakkizinchi")]
         [InlineData(-751633617, "minus yetti yuz ellik bir million olti yuz o`ttiz uch ming olti yuz o`n yettinchi")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

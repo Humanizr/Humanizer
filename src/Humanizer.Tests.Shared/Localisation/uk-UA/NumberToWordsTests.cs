@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ukUA
+﻿namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
     public class NumberToWordsTests
@@ -81,19 +79,15 @@ namespace Humanizer.Tests.Localisation.ukUA
             "вісімсот п'ятдесят чотири мільйона " +
             "сімсот сімдесят п'ять тисяч " +
             "вісімсот вісім")]
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(122, "сто двадцять дві", GrammaticalGender.Feminine)]
         [InlineData(3501, "три тисячі п'ятсот одна", GrammaticalGender.Feminine)]
         [InlineData(3501, "три тисячі п'ятсот одне", GrammaticalGender.Neuter)]
-        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToWordsWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
 
         [Theory]
         [InlineData(0, "нульовий")]
@@ -164,10 +158,8 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData(1111111000, "один мільярд сто одинадцять мільйонів стоодинадцятитисячний")]
         [InlineData(1234567000, "один мільярд двісті тридцять чотири мільйона п'ятисотшістдесятисемитисячний")]
         [InlineData(-751633617, "мінус сімсот п'ятдесят один мільйон шістсот тридцять три тисячі шістсот сімнадцятий")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "нульова")]
@@ -233,10 +225,8 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData(751633617, "сімсот п'ятдесят один мільйон шістсот тридцять три тисячі шістсот сімнадцята")]
         [InlineData(1111111118, "один мільярд сто одинадцять мільйонів сто одинадцять тисяч сто вісімнадцята")]
         [InlineData(-751633617, "мінус сімсот п'ятдесят один мільйон шістсот тридцять три тисячі шістсот сімнадцята")]
-        public void ToOrdinalWordsFeminine(int number, string expected)
-        {
+        public void ToOrdinalWordsFeminine(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(3, "третє")]
@@ -249,9 +239,7 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData(751633617, "сімсот п'ятдесят один мільйон шістсот тридцять три тисячі шістсот сімнадцяте")]
         [InlineData(1111111118, "один мільярд сто одинадцять мільйонів сто одинадцять тисяч сто вісімнадцяте")]
         [InlineData(-751633617, "мінус сімсот п'ятдесят один мільйон шістсот тридцять три тисячі шістсот сімнадцяте")]
-        public void ToOrdinalWordsNeuter(int number, string expected)
-        {
+        public void ToOrdinalWordsNeuter(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-        }
     }
 }

@@ -1,7 +1,4 @@
-﻿using Humanizer.Bytes;
-using Xunit;
-
-namespace Humanizer.Tests.Bytes
+﻿namespace Humanizer.Tests.Bytes
 {
     public class ArithmeticTests
     {

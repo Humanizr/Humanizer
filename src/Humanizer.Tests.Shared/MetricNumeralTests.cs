@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class MetricNumeralTests
@@ -21,10 +14,8 @@ namespace Humanizer.Tests
         [InlineData(1000d, "1 k")]
         [InlineData(1000d, "1 kilo")]
         [InlineData(1E-3, "1milli")]
-        public void FromMetric(double expected, string input)
-        {
+        public void FromMetric(double expected, string input) =>
             Assert.Equal(expected, input.FromMetric());
-        }
 
         [Theory]
         [InlineData("")]
@@ -36,17 +27,13 @@ namespace Humanizer.Tests
         [InlineData("0.02l")]
         [InlineData("0.12kilkilo")]
         [InlineData("0.02alois")]
-        public void FromMetricOnInvalid(string input)
-        {
+        public void FromMetricOnInvalid(string input) =>
             Assert.Throws<ArgumentException>(() => input.FromMetric());
-        }
 
         [Fact]
-        public void FromMetricOnNull()
-        {
+        public void FromMetricOnNull() =>
             Assert.Throws<ArgumentNullException>(() =>
-                                                 MetricNumeralExtensions.FromMetric(null));
-        }
+                MetricNumeralExtensions.FromMetric(null));
 
         [Theory]
         [MemberData(nameof(SymbolRange))]
@@ -87,27 +74,6 @@ namespace Humanizer.Tests
             }
 
             Assert.True(isEquals);
-        }
-
-        [Theory]
-        [InlineData("0", 0d, false, true, null)]
-        [InlineData("123", 123d, false, true, null)]
-        [InlineData("-123", (-123d), false, true, null)]
-        [InlineData("1.23k", 1230d, false, true, null)]
-        [InlineData("1 k", 1000d, true, true, null)]
-        [InlineData("1 kilo", 1000d, true, false, null)]
-        [InlineData("1milli", 1E-3, false, false, null)]
-        [InlineData("1.23milli", 1.234E-3, false, false, 2)]
-        [InlineData("12.34k", 12345, false, true, 2)]
-        [InlineData("12k", 12345, false, true, 0)]
-        [InlineData("-3.9m", -3.91e-3, false, true, 1)]
-        [InlineData("10 ", 10, true, false, 0)]
-        [InlineData("1.2", 1.23, false, false, 1)]
-        public void ToMetricObsolete(string expected, double input, bool hasSpace, bool useSymbol, int? decimals)
-        {
-#pragma warning disable CS0618 // Type or member is obsolete
-            Assert.Equal(expected, input.ToMetric(hasSpace, useSymbol, decimals));
-#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         [Theory]
@@ -193,19 +159,15 @@ namespace Humanizer.Tests
         [InlineData("1 milli", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseName, null)]
         [InlineData("1 thousandth", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseShortScaleWord, null)]
         [InlineData("1 thousandth", 1E-3, MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseLongScaleWord, null)]
-        public void ToMetric(string expected, double input, MetricNumeralFormats? format, int? decimals)
-        {
+        public void ToMetric(string expected, double input, MetricNumeralFormats? format, int? decimals) =>
             Assert.Equal(expected, input.ToMetric(format, decimals));
-        }
 
         [Theory]
         [InlineData(1E+27)]
         [InlineData(1E-27)]
         [InlineData(-1E+27)]
         [InlineData(-1E-27)]
-        public void ToMetricOnInvalid(double input)
-        {
+        public void ToMetricOnInvalid(double input) =>
             Assert.Throws<ArgumentOutOfRangeException>(() => input.ToMetric());
-        }
     }
 }

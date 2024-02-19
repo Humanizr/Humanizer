@@ -20,9 +20,6 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-using Humanizer.Bytes;
-using Xunit;
-
 namespace Humanizer.Tests.Bytes
 {
     public class CreatingTests

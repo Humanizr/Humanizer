@@ -20,21 +20,16 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
-using System;
-using System.Globalization;
-using System.Linq;
-using Humanizer.Configuration;
-using Humanizer.Localisation;
-
 using static System.Globalization.NumberStyles;
 
-namespace Humanizer.Bytes
+namespace Humanizer
 {
-    /// <summary>
-    /// Represents a byte size value.
-    /// </summary>
 #pragma warning disable 1591
-    public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize>, IComparable, IFormattable
+    public struct ByteSize(double byteSize) :
+        IComparable<ByteSize>,
+        IEquatable<ByteSize>,
+        IComparable,
+        IFormattable
     {
         public static readonly ByteSize MinValue = FromBits(long.MinValue);
         public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
@@ -58,12 +53,12 @@ namespace Humanizer.Bytes
         public const string TerabyteSymbol = "TB";
         public const string Terabyte = "terabyte";
 
-        public long Bits { get; private set; }
-        public double Bytes { get; private set; }
-        public double Kilobytes { get; private set; }
-        public double Megabytes { get; private set; }
-        public double Gigabytes { get; private set; }
-        public double Terabytes { get; private set; }
+        public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
+        public double Bytes { get; } = byteSize;
+        public double Kilobytes { get; } = byteSize / BytesInKilobyte;
+        public double Megabytes { get; } = byteSize / BytesInMegabyte;
+        public double Gigabytes { get; } = byteSize / BytesInGigabyte;
+        public double Terabytes { get; } = byteSize / BytesInTerabyte;
 
         public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
@@ -169,48 +164,25 @@ namespace Humanizer.Bytes
             }
         }
 
-        public ByteSize(double byteSize)
-            : this()
-        {
-            // Get ceiling because bis are whole units
-            Bits = (long)Math.Ceiling(byteSize * BitsInByte);
+        // Get ceiling because bis are whole units
 
-            Bytes = byteSize;
-            Kilobytes = byteSize / BytesInKilobyte;
-            Megabytes = byteSize / BytesInMegabyte;
-            Gigabytes = byteSize / BytesInGigabyte;
-            Terabytes = byteSize / BytesInTerabyte;
-        }
+        public static ByteSize FromBits(long value) =>
+            new(value / (double) BitsInByte);
 
-        public static ByteSize FromBits(long value)
-        {
-            return new ByteSize(value / (double)BitsInByte);
-        }
+        public static ByteSize FromBytes(double value) =>
+            new(value);
 
-        public static ByteSize FromBytes(double value)
-        {
-            return new ByteSize(value);
-        }
+        public static ByteSize FromKilobytes(double value) =>
+            new(value * BytesInKilobyte);
 
-        public static ByteSize FromKilobytes(double value)
-        {
-            return new ByteSize(value * BytesInKilobyte);
-        }
+        public static ByteSize FromMegabytes(double value) =>
+            new(value * BytesInMegabyte);
 
-        public static ByteSize FromMegabytes(double value)
-        {
-            return new ByteSize(value * BytesInMegabyte);
-        }
+        public static ByteSize FromGigabytes(double value) =>
+            new(value * BytesInGigabyte);
 
-        public static ByteSize FromGigabytes(double value)
-        {
-            return new ByteSize(value * BytesInGigabyte);
-        }
-
-        public static ByteSize FromTerabytes(double value)
-        {
-            return new ByteSize(value * BytesInTerabyte);
-        }
+        public static ByteSize FromTerabytes(double value) =>
+            new(value * BytesInTerabyte);
 
         /// <summary>
         /// Converts the value of the current ByteSize object to a string.
@@ -218,10 +190,8 @@ namespace Humanizer.Bytes
         /// the largest metric prefix such that the corresponding value is greater
         ///  than or equal to one.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(NumberFormatInfo.CurrentInfo);
-        }
+        public override string ToString() =>
+            ToString(NumberFormatInfo.CurrentInfo);
 
         public string ToString(IFormatProvider provider)
         {
@@ -231,17 +201,13 @@ namespace Humanizer.Bytes
             return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
         }
 
-        public string ToString(string format)
-        {
-            return ToString(format, NumberFormatInfo.CurrentInfo);
-        }
+        public string ToString(string format) =>
+            ToString(format, NumberFormatInfo.CurrentInfo);
 
-        public string ToString(string format, IFormatProvider provider)
-        {
-            return ToString(format, provider, toSymbol: true);
-        }
+        public string ToString(string format, IFormatProvider provider) =>
+            ToString(format, provider, toSymbol: true);
 
-        private string ToString(string format, IFormatProvider provider, bool toSymbol)
+        string ToString(string format, IFormatProvider provider, bool toSymbol)
         {
             if (format == null)
                 format = "G";
@@ -309,19 +275,17 @@ namespace Humanizer.Bytes
                                               ? "0"
                                               : formattedLargeWholeNumberValue;
 
-            return string.Format("{0} {1}", formattedLargeWholeNumberValue, toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider));
+            return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
         }
 
         /// <summary>
-        /// Converts the value of the current ByteSize object to a string with 
-        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga, 
-        /// tera) used is the largest metric prefix such that the corresponding 
+        /// Converts the value of the current ByteSize object to a string with
+        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga,
+        /// tera) used is the largest metric prefix such that the corresponding
         /// value is greater than or equal to one.
         /// </summary>
-        public string ToFullWords(string format = null, IFormatProvider provider = null)
-        {
-            return ToString(format, provider, toSymbol: false);
-        }
+        public string ToFullWords(string format = null, IFormatProvider provider = null) =>
+            ToString(format, provider, toSymbol: false);
 
         public override bool Equals(object value)
         {
@@ -331,9 +295,9 @@ namespace Humanizer.Bytes
             }
 
             ByteSize other;
-            if (value is ByteSize)
+            if (value is ByteSize size)
             {
-                other = (ByteSize)value;
+                other = size;
             }
             else
             {
@@ -343,15 +307,11 @@ namespace Humanizer.Bytes
             return Equals(other);
         }
 
-        public bool Equals(ByteSize value)
-        {
-            return Bits == value.Bits;
-        }
+        public bool Equals(ByteSize value) =>
+            Bits == value.Bits;
 
-        public override int GetHashCode()
-        {
-            return Bits.GetHashCode();
-        }
+        public override int GetHashCode() =>
+            Bits.GetHashCode();
 
         public int CompareTo(object obj)
         {
@@ -360,118 +320,76 @@ namespace Humanizer.Bytes
                 return 1;
             }
 
-            if (!(obj is ByteSize))
+            if (obj is ByteSize size)
             {
-                throw new ArgumentException("Object is not a ByteSize");
+                return CompareTo(size);
             }
 
-            return CompareTo((ByteSize)obj);
+            throw new ArgumentException("Object is not a ByteSize");
         }
 
-        public int CompareTo(ByteSize other)
-        {
-            return Bits.CompareTo(other.Bits);
-        }
+        public int CompareTo(ByteSize other) =>
+            Bits.CompareTo(other.Bits);
 
-        public ByteSize Add(ByteSize bs)
-        {
-            return new ByteSize(Bytes + bs.Bytes);
-        }
+        public ByteSize Add(ByteSize bs) =>
+            new(Bytes + bs.Bytes);
 
-        public ByteSize AddBits(long value)
-        {
-            return this + FromBits(value);
-        }
+        public ByteSize AddBits(long value) =>
+            this + FromBits(value);
 
-        public ByteSize AddBytes(double value)
-        {
-            return this + FromBytes(value);
-        }
+        public ByteSize AddBytes(double value) =>
+            this + FromBytes(value);
 
-        public ByteSize AddKilobytes(double value)
-        {
-            return this + FromKilobytes(value);
-        }
+        public ByteSize AddKilobytes(double value) =>
+            this + FromKilobytes(value);
 
-        public ByteSize AddMegabytes(double value)
-        {
-            return this + FromMegabytes(value);
-        }
+        public ByteSize AddMegabytes(double value) =>
+            this + FromMegabytes(value);
 
-        public ByteSize AddGigabytes(double value)
-        {
-            return this + FromGigabytes(value);
-        }
+        public ByteSize AddGigabytes(double value) =>
+            this + FromGigabytes(value);
 
-        public ByteSize AddTerabytes(double value)
-        {
-            return this + FromTerabytes(value);
-        }
+        public ByteSize AddTerabytes(double value) =>
+            this + FromTerabytes(value);
 
-        public ByteSize Subtract(ByteSize bs)
-        {
-            return new ByteSize(Bytes - bs.Bytes);
-        }
+        public ByteSize Subtract(ByteSize bs) =>
+            new(Bytes - bs.Bytes);
 
-        public static ByteSize operator +(ByteSize b1, ByteSize b2)
-        {
-            return new ByteSize(b1.Bytes + b2.Bytes);
-        }
+        public static ByteSize operator +(ByteSize b1, ByteSize b2) =>
+            new(b1.Bytes + b2.Bytes);
 
-        public static ByteSize operator -(ByteSize b1, ByteSize b2)
-        {
-            return new ByteSize(b1.Bytes - b2.Bytes);
-        }
+        public static ByteSize operator -(ByteSize b1, ByteSize b2) =>
+            new(b1.Bytes - b2.Bytes);
 
-        public static ByteSize operator ++(ByteSize b)
-        {
-            return new ByteSize(b.Bytes + 1);
-        }
+        public static ByteSize operator ++(ByteSize b) =>
+            new(b.Bytes + 1);
 
-        public static ByteSize operator -(ByteSize b)
-        {
-            return new ByteSize(-b.Bytes);
-        }
+        public static ByteSize operator -(ByteSize b) =>
+            new(-b.Bytes);
 
-        public static ByteSize operator --(ByteSize b)
-        {
-            return new ByteSize(b.Bytes - 1);
-        }
+        public static ByteSize operator --(ByteSize b) =>
+            new(b.Bytes - 1);
 
-        public static bool operator ==(ByteSize b1, ByteSize b2)
-        {
-            return b1.Bits == b2.Bits;
-        }
+        public static bool operator ==(ByteSize b1, ByteSize b2) =>
+            b1.Bits == b2.Bits;
 
-        public static bool operator !=(ByteSize b1, ByteSize b2)
-        {
-            return b1.Bits != b2.Bits;
-        }
+        public static bool operator !=(ByteSize b1, ByteSize b2) =>
+            b1.Bits != b2.Bits;
 
-        public static bool operator <(ByteSize b1, ByteSize b2)
-        {
-            return b1.Bits < b2.Bits;
-        }
+        public static bool operator <(ByteSize b1, ByteSize b2) =>
+            b1.Bits < b2.Bits;
 
-        public static bool operator <=(ByteSize b1, ByteSize b2)
-        {
-            return b1.Bits <= b2.Bits;
-        }
+        public static bool operator <=(ByteSize b1, ByteSize b2) =>
+            b1.Bits <= b2.Bits;
 
-        public static bool operator >(ByteSize b1, ByteSize b2)
-        {
-            return b1.Bits > b2.Bits;
-        }
+        public static bool operator >(ByteSize b1, ByteSize b2) =>
+            b1.Bits > b2.Bits;
 
-        public static bool operator >=(ByteSize b1, ByteSize b2)
-        {
-            return b1.Bits >= b2.Bits;
-        }
+        public static bool operator >=(ByteSize b1, ByteSize b2) =>
+            b1.Bits >= b2.Bits;
 
-        public static bool TryParse(string s, out ByteSize result)
-        {
-            return TryParse(s, null, out result);
-        }
+        public static bool TryParse(string s, out ByteSize result) =>
+            TryParse(s, null, out result);
 
         public static bool TryParse(string s, IFormatProvider formatProvider, out ByteSize result)
         {
@@ -495,7 +413,7 @@ namespace Humanizer.Bytes
             };
 
             // Setup the result
-            result = new ByteSize();
+            result = new();
 
             // Get the index of the first non-digit character
             s = s.TrimStart(); // Protect against leading spaces
@@ -572,7 +490,7 @@ namespace Humanizer.Bytes
             return true;
         }
 
-        private static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+        static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
         {
             if (formatProvider is NumberFormatInfo numberFormat)
                 return numberFormat;
@@ -582,10 +500,8 @@ namespace Humanizer.Bytes
             return culture.NumberFormat;
         }
 
-        public static ByteSize Parse(string s)
-        {
-            return Parse(s, null);
-        }
+        public static ByteSize Parse(string s) =>
+            Parse(s, null);
 
         public static ByteSize Parse(string s, IFormatProvider formatProvider)
         {

@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ukUA
+﻿namespace Humanizer.Tests.Localisation.ukUA
 {
     [UseCulture("uk-UA")]
     public class OrdinalizeTests
     {
-
         [Theory]
         [InlineData("0", "0-й")]
         [InlineData("1", "1-й")]
@@ -20,10 +17,8 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData("102", "102-й")]
         [InlineData("103", "103-й")]
         [InlineData("1001", "1001-й")]
-        public void OrdinalizeString(string number, string ordinalized)
-        {
+        public void OrdinalizeString(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData("0", "0-а")]
@@ -39,10 +34,8 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData("102", "102-а")]
         [InlineData("103", "103-я")]
         [InlineData("1001", "1001-а")]
-        public void OrdinalizeStringFeminine(string number, string ordinalized)
-        {
+        public void OrdinalizeStringFeminine(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
 
         [Theory]
         [InlineData("0", "0-е")]
@@ -58,10 +51,8 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData("102", "102-е")]
         [InlineData("103", "103-є")]
         [InlineData("1001", "1001-е")]
-        public void OrdinalizeStringNeuter(string number, string ordinalized)
-        {
+        public void OrdinalizeStringNeuter(string number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Neuter), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0-й")]
@@ -78,10 +69,8 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData(102, "102-й")]
         [InlineData(103, "103-й")]
         [InlineData(1001, "1001-й")]
-        public void OrdinalizeNumber(int number, string ordinalized)
-        {
+        public void OrdinalizeNumber(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Masculine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0-а")]
@@ -98,10 +87,8 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData(102, "102-а")]
         [InlineData(103, "103-я")]
         [InlineData(1001, "1001-а")]
-        public void OrdinalizeNumberFeminine(int number, string ordinalized)
-        {
+        public void OrdinalizeNumberFeminine(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Feminine), ordinalized);
-        }
 
         [Theory]
         [InlineData(0, "0-е")]
@@ -117,9 +104,7 @@ namespace Humanizer.Tests.Localisation.ukUA
         [InlineData(102, "102-е")]
         [InlineData(103, "103-є")]
         [InlineData(1001, "1001-е")]
-        public void OrdinalizeNumberNeuter(int number, string ordinalized)
-        {
+        public void OrdinalizeNumberNeuter(int number, string ordinalized) =>
             Assert.Equal(number.Ordinalize(GrammaticalGender.Neuter), ordinalized);
-        }
     }
 }

@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class CzechNumberToWordsConverter : GenderedNumberToWordsConverter
+    class CzechNumberToWordsConverter(CultureInfo culture) :
+        GenderedNumberToWordsConverter
     {
-        private static readonly string[] BillionsMap = { "miliarda", "miliardy", "miliard" };
-        private static readonly string[] MillionsMap = { "milion", "miliony", "milionů" };
-        private static readonly string[] ThousandsMap = { "tisíc", "tisíce", "tisíc" };
-        private static readonly string[] HundredsMap = { "nula", "sto", "dvě stě", "tři sta", "čtyři sta", "pět set", "šest set", "sedm set", "osm set", "devět set" };
-        private static readonly string[] TensMap = { "nula", "deset", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát" };
-        private static readonly string[] UnitsMap = { "nula", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct" };
+        static readonly string[] BillionsMap = ["miliarda", "miliardy", "miliard"];
+        static readonly string[] MillionsMap = ["milion", "miliony", "milionů"];
+        static readonly string[] ThousandsMap = ["tisíc", "tisíce", "tisíc"];
+        static readonly string[] HundredsMap = ["nula", "sto", "dvě stě", "tři sta", "čtyři sta", "pět set", "šest set", "sedm set", "osm set", "devět set"];
+        static readonly string[] TensMap = ["nula", "deset", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát"];
+        static readonly string[] UnitsMap = ["nula", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"];
 
-        private static readonly string[] UnitsMasculineOverrideMap = { "jeden", "dva" };
-        private static readonly string[] UnitsFeminineOverrideMap = { "jedna", "dvě" };
-        private static readonly string[] UnitsNeuterOverride = { "jedno", "dvě" };
-        private static readonly string[] UnitsIntraOverride = { "jedna", "dva" };
-
-        private readonly CultureInfo _culture;
-
-        public CzechNumberToWordsConverter(CultureInfo culture)
-        {
-            _culture = culture;
-        }
+        static readonly string[] UnitsMasculineOverrideMap = ["jeden", "dva"];
+        static readonly string[] UnitsFeminineOverrideMap = ["jedna", "dvě"];
+        static readonly string[] UnitsNeuterOverride = ["jedno", "dvě"];
+        static readonly string[] UnitsIntraOverride = ["jedna", "dva"];
 
         public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         {
@@ -49,12 +38,10 @@ namespace Humanizer.Localisation.NumberToWords
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return number.ToString(_culture);
-        }
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            number.ToString(culture);
 
-        private string UnitByGender(long number, GrammaticalGender? gender)
+        static string UnitByGender(long number, GrammaticalGender? gender)
         {
             if (number != 1 && number != 2)
             {
@@ -71,7 +58,7 @@ namespace Humanizer.Localisation.NumberToWords
             };
         }
 
-        private void CollectLessThanThousand(List<string> parts, long number, GrammaticalGender? gender)
+        static void CollectLessThanThousand(List<string> parts, long number, GrammaticalGender? gender)
         {
             if (number >= 100)
             {
@@ -91,7 +78,7 @@ namespace Humanizer.Localisation.NumberToWords
             }
         }
 
-        private void CollectThousandAndAbove(List<string> parts, ref long number, long divisor, GrammaticalGender gender, string[] map)
+        static void CollectThousandAndAbove(List<string> parts, ref long number, long divisor, GrammaticalGender gender, string[] map)
         {
             var n = number / divisor;
 
@@ -100,7 +87,7 @@ namespace Humanizer.Localisation.NumberToWords
                 return;
             }
 
-            CollectLessThanThousand(parts, n, n < 19 ? gender : (GrammaticalGender?)null);
+            CollectLessThanThousand(parts, n, n < 19 ? gender : null);
 
             var units = n % 1000;
 
@@ -108,7 +95,7 @@ namespace Humanizer.Localisation.NumberToWords
             {
                 parts.Add(map[0]);
             }
-            else if (units > 1 && units < 5)
+            else if (units is > 1 and < 5)
             {
                 parts.Add(map[1]);
             }

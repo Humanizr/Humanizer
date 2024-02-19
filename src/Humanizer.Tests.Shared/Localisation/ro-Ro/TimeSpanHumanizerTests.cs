@@ -1,10 +1,5 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.roRO
+﻿namespace Humanizer.Tests.Localisation.roRO
 {
-
-
     /// <summary>
     /// Test that for values bigger than 19 "de" is added between the numeral
     /// and the time unit: http://ebooks.unibuc.ro/filologie/NForascu-DGLR/numerale.htm.
@@ -13,7 +8,6 @@ namespace Humanizer.Tests.Localisation.roRO
     [UseCulture("ro-RO")]
     public class TimeSpanHumanizerTests
     {
-
         [Theory]
         [InlineData(1, "1 milisecundă")]
         [InlineData(14, "14 milisecunde")]
@@ -34,7 +28,7 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(156, "2 minute")]
         public void Seconds(int seconds, string expected, bool toWords = false)
         {
-            var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: Humanizer.Localisation.TimeUnit.Second,
+            var actual = TimeSpan.FromSeconds(seconds).Humanize(minUnit: TimeUnit.Second,
                 toWords: toWords);
             Assert.Equal(expected, actual);
         }
@@ -83,17 +77,14 @@ namespace Humanizer.Tests.Localisation.roRO
             Assert.Equal(expected, actual);
         }
 
-
         [Theory]
         [Trait("Translation", "Native speaker")]
         [InlineData(31, "1 lună")]
         [InlineData(61, "2 luni")]
         [InlineData(92, "3 luni")]
         [InlineData(335, "11 luni")]
-        public void Months(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Months(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [Trait("Translation", "Native speaker")]
@@ -102,23 +93,17 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(1096, "3 ani")]
         [InlineData(4018, "11 ani")]
         [InlineData(7500, "20 de ani")]
-        public void Years(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Years(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Fact]
-        public void NoTime()
-        {
+        public void NoTime() =>
             Assert.Equal("0 de milisecunde", TimeSpan.Zero.Humanize());
-        }
 
         [Fact, CustomDescription("The name of this test is confusing because has no sense. Instead should be read as an interval with duration zero and not the absence of time.")]
-        public void NoTimeToWords()
-        {
+        public void NoTimeToWords() =>
             // Usage in Romanian: "Timp execuție: 0 secunde."
             // Should be equivalent with TimeSpan.FromSeconds(0).Humanize()
             Assert.Equal("0 secunde", TimeSpan.Zero.Humanize(toWords: true));
-        }
     }
 }

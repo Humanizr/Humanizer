@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.el
+﻿namespace Humanizer.Tests.Localisation.el
 {
-  
-        [UseCulture("el")]
-        public class NumberToOrdinalWordsTests
-        {
+    [UseCulture("el")]
+    public class NumberToOrdinalWordsTests
+    {
         [InlineData(-1, "")]
         [InlineData(0, "")]
         [InlineData(1, "πρώτος")]
@@ -34,9 +25,7 @@ namespace Humanizer.Tests.Localisation.el
         [InlineData(2000, "")]
 
         [Theory]
-        public void ToOrdinalWordsInt(int number, string expected)
-            {
-                Assert.Equal(expected, number.ToOrdinalWords());
-            }
+        public void ToOrdinalWordsInt(int number, string expected) =>
+            Assert.Equal(expected, number.ToOrdinalWords());
     }
 }

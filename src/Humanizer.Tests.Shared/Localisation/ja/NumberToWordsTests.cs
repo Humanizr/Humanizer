@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.ja
+﻿namespace Humanizer.Tests.Localisation.ja
 {
     [UseCulture("ja")]
     public class NumberToWordsTests
@@ -37,10 +35,8 @@ namespace Humanizer.Tests.Localisation.ja
         [InlineData(123456789, "一億二千三百四十五万六千七百八十九")]
         [InlineData(1234567890, "十二億三千四百五十六万七千八百九十")]
         [InlineData(-123, "マイナス 百二十三")]
-        public void ToWordsInt(int number, string expected)
-        {
+        public void ToWordsInt(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1L, "一")]
@@ -62,10 +58,8 @@ namespace Humanizer.Tests.Localisation.ja
         [InlineData(11111111111111111L, "一京千百十一兆千百十一億千百十一万千百十一")]
         [InlineData(111111111111111111L, "十一京千百十一兆千百十一億千百十一万千百十一")]
         [InlineData(1111111111111111111L, "百十一京千百十一兆千百十一億千百十一万千百十一")]
-        public void ToWordsLong(long number, string expected)
-        {
+        public void ToWordsLong(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "〇番目")]
@@ -77,9 +71,7 @@ namespace Humanizer.Tests.Localisation.ja
         [InlineData(100, "百番目")]
         [InlineData(112, "百十二番目")]
         [InlineData(1000000, "百万番目")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

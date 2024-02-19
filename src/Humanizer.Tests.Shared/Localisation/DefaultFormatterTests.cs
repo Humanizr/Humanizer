@@ -1,12 +1,7 @@
-﻿using System;
-
-using Xunit;
-
-namespace Humanizer.Tests.Localisation
+﻿namespace Humanizer.Tests.Localisation
 {
     public class DefaultFormatterTests
     {
-
         [Fact]
         [UseCulture("iv")]
         public void HandlesNotImplementedCollectionFormattersGracefully()

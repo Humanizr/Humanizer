@@ -1,14 +1,10 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class HebrewFormatter : DefaultFormatter
+    class HebrewFormatter() :
+        DefaultFormatter("he")
     {
-        private const string DualPostfix = "_Dual";
-        private const string PluralPostfix = "_Plural";
-
-        public HebrewFormatter()
-            : base("he")
-        {
-        }
+        const string DualPostfix = "_Dual";
+        const string PluralPostfix = "_Plural";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
@@ -20,7 +16,7 @@
 
             //In Hebrew pluralization entities where the count is between 3 and 10 gets a different word.
             //See http://lib.cet.ac.il/pages/item.asp?item=21585 for explanation
-            if (number >= 3 && number <= 10)
+            if (number is >= 3 and <= 10)
             {
                 return resourceKey + PluralPostfix;
             }

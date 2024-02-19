@@ -1,7 +1,4 @@
-﻿using Humanizer.Localisation;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.cs
+﻿namespace Humanizer.Tests.Localisation.cs
 {
     [UseCulture("cs-CZ")]
     public class DateHumanizeTests
@@ -14,10 +11,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "za 5 sekund")]
         [InlineData(6, "za 6 sekund")]
         [InlineData(10, "za 10 sekund")]
-        public void SecondsFromNow(int seconds, string expected)
-        {
+        public void SecondsFromNow(int seconds, string expected) =>
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za minutu")]
@@ -27,10 +22,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "za 5 minut")]
         [InlineData(6, "za 6 minut")]
         [InlineData(10, "za 10 minut")]
-        public void MinutesFromNow(int minutes, string expected)
-        {
+        public void MinutesFromNow(int minutes, string expected) =>
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za hodinu")]
@@ -40,10 +33,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "za 5 hodin")]
         [InlineData(6, "za 6 hodin")]
         [InlineData(10, "za 10 hodin")]
-        public void HoursFromNow(int hours, string expected)
-        {
+        public void HoursFromNow(int hours, string expected) =>
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "zítra")]
@@ -52,10 +43,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(4, "za 4 dny")]
         [InlineData(9, "za 9 dnů")]
         [InlineData(10, "za 10 dnů")]
-        public void DayFromNow(int days, string expected)
-        {
+        public void DayFromNow(int days, string expected) =>
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za měsíc")]
@@ -65,10 +54,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "za 5 měsíců")]
         [InlineData(6, "za 6 měsíců")]
         [InlineData(10, "za 10 měsíců")]
-        public void MonthsFromNow(int months, string expected)
-        {
+        public void MonthsFromNow(int months, string expected) =>
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "za rok")]
@@ -78,10 +65,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "za 5 let")]
         [InlineData(6, "za 6 let")]
         [InlineData(10, "za 10 let")]
-        public void YearsFromNow(int years, string expected)
-        {
+        public void YearsFromNow(int years, string expected) =>
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "před sekundou")]
@@ -91,10 +76,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "před 5 sekundami")]
         [InlineData(6, "před 6 sekundami")]
         [InlineData(10, "před 10 sekundami")]
-        public void SecondsAgo(int seconds, string expected)
-        {
+        public void SecondsAgo(int seconds, string expected) =>
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "před minutou")]
@@ -105,10 +88,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(6, "před 6 minutami")]
         [InlineData(10, "před 10 minutami")]
         [InlineData(60, "před hodinou")]
-        public void MinutesAgo(int minutes, string expected)
-        {
+        public void MinutesAgo(int minutes, string expected) =>
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "před hodinou")]
@@ -118,10 +99,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "před 5 hodinami")]
         [InlineData(6, "před 6 hodinami")]
         [InlineData(10, "před 10 hodinami")]
-        public void HoursAgo(int hours, string expected)
-        {
+        public void HoursAgo(int hours, string expected) =>
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "včera")]
@@ -130,10 +109,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(4, "před 4 dny")]
         [InlineData(9, "před 9 dny")]
         [InlineData(10, "před 10 dny")]
-        public void DayAgo(int days, string expected)
-        {
+        public void DayAgo(int days, string expected) =>
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "před měsícem")]
@@ -143,10 +120,8 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "před 5 měsíci")]
         [InlineData(6, "před 6 měsíci")]
         [InlineData(10, "před 10 měsíci")]
-        public void MonthsAgo(int months, string expected)
-        {
+        public void MonthsAgo(int months, string expected) =>
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "před rokem")]
@@ -156,9 +131,7 @@ namespace Humanizer.Tests.Localisation.cs
         [InlineData(5, "před 5 lety")]
         [InlineData(6, "před 6 lety")]
         [InlineData(10, "před 10 lety")]
-        public void YearsAgo(int years, string expected)
-        {
+        public void YearsAgo(int years, string expected) =>
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
-        }
     }
 }

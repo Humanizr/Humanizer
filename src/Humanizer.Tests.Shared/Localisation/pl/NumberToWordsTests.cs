@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.pl
+﻿namespace Humanizer.Tests.Localisation.pl
 {
     [UseCulture("pl")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "zero")]
         [InlineData(1, "jeden")]
@@ -58,26 +55,24 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(1501001892, "miliard pięćset jeden milionów tysiąc osiemset dziewięćdziesiąt dwa")]
         [InlineData(2147483647, "dwa miliardy sto czterdzieści siedem milionów czterysta osiemdziesiąt trzy tysiące sześćset czterdzieści siedem")]
         [InlineData(-1501001892, "minus miliard pięćset jeden milionów tysiąc osiemset dziewięćdziesiąt dwa")]
-        [InlineData(long.MaxValue, 
+        [InlineData(long.MaxValue,
             "dziewięć trylionów " +
             "dwieście dwadzieścia trzy biliardy " +
-            "trzysta siedemdziesiąt dwa biliony " + 
+            "trzysta siedemdziesiąt dwa biliony " +
             "trzydzieści sześć miliardów " +
             "osiemset pięćdziesiąt cztery miliony " +
             "siedemset siedemdziesiąt pięć tysięcy " +
             "osiemset siedem")]
-        [InlineData(long.MinValue, 
+        [InlineData(long.MinValue,
             "minus dziewięć trylionów " +
             "dwieście dwadzieścia trzy biliardy " +
-            "trzysta siedemdziesiąt dwa biliony " + 
+            "trzysta siedemdziesiąt dwa biliony " +
             "trzydzieści sześć miliardów " +
             "osiemset pięćdziesiąt cztery miliony " +
             "siedemset siedemdziesiąt pięć tysięcy " +
             "osiemset osiem")]
-        public void ToWordsPolish(long number, string expected)
-        {
+        public void ToWordsPolish(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(-1, "minus jeden", GrammaticalGender.Masculine)]
@@ -106,9 +101,7 @@ namespace Humanizer.Tests.Localisation.pl
         [InlineData(1000002, "milion dwa", GrammaticalGender.Masculine)]
         [InlineData(1000002, "milion dwie", GrammaticalGender.Feminine)]
         [InlineData(1000002, "milion dwa", GrammaticalGender.Neuter)]
-        public void ToWordsPolishWithGender(int number, string expected, GrammaticalGender gender)
-        {
+        public void ToWordsPolishWithGender(int number, string expected, GrammaticalGender gender) =>
             Assert.Equal(expected, number.ToWords(gender));
-        }
     }
 }

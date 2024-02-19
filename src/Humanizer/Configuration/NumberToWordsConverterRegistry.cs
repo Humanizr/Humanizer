@@ -1,19 +1,17 @@
-﻿using Humanizer.Localisation.NumberToWords;
-
-namespace Humanizer.Configuration
+﻿namespace Humanizer
 {
-    internal class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
+    class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
     {
         public NumberToWordsConverterRegistry()
-            : base((culture) => new EnglishNumberToWordsConverter())
+            : base(_ => new EnglishNumberToWordsConverter())
         {
             Register("af", new AfrikaansNumberToWordsConverter());
             Register("en", new EnglishNumberToWordsConverter());
             Register("ar", new ArabicNumberToWordsConverter());
-            Register("cs", (culture) => new CzechNumberToWordsConverter(culture));
+            Register("cs", _ => new CzechNumberToWordsConverter(_));
             Register("fa", new FarsiNumberToWordsConverter());
             Register("es", new SpanishNumberToWordsConverter());
-            Register("pl", (culture) => new PolishNumberToWordsConverter(culture));
+            Register("pl", _ => new PolishNumberToWordsConverter(_));
             Register("pt", new PortugueseNumberToWordsConverter());
             Register("pt-BR", new BrazilianPortugueseNumberToWordsConverter());
             Register("ro", new RomanianNumberToWordsConverter());
@@ -23,8 +21,8 @@ namespace Humanizer.Configuration
             Register("fr-CH", new FrenchSwissNumberToWordsConverter());
             Register("fr", new FrenchNumberToWordsConverter());
             Register("nl", new DutchNumberToWordsConverter());
-            Register("he", (culture) => new HebrewNumberToWordsConverter(culture));
-            Register("sl", (culture) => new SlovenianNumberToWordsConverter(culture));
+            Register("he", _ => new HebrewNumberToWordsConverter(_));
+            Register("sl", _ => new SlovenianNumberToWordsConverter(_));
             Register("de", new GermanNumberToWordsConverter());
             Register("de-CH", new GermanSwissLiechtensteinNumberToWordsConverter());
             Register("de-LI", new GermanSwissLiechtensteinNumberToWordsConverter());
@@ -37,10 +35,10 @@ namespace Humanizer.Configuration
             Register("uz-Latn-UZ", new UzbekLatnNumberToWordConverter());
             Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
             Register("sv", new SwedishNumberToWordsConverter());
-            Register("sr", (culture) => new SerbianCyrlNumberToWordsConverter(culture));
-            Register("sr-Latn", (culture) => new SerbianNumberToWordsConverter(culture));
+            Register("sr", _ => new SerbianCyrlNumberToWordsConverter(_));
+            Register("sr-Latn", _ => new SerbianNumberToWordsConverter(_));
             Register("ta", new TamilNumberToWordsConverter());
-            Register("hr", (culture) => new CroatianNumberToWordsConverter(culture));
+            Register("hr", _ => new CroatianNumberToWordsConverter(_));
             Register("nb", new NorwegianBokmalNumberToWordsConverter());
             Register("vi", new VietnameseNumberToWordsConverter());
             Register("zh-CN", new ChineseNumberToWordsConverter());
@@ -54,7 +52,8 @@ namespace Humanizer.Configuration
             Register("lv", new LatvianNumberToWordsConverter());
             Register("ko-KR", new KoreanNumberToWordsConverter());
             Register("en-IN", new IndianNumberToWordsConverter());
-
+            Register("lt", new LithuanianNumberToWordsConverter());
+            Register("lb", new LuxembourgishNumberToWordsConverter());
         }
     }
 }

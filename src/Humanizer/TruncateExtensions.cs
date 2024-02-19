@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Allow strings to be truncated
@@ -13,10 +11,8 @@ namespace Humanizer
         /// <param name="input">The string to be truncated</param>
         /// <param name="length">The length to truncate to</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length)
-        {
-            return input.Truncate(length, "…", Truncator.FixedLength);
-        }
+        public static string Truncate(this string input, int length) =>
+            input.Truncate(length, "…", Truncator.FixedLength);
 
         /// <summary>
         /// Truncate the string
@@ -26,10 +22,8 @@ namespace Humanizer
         /// <param name="truncator">The truncate to use</param>
         /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length, ITruncator truncator, TruncateFrom from = TruncateFrom.Right)
-        {
-            return input.Truncate(length, "…", truncator, from);
-        }
+        public static string Truncate(this string input, int length, ITruncator truncator, TruncateFrom from = TruncateFrom.Right) =>
+            input.Truncate(length, "…", truncator, from);
 
         /// <summary>
         /// Truncate the string
@@ -39,10 +33,8 @@ namespace Humanizer
         /// <param name="truncationString">The string used to truncate with</param>
         /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length, string truncationString, TruncateFrom from = TruncateFrom.Right)
-        {
-            return input.Truncate(length, truncationString, Truncator.FixedLength, from);
-        }
+        public static string Truncate(this string input, int length, string truncationString, TruncateFrom from = TruncateFrom.Right) =>
+            input.Truncate(length, truncationString, Truncator.FixedLength, from);
 
         /// <summary>
         /// Truncate the string

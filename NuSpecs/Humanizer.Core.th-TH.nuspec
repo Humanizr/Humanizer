@@ -17,7 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\netstandard1.0\th-TH\*.*" target="lib\netstandard1.0\th-TH" />
     <file src="Humanizer\bin\Release\netstandard2.0\th-TH\*.*" target="lib\netstandard2.0\th-TH" />
     <file src="..\logo.png" target="logo.png" />
   </files>

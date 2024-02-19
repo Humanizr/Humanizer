@@ -1,8 +1,4 @@
-﻿using System.Linq;
-
-using Humanizer;
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Contains extension methods for dehumanizing strings.
@@ -14,14 +10,10 @@ namespace Humanizer
         /// If a string is already dehumanized then it leaves it alone 'SomeStringAndAnotherString' -> 'SomeStringAndAnotherString'
         /// </summary>
         /// <param name="input">The string to be dehumanized</param>
-        /// <returns></returns>
         public static string Dehumanize(this string input)
         {
             var pascalizedWords = input.Split(' ').Select(word => word.Humanize().Pascalize());
-            return string.Join("", pascalizedWords).Replace(" ", "");
+            return string.Concat(pascalizedWords).Replace(" ", "");
         }
     }
 }
-
-
-

@@ -1,13 +1,9 @@
-using System.Globalization;
-
 namespace Humanizer
 {
-    internal class ToLowerCase : ICulturedStringTransformer
+    class ToLowerCase : ICulturedStringTransformer
     {
-        public string Transform(string input)
-        {
-            return Transform(input, null);
-        }
+        public string Transform(string input) =>
+            Transform(input, null);
 
         public string Transform(string input, CultureInfo culture)
         {

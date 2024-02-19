@@ -1,6 +1,3 @@
-﻿namespace Humanizer.Localisation.NumberToWords
-{
-    internal class FrenchSwissNumberToWordsConverter : FrenchNumberToWordsConverterBase
-    {
-    }
-}
+﻿namespace Humanizer;
+
+class FrenchSwissNumberToWordsConverter : FrenchNumberToWordsConverterBase;

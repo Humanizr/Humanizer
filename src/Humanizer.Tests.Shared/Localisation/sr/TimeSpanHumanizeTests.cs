@@ -1,22 +1,16 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.sr
+﻿namespace Humanizer.Tests.Localisation.sr
 {
     [UseCulture("sr")]
     public class TimeSpanHumanizeTests
     {
-
         [Theory]
         [Trait("Translation", "Google")]
         [InlineData(366, "1 година")]
         [InlineData(731, "2 године")]
         [InlineData(1096, "3 године")]
         [InlineData(4018, "11 година")]
-        public void Years(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Years(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [Trait("Translation", "Google")]
@@ -24,10 +18,8 @@ namespace Humanizer.Tests.Localisation.sr
         [InlineData(61, "2 месеца")]
         [InlineData(92, "3 месеца")]
         [InlineData(335, "11 месеци")]
-        public void Months(int days, string expected)
-        {
-            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: Humanizer.Localisation.TimeUnit.Year));
-        }
+        public void Months(int days, string expected) =>
+            Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
         [Theory]
         [InlineData(35, "5 недеља")]

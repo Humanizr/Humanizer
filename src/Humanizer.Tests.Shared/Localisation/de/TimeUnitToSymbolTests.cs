@@ -1,10 +1,4 @@
-﻿using System;
-
-using Humanizer.Localisation;
-
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.de
+﻿namespace Humanizer.Tests.Localisation.de
 {
     [UseCulture("de-DE")]
     public class TimeUnitToSymbolTests
@@ -19,9 +13,7 @@ namespace Humanizer.Tests.Localisation.de
         [InlineData(TimeUnit.Week, "Woche")]
         [InlineData(TimeUnit.Month, "M")]
         [InlineData(TimeUnit.Year, "a")]
-        public void ToSymbol(TimeUnit unit, string expected)
-        {
+        public void ToSymbol(TimeUnit unit, string expected) =>
             Assert.Equal(expected, unit.ToSymbol());
-        }
     }
 }

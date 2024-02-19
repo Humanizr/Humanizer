@@ -1,11 +1,8 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.fiFI
+﻿namespace Humanizer.Tests.Localisation.fiFI
 {
     [UseCulture("fi-FI")]
     public class NumberToWordsTests
     {
-
         [Theory]
         [InlineData(0, "nolla")]
         [InlineData(1, "yksi")]
@@ -32,10 +29,8 @@ namespace Humanizer.Tests.Localisation.fiFI
         [InlineData(1000000000, "miljardi")]
         [InlineData(2147483647, "kaksimiljardia sataneljäkymmentäseitsemänmiljoonaa neljäsataakahdeksankymmentäkolmetuhatta kuusisataaneljäkymmentäseitsemän")]  // int.MaxValue
         [InlineData(-2147483647, "miinus kaksimiljardia sataneljäkymmentäseitsemänmiljoonaa neljäsataakahdeksankymmentäkolmetuhatta kuusisataaneljäkymmentäseitsemän")]  // int.MinValue + 1
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "nollas")]
@@ -63,9 +58,7 @@ namespace Humanizer.Tests.Localisation.fiFI
         [InlineData(1000000000, "miljardis")]
         [InlineData(1000000001, "miljardisensimmäinen")]
         [InlineData(2147483647, "kahdesmiljardissadasneljäskymmenesseitsemäsmiljoonasneljässadaskahdeksaskymmeneskolmastuhanneskuudessadasneljäskymmenesseitsemäs")] // int.MaxValue
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
     }
 }

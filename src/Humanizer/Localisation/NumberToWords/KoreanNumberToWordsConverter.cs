@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap1 = { "", "", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
-        private static readonly string[] UnitsMap2 = { "", "십", "백", "천" };
-        private static readonly string[] UnitsMap3 = { "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항하사", "아승기", "나유타", "불가사의", "무량대수"};
-        
-        private static readonly Dictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
+        static readonly string[] UnitsMap1 = ["", "", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+        static readonly string[] UnitsMap2 = ["", "십", "백", "천"];
+        static readonly string[] UnitsMap3 = ["", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항하사", "아승기", "나유타", "불가사의", "무량대수"];
+
+        static readonly Dictionary<long, string> OrdinalExceptions = new()
         {
             {0, "영번째"},
             {1, "첫번째"},
@@ -32,17 +30,13 @@ namespace Humanizer.Localisation.NumberToWords
             {19, "열아홉째"},
         };
 
-        public override string Convert(long number)
-        {
-            return ConvertImpl(number, false);
-        }
+        public override string Convert(long number) =>
+            ConvertImpl(number, false);
 
-        public override string ConvertToOrdinal(int number)
-        {
-            return ConvertImpl(number, true);
-        }
+        public override string ConvertToOrdinal(int number) =>
+            ConvertImpl(number, true);
 
-        private string ConvertImpl(long number, bool isOrdinal)
+        static string ConvertImpl(long number, bool isOrdinal)
         {
             if (isOrdinal && number < 20)
             {
@@ -57,7 +51,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("마이너스 {0}", ConvertImpl(-number, false));
+                return $"마이너스 {ConvertImpl(-number, false)}";
             }
 
             var parts = new List<string>();
@@ -84,11 +78,11 @@ namespace Humanizer.Localisation.NumberToWords
             }
 
             parts.Reverse();
-            var toWords = string.Join("", parts.ToArray());
+            var toWords = string.Concat(parts);
 
             if (isOrdinal)
             {
-                toWords = string.Format("{0}번째", toWords);
+                toWords = $"{toWords}번째";
             }
 
             return toWords;

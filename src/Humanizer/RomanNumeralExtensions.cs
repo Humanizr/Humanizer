@@ -1,8 +1,4 @@
 // Done by Jesse Slicer https://github.com/jslicer
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Humanizer
 {
@@ -11,9 +7,9 @@ namespace Humanizer
     /// </summary>
     public static class RomanNumeralExtensions
     {
-        private const int NumberOfRomanNumeralMaps = 13;
+        const int NumberOfRomanNumeralMaps = 13;
 
-        private static readonly IDictionary<string, int> RomanNumerals =
+        static readonly IDictionary<string, int> RomanNumerals =
             new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
                 { "M",  1000 },
@@ -31,10 +27,10 @@ namespace Humanizer
                 { "I",  1 }
             };
 
-        private static readonly Regex ValidRomanNumeral =
-            new Regex(
+        static readonly Regex ValidRomanNumeral =
+            new(
                 "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
-                RegexOptionsUtil.Compiled);
+                RegexOptions.Compiled);
 
         /// <summary>
         /// Converts Roman numbers into integer
@@ -52,7 +48,7 @@ namespace Humanizer
 
             var length = input.Length;
 
-            if ((length == 0) || IsInvalidRomanNumeral(input))
+            if (length == 0 || IsInvalidRomanNumeral(input))
             {
                 throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(input));
             }
@@ -93,7 +89,7 @@ namespace Humanizer
             const int maxValue = 3999;
             const int maxRomanNumeralLength = 15;
 
-            if ((input < minValue) || (input > maxValue))
+            if (input is < minValue or > maxValue)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -112,9 +108,7 @@ namespace Humanizer
             return sb.ToString();
         }
 
-        private static bool IsInvalidRomanNumeral(string input)
-        {
-            return !ValidRomanNumeral.IsMatch(input);
-        }
+        static bool IsInvalidRomanNumeral(string input) =>
+            !ValidRomanNumeral.IsMatch(input);
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-
-namespace Humanizer.Localisation.DateToOrdinalWords
+﻿namespace Humanizer
 {
-    internal class UsDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
+    class UsDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
     {
-        public override string Convert(DateTime date)
-        {
-            return date.ToString("MMMM ") + date.Day.Ordinalize() + date.ToString(", yyyy");
-        }
+        public override string Convert(DateTime date) =>
+            date.ToString("MMMM ") + date.Day.Ordinalize() + date.ToString(", yyyy");
     }
 }

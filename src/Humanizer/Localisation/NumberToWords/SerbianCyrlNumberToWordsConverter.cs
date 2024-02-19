@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class SerbianCyrlNumberToWordsConverter : GenderlessNumberToWordsConverter
+    class SerbianCyrlNumberToWordsConverter(CultureInfo culture) :
+        GenderlessNumberToWordsConverter
     {
-        private static readonly string[] UnitsMap = { "нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест" };
-        private static readonly string[] TensMap = { "нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет" };
-
-        private readonly CultureInfo _culture;
-
-        public SerbianCyrlNumberToWordsConverter(CultureInfo culture)
-        {
-            _culture = culture;
-        }
+        static readonly string[] UnitsMap = ["нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест"];
+        static readonly string[] TensMap = ["нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет"];
 
         public override string Convert(long input)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
+            if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
             }
@@ -31,7 +21,7 @@ namespace Humanizer.Localisation.NumberToWords
 
             if (number < 0)
             {
-                return string.Format("- {0}", Convert(-number));
+                return $"- {Convert(-number)}";
             }
 
             var parts = new List<string>();
@@ -101,21 +91,19 @@ namespace Humanizer.Localisation.NumberToWords
 
                     if (units > 0)
                     {
-                        parts.Add(string.Format(" {0}", UnitsMap[units]));
+                        parts.Add($" {UnitsMap[units]}");
                     }
                 }
             }
 
-            return string.Join("", parts);
+            return string.Concat(parts);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
+        public override string ConvertToOrdinal(int number) =>
             //TODO: In progress
-            return number.ToString(_culture);
-        }
+            number.ToString(culture);
 
-        private string Part(string singular, string dual, string trialQuadral, string plural, int number)
+        string Part(string singular, string dual, string trialQuadral, string plural, int number)
         {
             switch (number)
             {

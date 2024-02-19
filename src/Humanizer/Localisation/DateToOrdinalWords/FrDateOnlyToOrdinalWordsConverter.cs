@@ -1,9 +1,8 @@
 ﻿#if NET6_0_OR_GREATER
-using System;
 
-namespace Humanizer.Localisation.DateToOrdinalWords
+namespace Humanizer
 {
-    internal class FrDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
+    class FrDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
     {
         public override string Convert(DateOnly date)
         {

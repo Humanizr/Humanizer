@@ -1,19 +1,14 @@
-﻿using System;
-using System.Threading;
-
-namespace Humanizer.Inflections
+﻿namespace Humanizer
 {
     /// <summary>
     /// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.
     /// </summary>
     public static class Vocabularies
     {
-        private static readonly Lazy<Vocabulary> Instance;
+        static readonly Lazy<Vocabulary> Instance;
 
-        static Vocabularies()
-        {
-            Instance = new Lazy<Vocabulary>(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
-        }
+        static Vocabularies() =>
+            Instance = new(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
         /// The default vocabulary used for singular/plural irregularities.
@@ -22,7 +17,7 @@ namespace Humanizer.Inflections
         /// </summary>
         public static Vocabulary Default => Instance.Value;
 
-        private static Vocabulary BuildDefault()
+        static Vocabulary BuildDefault()
         {
             var _default = new Vocabulary();
 
@@ -89,17 +84,19 @@ namespace Humanizer.Inflections
             _default.AddIrregular("database", "databases");
             _default.AddIrregular("zombie", "zombies");
             _default.AddIrregular("personnel", "personnel");
-            //Fix #789
             _default.AddIrregular("cache", "caches");
-
-            //Fix 975
             _default.AddIrregular("ex", "exes", matchEnding: false);
             _default.AddIrregular("is", "are", matchEnding: false);
+            _default.AddIrregular("was", "were", matchEnding: false);
             _default.AddIrregular("that", "those", matchEnding: false);
             _default.AddIrregular("this", "these", matchEnding: false);
             _default.AddIrregular("bus", "buses", matchEnding: false);
             _default.AddIrregular("die", "dice", matchEnding: false);
             _default.AddIrregular("tie", "ties", matchEnding: false);
+            _default.AddIrregular("lens", "lenses");
+            _default.AddIrregular("clove", "cloves");
+            _default.AddIrregular("valve", "valves");
+            _default.AddIrregular("explosive", "explosives");
 
             _default.AddUncountable("staff");
             _default.AddUncountable("training");
@@ -142,6 +139,12 @@ namespace Humanizer.Inflections
             _default.AddUncountable("scissors");
             _default.AddUncountable("means");
             _default.AddUncountable("mail");
+            _default.AddUncountable("pliers");
+            _default.AddUncountable("sheers");
+            _default.AddUncountable("clothes");
+            _default.AddUncountable("apparatus");
+            _default.AddUncountable("chassis");
+            _default.AddUncountable("debris");
 
             //Fix 1132
             _default.AddUncountable("metadata");

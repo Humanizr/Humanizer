@@ -1,12 +1,8 @@
-﻿using Humanizer.Localisation;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.sk
+﻿namespace Humanizer.Tests.Localisation.sk
 {
     [UseCulture("sk-SK")]
     public class DateHumanizeTests
     {
-
         [Theory]
         [InlineData(1, "o sekundu")]
         [InlineData(2, "o 2 sekundy")]
@@ -15,10 +11,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "o 5 sekúnd")]
         [InlineData(6, "o 6 sekúnd")]
         [InlineData(10, "o 10 sekúnd")]
-        public void SecondsFromNow(int seconds, string expected)
-        {
+        public void SecondsFromNow(int seconds, string expected) =>
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "o minútu")]
@@ -28,10 +22,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "o 5 minút")]
         [InlineData(6, "o 6 minút")]
         [InlineData(10, "o 10 minút")]
-        public void MinutesFromNow(int minutes, string expected)
-        {
+        public void MinutesFromNow(int minutes, string expected) =>
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "o hodinu")]
@@ -41,10 +33,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "o 5 hodín")]
         [InlineData(6, "o 6 hodín")]
         [InlineData(10, "o 10 hodín")]
-        public void HoursFromNow(int hours, string expected)
-        {
+        public void HoursFromNow(int hours, string expected) =>
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "zajtra")]
@@ -53,10 +43,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(4, "o 4 dni")]
         [InlineData(9, "o 9 dní")]
         [InlineData(10, "o 10 dní")]
-        public void DaysFromNow(int days, string expected)
-        {
+        public void DaysFromNow(int days, string expected) =>
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "o mesiac")]
@@ -66,10 +54,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "o 5 mesiacov")]
         [InlineData(6, "o 6 mesiacov")]
         [InlineData(10, "o 10 mesiacov")]
-        public void MonthsFromNow(int months, string expected)
-        {
+        public void MonthsFromNow(int months, string expected) =>
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "o rok")]
@@ -79,10 +65,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "o 5 rokov")]
         [InlineData(6, "o 6 rokov")]
         [InlineData(10, "o 10 rokov")]
-        public void YearsFromNow(int years, string expected)
-        {
+        public void YearsFromNow(int years, string expected) =>
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
-        }
 
         [Theory]
         [InlineData(1, "pred sekundou")]
@@ -92,10 +76,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "pred 5 sekundami")]
         [InlineData(6, "pred 6 sekundami")]
         [InlineData(10, "pred 10 sekundami")]
-        public void SecondsAgo(int seconds, string expected)
-        {
+        public void SecondsAgo(int seconds, string expected) =>
             DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "pred minútou")]
@@ -106,10 +88,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(6, "pred 6 minútami")]
         [InlineData(10, "pred 10 minútami")]
         [InlineData(60, "pred hodinou")]
-        public void MinutesAgo(int minutes, string expected)
-        {
+        public void MinutesAgo(int minutes, string expected) =>
             DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "pred hodinou")]
@@ -119,10 +99,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "pred 5 hodinami")]
         [InlineData(6, "pred 6 hodinami")]
         [InlineData(10, "pred 10 hodinami")]
-        public void HoursAgo(int hours, string expected)
-        {
+        public void HoursAgo(int hours, string expected) =>
             DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "včera")]
@@ -131,10 +109,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(4, "pred 4 dňami")]
         [InlineData(9, "pred 9 dňami")]
         [InlineData(10, "pred 10 dňami")]
-        public void DaysAgo(int days, string expected)
-        {
+        public void DaysAgo(int days, string expected) =>
             DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "pred mesiacom")]
@@ -144,10 +120,8 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "pred 5 mesiacmi")]
         [InlineData(6, "pred 6 mesiacmi")]
         [InlineData(10, "pred 10 mesiacmi")]
-        public void MonthsAgo(int months, string expected)
-        {
+        public void MonthsAgo(int months, string expected) =>
             DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
-        }
 
         [Theory]
         [InlineData(1, "pred rokom")]
@@ -157,9 +131,7 @@ namespace Humanizer.Tests.Localisation.sk
         [InlineData(5, "pred 5 rokmi")]
         [InlineData(6, "pred 6 rokmi")]
         [InlineData(10, "pred 10 rokmi")]
-        public void YearsAgo(int years, string expected)
-        {
+        public void YearsAgo(int years, string expected) =>
             DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
-        }
     }
 }

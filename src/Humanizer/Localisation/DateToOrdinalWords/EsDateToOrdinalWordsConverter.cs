@@ -1,12 +1,8 @@
-﻿using System;
-
-namespace Humanizer.Localisation.DateToOrdinalWords
+﻿namespace Humanizer
 {
-    internal class EsDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
+    class EsDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
     {
-        public override string Convert(DateTime date)
-        {
-            return date.ToString("d 'de' MMMM 'de' yyyy");
-        }
+        public override string Convert(DateTime date) =>
+            date.ToString("d 'de' MMMM 'de' yyyy");
     }
 }

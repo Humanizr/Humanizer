@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer
 {
-    internal class ArmenianOrdinalizer : DefaultOrdinalizer
+    class ArmenianOrdinalizer : DefaultOrdinalizer
     {
         public override string Convert(int number, string numberString)
         {
-            if (number == 1 || number == -1)
+            if (number is 1 or -1)
             {
                 return numberString + "-ին";
             }

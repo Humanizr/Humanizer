@@ -1,10 +1,4 @@
-﻿using System.Globalization;
-
-using Humanizer.Localisation;
-
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.@is
+﻿namespace Humanizer.Tests.Localisation.@is
 {
     public class ResourcesTests
     {
@@ -19,7 +13,7 @@ namespace Humanizer.Tests.Localisation.@is
         [Fact]
         public void GetCultureSpecificTranslationsWithExplicitCulture()
         {
-            var format = Resources.GetResource("DateHumanize_SingleYearAgo", new CultureInfo("is"));
+            var format = Resources.GetResource("DateHumanize_SingleYearAgo", new("is"));
             Assert.Equal("fyrir einu ári", format);
         }
     }

@@ -1,6 +1,6 @@
 ﻿<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
 
-[<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
+[<img align="right" width="100px" src="https://old.dotnetfoundation.org/img/logo_big.svg" />](https://old.dotnetfoundation.org/projects/humanizer)
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities. It is part of the [.NET Foundation](https://www.dotnetfoundation.org/), and operates under their [code of conduct](https://www.dotnetfoundation.org/code-of-conduct). It is licensed under the [MIT](https://opensource.org/licenses/MIT) (an OSI approved license).
 
@@ -199,24 +199,6 @@ Default is the right as shown in the examples above. The examples below show how
 "Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords, TruncateFrom.Left) => "---to truncate"
 ```
 
-### <a id="format-string">Format String</a>
-You can format a `string` using the `FormatWith()` method:
-
-```c#
-"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formatted -> 1/A."
-```
-
-This is an extension method based on `String.Format`, so exact rules applies to it.
-If `format` is null, it'll throw `ArgumentNullException`.
-If passed a fewer number for arguments, it'll throw `String.FormatException` exception.
-
-You also can specify the culture to use explicitly as the first parameter for the `FormatWith()` method:
-
-```c#
-"{0:N2}".FormatWith(new CultureInfo("ru-RU"), 6666.66) => "6 666,66"
-```
-
-If a culture is not specified, current thread's current culture is used.
 
 ### <a id="humanize-enums">Humanize Enums</a>
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
@@ -1114,18 +1096,18 @@ Humanizer includes methods to change a numeric heading to words. The heading can
 
 ```C#
 360.ToHeading();
-// north
+// N
 720.ToHeading();
-// north
+// N
 ```
 
-In order to retrieve a short version of the heading you can use the following call:
+In order to retrieve a full version of the heading, use the following call:
 
 ```C#
-180.ToHeading(true);
-// S
-360.ToHeading(true);
-// N
+180.ToHeading(HeadingStyle.Full);
+// south
+360.ToHeading(HeadingStyle.Full);
+// north
 ```
 
 Please note that a textual representation has a maximum deviation of 11.25°.

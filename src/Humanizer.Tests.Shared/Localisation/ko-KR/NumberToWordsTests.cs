@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.koKR
+﻿namespace Humanizer.Tests.Localisation.koKR
 {
     [UseCulture("ko-KR")]
     public class NumberToWordsTests
@@ -37,10 +35,8 @@ namespace Humanizer.Tests.Localisation.koKR
         [InlineData(123456789, "일억이천삼백사십오만육천칠백팔십구")]
         [InlineData(1234567890, "십이억삼천사백오십육만칠천팔백구십")]
         [InlineData(-123, "마이너스 백이십삼")]
-        public void ToWordsInt(int number, string expected)
-        {
+        public void ToWordsInt(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1L, "일")]
@@ -62,10 +58,8 @@ namespace Humanizer.Tests.Localisation.koKR
         [InlineData(11111111111111111L, "일경천백십일조천백십일억천백십일만천백십일")]
         [InlineData(111111111111111111L, "십일경천백십일조천백십일억천백십일만천백십일")]
         [InlineData(1111111111111111111L, "백십일경천백십일조천백십일억천백십일만천백십일")]
-        public void ToWordsLong(long number, string expected)
-        {
+        public void ToWordsLong(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "영번째")]
@@ -77,9 +71,7 @@ namespace Humanizer.Tests.Localisation.koKR
         [InlineData(100, "백번째")]
         [InlineData(112, "백십이번째")]
         [InlineData(1000000, "백만번째")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
     }
 }

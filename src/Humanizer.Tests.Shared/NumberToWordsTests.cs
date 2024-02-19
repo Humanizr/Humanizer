@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-
-using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     [UseCulture("en-US")]
     public class NumberToWordsTests
@@ -51,19 +47,15 @@ namespace Humanizer.Tests
         [InlineData(10121, "ten thousand one hundred and twenty-first")]
         [InlineData(100000, "hundred thousandth")]
         [InlineData(1000000, "millionth")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(1021, "en-US", "thousand and twenty-first")]
         [InlineData(21, "ar", "الحادي و العشرون")]
         [InlineData(1112, "ru", "одна тысяча сто двенадцатый")]
-        public void ToOrdinalWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
-        {
-            Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo(culture)));
-        }
+        public void ToOrdinalWords_CanSpecifyCultureExplicitly(int number, string culture, string expected) =>
+            Assert.Equal(expected, number.ToOrdinalWords(new(culture)));
 
         [Theory]
         [InlineData(1, "first")]
@@ -77,7 +69,7 @@ namespace Humanizer.Tests
             var abbrForm2 = number.ToOrdinalWords(default, WordForm.Abbreviation);
 
             Assert.All(
-                new string[] { normalForm1, abbrForm1, normalForm2, abbrForm2 },
+                new[] { normalForm1, abbrForm1, normalForm2, abbrForm2 },
                 item => Assert.Equal(expected, item));
         }
 
@@ -99,7 +91,7 @@ namespace Humanizer.Tests
             var abbrForm2 = number.ToOrdinalWords(default, WordForm.Abbreviation, cultureInfo);
 
             Assert.All(
-                new string[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
+                new[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
                 item => Assert.Equal(expected, item));
         }
 
@@ -117,10 +109,8 @@ namespace Humanizer.Tests
         [InlineData(10, "decuple")]
         [InlineData(100, "centuple")]
         [InlineData(1000, "milluple")]
-        public void ToTuple(int number, string expected)
-        {
+        public void ToTuple(int number, string expected) =>
             Assert.Equal(expected, number.ToTuple());
-        }
 
         [Theory]
         [InlineData(11, "en-US", "eleven")]
@@ -130,10 +120,8 @@ namespace Humanizer.Tests
         [InlineData(11, "ta", "பதினொன்று")]
         [InlineData(12, "ta", "பனிரெண்டு")]
         [InlineData(555, "ta", "ஐந்நூற்று ஐம்பத்து ஐந்து")]
-        public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
-        {
-            Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
-        }
+        public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected) =>
+            Assert.Equal(expected, number.ToWords(new(culture)));
 
         [Theory]
         [InlineData(1, "one")]
@@ -148,7 +136,7 @@ namespace Humanizer.Tests
             var abbrFrom3 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender));
 
             Assert.All(
-                new string[] { normalForm1, abbrForm1, normalForm2, abbrForm2, normalForm3, normalForm3 },
+                new[] { normalForm1, abbrForm1, normalForm2, abbrForm2, normalForm3, normalForm3, abbrFrom3 },
                 item => Assert.Equal(expected, item));
         }
 
@@ -170,7 +158,7 @@ namespace Humanizer.Tests
             var abbrForm2 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender), cultureInfo);
 
             Assert.All(
-                new string[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
+                new[] { cultureSpecificNumber, normalForm1, abbrForm1, normalForm2, abbrForm2 },
                 item => Assert.Equal(expected, item));
         }
 
@@ -204,10 +192,8 @@ namespace Humanizer.Tests
         [InlineData(12345678, "twelve million three hundred and forty-five thousand six hundred and seventy-eight")]
         [InlineData(123456789, "one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine")]
         [InlineData(1234567890, "one billion two hundred and thirty-four million five hundred and sixty-seven thousand eight hundred and ninety")]
-        public void ToWordsInt(int number, string expected)
-        {
+        public void ToWordsInt(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(-1L, "minus one")]
@@ -230,16 +216,12 @@ namespace Humanizer.Tests
         [InlineData(11111111111111111L, "eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
         [InlineData(111111111111111111L, "one hundred and eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
         [InlineData(1111111111111111111L, "one quintillion one hundred and eleven quadrillion one hundred and eleven trillion one hundred and eleven billion one hundred and eleven million one hundred and eleven thousand one hundred and eleven")]
-        public void ToWordsLong(long number, string expected)
-        {
+        public void ToWordsLong(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(3501L, "three thousand five hundred one", false)]
-        public void ToWordsWithoutAnd(int number, string expected, bool addAnd)
-        {
+        public void ToWordsWithoutAnd(int number, string expected, bool addAnd) =>
             Assert.Equal(expected, number.ToWords(addAnd));
-        }
     }
 }

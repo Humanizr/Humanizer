@@ -1,50 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
+    class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     {
-        private static readonly string[] HundredsRootMap = {
+        static readonly string[] HundredsRootMap =
+        [
             "cero", "ciento", "doscient", "trescient", "cuatrocient", "quinient", "seiscient", "setecient",
-            "ochocient", "novecient" };
+            "ochocient", "novecient"
+        ];
 
-        private static readonly string[] HundredthsRootMap = {
+        static readonly string[] HundredthsRootMap =
+        [
             "", "centésim", "ducentésim", "tricentésim", "cuadringentésim", "quingentésim", "sexcentésim",
-            "septingentésim", "octingentésim", "noningentésim" };
+            "septingentésim", "octingentésim", "noningentésim"
+        ];
 
-        private static readonly string[] OrdinalsRootMap = { "" , "primer", "segund", "tercer", "cuart", "quint", "sext",
-            "séptim", "octav", "noven"};
+        static readonly string[] OrdinalsRootMap =
+        [
+            "" , "primer", "segund", "tercer", "cuart", "quint", "sext",
+            "séptim", "octav", "noven"
+        ];
 
-        private static readonly string[] TensMap = {
-            "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
+        static readonly string[] TensMap =
+        [
+            "cero", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"
+        ];
 
-        private static readonly string[] TenthsRootMap = {
+        static readonly string[] TenthsRootMap =
+        [
             "", "décim", "vigésim", "trigésim", "cuadragésim", "quincuagésim", "sexagésim", "septuagésim",
-            "octogésim", "nonagésim" };
+            "octogésim", "nonagésim"
+        ];
 
-        private static readonly string[] ThousandthsRootMap = {
+        static readonly string[] ThousandthsRootMap =
+        [
             "", "milésim", "dosmilésim", "tresmilésim", "cuatromilésim", "cincomilésim", "seismilésim",
-            "sietemilésim", "ochomilésim", "nuevemilésim" };
+            "sietemilésim", "ochomilésim", "nuevemilésim"
+        ];
 
-        private static readonly string[] TupleMap = {
+        static readonly string[] TupleMap =
+        [
             "cero veces", "una vez", "doble", "triple", "cuádruple", "quíntuple", "séxtuple", "séptuple", "óctuple",
-            "nonuplo", "décuplo", "undécuplo", "duodécuplo", "terciodécuplo" };
+            "nonuplo", "décuplo", "undécuplo", "duodécuplo", "terciodécuplo"
+        ];
 
-        private static readonly string[] UnitsMap = {
+        static readonly string[] UnitsMap =
+        [
             "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
             "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno",
-            "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"};
+            "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"
+        ];
 
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
-            return Convert(input, WordForm.Normal, gender, addAnd);
-        }
+        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
+            Convert(input, WordForm.Normal, gender, addAnd);
 
         public override string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true)
         {
-            List<string> wordBuilder = new();
+            List<string> wordBuilder = [];
 
             if (number == 0)
             {
@@ -71,16 +82,14 @@ namespace Humanizer.Localisation.NumberToWords
             return BuildWord(wordBuilder);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
-            return ConvertToOrdinal(number, gender, WordForm.Normal);
-        }
+        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+            ConvertToOrdinal(number, gender, WordForm.Normal);
 
         public override string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm)
         {
-            List<string> wordBuilder = new();
+            List<string> wordBuilder = [];
 
-            if (number == 0 || number == int.MinValue)
+            if (number is 0 or int.MinValue)
             {
                 return "cero";
             }
@@ -119,19 +128,19 @@ namespace Humanizer.Localisation.NumberToWords
             return Convert(number) + " veces";
         }
 
-        private static string BuildWord(IReadOnlyList<string> wordParts)
+        static string BuildWord(IReadOnlyList<string> wordParts)
         {
             var parts = wordParts.ToList();
             parts.RemoveAll(string.IsNullOrEmpty);
             return string.Join(" ", parts);
         }
 
-        private static string ConvertHundreds(in long inputNumber, out long remainder, GrammaticalGender gender)
+        static string ConvertHundreds(in long inputNumber, out long remainder, GrammaticalGender gender)
         {
             var wordPart = string.Empty;
             remainder = inputNumber;
 
-            if ((inputNumber / 100) > 0)
+            if (inputNumber / 100 > 0)
             {
                 wordPart = inputNumber == 100 ?
                     "cien" :
@@ -143,12 +152,10 @@ namespace Humanizer.Localisation.NumberToWords
             return wordPart;
         }
 
-        private static string ConvertHundredths(in int number, out int remainder, GrammaticalGender gender)
-        {
-            return ConvertMappedOrdinalNumber(number, 100, HundredthsRootMap, out remainder, gender);
-        }
+        static string ConvertHundredths(in int number, out int remainder, GrammaticalGender gender) =>
+            ConvertMappedOrdinalNumber(number, 100, HundredthsRootMap, out remainder, gender);
 
-        private static string ConvertMappedOrdinalNumber(
+        static string ConvertMappedOrdinalNumber(
             in int number,
             in int divisor,
             IReadOnlyList<string> map,
@@ -158,7 +165,7 @@ namespace Humanizer.Localisation.NumberToWords
             var wordPart = string.Empty;
             remainder = number;
 
-            if ((number / divisor) > 0)
+            if (number / divisor > 0)
             {
                 var genderedEnding = gender == GrammaticalGender.Feminine ? "a" : "o";
                 wordPart = map[number / divisor] + genderedEnding;
@@ -168,61 +175,61 @@ namespace Humanizer.Localisation.NumberToWords
             return wordPart;
         }
 
-        private static string ConvertOrdinalUnits(in int number, GrammaticalGender gender, WordForm wordForm)
+        static string ConvertOrdinalUnits(in int number, GrammaticalGender gender, WordForm wordForm)
         {
-            if (number is > 0 and < 10)
+            if (number is <= 0 or >= 10)
             {
-                Dictionary<GrammaticalGender, string> genderedEndingDict = new()
-                {
-                    { GrammaticalGender.Feminine, "a" },
-                    { GrammaticalGender.Masculine, HasOrdinalAbbreviation(number, wordForm) ? string.Empty : "o" },
-                };
-
-                genderedEndingDict.Add(GrammaticalGender.Neuter, genderedEndingDict[GrammaticalGender.Masculine]);
-
-                return OrdinalsRootMap[number] + genderedEndingDict[gender];
+                return string.Empty;
             }
 
-            return string.Empty;
-        }
-
-        private static string ConvertTenths(in int number, out int remainder, GrammaticalGender gender)
-        {
-            return ConvertMappedOrdinalNumber(number, 10, TenthsRootMap, out remainder, gender);
-        }
-
-        private static string ConvertThousandths(in int number, out int remainder, GrammaticalGender gender)
-        {
-            return ConvertMappedOrdinalNumber(number, 1000, ThousandthsRootMap, out remainder, gender);
-        }
-
-        private static string ConvertUnits(long inputNumber, GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
-        {
-            var wordPart = string.Empty;
-
-            if (inputNumber > 0)
+            switch (gender)
             {
-                UnitsMap[1] = GetGenderedOne(gender, wordForm);
-                UnitsMap[21] = GetGenderedTwentyOne(gender, wordForm);
-
-                if (inputNumber < 30)
-                {
-                    wordPart = UnitsMap[inputNumber];
-                }
-                else
-                {
-                    wordPart = TensMap[inputNumber / 10];
-                    if (inputNumber % 10 > 0)
+                case GrammaticalGender.Masculine:
+                case GrammaticalGender.Neuter:
+                    if (HasOrdinalAbbreviation(number, wordForm))
                     {
-                        wordPart += $" y {UnitsMap[inputNumber % 10]}";
+                        return OrdinalsRootMap[number];
                     }
-                }
-            }
 
-            return wordPart;
+                    return OrdinalsRootMap[number] + 'o';
+                case GrammaticalGender.Feminine:
+                    return OrdinalsRootMap[number] + "a";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
         }
 
-        private static IReadOnlyList<string> GetGenderedHundredsMap(GrammaticalGender gender)
+        static string ConvertTenths(in int number, out int remainder, GrammaticalGender gender) =>
+            ConvertMappedOrdinalNumber(number, 10, TenthsRootMap, out remainder, gender);
+
+        static string ConvertThousandths(in int number, out int remainder, GrammaticalGender gender) =>
+            ConvertMappedOrdinalNumber(number, 1000, ThousandthsRootMap, out remainder, gender);
+
+        static string ConvertUnits(long inputNumber, GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
+        {
+            if (inputNumber <= 0)
+            {
+                return string.Empty;
+            }
+
+            UnitsMap[1] = GetGenderedOne(gender, wordForm);
+            UnitsMap[21] = GetGenderedTwentyOne(gender, wordForm);
+
+            if (inputNumber < 30)
+            {
+                return UnitsMap[inputNumber];
+            }
+
+            var wordPart = TensMap[inputNumber / 10];
+            if (inputNumber % 10 <= 0)
+            {
+                return wordPart;
+            }
+
+            return wordPart + $" y {UnitsMap[inputNumber % 10]}";
+        }
+
+        static IReadOnlyList<string> GetGenderedHundredsMap(GrammaticalGender gender)
         {
             var genderedEnding = gender == GrammaticalGender.Feminine ? "as" : "os";
             var map = new List<string>();
@@ -236,70 +243,61 @@ namespace Humanizer.Localisation.NumberToWords
             return map;
         }
 
-        private static string GetGenderedOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
+        static string GetGenderedOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
-            var genderedOne = new Dictionary<GrammaticalGender, string>()
+            switch (gender)
             {
-                { GrammaticalGender.Feminine, "una" },
-                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "un" : "uno" }
-            };
-
-            genderedOne.Add(GrammaticalGender.Neuter, genderedOne[GrammaticalGender.Masculine]);
-            return genderedOne[gender];
+                case GrammaticalGender.Masculine:
+                case GrammaticalGender.Neuter:
+                    return wordForm == WordForm.Abbreviation ? "un" : "uno";
+                case GrammaticalGender.Feminine:
+                    return "una";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
         }
 
-        private static string GetGenderedTwentyOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
+        static string GetGenderedTwentyOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
         {
-            var genderedtwentyOne = new Dictionary<GrammaticalGender, string>()
+            switch (gender)
             {
-                { GrammaticalGender.Feminine, "veintiuna" },
-                { GrammaticalGender.Masculine, wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno" }
-            };
-
-            genderedtwentyOne.Add(GrammaticalGender.Neuter, genderedtwentyOne[GrammaticalGender.Masculine]);
-            return genderedtwentyOne[gender];
+                case GrammaticalGender.Masculine:
+                case GrammaticalGender.Neuter:
+                    return wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno";
+                case GrammaticalGender.Feminine:
+                    return "veintiuna";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
         }
 
-        private static bool HasOrdinalAbbreviation(int number, WordForm wordForm)
-        {
-            return (number == 1 || number == 3) && wordForm == WordForm.Abbreviation;
-        }
+        static bool HasOrdinalAbbreviation(int number, WordForm wordForm) =>
+            number is 1 or 3 && wordForm == WordForm.Abbreviation;
 
-        private static bool IsRoundBillion(int number)
-        {
-            return number >= 1000_000_000 && number % 1_000_000 == 0;
-        }
+        static bool IsRoundBillion(int number) =>
+            number >= 1000_000_000 && number % 1_000_000 == 0;
 
-        private static bool IsRoundMillion(int number)
-        {
-            return number >= 1000000 && number % 1000000 == 0;
-        }
+        static bool IsRoundMillion(int number) =>
+            number >= 1000000 && number % 1000000 == 0;
 
-        private static string PluralizeGreaterThanMillion(string singularWord)
-        {
-            return singularWord.TrimEnd('ó', 'n') + "ones";
-        }
+        static string PluralizeGreaterThanMillion(string singularWord) =>
+            singularWord.TrimEnd('ó', 'n') + "ones";
 
-        private string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
+        static Dictionary<string,long> numbersAndWordsDict = new()
         {
-            List<string> wordBuilder = new();
+            { "trillón", 1_000_000_000_000_000_000 },
+            { "billón", 1_000_000_000_000 },
+            { "millón", 1_000_000 }
+        };
 
-            const long oneTrillion = 1_000_000_000_000_000_000;
-            const long oneBillion = 1_000_000_000_000;
-            const long oneMillion = 1_000_000;
+        string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
+        {
+            List<string> wordBuilder = [];
 
             remainder = inputNumber;
-
-            var numbersAndWordsDict = new Dictionary<string, long>()
-            {
-                { "trillón", oneTrillion },
-                { "billón", oneBillion },
-                { "millón", oneMillion }
-            };
-
             foreach (var numberAndWord in numbersAndWordsDict)
             {
-                if ((remainder / numberAndWord.Value) > 0)
+                if (remainder / numberAndWord.Value > 0)
                 {
                     if (remainder / numberAndWord.Value == 1)
                     {
@@ -307,7 +305,7 @@ namespace Humanizer.Localisation.NumberToWords
                     }
                     else
                     {
-                        wordBuilder.Add((remainder / numberAndWord.Value % 10 == 1) ?
+                        wordBuilder.Add(remainder / numberAndWord.Value % 10 == 1 ?
                             $"{Convert(remainder / numberAndWord.Value, WordForm.Abbreviation, GrammaticalGender.Masculine)} {PluralizeGreaterThanMillion(numberAndWord.Key)}" :
                             $"{Convert(remainder / numberAndWord.Value)} {PluralizeGreaterThanMillion(numberAndWord.Key)}");
                     }
@@ -319,7 +317,7 @@ namespace Humanizer.Localisation.NumberToWords
             return BuildWord(wordBuilder);
         }
 
-        private string ConvertRoundBillionths(int number, GrammaticalGender gender)
+        string ConvertRoundBillionths(int number, GrammaticalGender gender)
         {
             var cardinalPart = Convert(number / 1_000_000, WordForm.Abbreviation, gender);
             var sep = number == 1_000_000_000 ? "" : " ";
@@ -327,14 +325,14 @@ namespace Humanizer.Localisation.NumberToWords
             return cardinalPart + sep + ordinalPart;
         }
 
-        private string ConvertTensAndHunderdsOfThousandths(in int number, out int remainder, GrammaticalGender gender)
+        string ConvertTensAndHunderdsOfThousandths(in int number, out int remainder, GrammaticalGender gender)
         {
             var wordPart = string.Empty;
             remainder = number;
 
-            if ((number / 10000) > 0)
+            if (number / 10000 > 0)
             {
-                wordPart = Convert((number / 1000) * 1000, gender);
+                wordPart = Convert(number / 1000 * 1000, gender);
 
                 if (number < 30000 || IsRoundNumber(number))
                 {
@@ -355,23 +353,21 @@ namespace Humanizer.Localisation.NumberToWords
 
             return wordPart;
 
-            static bool IsRoundNumber(int number)
-            {
-                return (number % 10000 == 0 && number < 100000)
-                       || (number % 100000 == 0 && number < 1000000)
-                       || (number % 1000000 == 0 && number < 10000000)
-                       || (number % 10000000 == 0 && number < 100000000)
-                       || (number % 100000000 == 0 && number < 1000000000)
-                       || (number % 1000000000 == 0 && number < int.MaxValue);
-            }
+            static bool IsRoundNumber(int number) =>
+                (number % 10000 == 0 && number < 100000)
+                || (number % 100000 == 0 && number < 1000000)
+                || (number % 1000000 == 0 && number < 10000000)
+                || (number % 10000000 == 0 && number < 100000000)
+                || (number % 100000000 == 0 && number < 1000000000)
+                || (number % 1000000000 == 0 && number < int.MaxValue);
         }
 
-        private string ConvertThousands(in long inputNumber, out long remainder, GrammaticalGender gender)
+        string ConvertThousands(in long inputNumber, out long remainder, GrammaticalGender gender)
         {
             var wordPart = string.Empty;
             remainder = inputNumber;
 
-            if ((inputNumber / 1000) > 0)
+            if (inputNumber / 1000 > 0)
             {
                 if (inputNumber / 1000 == 1)
                 {
@@ -379,7 +375,7 @@ namespace Humanizer.Localisation.NumberToWords
                 }
                 else
                 {
-                    wordPart = (gender == GrammaticalGender.Feminine) ?
+                    wordPart = gender == GrammaticalGender.Feminine ?
                         $"{Convert(inputNumber / 1000, GrammaticalGender.Feminine)} mil" :
                         $"{Convert(inputNumber / 1000, WordForm.Abbreviation, gender)} mil";
                 }

@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests
+﻿namespace Humanizer.Tests
 {
     public class StringHumanizeTests
     {
@@ -19,25 +17,19 @@ namespace Humanizer.Tests
         [InlineData("?", "")]
         [InlineData("", "")]
         [InlineData("JeNeParlePasFrançais", "Je ne parle pas français")]
-        public void CanHumanizeStringInPascalCase(string input, string expectedResult)
-        {
+        public void CanHumanizeStringInPascalCase(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Humanize());
-        }
 
         [Theory, UseCulture("tr-TR")]
         [InlineData("istanbul", "İstanbul")]
         [InlineData("diyarbakır", "Diyarbakır")]
-        public void CanHumanizeStringInPascalCaseInTurkish(string input, string expectedResult)
-        {
+        public void CanHumanizeStringInPascalCaseInTurkish(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Humanize());
-        }
 
         [Theory, UseCulture("ar")]
         [InlineData("جمهورية ألمانيا الاتحادية", "جمهورية ألمانيا الاتحادية")]
-        public void CanHumanizeOtherUnicodeLetter(string input, string expectedResult)
-        {
+        public void CanHumanizeOtherUnicodeLetter(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Humanize());
-        }
 
         [Theory]
         [InlineData("Underscored_input_string_is_turned_into_sentence", "Underscored input string is turned into sentence")]
@@ -50,10 +42,8 @@ namespace Humanizer.Tests
         [InlineData("TEST 1 _ THIS IS A TEST", "TEST 1 THIS IS A TEST")]
         [InlineData("TEST 1 - THIS_IS_A_TEST", "TEST 1 THIS IS A TEST")]
         [InlineData("TEST 1 - THIS is A Test", "TEST 1 THIS is A test")]
-        public void CanHumanizeStringWithUnderscoresAndDashes(string input, string expectedReseult)
-        {
-            Assert.Equal(expectedReseult, input.Humanize());
-        }
+        public void CanHumanizeStringWithUnderscoresAndDashes(string input, string expectedResult) =>
+            Assert.Equal(expectedResult, input.Humanize());
 
         [Theory]
         [InlineData("HTML", "HTML")]
@@ -63,10 +53,8 @@ namespace Humanizer.Tests
         [InlineData("TheLanguageIsHTML", "The language is HTML")]
         [InlineData("HTML5", "HTML 5")]
         [InlineData("1HTML", "1 HTML")]
-        public void CanHumanizeStringWithAcronyms(string input, string expectedValue)
-        {
+        public void CanHumanizeStringWithAcronyms(string input, string expectedValue) =>
             Assert.Equal(expectedValue, input.Humanize());
-        }
 
         [Theory]
         [InlineData("CanReturnTitleCase", "Can Return Title Case")]
@@ -76,36 +64,30 @@ namespace Humanizer.Tests
         [InlineData("MühldorferStraße23", "Mühldorfer Straße 23")]
         [InlineData("mühldorfer_STRAẞE_23", "Mühldorfer STRAẞE 23")]
         [InlineData("CAN RETURN TITLE CASE", "Can Return Title Case")]
-        public void CanHumanizeIntoTitleCase(string input, string expectedResult)
-        {
+        public void CanHumanizeIntoTitleCase(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.Title));
-        }
 
         [Theory]
         [InlineData("CanReturnLowerCase", "can return lower case")]
         [InlineData("LOWERCASE", "lowercase")]
         [InlineData("STRAẞE", "straße")]
-        public void CanHumanizeIntoLowerCase(string input, string expectedResult)
-        {
+        public void CanHumanizeIntoLowerCase(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.LowerCase));
-        }
 
         [Theory]
         [InlineData("CanReturnSentenceCase", "Can return sentence case")]
         [InlineData("", "")]
         [InlineData("égoïste", "Égoïste")]
-        public void CanHumanizeIntoSentenceCase(string input, string expectedResult)
-        {
+        [InlineData("Normal; Normal and PascalCase", "Normal; normal and pascal case")]
+        [InlineData("I,and No One else", "I, and no one else")]
+        public void CanHumanizeIntoSentenceCase(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.Sentence));
-        }
 
         [Theory]
         [InlineData("CanHumanizeIntoUpperCase", "CAN HUMANIZE INTO UPPER CASE")]
         [InlineData("Can_Humanize_into_Upper_case", "CAN HUMANIZE INTO UPPER CASE")]
         [InlineData("coûts_privés", "COÛTS PRIVÉS")]
-        public void CanHumanizeIntoUpperCase(string input, string expectedResult)
-        {
+        public void CanHumanizeIntoUpperCase(string input, string expectedResult) =>
             Assert.Equal(expectedResult, input.Humanize(LetterCasing.AllCaps));
-        }
     }
 }

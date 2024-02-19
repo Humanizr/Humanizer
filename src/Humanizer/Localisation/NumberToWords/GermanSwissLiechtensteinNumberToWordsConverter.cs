@@ -1,6 +1,6 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class GermanSwissLiechtensteinNumberToWordsConverter : GermanNumberToWordsConverterBase
+    class GermanSwissLiechtensteinNumberToWordsConverter : GermanNumberToWordsConverterBase
     {
         protected override string GetTens(long tens)
         {

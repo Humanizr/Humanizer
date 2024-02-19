@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer
 {
-    internal class FrenchBelgianNumberToWordsConverter : FrenchNumberToWordsConverterBase
+    class FrenchBelgianNumberToWordsConverter : FrenchNumberToWordsConverterBase
     {
         protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
         {

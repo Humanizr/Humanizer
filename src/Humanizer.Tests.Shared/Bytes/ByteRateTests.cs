@@ -1,9 +1,4 @@
-﻿using System;
-using Humanizer.Bytes;
-using Humanizer.Localisation;
-using Xunit;
-
-namespace Humanizer.Tests.Bytes
+﻿namespace Humanizer.Tests.Bytes
 {
     [UseCulture("en")]
     public class ByteRateTests
@@ -59,15 +54,13 @@ namespace Humanizer.Tests.Bytes
             Assert.Equal(expectedValue, text);
         }
 
-
-
         [Theory]
         [InlineData(TimeUnit.Millisecond)]
         [InlineData(TimeUnit.Day)]
         [InlineData(TimeUnit.Month)]
         [InlineData(TimeUnit.Week)]
         [InlineData(TimeUnit.Year)]
-        public void ThowsOnUnsupportedData(TimeUnit units)
+        public void ThrowsOnUnsupportedData(TimeUnit units)
         {
             var dummyRate = ByteSize.FromBits(1).Per(TimeSpan.FromSeconds(1));
 

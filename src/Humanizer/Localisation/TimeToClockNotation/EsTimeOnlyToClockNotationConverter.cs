@@ -1,15 +1,12 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
-using System.Collections.Generic;
-
-namespace Humanizer.Localisation.TimeToClockNotation
+namespace Humanizer
 {
-    internal class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
+    class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     {
-        private const int MORNING = 6;
-        private const int NOON = 12;
-        private const int AFTERNOON = 21;
+        const int MORNING = 6;
+        const int NOON = 12;
+        const int AFTERNOON = 21;
 
         public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
         {
@@ -51,17 +48,13 @@ namespace Humanizer.Localisation.TimeToClockNotation
                 $"{article} {hour} y {normalizedMinutes.ToWords()} {dayPeriod}");
         }
 
-        private static int NormalizeHour(TimeOnly time)
-        {
-            return time.Hour % 12 != 0 ? (time.Hour % 12) : 12;
-        }
+        static int NormalizeHour(TimeOnly time) =>
+            time.Hour % 12 != 0 ? time.Hour % 12 : 12;
 
-        private static string GetArticle(TimeOnly time)
-        {
-            return (time.Hour == 1 || time.Hour == 13) ? "la" : "las";
-        }
+        static string GetArticle(TimeOnly time) =>
+            time.Hour is 1 or 13 ? "la" : "las";
 
-        private static string GetDayPeriod(TimeOnly time)
+        static string GetDayPeriod(TimeOnly time)
         {
             if (IsEarlyMorning(time))
             {
@@ -81,20 +74,14 @@ namespace Humanizer.Localisation.TimeToClockNotation
             return "de la noche";
         }
 
-        private static bool IsEarlyMorning(TimeOnly time)
-        {
-            return time.Hour >= 1 && time.Hour < MORNING;
-        }
+        static bool IsEarlyMorning(TimeOnly time) =>
+            time.Hour is >= 1 and < MORNING;
 
-        private static bool IsMorning(TimeOnly time)
-        {
-            return time.Hour >= MORNING && time.Hour < NOON;
-        }
+        static bool IsMorning(TimeOnly time) =>
+            time.Hour is >= MORNING and < NOON;
 
-        private static bool IsAfternoon(TimeOnly time)
-        {
-            return time.Hour >= NOON && time.Hour < AFTERNOON;
-        }
+        static bool IsAfternoon(TimeOnly time) =>
+            time.Hour is >= NOON and < AFTERNOON;
     }
 }
 

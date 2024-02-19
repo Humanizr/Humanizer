@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.enIN
+﻿namespace Humanizer.Tests.Localisation.enIN
 {
     [UseCulture("en-IN")]
     public class NumberToWordsTests
@@ -47,18 +45,13 @@ namespace Humanizer.Tests.Localisation.enIN
         [InlineData(45678912345678, "forty five lakh sixty seven thousand eight hundred and ninety one crore twenty three lakh forty five thousand six hundred and seventy eight")]
         [InlineData(-7516, "(Negative) seven thousand five hundred and sixteen")]
 
-        public void ToWords(long number, string expected)
-        {
+        public void ToWords(long number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(1, "one")]
         [InlineData(3501, "three thousand five hundred and one")]
-        public void ToWordsFeminine(long number, string expected)
-        {
+        public void ToWordsFeminine(long number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
-        
     }
 }

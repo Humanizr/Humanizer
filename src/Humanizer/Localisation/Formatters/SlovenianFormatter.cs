@@ -1,14 +1,10 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class SlovenianFormatter : DefaultFormatter
+    class SlovenianFormatter() :
+        DefaultFormatter("sl")
     {
-        private const string DualPostfix = "_Dual";
-        private const string TrialQuadralPostfix = "_TrialQuadral";
-
-        public SlovenianFormatter()
-            : base("sl")
-        {
-        }
+        const string DualPostfix = "_Dual";
+        const string TrialQuadralPostfix = "_TrialQuadral";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
@@ -18,7 +14,7 @@
             }
 
             // When the count is three or four some some words have a different form when counting in Slovenian language
-            if (number == 3 || number == 4)
+            if (number is 3 or 4)
             {
                 return resourceKey + TrialQuadralPostfix;
             }

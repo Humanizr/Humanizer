@@ -1,11 +1,5 @@
-﻿using System;
-using System.Globalization;
-
-using Humanizer.Localisation;
-
-namespace Humanizer.Bytes
+﻿namespace Humanizer
 {
-
     /// <summary>
     /// Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
     /// </summary>
@@ -14,20 +8,16 @@ namespace Humanizer.Bytes
         /// <summary>
         /// Quantity of bytes
         /// </summary>
-        /// <returns></returns>
-        public ByteSize Size { get; private set; }
+        public ByteSize Size { get; }
 
         /// <summary>
         /// Interval that bytes were transferred in
         /// </summary>
-        /// <returns></returns>
-        public TimeSpan Interval { get; private set; }
+        public TimeSpan Interval { get; }
 
         /// <summary>
         /// Create a ByteRate with given quantity of bytes across an interval
         /// </summary>
-        /// <param name="size"></param>
-        /// <param name="interval"></param>
         public ByteRate(ByteSize size, TimeSpan interval)
         {
             this.Size = size;
@@ -38,11 +28,8 @@ namespace Humanizer.Bytes
         /// Calculate rate for the quantity of bytes and interval defined by this instance
         /// </summary>
         /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
-        /// <returns></returns>
-        public string Humanize(TimeUnit timeUnit = TimeUnit.Second)
-        {
-            return Humanize(null, timeUnit);
-        }
+        public string Humanize(TimeUnit timeUnit = TimeUnit.Second) =>
+            Humanize(null, timeUnit);
 
         /// <summary>
         /// Calculate rate for the quantity of bytes and interval defined by this instance
@@ -50,7 +37,6 @@ namespace Humanizer.Bytes
         /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
         /// <param name="format">The string format to use for the number of bytes</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        /// <returns></returns>
         public string Humanize(string format, TimeUnit timeUnit = TimeUnit.Second, CultureInfo culture = null)
         {
             var displayInterval = timeUnit switch

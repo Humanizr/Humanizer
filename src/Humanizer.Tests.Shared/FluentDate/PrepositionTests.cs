@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Humanizer.Tests.FluentDate
+﻿namespace Humanizer.Tests.FluentDate
 {
     public class PrepositionTests
     {
@@ -10,7 +7,7 @@ namespace Humanizer.Tests.FluentDate
         {
             var now = DateTime.Now;
             var midnight = now.AtMidnight();
-            Assert.Equal(new DateTime(now.Year, now.Month, now.Day), midnight);
+            Assert.Equal(new(now.Year, now.Month, now.Day), midnight);
         }
 
         [Fact]
@@ -18,7 +15,7 @@ namespace Humanizer.Tests.FluentDate
         {
             var now = DateTime.Now;
             var noon = now.AtNoon();
-            Assert.Equal(new DateTime(now.Year, now.Month, now.Day, 12, 0, 0), noon);
+            Assert.Equal(new(now.Year, now.Month, now.Day, 12, 0, 0), noon);
         }
 
         [Fact]
@@ -26,7 +23,7 @@ namespace Humanizer.Tests.FluentDate
         {
             var now = DateTime.Now;
             var in2011 = now.In(2011);
-            Assert.Equal(new DateTime(2011, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Millisecond), in2011);
+            Assert.Equal(new(2011, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Millisecond), in2011);
         }
     }
 }

@@ -1,17 +1,13 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class CzechSlovakPolishFormatter : DefaultFormatter
+    class CzechSlovakPolishFormatter(string localeCode) :
+        DefaultFormatter(localeCode)
     {
-        private const string PaucalPostfix = "_Paucal";
-
-        public CzechSlovakPolishFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
+        const string PaucalPostfix = "_Paucal";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
-            if (number > 1 && number < 5)
+            if (number is > 1 and < 5)
             {
                 return resourceKey + PaucalPostfix;
             }

@@ -1,7 +1,4 @@
-using System;
-using System.Globalization;
-
-namespace Humanizer.DateTimeHumanizeStrategy
+namespace Humanizer
 {
     /// <summary>
     /// The default 'distance of time' -> words calculator.
@@ -11,9 +8,7 @@ namespace Humanizer.DateTimeHumanizeStrategy
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public string Humanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
-        {
-            return DateTimeHumanizeAlgorithms.DefaultHumanize(input, comparisonBase, culture);
-        }
+        public string Humanize(DateTime input, DateTime comparisonBase, CultureInfo culture) =>
+            DateTimeHumanizeAlgorithms.DefaultHumanize(input, comparisonBase, culture);
     }
 }

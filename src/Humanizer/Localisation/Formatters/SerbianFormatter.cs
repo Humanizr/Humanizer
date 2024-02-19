@@ -1,19 +1,15 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer
 {
-    internal class SerbianFormatter : DefaultFormatter
+    class SerbianFormatter(string localeCode) :
+        DefaultFormatter(localeCode)
     {
-        private const string PaucalPostfix = "_Paucal";
-
-        public SerbianFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
+        const string PaucalPostfix = "_Paucal";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
             var mod10 = number % 10;
 
-            if (mod10 > 1 && mod10 < 5)
+            if (mod10 is > 1 and < 5)
             {
                 return resourceKey + PaucalPostfix;
             }

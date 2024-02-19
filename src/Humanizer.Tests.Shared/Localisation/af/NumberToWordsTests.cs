@@ -1,12 +1,8 @@
-﻿using System.Globalization;
-using Xunit;
-
-namespace Humanizer.Tests.Localisation.af
+﻿namespace Humanizer.Tests.Localisation.af
 {
     [UseCulture("af")]
     public class AfrikaansNumberToWordsTests
     {
-
         [InlineData(1, "een")]
         [InlineData(10, "tien")]
         [InlineData(11, "elf")]
@@ -36,10 +32,8 @@ namespace Humanizer.Tests.Localisation.af
         [InlineData(123456789, "een honderd drie en twintig miljoen vier honderd ses en vyftig duisend sewe honderd nege en tagtig")]
         [InlineData(1234567890, "een miljard twee honderd vier en dertig miljoen vyf honderd sewe en sestig duisend agt honderd en negentig")]
         [Theory]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(0, "nulste")]
@@ -85,27 +79,21 @@ namespace Humanizer.Tests.Localisation.af
         [InlineData(10121, "tien duisend een honderd een en twintigste")]
         [InlineData(100000, "honderd duisendste")]
         [InlineData(1000000, "miljoenste")]
-        public void ToOrdinalWords(int number, string words)
-        {
+        public void ToOrdinalWords(int number, string words) =>
             Assert.Equal(words, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(11, "en-US", "eleven")]
         [InlineData(22, "ar", "اثنان و عشرون")]
         [InlineData(40, "ru", "сорок")]
-        public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
-        {
-            Assert.Equal(expected, number.ToWords(new CultureInfo(culture)));
-        }
+        public void ToWords_CanSpecifyCultureExplicitly(int number, string culture, string expected) =>
+            Assert.Equal(expected, number.ToWords(new(culture)));
 
         [Theory]
         [InlineData(1021, "en-US", "thousand and twenty-first")]
         [InlineData(21, "ar", "الحادي و العشرون")]
         [InlineData(1112, "ru", "одна тысяча сто двенадцатый")]
-        public void ToOrdinalWords_CanSpecifyCultureExplicitly(int number, string culture, string expected)
-        {
-            Assert.Equal(expected, number.ToOrdinalWords(new CultureInfo(culture)));
-        }
+        public void ToOrdinalWords_CanSpecifyCultureExplicitly(int number, string culture, string expected) =>
+            Assert.Equal(expected, number.ToOrdinalWords(new(culture)));
     }
 }

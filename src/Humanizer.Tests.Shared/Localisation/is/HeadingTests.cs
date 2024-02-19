@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.@is
+﻿namespace Humanizer.Tests.Localisation.@is
 {
     [UseCulture("is")]
     public class HeadingTests
@@ -55,10 +53,8 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(348.8, "N")]
         [InlineData(720, "N")]
         [Theory]
-        public void ToHeadingAbbreviated(double heading, string expected)
-        {
+        public void ToHeadingAbbreviated(double heading, string expected) =>
             Assert.Equal(expected, heading.ToHeading());
-        }
 
         [InlineData(0, "norður")]
         [InlineData(45, "norðaustur")]
@@ -77,9 +73,7 @@ namespace Humanizer.Tests.Localisation.@is
         [InlineData(337.5, "norðnorðvestur")]
         [InlineData(720, "norður")]
         [Theory]
-        public void ToHeading(double heading, string expected)
-        {
+        public void ToHeading(double heading, string expected) =>
             Assert.Equal(expected, heading.ToHeading(HeadingStyle.Full));
-        }
     }
 }

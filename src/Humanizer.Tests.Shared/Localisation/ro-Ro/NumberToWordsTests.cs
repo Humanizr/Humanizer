@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Humanizer.Tests.Localisation.roRO
+﻿namespace Humanizer.Tests.Localisation.roRO
 {
     [UseCulture("ro-RO")]
     public class NumberToWordsTests
@@ -61,10 +59,8 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(2000000, "două milioane")]
         [InlineData(1000000000, "un miliard")]
         [InlineData(2000000000, "două miliarde")]
-        public void ToWords(int number, string expected)
-        {
+        public void ToWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords());
-        }
 
         [Theory]
         [InlineData(-1, "minus unu")]
@@ -122,10 +118,8 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(2000000, "două milioane")]
         [InlineData(1000000000, "un miliard")]
         [InlineData(2000000000, "două miliarde")]
-        public void ToMasculineWords(int number, string expected)
-        {
+        public void ToMasculineWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(-1, "minus una")]
@@ -183,10 +177,8 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(2000000, "două milioane")]
         [InlineData(1000000000, "un miliard")]
         [InlineData(2000000000, "două miliarde")]
-        public void ToFeminineWords(int number, string expected)
-        {
+        public void ToFeminineWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(-1, "minus unu")]
@@ -196,10 +188,8 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(3, "trei")]
         [InlineData(4, "patru")]
         [InlineData(5, "cinci")]
-        public void ToNeuterWords(int number, string expected)
-        {
+        public void ToNeuterWords(int number, string expected) =>
             Assert.Equal(expected, number.ToWords(GrammaticalGender.Neuter));
-        }
 
         // Test cases taken from Romanian Grammar, Mika Sarlin.
 
@@ -251,10 +241,8 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(20000000, "al douăzeci milioanelea")]
         [InlineData(1000000000, "al un miliardulea")]
         [InlineData(2000000000, "al două miliardelea")]
-        public void ToOrdinalWords(int number, string expected)
-        {
+        public void ToOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords());
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -304,10 +292,8 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(20000000, "al douăzeci milioanelea")]
         [InlineData(1000000000, "al un miliardulea")]
         [InlineData(2000000000, "al două miliardelea")]
-        public void ToMasculineOrdinalWords(int number, string expected)
-        {
+        public void ToMasculineOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -357,10 +343,8 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(20000000, "a douăzecea milioana")]
         [InlineData(1000000000, "a miliarda")]
         [InlineData(2000000000, "a două miliarda")]
-        public void ToFeminineOrdinalWords(int number, string expected)
-        {
+        public void ToFeminineOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
-        }
 
         [Theory]
         [InlineData(0, "zero")]
@@ -369,9 +353,7 @@ namespace Humanizer.Tests.Localisation.roRO
         [InlineData(3, "al treilea")]
         [InlineData(4, "al patrulea")]
         [InlineData(5, "al cincilea")]
-        public void ToNeuterOrdinalWords(int number, string expected)
-        {
+        public void ToNeuterOrdinalWords(int number, string expected) =>
             Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
-        }
     }
 }
