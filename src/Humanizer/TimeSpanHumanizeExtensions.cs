@@ -44,6 +44,24 @@
             return ConcatenateTimeSpanParts(timeParts, culture, collectionSeparator);
         }
 
+        /// <summary>
+        /// Turns a TimeSpan into an age expression, e.g. "40 years old"
+        /// </summary>
+        /// <param name="timeSpan">Elapsed time</param>
+        /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
+        /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Year"/>.</param>
+        /// <param name="toWords">Uses words instead of numbers if true. E.g. "forty years old".</param>
+        /// <returns>Age expression in the given culture/language</returns>
+        public static string ToAge(this TimeSpan timeSpan, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Year, bool toWords = false)
+        {
+            var timeSpanExpression = timeSpan.Humanize(culture: culture, maxUnit: maxUnit, toWords: toWords);
+
+            var cultureFormatter = Configurator.GetFormatter(culture);
+            var ageExpression = string.Format(cultureFormatter.TimeSpanHumanize_Age(), timeSpanExpression);
+
+            return ageExpression;
+        }
+
         static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);

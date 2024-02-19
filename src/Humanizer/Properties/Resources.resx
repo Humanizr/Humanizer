@@ -735,4 +735,7 @@
   <data name="TimeUnit_Year" xml:space="preserve">
     <value>y</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} old</value>
+  </data>
 </root>
