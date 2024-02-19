@@ -286,7 +286,7 @@ namespace Humanizer
         /// <summary>
         /// Check if a Metric representation is out of the valid range.
         /// </summary>
-        /// <param name="input">A Metric representation who might be out of the valid range.</param>
+        /// <param name="input">A Metric representation that may be out of the valid range.</param>
         /// <returns>True if input is out of the valid range.</returns>
         static bool IsOutOfRange(this double input)
         {
@@ -304,7 +304,7 @@ namespace Humanizer
         /// <remarks>
         /// ToDo: Performance: Use (string input, out number) to escape the double use of Parse()
         /// </remarks>
-        /// <param name="input">A string who might contain a invalid Metric representation.</param>
+        /// <param name="input">>A string that may contain an invalid Metric representation.</param>
         /// <returns>True if input is not a valid Metric representation.</returns>
         static bool IsInvalidMetricNumeral(this string input)
         {

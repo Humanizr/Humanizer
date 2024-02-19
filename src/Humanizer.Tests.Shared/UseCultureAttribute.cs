@@ -29,9 +29,6 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     public UseCultureAttribute(string culture) =>
         this.culture = new(() => new(culture));
 
-    /// <summary>
-    /// Gets the culture.
-    /// </summary>
     public CultureInfo Culture => culture.Value;
 
     /// <summary>

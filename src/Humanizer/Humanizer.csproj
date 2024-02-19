@@ -28,8 +28,13 @@
     <None Update="FluentDate\OnDate.Days.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="OnDate.Days.cs" />
     <Compile Update="FluentDate\OnDate.Days.cs" DesignTime="True" AutoGen="True" DependentUpon="OnDate.Days.tt" />
     
-    <None Update="FluentDate\On.Days.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="On.Days.cs" />
-    <Compile Update="FluentDate\On.Days.cs" DesignTime="True" AutoGen="True" DependentUpon="On.Days.tt" />
+    <None Update="FluentDate\On.Days.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>On.Days.cs</LastGenOutput>
+    </None>
+    <Compile Update="FluentDate\On.Days.cs" DesignTime="True" AutoGen="True">
+      <DependentUpon>On.Days.tt</DependentUpon>
+    </Compile>
 
     <None Update="FluentDate\In.Months.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -23,9 +23,6 @@
 
 namespace Humanizer
 {
-    /// <summary>
-    /// Inflector extensions
-    /// </summary>
     public static class InflectorExtensions
     {
         /// <summary>

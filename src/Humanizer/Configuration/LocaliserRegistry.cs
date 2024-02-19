@@ -3,7 +3,6 @@
     /// <summary>
     /// A registry of localised system components with their associated locales
     /// </summary>
-    /// <typeparam name="TLocaliser"></typeparam>
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser : class
     {
