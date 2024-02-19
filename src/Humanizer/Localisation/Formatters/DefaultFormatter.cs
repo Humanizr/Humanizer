@@ -7,24 +7,13 @@
     {
         readonly CultureInfo _culture;
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         /// <param name="localeCode">Name of the culture to use.</param>
         public DefaultFormatter(string localeCode) =>
             _culture = new(localeCode);
 
-        /// <summary>
-        /// Now
-        /// </summary>
-        /// <returns>Returns Now</returns>
         public virtual string DateHumanize_Now() =>
             GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
 
-        /// <summary>
-        /// Never
-        /// </summary>
-        /// <returns>Returns Never</returns>
         public virtual string DateHumanize_Never() =>
             Format(ResourceKeys.DateHumanize.Never);
 

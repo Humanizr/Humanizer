@@ -7,16 +7,8 @@
     /// </summary>
     public interface IFormatter
     {
-        /// <summary>
-        /// Now
-        /// </summary>
-        /// <returns>Returns Now</returns>
         string DateHumanize_Now();
 
-        /// <summary>
-        /// Never
-        /// </summary>
-        /// <returns>Returns Never</returns>
         string DateHumanize_Never();
 
         /// <summary>
