@@ -131,15 +131,11 @@
                 {
                     return exceptionString;
                 }
-                else
-                {
-                    return UnitsMap[number] + "th";
-                }
+
+                return UnitsMap[number] + "th";
             }
-            else
-            {
-                return UnitsMap[number];
-            }
+
+            return UnitsMap[number];
         }
 
         static string RemoveOnePrefix(string toWords)

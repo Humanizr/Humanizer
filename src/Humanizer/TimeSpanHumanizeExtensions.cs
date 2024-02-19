@@ -111,11 +111,9 @@
             {
                 return (int)(timespan.Days / _daysInAMonth);
             }
-            else
-            {
-                var remainingDays = timespan.Days % _daysInAYear;
-                return (int)(remainingDays / _daysInAMonth);
-            }
+
+            var remainingDays = timespan.Days % _daysInAYear;
+            return (int)(remainingDays / _daysInAMonth);
         }
 
         static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
