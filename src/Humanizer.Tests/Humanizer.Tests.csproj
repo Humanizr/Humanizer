@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.0" PrivateAssets="all" />
+    <PackageReference Include="coverlet.collector" Version="6.0.1" PrivateAssets="all" />
     <PackageReference Include="PublicApiGenerator" Version="11.1.0" />
     <PackageReference Include="xunit" Version="2.7.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7" PrivateAssets="all" />
