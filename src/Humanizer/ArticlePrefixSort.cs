@@ -49,18 +49,18 @@
             var inserted = new string[appended.Length];
 
             // ReSharper disable InconsistentNaming
-            var The = "The".AsSpan();
             var _The = " The".AsSpan();
-            var A = "A".AsSpan();
+            var The = _The[1..];
             var _A = " A".AsSpan();
-            var An = "An".AsSpan();
+            var A = _A[1..];
             var _An = " An".AsSpan();
-            var a = "a".AsSpan();
+            var An = _An[1..];
             var _a = " a".AsSpan();
-            var an = "an".AsSpan();
+            var a = _a[1..];
             var _an = " an".AsSpan();
-            var the = "the".AsSpan();
+            var an = _an[1..];
             var _the = " the".AsSpan();
+            var the = _the[1..];
             // ReSharper restore InconsistentNaming
             for (var i = 0; i < appended.Length; i++)
             {
