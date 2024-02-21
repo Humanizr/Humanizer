@@ -391,6 +391,9 @@ namespace Humanizer.Tests
             yield return ["chassis", "chassis"];
             yield return ["explosive", "explosives"];
             yield return ["debris", "debris"];
+
+            //Issue #1042
+            yield return ["database", "databases"];
         }
 
         IEnumerator IEnumerable.GetEnumerator() =>
