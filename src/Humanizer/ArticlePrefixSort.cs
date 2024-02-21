@@ -5,7 +5,7 @@
     /// </summary>
     public static class EnglishArticle
     {
-        static Regex _regex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+");
+        static Regex _regex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+", RegexOptions.Compiled);
 
         /// <summary>
         /// Removes the prefixed article and appends it to the same string.
