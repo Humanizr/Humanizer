@@ -690,26 +690,50 @@
   <data name="DataUnit_Kilobyte" xml:space="preserve">
     <value>kilobyte</value>
   </data>
+  <data name="DataUnit_Kibibyte" xml:space="preserve">
+    <value>kibibyte</value>
+  </data>
   <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
     <value>KB</value>
+  </data>
+  <data name="DataUnit_KibibyteSymbol" xml:space="preserve">
+    <value>KiB</value>
   </data>
   <data name="DataUnit_Megabyte" xml:space="preserve">
     <value>megabyte</value>
   </data>
+  <data name="DataUnit_Mebibyte" xml:space="preserve">
+    <value>mebibyte</value>
+  </data>
   <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
     <value>MB</value>
+  </data>
+  <data name="DataUnit_MebibyteSymbol" xml:space="preserve">
+    <value>MiB</value>
   </data>
   <data name="DataUnit_Gigabyte" xml:space="preserve">
     <value>gigabyte</value>
   </data>
+  <data name="DataUnit_Gibibyte" xml:space="preserve">
+    <value>gibibyte</value>
+  </data>
   <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
     <value>GB</value>
+  </data>
+  <data name="DataUnit_GibibyteSymbol" xml:space="preserve">
+    <value>GiB</value>
   </data>
   <data name="DataUnit_Terabyte" xml:space="preserve">
     <value>terabyte</value>
   </data>
+  <data name="DataUnit_Tebibyte" xml:space="preserve">
+    <value>tebibyte</value>
+  </data>
   <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
     <value>TB</value>
+  </data>
+  <data name="DataUnit_TebibyteSymbol" xml:space="preserve">
+    <value>TiB</value>
   </data>
   <data name="TimeUnit_Millisecond" xml:space="preserve">
     <value>ms</value>

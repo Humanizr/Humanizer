@@ -53,7 +53,7 @@
 
         [Theory]
         [InlineData(229376, "B", "229376 bæti")]
-        [InlineData(229376, "# KB", "224 kílóbæti")]
+        [InlineData(229376, "# KB", "229 kílóbæti")]
         public void ToFullWordsFormatted(double input, string format, string expectedValue) =>
             Assert.Equal(expectedValue, ByteSize.FromBytes(input).ToFullWords(format));
     }

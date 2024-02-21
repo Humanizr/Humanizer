@@ -5,8 +5,12 @@
         Bit,
         Byte,
         Kilobyte,
+        Kibibyte,
         Megabyte,
+        Mebibyte,
         Gigabyte,
-        Terabyte
+        Gibibyte,
+        Terabyte,
+        Tebibyte
     }
 }
