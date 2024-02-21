@@ -28,8 +28,7 @@
                     var indexOf = item.IndexOf(' ');
                     var removed = item[indexOf..].TrimStart();
                     var article = item[..indexOf].TrimEnd();
-                    var appended = $"{removed} {article}";
-                    transformed[i] = appended.Trim();
+                    transformed[i] = $"{removed} {article}";
                 }
                 else
                 {
