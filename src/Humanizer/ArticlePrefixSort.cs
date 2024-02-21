@@ -48,37 +48,51 @@
         {
             var inserted = new string[appended.Length];
 
+            // ReSharper disable InconsistentNaming
+            var The = "The".AsSpan();
+            var _The = " The".AsSpan();
+            var A = "A".AsSpan();
+            var _A = " A".AsSpan();
+            var An = "An".AsSpan();
+            var _An = " An".AsSpan();
+            var a = "a".AsSpan();
+            var _a = " a".AsSpan();
+            var an = "an".AsSpan();
+            var _an = " an".AsSpan();
+            var the = "the".AsSpan();
+            var _the = " the".AsSpan();
+            // ReSharper restore InconsistentNaming
             for (var i = 0; i < appended.Length; i++)
             {
                 var append = appended[i].AsSpan();
-                if (append.EndsWith(EnglishArticles.The.ToString()))
+                if (append.EndsWith(The))
                 {
-                    var suffix = append[append.IndexOf(" The".AsSpan(), StringComparison.CurrentCulture)..];
+                    var suffix = append[append.IndexOf(_The, StringComparison.CurrentCulture)..];
                     inserted[i] = ToOriginalFormat(append, suffix);
                 }
-                else if (append.EndsWith(EnglishArticles.A.ToString()))
+                else if (append.EndsWith(A))
                 {
-                    var suffix = append[append.IndexOf(" A".AsSpan(), StringComparison.CurrentCulture)..];
+                    var suffix = append[append.IndexOf(_A, StringComparison.CurrentCulture)..];
                     inserted[i] = ToOriginalFormat(append, suffix);
                 }
-                else if (append.EndsWith(EnglishArticles.An.ToString()))
+                else if (append.EndsWith(An))
                 {
-                    var suffix = append[append.IndexOf(" An".AsSpan(), StringComparison.CurrentCulture)..];
+                    var suffix = append[append.IndexOf(_An, StringComparison.CurrentCulture)..];
                     inserted[i] = ToOriginalFormat(append, suffix);
                 }
-                else if (append.EndsWith(EnglishArticles.A.ToString().ToLowerInvariant()))
+                else if (append.EndsWith(a))
                 {
-                    var suffix = append[append.IndexOf(" a".AsSpan(), StringComparison.CurrentCulture)..];
+                    var suffix = append[append.IndexOf(_a, StringComparison.CurrentCulture)..];
                     inserted[i] = ToOriginalFormat(append, suffix);
                 }
-                else if (append.EndsWith(EnglishArticles.An.ToString().ToLowerInvariant()))
+                else if (append.EndsWith(an))
                 {
-                    var suffix = append[append.IndexOf(" an".AsSpan(), StringComparison.CurrentCulture)..];
+                    var suffix = append[append.IndexOf(_an, StringComparison.CurrentCulture)..];
                     inserted[i] = ToOriginalFormat(append, suffix);
                 }
-                else if (append.EndsWith(EnglishArticles.The.ToString().ToLowerInvariant()))
+                else if (append.EndsWith(the))
                 {
-                    var suffix = append[append.IndexOf(" the".AsSpan(), StringComparison.CurrentCulture)..];
+                    var suffix = append[append.IndexOf(_the, StringComparison.CurrentCulture)..];
                     inserted[i] = ToOriginalFormat(append, suffix);
                 }
                 else
