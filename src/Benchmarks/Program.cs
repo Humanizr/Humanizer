@@ -1,1 +1,2 @@
-﻿BenchmarkRunner.Run<EnumBenchmarks>();
+﻿BenchmarkRunner.Run(
+    typeof(Program).Assembly);

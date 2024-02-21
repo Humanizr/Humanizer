@@ -22,17 +22,17 @@
 
             for (var i = 0; i < items.Length; i++)
             {
-                var item = items[i];
+                var item = items[i].AsSpan();
                 if (_regex.IsMatch(item))
                 {
-                    var article = item.Substring(0, item.IndexOf(" ", StringComparison.CurrentCulture));
-                    var removed = item.Remove(0, item.IndexOf(" ", StringComparison.CurrentCulture));
-                    var appended = $"{removed} {article}";
-                    transformed[i] = appended.Trim();
+                    var indexOf = item.IndexOf(' ');
+                    var removed = item[indexOf..].TrimStart();
+                    var article = item[..indexOf].TrimEnd();
+                    transformed[i] = $"{removed} {article}";
                 }
                 else
                 {
-                    transformed[i] = item.Trim();
+                    transformed[i] = item.Trim().ToString();
                 }
             }
             Array.Sort(transformed);
