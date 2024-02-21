@@ -47,61 +47,34 @@
         public static string[] PrependArticleSuffix(string[] appended)
         {
             var inserted = new string[appended.Length];
+            var the = " the".AsSpan();
+            var an = " an".AsSpan();
+            var a = " a".AsSpan();
 
             for (var i = 0; i < appended.Length; i++)
             {
-                string suffix;
-                string original;
-                var append = appended[i];
-                if (append.EndsWith(EnglishArticles.The.ToString()))
+                var append = appended[i].AsSpan();
+                if (append.EndsWith(the, StringComparison.OrdinalIgnoreCase))
                 {
-                    suffix = append.Substring(append.IndexOf(" The", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
+                    inserted[i] = ToOriginalFormat(append, 3);
                 }
-                else if (append.EndsWith(EnglishArticles.A.ToString()))
+                else if (append.EndsWith(an, StringComparison.OrdinalIgnoreCase))
                 {
-                    suffix = append.Substring(append.IndexOf(" A", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
+                    inserted[i] = ToOriginalFormat(append, 2);
                 }
-                else if (append.EndsWith(EnglishArticles.An.ToString()))
+                else if (append.EndsWith(a, StringComparison.OrdinalIgnoreCase))
                 {
-                    suffix = append.Substring(append.IndexOf(" An", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (append.EndsWith(EnglishArticles.A.ToString().ToLowerInvariant()))
-                {
-                    suffix = append.Substring(append.IndexOf(" a", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (append.EndsWith(EnglishArticles.An.ToString().ToLowerInvariant()))
-                {
-                    suffix = append.Substring(append.IndexOf(" an", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (append.EndsWith(EnglishArticles.The.ToString().ToLowerInvariant()))
-                {
-                    suffix = append.Substring(append.IndexOf(" the", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
+                    inserted[i] = ToOriginalFormat(append, 1);
                 }
                 else
                 {
-                    inserted[i] = append;
+                    inserted[i] = appended[i];
                 }
             }
             return inserted;
         }
 
-        static string ToOriginalFormat(string[] appended, string suffix, int i)
-        {
-            var insertion = appended[i].Remove(appended[i].IndexOf(suffix, StringComparison.CurrentCulture));
-            var original = $"{suffix} {insertion}";
-            return original.Trim();
-        }
+        static string ToOriginalFormat(ReadOnlySpan<char> value, int suffixLength) =>
+            $"{value[^suffixLength..]} {value[..^(suffixLength + 1)]}";
     }
 }
