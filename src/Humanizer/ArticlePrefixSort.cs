@@ -91,7 +91,8 @@
 
         static string ToOriginalFormat(string append, string suffix)
         {
-            var insertion = append.Remove(append.IndexOf(suffix, StringComparison.CurrentCulture));
+            var suffixIndex = append.IndexOf(suffix, StringComparison.CurrentCulture);
+            var insertion = append.Remove(suffixIndex);
             suffix = suffix.TrimStart();
             insertion = insertion.TrimEnd();
             return $"{suffix} {insertion}";
