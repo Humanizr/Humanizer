@@ -100,14 +100,36 @@
 #endif
 
         static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
-        static Func<PropertyInfo, bool> _enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
-        /// <summary>
-        /// A predicate function for description property of attribute to use for Enum.Humanize
-        /// </summary>
-        public static Func<PropertyInfo, bool> EnumDescriptionPropertyLocator
+        static Func<PropertyInfo, bool> enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
+        static bool enumDescriptionPropertyLocatorHasBeenUsed;
+
+        internal static Func<PropertyInfo, bool> EnumDescriptionPropertyLocator
         {
-            get => _enumDescriptionPropertyLocator;
-            set => _enumDescriptionPropertyLocator = value ?? DefaultEnumDescriptionPropertyLocator;
+            get
+            {
+                enumDescriptionPropertyLocatorHasBeenUsed = true;
+                return enumDescriptionPropertyLocator;
+            }
+            private set => enumDescriptionPropertyLocator = value;
+        }
+
+        /// <summary>
+        /// Use a predicate function for description property of attribute to use for Enum.Humanize
+        /// </summary>
+        public static void UseEnumDescriptionPropertyLocator(Func<PropertyInfo, bool> func)
+        {
+            if (enumDescriptionPropertyLocatorHasBeenUsed)
+            {
+                throw new("UseEnumDescriptionPropertyLocator must be called before any Enum.Humanize has already been. Move the call to UseEnumDescriptionPropertyLocator to the app startup or a ModuleInitializer.");
+            }
+
+            EnumDescriptionPropertyLocator = func;
+        }
+
+        internal static void ResetUseEnumDescriptionPropertyLocator()
+        {
+            enumDescriptionPropertyLocatorHasBeenUsed = false;
+            EnumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
         }
     }
 }

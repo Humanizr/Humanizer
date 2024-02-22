@@ -53,28 +53,28 @@ public class EnumHumanizeTests
     [Fact]
     public void HumanizeCustomPropertyAttributeWithLocator()
     {
-        Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info";
+        Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
         try
         {
             Assert.Equal(EnumTestsResources.MemberWithCustomPropertyAttribute, EnumForCustomLocator.MemberWithCustomPropertyAttribute.Humanize());
         }
         finally
         {
-            Configurator.EnumDescriptionPropertyLocator = null;
+            Configurator.ResetUseEnumDescriptionPropertyLocator();
         }
     }
 
     [Fact]
     public void HumanizeMembersWithoutDescriptionAttributeWithLocator()
     {
-        Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info";
+        Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
         try
         {
             Assert.Equal(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumForCustomLocator.MemberWithoutDescriptionAttribute.Humanize());
         }
         finally
         {
-            Configurator.EnumDescriptionPropertyLocator = null;
+            Configurator.ResetUseEnumDescriptionPropertyLocator();
         }
     }
     [Fact]
