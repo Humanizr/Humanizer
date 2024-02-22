@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
@@ -37,7 +38,7 @@
         /// <param name="timeUnit">Unit of time to calculate rate for (defaults is per second)</param>
         /// <param name="format">The string format to use for the number of bytes</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
-        public string Humanize(string format, TimeUnit timeUnit = TimeUnit.Second, CultureInfo culture = null)
+        public string Humanize(string format, TimeUnit timeUnit = TimeUnit.Second, CultureInfo? culture = null)
         {
             var displayInterval = timeUnit switch
             {

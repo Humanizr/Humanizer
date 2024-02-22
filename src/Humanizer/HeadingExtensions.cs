@@ -35,7 +35,7 @@
         /// <param name="heading">The heading value</param>
         /// <param name="style">Whether to return a short result or not. <see cref="HeadingStyle"/></param>
         /// <param name="culture">The culture to return the textual representation in</param>
-        public static string ToHeading(this double heading, HeadingStyle style = HeadingStyle.Abbreviated, CultureInfo culture = null)
+        public static string? ToHeading(this double heading, HeadingStyle style = HeadingStyle.Abbreviated, CultureInfo? culture = null)
         {
             var val = (int)(heading / 22.5 + .5);
 
@@ -76,7 +76,7 @@
         /// <param name="heading">The short textual representation of a heading</param>
         /// <param name="culture">The culture of the heading</param>
         /// <returns>The heading. -1 if the heading could not be parsed.</returns>
-        public static double FromAbbreviatedHeading(this string heading, CultureInfo culture = null)
+        public static double FromAbbreviatedHeading(this string heading, CultureInfo? culture = null)
         {
             if (heading == null)
             {

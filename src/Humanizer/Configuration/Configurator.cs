@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Provides a configuration point for Humanizer
@@ -48,7 +49,7 @@
         /// The formatter to be used
         /// </summary>
         /// <param name="culture">The culture to retrieve formatter for. Null means that current thread's UI culture should be used.</param>
-        internal static IFormatter GetFormatter(CultureInfo culture) =>
+        internal static IFormatter GetFormatter(CultureInfo? culture) =>
             Formatters.ResolveForCulture(culture);
 
         /// <summary>

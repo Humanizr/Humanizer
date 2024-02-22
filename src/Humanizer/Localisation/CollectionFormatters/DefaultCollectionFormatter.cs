@@ -19,7 +19,7 @@
         public virtual string Humanize<T>(IEnumerable<T> collection, string separator) =>
             Humanize(collection, o => o?.ToString(), separator);
 
-        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator)
+        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator)
         {
             if (collection == null)
             {

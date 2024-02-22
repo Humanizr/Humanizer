@@ -20,6 +20,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
+#nullable enable
 using static System.Globalization.NumberStyles;
 
 namespace Humanizer
@@ -62,7 +63,7 @@ namespace Humanizer
 
         public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
-        public string GetLargestWholeNumberSymbol(IFormatProvider provider = null)
+        public string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
         {
             var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 

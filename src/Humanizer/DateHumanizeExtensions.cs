@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Humanizes DateTime into human readable sentence
@@ -13,7 +14,7 @@
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateTime input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateTime input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo? culture = null)
         {
             var comparisonBase = dateToCompareAgainst ?? DateTime.UtcNow;
             utcDate ??= input.Kind != DateTimeKind.Local;
@@ -30,7 +31,7 @@
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateTime? input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateTime? input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo? culture = null)
         {
             if (input.HasValue)
             {
@@ -47,7 +48,7 @@
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo? culture = null)
         {
             var comparisonBase = dateToCompareAgainst ?? DateTimeOffset.UtcNow;
 
@@ -61,7 +62,7 @@
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateTimeOffset? input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateTimeOffset? input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo? culture = null)
         {
             if (input.HasValue)
             {
@@ -79,7 +80,7 @@
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateOnly input, DateOnly? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateOnly input, DateOnly? dateToCompareAgainst = null, CultureInfo? culture = null)
         {
             var comparisonBase = dateToCompareAgainst ?? DateOnly.FromDateTime(DateTime.UtcNow);
             return Configurator.DateOnlyHumanizeStrategy.Humanize(input, comparisonBase, culture);
@@ -92,7 +93,7 @@
         /// <param name="dateToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this DateOnly? input, DateOnly? dateToCompareAgainst = null, CultureInfo culture = null)
+        public static string Humanize(this DateOnly? input, DateOnly? dateToCompareAgainst = null, CultureInfo? culture = null)
         {
             if (input.HasValue)
             {
@@ -110,7 +111,7 @@
         /// <param name="timeToCompareAgainst">Date to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this TimeOnly input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo culture = null)
+        public static string Humanize(this TimeOnly input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo? culture = null)
         {
             var comparisonBase = timeToCompareAgainst ?? TimeOnly.FromDateTime(useUtc ? DateTime.UtcNow : DateTime.Now);
 
@@ -125,7 +126,7 @@
         /// <param name="timeToCompareAgainst">Time to compare the input against. If null, current date is used as base</param>
         /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
         /// <returns>distance of time in words</returns>
-        public static string Humanize(this TimeOnly? input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo culture = null)
+        public static string Humanize(this TimeOnly? input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo? culture = null)
         {
             if (input.HasValue)
             {
