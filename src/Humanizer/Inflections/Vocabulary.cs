@@ -1,4 +1,5 @@
-﻿namespace Humanizer;
+﻿#nullable enable
+namespace Humanizer;
 
 /// <summary>
 /// A container for exceptions to simple pluralization/singularization rules.
@@ -66,7 +67,7 @@ public class Vocabulary
     /// </summary>
     /// <param name="word">Word to be pluralized</param>
     /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
-    public string Pluralize(string word, bool inputIsKnownToBeSingular = true)
+    public string? Pluralize(string word, bool inputIsKnownToBeSingular = true)
     {
         var s = LetterS(word);
         if (s != null)
@@ -134,7 +135,7 @@ public class Vocabulary
         return word;
     }
 
-    string ApplyRules(IList<Rule> rules, string word, bool skipFirstRule)
+    string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)
     {
         if (word == null)
         {
@@ -179,7 +180,7 @@ public class Vocabulary
     /// <summary>
     /// If the word is the letter s, singular or plural, return the letter s singular
     /// </summary>
-    string LetterS(string word)
+    string? LetterS(string word)
     {
         var s = letterS.Match(word);
         return s.Groups.Count > 1 ? s.Groups[1].Value : null;
@@ -189,7 +190,7 @@ public class Vocabulary
     {
         readonly Regex regex = new(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        public string Apply(string word)
+        public string? Apply(string word)
         {
             if (!regex.IsMatch(word))
             {

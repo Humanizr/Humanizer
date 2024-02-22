@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// <see cref="DateTime"/> extensions related to spatial or temporal relations
