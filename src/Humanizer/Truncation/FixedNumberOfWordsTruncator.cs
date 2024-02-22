@@ -5,7 +5,7 @@ namespace Humanizer
     /// </summary>
     class FixedNumberOfWordsTruncator : ITruncator
     {
-        public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
+        public string? Truncate(string? value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
         {
             if (value == null)
             {

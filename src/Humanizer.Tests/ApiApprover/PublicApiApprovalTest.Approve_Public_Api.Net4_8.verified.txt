@@ -9,7 +9,7 @@ namespace Humanizer
         public System.TimeSpan Interval { get; }
         public Humanizer.ByteSize Size { get; }
         public string Humanize(Humanizer.TimeUnit timeUnit = 1) { }
-        public string Humanize(string format, Humanizer.TimeUnit timeUnit = 1, System.Globalization.CultureInfo culture = null) { }
+        public string Humanize(string? format, Humanizer.TimeUnit timeUnit = 1, System.Globalization.CultureInfo? culture = null) { }
     }
     public struct ByteSize : System.IComparable, System.IComparable<Humanizer.ByteSize>, System.IEquatable<Humanizer.ByteSize>, System.IFormattable
     {
@@ -50,18 +50,18 @@ namespace Humanizer
         public Humanizer.ByteSize AddMegabytes(double value) { }
         public Humanizer.ByteSize AddTerabytes(double value) { }
         public int CompareTo(Humanizer.ByteSize other) { }
-        public int CompareTo(object obj) { }
+        public int CompareTo(object? obj) { }
         public bool Equals(Humanizer.ByteSize value) { }
-        public override bool Equals(object value) { }
+        public override bool Equals(object? value) { }
         public override int GetHashCode() { }
-        public string GetLargestWholeNumberFullWord(System.IFormatProvider provider = null) { }
-        public string GetLargestWholeNumberSymbol(System.IFormatProvider provider = null) { }
+        public string GetLargestWholeNumberFullWord(System.IFormatProvider? provider = null) { }
+        public string GetLargestWholeNumberSymbol(System.IFormatProvider? provider = null) { }
         public Humanizer.ByteSize Subtract(Humanizer.ByteSize bs) { }
-        public string ToFullWords(string format = null, System.IFormatProvider provider = null) { }
+        public string ToFullWords(string? format = null, System.IFormatProvider? provider = null) { }
         public override string ToString() { }
         public string ToString(System.IFormatProvider provider) { }
         public string ToString(string format) { }
-        public string ToString(string format, System.IFormatProvider provider) { }
+        public string ToString(string? format, System.IFormatProvider? provider) { }
         public static Humanizer.ByteSize FromBits(long value) { }
         public static Humanizer.ByteSize FromBytes(double value) { }
         public static Humanizer.ByteSize FromGigabytes(double value) { }
@@ -69,9 +69,9 @@ namespace Humanizer
         public static Humanizer.ByteSize FromMegabytes(double value) { }
         public static Humanizer.ByteSize FromTerabytes(double value) { }
         public static Humanizer.ByteSize Parse(string s) { }
-        public static Humanizer.ByteSize Parse(string s, System.IFormatProvider formatProvider) { }
-        public static bool TryParse(string s, out Humanizer.ByteSize result) { }
-        public static bool TryParse(string s, System.IFormatProvider formatProvider, out Humanizer.ByteSize result) { }
+        public static Humanizer.ByteSize Parse(string s, System.IFormatProvider? formatProvider) { }
+        public static bool TryParse(string? s, out Humanizer.ByteSize result) { }
+        public static bool TryParse(string? s, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result) { }
         public static bool operator !=(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
         public static Humanizer.ByteSize operator +(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
         public static Humanizer.ByteSize operator ++(Humanizer.ByteSize b) { }
@@ -178,10 +178,10 @@ namespace Humanizer
     }
     public static class DateHumanizeExtensions
     {
-        public static string Humanize(this System.DateTimeOffset input, System.DateTimeOffset? dateToCompareAgainst = default, System.Globalization.CultureInfo culture = null) { }
-        public static string Humanize(this System.DateTimeOffset? input, System.DateTimeOffset? dateToCompareAgainst = default, System.Globalization.CultureInfo culture = null) { }
-        public static string Humanize(this System.DateTime input, bool? utcDate = default, System.DateTime? dateToCompareAgainst = default, System.Globalization.CultureInfo culture = null) { }
-        public static string Humanize(this System.DateTime? input, bool? utcDate = default, System.DateTime? dateToCompareAgainst = default, System.Globalization.CultureInfo culture = null) { }
+        public static string Humanize(this System.DateTimeOffset input, System.DateTimeOffset? dateToCompareAgainst = default, System.Globalization.CultureInfo? culture = null) { }
+        public static string Humanize(this System.DateTimeOffset? input, System.DateTimeOffset? dateToCompareAgainst = default, System.Globalization.CultureInfo? culture = null) { }
+        public static string Humanize(this System.DateTime input, bool? utcDate = default, System.DateTime? dateToCompareAgainst = default, System.Globalization.CultureInfo? culture = null) { }
+        public static string Humanize(this System.DateTime? input, bool? utcDate = default, System.DateTime? dateToCompareAgainst = default, System.Globalization.CultureInfo? culture = null) { }
     }
     public static class DateToOrdinalWordsExtensions
     {
@@ -191,12 +191,12 @@ namespace Humanizer
     public class DefaultDateTimeHumanizeStrategy : Humanizer.IDateTimeHumanizeStrategy
     {
         public DefaultDateTimeHumanizeStrategy() { }
-        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
     public class DefaultDateTimeOffsetHumanizeStrategy : Humanizer.IDateTimeOffsetHumanizeStrategy
     {
         public DefaultDateTimeOffsetHumanizeStrategy() { }
-        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
     public class DefaultFormatter : Humanizer.IFormatter
     {
@@ -258,10 +258,10 @@ namespace Humanizer
     public static class HeadingExtensions
     {
         public static double FromAbbreviatedHeading(this string heading) { }
-        public static double FromAbbreviatedHeading(this string heading, System.Globalization.CultureInfo culture = null) { }
+        public static double FromAbbreviatedHeading(this string heading, System.Globalization.CultureInfo? culture = null) { }
         public static double FromHeadingArrow(this char heading) { }
         public static double FromHeadingArrow(this string heading) { }
-        public static string ToHeading(this double heading, Humanizer.HeadingStyle style = 0, System.Globalization.CultureInfo culture = null) { }
+        public static string? ToHeading(this double heading, Humanizer.HeadingStyle style = 0, System.Globalization.CultureInfo? culture = null) { }
         public static char ToHeadingArrow(this double heading) { }
     }
     public enum HeadingStyle
@@ -284,11 +284,11 @@ namespace Humanizer
     }
     public interface IDateTimeHumanizeStrategy
     {
-        string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture);
+        string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo? culture);
     }
     public interface IDateTimeOffsetHumanizeStrategy
     {
-        string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture);
+        string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo? culture);
     }
     public interface IDateToOrdinalWordConverter
     {
@@ -556,11 +556,11 @@ namespace Humanizer
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser :  class
     {
-        public LocaliserRegistry(System.Func<System.Globalization.CultureInfo, TLocaliser> defaultLocaliser) { }
+        public LocaliserRegistry(System.Func<System.Globalization.CultureInfo?, TLocaliser> defaultLocaliser) { }
         public LocaliserRegistry(TLocaliser defaultLocaliser) { }
-        public void Register(string localeCode, System.Func<System.Globalization.CultureInfo, TLocaliser> localiser) { }
+        public void Register(string localeCode, System.Func<System.Globalization.CultureInfo?, TLocaliser> localiser) { }
         public void Register(string localeCode, TLocaliser localiser) { }
-        public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
+        public TLocaliser ResolveForCulture(System.Globalization.CultureInfo? culture) { }
         public TLocaliser ResolveForUiCulture() { }
     }
     public static class MetricNumeralExtensions
@@ -670,21 +670,21 @@ namespace Humanizer
     }
     public static class NumberToWordsExtension
     {
-        public static string ToOrdinalWords(this int number, System.Globalization.CultureInfo culture = null) { }
-        public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
-        public static string ToOrdinalWords(this int number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
-        public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
-        public static string ToTuple(this int number, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this int number, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this int number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this int number, bool addAnd, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this long number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this long number, System.Globalization.CultureInfo culture = null, bool addAnd = true) { }
-        public static string ToWords(this int number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this int number, bool addAnd, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo culture = null) { }
-        public static string ToWords(this long number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo culture = null, bool addAnd = false) { }
+        public static string ToOrdinalWords(this int number, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToOrdinalWords(this int number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToOrdinalWords(this int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToTuple(this int number, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this int number, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this int number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this int number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this int number, bool addAnd, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this long number, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this long number, System.Globalization.CultureInfo? culture = null, bool addAnd = true) { }
+        public static string ToWords(this int number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this int number, bool addAnd, Humanizer.WordForm wordForm, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, System.Globalization.CultureInfo? culture = null) { }
+        public static string ToWords(this long number, Humanizer.WordForm wordForm, System.Globalization.CultureInfo? culture = null, bool addAnd = false) { }
     }
     public class On
     {
@@ -1149,12 +1149,12 @@ namespace Humanizer
     public class PrecisionDateTimeHumanizeStrategy : Humanizer.IDateTimeHumanizeStrategy
     {
         public PrecisionDateTimeHumanizeStrategy(double precision = 0.75) { }
-        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
     public class PrecisionDateTimeOffsetHumanizeStrategy : Humanizer.IDateTimeOffsetHumanizeStrategy
     {
         public PrecisionDateTimeOffsetHumanizeStrategy(double precision = 0.75) { }
-        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo culture) { }
+        public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
     public static class PrepositionsExtensions
     {
@@ -1183,8 +1183,8 @@ namespace Humanizer
     }
     public static class Resources
     {
-        public static string GetResource(string resourceKey, System.Globalization.CultureInfo culture = null) { }
-        public static bool TryGetResource(string resourceKey, System.Globalization.CultureInfo culture, out string result) { }
+        public static string? GetResource(string resourceKey, System.Globalization.CultureInfo? culture = null) { }
+        public static bool TryGetResource(string resourceKey, System.Globalization.CultureInfo? culture, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string? result) { }
     }
     public static class RomanNumeralExtensions
     {
@@ -1213,9 +1213,9 @@ namespace Humanizer
     }
     public static class TimeSpanHumanizeExtensions
     {
-        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = false) { }
-        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string collectionSeparator = ", ", bool toWords = false) { }
-        public static string ToAge(this System.TimeSpan timeSpan, System.Globalization.CultureInfo culture = null, Humanizer.TimeUnit maxUnit = 7, bool toWords = false) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision = 1, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ", bool toWords = false) { }
+        public static string Humanize(this System.TimeSpan timeSpan, int precision, bool countEmptyUnits, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 5, Humanizer.TimeUnit minUnit = 0, string? collectionSeparator = ", ", bool toWords = false) { }
+        public static string ToAge(this System.TimeSpan timeSpan, System.Globalization.CultureInfo? culture = null, Humanizer.TimeUnit maxUnit = 7, bool toWords = false) { }
     }
     public enum TimeUnit
     {
@@ -1230,7 +1230,7 @@ namespace Humanizer
     }
     public static class TimeUnitToSymbolExtensions
     {
-        public static string ToSymbol(this Humanizer.TimeUnit unit, System.Globalization.CultureInfo culture = null) { }
+        public static string ToSymbol(this Humanizer.TimeUnit unit, System.Globalization.CultureInfo? culture = null) { }
     }
     public static class To
     {
@@ -1280,7 +1280,7 @@ namespace Humanizer
         public void AddPlural(string rule, string replacement) { }
         public void AddSingular(string rule, string replacement) { }
         public void AddUncountable(string word) { }
-        public string Pluralize(string word, bool inputIsKnownToBeSingular = true) { }
+        public string? Pluralize(string word, bool inputIsKnownToBeSingular = true) { }
         public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
     }
     public enum WordForm

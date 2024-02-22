@@ -57,10 +57,10 @@
         /// "request".ToQuantity(10000, format: "N0") => "10,000 requests"
         /// "request".ToQuantity(1, format: "N0") => "1 request"
         /// </example>
-        public static string ToQuantity(this string input, long quantity, string format, IFormatProvider formatProvider = null) =>
+        public static string ToQuantity(this string input, long quantity, string format, IFormatProvider? formatProvider = null) =>
             input.ToQuantity(quantity, showQuantityAs: ShowQuantityAs.Numeric, format: format, formatProvider: formatProvider);
 
-        static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string format = null, IFormatProvider formatProvider = null)
+        static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string? format = null, IFormatProvider? formatProvider = null)
         {
             var transformedInput = quantity == 1
                 ? input.Singularize(inputIsKnownToBePlural: false)
@@ -91,7 +91,7 @@
         /// "request".ToQuantity(10.6, format: "N0") => "10.6 requests"
         /// "request".ToQuantity(1.0, format: "N0") => "1 request"
         /// </example>
-        public static string ToQuantity(this string input, double quantity, string format = null, IFormatProvider formatProvider = null)
+        public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider formatProvider = null)
         {
             var transformedInput = quantity == 1
                 ? input.Singularize(inputIsKnownToBePlural: false)
