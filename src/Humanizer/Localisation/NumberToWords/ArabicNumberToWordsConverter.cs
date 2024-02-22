@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     class ArabicNumberToWordsConverter :
         GenderedNumberToWordsConverter

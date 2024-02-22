@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Dutch spelling of numbers is not really officially regulated.
@@ -15,9 +16,9 @@
         class Fact
         {
             public long Value { get; set; }
-            public string Name { get; set; }
-            public string Prefix { get; set; }
-            public string Postfix { get; set; }
+            public required string Name { get; set; }
+            public required string Prefix { get; set; }
+            public required string Postfix { get; set; }
             public bool DisplayOneUnit { get; set; }
         }
 

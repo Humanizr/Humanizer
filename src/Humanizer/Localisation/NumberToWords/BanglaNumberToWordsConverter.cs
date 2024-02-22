@@ -1,4 +1,7 @@
-﻿namespace Humanizer
+﻿#nullable enable
+using System.Diagnostics.CodeAnalysis;
+
+namespace Humanizer
 {
     class BanglaNumberToWordsConverter :
         GenderlessNumberToWordsConverter
@@ -110,7 +113,7 @@
             return string.Join(" ", parts);
         }
 
-        static bool ExceptionNumbersToWords(int number, out string words) =>
+        static bool ExceptionNumbersToWords(int number, [NotNullWhen(true)] out string? words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }
