@@ -130,7 +130,7 @@
             }
 
             if (isOrdinal && !string.IsNullOrWhiteSpace(lastOrdinalSubstitution))
-                parts[parts.Count - 1] = lastOrdinalSubstitution;
+                parts[^1] = lastOrdinalSubstitution;
 
             return string.Join(" ", parts);
         }
