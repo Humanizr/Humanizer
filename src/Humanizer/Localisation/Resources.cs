@@ -34,7 +34,7 @@ namespace Humanizer
         /// <param name="culture">The culture of the resource to retrieve. If not specified, current thread's UI culture is used.</param>
         /// <param name="result">The value of the resource localized for the specified culture if found; null otherwise.</param>
         /// <returns>true if the specified string resource was found for the given culture; otherwise, false.</returns>
-        public static bool TryGetResource(string resourceKey, CultureInfo culture, out string result)
+        public static bool TryGetResource(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result)
         {
             culture ??= CultureInfo.CurrentUICulture;
             var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);

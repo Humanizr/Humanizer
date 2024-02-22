@@ -99,7 +99,7 @@ public class Vocabulary
             return word;
         }
 
-        return result;
+        return result!;
     }
 
     /// <summary>
@@ -146,7 +146,6 @@ public class Vocabulary
         return word;
     }
 
-    [return:NotNullIfNotNull(nameof(word))]
     string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)
     {
         if (word == null)
