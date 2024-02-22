@@ -1,4 +1,6 @@
-﻿namespace Humanizer
+﻿#nullable enable
+
+namespace Humanizer
 {
     /// <summary>
     /// Algorithms used to convert distance between two dates into words.
