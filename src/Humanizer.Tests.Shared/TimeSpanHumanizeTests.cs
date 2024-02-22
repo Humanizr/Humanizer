@@ -443,7 +443,7 @@
         [InlineData(6 * 24 * 60 * 60 * 1000, 1, "ru-RU", "6 дней", ", ")]
         [InlineData(11 * 60 * 60 * 1000, 1, "ar", "11 ساعة", ", ")]
         [InlineData(3603001, 2, "it-IT", "1 ora e 3 secondi", null)]
-        public void CanSpecifyCultureExplicitly(int ms, int precision, string culture, string expected, string collectionSeparator)
+        public void CanSpecifyCultureExplicitly(int ms, int precision, string culture, string expected, string? collectionSeparator)
         {
             var actual = TimeSpan.FromMilliseconds(ms).Humanize(precision: precision, culture: new(culture), collectionSeparator: collectionSeparator);
             Assert.Equal(expected, actual);

@@ -2,7 +2,7 @@
 {
     public class SomeClass
     {
-        public string SomeString;
+        public string? SomeString;
         public int SomeInt;
         public override string ToString() =>
             "ToString";
@@ -97,7 +97,7 @@
 
         [Fact]
         public void HumanizeHandlesNullItemsWithoutAnException() =>
-            Assert.Null(Record.Exception(() => new object[] { null, null }.Humanize()));
+            Assert.Null(Record.Exception(() => new object?[] { null, null }.Humanize()));
 
         [Fact]
         public void HumanizeHandlesNullStringDisplayFormatterReturnsWithoutAnException() =>
@@ -105,7 +105,7 @@
 
         [Fact]
         public void HumanizeHandlesNullObjectDisplayFormatterReturnsWithoutAnException() =>
-            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => (object)null)));
+            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => (object?)null)));
 
         [Fact]
         public void HumanizeRunsStringDisplayFormatterOnNulls() =>
