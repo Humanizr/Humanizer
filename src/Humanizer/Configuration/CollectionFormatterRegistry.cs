@@ -1,4 +1,6 @@
-﻿namespace Humanizer
+﻿#nullable enable
+
+namespace Humanizer
 {
     class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
     {
