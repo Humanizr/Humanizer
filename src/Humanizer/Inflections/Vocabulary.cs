@@ -70,6 +70,11 @@ public class Vocabulary
     [return: NotNullIfNotNull(nameof(word))]
     public string? Pluralize(string? word, bool inputIsKnownToBeSingular = true)
     {
+        if (word == null)
+        {
+            return null;
+        }
+
         var s = LetterS(word);
         if (s != null)
         {

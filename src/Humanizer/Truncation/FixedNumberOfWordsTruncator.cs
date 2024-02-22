@@ -57,7 +57,7 @@ namespace Humanizer
             return value + truncationString;
         }
 
-        static string TruncateFromLeft(string value, int length, string truncationString)
+        static string TruncateFromLeft(string value, int length, string? truncationString)
         {
             var lastCharactersWasWhiteSpace = true;
             var numberOfWordsProcessed = 0;
