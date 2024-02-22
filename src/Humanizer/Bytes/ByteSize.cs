@@ -314,7 +314,7 @@ namespace Humanizer
         public override int GetHashCode() =>
             Bits.GetHashCode();
 
-        public int CompareTo(object obj)
+        public int CompareTo(object? obj)
         {
             if (obj == null)
             {
@@ -389,10 +389,10 @@ namespace Humanizer
         public static bool operator >=(ByteSize b1, ByteSize b2) =>
             b1.Bits >= b2.Bits;
 
-        public static bool TryParse(string s, out ByteSize result) =>
+        public static bool TryParse(string? s, out ByteSize result) =>
             TryParse(s, null, out result);
 
-        public static bool TryParse(string s, IFormatProvider? formatProvider, out ByteSize result)
+        public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result)
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
@@ -417,7 +417,7 @@ namespace Humanizer
             result = new();
 
             // Get the index of the first non-digit character
-            s = s.TrimStart(); // Protect against leading spaces
+            s = s!.TrimStart(); // Protect against leading spaces
 
             int num;
             var found = false;

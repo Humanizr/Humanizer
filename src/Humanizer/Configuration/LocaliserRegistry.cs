@@ -7,7 +7,7 @@ namespace Humanizer
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser : class
     {
-        readonly IDictionary<string, Func<CultureInfo?, TLocaliser>> _localisers = new Dictionary<string, Func<CultureInfo, TLocaliser>>();
+        readonly Dictionary<string, Func<CultureInfo?, TLocaliser>> _localisers = new();
         readonly Func<CultureInfo?, TLocaliser> _defaultLocaliser;
 
         /// <summary>
@@ -44,14 +44,14 @@ namespace Humanizer
         /// <summary>
         /// Registers the localiser factory for the culture provided
         /// </summary>
-        public void Register(string localeCode, Func<CultureInfo, TLocaliser> localiser) =>
+        public void Register(string localeCode, Func<CultureInfo?, TLocaliser> localiser) =>
             _localisers[localeCode] = localiser;
 
         Func<CultureInfo?, TLocaliser> FindLocaliser(CultureInfo culture)
         {
             for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
             {
-                if (_localisers.TryGetValue(c.Name, out var localiser))
+                if (_localisers.TryGetValue(c!.Name, out var localiser))
                 {
                     return localiser;
                 }

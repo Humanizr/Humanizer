@@ -188,7 +188,7 @@ namespace Humanizer
         static bool IsContainingOnlyNullValue(IEnumerable<string?> timeParts) =>
             timeParts.Count(x => x != null) == 0;
 
-        static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string?> timeParts, int precision, bool countEmptyUnits)
+        static IEnumerable<string?> SetPrecisionOfTimeSpan(IEnumerable<string?> timeParts, int precision, bool countEmptyUnits)
         {
             if (!countEmptyUnits)
             {
