@@ -270,9 +270,6 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
     <value>{0} milisekundes</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
-    <value>pirms {0} dienām</value>
-  </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>pirms {0} dienām</value>
   </data>
@@ -291,9 +288,6 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>pēc {0} dienas</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
-    <value>pirms {0} stundām</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>pirms {0} stundām</value>
   </data>
@@ -308,9 +302,6 @@
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>pēc {0} stundas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
-    <value>pirms {0} minūtēm</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>pirms {0} minūtēm</value>
@@ -345,9 +336,6 @@
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
     <value>pēc {0} mēneša</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
-    <value>pirms {0} sekundēm</value>
-  </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
     <value>pirms {0} sekundēm</value>
   </data>
@@ -359,9 +347,6 @@
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>pēc {0} sekundes</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
-    <value>pirms {0} gadiem</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>pirms {0} gadiem</value>

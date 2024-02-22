@@ -510,9 +510,6 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>{0} día desde ahora</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
-    <value>hace {0} horas</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>hace {0} horas</value>
   </data>
@@ -527,9 +524,6 @@
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>hace {0} hora desde ahora</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
-    <value>hace {0} minutos</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>hace {0} minutos</value>
@@ -585,9 +579,6 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
     <value>{0} milisegundos</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
-    <value>hace {0} días</value>
-  </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>hace {0} días</value>
   </data>
@@ -636,9 +627,6 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
     <value>{0} milisegundo</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
-    <value>hace {0} años</value>
-  </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>hace {0} años</value>
   </data>
@@ -658,9 +646,6 @@
     <value>hace {0} meses</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
-    <value>hace {0} segundos</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
     <value>hace {0} segundos</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">

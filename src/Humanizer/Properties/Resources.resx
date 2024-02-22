@@ -270,9 +270,6 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
     <value>{0} milliseconds</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
-    <value>{0} days ago</value>
-  </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>{0} days ago</value>
   </data>
@@ -291,9 +288,6 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>{0} day from now</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
-    <value>{0} hours ago</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>{0} hours ago</value>
   </data>
@@ -308,9 +302,6 @@
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>{0} hour from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
-    <value>{0} minutes ago</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>{0} minutes ago</value>
@@ -345,9 +336,6 @@
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
     <value>{0} month from now</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
-    <value>{0} seconds ago</value>
-  </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
     <value>{0} seconds ago</value>
   </data>
@@ -359,9 +347,6 @@
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>{0} second from now</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
-    <value>{0} years ago</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>{0} years ago</value>

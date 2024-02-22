@@ -270,9 +270,6 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
     <value>{0} میلیچرکە</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
-    <value>{0} ڕۆژ لەمەوبەر</value>
-  </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>{0} ڕۆژ لەمەوبەر</value>
   </data>
@@ -291,9 +288,6 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>{0} ڕۆژی دیکە</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
-    <value>{0} کاتژمێر لەمەوبەر</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>{0} کاتژمێر لەمەوبەر</value>
   </data>
@@ -308,9 +302,6 @@
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>{0} کاتژمێری دیکە</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
-    <value>{0} خولەک لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>{0} خولەک لەمەوبەر</value>
@@ -345,9 +336,6 @@
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
     <value>{0} مانگی دیکە</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
-    <value>{0} چرکە لەمەوبەر</value>
-  </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
     <value>{0} چرکە لەمەوبەر</value>
   </data>
@@ -359,9 +347,6 @@
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>{0} چرکەی دیکە</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
-    <value>{0} ساڵ لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>{0} ساڵ لەمەوبەر</value>
