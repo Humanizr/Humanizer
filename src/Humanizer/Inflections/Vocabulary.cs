@@ -67,7 +67,8 @@ public class Vocabulary
     /// </summary>
     /// <param name="word">Word to be pluralized</param>
     /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
-    public string? Pluralize(string word, bool inputIsKnownToBeSingular = true)
+    [return: NotNullIfNotNull(nameof(word))]
+    public string? Pluralize(string? word, bool inputIsKnownToBeSingular = true)
     {
         var s = LetterS(word);
         if (s != null)
@@ -102,8 +103,13 @@ public class Vocabulary
     /// <param name="word">Word to be singularized</param>
     /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
     /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
-    public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
+    [return: NotNullIfNotNull(nameof(word))]
+    public string? Singularize(string? word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
     {
+        if (word == null)
+        {
+            return null;
+        }
         var s = LetterS(word);
         if (s != null)
         {
