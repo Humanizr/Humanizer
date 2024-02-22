@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Provides a configuration point for Humanizer

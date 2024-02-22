@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     class BanglaNumberToWordsConverter :
         GenderlessNumberToWordsConverter

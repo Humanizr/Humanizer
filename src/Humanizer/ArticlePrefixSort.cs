@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.

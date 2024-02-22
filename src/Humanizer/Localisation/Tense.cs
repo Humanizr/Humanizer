@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Enumerates the possible time references; past or future.

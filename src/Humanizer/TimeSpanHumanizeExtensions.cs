@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Humanizes TimeSpan into human readable form

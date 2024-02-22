@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Humanizer
+﻿namespace Humanizer
 {
     class SerbianCyrlNumberToWordsConverter(CultureInfo? culture) :
         GenderlessNumberToWordsConverter

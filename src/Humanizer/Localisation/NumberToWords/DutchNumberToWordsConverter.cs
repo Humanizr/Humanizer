@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Dutch spelling of numbers is not really officially regulated.

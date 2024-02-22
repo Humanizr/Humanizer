@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Humanizer
+﻿namespace Humanizer
 {
     /// <summary>
     /// Enumerates the ways of displaying a quantity value when converting

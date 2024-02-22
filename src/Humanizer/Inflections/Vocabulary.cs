@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace Humanizer;
+﻿namespace Humanizer;
 
 /// <summary>
 /// A container for exceptions to simple pluralization/singularization rules.

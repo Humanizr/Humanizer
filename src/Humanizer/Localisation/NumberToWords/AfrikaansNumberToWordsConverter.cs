@@ -1,5 +1,3 @@
-#nullable enable
-
 namespace Humanizer
 {
     class AfrikaansNumberToWordsConverter :

@@ -1,4 +1,3 @@
-#nullable enable
 namespace Humanizer
 {
     class ToLowerCase : ICulturedStringTransformer

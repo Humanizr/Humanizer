@@ -59,8 +59,8 @@ namespace Humanizer
         public Humanizer.ByteSize Subtract(Humanizer.ByteSize bs) { }
         public string ToFullWords(string? format = null, System.IFormatProvider? provider = null) { }
         public override string ToString() { }
-        public string ToString(System.IFormatProvider provider) { }
-        public string ToString(string format) { }
+        public string ToString(System.IFormatProvider? provider) { }
+        public string ToString(string? format) { }
         public string ToString(string? format, System.IFormatProvider? provider) { }
         public static Humanizer.ByteSize FromBits(long value) { }
         public static Humanizer.ByteSize FromBytes(double value) { }
@@ -110,8 +110,8 @@ namespace Humanizer
         public static Humanizer.ByteSize Gigabytes(this uint input) { }
         public static Humanizer.ByteSize Gigabytes(this ushort input) { }
         public static string Humanize(this Humanizer.ByteSize input, System.IFormatProvider formatProvider) { }
-        public static string Humanize(this Humanizer.ByteSize input, string format = null) { }
-        public static string Humanize(this Humanizer.ByteSize input, string format, System.IFormatProvider formatProvider) { }
+        public static string Humanize(this Humanizer.ByteSize input, string? format = null) { }
+        public static string Humanize(this Humanizer.ByteSize input, string? format, System.IFormatProvider? formatProvider) { }
         public static Humanizer.ByteSize Kilobytes(this byte input) { }
         public static Humanizer.ByteSize Kilobytes(this double input) { }
         public static Humanizer.ByteSize Kilobytes(this int input) { }
@@ -370,7 +370,8 @@ namespace Humanizer
     }
     public interface ITruncator
     {
-        string Truncate(string value, int length, string truncationString, Humanizer.TruncateFrom truncateFrom = 1);
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
+        string? Truncate(string? value, int length, string? truncationString, Humanizer.TruncateFrom truncateFrom = 1);
     }
     public class In
     {
@@ -757,7 +758,8 @@ namespace Humanizer
         public static string Hyphenate(this string underscoredWord) { }
         public static string Kebaberize(this string input) { }
         public static string Pascalize(this string input) { }
-        public static string Pluralize(this string word, bool inputIsKnownToBeSingular = true) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
+        public static string? Pluralize(this string? word, bool inputIsKnownToBeSingular = true) { }
         public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
         public static string Titleize(this string input) { }
         public static string Underscore(this string input) { }
@@ -1839,7 +1841,7 @@ namespace Humanizer
     }
     public static class Resources
     {
-        public static string? GetResource(string resourceKey, System.Globalization.CultureInfo? culture = null) { }
+        public static string GetResource(string resourceKey, System.Globalization.CultureInfo? culture = null) { }
         public static bool TryGetResource(string resourceKey, System.Globalization.CultureInfo? culture, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out string? result) { }
     }
     public static class RomanNumeralExtensions
@@ -1905,15 +1907,19 @@ namespace Humanizer
     {
         public static string ToQuantity(this string input, double quantity) { }
         public static string ToQuantity(this string input, long quantity, Humanizer.ShowQuantityAs showQuantityAs = 1) { }
-        public static string ToQuantity(this string input, double quantity, string format = null, System.IFormatProvider formatProvider = null) { }
-        public static string ToQuantity(this string input, long quantity, string format, System.IFormatProvider formatProvider = null) { }
+        public static string ToQuantity(this string input, double quantity, string? format = null, System.IFormatProvider? formatProvider = null) { }
+        public static string ToQuantity(this string input, long quantity, string? format, System.IFormatProvider? formatProvider = null) { }
     }
     public static class TruncateExtensions
     {
-        public static string Truncate(this string input, int length) { }
-        public static string Truncate(this string input, int length, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from = 1) { }
-        public static string Truncate(this string input, int length, string truncationString, Humanizer.TruncateFrom from = 1) { }
-        public static string Truncate(this string input, int length, string truncationString, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from = 1) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("input")]
+        public static string? Truncate(this string? input, int length) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("input")]
+        public static string? Truncate(this string? input, int length, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from = 1) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("input")]
+        public static string? Truncate(this string? input, int length, string? truncationString, Humanizer.TruncateFrom from = 1) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("input")]
+        public static string? Truncate(this string? input, int length, string? truncationString, Humanizer.ITruncator truncator, Humanizer.TruncateFrom from = 1) { }
     }
     public enum TruncateFrom
     {
@@ -1940,8 +1946,10 @@ namespace Humanizer
         public void AddPlural(string rule, string replacement) { }
         public void AddSingular(string rule, string replacement) { }
         public void AddUncountable(string word) { }
-        public string? Pluralize(string word, bool inputIsKnownToBeSingular = true) { }
-        public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
+        public string? Pluralize(string? word, bool inputIsKnownToBeSingular = true) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
+        public string? Singularize(string? word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
     }
     public enum WordForm
     {
