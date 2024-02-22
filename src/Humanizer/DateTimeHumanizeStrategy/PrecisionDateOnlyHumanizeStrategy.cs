@@ -1,4 +1,6 @@
-﻿#if NET6_0_OR_GREATER
+﻿#nullable enable
+
+#if NET6_0_OR_GREATER
 
 namespace Humanizer
 {
