@@ -3,13 +3,14 @@ namespace Humanizer
     class CroatianFormatter() :
         DefaultFormatter("hr")
     {
-        const string DualTrialQuadralPostfix = "_DualTrialQuadral";
+        const string PaucalPostfix = "_Paucal";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {
-            if ((number % 10 == 2 || number % 10 == 3 || number % 10 == 4) && number != 12 && number != 13 && number != 14)
+            var mod10 = number % 10;
+            if (mod10 is > 1 and < 5 && number != 12 && number != 13 && number != 14)
             {
-                return resourceKey + DualTrialQuadralPostfix;
+                return resourceKey + PaucalPostfix;
             }
 
             return resourceKey;

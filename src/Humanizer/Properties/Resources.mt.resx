@@ -474,49 +474,49 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>sena</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
     <value>{0} siegħat ilu</value>
   </data>
-  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
     <value>{0} siegħat oħra</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
     <value>{0} minuti ilu</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
     <value>{0} minuti oħra</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
     <value>{0} xhur ilu</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
     <value>{0} xhur oħra</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
     <value>{0} sekondi ilu</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
     <value>{0} sekondi oħra</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
     <value>{0} snin ilu</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
     <value>{0} snin oħra</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
     <value>{0} siegħat</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
     <value>{0} millisekondi</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
     <value>{0} minuti</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
     <value>{0} sekondi</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} ġimgħat</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
@@ -525,7 +525,7 @@
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>xahrejn</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMonths_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
     <value>{0} xhur</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
@@ -540,7 +540,7 @@
   <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
     <value>sentejn</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleYears_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
     <value>{0} snin</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
@@ -576,7 +576,7 @@
   <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
     <value>sena</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleDays_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
     <value>{0} jiem</value>
   </data>
   <data name="N" xml:space="preserve">

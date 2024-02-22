@@ -474,49 +474,49 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 tahun</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
     <value>{0} jam yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
     <value>{0} jam dari sekarang</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
     <value>{0} minit yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
     <value>{0} minit dari sekarang</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
     <value>{0} bulan yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
     <value>{0} bulan dari sekarang</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
     <value>{0} saat yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
     <value>{0} saat dari sekarang</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
     <value>{0} tahun dari yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
     <value>{0} tahun dari sekarang</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
     <value>{0} jam</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
     <value>{0} milisaat</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
     <value>{0} minit</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
     <value>{0} saat</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} minggu</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
