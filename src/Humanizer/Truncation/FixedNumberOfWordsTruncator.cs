@@ -17,7 +17,7 @@ namespace Humanizer
                 return value;
             }
 
-            var numberOfWords = value.Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Count();
+            var numberOfWords = value.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Count();
             if (numberOfWords <= length)
             {
                 return value;
