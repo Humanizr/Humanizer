@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System.Resources;
+﻿using System.Resources;
 
 namespace Humanizer
 {
@@ -16,8 +15,17 @@ namespace Humanizer
         /// <param name="resourceKey">The name of the resource to retrieve.</param>
         /// <param name="culture">The culture of the resource to retrieve. If not specified, current thread's UI culture is used.</param>
         /// <returns>The value of the resource localized for the specified culture.</returns>
-        public static string? GetResource(string resourceKey, CultureInfo? culture = null) =>
-            ResourceManager.GetString(resourceKey, culture);
+        public static string GetResource(string resourceKey, CultureInfo culture = null)
+        {
+            var resource = ResourceManager.GetString(resourceKey, culture);
+
+            if (resource == null || string.IsNullOrEmpty(resource))
+            {
+                throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
+            }
+
+            return resource;
+        }
 
         /// <summary>
         /// Tries to get the value of the specified string resource, without fallback
@@ -26,7 +34,7 @@ namespace Humanizer
         /// <param name="culture">The culture of the resource to retrieve. If not specified, current thread's UI culture is used.</param>
         /// <param name="result">The value of the resource localized for the specified culture if found; null otherwise.</param>
         /// <returns>true if the specified string resource was found for the given culture; otherwise, false.</returns>
-        public static bool TryGetResource(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result)
+        public static bool TryGetResource(string resourceKey, CultureInfo culture, out string result)
         {
             culture ??= CultureInfo.CurrentUICulture;
             var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);

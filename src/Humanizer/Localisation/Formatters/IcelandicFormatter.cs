@@ -13,11 +13,6 @@ class IcelandicFormatter() :
     {
         var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), localCulture);
 
-        if (string.IsNullOrEmpty(resourceString))
-        {
-            throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
-        }
-
         if (toWords)
         {
             var unitGender = GetGrammaticalGender(resourceString);
