@@ -64,7 +64,7 @@
         public override string ConvertToOrdinal(int number)
         {
             var word = Convert(number);
-            return $"{word}{(IsVowel(word[word.Length - 1]) ? "یەم" : "ەم")}";
+            return $"{word}{(IsVowel(word[^1]) ? "یەم" : "ەم")}";
         }
 
         static bool IsVowel(char c) =>

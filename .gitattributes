@@ -8,6 +8,8 @@
 *.fsproj merge=union
 *.dbproj merge=union
 
+*.snk binary
+
 # Normalise endings to CRLF
 *.cs              eol=crlf
 *.xml             eol=crlf

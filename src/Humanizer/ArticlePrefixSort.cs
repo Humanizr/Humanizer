@@ -76,7 +76,7 @@ namespace Humanizer
             return inserted;
         }
 
-        static string ToOriginalFormat(ReadOnlySpan<char> value, int suffixLength) =>
+        static string ToOriginalFormat(CharSpan value, int suffixLength) =>
             $"{value[^suffixLength..]} {value[..^(suffixLength + 1)]}";
     }
 }
