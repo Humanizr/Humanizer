@@ -35,9 +35,9 @@
         ];
 
         public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
-            Convert(input, gender, false);
+            InnerConvert(input, gender, false);
 
-        static string Convert(long input, GrammaticalGender gender, bool isOrdinal, bool addAnd = true)
+        static string InnerConvert(long input, GrammaticalGender gender, bool isOrdinal)
         {
             if (input is > int.MaxValue or < int.MinValue)
             {
@@ -61,20 +61,20 @@
 
             if (input / 1000000000 > 0)
             {
-                parts.Add(input < 2000000000 ? "един милиард" : Convert(input / 1000000000, gender, false) + " милиарда");
+                parts.Add(input < 2000000000 ? "един милиард" : InnerConvert(input / 1000000000, gender, false) + " милиарда");
 
                 if (isOrdinal)
-                    lastOrdinalSubstitution = Convert(input / 1000000000, gender, false) + " милиард" +
+                    lastOrdinalSubstitution = InnerConvert(input / 1000000000, gender, false) + " милиард" +
                                               GetEndingForGender(gender, input);
                 input %= 1000000000;
             }
 
             if (input / 1000000 > 0)
             {
-                parts.Add(input < 2000000 ? "един милион" : Convert(input / 1000000, gender, false) + " милиона");
+                parts.Add(input < 2000000 ? "един милион" : InnerConvert(input / 1000000, gender, false) + " милиона");
 
                 if (isOrdinal)
-                    lastOrdinalSubstitution = Convert(input / 1000000, gender, false) + " милион" +
+                    lastOrdinalSubstitution = InnerConvert(input / 1000000, gender, false) + " милион" +
                                               GetEndingForGender(gender, input);
 
                 input %= 1000000;
@@ -86,11 +86,11 @@
                     parts.Add("хиляда");
                 else
                 {
-                    parts.Add(Convert(input / 1000, gender, false) + " хиляди");
+                    parts.Add(InnerConvert(input / 1000, gender, false) + " хиляди");
                 }
 
                 if (isOrdinal)
-                    lastOrdinalSubstitution = Convert(input / 1000, gender, false) + " хиляд" +
+                    lastOrdinalSubstitution = InnerConvert(input / 1000, gender, false) + " хиляд" +
                                               GetEndingForGender(gender, input);
 
                 input %= 1000;
@@ -136,7 +136,7 @@
         }
 
         public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
-            Convert(input, gender, true);
+            InnerConvert(input, gender, true);
 
         static string GetEndingForGender(GrammaticalGender gender, long input)
         {
