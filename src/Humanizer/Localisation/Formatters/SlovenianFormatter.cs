@@ -4,7 +4,7 @@
         DefaultFormatter("sl")
     {
         const string DualPostfix = "_Dual";
-        const string TrialQuadralPostfix = "_TrialQuadral";
+        const string TrialQuadralPostfix = "_Paucal";
 
         protected override string GetResourceKey(string resourceKey, int number)
         {

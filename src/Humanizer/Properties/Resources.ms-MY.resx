@@ -282,9 +282,6 @@
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
     <value>{0} hari yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} hari yang lalu</value>
-  </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
     <value>{0} hari dari sekarang</value>
   </data>
@@ -292,9 +289,6 @@
     <value>{0} hari dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
-    <value>{0} hari dari sekarang</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_TrialQuadral" xml:space="preserve">
     <value>{0} hari dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
@@ -309,16 +303,10 @@
   <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
     <value>{0} jam yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} jam yang lalu</value>
-  </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
     <value>{0} jam dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
-    <value>{0} jam dari sekarang</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_TrialQuadral" xml:space="preserve">
     <value>{0} jam dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
@@ -333,16 +321,10 @@
   <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
     <value>{0} minit yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} minit yang lalu</value>
-  </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
     <value>{0} minit dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>{0} minit dari sekarang</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_TrialQuadral" xml:space="preserve">
     <value>{0} minit dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
@@ -354,9 +336,6 @@
   <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
     <value>{0} bulan yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} bulan yang lalu</value>
-  </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
     <value>{0} bulan dari sekarang</value>
   </data>
@@ -364,9 +343,6 @@
     <value>{0} bulan dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
-    <value>{0} bulan dari sekarang</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_TrialQuadral" xml:space="preserve">
     <value>{0} bulan dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
@@ -378,16 +354,10 @@
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>{0} saat yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} saat yang lalu</value>
-  </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
     <value>{0} saat dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
-    <value>{0} saat dari sekarang</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_TrialQuadral" xml:space="preserve">
     <value>{0} saat dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
@@ -402,22 +372,13 @@
   <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
     <value>{0} tahun yang lalu</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} tahun yang lalu</value>
-  </data>
   <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
     <value>{0} tahun dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
     <value>{0} tahun dari sekarang</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_TrialQuadral" xml:space="preserve">
-    <value>{0} tahun dari sekarang</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
-    <value>{0} hari</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_TrialQuadral" xml:space="preserve">
     <value>{0} hari</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
@@ -426,28 +387,16 @@
   <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
     <value>{0} jam</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_TrialQuadral" xml:space="preserve">
-    <value>{0} jam</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
     <value>{0} milisaat</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_TrialQuadral" xml:space="preserve">
-    <value>{0} milisaat</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
-    <value>{0} minit</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_TrialQuadral" xml:space="preserve">
     <value>{0} minit</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
     <value>{0} saat</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
-    <value>{0} saat</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_TrialQuadral" xml:space="preserve">
     <value>{0} saat</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
@@ -457,9 +406,6 @@
     <value>{0} minggu</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>{0} minggu</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
     <value>{0} minggu</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
