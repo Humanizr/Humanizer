@@ -98,7 +98,7 @@ namespace Humanizer
         public static double FromMetric(this string input)
         {
             input = CleanRepresentation(input);
-            return BuildNumber(input, input[input.Length - 1]);
+            return BuildNumber(input, input[^1]);
         }
 
         /// <summary>
