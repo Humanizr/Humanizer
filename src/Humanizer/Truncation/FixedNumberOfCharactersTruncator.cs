@@ -17,10 +17,7 @@ namespace Humanizer
                 return value;
             }
 
-            if (truncationString == null)
-            {
-                truncationString = string.Empty;
-            }
+            truncationString ??= string.Empty;
 
             if (truncationString.Length > length)
             {

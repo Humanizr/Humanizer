@@ -195,8 +195,7 @@ namespace Humanizer
 
         public string ToString(IFormatProvider provider)
         {
-            if (provider == null)
-                provider = CultureInfo.CurrentCulture;
+            provider ??= CultureInfo.CurrentCulture;
 
             return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
         }
@@ -209,11 +208,8 @@ namespace Humanizer
 
         string ToString(string format, IFormatProvider provider, bool toSymbol)
         {
-            if (format == null)
-                format = "G";
-
-            if (provider == null)
-                provider = CultureInfo.CurrentCulture;
+            format ??= "G";
+            provider ??= CultureInfo.CurrentCulture;
 
             if (format == "G")
                 format = "0.##";
