@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -8,9 +9,9 @@
         class Fact
         {
             public int Value { get; set; }
-            public string Name { get; set; }
-            public string Prefix { get; set; }
-            public string Postfix { get; set; }
+            public required string Name { get; set; }
+            public required string Prefix { get; set; }
+            public required string Postfix { get; set; }
             public bool DisplayOneUnit { get; set; }
             public GrammaticalGender Gender { get; set; } = GrammaticalGender.Neuter;
         }

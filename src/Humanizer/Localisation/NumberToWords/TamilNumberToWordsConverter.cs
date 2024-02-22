@@ -1,4 +1,7 @@
-﻿namespace Humanizer
+﻿#nullable enable
+using System.Diagnostics.CodeAnalysis;
+
+namespace Humanizer
 {
     class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
@@ -266,7 +269,7 @@
             return toWords;
         }
 
-        static bool ExceptionNumbersToWords(long number, out string words) =>
+        static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }
