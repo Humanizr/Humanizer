@@ -53,6 +53,7 @@ public class EnumHumanizeTests
     [Fact]
     public void HumanizeCustomPropertyAttributeWithLocator()
     {
+        Configurator.ResetUseEnumDescriptionPropertyLocator();
         Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
         try
         {
@@ -67,6 +68,7 @@ public class EnumHumanizeTests
     [Fact]
     public void HumanizeMembersWithoutDescriptionAttributeWithLocator()
     {
+        Configurator.ResetUseEnumDescriptionPropertyLocator();
         Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
         try
         {
