@@ -110,7 +110,7 @@
             }
             else if (isOrdinal)
             {
-                parts[parts.Count - 1] += "th";
+                parts[^1] += "th";
             }
 
             var toWords = string.Join(" ", parts);

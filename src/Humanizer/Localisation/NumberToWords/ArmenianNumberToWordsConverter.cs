@@ -135,7 +135,7 @@
             }
             else if (isOrdinal)
             {
-                parts[parts.Count - 1] += "երորդ";
+                parts[^1] += "երորդ";
             }
 
             var toWords = string.Join(" ", parts);

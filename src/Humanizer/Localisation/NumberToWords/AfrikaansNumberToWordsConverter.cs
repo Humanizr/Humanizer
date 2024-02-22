@@ -106,7 +106,7 @@ namespace Humanizer
             }
             else if (isOrdinal)
             {
-                parts[parts.Count - 1] += "ste";
+                parts[^1] += "ste";
             }
 
             var toWords = string.Join(" ", parts);
