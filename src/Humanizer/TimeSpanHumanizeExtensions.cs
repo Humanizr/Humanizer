@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Humanizes TimeSpan into human readable form
@@ -62,11 +63,11 @@
             return ageExpression;
         }
 
-        static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
+        static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
             var firstValueFound = false;
-            var timeParts = new List<string>();
+            var timeParts = new List<string?>();
 
             foreach (var timeUnit in _timeUnits)
             {
@@ -177,7 +178,7 @@
             return timeNumberOfUnits;
         }
 
-        static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
+        static string? BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
             // Always use positive units to account for negative timespans
             amountOfTimeUnits != 0
                 ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
@@ -186,7 +187,7 @@
         static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
             [noTimeValue];
 
-        static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts) =>
+        static bool IsContainingOnlyNullValue(IEnumerable<string?> timeParts) =>
             timeParts.Count(x => x != null) == 0;
 
         static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
@@ -205,7 +206,7 @@
             return timeParts;
         }
 
-        static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, CultureInfo culture, string collectionSeparator)
+        static string ConcatenateTimeSpanParts(IEnumerable<string?> timeSpanParts, CultureInfo? culture, string collectionSeparator)
         {
             if (collectionSeparator == null)
             {

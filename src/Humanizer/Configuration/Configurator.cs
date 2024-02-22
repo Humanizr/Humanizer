@@ -56,7 +56,7 @@ namespace Humanizer
         /// The converter to be used
         /// </summary>
         /// <param name="culture">The culture to retrieve number to words converter for. Null means that current thread's UI culture should be used.</param>
-        internal static INumberToWordsConverter GetNumberToWordsConverter(CultureInfo culture) =>
+        internal static INumberToWordsConverter GetNumberToWordsConverter(CultureInfo? culture) =>
             NumberToWordsConverters.ResolveForCulture(culture);
 
         /// <summary>

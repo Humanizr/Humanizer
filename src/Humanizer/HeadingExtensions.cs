@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Style for the cardinal direction humanization

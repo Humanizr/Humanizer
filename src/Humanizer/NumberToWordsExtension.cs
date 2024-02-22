@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Transform a number into words; e.g. 1 => one

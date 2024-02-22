@@ -98,7 +98,7 @@ namespace Humanizer
 
         public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
 
-        public string GetLargestWholeNumberFullWord(IFormatProvider provider = null)
+        public string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
         {
             var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
@@ -208,7 +208,7 @@ namespace Humanizer
         public string ToString(string format, IFormatProvider provider) =>
             ToString(format, provider, toSymbol: true);
 
-        string ToString(string format, IFormatProvider provider, bool toSymbol)
+        string ToString(string? format, IFormatProvider? provider, bool toSymbol)
         {
             if (format == null)
                 format = "G";
@@ -285,10 +285,10 @@ namespace Humanizer
         /// tera) used is the largest metric prefix such that the corresponding
         /// value is greater than or equal to one.
         /// </summary>
-        public string ToFullWords(string format = null, IFormatProvider provider = null) =>
+        public string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
             ToString(format, provider, toSymbol: false);
 
-        public override bool Equals(object value)
+        public override bool Equals(object? value)
         {
             if (value == null)
             {
