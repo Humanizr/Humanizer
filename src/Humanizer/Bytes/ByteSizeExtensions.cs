@@ -307,7 +307,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="format">The string format to use</param>
         /// <param name="formatProvider">The format provider to use</param>
-        public static string Humanize(this ByteSize input, string format, IFormatProvider formatProvider) =>
+        public static string Humanize(this ByteSize input, string? format, IFormatProvider? formatProvider) =>
             string.IsNullOrWhiteSpace(format) ? input.ToString(formatProvider) : input.ToString(format, formatProvider);
 
         /// <summary>

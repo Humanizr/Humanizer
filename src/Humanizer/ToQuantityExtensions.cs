@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// Enumerates the ways of displaying a quantity value when converting
@@ -91,7 +92,7 @@
         /// "request".ToQuantity(10.6, format: "N0") => "10.6 requests"
         /// "request".ToQuantity(1.0, format: "N0") => "1 request"
         /// </example>
-        public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider formatProvider = null)
+        public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider? formatProvider = null)
         {
             var transformedInput = quantity == 1
                 ? input.Singularize(inputIsKnownToBePlural: false)

@@ -57,9 +57,9 @@
         /// for the next three-digit set.
         /// </summary>
         /// <returns>The next conversion function to use.</returns>
-        public Func<int, string> GetNextPartConverter()
+        public Func<int, string>? GetNextPartConverter()
         {
-            Func<int, string> converter;
+            Func<int, string>? converter;
 
             switch (_nextSet)
             {
