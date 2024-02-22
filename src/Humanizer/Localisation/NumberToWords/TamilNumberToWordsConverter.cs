@@ -78,7 +78,7 @@
             if (number > 0)
                 parts.Add(GetTensValue(number, isOrdinal));
             else if (isOrdinal)
-                parts[parts.Count - 1] += "வது";
+                parts[^1] += "வது";
 
             var toWords = string.Join(" ", parts);
 

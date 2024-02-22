@@ -85,7 +85,7 @@
                 return string.Empty;
             }
 
-            var lastChar = word[word.Length - 1];
+            var lastChar = word[^1];
             if (lastChar is 'и' or 'а')
             {
                 i = 1;

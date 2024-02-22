@@ -120,7 +120,7 @@
                 }
             }
 
-            if (word[word.Length - 1] == 't')
+            if (word[^1] == 't')
             {
                 word = word.Substring(0, word.Length - 1) + 'd';
             }

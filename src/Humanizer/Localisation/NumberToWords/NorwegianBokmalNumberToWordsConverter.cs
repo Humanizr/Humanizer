@@ -127,7 +127,7 @@ namespace Humanizer
             }
             else if (isOrdinal)
             {
-                parts[parts.Count - 1] += (number == 0 ? "" : "en") + (millionOrMore ? "te" : "de");
+                parts[^1] += (number == 0 ? "" : "en") + (millionOrMore ? "te" : "de");
             }
 
             var toWords = string.Concat(parts).Trim();
