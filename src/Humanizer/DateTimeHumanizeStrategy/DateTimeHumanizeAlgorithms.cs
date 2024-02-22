@@ -10,7 +10,7 @@ namespace Humanizer
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
-        public static string PrecisionHumanize(DateTime input, DateTime comparisonBase, double precision, CultureInfo culture)
+        public static string PrecisionHumanize(DateTime input, DateTime comparisonBase, double precision, CultureInfo? culture)
         {
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
@@ -42,7 +42,7 @@ namespace Humanizer
             return PrecisionHumanize(ts, tense, precision, culture);
         }
 #endif
-        static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
+        static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo? culture)
         {
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
@@ -133,7 +133,7 @@ namespace Humanizer
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
+        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo? culture)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
@@ -174,7 +174,7 @@ namespace Humanizer
         }
 #endif
 
-        static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
+        static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo? culture)
         {
             var formatter = Configurator.GetFormatter(culture);
 

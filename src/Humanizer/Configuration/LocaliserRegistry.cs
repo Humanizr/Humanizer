@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     /// <summary>
     /// A registry of localised system components with their associated locales
@@ -6,8 +7,8 @@
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser : class
     {
-        readonly IDictionary<string, Func<CultureInfo, TLocaliser>> _localisers = new Dictionary<string, Func<CultureInfo, TLocaliser>>();
-        readonly Func<CultureInfo, TLocaliser> _defaultLocaliser;
+        readonly IDictionary<string, Func<CultureInfo?, TLocaliser>> _localisers = new Dictionary<string, Func<CultureInfo, TLocaliser>>();
+        readonly Func<CultureInfo?, TLocaliser> _defaultLocaliser;
 
         /// <summary>
         /// Creates a localiser registry with the default localiser set to the provided value
@@ -18,7 +19,7 @@
         /// <summary>
         /// Creates a localiser registry with the default localiser factory set to the provided value
         /// </summary>
-        public LocaliserRegistry(Func<CultureInfo, TLocaliser> defaultLocaliser) =>
+        public LocaliserRegistry(Func<CultureInfo?, TLocaliser> defaultLocaliser) =>
             _defaultLocaliser = defaultLocaliser;
 
         /// <summary>
@@ -46,7 +47,7 @@
         public void Register(string localeCode, Func<CultureInfo, TLocaliser> localiser) =>
             _localisers[localeCode] = localiser;
 
-        Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
+        Func<CultureInfo?, TLocaliser> FindLocaliser(CultureInfo culture)
         {
             for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
             {

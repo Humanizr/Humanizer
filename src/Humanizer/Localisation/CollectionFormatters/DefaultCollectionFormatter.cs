@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     class DefaultCollectionFormatter : ICollectionFormatter
     {
@@ -53,7 +54,7 @@
                 separator);
         }
 
-        string HumanizeDisplayStrings(IEnumerable<string> strings, string separator)
+        string HumanizeDisplayStrings(IEnumerable<string?> strings, string separator)
         {
             var itemsArray = strings
                 .Select(item => item == null ? string.Empty : item.Trim())

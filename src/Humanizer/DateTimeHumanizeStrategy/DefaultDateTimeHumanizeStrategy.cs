@@ -9,7 +9,7 @@ namespace Humanizer
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public string Humanize(DateTime input, DateTime comparisonBase, CultureInfo culture) =>
+        public string Humanize(DateTime input, DateTime comparisonBase, CultureInfo? culture) =>
             DateTimeHumanizeAlgorithms.DefaultHumanize(input, comparisonBase, culture);
     }
 }

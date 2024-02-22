@@ -58,12 +58,10 @@ namespace Humanizer
             var timeSpanExpression = timeSpan.Humanize(culture: culture, maxUnit: maxUnit, toWords: toWords);
 
             var cultureFormatter = Configurator.GetFormatter(culture);
-            var ageExpression = string.Format(cultureFormatter.TimeSpanHumanize_Age(), timeSpanExpression);
-
-            return ageExpression;
+            return string.Format(cultureFormatter.TimeSpanHumanize_Age(), timeSpanExpression);
         }
 
-        static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
+        static IEnumerable<string?> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
             var firstValueFound = false;
@@ -184,13 +182,13 @@ namespace Humanizer
                 ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
                 : null;
 
-        static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
+        static List<string?> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
             [noTimeValue];
 
         static bool IsContainingOnlyNullValue(IEnumerable<string?> timeParts) =>
             timeParts.Count(x => x != null) == 0;
 
-        static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
+        static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string?> timeParts, int precision, bool countEmptyUnits)
         {
             if (!countEmptyUnits)
             {

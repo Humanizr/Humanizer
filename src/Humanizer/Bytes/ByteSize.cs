@@ -205,7 +205,7 @@ namespace Humanizer
         public string ToString(string format) =>
             ToString(format, NumberFormatInfo.CurrentInfo);
 
-        public string ToString(string format, IFormatProvider provider) =>
+        public string ToString(string? format, IFormatProvider? provider) =>
             ToString(format, provider, toSymbol: true);
 
         string ToString(string? format, IFormatProvider? provider, bool toSymbol)
@@ -392,7 +392,7 @@ namespace Humanizer
         public static bool TryParse(string s, out ByteSize result) =>
             TryParse(s, null, out result);
 
-        public static bool TryParse(string s, IFormatProvider formatProvider, out ByteSize result)
+        public static bool TryParse(string s, IFormatProvider? formatProvider, out ByteSize result)
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
@@ -491,7 +491,7 @@ namespace Humanizer
             return true;
         }
 
-        static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+        static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
         {
             if (formatProvider is NumberFormatInfo numberFormat)
                 return numberFormat;
@@ -504,7 +504,7 @@ namespace Humanizer
         public static ByteSize Parse(string s) =>
             Parse(s, null);
 
-        public static ByteSize Parse(string s, IFormatProvider formatProvider)
+        public static ByteSize Parse(string s, IFormatProvider? formatProvider)
         {
             if (s == null)
             {
