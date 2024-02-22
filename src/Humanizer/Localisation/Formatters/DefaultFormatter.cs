@@ -85,14 +85,7 @@
         protected virtual string Format(string resourceKey)
         {
             var resolvedKey = GetResourceKey(resourceKey);
-            var resourceString = Resources.GetResource(resolvedKey, _culture);
-
-            if (string.IsNullOrEmpty(resourceString))
-            {
-                throw new ArgumentException($"The resource object with key '{resourceKey}' (resolved to '{resolvedKey}') was not found", nameof(resourceKey));
-            }
-
-            return resourceString;
+            return Resources.GetResource(resolvedKey, _culture);
         }
 
         /// <summary>
@@ -105,11 +98,6 @@
         {
             var resolvedKey = GetResourceKey(resourceKey, number);
             var resourceString = Resources.GetResource(resolvedKey, _culture);
-
-            if (string.IsNullOrEmpty(resourceString))
-            {
-                throw new ArgumentException($"The resource object with key '{resourceKey}' for number `{number}' (resolved to '{resolvedKey}') was not found", nameof(resourceKey));
-            }
 
             if (toWords)
             {
