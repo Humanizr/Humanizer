@@ -9,8 +9,6 @@
     <Copyright>Copyright © .NET Foundation and Contributors</Copyright>    
     <Product>Humanizer ($(TargetFramework))</Product>    
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
     <NoWarn>CS1573;CS1591</NoWarn>
   </PropertyGroup>  
