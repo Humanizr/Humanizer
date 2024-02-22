@@ -1,4 +1,5 @@
-﻿namespace Humanizer
+﻿#nullable enable
+namespace Humanizer
 {
     class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
     {
@@ -14,9 +15,9 @@
         {
             public long Power { get; set; }
             public GrammaticalGender Gender { get; set; }
-            public string Plural { get; set; }
-            public string Single { get; set; }
-            public string OrdinalPrefix { get; set; }
+            public required string Plural { get; set; }
+            public required string Single { get; set; }
+            public required string OrdinalPrefix { get; set; }
         }
         static readonly Dictionary<int, Fact> PowerOfTenMap = new()
         {
@@ -29,11 +30,14 @@
             {15,    new(){Power = 1000000000000000       , Single = "einn billjarður",   Plural = "billjarðar",  OrdinalPrefix = "billjarðast",  Gender = GrammaticalGender.Masculine }},
             {18,    new(){Power = 1000000000000000000    , Single = "ein trilljón",      Plural = "trilljónir",  OrdinalPrefix = "trilljónast",  Gender = GrammaticalGender.Feminine  }}
         };
+
         static bool IsAndSplitNeeded(int number) =>
             number <= 20 || number % 10 == 0 && number < 100 || number % 100 == 0;
+
         static string GetOrdinalEnding(GrammaticalGender gender) =>
             gender == GrammaticalGender.Masculine ? "i" : "a";
-        static void GetUnits(ICollection<string> builder, long number, GrammaticalGender gender)
+
+        static void GetUnits(ICollection<string?> builder, long number, GrammaticalGender gender)
         {
             if (number is > 0 and < 5)
             {
@@ -51,7 +55,8 @@
                 builder.Add(UnitsMap[number]);
             }
         }
-        static void CollectOrdinalParts(ICollection<string> builder, int threeDigitPart, Fact conversionRule, GrammaticalGender partGender, GrammaticalGender ordinalGender)
+
+        static void CollectOrdinalParts(ICollection<string?> builder, int threeDigitPart, Fact conversionRule, GrammaticalGender partGender, GrammaticalGender ordinalGender)
         {
             var hundreds = threeDigitPart / 100;
             var hundredRemainder = threeDigitPart % 100;
@@ -116,14 +121,14 @@
                 builder.Add(conversionRule.OrdinalPrefix + GetOrdinalEnding(ordinalGender));
             }
         }
-        static string CollectOrdinalPartsUnderAHundred(int number, GrammaticalGender gender)
+
+        static string? CollectOrdinalPartsUnderAHundred(int number, GrammaticalGender gender)
         {
-            string returnValue = null;
             if (number is >= 0 and < 20)
             {
                 if (number == 2)
                 {
-                    returnValue = gender switch
+                    return gender switch
                     {
                         GrammaticalGender.Masculine => "annar",
                         GrammaticalGender.Feminine => "önnur",
@@ -133,16 +138,19 @@
                 }
                 else
                 {
-                    returnValue = UnitsOrdinalPrefixes[number] + GetOrdinalEnding(gender);
+                    return UnitsOrdinalPrefixes[number] + GetOrdinalEnding(gender);
                 }
             }
-            else if (number < 100 && number % 10 == 0)
+
+            if (number < 100 && number % 10 == 0)
             {
-                returnValue = TensOrdinalPrefixes[number / 10] + GetOrdinalEnding(gender);
+                return TensOrdinalPrefixes[number / 10] + GetOrdinalEnding(gender);
             }
-            return returnValue;
+
+            return null;
         }
-        static void CollectParts(IList<string> parts, ref long number, ref bool needsAnd, Fact rule)
+
+        static void CollectParts(IList<string?> parts, ref long number, ref bool needsAnd, Fact rule)
         {
             var remainder = number / rule.Power;
             if (remainder > 0)
@@ -157,7 +165,8 @@
                 needsAnd = true;
             }
         }
-        static void CollectPart(ICollection<string> parts, long number, Fact rule)
+
+        static void CollectPart(ICollection<string?> parts, long number, Fact rule)
         {
             if (number == 1)
             {
@@ -169,7 +178,8 @@
                 parts.Add(rule.Plural);
             }
         }
-        static void CollectPartUnderOneThousand(ICollection<string> builder, long number, GrammaticalGender gender)
+
+        static void CollectPartUnderOneThousand(ICollection<string?> builder, long number, GrammaticalGender gender)
         {
             var hundreds = number / 100;
             var hundredRemainder = number % 100;
@@ -209,14 +219,16 @@
                 GetUnits(builder, hundredRemainder, gender);
             }
         }
-        static void CollectOrdinal(IList<string> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
+
+        static void CollectOrdinal(IList<string?> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
         {
             var remainder = number / rule.Power;
             if (remainder > 0)
             {
                 number %= (int)rule.Power;
 
-                if (number > 0 && (number > 19 || (number % 100 > 10 && number % 100 % 10 == 0))) // https://malfar.arnastofnun.is/grein/65658
+                // https://malfar.arnastofnun.is/grein/65658
+                if (number > 0 && (number > 19 || (number % 100 > 10 && number % 100 % 10 == 0)))
                 {
                     if (remainder == 1)
                     {
@@ -250,7 +262,7 @@
                 return UnitsMap[number];
             }
 
-            var parts = new List<string>();
+            var parts = new List<string?>();
             if (number < 0)
             {
                 parts.Add("mínus");
@@ -281,7 +293,7 @@
             {
                 return UnitsOrdinalPrefixes[number] + GetOrdinalEnding(gender);
             }
-            var parts = new List<string>();
+            var parts = new List<string?>();
             var needsAnd = false;
 
             CollectOrdinal(parts, ref number, ref needsAnd, PowerOfTenMap[12], gender);
