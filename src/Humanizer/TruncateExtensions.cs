@@ -11,7 +11,8 @@
         /// <param name="input">The string to be truncated</param>
         /// <param name="length">The length to truncate to</param>
         /// <returns>The truncated string</returns>
-        public static string Truncate(this string input, int length) =>
+        [return: NotNullIfNotNull(nameof(input))]
+        public static string? Truncate(this string? input, int length) =>
             input.Truncate(length, "…", Truncator.FixedLength);
 
         /// <summary>
@@ -35,7 +36,7 @@
         /// <param name="from">The enum value used to determine from where to truncate the string</param>
         /// <returns>The truncated string</returns>
         [return: NotNullIfNotNull(nameof(input))]
-        public static string? Truncate(this string? input, int length, string truncationString, TruncateFrom from = TruncateFrom.Right) =>
+        public static string? Truncate(this string? input, int length, string? truncationString, TruncateFrom from = TruncateFrom.Right) =>
             input.Truncate(length, truncationString, Truncator.FixedLength, from);
 
         /// <summary>

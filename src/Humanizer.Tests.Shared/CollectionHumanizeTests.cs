@@ -101,11 +101,11 @@
 
         [Fact]
         public void HumanizeHandlesNullStringDisplayFormatterReturnsWithoutAnException() =>
-            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => null)));
+            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => null!)));
 
         [Fact]
         public void HumanizeHandlesNullObjectDisplayFormatterReturnsWithoutAnException() =>
-            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => (object?)null)));
+            Assert.Null(Record.Exception(() => new[] { "A", "B", "C" }.Humanize(_ => (object)null!)));
 
         [Fact]
         public void HumanizeRunsStringDisplayFormatterOnNulls() =>
