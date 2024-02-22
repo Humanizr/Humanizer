@@ -270,9 +270,6 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
     <value>{0} milisegundos</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
-    <value>{0} dias atrás</value>
-  </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>{0} dias atrás</value>
   </data>
@@ -281,9 +278,6 @@
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
     <value>{0} dia atrás</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} dias atrás</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
     <value>em {0} dias</value>
@@ -294,12 +288,6 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>em {0} dia</value>
   </data>
-  <data name="DateHumanize_MultipleDaysFromNow_TrialQuadral" xml:space="preserve">
-    <value>em {0} dias</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
-    <value>{0} horas atrás</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>{0} horas atrás</value>
   </data>
@@ -309,20 +297,11 @@
   <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
     <value>{0} hora atrás</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} hora atrás</value>
-  </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
     <value>em {0} horas</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>em {0} hora</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_TrialQuadral" xml:space="preserve">
-    <value>em {0} horas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
-    <value>{0} minutos atrás</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>{0} minutos atrás</value>
@@ -333,17 +312,11 @@
   <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
     <value>{0} minuto atrás</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} minuto atrás</value>
-  </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
     <value>em {0} minutos</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
     <value>em {0} minuto</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_TrialQuadral" xml:space="preserve">
-    <value>em {0} minutos</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
     <value>{0} meses atrás</value>
@@ -354,9 +327,6 @@
   <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
     <value>{0} mês atrás</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} meses atrás</value>
-  </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
     <value>em {0} meses</value>
   </data>
@@ -366,32 +336,17 @@
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
     <value>em {0} mês</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_TrialQuadral" xml:space="preserve">
-    <value>em {0} meses</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
-    <value>{0} segundos atrás</value>
-  </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
     <value>{0} segundos atrás</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>{0} segundo atrás</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} segundos atrás</value>
-  </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
     <value>em {0} segundos</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>em {0} segundo</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_TrialQuadral" xml:space="preserve">
-    <value>em {0} segundos</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
-    <value>{0} anos atrás</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>{0} anos atrás</value>
@@ -402,23 +357,14 @@
   <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
     <value>{0} ano atrás</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0} anos atrás</value>
-  </data>
   <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
     <value>em {0} anos</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
     <value>em {0} ano</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_TrialQuadral" xml:space="preserve">
-    <value>em {0} anos</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
     <value>{0} dia</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_TrialQuadral" xml:space="preserve">
-    <value>{0} dias</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
     <value>{0} horas</value>
@@ -426,29 +372,17 @@
   <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
     <value>{0} hora</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_TrialQuadral" xml:space="preserve">
-    <value>{0} horas</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
     <value>{0} milisegundo</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_TrialQuadral" xml:space="preserve">
-    <value>{0} milisegundos</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
     <value>{0} minuto</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_TrialQuadral" xml:space="preserve">
-    <value>{0} minutos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
     <value>{0} segundos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
     <value>{0} segundo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_TrialQuadral" xml:space="preserve">
-    <value>{0} segundos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
     <value>{0} semanas</value>
@@ -458,9 +392,6 @@
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
     <value>{0} semana</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
-    <value>{0} semanas</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
     <value>{0} meses</value>
@@ -474,49 +405,49 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 ano</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
     <value>{0} horas atrás</value>
   </data>
-  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
     <value>em {0} horas</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
     <value>{0} minutos atrás</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
     <value>em {0} minutos</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
     <value>{0} meses atrás</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
     <value>em {0} meses</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
     <value>{0} segundos atrás</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
     <value>em {0} segundos</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
     <value>{0} anos atrás</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
     <value>em {0} anos</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
     <value>{0} horas</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
     <value>{0} milisegundos</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
     <value>{0} minutos</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
     <value>{0} segundos</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} semanas</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
@@ -525,7 +456,7 @@
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>{0} meses</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMonths_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
     <value>{0} meses</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
@@ -534,13 +465,10 @@
   <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
     <value>{0} mês</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMonths_TrialQuadral" xml:space="preserve">
-    <value>{0} meses</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
     <value>{0} anos</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleYears_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
     <value>{0} anos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
@@ -548,9 +476,6 @@
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
     <value>{0} ano</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears_TrialQuadral" xml:space="preserve">
-    <value>{0} anos</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
     <value>um dia</value>
@@ -576,7 +501,7 @@
   <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
     <value>um ano</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleDays_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
     <value>{0} dias</value>
   </data>
   <data name="N" xml:space="preserve">
