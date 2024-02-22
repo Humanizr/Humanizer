@@ -146,6 +146,7 @@ public class Vocabulary
         return word;
     }
 
+    [return:NotNullIfNotNull(nameof(word))]
     string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)
     {
         if (word == null)
