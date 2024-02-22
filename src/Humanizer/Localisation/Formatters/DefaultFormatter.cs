@@ -38,6 +38,14 @@
         public virtual string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false) =>
             GetResourceForTimeSpan(timeUnit, unit, toWords);
 
+        /// <inheritdoc/>
+        public virtual string TimeSpanHumanize_Age()
+        {
+            if (Resources.TryGetResource("TimeSpanHumanize_Age", _culture, out var ageFormat))
+                return ageFormat;
+            return "{0}";
+        }
+
         /// <inheritdoc cref="IFormatter.DataUnitHumanize(DataUnit, double, bool)"/>
         public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
         {

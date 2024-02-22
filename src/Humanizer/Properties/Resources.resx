@@ -672,4 +672,7 @@
   <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
     <value>{0} years</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} old</value>
+  </data>
 </root>

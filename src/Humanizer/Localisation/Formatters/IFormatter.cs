@@ -28,6 +28,13 @@
         string TimeSpanHumanize(TimeUnit timeUnit, int unit, bool toWords = false);
 
         /// <summary>
+        /// Returns the age format that converts a humanized TimeSpan string to an age expression.
+        /// For instance, in English that format adds the " old" suffix, so that "40 years" becomes "40 years old".
+        /// </summary>
+        /// <returns>Age format</returns>
+        string TimeSpanHumanize_Age();
+
+        /// <summary>
         /// Returns the string representation of the provided DataUnit, either as a symbol or full word
         /// </summary>
         /// <param name="dataUnit">Data unit</param>

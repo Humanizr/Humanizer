@@ -144,6 +144,18 @@
         }
 
         [Theory]
+        [InlineData(4, false, "4 jours")]
+        [InlineData(23, false, "3 semaines")]
+        [InlineData(64, false, "2 mois")]
+        [InlineData(367, true, "un an")]
+        [InlineData(750, true, "deux ans")]
+        public void Age(int days, bool toWords, string expected)
+        {
+            var actual = TimeSpan.FromDays(days).ToAge(toWords: toWords);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
         [InlineData(TimeUnit.Year, "0 an")]
         [InlineData(TimeUnit.Month, "0 mois")]
         [InlineData(TimeUnit.Week, "0 semaine")]
