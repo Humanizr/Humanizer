@@ -29,11 +29,6 @@ class LuxembourgishFormatter() :
     {
         var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), localCulture);
 
-        if (string.IsNullOrEmpty(resourceString))
-        {
-            throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
-        }
-
         var unitGender = GetUnitGender(resourceString);
 
         var numberAsWord = number.ToWords(unitGender, localCulture);
