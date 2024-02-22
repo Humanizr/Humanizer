@@ -69,7 +69,7 @@ static class EnumCache<T>
         {
             description = displayAttribute.GetDescription() ?? displayAttribute.GetName();
 
-            return true;
+            return description != null;
         }
 
         foreach (var attr in member.GetCustomAttributes())
