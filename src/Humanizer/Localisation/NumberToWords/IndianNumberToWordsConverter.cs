@@ -62,7 +62,7 @@
              return NumberToText(number / 10000000).Trim() + " crore " + NumberToText(number % 10000000);
          }
 
-        static bool ExceptionNumbersToWords(long number, out string words) =>
+        static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }
