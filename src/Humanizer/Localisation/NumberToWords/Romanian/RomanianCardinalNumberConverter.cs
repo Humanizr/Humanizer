@@ -116,7 +116,11 @@
 
                 var partToString = GetNextPartConverter(currentSet);
 
-                words = partToString(_threeDigitParts[i], gender).Trim() + " " + words.Trim();
+                if (partToString != null)
+                {
+                    words = partToString(_threeDigitParts[i], gender)
+                        .Trim() + " " + words.Trim();
+                }
             }
 
             if (prefixMinusSign)
@@ -156,9 +160,9 @@
         /// to use for the next three-digit set.
         /// </summary>
         /// <returns>The next conversion function to use.</returns>
-        Func<int, GrammaticalGender, string> GetNextPartConverter(ThreeDigitSets currentSet)
+        Func<int, GrammaticalGender, string>? GetNextPartConverter(ThreeDigitSets currentSet)
         {
-            Func<int, GrammaticalGender, string> converter;
+            Func<int, GrammaticalGender, string>? converter;
 
             switch (currentSet)
             {
