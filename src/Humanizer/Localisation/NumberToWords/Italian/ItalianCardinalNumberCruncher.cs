@@ -16,7 +16,10 @@
             {
                 var partToString = GetNextPartConverter();
 
-                words = partToString(part) + words;
+                if (partToString != null)
+                {
+                    words = partToString(part) + words;
+                }
             }
 
             // remove trailing spaces if there are only millions or billions

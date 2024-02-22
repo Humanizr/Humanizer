@@ -62,7 +62,7 @@ static class EnumCache<T>
         return caseName.Humanize();
     }
 
-    static bool TryGetDescription(MemberInfo member, out string description)
+    static bool TryGetDescription(MemberInfo member, [NotNullWhen(true)] out string? description)
     {
         var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
         if (displayAttribute != null)
