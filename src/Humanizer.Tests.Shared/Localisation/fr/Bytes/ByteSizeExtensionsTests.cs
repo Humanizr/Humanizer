@@ -48,8 +48,15 @@
         [InlineData(10000000, "KB", "9765,63 Ko")]
         [InlineData(10000000, "#,##0 KB", "9 766 Ko")]
         [InlineData(10000000, "#,##0.# KB", "9 765,6 Ko")]
-        public void HumanizesBytes(double input, string format, string expectedValue) =>
-            Assert.Equal(expectedValue, input.Bytes().Humanize(format));
+        public void HumanizesBytes(double input, string format, string expectedValue)
+        {
+            expectedValue = expectedValue.Replace(" ", NumberFormatInfo.CurrentInfo.NumberGroupSeparator);
+            Assert.Equal(
+                expectedValue,
+                input
+                    .Bytes()
+                    .Humanize(format));
+        }
 
         [Theory]
         [InlineData(0, null, "0 b")]
