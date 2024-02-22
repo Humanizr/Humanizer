@@ -29,7 +29,7 @@ namespace Humanizer
                 : TruncateFromRight(value, length, truncationString);
         }
 
-        static string TruncateFromRight(string value, int length, string truncationString)
+        static string TruncateFromRight(string value, int length, string? truncationString)
         {
             var lastCharactersWasWhiteSpace = true;
             var numberOfWordsProcessed = 0;
