@@ -194,7 +194,7 @@ namespace Humanizer
         public override string ToString() =>
             ToString(NumberFormatInfo.CurrentInfo);
 
-        public string ToString(IFormatProvider provider)
+        public string ToString(IFormatProvider? provider)
         {
             if (provider == null)
                 provider = CultureInfo.CurrentCulture;
@@ -202,7 +202,7 @@ namespace Humanizer
             return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
         }
 
-        public string ToString(string format) =>
+        public string ToString(string? format) =>
             ToString(format, NumberFormatInfo.CurrentInfo);
 
         public string ToString(string? format, IFormatProvider? provider) =>
