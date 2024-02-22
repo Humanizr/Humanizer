@@ -76,11 +76,12 @@
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey)
         {
-            var resourceString = Resources.GetResource(GetResourceKey(resourceKey), _culture);
+            var resolvedKey = GetResourceKey(resourceKey);
+            var resourceString = Resources.GetResource(resolvedKey, _culture);
 
             if (string.IsNullOrEmpty(resourceString))
             {
-                throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
+                throw new ArgumentException($"The resource object with key '{resourceKey}' (resolved to '{resolvedKey}') was not found", nameof(resourceKey));
             }
 
             return resourceString;
@@ -94,11 +95,12 @@
         /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
         protected virtual string Format(string resourceKey, int number, bool toWords = false)
         {
-            var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), _culture);
+            var resolvedKey = GetResourceKey(resourceKey, number);
+            var resourceString = Resources.GetResource(resolvedKey, _culture);
 
             if (string.IsNullOrEmpty(resourceString))
             {
-                throw new ArgumentException($"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
+                throw new ArgumentException($"The resource object with key '{resourceKey}' for number `{number}' (resolved to '{resolvedKey}') was not found", nameof(resourceKey));
             }
 
             if (toWords)
