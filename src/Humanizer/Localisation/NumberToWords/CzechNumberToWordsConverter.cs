@@ -1,7 +1,7 @@
 ﻿#nullable enable
 namespace Humanizer
 {
-    class CzechNumberToWordsConverter(CultureInfo culture) :
+    class CzechNumberToWordsConverter(CultureInfo? culture) :
         GenderedNumberToWordsConverter
     {
         static readonly string[] BillionsMap = ["miliarda", "miliardy", "miliard"];

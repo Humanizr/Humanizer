@@ -1,7 +1,7 @@
 ﻿#nullable enable
 namespace Humanizer
 {
-    class SlovenianNumberToWordsConverter(CultureInfo culture) :
+    class SlovenianNumberToWordsConverter(CultureInfo? culture) :
         GenderlessNumberToWordsConverter
     {
         static readonly string[] UnitsMap = ["nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"];

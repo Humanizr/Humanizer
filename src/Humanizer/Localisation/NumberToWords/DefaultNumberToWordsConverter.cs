@@ -3,13 +3,13 @@ namespace Humanizer
 {
     class DefaultNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
-        readonly CultureInfo _culture;
+        readonly CultureInfo? _culture;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="culture">Culture to use.</param>
-        public DefaultNumberToWordsConverter(CultureInfo culture) =>
+        public DefaultNumberToWordsConverter(CultureInfo? culture) =>
             _culture = culture;
 
         /// <summary>

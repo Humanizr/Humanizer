@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    class HebrewNumberToWordsConverter(CultureInfo culture) :
+    class HebrewNumberToWordsConverter(CultureInfo? culture) :
         GenderedNumberToWordsConverter(GrammaticalGender.Feminine)
     {
         static readonly string[] UnitsFeminine = ["אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר"];
