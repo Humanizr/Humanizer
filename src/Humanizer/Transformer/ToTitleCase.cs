@@ -1,57 +1,54 @@
-﻿using System.Collections.Frozen;
+﻿namespace Humanizer;
 
-namespace Humanizer
+class ToTitleCase : ICulturedStringTransformer
 {
-    class ToTitleCase : ICulturedStringTransformer
+    public string Transform(string input) =>
+        Transform(input, null);
+
+    static Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+
+    public string Transform(string input, CultureInfo? culture)
     {
-        public string Transform(string input) =>
-            Transform(input, null);
-
-        static Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
-
-        public string Transform(string input, CultureInfo? culture)
+        culture ??= CultureInfo.CurrentCulture;
+        var builder = new StringBuilder(input.Length);
+        var textInfo = culture.TextInfo;
+        foreach (Match word in regex.Matches(input))
         {
-            culture ??= CultureInfo.CurrentCulture;
-            var builder = new StringBuilder(input.Length);
-            var textInfo = culture.TextInfo;
-            foreach (Match word in regex.Matches(input))
+            var value = word.Value;
+            if (lookups.Contains(value) || AllCapitals(value))
             {
-                var value = word.Value;
-                if (lookups.Contains(value) || AllCapitals(value))
-                {
-                    builder.Append(value);
-                    continue;
-                }
-
-                builder.Append(textInfo.ToUpper(value[0]));
-                builder.Append(textInfo.ToLower(value[1..]));
+                builder.Append(value);
+                continue;
             }
 
-            return builder.ToString();
+            builder.Append(textInfo.ToUpper(value[0]));
+            builder.Append(textInfo.ToLower(value[1..]));
         }
 
-        static bool AllCapitals(string input)
+        return builder.ToString();
+    }
+
+    static bool AllCapitals(string input)
+    {
+        foreach (var ch in input)
         {
-            foreach (var ch in input)
+            if (!char.IsUpper(ch))
             {
-                if (!char.IsUpper(ch))
-                {
-                    return false;
-                }
+                return false;
             }
-
-            return true;
         }
 
-        static FrozenSet<string> lookups;
+        return true;
+    }
 
-        static ToTitleCase()
-        {
-            var articles = new List<string> { "a", "an", "the" };
-            var conjunctions = new List<string> { "and", "as", "but", "if", "nor", "or", "so", "yet" };
-            var prepositions = new List<string> { "as", "at", "by", "for", "in", "of", "off", "on", "to", "up", "via" };
+    static FrozenSet<string> lookups;
 
-            lookups = articles.Concat(conjunctions).Concat(prepositions).ToFrozenSet();
-        }
+    static ToTitleCase()
+    {
+        var articles = new List<string> { "a", "an", "the" };
+        var conjunctions = new List<string> { "and", "as", "but", "if", "nor", "or", "so", "yet" };
+        var prepositions = new List<string> { "as", "at", "by", "for", "in", "of", "off", "on", "to", "up", "via" };
+
+        lookups = articles.Concat(conjunctions).Concat(prepositions).ToFrozenSet();
     }
 }
