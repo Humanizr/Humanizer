@@ -1,4 +1,4 @@
-﻿<img align="right" width="50px" src="logo.png" />
+﻿# <img align="right" width="50px" src="logo.png" /> Humanizer
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
@@ -18,9 +18,7 @@ Also Humanizer symbols are source indexed with [SourceLink](https://github.com/d
 
 ### Specify Languages (Optional)
 
-New in Humanizer 2.0 is the option to choose which localization packages you wish to use. You choose which packages
-based on what NuGet package(s) you install. By default, the main `Humanizer` 2.0 package installs all supported languages
-exactly like it does in 1.x. If you're not sure, then just use the main `Humanizer` package.
+You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` 2.0 package installs all supported languages exactly like it does in 1.x. If you're not sure, then just use the main `Humanizer` package.
 
 Here are the options:
 
