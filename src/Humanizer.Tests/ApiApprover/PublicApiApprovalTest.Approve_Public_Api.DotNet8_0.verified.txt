@@ -239,12 +239,6 @@ namespace Humanizer
         public static string[] AppendArticlePrefix(string[] items) { }
         public static string[] PrependArticleSuffix(string[] appended) { }
     }
-    public enum EnglishArticles
-    {
-        A = 0,
-        An = 1,
-        The = 2,
-    }
     public static class EnumDehumanizeExtensions
     {
         public static System.Enum DehumanizeTo(this string input, System.Type targetEnum, Humanizer.OnNoMatch onNoMatch = 0) { }
