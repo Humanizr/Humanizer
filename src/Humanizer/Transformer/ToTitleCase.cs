@@ -11,20 +11,39 @@ namespace Humanizer
         {
             culture ??= CultureInfo.CurrentCulture;
 
-            var result = input;
             var matches = Regex.Matches(input, @"(\w|[^\u0000-\u007F])+'?\w*");
             var firstWord = true;
+            var builder = new StringBuilder(input);
+            var textInfo = culture.TextInfo;
             foreach (Match word in matches)
             {
-                if (!AllCapitals(word.Value))
+                var value = word.Value;
+                if (!AllCapitals(value))
                 {
-                    result = ReplaceWithTitleCase(word, result, culture, firstWord);
+                    var wordToConvert = value;
+                    if (firstWord ||
+                        !lookups.Contains(wordToConvert))
+                    {
+                        builder[word.Index] = textInfo.ToUpper(wordToConvert[0]);
+                        Overwrite(builder, word.Index+1, textInfo.ToLower(wordToConvert[1..]));
+                    }
+                    else
+                    {
+                        var replacement = textInfo.ToLower(wordToConvert);
+                        Overwrite(builder, word.Index, replacement);
+                    }
                 }
+
                 firstWord = false;
             }
 
-            return result;
+            return builder.ToString();
         }
+
+        static void Overwrite(StringBuilder builder, int index, string replacement) =>
+            builder
+                .Remove(index, replacement.Length)
+                .Insert(index, replacement);
 
         static bool AllCapitals(string input)
         {
@@ -50,24 +69,15 @@ namespace Humanizer
             lookups = articles.Concat(conjunctions).Concat(prepositions).ToFrozenSet();
         }
 
-        static string ReplaceWithTitleCase(Match word, string source, CultureInfo culture, bool firstWord)
+        static string Replacement(bool firstWord, string wordToConvert, TextInfo textInfo)
         {
-            var wordToConvert = word.Value;
-            string replacement;
-
             if (firstWord ||
                 !lookups.Contains(wordToConvert))
             {
-                replacement = culture.TextInfo.ToUpper(wordToConvert[0]) + culture.TextInfo.ToLower(wordToConvert[1..]);
-
-            }
-            else
-            {
-                replacement = culture.TextInfo.ToLower(wordToConvert);
+                return textInfo.ToUpper(wordToConvert[0]) + textInfo.ToLower(wordToConvert[1..]);
             }
 
-            var span = source.AsSpan();
-            return $"{span[..word.Index]}{replacement}{span[(word.Index + word.Length)..]}";
+            return textInfo.ToLower(wordToConvert);
         }
     }
 }
