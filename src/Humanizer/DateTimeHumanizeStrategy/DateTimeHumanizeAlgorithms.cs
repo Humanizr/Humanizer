@@ -8,7 +8,7 @@
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
-        public static string PrecisionHumanize(DateTime input, DateTime comparisonBase, double precision, CultureInfo culture)
+        public static string PrecisionHumanize(DateTime input, DateTime comparisonBase, double precision, CultureInfo? culture)
         {
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
@@ -20,7 +20,7 @@
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
         /// </summary>
-        public static string PrecisionHumanize(DateOnly input, DateOnly comparisonBase, double precision, CultureInfo culture)
+        public static string PrecisionHumanize(DateOnly input, DateOnly comparisonBase, double precision, CultureInfo? culture)
         {
             var diffDays = Math.Abs(comparisonBase.DayOfYear - input.DayOfYear);
             var ts = new TimeSpan(diffDays, 0, 0, 0);
@@ -32,7 +32,7 @@
         /// <summary>
         /// Returns localized &amp; humanized distance of time between two times; given a specific precision.
         /// </summary>
-        public static string PrecisionHumanize(TimeOnly input, TimeOnly comparisonBase, double precision, CultureInfo culture)
+        public static string PrecisionHumanize(TimeOnly input, TimeOnly comparisonBase, double precision, CultureInfo? culture)
         {
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
@@ -40,7 +40,7 @@
             return PrecisionHumanize(ts, tense, precision, culture);
         }
 #endif
-        static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo culture)
+        static string PrecisionHumanize(TimeSpan ts, Tense tense, double precision, CultureInfo? culture)
         {
             int seconds = ts.Seconds, minutes = ts.Minutes, hours = ts.Hours, days = ts.Days;
             int years = 0, months = 0;
@@ -131,7 +131,7 @@
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo culture)
+        public static string DefaultHumanize(DateTime input, DateTime comparisonBase, CultureInfo? culture)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
@@ -147,7 +147,7 @@
         /// <summary>
         /// Calculates the distance of time in words between two provided dates
         /// </summary>
-        public static string DefaultHumanize(DateOnly input, DateOnly comparisonBase, CultureInfo culture)
+        public static string DefaultHumanize(DateOnly input, DateOnly comparisonBase, CultureInfo? culture)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var diffDays = Math.Abs(comparisonBase.DayNumber - input.DayNumber);
@@ -163,7 +163,7 @@
         /// <summary>
         /// Calculates the distance of time in words between two provided times
         /// </summary>
-        public static string DefaultHumanize(TimeOnly input, TimeOnly comparisonBase, CultureInfo culture)
+        public static string DefaultHumanize(TimeOnly input, TimeOnly comparisonBase, CultureInfo? culture)
         {
             var tense = input > comparisonBase ? Tense.Future : Tense.Past;
             var ts = new TimeSpan(Math.Abs(comparisonBase.Ticks - input.Ticks));
@@ -172,7 +172,7 @@
         }
 #endif
 
-        static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo culture)
+        static string DefaultHumanize(TimeSpan ts, bool sameMonth, int days, Tense tense, CultureInfo? culture)
         {
             var formatter = Configurator.GetFormatter(culture);
 

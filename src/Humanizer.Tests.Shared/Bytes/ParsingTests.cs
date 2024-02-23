@@ -113,7 +113,7 @@ namespace Humanizer.Tests.Bytes
 
         [Fact]
         public void ParseThrowsOnNull() =>
-            Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(null); });
+            Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(null!); });
 
         [Fact]
         public void ParseBits() =>

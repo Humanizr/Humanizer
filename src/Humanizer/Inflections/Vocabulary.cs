@@ -66,8 +66,14 @@ public class Vocabulary
     /// </summary>
     /// <param name="word">Word to be pluralized</param>
     /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
-    public string Pluralize(string word, bool inputIsKnownToBeSingular = true)
+    [return: NotNullIfNotNull(nameof(word))]
+    public string? Pluralize(string? word, bool inputIsKnownToBeSingular = true)
     {
+        if (word == null)
+        {
+            return null;
+        }
+
         var s = LetterS(word);
         if (s != null)
         {
@@ -92,7 +98,7 @@ public class Vocabulary
             return word;
         }
 
-        return result;
+        return result!;
     }
 
     /// <summary>
@@ -101,8 +107,13 @@ public class Vocabulary
     /// <param name="word">Word to be singularized</param>
     /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
     /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
-    public string Singularize(string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
+    [return: NotNullIfNotNull(nameof(word))]
+    public string? Singularize(string? word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false)
     {
+        if (word == null)
+        {
+            return null;
+        }
         var s = LetterS(word);
         if (s != null)
         {
@@ -134,7 +145,7 @@ public class Vocabulary
         return word;
     }
 
-    string ApplyRules(IList<Rule> rules, string word, bool skipFirstRule)
+    string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)
     {
         if (word == null)
         {
@@ -179,7 +190,7 @@ public class Vocabulary
     /// <summary>
     /// If the word is the letter s, singular or plural, return the letter s singular
     /// </summary>
-    string LetterS(string word)
+    string? LetterS(string word)
     {
         var s = letterS.Match(word);
         return s.Groups.Count > 1 ? s.Groups[1].Value : null;
@@ -189,7 +200,7 @@ public class Vocabulary
     {
         readonly Regex regex = new(pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-        public string Apply(string word)
+        public string? Apply(string word)
         {
             if (!regex.IsMatch(word))
             {

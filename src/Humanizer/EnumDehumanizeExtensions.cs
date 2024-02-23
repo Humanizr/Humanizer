@@ -28,7 +28,7 @@ public static class EnumDehumanizeExtensions
         DehumanizeToPrivate<TTargetEnum>(input, onNoMatch);
 
     static MethodInfo dehumanizeToMethod = typeof(EnumDehumanizeExtensions)
-        .GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)]);
+        .GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!;
 
     /// <summary>
     /// Dehumanizes a string into the Enum it was originally Humanized from!
@@ -43,7 +43,7 @@ public static class EnumDehumanizeExtensions
         var genericMethod = dehumanizeToMethod.MakeGenericMethod(targetEnum);
         try
         {
-            return (Enum) genericMethod.Invoke(null, [input, onNoMatch]);
+            return (Enum) genericMethod.Invoke(null, [input, onNoMatch])!;
         }
         catch (TargetInvocationException exception)
         {

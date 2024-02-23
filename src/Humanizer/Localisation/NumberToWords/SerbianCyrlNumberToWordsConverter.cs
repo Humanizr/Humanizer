@@ -1,6 +1,6 @@
 ﻿namespace Humanizer
 {
-    class SerbianCyrlNumberToWordsConverter(CultureInfo culture) :
+    class SerbianCyrlNumberToWordsConverter(CultureInfo? culture) :
         GenderlessNumberToWordsConverter
     {
         static readonly string[] UnitsMap = ["нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест"];

@@ -314,7 +314,7 @@ namespace Humanizer
             return !double.TryParse(isSymbol ? input.Remove(index) : input, out _);
         }
 
-        struct UnitPrefix(string name, string shortScaleWord, string longScaleWord = null)
+        struct UnitPrefix(string name, string shortScaleWord, string? longScaleWord = null)
         {
             public string Name { get; } = name;
             public string ShortScaleWord { get; } = shortScaleWord;

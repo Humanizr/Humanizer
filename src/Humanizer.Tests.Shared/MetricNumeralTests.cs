@@ -33,7 +33,7 @@
         [Fact]
         public void FromMetricOnNull() =>
             Assert.Throws<ArgumentNullException>(() =>
-                MetricNumeralExtensions.FromMetric(null));
+                MetricNumeralExtensions.FromMetric(null!));
 
         [Theory]
         [MemberData(nameof(SymbolRange))]

@@ -62,7 +62,7 @@ namespace Humanizer
 
         public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
-        public string GetLargestWholeNumberSymbol(IFormatProvider provider = null)
+        public string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
         {
             var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
@@ -97,7 +97,7 @@ namespace Humanizer
 
         public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
 
-        public string GetLargestWholeNumberFullWord(IFormatProvider provider = null)
+        public string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
         {
             var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
@@ -193,20 +193,20 @@ namespace Humanizer
         public override string ToString() =>
             ToString(NumberFormatInfo.CurrentInfo);
 
-        public string ToString(IFormatProvider provider)
+        public string ToString(IFormatProvider? provider)
         {
             provider ??= CultureInfo.CurrentCulture;
 
             return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
         }
 
-        public string ToString(string format) =>
+        public string ToString(string? format) =>
             ToString(format, NumberFormatInfo.CurrentInfo);
 
-        public string ToString(string format, IFormatProvider provider) =>
+        public string ToString(string? format, IFormatProvider? provider) =>
             ToString(format, provider, toSymbol: true);
 
-        string ToString(string format, IFormatProvider provider, bool toSymbol)
+        string ToString(string? format, IFormatProvider? provider, bool toSymbol)
         {
             format ??= "G";
             provider ??= CultureInfo.CurrentCulture;
@@ -280,10 +280,10 @@ namespace Humanizer
         /// tera) used is the largest metric prefix such that the corresponding
         /// value is greater than or equal to one.
         /// </summary>
-        public string ToFullWords(string format = null, IFormatProvider provider = null) =>
+        public string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
             ToString(format, provider, toSymbol: false);
 
-        public override bool Equals(object value)
+        public override bool Equals(object? value)
         {
             if (value == null)
             {
@@ -309,7 +309,7 @@ namespace Humanizer
         public override int GetHashCode() =>
             Bits.GetHashCode();
 
-        public int CompareTo(object obj)
+        public int CompareTo(object? obj)
         {
             if (obj == null)
             {
@@ -384,10 +384,10 @@ namespace Humanizer
         public static bool operator >=(ByteSize b1, ByteSize b2) =>
             b1.Bits >= b2.Bits;
 
-        public static bool TryParse(string s, out ByteSize result) =>
+        public static bool TryParse(string? s, out ByteSize result) =>
             TryParse(s, null, out result);
 
-        public static bool TryParse(string s, IFormatProvider formatProvider, out ByteSize result)
+        public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result)
         {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
@@ -412,7 +412,7 @@ namespace Humanizer
             result = new();
 
             // Get the index of the first non-digit character
-            s = s.TrimStart(); // Protect against leading spaces
+            s = s!.TrimStart(); // Protect against leading spaces
 
             int num;
             var found = false;
@@ -486,7 +486,7 @@ namespace Humanizer
             return true;
         }
 
-        static NumberFormatInfo GetNumberFormatInfo(IFormatProvider formatProvider)
+        static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
         {
             if (formatProvider is NumberFormatInfo numberFormat)
                 return numberFormat;
@@ -499,7 +499,7 @@ namespace Humanizer
         public static ByteSize Parse(string s) =>
             Parse(s, null);
 
-        public static ByteSize Parse(string s, IFormatProvider formatProvider)
+        public static ByteSize Parse(string s, IFormatProvider? formatProvider)
         {
             if (s == null)
             {

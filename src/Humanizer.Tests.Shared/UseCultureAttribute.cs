@@ -12,8 +12,8 @@ namespace Humanizer.Tests;
 public class UseCultureAttribute : BeforeAfterTestAttribute
 {
     readonly Lazy<CultureInfo> culture;
-    CultureInfo originalCulture;
-    CultureInfo originalUICulture;
+    CultureInfo? originalCulture;
+    CultureInfo? originalUICulture;
 
     /// <summary>
     /// Replaces the culture and UI culture of the current thread with
@@ -53,7 +53,7 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     /// <param name="methodUnderTest">The method under test</param>
     public override void After(MethodInfo methodUnderTest)
     {
-        CultureInfo.CurrentCulture = originalCulture;
-        CultureInfo.CurrentUICulture = originalUICulture;
+        CultureInfo.CurrentCulture = originalCulture!;
+        CultureInfo.CurrentUICulture = originalUICulture!;
     }
 }

@@ -16,7 +16,10 @@
             {
                 var partToString = GetNextPartConverter();
 
-                words = partToString(part) + words;
+                if (partToString != null)
+                {
+                    words = partToString(part) + words;
+                }
             }
 
             // remove trailing spaces if there are only millions or billions
@@ -57,9 +60,9 @@
         /// for the next three-digit set.
         /// </summary>
         /// <returns>The next conversion function to use.</returns>
-        public Func<int, string> GetNextPartConverter()
+        public Func<int, string>? GetNextPartConverter()
         {
-            Func<int, string> converter;
+            Func<int, string>? converter;
 
             switch (_nextSet)
             {

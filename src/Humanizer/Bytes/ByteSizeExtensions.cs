@@ -292,7 +292,7 @@ namespace Humanizer
         /// Turns a byte quantity into human readable form, eg 2 GB
         /// </summary>
         /// <param name="format">The string format to use</param>
-        public static string Humanize(this ByteSize input, string format = null) =>
+        public static string Humanize(this ByteSize input, string? format = null) =>
             string.IsNullOrWhiteSpace(format) ? input.ToString() : input.ToString(format);
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace Humanizer
         /// </summary>
         /// <param name="format">The string format to use</param>
         /// <param name="formatProvider">The format provider to use</param>
-        public static string Humanize(this ByteSize input, string format, IFormatProvider formatProvider) =>
+        public static string Humanize(this ByteSize input, string? format, IFormatProvider? formatProvider) =>
             string.IsNullOrWhiteSpace(format) ? input.ToString(formatProvider) : input.ToString(format, formatProvider);
 
         /// <summary>

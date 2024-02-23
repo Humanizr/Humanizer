@@ -155,7 +155,7 @@ namespace Humanizer
             return UnitsMap[number];
         }
 
-        static bool ExceptionNumbersToWords(int number, out string words) =>
+        static bool ExceptionNumbersToWords(int number, [NotNullWhen(true)] out string? words) =>
             OrdinalExceptions.TryGetValue(number, out words);
 
         string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)

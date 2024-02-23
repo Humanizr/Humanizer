@@ -67,7 +67,7 @@
         [InlineData(2.123, "#.#", "en", "2.1 TB")]
         [InlineData(2.1, null, "ru-RU", "2,1 TB")]
         [InlineData(2.123, "#.#", "ru-RU", "2,1 TB")]
-        public void HumanizesTerabytes(double input, string format, string cultureName, string expectedValue)
+        public void HumanizesTerabytes(double input, string? format, string cultureName, string expectedValue)
         {
             var culture = new CultureInfo(cultureName);
 
@@ -137,7 +137,7 @@
         [InlineData(2, null, "fr", "2 Go")]
         [InlineData(2, "MB", "en", "2048 MB")]
         [InlineData(2.123, "#.##", "en", "2.12 GB")]
-        public void HumanizesGigabytes(double input, string format, string cultureName, string expectedValue)
+        public void HumanizesGigabytes(double input, string? format, string cultureName, string expectedValue)
         {
             var cultureInfo = new CultureInfo(cultureName);
 
@@ -207,7 +207,7 @@
         [InlineData(2, null, "fr", "2 Mo")]
         [InlineData(2, "KB", "en", "2048 KB")]
         [InlineData(2.123, "#", "en", "2 MB")]
-        public void HumanizesMegabytes(double input, string format, string cultureName, string expectedValue)
+        public void HumanizesMegabytes(double input, string? format, string cultureName, string expectedValue)
         {
             var cultureInfo = new CultureInfo(cultureName);
 
@@ -277,7 +277,7 @@
         [InlineData(2, null, "fr", "2 Ko")]
         [InlineData(2, "B", "en", "2048 B")]
         [InlineData(2.123, "#.####", "en", "2.123 KB")]
-        public void HumanizesKilobytes(double input, string format, string cultureName, string expectedValue)
+        public void HumanizesKilobytes(double input, string? format, string cultureName, string expectedValue)
         {
             var cultureInfo = new CultureInfo(cultureName);
 
@@ -352,7 +352,7 @@
         [InlineData(10000000, "KB", "en", "9765.63 KB")]
         [InlineData(10000000, "#,##0 KB", "en", "9,766 KB")]
         [InlineData(10000000, "#,##0.# KB", "en", "9,765.6 KB")]
-        public void HumanizesBytes(double input, string format, string cultureName, string expectedValue)
+        public void HumanizesBytes(double input, string? format, string cultureName, string expectedValue)
         {
             var cultureInfo = new CultureInfo(cultureName);
 
@@ -415,7 +415,7 @@
         [InlineData(2, null, "fr", "2 b")]
         [InlineData(12, "B", "en", "1.5 B")]
         [InlineData(10000, "#.# KB", "en", "1.2 KB")]
-        public void HumanizesBits(long input, string format, string cultureName, string expectedValue)
+        public void HumanizesBits(long input, string? format, string cultureName, string expectedValue)
         {
             var cultureInfo = new CultureInfo(cultureName);
 

@@ -23,7 +23,7 @@
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
-        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false) =>
+        public static string Humanize(this TimeSpan timeSpan, int precision = 1, CultureInfo? culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string? collectionSeparator = ", ", bool toWords = false) =>
             Humanize(timeSpan, precision, false, culture, maxUnit, minUnit, collectionSeparator, toWords);
 
         /// <summary>
@@ -36,7 +36,7 @@
         /// <param name="minUnit">The minimum unit of time to output.</param>
         /// <param name="collectionSeparator">The separator to use when combining humanized time parts. If null, the default collection formatter for the current culture is used.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. one day.</param>
-        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string collectionSeparator = ", ", bool toWords = false)
+        public static string Humanize(this TimeSpan timeSpan, int precision, bool countEmptyUnits, CultureInfo? culture = null, TimeUnit maxUnit = TimeUnit.Week, TimeUnit minUnit = TimeUnit.Millisecond, string? collectionSeparator = ", ", bool toWords = false)
         {
             var timeParts = CreateTheTimePartsWithUpperAndLowerLimits(timeSpan, culture, maxUnit, minUnit, toWords);
             timeParts = SetPrecisionOfTimeSpan(timeParts, precision, countEmptyUnits);
@@ -52,21 +52,19 @@
         /// <param name="maxUnit">The maximum unit of time to output. The default value is <see cref="TimeUnit.Year"/>.</param>
         /// <param name="toWords">Uses words instead of numbers if true. E.g. "forty years old".</param>
         /// <returns>Age expression in the given culture/language</returns>
-        public static string ToAge(this TimeSpan timeSpan, CultureInfo culture = null, TimeUnit maxUnit = TimeUnit.Year, bool toWords = false)
+        public static string ToAge(this TimeSpan timeSpan, CultureInfo? culture = null, TimeUnit maxUnit = TimeUnit.Year, bool toWords = false)
         {
             var timeSpanExpression = timeSpan.Humanize(culture: culture, maxUnit: maxUnit, toWords: toWords);
 
             var cultureFormatter = Configurator.GetFormatter(culture);
-            var ageExpression = string.Format(cultureFormatter.TimeSpanHumanize_Age(), timeSpanExpression);
-
-            return ageExpression;
+            return string.Format(cultureFormatter.TimeSpanHumanize_Age(), timeSpanExpression);
         }
 
-        static IEnumerable<string> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
+        static IEnumerable<string?> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
         {
             var cultureFormatter = Configurator.GetFormatter(culture);
             var firstValueFound = false;
-            var timeParts = new List<string>();
+            var timeParts = new List<string?>();
 
             foreach (var timeUnit in _timeUnits)
             {
@@ -87,7 +85,7 @@
             return timeParts;
         }
 
-        static string GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)
+        static string? GetTimeUnitPart(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit, TimeUnit minimumTimeUnit, IFormatter cultureFormatter, bool toWords = false)
         {
             if (timeUnitToGet <= maximumTimeUnit && timeUnitToGet >= minimumTimeUnit)
             {
@@ -177,19 +175,19 @@
             return timeNumberOfUnits;
         }
 
-        static string BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
+        static string? BuildFormatTimePart(IFormatter cultureFormatter, TimeUnit timeUnitType, int amountOfTimeUnits, bool toWords = false) =>
             // Always use positive units to account for negative timespans
             amountOfTimeUnits != 0
                 ? cultureFormatter.TimeSpanHumanize(timeUnitType, Math.Abs(amountOfTimeUnits), toWords)
                 : null;
 
-        static List<string> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
+        static List<string?> CreateTimePartsWithNoTimeValue(string noTimeValue) =>
             [noTimeValue];
 
-        static bool IsContainingOnlyNullValue(IEnumerable<string> timeParts) =>
+        static bool IsContainingOnlyNullValue(IEnumerable<string?> timeParts) =>
             timeParts.Count(x => x != null) == 0;
 
-        static IEnumerable<string> SetPrecisionOfTimeSpan(IEnumerable<string> timeParts, int precision, bool countEmptyUnits)
+        static IEnumerable<string?> SetPrecisionOfTimeSpan(IEnumerable<string?> timeParts, int precision, bool countEmptyUnits)
         {
             if (!countEmptyUnits)
             {
@@ -205,7 +203,7 @@
             return timeParts;
         }
 
-        static string ConcatenateTimeSpanParts(IEnumerable<string> timeSpanParts, CultureInfo culture, string collectionSeparator)
+        static string ConcatenateTimeSpanParts(IEnumerable<string?> timeSpanParts, CultureInfo? culture, string? collectionSeparator)
         {
             if (collectionSeparator == null)
             {

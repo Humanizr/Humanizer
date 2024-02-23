@@ -152,7 +152,7 @@ namespace Humanizer
             return toWords;
         }
 
-        static bool ExceptionNumbersToWords(int number, out string words) =>
+        static bool ExceptionNumbersToWords(int number, [NotNullWhen(true)] out string? words) =>
             OrdinalExceptions.TryGetValue(number, out words);
     }
 }

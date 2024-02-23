@@ -88,7 +88,7 @@
         [InlineData("dollar", 1, "C0", "$1 dollar")]
         [InlineData("dollar", 2, "C0", "$2 dollars")]
         [InlineData("dollar", 2, "C2", "$2.00 dollars")]
-        public void ToQuantityWordsWithCurrentCultureFormatting(string word, int quantity, string format, string expected) =>
+        public void ToQuantityWordsWithCurrentCultureFormatting(string word, int quantity, string? format, string expected) =>
             Assert.Equal(expected, word.ToQuantity(quantity, format));
 
         [Theory]
