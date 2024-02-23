@@ -10,23 +10,28 @@ class ToTitleCase : ICulturedStringTransformer
     public string Transform(string input, CultureInfo? culture)
     {
         culture ??= CultureInfo.CurrentCulture;
-        var builder = new StringBuilder(input.Length);
+        var matches = regex.Matches(input);
+        var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;
-        foreach (Match word in regex.Matches(input))
+        foreach (Match word in matches)
         {
             var value = word.Value;
-            if (lookups.Contains(value) || AllCapitals(value))
+            if (AllCapitals(value) || lookups.Contains(value))
             {
-                builder.Append(value);
                 continue;
             }
 
-            builder.Append(textInfo.ToUpper(value[0]));
-            builder.Append(textInfo.ToLower(value[1..]));
+            builder[word.Index] = textInfo.ToUpper(value[0]);
+            Overwrite(builder, word.Index + 1, textInfo.ToLower(value[1..]));
         }
 
         return builder.ToString();
     }
+
+    static void Overwrite(StringBuilder builder, int index, string replacement) =>
+        builder
+            .Remove(index, replacement.Length)
+            .Insert(index, replacement);
 
     static bool AllCapitals(string input)
     {
