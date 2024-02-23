@@ -1,4 +1,4 @@
-﻿# <img width="35px" src="logo.png" /> Humanizer
+﻿# <img width="30px" src="logo.png" /> Humanizer
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
