@@ -26,8 +26,18 @@ namespace Humanizer
             return result;
         }
 
-        static bool AllCapitals(string input) =>
-            input.All(char.IsUpper);
+        static bool AllCapitals(string input)
+        {
+            foreach (var ch in input)
+            {
+                if (!char.IsUpper(ch))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         static FrozenSet<string> lookups;
 
