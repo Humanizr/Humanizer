@@ -48,14 +48,16 @@ namespace Humanizer
             if (firstWord ||
                 !lookups.Contains(wordToConvert))
             {
-                replacement = culture.TextInfo.ToUpper(wordToConvert[0]) + culture.TextInfo.ToLower(wordToConvert.Remove(0, 1));
+                replacement = culture.TextInfo.ToUpper(wordToConvert[0]) + culture.TextInfo.ToLower(wordToConvert[1..]);
 
             }
             else
             {
                 replacement = culture.TextInfo.ToLower(wordToConvert);
             }
-            return source.Substring(0, word.Index) + replacement + source.Substring(word.Index + word.Length);
+
+            var span = source.AsSpan();
+            return $"{span[..word.Index]}{replacement}{span[(word.Index + word.Length)..]}";
         }
     }
 }
