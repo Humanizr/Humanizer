@@ -23,7 +23,7 @@
         /// <example>
         /// "INvalid caSEs arE corrected" -> "Invalid Cases Are Corrected"
         /// </example>
-        public static ICulturedStringTransformer TitleCase => new ToTitleCase();
+        public static ICulturedStringTransformer TitleCase { get; } = new ToTitleCase();
 
         /// <summary>
         /// Changes the string to lower case
@@ -31,7 +31,7 @@
         /// <example>
         /// "Sentence casing" -> "sentence casing"
         /// </example>
-        public static ICulturedStringTransformer LowerCase => new ToLowerCase();
+        public static ICulturedStringTransformer LowerCase { get; } = new ToLowerCase();
 
         /// <summary>
         /// Changes the string to upper case
@@ -39,7 +39,7 @@
         /// <example>
         /// "lower case statement" -> "LOWER CASE STATEMENT"
         /// </example>
-        public static ICulturedStringTransformer UpperCase => new ToUpperCase();
+        public static ICulturedStringTransformer UpperCase { get; } = new ToUpperCase();
 
         /// <summary>
         /// Changes the string to sentence case
@@ -47,6 +47,6 @@
         /// <example>
         /// "lower case statement" -> "Lower case statement"
         /// </example>
-        public static ICulturedStringTransformer SentenceCase => new ToSentenceCase();
+        public static ICulturedStringTransformer SentenceCase { get; } = new ToSentenceCase();
     }
 }
