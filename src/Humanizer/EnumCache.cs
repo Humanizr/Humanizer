@@ -1,5 +1,4 @@
-﻿using System.Collections.Frozen;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Humanizer;
 
