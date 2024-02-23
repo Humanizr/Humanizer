@@ -20,16 +20,15 @@ namespace Humanizer
                 var value = word.Value;
                 if (!AllCapitals(value))
                 {
-                    var wordToConvert = value;
                     if (firstWord ||
-                        !lookups.Contains(wordToConvert))
+                        !lookups.Contains(value))
                     {
-                        builder[word.Index] = textInfo.ToUpper(wordToConvert[0]);
-                        Overwrite(builder, word.Index+1, textInfo.ToLower(wordToConvert[1..]));
+                        builder[word.Index] = textInfo.ToUpper(value[0]);
+                        Overwrite(builder, word.Index + 1, textInfo.ToLower(value[1..]));
                     }
                     else
                     {
-                        var replacement = textInfo.ToLower(wordToConvert);
+                        var replacement = textInfo.ToLower(value);
                         Overwrite(builder, word.Index, replacement);
                     }
                 }
