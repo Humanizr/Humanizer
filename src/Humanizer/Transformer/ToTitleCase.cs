@@ -7,11 +7,11 @@ namespace Humanizer
         public string Transform(string input) =>
             Transform(input, null);
 
+        static Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
         public string Transform(string input, CultureInfo? culture)
         {
             culture ??= CultureInfo.CurrentCulture;
-
-            var matches = Regex.Matches(input, @"(\w|[^\u0000-\u007F])+'?\w*");
+            var matches = regex.Matches(input);
             var firstWord = true;
             var builder = new StringBuilder(input);
             var textInfo = culture.TextInfo;
