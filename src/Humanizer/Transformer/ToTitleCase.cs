@@ -12,28 +12,23 @@ namespace Humanizer
         {
             culture ??= CultureInfo.CurrentCulture;
             var matches = regex.Matches(input);
-            var firstWord = true;
             var builder = new StringBuilder(input);
             var textInfo = culture.TextInfo;
             foreach (Match word in matches)
             {
                 var value = word.Value;
-                if (!AllCapitals(value))
+                if (AllCapitals(value))
                 {
-                    if (firstWord ||
-                        !lookups.Contains(value))
-                    {
-                        builder[word.Index] = textInfo.ToUpper(value[0]);
-                        Overwrite(builder, word.Index + 1, textInfo.ToLower(value[1..]));
-                    }
-                    else
-                    {
-                        var replacement = textInfo.ToLower(value);
-                        Overwrite(builder, word.Index, replacement);
-                    }
+                    continue;
                 }
 
-                firstWord = false;
+                if (lookups.Contains(value))
+                {
+                    continue;
+                }
+
+                builder[word.Index] = textInfo.ToUpper(value[0]);
+                Overwrite(builder, word.Index + 1, textInfo.ToLower(value[1..]));
             }
 
             return builder.ToString();
@@ -66,17 +61,6 @@ namespace Humanizer
             var prepositions = new List<string> { "as", "at", "by", "for", "in", "of", "off", "on", "to", "up", "via" };
 
             lookups = articles.Concat(conjunctions).Concat(prepositions).ToFrozenSet();
-        }
-
-        static string Replacement(bool firstWord, string wordToConvert, TextInfo textInfo)
-        {
-            if (firstWord ||
-                !lookups.Contains(wordToConvert))
-            {
-                return textInfo.ToUpper(wordToConvert[0]) + textInfo.ToLower(wordToConvert[1..]);
-            }
-
-            return textInfo.ToLower(wordToConvert);
         }
     }
 }
