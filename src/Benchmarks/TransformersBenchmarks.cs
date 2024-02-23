@@ -25,7 +25,7 @@ public class TransformersBenchmarks
     Random random = new(RAND_SEED);
     string input = null!;
 
-    [Params(10, 100)]
+    [Params(10, 100, 1000)]
     public int StringLen;
 
     [GlobalSetup]
