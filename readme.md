@@ -1,6 +1,6 @@
 ﻿<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
 
-[<img align="right" width="100px" src="https://old.dotnetfoundation.org/img/logo_big.svg" />](https://old.dotnetfoundation.org/projects/humanizer)
+<img align="right" width="50px" src="logo.png" />
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
