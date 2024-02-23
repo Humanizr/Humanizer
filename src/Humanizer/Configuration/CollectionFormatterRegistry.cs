@@ -5,7 +5,7 @@
         public CollectionFormatterRegistry()
             : base(new DefaultCollectionFormatter("&"))
         {
-            Register("en", new OxfordStyleCollectionFormatter("and"));
+            Register("en", new OxfordStyleCollectionFormatter());
             Register("it", new DefaultCollectionFormatter("e"));
             Register("de", new DefaultCollectionFormatter("und"));
             Register("dk", new DefaultCollectionFormatter("og"));
