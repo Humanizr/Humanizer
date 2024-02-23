@@ -8,36 +8,27 @@ namespace Humanizer
             Transform(input, null);
 
         static Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+
         public string Transform(string input, CultureInfo? culture)
         {
             culture ??= CultureInfo.CurrentCulture;
-            var matches = regex.Matches(input);
-            var builder = new StringBuilder(input);
+            var builder = new StringBuilder(input.Length);
             var textInfo = culture.TextInfo;
-            foreach (Match word in matches)
+            foreach (Match word in regex.Matches(input))
             {
                 var value = word.Value;
-                if (AllCapitals(value))
+                if (lookups.Contains(value) || AllCapitals(value))
                 {
+                    builder.Append(value);
                     continue;
                 }
 
-                if (lookups.Contains(value))
-                {
-                    continue;
-                }
-
-                builder[word.Index] = textInfo.ToUpper(value[0]);
-                Overwrite(builder, word.Index + 1, textInfo.ToLower(value[1..]));
+                builder.Append(textInfo.ToUpper(value[0]));
+                builder.Append(textInfo.ToLower(value[1..]));
             }
 
             return builder.ToString();
         }
-
-        static void Overwrite(StringBuilder builder, int index, string replacement) =>
-            builder
-                .Remove(index, replacement.Length)
-                .Insert(index, replacement);
 
         static bool AllCapitals(string input)
         {
