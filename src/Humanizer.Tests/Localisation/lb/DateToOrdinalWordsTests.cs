@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.lb;
+﻿namespace lb;
 
 [UseCulture("lb-LU")]
 public class DateToOrdinalWordsTests

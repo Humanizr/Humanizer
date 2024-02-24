@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.it;
+﻿namespace it;
 
 [UseCulture("it")]
 public class OrdinalizerTests

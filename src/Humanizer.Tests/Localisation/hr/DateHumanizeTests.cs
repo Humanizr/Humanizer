@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.hr;
+﻿namespace hr;
 
 [UseCulture("hr-HR")]
 public class DateHumanizeTests

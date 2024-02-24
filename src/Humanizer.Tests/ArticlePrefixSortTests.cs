@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-public class ArticlePrefixSortTests
+﻿public class ArticlePrefixSortTests
 {
     [Theory]
     [InlineData(new[] { "Ant", "The Theater", "The apple", "Fox", "Bear" }, new[] { "Ant", "The apple", "Bear", "Fox", "The Theater" })]

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.ukUA;
+﻿namespace ukUA;
 
 [UseCulture("uk-UA")]
 public class NumberToWordsTests

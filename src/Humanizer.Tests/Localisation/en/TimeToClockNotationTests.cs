@@ -1,6 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer.Tests.Localisation.en;
+namespace en;
 
 [UseCulture("en")]
 public class TimeToClockNotationTests

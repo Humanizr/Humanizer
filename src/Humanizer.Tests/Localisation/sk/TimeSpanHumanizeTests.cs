@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.sk;
+﻿namespace sk;
 
 [UseCulture("sk-SK")]
 public class TimeSpanHumanizeTests

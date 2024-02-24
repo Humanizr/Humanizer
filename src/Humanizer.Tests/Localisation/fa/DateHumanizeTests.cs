@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.fa;
+﻿namespace fa;
 
 [UseCulture("fa")]
 public class DateHumanizeTests

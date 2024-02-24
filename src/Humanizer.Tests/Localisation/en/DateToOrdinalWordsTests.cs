@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.en;
+﻿namespace en;
 
 public class DateToOrdinalWordsTests
 {

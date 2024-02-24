@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.fiFI;
+﻿namespace fiFI;
 
 [UseCulture("fi-FI")]
 public class NumberToWordsTests

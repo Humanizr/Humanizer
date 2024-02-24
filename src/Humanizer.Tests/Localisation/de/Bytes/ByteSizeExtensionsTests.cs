@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.de.Bytes;
+﻿namespace de.Bytes;
 
 [UseCulture("de-DE")]
 public class ByteSizeExtensionsTests

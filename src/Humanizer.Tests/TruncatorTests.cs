@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-public class TruncatorTests
+﻿public class TruncatorTests
 {
     [Theory]
     [InlineData(null, 10, null)]

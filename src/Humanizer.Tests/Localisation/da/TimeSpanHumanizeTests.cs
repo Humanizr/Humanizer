@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.da;
+﻿namespace da;
 
 [UseCulture("da-DK")]
 public class TimeSpanHumanizeTests

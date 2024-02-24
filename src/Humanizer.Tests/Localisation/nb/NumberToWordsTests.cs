@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.nb;
+﻿namespace nb;
 
 [UseCulture("nb-NO")]
 public class NumberToWordsTests

@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests.Bytes;
-
-[UseCulture("en")]
+﻿[UseCulture("en")]
 public class ByteRateTests
 {
     [Theory]

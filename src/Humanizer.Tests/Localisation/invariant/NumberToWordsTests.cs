@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.invariant;
+﻿namespace invariant;
 
 [UseCulture("")]
 public class NumberToWordsTests

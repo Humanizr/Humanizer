@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.msMY;
+﻿namespace msMY;
 
 [UseCulture("ms-MY")]
 public class TimeSpanHumanizeTests

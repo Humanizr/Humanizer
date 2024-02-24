@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.ku;
+﻿namespace ku;
 
 [UseCulture("ku")]
 public class TimeSpanHumanizeTests

@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-[UseCulture("en-US")]
+﻿[UseCulture("en-US")]
 public class OrdinalizeTests
 {
     [Theory]

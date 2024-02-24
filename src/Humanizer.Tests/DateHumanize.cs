@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-public class DateHumanize
+﻿public class DateHumanize
 {
     static readonly object LockObject = new();
 

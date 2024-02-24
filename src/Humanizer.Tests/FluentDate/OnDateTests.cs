@@ -1,7 +1,5 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer.Tests.FluentDate;
-
 public class OnDateTests
 {
     [Fact]
@@ -16,6 +14,5 @@ public class OnDateTests
     public void OnFebruaryThe() =>
         Assert.Equal(new(DateTime.Now.Year, 2, 11), OnDate.February.The(11));
 }
-
 
 #endif

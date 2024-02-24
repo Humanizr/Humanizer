@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-[UseCulture("en")]
+﻿[UseCulture("en")]
 public class BitFieldEnumHumanizeTests
 {
     [Fact]

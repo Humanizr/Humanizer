@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.de;
+﻿namespace de;
 
 [UseCulture("de")]
 public class CollectionFormatterTests

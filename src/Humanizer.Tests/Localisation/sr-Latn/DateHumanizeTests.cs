@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.srLatn;
+﻿namespace srLatn;
 
 [UseCulture("sr-Latn")]
 public class DateHumanizeDefaultStrategyTests

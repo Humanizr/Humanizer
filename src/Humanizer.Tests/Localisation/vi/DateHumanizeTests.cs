@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.vi;
+﻿namespace vi;
 
 [UseCulture("vi")]
 public class DateHumanizeTests

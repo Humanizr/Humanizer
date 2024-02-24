@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.nl;
+﻿namespace nl;
 
 [UseCulture("nl-NL")]
 public class TimeSpanHumanizeTests

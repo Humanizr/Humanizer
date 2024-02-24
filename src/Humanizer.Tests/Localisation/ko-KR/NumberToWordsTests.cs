@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.koKR;
+﻿namespace koKR;
 
 [UseCulture("ko-KR")]
 public class NumberToWordsTests

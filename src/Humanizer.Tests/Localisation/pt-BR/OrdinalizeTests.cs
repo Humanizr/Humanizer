@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.ptBR;
+﻿namespace ptBR;
 
 [UseCulture("pt-BR")]
 public class OrdinalizeTests

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.zhHK;
+﻿namespace zhHK;
 
 [UseCulture("zh-HK")]
 public class TimeSpanHumanizeTests

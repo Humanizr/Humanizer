@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.bnBD;
+﻿namespace bnBD;
 
 [UseCulture("bn-BD")]
 public class DateHumanizeTests

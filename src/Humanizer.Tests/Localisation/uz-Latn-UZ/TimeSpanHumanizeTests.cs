@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.uzLatn;
+﻿namespace uzLatn;
 
 [UseCulture("uz-Latn-UZ")]
 public class TimeSpanHumanizeTests

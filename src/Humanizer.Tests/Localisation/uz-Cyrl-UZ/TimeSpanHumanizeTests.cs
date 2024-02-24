@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.uzCyrl;
+﻿namespace uzCyrl;
 
 [UseCulture("uz-Cyrl-UZ")]
 public class TimeSpanHumanizeTests
