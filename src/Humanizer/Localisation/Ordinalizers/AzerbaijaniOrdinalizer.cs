@@ -1,10 +1,7 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class AzerbaijaniOrdinalizer : DefaultOrdinalizer
 {
-    internal class AzerbaijaniOrdinalizer : DefaultOrdinalizer
-    {
-        public override string Convert(int number, string numberString)
-        {
-            return numberString + ".";
-        }
-    }
+    public override string Convert(int number, string numberString) =>
+        numberString + ".";
 }

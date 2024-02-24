@@ -1,198 +1,183 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿namespace Humanizer;
 
-namespace Humanizer.Localisation.NumberToWords
+class HebrewNumberToWordsConverter(CultureInfo? culture) :
+    GenderedNumberToWordsConverter(GrammaticalGender.Feminine)
 {
-    internal class HebrewNumberToWordsConverter : GenderedNumberToWordsConverter
+    static readonly string[] UnitsFeminine = ["אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר"];
+    static readonly string[] UnitsMasculine = ["אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה"];
+    static readonly string[] TensUnit = ["עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים"];
+
+    class DescriptionAttribute(string description) :
+        Attribute
     {
-        private static readonly string[] UnitsFeminine = { "אפס", "אחת", "שתיים", "שלוש", "ארבע", "חמש", "שש", "שבע", "שמונה", "תשע", "עשר" };
-        private static readonly string[] UnitsMasculine = { "אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה" };
-        private static readonly string[] TensUnit = { "עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים" };
+        public string Description { get; set; } = description;
+    }
 
-        private readonly CultureInfo _culture;
+    enum Group
+    {
+        Hundreds = 100,
+        Thousands = 1000,
 
-        private class DescriptionAttribute : Attribute
+        [Description("מיליון")]
+        Millions = 1000000,
+
+        [Description("מיליארד")]
+        Billions = 1000000000
+    }
+
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+    {
+        if (input is > int.MaxValue or < int.MinValue)
         {
-            public string Description { get; set; }
-
-            public DescriptionAttribute(string description)
-            {
-                Description = description;
-            }
+            throw new NotImplementedException();
         }
 
-        private enum Group
+        var number = (int) input;
+
+        if (number < 0)
         {
-            Hundreds = 100,
-            Thousands = 1000,
-            [Description("מיליון")]
-            Millions = 1000000,
-            [Description("מיליארד")]
-            Billions = 1000000000
+            return $"מינוס {Convert(-number, gender)}";
         }
 
-        public HebrewNumberToWordsConverter(CultureInfo culture)
-            : base(GrammaticalGender.Feminine)
+        if (number == 0)
         {
-            _culture = culture;
+            return UnitsFeminine[0];
         }
 
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+        var parts = new List<string>();
+        if (number >= (int) Group.Billions)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
+            ToBigNumber(number, Group.Billions, parts);
+            number %= (int) Group.Billions;
+        }
 
-            if (number < 0)
-            {
-                return string.Format("מינוס {0}", Convert(-number, gender));
-            }
+        if (number >= (int) Group.Millions)
+        {
+            ToBigNumber(number, Group.Millions, parts);
+            number %= (int) Group.Millions;
+        }
 
-            if (number == 0)
-            {
-                return UnitsFeminine[0];
-            }
+        if (number >= (int) Group.Thousands)
+        {
+            ToThousands(number, parts);
+            number %= (int) Group.Thousands;
+        }
 
-            var parts = new List<string>();
-            if (number >= (int)Group.Billions)
-            {
-                ToBigNumber(number, Group.Billions, parts);
-                number %= (int)Group.Billions;
-            }
+        if (number >= (int) Group.Hundreds)
+        {
+            ToHundreds(number, parts);
+            number %= (int) Group.Hundreds;
+        }
 
-            if (number >= (int)Group.Millions)
-            {
-                ToBigNumber(number, Group.Millions, parts);
-                number %= (int)Group.Millions;
-            }
+        if (number > 0)
+        {
+            var appendAnd = parts.Count != 0;
 
-            if (number >= (int)Group.Thousands)
+            if (number <= 10)
             {
-                ToThousands(number, parts);
-                number %= (int)Group.Thousands;
-            }
-
-            if (number >= (int)Group.Hundreds)
-            {
-                ToHundreds(number, parts);
-                number %= (int)Group.Hundreds;
-            }
-
-            if (number > 0)
-            {
-                var appendAnd = parts.Count != 0;
-
-                if (number <= 10)
+                var unit = gender == GrammaticalGender.Masculine ? UnitsMasculine[number] : UnitsFeminine[number];
+                if (appendAnd)
                 {
-                    var unit = gender == GrammaticalGender.Masculine ? UnitsMasculine[number] : UnitsFeminine[number];
-                    if (appendAnd)
-                    {
-                        unit = "ו" + unit;
-                    }
-
-                    parts.Add(unit);
+                    unit = "ו" + unit;
                 }
-                else if (number < 20)
-                {
-                    var unit = Convert(number % 10, gender);
-                    unit = unit.Replace("יי", "י");
-                    unit = string.Format("{0} {1}", unit, gender == GrammaticalGender.Masculine ? "עשר" : "עשרה");
-                    if (appendAnd)
-                    {
-                        unit = "ו" + unit;
-                    }
 
-                    parts.Add(unit);
+                parts.Add(unit);
+            }
+            else if (number < 20)
+            {
+                var unit = Convert(number % 10, gender);
+                unit = unit.Replace("יי", "י");
+                unit = $"{unit} {(gender == GrammaticalGender.Masculine ? "עשר" : "עשרה")}";
+                if (appendAnd)
+                {
+                    unit = "ו" + unit;
+                }
+
+                parts.Add(unit);
+            }
+            else
+            {
+                var tenUnit = TensUnit[number / 10 - 1];
+                if (number % 10 == 0)
+                {
+                    parts.Add(tenUnit);
                 }
                 else
                 {
-                    var tenUnit = TensUnit[number / 10 - 1];
-                    if (number % 10 == 0)
-                    {
-                        parts.Add(tenUnit);
-                    }
-                    else
-                    {
-                        var unit = Convert(number % 10, gender);
-                        parts.Add(string.Format("{0} ו{1}", tenUnit, unit));
-                    }
+                    var unit = Convert(number % 10, gender);
+                    parts.Add($"{tenUnit} ו{unit}");
                 }
             }
-
-            return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+        return string.Join(" ", parts);
+    }
+
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+        number.ToString(culture);
+
+    void ToBigNumber(int number, Group group, List<string> parts)
+    {
+        // Big numbers (million and above) always use the masculine form
+        // See https://www.safa-ivrit.org/dikduk/numbers.php
+
+        var digits = number / (int) group;
+        if (digits == 2)
         {
-            return number.ToString(_culture);
+            parts.Add("שני");
+        }
+        else if (digits > 2)
+        {
+            parts.Add(Convert(digits, GrammaticalGender.Masculine));
         }
 
-        private void ToBigNumber(int number, Group group, List<string> parts)
+        parts.Add(group.Humanize());
+    }
+
+    void ToThousands(int number, List<string> parts)
+    {
+        var thousands = number / (int) Group.Thousands;
+
+        if (thousands == 1)
         {
-            // Big numbers (million and above) always use the masculine form
-            // See https://www.safa-ivrit.org/dikduk/numbers.php
-
-            var digits = number / (int)@group;
-            if (digits == 2)
-            {
-                parts.Add("שני");
-            }
-            else if (digits > 2)
-            {
-                parts.Add(Convert(digits, GrammaticalGender.Masculine));
-            }
-
-            parts.Add(@group.Humanize());
+            parts.Add("אלף");
         }
-
-        private void ToThousands(int number, List<string> parts)
+        else if (thousands == 2)
         {
-            var thousands = number / (int)Group.Thousands;
-
-            if (thousands == 1)
-            {
-                parts.Add("אלף");
-            }
-            else if (thousands == 2)
-            {
-                parts.Add("אלפיים");
-            }
-            else if (thousands == 8)
-            {
-                parts.Add("שמונת אלפים");
-            }
-            else if (thousands <= 10)
-            {
-                parts.Add(UnitsFeminine[thousands] + "ת" + " אלפים");
-            }
-            else
-            {
-                parts.Add(Convert(thousands) + " אלף");
-            }
+            parts.Add("אלפיים");
         }
-
-        private static void ToHundreds(int number, List<string> parts)
+        else if (thousands == 8)
         {
-            // For hundreds, Hebrew is using the feminine form
-            // See https://www.safa-ivrit.org/dikduk/numbers.php
+            parts.Add("שמונת אלפים");
+        }
+        else if (thousands <= 10)
+        {
+            parts.Add(UnitsFeminine[thousands] + "ת" + " אלפים");
+        }
+        else
+        {
+            parts.Add(Convert(thousands) + " אלף");
+        }
+    }
 
-            var hundreds = number / (int)Group.Hundreds;
+    static void ToHundreds(int number, List<string> parts)
+    {
+        // For hundreds, Hebrew is using the feminine form
+        // See https://www.safa-ivrit.org/dikduk/numbers.php
 
-            if (hundreds == 1)
-            {
-                parts.Add("מאה");
-            }
-            else if (hundreds == 2)
-            {
-                parts.Add("מאתיים");
-            }
-            else
-            {
-                parts.Add(UnitsFeminine[hundreds] + " מאות");
-            }
+        var hundreds = number / (int) Group.Hundreds;
+
+        if (hundreds == 1)
+        {
+            parts.Add("מאה");
+        }
+        else if (hundreds == 2)
+        {
+            parts.Add("מאתיים");
+        }
+        else
+        {
+            parts.Add(UnitsFeminine[hundreds] + " מאות");
         }
     }
 }

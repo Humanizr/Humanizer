@@ -1,26 +1,23 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class PortugueseOrdinalizer : DefaultOrdinalizer
 {
-    internal class PortugueseOrdinalizer : DefaultOrdinalizer
+    public override string Convert(int number, string numberString) =>
+        Convert(number, numberString, GrammaticalGender.Masculine);
+
+    public override string Convert(int number, string numberString, GrammaticalGender gender)
     {
-        public override string Convert(int number, string numberString)
+        // N/A in Portuguese
+        if (number == 0)
         {
-            return Convert(number, numberString, GrammaticalGender.Masculine);
+            return "0";
         }
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
+        if (gender == GrammaticalGender.Feminine)
         {
-            // N/A in Portuguese
-            if (number == 0)
-            {
-                return "0";
-            }
-
-            if (gender == GrammaticalGender.Feminine)
-            {
-                return numberString + "ª";
-            }
-
-            return numberString + "º";
+            return numberString + "ª";
         }
+
+        return numberString + "º";
     }
 }

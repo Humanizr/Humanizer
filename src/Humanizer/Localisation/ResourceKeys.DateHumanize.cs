@@ -1,52 +1,54 @@
-﻿namespace Humanizer.Localisation
+﻿namespace Humanizer;
+
+public partial class ResourceKeys
 {
-    public partial class ResourceKeys
+    /// <summary>
+    /// Encapsulates the logic required to get the resource keys for DateTime.Humanize
+    /// </summary>
+    public static class DateHumanize
     {
         /// <summary>
-        /// Encapsulates the logic required to get the resource keys for DateTime.Humanize
+        /// Resource key for Now.
         /// </summary>
-        public static class DateHumanize
+        public const string Now = "DateHumanize_Now";
+
+        /// <summary>
+        /// Resource key for Never.
+        /// </summary>
+        public const string Never = "DateHumanize_Never";
+
+        /// <summary>
+        /// Generates Resource Keys according to convention.
+        /// </summary>
+        /// <param name="timeUnit">Time unit</param>
+        /// <param name="timeUnitTense">Is time unit in future or past</param>
+        /// <param name="count">Number of units, default is One.</param>
+        /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
+        public static string GetResourceKey(TimeUnit timeUnit, Tense timeUnitTense, int count = 1)
         {
-            /// <summary>
-            /// Resource key for Now.
-            /// </summary>
-            public const string Now = "DateHumanize_Now";
+            ValidateRange(count);
 
-            /// <summary>
-            /// Resource key for Never.
-            /// </summary>
-            public const string Never = "DateHumanize_Never";
-
-            /// <summary>
-            /// Examples: DateHumanize_SingleMinuteAgo, DateHumanize_MultipleHoursAgo
-            /// Note: "s" for plural served separately by third part.
-            /// </summary>
-            private const string DateTimeFormat = "DateHumanize_{0}{1}{2}";
-
-            private const string Ago = "Ago";
-            private const string FromNow = "FromNow";
-
-            /// <summary>
-            /// Generates Resource Keys accordning to convention.
-            /// </summary>
-            /// <param name="timeUnit">Time unit</param>
-            /// <param name="timeUnitTense">Is time unit in future or past</param>
-            /// <param name="count">Number of units, default is One.</param>
-            /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
-            public static string GetResourceKey(TimeUnit timeUnit, Tense timeUnitTense, int count = 1)
+            if (count == 0)
             {
-                ValidateRange(count);
+                return Now;
+            }
 
-                if (count == 0)
+            if (count == 1)
+            {
+                if (timeUnitTense == Tense.Future)
                 {
-                    return Now;
+                    return $"DateHumanize_Single{timeUnit}FromNow";
                 }
 
-                var singularity = count == 1 ? Single : Multiple;
-                var tense = timeUnitTense == Tense.Future ? FromNow : Ago;
-                var unit = timeUnit.ToString().ToQuantity(count, ShowQuantityAs.None);
-                return DateTimeFormat.FormatWith(singularity, unit, tense);
+                return $"DateHumanize_Single{timeUnit}Ago";
             }
+
+            if (timeUnitTense == Tense.Future)
+            {
+                return $"DateHumanize_Multiple{timeUnit}sFromNow";
+            }
+
+            return $"DateHumanize_Multiple{timeUnit}sAgo";
         }
     }
 }

@@ -1,20 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">  
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.0;netstandard2.0;net6.0</TargetFrameworks>    
+    <TargetFrameworks>netstandard2.0;net462;net472;net48;net6.0;net7.0;net8.0</TargetFrameworks>    
     <Authors>Mehdi Khalili, Claire Novotny</Authors>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Humanizr/Humanizer/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
     <Copyright>Copyright © .NET Foundation and Contributors</Copyright>    
     <Product>Humanizer ($(TargetFramework))</Product>    
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Humanizer.snk</AssemblyOriginatorKeyFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
-    <LangVersion>preview</LangVersion>
+    <NoWarn>CS1573;CS1591</NoWarn>
   </PropertyGroup>  
   <ItemGroup>
+    <Using Remove="System.Net.Http" />
+    <PackageReference Include="Polyfill" Version="2.6.5" PrivateAssets="all" />
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" Condition="'$(TargetFramework)' != 'net8.0'" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="$(TargetFramework.StartsWith('net46')) or (TargetFramework) != '.NETStandard'" />
+    <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFramework) != '.NETStandard' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -22,11 +26,21 @@
     <None Update="FluentDate\OnDate.Days.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="OnDate.Days.cs" />
     <Compile Update="FluentDate\OnDate.Days.cs" DesignTime="True" AutoGen="True" DependentUpon="OnDate.Days.tt" />
     
-    <None Update="FluentDate\On.Days.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="On.Days.cs" />
-    <Compile Update="FluentDate\On.Days.cs" DesignTime="True" AutoGen="True" DependentUpon="On.Days.tt" />
+    <None Update="FluentDate\On.Days.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>On.Days.cs</LastGenOutput>
+    </None>
+    <Compile Update="FluentDate\On.Days.cs" DesignTime="True" AutoGen="True">
+      <DependentUpon>On.Days.tt</DependentUpon>
+    </Compile>
 
-    <None Update="FluentDate\In.Months.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="In.Months.cs" />
-    <Compile Update="FluentDate\In.Months.cs" DesignTime="True" AutoGen="True" DependentUpon="In.Months.tt" />
+    <None Update="FluentDate\In.Months.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>In.Months.cs</LastGenOutput>
+    </None>
+    <Compile Update="FluentDate\In.Months.cs" DesignTime="True" AutoGen="True">
+      <DependentUpon>In.Months.tt</DependentUpon>
+    </Compile>
     
     <None Update="FluentDate\InDate.Months.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.Months.cs" />
     <Compile Update="FluentDate\InDate.Months.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.Months.tt" />
@@ -40,5 +54,5 @@
   </ItemGroup>  
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>  
+  </ItemGroup>
 </Project>

@@ -1,21 +1,18 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class DutchOrdinalizer : DefaultOrdinalizer
 {
-    internal class DutchOrdinalizer : DefaultOrdinalizer
+    public override string Convert(int number, string numberString) =>
+        Convert(number, numberString, GrammaticalGender.Masculine);
+
+    public override string Convert(int number, string numberString, GrammaticalGender gender)
     {
-        public override string Convert(int number, string numberString)
+        // N/A in Dutch
+        if (number == 0)
         {
-            return Convert(number, numberString, GrammaticalGender.Masculine);
+            return "0";
         }
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
-        {
-            // N/A in Dutch
-            if (number == 0)
-            {
-                return "0";
-            }
-
-            return numberString + "e";
-        }
+        return numberString + "e";
     }
 }

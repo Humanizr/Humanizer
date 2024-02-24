@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Humanizer;
 
-namespace Humanizer.Localisation.Ordinalizers
+class ArmenianOrdinalizer : DefaultOrdinalizer
 {
-    internal class ArmenianOrdinalizer : DefaultOrdinalizer
+    public override string Convert(int number, string numberString)
     {
-        public override string Convert(int number, string numberString)
+        if (number is 1 or -1)
         {
-            if (number == 1 || number == -1)
-            {
-                return numberString + "-ին";
-            }
-
-            return numberString + "-րդ";
+            return numberString + "-ին";
         }
+
+        return numberString + "-րդ";
     }
 }

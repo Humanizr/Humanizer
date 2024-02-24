@@ -1,26 +1,23 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class ItalianOrdinalizer : DefaultOrdinalizer
 {
-    internal class ItalianOrdinalizer : DefaultOrdinalizer
+    public override string Convert(int number, string numberString) =>
+        Convert(number, numberString, GrammaticalGender.Masculine);
+
+    public override string Convert(int number, string numberString, GrammaticalGender gender)
     {
-        public override string Convert(int number, string numberString)
+        // No ordinal for 0 in italian (neologism apart)
+        if (number == 0)
         {
-            return Convert(number, numberString, GrammaticalGender.Masculine);
+            return "0";
         }
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
+        if (gender == GrammaticalGender.Feminine)
         {
-            // No ordinal for 0 in italian (neologism apart)
-            if (number == 0)
-            {
-                return "0";
-            }
-
-            if (gender == GrammaticalGender.Feminine)
-            {
-                return numberString + "ª";
-            }
-
-            return numberString + "°";
+            return numberString + "ª";
         }
+
+        return numberString + "°";
     }
 }

@@ -1,23 +1,14 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
+namespace Humanizer;
 
-namespace Humanizer.Localisation.DateToOrdinalWords
+class DefaultDateOnlyToOrdinalWordConverter : IDateOnlyToOrdinalWordConverter
 {
-    internal class DefaultDateOnlyToOrdinalWordConverter : IDateOnlyToOrdinalWordConverter
-    {
+    public virtual string Convert(DateOnly date) =>
+        date.Day.Ordinalize() + date.ToString(" MMMM yyyy");
 
-        public virtual string Convert(DateOnly date)
-        {
-            return date.Day.Ordinalize() + date.ToString(" MMMM yyyy");
-        }
-
-        public virtual string Convert(DateOnly date, GrammaticalCase grammaticalCase)
-        {
-            return Convert(date);
-        }
-
-    }
+    public virtual string Convert(DateOnly date, GrammaticalCase grammaticalCase) =>
+        Convert(date);
 }
 
 #endif

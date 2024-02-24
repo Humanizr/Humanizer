@@ -1,18 +1,13 @@
 ﻿#if NET6_0_OR_GREATER
 
-using System;
+namespace Humanizer;
 
-using Humanizer.Configuration;
-
-namespace Humanizer.Localisation.DateToOrdinalWords
+class EsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
 {
-    internal class EsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
+    public override string Convert(DateOnly date)
     {
-        public override string Convert(DateOnly date)
-        {
-            var equivalentDateTime = date.ToDateTime(TimeOnly.MinValue);
-            return Configurator.DateToOrdinalWordsConverter.Convert(equivalentDateTime);
-        }
+        var equivalentDateTime = date.ToDateTime(TimeOnly.MinValue);
+        return Configurator.DateToOrdinalWordsConverter.Convert(equivalentDateTime);
     }
 }
 

@@ -1,9 +1,8 @@
-﻿namespace Humanizer.Localisation.GrammaticalNumber
+﻿namespace Humanizer;
+
+enum RussianGrammaticalNumber
 {
-    internal enum RussianGrammaticalNumber
-    {
-        Singular,
-        Paucal,
-        Plural
-    }
+    Singular,
+    Paucal,
+    Plural
 }

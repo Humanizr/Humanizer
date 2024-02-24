@@ -246,22 +246,22 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
     <value>{0} неделя</value>
   </data>
-  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
     <value>один день</value>
   </data>
-  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
     <value>один час</value>
   </data>
-  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
     <value>одна миллисекунда</value>
   </data>
-  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
     <value>одна минута</value>
   </data>
-  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
     <value>одна секунда</value>
   </data>
-  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
     <value>одна неделя</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
@@ -357,10 +357,34 @@
   <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
     <value>{0} год</value>
   </data>
-  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
     <value>один месяц</value>
   </data>
-  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
     <value>один год</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>1 день</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>1 час</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1 миллисекунда</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>1 минута</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 месяц</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>1 секунда</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>1 неделя</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 год</value>
   </data>
 </root>

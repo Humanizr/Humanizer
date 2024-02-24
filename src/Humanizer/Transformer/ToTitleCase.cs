@@ -1,64 +1,59 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿namespace Humanizer;
 
-namespace Humanizer
+class ToTitleCase : ICulturedStringTransformer
 {
-    internal class ToTitleCase : ICulturedStringTransformer
+    public string Transform(string input) =>
+        Transform(input, null);
+
+    static Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+
+    public string Transform(string input, CultureInfo? culture)
     {
-        public string Transform(string input)
+        culture ??= CultureInfo.CurrentCulture;
+        var matches = regex.Matches(input);
+        var builder = new StringBuilder(input);
+        var textInfo = culture.TextInfo;
+        foreach (Match word in matches)
         {
-            return Transform(input, null);
-        }
-
-        public string Transform(string input, CultureInfo culture)
-        {
-            culture ??= CultureInfo.CurrentCulture;
-
-            var result = input;
-            var matches = Regex.Matches(input, @"(\w|[^\u0000-\u007F])+'?\w*");
-            var firstWord = true;
-            foreach (Match word in matches)
+            var value = word.Value;
+            if (AllCapitals(value) || lookups.Contains(value))
             {
-                if (!AllCapitals(word.Value))
-                {
-                    result = ReplaceWithTitleCase(word, result, culture, firstWord);
-                }
-                firstWord = false;
+                continue;
             }
 
-            return result;
+            builder[word.Index] = textInfo.ToUpper(value[0]);
+            Overwrite(builder, word.Index + 1, textInfo.ToLower(value[1..]));
         }
 
-        private static bool AllCapitals(string input)
+        return builder.ToString();
+    }
+
+    static void Overwrite(StringBuilder builder, int index, string replacement) =>
+        builder
+            .Remove(index, replacement.Length)
+            .Insert(index, replacement);
+
+    static bool AllCapitals(string input)
+    {
+        foreach (var ch in input)
         {
-            return input.ToCharArray().All(char.IsUpper);
+            if (!char.IsUpper(ch))
+            {
+                return false;
+            }
         }
 
-        private static string ReplaceWithTitleCase(Match word, string source, CultureInfo culture, bool firstWord)
-        {
-            var articles = new List<string> { "a", "an", "the" };
-            var conjunctions = new List<string> { "and", "as", "but", "if", "nor", "or", "so", "yet" };
-            var prepositions = new List<string> { "as", "at", "by", "for", "in", "of", "off", "on", "to", "up", "via" };
-            
-            var wordToConvert = word.Value;
-            string replacement;
+        return true;
+    }
 
-            
-            if (firstWord || 
-                (!articles.Contains(wordToConvert) &&
-                !conjunctions.Contains(wordToConvert) &&
-                !prepositions.Contains(wordToConvert)))
-            {
-                replacement = culture.TextInfo.ToUpper(wordToConvert[0]) + culture.TextInfo.ToLower(wordToConvert.Remove(0, 1));
-                
-            }
-            else
-            {
-                replacement = culture.TextInfo.ToLower(wordToConvert);
-            }
-            return source.Substring(0, word.Index) + replacement + source.Substring(word.Index + word.Length);
-        }
+    static FrozenSet<string> lookups;
+
+    static ToTitleCase()
+    {
+        var articles = new List<string> { "a", "an", "the" };
+        var conjunctions = new List<string> { "and", "as", "but", "if", "nor", "or", "so", "yet" };
+        var prepositions = new List<string> { "as", "at", "by", "for", "in", "of", "off", "on", "to", "up", "via" };
+
+        lookups = articles.Concat(conjunctions).Concat(prepositions).ToFrozenSet();
     }
 }

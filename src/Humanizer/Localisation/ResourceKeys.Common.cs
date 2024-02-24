@@ -1,21 +1,12 @@
-﻿using System;
+﻿namespace Humanizer;
 
-namespace Humanizer.Localisation
+public partial class ResourceKeys
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public partial class ResourceKeys
+    static void ValidateRange(int count)
     {
-        private const string Single = "Single";
-        private const string Multiple = "Multiple";
-
-        private static void ValidateRange(int count)
+        if (count < 0)
         {
-            if (count < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(count));
-            }
+            throw new ArgumentOutOfRangeException(nameof(count));
         }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
+﻿namespace Humanizer;
 
-namespace Humanizer.Localisation.DateToOrdinalWords
+class FrDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
 {
-    internal class FrDateToOrdinalWordsConverter : DefaultDateToOrdinalWordConverter
+    public override string Convert(DateTime date)
     {
-        public override string Convert(DateTime date)
-        {
-            var day = date.Day > 1 ? date.Day.ToString() : date.Day.Ordinalize();
-            return day + date.ToString(" MMMM yyyy");
-        }
+        var day = date.Day > 1 ? date.Day.ToString() : date.Day.Ordinalize();
+        return day + date.ToString(" MMMM yyyy");
     }
 }

@@ -1,64 +1,10 @@
-﻿<p><img src="https://raw.github.com/Humanizr/Humanizer/master/logo.png" alt="Logo" style="max-width:100%;" /></p>
+﻿# <img width="30px" src="logo.png" /> Humanizer
 
-[<img align="right" width="100px" src="https://dotnetfoundation.org/img/logo_big.svg" />](https://dotnetfoundation.org/projects?type=project&q=humanizer)
+Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
-Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities. It is part of the [.NET Foundation](https://www.dotnetfoundation.org/), and operates under their [code of conduct](https://www.dotnetfoundation.org/code-of-conduct). It is licensed under the [MIT](https://opensource.org/licenses/MIT) (an OSI approved license).
 
-[![Join the chat at https://gitter.im/Humanizr/Humanizer](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Humanizr/Humanizer)
+## Install</a>
 
-### Table of contents
- - [Install](#install)
-   - [Specifying Languages (Optional)](#specify-lang)
-   - [Known Installation Issues](#known-issues)
-   - [Use in ASP.NET 4.x MVC Views](#aspnet4mvc)
- - [Features](#features)
-   - [Humanize String](#humanize-string)
-   - [Dehumanize String](#dehumanize-string)
-   - [Transform String](#transform-string)
-   - [Truncate String](#truncate-string)
-   - [Format String](#format-string)
-   - [Humanize Enums](#humanize-enums)
-   - [Dehumanize Enums](#dehumanize-enums)
-   - [Humanize DateTime](#humanize-datetime)
-   - [Humanize TimeSpan](#humanize-timespan)
-   - [Humanize Collections](#humanize-collections)
-   - [Inflector methods](#inflector-methods)
-     - [Pluralize](#pluralize)
-     - [Singularize](#singularize)
-     - [Adding Words](#adding-words)
-     - [ToQuantity](#toquantity)
-     - [Ordinalize](#ordinalize)
-     - [Titleize](#titleize)
-     - [Pascalize](#pascalize)
-     - [Camelize](#camelize)
-     - [Underscore](#underscore)
-     - [Dasherize & Hyphenate](#dasherize--hyphenate)
-	 - [Kebaberize](#kebaberize)
-   - [Fluent date](#fluent-date)
-   - [Number to Numbers](#number-to-numbers)
-   - [Number to words](#number-to-words)
-   - [Number to ordinal words](#number-to-ordinal-words)
-   - [DateTime to ordinal words](#date-time-to-ordinal-words)
-   - [TimeOnly to Clock Notation](#time-only-to-clock-notation)
-   - [Roman numerals](#roman-numerals)
-   - [Metric numerals](#metric-numerals)
-   - [ByteSize](#bytesize)
-   - [Heading to words](#heading-to-words)
-   - [Tupleize](#tupleize)
-   - [Time unit to symbol](#timeunit-to-symbol)
- - [Mix this into your framework to simplify your life](#mix-this-into-your-framework-to-simplify-your-life) -
- - [How to contribute?](#how-to-contribute)
- - [Continuous Integration from AppVeyor](#continuous-integration)
- - [Related Projects](#related-projects)
-   - [Humanizer ReSharper Annotations](#humanizer-resharper-annotations)
-   - [PowerShell Humanizer](#powershell-humanizer)
-   - [Humanizer JVM](#humanizerjvm)
-   - [Humanizer.node](#humanizernode)
- - [Main contributors](#main-contributors)
- - [License](#license)
- - [Icon](#icon)
-
-## <a id="install">Install</a>
 You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer):
 
 **English only**: `Humanizer.Core`
@@ -69,14 +15,10 @@ Humanizer is a .NET Standard Class Library with support for .NET Standard 1.0+ (
 
 Also Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
 
-For pre-release builds, [Azure Artifacts feed](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=feed&feed=Humanizer) is available where you can pull down CI packages from the latest codebase. The feed URL is:
 
-  - [![Humanizer package in Humanizer feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet/5829eea4-55e5-4a15-ba8d-1de5daaafcea/_apis/public/Packaging/Feeds/b39738c7-8e60-4bfb-825f-29c47261a5cc/Packages/db81f806-d0b5-43a3-99f4-3d27606376b8/Badge)](https://dev.azure.com/dotnet/Humanizer/_packaging?_a=package&feed=b39738c7-8e60-4bfb-825f-29c47261a5cc&package=db81f806-d0b5-43a3-99f4-3d27606376b8&preferRelease=true) `https://pkgs.dev.azure.com/dotnet/Humanizer/_packaging/Humanizer/nuget/v3/index.json`
+### Specify Languages (Optional)
 
-### <a id="specify-lang">Specify Languages (Optional)</a>
-New in Humanizer 2.0 is the option to choose which localization packages you wish to use. You choose which packages
-based on what NuGet package(s) you install. By default, the main `Humanizer` 2.0 package installs all supported languages
-exactly like it does in 1.x. If you're not sure, then just use the main `Humanizer` package.
+You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` 2.0 package installs all supported languages exactly like it does in 1.x. If you're not sure, then just use the main `Humanizer` package.
 
 Here are the options:
 
@@ -86,9 +28,12 @@ Here are the options:
 
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
-## <a id="features">Features</a>
 
-### <a id="humanize-string">Humanize String</a>
+## Features
+
+
+### Humanize String
+
 `Humanize` string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
 The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences.
 
@@ -125,14 +70,18 @@ You may also specify the desired letter casing:
 
  > The `LetterCasing` API and the methods accepting it are legacy from V0.2 era and will be deprecated in the future. Instead of that, you can use `Transform` method explained below.
 
-### <a id="dehumanize-string">Dehumanize String</a>
+
+### Dehumanize String
+
 Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
 
 ```C#
 "Pascal case input string is turned into sentence".Dehumanize() => "PascalCaseInputStringIsTurnedIntoSentence"
 ```
 
-### <a id="transform-string">Transform String</a>
+
+### Transform String
+
 There is a `Transform` method that supersedes `LetterCasing`, `ApplyCase` and `Humanize` overloads that accept `LetterCasing`.
 Transform method signature is as follows:
 
@@ -154,7 +103,9 @@ And there are some out of the box implementations of `IStringTransformer` for le
 The benefit of using `Transform` and `IStringTransformer` over `ApplyCase` and `LetterCasing` is that `LetterCasing` is an enum and you're limited to use what's in the framework
 while `IStringTransformer` is an interface you can implement in your codebase once and use it with `Transform` method allowing for easy extension.
 
-### <a id="truncate-string">Truncate String</a>
+
+### Truncate String
+
 You can truncate a `string` using the `Truncate` method:
 
 ```c#
@@ -199,26 +150,9 @@ Default is the right as shown in the examples above. The examples below show how
 "Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords, TruncateFrom.Left) => "---to truncate"
 ```
 
-### <a id="format-string">Format String</a>
-You can format a `string` using the `FormatWith()` method:
 
-```c#
-"To be formatted -> {0}/{1}.".FormatWith(1, "A") => "To be formatted -> 1/A."
-```
+### Humanize Enums
 
-This is an extension method based on `String.Format`, so exact rules applies to it.
-If `format` is null, it'll throw `ArgumentNullException`.
-If passed a fewer number for arguments, it'll throw `String.FormatException` exception.
-
-You also can specify the culture to use explicitly as the first parameter for the `FormatWith()` method:
-
-```c#
-"{0:N2}".FormatWith(new CultureInfo("ru-RU"), 6666.66) => "6 666,66"
-```
-
-If a culture is not specified, current thread's current culture is used.
-
-### <a id="humanize-enums">Humanize Enums</a>
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
 
 ```C#
@@ -269,7 +203,9 @@ EnumUnderTest.Member.Humanize() => "content" // from Project.Resources found und
 
 Hopefully this will help avoid littering enums with unnecessary attributes!
 
-### <a id="dehumanize-enums">Dehumanize Enums</a>
+
+### Dehumanize Enums
+
 Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
 ```C#
@@ -299,7 +235,9 @@ which can be used like:
 By default both methods throw a `NoMatchFoundException` when they cannot match the provided input against the target enum.
 In the non-generic method you can also ask the method to return null by setting the second optional parameter to `NoMatch.ReturnsNull`.
 
-### <a id="humanize-datetime">Humanize DateTime</a>
+
+### Humanize DateTime
+
 You can `Humanize` an instance of `DateTime` or `DateTimeOffset` and get back a string telling how far back or forward in time that is:
 
 ```C#
@@ -360,7 +298,9 @@ The default precision is set to .75 but you can pass your desired precision too.
 
 **No dehumanization for dates as `Humanize` is a lossy transformation and the human friendly date is not reversible**
 
-### <a id="humanize-timespan">Humanize TimeSpan</a>
+
+### Humanize TimeSpan
+
 You can call `Humanize` on a `TimeSpan` to a get human friendly representation for it:
 
 ```C#
@@ -462,9 +402,22 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => 
 If words are preferred to numbers, a `toWords: true` parameter can be set to convert the numbers in a humanized TimeSpan to words:
 ```C#
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, toWords: true) => "two weeks, one day, one hour"
-````
+```
 
-### <a id="humanize-collections">Humanize Collections</a>
+By calling `ToAge`, a `TimeSpan` can also be expressed as an age.
+For cultures that do not define an age expression, the result will be the same as calling `Humanize` _(but with a default `maxUnit` equal to `TimeUnit.Year`)_. 
+
+```C#
+// in en-US culture
+TimeSpan.FromDays(750).ToAge() => "2 years old"
+
+// in fr culture
+TimeSpan.FromDays(750).ToAge() => "2 ans"
+```
+
+
+### Humanize Collections
+
 You can call `Humanize` on any `IEnumerable` to get a nicely formatted string representing the objects in the collection. By default `ToString()` will be called on each item to get its representation but a formatting function may be passed to `Humanize` instead. Additionally, a default separator is provided ("and" in English), but a different separator may be passed into `Humanize`.
 
 For instance:
@@ -502,10 +455,14 @@ Items are trimmed and blank (NullOrWhitespace) items are skipped. This results i
 
 You can provide your own collection formatter by implementing `ICollectionFormatter` and registering it with `Configurator.CollectionFormatters`.
 
-### <a id="inflector-methods">Inflector methods</a>
+
+### Inflector methods
+
 There are also a few inflector methods:
 
-#### <a id="pluralize">Pluralize</a>
+
+#### Pluralize
+
 `Pluralize` pluralizes the provided input while taking irregular and uncountable words into consideration:
 
 ```C#
@@ -524,7 +481,9 @@ Normally you would call `Pluralize` on a singular word but if you're unsure abou
 
 The overload of `Pluralize` with `plurality` argument is obsolete and was removed in version 2.0.
 
-#### <a id="singularize">Singularize</a>
+
+#### Singularize
+
 `Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
 
 ```C#
@@ -543,7 +502,9 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 
 The overload of `Singularize` with `plurality` argument is obsolete and was removed in version 2.0.
 
-## <a id="adding-words">Adding Words</a>
+
+## Adding Words
+
 Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabulary` used by `Inflector`):
 
 ```C#
@@ -566,7 +527,9 @@ Vocabularies.Default.AddSingular("(vert|ind)ices$", "$1ex");
 
 ```
 
-#### <a id="toquantity">ToQuantity</a>
+
+#### ToQuantity
+
 Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
 
 ```C#
@@ -603,7 +566,9 @@ There is also an overload that allows you to format the number. You can pass in 
 "cases".ToQuantity(12000, "N0") => "12,000 cases"
 ```
 
-#### <a id="ordinalize">Ordinalize</a>
+
+#### Ordinalize
+
 `Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th:
 
 ```C#
@@ -643,31 +608,41 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 "3".Ordinalize(GrammaticalGender.Masculine, WordForm.Normal) => "3.º"
 ```
 
-#### <a id="titleize">Titleize</a>
+
+#### Titleize
+
 `Titleize` converts the input words to Title casing; equivalent to `"some title".Humanize(LetterCasing.Title)`
 
-#### <a id="pascalize">Pascalize</a>
+
+#### Pascalize
+
 `Pascalize` converts the input words to UpperCamelCase, also removing underscores and spaces:
 
 ```C#
 "some_title for something".Pascalize() => "SomeTitleForSomething"
 ```
 
-#### <a id="camelize">Camelize</a>
+
+#### Camelize
+
 `Camelize` behaves identically to `Pascalize`, except that the first character is lower case:
 
 ```C#
 "some_title for something".Camelize() => "someTitleForSomething"
 ```
 
-#### <a id="underscore">Underscore</a>
+
+#### Underscore
+
 `Underscore` separates the input words with underscore:
 
 ```C#
 "SomeTitle".Underscore() => "some_title"
 ```
 
-#### <a id="dasherize--hyphenate">Dasherize & Hyphenate</a>
+
+#### Dasherize & Hyphenate
+
 `Dasherize` and `Hyphenate` replace underscores with dashes in the string:
 
 ```C#
@@ -675,14 +650,18 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 "some_title".Hyphenate() => "some-title"
 ```
 
-#### <a id="kebaberize">Kebaberize</a>
+
+#### Kebaberize
+
 `Kebaberize` separates the input words with hyphens and all words are converted to lowercase
 
 ```C#
 "SomeText".Kebaberize() => "some-text"
 ```
 
-### <a id="fluent-date">Fluent Date</a>
+
+### Fluent Date
+
 Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follows:
 
 `TimeSpan` methods:
@@ -753,7 +732,9 @@ someDateTime.AtMidnight()
 
 Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
-### <a id="number-to-numbers">Number to numbers</a>
+
+### Number to numbers
+
 Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:
 
 ```C#
@@ -761,7 +742,9 @@ Humanizer provides a fluent API that produces (usually big) numbers in a clearer
 3.Hundreds().Thousands() => 300000
 ```
 
-### <a id="number-towords">Number to words</a>
+
+### Number to words
+
 Humanizer can change numbers to words using the `ToWords` extension:
 
 ```C#
@@ -821,7 +804,9 @@ Passing `wordForm` argument in when it is not applicable will not make any diffe
 21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Masculine, new CultureInfo("en-US")) => "twenty-one thousand five hundred and one"
 ```
 
-### <a id="number-toordinalwords">Number to ordinal words</a>
+
+### Number to ordinal words
+
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
 
 ```C#
@@ -884,7 +869,9 @@ Passing `wordForm` argument in when it is not applicable will not make any diffe
 43.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Abbreviation, new CultureInfo("en")) => "forty-third"
 ```
 
-### <a id="date-time-to-ordinal-words">DateTime to ordinal words</a>
+
+### DateTime to ordinal words
+
 This is kind of an extension of Ordinalize
 ```C#
 // for English UK locale
@@ -906,7 +893,9 @@ The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`
 
 Obviously this only applies to some cultures. For others passing case in doesn't make any difference in the result.
 
-### <a id="time-only-to-clock-notation">TimeOnly to Clock Notation</a>
+
+### TimeOnly to Clock Notation
+
 Extends TimeOnly to allow humanizing it to a clock notation
 ```C#
 // for English US locale
@@ -920,7 +909,9 @@ new TimeOnly(12, 0).ToClockNotation() => "meio-dia"
 new TimeOnly(14, 30).ToClockNotation() => "duas e meia"
 ```
 
-### <a id="roman-numerals">Roman numerals</a>
+
+### Roman numerals
+
 Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
 
 ```C#
@@ -947,7 +938,9 @@ Also the reverse operation using the `FromRoman` extension.
 ```
 Note that only integers smaller than 4000 can be converted to Roman numerals.
 
-### <a id="metric-numerals">Metric numerals</a>
+
+### Metric numerals
+
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
 
 ```C#
@@ -964,7 +957,9 @@ Also the reverse operation using the `FromMetric` extension.
 "100m".FromMetric() => 0.1
 ```
 
-### <a id="bytesize">ByteSize</a>
+
+### ByteSize
+
 Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
 Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
@@ -1109,23 +1104,25 @@ You can specify a format for the bytes part of the humanized output:
 // 18.49 GB/s
 ```
 
-### <a id="heading-to-words">Heading to words</a>
+
+### Heading to words
+
 Humanizer includes methods to change a numeric heading to words. The heading can be a `double` whereas the result will be a string. You can choose whether to return a full representation of the heading (e.g. north, east, south or west), a short representation (e.g. N, E, S, W) or a unicode arrow character (e.g. ↑, →, ↓, ←).
 
 ```C#
 360.ToHeading();
-// north
+// N
 720.ToHeading();
-// north
+// N
 ```
 
-In order to retrieve a short version of the heading you can use the following call:
+In order to retrieve a full version of the heading, use the following call:
 
 ```C#
-180.ToHeading(true);
-// S
-360.ToHeading(true);
-// N
+180.ToHeading(HeadingStyle.Full);
+// south
+360.ToHeading(HeadingStyle.Full);
+// north
 ```
 
 Please note that a textual representation has a maximum deviation of 11.25°.
@@ -1152,7 +1149,9 @@ In order to retrieve a heading based on the short text representation (e.g. N, E
 // 225
 ```
 
-### <a id="tupleize">Tupleize</a>
+
+### Tupleize
+
 Humanizer can change whole numbers into their 'tuple'  using `Tupleize`. For example:
 
 ```C#
@@ -1166,7 +1165,9 @@ Humanizer can change whole numbers into their 'tuple'  using `Tupleize`. For exa
 
 The numbers 1-10, 100 and 1000 will be converted into a 'named' tuple (i.e. "single", "double" etc.). Any other number "n" will be converted to "n-tuple".
 
-### <a id="timeunit-to-symbol">Time unit to symbol</a>
+
+### Time unit to symbol
+
 Humanizer can translate time units to their symbols:
 
 ```C#
@@ -1178,12 +1179,14 @@ TimeUnit.Year.ToSymbol();
 // y
 ```
 
-## <a id="mix-this-into-your-framework-to-simplify-your-life">Mix this into your framework to simplify your life</a>
+
+## Mix this into your framework to simplify your life
+
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
-You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
+You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/v2.7.9/samples/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
 
-This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
+This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/Humanizr/Humanizer/blob/v2.7.9/samples/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
 ```C#
 using System;
@@ -1194,39 +1197,36 @@ using System.Linq;
 using System.Web.Mvc;
 using Humanizer;
 
-namespace YourApp
+public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
 {
-    public class HumanizerMetadataProvider : DataAnnotationsModelMetadataProvider
+    protected override ModelMetadata CreateMetadata(
+        IEnumerable<Attribute> attributes,
+        Type containerType,
+        Func<object> modelAccessor,
+        Type modelType,
+        string propertyName)
     {
-        protected override ModelMetadata CreateMetadata(
-            IEnumerable<Attribute> attributes,
-            Type containerType,
-            Func<object> modelAccessor,
-            Type modelType,
-            string propertyName)
-        {
-            var propertyAttributes = attributes.ToList();
-            var modelMetadata = base.CreateMetadata(propertyAttributes, containerType, modelAccessor, modelType, propertyName);
+        var propertyAttributes = attributes.ToList();
+        var modelMetadata = base.CreateMetadata(propertyAttributes, containerType, modelAccessor, modelType, propertyName);
 
-            if (IsTransformRequired(modelMetadata, propertyAttributes))
-                modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize();
+        if (IsTransformRequired(modelMetadata, propertyAttributes))
+            modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize();
 
-            return modelMetadata;
-        }
+        return modelMetadata;
+    }
 
-        private static bool IsTransformRequired(ModelMetadata modelMetadata, IList<Attribute> propertyAttributes)
-        {
-            if (string.IsNullOrEmpty(modelMetadata.PropertyName))
-                return false;
+    private static bool IsTransformRequired(ModelMetadata modelMetadata, IList<Attribute> propertyAttributes)
+    {
+        if (string.IsNullOrEmpty(modelMetadata.PropertyName))
+            return false;
 
-            if (propertyAttributes.OfType<DisplayNameAttribute>().Any())
-                return false;
+        if (propertyAttributes.OfType<DisplayNameAttribute>().Any())
+            return false;
 
-            if (propertyAttributes.OfType<DisplayAttribute>().Any())
-                return false;
+        if (propertyAttributes.OfType<DisplayAttribute>().Any())
+            return false;
 
-            return true;
-        }
+        return true;
     }
 }
 ```
@@ -1277,48 +1277,48 @@ No need to mention that if you want title casing for your labels you can chain t
 modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.TitleCase);
 ```
 
-## <a id="known-issues">Known installation issues and workarounds</a>
-Due to a [bug](https://github.com/dotnet/cli/issues/3396) in the CLI tools, the main `Humanizer` package and it's language packages will fail to install. As temporary workaround, until that bug is fixed, use `Humanizer.xproj` instead. It contains all of the languages.
 
-## <a id="aspnet4mvc">Use in ASP.NET 4.x MVC Views</a>
+## Use in ASP.NET 4.x MVC Views
+
 Humanizer is a Portable Class Library. There is currently [an issue](https://stackoverflow.com/questions/16675171/what-does-the-web-config-compilation-assemblies-element-do) if you try to use PCL's in an MVC view since the MVC views do not share the same build system as the regular project. You must specify all references in the `web.config` file, including ones the project system normally automatically adds.
 
 If you encounter errors saying that you must add a reference to either `System.Runtime` or `System.Globalization`, this applies to you. The solution is to add the contract references to your `web.config` as listed [here](https://stackoverflow.com/a/19942274/738188). Note that this applies to any PCL you use in an MVC view, not just Humanizer.
 
-## <a id="how-to-contribute">How to contribute?</a>
 
-Please see <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.
+## Continuous Integration from Azure DevOps
 
-## <a id="continuous-integration">Continuous Integration from Azure DevOps</a>
-Humanizer project is built & tested continuously by Azure DevOps (more details [here](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR. Feel free to jump in and <a href="https://github.com/Humanizr/Humanizer/blob/master/CONTRIBUTING.md">contribute</a> some green PRs!
+Humanizer project is built & tested continuously by Azure DevOps (more details [here](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR.
 
-The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=master)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
+The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 
-## <a id="related-projects">Related projects</a>
+
+## Related projects
+
 Below is a list of related open source projects:
 
-### <a id="humanizer-resharper-annotations">Humanizer ReSharper Annotations</a>
-If you use ReSharper, annotations for Humanizer are available in the [Humanizer.Annotations package](https://resharper-plugins.jetbrains.com/packages/Humanizer.Annotations/), which you can obtain via the ReSharper Extension Manager.
+
+### Humanizer ReSharper Annotations
+
+If using ReSharper, annotations for Humanizer are available in the [Humanizer.Annotations package](https://resharper-plugins.jetbrains.com/packages/Humanizer.Annotations/), which you can obtain via the ReSharper Extension Manager.
 These annotations do not yet cover the entire library, but [pull requests are always welcome!](https://github.com/enduracode/humanizer-annotations).
 
-### <a id="powershell-humanizer">PowerShell Humanizer</a>
+
+### PowerShell Humanizer
+
 [PowerShell Humanizer](https://github.com/dfinke/PowerShellHumanizer) is a PowerShell module that wraps Humanizer.
 
-### <a id="humanizerjvm">Humanizer JVM</a>
+
+### Humanizer JVM
+
 [Humanizer.jvm](https://github.com/MehdiK/Humanizer.jvm) is an adaptation of the Humanizer framework for .Net which is made for the jvm and is written in Kotlin.
 Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
-### <a id="humanizernode">Humanizer.node</a>
+
+### Humanizer.node
+
 [Humanizer.node](https://github.com/fakoua/humanizer.node) is a TypeScript port of the Humanizer framework.
 
-## <a id="main-contributors">Main contributors</a>
- - Mehdi Khalili ([@MehdiKhalili](https://twitter.com/MehdiKhalili))
- - Claire Novotny ([@clairernovotny](https://twitter.com/clairernovotny))
- - Alexander I. Zaytsev ([@hazzik](https://github.com/hazzik))
- - Max Malook ([@mexx](https://github.com/mexx))
 
-## <a id="license">License</a>
-Humanizer is released under the MIT License. See the [bundled LICENSE](https://github.com/Humanizr/Humanizer/blob/master/LICENSE) file for details.
+## Icon
 
-## <a id="icon">Icon</a>
 Icon created by [Tyrone Rieschiek](https://twitter.com/Inkventive)

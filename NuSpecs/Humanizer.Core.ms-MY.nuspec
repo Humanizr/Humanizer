@@ -17,7 +17,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\netstandard1.0\ms-MY\*.*" target="lib\netstandard1.0\ms-MY" />
     <file src="Humanizer\bin\Release\netstandard2.0\ms-MY\*.*" target="lib\netstandard2.0\ms-MY" />
     <file src="..\logo.png" target="logo.png" />
   </files>

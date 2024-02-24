@@ -1,12 +1,12 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class EnglishOrdinalizer : DefaultOrdinalizer
 {
-    internal class EnglishOrdinalizer : DefaultOrdinalizer
-    {
         public override string Convert(int number, string numberString)
         {
             var nMod100 = number % 100;
 
-            if (nMod100 is >= 11 and <= 13)
+        if (nMod100 is >= 11 and <= 20)
             {
                 return numberString + "th";
             }
@@ -20,4 +20,3 @@
             };
         }
     }
-}

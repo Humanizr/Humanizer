@@ -1,39 +1,35 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class UkrainianOrdinalizer : DefaultOrdinalizer
 {
-    internal class UkrainianOrdinalizer : DefaultOrdinalizer
+    public override string Convert(int number, string numberString) =>
+        Convert(number, numberString, GrammaticalGender.Masculine);
+
+    public override string Convert(int number, string numberString, GrammaticalGender gender)
     {
-        public override string Convert(int number, string numberString)
+        if (gender == GrammaticalGender.Masculine)
         {
-            return Convert(number, numberString, GrammaticalGender.Masculine);
+            return numberString + "-й";
         }
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
+        if (gender == GrammaticalGender.Feminine)
         {
-
-            if (gender == GrammaticalGender.Masculine)
+            if (number % 10 == 3)
             {
-                return numberString + "-й";
+                return numberString + "-я";
             }
 
-            if (gender == GrammaticalGender.Feminine)
-            {
-                if (number % 10 == 3)
-                {
-                    return numberString + "-я";
-                }
-
-                return numberString + "-а";
-            }
-
-            if (gender == GrammaticalGender.Neuter)
-            {
-                if (number % 10 == 3)
-                {
-                    return numberString + "-є";
-                }
-            }
-
-            return numberString + "-е";
+            return numberString + "-а";
         }
+
+        if (gender == GrammaticalGender.Neuter)
+        {
+            if (number % 10 == 3)
+            {
+                return numberString + "-є";
+            }
+        }
+
+        return numberString + "-е";
     }
 }

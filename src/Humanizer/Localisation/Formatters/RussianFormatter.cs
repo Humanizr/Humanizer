@@ -1,34 +1,30 @@
-﻿using Humanizer.Localisation.GrammaticalNumber;
+﻿namespace Humanizer;
 
-namespace Humanizer.Localisation.Formatters
+class RussianFormatter() :
+    DefaultFormatter("ru")
 {
-    internal class RussianFormatter : DefaultFormatter
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        public RussianFormatter()
-            : base("ru")
-        {
-        }
-
-        protected override string GetResourceKey(string resourceKey, int number)
-        {
-            var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(number);
-            var suffix = GetSuffix(grammaticalNumber);
-            return resourceKey + suffix;
-        }
-
-        private string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
-        {
-            if (grammaticalNumber == RussianGrammaticalNumber.Singular)
-            {
-                return "_Singular";
-            }
-
-            if (grammaticalNumber == RussianGrammaticalNumber.Paucal)
-            {
-                return "_Paucal";
-            }
-
-            return "";
-        }
+        var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(number);
+        var suffix = GetSuffix(grammaticalNumber);
+        return resourceKey + suffix;
     }
+
+    protected override string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
+        number.ToWords(GetUnitGender(unit), culture);
+
+    static string GetSuffix(RussianGrammaticalNumber grammaticalNumber) =>
+        grammaticalNumber switch
+        {
+            RussianGrammaticalNumber.Singular => "_Singular",
+            RussianGrammaticalNumber.Paucal => "_Paucal",
+            _ => ""
+        };
+
+    static GrammaticalGender GetUnitGender(TimeUnit unit) =>
+        unit switch
+        {
+            TimeUnit.Hour or TimeUnit.Day or TimeUnit.Month or TimeUnit.Year => GrammaticalGender.Masculine,
+            _ => GrammaticalGender.Feminine
+        };
 }

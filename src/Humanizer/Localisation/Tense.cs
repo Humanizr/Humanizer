@@ -1,18 +1,10 @@
-﻿namespace Humanizer.Localisation
-{
-    /// <summary>
-    /// Enumerates the possible time references; past or future.
-    /// </summary>
-    public enum Tense
-    {
-        /// <summary>
-        /// Indicates the future.
-        /// </summary>
-        Future,
+﻿namespace Humanizer;
 
-        /// <summary>
-        /// Indicates the past.
-        /// </summary>
-        Past
-    }
+/// <summary>
+/// Enumerates the possible time references; past or future.
+/// </summary>
+public enum Tense
+{
+    Future,
+    Past
 }
