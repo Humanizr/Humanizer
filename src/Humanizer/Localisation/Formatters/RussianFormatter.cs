@@ -10,18 +10,21 @@ class RussianFormatter() :
         return resourceKey + suffix;
     }
 
-    static string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
-    {
-        if (grammaticalNumber == RussianGrammaticalNumber.Singular)
-        {
-            return "_Singular";
-        }
+    protected override string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
+        number.ToWords(GetUnitGender(unit), culture);
 
-        if (grammaticalNumber == RussianGrammaticalNumber.Paucal)
+    static string GetSuffix(RussianGrammaticalNumber grammaticalNumber) =>
+        grammaticalNumber switch
         {
-            return "_Paucal";
-        }
+            RussianGrammaticalNumber.Singular => "_Singular",
+            RussianGrammaticalNumber.Paucal => "_Paucal",
+            _ => ""
+        };
 
-        return "";
-    }
+    static GrammaticalGender GetUnitGender(TimeUnit unit) =>
+        unit switch
+        {
+            TimeUnit.Hour or TimeUnit.Day or TimeUnit.Month or TimeUnit.Year => GrammaticalGender.Masculine,
+            _ => GrammaticalGender.Feminine
+        };
 }

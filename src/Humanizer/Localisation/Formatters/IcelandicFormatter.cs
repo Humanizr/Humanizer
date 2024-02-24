@@ -1,40 +1,19 @@
 ﻿namespace Humanizer;
 
 class IcelandicFormatter() :
-    DefaultFormatter(LocaleCode)
+    DefaultFormatter("is")
 {
-    const string LocaleCode = "is";
-    readonly CultureInfo localCulture = new(LocaleCode);
-
     public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
         base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');
 
-    protected override string Format(string resourceKey, int number, bool toWords = false)
-    {
-        var resourceString = Resources.GetResource(GetResourceKey(resourceKey, number), localCulture);
+    protected override string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
+        number.ToWords(GetUnitGender(unit), culture);
 
-        if (toWords)
+    static GrammaticalGender GetUnitGender(TimeUnit unit) =>
+        unit switch
         {
-            var unitGender = GetGrammaticalGender(resourceString);
-            return string.Format(resourceString, number.ToWords(unitGender, localCulture));
-        }
-
-        return string.Format(resourceString, number);
-    }
-
-    static GrammaticalGender GetGrammaticalGender(string resource)
-    {
-        if (resource.Contains(" mán") ||
-            resource.Contains(" dag"))
-        {
-            return GrammaticalGender.Masculine;
-        }
-
-        if (resource.Contains(" ár"))
-        {
-            return GrammaticalGender.Neuter;
-        }
-
-        return GrammaticalGender.Feminine;
-    }
+            TimeUnit.Day or TimeUnit.Month => GrammaticalGender.Masculine,
+            TimeUnit.Year => GrammaticalGender.Neuter,
+            _ => GrammaticalGender.Feminine
+        };
 }
