@@ -97,3 +97,6 @@ src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.receive
 .DS_Store
 /samples/Humanizer.MvcSample/Humanizer.MvcSample.sln
 /src/Humanizer/Properties/launchSettings.json
+
+
+*.received.*
