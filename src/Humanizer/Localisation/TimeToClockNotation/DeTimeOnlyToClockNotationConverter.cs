@@ -1,8 +1,8 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 using System;
 
-namespace Humanizer.Localisation.TimeToClockNotation;
+namespace Humanizer;
 
 internal class DeTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
