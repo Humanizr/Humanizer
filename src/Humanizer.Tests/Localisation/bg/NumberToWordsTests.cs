@@ -37,15 +37,21 @@ public class NumberToWordsTests
     [InlineData(111, "сто и единадесет")]
     [InlineData(55, "петдесет и пет")]
     [InlineData(555, "петстотин петдесет и пет")]
+    [InlineData(1000, "една хиляда")]
+    [InlineData(2000, "две хиляди")]
     [InlineData(4213, "четири хиляди двеста и тринадесет")]
     [InlineData(5000, "пет хиляди")]
     [InlineData(28205, "двадесет и осем хиляди двеста и пет")]
     [InlineData(35000, "тридесет и пет хиляди")]
     [InlineData(352192, "триста петдесет и две хиляди сто деветдесет и две")]
+    [InlineData(1000000, "един милион")]
+    [InlineData(2000000, "два милиона")]
     [InlineData(4000210, "четири милиона двеста и десет")]
     [InlineData(5200, "пет хиляди и двеста")]
     [InlineData(1125000, "един милион и сто двадесет и пет хиляди")]
     [InlineData(1000000000, "един милиард")]
+    [InlineData(2000000000, "два милиарда")]
+    [InlineData(3000000000, "три милиарда")]
     public void ToWordsBg(long number, string expected) =>
         Assert.Equal(expected, number.ToWords());
 
@@ -79,6 +85,16 @@ public class NumberToWordsTests
     [InlineData(21, "двадесет и първи")]
     [InlineData(22, "двадесет и втори")]
     [InlineData(35, "тридесет и пети")]
+    [InlineData(100, "стотен")]
+    [InlineData(111, "сто и единадесети")]
+    [InlineData(200, "двестотен")]
+    [InlineData(1000, "една хиляден")]
+    [InlineData(1111, "хиляда сто и единадесети")]
+    [InlineData(10000, "десет хиляден")]
+    [InlineData(12345, "дванадесет хиляди триста четиридесет и пети")]
+    [InlineData(12000, "дванадесет хиляден")]
+    [InlineData(100000, "сто хиляден")]
+    [InlineData(1000000, "милионен")]
     public void ToOrdinalWordsMasculine(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Masculine));
 
@@ -112,7 +128,16 @@ public class NumberToWordsTests
     [InlineData(21, "двадесет и първа")]
     [InlineData(22, "двадесет и втора")]
     [InlineData(35, "тридесет и пета")]
-    public void ToOrdinalWordsFeminine(int number, string expected) =>
+    [InlineData(100, "стотна")]
+    [InlineData(111, "сто и единадесета")]
+    [InlineData(200, "двестотна")]
+    [InlineData(1000, "една хилядна")]
+    [InlineData(1111, "една хиляда сто и единадесета")]
+    [InlineData(10000, "десет хилядна")]
+    [InlineData(12345, "дванадесет хиляди триста четиридесет и пета")]
+    [InlineData(12000, "дванадесет хилядна")]
+    [InlineData(100000, "сто хилядна")]
+    [InlineData(1000000, "милионен")]   public void ToOrdinalWordsFeminine(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Feminine));
 
     [Theory]
@@ -145,6 +170,15 @@ public class NumberToWordsTests
     [InlineData(21, "двадесет и първо")]
     [InlineData(22, "двадесет и второ")]
     [InlineData(35, "тридесет и пето")]
+    [InlineData(100, "стотно")]
+    [InlineData(111, "сто и единадесето")]
+    [InlineData(200, "двестотно")]
+    [InlineData(1000, "една хилядно")]
+    [InlineData(1111, "една хиляда сто и единадесето")]
+    [InlineData(10000, "десет хилядно")]
+    [InlineData(12345, "дванадесет хиляди триста четиридесет и пето")]
+    [InlineData(12000, "дванадесет хилядно")]
+    [InlineData(100000, "сто хилядно")]
     public void ToOrdinalWordsNeuter(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords(GrammaticalGender.Neuter));
 }
