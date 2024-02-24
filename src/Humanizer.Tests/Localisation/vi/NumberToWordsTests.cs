@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.vi;
+﻿namespace Humanizer.Tests.Localisation.vi;
 
 [UseCulture("vi")]
 public class NumberToWordsTests
