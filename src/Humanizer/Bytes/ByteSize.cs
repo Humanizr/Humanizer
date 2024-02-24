@@ -434,7 +434,7 @@ public struct ByteSize(double byteSize) :
             var lastNumber = num;
 
             // Cut the input string in half
-            var numberPart = s.Substring(0, lastNumber).Trim();
+            var numberPart = s[..lastNumber].Trim();
             var sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
 
             // Get the numeric part

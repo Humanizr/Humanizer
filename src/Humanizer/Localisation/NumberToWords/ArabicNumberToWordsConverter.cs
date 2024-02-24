@@ -220,7 +220,7 @@ class ArabicNumberToWordsConverter :
                 foreach (var kv in ordinals.Where(kv => word.EndsWith(kv.Key)))
                 {
                     // replace word with exception
-                    return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
+                    return word[..^kv.Key.Length] + kv.Value;
                 }
             }
             else if (number is > 10 and < 100)
@@ -238,7 +238,7 @@ class ArabicNumberToWordsConverter :
                     foreach (var kv in ordinals.Where(kv => oldPart.EndsWith(kv.Key)))
                     {
                         // replace word with exception
-                        newPart = oldPart.Substring(0, oldPart.Length - kv.Key.Length) + kv.Value;
+                        newPart = oldPart[..^kv.Key.Length] + kv.Value;
                     }
 
                     if (number > 19 && newPart == oldPart && oldPart.Length > 1)

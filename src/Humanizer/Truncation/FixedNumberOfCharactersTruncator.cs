@@ -22,7 +22,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
             if (truncationString.Length > length)
             {
-                return truncateFrom == TruncateFrom.Right ? value.Substring(0, length) : value.Substring(value.Length - length);
+                return truncateFrom == TruncateFrom.Right ? value[..length] : value[^length..];
             }
 
             var alphaNumericalCharactersProcessed = 0;
@@ -43,7 +43,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
                     if (alphaNumericalCharactersProcessed + truncationString.Length == length)
                     {
-                        return truncationString + value.Substring(i);
+                        return truncationString + value[i..];
                     }
                 }
             }
@@ -57,7 +57,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
                 if (alphaNumericalCharactersProcessed + truncationString.Length == length)
                 {
-                    return value.Substring(0, i + 1) + truncationString;
+                    return value[..(i + 1)] + truncationString;
                 }
             }
 

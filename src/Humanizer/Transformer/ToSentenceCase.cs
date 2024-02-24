@@ -11,7 +11,7 @@ class ToSentenceCase : ICulturedStringTransformer
 
         if (input.Length >= 1)
         {
-            return culture.TextInfo.ToUpper(input[0]) + input.Substring(1);
+            return culture.TextInfo.ToUpper(input[0]) + input[1..];
         }
 
         return culture.TextInfo.ToUpper(input);

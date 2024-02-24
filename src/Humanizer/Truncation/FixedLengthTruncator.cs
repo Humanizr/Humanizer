@@ -21,19 +21,19 @@ class FixedLengthTruncator : ITruncator
             if (truncationString == null || truncationString.Length > length)
             {
                 return truncateFrom == TruncateFrom.Right
-                    ? value.Substring(0, length)
-                    : value.Substring(value.Length - length);
+                    ? value[..length]
+                    : value[^length..];
             }
 
             if (truncateFrom == TruncateFrom.Left)
             {
                 return value.Length > length
-                    ? truncationString + value.Substring(value.Length - length + truncationString.Length)
+                    ? truncationString + value[(value.Length - length + truncationString.Length)..]
                     : value;
             }
 
             return value.Length > length
-                ? value.Substring(0, length - truncationString.Length) + truncationString
+                ? value[..(length - truncationString.Length)] + truncationString
                 : value;
         }
 }

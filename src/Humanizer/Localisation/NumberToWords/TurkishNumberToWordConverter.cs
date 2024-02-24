@@ -122,12 +122,12 @@ class TurkishNumberToWordConverter :
 
             if (word[^1] == 't')
             {
-                word = word.Substring(0, word.Length - 1) + 'd';
+                word = word[..^1] + 'd';
             }
 
             if (suffixFoundOnLastVowel)
             {
-                word = word.Substring(0, word.Length - 1);
+                word = word[..^1];
             }
 
             return $"{word}{wordSuffix}";

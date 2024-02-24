@@ -208,7 +208,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
 
                 if (number.EndsWith("as"))
                 {
-                    return number.Substring(0, number.Length - 1);
+                    return number[..^1];
                 }
 
                 if (number.EndsWith("i"))

@@ -54,7 +54,7 @@ class RomanianOrdinalNumberConverter
 
             if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci"))
             {
-                words = words.Substring(0, words.Length - 4) + "zece";
+                words = words[..^4] + "zece";
             }
             else if (gender == GrammaticalGender.Feminine && words.Contains("zeci") && (words.Contains("milioane") || words.Contains("miliarde")))
             {
@@ -63,14 +63,14 @@ class RomanianOrdinalNumberConverter
 
             if (gender == GrammaticalGender.Feminine && words.StartsWith("un "))
             {
-                words = words.Substring(2).TrimStart();
+                words = words[2..].TrimStart();
             }
 
             if (words.EndsWith("milioane"))
             {
                 if (gender == GrammaticalGender.Feminine)
                 {
-                    words = words.Substring(0, words.Length - 8) + "milioana";
+                    words = words[..^8] + "milioana";
                 }
             }
 
@@ -79,7 +79,7 @@ class RomanianOrdinalNumberConverter
             {
                 if (gender == GrammaticalGender.Feminine)
                 {
-                    words = words.Substring(0, words.Length - 6) + "milioana";
+                    words = words[..^6] + "milioana";
                 }
                 else
                 {
@@ -101,7 +101,7 @@ class RomanianOrdinalNumberConverter
                  words.EndsWith("e") ||
                  words.EndsWith("i")))
             {
-                words = words.Substring(0, words.Length - 1);
+                words = words[..^1];
             }
 
             return string.Format("{0} {1}{2}",

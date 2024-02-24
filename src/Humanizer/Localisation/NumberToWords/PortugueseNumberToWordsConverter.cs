@@ -165,17 +165,17 @@ class PortugueseNumberToWordsConverter : GenderedNumberToWordsConverter
 
             if (toWords.EndsWith("os"))
             {
-                return toWords.Substring(0, toWords.Length - 2) + "as";
+                return toWords[..^2] + "as";
             }
 
             if (toWords.EndsWith("um"))
             {
-                return toWords.Substring(0, toWords.Length - 2) + "uma";
+                return toWords[..^2] + "uma";
             }
 
             if (toWords.EndsWith("dois"))
             {
-                return toWords.Substring(0, toWords.Length - 4) + "duas";
+                return toWords[..^4] + "duas";
             }
 
             return toWords;

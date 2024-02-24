@@ -46,7 +46,7 @@ class FixedNumberOfWordsTruncator : ITruncator
 
                 if (numberOfWordsProcessed == length)
                 {
-                    return value.Substring(0, i) + truncationString;
+                    return value[..i] + truncationString;
                 }
             }
             else
@@ -74,7 +74,7 @@ class FixedNumberOfWordsTruncator : ITruncator
 
                 if (numberOfWordsProcessed == length)
                 {
-                    return truncationString + value.Substring(i + 1).TrimEnd();
+                    return truncationString + value[(i + 1)..].TrimEnd();
                 }
             }
             else

@@ -115,7 +115,7 @@ class DutchNumberToWordsConverter :
             foreach (var kv in OrdinalExceptions.Where(kv => word.EndsWith(kv.Key)))
             {
                 // replace word with exception
-                return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
+                return word[..^kv.Key.Length] + kv.Value;
             }
 
             // achtste
