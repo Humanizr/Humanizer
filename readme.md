@@ -1184,9 +1184,9 @@ TimeUnit.Year.ToSymbol();
 
 This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
-You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/master/src/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
+You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/v2.7.9/samples/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
 
-This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/Humanizr/Humanizer/blob/master/src/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
+This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/Humanizr/Humanizer/blob/v2.7.9/samples/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
 ```C#
 using System;
@@ -1289,7 +1289,7 @@ If you encounter errors saying that you must add a reference to either `System.R
 
 Humanizer project is built & tested continuously by Azure DevOps (more details [here](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR.
 
-The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=master)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
+The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 
 
 ## Related projects
