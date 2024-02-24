@@ -51,31 +51,16 @@ public static class TruncateExtensions
     [return: NotNullIfNotNull(nameof(input))]
     public static string? Truncate(this string? input, int length, string? truncationString, ITruncator truncator, TruncateFrom from = TruncateFrom.Right)
     {
-            if (truncator == null)
-            {
-                throw new ArgumentNullException(nameof(truncator));
-            }
-
-            if (input == null)
-            {
-                return null;
-            }
-
-            return truncator.Truncate(input, length, truncationString, from);
+        if (truncator == null)
+        {
+            throw new ArgumentNullException(nameof(truncator));
         }
-}
 
-/// <summary>
-/// Truncation location for humanizer
-/// </summary>
-public enum TruncateFrom
-{
-    /// <summary>
-    /// Truncate letters from the left (start) of the string
-    /// </summary>
-    Left,
-    /// <summary>
-    /// Truncate letters from the right (end) of the string
-    /// </summary>
-    Right
+        if (input == null)
+        {
+            return null;
+        }
+
+        return truncator.Truncate(input, length, truncationString, from);
+    }
 }

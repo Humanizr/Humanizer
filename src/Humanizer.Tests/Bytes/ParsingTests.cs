@@ -104,10 +104,7 @@ public class ParsingTests
         Assert.False(resultBool);
         Assert.Equal(new(), resultByteSize);
 
-        Assert.Throws<FormatException>(() =>
-        {
-            ByteSize.Parse(input);
-        });
+        Assert.Throws<FormatException>(() => ByteSize.Parse(input));
     }
 
     [Fact]
@@ -116,10 +113,7 @@ public class ParsingTests
 
     [Fact]
     public void ParseThrowsOnNull() =>
-        Assert.Throws<ArgumentNullException>(() =>
-        {
-            ByteSize.Parse(null!);
-        });
+        Assert.Throws<ArgumentNullException>(() => ByteSize.Parse(null!));
 
     [Fact]
     public void ParseBits() =>

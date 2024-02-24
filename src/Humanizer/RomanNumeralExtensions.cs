@@ -12,19 +12,45 @@ public static class RomanNumeralExtensions
     static readonly IDictionary<string, int> RomanNumerals =
         new Dictionary<string, int>(NumberOfRomanNumeralMaps)
         {
-            { "M",  1000 },
-            { "CM", 900 },
-            { "D",  500 },
-            { "CD", 400 },
-            { "C",  100 },
-            { "XC", 90 },
-            { "L",  50 },
-            { "XL", 40 },
-            { "X",  10 },
-            { "IX", 9 },
-            { "V",  5 },
-            { "IV", 4 },
-            { "I",  1 }
+            {
+                "M", 1000
+            },
+            {
+                "CM", 900
+            },
+            {
+                "D", 500
+            },
+            {
+                "CD", 400
+            },
+            {
+                "C", 100
+            },
+            {
+                "XC", 90
+            },
+            {
+                "L", 50
+            },
+            {
+                "XL", 40
+            },
+            {
+                "X", 10
+            },
+            {
+                "IX", 9
+            },
+            {
+                "V", 5
+            },
+            {
+                "IV", 4
+            },
+            {
+                "I", 1
+            }
         };
 
     static readonly Regex ValidRomanNumeral =
@@ -39,43 +65,47 @@ public static class RomanNumeralExtensions
     /// <returns>Human-readable number</returns>
     public static int FromRoman(this string input)
     {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            input = input.Trim().ToUpperInvariant();
-
-            var length = input.Length;
-
-            if (length == 0 || IsInvalidRomanNumeral(input))
-            {
-                throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(input));
-            }
-
-            var total = 0;
-            var i = length;
-
-            while (i > 0)
-            {
-                var digit = RomanNumerals[input[--i].ToString()];
-
-                if (i > 0)
-                {
-                    var previousDigit = RomanNumerals[input[i - 1].ToString()];
-
-                    if (previousDigit < digit)
-                    {
-                        digit -= previousDigit;
-                        i--;
-                    }
-                }
-
-                total += digit;
-            }
-
-            return total;
+        if (input == null)
+        {
+            throw new ArgumentNullException(nameof(input));
         }
+
+        input = input
+            .Trim()
+            .ToUpperInvariant();
+
+        var length = input.Length;
+
+        if (length == 0 || IsInvalidRomanNumeral(input))
+        {
+            throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(input));
+        }
+
+        var total = 0;
+        var i = length;
+
+        while (i > 0)
+        {
+            var digit = RomanNumerals[input[--i]
+                .ToString()];
+
+            if (i > 0)
+            {
+                var previousDigit = RomanNumerals[input[i - 1]
+                    .ToString()];
+
+                if (previousDigit < digit)
+                {
+                    digit -= previousDigit;
+                    i--;
+                }
+            }
+
+            total += digit;
+        }
+
+        return total;
+    }
 
     /// <summary>
     /// Converts the input to Roman number
@@ -85,28 +115,28 @@ public static class RomanNumeralExtensions
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the input is smaller than 1 or larger than 3999</exception>
     public static string ToRoman(this int input)
     {
-            const int minValue = 1;
-            const int maxValue = 3999;
-            const int maxRomanNumeralLength = 15;
+        const int minValue = 1;
+        const int maxValue = 3999;
+        const int maxRomanNumeralLength = 15;
 
-            if (input is < minValue or > maxValue)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            var sb = new StringBuilder(maxRomanNumeralLength);
-
-            foreach (var pair in RomanNumerals)
-            {
-                while (input / pair.Value > 0)
-                {
-                    sb.Append(pair.Key);
-                    input -= pair.Value;
-                }
-            }
-
-            return sb.ToString();
+        if (input is < minValue or > maxValue)
+        {
+            throw new ArgumentOutOfRangeException();
         }
+
+        var sb = new StringBuilder(maxRomanNumeralLength);
+
+        foreach (var pair in RomanNumerals)
+        {
+            while (input / pair.Value > 0)
+            {
+                sb.Append(pair.Key);
+                input -= pair.Value;
+            }
+        }
+
+        return sb.ToString();
+    }
 
     static bool IsInvalidRomanNumeral(string input) =>
         !ValidRomanNumeral.IsMatch(input);

@@ -1,14 +1,13 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer
+namespace Humanizer;
+
+class FrDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
 {
-    class FrDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
+    public override string Convert(DateOnly date)
     {
-        public override string Convert(DateOnly date)
-        {
-            var day = date.Day > 1 ? date.Day.ToString() : date.Day.Ordinalize();
-            return day + date.ToString(" MMMM yyyy");
-        }
+        var day = date.Day > 1 ? date.Day.ToString() : date.Day.Ordinalize();
+        return day + date.ToString(" MMMM yyyy");
     }
 }
 #endif

@@ -7,15 +7,16 @@ class FrenchOrdinalizer : DefaultOrdinalizer
 
     public override string Convert(int number, string numberString, GrammaticalGender gender)
     {
-            if (number == 1)
+        if (number == 1)
+        {
+            if (gender == GrammaticalGender.Feminine)
             {
-                if (gender == GrammaticalGender.Feminine)
-                {
-                    return numberString + "ère";
-                }
-                return numberString + "er";
+                return numberString + "ère";
             }
 
-            return numberString + "ème";
+            return numberString + "er";
         }
+
+        return numberString + "ème";
+    }
 }

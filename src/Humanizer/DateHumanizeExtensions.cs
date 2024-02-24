@@ -15,12 +15,12 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTime input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
-            var comparisonBase = dateToCompareAgainst ?? DateTime.UtcNow;
-            utcDate ??= input.Kind != DateTimeKind.Local;
-            comparisonBase = utcDate.Value ? comparisonBase.ToUniversalTime() : comparisonBase.ToLocalTime();
+        var comparisonBase = dateToCompareAgainst ?? DateTime.UtcNow;
+        utcDate ??= input.Kind != DateTimeKind.Local;
+        comparisonBase = utcDate.Value ? comparisonBase.ToUniversalTime() : comparisonBase.ToLocalTime();
 
-            return Configurator.DateTimeHumanizeStrategy.Humanize(input, comparisonBase, culture);
-        }
+        return Configurator.DateTimeHumanizeStrategy.Humanize(input, comparisonBase, culture);
+    }
 
     /// <summary>
     /// Turns the current or provided date into a human readable sentence, overload for the nullable DateTime, returning 'never' in case null
@@ -32,13 +32,15 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTime? input, bool? utcDate = null, DateTime? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
-            if (input.HasValue)
-            {
-                return Humanize(input.Value, utcDate, dateToCompareAgainst, culture);
-            }
-
-            return Configurator.GetFormatter(culture).DateHumanize_Never();
+        if (input.HasValue)
+        {
+            return Humanize(input.Value, utcDate, dateToCompareAgainst, culture);
         }
+
+        return Configurator
+            .GetFormatter(culture)
+            .DateHumanize_Never();
+    }
 
     /// <summary>
     /// Turns the current or provided date into a human readable sentence
@@ -49,10 +51,10 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
-            var comparisonBase = dateToCompareAgainst ?? DateTimeOffset.UtcNow;
+        var comparisonBase = dateToCompareAgainst ?? DateTimeOffset.UtcNow;
 
-            return Configurator.DateTimeOffsetHumanizeStrategy.Humanize(input, comparisonBase, culture);
-        }
+        return Configurator.DateTimeOffsetHumanizeStrategy.Humanize(input, comparisonBase, culture);
+    }
 
     /// <summary>
     /// Turns the current or provided date into a human readable sentence, overload for the nullable DateTimeOffset, returning 'never' in case null
@@ -63,13 +65,15 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateTimeOffset? input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
-            if (input.HasValue)
-            {
-                return Humanize(input.Value, dateToCompareAgainst, culture);
-            }
-
-            return Configurator.GetFormatter(culture).DateHumanize_Never();
+        if (input.HasValue)
+        {
+            return Humanize(input.Value, dateToCompareAgainst, culture);
         }
+
+        return Configurator
+            .GetFormatter(culture)
+            .DateHumanize_Never();
+    }
 
 #if NET6_0_OR_GREATER
     /// <summary>
@@ -81,9 +85,9 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateOnly input, DateOnly? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
-            var comparisonBase = dateToCompareAgainst ?? DateOnly.FromDateTime(DateTime.UtcNow);
-            return Configurator.DateOnlyHumanizeStrategy.Humanize(input, comparisonBase, culture);
-        }
+        var comparisonBase = dateToCompareAgainst ?? DateOnly.FromDateTime(DateTime.UtcNow);
+        return Configurator.DateOnlyHumanizeStrategy.Humanize(input, comparisonBase, culture);
+    }
 
     /// <summary>
     /// Turns the current or provided date into a human readable sentence, overload for the nullable DateTime, returning 'never' in case null
@@ -94,13 +98,15 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this DateOnly? input, DateOnly? dateToCompareAgainst = null, CultureInfo? culture = null)
     {
-            if (input.HasValue)
-            {
-                return Humanize(input.Value, dateToCompareAgainst, culture);
-            }
-
-            return Configurator.GetFormatter(culture).DateHumanize_Never();
+        if (input.HasValue)
+        {
+            return Humanize(input.Value, dateToCompareAgainst, culture);
         }
+
+        return Configurator
+            .GetFormatter(culture)
+            .DateHumanize_Never();
+    }
 
     /// <summary>
     /// Turns the current or provided time into a human readable sentence
@@ -112,10 +118,10 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this TimeOnly input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo? culture = null)
     {
-            var comparisonBase = timeToCompareAgainst ?? TimeOnly.FromDateTime(useUtc ? DateTime.UtcNow : DateTime.Now);
+        var comparisonBase = timeToCompareAgainst ?? TimeOnly.FromDateTime(useUtc ? DateTime.UtcNow : DateTime.Now);
 
-            return Configurator.TimeOnlyHumanizeStrategy.Humanize(input, comparisonBase, culture);
-        }
+        return Configurator.TimeOnlyHumanizeStrategy.Humanize(input, comparisonBase, culture);
+    }
 
     /// <summary>
     /// Turns the current or provided time into a human readable sentence, overload for the nullable TimeOnly, returning 'never' in case null
@@ -127,13 +133,15 @@ public static class DateHumanizeExtensions
     /// <returns>distance of time in words</returns>
     public static string Humanize(this TimeOnly? input, TimeOnly? timeToCompareAgainst = null, bool useUtc = true, CultureInfo? culture = null)
     {
-            if (input.HasValue)
-            {
-                return Humanize(input.Value, timeToCompareAgainst, useUtc, culture);
-            }
-
-            return Configurator.GetFormatter(culture).DateHumanize_Never();
+        if (input.HasValue)
+        {
+            return Humanize(input.Value, timeToCompareAgainst, useUtc, culture);
         }
+
+        return Configurator
+            .GetFormatter(culture)
+            .DateHumanize_Never();
+    }
 
 #endif
 }

@@ -14,30 +14,37 @@ public static class EnglishArticle
     /// <returns>Sorted string array</returns>
     public static string[] AppendArticlePrefix(string[] items)
     {
-            if (items.Length == 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(items));
-            }
-            var transformed = new string[items.Length];
-
-            for (var i = 0; i < items.Length; i++)
-            {
-                var item = items[i].AsSpan();
-                if (_regex.IsMatch(item))
-                {
-                    var indexOf = item.IndexOf(' ');
-                    var removed = item[indexOf..].TrimStart();
-                    var article = item[..indexOf].TrimEnd();
-                    transformed[i] = $"{removed} {article}";
-                }
-                else
-                {
-                    transformed[i] = item.Trim().ToString();
-                }
-            }
-            Array.Sort(transformed);
-            return transformed;
+        if (items.Length == 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(items));
         }
+
+        var transformed = new string[items.Length];
+
+        for (var i = 0; i < items.Length; i++)
+        {
+            var item = items[i]
+                .AsSpan();
+            if (_regex.IsMatch(item))
+            {
+                var indexOf = item.IndexOf(' ');
+                var removed = item[indexOf..]
+                    .TrimStart();
+                var article = item[..indexOf]
+                    .TrimEnd();
+                transformed[i] = $"{removed} {article}";
+            }
+            else
+            {
+                transformed[i] = item
+                    .Trim()
+                    .ToString();
+            }
+        }
+
+        Array.Sort(transformed);
+        return transformed;
+    }
 
     /// <summary>
     /// Removes the previously appended article and prepends it to the same string.
@@ -46,33 +53,35 @@ public static class EnglishArticle
     /// <returns>String array</returns>
     public static string[] PrependArticleSuffix(string[] appended)
     {
-            var inserted = new string[appended.Length];
-            var the = " the".AsSpan();
-            var an = " an".AsSpan();
-            var a = " a".AsSpan();
+        var inserted = new string[appended.Length];
+        var the = " the".AsSpan();
+        var an = " an".AsSpan();
+        var a = " a".AsSpan();
 
-            for (var i = 0; i < appended.Length; i++)
+        for (var i = 0; i < appended.Length; i++)
+        {
+            var append = appended[i]
+                .AsSpan();
+            if (append.EndsWith(the, StringComparison.OrdinalIgnoreCase))
             {
-                var append = appended[i].AsSpan();
-                if (append.EndsWith(the, StringComparison.OrdinalIgnoreCase))
-                {
-                    inserted[i] = ToOriginalFormat(append, 3);
-                }
-                else if (append.EndsWith(an, StringComparison.OrdinalIgnoreCase))
-                {
-                    inserted[i] = ToOriginalFormat(append, 2);
-                }
-                else if (append.EndsWith(a, StringComparison.OrdinalIgnoreCase))
-                {
-                    inserted[i] = ToOriginalFormat(append, 1);
-                }
-                else
-                {
-                    inserted[i] = appended[i];
-                }
+                inserted[i] = ToOriginalFormat(append, 3);
             }
-            return inserted;
+            else if (append.EndsWith(an, StringComparison.OrdinalIgnoreCase))
+            {
+                inserted[i] = ToOriginalFormat(append, 2);
+            }
+            else if (append.EndsWith(a, StringComparison.OrdinalIgnoreCase))
+            {
+                inserted[i] = ToOriginalFormat(append, 1);
+            }
+            else
+            {
+                inserted[i] = appended[i];
+            }
         }
+
+        return inserted;
+    }
 
     static string ToOriginalFormat(CharSpan value, int suffixLength) =>
         $"{value[^suffixLength..]} {value[..^(suffixLength + 1)]}";
