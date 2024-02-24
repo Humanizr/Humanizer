@@ -23,8 +23,6 @@
 
 using System.Collections;
 
-namespace Humanizer.Tests;
-
 public class InflectorTests
 {
     public readonly IList<object[]> PluralTestData = new List<object[]>();

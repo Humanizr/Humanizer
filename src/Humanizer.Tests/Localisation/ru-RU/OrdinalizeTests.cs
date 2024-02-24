@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.ruRU;
+﻿namespace ruRU;
 
 [UseCulture("ru-RU")]
 public class OrdinalizeTests

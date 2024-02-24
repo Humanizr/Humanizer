@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.pl;
+﻿namespace pl;
 
 [UseCulture("pl")]
 public class DateHumanizeTests

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.hu;
+﻿namespace hu;
 
 [UseCulture("hu-HU")]
 public class TimeSpanHumanizeTests

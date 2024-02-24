@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.bg;
+﻿namespace bg;
 
 [UseCulture("bg-BG")]
 public class TimeSpanHumanizeTests

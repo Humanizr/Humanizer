@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.filPH;
+﻿namespace filPH;
 
 [UseCulture("fil-PH")]
 public class TimeSpanHumanizeTests

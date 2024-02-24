@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-public class SomeClass
+﻿public class SomeClass
 {
     public string? SomeString;
     public int SomeInt;

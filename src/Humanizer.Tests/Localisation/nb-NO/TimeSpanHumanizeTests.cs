@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.nbNO;
+﻿namespace nbNO;
 
 [UseCulture("nb-NO")]
 public class TimeSpanHumanizeTests

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.thTH;
+﻿namespace thTH;
 
 [UseCulture("th-TH")]
 public class DateHumanizeTests

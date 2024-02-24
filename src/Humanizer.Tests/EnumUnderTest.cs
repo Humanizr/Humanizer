@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Humanizer.Tests;
-
 public enum EnumUnderTest
 {
     [Description(EnumTestsResources.MemberWithDescriptionAttribute)]

@@ -1,8 +1,6 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable StringLiteralTypo
 
-namespace Humanizer.Tests;
-
 public class TupleizeTests
 {
     [Theory]

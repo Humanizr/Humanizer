@@ -1,6 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer.Tests.Localisation.fr;
+namespace fr;
 
 [UseCulture("fr")]
 public class TimeOnlyHumanizeTests

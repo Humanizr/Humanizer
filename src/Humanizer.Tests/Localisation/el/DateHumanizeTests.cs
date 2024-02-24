@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.el;
+﻿namespace el;
 
 [UseCulture("el")]
 public class DateHumanizeTests

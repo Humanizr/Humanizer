@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.ja;
+﻿namespace ja;
 
 [UseCulture("ja")]
 public class DateHumanizeTests

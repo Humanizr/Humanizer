@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-[UseCulture("en-US")]
+﻿[UseCulture("en-US")]
 public class MetricNumeralTests
 {
     // Return a sequence of -24 -> 26

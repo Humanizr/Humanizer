@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.sl;
+﻿namespace sl;
 
 [UseCulture("sl-SI")]
 public class DateHumanizeTests

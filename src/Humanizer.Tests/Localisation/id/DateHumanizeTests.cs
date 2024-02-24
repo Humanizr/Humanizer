@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.id;
+﻿namespace id;
 
 [UseCulture("id-ID")]
 public class DateHumanizeTests

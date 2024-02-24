@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.hy;
+﻿namespace hy;
 
 [UseCulture("hy")]
 public class OrdinalizeTests

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.es;
+﻿namespace es;
 
 [UseCulture("es-ES")]
 public class NumberToWordsTests

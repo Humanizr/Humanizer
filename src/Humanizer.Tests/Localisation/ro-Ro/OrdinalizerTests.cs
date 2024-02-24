@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.roRO;
+﻿namespace roRO;
 
 [UseCulture("ro-RO")]
 public class OrdinalizerTests

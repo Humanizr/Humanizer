@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests.FluentDate;
-
-public class PrepositionTests
+﻿public class PrepositionTests
 {
     [Fact]
     public void AtMidnight()

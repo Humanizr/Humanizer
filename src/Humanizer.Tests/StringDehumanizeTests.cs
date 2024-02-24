@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-public class StringDehumanizeTests
+﻿public class StringDehumanizeTests
 {
     [Theory]
     [InlineData("", "")]

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.az;
+﻿namespace az;
 
 [UseCulture("az")]
 public class NumberToWordsTests

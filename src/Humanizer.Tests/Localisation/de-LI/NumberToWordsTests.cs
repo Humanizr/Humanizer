@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.deLI;
+﻿namespace deLI;
 
 [UseCulture("de-LI")]
 public class NumberToWordsTests

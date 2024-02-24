@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Humanizer.Tests;
-
 [Flags]
 public enum BitFieldEnumUnderTest : int
 {

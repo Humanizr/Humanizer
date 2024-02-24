@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.sr_Latn;
+﻿namespace sr_Latn;
 
 [UseCulture("sr-Latn")]
 public class NumberToWordsTest

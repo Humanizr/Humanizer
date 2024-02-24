@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.lb.Bytes;
+﻿namespace lb.Bytes;
 
 [UseCulture("lb-LU")]
 public class ToStringTests

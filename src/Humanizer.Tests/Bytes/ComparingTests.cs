@@ -1,7 +1,4 @@
-﻿
-namespace Humanizer.Tests.Bytes;
-
-public class ComparingTests
+﻿public class ComparingTests
 {
     [Theory]
     [InlineData(13, 23, -1)]

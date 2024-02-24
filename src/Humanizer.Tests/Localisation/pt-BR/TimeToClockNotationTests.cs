@@ -1,6 +1,6 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer.Tests.Localisation.ptBR;
+namespace ptBR;
 
 [UseCulture("pt-BR")]
 public class TimeToClockNotationTests

@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.af;
+﻿namespace af;
 
 [UseCulture("af")]
 public class TimeSpanHumanizeTests

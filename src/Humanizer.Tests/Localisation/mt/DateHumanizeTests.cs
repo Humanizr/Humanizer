@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.mt;
+﻿namespace mt;
 
 [UseCulture("mt")]
 public class DateHumanizeTests

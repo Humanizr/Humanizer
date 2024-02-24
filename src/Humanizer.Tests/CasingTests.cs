@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-public class CasingTests
+﻿public class CasingTests
 {
     [Theory]
     [InlineData("lower case statement", "Lower Case Statement")]

@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests.Bytes;
-
-public class ArithmeticTests
+﻿public class ArithmeticTests
 {
     [Fact]
     public void Add()

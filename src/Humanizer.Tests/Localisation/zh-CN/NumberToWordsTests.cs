@@ -1,4 +1,4 @@
-﻿namespace Humanizer.Tests.Localisation.zhCN;
+﻿namespace zhCN;
 
 [UseCulture("zh-CN")]
 public class NumberToWordsTests

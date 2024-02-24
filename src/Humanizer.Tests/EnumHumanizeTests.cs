@@ -1,6 +1,4 @@
-﻿namespace Humanizer.Tests;
-
-public class EnumHumanizeTests
+﻿public class EnumHumanizeTests
 {
     [Fact]
     public void HonorsDescriptionAttribute() =>

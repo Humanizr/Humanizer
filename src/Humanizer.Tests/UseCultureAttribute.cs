@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using Xunit.Sdk;
 
-namespace Humanizer.Tests;
-
 /// <summary>
 /// Apply this attribute to your test method to replace the
 /// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
