@@ -7,10 +7,8 @@ namespace Humanizer;
 /// </summary>
 public static class RomanNumeralExtensions
 {
-    const int NumberOfRomanNumeralMaps = 13;
-
-    static readonly IDictionary<string, int> RomanNumerals =
-        new Dictionary<string, int>(NumberOfRomanNumeralMaps)
+    static readonly Dictionary<string, int> RomanNumerals =
+        new(StringComparer.OrdinalIgnoreCase)
         {
             {
                 "M", 1000
@@ -56,7 +54,7 @@ public static class RomanNumeralExtensions
     static readonly Regex ValidRomanNumeral =
         new(
             "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
-            RegexOptions.Compiled);
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     /// <summary>
     /// Converts Roman numbers into integer
@@ -70,9 +68,17 @@ public static class RomanNumeralExtensions
             throw new ArgumentNullException(nameof(input));
         }
 
-        input = input
-            .Trim()
-            .ToUpperInvariant();
+        return FromRoman(input.AsSpan());
+    }
+
+    /// <summary>
+    /// Converts Roman numbers into integer
+    /// </summary>
+    /// <param name="input">Roman number</param>
+    /// <returns>Human-readable number</returns>
+    public static int FromRoman(CharSpan input)
+    {
+        input = input.Trim();
 
         var length = input.Length;
 
@@ -124,20 +130,20 @@ public static class RomanNumeralExtensions
             throw new ArgumentOutOfRangeException();
         }
 
-        var sb = new StringBuilder(maxRomanNumeralLength);
+        var builder = new StringBuilder(maxRomanNumeralLength);
 
         foreach (var pair in RomanNumerals)
         {
             while (input / pair.Value > 0)
             {
-                sb.Append(pair.Key);
+                builder.Append(pair.Key);
                 input -= pair.Value;
             }
         }
 
-        return sb.ToString();
+        return builder.ToString();
     }
 
-    static bool IsInvalidRomanNumeral(string input) =>
+    static bool IsInvalidRomanNumeral(CharSpan input) =>
         !ValidRomanNumeral.IsMatch(input);
 }
