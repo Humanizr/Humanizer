@@ -41,41 +41,41 @@ public class DefaultFormatter : IFormatter
     /// <inheritdoc/>
     public virtual string TimeSpanHumanize_Age()
     {
-            if (Resources.TryGetResource("TimeSpanHumanize_Age", _culture, out var ageFormat))
-                return ageFormat;
-            return "{0}";
-        }
+        if (Resources.TryGetResource("TimeSpanHumanize_Age", _culture, out var ageFormat))
+            return ageFormat;
+        return "{0}";
+    }
 
     /// <inheritdoc cref="IFormatter.DataUnitHumanize(DataUnit, double, bool)"/>
     public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
     {
-            var resourceKey = toSymbol ? $"DataUnit_{dataUnit}Symbol" : $"DataUnit_{dataUnit}";
-            var resourceValue = Format(resourceKey);
+        var resourceKey = toSymbol ? $"DataUnit_{dataUnit}Symbol" : $"DataUnit_{dataUnit}";
+        var resourceValue = Format(resourceKey);
 
-            if (!toSymbol && count > 1)
-                resourceValue += 's';
+        if (!toSymbol && count > 1)
+            resourceValue += 's';
 
-            return resourceValue;
-        }
+        return resourceValue;
+    }
 
     /// <inheritdoc />
     public virtual string TimeUnitHumanize(TimeUnit timeUnit)
     {
-            var resourceKey = ResourceKeys.TimeUnitSymbol.GetResourceKey(timeUnit);
-            return Format(resourceKey);
-        }
+        var resourceKey = ResourceKeys.TimeUnitSymbol.GetResourceKey(timeUnit);
+        return Format(resourceKey);
+    }
 
     string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
     {
-            var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
-            return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
-        }
+        var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
+        return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+    }
 
     string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
     {
-            var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
-            return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
-        }
+        var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
+        return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
+    }
 
     /// <summary>
     /// Formats the specified resource key.
@@ -84,9 +84,9 @@ public class DefaultFormatter : IFormatter
     /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
     protected virtual string Format(string resourceKey)
     {
-            var resolvedKey = GetResourceKey(resourceKey);
-            return Resources.GetResource(resolvedKey, _culture);
-        }
+        var resolvedKey = GetResourceKey(resourceKey);
+        return Resources.GetResource(resolvedKey, _culture);
+    }
 
     /// <summary>
     /// Formats the specified resource key.
@@ -96,16 +96,16 @@ public class DefaultFormatter : IFormatter
     /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
     protected virtual string Format(string resourceKey, int number, bool toWords = false)
     {
-            var resolvedKey = GetResourceKey(resourceKey, number);
-            var resourceString = Resources.GetResource(resolvedKey, _culture);
+        var resolvedKey = GetResourceKey(resourceKey, number);
+        var resourceString = Resources.GetResource(resolvedKey, _culture);
 
-            if (toWords)
-            {
-                return string.Format(resourceString, number.ToWords(_culture));
-            }
-
-            return string.Format(resourceString, number);
+        if (toWords)
+        {
+            return string.Format(resourceString, number.ToWords(_culture));
         }
+
+        return string.Format(resourceString, number);
+    }
 
     /// <summary>
     /// Override this method if your locale has complex rules around multiple units; e.g. Arabic, Russian

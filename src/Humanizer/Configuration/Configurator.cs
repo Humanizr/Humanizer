@@ -107,9 +107,9 @@ public static class Configurator
     {
         get
         {
-                enumDescriptionPropertyLocatorHasBeenUsed = true;
-                return enumDescriptionPropertyLocator;
-            }
+            enumDescriptionPropertyLocatorHasBeenUsed = true;
+            return enumDescriptionPropertyLocator;
+        }
         private set => enumDescriptionPropertyLocator = value;
     }
 
@@ -118,17 +118,17 @@ public static class Configurator
     /// </summary>
     public static void UseEnumDescriptionPropertyLocator(Func<PropertyInfo, bool> func)
     {
-            if (enumDescriptionPropertyLocatorHasBeenUsed)
-            {
-                throw new("UseEnumDescriptionPropertyLocator must be called before any Enum.Humanize has already been. Move the call to UseEnumDescriptionPropertyLocator to the app startup or a ModuleInitializer.");
-            }
-
-            EnumDescriptionPropertyLocator = func;
+        if (enumDescriptionPropertyLocatorHasBeenUsed)
+        {
+            throw new("UseEnumDescriptionPropertyLocator must be called before any Enum.Humanize has already been. Move the call to UseEnumDescriptionPropertyLocator to the app startup or a ModuleInitializer.");
         }
+
+        EnumDescriptionPropertyLocator = func;
+    }
 
     internal static void ResetUseEnumDescriptionPropertyLocator()
     {
-            enumDescriptionPropertyLocatorHasBeenUsed = false;
-            EnumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
-        }
+        enumDescriptionPropertyLocatorHasBeenUsed = false;
+        EnumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
+    }
 }

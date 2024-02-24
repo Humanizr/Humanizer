@@ -7,11 +7,11 @@ class CzechSlovakPolishFormatter(string localeCode) :
 
     protected override string GetResourceKey(string resourceKey, int number)
     {
-            if (number is > 1 and < 5)
-            {
-                return resourceKey + PaucalPostfix;
-            }
-
-            return resourceKey;
+        if (number is > 1 and < 5)
+        {
+            return resourceKey + PaucalPostfix;
         }
+
+        return resourceKey;
+    }
 }

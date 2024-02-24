@@ -128,7 +128,7 @@ public class TimeSpanHumanizeTests
     [InlineData(1299630020, 5, "tvær vikur, einn dagur, ein klukkustund, þrjátíu sekúndur, tuttugu millisekúndur")]
     public void TimeSpanWithNumbersConvertedToWords(int milliseconds, int precision, string expected)
     {
-            var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, toWords: true);
-            Assert.Equal(expected, actual);
-        }
+        var actual = TimeSpan.FromMilliseconds(milliseconds).Humanize(precision, toWords: true);
+        Assert.Equal(expected, actual);
+    }
 }

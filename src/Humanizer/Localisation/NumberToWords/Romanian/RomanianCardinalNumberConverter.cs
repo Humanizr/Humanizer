@@ -93,44 +93,46 @@ class RomanianCardinalNumberConverter
 
     public string Convert(int number, GrammaticalGender gender)
     {
-            if (number == 0)
-            {
-                return "zero";
-            }
-
-            var words = string.Empty;
-
-            var prefixMinusSign = false;
-
-            if (number < 0)
-            {
-                prefixMinusSign = true;
-                number = -number;
-            }
-
-            var _threeDigitParts = SplitEveryThreeDigits(number);
-
-            for (var i = 0; i < _threeDigitParts.Count; i++)
-            {
-                var currentSet = (ThreeDigitSets)Enum.ToObject(typeof(ThreeDigitSets), i);
-
-                var partToString = GetNextPartConverter(currentSet);
-
-                if (partToString != null)
-                {
-                    words = partToString(_threeDigitParts[i], gender)
-                        .Trim() + " " + words.Trim();
-                }
-            }
-
-            if (prefixMinusSign)
-            {
-                words = _minusSign + " " + words;
-            }
-
-            // remove extra spaces
-            return words.TrimEnd().Replace("  ", " ");
+        if (number == 0)
+        {
+            return "zero";
         }
+
+        var words = string.Empty;
+
+        var prefixMinusSign = false;
+
+        if (number < 0)
+        {
+            prefixMinusSign = true;
+            number = -number;
+        }
+
+        var _threeDigitParts = SplitEveryThreeDigits(number);
+
+        for (var i = 0; i < _threeDigitParts.Count; i++)
+        {
+            var currentSet = (ThreeDigitSets) Enum.ToObject(typeof(ThreeDigitSets), i);
+
+            var partToString = GetNextPartConverter(currentSet);
+
+            if (partToString != null)
+            {
+                words = partToString(_threeDigitParts[i], gender)
+                    .Trim() + " " + words.Trim();
+            }
+        }
+
+        if (prefixMinusSign)
+        {
+            words = _minusSign + " " + words;
+        }
+
+        // remove extra spaces
+        return words
+            .TrimEnd()
+            .Replace("  ", " ");
+    }
 
     /// <summary>
     /// Splits a number into a sequence of three-digits numbers,
@@ -140,20 +142,20 @@ class RomanianCardinalNumberConverter
     /// <returns>The sequence of three-digit numbers.</returns>
     static List<int> SplitEveryThreeDigits(int number)
     {
-            var parts = new List<int>();
-            var rest = number;
+        var parts = new List<int>();
+        var rest = number;
 
-            while (rest > 0)
-            {
-                var threeDigit = rest % 1000;
+        while (rest > 0)
+        {
+            var threeDigit = rest % 1000;
 
-                parts.Add(threeDigit);
+            parts.Add(threeDigit);
 
-                rest /= 1000;
-            }
-
-            return parts;
+            rest /= 1000;
         }
+
+        return parts;
+    }
 
     /// <summary>
     /// During number conversion to text, finds out the converter
@@ -162,36 +164,36 @@ class RomanianCardinalNumberConverter
     /// <returns>The next conversion function to use.</returns>
     Func<int, GrammaticalGender, string>? GetNextPartConverter(ThreeDigitSets currentSet)
     {
-            Func<int, GrammaticalGender, string>? converter;
+        Func<int, GrammaticalGender, string>? converter;
 
-            switch (currentSet)
-            {
-                case ThreeDigitSets.Units:
-                    converter = UnitsConverter;
-                    break;
+        switch (currentSet)
+        {
+            case ThreeDigitSets.Units:
+                converter = UnitsConverter;
+                break;
 
-                case ThreeDigitSets.Thousands:
-                    converter = ThousandsConverter;
-                    break;
+            case ThreeDigitSets.Thousands:
+                converter = ThousandsConverter;
+                break;
 
-                case ThreeDigitSets.Millions:
-                    converter = MillionsConverter;
-                    break;
+            case ThreeDigitSets.Millions:
+                converter = MillionsConverter;
+                break;
 
-                case ThreeDigitSets.Billions:
-                    converter = BillionsConverter;
-                    break;
+            case ThreeDigitSets.Billions:
+                converter = BillionsConverter;
+                break;
 
-                case ThreeDigitSets.More:
-                    converter = null;
-                    break;
+            case ThreeDigitSets.More:
+                converter = null;
+                break;
 
-                default:
-                    throw new ArgumentOutOfRangeException("Unknow ThreeDigitSet: " + currentSet);
-            }
-
-            return converter;
+            default:
+                throw new ArgumentOutOfRangeException("Unknow ThreeDigitSet: " + currentSet);
         }
+
+        return converter;
+    }
 
     /// <summary>
     /// Converts a three-digit set to text.
@@ -201,87 +203,87 @@ class RomanianCardinalNumberConverter
     /// <returns>The same three-digit set expressed as text.</returns>
     string ThreeDigitSetConverter(int number, GrammaticalGender gender)
     {
-            if (number == 0)
-            {
-                return string.Empty;
-            }
-
-            // grab lowest two digits
-            var tensAndUnits = number % 100;
-            // grab third digit
-            var hundreds = number / 100;
-
-            // grab also first and second digits separately
-            var units = tensAndUnits % 10;
-            var tens = tensAndUnits / 10;
-
-            var words = string.Empty;
-
-            // append text for hundreds
-            words += HundredsToText(hundreds);
-
-            // append text for tens, only those from twenty upward
-            words += (tens >= 2 ? " " : string.Empty) + _tensOver20NumberToText[tens];
-
-            if (tensAndUnits <= 9)
-            {
-                // simple case for units, under 10
-                words += " " + GetPartByGender(_units[tensAndUnits], gender);
-            }
-            else if (tensAndUnits <= 19)
-            {
-                // special case for 'teens', from 10 to 19
-                words += " " + GetPartByGender(_teensUnder20NumberToText[tensAndUnits - 10], gender);
-            }
-            else
-            {
-                // exception for zero
-                var unitsText = units == 0 ? string.Empty : " " + _joinGroups + " " + GetPartByGender(_units[units], gender);
-
-                words += unitsText;
-            }
-
-            return words;
+        if (number == 0)
+        {
+            return string.Empty;
         }
+
+        // grab lowest two digits
+        var tensAndUnits = number % 100;
+        // grab third digit
+        var hundreds = number / 100;
+
+        // grab also first and second digits separately
+        var units = tensAndUnits % 10;
+        var tens = tensAndUnits / 10;
+
+        var words = string.Empty;
+
+        // append text for hundreds
+        words += HundredsToText(hundreds);
+
+        // append text for tens, only those from twenty upward
+        words += (tens >= 2 ? " " : string.Empty) + _tensOver20NumberToText[tens];
+
+        if (tensAndUnits <= 9)
+        {
+            // simple case for units, under 10
+            words += " " + GetPartByGender(_units[tensAndUnits], gender);
+        }
+        else if (tensAndUnits <= 19)
+        {
+            // special case for 'teens', from 10 to 19
+            words += " " + GetPartByGender(_teensUnder20NumberToText[tensAndUnits - 10], gender);
+        }
+        else
+        {
+            // exception for zero
+            var unitsText = units == 0 ? string.Empty : " " + _joinGroups + " " + GetPartByGender(_units[units], gender);
+
+            words += unitsText;
+        }
+
+        return words;
+    }
 
     static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
     {
-            if (multiGenderPart.Contains("|"))
+        if (multiGenderPart.Contains("|"))
+        {
+            var parts = multiGenderPart.Split('|');
+            if (gender == GrammaticalGender.Feminine)
             {
-                var parts = multiGenderPart.Split('|');
-                if (gender == GrammaticalGender.Feminine)
-                {
-                    return parts[1];
-                }
-
-                if (gender == GrammaticalGender.Neuter)
-                {
-                    return parts[2];
-                }
-
-                return parts[0];
+                return parts[1];
             }
 
-            return multiGenderPart;
+            if (gender == GrammaticalGender.Neuter)
+            {
+                return parts[2];
+            }
+
+            return parts[0];
         }
+
+        return multiGenderPart;
+    }
 
     static bool IsAbove20(int number) =>
         number >= 20;
 
     string HundredsToText(int hundreds)
     {
-            if (hundreds == 0)
-            {
-                return string.Empty;
-            }
-
-            if (hundreds == 1)
-            {
-                return _feminineSingular + " sută";
-            }
-
-            return GetPartByGender(_units[hundreds], GrammaticalGender.Feminine) + " sute";
+        if (hundreds == 0)
+        {
+            return string.Empty;
         }
+
+        if (hundreds == 1)
+        {
+            return _feminineSingular + " sută";
+        }
+
+        return GetPartByGender(_units[hundreds], GrammaticalGender.Feminine) + " sute";
+    }
 
     /// <summary>
     /// Converts a three-digit number, as units, to text.
@@ -300,18 +302,18 @@ class RomanianCardinalNumberConverter
     /// <returns>The same three-digit number of thousands expressed as text.</returns>
     string ThousandsConverter(int number, GrammaticalGender gender)
     {
-            if (number == 0)
-            {
-                return string.Empty;
-            }
-
-            if (number == 1)
-            {
-                return _feminineSingular + " mie";
-            }
-
-            return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " mii";
+        if (number == 0)
+        {
+            return string.Empty;
         }
+
+        if (number == 1)
+        {
+            return _feminineSingular + " mie";
+        }
+
+        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " mii";
+    }
 
     // Large numbers (above 10^6) use a combined form of the long and short scales.
     /*
@@ -333,18 +335,18 @@ class RomanianCardinalNumberConverter
     /// <returns>The same three-digit number of millions expressed as text.</returns>
     string MillionsConverter(int number, GrammaticalGender gender)
     {
-            if (number == 0)
-            {
-                return string.Empty;
-            }
-
-            if (number == 1)
-            {
-                return _masculineSingular + " milion";
-            }
-
-            return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " milioane";
+        if (number == 0)
+        {
+            return string.Empty;
         }
+
+        if (number == 1)
+        {
+            return _masculineSingular + " milion";
+        }
+
+        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " milioane";
+    }
 
     /// <summary>
     /// Converts a billions three-digit number to text.
@@ -354,11 +356,11 @@ class RomanianCardinalNumberConverter
     /// <returns>The same three-digit number of billions expressed as text.</returns>
     string BillionsConverter(int number, GrammaticalGender gender)
     {
-            if (number == 1)
-            {
-                return _masculineSingular + " miliard";
-            }
-
-            return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " miliarde";
+        if (number == 1)
+        {
+            return _masculineSingular + " miliard";
         }
+
+        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " miliarde";
+    }
 }

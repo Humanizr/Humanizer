@@ -20,9 +20,9 @@ public class ByteRate
     /// </summary>
     public ByteRate(ByteSize size, TimeSpan interval)
     {
-            this.Size = size;
-            this.Interval = interval;
-        }
+        this.Size = size;
+        this.Interval = interval;
+    }
 
     /// <summary>
     /// Calculate rate for the quantity of bytes and interval defined by this instance
@@ -39,14 +39,14 @@ public class ByteRate
     /// <param name="culture">Culture to use. If null, current thread's UI culture is used.</param>
     public string Humanize(string? format, TimeUnit timeUnit = TimeUnit.Second, CultureInfo? culture = null)
     {
-            var displayInterval = timeUnit switch
-            {
-                TimeUnit.Second => TimeSpan.FromSeconds(1),
-                TimeUnit.Minute => TimeSpan.FromMinutes(1),
-                TimeUnit.Hour => TimeSpan.FromHours(1),
-                _ => throw new NotSupportedException("timeUnit must be Second, Minute, or Hour"),
-            };
-            return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
-                .Humanize(format, culture) + '/' + timeUnit.ToSymbol(culture);
-        }
+        var displayInterval = timeUnit switch
+        {
+            TimeUnit.Second => TimeSpan.FromSeconds(1),
+            TimeUnit.Minute => TimeSpan.FromMinutes(1),
+            TimeUnit.Hour => TimeSpan.FromHours(1),
+            _ => throw new NotSupportedException("timeUnit must be Second, Minute, or Hour"),
+        };
+        return new ByteSize(Size.Bytes / Interval.TotalSeconds * displayInterval.TotalSeconds)
+            .Humanize(format, culture) + '/' + timeUnit.ToSymbol(culture);
+    }
 }

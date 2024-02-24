@@ -52,7 +52,7 @@ public struct ByteSize(double byteSize) :
     public const string TerabyteSymbol = "TB";
     public const string Terabyte = "terabyte";
 
-    public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
+    public long Bits { get; } = (long) Math.Ceiling(byteSize * BitsInByte);
     public double Bytes { get; } = byteSize;
     public double Kilobytes { get; } = byteSize / BytesInKilobyte;
     public double Megabytes { get; } = byteSize / BytesInMegabyte;
@@ -63,104 +63,104 @@ public struct ByteSize(double byteSize) :
 
     public string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
     {
-            var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+        var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
-            // Absolute value is used to deal with negative values
-            if (Math.Abs(Terabytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: true);
-            }
-
-            if (Math.Abs(Gigabytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol: true);
-            }
-
-            if (Math.Abs(Megabytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol: true);
-            }
-
-            if (Math.Abs(Kilobytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol: true);
-            }
-
-            if (Math.Abs(Bytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol: true);
-            }
-
-            return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: true);
+        // Absolute value is used to deal with negative values
+        if (Math.Abs(Terabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: true);
         }
+
+        if (Math.Abs(Gigabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Megabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Kilobytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Bytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol: true);
+        }
+
+        return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: true);
+    }
 
     public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
 
     public string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
     {
-            var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+        var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
-            // Absolute value is used to deal with negative values
-            if (Math.Abs(Terabytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: false);
-            }
-
-            if (Math.Abs(Gigabytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol: false);
-            }
-
-            if (Math.Abs(Megabytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol: false);
-            }
-
-            if (Math.Abs(Kilobytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol: false);
-            }
-
-            if (Math.Abs(Bytes) >= 1)
-            {
-                return cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol: false);
-            }
-
-            return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: false);
+        // Absolute value is used to deal with negative values
+        if (Math.Abs(Terabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: false);
         }
+
+        if (Math.Abs(Gigabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Megabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Kilobytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Bytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol: false);
+        }
+
+        return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: false);
+    }
 
     public double LargestWholeNumberValue
     {
         get
         {
-                // Absolute value is used to deal with negative values
-                if (Math.Abs(Terabytes) >= 1)
-                {
-                    return Terabytes;
-                }
-
-                if (Math.Abs(Gigabytes) >= 1)
-                {
-                    return Gigabytes;
-                }
-
-                if (Math.Abs(Megabytes) >= 1)
-                {
-                    return Megabytes;
-                }
-
-                if (Math.Abs(Kilobytes) >= 1)
-                {
-                    return Kilobytes;
-                }
-
-                if (Math.Abs(Bytes) >= 1)
-                {
-                    return Bytes;
-                }
-
-                return Bits;
+            // Absolute value is used to deal with negative values
+            if (Math.Abs(Terabytes) >= 1)
+            {
+                return Terabytes;
             }
+
+            if (Math.Abs(Gigabytes) >= 1)
+            {
+                return Gigabytes;
+            }
+
+            if (Math.Abs(Megabytes) >= 1)
+            {
+                return Megabytes;
+            }
+
+            if (Math.Abs(Kilobytes) >= 1)
+            {
+                return Kilobytes;
+            }
+
+            if (Math.Abs(Bytes) >= 1)
+            {
+                return Bytes;
+            }
+
+            return Bits;
+        }
     }
 
     // Get ceiling because bis are whole units
@@ -194,10 +194,10 @@ public struct ByteSize(double byteSize) :
 
     public string ToString(IFormatProvider? provider)
     {
-            provider ??= CultureInfo.CurrentCulture;
+        provider ??= CultureInfo.CurrentCulture;
 
-            return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
-        }
+        return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
+    }
 
     public string ToString(string? format) =>
         ToString(format, NumberFormatInfo.CurrentInfo);
@@ -207,71 +207,71 @@ public struct ByteSize(double byteSize) :
 
     string ToString(string? format, IFormatProvider? provider, bool toSymbol)
     {
-            format ??= "G";
-            provider ??= CultureInfo.CurrentCulture;
+        format ??= "G";
+        provider ??= CultureInfo.CurrentCulture;
 
-            if (format == "G")
-                format = "0.##";
+        if (format == "G")
+            format = "0.##";
 
-            if (!format.Contains("#") && !format.Contains("0"))
-            {
-                format = "0.## " + format;
-            }
-
-            format = format.Replace("#.##", "0.##");
-
-            var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
-
-            bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
-            string output(double n) => n.ToString(format, provider);
-
-            var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
-
-            if (has(TerabyteSymbol))
-            {
-                format = format.Replace(TerabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol));
-                return output(Terabytes);
-            }
-
-            if (has(GigabyteSymbol))
-            {
-                format = format.Replace(GigabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol));
-                return output(Gigabytes);
-            }
-
-            if (has(MegabyteSymbol))
-            {
-                format = format.Replace(MegabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol));
-                return output(Megabytes);
-            }
-
-            if (has(KilobyteSymbol))
-            {
-                format = format.Replace(KilobyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol));
-                return output(Kilobytes);
-            }
-
-            // Byte and Bit symbol look must be case-sensitive
-            if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
-            {
-                format = format.Replace(ByteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol));
-                return output(Bytes);
-            }
-
-            if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
-            {
-                format = format.Replace(BitSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol));
-                return output(Bits);
-            }
-
-            var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format, provider);
-
-            formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
-                                              ? "0"
-                                              : formattedLargeWholeNumberValue;
-
-            return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
+        if (!format.Contains("#") && !format.Contains("0"))
+        {
+            format = "0.## " + format;
         }
+
+        format = format.Replace("#.##", "0.##");
+
+        var culture = provider as CultureInfo ?? CultureInfo.CurrentCulture;
+
+        bool has(string s) => culture.CompareInfo.IndexOf(format, s, CompareOptions.IgnoreCase) != -1;
+        string output(double n) => n.ToString(format, provider);
+
+        var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+
+        if (has(TerabyteSymbol))
+        {
+            format = format.Replace(TerabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol));
+            return output(Terabytes);
+        }
+
+        if (has(GigabyteSymbol))
+        {
+            format = format.Replace(GigabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Gigabyte, Gigabytes, toSymbol));
+            return output(Gigabytes);
+        }
+
+        if (has(MegabyteSymbol))
+        {
+            format = format.Replace(MegabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Megabyte, Megabytes, toSymbol));
+            return output(Megabytes);
+        }
+
+        if (has(KilobyteSymbol))
+        {
+            format = format.Replace(KilobyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Kilobyte, Kilobytes, toSymbol));
+            return output(Kilobytes);
+        }
+
+        // Byte and Bit symbol look must be case-sensitive
+        if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
+        {
+            format = format.Replace(ByteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol));
+            return output(Bytes);
+        }
+
+        if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
+        {
+            format = format.Replace(BitSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol));
+            return output(Bits);
+        }
+
+        var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format, provider);
+
+        formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
+            ? "0"
+            : formattedLargeWholeNumberValue;
+
+        return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
+    }
 
     /// <summary>
     /// Converts the value of the current ByteSize object to a string with
@@ -284,23 +284,23 @@ public struct ByteSize(double byteSize) :
 
     public override bool Equals(object? value)
     {
-            if (value == null)
-            {
-                return false;
-            }
-
-            ByteSize other;
-            if (value is ByteSize size)
-            {
-                other = size;
-            }
-            else
-            {
-                return false;
-            }
-
-            return Equals(other);
+        if (value == null)
+        {
+            return false;
         }
+
+        ByteSize other;
+        if (value is ByteSize size)
+        {
+            other = size;
+        }
+        else
+        {
+            return false;
+        }
+
+        return Equals(other);
+    }
 
     public bool Equals(ByteSize value) =>
         Bits == value.Bits;
@@ -310,18 +310,18 @@ public struct ByteSize(double byteSize) :
 
     public int CompareTo(object? obj)
     {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            if (obj is ByteSize size)
-            {
-                return CompareTo(size);
-            }
-
-            throw new ArgumentException("Object is not a ByteSize");
+        if (obj == null)
+        {
+            return 1;
         }
+
+        if (obj is ByteSize size)
+        {
+            return CompareTo(size);
+        }
+
+        throw new ArgumentException("Object is not a ByteSize");
+    }
 
     public int CompareTo(ByteSize other) =>
         Bits.CompareTo(other.Bits);
@@ -388,129 +388,136 @@ public struct ByteSize(double byteSize) :
 
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result)
     {
-            // Arg checking
-            if (string.IsNullOrWhiteSpace(s))
-            {
-                result = default;
-                return false;
-            }
-
-            // Acquiring culture-specific parsing info
-            var numberFormat = GetNumberFormatInfo(formatProvider);
-
-            const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign;
-            var numberSpecialChars = new[]
-            {
-                 Convert.ToChar(numberFormat.NumberDecimalSeparator),
-                 Convert.ToChar(numberFormat.NumberGroupSeparator),
-                 Convert.ToChar(numberFormat.PositiveSign),
-                 Convert.ToChar(numberFormat.NegativeSign),
-            };
-
-            // Setup the result
-            result = new();
-
-            // Get the index of the first non-digit character
-            s = s!.TrimStart(); // Protect against leading spaces
-
-            int num;
-            var found = false;
-
-            // Pick first non-digit number
-            for (num = 0; num < s.Length; num++)
-            {
-                if (!(char.IsDigit(s[num]) || numberSpecialChars.Contains(s[num])))
-                {
-                    found = true;
-                    break;
-                }
-            }
-
-            if (found == false)
-            {
-                return false;
-            }
-
-            var lastNumber = num;
-
-            // Cut the input string in half
-            var numberPart = s.Substring(0, lastNumber).Trim();
-            var sizePart = s.Substring(lastNumber, s.Length - lastNumber).Trim();
-
-            // Get the numeric part
-            if (!double.TryParse(numberPart, numberStyles, formatProvider, out var number))
-            {
-                return false;
-            }
-
-            // Get the magnitude part
-            switch (sizePart.ToUpper())
-            {
-                case ByteSymbol:
-                    if (sizePart == BitSymbol)
-                    { // Bits
-                        if (number % 1 != 0) // Can't have partial bits
-                        {
-                            return false;
-                        }
-
-                        result = FromBits((long)number);
-                    }
-                    else
-                    { // Bytes
-                        result = FromBytes(number);
-                    }
-                    break;
-
-                case KilobyteSymbol:
-                    result = FromKilobytes(number);
-                    break;
-
-                case MegabyteSymbol:
-                    result = FromMegabytes(number);
-                    break;
-
-                case GigabyteSymbol:
-                    result = FromGigabytes(number);
-                    break;
-
-                case TerabyteSymbol:
-                    result = FromTerabytes(number);
-                    break;
-
-                default:
-                    return false;
-            }
-
-            return true;
+        // Arg checking
+        if (string.IsNullOrWhiteSpace(s))
+        {
+            result = default;
+            return false;
         }
+
+        // Acquiring culture-specific parsing info
+        var numberFormat = GetNumberFormatInfo(formatProvider);
+
+        const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign;
+        var numberSpecialChars = new[]
+        {
+            Convert.ToChar(numberFormat.NumberDecimalSeparator),
+            Convert.ToChar(numberFormat.NumberGroupSeparator),
+            Convert.ToChar(numberFormat.PositiveSign),
+            Convert.ToChar(numberFormat.NegativeSign),
+        };
+
+        // Setup the result
+        result = new();
+
+        // Get the index of the first non-digit character
+        s = s!.TrimStart(); // Protect against leading spaces
+
+        int num;
+        var found = false;
+
+        // Pick first non-digit number
+        for (num = 0; num < s.Length; num++)
+        {
+            if (!(char.IsDigit(s[num]) || numberSpecialChars.Contains(s[num])))
+            {
+                found = true;
+                break;
+            }
+        }
+
+        if (found == false)
+        {
+            return false;
+        }
+
+        var lastNumber = num;
+
+        // Cut the input string in half
+        var numberPart = s
+            .Substring(0, lastNumber)
+            .Trim();
+        var sizePart = s
+            .Substring(lastNumber, s.Length - lastNumber)
+            .Trim();
+
+        // Get the numeric part
+        if (!double.TryParse(numberPart, numberStyles, formatProvider, out var number))
+        {
+            return false;
+        }
+
+        // Get the magnitude part
+        switch (sizePart.ToUpper())
+        {
+            case ByteSymbol:
+                if (sizePart == BitSymbol)
+                {
+                    // Bits
+                    if (number % 1 != 0) // Can't have partial bits
+                    {
+                        return false;
+                    }
+
+                    result = FromBits((long) number);
+                }
+                else
+                {
+                    // Bytes
+                    result = FromBytes(number);
+                }
+
+                break;
+
+            case KilobyteSymbol:
+                result = FromKilobytes(number);
+                break;
+
+            case MegabyteSymbol:
+                result = FromMegabytes(number);
+                break;
+
+            case GigabyteSymbol:
+                result = FromGigabytes(number);
+                break;
+
+            case TerabyteSymbol:
+                result = FromTerabytes(number);
+                break;
+
+            default:
+                return false;
+        }
+
+        return true;
+    }
 
     static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
     {
-            if (formatProvider is NumberFormatInfo numberFormat)
-                return numberFormat;
+        if (formatProvider is NumberFormatInfo numberFormat)
+            return numberFormat;
 
-            var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
+        var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
 
-            return culture.NumberFormat;
-        }
+        return culture.NumberFormat;
+    }
 
     public static ByteSize Parse(string s) =>
         Parse(s, null);
 
     public static ByteSize Parse(string s, IFormatProvider? formatProvider)
     {
-            if (s == null)
-            {
-                throw new ArgumentNullException(nameof(s));
-            }
-
-            if (TryParse(s, formatProvider, out var result))
-            {
-                return result;
-            }
-
-            throw new FormatException("Value is not in the correct format");
+        if (s == null)
+        {
+            throw new ArgumentNullException(nameof(s));
         }
+
+        if (TryParse(s, formatProvider, out var result))
+        {
+            return result;
+        }
+
+        throw new FormatException("Value is not in the correct format");
+    }
 }
 #pragma warning restore 1591

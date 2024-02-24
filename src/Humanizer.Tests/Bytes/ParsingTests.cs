@@ -32,18 +32,18 @@ public class ParsingTests
     [Fact]
     public void TryParseReturnsFalseOnNull()
     {
-            Assert.False(ByteSize.TryParse(null, out var result));
-            Assert.Equal(default, result);
-        }
+        Assert.False(ByteSize.TryParse(null, out var result));
+        Assert.Equal(default, result);
+    }
 
     [Fact]
     public void TryParse()
     {
-            var resultBool = ByteSize.TryParse("1020KB", out var resultByteSize);
+        var resultBool = ByteSize.TryParse("1020KB", out var resultByteSize);
 
-            Assert.True(resultBool);
-            Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
-        }
+        Assert.True(resultBool);
+        Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
+    }
 
     [Theory]
     [InlineData("2000.01KB", "")] // Invariant
@@ -57,31 +57,31 @@ public class ParsingTests
     [InlineData("+2000,01KB", "de")]
     public void TryParseWithCultureInfo(string value, string cultureName)
     {
-            var culture = new CultureInfo(cultureName);
+        var culture = new CultureInfo(cultureName);
 
-            Assert.True(ByteSize.TryParse(value, culture, out var resultByteSize));
-            Assert.Equal(ByteSize.FromKilobytes(2000.01), resultByteSize);
+        Assert.True(ByteSize.TryParse(value, culture, out var resultByteSize));
+        Assert.Equal(ByteSize.FromKilobytes(2000.01), resultByteSize);
 
-            Assert.Equal(resultByteSize, ByteSize.Parse(value, culture));
-        }
+        Assert.Equal(resultByteSize, ByteSize.Parse(value, culture));
+    }
 
     [Fact]
     public void TryParseWithNumberFormatInfo()
     {
-            var numberFormat = new NumberFormatInfo
-            {
-                NumberDecimalSeparator = "_",
-                NumberGroupSeparator = ";",
-                NegativeSign = "−", // proper minus, not hyphen-minus
-            };
+        var numberFormat = new NumberFormatInfo
+        {
+            NumberDecimalSeparator = "_",
+            NumberGroupSeparator = ";",
+            NegativeSign = "−", // proper minus, not hyphen-minus
+        };
 
-            var value = "−2;000_01KB";
+        var value = "−2;000_01KB";
 
-            Assert.True(ByteSize.TryParse(value, numberFormat, out var resultByteSize));
-            Assert.Equal(ByteSize.FromKilobytes(-2000.01), resultByteSize);
+        Assert.True(ByteSize.TryParse(value, numberFormat, out var resultByteSize));
+        Assert.Equal(ByteSize.FromKilobytes(-2000.01), resultByteSize);
 
-            Assert.Equal(resultByteSize, ByteSize.Parse(value, numberFormat));
-        }
+        Assert.Equal(resultByteSize, ByteSize.Parse(value, numberFormat));
+    }
 
     [Fact]
     public void ParseDecimalMegabytes() =>
@@ -99,13 +99,16 @@ public class ParsingTests
     [InlineData("1000KBB")] // Bad suffix
     public void TryParseReturnsFalseOnBadValue(string input)
     {
-            var resultBool = ByteSize.TryParse(input, out var resultByteSize);
+        var resultBool = ByteSize.TryParse(input, out var resultByteSize);
 
-            Assert.False(resultBool);
-            Assert.Equal(new(), resultByteSize);
+        Assert.False(resultBool);
+        Assert.Equal(new(), resultByteSize);
 
-            Assert.Throws<FormatException>(() => { ByteSize.Parse(input); });
-        }
+        Assert.Throws<FormatException>(() =>
+        {
+            ByteSize.Parse(input);
+        });
+    }
 
     [Fact]
     public void TryParseWorksWithLotsOfSpaces() =>
@@ -113,7 +116,10 @@ public class ParsingTests
 
     [Fact]
     public void ParseThrowsOnNull() =>
-        Assert.Throws<ArgumentNullException>(() => { ByteSize.Parse(null!); });
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            ByteSize.Parse(null!);
+        });
 
     [Fact]
     public void ParseBits() =>

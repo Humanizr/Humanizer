@@ -32,9 +32,9 @@ public class ToStringTests
     [Fact]
     public void ReturnsDefaultNumberFormat()
     {
-            Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.501).ToString());
-            Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.5).ToString("KB"));
-        }
+        Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.501).ToString());
+        Assert.Equal("10.5 KB", ByteSize.FromKilobytes(10.5).ToString("KB"));
+    }
 
     [Fact]
     public void ReturnsProvidedNumberFormat() =>

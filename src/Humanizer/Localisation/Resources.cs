@@ -7,7 +7,8 @@ namespace Humanizer;
 /// </summary>
 public static class Resources
 {
-    static readonly ResourceManager ResourceManager = new("Humanizer.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
+    static readonly ResourceManager ResourceManager = new("Humanizer.Properties.Resources", typeof(Resources).GetTypeInfo()
+        .Assembly);
 
     /// <summary>
     /// Returns the value of the specified string resource
@@ -17,15 +18,15 @@ public static class Resources
     /// <returns>The value of the resource localized for the specified culture.</returns>
     public static string GetResource(string resourceKey, CultureInfo? culture = null)
     {
-            var resource = ResourceManager.GetString(resourceKey, culture);
+        var resource = ResourceManager.GetString(resourceKey, culture);
 
-            if (resource == null || string.IsNullOrEmpty(resource))
-            {
-                throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
-            }
-
-            return resource;
+        if (resource == null || string.IsNullOrEmpty(resource))
+        {
+            throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
         }
+
+        return resource;
+    }
 
     /// <summary>
     /// Tries to get the value of the specified string resource, without fallback
@@ -36,9 +37,9 @@ public static class Resources
     /// <returns>true if the specified string resource was found for the given culture; otherwise, false.</returns>
     public static bool TryGetResource(string resourceKey, CultureInfo? culture, [NotNullWhen(true)] out string? result)
     {
-            culture ??= CultureInfo.CurrentUICulture;
-            var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
-            result = resourceSet?.GetString(resourceKey);
-            return result is not null;
-        }
+        culture ??= CultureInfo.CurrentUICulture;
+        var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
+        result = resourceSet?.GetString(resourceKey);
+        return result is not null;
+    }
 }

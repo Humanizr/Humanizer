@@ -62,12 +62,12 @@ public class DateHumanizeDefaultStrategyTests
     [InlineData(40, "2 days from now")]
     public void HoursFromNowNotTomorrow(int hours, string expected)
     {
-            //Only test with injected date, as results are dependent on time of day
-            var utcNow = new DateTime(2014, 6, 28, 9, 58, 22, DateTimeKind.Utc);
-            var now = new DateTime(2014, 6, 28, 9, 58, 22, DateTimeKind.Local);
+        //Only test with injected date, as results are dependent on time of day
+        var utcNow = new DateTime(2014, 6, 28, 9, 58, 22, DateTimeKind.Utc);
+        var now = new DateTime(2014, 6, 28, 9, 58, 22, DateTimeKind.Local);
 
-            DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future, null, null, now, utcNow);
-        }
+        DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future, null, null, now, utcNow);
+    }
 
     [Theory]
     [InlineData(1, "yesterday")]
@@ -120,17 +120,17 @@ public class DateHumanizeDefaultStrategyTests
     [Fact]
     public void Never()
     {
-            DateTime? never = null;
-            Assert.Equal("never", never.Humanize());
-        }
+        DateTime? never = null;
+        Assert.Equal("never", never.Humanize());
+    }
 
     [Fact]
     public void Nullable_ExpectSame()
     {
-            DateTime? never = new DateTime(2015, 12, 7, 9, 0, 0);
+        DateTime? never = new DateTime(2015, 12, 7, 9, 0, 0);
 
-            Assert.Equal(never.Value.Humanize(), never.Humanize());
-        }
+        Assert.Equal(never.Value.Humanize(), never.Humanize());
+    }
 
     [Theory]
     [InlineData(1, TimeUnit.Year, Tense.Future, "en-US", "one year from now")]
