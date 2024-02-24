@@ -448,6 +448,7 @@ public class TimeSpanHumanizeTests
         var actual = TimeSpan.FromMilliseconds(ms).Humanize(precision: precision, culture: new(culture), collectionSeparator: collectionSeparator);
         Assert.Equal(expected, actual);
     }
+
     [Theory]
     [InlineData(31 * 4, 1, "en-US", "four months")]
     [InlineData(236, 2, "ar", "سبعة أشهر, اثنان و عشرون يوم")]

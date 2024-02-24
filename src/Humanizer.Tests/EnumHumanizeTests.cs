@@ -79,6 +79,7 @@ public class EnumHumanizeTests
             Configurator.ResetUseEnumDescriptionPropertyLocator();
         }
     }
+
     [Fact]
     public void DehumanizeThrowsForEnumNoMatch()
     {
