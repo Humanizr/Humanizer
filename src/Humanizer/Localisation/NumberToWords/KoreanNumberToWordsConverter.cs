@@ -1,43 +1,43 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap1 = ["", "", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+    static readonly string[] UnitsMap2 = ["", "십", "백", "천"];
+    static readonly string[] UnitsMap3 = ["", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항하사", "아승기", "나유타", "불가사의", "무량대수"];
+
+    static readonly Dictionary<long, string> OrdinalExceptions = new()
     {
-        static readonly string[] UnitsMap1 = ["", "", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
-        static readonly string[] UnitsMap2 = ["", "십", "백", "천"];
-        static readonly string[] UnitsMap3 = ["", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항하사", "아승기", "나유타", "불가사의", "무량대수"];
+        {0, "영번째"},
+        {1, "첫번째"},
+        {2, "두번째"},
+        {3, "세번째"},
+        {4, "네번째"},
+        {5, "다섯번째"},
+        {6, "여섯번째"},
+        {7, "일곱번째"},
+        {8, "여덟번째"},
+        {9, "아홉번째"},
+        {10, "열번째"},
+        {11, "열한번째"},
+        {12, "열두번째"},
+        {13, "열세번째"},
+        {14, "열네번째"},
+        {15, "열다섯번째"},
+        {16, "열여섯번째"},
+        {17, "열일곱번째"},
+        {18, "열여덟번째"},
+        {19, "열아홉째"},
+    };
 
-        static readonly Dictionary<long, string> OrdinalExceptions = new()
-        {
-            {0, "영번째"},
-            {1, "첫번째"},
-            {2, "두번째"},
-            {3, "세번째"},
-            {4, "네번째"},
-            {5, "다섯번째"},
-            {6, "여섯번째"},
-            {7, "일곱번째"},
-            {8, "여덟번째"},
-            {9, "아홉번째"},
-            {10, "열번째"},
-            {11, "열한번째"},
-            {12, "열두번째"},
-            {13, "열세번째"},
-            {14, "열네번째"},
-            {15, "열다섯번째"},
-            {16, "열여섯번째"},
-            {17, "열일곱번째"},
-            {18, "열여덟번째"},
-            {19, "열아홉째"},
-        };
+    public override string Convert(long number) =>
+        ConvertImpl(number, false);
 
-        public override string Convert(long number) =>
-            ConvertImpl(number, false);
+    public override string ConvertToOrdinal(int number) =>
+        ConvertImpl(number, true);
 
-        public override string ConvertToOrdinal(int number) =>
-            ConvertImpl(number, true);
-
-        static string ConvertImpl(long number, bool isOrdinal)
-        {
+    static string ConvertImpl(long number, bool isOrdinal)
+    {
             if (isOrdinal && number < 20)
             {
                 if (OrdinalExceptions.TryGetValue(number, out var words))
@@ -87,5 +87,4 @@
 
             return toWords;
         }
-    }
 }

@@ -1,20 +1,20 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable StringLiteralTypo
-namespace Humanizer
+namespace Humanizer;
+
+/// <summary>
+/// Convert int to named tuple strings (1 -> 'single', 2-> 'double' etc.).
+/// Only values 1-10, 100, and 1000 have specific names. All others will return 'n-tuple'.
+/// </summary>
+public static class TupleizeExtensions
 {
     /// <summary>
-    /// Convert int to named tuple strings (1 -> 'single', 2-> 'double' etc.).
-    /// Only values 1-10, 100, and 1000 have specific names. All others will return 'n-tuple'.
+    /// Converts integer to named tuple (e.g. 'single', 'double' etc.).
     /// </summary>
-    public static class TupleizeExtensions
+    /// <param name="input">Integer</param>
+    /// <returns>Named tuple</returns>
+    public static string Tupleize(this int input)
     {
-        /// <summary>
-        /// Converts integer to named tuple (e.g. 'single', 'double' etc.).
-        /// </summary>
-        /// <param name="input">Integer</param>
-        /// <returns>Named tuple</returns>
-        public static string Tupleize(this int input)
-        {
             switch (input)
             {
                 case 1:
@@ -45,5 +45,4 @@ namespace Humanizer
                     return $"{input}-tuple";
             }
         }
-    }
 }

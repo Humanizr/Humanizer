@@ -1,12 +1,12 @@
-﻿namespace Humanizer
-{
-    class ItalianOrdinalizer : DefaultOrdinalizer
-    {
-        public override string Convert(int number, string numberString) =>
-            Convert(number, numberString, GrammaticalGender.Masculine);
+﻿namespace Humanizer;
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
-        {
+class ItalianOrdinalizer : DefaultOrdinalizer
+{
+    public override string Convert(int number, string numberString) =>
+        Convert(number, numberString, GrammaticalGender.Masculine);
+
+    public override string Convert(int number, string numberString, GrammaticalGender gender)
+    {
             // No ordinal for 0 in italian (neologism apart)
             if (number == 0)
             {
@@ -20,5 +20,4 @@
 
             return numberString + "°";
         }
-    }
 }

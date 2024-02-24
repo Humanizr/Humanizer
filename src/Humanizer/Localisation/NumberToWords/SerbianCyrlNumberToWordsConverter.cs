@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class SerbianCyrlNumberToWordsConverter(CultureInfo? culture) :
-        GenderlessNumberToWordsConverter
-    {
-        static readonly string[] UnitsMap = ["нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест"];
-        static readonly string[] TensMap = ["нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет"];
+﻿namespace Humanizer;
 
-        public override string Convert(long input)
-        {
+class SerbianCyrlNumberToWordsConverter(CultureInfo? culture) :
+    GenderlessNumberToWordsConverter
+{
+    static readonly string[] UnitsMap = ["нула", "један", "два", "три", "четири", "пет", "шест", "седам", "осам", "девет", "десет", "једанест", "дванаест", "тринаест", "четрнаест", "петнаест", "шеснаест", "седамнаест", "осамнаест", "деветнаест"];
+    static readonly string[] TensMap = ["нула", "десет", "двадесет", "тридесет", "четрдесет", "петдесет", "шестдесет", "седамдесет", "осамдесет", "деветдесет"];
+
+    public override string Convert(long input)
+    {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -99,12 +99,12 @@
             return string.Concat(parts);
         }
 
-        public override string ConvertToOrdinal(int number) =>
-            //TODO: In progress
-            number.ToString(culture);
+    public override string ConvertToOrdinal(int number) =>
+        //TODO: In progress
+        number.ToString(culture);
 
-        string Part(string singular, string dual, string trialQuadral, string plural, int number)
-        {
+    string Part(string singular, string dual, string trialQuadral, string plural, int number)
+    {
             switch (number)
             {
                 case 1:
@@ -118,5 +118,4 @@
                     return string.Format(plural, Convert(number));
             }
         }
-    }
 }

@@ -1,19 +1,19 @@
-﻿namespace Humanizer
-{
-    /// <summary>
-    /// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
-    /// </summary>
-    public static class EnglishArticle
-    {
-        static Regex _regex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+", RegexOptions.Compiled);
+﻿namespace Humanizer;
 
-        /// <summary>
-        /// Removes the prefixed article and appends it to the same string.
-        /// </summary>
-        /// <param name="items">The input array of strings</param>
-        /// <returns>Sorted string array</returns>
-        public static string[] AppendArticlePrefix(string[] items)
-        {
+/// <summary>
+/// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
+/// </summary>
+public static class EnglishArticle
+{
+    static Regex _regex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+", RegexOptions.Compiled);
+
+    /// <summary>
+    /// Removes the prefixed article and appends it to the same string.
+    /// </summary>
+    /// <param name="items">The input array of strings</param>
+    /// <returns>Sorted string array</returns>
+    public static string[] AppendArticlePrefix(string[] items)
+    {
             if (items.Length == 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(items));
@@ -39,13 +39,13 @@
             return transformed;
         }
 
-        /// <summary>
-        /// Removes the previously appended article and prepends it to the same string.
-        /// </summary>
-        /// <param name="appended">Sorted string array</param>
-        /// <returns>String array</returns>
-        public static string[] PrependArticleSuffix(string[] appended)
-        {
+    /// <summary>
+    /// Removes the previously appended article and prepends it to the same string.
+    /// </summary>
+    /// <param name="appended">Sorted string array</param>
+    /// <returns>String array</returns>
+    public static string[] PrependArticleSuffix(string[] appended)
+    {
             var inserted = new string[appended.Length];
             var the = " the".AsSpan();
             var an = " an".AsSpan();
@@ -74,7 +74,6 @@
             return inserted;
         }
 
-        static string ToOriginalFormat(CharSpan value, int suffixLength) =>
-            $"{value[^suffixLength..]} {value[..^(suffixLength + 1)]}";
-    }
+    static string ToOriginalFormat(CharSpan value, int suffixLength) =>
+        $"{value[^suffixLength..]} {value[..^(suffixLength + 1)]}";
 }

@@ -1,15 +1,14 @@
-﻿namespace Humanizer.Tests.Localisation
-{
-    public class DefaultFormatterTests
-    {
-        [Fact]
-        [UseCulture("iv")]
-        public void HandlesNotImplementedCollectionFormattersGracefully()
-        {
-            var a = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };
-            var b = a.Humanize();
+﻿namespace Humanizer.Tests.Localisation;
 
-            Assert.Equal(a[0] + " & " + a[1], b);
-        }
+public class DefaultFormatterTests
+{
+    [Fact]
+    [UseCulture("iv")]
+    public void HandlesNotImplementedCollectionFormattersGracefully()
+    {
+        var a = new[] { DateTime.UtcNow, DateTime.UtcNow.AddDays(10) };
+        var b = a.Humanize();
+
+        Assert.Equal(a[0] + " & " + a[1], b);
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class FormatterRegistry : LocaliserRegistry<IFormatter>
 {
-    class FormatterRegistry : LocaliserRegistry<IFormatter>
+    public FormatterRegistry() : base(new DefaultFormatter("en-US"))
     {
-        public FormatterRegistry() : base(new DefaultFormatter("en-US"))
-        {
             Register("ar", new ArabicFormatter());
             Register("de", new GermanFormatter());
             Register("he", new HebrewFormatter());
@@ -60,8 +60,8 @@
             Register("lb", new LuxembourgishFormatter());
         }
 
-        void RegisterDefaultFormatter(string localeCode)
-        {
+    void RegisterDefaultFormatter(string localeCode)
+    {
             try
             {
                 Register(localeCode, new DefaultFormatter(localeCode));
@@ -72,7 +72,6 @@
             }
         }
 
-        void RegisterCzechSlovakPolishFormatter(string localeCode) =>
-            Register(localeCode, new CzechSlovakPolishFormatter(localeCode));
-    }
+    void RegisterCzechSlovakPolishFormatter(string localeCode) =>
+        Register(localeCode, new CzechSlovakPolishFormatter(localeCode));
 }

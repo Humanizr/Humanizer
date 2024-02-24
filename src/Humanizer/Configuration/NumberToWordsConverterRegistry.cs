@@ -1,10 +1,10 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
 {
-    class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
+    public NumberToWordsConverterRegistry()
+        : base(_ => new EnglishNumberToWordsConverter())
     {
-        public NumberToWordsConverterRegistry()
-            : base(_ => new EnglishNumberToWordsConverter())
-        {
             Register("af", new AfrikaansNumberToWordsConverter());
             Register("en", new EnglishNumberToWordsConverter());
             Register("ar", new ArabicNumberToWordsConverter());
@@ -55,5 +55,4 @@
             Register("lt", new LithuanianNumberToWordsConverter());
             Register("lb", new LuxembourgishNumberToWordsConverter());
         }
-    }
 }

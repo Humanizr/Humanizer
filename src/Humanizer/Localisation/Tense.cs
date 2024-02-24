@@ -1,11 +1,10 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+/// <summary>
+/// Enumerates the possible time references; past or future.
+/// </summary>
+public enum Tense
 {
-    /// <summary>
-    /// Enumerates the possible time references; past or future.
-    /// </summary>
-    public enum Tense
-    {
-        Future,
-        Past
-    }
+    Future,
+    Past
 }

@@ -1,44 +1,44 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
 {
-    class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
+    static readonly string[] UnitsMap =
+    [
+        "нула", "едно", "две", "три", "четири", "пет", "шест", "седем", "осем", "девет", "десет", "единадесет",
+        "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет", "осемнадесет",
+        "деветнадесет"
+    ];
+
+    static readonly string[] TensMap =
+    [
+        "нула", "десет", "двадесет", "тридесет", "четиридесет", "петдесет", "шестдесет", "седемдесет",
+        "осемдесет", "деветдесет"
+    ];
+
+    static readonly string[] HundredsMap =
+    [
+        "нула", "сто", "двеста", "триста", "четиристотин", "петстотин", "шестстотин", "седемстотин",
+        "осемстотин", "деветстотин"
+    ];
+
+    static readonly string[] HundredsOrdinalMap =
+    [
+        string.Empty, "стот", "двест", "трист", "четиристот", "петстот", "шестстот", "седемстот", "осемстот",
+        "деветстот"
+    ];
+
+    static readonly string[] UnitsOrdinal =
+    [
+        string.Empty, "първ", "втор", "трет", "четвърт", "пет", "шест", "седм", "осм", "девeт", "десeт",
+        "единадесет", "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет",
+        "осемнадесет", "деветнадесет"
+    ];
+
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
+        InnerConvert(input, gender, false);
+
+    static string InnerConvert(long input, GrammaticalGender gender, bool isOrdinal)
     {
-        static readonly string[] UnitsMap =
-        [
-            "нула", "едно", "две", "три", "четири", "пет", "шест", "седем", "осем", "девет", "десет", "единадесет",
-            "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет", "осемнадесет",
-            "деветнадесет"
-        ];
-
-        static readonly string[] TensMap =
-        [
-            "нула", "десет", "двадесет", "тридесет", "четиридесет", "петдесет", "шестдесет", "седемдесет",
-            "осемдесет", "деветдесет"
-        ];
-
-        static readonly string[] HundredsMap =
-        [
-            "нула", "сто", "двеста", "триста", "четиристотин", "петстотин", "шестстотин", "седемстотин",
-            "осемстотин", "деветстотин"
-        ];
-
-        static readonly string[] HundredsOrdinalMap =
-        [
-            string.Empty, "стот", "двест", "трист", "четиристот", "петстот", "шестстот", "седемстот", "осемстот",
-            "деветстот"
-        ];
-
-        static readonly string[] UnitsOrdinal =
-        [
-            string.Empty, "първ", "втор", "трет", "четвърт", "пет", "шест", "седм", "осм", "девeт", "десeт",
-            "единадесет", "дванадесет", "тринадесет", "четиринадесет", "петнадесет", "шестнадесет", "седемнадесет",
-            "осемнадесет", "деветнадесет"
-        ];
-
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
-            InnerConvert(input, gender, false);
-
-        static string InnerConvert(long input, GrammaticalGender gender, bool isOrdinal)
-        {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -135,11 +135,11 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
-            InnerConvert(input, gender, true);
+    public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
+        InnerConvert(input, gender, true);
 
-        static string GetEndingForGender(GrammaticalGender gender, long input)
-        {
+    static string GetEndingForGender(GrammaticalGender gender, long input)
+    {
             if (input == 0)
             {
                 return gender switch
@@ -170,5 +170,4 @@
                 _ => throw new ArgumentOutOfRangeException(nameof(gender))
             };
         }
-    }
 }

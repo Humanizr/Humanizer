@@ -1,39 +1,39 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+/// <summary>
+/// Dutch spelling of numbers is not really officially regulated.
+/// There are a few different rules that can be applied.
+/// Used the rules as stated here.
+/// http://www.beterspellen.nl/website/?pag=110
+/// </summary>
+class DutchNumberToWordsConverter :
+    GenderlessNumberToWordsConverter
 {
-    /// <summary>
-    /// Dutch spelling of numbers is not really officially regulated.
-    /// There are a few different rules that can be applied.
-    /// Used the rules as stated here.
-    /// http://www.beterspellen.nl/website/?pag=110
-    /// </summary>
-    class DutchNumberToWordsConverter :
-        GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien"];
+    static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig"];
+
+    class Fact
     {
-        static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vijf", "zes", "zeven", "acht", "negen", "tien", "elf", "twaalf", "dertien", "veertien", "vijftien", "zestien", "zeventien", "achttien", "negentien"];
-        static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vijftig", "zestig", "zeventig", "tachtig", "negentig"];
+        public long Value { get; set; }
+        public required string Name { get; set; }
+        public required string Prefix { get; set; }
+        public required string Postfix { get; set; }
+        public bool DisplayOneUnit { get; set; }
+    }
 
-        class Fact
-        {
-            public long Value { get; set; }
-            public required string Name { get; set; }
-            public required string Prefix { get; set; }
-            public required string Postfix { get; set; }
-            public bool DisplayOneUnit { get; set; }
-        }
+    static readonly Fact[] Hunderds =
+    [
+        new() {Value = 1_000_000_000_000_000_000L, Name = "triljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+        new() {Value = 1_000_000_000_000_000L,     Name = "biljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+        new() {Value = 1_000_000_000_000L,         Name = "biljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+        new() {Value = 1000000000,                 Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+        new() {Value = 1000000,                    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
+        new() {Value = 1000,                       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
+        new() {Value = 100,                        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
+    ];
 
-        static readonly Fact[] Hunderds =
-        [
-            new() {Value = 1_000_000_000_000_000_000L, Name = "triljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new() {Value = 1_000_000_000_000_000L,     Name = "biljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new() {Value = 1_000_000_000_000L,         Name = "biljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new() {Value = 1000000000,                 Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new() {Value = 1000000,                    Name = "miljoen", Prefix = " ", Postfix = " ", DisplayOneUnit = true},
-            new() {Value = 1000,                       Name = "duizend", Prefix = "",  Postfix = " ", DisplayOneUnit = false},
-            new() {Value = 100,                        Name = "honderd", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
-        ];
-
-        public override string Convert(long input)
-        {
+    public override string Convert(long input)
+    {
             var number = input;
 
             if (number == 0)
@@ -99,17 +99,17 @@
             return word;
         }
 
-        static readonly Dictionary<string, string> OrdinalExceptions = new()
-        {
-            {"een", "eerste"},
-            {"drie", "derde"},
-            {"miljoen", "miljoenste"},
-        };
+    static readonly Dictionary<string, string> OrdinalExceptions = new()
+    {
+        {"een", "eerste"},
+        {"drie", "derde"},
+        {"miljoen", "miljoenste"},
+    };
 
-        static readonly char[] EndingCharForSte = ['t', 'g', 'd'];
+    static readonly char[] EndingCharForSte = ['t', 'g', 'd'];
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             var word = Convert(number);
 
             foreach (var kv in OrdinalExceptions.Where(kv => word.EndsWith(kv.Key)))
@@ -128,5 +128,4 @@
 
             return word + "de";
         }
-    }
 }

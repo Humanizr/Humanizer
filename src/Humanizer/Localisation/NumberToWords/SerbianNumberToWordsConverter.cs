@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class SerbianNumberToWordsConverter(CultureInfo? culture) :
-        GenderlessNumberToWordsConverter
-    {
-        static readonly string[] UnitsMap = ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset", "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šestnaest", "sedemnaest", "osemnaest", "devetnaest"];
-        static readonly string[] TensMap = ["nula", "deset", "dvadeset", "trideset", "četrdeset", "petdeset", "šestdeset", "sedamdeset", "osamdeset", "devetdeset"];
+﻿namespace Humanizer;
 
-        public override string Convert(long input)
-        {
+class SerbianNumberToWordsConverter(CultureInfo? culture) :
+    GenderlessNumberToWordsConverter
+{
+    static readonly string[] UnitsMap = ["nula", "jedan", "dva", "tri", "četiri", "pet", "šest", "sedam", "osam", "devet", "deset", "jedanaest", "dvanaest", "trinaest", "četrnaest", "petnaest", "šestnaest", "sedemnaest", "osemnaest", "devetnaest"];
+    static readonly string[] TensMap = ["nula", "deset", "dvadeset", "trideset", "četrdeset", "petdeset", "šestdeset", "sedamdeset", "osamdeset", "devetdeset"];
+
+    public override string Convert(long input)
+    {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -97,12 +97,12 @@
             return string.Concat(parts);
         }
 
-        public override string ConvertToOrdinal(int number) =>
-            //TODO: In progress
-            number.ToString(culture);
+    public override string ConvertToOrdinal(int number) =>
+        //TODO: In progress
+        number.ToString(culture);
 
-        string Part(string singular, string dual, string trialQuadral, string plural, int number)
-        {
+    string Part(string singular, string dual, string trialQuadral, string plural, int number)
+    {
             switch (number)
             {
                 case 1:
@@ -116,5 +116,4 @@
                     return string.Format(plural, Convert(number));
             }
         }
-    }
 }

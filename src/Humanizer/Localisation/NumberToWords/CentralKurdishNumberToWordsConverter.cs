@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class CentralKurdishNumberToWordsConverter : GenderlessNumberToWordsConverter
-    {
-        static readonly string[] KurdishHundredsMap = ["سفر", "سەد", "دوو سەد", "سێ سەد", "چوار سەد", "پێنج سەد", "شەش سەد", "حەوت سەد", "هەشت سەد", "نۆ سەد"];
-        static readonly string[] KurdishTensMap = ["سفر", "دە", "بیست", "سی", "چل", "پەنجا", "شەست", "حەفتا", "هەشتا", "نەوەد"];
-        static readonly string[] KurdishUnitsMap = ["سفر", "یەک", "دوو", "سێ", "چوار", "پێنج", "شەش", "حەوت", "هەشت", "نۆ", "دە", "یازدە", "دوازدە", "سێزدە", "چواردە", "پازدە", "شازدە", "حەڤدە", "هەژدە", "نۆزدە"];
+﻿namespace Humanizer;
 
-        public override string Convert(long number)
-        {
+class CentralKurdishNumberToWordsConverter : GenderlessNumberToWordsConverter
+{
+    static readonly string[] KurdishHundredsMap = ["سفر", "سەد", "دوو سەد", "سێ سەد", "چوار سەد", "پێنج سەد", "شەش سەد", "حەوت سەد", "هەشت سەد", "نۆ سەد"];
+    static readonly string[] KurdishTensMap = ["سفر", "دە", "بیست", "سی", "چل", "پەنجا", "شەست", "حەفتا", "هەشتا", "نەوەد"];
+    static readonly string[] KurdishUnitsMap = ["سفر", "یەک", "دوو", "سێ", "چوار", "پێنج", "شەش", "حەوت", "هەشت", "نۆ", "دە", "یازدە", "دوازدە", "سێزدە", "چواردە", "پازدە", "شازدە", "حەڤدە", "هەژدە", "نۆزدە"];
+
+    public override string Convert(long number)
+    {
             var largestNumber = Math.Pow(10, 15) * 1000 - 1;
             if (number > largestNumber || number < -largestNumber)
             {
@@ -61,13 +61,12 @@
             return sentence;
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             var word = Convert(number);
             return $"{word}{(IsVowel(word[^1]) ? "یەم" : "ەم")}";
         }
 
-        static bool IsVowel(char c) =>
-            c is 'ا' or 'ێ' or 'ۆ' or 'ە' or 'ی';
-    }
+    static bool IsVowel(char c) =>
+        c is 'ا' or 'ێ' or 'ۆ' or 'ە' or 'ی';
 }

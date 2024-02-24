@@ -1,13 +1,13 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+/// <summary>
+/// Truncate a string to a fixed length
+/// </summary>
+class FixedLengthTruncator : ITruncator
 {
-    /// <summary>
-    /// Truncate a string to a fixed length
-    /// </summary>
-    class FixedLengthTruncator : ITruncator
+    [return: NotNullIfNotNull(nameof(value))]
+    public string? Truncate(string? value, int length, string? truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
     {
-        [return: NotNullIfNotNull(nameof(value))]
-        public string? Truncate(string? value, int length, string? truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
-        {
             if (value == null)
             {
                 return null;
@@ -36,5 +36,4 @@
                 ? value.Substring(0, length - truncationString.Length) + truncationString
                 : value;
         }
-    }
 }

@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
-    {
-        static readonly string[] FarsiHundredsMap = ["صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"];
-        static readonly string[] FarsiTensMap = ["صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"];
-        static readonly string[] FarsiUnitsMap = ["صفر", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه", "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده"];
+﻿namespace Humanizer;
 
-        public override string Convert(long number)
-        {
+class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
+{
+    static readonly string[] FarsiHundredsMap = ["صفر", "صد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"];
+    static readonly string[] FarsiTensMap = ["صفر", "ده", "بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"];
+    static readonly string[] FarsiUnitsMap = ["صفر", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه", "ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده"];
+
+    public override string Convert(long number)
+    {
             if (number < 0)
             {
                 return $"منفی {Convert(-number)}";
@@ -53,8 +53,8 @@
             return string.Join(" و ", parts);
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             if (number == 1)
             {
                 return "اول";
@@ -73,5 +73,4 @@
             var word = Convert(number);
             return $"{word}{(word.EndsWith("ی") ? " ام" : "م")}";
         }
-    }
 }

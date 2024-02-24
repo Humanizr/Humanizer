@@ -1,17 +1,17 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
 {
-    class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
+    static readonly string[] UnitsMap = ["nulis", "vienas", "du", "trys", "keturi", "penki", "šeši", "septyni", "aštuoni", "devyni", "dešimt", "vienuolika", "dvylika", "trylika", "keturiolika", "penkiolika", "šešiolika", "septyniolika", "aštuoniolika", "devyniolika"];
+    static readonly string[] TensMap = [string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"];
+    static readonly string[] HundredsMap = [string.Empty, "šimtas", "du šimtai", "trys šimtai", "keturi šimtai", "penki šimtai", "šeši šimtai", "septyni šimtai", "aštuoni šimtai", "devyni šimtai"];
+
+    static readonly string[] OrdinalUnitsMap = [string.Empty, "pirm", "antr", "treči", "ketvirt", "penkt", "šešt", "septint", "aštunt", "devint", "dešimt", "vienuolikt", "dvylikt", "trylikt", "keturiolikt", "penkiolikt", "šešiolikt", "septyniolikt", "aštuoniolikt", "devyniolikt", "dvidešimt"];
+    static readonly string[] OrdinalTensMap = [string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"];
+    static readonly string[] OrdinalHundredsMap = [string.Empty, "šimt", "du šimt", "trys šimt", "keturi šimt", "penki šimt", "šeši šimt", "septyni šimt", "aštuoni šimt", "devyni šimt"];
+
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        static readonly string[] UnitsMap = ["nulis", "vienas", "du", "trys", "keturi", "penki", "šeši", "septyni", "aštuoni", "devyni", "dešimt", "vienuolika", "dvylika", "trylika", "keturiolika", "penkiolika", "šešiolika", "septyniolika", "aštuoniolika", "devyniolika"];
-        static readonly string[] TensMap = [string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"];
-        static readonly string[] HundredsMap = [string.Empty, "šimtas", "du šimtai", "trys šimtai", "keturi šimtai", "penki šimtai", "šeši šimtai", "septyni šimtai", "aštuoni šimtai", "devyni šimtai"];
-
-        static readonly string[] OrdinalUnitsMap = [string.Empty, "pirm", "antr", "treči", "ketvirt", "penkt", "šešt", "septint", "aštunt", "devint", "dešimt", "vienuolikt", "dvylikt", "trylikt", "keturiolikt", "penkiolikt", "šešiolikt", "septyniolikt", "aštuoniolikt", "devyniolikt", "dvidešimt"];
-        static readonly string[] OrdinalTensMap = [string.Empty, "dešimt", "dvidešimt", "trisdešimt", "keturiasdešimt", "penkiasdešimt", "šešiasdešimt", "septyniasdešimt", "aštuoniasdešimt", "devyniasdešimt"];
-        static readonly string[] OrdinalHundredsMap = [string.Empty, "šimt", "du šimt", "trys šimt", "keturi šimt", "penki šimt", "šeši šimt", "septyni šimt", "aštuoni šimt", "devyni šimt"];
-
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
             if (gender == GrammaticalGender.Neuter)
             {
                 throw new NotSupportedException();
@@ -32,8 +32,8 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int input, GrammaticalGender gender)
-        {
+    public override string ConvertToOrdinal(int input, GrammaticalGender gender)
+    {
             if (gender == GrammaticalGender.Neuter)
             {
                 throw new NotSupportedException();
@@ -51,8 +51,8 @@
             return string.Join(" ", parts);
         }
 
-        static void HandleNegative(List<string> parts, ref long number)
-        {
+    static void HandleNegative(List<string> parts, ref long number)
+    {
             if (number < 0)
             {
                 parts.Add("minus");
@@ -60,9 +60,9 @@
             }
         }
 
-        static void CollectParts(ICollection<string> parts, ref long number, long divisor,
-            GrammaticalGender gender, params string[] forms)
-        {
+    static void CollectParts(ICollection<string> parts, ref long number, long divisor,
+        GrammaticalGender gender, params string[] forms)
+    {
             var result = number / divisor;
             if (result == 0)
             {
@@ -79,9 +79,9 @@
             parts.Add(ChooseForm(result, forms));
         }
 
-        static void CollectOrdinalParts(ICollection<string> parts, ref long number, long divisor,
-            GrammaticalGender gender, string ordinalForm, params string[] forms)
-        {
+    static void CollectOrdinalParts(ICollection<string> parts, ref long number, long divisor,
+        GrammaticalGender gender, string ordinalForm, params string[] forms)
+    {
             var result = number / divisor;
             if (result == 0)
             {
@@ -98,8 +98,8 @@
             parts.Add(ChooseCardinalOrOrdinalForm(result, ordinalForm, forms, useOrdinalForm: number == 0));
         }
 
-        static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
-        {
+    static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
+    {
             if (number >= 100)
             {
                 var hundreds = number / 100;
@@ -120,9 +120,9 @@
             }
         }
 
-        static void CollectOrdinalPartsUnderOneThousand(ICollection<string> parts, long number,
-            GrammaticalGender gender, bool lastNumber = false)
-        {
+    static void CollectOrdinalPartsUnderOneThousand(ICollection<string> parts, long number,
+        GrammaticalGender gender, bool lastNumber = false)
+    {
             if (number >= 100)
             {
                 var hundreds = number / 100;
@@ -155,12 +155,12 @@
             }
         }
 
-        static string ChooseForm(long number, string[] forms) =>
-            forms[GetFormIndex(number)];
+    static string ChooseForm(long number, string[] forms) =>
+        forms[GetFormIndex(number)];
 
-        static string ChooseCardinalOrOrdinalForm(long number, string ordinalForm, string[] cardinalForms,
-            bool useOrdinalForm = false)
-        {
+    static string ChooseCardinalOrOrdinalForm(long number, string ordinalForm, string[] cardinalForms,
+        bool useOrdinalForm = false)
+    {
             if (useOrdinalForm)
             {
                 return ordinalForm;
@@ -169,8 +169,8 @@
             return ChooseForm(number, cardinalForms);
         }
 
-        static int GetFormIndex(long number)
-        {
+    static int GetFormIndex(long number)
+    {
             var form = LithuanianNumberFormDetector.Detect(number);
 
             switch (form)
@@ -192,8 +192,8 @@
             }
         }
 
-        static string GetCardinalNumberForGender(string number, GrammaticalGender gender)
-        {
+    static string GetCardinalNumberForGender(string number, GrammaticalGender gender)
+    {
             if (gender == GrammaticalGender.Masculine)
             {
                 return number;
@@ -222,8 +222,8 @@
             throw new ArgumentOutOfRangeException(nameof(gender));
         }
 
-        static string GetOrdinalEndingForGender(GrammaticalGender gender)
-        {
+    static string GetOrdinalEndingForGender(GrammaticalGender gender)
+    {
             switch (gender)
             {
                 case GrammaticalGender.Masculine:
@@ -238,5 +238,4 @@
                     throw new ArgumentOutOfRangeException(nameof(gender));
             }
         }
-    }
 }

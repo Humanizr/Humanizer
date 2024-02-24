@@ -1,9 +1,9 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class FrenchBelgianNumberToWordsConverter : FrenchNumberToWordsConverterBase
 {
-    class FrenchBelgianNumberToWordsConverter : FrenchNumberToWordsConverterBase
+    protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
     {
-        protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
-        {
             if (number == 80)
             {
                 parts.Add(pluralize ? "quatre-vingts" : "quatre-vingt");
@@ -18,8 +18,8 @@
             }
         }
 
-        protected override string GetTens(long tens)
-        {
+    protected override string GetTens(long tens)
+    {
             if (tens == 8)
             {
                 return "quatre-vingt";
@@ -27,5 +27,4 @@
 
             return base.GetTens(tens);
         }
-    }
 }

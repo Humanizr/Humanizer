@@ -1,13 +1,13 @@
-namespace Humanizer
+namespace Humanizer;
+
+/// <summary>
+/// Truncate a string to a fixed number of letters or digits
+/// </summary>
+class FixedNumberOfCharactersTruncator : ITruncator
 {
-    /// <summary>
-    /// Truncate a string to a fixed number of letters or digits
-    /// </summary>
-    class FixedNumberOfCharactersTruncator : ITruncator
+    [return: NotNullIfNotNull(nameof(value))]
+    public string? Truncate(string? value, int length, string? truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
     {
-        [return: NotNullIfNotNull(nameof(value))]
-        public string? Truncate(string? value, int length, string? truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
-        {
             if (value == null)
             {
                 return null;
@@ -63,5 +63,4 @@ namespace Humanizer
 
             return value;
         }
-    }
 }

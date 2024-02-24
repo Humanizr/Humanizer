@@ -1,14 +1,13 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+public enum TimeUnit
 {
-    public enum TimeUnit
-    {
-        Millisecond,
-        Second,
-        Minute,
-        Hour,
-        Day,
-        Week,
-        Month,
-        Year
-    }
+    Millisecond,
+    Second,
+    Minute,
+    Hour,
+    Day,
+    Week,
+    Month,
+    Year
 }

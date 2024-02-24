@@ -1,37 +1,37 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class TurkishNumberToWordConverter :
+    GenderlessNumberToWordsConverter
 {
-    class TurkishNumberToWordConverter :
-        GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];
+    static readonly string[] TensMap = ["sıfır", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"];
+
+    static readonly Dictionary<char, string> OrdinalSuffix = new()
     {
-        static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];
-        static readonly string[] TensMap = ["sıfır", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"];
+        {'ı', "ıncı"},
+        {'i', "inci"},
+        {'u', "uncu"},
+        {'ü', "üncü"},
+        {'o', "uncu"},
+        {'ö', "üncü"},
+        {'e', "inci"},
+        {'a', "ıncı"},
+    };
 
-        static readonly Dictionary<char, string> OrdinalSuffix = new()
-        {
-            {'ı', "ıncı"},
-            {'i', "inci"},
-            {'u', "uncu"},
-            {'ü', "üncü"},
-            {'o', "uncu"},
-            {'ö', "üncü"},
-            {'e', "inci"},
-            {'a', "ıncı"},
-        };
+    static readonly Dictionary<char, string> TupleSuffix = new()
+    {
+        {'ı', "lı"},
+        {'i', "li"},
+        {'u', "lu"},
+        {'ü', "lü"},
+        {'o', "lu"},
+        {'ö', "lü"},
+        {'e', "li"},
+        {'a', "lı"},
+    };
 
-        static readonly Dictionary<char, string> TupleSuffix = new()
-        {
-            {'ı', "lı"},
-            {'i', "li"},
-            {'u', "lu"},
-            {'ü', "lü"},
-            {'o', "lu"},
-            {'ö', "lü"},
-            {'e', "li"},
-            {'a', "lı"},
-        };
-
-        public override string Convert(long input)
-        {
+    public override string Convert(long input)
+    {
             var number = input;
             if (number == 0)
             {
@@ -105,8 +105,8 @@
             return toWords;
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             var word = Convert(number);
             var wordSuffix = string.Empty;
             var suffixFoundOnLastVowel = false;
@@ -133,8 +133,8 @@
             return $"{word}{wordSuffix}";
         }
 
-        public override string ConvertToTuple(int number)
-        {
+    public override string ConvertToTuple(int number)
+    {
             switch (number)
             {
                 case 1:
@@ -156,5 +156,4 @@
                     return $"{word}{wordSuffix}";
             }
         }
-    }
 }

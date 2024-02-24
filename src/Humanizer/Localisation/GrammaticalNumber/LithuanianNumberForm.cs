@@ -1,9 +1,8 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+enum LithuanianNumberForm
 {
-    enum LithuanianNumberForm
-    {
-        Singular,
-        Plural,
-        GenitivePlural
-    }
+    Singular,
+    Plural,
+    GenitivePlural
 }

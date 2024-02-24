@@ -1,24 +1,24 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+/// <summary>
+/// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.
+/// </summary>
+public static class Vocabularies
 {
+    static readonly Lazy<Vocabulary> Instance;
+
+    static Vocabularies() =>
+        Instance = new(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
+
     /// <summary>
-    /// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.
+    /// The default vocabulary used for singular/plural irregularities.
+    /// Rules can be added to this vocabulary and will be picked up by called to Singularize() and Pluralize().
+    /// At this time, multiple vocabularies and removing existing rules are not supported.
     /// </summary>
-    public static class Vocabularies
+    public static Vocabulary Default => Instance.Value;
+
+    static Vocabulary BuildDefault()
     {
-        static readonly Lazy<Vocabulary> Instance;
-
-        static Vocabularies() =>
-            Instance = new(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
-
-        /// <summary>
-        /// The default vocabulary used for singular/plural irregularities.
-        /// Rules can be added to this vocabulary and will be picked up by called to Singularize() and Pluralize().
-        /// At this time, multiple vocabularies and removing existing rules are not supported.
-        /// </summary>
-        public static Vocabulary Default => Instance.Value;
-
-        static Vocabulary BuildDefault()
-        {
             var _default = new Vocabulary();
 
             _default.AddPlural("$", "s");
@@ -151,5 +151,4 @@
 
             return _default;
         }
-    }
 }

@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class ArabicFormatter() :
-        DefaultFormatter("ar")
-    {
-        const string DualPostfix = "_Dual";
-        const string PluralPostfix = "_Plural";
+﻿namespace Humanizer;
 
-        protected override string GetResourceKey(string resourceKey, int number)
-        {
+class ArabicFormatter() :
+    DefaultFormatter("ar")
+{
+    const string DualPostfix = "_Dual";
+    const string PluralPostfix = "_Plural";
+
+    protected override string GetResourceKey(string resourceKey, int number)
+    {
             //In Arabic pluralization 2 entities gets a different word.
             if (number == 2)
             {
@@ -22,5 +22,4 @@
 
             return resourceKey;
         }
-    }
 }

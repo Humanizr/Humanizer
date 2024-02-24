@@ -1,17 +1,17 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class RussianFormatter() :
+    DefaultFormatter("ru")
 {
-    class RussianFormatter() :
-        DefaultFormatter("ru")
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        protected override string GetResourceKey(string resourceKey, int number)
-        {
             var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(number);
             var suffix = GetSuffix(grammaticalNumber);
             return resourceKey + suffix;
         }
 
-        static string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
-        {
+    static string GetSuffix(RussianGrammaticalNumber grammaticalNumber)
+    {
             if (grammaticalNumber == RussianGrammaticalNumber.Singular)
             {
                 return "_Singular";
@@ -24,5 +24,4 @@
 
             return "";
         }
-    }
 }

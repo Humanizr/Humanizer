@@ -1,26 +1,26 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class AzerbaijaniNumberToWordsConverter :
+    GenderlessNumberToWordsConverter
 {
-    class AzerbaijaniNumberToWordsConverter :
-        GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz"];
+    static readonly string[] TensMap = ["sıfır", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan"];
+
+    static readonly Dictionary<char, string> OrdinalSuffix = new()
     {
-        static readonly string[] UnitsMap = ["sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz"];
-        static readonly string[] TensMap = ["sıfır", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan"];
+        {'ı', "ıncı"},
+        {'i', "inci"},
+        {'u', "uncu"},
+        {'ü', "üncü"},
+        {'o', "uncu"},
+        {'ö', "üncü"},
+        {'e', "inci"},
+        {'a', "ıncı"},
+        {'ə', "inci"},
+    };
 
-        static readonly Dictionary<char, string> OrdinalSuffix = new()
-        {
-            {'ı', "ıncı"},
-            {'i', "inci"},
-            {'u', "uncu"},
-            {'ü', "üncü"},
-            {'o', "uncu"},
-            {'ö', "üncü"},
-            {'e', "inci"},
-            {'a', "ıncı"},
-            {'ə', "inci"},
-        };
-
-        public override string Convert(long input)
-        {
+    public override string Convert(long input)
+    {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -80,8 +80,8 @@
             return toWords;
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             var word = Convert(number);
             var wordSuffix = string.Empty;
             var suffixFoundOnLastVowel = false;
@@ -107,5 +107,4 @@
 
             return $"{word}{wordSuffix}";
         }
-    }
 }

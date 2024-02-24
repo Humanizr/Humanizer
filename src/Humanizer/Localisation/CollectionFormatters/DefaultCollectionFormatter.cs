@@ -1,26 +1,26 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class DefaultCollectionFormatter : ICollectionFormatter
 {
-    class DefaultCollectionFormatter : ICollectionFormatter
+    protected string DefaultSeparator = "";
+
+    public DefaultCollectionFormatter(string defaultSeparator) =>
+        DefaultSeparator = defaultSeparator;
+
+    public virtual string Humanize<T>(IEnumerable<T> collection) =>
+        Humanize(collection, o => o?.ToString(), DefaultSeparator);
+
+    public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter) =>
+        Humanize(collection, objectFormatter, DefaultSeparator);
+
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter) =>
+        Humanize(collection, objectFormatter, DefaultSeparator);
+
+    public virtual string Humanize<T>(IEnumerable<T> collection, string separator) =>
+        Humanize(collection, o => o?.ToString(), separator);
+
+    public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator)
     {
-        protected string DefaultSeparator = "";
-
-        public DefaultCollectionFormatter(string defaultSeparator) =>
-            DefaultSeparator = defaultSeparator;
-
-        public virtual string Humanize<T>(IEnumerable<T> collection) =>
-            Humanize(collection, o => o?.ToString(), DefaultSeparator);
-
-        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter) =>
-            Humanize(collection, objectFormatter, DefaultSeparator);
-
-        public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter) =>
-            Humanize(collection, objectFormatter, DefaultSeparator);
-
-        public virtual string Humanize<T>(IEnumerable<T> collection, string separator) =>
-            Humanize(collection, o => o?.ToString(), separator);
-
-        public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator)
-        {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -36,8 +36,8 @@
                 separator);
         }
 
-        public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator)
-        {
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator)
+    {
             if (collection == null)
             {
                 throw new ArgumentNullException(nameof(collection));
@@ -53,8 +53,8 @@
                 separator);
         }
 
-        string HumanizeDisplayStrings(IEnumerable<string?> strings, string separator)
-        {
+    string HumanizeDisplayStrings(IEnumerable<string?> strings, string separator)
+    {
             var itemsArray = strings
                 .Select(item => item == null ? string.Empty : item.Trim())
                 .Where(item => !string.IsNullOrWhiteSpace(item))
@@ -81,6 +81,5 @@
                 lastItem);
         }
 
-        protected virtual string GetConjunctionFormatString(int itemCount) => "{0} {1} {2}";
-    }
+    protected virtual string GetConjunctionFormatString(int itemCount) => "{0} {1} {2}";
 }

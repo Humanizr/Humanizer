@@ -1,10 +1,10 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
 {
-    class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
+    public CollectionFormatterRegistry()
+        : base(new DefaultCollectionFormatter("&"))
     {
-        public CollectionFormatterRegistry()
-            : base(new DefaultCollectionFormatter("&"))
-        {
             Register("en", new OxfordStyleCollectionFormatter());
             Register("it", new DefaultCollectionFormatter("e"));
             Register("de", new DefaultCollectionFormatter("und"));
@@ -19,5 +19,4 @@
             Register("es", new DefaultCollectionFormatter("y"));
             Register("lb", new DefaultCollectionFormatter("an"));
         }
-    }
 }

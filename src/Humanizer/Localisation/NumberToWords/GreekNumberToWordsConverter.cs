@@ -1,57 +1,57 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
+    readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+
+    readonly string[] UnitsMap = ["μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+
+    readonly string[] TensMap = ["", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα"];
+
+    readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
+
+    readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
+
+    readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
+
+    static readonly Dictionary<long, string> ΟrdinalMap = new()
     {
-        readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+        { 0, string.Empty },
+        { 1, "πρώτος" },
+        { 2, "δεύτερος" },
+        { 3, "τρίτος" },
+        { 4, "τέταρτος" },
+        { 5, "πέμπτος" },
+        { 6, "έκτος" },
+        { 7, "έβδομος" },
+        { 8, "όγδοος" },
+        { 9, "ένατος" },
+        { 10, "δέκατος" },
+        { 20, "εικοστός" },
+        { 30, "τριακοστός" },
+        { 40, "τεσσαρακοστός" },
+        { 50, "πεντηκοστός" },
+        { 60, "εξηκοστός" },
+        { 70, "εβδομηκοστός" },
+        { 80, "ογδοηκοστός" },
+        { 90, "ενενηκοστός" },
+        { 100, "εκατοστός" },
+        { 200, "διακοσιοστός" },
+        { 300, "τριακοσιοστός" },
+        { 400, "τετρακοσιστός" },
+        { 500, "πεντακοσιοστός" },
+        { 600, "εξακοσιοστός" },
+        { 700, "εφτακοσιοστός" },
+        { 800, "οχτακοσιοστός" },
+        { 900, "εννιακοσιοστός" },
+        { 1000, "χιλιοστός" }
+    };
 
-        readonly string[] UnitsMap = ["μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+    public override string Convert(long number) =>
+        ConvertImpl(number, false);
 
-        readonly string[] TensMap = ["", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα"];
-
-        readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
-
-        readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
-
-        readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
-
-        static readonly Dictionary<long, string> ΟrdinalMap = new()
-        {
-            { 0, string.Empty },
-            { 1, "πρώτος" },
-            { 2, "δεύτερος" },
-            { 3, "τρίτος" },
-            { 4, "τέταρτος" },
-            { 5, "πέμπτος" },
-            { 6, "έκτος" },
-            { 7, "έβδομος" },
-            { 8, "όγδοος" },
-            { 9, "ένατος" },
-            { 10, "δέκατος" },
-            { 20, "εικοστός" },
-            { 30, "τριακοστός" },
-            { 40, "τεσσαρακοστός" },
-            { 50, "πεντηκοστός" },
-            { 60, "εξηκοστός" },
-            { 70, "εβδομηκοστός" },
-            { 80, "ογδοηκοστός" },
-            { 90, "ενενηκοστός" },
-            { 100, "εκατοστός" },
-            { 200, "διακοσιοστός" },
-            { 300, "τριακοσιοστός" },
-            { 400, "τετρακοσιστός" },
-            { 500, "πεντακοσιοστός" },
-            { 600, "εξακοσιοστός" },
-            { 700, "εφτακοσιοστός" },
-            { 800, "οχτακοσιοστός" },
-            { 900, "εννιακοσιοστός" },
-            { 1000, "χιλιοστός" }
-        };
-
-        public override string Convert(long number) =>
-            ConvertImpl(number, false);
-
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             if (number / 10 == 0)
             {
                 return GetOneDigitOrdinal(number);
@@ -76,8 +76,8 @@
             return string.Empty;
         }
 
-        static string GetOneDigitOrdinal(int number)
-        {
+    static string GetOneDigitOrdinal(int number)
+    {
             if (ΟrdinalMap.TryGetValue(number, out var output))
             {
                 return output;
@@ -86,8 +86,8 @@
             return string.Empty;
         }
 
-        static string GetTwoDigitOrdinal(int number)
-        {
+    static string GetTwoDigitOrdinal(int number)
+    {
             if (number == 11) return "ενδέκατος";
             if (number == 12) return "δωδέκατος";
 
@@ -103,8 +103,8 @@
             return decadesString;
         }
 
-        static string GetThreeDigitOrdinal(int number)
-        {
+    static string GetThreeDigitOrdinal(int number)
+    {
             var hundreds = number / 100;
 
             if (!ΟrdinalMap.TryGetValue(hundreds*100, out var hundredsString)) return string.Empty;
@@ -122,8 +122,8 @@
             return hundredsString;
         }
 
-        static string GetFourDigitOrdinal(int number)
-        {
+    static string GetFourDigitOrdinal(int number)
+    {
             var thousands = number / 1000;
 
             if (!ΟrdinalMap.TryGetValue(thousands*1000, out var thousandsString)) return string.Empty;
@@ -146,8 +146,8 @@
             return thousandsString;
         }
 
-        string ConvertImpl(long number, bool returnPluralized)
-        {
+    string ConvertImpl(long number, bool returnPluralized)
+    {
             if (number < 13)
             {
                 return ConvertIntB13(number, returnPluralized);
@@ -177,11 +177,11 @@
             return "";
         }
 
-        string ConvertIntB13(long number, bool returnPluralized) =>
-            returnPluralized ? UnitsMap[number] : UnitMap[number];
+    string ConvertIntB13(long number, bool returnPluralized) =>
+        returnPluralized ? UnitsMap[number] : UnitMap[number];
 
-        string ConvertIntBH(long number, bool returnPluralized)
-        {
+    string ConvertIntBH(long number, bool returnPluralized)
+    {
             var result = number / 10 == 1 ? TensNoDiacriticsMap[number / 10] : TensMap[number / 10];
 
             if (number % 10 != 0)
@@ -197,8 +197,8 @@
             return result;
         }
 
-        string ConvertIntBT(long number, bool returnPluralized)
-        {
+    string ConvertIntBT(long number, bool returnPluralized)
+    {
             string result;
 
             if (number / 100 == 1)
@@ -223,8 +223,8 @@
             return result;
         }
 
-        string ConvertIntBM(long number)
-        {
+    string ConvertIntBM(long number)
+    {
             if (number / 1000 == 1)
             {
                 if (number % 1000 == 0)
@@ -245,8 +245,8 @@
             return result;
         }
 
-        string ConvertIntBB(long number)
-        {
+    string ConvertIntBB(long number)
+    {
             if (number / 1000000 == 1)
             {
                 if (number % 1000000 == 0)
@@ -267,8 +267,8 @@
             return result;
         }
 
-        string ConvertIntBTR(long number)
-        {
+    string ConvertIntBTR(long number)
+    {
             if (number / 1000000000 == 1)
             {
                 if (number % 1000000000 == 0)
@@ -288,5 +288,4 @@
 
             return result;
         }
-    }
 }

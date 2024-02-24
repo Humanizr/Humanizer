@@ -1,33 +1,33 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+    static readonly string[] TensMap = ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+    static readonly Dictionary<long, string> OrdinalExceptions = new()
     {
-        static readonly string[] UnitsMap = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-        static readonly string[] TensMap = ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        {1, "first"},
+        {2, "second"},
+        {3, "third"},
+        {4, "fourth"},
+        {5, "fifth"},
+        {8, "eighth"},
+        {9, "ninth"},
+        {12, "twelfth"},
+    };
 
-        static readonly Dictionary<long, string> OrdinalExceptions = new()
-        {
-            {1, "first"},
-            {2, "second"},
-            {3, "third"},
-            {4, "fourth"},
-            {5, "fifth"},
-            {8, "eighth"},
-            {9, "ninth"},
-            {12, "twelfth"},
-        };
+    public override string Convert(long number) =>
+        Convert(number, false);
 
-        public override string Convert(long number) =>
-            Convert(number, false);
+    public override string Convert(long number, bool addAnd = true) =>
+        Convert(number, false, addAnd);
 
-        public override string Convert(long number, bool addAnd = true) =>
-            Convert(number, false, addAnd);
+    public override string ConvertToOrdinal(int number) =>
+        Convert(number, true);
 
-        public override string ConvertToOrdinal(int number) =>
-            Convert(number, true);
-
-        string Convert(long number, bool isOrdinal, bool addAnd = true)
-        {
+    string Convert(long number, bool isOrdinal, bool addAnd = true)
+    {
             if (number == 0)
             {
                 return GetUnitValue(0, isOrdinal);
@@ -123,8 +123,8 @@
             return toWords;
         }
 
-        static string GetUnitValue(long number, bool isOrdinal)
-        {
+    static string GetUnitValue(long number, bool isOrdinal)
+    {
             if (isOrdinal)
             {
                 if (ExceptionNumbersToWords(number, out var exceptionString))
@@ -138,8 +138,8 @@
             return UnitsMap[number];
         }
 
-        static string RemoveOnePrefix(string toWords)
-        {
+    static string RemoveOnePrefix(string toWords)
+    {
             // one hundred => hundredth
             if (toWords.StartsWith("one", StringComparison.Ordinal))
             {
@@ -149,11 +149,11 @@
             return toWords;
         }
 
-        static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
-            OrdinalExceptions.TryGetValue(number, out words);
+    static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
+        OrdinalExceptions.TryGetValue(number, out words);
 
-        public override string ConvertToTuple(int number)
-        {
+    public override string ConvertToTuple(int number)
+    {
             switch (number)
             {
                 case 1:
@@ -184,5 +184,4 @@
                     return $"{number}-tuple";
             }
         }
-    }
 }

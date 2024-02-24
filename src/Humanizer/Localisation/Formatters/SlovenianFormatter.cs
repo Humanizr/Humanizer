@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class SlovenianFormatter() :
-        DefaultFormatter("sl")
-    {
-        const string DualPostfix = "_Dual";
-        const string TrialQuadralPostfix = "_Paucal";
+﻿namespace Humanizer;
 
-        protected override string GetResourceKey(string resourceKey, int number)
-        {
+class SlovenianFormatter() :
+    DefaultFormatter("sl")
+{
+    const string DualPostfix = "_Dual";
+    const string TrialQuadralPostfix = "_Paucal";
+
+    protected override string GetResourceKey(string resourceKey, int number)
+    {
             if (number == 2)
             {
                 return resourceKey + DualPostfix;
@@ -21,5 +21,4 @@
 
             return resourceKey;
         }
-    }
 }

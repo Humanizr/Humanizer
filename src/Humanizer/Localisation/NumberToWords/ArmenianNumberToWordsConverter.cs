@@ -1,25 +1,25 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class ArmenianNumberToWordsConverter :
+    GenderlessNumberToWordsConverter
 {
-    class ArmenianNumberToWordsConverter :
-        GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];
+    static readonly string[] TensMap = ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"];
+
+    static readonly Dictionary<long, string> OrdinalExceptions = new()
     {
-        static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];
-        static readonly string[] TensMap = ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"];
+        {0, "զրոյական"},
+        {1, "առաջին"},
+        {2, "երկրորդ"},
+        {3, "երրորդ"},
+        {4, "չորրորդ"}
+    };
 
-        static readonly Dictionary<long, string> OrdinalExceptions = new()
-        {
-            {0, "զրոյական"},
-            {1, "առաջին"},
-            {2, "երկրորդ"},
-            {3, "երրորդ"},
-            {4, "չորրորդ"}
-        };
+    public override string Convert(long number) =>
+        ConvertImpl(number, false);
 
-        public override string Convert(long number) =>
-            ConvertImpl(number, false);
-
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             if (ExceptionNumbersToWords(number, out var exceptionString))
             {
                 return exceptionString;
@@ -28,8 +28,8 @@
             return ConvertImpl(number, true);
         }
 
-        string ConvertImpl(long number, bool isOrdinal)
-        {
+    string ConvertImpl(long number, bool isOrdinal)
+    {
             if (number == 0)
             {
                 return GetUnitValue(0, isOrdinal);
@@ -148,8 +148,8 @@
             return toWords;
         }
 
-        static string GetUnitValue(long number, bool isOrdinal)
-        {
+    static string GetUnitValue(long number, bool isOrdinal)
+    {
             if (isOrdinal)
             {
                 return UnitsMap[number] + "երորդ";
@@ -158,8 +158,8 @@
             return UnitsMap[number];
         }
 
-        static string RemoveOnePrefix(string toWords)
-        {
+    static string RemoveOnePrefix(string toWords)
+    {
             // one hundred => hundredth
             if (toWords.StartsWith("մեկ", StringComparison.Ordinal))
             {
@@ -169,7 +169,6 @@
             return toWords;
         }
 
-        static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
-            OrdinalExceptions.TryGetValue(number, out words);
-    }
+    static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
+        OrdinalExceptions.TryGetValue(number, out words);
 }

@@ -22,48 +22,47 @@
 
 using static System.Globalization.NumberStyles;
 
-namespace Humanizer
-{
+namespace Humanizer;
 #pragma warning disable 1591
-    public struct ByteSize(double byteSize) :
-        IComparable<ByteSize>,
-        IEquatable<ByteSize>,
-        IComparable,
-        IFormattable
+public struct ByteSize(double byteSize) :
+    IComparable<ByteSize>,
+    IEquatable<ByteSize>,
+    IComparable,
+    IFormattable
+{
+    public static readonly ByteSize MinValue = FromBits(long.MinValue);
+    public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
+
+    public const long BitsInByte = 8;
+    public const long BytesInKilobyte = 1024;
+    public const long BytesInMegabyte = 1048576;
+    public const long BytesInGigabyte = 1073741824;
+    public const long BytesInTerabyte = 1099511627776;
+
+    public const string BitSymbol = "b";
+    public const string Bit = "bit";
+    public const string ByteSymbol = "B";
+    public const string Byte = "byte";
+    public const string KilobyteSymbol = "KB";
+    public const string Kilobyte = "kilobyte";
+    public const string MegabyteSymbol = "MB";
+    public const string Megabyte = "megabyte";
+    public const string GigabyteSymbol = "GB";
+    public const string Gigabyte = "gigabyte";
+    public const string TerabyteSymbol = "TB";
+    public const string Terabyte = "terabyte";
+
+    public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
+    public double Bytes { get; } = byteSize;
+    public double Kilobytes { get; } = byteSize / BytesInKilobyte;
+    public double Megabytes { get; } = byteSize / BytesInMegabyte;
+    public double Gigabytes { get; } = byteSize / BytesInGigabyte;
+    public double Terabytes { get; } = byteSize / BytesInTerabyte;
+
+    public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
+
+    public string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
     {
-        public static readonly ByteSize MinValue = FromBits(long.MinValue);
-        public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
-
-        public const long BitsInByte = 8;
-        public const long BytesInKilobyte = 1024;
-        public const long BytesInMegabyte = 1048576;
-        public const long BytesInGigabyte = 1073741824;
-        public const long BytesInTerabyte = 1099511627776;
-
-        public const string BitSymbol = "b";
-        public const string Bit = "bit";
-        public const string ByteSymbol = "B";
-        public const string Byte = "byte";
-        public const string KilobyteSymbol = "KB";
-        public const string Kilobyte = "kilobyte";
-        public const string MegabyteSymbol = "MB";
-        public const string Megabyte = "megabyte";
-        public const string GigabyteSymbol = "GB";
-        public const string Gigabyte = "gigabyte";
-        public const string TerabyteSymbol = "TB";
-        public const string Terabyte = "terabyte";
-
-        public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
-        public double Bytes { get; } = byteSize;
-        public double Kilobytes { get; } = byteSize / BytesInKilobyte;
-        public double Megabytes { get; } = byteSize / BytesInMegabyte;
-        public double Gigabytes { get; } = byteSize / BytesInGigabyte;
-        public double Terabytes { get; } = byteSize / BytesInTerabyte;
-
-        public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
-
-        public string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
-        {
             var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
             // Absolute value is used to deal with negative values
@@ -95,10 +94,10 @@ namespace Humanizer
             return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: true);
         }
 
-        public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
+    public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
 
-        public string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
-        {
+    public string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
+    {
             var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
             // Absolute value is used to deal with negative values
@@ -130,10 +129,10 @@ namespace Humanizer
             return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: false);
         }
 
-        public double LargestWholeNumberValue
+    public double LargestWholeNumberValue
+    {
+        get
         {
-            get
-            {
                 // Absolute value is used to deal with negative values
                 if (Math.Abs(Terabytes) >= 1)
                 {
@@ -162,52 +161,52 @@ namespace Humanizer
 
                 return Bits;
             }
-        }
+    }
 
-        // Get ceiling because bis are whole units
+    // Get ceiling because bis are whole units
 
-        public static ByteSize FromBits(long value) =>
-            new(value / (double) BitsInByte);
+    public static ByteSize FromBits(long value) =>
+        new(value / (double) BitsInByte);
 
-        public static ByteSize FromBytes(double value) =>
-            new(value);
+    public static ByteSize FromBytes(double value) =>
+        new(value);
 
-        public static ByteSize FromKilobytes(double value) =>
-            new(value * BytesInKilobyte);
+    public static ByteSize FromKilobytes(double value) =>
+        new(value * BytesInKilobyte);
 
-        public static ByteSize FromMegabytes(double value) =>
-            new(value * BytesInMegabyte);
+    public static ByteSize FromMegabytes(double value) =>
+        new(value * BytesInMegabyte);
 
-        public static ByteSize FromGigabytes(double value) =>
-            new(value * BytesInGigabyte);
+    public static ByteSize FromGigabytes(double value) =>
+        new(value * BytesInGigabyte);
 
-        public static ByteSize FromTerabytes(double value) =>
-            new(value * BytesInTerabyte);
+    public static ByteSize FromTerabytes(double value) =>
+        new(value * BytesInTerabyte);
 
-        /// <summary>
-        /// Converts the value of the current ByteSize object to a string.
-        /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
-        /// the largest metric prefix such that the corresponding value is greater
-        ///  than or equal to one.
-        /// </summary>
-        public override string ToString() =>
-            ToString(NumberFormatInfo.CurrentInfo);
+    /// <summary>
+    /// Converts the value of the current ByteSize object to a string.
+    /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
+    /// the largest metric prefix such that the corresponding value is greater
+    ///  than or equal to one.
+    /// </summary>
+    public override string ToString() =>
+        ToString(NumberFormatInfo.CurrentInfo);
 
-        public string ToString(IFormatProvider? provider)
-        {
+    public string ToString(IFormatProvider? provider)
+    {
             provider ??= CultureInfo.CurrentCulture;
 
             return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
         }
 
-        public string ToString(string? format) =>
-            ToString(format, NumberFormatInfo.CurrentInfo);
+    public string ToString(string? format) =>
+        ToString(format, NumberFormatInfo.CurrentInfo);
 
-        public string ToString(string? format, IFormatProvider? provider) =>
-            ToString(format, provider, toSymbol: true);
+    public string ToString(string? format, IFormatProvider? provider) =>
+        ToString(format, provider, toSymbol: true);
 
-        string ToString(string? format, IFormatProvider? provider, bool toSymbol)
-        {
+    string ToString(string? format, IFormatProvider? provider, bool toSymbol)
+    {
             format ??= "G";
             provider ??= CultureInfo.CurrentCulture;
 
@@ -274,17 +273,17 @@ namespace Humanizer
             return $"{formattedLargeWholeNumberValue} {(toSymbol ? GetLargestWholeNumberSymbol(provider) : GetLargestWholeNumberFullWord(provider))}";
         }
 
-        /// <summary>
-        /// Converts the value of the current ByteSize object to a string with
-        /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga,
-        /// tera) used is the largest metric prefix such that the corresponding
-        /// value is greater than or equal to one.
-        /// </summary>
-        public string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
-            ToString(format, provider, toSymbol: false);
+    /// <summary>
+    /// Converts the value of the current ByteSize object to a string with
+    /// full words. The metric prefix symbol (bit, byte, kilo, mega, giga,
+    /// tera) used is the largest metric prefix such that the corresponding
+    /// value is greater than or equal to one.
+    /// </summary>
+    public string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
+        ToString(format, provider, toSymbol: false);
 
-        public override bool Equals(object? value)
-        {
+    public override bool Equals(object? value)
+    {
             if (value == null)
             {
                 return false;
@@ -303,14 +302,14 @@ namespace Humanizer
             return Equals(other);
         }
 
-        public bool Equals(ByteSize value) =>
-            Bits == value.Bits;
+    public bool Equals(ByteSize value) =>
+        Bits == value.Bits;
 
-        public override int GetHashCode() =>
-            Bits.GetHashCode();
+    public override int GetHashCode() =>
+        Bits.GetHashCode();
 
-        public int CompareTo(object? obj)
-        {
+    public int CompareTo(object? obj)
+    {
             if (obj == null)
             {
                 return 1;
@@ -324,71 +323,71 @@ namespace Humanizer
             throw new ArgumentException("Object is not a ByteSize");
         }
 
-        public int CompareTo(ByteSize other) =>
-            Bits.CompareTo(other.Bits);
+    public int CompareTo(ByteSize other) =>
+        Bits.CompareTo(other.Bits);
 
-        public ByteSize Add(ByteSize bs) =>
-            new(Bytes + bs.Bytes);
+    public ByteSize Add(ByteSize bs) =>
+        new(Bytes + bs.Bytes);
 
-        public ByteSize AddBits(long value) =>
-            this + FromBits(value);
+    public ByteSize AddBits(long value) =>
+        this + FromBits(value);
 
-        public ByteSize AddBytes(double value) =>
-            this + FromBytes(value);
+    public ByteSize AddBytes(double value) =>
+        this + FromBytes(value);
 
-        public ByteSize AddKilobytes(double value) =>
-            this + FromKilobytes(value);
+    public ByteSize AddKilobytes(double value) =>
+        this + FromKilobytes(value);
 
-        public ByteSize AddMegabytes(double value) =>
-            this + FromMegabytes(value);
+    public ByteSize AddMegabytes(double value) =>
+        this + FromMegabytes(value);
 
-        public ByteSize AddGigabytes(double value) =>
-            this + FromGigabytes(value);
+    public ByteSize AddGigabytes(double value) =>
+        this + FromGigabytes(value);
 
-        public ByteSize AddTerabytes(double value) =>
-            this + FromTerabytes(value);
+    public ByteSize AddTerabytes(double value) =>
+        this + FromTerabytes(value);
 
-        public ByteSize Subtract(ByteSize bs) =>
-            new(Bytes - bs.Bytes);
+    public ByteSize Subtract(ByteSize bs) =>
+        new(Bytes - bs.Bytes);
 
-        public static ByteSize operator +(ByteSize b1, ByteSize b2) =>
-            new(b1.Bytes + b2.Bytes);
+    public static ByteSize operator +(ByteSize b1, ByteSize b2) =>
+        new(b1.Bytes + b2.Bytes);
 
-        public static ByteSize operator -(ByteSize b1, ByteSize b2) =>
-            new(b1.Bytes - b2.Bytes);
+    public static ByteSize operator -(ByteSize b1, ByteSize b2) =>
+        new(b1.Bytes - b2.Bytes);
 
-        public static ByteSize operator ++(ByteSize b) =>
-            new(b.Bytes + 1);
+    public static ByteSize operator ++(ByteSize b) =>
+        new(b.Bytes + 1);
 
-        public static ByteSize operator -(ByteSize b) =>
-            new(-b.Bytes);
+    public static ByteSize operator -(ByteSize b) =>
+        new(-b.Bytes);
 
-        public static ByteSize operator --(ByteSize b) =>
-            new(b.Bytes - 1);
+    public static ByteSize operator --(ByteSize b) =>
+        new(b.Bytes - 1);
 
-        public static bool operator ==(ByteSize b1, ByteSize b2) =>
-            b1.Bits == b2.Bits;
+    public static bool operator ==(ByteSize b1, ByteSize b2) =>
+        b1.Bits == b2.Bits;
 
-        public static bool operator !=(ByteSize b1, ByteSize b2) =>
-            b1.Bits != b2.Bits;
+    public static bool operator !=(ByteSize b1, ByteSize b2) =>
+        b1.Bits != b2.Bits;
 
-        public static bool operator <(ByteSize b1, ByteSize b2) =>
-            b1.Bits < b2.Bits;
+    public static bool operator <(ByteSize b1, ByteSize b2) =>
+        b1.Bits < b2.Bits;
 
-        public static bool operator <=(ByteSize b1, ByteSize b2) =>
-            b1.Bits <= b2.Bits;
+    public static bool operator <=(ByteSize b1, ByteSize b2) =>
+        b1.Bits <= b2.Bits;
 
-        public static bool operator >(ByteSize b1, ByteSize b2) =>
-            b1.Bits > b2.Bits;
+    public static bool operator >(ByteSize b1, ByteSize b2) =>
+        b1.Bits > b2.Bits;
 
-        public static bool operator >=(ByteSize b1, ByteSize b2) =>
-            b1.Bits >= b2.Bits;
+    public static bool operator >=(ByteSize b1, ByteSize b2) =>
+        b1.Bits >= b2.Bits;
 
-        public static bool TryParse(string? s, out ByteSize result) =>
-            TryParse(s, null, out result);
+    public static bool TryParse(string? s, out ByteSize result) =>
+        TryParse(s, null, out result);
 
-        public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result)
-        {
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result)
+    {
             // Arg checking
             if (string.IsNullOrWhiteSpace(s))
             {
@@ -486,8 +485,8 @@ namespace Humanizer
             return true;
         }
 
-        static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
-        {
+    static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
+    {
             if (formatProvider is NumberFormatInfo numberFormat)
                 return numberFormat;
 
@@ -496,11 +495,11 @@ namespace Humanizer
             return culture.NumberFormat;
         }
 
-        public static ByteSize Parse(string s) =>
-            Parse(s, null);
+    public static ByteSize Parse(string s) =>
+        Parse(s, null);
 
-        public static ByteSize Parse(string s, IFormatProvider? formatProvider)
-        {
+    public static ByteSize Parse(string s, IFormatProvider? formatProvider)
+    {
             if (s == null)
             {
                 throw new ArgumentNullException(nameof(s));
@@ -513,6 +512,5 @@ namespace Humanizer
 
             throw new FormatException("Value is not in the correct format");
         }
-    }
 }
 #pragma warning restore 1591

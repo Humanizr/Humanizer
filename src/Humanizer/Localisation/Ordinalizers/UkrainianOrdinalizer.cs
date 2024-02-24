@@ -1,12 +1,12 @@
-﻿namespace Humanizer
-{
-    class UkrainianOrdinalizer : DefaultOrdinalizer
-    {
-        public override string Convert(int number, string numberString) =>
-            Convert(number, numberString, GrammaticalGender.Masculine);
+﻿namespace Humanizer;
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
-        {
+class UkrainianOrdinalizer : DefaultOrdinalizer
+{
+    public override string Convert(int number, string numberString) =>
+        Convert(number, numberString, GrammaticalGender.Masculine);
+
+    public override string Convert(int number, string numberString, GrammaticalGender gender)
+    {
             if (gender == GrammaticalGender.Masculine)
             {
                 return numberString + "-й";
@@ -32,5 +32,4 @@
 
             return numberString + "-е";
         }
-    }
 }

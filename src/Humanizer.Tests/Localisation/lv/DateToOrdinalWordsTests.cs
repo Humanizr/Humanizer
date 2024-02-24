@@ -1,10 +1,9 @@
-﻿namespace Humanizer.Tests.Localisation.lv
+﻿namespace Humanizer.Tests.Localisation.lv;
+
+[UseCulture("lv")]
+public class DateToOrdinalWordsTests
 {
-    [UseCulture("lv")]
-    public class DateToOrdinalWordsTests
-    {
-        [Fact]
-        public void OrdinalizeString() =>
-            Assert.Equal("1 janvāris 2015", new DateTime(2015, 1, 1).ToOrdinalWords());
-    }
+    [Fact]
+    public void OrdinalizeString() =>
+        Assert.Equal("1 janvāris 2015", new DateTime(2015, 1, 1).ToOrdinalWords());
 }

@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class HebrewFormatter() :
-        DefaultFormatter("he")
-    {
-        const string DualPostfix = "_Dual";
-        const string PluralPostfix = "_Plural";
+﻿namespace Humanizer;
 
-        protected override string GetResourceKey(string resourceKey, int number)
-        {
+class HebrewFormatter() :
+    DefaultFormatter("he")
+{
+    const string DualPostfix = "_Dual";
+    const string PluralPostfix = "_Plural";
+
+    protected override string GetResourceKey(string resourceKey, int number)
+    {
             //In Hebrew pluralization 2 entities gets a different word.
             if (number == 2)
             {
@@ -23,5 +23,4 @@
 
             return resourceKey;
         }
-    }
 }
