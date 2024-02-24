@@ -1840,6 +1840,7 @@ namespace Humanizer
     }
     public static class RomanNumeralExtensions
     {
+        public static int FromRoman(System.ReadOnlySpan<char> input) { }
         public static int FromRoman(this string input) { }
         public static string ToRoman(this int input) { }
     }
