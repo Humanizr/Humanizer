@@ -1,40 +1,40 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class PolishNumberToWordsConverter(CultureInfo? culture) :
+    GenderedNumberToWordsConverter
 {
-    class PolishNumberToWordsConverter(CultureInfo? culture) :
-        GenderedNumberToWordsConverter
+    static readonly string[] HundredsMap =
+    [
+        "zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset"
+    ];
+
+    static readonly string[] TensMap =
+    [
+        "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt",
+        "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt"
+    ];
+
+    static readonly string[] UnitsMap =
+    [
+        "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć",
+        "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście",
+        "osiemnaście", "dziewiętnaście"
+    ];
+
+    static readonly string[][] PowersOfThousandMap =
+    [
+        ["tysiąc", "tysiące", "tysięcy"],
+        ["milion", "miliony", "milionów"],
+        ["miliard", "miliardy", "miliardów"],
+        ["bilion", "biliony", "bilionów"],
+        ["biliard", "biliardy", "biliardów"],
+        ["trylion", "tryliony", "trylionów"]
+    ];
+
+    const long MaxPossibleDivisor = 1_000_000_000_000_000_000;
+
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        static readonly string[] HundredsMap =
-        [
-            "zero", "sto", "dwieście", "trzysta", "czterysta", "pięćset", "sześćset", "siedemset", "osiemset", "dziewięćset"
-        ];
-
-        static readonly string[] TensMap =
-        [
-            "zero", "dziesięć", "dwadzieścia", "trzydzieści", "czterdzieści", "pięćdziesiąt", "sześćdziesiąt",
-            "siedemdziesiąt", "osiemdziesiąt", "dziewięćdziesiąt"
-        ];
-
-        static readonly string[] UnitsMap =
-        [
-            "zero", "jeden", "dwa", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć",
-            "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście",
-            "osiemnaście", "dziewiętnaście"
-        ];
-
-        static readonly string[][] PowersOfThousandMap =
-        [
-            ["tysiąc", "tysiące", "tysięcy"],
-            ["milion", "miliony", "milionów"],
-            ["miliard", "miliardy", "miliardów"],
-            ["bilion", "biliony", "bilionów"],
-            ["biliard", "biliardy", "biliardów"],
-            ["trylion", "tryliony", "trylionów"]
-        ];
-
-        const long MaxPossibleDivisor = 1_000_000_000_000_000_000;
-
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
             if (input == 0)
             {
                 return "zero";
@@ -46,11 +46,11 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-            number.ToString(culture);
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+        number.ToString(culture);
 
-        static void CollectParts(ICollection<string> parts, long input, GrammaticalGender gender)
-        {
+    static void CollectParts(ICollection<string> parts, long input, GrammaticalGender gender)
+    {
             var inputSign = 1;
             if (input < 0)
             {
@@ -91,8 +91,8 @@
             }
         }
 
-        static void CollectPartsUnderThousand(ICollection<string> parts, int number, GrammaticalGender gender)
-        {
+    static void CollectPartsUnderThousand(ICollection<string> parts, int number, GrammaticalGender gender)
+    {
             var hundredsDigit = number / 100;
             var tensDigit = number % 100 / 10;
             var unitsDigit = number % 10;
@@ -133,8 +133,8 @@
             }
         }
 
-        static string GetPowerOfThousandNameForm(int multiplier, int power)
-        {
+    static string GetPowerOfThousandNameForm(int multiplier, int power)
+    {
             const int singularIndex = 0;
             const int pluralIndex = 1;
             const int genitiveIndex = 2;
@@ -151,5 +151,4 @@
             }
             return PowersOfThousandMap[power][pluralIndex];
         }
-    }
 }

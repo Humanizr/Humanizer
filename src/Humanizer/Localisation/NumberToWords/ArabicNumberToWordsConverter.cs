@@ -1,21 +1,21 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class ArabicNumberToWordsConverter :
+    GenderedNumberToWordsConverter
 {
-    class ArabicNumberToWordsConverter :
-        GenderedNumberToWordsConverter
+    static readonly string[] Groups = ["مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون"];
+    static readonly string[] AppendedGroups = ["", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً"];
+    static readonly string[] PluralGroups = ["", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات", "كوينتليونات", "سكستيليونات"];
+    static readonly string[] OnesGroup = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
+    static readonly string[] TensGroup = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
+    static readonly string[] HundredsGroup = ["", "مئة", "مئتان", "ثلاث مئة", "أربع مئة", "خمس مئة", "ست مئة", "سبع مئة", "ثمان مئة", "تسع مئة"];
+    static readonly string[] AppendedTwos = ["مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن"];
+    static readonly string[] Twos = ["مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان"];
+
+    static readonly string[] FeminineOnesGroup = ["", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة"];
+
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
-        static readonly string[] Groups = ["مئة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون", "كوينتليون", "سكستيليون"];
-        static readonly string[] AppendedGroups = ["", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً", "كوينتليوناً", "سكستيليوناً"];
-        static readonly string[] PluralGroups = ["", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات", "كوينتليونات", "سكستيليونات"];
-        static readonly string[] OnesGroup = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"];
-        static readonly string[] TensGroup = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
-        static readonly string[] HundredsGroup = ["", "مئة", "مئتان", "ثلاث مئة", "أربع مئة", "خمس مئة", "ست مئة", "سبع مئة", "ثمان مئة", "تسع مئة"];
-        static readonly string[] AppendedTwos = ["مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونلن"];
-        static readonly string[] Twos = ["مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان", "كوينتليونان", "سكستيليونان"];
-
-        static readonly string[] FeminineOnesGroup = ["", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة", "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة", "ثمان عشرة", "تسع عشرة"];
-
-        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
-        {
             if (number == 0)
             {
                 return "صفر";
@@ -144,40 +144,40 @@
             return result.Trim();
         }
 
-        static readonly Dictionary<string, string> OrdinalExceptions = new()
-        {
-            {"واحد", "الحادي"},
-            {"أحد", "الحادي"},
-            {"اثنان", "الثاني"},
-            {"اثنا", "الثاني"},
-            {"ثلاثة", "الثالث"},
-            {"أربعة", "الرابع"},
-            {"خمسة", "الخامس"},
-            {"ستة", "السادس"},
-            {"سبعة", "السابع"},
-            {"ثمانية", "الثامن"},
-            {"تسعة", "التاسع"},
-            {"عشرة", "العاشر"},
-        };
+    static readonly Dictionary<string, string> OrdinalExceptions = new()
+    {
+        {"واحد", "الحادي"},
+        {"أحد", "الحادي"},
+        {"اثنان", "الثاني"},
+        {"اثنا", "الثاني"},
+        {"ثلاثة", "الثالث"},
+        {"أربعة", "الرابع"},
+        {"خمسة", "الخامس"},
+        {"ستة", "السادس"},
+        {"سبعة", "السابع"},
+        {"ثمانية", "الثامن"},
+        {"تسعة", "التاسع"},
+        {"عشرة", "العاشر"},
+    };
 
-        static readonly Dictionary<string, string> FeminineOrdinalExceptions = new()
-        {
-            {"واحدة", "الحادية"},
-            {"إحدى", "الحادية"},
-            {"اثنتان", "الثانية"},
-            {"اثنتا", "الثانية"},
-            {"ثلاث", "الثالثة"},
-            {"أربع", "الرابعة"},
-            {"خمس", "الخامسة"},
-            {"ست", "السادسة"},
-            {"سبع", "السابعة"},
-            {"ثمان", "الثامنة"},
-            {"تسع", "التاسعة"},
-            {"عشر", "العاشرة"},
-        };
+    static readonly Dictionary<string, string> FeminineOrdinalExceptions = new()
+    {
+        {"واحدة", "الحادية"},
+        {"إحدى", "الحادية"},
+        {"اثنتان", "الثانية"},
+        {"اثنتا", "الثانية"},
+        {"ثلاث", "الثالثة"},
+        {"أربع", "الرابعة"},
+        {"خمس", "الخامسة"},
+        {"ست", "السادسة"},
+        {"سبع", "السابعة"},
+        {"ثمان", "الثامنة"},
+        {"تسع", "التاسعة"},
+        {"عشر", "العاشرة"},
+    };
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+    {
             if (number == 0)
             {
                 return "الصفر";
@@ -207,8 +207,8 @@
             return word.Trim();
         }
 
-        static string ParseNumber(string word, int number, GrammaticalGender gender)
-        {
+    static string ParseNumber(string word, int number, GrammaticalGender gender)
+    {
             if (number == 1)
             {
                 return gender == GrammaticalGender.Feminine ? "الأولى" : "الأول";
@@ -258,5 +258,4 @@
 
             return word;
         }
-    }
 }

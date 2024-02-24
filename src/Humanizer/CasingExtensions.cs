@@ -1,15 +1,15 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+/// <summary>
+/// ApplyCase method to allow changing the case of a sentence easily
+/// </summary>
+public static class CasingExtensions
 {
     /// <summary>
-    /// ApplyCase method to allow changing the case of a sentence easily
+    /// Changes the casing of the provided input
     /// </summary>
-    public static class CasingExtensions
+    public static string ApplyCase(this string input, LetterCasing casing)
     {
-        /// <summary>
-        /// Changes the casing of the provided input
-        /// </summary>
-        public static string ApplyCase(this string input, LetterCasing casing)
-        {
             switch (casing)
             {
                 case LetterCasing.Title:
@@ -28,5 +28,4 @@
                     throw new ArgumentOutOfRangeException(nameof(casing));
             }
         }
-    }
 }

@@ -1,12 +1,11 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+public enum DataUnit
 {
-    public enum DataUnit
-    {
-        Bit,
-        Byte,
-        Kilobyte,
-        Megabyte,
-        Gigabyte,
-        Terabyte
-    }
+    Bit,
+    Byte,
+    Kilobyte,
+    Megabyte,
+    Gigabyte,
+    Terabyte
 }

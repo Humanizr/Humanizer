@@ -1,44 +1,44 @@
 // Done by Jesse Slicer https://github.com/jslicer
 
-namespace Humanizer
+namespace Humanizer;
+
+/// <summary>
+/// Contains extension methods for changing a number to Roman representation (ToRoman) and from Roman representation back to the number (FromRoman)
+/// </summary>
+public static class RomanNumeralExtensions
 {
-    /// <summary>
-    /// Contains extension methods for changing a number to Roman representation (ToRoman) and from Roman representation back to the number (FromRoman)
-    /// </summary>
-    public static class RomanNumeralExtensions
-    {
-        const int NumberOfRomanNumeralMaps = 13;
+    const int NumberOfRomanNumeralMaps = 13;
 
-        static readonly IDictionary<string, int> RomanNumerals =
-            new Dictionary<string, int>(NumberOfRomanNumeralMaps)
-            {
-                { "M",  1000 },
-                { "CM", 900 },
-                { "D",  500 },
-                { "CD", 400 },
-                { "C",  100 },
-                { "XC", 90 },
-                { "L",  50 },
-                { "XL", 40 },
-                { "X",  10 },
-                { "IX", 9 },
-                { "V",  5 },
-                { "IV", 4 },
-                { "I",  1 }
-            };
-
-        static readonly Regex ValidRomanNumeral =
-            new(
-                "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
-                RegexOptions.Compiled);
-
-        /// <summary>
-        /// Converts Roman numbers into integer
-        /// </summary>
-        /// <param name="input">Roman number</param>
-        /// <returns>Human-readable number</returns>
-        public static int FromRoman(this string input)
+    static readonly IDictionary<string, int> RomanNumerals =
+        new Dictionary<string, int>(NumberOfRomanNumeralMaps)
         {
+            { "M",  1000 },
+            { "CM", 900 },
+            { "D",  500 },
+            { "CD", 400 },
+            { "C",  100 },
+            { "XC", 90 },
+            { "L",  50 },
+            { "XL", 40 },
+            { "X",  10 },
+            { "IX", 9 },
+            { "V",  5 },
+            { "IV", 4 },
+            { "I",  1 }
+        };
+
+    static readonly Regex ValidRomanNumeral =
+        new(
+            "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
+            RegexOptions.Compiled);
+
+    /// <summary>
+    /// Converts Roman numbers into integer
+    /// </summary>
+    /// <param name="input">Roman number</param>
+    /// <returns>Human-readable number</returns>
+    public static int FromRoman(this string input)
+    {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
@@ -77,14 +77,14 @@ namespace Humanizer
             return total;
         }
 
-        /// <summary>
-        /// Converts the input to Roman number
-        /// </summary>
-        /// <param name="input">Integer input</param>
-        /// <returns>Roman number</returns>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the input is smaller than 1 or larger than 3999</exception>
-        public static string ToRoman(this int input)
-        {
+    /// <summary>
+    /// Converts the input to Roman number
+    /// </summary>
+    /// <param name="input">Integer input</param>
+    /// <returns>Roman number</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the input is smaller than 1 or larger than 3999</exception>
+    public static string ToRoman(this int input)
+    {
             const int minValue = 1;
             const int maxValue = 3999;
             const int maxRomanNumeralLength = 15;
@@ -108,7 +108,6 @@ namespace Humanizer
             return sb.ToString();
         }
 
-        static bool IsInvalidRomanNumeral(string input) =>
-            !ValidRomanNumeral.IsMatch(input);
-    }
+    static bool IsInvalidRomanNumeral(string input) =>
+        !ValidRomanNumeral.IsMatch(input);
 }

@@ -1,22 +1,22 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class CzechNumberToWordsConverter(CultureInfo? culture) :
+    GenderedNumberToWordsConverter
 {
-    class CzechNumberToWordsConverter(CultureInfo? culture) :
-        GenderedNumberToWordsConverter
+    static readonly string[] BillionsMap = ["miliarda", "miliardy", "miliard"];
+    static readonly string[] MillionsMap = ["milion", "miliony", "milionů"];
+    static readonly string[] ThousandsMap = ["tisíc", "tisíce", "tisíc"];
+    static readonly string[] HundredsMap = ["nula", "sto", "dvě stě", "tři sta", "čtyři sta", "pět set", "šest set", "sedm set", "osm set", "devět set"];
+    static readonly string[] TensMap = ["nula", "deset", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát"];
+    static readonly string[] UnitsMap = ["nula", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"];
+
+    static readonly string[] UnitsMasculineOverrideMap = ["jeden", "dva"];
+    static readonly string[] UnitsFeminineOverrideMap = ["jedna", "dvě"];
+    static readonly string[] UnitsNeuterOverride = ["jedno", "dvě"];
+    static readonly string[] UnitsIntraOverride = ["jedna", "dva"];
+
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
-        static readonly string[] BillionsMap = ["miliarda", "miliardy", "miliard"];
-        static readonly string[] MillionsMap = ["milion", "miliony", "milionů"];
-        static readonly string[] ThousandsMap = ["tisíc", "tisíce", "tisíc"];
-        static readonly string[] HundredsMap = ["nula", "sto", "dvě stě", "tři sta", "čtyři sta", "pět set", "šest set", "sedm set", "osm set", "devět set"];
-        static readonly string[] TensMap = ["nula", "deset", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát"];
-        static readonly string[] UnitsMap = ["nula", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"];
-
-        static readonly string[] UnitsMasculineOverrideMap = ["jeden", "dva"];
-        static readonly string[] UnitsFeminineOverrideMap = ["jedna", "dvě"];
-        static readonly string[] UnitsNeuterOverride = ["jedno", "dvě"];
-        static readonly string[] UnitsIntraOverride = ["jedna", "dva"];
-
-        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
-        {
             if (number == 0)
             {
                 return UnitByGender(number, gender);
@@ -38,11 +38,11 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-            number.ToString(culture);
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+        number.ToString(culture);
 
-        static string UnitByGender(long number, GrammaticalGender? gender)
-        {
+    static string UnitByGender(long number, GrammaticalGender? gender)
+    {
             if (number != 1 && number != 2)
             {
                 return UnitsMap[number];
@@ -58,8 +58,8 @@
             };
         }
 
-        static void CollectLessThanThousand(List<string> parts, long number, GrammaticalGender? gender)
-        {
+    static void CollectLessThanThousand(List<string> parts, long number, GrammaticalGender? gender)
+    {
             if (number >= 100)
             {
                 parts.Add(HundredsMap[number / 100]);
@@ -78,8 +78,8 @@
             }
         }
 
-        static void CollectThousandAndAbove(List<string> parts, ref long number, long divisor, GrammaticalGender gender, string[] map)
-        {
+    static void CollectThousandAndAbove(List<string> parts, ref long number, long divisor, GrammaticalGender gender, string[] map)
+    {
             var n = number / divisor;
 
             if (n <= 0)
@@ -106,5 +106,4 @@
 
             number %= divisor;
         }
-    }
 }

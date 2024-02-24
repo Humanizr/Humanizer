@@ -1,30 +1,30 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
+    static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];
+
+    class Fact
     {
-        static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
-        static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];
+        public int Value { get; set; }
+        public required string Name { get; set; }
+        public required string Prefix { get; set; }
+        public required string Postfix { get; set; }
+        public bool DisplayOneUnit { get; set; }
+        public GrammaticalGender Gender { get; set; } = GrammaticalGender.Neuter;
+    }
 
-        class Fact
-        {
-            public int Value { get; set; }
-            public required string Name { get; set; }
-            public required string Prefix { get; set; }
-            public required string Postfix { get; set; }
-            public bool DisplayOneUnit { get; set; }
-            public GrammaticalGender Gender { get; set; } = GrammaticalGender.Neuter;
-        }
+    static readonly Fact[] Hunderds =
+    [
+        new(){Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
+        new(){Value = 1000000,    Name = "miljon", Prefix = " ",  Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
+        new(){Value = 1000,       Name = "tusen",  Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
+        new(){Value = 100,        Name = "hundra", Prefix = "",   Postfix = "",  DisplayOneUnit = false}
+    ];
 
-        static readonly Fact[] Hunderds =
-        [
-            new(){Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new(){Value = 1000000,    Name = "miljon", Prefix = " ",  Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new(){Value = 1000,       Name = "tusen",  Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
-            new(){Value = 100,        Name = "hundra", Prefix = "",   Postfix = "",  DisplayOneUnit = false}
-        ];
-
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+    {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -105,36 +105,36 @@
 
             return word;
         }
-        public override string Convert(long input) =>
-            Convert(input, GrammaticalGender.Neuter);
+    public override string Convert(long input) =>
+        Convert(input, GrammaticalGender.Neuter);
 
-        static string[] ordinalNumbers =
-        [
-            "nollte",
-            "första",
-            "andra",
-            "tredje",
-            "fjärde",
-            "femte",
-            "sjätte",
-            "sjunde",
-            "åttonde",
-            "nionde",
-            "tionde",
-            "elfte",
-            "tolfte",
-            "trettonde",
-            "fjortonde",
-            "femtonde",
-            "sextonde",
-            "sjuttonde",
-            "artonde",
-            "nittonde",
-            "tjugonde"
-        ];
+    static string[] ordinalNumbers =
+    [
+        "nollte",
+        "första",
+        "andra",
+        "tredje",
+        "fjärde",
+        "femte",
+        "sjätte",
+        "sjunde",
+        "åttonde",
+        "nionde",
+        "tionde",
+        "elfte",
+        "tolfte",
+        "trettonde",
+        "fjortonde",
+        "femtonde",
+        "sextonde",
+        "sjuttonde",
+        "artonde",
+        "nittonde",
+        "tjugonde"
+    ];
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             var word = "";
 
             if (number < 0)
@@ -210,5 +210,4 @@
 
             return word;
         }
-    }
 }

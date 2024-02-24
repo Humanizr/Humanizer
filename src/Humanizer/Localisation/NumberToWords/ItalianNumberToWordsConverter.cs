@@ -1,9 +1,9 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class ItalianNumberToWordsConverter : GenderedNumberToWordsConverter
 {
-    class ItalianNumberToWordsConverter : GenderedNumberToWordsConverter
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -20,11 +20,10 @@
             return cruncher.Convert();
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+    {
             var cruncher = new ItalianOrdinalNumberCruncher(number, gender);
 
             return cruncher.Convert();
         }
-    }
 }

@@ -1,14 +1,14 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
 {
-    class UzbekCyrlNumberToWordConverter : GenderlessNumberToWordsConverter
+    static readonly string[] UnitsMap = ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"];
+    static readonly string[] TensMap = ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"];
+
+    static readonly string[] OrdinalSuffixes = ["инчи", "нчи"];
+
+    public override string Convert(long input)
     {
-        static readonly string[] UnitsMap = ["нол", "бир", "икки", "уч", "тўрт", "беш", "олти", "етти", "саккиз", "тўққиз"];
-        static readonly string[] TensMap = ["нол", "ўн", "йигирма", "ўттиз", "қирқ", "эллик", "олтмиш", "етмиш", "саксон", "тўқсон"];
-
-        static readonly string[] OrdinalSuffixes = ["инчи", "нчи"];
-
-        public override string Convert(long input)
-        {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -22,8 +22,8 @@
             return Convert(number, true);
         }
 
-        static string Convert(int number, bool checkForHundredRule)
-        {
+    static string Convert(int number, bool checkForHundredRule)
+    {
             if (number == 0)
             {
                 return UnitsMap[0];
@@ -76,8 +76,8 @@
             return sb.ToString().Trim();
         }
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             var word = Convert(number);
             var i = 0;
             if (string.IsNullOrEmpty(word))
@@ -93,5 +93,4 @@
 
             return $"{word}{OrdinalSuffixes[i]}";
         }
-    }
 }

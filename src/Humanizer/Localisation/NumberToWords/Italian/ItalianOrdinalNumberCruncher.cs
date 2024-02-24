@@ -1,9 +1,9 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
 {
-    class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
+    public string Convert()
     {
-        public string Convert()
-        {
             // it's easier to treat zero as a completely distinct case
             if (_fullNumber == 0)
             {
@@ -83,27 +83,26 @@
             return words;
         }
 
-        protected readonly int _fullNumber = number;
-        protected readonly GrammaticalGender _gender = gender;
-        readonly string _genderSuffix = gender == GrammaticalGender.Feminine ? "a" : "o";
+    protected readonly int _fullNumber = number;
+    protected readonly GrammaticalGender _gender = gender;
+    readonly string _genderSuffix = gender == GrammaticalGender.Feminine ? "a" : "o";
 
-        /// <summary>
-        /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
-        /// </summary>
-        protected static string[] _unitsUnder10NumberToText =
-        [
-            string.Empty,
-            "prim",
-            "second",
-            "terz",
-            "quart",
-            "quint",
-            "sest",
-            "settim",
-            "ottav",
-            "non"
-        ];
+    /// <summary>
+    /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
+    /// </summary>
+    protected static string[] _unitsUnder10NumberToText =
+    [
+        string.Empty,
+        "prim",
+        "second",
+        "terz",
+        "quart",
+        "quint",
+        "sest",
+        "settim",
+        "ottav",
+        "non"
+    ];
 
-        protected static int _lengthOf10AsCardinal = "dieci".Length;
-    }
+    protected static int _lengthOf10AsCardinal = "dieci".Length;
 }

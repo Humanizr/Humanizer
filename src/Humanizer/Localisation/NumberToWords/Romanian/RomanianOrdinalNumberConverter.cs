@@ -1,30 +1,30 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class RomanianOrdinalNumberConverter
 {
-    class RomanianOrdinalNumberConverter
+    /// <summary>
+    /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
+    /// </summary>
+    readonly Dictionary<int, string> _ordinalsUnder10 = new()
     {
-        /// <summary>
-        /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
-        /// </summary>
-        readonly Dictionary<int, string> _ordinalsUnder10 = new()
-        {
-            {1, "primul|prima"},
-            {2, "doilea|doua"},
-            {3, "treilea|treia"},
-            {4, "patrulea|patra"},
-            {5, "cincilea|cincea"},
-            {6, "șaselea|șasea"},
-            {7, "șaptelea|șaptea"},
-            {8, "optulea|opta"},
-            {9, "nouălea|noua"},
-        };
+        {1, "primul|prima"},
+        {2, "doilea|doua"},
+        {3, "treilea|treia"},
+        {4, "patrulea|patra"},
+        {5, "cincilea|cincea"},
+        {6, "șaselea|șasea"},
+        {7, "șaptelea|șaptea"},
+        {8, "optulea|opta"},
+        {9, "nouălea|noua"},
+    };
 
-        readonly string _femininePrefix = "a";
-        readonly string _masculinePrefix = "al";
-        readonly string _feminineSuffix = "a";
-        readonly string _masculineSuffix = "lea";
+    readonly string _femininePrefix = "a";
+    readonly string _masculinePrefix = "al";
+    readonly string _feminineSuffix = "a";
+    readonly string _masculineSuffix = "lea";
 
-        public string Convert(int number, GrammaticalGender gender)
-        {
+    public string Convert(int number, GrammaticalGender gender)
+    {
             // it's easier to treat zero as a completely distinct case
             if (number == 0)
             {
@@ -111,8 +111,8 @@
             );
         }
 
-        static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
-        {
+    static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
+    {
             if (multiGenderPart.Contains("|"))
             {
                 var parts = multiGenderPart.Split('|');
@@ -126,5 +126,4 @@
 
             return multiGenderPart;
         }
-    }
 }

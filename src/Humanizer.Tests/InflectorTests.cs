@@ -23,139 +23,139 @@
 
 using System.Collections;
 
-namespace Humanizer.Tests
+namespace Humanizer.Tests;
+
+public class InflectorTests
 {
-    public class InflectorTests
+    public readonly IList<object[]> PluralTestData = new List<object[]>();
+
+    [Theory]
+    [ClassData(typeof(PluralTestSource))]
+    public void Pluralize(string singular, string plural) =>
+        Assert.Equal(plural, singular.Pluralize());
+
+    [Theory]
+    [ClassData(typeof(PluralTestSource))]
+    public void PluralizeWordsWithUnknownPlurality(string singular, string plural)
     {
-        public readonly IList<object[]> PluralTestData = new List<object[]>();
-
-        [Theory]
-        [ClassData(typeof(PluralTestSource))]
-        public void Pluralize(string singular, string plural) =>
-            Assert.Equal(plural, singular.Pluralize());
-
-        [Theory]
-        [ClassData(typeof(PluralTestSource))]
-        public void PluralizeWordsWithUnknownPlurality(string singular, string plural)
-        {
             Assert.Equal(plural, plural.Pluralize(false));
             Assert.Equal(plural, singular.Pluralize(false));
         }
 
-        [Theory]
-        [ClassData(typeof(PluralTestSource))]
-        public void Singularize(string singular, string plural) =>
-            Assert.Equal(singular, plural.Singularize());
+    [Theory]
+    [ClassData(typeof(PluralTestSource))]
+    public void Singularize(string singular, string plural) =>
+        Assert.Equal(singular, plural.Singularize());
 
-        [Theory]
-        [ClassData(typeof(PluralTestSource))]
-        public void SingularizeWordsWithUnknownSingularity(string singular, string plural)
-        {
+    [Theory]
+    [ClassData(typeof(PluralTestSource))]
+    public void SingularizeWordsWithUnknownSingularity(string singular, string plural)
+    {
             Assert.Equal(singular, singular.Singularize(false));
             Assert.Equal(singular, plural.Singularize(false));
         }
 
-        [Theory]
-        [InlineData("tires", "tires")]
-        [InlineData("body", "bodies")]
-        [InlineData("traxxas", "traxxas")]
-        public void SingularizeSkipSimpleWords(string singular, string plural) =>
-            Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
+    [Theory]
+    [InlineData("tires", "tires")]
+    [InlineData("body", "bodies")]
+    [InlineData("traxxas", "traxxas")]
+    public void SingularizeSkipSimpleWords(string singular, string plural) =>
+        Assert.Equal(singular, plural.Singularize(skipSimpleWords: true));
 
-        [Theory]
-        [InlineData("a")]
-        [InlineData("A")]
-        [InlineData("s")]
-        [InlineData("S")]
-        [InlineData("z")]
-        [InlineData("Z")]
-        [InlineData("1")]
-        public void SingularizeSingleLetter(string input) =>
-            Assert.Equal(input, input.Singularize());
+    [Theory]
+    [InlineData("a")]
+    [InlineData("A")]
+    [InlineData("s")]
+    [InlineData("S")]
+    [InlineData("z")]
+    [InlineData("Z")]
+    [InlineData("1")]
+    public void SingularizeSingleLetter(string input) =>
+        Assert.Equal(input, input.Singularize());
 
-        //Uppercases individual words and removes some characters
-        [Theory]
-        [InlineData("some title", "Some Title")]
-        [InlineData("some-title", "Some Title")]
-        [InlineData("sometitle", "Sometitle")]
-        [InlineData("some-title: The beginning", "Some Title: The Beginning")]
-        [InlineData("some_title:_the_beginning", "Some Title: the Beginning")]
-        [InlineData("some title: The_beginning", "Some Title: The Beginning")]
-        public void Titleize(string input, string expectedOutput) =>
-            Assert.Equal(expectedOutput, input.Titleize());
+    //Uppercases individual words and removes some characters
+    [Theory]
+    [InlineData("some title", "Some Title")]
+    [InlineData("some-title", "Some Title")]
+    [InlineData("sometitle", "Sometitle")]
+    [InlineData("some-title: The beginning", "Some Title: The Beginning")]
+    [InlineData("some_title:_the_beginning", "Some Title: the Beginning")]
+    [InlineData("some title: The_beginning", "Some Title: The Beginning")]
+    public void Titleize(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Titleize());
 
-        [InlineData("some_title", "some-title")]
-        [InlineData("some-title", "some-title")]
-        [InlineData("some_title_goes_here", "some-title-goes-here")]
-        [InlineData("some_title and_another", "some-title and-another")]
-        [Theory]
-        public void Dasherize(string input, string expectedOutput) =>
-            Assert.Equal(input.Dasherize(), expectedOutput);
+    [InlineData("some_title", "some-title")]
+    [InlineData("some-title", "some-title")]
+    [InlineData("some_title_goes_here", "some-title-goes-here")]
+    [InlineData("some_title and_another", "some-title and-another")]
+    [Theory]
+    public void Dasherize(string input, string expectedOutput) =>
+        Assert.Equal(input.Dasherize(), expectedOutput);
 
-        [InlineData("some_title", "some-title")]
-        [InlineData("some-title", "some-title")]
-        [InlineData("some_title_goes_here", "some-title-goes-here")]
-        [InlineData("some_title and_another", "some-title and-another")]
-        [Theory]
-        public void Hyphenate(string input, string expectedOutput) =>
-            Assert.Equal(input.Hyphenate(), expectedOutput);
+    [InlineData("some_title", "some-title")]
+    [InlineData("some-title", "some-title")]
+    [InlineData("some_title_goes_here", "some-title-goes-here")]
+    [InlineData("some_title and_another", "some-title and-another")]
+    [Theory]
+    public void Hyphenate(string input, string expectedOutput) =>
+        Assert.Equal(input.Hyphenate(), expectedOutput);
 
-        [Theory]
-        [InlineData("customer", "Customer")]
-        [InlineData("CUSTOMER", "CUSTOMER")]
-        [InlineData("CUStomer", "CUStomer")]
-        [InlineData("customer_name", "CustomerName")]
-        [InlineData("customer_first_name", "CustomerFirstName")]
-        [InlineData("customer_first_name goes here", "CustomerFirstNameGoesHere")]
-        [InlineData("customer name", "CustomerName")]
-        [InlineData("customer   name", "CustomerName")]
-        [InlineData("customer-first-name", "CustomerFirstName")]
-        [InlineData("_customer-first-name", "CustomerFirstName")]
-        [InlineData(" customer__first--name", "CustomerFirstName")]
-        public void Pascalize(string input, string expectedOutput) =>
-            Assert.Equal(expectedOutput, input.Pascalize());
+    [Theory]
+    [InlineData("customer", "Customer")]
+    [InlineData("CUSTOMER", "CUSTOMER")]
+    [InlineData("CUStomer", "CUStomer")]
+    [InlineData("customer_name", "CustomerName")]
+    [InlineData("customer_first_name", "CustomerFirstName")]
+    [InlineData("customer_first_name goes here", "CustomerFirstNameGoesHere")]
+    [InlineData("customer name", "CustomerName")]
+    [InlineData("customer   name", "CustomerName")]
+    [InlineData("customer-first-name", "CustomerFirstName")]
+    [InlineData("_customer-first-name", "CustomerFirstName")]
+    [InlineData(" customer__first--name", "CustomerFirstName")]
+    public void Pascalize(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Pascalize());
 
-        // Same as pascalize, except first char is lowercase
-        [Theory]
-        [InlineData("customer", "customer")]
-        [InlineData("CUSTOMER", "cUSTOMER")]
-        [InlineData("CUStomer", "cUStomer")]
-        [InlineData("customer_name", "customerName")]
-        [InlineData("customer_first_name", "customerFirstName")]
-        [InlineData("customer_first_name goes here", "customerFirstNameGoesHere")]
-        [InlineData("customer name", "customerName")]
-        [InlineData("customer   name", "customerName")]
-        [InlineData("", "")]
-        public void Camelize(string input, string expectedOutput) =>
-            Assert.Equal(expectedOutput, input.Camelize());
+    // Same as pascalize, except first char is lowercase
+    [Theory]
+    [InlineData("customer", "customer")]
+    [InlineData("CUSTOMER", "cUSTOMER")]
+    [InlineData("CUStomer", "cUStomer")]
+    [InlineData("customer_name", "customerName")]
+    [InlineData("customer_first_name", "customerFirstName")]
+    [InlineData("customer_first_name goes here", "customerFirstNameGoesHere")]
+    [InlineData("customer name", "customerName")]
+    [InlineData("customer   name", "customerName")]
+    [InlineData("", "")]
+    public void Camelize(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Camelize());
 
-        //Makes an underscored lowercase string
-        [Theory]
-        [InlineData("SomeTitle", "some_title")]
-        [InlineData("someTitle", "some_title")]
-        [InlineData("some title", "some_title")]
-        [InlineData("some title that will be underscored", "some_title_that_will_be_underscored")]
-        [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
-        [InlineData("SomeForeignWordsLikeÄgyptenÑu", "some_foreign_words_like_ägypten_ñu")]
-        [InlineData("Some wordsTo be Underscored", "some_words_to_be_underscored")]
-        public void Underscore(string input, string expectedOutput) =>
-            Assert.Equal(expectedOutput, input.Underscore());
+    //Makes an underscored lowercase string
+    [Theory]
+    [InlineData("SomeTitle", "some_title")]
+    [InlineData("someTitle", "some_title")]
+    [InlineData("some title", "some_title")]
+    [InlineData("some title that will be underscored", "some_title_that_will_be_underscored")]
+    [InlineData("SomeTitleThatWillBeUnderscored", "some_title_that_will_be_underscored")]
+    [InlineData("SomeForeignWordsLikeÄgyptenÑu", "some_foreign_words_like_ägypten_ñu")]
+    [InlineData("Some wordsTo be Underscored", "some_words_to_be_underscored")]
+    public void Underscore(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Underscore());
 
-        // transform words into lowercase and separate with a -
-        [Theory]
-        [InlineData("SomeWords", "some-words")]
-        [InlineData("SOME words TOGETHER", "some-words-together")]
-        [InlineData("A spanish word EL niño", "a-spanish-word-el-niño")]
-        [InlineData("SomeForeignWords ÆgÑuÄgypten", "some-foreign-words-æg-ñu-ägypten")]
-        [InlineData("A VeryShortSENTENCE", "a-very-short-sentence")]
-        public void Kebaberize(string input, string expectedOutput) =>
-            Assert.Equal(expectedOutput, input.Kebaberize());
-    }
+    // transform words into lowercase and separate with a -
+    [Theory]
+    [InlineData("SomeWords", "some-words")]
+    [InlineData("SOME words TOGETHER", "some-words-together")]
+    [InlineData("A spanish word EL niño", "a-spanish-word-el-niño")]
+    [InlineData("SomeForeignWords ÆgÑuÄgypten", "some-foreign-words-æg-ñu-ägypten")]
+    [InlineData("A VeryShortSENTENCE", "a-very-short-sentence")]
+    public void Kebaberize(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Kebaberize());
+}
 
-    class PluralTestSource : IEnumerable<object[]>
+class PluralTestSource : IEnumerable<object[]>
+{
+    public IEnumerator<object[]> GetEnumerator()
     {
-        public IEnumerator<object[]> GetEnumerator()
-        {
             yield return ["search", "searches"];
             yield return ["switch", "switches"];
             yield return ["fix", "fixes"];
@@ -396,7 +396,6 @@ namespace Humanizer.Tests
             yield return ["database", "databases"];
         }
 
-        IEnumerator IEnumerable.GetEnumerator() =>
-            GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() =>
+        GetEnumerator();
 }

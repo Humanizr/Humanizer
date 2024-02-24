@@ -1,25 +1,25 @@
-namespace Humanizer
+namespace Humanizer;
+
+class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
 {
-    class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
+    static readonly string[] UnitsMap = ["null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten"];
+    static readonly string[] TensMap = ["null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti"];
+
+    static readonly Dictionary<int, string> OrdinalExceptions = new()
     {
-        static readonly string[] UnitsMap = ["null", "en", "to", "tre", "fire", "fem", "seks", "sju", "åtte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten"];
-        static readonly string[] TensMap = ["null", "ti", "tjue", "tretti", "førti", "femti", "seksti", "sytti", "åtti", "nitti"];
+        {0, "nullte"},
+        {1, "første"},
+        {2, "andre"},
+        {3, "tredje"},
+        {4, "fjerde"},
+        {5, "femte"},
+        {6, "sjette"},
+        {11, "ellevte"},
+        {12, "tolvte"}
+    };
 
-        static readonly Dictionary<int, string> OrdinalExceptions = new()
-        {
-            {0, "nullte"},
-            {1, "første"},
-            {2, "andre"},
-            {3, "tredje"},
-            {4, "fjerde"},
-            {5, "femte"},
-            {6, "sjette"},
-            {11, "ellevte"},
-            {12, "tolvte"}
-        };
-
-        public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
-        {
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
+    {
             if (number is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -28,11 +28,11 @@ namespace Humanizer
             return Convert((int)number, false, gender);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
-            Convert(number, true, gender);
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
+        Convert(number, true, gender);
 
-        string Convert(int number, bool isOrdinal, GrammaticalGender gender)
-        {
+    string Convert(int number, bool isOrdinal, GrammaticalGender gender)
+    {
             if (number == 0)
             {
                 return GetUnitValue(0, isOrdinal);
@@ -135,8 +135,8 @@ namespace Humanizer
             return toWords;
         }
 
-        static string GetUnitValue(int number, bool isOrdinal)
-        {
+    static string GetUnitValue(int number, bool isOrdinal)
+    {
             if (isOrdinal)
             {
                 if (ExceptionNumbersToWords(number, out var exceptionString))
@@ -155,11 +155,11 @@ namespace Humanizer
             return UnitsMap[number];
         }
 
-        static bool ExceptionNumbersToWords(int number, [NotNullWhen(true)] out string? words) =>
-            OrdinalExceptions.TryGetValue(number, out words);
+    static bool ExceptionNumbersToWords(int number, [NotNullWhen(true)] out string? words) =>
+        OrdinalExceptions.TryGetValue(number, out words);
 
-        string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)
-        {
+    string Part(string pluralFormat, string singular, int number, bool postfixSpace = false)
+    {
             var postfix = postfixSpace ? " " : "";
             if (number == 1)
             {
@@ -168,5 +168,4 @@ namespace Humanizer
 
             return string.Format(pluralFormat, Convert(number)) + postfix;
         }
-    }
 }

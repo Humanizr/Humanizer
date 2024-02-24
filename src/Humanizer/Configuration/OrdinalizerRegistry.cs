@@ -1,9 +1,9 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
 {
-    class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
+    public OrdinalizerRegistry() : base(new DefaultOrdinalizer())
     {
-        public OrdinalizerRegistry() : base(new DefaultOrdinalizer())
-        {
             Register("de", new GermanOrdinalizer());
             Register("en", new EnglishOrdinalizer());
             Register("es", new SpanishOrdinalizer());
@@ -20,5 +20,4 @@
             Register("az", new AzerbaijaniOrdinalizer());
             Register("lb", new LuxembourgishOrdinalizer());
         }
-    }
 }

@@ -1,9 +1,9 @@
-namespace Humanizer
+namespace Humanizer;
+
+class ThaiNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    class ThaiNumberToWordsConverter : GenderlessNumberToWordsConverter
+    public override string Convert(long numbermoney)
     {
-        public override string Convert(long numbermoney)
-        {
             var Textreturn = "";
             if (numbermoney == 0)
             {
@@ -70,7 +70,6 @@ namespace Humanizer
             return Textreturn;
         }
 
-        public override string ConvertToOrdinal(int number) =>
-            Convert(number);
-    }
+    public override string ConvertToOrdinal(int number) =>
+        Convert(number);
 }

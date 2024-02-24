@@ -1,9 +1,8 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+enum RussianGrammaticalNumber
 {
-    enum RussianGrammaticalNumber
-    {
-        Singular,
-        Paucal,
-        Plural
-    }
+    Singular,
+    Paucal,
+    Plural
 }

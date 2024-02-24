@@ -1,18 +1,18 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class BrazilianPortugueseNumberToWordsConverter :
+    GenderedNumberToWordsConverter
 {
-    class BrazilianPortugueseNumberToWordsConverter :
-        GenderedNumberToWordsConverter
+    static readonly string[] PortugueseUnitsMap = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
+    static readonly string[] PortugueseTensMap = ["zero", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
+    static readonly string[] PortugueseHundredsMap = ["zero", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
+
+    static readonly string[] PortugueseOrdinalUnitsMap = ["zero", "primeiro", "segundo", "terceiro", "quarto", "quinto", "sexto", "sétimo", "oitavo", "nono"];
+    static readonly string[] PortugueseOrdinalTensMap = ["zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo"];
+    static readonly string[] PortugueseOrdinalHundredsMap = ["zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo"];
+
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-        static readonly string[] PortugueseUnitsMap = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
-        static readonly string[] PortugueseTensMap = ["zero", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
-        static readonly string[] PortugueseHundredsMap = ["zero", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
-
-        static readonly string[] PortugueseOrdinalUnitsMap = ["zero", "primeiro", "segundo", "terceiro", "quarto", "quinto", "sexto", "sétimo", "oitavo", "nono"];
-        static readonly string[] PortugueseOrdinalTensMap = ["zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo"];
-        static readonly string[] PortugueseOrdinalHundredsMap = ["zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo"];
-
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
-        {
             if (input is > 999999999999 or < -999999999999)
             {
                 throw new NotImplementedException();
@@ -100,8 +100,8 @@
             return string.Join(" ", parts);
         }
 
-        public override string ConvertToOrdinal(int number, GrammaticalGender gender)
-        {
+    public override string ConvertToOrdinal(int number, GrammaticalGender gender)
+    {
             // N/A in Portuguese ordinal
             if (number == 0)
             {
@@ -157,8 +157,8 @@
             return string.Join(" ", parts);
         }
 
-        static string ApplyGender(string toWords, GrammaticalGender gender)
-        {
+    static string ApplyGender(string toWords, GrammaticalGender gender)
+    {
             if (gender != GrammaticalGender.Feminine)
             {
                 return toWords;
@@ -182,8 +182,8 @@
             return toWords;
         }
 
-        static string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
-        {
+    static string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
+    {
             if (gender == GrammaticalGender.Feminine)
             {
                 return toWords.TrimEnd('o') + 'a';
@@ -191,5 +191,4 @@
 
             return toWords;
         }
-    }
 }

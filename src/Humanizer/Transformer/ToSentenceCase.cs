@@ -1,20 +1,19 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class ToSentenceCase : ICulturedStringTransformer
 {
-    class ToSentenceCase : ICulturedStringTransformer
+    public string Transform(string input) =>
+        Transform(input, null);
+
+    public string Transform(string input, CultureInfo? culture)
     {
-        public string Transform(string input) =>
-            Transform(input, null);
+        culture ??= CultureInfo.CurrentCulture;
 
-        public string Transform(string input, CultureInfo? culture)
+        if (input.Length >= 1)
         {
-            culture ??= CultureInfo.CurrentCulture;
-
-            if (input.Length >= 1)
-            {
-                return culture.TextInfo.ToUpper(input[0]) + input.Substring(1);
-            }
-
-            return culture.TextInfo.ToUpper(input);
+            return culture.TextInfo.ToUpper(input[0]) + input.Substring(1);
         }
+
+        return culture.TextInfo.ToUpper(input);
     }
 }

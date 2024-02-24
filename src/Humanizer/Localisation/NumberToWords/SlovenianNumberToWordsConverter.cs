@@ -1,13 +1,13 @@
-﻿namespace Humanizer
-{
-    class SlovenianNumberToWordsConverter(CultureInfo? culture) :
-        GenderlessNumberToWordsConverter
-    {
-        static readonly string[] UnitsMap = ["nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"];
-        static readonly string[] TensMap = ["nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"];
+﻿namespace Humanizer;
 
-        public override string Convert(long input)
-        {
+class SlovenianNumberToWordsConverter(CultureInfo? culture) :
+    GenderlessNumberToWordsConverter
+{
+    static readonly string[] UnitsMap = ["nič", "ena", "dva", "tri", "štiri", "pet", "šest", "sedem", "osem", "devet", "deset", "enajst", "dvanajst", "trinajst", "štirinajst", "petnajst", "šestnajst", "sedemnajst", "osemnajst", "devetnajst"];
+    static readonly string[] TensMap = ["nič", "deset", "dvajset", "trideset", "štirideset", "petdeset", "šestdeset", "sedemdeset", "osemdeset", "devetdeset"];
+
+    public override string Convert(long input)
+    {
             if (input is > int.MaxValue or < int.MinValue)
             {
                 throw new NotImplementedException();
@@ -97,11 +97,11 @@
             return string.Concat(parts);
         }
 
-        public override string ConvertToOrdinal(int number) =>
-            number.ToString(culture);
+    public override string ConvertToOrdinal(int number) =>
+        number.ToString(culture);
 
-        string Part(string singular, string dual, string trialQuadral, string plural, int number)
-        {
+    string Part(string singular, string dual, string trialQuadral, string plural, int number)
+    {
             if (number == 1)
             {
                 return singular;
@@ -119,5 +119,4 @@
 
             return string.Format(plural, Convert(number));
         }
-    }
 }

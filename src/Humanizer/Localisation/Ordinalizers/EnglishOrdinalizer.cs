@@ -1,9 +1,9 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class EnglishOrdinalizer : DefaultOrdinalizer
 {
-    class EnglishOrdinalizer : DefaultOrdinalizer
+    public override string Convert(int number, string numberString)
     {
-        public override string Convert(int number, string numberString)
-        {
             var nMod100 = number % 100;
 
             if (nMod100 is >= 11 and <= 20)
@@ -26,5 +26,4 @@
                     return numberString + "th";
             }
         }
-    }
 }

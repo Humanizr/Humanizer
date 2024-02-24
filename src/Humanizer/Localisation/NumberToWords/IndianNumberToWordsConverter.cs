@@ -1,42 +1,42 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
+    static readonly Dictionary<long, string> OrdinalExceptions = new()
     {
-        static readonly Dictionary<long, string> OrdinalExceptions = new()
-        {
-            {1, "first"},
-            {2, "second"},
-            {3, "third"},
-            {4, "fourth"},
-            {5, "fifth"},
-            {8, "eighth"},
-            {9, "ninth"},
-            {12, "twelfth"},
-        };
-        static readonly string[] Tillnineteen =
-        [
-            "one", "two", "three", "four", "five", "six", "seven", "eight",
-            "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
-            "seventeen", "eighteen", "nineteen"
-        ];
+        {1, "first"},
+        {2, "second"},
+        {3, "third"},
+        {4, "fourth"},
+        {5, "fifth"},
+        {8, "eighth"},
+        {9, "ninth"},
+        {12, "twelfth"},
+    };
+    static readonly string[] Tillnineteen =
+    [
+        "one", "two", "three", "four", "five", "six", "seven", "eight",
+        "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+        "seventeen", "eighteen", "nineteen"
+    ];
 
-        static readonly string[] Tens =
-        [
-            "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
-            "eighty", "ninety"
-        ];
+    static readonly string[] Tens =
+    [
+        "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
+        "eighty", "ninety"
+    ];
 
-        public override string Convert(long number) =>
-            NumberToText(number).Trim();
+    public override string Convert(long number) =>
+        NumberToText(number).Trim();
 
-        public override string ConvertToOrdinal(int number)
-        {
+    public override string ConvertToOrdinal(int number)
+    {
             var result = NumberToText(number).Trim();
             return result;
         }
 
-         public static string NumberToText( long number)
-         {
+    public static string NumberToText( long number)
+    {
              if (number < 0)
                  return "(Negative) " + NumberToText(-number);
              if (number == 0)
@@ -62,7 +62,6 @@
              return NumberToText(number / 10000000).Trim() + " crore " + NumberToText(number % 10000000);
          }
 
-        static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
-            OrdinalExceptions.TryGetValue(number, out words);
-    }
+    static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
+        OrdinalExceptions.TryGetValue(number, out words);
 }
