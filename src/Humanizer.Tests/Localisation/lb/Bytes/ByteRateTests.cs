@@ -15,7 +15,9 @@ public class ByteRateTests
         var size = new ByteSize(inputBytes);
         var interval = TimeSpan.FromSeconds(perSeconds);
 
-        var rate = size.Per(interval).Humanize();
+        var rate = size
+            .Per(interval)
+            .Humanize();
 
         Assert.Equal(expectedValue, rate);
     }
@@ -62,11 +64,10 @@ public class ByteRateTests
     [InlineData(TimeUnit.Year)]
     public void ThrowsOnUnsupportedData(TimeUnit units)
     {
-        var dummyRate = ByteSize.FromBits(1).Per(TimeSpan.FromSeconds(1));
+        var dummyRate = ByteSize
+            .FromBits(1)
+            .Per(TimeSpan.FromSeconds(1));
 
-        Assert.Throws<NotSupportedException>(() =>
-        {
-            dummyRate.Humanize(units);
-        });
+        Assert.Throws<NotSupportedException>(() => dummyRate.Humanize(units));
     }
 }

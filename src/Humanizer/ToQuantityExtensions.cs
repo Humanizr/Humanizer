@@ -62,22 +62,22 @@ public static class ToQuantityExtensions
 
     static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string? format = null, IFormatProvider? formatProvider = null)
     {
-            var transformedInput = quantity == 1
-                ? input.Singularize(inputIsKnownToBePlural: false)
-                : input.Pluralize(inputIsKnownToBeSingular: false);
+        var transformedInput = quantity == 1
+            ? input.Singularize(inputIsKnownToBePlural: false)
+            : input.Pluralize(inputIsKnownToBeSingular: false);
 
-            if (showQuantityAs == ShowQuantityAs.None)
-            {
-                return transformedInput;
-            }
-
-            if (showQuantityAs == ShowQuantityAs.Numeric)
-            {
-                return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
-            }
-
-            return $"{quantity.ToWords()} {transformedInput}";
+        if (showQuantityAs == ShowQuantityAs.None)
+        {
+            return transformedInput;
         }
+
+        if (showQuantityAs == ShowQuantityAs.Numeric)
+        {
+            return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+        }
+
+        return $"{quantity.ToWords()} {transformedInput}";
+    }
 
     /// <summary>
     /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word
@@ -93,12 +93,12 @@ public static class ToQuantityExtensions
     /// </example>
     public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider? formatProvider = null)
     {
-            var transformedInput = quantity == 1
-                ? input.Singularize(inputIsKnownToBePlural: false)
-                : input.Pluralize(inputIsKnownToBeSingular: false);
+        var transformedInput = quantity == 1
+            ? input.Singularize(inputIsKnownToBePlural: false)
+            : input.Pluralize(inputIsKnownToBeSingular: false);
 
-            return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
-        }
+        return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+    }
 
     /// <summary>
     /// Prefixes the provided word with the number and accordingly pluralizes or singularizes the word

@@ -12,13 +12,15 @@ public class ByteRateTests
     [InlineData(15 * 60 * 1024 * 1024, 60, "15 MB/s")]
     public void HumanizesRates(long inputBytes, double perSeconds, string expectedValue)
     {
-            var size = new ByteSize(inputBytes);
-            var interval = TimeSpan.FromSeconds(perSeconds);
+        var size = new ByteSize(inputBytes);
+        var interval = TimeSpan.FromSeconds(perSeconds);
 
-            var rate = size.Per(interval).Humanize();
+        var rate = size
+            .Per(interval)
+            .Humanize();
 
-            Assert.Equal(expectedValue, rate);
-        }
+        Assert.Equal(expectedValue, rate);
+    }
 
     [Theory]
     [InlineData(1, 1, TimeUnit.Second, "1 MB/s")]
@@ -32,27 +34,27 @@ public class ByteRateTests
     [InlineData(1, 10 * 60 * 60, TimeUnit.Hour, "102.4 KB/h")]
     public void TimeUnitTests(long megabytes, double measurementIntervalSeconds, TimeUnit displayInterval, string expectedValue)
     {
-            var size = ByteSize.FromMegabytes(megabytes);
-            var measurementInterval = TimeSpan.FromSeconds(measurementIntervalSeconds);
+        var size = ByteSize.FromMegabytes(megabytes);
+        var measurementInterval = TimeSpan.FromSeconds(measurementIntervalSeconds);
 
-            var rate = size.Per(measurementInterval);
-            var text = rate.Humanize(displayInterval);
+        var rate = size.Per(measurementInterval);
+        var text = rate.Humanize(displayInterval);
 
-            Assert.Equal(expectedValue, text);
-        }
+        Assert.Equal(expectedValue, text);
+    }
 
     [Theory]
     [InlineData(19854651984, 1, TimeUnit.Second, null, "18.49 GB/s")]
     [InlineData(19854651984, 1, TimeUnit.Second, "#.##", "18.49 GB/s")]
     public void FormattedTimeUnitTests(long bytes, int measurementIntervalSeconds, TimeUnit displayInterval, string? format, string expectedValue)
     {
-            var size = ByteSize.FromBytes(bytes);
-            var measurementInterval = TimeSpan.FromSeconds(measurementIntervalSeconds);
-            var rate = size.Per(measurementInterval);
-            var text = rate.Humanize(format, displayInterval);
+        var size = ByteSize.FromBytes(bytes);
+        var measurementInterval = TimeSpan.FromSeconds(measurementIntervalSeconds);
+        var rate = size.Per(measurementInterval);
+        var text = rate.Humanize(format, displayInterval);
 
-            Assert.Equal(expectedValue, text);
-        }
+        Assert.Equal(expectedValue, text);
+    }
 
     [Theory]
     [InlineData(TimeUnit.Millisecond)]
@@ -62,12 +64,10 @@ public class ByteRateTests
     [InlineData(TimeUnit.Year)]
     public void ThrowsOnUnsupportedData(TimeUnit units)
     {
-            var dummyRate = ByteSize.FromBits(1).Per(TimeSpan.FromSeconds(1));
+        var dummyRate = ByteSize
+            .FromBits(1)
+            .Per(TimeSpan.FromSeconds(1));
 
-            Assert.Throws<NotSupportedException>(() =>
-            {
-                dummyRate.Humanize(units);
-            });
-        }
-
+        Assert.Throws<NotSupportedException>(() => dummyRate.Humanize(units));
+    }
 }

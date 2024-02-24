@@ -4,7 +4,12 @@
 public class MetricNumeralTests
 {
     // Return a sequence of -24 -> 26
-    public static IEnumerable<object[]> SymbolRange => Enumerable.Range(-24, 51).Select(e => new object[] { e });
+    public static IEnumerable<object[]> SymbolRange => Enumerable
+        .Range(-24, 51)
+        .Select(e => new object[]
+        {
+            e
+        });
 
     [Theory]
     [InlineData(0, "0")]
@@ -39,16 +44,16 @@ public class MetricNumeralTests
     [MemberData(nameof(SymbolRange))]
     public void TestAllSymbols(int e)
     {
-            var origin = Math.Pow(10, e);
-            var to = origin.ToMetric();
-            var from = to.FromMetric();
+        var origin = Math.Pow(10, e);
+        var to = origin.ToMetric();
+        var from = to.FromMetric();
 
-            var c = Equals(
-                origin.ToString("0.##E+0", CultureInfo.InvariantCulture),
-                from.ToString("0.##E+0", CultureInfo.InvariantCulture));
+        var c = Equals(
+            origin.ToString("0.##E+0", CultureInfo.InvariantCulture),
+            from.ToString("0.##E+0", CultureInfo.InvariantCulture));
 
-            Assert.True(c);
-        }
+        Assert.True(c);
+    }
 
     [Theory]
     [InlineData(-9)]
@@ -62,19 +67,20 @@ public class MetricNumeralTests
     [InlineData(9)]
     public void TestAllSymbolsAsInt(int exponent)
     {
-            var origin = Convert.ToInt32(Math.Pow(10, exponent));
-            var isEquals = Equals(
-                origin.ToString("0.##E+0", CultureInfo.InvariantCulture),
-                origin.ToMetric()
-                      .FromMetric()
-                      .ToString("0.##E+0", CultureInfo.InvariantCulture));
-            if (!isEquals)
-            {
-                Debugger.Break();
-            }
-
-            Assert.True(isEquals);
+        var origin = Convert.ToInt32(Math.Pow(10, exponent));
+        var isEquals = Equals(
+            origin.ToString("0.##E+0", CultureInfo.InvariantCulture),
+            origin
+                .ToMetric()
+                .FromMetric()
+                .ToString("0.##E+0", CultureInfo.InvariantCulture));
+        if (!isEquals)
+        {
+            Debugger.Break();
         }
+
+        Assert.True(isEquals);
+    }
 
     [Theory]
     [InlineData("1.3M", 1300000, null, null)]

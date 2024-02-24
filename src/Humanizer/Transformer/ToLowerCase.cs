@@ -7,8 +7,8 @@ class ToLowerCase : ICulturedStringTransformer
 
     public string Transform(string input, CultureInfo? culture)
     {
-            culture ??= CultureInfo.CurrentCulture;
+        culture ??= CultureInfo.CurrentCulture;
 
-            return culture.TextInfo.ToLower(input);
-        }
+        return culture.TextInfo.ToLower(input);
+    }
 }

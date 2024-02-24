@@ -8,96 +8,97 @@ class SerbianCyrlNumberToWordsConverter(CultureInfo? culture) :
 
     public override string Convert(long input)
     {
-            if (input is > int.MaxValue or < int.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
+        if (input is > int.MaxValue or < int.MinValue)
+        {
+            throw new NotImplementedException();
+        }
 
-            if (number == 0)
-            {
-                return "нула";
-            }
+        var number = (int) input;
 
-            if (number < 0)
-            {
-                return $"- {Convert(-number)}";
-            }
+        if (number == 0)
+        {
+            return "нула";
+        }
 
-            var parts = new List<string>();
-            var billions = number / 1000000000;
+        if (number < 0)
+        {
+            return $"- {Convert(-number)}";
+        }
 
-            if (billions > 0)
-            {
-                parts.Add(Part("милијарда", "две милијарде", "{0} милијарде", "{0} милијарда", billions));
-                number %= 1000000000;
+        var parts = new List<string>();
+        var billions = number / 1000000000;
 
-                if (number > 0)
-                {
-                    parts.Add(" ");
-                }
-            }
-
-            var millions = number / 1000000;
-
-            if (millions > 0)
-            {
-                parts.Add(Part("милион", "два милиона", "{0} милиона", "{0} милиона", millions));
-                number %= 1000000;
-
-                if (number > 0)
-                {
-                    parts.Add(" ");
-                }
-            }
-
-            var thousands = number / 1000;
-
-            if (thousands > 0)
-            {
-                parts.Add(Part("хиљаду", "две хиљаде", "{0} хиљаде", "{0} хиљада", thousands));
-                number %= 1000;
-
-                if (number > 0)
-                {
-                    parts.Add(" ");
-                }
-            }
-
-            var hundreds = number / 100;
-
-            if (hundreds > 0)
-            {
-                parts.Add(Part("сто", "двесто", "{0}сто", "{0}сто", hundreds));
-                number %= 100;
-
-                if (number > 0)
-                {
-                    parts.Add(" ");
-                }
-            }
+        if (billions > 0)
+        {
+            parts.Add(Part("милијарда", "две милијарде", "{0} милијарде", "{0} милијарда", billions));
+            number %= 1000000000;
 
             if (number > 0)
             {
-                if (number < 20)
-                {
-                    parts.Add(UnitsMap[number]);
-                }
-                else
-                {
-                    parts.Add(TensMap[number / 10]);
+                parts.Add(" ");
+            }
+        }
 
-                    var units = number % 10;
+        var millions = number / 1000000;
 
-                    if (units > 0)
-                    {
-                        parts.Add($" {UnitsMap[units]}");
-                    }
+        if (millions > 0)
+        {
+            parts.Add(Part("милион", "два милиона", "{0} милиона", "{0} милиона", millions));
+            number %= 1000000;
+
+            if (number > 0)
+            {
+                parts.Add(" ");
+            }
+        }
+
+        var thousands = number / 1000;
+
+        if (thousands > 0)
+        {
+            parts.Add(Part("хиљаду", "две хиљаде", "{0} хиљаде", "{0} хиљада", thousands));
+            number %= 1000;
+
+            if (number > 0)
+            {
+                parts.Add(" ");
+            }
+        }
+
+        var hundreds = number / 100;
+
+        if (hundreds > 0)
+        {
+            parts.Add(Part("сто", "двесто", "{0}сто", "{0}сто", hundreds));
+            number %= 100;
+
+            if (number > 0)
+            {
+                parts.Add(" ");
+            }
+        }
+
+        if (number > 0)
+        {
+            if (number < 20)
+            {
+                parts.Add(UnitsMap[number]);
+            }
+            else
+            {
+                parts.Add(TensMap[number / 10]);
+
+                var units = number % 10;
+
+                if (units > 0)
+                {
+                    parts.Add($" {UnitsMap[units]}");
                 }
             }
-
-            return string.Concat(parts);
         }
+
+        return string.Concat(parts);
+    }
 
     public override string ConvertToOrdinal(int number) =>
         //TODO: In progress
@@ -105,17 +106,17 @@ class SerbianCyrlNumberToWordsConverter(CultureInfo? culture) :
 
     string Part(string singular, string dual, string trialQuadral, string plural, int number)
     {
-            switch (number)
-            {
-                case 1:
-                    return singular;
-                case 2:
-                    return dual;
-                case 3:
-                case 4:
-                    return string.Format(trialQuadral, Convert(number));
-                default:
-                    return string.Format(plural, Convert(number));
-            }
+        switch (number)
+        {
+            case 1:
+                return singular;
+            case 2:
+                return dual;
+            case 3:
+            case 4:
+                return string.Format(trialQuadral, Convert(number));
+            default:
+                return string.Format(plural, Convert(number));
         }
+    }
 }

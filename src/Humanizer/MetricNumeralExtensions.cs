@@ -34,10 +34,10 @@ public static class MetricNumeralExtensions
 
     static MetricNumeralExtensions()
     {
-            const int limit = 27;
-            BigLimit = Math.Pow(10, limit);
-            SmallLimit = Math.Pow(10, -limit);
-        }
+        const int limit = 27;
+        BigLimit = Math.Pow(10, limit);
+        SmallLimit = Math.Pow(10, -limit);
+    }
 
     /// <summary>
     /// Symbols is a list of every symbols for the Metric system.
@@ -60,23 +60,55 @@ public static class MetricNumeralExtensions
     /// </remarks>
     static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new()
     {
-        {'Y', new("yotta", "septillion", "quadrillion")},
-        {'Z', new("zetta", "sextillion", "trilliard")},
-        {'E', new("exa", "quintillion", "trillion")},
-        {'P', new("peta", "quadrillion", "billiard")},
-        {'T', new("tera", "trillion", "billion")},
-        {'G', new("giga", "billion", "milliard")},
-        {'M', new("mega", "million")},
-        {'k', new("kilo", "thousand")},
+        {
+            'Y', new("yotta", "septillion", "quadrillion")
+        },
+        {
+            'Z', new("zetta", "sextillion", "trilliard")
+        },
+        {
+            'E', new("exa", "quintillion", "trillion")
+        },
+        {
+            'P', new("peta", "quadrillion", "billiard")
+        },
+        {
+            'T', new("tera", "trillion", "billion")
+        },
+        {
+            'G', new("giga", "billion", "milliard")
+        },
+        {
+            'M', new("mega", "million")
+        },
+        {
+            'k', new("kilo", "thousand")
+        },
 
-        {'m', new("milli", "thousandth")},
-        {'μ', new("micro", "millionth")},
-        {'n', new("nano", "billionth", "milliardth")},
-        {'p', new("pico", "trillionth", "billionth")},
-        {'f', new("femto", "quadrillionth", "billiardth")},
-        {'a', new("atto", "quintillionth", "trillionth")},
-        {'z', new("zepto", "sextillionth", "trilliardth")},
-        {'y', new("yocto", "septillionth", "quadrillionth")}
+        {
+            'm', new("milli", "thousandth")
+        },
+        {
+            'μ', new("micro", "millionth")
+        },
+        {
+            'n', new("nano", "billionth", "milliardth")
+        },
+        {
+            'p', new("pico", "trillionth", "billionth")
+        },
+        {
+            'f', new("femto", "quadrillionth", "billiardth")
+        },
+        {
+            'a', new("atto", "quintillionth", "trillionth")
+        },
+        {
+            'z', new("zepto", "sextillionth", "trilliardth")
+        },
+        {
+            'y', new("yocto", "septillionth", "quadrillionth")
+        }
     };
 
     /// <summary>
@@ -97,9 +129,9 @@ public static class MetricNumeralExtensions
     /// <returns>A number after a conversion from a Metric representation.</returns>
     public static double FromMetric(this string input)
     {
-            input = CleanRepresentation(input);
-            return BuildNumber(input, input[^1]);
-        }
+        input = CleanRepresentation(input);
+        return BuildNumber(input, input[^1]);
+    }
 
     /// <summary>
     /// Converts a number into a valid and Human-readable Metric representation.
@@ -120,7 +152,7 @@ public static class MetricNumeralExtensions
     /// </example>
     /// <returns>A valid Metric representation</returns>
     public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null) =>
-        ((double)input).ToMetric(formats, decimals);
+        ((double) input).ToMetric(formats, decimals);
 
     /// <summary>
     /// Converts a number into a valid and Human-readable Metric representation.
@@ -142,18 +174,18 @@ public static class MetricNumeralExtensions
     /// <returns>A valid Metric representation</returns>
     public static string ToMetric(this double input, MetricNumeralFormats? formats = null, int? decimals = null)
     {
-            if (input.Equals(0))
-            {
-                return input.ToString();
-            }
-
-            if (input.IsOutOfRange())
-            {
-                throw new ArgumentOutOfRangeException(nameof(input));
-            }
-
-            return BuildRepresentation(input, formats, decimals);
+        if (input.Equals(0))
+        {
+            return input.ToString();
         }
+
+        if (input.IsOutOfRange())
+        {
+            throw new ArgumentOutOfRangeException(nameof(input));
+        }
+
+        return BuildRepresentation(input, formats, decimals);
+    }
 
     /// <summary>
     /// Clean or handle any wrong input
@@ -162,20 +194,20 @@ public static class MetricNumeralExtensions
     /// <returns>A cleaned representation</returns>
     static string CleanRepresentation(string input)
     {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            input = input.Trim();
-            input = ReplaceNameBySymbol(input);
-            if (input.Length == 0 || input.IsInvalidMetricNumeral())
-            {
-                throw new ArgumentException("Empty or invalid Metric string.", nameof(input));
-            }
-
-            return input.Replace(" ", string.Empty);
+        if (input == null)
+        {
+            throw new ArgumentNullException(nameof(input));
         }
+
+        input = input.Trim();
+        input = ReplaceNameBySymbol(input);
+        if (input.Length == 0 || input.IsInvalidMetricNumeral())
+        {
+            throw new ArgumentException("Empty or invalid Metric string.", nameof(input));
+        }
+
+        return input.Replace(" ", string.Empty);
+    }
 
     /// <summary>
     /// Build a number from a metric representation or from a number
@@ -196,13 +228,14 @@ public static class MetricNumeralExtensions
     /// <returns>A number build from a Metric representation</returns>
     static double BuildMetricNumber(string input, char last)
     {
-            double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3;
-            var number = double.Parse(input.Remove(input.Length - 1));
-            var exponent = Math.Pow(10, Symbols[0].Contains(last)
-                ? getExponent(Symbols[0])
-                : -getExponent(Symbols[1]));
-            return number * exponent;
-        }
+        double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3;
+        var number = double.Parse(input.Remove(input.Length - 1));
+        var exponent = Math.Pow(10, Symbols[0]
+            .Contains(last)
+            ? getExponent(Symbols[0])
+            : -getExponent(Symbols[1]));
+        return number * exponent;
+    }
 
     /// <summary>
     /// Replace every symbol's name by its symbol representation.
@@ -222,16 +255,21 @@ public static class MetricNumeralExtensions
     /// <returns>A number in a Metric representation</returns>
     static string BuildRepresentation(double input, MetricNumeralFormats? formats, int? decimals)
     {
-            var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
+        var exponent = (int) Math.Floor(Math.Log10(Math.Abs(input)) / 3);
 
-            if (!exponent.Equals(0)) return BuildMetricRepresentation(input, exponent, formats, decimals);
-            var representation = decimals.HasValue ? Math.Round(input, decimals.Value).ToString() : input.ToString();
-            if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
-            {
-                representation += " ";
-            }
-            return representation;
+        if (!exponent.Equals(0)) return BuildMetricRepresentation(input, exponent, formats, decimals);
+        var representation = decimals.HasValue
+            ? Math
+                .Round(input, decimals.Value)
+                .ToString()
+            : input.ToString();
+        if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
+        {
+            representation += " ";
         }
+
+        return representation;
+    }
 
     /// <summary>
     /// Build a Metric representation of the number.
@@ -243,19 +281,19 @@ public static class MetricNumeralExtensions
     /// <returns>A number in a Metric representation</returns>
     static string BuildMetricRepresentation(double input, int exponent, MetricNumeralFormats? formats, int? decimals)
     {
-            var number = input * Math.Pow(1000, -exponent);
-            if (decimals.HasValue)
-            {
-                number = Math.Round(number, decimals.Value);
-            }
-
-            var symbol = Math.Sign(exponent) == 1
-                ? Symbols[0][exponent - 1]
-                : Symbols[1][-exponent - 1];
-            return number.ToString("G15")
-                   + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
-                   + GetUnitText(symbol, formats);
+        var number = input * Math.Pow(1000, -exponent);
+        if (decimals.HasValue)
+        {
+            number = Math.Round(number, decimals.Value);
         }
+
+        var symbol = Math.Sign(exponent) == 1
+            ? Symbols[0][exponent - 1]
+            : Symbols[1][-exponent - 1];
+        return number.ToString("G15")
+               + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
+               + GetUnitText(symbol, formats);
+    }
 
     /// <summary>
     /// Get the unit from a symbol of from the symbol's name.
@@ -265,23 +303,26 @@ public static class MetricNumeralExtensions
     /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
     static string GetUnitText(char symbol, MetricNumeralFormats? formats)
     {
-            if (formats.HasValue
-                && formats.Value.HasFlag(MetricNumeralFormats.UseName))
-            {
-                return UnitPrefixes[symbol].Name;
-            }
-            if (formats.HasValue
-                && formats.Value.HasFlag(MetricNumeralFormats.UseShortScaleWord))
-            {
-                return UnitPrefixes[symbol].ShortScaleWord;
-            }
-            if (formats.HasValue
-                && formats.Value.HasFlag(MetricNumeralFormats.UseLongScaleWord))
-            {
-                return UnitPrefixes[symbol].LongScaleWord;
-            }
-            return symbol.ToString();
+        if (formats.HasValue
+            && formats.Value.HasFlag(MetricNumeralFormats.UseName))
+        {
+            return UnitPrefixes[symbol].Name;
         }
+
+        if (formats.HasValue
+            && formats.Value.HasFlag(MetricNumeralFormats.UseShortScaleWord))
+        {
+            return UnitPrefixes[symbol].ShortScaleWord;
+        }
+
+        if (formats.HasValue
+            && formats.Value.HasFlag(MetricNumeralFormats.UseLongScaleWord))
+        {
+            return UnitPrefixes[symbol].LongScaleWord;
+        }
+
+        return symbol.ToString();
+    }
 
     /// <summary>
     /// Check if a Metric representation is out of the valid range.
@@ -290,11 +331,11 @@ public static class MetricNumeralExtensions
     /// <returns>True if input is out of the valid range.</returns>
     static bool IsOutOfRange(this double input)
     {
-            bool outside(double min, double max) => !(max > input && input > min);
+        bool outside(double min, double max) => !(max > input && input > min);
 
-            return (Math.Sign(input) == 1 && outside(SmallLimit, BigLimit))
-                   || (Math.Sign(input) == -1 && outside(-BigLimit, -SmallLimit));
-        }
+        return (Math.Sign(input) == 1 && outside(SmallLimit, BigLimit))
+               || (Math.Sign(input) == -1 && outside(-BigLimit, -SmallLimit));
+    }
 
     /// <summary>
     /// Check if a string is not a valid Metric representation.
@@ -308,11 +349,13 @@ public static class MetricNumeralExtensions
     /// <returns>True if input is not a valid Metric representation.</returns>
     static bool IsInvalidMetricNumeral(this string input)
     {
-            var index = input.Length - 1;
-            var last = input[index];
-            var isSymbol = Symbols[0].Contains(last) || Symbols[1].Contains(last);
-            return !double.TryParse(isSymbol ? input.Remove(index) : input, out _);
-        }
+        var index = input.Length - 1;
+        var last = input[index];
+        var isSymbol = Symbols[0]
+            .Contains(last) || Symbols[1]
+            .Contains(last);
+        return !double.TryParse(isSymbol ? input.Remove(index) : input, out _);
+    }
 
     struct UnitPrefix(string name, string shortScaleWord, string? longScaleWord = null)
     {

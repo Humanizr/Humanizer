@@ -1,30 +1,29 @@
 ﻿#if NET6_0_OR_GREATER
 
-namespace Humanizer
+namespace Humanizer;
+
+class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
-    class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
+    public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
-        public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
+        var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
+            ? 5 * Math.Round(time.Minute / 5.0)
+            : time.Minute);
+
+        return normalizedMinutes switch
         {
-            var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
-                ? 5 * Math.Round(time.Minute / 5.0)
-                : time.Minute);
+            00 => GetHourExpression(time.Hour),
+            60 => GetHourExpression(time.Hour + 1),
+            _ => $"{GetHourExpression(time.Hour)} {normalizedMinutes.ToWords(GrammaticalGender.Feminine)}"
+        };
 
-            return normalizedMinutes switch
+        static string GetHourExpression(int hour) =>
+            hour switch
             {
-                00 => GetHourExpression(time.Hour),
-                60 => GetHourExpression(time.Hour + 1),
-                _ => $"{GetHourExpression(time.Hour)} {normalizedMinutes.ToWords(GrammaticalGender.Feminine)}"
+                0 => "minuit",
+                12 => "midi",
+                _ => hour.ToWords(GrammaticalGender.Feminine) + (hour > 1 ? " heures" : " heure")
             };
-
-            static string GetHourExpression(int hour) =>
-                hour switch
-                {
-                    0 => "minuit",
-                    12 => "midi",
-                    _ => hour.ToWords(GrammaticalGender.Feminine) + (hour > 1 ? " heures" : " heure")
-                };
-        }
     }
 }
 

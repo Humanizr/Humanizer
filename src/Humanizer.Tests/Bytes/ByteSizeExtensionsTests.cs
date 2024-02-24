@@ -6,58 +6,58 @@ public class ByteSizeExtensionsTests
     [Fact]
     public void ByteTerabytes()
     {
-            const byte size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Fact]
     public void SbyteTerabytes()
     {
-            const sbyte size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Fact]
     public void ShortTerabytes()
     {
-            const short size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const short size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Fact]
     public void UshortTerabytes()
     {
-            const ushort size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Fact]
     public void IntTerabytes()
     {
-            const int size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const int size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Fact]
     public void UintTerabytes()
     {
-            const uint size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Fact]
     public void DoubleTerabytes()
     {
-            const double size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const double size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Fact]
     public void LongTerabytes()
     {
-            const long size = 2;
-            Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
-        }
+        const long size = 2;
+        Assert.Equal(ByteSize.FromTerabytes(size), size.Terabytes());
+    }
 
     [Theory]
     [InlineData(2, null, "en", "2 TB")]
@@ -69,66 +69,68 @@ public class ByteSizeExtensionsTests
     [InlineData(2.123, "#.#", "ru-RU", "2,1 TB")]
     public void HumanizesTerabytes(double input, string? format, string cultureName, string expectedValue)
     {
-            var culture = new CultureInfo(cultureName);
+        var culture = new CultureInfo(cultureName);
 
-            Assert.Equal(expectedValue, input.Terabytes().Humanize(format, culture));
-        }
+        Assert.Equal(expectedValue, input
+            .Terabytes()
+            .Humanize(format, culture));
+    }
 
     [Fact]
     public void ByteGigabytes()
     {
-            const byte size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Fact]
     public void SbyteGigabytes()
     {
-            const sbyte size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Fact]
     public void ShortGigabytes()
     {
-            const short size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const short size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Fact]
     public void UshortGigabytes()
     {
-            const ushort size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Fact]
     public void IntGigabytes()
     {
-            const int size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const int size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Fact]
     public void UintGigabytes()
     {
-            const uint size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Fact]
     public void DoubleGigabytes()
     {
-            const double size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const double size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Fact]
     public void LongGigabytes()
     {
-            const long size = 2;
-            Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
-        }
+        const long size = 2;
+        Assert.Equal(ByteSize.FromGigabytes(size), size.Gigabytes());
+    }
 
     [Theory]
     [InlineData(0, null, "en", "0 b")]
@@ -139,66 +141,68 @@ public class ByteSizeExtensionsTests
     [InlineData(2.123, "#.##", "en", "2.12 GB")]
     public void HumanizesGigabytes(double input, string? format, string cultureName, string expectedValue)
     {
-            var cultureInfo = new CultureInfo(cultureName);
+        var cultureInfo = new CultureInfo(cultureName);
 
-            Assert.Equal(expectedValue, input.Gigabytes().Humanize(format, cultureInfo));
-        }
+        Assert.Equal(expectedValue, input
+            .Gigabytes()
+            .Humanize(format, cultureInfo));
+    }
 
     [Fact]
     public void ByteMegabytes()
     {
-            const byte size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Fact]
     public void SbyteMegabytes()
     {
-            const sbyte size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Fact]
     public void ShortMegabytes()
     {
-            const short size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const short size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Fact]
     public void UshortMegabytes()
     {
-            const ushort size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Fact]
     public void IntMegabytes()
     {
-            const int size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const int size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Fact]
     public void UintMegabytes()
     {
-            const uint size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Fact]
     public void DoubleMegabytes()
     {
-            const double size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const double size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Fact]
     public void LongMegabytes()
     {
-            const long size = 2;
-            Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
-        }
+        const long size = 2;
+        Assert.Equal(ByteSize.FromMegabytes(size), size.Megabytes());
+    }
 
     [Theory]
     [InlineData(0, null, "en", "0 b")]
@@ -209,66 +213,68 @@ public class ByteSizeExtensionsTests
     [InlineData(2.123, "#", "en", "2 MB")]
     public void HumanizesMegabytes(double input, string? format, string cultureName, string expectedValue)
     {
-            var cultureInfo = new CultureInfo(cultureName);
+        var cultureInfo = new CultureInfo(cultureName);
 
-            Assert.Equal(expectedValue, input.Megabytes().Humanize(format, cultureInfo));
-        }
+        Assert.Equal(expectedValue, input
+            .Megabytes()
+            .Humanize(format, cultureInfo));
+    }
 
     [Fact]
     public void ByteKilobytes()
     {
-            const byte size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Fact]
     public void SbyteKilobytes()
     {
-            const sbyte size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Fact]
     public void ShortKilobytes()
     {
-            const short size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const short size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Fact]
     public void UshortKilobytes()
     {
-            const ushort size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Fact]
     public void IntKilobytes()
     {
-            const int size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const int size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Fact]
     public void UintKilobytes()
     {
-            const uint size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Fact]
     public void DoubleKilobytes()
     {
-            const double size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const double size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Fact]
     public void LongKilobytes()
     {
-            const long size = 2;
-            Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
-        }
+        const long size = 2;
+        Assert.Equal(ByteSize.FromKilobytes(size), size.Kilobytes());
+    }
 
     [Theory]
     [InlineData(0, null, "en", "0 b")]
@@ -279,66 +285,68 @@ public class ByteSizeExtensionsTests
     [InlineData(2.123, "#.####", "en", "2.123 KB")]
     public void HumanizesKilobytes(double input, string? format, string cultureName, string expectedValue)
     {
-            var cultureInfo = new CultureInfo(cultureName);
+        var cultureInfo = new CultureInfo(cultureName);
 
-            Assert.Equal(expectedValue, input.Kilobytes().Humanize(format, cultureInfo));
-        }
+        Assert.Equal(expectedValue, input
+            .Kilobytes()
+            .Humanize(format, cultureInfo));
+    }
 
     [Fact]
     public void ByteBytes()
     {
-            const byte size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Fact]
     public void SbyteBytes()
     {
-            const sbyte size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Fact]
     public void ShortBytes()
     {
-            const short size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const short size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Fact]
     public void UshortBytes()
     {
-            const ushort size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Fact]
     public void IntBytes()
     {
-            const int size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const int size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Fact]
     public void UintBytes()
     {
-            const uint size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Fact]
     public void DoubleBytes()
     {
-            const double size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const double size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Fact]
     public void LongBytes()
     {
-            const long size = 2;
-            Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
-        }
+        const long size = 2;
+        Assert.Equal(ByteSize.FromBytes(size), size.Bytes());
+    }
 
     [Theory]
     [InlineData(0, null, "en", "0 b")]
@@ -354,59 +362,61 @@ public class ByteSizeExtensionsTests
     [InlineData(10000000, "#,##0.# KB", "en", "9,765.6 KB")]
     public void HumanizesBytes(double input, string? format, string cultureName, string expectedValue)
     {
-            var cultureInfo = new CultureInfo(cultureName);
+        var cultureInfo = new CultureInfo(cultureName);
 
-            Assert.Equal(expectedValue, input.Bytes().Humanize(format, cultureInfo));
-        }
+        Assert.Equal(expectedValue, input
+            .Bytes()
+            .Humanize(format, cultureInfo));
+    }
 
     [Fact]
     public void ByteBits()
     {
-            const byte size = 2;
-            Assert.Equal(ByteSize.FromBits(size), size.Bits());
-        }
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromBits(size), size.Bits());
+    }
 
     [Fact]
     public void SbyteBits()
     {
-            const sbyte size = 2;
-            Assert.Equal(ByteSize.FromBits(size), size.Bits());
-        }
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromBits(size), size.Bits());
+    }
 
     [Fact]
     public void ShortBits()
     {
-            const short size = 2;
-            Assert.Equal(ByteSize.FromBits(size), size.Bits());
-        }
+        const short size = 2;
+        Assert.Equal(ByteSize.FromBits(size), size.Bits());
+    }
 
     [Fact]
     public void UshortBits()
     {
-            const ushort size = 2;
-            Assert.Equal(ByteSize.FromBits(size), size.Bits());
-        }
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromBits(size), size.Bits());
+    }
 
     [Fact]
     public void IntBits()
     {
-            const int size = 2;
-            Assert.Equal(ByteSize.FromBits(size), size.Bits());
-        }
+        const int size = 2;
+        Assert.Equal(ByteSize.FromBits(size), size.Bits());
+    }
 
     [Fact]
     public void UintBits()
     {
-            const uint size = 2;
-            Assert.Equal(ByteSize.FromBits(size), size.Bits());
-        }
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromBits(size), size.Bits());
+    }
 
     [Fact]
     public void LongBits()
     {
-            const long size = 2;
-            Assert.Equal(ByteSize.FromBits(size), size.Bits());
-        }
+        const long size = 2;
+        Assert.Equal(ByteSize.FromBits(size), size.Bits());
+    }
 
     [Theory]
     [InlineData(0, null, "en", "0 b")]
@@ -417,8 +427,10 @@ public class ByteSizeExtensionsTests
     [InlineData(10000, "#.# KB", "en", "1.2 KB")]
     public void HumanizesBits(long input, string? format, string cultureName, string expectedValue)
     {
-            var cultureInfo = new CultureInfo(cultureName);
+        var cultureInfo = new CultureInfo(cultureName);
 
-            Assert.Equal(expectedValue, input.Bits().Humanize(format, cultureInfo));
-        }
+        Assert.Equal(expectedValue, input
+            .Bits()
+            .Humanize(format, cultureInfo));
+    }
 }

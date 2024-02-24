@@ -12,148 +12,148 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
 
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
-            if (gender == GrammaticalGender.Neuter)
-            {
-                throw new NotSupportedException();
-            }
-
-            var parts = new List<string>();
-            var number = input;
-
-            HandleNegative(parts, ref number);
-            CollectParts(parts, ref number, 1000000000000000000, GrammaticalGender.Masculine, "kvintilijonas", "kvintilijonai", "kvintilijonų");
-            CollectParts(parts, ref number, 1000000000000000, GrammaticalGender.Masculine, "kvadrilijonas", "kvadrilijonai", "kvadrilijonų");
-            CollectParts(parts, ref number, 1000000000000, GrammaticalGender.Masculine, "trilijonas", "trilijonai", "trilijonų");
-            CollectParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "milijardas", "milijardai", "milijardų");
-            CollectParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "milijonas", "milijonai", "milijonų");
-            CollectParts(parts, ref number, 1000, GrammaticalGender.Masculine, "tūkstantis", "tūkstančiai", "tūkstančių");
-            CollectPartsUnderOneThousand(parts, number, gender);
-
-            return string.Join(" ", parts);
+        if (gender == GrammaticalGender.Neuter)
+        {
+            throw new NotSupportedException();
         }
+
+        var parts = new List<string>();
+        var number = input;
+
+        HandleNegative(parts, ref number);
+        CollectParts(parts, ref number, 1000000000000000000, GrammaticalGender.Masculine, "kvintilijonas", "kvintilijonai", "kvintilijonų");
+        CollectParts(parts, ref number, 1000000000000000, GrammaticalGender.Masculine, "kvadrilijonas", "kvadrilijonai", "kvadrilijonų");
+        CollectParts(parts, ref number, 1000000000000, GrammaticalGender.Masculine, "trilijonas", "trilijonai", "trilijonų");
+        CollectParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "milijardas", "milijardai", "milijardų");
+        CollectParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "milijonas", "milijonai", "milijonų");
+        CollectParts(parts, ref number, 1000, GrammaticalGender.Masculine, "tūkstantis", "tūkstančiai", "tūkstančių");
+        CollectPartsUnderOneThousand(parts, number, gender);
+
+        return string.Join(" ", parts);
+    }
 
     public override string ConvertToOrdinal(int input, GrammaticalGender gender)
     {
-            if (gender == GrammaticalGender.Neuter)
-            {
-                throw new NotSupportedException();
-            }
-
-            var parts = new List<string>();
-            var number = (long)input;
-
-            HandleNegative(parts, ref number);
-            CollectOrdinalParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "milijard" + GetOrdinalEndingForGender(gender), "milijardas", "milijardai", "milijardų");
-            CollectOrdinalParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "milijon" + GetOrdinalEndingForGender(gender), "milijonas", "milijonai", "milijonų");
-            CollectOrdinalParts(parts, ref number, 1000, GrammaticalGender.Masculine, "tūkstant" + GetOrdinalEndingForGender(gender), "tūkstantis", "tūkstančiai", "tūkstančių");
-            CollectOrdinalPartsUnderOneThousand(parts, number, gender, true);
-
-            return string.Join(" ", parts);
+        if (gender == GrammaticalGender.Neuter)
+        {
+            throw new NotSupportedException();
         }
+
+        var parts = new List<string>();
+        var number = (long) input;
+
+        HandleNegative(parts, ref number);
+        CollectOrdinalParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "milijard" + GetOrdinalEndingForGender(gender), "milijardas", "milijardai", "milijardų");
+        CollectOrdinalParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "milijon" + GetOrdinalEndingForGender(gender), "milijonas", "milijonai", "milijonų");
+        CollectOrdinalParts(parts, ref number, 1000, GrammaticalGender.Masculine, "tūkstant" + GetOrdinalEndingForGender(gender), "tūkstantis", "tūkstančiai", "tūkstančių");
+        CollectOrdinalPartsUnderOneThousand(parts, number, gender, true);
+
+        return string.Join(" ", parts);
+    }
 
     static void HandleNegative(List<string> parts, ref long number)
     {
-            if (number < 0)
-            {
-                parts.Add("minus");
-                number = -number;
-            }
+        if (number < 0)
+        {
+            parts.Add("minus");
+            number = -number;
         }
+    }
 
     static void CollectParts(ICollection<string> parts, ref long number, long divisor,
         GrammaticalGender gender, params string[] forms)
     {
-            var result = number / divisor;
-            if (result == 0)
-            {
-                return;
-            }
-
-            number %= divisor;
-
-            if (result > 1)
-            {
-                CollectPartsUnderOneThousand(parts, result, gender);
-            }
-
-            parts.Add(ChooseForm(result, forms));
+        var result = number / divisor;
+        if (result == 0)
+        {
+            return;
         }
+
+        number %= divisor;
+
+        if (result > 1)
+        {
+            CollectPartsUnderOneThousand(parts, result, gender);
+        }
+
+        parts.Add(ChooseForm(result, forms));
+    }
 
     static void CollectOrdinalParts(ICollection<string> parts, ref long number, long divisor,
         GrammaticalGender gender, string ordinalForm, params string[] forms)
     {
-            var result = number / divisor;
-            if (result == 0)
-            {
-                return;
-            }
-
-            number %= divisor;
-
-            if (result > 1)
-            {
-                CollectOrdinalPartsUnderOneThousand(parts, result, gender);
-            }
-
-            parts.Add(ChooseCardinalOrOrdinalForm(result, ordinalForm, forms, useOrdinalForm: number == 0));
+        var result = number / divisor;
+        if (result == 0)
+        {
+            return;
         }
+
+        number %= divisor;
+
+        if (result > 1)
+        {
+            CollectOrdinalPartsUnderOneThousand(parts, result, gender);
+        }
+
+        parts.Add(ChooseCardinalOrOrdinalForm(result, ordinalForm, forms, useOrdinalForm: number == 0));
+    }
 
     static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
     {
-            if (number >= 100)
-            {
-                var hundreds = number / 100;
-                number %= 100;
-                parts.Add(HundredsMap[hundreds]);
-            }
-
-            if (number >= 20)
-            {
-                var tens = number / 10;
-                parts.Add(TensMap[tens]);
-                number %= 10;
-            }
-
-            if (number > 0 || parts.Count == 0)
-            {
-                parts.Add(GetCardinalNumberForGender(UnitsMap[number], gender));
-            }
+        if (number >= 100)
+        {
+            var hundreds = number / 100;
+            number %= 100;
+            parts.Add(HundredsMap[hundreds]);
         }
+
+        if (number >= 20)
+        {
+            var tens = number / 10;
+            parts.Add(TensMap[tens]);
+            number %= 10;
+        }
+
+        if (number > 0 || parts.Count == 0)
+        {
+            parts.Add(GetCardinalNumberForGender(UnitsMap[number], gender));
+        }
+    }
 
     static void CollectOrdinalPartsUnderOneThousand(ICollection<string> parts, long number,
         GrammaticalGender gender, bool lastNumber = false)
     {
-            if (number >= 100)
-            {
-                var hundreds = number / 100;
-                number %= 100;
+        if (number >= 100)
+        {
+            var hundreds = number / 100;
+            number %= 100;
 
-                parts.Add(!lastNumber || number > 0
-                    ? HundredsMap[hundreds]
-                    : OrdinalHundredsMap[hundreds] + GetOrdinalEndingForGender(gender));
-            }
-
-            if (number >= 20)
-            {
-                var tens = number / 10;
-                number %= 10;
-
-                parts.Add(!lastNumber || number > 0
-                    ? TensMap[tens]
-                    : OrdinalTensMap[tens] + GetOrdinalEndingForGender(gender));
-            }
-
-            if (number > 0)
-            {
-                parts.Add(!lastNumber
-                    ? UnitsMap[number]
-                    : OrdinalUnitsMap[number] + GetOrdinalEndingForGender(gender));
-            }
-            else if (number == 0 && parts.Count == 0)
-            {
-                parts.Add(gender == GrammaticalGender.Masculine ? "nulinis" : "nulinė");
-            }
+            parts.Add(!lastNumber || number > 0
+                ? HundredsMap[hundreds]
+                : OrdinalHundredsMap[hundreds] + GetOrdinalEndingForGender(gender));
         }
+
+        if (number >= 20)
+        {
+            var tens = number / 10;
+            number %= 10;
+
+            parts.Add(!lastNumber || number > 0
+                ? TensMap[tens]
+                : OrdinalTensMap[tens] + GetOrdinalEndingForGender(gender));
+        }
+
+        if (number > 0)
+        {
+            parts.Add(!lastNumber
+                ? UnitsMap[number]
+                : OrdinalUnitsMap[number] + GetOrdinalEndingForGender(gender));
+        }
+        else if (number == 0 && parts.Count == 0)
+        {
+            parts.Add(gender == GrammaticalGender.Masculine ? "nulinis" : "nulinė");
+        }
+    }
 
     static string ChooseForm(long number, string[] forms) =>
         forms[GetFormIndex(number)];
@@ -161,81 +161,81 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
     static string ChooseCardinalOrOrdinalForm(long number, string ordinalForm, string[] cardinalForms,
         bool useOrdinalForm = false)
     {
-            if (useOrdinalForm)
-            {
-                return ordinalForm;
-            }
-
-            return ChooseForm(number, cardinalForms);
+        if (useOrdinalForm)
+        {
+            return ordinalForm;
         }
+
+        return ChooseForm(number, cardinalForms);
+    }
 
     static int GetFormIndex(long number)
     {
-            var form = LithuanianNumberFormDetector.Detect(number);
+        var form = LithuanianNumberFormDetector.Detect(number);
 
-            switch (form)
+        switch (form)
+        {
+            case LithuanianNumberForm.Singular:
             {
-                case LithuanianNumberForm.Singular:
-                    {
-                        return 0;
-                    }
-                case LithuanianNumberForm.Plural:
-                    {
-                        return 1;
-                    }
-                case LithuanianNumberForm.GenitivePlural:
-                    {
-                        return 2;
-                    }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(form));
+                return 0;
             }
+            case LithuanianNumberForm.Plural:
+            {
+                return 1;
+            }
+            case LithuanianNumberForm.GenitivePlural:
+            {
+                return 2;
+            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(form));
         }
+    }
 
     static string GetCardinalNumberForGender(string number, GrammaticalGender gender)
     {
-            if (gender == GrammaticalGender.Masculine)
-            {
-                return number;
-            }
-
-            if (gender == GrammaticalGender.Feminine)
-            {
-                if (number == "du")
-                {
-                    return "dvi";
-                }
-
-                if (number.EndsWith("as"))
-                {
-                    return number.Substring(0, number.Length - 1);
-                }
-
-                if (number.EndsWith("i"))
-                {
-                    return number + "os";
-                }
-
-                return number;
-            }
-
-            throw new ArgumentOutOfRangeException(nameof(gender));
+        if (gender == GrammaticalGender.Masculine)
+        {
+            return number;
         }
+
+        if (gender == GrammaticalGender.Feminine)
+        {
+            if (number == "du")
+            {
+                return "dvi";
+            }
+
+            if (number.EndsWith("as"))
+            {
+                return number.Substring(0, number.Length - 1);
+            }
+
+            if (number.EndsWith("i"))
+            {
+                return number + "os";
+            }
+
+            return number;
+        }
+
+        throw new ArgumentOutOfRangeException(nameof(gender));
+    }
 
     static string GetOrdinalEndingForGender(GrammaticalGender gender)
     {
-            switch (gender)
+        switch (gender)
+        {
+            case GrammaticalGender.Masculine:
             {
-                case GrammaticalGender.Masculine:
-                    {
-                        return "as";
-                    }
-                case GrammaticalGender.Feminine:
-                    {
-                        return "a";
-                    }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(gender));
+                return "as";
             }
+            case GrammaticalGender.Feminine:
+            {
+                return "a";
+            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(gender));
         }
+    }
 }

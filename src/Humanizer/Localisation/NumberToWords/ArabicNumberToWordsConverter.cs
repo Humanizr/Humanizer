@@ -16,246 +16,294 @@ class ArabicNumberToWordsConverter :
 
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
-            if (number == 0)
+        if (number == 0)
+        {
+            return "صفر";
+        }
+
+        if (number < 0)
+        {
+            return $"ناقص {Convert(-number, gender)}";
+        }
+
+        var result = string.Empty;
+        var groupLevel = 0;
+
+        while (number >= 1)
+        {
+            var groupNumber = number % 1000;
+            number /= 1000;
+
+            var tens = groupNumber % 100;
+            var hundreds = groupNumber / 100;
+            var process = string.Empty;
+
+            if (hundreds > 0)
             {
-                return "صفر";
-            }
-
-            if (number < 0)
-            {
-                return $"ناقص {Convert(-number, gender)}";
-            }
-
-            var result = string.Empty;
-            var groupLevel = 0;
-
-            while (number >= 1)
-            {
-                var groupNumber = number % 1000;
-                number /= 1000;
-
-                var tens = groupNumber % 100;
-                var hundreds = groupNumber / 100;
-                var process = string.Empty;
-
-                if (hundreds > 0)
+                if (tens == 0 && hundreds == 2)
                 {
-                    if (tens == 0 && hundreds == 2)
-                    {
-                        process = AppendedTwos[0];
-                    }
-                    else
-                    {
-                        process = HundredsGroup[hundreds];
-                    }
+                    process = AppendedTwos[0];
                 }
-
-                if (tens > 0)
+                else
                 {
-                    if (tens < 20)
+                    process = HundredsGroup[hundreds];
+                }
+            }
+
+            if (tens > 0)
+            {
+                if (tens < 20)
+                {
+                    if (tens == 2 && hundreds == 0 && groupLevel > 0)
                     {
-                        if (tens == 2 && hundreds == 0 && groupLevel > 0)
+                        if (number is 2000 or 2000000 or 2000000000)
                         {
-                            if (number is 2000 or 2000000 or 2000000000)
-                            {
-                                process = AppendedTwos[groupLevel];
-                            }
-                            else
-                            {
-                                process = Twos[groupLevel];
-                            }
+                            process = AppendedTwos[groupLevel];
                         }
                         else
                         {
-                            if (process != string.Empty)
-                            {
-                                process += " و ";
-                            }
-
-                            if (tens == 1 && groupLevel > 0 && hundreds == 0)
-                            {
-                                process += " ";
-                            }
-                            else
-                            {
-                                process += gender == GrammaticalGender.Feminine && groupLevel == 0 ? FeminineOnesGroup[tens] : OnesGroup[tens];
-                            }
+                            process = Twos[groupLevel];
                         }
                     }
                     else
                     {
-                        var ones = tens % 10;
-                        tens /= 10;
-
-                        if (ones > 0)
-                        {
-                            if (process != string.Empty)
-                            {
-                                process += " و ";
-                            }
-
-                            process += gender == GrammaticalGender.Feminine ? FeminineOnesGroup[ones] : OnesGroup[ones];
-                        }
-
                         if (process != string.Empty)
                         {
                             process += " و ";
                         }
 
-                        process += TensGroup[tens];
+                        if (tens == 1 && groupLevel > 0 && hundreds == 0)
+                        {
+                            process += " ";
+                        }
+                        else
+                        {
+                            process += gender == GrammaticalGender.Feminine && groupLevel == 0 ? FeminineOnesGroup[tens] : OnesGroup[tens];
+                        }
                     }
                 }
-
-                if (process != string.Empty)
+                else
                 {
-                    if (groupLevel > 0)
+                    var ones = tens % 10;
+                    tens /= 10;
+
+                    if (ones > 0)
                     {
-                        if (result != string.Empty)
+                        if (process != string.Empty)
                         {
-                            result = $"و {result}";
+                            process += " و ";
                         }
 
-                        if (groupNumber != 2)
+                        process += gender == GrammaticalGender.Feminine ? FeminineOnesGroup[ones] : OnesGroup[ones];
+                    }
+
+                    if (process != string.Empty)
+                    {
+                        process += " و ";
+                    }
+
+                    process += TensGroup[tens];
+                }
+            }
+
+            if (process != string.Empty)
+            {
+                if (groupLevel > 0)
+                {
+                    if (result != string.Empty)
+                    {
+                        result = $"و {result}";
+                    }
+
+                    if (groupNumber != 2)
+                    {
+                        if (groupNumber % 100 != 1)
                         {
-                            if (groupNumber % 100 != 1)
+                            if (groupNumber is >= 3 and <= 10)
                             {
-                                if (groupNumber is >= 3 and <= 10)
-                                {
-                                    result = $"{PluralGroups[groupLevel]} {result}";
-                                }
-                                else
-                                {
-                                    result = $"{(result != string.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel])} {result}";
-                                }
+                                result = $"{PluralGroups[groupLevel]} {result}";
                             }
                             else
                             {
-                                result = $"{Groups[groupLevel]} {result}";
+                                result = $"{(result != string.Empty ? AppendedGroups[groupLevel] : Groups[groupLevel])} {result}";
                             }
                         }
+                        else
+                        {
+                            result = $"{Groups[groupLevel]} {result}";
+                        }
                     }
-
-                    result = $"{process} {result}";
                 }
 
-                groupLevel++;
+                result = $"{process} {result}";
             }
 
-            return result.Trim();
+            groupLevel++;
         }
+
+        return result.Trim();
+    }
 
     static readonly Dictionary<string, string> OrdinalExceptions = new()
     {
-        {"واحد", "الحادي"},
-        {"أحد", "الحادي"},
-        {"اثنان", "الثاني"},
-        {"اثنا", "الثاني"},
-        {"ثلاثة", "الثالث"},
-        {"أربعة", "الرابع"},
-        {"خمسة", "الخامس"},
-        {"ستة", "السادس"},
-        {"سبعة", "السابع"},
-        {"ثمانية", "الثامن"},
-        {"تسعة", "التاسع"},
-        {"عشرة", "العاشر"},
+        {
+            "واحد", "الحادي"
+        },
+        {
+            "أحد", "الحادي"
+        },
+        {
+            "اثنان", "الثاني"
+        },
+        {
+            "اثنا", "الثاني"
+        },
+        {
+            "ثلاثة", "الثالث"
+        },
+        {
+            "أربعة", "الرابع"
+        },
+        {
+            "خمسة", "الخامس"
+        },
+        {
+            "ستة", "السادس"
+        },
+        {
+            "سبعة", "السابع"
+        },
+        {
+            "ثمانية", "الثامن"
+        },
+        {
+            "تسعة", "التاسع"
+        },
+        {
+            "عشرة", "العاشر"
+        },
     };
 
     static readonly Dictionary<string, string> FeminineOrdinalExceptions = new()
     {
-        {"واحدة", "الحادية"},
-        {"إحدى", "الحادية"},
-        {"اثنتان", "الثانية"},
-        {"اثنتا", "الثانية"},
-        {"ثلاث", "الثالثة"},
-        {"أربع", "الرابعة"},
-        {"خمس", "الخامسة"},
-        {"ست", "السادسة"},
-        {"سبع", "السابعة"},
-        {"ثمان", "الثامنة"},
-        {"تسع", "التاسعة"},
-        {"عشر", "العاشرة"},
+        {
+            "واحدة", "الحادية"
+        },
+        {
+            "إحدى", "الحادية"
+        },
+        {
+            "اثنتان", "الثانية"
+        },
+        {
+            "اثنتا", "الثانية"
+        },
+        {
+            "ثلاث", "الثالثة"
+        },
+        {
+            "أربع", "الرابعة"
+        },
+        {
+            "خمس", "الخامسة"
+        },
+        {
+            "ست", "السادسة"
+        },
+        {
+            "سبع", "السابعة"
+        },
+        {
+            "ثمان", "الثامنة"
+        },
+        {
+            "تسع", "التاسعة"
+        },
+        {
+            "عشر", "العاشرة"
+        },
     };
 
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)
     {
-            if (number == 0)
-            {
-                return "الصفر";
-            }
-
-            var beforeOneHundredNumber = number % 100;
-            var overTensPart = number / 100 * 100;
-            var beforeOneHundredWord = string.Empty;
-            var overTensWord = string.Empty;
-
-            if (beforeOneHundredNumber > 0)
-            {
-                beforeOneHundredWord = Convert(beforeOneHundredNumber, gender);
-                beforeOneHundredWord = ParseNumber(beforeOneHundredWord, beforeOneHundredNumber, gender);
-            }
-
-            if (overTensPart > 0)
-            {
-                overTensWord = Convert(overTensPart);
-                overTensWord = ParseNumber(overTensWord, overTensPart, gender);
-            }
-
-            var word = beforeOneHundredWord +
-                (overTensPart > 0
-                    ? (string.IsNullOrWhiteSpace(beforeOneHundredWord) ? string.Empty : " بعد ") + overTensWord
-                    : string.Empty);
-            return word.Trim();
+        if (number == 0)
+        {
+            return "الصفر";
         }
+
+        var beforeOneHundredNumber = number % 100;
+        var overTensPart = number / 100 * 100;
+        var beforeOneHundredWord = string.Empty;
+        var overTensWord = string.Empty;
+
+        if (beforeOneHundredNumber > 0)
+        {
+            beforeOneHundredWord = Convert(beforeOneHundredNumber, gender);
+            beforeOneHundredWord = ParseNumber(beforeOneHundredWord, beforeOneHundredNumber, gender);
+        }
+
+        if (overTensPart > 0)
+        {
+            overTensWord = Convert(overTensPart);
+            overTensWord = ParseNumber(overTensWord, overTensPart, gender);
+        }
+
+        var word = beforeOneHundredWord +
+                   (overTensPart > 0
+                       ? (string.IsNullOrWhiteSpace(beforeOneHundredWord) ? string.Empty : " بعد ") + overTensWord
+                       : string.Empty);
+        return word.Trim();
+    }
 
     static string ParseNumber(string word, int number, GrammaticalGender gender)
     {
-            if (number == 1)
-            {
-                return gender == GrammaticalGender.Feminine ? "الأولى" : "الأول";
-            }
+        if (number == 1)
+        {
+            return gender == GrammaticalGender.Feminine ? "الأولى" : "الأول";
+        }
 
-            if (number <= 10)
+        if (number <= 10)
+        {
+            var ordinals = gender == GrammaticalGender.Feminine ? FeminineOrdinalExceptions : OrdinalExceptions;
+            foreach (var kv in ordinals.Where(kv => word.EndsWith(kv.Key)))
             {
+                // replace word with exception
+                return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
+            }
+        }
+        else if (number is > 10 and < 100)
+        {
+            var parts = word.Split(' ');
+            var newParts = new string[parts.Length];
+            var count = 0;
+
+            foreach (var part in parts)
+            {
+                var newPart = part;
+                var oldPart = part;
+
                 var ordinals = gender == GrammaticalGender.Feminine ? FeminineOrdinalExceptions : OrdinalExceptions;
-                foreach (var kv in ordinals.Where(kv => word.EndsWith(kv.Key)))
+                foreach (var kv in ordinals.Where(kv => oldPart.EndsWith(kv.Key)))
                 {
                     // replace word with exception
-                    return word.Substring(0, word.Length - kv.Key.Length) + kv.Value;
+                    newPart = oldPart.Substring(0, oldPart.Length - kv.Key.Length) + kv.Value;
                 }
-            }
-            else if (number is > 10 and < 100)
-            {
-                var parts = word.Split(' ');
-                var newParts = new string[parts.Length];
-                var count = 0;
 
-                foreach (var part in parts)
+                if (number > 19 && newPart == oldPart && oldPart.Length > 1)
                 {
-                    var newPart = part;
-                    var oldPart = part;
-
-                    var ordinals = gender == GrammaticalGender.Feminine ? FeminineOrdinalExceptions : OrdinalExceptions;
-                    foreach (var kv in ordinals.Where(kv => oldPart.EndsWith(kv.Key)))
-                    {
-                        // replace word with exception
-                        newPart = oldPart.Substring(0, oldPart.Length - kv.Key.Length) + kv.Value;
-                    }
-
-                    if (number > 19 && newPart == oldPart && oldPart.Length > 1)
-                    {
-                        newPart = "ال" + oldPart;
-                    }
-
-                    newParts[count++] = newPart;
+                    newPart = "ال" + oldPart;
                 }
 
-                word = string.Join(" ", newParts);
-            }
-            else
-            {
-                word = "ال" + word;
+                newParts[count++] = newPart;
             }
 
-            return word;
+            word = string.Join(" ", newParts);
         }
+        else
+        {
+            word = "ال" + word;
+        }
+
+        return word;
+    }
 }

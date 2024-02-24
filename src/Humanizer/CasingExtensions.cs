@@ -10,22 +10,22 @@ public static class CasingExtensions
     /// </summary>
     public static string ApplyCase(this string input, LetterCasing casing)
     {
-            switch (casing)
-            {
-                case LetterCasing.Title:
-                    return input.Transform(To.TitleCase);
+        switch (casing)
+        {
+            case LetterCasing.Title:
+                return input.Transform(To.TitleCase);
 
-                case LetterCasing.LowerCase:
-                    return input.Transform(To.LowerCase);
+            case LetterCasing.LowerCase:
+                return input.Transform(To.LowerCase);
 
-                case LetterCasing.AllCaps:
-                    return input.Transform(To.UpperCase);
+            case LetterCasing.AllCaps:
+                return input.Transform(To.UpperCase);
 
-                case LetterCasing.Sentence:
-                    return input.Transform(To.SentenceCase);
+            case LetterCasing.Sentence:
+                return input.Transform(To.SentenceCase);
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(casing));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(casing));
         }
+    }
 }

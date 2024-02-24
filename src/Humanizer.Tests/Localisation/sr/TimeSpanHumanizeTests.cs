@@ -10,7 +10,9 @@ public class TimeSpanHumanizeTests
     [InlineData(1096, "3 године")]
     [InlineData(4018, "11 година")]
     public void Years(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
+        Assert.Equal(expected, TimeSpan
+            .FromDays(days)
+            .Humanize(maxUnit: TimeUnit.Year));
 
     [Theory]
     [Trait("Translation", "Google")]
@@ -19,7 +21,9 @@ public class TimeSpanHumanizeTests
     [InlineData(92, "3 месеца")]
     [InlineData(335, "11 месеци")]
     public void Months(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
+        Assert.Equal(expected, TimeSpan
+            .FromDays(days)
+            .Humanize(maxUnit: TimeUnit.Year));
 
     [Theory]
     [InlineData(35, "5 недеља")]
@@ -27,9 +31,11 @@ public class TimeSpanHumanizeTests
     [InlineData(7, "1 недеља")]
     public void Weeks(int days, string expected)
     {
-            var actual = TimeSpan.FromDays(days).Humanize();
-            Assert.Equal(expected, actual);
-        }
+        var actual = TimeSpan
+            .FromDays(days)
+            .Humanize();
+        Assert.Equal(expected, actual);
+    }
 
     [Theory]
     [InlineData(6, "6 дана")]
@@ -37,9 +43,11 @@ public class TimeSpanHumanizeTests
     [InlineData(1, "1 дан")]
     public void Days(int days, string expected)
     {
-            var actual = TimeSpan.FromDays(days).Humanize();
-            Assert.Equal(expected, actual);
-        }
+        var actual = TimeSpan
+            .FromDays(days)
+            .Humanize();
+        Assert.Equal(expected, actual);
+    }
 
     [Theory]
     [InlineData(5, "5 сати")]
@@ -47,50 +55,58 @@ public class TimeSpanHumanizeTests
     [InlineData(1, "1 сат")]
     public void Hours(int hours, string expected)
     {
-            var actual = TimeSpan.FromHours(hours).Humanize();
-            Assert.Equal(expected, actual);
-        }
+        var actual = TimeSpan
+            .FromHours(hours)
+            .Humanize();
+        Assert.Equal(expected, actual);
+    }
 
     [Theory]
     [InlineData(2, "2 минута")]
     [InlineData(1, "1 минут")]
     public void Minutes(int minutes, string expected)
     {
-            var actual = TimeSpan.FromMinutes(minutes).Humanize();
-            Assert.Equal(expected, actual);
-        }
+        var actual = TimeSpan
+            .FromMinutes(minutes)
+            .Humanize();
+        Assert.Equal(expected, actual);
+    }
 
     [Theory]
     [InlineData(2, "2 секунде")]
     [InlineData(1, "1 секунда")]
     public void Seconds(int seconds, string expected)
     {
-            var actual = TimeSpan.FromSeconds(seconds).Humanize();
-            Assert.Equal(expected, actual);
-        }
+        var actual = TimeSpan
+            .FromSeconds(seconds)
+            .Humanize();
+        Assert.Equal(expected, actual);
+    }
 
     [Theory]
     [InlineData(2, "2 милисекунде")]
     [InlineData(1, "1 милисекунда")]
     public void Milliseconds(int ms, string expected)
     {
-            var actual = TimeSpan.FromMilliseconds(ms).Humanize();
-            Assert.Equal(expected, actual);
-        }
+        var actual = TimeSpan
+            .FromMilliseconds(ms)
+            .Humanize();
+        Assert.Equal(expected, actual);
+    }
 
     [Fact]
     public void NoTime()
     {
-            var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize();
-            Assert.Equal("0 милисекунди", actual);
-        }
+        var noTime = TimeSpan.Zero;
+        var actual = noTime.Humanize();
+        Assert.Equal("0 милисекунди", actual);
+    }
 
     [Fact]
     public void NoTimeToWords()
     {
-            var noTime = TimeSpan.Zero;
-            var actual = noTime.Humanize(toWords: true);
-            Assert.Equal("без протеклог времена", actual);
-        }
+        var noTime = TimeSpan.Zero;
+        var actual = noTime.Humanize(toWords: true);
+        Assert.Equal("без протеклог времена", actual);
+    }
 }

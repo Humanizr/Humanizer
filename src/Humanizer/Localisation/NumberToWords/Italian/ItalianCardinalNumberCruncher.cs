@@ -4,27 +4,27 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
 {
     public string Convert()
     {
-            // it's easier to treat zero as a completely distinct case
-            if (_fullNumber == 0)
-            {
-                return "zero";
-            }
-
-            var words = string.Empty;
-
-            foreach (var part in _threeDigitParts)
-            {
-                var partToString = GetNextPartConverter();
-
-                if (partToString != null)
-                {
-                    words = partToString(part) + words;
-                }
-            }
-
-            // remove trailing spaces if there are only millions or billions
-            return words.TrimEnd();
+        // it's easier to treat zero as a completely distinct case
+        if (_fullNumber == 0)
+        {
+            return "zero";
         }
+
+        var words = string.Empty;
+
+        foreach (var part in _threeDigitParts)
+        {
+            var partToString = GetNextPartConverter();
+
+            if (partToString != null)
+            {
+                words = partToString(part) + words;
+            }
+        }
+
+        // remove trailing spaces if there are only millions or billions
+        return words.TrimEnd();
+    }
 
     protected readonly int _fullNumber = number;
     protected readonly List<int> _threeDigitParts = SplitEveryThreeDigits(number);
@@ -40,20 +40,20 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <returns>The sequence of three-digit numbers.</returns>
     protected static List<int> SplitEveryThreeDigits(int number)
     {
-            var parts = new List<int>();
-            var rest = number;
+        var parts = new List<int>();
+        var rest = number;
 
-            while (rest > 0)
-            {
-                var threeDigit = rest % 1000;
+        while (rest > 0)
+        {
+            var threeDigit = rest % 1000;
 
-                parts.Add(threeDigit);
+            parts.Add(threeDigit);
 
-                rest /= 1000;
-            }
-
-            return parts;
+            rest /= 1000;
         }
+
+        return parts;
+    }
 
     /// <summary>
     /// During number conversion to text, finds out the converter to use
@@ -62,40 +62,40 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <returns>The next conversion function to use.</returns>
     public Func<int, string>? GetNextPartConverter()
     {
-            Func<int, string>? converter;
+        Func<int, string>? converter;
 
-            switch (_nextSet)
-            {
-                case ThreeDigitSets.Units:
-                    converter = UnitsConverter;
-                    _nextSet = ThreeDigitSets.Thousands;
-                    break;
+        switch (_nextSet)
+        {
+            case ThreeDigitSets.Units:
+                converter = UnitsConverter;
+                _nextSet = ThreeDigitSets.Thousands;
+                break;
 
-                case ThreeDigitSets.Thousands:
-                    converter = ThousandsConverter;
-                    _nextSet = ThreeDigitSets.Millions;
-                    break;
+            case ThreeDigitSets.Thousands:
+                converter = ThousandsConverter;
+                _nextSet = ThreeDigitSets.Millions;
+                break;
 
-                case ThreeDigitSets.Millions:
-                    converter = MillionsConverter;
-                    _nextSet = ThreeDigitSets.Billions;
-                    break;
+            case ThreeDigitSets.Millions:
+                converter = MillionsConverter;
+                _nextSet = ThreeDigitSets.Billions;
+                break;
 
-                case ThreeDigitSets.Billions:
-                    converter = BillionsConverter;
-                    _nextSet = ThreeDigitSets.More;
-                    break;
+            case ThreeDigitSets.Billions:
+                converter = BillionsConverter;
+                _nextSet = ThreeDigitSets.More;
+                break;
 
-                case ThreeDigitSets.More:
-                    converter = null;
-                    break;
+            case ThreeDigitSets.More:
+                converter = null;
+                break;
 
-                default:
-                    throw new ArgumentOutOfRangeException("Unknow ThreeDigitSet: " + _nextSet);
-            }
-
-            return converter;
+            default:
+                throw new ArgumentOutOfRangeException("Unknow ThreeDigitSet: " + _nextSet);
         }
+
+        return converter;
+    }
 
     /// <summary>
     /// Converts a three-digit set to text.
@@ -105,56 +105,56 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <returns>The same three-digit set expressed as text.</returns>
     static string ThreeDigitSetConverter(int number, bool thisIsLastSet = false)
     {
-            if (number == 0)
-            {
-                return string.Empty;
-            }
-
-            // grab lowest two digits
-            var tensAndUnits = number % 100;
-            // grab third digit
-            var hundreds = number / 100;
-
-            // grab also first and second digits separately
-            var units = tensAndUnits % 10;
-            var tens = tensAndUnits / 10;
-
-            var words = string.Empty;
-
-            // append text for hundreds
-            words += _hundredNumberToText[hundreds];
-
-            // append text for tens, only those from twenty upward
-            words += _tensOver20NumberToText[tens];
-
-            if (tensAndUnits <= 9)
-            {
-                // simple case for units, under 10
-                words += _unitsNumberToText[tensAndUnits];
-            }
-            else if (tensAndUnits <= 19)
-            {
-                // special case for 'teens', from 10 to 19
-                words += _teensUnder20NumberToText[tensAndUnits - 10];
-            }
-            else
-            {
-                // just append units text, with some corner cases
-
-                // truncate tens last vowel before 'uno' (1) and 'otto' (8)
-                if (units is 1 or 8)
-                {
-                    words = words.Remove(words.Length - 1);
-                }
-
-                // if this is the last set, an accent could be due
-                var unitsText = thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units];
-
-                words += unitsText;
-            }
-
-            return words;
+        if (number == 0)
+        {
+            return string.Empty;
         }
+
+        // grab lowest two digits
+        var tensAndUnits = number % 100;
+        // grab third digit
+        var hundreds = number / 100;
+
+        // grab also first and second digits separately
+        var units = tensAndUnits % 10;
+        var tens = tensAndUnits / 10;
+
+        var words = string.Empty;
+
+        // append text for hundreds
+        words += _hundredNumberToText[hundreds];
+
+        // append text for tens, only those from twenty upward
+        words += _tensOver20NumberToText[tens];
+
+        if (tensAndUnits <= 9)
+        {
+            // simple case for units, under 10
+            words += _unitsNumberToText[tensAndUnits];
+        }
+        else if (tensAndUnits <= 19)
+        {
+            // special case for 'teens', from 10 to 19
+            words += _teensUnder20NumberToText[tensAndUnits - 10];
+        }
+        else
+        {
+            // just append units text, with some corner cases
+
+            // truncate tens last vowel before 'uno' (1) and 'otto' (8)
+            if (units is 1 or 8)
+            {
+                words = words.Remove(words.Length - 1);
+            }
+
+            // if this is the last set, an accent could be due
+            var unitsText = thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units];
+
+            words += unitsText;
+        }
+
+        return words;
+    }
 
     /// <summary>
     /// Converts a three-digit number, as units, to text.
@@ -163,14 +163,14 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <returns>The same three-digit number, as units, expressed as text.</returns>
     protected string UnitsConverter(int number)
     {
-            // being a unique case, it's easier to treat unity feminine gender as a completely distinct case
-            if (_gender == GrammaticalGender.Feminine && _fullNumber == 1)
-            {
-                return "una";
-            }
-
-            return ThreeDigitSetConverter(number, true);
+        // being a unique case, it's easier to treat unity feminine gender as a completely distinct case
+        if (_gender == GrammaticalGender.Feminine && _fullNumber == 1)
+        {
+            return "una";
         }
+
+        return ThreeDigitSetConverter(number, true);
+    }
 
     /// <summary>
     /// Converts a thousands three-digit number to text.
@@ -179,18 +179,18 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <returns>The same three-digit number of thousands expressed as text.</returns>
     protected static string ThousandsConverter(int number)
     {
-            if (number == 0)
-            {
-                return string.Empty;
-            }
-
-            if (number == 1)
-            {
-                return "mille";
-            }
-
-            return ThreeDigitSetConverter(number) + "mila";
+        if (number == 0)
+        {
+            return string.Empty;
         }
+
+        if (number == 1)
+        {
+            return "mille";
+        }
+
+        return ThreeDigitSetConverter(number) + "mila";
+    }
 
     /// <summary>
     /// Converts a millions three-digit number to text.
@@ -199,18 +199,18 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <returns>The same three-digit number of millions expressed as text.</returns>
     protected static string MillionsConverter(int number)
     {
-            if (number == 0)
-            {
-                return string.Empty;
-            }
-
-            if (number == 1)
-            {
-                return "un milione ";
-            }
-
-            return ThreeDigitSetConverter(number, true) + " milioni ";
+        if (number == 0)
+        {
+            return string.Empty;
         }
+
+        if (number == 1)
+        {
+            return "un milione ";
+        }
+
+        return ThreeDigitSetConverter(number, true) + " milioni ";
+    }
 
     /// <summary>
     /// Converts a billions three-digit number to text.
@@ -219,13 +219,13 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <returns>The same three-digit number of billions expressed as text.</returns>
     protected static string BillionsConverter(int number)
     {
-            if (number == 1)
-            {
-                return "un miliardo ";
-            }
-
-            return ThreeDigitSetConverter(number) + " miliardi ";
+        if (number == 1)
+        {
+            return "un miliardo ";
         }
+
+        return ThreeDigitSetConverter(number) + " miliardi ";
+    }
 
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.

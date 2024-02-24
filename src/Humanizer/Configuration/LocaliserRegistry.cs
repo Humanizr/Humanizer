@@ -48,14 +48,14 @@ public class LocaliserRegistry<TLocaliser>
 
     Func<CultureInfo?, TLocaliser> FindLocaliser(CultureInfo culture)
     {
-            for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
+        for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
+        {
+            if (_localisers.TryGetValue(c!.Name, out var localiser))
             {
-                if (_localisers.TryGetValue(c!.Name, out var localiser))
-                {
-                    return localiser;
-                }
+                return localiser;
             }
-
-            return _defaultLocaliser;
         }
+
+        return _defaultLocaliser;
+    }
 }

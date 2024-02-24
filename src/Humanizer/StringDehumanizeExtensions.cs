@@ -12,7 +12,13 @@ public static class StringDehumanizeExtensions
     /// <param name="input">The string to be dehumanized</param>
     public static string Dehumanize(this string input)
     {
-            var pascalizedWords = input.Split(' ').Select(word => word.Humanize().Pascalize());
-            return string.Concat(pascalizedWords).Replace(" ", "");
-        }
+        var pascalizedWords = input
+            .Split(' ')
+            .Select(word => word
+                .Humanize()
+                .Pascalize());
+        return string
+            .Concat(pascalizedWords)
+            .Replace(" ", "");
+    }
 }

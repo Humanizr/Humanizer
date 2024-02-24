@@ -16,37 +16,42 @@ public static class StringHumanizeExtensions
 
     static StringHumanizeExtensions()
     {
-            PascalCaseWordPartsRegex = new(
-                $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
-                RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-            FreestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
-        }
+        PascalCaseWordPartsRegex = new(
+            $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
+            RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        FreestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
+    }
 
     static string FromUnderscoreDashSeparatedWords(string input) =>
         string.Join(" ", input.Split(['_', '-']));
 
     static string FromPascalCase(string input)
     {
-            var result = string.Join(" ", PascalCaseWordPartsRegex
-                .Matches(input).Cast<Match>()
-                .Select(match =>
-                {
-                    var value = match.Value;
-                    return value.All(char.IsUpper) &&
-                           (value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || value == "I")
-                        ? value
-                        : value.ToLower();
-                }));
-
-            if (result.Replace(" ", "").All(char.IsUpper) &&
-                result.Contains(" "))
+        var result = string.Join(" ", PascalCaseWordPartsRegex
+            .Matches(input)
+            .Cast<Match>()
+            .Select(match =>
             {
-                result = result.ToLower();
-            }
+                var value = match.Value;
+                return value.All(char.IsUpper) &&
+                       (value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || value == "I")
+                    ? value
+                    : value.ToLower();
+            }));
 
-            return result.Length > 0 ? char.ToUpper(result[0]) +
-                result.Substring(1, result.Length - 1) : result;
+        if (result
+                .Replace(" ", "")
+                .All(char.IsUpper) &&
+            result.Contains(" "))
+        {
+            result = result.ToLower();
         }
+
+        return result.Length > 0
+            ? char.ToUpper(result[0]) +
+              result.Substring(1, result.Length - 1)
+            : result;
+    }
 
     /// <summary>
     /// Humanizes the input string; e.g. Underscored_input_String_is_turned_INTO_sentence -> 'Underscored input String is turned INTO sentence'
@@ -54,26 +59,26 @@ public static class StringHumanizeExtensions
     /// <param name="input">The string to be humanized</param>
     public static string Humanize(this string input)
     {
-            // if input is all capitals (e.g. an acronym) then return it without change
-            if (input.All(char.IsUpper))
-            {
-                return input;
-            }
-
-            // if input contains a dash or underscore which precedes or follows a space (or both, e.g. free-standing)
-            // remove the dash/underscore and run it through FromPascalCase
-            if (FreestandingSpacingCharRegex.IsMatch(input))
-            {
-                return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
-            }
-
-            if (input.Contains("_") || input.Contains("-"))
-            {
-                return FromUnderscoreDashSeparatedWords(input);
-            }
-
-            return FromPascalCase(input);
+        // if input is all capitals (e.g. an acronym) then return it without change
+        if (input.All(char.IsUpper))
+        {
+            return input;
         }
+
+        // if input contains a dash or underscore which precedes or follows a space (or both, e.g. free-standing)
+        // remove the dash/underscore and run it through FromPascalCase
+        if (FreestandingSpacingCharRegex.IsMatch(input))
+        {
+            return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
+        }
+
+        if (input.Contains("_") || input.Contains("-"))
+        {
+            return FromUnderscoreDashSeparatedWords(input);
+        }
+
+        return FromPascalCase(input);
+    }
 
     /// <summary>
     /// Humanized the input string based on the provided casing
@@ -81,5 +86,7 @@ public static class StringHumanizeExtensions
     /// <param name="input">The string to be humanized</param>
     /// <param name="casing">The desired casing for the output</param>
     public static string Humanize(this string input, LetterCasing casing) =>
-        input.Humanize().ApplyCase(casing);
+        input
+            .Humanize()
+            .ApplyCase(casing);
 }

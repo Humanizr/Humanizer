@@ -64,9 +64,6 @@ public class ByteRateTests
     {
         var dummyRate = ByteSize.FromBits(1).Per(TimeSpan.FromSeconds(1));
 
-        Assert.Throws<NotSupportedException>(() =>
-        {
-            dummyRate.Humanize(units);
-        });
+        Assert.Throws<NotSupportedException>(() => dummyRate.Humanize(units));
     }
 }

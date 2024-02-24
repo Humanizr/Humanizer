@@ -26,9 +26,9 @@ public class OrdinalizeTests
     [InlineData(21, WordForm.Normal, "21.º")]
     public void OrdinalizeWithWordForm(int number, WordForm wordForm, string expected)
     {
-            Assert.Equal(expected, number.Ordinalize(wordForm));
-            Assert.Equal(expected, number.ToString(CultureInfo.CurrentUICulture).Ordinalize(wordForm));
-        }
+        Assert.Equal(expected, number.Ordinalize(wordForm));
+        Assert.Equal(expected, number.ToString(CultureInfo.CurrentUICulture).Ordinalize(wordForm));
+    }
 
     [Theory]
     [InlineData(1, GrammaticalGender.Masculine, WordForm.Abbreviation, "1.er")]
@@ -39,9 +39,9 @@ public class OrdinalizeTests
     [InlineData(1, GrammaticalGender.Neuter, WordForm.Normal, "1.º")]
     public void OrdinalizeWithWordFormAndGender(int number, GrammaticalGender gender, WordForm wordForm, string expected)
     {
-            Assert.Equal(expected, number.Ordinalize(gender, wordForm));
-            Assert.Equal(expected, number.ToString(CultureInfo.CurrentUICulture).Ordinalize(gender, wordForm));
-        }
+        Assert.Equal(expected, number.Ordinalize(gender, wordForm));
+        Assert.Equal(expected, number.ToString(CultureInfo.CurrentUICulture).Ordinalize(gender, wordForm));
+    }
 
     [Theory]
     [InlineData("1", "1.º")]
