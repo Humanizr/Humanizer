@@ -66,7 +66,7 @@ class BulgarianNumberToWordsConverter() :
         return string.Join(" ", parts);
     }
 
-    static void CollectParts(IList<string> parts, ref long number, bool isOrdinal, long divisor, GrammaticalGender gender, string singular, string plural, string? ordinal = null)
+    static void CollectParts(IList<string> parts, ref long number, bool isOrdinal, long divisor, GrammaticalGender gender, string singular, string plural, string ordinal)
     {
         if (number < divisor)
         {
@@ -75,7 +75,7 @@ class BulgarianNumberToWordsConverter() :
 
         var result = number / divisor;
 
-        if (parts.Count > 0 && !isOrdinal)
+        if (parts.Count > 0)
         {
             parts.Add("и");
         }
@@ -85,7 +85,7 @@ class BulgarianNumberToWordsConverter() :
         number %= divisor;
         if (number == 0 && isOrdinal)
         {
-            parts.Add(ordinal!);
+            parts.Add(ordinal);
         }
         else
         {
