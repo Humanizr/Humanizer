@@ -54,89 +54,76 @@ class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
             return $"minus {Convert(-number)}";
         }
 
-        var parts = new List<string>();
+        var parts = new List<string>(20);
 
-        if (number / 1000000000000000000 > 0)
+        CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000_000_000, "quintillion", "quintillionth");
+        CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000_000, "quadrillion", "quadrillionth");
+        CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000, "trillion", "trillionth");
+        CollectParts(parts, ref number, isOrdinal, 1_000_000_000, "billion", "billionth");
+        CollectParts(parts, ref number, isOrdinal, 1_000_000, "million", "millionth");
+        CollectParts(parts, ref number, isOrdinal, 1_000, "thousand", "thousandth");
+
+        CollectPartsUnderAThousand(parts, number, isOrdinal, addAnd);
+
+        if (isOrdinal && parts[0] == "one")
         {
-            parts.Add($"{Convert(number / 1000000000000000000)} quintillion");
-            number %= 1000000000000000000;
+            // one hundred => hundredth
+            parts.RemoveAt(0);
         }
 
-        if (number / 1000000000000000 > 0)
+        return string.Join(" ", parts);
+    }
+
+    static void CollectParts(List<string> parts, ref long number, bool isOrdinal, long divisor, string word, string ordinal)
+    {
+        var result = number / divisor;
+        if (result == 0)
         {
-            parts.Add($"{Convert(number / 1000000000000000)} quadrillion");
-            number %= 1000000000000000;
+            return;
         }
 
-        if (number / 1000000000000 > 0)
-        {
-            parts.Add($"{Convert(number / 1000000000000)} trillion");
-            number %= 1000000000000;
-        }
+        CollectPartsUnderAThousand(parts, result);
 
-        if (number / 1000000000 > 0)
-        {
-            parts.Add($"{Convert(number / 1000000000)} billion");
-            number %= 1000000000;
-        }
+        number %= divisor;
+        parts.Add(number == 0 && isOrdinal ? ordinal : word);
+    }
 
-        if (number / 1000000 > 0)
+    static void CollectPartsUnderAThousand(List<string> parts, long number, bool isOrdinal = false, bool addAnd = true)
+    {
+        if (number >= 100)
         {
-            parts.Add($"{Convert(number / 1000000)} million");
-            number %= 1000000;
-        }
-
-        if (number / 1000 > 0)
-        {
-            parts.Add($"{Convert(number / 1000)} thousand");
-            number %= 1000;
-        }
-
-        if (number / 100 > 0)
-        {
-            parts.Add($"{Convert(number / 100)} hundred");
+            parts.Add(GetUnitValue(number / 100, false));
             number %= 100;
+            parts.Add(number == 0 && isOrdinal ? "hundredth" : "hundred");
         }
 
-        if (number > 0)
+        if (number == 0)
         {
-            if (parts.Count != 0 && addAnd)
-            {
-                parts.Add("and");
-            }
+            return;
+        }
 
-            if (number < 20)
+        if (parts.Count > 0 && addAnd)
+        {
+            parts.Add("and");
+        }
+
+        if (number >= 20)
+        {
+            var tens = TensMap[number / 10];
+            var units = number % 10;
+            if (units == 0)
             {
-                parts.Add(GetUnitValue(number, isOrdinal));
+                parts.Add(isOrdinal ? $"{tens.TrimEnd('y')}ieth" : tens);
             }
             else
             {
-                var lastPart = TensMap[number / 10];
-                if (number % 10 > 0)
-                {
-                    lastPart += $"-{GetUnitValue(number % 10, isOrdinal)}";
-                }
-                else if (isOrdinal)
-                {
-                    lastPart = lastPart.TrimEnd('y') + "ieth";
-                }
-
-                parts.Add(lastPart);
+                parts.Add($"{tens}-{GetUnitValue(units, isOrdinal)}");
             }
         }
-        else if (isOrdinal)
+        else
         {
-            parts[^1] += "th";
+            parts.Add(GetUnitValue(number, isOrdinal));
         }
-
-        var toWords = string.Join(" ", parts);
-
-        if (isOrdinal)
-        {
-            toWords = RemoveOnePrefix(toWords);
-        }
-
-        return toWords;
     }
 
     static string GetUnitValue(long number, bool isOrdinal)
@@ -148,21 +135,10 @@ class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
                 return exceptionString;
             }
 
-            return UnitsMap[number] + "th";
+            return $"{UnitsMap[number]}th";
         }
 
         return UnitsMap[number];
-    }
-
-    static string RemoveOnePrefix(string toWords)
-    {
-        // one hundred => hundredth
-        if (toWords.StartsWith("one", StringComparison.Ordinal))
-        {
-            toWords = toWords.Remove(0, 4);
-        }
-
-        return toWords;
     }
 
     static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>

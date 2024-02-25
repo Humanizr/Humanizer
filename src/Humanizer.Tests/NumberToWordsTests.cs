@@ -199,6 +199,8 @@ public class NumberToWordsTests
     [InlineData(3501, "three thousand five hundred and one")]
     [InlineData(100, "one hundred")]
     [InlineData(1000, "one thousand")]
+    [InlineData(1001, "one thousand and one")]
+    [InlineData(1010, "one thousand and ten")]
     [InlineData(100000, "one hundred thousand")]
     [InlineData(1000000, "one million")]
     [InlineData(10000000, "ten million")]
