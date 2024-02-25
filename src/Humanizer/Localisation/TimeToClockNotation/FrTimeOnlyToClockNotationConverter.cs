@@ -4,6 +4,7 @@ namespace Humanizer;
 
 class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
+    static CultureInfo culture = new("fr-FR");
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
         var normalizedMinutes = NormalizedMinutes(time, roundToNearestFive);
@@ -12,7 +13,7 @@ class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         {
             00 => GetHourExpression(time.Hour),
             60 => GetHourExpression(time.Hour + 1),
-            _ => $"{GetHourExpression(time.Hour)} {normalizedMinutes.ToWords(GrammaticalGender.Feminine)}"
+            _ => $"{GetHourExpression(time.Hour)} {normalizedMinutes.ToWords(GrammaticalGender.Feminine, culture)}"
         };
 
         static string GetHourExpression(int hour) =>
@@ -20,7 +21,8 @@ class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             {
                 0 => "minuit",
                 12 => "midi",
-                _ => hour.ToWords(GrammaticalGender.Feminine) + (hour > 1 ? " heures" : " heure")
+                1 => $"{hour.ToWords(GrammaticalGender.Feminine, culture)} heure",
+                _ => $"{hour.ToWords(GrammaticalGender.Feminine, culture)} heures"
             };
     }
 
