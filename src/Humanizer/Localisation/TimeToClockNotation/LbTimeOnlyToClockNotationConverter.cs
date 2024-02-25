@@ -44,10 +44,10 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         return new(roundedHours, roundedMinutes);
     }
 
-    private static string GetMinuteExpression(int minute, string nextWord = "")
+    static string GetMinuteExpression(int minute, string? nextWord = null)
         => GetFormattedExpression(minute, nextWord);
 
-    private static string GetHourExpression(int hour, string nextWord = "")
+    static string GetHourExpression(int hour, string? nextWord = null)
     {
         var normalizedHour = hour % 12;
         var hourExpression = normalizedHour == 0 ? 12 : normalizedHour;
@@ -55,13 +55,36 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         return GetFormattedExpression(hourExpression, nextWord);
     }
 
-    private static string GetFormattedExpression(int number, string nextWord) =>
-        (number switch
+    private static string GetFormattedExpression(int number, string? nextWord)
+    {
+        if (nextWord == null)
         {
-            1 or 2 => $"{number.ToWords(GrammaticalGender.Feminine)} {nextWord}",
-            7 => $"{number.ToWords(LuxembourgishFormatter.DoesEifelerRuleApply(nextWord) ? WordForm.Eifeler : WordForm.Normal)} {nextWord}",
-            _ => $"{number.ToWords()} {nextWord}"
-        }).TrimEnd();
+            if (number is 1 or 2)
+            {
+                return number.ToWords(GrammaticalGender.Feminine);
+            }
+
+            if (number == 7)
+            {
+                return number.ToWords(WordForm.Normal);
+            }
+
+            return number.ToWords();
+        }
+
+        if (number is 1 or 2)
+        {
+            return $"{number.ToWords(GrammaticalGender.Feminine)} {nextWord}";
+        }
+
+        if (number == 7)
+        {
+            var eifelerRuleApply = LuxembourgishFormatter.DoesEifelerRuleApply(nextWord);
+            return $"{number.ToWords(eifelerRuleApply ? WordForm.Eifeler : WordForm.Normal)} {nextWord}";
+        }
+
+        return $"{number.ToWords()} {nextWord}";
+    }
 }
 
 #endif
