@@ -10,29 +10,36 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             ? GetRoundedTime(time)
             : time;
 
-        return rounded switch
+        var minute = rounded.Minute;
+        var hour = rounded.Hour;
+        if (hour == 0 &&  minute == 0)
         {
-            {Hour: 0, Minute: 0} => "Mëtternuecht",
-            {Hour: 12, Minute: 0} => "Mëtteg",
-            _ => rounded.Minute switch
-            {
-                00 => Hours(rounded.Hour, "Auer"),
-                15 => $"Véirel op {Hours(rounded.Hour)}",
-                25 => $"{Minutes(30 - rounded.Minute, "vir")} hallwer {Hours(rounded.Hour + 1)}",
-                30 => $"hallwer {Hours(rounded.Hour + 1)}",
-                35 => $"{Minutes(rounded.Minute - 30, "op")} hallwer {Hours(rounded.Hour + 1)}",
-                45 => $"Véirel vir {Hours(rounded.Hour + 1)}",
-                60 => Hours(rounded.Hour + 1, "Auer"),
-                01 => $"{Minutes(rounded.Minute, "Minutt")} op {Hours(rounded.Hour)}",
-                59 => $"{Minutes(60 - rounded.Minute, "Minutt")} vir {Hours(rounded.Hour + 1)}",
-                05 or 10 or 20 => $"{Minutes(rounded.Minute, "op")} {Hours(rounded.Hour)}",
-                40 or 50 or 55 => $"{Minutes(60 - rounded.Minute, "vir")} {Hours(rounded.Hour + 1)}",
-                > 00 and < 25 => $"{Minutes(rounded.Minute, "Minutten")} op {Hours(rounded.Hour)}",
-                > 25 and < 30 => $"{Minutes(30 - rounded.Minute, "Minutten")} vir hallwer {Hours(rounded.Hour + 1)}",
-                > 30 and < 35 => $"{Minutes(rounded.Minute - 30, "Minutten")} op hallwer {Hours(rounded.Hour + 1)}",
-                > 35 and < 60 => $"{Minutes(60 - rounded.Minute, "Minutten")} vir {Hours(rounded.Hour + 1)}",
-                _ => $"{Hours(time.Hour, "Auer")} {Minutes(time.Minute)}"
-            }
+            return "Mëtternuecht";
+        }
+
+        if (hour == 12 &&  minute == 0)
+        {
+            return "Mëtteg";
+        }
+
+        return minute switch
+        {
+            00 => Hours(hour, "Auer"),
+            15 => $"Véirel op {Hours(hour)}",
+            25 => $"{Minutes(30 - minute, "vir")} hallwer {Hours(hour + 1)}",
+            30 => $"hallwer {Hours(hour + 1)}",
+            35 => $"{Minutes(minute - 30, "op")} hallwer {Hours(hour + 1)}",
+            45 => $"Véirel vir {Hours(hour + 1)}",
+            60 => Hours(hour + 1, "Auer"),
+            01 => $"{Minutes(minute, "Minutt")} op {Hours(hour)}",
+            59 => $"{Minutes(60 - minute, "Minutt")} vir {Hours(hour + 1)}",
+            05 or 10 or 20 => $"{Minutes(minute, "op")} {Hours(hour)}",
+            40 or 50 or 55 => $"{Minutes(60 - minute, "vir")} {Hours(hour + 1)}",
+            > 00 and < 25 => $"{Minutes(minute, "Minutten")} op {Hours(hour)}",
+            > 25 and < 30 => $"{Minutes(30 - minute, "Minutten")} vir hallwer {Hours(hour + 1)}",
+            > 30 and < 35 => $"{Minutes(minute - 30, "Minutten")} op hallwer {Hours(hour + 1)}",
+            > 35 and < 60 => $"{Minutes(60 - minute, "Minutten")} vir {Hours(hour + 1)}",
+            _ => $"{Hours(time.Hour, "Auer")} {Minutes(time.Minute)}"
         };
     }
 
