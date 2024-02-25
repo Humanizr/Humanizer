@@ -8,7 +8,7 @@ public class PublicApiApprovalTest
         var publicApi = typeof(StringHumanizeExtensions).Assembly.GeneratePublicApi();
 
         return Verify(publicApi)
-            .ScrubLinesContaining("CommitHash", "RepositoryUrl")
+            .ScrubLinesContaining("CommitHash", "RepositoryUrl", "InternalsVisibleTo")
             .UniqueForTargetFrameworkAndVersion();
     }
 }
