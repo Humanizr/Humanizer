@@ -22,6 +22,7 @@ class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
         if (input < 0)
         {
             parts.Add("мінус");
+            input -= input;
         }
 
         CollectParts(parts, ref input, 1000000000000000000, GrammaticalGender.Masculine, "квінтильйон", "квінтильйона", "квінтильйонів");
@@ -168,16 +169,15 @@ class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
 
     static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
     {
-        var result = Math.Abs(number / divisor);
-        if (result == 0)
+        if (number < divisor)
         {
             return;
         }
 
-        number = Math.Abs(number % divisor);
-
+        var result = number / divisor;
         CollectPartsUnderOneThousand(parts, result, gender);
         parts.Add(ChooseOneForGrammaticalNumber(result, forms));
+        number %= divisor;
     }
 
     static void CollectOrdinalParts(ICollection<string> parts, ref int number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
