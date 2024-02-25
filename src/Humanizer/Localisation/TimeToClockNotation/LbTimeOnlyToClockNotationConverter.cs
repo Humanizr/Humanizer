@@ -79,8 +79,8 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
         if (number == 7)
         {
-            var eifelerRuleApply = LuxembourgishFormatter.DoesEifelerRuleApply(nextWord);
-            return $"{number.ToWords(eifelerRuleApply ? WordForm.Eifeler : WordForm.Normal)} {nextWord}";
+            var eifelerApplies = LuxembourgishFormatter.DoesEifelerRuleApply(nextWord);
+            return $"{number.ToWords(eifelerApplies ? WordForm.Eifeler : WordForm.Normal)} {nextWord}";
         }
 
         return $"{number.ToWords()} {nextWord}";
