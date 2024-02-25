@@ -31,7 +31,7 @@ class BrazilianPortugueseNumberToWordsConverter :
         return ConvertMasculine(number);
     }
 
-    string ConvertMasculine(long number)
+    static string ConvertMasculine(long number)
     {
         if (number == 0)
         {
