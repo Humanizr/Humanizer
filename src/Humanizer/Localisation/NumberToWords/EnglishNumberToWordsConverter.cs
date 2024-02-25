@@ -54,7 +54,7 @@ class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
             return $"minus {Convert(-number)}";
         }
 
-        var parts = new List<string>();
+        var parts = new List<string>(20);
 
         CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000_000_000, "quintillion", "quintillionth");
         CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000_000, "quadrillion", "quadrillionth");
@@ -81,11 +81,8 @@ class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
             return;
         }
 
-        // var parts1 = new List<string>();
-
         CollectPartsUnderAThousand(parts, result);
 
-        // parts.Add(ret);
         number %= divisor;
         parts.Add(number == 0 && isOrdinal ? ordinal : word);
     }
