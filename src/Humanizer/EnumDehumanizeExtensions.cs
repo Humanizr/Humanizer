@@ -12,7 +12,7 @@ public static class EnumDehumanizeExtensions
     /// <param name="input">The string to be converted</param>
     /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
     /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
-    public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
+    public static TTargetEnum DehumanizeTo<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TTargetEnum>(this string input)
         where TTargetEnum : struct, Enum =>
         DehumanizeToPrivate<TTargetEnum>(input, OnNoMatch.ThrowsException)!.Value;
 
@@ -23,7 +23,7 @@ public static class EnumDehumanizeExtensions
     /// <param name="input">The string to be converted</param>
     /// <exception cref="ArgumentException">If TTargetEnum is not an enum</exception>
     /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
-    public static TTargetEnum? DehumanizeTo<TTargetEnum>(this string input, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
+    public static TTargetEnum? DehumanizeTo<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TTargetEnum>(this string input, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
         where TTargetEnum : struct, Enum =>
         DehumanizeToPrivate<TTargetEnum>(input, onNoMatch);
 
@@ -51,7 +51,7 @@ public static class EnumDehumanizeExtensions
         }
     }
 
-    static T? DehumanizeToPrivate<T>(string input, OnNoMatch onNoMatch)
+    static T? DehumanizeToPrivate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(string input, OnNoMatch onNoMatch)
         where T : struct, Enum
     {
         var dehumanized = EnumCache<T>.GetDehumanized();

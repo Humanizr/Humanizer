@@ -5,11 +5,11 @@
 /// </summary>
 public class DefaultFormatter : IFormatter
 {
-    readonly CultureInfo _culture;
+    protected CultureInfo Culture { get; }
 
     /// <param name="localeCode">Name of the culture to use.</param>
     public DefaultFormatter(string localeCode) =>
-        _culture = new(localeCode);
+        Culture = new(localeCode);
 
     public virtual string DateHumanize_Now() =>
         GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
@@ -41,7 +41,7 @@ public class DefaultFormatter : IFormatter
     /// <inheritdoc/>
     public virtual string TimeSpanHumanize_Age()
     {
-        if (Resources.TryGetResource("TimeSpanHumanize_Age", _culture, out var ageFormat))
+        if (Resources.TryGetResource("TimeSpanHumanize_Age", Culture, out var ageFormat))
             return ageFormat;
         return "{0}";
     }
@@ -68,13 +68,13 @@ public class DefaultFormatter : IFormatter
     string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
     {
         var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
-        return count == 1 ? Format(resourceKey) : Format(resourceKey, count);
+        return count == 1 ? Format(resourceKey) : Format(unit, resourceKey, count);
     }
 
     string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
     {
         var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
-        return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(resourceKey, count, toWords);
+        return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(unit, resourceKey, count, toWords);
     }
 
     /// <summary>
@@ -85,27 +85,27 @@ public class DefaultFormatter : IFormatter
     protected virtual string Format(string resourceKey)
     {
         var resolvedKey = GetResourceKey(resourceKey);
-        return Resources.GetResource(resolvedKey, _culture);
+        return Resources.GetResource(resolvedKey, Culture);
     }
 
     /// <summary>
     /// Formats the specified resource key.
     /// </summary>
+    /// <param name="unit"></param>
     /// <param name="resourceKey">The resource key.</param>
     /// <param name="number">The number.</param>
+    /// <param name="toWords"></param>
     /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
-    protected virtual string Format(string resourceKey, int number, bool toWords = false)
+    protected virtual string Format(TimeUnit unit, string resourceKey, int number, bool toWords = false)
     {
         var resolvedKey = GetResourceKey(resourceKey, number);
-        var resourceString = Resources.GetResource(resolvedKey, _culture);
+        var resourceString = Resources.GetResource(resolvedKey, Culture);
 
-        if (toWords)
-        {
-            return string.Format(resourceString, number.ToWords(_culture));
-        }
-
-        return string.Format(resourceString, number);
+        return string.Format(resourceString, toWords ? NumberToWords(unit, number, Culture) : number);
     }
+
+    protected virtual string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
+        number.ToWords(culture);
 
     /// <summary>
     /// Override this method if your locale has complex rules around multiple units; e.g. Arabic, Russian

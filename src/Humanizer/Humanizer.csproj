@@ -10,7 +10,8 @@
     <Product>Humanizer ($(TargetFramework))</Product>    
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
-    <NoWarn>CS1573;CS1591</NoWarn>
+    <NoWarn>CS1573;CS1591</NoWarn>  
+    <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>  
   <ItemGroup>
     <Using Remove="System.Net.Http" />

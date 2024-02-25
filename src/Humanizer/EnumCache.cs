@@ -2,7 +2,7 @@
 
 namespace Humanizer;
 
-static class EnumCache<T>
+static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>
     where T : struct, Enum
 {
     static (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) info;
