@@ -116,7 +116,7 @@ public class NumberToWordsTests
     [InlineData(1111, "mil centa e onze")]
     [InlineData(111111, "centa e onze mil centa e onze")]
     [InlineData(1111101, "um milhão centa e onze mil centa e uma")]
-    [InlineData(1111111, "um milhão centa e onze mil centa e onze")]
+    [InlineData(1111111, "um milhão cento e onze mil centa e onze")]
     [InlineData(2111102, "dois milhões centa e onze mil centa e duas")]
     [InlineData(3111101, "três milhões cento e onze mil centa e uma")]
     [InlineData(1101111101, "um bilhão cento e um milhões cento e onze mil centa e uma")]
