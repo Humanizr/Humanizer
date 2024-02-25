@@ -148,8 +148,16 @@ class BrazilianPortugueseNumberToWordsConverter :
 
         if (number / 1000 > 0)
         {
-            // gender is not applied for thousands
-            parts.Add(number / 1000 == 1 ? "mil" : $"{ConvertMasculine(number / 1000)} mil");
+            if (number / 1000 == 1)
+            {
+                parts.Add("mil");
+            }
+            else
+            {
+                // gender is not applied for thousands
+                parts.Add($"{ConvertMasculine(number / 1000)} mil");
+            }
+
             number %= 1000;
         }
 
@@ -215,28 +223,42 @@ class BrazilianPortugueseNumberToWordsConverter :
 
         if (number / 1000000000 > 0)
         {
-            parts.Add(number / 1000000000 == 1
-                ? "bilionésima"
-                : $"{ConvertToOrdinalFeminine(number / 1000000000)} bilionésima");
+            if (number / 1000000000 == 1)
+            {
+                parts.Add("bilionésima");
+            }
+            else
+            {
+                parts.Add($"{ConvertToOrdinalFeminine(number / 1000000000)} bilionésima");
+            }
 
             number %= 1000000000;
         }
 
         if (number / 1000000 > 0)
         {
-            parts.Add(number / 1000000 == 1
-                ? "milionésima"
-                : $"{ConvertToOrdinalFeminine(number / 1000000000)} milionésima");
+            if (number / 1000000 == 1)
+            {
+                parts.Add("milionésima");
+            }
+            else
+            {
+                parts.Add($"{ConvertToOrdinalFeminine(number / 1000000000)} milionésima");
+            }
 
             number %= 1000000;
         }
 
         if (number / 1000 > 0)
         {
-            parts.Add(number / 1000 == 1
-                ? "milésima"
-                : $"{ConvertToOrdinalFeminine(number / 1000)} milésima");
-
+            if (number / 1000 == 1)
+            {
+                parts.Add( "milésima");
+            }
+            else
+            {
+                parts.Add($"{ConvertToOrdinalFeminine(number / 1000)} milésima");
+            }
             number %= 1000;
         }
 
@@ -266,9 +288,14 @@ class BrazilianPortugueseNumberToWordsConverter :
 
         if (number / 1000000000 > 0)
         {
-            parts.Add(number / 1000000000 == 1
-                ? "bilionésimo"
-                : $"{ConvertToOrdinalMasculine(number / 1000000000)} bilionésimo");
+            if (number / 1000000000 == 1)
+            {
+                parts.Add("bilionésimo");
+            }
+            else
+            {
+                parts.Add($"{ConvertToOrdinalMasculine(number / 1000000000)} bilionésimo");
+            }
 
             number %= 1000000000;
         }
