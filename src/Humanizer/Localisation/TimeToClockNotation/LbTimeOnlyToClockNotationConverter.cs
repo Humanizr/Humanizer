@@ -4,11 +4,11 @@ namespace Humanizer;
 
 class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
-    static string tenMinutes = 10.ToWords();
-    static        string oneMinute = 1.ToWords(GrammaticalGender.Feminine);
-    static        string fiveMinutes = 5.ToWords();
-    string twentyMinutes = 20.ToWords();
-
+    static string tenMinutes = 10.ToWords(culture);
+    static string oneMinute = 1.ToWords(GrammaticalGender.Feminine, culture);
+    static string fiveMinutes = 5.ToWords(culture);
+    string twentyMinutes = 20.ToWords(culture);
+    static CultureInfo culture = new("lb-LU");
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
         if (roundToNearestFive is ClockNotationRounding.NearestFiveMinutes)
@@ -41,7 +41,7 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             > 00 and < 25 => $"{Minutes(time.Minute, "Minutten")} op {Hours(time.Hour)}",
             > 25 and < 30 => $"{Minutes(30 - time.Minute, "Minutten")} vir hallwer {Hours(time.Hour + 1)}",
             > 30 and < 35 => $"{Minutes(time.Minute - 30, "Minutten")} op hallwer {Hours(time.Hour + 1)}",
-            _ =>  $"{Minutes(60 - time.Minute, "Minutten")} vir {Hours(time.Hour + 1)}",
+            _ => $"{Minutes(60 - time.Minute, "Minutten")} vir {Hours(time.Hour + 1)}",
         };
     }
 
@@ -90,7 +90,7 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         };
     }
 
-    private static TimeOnly GetRoundedTime(TimeOnly time)
+    static TimeOnly GetRoundedTime(TimeOnly time)
     {
         var tempMinutes = (int) (5 * Math.Round(time.Minute / 5.0));
         var hours = tempMinutes == 60 ? time.Hour + 1 : time.Hour;
@@ -124,35 +124,35 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         return normalizedHour == 0 ? 12 : normalizedHour;
     }
 
-    private static string GetFormattedExpression(int number)
+    static string GetFormattedExpression(int number)
     {
         if (number is 1 or 2)
         {
-            return number.ToWords(GrammaticalGender.Feminine);
+            return number.ToWords(GrammaticalGender.Feminine, culture);
         }
 
         if (number == 7)
         {
-            return number.ToWords(WordForm.Normal);
+            return number.ToWords(WordForm.Normal, culture);
         }
 
-        return number.ToWords();
+        return number.ToWords(culture);
     }
 
-    private static string GetFormattedExpression(int number, string nextWord)
+    static string GetFormattedExpression(int number, string nextWord)
     {
         if (number is 1 or 2)
         {
-            return $"{number.ToWords(GrammaticalGender.Feminine)} {nextWord}";
+            return $"{number.ToWords(GrammaticalGender.Feminine, culture)} {nextWord}";
         }
 
         if (number == 7)
         {
             var wordForm = LuxembourgishFormatter.DoesEifelerRuleApply(nextWord) ? WordForm.Eifeler : WordForm.Normal;
-            return $"{number.ToWords(wordForm)} {nextWord}";
+            return $"{number.ToWords(wordForm, culture)} {nextWord}";
         }
 
-        return $"{number.ToWords()} {nextWord}";
+        return $"{number.ToWords(culture)} {nextWord}";
     }
 }
 

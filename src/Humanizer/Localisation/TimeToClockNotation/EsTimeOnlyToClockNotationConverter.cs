@@ -4,6 +4,7 @@ namespace Humanizer;
 
 class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
+    static CultureInfo culture = new("es-ES");
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
         switch (time)
@@ -65,7 +66,7 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             return $"{GetArticle(oneHourForward)} {GetNextHour(oneHourForward)} {GetDayPeriod(oneHourForward)}";
         }
 
-        return $"{article} {GetHour(time)} y {normalizedMinutes.ToWords()} {GetDayPeriod(time)}";
+        return $"{article} {GetHour(time)} y {normalizedMinutes.ToWords(culture)} {GetDayPeriod(time)}";
     }
 
     static int NormalizedMinutes(TimeOnly time, ClockNotationRounding rounding)
@@ -80,11 +81,11 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
     static string GetNextHour(TimeOnly oneHourForward) =>
         NormalizeHour(oneHourForward)
-            .ToWords(GrammaticalGender.Feminine);
+            .ToWords(GrammaticalGender.Feminine, culture);
 
     static string GetHour(TimeOnly time) =>
         NormalizeHour(time)
-            .ToWords(GrammaticalGender.Feminine);
+            .ToWords(GrammaticalGender.Feminine, culture);
 
     static int NormalizeHour(TimeOnly time)
     {
