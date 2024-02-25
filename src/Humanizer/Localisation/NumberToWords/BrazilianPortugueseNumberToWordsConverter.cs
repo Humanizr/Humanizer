@@ -25,7 +25,7 @@ class BrazilianPortugueseNumberToWordsConverter :
 
         if (gender == GrammaticalGender.Feminine)
         {
-            ConvertFeminine(number);
+            return ConvertFeminine(number);
         }
 
         return ConvertMasculine(number);
