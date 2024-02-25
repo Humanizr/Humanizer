@@ -15,9 +15,7 @@ class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverte
         }
 
         var normalizedHour = time.Hour % 12;
-        var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
-            ? 5 * Math.Round(time.Minute / 5.0)
-            : time.Minute);
+        var normalizedMinutes = NormalizedMinutes(time, roundToNearestFive);
 
         return normalizedMinutes switch
         {
@@ -35,6 +33,16 @@ class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverte
             60 => $"{(normalizedHour + 1).ToWords()} o'clock",
             _ => $"{normalizedHour.ToWords()} {normalizedMinutes.ToWords()}"
         };
+    }
+
+    static int NormalizedMinutes(TimeOnly time, ClockNotationRounding roundToNearestFive)
+    {
+        if (roundToNearestFive == ClockNotationRounding.NearestFiveMinutes)
+        {
+            return (int) (5 * Math.Round(time.Minute / 5.0));
+        }
+
+        return time.Minute;
     }
 }
 

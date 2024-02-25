@@ -12,8 +12,8 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
         return roundedTime switch
         {
-            { Hour: 0, Minute: 0 } => "Mëtternuecht",
-            { Hour: 12, Minute: 0 } => "Mëtteg",
+            {Hour: 0, Minute: 0} => "Mëtternuecht",
+            {Hour: 12, Minute: 0} => "Mëtteg",
             _ => roundedTime.Minute switch
             {
                 00 => GetHourExpression(roundedTime.Hour, "Auer"),
@@ -38,7 +38,7 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
     private static TimeOnly GetRoundedTime(TimeOnly time)
     {
-        var tempRoundedMinutes = (int)(5 * Math.Round(time.Minute / 5.0));
+        var tempRoundedMinutes = (int) (5 * Math.Round(time.Minute / 5.0));
         var roundedHours = tempRoundedMinutes == 60 ? time.Hour + 1 : time.Hour;
         var roundedMinutes = tempRoundedMinutes == 60 ? 0 : tempRoundedMinutes;
         return new(roundedHours, roundedMinutes);

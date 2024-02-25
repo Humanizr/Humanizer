@@ -86,8 +86,15 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         NormalizeHour(time)
             .ToWords(GrammaticalGender.Feminine);
 
-    static int NormalizeHour(TimeOnly time) =>
-        time.Hour % 12 != 0 ? time.Hour % 12 : 12;
+    static int NormalizeHour(TimeOnly time)
+    {
+        if (time.Hour % 12 == 0)
+        {
+            return 12;
+        }
+
+        return time.Hour % 12;
+    }
 
     static string GetArticle(TimeOnly time) =>
         time.Hour is 1 or 13 ? "la" : "las";

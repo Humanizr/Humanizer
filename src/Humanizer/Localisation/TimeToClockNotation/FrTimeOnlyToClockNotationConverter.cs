@@ -6,9 +6,7 @@ class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
-        var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
-            ? 5 * Math.Round(time.Minute / 5.0)
-            : time.Minute);
+        var normalizedMinutes = NormalizedMinutes(time, roundToNearestFive);
 
         return normalizedMinutes switch
         {
@@ -24,6 +22,16 @@ class FrTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
                 12 => "midi",
                 _ => hour.ToWords(GrammaticalGender.Feminine) + (hour > 1 ? " heures" : " heure")
             };
+    }
+
+    static int NormalizedMinutes(TimeOnly time, ClockNotationRounding roundToNearestFive)
+    {
+        if (roundToNearestFive == ClockNotationRounding.NearestFiveMinutes)
+        {
+            return (int) (5 * Math.Round(time.Minute / 5.0));
+        }
+
+        return time.Minute;
     }
 }
 
