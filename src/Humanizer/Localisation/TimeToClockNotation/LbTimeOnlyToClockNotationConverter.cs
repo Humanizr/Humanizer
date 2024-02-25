@@ -24,15 +24,19 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         {
             00 => Hours(rounded.Hour, "Auer"),
             15 => $"Véirel op {Hours(rounded.Hour)}",
-            25 => $"{Minutes(30 - rounded.Minute, "vir")} hallwer {Hours(rounded.Hour + 1)}",
+            25 => $"{Minutes(5, "vir")} hallwer {Hours(rounded.Hour + 1)}",
             30 => $"hallwer {Hours(rounded.Hour + 1)}",
-            35 => $"{Minutes(rounded.Minute - 30, "op")} hallwer {Hours(rounded.Hour + 1)}",
+            35 => $"{Minutes(5, "op")} hallwer {Hours(rounded.Hour + 1)}",
             45 => $"Véirel vir {Hours(rounded.Hour + 1)}",
             60 => Hours(rounded.Hour + 1, "Auer"),
-            01 => $"{Minutes(rounded.Minute, "Minutt")} op {Hours(rounded.Hour)}",
-            59 => $"{Minutes(60 - rounded.Minute, "Minutt")} vir {Hours(rounded.Hour + 1)}",
-            05 or 10 or 20 => $"{Minutes(rounded.Minute, "op")} {Hours(rounded.Hour)}",
-            40 or 50 or 55 => $"{Minutes(60 - rounded.Minute, "vir")} {Hours(rounded.Hour + 1)}",
+            01 => $"{Minutes(1, "Minutt")} op {Hours(rounded.Hour)}",
+            59 => $"{Minutes(1, "Minutt")} vir {Hours(rounded.Hour + 1)}",
+            05 => $"{Minutes(5, "op")} {Hours(rounded.Hour)}",
+            10 => $"{Minutes(10, "op")} {Hours(rounded.Hour)}",
+            20 => $"{Minutes(20, "op")} {Hours(rounded.Hour)}",
+            40 => $"{Minutes(20, "vir")} {Hours(rounded.Hour + 1)}",
+            50 => $"{Minutes(10, "vir")} {Hours(rounded.Hour + 1)}",
+            55 => $"{Minutes(5, "vir")} {Hours(rounded.Hour + 1)}",
             > 00 and < 25 => $"{Minutes(rounded.Minute, "Minutten")} op {Hours(rounded.Hour)}",
             > 25 and < 30 => $"{Minutes(30 - rounded.Minute, "Minutten")} vir hallwer {Hours(rounded.Hour + 1)}",
             > 30 and < 35 => $"{Minutes(rounded.Minute - 30, "Minutten")} op hallwer {Hours(rounded.Hour + 1)}",
@@ -49,34 +53,49 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         return new(hours, minutes);
     }
 
-    static string Minutes(int minute, string? nextWord = null)
+    static string Minutes(int minute)
+        => GetFormattedExpression(minute);
+
+    static string Minutes(int minute, string nextWord)
         => GetFormattedExpression(minute, nextWord);
 
-    static string Hours(int hour, string? nextWord = null)
+    static string Hours(int hour)
     {
-        var normalizedHour = hour % 12;
-        var hourExpression = normalizedHour == 0 ? 12 : normalizedHour;
+        var hourExpression = HourExpression(hour);
+
+        return GetFormattedExpression(hourExpression);
+    }
+
+    static string Hours(int hour, string nextWord)
+    {
+        var hourExpression = HourExpression(hour);
 
         return GetFormattedExpression(hourExpression, nextWord);
     }
 
-    private static string GetFormattedExpression(int number, string? nextWord)
+    static int HourExpression(int hour)
     {
-        if (nextWord == null)
+        var normalizedHour = hour % 12;
+        return normalizedHour == 0 ? 12 : normalizedHour;
+    }
+
+    private static string GetFormattedExpression(int number)
+    {
+        if (number is 1 or 2)
         {
-            if (number is 1 or 2)
-            {
-                return number.ToWords(GrammaticalGender.Feminine);
-            }
-
-            if (number == 7)
-            {
-                return number.ToWords(WordForm.Normal);
-            }
-
-            return number.ToWords();
+            return number.ToWords(GrammaticalGender.Feminine);
         }
 
+        if (number == 7)
+        {
+            return number.ToWords(WordForm.Normal);
+        }
+
+        return number.ToWords();
+    }
+
+    private static string GetFormattedExpression(int number, string nextWord)
+    {
         if (number is 1 or 2)
         {
             return $"{number.ToWords(GrammaticalGender.Feminine)} {nextWord}";
@@ -85,7 +104,7 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         if (number == 7)
         {
             var eifelerApplies = LuxembourgishFormatter.DoesEifelerRuleApply(nextWord);
-            return $"{number.ToWords(eifelerApplies ? WordForm.Eifeler : WordForm.Normal)} {nextWord}";
+            return $"{number.ToWords(WordForm.Eifeler)} {nextWord}";
         }
 
         return $"{number.ToWords()} {nextWord}";
