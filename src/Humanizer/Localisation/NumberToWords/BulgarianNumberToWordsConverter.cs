@@ -1,6 +1,7 @@
 ﻿namespace Humanizer;
 
-class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
+class BulgarianNumberToWordsConverter() :
+    GenderedNumberToWordsConverter(GrammaticalGender.Neuter)
 {
     static readonly string[] UnitsMap =
     [
@@ -23,7 +24,7 @@ class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
 
     static readonly string[] HundredsOrdinalMap =
     [
-        string.Empty, "стот", "двест", "трист", "четиристот", "петстот", "шестстот", "седемстот", "осемстот",
+        string.Empty, "стот", "двестот", "тристот", "четиристот", "петстот", "шестстот", "седемстот", "осемстот",
         "деветстот"
     ];
 
@@ -37,137 +38,147 @@ class BulgarianNumberToWordsConverter : GenderedNumberToWordsConverter
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
         InnerConvert(input, gender, false);
 
+    public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
+        InnerConvert(input, gender, true);
+
     static string InnerConvert(long input, GrammaticalGender gender, bool isOrdinal)
     {
-        if (input is > int.MaxValue or < int.MinValue)
-        {
-            throw new NotImplementedException();
-        }
-
         if (input == 0)
         {
-            return isOrdinal ? "нулев" + GetEndingForGender(gender, input) : "нула";
+            return isOrdinal ? OrdinalZero(gender) : "нула";
         }
 
         var parts = new List<string>();
-
         if (input < 0)
         {
             parts.Add("минус");
             input = -input;
         }
 
-        var lastOrdinalSubstitution = "";
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000_000_000_000, GrammaticalGender.Masculine, "квинтилион", "квадрилиона", ToOrdinalOverAHundred("квинтилион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000_000_000, GrammaticalGender.Masculine, "квадрилион", "квадрилиона", ToOrdinalOverAHundred("квадрилион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000_000, GrammaticalGender.Masculine, "трилион", "трилиона", ToOrdinalOverAHundred("трилион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000, GrammaticalGender.Masculine, "милиард", "милиарда", ToOrdinalOverAHundred("милиард", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000, GrammaticalGender.Masculine, "милион", "милиона", ToOrdinalOverAHundred("милион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000, GrammaticalGender.Feminine, "хиляда", "хиляди", ToOrdinalOverAHundred("хиляд", gender));
+        CollectPartsUnderOneThousand(parts, ref input, isOrdinal, gender);
 
-        if (input / 1000000000 > 0)
+        return string.Join(" ", parts);
+    }
+
+    static void CollectParts(IList<string> parts, ref long number, bool isOrdinal, long divisor, GrammaticalGender gender, string singular, string plural, string ordinal)
+    {
+        if (number < divisor)
         {
-            parts.Add(input < 2000000000 ? "един милиард" : InnerConvert(input / 1000000000, gender, false) + " милиарда");
-
-            if (isOrdinal)
-                lastOrdinalSubstitution = InnerConvert(input / 1000000000, gender, false) + " милиард" +
-                                          GetEndingForGender(gender, input);
-            input %= 1000000000;
+            return;
         }
 
-        if (input / 1000000 > 0)
+        var result = number / divisor;
+
+        if (parts.Count > 0)
         {
-            parts.Add(input < 2000000 ? "един милион" : InnerConvert(input / 1000000, gender, false) + " милиона");
-
-            if (isOrdinal)
-                lastOrdinalSubstitution = InnerConvert(input / 1000000, gender, false) + " милион" +
-                                          GetEndingForGender(gender, input);
-
-            input %= 1000000;
+            parts.Add("и");
         }
 
-        if (input / 1000 > 0)
+        CollectPartsUnderOneThousand(parts, ref result, false, gender);
+
+        number %= divisor;
+        if (number == 0 && isOrdinal)
         {
-            if (input < 2000)
-                parts.Add("хиляда");
+            parts.Add(ordinal);
+        }
+        else
+        {
+            parts.Add(result == 1 ? singular : plural);
+        }
+    }
+
+    static void CollectPartsUnderOneThousand(IList<string> parts, ref long number, bool isOrdinal, GrammaticalGender gender)
+    {
+        if (number == 0)
+        {
+            return;
+        }
+
+        if (number >= 100)
+        {
+            var hundreds = number / 100;
+            number %= 100;
+            if (number == 0 && isOrdinal)
+            {
+                parts.Add(ToOrdinalOverAHundred(HundredsOrdinalMap[hundreds], gender));
+            }
             else
             {
-                parts.Add(InnerConvert(input / 1000, gender, false) + " хиляди");
+                parts.Add(HundredsMap[hundreds]);
             }
-
-            if (isOrdinal)
-                lastOrdinalSubstitution = InnerConvert(input / 1000, gender, false) + " хиляд" +
-                                          GetEndingForGender(gender, input);
-
-            input %= 1000;
         }
 
-        if (input / 100 > 0)
+        if (number >= 20)
         {
-            parts.Add(HundredsMap[(int) input / 100]);
-
-            if (isOrdinal)
-                lastOrdinalSubstitution = HundredsOrdinalMap[(int) input / 100] + GetEndingForGender(gender, input);
-
-            input %= 100;
+            var tens = number / 10;
+            number %= 10;
+            if (number == 0 && isOrdinal)
+            {
+                parts.Add(ToOrdinalUnitsAndTens(TensMap[tens], gender));
+            }
+            else
+            {
+                parts.Add(TensMap[tens]);
+            }
         }
 
-        if (input > 19)
+        if (number > 0)
         {
-            parts.Add(TensMap[input / 10]);
-
             if (isOrdinal)
-                lastOrdinalSubstitution = TensMap[(int) input / 10] + GetEndingForGender(gender, input);
-
-            input %= 10;
-        }
-
-        if (input > 0)
-        {
-            parts.Add(UnitsMap[input]);
-
-            if (isOrdinal)
-                lastOrdinalSubstitution = UnitsOrdinal[input] + GetEndingForGender(gender, input);
+            {
+                parts.Add(ToOrdinalUnitsAndTens(UnitsOrdinal[number], gender));
+            }
+            else
+            {
+                parts.Add(GetUnit(number, gender));
+            }
         }
 
         if (parts.Count > 1)
         {
             parts.Insert(parts.Count - 1, "и");
         }
-
-        if (isOrdinal && !string.IsNullOrWhiteSpace(lastOrdinalSubstitution))
-            parts[^1] = lastOrdinalSubstitution;
-
-        return string.Join(" ", parts);
     }
 
-    public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
-        InnerConvert(input, gender, true);
-
-    static string GetEndingForGender(GrammaticalGender gender, long input)
-    {
-        if (input == 0)
+    static string GetUnit(long number, GrammaticalGender gender) =>
+        (number, gender) switch
         {
-            return gender switch
-            {
-                GrammaticalGender.Masculine => "",
-                GrammaticalGender.Feminine => "а",
-                GrammaticalGender.Neuter => "о",
-                _ => throw new ArgumentOutOfRangeException(nameof(gender))
-            };
-        }
+            (1, GrammaticalGender.Masculine) => "един",
+            (1, GrammaticalGender.Feminine) => "една",
+            (2, GrammaticalGender.Masculine) => "два",
+            _ => UnitsMap[number],
+        };
 
-        if (input < 99)
+    static string OrdinalZero(GrammaticalGender gender) =>
+        gender switch
         {
-            return gender switch
-            {
-                GrammaticalGender.Masculine => "и",
-                GrammaticalGender.Feminine => "а",
-                GrammaticalGender.Neuter => "о",
-                _ => throw new ArgumentOutOfRangeException(nameof(gender))
-            };
-        }
+            GrammaticalGender.Masculine => "нулев",
+            GrammaticalGender.Feminine => "нулева",
+            GrammaticalGender.Neuter => "нулево",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
+        };
 
-        return gender switch
+    static string ToOrdinalOverAHundred(string word, GrammaticalGender gender) =>
+        gender switch
         {
-            GrammaticalGender.Masculine => "ен",
-            GrammaticalGender.Feminine => "на",
-            GrammaticalGender.Neuter => "но",
+            GrammaticalGender.Masculine => $"{word}ен",
+            GrammaticalGender.Feminine => $"{word}на",
+            GrammaticalGender.Neuter => $"{word}но",
             _ => throw new ArgumentOutOfRangeException(nameof(gender))
         };
-    }
+
+    static string ToOrdinalUnitsAndTens(string word, GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Masculine => $"{word}и",
+            GrammaticalGender.Feminine => $"{word}а",
+            GrammaticalGender.Neuter => $"{word}о",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender))
+        };
 }
