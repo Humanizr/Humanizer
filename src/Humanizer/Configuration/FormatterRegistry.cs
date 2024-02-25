@@ -20,7 +20,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterCzechSlovakPolishFormatter("cs");
         RegisterCzechSlovakPolishFormatter("pl");
         RegisterCzechSlovakPolishFormatter("sk");
-        RegisterDefaultFormatter("bg");
+        Register("bg", new BulgarianFormatter());
         RegisterDefaultFormatter("ku");
         RegisterDefaultFormatter("pt");
         RegisterDefaultFormatter("sv");
