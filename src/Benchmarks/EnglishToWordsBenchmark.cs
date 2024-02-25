@@ -5,7 +5,7 @@ public class EnglishToWordsBenchmark
 
     [Benchmark]
     public string ToWords() =>
-        converter.Convert(long.MaxValue);
+        converter.Convert(int.MaxValue);
 
     [Benchmark]
     public string ToWordsOrdinal() =>
