@@ -1,5 +1,4 @@
-﻿using Humanizer;
-using PublicApiGenerator;
+﻿using PublicApiGenerator;
 
 public class PublicApiApprovalTest
 {
