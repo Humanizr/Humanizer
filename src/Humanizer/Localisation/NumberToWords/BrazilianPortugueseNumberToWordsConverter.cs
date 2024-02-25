@@ -3,23 +3,36 @@
 class BrazilianPortugueseNumberToWordsConverter :
     GenderedNumberToWordsConverter
 {
-    static readonly string[] UnitsMap = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
-    static readonly string[] TensMap = ["zero", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
-    static readonly string[] HundredsMap = ["zero", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
+    static readonly string[] MasculineUnitsMap = ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"];
+    static readonly string[] FeminineUnitsMap = ["zera", "uma", "duas", "três", "quatra", "cinca", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoita", "dezenove"];
+    static readonly string[] MasculineTensMap = ["zero", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
+    static readonly string[] FeminineTensMap = ["zera", "dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"];
+    static readonly string[] MasculineHundredsMap = ["zero", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"];
+    static readonly string[] FeminineHundredsMap = ["zera", "centa", "duzentas", "trezentas", "quatrocentas", "quinhentas", "seiscentas", "setecentas", "oitocentas", "novecentas"];
+    static readonly string[] MasculineOrdinalUnitsMap = ["zero", "primeiro", "segundo", "terceiro", "quarto", "quinto", "sexto", "sétimo", "oitavo", "nono"];
+    static readonly string[] FeminineOrdinalUnitsMap = ["zera", "primeira", "segunda", "terceira", "quarta", "quinta", "sexta", "sétima", "oitava", "nona"];
+    static readonly string[] MasculineOrdinalTensMap = ["zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo"];
+    static readonly string[] FeminineOrdinalTensMap = ["zera", "décima", "vigésima", "trigésima", "quadragésima", "quinquagésima", "sexagésima", "septuagésima", "octogésima", "nonagésima"];
+    static readonly string[] MasculineOrdinalHundredsMap = ["zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo"];
+    static readonly string[] FeminineOrdinalHundredsMap = ["zera", "centésima", "ducentésima", "trecentésima", "quadringentésima", "quingentésima", "sexcentésima", "septingentésima", "octingentésima", "noningentésima"];
 
-    static readonly string[] OrdinalUnitsMap = ["zero", "primeiro", "segundo", "terceiro", "quarto", "quinto", "sexto", "sétimo", "oitavo", "nono"];
-    static readonly string[] OrdinalTensMap = ["zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo"];
-    static readonly string[] OrdinalHundredsMap = ["zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo"];
-
-    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+    public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
-        if (input is > 999999999999 or < -999999999999)
+        if (number is > 999999999999 or < -999999999999)
         {
             throw new NotImplementedException();
         }
 
-        var number = input;
+        if (gender == GrammaticalGender.Feminine)
+        {
+            ConvertFeminine(number);
+        }
 
+        return ConvertMasculine(number);
+    }
+
+    string ConvertMasculine(long number)
+    {
         if (number == 0)
         {
             return "zero";
@@ -27,7 +40,7 @@ class BrazilianPortugueseNumberToWordsConverter :
 
         if (number < 0)
         {
-            return $"menos {Convert(Math.Abs(number), gender)}";
+            return $"menos {ConvertFeminine(Math.Abs(number))}";
         }
 
         var parts = new List<string>();
@@ -36,8 +49,8 @@ class BrazilianPortugueseNumberToWordsConverter :
         {
             // gender is not applied for billions
             parts.Add(number / 1000000000 >= 2
-                ? $"{Convert(number / 1000000000, GrammaticalGender.Masculine)} bilhões"
-                : $"{Convert(number / 1000000000, GrammaticalGender.Masculine)} bilhão");
+                ? $"{ConvertMasculine(number / 1000000000)} bilhões"
+                : $"{ConvertMasculine(number / 1000000000)} bilhão");
 
             number %= 1000000000;
         }
@@ -46,8 +59,8 @@ class BrazilianPortugueseNumberToWordsConverter :
         {
             // gender is not applied for millions
             parts.Add(number / 1000000 >= 2
-                ? $"{Convert(number / 1000000, GrammaticalGender.Masculine)} milhões"
-                : $"{Convert(number / 1000000, GrammaticalGender.Masculine)} milhão");
+                ? $"{ConvertMasculine(number / 1000000)} milhões"
+                : $"{ConvertMasculine(number / 1000000)} milhão");
 
             number %= 1000000;
         }
@@ -55,7 +68,7 @@ class BrazilianPortugueseNumberToWordsConverter :
         if (number / 1000 > 0)
         {
             // gender is not applied for thousands
-            parts.Add(number / 1000 == 1 ? "mil" : $"{Convert(number / 1000, GrammaticalGender.Masculine)} mil");
+            parts.Add(number / 1000 == 1 ? "mil" : $"{ConvertMasculine(number / 1000)} mil");
             number %= 1000;
         }
 
@@ -67,8 +80,7 @@ class BrazilianPortugueseNumberToWordsConverter :
             }
             else
             {
-                // Gender is applied to hundreds starting from 200
-                parts.Add(ApplyGender(HundredsMap[number / 100], gender));
+                parts.Add(MasculineHundredsMap[number / 100]);
             }
 
             number %= 100;
@@ -83,14 +95,95 @@ class BrazilianPortugueseNumberToWordsConverter :
 
             if (number < 20)
             {
-                parts.Add(ApplyGender(UnitsMap[number], gender));
+                parts.Add(MasculineUnitsMap[number]);
             }
             else
             {
-                var lastPart = TensMap[number / 10];
+                var lastPart = MasculineTensMap[number / 10];
                 if (number % 10 > 0)
                 {
-                    lastPart += $" e {ApplyGender(UnitsMap[number % 10], gender)}";
+                    lastPart += $" e {MasculineUnitsMap[number % 10]}";
+                }
+
+                parts.Add(lastPart);
+            }
+        }
+
+        return string.Join(" ", parts);
+    }
+
+    string ConvertFeminine(long number)
+    {
+        if (number == 0)
+        {
+            return "zero";
+        }
+
+        if (number < 0)
+        {
+            return $"menos {ConvertFeminine(Math.Abs(number))}";
+        }
+
+        var parts = new List<string>();
+
+        if (number / 1000000000 > 0)
+        {
+            // gender is not applied for billions
+            parts.Add(number / 1000000000 >= 2
+                ? $"{ConvertMasculine(number / 1000000000)} bilhões"
+                : $"{ConvertMasculine(number / 1000000000)} bilhão");
+
+            number %= 1000000000;
+        }
+
+        if (number / 1000000 > 0)
+        {
+            // gender is not applied for millions
+            parts.Add(number / 1000000 >= 2
+                ? $"{ConvertMasculine(number / 1000000)} milhões"
+                : $"{ConvertMasculine(number / 1000000)} milhão");
+
+            number %= 1000000;
+        }
+
+        if (number / 1000 > 0)
+        {
+            // gender is not applied for thousands
+            parts.Add(number / 1000 == 1 ? "mil" : $"{ConvertMasculine(number / 1000)} mil");
+            number %= 1000;
+        }
+
+        if (number / 100 > 0)
+        {
+            if (number == 100)
+            {
+                parts.Add(parts.Count > 0 ? "e cem" : "cem");
+            }
+            else
+            {
+                parts.Add(FeminineHundredsMap[number / 100]);
+            }
+
+            number %= 100;
+        }
+
+        if (number > 0)
+        {
+            if (parts.Count != 0)
+            {
+                parts.Add("e");
+            }
+
+            if (number < 20)
+            {
+                parts.Add(FeminineUnitsMap[number]);
+            }
+            else
+            {
+                var lastPart = FeminineTensMap[number / 10];
+                if (number % 10 > 0)
+                {
+                    lastPart += $" e {FeminineUnitsMap[number % 10]}";
                 }
 
                 parts.Add(lastPart);
@@ -108,13 +201,23 @@ class BrazilianPortugueseNumberToWordsConverter :
             return "zero";
         }
 
+        if (gender == GrammaticalGender.Feminine)
+        {
+            return ConvertToOrdinalFeminine(number);
+        }
+
+        return ConvertToOrdinalMasculine(number);
+    }
+
+    static string ConvertToOrdinalFeminine(int number)
+    {
         var parts = new List<string>();
 
         if (number / 1000000000 > 0)
         {
             parts.Add(number / 1000000000 == 1
-                ? ApplyOrdinalGender("bilionésimo", gender)
-                : string.Format("{0} " + ApplyOrdinalGender("bilionésimo", gender), ConvertToOrdinal(number / 1000000000, gender)));
+                ? "bilionésima"
+                : $"{ConvertToOrdinalFeminine(number / 1000000000)} bilionésima");
 
             number %= 1000000000;
         }
@@ -122,8 +225,8 @@ class BrazilianPortugueseNumberToWordsConverter :
         if (number / 1000000 > 0)
         {
             parts.Add(number / 1000000 == 1
-                ? ApplyOrdinalGender("milionésimo", gender)
-                : string.Format("{0}" + ApplyOrdinalGender("milionésimo", gender), ConvertToOrdinal(number / 1000000000, gender)));
+                ? "milionésima"
+                : $"{ConvertToOrdinalFeminine(number / 1000000000)} milionésima");
 
             number %= 1000000;
         }
@@ -131,64 +234,82 @@ class BrazilianPortugueseNumberToWordsConverter :
         if (number / 1000 > 0)
         {
             parts.Add(number / 1000 == 1
-                ? ApplyOrdinalGender("milésimo", gender)
-                : string.Format("{0} " + ApplyOrdinalGender("milésimo", gender), ConvertToOrdinal(number / 1000, gender)));
+                ? "milésima"
+                : $"{ConvertToOrdinalFeminine(number / 1000)} milésima");
 
             number %= 1000;
         }
 
         if (number / 100 > 0)
         {
-            parts.Add(ApplyOrdinalGender(OrdinalHundredsMap[number / 100], gender));
+            parts.Add(FeminineOrdinalHundredsMap[number / 100]);
             number %= 100;
         }
 
         if (number / 10 > 0)
         {
-            parts.Add(ApplyOrdinalGender(OrdinalTensMap[number / 10], gender));
+            parts.Add(FeminineOrdinalTensMap[number / 10]);
             number %= 10;
         }
 
         if (number > 0)
         {
-            parts.Add(ApplyOrdinalGender(OrdinalUnitsMap[number], gender));
+            parts.Add(FeminineOrdinalUnitsMap[number]);
         }
 
         return string.Join(" ", parts);
     }
 
-    static string ApplyGender(string toWords, GrammaticalGender gender)
+    static string ConvertToOrdinalMasculine(int number)
     {
-        if (gender != GrammaticalGender.Feminine)
+        var parts = new List<string>();
+
+        if (number / 1000000000 > 0)
         {
-            return toWords;
+            parts.Add(number / 1000000000 == 1
+                ? "bilionésimo"
+                : $"{ConvertToOrdinalMasculine(number / 1000000000)} bilionésimo");
+
+            number %= 1000000000;
         }
 
-        if (toWords.EndsWith("os"))
+        if (number / 1000000 > 0)
         {
-            return toWords.Substring(0, toWords.Length - 2) + "as";
+            parts.Add(number / 1000000 == 1
+                ? "milionésimo"
+                : $"{ConvertToOrdinalMasculine(number / 1000000000)} milionésimo");
+
+            number %= 1000000;
         }
 
-        if (toWords.EndsWith("um"))
+        if (number / 1000 > 0)
         {
-            return toWords.Substring(0, toWords.Length - 2) + "uma";
+            parts.Add(number / 1000 == 1
+                ? "milésimo"
+                : $"{ConvertToOrdinalMasculine(number / 1000)} milésimo");
+
+            number %= 1000;
         }
 
-        if (toWords.EndsWith("dois"))
+        if (number / 100 > 0)
         {
-            return toWords.Substring(0, toWords.Length - 4) + "duas";
+            parts.Add(MasculineOrdinalHundredsMap[number / 100]);
+
+            number %= 100;
         }
 
-        return toWords;
-    }
-
-    static string ApplyOrdinalGender(string toWords, GrammaticalGender gender)
-    {
-        if (gender == GrammaticalGender.Feminine)
+        if (number / 10 > 0)
         {
-            return toWords.TrimEnd('o') + 'a';
+            parts.Add(MasculineOrdinalTensMap[number / 10]);
+
+            number %= 10;
         }
 
-        return toWords;
+        if (number > 0)
+        {
+            parts.Add(MasculineOrdinalUnitsMap[number]);
+        }
+
+        return string.Join(" ", parts);
     }
 }
