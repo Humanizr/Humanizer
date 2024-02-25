@@ -35,11 +35,17 @@ class BulgarianNumberToWordsConverter() :
         "осемнадесет", "деветнадесет"
     ];
 
-    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true) =>
+        InnerConvert(input, gender, false);
+
+    public override string ConvertToOrdinal(int input, GrammaticalGender gender) =>
+        InnerConvert(input, gender, true);
+
+    static string InnerConvert(long input, GrammaticalGender gender, bool isOrdinal)
     {
         if (input == 0)
         {
-            return "нула";
+            return isOrdinal ? OrdinalZero(gender) : "нула";
         }
 
         var parts = new List<string>();
@@ -49,93 +55,18 @@ class BulgarianNumberToWordsConverter() :
             input = -input;
         }
 
-        CollectParts(parts, ref input, 1_000_000_000_000_000_000, GrammaticalGender.Masculine, "квинтилион", "квадрилиона");
-        CollectParts(parts, ref input, 1_000_000_000_000_000, GrammaticalGender.Masculine, "квадрилион", "квадрилиона");
-        CollectParts(parts, ref input, 1_000_000_000_000, GrammaticalGender.Masculine, "трилион", "трилиона");
-        CollectParts(parts, ref input, 1_000_000_000, GrammaticalGender.Masculine, "милиард", "милиарда");
-        CollectParts(parts, ref input, 1_000_000, GrammaticalGender.Masculine, "милион", "милиона");
-        CollectParts(parts, ref input, 1_000, GrammaticalGender.Feminine, "хиляда", "хиляди");
-        CollectPartsUnderOneThousand(parts, ref input, gender);
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000_000_000_000, GrammaticalGender.Masculine, "квинтилион", "квадрилиона", ToOrdinalOverAHundred("квинтилион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000_000_000, GrammaticalGender.Masculine, "квадрилион", "квадрилиона", ToOrdinalOverAHundred("квадрилион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000_000, GrammaticalGender.Masculine, "трилион", "трилиона", ToOrdinalOverAHundred("трилион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000_000, GrammaticalGender.Masculine, "милиард", "милиарда", ToOrdinalOverAHundred("милиард", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000_000, GrammaticalGender.Masculine, "милион", "милиона", ToOrdinalOverAHundred("милион", gender));
+        CollectParts(parts, ref input, isOrdinal, 1_000, GrammaticalGender.Feminine, "хиляда", "хиляди", ToOrdinalOverAHundred("хиляд", gender));
+        CollectPartsUnderOneThousand(parts, ref input, isOrdinal, gender);
 
         return string.Join(" ", parts);
     }
 
-    public override string ConvertToOrdinal(int input, GrammaticalGender gender)
-    {
-        if (input == 0)
-        {
-            return gender switch
-            {
-                GrammaticalGender.Masculine => "нулев",
-                GrammaticalGender.Feminine => "нулева",
-                GrammaticalGender.Neuter => "нулево",
-                _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
-            };
-        }
-
-        var parts = new List<string>();
-
-        long number = input;
-        if (number < 0)
-        {
-            parts.Add("минус");
-            number = -number;
-        }
-
-        var ending = GetEnding2(gender);
-        CollectOrdinalParts(parts, ref number, 1_000_000_000, GrammaticalGender.Masculine, "милиард", "милиарда", "милиард" + ending);
-        CollectOrdinalParts(parts, ref number, 1_000_000, GrammaticalGender.Masculine, "милион", "милиона", "милион" + ending);
-        CollectOrdinalParts(parts, ref number, 1_000, GrammaticalGender.Feminine, "хиляда", "хиляди", "хиляд" + ending);
-        CollectOrdinalPartsUnderOneThousand(parts, number, gender);
-
-        return string.Join(" ", parts);
-    }
-
-    static string GetEnding2(GrammaticalGender gender)
-    {
-        var ending = gender switch
-        {
-            GrammaticalGender.Masculine => "ен",
-            GrammaticalGender.Feminine => "на",
-            GrammaticalGender.Neuter => "но",
-            _ => throw new ArgumentOutOfRangeException(nameof(gender))
-        };
-        return ending;
-    }
-
-    static void CollectPartsUnderOneThousand(IList<string> parts, ref long number, GrammaticalGender gender)
-    {
-        if (number == 0)
-        {
-            return;
-        }
-
-        if (number >= 100)
-        {
-            var hundreds = number / 100;
-            parts.Add(HundredsMap[hundreds]);
-            number %= 100;
-        }
-
-        if (number >= 20)
-        {
-            var tens = number / 10;
-            parts.Add(TensMap[tens]);
-            number %= 10;
-        }
-
-        if (number > 0)
-        {
-            parts.Add(GetUnit(number, gender));
-        }
-
-        if (parts.Count > 1)
-        {
-            parts.Insert(parts.Count - 1, "и");
-        }
-    }
-
-    static void CollectParts(IList<string> parts, ref long number, long divisor, GrammaticalGender gender, string singular, string plural)
+    static void CollectParts(IList<string> parts, ref long number, bool isOrdinal, long divisor, GrammaticalGender gender, string singular, string plural, string? ordinal = null)
     {
         if (number < divisor)
         {
@@ -144,18 +75,25 @@ class BulgarianNumberToWordsConverter() :
 
         var result = number / divisor;
 
-        if (parts.Count > 0)
+        if (parts.Count > 0 && !isOrdinal)
         {
             parts.Add("и");
         }
 
-        CollectPartsUnderOneThousand(parts, ref result, gender);
+        CollectPartsUnderOneThousand(parts, ref result, false, gender);
 
         number %= divisor;
-        parts.Add(result == 1 ? singular : plural);
+        if (number == 0 && isOrdinal)
+        {
+            parts.Add(ordinal!);
+        }
+        else
+        {
+            parts.Add(result == 1 ? singular : plural);
+        }
     }
 
-    static void CollectOrdinalPartsUnderOneThousand(IList<string> parts, long number, GrammaticalGender gender)
+    static void CollectPartsUnderOneThousand(IList<string> parts, ref long number, bool isOrdinal, GrammaticalGender gender)
     {
         if (number == 0)
         {
@@ -166,9 +104,9 @@ class BulgarianNumberToWordsConverter() :
         {
             var hundreds = number / 100;
             number %= 100;
-            if (number == 0)
+            if (number == 0 && isOrdinal)
             {
-                parts.Add(HundredsOrdinalMap[hundreds] + GetEnding2(gender));
+                parts.Add(ToOrdinalOverAHundred(HundredsOrdinalMap[hundreds], gender));
             }
             else
             {
@@ -180,9 +118,9 @@ class BulgarianNumberToWordsConverter() :
         {
             var tens = number / 10;
             number %= 10;
-            if (number == 0)
+            if (number == 0 && isOrdinal)
             {
-                parts.Add(TensMap[tens] + GetEnding(gender));
+                parts.Add(ToOrdinalUnitsAndTens(TensMap[tens], gender));
             }
             else
             {
@@ -192,35 +130,19 @@ class BulgarianNumberToWordsConverter() :
 
         if (number > 0)
         {
-            parts.Add(UnitsOrdinal[number] + GetEnding(gender));
+            if (isOrdinal)
+            {
+                parts.Add(ToOrdinalUnitsAndTens(UnitsOrdinal[number], gender));
+            }
+            else
+            {
+                parts.Add(GetUnit(number, gender));
+            }
         }
 
         if (parts.Count > 1)
         {
             parts.Insert(parts.Count - 1, "и");
-        }
-    }
-
-
-    static void CollectOrdinalParts(IList<string> parts, ref long number, long divisor, GrammaticalGender gender, string singular, string plural, string ordinal)
-    {
-        if (number < divisor)
-        {
-            return;
-        }
-
-        var result = number / divisor;
-        number %= divisor;
-
-        CollectPartsUnderOneThousand(parts, ref result, gender);
-
-        if (number == 0)
-        {
-            parts.Add(ordinal);
-        }
-        else
-        {
-            parts.Add(result == 1 ? singular : plural);
         }
     }
 
@@ -233,19 +155,30 @@ class BulgarianNumberToWordsConverter() :
             _ => UnitsMap[number],
         };
 
-    static string SelectForm(long number, params string[] forms) =>
-        number switch
-        {
-            1 => forms[0],
-            _ => forms[1]
-        };
-
-    static string GetEnding(GrammaticalGender gender) =>
+    static string OrdinalZero(GrammaticalGender gender) =>
         gender switch
         {
-            GrammaticalGender.Masculine => "и",
-            GrammaticalGender.Feminine => "а",
-            GrammaticalGender.Neuter => "о",
+            GrammaticalGender.Masculine => "нулев",
+            GrammaticalGender.Feminine => "нулева",
+            GrammaticalGender.Neuter => "нулево",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
+        };
+
+    static string ToOrdinalOverAHundred(string word, GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Masculine => $"{word}ен",
+            GrammaticalGender.Feminine => $"{word}на",
+            GrammaticalGender.Neuter => $"{word}но",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender))
+        };
+
+    static string ToOrdinalUnitsAndTens(string word, GrammaticalGender gender) =>
+        gender switch
+        {
+            GrammaticalGender.Masculine => $"{word}и",
+            GrammaticalGender.Feminine => $"{word}а",
+            GrammaticalGender.Neuter => $"{word}о",
             _ => throw new ArgumentOutOfRangeException(nameof(gender))
         };
 }
