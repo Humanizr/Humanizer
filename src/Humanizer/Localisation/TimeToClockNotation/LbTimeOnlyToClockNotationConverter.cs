@@ -6,32 +6,32 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
-        var roundedTime = roundToNearestFive is ClockNotationRounding.NearestFiveMinutes
+        var rounded = roundToNearestFive is ClockNotationRounding.NearestFiveMinutes
             ? GetRoundedTime(time)
             : time;
 
-        return roundedTime switch
+        return rounded switch
         {
             {Hour: 0, Minute: 0} => "Mëtternuecht",
             {Hour: 12, Minute: 0} => "Mëtteg",
-            _ => roundedTime.Minute switch
+            _ => rounded.Minute switch
             {
-                00 => GetHourExpression(roundedTime.Hour, "Auer"),
-                15 => $"Véirel op {GetHourExpression(roundedTime.Hour)}",
-                25 => $"{GetMinuteExpression(30 - roundedTime.Minute, "vir")} hallwer {GetHourExpression(roundedTime.Hour + 1)}",
-                30 => $"hallwer {GetHourExpression(roundedTime.Hour + 1)}",
-                35 => $"{GetMinuteExpression(roundedTime.Minute - 30, "op")} hallwer {GetHourExpression(roundedTime.Hour + 1)}",
-                45 => $"Véirel vir {GetHourExpression(roundedTime.Hour + 1)}",
-                60 => GetHourExpression(roundedTime.Hour + 1, "Auer"),
-                01 => $"{GetMinuteExpression(roundedTime.Minute, "Minutt")} op {GetHourExpression(roundedTime.Hour)}",
-                59 => $"{GetMinuteExpression(60 - roundedTime.Minute, "Minutt")} vir {GetHourExpression(roundedTime.Hour + 1)}",
-                05 or 10 or 20 => $"{GetMinuteExpression(roundedTime.Minute, "op")} {GetHourExpression(roundedTime.Hour)}",
-                40 or 50 or 55 => $"{GetMinuteExpression(60 - roundedTime.Minute, "vir")} {GetHourExpression(roundedTime.Hour + 1)}",
-                > 00 and < 25 => $"{GetMinuteExpression(roundedTime.Minute, "Minutten")} op {GetHourExpression(roundedTime.Hour)}",
-                > 25 and < 30 => $"{GetMinuteExpression(30 - roundedTime.Minute, "Minutten")} vir hallwer {GetHourExpression(roundedTime.Hour + 1)}",
-                > 30 and < 35 => $"{GetMinuteExpression(roundedTime.Minute - 30, "Minutten")} op hallwer {GetHourExpression(roundedTime.Hour + 1)}",
-                > 35 and < 60 => $"{GetMinuteExpression(60 - roundedTime.Minute, "Minutten")} vir {GetHourExpression(roundedTime.Hour + 1)}",
-                _ => $"{GetHourExpression(time.Hour, "Auer")} {GetMinuteExpression(time.Minute)}"
+                00 => Hours(rounded.Hour, "Auer"),
+                15 => $"Véirel op {Hours(rounded.Hour)}",
+                25 => $"{Minutes(30 - rounded.Minute, "vir")} hallwer {Hours(rounded.Hour + 1)}",
+                30 => $"hallwer {Hours(rounded.Hour + 1)}",
+                35 => $"{Minutes(rounded.Minute - 30, "op")} hallwer {Hours(rounded.Hour + 1)}",
+                45 => $"Véirel vir {Hours(rounded.Hour + 1)}",
+                60 => Hours(rounded.Hour + 1, "Auer"),
+                01 => $"{Minutes(rounded.Minute, "Minutt")} op {Hours(rounded.Hour)}",
+                59 => $"{Minutes(60 - rounded.Minute, "Minutt")} vir {Hours(rounded.Hour + 1)}",
+                05 or 10 or 20 => $"{Minutes(rounded.Minute, "op")} {Hours(rounded.Hour)}",
+                40 or 50 or 55 => $"{Minutes(60 - rounded.Minute, "vir")} {Hours(rounded.Hour + 1)}",
+                > 00 and < 25 => $"{Minutes(rounded.Minute, "Minutten")} op {Hours(rounded.Hour)}",
+                > 25 and < 30 => $"{Minutes(30 - rounded.Minute, "Minutten")} vir hallwer {Hours(rounded.Hour + 1)}",
+                > 30 and < 35 => $"{Minutes(rounded.Minute - 30, "Minutten")} op hallwer {Hours(rounded.Hour + 1)}",
+                > 35 and < 60 => $"{Minutes(60 - rounded.Minute, "Minutten")} vir {Hours(rounded.Hour + 1)}",
+                _ => $"{Hours(time.Hour, "Auer")} {Minutes(time.Minute)}"
             }
         };
     }
@@ -44,10 +44,10 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
         return new(roundedHours, roundedMinutes);
     }
 
-    static string GetMinuteExpression(int minute, string? nextWord = null)
+    static string Minutes(int minute, string? nextWord = null)
         => GetFormattedExpression(minute, nextWord);
 
-    static string GetHourExpression(int hour, string? nextWord = null)
+    static string Hours(int hour, string? nextWord = null)
     {
         var normalizedHour = hour % 12;
         var hourExpression = normalizedHour == 0 ? 12 : normalizedHour;
