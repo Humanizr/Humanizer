@@ -4,49 +4,87 @@ namespace Humanizer;
 
 class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
-    const int MORNING = 6;
-    const int NOON = 12;
-    const int AFTERNOON = 21;
-
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
         switch (time)
         {
-            case { Hour: 0, Minute: 0 }:
+            case {Hour: 0, Minute: 0}:
                 return "medianoche";
 
-            case { Hour: 12, Minute: 0 }:
+            case {Hour: 12, Minute: 0}:
                 return "mediodía";
         }
 
         var article = GetArticle(time);
-        var articleNextHour = GetArticle(time.AddHours(1));
-        var hour = NormalizeHour(time).ToWords(GrammaticalGender.Feminine);
-        var nextHour = NormalizeHour(time.AddHours(1)).ToWords(GrammaticalGender.Feminine);
-        var dayPeriod = GetDayPeriod(time);
-        var dayPeriodNextHour = GetDayPeriod(time.AddHours(1));
 
-        var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
-            ? 5 * Math.Round(time.Minute / 5.0)
-            : time.Minute);
+        var normalizedMinutes = NormalizedMinutes(time, roundToNearestFive);
 
-        var clockNotationMap = new Dictionary<int, string>()
+        if (normalizedMinutes == 0)
         {
-            { 0, $"{article} {hour} {dayPeriod}" },
-            { 15 , $"{article} {hour} y cuarto {dayPeriod}" },
-            { 30 , $"{article} {hour} y media {dayPeriod}"},
-            { 35 , $"{articleNextHour} {nextHour} menos veinticinco {dayPeriodNextHour}"},
-            { 40 , $"{articleNextHour} {nextHour} menos veinte {dayPeriodNextHour}"},
-            { 45 , $"{articleNextHour} {nextHour} menos cuarto {dayPeriodNextHour}"},
-            { 50 , $"{articleNextHour} {nextHour} menos diez {dayPeriodNextHour}"},
-            { 55 , $"{articleNextHour} {nextHour} menos cinco {dayPeriodNextHour}"},
-            { 60 , $"{articleNextHour} {nextHour} {dayPeriodNextHour}"},
-        };
+            return $"{article} {GetHour(time)} {GetDayPeriod(time)}";
+        }
 
-        return clockNotationMap.GetValueOrDefault(
-            normalizedMinutes,
-            $"{article} {hour} y {normalizedMinutes.ToWords()} {dayPeriod}");
+        if (normalizedMinutes == 15)
+        {
+            return $"{article} {GetHour(time)} y cuarto {GetDayPeriod(time)}";
+        }
+
+        if (normalizedMinutes == 30)
+        {
+            return $"{article} {GetHour(time)} y media {GetDayPeriod(time)}";
+        }
+
+        var oneHourForward = time.AddHours(1);
+        if (normalizedMinutes == 35)
+        {
+            return $"{GetArticle(oneHourForward)} {GetNextHour(oneHourForward)} menos veinticinco {GetDayPeriod(oneHourForward)}";
+        }
+
+        if (normalizedMinutes == 40)
+        {
+            return $"{GetArticle(oneHourForward)} {GetNextHour(oneHourForward)} menos veinte {GetDayPeriod(oneHourForward)}";
+        }
+
+        if (normalizedMinutes == 45)
+        {
+            return $"{GetArticle(oneHourForward)} {GetNextHour(oneHourForward)} menos cuarto {GetDayPeriod(oneHourForward)}";
+        }
+
+        if (normalizedMinutes == 50)
+        {
+            return $"{GetArticle(oneHourForward)} {GetNextHour(oneHourForward)} menos diez {GetDayPeriod(oneHourForward)}";
+        }
+
+        if (normalizedMinutes == 55)
+        {
+            return $"{GetArticle(oneHourForward)} {GetNextHour(oneHourForward)} menos cinco {GetDayPeriod(oneHourForward)}";
+        }
+
+        if (normalizedMinutes == 60)
+        {
+            return $"{GetArticle(oneHourForward)} {GetNextHour(oneHourForward)} {GetDayPeriod(oneHourForward)}";
+        }
+
+        return $"{article} {GetHour(time)} y {normalizedMinutes.ToWords()} {GetDayPeriod(time)}";
     }
+
+    static int NormalizedMinutes(TimeOnly time, ClockNotationRounding rounding)
+    {
+        if (rounding == ClockNotationRounding.NearestFiveMinutes)
+        {
+            return (int) (5 * Math.Round(time.Minute / 5.0));
+        }
+
+        return time.Minute;
+    }
+
+    static string GetNextHour(TimeOnly oneHourForward) =>
+        NormalizeHour(oneHourForward)
+            .ToWords(GrammaticalGender.Feminine);
+
+    static string GetHour(TimeOnly time) =>
+        NormalizeHour(time)
+            .ToWords(GrammaticalGender.Feminine);
 
     static int NormalizeHour(TimeOnly time) =>
         time.Hour % 12 != 0 ? time.Hour % 12 : 12;
@@ -73,6 +111,10 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
         return "de la noche";
     }
+
+    const int MORNING = 6;
+    const int NOON = 12;
+    const int AFTERNOON = 21;
 
     static bool IsEarlyMorning(TimeOnly time) =>
         time.Hour is >= 1 and < MORNING;
