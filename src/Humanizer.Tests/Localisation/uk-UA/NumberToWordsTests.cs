@@ -4,6 +4,7 @@
 public class NumberToWordsTests
 {
     [Theory]
+    [InlineData(-123, "мінус сто двадцять три")]
     [InlineData(0, "нуль")]
     [InlineData(1, "один")]
     [InlineData(10, "десять")]

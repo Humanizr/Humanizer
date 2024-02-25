@@ -31,9 +31,9 @@ class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
         CollectParts(parts, ref input, 1000000, GrammaticalGender.Masculine, "миллион", "миллиона", "миллионов");
         CollectParts(parts, ref input, 1000, GrammaticalGender.Feminine, "тысяча", "тысячи", "тысяч");
 
-        if (input > 0)
+        if (input != 0)
         {
-            CollectPartsUnderOneThousand(parts, input, gender);
+            CollectPartsUnderOneThousand(parts, Math.Abs(input), gender);
         }
 
         return string.Join(" ", parts);
@@ -175,10 +175,9 @@ class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
             return;
         }
 
-        number = Math.Abs(number % divisor);
-
         CollectPartsUnderOneThousand(parts, result, gender);
         parts.Add(ChooseOneForGrammaticalNumber(result, forms));
+        number = Math.Abs(number % divisor);
     }
 
     static void CollectOrdinalParts(ICollection<string> parts, ref long number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
