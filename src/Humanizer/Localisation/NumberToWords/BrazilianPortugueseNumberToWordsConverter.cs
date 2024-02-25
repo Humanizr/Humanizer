@@ -40,7 +40,7 @@ class BrazilianPortugueseNumberToWordsConverter :
 
         if (number < 0)
         {
-            return $"menos {ConvertFeminine(Math.Abs(number))}";
+            return $"menos {ConvertMasculine(Math.Abs(number))}";
         }
 
         var parts = new List<string>();
