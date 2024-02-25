@@ -2,8 +2,12 @@
 
 namespace Humanizer;
 
-class BrazilianPortugueseTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
+class BrazilianPortugueseTimeOnlyToClockNotationConverter :
+    ITimeOnlyToClockNotationConverter
 {
+    static CultureInfo culture = new("pt-BR");
+    static INumberToWordsConverter numberToWordsConverter = Configurator.GetNumberToWordsConverter(culture);
+
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
         switch (time)
@@ -15,21 +19,35 @@ class BrazilianPortugueseTimeOnlyToClockNotationConverter : ITimeOnlyToClockNota
         }
 
         var normalizedHour = time.Hour % 12;
-        var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
-            ? 5 * Math.Round(time.Minute / 5.0)
-            : time.Minute);
+        var normalizedMinutes = NormalizedMinutes(time, roundToNearestFive);
 
         return normalizedMinutes switch
         {
-            00 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} em ponto",
-            30 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} e meia",
-            40 => $"vinte para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            45 => $"quinze para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            50 => $"dez para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            55 => $"cinco para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            60 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)} em ponto",
-            _ => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} e {normalizedMinutes.ToWords()}"
+            00 => $"{ToFeminineWords(normalizedHour)} em ponto",
+            30 => $"{ToFeminineWords(normalizedHour)} e meia",
+            40 => $"vinte para as {ToFeminineWords(normalizedHour + 1)}",
+            45 => $"quinze para as {ToFeminineWords(normalizedHour + 1)}",
+            50 => $"dez para as {ToFeminineWords(normalizedHour + 1)}",
+            55 => $"cinco para as {ToFeminineWords(normalizedHour + 1)}",
+            60 => $"{ToFeminineWords(normalizedHour + 1)} em ponto",
+            _ => $"{ToFeminineWords(normalizedHour)} e {ToMasculineWords(normalizedMinutes)}"
         };
+    }
+
+    static string ToFeminineWords(int normalizedHour) =>
+        numberToWordsConverter.Convert(normalizedHour,GrammaticalGender.Feminine);
+
+    static string ToMasculineWords(int normalizedHour) =>
+        numberToWordsConverter.Convert(normalizedHour,GrammaticalGender.Masculine);
+
+    static int NormalizedMinutes(TimeOnly time, ClockNotationRounding roundToNearestFive)
+    {
+        if (roundToNearestFive == ClockNotationRounding.NearestFiveMinutes)
+        {
+            return (int) (5 * Math.Round(time.Minute / 5.0));
+        }
+
+        return time.Minute;
     }
 }
 
