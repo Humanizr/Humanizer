@@ -4,6 +4,10 @@ namespace Humanizer;
 
 class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
+    static string tenMinutes = 10.ToWords();
+    static        string oneMinute = 1.ToWords(GrammaticalGender.Feminine);
+    static        string fiveMinutes = 5.ToWords();
+
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
         var rounded = roundToNearestFive is ClockNotationRounding.NearestFiveMinutes
@@ -29,13 +33,13 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             35 => $"{Minutes(5, "op")} hallwer {Hours(rounded.Hour + 1)}",
             45 => $"Véirel vir {Hours(rounded.Hour + 1)}",
             60 => Hours(rounded.Hour + 1, "Auer"),
-            01 => $"{Minutes(1, "Minutt")} op {Hours(rounded.Hour)}",
-            59 => $"{Minutes(1, "Minutt")} vir {Hours(rounded.Hour + 1)}",
+            01 => $"{oneMinute} Minutt op {Hours(rounded.Hour)}",
+            59 => $"{oneMinute} Minutt vir {Hours(rounded.Hour + 1)}",
             05 => $"{Minutes(5, "op")} {Hours(rounded.Hour)}",
-            10 => $"{Minutes(10, "op")} {Hours(rounded.Hour)}",
+            10 => $"{tenMinutes} op {Hours(rounded.Hour)}",
             20 => $"{Minutes(20, "op")} {Hours(rounded.Hour)}",
             40 => $"{Minutes(20, "vir")} {Hours(rounded.Hour + 1)}",
-            50 => $"{Minutes(10, "vir")} {Hours(rounded.Hour + 1)}",
+            50 => $"{tenMinutes} vir {Hours(rounded.Hour + 1)}",
             55 => $"{Minutes(5, "vir")} {Hours(rounded.Hour + 1)}",
             > 00 and < 25 => $"{Minutes(rounded.Minute, "Minutten")} op {Hours(rounded.Hour)}",
             > 25 and < 30 => $"{Minutes(30 - rounded.Minute, "Minutten")} vir hallwer {Hours(rounded.Hour + 1)}",
@@ -58,6 +62,11 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
     static string Minutes(int minute, string nextWord)
         => GetFormattedExpression(minute, nextWord);
+
+    static string FiveMinutes(string nextWord)
+    {
+        return $"{fiveMinutes} {nextWord}";
+    }
 
     static string Hours(int hour)
     {
