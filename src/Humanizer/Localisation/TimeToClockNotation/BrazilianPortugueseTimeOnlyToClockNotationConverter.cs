@@ -5,8 +5,7 @@ namespace Humanizer;
 class BrazilianPortugueseTimeOnlyToClockNotationConverter :
     ITimeOnlyToClockNotationConverter
 {
-    static CultureInfo culture = new("pt-BR");
-    static INumberToWordsConverter numberToWordsConverter = Configurator.GetNumberToWordsConverter(culture);
+    static INumberToWordsConverter numberToWordsConverter = Configurator.GetNumberToWordsConverter(new("pt-BR"));
 
     public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
