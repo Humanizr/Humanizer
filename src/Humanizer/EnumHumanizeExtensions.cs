@@ -9,7 +9,7 @@ public static class EnumHumanizeExtensions
     /// Turns an enum member into a human readable string; e.g. AnonymousUser -> Anonymous user. It also honors DescriptionAttribute data annotation
     /// </summary>
     /// <param name="input">The enum member to be humanized</param>
-    public static string Humanize<T>(this T input)
+    public static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(this T input)
         where T : struct, Enum
     {
         var (zero, humanized, values) = EnumCache<T>.GetInfo();
@@ -31,7 +31,7 @@ public static class EnumHumanizeExtensions
     /// </summary>
     /// <param name="input">The enum member to be humanized</param>
     /// <param name="casing">The casing to use for humanizing the enum member</param>
-    public static string Humanize<T>(this T input, LetterCasing casing)
+    public static string Humanize<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>(this T input, LetterCasing casing)
         where T : struct, Enum
     {
         var humanizedEnum = Humanize(input);
