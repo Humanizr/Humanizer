@@ -67,6 +67,7 @@ class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
 
         if (isOrdinal && parts[0] == "one")
         {
+            // one hundred => hundredth
             parts.RemoveAt(0);
         }
 
