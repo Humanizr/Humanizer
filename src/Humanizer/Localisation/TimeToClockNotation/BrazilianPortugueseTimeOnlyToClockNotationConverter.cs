@@ -35,10 +35,10 @@ class BrazilianPortugueseTimeOnlyToClockNotationConverter :
     }
 
     static string ToFeminineWords(int normalizedHour) =>
-        numberToWordsConverter.Convert(normalizedHour,GrammaticalGender.Feminine);
+        numberToWordsConverter.Convert(normalizedHour, GrammaticalGender.Feminine);
 
     static string ToMasculineWords(int normalizedHour) =>
-        numberToWordsConverter.Convert(normalizedHour,GrammaticalGender.Masculine);
+        numberToWordsConverter.Convert(normalizedHour, GrammaticalGender.Masculine);
 
     static int NormalizedMinutes(TimeOnly time, ClockNotationRounding roundToNearestFive)
     {
