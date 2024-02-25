@@ -38,10 +38,10 @@ class LbTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
     private static TimeOnly GetRoundedTime(TimeOnly time)
     {
-        var tempRoundedMinutes = (int) (5 * Math.Round(time.Minute / 5.0));
-        var roundedHours = tempRoundedMinutes == 60 ? time.Hour + 1 : time.Hour;
-        var roundedMinutes = tempRoundedMinutes == 60 ? 0 : tempRoundedMinutes;
-        return new(roundedHours, roundedMinutes);
+        var tempMinutes = (int) (5 * Math.Round(time.Minute / 5.0));
+        var hours = tempMinutes == 60 ? time.Hour + 1 : time.Hour;
+        var minutes = tempMinutes == 60 ? 0 : tempMinutes;
+        return new(hours, minutes);
     }
 
     static string Minutes(int minute, string? nextWord = null)
