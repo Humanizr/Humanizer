@@ -1949,9 +1949,143 @@ namespace Humanizer
         public string? Singularize(string? word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
     }
     public enum WordForm
-    {
+{
         Normal = 0,
         Abbreviation = 1,
         Eifeler = 2,
+    }
+}
+namespace Humanizer.Localisation
+{
+    public enum DataUnit
+    {
+        Bit = 0,
+        Byte = 1,
+        Kilobyte = 2,
+        Megabyte = 3,
+        Gigabyte = 4,
+        Terabyte = 5,
+    }
+    public class ResourceKeys
+    {
+        public ResourceKeys() { }
+        public class static DateHumanize
+        {
+            public const string Never = "DateHumanize_Never";
+            public const string Now = "DateHumanize_Now";
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int count = 1) { }
+        }
+        public class static TimeSpanHumanize
+        {
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit, int count = 1, bool toWords = False) { }
+        }
+        public class static TimeUnitSymbol
+        {
+            public static string GetResourceKey(Humanizer.Localisation.TimeUnit unit) { }
+        }
+    }
+    public class static Resources
+    {
+        public static string GetResource(string resourceKey, System.Globalization.CultureInfo culture = null) { }
+    }
+    public enum Tense
+    {
+        Future = 0,
+        Past = 1,
+    }
+    public enum TimeUnit
+    {
+        Millisecond = 0,
+        Second = 1,
+        Minute = 2,
+        Hour = 3,
+        Day = 4,
+        Week = 5,
+        Month = 6,
+        Year = 7,
+    }
+}
+namespace Humanizer.Localisation.DateToOrdinalWords
+{
+    public interface IDateOnlyToOrdinalWordConverter
+    {
+        string Convert(System.DateOnly date);
+        string Convert(System.DateOnly date, Humanizer.GrammaticalCase grammaticalCase);
+    }
+    public interface IDateToOrdinalWordConverter
+    {
+        string Convert(System.DateTime date);
+        string Convert(System.DateTime date, Humanizer.GrammaticalCase grammaticalCase);
+    }
+}
+namespace Humanizer.Localisation.Formatters
+{
+    public class DefaultFormatter : Humanizer.Localisation.Formatters.IFormatter
+    {
+        public DefaultFormatter(string localeCode) { }
+        public virtual string DataUnitHumanize(Humanizer.Localisation.DataUnit dataUnit, double count, bool toSymbol = True) { }
+        public virtual string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit) { }
+        public virtual string DateHumanize_Never() { }
+        public virtual string DateHumanize_Now() { }
+        protected virtual string Format(string resourceKey) { }
+        protected virtual string Format(string resourceKey, int number, bool toWords = False) { }
+        protected virtual string GetResourceKey(string resourceKey, int number) { }
+        protected virtual string GetResourceKey(string resourceKey) { }
+        public virtual string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False) { }
+        public virtual string TimeSpanHumanize_Zero() { }
+        public virtual string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit) { }
+    }
+    public interface IFormatter
+    {
+        string DataUnitHumanize(Humanizer.Localisation.DataUnit dataUnit, double count, bool toSymbol = True);
+        string DateHumanize(Humanizer.Localisation.TimeUnit timeUnit, Humanizer.Localisation.Tense timeUnitTense, int unit);
+        string DateHumanize_Never();
+        string DateHumanize_Now();
+        string TimeSpanHumanize(Humanizer.Localisation.TimeUnit timeUnit, int unit, bool toWords = False);
+        string TimeSpanHumanize_Zero();
+        string TimeUnitHumanize(Humanizer.Localisation.TimeUnit timeUnit);
+    }
+}
+namespace Humanizer.Localisation.NumberToWords
+{
+    public interface INumberToWordsConverter
+    {
+        string Convert(long number);
+        string Convert(long number, Humanizer.WordForm wordForm);
+        string Convert(long number, bool addAnd);
+        string Convert(long number, bool addAnd, Humanizer.WordForm wordForm);
+        string Convert(long number, Humanizer.GrammaticalGender gender, bool addAnd = True);
+        string Convert(long number, Humanizer.WordForm wordForm, Humanizer.GrammaticalGender gender, bool addAnd = True);
+        string ConvertToOrdinal(int number);
+        string ConvertToOrdinal(int number, Humanizer.WordForm wordForm);
+        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender);
+        string ConvertToOrdinal(int number, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
+        string ConvertToTuple(int number);
+    }
+}
+namespace Humanizer.Localisation.Ordinalizers
+{
+    public interface IOrdinalizer
+    {
+        string Convert(int number, string numberString);
+        string Convert(int number, string numberString, Humanizer.WordForm wordForm);
+        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender);
+        string Convert(int number, string numberString, Humanizer.GrammaticalGender gender, Humanizer.WordForm wordForm);
+    }
+}
+namespace Humanizer.Localisation.TimeToClockNotation
+{
+    public class static German
+    {
+        public const string MidDay = "Mittag";
+        public const string MidNight = "Mitternacht";
+        public static readonly System.Collections.Generic.IReadOnlyList<string> QuarterDay;
+        public static string AsClockDe(this System.TimeOnly time, Humanizer.ClockNotationRounding round, bool asWords = False) { }
+        public static string GetDayQuarterGerman(this System.TimeOnly time) { }
+        public static string GetDayQuarterGermanGenitive(this System.TimeOnly time) { }
+    }
+    public interface ITimeOnlyToClockNotationConverter
+    {
+        string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive);
     }
 }
