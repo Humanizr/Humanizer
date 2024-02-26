@@ -18,20 +18,14 @@ class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
     public override string ConvertToOrdinal(int number) =>
         $"thứ {ConvertToOrdinalImpl(number)}";
 
-    string ConvertToOrdinalImpl(int number)
-    {
-        switch (number)
+    string ConvertToOrdinalImpl(int number) =>
+        number switch
         {
-            case 1:
-                return "nhất";
-            case 2:
-                return "nhì";
-            case 4:
-                return "tư";
-            default:
-                return Convert(number);
-        }
-    }
+            1 => "nhất",
+            2 => "nhì",
+            4 => "tư",
+            _ => Convert(number)
+        };
 
     static string ConvertImpl(long number, bool hasTens = false, bool isGreaterThanOneHundred = false)
     {

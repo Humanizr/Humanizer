@@ -222,15 +222,11 @@ class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
             // suffix -de/-te
             if (number % m.Value == 0)
             {
-                switch (number)
+                word += number switch
                 {
-                    case 1_000_000:
-                        word += "te";
-                        break;
-                    default:
-                        word += "de";
-                        break;
-                }
+                    1_000_000 => "te",
+                    _ => "de"
+                };
             }
 
             number %= m.Value;

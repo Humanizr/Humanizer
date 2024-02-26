@@ -103,27 +103,18 @@ public static class TimeSpanHumanizeExtensions
     static int GetTimeUnitNumericalValue(TimeUnit timeUnitToGet, TimeSpan timespan, TimeUnit maximumTimeUnit)
     {
         var isTimeUnitToGetTheMaximumTimeUnit = timeUnitToGet == maximumTimeUnit;
-        switch (timeUnitToGet)
+        return timeUnitToGet switch
         {
-            case TimeUnit.Millisecond:
-                return GetNormalCaseTimeAsInteger(timespan.Milliseconds, timespan.TotalMilliseconds, isTimeUnitToGetTheMaximumTimeUnit);
-            case TimeUnit.Second:
-                return GetNormalCaseTimeAsInteger(timespan.Seconds, timespan.TotalSeconds, isTimeUnitToGetTheMaximumTimeUnit);
-            case TimeUnit.Minute:
-                return GetNormalCaseTimeAsInteger(timespan.Minutes, timespan.TotalMinutes, isTimeUnitToGetTheMaximumTimeUnit);
-            case TimeUnit.Hour:
-                return GetNormalCaseTimeAsInteger(timespan.Hours, timespan.TotalHours, isTimeUnitToGetTheMaximumTimeUnit);
-            case TimeUnit.Day:
-                return GetSpecialCaseDaysAsInteger(timespan, maximumTimeUnit);
-            case TimeUnit.Week:
-                return GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
-            case TimeUnit.Month:
-                return GetSpecialCaseMonthAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit);
-            case TimeUnit.Year:
-                return GetSpecialCaseYearAsInteger(timespan);
-            default:
-                return 0;
-        }
+            TimeUnit.Millisecond => GetNormalCaseTimeAsInteger(timespan.Milliseconds, timespan.TotalMilliseconds, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Second => GetNormalCaseTimeAsInteger(timespan.Seconds, timespan.TotalSeconds, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Minute => GetNormalCaseTimeAsInteger(timespan.Minutes, timespan.TotalMinutes, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Hour => GetNormalCaseTimeAsInteger(timespan.Hours, timespan.TotalHours, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Day => GetSpecialCaseDaysAsInteger(timespan, maximumTimeUnit),
+            TimeUnit.Week => GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Month => GetSpecialCaseMonthAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Year => GetSpecialCaseYearAsInteger(timespan),
+            _ => 0
+        };
     }
 
     static int GetSpecialCaseMonthAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)

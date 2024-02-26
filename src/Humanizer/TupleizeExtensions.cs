@@ -13,36 +13,21 @@ public static class TupleizeExtensions
     /// </summary>
     /// <param name="input">Integer</param>
     /// <returns>Named tuple</returns>
-    public static string Tupleize(this int input)
-    {
-        switch (input)
+    public static string Tupleize(this int input) =>
+        input switch
         {
-            case 1:
-                return "single";
-            case 2:
-                return "double";
-            case 3:
-                return "triple";
-            case 4:
-                return "quadruple";
-            case 5:
-                return "quintuple";
-            case 6:
-                return "sextuple";
-            case 7:
-                return "septuple";
-            case 8:
-                return "octuple";
-            case 9:
-                return "nonuple";
-            case 10:
-                return "decuple";
-            case 100:
-                return "centuple";
-            case 1000:
-                return "milluple";
-            default:
-                return $"{input}-tuple";
-        }
-    }
+            1 => "single",
+            2 => "double",
+            3 => "triple",
+            4 => "quadruple",
+            5 => "quintuple",
+            6 => "sextuple",
+            7 => "septuple",
+            8 => "octuple",
+            9 => "nonuple",
+            10 => "decuple",
+            100 => "centuple",
+            1000 => "milluple",
+            _ => $"{input}-tuple"
+        };
 }

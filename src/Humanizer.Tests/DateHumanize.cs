@@ -51,7 +51,6 @@
                 Configurator.DateTimeHumanizeStrategy = new DefaultDateTimeHumanizeStrategy();
             }
 
-            var deltaFromNow = new TimeSpan();
             unit = Math.Abs(unit);
 
             if (tense == Tense.Past)
@@ -59,30 +58,17 @@
                 unit = -unit;
             }
 
-            switch (timeUnit)
+            var deltaFromNow = timeUnit switch
             {
-                case TimeUnit.Millisecond:
-                    deltaFromNow = TimeSpan.FromMilliseconds(unit);
-                    break;
-                case TimeUnit.Second:
-                    deltaFromNow = TimeSpan.FromSeconds(unit);
-                    break;
-                case TimeUnit.Minute:
-                    deltaFromNow = TimeSpan.FromMinutes(unit);
-                    break;
-                case TimeUnit.Hour:
-                    deltaFromNow = TimeSpan.FromHours(unit);
-                    break;
-                case TimeUnit.Day:
-                    deltaFromNow = TimeSpan.FromDays(unit);
-                    break;
-                case TimeUnit.Month:
-                    deltaFromNow = TimeSpan.FromDays(unit * 31);
-                    break;
-                case TimeUnit.Year:
-                    deltaFromNow = TimeSpan.FromDays(unit * 366);
-                    break;
-            }
+                TimeUnit.Millisecond => TimeSpan.FromMilliseconds(unit),
+                TimeUnit.Second => TimeSpan.FromSeconds(unit),
+                TimeUnit.Minute => TimeSpan.FromMinutes(unit),
+                TimeUnit.Hour => TimeSpan.FromHours(unit),
+                TimeUnit.Day => TimeSpan.FromDays(unit),
+                TimeUnit.Month => TimeSpan.FromDays(unit * 31),
+                TimeUnit.Year => TimeSpan.FromDays(unit * 366),
+                _ => new()
+            };
 
             if (baseDate == null)
             {
