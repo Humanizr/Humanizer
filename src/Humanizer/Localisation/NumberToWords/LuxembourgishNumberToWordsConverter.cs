@@ -2,17 +2,17 @@
 
 class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
 {
-    private readonly string[] UnitsMap = ["null", "een", "zwee", "dräi", "véier", "fënnef", "sechs", "siwen", "aacht", "néng", "zéng", "eelef", "zwielef", "dräizéng", "véierzéng", "fofzéng", "siechzéng", "siwwenzéng", "uechtzéng", "nonzéng"];
-    private readonly string[] TensMap = ["null", "zéng", "zwanzeg", "drësseg", "véierzeg", "fofzeg", "sechzeg", "siwwenzeg", "achtzeg", "nonzeg"];
-    private readonly string[] UnitsOrdinal = [string.Empty, "éisch", "zwee", "drët", "véier", "fënnef", "sechs", "siwen", "aach", "néng", "zéng", "eelef", "zwielef", "dräizéng", "véierzéng", "fofzéng", "siechzéng", "siwwenzéng", "uechtzéng", "nonzéng"];
-    private readonly string[] HundredOrdinalSingular = ["eenhonnert"];
-    private readonly string[] HundredOrdinalPlural = ["{0}honnert"];
-    private readonly string[] ThousandOrdinalSingular = ["eendausend"];
-    private readonly string[] ThousandOrdinalPlural = ["{0}dausend"];
-    private readonly string[] MillionOrdinalSingular = ["eemillioun", "engmillioun"];
-    private readonly string[] MillionOrdinalPlural = ["{0}millioun", "{0}milliounen"];
-    private readonly string[] BillionOrdinalSingular = ["eemilliard", "engmilliard"];
-    private readonly string[] BillionOrdinalPlural = ["{0}milliard", "{0}milliarden"];
+    static readonly string[] UnitsMap = ["null", "een", "zwee", "dräi", "véier", "fënnef", "sechs", "siwen", "aacht", "néng", "zéng", "eelef", "zwielef", "dräizéng", "véierzéng", "fofzéng", "siechzéng", "siwwenzéng", "uechtzéng", "nonzéng"];
+    static readonly string[] TensMap = ["null", "zéng", "zwanzeg", "drësseg", "véierzeg", "fofzeg", "sechzeg", "siwwenzeg", "achtzeg", "nonzeg"];
+    static readonly string[] UnitsOrdinal = [string.Empty, "éisch", "zwee", "drët", "véier", "fënnef", "sechs", "siwen", "aach", "néng", "zéng", "eelef", "zwielef", "dräizéng", "véierzéng", "fofzéng", "siechzéng", "siwwenzéng", "uechtzéng", "nonzéng"];
+    static readonly string[] HundredOrdinalSingular = ["eenhonnert"];
+    static readonly string[] HundredOrdinalPlural = ["{0}honnert"];
+    static readonly string[] ThousandOrdinalSingular = ["eendausend"];
+    static readonly string[] ThousandOrdinalPlural = ["{0}dausend"];
+    static readonly string[] MillionOrdinalSingular = ["eemillioun", "engmillioun"];
+    static readonly string[] MillionOrdinalPlural = ["{0}millioun", "{0}milliounen"];
+    static readonly string[] BillionOrdinalSingular = ["eemilliard", "engmilliard"];
+    static readonly string[] BillionOrdinalPlural = ["{0}milliard", "{0}milliarden"];
 
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
         => Convert(number, WordForm.Normal, gender, addAnd);
