@@ -134,20 +134,14 @@ abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
     static int NoRestIndex(int number) =>
         number == 0 ? 0 : 1;
 
-    static string GetEndingForGender(GrammaticalGender gender)
-    {
-        switch (gender)
+    static string GetEndingForGender(GrammaticalGender gender) =>
+        gender switch
         {
-            case GrammaticalGender.Masculine:
-                return "ter";
-            case GrammaticalGender.Feminine:
-                return "te";
-            case GrammaticalGender.Neuter:
-                return "tes";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gender));
-        }
-    }
+            GrammaticalGender.Masculine => "ter",
+            GrammaticalGender.Feminine => "te",
+            GrammaticalGender.Neuter => "tes",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender))
+        };
 
     protected virtual string GetTens(long tens) =>
         TensMap[tens];

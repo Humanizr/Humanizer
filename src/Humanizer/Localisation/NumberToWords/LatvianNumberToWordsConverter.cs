@@ -184,22 +184,13 @@ class LatvianNumberToWordsConverter : GenderedNumberToWordsConverter
         return string.Join(" ", parts);
     }
 
-    static string GetOrdinalEndingForGender(GrammaticalGender gender)
-    {
-        switch (gender)
+    static string GetOrdinalEndingForGender(GrammaticalGender gender) =>
+        gender switch
         {
-            case GrammaticalGender.Masculine:
-            {
-                return "ais";
-            }
-            case GrammaticalGender.Feminine:
-            {
-                return "ā";
-            }
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gender));
-        }
-    }
+            GrammaticalGender.Masculine => "ais",
+            GrammaticalGender.Feminine => "ā",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender))
+        };
 
     static string GetCardinalEndingForGender(GrammaticalGender gender, long number)
     {

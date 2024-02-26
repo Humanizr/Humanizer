@@ -172,24 +172,13 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
     static int GetFormIndex(long number)
     {
         var form = LithuanianNumberFormDetector.Detect(number);
-
-        switch (form)
+        return form switch
         {
-            case LithuanianNumberForm.Singular:
-            {
-                return 0;
-            }
-            case LithuanianNumberForm.Plural:
-            {
-                return 1;
-            }
-            case LithuanianNumberForm.GenitivePlural:
-            {
-                return 2;
-            }
-            default:
-                throw new ArgumentOutOfRangeException(nameof(form));
-        }
+            LithuanianNumberForm.Singular => 0,
+            LithuanianNumberForm.Plural => 1,
+            LithuanianNumberForm.GenitivePlural => 2,
+            _ => throw new ArgumentOutOfRangeException(nameof(form))
+        };
     }
 
     static string GetCardinalNumberForGender(string number, GrammaticalGender gender)
@@ -222,20 +211,11 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
         throw new ArgumentOutOfRangeException(nameof(gender));
     }
 
-    static string GetOrdinalEndingForGender(GrammaticalGender gender)
-    {
-        switch (gender)
+    static string GetOrdinalEndingForGender(GrammaticalGender gender) =>
+        gender switch
         {
-            case GrammaticalGender.Masculine:
-            {
-                return "as";
-            }
-            case GrammaticalGender.Feminine:
-            {
-                return "a";
-            }
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gender));
-        }
-    }
+            GrammaticalGender.Masculine => "as",
+            GrammaticalGender.Feminine => "a",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender))
+        };
 }

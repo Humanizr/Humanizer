@@ -8,24 +8,13 @@ public static class CasingExtensions
     /// <summary>
     /// Changes the casing of the provided input
     /// </summary>
-    public static string ApplyCase(this string input, LetterCasing casing)
-    {
-        switch (casing)
+    public static string ApplyCase(this string input, LetterCasing casing) =>
+        casing switch
         {
-            case LetterCasing.Title:
-                return input.Transform(To.TitleCase);
-
-            case LetterCasing.LowerCase:
-                return input.Transform(To.LowerCase);
-
-            case LetterCasing.AllCaps:
-                return input.Transform(To.UpperCase);
-
-            case LetterCasing.Sentence:
-                return input.Transform(To.SentenceCase);
-
-            default:
-                throw new ArgumentOutOfRangeException(nameof(casing));
-        }
-    }
+            LetterCasing.Title => input.Transform(To.TitleCase),
+            LetterCasing.LowerCase => input.Transform(To.LowerCase),
+            LetterCasing.AllCaps => input.Transform(To.UpperCase),
+            LetterCasing.Sentence => input.Transform(To.SentenceCase),
+            _ => throw new ArgumentOutOfRangeException(nameof(casing))
+        };
 }

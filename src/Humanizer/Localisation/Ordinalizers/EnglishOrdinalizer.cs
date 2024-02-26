@@ -11,19 +11,12 @@ class EnglishOrdinalizer : DefaultOrdinalizer
             return numberString + "th";
         }
 
-        switch (number % 10)
+        return (number % 10) switch
         {
-            case 1:
-                return numberString + "st";
-
-            case 2:
-                return numberString + "nd";
-
-            case 3:
-                return numberString + "rd";
-
-            default:
-                return numberString + "th";
-        }
+            1 => numberString + "st",
+            2 => numberString + "nd",
+            3 => numberString + "rd",
+            _ => numberString + "th"
+        };
     }
 }

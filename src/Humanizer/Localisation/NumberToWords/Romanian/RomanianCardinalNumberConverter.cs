@@ -162,38 +162,16 @@ class RomanianCardinalNumberConverter
     /// to use for the next three-digit set.
     /// </summary>
     /// <returns>The next conversion function to use.</returns>
-    Func<int, GrammaticalGender, string>? GetNextPartConverter(ThreeDigitSets currentSet)
-    {
-        Func<int, GrammaticalGender, string>? converter;
-
-        switch (currentSet)
+    Func<int, GrammaticalGender, string>? GetNextPartConverter(ThreeDigitSets currentSet) =>
+        currentSet switch
         {
-            case ThreeDigitSets.Units:
-                converter = UnitsConverter;
-                break;
-
-            case ThreeDigitSets.Thousands:
-                converter = ThousandsConverter;
-                break;
-
-            case ThreeDigitSets.Millions:
-                converter = MillionsConverter;
-                break;
-
-            case ThreeDigitSets.Billions:
-                converter = BillionsConverter;
-                break;
-
-            case ThreeDigitSets.More:
-                converter = null;
-                break;
-
-            default:
-                throw new ArgumentOutOfRangeException("Unknow ThreeDigitSet: " + currentSet);
-        }
-
-        return converter;
-    }
+            ThreeDigitSets.Units => UnitsConverter,
+            ThreeDigitSets.Thousands => ThousandsConverter,
+            ThreeDigitSets.Millions => MillionsConverter,
+            ThreeDigitSets.Billions => BillionsConverter,
+            ThreeDigitSets.More => null,
+            _ => throw new ArgumentOutOfRangeException("Unknow ThreeDigitSet: " + currentSet)
+        };
 
     /// <summary>
     /// Converts a three-digit set to text.
