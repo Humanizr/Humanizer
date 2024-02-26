@@ -2,17 +2,12 @@
 
 class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
-
-    readonly string[] UnitsMap = ["μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
-
-    readonly string[] TensMap = ["", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα"];
-
-    readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
-
-    readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
-
-    readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
+    static readonly string[] UnitMap = ["μηδέν", "ένα", "δύο", "τρία", "τέσσερα", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+    static readonly string[] UnitsMap = ["μηδέν", "ένα", "δύο", "τρείς", "τέσσερις", "πέντε", "έξι", "επτά", "οκτώ", "εννέα", "δέκα", "έντεκα", "δώδεκα"];
+    static readonly string[] TensMap = ["", "δέκα", "είκοσι", "τριάντα", "σαράντα", "πενήντα", "εξήντα", "εβδομήντα", "ογδόντα", "ενενήντα"];
+    static readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
+    static readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
+    static readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
 
     static readonly Dictionary<long, string> ΟrdinalMap = new()
     {
@@ -239,7 +234,7 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
         return "";
     }
 
-    string ConvertIntB13(long number, bool returnPluralized) =>
+    static string ConvertIntB13(long number, bool returnPluralized) =>
         returnPluralized ? UnitsMap[number] : UnitMap[number];
 
     string ConvertIntBH(long number, bool returnPluralized)
