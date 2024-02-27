@@ -5,7 +5,7 @@
 /// </summary>
 public class DefaultFormatter(CultureInfo culture) : IFormatter
 {
-    protected CultureInfo Culture => culture;
+    protected CultureInfo Culture { get; } = culture;
 
     public DefaultFormatter(string localeCode)
         : this(new CultureInfo(localeCode))
