@@ -1,6 +1,6 @@
 ﻿namespace Humanizer;
 
-class SpanishOrdinalizer : DefaultOrdinalizer
+class SpanishOrdinalizer(CultureInfo culture) : DefaultOrdinalizer
 {
     public override string Convert(int number, string numberString) =>
         Convert(number, numberString, GrammaticalGender.Masculine, WordForm.Normal);
@@ -33,10 +33,8 @@ class SpanishOrdinalizer : DefaultOrdinalizer
         }
     }
 
-    static CultureInfo _spanishCulture = new("es-ES");
-
-    static string GetNumberString(int number) =>
-        number.ToString(_spanishCulture);
+    string GetNumberString(int number) =>
+        number.ToString(culture);
 
     static string GetWordForm(int number, WordForm wordForm) =>
         (number % 10 == 1 || number % 10 == 3) && wordForm == WordForm.Abbreviation ? ".er" : ".º";

@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class LithuanianFormatter() :
-    DefaultFormatter("lt")
+class LithuanianFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     protected override string GetResourceKey(string resourceKey, int number)
     {

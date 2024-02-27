@@ -1,6 +1,6 @@
 ﻿namespace Humanizer;
 
-class CroatianNumberToWordsConverter(CultureInfo? culture)
+class CroatianNumberToWordsConverter(CultureInfo culture)
     : GenderlessNumberToWordsConverter
 {
     static readonly string[] UnitsMap =

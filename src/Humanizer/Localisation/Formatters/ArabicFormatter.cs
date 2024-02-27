@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class ArabicFormatter() :
-    DefaultFormatter("ar")
+class ArabicFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     const string DualPostfix = "_Dual";
     const string PluralPostfix = "_Plural";

@@ -7,7 +7,7 @@ class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
     {
         Register("de", new GermanOrdinalizer());
         Register("en", new EnglishOrdinalizer());
-        Register("es", new SpanishOrdinalizer());
+        Register("es", c => new SpanishOrdinalizer(c));
         Register("fr", new FrenchOrdinalizer());
         Register("is", new IcelandicOrdinalizer());
         Register("it", new ItalianOrdinalizer());

@@ -6,8 +6,8 @@
 public class LocaliserRegistry<TLocaliser>
     where TLocaliser : class
 {
-    readonly Dictionary<string, Func<CultureInfo?, TLocaliser>> _localisers = new();
-    readonly Func<CultureInfo?, TLocaliser> _defaultLocaliser;
+    readonly Dictionary<string, Func<CultureInfo, TLocaliser>> _localisers = new();
+    readonly Func<CultureInfo, TLocaliser> _defaultLocaliser;
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -18,7 +18,7 @@ public class LocaliserRegistry<TLocaliser>
     /// <summary>
     /// Creates a localiser registry with the default localiser factory set to the provided value
     /// </summary>
-    public LocaliserRegistry(Func<CultureInfo?, TLocaliser> defaultLocaliser) =>
+    public LocaliserRegistry(Func<CultureInfo, TLocaliser> defaultLocaliser) =>
         _defaultLocaliser = defaultLocaliser;
 
     /// <summary>
@@ -31,8 +31,11 @@ public class LocaliserRegistry<TLocaliser>
     /// Gets the localiser for the specified culture
     /// </summary>
     /// <param name="culture">The culture to retrieve localiser for. If not specified, current thread's UI culture is used.</param>
-    public TLocaliser ResolveForCulture(CultureInfo? culture) =>
-        FindLocaliser(culture ?? CultureInfo.CurrentUICulture)(culture);
+    public TLocaliser ResolveForCulture(CultureInfo? culture)
+    {
+        var cultureInfo = culture ?? CultureInfo.CurrentUICulture;
+        return FindLocaliser(cultureInfo)(cultureInfo);
+    }
 
     /// <summary>
     /// Registers the localiser for the culture provided
@@ -43,14 +46,14 @@ public class LocaliserRegistry<TLocaliser>
     /// <summary>
     /// Registers the localiser factory for the culture provided
     /// </summary>
-    public void Register(string localeCode, Func<CultureInfo?, TLocaliser> localiser) =>
+    public void Register(string localeCode, Func<CultureInfo, TLocaliser> localiser) =>
         _localisers[localeCode] = localiser;
 
-    Func<CultureInfo?, TLocaliser> FindLocaliser(CultureInfo culture)
+    Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
     {
-        for (var c = culture; !string.IsNullOrEmpty(c?.Name); c = c.Parent)
+        for (var c = culture; !string.IsNullOrEmpty(c.Name); c = c.Parent)
         {
-            if (_localisers.TryGetValue(c!.Name, out var localiser))
+            if (_localisers.TryGetValue(c.Name, out var localiser))
             {
                 return localiser;
             }

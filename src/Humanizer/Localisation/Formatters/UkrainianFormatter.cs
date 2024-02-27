@@ -1,6 +1,7 @@
 ﻿namespace Humanizer;
 
-class UkrainianFormatter() : DefaultFormatter("uk")
+class UkrainianFormatter(CultureInfo culture)
+    : DefaultFormatter(culture)
 {
     protected override string GetResourceKey(string resourceKey, int number)
     {

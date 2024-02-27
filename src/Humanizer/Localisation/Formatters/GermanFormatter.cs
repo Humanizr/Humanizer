@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class GermanFormatter() :
-    DefaultFormatter("de")
+class GermanFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     /// <inheritdoc />
     public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>

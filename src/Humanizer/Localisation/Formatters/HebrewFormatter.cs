@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class HebrewFormatter() :
-    DefaultFormatter("he")
+class HebrewFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     const string DualPostfix = "_Dual";
     const string PluralPostfix = "_Plural";

@@ -3,24 +3,24 @@
 class FormatterRegistry : LocaliserRegistry<IFormatter>
 {
     public FormatterRegistry()
-        : base(new DefaultFormatter("en-US"))
+        : base(c => new DefaultFormatter(c))
     {
-        Register("ar", new ArabicFormatter());
-        Register("de", new GermanFormatter());
-        Register("he", new HebrewFormatter());
-        Register("ro", new RomanianFormatter());
-        Register("ru", new RussianFormatter());
-        Register("sl", new SlovenianFormatter());
-        Register("hr", new CroatianFormatter());
-        Register("sr", new SerbianFormatter("sr"));
-        Register("sr-Latn", new SerbianFormatter("sr-Latn"));
-        Register("uk", new UkrainianFormatter());
-        Register("fr", new FrenchFormatter("fr"));
-        Register("fr-BE", new FrenchFormatter("fr-BE"));
+        Register("ar", c => new ArabicFormatter(c));
+        Register("de", c => new GermanFormatter(c));
+        Register("he", c => new HebrewFormatter(c));
+        Register("ro", c => new RomanianFormatter(c));
+        Register("ru", c => new RussianFormatter(c));
+        Register("sl", c => new SlovenianFormatter(c));
+        Register("hr", c => new CroatianFormatter(c));
+        Register("sr", c => new SerbianFormatter(c));
+        Register("sr-Latn", c => new SerbianFormatter(c));
+        Register("uk", c => new UkrainianFormatter(c));
+        Register("fr", c => new FrenchFormatter(c));
+        Register("fr-BE", c => new FrenchFormatter(c));
         RegisterCzechSlovakPolishFormatter("cs");
         RegisterCzechSlovakPolishFormatter("pl");
         RegisterCzechSlovakPolishFormatter("sk");
-        Register("bg", new BulgarianFormatter());
+        Register("bg", c => new BulgarianFormatter(c));
         RegisterDefaultFormatter("ku");
         RegisterDefaultFormatter("pt");
         RegisterDefaultFormatter("sv");
@@ -38,11 +38,11 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("hu");
         RegisterDefaultFormatter("hy");
         RegisterDefaultFormatter("id");
-        Register("is", new IcelandicFormatter());
+        Register("is", c => new IcelandicFormatter(c));
         RegisterDefaultFormatter("ja");
         RegisterDefaultFormatter("ko-KR");
         RegisterDefaultFormatter("lv");
-        Register("mt", new MalteseFormatter("mt"));
+        Register("mt", c => new MalteseFormatter(c));
         RegisterDefaultFormatter("ms-MY");
         RegisterDefaultFormatter("nb");
         RegisterDefaultFormatter("nb-NO");
@@ -57,22 +57,13 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("zh-Hant");
         RegisterDefaultFormatter("th-TH");
         RegisterDefaultFormatter("en-IN");
-        Register("lt", new LithuanianFormatter());
-        Register("lb", new LuxembourgishFormatter());
+        Register("lt", c => new LithuanianFormatter(c));
+        Register("lb", c => new LuxembourgishFormatter(c));
     }
 
-    void RegisterDefaultFormatter(string localeCode)
-    {
-        try
-        {
-            Register(localeCode, new DefaultFormatter(localeCode));
-        }
-        catch (CultureNotFoundException)
-        {
-            // Some OS's may not support the particular culture. Not much we can do for those.
-        }
-    }
+    void RegisterDefaultFormatter(string localeCode) =>
+        Register(localeCode, c => new DefaultFormatter(c));
 
     void RegisterCzechSlovakPolishFormatter(string localeCode) =>
-        Register(localeCode, new CzechSlovakPolishFormatter(localeCode));
+        Register(localeCode, c => new CzechSlovakPolishFormatter(c));
 }
