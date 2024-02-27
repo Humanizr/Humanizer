@@ -3,13 +3,14 @@
 /// <summary>
 /// Default implementation of IFormatter interface.
 /// </summary>
-public class DefaultFormatter : IFormatter
+public class DefaultFormatter(CultureInfo culture) : IFormatter
 {
-    protected CultureInfo Culture { get; }
+    protected CultureInfo Culture { get; } = culture;
 
-    /// <param name="localeCode">Name of the culture to use.</param>
-    public DefaultFormatter(string localeCode) =>
-        Culture = new(localeCode);
+    public DefaultFormatter(string localeCode)
+        : this(new CultureInfo(localeCode))
+    {
+    }
 
     public virtual string DateHumanize_Now() =>
         GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);

@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class FrenchFormatter(string localeCode) :
-    DefaultFormatter(localeCode)
+class FrenchFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     const string DualPostfix = "_Dual";
 

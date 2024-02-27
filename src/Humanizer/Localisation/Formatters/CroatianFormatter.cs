@@ -1,7 +1,7 @@
 namespace Humanizer;
 
-class CroatianFormatter() :
-    DefaultFormatter("hr")
+class CroatianFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     const string PaucalPostfix = "_Paucal";
 

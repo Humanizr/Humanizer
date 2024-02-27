@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class MalteseFormatter(string localeCode) :
-    DefaultFormatter(localeCode)
+class MalteseFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     const string DualPostfix = "_Dual";
 

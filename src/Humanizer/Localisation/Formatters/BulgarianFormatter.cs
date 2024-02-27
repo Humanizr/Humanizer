@@ -1,6 +1,6 @@
 namespace Humanizer;
 
-class BulgarianFormatter() : DefaultFormatter("bg")
+class BulgarianFormatter(CultureInfo culture) : DefaultFormatter(culture)
 {
     protected override string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
         number.ToWords(GetUnitGender(unit), culture);

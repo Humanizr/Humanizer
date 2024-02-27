@@ -215,6 +215,7 @@ namespace Humanizer
     }
     public class DefaultFormatter : Humanizer.IFormatter
     {
+        public DefaultFormatter(System.Globalization.CultureInfo culture) { }
         public DefaultFormatter(string localeCode) { }
         protected System.Globalization.CultureInfo Culture { get; }
         public virtual string DataUnitHumanize(Humanizer.DataUnit dataUnit, double count, bool toSymbol = true) { }
@@ -770,9 +771,9 @@ namespace Humanizer
     public class LocaliserRegistry<TLocaliser>
         where TLocaliser :  class
     {
-        public LocaliserRegistry(System.Func<System.Globalization.CultureInfo?, TLocaliser> defaultLocaliser) { }
+        public LocaliserRegistry(System.Func<System.Globalization.CultureInfo, TLocaliser> defaultLocaliser) { }
         public LocaliserRegistry(TLocaliser defaultLocaliser) { }
-        public void Register(string localeCode, System.Func<System.Globalization.CultureInfo?, TLocaliser> localiser) { }
+        public void Register(string localeCode, System.Func<System.Globalization.CultureInfo, TLocaliser> localiser) { }
         public void Register(string localeCode, TLocaliser localiser) { }
         public TLocaliser ResolveForCulture(System.Globalization.CultureInfo? culture) { }
         public TLocaliser ResolveForUiCulture() { }

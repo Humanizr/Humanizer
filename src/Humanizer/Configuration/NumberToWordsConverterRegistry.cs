@@ -3,15 +3,15 @@
 class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
 {
     public NumberToWordsConverterRegistry()
-        : base(_ => new EnglishNumberToWordsConverter())
+        : base(new EnglishNumberToWordsConverter())
     {
         Register("af", new AfrikaansNumberToWordsConverter());
         Register("en", new EnglishNumberToWordsConverter());
         Register("ar", new ArabicNumberToWordsConverter());
-        Register("cs", _ => new CzechNumberToWordsConverter(_));
+        Register("cs", c => new CzechNumberToWordsConverter(c));
         Register("fa", new FarsiNumberToWordsConverter());
         Register("es", new SpanishNumberToWordsConverter());
-        Register("pl", _ => new PolishNumberToWordsConverter(_));
+        Register("pl", c => new PolishNumberToWordsConverter(c));
         Register("pt", new PortugueseNumberToWordsConverter());
         Register("pt-BR", new BrazilianPortugueseNumberToWordsConverter());
         Register("ro", new RomanianNumberToWordsConverter());
@@ -21,8 +21,8 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("fr-CH", new FrenchSwissNumberToWordsConverter());
         Register("fr", new FrenchNumberToWordsConverter());
         Register("nl", new DutchNumberToWordsConverter());
-        Register("he", _ => new HebrewNumberToWordsConverter(_));
-        Register("sl", _ => new SlovenianNumberToWordsConverter(_));
+        Register("he", c => new HebrewNumberToWordsConverter(c));
+        Register("sl", c => new SlovenianNumberToWordsConverter(c));
         Register("de", new GermanNumberToWordsConverter());
         Register("de-CH", new GermanSwissLiechtensteinNumberToWordsConverter());
         Register("de-LI", new GermanSwissLiechtensteinNumberToWordsConverter());
@@ -35,10 +35,10 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("uz-Latn-UZ", new UzbekLatnNumberToWordConverter());
         Register("uz-Cyrl-UZ", new UzbekCyrlNumberToWordConverter());
         Register("sv", new SwedishNumberToWordsConverter());
-        Register("sr", _ => new SerbianCyrlNumberToWordsConverter(_));
-        Register("sr-Latn", _ => new SerbianNumberToWordsConverter(_));
+        Register("sr", c => new SerbianCyrlNumberToWordsConverter(c));
+        Register("sr-Latn", c => new SerbianNumberToWordsConverter(c));
         Register("ta", new TamilNumberToWordsConverter());
-        Register("hr", _ => new CroatianNumberToWordsConverter(_));
+        Register("hr", c => new CroatianNumberToWordsConverter(c));
         Register("nb", new NorwegianBokmalNumberToWordsConverter());
         Register("vi", new VietnameseNumberToWordsConverter());
         Register("zh-CN", new ChineseNumberToWordsConverter());

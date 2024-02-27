@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class SerbianFormatter(string localeCode) :
-    DefaultFormatter(localeCode)
+class SerbianFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
     const string PaucalPostfix = "_Paucal";
 
