@@ -30,7 +30,7 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             ? 5 * Math.Round(time.Minute / 5.0)
             : time.Minute);
 
-        var clockNotationMap = new Dictionary<int, string>()
+        var clockNotationMap = new Dictionary<int, string>
         {
             { 0, $"{article} {hour} {dayPeriod}" },
             { 15 , $"{article} {hour} y cuarto {dayPeriod}" },

@@ -213,10 +213,8 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
                     _ => throw new ArgumentOutOfRangeException(nameof(gender))
                 };
             }
-            else
-            {
-                return UnitsOrdinalPrefixes[number] + GetOrdinalEnding(gender);
-            }
+
+            return UnitsOrdinalPrefixes[number] + GetOrdinalEnding(gender);
         }
 
         if (number < 100 && number % 10 == 0)
