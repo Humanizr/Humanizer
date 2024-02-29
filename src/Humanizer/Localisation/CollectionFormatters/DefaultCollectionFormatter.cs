@@ -74,15 +74,10 @@ class DefaultCollectionFormatter : ICollectionFormatter
             return itemsArray[0];
         }
 
-        var itemsBeforeLast = itemsArray.Take(count - 1);
-        var lastItem = itemsArray
-            .Skip(count - 1)
-            .First();
-
         return string.Format(GetConjunctionFormatString(count),
-            string.Join(", ", itemsBeforeLast),
+            string.Join(", ", itemsArray, 0, itemsArray.Length - 1),
             separator,
-            lastItem);
+            itemsArray[^1]);
     }
 
     protected virtual string GetConjunctionFormatString(int itemCount) => "{0} {1} {2}";
