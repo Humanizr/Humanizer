@@ -20,7 +20,7 @@
     public void InYear()
     {
         var now = DateTime.Now;
-        var in2011 = now.In(2011);
-        Assert.Equal(new(2011, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Millisecond), in2011);
+        var in2012 = now.In(2012);
+        Assert.Equal(new(2012, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Millisecond), in2012);
     }
 }
