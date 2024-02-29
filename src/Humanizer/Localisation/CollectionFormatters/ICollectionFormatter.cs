@@ -13,12 +13,12 @@ public interface ICollectionFormatter
     /// <summary>
     /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
     /// </summary>
-    string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter);
+    string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter);
 
     /// <summary>
     /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
     /// </summary>
-    string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter);
+    string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter);
 
     /// <summary>
     /// Formats the collection for display, calling ToString() on each object
@@ -30,11 +30,11 @@ public interface ICollectionFormatter
     /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
     /// and using <paramref name="separator"/> before the final item.
     /// </summary>
-    string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter, string separator);
+    string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator);
 
     /// <summary>
     /// Formats the collection for display, calling <paramref name="objectFormatter"/> on each element.
     /// and using <paramref name="separator"/> before the final item.
     /// </summary>
-    string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator);
+    string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator);
 }
