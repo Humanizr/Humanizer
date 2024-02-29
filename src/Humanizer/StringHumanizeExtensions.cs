@@ -29,6 +29,7 @@ public static class StringHumanizeExtensions
     {
         var result = string.Join(" ", PascalCaseWordPartsRegex
             .Matches(input)
+            // ReSharper disable once RedundantEnumerableCastCall
             .Cast<Match>()
             .Select(match =>
             {

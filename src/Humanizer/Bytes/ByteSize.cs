@@ -411,6 +411,7 @@ public struct ByteSize(double byteSize) :
         result = new();
 
         // Get the index of the first non-digit character
+        // ReSharper disable once RedundantSuppressNullableWarningExpression
         s = s!.TrimStart(); // Protect against leading spaces
 
         int num;
