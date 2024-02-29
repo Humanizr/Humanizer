@@ -10,10 +10,10 @@ class DefaultCollectionFormatter : ICollectionFormatter
     public virtual string Humanize<T>(IEnumerable<T> collection) =>
         Humanize(collection, o => o?.ToString(), DefaultSeparator);
 
-    public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string> objectFormatter) =>
+    public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter) =>
         Humanize(collection, objectFormatter, DefaultSeparator);
 
-    public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter) =>
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter) =>
         Humanize(collection, objectFormatter, DefaultSeparator);
 
     public virtual string Humanize<T>(IEnumerable<T> collection, string separator) =>
@@ -36,7 +36,7 @@ class DefaultCollectionFormatter : ICollectionFormatter
             separator);
     }
 
-    public string Humanize<T>(IEnumerable<T> collection, Func<T, object> objectFormatter, string separator)
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator)
     {
         if (collection == null)
         {
