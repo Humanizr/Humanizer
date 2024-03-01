@@ -1,13 +1,16 @@
-﻿[MemoryDiagnoser(false)]
+﻿using System.Globalization;
+
+[MemoryDiagnoser(false)]
 public class ItalianNumberBenchmarks
 {
+    static CultureInfo culture = new("it");
     [Benchmark(Description = "ItalianNumber.ToOrdinalWords")]
     public void ToOrdinalWords()
     {
         foreach (var number in numbers)
         {
-            number.ToOrdinalWords();
-            number.ToOrdinalWords(GrammaticalGender.Feminine);
+            number.ToOrdinalWords(culture);
+            number.ToOrdinalWords(GrammaticalGender.Feminine, culture);
         }
     }
 
