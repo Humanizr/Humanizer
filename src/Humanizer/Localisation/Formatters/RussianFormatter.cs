@@ -6,20 +6,17 @@ class RussianFormatter(CultureInfo culture) :
     protected override string GetResourceKey(string resourceKey, int number)
     {
         var grammaticalNumber = RussianGrammaticalNumberDetector.Detect(number);
-        var suffix = GetSuffix(grammaticalNumber);
-        return resourceKey + suffix;
+        return grammaticalNumber switch
+        {
+            RussianGrammaticalNumber.Singular => resourceKey + "_Singular",
+            RussianGrammaticalNumber.Paucal => resourceKey + "_Paucal",
+            _ => resourceKey
+        };
     }
 
     protected override string NumberToWords(TimeUnit unit, int number, CultureInfo culture) =>
         number.ToWords(GetUnitGender(unit), culture);
 
-    static string GetSuffix(RussianGrammaticalNumber grammaticalNumber) =>
-        grammaticalNumber switch
-        {
-            RussianGrammaticalNumber.Singular => "_Singular",
-            RussianGrammaticalNumber.Paucal => "_Paucal",
-            _ => ""
-        };
 
     static GrammaticalGender GetUnitGender(TimeUnit unit) =>
         unit switch
