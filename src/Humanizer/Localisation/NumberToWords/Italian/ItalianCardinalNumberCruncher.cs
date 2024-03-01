@@ -26,9 +26,9 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
         return words.TrimEnd();
     }
 
-    protected readonly int _fullNumber = number;
-    protected readonly List<int> _threeDigitParts = SplitEveryThreeDigits(number);
-    protected readonly GrammaticalGender _gender = gender;
+    readonly int _fullNumber = number;
+    readonly List<int> _threeDigitParts = SplitEveryThreeDigits(number);
+    readonly GrammaticalGender _gender = gender;
 
     protected ThreeDigitSets _nextSet = ThreeDigitSets.Units;
 
@@ -38,7 +38,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// </summary>
     /// <param name="number">The number to split.</param>
     /// <returns>The sequence of three-digit numbers.</returns>
-    protected static List<int> SplitEveryThreeDigits(int number)
+    static List<int> SplitEveryThreeDigits(int number)
     {
         var parts = new List<int>();
         var rest = number;
@@ -60,7 +60,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// for the next three-digit set.
     /// </summary>
     /// <returns>The next conversion function to use.</returns>
-    public Func<int, string>? GetNextPartConverter()
+    Func<int, string>? GetNextPartConverter()
     {
         Func<int, string>? converter;
 
@@ -161,7 +161,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// </summary>
     /// <param name="number">The three-digit number, as units, to convert.</param>
     /// <returns>The same three-digit number, as units, expressed as text.</returns>
-    protected string UnitsConverter(int number)
+    string UnitsConverter(int number)
     {
         // being a unique case, it's easier to treat unity feminine gender as a completely distinct case
         if (_gender == GrammaticalGender.Feminine && _fullNumber == 1)
@@ -177,7 +177,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// </summary>
     /// <param name="number">The three-digit number, as thousands, to convert.</param>
     /// <returns>The same three-digit number of thousands expressed as text.</returns>
-    protected static string ThousandsConverter(int number)
+    static string ThousandsConverter(int number)
     {
         if (number == 0)
         {
@@ -197,7 +197,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// </summary>
     /// <param name="number">The three-digit number, as millions, to convert.</param>
     /// <returns>The same three-digit number of millions expressed as text.</returns>
-    protected static string MillionsConverter(int number)
+    static string MillionsConverter(int number)
     {
         if (number == 0)
         {
@@ -217,7 +217,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// </summary>
     /// <param name="number">The three-digit number, as billions, to convert.</param>
     /// <returns>The same three-digit number of billions expressed as text.</returns>
-    protected static string BillionsConverter(int number)
+    static string BillionsConverter(int number)
     {
         if (number == 1)
         {
@@ -230,7 +230,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
     /// </summary>
-    protected static string[] _unitsNumberToText =
+    static string[] _unitsNumberToText =
     [
         string.Empty,
         "uno",
@@ -247,7 +247,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
     /// </summary>
-    protected static string[] _tensOver20NumberToText =
+    static string[] _tensOver20NumberToText =
     [
         string.Empty,
         string.Empty,
@@ -264,7 +264,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
     /// </summary>
-    protected static string[] _teensUnder20NumberToText =
+    static string[] _teensUnder20NumberToText =
     [
         "dieci",
         "undici",
@@ -281,7 +281,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
     /// </summary>
-    protected static string[] _hundredNumberToText =
+    static string[] _hundredNumberToText =
     [
         string.Empty,
         "cento",

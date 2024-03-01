@@ -83,14 +83,14 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
         return words;
     }
 
-    protected readonly int _fullNumber = number;
-    protected readonly GrammaticalGender _gender = gender;
+    readonly int _fullNumber = number;
+    readonly GrammaticalGender _gender = gender;
     readonly string _genderSuffix = gender == GrammaticalGender.Feminine ? "a" : "o";
 
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
     /// </summary>
-    protected static string[] _unitsUnder10NumberToText =
+    static string[] _unitsUnder10NumberToText =
     [
         string.Empty,
         "prim",
@@ -104,5 +104,5 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
         "non"
     ];
 
-    protected static int _lengthOf10AsCardinal = "dieci".Length;
+    static int _lengthOf10AsCardinal = "dieci".Length;
 }
