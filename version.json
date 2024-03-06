@@ -1,0 +1,10 @@
+{
+  "version": "2.14",
+  "publicReleaseRefSpec": [
+    "^refs/heads/main$", // we release out of main
+    "^refs/heads/rel/v\\d+\\.\\d+" // we also release branches starting with rel/vN.N
+  ],
+  "nugetPackageVersion":{
+    "semVer": 2
+  }
+}
