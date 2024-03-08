@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 		..\readme.md = ..\readme.md
 		..\release_notes.md = ..\release_notes.md
+		..\version.json = ..\version.json
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
