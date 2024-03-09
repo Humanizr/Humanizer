@@ -162,7 +162,7 @@ public static class TimeSpanHumanizeExtensions
             TimeUnit.Minute => GetNormalCaseTimeAsInteger(timespan.Minutes, timespan.TotalMinutes, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Hour => GetNormalCaseTimeAsInteger(timespan.Hours, timespan.TotalHours, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Day => GetSpecialCaseDaysAsInteger(timespan, maximumTimeUnit),
-            TimeUnit.Week => GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Week => GetSpecialCaseWeeksAsInteger(timespan, maximumTimeUnit),
             TimeUnit.Month => GetSpecialCaseMonthAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Year => GetSpecialCaseYearAsInteger(timespan),
             _ => 0
@@ -183,14 +183,14 @@ public static class TimeSpanHumanizeExtensions
     static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
         (int)(timespan.Days / DaysInAYear);
 
-    static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+    static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
     {
-        if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < DaysInAMonth)
+        if (maximumTimeUnit == TimeUnit.Week)
         {
             return timespan.Days / DaysInAWeek;
         }
 
-        return 0;
+        return (int)(timespan.Days % DaysInAMonth) / DaysInAWeek;
     }
 
     static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
@@ -200,13 +200,13 @@ public static class TimeSpanHumanizeExtensions
             return timespan.Days;
         }
 
-        if (timespan.Days < DaysInAMonth || maximumTimeUnit == TimeUnit.Week)
+        if (maximumTimeUnit == TimeUnit.Week)
         {
             var remainingDays = timespan.Days % DaysInAWeek;
             return remainingDays;
         }
 
-        return (int)(timespan.Days % DaysInAMonth);
+        return (int)(timespan.Days % DaysInAMonth) % DaysInAWeek;
     }
 
     static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)

@@ -7,7 +7,7 @@ public class TimeSpanHumanizeTests
         var culture = new CultureInfo("en-US");
         var qry = from i in Enumerable.Range(0, 100000)
                   let ts = TimeSpan.FromDays(i)
-                  let text = ts.Humanize(precision: 3, culture: culture, maxUnit: TimeUnit.Year)
+                  let text = ts.Humanize(precision: 4, culture: culture, maxUnit: TimeUnit.Year)
                   select text;
         var grouping = from t in qry
                        group t by t into g
@@ -17,15 +17,15 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(365, "11 months, 30 days")]
+    [InlineData(365, "11 months, 4 weeks, 2 days")]
     [InlineData(365 + 1, "1 year")]
-    [InlineData(365 + 365, "1 year, 11 months, 29 days")]
+    [InlineData(365 + 365, "1 year, 11 months, 4 weeks, 1 day")]
     [InlineData(365 + 365 + 1, "2 years")]
-    [InlineData(365 + 365 + 365, "2 years, 11 months, 29 days")]
+    [InlineData(365 + 365 + 365, "2 years, 11 months, 4 weeks, 1 day")]
     [InlineData(365 + 365 + 365 + 1, "3 years")]
-    [InlineData(365 + 365 + 365 + 365, "3 years, 11 months, 29 days")]
+    [InlineData(365 + 365 + 365 + 365, "3 years, 11 months, 4 weeks, 1 day")]
     [InlineData(365 + 365 + 365 + 365 + 1, "4 years")]
-    [InlineData(365 + 365 + 365 + 365 + 366, "4 years, 11 months, 30 days")]
+    [InlineData(365 + 365 + 365 + 365 + 366, "4 years, 11 months, 4 weeks, 2 days")]
     [InlineData(365 + 365 + 365 + 365 + 366 + 1, "5 years")]
     public void Years(int days, string expected)
     {
@@ -36,15 +36,15 @@ public class TimeSpanHumanizeTests
     [Theory]
     [InlineData(30, "4 weeks, 2 days")]
     [InlineData(30 + 1, "1 month")]
-    [InlineData(30 + 30, "1 month, 29 days")]
+    [InlineData(30 + 30, "1 month, 4 weeks, 1 day")]
     [InlineData(30 + 30 + 1, "2 months")]
-    [InlineData(30 + 30 + 31, "2 months, 30 days")]
+    [InlineData(30 + 30 + 31, "2 months, 4 weeks, 2 days")]
     [InlineData(30 + 30 + 31 + 1, "3 months")]
-    [InlineData(30 + 30 + 31 + 30, "3 months, 29 days")]
+    [InlineData(30 + 30 + 31 + 30, "3 months, 4 weeks, 1 day")]
     [InlineData(30 + 30 + 31 + 30 + 1, "4 months")]
-    [InlineData(30 + 30 + 31 + 30 + 31, "4 months, 30 days")]
+    [InlineData(30 + 30 + 31 + 30 + 31, "4 months, 4 weeks, 2 days")]
     [InlineData(30 + 30 + 31 + 30 + 31 + 1, "5 months")]
-    [InlineData(365, "11 months, 30 days")]
+    [InlineData(365, "11 months, 4 weeks, 2 days")]
     [InlineData(366, "1 year")]
     public void Months(int days, string expected)
     {
@@ -459,8 +459,8 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [InlineData(31 * 4, 1, "en-US", "four months")]
-    [InlineData(236, 2, "ar", "سبعة أشهر, اثنان و عشرون يوم")]
-    [InlineData(321, 2, "es", "diez meses, dieciséis días")]
+    [InlineData(236, 2, "ar", "سبعة أشهر, ثلاثة أسابيع")]
+    [InlineData(321, 2, "es", "diez meses, dos semanas")]
     public void CanSpecifyCultureExplicitlyToWords(int days, int precision, string culture, string expected)
     {
         var timeSpan = new TimeSpan(days, 0, 0, 0);
@@ -476,5 +476,25 @@ public class TimeSpanHumanizeTests
     {
         Assert.Equal(expected, TimeSpan.MaxValue.Humanize(maxUnit: unit, minUnit: unit));
         Assert.Equal(expected, TimeSpan.MinValue.Humanize(maxUnit: unit, minUnit: unit));
+    }
+
+    [Theory]
+    [InlineData(109, TimeUnit.Month, "3 months, 2 weeks, 3 days, 4 hours")]
+    [InlineData(-109, TimeUnit.Month, "3 months, 2 weeks, 3 days, 4 hours")]
+    [InlineData(474, TimeUnit.Year, "1 year, 3 months, 2 weeks, 3 days, 4 hours")]
+    [InlineData(-474, TimeUnit.Year, "1 year, 3 months, 2 weeks, 3 days, 4 hours")]
+    public void MonthAndYearRangesIncludeWeeks(int days, TimeUnit maxUnit, string expected)
+    {
+        var actual = new TimeSpan(days, days < 0 ? -4 : 4, 0, 0).Humanize(5, maxUnit: maxUnit);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(TimeUnit.Month, 109, 2, "3 months, 2 weeks")]
+    [InlineData(TimeUnit.Year, 474, 3, "1 year, 3 months, 2 weeks")]
+    public void CanRequestWeeksBelowMonthOrYear(TimeUnit maxUnit, int days, int precision, string expected)
+    {
+        var actual = TimeSpan.FromDays(days).Humanize(precision, maxUnit: maxUnit, minUnit: TimeUnit.Week);
+        Assert.Equal(expected, actual);
     }
 }
