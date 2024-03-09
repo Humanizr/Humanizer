@@ -7,7 +7,7 @@ public class TimeSpanHumanizeTests
         var culture = new CultureInfo("en-US");
         var qry = from i in Enumerable.Range(0, 100000)
             let ts = TimeSpan.FromDays(i)
-            let text = ts.Humanize(precision: 3, culture: culture, maxUnit: TimeUnit.Year)
+            let text = ts.Humanize(precision: 4, culture: culture, maxUnit: TimeUnit.Year)
             select text;
         var grouping = from t in qry
             group t by t into g
@@ -17,15 +17,15 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(365, "11 months, 30 days")]
+    [InlineData(365, "11 months, 4 weeks, 2 days")]
     [InlineData(365 + 1, "1 year")]
-    [InlineData(365 + 365, "1 year, 11 months, 29 days")]
+    [InlineData(365 + 365, "1 year, 11 months, 4 weeks, 1 day")]
     [InlineData(365 + 365 + 1, "2 years")]
-    [InlineData(365 + 365 + 365, "2 years, 11 months, 29 days")]
+    [InlineData(365 + 365 + 365, "2 years, 11 months, 4 weeks, 1 day")]
     [InlineData(365 + 365 + 365 + 1, "3 years")]
-    [InlineData(365 + 365 + 365 + 365, "3 years, 11 months, 29 days")]
+    [InlineData(365 + 365 + 365 + 365, "3 years, 11 months, 4 weeks, 1 day")]
     [InlineData(365 + 365 + 365 + 365 + 1, "4 years")]
-    [InlineData(365 + 365 + 365 + 365 + 366, "4 years, 11 months, 30 days")]
+    [InlineData(365 + 365 + 365 + 365 + 366, "4 years, 11 months, 4 weeks, 2 days")]
     [InlineData(365 + 365 + 365 + 365 + 366 + 1, "5 years")]
     public void Years(int days, string expected)
     {
@@ -36,15 +36,15 @@ public class TimeSpanHumanizeTests
     [Theory]
     [InlineData(30, "4 weeks, 2 days")]
     [InlineData(30 + 1, "1 month")]
-    [InlineData(30 + 30, "1 month, 29 days")]
+    [InlineData(30 + 30, "1 month, 4 weeks, 1 day")]
     [InlineData(30 + 30 + 1, "2 months")]
-    [InlineData(30 + 30 + 31, "2 months, 30 days")]
+    [InlineData(30 + 30 + 31, "2 months, 4 weeks, 2 days")]
     [InlineData(30 + 30 + 31 + 1, "3 months")]
-    [InlineData(30 + 30 + 31 + 30, "3 months, 29 days")]
+    [InlineData(30 + 30 + 31 + 30, "3 months, 4 weeks, 1 day")]
     [InlineData(30 + 30 + 31 + 30 + 1, "4 months")]
-    [InlineData(30 + 30 + 31 + 30 + 31, "4 months, 30 days")]
+    [InlineData(30 + 30 + 31 + 30 + 31, "4 months, 4 weeks, 2 days")]
     [InlineData(30 + 30 + 31 + 30 + 31 + 1, "5 months")]
-    [InlineData(365, "11 months, 30 days")]
+    [InlineData(365, "11 months, 4 weeks, 2 days")]
     [InlineData(366, "1 year")]
     public void Months(int days, string expected)
     {
@@ -456,5 +456,15 @@ public class TimeSpanHumanizeTests
         var timeSpan = new TimeSpan(days, 0, 0, 0);
         var actual = timeSpan.Humanize(precision: precision, culture: new(culture), maxUnit: TimeUnit.Year, toWords: true);
         Assert.Equal(expected: expected, actual);
+    }
+
+    [Fact]
+    //Fixes https://stackoverflow.com/questions/56550059/humanizer-months-weeks-days-hours
+    public void MonthsAndWeeks()
+    {
+        var ts = new TimeSpan(109, 4, 0, 0, 0);
+        var humanized = ts.Humanize(4, maxUnit: TimeUnit.Month);
+
+        Assert.Equal("3 months, 2 weeks, 3 days, 4 hours", humanized);
     }
 }
