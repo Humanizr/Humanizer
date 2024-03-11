@@ -116,7 +116,7 @@ stages:
       inputs:
         command: custom
         custom: tool
-        arguments: install --tool-path . sign --prereelase
+        arguments: install --tool-path . --prerelease sign 
       displayName: Install SignTool tool
 
     # Run the signing command
