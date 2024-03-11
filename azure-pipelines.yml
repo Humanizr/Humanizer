@@ -89,9 +89,10 @@ stages:
   
 
 - stage: CodeSign
+  dependsOn: Build
   condition: and(succeeded('Build'), not(eq(variables['build.reason'], 'PullRequest')))
   jobs:
-  - deployment: CodeSign
+  - job: CodeSign
     displayName: Code Signing
     pool:
       vmImage: windows-latest
