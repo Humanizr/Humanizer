@@ -86,10 +86,7 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
       artifact: BuildPackages
-
-    - publish: SignClient.json
-      displayName: Publish signing config
-      artifact: config
+  
 
 - stage: CodeSign
   condition: and(succeeded('Build'), not(eq(variables['build.reason'], 'PullRequest')))
@@ -100,30 +97,48 @@ stages:
       vmImage: windows-latest
     environment: Code Sign
     variables:
-    - group: SignClient Credentials
-    strategy:
-      runOnce:
-        deploy:
-          steps: 
-          - task: DotNetCoreCLI@2
-            inputs:
-              command: custom
-              custom: tool
-              arguments: install --tool-path . SignClient
-            displayName: Install SignTool tool
+    - group: SignCLI Creds
 
-          - pwsh: |
-              .\SignClient "Sign" `
-              --baseDirectory "$(Pipeline.Workspace)\BuildPackages" `
-              --input "**/*.nupkg" `
-              --config "$(Pipeline.Workspace)\config\SignClient.json" `
-              --user "$(SignClientUser)" `
-              --secret "$(SignClientSecret)" `
-              --name "Humanizer" `
-              --description "Humanizer" `
-              --descriptionUrl "https://github.com/Humanizr/Humanizer"
-            displayName: Sign packages
+    steps:
 
-          - publish: $(Pipeline.Workspace)/BuildPackages
-            displayName: Publish Signed Packages
-            artifact: SignedPackages
+    # Retreive unsigned artifacts and file list
+    - download: current
+      artifact: config
+      displayName: Download signing file list
+
+    - download: current
+      artifact: BuildPackages
+      displayName: Download build artifacts
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET SDK 6.x'
+      inputs:
+        version: 6.x
+
+    # Install the code signing tool
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: custom
+        custom: tool
+        arguments: install --tool-path . sign --prereelase
+      displayName: Install SignTool tool
+
+    # Run the signing command
+    - pwsh: |
+        .\sign code azure-key-vault `
+        --base-directory "$(Pipeline.Workspace)\BuildPackages" `
+        --input "**/*.nupkg" `
+        --publisher-name "Humanizer" `
+        --description "Humanizer" `
+        --description-url "https://github.com/Humanizr/Humanizer" `
+        --azure-key-vault-tenant-id "$(SignTenantId)" `
+        --azure-key-vault-client-id "$(SignClientId)" `
+        --azure-key-vault-client-secret '$(SignClientSecret)' `
+        --azure-key-vault-certificate "$(SignKeyVaultCertificate)" `
+        --azure-key-vault-url "$(SignKeyVaultUrl)"
+      displayName: Sign packages
+    
+    # Publish the signed packages
+    - publish: $(Pipeline.Workspace)/BuildPackages
+      displayName: Publish Signed Packages
+      artifact: SignedPackages
