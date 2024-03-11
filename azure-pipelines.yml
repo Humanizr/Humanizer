@@ -96,7 +96,6 @@ stages:
     displayName: Code Signing
     pool:
       vmImage: windows-latest
-    environment: Code Sign
     variables:
     - group: SignCLI Creds
 
