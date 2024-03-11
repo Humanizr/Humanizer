@@ -122,8 +122,8 @@ stages:
     # Run the signing command
     - pwsh: |
         .\sign code azure-key-vault `
+        "**/*.nupkg" `
         --base-directory "$(Pipeline.Workspace)\BuildPackages" `
-        --input "**/*.nupkg" `
         --publisher-name "Humanizer" `
         --description "Humanizer" `
         --description-url "https://github.com/Humanizr/Humanizer" `
