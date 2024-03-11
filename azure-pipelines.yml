@@ -101,11 +101,7 @@ stages:
 
     steps:
 
-    # Retreive unsigned artifacts and file list
-    - download: current
-      artifact: config
-      displayName: Download signing file list
-
+    # Retreive unsigned artifacts 
     - download: current
       artifact: BuildPackages
       displayName: Download build artifacts
