@@ -79,7 +79,6 @@ stages:
         reports: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
         targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
         reporttypes: HtmlInline_AzurePipelines;Cobertura;Badges
-        assemblyfilters: -Verify
         license: '$(ReportGeneratorLicenseKey)'
     
     # Publish Code Coverage results
