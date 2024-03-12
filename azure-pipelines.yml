@@ -12,6 +12,9 @@ variables:
 
 stages:
 - stage: Build
+  variables:
+   - group: 'Report Generator License Key'
+
   jobs:
   - job: Build
     pool:
@@ -74,7 +77,7 @@ stages:
         arguments: install --tool-path . dotnet-reportgenerator-globaltool
       displayName: Install ReportGenerator tool
 
-    - script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
+    - script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura" -license:"$(ReportGeneratorLicenseKey)"
       displayName: Create reports
 
     - task: PublishCodeCoverageResults@1
