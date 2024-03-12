@@ -9,6 +9,7 @@ pr:
 variables:
   BuildConfiguration: Release
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  disable.coverage.autogenerate: 'true'
 
 stages:
 - stage: Build
@@ -70,21 +71,23 @@ stages:
         arguments: -c $(BuildConfiguration) --no-build --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
       displayName: Run Tests
 
-    - task: DotNetCoreCLI@2
+    # Generate code coverage report
+    # https://danielpalme.github.io/ReportGenerator/
+    - task: reportgenerator@5
+      displayName: Generate Code Coverage Report
       inputs:
-        command: custom
-        custom: tool
-        arguments: install --tool-path . dotnet-reportgenerator-globaltool
-      displayName: Install ReportGenerator tool
-
-    - script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura" -license:"$(ReportGeneratorLicenseKey)"
-      displayName: Create reports
-
+        reports: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+        targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/
+        reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Badges'
+        license: '$(ReportGeneratorLicenseKey)'
+    
+    # Publish Code Coverage results
     - task: PublishCodeCoverageResults@1
-      displayName: 'Publish code coverage'
+      displayName: 'Publish Code Coverage Results'
       inputs:
-        codeCoverageTool: Cobertura
-        summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml
+        codeCoverageTool: cobertura
+        summaryFileLocation: $(Build.ArtifactStagingDirectory)/coverageReports/Cobertura.xml
+        reportDirectory: $(Build.ArtifactStagingDirectory)/coverageReports/        
       
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
