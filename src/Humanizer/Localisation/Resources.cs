@@ -7,7 +7,7 @@ namespace Humanizer;
 /// </summary>
 public static class Resources
 {
-    static readonly ResourceManager ResourceManager = new("Humanizer.Properties.Resources", typeof(Resources).GetTypeInfo()
+    public static readonly ResourceManager ResourceManager = new("Humanizer.Properties.Resources", typeof(Resources).GetTypeInfo()
         .Assembly);
 
     /// <summary>

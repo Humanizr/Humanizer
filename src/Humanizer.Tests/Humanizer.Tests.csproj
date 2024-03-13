@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net48</TargetFrameworks>
+    <TargetFrameworks>net48</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.1" PrivateAssets="all" />
     <PackageReference Include="PublicApiGenerator" Version="11.1.0" />
+    <PackageReference Include="System.Resources.Reader" Version="4.3.0" />
     <PackageReference Include="xunit" Version="2.7.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7" PrivateAssets="all" />
     <PackageReference Include="Verify.Xunit" Version="23.3.0" />
@@ -16,6 +17,7 @@
     <Content Include="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
 </Project>
