@@ -1,18 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">  
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48;net6.0;net7.0;net8.0</TargetFrameworks>    
     <Authors>Mehdi Khalili, Claire Novotny</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
-    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>    
-    <Copyright>Copyright © .NET Foundation and Contributors</Copyright>    
-    <Product>Humanizer ($(TargetFramework))</Product>    
+    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>
+    <Copyright>Copyright © .NET Foundation and Contributors</Copyright>
+    <Product>Humanizer ($(TargetFramework))</Product>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
     <NoWarn>CS1573;CS1591</NoWarn>  
     <IsTrimmable>true</IsTrimmable>
-  </PropertyGroup>  
+  </PropertyGroup>
   <ItemGroup>
     <Using Remove="System.Net.Http" />
     <PackageReference Include="Polyfill" Version="4.0.0" PrivateAssets="all" />
@@ -52,7 +52,7 @@
 
     <None Update="FluentDate\InDate.SomeTimeFrom.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.SomeTimeFrom.cs" />
     <Compile Update="FluentDate\InDate.SomeTimeFrom.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.SomeTimeFrom.tt" />
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
