@@ -13,7 +13,7 @@ public class MergeResources
         {
             File.Delete(file);
         }
-        var files = Directory.EnumerateFiles(@"C:\Code\Humanizer\src\Humanizer\Properties", "*.resx");
+        var files = Directory.EnumerateFiles(@"C:\Code\Humanizer\src\Humanizer\Properties", "*.resx").ToList();
         var invarientFile = @"C:\Code\Humanizer\src\Humanizer\Properties\Resources.resx";
         var keys = await WriteInvarient(dir, invarientFile);
         await WriteClass(dir, CultureInfo.InvariantCulture, invarientFile, keys);
@@ -21,7 +21,7 @@ public class MergeResources
         {
             if (file.EndsWith("Resources.resx"))
             {
-                break;
+                continue;
             }
             var culture = Culture(file, cultureInfos);
 
@@ -54,7 +54,6 @@ public class MergeResources
                       public string {{key}} => "{{entry.Value}}";
                   """);
         }
-
 
         if(File.Exists($@"C:\Code\Humanizer\src\Humanizer\Properties\Resources.{culture.Parent.Name}.resx"))
         {
