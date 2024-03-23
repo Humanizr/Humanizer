@@ -109,7 +109,7 @@ public class MergeResources
         using var writer = File.CreateText(combine);
         await writer.WriteLineAsync(
             $$"""
-              interface IResources
+              public interface IResources
               {
                   public string Culture { get; }
               """);

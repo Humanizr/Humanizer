@@ -1,4 +1,4 @@
-interface IResources
+public interface IResources
 {
     public string Culture { get; }
     public string DateSingleSecondAgo { get; }
