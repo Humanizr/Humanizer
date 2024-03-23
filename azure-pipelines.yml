@@ -9,9 +9,13 @@ pr:
 variables:
   BuildConfiguration: Release
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  disable.coverage.autogenerate: 'true'
 
 stages:
 - stage: Build
+  variables:
+   - group: 'Report Generator License Key'
+
   jobs:
   - job: Build
     pool:
@@ -67,63 +71,76 @@ stages:
         arguments: -c $(BuildConfiguration) --no-build --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
       displayName: Run Tests
 
-    - task: DotNetCoreCLI@2
+    # Generate code coverage report
+    # https://danielpalme.github.io/ReportGenerator/
+    - task: reportgenerator@5
+      displayName: Generate Code Coverage Report
       inputs:
-        command: custom
-        custom: tool
-        arguments: install --tool-path . dotnet-reportgenerator-globaltool
-      displayName: Install ReportGenerator tool
-
-    - script: reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
-      displayName: Create reports
-
+        reports: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+        targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
+        reporttypes: HtmlInline_AzurePipelines;Cobertura;Badges
+        license: '$(ReportGeneratorLicenseKey)'
+    
+    # Publish Code Coverage results
     - task: PublishCodeCoverageResults@1
-      displayName: 'Publish code coverage'
+      displayName: 'Publish Code Coverage Results'
       inputs:
-        codeCoverageTool: Cobertura
-        summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml
+        codeCoverageTool: cobertura
+        summaryFileLocation: $(Build.ArtifactStagingDirectory)/coverageReports/Cobertura.xml
+        reportDirectory: $(Build.ArtifactStagingDirectory)/coverageReports/        
       
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
       artifact: BuildPackages
-
-    - publish: SignClient.json
-      displayName: Publish signing config
-      artifact: config
+  
 
 - stage: CodeSign
+  dependsOn: Build
   condition: and(succeeded('Build'), not(eq(variables['build.reason'], 'PullRequest')))
   jobs:
-  - deployment: CodeSign
+  - job: CodeSign
     displayName: Code Signing
     pool:
       vmImage: windows-latest
-    environment: Code Sign
     variables:
-    - group: SignClient Credentials
-    strategy:
-      runOnce:
-        deploy:
-          steps: 
-          - task: DotNetCoreCLI@2
-            inputs:
-              command: custom
-              custom: tool
-              arguments: install --tool-path . SignClient
-            displayName: Install SignTool tool
+    - group: SignCLI Creds
 
-          - pwsh: |
-              .\SignClient "Sign" `
-              --baseDirectory "$(Pipeline.Workspace)\BuildPackages" `
-              --input "**/*.nupkg" `
-              --config "$(Pipeline.Workspace)\config\SignClient.json" `
-              --user "$(SignClientUser)" `
-              --secret "$(SignClientSecret)" `
-              --name "Humanizer" `
-              --description "Humanizer" `
-              --descriptionUrl "https://github.com/Humanizr/Humanizer"
-            displayName: Sign packages
+    steps:
 
-          - publish: $(Pipeline.Workspace)/BuildPackages
-            displayName: Publish Signed Packages
-            artifact: SignedPackages
+    # Retreive unsigned artifacts 
+    - download: current
+      artifact: BuildPackages
+      displayName: Download build artifacts
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET SDK 8.x'
+      inputs:
+        version: 8.x
+
+    # Install the code signing tool
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: custom
+        custom: tool
+        arguments: install --tool-path . --prerelease sign 
+      displayName: Install SignTool tool
+
+    # Run the signing command
+    - pwsh: |
+        .\sign code azure-key-vault `
+        "**/*.nupkg" `
+        --base-directory "$(Pipeline.Workspace)\BuildPackages" `
+        --publisher-name "Humanizer" `
+        --description "Humanizer" `
+        --description-url "https://github.com/Humanizr/Humanizer" `
+        --azure-key-vault-tenant-id "$(SignTenantId)" `
+        --azure-key-vault-client-id "$(SignClientId)" `
+        --azure-key-vault-client-secret '$(SignClientSecret)' `
+        --azure-key-vault-certificate "$(SignKeyVaultCertificate)" `
+        --azure-key-vault-url "$(SignKeyVaultUrl)"
+      displayName: Sign packages
+    
+    # Publish the signed packages
+    - publish: $(Pipeline.Workspace)/BuildPackages
+      displayName: Publish Signed Packages
+      artifact: SignedPackages
