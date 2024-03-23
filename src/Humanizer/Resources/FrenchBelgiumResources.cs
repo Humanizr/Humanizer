@@ -98,7 +98,6 @@ class FrenchBelgiumResources : IResources
     public string TimeSpanMultipleWeeksDual => FrenchResources.Instance.TimeSpanMultipleWeeksDual;
     public string TimeSpanMultipleWeeksPlural => FrenchResources.Instance.TimeSpanMultipleWeeksPlural;
     public string TimeSpanMultipleWeeksSingular => FrenchResources.Instance.TimeSpanMultipleWeeksSingular;
-    public string DateNever => FrenchResources.Instance.DateNever;
     public string TimeSpanMultipleMonthsDual => FrenchResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => FrenchResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => FrenchResources.Instance.TimeSpanMultipleMonthsSingular;

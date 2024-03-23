@@ -40,7 +40,6 @@ class FrenchResources : IResources
     public string TimeSpanSingleSecond => "1 seconde";
     public string TimeSpanSingleWeek => "1 semaine";
     public string TimeSpanZero => "temps nul";
-    public string DateNever => "jamais";
     public string TimeSpanMultipleMonths => "{0} mois";
     public string TimeSpanMultipleYears => "{0} ans";
     public string TimeSpanSingleMonth => "1 mois";

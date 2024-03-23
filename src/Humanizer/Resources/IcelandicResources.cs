@@ -80,7 +80,6 @@ class IcelandicResources : IResources
     public string TimeSpanMultipleYears => "{0} ár";
     public string TimeSpanSingleMonth => "1 mánuður";
     public string TimeSpanSingleYear => "1 ár";
-    public string DateNever => "aldrei";
     public string TimeSpanMultipleMonthsPlural => "{0} mánuðir";
     public string TimeSpanMultipleMonthsSingular => "{0} mánuðir";
     public string TimeSpanMultipleYearsPlural => "{0} ár";

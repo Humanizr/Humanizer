@@ -450,9 +450,6 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} هەفتە</value>
   </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>هەرگیز</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>{0} مانگ</value>
   </data>

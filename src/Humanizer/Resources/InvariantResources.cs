@@ -98,7 +98,6 @@ class InvariantResources : IResources
     public string TimeSpanMultipleYears => "{0} years";
     public string TimeSpanSingleMonth => "1 month";
     public string TimeSpanSingleYear => "1 year";
-    public string DateNever => "never";
     public string TimeSpanMultipleMonthsDual => "{0} months";
     public string TimeSpanMultipleMonthsPlural => "{0} months";
     public string TimeSpanMultipleMonthsSingular => "{0} months";

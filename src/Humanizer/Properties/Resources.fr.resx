@@ -231,9 +231,6 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>temps nul</value>
   </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>jamais</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
     <value>{0} mois</value>
   </data>

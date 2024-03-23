@@ -450,7 +450,4 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0}주</value>
   </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>사용 안 함</value>
-  </data>
 </root>

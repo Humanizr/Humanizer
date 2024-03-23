@@ -1166,7 +1166,6 @@ namespace Humanizer
         public ResourceKeys() { }
         public static class DateHumanize
         {
-            public const string Never = "DateHumanize_Never";
             public const string Now = "DateHumanize_Now";
             public static string GetResourceKey(Humanizer.TimeUnit timeUnit, Humanizer.Tense timeUnitTense, int count = 1) { }
         }

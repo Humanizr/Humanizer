@@ -29,7 +29,6 @@ class LuxembourgishResources : IResources
     public string DateMultipleSecondsFromNow => "a{1} {0} Sekonnen";
     public string DateMultipleYearsAgo => "viru{1} {0} Joer";
     public string DateMultipleYearsFromNow => "a{1} {0} Joer";
-    public string DateNever => "ni";
     public string DateNow => "elo";
     public string DateSingleDayAgo => "gëschter";
     public string DateSingleDayFromNow => "muer";

@@ -106,7 +106,6 @@ class NorwegianBokmålNorwayResources : IResources
     public string TimeSpanMultipleWeeksDual => NorwegianBokmålResources.Instance.TimeSpanMultipleWeeksDual;
     public string TimeSpanMultipleWeeksPlural => NorwegianBokmålResources.Instance.TimeSpanMultipleWeeksPlural;
     public string TimeSpanMultipleWeeksSingular => NorwegianBokmålResources.Instance.TimeSpanMultipleWeeksSingular;
-    public string DateNever => NorwegianBokmålResources.Instance.DateNever;
     public string TimeSpanMultipleMonthsDual => NorwegianBokmålResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => NorwegianBokmålResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => NorwegianBokmålResources.Instance.TimeSpanMultipleMonthsSingular;

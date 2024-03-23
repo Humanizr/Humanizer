@@ -113,7 +113,6 @@ class LatvianResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0} minūtes";
     public string TimeSpanMultipleSecondsPaucal => "{0} sekundes";
     public string TimeSpanMultipleWeeksPaucal => "{0} nedēļas";
-    public string DateNever => "nekad";
     public string TimeSpanMultipleMonthsDual => InvariantResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => InvariantResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;

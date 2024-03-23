@@ -450,9 +450,6 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} ġimgħat</value>
   </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>qatt</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>xahrejn</value>
   </data>

@@ -450,7 +450,4 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} minggu</value>
   </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>tidak pernah</value>
-  </data>
 </root>

@@ -86,7 +86,6 @@ class SpanishResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0} minutos";
     public string TimeSpanMultipleSecondsPaucal => "{0} segundos";
     public string TimeSpanMultipleWeeksPaucal => "{0} semanas";
-    public string DateNever => "nunca";
     public string TimeSpanMultipleMonthsDual => "{0} meses";
     public string TimeSpanMultipleMonthsPaucal => "{0} meses";
     public string TimeSpanMultipleMonthsPlural => "{0} meses";

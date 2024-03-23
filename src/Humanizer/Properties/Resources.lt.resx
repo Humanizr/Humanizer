@@ -185,9 +185,6 @@
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>dabar</value>
   </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>niekada</value>
-  </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
     <value>po {0} metų</value>
   </data>

@@ -40,7 +40,6 @@ class GermanResources : IResources
     public string DateSingleMonthFromNow => "in einem Monat";
     public string DateSingleSecondFromNow => "in einer Sekunde";
     public string DateSingleYearFromNow => "in einem Jahr";
-    public string DateNever => "nie";
     public string TimeSpanMultipleMonths => "{0} Monate";
     public string TimeSpanMultipleYears => "{0} Jahre";
     public string TimeSpanSingleMonth => "1 Monat";
