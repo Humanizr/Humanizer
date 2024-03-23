@@ -13,7 +13,7 @@
     <PackageReference Include="Verify.DiffPlex" Version="2.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
-    <Reference Include="System.ComponentModel.DataAnnotations" Condition="'$(TargetFramework)' == 'net48' "/>
+    <Reference Include="System.ComponentModel.DataAnnotations" Condition="'$(TargetFramework)' == 'net48' " />
     <Content Include="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

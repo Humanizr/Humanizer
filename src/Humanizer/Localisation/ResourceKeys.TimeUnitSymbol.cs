@@ -14,6 +14,17 @@ public partial class ResourceKeys
         /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
         /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
         public static string GetResourceKey(TimeUnit unit) =>
-            $"TimeUnit_{unit}";
+            unit switch
+            {
+                TimeUnit.Millisecond => "TimeUnit_Millisecond",
+                TimeUnit.Second => "TimeUnit_Second",
+                TimeUnit.Minute => "TimeUnit_Minute",
+                TimeUnit.Hour => "TimeUnit_Hour",
+                TimeUnit.Day => "TimeUnit_Day",
+                TimeUnit.Week => "TimeUnit_Week",
+                TimeUnit.Month => "TimeUnit_Month",
+                TimeUnit.Year => "TimeUnit_Year",
+                _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null)
+            };
     }
 }
