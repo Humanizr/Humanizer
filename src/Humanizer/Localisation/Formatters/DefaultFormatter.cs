@@ -18,7 +18,7 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
         GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
 
     public virtual string DateHumanize_Never() =>
-        Format(ResourceKeys.DateHumanize.Never);
+        resources.DateNever;
 
     /// <summary>
     /// Returns the string representation of the provided DateTime
