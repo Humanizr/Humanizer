@@ -62,11 +62,19 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
     }
 
     /// <inheritdoc />
-    public virtual string TimeUnitHumanize(TimeUnit timeUnit)
-    {
-        var resourceKey = ResourceKeys.TimeUnitSymbol.GetResourceKey(timeUnit);
-        return Format(resourceKey);
-    }
+    public virtual string TimeUnitHumanize(TimeUnit timeUnit) =>
+        timeUnit switch
+        {
+            TimeUnit.Millisecond => resources.TimeUnitMillisecond,
+            TimeUnit.Second => resources.TimeUnitSecond,
+            TimeUnit.Minute => resources.TimeUnitMinute,
+            TimeUnit.Hour => resources.TimeUnitHour,
+            TimeUnit.Day => resources.TimeUnitDay,
+            TimeUnit.Week => resources.TimeUnitWeek,
+            TimeUnit.Month => resources.TimeUnitMonth,
+            TimeUnit.Year => resources.TimeUnitYear,
+            _ => throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, null)
+        };
 
     string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
     {

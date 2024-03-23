@@ -1174,10 +1174,6 @@ namespace Humanizer
         {
             public static string GetResourceKey(Humanizer.TimeUnit unit, int count = 1, bool toWords = false) { }
         }
-        public static class TimeUnitSymbol
-        {
-            public static string GetResourceKey(Humanizer.TimeUnit unit) { }
-        }
     }
     public static class Resources
     {
