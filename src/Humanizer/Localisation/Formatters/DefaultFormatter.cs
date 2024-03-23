@@ -53,7 +53,7 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
     public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
     {
         var resourceKey = toSymbol ? $"DataUnit_{dataUnit}Symbol" : $"DataUnit_{dataUnit}";
-        var resourceValue = Format(resourceKey);
+        var resourceValue = Resources.GetResource(resourceKey, Culture);
 
         if (!toSymbol && count > 1)
             resourceValue += 's';
@@ -81,7 +81,7 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
         var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
         if (count == 1)
         {
-            return Format(resourceKey);
+            return Resources.GetResource(resourceKey, Culture);
         }
         else
         {
@@ -92,16 +92,13 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
     string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
     {
         var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
-        return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(unit, resourceKey, count, toWords);
-    }
+        if (count == 1)
+        {
+            return Resources.GetResource(resourceKey + (toWords ? "_Words" : ""), Culture);
+        }
 
-    /// <summary>
-    /// Formats the specified resource key.
-    /// </summary>
-    /// <param name="resourceKey">The resource key.</param>
-    /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
-    protected virtual string Format(string resourceKey) =>
-        Resources.GetResource(resourceKey, Culture);
+        return Format(unit, resourceKey, count, toWords);
+    }
 
     /// <summary>
     /// Formats the specified resource key.
