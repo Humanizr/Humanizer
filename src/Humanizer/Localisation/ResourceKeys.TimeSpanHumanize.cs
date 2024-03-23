@@ -26,10 +26,32 @@ public partial class ResourceKeys
 
             if (count == 1)
             {
-                return $"TimeSpanHumanize_Single{unit}";
+                return unit switch
+                {
+                    TimeUnit.Millisecond => "TimeSpanHumanize_SingleMillisecond",
+                    TimeUnit.Second => "TimeSpanHumanize_SingleSecond",
+                    TimeUnit.Minute => "TimeSpanHumanize_SingleMinute",
+                    TimeUnit.Hour => "TimeSpanHumanize_SingleHour",
+                    TimeUnit.Day => "TimeSpanHumanize_SingleDay",
+                    TimeUnit.Week => "TimeSpanHumanize_SingleWeek",
+                    TimeUnit.Month => "TimeSpanHumanize_SingleMonth",
+                    TimeUnit.Year => "TimeSpanHumanize_SingleYear",
+                    _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null)
+                };
             }
 
-            return $"TimeSpanHumanize_Multiple{unit}s";
+            return unit switch
+            {
+                TimeUnit.Millisecond => "TimeSpanHumanize_MultipleMilliseconds",
+                TimeUnit.Second => "TimeSpanHumanize_MultipleSeconds",
+                TimeUnit.Minute => "TimeSpanHumanize_MultipleMinutes",
+                TimeUnit.Hour => "TimeSpanHumanize_MultipleHours",
+                TimeUnit.Day => "TimeSpanHumanize_MultipleDays",
+                TimeUnit.Week => "TimeSpanHumanize_MultipleWeeks",
+                TimeUnit.Month => "TimeSpanHumanize_MultipleMonths",
+                TimeUnit.Year => "TimeSpanHumanize_MultipleYears",
+                _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null)
+            };
         }
     }
 }
