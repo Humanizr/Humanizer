@@ -8,7 +8,7 @@ public class MergeResources
     {
 
         var cultureInfos = CultureInfo.GetCultures(CultureTypes.AllCultures);
-        var dir = @"C:\Code\ClassLibrary1\ClassLibrary1";
+        var dir = @"C:\Code\Humanizer\src\Humanizer\Resources";
         foreach (var file in Directory.EnumerateFiles(dir,"*.cs"))
         {
             File.Delete(file);
