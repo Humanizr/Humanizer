@@ -79,7 +79,14 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
     string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
     {
         var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
-        return count == 1 ? Format(resourceKey) : Format(unit, resourceKey, count);
+        if (count == 1)
+        {
+            return Format(resourceKey);
+        }
+        else
+        {
+            return Format(unit, resourceKey, count);
+        }
     }
 
     string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
