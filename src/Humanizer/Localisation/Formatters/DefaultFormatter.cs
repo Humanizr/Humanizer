@@ -100,11 +100,8 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
     /// </summary>
     /// <param name="resourceKey">The resource key.</param>
     /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
-    protected virtual string Format(string resourceKey)
-    {
-        var resolvedKey = GetResourceKey(resourceKey);
-        return Resources.GetResource(resolvedKey, Culture);
-    }
+    protected virtual string Format(string resourceKey) =>
+        Resources.GetResource(resourceKey, Culture);
 
     /// <summary>
     /// Formats the specified resource key.
@@ -131,8 +128,5 @@ public class DefaultFormatter(CultureInfo culture, IResources resources) : IForm
     /// <param name="resourceKey">The resource key that's being in formatting</param>
     /// <param name="number">The number of the units being used in formatting</param>
     protected virtual string GetResourceKey(string resourceKey, int number) =>
-        resourceKey;
-
-    protected virtual string GetResourceKey(string resourceKey) =>
         resourceKey;
 }
