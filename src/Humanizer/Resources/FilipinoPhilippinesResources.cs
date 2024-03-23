@@ -113,6 +113,7 @@ class FilipinoPhilippinesResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0} minuto";
     public string TimeSpanMultipleSecondsPaucal => "{0} segundo";
     public string TimeSpanMultipleWeeksPaucal => "{0} linggo";
+    public string DateNever => "hindi kailanman";
     public string TimeSpanMultipleMonthsDual => InvariantResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => InvariantResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;

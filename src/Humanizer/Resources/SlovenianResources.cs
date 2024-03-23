@@ -76,6 +76,7 @@ class SlovenianResources : IResources
     public string TimeSpanMultipleSecondsPaucal => "{0} sekunde";
     public string TimeSpanMultipleWeeksDual => "{0} tedna";
     public string TimeSpanMultipleWeeksPaucal => "{0} tedne";
+    public string DateNever => "nikoli";
     public string TimeSpanMultipleMonths => "{0} mesecev";
     public string TimeSpanMultipleMonthsDual => "{0} meseca";
     public string TimeSpanMultipleMonthsPaucal => "{0} mesece";

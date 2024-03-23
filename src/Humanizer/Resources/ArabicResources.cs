@@ -102,6 +102,7 @@ class ArabicResources : IResources
     public string TimeSpanMultipleMinutesSingular => InvariantResources.Instance.TimeSpanMultipleMinutesSingular;
     public string TimeSpanMultipleSecondsSingular => InvariantResources.Instance.TimeSpanMultipleSecondsSingular;
     public string TimeSpanMultipleWeeksSingular => InvariantResources.Instance.TimeSpanMultipleWeeksSingular;
+    public string DateNever => InvariantResources.Instance.DateNever;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;
     public string TimeSpanMultipleYearsSingular => InvariantResources.Instance.TimeSpanMultipleYearsSingular;
     public string TimeSpanSingleDayWords => InvariantResources.Instance.TimeSpanSingleDayWords;

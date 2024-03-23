@@ -113,6 +113,7 @@ class KoreanKoreaResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0}분";
     public string TimeSpanMultipleSecondsPaucal => "{0}초";
     public string TimeSpanMultipleWeeksPaucal => "{0}주";
+    public string DateNever => "사용 안 함";
     public string TimeSpanMultipleMonthsDual => InvariantResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => InvariantResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;

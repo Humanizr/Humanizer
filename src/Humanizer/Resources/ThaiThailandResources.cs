@@ -113,6 +113,7 @@ class ThaiThailandResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0} นาที";
     public string TimeSpanMultipleSecondsPaucal => "{0} วินาที";
     public string TimeSpanMultipleWeeksPaucal => "{0} สัปดาห์";
+    public string DateNever => "ไม่เคย";
     public string TimeSpanMultipleMonthsDual => InvariantResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => InvariantResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;

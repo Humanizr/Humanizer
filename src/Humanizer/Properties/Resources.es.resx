@@ -369,6 +369,9 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} semanas</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nunca</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>{0} meses</value>
   </data>

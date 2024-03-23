@@ -14,6 +14,7 @@ class GreekResources : IResources
     public string DateMultipleSecondsFromNow => "{0} δευτερόλεπτα από τώρα";
     public string DateMultipleYearsAgo => "πριν από {0} χρόνια";
     public string DateMultipleYearsFromNow => "{0} χρόνια από τώρα";
+    public string DateNever => "ποτέ";
     public string DateNow => "τώρα";
     public string DateSingleDayAgo => "χθες";
     public string DateSingleDayFromNow => "αύριο";

@@ -98,6 +98,7 @@ class UzbekLatinUzbekistanResources : IResources
     public string TimeSpanMultipleWeeksDual => InvariantResources.Instance.TimeSpanMultipleWeeksDual;
     public string TimeSpanMultipleWeeksPlural => InvariantResources.Instance.TimeSpanMultipleWeeksPlural;
     public string TimeSpanMultipleWeeksSingular => InvariantResources.Instance.TimeSpanMultipleWeeksSingular;
+    public string DateNever => InvariantResources.Instance.DateNever;
     public string TimeSpanMultipleMonthsDual => InvariantResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => InvariantResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;

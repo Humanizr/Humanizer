@@ -113,6 +113,7 @@ class CentralKurdishResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0} خولەک";
     public string TimeSpanMultipleSecondsPaucal => "{0} چرکە";
     public string TimeSpanMultipleWeeksPaucal => "{0} هەفتە";
+    public string DateNever => "هەرگیز";
     public string TimeSpanMultipleMonthsDual => "{0} مانگ";
     public string TimeSpanMultipleMonthsPaucal => "{0} مانگ";
     public string TimeSpanMultipleMonthsPlural => "{0} مانگ";

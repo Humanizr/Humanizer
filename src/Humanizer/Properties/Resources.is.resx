@@ -351,6 +351,9 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 ár</value>
   </data>
+                                <data name="DateHumanize_Never" xml:space="preserve">
+    <value>aldrei</value>
+  </data>
       <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
     <value>{0} mánuðir</value>
   </data>

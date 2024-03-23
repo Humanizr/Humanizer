@@ -99,6 +99,9 @@
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
     <value>a{1} {0} Joer</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>ni</value>
+  </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>elo</value>
   </data>

@@ -13,6 +13,11 @@ public partial class ResourceKeys
         public const string Now = "DateHumanize_Now";
 
         /// <summary>
+        /// Resource key for Never.
+        /// </summary>
+        public const string Never = "DateHumanize_Never";
+
+        /// <summary>
         /// Generates Resource Keys according to convention.
         /// </summary>
         /// <param name="timeUnit">Time unit</param>

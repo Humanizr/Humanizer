@@ -100,6 +100,7 @@ class FinnishFinlandResources : IResources
     public string TimeSpanMultipleYears => InvariantResources.Instance.TimeSpanMultipleYears;
     public string TimeSpanSingleMonth => InvariantResources.Instance.TimeSpanSingleMonth;
     public string TimeSpanSingleYear => InvariantResources.Instance.TimeSpanSingleYear;
+    public string DateNever => InvariantResources.Instance.DateNever;
     public string TimeSpanMultipleMonthsDual => InvariantResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => InvariantResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;

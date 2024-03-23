@@ -118,6 +118,7 @@ class SerbianLatinResources : IResources
     public string TimeSpanMultipleWeeksDual => SerbianResources.Instance.TimeSpanMultipleWeeksDual;
     public string TimeSpanMultipleWeeksPlural => SerbianResources.Instance.TimeSpanMultipleWeeksPlural;
     public string TimeSpanMultipleWeeksSingular => SerbianResources.Instance.TimeSpanMultipleWeeksSingular;
+    public string DateNever => SerbianResources.Instance.DateNever;
     public string TimeSpanMultipleMonthsDual => SerbianResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => SerbianResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => SerbianResources.Instance.TimeSpanMultipleMonthsSingular;

@@ -60,6 +60,7 @@ class LithuanianResources : IResources
     public string DateSingleDayFromNow => "rytoj";
     public string DateSingleDayAgo => "vakar";
     public string DateNow => "dabar";
+    public string DateNever => "niekada";
     public string DateMultipleYearsFromNowSingular => "po {0} metų";
     public string DateMultipleYearsFromNowPlural => "po {0} metų";
     public string DateMultipleYearsFromNow => "po {0} metų";

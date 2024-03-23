@@ -97,6 +97,7 @@ public interface IResources
     public string TimeSpanMultipleYears { get; }
     public string TimeSpanSingleMonth { get; }
     public string TimeSpanSingleYear { get; }
+    public string DateNever { get; }
     public string TimeSpanMultipleMonthsDual { get; }
     public string TimeSpanMultipleMonthsPlural { get; }
     public string TimeSpanMultipleMonthsSingular { get; }

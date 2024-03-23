@@ -113,6 +113,7 @@ class MalteseResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0} minuti";
     public string TimeSpanMultipleSecondsPaucal => "{0} sekondi";
     public string TimeSpanMultipleWeeksPaucal => "{0} ġimgħat";
+    public string DateNever => "qatt";
     public string TimeSpanMultipleMonthsDual => "xahrejn";
     public string TimeSpanMultipleMonthsPaucal => "{0} xhur";
     public string TimeSpanMultipleMonthsPlural => "{0} xhur";

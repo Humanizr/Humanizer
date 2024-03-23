@@ -405,6 +405,9 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 year</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>never</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>{0} months</value>
   </data>

@@ -450,4 +450,7 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0} linggo</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>hindi kailanman</value>
+  </data>
 </root>

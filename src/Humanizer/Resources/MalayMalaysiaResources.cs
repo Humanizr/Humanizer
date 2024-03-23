@@ -113,6 +113,7 @@ class MalayMalaysiaResources : IResources
     public string TimeSpanMultipleMinutesPaucal => "{0} minit";
     public string TimeSpanMultipleSecondsPaucal => "{0} saat";
     public string TimeSpanMultipleWeeksPaucal => "{0} minggu";
+    public string DateNever => "tidak pernah";
     public string TimeSpanMultipleMonthsDual => InvariantResources.Instance.TimeSpanMultipleMonthsDual;
     public string TimeSpanMultipleMonthsPlural => InvariantResources.Instance.TimeSpanMultipleMonthsPlural;
     public string TimeSpanMultipleMonthsSingular => InvariantResources.Instance.TimeSpanMultipleMonthsSingular;
