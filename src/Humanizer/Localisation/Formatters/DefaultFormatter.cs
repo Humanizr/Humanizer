@@ -3,12 +3,14 @@
 /// <summary>
 /// Default implementation of IFormatter interface.
 /// </summary>
-public class DefaultFormatter(CultureInfo culture) : IFormatter
+#pragma warning disable CS9113 // Parameter is unread.
+public class DefaultFormatter(CultureInfo culture, IResources resources) : IFormatter
+#pragma warning restore CS9113 // Parameter is unread.
 {
     protected CultureInfo Culture { get; } = culture;
 
-    public DefaultFormatter(string localeCode)
-        : this(new CultureInfo(localeCode))
+    public DefaultFormatter(string localeCode, IResources resources)
+        : this(new CultureInfo(localeCode), resources)
     {
     }
 

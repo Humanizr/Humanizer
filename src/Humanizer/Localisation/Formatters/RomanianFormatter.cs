@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
 class RomanianFormatter(CultureInfo culture) :
-    DefaultFormatter(culture)
+    DefaultFormatter(culture, RomanianResources.Instance)
 {
     const int PrepositionIndicatingDecimals = 2;
     const int MaxNumeralWithNoPreposition = 19;

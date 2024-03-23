@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
 class LuxembourgishFormatter(CultureInfo culture) :
-    DefaultFormatter(culture)
+    DefaultFormatter(culture, LuxembourgishResources.Instance)
 {
     const string DualPostfix = "_Dual";
 

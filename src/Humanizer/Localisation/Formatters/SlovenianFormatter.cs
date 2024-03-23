@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
 class SlovenianFormatter(CultureInfo culture) :
-    DefaultFormatter(culture)
+    DefaultFormatter(culture, SlovenianResources.Instance)
 {
     const string DualPostfix = "_Dual";
     const string TrialQuadralPostfix = "_Paucal";

@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
-class SerbianFormatter(CultureInfo culture) :
-    DefaultFormatter(culture)
+class SerbianFormatter(CultureInfo culture, IResources resources) :
+    DefaultFormatter(culture, resources)
 {
     const string PaucalPostfix = "_Paucal";
 
