@@ -26,7 +26,10 @@ public partial class ResourceKeys
         /// <returns>Resource key, like DateHumanize_SingleMinuteAgo</returns>
         public static string GetResourceKey(TimeUnit timeUnit, Tense timeUnitTense, int count = 1)
         {
-            ValidateRange(count);
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
 
             if (count == 0)
             {

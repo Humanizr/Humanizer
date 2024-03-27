@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
 class UkrainianFormatter(CultureInfo culture)
-    : DefaultFormatter(culture)
+    : DefaultFormatter(culture, UkrainianResources.Instance)
 {
     protected override string GetResourceKey(string resourceKey, int number)
     {

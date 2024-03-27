@@ -3,12 +3,14 @@
 /// <summary>
 /// Default implementation of IFormatter interface.
 /// </summary>
-public class DefaultFormatter(CultureInfo culture) : IFormatter
+#pragma warning disable CS9113 // Parameter is unread.
+public class DefaultFormatter(CultureInfo culture, IResources resources) : IFormatter
+#pragma warning restore CS9113 // Parameter is unread.
 {
     protected CultureInfo Culture { get; } = culture;
 
-    public DefaultFormatter(string localeCode)
-        : this(new CultureInfo(localeCode))
+    public DefaultFormatter(string localeCode, IResources resources)
+        : this(new CultureInfo(localeCode), resources)
     {
     }
 
@@ -16,7 +18,7 @@ public class DefaultFormatter(CultureInfo culture) : IFormatter
         GetResourceForDate(TimeUnit.Millisecond, Tense.Past, 0);
 
     public virtual string DateHumanize_Never() =>
-        Format(ResourceKeys.DateHumanize.Never);
+        resources.DateNever;
 
     /// <summary>
     /// Returns the string representation of the provided DateTime
@@ -51,7 +53,7 @@ public class DefaultFormatter(CultureInfo culture) : IFormatter
     public virtual string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
     {
         var resourceKey = toSymbol ? $"DataUnit_{dataUnit}Symbol" : $"DataUnit_{dataUnit}";
-        var resourceValue = Format(resourceKey);
+        var resourceValue = Resources.GetResource(resourceKey, Culture);
 
         if (!toSymbol && count > 1)
             resourceValue += 's';
@@ -60,33 +62,42 @@ public class DefaultFormatter(CultureInfo culture) : IFormatter
     }
 
     /// <inheritdoc />
-    public virtual string TimeUnitHumanize(TimeUnit timeUnit)
-    {
-        var resourceKey = ResourceKeys.TimeUnitSymbol.GetResourceKey(timeUnit);
-        return Format(resourceKey);
-    }
+    public virtual string TimeUnitHumanize(TimeUnit timeUnit) =>
+        timeUnit switch
+        {
+            TimeUnit.Millisecond => resources.TimeUnitMillisecond,
+            TimeUnit.Second => resources.TimeUnitSecond,
+            TimeUnit.Minute => resources.TimeUnitMinute,
+            TimeUnit.Hour => resources.TimeUnitHour,
+            TimeUnit.Day => resources.TimeUnitDay,
+            TimeUnit.Week => resources.TimeUnitWeek,
+            TimeUnit.Month => resources.TimeUnitMonth,
+            TimeUnit.Year => resources.TimeUnitYear,
+            _ => throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, null)
+        };
 
     string GetResourceForDate(TimeUnit unit, Tense timeUnitTense, int count)
     {
         var resourceKey = ResourceKeys.DateHumanize.GetResourceKey(unit, timeUnitTense: timeUnitTense, count: count);
-        return count == 1 ? Format(resourceKey) : Format(unit, resourceKey, count);
+        if (count == 1)
+        {
+            return Resources.GetResource(resourceKey, Culture);
+        }
+        else
+        {
+            return Format(unit, resourceKey, count);
+        }
     }
 
     string GetResourceForTimeSpan(TimeUnit unit, int count, bool toWords = false)
     {
         var resourceKey = ResourceKeys.TimeSpanHumanize.GetResourceKey(unit, count, toWords);
-        return count == 1 ? Format(resourceKey + (toWords ? "_Words" : "")) : Format(unit, resourceKey, count, toWords);
-    }
+        if (count == 1)
+        {
+            return Resources.GetResource(resourceKey + (toWords ? "_Words" : ""), Culture);
+        }
 
-    /// <summary>
-    /// Formats the specified resource key.
-    /// </summary>
-    /// <param name="resourceKey">The resource key.</param>
-    /// <exception cref="ArgumentException">If the resource not exists on the specified culture.</exception>
-    protected virtual string Format(string resourceKey)
-    {
-        var resolvedKey = GetResourceKey(resourceKey);
-        return Resources.GetResource(resolvedKey, Culture);
+        return Format(unit, resourceKey, count, toWords);
     }
 
     /// <summary>
@@ -114,8 +125,5 @@ public class DefaultFormatter(CultureInfo culture) : IFormatter
     /// <param name="resourceKey">The resource key that's being in formatting</param>
     /// <param name="number">The number of the units being used in formatting</param>
     protected virtual string GetResourceKey(string resourceKey, int number) =>
-        resourceKey;
-
-    protected virtual string GetResourceKey(string resourceKey) =>
         resourceKey;
 }

@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
 class HebrewFormatter(CultureInfo culture) :
-    DefaultFormatter(culture)
+    DefaultFormatter(culture, HebrewResources.Instance)
 {
     const string DualPostfix = "_Dual";
     const string PluralPostfix = "_Plural";

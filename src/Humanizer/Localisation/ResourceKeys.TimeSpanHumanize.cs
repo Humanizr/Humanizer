@@ -17,7 +17,10 @@ public partial class ResourceKeys
         /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
         public static string GetResourceKey(TimeUnit unit, int count = 1, bool toWords = false)
         {
-            ValidateRange(count);
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
 
             if (count == 0 && toWords)
             {

@@ -1,7 +1,7 @@
 ﻿namespace Humanizer;
 
 class MalteseFormatter(CultureInfo culture) :
-    DefaultFormatter(culture)
+    DefaultFormatter(culture, MalteseResources.Instance)
 {
     protected override string GetResourceKey(string resourceKey, int number)
     {
