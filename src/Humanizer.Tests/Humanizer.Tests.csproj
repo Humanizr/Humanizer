@@ -6,8 +6,8 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.2" PrivateAssets="all" />
     <PackageReference Include="PublicApiGenerator" Version="11.1.0" />
-    <PackageReference Include="xunit" Version="2.7.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7" PrivateAssets="all" />
+    <PackageReference Include="xunit" Version="2.7.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.8" PrivateAssets="all" />
     <PackageReference Include="Verify.Xunit" Version="24.0.0" />
     <PackageReference Include="Verify.DiffPlex" Version="2.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
