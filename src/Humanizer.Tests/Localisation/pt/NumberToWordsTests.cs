@@ -1,9 +1,10 @@
-﻿namespace pt;
+namespace pt;
 
 [UseCulture("pt")]
 public class NumberToWordsTests
 {
     [Theory]
+    [InlineData(0, "zero")]
     [InlineData(1, "um")]
     [InlineData(2, "dois")]
     [InlineData(3, "três")]
@@ -19,10 +20,10 @@ public class NumberToWordsTests
     [InlineData(13, "treze")]
     [InlineData(14, "quatorze")]
     [InlineData(15, "quinze")]
-    [InlineData(16, "dezesseis")]
-    [InlineData(17, "dezessete")]
+    [InlineData(16, "dezasseis")]
+    [InlineData(17, "dezassete")]
     [InlineData(18, "dezoito")]
-    [InlineData(19, "dezenove")]
+    [InlineData(19, "dezanove")]
     [InlineData(20, "vinte")]
     [InlineData(30, "trinta")]
     [InlineData(40, "quarenta")]
@@ -101,6 +102,7 @@ public class NumberToWordsTests
         Assert.Equal(expected, number.ToWords());
 
     [Theory]
+    [InlineData(0, "zero")]
     [InlineData(1, "uma")]
     [InlineData(2, "duas")]
     [InlineData(3, "três")]
