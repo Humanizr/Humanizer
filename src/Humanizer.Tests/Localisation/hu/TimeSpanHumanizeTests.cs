@@ -5,7 +5,7 @@ public class TimeSpanHumanizeTests
 {
     [Theory]
     [Trait("Translation", "Google")]
-    [InlineData(366, "egy év")]
+    [InlineData(366, "1 év")]
     [InlineData(731, "2 év")]
     [InlineData(1096, "3 év")]
     [InlineData(4018, "11 év")]
@@ -14,7 +14,7 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [Trait("Translation", "Google")]
-    [InlineData(31, "egy hónap")]
+    [InlineData(31, "1 hónap")]
     [InlineData(61, "2 hónap")]
     [InlineData(92, "3 hónap")]
     [InlineData(335, "11 hónap")]

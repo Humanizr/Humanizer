@@ -54,5 +54,6 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("en-IN", new IndianNumberToWordsConverter());
         Register("lt", new LithuanianNumberToWordsConverter());
         Register("lb", new LuxembourgishNumberToWordsConverter());
+        Register("hu", new HungarianNumberToWordsConverter());
     }
 }
