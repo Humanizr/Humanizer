@@ -51,19 +51,20 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
                 return $"mínusz {ConvertInternal(-number, isOrdinal)}";
         }
 
+        var isLessThanTen = number < 10;
         var parts = new List<string>(10);
 
-        CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000_000_000, "trillió", "trilliomodik");
-        CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000_000, "billiárd", "billiárdodik");
-        CollectParts(parts, ref number, isOrdinal, 1_000_000_000_000, "billió", "billiomodik");
-        CollectParts(parts, ref number, isOrdinal, 1_000_000_000, "milliárd", "milliárdodik");
-        CollectParts(parts, ref number, isOrdinal, 1_000_000, "millió", "milliomodik");
+        CollectParts(parts, ref number, isOrdinal, isLessThanTen, 1_000_000_000_000_000_000, "trillió", "trilliomodik");
+        CollectParts(parts, ref number, isOrdinal, isLessThanTen, 1_000_000_000_000_000, "billiárd", "billiárdodik");
+        CollectParts(parts, ref number, isOrdinal, isLessThanTen, 1_000_000_000_000, "billió", "billiomodik");
+        CollectParts(parts, ref number, isOrdinal, isLessThanTen, 1_000_000_000, "milliárd", "milliárdodik");
+        CollectParts(parts, ref number, isOrdinal, isLessThanTen, 1_000_000, "millió", "milliomodik");
 
         // All numbers above 2000 should be separated by dashes per thousands
         if (2_000 <= number)
         {
-            CollectParts(parts, ref number, isOrdinal, 1_000, "ezer", "ezredik");
-            var underAThousandPart = GetUnderAThousandPart(number, isOrdinal, false);
+            CollectParts(parts, ref number, isOrdinal, isLessThanTen, 1_000, "ezer", "ezredik");
+            var underAThousandPart = GetUnderAThousandPart(number, isOrdinal, false, isLessThanTen);
             if (underAThousandPart != string.Empty)
                 parts.Add(underAThousandPart);
         }
@@ -71,7 +72,7 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             // In hungarian there is no separator between one thousand and the rest of the numbers
             var lastPart = 1_000 <= number ? GetOneThousandPart(ref number, isOrdinal) : "";
-            lastPart += GetUnderAThousandPart(number, isOrdinal, false);
+            lastPart += GetUnderAThousandPart(number, isOrdinal, false, isLessThanTen);
 
             if (lastPart != string.Empty)
                 parts.Add(lastPart);
@@ -80,28 +81,19 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
         return string.Join("-", parts);
     }
 
-    // Thosuand part for numbers between 1000 and 1999
+    // Thousands part for numbers between 1000 and 1999
     static string GetOneThousandPart(ref long number, bool isOrdinal)
     {
         const int divisor = 1_000;
-        if (number == divisor)
-        {
-            number %= divisor;
-            return isOrdinal ? "ezredik" : "ezer";
-        }
 
-        var result = number / divisor;
-        if (result == 0)
-        {
-            return string.Empty;
-        }
+        var oneThousandPart = isOrdinal && number == divisor ? "ezredik" : "ezer";
 
-        var prefixNumber = result == 1 ? "ezer" : GetUnderAThousandPart(result, isOrdinal, true) + "ezer";
         number %= divisor;
-        return prefixNumber;
+        return oneThousandPart;
     }
 
-    private static void CollectParts(List<string> parts, ref long number, bool isOrdinal, long divisor, string word,
+    private static void CollectParts(List<string> parts, ref long number, bool isOrdinal, bool isLessThanTen,
+        long divisor, string word,
         string ordinal)
     {
         var result = number / divisor;
@@ -110,13 +102,13 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
             return;
         }
 
-        var prefixNumber = GetUnderAThousandPart(result, isOrdinal, true);
+        var prefixNumber = GetUnderAThousandPart(result, isOrdinal, true, isLessThanTen);
 
         number %= divisor;
         parts.Add(number == 0 && isOrdinal ? prefixNumber + ordinal : prefixNumber + word);
     }
 
-    private static string GetUnderAThousandPart(long number, bool isOrdinal, bool isPrefix)
+    private static string GetUnderAThousandPart(long number, bool isOrdinal, bool isPrefix, bool originalLessThanTen)
     {
         var numberString = "";
         if (100 <= number)
@@ -133,23 +125,23 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             // Return an ordinal ten if the number is exactly one of tens
             if (isOrdinal && number % 10 == 0)
-                return OrdinalTensMap[number / 10];
+                return numberString + OrdinalTensMap[number / 10];
 
             numberString += WholeTensExceptions.TryGetValue(number, out var value) ? value : TensMap[number / 10];
             number %= 10;
         }
 
-        if (isOrdinal)
-            numberString += GetOrdinalOnes(number, numberString == string.Empty);
+        if (isOrdinal && !isPrefix)
+            numberString += GetOrdinalOnes(number, originalLessThanTen);
         else
             numberString += isPrefix && number == 2 ? "két" : UnitsMap[number];
 
         return numberString;
     }
 
-    private static string GetOrdinalOnes(long number, bool onlyOnes)
+    private static string GetOrdinalOnes(long number, bool lessThanTen)
     {
-        if (onlyOnes)
+        if (lessThanTen)
             return OrdinalUnitsMap[number];
 
         return OrdinalUnitsExceptions.TryGetValue(number, out var value) ? value : OrdinalUnitsMap[number];
