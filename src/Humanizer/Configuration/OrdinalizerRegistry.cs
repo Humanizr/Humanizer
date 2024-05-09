@@ -20,5 +20,6 @@ class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
         Register("hy", new ArmenianOrdinalizer());
         Register("az", new AzerbaijaniOrdinalizer());
         Register("lb", new LuxembourgishOrdinalizer());
+        Register("hu", new HungarianOrdinalizer());
     }
 }
