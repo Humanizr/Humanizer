@@ -118,40 +118,40 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>há um segundo</value>
+    <value>um segundo atrás</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>daqui a um segundo</value>
+    <value>em um segundo</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>há {0} segundos</value>
+    <value>{0} segundos atrás</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>daqui a {0} segundos</value>
+    <value>em {0} segundos</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>há um minuto</value>
+    <value>um minuto atrás</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>daqui a um minuto</value>
+    <value>em um minuto</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>há {0} minutos</value>
+    <value>{0} minutos atrás</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>daqui a {0} minutos</value>
+    <value>em {0} minutos</value>
   </data>
   <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>há uma hora</value>
+    <value>uma hora atrás</value>
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>daqui a uma hora</value>
+    <value>em uma hora</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>há {0} horas</value>
+    <value>{0} horas atrás</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>daqui a {0} horas</value>
+    <value>em {0} horas</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ontem</value>
@@ -160,34 +160,34 @@
     <value>amanhã</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>há {0} dias</value>
+    <value>{0} dias atrás</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>daqui a {0} dias</value>
+    <value>em {0} dias</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>há um mês</value>
+    <value>um mês atrás</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>daqui a um mês</value>
+    <value>em um mês</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>daqui a {0} meses</value>
+    <value>em {0} meses</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
-    <value>há {0} meses</value>
+    <value>{0} meses atrás</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>há um ano</value>
+    <value>um ano atrás</value>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>daqui a um ano</value>
+    <value>em um ano</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
-    <value>há {0} anos</value>
+    <value>{0} anos atrás</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>daqui a {0} anos</value>
+    <value>em {0} anos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} dias</value>
@@ -232,19 +232,19 @@
     <value>agora</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
-    <value>daqui a {0} horas</value>
+    <value>em {0} horas</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
-    <value>daqui a {0} minutos</value>
+    <value>em {0} minutos</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
-    <value>há {0} segundos</value>
+    <value>{0} segundos atrás</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
-    <value>daqui a {0} segundos</value>
+    <value>em {0} segundos</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
-    <value>daqui a {0} anos</value>
+    <value>em {0} anos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
     <value>{0} dias</value>
@@ -271,97 +271,97 @@
     <value>{0} milisegundos</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
-    <value>há {0} dias</value>
+    <value>{0} dias atrás</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
-    <value>há {0} dias</value>
+    <value>{0} dias atrás</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
-    <value>há {0} dia</value>
+    <value>{0} dia atrás</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
-    <value>daqui a {0} dias</value>
+    <value>em {0} dias</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
-    <value>daqui a {0} dias</value>
+    <value>em {0} dias</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
-    <value>daqui a {0} dia</value>
+    <value>em {0} dia</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
-    <value>há {0} horas</value>
+    <value>{0} horas atrás</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
-    <value>há {0} horas</value>
+    <value>{0} horas atrás</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
-    <value>há {0} hora</value>
+    <value>{0} hora atrás</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
-    <value>daqui a {0} horas</value>
+    <value>em {0} horas</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
-    <value>daqui a {0} hora</value>
+    <value>em {0} hora</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
-    <value>há {0} minutos</value>
+    <value>{0} minutos atrás</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
-    <value>há {0} minutos</value>
+    <value>{0} minutos atrás</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
-    <value>há {0} minuto</value>
+    <value>{0} minuto atrás</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
-    <value>daqui a {0} minutos</value>
+    <value>em {0} minutos</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>daqui a {0} minuto</value>
+    <value>em {0} minuto</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
-    <value>há {0} meses</value>
+    <value>{0} meses atrás</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
-    <value>há {0} meses</value>
+    <value>{0} meses atrás</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
-    <value>há {0} mês</value>
+    <value>{0} mês atrás</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
-    <value>daqui a {0} meses</value>
+    <value>em {0} meses</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
-    <value>daqui a {0} meses</value>
+    <value>em {0} meses</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
-    <value>daqui a {0} mês</value>
+    <value>em {0} mês</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
-    <value>há {0} segundos</value>
+    <value>{0} segundos atrás</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
-    <value>há {0} segundo</value>
+    <value>{0} segundo atrás</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
-    <value>daqui a {0} segundos</value>
+    <value>em {0} segundos</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
-    <value>daqui a {0} segundo</value>
+    <value>em {0} segundo</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
-    <value>há {0} anos</value>
+    <value>{0} anos atrás</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
-    <value>há {0} anos</value>
+    <value>{0} anos atrás</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
-    <value>há {0} ano</value>
+    <value>{0} ano atrás</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
-    <value>daqui a {0} anos</value>
+    <value>em {0} anos</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
-    <value>daqui a {0} ano</value>
+    <value>em {0} ano</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
     <value>{0} dia</value>
@@ -406,34 +406,34 @@
     <value>1 ano</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
-    <value>há {0} horas</value>
+    <value>{0} horas atrás</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
-    <value>daqui a {0} horas</value>
+    <value>em {0} horas</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
-    <value>há {0} minutos</value>
+    <value>{0} minutos atrás</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
-    <value>daqui a {0} minutos</value>
+    <value>em {0} minutos</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
-    <value>há {0} meses</value>
+    <value>{0} meses atrás</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
-    <value>daqui a {0} meses</value>
+    <value>em {0} meses</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
-    <value>há {0} segundos</value>
+    <value>{0} segundos atrás</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
-    <value>daqui a {0} segundos</value>
+    <value>em {0} segundos</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>há {0} anos</value>
+    <value>{0} anos atrás</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
-    <value>daqui a {0} anos</value>
+    <value>em {0} anos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
     <value>{0} horas</value>
