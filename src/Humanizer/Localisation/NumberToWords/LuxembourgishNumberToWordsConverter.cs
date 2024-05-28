@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
 {
@@ -166,7 +166,7 @@ class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
     private string GetPartWithEifelerRule(string pluralFormat, long number, GrammaticalGender gender)
     {
         var nextWord = pluralFormat
-            .Substring(3, pluralFormat.Length - 3)
+            .AsSpan(3, pluralFormat.Length - 3)
             .TrimStart();
         var wordForm = LuxembourgishFormatter.DoesEifelerRuleApply(nextWord)
             ? WordForm.Eifeler
