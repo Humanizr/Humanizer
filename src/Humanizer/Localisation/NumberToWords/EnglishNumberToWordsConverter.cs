@@ -1,37 +1,10 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
     static readonly string[] UnitsMap = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+    static readonly string[] UnitsMapTh = ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth"];
     static readonly string[] TensMap = ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
-
-    static readonly Dictionary<long, string> OrdinalExceptions = new()
-    {
-        {
-            1, "first"
-        },
-        {
-            2, "second"
-        },
-        {
-            3, "third"
-        },
-        {
-            4, "fourth"
-        },
-        {
-            5, "fifth"
-        },
-        {
-            8, "eighth"
-        },
-        {
-            9, "ninth"
-        },
-        {
-            12, "twelfth"
-        },
-    };
 
     public override string Convert(long number) =>
         Convert(number, false);
@@ -126,23 +99,8 @@ class EnglishNumberToWordsConverter : GenderlessNumberToWordsConverter
         }
     }
 
-    static string GetUnitValue(long number, bool isOrdinal)
-    {
-        if (isOrdinal)
-        {
-            if (ExceptionNumbersToWords(number, out var exceptionString))
-            {
-                return exceptionString;
-            }
-
-            return $"{UnitsMap[number]}th";
-        }
-
-        return UnitsMap[number];
-    }
-
-    static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
-        OrdinalExceptions.TryGetValue(number, out words);
+    static string GetUnitValue(long number, bool isOrdinal) =>
+        isOrdinal ? UnitsMapTh[number] : UnitsMap[number];
 
     public override string ConvertToTuple(int number) =>
         number switch
