@@ -1,4 +1,4 @@
-﻿//The MIT License (MIT)
+//The MIT License (MIT)
 
 //Copyright (c) 2013-2014 Omar Khudeira (http://omar.io)
 
@@ -20,6 +20,7 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //THE SOFTWARE.
 
+using System.Diagnostics;
 using static System.Globalization.NumberStyles;
 
 namespace Humanizer;
@@ -386,73 +387,82 @@ public struct ByteSize(double byteSize) :
     public static bool TryParse(string? s, out ByteSize result) =>
         TryParse(s, null, out result);
 
-    public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result)
+    public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result) =>
+        TryParse(s.AsSpan(), formatProvider, out result);
+
+    static bool TryParse(CharSpan span, IFormatProvider? formatProvider, out ByteSize result)
     {
         // Arg checking
-        if (string.IsNullOrWhiteSpace(s))
+        span = span.TrimStart(); // Protect against leading spaces
+        if (span.IsEmpty)
         {
             result = default;
             return false;
         }
 
         // Acquiring culture-specific parsing info
-        var numberFormat = GetNumberFormatInfo(formatProvider);
-
-        const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign;
-        var numberSpecialChars = new[]
-        {
+        var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
+        CharSpan numberSpecialChars =
+        [
             Convert.ToChar(numberFormat.NumberDecimalSeparator),
             Convert.ToChar(numberFormat.NumberGroupSeparator),
             Convert.ToChar(numberFormat.PositiveSign),
             Convert.ToChar(numberFormat.NegativeSign),
-        };
+        ];
 
         // Setup the result
-        result = new();
-
-        // Get the index of the first non-digit character
-        // ReSharper disable once RedundantSuppressNullableWarningExpression
-        s = s!.TrimStart(); // Protect against leading spaces
-
-        int num;
-        var found = false;
+        result = default;
 
         // Pick first non-digit number
-        for (num = 0; num < s.Length; num++)
+        int lastNumber;
+        for (lastNumber = 0; lastNumber < span.Length; lastNumber++)
         {
-            if (!(char.IsDigit(s[num]) || numberSpecialChars.Contains(s[num])))
+            if (!(char.IsDigit(span[lastNumber]) || numberSpecialChars.Contains(span[lastNumber])))
             {
-                found = true;
                 break;
             }
         }
 
-        if (found == false)
+        if (lastNumber == span.Length)
         {
             return false;
         }
-
-        var lastNumber = num;
 
         // Cut the input string in half
-        var numberPart = s
-            .Substring(0, lastNumber)
+        var numberPart = span
+            .Slice(0, lastNumber)
             .Trim();
-        var sizePart = s
-            .Substring(lastNumber, s.Length - lastNumber)
+        var sizePart = span
+            .Slice(lastNumber, span.Length - lastNumber)
             .Trim();
 
-        // Get the numeric part
-        if (!double.TryParse(numberPart, numberStyles, formatProvider, out var number))
+        if (sizePart.Length is not (1 or 2))
         {
             return false;
         }
 
+        // Get the numeric part
+        const NumberStyles numberStyles = AllowDecimalPoint | AllowThousands | AllowLeadingSign;
+        if (!double.TryParse(
+#if NET
+            numberPart,
+#else
+            numberPart.ToString(),
+#endif
+            numberStyles, formatProvider, out var number))
+        {
+            return false;
+        }
+
+        Span<char> sizePartUpper = stackalloc char[sizePart.Length];
+        var upperLength = sizePart.ToUpperInvariant(sizePartUpper);
+        Debug.Assert(sizePartUpper.Length == upperLength);
+
         // Get the magnitude part
-        switch (sizePart.ToUpper())
+        switch (sizePartUpper)
         {
             case ByteSymbol:
-                if (sizePart == BitSymbol)
+                if (sizePart.SequenceEqual(BitSymbol))
                 {
                     // Bits
                     if (number % 1 != 0) // Can't have partial bits
@@ -491,16 +501,6 @@ public struct ByteSize(double byteSize) :
         }
 
         return true;
-    }
-
-    static NumberFormatInfo GetNumberFormatInfo(IFormatProvider? formatProvider)
-    {
-        if (formatProvider is NumberFormatInfo numberFormat)
-            return numberFormat;
-
-        var culture = formatProvider as CultureInfo ?? CultureInfo.CurrentCulture;
-
-        return culture.NumberFormat;
     }
 
     public static ByteSize Parse(string s) =>
