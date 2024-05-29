@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Style for the cardinal direction humanization
@@ -23,6 +23,7 @@ public enum HeadingStyle
 public static class HeadingExtensions
 {
     internal static readonly string[] Headings = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    internal static readonly string[] HeadingsShort = ["N_Short", "NNE_Short", "NE_Short", "ENE_Short", "E_Short", "ESE_Short", "SE_Short", "SSE_Short", "S_Short", "SSW_Short", "SW_Short", "WSW_Short", "W_Short", "WNW_Short", "NW_Short", "NNW_Short"];
     internal static readonly char[] HeadingArrows = ['↑', '↗', '→', '↘', '↓', '↙', '←', '↖'];
 
     // https://stackoverflow.com/a/7490772/1720761
@@ -39,14 +40,11 @@ public static class HeadingExtensions
     {
         var val = (int) (heading / 22.5 + .5);
 
-        var result = Headings[val % 16];
+        var headingsIndex = val % 16;
 
-        if (style == HeadingStyle.Abbreviated)
-        {
-            return Resources.GetResource($"{result}_Short", culture);
-        }
-
-        return Resources.GetResource(result, culture);
+        return Resources.GetResource(
+            style == HeadingStyle.Abbreviated ? HeadingsShort[headingsIndex] : Headings[headingsIndex],
+            culture);
     }
 
     /// <summary>
@@ -86,9 +84,9 @@ public static class HeadingExtensions
         culture ??= CultureInfo.CurrentCulture;
 
         var upperCaseHeading = culture.TextInfo.ToUpper(heading);
-        for (var index = 0; index < Headings.Length; ++index)
+        for (var index = 0; index < HeadingsShort.Length; ++index)
         {
-            var localizedShortHeading = Resources.GetResource($"{Headings[index]}_Short", culture);
+            var localizedShortHeading = Resources.GetResource(HeadingsShort[index], culture);
             if (culture.CompareInfo.Compare(upperCaseHeading, localizedShortHeading) == 0)
             {
                 return index * 22.5;
