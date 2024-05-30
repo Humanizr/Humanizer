@@ -1,4 +1,4 @@
-﻿//The Inflector class was cloned from Inflector (https://github.com/srkirkland/Inflector)
+//The Inflector class was cloned from Inflector (https://github.com/srkirkland/Inflector)
 
 //The MIT License (MIT)
 
@@ -65,9 +65,9 @@ public static class InflectorExtensions
     {
         var word = input.Pascalize();
         return word.Length > 0
-            ? word
-                .Substring(0, 1)
-                .ToLower() + word.Substring(1)
+            ? StringHumanizeExtensions.Concat(
+                char.ToLower(word[0]),
+                word.AsSpan(1))
             : word;
     }
 

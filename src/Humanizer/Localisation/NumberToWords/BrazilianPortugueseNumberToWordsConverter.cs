@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class BrazilianPortugueseNumberToWordsConverter :
     GenderedNumberToWordsConverter
@@ -166,17 +166,17 @@ class BrazilianPortugueseNumberToWordsConverter :
 
         if (toWords.EndsWith("os"))
         {
-            return toWords.Substring(0, toWords.Length - 2) + "as";
+            return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "as".AsSpan());
         }
 
         if (toWords.EndsWith("um"))
         {
-            return toWords.Substring(0, toWords.Length - 2) + "uma";
+            return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "uma".AsSpan());
         }
 
         if (toWords.EndsWith("dois"))
         {
-            return toWords.Substring(0, toWords.Length - 4) + "duas";
+            return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 4), "duas".AsSpan());
         }
 
         return toWords;
@@ -186,7 +186,9 @@ class BrazilianPortugueseNumberToWordsConverter :
     {
         if (gender == GrammaticalGender.Feminine)
         {
-            return toWords.TrimEnd('o') + 'a';
+            return StringHumanizeExtensions.Concat(
+                toWords.AsSpan().TrimEnd('o'),
+                'a');
         }
 
         return toWords;

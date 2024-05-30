@@ -46,7 +46,7 @@ class FixedNumberOfWordsTruncator : ITruncator
 
                 if (numberOfWordsProcessed == length)
                 {
-                    return value.Substring(0, i) + truncationString;
+                    return StringHumanizeExtensions.Concat(value.AsSpan(0, i), truncationString.AsSpan());
                 }
             }
             else
@@ -74,7 +74,7 @@ class FixedNumberOfWordsTruncator : ITruncator
 
                 if (numberOfWordsProcessed == length)
                 {
-                    return truncationString + value.Substring(i + 1).TrimEnd();
+                    return StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(i + 1).TrimEnd());
                 }
             }
             else

@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class RomanianOrdinalNumberConverter
 {
@@ -72,7 +72,7 @@ class RomanianOrdinalNumberConverter
 
         if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci"))
         {
-            words = words.Substring(0, words.Length - 4) + "zece";
+            words = StringHumanizeExtensions.Concat(words.AsSpan(0, words.Length - 4), "zece".AsSpan());
         }
         else if (gender == GrammaticalGender.Feminine && words.Contains("zeci") && (words.Contains("milioane") || words.Contains("miliarde")))
         {
@@ -82,15 +82,16 @@ class RomanianOrdinalNumberConverter
         if (gender == GrammaticalGender.Feminine && words.StartsWith("un "))
         {
             words = words
-                .Substring(2)
-                .TrimStart();
+                .AsSpan(2)
+                .TrimStart()
+                .ToString();
         }
 
         if (words.EndsWith("milioane"))
         {
             if (gender == GrammaticalGender.Feminine)
             {
-                words = words.Substring(0, words.Length - 8) + "milioana";
+                words = StringHumanizeExtensions.Concat(words.AsSpan(0, words.Length - 8), "milioana".AsSpan());
             }
         }
 
@@ -99,7 +100,7 @@ class RomanianOrdinalNumberConverter
         {
             if (gender == GrammaticalGender.Feminine)
             {
-                words = words.Substring(0, words.Length - 6) + "milioana";
+                words = StringHumanizeExtensions.Concat(words.AsSpan(0, words.Length - 6), "milioana".AsSpan());
             }
             else
             {

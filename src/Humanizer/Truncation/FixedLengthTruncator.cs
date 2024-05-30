@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Truncate a string to a fixed length
@@ -28,12 +28,12 @@ class FixedLengthTruncator : ITruncator
         if (truncateFrom == TruncateFrom.Left)
         {
             return value.Length > length
-                ? truncationString + value.Substring(value.Length - length + truncationString.Length)
+                ? StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(value.Length - length + truncationString.Length))
                 : value;
         }
 
         return value.Length > length
-            ? value.Substring(0, length - truncationString.Length) + truncationString
+            ? StringHumanizeExtensions.Concat(value.AsSpan(0, length - truncationString.Length), truncationString.AsSpan())
             : value;
     }
 }
