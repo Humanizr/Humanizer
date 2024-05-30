@@ -43,7 +43,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
                 if (alphaNumericalCharactersProcessed + truncationString.Length == length)
                 {
-                    return truncationString + value.Substring(i);
+                    return StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(i));
                 }
             }
         }
@@ -57,7 +57,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
             if (alphaNumericalCharactersProcessed + truncationString.Length == length)
             {
-                return value.Substring(0, i + 1) + truncationString;
+                return StringHumanizeExtensions.Concat(value.AsSpan(0, i + 1), truncationString.AsSpan());
             }
         }
 

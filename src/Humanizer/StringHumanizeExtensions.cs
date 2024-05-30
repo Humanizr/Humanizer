@@ -1,4 +1,8 @@
-﻿namespace Humanizer;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+namespace Humanizer;
 
 /// <summary>
 /// Contains extension methods for humanizing string values.
@@ -49,8 +53,7 @@ public static class StringHumanizeExtensions
         }
 
         return result.Length > 0
-            ? char.ToUpper(result[0]) +
-              result.Substring(1, result.Length - 1)
+            ? Concat(char.ToUpper(result[0]), result.AsSpan(1, result.Length - 1))
             : result;
     }
 
@@ -90,4 +93,32 @@ public static class StringHumanizeExtensions
         input
             .Humanize()
             .ApplyCase(casing);
+
+#if NET
+    internal static string Concat(CharSpan left, CharSpan right) =>
+        string.Concat(left, right);
+
+    internal static string Concat(char left, CharSpan right) =>
+        string.Concat(MemoryMarshal.CreateReadOnlySpan(ref left, 1), right);
+
+    internal static string Concat(CharSpan left, char right) =>
+        string.Concat(left, MemoryMarshal.CreateReadOnlySpan(ref right, 1));
+#else
+    internal static unsafe string Concat(CharSpan left, CharSpan right)
+    {
+        var result = new string('\0', left.Length + right.Length);
+        fixed (char* pResult = result)
+        {
+            left.CopyTo(new Span<char>(pResult, left.Length));
+            right.CopyTo(new Span<char>(pResult + left.Length, right.Length));
+        }
+        return result;
+    }
+
+    internal static unsafe string Concat(char left, CharSpan right) =>
+        Concat(new CharSpan(&left, 1), right);
+
+    internal static unsafe string Concat(CharSpan left, char right) =>
+        Concat(left, new CharSpan(&right, 1));
+#endif
 }

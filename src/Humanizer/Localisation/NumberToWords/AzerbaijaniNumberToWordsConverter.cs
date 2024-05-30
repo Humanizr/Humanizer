@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class AzerbaijaniNumberToWordsConverter :
     GenderlessNumberToWordsConverter
@@ -116,7 +116,7 @@ class AzerbaijaniNumberToWordsConverter :
 
         if (word[^1] == 't')
         {
-            word = word.Substring(0, word.Length - 1) + 'd';
+            word = StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length - 1), 'd');
         }
 
         if (suffixFoundOnLastVowel)

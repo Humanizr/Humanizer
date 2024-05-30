@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class LuxembourgishFormatter(CultureInfo culture) :
     DefaultFormatter(culture)
@@ -18,12 +18,12 @@ class LuxembourgishFormatter(CultureInfo culture) :
         => word.TrimEnd(EifelerRuleSuffix);
 
     public static string CheckForAndApplyEifelerRule(string word, string nextWord)
-        => DoesEifelerRuleApply(nextWord)
+        => DoesEifelerRuleApply(nextWord.AsSpan())
             ? word.TrimEnd(EifelerRuleSuffix)
             : word;
 
-    public static bool DoesEifelerRuleApply(string nextWord)
-        => !string.IsNullOrWhiteSpace(nextWord)
+    public static bool DoesEifelerRuleApply(CharSpan nextWord)
+        => !nextWord.IsWhiteSpace()
            && !EifelerRuleCharacters.Contains(nextWord[0]);
 
     protected override string Format(TimeUnit unit, string resourceKey, int number, bool toWords = false)
@@ -33,7 +33,7 @@ class LuxembourgishFormatter(CultureInfo culture) :
 
         return string.Format(resourceString,
             toWords ? numberAsWord : number,
-            DoesEifelerRuleApply(numberAsWord) ? "" : EifelerRuleSuffix);
+            DoesEifelerRuleApply(numberAsWord.AsSpan()) ? "" : EifelerRuleSuffix);
     }
 
     protected override string GetResourceKey(string resourceKey, int number)
