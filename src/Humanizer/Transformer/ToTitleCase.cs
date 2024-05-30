@@ -1,11 +1,11 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class ToTitleCase : ICulturedStringTransformer
 {
     public string Transform(string input) =>
         Transform(input, null);
 
-    static Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+    static readonly Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
 
     public string Transform(string input, CultureInfo? culture)
     {
@@ -16,7 +16,7 @@ class ToTitleCase : ICulturedStringTransformer
         foreach (Match word in matches)
         {
             var value = word.Value;
-            if (AllCapitals(value) || lookups.Contains(value))
+            if (AllCapitals(value) || IsArticleOrConjunctionOrPreposition(value))
             {
                 continue;
             }
@@ -46,14 +46,15 @@ class ToTitleCase : ICulturedStringTransformer
         return true;
     }
 
-    static FrozenSet<string> lookups;
+    private static bool IsArticleOrConjunctionOrPreposition(string word) =>
+        word is
 
-    static ToTitleCase()
-    {
-        var articles = new List<string> { "a", "an", "the" };
-        var conjunctions = new List<string> { "and", "as", "but", "if", "nor", "or", "so", "yet" };
-        var prepositions = new List<string> { "as", "at", "by", "for", "in", "of", "off", "on", "to", "up", "via" };
+            // articles
+            "a" or "an" or "the" or
 
-        lookups = articles.Concat(conjunctions).Concat(prepositions).ToFrozenSet();
-    }
+            // conjunctions
+            "and" or  "as" or  "but" or  "if" or  "nor" or  "or" or  "so" or  "yet" or
+
+            // prepositions
+            "as" or  "at" or  "by" or  "for" or  "in" or  "of" or  "off" or  "on" or  "to" or  "up" or  "via";
 }

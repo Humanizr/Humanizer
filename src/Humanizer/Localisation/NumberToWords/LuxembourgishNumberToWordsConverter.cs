@@ -115,7 +115,7 @@ class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
         return string.Concat(parts);
     }
 
-    private void CollectParts(ICollection<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)
+    private void CollectParts(List<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)
     {
         if (number / divisor <= 0)
         {
@@ -130,7 +130,7 @@ class LuxembourgishNumberToWordsConverter : GenderedNumberToWordsConverter
         }
     }
 
-    private void CollectOrdinalParts(ICollection<string> parts, ref int number, int divisor, bool evaluateNoRest, string[] pluralFormats, string[] singulars)
+    private void CollectOrdinalParts(List<string> parts, ref int number, int divisor, bool evaluateNoRest, string[] pluralFormats, string[] singulars)
     {
         if (number / divisor <= 0)
         {

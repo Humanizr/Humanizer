@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
 {
@@ -79,7 +79,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
         return UnitsMap[number];
     }
 
-    static void CollectHundreds(ICollection<string> parts, ref long number, long d, string form, bool pluralize)
+    static void CollectHundreds(List<string> parts, ref long number, long d, string form, bool pluralize)
     {
         if (number < d)
         {
@@ -107,7 +107,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
         number %= d;
     }
 
-    void CollectParts(ICollection<string> parts, ref long number, long d, string form)
+    void CollectParts(List<string> parts, ref long number, long d, string form)
     {
         if (number < d)
         {
@@ -130,7 +130,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
         number %= d;
     }
 
-    void CollectPartsUnderAThousand(ICollection<string> parts, long number, GrammaticalGender gender, bool pluralize)
+    void CollectPartsUnderAThousand(List<string> parts, long number, GrammaticalGender gender, bool pluralize)
     {
         CollectHundreds(parts, ref number, 100, "cent", pluralize);
 
@@ -140,7 +140,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
         }
     }
 
-    void CollectThousands(ICollection<string> parts, ref long number, int d, string form)
+    void CollectThousands(List<string> parts, ref long number, int d, string form)
     {
         if (number < d)
         {
@@ -158,7 +158,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
         number %= d;
     }
 
-    protected virtual void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
+    protected virtual void CollectPartsUnderAHundred(List<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
     {
         if (number < 20)
         {

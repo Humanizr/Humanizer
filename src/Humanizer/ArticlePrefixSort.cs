@@ -1,11 +1,11 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
 /// </summary>
 public static class EnglishArticle
 {
-    static Regex _regex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+", RegexOptions.Compiled);
+    static readonly Regex _regex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+", RegexOptions.Compiled);
 
     /// <summary>
     /// Removes the prefixed article and appends it to the same string.

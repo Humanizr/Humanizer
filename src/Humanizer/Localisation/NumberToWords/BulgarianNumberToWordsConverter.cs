@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class BulgarianNumberToWordsConverter() :
     GenderedNumberToWordsConverter(GrammaticalGender.Neuter)
@@ -66,7 +66,7 @@ class BulgarianNumberToWordsConverter() :
         return string.Join(" ", parts);
     }
 
-    static void CollectParts(IList<string> parts, ref long number, bool isOrdinal, long divisor, GrammaticalGender gender, string singular, string plural, string ordinal)
+    static void CollectParts(List<string> parts, ref long number, bool isOrdinal, long divisor, GrammaticalGender gender, string singular, string plural, string ordinal)
     {
         if (number < divisor)
         {
@@ -93,7 +93,7 @@ class BulgarianNumberToWordsConverter() :
         }
     }
 
-    static void CollectPartsUnderOneThousand(IList<string> parts, ref long number, bool isOrdinal, GrammaticalGender gender)
+    static void CollectPartsUnderOneThousand(List<string> parts, ref long number, bool isOrdinal, GrammaticalGender gender)
     {
         if (number == 0)
         {

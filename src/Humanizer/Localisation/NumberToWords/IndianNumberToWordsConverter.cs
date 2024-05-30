@@ -1,35 +1,7 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    static readonly Dictionary<long, string> OrdinalExceptions = new()
-    {
-        {
-            1, "first"
-        },
-        {
-            2, "second"
-        },
-        {
-            3, "third"
-        },
-        {
-            4, "fourth"
-        },
-        {
-            5, "fifth"
-        },
-        {
-            8, "eighth"
-        },
-        {
-            9, "ninth"
-        },
-        {
-            12, "twelfth"
-        },
-    };
-
     static readonly string[] Tillnineteen =
     [
         "one", "two", "three", "four", "five", "six", "seven", "eight",
@@ -81,7 +53,4 @@ class IndianNumberToWordsConverter : GenderlessNumberToWordsConverter
         return NumberToText(number / 10000000)
             .Trim() + " crore " + NumberToText(number % 10000000);
     }
-
-    static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
-        OrdinalExceptions.TryGetValue(number, out words);
 }

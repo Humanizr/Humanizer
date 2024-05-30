@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Humanizer;
 
 static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>
     where T : struct, Enum
 {
-    static (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) info;
+    static readonly (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) info = CreateInfo();
 
-    static EnumCache()
+    private static (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
         var values = EnumPolyfill.GetValues<T>().ToFrozenSet();
         var type = typeof(T);
@@ -22,7 +22,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         }
 
         var isBitFieldEnum = type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
-        info = (
+        return (
             zero,
             humanized.ToFrozenDictionary(),
             dehumanized,

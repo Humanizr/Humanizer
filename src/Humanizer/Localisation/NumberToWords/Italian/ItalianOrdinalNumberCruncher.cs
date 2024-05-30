@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
 {
@@ -90,7 +90,7 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
     /// </summary>
-    static string[] _unitsUnder10NumberToText =
+    static readonly string[] _unitsUnder10NumberToText =
     [
         string.Empty,
         "prim",
@@ -104,5 +104,5 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
         "non"
     ];
 
-    static int _lengthOf10AsCardinal = "dieci".Length;
+    static readonly int _lengthOf10AsCardinal = "dieci".Length;
 }

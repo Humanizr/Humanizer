@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Humanizes TimeSpan into human readable form
@@ -9,7 +9,7 @@ public static class TimeSpanHumanizeExtensions
     const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
     const double _daysInAMonth = _daysInAYear / 12;
 
-    static TimeUnit[] _timeUnits = Enum
+    static readonly TimeUnit[] _timeUnits = Enum
         .GetValues(typeof(TimeUnit))
         .Cast<TimeUnit>()
         .Reverse()
@@ -185,7 +185,7 @@ public static class TimeSpanHumanizeExtensions
         [noTimeValue];
 
     static bool IsContainingOnlyNullValue(IEnumerable<string?> timeParts) =>
-        timeParts.Count(x => x != null) == 0;
+        !timeParts.Any(x => x != null);
 
     static IEnumerable<string?> SetPrecisionOfTimeSpan(IEnumerable<string?> timeParts, int precision, bool countEmptyUnits)
     {

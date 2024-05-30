@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
@@ -140,7 +140,7 @@ class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
     public override string Convert(long input) =>
         Convert(input, GrammaticalGender.Neuter);
 
-    static string[] ordinalNumbers =
+    static readonly string[] OrdinalNumbers =
     [
         "nollte",
         "första",
@@ -176,7 +176,7 @@ class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
 
         if (number <= 20)
         {
-            return ordinalNumbers[number];
+            return OrdinalNumbers[number];
         }
 
         // 21+

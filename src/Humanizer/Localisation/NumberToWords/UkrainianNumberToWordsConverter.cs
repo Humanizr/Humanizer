@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
 {
@@ -96,7 +96,7 @@ class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
         return string.Join(" ", parts);
     }
 
-    static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
+    static void CollectPartsUnderOneThousand(List<string> parts, long number, GrammaticalGender gender)
     {
         if (number >= 100)
         {
@@ -166,7 +166,7 @@ class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
         return string.Concat(parts);
     }
 
-    static void CollectParts(ICollection<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
+    static void CollectParts(List<string> parts, ref long number, long divisor, GrammaticalGender gender, params string[] forms)
     {
         var result = Math.Abs(number / divisor);
         if (result == 0)
@@ -179,7 +179,7 @@ class UkrainianNumberToWordsConverter : GenderedNumberToWordsConverter
         number = Math.Abs(number % divisor);
     }
 
-    static void CollectOrdinalParts(ICollection<string> parts, ref int number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
+    static void CollectOrdinalParts(List<string> parts, ref int number, int divisor, GrammaticalGender gender, string prefixedForm, params string[] forms)
     {
         if (number < divisor)
         {

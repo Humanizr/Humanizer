@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
 {
@@ -230,7 +230,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
     /// </summary>
-    static string[] _unitsNumberToText =
+    static readonly string[] _unitsNumberToText =
     [
         string.Empty,
         "uno",
@@ -247,7 +247,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
     /// </summary>
-    static string[] _tensOver20NumberToText =
+    static readonly string[] _tensOver20NumberToText =
     [
         string.Empty,
         string.Empty,
@@ -264,7 +264,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
     /// </summary>
-    static string[] _teensUnder20NumberToText =
+    static readonly string[] _teensUnder20NumberToText =
     [
         "dieci",
         "undici",
@@ -281,7 +281,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
     /// </summary>
-    static string[] _hundredNumberToText =
+    static readonly string[] _hundredNumberToText =
     [
         string.Empty,
         "cento",

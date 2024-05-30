@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Contains extension methods for dehumanizing Enum string values.
@@ -27,7 +27,7 @@ public static class EnumDehumanizeExtensions
         where TTargetEnum : struct, Enum =>
         DehumanizeToPrivate<TTargetEnum>(input, onNoMatch);
 
-    static MethodInfo dehumanizeToMethod = typeof(EnumDehumanizeExtensions)
+    static readonly MethodInfo dehumanizeToMethod = typeof(EnumDehumanizeExtensions)
         .GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!;
 
     /// <summary>
