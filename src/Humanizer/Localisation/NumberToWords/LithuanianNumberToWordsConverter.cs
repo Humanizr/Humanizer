@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
 {
@@ -60,7 +60,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
         }
     }
 
-    static void CollectParts(ICollection<string> parts, ref long number, long divisor,
+    static void CollectParts(List<string> parts, ref long number, long divisor,
         GrammaticalGender gender, params string[] forms)
     {
         var result = number / divisor;
@@ -79,7 +79,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
         parts.Add(ChooseForm(result, forms));
     }
 
-    static void CollectOrdinalParts(ICollection<string> parts, ref long number, long divisor,
+    static void CollectOrdinalParts(List<string> parts, ref long number, long divisor,
         GrammaticalGender gender, string ordinalForm, params string[] forms)
     {
         var result = number / divisor;
@@ -98,7 +98,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
         parts.Add(ChooseCardinalOrOrdinalForm(result, ordinalForm, forms, useOrdinalForm: number == 0));
     }
 
-    static void CollectPartsUnderOneThousand(ICollection<string> parts, long number, GrammaticalGender gender)
+    static void CollectPartsUnderOneThousand(List<string> parts, long number, GrammaticalGender gender)
     {
         if (number >= 100)
         {
@@ -120,7 +120,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
         }
     }
 
-    static void CollectOrdinalPartsUnderOneThousand(ICollection<string> parts, long number,
+    static void CollectOrdinalPartsUnderOneThousand(List<string> parts, long number,
         GrammaticalGender gender, bool lastNumber = false)
     {
         if (number >= 100)

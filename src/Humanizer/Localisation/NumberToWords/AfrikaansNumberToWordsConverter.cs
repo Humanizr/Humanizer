@@ -163,12 +163,10 @@ class AfrikaansNumberToWordsConverter :
     static string RemoveOnePrefix(string toWords)
     {
         // one hundred => hundredth
-        if (toWords.StartsWith("een", StringComparison.Ordinal))
+        if (toWords.StartsWith("een", StringComparison.Ordinal) &&
+            !toWords.StartsWith("een en", StringComparison.Ordinal))
         {
-            if (toWords.IndexOf("een en", StringComparison.Ordinal) != 0)
-            {
-                toWords = toWords.Remove(0, 4);
-            }
+            toWords = toWords.Remove(0, 4);
         }
 
         return toWords;

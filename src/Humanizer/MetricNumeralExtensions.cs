@@ -1,4 +1,4 @@
-﻿// Wrote by Alois de Gouvello https://github.com/aloisdg
+// Wrote by Alois de Gouvello https://github.com/aloisdg
 
 // The MIT License (MIT)
 
@@ -29,15 +29,10 @@ namespace Humanizer;
 /// </summary>
 public static class MetricNumeralExtensions
 {
-    static readonly double BigLimit;
-    static readonly double SmallLimit;
+    const int limit = 27;
 
-    static MetricNumeralExtensions()
-    {
-        const int limit = 27;
-        BigLimit = Math.Pow(10, limit);
-        SmallLimit = Math.Pow(10, -limit);
-    }
+    static readonly double BigLimit = Math.Pow(10, limit);
+    static readonly double SmallLimit = Math.Pow(10, -limit);
 
     /// <summary>
     /// Symbols is a list of every symbols for the Metric system.

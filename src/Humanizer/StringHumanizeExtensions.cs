@@ -9,22 +9,18 @@ namespace Humanizer;
 /// </summary>
 public static class StringHumanizeExtensions
 {
-    static readonly Regex PascalCaseWordPartsRegex;
-    static readonly Regex FreestandingSpacingCharRegex;
+    static readonly Regex PascalCaseWordPartsRegex = new(
+        $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
+        RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+
+    static readonly Regex FreestandingSpacingCharRegex =
+        new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
 
     const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";
     const string IntegerAndOptionalLowercaseLetters = @"[0-9]+\p{Ll}*";
     const string Acronym = @"\p{Lu}+(?=\p{Lu}|[0-9]|\b)";
     const string SequenceOfOtherLetters = @"\p{Lo}+";
     const string MidSentencePunctuation = "[,;]?";
-
-    static StringHumanizeExtensions()
-    {
-        PascalCaseWordPartsRegex = new(
-            $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-        FreestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
-    }
 
     static string FromUnderscoreDashSeparatedWords(string input) =>
         string.Join(" ", input.Split(['_', '-']));

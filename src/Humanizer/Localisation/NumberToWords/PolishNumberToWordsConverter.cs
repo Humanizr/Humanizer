@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class PolishNumberToWordsConverter(CultureInfo culture) :
     GenderedNumberToWordsConverter
@@ -49,7 +49,7 @@ class PolishNumberToWordsConverter(CultureInfo culture) :
     public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>
         number.ToString(culture);
 
-    static void CollectParts(ICollection<string> parts, long input, GrammaticalGender gender)
+    static void CollectParts(List<string> parts, long input, GrammaticalGender gender)
     {
         var inputSign = 1;
         if (input < 0)
@@ -92,7 +92,7 @@ class PolishNumberToWordsConverter(CultureInfo culture) :
         }
     }
 
-    static void CollectPartsUnderThousand(ICollection<string> parts, int number, GrammaticalGender gender)
+    static void CollectPartsUnderThousand(List<string> parts, int number, GrammaticalGender gender)
     {
         var hundredsDigit = number / 100;
         var tensDigit = number % 100 / 10;

@@ -18,7 +18,7 @@ class FixedNumberOfWordsTruncator : ITruncator
             return value;
         }
 
-        var numberOfWords = value.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Count();
+        var numberOfWords = value.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
         if (numberOfWords <= length)
         {
             return value;

@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
 {
@@ -98,7 +98,7 @@ abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
         return string.Concat(parts);
     }
 
-    void CollectParts(ICollection<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)
+    void CollectParts(List<string> parts, ref long number, long divisor, bool addSpaceBeforeNextPart, string pluralFormat, string singular)
     {
         if (number / divisor > 0)
         {
@@ -111,7 +111,7 @@ abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
         }
     }
 
-    void CollectOrdinalParts(ICollection<string> parts, ref int number, int divisor, bool evaluateNoRest, string[] pluralFormats, string[] singulars)
+    void CollectOrdinalParts(List<string> parts, ref int number, int divisor, bool evaluateNoRest, string[] pluralFormats, string[] singulars)
     {
         if (number / divisor > 0)
         {

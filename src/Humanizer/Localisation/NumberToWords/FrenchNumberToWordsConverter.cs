@@ -1,8 +1,8 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class FrenchNumberToWordsConverter : FrenchNumberToWordsConverterBase
 {
-    protected override void CollectPartsUnderAHundred(ICollection<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
+    protected override void CollectPartsUnderAHundred(List<string> parts, ref long number, GrammaticalGender gender, bool pluralize)
     {
         if (number == 71)
         {

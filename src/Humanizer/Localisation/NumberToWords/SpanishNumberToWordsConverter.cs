@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
 {
@@ -129,11 +129,10 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
         return Convert(number) + " veces";
     }
 
-    static string BuildWord(IReadOnlyList<string> wordParts)
+    static string BuildWord(List<string> wordParts)
     {
-        var parts = wordParts.ToList();
-        parts.RemoveAll(string.IsNullOrEmpty);
-        return string.Join(" ", parts);
+        wordParts.RemoveAll(string.IsNullOrEmpty);
+        return string.Join(" ", wordParts);
     }
 
     static string ConvertHundreds(in long inputNumber, out long remainder, GrammaticalGender gender)
@@ -228,7 +227,7 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
         return wordPart + $" y {UnitsMap[inputNumber % 10]}";
     }
 
-    static IReadOnlyList<string> GetGenderedHundredsMap(GrammaticalGender gender)
+    static List<string> GetGenderedHundredsMap(GrammaticalGender gender)
     {
         var genderedEnding = gender == GrammaticalGender.Feminine ? "as" : "os";
         var map = new List<string>();
@@ -282,25 +281,19 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     static string PluralizeGreaterThanMillion(string singularWord) =>
         singularWord.TrimEnd('ó', 'n') + "ones";
 
-    static Dictionary<string, long> numbersAndWordsDict = new()
-    {
-        {
-            "trillón", 1_000_000_000_000_000_000
-        },
-        {
-            "billón", 1_000_000_000_000
-        },
-        {
-            "millón", 1_000_000
-        }
-    };
+    static readonly KeyValuePair<string, long>[] NumbersAndWordsDict =
+    [
+        new KeyValuePair<string, long>("trillón", 1_000_000_000_000_000_000),
+        new KeyValuePair<string, long>("billón", 1_000_000_000_000),
+        new KeyValuePair<string, long>("millón", 1_000_000),
+    ];
 
     string ConvertGreaterThanMillion(in long inputNumber, out long remainder)
     {
         List<string> wordBuilder = [];
 
         remainder = inputNumber;
-        foreach (var numberAndWord in numbersAndWordsDict)
+        foreach (var numberAndWord in NumbersAndWordsDict)
         {
             if (remainder / numberAndWord.Value > 0)
             {

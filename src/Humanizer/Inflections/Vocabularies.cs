@@ -1,14 +1,11 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.
 /// </summary>
 public static class Vocabularies
 {
-    static readonly Lazy<Vocabulary> Instance;
-
-    static Vocabularies() =>
-        Instance = new(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
+    static readonly Lazy<Vocabulary> Instance = new(BuildDefault, LazyThreadSafetyMode.PublicationOnly);
 
     /// <summary>
     /// The default vocabulary used for singular/plural irregularities.

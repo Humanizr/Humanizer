@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
 {
@@ -110,7 +110,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
     static string GetOrdinalEnding(GrammaticalGender gender) =>
         gender == GrammaticalGender.Masculine ? "i" : "a";
 
-    static void GetUnits(ICollection<string?> builder, long number, GrammaticalGender gender)
+    static void GetUnits(List<string?> builder, long number, GrammaticalGender gender)
     {
         if (number is > 0 and < 5)
         {
@@ -129,7 +129,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
         }
     }
 
-    static void CollectOrdinalParts(ICollection<string?> builder, int threeDigitPart, Fact conversionRule, GrammaticalGender partGender, GrammaticalGender ordinalGender)
+    static void CollectOrdinalParts(List<string?> builder, int threeDigitPart, Fact conversionRule, GrammaticalGender partGender, GrammaticalGender ordinalGender)
     {
         var hundreds = threeDigitPart / 100;
         var hundredRemainder = threeDigitPart % 100;
@@ -225,7 +225,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
         return null;
     }
 
-    static void CollectParts(IList<string?> parts, ref long number, ref bool needsAnd, Fact rule)
+    static void CollectParts(List<string?> parts, ref long number, ref bool needsAnd, Fact rule)
     {
         var remainder = number / rule.Power;
         if (remainder > 0)
@@ -244,7 +244,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
         }
     }
 
-    static void CollectPart(ICollection<string?> parts, long number, Fact rule)
+    static void CollectPart(List<string?> parts, long number, Fact rule)
     {
         if (number == 1)
         {
@@ -257,7 +257,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
         }
     }
 
-    static void CollectPartUnderOneThousand(ICollection<string?> builder, long number, GrammaticalGender gender)
+    static void CollectPartUnderOneThousand(List<string?> builder, long number, GrammaticalGender gender)
     {
         var hundreds = number / 100;
         var hundredRemainder = number % 100;
@@ -300,7 +300,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
         }
     }
 
-    static void CollectOrdinal(IList<string?> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
+    static void CollectOrdinal(List<string?> parts, ref int number, ref bool needsAnd, Fact rule, GrammaticalGender gender)
     {
         var remainder = number / rule.Power;
         if (remainder > 0)

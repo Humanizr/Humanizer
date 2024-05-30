@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class ArmenianNumberToWordsConverter :
     GenderlessNumberToWordsConverter
@@ -166,17 +166,6 @@ class ArmenianNumberToWordsConverter :
         }
 
         return UnitsMap[number];
-    }
-
-    static string RemoveOnePrefix(string toWords)
-    {
-        // one hundred => hundredth
-        if (toWords.StartsWith("մեկ", StringComparison.Ordinal))
-        {
-            toWords = toWords.Remove(0, 4);
-        }
-
-        return toWords;
     }
 
     static bool ExceptionNumbersToWords(long number, [NotNullWhen(true)] out string? words) =>
