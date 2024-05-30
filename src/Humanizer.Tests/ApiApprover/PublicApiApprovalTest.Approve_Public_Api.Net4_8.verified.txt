@@ -69,7 +69,9 @@ namespace Humanizer
         public static Humanizer.ByteSize FromTerabytes(double value) { }
         public static Humanizer.ByteSize Parse(string s) { }
         public static Humanizer.ByteSize Parse(string s, System.IFormatProvider? formatProvider) { }
+        public static bool TryParse(System.ReadOnlySpan<char> s, out Humanizer.ByteSize result) { }
         public static bool TryParse(string? s, out Humanizer.ByteSize result) { }
+        public static bool TryParse(System.ReadOnlySpan<char> s, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result) { }
         public static bool TryParse(string? s, System.IFormatProvider? formatProvider, out Humanizer.ByteSize result) { }
         public static bool operator !=(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }
         public static Humanizer.ByteSize operator +(Humanizer.ByteSize b1, Humanizer.ByteSize b2) { }

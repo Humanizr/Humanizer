@@ -1,4 +1,4 @@
-﻿//The MIT License (MIT)
+//The MIT License (MIT)
 
 //Copyright (c) 2013-2014 Omar Khudeira (http://omar.io)
 
@@ -28,9 +28,18 @@ public class ParsingTests
         Assert.Equal(ByteSize.FromKilobytes(1020), ByteSize.Parse("1020KB"));
 
     [Fact]
-    public void TryParseReturnsFalseOnNull()
+    public void TryParseReturnsFalseOnNullOrEmpty()
     {
-        Assert.False(ByteSize.TryParse(null, out var result));
+        Assert.False(ByteSize.TryParse((string?)null, out var result));
+        Assert.Equal(default, result);
+
+        Assert.False(ByteSize.TryParse(string.Empty, out result));
+        Assert.Equal(default, result);
+
+        Assert.False(ByteSize.TryParse(" \r\n\t", out result));
+        Assert.Equal(default, result);
+
+        Assert.False(ByteSize.TryParse(" \r\n\t".AsSpan(), out result));
         Assert.Equal(default, result);
     }
 
@@ -38,7 +47,10 @@ public class ParsingTests
     public void TryParse()
     {
         var resultBool = ByteSize.TryParse("1020KB", out var resultByteSize);
+        Assert.True(resultBool);
+        Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
 
+        resultBool = ByteSize.TryParse("1020KB".AsSpan(), out resultByteSize);
         Assert.True(resultBool);
         Assert.Equal(ByteSize.FromKilobytes(1020), resultByteSize);
     }
@@ -59,7 +71,10 @@ public class ParsingTests
 
         Assert.True(ByteSize.TryParse(value, culture, out var resultByteSize));
         Assert.Equal(ByteSize.FromKilobytes(2000.01), resultByteSize);
+        Assert.Equal(resultByteSize, ByteSize.Parse(value, culture));
 
+        Assert.True(ByteSize.TryParse(value.AsSpan(), culture, out resultByteSize));
+        Assert.Equal(ByteSize.FromKilobytes(2000.01), resultByteSize);
         Assert.Equal(resultByteSize, ByteSize.Parse(value, culture));
     }
 
@@ -77,7 +92,10 @@ public class ParsingTests
 
         Assert.True(ByteSize.TryParse(value, numberFormat, out var resultByteSize));
         Assert.Equal(ByteSize.FromKilobytes(-2000.01), resultByteSize);
+        Assert.Equal(resultByteSize, ByteSize.Parse(value, numberFormat));
 
+        Assert.True(ByteSize.TryParse(value.AsSpan(), numberFormat, out resultByteSize));
+        Assert.Equal(ByteSize.FromKilobytes(-2000.01), resultByteSize);
         Assert.Equal(resultByteSize, ByteSize.Parse(value, numberFormat));
     }
 
@@ -98,7 +116,10 @@ public class ParsingTests
     public void TryParseReturnsFalseOnBadValue(string input)
     {
         var resultBool = ByteSize.TryParse(input, out var resultByteSize);
+        Assert.False(resultBool);
+        Assert.Equal(new(), resultByteSize);
 
+        resultBool = ByteSize.TryParse(input.AsSpan(), out resultByteSize);
         Assert.False(resultBool);
         Assert.Equal(new(), resultByteSize);
 
