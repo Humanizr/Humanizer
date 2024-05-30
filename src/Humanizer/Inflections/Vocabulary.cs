@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// A container for exceptions to simple pluralization/singularization rules.
@@ -185,7 +185,7 @@ public class Vocabulary
 
     static string MatchUpperCase(string word, string replacement) =>
         char.IsUpper(word[0]) &&
-        char.IsLower(replacement[0]) ? char.ToUpper(replacement[0]) + replacement.Substring(1) : replacement;
+        char.IsLower(replacement[0]) ? StringHumanizeExtensions.Concat(char.ToUpper(replacement[0]), replacement.AsSpan(1)) : replacement;
 
     /// <summary>
     /// If the word is the letter s, singular or plural, return the letter s singular

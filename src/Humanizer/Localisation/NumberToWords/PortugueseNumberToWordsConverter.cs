@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class PortugueseNumberToWordsConverter : GenderedNumberToWordsConverter
 {
@@ -165,17 +165,17 @@ class PortugueseNumberToWordsConverter : GenderedNumberToWordsConverter
 
         if (toWords.EndsWith("os"))
         {
-            return toWords.Substring(0, toWords.Length - 2) + "as";
+            return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "as".AsSpan());
         }
 
         if (toWords.EndsWith("um"))
         {
-            return toWords.Substring(0, toWords.Length - 2) + "uma";
+            return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "uma".AsSpan());
         }
 
         if (toWords.EndsWith("dois"))
         {
-            return toWords.Substring(0, toWords.Length - 4) + "duas";
+            return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 4), "duas".AsSpan());
         }
 
         return toWords;
