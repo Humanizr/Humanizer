@@ -28,7 +28,7 @@ public static class RomanNumeralExtensions
 
     static int GetRomanNumeralCharValue(char c)
     {
-        Debug.Assert(char.ToLowerInvariant(c) is 'M' or 'D' or 'C' or 'L' or 'X' or 'V' or 'I', "Invalid Roman numeral character");
+        Debug.Assert(char.ToUpperInvariant(c) is 'M' or 'D' or 'C' or 'L' or 'X' or 'V' or 'I', "Invalid Roman numeral character");
         return (c & ~0x20) switch
         {
             'M' => 1000,
