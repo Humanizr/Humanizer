@@ -387,14 +387,17 @@ public struct ByteSize(double byteSize) :
     public static bool TryParse(string? s, out ByteSize result) =>
         TryParse(s, null, out result);
 
+    public static bool TryParse(CharSpan s, out ByteSize result) =>
+        TryParse(s, null, out result);
+
     public static bool TryParse(string? s, IFormatProvider? formatProvider, out ByteSize result) =>
         TryParse(s.AsSpan(), formatProvider, out result);
 
-    static bool TryParse(CharSpan span, IFormatProvider? formatProvider, out ByteSize result)
+    public static bool TryParse(CharSpan s, IFormatProvider? formatProvider, out ByteSize result)
     {
         // Arg checking
-        span = span.TrimStart(); // Protect against leading spaces
-        if (span.IsEmpty)
+        s = s.TrimStart(); // Protect against leading spaces
+        if (s.IsEmpty)
         {
             result = default;
             return false;
@@ -415,25 +418,25 @@ public struct ByteSize(double byteSize) :
 
         // Pick first non-digit number
         int lastNumber;
-        for (lastNumber = 0; lastNumber < span.Length; lastNumber++)
+        for (lastNumber = 0; lastNumber < s.Length; lastNumber++)
         {
-            if (!(char.IsDigit(span[lastNumber]) || numberSpecialChars.Contains(span[lastNumber])))
+            if (!(char.IsDigit(s[lastNumber]) || numberSpecialChars.Contains(s[lastNumber])))
             {
                 break;
             }
         }
 
-        if (lastNumber == span.Length)
+        if (lastNumber == s.Length)
         {
             return false;
         }
 
         // Cut the input string in half
-        var numberPart = span
+        var numberPart = s
             .Slice(0, lastNumber)
             .Trim();
-        var sizePart = span
-            .Slice(lastNumber, span.Length - lastNumber)
+        var sizePart = s
+            .Slice(lastNumber, s.Length - lastNumber)
             .Trim();
 
         if (sizePart.Length is not (1 or 2))
