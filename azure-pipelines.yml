@@ -82,7 +82,7 @@ stages:
         license: '$(ReportGeneratorLicenseKey)'
     
     # Publish Code Coverage results
-    - task: PublishCodeCoverageResults@1
+    - task: PublishCodeCoverageResults@2
       displayName: 'Publish Code Coverage Results'
       inputs:
         codeCoverageTool: cobertura
