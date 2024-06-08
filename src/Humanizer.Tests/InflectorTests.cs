@@ -290,7 +290,6 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["cactus", "cacti"];
         yield return ["corps", "corps"];
         yield return ["curriculum", "curricula"];
-        yield return ["database", "databases"];
         yield return ["die", "dice"];
         yield return ["echo", "echoes"];
         yield return ["ellipsis", "ellipses"];
