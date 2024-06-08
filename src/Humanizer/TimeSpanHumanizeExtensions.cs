@@ -10,7 +10,11 @@ public static class TimeSpanHumanizeExtensions
     const double _daysInAMonth = _daysInAYear / 12;
 
     static readonly TimeUnit[] _timeUnits = Enum
+#if NET6_0_OR_GREATER
+        .GetValues<TimeUnit>()
+#else
         .GetValues(typeof(TimeUnit))
+#endif
         .Cast<TimeUnit>()
         .Reverse()
         .ToArray();
