@@ -19,7 +19,7 @@
     <Using Remove="System.Net.Http" />
     <PackageReference Include="Polyfill" Version="5.2.2" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" Condition="'$(TargetFramework)' != 'net8.0'" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="$(TargetFramework.StartsWith('net46')) or (TargetFramework) != '.NETStandard'" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="$(TargetFramework.StartsWith('net46')) or $(TargetFramework) != '.NETStandard'" />
     <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFramework) != '.NETStandard' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
     <None Update="FluentDate\InDate.Months.tt">
