@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
 {
@@ -48,7 +48,7 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("ja", new JapaneseNumberToWordsConverter());
         Register("ku", new CentralKurdishNumberToWordsConverter());
         Register("el", new GreekNumberToWordsConverter());
-        Register("th-TH", new ThaiNumberToWordsConverter());
+        Register("th", new ThaiNumberToWordsConverter());
         Register("lv", new LatvianNumberToWordsConverter());
         Register("ko-KR", new KoreanNumberToWordsConverter());
         Register("en-IN", new IndianNumberToWordsConverter());

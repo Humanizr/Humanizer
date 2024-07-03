@@ -1,6 +1,6 @@
-﻿namespace thTH;
+namespace th;
 
-[UseCulture("th-TH")]
+[UseCulture("th")]
 public class DateHumanizeTests
 {
     [Theory]
