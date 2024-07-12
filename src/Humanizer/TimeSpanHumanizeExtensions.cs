@@ -14,8 +14,8 @@ public static class TimeSpanHumanizeExtensions
         .GetValues<TimeUnit>()
 #else
         .GetValues(typeof(TimeUnit))
-#endif
         .Cast<TimeUnit>()
+#endif
         .Reverse()
         .ToArray();
 
