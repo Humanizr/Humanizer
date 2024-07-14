@@ -54,6 +54,7 @@
 
     <None Update="FluentDate\InDate.SomeTimeFrom.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.SomeTimeFrom.cs" />
     <Compile Update="FluentDate\InDate.SomeTimeFrom.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.SomeTimeFrom.tt" />
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.6.139" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

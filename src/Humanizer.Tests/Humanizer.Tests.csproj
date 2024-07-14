@@ -16,6 +16,7 @@
     <Content Include="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.6.139" />
   </ItemGroup>
 
 </Project>
