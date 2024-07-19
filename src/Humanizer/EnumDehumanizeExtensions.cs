@@ -38,6 +38,10 @@ public static class EnumDehumanizeExtensions
     /// <param name="onNoMatch">What to do when input is not matched to the enum.</param>
     /// <exception cref="NoMatchFoundException">Couldn't find any enum member that matches the string</exception>
     /// <exception cref="ArgumentException">If targetEnum is not an enum</exception>
+#if NET6_0_OR_GREATER
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+#endif
     public static Enum DehumanizeTo(this string input, Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
     {
         var genericMethod = dehumanizeToMethod.MakeGenericMethod(targetEnum);
