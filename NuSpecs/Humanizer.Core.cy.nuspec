@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata minClientVersion="2.12">
+    <id>Humanizer.Core.cy</id>
+    <version>$version$</version>
+    <title>Humanizer Locale (cy)</title>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
+    <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
+    <icon>logo.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer Locale Welsh (cy)</description>
+    <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
+    <license type="expression">MIT</license>
+    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
+    <language>cy</language>
+    <dependencies>
+       <dependency id="Humanizer.Core" version="[$version$]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Humanizer\bin\Release\netstandard2.0\cy\*.*" target="lib\netstandard2.0\cy" />
+    <file src="Humanizer\bin\Release\net6.0\cy\*.*" target="lib\net6.0\cy" />
+    <file src="..\logo.png" target="logo.png" />
+  </files>
+</package>
