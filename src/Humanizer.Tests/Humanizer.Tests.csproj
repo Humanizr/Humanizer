@@ -19,8 +19,4 @@
     <PackageReference Update="Nerdbank.GitVersioning" Version="3.6.139" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Localisation\cy\" />
-  </ItemGroup>
-
 </Project>
