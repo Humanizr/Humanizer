@@ -133,7 +133,7 @@
     <value>gigabeit</value>
   </data>
   <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
-    <value>Prydain Fawr</value>
+    <value>GB</value>
   </data>
   <data name="DataUnit_Kilobyte" xml:space="preserve">
     <value>cilobeit</value>
@@ -184,31 +184,31 @@
     <value>{0} diwrnod o nawr</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>{0} o oriau yn ôl</value>
+    <value>{0} awr yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
-    <value>{0} o oriau yn ôl</value>
+    <value>{0} awr yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
-    <value>{0} o oriau yn ôl</value>
+    <value>{0} awr yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
-    <value>{0} o oriau yn ôl</value>
+    <value>{0} awr yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
     <value>{0} awr yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} o oriau o nawr</value>
+    <value>{0} awr o nawr</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
-    <value>{0} o oriau o nawr</value>
+    <value>{0} awr o nawr</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
-    <value>{0} o oriau o nawr</value>
+    <value>{0} awr o nawr</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
-    <value>{0} o oriau o nawr</value>
+    <value>{0} awr o nawr</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>{0} awr o nawr</value>
@@ -274,31 +274,31 @@
     <value>{0} mis o nawr</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} o eiliadau yn ôl</value>
+    <value>{0} eiliad yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
-    <value>{0} o eiliadau yn ôl</value>
+    <value>{0} eiliad yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
-    <value>{0} o eiliadau yn ôl</value>
+    <value>{0} eiliad yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
-    <value>{0} o eiliadau yn ôl</value>
+    <value>{0} eiliad yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>{0} eiliad yn ôl</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} o eiliadau o nawr</value>
+    <value>{0} eiliad o nawr</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
-    <value>{0} o eiliadau o nawr</value>
+    <value>{0} eiliad o nawr</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
-    <value>{0} o eiliadau o nawr</value>
+    <value>{0} eiliad o nawr</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
-    <value>{0} o eiliadau o nawr</value>
+    <value>{0} eiliad o nawr</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>{0} eiliad o nawr</value>
@@ -478,16 +478,16 @@
     <value>{0} diwrnod</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
-    <value>{0} o oriau</value>
+    <value>{0} awr</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
-    <value>{0} o oriau</value>
+    <value>{0} awr</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
-    <value>{0} o oriau</value>
+    <value>{0} awr</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
-    <value>{0} o oriau</value>
+    <value>{0} awr</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
     <value>{0} awr</value>
@@ -538,31 +538,31 @@
     <value>{0} o fisoedd</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
-    <value>{0} o eiliadau</value>
+    <value>{0} eiliad</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
-    <value>{0} o eiliadau</value>
+    <value>{0} eiliad</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
     <value>{0} o fisoedd</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
-    <value>{0} o eiliadau</value>
+    <value>{0} eiliad</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
     <value>{0} eiliad</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
-    <value>{0} o wythnosau</value>
+    <value>{0} wythnos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
-    <value>{0} o wythnosau</value>
+    <value>{0} wythnos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
-    <value>{0} o wythnosau</value>
+    <value>{0} wythnos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
-    <value>{0} o wythnosau</value>
+    <value>{0} wythnos</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
     <value>{0} wythnos</value>
@@ -643,7 +643,7 @@
     <value>me</value>
   </data>
   <data name="TimeUnit_Minute" xml:space="preserve">
-    <value>isafswm</value>
+    <value>mun</value>
   </data>
   <data name="TimeUnit_Month" xml:space="preserve">
     <value>mis</value>
