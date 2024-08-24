@@ -22,7 +22,7 @@ public class TimeToClockNotationTests
     [InlineData(18, 50, "sete menos dez")]
     [InlineData(19, 55, "oito menos cinco")]
     [InlineData(20, 59, "oito e cinquenta e nove")]
-    public void ConvertToClockNotationTimeOnlyStringPtBr(int hours, int minutes, string expectedResult)
+    public void ConvertToClockNotationTimeOnlyStringPt(int hours, int minutes, string expectedResult)
     {
         var actualResult = new TimeOnly(hours, minutes).ToClockNotation();
         Assert.Equal(expectedResult, actualResult);
@@ -45,7 +45,7 @@ public class TimeToClockNotationTests
     [InlineData(18, 50, "sete menos dez")]
     [InlineData(19, 55, "oito menos cinco")]
     [InlineData(20, 59, "oito e cinquenta e nove")]
-    public void ConvertToClockNotationTimeOnlyStringWithCulturePtBr(int hours, int minutes, string expectedResult)
+    public void ConvertToClockNotationTimeOnlyStringWithCulturePt(int hours, int minutes, string expectedResult)
     {
         var actualResult = new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.None, CultureInfo.CreateSpecificCulture("pt"));
         Assert.Equal(expectedResult, actualResult);
@@ -70,7 +70,7 @@ public class TimeToClockNotationTests
     [InlineData(18, 50, "sete menos dez")]
     [InlineData(19, 55, "oito menos cinco")]
     [InlineData(20, 59, "nove horas")]
-    public void ConvertToRoundedClockNotationTimeOnlyStringPtBr(int hours, int minutes, string expectedResult)
+    public void ConvertToRoundedClockNotationTimeOnlyStringPt(int hours, int minutes, string expectedResult)
     {
         var actualResult = new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.NearestFiveMinutes);
         Assert.Equal(expectedResult, actualResult);
@@ -95,7 +95,7 @@ public class TimeToClockNotationTests
     [InlineData(18, 50, "sete menos dez")]
     [InlineData(19, 55, "oito menos cinco")]
     [InlineData(20, 59, "nove horas")]
-    public void ConvertToRoundedClockNotationTimeOnlyStringWithCulturePtBr(int hours, int minutes, string expectedResult)
+    public void ConvertToRoundedClockNotationTimeOnlyStringWithCulturePt(int hours, int minutes, string expectedResult)
     {
         var actualResult = new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.NearestFiveMinutes, CultureInfo.CreateSpecificCulture("pt"));
         Assert.Equal(expectedResult, actualResult);
