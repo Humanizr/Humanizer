@@ -1,6 +1,6 @@
 #if NET6_0_OR_GREATER
 
-namespace en;
+namespace de;
 
 [UseCulture("de")]
 public class TimeToClockNotationTests
