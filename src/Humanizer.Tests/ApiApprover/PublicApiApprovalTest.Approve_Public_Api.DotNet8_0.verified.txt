@@ -367,7 +367,7 @@ namespace Humanizer
     }
     public interface ITimeOnlyToClockNotationConverter
     {
-        string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive);
+        string Convert(System.TimeOnly time, Humanizer.ClockNotationRounding roundToNearestFive, System.Globalization.CultureInfo? culture);
     }
     public interface ITruncator
     {

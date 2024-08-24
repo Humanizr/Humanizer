@@ -47,7 +47,7 @@ public class TimeToClockNotationTests
     [InlineData(20, 59, "oito e cinquenta e nove")]
     public void ConvertToClockNotationTimeOnlyStringWithCulturePt(int hours, int minutes, string expectedResult)
     {
-        var actualResult = new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.None, CultureInfo.CreateSpecificCulture("pt"));
+        var actualResult = new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.None, new("pt"));
         Assert.Equal(expectedResult, actualResult);
     }
 
@@ -97,7 +97,7 @@ public class TimeToClockNotationTests
     [InlineData(20, 59, "nove horas")]
     public void ConvertToRoundedClockNotationTimeOnlyStringWithCulturePt(int hours, int minutes, string expectedResult)
     {
-        var actualResult = new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.NearestFiveMinutes, CultureInfo.CreateSpecificCulture("pt"));
+        var actualResult = new TimeOnly(hours, minutes).ToClockNotation(ClockNotationRounding.NearestFiveMinutes, new("pt"));
         Assert.Equal(expectedResult, actualResult);
     }
 }
