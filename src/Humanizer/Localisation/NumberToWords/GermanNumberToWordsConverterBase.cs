@@ -2,7 +2,7 @@ namespace Humanizer;
 
 abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
 {
-    static readonly string[] UnitsMap = ["null", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
+    static readonly string[] UnitsMap = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
     static readonly string[] TensMap = ["null", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];
     static readonly string[] UnitsOrdinal = [string.Empty, "ers", "zwei", "drit", "vier", "fünf", "sechs", "sieb", "ach", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
     static readonly string[] HundredOrdinalSingular = ["einhundert"];
@@ -44,9 +44,9 @@ abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
                 {
                     parts.Add("eine");
                 }
-                else if (number == 1 && gender == GrammaticalGender.Masculine)
+                else if (number == 1)
                 {
-                    parts.Add("einer");
+                    parts.Add($"{UnitsMap[number]}s");
                 }
                 else
                 {

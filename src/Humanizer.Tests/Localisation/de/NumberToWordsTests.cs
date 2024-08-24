@@ -34,7 +34,7 @@ public class NumberToWordsTests
     [InlineData(1000000000, "eine Milliarde")]
     [InlineData(2000000000, "zwei Milliarden")]
     [InlineData(122, "einhundertzweiundzwanzig")]
-    [InlineData(3501, "dreitausendfünfhundertein")]
+    [InlineData(3501, "dreitausendfünfhunderteins")]
     [InlineData(111, "einhundertelf")]
     [InlineData(1112, "eintausendeinhundertzwölf")]
     [InlineData(11213, "elftausendzweihundertdreizehn")]
@@ -55,12 +55,6 @@ public class NumberToWordsTests
     [InlineData(3501, "dreitausendfünfhunderteine")]
     public void ToWordsFeminine(long number, string expected) =>
         Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
-
-    [Theory]
-    [InlineData(1, "einer")]
-    [InlineData(3501, "dreitausendfünfhunderteiner")]
-    public void ToWordsMasculine(long number, string expected) =>
-        Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
 
     [Theory]
     [InlineData(0, "nullter")]
