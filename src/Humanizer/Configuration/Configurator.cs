@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Provides a configuration point for Humanizer
@@ -74,7 +74,7 @@ public static class Configurator
     /// </summary>
     internal static IDateOnlyToOrdinalWordConverter DateOnlyToOrdinalWordsConverter => DateOnlyToOrdinalWordsConverters.ResolveForUiCulture();
 
-    internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter => TimeOnlyToClockNotationConverters.ResolveForUiCulture();
+    internal static ITimeOnlyToClockNotationConverter TimeOnlyToClockNotationConverter(CultureInfo? culture) => TimeOnlyToClockNotationConverters.ResolveForCulture(culture);
 #endif
 
     /// <summary>
