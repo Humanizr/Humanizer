@@ -1873,7 +1873,7 @@ namespace Humanizer
     }
     public static class TimeOnlyToClockNotationExtensions
     {
-        public static string ToClockNotation(this System.TimeOnly input, Humanizer.ClockNotationRounding roundToNearestFive = 0) { }
+        public static string ToClockNotation(this System.TimeOnly input, Humanizer.ClockNotationRounding roundToNearestFive = 0, System.Globalization.CultureInfo? culture) { }
     }
     public static class TimeSpanHumanizeExtensions
     {
