@@ -1,11 +1,11 @@
-﻿namespace de;
+namespace de;
 
 [UseCulture("de-DE")]
 public class NumberToWordsTests
 {
     [Theory]
     [InlineData(0, "null")]
-    [InlineData(1, "ein")]
+    [InlineData(1, "eins")]
     [InlineData(2, "zwei")]
     [InlineData(3, "drei")]
     [InlineData(4, "vier")]
@@ -55,6 +55,12 @@ public class NumberToWordsTests
     [InlineData(3501, "dreitausendfünfhunderteine")]
     public void ToWordsFeminine(long number, string expected) =>
         Assert.Equal(expected, number.ToWords(GrammaticalGender.Feminine));
+
+    [Theory]
+    [InlineData(1, "einer")]
+    [InlineData(3501, "dreitausendfünfhunderteiner")]
+    public void ToWordsMasculine(long number, string expected) =>
+        Assert.Equal(expected, number.ToWords(GrammaticalGender.Masculine));
 
     [Theory]
     [InlineData(0, "nullter")]
