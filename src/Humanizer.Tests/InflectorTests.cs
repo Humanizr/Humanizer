@@ -1,4 +1,4 @@
-﻿//The Inflector class was cloned from Inflector (https://github.com/srkirkland/Inflector)
+//The Inflector class was cloned from Inflector (https://github.com/srkirkland/Inflector)
 
 //The MIT License (MIT)
 
@@ -121,6 +121,12 @@ public class InflectorTests
     [InlineData("customer_name", "customerName")]
     [InlineData("customer_first_name", "customerFirstName")]
     [InlineData("customer_first_name goes here", "customerFirstNameGoesHere")]
+    [InlineData("customer-name", "customerName")]
+    [InlineData("customer-first-name", "customerFirstName")]
+    [InlineData("customer-first-name goes here", "customerFirstNameGoesHere")]
+    [InlineData("customer.name", "customerName")]
+    [InlineData("customer.first.name", "customerFirstName")]
+    [InlineData("customer.first.name goes-here", "customerFirstNameGoesHere")]
     [InlineData("customer name", "customerName")]
     [InlineData("customer   name", "customerName")]
     [InlineData("", "")]

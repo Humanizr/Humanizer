@@ -59,11 +59,13 @@ public static class InflectorExtensions
             .Value.ToUpper());
 
     /// <summary>
-    /// Same as Pascalize except that the first character is lower case
+    /// Same as Pascalize except that the first character is lower case and removing periods and hyphens
     /// </summary>
     public static string Camelize(this string input)
     {
-        var word = input.Pascalize();
+        var word = Regex.Replace(input, @"(?:[ _.-]+|^)([a-zA-Z])", match => match
+            .Groups[1]
+            .Value.ToUpper());
         return word.Length > 0
             ? StringHumanizeExtensions.Concat(
                 char.ToLower(word[0]),
