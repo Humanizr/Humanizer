@@ -20,6 +20,11 @@ class FixedLengthTruncator : ITruncator
 
         if (truncationString == null || truncationString.Length > length)
         {
+            if (value.Length <= length)
+            {
+                return value;
+            }
+
             return truncateFrom == TruncateFrom.Right
                 ? value.Substring(0, length)
                 : value.Substring(value.Length - length);
