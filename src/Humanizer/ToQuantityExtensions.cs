@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Enumerates the ways of displaying a quantity value when converting
@@ -62,7 +62,7 @@ public static class ToQuantityExtensions
 
     static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string? format = null, IFormatProvider? formatProvider = null)
     {
-        var transformedInput = quantity == 1
+        var transformedInput = quantity == 1 || quantity == -1
             ? input.Singularize(inputIsKnownToBePlural: false)
             : input.Pluralize(inputIsKnownToBeSingular: false);
 
@@ -93,7 +93,7 @@ public static class ToQuantityExtensions
     /// </example>
     public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider? formatProvider = null)
     {
-        var transformedInput = quantity == 1
+        var transformedInput = quantity == 1 || quantity == -1
             ? input.Singularize(inputIsKnownToBePlural: false)
             : input.Pluralize(inputIsKnownToBeSingular: false);
 
