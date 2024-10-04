@@ -13,7 +13,7 @@ class FixedLengthTruncator : ITruncator
             return null;
         }
 
-        if (value.Length == 0)
+        if (value.Length == 0 || value.Length <= length)
         {
             return value;
         }
@@ -25,15 +25,6 @@ class FixedLengthTruncator : ITruncator
                 : value.Substring(value.Length - length);
         }
 
-        if (truncateFrom == TruncateFrom.Left)
-        {
-            return value.Length > length
-                ? StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(value.Length - length + truncationString.Length))
-                : value;
-        }
-
-        return value.Length > length
-            ? StringHumanizeExtensions.Concat(value.AsSpan(0, length - truncationString.Length), truncationString.AsSpan())
-            : value;
+        return truncateFrom == TruncateFrom.Left ? StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(value.Length - length + truncationString.Length)) : StringHumanizeExtensions.Concat(value.AsSpan(0, length - truncationString.Length), truncationString.AsSpan());
     }
 }
