@@ -114,7 +114,7 @@ public static class TimeSpanHumanizeExtensions
             TimeUnit.Minute => GetNormalCaseTimeAsInteger(timespan.Minutes, timespan.TotalMinutes, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Hour => GetNormalCaseTimeAsInteger(timespan.Hours, timespan.TotalHours, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Day => GetSpecialCaseDaysAsInteger(timespan, maximumTimeUnit),
-            TimeUnit.Week => GetSpecialCaseWeeksAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
+            TimeUnit.Week => GetSpecialCaseWeeksAsInteger(timespan, maximumTimeUnit),
             TimeUnit.Month => GetSpecialCaseMonthAsInteger(timespan, isTimeUnitToGetTheMaximumTimeUnit),
             TimeUnit.Year => GetSpecialCaseYearAsInteger(timespan),
             _ => 0
@@ -135,14 +135,25 @@ public static class TimeSpanHumanizeExtensions
     static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
         (int) (timespan.Days / _daysInAYear);
 
-    static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
+    static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
     {
-        if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < _daysInAMonth)
+        if (maximumTimeUnit == TimeUnit.Week || timespan.Days < _daysInAMonth)
         {
             return timespan.Days / _daysInAWeek;
         }
+        var timespanRemaining = timespan;
 
-        return 0;
+        if (maximumTimeUnit == TimeUnit.Year)
+        {
+            timespanRemaining -= TimeSpan.FromDays(GetSpecialCaseYearAsInteger(timespan) * _daysInAYear);
+        }
+
+        if (maximumTimeUnit >= TimeUnit.Month)
+        {
+            timespanRemaining -= TimeSpan.FromDays(GetSpecialCaseMonthAsInteger(timespan, false) * _daysInAMonth);
+        }
+
+        return timespanRemaining.Days / _daysInAWeek;
     }
 
     static int GetSpecialCaseDaysAsInteger(TimeSpan timespan, TimeUnit maximumTimeUnit)
@@ -152,13 +163,25 @@ public static class TimeSpanHumanizeExtensions
             return timespan.Days;
         }
 
-        if (timespan.Days < _daysInAMonth || maximumTimeUnit == TimeUnit.Week)
+        var timespanRemaining = timespan;
+
+        if (maximumTimeUnit == TimeUnit.Year)
         {
-            var remainingDays = timespan.Days % _daysInAWeek;
-            return remainingDays;
+            timespanRemaining -= TimeSpan.FromDays(GetSpecialCaseYearAsInteger(timespan) * _daysInAYear);
         }
 
-        return (int) (timespan.Days % _daysInAMonth);
+        if (maximumTimeUnit >= TimeUnit.Month)
+        {
+            timespanRemaining -= TimeSpan.FromDays(GetSpecialCaseMonthAsInteger(timespan, false) * _daysInAMonth);
+        }
+
+        if (maximumTimeUnit >= TimeUnit.Week)
+        {
+            timespanRemaining -= TimeSpan.FromDays(GetSpecialCaseWeeksAsInteger(timespan, maximumTimeUnit) * _daysInAWeek);
+        }
+
+        var remainingDays = timespanRemaining.Days;
+        return remainingDays;
     }
 
     static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)
