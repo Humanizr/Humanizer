@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class FormatterRegistry : LocaliserRegistry<IFormatter>
 {
@@ -55,7 +55,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("zh-CN");
         RegisterDefaultFormatter("zh-Hans");
         RegisterDefaultFormatter("zh-Hant");
-        RegisterDefaultFormatter("th-TH");
+        RegisterDefaultFormatter("th");
         RegisterDefaultFormatter("en-IN");
         Register("lt", c => new LithuanianFormatter(c));
         Register("lb", c => new LuxembourgishFormatter(c));
