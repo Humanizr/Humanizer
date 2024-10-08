@@ -44,6 +44,10 @@ abstract class GermanNumberToWordsConverterBase : GenderedNumberToWordsConverter
                 {
                     parts.Add("eine");
                 }
+                else if (number == 1)
+                {
+                    parts.Add($"{UnitsMap[number]}s");
+                }
                 else
                 {
                     parts.Add(UnitsMap[number]);

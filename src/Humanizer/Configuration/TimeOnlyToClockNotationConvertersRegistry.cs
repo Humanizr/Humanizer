@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 namespace Humanizer;
 
@@ -8,6 +8,7 @@ class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToC
     {
         Register("pt-BR", new BrazilianPortugueseTimeOnlyToClockNotationConverter());
         Register("fr", new FrTimeOnlyToClockNotationConverter());
+        Register("de", new GermanTimeOnlyToClockNotationConverter());
         Register("es", new EsTimeOnlyToClockNotationConverter());
         Register("lb", new LbTimeOnlyToClockNotationConverter());
         Register("pt", new PortugueseTimeOnlyToClockNotationConverter());
