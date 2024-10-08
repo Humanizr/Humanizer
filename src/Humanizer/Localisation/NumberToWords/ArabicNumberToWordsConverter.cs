@@ -23,7 +23,7 @@ class ArabicNumberToWordsConverter :
 
         if (number < 0)
         {
-            return $"ناقص {Convert(-number, gender)}";
+            return $"سالب {Convert(-number, gender)}";
         }
 
         var result = string.Empty;
