@@ -1,6 +1,449 @@
-﻿[UseCulture("en")]
+using Humanizer;
+
+[UseCulture("en")]
 public class ByteSizeExtensionsTests
 {
+    [Fact]
+    public void ByteQuettabytes()
+    {
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Fact]
+    public void SbyteQuettabytes()
+    {
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Fact]
+    public void ShortQuettabytes()
+    {
+        const short size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Fact]
+    public void UshortQuettabytes()
+    {
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Fact]
+    public void IntQuettabytes()
+    {
+        const int size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Fact]
+    public void UintQuettabytes()
+    {
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Fact]
+    public void DoubleQuettabytes()
+    {
+        const double size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Fact]
+    public void LongQuettabytes()
+    {
+        const long size = 2;
+        Assert.Equal(ByteSize.FromQuettabytes(size), size.Quettabytes());
+    }
+
+    [Theory]
+    [InlineData(2, null, "en", "2 QB")]
+    [InlineData(2, "RB", "en", "2048 RB")]
+    [InlineData(2.1, null, "en", "2.1 QB")]
+    [InlineData(2.123, "#.#", "en", "2.1 QB")]
+    [InlineData(2.1, null, "ru-RU", "2,1 QB")]
+    [InlineData(2.123, "#.#", "ru-RU", "2,1 QB")]
+    public void HumanizesQuettabytes(double input, string? format, string cultureName, string expectedValue)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.Equal(expectedValue, input
+            .Quettabytes()
+            .Humanize(format, culture));
+    }
+
+
+    [Fact]
+    public void ByteRonnabytes()
+    {
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Fact]
+    public void SbyteRonnabytes()
+    {
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Fact]
+    public void ShortRonnabytes()
+    {
+        const short size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Fact]
+    public void UshortRonnabytes()
+    {
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Fact]
+    public void IntRonnabytes()
+    {
+        const int size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Fact]
+    public void UintRonnabytes()
+    {
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Fact]
+    public void DoubleRonnabytes()
+    {
+        const double size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Fact]
+    public void LongRonnabytes()
+    {
+        const long size = 2;
+        Assert.Equal(ByteSize.FromRonnabytes(size), size.Ronnabytes());
+    }
+
+    [Theory]
+    [InlineData(2, null, "en", "2 RB")]
+    [InlineData(2, "YB", "en", "2048 YB")]
+    [InlineData(2.1, null, "en", "2.1 RB")]
+    [InlineData(2.123, "#.#", "en", "2.1 RB")]
+    [InlineData(2.1, null, "ru-RU", "2,1 RB")]
+    [InlineData(2.123, "#.#", "ru-RU", "2,1 RB")]
+    public void HumanizesRonnabytes(double input, string? format, string cultureName, string expectedValue)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.Equal(expectedValue, input
+            .Ronnabytes()
+            .Humanize(format, culture));
+    }
+
+
+    [Fact]
+    public void ByteYottabytes()
+    {
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Fact]
+    public void SbyteYottabytes()
+    {
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Fact]
+    public void ShortYottabytes()
+    {
+        const short size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Fact]
+    public void UshortYottabytes()
+    {
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Fact]
+    public void IntYottabytes()
+    {
+        const int size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Fact]
+    public void UintYottabytes()
+    {
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Fact]
+    public void DoubleYottabytes()
+    {
+        const double size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Fact]
+    public void LongYottabytes()
+    {
+        const long size = 2;
+        Assert.Equal(ByteSize.FromYottabytes(size), size.Yottabytes());
+    }
+
+    [Theory]
+    [InlineData(2, null, "en", "2 YB")]
+    [InlineData(2, null, "fr", "2 Yo")]
+    [InlineData(2, "ZB", "en", "2048 ZB")]
+    [InlineData(2.1, null, "en", "2.1 YB")]
+    [InlineData(2.123, "#.#", "en", "2.1 YB")]
+    [InlineData(2.1, null, "ru-RU", "2,1 YB")]
+    [InlineData(2.123, "#.#", "ru-RU", "2,1 YB")]
+    public void HumanizesYottabytes(double input, string? format, string cultureName, string expectedValue)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.Equal(expectedValue, input
+            .Yottabytes()
+            .Humanize(format, culture));
+    }
+
+
+    [Fact]
+    public void ByteZettabytes()
+    {
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Fact]
+    public void SbyteZettabytes()
+    {
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Fact]
+    public void ShortZettabytes()
+    {
+        const short size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Fact]
+    public void UshortZettabytes()
+    {
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Fact]
+    public void IntZettabytes()
+    {
+        const int size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Fact]
+    public void UintZettabytes()
+    {
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Fact]
+    public void DoubleZettabytes()
+    {
+        const double size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Fact]
+    public void LongZettabytes()
+    {
+        const long size = 2;
+        Assert.Equal(ByteSize.FromZettabytes(size), size.Zettabytes());
+    }
+
+    [Theory]
+    [InlineData(2, null, "en", "2 ZB")]
+    [InlineData(2, null, "fr", "2 Zo")]
+    [InlineData(2, "EB", "en", "2048 EB")]
+    [InlineData(2.1, null, "en", "2.1 ZB")]
+    [InlineData(2.123, "#.#", "en", "2.1 ZB")]
+    [InlineData(2.1, null, "ru-RU", "2,1 ZB")]
+    [InlineData(2.123, "#.#", "ru-RU", "2,1 ZB")]
+    public void HumanizesZettabytes(double input, string? format, string cultureName, string expectedValue)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.Equal(expectedValue, input
+            .Zettabytes()
+            .Humanize(format, culture));
+    }
+
+
+    [Fact]
+    public void ByteExabytes()
+    {
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Fact]
+    public void SbyteExabytes()
+    {
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Fact]
+    public void ShortExabytes()
+    {
+        const short size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Fact]
+    public void UshortExabytes()
+    {
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Fact]
+    public void IntExabytes()
+    {
+        const int size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Fact]
+    public void UintExabytes()
+    {
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Fact]
+    public void DoubleExabytes()
+    {
+        const double size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Fact]
+    public void LongExabytes()
+    {
+        const long size = 2;
+        Assert.Equal(ByteSize.FromExabytes(size), size.Exabytes());
+    }
+
+    [Theory]
+    [InlineData(2, null, "en", "2 EB")]
+    [InlineData(2, null, "fr", "2 Eo")]
+    [InlineData(2, "PB", "en", "2048 PB")]
+    [InlineData(2.1, null, "en", "2.1 EB")]
+    [InlineData(2.123, "#.#", "en", "2.1 EB")]
+    [InlineData(2.1, null, "ru-RU", "2,1 EB")]
+    [InlineData(2.123, "#.#", "ru-RU", "2,1 EB")]
+    public void HumanizesExabytes(double input, string? format, string cultureName, string expectedValue)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.Equal(expectedValue, input
+            .Exabytes()
+            .Humanize(format, culture));
+    }
+
+
+    [Fact]
+    public void BytePetabytes()
+    {
+        const byte size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Fact]
+    public void SbytePetabytes()
+    {
+        const sbyte size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Fact]
+    public void ShortPetabytes()
+    {
+        const short size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Fact]
+    public void UshortPetabytes()
+    {
+        const ushort size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Fact]
+    public void IntPetabytes()
+    {
+        const int size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Fact]
+    public void UintPetabytes()
+    {
+        const uint size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Fact]
+    public void DoublePetabytes()
+    {
+        const double size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Fact]
+    public void LongPetabytes()
+    {
+        const long size = 2;
+        Assert.Equal(ByteSize.FromPetabytes(size), size.Petabytes());
+    }
+
+    [Theory]
+    [InlineData(2, null, "en", "2 PB")]
+    [InlineData(2, null, "fr", "2 Po")]
+    [InlineData(2, "TB", "en", "2048 TB")]
+    [InlineData(2.1, null, "en", "2.1 PB")]
+    [InlineData(2.123, "#.#", "en", "2.1 PB")]
+    [InlineData(2.1, null, "ru-RU", "2,1 PB")]
+    [InlineData(2.123, "#.#", "ru-RU", "2,1 PB")]
+    public void HumanizesPetabytes(double input, string? format, string cultureName, string expectedValue)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.Equal(expectedValue, input
+            .Petabytes()
+            .Humanize(format, culture));
+    }
+
     [Fact]
     public void ByteTerabytes()
     {

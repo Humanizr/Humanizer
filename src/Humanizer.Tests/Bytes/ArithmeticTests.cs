@@ -1,4 +1,4 @@
-﻿public class ArithmeticTests
+public class ArithmeticTests
 {
     [Fact]
     public void Add()
@@ -84,6 +84,122 @@
         Assert.Equal(4d * 1024 * 1024, size.Megabytes);
         Assert.Equal(4d * 1024, size.Gigabytes);
         Assert.Equal(4d, size.Terabytes);
+    }
+
+    [Fact]
+    public void AddPetabytes()
+    {
+        var size = ByteSize
+            .FromPetabytes(2)
+            .AddPetabytes(2);
+
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Kilobytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024, size.Megabytes);
+        Assert.Equal(4d * 1024 * 1024, size.Gigabytes);
+        Assert.Equal(4d * 1024, size.Terabytes);
+        Assert.Equal(4d, size.Petabytes);
+    }
+
+    [Fact]
+    public void AddExabytes()
+    {
+        var size = ByteSize
+            .FromExabytes(2)
+            .AddExabytes(2);
+
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Kilobytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Megabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024, size.Gigabytes);
+        Assert.Equal(4d * 1024 * 1024, size.Terabytes);
+        Assert.Equal(4d * 1024, size.Petabytes);
+        Assert.Equal(4d, size.Exabytes);
+    }
+
+
+    [Fact]
+    public void AddZettabytes()
+    {
+        var size = ByteSize
+            .FromZettabytes(2)
+            .AddZettabytes(2);
+
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Kilobytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Megabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Gigabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024, size.Terabytes);
+        Assert.Equal(4d * 1024 * 1024, size.Petabytes);
+        Assert.Equal(4d * 1024, size.Exabytes);
+        Assert.Equal(4d, size.Zettabytes);
+    }
+
+
+    [Fact]
+    public void AddYottabytes()
+    {
+        var size = ByteSize
+            .FromYottabytes(2)
+            .AddYottabytes(2);
+
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Kilobytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Megabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Gigabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Terabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024, size.Petabytes);
+        Assert.Equal(4d * 1024 * 1024, size.Exabytes);
+        Assert.Equal(4d * 1024, size.Zettabytes);
+        Assert.Equal(4d, size.Yottabytes);
+    }
+
+
+    [Fact]
+    public void AddRonnabytes()
+    {
+        var size = ByteSize
+            .FromRonnabytes(2)
+            .AddRonnabytes(2);
+
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Kilobytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Megabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Gigabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Terabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Petabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024, size.Exabytes);
+        Assert.Equal(4d * 1024 * 1024, size.Zettabytes);
+        Assert.Equal(4d * 1024, size.Yottabytes);
+        Assert.Equal(4d, size.Ronnabytes);
+    }
+
+
+    [Fact]
+    public void AddQuettabytes()
+    {
+        var size = ByteSize
+            .FromQuettabytes(2)
+            .AddQuettabytes(2);
+
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 8, size.Bits);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Bytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Kilobytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Megabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Gigabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024 * 1024, size.Terabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024 * 1024, size.Petabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024 * 1024, size.Exabytes);
+        Assert.Equal(4d * 1024 * 1024 * 1024, size.Zettabytes);
+        Assert.Equal(4d * 1024 * 1024, size.Yottabytes);
+        Assert.Equal(4d * 1024, size.Ronnabytes);
+        Assert.Equal(4d, size.Quettabytes);
+
     }
 
     [Fact]
