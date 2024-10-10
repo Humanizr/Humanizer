@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using System.Diagnostics;
+using System.Numerics;
 using static System.Globalization.NumberStyles;
 
 namespace Humanizer;
@@ -39,6 +40,13 @@ public struct ByteSize(double byteSize) :
     public const long BytesInMegabyte = 1048576;
     public const long BytesInGigabyte = 1073741824;
     public const long BytesInTerabyte = 1099511627776;
+    public const long BytesInPetabyte = 1125899906842624;
+    public const long BytesInExabyte =  1152921504606846976;
+    public const double BytesInZettabyte =  1180591620717411303424d;
+    public const double BytesInYottabyte =  1208925819614629174706176d;
+    public const double BytesInRonnabyte =  1237940039285380274899124224d;
+    public const double BytesInQuettabyte = 1267650600228229401496703205376d;
+
 
     public const string BitSymbol = "b";
     public const string Bit = "bit";
@@ -52,13 +60,35 @@ public struct ByteSize(double byteSize) :
     public const string Gigabyte = "gigabyte";
     public const string TerabyteSymbol = "TB";
     public const string Terabyte = "terabyte";
+    public const string PetabyteSymbol = "PB";
+    public const string Petabyte = "petabyte";
+    public const string ExabyteSymbol = "EB";
+    public const string Exabyte = "exabyte";
+    public const string ZettabyteSymbol = "ZB";
+    public const string Zettabyte = "zettabyte";
+    public const string YottabyteSymbol = "YB";
+    public const string Yottabyte = "yottabyte";
+    public const string RonnabyteSymbol = "RB";
+    public const string Ronnabyte = "ronnabyte";
+    public const string QuettabyteSymbol = "QB";
+    public const string Quettabyte = "quettabyte";
 
-    public long Bits { get; } = (long) Math.Ceiling(byteSize * BitsInByte);
+
+
+    public double Bits { get; } = (double) Math.Ceiling(byteSize * BitsInByte);
     public double Bytes { get; } = byteSize;
     public double Kilobytes { get; } = byteSize / BytesInKilobyte;
     public double Megabytes { get; } = byteSize / BytesInMegabyte;
     public double Gigabytes { get; } = byteSize / BytesInGigabyte;
     public double Terabytes { get; } = byteSize / BytesInTerabyte;
+    public double Petabytes { get; } = byteSize / BytesInPetabyte;
+    public double Exabytes { get; } = byteSize / BytesInExabyte;
+    public double Zettabytes { get; } = byteSize / BytesInZettabyte;
+    public double Yottabytes { get; } = byteSize / BytesInYottabyte;
+    public double Ronnabytes { get; } = byteSize / BytesInRonnabyte;
+    public double Quettabytes { get; } = byteSize / BytesInQuettabyte;
+
+
 
     public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
@@ -67,6 +97,36 @@ public struct ByteSize(double byteSize) :
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
         // Absolute value is used to deal with negative values
+        if (Math.Abs(Quettabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Quettabyte, Quettabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Ronnabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Ronnabyte, Ronnabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Yottabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Yottabyte, Yottabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Zettabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Zettabyte, Zettabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Exabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Exabyte, Exabytes, toSymbol: true);
+        }
+
+        if (Math.Abs(Petabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Petabyte, Petabytes, toSymbol: true);
+        }
+
         if (Math.Abs(Terabytes) >= 1)
         {
             return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: true);
@@ -102,6 +162,36 @@ public struct ByteSize(double byteSize) :
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
         // Absolute value is used to deal with negative values
+        if (Math.Abs(Quettabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Quettabyte, Quettabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Ronnabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Ronnabyte, Ronnabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Yottabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Yottabyte, Yottabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Zettabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Zettabyte, Zettabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Exabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Exabyte, Exabytes, toSymbol: false);
+        }
+
+        if (Math.Abs(Petabytes) >= 1)
+        {
+            return cultureFormatter.DataUnitHumanize(DataUnit.Petabyte, Petabytes, toSymbol: false);
+        }
+
         if (Math.Abs(Terabytes) >= 1)
         {
             return cultureFormatter.DataUnitHumanize(DataUnit.Terabyte, Terabytes, toSymbol: false);
@@ -135,6 +225,36 @@ public struct ByteSize(double byteSize) :
         get
         {
             // Absolute value is used to deal with negative values
+            if (Math.Abs(Quettabytes) >= 1)
+            {
+                return Quettabytes;
+            }
+
+            if (Math.Abs(Ronnabytes) >= 1)
+            {
+                return Ronnabytes;
+            }
+
+            if (Math.Abs(Yottabytes) >= 1)
+            {
+                return Yottabytes;
+            }
+
+            if (Math.Abs(Zettabytes) >= 1)
+            {
+                return Zettabytes;
+            }
+
+            if (Math.Abs(Exabytes) >= 1)
+            {
+                return Exabytes;
+            }
+
+            if (Math.Abs(Petabytes) >= 1)
+            {
+                return Petabytes;
+            }
+
             if (Math.Abs(Terabytes) >= 1)
             {
                 return Terabytes;
@@ -184,6 +304,25 @@ public struct ByteSize(double byteSize) :
     public static ByteSize FromTerabytes(double value) =>
         new(value * BytesInTerabyte);
 
+    public static ByteSize FromPetabytes(double value) =>
+        new(value * BytesInPetabyte);
+
+    public static ByteSize FromExabytes(double value) =>
+        new(value * BytesInExabyte);
+
+    public static ByteSize FromZettabytes(double value) =>
+        new(value * BytesInZettabyte);
+
+    public static ByteSize FromYottabytes(double value) =>
+        new(value * BytesInYottabyte);
+
+    public static ByteSize FromRonnabytes(double value) =>
+        new(value * BytesInRonnabyte);
+
+    public static ByteSize FromQuettabytes(double value) =>
+        new(value * BytesInQuettabyte);
+
+
     /// <summary>
     /// Converts the value of the current ByteSize object to a string.
     /// The metric prefix symbol (bit, byte, kilo, mega, giga, tera) used is
@@ -227,6 +366,43 @@ public struct ByteSize(double byteSize) :
         string output(double n) => n.ToString(format, provider);
 
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
+
+
+        if (has(QuettabyteSymbol))
+        {
+            format = format.Replace(QuettabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Quettabyte, Quettabytes, toSymbol));
+            return output(Quettabytes);
+        }
+
+        if (has(RonnabyteSymbol))
+        {
+            format = format.Replace(RonnabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Ronnabyte, Ronnabytes, toSymbol));
+            return output(Ronnabytes);
+        }
+
+        if (has(YottabyteSymbol))
+        {
+            format = format.Replace(YottabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Yottabyte, Yottabytes, toSymbol));
+            return output(Yottabytes);
+        }
+
+        if (has(ZettabyteSymbol))
+        {
+            format = format.Replace(ZettabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Zettabyte, Zettabytes, toSymbol));
+            return output(Zettabytes);
+        }
+
+        if (has(ExabyteSymbol))
+        {
+            format = format.Replace(ExabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Exabyte, Exabytes, toSymbol));
+            return output(Exabytes);
+        }
+
+        if (has(PetabyteSymbol))
+        {
+            format = format.Replace(PetabyteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Petabyte, Petabytes, toSymbol));
+            return output(Petabytes);
+        }
 
         if (has(TerabyteSymbol))
         {
@@ -347,6 +523,24 @@ public struct ByteSize(double byteSize) :
 
     public ByteSize AddTerabytes(double value) =>
         this + FromTerabytes(value);
+
+    public ByteSize AddPetabytes(double value) =>
+        this + FromPetabytes(value);
+
+    public ByteSize AddExabytes(double value) =>
+        this + FromExabytes(value);
+
+    public ByteSize AddZettabytes(double value) =>
+        this + FromZettabytes(value);
+
+    public ByteSize AddYottabytes(double value) =>
+        this + FromYottabytes(value);
+
+    public ByteSize AddRonnabytes(double value) =>
+        this + FromRonnabytes(value);
+
+    public ByteSize AddQuettabytes(double value) =>
+        this + FromQuettabytes(value);
 
     public ByteSize Subtract(ByteSize bs) =>
         new(Bytes - bs.Bytes);
@@ -497,6 +691,26 @@ public struct ByteSize(double byteSize) :
 
             case TerabyteSymbol:
                 result = FromTerabytes(number);
+                break;
+
+            case ExabyteSymbol:
+                result = FromExabytes(number);
+                break;
+
+            case ZettabyteSymbol:
+                result = FromZettabytes(number);
+                break;
+
+            case YottabyteSymbol:
+                result = FromYottabytes(number);
+                break;
+
+            case RonnabyteSymbol:
+                result = FromRonnabytes(number);
+                break;
+
+            case QuettabyteSymbol:
+                result = FromQuettabytes(number);
                 break;
 
             default:

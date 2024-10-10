@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 public enum DataUnit
 {
@@ -7,5 +7,11 @@ public enum DataUnit
     Kilobyte,
     Megabyte,
     Gigabyte,
-    Terabyte
+    Terabyte,
+    Petabyte,
+    Exabyte,
+    Zettabyte,
+    Yottabyte,
+    Ronnabyte,
+    Quettabyte
 }
