@@ -972,12 +972,18 @@ Here is a few examples of how you can convert from numbers to byte sizes and bet
 ```c#
 var fileSize = (10).Kilobytes();
 
-fileSize.Bits      => 81920
-fileSize.Bytes     => 10240
-fileSize.Kilobytes => 10
-fileSize.Megabytes => 0.009765625
-fileSize.Gigabytes => 9.53674316e-6
-fileSize.Terabytes => 9.31322575e-9
+fileSize.Bits        => 81920
+fileSize.Bytes       => 10240
+fileSize.Kilobytes   => 10
+fileSize.Megabytes   => 0.009765625
+fileSize.Gigabytes   => 9.53674316e-6
+fileSize.Terabytes   => 9.31322575e-9
+fileSize.Petabytes   => 9.09494701e-12
+fileSize.Exabytes    => 8.88178419e-15
+fileSize.Zettabytes  => 8.67361737e-18
+fileSize.Yottabytes  => 8.47032947e-21
+fileSize.Ronnabytes  => 8.27180612e-24
+fileSize.Quettabytes => 8.07793566e-27
 ```
 
 There are a few extension methods that allow you to turn a number into a ByteSize instance:
@@ -989,6 +995,11 @@ There are a few extension methods that allow you to turn a number into a ByteSiz
 (2.5).Megabytes();
 (10.2).Gigabytes();
 (4.7).Terabytes();
+(8.3d).Petabytes();
+(17.38).Exabytes();
+(7.9).Yottabytes();
+(59.3).Ronnabytes();
+(10).Quettabytes();
 ```
 
 You can also add/subtract the values using +/- operators and Add/Subtract methods:

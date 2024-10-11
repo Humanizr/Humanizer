@@ -693,6 +693,10 @@ public struct ByteSize(double byteSize) :
                 result = FromTerabytes(number);
                 break;
 
+            case PetabyteSymbol:
+                result = FromPetabytes(number);
+                break;
+
             case ExabyteSymbol:
                 result = FromExabytes(number);
                 break;
