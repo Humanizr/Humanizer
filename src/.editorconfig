@@ -160,6 +160,8 @@ resharper_braces_for_lock = required
 resharper_braces_for_fixed = required
 resharper_braces_for_for = required
 
+resharper_return_value_of_pure_method_is_not_used_highlighting = error
+
 # Xml files
 [*.{xml,config,nuspec,resx,vsixmanifest,csproj,targets,props,fsproj}]
 indent_size = 2
