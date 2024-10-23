@@ -16,7 +16,7 @@ All languages: `Humanizer`
 
 The following frameworks are supported: net4.8, net6, net7, and net8
 
-Note: The nuget also targets netstandard2. This is to enable scenario where netstandard2 is required. For example Roslyn Analyzers or MSBuil tasks. Other frameworks (other than listed above) that can consume netstandard2 (example net4.6.1 through to net 4.7.2) are not supported. For example net4.6.1 through to net4.7.2 are not supported.
+Note: The nuget also targets netstandard2. This is to enable scenario where netstandard2 is required. For example Roslyn Analyzers or MSBuild tasks. Other frameworks (other than listed above) that can consume netstandard2 (example net4.6.1 through to net 4.7.2) are not supported. For example net4.6.1 through to net4.7.2 are not supported.
 
 Also Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
 
