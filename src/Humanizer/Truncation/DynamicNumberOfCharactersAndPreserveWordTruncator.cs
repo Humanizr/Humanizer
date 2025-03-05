@@ -34,19 +34,14 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
             : TruncateLeft(value, totalLength, delimiter);
     }
 
-    // Helper for right truncation.
     static string TruncateRight(string value, int totalLength, string delimiter)
     {
         var dLen = delimiter.Length;
-        // Allowed alphanumeric count from the beginning.
-        // var allowed = totalLength - dLen;
-        // if (allowed <= 0)
-        //     return delimiter;
 
         var alphaCount = 0;
         var candidateIndex = -1;
         var lastSpace = -1;
-        // Iterate from the start.
+
         for (var i = 0; i < value.Length; i++)
         {
             if (char.IsWhiteSpace(value[i]))
@@ -55,11 +50,11 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
                 alphaCount++;
             if (alphaCount + dLen == totalLength)
             {
-                candidateIndex = i + 1; // include this character
+                candidateIndex = i + 1;
                 break;
             }
 
-            if (alphaCount == totalLength) //break;
+            if (alphaCount == totalLength) // if alpha count without delimiter reached total length
             {
                 candidateIndex = i;
                 break;
@@ -81,10 +76,7 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
 
         // Get the substring and trim trailing spaces.
         var prefix = value.Substring(0, candidateIndex).TrimEnd();
-        // Ensure the final length does not exceed totalLength.
-        // if (prefix.Length + dLen > totalLength)
-        //     prefix = prefix.Substring(0, totalLength - dLen);
-        // If nothing remains, return delimiter.
+
         var prefixLength = 0;
         for (var i = prefix.Length - 1; i >= 0; i--)
             if (char.IsLetterOrDigit(prefix[i]))
@@ -103,13 +95,9 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
         return prefix + delimiter;
     }
 
-    // Helper for left truncation.
     static string TruncateLeft(string value, int totalLength, string delimiter)
     {
         var dLen = delimiter.Length;
-        // var allowed = totalLength - dLen;
-        // if (allowed <= 0)
-        //     return string.Empty;
 
         var alphaCount = 0;
         var candidateIndex = -1;
@@ -127,7 +115,7 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
                 break;
             }
 
-            if (alphaCount == totalLength) //break;
+            if (alphaCount == totalLength) // if alpha count without delimiter reached total length
             {
                 candidateIndex = i;
                 break;
@@ -148,9 +136,6 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
         }
 
         var suffix = value.Substring(candidateIndex).TrimStart();
-        // Ensure final length does not exceed totalLength.
-        // if (dLen + suffix.Length > totalLength)
-        //     suffix = suffix.Substring(0, totalLength - dLen);
 
         var suffixLength = 0;
         for (var i = suffix.Length - 1; i >= 0; i--)
