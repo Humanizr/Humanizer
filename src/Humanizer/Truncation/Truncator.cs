@@ -19,4 +19,14 @@ public static class Truncator
     /// Fixed number of words truncator
     /// </summary>
     public static ITruncator FixedNumberOfWords { get; } = new FixedNumberOfWordsTruncator();
+
+    /// <summary>
+    /// Dynamic length And Preserve Words truncator
+    /// </summary>
+    public static ITruncator DynamicLengthAndPreserveWords { get; } = new DynamicLengthAndPreserveWordsTruncator();
+
+    /// <summary>
+    /// Dynamic number of characters And Preserve Words truncator
+    /// </summary>
+    public static ITruncator DynamicNumberOfCharactersAndPreserveWords { get; } = new DynamicNumberOfCharactersAndPreserveWordsTruncator();
 }
