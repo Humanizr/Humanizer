@@ -264,7 +264,7 @@ public static string Humanize(this DateTime input, bool utcDate = true, DateTime
 public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
 ```
 
-Many localizations are available for this method. Here is a few examples:
+Many localizations are available for this method. Here are a few examples:
 
 ```C#
 // In ar culture
@@ -317,7 +317,7 @@ TimeSpan.FromDays(16).Humanize() => "2 weeks"
 
 There is an optional `precision` parameter for `TimeSpan.Humanize` which allows you to specify the precision of the returned value.
 The default value of `precision` is 1 which means only the largest time unit is returned like you saw in `TimeSpan.FromDays(16).Humanize()`.
-Here is a few examples of specifying precision:
+Here are a few examples of specifying precision:
 
 ```C#
 TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only one unit in the provided TimeSpan
@@ -967,7 +967,7 @@ Also the reverse operation using the `FromMetric` extension.
 
 Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
 Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
-Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
+Here are a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
 ```c#
 var fileSize = (10).Kilobytes();
