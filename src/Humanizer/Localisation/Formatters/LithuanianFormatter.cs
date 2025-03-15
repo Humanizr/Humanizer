@@ -3,11 +3,11 @@
 class LithuanianFormatter(CultureInfo culture) :
     DefaultFormatter(culture)
 {
-    private static HashSet<string> keysWithoutNumbersForms = ["TimeSpanHumanize_Zero", "DateHumanize_Now"];
+    private static HashSet<string> keysWithoutNumberForms = ["TimeSpanHumanize_Zero", "DateHumanize_Now"];
 
     protected override string GetResourceKey(string resourceKey, int number)
     {
-        if (keysWithoutNumbersForms.Contains(resourceKey))
+        if (keysWithoutNumberForms.Contains(resourceKey))
         {
             return resourceKey;
         }
