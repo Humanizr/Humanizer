@@ -1,7 +1,7 @@
 namespace lt;
 
 [UseCulture("lt")]
-public class DateHÍumanizeTests
+public class DateHumanizeTests
 {
     [Fact]
     public void Now() =>
