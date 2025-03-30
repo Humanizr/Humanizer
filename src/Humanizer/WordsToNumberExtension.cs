@@ -1,6 +1,5 @@
 using System.Globalization;
 using Humanizer;
-
 namespace Humanizer
 {
     /// <summary>
@@ -8,9 +7,6 @@ namespace Humanizer
     /// </summary>
     public static class WordsToNumberExtension
     {
-        public static int ToNumber(this string words, CultureInfo culture) =>
-        
-             Configurator.GetWordsToNumberConverter(culture).Convert(words);
-        
+        public static int ToNumber(this string words, CultureInfo culture) => Configurator.GetWordsToNumberConverter(culture).Convert(words);
     }
 }
