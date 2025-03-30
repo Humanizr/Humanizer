@@ -1296,4 +1296,15 @@ namespace Humanizer
         Abbreviation = 1,
         Eifeler = 2,
     }
+    public static class WordsToNumberExtension
+    {
+        public static int ToNumber(this string words, System.Globalization.CultureInfo culture) { }
+    }
+}
+namespace Humanizer.Localisation.WordsToNumber
+{
+    public interface IWordsToNumberConverter
+    {
+        int Convert(string words);
+    }
 }
