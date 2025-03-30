@@ -1,5 +1,3 @@
-using Humanizer.Localisation.WordsToNumber;
-
 namespace Humanizer;
 
 /// <summary>

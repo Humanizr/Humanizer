@@ -1,5 +1,4 @@
 using System.Globalization;
-using Humanizer.Localisation.WordsToNumber;
 
 namespace Humanizer
 {

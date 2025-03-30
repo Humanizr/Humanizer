@@ -888,6 +888,7 @@ If words from other languages are used, a `NotSupportedException` is thrown.
 // Unsupported locales (throws NotSupportedException)
 "vingt".ToNumber(new CultureInfo("fr"))   // French
 "veinte".ToNumber(new CultureInfo("es"))  // Spanish
+```
 
 ### DateTime to ordinal words
 

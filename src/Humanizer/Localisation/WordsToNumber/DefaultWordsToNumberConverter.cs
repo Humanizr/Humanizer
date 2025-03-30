@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Humanizer.Localisation.WordsToNumber;
+namespace Humanizer;
 
 internal class DefaultWordsToNumberConverter : GenderlessWordsToNumberConverter
 {

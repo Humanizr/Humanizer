@@ -1,7 +1,6 @@
-namespace Humanizer.Localisation.WordsToNumber
+namespace Humanizer;
+
+public interface IWordsToNumberConverter
 {
-    public interface IWordsToNumberConverter
-    {
-        int Convert(string words);
-    }
+    int Convert(string words);
 }
