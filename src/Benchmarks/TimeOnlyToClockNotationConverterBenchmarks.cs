@@ -1,4 +1,4 @@
-﻿[MemoryDiagnoser(false)]
+[MemoryDiagnoser(false)]
 public class TimeOnlyToClockNotationConverterBenchmarks
 {
     static TimeOnly time = new(13, 6, 2, 88, 987);

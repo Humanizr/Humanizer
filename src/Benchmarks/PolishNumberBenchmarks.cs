@@ -1,10 +1,10 @@
 using System.Globalization;
 
 [MemoryDiagnoser(false)]
-public class ItalianNumberBenchmarks
+public class PolishNumberBenchmarks
 {
-    static CultureInfo culture = new("it");
-    [Benchmark(Description = "ItalianNumber.ToWords")]
+    static CultureInfo culture = new("pl");
+    [Benchmark(Description = "PolishNumber.ToWords")]
     public void ToWords()
     {
         foreach (var number in numbers)

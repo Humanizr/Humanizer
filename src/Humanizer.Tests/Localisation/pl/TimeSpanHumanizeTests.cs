@@ -1,4 +1,4 @@
-﻿namespace pl;
+namespace pl;
 
 [UseCulture("pl")]
 public class TimeSpanHumanizeTests
@@ -64,6 +64,7 @@ public class TimeSpanHumanizeTests
     [InlineData(4, "4 tygodnie")]
     [InlineData(5, "5 tygodni")]
     [InlineData(6, "6 tygodni")]
+    [InlineData(10, "10 tygodni")]
     public void Weeks(int number, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(number * 7).Humanize());
 
