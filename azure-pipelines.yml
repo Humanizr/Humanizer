@@ -43,12 +43,7 @@ stages:
         command: build
         projects: .\src\Humanizer.sln
         arguments: -c $(BuildConfiguration)
-      displayName: Restore
-
-    - task: VSBuild@1
-      inputs:
-        solution: .\src\Humanizer.sln
-        configuration: $(BuildConfiguration)
+      displayName: Restore and Build solution
 
     - task: NuGetToolInstaller@1
 
