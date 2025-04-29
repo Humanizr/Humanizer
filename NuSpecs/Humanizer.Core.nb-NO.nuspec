@@ -19,7 +19,7 @@
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\netstandard2.0\nb-NO\*.*" target="lib\netstandard2.0\nb-NO" />
-    <file src="Humanizer\bin\Release\net6.0\nb-NO\*.*" target="lib\net6.0\nb-NO" />
+    <file src="Humanizer\bin\Release\net8.0\nb-NO\*.*" target="lib\net8.0\nb-NO" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

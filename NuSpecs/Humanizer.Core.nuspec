@@ -20,7 +20,7 @@
         <dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
         <dependency id="System.ValueTuple" version="4.5.0" exclude="Build,Analyzers" />
       </group>
-      <group targetFramework="net6.0">
+      <group targetFramework="net8.0">
         <dependency id="System.Collections.Immutable" version="8.0.0" exclude="Build,Analyzers" />
         <dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
         <dependency id="System.ValueTuple" version="4.5.0" exclude="Build,Analyzers" />
@@ -47,8 +47,8 @@
     <file src="Humanizer\bin\Release\netstandard2.0\*.xml" target="lib\netstandard2.0" />
     <file src="Humanizer\bin\Release\net48\*.dll" target="lib\net48" />
     <file src="Humanizer\bin\Release\net48\*.xml" target="lib\net48" />
-    <file src="Humanizer\bin\Release\net6.0\*.dll" target="lib\net6.0" />
-    <file src="Humanizer\bin\Release\net6.0\*.xml" target="lib\net6.0" />
+    <file src="Humanizer\bin\Release\net8.0\*.dll" target="lib\net8.0" />
+    <file src="Humanizer\bin\Release\net8.0\*.xml" target="lib\net8.0" />
     <file src="Humanizer\bin\Release\net7.0\*.dll" target="lib\net7.0" />
     <file src="Humanizer\bin\Release\net7.0\*.xml" target="lib\net7.0" />
     <file src="Humanizer\bin\Release\net8.0\*.dll" target="lib\net8.0" />

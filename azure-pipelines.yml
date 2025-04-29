@@ -40,7 +40,7 @@ stages:
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: restore
+        command: build
         projects: .\src\Humanizer.sln
         arguments: -c $(BuildConfiguration)
       displayName: Restore
