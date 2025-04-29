@@ -23,6 +23,11 @@ stages:
 
     steps:
     - task: UseDotNet@2
+      displayName: 'Use .NET 8 SDK'
+      inputs:
+        version: 8.x
+
+    - task: UseDotNet@2
       displayName: 'Use .NET 10 SDK'
       inputs:
         includePreviewVersions: true
