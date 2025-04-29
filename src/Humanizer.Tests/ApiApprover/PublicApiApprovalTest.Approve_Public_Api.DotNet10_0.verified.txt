@@ -161,16 +161,16 @@ namespace Humanizer
     public static class Configurator
     {
         public static Humanizer.LocaliserRegistry<Humanizer.ICollectionFormatter> CollectionFormatters { get; }
+        public static Humanizer.IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy { get; set; }
         public static Humanizer.LocaliserRegistry<Humanizer.IDateOnlyToOrdinalWordConverter> DateOnlyToOrdinalWordsConverters { get; }
+        public static Humanizer.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
+        public static Humanizer.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
         public static Humanizer.LocaliserRegistry<Humanizer.IDateToOrdinalWordConverter> DateToOrdinalWordsConverters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.IFormatter> Formatters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.INumberToWordsConverter> NumberToWordsConverters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.IOrdinalizer> Ordinalizers { get; }
-        public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; }
-        public static Humanizer.IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy { get; set; }
-        public static Humanizer.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
-        public static Humanizer.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
         public static Humanizer.ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy { get; set; }
+        public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; }
         public static void UseEnumDescriptionPropertyLocator(System.Func<System.Reflection.PropertyInfo, bool> func) { }
     }
     public enum DataUnit
