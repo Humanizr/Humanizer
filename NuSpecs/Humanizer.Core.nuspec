@@ -53,6 +53,8 @@
     <file src="Humanizer\bin\Release\net7.0\*.xml" target="lib\net7.0" />
     <file src="Humanizer\bin\Release\net8.0\*.dll" target="lib\net8.0" />
     <file src="Humanizer\bin\Release\net8.0\*.xml" target="lib\net8.0" />
+    <file src="Humanizer\bin\Release\net10.0\*.dll" target="lib\net10.0" />
+    <file src="Humanizer\bin\Release\net10.0\*.xml" target="lib\net10.0" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>
