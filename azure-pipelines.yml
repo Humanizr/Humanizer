@@ -23,9 +23,10 @@ stages:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Use .NET Core SDK 8.x'
+      displayName: 'Use .NET 10 SDK'
       inputs:
-        version: 8.x
+        includePreviewVersions: true
+        version: 10.x
 
     - task: DotNetCoreCLI@2
       inputs:
@@ -82,12 +83,10 @@ stages:
         license: '$(ReportGeneratorLicenseKey)'
     
     # Publish Code Coverage results
-    - task: PublishCodeCoverageResults@1
+    - task: PublishCodeCoverageResults@2
       displayName: 'Publish Code Coverage Results'
-      inputs:
-        codeCoverageTool: cobertura
+      inputs:        
         summaryFileLocation: $(Build.ArtifactStagingDirectory)/coverageReports/Cobertura.xml
-        reportDirectory: $(Build.ArtifactStagingDirectory)/coverageReports/        
       
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
@@ -113,9 +112,10 @@ stages:
       displayName: Download build artifacts
 
     - task: UseDotNet@2
-      displayName: 'Use .NET SDK 8.x'
+      displayName: 'Use .NET 10 SDK'
       inputs:
-        version: 8.x
+        includePreviewVersions: true
+        version: 10.x
 
     # Install the code signing tool
     - task: DotNetCoreCLI@2
@@ -125,19 +125,20 @@ stages:
         arguments: install --tool-path . --prerelease sign 
       displayName: Install SignTool tool
 
-    # Run the signing command
-    - pwsh: |
-        .\sign code azure-key-vault `
-        "**/*.nupkg" `
-        --base-directory "$(Pipeline.Workspace)\BuildPackages" `
-        --publisher-name "Humanizer" `
-        --description "Humanizer" `
-        --description-url "https://github.com/Humanizr/Humanizer" `
-        --azure-key-vault-tenant-id "$(SignTenantId)" `
-        --azure-key-vault-client-id "$(SignClientId)" `
-        --azure-key-vault-client-secret '$(SignClientSecret)' `
-        --azure-key-vault-certificate "$(SignKeyVaultCertificate)" `
-        --azure-key-vault-url "$(SignKeyVaultUrl)"
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureRM - Humanizr'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        inlineScript: |
+          .\sign code azure-key-vault `
+          "**/*.nupkg" `
+          --base-directory "$(Pipeline.Workspace)\BuildPackages" `
+          --publisher-name "Humanizer" `
+          --description "Humanizer" `
+          --description-url "https://github.com/Humanizr/Humanizer" `
+          --azure-key-vault-certificate "$(SignKeyVaultCertificate)" `
+          --azure-key-vault-url "$(SignKeyVaultUrl)"
       displayName: Sign packages
     
     # Publish the signed packages
