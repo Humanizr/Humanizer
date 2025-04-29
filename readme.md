@@ -874,6 +874,21 @@ Passing `wordForm` argument in when it is not applicable will not make any diffe
 43.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Abbreviation, new CultureInfo("en")) => "forty-third"
 ```
 
+### Words to Number Conversion
+
+This feature allows converting **English words** into numbers. Currently, it **only supports English (`en`)**.  
+If words from other languages are used, a `NotSupportedException` is thrown.
+
+```csharp
+// English locale
+"twenty".ToNumber(new CultureInfo("en")) => 20
+"one hundred and five".ToNumber(new CultureInfo("en")) => 105
+"three thousand two hundred".ToNumber(new CultureInfo("en")) => 3200
+
+// Unsupported locales (throws NotSupportedException)
+"vingt".ToNumber(new CultureInfo("fr"))   // French
+"veinte".ToNumber(new CultureInfo("es"))  // Spanish
+```
 
 ### DateTime to ordinal words
 

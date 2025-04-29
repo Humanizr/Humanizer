@@ -334,6 +334,10 @@ namespace Humanizer
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
         string? Truncate(string? value, int length, string? truncationString, Humanizer.TruncateFrom truncateFrom = 1);
     }
+    public interface IWordsToNumberConverter
+    {
+        int Convert(string words);
+    }
     public class In
     {
         public In() { }
@@ -1295,5 +1299,9 @@ namespace Humanizer
         Normal = 0,
         Abbreviation = 1,
         Eifeler = 2,
+    }
+    public static class WordsToNumberExtension
+    {
+        public static int ToNumber(this string words, System.Globalization.CultureInfo culture) { }
     }
 }
