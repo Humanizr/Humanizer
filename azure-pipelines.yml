@@ -9,7 +9,6 @@ pr:
 variables:
   BuildConfiguration: Release
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  disable.coverage.autogenerate: 'true'
 
 stages:
 - stage: Build
@@ -66,6 +65,7 @@ stages:
         targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
         reporttypes: HtmlInline_AzurePipelines;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
+        publishCodeCoverageResults: true
     
     # Publish Code Coverage results
     - task: PublishCodeCoverageResults@2
