@@ -66,12 +66,6 @@ stages:
         reporttypes: HtmlInline_AzurePipelines;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
         publishCodeCoverageResults: true
-    
-    # Publish Code Coverage results
-    - task: PublishCodeCoverageResults@2
-      displayName: 'Publish Code Coverage Results'
-      inputs:        
-        summaryFileLocation: $(Build.ArtifactStagingDirectory)/coverageReports/Cobertura.xml
       
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
