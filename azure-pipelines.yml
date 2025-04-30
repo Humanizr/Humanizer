@@ -46,30 +46,15 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: build
-        projects: .\src\Humanizer.sln
-        arguments: -c $(BuildConfiguration)
-      displayName: Restore and Build solution
-
-    - task: NuGetToolInstaller@1
-
-    - pwsh: |
-        mkdir $(Build.ArtifactStagingDirectory)\Packages
-        $version = .\nbgv get-version -f json | ConvertFrom-Json
-        $nuspecs = gci .\NuSpecs\*.nuspec 
-        foreach ($item in $nuspecs) {
-          nuget pack $($item.FullName) `
-                    -outputdirectory $(Build.ArtifactStagingDirectory)\Packages `
-                    -basepath $(System.DefaultWorkingDirectory)\src\ `
-                    -NoPackageAnalysis `
-                    -Properties "version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" 
-        }
-      displayName: Create packages
+        projects: .\src\Humanizer\Humanizer.csproj
+        arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\Packages 
+      displayName: Restore, Build, and Pack
 
     - task: DotNetCoreCLI@2
       inputs:
         command: test
         projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) --no-build --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
+        arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
       displayName: Run Tests
 
     # Generate code coverage report

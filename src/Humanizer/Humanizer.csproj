@@ -21,10 +21,9 @@
   <ItemGroup>
     <Using Remove="System.Net.Http" />
     <PackageReference Include="Polyfill" Version="7.27.0" PrivateAssets="all" />
-    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
-    <!-- <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="$(TargetFramework.StartsWith('net46')) or $(TargetFramework) != '.NETStandard'" /> -->
-    <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />    
+    <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'"  />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'"  />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -66,4 +65,73 @@
     <InternalsVisibleTo Include="Humanizer.Tests" />
     <InternalsVisibleTo Include="Benchmarks" />
   </ItemGroup>
+  
+
+  <Target Name="PackNuSpecs" DependsOnTargets="GetBuildVersion;Build;_InitializeNuspecRepositoryInformationProperties">
+    <ItemGroup>
+      <NuspecFiles Include="$(MSBuildThisFileDirectory)..\..\NuSpecs\*.nuspec" />
+    </ItemGroup>
+    <PropertyGroup>
+      <NoWarn>$(NoWarn);NU5128</NoWarn>
+      <IncludeBuildOutput>false</IncludeBuildOutput>
+      <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+      <PackageOutputPath Condition=" '$(Configuration)' == '' ">$(MSBuildThisFileDirectory)..\..\artifacts\$(Configuration)\</PackageOutputPath>      
+      <NuspecBasePath>$(MSBuildThisFileDirectory)..\</NuspecBasePath>
+      <NuspecProperties>version=$(NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$(GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer</NuspecProperties>
+    </PropertyGroup>
+        
+    <Message Importance="High" Text="Packing %(NuspecFiles.Identity) → v$(NuGetPackageVersion)"  />
+    
+    <PackTask
+      PackItem="$(MSBuildProjectFullPath)"
+      TargetFrameworks="$(TargetFrameworks)"
+
+
+      PackageId="$(PackageId)"
+      PackageVersion="$(NuGetPackageVersion)"
+      Title="$(Product)"
+      Authors="$(Authors)"
+      Description="$(Description)"
+      DevelopmentDependency="$(DevelopmentDependency)"
+      Copyright="$(Copyright)"
+      RequireLicenseAcceptance="$(PackageRequireLicenseAcceptance)"
+      RestoreOutputPath="$(RestoreOutputPath)"
+      LicenseUrl="$(PackageLicenseUrl)"
+      ProjectUrl="$(PackageProjectUrl)"
+      IconUrl="$(PackageIconUrl)"
+      Tags="$(PackageTags)"
+      ReleaseNotes="$(PackageReleaseNotes)"
+      AssemblyName="$(AssemblyName)"
+      PackageOutputPath="$(PackageOutputPath)"
+      IsTool="$(IsTool)"
+      IncludeSymbols="$(IncludeSymbols)"
+      IncludeSource="$(IncludeSource)"
+      InstallPackageToOutputPath="$(InstallPackageToOutputPath)"
+      OutputFileNamesWithoutVersion="$(OutputFileNamesWithoutVersion)"
+      RepositoryUrl="$(RepositoryUrl)"
+      RepositoryType="$(RepositoryType)"
+      RepositoryBranch="$(RepositoryBranch)"
+      RepositoryCommit="$(RepositoryCommit)"
+      NoPackageAnalysis="$(NoPackageAnalysis)"
+      NuspecFile="%(NuspecFiles.Identity)"
+      NuspecBasePath="$(NuspecBasePath)"
+      NuspecProperties="$(NuspecProperties)"
+      SymbolPackageFormat="$(SymbolPackageFormat)"
+      MinClientVersion="$(MinClientVersion)"
+      Serviceable="$(Serviceable)"
+      ContinuePackingAfterGeneratingNuspec="true"
+      NoDefaultExcludes="$(NoDefaultExcludes)"
+      NuspecOutputPath="$(NuspecOutputPath)"
+      IncludeBuildOutput="$(IncludeBuildOutput)"
+      NoWarn="$(NoWarn)"
+      TreatWarningsAsErrors="$(TreatWarningsAsErrors)"
+      WarningsAsErrors="$(WarningsAsErrors)"
+      WarningsNotAsErrors="$(WarningsNotAsErrors)"
+      PackageLicenseExpression="$(PackageLicenseExpression)"
+      PackageLicenseFile="$(PackageLicenseFile)"
+      PackageLicenseExpressionVersion="$(PackageLicenseExpressionVersion)"
+      Readme="$(Readme)"
+      Deterministic="$(Deterministic)"
+      PackageIcon="$(PackageIcon)" />
+  </Target>
 </Project>

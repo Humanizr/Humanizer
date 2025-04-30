@@ -11,7 +11,7 @@
     <description>Humanizer Locale Afrikaans (af)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
-    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
+    
     <language>af</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
