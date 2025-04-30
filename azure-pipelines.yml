@@ -13,7 +13,7 @@ variables:
 stages:
 - stage: Build
   variables:
-   - group: 'Report Generator License Key'
+  - group: 'Report Generator License Key'
 
   jobs:
   - job: Build
