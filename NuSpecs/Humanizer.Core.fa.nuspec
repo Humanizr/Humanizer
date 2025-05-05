@@ -19,7 +19,9 @@
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\netstandard2.0\fa\*.*" target="lib\netstandard2.0\fa" />
-    <file src="Humanizer\bin\Release\net6.0\fa\*.*" target="lib\net6.0\fa" />
+    <file src="Humanizer\bin\Release\net8.0\fa\*.*" target="lib\net8.0\fa" />
+    <file src="Humanizer\bin\Release\net48\fa\*.*" target="lib\net48\fa" />
+    <file src="Humanizer\bin\Release\net10.0\fa\*.*" target="lib\net10.0\fa" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

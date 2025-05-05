@@ -9,12 +9,11 @@ pr:
 variables:
   BuildConfiguration: Release
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  disable.coverage.autogenerate: 'true'
 
 stages:
 - stage: Build
   variables:
-   - group: 'Report Generator License Key'
+  - group: 'Report Generator License Key'
 
   jobs:
   - job: Build
@@ -23,9 +22,15 @@ stages:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Use .NET Core SDK 8.x'
+      displayName: 'Use .NET 8 SDK'
       inputs:
         version: 8.x
+
+    - task: UseDotNet@2
+      displayName: 'Use .NET 10 SDK'
+      inputs:
+        includePreviewVersions: true
+        version: 10.x
 
     - task: DotNetCoreCLI@2
       inputs:
@@ -39,36 +44,16 @@ stages:
 
     - task: DotNetCoreCLI@2
       inputs:
-        command: restore
-        projects: .\src\Humanizer.sln
-        arguments: -c $(BuildConfiguration)
-      displayName: Restore
-
-    - task: VSBuild@1
-      inputs:
-        solution: .\src\Humanizer.sln
-        configuration: $(BuildConfiguration)
-
-    - task: NuGetToolInstaller@1
-
-    - pwsh: |
-        mkdir $(Build.ArtifactStagingDirectory)\Packages
-        $version = .\nbgv get-version -f json | ConvertFrom-Json
-        $nuspecs = gci .\NuSpecs\*.nuspec 
-        foreach ($item in $nuspecs) {
-          nuget pack $($item.FullName) `
-                    -outputdirectory $(Build.ArtifactStagingDirectory)\Packages `
-                    -basepath $(System.DefaultWorkingDirectory)\src\ `
-                    -NoPackageAnalysis `
-                    -Properties "version=$($version.NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$($version.GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer" 
-        }
-      displayName: Create packages
+        command: build
+        projects: .\src\Humanizer\Humanizer.csproj
+        arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\Packages 
+      displayName: Restore, Build, and Pack
 
     - task: DotNetCoreCLI@2
       inputs:
         command: test
         projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) --no-build --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
+        arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
       displayName: Run Tests
 
     # Generate code coverage report
@@ -80,14 +65,7 @@ stages:
         targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
         reporttypes: HtmlInline_AzurePipelines;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
-    
-    # Publish Code Coverage results
-    - task: PublishCodeCoverageResults@1
-      displayName: 'Publish Code Coverage Results'
-      inputs:
-        codeCoverageTool: cobertura
-        summaryFileLocation: $(Build.ArtifactStagingDirectory)/coverageReports/Cobertura.xml
-        reportDirectory: $(Build.ArtifactStagingDirectory)/coverageReports/        
+        publishCodeCoverageResults: true
       
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
@@ -113,9 +91,10 @@ stages:
       displayName: Download build artifacts
 
     - task: UseDotNet@2
-      displayName: 'Use .NET SDK 8.x'
+      displayName: 'Use .NET 10 SDK'
       inputs:
-        version: 8.x
+        includePreviewVersions: true
+        version: 10.x
 
     # Install the code signing tool
     - task: DotNetCoreCLI@2
@@ -125,19 +104,20 @@ stages:
         arguments: install --tool-path . --prerelease sign 
       displayName: Install SignTool tool
 
-    # Run the signing command
-    - pwsh: |
-        .\sign code azure-key-vault `
-        "**/*.nupkg" `
-        --base-directory "$(Pipeline.Workspace)\BuildPackages" `
-        --publisher-name "Humanizer" `
-        --description "Humanizer" `
-        --description-url "https://github.com/Humanizr/Humanizer" `
-        --azure-key-vault-tenant-id "$(SignTenantId)" `
-        --azure-key-vault-client-id "$(SignClientId)" `
-        --azure-key-vault-client-secret '$(SignClientSecret)' `
-        --azure-key-vault-certificate "$(SignKeyVaultCertificate)" `
-        --azure-key-vault-url "$(SignKeyVaultUrl)"
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureRM - Humanizr'
+        scriptType: pscore
+        scriptLocation: inlineScript
+        inlineScript: |
+          .\sign code azure-key-vault `
+          "**/*.nupkg" `
+          --base-directory "$(Pipeline.Workspace)\BuildPackages" `
+          --publisher-name "Humanizer" `
+          --description "Humanizer" `
+          --description-url "https://github.com/Humanizr/Humanizer" `
+          --azure-key-vault-certificate "$(SignKeyVaultCertificate)" `
+          --azure-key-vault-url "$(SignKeyVaultUrl)"
       displayName: Sign packages
     
     # Publish the signed packages

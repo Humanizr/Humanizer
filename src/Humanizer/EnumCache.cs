@@ -61,6 +61,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         return caseName.Humanize();
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Reflection over attribute properties is intentional and documented.")]
     static bool TryGetDescription(MemberInfo member, [NotNullWhen(true)] out string? description)
     {
         var displayAttribute = member.GetCustomAttribute<DisplayAttribute>();
