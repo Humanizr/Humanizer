@@ -239,6 +239,12 @@ namespace Humanizer
         public DefaultTimeOnlyHumanizeStrategy() { }
         public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
+    public class DynamicNumberOfCharactersAndPreserveWordsTruncator : Humanizer.ITruncator
+    {
+        public DynamicNumberOfCharactersAndPreserveWordsTruncator() { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
+        public string? Truncate(string? value, int totalLength, string? delimiter, Humanizer.TruncateFrom truncateFrom = 1) { }
+    }
     public static class EnglishArticle
     {
         public static string[] AppendArticlePrefix(string[] items) { }
@@ -1934,6 +1940,8 @@ namespace Humanizer
     }
     public static class Truncator
     {
+        public static Humanizer.ITruncator DynamicLengthAndPreserveWords { get; }
+        public static Humanizer.ITruncator DynamicNumberOfCharactersAndPreserveWords { get; }
         public static Humanizer.ITruncator FixedLength { get; }
         public static Humanizer.ITruncator FixedNumberOfCharacters { get; }
         public static Humanizer.ITruncator FixedNumberOfWords { get; }
