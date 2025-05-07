@@ -22,8 +22,8 @@ public class ResourceKeyTests
         Assert.NotNull(Resources.GetResource(generatedResourceKey));
 
     public static IEnumerable<object[]> DateHumanizeResourceKeys =>
-        new[] {
-            [0, "DateHumanize_SingleSecondAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, Tense.Past)],
+    [
+        [0, "DateHumanize_SingleSecondAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, Tense.Past)],
             [0, "DateHumanize_SingleMinuteAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, Tense.Past)],
             [0, "DateHumanize_SingleHourAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, Tense.Past)],
             [0, "DateHumanize_SingleDayAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, Tense.Past)],
@@ -55,12 +55,12 @@ public class ResourceKeyTests
             [5, "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Week, Tense.Past, count: 0)],
             [6, "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, Tense.Past, count: 0)],
             [7, "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, Tense.Past, count: 0)],
-            new object[]{8, "DateHumanize_Now", ResourceKeys.DateHumanize.Now }
-        };
+        [8, "DateHumanize_Now", ResourceKeys.DateHumanize.Now]
+    ];
 
     public static IEnumerable<object[]> TimeSpanHumanizeResourceKeys =>
-        new[] {
-            [0, "TimeSpanHumanize_SingleMillisecond", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Millisecond)],
+    [
+        [0, "TimeSpanHumanize_SingleMillisecond", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Millisecond)],
             [0, "TimeSpanHumanize_SingleSecond", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Second)],
             [0, "TimeSpanHumanize_SingleMinute", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Minute)],
             [0, "TimeSpanHumanize_SingleHour", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Hour)],
@@ -91,7 +91,7 @@ public class ResourceKeyTests
             [5, "TimeSpanHumanize_MultipleDays", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Day, 0)],
             [6, "TimeSpanHumanize_MultipleWeeks", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Week, 0)],
             [7, "TimeSpanHumanize_MultipleMonths", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Month, 0)],
-            new object[]{8, "TimeSpanHumanize_MultipleYears", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Year, 0) }
-        };
+        [8, "TimeSpanHumanize_MultipleYears", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Year, 0)]
+    ];
 }
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters
