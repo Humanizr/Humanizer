@@ -1,11 +1,11 @@
-﻿namespace deLI;
+namespace deLI;
 
 [UseCulture("de-LI")]
 public class NumberToWordsTests
 {
     [Theory]
     [InlineData(0, "null")]
-    [InlineData(1, "ein")]
+    [InlineData(1, "eins")]
     [InlineData(2, "zwei")]
     [InlineData(3, "drei")]
     [InlineData(4, "vier")]
@@ -34,7 +34,7 @@ public class NumberToWordsTests
     [InlineData(1000000000, "eine Milliarde")]
     [InlineData(2000000000, "zwei Milliarden")]
     [InlineData(122, "einhundertzweiundzwanzig")]
-    [InlineData(3501, "dreitausendfünfhundertein")]
+    [InlineData(3501, "dreitausendfünfhunderteins")]
     [InlineData(111, "einhundertelf")]
     [InlineData(1112, "eintausendeinhundertzwölf")]
     [InlineData(11213, "elftausendzweihundertdreizehn")]
