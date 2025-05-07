@@ -582,6 +582,42 @@
   <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
     <value>TB</value>
   </data>
+  <data name="DataUnit_Petabyte" xml:space="preserve">
+    <value>petabyte</value>
+  </data>
+  <data name="DataUnit_PetabyteSymbol" xml:space="preserve">
+    <value>PB</value>
+  </data>
+  <data name="DataUnit_Exabyte" xml:space="preserve">
+    <value>exabyte</value>
+  </data>
+  <data name="DataUnit_ExabyteSymbol" xml:space="preserve">
+    <value>EB</value>
+  </data>
+  <data name="DataUnit_Zettabyte" xml:space="preserve">
+    <value>zettabyte</value>
+  </data>
+  <data name="DataUnit_ZettabyteSymbol" xml:space="preserve">
+    <value>ZB</value>
+  </data>
+  <data name="DataUnit_Yottabyte" xml:space="preserve">
+    <value>yottabyte</value>
+  </data>
+  <data name="DataUnit_YottabyteSymbol" xml:space="preserve">
+    <value>YB</value>
+  </data>
+  <data name="DataUnit_Ronnabyte" xml:space="preserve">
+    <value>ronnabyte</value>
+  </data>
+  <data name="DataUnit_RonnabyteSymbol" xml:space="preserve">
+    <value>RB</value>
+  </data>
+  <data name="DataUnit_Quettabyte" xml:space="preserve">
+    <value>quettabyte</value>
+  </data>
+  <data name="DataUnit_QuettabyteSymbol" xml:space="preserve">
+    <value>QB</value>
+  </data>
   <data name="TimeUnit_Millisecond" xml:space="preserve">
     <value>ms</value>
   </data>

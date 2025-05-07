@@ -336,6 +336,30 @@
   <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="DataUnit_Petabyte" xml:space="preserve">
+    <value>pétaoctet</value>
+  </data>
+  <data name="DataUnit_PetabyteSymbol" xml:space="preserve">
+    <value>Po</value>
+  </data>
+  <data name="DataUnit_Exabyte" xml:space="preserve">
+    <value>exaoctet</value>
+  </data>
+  <data name="DataUnit_ExabyteSymbol" xml:space="preserve">
+    <value>Eo</value>
+  </data>
+  <data name="DataUnit_Zettabyte" xml:space="preserve">
+    <value>zettaoctet</value>
+  </data>
+  <data name="DataUnit_ZettabyteSymbol" xml:space="preserve">
+    <value>Zo</value>
+  </data>
+  <data name="DataUnit_Yottabyte" xml:space="preserve">
+    <value>yottaoctet</value>
+  </data>
+  <data name="DataUnit_YottabyteSymbol" xml:space="preserve">
+    <value>Yo</value>
+  </data>
   <data name="TimeUnit_Millisecond" xml:space="preserve">
     <value>ms</value>
   </data>
