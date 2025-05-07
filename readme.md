@@ -18,7 +18,7 @@ The following frameworks are supported: net4.8, net6, net7, and net8
 
 Note: The nuget also targets netstandard2. This is to enable scenario where netstandard2 is required. For example Roslyn Analyzers or MSBuild tasks. Other frameworks (other than listed above) that can consume netstandard2 (example net4.6.1 through to net 4.7.2) are not supported. For example net4.6.1 through to net4.7.2 are not supported.
 
-Also Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
+Also, Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
 
 
 ### Specify Languages (Optional)
@@ -40,7 +40,7 @@ The detailed explanation for how this works is in the comments [here](https://gi
 ### Humanize String
 
 `Humanize` string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
-The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human readable sentences.
+The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human-readable sentences.
 
 ```C#
 "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
@@ -117,14 +117,14 @@ You can truncate a `string` using the `Truncate` method:
 "Long text to truncate".Truncate(10) => "Long text…"
 ```
 
-By default the `'…'` character is used to truncate strings. The advantage of using the `'…'` character instead of `"..."` is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:
+By default, the `'…'` character is used to truncate strings. The advantage of using the `'…'` character instead of `"..."` is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:
 
 ```c#
 "Long text to truncate".Truncate(10, "---") => "Long te---"
 ```
 
 The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length.
-There are two more truncator strategies available: one for a fixed number of (alpha-numerical) characters and one for a fixed number of words.
+There are four more truncator strategies available: one for a fixed number of (alphanumerical) characters, two that are similar to fixed length and fixed number of characters that try to preserve words as well or cut it off wholly, and another for a fixed number of words.
 To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples all have an overload that allow you to specify the `ITruncator` instance to use for the truncation.
 Here are examples on how to use the three provided truncators:
 
@@ -137,6 +137,12 @@ Here are examples on how to use the three provided truncators:
 
 "Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "Long text…"
 "Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "Long text---"
+    
+"Long text to truncate".Truncate(10, Truncator.DynamicLengthAndPreserveWords) => "Long text…"
+"Long text to truncate".Truncate(10, "---", Truncator.DynamicLengthAndPreserveWords) => "Long---"
+
+"Long text to truncate".Truncate(6, Truncator.DynamicNumberOfCharactersAndPreserveWords) => "Long…"
+"Long text to truncate".Truncate(6, "---", Truncator.DynamicNumberOfCharactersAndPreserveWords) => "---"
 ```
 
 Note that you can also use create your own truncator by implementing the `ITruncator` interface.
@@ -153,6 +159,12 @@ Default is the right as shown in the examples above. The examples below show how
 
 "Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords, TruncateFrom.Left) => "…to truncate"
 "Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords, TruncateFrom.Left) => "---to truncate"
+    
+"Long text to truncate".Truncate(10, Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left) => "…truncate"
+"Long text to truncate".Truncate(16, "---", Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left) => "---to truncate"
+
+"Long text to truncate".Truncate(10, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left) => "…truncate"
+"Long text to truncate".Truncate(16, "---", Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left) => "---to truncate"
 ```
 
 
@@ -237,7 +249,7 @@ which can be used like:
 "Member without description attribute".DehumanizeTo(typeof(EnumUnderTest)) => EnumUnderTest.MemberWithoutDescriptionAttribute
 ```
 
-By default both methods throw a `NoMatchFoundException` when they cannot match the provided input against the target enum.
+By default, both methods throw a `NoMatchFoundException` when they cannot match the provided input against the target enum.
 In the non-generic method you can also ask the method to return null by setting the second optional parameter to `NoMatch.ReturnsNull`.
 
 
@@ -264,7 +276,7 @@ public static string Humanize(this DateTime input, bool utcDate = true, DateTime
 public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
 ```
 
-Many localizations are available for this method. Here is a few examples:
+Many localizations are available for this method. Here are a few examples:
 
 ```C#
 // In ar culture
@@ -290,7 +302,7 @@ Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(pr
 Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision: .75); // configure when humanizing DateTimeOffset
 ```
 
-The default precision is set to .75 but you can pass your desired precision too. With precision set to 0.75:
+The default precision is set to .75, but you can pass your desired precision too. With precision set to 0.75:
 
 ```C#
 44 seconds => 44 seconds ago/from now
@@ -317,7 +329,7 @@ TimeSpan.FromDays(16).Humanize() => "2 weeks"
 
 There is an optional `precision` parameter for `TimeSpan.Humanize` which allows you to specify the precision of the returned value.
 The default value of `precision` is 1 which means only the largest time unit is returned like you saw in `TimeSpan.FromDays(16).Humanize()`.
-Here is a few examples of specifying precision:
+Here are a few examples of specifying precision:
 
 ```C#
 TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only one unit in the provided TimeSpan
@@ -330,7 +342,7 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(4) => "2 weeks, 1 day, 1 hour, 30
 TimeSpan.FromMilliseconds(1299630020).Humanize(5) => "2 weeks, 1 day, 1 hour, 30 seconds, 20 milliseconds"
 ```
 
-By default when using `precision` parameter empty time units are not counted towards the precision of the returned value.
+By default, when using `precision` parameter empty time units are not counted towards the precision of the returned value.
 If this behavior isn't desired for you, you can use the overloaded `TimeSpan.Humanize` method with `countEmptyUnits` parameter. Leading empty time units never count.
 Here is an example showing the difference of counting empty units:
 
@@ -369,7 +381,7 @@ In addition, a maximum unit of time may be specified to avoid rolling up to the 
 TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day) => "7 days"    // instead of 1 week
 TimeSpan.FromMilliseconds(2000).Humanize(maxUnit: TimeUnit.Millisecond) => "2000 milliseconds"    // instead of 2 seconds
 ```
-The default maxUnit is `TimeUnit.Week` because it gives exact results. You can increase this value to `TimeUnit.Month` or `TimeUnit.Year` which will give you an approximation based on 365.2425 days a year and 30.436875 days a month. Therefore the months are alternating between 30 and 31 days in length and every fourth year is 366 days long.
+The default maxUnit is `TimeUnit.Week` because it gives exact results. You can increase this value to `TimeUnit.Month` or `TimeUnit.Year` which will give you an approximation based on 365.2425 days a year and 30.436875 days a month. Therefore, the months are alternating between 30 and 31 days in length and every fourth year is 366 days long.
 ```C#
 TimeSpan.FromDays(486).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year, 3 months, 29 days" // One day further is 1 year, 4 month
 TimeSpan.FromDays(517).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year, 4 months, 30 days" // This month has 30 days and one day further is 1 year, 5 months
@@ -680,7 +692,7 @@ Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follow
 2.Weeks() => TimeSpan.FromDays(14)
 ```
 
-<small>There are no fluent APIs for month or year as a month could have between 28 to 31 days and a year could be 365 or 366 days.</small>
+<small>There are no fluent APIs for month or year as a month could have between 28 and 31 days and a year could be 365 or 366 days.</small>
 
 You could use these methods to, for example, replace
 
@@ -874,6 +886,21 @@ Passing `wordForm` argument in when it is not applicable will not make any diffe
 43.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Abbreviation, new CultureInfo("en")) => "forty-third"
 ```
 
+### Words to Number Conversion
+
+This feature allows converting **English words** into numbers. Currently, it **only supports English (`en`)**.  
+If words from other languages are used, a `NotSupportedException` is thrown.
+
+```csharp
+// English locale
+"twenty".ToNumber(new CultureInfo("en")) => 20
+"one hundred and five".ToNumber(new CultureInfo("en")) => 105
+"three thousand two hundred".ToNumber(new CultureInfo("en")) => 3200
+
+// Unsupported locales (throws NotSupportedException)
+"vingt".ToNumber(new CultureInfo("fr"))   // French
+"veinte".ToNumber(new CultureInfo("es"))  // Spanish
+```
 
 ### DateTime to ordinal words
 
@@ -932,7 +959,7 @@ Humanizer can change numbers to Roman numerals using the `ToRoman` extension. Th
 10.ToRoman() => "X"
 ```
 
-Also the reverse operation using the `FromRoman` extension.
+Also, the reverse operation using the `FromRoman` extension.
 
 ```C#
 "I".FromRoman() => 1
@@ -954,7 +981,7 @@ Humanizer can change numbers to Metric numerals using the `ToMetric` extension. 
 0.1d.ToMetric() => "100m"
 ```
 
-Also the reverse operation using the `FromMetric` extension.
+Also, the reverse operation using the `FromMetric` extension.
 
 ```C#
 "1".FromMetric() => 1
@@ -967,7 +994,7 @@ Also the reverse operation using the `FromMetric` extension.
 
 Humanizer includes a port of the brilliant [ByteSize](https://github.com/omar/ByteSize) library.
 Quite a few changes and additions are made on `ByteSize` to make the interaction with `ByteSize` easier and more consistent with the Humanizer API.
-Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
+Here are a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
 ```c#
 var fileSize = (10).Kilobytes();
@@ -1057,7 +1084,7 @@ If you want a string representation with full words you can call `ToFullWords` o
 ```
 
 There isn't a `Dehumanize` method to turn a string representation back into a `ByteSize` instance; but you can use `Parse` and `TryParse` on `ByteSize` to do that.
-Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether or not the parsing was successful.
+Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether the parsing was successful.
 If the value is parsed it is output to the `out` parameter supplied:
 
 ```C#
@@ -1112,7 +1139,7 @@ You can specify a format for the bytes part of the humanized output:
 
 ### Heading to words
 
-Humanizer includes methods to change a numeric heading to words. The heading can be a `double` whereas the result will be a string. You can choose whether to return a full representation of the heading (e.g. north, east, south or west), a short representation (e.g. N, E, S, W) or a unicode arrow character (e.g. ↑, →, ↓, ←).
+Humanizer includes methods to change a numeric heading to words. The heading can be a `double` whereas the result will be a string. You can choose whether to return a full representation of the heading (e.g. north, east, south or west), a short representation (e.g. N, E, S, W) or a Unicode arrow character (e.g. ↑, →, ↓, ←).
 
 ```C#
 360.ToHeading();
@@ -1187,7 +1214,7 @@ TimeUnit.Year.ToSymbol();
 
 ## Mix this into your framework to simplify your life
 
-This is just a baseline and you can use this to simplify your day to day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
+This is just a baseline, and you can use this to simplify your day-to-day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in the vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
 You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/v2.7.9/samples/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
 

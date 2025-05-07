@@ -11,7 +11,7 @@
     <description>Humanizer Locale Afrikaans (af)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
-    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
+    
     <language>af</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
@@ -19,7 +19,9 @@
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\netstandard2.0\af\*.*" target="lib\netstandard2.0\af" />
-    <file src="Humanizer\bin\Release\net6.0\af\*.*" target="lib\net6.0\af" />
+    <file src="Humanizer\bin\Release\net8.0\af\*.*" target="lib\net8.0\af" />
+    <file src="Humanizer\bin\Release\net48\af\*.*" target="lib\net48\af" />
+    <file src="Humanizer\bin\Release\net10.0\af\*.*" target="lib\net10.0\af" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>
