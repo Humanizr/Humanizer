@@ -30,7 +30,8 @@ public class ParsingTests
     [Fact]
     public void TryParseReturnsFalseOnNullOrEmpty()
     {
-        Assert.False(ByteSize.TryParse((string?)null, out var result));
+        string? stringNull = null; // Get rid of redundant cast error
+        Assert.False(ByteSize.TryParse(stringNull, out var result));
         Assert.Equal(default, result);
 
         Assert.False(ByteSize.TryParse(string.Empty, out result));

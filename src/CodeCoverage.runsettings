@@ -6,7 +6,7 @@
        <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
           <Format>cobertura</Format>
-          <Exclude>[xunit.*]*,[*Tests]*,[*]Xunit.*,[Verify]*,[EmptyFiles]*</Exclude> <!-- [Assembly-Filter]Type-Filter -->
+          <Exclude>[xunit.*]*,[*Tests]*,[*]Xunit.*,[Verify]*,[EmptyFiles]*,[Argon]*</Exclude> <!-- [Assembly-Filter]Type-Filter -->
           <ExcludeByAttribute>Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
           <SingleHit>false</SingleHit>
         </Configuration>
