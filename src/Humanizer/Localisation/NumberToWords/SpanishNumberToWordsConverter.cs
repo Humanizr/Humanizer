@@ -283,9 +283,9 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
 
     static readonly KeyValuePair<string, long>[] NumbersAndWordsDict =
     [
-        new KeyValuePair<string, long>("trillón", 1_000_000_000_000_000_000),
-        new KeyValuePair<string, long>("billón", 1_000_000_000_000),
-        new KeyValuePair<string, long>("millón", 1_000_000),
+        new("trillón", 1_000_000_000_000_000_000),
+        new("billón", 1_000_000_000_000),
+        new("millón", 1_000_000),
     ];
 
     string ConvertGreaterThanMillion(in long inputNumber, out long remainder)

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net48;net6.0;net7.0;net8.0</TargetFrameworks>    
+    <TargetFrameworks>netstandard2.0;net48;net8.0;net10.0</TargetFrameworks>
     <Authors>Mehdi Khalili, Claire Novotny</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
@@ -10,21 +10,20 @@
     <Product>Humanizer ($(TargetFramework))</Product>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
-    <NoWarn>CS1573;CS1591</NoWarn>
-    <IsTrimmable>true</IsTrimmable>
+    <NoWarn>CS1573;CS1591</NoWarn>    
     <PublicKey>0024000004800000940000000602000000240000525341310004000001000100F9104F5F9BDB168AE140366EB1CD84C469B020EA3423D5D29996D5214CE2BD9B7C0BA3EAD1CA545C4399668AB8911E61CC1CC83C7DF6D50FD6B781365B467E65173F40A11C957D27C5AA0CB0F8DA9C91C988203CC8AEF1468C74A472839D0FD870DA8D13A4DC6B3AAFDAF0384D8E18E393C613D88BF02A64467A119902204FCC</PublicKey>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
     <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
   <ItemGroup>
     <Using Remove="System.Net.Http" />
-    <PackageReference Include="Polyfill" Version="5.6.0" PrivateAssets="all" />
-    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" Condition="'$(TargetFramework)' != 'net8.0'" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="$(TargetFramework.StartsWith('net46')) or $(TargetFramework) != '.NETStandard'" />
-    <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFramework) != '.NETStandard' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
+    <PackageReference Include="Polyfill" Version="7.27.0" PrivateAssets="all" />
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />    
+    <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'"  />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'"  />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -66,4 +65,73 @@
     <InternalsVisibleTo Include="Humanizer.Tests" />
     <InternalsVisibleTo Include="Benchmarks" />
   </ItemGroup>
+  
+
+  <Target Name="PackNuSpecs" DependsOnTargets="GetBuildVersion;Build;_InitializeNuspecRepositoryInformationProperties">
+    <ItemGroup>
+      <NuspecFiles Include="$(MSBuildThisFileDirectory)..\..\NuSpecs\*.nuspec" />
+    </ItemGroup>
+    <PropertyGroup>
+      <NoWarn>$(NoWarn);NU5128</NoWarn>
+      <IncludeBuildOutput>false</IncludeBuildOutput>
+      <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+      <PackageOutputPath Condition=" '$(Configuration)' == '' ">$(MSBuildThisFileDirectory)..\..\artifacts\$(Configuration)\</PackageOutputPath>      
+      <NuspecBasePath>$(MSBuildThisFileDirectory)..\</NuspecBasePath>
+      <NuspecProperties>version=$(NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$(GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer</NuspecProperties>
+    </PropertyGroup>
+        
+    <Message Importance="High" Text="Packing %(NuspecFiles.Identity) → v$(NuGetPackageVersion)"  />
+    
+    <PackTask
+      PackItem="$(MSBuildProjectFullPath)"
+      TargetFrameworks="$(TargetFrameworks)"
+
+
+      PackageId="$(PackageId)"
+      PackageVersion="$(NuGetPackageVersion)"
+      Title="$(Product)"
+      Authors="$(Authors)"
+      Description="$(Description)"
+      DevelopmentDependency="$(DevelopmentDependency)"
+      Copyright="$(Copyright)"
+      RequireLicenseAcceptance="$(PackageRequireLicenseAcceptance)"
+      RestoreOutputPath="$(RestoreOutputPath)"
+      LicenseUrl="$(PackageLicenseUrl)"
+      ProjectUrl="$(PackageProjectUrl)"
+      IconUrl="$(PackageIconUrl)"
+      Tags="$(PackageTags)"
+      ReleaseNotes="$(PackageReleaseNotes)"
+      AssemblyName="$(AssemblyName)"
+      PackageOutputPath="$(PackageOutputPath)"
+      IsTool="$(IsTool)"
+      IncludeSymbols="$(IncludeSymbols)"
+      IncludeSource="$(IncludeSource)"
+      InstallPackageToOutputPath="$(InstallPackageToOutputPath)"
+      OutputFileNamesWithoutVersion="$(OutputFileNamesWithoutVersion)"
+      RepositoryUrl="$(RepositoryUrl)"
+      RepositoryType="$(RepositoryType)"
+      RepositoryBranch="$(RepositoryBranch)"
+      RepositoryCommit="$(RepositoryCommit)"
+      NoPackageAnalysis="$(NoPackageAnalysis)"
+      NuspecFile="%(NuspecFiles.Identity)"
+      NuspecBasePath="$(NuspecBasePath)"
+      NuspecProperties="$(NuspecProperties)"
+      SymbolPackageFormat="$(SymbolPackageFormat)"
+      MinClientVersion="$(MinClientVersion)"
+      Serviceable="$(Serviceable)"
+      ContinuePackingAfterGeneratingNuspec="true"
+      NoDefaultExcludes="$(NoDefaultExcludes)"
+      NuspecOutputPath="$(NuspecOutputPath)"
+      IncludeBuildOutput="$(IncludeBuildOutput)"
+      NoWarn="$(NoWarn)"
+      TreatWarningsAsErrors="$(TreatWarningsAsErrors)"
+      WarningsAsErrors="$(WarningsAsErrors)"
+      WarningsNotAsErrors="$(WarningsNotAsErrors)"
+      PackageLicenseExpression="$(PackageLicenseExpression)"
+      PackageLicenseFile="$(PackageLicenseFile)"
+      PackageLicenseExpressionVersion="$(PackageLicenseExpressionVersion)"
+      Readme="$(Readme)"
+      Deterministic="$(Deterministic)"
+      PackageIcon="$(PackageIcon)" />
+  </Target>
 </Project>

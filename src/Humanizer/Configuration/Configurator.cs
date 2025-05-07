@@ -21,6 +21,11 @@ public static class Configurator
     public static LocaliserRegistry<INumberToWordsConverter> NumberToWordsConverters { get; } = new NumberToWordsConverterRegistry();
 
     /// <summary>
+    /// Registry of converters that transform words into numbers for english language
+    /// </summary>
+    private static LocaliserRegistry<IWordsToNumberConverter> WordsToNumberConverters { get; } = new WordsToNumberConverterRegistry();
+
+    /// <summary>
     /// A registry of ordinalizers used to localise Ordinalize method
     /// </summary>
     public static LocaliserRegistry<IOrdinalizer> Ordinalizers { get; } = new OrdinalizerRegistry();
@@ -57,6 +62,11 @@ public static class Configurator
     /// <param name="culture">The culture to retrieve number to words converter for. Null means that current thread's UI culture should be used.</param>
     internal static INumberToWordsConverter GetNumberToWordsConverter(CultureInfo? culture) =>
         NumberToWordsConverters.ResolveForCulture(culture);
+
+    internal static IWordsToNumberConverter GetWordsToNumberConverter(CultureInfo culture) =>
+        WordsToNumberConverters.ResolveForCulture(culture);
+
+
 
     /// <summary>
     /// The ordinalizer to be used

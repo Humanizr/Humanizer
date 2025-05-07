@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Humanizer;
@@ -65,7 +63,7 @@ public static class StringHumanizeExtensions
             return input;
         }
 
-        // if input contains a dash or underscore which precedes or follows a space (or both, e.g. free-standing)
+        // if input contains a dash or underscore which precedes or follows a space (or both, e.g. freestanding)
         // remove the dash/underscore and run it through FromPascalCase
         if (FreestandingSpacingCharRegex.IsMatch(input))
         {
@@ -105,8 +103,8 @@ public static class StringHumanizeExtensions
         var result = new string('\0', left.Length + right.Length);
         fixed (char* pResult = result)
         {
-            left.CopyTo(new Span<char>(pResult, left.Length));
-            right.CopyTo(new Span<char>(pResult + left.Length, right.Length));
+            left.CopyTo(new(pResult, left.Length));
+            right.CopyTo(new(pResult + left.Length, right.Length));
         }
         return result;
     }

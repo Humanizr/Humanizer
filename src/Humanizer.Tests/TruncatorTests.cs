@@ -1,6 +1,6 @@
 ﻿public class TruncatorTests
 {
-    [Theory]
+    [Theory(DisplayName = "01 - Truncate")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]
@@ -10,7 +10,16 @@
     public void Truncate(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length));
 
-    [Theory]
+    [Theory(DisplayName = "02.1 - TruncateWithFixedLengthTruncator")]
+    [InlineData("short text", 20, null, "short text")]
+    [InlineData("short text", 20, "trunc", "short text")]
+    [InlineData("short text", 20, "very long truncation string", "short text")]
+    [InlineData("Text longer than truncate length", 10, "very long truncation string", "Text longe")]
+    [InlineData("Text longer than truncate length", 10, "trunc", "Text trunc")]
+    public void TruncateWithCustomTruncationString(string? input, int length, string? trunactionString, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, trunactionString));
+
+    [Theory(DisplayName = "02.2 - TruncateWithFixedLengthTruncator")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]
@@ -20,7 +29,7 @@
     public void TruncateWithFixedLengthTruncator(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedLength));
 
-    [Theory]
+    [Theory(DisplayName = "03 - TruncateWithFixedNumberOfCharactersTruncator")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]
@@ -30,7 +39,7 @@
     public void TruncateWithFixedNumberOfCharactersTruncator(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfCharacters));
 
-    [Theory]
+    [Theory(DisplayName = "04 - TruncateWithFixedNumberOfCharactersTruncator")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]
@@ -41,7 +50,33 @@
     public void TruncateWithFixedNumberOfWordsTruncator(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfWords));
 
-    [Theory]
+    [Theory(DisplayName = "05 - TruncateWithDynamicLengthAndPreserveWordsTruncator")]
+    [InlineData(null, 10, null)]
+    [InlineData("", 10, "")]
+    [InlineData("a", 1, "a")]
+    [InlineData("Text longer than truncate length", 10, "Text…")]
+    [InlineData("Text with length equal to truncate length", 41, "Text with length equal to truncate length")]
+    [InlineData("Text smaller than truncate length", 34, "Text smaller than truncate length")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "…")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 1, "…")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 2, "A…")]
+    public void TruncateWithDynamicLengthAndPreserveWordsTruncator(string? input, int length, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, Truncator.DynamicLengthAndPreserveWords));
+
+    [Theory(DisplayName = "06 - TruncateWithDynamicNumberOfCharactersAndPreserveWordsTruncator")]
+    [InlineData(null, 10, null)]
+    [InlineData("", 10, "")]
+    [InlineData("a", 1, "a")]
+    [InlineData("Text with more characters than truncate length", 10, "Text with…")]
+    [InlineData("Text with number of characters equal to truncate length", 47, "Text with number of characters equal to truncate length")]
+    [InlineData("Text with less characters than truncate length", 41, "Text with less characters than truncate length")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "…")]
+    [InlineData("A Text with delimiter length less than truncate length and the first word fit", 2, "A…")]
+    [InlineData("A Text with delimiter length equal to truncate length and the first word fit", 1, "…")]
+    public void TruncateWithDynamicNumberOfCharactersAndPreserveWordsTruncator(string? input, int length, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, Truncator.DynamicNumberOfCharactersAndPreserveWords));
+
+    [Theory(DisplayName = "07 - TruncateWithTruncationString")]
     [InlineData(null, 10, "...", null)]
     [InlineData("", 10, "...", "")]
     [InlineData("a", 1, "...", "a")]
@@ -53,7 +88,7 @@
     public void TruncateWithTruncationString(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString));
 
-    [Theory]
+    [Theory(DisplayName = "08 - TruncateWithTruncationStringAndFixedLengthTruncator")]
     [InlineData(null, 10, "...", null)]
     [InlineData("", 10, "...", "")]
     [InlineData("a", 1, "...", "a")]
@@ -66,7 +101,7 @@
     public void TruncateWithTruncationStringAndFixedLengthTruncator(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedLength));
 
-    [Theory]
+    [Theory(DisplayName = "09 - TruncateWithTruncationStringAndFixedNumberOfCharactersTruncator")]
     [InlineData(null, 10, "...", null)]
     [InlineData("", 10, "...", "")]
     [InlineData("a", 1, "...", "a")]
@@ -80,7 +115,7 @@
     public void TruncateWithTruncationStringAndFixedNumberOfCharactersTruncator(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfCharacters));
 
-    [Theory]
+    [Theory(DisplayName = "10 - TruncateWithTruncationStringAndFixedNumberOfWordsTruncator")]
     [InlineData(null, 10, "...", null)]
     [InlineData("", 10, "...", "")]
     [InlineData("a", 1, "...", "a")]
@@ -93,7 +128,48 @@
     public void TruncateWithTruncationStringAndFixedNumberOfWordsTruncator(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords));
 
-    [Theory]
+    [Theory(DisplayName = "11 - TruncateWithTruncationStringAndDynamicLengthAndPreserveWordsTruncator")]
+    [InlineData(null, 10, "...", null)]
+    [InlineData("", 10, "...", "")]
+    [InlineData("a", 1, "...", "a")]
+    [InlineData("Text longer than truncate length", 10, "...", "Text...")]
+    [InlineData("Text with different truncation string", 10, "---", "Text---")]
+    [InlineData("Text with length equal to truncate length", 41, "...", "Text with length equal to truncate length")]
+    [InlineData("Text smaller than truncate length", 34, "...", "Text smaller than truncate length")]
+    [InlineData("Text with delimiter length greater than truncate length truncates to fixed length without truncation string", 2, "...", "Te")]
+    [InlineData("Text with delimiter length greater than truncate length truncates nothingness without truncation string", 2, "", "")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "...", "...")]
+    [InlineData("Text with delimiter length less than truncate length and the last word fit", 4, "...", "...")]
+    [InlineData("Text with delimiter length less than truncate length and the last word fit", 5, "...", "...")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 3, null, "")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 4, null, "Null")]
+    public void TruncateWithTruncationStringAndDynamicLengthAndPreserveWordsTruncator(string? input, int length, string? truncationString, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicLengthAndPreserveWords));
+
+    [Theory(DisplayName = "12 - TruncateWithTruncationStringAndDynamicNumberOfCharactersAndPreserveWordsTruncator")]
+    [InlineData(null, 10, "...", null)]
+    [InlineData("", 10, "...", "")]
+    [InlineData("a", 1, "...", "a")]
+    [InlineData("Text with more characters than truncate length", 10, "...", "Text...")]
+    [InlineData("Text with different truncation string", 10, "---", "Text---")]
+    [InlineData("Text with number of characters equal to truncate length", 47, "...", "Text with number of characters equal to truncate length")]
+    [InlineData("Text with less characters than truncate length", 41, "...", "Text with less characters than truncate length")]
+    [InlineData("Text with delimiter length greater than truncate length truncates to fixed length without truncation string", 2, "...", "")]
+    [InlineData("Text     with additional spaces and null truncate string", 10, null, "Text     with")]
+    [InlineData("Text     with additional spaces and empty string as truncate string", 10, "", "Text     with")]
+    [InlineData("Text with delimiter length greater than truncate length truncates nothingness without truncation string", 2, "", "")]
+    [InlineData("Text delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "...", "...")]
+    [InlineData("Text with delimiter length less than truncate length and the last word fit", 4, "...", "...")]
+    [InlineData("Text with delimiter length less than truncate length and the last word fit", 5, "...", "...")]
+    [InlineData("Text with delimiter length less than truncate length and the last word fit", 7, "...", "Text...")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 2, null, "")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 3, null, "")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 4, null, "Null")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 5, null, "Null")]
+    public void TruncateWithTruncationStringAndDynamicNumberOfCharactersAndPreserveWordsTruncator(string? input, int length, string? truncationString, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicNumberOfCharactersAndPreserveWords));
+
+    [Theory(DisplayName = "13 - TruncateWithFixedLengthTruncatorTruncateFromLeft")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]
@@ -103,7 +179,7 @@
     public void TruncateWithFixedLengthTruncatorTruncateFromLeft(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedLength, TruncateFrom.Left));
 
-    [Theory]
+    [Theory(DisplayName = "14 - TruncateWithFixedNumberOfCharactersTruncatorTruncateFromLeft")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]
@@ -114,7 +190,7 @@
     public void TruncateWithFixedNumberOfCharactersTruncatorTruncateFromLeft(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfCharacters, TruncateFrom.Left));
 
-    [Theory]
+    [Theory(DisplayName = "15 - TruncateWithFixedNumberOfWordsTruncatorTruncateFromLeft")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]
@@ -126,7 +202,35 @@
     public void TruncateWithFixedNumberOfWordsTruncatorTruncateFromLeft(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, Truncator.FixedNumberOfWords, TruncateFrom.Left));
 
-    [Theory]
+    [Theory(DisplayName = "16 - TruncateWithDynamicLengthAndPreserveWordsTruncatorTruncateFromLeft")]
+    [InlineData(null, 10, null)]
+    [InlineData("", 10, "")]
+    [InlineData("a", 1, "a")]
+    [InlineData("Text longer than truncate length", 10, "…length")]
+    [InlineData("Text with length equal to truncate length", 41, "Text with length equal to truncate length")]
+    [InlineData("Text smaller than truncate length", 34, "Text smaller than truncate length")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "…")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 5, "…fit")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 4, "…fit")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 3, "…")]
+    public void TruncateWithDynamicLengthAndPreserveWordsTruncatorTruncateFromLeft(string? input, int length, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "17 - TruncateWithDynamicNumberOfCharactersAndPreserveWordsTruncatorTruncateFromLeft")]
+    [InlineData(null, 10, null)]
+    [InlineData("", 10, "")]
+    [InlineData("a", 1, "a")]
+    [InlineData("Text with more characters than truncate length", 10, "…length")]
+    [InlineData("Text with number of characters equal to truncate length", 47, "Text with number of characters equal to truncate length")]
+    [InlineData("Text with less characters than truncate length", 41, "Text with less characters than truncate length")]
+    [InlineData("Text with strange characters ^$(*^ and more ^$**)%  ", 10, "…^$(*^ and more ^$**)%  ")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "…")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 4, "…fit")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 3, "…")]
+    public void TruncateWithDynamicNumberOfCharactersAndPreserveWordsTruncatorTruncateFromLeft(string? input, int length, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "18 - TruncateWithTruncationStringAndFixedLengthTruncatorTruncateFromLeft")]
     [InlineData(null, 10, "...", null)]
     [InlineData("", 10, "...", "")]
     [InlineData("a", 1, "...", "a")]
@@ -139,7 +243,7 @@
     public void TruncateWithTruncationStringAndFixedLengthTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedLength, TruncateFrom.Left));
 
-    [Theory]
+    [Theory(DisplayName = "19 - TruncateWithTruncationStringAndFixedNumberOfCharactersTruncatorTruncateFromLeft")]
     [InlineData(null, 10, "...", null)]
     [InlineData("", 10, "...", "")]
     [InlineData("a", 1, "...", "a")]
@@ -152,7 +256,7 @@
     public void TruncateWithTruncationStringAndFixedNumberOfCharactersTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfCharacters, TruncateFrom.Left));
 
-    [Theory]
+    [Theory(DisplayName = "20 - TruncateWithTruncationStringAndFixedNumberOfWordsTruncatorTruncateFromLeft")]
     [InlineData(null, 10, "...", null)]
     [InlineData("", 10, "...", "")]
     [InlineData("a", 1, "...", "a")]
@@ -165,4 +269,52 @@
     [InlineData("Text with whitespace at the end  ", 4, "...", "...whitespace at the end")]
     public void TruncateWithTruncationStringAndFixedNumberOfWordsTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.FixedNumberOfWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "20 - TruncateWithTruncationStringAndDynamicLengthAndPreserveWordsTruncatorTruncateFromLeft")]
+    [InlineData(null, 10, "...", null)]
+    [InlineData("", 10, "...", "")]
+    [InlineData("a", 1, "...", "a")]
+    [InlineData("Text longer than truncate length", 10, "...", "...length")]
+    [InlineData("Text with different truncation string", 10, "---", "---string")]
+    [InlineData("Text with length equal to truncate length", 41, "...", "Text with length equal to truncate length")]
+    [InlineData("Text smaller than truncate length", 34, "...", "Text smaller than truncate length")]
+    [InlineData("Text with delimiter length greater than truncate length truncates nothingness without truncation string", 2, "", "")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "...", "...")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 5, "...", "...")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 6, "...", "...")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 7, "...", "...")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 9, "...", "...alone")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 4, "...", "...")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 3, "...", "...")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 4, null, "")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 6, null, "string")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 7, null, "string")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 10, null, "string")]
+    public void TruncateWithTruncationStringAndDynamicLengthAndPreserveWordsTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left));
+
+    [Theory(DisplayName = "21 - TruncateWithTruncationStringAndDynamicNumberOfCharactersAndPreserveWordsTruncatorTruncateFromLeft")]
+    [InlineData(null, 10, "...", null)]
+    [InlineData("", 10, "...", "")]
+    [InlineData("a", 1, "...", "a")]
+    [InlineData("Text with more characters than truncate length", 10, "...", "...length")]
+    [InlineData("Text with different truncation string", 10, "---", "---string")]
+    [InlineData("Text with number of characters equal to truncate length", 47, "...", "Text with number of characters equal to truncate length")]
+    [InlineData("Text with less characters than truncate length", 41, "...", "Text with less characters than truncate length")]
+    [InlineData("Text with delimiter length greater than truncate length truncates nothingness without truncation string", 2, "", "")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 2, "...", "")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 4, "...", "...")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 5, "...", "...")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 6, "...", "...")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 8, "...", "...alone")]
+    [InlineData("Textual with delimiter length less than truncate length and starting word longer than truncate length to truncation string alone", 9, "...", "...alone")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 2, "...", "")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 4, ".....", "fit")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 5, ".....", ".....")]
+    [InlineData("A Text with delimiter length less than truncate length and the last word fit", 6, ".....", ".....")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 4, null, "")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 6, null, "string")]
+    [InlineData("Null truncation string truncates to truncate length without truncation string", 7, null, "string")]
+    public void TruncateWithTruncationStringAndDynamicNumberOfCharactersAndPreserveWordsTruncatorTruncateFromLeft(string? input, int length, string? truncationString, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, truncationString, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left));
 }
