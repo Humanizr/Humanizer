@@ -24,10 +24,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D-0488-42AE-A585-86D882F23D5F}"
 	ProjectSection(SolutionItems) = preProject
-		..\azure-pipelines.yml = ..\azure-pipelines.yml
-		..\build.cmd = ..\build.cmd
-		..\build.ps1 = ..\build.ps1
-		Humanizer.ruleset = Humanizer.ruleset
+		.\azure-pipelines.yml = ..\azure-pipelines.yml
+		.\build.cmd = .\build.cmd
+		.\build.ps1 = .\build.ps1
+		.\Humanizer.ruleset = Humanizer.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA449265-E001-486D-A0F4-04ACF0C83DC1}"
