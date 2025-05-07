@@ -1,10 +1,10 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 namespace Humanizer;
 
 class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
-    public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
+    public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive, CultureInfo? culture)
     {
         switch (time)
         {
@@ -21,19 +21,19 @@ class DefaultTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverte
 
         return normalizedMinutes switch
         {
-            00 => $"{normalizedHour.ToWords()} o'clock",
-            05 => $"five past {normalizedHour.ToWords()}",
-            10 => $"ten past {normalizedHour.ToWords()}",
-            15 => $"a quarter past {normalizedHour.ToWords()}",
-            20 => $"twenty past {normalizedHour.ToWords()}",
-            25 => $"twenty-five past {normalizedHour.ToWords()}",
-            30 => $"half past {normalizedHour.ToWords()}",
-            40 => $"twenty to {(normalizedHour + 1).ToWords()}",
-            45 => $"a quarter to {(normalizedHour + 1).ToWords()}",
-            50 => $"ten to {(normalizedHour + 1).ToWords()}",
-            55 => $"five to {(normalizedHour + 1).ToWords()}",
-            60 => $"{(normalizedHour + 1).ToWords()} o'clock",
-            _ => $"{normalizedHour.ToWords()} {normalizedMinutes.ToWords()}"
+            00 => $"{normalizedHour.ToWords(culture)} o'clock",
+            05 => $"five past {normalizedHour.ToWords(culture)}",
+            10 => $"ten past {normalizedHour.ToWords(culture)}",
+            15 => $"a quarter past {normalizedHour.ToWords(culture)}",
+            20 => $"twenty past {normalizedHour.ToWords(culture)}",
+            25 => $"twenty-five past {normalizedHour.ToWords(culture)}",
+            30 => $"half past {normalizedHour.ToWords(culture)}",
+            40 => $"twenty to {(normalizedHour + 1).ToWords(culture)}",
+            45 => $"a quarter to {(normalizedHour + 1).ToWords(culture)}",
+            50 => $"ten to {(normalizedHour + 1).ToWords(culture)}",
+            55 => $"five to {(normalizedHour + 1).ToWords(culture)}",
+            60 => $"{(normalizedHour + 1).ToWords(culture)} o'clock",
+            _ => $"{normalizedHour.ToWords(culture)} {normalizedMinutes.ToWords(culture)}"
         };
     }
 }
