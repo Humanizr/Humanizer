@@ -11,19 +11,19 @@ public static class RomanNumeralExtensions
 {
     static readonly KeyValuePair<string, int>[] RomanNumeralsSequence =
     [
-        new KeyValuePair<string, int>("M", 1000),
-        new KeyValuePair<string, int>("CM", 900),
-        new KeyValuePair<string, int>("D", 500 ),
-        new KeyValuePair<string, int>("CD", 400),
-        new KeyValuePair<string, int>("C", 100 ),
-        new KeyValuePair<string, int>("XC", 90 ),
-        new KeyValuePair<string, int>("L", 50  ),
-        new KeyValuePair<string, int>("XL", 40 ),
-        new KeyValuePair<string, int>("X", 10  ),
-        new KeyValuePair<string, int>("IX", 9  ),
-        new KeyValuePair<string, int>("V", 5   ),
-        new KeyValuePair<string, int>("IV", 4  ),
-        new KeyValuePair<string, int>("I", 1   ),
+        new("M", 1000),
+        new("CM", 900),
+        new("D", 500 ),
+        new("CD", 400),
+        new("C", 100 ),
+        new("XC", 90 ),
+        new("L", 50  ),
+        new("XL", 40 ),
+        new("X", 10  ),
+        new("IX", 9  ),
+        new("V", 5   ),
+        new("IV", 4  ),
+        new("I", 1   ),
     ];
 
     static int GetRomanNumeralCharValue(char c)

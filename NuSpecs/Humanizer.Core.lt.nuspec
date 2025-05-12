@@ -12,14 +12,16 @@
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
     <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
-    <language>lv</language>
+    <language>lt</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>
     <file src="Humanizer\bin\Release\netstandard2.0\lt\*.*" target="lib\netstandard2.0\lt" />
-    <file src="Humanizer\bin\Release\net6.0\lt\*.*" target="lib\net6.0\lt" />
+    <file src="Humanizer\bin\Release\net8.0\lt\*.*" target="lib\net8.0\lt" />
+    <file src="Humanizer\bin\Release\net48\lt\*.*" target="lib\net48\lt" />
+    <file src="Humanizer\bin\Release\net10.0\lt\*.*" target="lib\net10.0\lt" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

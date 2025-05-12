@@ -27,6 +27,10 @@ public static class EnumDehumanizeExtensions
         where TTargetEnum : struct, Enum =>
         DehumanizeToPrivate<TTargetEnum>(input, onNoMatch);
 
+#if NET6_0_OR_GREATER
+    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(EnumDehumanizeExtensions))]
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Access to DehumanizeTo via reflection is intentional and documented.")]
+#endif
     static readonly MethodInfo dehumanizeToMethod = typeof(EnumDehumanizeExtensions)
         .GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!;
 
@@ -42,7 +46,7 @@ public static class EnumDehumanizeExtensions
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
 #endif
-    public static Enum DehumanizeTo(this string input, Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
+    public static Enum DehumanizeTo(this string input, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
     {
         var genericMethod = dehumanizeToMethod.MakeGenericMethod(targetEnum);
         try

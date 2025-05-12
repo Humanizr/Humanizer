@@ -161,16 +161,16 @@ namespace Humanizer
     public static class Configurator
     {
         public static Humanizer.LocaliserRegistry<Humanizer.ICollectionFormatter> CollectionFormatters { get; }
+        public static Humanizer.IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy { get; set; }
         public static Humanizer.LocaliserRegistry<Humanizer.IDateOnlyToOrdinalWordConverter> DateOnlyToOrdinalWordsConverters { get; }
+        public static Humanizer.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
+        public static Humanizer.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
         public static Humanizer.LocaliserRegistry<Humanizer.IDateToOrdinalWordConverter> DateToOrdinalWordsConverters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.IFormatter> Formatters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.INumberToWordsConverter> NumberToWordsConverters { get; }
         public static Humanizer.LocaliserRegistry<Humanizer.IOrdinalizer> Ordinalizers { get; }
-        public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; }
-        public static Humanizer.IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy { get; set; }
-        public static Humanizer.IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; }
-        public static Humanizer.IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; }
         public static Humanizer.ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy { get; set; }
+        public static Humanizer.LocaliserRegistry<Humanizer.ITimeOnlyToClockNotationConverter> TimeOnlyToClockNotationConverters { get; }
         public static void UseEnumDescriptionPropertyLocator(System.Func<System.Reflection.PropertyInfo, bool> func) { }
     }
     public enum DataUnit
@@ -239,6 +239,12 @@ namespace Humanizer
         public DefaultTimeOnlyHumanizeStrategy() { }
         public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalization.CultureInfo? culture) { }
     }
+    public class DynamicNumberOfCharactersAndPreserveWordsTruncator : Humanizer.ITruncator
+    {
+        public DynamicNumberOfCharactersAndPreserveWordsTruncator() { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
+        public string? Truncate(string? value, int totalLength, string? delimiter, Humanizer.TruncateFrom truncateFrom = 1) { }
+    }
     public static class EnglishArticle
     {
         public static string[] AppendArticlePrefix(string[] items) { }
@@ -248,7 +254,7 @@ namespace Humanizer
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
-        public static System.Enum DehumanizeTo(this string input, System.Type targetEnum, Humanizer.OnNoMatch onNoMatch = 0) { }
+        public static System.Enum DehumanizeTo(this string input, [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)] System.Type targetEnum, Humanizer.OnNoMatch onNoMatch = 0) { }
         public static TTargetEnum DehumanizeTo<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)]  TTargetEnum>(this string input)
             where TTargetEnum :  struct, System.Enum { }
         public static TTargetEnum? DehumanizeTo<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)]  TTargetEnum>(this string input, Humanizer.OnNoMatch onNoMatch = 0)
@@ -373,6 +379,10 @@ namespace Humanizer
     {
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
         string? Truncate(string? value, int length, string? truncationString, Humanizer.TruncateFrom truncateFrom = 1);
+    }
+    public interface IWordsToNumberConverter
+    {
+        int Convert(string words);
     }
     public class In
     {
@@ -1930,6 +1940,8 @@ namespace Humanizer
     }
     public static class Truncator
     {
+        public static Humanizer.ITruncator DynamicLengthAndPreserveWords { get; }
+        public static Humanizer.ITruncator DynamicNumberOfCharactersAndPreserveWords { get; }
         public static Humanizer.ITruncator FixedLength { get; }
         public static Humanizer.ITruncator FixedNumberOfCharacters { get; }
         public static Humanizer.ITruncator FixedNumberOfWords { get; }
@@ -1958,5 +1970,9 @@ namespace Humanizer
         Normal = 0,
         Abbreviation = 1,
         Eifeler = 2,
+    }
+    public static class WordsToNumberExtension
+    {
+        public static int ToNumber(this string words, System.Globalization.CultureInfo culture) { }
     }
 }
