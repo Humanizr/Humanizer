@@ -72,11 +72,6 @@ public class MetricNumeralTests
                 .ToMetric()
                 .FromMetric()
                 .ToString("0.##E+0", CultureInfo.InvariantCulture));
-        if (!isEquals)
-        {
-            Debugger.Break();
-        }
-
         Assert.True(isEquals);
     }
 
@@ -94,6 +89,7 @@ public class MetricNumeralTests
     [InlineData("1.23milli", 1.234E-3, MetricNumeralFormats.UseName, 2)]
     [InlineData("12.34k", 12345, null, 2)]
     [InlineData("12k", 12345, null, 0)]
+    [InlineData("1M", 999500d, null, 0)]
     [InlineData("-3.9m", -3.91e-3, null, 1)]
     [InlineData("10 ", 10, MetricNumeralFormats.WithSpace, 0)]
     [InlineData("1.2", 1.23, null, 1)]
