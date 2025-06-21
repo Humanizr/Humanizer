@@ -768,7 +768,7 @@ namespace Humanizer
         public static string Dasherize(this string underscoredWord) { }
         public static string Hyphenate(this string underscoredWord) { }
         public static string Kebaberize(this string input) { }
-        public static string Pascalize(this string input) { }
+        public static string Pascalize(this string input, bool preserveAcronym = true) { }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
         public static string? Pluralize(this string? word, bool inputIsKnownToBeSingular = true) { }
         public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
