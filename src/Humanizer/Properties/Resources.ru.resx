@@ -387,4 +387,289 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 год</value>
   </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>бит</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>бит</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>восток</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>ТБ</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>терабайт</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>МБ</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>мегабайт</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>килобайт</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>КБ</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>ГБ</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>гигабайт</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>Б</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>байт</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>никогда</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>два дня назад</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>через два дня</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>север</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>юг</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>д.</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ч.</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>мс.</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>мин.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>мес.</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>сек.</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>нед.</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>г.</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>запад</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>востоко-северо-восток</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>ВСВ</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>востоко-юго-восток</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>ВЮВ</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>В</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>северо-восток</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>СВ</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>северо-северо-восток</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>ССВ</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>северо-северо-запад</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>ССЗ</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>северо-запад</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>СЗ</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>С</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>юго-восток</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ЮВ</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>юго-юго-восток</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>ЮЮВ</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>юго-юго-запад</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>ЮЮЗ</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>юго-запад</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ЮЗ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>Ю</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>западо-северо-запад</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>ЗСЗ</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>западо-юго-запад</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>ЗЮЗ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>З</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>{0} дней назад</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>{0} дня назад</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>через {0} дней</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>через {0} дня</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>{0} часа назад</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>{0} часов назад</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>через {0} часа</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>через {0} часов</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>{0} минуты назад</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>{0} минут назад</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>через {0} минуты</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>через {0} минут</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>{0} месяца назад</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>{0} месяцев назад</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>через {0} месяца</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>через {0} месяцев</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>{0} секунды назад</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>{0} секунд назад</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>через {0} секунды</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>через {0} секунд</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>{0} года назад</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>{0} лет назад</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>через {0} года</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>через {0} лет</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>{0} дня</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>{0} часа</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} дней</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} часов</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>{0} миллисекунды</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} миллисекунд</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>{0} минуты</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} минут</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
+    <value>{0} месяца</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} месяцев</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>{0} секунды</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} секунд</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>{0} недели</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} недель</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
+    <value>{0} года</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} лет</value>
+  </data>
 </root>
