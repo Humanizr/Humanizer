@@ -6,6 +6,7 @@ public class ByteSizeExtensionsTests
     [Theory]
     [InlineData(2, null, "2 ТБ")]
     [InlineData(2, "GB", "2048 ГБ")]
+    [InlineData(2.1, null, "2,1 ТБ")]
     [InlineData(2.123, "#.#", "2,1 ТБ")]
     public void HumanizesTerabytes(double input, string? format, string expectedValue) =>
         Assert.Equal(expectedValue, input.Terabytes().Humanize(format));
