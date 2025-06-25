@@ -765,7 +765,7 @@ namespace Humanizer
     public static class InflectorExtensions
     {
         public static string Camelize(this string input) { }
-        public static string CamelizeV2(this string input) { }        
+        public static string CamelizeV2(this string input) { }
         public static string Dasherize(this string underscoredWord) { }
         public static string Hyphenate(this string underscoredWord) { }
         public static string Kebaberize(this string input) { }
