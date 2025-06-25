@@ -1,3 +1,5 @@
+using Humanizer;
+
 namespace Humanizer;
 
 /// <summary>
@@ -16,6 +18,11 @@ public class Vocabulary
     readonly HashSet<string> uncountables = new(StringComparer.CurrentCultureIgnoreCase);
     readonly Regex letterS = new("^([sS])[sS]*$");
 
+    readonly Dictionary<string, char> possessiveExceptionMap = new Dictionary<string, char>(StringComparer.OrdinalIgnoreCase)
+    {
+        { "it", 's' },
+    };
+
     /// <summary>
     /// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx, e.g. "person" and "people".
     /// </summary>
@@ -23,20 +30,20 @@ public class Vocabulary
     /// <param name="plural">The plural form of the irregular word, e.g. "people".</param>
     /// <param name="matchEnding">True to match these words on their own as well as at the end of longer words. False, otherwise.</param>
     public void AddIrregular(string singular, string plural, bool matchEnding = true)
+{
+    if (matchEnding)
     {
-        if (matchEnding)
-        {
-            var singularSubstring = singular.Substring(1);
-            var pluralSubString = plural.Substring(1);
-            AddPlural($"({singular[0]}){singularSubstring}$", $"$1{pluralSubString}");
-            AddSingular($"({plural[0]}){pluralSubString}$", $"$1{singularSubstring}");
-        }
-        else
-        {
-            AddPlural($"^{singular}$", plural);
-            AddSingular($"^{plural}$", singular);
-        }
+        var singularSubstring = singular.Substring(1);
+        var pluralSubString = plural.Substring(1);
+        AddPlural($"({singular[0]}){singularSubstring}$", $"$1{pluralSubString}");
+        AddSingular($"({plural[0]}){pluralSubString}$", $"$1{singularSubstring}");
     }
+    else
+    {
+        AddPlural($"^{singular}$", plural);
+        AddSingular($"^{plural}$", singular);
+    }
+}
 
     /// <summary>
     /// Adds an uncountable word to the vocabulary, e.g. "fish".  Will be ignored when plurality is changed.
@@ -143,6 +150,36 @@ public class Vocabulary
         }
 
         return word;
+    }
+
+    public string? ToPossessive(string? word, PossesiveSuffixOverride? possessiveSuffix)
+    {
+        if (word == null || string.IsNullOrWhiteSpace(word))
+        {
+            return word;
+        }
+
+        switch (possessiveSuffix)
+        {
+            case PossesiveSuffixOverride.S_ONLY:
+                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), 's');
+            case PossesiveSuffixOverride.APOSTROPHE_ONLY:
+                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), '\'');
+            case PossesiveSuffixOverride.APOSTROPHE_S:
+                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), "'s".AsSpan());
+        }
+
+        if (possessiveExceptionMap.TryGetValue(word, out var suffix))
+        {
+            return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), suffix);
+        }
+
+        if (word[word.Length - 1] == 's')
+        {
+            return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), '\'');
+        }
+
+        return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), "'s".AsSpan());
     }
 
     string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)

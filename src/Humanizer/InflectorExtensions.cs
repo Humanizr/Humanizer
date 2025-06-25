@@ -21,6 +21,8 @@
 //IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Humanizer;
+
 namespace Humanizer;
 
 public static class InflectorExtensions
@@ -100,4 +102,13 @@ public static class InflectorExtensions
     public static string Kebaberize(this string input) =>
         Underscore(input)
             .Dasherize();
+
+    /// <summary>
+    /// Pluralizes the provided input considering irregular words
+    /// </summary>
+    /// <param name="word">Word to be pluralized</param>
+    /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
+    [return: NotNullIfNotNull(nameof(word))]
+    public static string? ToPossessive(this string? word, PossesiveSuffixOverride? suffxix = null) =>
+        Vocabularies.Default.ToPossessive(word, suffxix);
 }

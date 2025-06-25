@@ -22,6 +22,7 @@
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Collections;
+using Humanizer;
 
 public class InflectorTests
 {
@@ -148,6 +149,54 @@ public class InflectorTests
     [InlineData("A VeryShortSENTENCE", "a-very-short-sentence")]
     public void Kebaberize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Kebaberize());
+
+
+
+    [Theory]
+    [InlineData("James", "James'")]
+    [InlineData("cat", "cat's")]
+    [InlineData("boss", "boss'")]
+    [InlineData("child", "child's")]
+    [InlineData("dogs", "dogs'")]
+    [InlineData("Chris", "Chris'")]
+    [InlineData("class", "class'")]
+    [InlineData("fox", "fox's")]
+    [InlineData("baby", "baby's")]
+    [InlineData("children", "children's")]
+    [InlineData("iT", "iTs")]
+    [InlineData("it", "its")]
+    [InlineData("IT", "ITs")]
+    [InlineData("It", "Its")]
+    [InlineData("", "")]
+    [InlineData("  ", "  ")]
+    public void ToPossessive_DefaultSuffix_Works(string input, string expected) =>
+        Assert.Equal(expected, input.ToPossessive());
+
+    [Theory]
+    [InlineData("James", PossesiveSuffixOverride.APOSTROPHE_S, "James's")]
+    [InlineData("iT", PossesiveSuffixOverride.APOSTROPHE_S, "iT's")]
+    [InlineData("it", PossesiveSuffixOverride.APOSTROPHE_S, "it's")]
+    [InlineData("IT", PossesiveSuffixOverride.APOSTROPHE_S, "IT's")]
+    [InlineData("It", PossesiveSuffixOverride.APOSTROPHE_S, "It's")]
+    [InlineData("", PossesiveSuffixOverride.APOSTROPHE_S, "")]
+    [InlineData("  ", PossesiveSuffixOverride.APOSTROPHE_S, "  ")]
+    [InlineData("Bit", PossesiveSuffixOverride.S_ONLY, "Bits")]
+    [InlineData("iT", PossesiveSuffixOverride.S_ONLY, "iTs")]
+    [InlineData("it", PossesiveSuffixOverride.S_ONLY, "its")]
+    [InlineData("IT", PossesiveSuffixOverride.S_ONLY, "ITs")]
+    [InlineData("It", PossesiveSuffixOverride.S_ONLY, "Its")]
+    [InlineData("", PossesiveSuffixOverride.S_ONLY, "")]
+    [InlineData("  ", PossesiveSuffixOverride.S_ONLY, "  ")]    
+    [InlineData("Bit", PossesiveSuffixOverride.APOSTROPHE_ONLY, "Bit'")]
+    [InlineData("iT", PossesiveSuffixOverride.APOSTROPHE_ONLY, "iT'")]
+    [InlineData("it", PossesiveSuffixOverride.APOSTROPHE_ONLY, "it'")]
+    [InlineData("IT", PossesiveSuffixOverride.APOSTROPHE_ONLY, "IT'")]
+    [InlineData("It", PossesiveSuffixOverride.APOSTROPHE_ONLY, "It'")]
+    [InlineData("", PossesiveSuffixOverride.APOSTROPHE_ONLY, "")]
+    [InlineData("  ", PossesiveSuffixOverride.APOSTROPHE_ONLY, "  ")]    
+    public void ToPossessive_WithExplicitSuffix_AppliesSuffix(string input, PossesiveSuffixOverride suffix, string expected) =>
+        // Assuming PossesiveSuffix is an enum with at least ApostropheS and Apostrophe
+        Assert.Equal(expected, input.ToPossessive(suffix)); 
 }
 
 class PluralTestSource : IEnumerable<object[]>
