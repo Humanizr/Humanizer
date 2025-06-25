@@ -124,6 +124,21 @@ public static class InflectorExtensions
     }
 
     /// <summary>
+    /// Adheres to Google camel case definition https://google.github.io/styleguide/jsguide.html#naming-camel-case-defined
+    /// that appropriately handles acronyms.
+    /// </summary>
+    public static string CamelizeV2(this string input)
+    {
+        var word = input.Pascalize(false);
+        return word.Length > 0
+            ? StringHumanizeExtensions.Concat(
+                char.ToLower(word[0]),
+                word.AsSpan(1))
+            : word;
+
+    }
+
+    /// <summary>
     /// Separates the input words with underscore
     /// </summary>
     /// <param name="input">The string to be underscored</param>
