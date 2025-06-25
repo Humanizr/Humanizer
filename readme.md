@@ -633,10 +633,11 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 
 #### Pascalize
 
-`Pascalize` converts the input words to UpperCamelCase, also removing underscores and spaces:
+`Pascalize` converts the input words to UpperCamelCase, also removing underscores and spaces, with optional capability to preserve acronym casing:
 
 ```C#
-"some_title for something".Pascalize() => "SomeTitleForSomething"
+"some_title for some SKU".Pascalize() => "SomeTitleForSomeSKU"
+"NBA-Basketball MLS-baseball".Pascalize(false) => "NbaBasketballMlsBaseball"
 ```
 
 
@@ -646,6 +647,14 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 
 ```C#
 "some_title for something".Camelize() => "someTitleForSomething"
+```
+
+#### CamelizeV2
+
+`Camelize` camelizes acronyms correctly, it is backwards incompatible with the way current Camelize works which is why introducing a new version
+
+```C#
+"HTTP IO module".Camelize() => "httpIoModule"
 ```
 
 
