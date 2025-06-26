@@ -104,11 +104,12 @@ public static class InflectorExtensions
             .Dasherize();
 
     /// <summary>
-    /// Pluralizes the provided input considering irregular words
+    /// Converts the input to possessive form, e.g. "cat" -> "cat's", "dogs" -> "dogs'", "child" -> "child's"
+    /// Also supports custom possessive suffixes via the PossesiveSuffixOverride parameter.
     /// </summary>
-    /// <param name="word">Word to be pluralized</param>
-    /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
+    /// <param name="word">Word to convert to possessive</param>
+    /// <param name="suffix">Custom possessive suffix that user may want to override with</param>
     [return: NotNullIfNotNull(nameof(word))]
-    public static string? ToPossessive(this string? word, PossesiveSuffixOverride? suffxix = null) =>
-        Vocabularies.Default.ToPossessive(word, suffxix);
+    public static string? ToPossessive(this string? word, PossesiveSuffixOverride? suffix = null) =>
+        Vocabularies.Default.ToPossessive(word, suffix);
 }
