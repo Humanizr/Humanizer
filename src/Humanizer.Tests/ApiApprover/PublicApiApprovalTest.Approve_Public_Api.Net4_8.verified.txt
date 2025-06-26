@@ -343,6 +343,8 @@ namespace Humanizer
     public interface IWordsToNumberConverter
     {
         int Convert(string words);
+        bool TryConvert(string words, out int parsedValue);
+        bool TryConvert(string words, out int parsedValue, out string? unrecognizedNumber);
     }
     public class In
     {
@@ -1311,5 +1313,7 @@ namespace Humanizer
     public static class WordsToNumberExtension
     {
         public static int ToNumber(this string words, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
     }
 }
