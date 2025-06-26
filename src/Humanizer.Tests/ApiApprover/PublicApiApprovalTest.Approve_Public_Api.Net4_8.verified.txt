@@ -1163,7 +1163,7 @@ namespace Humanizer
         S_ONLY = 0,
         APOSTROPHE_ONLY = 1,
         APOSTROPHE_S = 2,
-    }    
+    }
     public class PrecisionDateTimeHumanizeStrategy : Humanizer.IDateTimeHumanizeStrategy
     {
         public PrecisionDateTimeHumanizeStrategy(double precision = 0.75) { }
