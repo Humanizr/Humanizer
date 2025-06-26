@@ -1313,7 +1313,7 @@ namespace Humanizer
     public static class WordsToNumberExtension
     {
         public static int ToNumber(this string words, System.Globalization.CultureInfo culture) { }
-        public static bool TryToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture) { }
-        public static bool TryToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
+        public static bool TryConvertToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture) { }
+        public static bool TryConvertToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
     }
 }
