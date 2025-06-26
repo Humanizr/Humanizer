@@ -30,20 +30,20 @@ public class Vocabulary
     /// <param name="plural">The plural form of the irregular word, e.g. "people".</param>
     /// <param name="matchEnding">True to match these words on their own as well as at the end of longer words. False, otherwise.</param>
     public void AddIrregular(string singular, string plural, bool matchEnding = true)
-{
-    if (matchEnding)
     {
-        var singularSubstring = singular.Substring(1);
-        var pluralSubString = plural.Substring(1);
-        AddPlural($"({singular[0]}){singularSubstring}$", $"$1{pluralSubString}");
-        AddSingular($"({plural[0]}){pluralSubString}$", $"$1{singularSubstring}");
+        if (matchEnding)
+        {
+            var singularSubstring = singular.Substring(1);
+            var pluralSubString = plural.Substring(1);
+            AddPlural($"({singular[0]}){singularSubstring}$", $"$1{pluralSubString}");
+            AddSingular($"({plural[0]}){pluralSubString}$", $"$1{singularSubstring}");
+        }
+        else
+        {
+            AddPlural($"^{singular}$", plural);
+            AddSingular($"^{plural}$", singular);
+        }
     }
-    else
-    {
-        AddPlural($"^{singular}$", plural);
-        AddSingular($"^{plural}$", singular);
-    }
-}
 
     /// <summary>
     /// Adds an uncountable word to the vocabulary, e.g. "fish".  Will be ignored when plurality is changed.
