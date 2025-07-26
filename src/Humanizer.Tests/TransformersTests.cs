@@ -10,6 +10,8 @@
     [InlineData("Title Case", "Title Case")]
     [InlineData("apostrophe's aren't capitalized", "Apostrophe's Aren't Capitalized")]
     [InlineData("titles with, commas work too", "Titles With, Commas Work Too")]
+    [InlineData("LONGER_WORD", "Longer_word")] // Issue #1557: ALL-CAPS with separators should be transformed
+    [InlineData("HELLO", "HELLO")] // ALL-CAPS words without separators should be preserved as potential acronyms
     public void TransformToTitleCase(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Transform(To.TitleCase));
 
@@ -25,6 +27,8 @@
     [InlineData("lower case statement", "Lower case statement")]
     [InlineData("Sentence casing", "Sentence casing")]
     [InlineData("honors UPPER case", "Honors UPPER case")]
+    [InlineData("LONGER_WORD", "Longer_word")] // Issue #1557: ALL-CAPS with separators should be transformed
+    [InlineData("HELLO", "HELLO")] // ALL-CAPS words without separators should be preserved as potential acronyms  
     public void TransformToSentenceCase(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Transform(To.SentenceCase));
 

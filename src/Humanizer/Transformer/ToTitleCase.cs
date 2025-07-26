@@ -43,7 +43,8 @@ class ToTitleCase : ICulturedStringTransformer
             }
         }
 
-        return true;
+        // Preserve ALL-CAPS words, but allow transformation of words with separators
+        return !input.Contains('_') && !input.Contains('-');
     }
 
     private static bool IsArticleOrConjunctionOrPreposition(string word) =>
