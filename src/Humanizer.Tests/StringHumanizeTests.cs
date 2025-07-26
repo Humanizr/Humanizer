@@ -64,7 +64,7 @@
     [InlineData("MühldorferStraße23", "Mühldorfer Straße 23")]
     [InlineData("mühldorfer_STRAẞE_23", "Mühldorfer STRAẞE 23")]
     [InlineData("CAN RETURN TITLE CASE", "Can Return Title Case")]
-    [InlineData("LONGER_WORD", "LONGER WORD")] // Issue #1557: ALL-CAPS with separators should be humanized to separated words
+    [InlineData("LONGER_WORD", "Longer Word")] // Issue #1557: ALL-CAPS with separators should be transformed to title case
     [InlineData("HELLO", "HELLO")] // ALL-CAPS words without separators should be preserved as potential acronyms
     public void CanHumanizeIntoTitleCase(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Humanize(LetterCasing.Title));
@@ -82,6 +82,7 @@
     [InlineData("égoïste", "Égoïste")]
     [InlineData("Normal; Normal and PascalCase", "Normal; normal and pascal case")]
     [InlineData("I,and No One else", "I, and no one else")]
+    [InlineData("LONGER_WORD", "Longer word")] // Issue #1557: ALL-CAPS with separators should be transformed to sentence case
     public void CanHumanizeIntoSentenceCase(string input, string expectedResult) =>
         Assert.Equal(expectedResult, input.Humanize(LetterCasing.Sentence));
 
