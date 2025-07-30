@@ -3,9 +3,9 @@
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
 
-## Install</a>
+## Install
 
-You can install Humanizer as [a nuget package](https://nuget.org/packages/Humanizer):
+You can install Humanizer as [a NuGet package](https://nuget.org/packages/Humanizer):
 
 **English only**: `Humanizer.Core`
 
@@ -14,12 +14,11 @@ All languages: `Humanizer`
 
 ### Supported frameworks
 
-The following frameworks are supported: net4.8, net6, net7, and net8
+The following frameworks are supported: net48, net6.0, net7.0, and net8.0
 
 Note: The nuget also targets netstandard2. This is to enable scenario where netstandard2 is required. For example Roslyn Analyzers or MSBuild tasks. Other frameworks (other than listed above) that can consume netstandard2 (example net4.6.1 through to net 4.7.2) are not supported. For example net4.6.1 through to net4.7.2 are not supported.
 
 Also, Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
-
 
 ### Specify Languages (Optional)
 
@@ -29,7 +28,7 @@ Here are the options:
 
   - **All languages**: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
   - **English**: use the `Humanizer.Core` package. Only the English language resources will be available
-  - **Specific languages**: Use the language specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include multiple languages by installing however many language packages you want.
+  - **Specific languages**: Use the language-specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include multiple languages by installing however many language packages you want.
 
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
@@ -78,7 +77,7 @@ You may also specify the desired letter casing:
 
 ### Dehumanize String
 
-Much like you can humanize a computer friendly into human friendly string you can dehumanize a human friendly string into a computer friendly one:
+Much like you can humanize a computer friendly string into a human friendly one you can dehumanize a human friendly string into a computer friendly one:
 
 ```C#
 "Pascal case input string is turned into sentence".Dehumanize() => "PascalCaseInputStringIsTurnedIntoSentence"
@@ -188,7 +187,7 @@ You will get:
 // DescriptionAttribute is honored
 EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"
 
-// In the absence of Description attribute string.Humanizer kicks in
+// In the absence of the Description attribute string.Humanizer kicks in
 EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute"
 
 // Of course you can still apply letter casing
@@ -269,7 +268,7 @@ DateTimeOffset.UtcNow.AddHours(1).Humanize() => "an hour from now"
 
 Humanizer supports both local and UTC dates as well as dates with offset (`DateTimeOffset`). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
-Here is the API signature:
+Here are the API signatures:
 
 ```C#
 public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
@@ -944,7 +943,7 @@ new TimeOnly(14, 30).ToClockNotation() => "duas e meia"
 
 ### Roman numerals
 
-Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
+Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 through 10 can be expressed in Roman numerals as follows:
 
 ```C#
 1.ToRoman() => "I"
@@ -1148,7 +1147,7 @@ Humanizer includes methods to change a numeric heading to words. The heading can
 // N
 ```
 
-In order to retrieve a full version of the heading, use the following call:
+To retrieve a full version of the heading, use the following call:
 
 ```C#
 180.ToHeading(HeadingStyle.Full);
@@ -1216,7 +1215,7 @@ TimeUnit.Year.ToSymbol();
 
 This is just a baseline, and you can use this to simplify your day-to-day job. For example, in Asp.Net MVC we keep chucking `Display` attribute on ViewModel properties so `HtmlHelper` can generate correct labels for us; but, just like enums, in the vast majority of cases we just need a space between the words in property name - so why not use `"string".Humanize` for that?!
 
-You may find an Asp.Net MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/v2.7.9/samples/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the nuget package available for .Net 3.5 too).
+You may find an ASP.NET MVC sample [in the code](https://github.com/Humanizr/Humanizer/tree/v2.7.9/samples/Humanizer.MvcSample) that does that (although the project is excluded from the solution file to make the NuGet package available for .NET 3.5 too).
 
 This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/Humanizr/Humanizer/blob/v2.7.9/samples/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
@@ -1319,14 +1318,14 @@ If you encounter errors saying that you must add a reference to either `System.R
 
 ## Continuous Integration from Azure DevOps
 
-Humanizer project is built & tested continuously by Azure DevOps (more details [here](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR.
+The Humanizer project is built & tested continuously by Azure DevOps (more details [here](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)). That applies to pull requests too. Shortly after you submit a PR you can check the build and test status notification on your PR.
 
 The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 
 
 ## Related projects
 
-Below is a list of related open source projects:
+Below is a list of related open-source projects:
 
 
 ### Humanizer ReSharper Annotations
@@ -1353,4 +1352,4 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 
 ## Icon
 
-Icon created by [Tyrone Rieschiek](https://twitter.com/Inkventive)
+The icon was created by [Tyrone Rieschiek](https://twitter.com/Inkventive)
