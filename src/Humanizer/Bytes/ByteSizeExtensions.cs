@@ -1,4 +1,4 @@
-﻿// ReSharper disable once CheckNamespace
+// ReSharper disable once CheckNamespace
 namespace Humanizer;
 
 /// <summary>
@@ -287,6 +287,299 @@ public static class ByteSizeExtensions
     /// </summary>
     public static ByteSize Terabytes(this long input) =>
         ByteSize.FromTerabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this byte input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this sbyte input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this short input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this ushort input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this int input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this uint input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this double input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as petabyte
+    /// </summary>
+    public static ByteSize Petabytes(this long input) =>
+        ByteSize.FromPetabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this byte input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this sbyte input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this short input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this ushort input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this int input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this uint input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this double input) =>
+        ByteSize.FromExabytes(input);
+
+    /// <summary>
+    /// Considers input as exabyte
+    /// </summary>
+    public static ByteSize Exabytes(this long input) =>
+        ByteSize.FromExabytes(input);
+
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this byte input) =>
+        ByteSize.FromZettabytes(input);
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this sbyte input) =>
+        ByteSize.FromZettabytes(input);
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this short input) =>
+        ByteSize.FromZettabytes(input);
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this ushort input) =>
+        ByteSize.FromZettabytes(input);
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this int input) =>
+        ByteSize.FromZettabytes(input);
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this uint input) =>
+        ByteSize.FromZettabytes(input);
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this double input) =>
+        ByteSize.FromZettabytes(input);
+
+    /// <summary>
+    /// Considers input as zettabyte
+    /// </summary>
+    public static ByteSize Zettabytes(this long input) =>
+        ByteSize.FromZettabytes(input);
+
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this byte input) =>
+        ByteSize.FromYottabytes(input);
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this sbyte input) =>
+        ByteSize.FromYottabytes(input);
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this short input) =>
+        ByteSize.FromYottabytes(input);
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this ushort input) =>
+        ByteSize.FromYottabytes(input);
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this int input) =>
+        ByteSize.FromYottabytes(input);
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this uint input) =>
+        ByteSize.FromYottabytes(input);
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this double input) =>
+        ByteSize.FromYottabytes(input);
+
+    /// <summary>
+    /// Considers input as yottabyte
+    /// </summary>
+    public static ByteSize Yottabytes(this long input) =>
+        ByteSize.FromYottabytes(input);
+
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this byte input) =>
+        ByteSize.FromRonnabytes(input);
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this sbyte input) =>
+        ByteSize.FromRonnabytes(input);
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this short input) =>
+        ByteSize.FromRonnabytes(input);
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this ushort input) =>
+        ByteSize.FromRonnabytes(input);
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this int input) =>
+        ByteSize.FromRonnabytes(input);
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this uint input) =>
+        ByteSize.FromRonnabytes(input);
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this double input) =>
+        ByteSize.FromRonnabytes(input);
+
+    /// <summary>
+    /// Considers input as ronnabyte
+    /// </summary>
+    public static ByteSize Ronnabytes(this long input) =>
+        ByteSize.FromRonnabytes(input);
+
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this byte input) =>
+        ByteSize.FromQuettabytes(input);
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this sbyte input) =>
+        ByteSize.FromQuettabytes(input);
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this short input) =>
+        ByteSize.FromQuettabytes(input);
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this ushort input) =>
+        ByteSize.FromQuettabytes(input);
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this int input) =>
+        ByteSize.FromQuettabytes(input);
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this uint input) =>
+        ByteSize.FromQuettabytes(input);
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this double input) =>
+        ByteSize.FromQuettabytes(input);
+
+    /// <summary>
+    /// Considers input as quettabyte
+    /// </summary>
+    public static ByteSize Quettabytes(this long input) =>
+        ByteSize.FromQuettabytes(input);
+
 
     /// <summary>
     /// Turns a byte quantity into human readable form, eg 2 GB
