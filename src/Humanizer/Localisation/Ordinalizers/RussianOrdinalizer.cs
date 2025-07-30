@@ -1,25 +1,22 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class RussianOrdinalizer : DefaultOrdinalizer
 {
-    internal class RussianOrdinalizer : DefaultOrdinalizer
+    public override string Convert(int number, string numberString) =>
+        Convert(number, numberString, GrammaticalGender.Masculine);
+
+    public override string Convert(int number, string numberString, GrammaticalGender gender)
     {
-        public override string Convert(int number, string numberString)
+        if (gender == GrammaticalGender.Masculine)
         {
-            return Convert(number, numberString, GrammaticalGender.Masculine);
+            return numberString + "-й";
         }
 
-        public override string Convert(int number, string numberString, GrammaticalGender gender)
+        if (gender == GrammaticalGender.Feminine)
         {
-            if (gender == GrammaticalGender.Masculine)
-            {
-                return numberString + "-й";
-            }
-
-            if (gender == GrammaticalGender.Feminine)
-            {
-                return numberString + "-я";
-            }
-
-            return numberString + "-е";
+            return numberString + "-я";
         }
+
+        return numberString + "-е";
     }
 }

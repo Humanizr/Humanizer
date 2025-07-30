@@ -1,28 +1,30 @@
-﻿namespace Humanizer.Localisation
+﻿namespace Humanizer;
+
+public partial class ResourceKeys
 {
-    public partial class ResourceKeys
+    /// <summary>
+    /// Encapsulates the logic required to get the resource keys for TimeUnit.ToSymbol
+    /// </summary>
+    public static class TimeUnitSymbol
     {
         /// <summary>
-        /// Encapsulates the logic required to get the resource keys for TimeUnit.ToSymbol
+        /// Generates Resource Keys according to convention.
+        /// Examples: TimeUnit_Minute, TimeUnit_Hour.
         /// </summary>
-        public static class TimeUnitSymbol
-        {
-            /// <summary>
-            /// Examples: TimeUnit_Minute, TimeUnit_Hour.
-            /// </summary>
-            private const string TimeUnitFormat = "TimeUnit_{0}";
-
-            /// <summary>
-            /// Generates Resource Keys according to convention.
-            /// </summary>
-            /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
-            /// <param name="count">Number of units, default is One.</param>
-            /// <param name="toWords">Result to words, default is false.</param>
-            /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
-            public static string GetResourceKey(TimeUnit unit)
+        /// <param name="unit">Time unit, <see cref="TimeUnit"/>.</param>
+        /// <returns>Resource key, like TimeSpanHumanize_SingleMinute</returns>
+        public static string GetResourceKey(TimeUnit unit) =>
+            unit switch
             {
-                return TimeUnitFormat.FormatWith(unit);
-            }
-        }
+                TimeUnit.Millisecond => "TimeUnit_Millisecond",
+                TimeUnit.Second => "TimeUnit_Second",
+                TimeUnit.Minute => "TimeUnit_Minute",
+                TimeUnit.Hour => "TimeUnit_Hour",
+                TimeUnit.Day => "TimeUnit_Day",
+                TimeUnit.Week => "TimeUnit_Week",
+                TimeUnit.Month => "TimeUnit_Month",
+                TimeUnit.Year => "TimeUnit_Year",
+                _ => throw new ArgumentOutOfRangeException(nameof(unit), unit, null)
+            };
     }
 }

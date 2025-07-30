@@ -1,15 +1,17 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
-using Humanizer.Localisation.TimeToClockNotation;
+namespace Humanizer;
 
-namespace Humanizer.Configuration
+class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToClockNotationConverter>
 {
-    internal class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToClockNotationConverter>
+    public TimeOnlyToClockNotationConvertersRegistry() : base(new DefaultTimeOnlyToClockNotationConverter())
     {
-        public TimeOnlyToClockNotationConvertersRegistry() : base(new DefaultTimeOnlyToClockNotationConverter())
-        {
-            Register("pt-BR", new BrazilianPortugueseTimeOnlyToClockNotationConverter());
-        }
+        Register("pt-BR", new BrazilianPortugueseTimeOnlyToClockNotationConverter());
+        Register("fr", new FrTimeOnlyToClockNotationConverter());
+        Register("de", new GermanTimeOnlyToClockNotationConverter());
+        Register("es", new EsTimeOnlyToClockNotationConverter());
+        Register("lb", new LbTimeOnlyToClockNotationConverter());
+        Register("pt", new PortugueseTimeOnlyToClockNotationConverter());
     }
 }
 

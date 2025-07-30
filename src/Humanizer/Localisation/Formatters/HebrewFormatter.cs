@@ -1,31 +1,26 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer;
+
+class HebrewFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
-    internal class HebrewFormatter : DefaultFormatter
+    const string DualPostfix = "_Dual";
+    const string PluralPostfix = "_Plural";
+
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        private const string DualPostfix = "_Dual";
-        private const string PluralPostfix = "_Plural";
-
-        public HebrewFormatter()
-            : base("he")
+        //In Hebrew pluralization 2 entities gets a different word.
+        if (number == 2)
         {
+            return resourceKey + DualPostfix;
         }
 
-        protected override string GetResourceKey(string resourceKey, int number)
+        //In Hebrew pluralization entities where the count is between 3 and 10 gets a different word.
+        //See http://lib.cet.ac.il/pages/item.asp?item=21585 for explanation
+        if (number is >= 3 and <= 10)
         {
-            //In Hebrew pluralization 2 entities gets a different word.
-            if (number == 2)
-            {
-                return resourceKey + DualPostfix;
-            }
-
-            //In Hebrew pluralization entities where the count is between 3 and 10 gets a different word.
-            //See http://lib.cet.ac.il/pages/item.asp?item=21585 for explanation
-            if (number >= 3 && number <= 10)
-            {
-                return resourceKey + PluralPostfix;
-            }
-
-            return resourceKey;
+            return resourceKey + PluralPostfix;
         }
+
+        return resourceKey;
     }
 }

@@ -1,37 +1,20 @@
-﻿using System;
+﻿namespace Humanizer;
 
-namespace Humanizer
+/// <summary>
+/// ApplyCase method to allow changing the case of a sentence easily
+/// </summary>
+public static class CasingExtensions
 {
     /// <summary>
-    /// ApplyCase method to allow changing the case of a sentence easily
+    /// Changes the casing of the provided input
     /// </summary>
-    public static class CasingExtensions
-    {
-        /// <summary>
-        /// Changes the casing of the provided input
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="casing"></param>
-        /// <returns></returns>
-        public static string ApplyCase(this string input, LetterCasing casing)
+    public static string ApplyCase(this string input, LetterCasing casing) =>
+        casing switch
         {
-            switch (casing)
-            {
-                case LetterCasing.Title:
-                    return input.Transform(To.TitleCase);
-
-                case LetterCasing.LowerCase:
-                    return input.Transform(To.LowerCase);
-
-                case LetterCasing.AllCaps:
-                    return input.Transform(To.UpperCase);
-
-                case LetterCasing.Sentence:
-                    return input.Transform(To.SentenceCase);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(casing));
-            }
-        }
-    }
+            LetterCasing.Title => input.Transform(To.TitleCase),
+            LetterCasing.LowerCase => input.Transform(To.LowerCase),
+            LetterCasing.AllCaps => input.Transform(To.UpperCase),
+            LetterCasing.Sentence => input.Transform(To.SentenceCase),
+            _ => throw new ArgumentOutOfRangeException(nameof(casing))
+        };
 }

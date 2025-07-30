@@ -1,220 +1,241 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+namespace Humanizer;
 
-namespace Humanizer.Localisation.NumberToWords
+class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
-    internal class SwedishNumberToWordsConverter : GenderlessNumberToWordsConverter
-    {
-        private static readonly string[] UnitsMap = { "noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton" };
-        private static readonly string[] TensMap = { "noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra" };
+    static readonly string[] UnitsMap = ["noll", "ett", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio", "elva", "tolv", "tretton", "fjorton", "femton", "sexton", "sjutton", "arton", "nitton"];
+    static readonly string[] TensMap = ["noll", "tio", "tjugo", "trettio", "fyrtio", "femtio", "sextio", "sjuttio", "åttio", "nittio", "hundra"];
 
-        private class Fact
+    class Fact
+    {
+        public int Value { get; set; }
+        public required string Name { get; set; }
+        public required string Prefix { get; set; }
+        public required string Postfix { get; set; }
+        public bool DisplayOneUnit { get; set; }
+        public GrammaticalGender Gender { get; set; } = GrammaticalGender.Neuter;
+    }
+
+    static readonly Fact[] Hunderds =
+    [
+        new()
         {
-            public int Value { get; set; }
-            public string Name { get; set; }
-            public string Prefix { get; set; }
-            public string Postfix { get; set; }
-            public bool DisplayOneUnit { get; set; }
-            public GrammaticalGender Gender { get; set; } = GrammaticalGender.Neuter;
+            Value = 1000000000,
+            Name = "miljard",
+            Prefix = " ",
+            Postfix = " ",
+            DisplayOneUnit = true,
+            Gender = GrammaticalGender.Masculine
+        },
+        new()
+        {
+            Value = 1000000,
+            Name = "miljon",
+            Prefix = " ",
+            Postfix = " ",
+            DisplayOneUnit = true,
+            Gender = GrammaticalGender.Masculine
+        },
+        new()
+        {
+            Value = 1000,
+            Name = "tusen",
+            Prefix = " ",
+            Postfix = " ",
+            DisplayOneUnit = true
+        },
+        new()
+        {
+            Value = 100,
+            Name = "hundra",
+            Prefix = "",
+            Postfix = "",
+            DisplayOneUnit = false
+        }
+    ];
+
+    public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+    {
+        if (input is > int.MaxValue or < int.MinValue)
+        {
+            throw new NotImplementedException();
         }
 
-        private static readonly Fact[] Hunderds =
+        var number = (int) input;
+
+        if (number == 0)
         {
-            new Fact {Value = 1000000000, Name = "miljard", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new Fact {Value = 1000000,    Name = "miljon", Prefix = " ", Postfix = " ", DisplayOneUnit = true, Gender = GrammaticalGender.Masculine},
-            new Fact {Value = 1000,       Name = "tusen", Prefix = " ",  Postfix = " ", DisplayOneUnit = true},
-            new Fact {Value = 100,        Name = "hundra", Prefix = "",  Postfix = "",  DisplayOneUnit = false}
-        };
-         
-        public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
+            return UnitsMap[0];
+        }
+
+        if (number < 0)
         {
-            if (input > Int32.MaxValue || input < Int32.MinValue)
-            {
-                throw new NotImplementedException();
-            }
-            var number = (int)input;
+            return $"minus {Convert(-number, gender)}";
+        }
 
-            if (number == 0)
-            {
-                return UnitsMap[0];
-            }
+        var word = "";
 
-            if (number < 0)
+        foreach (var m in Hunderds)
+        {
+            var divided = number / m.Value;
+
+            if (divided <= 0)
             {
-                return string.Format("minus {0}", Convert(-number, gender));
+                continue;
             }
 
-            var word = "";
-
-            foreach (var m in Hunderds)
+            if (divided == 1 && !m.DisplayOneUnit)
             {
-                var divided = number / m.Value;
-
-                if (divided <= 0)
-                {
-                    continue;
-                }
-
-                if (divided == 1 && !m.DisplayOneUnit)
-                {
-                    word += m.Name;
-                }
-                else
-                {
-                    word += Convert(divided, m.Gender) + m.Prefix + m.Name;
-                }
-
-                // pluralise 1M+
-                if (divided > 1 && input >= 1_000_000)
-                {
-                    word += "er";
-                }
-
-                number %= m.Value;
-                if (number > 0)
-                {
-                    word += m.Postfix;
-                }
+                word += m.Name;
+            }
+            else
+            {
+                word += Convert(divided, m.Gender) + m.Prefix + m.Name;
             }
 
+            // pluralise 1M+
+            if (divided > 1 && input >= 1_000_000)
+            {
+                word += "er";
+            }
+
+            number %= m.Value;
             if (number > 0)
             {
-                if (number < 20)
+                word += m.Postfix;
+            }
+        }
+
+        if (number > 0)
+        {
+            if (number < 20)
+            {
+                if (number == 1 && gender == GrammaticalGender.Masculine)
                 {
-                    if (number == 1 && gender == GrammaticalGender.Masculine)
-                    {
-                        word += "en";
-                    }
-                    else
-                    {
-                        word += UnitsMap[number];
-                    }
+                    word += "en";
                 }
                 else
                 {
-                    var tens = TensMap[number / 10];
-                    var unit = number % 10;
-                    if (unit > 0)
-                    {
-                        var units = UnitsMap[unit];
-                        word += tens + units;
-                    }
-                    else
-                    {
-                        word += tens;
-                    }
+                    word += UnitsMap[number];
                 }
             }
-
-            return word;
-        }
-        public override string Convert(long input)
-        {
-            return Convert(input, GrammaticalGender.Neuter);
-        }
-
-        private static string[] ordinalNumbers = new[]
-        {
-            "nollte",
-            "första",
-            "andra",
-            "tredje",
-            "fjärde",
-            "femte",
-            "sjätte",
-            "sjunde",
-            "åttonde",
-            "nionde",
-            "tionde",
-            "elfte",
-            "tolfte",
-            "trettonde",
-            "fjortonde",
-            "femtonde",
-            "sextonde",
-            "sjuttonde",
-            "artonde",
-            "nittonde",
-            "tjugonde",
-        };
-
-        public override string ConvertToOrdinal(int number)
-        {
-            var word = "";
-
-            if (number < 0)
-            {
-                return $"minus {ConvertToOrdinal(-number)}";
-            }
-
-            if (number <= 20)
-            {
-                return ordinalNumbers[number];
-            }
-
-            // 21+
-            if (number <= 100)
+            else
             {
                 var tens = TensMap[number / 10];
                 var unit = number % 10;
                 if (unit > 0)
                 {
-                    word += tens + ConvertToOrdinal(unit);
-                }
-                else if (number == 100)
-                {
-                    word += tens + "de";
+                    var units = UnitsMap[unit];
+                    word += tens + units;
                 }
                 else
                 {
-                    word += tens + "nde";
+                    word += tens;
                 }
-
-                return word;
             }
+        }
 
-            // 101+
-            foreach (var m in Hunderds)
+        return word;
+    }
+
+    public override string Convert(long input) =>
+        Convert(input, GrammaticalGender.Neuter);
+
+    static readonly string[] OrdinalNumbers =
+    [
+        "nollte",
+        "första",
+        "andra",
+        "tredje",
+        "fjärde",
+        "femte",
+        "sjätte",
+        "sjunde",
+        "åttonde",
+        "nionde",
+        "tionde",
+        "elfte",
+        "tolfte",
+        "trettonde",
+        "fjortonde",
+        "femtonde",
+        "sextonde",
+        "sjuttonde",
+        "artonde",
+        "nittonde",
+        "tjugonde"
+    ];
+
+    public override string ConvertToOrdinal(int number)
+    {
+        var word = "";
+
+        if (number < 0)
+        {
+            return $"minus {ConvertToOrdinal(-number)}";
+        }
+
+        if (number <= 20)
+        {
+            return OrdinalNumbers[number];
+        }
+
+        // 21+
+        if (number <= 100)
+        {
+            var tens = TensMap[number / 10];
+            var unit = number % 10;
+            if (unit > 0)
             {
-                var divided = number / m.Value;
-
-                if (divided <= 0)
-                {
-                    continue;
-                }
-
-                if (divided == 1 && !m.DisplayOneUnit)
-                {
-                    word += m.Name;
-                }
-                else
-                {
-                    word += Convert(divided, m.Gender) + m.Prefix + m.Name;
-                }
-
-                // suffix -de/-te
-                if (divided > 0 && (number % m.Value) == 0)
-                {
-                    switch (number)
-                    {
-                        case 1_000_000:
-                            word += "te";
-                            break;
-                        default:
-                            word += "de";
-                            break;
-                    }
-                }
-
-                number %= m.Value;
-                if (number > 0)
-                {
-                    word += ConvertToOrdinal(number);
-                }
+                word += tens + ConvertToOrdinal(unit);
+            }
+            else if (number == 100)
+            {
+                word += tens + "de";
+            }
+            else
+            {
+                word += tens + "nde";
             }
 
             return word;
         }
+
+        // 101+
+        foreach (var m in Hunderds)
+        {
+            var divided = number / m.Value;
+
+            if (divided <= 0)
+            {
+                continue;
+            }
+
+            if (divided == 1 && !m.DisplayOneUnit)
+            {
+                word += m.Name;
+            }
+            else
+            {
+                word += Convert(divided, m.Gender) + m.Prefix + m.Name;
+            }
+
+            // suffix -de/-te
+            if (number % m.Value == 0)
+            {
+                word += number switch
+                {
+                    1_000_000 => "te",
+                    _ => "de"
+                };
+            }
+
+            number %= m.Value;
+            if (number > 0)
+            {
+                word += ConvertToOrdinal(number);
+            }
+        }
+
+        return word;
     }
 }

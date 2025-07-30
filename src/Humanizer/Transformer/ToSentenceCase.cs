@@ -1,24 +1,24 @@
-﻿using System.Globalization;
+namespace Humanizer;
 
-namespace Humanizer
+class ToSentenceCase : ICulturedStringTransformer
 {
-    internal class ToSentenceCase : ICulturedStringTransformer
+    public string Transform(string input) =>
+        Transform(input, null);
+
+    public string Transform(string input, CultureInfo? culture)
     {
-        public string Transform(string input)
-        {
-            return Transform(input, null);
-        }
+        culture ??= CultureInfo.CurrentCulture;
 
-        public string Transform(string input, CultureInfo culture)
+        if (input.Length >= 1)
         {
-            culture ??= CultureInfo.CurrentCulture;
-
-            if (input.Length >= 1)
+            if (char.IsUpper(input[0]))
             {
-                return culture.TextInfo.ToUpper(input[0]) + input.Substring(1);
+                return input;
             }
 
-            return culture.TextInfo.ToUpper(input);
+            return StringHumanizeExtensions.Concat(culture.TextInfo.ToUpper(input[0]), input.AsSpan(1));
         }
+
+        return culture.TextInfo.ToUpper(input);
     }
 }

@@ -1,90 +1,87 @@
-using System;
-using System.Linq;
+namespace Humanizer;
 
-namespace Humanizer
+/// <summary>
+/// Truncate a string to a fixed number of words
+/// </summary>
+class FixedNumberOfWordsTruncator : ITruncator
 {
-    /// <summary>
-    /// Truncate a string to a fixed number of words
-    /// </summary>
-    internal class FixedNumberOfWordsTruncator : ITruncator
+    [return: NotNullIfNotNull(nameof(value))]
+    public string? Truncate(string? value, int length, string? truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
     {
-        public string Truncate(string value, int length, string truncationString, TruncateFrom truncateFrom = TruncateFrom.Right)
+        if (value == null)
         {
-            if (value == null)
-            {
-                return null;
-            }
-
-            if (value.Length == 0)
-            {
-                return value;
-            }
-
-            var numberOfWords = value.Split((char[])null, StringSplitOptions.RemoveEmptyEntries).Count();
-            if (numberOfWords <= length)
-            {
-                return value;
-            }
-
-            return truncateFrom == TruncateFrom.Left
-                ? TruncateFromLeft(value, length, truncationString)
-                : TruncateFromRight(value, length, truncationString);
+            return null;
         }
 
-        private static string TruncateFromRight(string value, int length, string truncationString)
+        if (value.Length == 0)
         {
-            var lastCharactersWasWhiteSpace = true;
-            var numberOfWordsProcessed = 0;
-            for (var i = 0; i < value.Length; i++)
-            {
-                if (char.IsWhiteSpace(value[i]))
-                {
-                    if (!lastCharactersWasWhiteSpace)
-                    {
-                        numberOfWordsProcessed++;
-                    }
-
-                    lastCharactersWasWhiteSpace = true;
-
-                    if (numberOfWordsProcessed == length)
-                    {
-                        return value.Substring(0, i) + truncationString;
-                    }
-                }
-                else
-                {
-                    lastCharactersWasWhiteSpace = false;
-                }
-            }
-            return value + truncationString;
+            return value;
         }
 
-        private static string TruncateFromLeft(string value, int length, string truncationString)
+        var numberOfWords = value.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+        if (numberOfWords <= length)
         {
-            var lastCharactersWasWhiteSpace = true;
-            var numberOfWordsProcessed = 0;
-            for (var i = value.Length - 1; i > 0; i--)
+            return value;
+        }
+
+        return truncateFrom == TruncateFrom.Left
+            ? TruncateFromLeft(value, length, truncationString)
+            : TruncateFromRight(value, length, truncationString);
+    }
+
+    static string TruncateFromRight(string value, int length, string? truncationString)
+    {
+        var lastCharactersWasWhiteSpace = true;
+        var numberOfWordsProcessed = 0;
+        for (var i = 0; i < value.Length; i++)
+        {
+            if (char.IsWhiteSpace(value[i]))
             {
-                if (char.IsWhiteSpace(value[i]))
+                if (!lastCharactersWasWhiteSpace)
                 {
-                    if (!lastCharactersWasWhiteSpace)
-                    {
-                        numberOfWordsProcessed++;
-                    }
-
-                    lastCharactersWasWhiteSpace = true;
-
-                    if (numberOfWordsProcessed == length)
-                    {
-                        return truncationString + value.Substring(i + 1).TrimEnd();
-                    }
+                    numberOfWordsProcessed++;
                 }
-                else
+
+                lastCharactersWasWhiteSpace = true;
+
+                if (numberOfWordsProcessed == length)
                 {
-                    lastCharactersWasWhiteSpace = false;
+                    return StringHumanizeExtensions.Concat(value.AsSpan(0, i), truncationString.AsSpan());
                 }
             }
-            return truncationString + value;
+            else
+            {
+                lastCharactersWasWhiteSpace = false;
+            }
         }
+        return value + truncationString;
+    }
+
+    static string TruncateFromLeft(string value, int length, string? truncationString)
+    {
+        var lastCharactersWasWhiteSpace = true;
+        var numberOfWordsProcessed = 0;
+        for (var i = value.Length - 1; i > 0; i--)
+        {
+            if (char.IsWhiteSpace(value[i]))
+            {
+                if (!lastCharactersWasWhiteSpace)
+                {
+                    numberOfWordsProcessed++;
+                }
+
+                lastCharactersWasWhiteSpace = true;
+
+                if (numberOfWordsProcessed == length)
+                {
+                    return StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(i + 1).TrimEnd());
+                }
+            }
+            else
+            {
+                lastCharactersWasWhiteSpace = false;
+            }
+        }
+        return truncationString + value;
     }
 }

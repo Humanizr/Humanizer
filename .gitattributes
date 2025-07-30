@@ -8,6 +8,8 @@
 *.fsproj merge=union
 *.dbproj merge=union
 
+*.snk binary
+
 # Normalise endings to CRLF
 *.cs              eol=crlf
 *.xml             eol=crlf
@@ -60,3 +62,6 @@
 *.PDF  diff=astextplain
 *.rtf  diff=astextplain
 *.RTF  diff=astextplain
+
+
+*.verified.txt text eol=lf working-tree-encoding=UTF-8

@@ -1,71 +1,51 @@
-﻿namespace Humanizer.Localisation.NumberToWords
+﻿namespace Humanizer;
+
+abstract class GenderedNumberToWordsConverter : INumberToWordsConverter
 {
-    internal abstract class GenderedNumberToWordsConverter : INumberToWordsConverter
-    {
-        private readonly GrammaticalGender _defaultGender;
+    readonly GrammaticalGender _defaultGender;
 
-        protected GenderedNumberToWordsConverter(GrammaticalGender defaultGender = GrammaticalGender.Masculine)
-        {
-            _defaultGender = defaultGender;
-        }
+    protected GenderedNumberToWordsConverter(GrammaticalGender defaultGender = GrammaticalGender.Masculine) =>
+        _defaultGender = defaultGender;
 
-        /// <summary>
-        /// Converts the number to string using the locale's default grammatical gender
-        /// </summary>
-        /// <param name="number"></param>
-        /// <returns></returns>
-        public string Convert(long number)
-        {
-            return Convert(number, _defaultGender);
-        }
+    /// <inheritdoc/>
+    public string Convert(long number) =>
+        Convert(number, _defaultGender);
 
-        /// <summary>
-        /// Converts the number to string using the locale's default gramatical gender and adds "and"
-        /// </summary>
-        /// <param name="number"></param>
-        /// <param name="addAnd">Whether "and" should be included.</param>
-        /// <returns></returns>
-        public string Convert(long number, bool addAnd)
-        {
-            return Convert(number, _defaultGender);
-        }
+    /// <inheritdoc/>
+    public string Convert(long number, WordForm wordForm) =>
+        Convert(number, wordForm, _defaultGender);
 
-        /// <summary>
-        /// Converts the number to string using the provided grammatical gender
-        /// </summary>
-        /// <param name="number"></param>
-        /// <param name="gender"></param>
-        /// <param name="addAnd"></param>
-        /// <returns></returns>
-        public abstract string Convert(long number, GrammaticalGender gender, bool addAnd = true);
+    /// <inheritdoc/>
+    public string Convert(long number, bool addAnd) =>
+        Convert(number, _defaultGender);
 
+    /// <inheritdoc/>
+    public string Convert(long number, bool addAnd, WordForm wordForm) =>
+        Convert(number, wordForm, _defaultGender, addAnd);
 
-        /// <summary>
-        /// Converts the number to ordinal string using the locale's default grammatical gender
-        /// </summary>
-        /// <param name="number"></param>
-        /// <returns></returns>
-        public string ConvertToOrdinal(int number)
-        {
-            return ConvertToOrdinal(number, _defaultGender);
-        }
+    /// <inheritdoc/>
+    public abstract string Convert(long number, GrammaticalGender gender, bool addAnd = true);
 
-        /// <summary>
-        /// Converts the number to ordinal string using the provided grammatical gender
-        /// </summary>
-        /// <param name="number"></param>
-        /// <param name="gender"></param>
-        /// <returns></returns>
-        public abstract string ConvertToOrdinal(int number, GrammaticalGender gender);
+    /// <inheritdoc/>
+    public virtual string Convert(long number, WordForm wordForm, GrammaticalGender gender, bool addAnd = true) =>
+        Convert(number, gender, addAnd);
 
-        /// <summary>
-        /// Converts integer to named tuple (e.g. 'single', 'double' etc.).
-        /// </summary>
-        /// <param name="number"></param>
-        /// <returns></returns>
-        public virtual string ConvertToTuple(int number)
-        {
-            return Convert(number);
-        }
-    }
+    /// <inheritdoc/>
+    public string ConvertToOrdinal(int number) =>
+        ConvertToOrdinal(number, _defaultGender);
+
+    /// <inheritdoc/>
+    public abstract string ConvertToOrdinal(int number, GrammaticalGender gender);
+
+    /// <inheritdoc/>
+    public string ConvertToOrdinal(int number, WordForm wordForm) =>
+        ConvertToOrdinal(number, _defaultGender, wordForm);
+
+    /// <inheritdoc/>
+    public virtual string ConvertToOrdinal(int number, GrammaticalGender gender, WordForm wordForm) =>
+        ConvertToOrdinal(number, gender);
+
+    /// <inheritdoc/>
+    public virtual string ConvertToTuple(int number) =>
+        Convert(number);
 }

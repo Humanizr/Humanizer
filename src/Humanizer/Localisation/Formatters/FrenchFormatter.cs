@@ -1,27 +1,22 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer;
+
+class FrenchFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
-    internal class FrenchFormatter : DefaultFormatter
+    const string DualPostfix = "_Dual";
+
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        private const string DualPostfix = "_Dual";
-
-        public FrenchFormatter(string localeCode)
-            : base(localeCode)
+        if (number == 2 && resourceKey is "DateHumanize_MultipleDaysAgo" or "DateHumanize_MultipleDaysFromNow")
         {
+            return resourceKey + DualPostfix;
         }
 
-        protected override string GetResourceKey(string resourceKey, int number)
+        if (number == 0 && resourceKey.StartsWith("TimeSpanHumanize_Multiple"))
         {
-            if (number == 2 && (resourceKey == "DateHumanize_MultipleDaysAgo" || resourceKey == "DateHumanize_MultipleDaysFromNow"))
-            {
-                return resourceKey + DualPostfix;
-            }
-
-            if (number == 0 && resourceKey.StartsWith("TimeSpanHumanize_Multiple"))
-            {
-                return resourceKey + "_Singular";
-            }
-
-            return resourceKey;
+            return resourceKey + "_Singular";
         }
+
+        return resourceKey;
     }
 }

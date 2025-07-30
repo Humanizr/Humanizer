@@ -1,8 +1,17 @@
-﻿namespace Humanizer
+﻿namespace Humanizer;
+
+/// <summary>
+/// Options for specifying readable clock notation
+/// </summary>
+public enum ClockNotationRounding
 {
-    public enum ClockNotationRounding
-    {
-        None,
-        NearestFiveMinutes
-    }
+    /// <summary>
+    /// Do not round minutes
+    /// </summary>
+    None,
+
+    /// <summary>
+    /// Round time to nearest five minutes
+    /// </summary>
+    NearestFiveMinutes
 }

@@ -1,10 +1,7 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class TurkishOrdinalizer : DefaultOrdinalizer
 {
-    internal class TurkishOrdinalizer : DefaultOrdinalizer
-    {
-        public override string Convert(int number, string numberString)
-        {
-            return numberString + ".";
-        }
-    }
+    public override string Convert(int number, string numberString) =>
+        numberString + ".";
 }

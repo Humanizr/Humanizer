@@ -1,10 +1,7 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
+﻿namespace Humanizer;
+
+class IcelandicOrdinalizer : DefaultOrdinalizer
 {
-    internal class IcelandicOrdinalizer : DefaultOrdinalizer
-    {
-        public override string Convert(int number, string numberString)
-        {
-            return numberString + ".";
-        }
-    }
+    public override string Convert(int number, string numberString) =>
+        numberString + ".";
 }

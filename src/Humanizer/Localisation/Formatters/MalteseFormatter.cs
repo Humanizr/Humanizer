@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+namespace Humanizer;
 
-namespace Humanizer.Localisation.Formatters
+class MalteseFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
-    internal class MalteseFormatter : DefaultFormatter
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        private const string DualPostfix = "_Dual";
-
-        private static readonly string[] DualResourceKeys = new[]
+        if (number != 2)
         {
-            "DateHumanize_MultipleDaysAgo", "DateHumanize_MultipleDaysFromNow", "DateHumanize_MultipleHoursAgo", "DateHumanize_MultipleHoursFromNow" ,
-            "DateHumanize_MultipleMonthsAgo", "DateHumanize_MultipleMonthsFromNow", "DateHumanize_MultipleYearsAgo", "DateHumanize_MultipleYearsFromNow",
-            "TimeSpanHumanize_MultipleDays", "TimeSpanHumanize_MultipleYears", "TimeSpanHumanize_MultipleMonths", "TimeSpanHumanize_MultipleHours",
-            "TimeSpanHumanize_MultipleWeeks"
-        };
-
-        public MalteseFormatter(string localeCode)
-            : base(localeCode)
-        {
-        }
-
-        protected override string GetResourceKey(string resourceKey, int number)
-        {
-            if (number == 2 && DualResourceKeys.Contains(resourceKey))
-            {
-                return resourceKey + DualPostfix;
-            }
-
             return resourceKey;
         }
+
+        return resourceKey switch
+        {
+            "DateHumanize_MultipleDaysAgo" => "DateHumanize_MultipleDaysAgo_Dual",
+            "DateHumanize_MultipleDaysFromNow" => "DateHumanize_MultipleDaysFromNow_Dual",
+            "DateHumanize_MultipleHoursAgo" => "DateHumanize_MultipleHoursAgo_Dual",
+            "DateHumanize_MultipleHoursFromNow" => "DateHumanize_MultipleHoursFromNow_Dual",
+            "DateHumanize_MultipleMonthsAgo" => "DateHumanize_MultipleMonthsAgo_Dual",
+            "DateHumanize_MultipleMonthsFromNow" => "DateHumanize_MultipleMonthsFromNow_Dual",
+            "DateHumanize_MultipleYearsAgo" => "DateHumanize_MultipleYearsAgo_Dual",
+            "DateHumanize_MultipleYearsFromNow" => "DateHumanize_MultipleYearsFromNow_Dual",
+            "TimeSpanHumanize_MultipleDays" => "TimeSpanHumanize_MultipleDays_Dual",
+            "TimeSpanHumanize_MultipleYears" => "TimeSpanHumanize_MultipleYears_Dual",
+            "TimeSpanHumanize_MultipleMonths" => "TimeSpanHumanize_MultipleMonths_Dual",
+            "TimeSpanHumanize_MultipleHours" => "TimeSpanHumanize_MultipleHours_Dual",
+            "TimeSpanHumanize_MultipleWeeks" => "TimeSpanHumanize_MultipleWeeks_Dual",
+            _ => resourceKey,
+        };
     }
 }

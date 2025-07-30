@@ -1,15 +1,16 @@
-﻿namespace Humanizer.Localisation.Ordinalizers
-{
-    internal class DefaultOrdinalizer : IOrdinalizer
-    {
-        public virtual string Convert(int number, string numberString, GrammaticalGender gender)
-        {
-            return Convert(number, numberString);
-        }
+﻿namespace Humanizer;
 
-        public virtual string Convert(int number, string numberString)
-        {
-            return numberString;
-        }
-    }
+class DefaultOrdinalizer : IOrdinalizer
+{
+    public virtual string Convert(int number, string numberString, GrammaticalGender gender) =>
+        Convert(number, numberString);
+
+    public virtual string Convert(int number, string numberString) =>
+        numberString;
+
+    public virtual string Convert(int number, string numberString, WordForm wordForm) =>
+        Convert(number, numberString, default, wordForm);
+
+    public virtual string Convert(int number, string numberString, GrammaticalGender gender, WordForm wordForm) =>
+        Convert(number, numberString, gender);
 }

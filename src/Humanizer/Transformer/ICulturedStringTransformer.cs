@@ -1,18 +1,13 @@
-﻿using System.Globalization;
+﻿namespace Humanizer;
 
-namespace Humanizer
+/// <summary>
+/// Can transform a string with the given culture
+/// </summary>
+public interface ICulturedStringTransformer : IStringTransformer
 {
     /// <summary>
-    /// Can transform a string with the given culture
+    /// Transform the input
     /// </summary>
-    public interface ICulturedStringTransformer : IStringTransformer
-    {
-        /// <summary>
-        /// Transform the input
-        /// </summary>
-        /// <param name="input">String to be transformed</param>
-        /// <param name="culture">The culture</param>
-        /// <returns></returns>
-        string Transform(string input, CultureInfo culture);
-    }
+    /// <param name="input">String to be transformed</param>
+    string Transform(string input, CultureInfo culture);
 }

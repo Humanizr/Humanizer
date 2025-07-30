@@ -1,29 +1,24 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer;
+
+class SlovenianFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
-    internal class SlovenianFormatter : DefaultFormatter
+    const string DualPostfix = "_Dual";
+    const string TrialQuadralPostfix = "_Paucal";
+
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        private const string DualPostfix = "_Dual";
-        private const string TrialQuadralPostfix = "_TrialQuadral";
-
-        public SlovenianFormatter()
-            : base("sl")
+        if (number == 2)
         {
+            return resourceKey + DualPostfix;
         }
 
-        protected override string GetResourceKey(string resourceKey, int number)
+        // When the count is three or four some words have a different form when counting in Slovenian language
+        if (number is 3 or 4)
         {
-            if (number == 2)
-            {
-                return resourceKey + DualPostfix;
-            }
-
-            // When the count is three or four some some words have a different form when counting in Slovenian language
-            if (number == 3 || number == 4)
-            {
-                return resourceKey + TrialQuadralPostfix;
-            }
-
-            return resourceKey;
+            return resourceKey + TrialQuadralPostfix;
         }
+
+        return resourceKey;
     }
 }

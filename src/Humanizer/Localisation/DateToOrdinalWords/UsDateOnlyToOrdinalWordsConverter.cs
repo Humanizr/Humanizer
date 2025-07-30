@@ -1,14 +1,10 @@
 ﻿#if NET6_0_OR_GREATER
-using System;
 
-namespace Humanizer.Localisation.DateToOrdinalWords
+namespace Humanizer;
+
+class UsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
 {
-    internal class UsDateOnlyToOrdinalWordsConverter : DefaultDateOnlyToOrdinalWordConverter
-    {
-        public override string Convert(DateOnly date)
-        {
-            return date.ToString("MMMM ") + date.Day.Ordinalize() + date.ToString(", yyyy");
-        }
-    }
+    public override string Convert(DateOnly date) =>
+        date.ToString("MMMM ") + date.Day.Ordinalize() + date.ToString(", yyyy");
 }
 #endif

@@ -1,108 +1,88 @@
-﻿using System;
-using System.Text.RegularExpressions;
+namespace Humanizer;
 
-namespace Humanizer
+/// <summary>
+/// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
+/// </summary>
+public static class EnglishArticle
 {
+    static readonly Regex _regex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+", RegexOptions.Compiled);
+
     /// <summary>
-    /// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
+    /// Removes the prefixed article and appends it to the same string.
     /// </summary>
-    public static class EnglishArticle
+    /// <param name="items">The input array of strings</param>
+    /// <returns>Sorted string array</returns>
+    public static string[] AppendArticlePrefix(string[] items)
     {
-        /// <summary>
-        /// Removes the prefixed article and appends it to the same string.
-        /// </summary>
-        /// <param name="items">The input array of strings</param>
-        /// <returns>Sorted string array</returns>
-        public static string[] AppendArticlePrefix(string[] items)
+        if (items.Length == 0)
         {
-            if (items.Length == 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(items));
-            }
-
-            var regex = new Regex("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+");
-            var transformed = new string[items.Length];
-
-            for (var i = 0; i < items.Length; i++)
-            {
-                if (regex.IsMatch(items[i]))
-                {
-                    var article = items[i].Substring(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
-                    var removed = items[i].Remove(0, items[i].IndexOf(" ", StringComparison.CurrentCulture));
-                    var appended = $"{removed} {article}";
-                    transformed[i] = appended.Trim();
-                }
-                else
-                {
-                    transformed[i] = items[i].Trim();
-                }
-            }
-            Array.Sort(transformed);
-            return transformed;
+            throw new ArgumentOutOfRangeException(nameof(items));
         }
 
-        /// <summary>
-        /// Removes the previously appended article and prepends it to the same string.
-        /// </summary>
-        /// <param name="appended">Sorted string array</param>
-        /// <returns>String array</returns>
-        public static string[] PrependArticleSuffix(string[] appended)
-        {
-            var inserted = new string[appended.Length];
+        var transformed = new string[items.Length];
 
-            for (var i = 0; i < appended.Length; i++)
+        for (var i = 0; i < items.Length; i++)
+        {
+            var item = items[i]
+                .AsSpan();
+            if (_regex.IsMatch(item))
             {
-                string suffix;
-                string original;
-                if (appended[i].EndsWith(EnglishArticles.The.ToString()))
-                {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" The", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (appended[i].EndsWith(EnglishArticles.A.ToString()))
-                {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" A", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (appended[i].EndsWith(EnglishArticles.An.ToString()))
-                {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" An", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (appended[i].EndsWith(EnglishArticles.A.ToString().ToLowerInvariant()))
-                {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" a", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (appended[i].EndsWith(EnglishArticles.An.ToString().ToLowerInvariant()))
-                {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" an", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else if (appended[i].EndsWith(EnglishArticles.The.ToString().ToLowerInvariant()))
-                {
-                    suffix = appended[i].Substring(appended[i].IndexOf(" the", StringComparison.CurrentCulture));
-                    original = ToOriginalFormat(appended, suffix, i);
-                    inserted[i] = original;
-                }
-                else
-                {
-                    inserted[i] = appended[i];
-                }
+                var indexOf = item.IndexOf(' ');
+                var removed = item[indexOf..]
+                    .TrimStart();
+                var article = item[..indexOf]
+                    .TrimEnd();
+                transformed[i] = $"{removed} {article}";
             }
-            return inserted;
+            else
+            {
+                transformed[i] = item
+                    .Trim()
+                    .ToString();
+            }
         }
 
-        private static string ToOriginalFormat(string[] appended, string suffix, int i)
-        {
-            var insertion = appended[i].Remove(appended[i].IndexOf(suffix, StringComparison.CurrentCulture));
-            var original = $"{suffix} {insertion}";
-            return original.Trim();
-        }
+        Array.Sort(transformed);
+        return transformed;
     }
+
+    /// <summary>
+    /// Removes the previously appended article and prepends it to the same string.
+    /// </summary>
+    /// <param name="appended">Sorted string array</param>
+    /// <returns>String array</returns>
+    public static string[] PrependArticleSuffix(string[] appended)
+    {
+        var inserted = new string[appended.Length];
+        var the = " the".AsSpan();
+        var an = " an".AsSpan();
+        var a = " a".AsSpan();
+
+        for (var i = 0; i < appended.Length; i++)
+        {
+            var append = appended[i]
+                .AsSpan();
+            if (append.EndsWith(the, StringComparison.OrdinalIgnoreCase))
+            {
+                inserted[i] = ToOriginalFormat(append, 3);
+            }
+            else if (append.EndsWith(an, StringComparison.OrdinalIgnoreCase))
+            {
+                inserted[i] = ToOriginalFormat(append, 2);
+            }
+            else if (append.EndsWith(a, StringComparison.OrdinalIgnoreCase))
+            {
+                inserted[i] = ToOriginalFormat(append, 1);
+            }
+            else
+            {
+                inserted[i] = appended[i];
+            }
+        }
+
+        return inserted;
+    }
+
+    static string ToOriginalFormat(CharSpan value, int suffixLength) =>
+        $"{value[^suffixLength..]} {value[..^(suffixLength + 1)]}";
 }

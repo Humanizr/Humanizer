@@ -247,22 +247,22 @@
     <value>{0} тиждень</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>один день</value>
+    <value>1 день</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>одна година</value>
+    <value>1 година</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>одна мілісекунда</value>
+    <value>1 мілісекунда</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>одна хвилина</value>
+    <value>1 хвилина</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>одна секунда</value>
+    <value>1 секунда</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>один тиждень</value>
+    <value>1 тиждень</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>без часу</value>
@@ -358,9 +358,33 @@
     <value>{0} рік</value>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>один місяць</value>
+    <value>1 місяць</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 рік</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>один день</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>одна година</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>одна мілісекунда</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>одна хвилина</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>один місяць</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>одна секунда</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>один тиждень</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
     <value>один рік</value>
   </data>
 </root>

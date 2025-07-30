@@ -1,24 +1,18 @@
-﻿namespace Humanizer.Localisation.Formatters
+﻿namespace Humanizer;
+
+class SerbianFormatter(CultureInfo culture) :
+    DefaultFormatter(culture)
 {
-    internal class SerbianFormatter : DefaultFormatter
+    const string PaucalPostfix = "_Paucal";
+
+    protected override string GetResourceKey(string resourceKey, int number)
     {
-        private const string PaucalPostfix = "_Paucal";
-
-        public SerbianFormatter(string localeCode)
-            : base(localeCode)
+        var mod10 = number % 10;
+        if (mod10 is > 1 and < 5)
         {
+            return resourceKey + PaucalPostfix;
         }
 
-        protected override string GetResourceKey(string resourceKey, int number)
-        {
-            var mod10 = number % 10;
-
-            if (mod10 > 1 && mod10 < 5)
-            {
-                return resourceKey + PaucalPostfix;
-            }
-
-            return resourceKey;
-        }
+        return resourceKey;
     }
 }

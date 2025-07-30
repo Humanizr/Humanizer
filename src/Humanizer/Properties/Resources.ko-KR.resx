@@ -270,9 +270,6 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
     <value>{0}밀리초</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
-    <value>{0}일 전</value>
-  </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>{0}일 전</value>
   </data>
@@ -280,9 +277,6 @@
     <value>{0}일 전</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
-    <value>{0}일 전</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_TrialQuadral" xml:space="preserve">
     <value>{0}일 전</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
@@ -294,12 +288,6 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>{0}일 후</value>
   </data>
-  <data name="DateHumanize_MultipleDaysFromNow_TrialQuadral" xml:space="preserve">
-    <value>{0}일 후</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
-    <value>{0}시간 전</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>{0}시간 전</value>
   </data>
@@ -309,20 +297,11 @@
   <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
     <value>{0}시간 전</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_TrialQuadral" xml:space="preserve">
-    <value>{0}시간 전</value>
-  </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
     <value>{0}시간 후</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>{0}시간 후</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_TrialQuadral" xml:space="preserve">
-    <value>{0}시간 후</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
-    <value>{0}분 전</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>{0}분 전</value>
@@ -333,16 +312,10 @@
   <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
     <value>{0}분 전</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_TrialQuadral" xml:space="preserve">
-    <value>{0}분 전</value>
-  </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
     <value>{0}분 후</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>{0}분 후</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_TrialQuadral" xml:space="preserve">
     <value>{0}분 후</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
@@ -354,9 +327,6 @@
   <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
     <value>{0}개월 전</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0}개월 전</value>
-  </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
     <value>{0}개월 후</value>
   </data>
@@ -366,19 +336,10 @@
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
     <value>{0}개월 후</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_TrialQuadral" xml:space="preserve">
-    <value>{0}개월 후</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
-    <value>{0}초 전</value>
-  </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
     <value>{0}초 전</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
-    <value>{0}초 전</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_TrialQuadral" xml:space="preserve">
     <value>{0}초 전</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
@@ -386,12 +347,6 @@
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>{0}초 후</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_TrialQuadral" xml:space="preserve">
-    <value>{0}초 후</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
-    <value>{0}년 전</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>{0}년 전</value>
@@ -402,22 +357,13 @@
   <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
     <value>{0}년 전</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_TrialQuadral" xml:space="preserve">
-    <value>{0}년 전</value>
-  </data>
   <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
     <value>{0}년 후</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
     <value>{0}년 후</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_TrialQuadral" xml:space="preserve">
-    <value>{0}년 후</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
-    <value>{0}일</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_TrialQuadral" xml:space="preserve">
     <value>{0}일</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
@@ -426,28 +372,16 @@
   <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
     <value>{0}시간</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_TrialQuadral" xml:space="preserve">
-    <value>{0}시간</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
     <value>{0}밀리초</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_TrialQuadral" xml:space="preserve">
-    <value>{0}밀리초</value>
-  </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
-    <value>{0}분</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_TrialQuadral" xml:space="preserve">
     <value>{0}분</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
     <value>{0}초</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
-    <value>{0}초</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_TrialQuadral" xml:space="preserve">
     <value>{0}초</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
@@ -457,9 +391,6 @@
     <value>{0}주</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>{0}주</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
     <value>{0}주</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
@@ -474,49 +405,49 @@
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1년</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
     <value>{0}시간 전</value>
   </data>
-  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
     <value>{0}시간 후</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
     <value>{0}분 전</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
     <value>{0}분 후</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
     <value>{0}개월 전</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
     <value>{0}개월 후</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
     <value>{0}초 전</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
     <value>{0}초 후</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
     <value>{0}년 전</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
     <value>{0}년 후</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
     <value>{0}시간</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
     <value>{0}밀리초</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
     <value>{0}분</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
     <value>{0}초</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
     <value>{0}주</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
