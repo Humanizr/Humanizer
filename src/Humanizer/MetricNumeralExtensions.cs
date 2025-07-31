@@ -282,6 +282,12 @@ public static class MetricNumeralExtensions
             number = Math.Round(number, decimals.Value);
         }
 
+        if (Math.Abs(number) >= 1000 && exponent < Symbols[0].Count)
+        {
+            number /= 1000;
+            exponent += 1;
+        }
+
         var symbol = Math.Sign(exponent) == 1
             ? Symbols[0][exponent - 1]
             : Symbols[1][-exponent - 1];

@@ -10,7 +10,16 @@
     public void Truncate(string? input, int length, string? expectedOutput) =>
         Assert.Equal(expectedOutput, input.Truncate(length));
 
-    [Theory(DisplayName = "02 - TruncateWithFixedLengthTruncator")]
+    [Theory(DisplayName = "02.1 - TruncateWithFixedLengthTruncator")]
+    [InlineData("short text", 20, null, "short text")]
+    [InlineData("short text", 20, "trunc", "short text")]
+    [InlineData("short text", 20, "very long truncation string", "short text")]
+    [InlineData("Text longer than truncate length", 10, "very long truncation string", "Text longe")]
+    [InlineData("Text longer than truncate length", 10, "trunc", "Text trunc")]
+    public void TruncateWithCustomTruncationString(string? input, int length, string? trunactionString, string? expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Truncate(length, trunactionString));
+
+    [Theory(DisplayName = "02.2 - TruncateWithFixedLengthTruncator")]
     [InlineData(null, 10, null)]
     [InlineData("", 10, "")]
     [InlineData("a", 1, "a")]

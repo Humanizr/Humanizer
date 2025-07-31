@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
@@ -29,6 +29,11 @@ class VietnameseNumberToWordsConverter : GenderlessNumberToWordsConverter
 
     static string ConvertImpl(long number, bool hasTens = false, bool isGreaterThanOneHundred = false)
     {
+        if (number < 0)
+        {
+            return $"trừ {ConvertImpl(-number, hasTens, isGreaterThanOneHundred)}";
+        }
+
         if (number >= OneBillion)
         {
             return string.Format(
