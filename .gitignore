@@ -99,4 +99,4 @@ src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.receive
 /src/Humanizer/Properties/launchSettings.json
 
 
-*.received.*src/Humanizer/Properties/*.backup_*
+*.received.*
