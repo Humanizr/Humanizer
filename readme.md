@@ -896,6 +896,12 @@ If words from other languages are used, a `NotSupportedException` is thrown.
 "one hundred and five".ToNumber(new CultureInfo("en")) => 105
 "three thousand two hundred".ToNumber(new CultureInfo("en")) => 3200
 
+if ("forty-two".TryToNumber(out var number, new CultureInfo("en")))
+    Console.WriteLine(number); // 42
+
+if (!"tenn".TryToNumber(out var invalid, new CultureInfo("en"), out var badWord))
+    Console.WriteLine($"Unrecognized word: {badWord}"); // Unrecognized word: tenn
+
 // Unsupported locales (throws NotSupportedException)
 "vingt".ToNumber(new CultureInfo("fr"))   // French
 "veinte".ToNumber(new CultureInfo("es"))  // Spanish

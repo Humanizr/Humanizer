@@ -62,9 +62,9 @@ namespace Humanizer.Tests
         [InlineData("negative five", -5, null)]
         [InlineData("negative one hundred and five", -105, null)]
         [InlineData("negative twenty-first", -21, null)]
-        public void TryConvertToNumber_ValidInput_US(string words, int expectedNumber, string? expectedUnrecognizedWord)
+        public void TryToNumber_ValidInput_US(string words, int expectedNumber, string? expectedUnrecognizedWord)
         {
-            Assert.True(words.TryConvertToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+            Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
             Assert.Equal(unrecognizedWord, expectedUnrecognizedWord);
             Assert.Equal(expectedNumber, parsedNumber);
         }
@@ -79,10 +79,10 @@ namespace Humanizer.Tests
         [InlineData("two hundred , ninetyy sevennn", 0, "ninetyy")]
         [InlineData("invalidinput", 0, "invalidinput")]
         [InlineData("30rmd", 0, "30rmd")]
-        [InlineData("negative energie", 0, "energie")]
-        public void TryConvertToNumber_InvalidInput_US(string words, int expectedNumber, string? expectedUnrecognizedWord)
+        [InlineData("negative energy", 0, "energy")]
+        public void TryToNumber_InvalidInput_US(string words, int expectedNumber, string? expectedUnrecognizedWord)
         {
-            Assert.False(words.TryConvertToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+            Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
             Assert.Equal(unrecognizedWord, expectedUnrecognizedWord);
             Assert.Equal(expectedNumber, parsedNumber);
         }
@@ -119,9 +119,9 @@ namespace Humanizer.Tests
         [InlineData("negative five", -5, null)]
         [InlineData("negative one hundred and five", -105, null)]
         [InlineData("negative twenty-first", -21, null)]
-        public void TryConvertToNumber_ValidInput_GB(string words, int expectedNumber, string? expectedUnrecognizedWord)
+        public void TryToNumber_ValidInput_GB(string words, int expectedNumber, string? expectedUnrecognizedWord)
         {
-            Assert.True(words.TryConvertToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+            Assert.True(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
             Assert.Equal(unrecognizedWord, expectedUnrecognizedWord);
             Assert.Equal(expectedNumber, parsedNumber);
         }
@@ -136,10 +136,10 @@ namespace Humanizer.Tests
         [InlineData("two hundred , ninetyy sevennn", 0, "ninetyy")]
         [InlineData("invalidinput", 0, "invalidinput")]
         [InlineData("30rmd", 0, "30rmd")]
-        [InlineData("negative energie", 0, "energie")]
-        public void TryConvertToNumber_InvalidInput_GB(string words, int expectedNumber, string? expectedUnrecognizedWord)
+        [InlineData("negative energy", 0, "energy")]
+        public void TryToNumber_InvalidInput_GB(string words, int expectedNumber, string? expectedUnrecognizedWord)
         {
-            Assert.False(words.TryConvertToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
+            Assert.False(words.TryToNumber(out var parsedNumber, CultureInfo.CurrentCulture, out var unrecognizedWord));
             Assert.Equal(unrecognizedWord, expectedUnrecognizedWord);
             Assert.Equal(expectedNumber, parsedNumber);
         }
