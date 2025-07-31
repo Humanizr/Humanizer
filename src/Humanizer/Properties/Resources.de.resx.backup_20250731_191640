@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>vor einer Sekunde</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>vor {0} Sekunden</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>vor einer Minute</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>vor {0} Minuten</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>vor einer Stunde</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>vor {0} Stunden</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>gestern</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>vor {0} Tagen</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>vor einem Monat</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
+    <value>vor {0} Monaten</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>vor einem Jahr</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>vor {0} Jahren</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} Tage</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} Stunden</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} Millisekunden</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} Minuten</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} Sekunden</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>1 Tag</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>1 Stunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1 Millisekunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>1 Minute</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>1 Sekunde</value>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>Keine Zeit</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} Wochen</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>1 Woche</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>in {0} Tagen</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>in {0} Stunden</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>in {0} Minuten</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>in {0} Monaten</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>in {0} Sekunden</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>in {0} Jahren</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>jetzt</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>morgen</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>in einer Stunde</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>in einer Minute</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>in einem Monat</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>in einer Sekunde</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>in einem Jahr</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nie</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} Monate</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} Jahre</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 Monat</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 Jahr</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>ein Tag</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>eine Stunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>eine Millisekunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>eine Minute</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>ein Monat</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>eine Sekunde</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>eine Woche</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>ein Jahr</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>Nord</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>Nordnordost</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>Nordost</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>Ostnordost</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>Ost</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>Ostsüdost</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>Südost</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>Südsüdost</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>Süd</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>Südsüdwest</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>Südwest</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>Westsüdwest</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>West</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>Westnordwest</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>Nordwest</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>Nordnordwest</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>NNO</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>ONO</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>OSO</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SO</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>SSO</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>SSW</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SW</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>WSW</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>WNW</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NW</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>NNW</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>Bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>Byte</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>Kilobyte</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>kB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>Megabyte</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>Gigabyte</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>Terabyte</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>Woche</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>a</value>
+  </data>
+</root>

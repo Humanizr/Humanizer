@@ -672,4 +672,7 @@
   <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
     <value>{0} лет</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} old</value>
+  </data>
 </root>

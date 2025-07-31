@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>לפני שנייה</value>
+    <comment>one second ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>לפני {0} שניות</value>
+    <comment>{0} seconds ago</comment>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>לפני דקה</value>
+    <comment>a minute ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>לפני {0} דקות</value>
+    <comment>{0} minutes ago</comment>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>לפני שעה</value>
+    <comment>an hour ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>לפני {0} שעות</value>
+    <comment>{0} hours ago</comment>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>אתמול</value>
+    <comment>yesterday</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>לפני {0} יום</value>
+    <comment>{0} days ago</comment>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>לפני חודש</value>
+    <comment>one month ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
+    <value>לפני {0} חודשים</value>
+    <comment>{0} months ago</comment>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>לפני שנה</value>
+    <comment>one year ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>לפני {0} שנה</value>
+    <comment>{0} years ago</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>יום</value>
+    <comment>single day</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>שעה</value>
+    <comment>single hour</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>אלפית שנייה</value>
+    <comment>single millisecond</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>דקה</value>
+    <comment>single minute</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>שנייה</value>
+    <comment>single second</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>שבוע</value>
+    <comment>single week</comment>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>אין זמן</value>
+    <comment>no time</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>לפני יומיים</value>
+    <comment>two days ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>לפני שעתיים</value>
+    <comment>two hours ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>לפני {0} דקות</value>
+    <comment>two minutes ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>לפני חודשיים</value>
+    <comment>two months ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>לפני {0} שניות</value>
+    <comment>two  seconds ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>לפני שנתיים</value>
+    <comment>two years ago</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>שבועיים</value>
+    <comment>two weeks</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>יומיים</value>
+    <comment>two days</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>שעתיים</value>
+    <comment>two hours</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>שתי אלפיות שנייה</value>
+    <comment>two milliseconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>שתי דקות</value>
+    <comment>two minutes</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>שתי שניות</value>
+    <comment>two seconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} ימים</value>
+    <comment>{0} days</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} ימים</value>
+    <comment>{0} days</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} שעות</value>
+    <comment>{0} hours</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} שעות</value>
+    <comment>{0} hours</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} אלפיות שנייה</value>
+    <comment>{0} milliseconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} אלפיות שנייה</value>
+    <comment>{0} milliseconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} דקות</value>
+    <comment>{0} minutes</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} דקות</value>
+    <comment>{0} minutes</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} שניות</value>
+    <comment>{0} seconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} שניות</value>
+    <comment>{0} seconds</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} שבועות</value>
+    <comment>{0} weeks</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} שבועות</value>
+    <comment>{0} weeks</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>לפני {0} ימים</value>
+    <comment>{0} days ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>לפני {0} שעות</value>
+    <comment>{0} hours ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>לפני {0} דקות</value>
+    <comment>{0} minutes ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>לפני {0} חודשים</value>
+    <comment>{0} months ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>לפני {0} שניות</value>
+    <comment>{0} seconds ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>לפני {0} שנים</value>
+    <comment>{0} years ago</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>בעוד {0} יום</value>
+    <comment>{0} days from now</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>בעוד יומיים</value>
+    <comment>in 2 days</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} ימים</value>
+    <comment>{0} days from now</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>בעוד {0} שעות</value>
+    <comment>in {0} hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>בעוד שעתיים</value>
+    <comment>in 2 hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} שעות</value>
+    <comment>in {0} hours</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>בעוד {0} דקות</value>
+    <comment>in {0} minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>בעוד 2 דקות</value>
+    <comment>in 2 minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} דקות</value>
+    <comment>in {0} minutes</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>בעוד {0} חודשים</value>
+    <comment>in {0} months</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>בעוד חודשיים</value>
+    <comment>in 2 months</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} חודשים</value>
+    <comment>in {0} months</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>בעוד {0} שנה</value>
+    <comment>in {0} years</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>בעוד שנתיים</value>
+    <comment>in 2 years</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} שנים</value>
+    <comment>in {0} years</comment>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>כעת</value>
+    <comment>now</comment>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>מחר</value>
+    <comment>tomorrow</comment>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>בעוד שעה</value>
+    <comment>in an hour</comment>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>בעוד דקה</value>
+    <comment>in a minute</comment>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>בעוד חודש</value>
+    <comment>in a month</comment>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>בעוד שנה</value>
+    <comment>in a year</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>בעוד {0} שניות</value>
+    <comment>in {0} seconds</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>בעוד 2 שניות</value>
+    <comment>in 2 seconds</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>בעוד {0} שניות</value>
+    <comment>in {0} seconds</comment>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>בעוד שנייה</value>
+    <comment>in a second</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} חודשים</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
+    <value>חודשיים</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} חודשים</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} שנים</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
+    <value>שנתיים</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} שנים</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>חודש</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>שנה</value>
+  </data>
+</root>
