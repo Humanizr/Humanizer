@@ -657,22 +657,4 @@
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>hace {0} segundo</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
-    <value>{0} days ago</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
-    <value>{0} days from now</value>
-  </data>
-  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
-    <value>two days ago</value>
-  </data>
-  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
-    <value>two days from now</value>
-  </data>
-  <data name="TimeSpanHumanize_Age" xml:space="preserve">
-    <value>{0} old</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
-    <value>{0} days</value>
-  </data>
 </root>
