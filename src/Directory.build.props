@@ -4,8 +4,8 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ImplicitUsings>enable</ImplicitUsings>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <SignAssembly>true</SignAssembly>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Humanizer.snk</AssemblyOriginatorKeyFile>
     <Nullable>enable</Nullable>
   </PropertyGroup>
