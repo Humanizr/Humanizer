@@ -657,4 +657,22 @@
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>hace {0} segundo</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>hace {0} días</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>en {0} días</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>hace dos días</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>en dos días</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} años</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
+    <value>{0} días</value>
+  </data>
 </root>

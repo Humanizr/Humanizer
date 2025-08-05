@@ -600,4 +600,79 @@
   <data name="NNW_Short" xml:space="preserve">
     <value>NNO</value>
   </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabyte</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobyte</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabyte</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabyte</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} days ago</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>{0} days from now</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>two days ago</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>two days from now</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} anos</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mo</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>week</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>y</value>
+  </data>
 </root>
