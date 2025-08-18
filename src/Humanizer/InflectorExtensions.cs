@@ -52,11 +52,63 @@ public static class InflectorExtensions
 
     /// <summary>
     /// By default, pascalize converts strings to UpperCamelCase also removing underscores
+    /// For a word that are all upper case, this function by default assumes its an acronym and preserves the casing
+    /// of all letters in that word
+    /// In order to treat it as a word and not acronym, set preserveAcronym to false
     /// </summary>
-    public static string Pascalize(this string input) =>
+    public static string Pascalize(this string input, bool preserveAcronym = true)
+    {
+        if (preserveAcronym)
+            return input.PascalizeWithAcronymPreservation();
+        else
+            return input.PascalizeWithoutAcronymPreservation();
+    }
+
+    private static string PascalizeWithAcronymPreservation(this string input) =>
         Regex.Replace(input, @"(?:[ _-]+|^)([a-zA-Z])", match => match
             .Groups[1]
             .Value.ToUpper());
+
+
+    private static string PascalizeWithoutAcronymPreservation(this string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            return string.Empty;
+
+        var span = input.AsSpan();
+        var sb = new StringBuilder(input.Length);
+
+        var wordStart = 0;
+        for (var index = 0; index <= span.Length; index++)
+        {
+            var isSeparator = index == span.Length || span[index] == ' ' || span[index] == '_' || span[index] == '-';
+
+            if (!isSeparator)
+                continue;
+
+            var wordSpan = span.Slice(wordStart, index - wordStart);
+
+            if (wordSpan.Length > 0)
+            {
+                // Otherwise, capitalize the first letter and append the rest
+                sb.Append(char.ToUpper(wordSpan[0]));
+                for (var k = 1; k < wordSpan.Length; k++)
+                {
+                    sb.Append(char.ToLower(wordSpan[k]));
+                }
+            }
+
+            while (index < span.Length && (span[index] == ' ' || span[index] == '_' || span[index] == '-'))
+            {
+                index++;
+            }
+
+            wordStart = index;
+        }
+
+        return sb.ToString();
+    }
+
 
     /// <summary>
     /// Same as Pascalize except that the first character is lower case
@@ -69,6 +121,21 @@ public static class InflectorExtensions
                 char.ToLower(word[0]),
                 word.AsSpan(1))
             : word;
+    }
+
+    /// <summary>
+    /// Adheres to Google camel case definition https://google.github.io/styleguide/jsguide.html#naming-camel-case-defined
+    /// that appropriately handles acronyms.
+    /// </summary>
+    public static string CamelizeV2(this string input)
+    {
+        var word = input.Pascalize(false);
+        return word.Length > 0
+            ? StringHumanizeExtensions.Concat(
+                char.ToLower(word[0]),
+                word.AsSpan(1))
+            : word;
+
     }
 
     /// <summary>
