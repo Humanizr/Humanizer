@@ -117,56 +117,314 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>isang segundo ang nakalipas</value>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>{0} isang araw ang nakalipas</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} segundong nakalipas</value>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>{0} isang araw ang nakalipas</value>
   </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>isang minutong nakalipas</value>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>{0} isang araw ang nakalipas</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>{0} minutong nakalipas</value>
+  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
+    <value>{0} isang araw ang nakalipas</value>
   </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>isang oras ang nakalipas</value>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} araw mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>{0} araw mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>{0} araw mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
+    <value>{0} araw mula ngayon</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} isang oras ang nakalipas</value>
   </data>
-  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
-    <value>kahapon</value>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>{0} isang oras ang nakalipas</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>{0} isang araw ang nakalipas</value>
+  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
+    <value>{0} isang oras ang nakalipas</value>
   </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>isang buwan ang nakalipas</value>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>{0} isang oras ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
+    <value>{0} oras ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>{0} oras mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>{0} oras mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
+    <value>{0} oras mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>{0} oras mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
+    <value>{0} oras mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>{0} minutong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>{0} minutong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
+    <value>{0} minutong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>{0} minutong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
+    <value>{0} minuto ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>{0} minuto mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>{0} minuto mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
+    <value>{0} minuto mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>{0} minuto mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
+    <value>{0} minuto mula ngayon</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} isang buwan ang nakalipas</value>
   </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>isang taong nakalipas</value>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>{0} isang buwan ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
+    <value>{0} isang buwan ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>{0} isang buwan ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
+    <value>{0} buwan ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>{0} buwan mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>{0} buwan mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
+    <value>{0} buwan mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>{0} buwan mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
+    <value>{0} buwan mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>{0} segundong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>{0} segundong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
+    <value>{0} segundong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>{0} segundong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
+    <value>{0} segundo ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>{0} segundo mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>{0} segundo mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
+    <value>{0} segundo mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>{0} segundo mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
+    <value>{0} segundo mula ngayon</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} isang taong nakalipas</value>
   </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>{0} isang taong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
+    <value>{0} taon mula sa nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>{0} isang taong nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
+    <value>{0} taon ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>{0} taon mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>{0} taon mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
+    <value>{0} taon mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>{0} taon mula ngayon</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
+    <value>{0} taon mula ngayon</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>hindi kailanman</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>ngayon</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>kahapon</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>bukas</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>isang oras ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>isang oras mula ngayon</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>isang minutong nakalipas</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>isang minuto mula ngayon</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>isang buwan ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>isang buwan mula ngayon</value>
+  </data>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>isang segundo ang nakalipas</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>isang segundo mula ngayon</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>isang taong nakalipas</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>isang taon mula ngayon</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} araw</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>{0} araw</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} araw</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
     <value>{0} araw</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} oras</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>{0} oras</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
+    <value>{0} oras</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} oras</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
+    <value>{0} oras</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
     <value>{0} milliseconds</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>{0} milliseconds</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
+    <value>{0} milliseconds</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} milliseconds</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>{0} millisecond</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
     <value>{0} minuto</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>{0} minuto</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
+    <value>{0} minuto</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} minuto</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} minuto</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} buwan</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
     <value>{0} segundo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>{0} segundo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
+    <value>{0} segundo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} segundo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>{0} segundo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} linggo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>{0} linggo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
+    <value>{0} linggo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} linggo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>{0} linggo</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} taon</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 araw</value>
@@ -180,277 +438,19 @@
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 minuto</value>
   </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 buwan</value>
+  </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>1 segundo</value>
-  </data>
-  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>walang oras</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
-    <value>{0} linggo</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>1 linggo</value>
   </data>
-  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} araw mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} oras mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} minuto mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} buwan mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} segundo mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} taon mula ngayon</value>
-  </data>
-  <data name="DateHumanize_Now" xml:space="preserve">
-    <value>ngayon</value>
-  </data>
-  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
-    <value>bukas</value>
-  </data>
-  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>isang oras mula ngayon</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>isang minuto mula ngayon</value>
-  </data>
-  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>isang buwan mula ngayon</value>
-  </data>
-  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>isang segundo mula ngayon</value>
-  </data>
-  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>isang taon mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
-    <value>{0} oras mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
-    <value>{0} minuto mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
-    <value>{0} segundong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
-    <value>{0} segundo mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
-    <value>{0} taon mula ngayon</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
-    <value>{0} araw</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
-    <value>{0} araw</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
-    <value>{0} oras</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>{0} milliseconds</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
-    <value>{0} minuto</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
-    <value>{0} minuto</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
-    <value>{0} segundo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} milliseconds</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
-    <value>{0} isang araw ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
-    <value>{0} isang araw ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
-    <value>{0} isang araw ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
-    <value>{0} araw mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
-    <value>{0} araw mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
-    <value>{0} araw mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
-    <value>{0} isang oras ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
-    <value>{0} isang oras ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
-    <value>{0} oras ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
-    <value>{0} oras mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
-    <value>{0} oras mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
-    <value>{0} minutong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
-    <value>{0} minutong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
-    <value>{0} minuto ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
-    <value>{0} minuto mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>{0} minuto mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
-    <value>{0} isang buwan ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
-    <value>{0} isang buwan ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
-    <value>{0} buwan ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
-    <value>{0} buwan mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
-    <value>{0} buwan mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
-    <value>{0} buwan mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
-    <value>{0} segundong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
-    <value>{0} segundo ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
-    <value>{0} segundo mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
-    <value>{0} segundo mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
-    <value>{0} isang taong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
-    <value>{0} isang taong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
-    <value>{0} taon ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
-    <value>{0} taon mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
-    <value>{0} taon mula ngayon</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
-    <value>{0} araw</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
-    <value>{0} oras</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
-    <value>{0} oras</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
-    <value>{0} millisecond</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
-    <value>{0} minuto</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
-    <value>{0} segundo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
-    <value>{0} segundo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
-    <value>{0} linggo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
-    <value>{0} linggo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>{0} linggo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
-    <value>{0} buwan</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
-    <value>{0} taon</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>1 buwan</value>
-  </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 taon</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
-    <value>{0} isang oras ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
-    <value>{0} oras mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
-    <value>{0} minutong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
-    <value>{0} minuto mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
-    <value>{0} isang buwan ang nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
-    <value>{0} buwan mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
-    <value>{0} segundong nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
-    <value>{0} segundo mula ngayon</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>{0} taon mula sa nakalipas</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
-    <value>{0} taon mula ngayon</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
-    <value>{0} oras</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
-    <value>{0} milliseconds</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
-    <value>{0} minuto</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
-    <value>{0} segundo</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
-    <value>{0} linggo</value>
-  </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>hindi kailanman</value>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>walang oras</value>
   </data>
 </root>

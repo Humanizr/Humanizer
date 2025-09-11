@@ -117,158 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>sekonda ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} sekondi ilu</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>minuta ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>{0} minuti ilu</value>
-  </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>siegħa ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>{0} siegħat ilu</value>
-  </data>
-  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
-    <value>il-bieraħ</value>
-  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} jiem ilu</value>
-  </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>xahar ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
-    <value>{0} xhur ilu</value>
-  </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>sena ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
-    <value>{0} snin ilu</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
-    <value>{0} jiem</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
-    <value>{0} siegħat</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} millisekondi</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
-    <value>{0} minuti</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
-    <value>{0} sekondi</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>ġurnata</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>siegħa</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>millisekonda</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>minuta</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>sekonda</value>
-  </data>
-  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>xejn</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
-    <value>{0} ġimgħat</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>ġimgħa</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} jiem oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} siegħat oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} minuti oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} xhur oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} sekondi oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} snin oħra</value>
-  </data>
-  <data name="DateHumanize_Now" xml:space="preserve">
-    <value>issa</value>
-  </data>
-  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
-    <value>għada</value>
-  </data>
-  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>siegħa oħra</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>minuta oħra</value>
-  </data>
-  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>xahar ieħor</value>
-  </data>
-  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>sekonda oħra</value>
-  </data>
-  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>sena oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
-    <value>sagħtejn oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
-    <value>{0} minuti oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
-    <value>{0} sekondi ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
-    <value>{0} sekondi oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
-    <value>sentejn oħra</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
-    <value>jumejn</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
-    <value>{0} jiem</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
-    <value>{0} siegħat</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>{0} millisekondi</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
-    <value>{0} minuti</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
-    <value>{0} minuti</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
-    <value>{0} sekondi</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} millisekondi</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>jumejn ilu</value>
@@ -279,6 +129,9 @@
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
     <value>il-bieraħ</value>
   </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} jiem oħra</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
     <value>pitgħada</value>
   </data>
@@ -288,8 +141,14 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>għada</value>
   </data>
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>{0} siegħat ilu</value>
+  </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>sagħtejn ilu</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
+    <value>{0} siegħat ilu</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
     <value>{0} siegħat ilu</value>
@@ -297,13 +156,28 @@
   <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
     <value>siegħa ilu</value>
   </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>{0} siegħat oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>sagħtejn oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
+    <value>{0} siegħat oħra</value>
+  </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
     <value>{0} siegħat oħra</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>siegħa oħra</value>
   </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>{0} minuti ilu</value>
+  </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>{0} minuti ilu</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
     <value>{0} minuti ilu</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
@@ -312,14 +186,29 @@
   <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
     <value>minuta ilu</value>
   </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>{0} minuti oħra</value>
+  </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>{0} minuti oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
+    <value>{0} minuti oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
     <value>{0} minuti oħra</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
     <value>minuta oħra</value>
   </data>
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
+    <value>{0} xhur ilu</value>
+  </data>
   <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
     <value>xahrejn ilu</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
+    <value>{0} xhur ilu</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
     <value>{0} xhur ilu</value>
@@ -327,8 +216,14 @@
   <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
     <value>xahar ilu</value>
   </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>{0} xhur oħra</value>
+  </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
     <value>xahrejn oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
+    <value>{0} xhur oħra</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
     <value>{0} xhur oħra</value>
@@ -336,11 +231,29 @@
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
     <value>xahar ieħor</value>
   </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>{0} sekondi ilu</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>{0} sekondi ilu</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
+    <value>{0} sekondi ilu</value>
+  </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
     <value>{0} sekondi ilu</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>sekonda ilu</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>{0} sekondi oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>{0} sekondi oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
+    <value>{0} sekondi oħra</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
     <value>{0} sekondi oħra</value>
@@ -348,8 +261,14 @@
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>sekonda oħra</value>
   </data>
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>{0} snin ilu</value>
+  </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>sentejn ilu</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
+    <value>{0} snin ilu</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
     <value>{0} snin ilu</value>
@@ -357,101 +276,203 @@
   <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
     <value>sena ilu</value>
   </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>{0} snin oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>sentejn oħra</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
+    <value>{0} snin oħra</value>
+  </data>
   <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
     <value>{0} snin oħra</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
     <value>sena oħra</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>qatt</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>issa</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>il-bieraħ</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>għada</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>siegħa ilu</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>siegħa oħra</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>minuta ilu</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>minuta oħra</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>xahar ilu</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>xahar ieħor</value>
+  </data>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>sekonda ilu</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>sekonda oħra</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>sena ilu</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>sena oħra</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>lvant</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>grieg il-lvant</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>GL</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>east-southeast</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>xlokk il-lvant</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>XL</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>grigal</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>grieg it-tramuntana</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>GT</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>majjistral it-tramuntana</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>MT</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>majjistral</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>nofsinhar</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>xlokk</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>nofsinhar ix-xlokk</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>NX</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>nofsinhar il-lbiċ</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>NL</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>lbiċ</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} jiem</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>jumejn</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
+    <value>{0} jiem</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} jiem</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
     <value>jum</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} siegħat</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
     <value>sagħtejn</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
+    <value>{0} siegħat</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} siegħat</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
     <value>siegħa</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
-    <value>millisekonda</value>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} millisekondi</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
-    <value>{0} minuta</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
-    <value>{0} sekondi</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
-    <value>sekonda</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
-    <value>ġimgħatejn</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
-    <value>{0} ġimgħat</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>ġimgħa</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
-    <value>{0} xhur</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
-    <value>{0} snin</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>xahar</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>sena</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
-    <value>{0} siegħat ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
-    <value>{0} siegħat oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
-    <value>{0} minuti ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
-    <value>{0} minuti oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
-    <value>{0} xhur ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
-    <value>{0} xhur oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
-    <value>{0} sekondi ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
-    <value>{0} sekondi oħra</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>{0} snin ilu</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
-    <value>{0} snin oħra</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
-    <value>{0} siegħat</value>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>{0} millisekondi</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
     <value>{0} millisekondi</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} millisekondi</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>millisekonda</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} minuti</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>{0} minuti</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
     <value>{0} minuti</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
-    <value>{0} sekondi</value>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} minuti</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
-    <value>{0} ġimgħat</value>
+  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} minuta</value>
   </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>qatt</value>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} xhur</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>xahrejn</value>
@@ -465,6 +486,39 @@
   <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
     <value>xahar</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} sekondi</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>{0} sekondi</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
+    <value>{0} sekondi</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} sekondi</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>sekonda</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} ġimgħat</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>ġimgħatejn</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
+    <value>{0} ġimgħat</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} ġimgħat</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>ġimgħa</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} snin</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
     <value>sentejn</value>
   </data>
@@ -477,68 +531,56 @@
   <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
     <value>{0} snin</value>
   </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>ġurnata</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
     <value>ġurnata</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>siegħa</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
     <value>siegħa</value>
   </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>millisekonda</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
     <value>millisekonda</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>minuta</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
     <value>minuta</value>
   </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>xahar</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
     <value>xahar</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>sekonda</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
     <value>sekonda</value>
   </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>ġimgħa</value>
+  </data>
   <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
     <value>ġimgħa</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>sena</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
     <value>sena</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
-    <value>{0} jiem</value>
-  </data>
-  <data name="N" xml:space="preserve">
-    <value>XL</value>
-  </data>
-  <data name="NNE" xml:space="preserve">
-    <value>grieg it-tramuntana</value>
-  </data>
-  <data name="NE" xml:space="preserve">
-    <value>grigal</value>
-  </data>
-  <data name="ENE" xml:space="preserve">
-    <value>grieg il-lvant</value>
-  </data>
-  <data name="E" xml:space="preserve">
-    <value>lvant</value>
-  </data>
-  <data name="ESE" xml:space="preserve">
-    <value>east-southeast</value>
-  </data>
-  <data name="SE" xml:space="preserve">
-    <value>xlokk</value>
-  </data>
-  <data name="SSE" xml:space="preserve">
-    <value>nofsinhar ix-xlokk</value>
-  </data>
-  <data name="S" xml:space="preserve">
-    <value>nofsinhar</value>
-  </data>
-  <data name="SSW" xml:space="preserve">
-    <value>nofsinhar il-lbiċ</value>
-  </data>
-  <data name="SW" xml:space="preserve">
-    <value>lbiċ</value>
-  </data>
-  <data name="WSW" xml:space="preserve">
-    <value>punent il-lbiċ</value>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>xejn</value>
   </data>
   <data name="W" xml:space="preserve">
     <value>punent</value>
@@ -546,58 +588,16 @@
   <data name="WNW" xml:space="preserve">
     <value>punent majjistru</value>
   </data>
-  <data name="NW" xml:space="preserve">
-    <value>majjistral</value>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>PM</value>
   </data>
-  <data name="NNW" xml:space="preserve">
-    <value>majjistral it-tramuntana</value>
-  </data>
-  <data name="N_Short" xml:space="preserve">
-    <value>T</value>
-  </data>
-  <data name="NNE_Short" xml:space="preserve">
-    <value>GT</value>
-  </data>
-  <data name="NE_Short" xml:space="preserve">
-    <value>G</value>
-  </data>
-  <data name="ENE_Short" xml:space="preserve">
-    <value>GL</value>
-  </data>
-  <data name="E_Short" xml:space="preserve">
-    <value>L</value>
-  </data>
-  <data name="ESE_Short" xml:space="preserve">
-    <value>xlokk il-lvant</value>
-  </data>
-  <data name="SE_Short" xml:space="preserve">
-    <value>X</value>
-  </data>
-  <data name="SSE_Short" xml:space="preserve">
-    <value>NX</value>
-  </data>
-  <data name="S_Short" xml:space="preserve">
-    <value>N</value>
-  </data>
-  <data name="SSW_Short" xml:space="preserve">
-    <value>NL</value>
-  </data>
-  <data name="SW_Short" xml:space="preserve">
-    <value>L</value>
+  <data name="WSW" xml:space="preserve">
+    <value>punent il-lbiċ</value>
   </data>
   <data name="WSW_Short" xml:space="preserve">
     <value>PL</value>
   </data>
   <data name="W_Short" xml:space="preserve">
     <value>P</value>
-  </data>
-  <data name="WNW_Short" xml:space="preserve">
-    <value>PM</value>
-  </data>
-  <data name="NW_Short" xml:space="preserve">
-    <value>M</value>
-  </data>
-  <data name="NNW_Short" xml:space="preserve">
-    <value>MT</value>
   </data>
 </root>
