@@ -12,7 +12,7 @@
     <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
     <NoWarn>CS1573;CS1591</NoWarn>    
     <PublicKey>0024000004800000940000000602000000240000525341310004000001000100F9104F5F9BDB168AE140366EB1CD84C469B020EA3423D5D29996D5214CE2BD9B7C0BA3EAD1CA545C4399668AB8911E61CC1CC83C7DF6D50FD6B781365B467E65173F40A11C957D27C5AA0CB0F8DA9C91C988203CC8AEF1468C74A472839D0FD870DA8D13A4DC6B3AAFDAF0384D8E18E393C613D88BF02A64467A119902204FCC</PublicKey>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>    
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
     <IsAotCompatible>true</IsAotCompatible>
@@ -20,6 +20,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Using Remove="System.Net.Http" />
+    <PackageReference Include="Microsoft.DotNet.XliffTasks" Version="11.0.0-beta.25461.2" PrivateAssets="all" />
     <PackageReference Include="Polyfill" Version="7.27.0" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />    
     <PackageReference Include="System.Memory" Version="4.5.5" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'"  />

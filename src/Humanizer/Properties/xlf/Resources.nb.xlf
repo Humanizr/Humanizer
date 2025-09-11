@@ -1,0 +1,937 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="nb" original="../Resources.resx">
+    <body>
+      <trans-unit id="DataUnit_Bit">
+        <source>bit</source>
+        <target state="new">bit</target>
+        <note>Data unit: bit</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_BitSymbol">
+        <source>b</source>
+        <target state="new">b</target>
+        <note>Symbol for data unit: bit</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_Byte">
+        <source>byte</source>
+        <target state="new">byte</target>
+        <note>Data unit: byte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_ByteSymbol">
+        <source>B</source>
+        <target state="new">B</target>
+        <note>Symbol for data unit: byte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_Gigabyte">
+        <source>gigabyte</source>
+        <target state="new">gigabyte</target>
+        <note>Data unit: gigabyte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_GigabyteSymbol">
+        <source>GB</source>
+        <target state="new">GB</target>
+        <note>Symbol for data unit: gigabyte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_Kilobyte">
+        <source>kilobyte</source>
+        <target state="new">kilobyte</target>
+        <note>Data unit: kilobyte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_KilobyteSymbol">
+        <source>KB</source>
+        <target state="new">KB</target>
+        <note>Symbol for data unit: kilobyte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_Megabyte">
+        <source>megabyte</source>
+        <target state="new">megabyte</target>
+        <note>Data unit: megabyte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_MegabyteSymbol">
+        <source>MB</source>
+        <target state="new">MB</target>
+        <note>Symbol for data unit: megabyte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_Terabyte">
+        <source>terabyte</source>
+        <target state="new">terabyte</target>
+        <note>Data unit: terabyte</note>
+      </trans-unit>
+      <trans-unit id="DataUnit_TerabyteSymbol">
+        <source>TB</source>
+        <target state="new">TB</target>
+        <note>Symbol for data unit: terabyte</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysAgo">
+        <source>{0} days ago</source>
+        <target state="new">{0} days ago</target>
+        <note>Date, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysAgo_Dual">
+        <source>{0} days ago</source>
+        <target state="new">{0} days ago</target>
+        <note>Date, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysAgo_Paucal">
+        <source>{0} days ago</source>
+        <target state="new">{0} days ago</target>
+        <note>Date, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysAgo_Plural">
+        <source>{0} days ago</source>
+        <target state="new">{0} days ago</target>
+        <note>Date, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysAgo_Singular">
+        <source>{0} day ago</source>
+        <target state="new">{0} day ago</target>
+        <note>Date, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysFromNow">
+        <source>{0} days from now</source>
+        <target state="new">{0} days from now</target>
+        <note>Date, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysFromNow_Dual">
+        <source>{0} days from now</source>
+        <target state="new">{0} days from now</target>
+        <note>Date, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysFromNow_Paucal">
+        <source>{0} days from now</source>
+        <target state="new">{0} days from now</target>
+        <note>Date, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysFromNow_Plural">
+        <source>{0} days from now</source>
+        <target state="new">{0} days from now</target>
+        <note>Date, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleDaysFromNow_Singular">
+        <source>{0} day from now</source>
+        <target state="new">{0} day from now</target>
+        <note>Date, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursAgo">
+        <source>{0} hours ago</source>
+        <target state="new">{0} hours ago</target>
+        <note>Time, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursAgo_Dual">
+        <source>{0} hours ago</source>
+        <target state="new">{0} hours ago</target>
+        <note>Time, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursAgo_Paucal">
+        <source>{0} hours ago</source>
+        <target state="new">{0} hours ago</target>
+        <note>Time, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursAgo_Plural">
+        <source>{0} hours ago</source>
+        <target state="new">{0} hours ago</target>
+        <note>Time, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursAgo_Singular">
+        <source>{0} hour ago</source>
+        <target state="new">{0} hour ago</target>
+        <note>Time, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursFromNow">
+        <source>{0} hours from now</source>
+        <target state="new">{0} hours from now</target>
+        <note>Time, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursFromNow_Dual">
+        <source>{0} hours from now</source>
+        <target state="new">{0} hours from now</target>
+        <note>Time, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursFromNow_Paucal">
+        <source>{0} hours from now</source>
+        <target state="new">{0} hours from now</target>
+        <note>Time, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursFromNow_Plural">
+        <source>{0} hours from now</source>
+        <target state="new">{0} hours from now</target>
+        <note>Time, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleHoursFromNow_Singular">
+        <source>{0} hour from now</source>
+        <target state="new">{0} hour from now</target>
+        <note>Time, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesAgo">
+        <source>{0} minutes ago</source>
+        <target state="new">{0} minutes ago</target>
+        <note>Time, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesAgo_Dual">
+        <source>{0} minutes ago</source>
+        <target state="new">{0} minutes ago</target>
+        <note>Time, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesAgo_Paucal">
+        <source>{0} minutes ago</source>
+        <target state="new">{0} minutes ago</target>
+        <note>Time, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesAgo_Plural">
+        <source>{0} minutes ago</source>
+        <target state="new">{0} minutes ago</target>
+        <note>Time, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesAgo_Singular">
+        <source>{0} minute ago</source>
+        <target state="new">{0} minute ago</target>
+        <note>Time, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesFromNow">
+        <source>{0} minutes from now</source>
+        <target state="new">{0} minutes from now</target>
+        <note>Time, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesFromNow_Dual">
+        <source>{0} minutes from now</source>
+        <target state="new">{0} minutes from now</target>
+        <note>Time, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesFromNow_Paucal">
+        <source>{0} minutes from now</source>
+        <target state="new">{0} minutes from now</target>
+        <note>Time, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesFromNow_Plural">
+        <source>{0} minutes from now</source>
+        <target state="new">{0} minutes from now</target>
+        <note>Time, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMinutesFromNow_Singular">
+        <source>{0} minute from now</source>
+        <target state="new">{0} minute from now</target>
+        <note>Time, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsAgo">
+        <source>{0} months ago</source>
+        <target state="new">{0} months ago</target>
+        <note>Date, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsAgo_Dual">
+        <source>{0} months ago</source>
+        <target state="new">{0} months ago</target>
+        <note>Date, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsAgo_Paucal">
+        <source>{0} months ago</source>
+        <target state="new">{0} months ago</target>
+        <note>Date, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsAgo_Plural">
+        <source>{0} months ago</source>
+        <target state="new">{0} months ago</target>
+        <note>Date, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsAgo_Singular">
+        <source>{0} month ago</source>
+        <target state="new">{0} month ago</target>
+        <note>Date, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsFromNow">
+        <source>{0} months from now</source>
+        <target state="new">{0} months from now</target>
+        <note>Date, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsFromNow_Dual">
+        <source>{0} months from now</source>
+        <target state="new">{0} months from now</target>
+        <note>Date, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsFromNow_Paucal">
+        <source>{0} months from now</source>
+        <target state="new">{0} months from now</target>
+        <note>Date, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsFromNow_Plural">
+        <source>{0} months from now</source>
+        <target state="new">{0} months from now</target>
+        <note>Date, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleMonthsFromNow_Singular">
+        <source>{0} month from now</source>
+        <target state="new">{0} month from now</target>
+        <note>Date, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsAgo">
+        <source>{0} seconds ago</source>
+        <target state="new">{0} seconds ago</target>
+        <note>Time, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsAgo_Dual">
+        <source>{0} seconds ago</source>
+        <target state="new">{0} seconds ago</target>
+        <note>Time, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsAgo_Paucal">
+        <source>{0} seconds ago</source>
+        <target state="new">{0} seconds ago</target>
+        <note>Time, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsAgo_Plural">
+        <source>{0} seconds ago</source>
+        <target state="new">{0} seconds ago</target>
+        <note>Time, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsAgo_Singular">
+        <source>{0} second ago</source>
+        <target state="new">{0} second ago</target>
+        <note>Time, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsFromNow">
+        <source>{0} seconds from now</source>
+        <target state="new">{0} seconds from now</target>
+        <note>Time, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsFromNow_Dual">
+        <source>{0} seconds from now</source>
+        <target state="new">{0} seconds from now</target>
+        <note>Time, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsFromNow_Paucal">
+        <source>{0} seconds from now</source>
+        <target state="new">{0} seconds from now</target>
+        <note>Time, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsFromNow_Plural">
+        <source>{0} seconds from now</source>
+        <target state="new">{0} seconds from now</target>
+        <note>Time, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleSecondsFromNow_Singular">
+        <source>{0} second from now</source>
+        <target state="new">{0} second from now</target>
+        <note>Time, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsAgo">
+        <source>{0} years ago</source>
+        <target state="new">{0} years ago</target>
+        <note>Date, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsAgo_Dual">
+        <source>{0} years ago</source>
+        <target state="new">{0} years ago</target>
+        <note>Date, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsAgo_Paucal">
+        <source>{0} years from ago</source>
+        <target state="new">{0} years from ago</target>
+        <note>Date, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsAgo_Plural">
+        <source>{0} years ago</source>
+        <target state="new">{0} years ago</target>
+        <note>Date, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsAgo_Singular">
+        <source>{0} year ago</source>
+        <target state="new">{0} year ago</target>
+        <note>Date, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsFromNow">
+        <source>{0} years from now</source>
+        <target state="new">{0} years from now</target>
+        <note>Date, number in word form, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsFromNow_Dual">
+        <source>{0} years from now</source>
+        <target state="new">{0} years from now</target>
+        <note>Date, number in word form, dual</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsFromNow_Paucal">
+        <source>{0} years from now</source>
+        <target state="new">{0} years from now</target>
+        <note>Date, number in word form, paucal</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsFromNow_Plural">
+        <source>{0} years from now</source>
+        <target state="new">{0} years from now</target>
+        <note>Date, number in word form, plural</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_MultipleYearsFromNow_Singular">
+        <source>{0} year from now</source>
+        <target state="new">{0} year from now</target>
+        <note>Date, number in word form, singular</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_Never">
+        <source>never</source>
+        <target state="new">never</target>
+        <note>Date/Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_Now">
+        <source>now</source>
+        <target state="new">now</target>
+        <note>Date/Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleDayAgo">
+        <source>yesterday</source>
+        <target state="new">yesterday</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleDayFromNow">
+        <source>tomorrow</source>
+        <target state="new">tomorrow</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleHourAgo">
+        <source>an hour ago</source>
+        <target state="new">an hour ago</target>
+        <note>Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleHourFromNow">
+        <source>an hour from now</source>
+        <target state="new">an hour from now</target>
+        <note>Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleMinuteAgo">
+        <source>a minute ago</source>
+        <target state="new">a minute ago</target>
+        <note>Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleMinuteFromNow">
+        <source>a minute from now</source>
+        <target state="new">a minute from now</target>
+        <note>Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleMonthAgo">
+        <source>one month ago</source>
+        <target state="new">one month ago</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleMonthFromNow">
+        <source>one month from now</source>
+        <target state="new">one month from now</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleSecondAgo">
+        <source>one second ago</source>
+        <target state="new">one second ago</target>
+        <note>Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleSecondFromNow">
+        <source>one second from now</source>
+        <target state="new">one second from now</target>
+        <note>Time</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleYearAgo">
+        <source>one year ago</source>
+        <target state="new">one year ago</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_SingleYearFromNow">
+        <source>one year from now</source>
+        <target state="new">one year from now</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_TwoDaysAgo">
+        <source>two days ago</source>
+        <target state="new">two days ago</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="DateHumanize_TwoDaysFromNow">
+        <source>two days from now</source>
+        <target state="new">two days from now</target>
+        <note>Date</note>
+      </trans-unit>
+      <trans-unit id="E">
+        <source>east</source>
+        <target state="new">east</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="ENE">
+        <source>east-northeast</source>
+        <target state="new">east-northeast</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="ENE_Short">
+        <source>ENE</source>
+        <target state="new">ENE</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="ESE">
+        <source>east-southeast</source>
+        <target state="new">east-southeast</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="ESE_Short">
+        <source>ESE</source>
+        <target state="new">ESE</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="E_Short">
+        <source>E</source>
+        <target state="new">E</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="N">
+        <source>north</source>
+        <target state="new">north</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="NE">
+        <source>northeast</source>
+        <target state="new">northeast</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="NE_Short">
+        <source>NE</source>
+        <target state="new">NE</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="NNE">
+        <source>north-northeast</source>
+        <target state="new">north-northeast</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="NNE_Short">
+        <source>NNE</source>
+        <target state="new">NNE</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="NNW">
+        <source>north-northwest</source>
+        <target state="new">north-northwest</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="NNW_Short">
+        <source>NNW</source>
+        <target state="new">NNW</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="NW">
+        <source>northwest</source>
+        <target state="new">northwest</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="NW_Short">
+        <source>NW</source>
+        <target state="new">NW</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="N_Short">
+        <source>N</source>
+        <target state="new">N</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="S">
+        <source>south</source>
+        <target state="new">south</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="SE">
+        <source>southeast</source>
+        <target state="new">southeast</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="SE_Short">
+        <source>SE</source>
+        <target state="new">SE</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="SSE">
+        <source>south-southeast</source>
+        <target state="new">south-southeast</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="SSE_Short">
+        <source>SSE</source>
+        <target state="new">SSE</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="SSW">
+        <source>south-southwest</source>
+        <target state="new">south-southwest</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="SSW_Short">
+        <source>SSW</source>
+        <target state="new">SSW</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="SW">
+        <source>southwest</source>
+        <target state="new">southwest</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="SW_Short">
+        <source>SW</source>
+        <target state="new">SW</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="S_Short">
+        <source>S</source>
+        <target state="new">S</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_Age">
+        <source>{0} old</source>
+        <target state="new">{0} old</target>
+        <note>Age as in 'three years old'</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleDays">
+        <source>{0} days</source>
+        <target state="new">{0} days</target>
+        <note>Date, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleDays_Dual">
+        <source>{0} days</source>
+        <target state="new">{0} days</target>
+        <note>Date, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleDays_Paucal">
+        <source>{0} days</source>
+        <target state="new">{0} days</target>
+        <note>Date, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleDays_Plural">
+        <source>{0} days</source>
+        <target state="new">{0} days</target>
+        <note>Date, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleDays_Singular">
+        <source>{0} day</source>
+        <target state="new">{0} day</target>
+        <note>Date, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleHours">
+        <source>{0} hours</source>
+        <target state="new">{0} hours</target>
+        <note>Time, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleHours_Dual">
+        <source>{0} hours</source>
+        <target state="new">{0} hours</target>
+        <note>Time, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleHours_Paucal">
+        <source>{0} hours</source>
+        <target state="new">{0} hours</target>
+        <note>Time, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleHours_Plural">
+        <source>{0} hours</source>
+        <target state="new">{0} hours</target>
+        <note>Time, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleHours_Singular">
+        <source>{0} hour</source>
+        <target state="new">{0} hour</target>
+        <note>Time, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMilliseconds">
+        <source>{0} milliseconds</source>
+        <target state="new">{0} milliseconds</target>
+        <note>Time, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMilliseconds_Dual">
+        <source>{0} milliseconds</source>
+        <target state="new">{0} milliseconds</target>
+        <note>Time, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMilliseconds_Paucal">
+        <source>{0} milliseconds</source>
+        <target state="new">{0} milliseconds</target>
+        <note>Time, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMilliseconds_Plural">
+        <source>{0} milliseconds</source>
+        <target state="new">{0} milliseconds</target>
+        <note>Time, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMilliseconds_Singular">
+        <source>{0} millisecond</source>
+        <target state="new">{0} millisecond</target>
+        <note>Time, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMinutes">
+        <source>{0} minutes</source>
+        <target state="new">{0} minutes</target>
+        <note>Date, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMinutes_Dual">
+        <source>{0} minutes</source>
+        <target state="new">{0} minutes</target>
+        <note>Date, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMinutes_Paucal">
+        <source>{0} minutes</source>
+        <target state="new">{0} minutes</target>
+        <note>Date, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMinutes_Plural">
+        <source>{0} minutes</source>
+        <target state="new">{0} minutes</target>
+        <note>Date, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMinutes_Singular">
+        <source>{0} minute</source>
+        <target state="new">{0} minute</target>
+        <note>Date, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMonths">
+        <source>{0} months</source>
+        <target state="new">{0} months</target>
+        <note>Date, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMonths_Dual">
+        <source>{0} months</source>
+        <target state="new">{0} months</target>
+        <note>Date, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMonths_Paucal">
+        <source>{0} months</source>
+        <target state="new">{0} months</target>
+        <note>Date, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMonths_Plural">
+        <source>{0} months</source>
+        <target state="new">{0} months</target>
+        <note>Date, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleMonths_Singular">
+        <source>{0} months</source>
+        <target state="new">{0} months</target>
+        <note>Date, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleSeconds">
+        <source>{0} seconds</source>
+        <target state="new">{0} seconds</target>
+        <note>Time, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleSeconds_Dual">
+        <source>{0} seconds</source>
+        <target state="new">{0} seconds</target>
+        <note>Time, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleSeconds_Paucal">
+        <source>{0} months</source>
+        <target state="new">{0} months</target>
+        <note>Time, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleSeconds_Plural">
+        <source>{0} seconds</source>
+        <target state="new">{0} seconds</target>
+        <note>Time, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleSeconds_Singular">
+        <source>{0} second</source>
+        <target state="new">{0} second</target>
+        <note>Time, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleWeeks">
+        <source>{0} weeks</source>
+        <target state="new">{0} weeks</target>
+        <note>Date, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleWeeks_Dual">
+        <source>{0} weeks</source>
+        <target state="new">{0} weeks</target>
+        <note>Date, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleWeeks_Paucal">
+        <source>{0} weeks</source>
+        <target state="new">{0} weeks</target>
+        <note>Date, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleWeeks_Plural">
+        <source>{0} weeks</source>
+        <target state="new">{0} weeks</target>
+        <note>Date, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleWeeks_Singular">
+        <source>{0} week</source>
+        <target state="new">{0} week</target>
+        <note>Date, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleYears">
+        <source>{0} years</source>
+        <target state="new">{0} years</target>
+        <note>Date, number as words, ambiguous</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleYears_Dual">
+        <source>{0} years</source>
+        <target state="new">{0} years</target>
+        <note>Date, number as words, dual</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleYears_Paucal">
+        <source>{0} years</source>
+        <target state="new">{0} years</target>
+        <note>Date, number as words, paucal</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleYears_Plural">
+        <source>{0} years</source>
+        <target state="new">{0} years</target>
+        <note>Date, number as words, plural</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_MultipleYears_Singular">
+        <source>{0} years</source>
+        <target state="new">{0} years</target>
+        <note>Date, number as words, singular</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleDay">
+        <source>1 day</source>
+        <target state="new">1 day</target>
+        <note>Date single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleDay_Words">
+        <source>one day</source>
+        <target state="new">one day</target>
+        <note>Date words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleHour">
+        <source>1 hour</source>
+        <target state="new">1 hour</target>
+        <note>Time single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleHour_Words">
+        <source>one hour</source>
+        <target state="new">one hour</target>
+        <note>Time words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleMillisecond">
+        <source>1 millisecond</source>
+        <target state="new">1 millisecond</target>
+        <note>Time single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleMillisecond_Words">
+        <source>one millisecond</source>
+        <target state="new">one millisecond</target>
+        <note>Time words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleMinute">
+        <source>1 minute</source>
+        <target state="new">1 minute</target>
+        <note>Time single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleMinute_Words">
+        <source>one minute</source>
+        <target state="new">one minute</target>
+        <note>Time words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleMonth">
+        <source>1 month</source>
+        <target state="new">1 month</target>
+        <note>Date single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleMonth_Words">
+        <source>one month</source>
+        <target state="new">one month</target>
+        <note>Date words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleSecond">
+        <source>1 second</source>
+        <target state="new">1 second</target>
+        <note>Time single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleSecond_Words">
+        <source>one second</source>
+        <target state="new">one second</target>
+        <note>Time words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleWeek">
+        <source>1 week</source>
+        <target state="new">1 week</target>
+        <note>Date single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleWeek_Words">
+        <source>one week</source>
+        <target state="new">one week</target>
+        <note>Date words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleYear">
+        <source>1 year</source>
+        <target state="new">1 year</target>
+        <note>Date single as number</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_SingleYear_Words">
+        <source>one year</source>
+        <target state="new">one year</target>
+        <note>Date words</note>
+      </trans-unit>
+      <trans-unit id="TimeSpanHumanize_Zero">
+        <source>no time</source>
+        <target state="new">no time</target>
+        <note>Time</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Day">
+        <source>d</source>
+        <target state="new">d</target>
+        <note>Time unit: day</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Hour">
+        <source>h</source>
+        <target state="new">h</target>
+        <note>Time unit: hour</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Millisecond">
+        <source>ms</source>
+        <target state="new">ms</target>
+        <note>Time unit: millisecond</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Minute">
+        <source>min</source>
+        <target state="new">min</target>
+        <note>Time unit: minute</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Month">
+        <source>mo</source>
+        <target state="new">mo</target>
+        <note>Time unit: month</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Second">
+        <source>s</source>
+        <target state="new">s</target>
+        <note>Time unit: second</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Week">
+        <source>week</source>
+        <target state="new">week</target>
+        <note>Time unit: week</note>
+      </trans-unit>
+      <trans-unit id="TimeUnit_Year">
+        <source>y</source>
+        <target state="new">y</target>
+        <note>Time unit: year</note>
+      </trans-unit>
+      <trans-unit id="W">
+        <source>west</source>
+        <target state="new">west</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="WNW">
+        <source>west-northwest</source>
+        <target state="new">west-northwest</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="WNW_Short">
+        <source>WNW</source>
+        <target state="new">WNW</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="WSW">
+        <source>west-southwest</source>
+        <target state="new">west-southwest</target>
+        <note>Cardinal Direction</note>
+      </trans-unit>
+      <trans-unit id="WSW_Short">
+        <source>WSW</source>
+        <target state="new">WSW</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+      <trans-unit id="W_Short">
+        <source>W</source>
+        <target state="new">W</target>
+        <note>Cardinal Direction Abbreviation</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

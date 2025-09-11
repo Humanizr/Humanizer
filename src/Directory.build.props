@@ -8,6 +8,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Humanizer.snk</AssemblyOriginatorKeyFile>
     <Nullable>enable</Nullable>
+    <XlfLanguages>af;ar;az;bg;bn-BD;cs;da;de;el;es;fa;fi-FI;fil-PH;fr-BE;fr;he;hr;hu;hy;id;is;it;ja;ko-KR;ku;lb;lt;lv;ms-MY;mt;nb-NO;nb;nl;pl;pt-BR;pt;ro;ru;sk;sl;sr-Latn;sr;sv;th-TH;tr;uk;uz-Cyrl-UZ;uz-Latn-UZ;vi;zh-CN;zh-Hans;zh-Hant</XlfLanguages>
   </PropertyGroup>
   <ItemGroup>
     <Using Include="System.ReadOnlySpan&lt;System.Char&gt;" Alias="CharSpan" />
@@ -17,5 +18,8 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <NuGetAuditMode>all</NuGetAuditMode>
     <NuGetAuditLevel>low</NuGetAuditLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' != 'true'">
+    <UpdateXlfOnBuild>true</UpdateXlfOnBuild>
   </PropertyGroup>
 </Project>
