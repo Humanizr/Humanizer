@@ -9,15 +9,15 @@ public static class TimeSpanHumanizeExtensions
     const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
     const double _daysInAMonth = _daysInAYear / 12;
 
-    static readonly TimeUnit[] _timeUnits = Enum
+    static readonly TimeUnit[] _timeUnits = [.. Enumerable.Reverse(Enum
 #if NET6_0_OR_GREATER
         .GetValues<TimeUnit>()
 #else
         .GetValues(typeof(TimeUnit))
         .Cast<TimeUnit>()
 #endif
-        .Reverse()
-        .ToArray();
+        )
+        ];
 
     /// <summary>
     /// Turns a TimeSpan into a human readable form. E.g. 1 day.
