@@ -1,10 +1,10 @@
-﻿[MemoryDiagnoser(false)]
+[MemoryDiagnoser(false)]
 public class TransformersBenchmarks
 {
     // hard-coded seed ensures the same random strings are generated each time.
     const int RAND_SEED = 17432;
 
-    static readonly char[] _alphabet =
+    static readonly char[] Alphabet =
         Enumerable
             .Repeat((int) ' ', 12)
             .Concat(Enumerable.Range('a', 'z' - 'a'))
@@ -33,7 +33,7 @@ public class TransformersBenchmarks
         var chars = new char[StringLen];
         for (var i = 0; i < StringLen; i++)
         {
-            chars[i] = _alphabet[random.Next(0, _alphabet.Length)];
+            chars[i] = Alphabet[random.Next(0, Alphabet.Length)];
         }
 
         input = new(chars);

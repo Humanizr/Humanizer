@@ -5,12 +5,12 @@ class ToTitleCase : ICulturedStringTransformer
     public string Transform(string input) =>
         Transform(input, null);
 
-    static readonly Regex regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+    static readonly Regex Regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
 
     public string Transform(string input, CultureInfo? culture)
     {
         culture ??= CultureInfo.CurrentCulture;
-        var matches = regex.Matches(input);
+        var matches = Regex.Matches(input);
         var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;
         foreach (Match word in matches)

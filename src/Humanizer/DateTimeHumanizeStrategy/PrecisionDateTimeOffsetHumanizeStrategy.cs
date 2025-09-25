@@ -5,18 +5,18 @@ namespace Humanizer;
 /// </summary>
 public class PrecisionDateTimeOffsetHumanizeStrategy : IDateTimeOffsetHumanizeStrategy
 {
-    readonly double _precision;
+    readonly double precision;
 
     /// <summary>
     /// Constructs a precision-based calculator for distance of time with default precision 0.75.
     /// </summary>
     /// <param name="precision">precision of approximation, if not provided  0.75 will be used as a default precision.</param>
     public PrecisionDateTimeOffsetHumanizeStrategy(double precision = .75) =>
-        _precision = precision;
+        this.precision = precision;
 
     /// <summary>
     /// Returns localized &amp; humanized distance of time between two dates; given a specific precision.
     /// </summary>
     public string Humanize(DateTimeOffset input, DateTimeOffset comparisonBase, CultureInfo? culture) =>
-        DateTimeHumanizeAlgorithms.PrecisionHumanize(input.UtcDateTime, comparisonBase.UtcDateTime, _precision, culture);
+        DateTimeHumanizeAlgorithms.PrecisionHumanize(input.UtcDateTime, comparisonBase.UtcDateTime, precision, culture);
 }
