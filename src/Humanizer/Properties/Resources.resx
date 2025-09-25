@@ -374,7 +374,7 @@
     <comment>Date, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>{0} years from ago</value>
+    <value>{0} years ago</value>
     <comment>Date, number in word form, paucal</comment>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
@@ -686,7 +686,7 @@
     <comment>Time, number as words, dual</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
-    <value>{0} months</value>
+    <value>{0} seconds</value>
     <comment>Time, number as words, paucal</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
