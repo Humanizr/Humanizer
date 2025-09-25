@@ -33,11 +33,23 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
 
     public override int Convert(string words)
     {
+        if (!TryConvert(words, out var result, out var unrecognizedword))
+            throw new ArgumentException($"Unrecognized number word: {unrecognizedword}");
+
+        return result;
+    }
+
+    public override bool TryConvert(string words, out int result) => TryConvert(words, out result, out _);
+
+    public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
+    {
         if (string.IsNullOrWhiteSpace(words))
             throw new ArgumentException("Input words cannot be empty.");
 
+        unrecognizedWord = null;
+
         words = words.Replace(",", "")
-                     .Replace(" and ", " ")   
+                     .Replace(" and ", " ")
                      .ToLowerInvariant()
                      .Trim();
 
@@ -50,19 +62,33 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
         words = words.Replace("-", " ");
 
         if (int.TryParse(words, out var numericValue))
-            return isNegative ? -numericValue : numericValue;
+        {
+            parsedValue = isNegative ? -numericValue : numericValue;
+            return true;
+        }
 
         if (OrdinalsMap.TryGetValue(words, out var ordinalValue))
-            return isNegative ? -ordinalValue : ordinalValue;
+        {
+            parsedValue = isNegative ? -ordinalValue : ordinalValue;
+            return true;
+        }
+        if (TryConvertWordsToNumber(words, out var numberValue, out var unrecognizedNumberWord))
+        {
+            parsedValue = isNegative ? -numberValue : numberValue;
+            return true;
+        }
 
-        return isNegative ? -ConvertWordsToNumber(words) : ConvertWordsToNumber(words);
+        unrecognizedWord = unrecognizedNumberWord;
+        parsedValue = default;
+        return false;
     }
 
-
-    private int ConvertWordsToNumber(string words)
+    private bool TryConvertWordsToNumber(string words, out int result, out string? unrecognizedWord)
     {
         var wordsArray = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        int result = 0, current = 0;
+        result = 0;
+        unrecognizedWord = null;
+        var current = 0;
         var hasOrdinal = false;
 
         foreach (var word in wordsArray)
@@ -75,10 +101,14 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
             }
 
             if (!NumbersMap.TryGetValue(word, out var value))
-                throw new ArgumentException($"Unrecognized number word: {word}");
+            {
+                unrecognizedWord = word;
+                return false;
+            }
 
             if (value == 100)
                 current = (current == 0 ? 1 : current) * 100;
+
             else if (value >= 1000)
             {
                 result += (current == 0 ? 1 : current) * value;
@@ -88,6 +118,9 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
                 current += value;
         }
 
-        return hasOrdinal ? result : result + current;
+        if (!hasOrdinal)
+            result += current;
+
+        return true;
     }
 }
