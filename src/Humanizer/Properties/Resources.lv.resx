@@ -117,56 +117,314 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>pirms sekundes</value>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>pirms {0} dienām</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>pirms {0} sekundēm</value>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>pirms {0} dienām</value>
   </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>pirms minūtes</value>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>pirms {0} dienām</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>pirms {0} minūtēm</value>
+  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
+    <value>pirms {0} dienas</value>
   </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>pirms stundas</value>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>pēc {0} dienām</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>pēc {0} dienām</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>pēc {0} dienām</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
+    <value>pēc {0} dienas</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>pirms {0} stundām</value>
   </data>
-  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
-    <value>vakardien</value>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>pirms {0} stundām</value>
   </data>
-  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>pirms {0} dienām</value>
+  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
+    <value>pirms {0} stundām</value>
   </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>pirms mēneša</value>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>pirms {0} stundām</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
+    <value>pirms {0} stundas</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>pēc {0} stundām</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>pēc {0} stundām</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
+    <value>pēc {0} stundām</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>pēc {0} stundām</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
+    <value>pēc {0} stundas</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>pirms {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>pirms {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
+    <value>pirms {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>pirms {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
+    <value>pirms {0} minūtes</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>pēc {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>pēc {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
+    <value>pēc {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>pēc {0} minūtēm</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
+    <value>pēc {0} minūtes</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>pirms {0} mēnešiem</value>
   </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>pirms gada</value>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>pirms {0} mēnešiem</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
+    <value>pirms {0} mēnešiem</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>pirms {0} mēnešiem</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
+    <value>pirms {0} mēneša</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>pēc {0} mēnešiem</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>pēc {0} mēnešiem</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
+    <value>pēc {0} mēnešiem</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>pēc {0} mēnešiem</value>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
+    <value>pēc {0} mēneša</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>pirms {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>pirms {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
+    <value>pirms {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>pirms {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
+    <value>pirms {0} sekundes</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>pēc {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>pēc {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
+    <value>pēc {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>pēc {0} sekundēm</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
+    <value>pēc {0} sekundes</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>pirms {0} gadiem</value>
   </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>pirms {0} gadiem</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
+    <value>pirms {0} gadiem</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>pirms {0} gadiem</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
+    <value>pirms {0} gada</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>pēc {0} gadiem</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>pēc {0} gadiem</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
+    <value>pēc {0} gadiem</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>pēc {0} gadiem</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
+    <value>pēc {0} gada</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nekad</value>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>tagad</value>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>vakardien</value>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>rītdien</value>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>pirms stundas</value>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>pēc stundas</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>pirms minūtes</value>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>pēc minūtēs</value>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>pirms mēneša</value>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>pēc mēneša</value>
+  </data>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>pirms sekundes</value>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>pēc sekundes</value>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>pirms gada</value>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>pēc gada</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} dienas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>{0} dienas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} dienas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
+    <value>{0} diena</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} stundas</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>{0} stundas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
+    <value>{0} stundas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} stundas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
+    <value>{0} stunda</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
     <value>{0} milisekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>{0} milisekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
+    <value>{0} milisekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} milisekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>{0} milisekunde</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
     <value>{0} minūtes</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>{0} minūtes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
+    <value>{0} minūtes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} minūtes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} minūte</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} mēneši</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
     <value>{0} sekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>{0} sekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
+    <value>{0} sekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} sekundes</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>{0} sekunde</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} nedēļas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>{0} nedēļas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
+    <value>{0} nedēļas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} nedēļas</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>{0} nedēļa</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} gadi</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 diena</value>
@@ -180,277 +438,19 @@
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 minūte</value>
   </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 mēnesis</value>
+  </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>1 sekunde</value>
-  </data>
-  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>bez laika</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
-    <value>{0} nedēļas</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>1 nedēļa</value>
   </data>
-  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>pēc {0} dienām</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>pēc {0} stundām</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>pēc {0} minūtēm</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>pēc {0} mēnešiem</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>pēc {0} sekundēm</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>pēc {0} gadiem</value>
-  </data>
-  <data name="DateHumanize_Now" xml:space="preserve">
-    <value>tagad</value>
-  </data>
-  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
-    <value>rītdien</value>
-  </data>
-  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>pēc stundas</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>pēc minūtēs</value>
-  </data>
-  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>pēc mēneša</value>
-  </data>
-  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>pēc sekundes</value>
-  </data>
-  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>pēc gada</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
-    <value>pēc {0} stundām</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
-    <value>pēc {0} minūtēm</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
-    <value>pirms {0} sekundēm</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
-    <value>pēc {0} sekundēm</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
-    <value>pēc {0} gadiem</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
-    <value>{0} dienas</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
-    <value>{0} dienas</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
-    <value>{0} stundas</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>{0} milisekundes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
-    <value>{0} minūtes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
-    <value>{0} minūtes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
-    <value>{0} sekundes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} milisekundes</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
-    <value>pirms {0} dienām</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
-    <value>pirms {0} dienām</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
-    <value>pirms {0} dienas</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
-    <value>pēc {0} dienām</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
-    <value>pēc {0} dienām</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
-    <value>pēc {0} dienas</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
-    <value>pirms {0} stundām</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
-    <value>pirms {0} stundām</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
-    <value>pirms {0} stundas</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
-    <value>pēc {0} stundām</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
-    <value>pēc {0} stundas</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
-    <value>pirms {0} minūtēm</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
-    <value>pirms {0} minūtēm</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
-    <value>pirms {0} minūtes</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
-    <value>pēc {0} minūtēm</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>pēc {0} minūtes</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
-    <value>pirms {0} mēnešiem</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
-    <value>pirms {0} mēnešiem</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
-    <value>pirms {0} mēneša</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
-    <value>pēc {0} mēnešiem</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
-    <value>pēc {0} mēnešiem</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
-    <value>pēc {0} mēneša</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
-    <value>pirms {0} sekundēm</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
-    <value>pirms {0} sekundes</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
-    <value>pēc {0} sekundēm</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
-    <value>pēc {0} sekundes</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
-    <value>pirms {0} gadiem</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
-    <value>pirms {0} gadiem</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
-    <value>pirms {0} gada</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
-    <value>pēc {0} gadiem</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
-    <value>pēc {0} gada</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
-    <value>{0} diena</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
-    <value>{0} stundas</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
-    <value>{0} stunda</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
-    <value>{0} milisekunde</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
-    <value>{0} minūte</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
-    <value>{0} sekundes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
-    <value>{0} sekunde</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
-    <value>{0} nedēļas</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
-    <value>{0} nedēļas</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>{0} nedēļa</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
-    <value>{0} mēneši</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
-    <value>{0} gadi</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>1 mēnesis</value>
-  </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 gads</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
-    <value>pirms {0} stundām</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
-    <value>pēc {0} stundām</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
-    <value>pirms {0} minūtēm</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
-    <value>pēc {0} minūtēm</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
-    <value>pirms {0} mēnešiem</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
-    <value>pēc {0} mēnešiem</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
-    <value>pirms {0} sekundēm</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
-    <value>pēc {0} sekundēm</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>pirms {0} gadiem</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
-    <value>pēc {0} gadiem</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
-    <value>{0} stundas</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
-    <value>{0} milisekundes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
-    <value>{0} minūtes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
-    <value>{0} sekundes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
-    <value>{0} nedēļas</value>
-  </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>nekad</value>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>bez laika</value>
   </data>
 </root>

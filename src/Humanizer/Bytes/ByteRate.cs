@@ -1,28 +1,22 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 /// <summary>
 /// Class to hold a ByteSize and a measurement interval, for the purpose of calculating the rate of transfer
 /// </summary>
-public class ByteRate
+/// <remarks>
+/// Create a ByteRate with given quantity of bytes across an interval
+/// </remarks>
+public class ByteRate(ByteSize size, TimeSpan interval)
 {
     /// <summary>
     /// Quantity of bytes
     /// </summary>
-    public ByteSize Size { get; }
+    public ByteSize Size { get; } = size;
 
     /// <summary>
     /// Interval that bytes were transferred in
     /// </summary>
-    public TimeSpan Interval { get; }
-
-    /// <summary>
-    /// Create a ByteRate with given quantity of bytes across an interval
-    /// </summary>
-    public ByteRate(ByteSize size, TimeSpan interval)
-    {
-        this.Size = size;
-        this.Interval = interval;
-    }
+    public TimeSpan Interval { get; } = interval;
 
     /// <summary>
     /// Calculate rate for the quantity of bytes and interval defined by this instance

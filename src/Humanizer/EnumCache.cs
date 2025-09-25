@@ -5,11 +5,11 @@ namespace Humanizer;
 static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>
     where T : struct, Enum
 {
-    static readonly (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) info = CreateInfo();
+    static readonly (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) Info = CreateInfo();
 
     private static (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
-        var values = EnumPolyfill.GetValues<T>().ToFrozenSet();
+        var values = Enum.GetValues<T>().ToFrozenSet();
         var type = typeof(T);
         var zero = (T)Convert.ChangeType(Enum.ToObject(type, 0), type);
         var humanized = new Dictionary<T, string>();
@@ -31,15 +31,15 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     }
 
     public static (T Zero, FrozenDictionary<T, string> Humanized, FrozenSet<T> Values) GetInfo() =>
-        (info.Zero, info.Humanized, info.Values);
+        (Info.Zero, Info.Humanized, Info.Values);
 
     public static Dictionary<string, T> GetDehumanized() =>
-        info.Dehumanized;
+        Info.Dehumanized;
 
     public static bool TreatAsFlags(T input)
     {
         var type = typeof(T);
-        if (!info.IsBitFieldEnum)
+        if (!Info.IsBitFieldEnum)
         {
             return false;
         }

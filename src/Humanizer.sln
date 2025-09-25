@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31223.326
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11005.162
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer.Tests", "Humanizer.Tests\Humanizer.Tests.csproj", "{F886A8DA-3EFC-4A89-91DD-06FAF13DA172}"
 EndProject
@@ -9,17 +9,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Humanizer", "Humanizer\Huma
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4779A7C9-9ED8-4146-A158-FBE0B1BE09D9}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
 		Directory.build.props = Directory.build.props
+		global.json = global.json
 		..\NuSpecs\Humanizer.Core.nuspec = ..\NuSpecs\Humanizer.Core.nuspec
 		..\NuSpecs\Humanizer.nuspec = ..\NuSpecs\Humanizer.nuspec
 		..\license.txt = ..\license.txt
-		global.json = global.json
+		nuget.config = nuget.config
 		..\readme.md = ..\readme.md
 		..\release_notes.md = ..\release_notes.md
 		..\version.json = ..\version.json
-		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{97AAE24D-0488-42AE-A585-86D882F23D5F}"
@@ -36,16 +37,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.ar.nuspec = ..\NuSpecs\Humanizer.Core.ar.nuspec
 		..\NuSpecs\Humanizer.Core.az.nuspec = ..\NuSpecs\Humanizer.Core.az.nuspec
 		..\NuSpecs\Humanizer.Core.bg.nuspec = ..\NuSpecs\Humanizer.Core.bg.nuspec
-		..\NuSpecs\Humanizer.Core.bn-BD.nuspec = ..\NuSpecs\Humanizer.Core.bn-BD.nuspec
+		..\NuSpecs\Humanizer.Core.bn.nuspec = ..\NuSpecs\Humanizer.Core.bn.nuspec
 		..\NuSpecs\Humanizer.Core.cs.nuspec = ..\NuSpecs\Humanizer.Core.cs.nuspec
 		..\NuSpecs\Humanizer.Core.da.nuspec = ..\NuSpecs\Humanizer.Core.da.nuspec
 		..\NuSpecs\Humanizer.Core.de.nuspec = ..\NuSpecs\Humanizer.Core.de.nuspec
 		..\NuSpecs\Humanizer.Core.el.nuspec = ..\NuSpecs\Humanizer.Core.el.nuspec
 		..\NuSpecs\Humanizer.Core.es.nuspec = ..\NuSpecs\Humanizer.Core.es.nuspec
 		..\NuSpecs\Humanizer.Core.fa.nuspec = ..\NuSpecs\Humanizer.Core.fa.nuspec
-		..\NuSpecs\Humanizer.Core.fi-FI.nuspec = ..\NuSpecs\Humanizer.Core.fi-FI.nuspec
-		..\NuSpecs\Humanizer.Core.fil-PH.nuspec = ..\NuSpecs\Humanizer.Core.fil-PH.nuspec
-		..\NuSpecs\Humanizer.Core.fr-BE.nuspec = ..\NuSpecs\Humanizer.Core.fr-BE.nuspec
+		..\NuSpecs\Humanizer.Core.fi.nuspec = ..\NuSpecs\Humanizer.Core.fi.nuspec
+		..\NuSpecs\Humanizer.Core.fil.nuspec = ..\NuSpecs\Humanizer.Core.fil.nuspec
 		..\NuSpecs\Humanizer.Core.fr.nuspec = ..\NuSpecs\Humanizer.Core.fr.nuspec
 		..\NuSpecs\Humanizer.Core.he.nuspec = ..\NuSpecs\Humanizer.Core.he.nuspec
 		..\NuSpecs\Humanizer.Core.hr.nuspec = ..\NuSpecs\Humanizer.Core.hr.nuspec
@@ -55,15 +55,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.is.nuspec = ..\NuSpecs\Humanizer.Core.is.nuspec
 		..\NuSpecs\Humanizer.Core.it.nuspec = ..\NuSpecs\Humanizer.Core.it.nuspec
 		..\NuSpecs\Humanizer.Core.ja.nuspec = ..\NuSpecs\Humanizer.Core.ja.nuspec
+		..\NuSpecs\Humanizer.Core.ko.nuspec = ..\NuSpecs\Humanizer.Core.ko.nuspec
 		..\NuSpecs\Humanizer.Core.ku.nuspec = ..\NuSpecs\Humanizer.Core.ku.nuspec
 		..\NuSpecs\Humanizer.Core.lb.nuspec = ..\NuSpecs\Humanizer.Core.lb.nuspec
-		..\NuSpecs\Humanizer.Core.lv.nuspec = ..\NuSpecs\Humanizer.Core.lv.nuspec
 		..\NuSpecs\Humanizer.Core.lt.nuspec = ..\NuSpecs\Humanizer.Core.lt.nuspec
-		..\NuSpecs\Humanizer.Core.nb-NO.nuspec = ..\NuSpecs\Humanizer.Core.nb-NO.nuspec
+		..\NuSpecs\Humanizer.Core.lv.nuspec = ..\NuSpecs\Humanizer.Core.lv.nuspec
+		..\NuSpecs\Humanizer.Core.ms.nuspec = ..\NuSpecs\Humanizer.Core.ms.nuspec
+		..\NuSpecs\Humanizer.Core.mt.nuspec = ..\NuSpecs\Humanizer.Core.mt.nuspec
 		..\NuSpecs\Humanizer.Core.nb.nuspec = ..\NuSpecs\Humanizer.Core.nb.nuspec
 		..\NuSpecs\Humanizer.Core.nl.nuspec = ..\NuSpecs\Humanizer.Core.nl.nuspec
 		..\NuSpecs\Humanizer.Core.nuspec = ..\NuSpecs\Humanizer.Core.nuspec
 		..\NuSpecs\Humanizer.Core.pl.nuspec = ..\NuSpecs\Humanizer.Core.pl.nuspec
+		..\NuSpecs\Humanizer.Core.pt-BR.nuspec = ..\NuSpecs\Humanizer.Core.pt-BR.nuspec
 		..\NuSpecs\Humanizer.Core.pt.nuspec = ..\NuSpecs\Humanizer.Core.pt.nuspec
 		..\NuSpecs\Humanizer.Core.ro.nuspec = ..\NuSpecs\Humanizer.Core.ro.nuspec
 		..\NuSpecs\Humanizer.Core.ru.nuspec = ..\NuSpecs\Humanizer.Core.ru.nuspec
@@ -72,7 +75,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpecs", "NuSpecs", "{AA44
 		..\NuSpecs\Humanizer.Core.sr-Latn.nuspec = ..\NuSpecs\Humanizer.Core.sr-Latn.nuspec
 		..\NuSpecs\Humanizer.Core.sr.nuspec = ..\NuSpecs\Humanizer.Core.sr.nuspec
 		..\NuSpecs\Humanizer.Core.sv.nuspec = ..\NuSpecs\Humanizer.Core.sv.nuspec
-		..\NuSpecs\Humanizer.Core.ta.nuspec.unused = ..\NuSpecs\Humanizer.Core.ta.nuspec.unused
+		..\NuSpecs\Humanizer.Core.th.nuspec = ..\NuSpecs\Humanizer.Core.th.nuspec
+		..\NuSpecs\Humanizer.Core.ta.nuspec = ..\NuSpecs\Humanizer.Core.ta.nuspec
 		..\NuSpecs\Humanizer.Core.tr.nuspec = ..\NuSpecs\Humanizer.Core.tr.nuspec
 		..\NuSpecs\Humanizer.Core.uk.nuspec = ..\NuSpecs\Humanizer.Core.uk.nuspec
 		..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec = ..\NuSpecs\Humanizer.Core.uz-Cyrl-UZ.nuspec

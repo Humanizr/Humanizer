@@ -5,7 +5,7 @@ class RomanianOrdinalNumberConverter
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
     /// </summary>
-    readonly Dictionary<int, string> _ordinalsUnder10 = new()
+    readonly Dictionary<int, string> ordinalsUnder10 = new()
     {
         {
             1, "primul|prima"
@@ -36,10 +36,10 @@ class RomanianOrdinalNumberConverter
         },
     };
 
-    readonly string _femininePrefix = "a";
-    readonly string _masculinePrefix = "al";
-    readonly string _feminineSuffix = "a";
-    readonly string _masculineSuffix = "lea";
+    readonly string femininePrefix = "a";
+    readonly string masculinePrefix = "al";
+    readonly string feminineSuffix = "a";
+    readonly string masculineSuffix = "lea";
 
     public string Convert(int number, GrammaticalGender gender)
     {
@@ -52,15 +52,15 @@ class RomanianOrdinalNumberConverter
         if (number == 1)
         {
             // no prefixes for primul/prima
-            return GetPartByGender(_ordinalsUnder10[number], gender);
+            return GetPartByGender(ordinalsUnder10[number], gender);
         }
 
         if (number <= 9)
         {
             // units ordinals, 2 to 9, are totally different than the rest: treat them as a distinct case
             return string.Format("{0} {1}",
-                gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
-                GetPartByGender(_ordinalsUnder10[number], gender)
+                gender == GrammaticalGender.Feminine ? femininePrefix : masculinePrefix,
+                GetPartByGender(ordinalsUnder10[number], gender)
             );
         }
 
@@ -95,7 +95,7 @@ class RomanianOrdinalNumberConverter
             }
         }
 
-        var customMasculineSuffix = _masculineSuffix;
+        var customMasculineSuffix = masculineSuffix;
         if (words.EndsWith("milion"))
         {
             if (gender == GrammaticalGender.Feminine)
@@ -104,14 +104,14 @@ class RomanianOrdinalNumberConverter
             }
             else
             {
-                customMasculineSuffix = "u" + _masculineSuffix;
+                customMasculineSuffix = "u" + masculineSuffix;
             }
         }
         else if (words.EndsWith("miliard"))
         {
             if (gender == GrammaticalGender.Masculine)
             {
-                customMasculineSuffix = "u" + _masculineSuffix;
+                customMasculineSuffix = "u" + masculineSuffix;
             }
         }
 
@@ -126,9 +126,9 @@ class RomanianOrdinalNumberConverter
         }
 
         return string.Format("{0} {1}{2}",
-            gender == GrammaticalGender.Feminine ? _femininePrefix : _masculinePrefix,
+            gender == GrammaticalGender.Feminine ? femininePrefix : masculinePrefix,
             words,
-            gender == GrammaticalGender.Feminine ? _feminineSuffix : customMasculineSuffix
+            gender == GrammaticalGender.Feminine ? feminineSuffix : customMasculineSuffix
         );
     }
 

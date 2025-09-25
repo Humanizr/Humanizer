@@ -5,19 +5,11 @@ namespace Humanizer;
 /// </summary>
 public static class TimeSpanHumanizeExtensions
 {
-    const int _daysInAWeek = 7;
-    const double _daysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
-    const double _daysInAMonth = _daysInAYear / 12;
+    const int DaysInAWeek = 7;
+    const double DaysInAYear = 365.2425; // see https://en.wikipedia.org/wiki/Gregorian_calendar
+    const double DaysInAMonth = DaysInAYear / 12;
 
-    static readonly TimeUnit[] _timeUnits = Enum
-#if NET6_0_OR_GREATER
-        .GetValues<TimeUnit>()
-#else
-        .GetValues(typeof(TimeUnit))
-        .Cast<TimeUnit>()
-#endif
-        .Reverse()
-        .ToArray();
+    static readonly TimeUnit[] TimeUnits = [.. Enumerable.Reverse(Enum.GetValues<TimeUnit>())];
 
     /// <summary>
     /// Turns a TimeSpan into a human readable form. E.g. 1 day.
@@ -71,7 +63,7 @@ public static class TimeSpanHumanizeExtensions
         var firstValueFound = false;
         var timeParts = new List<string?>();
 
-        foreach (var timeUnit in _timeUnits)
+        foreach (var timeUnit in TimeUnits)
         {
             var timePart = GetTimeUnitPart(timeUnit, timespan, maxUnit, minUnit, cultureFormatter, toWords);
 
@@ -125,21 +117,21 @@ public static class TimeSpanHumanizeExtensions
     {
         if (isTimeUnitToGetTheMaximumTimeUnit)
         {
-            return (int) (timespan.Days / _daysInAMonth);
+            return (int) (timespan.Days / DaysInAMonth);
         }
 
-        var remainingDays = timespan.Days % _daysInAYear;
-        return (int) (remainingDays / _daysInAMonth);
+        var remainingDays = timespan.Days % DaysInAYear;
+        return (int) (remainingDays / DaysInAMonth);
     }
 
     static int GetSpecialCaseYearAsInteger(TimeSpan timespan) =>
-        (int) (timespan.Days / _daysInAYear);
+        (int) (timespan.Days / DaysInAYear);
 
     static int GetSpecialCaseWeeksAsInteger(TimeSpan timespan, bool isTimeUnitToGetTheMaximumTimeUnit)
     {
-        if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < _daysInAMonth)
+        if (isTimeUnitToGetTheMaximumTimeUnit || timespan.Days < DaysInAMonth)
         {
-            return timespan.Days / _daysInAWeek;
+            return timespan.Days / DaysInAWeek;
         }
 
         return 0;
@@ -152,13 +144,13 @@ public static class TimeSpanHumanizeExtensions
             return timespan.Days;
         }
 
-        if (timespan.Days < _daysInAMonth || maximumTimeUnit == TimeUnit.Week)
+        if (timespan.Days < DaysInAMonth || maximumTimeUnit == TimeUnit.Week)
         {
-            var remainingDays = timespan.Days % _daysInAWeek;
+            var remainingDays = timespan.Days % DaysInAWeek;
             return remainingDays;
         }
 
-        return (int) (timespan.Days % _daysInAMonth);
+        return (int) (timespan.Days % DaysInAMonth);
     }
 
     static int GetNormalCaseTimeAsInteger(int timeNumberOfUnits, double totalTimeNumberOfUnits, bool isTimeUnitToGetTheMaximumTimeUnit)

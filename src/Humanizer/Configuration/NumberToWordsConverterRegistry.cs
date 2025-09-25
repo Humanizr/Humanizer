@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter>
 {
@@ -26,7 +26,7 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("de", new GermanNumberToWordsConverter());
         Register("de-CH", new GermanSwissLiechtensteinNumberToWordsConverter());
         Register("de-LI", new GermanSwissLiechtensteinNumberToWordsConverter());
-        Register("bn-BD", new BanglaNumberToWordsConverter());
+        Register("bn", new BanglaNumberToWordsConverter());
         Register("tr", new TurkishNumberToWordConverter());
         Register("is", new IcelandicNumberToWordsConverter());
         Register("it", new ItalianNumberToWordsConverter());
@@ -42,15 +42,17 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("nb", new NorwegianBokmalNumberToWordsConverter());
         Register("vi", new VietnameseNumberToWordsConverter());
         Register("zh-CN", new ChineseNumberToWordsConverter());
+        Register("zh-Hans", new ChineseNumberToWordsConverter());
+        Register("zh-Hant", new ChineseNumberToWordsConverter());
         Register("bg", new BulgarianNumberToWordsConverter());
         Register("hy", new ArmenianNumberToWordsConverter());
         Register("az", new AzerbaijaniNumberToWordsConverter());
         Register("ja", new JapaneseNumberToWordsConverter());
         Register("ku", new CentralKurdishNumberToWordsConverter());
         Register("el", new GreekNumberToWordsConverter());
-        Register("th-TH", new ThaiNumberToWordsConverter());
+        Register("th", new ThaiNumberToWordsConverter());
         Register("lv", new LatvianNumberToWordsConverter());
-        Register("ko-KR", new KoreanNumberToWordsConverter());
+        Register("ko", new KoreanNumberToWordsConverter());
         Register("en-IN", new IndianNumberToWordsConverter());
         Register("lt", new LithuanianNumberToWordsConverter());
         Register("lb", new LuxembourgishNumberToWordsConverter());

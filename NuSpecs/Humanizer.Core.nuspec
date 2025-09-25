@@ -15,14 +15,14 @@
     <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="System.Collections.Immutable" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Collections.Immutable" version="9.0.9" exclude="Build,Analyzers" />
         <dependency id="System.ComponentModel.Annotations" version="5.0.0" exclude="Build,Analyzers" />
-        <dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
+        <dependency id="System.Memory" version="4.6.3" exclude="Build,Analyzers" />
       </group>
       <group targetFramework="net48">
-        <dependency id="System.Collections.Immutable" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Collections.Immutable" version="9.0.9" exclude="Build,Analyzers" />
         <dependency id="System.ComponentModel.Annotations" version="5.0.0" exclude="Build,Analyzers" />
-        <dependency id="System.Memory" version="4.5.5" exclude="Build,Analyzers" />
+        <dependency id="System.Memory" version="4.6.3" exclude="Build,Analyzers" />
       </group>
       <group targetFramework="net8.0" />
     </dependencies>
