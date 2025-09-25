@@ -32,6 +32,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     # Add any setup steps before running the `github/codeql-action/init` action.
     # This includes steps like installing compilers or runtimes (`actions/setup-node`
@@ -47,8 +49,15 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: csharp
-        build-mode: autobuild
+        build-mode: manual
 
+    - name: Build
+      working-directory: src
+      shell: pwsh
+      run: |
+        dotnet --info
+        dotnet build -c Release --nologo --verbosity minimal
+         
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
