@@ -223,7 +223,7 @@ public static class MetricNumeralExtensions
     /// <returns>A number build from a Metric representation</returns>
     static double BuildMetricNumber(string input, char last)
     {
-        double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3;
+        double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3.0;
         var number = double.Parse(input.Remove(input.Length - 1));
         var exponent = Math.Pow(10, Symbols[0]
             .Contains(last)
