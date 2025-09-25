@@ -1,26 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata minClientVersion="2.12">
-    <id>Humanizer.Core.ko-KR</id>
+    <id>Humanizer.Core.th</id>
     <version>$version$</version>
-    <title>Humanizer Locale (ko-KR)</title>
+    <title>Humanizer Locale (th-TH)</title>
     <authors>Mehdi Khalili, Claire Novotny</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
     <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Humanizer Locale Korean (South Korea) (ko-KR)</description>
+    <description>Humanizer Locale Thai (Thailand) (th)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
-    <language>ko-KR</language>
+    <language>th</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\netstandard2.0\ko-KR\*.*" target="lib\netstandard2.0\ko-KR" />
-    <file src="Humanizer\bin\Release\net8.0\ko-KR\*.*" target="lib\net8.0\ko-KR" />
-    <file src="Humanizer\bin\Release\net48\ko-KR\*.*" target="lib\net48\ko-KR" />
-    <file src="Humanizer\bin\Release\net10.0\ko-KR\*.*" target="lib\net10.0\ko-KR" />
+    <file src="Humanizer\bin\Release\netstandard2.0\th\*.*" target="lib\netstandard2.0\th" />
+    <file src="Humanizer\bin\Release\net8.0\th\*.*" target="lib\net8.0\th" />
+    <file src="Humanizer\bin\Release\net48\th\*.*" target="lib\net48\th" />
+    <file src="Humanizer\bin\Release\net10.0\th\*.*" target="lib\net10.0\th" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

@@ -1,10 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:element name="root" msdata:IsDataSet="true">
-      
-    </xsd:element>
+    <xsd:element name="root" msdata:IsDataSet="true"></xsd:element>
   </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -57,14 +54,14 @@
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>viru{1} {0} Deeg</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>virgëschter</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
     <value>virun engem Dag</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>a{1} {0} Deeg</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
-    <value>virgëschter</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
     <value>iwwermuer</value>

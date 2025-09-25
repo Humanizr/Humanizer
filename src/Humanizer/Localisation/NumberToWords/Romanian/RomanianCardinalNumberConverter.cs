@@ -1,11 +1,11 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class RomanianCardinalNumberConverter
 {
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9 for 9.
     /// </summary>
-    readonly string[] _units =
+    readonly string[] units =
     [
         string.Empty,
         "unu|una|unu",
@@ -22,7 +22,7 @@ class RomanianCardinalNumberConverter
     /// <summary>
     /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
     /// </summary>
-    readonly string[] _teensUnder20NumberToText =
+    readonly string[] teensUnder20NumberToText =
     [
         "zece",
         "unsprezece",
@@ -39,7 +39,7 @@ class RomanianCardinalNumberConverter
     /// <summary>
     /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
     /// </summary>
-    readonly string[] _tensOver20NumberToText =
+    readonly string[] tensOver20NumberToText =
     [
         string.Empty,
         string.Empty,
@@ -53,12 +53,12 @@ class RomanianCardinalNumberConverter
         "nouăzeci"
     ];
 
-    readonly string _feminineSingular = "o";
-    readonly string _masculineSingular = "un";
+    readonly string feminineSingular = "o";
+    readonly string masculineSingular = "un";
 
-    readonly string _joinGroups = "și";
-    readonly string _joinAbove20 = "de";
-    readonly string _minusSign = "minus";
+    readonly string joinGroups = "și";
+    readonly string joinAbove20 = "de";
+    readonly string minusSign = "minus";
 
     /// <summary>
     /// Enumerates sets of three-digits having distinct conversion to text.
@@ -125,7 +125,7 @@ class RomanianCardinalNumberConverter
 
         if (prefixMinusSign)
         {
-            words = _minusSign + " " + words;
+            words = minusSign + " " + words;
         }
 
         // remove extra spaces
@@ -201,22 +201,22 @@ class RomanianCardinalNumberConverter
         words += HundredsToText(hundreds);
 
         // append text for tens, only those from twenty upward
-        words += (tens >= 2 ? " " : string.Empty) + _tensOver20NumberToText[tens];
+        words += (tens >= 2 ? " " : string.Empty) + tensOver20NumberToText[tens];
 
         if (tensAndUnits <= 9)
         {
             // simple case for units, under 10
-            words += " " + GetPartByGender(_units[tensAndUnits], gender);
+            words += " " + GetPartByGender(this.units[tensAndUnits], gender);
         }
         else if (tensAndUnits <= 19)
         {
             // special case for 'teens', from 10 to 19
-            words += " " + GetPartByGender(_teensUnder20NumberToText[tensAndUnits - 10], gender);
+            words += " " + GetPartByGender(teensUnder20NumberToText[tensAndUnits - 10], gender);
         }
         else
         {
             // exception for zero
-            var unitsText = units == 0 ? string.Empty : " " + _joinGroups + " " + GetPartByGender(_units[units], gender);
+            var unitsText = units == 0 ? string.Empty : " " + joinGroups + " " + GetPartByGender(this.units[units], gender);
 
             words += unitsText;
         }
@@ -257,10 +257,10 @@ class RomanianCardinalNumberConverter
 
         if (hundreds == 1)
         {
-            return _feminineSingular + " sută";
+            return feminineSingular + " sută";
         }
 
-        return GetPartByGender(_units[hundreds], GrammaticalGender.Feminine) + " sute";
+        return GetPartByGender(units[hundreds], GrammaticalGender.Feminine) + " sute";
     }
 
     /// <summary>
@@ -287,10 +287,10 @@ class RomanianCardinalNumberConverter
 
         if (number == 1)
         {
-            return _feminineSingular + " mie";
+            return feminineSingular + " mie";
         }
 
-        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " mii";
+        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + joinAbove20 : string.Empty) + " mii";
     }
 
     // Large numbers (above 10^6) use a combined form of the long and short scales.
@@ -320,10 +320,10 @@ class RomanianCardinalNumberConverter
 
         if (number == 1)
         {
-            return _masculineSingular + " milion";
+            return masculineSingular + " milion";
         }
 
-        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " milioane";
+        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + joinAbove20 : string.Empty) + " milioane";
     }
 
     /// <summary>
@@ -336,9 +336,9 @@ class RomanianCardinalNumberConverter
     {
         if (number == 1)
         {
-            return _masculineSingular + " miliard";
+            return masculineSingular + " miliard";
         }
 
-        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + _joinAbove20 : string.Empty) + " miliarde";
+        return ThreeDigitSetConverter(number, GrammaticalGender.Feminine) + (IsAbove20(number) ? " " + joinAbove20 : string.Empty) + " miliarde";
     }
 }

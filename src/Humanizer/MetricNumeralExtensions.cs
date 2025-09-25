@@ -29,10 +29,10 @@ namespace Humanizer;
 /// </summary>
 public static class MetricNumeralExtensions
 {
-    const int limit = 27;
+    const int Limit = 27;
 
-    static readonly double BigLimit = Math.Pow(10, limit);
-    static readonly double SmallLimit = Math.Pow(10, -limit);
+    static readonly double BigLimit = Math.Pow(10, Limit);
+    static readonly double SmallLimit = Math.Pow(10, -Limit);
 
     /// <summary>
     /// Symbols is a list of every symbols for the Metric system.

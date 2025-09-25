@@ -1,4 +1,4 @@
-﻿public class SomeClass
+public class SomeClass
 {
     public string? SomeString;
     public int SomeInt;
@@ -54,7 +54,7 @@ public class CollectionHumanizeTests
         Assert.Equal("A String, Another String, or A Third String", collection.Humanize("or"));
     }
 
-    readonly List<SomeClass> _testCollection =
+    readonly List<SomeClass> testCollection =
     [
         new() { SomeInt = 1, SomeString = "One" },
         new() { SomeInt = 2, SomeString = "Two" },
@@ -63,33 +63,33 @@ public class CollectionHumanizeTests
 
     [Fact]
     public void HumanizeDefaultsToToString() =>
-        Assert.Equal("ToString, ToString, or ToString", _testCollection.Humanize("or"));
+        Assert.Equal("ToString, ToString, or ToString", testCollection.Humanize("or"));
 
     [Fact]
     public void HumanizeUsesStringDisplayFormatter()
     {
-        var humanized = _testCollection.Humanize(sc => $"SomeObject #{sc.SomeInt} - {sc.SomeString}");
+        var humanized = testCollection.Humanize(sc => $"SomeObject #{sc.SomeInt} - {sc.SomeString}");
         Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, and SomeObject #3 - Three", humanized);
     }
 
     [Fact]
     public void HumanizeUsesObjectDisplayFormatter()
     {
-        var humanized = _testCollection.Humanize(sc => sc.SomeInt);
+        var humanized = testCollection.Humanize(sc => sc.SomeInt);
         Assert.Equal("1, 2, and 3", humanized);
     }
 
     [Fact]
     public void HumanizeUsesStringDisplayFormatterWhenSeparatorIsProvided()
     {
-        var humanized = _testCollection.Humanize(sc => $"SomeObject #{sc.SomeInt} - {sc.SomeString}", "or");
+        var humanized = testCollection.Humanize(sc => $"SomeObject #{sc.SomeInt} - {sc.SomeString}", "or");
         Assert.Equal("SomeObject #1 - One, SomeObject #2 - Two, or SomeObject #3 - Three", humanized);
     }
 
     [Fact]
     public void HumanizeUsesObjectDisplayFormatterWhenSeparatorIsProvided()
     {
-        var humanized = _testCollection.Humanize(sc => sc.SomeInt, "or");
+        var humanized = testCollection.Humanize(sc => sc.SomeInt, "or");
         Assert.Equal("1, 2, or 3", humanized);
     }
 
@@ -115,14 +115,14 @@ public class CollectionHumanizeTests
 
     [Fact]
     public void HumanizeRemovesEmptyItemsByDefault() =>
-        Assert.Equal("A and C", new[] { "A", " ", "C" }.Humanize(dummyFormatter));
+        Assert.Equal("A and C", new[] { "A", " ", "C" }.Humanize(DummyFormatter));
 
     [Fact]
     public void HumanizeTrimsItemsByDefault() =>
-        Assert.Equal("A, B, and C", new[] { "A", "  B  ", "C" }.Humanize(dummyFormatter));
+        Assert.Equal("A, B, and C", new[] { "A", "  B  ", "C" }.Humanize(DummyFormatter));
 
     /// <summary>
     /// Use the dummy formatter to ensure tests are testing formatter output rather than input
     /// </summary>
-    static readonly Func<string, string> dummyFormatter = input => input;
+    static readonly Func<string, string> DummyFormatter = input => input;
 }

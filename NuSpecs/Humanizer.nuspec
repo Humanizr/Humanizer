@@ -17,17 +17,16 @@
       <dependency id="Humanizer.Core.ar" version="$version$" />
       <dependency id="Humanizer.Core.az" version="$version$" />
       <dependency id="Humanizer.Core.bg" version="$version$" />
-      <dependency id="Humanizer.Core.bn-BD" version="$version$" />
+      <dependency id="Humanizer.Core.bn" version="$version$" />
       <dependency id="Humanizer.Core.cs" version="$version$" />
       <dependency id="Humanizer.Core.da" version="$version$" />
       <dependency id="Humanizer.Core.de" version="$version$" />
       <dependency id="Humanizer.Core.el" version="$version$" />
       <dependency id="Humanizer.Core.es" version="$version$" />
       <dependency id="Humanizer.Core.fa" version="$version$" />
-      <dependency id="Humanizer.Core.fi-FI" version="$version$" />
-      <!--<dependency id="Humanizer.Core.fil-PH" version="$version$" />-->
+      <dependency id="Humanizer.Core.fi" version="$version$" />
+      <dependency id="Humanizer.Core.fil" version="$version$" />
       <dependency id="Humanizer.Core.fr" version="$version$" />
-      <dependency id="Humanizer.Core.fr-BE" version="$version$" />
       <dependency id="Humanizer.Core.he" version="$version$" />
       <dependency id="Humanizer.Core.hr" version="$version$" />
       <dependency id="Humanizer.Core.hu" version="$version$" />
@@ -36,18 +35,18 @@
       <dependency id="Humanizer.Core.is" version="$version$" />
       <dependency id="Humanizer.Core.it" version="$version$" />
       <dependency id="Humanizer.Core.ja" version="$version$" />
-      <dependency id="Humanizer.Core.ko-KR" version="$version$" />
+      <dependency id="Humanizer.Core.ko" version="$version$" />
       <dependency id="Humanizer.Core.ku" version="$version$" />
       <dependency id="Humanizer.Core.lb" version="$version$" />
       <dependency id="Humanizer.Core.lv" version="$version$" />
       <dependency id="Humanizer.Core.lt" version="$version$" />
-      <dependency id="Humanizer.Core.ms-MY" version="$version$" />
+      <dependency id="Humanizer.Core.ms" version="$version$" />
       <dependency id="Humanizer.Core.mt" version="$version$" />
       <dependency id="Humanizer.Core.nb" version="$version$" />
-      <dependency id="Humanizer.Core.nb-NO" version="$version$" />
       <dependency id="Humanizer.Core.nl" version="$version$" />
       <dependency id="Humanizer.Core.pl" version="$version$" />
       <dependency id="Humanizer.Core.pt" version="$version$" />
+      <dependency id="Humanizer.Core.pt-BR" version="$version$" />
       <dependency id="Humanizer.Core.ro" version="$version$" />
       <dependency id="Humanizer.Core.ru" version="$version$" />
       <dependency id="Humanizer.Core.sk" version="$version$" />
@@ -56,7 +55,7 @@
       <dependency id="Humanizer.Core.sr-Latn" version="$version$" />
       <dependency id="Humanizer.Core.sv" version="$version$" />
       <!--<dependency id="Humanizer.Core.ta" version="$version$" /> no resources yet -->
-      <dependency id="Humanizer.Core.th-TH" version="$version$" />
+      <dependency id="Humanizer.Core.th" version="$version$" />
       <dependency id="Humanizer.Core.tr" version="$version$" />
       <dependency id="Humanizer.Core.uk" version="$version$" />
       <dependency id="Humanizer.Core.uz-Cyrl-UZ" version="$version$" />
@@ -65,7 +64,6 @@
       <dependency id="Humanizer.Core.zh-CN" version="$version$" />
       <dependency id="Humanizer.Core.zh-Hans" version="$version$" />
       <dependency id="Humanizer.Core.zh-Hant" version="$version$" />
-      <dependency id="Humanizer.Core.ku" version="$version$" />
     </dependencies>
   </metadata>
   <files>

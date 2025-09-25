@@ -31,7 +31,7 @@ public static class EnumDehumanizeExtensions
     [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(EnumDehumanizeExtensions))]
     [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Access to DehumanizeTo via reflection is intentional and documented.")]
 #endif
-    static readonly MethodInfo dehumanizeToMethod = typeof(EnumDehumanizeExtensions)
+    static readonly MethodInfo DehumanizeToMethod = typeof(EnumDehumanizeExtensions)
         .GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!;
 
     /// <summary>
@@ -48,7 +48,7 @@ public static class EnumDehumanizeExtensions
 #endif
     public static Enum DehumanizeTo(this string input, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
     {
-        var genericMethod = dehumanizeToMethod.MakeGenericMethod(targetEnum);
+        var genericMethod = DehumanizeToMethod.MakeGenericMethod(targetEnum);
         try
         {
             return (Enum) genericMethod.Invoke(null, [input, onNoMatch])!;

@@ -5,34 +5,34 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
     public string Convert()
     {
         // it's easier to treat zero as a completely distinct case
-        if (_fullNumber == 0)
+        if (fullNumber == 0)
         {
             return "zero";
         }
 
-        if (_fullNumber <= 9)
+        if (fullNumber <= 9)
         {
             // units ordinals, 1 to 9, are totally different than the rest: treat them as a distinct case
-            return _unitsUnder10NumberToText[_fullNumber] + _genderSuffix;
+            return UnitsUnder10NumberToText[fullNumber] + genderSuffix;
         }
 
-        var cardinalCruncher = new ItalianCardinalNumberCruncher(_fullNumber, _gender);
+        var cardinalCruncher = new ItalianCardinalNumberCruncher(fullNumber, gender);
 
         var words = cardinalCruncher.Convert();
 
-        var tensAndUnits = _fullNumber % 100;
+        var tensAndUnits = fullNumber % 100;
 
         if (tensAndUnits == 10)
         {
             // for numbers ending in 10, cardinal and ordinal endings are different, suffix doesn't work
-            words = words.Remove(words.Length - _lengthOf10AsCardinal) + "decim" + _genderSuffix;
+            words = words.Remove(words.Length - LengthOf10AsCardinal) + "decim" + genderSuffix;
         }
         else
         {
             // truncate last vowel
             words = words.Remove(words.Length - 1);
 
-            var units = _fullNumber % 10;
+            var units = fullNumber % 10;
 
             // reintroduce *unaccented* last vowel in some corner cases
             if (units == 3)
@@ -44,9 +44,9 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
                 words += 'i';
             }
 
-            var lowestThreeDigits = _fullNumber % 1000;
-            var lowestSixDigits = _fullNumber % 1000000;
-            var lowestNineDigits = _fullNumber % 1000000000;
+            var lowestThreeDigits = fullNumber % 1000;
+            var lowestSixDigits = fullNumber % 1000000;
+            var lowestNineDigits = fullNumber % 1000000000;
 
             if (lowestNineDigits == 0)
             {
@@ -54,7 +54,7 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
                 words = words.Replace(" miliard", "miliard");
 
                 // if 1 billion, numeral prefix is removed completely
-                if (_fullNumber == 1000000000)
+                if (fullNumber == 1000000000)
                 {
                     words = words.Replace("un", string.Empty);
                 }
@@ -65,32 +65,32 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
                 words = words.Replace(" milion", "milion");
 
                 // if 1 million, numeral prefix is removed completely
-                if (_fullNumber == 1000000)
+                if (fullNumber == 1000000)
                 {
                     words = words.Replace("un", string.Empty);
                 }
             }
-            else if (lowestThreeDigits == 0 && _fullNumber > 1000)
+            else if (lowestThreeDigits == 0 && fullNumber > 1000)
             {
                 // if exact thousands, double the final 'l', apart from 1000 already having that
                 words += 'l';
             }
 
             // append common ordinal suffix
-            words += "esim" + _genderSuffix;
+            words += "esim" + genderSuffix;
         }
 
         return words;
     }
 
-    readonly int _fullNumber = number;
-    readonly GrammaticalGender _gender = gender;
-    readonly string _genderSuffix = gender == GrammaticalGender.Feminine ? "a" : "o";
+    readonly int fullNumber = number;
+    readonly GrammaticalGender gender = gender;
+    readonly string genderSuffix = gender == GrammaticalGender.Feminine ? "a" : "o";
 
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
     /// </summary>
-    static readonly string[] _unitsUnder10NumberToText =
+    static readonly string[] UnitsUnder10NumberToText =
     [
         string.Empty,
         "prim",
@@ -104,5 +104,5 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
         "non"
     ];
 
-    static readonly int _lengthOf10AsCardinal = "dieci".Length;
+    static readonly int LengthOf10AsCardinal = "dieci".Length;
 }

@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata minClientVersion="2.12">
-    <id>Humanizer.Core.fil-PH</id>
+    <id>Humanizer.Core.bn</id>
     <version>$version$</version>
-    <title>Humanizer Locale (fil-PH)</title>
+    <title>Humanizer Locale (bn)</title>
     <authors>Mehdi Khalili, Claire Novotny</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
     <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Humanizer Locale Filipino (Philippines) (fil-PH)</description>
+    <description>Humanizer Locale Bangla (Bangladesh) (bn)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
     <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
-    <language>fil-PH</language>
+    <language>bn</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\netstandard2.0\fil-PH\*.*" target="lib\netstandard2.0\fil-PH" />
-    <file src="Humanizer\bin\Release\net8.0\fil-PH\*.*" target="lib\net8.0\fil-PH" />
-    <file src="Humanizer\bin\Release\net48\fil-PH\*.*" target="lib\net48\fil-PH" />
-    <file src="Humanizer\bin\Release\net10.0\fil-PH\*.*" target="lib\net10.0\fil-PH" />
+    <file src="Humanizer\bin\Release\netstandard2.0\bn\*.*" target="lib\netstandard2.0\bn" />
+    <file src="Humanizer\bin\Release\net8.0\bn\*.*" target="lib\net8.0\bn" />
+    <file src="Humanizer\bin\Release\net48\bn\*.*" target="lib\net48\bn" />
+    <file src="Humanizer\bin\Release\net10.0\bn\*.*" target="lib\net10.0\bn" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

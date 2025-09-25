@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata minClientVersion="2.12">
-    <id>Humanizer.Core.fi-FI</id>
+    <id>Humanizer.Core.fil</id>
     <version>$version$</version>
-    <title>Humanizer Locale (fi-FI)</title>
+    <title>Humanizer Locale (fil)</title>
     <authors>Mehdi Khalili, Claire Novotny</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
     <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Humanizer Locale Finnish (Finland) (fi-FI)</description>
+    <description>Humanizer Locale Filipino (Philippines) (fil)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
     <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
-    <language>fi-FI</language>
+    <language>fil</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\netstandard2.0\fi-FI\*.*" target="lib\netstandard2.0\fi-FI" />
-    <file src="Humanizer\bin\Release\net8.0\fi-FI\*.*" target="lib\net8.0\fi-FI" />
-    <file src="Humanizer\bin\Release\net48\fi-FI\*.*" target="lib\net48\fi-FI" />
-    <file src="Humanizer\bin\Release\net10.0\fi-FI\*.*" target="lib\net10.0\fi-FI" />
+    <file src="Humanizer\bin\Release\netstandard2.0\fil\*.*" target="lib\netstandard2.0\fil" />
+    <file src="Humanizer\bin\Release\net8.0\fil\*.*" target="lib\net8.0\fil" />
+    <file src="Humanizer\bin\Release\net48\fil\*.*" target="lib\net48\fil" />
+    <file src="Humanizer\bin\Release\net10.0\fil\*.*" target="lib\net10.0\fil" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>
