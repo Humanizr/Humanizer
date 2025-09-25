@@ -17,7 +17,7 @@ on:
     paths:
       - 'src/**'
       - '.github/codeql/**'
-      - '.github/workflows/codeql.yml'    
+      - '.github/workflows/codeql.yml'
   pull_request:
     branches: [ "main" ]
     paths:
