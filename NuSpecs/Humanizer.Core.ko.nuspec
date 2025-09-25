@@ -1,27 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata minClientVersion="2.12">
-    <id>Humanizer.Core.nb-NO</id>
+    <id>Humanizer.Core.ko</id>
     <version>$version$</version>
-    <title>Humanizer Locale (nb-NO)</title>
+    <title>Humanizer Locale (ko)</title>
     <authors>Mehdi Khalili, Claire Novotny</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
     <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Humanizer Locale Norwegian Bokmål (Norway) (nb-NO)</description>
+    <description>Humanizer Locale Korean (South Korea) (ko)</description>
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
     <license type="expression">MIT</license>
-    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
-    <language>nb-NO</language>
+    <language>ko</language>
     <dependencies>
        <dependency id="Humanizer.Core" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="Humanizer\bin\Release\netstandard2.0\nb-NO\*.*" target="lib\netstandard2.0\nb-NO" />
-    <file src="Humanizer\bin\Release\net8.0\nb-NO\*.*" target="lib\net8.0\nb-NO" />
-    <file src="Humanizer\bin\Release\net48\nb-NO\*.*" target="lib\net48\nb-NO" />
-    <file src="Humanizer\bin\Release\net10.0\nb-NO\*.*" target="lib\net10.0\nb-NO" />
+    <file src="Humanizer\bin\Release\netstandard2.0\ko\*.*" target="lib\netstandard2.0\ko" />
+    <file src="Humanizer\bin\Release\net8.0\ko\*.*" target="lib\net8.0\ko" />
+    <file src="Humanizer\bin\Release\net48\ko\*.*" target="lib\net48\ko" />
+    <file src="Humanizer\bin\Release\net10.0\ko\*.*" target="lib\net10.0\ko" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

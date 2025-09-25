@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class FormatterRegistry : LocaliserRegistry<IFormatter>
 {
@@ -13,10 +13,8 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("sl", c => new SlovenianFormatter(c));
         Register("hr", c => new CroatianFormatter(c));
         Register("sr", c => new SerbianFormatter(c));
-        Register("sr-Latn", c => new SerbianFormatter(c));
         Register("uk", c => new UkrainianFormatter(c));
         Register("fr", c => new FrenchFormatter(c));
-        Register("fr-BE", c => new FrenchFormatter(c));
         RegisterCzechSlovakPolishFormatter("cs");
         RegisterCzechSlovakPolishFormatter("pl");
         RegisterCzechSlovakPolishFormatter("sk");
@@ -26,28 +24,27 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("sv");
         RegisterDefaultFormatter("tr");
         RegisterDefaultFormatter("vi");
-        RegisterDefaultFormatter("en-US");
+        RegisterDefaultFormatter("en");
         RegisterDefaultFormatter("af");
         RegisterDefaultFormatter("az");
         RegisterDefaultFormatter("da");
         RegisterDefaultFormatter("el");
         RegisterDefaultFormatter("es");
         RegisterDefaultFormatter("fa");
-        RegisterDefaultFormatter("fi-FI");
-        RegisterDefaultFormatter("fil-PH");
+        RegisterDefaultFormatter("fi");
+        RegisterDefaultFormatter("fil");
         RegisterDefaultFormatter("hu");
         RegisterDefaultFormatter("hy");
         RegisterDefaultFormatter("id");
         Register("is", c => new IcelandicFormatter(c));
         RegisterDefaultFormatter("ja");
-        RegisterDefaultFormatter("ko-KR");
+        RegisterDefaultFormatter("ko");
         RegisterDefaultFormatter("lv");
         Register("mt", c => new MalteseFormatter(c));
-        RegisterDefaultFormatter("ms-MY");
+        RegisterDefaultFormatter("ms");
         RegisterDefaultFormatter("nb");
-        RegisterDefaultFormatter("nb-NO");
         RegisterDefaultFormatter("nl");
-        RegisterDefaultFormatter("bn-BD");
+        RegisterDefaultFormatter("bn");
         RegisterDefaultFormatter("it");
         RegisterDefaultFormatter("ta");
         RegisterDefaultFormatter("uz-Latn-UZ");
@@ -55,8 +52,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("zh-CN");
         RegisterDefaultFormatter("zh-Hans");
         RegisterDefaultFormatter("zh-Hant");
-        RegisterDefaultFormatter("th-TH");
-        RegisterDefaultFormatter("en-IN");
+        RegisterDefaultFormatter("th");
         Register("lt", c => new LithuanianFormatter(c));
         Register("lb", c => new LuxembourgishFormatter(c));
     }

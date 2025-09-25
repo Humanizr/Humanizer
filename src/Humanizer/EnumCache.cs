@@ -9,7 +9,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 
     private static (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
-        var values = EnumPolyfill.GetValues<T>().ToFrozenSet();
+        var values = Enum.GetValues<T>().ToFrozenSet();
         var type = typeof(T);
         var zero = (T)Convert.ChangeType(Enum.ToObject(type, 0), type);
         var humanized = new Dictionary<T, string>();
