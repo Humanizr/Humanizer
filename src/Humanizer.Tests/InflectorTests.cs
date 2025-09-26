@@ -110,8 +110,28 @@ public class InflectorTests
     [InlineData("customer-first-name", "CustomerFirstName")]
     [InlineData("_customer-first-name", "CustomerFirstName")]
     [InlineData(" customer__first--name", "CustomerFirstName")]
-    public void Pascalize(string input, string expectedOutput) =>
+    [InlineData("HTTP-method   IO module   RESTful", "HTTPMethodIOModuleRESTful")]
+    [InlineData("HTTP SSL   IO module  RESTful", "HTTPSSLIOModuleRESTful")]
+    public void PascalizeWithAcronymPreserved(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Pascalize());
+
+
+    [Theory]
+    [InlineData("customer", "Customer")]
+    [InlineData("CUSTOMER", "Customer")]
+    [InlineData("CUStomer", "Customer")]
+    [InlineData("customer_name", "CustomerName")]
+    [InlineData("customer_first_name", "CustomerFirstName")]
+    [InlineData("customer_first_name goes here", "CustomerFirstNameGoesHere")]
+    [InlineData("customer name", "CustomerName")]
+    [InlineData("customer   name", "CustomerName")]
+    [InlineData("customer-first-name", "CustomerFirstName")]
+    [InlineData("_customer-first-name", "CustomerFirstName")]
+    [InlineData(" customer__first--name", "CustomerFirstName")]
+    [InlineData("HTTP-method   IO module  RESTful ", "HttpMethodIoModuleRestful")]
+    [InlineData("HTTP SSL   IO module  RESTful ", "HttpSslIoModuleRestful")]
+    public void PascalizeWithoutAcronymPreserved(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.Pascalize(false));    
 
     // Same as pascalize, except first char is lowercase
     [Theory]
@@ -126,6 +146,22 @@ public class InflectorTests
     [InlineData("", "")]
     public void Camelize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Camelize());
+
+
+    // Handles acronyms uniformly, preserving the case of the first letter
+    [Theory]
+    [InlineData("customer", "customer")]
+    [InlineData("CUSTOMER", "customer")]
+    [InlineData("CUStomer", "customer")]
+    [InlineData("customer_name", "customerName")]
+    [InlineData("customer_first_name", "customerFirstName")]
+    [InlineData("customer_first_name goes here", "customerFirstNameGoesHere")]
+    [InlineData("customer name", "customerName")]
+    [InlineData("customer   name", "customerName")]
+    [InlineData("HTTP-method   IO module  RESTful ", "httpMethodIoModuleRestful")]
+    [InlineData("", "")]
+    public void CamelizeV2(string input, string expectedOutput) =>
+        Assert.Equal(expectedOutput, input.CamelizeV2());
 
     //Makes an underscored lowercase string
     [Theory]
