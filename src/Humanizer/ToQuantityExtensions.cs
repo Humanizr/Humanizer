@@ -93,8 +93,11 @@ public static class ToQuantityExtensions
     /// </example>
     public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider? formatProvider = null)
     {
-        var isFinite = !(double.IsNaN(quantity) || double.IsInfinity(quantity));
-        var isSingular = isFinite && quantity == Math.Truncate(quantity) && Math.Abs(quantity) == 1d;
+        var isSingular =
+            double.IsFinite(quantity) &&
+            double.IsInteger(quantity) &&
+            Math.Abs(quantity) >= 1d &&
+            Math.Abs(quantity) < 2d;
 
         var transformedInput = isSingular
             ? input.Singularize(inputIsKnownToBePlural: false)
