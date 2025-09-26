@@ -62,7 +62,7 @@ public static class ToQuantityExtensions
 
     static string ToQuantity(this string input, long quantity, ShowQuantityAs showQuantityAs = ShowQuantityAs.Numeric, string? format = null, IFormatProvider? formatProvider = null)
     {
-        var transformedInput = quantity == 1 || quantity == -1
+        var transformedInput = quantity is 1 or -1
             ? input.Singularize(inputIsKnownToBePlural: false)
             : input.Pluralize(inputIsKnownToBeSingular: false);
 
@@ -93,7 +93,10 @@ public static class ToQuantityExtensions
     /// </example>
     public static string ToQuantity(this string input, double quantity, string? format = null, IFormatProvider? formatProvider = null)
     {
-        var transformedInput = quantity == 1 || quantity == -1
+        var isFinite = !(double.IsNaN(quantity) || double.IsInfinity(quantity));
+        var isSingular = isFinite && quantity == Math.Truncate(quantity) && Math.Abs(quantity) == 1d;
+
+        var transformedInput = isSingular
             ? input.Singularize(inputIsKnownToBePlural: false)
             : input.Pluralize(inputIsKnownToBeSingular: false);
 
