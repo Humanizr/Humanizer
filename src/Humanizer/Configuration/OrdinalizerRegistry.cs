@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
 {
@@ -21,5 +21,6 @@ class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
         Register("az", new AzerbaijaniOrdinalizer());
         Register("lb", new LuxembourgishOrdinalizer());
         Register("hu", new HungarianOrdinalizer());
+        Register("ca", new CatalanOrdinalizer());
     }
 }

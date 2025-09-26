@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 namespace Humanizer;
 
 class DateOnlyToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateOnlyToOrdinalWordConverter>
@@ -9,6 +9,7 @@ class DateOnlyToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateOnlyToOrd
         Register("fr", new FrDateOnlyToOrdinalWordsConverter());
         Register("es", new EsDateOnlyToOrdinalWordsConverter());
         Register("lt", new LtDateOnlyToOrdinalWordsConverter());
+        Register("ca", new CaDateOnlyToOrdinalWordsConverter());
     }
 }
 #endif

@@ -12,6 +12,7 @@ class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToC
         Register("es", new EsTimeOnlyToClockNotationConverter());
         Register("lb", new LbTimeOnlyToClockNotationConverter());
         Register("pt", new PortugueseTimeOnlyToClockNotationConverter());
+        Register("ca", new CaTimeOnlyToClockNotationConverter());
     }
 }
 
