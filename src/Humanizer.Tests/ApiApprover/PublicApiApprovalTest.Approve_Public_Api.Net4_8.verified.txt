@@ -580,6 +580,7 @@ namespace Humanizer
         public static double FromMetric(this string input) { }
         public static string ToMetric(this double input, Humanizer.MetricNumeralFormats? formats = default, int? decimals = default) { }
         public static string ToMetric(this int input, Humanizer.MetricNumeralFormats? formats = default, int? decimals = default) { }
+        public static string ToMetric(this long input, Humanizer.MetricNumeralFormats? formats = default, int? decimals = default) { }
     }
     [System.Flags]
     public enum MetricNumeralFormats
