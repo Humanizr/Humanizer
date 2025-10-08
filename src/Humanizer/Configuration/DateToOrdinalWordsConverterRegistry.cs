@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWordConverter>
 {
@@ -9,5 +9,6 @@ class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWord
         Register("fr", new FrDateToOrdinalWordsConverter());
         Register("es", new EsDateToOrdinalWordsConverter());
         Register("lt", new LtDateToOrdinalWordsConverter());
+        Register("ca", new CaDateToOrdinalWordsConverter());
     }
 }

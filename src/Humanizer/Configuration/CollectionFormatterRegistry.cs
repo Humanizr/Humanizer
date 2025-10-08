@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
 {
@@ -18,5 +18,6 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("is", new DefaultCollectionFormatter("og"));
         Register("es", new DefaultCollectionFormatter("y"));
         Register("lb", new DefaultCollectionFormatter("an"));
+        Register("ca", new DefaultCollectionFormatter("i"));
     }
 }
