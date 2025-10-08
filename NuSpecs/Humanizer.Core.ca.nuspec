@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata minClientVersion="2.12">
+    <id>Humanizer.Core.ca</id>
+    <version>$version$</version>
+    <title>Humanizer Locale (ca)</title>
+    <authors>Mehdi Khalili, Claire Novotny</authors>
+    <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
+    <icon>logo.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Humanizer Locale Catalan (ca)</description>
+    <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
+    <license type="expression">MIT</license>
+    <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
+    <language>ca</language>
+    <dependencies>
+       <dependency id="Humanizer.Core" version="[$version$]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Humanizer\bin\Release\netstandard2.0\ca\*.*" target="lib\netstandard2.0\ca" />
+    <file src="Humanizer\bin\Release\net8.0\ca\*.*" target="lib\net8.0\ca" />
+    <file src="Humanizer\bin\Release\net48\ca\*.*" target="lib\net48\ca" />
+    <file src="Humanizer\bin\Release\net10.0\ca\*.*" target="lib\net10.0\ca" />
+    <file src="..\logo.png" target="logo.png" />
+  </files>
+</package>

@@ -18,6 +18,7 @@
       <dependency id="Humanizer.Core.az" version="$version$" />
       <dependency id="Humanizer.Core.bg" version="$version$" />
       <dependency id="Humanizer.Core.bn" version="$version$" />
+      <dependency id="Humanizer.Core.ca" version="$version$" />
       <dependency id="Humanizer.Core.cs" version="$version$" />
       <dependency id="Humanizer.Core.da" version="$version$" />
       <dependency id="Humanizer.Core.de" version="$version$" />
@@ -38,8 +39,8 @@
       <dependency id="Humanizer.Core.ko" version="$version$" />
       <dependency id="Humanizer.Core.ku" version="$version$" />
       <dependency id="Humanizer.Core.lb" version="$version$" />
-      <dependency id="Humanizer.Core.lv" version="$version$" />
       <dependency id="Humanizer.Core.lt" version="$version$" />
+      <dependency id="Humanizer.Core.lv" version="$version$" />
       <dependency id="Humanizer.Core.ms" version="$version$" />
       <dependency id="Humanizer.Core.mt" version="$version$" />
       <dependency id="Humanizer.Core.nb" version="$version$" />
