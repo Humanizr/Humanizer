@@ -1,3 +1,4 @@
+using System.Linq;
 namespace Humanizer;
 
 class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
@@ -293,21 +294,20 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
         List<string> wordBuilder = [];
 
         remainder = inputNumber;
-        foreach (var numberAndWord in NumbersAndWordsDict)
+        foreach (var numberAndWord in NumbersAndWordsDict.Where(numberAndWord => remainder / numberAndWord.Value > 0))
         {
-            if (remainder / numberAndWord.Value > 0)
+            if (remainder / numberAndWord.Value == 1)
             {
-                if (remainder / numberAndWord.Value == 1)
-                {
-                    wordBuilder.Add($"un {numberAndWord.Key}");
-                }
-                else
-                {
-                    wordBuilder.Add(remainder / numberAndWord.Value % 10 == 1 ? $"{Convert(remainder / numberAndWord.Value, WordForm.Abbreviation, GrammaticalGender.Masculine)} {PluralizeGreaterThanMillion(numberAndWord.Key)}" : $"{Convert(remainder / numberAndWord.Value)} {PluralizeGreaterThanMillion(numberAndWord.Key)}");
-                }
-
-                remainder %= numberAndWord.Value;
+                wordBuilder.Add($"un {numberAndWord.Key}");
             }
+            else
+            {
+                wordBuilder.Add(remainder / numberAndWord.Value % 10 == 1
+                    ? $"{Convert(remainder / numberAndWord.Value, WordForm.Abbreviation, GrammaticalGender.Masculine)} {PluralizeGreaterThanMillion(numberAndWord.Key)}"
+                    : $"{Convert(remainder / numberAndWord.Value)} {PluralizeGreaterThanMillion(numberAndWord.Key)}");
+            }
+
+            remainder %= numberAndWord.Value;
         }
 
         return BuildWord(wordBuilder);
