@@ -994,6 +994,14 @@ Also, the reverse operation using the `FromMetric` extension.
 "100m".FromMetric() => 0.1
 ```
 
+The `int` and `long` data types are also supported:
+
+```C#
+((int)456789).ToMetric(decimals: 2) => "456.79k"
+((int)456789).ToMetric(decimals: 20) => "456.78900000000000000000k"
+long.MaxValue.ToMetric(decimals: 12) => "9.223372036855E"
+```
+
 
 ### ByteSize
 
