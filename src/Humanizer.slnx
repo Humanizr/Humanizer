@@ -1,0 +1,87 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="../.gitattributes" />
+    <File Path="../.gitignore" />
+    <File Path="../license.txt" />
+    <File Path="../NuSpecs/Humanizer.Core.nuspec" />
+    <File Path="../NuSpecs/Humanizer.nuspec" />
+    <File Path="../readme.md" />
+    <File Path="../release_notes.md" />
+    <File Path="../version.json" />
+    <File Path=".editorconfig" />
+    <File Path="Directory.build.props" />
+    <File Path="global.json" />
+    <File Path="nuget.config" />
+  </Folder>
+  <Folder Name="/Solution Items/Build/">
+    <File Path="azure-pipelines.yml" />
+    <File Path="build.cmd" />
+    <File Path="build.ps1" />
+    <File Path="Humanizer.ruleset" />
+  </Folder>
+  <Folder Name="/Solution Items/NuSpecs/">
+    <File Path="../NuSpecs/Humanizer.Core.af.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ar.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.az.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.bg.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.bn.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ca.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.cs.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.da.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.de.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.el.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.es.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.fa.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.fi.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.fil.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.fr.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.he.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.hr.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.hu.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.hy.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.id.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.is.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.it.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ja.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ko.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ku.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.lb.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.lt.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.lv.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ms.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.mt.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.nb.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.nl.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.pl.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.pt-BR.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.pt.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ro.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ru.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.sk.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.sl.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.sr-Latn.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.sr.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.sv.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.ta.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.th.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.tr.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.uk.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.uz-Cyrl-UZ.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.uz-Latn-UZ.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.vi.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.zh-CN.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.zh-Hans.nuspec" />
+    <File Path="../NuSpecs/Humanizer.Core.zh-Hant.nuspec" />
+    <File Path="../NuSpecs/Humanizer.nuspec" />
+  </Folder>
+  <Project Path="Benchmarks/Benchmarks.csproj" />
+  <Project Path="Humanizer.Tests/Humanizer.Tests.csproj" />
+  <Project Path="Humanizer/Humanizer.csproj" />
+</Solution>
