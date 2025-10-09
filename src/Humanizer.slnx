@@ -8,6 +8,7 @@
   <Folder Name="/Solution Items/">
     <File Path="../.gitattributes" />
     <File Path="../.gitignore" />
+    <File Path="../azure-pipelines.yml" />
     <File Path="../license.txt" />
     <File Path="../NuSpecs/Humanizer.Core.nuspec" />
     <File Path="../NuSpecs/Humanizer.nuspec" />
@@ -17,13 +18,8 @@
     <File Path=".editorconfig" />
     <File Path="Directory.build.props" />
     <File Path="global.json" />
-    <File Path="nuget.config" />
-  </Folder>
-  <Folder Name="/Solution Items/Build/">
-    <File Path="azure-pipelines.yml" />
-    <File Path="build.cmd" />
-    <File Path="build.ps1" />
     <File Path="Humanizer.ruleset" />
+    <File Path="nuget.config" />
   </Folder>
   <Folder Name="/Solution Items/NuSpecs/">
     <File Path="../NuSpecs/Humanizer.Core.af.nuspec" />
