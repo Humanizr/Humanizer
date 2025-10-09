@@ -16,7 +16,9 @@
     <File Path="../version.json" />
     <File Path=".editorconfig" />
     <File Path="Directory.build.props" />
+    <File Path="Directory.Build.targets" />
     <File Path="Directory.Packages.props" />
+    <File Path="Directory.Solution.targets" />
     <File Path="global.json" />
     <File Path="nuget.config" />
   </Folder>
