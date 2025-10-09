@@ -7,16 +7,9 @@ url: "" # the base hostname & protocol for your site
 # Build settings
 markdown: kramdown
 
-# Exclude files from the site
-exclude:
-  - src/
-  - NuSpecs/
-  - .git/
-  - .github/
-  - .gitignore
-  - .gitattributes
-  - azure-pipelines.yml
-  - verify-packages.ps1
-  - version.json
-  - license.txt
-  - AGENTS.md
+# Use readme.md as the index page
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
