@@ -21,36 +21,27 @@ public static class Resources
     /// <returns>The value of the resource localized for the specified culture.</returns>
     public static string GetResource(string resourceKey, CultureInfo? culture = null)
     {
-        // We avoid populating ResourceManager's fallback cache unless absolutely necessary.
-        // ResourceManager.GetString follows the full fallback chain (culture -> parent -> neutral)
-        // and will create/cache ResourceSets for whichever culture supplies the string. On
-        // environments with lazy satellite assembly loading (Blazor WebAssembly), this can
-        // result in an incorrect fallback to the neutral culture and that fallback being cached
-        // for subsequent lookups. To minimize that risk and improve performance, we:
-        //   1) Attempt to read the exact culture's ResourceSet without creating or probing parents.
-        //   2) If not found, check already-loaded parent ResourceSets without creating new ones.
-        //   3) Only as a last resort call ResourceManager.GetString which may perform fallback
-        //      and populate the cache.
+        // When an explicit culture is provided, we must ensure the exact culture's resource set
+        // is loaded before falling back. In Blazor WebAssembly, satellite assemblies are loaded
+        // lazily, and ResourceManager.GetString's fallback logic may cache an incorrect neutral
+        // culture result before the satellite assembly loads. To prevent this, we:
+        //   1) Load the exact culture's ResourceSet (createIfNotExists: true, tryParents: false)
+        //   2) Only fall back to GetString if the exact culture's resource set doesn't contain the key
 
         string? resource = null;
 
-        // Only call GetResourceSet when we have an explicit, non-null culture to pass 
+        // Only attempt to load the exact culture's resource set when an explicit culture is provided
         // This preserves the previous behavior for callers that pass null (they fall through to GetString).
         if (culture != null)
         {
-            // Exact culture only, don't try parents and don't create resource sets.
-            var exactResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
+            // Load the exact culture's resource set without trying parents.
+            // This ensures the satellite assembly is loaded in Blazor WebAssembly scenarios.
+            var exactResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: true, tryParents: false);
             resource = exactResourceSet?.GetString(resourceKey);
-
-            if (resource == null)
-            {
-                // Check already-loaded parents without creating/adding new ResourceSets to the cache.
-                var parentResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: true);
-                resource = parentResourceSet?.GetString(resourceKey);
-            }
         }
 
-        // Last resort: use the standard GetString which performs the full fallback chain and accepts null culture.
+        // If not found in the exact culture (or culture was null), use the standard GetString
+        // which performs the full fallback chain and accepts null culture.
         if (resource == null)
         {
             resource = ResourceManager.GetString(resourceKey, culture);
