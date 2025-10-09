@@ -1,11 +1,16 @@
 ﻿# <img width="30px" src="logo.png" /> Humanizer
 
+[![Build Status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
+[![NuGet version](https://img.shields.io/nuget/v/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer)
+[![NuGet version prerelease](https://img.shields.io/nuget/vpre/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://img.shields.io/nuget/vpre/Humanizer.Core)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.Core.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer.Core)
+
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
 
 ## Install
 
-You can install Humanizer as [a NuGet package](https://nuget.org/packages/Humanizer):
+You can install Humanizer as [a NuGet package](https://www.nuget.org/packages/Humanizer):
 
 **English only**: `Humanizer.Core`
 
@@ -14,21 +19,27 @@ All languages: `Humanizer`
 
 ### Supported frameworks
 
-The following frameworks are supported: net48, net6.0, net7.0, and net8.0
+**Supported frameworks:** net10.0, net9.0, net8.0, net48
 
-Note: The nuget also targets netstandard2. This is to enable scenario where netstandard2 is required. For example Roslyn Analyzers or MSBuild tasks. Other frameworks (other than listed above) that can consume netstandard2 (example net4.6.1 through to net 4.7.2) are not supported. For example net4.6.1 through to net4.7.2 are not supported.
+**netstandard2.0:** The NuGet package also targets netstandard2.0 as a special case to support specific scenarios such as Roslyn Analyzers and MSBuild tasks that require netstandard2.0.
 
-Also, Humanizer symbols are source indexed with [SourceLink](https://github.com/dotnet/sourcelink) and are included in the package so you can step through Humanizer code while debugging your code.
+**Unsupported versions:** While other .NET Framework versions (net4.6.1 through net4.7.2) can technically consume netstandard2.0 libraries, they are **not officially supported** by Humanizer and may not work correctly. Please use one of the explicitly supported frameworks listed above for the best experience.
+
+Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet/sourcelink) and included in the package, which means you can step through Humanizer's source code while debugging your own application.
 
 ### Specify Languages (Optional)
 
-You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` 2.0 package installs all supported languages exactly like it does in 1.x. If you're not sure, then just use the main `Humanizer` package.
+You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` package installs all supported languages. If you're not sure, then just use the main `Humanizer` package.
 
 Here are the options:
 
-  - **All languages**: use the main `Humanizer` package. This pulls in `Humanizer.Core` and all language packages.
-  - **English**: use the `Humanizer.Core` package. Only the English language resources will be available
-  - **Specific languages**: Use the language-specific packages you'd like. For example for French, use `Humanizer.Core.fr`. You can include multiple languages by installing however many language packages you want.
+| Option | Package Name | Install Command | Included Languages |
+|--------|--------------|-----------------|-------------------|
+| **All languages** | `Humanizer` | `dotnet add package Humanizer` | All supported languages (pulls in `Humanizer.Core` and all language packages) |
+| **English only** | `Humanizer.Core` | `dotnet add package Humanizer.Core` | English only |
+| **Specific languages** | `Humanizer.Core.<locale>` | `dotnet add package Humanizer.Core.fr` (French example) | Install as many language-specific packages as needed |
+
+For example, for French use `Humanizer.Core.fr`, for Spanish use `Humanizer.Core.es`, etc. You can include multiple languages by installing however many language packages you want.
 
 The detailed explanation for how this works is in the comments [here](https://github.com/Humanizr/Humanizer/issues/59#issuecomment-152546079).
 
@@ -41,7 +52,7 @@ The detailed explanation for how this works is in the comments [here](https://gi
 `Humanize` string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
 The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human-readable sentences.
 
-```C#
+```csharp
 "PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
 
 "Underscored_input_string_is_turned_into_sentence".Humanize() => "Underscored input string is turned into sentence"
@@ -51,7 +62,7 @@ The foundation of this was set in the [BDDfy framework](https://github.com/TestS
 
 Note that a string that contains only upper case letters, and consists only of one word, is always treated as an acronym (regardless of its length). To guarantee that any arbitrary string will always be humanized you must use a transform (see `Transform` method below):
 
-```C#
+```csharp
 // acronyms are left intact
 "HTML".Humanize() => "HTML"
 
@@ -62,7 +73,7 @@ Note that a string that contains only upper case letters, and consists only of o
 
 You may also specify the desired letter casing:
 
-```C#
+```csharp
 "CanReturnTitleCase".Humanize(LetterCasing.Title) => "Can Return Title Case"
 
 "Can_return_title_Case".Humanize(LetterCasing.Title) => "Can Return Title Case"
@@ -79,7 +90,7 @@ You may also specify the desired letter casing:
 
 Much like you can humanize a computer friendly string into a human friendly one you can dehumanize a human friendly string into a computer friendly one:
 
-```C#
+```csharp
 "Pascal case input string is turned into sentence".Dehumanize() => "PascalCaseInputStringIsTurnedIntoSentence"
 ```
 
@@ -89,13 +100,13 @@ Much like you can humanize a computer friendly string into a human friendly one 
 There is a `Transform` method that supersedes `LetterCasing`, `ApplyCase` and `Humanize` overloads that accept `LetterCasing`.
 Transform method signature is as follows:
 
-```C#
+```csharp
 string Transform(this string input, params IStringTransformer[] transformers)
 ```
 
 And there are some out of the box implementations of `IStringTransformer` for letter casing:
 
-```C#
+```csharp
 "Sentence casing".Transform(To.LowerCase) => "sentence casing"
 "Sentence casing".Transform(To.SentenceCase) => "Sentence casing"
 "Sentence casing".Transform(To.TitleCase) => "Sentence Casing"
@@ -171,7 +182,7 @@ Default is the right as shown in the examples above. The examples below show how
 
 Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
 
-```C#
+```csharp
 public enum EnumUnderTest
 {
     [Description("Custom description")]
@@ -183,7 +194,7 @@ public enum EnumUnderTest
 
 You will get:
 
-```C#
+```csharp
 // DescriptionAttribute is honored
 EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"
 
@@ -203,7 +214,7 @@ You can even configure the name of the property of attibute to use as descriptio
 
 If you need to provide localised descriptions you can use `DisplayAttribute` data annotation instead.
 
-```C#
+```csharp
 public enum EnumUnderTest
 {
     [Display(Description = "EnumUnderTest_Member", ResourceType = typeof(Project.Resources))]
@@ -213,7 +224,7 @@ public enum EnumUnderTest
 
 You will get:
 
-```C#
+```csharp
 EnumUnderTest.Member.Humanize() => "content" // from Project.Resources found under "EnumUnderTest_Member" resource key
 ```
 
@@ -224,13 +235,13 @@ Hopefully this will help avoid littering enums with unnecessary attributes!
 
 Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
 
-```C#
+```csharp
 public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
 ```
 
 And the usage is:
 
-```C#
+```csharp
 "Member without description attribute".DehumanizeTo<EnumUnderTest>() => EnumUnderTest.MemberWithoutDescriptionAttribute
 ```
 
@@ -238,13 +249,13 @@ And just like the Humanize API it honors the `Description` attribute. You don't 
 
 There is also a non-generic counterpart for when the original Enum is not known at compile time:
 
-```C#
+```csharp
 public static Enum DehumanizeTo(this string input, Type targetEnum, NoMatch onNoMatch = NoMatch.ThrowsException)
 ```
 
 which can be used like:
 
-```C#
+```csharp
 "Member without description attribute".DehumanizeTo(typeof(EnumUnderTest)) => EnumUnderTest.MemberWithoutDescriptionAttribute
 ```
 
@@ -256,7 +267,7 @@ In the non-generic method you can also ask the method to return null by setting 
 
 You can `Humanize` an instance of `DateTime` or `DateTimeOffset` and get back a string telling how far back or forward in time that is:
 
-```C#
+```csharp
 DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 DateTime.UtcNow.AddHours(-2).Humanize() => "2 hours ago"
 
@@ -270,14 +281,14 @@ Humanizer supports both local and UTC dates as well as dates with offset (`DateT
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
 Here are the API signatures:
 
-```C#
+```csharp
 public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
 public static string Humanize(this DateTimeOffset input, DateTimeOffset? dateToCompareAgainst = null, CultureInfo culture = null)
 ```
 
 Many localizations are available for this method. Here are a few examples:
 
-```C#
+```csharp
 // In ar culture
 DateTime.UtcNow.AddDays(-1).Humanize() => "أمس"
 DateTime.UtcNow.AddDays(-2).Humanize() => "منذ يومين"
@@ -296,14 +307,14 @@ DateTime.UtcNow.AddMinutes(-40).Humanize() => "40 минут назад"
 There are two strategies for `DateTime.Humanize`: the default one as seen above and a precision based one.
 To use the precision based strategy you need to configure it:
 
-```C#
+```csharp
 Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision: .75);
 Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumanizeStrategy(precision: .75); // configure when humanizing DateTimeOffset
 ```
 
 The default precision is set to .75, but you can pass your desired precision too. With precision set to 0.75:
 
-```C#
+```csharp
 44 seconds => 44 seconds ago/from now
 45 seconds => one minute ago/from now
 104 seconds => one minute ago/from now
@@ -319,7 +330,7 @@ The default precision is set to .75, but you can pass your desired precision too
 
 You can call `Humanize` on a `TimeSpan` to a get human friendly representation for it:
 
-```C#
+```csharp
 TimeSpan.FromMilliseconds(1).Humanize() => "1 millisecond"
 TimeSpan.FromMilliseconds(2).Humanize() => "2 milliseconds"
 TimeSpan.FromDays(1).Humanize() => "1 day"
@@ -330,7 +341,7 @@ There is an optional `precision` parameter for `TimeSpan.Humanize` which allows 
 The default value of `precision` is 1 which means only the largest time unit is returned like you saw in `TimeSpan.FromDays(16).Humanize()`.
 Here are a few examples of specifying precision:
 
-```C#
+```csharp
 TimeSpan.FromDays(1).Humanize(precision:2) => "1 day" // no difference when there is only one unit in the provided TimeSpan
 TimeSpan.FromDays(16).Humanize(2) => "2 weeks, 2 days"
 
@@ -345,14 +356,14 @@ By default, when using `precision` parameter empty time units are not counted to
 If this behavior isn't desired for you, you can use the overloaded `TimeSpan.Humanize` method with `countEmptyUnits` parameter. Leading empty time units never count.
 Here is an example showing the difference of counting empty units:
 
-```C#
+```csharp
 TimeSpan.FromMilliseconds(3603001).Humanize(3) => "1 hour, 3 seconds, 1 millisecond"
 TimeSpan.FromMilliseconds(3603001).Humanize(3, countEmptyUnits:true) => "1 hour, 3 seconds"
 ```
 
 Many localizations are available for this method:
 
-```C#
+```csharp
 // in de-DE culture
 TimeSpan.FromDays(1).Humanize() => "Ein Tag"
 TimeSpan.FromDays(2).Humanize() => "2 Tage"
@@ -365,35 +376,35 @@ TimeSpan.FromMilliseconds(5).Humanize() => "5 milisekúnd"
 
 Culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Example:
 
-```C#
+```csharp
 TimeSpan.FromDays(1).Humanize(culture: "ru-RU") => "один день"
 ```
 
 In addition, a minimum unit of time may be specified to avoid rolling down to a smaller unit. For example:
-  ```C#
+  ```csharp
   TimeSpan.FromMilliseconds(122500).Humanize(minUnit: TimeUnit.Second) => "2 minutes, 2 seconds"    // instead of 2 minutes, 2 seconds, 500 milliseconds
   TimeSpan.FromHours(25).Humanize(minUnit: TimeUnit.Day) => "1 Day"   //instead of 1 Day, 1 Hour
   ```
 
 In addition, a maximum unit of time may be specified to avoid rolling up to the next largest unit. For example:
-```C#
+```csharp
 TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day) => "7 days"    // instead of 1 week
 TimeSpan.FromMilliseconds(2000).Humanize(maxUnit: TimeUnit.Millisecond) => "2000 milliseconds"    // instead of 2 seconds
 ```
 The default maxUnit is `TimeUnit.Week` because it gives exact results. You can increase this value to `TimeUnit.Month` or `TimeUnit.Year` which will give you an approximation based on 365.2425 days a year and 30.436875 days a month. Therefore, the months are alternating between 30 and 31 days in length and every fourth year is 366 days long.
-```C#
+```csharp
 TimeSpan.FromDays(486).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year, 3 months, 29 days" // One day further is 1 year, 4 month
 TimeSpan.FromDays(517).Humanize(maxUnit: TimeUnit.Year, precision: 7) => "1 year, 4 months, 30 days" // This month has 30 days and one day further is 1 year, 5 months
 ```
 
 When there are multiple time units, they are combined using the `", "` string:
 
-```C#
+```csharp
 TimeSpan.FromMilliseconds(1299630020).Humanize(3) => "2 weeks, 1 day, 1 hour"
 ```
 
 When `TimeSpan` is zero, the default behavior will return "0" plus whatever the minimum time unit is. However, if you assign `true` to `toWords` when calling `Humanize`, then the method returns "no time". For example:
-```C#
+```csharp
 TimeSpan.Zero.Humanize(1) => "0 milliseconds"
 TimeSpan.Zero.Humanize(1, toWords: true) => "no time"
 TimeSpan.Zero.Humanize(1, minUnit: Humanizer.Localisation.TimeUnit.Second) => "0 seconds"
@@ -401,13 +412,13 @@ TimeSpan.Zero.Humanize(1, minUnit: Humanizer.Localisation.TimeUnit.Second) => "0
 
 Using the `collectionSeparator` parameter, you can specify your own separator string:
 
-```C#
+```csharp
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: " - ") => "2 weeks - 1 day - 1 hour"
 ````
 
 It is also possible to use the current culture's collection formatter to combine the time units. To do so, specify `null` as the `collectionSeparator` parameter:
 
-```C#
+```csharp
 // in en-US culture
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => "2 weeks, 1 day, and 1 hour"
 
@@ -416,14 +427,14 @@ TimeSpan.FromMilliseconds(1299630020).Humanize(3, collectionSeparator: null) => 
 ```
 
 If words are preferred to numbers, a `toWords: true` parameter can be set to convert the numbers in a humanized TimeSpan to words:
-```C#
+```csharp
 TimeSpan.FromMilliseconds(1299630020).Humanize(3, toWords: true) => "two weeks, one day, one hour"
 ```
 
 By calling `ToAge`, a `TimeSpan` can also be expressed as an age.
 For cultures that do not define an age expression, the result will be the same as calling `Humanize` _(but with a default `maxUnit` equal to `TimeUnit.Year`)_. 
 
-```C#
+```csharp
 // in en-US culture
 TimeSpan.FromDays(750).ToAge() => "2 years old"
 
@@ -438,7 +449,7 @@ You can call `Humanize` on any `IEnumerable` to get a nicely formatted string re
 
 For instance:
 
-```C#
+```csharp
 class SomeClass
 {
     public string SomeString;
@@ -481,14 +492,14 @@ There are also a few inflector methods:
 
 `Pluralize` pluralizes the provided input while taking irregular and uncountable words into consideration:
 
-```C#
+```csharp
 "Man".Pluralize() => "Men"
 "string".Pluralize() => "strings"
 ```
 
 Normally you would call `Pluralize` on a singular word but if you're unsure about the singularity of the word you can call the method with the optional `inputIsKnownToBeSingular` argument:
 
-```C#
+```csharp
 "Men".Pluralize(inputIsKnownToBeSingular: false) => "Men"
 "Man".Pluralize(inputIsKnownToBeSingular: false) => "Men"
 "string".Pluralize(inputIsKnownToBeSingular: false) => "strings"
@@ -502,14 +513,14 @@ The overload of `Pluralize` with `plurality` argument is obsolete and was remove
 
 `Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
 
-```C#
+```csharp
 "Men".Singularize() => "Man"
 "strings".Singularize() => "string"
 ```
 
 Normally you would call `Singularize` on a plural word but if you're unsure about the plurality of the word you can call the method with the optional `inputIsKnownToBePlural` argument:
 
-```C#
+```csharp
 "Men".Singularize(inputIsKnownToBePlural: false) => "Man"
 "Man".Singularize(inputIsKnownToBePlural: false) => "Man"
 "strings".Singularize(inputIsKnownToBePlural: false) => "string"
@@ -523,7 +534,7 @@ The overload of `Singularize` with `plurality` argument is obsolete and was remo
 
 Sometimes, you may need to add a rule from the singularization/pluralization vocabulary (the examples below are already in the `DefaultVocabulary` used by `Inflector`):
 
-```C#
+```csharp
 // Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx.
 // Will match both "salesperson" and "person".
 Vocabularies.Default.AddIrregular("person", "people");
@@ -548,7 +559,7 @@ Vocabularies.Default.AddSingular("(vert|ind)ices$", "$1ex");
 
 Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
 
-```C#
+```csharp
 "case".ToQuantity(0) => "0 cases"
 "case".ToQuantity(1) => "1 case"
 "case".ToQuantity(5) => "5 cases"
@@ -559,7 +570,7 @@ Many times you want to call `Singularize` and `Pluralize` to prefix a word with 
 
 `ToQuantity` can figure out whether the input word is singular or plural and will singularize or pluralize as necessary:
 
-```C#
+```csharp
 "men".ToQuantity(2) => "2 men"
 "process".ToQuantity(2) => "2 processes"
 "process".ToQuantity(1) => "1 process"
@@ -569,14 +580,14 @@ Many times you want to call `Singularize` and `Pluralize` to prefix a word with 
 
 You can also pass a second argument, `ShowQuantityAs`, to `ToQuantity` to specify how you want the provided quantity to be outputted. The default value is `ShowQuantityAs.Numeric` which is what we saw above. The other two values are `ShowQuantityAs.Words` and `ShowQuantityAs.None`.
 
-```C#
+```csharp
 "case".ToQuantity(5, ShowQuantityAs.Words) => "five cases"
 "case".ToQuantity(5, ShowQuantityAs.None) => "cases"
 ```
 
 There is also an overload that allows you to format the number. You can pass in the format and the culture to be used.
 
-```C#
+```csharp
 "dollar".ToQuantity(2, "C0", new CultureInfo("en-US")) => "$2 dollars"
 "dollar".ToQuantity(2, "C2", new CultureInfo("en-US")) => "$2.00 dollars"
 "cases".ToQuantity(12000, "N0") => "12,000 cases"
@@ -587,7 +598,7 @@ There is also an overload that allows you to format the number. You can pass in 
 
 `Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th:
 
-```C#
+```csharp
 1.Ordinalize() => "1st"
 5.Ordinalize() => "5th"
 ```
@@ -598,7 +609,7 @@ You can also call `Ordinalize` on a numeric string and achieve the same result: 
 You can pass an argument to `Ordinalize` to specify which gender the number should be outputted in.
 The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
-```C#
+```csharp
 // for Brazilian Portuguese locale
 1.Ordinalize(GrammaticalGender.Masculine) => "1º"
 1.Ordinalize(GrammaticalGender.Feminine) => "1ª"
@@ -614,7 +625,7 @@ In addition, `Ordinalize` supports variations some cultures apply depending on t
 Use the argument `wordForm` to get one result or another. Possible values are `WordForm.Abbreviation` and `WordForm.Normal`.
 You can combine `wordForm` argument with gender but passing this argument in when it is not applicable will not make any difference in the result.
 
-```C#
+```csharp
 // Spanish locale
 1.Ordinalize(WordForm.Abbreviation) => "1.er" // As in "Vivo en el 1.er piso"
 1.Ordinalize(WordForm.Normal) => "1.º" // As in "He llegado el 1º"
@@ -634,7 +645,7 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 
 `Pascalize` converts the input words to UpperCamelCase, also removing underscores and spaces:
 
-```C#
+```csharp
 "some_title for something".Pascalize() => "SomeTitleForSomething"
 ```
 
@@ -643,7 +654,7 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 
 `Camelize` behaves identically to `Pascalize`, except that the first character is lower case:
 
-```C#
+```csharp
 "some_title for something".Camelize() => "someTitleForSomething"
 ```
 
@@ -652,7 +663,7 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 
 `Underscore` separates the input words with underscore:
 
-```C#
+```csharp
 "SomeTitle".Underscore() => "some_title"
 ```
 
@@ -661,7 +672,7 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 
 `Dasherize` and `Hyphenate` replace underscores with dashes in the string:
 
-```C#
+```csharp
 "some_title".Dasherize() => "some-title"
 "some_title".Hyphenate() => "some-title"
 ```
@@ -671,7 +682,7 @@ You can combine `wordForm` argument with gender but passing this argument in whe
 
 `Kebaberize` separates the input words with hyphens and all words are converted to lowercase
 
-```C#
+```csharp
 "SomeText".Kebaberize() => "some-text"
 ```
 
@@ -682,7 +693,7 @@ Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follow
 
 `TimeSpan` methods:
 
-```C#
+```csharp
 2.Milliseconds() => TimeSpan.FromMilliseconds(2)
 2.Seconds() => TimeSpan.FromSeconds(2)
 2.Minutes() => TimeSpan.FromMinutes(2)
@@ -695,19 +706,19 @@ Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follow
 
 You could use these methods to, for example, replace
 
-```C#
+```csharp
 DateTime.Now.AddDays(2).AddHours(3).AddMinutes(-5)
 ```
 
 with
 
-```C#
+```csharp
 DateTime.Now + 2.Days() + 3.Hours() - 5.Minutes()
 ```
 
 There are also three categories of fluent methods to deal with `DateTime`:
 
-```C#
+```csharp
 In.TheYear(2010) // Returns the first of January of 2010
 In.January // Returns 1st of January of the current year
 In.FebruaryOf(2009) // Returns 1st of February of 2009
@@ -727,7 +738,7 @@ On.February.The(12) // Returns 12th of Feb of the current year
 
 and some extension methods:
 
-```C#
+```csharp
 var someDateTime = new DateTime(2011, 2, 10, 5, 25, 45, 125);
 
 // Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008
@@ -753,7 +764,7 @@ Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).At
 
 Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:
 
-```C#
+```csharp
 1.25.Billions() => 1250000000
 3.Hundreds().Thousands() => 300000
 ```
@@ -763,7 +774,7 @@ Humanizer provides a fluent API that produces (usually big) numbers in a clearer
 
 Humanizer can change numbers to words using the `ToWords` extension:
 
-```C#
+```csharp
 1.ToWords() => "one"
 10.ToWords() => "ten"
 11.ToWords() => "eleven"
@@ -774,14 +785,14 @@ Humanizer can change numbers to words using the `ToWords` extension:
 You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specify which gender the number should be outputted in.
 The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
-```C#
+```csharp
 // for Russian locale
 1.ToWords(GrammaticalGender.Masculine) => "один"
 1.ToWords(GrammaticalGender.Feminine) => "одна"
 1.ToWords(GrammaticalGender.Neuter) => "одно"
 ```
 
-```C#
+```csharp
 // for Arabic locale
 1.ToWords(GrammaticalGender.Masculine) => "واحد"
 1.ToWords(GrammaticalGender.Feminine) => "واحدة"
@@ -793,14 +804,14 @@ Obviously this only applies to some cultures. For others passing gender in doesn
 
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
 
-```C#
+```csharp
 11.ToWords(new CultureInfo("en")) => "eleven"
 1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru")) => "один"
 ```
 
 Another overload of the method allow you to pass a bool to remove the "And" that can be added before the last number:
 
-```C#
+```csharp
 3501.ToWords(false) => "three thousand five hundred one"
 102.ToWords(false) => "one hundred two"
 ```
@@ -811,7 +822,7 @@ Use the argument `wordForm` to get one result or another. Possible values are `W
 This argument can be combined with the rest of the arguments presented above.
 Passing `wordForm` argument in when it is not applicable will not make any difference in the result.
 
-```C#
+```csharp
 // Spanish locale
 21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Masculine) => "veintiún mil quinientos un"
 21501.ToWords(WordForm.Normal, GrammaticalGender.Masculine) => "veintiún mil quinientos uno"
@@ -825,7 +836,7 @@ Passing `wordForm` argument in when it is not applicable will not make any diffe
 
 This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
 
-```C#
+```csharp
 0.ToOrdinalWords() => "zeroth"
 1.ToOrdinalWords() => "first"
 2.ToOrdinalWords() => "second"
@@ -842,7 +853,7 @@ This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords
 You can pass a second argument to `ToOrdinalWords` to specify the gender of the output.
 The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
 
-```C#
+```csharp
 // for Brazilian Portuguese locale
 1.ToOrdinalWords(GrammaticalGender.Masculine) => "primeiro"
 1.ToOrdinalWords(GrammaticalGender.Feminine) => "primeira"
@@ -852,7 +863,7 @@ The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Femini
 2.ToOrdinalWords(GrammaticalGender.Neuter) => "segundo"
 ```
 
-```C#
+```csharp
 // for Arabic locale
 1.ToOrdinalWords(GrammaticalGender.Masculine) => "الأول"
 1.ToOrdinalWords(GrammaticalGender.Feminine) => "الأولى"
@@ -866,9 +877,9 @@ Obviously this only applies to some cultures. For others passing gender in doesn
 
 Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
 
-```C#
+```csharp
 10.ToOrdinalWords(new CultureInfo("en-US")) => "tenth"
-1.ToOrdinalWords(GrammaticalGender.Masculine, new CulureInfo("pt-BR")) => "primeiro"
+1.ToOrdinalWords(GrammaticalGender.Masculine, new CultureInfo("pt-BR")) => "primeiro"
 ```
 
 `ToOrdinalWords` also supports variations some cultures apply depending on the position of the ordinalized number in a sentence.
@@ -876,7 +887,7 @@ Use the argument `wordForm` to get one result or another. Possible values are `W
 Combine this argument with the rest of the arguments presented above.
 Passing `wordForm` argument in when it is not applicable will not make any difference in the result.
 
-```C#
+```csharp
 // Spanish locale
 43.ToOrdinalWords(WordForm.Normal, GrammaticalGender.Masculine) => "cuadragésimo tercero"
 43.ToOrdinalWords(WordForm.Abbreviation, GrammaticalGender.Masculine) => "cuadragésimo tercer"
@@ -910,7 +921,7 @@ if (!"tenn".TryToNumber(out var invalid, new CultureInfo("en"), out var badWord)
 ### DateTime to ordinal words
 
 This is kind of an extension of Ordinalize
-```C#
+```csharp
 // for English UK locale
 new DateTime(2015, 1, 1).ToOrdinalWords() => "1st January 2015"
 new DateTime(2015, 2, 12).ToOrdinalWords() => "12th February 2015"
@@ -925,7 +936,9 @@ new DateTime(2015, 3, 22).ToOrdinalWords() => "March 22nd, 2015"
 You can pass a second argument to `ToOrdinalWords` to specify the case of the output.
 The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`, `GrammaticalCase.Dative`, `GrammaticalCase.Accusative`, `GrammaticalCase.Instrumental` and `GrammaticalGender.Prepositional`:
 
-```C#
+```csharp
+// Example: Using ToOrdinalWords with grammatical case
+new DateTime(2015, 1, 1).ToOrdinalWords(GrammaticalCase.Genitive) // e.g., "1st of January 2015" in some languages
 ```
 
 Obviously this only applies to some cultures. For others passing case in doesn't make any difference in the result.
@@ -934,7 +947,7 @@ Obviously this only applies to some cultures. For others passing case in doesn't
 ### TimeOnly to Clock Notation
 
 Extends TimeOnly to allow humanizing it to a clock notation
-```C#
+```csharp
 // for English US locale
 new TimeOnly(3, 0).ToClockNotation() => "three o'clock"
 new TimeOnly(12, 0).ToClockNotation() => "noon"
@@ -951,7 +964,7 @@ new TimeOnly(14, 30).ToClockNotation() => "duas e meia"
 
 Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 through 10 can be expressed in Roman numerals as follows:
 
-```C#
+```csharp
 1.ToRoman() => "I"
 2.ToRoman() => "II"
 3.ToRoman() => "III"
@@ -966,7 +979,7 @@ Humanizer can change numbers to Roman numerals using the `ToRoman` extension. Th
 
 Also, the reverse operation using the `FromRoman` extension.
 
-```C#
+```csharp
 "I".FromRoman() => 1
 "II".FromRoman() => 2
 "III".FromRoman() => 3
@@ -980,7 +993,7 @@ Note that only integers smaller than 4000 can be converted to Roman numerals.
 
 Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
 
-```C#
+```csharp
 1d.ToMetric() => "1"
 1230d.ToMetric() => "1.23k"
 0.1d.ToMetric() => "100m"
@@ -988,7 +1001,7 @@ Humanizer can change numbers to Metric numerals using the `ToMetric` extension. 
 
 Also, the reverse operation using the `FromMetric` extension.
 
-```C#
+```csharp
 "1".FromMetric() => 1
 "1.23k".FromMetric() => 1230
 "100m".FromMetric() => 0.1
@@ -996,7 +1009,7 @@ Also, the reverse operation using the `FromMetric` extension.
 
 The `int` and `long` data types are also supported:
 
-```C#
+```csharp
 ((int)456789).ToMetric(decimals: 2) => "456.79k"
 ((int)456789).ToMetric(decimals: 20) => "456.78900000000000000000k"
 long.MaxValue.ToMetric(decimals: 12) => "9.223372036855E"
@@ -1022,7 +1035,7 @@ fileSize.Terabytes => 9.31322575e-9
 
 There are a few extension methods that allow you to turn a number into a ByteSize instance:
 
-```C#
+```csharp
 3.Bits();
 5.Bytes();
 (10.5).Kilobytes();
@@ -1033,14 +1046,14 @@ There are a few extension methods that allow you to turn a number into a ByteSiz
 
 You can also add/subtract the values using +/- operators and Add/Subtract methods:
 
-```C#
+```csharp
 var total = (10).Gigabytes() + (512).Megabytes() - (2.5).Gigabytes();
 total.Subtract((2500).Kilobytes()).Add((25).Megabytes());
 ```
 
 A `ByteSize` object contains two properties that represent the largest metric prefix symbol and value:
 
-```C#
+```csharp
 var maxFileSize = (10).Kilobytes();
 
 maxFileSize.LargestWholeNumberSymbol;  // "KB"
@@ -1049,7 +1062,7 @@ maxFileSize.LargestWholeNumberValue;   // 10
 
 If you want a string representation you can call `ToString` or `Humanize` interchangeably on the `ByteSize` instance:
 
-```C#
+```csharp
 7.Bits().ToString();           // 7 b
 8.Bits().ToString();           // 1 B
 (.5).Kilobytes().Humanize();   // 512 B
@@ -1063,7 +1076,7 @@ You can also optionally provide a format for the expected string representation.
 The formatter can contain the symbol of the value to display: `b`, `B`, `KB`, `MB`, `GB`, `TB`.
 The formatter uses the built in [`double.ToString` method](https://docs.microsoft.com/dotnet/api/system.double.tostring) with `#.##` as the default format which rounds the number to two decimal places:
 
-```C#
+```csharp
 var b = (10.505).Kilobytes();
 
 // Default number format is #.##
@@ -1086,7 +1099,7 @@ b.Humanize("#.## B");     // 10757.12 B
 
 If you want a string representation with full words you can call `ToFullWords` on the `ByteSize` instance:
 
-```C#
+```csharp
 7.Bits().ToFullWords();           // 7 bits
 8.Bits().ToFullWords();           // 1 byte
 (.5).Kilobytes().ToFullWords();   // 512 bytes
@@ -1100,7 +1113,7 @@ There isn't a `Dehumanize` method to turn a string representation back into a `B
 Like other `TryParse` methods, `ByteSize.TryParse` returns `boolean` value indicating whether the parsing was successful.
 If the value is parsed it is output to the `out` parameter supplied:
 
-```C#
+```csharp
 ByteSize output;
 ByteSize.TryParse("1.5mb", out output);
 
@@ -1128,7 +1141,7 @@ Finally, if you need to calculate the rate at which a quantity of bytes has been
 
 The `Per` method returns a `ByteRate` class which has a `Humanize` method. By default, rates are given in seconds (eg, MB/s). However, if desired, a TimeUnit may be passed to `Humanize` for an alternate interval. Valid intervals are `TimeUnit.Second`, `TimeUnit.Minute`, and `TimeUnit.Hour`. Examples of each interval and example byte rate usage is below.
 
-```C#
+```csharp
 var size = ByteSize.FromMegabytes(10);
 var measurementInterval = TimeSpan.FromSeconds(1);
 
@@ -1144,7 +1157,7 @@ text = size.Per(measurementInterval).Humanize(TimeUnit.Hour);
 
 You can specify a format for the bytes part of the humanized output:
 
-```C#
+```csharp
 19854651984.Bytes().Per(1.Seconds()).Humanize("#.##");
 // 18.49 GB/s
 ```
@@ -1154,7 +1167,7 @@ You can specify a format for the bytes part of the humanized output:
 
 Humanizer includes methods to change a numeric heading to words. The heading can be a `double` whereas the result will be a string. You can choose whether to return a full representation of the heading (e.g. north, east, south or west), a short representation (e.g. N, E, S, W) or a Unicode arrow character (e.g. ↑, →, ↓, ←).
 
-```C#
+```csharp
 360.ToHeading();
 // N
 720.ToHeading();
@@ -1163,7 +1176,7 @@ Humanizer includes methods to change a numeric heading to words. The heading can
 
 To retrieve a full version of the heading, use the following call:
 
-```C#
+```csharp
 180.ToHeading(HeadingStyle.Full);
 // south
 360.ToHeading(HeadingStyle.Full);
@@ -1176,7 +1189,7 @@ The methods above all have an overload with which you can provide a `CultureInfo
 
 To retrieve an arrow representing the heading use the following method:
 
-```C#
+```csharp
 90.ToHeadingArrow();
 // →
 225.ToHeadingArrow();
@@ -1187,7 +1200,7 @@ The arrow representation of the heading has a maximum deviation of 22.5°.
 
 In order to retrieve a heading based on the short text representation (e.g. N, E, S, W), the following method can be used:
 
-```C#
+```csharp
 "S".FromShortHeading();
 // 180
 "SW".FromShortHeading();
@@ -1199,7 +1212,7 @@ In order to retrieve a heading based on the short text representation (e.g. N, E
 
 Humanizer can change whole numbers into their 'tuple'  using `Tupleize`. For example:
 
-```C#
+```csharp
 1.Tupleize();
 // single
 3.Tupleize();
@@ -1215,7 +1228,7 @@ The numbers 1-10, 100 and 1000 will be converted into a 'named' tuple (i.e. "sin
 
 Humanizer can translate time units to their symbols:
 
-```C#
+```csharp
 TimeUnit.Day.ToSymbol();
 // d
 TimeUnit.Week.ToSymbol();
@@ -1233,7 +1246,7 @@ You may find an ASP.NET MVC sample [in the code](https://github.com/Humanizr/Hum
 
 This is achieved using a custom `DataAnnotationsModelMetadataProvider` I called [HumanizerMetadataProvider](https://github.com/Humanizr/Humanizer/blob/v2.7.9/samples/Humanizer.MvcSample/HumanizerMetadataProvider.cs). It is small enough to repeat here; so here we go:
 
-```C#
+```csharp
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -1283,13 +1296,13 @@ For other properties it will Humanize the property name. That is all.
 Now you need to register this metadata provider with Asp.Net MVC.
 Make sure you use `System.Web.Mvc.ModelMetadataProviders`, and not `System.Web.ModelBinding.ModelMetadataProviders`:
 
-```C#
+```csharp
 ModelMetadataProviders.Current = new HumanizerMetadataProvider();
 ```
 
 ... and now you can replace:
 
-```C#
+```csharp
 public class RegisterModel
 {
     [Display(Name = "User name")]
@@ -1305,7 +1318,7 @@ public class RegisterModel
 
 with:
 
-```C#
+```csharp
 public class RegisterModel
 {
     public string UserName { get; set; }
@@ -1318,7 +1331,7 @@ public class RegisterModel
 
 No need to mention that if you want title casing for your labels you can chain the method with `Transform`:
 
-```C#
+```csharp
 modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize().Transform(To.TitleCase);
 ```
 
@@ -1362,6 +1375,36 @@ Humanizer.jvm meets all your jvm needs for manipulating and displaying strings, 
 ### Humanizer.node
 
 [Humanizer.node](https://github.com/fakoua/humanizer.node) is a TypeScript port of the Humanizer framework.
+
+
+## Contributing
+
+We welcome contributions! If you'd like to contribute to Humanizer:
+
+- **Found a bug?** Please [open an issue](https://github.com/Humanizr/Humanizer/issues/new)
+- **Have a feature idea?** Create an issue to discuss it
+- **Want to submit code?** Read our [contribution guidelines](.github/CONTRIBUTING.md) and submit a pull request
+
+Please read our [Code of Conduct](.github/CODE_OF_CONDUCT.md) before contributing.
+
+
+## License
+
+Humanizer is licensed under the [MIT License](license.txt).
+
+Copyright (c) .NET Foundation and Contributors
+
+
+## Reporting Issues
+
+If you encounter any bugs or have feature requests, please:
+
+1. Check if the issue already exists in our [issue tracker](https://github.com/Humanizr/Humanizer/issues)
+2. If not, [create a new issue](https://github.com/Humanizr/Humanizer/issues/new) with:
+   - A clear description of the problem or feature request
+   - Steps to reproduce (for bugs)
+   - Expected vs actual behavior (for bugs)
+   - Your environment details (OS, .NET version, Humanizer version)
 
 
 ## Icon
