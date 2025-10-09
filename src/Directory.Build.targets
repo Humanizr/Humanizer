@@ -8,7 +8,6 @@
 
   <PropertyGroup>
     <EnableSourceLink Condition="'$(Configuration)' == 'Debug'">false</EnableSourceLink>
-    <DebugType Condition=" '$(BuildingForLiveUnitTesting)' != 'true' ">embedded</DebugType>
   </PropertyGroup>
 
   <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">

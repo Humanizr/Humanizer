@@ -69,14 +69,14 @@ namespace Humanizer
 
         private string GetTens(int number, GrammaticalGender gender)
         {
-            int tens = number / 10;
-            int units = number % 10;
+            var tens = number / 10;
+            var units = number % 10;
             if (number < 20)
                 return Teens[number - 10];
             if (units == 0)
                 return Tens[tens];
             // "vint-i-un", "trenta-dos"
-            string conjunction = tens == 2 ? "-i-" : "-";
+            var conjunction = tens == 2 ? "-i-" : "-";
 
             var num = (units == 1) && gender == GrammaticalGender.Masculine
                 ? "u"
@@ -87,9 +87,9 @@ namespace Humanizer
 
         private string GetHundreds(int number, GrammaticalGender gender)
         {
-            int hundreds = number / 100;
-            int rest = number % 100;
-            string hundredPart = gender == GrammaticalGender.Feminine ? HundredsFeminine[hundreds] : HundredsMasculine[hundreds];
+            var hundreds = number / 100;
+            var rest = number % 100;
+            var hundredPart = gender == GrammaticalGender.Feminine ? HundredsFeminine[hundreds] : HundredsMasculine[hundreds];
 
             if (rest == 0)
                 return hundredPart;
@@ -103,8 +103,8 @@ namespace Humanizer
 
         private string GetThousands(int number, GrammaticalGender gender)
         {
-            int thousands = number / 1000;
-            int rest = number % 1000;
+            var thousands = number / 1000;
+            var rest = number % 1000;
             string thousandPart;
             if (thousands == 1)
                 thousandPart = "mil";
@@ -122,8 +122,8 @@ namespace Humanizer
 
         private string GetMillions(int number, GrammaticalGender gender)
         {
-            int millions = number / 1000000;
-            int rest = number % 1000000;
+            var millions = number / 1000000;
+            var rest = number % 1000000;
             string millionPart;
             if (millions == 1)
                 millionPart = "un milió";
@@ -171,11 +171,11 @@ namespace Humanizer
 
         private string GetOrdinalTens(int number, GrammaticalGender gender)
         {
-            int dec = number / 10;
-            int rem = number % 10;
+            var dec = number / 10;
+            var rem = number % 10;
             string[] tens = { "", "", "vint", "trenta", "quaranta", "cinquanta", "seixanta", "setanta", "vuitanta", "noranta" };
 
-            string ordSuf = gender == GrammaticalGender.Feminine ? "ena" : "è";
+            var ordSuf = gender == GrammaticalGender.Feminine ? "ena" : "è";
 
             if (rem == 0)
             {
@@ -186,21 +186,21 @@ namespace Humanizer
                 return tensDec + ordSuf;
             }
 
-            string[] unitRoots = new[] { "", "un", "dos", "tres", "quatr", "cinqu", "sis", "set", "vuit", "nov" };
+            var unitRoots = new[] { "", "un", "dos", "tres", "quatr", "cinqu", "sis", "set", "vuit", "nov" };
             var num = $"{unitRoots[rem]}{ordSuf}";
             if (rem == 1)
                 num = gender == GrammaticalGender.Feminine ? "una" : "un";
 
-            string conj = dec == 2 ? "-i-" : "-";
+            var conj = dec == 2 ? "-i-" : "-";
             return $"{tens[dec]}{conj}{num}";
         }
 
         private string GetOrdinalHundreds(int number, GrammaticalGender gender)
         {
-            int centenas = number / 100;
-            int rest = number % 100;
+            var centenas = number / 100;
+            var rest = number % 100;
 
-            string hundred = gender == GrammaticalGender.Feminine
+            var hundred = gender == GrammaticalGender.Feminine
                 ? new[] { "", "cent", "dues-centes", "tres-centes", "quatre-centes", "cinc-centes", "sis-centes", "set-centes", "vuit-centes", "nou-centes" }[centenas]
                 : new[] { "", "cent", "dos-cents", "tres-cents", "quatre-cents", "cinc-cents", "sis-cents", "set-cents", "vuit-cents", "nou-cents" }[centenas];
 
@@ -225,9 +225,9 @@ namespace Humanizer
 
         private string GetOrdinalThousands(int number, GrammaticalGender gender)
         {
-            int mils = number / 1000;
-            int rest = number % 1000;
-            string milStr = mils == 1 ? "mil" : $"{Convert(mils, gender)} mil";
+            var mils = number / 1000;
+            var rest = number % 1000;
+            var milStr = mils == 1 ? "mil" : $"{Convert(mils, gender)} mil";
             if (rest == 0)
                 return milStr;
 
@@ -243,9 +243,9 @@ namespace Humanizer
 
         private string GetOrdinalMillions(int number, GrammaticalGender gender)
         {
-            int mills = number / 1000000;
-            int rest = number % 1000000;
-            string millsStr = mills == 1 ? "un milió" : $"{Convert(mills, GrammaticalGender.Masculine)} milions";
+            var mills = number / 1000000;
+            var rest = number % 1000000;
+            var millsStr = mills == 1 ? "un milió" : $"{Convert(mills, GrammaticalGender.Masculine)} milions";
             if (rest == 0)
                 return millsStr;
 
