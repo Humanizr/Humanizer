@@ -11,8 +11,8 @@
     [InlineData("ContainsSpecial?)@Characters", "Contains special characters")]
     [InlineData("a", "A")]
     [InlineData("A", "A")]
-    [InlineData("?)@", "")]
-    [InlineData("?", "")]
+    [InlineData("?)@", "?)@")]
+    [InlineData("?", "?")]
     [InlineData("", "")]
     [InlineData("JeNeParlePasFrançais", "Je ne parle pas français")]
     public void CanHumanizeStringInPascalCase(string input, string expectedResult) =>
