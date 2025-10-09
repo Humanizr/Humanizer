@@ -1,4 +1,7 @@
-﻿using System.Resources;
+using System.Resources;
+using System.Globalization;
+using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Humanizer;
 
@@ -18,20 +21,35 @@ public static class Resources
     /// <returns>The value of the resource localized for the specified culture.</returns>
     public static string GetResource(string resourceKey, CultureInfo? culture = null)
     {
+        // We avoid populating ResourceManager's fallback cache unless absolutely necessary.
+        // ResourceManager.GetString follows the full fallback chain (culture -> parent -> neutral)
+        // and will create/cache ResourceSets for whichever culture supplies the string. On
+        // environments with lazy satellite assembly loading (Blazor WebAssembly), this can
+        // result in an incorrect fallback to the neutral culture and that fallback being cached
+        // for subsequent lookups. To minimize that risk and improve performance, we:
+        //   1) Attempt to read the exact culture's ResourceSet without creating or probing parents.
+        //   2) If not found, check already-loaded parent ResourceSets without creating new ones.
+        //   3) Only as a last resort call ResourceManager.GetString which may perform fallback
+        //      and populate the cache.
+
         string? resource = null;
-        
-        // When a specific culture is requested, first try to get it without falling back to parent cultures.
-        // This is important for Blazor WebAssembly where ResourceManager.GetString can incorrectly fall back
-        // to the neutral culture even when satellite assemblies are available.
+
         if (culture != null)
         {
-            var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
-            resource = resourceSet?.GetString(resourceKey);
+            var exactResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
+            resource = exactResourceSet?.GetString(resourceKey);
         }
-        
-        // If we didn't find it without fallback (or no culture was specified), use the standard approach with fallback
+
         if (resource == null)
         {
+            // Check already-loaded parents without creating/adding new ResourceSets to the cache.
+            var parentResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: true);
+            resource = parentResourceSet?.GetString(resourceKey);
+        }
+
+        if (resource == null)
+        {
+            // Last resort: use the standard GetString which will perform fallback and may create/cache ResourceSets.
             resource = ResourceManager.GetString(resourceKey, culture);
         }
 
