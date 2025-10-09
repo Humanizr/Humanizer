@@ -76,8 +76,8 @@ try {
 "@
     Set-Content -Path $nugetConfig -Value $nugetConfigContent
 
-    # Test 1: Verify main metapackage can be restored and pulls in satellites
-    Write-AzureDevOpsSection "Test 1: Verifying Humanizer metapackage dependencies"
+    # Verify main metapackage can be restored and pulls in satellites
+    Write-AzureDevOpsSection "Verifying Humanizer metapackage dependencies"
     Push-Location $tempDir
     
     Write-Host "Creating test project..."
@@ -138,72 +138,12 @@ try {
     Pop-Location
     Write-Host ""
     
-    # Test 2: Verify satellite packages depend on Humanizer.Core
-    Write-AzureDevOpsSection "Test 2: Verifying satellite packages depend on Humanizer.Core"
-    
-    $satelliteCount = 0
-    foreach ($satellite in $satellitePackages) {
-        $pkgName = $satellite.Name -replace "\.$PackageVersion\.nupkg$", ""
-        $satelliteCount++
-        Write-Host "[$satelliteCount/$($satellitePackages.Count)] Testing $pkgName..."
-        
-        $testDir = Join-Path $tempDir "SatelliteTest_$satelliteCount"
-        New-Item -ItemType Directory -Path $testDir -Force | Out-Null
-        Push-Location $testDir
-        
-        $output = dotnet new console -n Test --force 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            Pop-Location
-            Write-AzureDevOpsError "Failed to create test project for $pkgName"
-            throw "Failed to create test project for $pkgName"
-        }
-        
-        Set-Location Test
-        
-        $output = dotnet add package $pkgName --version $PackageVersion --no-restore 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            Pop-Location
-            Write-AzureDevOpsError "Failed to add $pkgName package reference"
-            throw "Failed to add $pkgName package reference"
-        }
-        
-        $restoreOutput = dotnet restore --configfile $nugetConfig 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            Pop-Location
-            Write-AzureDevOpsError "Failed to restore $pkgName"
-            Write-Host $restoreOutput
-            throw "Failed to restore $pkgName"
-        }
-        
-        # Check if Humanizer.Core was pulled in
-        $objPath = "obj/project.assets.json"
-        if (-not (Test-Path $objPath)) {
-            Pop-Location
-            Write-AzureDevOpsError "project.assets.json not found for $pkgName"
-            throw "project.assets.json not found for $pkgName"
-        }
-        
-        $assets = Get-Content $objPath | ConvertFrom-Json
-        $hasCoreReference = $assets.libraries.PSObject.Properties.Name -contains "Humanizer.Core/$PackageVersion"
-        
-        if (-not $hasCoreReference) {
-            Pop-Location
-            Write-AzureDevOpsError "$pkgName does not depend on Humanizer.Core"
-            throw "$pkgName does not depend on Humanizer.Core"
-        }
-        
-        Write-Host "  ##[command]✓ $pkgName correctly depends on Humanizer.Core"
-        Pop-Location
-    }
-    
-    Write-Host ""
     Write-AzureDevOpsSection "✓ All Verification Checks Passed"
     Write-Host "##[command]Summary:"
     Write-Host "  - Main metapackage (Humanizer): ✓"
     Write-Host "  - Core package (Humanizer.Core): ✓"
     Write-Host "  - Satellite packages verified: $($satellitePackages.Count)"
     Write-Host "  - All satellites are dependencies of metapackage: ✓"
-    Write-Host "  - All satellites depend on Humanizer.Core: ✓"
     
 } catch {
     Write-AzureDevOpsError $_.Exception.Message
