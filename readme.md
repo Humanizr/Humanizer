@@ -2,7 +2,7 @@
 
 [![Build Status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 [![NuGet version](https://img.shields.io/nuget/v/Humanizer.svg)](https://www.nuget.org/packages/Humanizer)
-[![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.svg)](https://www.nuget.org/packages/Humanizer)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.Core.svg)](https://www.nuget.org/packages/Humanizer.Core)
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
@@ -18,9 +18,11 @@ All languages: `Humanizer`
 
 ### Supported frameworks
 
-The following frameworks are supported: net48, net6.0, net7.0, and net8.0
+**Supported frameworks:** net48, net6.0, net7.0, and net8.0
 
-The NuGet package also targets netstandard2.0 to support specific scenarios such as Roslyn Analyzers and MSBuild tasks that require netstandard2.0. While other .NET Framework versions (net4.6.1 through net4.7.2) can technically consume netstandard2.0 libraries, they are **not officially supported** by Humanizer and may not work correctly. Please use one of the explicitly supported frameworks listed above for the best experience.
+**netstandard2.0 targeting:** The NuGet package also targets netstandard2.0 as a special case to support specific scenarios such as Roslyn Analyzers and MSBuild tasks that require netstandard2.0.
+
+**Unsupported versions:** While other .NET Framework versions (net4.6.1 through net4.7.2) can technically consume netstandard2.0 libraries, they are **not officially supported** by Humanizer and may not work correctly. Please use one of the explicitly supported frameworks listed above for the best experience.
 
 Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet/sourcelink) and included in the package, which means you can step through Humanizer's source code while debugging your own application.
 
@@ -32,9 +34,9 @@ Here are the options:
 
 | Option | Package Name | Install Command | Included Languages |
 |--------|--------------|-----------------|-------------------|
-| **All languages** | `Humanizer` | `Install-Package Humanizer` | All supported languages (pulls in `Humanizer.Core` and all language packages) |
-| **English only** | `Humanizer.Core` | `Install-Package Humanizer.Core` | English only |
-| **Specific languages** | `Humanizer.Core.<locale>` | `Install-Package Humanizer.Core.fr` (French example) | Install as many language-specific packages as needed |
+| **All languages** | `Humanizer` | `dotnet add package Humanizer` | All supported languages (pulls in `Humanizer.Core` and all language packages) |
+| **English only** | `Humanizer.Core` | `dotnet add package Humanizer.Core` | English only |
+| **Specific languages** | `Humanizer.Core.<locale>` | `dotnet add package Humanizer.Core.fr` (French example) | Install as many language-specific packages as needed |
 
 For example, for French use `Humanizer.Core.fr`, for Spanish use `Humanizer.Core.es`, etc. You can include multiple languages by installing however many language packages you want.
 
