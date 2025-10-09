@@ -1,0 +1,23 @@
+# Jekyll configuration for Humanizer GitHub Pages
+title: Humanizer
+description: Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+# Exclude files from the site
+exclude:
+  - src/
+  - NuSpecs/
+  - .git/
+  - .github/
+  - .gitignore
+  - .gitattributes
+  - azure-pipelines.yml
+  - verify-packages.ps1
+  - version.json
+  - license.txt
+  - AGENTS.md
