@@ -25,8 +25,8 @@
     <Using Remove="System.Net.Http" />
     <PackageReference Include="Polyfill" Version="9.0.0-beta.18" PrivateAssets="all" />
     <PackageReference Include="System.Collections.Immutable" Version="9.0.9" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />    
-    <PackageReference Include="System.Memory" Version="4.6.3" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'"  />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'"  />
+    <PackageReference Include="System.Memory" Version="4.6.3" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -59,7 +59,7 @@
 
     <None Update="FluentDate\InDate.SomeTimeFrom.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.SomeTimeFrom.cs" />
     <Compile Update="FluentDate\InDate.SomeTimeFrom.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.SomeTimeFrom.tt" />
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.7.115" />
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.8.118" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -83,58 +83,8 @@
       <NuspecProperties>version=$(NuGetPackageVersion);RepositoryType=git;RepositoryCommit=$(GitCommitId);RepositoryUrl=https://github.com/Humanizr/Humanizer</NuspecProperties>
     </PropertyGroup>
         
-    <Message Importance="High" Text="Packing %(NuspecFiles.Identity) → v$(NuGetPackageVersion)"  />
+    <Message Importance="High" Text="Packing %(NuspecFiles.Identity) → v$(NuGetPackageVersion)" />
     
-    <PackTask
-      PackItem="$(MSBuildProjectFullPath)"
-      TargetFrameworks="$(TargetFrameworks)"
-
-
-      PackageId="$(PackageId)"
-      PackageVersion="$(NuGetPackageVersion)"
-      Title="$(Product)"
-      Authors="$(Authors)"
-      Description="$(Description)"
-      DevelopmentDependency="$(DevelopmentDependency)"
-      Copyright="$(Copyright)"
-      RequireLicenseAcceptance="$(PackageRequireLicenseAcceptance)"
-      RestoreOutputPath="$(RestoreOutputPath)"
-      LicenseUrl="$(PackageLicenseUrl)"
-      ProjectUrl="$(PackageProjectUrl)"
-      IconUrl="$(PackageIconUrl)"
-      Tags="$(PackageTags)"
-      ReleaseNotes="$(PackageReleaseNotes)"
-      AssemblyName="$(AssemblyName)"
-      PackageOutputPath="$(PackageOutputPath)"
-      IsTool="$(IsTool)"
-      IncludeSymbols="$(IncludeSymbols)"
-      IncludeSource="$(IncludeSource)"
-      InstallPackageToOutputPath="$(InstallPackageToOutputPath)"
-      OutputFileNamesWithoutVersion="$(OutputFileNamesWithoutVersion)"
-      RepositoryUrl="$(RepositoryUrl)"
-      RepositoryType="$(RepositoryType)"
-      RepositoryBranch="$(RepositoryBranch)"
-      RepositoryCommit="$(RepositoryCommit)"
-      NoPackageAnalysis="$(NoPackageAnalysis)"
-      NuspecFile="%(NuspecFiles.Identity)"
-      NuspecBasePath="$(NuspecBasePath)"
-      NuspecProperties="$(NuspecProperties)"
-      SymbolPackageFormat="$(SymbolPackageFormat)"
-      MinClientVersion="$(MinClientVersion)"
-      Serviceable="$(Serviceable)"
-      ContinuePackingAfterGeneratingNuspec="true"
-      NoDefaultExcludes="$(NoDefaultExcludes)"
-      NuspecOutputPath="$(NuspecOutputPath)"
-      IncludeBuildOutput="$(IncludeBuildOutput)"
-      NoWarn="$(NoWarn)"
-      TreatWarningsAsErrors="$(TreatWarningsAsErrors)"
-      WarningsAsErrors="$(WarningsAsErrors)"
-      WarningsNotAsErrors="$(WarningsNotAsErrors)"
-      PackageLicenseExpression="$(PackageLicenseExpression)"
-      PackageLicenseFile="$(PackageLicenseFile)"
-      PackageLicenseExpressionVersion="$(PackageLicenseExpressionVersion)"
-      Readme="$(Readme)"
-      Deterministic="$(Deterministic)"
-      PackageIcon="$(PackageIcon)" />
+    <PackTask PackItem="$(MSBuildProjectFullPath)" TargetFrameworks="$(TargetFrameworks)" PackageId="$(PackageId)" PackageVersion="$(NuGetPackageVersion)" Title="$(Product)" Authors="$(Authors)" Description="$(Description)" DevelopmentDependency="$(DevelopmentDependency)" Copyright="$(Copyright)" RequireLicenseAcceptance="$(PackageRequireLicenseAcceptance)" RestoreOutputPath="$(RestoreOutputPath)" LicenseUrl="$(PackageLicenseUrl)" ProjectUrl="$(PackageProjectUrl)" IconUrl="$(PackageIconUrl)" Tags="$(PackageTags)" ReleaseNotes="$(PackageReleaseNotes)" AssemblyName="$(AssemblyName)" PackageOutputPath="$(PackageOutputPath)" IsTool="$(IsTool)" IncludeSymbols="$(IncludeSymbols)" IncludeSource="$(IncludeSource)" InstallPackageToOutputPath="$(InstallPackageToOutputPath)" OutputFileNamesWithoutVersion="$(OutputFileNamesWithoutVersion)" RepositoryUrl="$(RepositoryUrl)" RepositoryType="$(RepositoryType)" RepositoryBranch="$(RepositoryBranch)" RepositoryCommit="$(RepositoryCommit)" NoPackageAnalysis="$(NoPackageAnalysis)" NuspecFile="%(NuspecFiles.Identity)" NuspecBasePath="$(NuspecBasePath)" NuspecProperties="$(NuspecProperties)" SymbolPackageFormat="$(SymbolPackageFormat)" MinClientVersion="$(MinClientVersion)" Serviceable="$(Serviceable)" ContinuePackingAfterGeneratingNuspec="true" NoDefaultExcludes="$(NoDefaultExcludes)" NuspecOutputPath="$(NuspecOutputPath)" IncludeBuildOutput="$(IncludeBuildOutput)" NoWarn="$(NoWarn)" TreatWarningsAsErrors="$(TreatWarningsAsErrors)" WarningsAsErrors="$(WarningsAsErrors)" WarningsNotAsErrors="$(WarningsNotAsErrors)" PackageLicenseExpression="$(PackageLicenseExpression)" PackageLicenseFile="$(PackageLicenseFile)" PackageLicenseExpressionVersion="$(PackageLicenseExpressionVersion)" Readme="$(Readme)" Deterministic="$(Deterministic)" PackageIcon="$(PackageIcon)" />
   </Target>
 </Project>
