@@ -49,12 +49,10 @@ stages:
         arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\Packages 
       displayName: Restore, Build, and Pack
 
-    - task: PowerShell@2
+    - powershell: |
+        $(Build.SourcesDirectory)/verify-packages.ps1 -PackageVersion '$(NBGV_NuGetPackageVersion)' -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
       displayName: 'Verify Package Structure and Dependencies'
       inputs:
-        targetType: 'filePath'
-        filePath: '$(Build.SourcesDirectory)/verify-packages.ps1'
-        arguments: -PackageVersion '$(NBGV_NuGetPackageVersion)' -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
         pwsh: true
         failOnStderr: false
 
