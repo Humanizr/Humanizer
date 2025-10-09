@@ -100,3 +100,8 @@ src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.receive
 
 
 *.received.*
+
+# Jekyll
+docs/_site/
+docs/.jekyll-cache/
+docs/.sass-cache/

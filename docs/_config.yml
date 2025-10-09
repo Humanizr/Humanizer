@@ -1,0 +1,15 @@
+# Jekyll configuration for Humanizer GitHub Pages
+title: Humanizer
+description: Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+
+# Use readme.md as the index page
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"

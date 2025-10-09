@@ -28,12 +28,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Prepare index.md from readme
+        run: |
+          echo "---" > docs/index.md
+          echo "layout: default" >> docs/index.md
+          echo "title: Humanizer" >> docs/index.md
+          echo "---" >> docs/index.md
+          echo "" >> docs/index.md
+          cat readme.md >> docs/index.md
+      - name: Copy logo to docs
+        run: cp logo.png docs/logo.png
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./docs
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
