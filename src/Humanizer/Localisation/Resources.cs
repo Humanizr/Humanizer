@@ -18,7 +18,22 @@ public static class Resources
     /// <returns>The value of the resource localized for the specified culture.</returns>
     public static string GetResource(string resourceKey, CultureInfo? culture = null)
     {
-        var resource = ResourceManager.GetString(resourceKey, culture);
+        string? resource = null;
+        
+        // When a specific culture is requested, first try to get it without falling back to parent cultures.
+        // This is important for Blazor WebAssembly where ResourceManager.GetString can incorrectly fall back
+        // to the neutral culture even when satellite assemblies are available.
+        if (culture != null)
+        {
+            var resourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
+            resource = resourceSet?.GetString(resourceKey);
+        }
+        
+        // If we didn't find it without fallback (or no culture was specified), use the standard approach with fallback
+        if (resource == null)
+        {
+            resource = ResourceManager.GetString(resourceKey, culture);
+        }
 
         if (resource == null || string.IsNullOrEmpty(resource))
         {
