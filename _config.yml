@@ -6,7 +6,6 @@ url: "" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
-theme: minima
 
 # Exclude files from the site
 exclude:
