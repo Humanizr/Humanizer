@@ -6,7 +6,7 @@ Humanizer is a .NET library that meets all your needs for manipulating and displ
 
 ## Technology Stack
 
-- **Language**: C# (C# 8+)
+- **Language**: C# (C# 14)
 - **Frameworks**: .NET 8.0, .NET 10.0, .NET 4.8
 - **Test Framework**: xUnit
 - **Build System**: .NET CLI (dotnet)
@@ -17,7 +17,7 @@ Humanizer is a .NET library that meets all your needs for manipulating and displ
 ### General Principles
 
 1. **Follow .editorconfig**: The project has a comprehensive `.editorconfig` file that must be respected
-2. **No ReSharper warnings**: Code should be clean of ReSharper warnings
+2. **No build warnings**: Code should be clean of build warnings
 3. **Minimal comments**: Write clean, self-documenting code. Comments should only be used when necessary to explain complex logic
 4. **No curly braces for one-line blocks**: Use single-line syntax when appropriate
 5. **Spaces over tabs**: Always use spaces for indentation (4 spaces for C#)
@@ -36,6 +36,7 @@ Humanizer is a .NET library that meets all your needs for manipulating and displ
 - Remove redundant empty lines between methods or code blocks
 - Use `var` for built-in types and simple type declarations
 - Sort using directives with System.* appearing first
+- Prefer global usings for common namespaces
 - Use language keywords instead of framework type names (e.g., `string` not `String`)
 - Prefer modern C# language features (object initializers, collection initializers, pattern matching)
 
@@ -59,24 +60,47 @@ Humanizer is a .NET library that meets all your needs for manipulating and displ
 
 ```bash
 # Run all tests
-dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj -c Release
+dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj
 
 # Run tests with code coverage
-dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj -c Release --collect:"XPlat code coverage" -s src/CodeCoverage.runsettings
+dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj --collect:"XPlat code coverage" -s src/CodeCoverage.runsettings  -- RunConfiguration.DisableAppDomain=true
 ```
 
 ## Build and Validation
+
+Use the latest version of the .NET to build. The following script will install it:
+
+```bash
+#!/usr/bin/env bash
+
+# Installs the latest preview .NET SDK using the official dotnet-install script.
+# The SDK will be installed to ~/.dotnet by default.
+
+set -euo pipefail
+
+INSTALL_DIR="${DOTNET_INSTALL_DIR:-$HOME/.dotnet}"
+
+curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
+chmod +x dotnet-install.sh
+
+./dotnet-install.sh --install-dir "$INSTALL_DIR" --channel 10.0
+
+rm dotnet-install.sh
+
+echo ".NET SDK installed in $INSTALL_DIR"
+
+export DOTNET_ROOT="$INSTALL_DIR"
+export PATH="$DOTNET_ROOT:$PATH"
+hash -r || true   # refresh bash's command cache
+```
+
 
 ### Building the Project
 
 ```bash
 # Build from the src directory
 cd src
-dotnet build Humanizer/Humanizer.csproj -c Release
-
-# Or use the build script from the root
-./src/build.cmd  # Windows
-./src/build.ps1  # PowerShell
+dotnet build Humanizer/Humanizer.csproj /t:PackNuSpecs
 ```
 
 ### Pre-commit Checklist
@@ -85,7 +109,7 @@ Before submitting changes:
 
 1. **Build succeeds**: Run the build command and ensure no errors
 2. **All tests pass**: Run the test suite and verify all tests pass
-3. **No new warnings**: Check that no new compiler or ReSharper warnings were introduced
+3. **No new warnings**: Check that no new compiler warnings were introduced
 4. **EditorConfig compliance**: Verify code follows .editorconfig rules
 5. **XML documentation**: Add or update XML documentation for public APIs
 6. **Update README**: If adding/changing features, update `readme.md`
@@ -96,7 +120,7 @@ Humanizer supports extensive localization. When working with localization:
 
 ### Adding a New Localization
 
-1. **Resource files**: Duplicate `src/Humanizer/Properties/Resources.resx` and add the locale code (e.g., `Resources.ru.resx`)
+1. **Resource files**: Duplicate `src/Humanizer/Properties/Resources.resx` and add the locale code (e.g., `Resources.ru.resx`). Translate English strings in the <value></value> tags in that new resource file to the new language
 2. **Register formatter**: Add your formatter in `src/Humanizer/Configuration/FormatterRegistry.cs`
 3. **Complex rules**: For languages with complex number rules, subclass `DefaultFormatter` (see `RomanianFormatter` or `RussianFormatter`)
 4. **Number converters**: For `ToWords` and `ToOrdinalWords`, create a converter (see `DutchNumberToWordsConverter` or `RussianNumberToWordsConverter`)
