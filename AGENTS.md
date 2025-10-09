@@ -17,7 +17,8 @@ These instructions apply to the entire repository.
 - Respect `.editorconfig`; use spaces, 4-space indentation, and file-scoped namespaces.
 - Use `var` for obvious types, and language keywords (`string`, `int`, etc.).
 - Order `using` directives with `System.*` first; prefer existing global usings.
-- Keep code self-documenting; use comments sparingly and never wrap imports in `try/catch`.
+- Keep code self-documenting; use comments sparingly.
+- Never wrap imports in `try/catch`.
 - Avoid unnecessary `this.` and braces for one-line blocks; trim redundant blank lines.
 - Follow existing naming conventions (camelCase private fields, PascalCase public members/constants/static readonly).
 - Add XML documentation for new or modified public APIs.
