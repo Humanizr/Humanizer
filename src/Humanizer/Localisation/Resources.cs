@@ -34,28 +34,31 @@ public static class Resources
 
         string? resource = null;
 
+        // Only call GetResourceSet when we have an explicit, non-null culture to pass 
+        // This preserves the previous behavior for callers that pass null (they fall through to GetString).
         if (culture != null)
         {
+            // Exact culture only, don't try parents and don't create resource sets.
             var exactResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: false);
             resource = exactResourceSet?.GetString(resourceKey);
+
+            if (resource == null)
+            {
+                // Check already-loaded parents without creating/adding new ResourceSets to the cache.
+                var parentResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: true);
+                resource = parentResourceSet?.GetString(resourceKey);
+            }
         }
 
+        // Last resort: use the standard GetString which performs the full fallback chain and accepts null culture.
         if (resource == null)
         {
-            // Check already-loaded parents without creating/adding new ResourceSets to the cache.
-            var parentResourceSet = ResourceManager.GetResourceSet(culture, createIfNotExists: false, tryParents: true);
-            resource = parentResourceSet?.GetString(resourceKey);
-        }
-
-        if (resource == null)
-        {
-            // Last resort: use the standard GetString which will perform fallback and may create/cache ResourceSets.
             resource = ResourceManager.GetString(resourceKey, culture);
         }
 
         if (resource == null || string.IsNullOrEmpty(resource))
         {
-            throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
+            throw new ArgumentException($@\"The resource object with key '{resourceKey}' was not found\", nameof(resourceKey));
         }
 
         return resource;
