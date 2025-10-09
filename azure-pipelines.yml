@@ -49,6 +49,15 @@ stages:
         arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\Packages 
       displayName: Restore, Build, and Pack
 
+    - task: PowerShell@2
+      displayName: 'Verify Package Structure and Dependencies'
+      inputs:
+        targetType: 'filePath'
+        filePath: '$(Build.SourcesDirectory)/verify-packages.ps1'
+        arguments: '-PackageVersion "$(NBGV_NuGetPackageVersion)" -PackagesDirectory "$(Build.ArtifactStagingDirectory)\Packages"'
+        pwsh: true
+        failOnStderr: false
+
     - task: DotNetCoreCLI@2
       inputs:
         command: test
