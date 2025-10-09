@@ -54,7 +54,7 @@ stages:
       inputs:
         targetType: 'filePath'
         filePath: '$(Build.SourcesDirectory)/verify-packages.ps1'
-        arguments: '-PackageVersion $(NBGV_NuGetPackageVersion) -PackagesDirectory $(Build.ArtifactStagingDirectory)/Packages'
+        arguments: -PackageVersion '$(NBGV_NuGetPackageVersion)' -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
         pwsh: true
         failOnStderr: false
 
