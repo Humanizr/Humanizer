@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net48;net8.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net8.0;net48;netstandard2.0</TargetFrameworks>
     <Authors>Claire Novotny, Mehdi Khalili</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>
-    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields ETC into a human friendly format</Description>
+    <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields, etc, into a human friendly format</Description>
     <Copyright>Copyright © .NET Foundation and Contributors</Copyright>
     <Product>Humanizer ($(TargetFramework))</Product>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
@@ -23,10 +23,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Using Remove="System.Net.Http" />
-    <PackageReference Include="Polyfill" Version="9.0.0-beta.18" PrivateAssets="all" />
-    <PackageReference Include="System.Collections.Immutable" Version="9.0.9" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />    
-    <PackageReference Include="System.Memory" Version="4.6.3" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
+    <PackageReference Include="Polyfill"  PrivateAssets="all" />
+    <PackageReference Include="System.Collections.Immutable" Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />    
+    <PackageReference Include="System.Memory" Condition="$(TargetFrameworkIdentifier) == '.NETFramework'" />
+    <PackageReference Include="System.ComponentModel.Annotations"  Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <None Update="FluentDate\InDate.Months.tt">
       <LastGenOutput>InDate.Months.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -59,11 +62,9 @@
 
     <None Update="FluentDate\InDate.SomeTimeFrom.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.SomeTimeFrom.cs" />
     <Compile Update="FluentDate\InDate.SomeTimeFrom.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.SomeTimeFrom.tt" />
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.8.118" />
+    
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="Humanizer.Tests" />
     <InternalsVisibleTo Include="Benchmarks" />

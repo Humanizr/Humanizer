@@ -1,0 +1,27 @@
+﻿<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <SystemDependencyVersion>9.0.9</SystemDependencyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.8.118"  />
+
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.4" />
+    <PackageVersion Include="Polyfill" Version="9.0.0-beta.19" />   
+
+    <PackageVersion Include="System.Collections.Immutable" Version="$(SystemDependencyVersion)" />
+    <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageVersion Include="System.Memory" Version="4.6.3" />
+    
+    
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageVersion Include="PublicApiGenerator" Version="11.4.6" />
+    <PackageVersion Include="Verify.DiffPlex" Version="3.1.2" />    
+    <PackageVersion Include="Verify.Xunit" Version="31.0.0" />
+    <PackageVersion Include="Xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />      
+
+  </ItemGroup>
+</Project>
