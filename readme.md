@@ -934,6 +934,8 @@ You can pass a second argument to `ToOrdinalWords` to specify the case of the ou
 The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`, `GrammaticalCase.Dative`, `GrammaticalCase.Accusative`, `GrammaticalCase.Instrumental` and `GrammaticalGender.Prepositional`:
 
 ```csharp
+// Example: Using ToOrdinalWords with grammatical case
+new DateTime(2015, 1, 1).ToOrdinalWords(GrammaticalCase.Genitive) // e.g., "1st of January 2015" in some languages
 ```
 
 Obviously this only applies to some cultures. For others passing case in doesn't make any difference in the result.
