@@ -19,9 +19,9 @@ All languages: `Humanizer`
 
 ### Supported frameworks
 
-**Supported frameworks:** net48, net6.0, net7.0, and net8.0
+**Supported frameworks:** net10.0, net9.0, net8.0, net48
 
-**netstandard2.0 targeting:** The NuGet package also targets netstandard2.0 as a special case to support specific scenarios such as Roslyn Analyzers and MSBuild tasks that require netstandard2.0.
+**netstandard2.0:** The NuGet package also targets netstandard2.0 as a special case to support specific scenarios such as Roslyn Analyzers and MSBuild tasks that require netstandard2.0.
 
 **Unsupported versions:** While other .NET Framework versions (net4.6.1 through net4.7.2) can technically consume netstandard2.0 libraries, they are **not officially supported** by Humanizer and may not work correctly. Please use one of the explicitly supported frameworks listed above for the best experience.
 
@@ -29,7 +29,7 @@ Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet
 
 ### Specify Languages (Optional)
 
-You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` package installs all supported languages exactly like it does in 1.x. If you're not sure, then just use the main `Humanizer` package.
+You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` package installs all supported languages. If you're not sure, then just use the main `Humanizer` package.
 
 Here are the options:
 
