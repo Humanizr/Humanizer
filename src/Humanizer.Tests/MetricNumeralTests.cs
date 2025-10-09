@@ -1,4 +1,4 @@
-﻿[UseCulture("en-US")]
+[UseCulture("en-US")]
 public class MetricNumeralTests
 {
     // Return a sequence of -24 -> 26
@@ -72,13 +72,51 @@ public class MetricNumeralTests
                 .ToMetric()
                 .FromMetric()
                 .ToString("0.##E+0", CultureInfo.InvariantCulture));
-        if (!isEquals)
-        {
-            Debugger.Break();
-        }
-
         Assert.True(isEquals);
     }
+
+    [Theory]
+    [InlineData(0, 0, "0")]
+    [InlineData(0, 1, "0.0")]
+    [InlineData(0, 3, "0.000")]
+    [InlineData(0, 20, "0.00000000000000000000")]
+    [InlineData(123, 0, "123")]
+    [InlineData(123, 1, "123.0")]
+    [InlineData(123, 3, "123.000")]
+    [InlineData(123, 20, "123.00000000000000000000")]
+    [InlineData(123456, null, "123.456k")]
+    [InlineData(123456, 0, "123k")]
+    [InlineData(123456, 1, "123.5k")]
+    [InlineData(123456, 2, "123.46k")]
+    [InlineData(123456, 3, "123.456k")]
+    [InlineData(123456, 20, "123.45600000000000000000k")]
+    [InlineData(123456789, null, "123.456789M")]
+    [InlineData(123456789, 0, "123M")]
+    [InlineData(123456789, 1, "123.5M")]
+    [InlineData(123456789, 2, "123.46M")]
+    [InlineData(123456789, 3, "123.457M")]
+    [InlineData(123456789, 5, "123.45679M")]
+    [InlineData(123456789, 20, "123.45678900000000000000M")]
+    [InlineData(123456789987, 5, "123.45679G")]
+    [InlineData(123456789987, 20, "123.45678998700000000000G")]
+    [InlineData(123456789987654, 5, "123.45679T")]
+    [InlineData(123456789987654, 20, "123.45678998765400000000T")]
+    [InlineData(123456789987654321, 5, "123.45679P")]
+    [InlineData(123456789987654321, 20, "123.45678998765432100000P")]
+    [InlineData(9223372036854775807, null, "9.223372036854775807E")]
+    [InlineData(9223372036854775807, 0, "9E")]
+    [InlineData(9223372036854775807, 3, "9.223E")]
+    [InlineData(9223372036854775807, 20, "9.22337203685477580700E")]
+    [InlineData(-1, null, "-1")]
+    [InlineData(-123, null, "-123")]
+    [InlineData(-123456, null, "-123.456k")]
+    [InlineData(-123456789, null, "-123.456789M")]
+    [InlineData(-9223372036854775808, null, "-9.223372036854775808E")]
+    [InlineData(-9223372036854775808, 0, "-9E")]
+    [InlineData(-9223372036854775808, 3, "-9.223E")]
+    [InlineData(-9223372036854775808, 20, "-9.22337203685477580800E")]
+    public void TestAllSymbolsAsLong(long subject, int? decimals, string expected) =>
+        Assert.Equal(expected, subject.ToMetric(decimals: decimals));
 
     [Theory]
     [InlineData("1.3M", 1300000, null, null)]
@@ -94,6 +132,7 @@ public class MetricNumeralTests
     [InlineData("1.23milli", 1.234E-3, MetricNumeralFormats.UseName, 2)]
     [InlineData("12.34k", 12345, null, 2)]
     [InlineData("12k", 12345, null, 0)]
+    [InlineData("1M", 999500d, null, 0)]
     [InlineData("-3.9m", -3.91e-3, null, 1)]
     [InlineData("10 ", 10, MetricNumeralFormats.WithSpace, 0)]
     [InlineData("1.2", 1.23, null, 1)]

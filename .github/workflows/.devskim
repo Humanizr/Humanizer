@@ -1,0 +1,8 @@
+{
+  "Globs": [
+    "**/.git/**",
+    "**/bin/**",
+    "**/obj/**",
+    "**/nuget.config"        // exact file at repo root
+  ]
+}

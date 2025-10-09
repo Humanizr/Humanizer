@@ -5,14 +5,14 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     public string Convert()
     {
         // it's easier to treat zero as a completely distinct case
-        if (_fullNumber == 0)
+        if (fullNumber == 0)
         {
             return "zero";
         }
 
         var words = string.Empty;
 
-        foreach (var part in _threeDigitParts)
+        foreach (var part in threeDigitParts)
         {
             var partToString = GetNextPartConverter();
 
@@ -26,9 +26,9 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
         return words.TrimEnd();
     }
 
-    readonly int _fullNumber = number;
-    readonly List<int> _threeDigitParts = SplitEveryThreeDigits(number);
-    readonly GrammaticalGender _gender = gender;
+    readonly int fullNumber = number;
+    readonly List<int> threeDigitParts = SplitEveryThreeDigits(number);
+    readonly GrammaticalGender gender = gender;
 
     protected ThreeDigitSets _nextSet = ThreeDigitSets.Units;
 
@@ -122,20 +122,20 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
         var words = string.Empty;
 
         // append text for hundreds
-        words += _hundredNumberToText[hundreds];
+        words += HundredNumberToText[hundreds];
 
         // append text for tens, only those from twenty upward
-        words += _tensOver20NumberToText[tens];
+        words += TensOver20NumberToText[tens];
 
         if (tensAndUnits <= 9)
         {
             // simple case for units, under 10
-            words += _unitsNumberToText[tensAndUnits];
+            words += UnitsNumberToText[tensAndUnits];
         }
         else if (tensAndUnits <= 19)
         {
             // special case for 'teens', from 10 to 19
-            words += _teensUnder20NumberToText[tensAndUnits - 10];
+            words += TeensUnder20NumberToText[tensAndUnits - 10];
         }
         else
         {
@@ -148,7 +148,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
             }
 
             // if this is the last set, an accent could be due
-            var unitsText = thisIsLastSet && units == 3 ? "tré" : _unitsNumberToText[units];
+            var unitsText = thisIsLastSet && units == 3 ? "tré" : UnitsNumberToText[units];
 
             words += unitsText;
         }
@@ -164,7 +164,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     string UnitsConverter(int number)
     {
         // being a unique case, it's easier to treat unity feminine gender as a completely distinct case
-        if (_gender == GrammaticalGender.Feminine && _fullNumber == 1)
+        if (gender == GrammaticalGender.Feminine && fullNumber == 1)
         {
             return "una";
         }
@@ -230,7 +230,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting units number to text. Index 1 for 1, index 2 for 2, up to index 9.
     /// </summary>
-    static readonly string[] _unitsNumberToText =
+    static readonly string[] UnitsNumberToText =
     [
         string.Empty,
         "uno",
@@ -247,7 +247,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting tens number to text. Index 2 for 20, index 3 for 30, up to index 9 for 90.
     /// </summary>
-    static readonly string[] _tensOver20NumberToText =
+    static readonly string[] TensOver20NumberToText =
     [
         string.Empty,
         string.Empty,
@@ -264,7 +264,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting teens number to text. Index 0 for 10, index 1 for 11, up to index 9 for 19.
     /// </summary>
-    static readonly string[] _teensUnder20NumberToText =
+    static readonly string[] TeensUnder20NumberToText =
     [
         "dieci",
         "undici",
@@ -281,7 +281,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
     /// <summary>
     /// Lookup table converting hundreds number to text. Index 0 for no hundreds, index 1 for 100, up to index 9.
     /// </summary>
-    static readonly string[] _hundredNumberToText =
+    static readonly string[] HundredNumberToText =
     [
         string.Empty,
         "cento",

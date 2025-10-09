@@ -29,10 +29,10 @@ namespace Humanizer;
 /// </summary>
 public static class MetricNumeralExtensions
 {
-    const int limit = 27;
+    const int Limit = 27;
 
-    static readonly double BigLimit = Math.Pow(10, limit);
-    static readonly double SmallLimit = Math.Pow(10, -limit);
+    static readonly double BigLimit = Math.Pow(10, Limit);
+    static readonly double SmallLimit = Math.Pow(10, -Limit);
 
     /// <summary>
     /// Symbols is a list of every symbols for the Metric system.
@@ -161,6 +161,34 @@ public static class MetricNumeralExtensions
     /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
     /// <example>
     /// <code>
+    /// 1000.ToMetric() => "1k"
+    /// 123.ToMetric() => "123"
+    /// 1E-1.ToMetric() => "100m"
+    /// </code>
+    /// </example>
+    /// <returns>A valid Metric representation</returns>
+    public static string ToMetric(this long input, MetricNumeralFormats? formats = null, int? decimals = null)
+    {
+        if (input.Equals(0) && (!decimals.HasValue || (decimals == 0)))
+        {
+            return input.ToString();
+        }
+
+        return BuildRepresentation(input, formats, decimals);
+    }
+
+    /// <summary>
+    /// Converts a number into a valid and Human-readable Metric representation.
+    /// </summary>
+    /// <remarks>
+    /// Inspired by a snippet from Thom Smith.
+    /// See <a href="http://stackoverflow.com/questions/12181024/formatting-a-number-with-a-metric-prefix">this link</a> for more.
+    /// </remarks>
+    /// <param name="input">Number to convert to a Metric representation.</param>
+    /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
+    /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+    /// <example>
+    /// <code>
     /// 1000d.ToMetric() => "1k"
     /// 123d.ToMetric() => "123"
     /// 1E-1.ToMetric() => "100m"
@@ -223,7 +251,7 @@ public static class MetricNumeralExtensions
     /// <returns>A number build from a Metric representation</returns>
     static double BuildMetricNumber(string input, char last)
     {
-        double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3;
+        double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3.0;
         var number = double.Parse(input.Remove(input.Length - 1));
         var exponent = Math.Pow(10, Symbols[0]
             .Contains(last)
@@ -240,6 +268,110 @@ public static class MetricNumeralExtensions
     static string ReplaceNameBySymbol(string input) =>
         UnitPrefixes.Aggregate(input, (current, unitPrefix) =>
             current.Replace(unitPrefix.Value.Name, unitPrefix.Key.ToString()));
+
+    /// <summary>
+    /// Build a Metric representation of the number.
+    /// </summary>
+    /// <param name="input">Number to convert to a Metric representation.</param>
+    /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
+    /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+    /// <returns>A number in a Metric representation</returns>
+    static string BuildRepresentation(long input, MetricNumeralFormats? formats, int? decimals)
+    {
+        var number = Math.Abs(input / 10);
+        var exponent = 0;
+
+        while (number > 0)
+        {
+            exponent++;
+            number /= 10;
+        }
+
+        var scale = exponent / 3;
+
+        if (!scale.Equals(0)) return BuildMetricRepresentation(input, scale, formats, decimals);
+
+        var representation = decimals > 0
+            ? $"{input}.{new string('0', decimals.Value)}"
+            : input.ToString();
+        if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
+        {
+            representation += " ";
+        }
+
+        return representation;
+    }
+
+    /// <summary>
+    /// Build a Metric representation of the number.
+    /// </summary>
+    /// <param name="input">Number to convert to a Metric representation.</param>
+    /// <param name="scale">Number of times number should be divided by 1000.</param>
+    /// <param name="formats">A bitwise combination of <see cref="MetricNumeralFormats"/> enumeration values that format the metric representation.</param>
+    /// <param name="decimals">If not null it is the numbers of decimals to round the number to</param>
+    /// <returns>A number in a Metric representation</returns>
+    static string BuildMetricRepresentation(long input, int scale, MetricNumeralFormats? formats, int? decimals)
+    {
+        // Convert back to actual exponent (number of 10s places)
+        var exponent = scale * 3;
+
+        var divisor = 1L;
+
+        for (var i=0; i < scale; i++)
+        {
+            divisor *= 1000;
+        }
+
+        var number = input / divisor;
+        var fractionalPart = Math.Abs(input % divisor); // input could be negative
+
+        if (Math.Abs(number) >= 1000 && exponent < Symbols[0].Count * 3)
+        {
+            exponent += 3;
+            scale++;
+            divisor *= 1000;
+
+            number = input / divisor;
+            fractionalPart = Math.Abs(input % divisor);
+        }
+
+        if (decimals.HasValue)
+        {
+            for (var i = decimals.Value; i < exponent; i++)
+            {
+                var roundUp = (i + 1 == exponent);
+
+                fractionalPart = (fractionalPart + (roundUp ? 5 : 0)) / 10;
+            }
+        }
+        else
+        {
+            decimals = exponent;
+        }
+
+        var symbol = Math.Sign(scale) == 1
+            ? Symbols[0][scale - 1]
+            : Symbols[1][-scale - 1];
+
+        if (decimals == 0)
+        {
+            return number
+                 + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
+                 + GetUnitText(symbol, formats);
+        }
+        else
+        {
+            var decimalPlaces = Math.Min(decimals.Value, exponent);
+            var extraZeroes = (decimals.Value - decimalPlaces);
+
+            return number
+                 + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+                 + fractionalPart.ToString("d" + decimalPlaces)
+                 + (extraZeroes <= 0 ? "" : new string('0', extraZeroes))
+                 + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
+                 + GetUnitText(symbol, formats);
+        }
+    }
 
     /// <summary>
     /// Build a Metric representation of the number.
@@ -280,6 +412,12 @@ public static class MetricNumeralExtensions
         if (decimals.HasValue)
         {
             number = Math.Round(number, decimals.Value);
+        }
+
+        if (Math.Abs(number) >= 1000 && exponent < Symbols[0].Count)
+        {
+            number /= 1000;
+            exponent += 1;
         }
 
         var symbol = Math.Sign(exponent) == 1

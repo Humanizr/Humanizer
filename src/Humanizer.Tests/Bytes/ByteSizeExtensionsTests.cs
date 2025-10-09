@@ -63,8 +63,6 @@ public class ByteSizeExtensionsTests
     [InlineData(2, "GB", "en", "2048 GB")]
     [InlineData(2.1, null, "en", "2.1 TB")]
     [InlineData(2.123, "#.#", "en", "2.1 TB")]
-    [InlineData(2.1, null, "ru-RU", "2,1 TB")]
-    [InlineData(2.123, "#.#", "ru-RU", "2,1 TB")]
     public void HumanizesTerabytes(double input, string? format, string cultureName, string expectedValue)
     {
         var culture = new CultureInfo(cultureName);

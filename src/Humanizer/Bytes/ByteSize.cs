@@ -467,17 +467,13 @@ public struct ByteSize(double byteSize) :
             case ByteSymbol:
                 if (sizePart.SequenceEqual(BitSymbol))
                 {
-                    // Bits
-                    if (number % 1 != 0) // Can't have partial bits
-                    {
-                        return false;
-                    }
-
-                    result = FromBits((long) number);
+                    if (!double.IsFinite(number)) return false;
+                    if (number != Math.Truncate(number)) return false;
+                    if (number < long.MinValue || number > long.MaxValue) return false;
+                    result = FromBits((long)number);
                 }
                 else
                 {
-                    // Bytes
                     result = FromBytes(number);
                 }
 

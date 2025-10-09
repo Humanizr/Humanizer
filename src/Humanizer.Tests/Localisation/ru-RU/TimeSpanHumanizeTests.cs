@@ -5,6 +5,19 @@ public class TimeSpanHumanizeTests
 {
     [Theory]
     [Trait("Translation", "Native speaker")]
+    [InlineData(4, false, "4 дня")]
+    [InlineData(23, false, "3 недели")]
+    [InlineData(64, false, "2 месяца")]
+    [InlineData(367, true, "один год")]
+    [InlineData(750, true, "два года")]
+    public void Age(int days, bool toWords, string expected)
+    {
+        var actual = TimeSpan.FromDays(days).ToAge(toWords: toWords);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [Trait("Translation", "Native speaker")]
     [InlineData(366, "один год", true)]
     [InlineData(366, "1 год")]
     [InlineData(731, "2 года")]

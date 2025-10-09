@@ -383,6 +383,8 @@ namespace Humanizer
     public interface IWordsToNumberConverter
     {
         int Convert(string words);
+        bool TryConvert(string words, out int parsedValue);
+        bool TryConvert(string words, out int parsedValue, out string? unrecognizedNumber);
     }
     public class In
     {
@@ -797,6 +799,7 @@ namespace Humanizer
         public static double FromMetric(this string input) { }
         public static string ToMetric(this double input, Humanizer.MetricNumeralFormats? formats = default, int? decimals = default) { }
         public static string ToMetric(this int input, Humanizer.MetricNumeralFormats? formats = default, int? decimals = default) { }
+        public static string ToMetric(this long input, Humanizer.MetricNumeralFormats? formats = default, int? decimals = default) { }
     }
     [System.Flags]
     public enum MetricNumeralFormats
@@ -1974,5 +1977,7 @@ namespace Humanizer
     public static class WordsToNumberExtension
     {
         public static int ToNumber(this string words, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture) { }
+        public static bool TryToNumber(this string words, out int parsedNumber, System.Globalization.CultureInfo culture, out string? unrecognizedWord) { }
     }
 }

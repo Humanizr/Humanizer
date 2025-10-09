@@ -117,562 +117,748 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>one second ago</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} seconds ago</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>a minute ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>{0} minutes ago</value>
-  </data>
-  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
-    <value>an hour ago</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
-    <value>{0} hours ago</value>
-  </data>
-  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
-    <value>yesterday</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>{0} days ago</value>
-  </data>
-  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
-    <value>one month ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
-    <value>{0} months ago</value>
-  </data>
-  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
-    <value>one year ago</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
-    <value>{0} years ago</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
-    <value>{0} days</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
-    <value>{0} hours</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} milliseconds</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
-    <value>{0} minutes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
-    <value>{0} seconds</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
-    <value>1 day</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
-    <value>1 hour</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 millisecond</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>1 minute</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>1 second</value>
-  </data>
-  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>no time</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
-    <value>{0} weeks</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>1 week</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} days from now</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} hours from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} minutes from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} months from now</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} seconds from now</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} years from now</value>
-  </data>
-  <data name="DateHumanize_Now" xml:space="preserve">
-    <value>now</value>
-  </data>
-  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
-    <value>tomorrow</value>
-  </data>
-  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>an hour from now</value>
-  </data>
-  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>a minute from now</value>
-  </data>
-  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>one month from now</value>
-  </data>
-  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>one second from now</value>
-  </data>
-  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>one year from now</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
-    <value>{0} hours from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
-    <value>{0} minutes from now</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
-    <value>{0} seconds ago</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
-    <value>{0} seconds from now</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
-    <value>{0} years from now</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
-    <value>{0} days</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
-    <value>{0} days</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
-    <value>{0} hours</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>{0} milliseconds</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
-    <value>{0} minutes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
-    <value>{0} minutes</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
-    <value>{0} seconds</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} milliseconds</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
-    <value>{0} days ago</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
-    <value>{0} days ago</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
-    <value>{0} day ago</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
-    <value>{0} days from now</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
-    <value>{0} days from now</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
-    <value>{0} day from now</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
-    <value>{0} hours ago</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
-    <value>{0} hours ago</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
-    <value>{0} hour ago</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
-    <value>{0} hours from now</value>
-  </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
-    <value>{0} hour from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
-    <value>{0} minutes ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
-    <value>{0} minutes ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
-    <value>{0} minute ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
-    <value>{0} minutes from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>{0} minute from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
-    <value>{0} months ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
-    <value>{0} months ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
-    <value>{0} month ago</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
-    <value>{0} months from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
-    <value>{0} months from now</value>
-  </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
-    <value>{0} month from now</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
-    <value>{0} seconds ago</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
-    <value>{0} second ago</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
-    <value>{0} seconds from now</value>
-  </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
-    <value>{0} second from now</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
-    <value>{0} years ago</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
-    <value>{0} years ago</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
-    <value>{0} year ago</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
-    <value>{0} years from now</value>
-  </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
-    <value>{0} year from now</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
-    <value>{0} day</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
-    <value>{0} hours</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
-    <value>{0} hour</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
-    <value>{0} millisecond</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
-    <value>{0} minute</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
-    <value>{0} seconds</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
-    <value>{0} second</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
-    <value>{0} weeks</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
-    <value>{0} weeks</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>{0} week</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
-    <value>{0} months</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
-    <value>{0} years</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>1 month</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>1 year</value>
-  </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>never</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
-    <value>{0} months</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
-    <value>{0} months</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
-    <value>{0} months</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
-    <value>{0} years</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
-    <value>{0} years</value>
-  </data>
-  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
-    <value>{0} years</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
-    <value>one day</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
-    <value>one hour</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
-    <value>one millisecond</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
-    <value>one minute</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
-    <value>one month</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
-    <value>one second</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
-    <value>one week</value>
-  </data>
-  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
-    <value>one year</value>
-  </data>
-  <data name="N" xml:space="preserve">
-    <value>north</value>
-  </data>
-  <data name="NNE" xml:space="preserve">
-    <value>north-northeast</value>
-  </data>
-  <data name="NE" xml:space="preserve">
-    <value>northeast</value>
-  </data>
-  <data name="ENE" xml:space="preserve">
-    <value>east-northeast</value>
-  </data>
-  <data name="E" xml:space="preserve">
-    <value>east</value>
-  </data>
-  <data name="ESE" xml:space="preserve">
-    <value>east-southeast</value>
-  </data>
-  <data name="SE" xml:space="preserve">
-    <value>southeast</value>
-  </data>
-  <data name="SSE" xml:space="preserve">
-    <value>south-southeast</value>
-  </data>
-  <data name="S" xml:space="preserve">
-    <value>south</value>
-  </data>
-  <data name="SSW" xml:space="preserve">
-    <value>south-southwest</value>
-  </data>
-  <data name="SW" xml:space="preserve">
-    <value>southwest</value>
-  </data>
-  <data name="WSW" xml:space="preserve">
-    <value>west-southwest</value>
-  </data>
-  <data name="W" xml:space="preserve">
-    <value>west</value>
-  </data>
-  <data name="WNW" xml:space="preserve">
-    <value>west-northwest</value>
-  </data>
-  <data name="NW" xml:space="preserve">
-    <value>northwest</value>
-  </data>
-  <data name="NNW" xml:space="preserve">
-    <value>north-northwest</value>
-  </data>
-  <data name="N_Short" xml:space="preserve">
-    <value>N</value>
-  </data>
-  <data name="NNE_Short" xml:space="preserve">
-    <value>NNE</value>
-  </data>
-  <data name="NE_Short" xml:space="preserve">
-    <value>NE</value>
-  </data>
-  <data name="ENE_Short" xml:space="preserve">
-    <value>ENE</value>
-  </data>
-  <data name="E_Short" xml:space="preserve">
-    <value>E</value>
-  </data>
-  <data name="ESE_Short" xml:space="preserve">
-    <value>ESE</value>
-  </data>
-  <data name="SE_Short" xml:space="preserve">
-    <value>SE</value>
-  </data>
-  <data name="SSE_Short" xml:space="preserve">
-    <value>SSE</value>
-  </data>
-  <data name="S_Short" xml:space="preserve">
-    <value>S</value>
-  </data>
-  <data name="SSW_Short" xml:space="preserve">
-    <value>SSW</value>
-  </data>
-  <data name="SW_Short" xml:space="preserve">
-    <value>SW</value>
-  </data>
-  <data name="WSW_Short" xml:space="preserve">
-    <value>WSW</value>
-  </data>
-  <data name="W_Short" xml:space="preserve">
-    <value>W</value>
-  </data>
-  <data name="WNW_Short" xml:space="preserve">
-    <value>WNW</value>
-  </data>
-  <data name="NW_Short" xml:space="preserve">
-    <value>NW</value>
-  </data>
-  <data name="NNW_Short" xml:space="preserve">
-    <value>NNW</value>
-  </data>
   <data name="DataUnit_Bit" xml:space="preserve">
     <value>bit</value>
+    <comment>Data unit: bit</comment>
   </data>
   <data name="DataUnit_BitSymbol" xml:space="preserve">
     <value>b</value>
+    <comment>Symbol for data unit: bit</comment>
   </data>
   <data name="DataUnit_Byte" xml:space="preserve">
     <value>byte</value>
+    <comment>Data unit: byte</comment>
   </data>
   <data name="DataUnit_ByteSymbol" xml:space="preserve">
     <value>B</value>
-  </data>
-  <data name="DataUnit_Kilobyte" xml:space="preserve">
-    <value>kilobyte</value>
-  </data>
-  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
-    <value>KB</value>
-  </data>
-  <data name="DataUnit_Megabyte" xml:space="preserve">
-    <value>megabyte</value>
-  </data>
-  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
-    <value>MB</value>
+    <comment>Symbol for data unit: byte</comment>
   </data>
   <data name="DataUnit_Gigabyte" xml:space="preserve">
     <value>gigabyte</value>
+    <comment>Data unit: gigabyte</comment>
   </data>
   <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
     <value>GB</value>
+    <comment>Symbol for data unit: gigabyte</comment>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobyte</value>
+    <comment>Data unit: kilobyte</comment>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+    <comment>Symbol for data unit: kilobyte</comment>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabyte</value>
+    <comment>Data unit: megabyte</comment>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+    <comment>Symbol for data unit: megabyte</comment>
   </data>
   <data name="DataUnit_Terabyte" xml:space="preserve">
     <value>terabyte</value>
+    <comment>Data unit: terabyte</comment>
   </data>
   <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
     <value>TB</value>
+    <comment>Symbol for data unit: terabyte</comment>
   </data>
-  <data name="TimeUnit_Millisecond" xml:space="preserve">
-    <value>ms</value>
+  <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
+    <value>{0} days ago</value>
+    <comment>Date, number in word form, ambiguous</comment>
   </data>
-  <data name="TimeUnit_Second" xml:space="preserve">
-    <value>s</value>
-  </data>
-  <data name="TimeUnit_Minute" xml:space="preserve">
-    <value>min</value>
-  </data>
-  <data name="TimeUnit_Hour" xml:space="preserve">
-    <value>h</value>
-  </data>
-  <data name="TimeUnit_Day" xml:space="preserve">
-    <value>d</value>
-  </data>
-  <data name="TimeUnit_Week" xml:space="preserve">
-    <value>week</value>
-  </data>
-  <data name="TimeUnit_Month" xml:space="preserve">
-    <value>mo</value>
-  </data>
-  <data name="TimeUnit_Year" xml:space="preserve">
-    <value>y</value>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>{0} days ago</value>
+    <comment>Date, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
     <value>{0} days ago</value>
+    <comment>Date, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
+    <value>{0} days ago</value>
+    <comment>Date, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
+    <value>{0} day ago</value>
+    <comment>Date, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} days from now</value>
+    <comment>Date, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>{0} days from now</value>
+    <comment>Date, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>{0} days from now</value>
+    <comment>Date, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
+    <value>{0} days from now</value>
+    <comment>Date, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
+    <value>{0} day from now</value>
+    <comment>Date, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>{0} hours ago</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
+    <value>{0} hours ago</value>
+    <comment>Time, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
     <value>{0} hours ago</value>
+    <comment>Time, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
+    <value>{0} hours ago</value>
+    <comment>Time, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
+    <value>{0} hour ago</value>
+    <comment>Time, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
+    <value>{0} hours from now</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
+    <value>{0} hours from now</value>
+    <comment>Time, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
     <value>{0} hours from now</value>
+    <comment>Time, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
+    <value>{0} hours from now</value>
+    <comment>Time, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
+    <value>{0} hour from now</value>
+    <comment>Time, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>{0} minutes ago</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
+    <value>{0} minutes ago</value>
+    <comment>Time, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
     <value>{0} minutes ago</value>
+    <comment>Time, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
+    <value>{0} minutes ago</value>
+    <comment>Time, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
+    <value>{0} minute ago</value>
+    <comment>Time, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
+    <value>{0} minutes from now</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
+    <value>{0} minutes from now</value>
+    <comment>Time, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
     <value>{0} minutes from now</value>
+    <comment>Time, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
+    <value>{0} minutes from now</value>
+    <comment>Time, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
+    <value>{0} minute from now</value>
+    <comment>Time, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
+    <value>{0} months ago</value>
+    <comment>Date, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
+    <value>{0} months ago</value>
+    <comment>Date, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
     <value>{0} months ago</value>
+    <comment>Date, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
+    <value>{0} months ago</value>
+    <comment>Date, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
+    <value>{0} month ago</value>
+    <comment>Date, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
+    <value>{0} months from now</value>
+    <comment>Date, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
+    <value>{0} months from now</value>
+    <comment>Date, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
     <value>{0} months from now</value>
+    <comment>Date, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
+    <value>{0} months from now</value>
+    <comment>Date, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
+    <value>{0} month from now</value>
+    <comment>Date, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>{0} seconds ago</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
+    <value>{0} seconds ago</value>
+    <comment>Time, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
     <value>{0} seconds ago</value>
+    <comment>Time, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
+    <value>{0} seconds ago</value>
+    <comment>Time, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
+    <value>{0} second ago</value>
+    <comment>Time, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
+    <value>{0} seconds from now</value>
+    <comment>Time, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
+    <value>{0} seconds from now</value>
+    <comment>Time, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
     <value>{0} seconds from now</value>
+    <comment>Time, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
+    <value>{0} seconds from now</value>
+    <comment>Time, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
+    <value>{0} second from now</value>
+    <comment>Time, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>{0} years ago</value>
+    <comment>Date, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
+    <value>{0} years ago</value>
+    <comment>Date, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>{0} years from ago</value>
+    <value>{0} years ago</value>
+    <comment>Date, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
+    <value>{0} years ago</value>
+    <comment>Date, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
+    <value>{0} year ago</value>
+    <comment>Date, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
+    <value>{0} years from now</value>
+    <comment>Date, number in word form, ambiguous</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
+    <value>{0} years from now</value>
+    <comment>Date, number in word form, dual</comment>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
     <value>{0} years from now</value>
+    <comment>Date, number in word form, paucal</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
+    <value>{0} years from now</value>
+    <comment>Date, number in word form, plural</comment>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
+    <value>{0} year from now</value>
+    <comment>Date, number in word form, singular</comment>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>never</value>
+    <comment>Date/Time</comment>
+  </data>
+  <data name="DateHumanize_Now" xml:space="preserve">
+    <value>now</value>
+    <comment>Date/Time</comment>
+  </data>
+  <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
+    <value>yesterday</value>
+    <comment>Date</comment>
+  </data>
+  <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
+    <value>tomorrow</value>
+    <comment>Date</comment>
+  </data>
+  <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
+    <value>an hour ago</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
+    <value>an hour from now</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
+    <value>a minute ago</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
+    <value>a minute from now</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
+    <value>one month ago</value>
+    <comment>Date</comment>
+  </data>
+  <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
+    <value>one month from now</value>
+    <comment>Date</comment>
+  </data>
+  <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
+    <value>one second ago</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
+    <value>one second from now</value>
+    <comment>Time</comment>
+  </data>
+  <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
+    <value>one year ago</value>
+    <comment>Date</comment>
+  </data>
+  <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
+    <value>one year from now</value>
+    <comment>Date</comment>
   </data>
   <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
     <value>two days ago</value>
+    <comment>Date</comment>
   </data>
   <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
     <value>two days from now</value>
+    <comment>Date</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
-    <value>{0} days</value>
+  <data name="E" xml:space="preserve">
+    <value>east</value>
+    <comment>Cardinal Direction</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
-    <value>{0} hours</value>
+  <data name="ENE" xml:space="preserve">
+    <value>east-northeast</value>
+    <comment>Cardinal Direction</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
-    <value>{0} milliseconds</value>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>ENE</value>
+    <comment>Cardinal Direction Abbreviation</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
-    <value>{0} minutes</value>
+  <data name="ESE" xml:space="preserve">
+    <value>east-southeast</value>
+    <comment>Cardinal Direction</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
-    <value>{0} months</value>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>ESE</value>
+    <comment>Cardinal Direction Abbreviation</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
-    <value>{0} months</value>
+  <data name="E_Short" xml:space="preserve">
+    <value>E</value>
+    <comment>Cardinal Direction Abbreviation</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
-    <value>{0} weeks</value>
+  <data name="N" xml:space="preserve">
+    <value>north</value>
+    <comment>Cardinal Direction</comment>
   </data>
-  <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
-    <value>{0} years</value>
+  <data name="NE" xml:space="preserve">
+    <value>northeast</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NE</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>north-northeast</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>NNE</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>north-northwest</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>NNW</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>northwest</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NW</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>south</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>southeast</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SE</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>south-southeast</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>SSE</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>south-southwest</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>SSW</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>southwest</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SW</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+    <comment>Cardinal Direction Abbreviation</comment>
   </data>
   <data name="TimeSpanHumanize_Age" xml:space="preserve">
     <value>{0} old</value>
+    <comment>Age as in 'three years old'</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} days</value>
+    <comment>Date, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>{0} days</value>
+    <comment>Date, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
+    <value>{0} days</value>
+    <comment>Date, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
+    <value>{0} days</value>
+    <comment>Date, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
+    <value>{0} day</value>
+    <comment>Date, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
+    <value>{0} hours</value>
+    <comment>Time, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
+    <value>{0} hours</value>
+    <comment>Time, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
+    <value>{0} hours</value>
+    <comment>Time, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
+    <value>{0} hours</value>
+    <comment>Time, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
+    <value>{0} hour</value>
+    <comment>Time, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
+    <value>{0} milliseconds</value>
+    <comment>Time, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
+    <value>{0} milliseconds</value>
+    <comment>Time, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
+    <value>{0} milliseconds</value>
+    <comment>Time, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
+    <value>{0} milliseconds</value>
+    <comment>Time, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
+    <value>{0} millisecond</value>
+    <comment>Time, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
+    <value>{0} minutes</value>
+    <comment>Date, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
+    <value>{0} minutes</value>
+    <comment>Date, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
+    <value>{0} minutes</value>
+    <comment>Date, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
+    <value>{0} minutes</value>
+    <comment>Date, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
+    <value>{0} minute</value>
+    <comment>Date, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
+    <value>{0} months</value>
+    <comment>Date, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
+    <value>{0} months</value>
+    <comment>Date, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
+    <value>{0} months</value>
+    <comment>Date, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0} months</value>
+    <comment>Date, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
+    <value>{0} months</value>
+    <comment>Date, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
+    <value>{0} seconds</value>
+    <comment>Time, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
+    <value>{0} seconds</value>
+    <comment>Time, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
+    <value>{0} seconds</value>
+    <comment>Time, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
+    <value>{0} seconds</value>
+    <comment>Time, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
+    <value>{0} second</value>
+    <comment>Time, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
+    <value>{0} weeks</value>
+    <comment>Date, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
+    <value>{0} weeks</value>
+    <comment>Date, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
+    <value>{0} weeks</value>
+    <comment>Date, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
+    <value>{0} weeks</value>
+    <comment>Date, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
+    <value>{0} week</value>
+    <comment>Date, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
+    <value>{0} years</value>
+    <comment>Date, number as words, ambiguous</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
+    <value>{0} years</value>
+    <comment>Date, number as words, dual</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
+    <value>{0} years</value>
+    <comment>Date, number as words, paucal</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0} years</value>
+    <comment>Date, number as words, plural</comment>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0} years</value>
+    <comment>Date, number as words, singular</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>1 day</value>
+    <comment>Date single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>one day</value>
+    <comment>Date words</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
+    <value>1 hour</value>
+    <comment>Time single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>one hour</value>
+    <comment>Time words</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1 millisecond</value>
+    <comment>Time single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>one millisecond</value>
+    <comment>Time words</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
+    <value>1 minute</value>
+    <comment>Time single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>one minute</value>
+    <comment>Time words</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1 month</value>
+    <comment>Date single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>one month</value>
+    <comment>Date words</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
+    <value>1 second</value>
+    <comment>Time single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>one second</value>
+    <comment>Time words</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>1 week</value>
+    <comment>Date single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>one week</value>
+    <comment>Date words</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
+    <value>1 year</value>
+    <comment>Date single as number</comment>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>one year</value>
+    <comment>Date words</comment>
+  </data>
+  <data name="TimeSpanHumanize_Zero" xml:space="preserve">
+    <value>no time</value>
+    <comment>Time</comment>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>d</value>
+    <comment>Time unit: day</comment>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>h</value>
+    <comment>Time unit: hour</comment>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+    <comment>Time unit: millisecond</comment>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min</value>
+    <comment>Time unit: minute</comment>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mo</value>
+    <comment>Time unit: month</comment>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+    <comment>Time unit: second</comment>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>week</value>
+    <comment>Time unit: week</comment>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>y</value>
+    <comment>Time unit: year</comment>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>west</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>west-northwest</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>WNW</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>west-southwest</value>
+    <comment>Cardinal Direction</comment>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>WSW</value>
+    <comment>Cardinal Direction Abbreviation</comment>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>W</value>
+    <comment>Cardinal Direction Abbreviation</comment>
   </data>
 </root>
