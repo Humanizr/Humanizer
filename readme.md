@@ -85,6 +85,19 @@ You may also specify the desired letter casing:
 
  > The `LetterCasing` API and the methods accepting it are legacy from V0.2 era and will be deprecated in the future. Instead of that, you can use `Transform` method explained below.
 
+#### Version 3.0 Behavioral Change
+
+In version 3.0, `Humanize` and `Titleize` now preserve input strings that contain no recognized letters (e.g., special characters, unrecognized Unicode scripts) instead of returning an empty string:
+
+```csharp
+// Before v3.0: returned ""
+// v3.0 and later: returns "@@"
+"@@".Humanize() => "@@"
+
+// Cyrillic and other Unicode scripts are also preserved
+"Майк".Titleize() => "Майк"
+```
+
 
 ### Dehumanize String
 
