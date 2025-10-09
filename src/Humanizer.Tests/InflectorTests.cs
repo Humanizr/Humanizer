@@ -82,6 +82,15 @@ public class InflectorTests
     public void Titleize(string input, string expectedOutput) =>
         Assert.Equal(expectedOutput, input.Titleize());
 
+    // Issue #385: Titleize should preserve input with no recognized letters
+    [Theory]
+    [InlineData("Майк", "Майк")]
+    [InlineData("@@", "@@")]
+    [InlineData("?", "?")]
+    [InlineData("123", "123")]
+    public void TitleizeShouldPreserveUnrecognizedCharacters(string input, string expected) =>
+        Assert.Equal(expected, input.Titleize());
+
     [InlineData("some_title", "some-title")]
     [InlineData("some-title", "some-title")]
     [InlineData("some_title_goes_here", "some-title-goes-here")]

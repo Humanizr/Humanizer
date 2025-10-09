@@ -47,8 +47,12 @@ public static class InflectorExtensions
     /// Humanizes the input with Title casing
     /// </summary>
     /// <param name="input">The string to be titleized</param>
-    public static string Titleize(this string input) =>
-        input.Humanize(LetterCasing.Title);
+    public static string Titleize(this string input)
+    {
+        var humanized = input.Humanize();
+        // If humanization returns empty string (no recognized letters), preserve original input
+        return humanized.Length == 0 ? input : humanized.ApplyCase(LetterCasing.Title);
+    }
 
     /// <summary>
     /// By default, pascalize converts strings to UpperCamelCase also removing underscores
