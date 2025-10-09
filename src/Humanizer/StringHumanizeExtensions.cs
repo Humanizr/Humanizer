@@ -38,12 +38,6 @@ public static class StringHumanizeExtensions
                     : value.ToLower();
             }));
 
-        // If no matches found, return the original input
-        if (result.Length == 0)
-        {
-            return input;
-        }
-
         if (result
                 .Replace(" ", "")
                 .All(char.IsUpper) &&
