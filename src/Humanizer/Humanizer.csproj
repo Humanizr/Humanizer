@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48;net8.0;net10.0</TargetFrameworks>
-    <Authors>Mehdi Khalili, Claire Novotny</Authors>
+    <Authors>Claire Novotny, Mehdi Khalili</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Humanizr/Humanizer</PackageProjectUrl>
     <MinClientVersion>2.12</MinClientVersion>

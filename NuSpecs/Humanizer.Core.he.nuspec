@@ -4,7 +4,7 @@
     <id>Humanizer.Core.he</id>
     <version>$version$</version>
     <title>Humanizer Locale (he)</title>
-    <authors>Mehdi Khalili, Claire Novotny</authors>
+    <authors>Claire Novotny, Mehdi Khalili</authors>
     <projectUrl>https://github.com/Humanizr/Humanizer</projectUrl>
     <icon>logo.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
