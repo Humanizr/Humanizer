@@ -58,7 +58,7 @@ public static class Resources
 
         if (resource == null || string.IsNullOrEmpty(resource))
         {
-            throw new ArgumentException($@\"The resource object with key '{resourceKey}' was not found\", nameof(resourceKey));
+            throw new ArgumentException($@"The resource object with key '{resourceKey}' was not found", nameof(resourceKey));
         }
 
         return resource;
