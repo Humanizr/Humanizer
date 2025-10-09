@@ -28,7 +28,7 @@ These instructions apply to the entire repository.
 - Run relevant `dotnet test` commands (e.g., `dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj`) and ensure they pass before submission.
 
 ## Build & Validation
-- Ensure `dotnet build Humanizer/Humanizer.csproj /t:PackNuSpecs` (from `src`) succeeds without warnings where feasible.
+- Ensure `dotnet build Humanizer/Humanizer.csproj /t:PackNuSpecs` (from `src`) succeeds without warnings.
 - Do not introduce new compiler warnings or break existing build/test workflows.
 
 ## Localization Guidance
