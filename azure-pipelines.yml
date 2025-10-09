@@ -39,7 +39,7 @@ stages:
         arguments: install --tool-path . nbgv
       displayName: Install NBGV tool
 
-    - script: nbgv cloud
+    - script: nbgv cloud -c -a
       displayName: Set Version
 
     - task: DotNetCoreCLI@2
@@ -48,6 +48,11 @@ stages:
         projects: .\src\Humanizer\Humanizer.csproj
         arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\Packages 
       displayName: Restore, Build, and Pack
+
+    - pwsh: |
+        $(Build.SourcesDirectory)/verify-packages.ps1 -PackageVersion '$(NBGV_NuGetPackageVersion)' -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
+      displayName: Verify Package Structure and Dependencies
+      failOnStderr: false
 
     - task: DotNetCoreCLI@2
       inputs:
