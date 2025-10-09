@@ -876,7 +876,7 @@ Also, culture to use can be specified explicitly. If it is not, current thread's
 
 ```csharp
 10.ToOrdinalWords(new CultureInfo("en-US")) => "tenth"
-1.ToOrdinalWords(GrammaticalGender.Masculine, new CulureInfo("pt-BR")) => "primeiro"
+1.ToOrdinalWords(GrammaticalGender.Masculine, new CultureInfo("pt-BR")) => "primeiro"
 ```
 
 `ToOrdinalWords` also supports variations some cultures apply depending on the position of the ordinalized number in a sentence.
