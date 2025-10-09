@@ -1,8 +1,9 @@
 ﻿# <img width="30px" src="logo.png" /> Humanizer
 
 [![Build Status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
-[![NuGet version](https://img.shields.io/nuget/v/Humanizer.svg)](https://www.nuget.org/packages/Humanizer)
-[![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.Core.svg)](https://www.nuget.org/packages/Humanizer.Core)
+[![NuGet version](https://img.shields.io/nuget/v/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer)
+[![NuGet version prerelease](https://img.shields.io/nuget/vpre/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://img.shields.io/nuget/vpre/Humanizer.Core)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.Core.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer.Core)
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
