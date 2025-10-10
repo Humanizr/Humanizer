@@ -40,7 +40,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
         }
 
         var parts = new List<string>();
-        var number = (long) input;
+        var number = (long)input;
 
         HandleNegative(parts, ref number);
         CollectOrdinalParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "milijard" + GetOrdinalEndingForGender(gender), "milijardas", "milijardai", "milijardų");
@@ -177,7 +177,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
             LithuanianNumberForm.Singular => 0,
             LithuanianNumberForm.Plural => 1,
             LithuanianNumberForm.GenitivePlural => 2,
-            _ => throw new ArgumentOutOfRangeException(nameof(form))
+            _ => throw new ArgumentOutOfRangeException(nameof(number))
         };
     }
 
@@ -200,7 +200,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
                 return number.Substring(0, number.Length - 1);
             }
 
-            if (number.EndsWith("i"))
+            if (number.EndsWith('i'))
             {
                 return number + "os";
             }

@@ -82,7 +82,7 @@ class FinnishNumberToWordsConverter : GenderlessNumberToWordsConverter
             parts.Add(UnitsMap[number]);
         }
 
-        return string.Concat( parts).Trim();
+        return string.Concat(parts).Trim();
     }
 
     static string GetOrdinalUnit(int number, bool useExceptions)

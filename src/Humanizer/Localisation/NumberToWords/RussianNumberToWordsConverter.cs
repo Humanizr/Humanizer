@@ -54,7 +54,7 @@ class RussianNumberToWordsConverter : GenderedNumberToWordsConverter
             input = -input;
         }
 
-        var number = (long) input;
+        var number = (long)input;
         CollectOrdinalParts(parts, ref number, 1000000000, GrammaticalGender.Masculine, "миллиардн" + GetEndingForGender(gender, number), "миллиард", "миллиарда", "миллиардов");
         CollectOrdinalParts(parts, ref number, 1000000, GrammaticalGender.Masculine, "миллионн" + GetEndingForGender(gender, number), "миллион", "миллиона", "миллионов");
         CollectOrdinalParts(parts, ref number, 1000, GrammaticalGender.Feminine, "тысячн" + GetEndingForGender(gender, number), "тысяча", "тысячи", "тысяч");

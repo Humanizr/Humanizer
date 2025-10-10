@@ -85,6 +85,6 @@ class FarsiNumberToWordsConverter : GenderlessNumberToWordsConverter
         }
 
         var word = Convert(number);
-        return $"{word}{(word.EndsWith("ی") ? " ام" : "م")}";
+        return $"{word}{(word.EndsWith('ی') ? " ام" : "م")}";
     }
 }

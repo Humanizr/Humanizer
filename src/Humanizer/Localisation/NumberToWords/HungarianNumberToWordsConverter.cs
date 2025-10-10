@@ -66,7 +66,9 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
             CollectParts(parts, ref number, isOrdinal, isLessThanTen, 1_000, "ezer", "ezredik");
             var underAThousandPart = GetUnderAThousandPart(number, isOrdinal, false, isLessThanTen);
             if (underAThousandPart != string.Empty)
+            {
                 parts.Add(underAThousandPart);
+            }
         }
         else
         {
@@ -75,7 +77,9 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
             lastPart += GetUnderAThousandPart(number, isOrdinal, false, isLessThanTen);
 
             if (lastPart != string.Empty)
+            {
                 parts.Add(lastPart);
+            }
         }
 
         return string.Join("-", parts);
@@ -115,7 +119,9 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             // Return hundred + "adik" if the number is exactly one of hundreds e.g.: századik, hétszázadik
             if (isOrdinal && number % 100 == 0)
+            {
                 return HundredsMap[number / 100] + "adik";
+            }
 
             numberString += HundredsMap[number / 100];
             number %= 100;
@@ -125,16 +131,22 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             // Return an ordinal ten if the number is exactly one of tens
             if (isOrdinal && number % 10 == 0)
+            {
                 return numberString + OrdinalTensMap[number / 10];
+            }
 
             numberString += WholeTensExceptions.TryGetValue(number, out var value) ? value : TensMap[number / 10];
             number %= 10;
         }
 
         if (isOrdinal && !isPrefix)
+        {
             numberString += GetOrdinalOnes(number, originalLessThanTen);
+        }
         else
+        {
             numberString += isPrefix && number == 2 ? "két" : UnitsMap[number];
+        }
 
         return numberString;
     }
@@ -142,7 +154,9 @@ class HungarianNumberToWordsConverter : GenderlessNumberToWordsConverter
     private static string GetOrdinalOnes(long number, bool lessThanTen)
     {
         if (lessThanTen)
+        {
             return OrdinalUnitsMap[number];
+        }
 
         return OrdinalUnitsExceptions.TryGetValue(number, out var value) ? value : OrdinalUnitsMap[number];
     }

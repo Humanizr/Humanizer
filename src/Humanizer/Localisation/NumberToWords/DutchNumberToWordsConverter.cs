@@ -135,7 +135,7 @@ class DutchNumberToWordsConverter :
                 if (unit > 0)
                 {
                     var units = UnitsMap[unit];
-                    var trema = units.EndsWith("e");
+                    var trema = units.EndsWith('e');
                     word += units + (trema ? "ën" : "en") + tens;
                 }
                 else

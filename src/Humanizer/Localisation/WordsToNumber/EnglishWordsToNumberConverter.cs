@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Humanizer;
-
 namespace Humanizer;
 
 internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
@@ -34,7 +28,9 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
     public override int Convert(string words)
     {
         if (!TryConvert(words, out var result, out var unrecognizedword))
+        {
             throw new ArgumentException($"Unrecognized number word: {unrecognizedword}");
+        }
 
         return result;
     }
@@ -44,7 +40,9 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
     public override bool TryConvert(string words, out int parsedValue, out string? unrecognizedWord)
     {
         if (string.IsNullOrWhiteSpace(words))
+        {
             throw new ArgumentException("Input words cannot be empty.");
+        }
 
         unrecognizedWord = null;
 
@@ -55,7 +53,9 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
 
         var isNegative = words.StartsWith("minus ") || words.StartsWith("negative ");
         if (isNegative)
+        {
             words = words.Replace("minus ", "").Replace("negative ", "").Trim();
+        }
 
         // Remove ordinal suffixes (st, nd, rd, th)
         words = Regex.Replace(words, @"\b(\d+)(st|nd|rd|th)\b", "$1");
@@ -72,7 +72,7 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
             parsedValue = isNegative ? -ordinalValue : ordinalValue;
             return true;
         }
-        if (TryConvertWordsToNumber(words, out var numberValue, out var unrecognizedNumberWord))
+        if (EnglishWordsToNumberConverter.TryConvertWordsToNumber(words, out var numberValue, out var unrecognizedNumberWord))
         {
             parsedValue = isNegative ? -numberValue : numberValue;
             return true;
@@ -83,7 +83,7 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
         return false;
     }
 
-    private bool TryConvertWordsToNumber(string words, out int result, out string? unrecognizedWord)
+    private static bool TryConvertWordsToNumber(string words, out int result, out string? unrecognizedWord)
     {
         var wordsArray = words.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         result = 0;
@@ -107,19 +107,24 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
             }
 
             if (value == 100)
+            {
                 current = (current == 0 ? 1 : current) * 100;
-
+            }
             else if (value >= 1000)
             {
                 result += (current == 0 ? 1 : current) * value;
                 current = 0;
             }
             else
+            {
                 current += value;
+            }
         }
 
         if (!hasOrdinal)
+        {
             result += current;
+        }
 
         return true;
     }

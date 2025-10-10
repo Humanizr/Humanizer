@@ -147,7 +147,7 @@ public static class MetricNumeralExtensions
     /// </example>
     /// <returns>A valid Metric representation</returns>
     public static string ToMetric(this int input, MetricNumeralFormats? formats = null, int? decimals = null) =>
-        ((double) input).ToMetric(formats, decimals);
+        ((double)input).ToMetric(formats, decimals);
 
     /// <summary>
     /// Converts a number into a valid and Human-readable Metric representation.
@@ -217,10 +217,7 @@ public static class MetricNumeralExtensions
     /// <returns>A cleaned representation</returns>
     static string CleanRepresentation(string input)
     {
-        if (input == null)
-        {
-            throw new ArgumentNullException(nameof(input));
-        }
+        ArgumentNullException.ThrowIfNull(input);
 
         input = input.Trim();
         input = ReplaceNameBySymbol(input);
@@ -289,7 +286,10 @@ public static class MetricNumeralExtensions
 
         var scale = exponent / 3;
 
-        if (!scale.Equals(0)) return BuildMetricRepresentation(input, scale, formats, decimals);
+        if (!scale.Equals(0))
+        {
+            return BuildMetricRepresentation(input, scale, formats, decimals);
+        }
 
         var representation = decimals > 0
             ? $"{input}.{new string('0', decimals.Value)}"
@@ -317,7 +317,7 @@ public static class MetricNumeralExtensions
 
         var divisor = 1L;
 
-        for (var i=0; i < scale; i++)
+        for (var i = 0; i < scale; i++)
         {
             divisor *= 1000;
         }
@@ -382,9 +382,13 @@ public static class MetricNumeralExtensions
     /// <returns>A number in a Metric representation</returns>
     static string BuildRepresentation(double input, MetricNumeralFormats? formats, int? decimals)
     {
-        var exponent = (int) Math.Floor(Math.Log10(Math.Abs(input)) / 3);
+        var exponent = (int)Math.Floor(Math.Log10(Math.Abs(input)) / 3);
 
-        if (!exponent.Equals(0)) return BuildMetricRepresentation(input, exponent, formats, decimals);
+        if (!exponent.Equals(0))
+        {
+            return BuildMetricRepresentation(input, exponent, formats, decimals);
+        }
+
         var representation = decimals.HasValue
             ? Math
                 .Round(input, decimals.Value)

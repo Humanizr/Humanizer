@@ -46,10 +46,14 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     string ConvertImpl(long number, bool isOrdinal)
     {
         if (number == 0)
+        {
             return GetUnitValue(0, isOrdinal);
+        }
 
         if (number < 0)
+        {
             return $"கழித்தல் {Convert(-number)}";
+        }
 
         var parts = new List<string>();
 
@@ -83,18 +87,34 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
         //    number %= 1000000;
         //}
 
-        if (number / 10000000 > 0) parts.Add(GetCroresValue(ref number));
+        if (number / 10000000 > 0)
+        {
+            parts.Add(GetCroresValue(ref number));
+        }
 
-        if (number / 100000 > 0) parts.Add(GetLakhsValue(ref number, isOrdinal));
+        if (number / 100000 > 0)
+        {
+            parts.Add(GetLakhsValue(ref number, isOrdinal));
+        }
 
-        if (number / 1000 > 0) parts.Add(GetThousandsValue(ref number));
+        if (number / 1000 > 0)
+        {
+            parts.Add(GetThousandsValue(ref number));
+        }
 
-        if (number / 100 > 0) parts.Add(GetHundredsValue(ref number));
+        if (number / 100 > 0)
+        {
+            parts.Add(GetHundredsValue(ref number));
+        }
 
         if (number > 0)
+        {
             parts.Add(GetTensValue(number, isOrdinal));
+        }
         else if (isOrdinal)
+        {
             parts[^1] += "வது";
+        }
 
         var toWords = string.Join(" ", parts);
 
@@ -125,7 +145,9 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         var local_word = "";
         if (number < 20)
+        {
             local_word = GetUnitValue(number, isOrdinal);
+        }
         else if (number is >= 20 and <= 99)
         {
             var lastPart = TensMap[number / 10];
@@ -133,33 +155,52 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
             if (number % 10 > 0)
             {
                 if (quot == 9)
+                {
                     lastPart += "ற்றி ";
+                }
                 else if (quot is 7 or 8 or 4)
+                {
                     lastPart += "த்தி ";
+                }
                 else
+                {
                     lastPart += "த்து ";
+                }
 
-                if (!isThousand) lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
+                if (!isThousand)
+                {
+                    lastPart += $"{GetUnitValue(number % 10, isOrdinal)}";
+                }
             }
             else if (number % 10 == 0)
             {
                 if (isThousand)
                 {
                     if (quot == 9)
+                    {
                         lastPart += "றா";
+                    }
                     else
+                    {
                         lastPart += "தா";
+                    }
                 }
                 else
                 {
                     if (quot == 9)
+                    {
                         lastPart += "று";
+                    }
                     else
+                    {
                         lastPart += "து";
+                    }
                 }
             }
             else if (isOrdinal)
+            {
                 lastPart = lastPart.TrimEnd('y') + "ieth";
+            }
 
             local_word = lastPart;
         }
@@ -177,13 +218,22 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
             local_word += " " + LakhsMap[0];
         }
         else if (num_above_10 == 1)
+        {
             local_word = "ஒரு " + LakhsMap[0];
-        else local_word += GetTensValue(number / 100000, isOrdinal) + " " + LakhsMap[0];
+        }
+        else
+        {
+            local_word += GetTensValue(number / 100000, isOrdinal) + " " + LakhsMap[0];
+        }
 
         if (number % 1000000 == 0 || number % 100000 == 0)
+        {
             local_word += "ம்";
+        }
         else
+        {
             local_word += "த்து";
+        }
 
         number %= 100000;
         return local_word;
@@ -219,14 +269,23 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
             local_word += " ";
         }
         else if (num_above_10 == 1)
+        {
             local_word = "ஒரு ";
-        else if (num_above_10 > 0) local_word += GetTensValue(num_above_10, false) + " ";
+        }
+        else if (num_above_10 > 0)
+        {
+            local_word += GetTensValue(num_above_10, false) + " ";
+        }
 
         local_word = local_word.TrimEnd() + " " + str_crore;
         if (number % 10000000 == 0 || number % 100000000 == 0)
+        {
             local_word += "";
+        }
         else
+        {
             local_word += "யே";
+        }
 
         number %= 10000000;
         return local_word;
@@ -241,20 +300,29 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
             local_word = GetTensValue(num_above_10, false, true);
 
             if (num_above_10 % 10 == 1)
+            {
                 local_word += "ஓரா";
+            }
             else if (num_above_10 % 10 > 1)
+            {
                 local_word += ThousandsMap[num_above_10 % 10 - 1];
-
+            }
         }
         else
+        {
             local_word += ThousandsMap[number / 1000 - 1];
+        }
 
         number %= 1000;
 
         if (number > 0)
+        {
             local_word += "யிரத்து";
+        }
         else
+        {
             local_word += "யிரம்";
+        }
 
         return local_word;
     }
@@ -265,14 +333,22 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
         if (number / 100 == 9)
         {
             if (number % 100 == 0)
+            {
                 local_word += "ம்";
+            }
             else
+            {
                 local_word += "த்து";
+            }
         }
         else if (number % 100 >= 1)
+        {
             local_word += "ற்று";
+        }
         else
+        {
             local_word += "று";
+        }
 
         number %= 100;
 
@@ -283,7 +359,9 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         // one hundred => hundredth
         if (toWords.StartsWith("one", StringComparison.Ordinal))
+        {
             toWords = toWords.Remove(0, 4);
+        }
 
         return toWords;
     }

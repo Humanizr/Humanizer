@@ -2,14 +2,8 @@
   <PropertyGroup>
     <TargetFrameworks>net10.0;net8.0;net48;netstandard2.0</TargetFrameworks>
     <Description>A micro-framework that turns your normal strings, type names, enum fields, date fields, etc, into a human friendly format</Description>
-
     <Product>Humanizer</Product>
-    <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
-
-
-  </PropertyGroup>
-  
-
+  </PropertyGroup> 
   
   <ItemGroup>
     <PackageReference Include="Polyfill" PrivateAssets="all" />
@@ -44,7 +38,6 @@
     
     <None Update="FluentDate\InDate.Months.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="InDate.Months.cs" />
     <Compile Update="FluentDate\InDate.Months.cs" DesignTime="True" AutoGen="True" DependentUpon="InDate.Months.tt" />
-
 
     <None Update="FluentDate\In.SomeTimeFrom.tt" Generator="TextTemplatingFileGenerator" LastGenOutput="In.SomeTimeFrom.cs" />
     <Compile Update="FluentDate\In.SomeTimeFrom.cs" DesignTime="True" AutoGen="True" DependentUpon="In.SomeTimeFrom.tt" />

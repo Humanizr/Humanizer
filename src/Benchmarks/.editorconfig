@@ -1,0 +1,13 @@
+
+[*.cs]
+dotnet_diagnostic.CA1050.severity = none # CA1050: Declare types in namespaces
+
+
+# CA1861: Avoid constant arrays as arguments
+dotnet_diagnostic.CA1861.severity = silent
+
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = none

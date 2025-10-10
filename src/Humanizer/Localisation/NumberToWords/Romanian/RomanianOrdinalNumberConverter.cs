@@ -117,10 +117,10 @@ class RomanianOrdinalNumberConverter
 
         // trim last letter
         if (gender == GrammaticalGender.Feminine && !words.EndsWith("zece") &&
-            (words.EndsWith("a") ||
-             words.EndsWith("ă") ||
-             words.EndsWith("e") ||
-             words.EndsWith("i")))
+            (words.EndsWith('a') ||
+             words.EndsWith('ă') ||
+             words.EndsWith('e') ||
+             words.EndsWith('i')))
         {
             words = words.Substring(0, words.Length - 1);
         }
@@ -134,7 +134,7 @@ class RomanianOrdinalNumberConverter
 
     static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
     {
-        if (multiGenderPart.Contains("|"))
+        if (multiGenderPart.Contains('|'))
         {
             var parts = multiGenderPart.Split('|');
             if (gender == GrammaticalGender.Feminine)

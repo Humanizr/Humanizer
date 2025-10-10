@@ -41,7 +41,7 @@ public static class StringHumanizeExtensions
         if (result
                 .Replace(" ", "")
                 .All(char.IsUpper) &&
-            result.Contains(" "))
+            result.Contains(' '))
         {
             result = result.ToLower();
         }
@@ -70,7 +70,7 @@ public static class StringHumanizeExtensions
             return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
         }
 
-        if (input.Contains("_") || input.Contains("-"))
+        if (input.Contains('_') || input.Contains('-'))
         {
             return FromUnderscoreDashSeparatedWords(input);
         }

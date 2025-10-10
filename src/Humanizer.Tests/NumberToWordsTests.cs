@@ -1,4 +1,4 @@
-﻿[UseCulture("en-US")]
+[UseCulture("en-US")]
 public class NumberToWordsTests
 {
     [Theory]
@@ -141,8 +141,8 @@ public class NumberToWordsTests
         var abbrForm1 = number.ToWords(WordForm.Abbreviation);
         var normalForm2 = number.ToWords(addAnd: true, WordForm.Normal);
         var abbrForm2 = number.ToWords(addAnd: true, WordForm.Abbreviation);
-        var normalForm3 = ((long) number).ToWords(WordForm.Normal, default(GrammaticalGender));
-        var abbrFrom3 = ((long) number).ToWords(WordForm.Abbreviation, default(GrammaticalGender));
+        var normalForm3 = ((long)number).ToWords(WordForm.Normal, default(GrammaticalGender));
+        var abbrFrom3 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender));
 
         Assert.All(
             [
@@ -171,8 +171,8 @@ public class NumberToWordsTests
         var cultureSpecificNumber = number.ToWords(cultureInfo);
         var normalForm1 = number.ToWords(addAnd: true, WordForm.Normal, cultureInfo);
         var abbrForm1 = number.ToWords(addAnd: true, WordForm.Abbreviation, cultureInfo);
-        var normalForm2 = ((long) number).ToWords(WordForm.Normal, default(GrammaticalGender), cultureInfo);
-        var abbrForm2 = ((long) number).ToWords(WordForm.Abbreviation, default(GrammaticalGender), cultureInfo);
+        var normalForm2 = ((long)number).ToWords(WordForm.Normal, default(GrammaticalGender), cultureInfo);
+        var abbrForm2 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender), cultureInfo);
 
         Assert.All(
             [

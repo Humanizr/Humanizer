@@ -124,7 +124,9 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
         number = Math.Abs(number);
 
         if (number < TupleMap.Length)
+        {
             return TupleMap[number];
+        }
 
         return Convert(number) + " veces";
     }
@@ -142,7 +144,7 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
 
         if (inputNumber / 100 > 0)
         {
-            wordPart = inputNumber == 100 ? "cien" : GetGenderedHundredsMap(gender)[(int) (inputNumber / 100)];
+            wordPart = inputNumber == 100 ? "cien" : GetGenderedHundredsMap(gender)[(int)(inputNumber / 100)];
 
             remainder = inputNumber % 100;
         }
@@ -156,7 +158,7 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
     static string ConvertMappedOrdinalNumber(
         in int number,
         in int divisor,
-        IReadOnlyList<string> map,
+        string[] map,
         out int remainder,
         GrammaticalGender gender)
     {

@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Humanizer;
 
 internal class DefaultWordsToNumberConverter : GenderlessWordsToNumberConverter

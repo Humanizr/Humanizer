@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using System.Diagnostics;
+
 using static System.Globalization.NumberStyles;
 
 namespace Humanizer;
@@ -53,7 +54,7 @@ public struct ByteSize(double byteSize) :
     public const string TerabyteSymbol = "TB";
     public const string Terabyte = "terabyte";
 
-    public long Bits { get; } = (long) Math.Ceiling(byteSize * BitsInByte);
+    public long Bits { get; } = (long)Math.Ceiling(byteSize * BitsInByte);
     public double Bytes { get; } = byteSize;
     public double Kilobytes { get; } = byteSize / BytesInKilobyte;
     public double Megabytes { get; } = byteSize / BytesInMegabyte;
@@ -167,7 +168,7 @@ public struct ByteSize(double byteSize) :
     // Get ceiling because bis are whole units
 
     public static ByteSize FromBits(long value) =>
-        new(value / (double) BitsInByte);
+        new(value / (double)BitsInByte);
 
     public static ByteSize FromBytes(double value) =>
         new(value);
@@ -212,9 +213,11 @@ public struct ByteSize(double byteSize) :
         provider ??= CultureInfo.CurrentCulture;
 
         if (format == "G")
+        {
             format = "0.##";
+        }
 
-        if (!format.Contains("#") && !format.Contains("0"))
+        if (!format.Contains('#') && !format.Contains('0'))
         {
             format = "0.## " + format;
         }
@@ -253,13 +256,13 @@ public struct ByteSize(double byteSize) :
         }
 
         // Byte and Bit symbol look must be case-sensitive
-        if (format.IndexOf(ByteSymbol, StringComparison.Ordinal) != -1)
+        if (format.Contains(ByteSymbol, StringComparison.Ordinal))
         {
             format = format.Replace(ByteSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Byte, Bytes, toSymbol));
             return output(Bytes);
         }
 
-        if (format.IndexOf(BitSymbol, StringComparison.Ordinal) != -1)
+        if (format.Contains(BitSymbol, StringComparison.Ordinal))
         {
             format = format.Replace(BitSymbol, cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol));
             return output(Bits);
@@ -435,8 +438,7 @@ public struct ByteSize(double byteSize) :
         var numberPart = s
             .Slice(0, lastNumber)
             .Trim();
-        var sizePart = s
-            .Slice(lastNumber, s.Length - lastNumber)
+        var sizePart = s.Slice(lastNumber)
             .Trim();
 
         if (sizePart.Length is not (1 or 2))
@@ -467,9 +469,21 @@ public struct ByteSize(double byteSize) :
             case ByteSymbol:
                 if (sizePart.SequenceEqual(BitSymbol))
                 {
-                    if (!double.IsFinite(number)) return false;
-                    if (number != Math.Truncate(number)) return false;
-                    if (number < long.MinValue || number > long.MaxValue) return false;
+                    if (!double.IsFinite(number))
+                    {
+                        return false;
+                    }
+
+                    if (number != Math.Truncate(number))
+                    {
+                        return false;
+                    }
+
+                    if (number < long.MinValue || number > long.MaxValue)
+                    {
+                        return false;
+                    }
+
                     result = FromBits((long)number);
                 }
                 else
@@ -507,10 +521,7 @@ public struct ByteSize(double byteSize) :
 
     public static ByteSize Parse(string s, IFormatProvider? formatProvider)
     {
-        if (s == null)
-        {
-            throw new ArgumentNullException(nameof(s));
-        }
+        ArgumentNullException.ThrowIfNull(s);
 
         if (TryParse(s, formatProvider, out var result))
         {

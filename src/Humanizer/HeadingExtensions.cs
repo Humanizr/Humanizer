@@ -38,7 +38,7 @@ public static class HeadingExtensions
     /// <param name="culture">The culture to return the textual representation in</param>
     public static string ToHeading(this double heading, HeadingStyle style = HeadingStyle.Abbreviated, CultureInfo? culture = null)
     {
-        var val = (int) (heading / 22.5 + .5);
+        var val = (int)(heading / 22.5 + .5);
 
         var headingsIndex = val % 16;
 
@@ -55,7 +55,7 @@ public static class HeadingExtensions
     /// <returns>The heading arrow.</returns>
     public static char ToHeadingArrow(this double heading)
     {
-        var val = (int) (heading / 45 + .5);
+        var val = (int)(heading / 45 + .5);
 
         return HeadingArrows[val % 8];
     }
@@ -76,10 +76,7 @@ public static class HeadingExtensions
     /// <returns>The heading. -1 if the heading could not be parsed.</returns>
     public static double FromAbbreviatedHeading(this string heading, CultureInfo? culture = null)
     {
-        if (heading == null)
-        {
-            throw new ArgumentNullException(nameof(heading));
-        }
+        ArgumentNullException.ThrowIfNull(heading);
 
         culture ??= CultureInfo.CurrentCulture;
 
@@ -116,10 +113,7 @@ public static class HeadingExtensions
     /// </summary>
     public static double FromHeadingArrow(this string heading)
     {
-        if (heading == null)
-        {
-            throw new ArgumentNullException(nameof(heading));
-        }
+        ArgumentNullException.ThrowIfNull(heading);
 
         if (heading.Length != 1)
         {

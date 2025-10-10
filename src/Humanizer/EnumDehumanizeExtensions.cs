@@ -51,7 +51,7 @@ public static class EnumDehumanizeExtensions
         var genericMethod = DehumanizeToMethod.MakeGenericMethod(targetEnum);
         try
         {
-            return (Enum) genericMethod.Invoke(null, [input, onNoMatch])!;
+            return (Enum)genericMethod.Invoke(null, [input, onNoMatch])!;
         }
         catch (TargetInvocationException exception)
         {

@@ -8,6 +8,7 @@
 
   <PropertyGroup>
     <EnableSourceLink Condition="'$(Configuration)' == 'Debug'">false</EnableSourceLink>
+    <EnableNETAnalyzers Condition="'$(TargetFramework)' == 'netstandard2.0' or $(TargetFrameworkIdentifier) == '.NETFramework'">true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">

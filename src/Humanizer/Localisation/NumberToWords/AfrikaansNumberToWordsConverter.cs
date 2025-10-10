@@ -47,7 +47,7 @@ class AfrikaansNumberToWordsConverter :
             throw new NotImplementedException();
         }
 
-        return Convert((int) number, false);
+        return Convert((int)number, false);
     }
 
     public override string ConvertToOrdinal(int number) =>

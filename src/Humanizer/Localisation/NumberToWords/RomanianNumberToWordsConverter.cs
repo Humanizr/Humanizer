@@ -10,7 +10,7 @@ class RomanianNumberToWordsConverter : GenderedNumberToWordsConverter
         }
 
         var converter = new RomanianCardinalNumberConverter();
-        return converter.Convert((int) number, gender);
+        return converter.Convert((int)number, gender);
     }
 
     public override string ConvertToOrdinal(int number, GrammaticalGender gender)

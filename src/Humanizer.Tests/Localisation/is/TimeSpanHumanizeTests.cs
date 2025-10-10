@@ -1,4 +1,4 @@
-﻿namespace @is;
+namespace @is;
 
 [UseCulture("is")]
 public class TimeSpanHumanizeTests
@@ -19,7 +19,7 @@ public class TimeSpanHumanizeTests
     [InlineData(1096, "þrjú ár")]
     [InlineData(4018, "ellefu ár")]
     public void YearsToWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [Trait("Translation", "Native speaker")]
@@ -37,7 +37,7 @@ public class TimeSpanHumanizeTests
     [InlineData(92, "þrír mánuðir")]
     [InlineData(335, "ellefu mánuðir")]
     public void MonthsToWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [InlineData(7, "ein vika")]

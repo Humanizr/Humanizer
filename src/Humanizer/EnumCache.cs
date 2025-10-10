@@ -21,7 +21,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             dehumanized[description] = value;
         }
 
-        var isBitFieldEnum = type.GetCustomAttribute(typeof(FlagsAttribute)) != null;
+        var isBitFieldEnum = type.GetCustomAttribute<FlagsAttribute>() != null;
         return (
             zero,
             humanized.ToFrozenDictionary(),

@@ -7,6 +7,7 @@ class HebrewNumberToWordsConverter(CultureInfo culture) :
     static readonly string[] UnitsMasculine = ["אפס", "אחד", "שניים", "שלושה", "ארבעה", "חמישה", "שישה", "שבעה", "שמונה", "תשעה", "עשרה"];
     static readonly string[] TensUnit = ["עשר", "עשרים", "שלושים", "ארבעים", "חמישים", "שישים", "שבעים", "שמונים", "תשעים"];
 
+    [AttributeUsage(AttributeTargets.Field)]
     class DescriptionAttribute(string description) :
         Attribute
     {
@@ -32,7 +33,7 @@ class HebrewNumberToWordsConverter(CultureInfo culture) :
             throw new NotImplementedException();
         }
 
-        var number = (int) input;
+        var number = (int)input;
 
         if (number < 0)
         {
@@ -45,28 +46,28 @@ class HebrewNumberToWordsConverter(CultureInfo culture) :
         }
 
         var parts = new List<string>();
-        if (number >= (int) Group.Billions)
+        if (number >= (int)Group.Billions)
         {
             ToBigNumber(number, Group.Billions, parts);
-            number %= (int) Group.Billions;
+            number %= (int)Group.Billions;
         }
 
-        if (number >= (int) Group.Millions)
+        if (number >= (int)Group.Millions)
         {
             ToBigNumber(number, Group.Millions, parts);
-            number %= (int) Group.Millions;
+            number %= (int)Group.Millions;
         }
 
-        if (number >= (int) Group.Thousands)
+        if (number >= (int)Group.Thousands)
         {
             ToThousands(number, parts);
-            number %= (int) Group.Thousands;
+            number %= (int)Group.Thousands;
         }
 
-        if (number >= (int) Group.Hundreds)
+        if (number >= (int)Group.Hundreds)
         {
             ToHundreds(number, parts);
-            number %= (int) Group.Hundreds;
+            number %= (int)Group.Hundreds;
         }
 
         if (number > 0)
@@ -121,7 +122,7 @@ class HebrewNumberToWordsConverter(CultureInfo culture) :
         // Big numbers (million and above) always use the masculine form
         // See https://www.safa-ivrit.org/dikduk/numbers.php
 
-        var digits = number / (int) group;
+        var digits = number / (int)group;
         if (digits == 2)
         {
             parts.Add("שני");
@@ -136,7 +137,7 @@ class HebrewNumberToWordsConverter(CultureInfo culture) :
 
     void ToThousands(int number, List<string> parts)
     {
-        var thousands = number / (int) Group.Thousands;
+        var thousands = number / (int)Group.Thousands;
 
         if (thousands == 1)
         {
@@ -165,7 +166,7 @@ class HebrewNumberToWordsConverter(CultureInfo culture) :
         // For hundreds, Hebrew is using the feminine form
         // See https://www.safa-ivrit.org/dikduk/numbers.php
 
-        var hundreds = number / (int) Group.Hundreds;
+        var hundreds = number / (int)Group.Hundreds;
 
         if (hundreds == 1)
         {

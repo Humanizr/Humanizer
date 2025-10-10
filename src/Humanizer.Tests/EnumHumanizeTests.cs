@@ -93,7 +93,7 @@ public class EnumHumanizeTests
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeCanReturnNullForEnumNoMatch() =>
-        Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
+        Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyEnum>(OnNoMatch.ReturnsNull));
 
     [Fact]
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+using System.Reflection;
+
 using Xunit.Sdk;
 
 /// <summary>
@@ -21,7 +22,7 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     /// <remarks>
     /// <para>
     /// This constructor overload uses <paramref name="culture" /> for both
-    /// <see cref="Culture" /> and <see cref="UICulture" />.
+    /// <see cref="CultureInfo.CurrentCulture" /> and <see cref="CultureInfo.CurrentUICulture" />.
     /// </para>
     /// </remarks>
     public UseCultureAttribute(string culture) =>

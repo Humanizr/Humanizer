@@ -112,7 +112,7 @@ class RomanianCardinalNumberConverter
 
         for (var i = 0; i < _threeDigitParts.Count; i++)
         {
-            var currentSet = (ThreeDigitSets) Enum.ToObject(typeof(ThreeDigitSets), i);
+            var currentSet = (ThreeDigitSets)Enum.ToObject(typeof(ThreeDigitSets), i);
 
             var partToString = GetNextPartConverter(currentSet);
 
@@ -226,7 +226,7 @@ class RomanianCardinalNumberConverter
 
     static string GetPartByGender(string multiGenderPart, GrammaticalGender gender)
     {
-        if (multiGenderPart.Contains("|"))
+        if (multiGenderPart.Contains('|'))
         {
             var parts = multiGenderPart.Split('|');
             if (gender == GrammaticalGender.Feminine)
