@@ -141,12 +141,22 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
 
     static string GetTwoDigitOrdinal(int number)
     {
-        if (number == 11) return "ενδέκατος";
-        if (number == 12) return "δωδέκατος";
+        if (number == 11)
+        {
+            return "ενδέκατος";
+        }
+
+        if (number == 12)
+        {
+            return "δωδέκατος";
+        }
 
         var decades = number / 10;
 
-        if (!ΟrdinalMap.TryGetValue(decades * 10, out var decadesString)) return string.Empty;
+        if (!ΟrdinalMap.TryGetValue(decades * 10, out var decadesString))
+        {
+            return string.Empty;
+        }
 
         if (number - decades * 10 > 0)
         {
@@ -160,7 +170,10 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         var hundreds = number / 100;
 
-        if (!ΟrdinalMap.TryGetValue(hundreds * 100, out var hundredsString)) return string.Empty;
+        if (!ΟrdinalMap.TryGetValue(hundreds * 100, out var hundredsString))
+        {
+            return string.Empty;
+        }
 
         if (number - hundreds * 100 > 10)
         {
@@ -179,7 +192,10 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
     {
         var thousands = number / 1000;
 
-        if (!ΟrdinalMap.TryGetValue(thousands * 1000, out var thousandsString)) return string.Empty;
+        if (!ΟrdinalMap.TryGetValue(thousands * 1000, out var thousandsString))
+        {
+            return string.Empty;
+        }
 
         if (number - thousands * 1000 > 100)
         {

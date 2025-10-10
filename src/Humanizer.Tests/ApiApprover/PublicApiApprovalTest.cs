@@ -1,4 +1,4 @@
-﻿using PublicApiGenerator;
+using PublicApiGenerator;
 
 public class PublicApiApprovalTest
 {
@@ -8,7 +8,7 @@ public class PublicApiApprovalTest
         var publicApi = typeof(StringHumanizeExtensions).Assembly.GeneratePublicApi();
 
         return Verify(publicApi)
-            .ScrubLinesContaining("CommitHash", "RepositoryUrl", "InternalsVisibleTo")
+            .ScrubLinesContaining("CommitHash", "RepositoryUrl", "InternalsVisibleTo", "CloudBuildNumber")
             .UniqueForTargetFrameworkAndVersion();
     }
 }

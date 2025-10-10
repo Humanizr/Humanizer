@@ -26,8 +26,8 @@ public class Vocabulary
     {
         if (matchEnding)
         {
-            var singularSubstring = singular.Substring(1);
-            var pluralSubString = plural.Substring(1);
+            var singularSubstring = singular[1..];
+            var pluralSubString = plural[1..];
             AddPlural($"({singular[0]}){singularSubstring}$", $"$1{pluralSubString}");
             AddSingular($"({plural[0]}){pluralSubString}$", $"$1{singularSubstring}");
         }

@@ -1,7 +1,7 @@
 [MemoryDiagnoser]
 public class EnglishToWordsBenchmark
 {
-    EnglishNumberToWordsConverter converter = new();
+    readonly EnglishNumberToWordsConverter converter = new();
 
     [Benchmark]
     public string ToWords() =>

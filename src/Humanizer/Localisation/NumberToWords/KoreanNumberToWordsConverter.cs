@@ -81,7 +81,9 @@ class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
         if (isOrdinal && number < 20)
         {
             if (OrdinalExceptions.TryGetValue(number, out var words))
+            {
                 return words;
+            }
         }
 
         if (number == 0)

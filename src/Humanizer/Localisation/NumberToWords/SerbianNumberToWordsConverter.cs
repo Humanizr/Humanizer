@@ -13,7 +13,7 @@ class SerbianNumberToWordsConverter(CultureInfo culture) :
             throw new NotImplementedException();
         }
 
-        var number = (int) input;
+        var number = (int)input;
         if (number == 0)
         {
             return "nula";

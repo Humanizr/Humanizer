@@ -1,4 +1,4 @@
-﻿namespace hu;
+namespace hu;
 
 [UseCulture("hu-HU")]
 public class TimeSpanHumanizeTests
@@ -58,7 +58,7 @@ public class TimeSpanHumanizeTests
     [InlineData(1096, "három év")]
     [InlineData(4018, "tizenegy év")]
     public void YearsWithWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [Trait("Translation", "Google")]
@@ -67,37 +67,37 @@ public class TimeSpanHumanizeTests
     [InlineData(92, "három hónap")]
     [InlineData(335, "tizenegy hónap")]
     public void MonthsWithWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [InlineData(14, "kettő hét")]
     [InlineData(7, "egy hét")]
     public void WeeksWithWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords: true));
 
     [Theory]
     [InlineData(2, "kettő nap")]
     [InlineData(1, "egy nap")]
     public void DaysWithWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords: true));
 
     [Theory]
     [InlineData(2, "kettő óra")]
     [InlineData(1, "egy óra")]
     public void HoursWithWords(int hours, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize(toWords:true));
+        Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize(toWords: true));
 
     [Theory]
     [InlineData(2, "kettő perc")]
     [InlineData(1, "egy perc")]
     public void MinutesWithWords(int minutes, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize(toWords:true));
+        Assert.Equal(expected, TimeSpan.FromMinutes(minutes).Humanize(toWords: true));
 
     [Theory]
     [InlineData(2, "kettő másodperc")]
     [InlineData(1, "egy másodperc")]
     public void SecondsWithWords(int seconds, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize(toWords:true));
+        Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize(toWords: true));
 
     [Fact]
     public void NoTime()

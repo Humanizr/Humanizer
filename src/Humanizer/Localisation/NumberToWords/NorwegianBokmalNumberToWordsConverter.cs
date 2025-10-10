@@ -43,7 +43,7 @@ class NorwegianBokmalNumberToWordsConverter : GenderedNumberToWordsConverter
             throw new NotImplementedException();
         }
 
-        return Convert((int) number, false, gender);
+        return Convert((int)number, false, gender);
     }
 
     public override string ConvertToOrdinal(int number, GrammaticalGender gender) =>

@@ -22,7 +22,7 @@ class FixedNumberOfCharactersTruncator : ITruncator
 
         if (truncationString.Length > length)
         {
-            return truncateFrom == TruncateFrom.Right ? value.Substring(0, length) : value.Substring(value.Length - length);
+            return truncateFrom == TruncateFrom.Right ? value[..length] : value[^length..];
         }
 
         var alphaNumericalCharactersProcessed = 0;

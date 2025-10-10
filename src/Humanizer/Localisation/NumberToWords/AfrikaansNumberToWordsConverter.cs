@@ -47,7 +47,7 @@ class AfrikaansNumberToWordsConverter :
             throw new NotImplementedException();
         }
 
-        return Convert((int) number, false);
+        return Convert((int)number, false);
     }
 
     public override string ConvertToOrdinal(int number) =>
@@ -166,7 +166,7 @@ class AfrikaansNumberToWordsConverter :
         if (toWords.StartsWith("een", StringComparison.Ordinal) &&
             !toWords.StartsWith("een en", StringComparison.Ordinal))
         {
-            toWords = toWords.Remove(0, 4);
+            toWords = toWords[4..];
         }
 
         return toWords;

@@ -305,7 +305,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
         var remainder = number / rule.Power;
         if (remainder > 0)
         {
-            number %= (int) rule.Power;
+            number %= (int)rule.Power;
 
             // https://malfar.arnastofnun.is/grein/65658
             if (number > 0 && (number > 19 || (number % 100 > 10 && number % 100 % 10 == 0)))
@@ -326,7 +326,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
             else
             {
                 var prevLen = parts.Count;
-                CollectOrdinalParts(parts, (int) remainder, rule, rule.Gender, gender);
+                CollectOrdinalParts(parts, (int)remainder, rule, rule.Gender, gender);
                 if (number == 0 && needsAnd && false == parts
                         .Skip(prevLen)
                         .Contains(AndSplit))
@@ -363,7 +363,7 @@ class IcelandicNumberToWordsConverter : GenderedNumberToWordsConverter
 
         if (number > 0)
         {
-            if (needsAnd && IsAndSplitNeeded((int) number))
+            if (needsAnd && IsAndSplitNeeded((int)number))
             {
                 parts.Add(AndSplit);
             }

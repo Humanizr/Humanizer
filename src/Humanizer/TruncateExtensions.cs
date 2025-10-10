@@ -51,10 +51,7 @@ public static class TruncateExtensions
     [return: NotNullIfNotNull(nameof(input))]
     public static string? Truncate(this string? input, int length, string? truncationString, ITruncator truncator, TruncateFrom from = TruncateFrom.Right)
     {
-        if (truncator == null)
-        {
-            throw new ArgumentNullException(nameof(truncator));
-        }
+        ArgumentNullException.ThrowIfNull(truncator);
 
         if (input == null)
         {

@@ -1,4 +1,6 @@
-﻿public class EnumHumanizeTests
+using System.Diagnostics.CodeAnalysis;
+
+public class EnumHumanizeTests
 {
     [Fact]
     public void HonorsDescriptionAttribute() =>
@@ -79,6 +81,8 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeThrowsForEnumNoMatch()
     {
         Assert.Throws<NoMatchFoundException>(() => EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyEnum>());
@@ -86,10 +90,14 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeCanReturnNullForEnumNoMatch() =>
-        Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo(typeof(DummyEnum), OnNoMatch.ReturnsNull));
+        Assert.Null(EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<DummyEnum>(OnNoMatch.ReturnsNull));
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeDescriptionAttribute()
     {
         Assert.Equal(EnumUnderTest.MemberWithDescriptionAttribute, EnumTestsResources.MemberWithDescriptionAttribute.DehumanizeTo<EnumUnderTest>());
@@ -97,6 +105,8 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeDescriptionAttributeSubclasses()
     {
         const string calculatedDescription = "Overridden " + EnumTestsResources.MemberWithDescriptionAttributeSubclass;
@@ -105,6 +115,8 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeAnyAttributeWithDescriptionStringProperty()
     {
         Assert.Equal(EnumUnderTest.MemberWithCustomDescriptionAttribute, EnumTestsResources.MemberWithCustomDescriptionAttribute.DehumanizeTo<EnumUnderTest>());
@@ -112,6 +124,8 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeMembersWithoutDescriptionAttribute()
     {
         Assert.Equal(EnumUnderTest.MemberWithoutDescriptionAttribute, EnumTestsResources.MemberWithoutDescriptionAttributeSentence.DehumanizeTo<EnumUnderTest>());
@@ -122,6 +136,8 @@
     [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeTitle, EnumUnderTest.MemberWithoutDescriptionAttribute)]
     [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeLowerCase, EnumUnderTest.MemberWithoutDescriptionAttribute)]
     [InlineData(EnumTestsResources.MemberWithoutDescriptionAttributeSentence, EnumUnderTest.MemberWithoutDescriptionAttribute)]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeIsCaseInsensitive(string input, EnumUnderTest expectedEnum)
     {
         Assert.Equal(expectedEnum, input.DehumanizeTo<EnumUnderTest>());
@@ -129,6 +145,8 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeAllCapitalMembersAreReturnedAsIs()
     {
         Assert.Equal(EnumUnderTest.ALLCAPITALS, EnumUnderTest.ALLCAPITALS.ToString().DehumanizeTo<EnumUnderTest>());
@@ -136,6 +154,8 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeDisplayAttribute()
     {
         Assert.Equal(EnumUnderTest.MemberWithDisplayAttribute, EnumTestsResources.MemberWithDisplayAttribute.DehumanizeTo<EnumUnderTest>());
@@ -143,6 +163,8 @@
     }
 
     [Fact]
+    [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
+    [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
     public void DehumanizeLocalizedDisplayAttribute()
     {
         Assert.Equal(EnumUnderTest.MemberWithLocalizedDisplayAttribute, EnumTestsResources.MemberWithLocalizedDisplayAttribute.DehumanizeTo<EnumUnderTest>());

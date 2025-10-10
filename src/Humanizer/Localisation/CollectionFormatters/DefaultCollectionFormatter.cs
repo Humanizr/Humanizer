@@ -21,15 +21,9 @@ class DefaultCollectionFormatter : ICollectionFormatter
 
     public virtual string Humanize<T>(IEnumerable<T> collection, Func<T, string?> objectFormatter, string separator)
     {
-        if (collection == null)
-        {
-            throw new ArgumentNullException(nameof(collection));
-        }
+        ArgumentNullException.ThrowIfNull(collection);
 
-        if (objectFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(objectFormatter));
-        }
+        ArgumentNullException.ThrowIfNull(objectFormatter);
 
         return HumanizeDisplayStrings(
             collection.Select(objectFormatter),
@@ -38,15 +32,9 @@ class DefaultCollectionFormatter : ICollectionFormatter
 
     public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> objectFormatter, string separator)
     {
-        if (collection == null)
-        {
-            throw new ArgumentNullException(nameof(collection));
-        }
+        ArgumentNullException.ThrowIfNull(collection);
 
-        if (objectFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(objectFormatter));
-        }
+        ArgumentNullException.ThrowIfNull(objectFormatter);
 
         return HumanizeDisplayStrings(
             collection

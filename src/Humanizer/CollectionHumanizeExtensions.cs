@@ -18,10 +18,7 @@ public static class CollectionHumanizeExtensions
     /// </summary>
     public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter)
     {
-        if (displayFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(displayFormatter));
-        }
+        ArgumentNullException.ThrowIfNull(displayFormatter);
 
         return Configurator.CollectionFormatter.Humanize(collection, displayFormatter);
     }
@@ -32,10 +29,7 @@ public static class CollectionHumanizeExtensions
     /// </summary>
     public static string Humanize<T>(this IEnumerable<T> collection, Func<T, object> displayFormatter)
     {
-        if (displayFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(displayFormatter));
-        }
+        ArgumentNullException.ThrowIfNull(displayFormatter);
 
         return Configurator.CollectionFormatter.Humanize(collection, displayFormatter);
     }
@@ -53,10 +47,7 @@ public static class CollectionHumanizeExtensions
     /// </summary>
     public static string Humanize<T>(this IEnumerable<T> collection, Func<T, string> displayFormatter, string separator)
     {
-        if (displayFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(displayFormatter));
-        }
+        ArgumentNullException.ThrowIfNull(displayFormatter);
 
         return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, separator);
     }
@@ -67,10 +58,7 @@ public static class CollectionHumanizeExtensions
     /// </summary>
     public static string Humanize<T>(this IEnumerable<T> collection, Func<T, object> displayFormatter, string separator)
     {
-        if (displayFormatter == null)
-        {
-            throw new ArgumentNullException(nameof(displayFormatter));
-        }
+        ArgumentNullException.ThrowIfNull(displayFormatter);
 
         return Configurator.CollectionFormatter.Humanize(collection, displayFormatter, separator);
     }

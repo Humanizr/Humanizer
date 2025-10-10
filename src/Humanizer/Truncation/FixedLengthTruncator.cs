@@ -21,8 +21,8 @@ class FixedLengthTruncator : ITruncator
         if (truncationString == null || truncationString.Length > length)
         {
             return truncateFrom == TruncateFrom.Right
-                ? value.Substring(0, length)
-                : value.Substring(value.Length - length);
+                ? value[..length]
+                : value[^length..];
         }
 
         return truncateFrom == TruncateFrom.Left ? StringHumanizeExtensions.Concat(truncationString.AsSpan(), value.AsSpan(value.Length - length + truncationString.Length)) : StringHumanizeExtensions.Concat(value.AsSpan(0, length - truncationString.Length), truncationString.AsSpan());

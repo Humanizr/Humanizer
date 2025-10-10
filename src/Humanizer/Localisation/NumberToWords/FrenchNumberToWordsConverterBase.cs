@@ -41,7 +41,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
 
         var convertedNumber = Convert(number);
 
-        if (convertedNumber.EndsWith("s") && !convertedNumber.EndsWith("trois"))
+        if (convertedNumber.EndsWith('s') && !convertedNumber.EndsWith("trois"))
         {
             convertedNumber = convertedNumber.TrimEnd('s');
         }
@@ -56,7 +56,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
 
         if (convertedNumber.StartsWith("un "))
         {
-            convertedNumber = convertedNumber.Remove(0, 3);
+            convertedNumber = convertedNumber[3..];
         }
 
         if (number == 0)

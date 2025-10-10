@@ -1,4 +1,4 @@
-﻿namespace de;
+namespace de;
 
 [UseCulture("de-DE")]
 public class TimeSpanHumanizeTests
@@ -19,7 +19,7 @@ public class TimeSpanHumanizeTests
     [InlineData(1096, "drei Jahre")]
     [InlineData(4018, "elf Jahre")]
     public void YearsToWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [Trait("Translation", "Native speaker")]
@@ -37,7 +37,7 @@ public class TimeSpanHumanizeTests
     [InlineData(92, "drei Monate")]
     [InlineData(335, "elf Monate")]
     public void MonthsToWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [InlineData(7, "1 Woche")]

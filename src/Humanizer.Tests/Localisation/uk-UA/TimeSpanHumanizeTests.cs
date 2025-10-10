@@ -1,4 +1,4 @@
-﻿namespace ukUA;
+namespace ukUA;
 
 [UseCulture("uk-UA")]
 public class TimeSpanHumanizeTests
@@ -67,7 +67,7 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize(toWords: toWords));
 
     [Theory]
-    [InlineData(1, "одна хвилина",true)]
+    [InlineData(1, "одна хвилина", true)]
     [InlineData(1, "1 хвилина")]
     [InlineData(2, "2 хвилини")]
     [InlineData(3, "3 хвилини")]

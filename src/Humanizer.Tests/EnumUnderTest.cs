@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 public enum EnumUnderTest
@@ -45,24 +45,28 @@ public class EnumTestsResources
     public static string MemberWithLocalizedDisplayAttribute => "Localized description from Display attribute";
 }
 
+[AttributeUsage(AttributeTargets.Field)]
 public class ImposterDescriptionAttribute(int description) :
     Attribute
 {
     public int Description { get; set; } = description;
 }
 
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Method)]
 public class CustomDescriptionAttribute(string description) :
     Attribute
 {
     public string Description { get; set; } = description;
 }
 
+[AttributeUsage(AttributeTargets.Field)]
 public class DescriptionSubclassAttribute(string description) :
     DescriptionAttribute(description)
 {
     public override string Description => "Overridden " + base.Description;
 }
 
+[AttributeUsage(AttributeTargets.Field)]
 public class CustomPropertyAttribute(string info) :
     Attribute
 {

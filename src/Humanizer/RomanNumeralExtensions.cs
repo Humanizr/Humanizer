@@ -53,10 +53,7 @@ public static class RomanNumeralExtensions
     /// <returns>Human-readable number</returns>
     public static int FromRoman(this string input)
     {
-        if (input == null)
-        {
-            throw new ArgumentNullException(nameof(input));
-        }
+        ArgumentNullException.ThrowIfNull(input);
 
         return FromRoman(input.AsSpan());
     }
@@ -113,7 +110,7 @@ public static class RomanNumeralExtensions
 
         if (input is < minValue or > maxValue)
         {
-            throw new ArgumentOutOfRangeException();
+            throw new ArgumentOutOfRangeException(nameof(input));
         }
 
         Span<char> builder = stackalloc char[maxRomanNumeralLength];
@@ -123,13 +120,13 @@ public static class RomanNumeralExtensions
         {
             while (input >= pair.Value)
             {
-                pair.Key.AsSpan().CopyTo(builder.Slice(pos));
+                pair.Key.AsSpan().CopyTo(builder[pos..]);
                 pos += pair.Key.Length;
                 input -= pair.Value;
             }
         }
 
-        return builder.Slice(0, pos).ToString();
+        return builder[..pos].ToString();
     }
 
     static bool IsInvalidRomanNumeral(CharSpan input) =>

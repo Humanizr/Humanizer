@@ -4,15 +4,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.4" PrivateAssets="all" />
-    <PackageReference Include="PublicApiGenerator" Version="11.4.6" />
-    <PackageReference Include="Xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" PrivateAssets="all" />
-    <PackageReference Include="Verify.Xunit" Version="30.13.0" />
-    <PackageReference Include="Verify.DiffPlex" Version="3.1.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
-    <Reference Include="System.ComponentModel.DataAnnotations" Condition="'$(TargetFramework)' == 'net48' " />
+    <PackageReference Include="coverlet.collector" PrivateAssets="all" />
+    <PackageReference Include="PublicApiGenerator" />
+    <PackageReference Include="Xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="Verify.Xunit" />
+    <PackageReference Include="Verify.DiffPlex" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="System.ComponentModel.Annotations" Condition="'$(TargetFramework)' == 'net48' " />
+    <ProjectReference Include="..\Humanizer\Humanizer.csproj" />    
     <Content Include="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

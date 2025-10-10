@@ -1,4 +1,4 @@
-﻿namespace es;
+namespace es;
 
 [UseCulture("es-ES")]
 public class TimeSpanHumanizeTests
@@ -98,12 +98,12 @@ public class TimeSpanHumanizeTests
     {
         var culture = new CultureInfo("es-ES");
         var qry = from i in Enumerable.Range(0, 100000)
-            let ts = TimeSpan.FromDays(i)
-            let text = ts.Humanize(precision: 3, culture: culture, maxUnit: TimeUnit.Year)
-            select text;
+                  let ts = TimeSpan.FromDays(i)
+                  let text = ts.Humanize(precision: 3, culture: culture, maxUnit: TimeUnit.Year)
+                  select text;
         var grouping = from t in qry
-            group t by t into g
-            select new { g.Key, Count = g.Count() };
+                       group t by t into g
+                       select new { g.Key, Count = g.Count() };
         var allUnique = grouping.All(g => g.Count == 1);
         Assert.True(allUnique);
     }

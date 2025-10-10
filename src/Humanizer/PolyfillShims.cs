@@ -7,8 +7,33 @@ namespace System;
 
 // C# 14 static extension members on the *type* itself.
 // Usage on old TFMs:  Double.IsFinite(x), Double.IsIntegral(x), Single.IsFinite(x), ...
-static class FloatCompat
+static class PolyfillShims
 {
+
+    // Extend the *type* ArgumentNullException with a static member
+    extension(ArgumentNullException)
+    {
+        [Intrinsic]
+        public static void ThrowIfNull(
+            object? argument,
+            [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+            => _ = argument ?? throw new ArgumentNullException(paramName);
+    }
+
+    extension(ArgumentOutOfRangeException)
+    {
+        /// <summary>Throws an <see cref="ArgumentOutOfRangeException"/> if <paramref name="value"/> is negative.</summary>
+        /// <param name="value">The argument to validate as non-negative.</param>
+        /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
+        public static void ThrowIfNegative(int value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        {
+            if (value < 0)
+            {
+                throw new ArgumentOutOfRangeException(paramName, value, "Argument must be non-negative.");
+            }
+        }
+    }
+
     // ---- Double ----
     extension(double)
     {
@@ -22,7 +47,11 @@ static class FloatCompat
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsIntegral(double x)
         {
-            if (!IsFinite(x)) return false;
+            if (!IsFinite(x))
+            {
+                return false;
+            }
+
             return x == Math.Truncate(x);
         }
 
@@ -57,7 +86,11 @@ static class FloatCompat
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsIntegral(float x)
         {
-            if (!IsFinite(x)) return false;
+            if (!IsFinite(x))
+            {
+                return false;
+            }
+
             return x == Math.Truncate(x);
         }
 

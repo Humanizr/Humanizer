@@ -1,4 +1,4 @@
-﻿namespace lb;
+namespace lb;
 
 [UseCulture("lb-LU")]
 public class TimeSpanHumanizeTests
@@ -19,7 +19,7 @@ public class TimeSpanHumanizeTests
     [InlineData(1096, "dräi Joer")]
     [InlineData(4018, "eelef Joer")]
     public void YearsToWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [Trait("Translation", "Native speaker")]
@@ -37,7 +37,7 @@ public class TimeSpanHumanizeTests
     [InlineData(92, "dräi Méint")]
     [InlineData(335, "eelef Méint")]
     public void MonthsToWords(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year,toWords:true));
+        Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year, toWords: true));
 
     [Theory]
     [InlineData(7, "1 Woch")]

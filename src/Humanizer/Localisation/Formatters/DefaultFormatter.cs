@@ -43,7 +43,10 @@ public class DefaultFormatter(CultureInfo culture) : IFormatter
     public virtual string TimeSpanHumanize_Age()
     {
         if (Resources.TryGetResource("TimeSpanHumanize_Age", Culture, out var ageFormat))
+        {
             return ageFormat;
+        }
+
         return "{0}";
     }
 
@@ -72,7 +75,9 @@ public class DefaultFormatter(CultureInfo culture) : IFormatter
         var resourceValue = Format(resourceKey);
 
         if (!toSymbol && count > 1)
+        {
             resourceValue += "s";
+        }
 
         return resourceValue;
     }

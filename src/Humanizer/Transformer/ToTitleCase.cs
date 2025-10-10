@@ -53,8 +53,8 @@ class ToTitleCase : ICulturedStringTransformer
             "a" or "an" or "the" or
 
             // conjunctions
-            "and" or  "as" or  "but" or  "if" or  "nor" or  "or" or  "so" or  "yet" or
+            "and" or "as" or "but" or "if" or "nor" or "or" or "so" or "yet" or
 
             // prepositions
-            "as" or  "at" or  "by" or  "for" or  "in" or  "of" or  "off" or  "on" or  "to" or  "up" or  "via";
+            "as" or "at" or "by" or "for" or "in" or "of" or "off" or "on" or "to" or "up" or "via";
 }

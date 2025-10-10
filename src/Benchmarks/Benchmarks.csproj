@@ -6,9 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.15.3" />
+    <PackageReference Include="BenchmarkDotNet" />
     <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.7.115"/>
 <!--      <PackageReference Include="Humanizer" Version="2.14.1" />-->
   </ItemGroup>
 

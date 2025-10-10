@@ -1,0 +1,8 @@
+﻿<Project>
+    <Target Name="AssertRestoreTaskOutputProperties"
+            AfterTargets="Restore">
+        <Error
+            Condition="'$(RestoreProjectCount)' != '$([MSBuild]::Add($(RestoreProjectsAuditedCount), $(RestoreSkippedCount)))'"
+            Text="Restore did not audit every project in the solution. Expected: $(RestoreProjectCount) Found: $(RestoreProjectsAuditedCount), Skipped: $(RestoreSkippedCount)" />
+    </Target>
+</Project>

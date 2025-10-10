@@ -10,7 +10,42 @@ indent_style = space
 [*.cs]
 indent_size = 4
 charset = utf-8
-
+tab_width = 4
+end_of_line = crlf
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
+dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_explicit_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
+dotnet_style_prefer_compound_assignment = true:suggestion
+dotnet_style_prefer_simplified_interpolation = true:suggestion
+dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
+dotnet_style_namespace_match_folder = true:suggestion
+dotnet_style_readonly_field = true:suggestion
+dotnet_style_predefined_type_for_locals_parameters_members = true:error
+dotnet_style_predefined_type_for_member_access = true:error
+dotnet_style_require_accessibility_modifiers = never:error
+dotnet_style_allow_multiple_blank_lines_experimental = true:silent
+dotnet_style_allow_statement_immediately_after_block_experimental = true:silent
+dotnet_code_quality_unused_parameters = all:suggestion
+dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary:none
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:none
+dotnet_style_parentheses_in_relational_binary_operators = never_if_unnecessary:none
+dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
+dotnet_style_qualification_for_field = false:error
+dotnet_style_qualification_for_property = false:error
+dotnet_style_qualification_for_method = false:error
+dotnet_style_qualification_for_event = false:error
+dotnet_diagnostic.CA1305.severity = none
+dotnet_diagnostic.CA1304.severity = none
 
 # Microsoft .NET properties
 trim_trailing_whitespace = true
@@ -45,41 +80,6 @@ dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary:n
 dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:none
 dotnet_style_parentheses_in_relational_binary_operators = never_if_unnecessary:none
 
-# ReSharper properties
-resharper_object_creation_when_type_not_evident = target_typed
-
-# ReSharper inspection severities
-resharper_arrange_object_creation_when_type_evident_highlighting = error
-resharper_arrange_object_creation_when_type_not_evident_highlighting = error
-resharper_arrange_redundant_parentheses_highlighting = error
-resharper_arrange_static_member_qualifier_highlighting = error
-resharper_arrange_this_qualifier_highlighting = hint
-resharper_arrange_type_member_modifiers_highlighting = none
-resharper_built_in_type_reference_style_for_member_access_highlighting = hint
-resharper_built_in_type_reference_style_highlighting = hint
-resharper_check_namespace_highlighting = none
-resharper_convert_to_using_declaration_highlighting = error
-resharper_css_not_resolved_highlighting = warning
-resharper_field_can_be_made_read_only_local_highlighting = none
-resharper_merge_into_logical_pattern_highlighting = warning
-resharper_merge_into_pattern_highlighting = error
-resharper_method_has_async_overload_highlighting = warning
-resharper_partial_type_with_single_part_highlighting = error
-resharper_redundant_base_qualifier_highlighting = warning
-resharper_redundant_cast_highlighting = error
-resharper_redundant_empty_object_creation_argument_list_highlighting = error
-resharper_redundant_empty_object_or_collection_initializer_highlighting = error
-resharper_redundant_name_qualifier_highlighting = error
-resharper_redundant_suppress_nullable_warning_expression_highlighting = error
-resharper_redundant_using_directive_highlighting = error
-resharper_redundant_verbatim_string_prefix_highlighting = error
-resharper_replace_substring_with_range_indexer_highlighting = warning
-resharper_suggest_var_or_type_built_in_types_highlighting = error
-resharper_suggest_var_or_type_elsewhere_highlighting = error
-resharper_suggest_var_or_type_simple_types_highlighting = error
-resharper_unnecessary_whitespace_highlighting = error
-resharper_use_await_using_highlighting = warning
-resharper_use_deconstruction_highlighting = warning
 
 # Sort using and Import directives with System.* appearing first
 dotnet_sort_system_directives_first = true
@@ -127,48 +127,131 @@ csharp_style_conditional_delegate_call = true:suggestion
 
 # Newline settings
 #csharp_new_line_before_open_brace = all:error
-resharper_max_array_initializer_elements_on_line = 1
 csharp_new_line_before_else = true
 csharp_new_line_before_catch = true
 csharp_new_line_before_finally = true
 csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_members_in_anonymous_types = true
-resharper_wrap_before_first_type_parameter_constraint = true
-resharper_wrap_extends_list_style = chop_always
-resharper_wrap_after_dot_in_method_calls = false
-resharper_wrap_before_binary_pattern_op = false
-resharper_wrap_object_and_collection_initializer_style = chop_always
-resharper_place_simple_initializer_on_single_line = false
-
 dotnet_style_require_accessibility_modifiers = never:error
-resharper_place_type_constraints_on_same_line = false
-resharper_blank_lines_inside_namespace = 0
-resharper_blank_lines_after_file_scoped_namespace_directive = 1
-resharper_blank_lines_inside_type = 0
-
 insert_final_newline = false
-resharper_place_attribute_on_same_line = false
-resharper_space_around_lambda_arrow = true
-resharper_place_constructor_initializer_on_same_line = false
+csharp_using_directive_placement = outside_namespace:silent
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_prefer_braces = true:silent
+csharp_style_namespace_declarations = file_scoped:silent
+csharp_style_prefer_method_group_conversion = true:silent
+csharp_style_prefer_top_level_statements = true:silent
+csharp_style_prefer_primary_constructors = true:suggestion
+csharp_prefer_system_threading_lock = true:suggestion
+csharp_style_prefer_simple_property_accessors = true:suggestion
+csharp_style_expression_bodied_lambdas = true:silent
+csharp_style_prefer_null_check_over_type_check = true:suggestion
+csharp_prefer_simple_default_expression = true:suggestion
+csharp_style_prefer_local_over_anonymous_function = true:suggestion
+csharp_style_prefer_index_operator = true:suggestion
+csharp_style_prefer_range_operator = true:suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
+csharp_style_prefer_implicitly_typed_lambda_expression = true:suggestion
+csharp_style_prefer_tuple_swap = true:suggestion
+csharp_style_prefer_unbound_generic_type_in_nameof = true:suggestion
+csharp_style_prefer_utf8_string_literals = true:suggestion
+csharp_style_deconstructed_variable_declaration = true:suggestion
+csharp_style_unused_value_assignment_preference = discard_variable:suggestion
+csharp_style_unused_value_expression_statement_preference = discard_variable:silent
+csharp_prefer_static_local_function = true:suggestion
+csharp_prefer_static_anonymous_function = true:suggestion
+csharp_style_prefer_readonly_struct = true:suggestion
+csharp_style_prefer_readonly_struct_member = true:suggestion
+csharp_style_allow_embedded_statements_on_same_line_experimental = true:silent
+csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true:silent
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:silent
+csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental = true:silent
+csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true:silent
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:silent
+csharp_style_prefer_not_pattern = true:suggestion
+csharp_style_prefer_extended_property_pattern = true:suggestion
 
-#braces https://www.jetbrains.com/help/resharper/EditorConfig_CSHARP_CSharpCodeStylePageImplSchema.html#Braces
-resharper_braces_for_ifelse = required
-resharper_braces_for_foreach = required
-resharper_braces_for_while = required
-resharper_braces_for_dowhile = required
-resharper_braces_for_lock = required
-resharper_braces_for_fixed = required
-resharper_braces_for_for = required
+# Legacy rules
 
-resharper_return_value_of_pure_method_is_not_used_highlighting = error
+dotnet_diagnostic.CA1001.severity = error
+dotnet_diagnostic.CA1009.severity = error
+dotnet_diagnostic.CA1016.severity = error
+dotnet_diagnostic.CA1033.severity = error
+dotnet_diagnostic.CA1049.severity = error
+dotnet_diagnostic.CA1060.severity = error
+dotnet_diagnostic.CA1061.severity = error
+dotnet_diagnostic.CA1063.severity = error
+dotnet_diagnostic.CA1065.severity = error
+dotnet_diagnostic.CA1301.severity = error
+dotnet_diagnostic.CA1400.severity = error
+dotnet_diagnostic.CA1401.severity = error
+dotnet_diagnostic.CA1403.severity = error
+dotnet_diagnostic.CA1404.severity = error
+dotnet_diagnostic.CA1405.severity = error
+dotnet_diagnostic.CA1410.severity = error
+dotnet_diagnostic.CA1415.severity = error
+dotnet_diagnostic.CA1821.severity = error
+dotnet_diagnostic.CA1900.severity = error
+dotnet_diagnostic.CA1901.severity = error
+dotnet_diagnostic.CA2002.severity = error
+dotnet_diagnostic.CA2100.severity = error
+dotnet_diagnostic.CA2101.severity = error
+dotnet_diagnostic.CA2108.severity = error
+dotnet_diagnostic.CA2111.severity = error
+dotnet_diagnostic.CA2112.severity = error
+dotnet_diagnostic.CA2114.severity = error
+dotnet_diagnostic.CA2116.severity = error
+dotnet_diagnostic.CA2117.severity = error
+dotnet_diagnostic.CA2122.severity = error
+dotnet_diagnostic.CA2123.severity = error
+dotnet_diagnostic.CA2124.severity = error
+dotnet_diagnostic.CA2126.severity = error
+dotnet_diagnostic.CA2131.severity = error
+dotnet_diagnostic.CA2132.severity = error
+dotnet_diagnostic.CA2133.severity = error
+dotnet_diagnostic.CA2134.severity = error
+dotnet_diagnostic.CA2137.severity = error
+dotnet_diagnostic.CA2138.severity = error
+dotnet_diagnostic.CA2140.severity = error
+dotnet_diagnostic.CA2141.severity = error
+dotnet_diagnostic.CA2146.severity = error
+dotnet_diagnostic.CA2147.severity = error
+dotnet_diagnostic.CA2149.severity = error
+dotnet_diagnostic.CA2200.severity = error
+dotnet_diagnostic.CA2202.severity = error
+dotnet_diagnostic.CA2207.severity = error
+dotnet_diagnostic.CA2212.severity = error
+dotnet_diagnostic.CA2213.severity = error
+dotnet_diagnostic.CA2214.severity = error
+dotnet_diagnostic.CA2216.severity = error
+dotnet_diagnostic.CA2220.severity = error
+dotnet_diagnostic.CA2229.severity = error
+dotnet_diagnostic.CA2231.severity = error
+dotnet_diagnostic.CA2232.severity = error
+dotnet_diagnostic.CA2235.severity = error
+dotnet_diagnostic.CA2236.severity = error
+dotnet_diagnostic.CA2237.severity = error
+dotnet_diagnostic.CA2238.severity = error
+dotnet_diagnostic.CA2240.severity = error
+dotnet_diagnostic.CA2241.severity = error
+dotnet_diagnostic.CA2242.severity = error
+
+
+# Test Projects
+
+# IDE0022: Use expression body for method
+dotnet_diagnostic.IDE0022.severity = silent
+
+[Benchmarks/**/*.cs]
+dotnet_diagnostic.CA1050.severity = none # CA1050: Declare types in namespaces
+
+[**/Humanizer.Tests/**/*.cs]
+dotnet_diagnostic.CA1050.severity = none # CA1050: Declare types in namespaces
+
 
 # Xml files
 [*.{xml,config,nuspec,resx,vsixmanifest,csproj,targets,props,fsproj}]
 indent_size = 2
-# https://www.jetbrains.com/help/resharper/EditorConfig_XML_XmlCodeStylePageSchema.html#resharper_xml_blank_line_after_pi
-resharper_blank_line_after_pi = false
-resharper_space_before_self_closing = true
-ij_xml_space_inside_empty_tag = true
 
 [*.json]
 indent_size = 2

@@ -1,9 +1,9 @@
-﻿[MemoryDiagnoser(false)]
+[MemoryDiagnoser(false)]
 public class TimeOnlyToClockNotationConverterBenchmarks
 {
-    static TimeOnly time = new(13, 6, 2, 88, 987);
+    static readonly TimeOnly time = new(13, 6, 2, 88, 987);
 
-    static EsTimeOnlyToClockNotationConverter esConverter = new();
+    static readonly EsTimeOnlyToClockNotationConverter esConverter = new();
     [Benchmark]
     public void EsClockNotationConverter()
     {
@@ -11,7 +11,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         esConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static BrazilianPortugueseTimeOnlyToClockNotationConverter brazilianConverter = new();
+    static readonly BrazilianPortugueseTimeOnlyToClockNotationConverter brazilianConverter = new();
     [Benchmark]
     public void BrazilianPortugueseClockNotationConverter()
     {
@@ -19,7 +19,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         brazilianConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static FrTimeOnlyToClockNotationConverter frConverter = new();
+    static readonly FrTimeOnlyToClockNotationConverter frConverter = new();
     [Benchmark]
     public void FrClockNotationConverter()
     {
@@ -27,7 +27,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         frConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static LbTimeOnlyToClockNotationConverter lbConverter = new();
+    static readonly LbTimeOnlyToClockNotationConverter lbConverter = new();
     [Benchmark]
     public void LbClockNotationConverter()
     {
@@ -35,7 +35,7 @@ public class TimeOnlyToClockNotationConverterBenchmarks
         lbConverter.Convert(time, ClockNotationRounding.NearestFiveMinutes);
     }
 
-    static DefaultTimeOnlyToClockNotationConverter defaultConverter = new();
+    static readonly DefaultTimeOnlyToClockNotationConverter defaultConverter = new();
     [Benchmark]
     public void DefaultClockNotationConverter()
     {

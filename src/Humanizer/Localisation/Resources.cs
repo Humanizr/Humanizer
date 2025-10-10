@@ -1,7 +1,4 @@
 using System.Resources;
-using System.Globalization;
-using System.Reflection;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Humanizer;
 
