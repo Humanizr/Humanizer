@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 namespace Humanizer;
 
@@ -10,7 +10,6 @@ public interface ITimeOnlyToClockNotationConverter
     /// <summary>
     /// Converts the time to Clock Notation
     /// </summary>
-    string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive);
+    string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive, CultureInfo? culture);
 }
-
 #endif
