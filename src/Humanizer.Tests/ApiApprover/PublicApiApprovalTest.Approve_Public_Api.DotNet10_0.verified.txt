@@ -776,6 +776,8 @@ namespace Humanizer
         public static string? Pluralize(this string? word, bool inputIsKnownToBeSingular = true) { }
         public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
         public static string Titleize(this string input) { }
+        [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
+        public static string? ToPossessive(this string? word, Humanizer.PossesiveSuffixOverride? suffix = default) { }
         public static string Underscore(this string input) { }
     }
     public enum LetterCasing
@@ -1809,6 +1811,12 @@ namespace Humanizer
         Plural = 1,
         CouldBeEither = 2,
     }
+    public enum PossesiveSuffixOverride
+    {
+        S_ONLY = 0,
+        APOSTROPHE_ONLY = 1,
+        APOSTROPHE_S = 2,
+    }
     public class PrecisionDateOnlyHumanizeStrategy : Humanizer.IDateOnlyHumanizeStrategy
     {
         public PrecisionDateOnlyHumanizeStrategy(double precision = 0.75) { }
@@ -1968,6 +1976,7 @@ namespace Humanizer
         public string? Pluralize(string? word, bool inputIsKnownToBeSingular = true) { }
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("word")]
         public string? Singularize(string? word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) { }
+        public string? ToPossessive(string? word, Humanizer.PossesiveSuffixOverride? possessiveSuffix) { }
     }
     public enum WordForm
     {
