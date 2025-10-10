@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-
+using System.Linq;
 namespace Humanizer;
 
 static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>
@@ -75,14 +75,12 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         foreach (var attr in member.GetCustomAttributes())
         {
             var attrType = attr.GetType();
-            foreach (var property in attrType.GetRuntimeProperties())
+            foreach (var property in attrType.GetRuntimeProperties()
+                .Where(property => property.PropertyType == typeof(string) &&
+                                   Configurator.EnumDescriptionPropertyLocator(property)))
             {
-                if (property.PropertyType == typeof(string) &&
-                    Configurator.EnumDescriptionPropertyLocator(property))
-                {
-                    description = (string)property.GetValue(attr, null)!;
-                    return true;
-                }
+                description = (string)property.GetValue(attr, null)!;
+                return true;
             }
         }
 
