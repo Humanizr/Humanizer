@@ -122,7 +122,7 @@ class RomanianOrdinalNumberConverter
              words.EndsWith('e') ||
              words.EndsWith('i')))
         {
-            words = words.Substring(0, words.Length - 1);
+            words = words[..^1];
         }
 
         return string.Format("{0} {1}{2}",

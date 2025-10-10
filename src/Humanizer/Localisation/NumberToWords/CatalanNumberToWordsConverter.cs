@@ -55,7 +55,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
 
         if (number < 10)
         {
-            return CatalanNumberToWordsConverter.GetUnit((int)number, gender);
+            return GetUnit((int)number, gender);
         }
 
         if (number < 20)
@@ -65,7 +65,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
 
         if (number < 100)
         {
-            return CatalanNumberToWordsConverter.GetTens((int)number, gender);
+            return GetTens((int)number, gender);
         }
 
         if (number < 1000)
@@ -107,7 +107,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
 
         var num = (units == 1) && gender == GrammaticalGender.Masculine
             ? "u"
-            : CatalanNumberToWordsConverter.GetUnit(units, gender);
+            : GetUnit(units, gender);
 
         return $"{Tens[tens]}{conjunction}{num}";
     }
@@ -125,7 +125,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
 
         var num = rest == 1 && gender == GrammaticalGender.Masculine
             ? "u"
-            : (rest < 10 ? CatalanNumberToWordsConverter.GetUnit(rest, gender) : CatalanNumberToWordsConverter.GetTens(rest, gender));
+            : (rest < 10 ? GetUnit(rest, gender) : GetTens(rest, gender));
 
         return $"{hundredPart} {num}";
     }
@@ -208,7 +208,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
 
         if (number < 100)
         {
-            return CatalanNumberToWordsConverter.GetOrdinalTens(number, gender);
+            return GetOrdinalTens(number, gender);
         }
 
         if (number < 1000)
@@ -244,7 +244,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
             var tensDec = tens[dec];
             if (dec == 3 || dec == 6 || dec == 7 || dec == 8 || dec == 9)
             {
-                tensDec = tensDec.Substring(0, tensDec.Length - 1); //
+                tensDec = tensDec[..^1]; //
             }
 
             return tensDec + ordSuf;
@@ -372,7 +372,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
 
             if (number == 11 || number == 100 || number == 999)
             {
-                return number.ToString() + (gender == GrammaticalGender.Feminine ? "a" : "è");
+                return number + (gender == GrammaticalGender.Feminine ? "a" : "è");
             }
 
             if (number == 101)
@@ -387,10 +387,10 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
             // Comportamiento genérico
             if (gender == GrammaticalGender.Feminine)
             {
-                return number.ToString() + "a";
+                return number + "a";
             }
 
-            return number.ToString() + (
+            return number + (
                 (number % 10 == 1 || number % 10 == 3) ? "r" :
                 (number % 10 == 2 || number % 10 == 7) ? "n" :
                 "è"

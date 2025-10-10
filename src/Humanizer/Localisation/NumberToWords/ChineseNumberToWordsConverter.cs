@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class ChineseNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
@@ -108,7 +108,7 @@ class ChineseNumberToWordsConverter : GenderlessNumberToWordsConverter
 
         if (isSpecial)
         {
-            toWords = toWords.Substring(1);
+            toWords = toWords[1..];
         }
 
         if (isOrdinal)

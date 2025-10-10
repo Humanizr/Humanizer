@@ -121,7 +121,7 @@ class AzerbaijaniNumberToWordsConverter :
 
         if (suffixFoundOnLastVowel)
         {
-            word = word.Substring(0, word.Length - 1);
+            word = word[..^1];
         }
 
         return $"{word}{wordSuffix}";

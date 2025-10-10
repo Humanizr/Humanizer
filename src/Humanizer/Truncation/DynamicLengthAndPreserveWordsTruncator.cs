@@ -33,8 +33,8 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
         if (truncationString.Length > length)
         {
             return truncateFrom == TruncateFrom.Right
-                ? value.Substring(0, length)
-                : value.Substring(value.Length - length);
+                ? value[..length]
+                : value[^length..];
         }
 
         // If the whole string fits, return it.
@@ -73,7 +73,7 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
                 }
             }
         }
-        var candidate = value.Substring(candidateStart).TrimStart();
+        var candidate = value[candidateStart..].TrimStart();
         // If the candidate word is too long (i.e. would be partial) or empty, return just the delimiter.
         if (candidate.Length > allowedContentLength || candidate.Length == 0)
         {
@@ -103,7 +103,7 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
                 return truncationString;
             }
         }
-        var prefix = value.Substring(0, effectiveLength).TrimEnd();
+        var prefix = value[..effectiveLength].TrimEnd();
         if (prefix.Length == 0)
         {
             return truncationString;

@@ -249,7 +249,7 @@ public static class MetricNumeralExtensions
     static double BuildMetricNumber(string input, char last)
     {
         double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3.0;
-        var number = double.Parse(input.Remove(input.Length - 1));
+        var number = double.Parse(input[..^1]);
         var exponent = Math.Pow(10, Symbols[0]
             .Contains(last)
             ? getExponent(Symbols[0])
@@ -491,7 +491,7 @@ public static class MetricNumeralExtensions
         var isSymbol = Symbols[0]
             .Contains(last) || Symbols[1]
             .Contains(last);
-        return !double.TryParse(isSymbol ? input.Remove(index) : input, out _);
+        return !double.TryParse(isSymbol ? input[..index] : input, out _);
     }
 
     struct UnitPrefix(string name, string shortScaleWord, string? longScaleWord = null)

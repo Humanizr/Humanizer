@@ -25,12 +25,12 @@ class ItalianOrdinalNumberCruncher(int number, GrammaticalGender gender)
         if (tensAndUnits == 10)
         {
             // for numbers ending in 10, cardinal and ordinal endings are different, suffix doesn't work
-            words = words.Remove(words.Length - LengthOf10AsCardinal) + "decim" + genderSuffix;
+            words = words[..^LengthOf10AsCardinal] + "decim" + genderSuffix;
         }
         else
         {
             // truncate last vowel
-            words = words.Remove(words.Length - 1);
+            words = words[..^1];
 
             var units = fullNumber % 10;
 

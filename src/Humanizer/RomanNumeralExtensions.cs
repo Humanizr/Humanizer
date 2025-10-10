@@ -120,13 +120,13 @@ public static class RomanNumeralExtensions
         {
             while (input >= pair.Value)
             {
-                pair.Key.AsSpan().CopyTo(builder.Slice(pos));
+                pair.Key.AsSpan().CopyTo(builder[pos..]);
                 pos += pair.Key.Length;
                 input -= pair.Value;
             }
         }
 
-        return builder.Slice(0, pos).ToString();
+        return builder[..pos].ToString();
     }
 
     static bool IsInvalidRomanNumeral(CharSpan input) =>

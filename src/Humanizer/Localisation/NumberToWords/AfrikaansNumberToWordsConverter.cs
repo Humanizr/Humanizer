@@ -166,7 +166,7 @@ class AfrikaansNumberToWordsConverter :
         if (toWords.StartsWith("een", StringComparison.Ordinal) &&
             !toWords.StartsWith("een en", StringComparison.Ordinal))
         {
-            toWords = toWords.Remove(0, 4);
+            toWords = toWords[4..];
         }
 
         return toWords;

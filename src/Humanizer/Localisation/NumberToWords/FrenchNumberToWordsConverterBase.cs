@@ -56,7 +56,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
 
         if (convertedNumber.StartsWith("un "))
         {
-            convertedNumber = convertedNumber.Remove(0, 3);
+            convertedNumber = convertedNumber[3..];
         }
 
         if (number == 0)

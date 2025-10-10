@@ -25,14 +25,12 @@ static class PolyfillShims
         /// <summary>Throws an <see cref="ArgumentOutOfRangeException"/> if <paramref name="value"/> is negative.</summary>
         /// <param name="value">The argument to validate as non-negative.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        
         public static void ThrowIfNegative(int value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
         {
             if (value < 0)
             {
                 throw new ArgumentOutOfRangeException(paramName, value, "Argument must be non-negative.");
             }
-
         }
     }
 

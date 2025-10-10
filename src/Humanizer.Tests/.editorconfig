@@ -5,3 +5,6 @@ dotnet_diagnostic.CA1050.severity = none # CA1050: Declare types in namespaces
 
 # CA1861: Avoid constant arrays as arguments
 dotnet_diagnostic.CA1861.severity = silent
+
+# IDE0060: Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = none

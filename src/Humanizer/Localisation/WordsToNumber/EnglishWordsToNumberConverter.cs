@@ -72,7 +72,7 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
             parsedValue = isNegative ? -ordinalValue : ordinalValue;
             return true;
         }
-        if (EnglishWordsToNumberConverter.TryConvertWordsToNumber(words, out var numberValue, out var unrecognizedNumberWord))
+        if (TryConvertWordsToNumber(words, out var numberValue, out var unrecognizedNumberWord))
         {
             parsedValue = isNegative ? -numberValue : numberValue;
             return true;

@@ -98,7 +98,7 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
         }
 
         // Get the substring and trim trailing spaces.
-        var prefix = value.Substring(0, candidateIndex).TrimEnd();
+        var prefix = value[..candidateIndex].TrimEnd();
 
         var prefixLength = 0;
         for (var i = prefix.Length - 1; i >= 0; i--)
@@ -186,7 +186,7 @@ public class DynamicNumberOfCharactersAndPreserveWordsTruncator : ITruncator
             }
         }
 
-        var suffix = value.Substring(candidateIndex).TrimStart();
+        var suffix = value[candidateIndex..].TrimStart();
 
         var suffixLength = 0;
         for (var i = suffix.Length - 1; i >= 0; i--)

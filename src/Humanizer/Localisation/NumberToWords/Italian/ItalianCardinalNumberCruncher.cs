@@ -144,7 +144,7 @@ class ItalianCardinalNumberCruncher(int number, GrammaticalGender gender)
             // truncate tens last vowel before 'uno' (1) and 'otto' (8)
             if (units is 1 or 8)
             {
-                words = words.Remove(words.Length - 1);
+                words = words[..^1];
             }
 
             // if this is the last set, an accent could be due
