@@ -1,21 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net10.0;net8.0;net48</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" PrivateAssets="all" />
-    <PackageReference Include="PublicApiGenerator" />
-    <PackageReference Include="Xunit" />
-    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
-    <PackageReference Include="Verify.Xunit" />
-    <PackageReference Include="Verify.DiffPlex" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="System.ComponentModel.Annotations" Condition="'$(TargetFramework)' == 'net48' " />
-    <ProjectReference Include="..\Humanizer\Humanizer.csproj" />    
-    <Content Include="xunit.runner.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Using Include="Xunit.v3" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" PrivateAssets="all" />
+    <PackageReference Include="PublicApiGenerator" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="Verify.XunitV3" />
+    <PackageReference Include="Verify.DiffPlex" />
+    <PackageReference Include="System.ComponentModel.Annotations" Condition="'$(TargetFramework)' == 'net48' " />
+    <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
+  </ItemGroup>
+  
 </Project>

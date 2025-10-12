@@ -47,7 +47,7 @@ jobs:
     #   uses: actions/setup-example@v1
     - uses: actions/setup-dotnet@v5
       with:
-        global-json-file: src/global.json
+        global-json-file: global.json
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3

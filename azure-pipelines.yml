@@ -58,7 +58,7 @@ stages:
       inputs:
         command: test
         projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
-        arguments: -c $(BuildConfiguration) --collect:"XPlat code coverage" -s $(System.DefaultWorkingDirectory)/src/CodeCoverage.runsettings -- RunConfiguration.DisableAppDomain=true
+        arguments: -c $(BuildConfiguration) --coverage --xunit-info
       displayName: Run Tests
 
     # Generate code coverage report
@@ -66,9 +66,9 @@ stages:
     - task: reportgenerator@5
       displayName: Generate Code Coverage Report
       inputs:
-        reports: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+        reports: '$(Agent.TempDirectory)/**/*.cobertura.xml'
         targetdir: $(Build.ArtifactStagingDirectory)/coverageReports/ 
-        reporttypes: HtmlInline_AzurePipelines;Cobertura;Badges
+        reporttypes: HtmlInline_AzurePipelines_Dark;Cobertura;Badges
         license: '$(ReportGeneratorLicenseKey)'
         publishCodeCoverageResults: true
       

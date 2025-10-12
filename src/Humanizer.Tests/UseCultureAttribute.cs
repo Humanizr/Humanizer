@@ -1,12 +1,8 @@
 using System.Reflection;
 
-using Xunit.Sdk;
 
-/// <summary>
-/// Apply this attribute to your test method to replace the
-/// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
-/// <see cref="CultureInfo.CurrentUICulture" /> with another culture.
-/// </summary>
+
+
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class UseCultureAttribute : BeforeAfterTestAttribute
 {
@@ -15,18 +11,21 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     CultureInfo? originalUICulture;
 
     /// <summary>
+    /// Apply this attribute to your test method to replace the
+    /// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
+    /// <see cref="CultureInfo.CurrentUICulture" /> with another culture.
+    /// </summary>
+    /// <remarks>
     /// Replaces the culture and UI culture of the current thread with
     /// <paramref name="culture" />
-    /// </summary>
-    /// <param name="culture">The name of the culture.</param>
+    /// </remarks>
     /// <remarks>
     /// <para>
     /// This constructor overload uses <paramref name="culture" /> for both
     /// <see cref="CultureInfo.CurrentCulture" /> and <see cref="CultureInfo.CurrentUICulture" />.
     /// </para>
     /// </remarks>
-    public UseCultureAttribute(string culture) =>
-        this.culture = new(() => new(culture));
+    public UseCultureAttribute(string culture) => this.culture = new Lazy<CultureInfo>(() => new CultureInfo(culture));
 
     public CultureInfo Culture => culture.Value;
 
@@ -36,7 +35,7 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     /// and replaces them with the new cultures defined in the constructor.
     /// </summary>
     /// <param name="methodUnderTest">The method under test</param>
-    public override void Before(MethodInfo methodUnderTest)
+    public override void Before(MethodInfo methodUnderTest, IXunitTest test)
     {
         originalCulture = CultureInfo.CurrentCulture;
         originalUICulture = CultureInfo.CurrentUICulture;
@@ -50,7 +49,7 @@ public class UseCultureAttribute : BeforeAfterTestAttribute
     /// <see cref="CultureInfo.CurrentUICulture" /> to <see cref="CultureInfo.CurrentCulture" />
     /// </summary>
     /// <param name="methodUnderTest">The method under test</param>
-    public override void After(MethodInfo methodUnderTest)
+    public override void After(MethodInfo methodUnderTest, IXunitTest test)
     {
         CultureInfo.CurrentCulture = originalCulture!;
         CultureInfo.CurrentUICulture = originalUICulture!;
