@@ -84,6 +84,7 @@ try {
     
     # Define SDK versions to test
     # These versions will use rollForward to match any installed SDK in that major version
+    # Note: MSBuild on .NET Framework could be added here for Windows environments to test net48 compatibility
     $sdkVersionsToTest = @(
         @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8 },
         @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9 },
