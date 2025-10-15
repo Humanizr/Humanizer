@@ -1362,7 +1362,6 @@ The Humanizer project is built & tested continuously by Azure DevOps (more detai
 
 The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 
-
 ## Related projects
 
 Below is a list of related open-source projects:
