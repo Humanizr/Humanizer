@@ -125,11 +125,11 @@ try {
 
     $sdkTestResults = @()
     $msbuildTestResults = @()
-    $isWindows = $false
+    $runningOnWindows = $false
     try {
-        $isWindows = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)
+        $runningOnWindows = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)
     } catch {
-        $isWindows = $false
+        $runningOnWindows = $false
     }
     
     # Filter to only test SDKs that are actually installed
@@ -242,7 +242,7 @@ try {
         throw "SDK version testing failed"
     }
 
-    if ($isWindows) {
+    if ($runningOnWindows) {
         Write-Host ""
         Write-AzureDevOpsSection "Detecting MSBuild installations"
 
@@ -452,7 +452,7 @@ namespace MetaTest
     Write-Host "  - All satellites are dependencies of metapackage: ✓"
     $sdkPassedCount = $sdkTestResults | Where-Object Success | Measure-Object | Select-Object -ExpandProperty Count
     Write-Host "  - SDK version tests passed: $sdkPassedCount/$($sdkTestResults.Count)"
-    if ($isWindows) {
+    if ($runningOnWindows) {
         $msbuildPassedCount = $msbuildTestResults | Where-Object Success | Measure-Object | Select-Object -ExpandProperty Count
         if ($msbuildTestResults.Count -gt 0) {
             Write-Host "  - MSBuild restore tests passed: $msbuildPassedCount/$($msbuildTestResults.Count)"
