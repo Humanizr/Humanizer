@@ -77,18 +77,39 @@ try {
 "@
     Set-Content -Path $nugetConfig -Value $nugetConfigContent
 
+    # Get list of installed SDKs
+    Write-Host "Detecting installed .NET SDKs..."
+    $installedSdks = dotnet --list-sdks 2>&1 | Out-String
+    Write-Host $installedSdks
+    
     # Define SDK versions to test
     # These versions will use rollForward to match any installed SDK in that major version
     $sdkVersionsToTest = @(
-        @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8" },
-        @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9" },
-        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10" }
+        @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8 },
+        @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9 },
+        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10 }
     )
 
     $sdkTestResults = @()
+    
+    # Filter to only test SDKs that are actually installed
+    $sdksToTest = $sdkVersionsToTest | Where-Object {
+        $majorVersion = $_.MajorVersion
+        $pattern = "(?m)^$majorVersion\."
+        if ($installedSdks -match $pattern) {
+            $true
+        } else {
+            Write-Host "##[warning]$($_.Name) not installed, skipping"
+            $false
+        }
+    }
+    
+    if ($sdksToTest.Count -eq 0) {
+        Write-AzureDevOpsWarning "No target SDK versions (8, 9, or 10) are installed"
+    }
 
     # Test package restoration with each SDK version
-    foreach ($sdkConfig in $sdkVersionsToTest) {
+    foreach ($sdkConfig in $sdksToTest) {
         Write-AzureDevOpsSection "Testing package restoration with $($sdkConfig.Name) (v$($sdkConfig.Version))"
         
         # Create a test folder for this SDK version
@@ -173,7 +194,9 @@ try {
         }
     }
     
-    if (-not $allSdksPassed) {
+    if ($sdkTestResults.Count -eq 0) {
+        Write-AzureDevOpsWarning "No SDK versions were tested"
+    } elseif (-not $allSdksPassed) {
         Write-AzureDevOpsError "Not all SDK versions passed package restoration tests"
         throw "SDK version testing failed"
     }
