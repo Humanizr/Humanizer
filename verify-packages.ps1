@@ -126,7 +126,7 @@ try {
     $sdkTestResults = @()
     
     # Filter to only test SDKs that are actually installed
-    $sdksToTest = $sdkVersionsToTest | Where-Object {
+    $sdksToTest = @($sdkVersionsToTest | Where-Object {
         $majorVersion = $_.MajorVersion
         $pattern = "(?m)^$majorVersion\."
         if ($installedSdks -match $pattern) {
@@ -135,7 +135,7 @@ try {
             Write-Host "##[warning]$($_.Name) not installed, skipping"
             $false
         }
-    }
+    })
     
     if ($sdksToTest.Count -eq 0) {
         $sdkMajorVersions = ($sdkVersionsToTest | ForEach-Object { $_.MajorVersion }) -join ", "
