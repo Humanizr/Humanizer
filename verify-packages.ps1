@@ -352,7 +352,7 @@ namespace MetaTest
                     Write-Host "##[command]✓ Package restoration succeeded with $msbuildName"
                     $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $true }
                 } catch {
-                    Write-AzureDevOpsWarning "Exception testing $msbuildName: $($_.Exception.Message)"
+                    Write-AzureDevOpsWarning "Exception testing ${msbuildName}: $($_.Exception.Message)"
                     $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message }
                 } finally {
                     Set-Location $currentLocation
