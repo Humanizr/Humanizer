@@ -1,3 +1,35 @@
+<#
+.SYNOPSIS
+    Verifies Humanizer NuGet packages structure, dependencies, and SDK compatibility.
+
+.DESCRIPTION
+    This script validates that Humanizer NuGet packages are correctly built and can be restored
+    across multiple .NET SDK versions. It performs the following checks:
+    
+    1. Verifies all expected packages exist (main metapackage, core package, and satellite packages)
+    2. Tests package restoration on multiple .NET SDK versions (8, 9, and 10)
+       - Creates isolated test environments with global.json for each SDK version
+       - Validates that packages can be restored successfully
+    3. Verifies that the main Humanizer metapackage includes all satellite packages as dependencies
+    
+    The script is designed to run in CI/CD pipelines (Azure DevOps) and provides detailed
+    logging with Azure DevOps-specific formatting.
+
+.PARAMETER PackageVersion
+    The version of the Humanizer packages to verify (e.g., "3.0.0-rc.14").
+
+.PARAMETER PackagesDirectory
+    The directory containing the built NuGet packages (.nupkg files).
+
+.EXAMPLE
+    .\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
+
+.NOTES
+    - The script requires .NET SDK 8, 9, and/or 10 to be installed
+    - SDKs that are not installed will be skipped with a warning
+    - MSBuild on .NET Framework testing could be added for Windows environments
+#>
+
 param(
     [Parameter(Mandatory=$true)]
     [string]$PackageVersion,
