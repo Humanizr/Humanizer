@@ -1362,11 +1362,6 @@ The Humanizer project is built & tested continuously by Azure DevOps (more detai
 
 The current build status on the CI server is [![Build status](https://dev.azure.com/dotnet/Humanizer/_apis/build/status/Humanizer-CI?branchName=main)](https://dev.azure.com/dotnet/Humanizer/_build?definitionId=14)
 
-
-## Running the test suite
-
-Humanizer targets multiple runtimes. When exercising the `net48` build on Linux (Mono), make sure the host has Mono's optional globalization data installed; otherwise many culture-specific tests will fail with `CultureNotFoundException`. Follow the steps in [docs/mono-globalization.md](docs/mono-globalization.md) before running the tests if you see missing culture failures.
-
 ## Related projects
 
 Below is a list of related open-source projects:
