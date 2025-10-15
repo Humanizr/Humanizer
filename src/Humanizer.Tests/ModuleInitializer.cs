@@ -1,4 +1,4 @@
-﻿using VerifyTests.DiffPlex;
+using VerifyTests.DiffPlex;
 
 public static class ModuleInitializer
 {
