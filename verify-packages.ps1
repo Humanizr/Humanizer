@@ -57,7 +57,8 @@ $satellitePackages | ForEach-Object { Write-Host "  - $($_.Name)" }
 Write-Host ""
 
 # Create a temporary test directory
-$tempDir = Join-Path $env:TEMP "HumanizerPackageTest_$(New-Guid)"
+$tempPath = if ($env:TEMP) { $env:TEMP } elseif ($env:TMP) { $env:TMP } else { "/tmp" }
+$tempDir = Join-Path $tempPath "HumanizerPackageTest_$(New-Guid)"
 New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
 
 try {
@@ -76,7 +77,109 @@ try {
 "@
     Set-Content -Path $nugetConfig -Value $nugetConfigContent
 
+    # Define SDK versions to test
+    # These versions will use rollForward to match any installed SDK in that major version
+    $sdkVersionsToTest = @(
+        @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8" },
+        @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9" },
+        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10" }
+    )
+
+    $sdkTestResults = @()
+
+    # Test package restoration with each SDK version
+    foreach ($sdkConfig in $sdkVersionsToTest) {
+        Write-AzureDevOpsSection "Testing package restoration with $($sdkConfig.Name) (v$($sdkConfig.Version))"
+        
+        # Create a test folder for this SDK version
+        $sdkTestDir = Join-Path $tempDir "$($sdkConfig.Name -replace ' ', '')"
+        New-Item -ItemType Directory -Path $sdkTestDir -Force | Out-Null
+        
+        $currentLocation = Get-Location
+        try {
+            Set-Location $sdkTestDir
+            
+            # Create global.json for this SDK version
+            $globalJsonContent = @"
+{
+  "sdk": {
+    "version": "$($sdkConfig.Version)",
+    "rollForward": "$($sdkConfig.RollForward)"
+  }
+}
+"@
+            Set-Content -Path "global.json" -Value $globalJsonContent
+            Write-Host "Created global.json with SDK version $($sdkConfig.Version) and rollForward: $($sdkConfig.RollForward)"
+            
+            # Create test project
+            Write-Host "Creating test project..."
+            $output = dotnet new console -n MetaTest --force 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                Write-AzureDevOpsWarning "Failed to create test project with $($sdkConfig.Name): $output"
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to create test project" }
+                continue
+            }
+            
+            Set-Location MetaTest
+            
+            # Add Humanizer package reference
+            Write-Host "Adding Humanizer package reference..."
+            $output = dotnet add package Humanizer --version $PackageVersion --no-restore 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                Write-AzureDevOpsWarning "Failed to add Humanizer package reference with $($sdkConfig.Name): $output"
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to add package reference" }
+                continue
+            }
+            
+            # Restore packages
+            Write-Host "Restoring packages..."
+            $restoreOutput = dotnet restore --configfile $nugetConfig 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                Write-AzureDevOpsWarning "Failed to restore Humanizer metapackage with $($sdkConfig.Name)"
+                Write-Host $restoreOutput
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to restore packages" }
+                continue
+            }
+            
+            # Verify restore succeeded
+            $objPath = "obj/project.assets.json"
+            if (-not (Test-Path $objPath)) {
+                Write-AzureDevOpsWarning "project.assets.json not found after restore with $($sdkConfig.Name)"
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "project.assets.json not found" }
+                continue
+            }
+            
+            Write-Host "##[command]✓ Package restoration succeeded with $($sdkConfig.Name)"
+            $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $true }
+            
+        } catch {
+            Write-AzureDevOpsWarning "Exception testing $($sdkConfig.Name): $($_.Exception.Message)"
+            $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = $_.Exception.Message }
+        } finally {
+            Set-Location $currentLocation
+        }
+    }
+
+    # Report SDK test results
+    Write-Host ""
+    Write-AzureDevOpsSection "SDK Version Test Results"
+    $allSdksPassed = $true
+    foreach ($result in $sdkTestResults) {
+        if ($result.Success) {
+            Write-Host "  ✓ $($result.SDK): Passed"
+        } else {
+            Write-Host "  ✗ $($result.SDK): Failed - $($result.Error)"
+            $allSdksPassed = $false
+        }
+    }
+    
+    if (-not $allSdksPassed) {
+        Write-AzureDevOpsError "Not all SDK versions passed package restoration tests"
+        throw "SDK version testing failed"
+    }
+
     # Verify main metapackage can be restored and pulls in satellites
+    Write-Host ""
     Write-AzureDevOpsSection "Verifying Humanizer metapackage dependencies"
     Push-Location $tempDir
     
@@ -144,6 +247,7 @@ try {
     Write-Host "  - Core package (Humanizer.Core): ✓"
     Write-Host "  - Satellite packages verified: $($satellitePackages.Count)"
     Write-Host "  - All satellites are dependencies of metapackage: ✓"
+    Write-Host "  - SDK version tests passed: $($sdkTestResults | Where-Object Success | Measure-Object | Select-Object -ExpandProperty Count)/$($sdkTestResults.Count)"
     
 } catch {
     Write-AzureDevOpsError $_.Exception.Message
