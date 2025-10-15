@@ -124,6 +124,13 @@ try {
     )
 
     $sdkTestResults = @()
+    $msbuildTestResults = @()
+    $isWindows = $false
+    try {
+        $isWindows = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)
+    } catch {
+        $isWindows = $false
+    }
     
     # Filter to only test SDKs that are actually installed
     $sdksToTest = @($sdkVersionsToTest | Where-Object {
@@ -235,6 +242,145 @@ try {
         throw "SDK version testing failed"
     }
 
+    if ($isWindows) {
+        Write-Host ""
+        Write-AzureDevOpsSection "Detecting MSBuild installations"
+
+        $msbuildPaths = @()
+        $msbuildCommands = @(Get-Command msbuild.exe -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -Unique)
+        if ($msbuildCommands) {
+            $msbuildPaths += $msbuildCommands
+        }
+
+        $programFilesX86 = [Environment]::GetEnvironmentVariable("ProgramFiles(x86)")
+        if (-not [string]::IsNullOrWhiteSpace($programFilesX86)) {
+            $vswherePath = Join-Path $programFilesX86 "Microsoft Visual Studio/Installer/vswhere.exe"
+            if (Test-Path $vswherePath) {
+                $vswhereOutput = & $vswherePath -prerelease -requires Microsoft.Component.MSBuild -find "MSBuild/**/Bin/MSBuild.exe" 2>$null
+                if ($vswhereOutput) {
+                    $msbuildPaths += $vswhereOutput
+                }
+            } else {
+                Write-Host "##[command]vswhere.exe not found at $vswherePath"
+            }
+        }
+
+        $frameworkMsbuildPaths = @()
+        $windowsDir = [Environment]::GetEnvironmentVariable("WINDIR")
+        if (-not [string]::IsNullOrWhiteSpace($windowsDir)) {
+            $frameworkMsbuildPaths += Join-Path $windowsDir "Microsoft.NET/Framework64/v4.0.30319/MSBuild.exe"
+            $frameworkMsbuildPaths += Join-Path $windowsDir "Microsoft.NET/Framework/v4.0.30319/MSBuild.exe"
+        }
+
+        foreach ($candidate in $frameworkMsbuildPaths) {
+            if (Test-Path $candidate) {
+                $msbuildPaths += $candidate
+            }
+        }
+
+        $msbuildPaths = $msbuildPaths | Where-Object { $_ -and (Test-Path $_) } | Sort-Object -Unique
+
+        if ($msbuildPaths.Count -eq 0) {
+            Write-AzureDevOpsWarning "No MSBuild installations detected"
+        } else {
+            $index = 0
+            foreach ($msbuildPath in $msbuildPaths) {
+                $index++
+                $msbuildItem = Get-Item $msbuildPath
+                $msbuildVersion = $null
+                try {
+                    $msbuildVersion = $msbuildItem.VersionInfo.ProductVersion
+                } catch {
+                    $msbuildVersion = $null
+                }
+
+                $msbuildName = if ($msbuildVersion) { "MSBuild $msbuildVersion" } else { "MSBuild" }
+                Write-Host "Found $msbuildName at $msbuildPath"
+
+                Write-AzureDevOpsSection "Testing package restoration with $msbuildName"
+
+                $msbuildTestDir = Join-Path $tempDir "MSBuildTest_$index"
+                New-Item -ItemType Directory -Path $msbuildTestDir -Force | Out-Null
+
+                $currentLocation = Get-Location
+                try {
+                    Set-Location $msbuildTestDir
+
+                    $projectFile = "MetaTest.csproj"
+                    $projectContent = @"
+<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include=""Humanizer"" Version=""$PackageVersion"" />
+  </ItemGroup>
+</Project>
+"@
+                    Set-Content -Path $projectFile -Value $projectContent
+
+                    $programContent = @"
+using System;
+
+namespace MetaTest
+{
+    internal static class Program
+    {
+        private static void Main()
+        {
+        }
+    }
+}
+"@
+                    Set-Content -Path "Program.cs" -Value $programContent
+
+                    $restoreOutput = & $msbuildPath $projectFile "/t:Restore" "/p:RestoreConfigFile=$nugetConfig" "/nologo" 2>&1
+                    if ($LASTEXITCODE -ne 0) {
+                        Write-AzureDevOpsWarning "Failed to restore Humanizer metapackage with $msbuildName"
+                        Write-Host $restoreOutput
+                        $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages" }
+                        continue
+                    }
+
+                    $msbuildAssetsPath = "obj/project.assets.json"
+                    if (-not (Test-Path $msbuildAssetsPath)) {
+                        Write-AzureDevOpsWarning "project.assets.json not found after restore with $msbuildName"
+                        $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = "project.assets.json not found" }
+                        continue
+                    }
+
+                    Write-Host "##[command]✓ Package restoration succeeded with $msbuildName"
+                    $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $true }
+                } catch {
+                    Write-AzureDevOpsWarning "Exception testing $msbuildName: $($_.Exception.Message)"
+                    $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message }
+                } finally {
+                    Set-Location $currentLocation
+                }
+            }
+
+            Write-Host ""
+            Write-AzureDevOpsSection "MSBuild Restore Test Results"
+            $allMsbuildPassed = $true
+            foreach ($result in $msbuildTestResults) {
+                if ($result.Success) {
+                    Write-Host "  ✓ $($result.Name): Passed"
+                } else {
+                    Write-Host "  ✗ $($result.Name): Failed - $($result.Error)"
+                    $allMsbuildPassed = $false
+                }
+            }
+
+            if (-not $allMsbuildPassed) {
+                Write-AzureDevOpsError "Not all MSBuild restores succeeded"
+                throw "MSBuild restore testing failed"
+            }
+        }
+    } else {
+        Write-Host ""
+        Write-Host "##[command]MSBuild restore tests skipped (non-Windows environment)"
+    }
+
     # Verify main metapackage can be restored and pulls in satellites
     Write-Host ""
     Write-AzureDevOpsSection "Verifying Humanizer metapackage dependencies"
@@ -304,8 +450,19 @@ try {
     Write-Host "  - Core package (Humanizer.Core): ✓"
     Write-Host "  - Satellite packages verified: $($satellitePackages.Count)"
     Write-Host "  - All satellites are dependencies of metapackage: ✓"
-    Write-Host "  - SDK version tests passed: $($sdkTestResults | Where-Object Success | Measure-Object | Select-Object -ExpandProperty Count)/$($sdkTestResults.Count)"
-    
+    $sdkPassedCount = $sdkTestResults | Where-Object Success | Measure-Object | Select-Object -ExpandProperty Count
+    Write-Host "  - SDK version tests passed: $sdkPassedCount/$($sdkTestResults.Count)"
+    if ($isWindows) {
+        $msbuildPassedCount = $msbuildTestResults | Where-Object Success | Measure-Object | Select-Object -ExpandProperty Count
+        if ($msbuildTestResults.Count -gt 0) {
+            Write-Host "  - MSBuild restore tests passed: $msbuildPassedCount/$($msbuildTestResults.Count)"
+        } else {
+            Write-Host "  - MSBuild restore tests passed: 0/0 (no MSBuild detected)"
+        }
+    } else {
+        Write-Host "  - MSBuild restore tests passed: skipped (non-Windows)"
+    }
+
 } catch {
     Write-AzureDevOpsError $_.Exception.Message
     throw
