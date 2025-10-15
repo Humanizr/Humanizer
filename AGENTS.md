@@ -10,7 +10,6 @@ These instructions apply to the entire repository.
 ## Toolchain
 - Primary language: C# (modern features).
 - Target frameworks: .NET 8.0, .NET 10.0, and .NET Framework 4.8.
-- In this environment we only execute the .NET (Core) targets; skip running the .NET Framework 4.8 build.
 - Tests use xUnit and should live alongside similar tests in `src/Humanizer.Tests`.
 - Build with the .NET CLI (`dotnet`). Prefer the latest SDK (see install script in `.github/copilot-instructions.md`).
 
@@ -27,7 +26,7 @@ These instructions apply to the entire repository.
 ## Testing Expectations
 - Every functional change must include or update xUnit tests in `src/Humanizer.Tests`.
 - Use culture-specific folders and `UseCulture` attribute for localization tests when applicable.
-- Run the test suite for the supported .NET targets (`dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). Avoid invoking the net48 target here, and allow a few minutes for each run to complete before moving on to PR creation.
+- Run the test suite for the supported .NET targets (`dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). Avoid invoking the net48 target on Linux, and allow a few minutes for each run to complete.
 
 ## Build & Validation
 - Ensure `dotnet build Humanizer/Humanizer.csproj /t:PackNuSpecs` (from `src`) succeeds without warnings.
