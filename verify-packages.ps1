@@ -138,7 +138,8 @@ try {
     }
     
     if ($sdksToTest.Count -eq 0) {
-        Write-AzureDevOpsWarning "No target SDK versions (8, 9, or 10) are installed"
+        $sdkMajorVersions = ($sdkVersionsToTest | ForEach-Object { $_.MajorVersion }) -join ", "
+        Write-AzureDevOpsWarning "No target SDK versions ($sdkMajorVersions) are installed"
     }
 
     # Test package restoration with each SDK version
