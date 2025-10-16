@@ -173,6 +173,71 @@ function Invoke-CapturedProcess {
     }
 }
 
+function Set-ProjectTargetFramework {
+    param(
+        [Parameter(Mandatory = $true)][string]$ProjectPath,
+        [Parameter(Mandatory = $true)][string]$TargetFramework
+    )
+
+    if (-not (Test-Path $ProjectPath)) {
+        return
+    }
+
+    $xmlDocument = New-Object System.Xml.XmlDocument
+    $xmlDocument.PreserveWhitespace = $true
+
+    try {
+        $xmlDocument.Load($ProjectPath)
+    } catch {
+        return
+    }
+
+    $namespaceUri = $xmlDocument.DocumentElement.NamespaceURI
+    $namespaceManager = $null
+
+    if (-not [string]::IsNullOrEmpty($namespaceUri)) {
+        $namespaceManager = New-Object System.Xml.XmlNamespaceManager($xmlDocument.NameTable)
+        $namespaceManager.AddNamespace('msb', $namespaceUri)
+    }
+
+    if ($namespaceManager) {
+        $targetNode = $xmlDocument.SelectSingleNode('//msb:TargetFramework', $namespaceManager)
+        if (-not $targetNode) {
+            $targetNode = $xmlDocument.SelectSingleNode('//msb:TargetFrameworks', $namespaceManager)
+        }
+        $propertyGroup = $xmlDocument.SelectSingleNode('//msb:PropertyGroup', $namespaceManager)
+    } else {
+        $targetNode = $xmlDocument.SelectSingleNode('//TargetFramework')
+        if (-not $targetNode) {
+            $targetNode = $xmlDocument.SelectSingleNode('//TargetFrameworks')
+        }
+        $propertyGroup = $xmlDocument.SelectSingleNode('//PropertyGroup')
+    }
+
+    if (-not $propertyGroup) {
+        if ($namespaceManager) {
+            $propertyGroup = $xmlDocument.CreateElement('PropertyGroup', $namespaceUri)
+        } else {
+            $propertyGroup = $xmlDocument.CreateElement('PropertyGroup')
+        }
+        [void]$xmlDocument.DocumentElement.AppendChild($propertyGroup)
+    }
+
+    if ($targetNode) {
+        $targetNode.InnerText = $TargetFramework
+    } else {
+        if ($namespaceManager) {
+            $targetNode = $xmlDocument.CreateElement('TargetFramework', $namespaceUri)
+        } else {
+            $targetNode = $xmlDocument.CreateElement('TargetFramework')
+        }
+        $targetNode.InnerText = $TargetFramework
+        [void]$propertyGroup.AppendChild($targetNode)
+    }
+
+    $xmlDocument.Save($ProjectPath)
+}
+
 function Write-AzureDevOpsErrorDetail {
     param(
         [string]$Summary,
@@ -217,12 +282,12 @@ function Get-RestoreDiagnostics {
             continue
         }
 
-        if ($trimmed -match "(?i)\berror\s+[A-Z0-9]+:") {
+        if ($trimmed -match "(?i)\berror\s*:?\s*[A-Z0-9]+:") {
             $errorLines += $trimmed
             continue
         }
 
-        if ($trimmed -match "(?i)\bwarning\s+[A-Z0-9]+:") {
+        if ($trimmed -match "(?i)\bwarning\s*:?\s*[A-Z0-9]+:") {
             $warningLines += $trimmed
         }
     }
@@ -241,13 +306,14 @@ function Publish-RestoreFailure {
 
     if ($null -eq $ProcessResult) {
         Write-AzureDevOpsErrorDetail $Summary $null
-        return
+        return $null
     }
 
     $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
 
     if ($diagnostics.Warnings.Count -gt 0) {
         Write-AzureDevOpsWarningDetail "$Summary - warnings" $diagnostics.Warnings
+        $diagnostics.Warnings | ForEach-Object { Write-Host $_ }
     }
 
     $errorDetails = $null
@@ -256,6 +322,49 @@ function Publish-RestoreFailure {
     }
 
     Write-AzureDevOpsErrorDetail $Summary $errorDetails
+
+    if ($diagnostics.Errors.Count -gt 0) {
+        $diagnostics.Errors | ForEach-Object { Write-Host $_ }
+    } elseif ($ProcessResult.StandardError) {
+        Write-Host $ProcessResult.StandardError
+    } elseif ($ProcessResult.StandardOutput) {
+        Write-Host $ProcessResult.StandardOutput
+    }
+
+    return $diagnostics
+}
+
+function Get-FailureDetailText {
+    param(
+        [PSCustomObject]$Diagnostics,
+        [PSCustomObject]$ProcessResult
+    )
+
+    if ($Diagnostics) {
+        if ($Diagnostics.Errors -and $Diagnostics.Errors.Count -gt 0) {
+            return ($Diagnostics.Errors -join "`n").Trim()
+        }
+
+        if ($Diagnostics.Warnings -and $Diagnostics.Warnings.Count -gt 0) {
+            return ($Diagnostics.Warnings -join "`n").Trim()
+        }
+    }
+
+    if ($ProcessResult) {
+        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.StandardError)) {
+            return $ProcessResult.StandardError.Trim()
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.StandardOutput)) {
+            return $ProcessResult.StandardOutput.Trim()
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.CombinedOutput)) {
+            return $ProcessResult.CombinedOutput.Trim()
+        }
+    }
+
+    return $null
 }
 
 Write-AzureDevOpsSection "Humanizer Package Verification"
@@ -390,24 +499,25 @@ try {
             Write-Host "Creating test project..."
             $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", $sdkConfig.TargetFramework) -WorkingDirectory (Get-Location).Path
             if ($createProjectResult.ExitCode -ne 0) {
-                Publish-RestoreFailure "Restore validation failed for $targetDisplayName while creating test project" $createProjectResult
-                if ($createProjectResult.StandardOutput) { Write-Host $createProjectResult.StandardOutput }
-                if ($createProjectResult.StandardError) { Write-Host $createProjectResult.StandardError }
-                $restoreTestResults += @{ Tool = 'dotnet'; DisplayName = $targetDisplayName; Version = $sdkConfig.Version; Success = $false; Error = "Failed to create test project"; Details = $createProjectResult.CombinedOutput.Trim() }
+                $diagnostics = Publish-RestoreFailure "Restore validation failed for $targetDisplayName while creating test project" $createProjectResult
+                $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $createProjectResult
+                $restoreTestResults += @{ Tool = 'dotnet'; DisplayName = $targetDisplayName; Version = $sdkConfig.Version; Success = $false; Error = "Failed to create test project"; Details = $detailText }
                 continue
             }
 
             Set-Location MetaTest
 
+            $projectPath = Join-Path (Get-Location).Path "MetaTest.csproj"
+            Set-ProjectTargetFramework -ProjectPath $projectPath -TargetFramework $sdkConfig.TargetFramework
+
             # Add Humanizer package reference
             Write-Host "Adding Humanizer package reference..."
-            $addPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
+            $addPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--framework", $sdkConfig.TargetFramework)
             $addPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $addPackageArguments -WorkingDirectory (Get-Location).Path
             if ($addPackageResult.ExitCode -ne 0) {
-                Publish-RestoreFailure "Restore validation failed for $targetDisplayName while adding Humanizer package reference" $addPackageResult
-                if ($addPackageResult.StandardOutput) { Write-Host $addPackageResult.StandardOutput }
-                if ($addPackageResult.StandardError) { Write-Host $addPackageResult.StandardError }
-                $restoreTestResults += @{ Tool = 'dotnet'; DisplayName = $targetDisplayName; Version = $sdkConfig.Version; Success = $false; Error = "Failed to add package reference"; Details = $addPackageResult.CombinedOutput.Trim() }
+                $diagnostics = Publish-RestoreFailure "Restore validation failed for $targetDisplayName while adding Humanizer package reference" $addPackageResult
+                $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $addPackageResult
+                $restoreTestResults += @{ Tool = 'dotnet'; DisplayName = $targetDisplayName; Version = $sdkConfig.Version; Success = $false; Error = "Failed to add package reference"; Details = $detailText }
                 continue
             }
 
@@ -415,10 +525,9 @@ try {
             Write-Host "Restoring packages..."
             $restoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
             if ($restoreResult.ExitCode -ne 0) {
-                Publish-RestoreFailure "Restore validation failed for $targetDisplayName during dotnet restore" $restoreResult
-                if ($restoreResult.StandardOutput) { Write-Host $restoreResult.StandardOutput }
-                if ($restoreResult.StandardError) { Write-Host $restoreResult.StandardError }
-                $restoreTestResults += @{ Tool = 'dotnet'; DisplayName = $targetDisplayName; Version = $sdkConfig.Version; Success = $false; Error = "Failed to restore packages"; Details = $restoreResult.CombinedOutput.Trim() }
+                $diagnostics = Publish-RestoreFailure "Restore validation failed for $targetDisplayName during dotnet restore" $restoreResult
+                $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $restoreResult
+                $restoreTestResults += @{ Tool = 'dotnet'; DisplayName = $targetDisplayName; Version = $sdkConfig.Version; Success = $false; Error = "Failed to restore packages"; Details = $detailText }
                 continue
             }
 
@@ -518,23 +627,24 @@ try {
                     Write-Host "Creating test project..."
                     $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", "net48", "--no-restore") -WorkingDirectory (Get-Location).Path
                     if ($createProjectResult.ExitCode -ne 0) {
-                        Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while creating test project" $createProjectResult
-                        if ($createProjectResult.StandardOutput) { Write-Host $createProjectResult.StandardOutput }
-                        if ($createProjectResult.StandardError) { Write-Host $createProjectResult.StandardError }
-                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to create test project"; Details = $createProjectResult.CombinedOutput.Trim() }
+                        $diagnostics = Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while creating test project" $createProjectResult
+                        $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $createProjectResult
+                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to create test project"; Details = $detailText }
                         continue
                     }
 
                     Set-Location MetaTest
 
+                    $projectPath = Join-Path (Get-Location).Path "MetaTest.csproj"
+                    Set-ProjectTargetFramework -ProjectPath $projectPath -TargetFramework "net48"
+
                     Write-Host "Adding Humanizer package reference..."
-                    $msbuildAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore")
+                    $msbuildAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore", "--framework", "net48")
                     $msbuildAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $msbuildAddPackageArguments -WorkingDirectory (Get-Location).Path
                     if ($msbuildAddPackageResult.ExitCode -ne 0) {
-                        Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while adding Humanizer package reference" $msbuildAddPackageResult
-                        if ($msbuildAddPackageResult.StandardOutput) { Write-Host $msbuildAddPackageResult.StandardOutput }
-                        if ($msbuildAddPackageResult.StandardError) { Write-Host $msbuildAddPackageResult.StandardError }
-                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to add package reference"; Details = $msbuildAddPackageResult.CombinedOutput.Trim() }
+                        $diagnostics = Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while adding Humanizer package reference" $msbuildAddPackageResult
+                        $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $msbuildAddPackageResult
+                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to add package reference"; Details = $detailText }
                         continue
                     }
 
@@ -542,10 +652,9 @@ try {
 
                     $msbuildRestoreResult = Invoke-CapturedProcess -FilePath $msbuildPath -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$nugetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
                     if ($msbuildRestoreResult.ExitCode -ne 0) {
-                        Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName during msbuild restore" $msbuildRestoreResult
-                        if ($msbuildRestoreResult.StandardOutput) { Write-Host $msbuildRestoreResult.StandardOutput }
-                        if ($msbuildRestoreResult.StandardError) { Write-Host $msbuildRestoreResult.StandardError }
-                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages"; Details = $msbuildRestoreResult.CombinedOutput.Trim() }
+                        $diagnostics = Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName during msbuild restore" $msbuildRestoreResult
+                        $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $msbuildRestoreResult
+                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages"; Details = $detailText }
                         continue
                     }
 
@@ -602,21 +711,20 @@ try {
     $globalCreateResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", "net8.0") -WorkingDirectory (Get-Location).Path
     if ($globalCreateResult.ExitCode -ne 0) {
         Write-AzureDevOpsErrorDetail "Failed to create test project" $globalCreateResult.CombinedOutput
-        if ($globalCreateResult.StandardOutput) { Write-Host $globalCreateResult.StandardOutput }
-        if ($globalCreateResult.StandardError) { Write-Host $globalCreateResult.StandardError }
         throw "Failed to create test project: $($globalCreateResult.CombinedOutput.Trim())"
     }
 
     Set-Location MetaTest
 
+    $metaProjectPath = Join-Path (Get-Location).Path "MetaTest.csproj"
+    Set-ProjectTargetFramework -ProjectPath $metaProjectPath -TargetFramework "net8.0"
+
     Write-Host "Adding Humanizer package reference..."
-    $globalAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
+    $globalAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--framework", "net8.0")
     
     $globalAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $globalAddPackageArguments -WorkingDirectory (Get-Location).Path
     if ($globalAddPackageResult.ExitCode -ne 0) {
         Write-AzureDevOpsErrorDetail "Failed to add Humanizer package reference" $globalAddPackageResult.CombinedOutput
-        if ($globalAddPackageResult.StandardOutput) { Write-Host $globalAddPackageResult.StandardOutput }
-        if ($globalAddPackageResult.StandardError) { Write-Host $globalAddPackageResult.StandardError }
         throw "Failed to add package reference: $($globalAddPackageResult.CombinedOutput.Trim())"
     }
 
@@ -624,8 +732,6 @@ try {
     $globalRestoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
     if ($globalRestoreResult.ExitCode -ne 0) {
         Publish-RestoreFailure "Failed to restore Humanizer metapackage" $globalRestoreResult
-        if ($globalRestoreResult.StandardOutput) { Write-Host $globalRestoreResult.StandardOutput }
-        if ($globalRestoreResult.StandardError) { Write-Host $globalRestoreResult.StandardError }
         throw "Failed to restore Humanizer metapackage"
     }
     
