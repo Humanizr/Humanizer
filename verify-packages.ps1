@@ -39,6 +39,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$overallFailure = $false
 
 function ConvertTo-AzureDevOpsCommandValue {
     param([string]$Value)
@@ -247,6 +248,7 @@ try {
 
     $sdkTestResults = @()
     $msbuildTestResults = @()
+    $verificationFailures = @()
     $runningOnWindows = $false
     try {
         $runningOnWindows = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)
@@ -372,8 +374,7 @@ try {
     if ($sdkTestResults.Count -eq 0) {
         Write-AzureDevOpsWarning "No SDK versions were tested"
     } elseif (-not $allSdksPassed) {
-        Write-AzureDevOpsError "Not all SDK versions passed package restoration tests"
-        throw "SDK version testing failed"
+        $verificationFailures += "SDK version tests failed"
     }
 
     if ($runningOnWindows) {
@@ -514,8 +515,7 @@ namespace MetaTest
             }
 
             if (-not $allMsbuildPassed) {
-                Write-AzureDevOpsError "Not all MSBuild restores succeeded"
-                throw "MSBuild restore testing failed"
+                $verificationFailures += "MSBuild restore tests failed"
             }
         }
     } else {
@@ -582,21 +582,26 @@ namespace MetaTest
     }
     
     if ($missingSatellites.Count -gt 0) {
-        Write-AzureDevOpsError "The following satellite packages are NOT dependencies of the Humanizer metapackage: $($missingSatellites -join ', ')"
-        throw "Missing satellite package dependencies in Humanizer metapackage"
+        $missingMessage = "The following satellite packages are NOT dependencies of the Humanizer metapackage: $($missingSatellites -join ', ')"
+        Write-AzureDevOpsError $missingMessage
+        $verificationFailures += "Humanizer metapackage dependencies are incomplete"
+    } else {
+        Write-Host "##[command]✓ All $($satellitePackages.Count) satellite packages are dependencies of the Humanizer metapackage"
     }
-    
-    Write-Host "##[command]✓ All $($satellitePackages.Count) satellite packages are dependencies of the Humanizer metapackage"
-    
+
     Pop-Location
     Write-Host ""
-    
-    Write-AzureDevOpsSection "✓ All Verification Checks Passed"
+
+    Write-AzureDevOpsSection "Verification Summary"
     Write-Host "##[command]Summary:"
     Write-Host "  - Main metapackage (Humanizer): ✓"
     Write-Host "  - Core package (Humanizer.Core): ✓"
     Write-Host "  - Satellite packages verified: $($satellitePackages.Count)"
-    Write-Host "  - All satellites are dependencies of metapackage: ✓"
+    if ($missingSatellites.Count -eq 0) {
+        Write-Host "  - All satellites are dependencies of metapackage: ✓"
+    } else {
+        Write-Host "  - All satellites are dependencies of metapackage: ✗"
+    }
     $sdkPassedCount = $sdkTestResults | Where-Object Success | Measure-Object | Select-Object -ExpandProperty Count
     Write-Host "  - SDK version tests passed: $sdkPassedCount/$($sdkTestResults.Count)"
     if ($runningOnWindows) {
@@ -610,6 +615,22 @@ namespace MetaTest
         Write-Host "  - MSBuild restore tests passed: skipped (non-Windows)"
     }
 
+    if ($verificationFailures.Count -eq 0) {
+        Write-Host "  - Overall result: PASS"
+        Write-Host ""
+        Write-AzureDevOpsSection "✓ All Verification Checks Passed"
+    } else {
+        Write-Host "  - Overall result: FAIL"
+        $failureLines = $verificationFailures | ForEach-Object { "    - $_" }
+        foreach ($line in $failureLines) {
+            Write-Host $line
+        }
+
+        $failureDetails = ($verificationFailures | ForEach-Object { "- $_" }) -join "`n"
+        Write-AzureDevOpsErrorDetail "Verification checks failed" $failureDetails
+        $overallFailure = $true
+    }
+
 } catch {
     $catchText = ($_ | Out-String).Trim()
     Write-AzureDevOpsErrorDetail $_.Exception.Message $catchText
@@ -621,4 +642,8 @@ namespace MetaTest
         Write-Host "Cleaning up temporary directory..."
         Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
     }
+}
+
+if ($overallFailure) {
+    exit 1
 }
