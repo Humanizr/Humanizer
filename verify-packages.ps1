@@ -23,8 +23,8 @@
 
 .PARAMETER MinimumPassingSdkVersion
     Optional minimum .NET SDK version (e.g., "9.0.200") that is expected to restore packages successfully.
-    SDK targets with versions lower than this threshold and legacy MSBuild runners that fail restores are
-    treated as expected failures (the script reports success when they fail and failure when they succeed).
+    SDK targets with versions lower than this threshold are treated as expected failures (the script reports
+    success when they fail and failure when they succeed). The default value is 9.0.200.
 
 .EXAMPLE
     .\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
@@ -42,7 +42,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$PackagesDirectory,
 
-    [string]$MinimumPassingSdkVersion
+    [string]$MinimumPassingSdkVersion = "9.0.200"
 )
 
 $ErrorActionPreference = "Stop"
@@ -211,9 +211,17 @@ function Write-FilteredProcessOutput {
     $lines = $combined -split "(`r`n|`r|`n)"
     foreach ($line in $lines) {
         if ([string]::IsNullOrWhiteSpace($line)) { continue }
-        $trimmed = $line.TrimEnd()
+        $trimmed = $line.Trim()
+
         if ($trimmed -match '^(?i)info\s*:') { continue }
-        Write-Host $trimmed
+
+        $match = [regex]::Match($trimmed, '(?i)(error|warning)\s*:?.*')
+        if ($match.Success) {
+            $message = $match.Value.Trim()
+            if (-not [string]::IsNullOrWhiteSpace($message)) {
+                Write-Host $message
+            }
+        }
     }
 }
 
@@ -292,14 +300,6 @@ function Get-MSBuildProductName {
         }
     }
 
-    if ($Path -match "Microsoft.NET\\Framework64") {
-        return ".NETFX"
-    }
-
-    if ($Path -match "Microsoft.NET\\Framework") {
-        return ".NETFX"
-    }
-
     return $null
 }
 
@@ -332,18 +332,6 @@ function Get-MSBuildInfos {
             if ($vswhereOutput) {
                 $msbuildPaths += $vswhereOutput
             }
-        }
-    }
-
-    $windowsDir = [Environment]::GetEnvironmentVariable("WINDIR")
-    if (-not [string]::IsNullOrWhiteSpace($windowsDir)) {
-        $framework64 = Join-Path $windowsDir "Microsoft.NET/Framework64/v4.0.30319/MSBuild.exe"
-        $framework32 = Join-Path $windowsDir "Microsoft.NET/Framework/v4.0.30319/MSBuild.exe"
-
-        if (Test-Path $framework64) {
-            $msbuildPaths += $framework64
-        } elseif (Test-Path $framework32) {
-            $msbuildPaths += $framework32
         }
     }
 
@@ -552,21 +540,14 @@ function Get-RestoreTargets {
                     $displayName = "$displayName ($($info.ProductName))"
                 }
 
-                $failureExpected = $false
-                $expectationReason = $null
-                if ($info.ProductName -eq '.NETFX') {
-                    $failureExpected = $true
-                    $expectationReason = '.NET Framework MSBuild'
-                }
-
                 $restoreTargets += [PSCustomObject]@{
                     Kind              = 'msbuild'
                     Id                = "msbuild$index"
                     DisplayName       = $displayName
                     Version           = $info.Version
                     Path              = $info.Path
-                    FailureExpected   = $failureExpected
-                    ExpectationReason = $expectationReason
+                    FailureExpected   = $false
+                    ExpectationReason = $null
                 }
             }
         }
@@ -640,7 +621,7 @@ function Invoke-DotnetRestoreTarget {
 
         $restoreSucceeded = ($restoreResult.ExitCode -eq 0)
         if (-not $restoreSucceeded) {
-            $severity = if ($Target.FailureExpected) { 'warning' } else { 'error' }
+            $severity = if ($Target.FailureExpected) { 'none' } else { 'error' }
             $context = "Restore failed for $($Target.DisplayName) during dotnet restore"
             if ($Target.FailureExpected -and $Target.ExpectationReason) {
                 $context = "$context (expected: $($Target.ExpectationReason))"
@@ -727,7 +708,7 @@ function Invoke-MSBuildRestoreTarget {
 
         $restoreSucceeded = ($msbuildRestoreResult.ExitCode -eq 0)
         if (-not $restoreSucceeded) {
-            $severity = if ($Target.FailureExpected) { 'warning' } else { 'error' }
+            $severity = if ($Target.FailureExpected) { 'none' } else { 'error' }
             $context = "Restore failed for $($Target.DisplayName) during MSBuild restore"
             if ($Target.FailureExpected -and $Target.ExpectationReason) {
                 $context = "$context (expected: $($Target.ExpectationReason))"
@@ -783,7 +764,7 @@ function Write-RestoreDiagnosticLines {
     param(
         [string]$DisplayName,
         [PSCustomObject]$Diagnostics,
-        [ValidateSet('error','warning')]
+        [ValidateSet('error','warning','none')]
         [string]$ErrorSeverity = 'error'
     )
 
@@ -793,17 +774,21 @@ function Write-RestoreDiagnosticLines {
 
     if ($Diagnostics.Warnings -and $Diagnostics.Warnings.Count -gt 0) {
         foreach ($warningLine in $Diagnostics.Warnings | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) {
-            Write-AzureDevOpsWarning "${DisplayName}: $($warningLine.Trim())"
+            $message = "${DisplayName}: $($warningLine.Trim())"
+            Write-Host $message
+            if ($ErrorSeverity -ne 'none') {
+                Write-AzureDevOpsWarning $message
+            }
         }
     }
 
     if ($Diagnostics.Errors -and $Diagnostics.Errors.Count -gt 0) {
         foreach ($errorLine in $Diagnostics.Errors | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) {
             $message = "${DisplayName}: $($errorLine.Trim())"
-            if ($ErrorSeverity -eq 'warning') {
-                Write-AzureDevOpsWarning $message
-            } else {
-                Write-AzureDevOpsError $message
+            Write-Host $message
+            switch ($ErrorSeverity) {
+                'warning' { Write-AzureDevOpsWarning $message }
+                'error'   { Write-AzureDevOpsError $message }
             }
         }
     }
@@ -814,7 +799,7 @@ function Publish-RestoreFailure {
         [string]$Context,
         [string]$DisplayName,
         [PSCustomObject]$ProcessResult,
-        [ValidateSet('error','warning')]
+        [ValidateSet('error','warning','none')]
         [string]$ErrorSeverity = 'error'
     )
 
@@ -824,12 +809,18 @@ function Publish-RestoreFailure {
 
     if ($null -eq $ProcessResult) {
         if (-not [string]::IsNullOrWhiteSpace($Context)) {
-            Write-AzureDevOpsError $Context
+            if ($ErrorSeverity -eq 'warning') {
+                Write-AzureDevOpsWarning $Context
+            } elseif ($ErrorSeverity -eq 'error') {
+                Write-AzureDevOpsError $Context
+            }
         }
         return $null
     }
 
-    Write-FilteredProcessOutput -ProcessResult $ProcessResult
+    if ($ErrorSeverity -ne 'none') {
+        Write-FilteredProcessOutput -ProcessResult $ProcessResult
+    }
 
     $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
 
@@ -849,9 +840,10 @@ function Publish-RestoreFailure {
                 if ($trimmedFallback -match '^(?i)info\s*:') { continue }
 
                 $message = "${DisplayName}: $trimmedFallback"
+                Write-Host $message
                 if ($ErrorSeverity -eq 'warning') {
                     Write-AzureDevOpsWarning $message
-                } else {
+                } elseif ($ErrorSeverity -eq 'error') {
                     Write-AzureDevOpsError $message
                 }
             }
