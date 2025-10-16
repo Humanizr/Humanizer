@@ -330,9 +330,9 @@ try {
     # These versions will use rollForward to match any installed SDK in that major version
     # Note: MSBuild on .NET Framework could be added here for Windows environments to test net48 compatibility
     $sdkVersionsToTest = @(
-        @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8 },
-        @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9 },
-        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10 }
+        @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
+        @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
+        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" }
     )
 
     $restoreTestResults = @()
@@ -362,6 +362,8 @@ try {
     }
 
     # Test package restoration with each SDK version
+    $packageSources = @($absolutePackagesDir, "https://api.nuget.org/v3/index.json")
+
     foreach ($sdkConfig in $sdksToTest) {
         $targetDisplayName = "dotnet $($sdkConfig.Name) ($($sdkConfig.Version))"
         Write-AzureDevOpsSection "Testing package restoration with $targetDisplayName"
@@ -388,7 +390,7 @@ try {
             
             # Create test project
             Write-Host "Creating test project..."
-            $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force") -WorkingDirectory (Get-Location).Path
+            $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", $sdkConfig.TargetFramework) -WorkingDirectory (Get-Location).Path
             if ($createProjectResult.ExitCode -ne 0) {
                 Publish-RestoreFailure "Restore validation failed for $targetDisplayName while creating test project" $createProjectResult
                 if ($createProjectResult.StandardOutput) { Write-Host $createProjectResult.StandardOutput }
@@ -401,7 +403,11 @@ try {
 
             # Add Humanizer package reference
             Write-Host "Adding Humanizer package reference..."
-            $addPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore") -WorkingDirectory (Get-Location).Path
+            $addPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
+            foreach ($source in $packageSources) {
+                $addPackageArguments += @("--source", $source)
+            }
+            $addPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $addPackageArguments -WorkingDirectory (Get-Location).Path
             if ($addPackageResult.ExitCode -ne 0) {
                 Publish-RestoreFailure "Restore validation failed for $targetDisplayName while adding Humanizer package reference" $addPackageResult
                 if ($addPackageResult.StandardOutput) { Write-Host $addPackageResult.StandardOutput }
@@ -514,33 +520,33 @@ try {
                 try {
                     Set-Location $msbuildTestDir
 
+                    Write-Host "Creating test project..."
+                    $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", "net48") -WorkingDirectory (Get-Location).Path
+                    if ($createProjectResult.ExitCode -ne 0) {
+                        Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while creating test project" $createProjectResult
+                        if ($createProjectResult.StandardOutput) { Write-Host $createProjectResult.StandardOutput }
+                        if ($createProjectResult.StandardError) { Write-Host $createProjectResult.StandardError }
+                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to create test project"; Details = $createProjectResult.CombinedOutput.Trim() }
+                        continue
+                    }
+
+                    Set-Location MetaTest
+
+                    Write-Host "Adding Humanizer package reference..."
+                    $msbuildAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
+                    foreach ($source in $packageSources) {
+                        $msbuildAddPackageArguments += @("--source", $source)
+                    }
+                    $msbuildAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $msbuildAddPackageArguments -WorkingDirectory (Get-Location).Path
+                    if ($msbuildAddPackageResult.ExitCode -ne 0) {
+                        Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while adding Humanizer package reference" $msbuildAddPackageResult
+                        if ($msbuildAddPackageResult.StandardOutput) { Write-Host $msbuildAddPackageResult.StandardOutput }
+                        if ($msbuildAddPackageResult.StandardError) { Write-Host $msbuildAddPackageResult.StandardError }
+                        $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = "Failed to add package reference"; Details = $msbuildAddPackageResult.CombinedOutput.Trim() }
+                        continue
+                    }
+
                     $projectFile = "MetaTest.csproj"
-                    $projectContent = @"
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Humanizer" Version="$PackageVersion" />
-  </ItemGroup>
-</Project>
-"@
-                    Set-Content -Path $projectFile -Value $projectContent
-
-                    $programContent = @"
-using System;
-
-namespace MetaTest
-{
-    internal static class Program
-    {
-        private static void Main()
-        {
-        }
-    }
-}
-"@
-                    Set-Content -Path "Program.cs" -Value $programContent
 
                     $msbuildRestoreResult = Invoke-CapturedProcess -FilePath $msbuildPath -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$nugetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
                     if ($msbuildRestoreResult.ExitCode -ne 0) {
@@ -595,17 +601,13 @@ namespace MetaTest
         }
     }
 
-    if ($sdksToTest.Count -eq 0) {
-        Write-AzureDevOpsWarning "No dotnet SDK restore tests were executed"
-    }
-
     # Verify main metapackage can be restored and pulls in satellites
     Write-Host ""
     Write-AzureDevOpsSection "Verifying Humanizer metapackage dependencies"
     Push-Location $tempDir
     
     Write-Host "Creating test project..."
-    $globalCreateResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force") -WorkingDirectory (Get-Location).Path
+    $globalCreateResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", "net8.0") -WorkingDirectory (Get-Location).Path
     if ($globalCreateResult.ExitCode -ne 0) {
         Write-AzureDevOpsErrorDetail "Failed to create test project" $globalCreateResult.CombinedOutput
         if ($globalCreateResult.StandardOutput) { Write-Host $globalCreateResult.StandardOutput }
@@ -616,7 +618,11 @@ namespace MetaTest
     Set-Location MetaTest
 
     Write-Host "Adding Humanizer package reference..."
-    $globalAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore") -WorkingDirectory (Get-Location).Path
+    $globalAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
+    foreach ($source in $packageSources) {
+        $globalAddPackageArguments += @("--source", $source)
+    }
+    $globalAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $globalAddPackageArguments -WorkingDirectory (Get-Location).Path
     if ($globalAddPackageResult.ExitCode -ne 0) {
         Write-AzureDevOpsErrorDetail "Failed to add Humanizer package reference" $globalAddPackageResult.CombinedOutput
         if ($globalAddPackageResult.StandardOutput) { Write-Host $globalAddPackageResult.StandardOutput }
