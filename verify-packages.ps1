@@ -128,19 +128,32 @@ function Invoke-CapturedProcess {
     }
 }
 
-function Write-AzureErrorLines {
-    param([string]$Text)
+function Write-AzureDevOpsErrorDetail {
+    param(
+        [string]$Summary,
+        [string]$Details
+    )
 
-    if ([string]::IsNullOrWhiteSpace($Text)) {
+    if ([string]::IsNullOrWhiteSpace($Summary) -and [string]::IsNullOrWhiteSpace($Details)) {
         return
     }
 
-    $lines = $Text -split "(`r`n|`n|`r)"
-    foreach ($line in $lines) {
-        if (-not [string]::IsNullOrWhiteSpace($line)) {
-            Write-AzureDevOpsError $line
+    $message = $null
+
+    if (-not [string]::IsNullOrWhiteSpace($Summary)) {
+        $message = $Summary.Trim()
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($Details)) {
+        $normalizedDetails = ($Details -replace "(`r`n|`r)", "`n").Trim("`n")
+        if ($message) {
+            $message = "$message`n$normalizedDetails"
+        } else {
+            $message = $normalizedDetails
         }
     }
+
+    Write-AzureDevOpsError $message
 }
 
 Write-AzureDevOpsSection "Humanizer Package Verification"
@@ -201,9 +214,7 @@ try {
     Write-Host "Detecting installed .NET SDKs..."
     $listSdksResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("--list-sdks")
     if ($listSdksResult.ExitCode -ne 0) {
-        Write-AzureDevOpsError "Failed to enumerate installed SDKs"
-        Write-AzureErrorLines $listSdksResult.StandardOutput
-        Write-AzureErrorLines $listSdksResult.StandardError
+        Write-AzureDevOpsErrorDetail "Failed to enumerate installed SDKs" $listSdksResult.CombinedOutput
         if ($listSdksResult.StandardOutput) { Write-Host $listSdksResult.StandardOutput }
         if ($listSdksResult.StandardError) { Write-Host $listSdksResult.StandardError }
         throw "Unable to determine installed SDKs"
@@ -276,9 +287,7 @@ try {
             Write-Host "Creating test project..."
             $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force") -WorkingDirectory (Get-Location).Path
             if ($createProjectResult.ExitCode -ne 0) {
-                Write-AzureDevOpsError "SDK $($sdkConfig.Name) restore validation failed while creating test project"
-                Write-AzureErrorLines $createProjectResult.StandardOutput
-                Write-AzureErrorLines $createProjectResult.StandardError
+                Write-AzureDevOpsErrorDetail "SDK $($sdkConfig.Name) restore validation failed while creating test project" $createProjectResult.CombinedOutput
                 if ($createProjectResult.StandardOutput) { Write-Host $createProjectResult.StandardOutput }
                 if ($createProjectResult.StandardError) { Write-Host $createProjectResult.StandardError }
                 $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to create test project"; Details = $createProjectResult.CombinedOutput.Trim() }
@@ -291,9 +300,7 @@ try {
             Write-Host "Adding Humanizer package reference..."
             $addPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore") -WorkingDirectory (Get-Location).Path
             if ($addPackageResult.ExitCode -ne 0) {
-                Write-AzureDevOpsError "SDK $($sdkConfig.Name) restore validation failed while adding Humanizer package reference"
-                Write-AzureErrorLines $addPackageResult.StandardOutput
-                Write-AzureErrorLines $addPackageResult.StandardError
+                Write-AzureDevOpsErrorDetail "SDK $($sdkConfig.Name) restore validation failed while adding Humanizer package reference" $addPackageResult.CombinedOutput
                 if ($addPackageResult.StandardOutput) { Write-Host $addPackageResult.StandardOutput }
                 if ($addPackageResult.StandardError) { Write-Host $addPackageResult.StandardError }
                 $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to add package reference"; Details = $addPackageResult.CombinedOutput.Trim() }
@@ -304,9 +311,7 @@ try {
             Write-Host "Restoring packages..."
             $restoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
             if ($restoreResult.ExitCode -ne 0) {
-                Write-AzureDevOpsError "SDK $($sdkConfig.Name) restore validation failed during dotnet restore"
-                Write-AzureErrorLines $restoreResult.StandardOutput
-                Write-AzureErrorLines $restoreResult.StandardError
+                Write-AzureDevOpsErrorDetail "SDK $($sdkConfig.Name) restore validation failed during dotnet restore" $restoreResult.CombinedOutput
                 if ($restoreResult.StandardOutput) { Write-Host $restoreResult.StandardOutput }
                 if ($restoreResult.StandardError) { Write-Host $restoreResult.StandardError }
                 $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to restore packages"; Details = $restoreResult.CombinedOutput.Trim() }
@@ -326,9 +331,8 @@ try {
             
         } catch {
             $exceptionText = $_ | Out-String
-            Write-AzureDevOpsError "Exception testing $($sdkConfig.Name): $($_.Exception.Message)"
             $exceptionTrimmed = $exceptionText.Trim()
-            Write-AzureErrorLines $exceptionTrimmed
+            Write-AzureDevOpsErrorDetail "Exception testing $($sdkConfig.Name): $($_.Exception.Message)" $exceptionTrimmed
             if ($exceptionText) { Write-Host $exceptionText }
             $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = $_.Exception.Message; Details = $exceptionTrimmed }
         } finally {
@@ -454,9 +458,7 @@ namespace MetaTest
 
                     $msbuildRestoreResult = Invoke-CapturedProcess -FilePath $msbuildPath -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$nugetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
                     if ($msbuildRestoreResult.ExitCode -ne 0) {
-                        Write-AzureDevOpsError "MSBuild restore validation failed with $msbuildName"
-                        Write-AzureErrorLines $msbuildRestoreResult.StandardOutput
-                        Write-AzureErrorLines $msbuildRestoreResult.StandardError
+                        Write-AzureDevOpsErrorDetail "MSBuild restore validation failed with $msbuildName" $msbuildRestoreResult.CombinedOutput
                         if ($msbuildRestoreResult.StandardOutput) { Write-Host $msbuildRestoreResult.StandardOutput }
                         if ($msbuildRestoreResult.StandardError) { Write-Host $msbuildRestoreResult.StandardError }
                         $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages"; Details = $msbuildRestoreResult.CombinedOutput.Trim() }
@@ -474,9 +476,8 @@ namespace MetaTest
                     $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $true }
                 } catch {
                     $exceptionText = $_ | Out-String
-                    Write-AzureDevOpsError "Exception testing ${msbuildName}: $($_.Exception.Message)"
                     $exceptionTrimmed = $exceptionText.Trim()
-                    Write-AzureErrorLines $exceptionTrimmed
+                    Write-AzureDevOpsErrorDetail "Exception testing ${msbuildName}: $($_.Exception.Message)" $exceptionTrimmed
                     if ($exceptionText) { Write-Host $exceptionText }
                     $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message; Details = $exceptionTrimmed }
                 } finally {
@@ -518,9 +519,7 @@ namespace MetaTest
     Write-Host "Creating test project..."
     $globalCreateResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force") -WorkingDirectory (Get-Location).Path
     if ($globalCreateResult.ExitCode -ne 0) {
-        Write-AzureDevOpsError "Failed to create test project"
-        Write-AzureErrorLines $globalCreateResult.StandardOutput
-        Write-AzureErrorLines $globalCreateResult.StandardError
+        Write-AzureDevOpsErrorDetail "Failed to create test project" $globalCreateResult.CombinedOutput
         if ($globalCreateResult.StandardOutput) { Write-Host $globalCreateResult.StandardOutput }
         if ($globalCreateResult.StandardError) { Write-Host $globalCreateResult.StandardError }
         throw "Failed to create test project: $($globalCreateResult.CombinedOutput.Trim())"
@@ -531,9 +530,7 @@ namespace MetaTest
     Write-Host "Adding Humanizer package reference..."
     $globalAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore") -WorkingDirectory (Get-Location).Path
     if ($globalAddPackageResult.ExitCode -ne 0) {
-        Write-AzureDevOpsError "Failed to add Humanizer package reference"
-        Write-AzureErrorLines $globalAddPackageResult.StandardOutput
-        Write-AzureErrorLines $globalAddPackageResult.StandardError
+        Write-AzureDevOpsErrorDetail "Failed to add Humanizer package reference" $globalAddPackageResult.CombinedOutput
         if ($globalAddPackageResult.StandardOutput) { Write-Host $globalAddPackageResult.StandardOutput }
         if ($globalAddPackageResult.StandardError) { Write-Host $globalAddPackageResult.StandardError }
         throw "Failed to add package reference: $($globalAddPackageResult.CombinedOutput.Trim())"
@@ -542,9 +539,7 @@ namespace MetaTest
     Write-Host "Restoring packages..."
     $globalRestoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
     if ($globalRestoreResult.ExitCode -ne 0) {
-        Write-AzureDevOpsError "Failed to restore Humanizer metapackage"
-        Write-AzureErrorLines $globalRestoreResult.StandardOutput
-        Write-AzureErrorLines $globalRestoreResult.StandardError
+        Write-AzureDevOpsErrorDetail "Failed to restore Humanizer metapackage" $globalRestoreResult.CombinedOutput
         if ($globalRestoreResult.StandardOutput) { Write-Host $globalRestoreResult.StandardOutput }
         if ($globalRestoreResult.StandardError) { Write-Host $globalRestoreResult.StandardError }
         throw "Failed to restore Humanizer metapackage"
@@ -604,9 +599,8 @@ namespace MetaTest
     }
 
 } catch {
-    Write-AzureDevOpsError $_.Exception.Message
     $catchText = ($_ | Out-String).Trim()
-    Write-AzureErrorLines $catchText
+    Write-AzureDevOpsErrorDetail $_.Exception.Message $catchText
     throw
 } finally {
     # Cleanup
