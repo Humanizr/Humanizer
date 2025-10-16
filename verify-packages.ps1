@@ -40,6 +40,9 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+$script:AzureDevOpsErrorLogged = $false
+$script:AzureDevOpsWarningLogged = $false
+
 function ConvertTo-AzureDevOpsCommandValue {
     param([string]$Value)
 
@@ -60,6 +63,7 @@ function Write-AzureDevOpsError {
     if (-not [string]::IsNullOrEmpty($Message)) {
         $escaped = ConvertTo-AzureDevOpsCommandValue $Message
         Write-Host "##vso[task.logissue type=error;]$escaped"
+        $script:AzureDevOpsErrorLogged = $true
     }
 }
 
@@ -68,6 +72,7 @@ function Write-AzureDevOpsWarning {
     if (-not [string]::IsNullOrEmpty($Message)) {
         $escaped = ConvertTo-AzureDevOpsCommandValue $Message
         Write-Host "##vso[task.logissue type=warning;]$escaped"
+        $script:AzureDevOpsWarningLogged = $true
     }
 }
 
@@ -172,21 +177,20 @@ function Get-MSBuildProductName {
     }
 
     if ($Path -match "Microsoft Visual Studio\\(\\d{4})\\BuildTools") {
-        return "Build Tools $($Matches[1])"
+        return "VS $($Matches[1]) Build Tools"
     }
 
-    if ($Path -match "Microsoft Visual Studio\\(\\d{4})\\([^\\]+)\\") {
+    if ($Path -match "Microsoft Visual Studio\\(\\d{4})\\") {
         $year = $Matches[1]
-        $edition = $Matches[2]
-        return "Visual Studio $year $edition"
+        return "VS $year"
     }
 
     if ($Path -match "Microsoft.NET\\Framework64") {
-        return ".NET Framework 64-bit"
+        return ".NETFX"
     }
 
     if ($Path -match "Microsoft.NET\\Framework") {
-        return ".NET Framework"
+        return ".NETFX"
     }
 
     return $null
@@ -257,8 +261,8 @@ function Get-MSBuildInfos {
             $productName = $msbuildItem.VersionInfo.ProductName
         }
 
-        $msbuildLabel = if ($normalizedMsbuildVersion) { "MSBuild $normalizedMsbuildVersion" } else { "MSBuild" }
-        $displayName = if ($productName) { "$productName ($msbuildLabel)" } else { $msbuildLabel }
+        $baseName = if ($normalizedMsbuildVersion) { "MSBuild $normalizedMsbuildVersion" } else { "MSBuild" }
+        $displayName = if ($productName) { "$baseName ($productName)" } else { $baseName }
 
         $msbuildInfos += [PSCustomObject]@{
             Path        = $msbuildPath
@@ -382,24 +386,332 @@ function Get-RestoreDiagnostics {
         }
 
         if ($trimmed -match "(?i)\berror\s*:?\s*[A-Z0-9]+:") {
-            $errorLines += $trimmed
+            $match = [regex]::Match($trimmed, "(?i)\berror\s*:?\s*[A-Z0-9]+:.*")
+            if ($match.Success) {
+                $errorLines += $match.Value.Trim()
+            } else {
+                $errorLines += $trimmed
+            }
             continue
         }
 
         if ($trimmed -match "(?i)\bwarning\s*:?\s*[A-Z0-9]+:") {
-            $warningLines += $trimmed
+            $match = [regex]::Match($trimmed, "(?i)\bwarning\s*:?\s*[A-Z0-9]+:.*")
+            if ($match.Success) {
+                $warningLines += $match.Value.Trim()
+            } else {
+                $warningLines += $trimmed
+            }
         }
     }
 
     return [PSCustomObject]@{
-        Errors   = $errorLines
-        Warnings = $warningLines
+        Errors   = $errorLines | Select-Object -Unique
+        Warnings = $warningLines | Select-Object -Unique
+    }
+}
+
+function Get-RestoreTargets {
+    param([bool]$RunningOnWindows)
+
+    Write-AzureDevOpsSection "Detecting installed .NET SDKs and MSBuild tools"
+
+    $restoreTargets = @()
+
+    $listSdksResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("--list-sdks")
+    if ($listSdksResult.ExitCode -ne 0) {
+        Write-AzureDevOpsErrorDetail "Failed to enumerate installed SDKs" $listSdksResult.CombinedOutput
+        if ($listSdksResult.StandardOutput) { Write-Host $listSdksResult.StandardOutput }
+        if ($listSdksResult.StandardError) { Write-Host $listSdksResult.StandardError }
+        throw "Unable to determine installed SDKs"
+    }
+
+    if ($listSdksResult.StandardOutput) { Write-Host $listSdksResult.StandardOutput }
+    if ($listSdksResult.StandardError) { Write-Host $listSdksResult.StandardError }
+
+    $installedSdkLines = @()
+    if ($listSdksResult.StandardOutput) {
+        $installedSdkLines = ($listSdksResult.StandardOutput -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    }
+
+    $sdksByMajor = @{}
+    foreach ($line in $installedSdkLines) {
+        if ($line -match '^(?<version>[^\s]+)\s+\[(?<path>.+)\]$') {
+            $version = $Matches['version']
+            $major = $version.Split('.')[0]
+            if (-not $sdksByMajor.ContainsKey($major)) {
+                $sdksByMajor[$major] = @()
+            }
+            $sdksByMajor[$major] += $version
+        }
+    }
+
+    $sdkVersionsToTest = @(
+        @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
+        @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
+        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" }
+    )
+
+    foreach ($sdkConfig in $sdkVersionsToTest) {
+        $majorKey = [string]$sdkConfig.MajorVersion
+        if ($sdksByMajor.ContainsKey($majorKey)) {
+            $availableVersions = $sdksByMajor[$majorKey] | Sort-Object -Descending
+            $selectedVersion = $availableVersions | Select-Object -First 1
+            $normalizedVersion = Get-NormalizedVersionString $selectedVersion
+            if (-not $normalizedVersion) {
+                $normalizedVersion = Get-NormalizedVersionString $sdkConfig.Version
+            }
+
+            $displayName = if ($normalizedVersion) { ".NET SDK $normalizedVersion" } else { ".NET SDK $($sdkConfig.MajorVersion)" }
+
+            $restoreTargets += [PSCustomObject]@{
+                Kind              = 'dotnet'
+                Id                = "sdk$($sdkConfig.MajorVersion)"
+                DisplayName       = $displayName
+                Version           = $normalizedVersion
+                TargetFramework   = $sdkConfig.TargetFramework
+                GlobalJsonVersion = $sdkConfig.Version
+                RollForward       = $sdkConfig.RollForward
+            }
+        } else {
+            Write-AzureDevOpsWarning "$($sdkConfig.Name) not installed, skipping"
+        }
+    }
+
+    $dotnetTargets = $restoreTargets | Where-Object { $_.Kind -eq 'dotnet' }
+    if ($dotnetTargets.Count -eq 0) {
+        $sdkMajorVersions = ($sdkVersionsToTest | ForEach-Object { $_.MajorVersion }) -join ", "
+        Write-AzureDevOpsWarning "No target SDK versions ($sdkMajorVersions) are installed"
+    }
+
+    if ($RunningOnWindows) {
+        $msbuildInfos = Get-MSBuildInfos -RunningOnWindows $RunningOnWindows
+        if ($msbuildInfos.Count -eq 0) {
+            Write-AzureDevOpsWarning "No MSBuild installations detected"
+        } else {
+            $index = 0
+            foreach ($info in $msbuildInfos) {
+                $index++
+                $restoreTargets += [PSCustomObject]@{
+                    Kind        = 'msbuild'
+                    Id          = "msbuild$index"
+                    DisplayName = $info.DisplayName
+                    Version     = $info.Version
+                    Path        = $info.Path
+                }
+            }
+        }
+    } else {
+        Write-AzureDevOpsWarning "MSBuild restore tests skipped (non-Windows environment)"
+    }
+
+    if ($restoreTargets.Count -gt 0) {
+        Write-Host "Discovered restore targets:"
+        foreach ($target in $restoreTargets) {
+            Write-Host "  - $($target.DisplayName)"
+        }
+    } else {
+        Write-AzureDevOpsWarning "No restore targets were discovered"
+    }
+
+    return $restoreTargets
+}
+
+function Invoke-DotnetRestoreTarget {
+    param(
+        [PSCustomObject]$Target,
+        [string]$TempDir,
+        [string]$NuGetConfig,
+        [string]$PackageVersion
+    )
+
+    $resultRecord = [PSCustomObject]@{
+        Kind        = 'dotnet'
+        DisplayName = $Target.DisplayName
+        Version     = $Target.Version
+        Success     = $false
+        Details     = $null
+    }
+
+    $sdkTestDir = Join-Path $TempDir $Target.Id
+    New-Item -ItemType Directory -Path $sdkTestDir -Force | Out-Null
+
+    $currentLocation = Get-Location
+    try {
+        Set-Location $sdkTestDir
+
+        $globalJsonContent = @"
+{
+  "sdk": {
+    "version": "$($Target.GlobalJsonVersion)",
+    "rollForward": "$($Target.RollForward)"
+  }
+}
+"@
+        Set-Content -Path "global.json" -Value $globalJsonContent
+        Write-Host "Created global.json targeting $($Target.GlobalJsonVersion) (rollForward $($Target.RollForward))"
+
+        Write-Host "Creating test project..."
+        $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", $Target.TargetFramework) -WorkingDirectory (Get-Location).Path
+        if ($createProjectResult.ExitCode -ne 0) {
+            $diagnostics = Publish-RestoreFailure "Restore failed for $($Target.DisplayName) while creating test project" $Target.DisplayName $createProjectResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $createProjectResult
+            return $resultRecord
+        }
+
+        Set-Location MetaTest
+
+        $projectPath = Join-Path (Get-Location).Path "MetaTest.csproj"
+        Set-ProjectTargetFramework -ProjectPath $projectPath -TargetFramework $Target.TargetFramework
+
+        Write-Host "Adding Humanizer package reference..."
+        $addPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--framework", $Target.TargetFramework)
+        $addPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $addPackageArguments -WorkingDirectory (Get-Location).Path
+        if ($addPackageResult.ExitCode -ne 0) {
+            $diagnostics = Publish-RestoreFailure "Restore failed for $($Target.DisplayName) while adding Humanizer package reference" $Target.DisplayName $addPackageResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $addPackageResult
+            return $resultRecord
+        }
+
+        Write-Host "Restoring packages..."
+        $restoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $NuGetConfig) -WorkingDirectory (Get-Location).Path
+        if ($restoreResult.ExitCode -ne 0) {
+            $diagnostics = Publish-RestoreFailure "Restore failed for $($Target.DisplayName) during dotnet restore" $Target.DisplayName $restoreResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $restoreResult
+            return $resultRecord
+        }
+
+        $objPath = "obj/project.assets.json"
+        if (-not (Test-Path $objPath)) {
+            Write-AzureDevOpsWarning "project.assets.json not found after restore with $($Target.DisplayName)"
+            $resultRecord.Details = "project.assets.json missing"
+            return $resultRecord
+        }
+
+        Publish-RestoreSuccess "Restore succeeded: $($Target.DisplayName)" $Target.DisplayName $restoreResult
+        $resultRecord.Success = $true
+        return $resultRecord
+    } catch {
+        $exceptionText = $_ | Out-String
+        $exceptionTrimmed = $exceptionText.Trim()
+        Write-AzureDevOpsErrorDetail "Exception testing $($Target.DisplayName): $($_.Exception.Message)" $exceptionTrimmed
+        if ($exceptionText) { Write-Host $exceptionText }
+        $resultRecord.Details = $exceptionTrimmed
+        return $resultRecord
+    } finally {
+        Set-Location $currentLocation
+    }
+}
+
+function Invoke-MSBuildRestoreTarget {
+    param(
+        [PSCustomObject]$Target,
+        [string]$TempDir,
+        [string]$NuGetConfig,
+        [string]$PackageVersion
+    )
+
+    $resultRecord = [PSCustomObject]@{
+        Kind        = 'msbuild'
+        DisplayName = $Target.DisplayName
+        Version     = $Target.Version
+        Success     = $false
+        Details     = $null
+    }
+
+    $msbuildTestDir = Join-Path $TempDir $Target.Id
+    New-Item -ItemType Directory -Path $msbuildTestDir -Force | Out-Null
+
+    $currentLocation = Get-Location
+    try {
+        Set-Location $msbuildTestDir
+
+        $projectRoot = Join-Path (Get-Location).Path "MetaTest"
+        New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
+        Set-Location $projectRoot
+
+        $projectContent = @"
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="`$(MSBuildExtensionsPath)\`$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('`$(MSBuildExtensionsPath)\`$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '`$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '`$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MetaTest</RootNamespace>
+    <AssemblyName>MetaTest</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="$PackageVersion" />
+  </ItemGroup>
+  <Import Project="`$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
+"@
+        Set-Content -Path "MetaTest.csproj" -Value $projectContent -Encoding UTF8
+
+        $projectFile = "MetaTest.csproj"
+
+        $msbuildRestoreResult = Invoke-CapturedProcess -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$NuGetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
+        if ($msbuildRestoreResult.ExitCode -ne 0) {
+            $diagnostics = Publish-RestoreFailure "Restore failed for $($Target.DisplayName) during MSBuild restore" $Target.DisplayName $msbuildRestoreResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $msbuildRestoreResult
+            return $resultRecord
+        }
+
+        $msbuildAssetsPath = "obj/project.assets.json"
+        if (-not (Test-Path $msbuildAssetsPath)) {
+            Write-AzureDevOpsWarning "project.assets.json not found after restore with $($Target.DisplayName)"
+            $resultRecord.Details = "project.assets.json missing"
+            return $resultRecord
+        }
+
+        Publish-RestoreSuccess "Restore succeeded: $($Target.DisplayName)" $Target.DisplayName $msbuildRestoreResult
+        $resultRecord.Success = $true
+        return $resultRecord
+    } catch {
+        $exceptionText = $_ | Out-String
+        $exceptionTrimmed = $exceptionText.Trim()
+        Write-AzureDevOpsErrorDetail "Exception testing $($Target.DisplayName): $($_.Exception.Message)" $exceptionTrimmed
+        if ($exceptionText) { Write-Host $exceptionText }
+        $resultRecord.Details = $exceptionTrimmed
+        return $resultRecord
+    } finally {
+        Set-Location $currentLocation
+    }
+}
+
+function Write-RestoreDiagnosticLines {
+    param(
+        [string]$DisplayName,
+        [PSCustomObject]$Diagnostics
+    )
+
+    if ($null -eq $Diagnostics) {
+        return
+    }
+
+    if ($Diagnostics.Warnings -and $Diagnostics.Warnings.Count -gt 0) {
+        foreach ($warningLine in $Diagnostics.Warnings | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) {
+            Write-AzureDevOpsWarning "${DisplayName}: $($warningLine.Trim())"
+        }
+    }
+
+    if ($Diagnostics.Errors -and $Diagnostics.Errors.Count -gt 0) {
+        foreach ($errorLine in $Diagnostics.Errors | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) {
+            Write-AzureDevOpsError "${DisplayName}: $($errorLine.Trim())"
+        }
     }
 }
 
 function Publish-RestoreFailure {
     param(
         [string]$Context,
+        [string]$DisplayName,
         [PSCustomObject]$ProcessResult
     )
 
@@ -424,24 +736,19 @@ function Publish-RestoreFailure {
 
     $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
 
-    if ($diagnostics.Warnings.Count -gt 0) {
-        foreach ($warningLine in $diagnostics.Warnings) {
-            Write-AzureDevOpsWarning $warningLine
-        }
-    }
+    Write-RestoreDiagnosticLines -DisplayName $DisplayName -Diagnostics $diagnostics
 
-    if ($diagnostics.Errors.Count -gt 0) {
-        foreach ($errorLine in $diagnostics.Errors) {
-            Write-AzureDevOpsError $errorLine
-        }
-    } else {
+    if (($diagnostics.Errors.Count -eq 0) -and ($diagnostics.Warnings.Count -eq 0)) {
         $fallbackMessage = $ProcessResult.StandardError
         if ([string]::IsNullOrWhiteSpace($fallbackMessage)) {
             $fallbackMessage = $ProcessResult.StandardOutput
         }
 
         if (-not [string]::IsNullOrWhiteSpace($fallbackMessage)) {
-            Write-AzureDevOpsError $fallbackMessage.Trim()
+            $fallbackLines = ($fallbackMessage -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+            foreach ($line in $fallbackLines) {
+                Write-AzureDevOpsError "${DisplayName}: $($line.Trim())"
+            }
         }
     }
 
@@ -451,6 +758,7 @@ function Publish-RestoreFailure {
 function Publish-RestoreSuccess {
     param(
         [string]$Context,
+        [string]$DisplayName,
         [PSCustomObject]$ProcessResult
     )
 
@@ -464,11 +772,7 @@ function Publish-RestoreSuccess {
 
     $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
 
-    if ($diagnostics.Warnings.Count -gt 0) {
-        foreach ($warningLine in $diagnostics.Warnings) {
-            Write-AzureDevOpsWarning $warningLine
-        }
-    }
+    Write-RestoreDiagnosticLines -DisplayName $DisplayName -Diagnostics $diagnostics
 
     return $diagnostics
 }
@@ -561,9 +865,6 @@ try {
     Set-Content -Path $nugetConfig -Value $nugetConfigContent
 
     # Discover restore targets
-    Write-AzureDevOpsSection "Detecting installed .NET SDKs and MSBuild tools"
-
-    $restoreTargets = @()
     $restoreTestResults = @()
     $verificationFailures = @()
 
@@ -574,241 +875,33 @@ try {
         $runningOnWindows = $false
     }
 
-    $listSdksResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("--list-sdks")
-    if ($listSdksResult.ExitCode -ne 0) {
-        Write-AzureDevOpsErrorDetail "Failed to enumerate installed SDKs" $listSdksResult.CombinedOutput
-        if ($listSdksResult.StandardOutput) { Write-Host $listSdksResult.StandardOutput }
-        if ($listSdksResult.StandardError) { Write-Host $listSdksResult.StandardError }
-        throw "Unable to determine installed SDKs"
-    }
-
-    if ($listSdksResult.StandardOutput) { Write-Host $listSdksResult.StandardOutput }
-    if ($listSdksResult.StandardError) { Write-Host $listSdksResult.StandardError }
-
-    $installedSdkLines = @()
-    if ($listSdksResult.StandardOutput) {
-        $installedSdkLines = ($listSdksResult.StandardOutput -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
-    }
-
-    $sdksByMajor = @{}
-    foreach ($line in $installedSdkLines) {
-        if ($line -match '^(?<version>[^\s]+)\s+\[(?<path>.+)\]$') {
-            $version = $Matches['version']
-            $major = $version.Split('.')[0]
-            if (-not $sdksByMajor.ContainsKey($major)) {
-                $sdksByMajor[$major] = @()
-            }
-            $sdksByMajor[$major] += $version
-        }
-    }
-
-    $sdkVersionsToTest = @(
-        @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
-        @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
-        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" }
-    )
-
-    foreach ($sdkConfig in $sdkVersionsToTest) {
-        $majorKey = [string]$sdkConfig.MajorVersion
-        if ($sdksByMajor.ContainsKey($majorKey)) {
-            $availableVersions = $sdksByMajor[$majorKey] | Sort-Object -Descending
-            $selectedVersion = $availableVersions | Select-Object -First 1
-            $normalizedVersion = Get-NormalizedVersionString $selectedVersion
-            if (-not $normalizedVersion) {
-                $normalizedVersion = Get-NormalizedVersionString $sdkConfig.Version
-            }
-
-            $displayName = if ($normalizedVersion) { ".NET SDK $normalizedVersion" } else { ".NET SDK $($sdkConfig.MajorVersion)" }
-
-            $restoreTargets += [PSCustomObject]@{
-                Kind              = 'dotnet'
-                Id                = "sdk$($sdkConfig.MajorVersion)"
-                DisplayName       = $displayName
-                Version           = $normalizedVersion
-                TargetFramework   = $sdkConfig.TargetFramework
-                GlobalJsonVersion = $sdkConfig.Version
-                RollForward       = $sdkConfig.RollForward
-            }
-        } else {
-            Write-AzureDevOpsWarning "$($sdkConfig.Name) not installed, skipping"
-        }
-    }
-
-    $dotnetTargets = $restoreTargets | Where-Object { $_.Kind -eq 'dotnet' }
-    if ($dotnetTargets.Count -eq 0) {
-        $sdkMajorVersions = ($sdkVersionsToTest | ForEach-Object { $_.MajorVersion }) -join ", "
-        Write-AzureDevOpsWarning "No target SDK versions ($sdkMajorVersions) are installed"
-    }
-
-    if ($runningOnWindows) {
-        $msbuildInfos = Get-MSBuildInfos -RunningOnWindows $runningOnWindows
-        if ($msbuildInfos.Count -eq 0) {
-            Write-AzureDevOpsWarning "No MSBuild installations detected"
-        } else {
-            $index = 0
-            foreach ($info in $msbuildInfos) {
-                $index++
-                $restoreTargets += [PSCustomObject]@{
-                    Kind        = 'msbuild'
-                    Id          = "msbuild$index"
-                    DisplayName = $info.DisplayName
-                    Version     = $info.Version
-                    Path        = $info.Path
-                }
-            }
-        }
-    } else {
-        Write-AzureDevOpsWarning "MSBuild restore tests skipped (non-Windows environment)"
-    }
-
-    if ($restoreTargets.Count -gt 0) {
-        Write-Host "Restore targets discovered:"
-        foreach ($target in $restoreTargets) {
-            Write-Host "  - $($target.DisplayName)"
-        }
-    } else {
-        Write-AzureDevOpsWarning "No restore targets were discovered"
-    }
+    $restoreTargets = Get-RestoreTargets -RunningOnWindows $runningOnWindows
 
     foreach ($target in $restoreTargets) {
         Write-AzureDevOpsSection "Testing package restoration with $($target.DisplayName)"
 
         if ($target.Kind -eq 'dotnet') {
-            $normalizedSdkVersion = $target.Version
-            $targetDisplayName = $target.DisplayName
-            $sdkTestDir = Join-Path $tempDir $target.Id
-            New-Item -ItemType Directory -Path $sdkTestDir -Force | Out-Null
-
-            $currentLocation = Get-Location
-            try {
-                Set-Location $sdkTestDir
-
-                $globalJsonContent = @"
-{
-  "sdk": {
-    "version": "$($target.GlobalJsonVersion)",
-    "rollForward": "$($target.RollForward)"
-  }
-}
-"@
-                Set-Content -Path "global.json" -Value $globalJsonContent
-                Write-Host "Created global.json targeting $($target.GlobalJsonVersion) (rollForward $($target.RollForward))"
-
-                Write-Host "Creating test project..."
-                $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", $target.TargetFramework) -WorkingDirectory (Get-Location).Path
-                if ($createProjectResult.ExitCode -ne 0) {
-                    $diagnostics = Publish-RestoreFailure "Restore failed for $targetDisplayName while creating test project" $createProjectResult
-                    $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $createProjectResult
-                    $restoreTestResults += @{ Kind = 'dotnet'; DisplayName = $targetDisplayName; Version = $normalizedSdkVersion; Success = $false; Details = $detailText }
-                    continue
-                }
-
-                Set-Location MetaTest
-
-                $projectPath = Join-Path (Get-Location).Path "MetaTest.csproj"
-                Set-ProjectTargetFramework -ProjectPath $projectPath -TargetFramework $target.TargetFramework
-
-                Write-Host "Adding Humanizer package reference..."
-                $addPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--framework", $target.TargetFramework)
-                $addPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $addPackageArguments -WorkingDirectory (Get-Location).Path
-                if ($addPackageResult.ExitCode -ne 0) {
-                    $diagnostics = Publish-RestoreFailure "Restore failed for $targetDisplayName while adding Humanizer package reference" $addPackageResult
-                    $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $addPackageResult
-                    $restoreTestResults += @{ Kind = 'dotnet'; DisplayName = $targetDisplayName; Version = $normalizedSdkVersion; Success = $false; Details = $detailText }
-                    continue
-                }
-
-                Write-Host "Restoring packages..."
-                $restoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
-                if ($restoreResult.ExitCode -ne 0) {
-                    $diagnostics = Publish-RestoreFailure "Restore failed for $targetDisplayName during dotnet restore" $restoreResult
-                    $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $restoreResult
-                    $restoreTestResults += @{ Kind = 'dotnet'; DisplayName = $targetDisplayName; Version = $normalizedSdkVersion; Success = $false; Details = $detailText }
-                    continue
-                }
-
-                $objPath = "obj/project.assets.json"
-                if (-not (Test-Path $objPath)) {
-                    Write-AzureDevOpsWarning "project.assets.json not found after restore with $targetDisplayName"
-                    $restoreTestResults += @{ Kind = 'dotnet'; DisplayName = $targetDisplayName; Version = $normalizedSdkVersion; Success = $false }
-                    continue
-                }
-
-                Publish-RestoreSuccess "Restore succeeded: $targetDisplayName" $restoreResult
-                $restoreTestResults += @{ Kind = 'dotnet'; DisplayName = $targetDisplayName; Version = $normalizedSdkVersion; Success = $true }
-
-            } catch {
-                $exceptionText = $_ | Out-String
-                $exceptionTrimmed = $exceptionText.Trim()
-                Write-AzureDevOpsErrorDetail "Exception testing $($targetDisplayName): $($_.Exception.Message)" $exceptionTrimmed
-                if ($exceptionText) { Write-Host $exceptionText }
-                $restoreTestResults += @{ Kind = 'dotnet'; DisplayName = $targetDisplayName; Version = $normalizedSdkVersion; Success = $false; Details = $exceptionTrimmed }
-            } finally {
-                Set-Location $currentLocation
-            }
+            $testResult = Invoke-DotnetRestoreTarget -Target $target -TempDir $tempDir -NuGetConfig $nugetConfig -PackageVersion $PackageVersion
         } elseif ($target.Kind -eq 'msbuild') {
-            $msbuildDisplayName = $target.DisplayName
-            $msbuildTestDir = Join-Path $tempDir $target.Id
-            New-Item -ItemType Directory -Path $msbuildTestDir -Force | Out-Null
+            $testResult = Invoke-MSBuildRestoreTarget -Target $target -TempDir $tempDir -NuGetConfig $nugetConfig -PackageVersion $PackageVersion
+        } else {
+            continue
+        }
 
-            $currentLocation = Get-Location
-            try {
-                Set-Location $msbuildTestDir
-
-                $projectRoot = Join-Path (Get-Location).Path "MetaTest"
-                New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
-                Set-Location $projectRoot
-
-                $projectContent = @"
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Humanizer" Version="$PackageVersion" />
-  </ItemGroup>
-</Project>
-"@
-                Set-Content -Path "MetaTest.csproj" -Value $projectContent -Encoding UTF8
-
-                $projectFile = "MetaTest.csproj"
-
-                $msbuildRestoreResult = Invoke-CapturedProcess -FilePath $target.Path -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$nugetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
-                if ($msbuildRestoreResult.ExitCode -ne 0) {
-                    $diagnostics = Publish-RestoreFailure "Restore failed for $msbuildDisplayName during MSBuild restore" $msbuildRestoreResult
-                    $detailText = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $msbuildRestoreResult
-                    $restoreTestResults += @{ Kind = 'msbuild'; DisplayName = $msbuildDisplayName; Version = $target.Version; Success = $false; Details = $detailText }
-                    continue
-                }
-
-                $msbuildAssetsPath = "obj/project.assets.json"
-                if (-not (Test-Path $msbuildAssetsPath)) {
-                    Write-AzureDevOpsWarning "project.assets.json not found after restore with $msbuildDisplayName"
-                    $restoreTestResults += @{ Kind = 'msbuild'; DisplayName = $msbuildDisplayName; Version = $target.Version; Success = $false }
-                    continue
-                }
-
-                Publish-RestoreSuccess "Restore succeeded: $msbuildDisplayName" $msbuildRestoreResult
-                $restoreTestResults += @{ Kind = 'msbuild'; DisplayName = $msbuildDisplayName; Version = $target.Version; Success = $true }
-            } catch {
-                $exceptionText = $_ | Out-String
-                $exceptionTrimmed = $exceptionText.Trim()
-                Write-AzureDevOpsErrorDetail "Exception testing $($msbuildDisplayName): $($_.Exception.Message)" $exceptionTrimmed
-                if ($exceptionText) { Write-Host $exceptionText }
-                $restoreTestResults += @{ Kind = 'msbuild'; DisplayName = $msbuildDisplayName; Version = $target.Version; Success = $false; Details = $exceptionTrimmed }
-            } finally {
-                Set-Location $currentLocation
-            }
+        if ($null -ne $testResult) {
+            $restoreTestResults += $testResult
         }
     }
 
     Write-Host ""
     Write-AzureDevOpsSection "Restore Test Results"
 
-    if ($restoreTestResults.Count -eq 0) {
+    $validRestoreResults = @($restoreTestResults | Where-Object { $_ -and -not [string]::IsNullOrWhiteSpace($_.DisplayName) })
+
+    if ($validRestoreResults.Count -eq 0) {
         Write-AzureDevOpsWarning "No restore tests were executed"
     } else {
-        foreach ($result in $restoreTestResults) {
+        foreach ($result in $validRestoreResults) {
             if ($result.Success) {
                 Write-Host "  ✓ $($result.DisplayName)"
             } else {
@@ -830,7 +923,7 @@ try {
     $metaProjectCreated = $false
     $globalCreateResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", "net8.0") -WorkingDirectory (Get-Location).Path
     if ($globalCreateResult.ExitCode -ne 0) {
-        Publish-RestoreFailure "Failed to create metapackage verification project" $globalCreateResult
+        Publish-RestoreFailure "Failed to create metapackage verification project" "Humanizer metapackage" $globalCreateResult
         $verificationFailures += "Metapackage verification project creation failed"
         $metaVerificationSucceeded = $false
     } else {
@@ -848,7 +941,7 @@ try {
 
         $globalAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $globalAddPackageArguments -WorkingDirectory (Get-Location).Path
         if ($globalAddPackageResult.ExitCode -ne 0) {
-            Publish-RestoreFailure "Failed to add Humanizer package reference to metapackage verification project" $globalAddPackageResult
+            Publish-RestoreFailure "Failed to add Humanizer package reference to metapackage verification project" "Humanizer metapackage" $globalAddPackageResult
             $verificationFailures += "Metapackage verification project setup failed"
             $metaVerificationSucceeded = $false
         }
@@ -858,11 +951,11 @@ try {
         Write-Host "Restoring packages..."
         $globalRestoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
         if ($globalRestoreResult.ExitCode -ne 0) {
-            Publish-RestoreFailure "Failed to restore Humanizer metapackage" $globalRestoreResult
+            Publish-RestoreFailure "Failed to restore Humanizer metapackage" "Humanizer metapackage" $globalRestoreResult
             $verificationFailures += "Metapackage restore failed"
             $metaVerificationSucceeded = $false
         } else {
-            Publish-RestoreSuccess "Humanizer metapackage restore succeeded" $globalRestoreResult
+            Publish-RestoreSuccess "Humanizer metapackage restore succeeded" "Humanizer metapackage" $globalRestoreResult
         }
 
         if ($metaVerificationSucceeded) {
@@ -909,25 +1002,34 @@ try {
     Write-Host ""
 
     Write-AzureDevOpsSection "Verification Summary"
-    Write-Host "##[command]Summary:"
-    Write-Host "  - Main metapackage (Humanizer): ✓"
-    Write-Host "  - Core package (Humanizer.Core): ✓"
-    Write-Host "  - Satellite packages verified: $($satellitePackages.Count)"
-    if ($metapackageCheckCompleted -and $missingSatellites.Count -eq 0) {
-        Write-Host "  - All satellites are dependencies of metapackage: ✓"
-    } elseif ($metapackageCheckCompleted) {
-        Write-Host "  - All satellites are dependencies of metapackage: ✗"
-    } else {
-        Write-Host "  - All satellites are dependencies of metapackage: (not verified)"
-    }
 
-    $restoreSuccesses = @($restoreTestResults | Where-Object { $_.Success })
-    $restoreFailures = @($restoreTestResults | Where-Object { -not $_.Success })
+    $restoreSuccesses = @($validRestoreResults | Where-Object { $_.Success })
+    $restoreFailures = @($validRestoreResults | Where-Object { -not $_.Success })
     $restorePassedCount = $restoreSuccesses.Count
-    $restoreTotalCount = $restoreTestResults.Count
+    $restoreTotalCount = $validRestoreResults.Count
 
     $summaryLines = @()
+    $summaryLines += "Summary:"
+    $summaryLines += "  ✓ Humanizer"
+    $summaryLines += "  ✓ Humanizer.Core"
+
+    $satelliteLine = "  ✓ Satellite packages verified: $($satellitePackages.Count)"
+    if ($satellitePackages.Count -eq 0) {
+        $satelliteLine = "  ✗ Satellite packages verified: 0"
+    }
+    $summaryLines += $satelliteLine
+
+    if ($metapackageCheckCompleted -and $missingSatellites.Count -eq 0) {
+        $summaryLines += "  ✓ All satellites are dependencies of Humanizer"
+    } elseif ($metapackageCheckCompleted) {
+        $summaryLines += "  ✗ All satellites are dependencies of Humanizer"
+    } else {
+        $summaryLines += "  ✗ All satellites are dependencies of Humanizer (not verified)"
+    }
+
+    $summaryLines += ""
     $summaryLines += "Restore tests passed: $restorePassedCount/$restoreTotalCount"
+
     if ($restoreTotalCount -eq 0) {
         $summaryLines += "  (no restore tests executed)"
     } else {
@@ -936,16 +1038,15 @@ try {
         }
     }
 
-    $restoreFailureNames = $restoreFailures | ForEach-Object { $_.DisplayName }
-    if ($restoreFailureNames.Count -gt 0) {
+    if ($restoreFailures.Count -gt 0) {
         $summaryLines += "Restore tests failed:"
-        foreach ($name in $restoreFailureNames) {
-            $summaryLines += "  ✗ $name"
+        foreach ($failure in $restoreFailures) {
+            $summaryLines += "  ✗ $($failure.DisplayName)"
         }
     }
 
     if ($verificationFailures.Count -gt 0) {
-        $summaryLines += "Additional verification checks failed:"
+        $summaryLines += "Verification checks failed:"
         foreach ($failure in $verificationFailures) {
             $summaryLines += "  ✗ $failure"
         }
@@ -955,29 +1056,18 @@ try {
         Write-Host $line
     }
 
-    if ($summaryLines.Count -gt 0) {
-        Write-AzureDevOpsInformation ($summaryLines -join "`n")
-    }
+    $summaryText = $summaryLines -join "`n"
 
-    $hasFailures = ($restoreFailureNames.Count -gt 0) -or ($verificationFailures.Count -gt 0)
+    $hasFailures = ($restoreFailures.Count -gt 0) -or ($verificationFailures.Count -gt 0)
 
-    if (-not $hasFailures) {
-        Write-Host ""
-        Write-AzureDevOpsSection "✓ All Verification Checks Passed"
-    } else {
-        $failureSummaryLines = @()
-        if ($restoreFailureNames.Count -gt 0) {
-            $failureSummaryLines += $restoreFailureNames
-        }
-        if ($verificationFailures.Count -gt 0) {
-            $failureSummaryLines += $verificationFailures
-        }
-
-        $failureSummaryText = $failureSummaryLines -join "`n"
-        Write-AzureDevOpsErrorDetail "Verification checks failed" $failureSummaryText
-
-        $completionMessage = ConvertTo-AzureDevOpsCommandValue "Verification checks failed`n$failureSummaryText"
+    if ($hasFailures) {
+        Write-AzureDevOpsError $summaryText
+        $completionMessage = ConvertTo-AzureDevOpsCommandValue $summaryText
         Write-Host "##vso[task.complete result=Failed;]$completionMessage"
+    } elseif ($script:AzureDevOpsWarningLogged) {
+        Write-AzureDevOpsWarning $summaryText
+    } else {
+        Write-AzureDevOpsInformation $summaryText
     }
 
 } catch {
