@@ -521,7 +521,7 @@ try {
                     Set-Location $msbuildTestDir
 
                     Write-Host "Creating test project..."
-                    $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", "net48") -WorkingDirectory (Get-Location).Path
+                    $createProjectResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("new", "console", "-n", "MetaTest", "--force", "--framework", "net48", "--no-restore") -WorkingDirectory (Get-Location).Path
                     if ($createProjectResult.ExitCode -ne 0) {
                         Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while creating test project" $createProjectResult
                         if ($createProjectResult.StandardOutput) { Write-Host $createProjectResult.StandardOutput }
@@ -533,7 +533,7 @@ try {
                     Set-Location MetaTest
 
                     Write-Host "Adding Humanizer package reference..."
-                    $msbuildAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
+                    $msbuildAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore")
                     foreach ($source in $packageSources) {
                         $msbuildAddPackageArguments += @("--source", $source)
                     }
