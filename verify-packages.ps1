@@ -40,6 +40,16 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+function ConvertTo-AzureDevOpsCommandValue {
+    param([string]$Value)
+
+    if ([string]::IsNullOrEmpty($Value)) {
+        return $Value
+    }
+
+    return $Value.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A').Replace(';', '%3B').Replace(']', '%5D')
+}
+
 function Write-AzureDevOpsSection {
     param([string]$Message)
     Write-Host "##[section]$Message"
@@ -48,14 +58,16 @@ function Write-AzureDevOpsSection {
 function Write-AzureDevOpsError {
     param([string]$Message)
     if (-not [string]::IsNullOrEmpty($Message)) {
-        Write-Host "##vso[task.logissue type=error;]$Message"
+        $escaped = ConvertTo-AzureDevOpsCommandValue $Message
+        Write-Host "##vso[task.logissue type=error;]$escaped"
     }
 }
 
 function Write-AzureDevOpsWarning {
     param([string]$Message)
     if (-not [string]::IsNullOrEmpty($Message)) {
-        Write-Host "##vso[task.logissue type=warning;]$Message"
+        $escaped = ConvertTo-AzureDevOpsCommandValue $Message
+        Write-Host "##vso[task.logissue type=warning;]$escaped"
     }
 }
 
