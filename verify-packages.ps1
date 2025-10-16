@@ -47,12 +47,16 @@ function Write-AzureDevOpsSection {
 
 function Write-AzureDevOpsError {
     param([string]$Message)
-    Write-Host "##[error]$Message"
+    if (-not [string]::IsNullOrEmpty($Message)) {
+        Write-Host "##vso[task.logissue type=error;]$Message"
+    }
 }
 
 function Write-AzureDevOpsWarning {
     param([string]$Message)
-    Write-Host "##[warning]$Message"
+    if (-not [string]::IsNullOrEmpty($Message)) {
+        Write-Host "##vso[task.logissue type=warning;]$Message"
+    }
 }
 
 function Invoke-CapturedProcess {
