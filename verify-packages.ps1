@@ -177,9 +177,13 @@ try {
             Write-Host "Creating test project..."
             $output = dotnet new console -n MetaTest --force 2>&1
             if ($LASTEXITCODE -ne 0) {
-                Write-AzureDevOpsWarning "Failed to create test project with $($sdkConfig.Name)"
+                $outputText = $output.Trim()
+                Write-AzureDevOpsError "SDK $($sdkConfig.Name) restore validation failed while creating test project"
+                if ($outputText) {
+                    Write-AzureDevOpsError $outputText
+                }
                 Write-Host $output
-                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to create test project"; Details = $output.Trim() }
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to create test project"; Details = $outputText }
                 continue
             }
             
@@ -189,9 +193,13 @@ try {
             Write-Host "Adding Humanizer package reference..."
             $output = dotnet add package Humanizer --version $PackageVersion --no-restore 2>&1
             if ($LASTEXITCODE -ne 0) {
-                Write-AzureDevOpsWarning "Failed to add Humanizer package reference with $($sdkConfig.Name)"
+                $outputText = $output.Trim()
+                Write-AzureDevOpsError "SDK $($sdkConfig.Name) restore validation failed while adding Humanizer package reference"
+                if ($outputText) {
+                    Write-AzureDevOpsError $outputText
+                }
                 Write-Host $output
-                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to add package reference"; Details = $output.Trim() }
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to add package reference"; Details = $outputText }
                 continue
             }
             
@@ -199,9 +207,13 @@ try {
             Write-Host "Restoring packages..."
             $restoreOutput = dotnet restore --configfile $nugetConfig 2>&1
             if ($LASTEXITCODE -ne 0) {
-                Write-AzureDevOpsWarning "Failed to restore Humanizer metapackage with $($sdkConfig.Name)"
+                $restoreText = $restoreOutput.Trim()
+                Write-AzureDevOpsError "SDK $($sdkConfig.Name) restore validation failed during dotnet restore"
+                if ($restoreText) {
+                    Write-AzureDevOpsError $restoreText
+                }
                 Write-Host $restoreOutput
-                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to restore packages"; Details = $restoreOutput.Trim() }
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to restore packages"; Details = $restoreText }
                 continue
             }
             
@@ -218,9 +230,13 @@ try {
             
         } catch {
             $exceptionText = $_ | Out-String
-            Write-AzureDevOpsWarning "Exception testing $($sdkConfig.Name): $($_.Exception.Message)"
+            Write-AzureDevOpsError "Exception testing $($sdkConfig.Name): $($_.Exception.Message)"
+            $exceptionTrimmed = $exceptionText.Trim()
+            if ($exceptionTrimmed) {
+                Write-AzureDevOpsError $exceptionTrimmed
+            }
             Write-Host $exceptionText
-            $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = $_.Exception.Message; Details = $exceptionText.Trim() }
+            $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = $_.Exception.Message; Details = $exceptionTrimmed }
         } finally {
             Set-Location $currentLocation
         }
@@ -344,9 +360,13 @@ namespace MetaTest
 
                     $restoreOutput = & $msbuildPath $projectFile "/t:Restore" "/p:RestoreConfigFile=$nugetConfig" "/nologo" 2>&1
                     if ($LASTEXITCODE -ne 0) {
-                        Write-AzureDevOpsWarning "Failed to restore Humanizer metapackage with $msbuildName"
+                        $restoreText = $restoreOutput.Trim()
+                        Write-AzureDevOpsError "MSBuild restore validation failed with $msbuildName"
+                        if ($restoreText) {
+                            Write-AzureDevOpsError $restoreText
+                        }
                         Write-Host $restoreOutput
-                        $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages"; Details = $restoreOutput.Trim() }
+                        $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages"; Details = $restoreText }
                         continue
                     }
 
@@ -361,9 +381,13 @@ namespace MetaTest
                     $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $true }
                 } catch {
                     $exceptionText = $_ | Out-String
-                    Write-AzureDevOpsWarning "Exception testing ${msbuildName}: $($_.Exception.Message)"
+                    Write-AzureDevOpsError "Exception testing ${msbuildName}: $($_.Exception.Message)"
+                    $exceptionTrimmed = $exceptionText.Trim()
+                    if ($exceptionTrimmed) {
+                        Write-AzureDevOpsError $exceptionTrimmed
+                    }
                     Write-Host $exceptionText
-                    $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message; Details = $exceptionText.Trim() }
+                    $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message; Details = $exceptionTrimmed }
                 } finally {
                     Set-Location $currentLocation
                 }
@@ -403,7 +427,12 @@ namespace MetaTest
     Write-Host "Creating test project..."
     $output = dotnet new console -n MetaTest --force 2>&1
     if ($LASTEXITCODE -ne 0) {
+        $outputText = $output.Trim()
         Write-AzureDevOpsError "Failed to create test project"
+        if ($outputText) {
+            Write-AzureDevOpsError $outputText
+        }
+        Write-Host $output
         throw "Failed to create test project: $output"
     }
     
@@ -412,14 +441,23 @@ namespace MetaTest
     Write-Host "Adding Humanizer package reference..."
     $output = dotnet add package Humanizer --version $PackageVersion --no-restore 2>&1
     if ($LASTEXITCODE -ne 0) {
+        $outputText = $output.Trim()
         Write-AzureDevOpsError "Failed to add Humanizer package reference"
+        if ($outputText) {
+            Write-AzureDevOpsError $outputText
+        }
+        Write-Host $output
         throw "Failed to add package reference: $output"
     }
     
     Write-Host "Restoring packages..."
     $restoreOutput = dotnet restore --configfile $nugetConfig 2>&1
     if ($LASTEXITCODE -ne 0) {
+        $restoreText = $restoreOutput.Trim()
         Write-AzureDevOpsError "Failed to restore Humanizer metapackage"
+        if ($restoreText) {
+            Write-AzureDevOpsError $restoreText
+        }
         Write-Host $restoreOutput
         throw "Failed to restore Humanizer metapackage"
     }
