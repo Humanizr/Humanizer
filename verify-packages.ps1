@@ -101,45 +101,26 @@ function Invoke-CapturedProcess {
     $process = New-Object System.Diagnostics.Process
     $process.StartInfo = $startInfo
 
-    $standardOutputBuilder = New-Object System.Text.StringBuilder
-    $standardErrorBuilder = New-Object System.Text.StringBuilder
-
-    $outputHandler = [System.Diagnostics.DataReceivedEventHandler] {
-        param($sender, $eventArgs)
-        if ($eventArgs.Data -ne $null) {
-            [void]$standardOutputBuilder.AppendLine($eventArgs.Data)
-        }
-    }
-
-    $errorHandler = [System.Diagnostics.DataReceivedEventHandler] {
-        param($sender, $eventArgs)
-        if ($eventArgs.Data -ne $null) {
-            [void]$standardErrorBuilder.AppendLine($eventArgs.Data)
-        }
-    }
-
-    $process.add_OutputDataReceived($outputHandler)
-    $process.add_ErrorDataReceived($errorHandler)
-
     $null = $process.Start()
-    $process.BeginOutputReadLine()
-    $process.BeginErrorReadLine()
-    $process.WaitForExit()
 
-    $standardOutput = $standardOutputBuilder.ToString()
-    $standardError = $standardErrorBuilder.ToString()
+    $standardOutput = $process.StandardOutput.ReadToEnd()
+    $standardError = $process.StandardError.ReadToEnd()
+
+    $process.WaitForExit()
 
     $exitCode = $process.ExitCode
 
-    $process.remove_OutputDataReceived($outputHandler)
-    $process.remove_ErrorDataReceived($errorHandler)
     $process.Dispose()
+
+    $combinedParts = @()
+    if ($standardOutput) { $combinedParts += $standardOutput }
+    if ($standardError) { $combinedParts += $standardError }
 
     return [PSCustomObject]@{
         ExitCode        = $exitCode
         StandardOutput  = $standardOutput
         StandardError   = $standardError
-        CombinedOutput  = (($standardOutput, $standardError) | Where-Object { $_ }) -join ""
+        CombinedOutput  = ($combinedParts -join "`n")
     }
 }
 
