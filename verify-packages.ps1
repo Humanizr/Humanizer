@@ -177,8 +177,9 @@ try {
             Write-Host "Creating test project..."
             $output = dotnet new console -n MetaTest --force 2>&1
             if ($LASTEXITCODE -ne 0) {
-                Write-AzureDevOpsWarning "Failed to create test project with $($sdkConfig.Name): $output"
-                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to create test project" }
+                Write-AzureDevOpsWarning "Failed to create test project with $($sdkConfig.Name)"
+                Write-Host $output
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to create test project"; Details = $output.Trim() }
                 continue
             }
             
@@ -188,8 +189,9 @@ try {
             Write-Host "Adding Humanizer package reference..."
             $output = dotnet add package Humanizer --version $PackageVersion --no-restore 2>&1
             if ($LASTEXITCODE -ne 0) {
-                Write-AzureDevOpsWarning "Failed to add Humanizer package reference with $($sdkConfig.Name): $output"
-                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to add package reference" }
+                Write-AzureDevOpsWarning "Failed to add Humanizer package reference with $($sdkConfig.Name)"
+                Write-Host $output
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to add package reference"; Details = $output.Trim() }
                 continue
             }
             
@@ -199,7 +201,7 @@ try {
             if ($LASTEXITCODE -ne 0) {
                 Write-AzureDevOpsWarning "Failed to restore Humanizer metapackage with $($sdkConfig.Name)"
                 Write-Host $restoreOutput
-                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to restore packages" }
+                $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = "Failed to restore packages"; Details = $restoreOutput.Trim() }
                 continue
             }
             
@@ -215,8 +217,10 @@ try {
             $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $true }
             
         } catch {
+            $exceptionText = $_ | Out-String
             Write-AzureDevOpsWarning "Exception testing $($sdkConfig.Name): $($_.Exception.Message)"
-            $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = $_.Exception.Message }
+            Write-Host $exceptionText
+            $sdkTestResults += @{ SDK = $sdkConfig.Name; Success = $false; Error = $_.Exception.Message; Details = $exceptionText.Trim() }
         } finally {
             Set-Location $currentLocation
         }
@@ -230,7 +234,11 @@ try {
         if ($result.Success) {
             Write-Host "  ✓ $($result.SDK): Passed"
         } else {
-            Write-Host "  ✗ $($result.SDK): Failed - $($result.Error)"
+            $errorMessage = if ($result.ContainsKey('Error') -and $result.Error) { $result.Error } else { 'Failed' }
+            Write-Host "  ✗ $($result.SDK): Failed - $errorMessage"
+            if ($result.ContainsKey('Details') -and $result.Details) {
+                Write-Host $result.Details
+            }
             $allSdksPassed = $false
         }
     }
@@ -338,7 +346,7 @@ namespace MetaTest
                     if ($LASTEXITCODE -ne 0) {
                         Write-AzureDevOpsWarning "Failed to restore Humanizer metapackage with $msbuildName"
                         Write-Host $restoreOutput
-                        $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages" }
+                        $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = "Failed to restore packages"; Details = $restoreOutput.Trim() }
                         continue
                     }
 
@@ -352,8 +360,10 @@ namespace MetaTest
                     Write-Host "##[command]✓ Package restoration succeeded with $msbuildName"
                     $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $true }
                 } catch {
+                    $exceptionText = $_ | Out-String
                     Write-AzureDevOpsWarning "Exception testing ${msbuildName}: $($_.Exception.Message)"
-                    $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message }
+                    Write-Host $exceptionText
+                    $msbuildTestResults += @{ Name = $msbuildName; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message; Details = $exceptionText.Trim() }
                 } finally {
                     Set-Location $currentLocation
                 }
@@ -366,7 +376,11 @@ namespace MetaTest
                 if ($result.Success) {
                     Write-Host "  ✓ $($result.Name): Passed"
                 } else {
-                    Write-Host "  ✗ $($result.Name): Failed - $($result.Error)"
+                    $errorMessage = if ($result.ContainsKey('Error') -and $result.Error) { $result.Error } else { 'Failed' }
+                    Write-Host "  ✗ $($result.Name): Failed - $errorMessage"
+                    if ($result.ContainsKey('Details') -and $result.Details) {
+                        Write-Host $result.Details
+                    }
                     $allMsbuildPassed = $false
                 }
             }
