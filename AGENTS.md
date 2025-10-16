@@ -30,6 +30,7 @@ These instructions apply to the entire repository.
 
 ## Build & Validation
 - Ensure `dotnet build Humanizer/Humanizer.csproj /t:PackNuSpecs` (from `src`) succeeds without warnings.
+- When verifying packages, produce real nupkgs with `dotnet build src/Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<path>` and pass that output path into `verify-packages.ps1`.
 - Do not introduce new compiler warnings or break existing build/test workflows.
 
 ## Localization Guidance

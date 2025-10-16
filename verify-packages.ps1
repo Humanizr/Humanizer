@@ -362,8 +362,6 @@ try {
     }
 
     # Test package restoration with each SDK version
-    $packageSources = @($absolutePackagesDir, "https://api.nuget.org/v3/index.json")
-
     foreach ($sdkConfig in $sdksToTest) {
         $targetDisplayName = "dotnet $($sdkConfig.Name) ($($sdkConfig.Version))"
         Write-AzureDevOpsSection "Testing package restoration with $targetDisplayName"
@@ -404,9 +402,6 @@ try {
             # Add Humanizer package reference
             Write-Host "Adding Humanizer package reference..."
             $addPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
-            foreach ($source in $packageSources) {
-                $addPackageArguments += @("--source", $source)
-            }
             $addPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $addPackageArguments -WorkingDirectory (Get-Location).Path
             if ($addPackageResult.ExitCode -ne 0) {
                 Publish-RestoreFailure "Restore validation failed for $targetDisplayName while adding Humanizer package reference" $addPackageResult
@@ -441,7 +436,7 @@ try {
         } catch {
             $exceptionText = $_ | Out-String
             $exceptionTrimmed = $exceptionText.Trim()
-            Write-AzureDevOpsErrorDetail "Exception testing $targetDisplayName: $($_.Exception.Message)" $exceptionTrimmed
+            Write-AzureDevOpsErrorDetail "Exception testing $($targetDisplayName): $($_.Exception.Message)" $exceptionTrimmed
             if ($exceptionText) { Write-Host $exceptionText }
             $restoreTestResults += @{ Tool = 'dotnet'; DisplayName = $targetDisplayName; Version = $sdkConfig.Version; Success = $false; Error = $_.Exception.Message; Details = $exceptionTrimmed }
         } finally {
@@ -534,9 +529,6 @@ try {
 
                     Write-Host "Adding Humanizer package reference..."
                     $msbuildAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion, "--no-restore")
-                    foreach ($source in $packageSources) {
-                        $msbuildAddPackageArguments += @("--source", $source)
-                    }
                     $msbuildAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $msbuildAddPackageArguments -WorkingDirectory (Get-Location).Path
                     if ($msbuildAddPackageResult.ExitCode -ne 0) {
                         Publish-RestoreFailure "Restore validation failed for $msbuildDisplayName while adding Humanizer package reference" $msbuildAddPackageResult
@@ -569,7 +561,7 @@ try {
                 } catch {
                     $exceptionText = $_ | Out-String
                     $exceptionTrimmed = $exceptionText.Trim()
-                    Write-AzureDevOpsErrorDetail "Exception testing $msbuildDisplayName: $($_.Exception.Message)" $exceptionTrimmed
+                    Write-AzureDevOpsErrorDetail "Exception testing $($msbuildDisplayName): $($_.Exception.Message)" $exceptionTrimmed
                     if ($exceptionText) { Write-Host $exceptionText }
                     $restoreTestResults += @{ Tool = 'MSBuild'; DisplayName = $msbuildDisplayName; Version = $msbuildVersion; Path = $msbuildPath; Success = $false; Error = $_.Exception.Message; Details = $exceptionTrimmed }
                 } finally {
@@ -619,9 +611,7 @@ try {
 
     Write-Host "Adding Humanizer package reference..."
     $globalAddPackageArguments = @("add", "package", "Humanizer", "--version", $PackageVersion)
-    foreach ($source in $packageSources) {
-        $globalAddPackageArguments += @("--source", $source)
-    }
+    
     $globalAddPackageResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $globalAddPackageArguments -WorkingDirectory (Get-Location).Path
     if ($globalAddPackageResult.ExitCode -ne 0) {
         Write-AzureDevOpsErrorDetail "Failed to add Humanizer package reference" $globalAddPackageResult.CombinedOutput
