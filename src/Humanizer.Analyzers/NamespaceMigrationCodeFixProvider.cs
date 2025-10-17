@@ -80,7 +80,7 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         if (root is CompilationUnitSyntax compilationUnit)
         {
             var hasHumanizerUsing = compilationUnit.Usings.Any(static u => 
-                u.Name?.ToString() == "Humanizer");
+                u.Name?.ToFullString() == "Humanizer");
 
             if (hasHumanizerUsing)
             {
