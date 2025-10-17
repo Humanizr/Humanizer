@@ -23,6 +23,7 @@ jobs:
   benchmark:
     name: Run Benchmarks (${{ matrix.kind }})
     runs-on: ubuntu-latest
+    timeout-minutes: 180
     env:
       BASELINE_VERSION: ${{ inputs.baselineVersion || '2.14.1' }}
     strategy:
@@ -31,15 +32,17 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      
-      - name: Setup .NET
+
+      - name: Setup .NET 8,10
         uses: actions/setup-dotnet@v5
         with:
-          global-json-file: global.json
-      
+          dotnet-version: |
+            8.0
+            10.0
+                
       - name: Display run information
         run: |
           echo "## Benchmark Run: ${{ matrix.kind }}" >> $GITHUB_STEP_SUMMARY
@@ -52,29 +55,23 @@ jobs:
       - name: Build Benchmarks (baseline)
         if: matrix.kind == 'baseline'
         run: |
-          dotnet build src/Benchmarks/Benchmarks.csproj -c Release \
-            /p:UseBaselinePackage=true \
-            /p:BaselinePackageVersion=${{ env.BASELINE_VERSION }}
-      
+          out="artifacts/baseline"
+          mkdir -p "$out"
+          dotnet run src/Humanizer/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -p:UseBaselinePackage=true -p:BaselinePackageVersion=${{ env.BASELINE_VERSION }} -- --filter '*' --runtimes net8.0 net10.0 --statisticalTest 5% --exporters JSON GitHub --artifacts "$out" --join
+         
       - name: Build Benchmarks (current)
         if: matrix.kind == 'current'
         run: |
-          dotnet build src/Benchmarks/Benchmarks.csproj -c Release \
-            /p:UseBaselinePackage=false
-      
-      - name: Run Benchmarks
-        run: |
-          cd src/Benchmarks
-          dotnet bin/Release/net10.0/Benchmarks.dll --filter '*' --exporters fulljson markdown
-      
-      - name: Append Markdown Results to Summary
-        run: |
+          out="artifacts/current"
+          mkdir -p "$out"
+          dotnet run src/Humanizer/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -- --filter '*' --runtimes net8.0 net10.0 --statisticalTest 5% --exporters JSON GitHub --artifacts "$out" --join
+
           # Find all markdown files and append them to the summary
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Benchmark Results (${{ matrix.kind }})" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          for MD in src/Benchmarks/BenchmarkDotNet.Artifacts/results/*-report-github.md; do
+          for MD in $out/**/*.md; do
             if [ -f "$MD" ]; then
               cat "$MD" >> $GITHUB_STEP_SUMMARY
               echo "" >> $GITHUB_STEP_SUMMARY
@@ -85,14 +82,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: humanizer-bdn-${{ matrix.kind }}-json
-          path: src/Benchmarks/BenchmarkDotNet.Artifacts/results/*-report-full.json
+          path: artifacts/${{ matrix.kind }}/*.json
           retention-days: 7
       
       - name: Upload All Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: humanizer-bdn-${{ matrix.kind }}-all
-          path: src/Benchmarks/BenchmarkDotNet.Artifacts/
+          path: artifacts/${{ matrix.kind }}/
           retention-days: 7
 
   compare:
@@ -122,24 +119,17 @@ jobs:
       
       - name: Clone and Build ResultsComparer
         run: |
-          git clone --depth 1 https://github.com/dotnet/performance
-          dotnet build performance/src/tools/ResultsComparer -c Release
+          git clone --depth 1 https://github.com/dotnet/performance          
       
       - name: Run ResultsComparer
         run: |
           BASE=$(pwd)/baseline
           DIFF=$(pwd)/current
           
-          # Find the ResultsComparer DLL
-          DOTNET_PERF=$(find performance/artifacts/bin/ResultsComparer/Release -name "ResultsComparer.dll" | head -n 1)
-          
-          if [ ! -f "$DOTNET_PERF" ]; then
-            echo "Error: ResultsComparer.dll not found"
-            exit 1
-          fi
-          
-          # Run comparison with 5% threshold
-          dotnet "$DOTNET_PERF" --base "$BASE" --diff "$DIFF" --threshold "5%" > diff.md || true
+          dotnet run performance/src/tools/ResultsComparer -c Release \
+            --base $(pwd)/baseline \
+            --diff $(pwd)/current \
+            --threshold "5%" > diff.md || true           
       
       - name: Append Comparison to Summary
         run: |
