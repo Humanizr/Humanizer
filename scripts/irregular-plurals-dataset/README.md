@@ -31,6 +31,21 @@ cd scripts/irregular-plurals-dataset
 python3 build_dataset.py
 ```
 
+### Viewing Example Usage
+
+To see examples of how to use the generated dataset:
+
+```bash
+python3 example_usage.py
+```
+
+This will demonstrate:
+- Loading the JSON dataset
+- Filtering by category (internal vowel shift, Latin/Greek, etc.)
+- Finding words with multiple plural forms
+- Searching by domain tags (mathematics, biology, etc.)
+- Creating lookup functions for programmatic access
+
 ### Output
 
 The script generates the following files in the `output/` directory:
