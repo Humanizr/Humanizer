@@ -30,12 +30,16 @@
   <files>
     <file src="Humanizer\bin\Release\netstandard2.0\Humanizer.dll" target="lib\netstandard2.0" />
     <file src="Humanizer\bin\Release\netstandard2.0\Humanizer.xml" target="lib\netstandard2.0" />
+    <file src="Humanizer.Core.Facade\bin\Release\netstandard2.0\Humanizer.Core.dll" target="lib\netstandard2.0" />
     <file src="Humanizer\bin\Release\net48\Humanizer.dll" target="lib\net48" />
     <file src="Humanizer\bin\Release\net48\Humanizer.xml" target="lib\net48" />
+    <file src="Humanizer.Core.Facade\bin\Release\net48\Humanizer.Core.dll" target="lib\net48" />
     <file src="Humanizer\bin\Release\net8.0\Humanizer.dll" target="lib\net8.0" />
     <file src="Humanizer\bin\Release\net8.0\Humanizer.xml" target="lib\net8.0" />
+    <file src="Humanizer.Core.Facade\bin\Release\net8.0\Humanizer.Core.dll" target="lib\net8.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.dll" target="lib\net10.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.xml" target="lib\net10.0" />
+    <file src="Humanizer.Core.Facade\bin\Release\net10.0\Humanizer.Core.dll" target="lib\net10.0" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

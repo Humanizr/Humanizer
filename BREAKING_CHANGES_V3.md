@@ -29,7 +29,7 @@ Humanizer 3.0 introduces a major simplification of the namespace structure by co
 |-------------|-------|--------------|
 | Namespace-only changes | 93 types | **Source-breaking** (requires using statement updates) |
 | Nullable annotations | Various APIs | **Warning-level** (improves null safety, may produce warnings) |
-| Binary compatibility | N/A | **Breaking** (recompilation required) |
+| Binary compatibility | Maintained via facade | **Compatible** (recompilation optional) |
 
 ---
 
@@ -204,7 +204,7 @@ var formatter = new Humanizer.DefaultFormatter(culture);
 
 ### Step 3: Recompile Your Application
 
-**Important**: Assemblies compiled against Humanizer v2.x will need to be **recompiled** to work with v3.0. Binary compatibility is not maintained for this major version change.
+**Good News**: Assemblies compiled against Humanizer v2.x will work with v3.0 **without recompilation**. Binary compatibility is maintained through a facade assembly (`Humanizer.Core.dll`) that contains TypeForwardedTo attributes redirecting old namespace references to the new `Humanizer.dll` assembly.
 
 ### Step 4: Address Nullable Warnings (Optional)
 
@@ -263,13 +263,27 @@ Get-ChildItem -Recurse -Filter *.cs | ForEach-Object {
 
 ### Q: Will my compiled application work with Humanizer 3.0 without recompiling?
 
-**A:** No. Due to the namespace changes, assemblies compiled against v2.x will need to be recompiled against v3.0. This is a binary-breaking change, which is why it's a major version increment.
+**A:** Yes! Binary compatibility is maintained through a facade assembly. The Humanizer.Core package includes:
+- `Humanizer.dll` - Main implementation with all types in the root `Humanizer` namespace
+- `Humanizer.Core.dll` - Facade assembly with TypeForwardedTo attributes that redirect old namespace references
 
-### Q: Can I use TypeForwardedTo attributes to maintain binary compatibility?
+Applications compiled against v2.x will work without recompilation. However, recompiling is still recommended to take advantage of updated signatures and nullable reference types.
 
-**A:** No. TypeForwardedTo only works when types move between different assemblies. Since the namespace consolidation happened within the same assembly (Humanizer.dll), TypeForwardedTo cannot be used.
+### Q: How does the TypeForwardedTo facade work?
 
-The only way to maintain binary compatibility would be to ship separate "shim" assemblies (e.g., `Humanizer.Bytes.dll`) that only contain TypeForwardedTo attributes pointing to the main Humanizer.dll. However, this would add complexity and is not the approach taken for v3.0.
+**A:** The solution uses a clever assembly naming strategy:
+
+1. The main assembly is named `Humanizer.dll` (contains all implementations)
+2. A facade assembly named `Humanizer.Core.dll` contains only TypeForwardedTo attributes
+3. Both assemblies are included in the Humanizer.Core NuGet package
+
+When v2.x compiled code references types like `[Humanizer.Core]Humanizer.Bytes.ByteSize`:
+- The runtime loads `Humanizer.Core.dll`
+- Finds the TypeForwardedTo attribute: `[assembly: TypeForwardedTo(typeof(Humanizer.ByteSize))]`
+- Redirects to `[Humanizer]Humanizer.ByteSize` in the main assembly
+- ✅ Binary compatibility achieved!
+
+This approach maintains the same package name (Humanizer.Core) while leveraging the assembly boundary needed for TypeForwardedTo to function.
 
 ### Q: Are there any API removals I should know about?
 

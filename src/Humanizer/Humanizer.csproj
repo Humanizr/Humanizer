@@ -50,6 +50,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Humanizer.Tests" />
     <InternalsVisibleTo Include="Benchmarks" />
+    <InternalsVisibleTo Include="Humanizer.Core" />
   </ItemGroup>
   
 

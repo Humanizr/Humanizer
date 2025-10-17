@@ -15,7 +15,7 @@
 **Bottom Line:**
 - ✅ **0 critical breaking changes** (both flagged cases verified as false positives)
 - ✅ **~80% of flagged changes** are namespace-related, not actual API removals
-- ✅ **Binary compatibility achievable** with type forwarding attributes
+- ✅ **Binary compatibility maintained** with facade assembly containing type forwarding attributes
 - ⚠️ **Source compatibility requires** updating `using` statements
 - 📝 **Manual verification recommended** for ~80 high-severity flagged items
 
@@ -91,7 +91,7 @@ The most significant change is the consolidation of multiple sub-namespaces into
 
 **Impact:**
 - **Source compatibility:** BREAKING - users must update `using` statements
-- **Binary compatibility:** Can be maintained with `[TypeForwardedTo]` attributes
+- **Binary compatibility:** Maintained via facade assembly `Humanizer.Core.dll` with `[TypeForwardedTo]` attributes
 - **Recommendation:** Add type forwarding to minimize upgrade friction
 
 ### 2. Nullable Reference Types
@@ -100,7 +100,7 @@ Nullable reference types have been enabled across the codebase, with 1 signature
 
 **Impact:**
 - **Source compatibility:** Compatible (warnings only)
-- **Binary compatibility:** Compatible
+- **Binary compatibility:** Maintained (no recompilation required)
 - **Recommendation:** No mitigation needed - this is a quality improvement
 
 ### 3. True Breaking Changes
