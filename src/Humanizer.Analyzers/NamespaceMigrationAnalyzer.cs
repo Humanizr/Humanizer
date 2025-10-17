@@ -2,6 +2,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 
 namespace Humanizer.Analyzers;
@@ -16,7 +17,7 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
     private static readonly LocalizableString MessageFormat = "The namespace '{0}' has been consolidated into 'Humanizer' in v3. Update your using directive.";
     private static readonly LocalizableString Description = "Humanizer v3 consolidates sub-namespaces into the root Humanizer namespace. This using directive should be updated to 'using Humanizer;'.";
 
-    private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+    private static readonly DiagnosticDescriptor Rule = new(
         DiagnosticId,
         Title,
         MessageFormat,
@@ -26,23 +27,24 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         description: Description);
 
     // All the old namespaces that were consolidated in v3
-    // Using StringComparer.Ordinal for optimal performance
-    private static readonly ImmutableHashSet<string> OldNamespaces = ImmutableHashSet.Create(
-        StringComparer.Ordinal,
-        "Humanizer.Bytes",
-        "Humanizer.Localisation",
-        "Humanizer.Localisation.Formatters",
-        "Humanizer.Localisation.NumberToWords",
-        "Humanizer.DateTimeHumanizeStrategy",
-        "Humanizer.Configuration",
-        "Humanizer.Localisation.DateToOrdinalWords",
-        "Humanizer.Localisation.Ordinalizers",
-        "Humanizer.Inflections",
-        "Humanizer.Localisation.CollectionFormatters",
-        "Humanizer.Localisation.TimeToClockNotation"
-    );
+    // Using FrozenSet for optimal lookup performance
+    private static readonly FrozenSet<string> OldNamespaces = FrozenSet.ToFrozenSet(
+        [
+            "Humanizer.Bytes",
+            "Humanizer.Localisation",
+            "Humanizer.Localisation.Formatters",
+            "Humanizer.Localisation.NumberToWords",
+            "Humanizer.DateTimeHumanizeStrategy",
+            "Humanizer.Configuration",
+            "Humanizer.Localisation.DateToOrdinalWords",
+            "Humanizer.Localisation.Ordinalizers",
+            "Humanizer.Inflections",
+            "Humanizer.Localisation.CollectionFormatters",
+            "Humanizer.Localisation.TimeToClockNotation"
+        ],
+        StringComparer.Ordinal);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 
     public override void Initialize(AnalysisContext context)
     {
@@ -55,9 +57,10 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
 
     private static void AnalyzeUsingDirective(SyntaxNodeAnalysisContext context)
     {
-        var usingDirective = (UsingDirectiveSyntax)context.Node;
+        if (context.Node is not UsingDirectiveSyntax usingDirective)
+            return;
         
-        if (usingDirective.Name == null)
+        if (usingDirective.Name is null)
             return;
 
         var namespaceName = usingDirective.Name.ToString();
@@ -71,7 +74,8 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
 
     private static void AnalyzeQualifiedName(SyntaxNodeAnalysisContext context)
     {
-        var qualifiedName = (QualifiedNameSyntax)context.Node;
+        if (context.Node is not QualifiedNameSyntax qualifiedName)
+            return;
         
         // Skip if this is part of a using directive (already handled above)
         if (qualifiedName.Parent is UsingDirectiveSyntax)
@@ -80,7 +84,6 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         var fullName = qualifiedName.ToString();
         
         // Check if any old namespace is used as a prefix
-        // Iterate in reverse order to match longer namespaces first (more specific)
         foreach (var oldNamespace in OldNamespaces)
         {
             if (IsNamespaceMatch(fullName, oldNamespace))
@@ -92,20 +95,15 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    private static bool IsNamespaceMatch(string fullName, string oldNamespace)
+    private static bool IsNamespaceMatch(ReadOnlySpan<char> fullName, ReadOnlySpan<char> oldNamespace)
     {
         // Exact match
         if (fullName.Length == oldNamespace.Length)
-            return string.Equals(fullName, oldNamespace, StringComparison.Ordinal);
+            return fullName.Equals(oldNamespace, StringComparison.Ordinal);
 
-        // Prefix match with dot separator (avoid allocating with StartsWith + concatenation)
-        if (fullName.Length > oldNamespace.Length && 
-            fullName[oldNamespace.Length] == '.' &&
-            fullName.AsSpan().StartsWith(oldNamespace.AsSpan(), StringComparison.Ordinal))
-        {
-            return true;
-        }
-
-        return false;
+        // Prefix match with dot separator
+        return fullName.Length > oldNamespace.Length
+            && fullName[oldNamespace.Length] == '.'
+            && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
     }
 }
