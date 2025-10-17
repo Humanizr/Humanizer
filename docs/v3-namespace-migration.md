@@ -58,23 +58,11 @@ public class Example
 
 ## Automated Migration with Roslyn Analyzer
 
-We've created a Roslyn analyzer (`Humanizer.Analyzers`) that automatically detects and fixes namespace usage.
+Humanizer v3 includes a Roslyn analyzer that automatically detects and fixes namespace usage. No separate installation is required—the analyzer is bundled with the `Humanizer.Core` package starting from v3.0.0.
 
-### Installation
+### Usage
 
-Add the analyzer as a development dependency to your project:
-
-```xml
-<ItemGroup>
-  <PackageReference Include="Humanizer.Analyzers" Version="3.0.0" PrivateAssets="all" />
-</ItemGroup>
-```
-
-Or via CLI:
-```bash
-dotnet add package Humanizer.Analyzers --version 3.0.0
-```
-
+Once you have installed or updated to `Humanizer.Core` v3.0.0 or later, the analyzer will be available automatically in your project.
 ### Usage in Visual Studio / Rider
 
 1. The analyzer will highlight old namespace usages with warnings (HUMANIZER001)
