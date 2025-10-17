@@ -13,7 +13,7 @@ internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberCo
     private static Regex OrdinalSuffixRegex() => _ordinalSuffixRegex;
 #endif
 
-    private static readonly Dictionary<string, int> NumbersMap = new()
+    private static readonly FrozenDictionary<string, int> NumbersMap = new Dictionary<string, int>
     {
         {"zero",0}, {"one",1}, {"two",2}, {"three",3}, {"four",4}, {"five",5},
         {"six",6}, {"seven",7}, {"eight",8}, {"nine",9}, {"ten",10},
@@ -23,9 +23,9 @@ internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberCo
         {"fifty", 50}, {"sixty", 60}, {"seventy", 70}, {"eighty", 80},
         {"ninety", 90}, {"hundred", 100}, {"thousand", 1000},
         {"million", 1_000_000}, {"billion", 1_000_000_000}
-    };
+    }.ToFrozenDictionary();
 
-    private static readonly Dictionary<string, int> OrdinalsMap = new()
+    private static readonly FrozenDictionary<string, int> OrdinalsMap = new Dictionary<string, int>
     {
         {"first",1}, {"second",2}, {"third",3}, {"fourth",4}, {"fifth",5},
         {"sixth",6}, {"seventh",7}, {"eighth",8}, {"ninth",9}, {"tenth",10},
@@ -34,7 +34,7 @@ internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberCo
         {"nineteenth",19}, {"twentieth",20}, {"thirtieth",30},
         {"fortieth",40}, {"fiftieth",50}, {"sixtieth",60}, {"seventieth",70},
         {"eightieth",80}, {"ninetieth",90}, {"hundredth",100}, {"thousandth",1000}
-    };
+    }.ToFrozenDictionary();
 
     public override int Convert(string words)
     {

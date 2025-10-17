@@ -6,7 +6,7 @@ class ArmenianNumberToWordsConverter :
     static readonly string[] UnitsMap = ["զրո", "մեկ", "երկու", "երեք", "չորս", "հինգ", "վեց", "յոթ", "ութ", "ինը", "տաս", "տասնմեկ", "տասներկու", "տասներեք", "տասնչորս", "տասնհինգ", "տասնվեց", "տասնյոթ", "տասնութ", "տասնինը"];
     static readonly string[] TensMap = ["զրո", "տաս", "քսան", "երեսուն", "քառասուն", "հիսուն", "վաթսուն", "յոթանասուն", "ութսուն", "իննսուն"];
 
-    static readonly Dictionary<long, string> OrdinalExceptions = new()
+    static readonly FrozenDictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
     {
         {
             0, "զրոյական"
@@ -23,7 +23,7 @@ class ArmenianNumberToWordsConverter :
         {
             4, "չորրորդ"
         }
-    };
+    }.ToFrozenDictionary();
 
     public override string Convert(long number) =>
         ConvertImpl(number, false);
