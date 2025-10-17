@@ -14,6 +14,10 @@
   <!-- Use baseline package from NuGet for comparison -->
   <ItemGroup Condition="'$(UseBaselinePackage)' == 'true'">
     <PackageReference Include="Humanizer" VersionOverride="$(BaselinePackageVersion)" />
+    <!-- Exclude benchmarks that use types not available in baseline version -->
+    <Compile Remove="EnglishToWordsBenchmark.cs" />
+    <Compile Remove="TimeOnlyToClockNotationConverterBenchmarks.cs" />
+    <Compile Remove="WordsToNumberBenchmarks.cs" />
   </ItemGroup>
 
   <!-- Use current source code from the repo -->
