@@ -1,0 +1,769 @@
+==============================================================================================================
+                              HUMANIZER 3.0 BREAKING CHANGES ANALYSIS
+                                   v2.14.1 → main branch
+==============================================================================================================
+
+Loading API surfaces...
+  v2.14.1 (NET Core 6.0):   608 API members
+  main (NET 10.0):          629 API members
+  main (NET 8.0):           629 API members
+  main (NET 4.8):           565 API members
+
+Analyzing changes...
+Total changes detected: 437
+
+==============================================================================================================
+EXECUTIVE SUMMARY
+==============================================================================================================
+
+Total API Changes:                 437
+  Namespace changes only:           93
+  Nullable annotation changes:       1
+  True breaking changes:           343
+
+Changes by Type:
+  Removed API                             :  313
+  Namespace change                        :   93
+  Namespace change + Signature change     :   30
+  Nullable annotations added              :    1
+
+Changes by Severity:
+  Critical    :    2
+  High        :  100
+  Medium      :  249
+  Low         :   86
+
+Mitigation Difficulty (excluding N/A):
+  Easy           :  349
+  Moderate       :   52
+  Hard           :   35
+
+==============================================================================================================
+HIGH-LEVEL RECOMMENDATIONS
+==============================================================================================================
+
+1. NAMESPACE CONSOLIDATION
+   ----------------------------------------------------------------------------------------------------------
+   Humanizer.Bytes                               → Humanizer                                     ( 30 members)
+   Humanizer.Configuration                       → Humanizer                                     (  5 members)
+   Humanizer.DateTimeHumanizeStrategy            → Humanizer                                     (  8 members)
+   Humanizer.Inflections                         → Humanizer                                     (  3 members)
+   Humanizer.Localisation                        → Humanizer                                     ( 17 members)
+   Humanizer.Localisation.CollectionFormatters   → Humanizer                                     (  2 members)
+   Humanizer.Localisation.DateToOrdinalWords     → Humanizer                                     (  4 members)
+   Humanizer.Localisation.Formatters             → Humanizer                                     ( 10 members)
+   Humanizer.Localisation.NumberToWords          → Humanizer                                     (  9 members)
+   Humanizer.Localisation.Ordinalizers           → Humanizer                                     (  4 members)
+   Humanizer.Localisation.TimeToClockNotation    → Humanizer                                     (  1 members)
+
+   Impact: 93 members moved to Humanizer namespace (flattened structure)
+   Action: Add [TypeForwardedTo] attributes for binary compatibility
+   Action: Document in migration guide that users should update using statements
+
+2. NULLABLE REFERENCE TYPES
+   ----------------------------------------------------------------------------------------------------------
+   1 signatures updated with nullable annotations
+   Impact: Source compatible but may produce new compiler warnings
+   Action: No mitigation needed - this is a quality improvement
+
+3. TRUE BREAKING CHANGES
+   ----------------------------------------------------------------------------------------------------------
+   Total: 343 breaking changes
+   Critical: 2, High: 100, Medium: 219
+
+   CRITICAL ISSUES TO ADDRESS:
+     • Humanizer.Bytes.ByteRate::Humanize
+       Removed API: Significant API removal - may be intentional breaking change
+     • Humanizer.Bytes.ByteRate::Humanize
+       Removed API: Significant API removal - may be intentional breaking change
+
+==============================================================================================================
+DETAILED BREAKING CHANGES BY CATEGORY
+==============================================================================================================
+
+
+==============================================================================================================
+NAMESPACE CHANGES (93 members)
+==============================================================================================================
+
+These changes require updating using statements but maintain binary compatibility with
+[TypeForwardedTo] attributes. They do NOT break compiled assemblies.
+
+ 1. Type: ByteRate
+    From: Humanizer.Bytes
+    To:   Humanizer
+    Members: 1
+
+ 2. Type: ByteSize
+    From: Humanizer.Bytes
+    To:   Humanizer
+    Members: 29
+
+ 3. Type: LocaliserRegistry
+    From: Humanizer.Configuration
+    To:   Humanizer
+    Members: 5
+
+ 4. Type: DefaultDateOnlyHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+ 5. Type: DefaultDateTimeHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+ 6. Type: DefaultDateTimeOffsetHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+ 7. Type: DefaultTimeOnlyHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+ 8. Type: PrecisionDateOnlyHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+ 9. Type: PrecisionDateTimeHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+10. Type: PrecisionDateTimeOffsetHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+11. Type: PrecisionTimeOnlyHumanizeStrategy
+    From: Humanizer.DateTimeHumanizeStrategy
+    To:   Humanizer
+    Members: 1
+
+12. Type: Vocabulary
+    From: Humanizer.Inflections
+    To:   Humanizer
+    Members: 3
+
+13. Type: ICollectionFormatter
+    From: Humanizer.Localisation.CollectionFormatters
+    To:   Humanizer
+    Members: 2
+
+14. Type: DataUnit
+    From: Humanizer.Localisation
+    To:   Humanizer
+    Members: 6
+
+15. Type: IDateOnlyToOrdinalWordConverter
+    From: Humanizer.Localisation.DateToOrdinalWords
+    To:   Humanizer
+    Members: 2
+
+16. Type: IDateToOrdinalWordConverter
+    From: Humanizer.Localisation.DateToOrdinalWords
+    To:   Humanizer
+    Members: 2
+
+17. Type: DefaultFormatter
+    From: Humanizer.Localisation.Formatters
+    To:   Humanizer
+    Members: 7
+
+18. Type: IFormatter
+    From: Humanizer.Localisation.Formatters
+    To:   Humanizer
+    Members: 3
+
+19. Type: INumberToWordsConverter
+    From: Humanizer.Localisation.NumberToWords
+    To:   Humanizer
+    Members: 9
+
+20. Type: IOrdinalizer
+    From: Humanizer.Localisation.Ordinalizers
+    To:   Humanizer
+    Members: 4
+
+21. Type: ResourceKeys
+    From: Humanizer.Localisation
+    To:   Humanizer
+    Members: 1
+
+22. Type: Tense
+    From: Humanizer.Localisation
+    To:   Humanizer
+    Members: 2
+
+23. Type: ITimeOnlyToClockNotationConverter
+    From: Humanizer.Localisation.TimeToClockNotation
+    To:   Humanizer
+    Members: 1
+
+24. Type: TimeUnit
+    From: Humanizer.Localisation
+    To:   Humanizer
+    Members: 8
+
+
+==============================================================================================================
+NULLABLE ANNOTATION CHANGES (1 members)
+==============================================================================================================
+
+These are source-compatible changes that may produce new nullability warnings.
+No mitigation required.
+
+ 1. Humanizer.ITruncator::Truncate
+    Old: string Truncate(string value, int length, string truncationString, Humanizer.TruncateFrom 
+    New: string? Truncate(string? value, int length, string? truncationString, Humanizer.TruncateFr
+
+
+==============================================================================================================
+CRITICAL SEVERITY BREAKING CHANGES (2 changes)
+==============================================================================================================
+
+ 1. Removed API
+    Type: Humanizer.Bytes.ByteRate
+    Member: Humanize
+    Old: public string Humanize(Humanizer.Localisation.TimeUnit timeUnit = 1) { }
+    New: [REMOVED]
+    Mitigation (Hard): Significant API removal - may be intentional breaking change
+
+ 2. Removed API
+    Type: Humanizer.Bytes.ByteRate
+    Member: Humanize
+    Old: public string Humanize(string format, Humanizer.Localisation.TimeUnit timeUnit = 1, System
+    New: [REMOVED]
+    Mitigation (Hard): Significant API removal - may be intentional breaking change
+
+
+==============================================================================================================
+HIGH SEVERITY BREAKING CHANGES (100 changes)
+==============================================================================================================
+
+ 1. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this Humanizer.Bytes.ByteSize input, string format = null) {
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 2. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this Humanizer.Bytes.ByteSize input, System.IFormatProvider 
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 3. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this Humanizer.Bytes.ByteSize input, string format, System.I
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 4. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.DateTime input, System.Nullable<bool> utcDate = 
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 5. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.Nullable<System.DateTime> input, System.Nullable
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 6. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.DateTimeOffset input, System.Nullable<System.Dat
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 7. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.Nullable<System.DateTimeOffset> input, System.Nu
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 8. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.DateOnly input, System.Nullable<System.DateOnly>
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 9. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.Nullable<System.DateOnly> input, System.Nullable
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+10. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.TimeOnly input, System.Nullable<System.TimeOnly>
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+11. Removed API
+    Type: Humanizer.static DateHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.Nullable<System.TimeOnly> input, System.Nullable
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+12. Removed API
+    Type: Humanizer.static DateToOrdinalWordsExtensions
+    Member: ToOrdinalWords
+    Old: public static string ToOrdinalWords(this System.DateTime input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+13. Removed API
+    Type: Humanizer.static DateToOrdinalWordsExtensions
+    Member: ToOrdinalWords
+    Old: public static string ToOrdinalWords(this System.DateTime input, Humanizer.GrammaticalCase 
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+14. Removed API
+    Type: Humanizer.static DateToOrdinalWordsExtensions
+    Member: ToOrdinalWords
+    Old: public static string ToOrdinalWords(this System.DateOnly input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+15. Removed API
+    Type: Humanizer.static DateToOrdinalWordsExtensions
+    Member: ToOrdinalWords
+    Old: public static string ToOrdinalWords(this System.DateOnly input, Humanizer.GrammaticalCase 
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+16. Removed API
+    Type: Humanizer.static EnumHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.Enum input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+17. Removed API
+    Type: Humanizer.static EnumHumanizeExtensions
+    Member: Humanize
+    Old: public static string Humanize(this System.Enum input, Humanizer.LetterCasing casing) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+18. Removed API
+    Type: Humanizer.static InflectorExtensions
+    Member: Camelize
+    Old: public static string Camelize(this string input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+19. Removed API
+    Type: Humanizer.static InflectorExtensions
+    Member: Dasherize
+    Old: public static string Dasherize(this string underscoredWord) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+20. Removed API
+    Type: Humanizer.static InflectorExtensions
+    Member: Hyphenate
+    Old: public static string Hyphenate(this string underscoredWord) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+... and 80 more changes in this severity level
+
+
+==============================================================================================================
+MEDIUM SEVERITY BREAKING CHANGES (219 changes)
+==============================================================================================================
+
+ 1. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bits
+    Old: public static Humanizer.Bytes.ByteSize Bits(this byte input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 2. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bits
+    Old: public static Humanizer.Bytes.ByteSize Bits(this sbyte input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 3. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bits
+    Old: public static Humanizer.Bytes.ByteSize Bits(this short input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 4. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bits
+    Old: public static Humanizer.Bytes.ByteSize Bits(this ushort input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 5. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bits
+    Old: public static Humanizer.Bytes.ByteSize Bits(this int input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 6. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bits
+    Old: public static Humanizer.Bytes.ByteSize Bits(this uint input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 7. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bits
+    Old: public static Humanizer.Bytes.ByteSize Bits(this long input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 8. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this byte input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+ 9. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this sbyte input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+10. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this short input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+11. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this ushort input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+12. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this int input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+13. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this uint input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+14. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this double input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+15. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Bytes
+    Old: public static Humanizer.Bytes.ByteSize Bytes(this long input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+16. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Gigabytes
+    Old: public static Humanizer.Bytes.ByteSize Gigabytes(this byte input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+17. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Gigabytes
+    Old: public static Humanizer.Bytes.ByteSize Gigabytes(this sbyte input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+18. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Gigabytes
+    Old: public static Humanizer.Bytes.ByteSize Gigabytes(this short input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+19. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Gigabytes
+    Old: public static Humanizer.Bytes.ByteSize Gigabytes(this ushort input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+20. Removed API
+    Type: Humanizer.static ByteSizeExtensions
+    Member: Gigabytes
+    Old: public static Humanizer.Bytes.ByteSize Gigabytes(this int input) { }
+    New: [REMOVED]
+    Mitigation (Easy): Add extension method back as compatibility shim, delegate to new implementation
+
+... and 199 more changes in this severity level
+
+
+==============================================================================================================
+LOW SEVERITY BREAKING CHANGES (22 changes)
+==============================================================================================================
+
+ 1. Namespace change + Signature change
+    Type: Humanizer.Configuration.LocaliserRegistry
+    Member: ResolveForCulture
+    Old: public TLocaliser ResolveForCulture(System.Globalization.CultureInfo culture) { }
+    New: public TLocaliser ResolveForCulture(System.Globalization.CultureInfo? culture) { }
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 2. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.DefaultDateOnlyHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.DateOnly input, System.DateOnly comparisonBase, System.Globa
+    New: public string Humanize(System.DateOnly input, System.DateOnly comparisonBase, System.Globa
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 3. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.DefaultDateTimeHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globa
+    New: public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globa
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 4. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.DefaultDateTimeOffsetHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, 
+    New: public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, 
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 5. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.DefaultTimeOnlyHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globa
+    New: public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globa
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 6. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.IDateOnlyHumanizeStrategy
+    Member: Humanize
+    Old: string Humanize(System.DateOnly input, System.DateOnly comparisonBase, System.Globalizatio
+    New: string Humanize(System.DateOnly input, System.DateOnly comparisonBase, System.Globalizatio
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 7. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.IDateTimeHumanizeStrategy
+    Member: Humanize
+    Old: string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalizatio
+    New: string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globalizatio
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 8. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.IDateTimeOffsetHumanizeStrategy
+    Member: Humanize
+    Old: string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.
+    New: string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, System.
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+ 9. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.ITimeOnlyHumanizeStrategy
+    Member: Humanize
+    Old: string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalizatio
+    New: string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globalizatio
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+10. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.PrecisionDateOnlyHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.DateOnly input, System.DateOnly comparisonBase, System.Globa
+    New: public string Humanize(System.DateOnly input, System.DateOnly comparisonBase, System.Globa
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+11. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.PrecisionDateTimeHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globa
+    New: public string Humanize(System.DateTime input, System.DateTime comparisonBase, System.Globa
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+12. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.PrecisionDateTimeOffsetHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, 
+    New: public string Humanize(System.DateTimeOffset input, System.DateTimeOffset comparisonBase, 
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+13. Namespace change + Signature change
+    Type: Humanizer.DateTimeHumanizeStrategy.PrecisionTimeOnlyHumanizeStrategy
+    Member: Humanize
+    Old: public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globa
+    New: public string Humanize(System.TimeOnly input, System.TimeOnly comparisonBase, System.Globa
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+14. Namespace change + Signature change
+    Type: Humanizer.Inflections.Vocabulary
+    Member: AddIrregular
+    Old: public void AddIrregular(string singular, string plural, bool matchEnding = True) { }
+    New: public void AddIrregular(string singular, string plural, bool matchEnding = true) { }
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+15. Namespace change + Signature change
+    Type: Humanizer.Inflections.Vocabulary
+    Member: Pluralize
+    Old: public string Pluralize(string word, bool inputIsKnownToBeSingular = True) { }
+    New: public string? Pluralize(string? word, bool inputIsKnownToBeSingular = true) { }
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+16. Namespace change + Signature change
+    Type: Humanizer.Inflections.Vocabulary
+    Member: Singularize
+    Old: public string Singularize(string word, bool inputIsKnownToBePlural = True, bool skipSimple
+    New: public string? Singularize(string? word, bool inputIsKnownToBePlural = true, bool skipSimp
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+17. Namespace change + Signature change
+    Type: Humanizer.Localisation.CollectionFormatters.ICollectionFormatter
+    Member: N/A
+    Old: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, st
+    New: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, st
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+18. Namespace change + Signature change
+    Type: Humanizer.Localisation.CollectionFormatters.ICollectionFormatter
+    Member: N/A
+    Old: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, ob
+    New: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, ob
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+19. Namespace change + Signature change
+    Type: Humanizer.Localisation.CollectionFormatters.ICollectionFormatter
+    Member: N/A
+    Old: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, st
+    New: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, st
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+20. Namespace change + Signature change
+    Type: Humanizer.Localisation.CollectionFormatters.ICollectionFormatter
+    Member: N/A
+    Old: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, ob
+    New: string Humanize<T>(System.Collections.Generic.IEnumerable<T> collection, System.Func<T, ob
+    Mitigation (Moderate): Address both namespace move and signature change - may need compatibility shim
+
+... and 2 more changes in this severity level
+
+
+==============================================================================================================
+PRIORITIZED MITIGATION RECOMMENDATIONS
+==============================================================================================================
+
+PRIORITY 1: MUST FIX BEFORE 3.0 (0 changes)
+Critical severity + Easy/Moderate mitigation
+--------------------------------------------------------------------------------------------------------------
+  (None - no critical issues with easy mitigation)
+
+PRIORITY 2: SHOULD FIX BEFORE 3.0 (80 changes)
+High severity + Easy mitigation
+--------------------------------------------------------------------------------------------------------------
+   1. Humanizer.static ByteSizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   2. Humanizer.static ByteSizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   3. Humanizer.static ByteSizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   4. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   5. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   6. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   7. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   8. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+   9. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+  10. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+  11. Humanizer.static DateHumanizeExtensions::Humanize
+      Add extension method back as compatibility shim, delegate to new implementation
+  12. Humanizer.static DateToOrdinalWordsExtensions::ToOrdinalWords
+      Add extension method back as compatibility shim, delegate to new implementation
+  13. Humanizer.static DateToOrdinalWordsExtensions::ToOrdinalWords
+      Add extension method back as compatibility shim, delegate to new implementation
+  14. Humanizer.static DateToOrdinalWordsExtensions::ToOrdinalWords
+      Add extension method back as compatibility shim, delegate to new implementation
+  15. Humanizer.static DateToOrdinalWordsExtensions::ToOrdinalWords
+      Add extension method back as compatibility shim, delegate to new implementation
+  ... and 65 more
+
+PRIORITY 3: CONSIDER FIXING (176 changes)
+Medium severity + Easy mitigation
+--------------------------------------------------------------------------------------------------------------
+   1. Humanizer.static ByteSizeExtensions::Bits
+   2. Humanizer.static ByteSizeExtensions::Bits
+   3. Humanizer.static ByteSizeExtensions::Bits
+   4. Humanizer.static ByteSizeExtensions::Bits
+   5. Humanizer.static ByteSizeExtensions::Bits
+   6. Humanizer.static ByteSizeExtensions::Bits
+   7. Humanizer.static ByteSizeExtensions::Bits
+   8. Humanizer.static ByteSizeExtensions::Bytes
+   9. Humanizer.static ByteSizeExtensions::Bytes
+  10. Humanizer.static ByteSizeExtensions::Bytes
+  ... and 166 more
+
+PRIORITY 4: ACCEPT AS BREAKING (57 changes)
+Hard/Not Possible mitigation OR Low severity
+--------------------------------------------------------------------------------------------------------------
+  57 changes fall into this category
+  These may be intentional refactoring or have complex migration paths
+  Document in release notes and migration guide
+
+==============================================================================================================
+FINAL STATISTICS
+==============================================================================================================
+
+API Surface Comparison:
+  v2.14.1 members:       529
+  main members:          549
+  Net change:            +20
+
+Change Breakdown:
+  Namespace changes:      93 (17.6%)
+  Nullable changes:        1 (0.2%)
+  Breaking changes:      343 (64.8%)
+  Total changed:         437 (82.6%)
+  Unchanged:              92 (17.4%)
+
+==============================================================================================================
+END OF REPORT
+==============================================================================================================
