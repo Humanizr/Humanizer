@@ -105,3 +105,6 @@ src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.receive
 docs/_site/
 docs/.jekyll-cache/
 docs/.sass-cache/
+
+# Scripts output directories
+scripts/irregular-plurals-dataset/output/
