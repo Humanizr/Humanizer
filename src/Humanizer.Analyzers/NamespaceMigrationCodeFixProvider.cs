@@ -16,6 +16,23 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
 {
     private const string Title = "Update to Humanizer namespace";
 
+    // Shared array ordered by length (longest first) for optimal matching
+    // This matches the order in the analyzer to ensure consistency
+    private static readonly string[] OldNamespaces =
+    [
+        "Humanizer.Localisation.CollectionFormatters",
+        "Humanizer.Localisation.TimeToClockNotation",
+        "Humanizer.Localisation.DateToOrdinalWords",
+        "Humanizer.DateTimeHumanizeStrategy",
+        "Humanizer.Localisation.NumberToWords",
+        "Humanizer.Localisation.Formatters",
+        "Humanizer.Localisation.Ordinalizers",
+        "Humanizer.Configuration",
+        "Humanizer.Localisation",
+        "Humanizer.Inflections",
+        "Humanizer.Bytes"
+    ];
+
     public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NamespaceMigrationAnalyzer.DiagnosticId);
 
     public sealed override FixAllProvider GetFixAllProvider()
@@ -56,17 +73,16 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         }
     }
 
-    private async Task<Document> ReplaceUsingDirectiveAsync(Document document, UsingDirectiveSyntax usingDirective, CancellationToken cancellationToken)
+    private static async Task<Document> ReplaceUsingDirectiveAsync(Document document, UsingDirectiveSyntax usingDirective, CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
         if (root == null)
             return document;
 
         // Check if "using Humanizer;" already exists
-        var compilationUnit = root as CompilationUnitSyntax;
-        if (compilationUnit != null)
+        if (root is CompilationUnitSyntax compilationUnit)
         {
-            var hasHumanizerUsing = compilationUnit.Usings.Any(u => 
+            var hasHumanizerUsing = compilationUnit.Usings.Any(static u => 
                 u.Name?.ToString() == "Humanizer");
 
             if (hasHumanizerUsing)
@@ -85,7 +101,7 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         return document.WithSyntaxRoot(updatedRoot);
     }
 
-    private async Task<Document> ReplaceQualifiedNameAsync(Document document, QualifiedNameSyntax qualifiedName, CancellationToken cancellationToken)
+    private static async Task<Document> ReplaceQualifiedNameAsync(Document document, QualifiedNameSyntax qualifiedName, CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
         if (root == null)
@@ -95,24 +111,9 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         var fullName = qualifiedName.ToString();
         string? matchedNamespace = null;
         
-        var oldNamespaces = new[]
+        foreach (var ns in OldNamespaces)
         {
-            "Humanizer.Bytes",
-            "Humanizer.Localisation.Formatters",
-            "Humanizer.Localisation.NumberToWords",
-            "Humanizer.Localisation.DateToOrdinalWords",
-            "Humanizer.Localisation.Ordinalizers",
-            "Humanizer.Localisation.CollectionFormatters",
-            "Humanizer.Localisation.TimeToClockNotation",
-            "Humanizer.Localisation",
-            "Humanizer.DateTimeHumanizeStrategy",
-            "Humanizer.Configuration",
-            "Humanizer.Inflections"
-        };
-
-        foreach (var ns in oldNamespaces)
-        {
-            if (fullName == ns || fullName.StartsWith(ns + "."))
+            if (IsNamespaceMatch(fullName, ns))
             {
                 matchedNamespace = ns;
                 break;
@@ -123,17 +124,46 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
             return document;
 
         // Replace the old namespace prefix with "Humanizer"
-        var remainder = fullName.Substring(matchedNamespace.Length);
-        var trimmedRemainder = remainder.TrimStart('.');
-        var newName = !string.IsNullOrEmpty(trimmedRemainder)
-            ? $"Humanizer.{trimmedRemainder}"
-            : "Humanizer";
+        var newNameText = GetReplacementName(fullName, matchedNamespace);
 
-        var newQualifiedName = SyntaxFactory.ParseName(newName)
+        var newQualifiedName = SyntaxFactory.ParseName(newNameText)
             .WithLeadingTrivia(qualifiedName.GetLeadingTrivia())
             .WithTrailingTrivia(qualifiedName.GetTrailingTrivia());
 
         var updatedRoot = root.ReplaceNode(qualifiedName, newQualifiedName);
         return document.WithSyntaxRoot(updatedRoot);
+    }
+
+    private static bool IsNamespaceMatch(string fullName, string oldNamespace)
+    {
+        // Exact match
+        if (fullName.Length == oldNamespace.Length)
+            return string.Equals(fullName, oldNamespace, System.StringComparison.Ordinal);
+
+        // Prefix match with dot separator
+        if (fullName.Length > oldNamespace.Length && 
+            fullName[oldNamespace.Length] == '.' &&
+            fullName.AsSpan().StartsWith(oldNamespace.AsSpan(), System.StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static string GetReplacementName(string fullName, string matchedNamespace)
+    {
+        if (fullName.Length == matchedNamespace.Length)
+            return "Humanizer";
+
+        // Skip the matched namespace and the dot
+        var startIndex = matchedNamespace.Length + 1;
+        
+        if (startIndex >= fullName.Length)
+            return "Humanizer";
+
+        // Use Substring to avoid allocating a new string for the span
+        // On netstandard2.0, this is still more efficient than string concatenation in a loop
+        return "Humanizer." + fullName.Substring(startIndex);
     }
 }

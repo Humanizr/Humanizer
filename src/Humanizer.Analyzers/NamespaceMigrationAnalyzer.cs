@@ -26,7 +26,9 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         description: Description);
 
     // All the old namespaces that were consolidated in v3
+    // Using StringComparer.Ordinal for optimal performance
     private static readonly ImmutableHashSet<string> OldNamespaces = ImmutableHashSet.Create(
+        StringComparer.Ordinal,
         "Humanizer.Bytes",
         "Humanizer.Localisation",
         "Humanizer.Localisation.Formatters",
@@ -51,7 +53,7 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         context.RegisterSyntaxNodeAction(AnalyzeQualifiedName, SyntaxKind.QualifiedName);
     }
 
-    private void AnalyzeUsingDirective(SyntaxNodeAnalysisContext context)
+    private static void AnalyzeUsingDirective(SyntaxNodeAnalysisContext context)
     {
         var usingDirective = (UsingDirectiveSyntax)context.Node;
         
@@ -67,7 +69,7 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    private void AnalyzeQualifiedName(SyntaxNodeAnalysisContext context)
+    private static void AnalyzeQualifiedName(SyntaxNodeAnalysisContext context)
     {
         var qualifiedName = (QualifiedNameSyntax)context.Node;
         
@@ -78,14 +80,32 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         var fullName = qualifiedName.ToString();
         
         // Check if any old namespace is used as a prefix
+        // Iterate in reverse order to match longer namespaces first (more specific)
         foreach (var oldNamespace in OldNamespaces)
         {
-            if (fullName == oldNamespace || fullName.StartsWith(oldNamespace + "."))
+            if (IsNamespaceMatch(fullName, oldNamespace))
             {
                 var diagnostic = Diagnostic.Create(Rule, qualifiedName.GetLocation(), oldNamespace);
                 context.ReportDiagnostic(diagnostic);
                 break;
             }
         }
+    }
+
+    private static bool IsNamespaceMatch(string fullName, string oldNamespace)
+    {
+        // Exact match
+        if (fullName.Length == oldNamespace.Length)
+            return string.Equals(fullName, oldNamespace, StringComparison.Ordinal);
+
+        // Prefix match with dot separator (avoid allocating with StartsWith + concatenation)
+        if (fullName.Length > oldNamespace.Length && 
+            fullName[oldNamespace.Length] == '.' &&
+            fullName.AsSpan().StartsWith(oldNamespace.AsSpan(), StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
