@@ -57,14 +57,14 @@ jobs:
         run: |
           out="artifacts/baseline"
           mkdir -p "$out"
-          dotnet run src/Humanizer/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -p:UseBaselinePackage=true -p:BaselinePackageVersion=${{ env.BASELINE_VERSION }} -- --filter '*' --runtimes net8.0 net10.0 --statisticalTest 5% --exporters JSON GitHub --artifacts "$out" --join
+          dotnet run src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -p:UseBaselinePackage=true -p:BaselinePackageVersion=${{ env.BASELINE_VERSION }} -- --filter '*' --runtimes net8.0 net10.0 --statisticalTest 5% --exporters JSON GitHub --artifacts "$out" --join
          
       - name: Build Benchmarks (current)
         if: matrix.kind == 'current'
         run: |
           out="artifacts/current"
           mkdir -p "$out"
-          dotnet run src/Humanizer/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -- --filter '*' --runtimes net8.0 net10.0 --statisticalTest 5% --exporters JSON GitHub --artifacts "$out" --join
+          dotnet run src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -- --filter '*' --runtimes net8.0 net10.0 --statisticalTest 5% --exporters JSON GitHub --artifacts "$out" --join
 
           # Find all markdown files and append them to the summary
           echo "" >> $GITHUB_STEP_SUMMARY
