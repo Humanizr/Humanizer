@@ -1,4 +1,5 @@
 namespace Humanizer;
+using System.Linq;
 
 class ToTitleCase : ICulturedStringTransformer
 {
@@ -33,18 +34,8 @@ class ToTitleCase : ICulturedStringTransformer
             .Remove(index, replacement.Length)
             .Insert(index, replacement);
 
-    static bool AllCapitals(string input)
-    {
-        foreach (var ch in input)
-        {
-            if (!char.IsUpper(ch))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    static bool AllCapitals(string input) =>
+        input.All(char.IsUpper);
 
     private static bool IsArticleOrConjunctionOrPreposition(string word) =>
         word is
