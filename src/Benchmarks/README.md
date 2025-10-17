@@ -6,20 +6,42 @@ This project contains comprehensive benchmarks for the Humanizer library, demons
 
 ### Locally
 
+Run all benchmarks:
 ```bash
 cd src/Benchmarks
-dotnet run -c Release
+dotnet run -c Release -- --filter *
 ```
 
-To run specific benchmarks:
-
+Run specific benchmarks:
 ```bash
-dotnet run -c Release --filter *StringHumanize*
+dotnet run -c Release -- --filter *StringHumanize*
 ```
 
-### In CI/CD
+### Baseline Comparison (GitHub Actions)
 
-Benchmarks are automatically run in Azure Pipelines on every build. Results are published as build artifacts and can be downloaded from the pipeline run. The benchmarks generate both JSON and Markdown reports for easy analysis.
+A manual GitHub Actions workflow is available to compare performance between a baseline NuGet package version and the current source code:
+
+1. Go to **Actions** → **Benchmark Baseline vs Current**
+2. Click **Run workflow**
+3. Enter the baseline version (default: 2.14.1)
+4. The workflow will:
+   - Run benchmarks against the baseline package in parallel
+   - Run benchmarks against the current source code in parallel
+   - Compare results using ResultsComparer
+   - Publish detailed reports as artifacts
+   - Display results and comparison in the job summary
+
+**How it works:**
+- **Baseline run**: Builds benchmarks with `UseBaselinePackage=true` to reference the NuGet package
+- **Current run**: Builds benchmarks with `UseBaselinePackage=false` to reference the local source code
+- **Comparison**: Downloads both JSON results and uses `dotnet/performance` ResultsComparer tool to generate a diff table
+
+**Artifacts available after each run:**
+- `humanizer-bdn-baseline-json` - Full JSON results from baseline
+- `humanizer-bdn-current-json` - Full JSON results from current code
+- `humanizer-bdn-baseline-all` - Complete BenchmarkDotNet artifacts (baseline)
+- `humanizer-bdn-current-all` - Complete BenchmarkDotNet artifacts (current)
+- `humanizer-bdn-comparison` - ResultsComparer diff report
 
 ## Benchmark Suites
 
