@@ -54,6 +54,10 @@
   </ItemGroup>
   
 
+  <Target Name="BuildFacade" BeforeTargets="PackNuSpecs">
+    <MSBuild Projects="..\Humanizer.Core.Facade\Humanizer.Core.Facade.csproj" Properties="Configuration=$(Configuration)" />
+  </Target>
+
   <Target Name="PackNuSpecs" DependsOnTargets="GetBuildVersion;Build;_InitializeNuspecRepositoryInformationProperties">
     <ItemGroup>
       <NuspecFiles Include="$(MSBuildThisFileDirectory)..\..\NuSpecs\*.nuspec" />

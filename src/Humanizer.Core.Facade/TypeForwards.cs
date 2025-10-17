@@ -17,24 +17,19 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(Humanizer.LocaliserRegistry<>))]
 
 // Humanizer.DateTimeHumanizeStrategy → Humanizer
-#if NET6_0_OR_GREATER
-[assembly: TypeForwardedTo(typeof(Humanizer.DefaultDateOnlyHumanizeStrategy))]
-#endif
 [assembly: TypeForwardedTo(typeof(Humanizer.DefaultDateTimeHumanizeStrategy))]
 [assembly: TypeForwardedTo(typeof(Humanizer.DefaultDateTimeOffsetHumanizeStrategy))]
-#if NET6_0_OR_GREATER
-[assembly: TypeForwardedTo(typeof(Humanizer.DefaultTimeOnlyHumanizeStrategy))]
-[assembly: TypeForwardedTo(typeof(Humanizer.IDateOnlyHumanizeStrategy))]
-#endif
 [assembly: TypeForwardedTo(typeof(Humanizer.IDateTimeHumanizeStrategy))]
 [assembly: TypeForwardedTo(typeof(Humanizer.IDateTimeOffsetHumanizeStrategy))]
-#if NET6_0_OR_GREATER
-[assembly: TypeForwardedTo(typeof(Humanizer.ITimeOnlyHumanizeStrategy))]
-[assembly: TypeForwardedTo(typeof(Humanizer.PrecisionDateOnlyHumanizeStrategy))]
-#endif
 [assembly: TypeForwardedTo(typeof(Humanizer.PrecisionDateTimeHumanizeStrategy))]
 [assembly: TypeForwardedTo(typeof(Humanizer.PrecisionDateTimeOffsetHumanizeStrategy))]
+
 #if NET6_0_OR_GREATER
+[assembly: TypeForwardedTo(typeof(Humanizer.DefaultDateOnlyHumanizeStrategy))]
+[assembly: TypeForwardedTo(typeof(Humanizer.DefaultTimeOnlyHumanizeStrategy))]
+[assembly: TypeForwardedTo(typeof(Humanizer.IDateOnlyHumanizeStrategy))]
+[assembly: TypeForwardedTo(typeof(Humanizer.ITimeOnlyHumanizeStrategy))]
+[assembly: TypeForwardedTo(typeof(Humanizer.PrecisionDateOnlyHumanizeStrategy))]
 [assembly: TypeForwardedTo(typeof(Humanizer.PrecisionTimeOnlyHumanizeStrategy))]
 #endif
 
@@ -50,10 +45,11 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(Humanizer.ICollectionFormatter))]
 
 // Humanizer.Localisation.DateToOrdinalWords → Humanizer
+[assembly: TypeForwardedTo(typeof(Humanizer.IDateToOrdinalWordConverter))]
+
 #if NET6_0_OR_GREATER
 [assembly: TypeForwardedTo(typeof(Humanizer.IDateOnlyToOrdinalWordConverter))]
 #endif
-[assembly: TypeForwardedTo(typeof(Humanizer.IDateToOrdinalWordConverter))]
 
 // Humanizer.Localisation.Formatters → Humanizer
 [assembly: TypeForwardedTo(typeof(Humanizer.DefaultFormatter))]
@@ -65,10 +61,10 @@ using System.Runtime.CompilerServices;
 // Humanizer.Localisation.Ordinalizers → Humanizer
 [assembly: TypeForwardedTo(typeof(Humanizer.IOrdinalizer))]
 
+// Humanizer.Localisation.WordsToNumber → Humanizer
+[assembly: TypeForwardedTo(typeof(Humanizer.IWordsToNumberConverter))]
+
 // Humanizer.Localisation.TimeToClockNotation → Humanizer
 #if NET6_0_OR_GREATER
 [assembly: TypeForwardedTo(typeof(Humanizer.ITimeOnlyToClockNotationConverter))]
 #endif
-
-// Humanizer.Localisation.WordsToNumber → Humanizer
-[assembly: TypeForwardedTo(typeof(Humanizer.IWordsToNumberConverter))]
