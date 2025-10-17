@@ -27,6 +27,11 @@ stages:
         version: 8.x
 
     - task: UseDotNet@2
+      displayName: 'Use .NET 9 SDK'
+      inputs:
+        version: 9.x
+
+    - task: UseDotNet@2
       displayName: 'Use .NET 10 SDK'
       inputs:
         includePreviewVersions: true
@@ -50,7 +55,7 @@ stages:
       displayName: Restore, Build, and Pack
 
     - pwsh: |
-        $(Build.SourcesDirectory)/verify-packages.ps1 -PackageVersion '$(NBGV_NuGetPackageVersion)' -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages'
+        $(Build.SourcesDirectory)/verify-packages.ps1 -PackageVersion '$(NBGV_NuGetPackageVersion)' -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages' -MinimumPassingSdkVersion '9.0.200'
       displayName: Verify Package Structure and Dependencies
       failOnStderr: false
 
