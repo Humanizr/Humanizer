@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Frozen;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace Humanizer.Analyzers;
 
@@ -84,14 +85,11 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         var fullName = qualifiedName.ToString();
         
         // Check if any old namespace is used as a prefix
-        foreach (var oldNamespace in OldNamespaces)
+        var matchingNamespace = OldNamespaces.FirstOrDefault(ns => IsNamespaceMatch(fullName, ns));
+        if (matchingNamespace != null)
         {
-            if (IsNamespaceMatch(fullName, oldNamespace))
-            {
-                var diagnostic = Diagnostic.Create(Rule, qualifiedName.GetLocation(), oldNamespace);
-                context.ReportDiagnostic(diagnostic);
-                break;
-            }
+            var diagnostic = Diagnostic.Create(Rule, qualifiedName.GetLocation(), matchingNamespace);
+            context.ReportDiagnostic(diagnostic);
         }
     }
 
