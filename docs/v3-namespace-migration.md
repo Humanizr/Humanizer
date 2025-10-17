@@ -96,15 +96,6 @@ dotnet build
 dotnet format analyzers --diagnostics HUMANIZER001
 ```
 
-### Removing the Analyzer After Migration
-
-Once you've migrated your code, you can remove the analyzer package:
-
-```xml
-<!-- Remove this line after migration is complete -->
-<PackageReference Include="Humanizer.Analyzers" Version="3.0.0" PrivateAssets="all" />
-```
-
 ## Manual Migration
 
 If you prefer to migrate manually or can't use the analyzer:
