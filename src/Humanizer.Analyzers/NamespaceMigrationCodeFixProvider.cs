@@ -106,16 +106,8 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
 
         // Find which old namespace this qualified name starts with
         var fullName = qualifiedName.ToString().AsSpan();
-        ReadOnlySpan<char> matchedNamespace = default;
-        
-        foreach (var ns in OldNamespaces)
-        {
-            if (IsNamespaceMatch(fullName, ns.AsSpan()))
-            {
-                matchedNamespace = ns.AsSpan();
-                break;
-            }
-        }
+        var foundNs = OldNamespaces.FirstOrDefault(ns => IsNamespaceMatch(fullName, ns.AsSpan()));
+        ReadOnlySpan<char> matchedNamespace = foundNs is not null ? foundNs.AsSpan() : default;
 
         if (matchedNamespace.IsEmpty)
             return document;
