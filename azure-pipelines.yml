@@ -80,7 +80,47 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
       artifact: BuildPackages
-  
+
+
+- stage: Benchmarks
+  dependsOn: Build
+  condition: succeeded('Build')
+  jobs:
+  - job: RunBenchmarks
+    displayName: Run Performance Benchmarks
+    pool:
+      vmImage: windows-latest
+    
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET 10 SDK'
+      inputs:
+        includePreviewVersions: true
+        version: 10.x
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build Benchmarks Project'
+      inputs:
+        command: build
+        projects: .\src\Benchmarks\Benchmarks.csproj
+        arguments: -c Release
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Run Benchmarks'
+      inputs:
+        command: run
+        projects: .\src\Benchmarks\Benchmarks.csproj
+        arguments: -c Release --exporters json markdown --artifacts $(Build.ArtifactStagingDirectory)\BenchmarkResults
+      # Allow benchmarks to take up to 30 minutes
+      timeoutInMinutes: 30
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Benchmark Results'
+      inputs:
+        PathtoPublish: $(Build.ArtifactStagingDirectory)\BenchmarkResults
+        ArtifactName: BenchmarkResults
+      condition: always()
+
 
 - stage: CodeSign
   dependsOn: Build

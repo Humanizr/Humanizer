@@ -4,6 +4,8 @@ This project contains comprehensive benchmarks for the Humanizer library, demons
 
 ## Running the Benchmarks
 
+### Locally
+
 ```bash
 cd src/Benchmarks
 dotnet run -c Release
@@ -14,6 +16,10 @@ To run specific benchmarks:
 ```bash
 dotnet run -c Release --filter *StringHumanize*
 ```
+
+### In CI/CD
+
+Benchmarks are automatically run in Azure Pipelines on every build. Results are published as build artifacts and can be downloaded from the pipeline run. The benchmarks generate both JSON and Markdown reports for easy analysis.
 
 ## Benchmark Suites
 
