@@ -1,7 +1,18 @@
 namespace Humanizer;
 
-internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
+internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
 {
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"\b(\d+)(st|nd|rd|th)\b")]
+    private static partial Regex OrdinalSuffixRegexGenerated();
+    
+    private static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexGenerated();
+#else
+    private static readonly Regex _ordinalSuffixRegex = new(@"\b(\d+)(st|nd|rd|th)\b", RegexOptions.Compiled);
+    
+    private static Regex OrdinalSuffixRegex() => _ordinalSuffixRegex;
+#endif
+
     private static readonly Dictionary<string, int> NumbersMap = new()
     {
         {"zero",0}, {"one",1}, {"two",2}, {"three",3}, {"four",4}, {"five",5},
@@ -58,7 +69,7 @@ internal class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
         }
 
         // Remove ordinal suffixes (st, nd, rd, th)
-        words = Regex.Replace(words, @"\b(\d+)(st|nd|rd|th)\b", "$1");
+        words = OrdinalSuffixRegex().Replace(words, "$1");
         words = words.Replace("-", " ");
 
         if (int.TryParse(words, out var numericValue))

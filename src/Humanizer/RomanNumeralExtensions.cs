@@ -7,7 +7,7 @@ namespace Humanizer;
 /// <summary>
 /// Contains extension methods for changing a number to Roman representation (ToRoman) and from Roman representation back to the number (FromRoman)
 /// </summary>
-public static class RomanNumeralExtensions
+public static partial class RomanNumeralExtensions
 {
     static readonly KeyValuePair<string, int>[] RomanNumeralsSequence =
     [
@@ -41,10 +41,18 @@ public static class RomanNumeralExtensions
         };
     }
 
-    static readonly Regex ValidRomanNumeral =
-        new(
-            "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
-            RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$", RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    private static partial Regex ValidRomanNumeralGenerated();
+    
+    private static Regex ValidRomanNumeral() => ValidRomanNumeralGenerated();
+#else
+    private static readonly Regex _validRomanNumeral = new(
+        "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
+        RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+    
+    private static Regex ValidRomanNumeral() => _validRomanNumeral;
+#endif
 
     /// <summary>
     /// Converts Roman numbers into integer
@@ -130,5 +138,5 @@ public static class RomanNumeralExtensions
     }
 
     static bool IsInvalidRomanNumeral(CharSpan input) =>
-        !ValidRomanNumeral.IsMatch(input);
+        !ValidRomanNumeral().IsMatch(input);
 }

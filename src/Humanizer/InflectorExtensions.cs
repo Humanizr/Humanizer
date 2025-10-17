@@ -23,8 +23,42 @@
 
 namespace Humanizer;
 
-public static class InflectorExtensions
+public static partial class InflectorExtensions
 {
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"(?:[ _-]+|^)([a-zA-Z])")]
+    private static partial Regex PascalizeRegexGenerated();
+    
+    private static Regex PascalizeRegex() => PascalizeRegexGenerated();
+
+    [GeneratedRegex(@"([\p{Lu}]+)([\p{Lu}][\p{Ll}])")]
+    private static partial Regex UnderscoreRegex1Generated();
+    
+    private static Regex UnderscoreRegex1() => UnderscoreRegex1Generated();
+
+    [GeneratedRegex(@"([\p{Ll}\d])([\p{Lu}])")]
+    private static partial Regex UnderscoreRegex2Generated();
+    
+    private static Regex UnderscoreRegex2() => UnderscoreRegex2Generated();
+
+    [GeneratedRegex(@"[-\s]")]
+    private static partial Regex UnderscoreRegex3Generated();
+    
+    private static Regex UnderscoreRegex3() => UnderscoreRegex3Generated();
+#else
+    private static readonly Regex _pascalizeRegex = new(@"(?:[ _-]+|^)([a-zA-Z])", RegexOptions.Compiled);
+    private static Regex PascalizeRegex() => _pascalizeRegex;
+
+    private static readonly Regex _underscoreRegex1 = new(@"([\p{Lu}]+)([\p{Lu}][\p{Ll}])", RegexOptions.Compiled);
+    private static Regex UnderscoreRegex1() => _underscoreRegex1;
+
+    private static readonly Regex _underscoreRegex2 = new(@"([\p{Ll}\d])([\p{Lu}])", RegexOptions.Compiled);
+    private static Regex UnderscoreRegex2() => _underscoreRegex2;
+
+    private static readonly Regex _underscoreRegex3 = new(@"[-\s]", RegexOptions.Compiled);
+    private static Regex UnderscoreRegex3() => _underscoreRegex3;
+#endif
+
     /// <summary>
     /// Pluralizes the provided input considering irregular words
     /// </summary>
@@ -58,7 +92,7 @@ public static class InflectorExtensions
     /// By default, pascalize converts strings to UpperCamelCase also removing underscores
     /// </summary>
     public static string Pascalize(this string input) =>
-        Regex.Replace(input, @"(?:[ _-]+|^)([a-zA-Z])", match => match
+        PascalizeRegex().Replace(input, match => match
             .Groups[1]
             .Value.ToUpper());
 
@@ -80,10 +114,10 @@ public static class InflectorExtensions
     /// </summary>
     /// <param name="input">The string to be underscored</param>
     public static string Underscore(this string input) =>
-        Regex
+        UnderscoreRegex3()
             .Replace(
-                Regex.Replace(
-                    Regex.Replace(input, @"([\p{Lu}]+)([\p{Lu}][\p{Ll}])", "$1_$2"), @"([\p{Ll}\d])([\p{Lu}])", "$1_$2"), @"[-\s]", "_")
+                UnderscoreRegex2().Replace(
+                    UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_")
             .ToLower();
 
     /// <summary>
