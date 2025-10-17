@@ -252,6 +252,7 @@ namespace Humanizer
     }
     public static class EnumDehumanizeExtensions
     {
+        [System.Diagnostics.CodeAnalysis.DynamicDependency(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods, typeof(Humanizer.EnumDehumanizeExtensions))]
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
         public static System.Enum DehumanizeTo(this string input, [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields)] System.Type targetEnum, Humanizer.OnNoMatch onNoMatch = 0) { }

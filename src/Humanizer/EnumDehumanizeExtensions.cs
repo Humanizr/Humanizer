@@ -28,11 +28,14 @@ public static class EnumDehumanizeExtensions
         DehumanizeToPrivate<TTargetEnum>(input, onNoMatch);
 
 #if NET6_0_OR_GREATER
-    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(EnumDehumanizeExtensions))]
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Access to DehumanizeTo via reflection is intentional and documented.")]
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "The method is only used by DehumanizeTo which already has RequiresUnreferencedCode")]
+    [UnconditionalSuppressMessage("Trimming", "IL2111", Justification = "The method is only used by DehumanizeTo which already has RequiresUnreferencedCode")]
+    [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "The method is only used by DehumanizeTo which already has RequiresDynamicCode")]
 #endif
-    static readonly MethodInfo DehumanizeToMethod = typeof(EnumDehumanizeExtensions)
-        .GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!;
+    static MethodInfo GetDehumanizeToMethodInfo() =>
+        typeof(EnumDehumanizeExtensions).GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!;
+
+    static readonly Lazy<MethodInfo> DehumanizeToMethod = new(GetDehumanizeToMethodInfo);
 
     /// <summary>
     /// Dehumanizes a string into the Enum it was originally Humanized from!
@@ -45,10 +48,11 @@ public static class EnumDehumanizeExtensions
 #if NET6_0_OR_GREATER
     [RequiresDynamicCode("The native code for the target enumeration might not be available at runtime.")]
     [RequiresUnreferencedCode("The native code for the target enumeration might not be available at runtime.")]
+    [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(EnumDehumanizeExtensions))]
 #endif
     public static Enum DehumanizeTo(this string input, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
     {
-        var genericMethod = DehumanizeToMethod.MakeGenericMethod(targetEnum);
+        var genericMethod = DehumanizeToMethod.Value.MakeGenericMethod(targetEnum);
         try
         {
             return (Enum)genericMethod.Invoke(null, [input, onNoMatch])!;
