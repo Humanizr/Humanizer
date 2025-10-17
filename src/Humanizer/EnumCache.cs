@@ -74,8 +74,10 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 
         foreach (var attr in member.GetCustomAttributes())
         {
+#pragma warning disable IL2072 // Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' in call to target method. The return value of the source method does not have matching annotations.
             var attrType = attr.GetType();
             foreach (var property in attrType.GetRuntimeProperties())
+#pragma warning restore IL2072
             {
                 if (property.PropertyType == typeof(string) &&
                     Configurator.EnumDescriptionPropertyLocator(property))
