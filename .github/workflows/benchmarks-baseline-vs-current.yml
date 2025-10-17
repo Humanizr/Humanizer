@@ -69,19 +69,23 @@ jobs:
       
       - name: Append Markdown Results to Summary
         run: |
-          MD=$(ls -t src/Benchmarks/BenchmarkDotNet.Artifacts/results/*.md | head -n 1)
-          if [ -f "$MD" ]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### Benchmark Results" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            cat "$MD" >> $GITHUB_STEP_SUMMARY
-          fi
+          # Find all markdown files and append them to the summary
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Benchmark Results (${{ matrix.kind }})" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          for MD in src/Benchmarks/BenchmarkDotNet.Artifacts/results/*-report-github.md; do
+            if [ -f "$MD" ]; then
+              cat "$MD" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
       
       - name: Upload JSON Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: humanizer-bdn-${{ matrix.kind }}-json
-          path: src/Benchmarks/BenchmarkDotNet.Artifacts/results/*.full.json
+          path: src/Benchmarks/BenchmarkDotNet.Artifacts/results/*-report-full.json
           retention-days: 7
       
       - name: Upload All Artifacts
