@@ -1,10 +1,38 @@
 # Humanizer v3 Impact Analysis Tool
 
-This tool performs a comprehensive impact analysis for the Humanizer v3 namespace consolidation, identifying repositories and NuGet packages that will be affected by the breaking changes.
+A comprehensive tool for analyzing the impact of Humanizer v3's namespace consolidation on public GitHub repositories and NuGet packages.
 
-## Overview
+## What This Tool Does
 
-Humanizer v3 consolidates many sub-namespaces into the root `Humanizer` namespace:
+Humanizer v3 consolidates many sub-namespaces into the root `Humanizer` namespace, which is a source-breaking change. This tool:
+
+1. **Searches GitHub** for repositories using old namespaces
+2. **Analyzes NuGet** packages depending on Humanizer
+3. **Scores & Ranks** impact using a weighted formula
+4. **Generates Reports** in CSV, JSON, and Markdown formats
+5. **Recommends Actions** for different impact levels
+
+## Quick Start
+
+```bash
+# Set your GitHub token
+export GITHUB_TOKEN="your-token-here"
+
+# Run the analysis
+cd tools/ImpactAnalysis
+./run-impact-analysis.sh
+
+# View results
+cat ./output/IMPACT_SUMMARY.md
+```
+
+**📖 [Read the Complete Quick Start Guide](QUICKSTART.md)** for detailed setup instructions.
+
+**📄 [See Sample Output](SAMPLE_OUTPUT.md)** to understand what the reports look like.
+
+## Old Namespaces Being Consolidated
+
+All of these are moving to the root `Humanizer` namespace in v3:
 
 - `Humanizer.Bytes` → `Humanizer`
 - `Humanizer.Localisation` → `Humanizer`
@@ -18,100 +46,101 @@ Humanizer v3 consolidates many sub-namespaces into the root `Humanizer` namespac
 - `Humanizer.Localisation.CollectionFormatters` → `Humanizer`
 - `Humanizer.Localisation.TimeToClockNotation` → `Humanizer`
 
-## What This Tool Does
+## How It Works
 
-1. **GitHub Search**: Searches public GitHub repositories for usage of old namespaces
-   - Using directives (`using Humanizer.Bytes;`)
-   - Qualified type references (`Humanizer.Bytes.ByteSize`)
-   - Package references in .csproj files
-   - Binary references (DLL files)
+### Phase 1: GitHub Search
+Searches public GitHub repositories for:
+- Using directives: `using Humanizer.Bytes;`
+- Qualified type references: `Humanizer.Bytes.ByteSize`
+- Package references in .csproj files
+- Binary references (DLL files)
 
-2. **NuGet Analysis**: Identifies packages that depend on Humanizer.Core or Humanizer
-   - Total downloads
-   - Dependent packages count
-   - Repository links
+### Phase 2: NuGet Analysis
+Identifies packages that depend on Humanizer.Core or Humanizer:
+- Total downloads and recent downloads
+- Dependent packages count
+- Repository links
 
-3. **Impact Scoring**: Ranks repositories and packages using a balanced scoring formula
-   - Repository metrics (stars, forks, dependents)
-   - Usage metrics (occurrences, files affected)
-   - Public API exposure
-   - Recency and activity
+### Phase 3: Impact Scoring
+Ranks repositories and packages using a balanced scoring formula:
+- Repository metrics (stars, forks, dependents)
+- Usage metrics (occurrences, files affected)
+- Public API exposure
+- Recency and activity
 
-4. **Report Generation**: Produces multiple output formats
-   - `all_matches.csv` - All namespace matches found
-   - `top_impacted.csv` - Top 50 impacted entities
-   - `impact_analysis_report.json` - Complete structured report
-   - `IMPACT_SUMMARY.md` - Executive summary with recommendations
+### Phase 4: Report Generation
+Produces multiple output formats:
+- `IMPACT_SUMMARY.md` - Executive summary with recommendations ⭐
+- `top_impacted.csv` - Top 50 impacted entities
+- `all_matches.csv` - All namespace matches found
+- `impact_analysis_report.json` - Complete structured report
 
 ## Prerequisites
 
-- .NET 10.0 SDK (or later)
-- GitHub Personal Access Token (for API access)
-  - Create at: https://github.com/settings/tokens
+- .NET 10.0 SDK or later
+- GitHub Personal Access Token ([get one here](https://github.com/settings/tokens))
   - Required scopes: `public_repo`, `read:packages`
 
-## Usage
+## Running the Analysis
 
-### Set GitHub Token
+### Option 1: Using the Scripts (Recommended)
 
+**Linux/Mac:**
 ```bash
-export GITHUB_TOKEN="your-github-token-here"
-```
-
-Or on Windows:
-```powershell
-$env:GITHUB_TOKEN="your-github-token-here"
-```
-
-### Run the Analysis
-
-```bash
-cd tools/ImpactAnalysis
-dotnet run
-```
-
-### Run with Script
-
-```bash
+export GITHUB_TOKEN="your-token-here"
 ./run-impact-analysis.sh
 ```
 
-Or on Windows:
+**Windows:**
 ```powershell
+$env:GITHUB_TOKEN="your-token-here"
 .\run-impact-analysis.ps1
+```
+
+### Option 2: Direct Execution
+
+```bash
+export GITHUB_TOKEN="your-token-here"
+dotnet run -c Release
 ```
 
 ## Output Files
 
-All output files are generated in the `./output` directory:
+All files are generated in `./output/`:
 
-### 1. all_matches.csv
-Complete list of all namespace matches found, including:
-- Repository information
-- File paths and permalinks
-- Match types and context
-- Metadata (stars, forks, etc.)
+### 1. IMPACT_SUMMARY.md ⭐ Start Here!
 
-### 2. top_impacted.csv
-Top 50 most impacted repositories and packages with:
-- Ranking and scores
-- Impact category (Critical/High/Medium/Low)
-- Recommended mitigation strategies
-
-### 3. impact_analysis_report.json
-Structured JSON report containing:
-- Summary statistics
-- Top impacted entities
-- Aggregated data by namespace
-- Methodology and search queries used
-- Prioritized action items
-
-### 4. IMPACT_SUMMARY.md
-Executive summary Markdown document with:
-- Top 10 detailed analysis
+Executive summary with:
+- Top 10 detailed analysis with code samples
 - Top 25 brief summaries
 - Recommended migration strategies
+- Impact breakdown by namespace
 - Methodology and limitations
+
+### 2. top_impacted.csv
+
+Top 50 entities with rankings and scores:
+- Repository/package name and type
+- Impact category (Critical/High/Medium/Low)
+- Metrics: stars, forks, downloads, occurrences
+- Recommended mitigation strategies
+
+### 3. all_matches.csv
+
+Complete raw data:
+- All namespace matches found
+- Repository information and metadata
+- File paths with permalinks
+- Match types and confidence levels
+
+### 4. impact_analysis_report.json
+
+Machine-readable structured report:
+- Summary statistics
+- Top impacted entities with details
+- Aggregated data by namespace
+- Search queries and methodology
+- Prioritized action items
 
 ## Scoring Methodology
 
