@@ -28,14 +28,6 @@ The following namespaces have been consolidated into `Humanizer`:
 
 ## Usage
 
-### Install the Analyzer
-
-Add the analyzer to your project:
-
-```xml
-<PackageReference Include="Humanizer.Analyzers" Version="3.0.0" />
-```
-
 ### Automatic Fixes
 
 The analyzer will highlight old namespace usages with warnings. You can:
@@ -107,7 +99,3 @@ dotnet test
 ## Diagnostic ID
 
 - **HUMANIZER001**: Old Humanizer namespace usage
-
-## License
-
-MIT - Same as Humanizer

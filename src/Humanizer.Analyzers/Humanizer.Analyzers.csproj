@@ -2,23 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <IsPackable>true</IsPackable>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynComponent>true</IsRoslynComponent>
-    <EnableNuGetPackageRestore>false</EnableNuGetPackageRestore>
-    <NBGV_GitEngine>Disabled</NBGV_GitEngine>
     <NoWarn>$(NoWarn);RS1038</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PackageId>Humanizer.Analyzers</PackageId>
-    <Description>Roslyn analyzer and code fix provider for Humanizer v3 namespace migration. Automatically updates old namespace references (Humanizer.Bytes, Humanizer.Localisation, etc.) to the new consolidated Humanizer namespace.</Description>
-    <PackageTags>Humanizer;Roslyn;Analyzer;CodeFix;Migration</PackageTags>
-    <DevelopmentDependency>true</DevelopmentDependency>
   </PropertyGroup>
 
   <ItemGroup>
