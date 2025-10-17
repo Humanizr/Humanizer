@@ -36,6 +36,7 @@
     <file src="Humanizer\bin\Release\net8.0\Humanizer.xml" target="lib\net8.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.dll" target="lib\net10.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.xml" target="lib\net10.0" />
+    <file src="Humanizer.Analyzers\bin\Release\netstandard2.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\cs" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>
