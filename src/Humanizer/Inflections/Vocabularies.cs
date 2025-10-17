@@ -21,7 +21,7 @@ public static class Vocabularies
         _default.AddPlural("$", "s");
         _default.AddPlural("s$", "s");
         _default.AddPlural("(ax|test)is$", "$1es");
-        _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)us$", "$1i");
+        _default.AddPlural("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle|geni|modul|termin|gladiol)us$", "$1i");
         _default.AddPlural("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis)$", "$1es");
         _default.AddPlural("(buffal|tomat|volcan|ech|embarg|her|mosquit|potat|torped|vet)o$", "$1oes");
         _default.AddPlural("([dti])um$", "$1a");
@@ -36,7 +36,7 @@ public static class Vocabularies
         _default.AddPlural("(quiz)$", "$1zes");
         _default.AddPlural("(buz|blit|walt)z$", "$1zes");
         _default.AddPlural("(hoo|lea|loa|thie)f$", "$1ves");
-        _default.AddPlural("(alumn|alg|larv|vertebr)a$", "$1ae");
+        _default.AddPlural("(alumn|alg|larv|vertebr|antenn|formul|nebul|auror)a$", "$1ae");
         _default.AddPlural("(criteri|phenomen)on$", "$1a");
 
         _default.AddSingular("s$", "");
@@ -55,14 +55,14 @@ public static class Vocabularies
         _default.AddSingular("(?<!^[a-z])(o)es$", "$1");
         _default.AddSingular("(shoe)s$", "$1");
         _default.AddSingular("(cris|ax|test)es$", "$1is");
-        _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle)i$", "$1us");
+        _default.AddSingular("(octop|vir|alumn|fung|cact|foc|hippopotam|radi|stimul|syllab|nucle|geni|modul|termin|gladiol)i$", "$1us");
         _default.AddSingular("(alias|bias|iris|status|campus|apparatus|virus|walrus|trellis)es$", "$1");
         _default.AddSingular("^(ox)en", "$1");
         _default.AddSingular("(matr|d)ices$", "$1ix");
         _default.AddSingular("(vert|ind)ices$", "$1ex");
         _default.AddSingular("(quiz)zes$", "$1");
         _default.AddSingular("(buz|blit|walt)zes$", "$1z");
-        _default.AddSingular("(alumn|alg|larv|vertebr)ae$", "$1a");
+        _default.AddSingular("(alumn|alg|larv|vertebr|antenn|formul|nebul|auror)ae$", "$1a");
         _default.AddSingular("(criteri|phenomen)a$", "$1on");
         _default.AddSingular("([b|r|c]ook|room|smooth)ies$", "$1ie");
 

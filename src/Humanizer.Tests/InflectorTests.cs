@@ -291,7 +291,9 @@ class PluralTestSource : IEnumerable<object[]>
 
         yield return ["addendum", "addenda"];
         yield return ["alga", "algae"];
+        yield return ["antenna", "antennae"];
         yield return ["appendix", "appendices"];
+        yield return ["aurora", "aurorae"];
         yield return ["bias", "biases"];
         yield return ["bison", "bison"];
         yield return ["blitz", "blitzes"];
@@ -307,7 +309,10 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["embargo", "embargoes"];
         yield return ["focus", "foci"];
         yield return ["foot", "feet"];
+        yield return ["formula", "formulae"];
         yield return ["fuse", "fuses"];
+        yield return ["genius", "genii"];
+        yield return ["gladiolus", "gladioli"];
         yield return ["grass", "grass"];
         yield return ["hair", "hair"];
         yield return ["hero", "heroes"];
@@ -321,9 +326,11 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["means", "means"];
         yield return ["mail", "mail"];
         yield return ["millennium", "millennia"];
+        yield return ["modulus", "moduli"];
         yield return ["moose", "moose"];
         yield return ["mosquito", "mosquitoes"];
         yield return ["mud", "mud"];
+        yield return ["nebula", "nebulae"];
         yield return ["nucleus", "nuclei"];
         yield return ["neurosis", "neuroses"];
         yield return ["oasis", "oases"];
@@ -339,6 +346,7 @@ class PluralTestSource : IEnumerable<object[]>
         yield return ["stimulus", "stimuli"];
         yield return ["swine", "swine"];
         yield return ["syllabus", "syllabi"];
+        yield return ["terminus", "termini"];
         yield return ["that", "those"];
         yield return ["thief", "thieves"];
         yield return ["this", "these"];
