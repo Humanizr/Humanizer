@@ -110,7 +110,7 @@ stages:
       inputs:
         command: run
         projects: .\src\Benchmarks\Benchmarks.csproj
-        arguments: -c Release --exporters json markdown --artifacts $(Build.ArtifactStagingDirectory)\BenchmarkResults
+        arguments: -c Release -- --filter * --exporters json markdown --artifacts $(Build.ArtifactStagingDirectory)\BenchmarkResults
       # Allow benchmarks to take up to 30 minutes
       timeoutInMinutes: 30
 
