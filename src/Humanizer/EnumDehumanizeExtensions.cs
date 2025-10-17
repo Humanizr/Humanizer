@@ -27,6 +27,16 @@ public static class EnumDehumanizeExtensions
         where TTargetEnum : struct, Enum =>
         DehumanizeToPrivate<TTargetEnum>(input, onNoMatch);
 
+#if NET6_0_OR_GREATER
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "The method is only used by DehumanizeTo which already has RequiresUnreferencedCode")]
+    [UnconditionalSuppressMessage("Trimming", "IL2111", Justification = "The method is only used by DehumanizeTo which already has RequiresUnreferencedCode")]
+    [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "The method is only used by DehumanizeTo which already has RequiresDynamicCode")]
+#endif
+    static MethodInfo GetDehumanizeToMethodInfo() =>
+        typeof(EnumDehumanizeExtensions).GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!;
+
+    static readonly Lazy<MethodInfo> DehumanizeToMethod = new(GetDehumanizeToMethodInfo);
+
     /// <summary>
     /// Dehumanizes a string into the Enum it was originally Humanized from!
     /// </summary>
@@ -42,15 +52,7 @@ public static class EnumDehumanizeExtensions
 #endif
     public static Enum DehumanizeTo(this string input, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type targetEnum, OnNoMatch onNoMatch = OnNoMatch.ThrowsException)
     {
-#pragma warning disable IL2026 // Using member which has RequiresUnreferencedCodeAttribute
-#pragma warning disable IL2111 // Method with DynamicallyAccessedMembersAttribute accessed via reflection
-#pragma warning disable IL3050 // Using member which has RequiresDynamicCodeAttribute
-        var genericMethod = typeof(EnumDehumanizeExtensions)
-            .GetMethod("DehumanizeTo", [typeof(string), typeof(OnNoMatch)])!
-            .MakeGenericMethod(targetEnum);
-#pragma warning restore IL3050
-#pragma warning restore IL2111
-#pragma warning restore IL2026
+        var genericMethod = DehumanizeToMethod.Value.MakeGenericMethod(targetEnum);
         try
         {
             return (Enum)genericMethod.Invoke(null, [input, onNoMatch])!;
