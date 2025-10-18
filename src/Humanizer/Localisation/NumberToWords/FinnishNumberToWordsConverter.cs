@@ -5,11 +5,11 @@ class FinnishNumberToWordsConverter : GenderlessNumberToWordsConverter
     static readonly string[] UnitsMap = ["nolla", "yksi", "kaksi", "kolme", "neljä", "viisi", "kuusi", "seitsemän", "kahdeksan", "yhdeksän", "kymmenen"];
     static readonly string[] OrdinalUnitsMap = ["nollas", "ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes", "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"];
 
-    static readonly Dictionary<int, string> OrdinalExceptions = new()
+    static readonly FrozenDictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
     {
         {1, "yhdes" },
         {2, "kahdes" }
-    };
+    }.ToFrozenDictionary();
 
     public override string Convert(long input)
     {

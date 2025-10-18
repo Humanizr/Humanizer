@@ -3,9 +3,18 @@ namespace Humanizer;
 /// <summary>
 /// Contains methods for removing, appending and prepending article prefixes for sorting strings ignoring the article.
 /// </summary>
-public static class EnglishArticle
+public static partial class EnglishArticle
 {
-    static readonly Regex ArticleRegex = new("^((The)|(the)|(a)|(A)|(An)|(an))\\s\\w+", RegexOptions.Compiled);
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+")]
+    private static partial Regex ArticleRegexGenerated();
+    
+    private static Regex ArticleRegex() => ArticleRegexGenerated();
+#else
+    private static readonly Regex _articleRegex = new(@"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+", RegexOptions.Compiled);
+    
+    private static Regex ArticleRegex() => _articleRegex;
+#endif
 
     /// <summary>
     /// Removes the prefixed article and appends it to the same string.
@@ -25,7 +34,7 @@ public static class EnglishArticle
         {
             var item = items[i]
                 .AsSpan();
-            if (ArticleRegex.IsMatch(item))
+            if (ArticleRegex().IsMatch(item))
             {
                 var indexOf = item.IndexOf(' ');
                 var removed = item[indexOf..]

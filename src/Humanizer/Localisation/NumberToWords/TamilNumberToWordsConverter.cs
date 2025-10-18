@@ -9,7 +9,7 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
 
     static readonly string[] LakhsMap = ["இலட்ச"];
 
-    static readonly Dictionary<long, string> OrdinalExceptions = new()
+    static readonly FrozenDictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
     {
         {
             1, "முதலாவது"
@@ -35,7 +35,7 @@ class TamilNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             12, "பனிரெண்டாவது"
         },
-    };
+    }.ToFrozenDictionary();
 
     public override string Convert(long number) =>
         ConvertImpl(number, false);

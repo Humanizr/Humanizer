@@ -7,7 +7,11 @@ class LuxembourgishFormatter(CultureInfo culture) :
 
     // https://lb.wikipedia.org/wiki/Eifeler_Reegel
     const char EifelerRuleSuffix = 'n';
+#if NET8_0_OR_GREATER
+    static readonly SearchValues<char> EifelerRuleCharacters = SearchValues.Create("unitedzohay");
+#else
     const string EifelerRuleCharacters = "unitedzohay";
+#endif
 
     public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true) =>
         base

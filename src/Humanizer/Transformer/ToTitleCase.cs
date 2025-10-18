@@ -1,16 +1,25 @@
 namespace Humanizer;
 
-class ToTitleCase : ICulturedStringTransformer
+partial class ToTitleCase : ICulturedStringTransformer
 {
     public string Transform(string input) =>
         Transform(input, null);
 
-    static readonly Regex Regex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"(\w|[^\u0000-\u007F])+'?\w*")]
+    private static partial Regex WordRegexGenerated();
+    
+    private static Regex WordRegex() => WordRegexGenerated();
+#else
+    private static readonly Regex _wordRegex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+    
+    private static Regex WordRegex() => _wordRegex;
+#endif
 
     public string Transform(string input, CultureInfo? culture)
     {
         culture ??= CultureInfo.CurrentCulture;
-        var matches = Regex.Matches(input);
+        var matches = WordRegex().Matches(input);
         var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;
         foreach (Match word in matches)

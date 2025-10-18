@@ -9,7 +9,7 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
     static readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
     static readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
 
-    static readonly Dictionary<long, string> ΟrdinalMap = new()
+    static readonly FrozenDictionary<long, string> ΟrdinalMap = new Dictionary<long, string>
     {
         {
             0, string.Empty
@@ -98,7 +98,7 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             1000, "χιλιοστός"
         }
-    };
+    }.ToFrozenDictionary();
 
     public override string Convert(long number) =>
         ConvertImpl(number, false);

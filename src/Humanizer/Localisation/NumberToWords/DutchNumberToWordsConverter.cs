@@ -161,7 +161,11 @@ class DutchNumberToWordsConverter :
         },
     };
 
+#if NET8_0_OR_GREATER
+    static readonly SearchValues<char> EndingCharForSte = SearchValues.Create(['t', 'g', 'd']);
+#else
     static readonly char[] EndingCharForSte = ['t', 'g', 'd'];
+#endif
 
     public override string ConvertToOrdinal(int number)
     {
@@ -176,7 +180,11 @@ class DutchNumberToWordsConverter :
         // achtste
         // twintigste, dertigste, veertigste, ...
         // honderdste, duizendste, ...
+#if NET8_0_OR_GREATER
+        if (word.AsSpan().LastIndexOfAny(EndingCharForSte) == word.Length - 1)
+#else
         if (word.LastIndexOfAny(EndingCharForSte) == word.Length - 1)
+#endif
         {
             return word + "ste";
         }

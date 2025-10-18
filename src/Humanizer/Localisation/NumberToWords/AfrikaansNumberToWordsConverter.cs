@@ -6,7 +6,7 @@ class AfrikaansNumberToWordsConverter :
     static readonly string[] UnitsMap = ["nul", "een", "twee", "drie", "vier", "vyf", "ses", "sewe", "agt", "nege", "tien", "elf", "twaalf", "dertien", "veertien", "vyftien", "sestien", "sewentien", "agtien", "negentien"];
     static readonly string[] TensMap = ["nul", "tien", "twintig", "dertig", "veertig", "vyftig", "sestig", "sewentig", "tagtig", "negentig"];
 
-    static readonly Dictionary<int, string> OrdinalExceptions = new()
+    static readonly FrozenDictionary<int, string> OrdinalExceptions = new Dictionary<int, string>
     {
         {
             0, "nulste"
@@ -38,7 +38,7 @@ class AfrikaansNumberToWordsConverter :
         {
             19, "negentiende"
         }
-    };
+    }.ToFrozenDictionary();
 
     public override string Convert(long number)
     {

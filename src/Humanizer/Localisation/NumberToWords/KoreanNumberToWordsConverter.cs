@@ -6,7 +6,7 @@ class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
     static readonly string[] UnitsMap2 = ["", "십", "백", "천"];
     static readonly string[] UnitsMap3 = ["", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항하사", "아승기", "나유타", "불가사의", "무량대수"];
 
-    static readonly Dictionary<long, string> OrdinalExceptions = new()
+    static readonly FrozenDictionary<long, string> OrdinalExceptions = new Dictionary<long, string>
     {
         {
             0, "영번째"
@@ -68,7 +68,7 @@ class KoreanNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             19, "열아홉째"
         },
-    };
+    }.ToFrozenDictionary();
 
     public override string Convert(long number) =>
         ConvertImpl(number, false);
