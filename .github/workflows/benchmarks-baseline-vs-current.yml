@@ -57,17 +57,17 @@ jobs:
         run: |
           out="artifacts/baseline"
           mkdir -p "$out"
-          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 \
-            /p:UseBaselinePackage=true /p:BaselinePackageVersion=${{ env.BASELINE_VERSION }} \
-            -- --filter '*' --exporters json github --artifacts "$out"
+          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release \
+            -p:UseBaselinePackage=true -p:BaselinePackageVersion=${{ env.BASELINE_VERSION }} \
+            -- --filter '*' --exporters json github --artifacts "$out" --runtimes net8.0 net10.0
          
       - name: Build Benchmarks (current)
         if: matrix.kind == 'current'
         run: |
           out="artifacts/current"
           mkdir -p "$out"
-          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 \
-            -- --filter '*' --exporters json github --artifacts "$out"
+          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release \
+            -- --filter '*' --exporters json github --artifacts "$out" --runtimes net8.0 net10.0
       
       - name: Append Results to Summary
         run: |
