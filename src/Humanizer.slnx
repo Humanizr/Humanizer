@@ -81,6 +81,8 @@
     <File Path="../NuSpecs/Humanizer.nuspec" />
   </Folder>
   <Project Path="Benchmarks/Benchmarks.csproj" />
+  <Project Path="Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj" />
+  <Project Path="Humanizer.Analyzers/Humanizer.Analyzers.csproj" />
   <Project Path="Humanizer.Tests/Humanizer.Tests.csproj" />
   <Project Path="Humanizer/Humanizer.csproj" />
 </Solution>

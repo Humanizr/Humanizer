@@ -52,6 +52,10 @@
     <InternalsVisibleTo Include="Benchmarks" />
   </ItemGroup>
   
+  <ItemGroup>
+    <!-- Reference the analyzer project to ensure it builds first and its outputs are available for packing -->
+    <ProjectReference Include="..\Humanizer.Analyzers\Humanizer.Analyzers.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 
   <Target Name="PackNuSpecs" DependsOnTargets="GetBuildVersion;Build;_InitializeNuspecRepositoryInformationProperties">
     <ItemGroup>
