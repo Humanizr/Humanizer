@@ -58,7 +58,7 @@ jobs:
           out="artifacts/baseline"
           mkdir -p "$out"
           dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 \            
-            -- --filter '*' --artifacts "$out" --envVars UseBaselinePackage=true,BaselinePackageVersion=${{ env.BASELINE_VERSION }} 
+            -- --filter '*' --artifacts "$out" --envVars UseBaselinePackage:true,BaselinePackageVersion:${{ env.BASELINE_VERSION }} 
 
       - name: Build Benchmarks (current)
         if: matrix.kind == 'current'
