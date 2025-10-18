@@ -129,7 +129,7 @@ jobs:
         run: |
           BASE=$(pwd)/baseline
           DIFF=$(pwd)/current          
-          dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net8.0 --base "$(pwd)/baseline" --diff "$(pwd)/current" --threshold "5%" > diff.md || true           
+          dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net8.0 -f net8.0 --base "$(pwd)/baseline" --diff "$(pwd)/current" --threshold "5%" > diff.md || true           
       
       - name: Append Comparison to Summary
         run: |
