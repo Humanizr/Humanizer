@@ -57,17 +57,16 @@ jobs:
         run: |
           out="artifacts/baseline"
           mkdir -p "$out"
-          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 \
-            -p:UseBaselinePackage=true -p:BaselinePackageVersion=${{ env.BASELINE_VERSION }} \
-            -- --filter '*' --exporters json github --artifacts "$out" --runtimes net8.0 net10.0
-         
+          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 \            
+            -- --filter '*' --artifacts "$out" --envVars UseBaselinePackage=true,BaselinePackageVersion=${{ env.BASELINE_VERSION }} 
+
       - name: Build Benchmarks (current)
         if: matrix.kind == 'current'
         run: |
           out="artifacts/current"
           mkdir -p "$out"
           dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 \
-            -- --filter '*' --exporters json github --artifacts "$out" --runtimes net8.0 net10.0
+            -- --filter '*' --artifacts "$out"
       
       - name: Append Results to Summary
         run: |
@@ -78,7 +77,7 @@ jobs:
           echo "### Benchmark Results (${{ matrix.kind }})" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          for MD in $out/*.md; do
+          for MD in $out/**/*.md; do
             if [ -f "$MD" ]; then
               cat "$MD" >> $GITHUB_STEP_SUMMARY
               echo "" >> $GITHUB_STEP_SUMMARY
@@ -89,7 +88,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: humanizer-bdn-${{ matrix.kind }}-json
-          path: artifacts/${{ matrix.kind }}/*.json
+          path: artifacts/${{ matrix.kind }}/**/*.json
           retention-days: 7
       
       - name: Upload All Artifacts
