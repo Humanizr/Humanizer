@@ -1,13 +1,29 @@
 ﻿namespace Humanizer;
 
 /// <summary>
-/// Number to TimeSpan extensions
+/// Provides extension methods for converting numeric values to <see cref="TimeSpan"/> instances,
+/// enabling fluent and readable time duration creation (e.g., 5.Seconds(), 3.Hours(), 2.Weeks()).
 /// </summary>
+/// <remarks>
+/// These extensions make it easy to create TimeSpan values in a more natural, readable way:
+/// - Instead of TimeSpan.FromHours(3), you can write 3.Hours()
+/// - Instead of TimeSpan.FromMinutes(30), you can write 30.Minutes()
+/// - Supports all numeric types: byte, sbyte, short, ushort, int, uint, long, ulong, and double
+/// - Weeks are converted to days (1 week = 7 days)
+/// </remarks>
 public static class NumberToTimeSpanExtensions
 {
     /// <summary>
-    /// 5.Milliseconds() == TimeSpan.FromMilliseconds(5)
+    /// Creates a <see cref="TimeSpan"/> representing the specified number of milliseconds.
     /// </summary>
+    /// <param name="ms">The number of milliseconds.</param>
+    /// <returns>A <see cref="TimeSpan"/> representing <paramref name="ms"/> milliseconds.</returns>
+    /// <example>
+    /// <code>
+    /// 500.Milliseconds() => TimeSpan representing 500 milliseconds
+    /// 1000.Milliseconds() => TimeSpan representing 1 second
+    /// </code>
+    /// </example>
     public static TimeSpan Milliseconds(this byte ms) =>
         Milliseconds((double)ms);
 
@@ -108,8 +124,16 @@ public static class NumberToTimeSpanExtensions
         Seconds((double)seconds);
 
     /// <summary>
-    /// 5.Seconds() == TimeSpan.FromSeconds(5)
+    /// Creates a <see cref="TimeSpan"/> representing the specified number of seconds.
     /// </summary>
+    /// <param name="seconds">The number of seconds.</param>
+    /// <returns>A <see cref="TimeSpan"/> representing <paramref name="seconds"/> seconds.</returns>
+    /// <example>
+    /// <code>
+    /// 30.Seconds() => TimeSpan representing 30 seconds
+    /// 90.Seconds() => TimeSpan representing 1 minute and 30 seconds
+    /// </code>
+    /// </example>
     public static TimeSpan Seconds(this double seconds) =>
         TimeSpan.FromSeconds(seconds);
 
@@ -162,8 +186,16 @@ public static class NumberToTimeSpanExtensions
         Minutes((double)minutes);
 
     /// <summary>
-    /// 4.Minutes() == TimeSpan.FromMinutes(4)
+    /// Creates a <see cref="TimeSpan"/> representing the specified number of minutes.
     /// </summary>
+    /// <param name="minutes">The number of minutes.</param>
+    /// <returns>A <see cref="TimeSpan"/> representing <paramref name="minutes"/> minutes.</returns>
+    /// <example>
+    /// <code>
+    /// 30.Minutes() => TimeSpan representing 30 minutes
+    /// 90.Minutes() => TimeSpan representing 1 hour and 30 minutes
+    /// </code>
+    /// </example>
     public static TimeSpan Minutes(this double minutes) =>
         TimeSpan.FromMinutes(minutes);
 
@@ -216,8 +248,17 @@ public static class NumberToTimeSpanExtensions
         Hours((double)hours);
 
     /// <summary>
-    /// 3.Hours() == TimeSpan.FromHours(3)
+    /// Creates a <see cref="TimeSpan"/> representing the specified number of hours.
     /// </summary>
+    /// <param name="hours">The number of hours.</param>
+    /// <returns>A <see cref="TimeSpan"/> representing <paramref name="hours"/> hours.</returns>
+    /// <example>
+    /// <code>
+    /// 3.Hours() => TimeSpan representing 3 hours
+    /// 24.Hours() => TimeSpan representing 1 day
+    /// 1.5.Hours() => TimeSpan representing 1 hour and 30 minutes
+    /// </code>
+    /// </example>
     public static TimeSpan Hours(this double hours) =>
         TimeSpan.FromHours(hours);
 
@@ -270,8 +311,17 @@ public static class NumberToTimeSpanExtensions
         Days((double)days);
 
     /// <summary>
-    /// 2.Days() == TimeSpan.FromDays(2)
+    /// Creates a <see cref="TimeSpan"/> representing the specified number of days.
     /// </summary>
+    /// <param name="days">The number of days.</param>
+    /// <returns>A <see cref="TimeSpan"/> representing <paramref name="days"/> days.</returns>
+    /// <example>
+    /// <code>
+    /// 2.Days() => TimeSpan representing 2 days  
+    /// 7.Days() => TimeSpan representing 1 week
+    /// 1.5.Days() => TimeSpan representing 1 day and 12 hours
+    /// </code>
+    /// </example>
     public static TimeSpan Days(this double days) =>
         TimeSpan.FromDays(days);
 
@@ -324,8 +374,21 @@ public static class NumberToTimeSpanExtensions
         Weeks((double)input);
 
     /// <summary>
-    /// 2.Weeks() == new TimeSpan(14, 0, 0, 0)
+    /// Creates a <see cref="TimeSpan"/> representing the specified number of weeks.
     /// </summary>
+    /// <param name="input">The number of weeks.</param>
+    /// <returns>A <see cref="TimeSpan"/> representing <paramref name="input"/> weeks (converted to days: 1 week = 7 days).</returns>
+    /// <remarks>
+    /// Since <see cref="TimeSpan"/> doesn't have a native concept of weeks, this method converts
+    /// weeks to days (multiplying by 7).
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// 2.Weeks() => TimeSpan representing 14 days
+    /// 1.Weeks() => TimeSpan representing 7 days
+    /// 0.5.Weeks() => TimeSpan representing 3.5 days
+    /// </code>
+    /// </example>
     public static TimeSpan Weeks(this double input) =>
         Days(7 * input);
 }
