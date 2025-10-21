@@ -8,16 +8,16 @@ on:
         required: true
         type: string
         default: '3.0.0-rc.6'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'src/Humanizer/**'
-      - 'src/Benchmarks/**'
-      - '.github/workflows/benchmarks-baseline-vs-current.yml'
+
   push:
-    branches:
-      - 'copilot/identify-performance-improvements'
+    paths:
+      - '.github/workflows/benchmarks-baseline-vs-current.yml'        
+  pull_request:
+    paths:
+      - '.github/workflows/benchmarks-baseline-vs-current.yml'
+
+  schedule:
+    - cron: '0 4 * * 1'  # Every Monday at 04:00 UTC
 
 jobs:
   benchmark:
