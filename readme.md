@@ -7,6 +7,8 @@
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
+> **📚 Full Documentation**: See the [documentation folder](docs/index.md) for comprehensive guides, examples, and API reference.
+
 
 ## Install
 
@@ -52,7 +54,9 @@ The detailed explanation for how this works is in the comments [here](https://gi
 
 ### Humanize String
 
-`Humanize` string extensions transform computerized strings into readable, human-friendly sentences by intelligently handling PascalCase, camelCase, underscored_strings, and dash-separated-strings.
+String humanization is a core feature that transforms computerized strings into readable, human-friendly text. This is particularly valuable when you need to display programming identifiers (class names, method names, properties) to end users in a readable format.
+
+The foundation of this feature was originally developed for the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) to turn test method names into readable test descriptions. `Humanize` intelligently handles PascalCase, camelCase, underscored_strings, and dash-separated-strings.
 
 ```csharp
 "PascalCaseInputStringIsTurnedIntoSentence".Humanize() 
@@ -113,7 +117,7 @@ Reverse the humanization process by converting human-friendly strings back to Pa
 
 ### Transform String
 
-The `Transform` method provides a flexible, extensible way to apply string transformations using the `IStringTransformer` interface:
+The `Transform` method provides a flexible, extensible way to apply string transformations. Unlike the legacy `LetterCasing` enum which limits you to built-in options, `IStringTransformer` is an interface you can implement in your codebase for domain-specific transformations.
 
 ```csharp
 "Sentence casing".Transform(To.LowerCase) => "sentence casing"
@@ -122,12 +126,12 @@ The `Transform` method provides a flexible, extensible way to apply string trans
 "Sentence casing".Transform(To.UpperCase) => "SENTENCE CASING"
 ```
 
-The advantage of `Transform` over the legacy `LetterCasing` enum is that you can implement custom `IStringTransformer` instances in your codebase for domain-specific transformations.
+
 
 
 ### Truncate String
 
-Truncate strings intelligently with various strategies:
+Intelligently truncate strings with multiple strategies. The default uses the `…` character (one character) instead of `"..."` (three characters) to maximize visible text before truncation. You can also implement custom `ITruncator` strategies for specialized truncation logic.
 
 ```csharp
 "Long text to truncate".Truncate(10) => "Long text…"
@@ -144,12 +148,12 @@ Truncate strings intelligently with various strategies:
     => "… truncate"
 ```
 
-The default truncator uses the `…` character (one character) instead of `"..."` (three characters) to maximize visible text before truncation.
+
 
 
 ### Humanize Enums
 
-Transform enum values into readable strings, honoring `DescriptionAttribute` when present:
+Enum humanization eliminates the need to manually add spaces between words in enum member names. While you could use `DescriptionAttribute` on every enum member, Humanizer automatically handles the common case of simply needing to add spaces. When `DescriptionAttribute` (or any attribute with a `Description` property) is present, it takes precedence, making it easy to provide custom text only when needed.
 
 ```csharp
 public enum UserType
@@ -172,7 +176,7 @@ UserType.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase)
     => "Member Without Description Attribute"
 ```
 
-Works with any attribute containing a `Description` property, and supports localized `DisplayAttribute` for multi-language scenarios.
+Humanizer works with any attribute containing a `Description` property and supports localized `DisplayAttribute` for multi-language scenarios. This helps you avoid littering enums with unnecessary attributes while still providing customization when needed.
 
 
 ### Dehumanize Enums
@@ -414,7 +418,7 @@ You can provide your own collection formatter by implementing `ICollectionFormat
 
 ### Inflector methods
 
-Transform words with powerful pluralization, singularization, and casing methods.
+Inflector methods handle the complexities of English pluralization and singularization rules, including irregular words (man/men, person/people) and uncountable words (fish, equipment). These methods save you from maintaining your own word lists and rules.
 
 
 #### Pluralize
@@ -543,7 +547,7 @@ Transform to common naming conventions:
 
 ### Fluent Date
 
-Create `TimeSpan` and `DateTime` values with readable, fluent syntax:
+Fluent date methods make time-based code dramatically more readable. Instead of verbose `DateTime.Now.AddDays(2).AddHours(3)` calls, you can write `DateTime.Now + 2.Days() + 3.Hours()`. This improves code clarity and reduces errors.
 
 **TimeSpan methods:**
 
