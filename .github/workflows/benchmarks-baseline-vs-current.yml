@@ -162,7 +162,7 @@ jobs:
               echo "Comparing results for $tfm..."
               
               if [ -d "current-split/$tfm" ]; then
-                dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net8.0 -f net8.0 --base "$tfm_dir" --diff "current-split/$tfm" --threshold "5%" > "comparisons/diff-$tfm.md" || true
+                dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -f net10.0 --base "$tfm_dir" --diff "current-split/$tfm" --threshold "5%" > "comparisons/diff-$tfm.md" || true
               else
                 echo "⚠️ No current results found for $tfm" > "comparisons/diff-$tfm.md"
               fi
