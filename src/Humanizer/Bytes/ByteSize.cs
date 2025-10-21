@@ -270,7 +270,7 @@ public struct ByteSize(double byteSize) :
 
         var formattedLargeWholeNumberValue = LargestWholeNumberValue.ToString(format, provider);
 
-        formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty)
+        formattedLargeWholeNumberValue = formattedLargeWholeNumberValue.Equals(string.Empty, StringComparison.Ordinal)
             ? "0"
             : formattedLargeWholeNumberValue;
 

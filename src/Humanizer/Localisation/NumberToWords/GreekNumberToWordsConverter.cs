@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
@@ -8,6 +8,7 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
     static readonly string[] TensNoDiacriticsMap = ["", "δεκα", "εικοσι", "τριαντα", "σαραντα", "πενηντα", "εξηντα", "εβδομηντα", "ογδοντα", "ενενηντα"];
     static readonly string[] HundredMap = ["", "εκατό", "διακόσια", "τριακόσια", "τετρακόσια", "πεντακόσια", "εξακόσια", "επτακόσια", "οκτακόσια", "εννιακόσια"];
     static readonly string[] HundredsMap = ["", "εκατόν", "διακόσιες", "τριακόσιες", "τετρακόσιες", "πεντακόσιες", "εξακόσιες", "επτακόσιες", "οκτακόσιες", "εννιακόσιες"];
+    static readonly CultureInfo Culture = CultureInfo.GetCultureInfo("el");
 
     static readonly FrozenDictionary<long, string> ΟrdinalMap = new Dictionary<long, string>
     {
@@ -265,7 +266,7 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
             }
 
             result += ConvertImpl(number % 10, returnPluralized)
-                .ToLower();
+                .ToLower(Culture);
         }
 
         return result;
@@ -291,7 +292,7 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
 
         if (number % 100 != 0)
         {
-            result += $" {ConvertImpl(number % 100, returnPluralized).ToLower()}";
+            result += $" {ConvertImpl(number % 100, returnPluralized).ToLower(Culture)}";
         }
 
         return result;
@@ -306,14 +307,14 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
                 return "χίλια";
             }
 
-            return $"χίλια {ConvertImpl(number % 1000, false).ToLower()}";
+            return $"χίλια {ConvertImpl(number % 1000, false).ToLower(Culture)}";
         }
 
         var result = $"{ConvertImpl(number / 1000, true)} χιλιάδες";
 
         if (number % 1000 != 0)
         {
-            result += $" {ConvertImpl(number % 1000, false).ToLower()}";
+            result += $" {ConvertImpl(number % 1000, false).ToLower(Culture)}";
         }
 
         return result;
@@ -328,14 +329,14 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
                 return "ένα εκατομμύριο";
             }
 
-            return $"ένα εκατομμύριο {ConvertImpl(number % 1000000, true).ToLower()}";
+            return $"ένα εκατομμύριο {ConvertImpl(number % 1000000, true).ToLower(Culture)}";
         }
 
         var result = $"{ConvertImpl(number / 1000000, false)} εκατομμύρια";
 
         if (number % 1000000 != 0)
         {
-            result += $" {ConvertImpl(number % 1000000, false).ToLower()}";
+            result += $" {ConvertImpl(number % 1000000, false).ToLower(Culture)}";
         }
 
         return result;
@@ -350,14 +351,14 @@ class GreekNumberToWordsConverter : GenderlessNumberToWordsConverter
                 return "ένα δισεκατομμύριο";
             }
 
-            return $"ένα δισεκατομμύριο {ConvertImpl(number % 1000000000, true).ToLower()}";
+            return $"ένα δισεκατομμύριο {ConvertImpl(number % 1000000000, true).ToLower(Culture)}";
         }
 
         var result = $"{ConvertImpl(number / 1000000000, false)} δισεκατομμύρια";
 
         if (number % 1000000000 != 0)
         {
-            result += $" {ConvertImpl(number % 1000000000, false).ToLower()}";
+            result += $" {ConvertImpl(number % 1000000000, false).ToLower(Culture)}";
         }
 
         return result;

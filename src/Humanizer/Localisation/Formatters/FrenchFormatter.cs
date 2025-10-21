@@ -1,4 +1,4 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class FrenchFormatter(CultureInfo culture) :
     DefaultFormatter(culture)
@@ -12,7 +12,7 @@ class FrenchFormatter(CultureInfo culture) :
             return resourceKey + DualPostfix;
         }
 
-        if (number == 0 && resourceKey.StartsWith("TimeSpanHumanize_Multiple"))
+        if (number == 0 && resourceKey.StartsWith("TimeSpanHumanize_Multiple", StringComparison.InvariantCulture))
         {
             return resourceKey + "_Singular";
         }

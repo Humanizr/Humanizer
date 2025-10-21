@@ -70,7 +70,7 @@ class RomanianOrdinalNumberConverter
         // remove 'de' preposition
         words = words.Replace(" de ", " ");
 
-        if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci"))
+        if (gender == GrammaticalGender.Feminine && words.EndsWith("zeci", StringComparison.OrdinalIgnoreCase))
         {
             words = StringHumanizeExtensions.Concat(words.AsSpan(0, words.Length - 4), "zece".AsSpan());
         }
@@ -79,7 +79,7 @@ class RomanianOrdinalNumberConverter
             words = words.Replace("zeci", "zecea");
         }
 
-        if (gender == GrammaticalGender.Feminine && words.StartsWith("un "))
+        if (gender == GrammaticalGender.Feminine && words.StartsWith("un ", StringComparison.OrdinalIgnoreCase))
         {
             words = words
                 .AsSpan(2)
@@ -87,7 +87,7 @@ class RomanianOrdinalNumberConverter
                 .ToString();
         }
 
-        if (words.EndsWith("milioane"))
+        if (words.EndsWith("milioane", StringComparison.OrdinalIgnoreCase))
         {
             if (gender == GrammaticalGender.Feminine)
             {
@@ -96,7 +96,7 @@ class RomanianOrdinalNumberConverter
         }
 
         var customMasculineSuffix = masculineSuffix;
-        if (words.EndsWith("milion"))
+        if (words.EndsWith("milion", StringComparison.OrdinalIgnoreCase))
         {
             if (gender == GrammaticalGender.Feminine)
             {
@@ -107,7 +107,7 @@ class RomanianOrdinalNumberConverter
                 customMasculineSuffix = "u" + masculineSuffix;
             }
         }
-        else if (words.EndsWith("miliard"))
+        else if (words.EndsWith("miliard", StringComparison.OrdinalIgnoreCase))
         {
             if (gender == GrammaticalGender.Masculine)
             {
@@ -116,7 +116,7 @@ class RomanianOrdinalNumberConverter
         }
 
         // trim last letter
-        if (gender == GrammaticalGender.Feminine && !words.EndsWith("zece") &&
+        if (gender == GrammaticalGender.Feminine && !words.EndsWith("zece", StringComparison.OrdinalIgnoreCase) &&
             (words.EndsWith('a') ||
              words.EndsWith('ă') ||
              words.EndsWith('e') ||

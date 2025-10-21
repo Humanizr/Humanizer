@@ -4,6 +4,7 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
 {
     static readonly string[] UnitsMap = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"];
     static readonly string[] TensMap = ["zéro", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "septante", "octante", "nonante"];
+    static readonly CultureInfo Culture = CultureInfo.GetCultureInfo("fr");
 
     public override string Convert(long number, GrammaticalGender gender, bool addAnd = true)
     {
@@ -41,20 +42,20 @@ abstract class FrenchNumberToWordsConverterBase : GenderedNumberToWordsConverter
 
         var convertedNumber = Convert(number);
 
-        if (convertedNumber.EndsWith('s') && !convertedNumber.EndsWith("trois"))
+        if (convertedNumber.EndsWith('s') && !convertedNumber.EndsWith("trois", true, Culture))
         {
             convertedNumber = convertedNumber.TrimEnd('s');
         }
-        else if (convertedNumber.EndsWith("cinq"))
+        else if (convertedNumber.EndsWith("cinq", true, Culture))
         {
             convertedNumber += "u";
         }
-        else if (convertedNumber.EndsWith("neuf"))
+        else if (convertedNumber.EndsWith("neuf", true, Culture))
         {
             convertedNumber = convertedNumber.TrimEnd('f') + "v";
         }
 
-        if (convertedNumber.StartsWith("un "))
+        if (convertedNumber.StartsWith("un ", true, Culture))
         {
             convertedNumber = convertedNumber[3..];
         }

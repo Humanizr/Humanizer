@@ -5,12 +5,12 @@ internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberCo
 #if NET7_0_OR_GREATER
     [GeneratedRegex(@"\b(\d+)(st|nd|rd|th)\b")]
     private static partial Regex OrdinalSuffixRegexGenerated();
-    
-    private static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexGenerated();
-#else
-    private static readonly Regex OrdinalSuffixRegexField = new(@"\b(\d+)(st|nd|rd|th)\b", RegexOptions.Compiled);
 
-    private static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexField;
+    static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexGenerated();
+#else
+    static readonly Regex OrdinalSuffixRegexField = new(@"\b(\d+)(st|nd|rd|th)\b", RegexOptions.Compiled);
+
+    static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexField;
 #endif
 
     private static readonly FrozenDictionary<string, int> NumbersMap = new Dictionary<string, int>
@@ -62,7 +62,7 @@ internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberCo
                      .ToLowerInvariant()
                      .Trim();
 
-        var isNegative = words.StartsWith("minus ") || words.StartsWith("negative ");
+        var isNegative = words.StartsWith("minus ", StringComparison.OrdinalIgnoreCase) || words.StartsWith("negative ", StringComparison.OrdinalIgnoreCase);
         if (isNegative)
         {
             words = words.Replace("minus ", "").Replace("negative ", "").Trim();

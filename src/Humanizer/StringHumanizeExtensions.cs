@@ -10,12 +10,12 @@ public static partial class StringHumanizeExtensions
 #if NET7_0_OR_GREATER
     [GeneratedRegex(@"(\p{Lu}?\p{Ll}+|[0-9]+\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?", RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture)]
     private static partial Regex PascalCaseWordPartsRegexGenerated();
-    
+
     private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexGenerated();
 
     [GeneratedRegex(@"\s[-_]|[-_]\s")]
     private static partial Regex FreestandingSpacingCharRegexGenerated();
-    
+
     private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexGenerated();
 #else
     private static readonly Regex PascalCaseWordPartsRegexField = new(
@@ -50,7 +50,7 @@ public static partial class StringHumanizeExtensions
                 return value.All(char.IsUpper) &&
                        (value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || value == "I")
                     ? value
-                    : value.ToLower();
+                    : value.ToLower(CultureInfo.CurrentUICulture);
             }));
 
         if (result
@@ -58,7 +58,7 @@ public static partial class StringHumanizeExtensions
                 .All(char.IsUpper) &&
             result.Contains(' '))
         {
-            result = result.ToLower();
+            result = result.ToLower(CultureInfo.CurrentUICulture);
         }
 
         return result.Length > 0

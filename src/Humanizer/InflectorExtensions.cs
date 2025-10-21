@@ -28,22 +28,22 @@ public static partial class InflectorExtensions
 #if NET7_0_OR_GREATER
     [GeneratedRegex(@"(?:[ _-]+|^)([a-zA-Z])")]
     private static partial Regex PascalizeRegexGenerated();
-    
+
     private static Regex PascalizeRegex() => PascalizeRegexGenerated();
 
     [GeneratedRegex(@"([\p{Lu}]+)([\p{Lu}][\p{Ll}])")]
     private static partial Regex UnderscoreRegex1Generated();
-    
+
     private static Regex UnderscoreRegex1() => UnderscoreRegex1Generated();
 
     [GeneratedRegex(@"([\p{Ll}\d])([\p{Lu}])")]
     private static partial Regex UnderscoreRegex2Generated();
-    
+
     private static Regex UnderscoreRegex2() => UnderscoreRegex2Generated();
 
     [GeneratedRegex(@"[-\s]")]
     private static partial Regex UnderscoreRegex3Generated();
-    
+
     private static Regex UnderscoreRegex3() => UnderscoreRegex3Generated();
 #else
     private static readonly Regex PascalizeRegexField = new(@"(?:[ _-]+|^)([a-zA-Z])", RegexOptions.Compiled);
@@ -77,48 +77,56 @@ public static partial class InflectorExtensions
     public static string Singularize(this string word, bool inputIsKnownToBePlural = true, bool skipSimpleWords = false) =>
         Vocabularies.Default.Singularize(word, inputIsKnownToBePlural, skipSimpleWords);
 
-    /// <summary>
-    /// Humanizes the input with Title casing
-    /// </summary>
-    /// <param name="input">The string to be titleized</param>
-    public static string Titleize(this string input)
+    extension(string input)
     {
-        var humanized = input.Humanize();
-        // If humanization returns empty string (no recognized letters), preserve original input
-        return humanized.Length == 0 ? input : humanized.ApplyCase(LetterCasing.Title);
+        /// <summary>
+        /// Humanizes the input with Title casing
+        /// </summary>
+        public string Titleize()
+        {
+            var humanized = input.Humanize();
+            // If humanization returns empty string (no recognized letters), preserve original input
+            return humanized.Length == 0 ? input : humanized.ApplyCase(LetterCasing.Title);
+        }
+
+        /// <summary>
+        /// By default, pascalize converts strings to UpperCamelCase also removing underscores
+        /// </summary>
+        public string Pascalize() =>
+            PascalizeRegex().Replace(input, match => match
+                .Groups[1]
+                .Value.ToUpper(CultureInfo.CurrentUICulture));
+
+        /// <summary>
+        /// Same as Pascalize except that the first character is lower case
+        /// </summary>
+        public string Camelize()
+        {
+            var word = input.Pascalize();
+            return word.Length > 0
+                ? StringHumanizeExtensions.Concat(
+                    char.ToLower(word[0]),
+                    word.AsSpan(1))
+                : word;
+        }
+
+        /// <summary>
+        /// Separates the input words with underscore
+        /// </summary>
+        public string Underscore() =>
+            UnderscoreRegex3()
+                .Replace(
+                    UnderscoreRegex2().Replace(
+                        UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_")
+                .ToLower(CultureInfo.CurrentUICulture);
+
+        /// <summary>
+        /// Separates the input words with hyphens and all the words are converted to lowercase
+        /// </summary>
+        public string Kebaberize() =>
+            Underscore(input)
+                .Dasherize();
     }
-
-    /// <summary>
-    /// By default, pascalize converts strings to UpperCamelCase also removing underscores
-    /// </summary>
-    public static string Pascalize(this string input) =>
-        PascalizeRegex().Replace(input, match => match
-            .Groups[1]
-            .Value.ToUpper());
-
-    /// <summary>
-    /// Same as Pascalize except that the first character is lower case
-    /// </summary>
-    public static string Camelize(this string input)
-    {
-        var word = input.Pascalize();
-        return word.Length > 0
-            ? StringHumanizeExtensions.Concat(
-                char.ToLower(word[0]),
-                word.AsSpan(1))
-            : word;
-    }
-
-    /// <summary>
-    /// Separates the input words with underscore
-    /// </summary>
-    /// <param name="input">The string to be underscored</param>
-    public static string Underscore(this string input) =>
-        UnderscoreRegex3()
-            .Replace(
-                UnderscoreRegex2().Replace(
-                    UnderscoreRegex1().Replace(input, "$1_$2"), "$1_$2"), "_")
-            .ToLower();
 
     /// <summary>
     /// Replaces underscores with dashes in the string
@@ -131,11 +139,4 @@ public static partial class InflectorExtensions
     /// </summary>
     public static string Hyphenate(this string underscoredWord) =>
         Dasherize(underscoredWord);
-
-    /// <summary>
-    /// Separates the input words with hyphens and all the words are converted to lowercase
-    /// </summary>
-    public static string Kebaberize(this string input) =>
-        Underscore(input)
-            .Dasherize();
 }

@@ -163,17 +163,17 @@ class PortugueseNumberToWordsConverter : GenderedNumberToWordsConverter
             return toWords;
         }
 
-        if (toWords.EndsWith("os"))
+        if (toWords.EndsWith("os", StringComparison.OrdinalIgnoreCase))
         {
             return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "as".AsSpan());
         }
 
-        if (toWords.EndsWith("um"))
+        if (toWords.EndsWith("um", StringComparison.OrdinalIgnoreCase))
         {
             return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "uma".AsSpan());
         }
 
-        if (toWords.EndsWith("dois"))
+        if (toWords.EndsWith("dois", StringComparison.OrdinalIgnoreCase))
         {
             return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 4), "duas".AsSpan());
         }

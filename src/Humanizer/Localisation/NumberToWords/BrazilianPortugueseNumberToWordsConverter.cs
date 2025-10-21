@@ -11,6 +11,8 @@ class BrazilianPortugueseNumberToWordsConverter :
     static readonly string[] OrdinalTensMap = ["zero", "décimo", "vigésimo", "trigésimo", "quadragésimo", "quinquagésimo", "sexagésimo", "septuagésimo", "octogésimo", "nonagésimo"];
     static readonly string[] OrdinalHundredsMap = ["zero", "centésimo", "ducentésimo", "trecentésimo", "quadringentésimo", "quingentésimo", "sexcentésimo", "septingentésimo", "octingentésimo", "noningentésimo"];
 
+    static readonly CultureInfo Culture = CultureInfo.GetCultureInfo("pt-BR");
+
     public override string Convert(long input, GrammaticalGender gender, bool addAnd = true)
     {
         if (input is > 999999999999 or < -999999999999)
@@ -164,17 +166,17 @@ class BrazilianPortugueseNumberToWordsConverter :
             return toWords;
         }
 
-        if (toWords.EndsWith("os"))
+        if (toWords.EndsWith("os", StringComparison.OrdinalIgnoreCase))
         {
             return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "as".AsSpan());
         }
 
-        if (toWords.EndsWith("um"))
+        if (toWords.EndsWith("um", StringComparison.OrdinalIgnoreCase))
         {
             return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 2), "uma".AsSpan());
         }
 
-        if (toWords.EndsWith("dois"))
+        if (toWords.EndsWith("dois", StringComparison.OrdinalIgnoreCase))
         {
             return StringHumanizeExtensions.Concat(toWords.AsSpan(0, toWords.Length - 4), "duas".AsSpan());
         }

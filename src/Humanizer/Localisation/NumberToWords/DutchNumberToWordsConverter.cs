@@ -171,7 +171,7 @@ class DutchNumberToWordsConverter :
     {
         var word = Convert(number);
 
-        foreach (var kv in OrdinalExceptions.Where(kv => word.EndsWith(kv.Key)))
+        foreach (var kv in OrdinalExceptions.Where(kv => word.EndsWith(kv.Key, StringComparison.Ordinal)))
         {
             // replace word with exception
             return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length - kv.Key.Length), kv.Value.AsSpan());

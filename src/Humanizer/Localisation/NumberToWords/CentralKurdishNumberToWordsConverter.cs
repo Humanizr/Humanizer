@@ -68,7 +68,7 @@ class CentralKurdishNumberToWordsConverter : GenderlessNumberToWordsConverter
         }
 
         var sentence = string.Join(" و ", parts);
-        if (sentence.StartsWith("یەک هەزار"))
+        if (sentence.StartsWith("یەک هەزار", StringComparison.OrdinalIgnoreCase))
         {
             return sentence[" یەک".Length..];
         }

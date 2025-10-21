@@ -195,7 +195,7 @@ class LithuanianNumberToWordsConverter : GenderedNumberToWordsConverter
                 return "dvi";
             }
 
-            if (number.EndsWith("as"))
+            if (number.EndsWith("as", StringComparison.OrdinalIgnoreCase))
             {
                 return number[..^1];
             }

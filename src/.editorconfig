@@ -237,7 +237,8 @@ dotnet_diagnostic.CA2241.severity = error
 dotnet_diagnostic.CA2242.severity = error
 
 
-# Test Projects
+dotnet_analyzer_diagnostic.category-Performance.severity = warning
+dotnet_analyzer_diagnostic.category-Globalization.severity = warning
 
 # IDE0022: Use expression body for method
 dotnet_diagnostic.IDE0022.severity = silent

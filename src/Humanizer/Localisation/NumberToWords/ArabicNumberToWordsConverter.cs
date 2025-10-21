@@ -265,7 +265,7 @@ class ArabicNumberToWordsConverter :
         if (number <= 10)
         {
             var ordinals = gender == GrammaticalGender.Feminine ? FeminineOrdinalExceptions : OrdinalExceptions;
-            foreach (var kv in ordinals.Where(kv => word.EndsWith(kv.Key)))
+            foreach (var kv in ordinals.Where(kv => word.EndsWith(kv.Key, StringComparison.OrdinalIgnoreCase)))
             {
                 // replace word with exception
                 return StringHumanizeExtensions.Concat(
@@ -285,7 +285,7 @@ class ArabicNumberToWordsConverter :
                 var oldPart = part;
 
                 var ordinals = gender == GrammaticalGender.Feminine ? FeminineOrdinalExceptions : OrdinalExceptions;
-                foreach (var kv in ordinals.Where(kv => oldPart.EndsWith(kv.Key)))
+                foreach (var kv in ordinals.Where(kv => oldPart.EndsWith(kv.Key, StringComparison.OrdinalIgnoreCase)))
                 {
                     // replace word with exception
                     newPart = StringHumanizeExtensions.Concat(
