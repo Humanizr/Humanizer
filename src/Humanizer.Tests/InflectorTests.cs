@@ -159,7 +159,7 @@ public class InflectorTests
         Assert.Equal(expectedOutput, input.Kebaberize());
 }
 
-class PluralTestSource : IEnumerable<object[]>
+sealed class PluralTestSource : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {
