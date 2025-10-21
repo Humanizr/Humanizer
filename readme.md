@@ -545,6 +545,19 @@ Normally you would call `Singularize` on a plural word but if you're unsure abou
 
 The overload of `Singularize` with `plurality` argument is obsolete and was removed in version 2.0.
 
+#### ToPossessive
+`ToPossessive` converts word to its possesive form. 
+
+By default it appends "'" to words ending with 's' and "'s" for all other words. 
+
+This rule may differ between different versions of english, in which case user can override the default for e.g. adding "'s" even for words ending with 's' -
+
+```
+"Jess".ToPossessive() => "Jess'"
+"Jess".ToPossessive(PossessiveSuffixOverride.APOSTROPHE_S) => "Jess's"
+```
+
+
 
 ## Adding Words
 

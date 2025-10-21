@@ -1,3 +1,5 @@
+using Humanizer;
+
 namespace Humanizer;
 
 /// <summary>
@@ -25,6 +27,11 @@ public partial class Vocabulary
 
     private static Regex LetterSRegex() => LetterSRegexField;
 #endif
+
+    readonly Dictionary<string, char> possessiveExceptionMap = new Dictionary<string, char>(StringComparer.OrdinalIgnoreCase)
+    {
+        { "it", 's' },
+    };
 
     /// <summary>
     /// Adds a word to the vocabulary which cannot easily be pluralized/singularized by RegEx, e.g. "person" and "people".
@@ -153,6 +160,36 @@ public partial class Vocabulary
         }
 
         return word;
+    }
+
+    public string? ToPossessive(string? word, PossesiveSuffixOverride? possessiveSuffix)
+    {
+        if (word == null || string.IsNullOrWhiteSpace(word))
+        {
+            return word;
+        }
+
+        switch (possessiveSuffix)
+        {
+            case PossesiveSuffixOverride.S_ONLY:
+                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), 's');
+            case PossesiveSuffixOverride.APOSTROPHE_ONLY:
+                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), '\'');
+            case PossesiveSuffixOverride.APOSTROPHE_S:
+                return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), "'s".AsSpan());
+        }
+
+        if (possessiveExceptionMap.TryGetValue(word, out var suffix))
+        {
+            return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), suffix);
+        }
+
+        if (word[word.Length - 1] == 's')
+        {
+            return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), '\'');
+        }
+
+        return StringHumanizeExtensions.Concat(word.AsSpan(0, word.Length), "'s".AsSpan());
     }
 
     string? ApplyRules(IList<Rule> rules, string? word, bool skipFirstRule)

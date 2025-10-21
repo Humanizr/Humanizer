@@ -21,6 +21,8 @@
 //IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Humanizer;
+
 namespace Humanizer;
 
 public static partial class InflectorExtensions
@@ -138,4 +140,14 @@ public static partial class InflectorExtensions
     public static string Kebaberize(this string input) =>
         Underscore(input)
             .Dasherize();
+
+    /// <summary>
+    /// Converts the input to possessive form, e.g. "cat" -> "cat's", "dogs" -> "dogs'", "child" -> "child's"
+    /// Also supports custom possessive suffixes via the PossesiveSuffixOverride parameter.
+    /// </summary>
+    /// <param name="word">Word to convert to possessive</param>
+    /// <param name="suffix">Custom possessive suffix that user may want to override with</param>
+    [return: NotNullIfNotNull(nameof(word))]
+    public static string? ToPossessive(this string? word, PossesiveSuffixOverride? suffix = null) =>
+        Vocabularies.Default.ToPossessive(word, suffix);
 }
