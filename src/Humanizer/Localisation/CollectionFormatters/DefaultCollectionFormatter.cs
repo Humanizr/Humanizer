@@ -1,11 +1,8 @@
 ﻿namespace Humanizer;
 
-class DefaultCollectionFormatter : ICollectionFormatter
+class DefaultCollectionFormatter(string defaultSeparator) : ICollectionFormatter
 {
-    protected string DefaultSeparator = "";
-
-    public DefaultCollectionFormatter(string defaultSeparator) =>
-        DefaultSeparator = defaultSeparator;
+    protected string DefaultSeparator = defaultSeparator;
 
     public virtual string Humanize<T>(IEnumerable<T> collection) =>
         Humanize(collection, o => o?.ToString(), DefaultSeparator);

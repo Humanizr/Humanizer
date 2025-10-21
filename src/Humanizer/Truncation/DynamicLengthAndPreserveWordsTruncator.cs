@@ -24,10 +24,7 @@ class DynamicLengthAndPreserveWordsTruncator : ITruncator
 
         // For this scenario we expect a single-character delimiter.
         // If truncation string is null, treat it as empty.
-        if (truncationString == null)
-        {
-            truncationString = string.Empty;
-        }
+        truncationString ??= string.Empty;
 
         // If the delimiter itself is longer than the allowed length, fall back to a basic substring.
         if (truncationString.Length > length)

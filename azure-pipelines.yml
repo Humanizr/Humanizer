@@ -80,7 +80,7 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)\Packages
       displayName: Publish build packages
       artifact: BuildPackages
-  
+
 
 - stage: CodeSign
   dependsOn: Build

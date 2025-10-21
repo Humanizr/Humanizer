@@ -23,6 +23,7 @@
     <File Path="Directory.Solution.targets" />
     <File Path="Humanizer.ruleset" />
     <File Path="nuget.config" />
+    <File Path="scripts/split-benchmark-results.ps1" />
   </Folder>
   <Folder Name="/Solution Items/NuSpecs/">
     <File Path="../NuSpecs/Humanizer.Core.af.nuspec" />

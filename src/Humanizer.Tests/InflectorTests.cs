@@ -1,4 +1,4 @@
-﻿//The Inflector class was cloned from Inflector (https://github.com/srkirkland/Inflector)
+//The Inflector class was cloned from Inflector (https://github.com/srkirkland/Inflector)
 
 //The MIT License (MIT)
 
@@ -25,7 +25,7 @@ using System.Collections;
 
 public class InflectorTests
 {
-    public readonly IList<object[]> PluralTestData = new List<object[]>();
+    public readonly IList<object[]> PluralTestData = [];
 
     [Theory]
     [ClassData(typeof(PluralTestSource))]

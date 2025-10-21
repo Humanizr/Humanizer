@@ -104,17 +104,12 @@ class SerbianNumberToWordsConverter(CultureInfo culture) :
 
     string Part(string singular, string dual, string trialQuadral, string plural, int number)
     {
-        switch (number)
+        return number switch
         {
-            case 1:
-                return singular;
-            case 2:
-                return dual;
-            case 3:
-            case 4:
-                return string.Format(trialQuadral, Convert(number));
-            default:
-                return string.Format(plural, Convert(number));
-        }
+            1 => singular,
+            2 => dual,
+            3 or 4 => string.Format(trialQuadral, Convert(number)),
+            _ => string.Format(plural, Convert(number)),
+        };
     }
 }

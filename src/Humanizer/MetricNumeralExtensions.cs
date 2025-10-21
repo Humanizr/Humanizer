@@ -53,7 +53,7 @@ public static class MetricNumeralExtensions
     /// {'d', "deci" },
     /// {'c', "centi"},
     /// </remarks>
-    static readonly Dictionary<char, UnitPrefix> UnitPrefixes = new()
+    static readonly FrozenDictionary<char, UnitPrefix> UnitPrefixes = new Dictionary<char, UnitPrefix>
     {
         {
             'Y', new("yotta", "septillion", "quadrillion")
@@ -104,7 +104,7 @@ public static class MetricNumeralExtensions
         {
             'y', new("yocto", "septillionth", "quadrillionth")
         }
-    };
+    }.ToFrozenDictionary();
 
     /// <summary>
     /// Converts a Metric representation into a number.
@@ -498,6 +498,6 @@ public static class MetricNumeralExtensions
     {
         public string Name { get; } = name;
         public string ShortScaleWord { get; } = shortScaleWord;
-        public string LongScaleWord => longScaleWord ?? ShortScaleWord;
+        public readonly string LongScaleWord => longScaleWord ?? ShortScaleWord;
     }
 }

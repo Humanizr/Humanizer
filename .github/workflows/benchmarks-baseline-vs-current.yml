@@ -1,0 +1,201 @@
+name: Benchmark Baseline vs Current
+
+on:
+  workflow_dispatch:
+    inputs:
+      baselineVersion:
+        description: 'NuGet version of Humanizer to use for the baseline run'
+        required: true
+        type: string
+        default: '3.0.0-rc.6'
+
+  push:
+    paths:
+      - '.github/workflows/benchmarks-baseline-vs-current.yml'        
+  pull_request:
+    paths:
+      - '.github/workflows/benchmarks-baseline-vs-current.yml'
+
+  schedule:
+    - cron: '0 4 * * 1'  # Every Monday at 04:00 UTC
+
+jobs:
+  benchmark:
+    name: Run Benchmarks (${{ matrix.kind }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      BASELINE_VERSION: ${{ inputs.baselineVersion || '3.0.0-rc.6' }}
+    strategy:
+      matrix:
+        kind: [baseline, current]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET 8,10
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0
+            10.0
+                
+      - name: Display run information
+        run: |
+          echo "## Benchmark Run: ${{ matrix.kind }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit SHA:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Baseline Version:** ${{ env.BASELINE_VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Run Type:** ${{ matrix.kind }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Build Benchmarks (baseline)
+        if: matrix.kind == 'baseline'
+        run: |
+          out="artifacts/baseline"
+          mkdir -p "$out"
+          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -- --filter '*' --artifacts "$out" --envVars UseBaselinePackage:true,BaselinePackageVersion:${{ env.BASELINE_VERSION }} 
+
+      - name: Build Benchmarks (current)
+        if: matrix.kind == 'current'
+        run: |
+          out="artifacts/current"
+          mkdir -p "$out"
+          dotnet run --project src/Benchmarks/Benchmarks.csproj -c Release -f net8.0 -- --filter '*' --artifacts "$out"
+      
+      - name: Append Results to Summary
+        run: |
+          out="artifacts/${{ matrix.kind }}"
+          
+          # Find all markdown files and append them to the summary
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Benchmark Results (${{ matrix.kind }})" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          while IFS= read -r MD; do
+            cat "$MD" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          done < <(find "$out" -type f -name '*.md')
+      
+      - name: Upload JSON Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: humanizer-bdn-${{ matrix.kind }}-json
+          path: artifacts/${{ matrix.kind }}/**/*.json
+          retention-days: 7
+      
+      - name: Upload All Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: humanizer-bdn-${{ matrix.kind }}-all
+          path: artifacts/${{ matrix.kind }}/
+          retention-days: 7
+
+  compare:
+    name: Compare Baseline vs Current
+    runs-on: ubuntu-latest
+    needs: benchmark
+    env:
+      BASELINE_VERSION: ${{ inputs.baselineVersion || '3.0.0-rc.6' }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Download Baseline JSON
+        uses: actions/download-artifact@v4
+        with:
+          name: humanizer-bdn-baseline-json
+          path: baseline
+      
+      - name: Download Current JSON
+        uses: actions/download-artifact@v4
+        with:
+          name: humanizer-bdn-current-json
+          path: current
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.x'
+      
+      - name: Clone and Build ResultsComparer
+        run: |
+          git clone --depth 1 https://github.com/dotnet/performance          
+      
+      - name: Split Benchmark Results by TFM
+        run: |
+          set -euo pipefail
+          
+          baseline_results=$(find baseline -type d -name results -print -quit)
+          current_results=$(find current -type d -name results -print -quit)
+          
+          if [ -z "$baseline_results" ]; then
+            echo "Baseline results directory not found under 'baseline'." >&2
+            exit 1
+          fi
+          
+          if [ -z "$current_results" ]; then
+            echo "Current results directory not found under 'current'." >&2
+            exit 1
+          fi
+          
+          echo "Using baseline results directory: $baseline_results"
+          echo "Using current results directory: $current_results"
+          
+          pwsh -File src/scripts/split-benchmark-results.ps1 -InputDir "$baseline_results" -OutputRoot baseline-split
+          pwsh -File src/scripts/split-benchmark-results.ps1 -InputDir "$current_results" -OutputRoot current-split
+      
+      - name: Run ResultsComparer for each TFM
+        run: |
+          mkdir -p comparisons
+          
+          # Compare each target framework independently
+          for tfm_dir in baseline-split/*; do
+            if [ -d "$tfm_dir" ]; then
+              tfm=$(basename "$tfm_dir")
+              echo "Comparing results for $tfm..."
+              
+              if [ -d "current-split/$tfm" ]; then
+                dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net10.0 -f net10.0 --base "$tfm_dir" --diff "current-split/$tfm" --threshold "5%" > "comparisons/diff-$tfm.md" || true
+              else
+                echo "⚠️ No current results found for $tfm" > "comparisons/diff-$tfm.md"
+              fi
+            fi
+          done
+      
+      - name: Append Comparison to Summary
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Performance Comparison: Baseline vs Current" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Baseline Version:** ${{ env.BASELINE_VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Append comparison for each TFM
+          for diff_file in comparisons/diff-*.md; do
+            if [ -f "$diff_file" ]; then
+              tfm=$(basename "$diff_file" .md | sed 's/diff-//')
+              echo "### Results for $tfm" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              cat "$diff_file" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          
+          if [ ! -f comparisons/diff-*.md ]; then
+            echo "⚠️ No comparison results available" >> $GITHUB_STEP_SUMMARY
+          fi
+      
+      - name: Upload Comparison Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: humanizer-bdn-comparison
+          path: comparisons/
+          retention-days: 7

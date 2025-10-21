@@ -196,7 +196,7 @@ public static class TimeSpanHumanizeExtensions
             timeParts = timeParts.Where(x => x != null);
         }
 
-        return timeParts.ToList();
+        return [.. timeParts];
     }
 
     static string ConcatenateTimeSpanParts(IEnumerable<string?> timeSpanParts, CultureInfo? culture, string? collectionSeparator)

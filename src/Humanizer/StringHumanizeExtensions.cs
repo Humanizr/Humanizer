@@ -5,14 +5,29 @@ namespace Humanizer;
 /// <summary>
 /// Contains extension methods for humanizing string values.
 /// </summary>
-public static class StringHumanizeExtensions
+public static partial class StringHumanizeExtensions
 {
-    static readonly Regex PascalCaseWordPartsRegex = new(
+#if NET7_0_OR_GREATER
+    [GeneratedRegex(@"(\p{Lu}?\p{Ll}+|[0-9]+\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?", RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture)]
+    private static partial Regex PascalCaseWordPartsRegexGenerated();
+    
+    private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexGenerated();
+
+    [GeneratedRegex(@"\s[-_]|[-_]\s")]
+    private static partial Regex FreestandingSpacingCharRegexGenerated();
+    
+    private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexGenerated();
+#else
+    private static readonly Regex PascalCaseWordPartsRegexField = new(
         $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
         RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
-    static readonly Regex FreestandingSpacingCharRegex =
-        new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
+    private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexField;
+
+    private static readonly Regex FreestandingSpacingCharRegexField = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
+
+    private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexField;
+#endif
 
     const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";
     const string IntegerAndOptionalLowercaseLetters = @"[0-9]+\p{Ll}*";
@@ -25,7 +40,7 @@ public static class StringHumanizeExtensions
 
     static string FromPascalCase(string input)
     {
-        var result = string.Join(" ", PascalCaseWordPartsRegex
+        var result = string.Join(" ", PascalCaseWordPartsRegex()
             .Matches(input)
             // ReSharper disable once RedundantEnumerableCastCall
             .Cast<Match>()
@@ -65,7 +80,7 @@ public static class StringHumanizeExtensions
 
         // if input contains a dash or underscore which precedes or follows a space (or both, e.g. freestanding)
         // remove the dash/underscore and run it through FromPascalCase
-        if (FreestandingSpacingCharRegex.IsMatch(input))
+        if (FreestandingSpacingCharRegex().IsMatch(input))
         {
             return FromPascalCase(FromUnderscoreDashSeparatedWords(input));
         }

@@ -21,16 +21,12 @@ class SpanishOrdinalizer(CultureInfo culture) : DefaultOrdinalizer
             return Convert(-number, GetNumberString(-number), gender);
         }
 
-        switch (gender)
+        return gender switch
         {
-            case GrammaticalGender.Masculine:
-            case GrammaticalGender.Neuter:
-                return numberString + GetWordForm(number, wordForm);
-            case GrammaticalGender.Feminine:
-                return numberString + ".ª";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
-        }
+            GrammaticalGender.Masculine or GrammaticalGender.Neuter => numberString + GetWordForm(number, wordForm),
+            GrammaticalGender.Feminine => numberString + ".ª",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null),
+        };
     }
 
     string GetNumberString(int number) =>

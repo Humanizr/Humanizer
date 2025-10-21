@@ -61,9 +61,9 @@ public struct ByteSize(double byteSize) :
     public double Gigabytes { get; } = byteSize / BytesInGigabyte;
     public double Terabytes { get; } = byteSize / BytesInTerabyte;
 
-    public string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
+    public readonly string LargestWholeNumberSymbol => GetLargestWholeNumberSymbol();
 
-    public string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
+    public readonly string GetLargestWholeNumberSymbol(IFormatProvider? provider = null)
     {
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
@@ -96,9 +96,9 @@ public struct ByteSize(double byteSize) :
         return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: true);
     }
 
-    public string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
+    public readonly string LargestWholeNumberFullWord => GetLargestWholeNumberFullWord();
 
-    public string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
+    public readonly string GetLargestWholeNumberFullWord(IFormatProvider? provider = null)
     {
         var cultureFormatter = Configurator.GetFormatter(provider as CultureInfo);
 
@@ -131,7 +131,7 @@ public struct ByteSize(double byteSize) :
         return cultureFormatter.DataUnitHumanize(DataUnit.Bit, Bits, toSymbol: false);
     }
 
-    public double LargestWholeNumberValue
+    public readonly double LargestWholeNumberValue
     {
         get
         {
@@ -191,23 +191,23 @@ public struct ByteSize(double byteSize) :
     /// the largest metric prefix such that the corresponding value is greater
     ///  than or equal to one.
     /// </summary>
-    public override string ToString() =>
+    public readonly override string ToString() =>
         ToString(NumberFormatInfo.CurrentInfo);
 
-    public string ToString(IFormatProvider? provider)
+    public readonly string ToString(IFormatProvider? provider)
     {
         provider ??= CultureInfo.CurrentCulture;
 
         return string.Format(provider, "{0:0.##} {1}", LargestWholeNumberValue, GetLargestWholeNumberSymbol(provider));
     }
 
-    public string ToString(string? format) =>
+    public readonly string ToString(string? format) =>
         ToString(format, NumberFormatInfo.CurrentInfo);
 
-    public string ToString(string? format, IFormatProvider? provider) =>
+    public readonly string ToString(string? format, IFormatProvider? provider) =>
         ToString(format, provider, toSymbol: true);
 
-    string ToString(string? format, IFormatProvider? provider, bool toSymbol)
+    readonly string ToString(string? format, IFormatProvider? provider, bool toSymbol)
     {
         format ??= "G";
         provider ??= CultureInfo.CurrentCulture;
@@ -283,10 +283,10 @@ public struct ByteSize(double byteSize) :
     /// tera) used is the largest metric prefix such that the corresponding
     /// value is greater than or equal to one.
     /// </summary>
-    public string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
+    public readonly string ToFullWords(string? format = null, IFormatProvider? provider = null) =>
         ToString(format, provider, toSymbol: false);
 
-    public override bool Equals(object? value)
+    public readonly override bool Equals(object? value)
     {
         if (value == null)
         {
@@ -306,13 +306,13 @@ public struct ByteSize(double byteSize) :
         return Equals(other);
     }
 
-    public bool Equals(ByteSize value) =>
+    public readonly bool Equals(ByteSize value) =>
         Bits == value.Bits;
 
-    public override int GetHashCode() =>
+    public readonly override int GetHashCode() =>
         Bits.GetHashCode();
 
-    public int CompareTo(object? obj)
+    public readonly int CompareTo(object? obj)
     {
         if (obj == null)
         {
@@ -327,31 +327,31 @@ public struct ByteSize(double byteSize) :
         throw new ArgumentException("Object is not a ByteSize");
     }
 
-    public int CompareTo(ByteSize other) =>
+    public readonly int CompareTo(ByteSize other) =>
         Bits.CompareTo(other.Bits);
 
-    public ByteSize Add(ByteSize bs) =>
+    public readonly ByteSize Add(ByteSize bs) =>
         new(Bytes + bs.Bytes);
 
-    public ByteSize AddBits(long value) =>
+    public readonly ByteSize AddBits(long value) =>
         this + FromBits(value);
 
-    public ByteSize AddBytes(double value) =>
+    public readonly ByteSize AddBytes(double value) =>
         this + FromBytes(value);
 
-    public ByteSize AddKilobytes(double value) =>
+    public readonly ByteSize AddKilobytes(double value) =>
         this + FromKilobytes(value);
 
-    public ByteSize AddMegabytes(double value) =>
+    public readonly ByteSize AddMegabytes(double value) =>
         this + FromMegabytes(value);
 
-    public ByteSize AddGigabytes(double value) =>
+    public readonly ByteSize AddGigabytes(double value) =>
         this + FromGigabytes(value);
 
-    public ByteSize AddTerabytes(double value) =>
+    public readonly ByteSize AddTerabytes(double value) =>
         this + FromTerabytes(value);
 
-    public ByteSize Subtract(ByteSize bs) =>
+    public readonly ByteSize Subtract(ByteSize bs) =>
         new(Bytes - bs.Bytes);
 
     public static ByteSize operator +(ByteSize b1, ByteSize b2) =>

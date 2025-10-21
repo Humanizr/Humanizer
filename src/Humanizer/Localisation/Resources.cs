@@ -39,10 +39,7 @@ public static class Resources
 
         // If not found in the exact culture (or culture was null), use the standard GetString
         // which performs the full fallback chain and accepts null culture.
-        if (resource == null)
-        {
-            resource = ResourceManager.GetString(resourceKey, culture);
-        }
+        resource ??= ResourceManager.GetString(resourceKey, culture);
 
         if (resource == null || string.IsNullOrEmpty(resource))
         {

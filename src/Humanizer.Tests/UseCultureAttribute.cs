@@ -3,29 +3,27 @@ using System.Reflection;
 
 
 
+/// <summary>
+/// Apply this attribute to your test method to replace the
+/// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
+/// <see cref="CultureInfo.CurrentUICulture" /> with another culture.
+/// </summary>
+/// <remarks>
+/// Replaces the culture and UI culture of the current thread with
+/// <paramref name="culture" />
+/// </remarks>
+/// <remarks>
+/// <para>
+/// This constructor overload uses <paramref name="culture" /> for both
+/// <see cref="CultureInfo.CurrentCulture" /> and <see cref="CultureInfo.CurrentUICulture" />.
+/// </para>
+/// </remarks>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class UseCultureAttribute : BeforeAfterTestAttribute
+public class UseCultureAttribute(string culture) : BeforeAfterTestAttribute
 {
-    readonly Lazy<CultureInfo> culture;
+    readonly Lazy<CultureInfo> culture = new(() => new CultureInfo(culture));
     CultureInfo? originalCulture;
     CultureInfo? originalUICulture;
-
-    /// <summary>
-    /// Apply this attribute to your test method to replace the
-    /// <see cref="Thread.CurrentThread" /> <see cref="CultureInfo.CurrentCulture" /> and
-    /// <see cref="CultureInfo.CurrentUICulture" /> with another culture.
-    /// </summary>
-    /// <remarks>
-    /// Replaces the culture and UI culture of the current thread with
-    /// <paramref name="culture" />
-    /// </remarks>
-    /// <remarks>
-    /// <para>
-    /// This constructor overload uses <paramref name="culture" /> for both
-    /// <see cref="CultureInfo.CurrentCulture" /> and <see cref="CultureInfo.CurrentUICulture" />.
-    /// </para>
-    /// </remarks>
-    public UseCultureAttribute(string culture) => this.culture = new Lazy<CultureInfo>(() => new CultureInfo(culture));
 
     public CultureInfo Culture => culture.Value;
 
