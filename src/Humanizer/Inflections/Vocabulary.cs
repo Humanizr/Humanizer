@@ -21,9 +21,9 @@ public partial class Vocabulary
     
     private static Regex LetterSRegex() => LetterSRegexGenerated();
 #else
-    private static readonly Regex _letterSRegex = new("^([sS])[sS]*$", RegexOptions.Compiled);
-    
-    private static Regex LetterSRegex() => _letterSRegex;
+    private static readonly Regex LetterSRegexField = new("^([sS])[sS]*$", RegexOptions.Compiled);
+
+    private static Regex LetterSRegex() => LetterSRegexField;
 #endif
 
     /// <summary>

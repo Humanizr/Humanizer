@@ -6,7 +6,7 @@ namespace Humanizer;
 public class LocaliserRegistry<TLocaliser>
     where TLocaliser : class
 {
-    readonly Dictionary<string, Func<CultureInfo, TLocaliser>> localisers = new();
+    readonly Dictionary<string, Func<CultureInfo, TLocaliser>> localisers = [];
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
 
     /// <summary>

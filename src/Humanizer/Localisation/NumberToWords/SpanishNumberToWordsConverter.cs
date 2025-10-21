@@ -245,30 +245,22 @@ class SpanishNumberToWordsConverter : GenderedNumberToWordsConverter
 
     static string GetGenderedOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
     {
-        switch (gender)
+        return gender switch
         {
-            case GrammaticalGender.Masculine:
-            case GrammaticalGender.Neuter:
-                return wordForm == WordForm.Abbreviation ? "un" : "uno";
-            case GrammaticalGender.Feminine:
-                return "una";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
-        }
+            GrammaticalGender.Masculine or GrammaticalGender.Neuter => wordForm == WordForm.Abbreviation ? "un" : "uno",
+            GrammaticalGender.Feminine => "una",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null),
+        };
     }
 
     static string GetGenderedTwentyOne(GrammaticalGender gender, WordForm wordForm = WordForm.Normal)
     {
-        switch (gender)
+        return gender switch
         {
-            case GrammaticalGender.Masculine:
-            case GrammaticalGender.Neuter:
-                return wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno";
-            case GrammaticalGender.Feminine:
-                return "veintiuna";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
-        }
+            GrammaticalGender.Masculine or GrammaticalGender.Neuter => wordForm == WordForm.Abbreviation ? "veintiún" : "veintiuno",
+            GrammaticalGender.Feminine => "veintiuna",
+            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null),
+        };
     }
 
     static bool HasOrdinalAbbreviation(int number, WordForm wordForm) =>

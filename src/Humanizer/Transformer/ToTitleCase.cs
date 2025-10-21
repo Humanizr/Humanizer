@@ -11,9 +11,9 @@ partial class ToTitleCase : ICulturedStringTransformer
     
     private static Regex WordRegex() => WordRegexGenerated();
 #else
-    private static readonly Regex _wordRegex = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
-    
-    private static Regex WordRegex() => _wordRegex;
+    private static readonly Regex WordRegexDefinition = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+
+    private static Regex WordRegex() => WordRegexDefinition;
 #endif
 
     public string Transform(string input, CultureInfo? culture)

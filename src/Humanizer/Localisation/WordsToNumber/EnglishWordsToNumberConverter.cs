@@ -8,9 +8,9 @@ internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberCo
     
     private static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexGenerated();
 #else
-    private static readonly Regex _ordinalSuffixRegex = new(@"\b(\d+)(st|nd|rd|th)\b", RegexOptions.Compiled);
-    
-    private static Regex OrdinalSuffixRegex() => _ordinalSuffixRegex;
+    private static readonly Regex OrdinalSuffixRegexField = new(@"\b(\d+)(st|nd|rd|th)\b", RegexOptions.Compiled);
+
+    private static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexField;
 #endif
 
     private static readonly FrozenDictionary<string, int> NumbersMap = new Dictionary<string, int>

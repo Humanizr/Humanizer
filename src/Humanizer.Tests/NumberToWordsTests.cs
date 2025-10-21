@@ -171,8 +171,8 @@ public class NumberToWordsTests
         var cultureSpecificNumber = number.ToWords(cultureInfo);
         var normalForm1 = number.ToWords(addAnd: true, WordForm.Normal, cultureInfo);
         var abbrForm1 = number.ToWords(addAnd: true, WordForm.Abbreviation, cultureInfo);
-        var normalForm2 = ((long)number).ToWords(WordForm.Normal, default(GrammaticalGender), cultureInfo);
-        var abbrForm2 = ((long)number).ToWords(WordForm.Abbreviation, default(GrammaticalGender), cultureInfo);
+        var normalForm2 = ((long)number).ToWords(WordForm.Normal, default, cultureInfo);
+        var abbrForm2 = ((long)number).ToWords(WordForm.Abbreviation, default, cultureInfo);
 
         Assert.All(
             [

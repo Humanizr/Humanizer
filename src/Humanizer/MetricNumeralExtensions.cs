@@ -498,6 +498,6 @@ public static class MetricNumeralExtensions
     {
         public string Name { get; } = name;
         public string ShortScaleWord { get; } = shortScaleWord;
-        public string LongScaleWord => longScaleWord ?? ShortScaleWord;
+        public readonly string LongScaleWord => longScaleWord ?? ShortScaleWord;
     }
 }

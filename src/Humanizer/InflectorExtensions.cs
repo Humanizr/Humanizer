@@ -46,17 +46,17 @@ public static partial class InflectorExtensions
     
     private static Regex UnderscoreRegex3() => UnderscoreRegex3Generated();
 #else
-    private static readonly Regex _pascalizeRegex = new(@"(?:[ _-]+|^)([a-zA-Z])", RegexOptions.Compiled);
-    private static Regex PascalizeRegex() => _pascalizeRegex;
+    private static readonly Regex PascalizeRegexField = new(@"(?:[ _-]+|^)([a-zA-Z])", RegexOptions.Compiled);
+    private static Regex PascalizeRegex() => PascalizeRegexField;
 
-    private static readonly Regex _underscoreRegex1 = new(@"([\p{Lu}]+)([\p{Lu}][\p{Ll}])", RegexOptions.Compiled);
-    private static Regex UnderscoreRegex1() => _underscoreRegex1;
+    private static readonly Regex UnderscoreRegex1Field = new(@"([\p{Lu}]+)([\p{Lu}][\p{Ll}])", RegexOptions.Compiled);
+    private static Regex UnderscoreRegex1() => UnderscoreRegex1Field;
 
-    private static readonly Regex _underscoreRegex2 = new(@"([\p{Ll}\d])([\p{Lu}])", RegexOptions.Compiled);
-    private static Regex UnderscoreRegex2() => _underscoreRegex2;
+    private static readonly Regex UnderscoreRegex2Field = new(@"([\p{Ll}\d])([\p{Lu}])", RegexOptions.Compiled);
+    private static Regex UnderscoreRegex2() => UnderscoreRegex2Field;
 
-    private static readonly Regex _underscoreRegex3 = new(@"[-\s]", RegexOptions.Compiled);
-    private static Regex UnderscoreRegex3() => _underscoreRegex3;
+    private static readonly Regex UnderscoreRegex3Field = new(@"[-\s]", RegexOptions.Compiled);
+    private static Regex UnderscoreRegex3() => UnderscoreRegex3Field;
 #endif
 
     /// <summary>

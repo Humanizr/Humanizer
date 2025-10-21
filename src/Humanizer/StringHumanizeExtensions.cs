@@ -18,15 +18,15 @@ public static partial class StringHumanizeExtensions
     
     private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexGenerated();
 #else
-    private static readonly Regex _pascalCaseWordPartsRegex = new(
+    private static readonly Regex PascalCaseWordPartsRegexField = new(
         $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
         RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-    
-    private static Regex PascalCaseWordPartsRegex() => _pascalCaseWordPartsRegex;
 
-    private static readonly Regex _freestandingSpacingCharRegex = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
-    
-    private static Regex FreestandingSpacingCharRegex() => _freestandingSpacingCharRegex;
+    private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexField;
+
+    private static readonly Regex FreestandingSpacingCharRegexField = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
+
+    private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexField;
 #endif
 
     const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";

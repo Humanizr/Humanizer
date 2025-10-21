@@ -8,3 +8,6 @@ dotnet_diagnostic.CA1861.severity = silent
 
 # IDE0060: Remove unused parameter
 dotnet_diagnostic.IDE0060.severity = none
+
+# IDE0022: Use expression body for method
+dotnet_diagnostic.IDE0130.severity = none

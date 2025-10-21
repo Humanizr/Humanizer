@@ -47,11 +47,11 @@ public static partial class RomanNumeralExtensions
     
     private static Regex ValidRomanNumeral() => ValidRomanNumeralGenerated();
 #else
-    private static readonly Regex _validRomanNumeral = new(
+    private static readonly Regex ValidRomanNumeralRegex = new(
         "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
         RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-    
-    private static Regex ValidRomanNumeral() => _validRomanNumeral;
+
+    private static Regex ValidRomanNumeral() => ValidRomanNumeralRegex;
 #endif
 
     /// <summary>

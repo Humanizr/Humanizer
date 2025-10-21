@@ -4,35 +4,35 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
 {
     // Cardinal units
     private static readonly string[] UnitsMasculine =
-    {
+    [
         "", "un", "dos", "tres", "quatre", "cinc", "sis", "set", "vuit", "nou"
-    };
+    ];
     private static readonly string[] UnitsFeminine =
-    {
+    [
         "", "una", "dues", "tres", "quatre", "cinc", "sis", "set", "vuit", "nou"
-    };
+    ];
 
     // Special cases for teens (10-19)
     private static readonly string[] Teens =
-    {
+    [
         "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit", "dinou"
-    };
+    ];
 
     // Decenas: exact tens and for composition
     private static readonly string[] Tens =
-    {
+    [
         "", "deu", "vint", "trenta", "quaranta", "cinquanta", "seixanta", "setanta", "vuitanta", "noranta"
-    };
+    ];
 
     // Centenas (masculino y femenino)
     private static readonly string[] HundredsMasculine =
-    {
+    [
         "", "cent", "dos-cents", "tres-cents", "quatre-cents", "cinc-cents", "sis-cents", "set-cents", "vuit-cents", "nou-cents"
-    };
+    ];
     private static readonly string[] HundredsFeminine =
-    {
+    [
         "", "cent", "dues-centes", "tres-centes", "quatre-centes", "cinc-centes", "sis-centes", "set-centes", "vuit-centes", "nou-centes"
-    };
+    ];
 
     static readonly string[] TupleMap =
     [
@@ -198,8 +198,8 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
         }
 
         // Ordinales simples
-        string[] masc = { "", "primer", "segon", "tercer", "quart", "cinquè", "sisè", "setè", "vuitè", "novè", "desè", "onzè", "dotzè", "tretzè", "catorzè", "quinzè" };
-        string[] fem = { "", "primera", "segona", "tercera", "quarta", "cinquena", "sisena", "setena", "vuitena", "novena", "desena", "onzena", "dotzena", "tretzena", "catorzena", "quinzena" };
+        string[] masc = ["", "primer", "segon", "tercer", "quart", "cinquè", "sisè", "setè", "vuitè", "novè", "desè", "onzè", "dotzè", "tretzè", "catorzè", "quinzè"];
+        string[] fem = ["", "primera", "segona", "tercera", "quarta", "cinquena", "sisena", "setena", "vuitena", "novena", "desena", "onzena", "dotzena", "tretzena", "catorzena", "quinzena"];
 
         if (number < masc.Length)
         {
@@ -235,7 +235,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
     {
         var dec = number / 10;
         var rem = number % 10;
-        string[] tens = { "", "", "vint", "trenta", "quaranta", "cinquanta", "seixanta", "setanta", "vuitanta", "noranta" };
+        string[] tens = ["", "", "vint", "trenta", "quaranta", "cinquanta", "seixanta", "setanta", "vuitanta", "noranta"];
 
         var ordSuf = gender == GrammaticalGender.Feminine ? "ena" : "è";
 
@@ -290,7 +290,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
             num = Convert(rest, gender);
             if (gender == GrammaticalGender.Masculine && rest != 1 && rest % 10 == 1)
             {
-                num = num + "n";
+                num += "n";
             }
         }
 
@@ -315,7 +315,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
         var num = Convert(rest, gender);
         if (gender == GrammaticalGender.Masculine && rest != 1 && rest % 10 == 1)
         {
-            num = num + "n";
+            num += "n";
         }
 
         return $"{milStr} {num}";
@@ -334,7 +334,7 @@ class CatalanNumberToWordsConverter : GenderedNumberToWordsConverter
         var num = Convert(rest, gender);
         if (gender == GrammaticalGender.Masculine && rest != 1 && rest % 10 == 1)
         {
-            num = num + "n";
+            num += "n";
         }
 
         return $"{millsStr} {num}";

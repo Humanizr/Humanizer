@@ -96,23 +96,13 @@ class CroatianNumberToWordsConverter(CultureInfo culture)
                             break;
                         }
 
-                        switch (quadrillions % 10)
+                        part = (quadrillions % 10) switch
                         {
-                            case 1:
-                                part = $"{Convert(quadrillions - 1)} jedna bilijarda";
-                                break;
-                            case 2:
-                                part = $"{Convert(quadrillions - 2)} dvije bilijarde";
-                                break;
-                            case 3:
-                            case 4:
-                                part = $"{Convert(quadrillions)} bilijarde";
-                                break;
-                            default:
-                                part = $"{Convert(quadrillions)} bilijardi";
-                                break;
-                        }
-
+                            1 => $"{Convert(quadrillions - 1)} jedna bilijarda",
+                            2 => $"{Convert(quadrillions - 2)} dvije bilijarde",
+                            3 or 4 => $"{Convert(quadrillions)} bilijarde",
+                            _ => $"{Convert(quadrillions)} bilijardi",
+                        };
                         break;
                     }
             }
@@ -181,23 +171,13 @@ class CroatianNumberToWordsConverter(CultureInfo culture)
                             break;
                         }
 
-                        switch (billions % 10)
+                        part = (billions % 10) switch
                         {
-                            case 1:
-                                part = $"{Convert(billions - 1)} jedna milijarda";
-                                break;
-                            case 2:
-                                part = $"{Convert(billions - 2)} dvije milijarde";
-                                break;
-                            case 3:
-                            case 4:
-                                part = $"{Convert(billions)} milijarde";
-                                break;
-                            default:
-                                part = $"{Convert(billions)} milijardi";
-                                break;
-                        }
-
+                            1 => $"{Convert(billions - 1)} jedna milijarda",
+                            2 => $"{Convert(billions - 2)} dvije milijarde",
+                            3 or 4 => $"{Convert(billions)} milijarde",
+                            _ => $"{Convert(billions)} milijardi",
+                        };
                         break;
                     }
             }
@@ -266,23 +246,13 @@ class CroatianNumberToWordsConverter(CultureInfo culture)
                             break;
                         }
 
-                        switch (thousands % 10)
+                        part = (thousands % 10) switch
                         {
-                            case 1:
-                                part = $"{Convert(thousands - 1)} jedna tisuća";
-                                break;
-                            case 2:
-                                part = $"{Convert(thousands - 2)} dvije tisuće";
-                                break;
-                            case 3:
-                            case 4:
-                                part = $"{Convert(thousands)} tisuće";
-                                break;
-                            default:
-                                part = $"{Convert(thousands)} tisuća";
-                                break;
-                        }
-
+                            1 => $"{Convert(thousands - 1)} jedna tisuća",
+                            2 => $"{Convert(thousands - 2)} dvije tisuće",
+                            3 or 4 => $"{Convert(thousands)} tisuće",
+                            _ => $"{Convert(thousands)} tisuća",
+                        };
                         break;
                     }
             }

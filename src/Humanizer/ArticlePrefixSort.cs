@@ -11,9 +11,9 @@ public static partial class EnglishArticle
     
     private static Regex ArticleRegex() => ArticleRegexGenerated();
 #else
-    private static readonly Regex _articleRegex = new(@"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+", RegexOptions.Compiled);
-    
-    private static Regex ArticleRegex() => _articleRegex;
+    private static readonly Regex ArticleRegexField = new(@"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+", RegexOptions.Compiled);
+
+    private static Regex ArticleRegex() => ArticleRegexField;
 #endif
 
     /// <summary>

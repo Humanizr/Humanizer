@@ -5,7 +5,7 @@ public class TransformersBenchmarks
     const int RAND_SEED = 17432;
 
     static readonly char[] Alphabet =
-        Enumerable
+        [.. Enumerable
             .Repeat((int)' ', 12)
             .Concat(Enumerable.Range('a', 'z' - 'a'))
             .Concat(Enumerable.Range('A', 'Z' - 'A'))
@@ -18,8 +18,7 @@ public class TransformersBenchmarks
                 '!',
                 '$'
             ])
-            .Select(x => (char)x)
-            .ToArray();
+            .Select(x => (char)x)];
 
     readonly Random random = new(RAND_SEED);
     string input = null!;

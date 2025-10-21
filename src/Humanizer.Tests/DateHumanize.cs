@@ -1,6 +1,7 @@
-﻿public class DateHumanize
+
+public class DateHumanize
 {
-    static readonly object LockObject = new();
+    static readonly Lock LockObject = new();
 
     static void VerifyWithCurrentDate(string expectedString, TimeSpan deltaFromNow, CultureInfo? culture)
     {

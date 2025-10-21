@@ -242,6 +242,9 @@ dotnet_diagnostic.CA2242.severity = error
 # IDE0022: Use expression body for method
 dotnet_diagnostic.IDE0022.severity = silent
 
+# IDE0130: Namespace match folder structure
+dotnet_diagnostic.IDE0130.severity = none
+
 [Benchmarks/**/*.cs]
 dotnet_diagnostic.CA1050.severity = none # CA1050: Declare types in namespaces
 
