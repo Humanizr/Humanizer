@@ -75,12 +75,10 @@ jobs:
           echo "### Benchmark Results (${{ matrix.kind }})" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          for MD in $out/**/*.md; do
-            if [ -f "$MD" ]; then
-              cat "$MD" >> $GITHUB_STEP_SUMMARY
-              echo "" >> $GITHUB_STEP_SUMMARY
-            fi
-          done
+          while IFS= read -r MD; do
+            cat "$MD" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          done < <(find "$out" -type f -name '*.md')
       
       - name: Upload JSON Artifacts
         uses: actions/upload-artifact@v4
@@ -132,8 +130,26 @@ jobs:
       
       - name: Split Benchmark Results by TFM
         run: |
-          pwsh -File scripts/split-benchmark-results.ps1 -InputDir baseline/results -OutputRoot baseline-split
-          pwsh -File scripts/split-benchmark-results.ps1 -InputDir current/results -OutputRoot current-split
+          set -euo pipefail
+          
+          baseline_results=$(find baseline -type d -name results -print -quit)
+          current_results=$(find current -type d -name results -print -quit)
+          
+          if [ -z "$baseline_results" ]; then
+            echo "Baseline results directory not found under 'baseline'." >&2
+            exit 1
+          fi
+          
+          if [ -z "$current_results" ]; then
+            echo "Current results directory not found under 'current'." >&2
+            exit 1
+          fi
+          
+          echo "Using baseline results directory: $baseline_results"
+          echo "Using current results directory: $current_results"
+          
+          pwsh -File src/scripts/split-benchmark-results.ps1 -InputDir "$baseline_results" -OutputRoot baseline-split
+          pwsh -File src/scripts/split-benchmark-results.ps1 -InputDir "$current_results" -OutputRoot current-split
       
       - name: Run ResultsComparer for each TFM
         run: |
