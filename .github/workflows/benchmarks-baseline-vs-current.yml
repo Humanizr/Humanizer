@@ -7,7 +7,7 @@ on:
         description: 'NuGet version of Humanizer to use for the baseline run'
         required: true
         type: string
-        default: '2.14.1'
+        default: '3.0.0-rc.6'
   pull_request:
     branches:
       - main
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     env:
-      BASELINE_VERSION: ${{ inputs.baselineVersion || '2.14.1' }}
+      BASELINE_VERSION: ${{ inputs.baselineVersion || '3.0.0-rc.6' }}
     strategy:
       matrix:
         kind: [baseline, current]
@@ -101,9 +101,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: benchmark
     env:
-      BASELINE_VERSION: ${{ inputs.baselineVersion || '2.14.1' }}
+      BASELINE_VERSION: ${{ inputs.baselineVersion || '3.0.0-rc.6' }}
     
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
       - name: Download Baseline JSON
         uses: actions/download-artifact@v4
         with:
@@ -125,11 +130,28 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/dotnet/performance          
       
-      - name: Run ResultsComparer
+      - name: Split Benchmark Results by TFM
         run: |
-          BASE=$(pwd)/baseline
-          DIFF=$(pwd)/current          
-          dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net8.0 -f net8.0 --base "$(pwd)/baseline" --diff "$(pwd)/current" --threshold "5%" > diff.md || true           
+          pwsh -File scripts/split-benchmark-results.ps1 -InputDir baseline/results -OutputRoot baseline-split
+          pwsh -File scripts/split-benchmark-results.ps1 -InputDir current/results -OutputRoot current-split
+      
+      - name: Run ResultsComparer for each TFM
+        run: |
+          mkdir -p comparisons
+          
+          # Compare each target framework independently
+          for tfm_dir in baseline-split/*; do
+            if [ -d "$tfm_dir" ]; then
+              tfm=$(basename "$tfm_dir")
+              echo "Comparing results for $tfm..."
+              
+              if [ -d "current-split/$tfm" ]; then
+                dotnet run --project performance/src/tools/ResultsComparer/ResultsComparer.csproj -c Release -p:PERFLAB_TARGET_FRAMEWORKS=net8.0 -f net8.0 --base "$tfm_dir" --diff "current-split/$tfm" --threshold "5%" > "comparisons/diff-$tfm.md" || true
+              else
+                echo "⚠️ No current results found for $tfm" > "comparisons/diff-$tfm.md"
+              fi
+            fi
+          done
       
       - name: Append Comparison to Summary
         run: |
@@ -139,9 +161,18 @@ jobs:
           echo "**Baseline Version:** ${{ env.BASELINE_VERSION }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          if [ -f diff.md ]; then
-            cat diff.md >> $GITHUB_STEP_SUMMARY
-          else
+          # Append comparison for each TFM
+          for diff_file in comparisons/diff-*.md; do
+            if [ -f "$diff_file" ]; then
+              tfm=$(basename "$diff_file" .md | sed 's/diff-//')
+              echo "### Results for $tfm" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              cat "$diff_file" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          
+          if [ ! -f comparisons/diff-*.md ]; then
             echo "⚠️ No comparison results available" >> $GITHUB_STEP_SUMMARY
           fi
       
@@ -150,5 +181,5 @@ jobs:
         if: always()
         with:
           name: humanizer-bdn-comparison
-          path: diff.md
+          path: comparisons/
           retention-days: 7

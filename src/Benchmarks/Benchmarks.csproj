@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
     <UseBaselinePackage Condition="'$(UseBaselinePackage)' == ''">false</UseBaselinePackage>
-    <BaselinePackageVersion Condition="'$(BaselinePackageVersion)' == ''">2.14.1</BaselinePackageVersion>
+    <BaselinePackageVersion Condition="'$(BaselinePackageVersion)' == ''">3.0.0-rc.6</BaselinePackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,10 +14,6 @@
   <!-- Use baseline package from NuGet for comparison -->
   <ItemGroup Condition="'$(UseBaselinePackage)' == 'true'">
     <PackageReference Include="Humanizer" VersionOverride="$(BaselinePackageVersion)" />
-    <!-- Exclude benchmarks that use types not available in baseline version -->
-    <Compile Remove="EnglishToWordsBenchmark.cs" />
-    <Compile Remove="TimeOnlyToClockNotationConverterBenchmarks.cs" />
-    <Compile Remove="WordsToNumberBenchmarks.cs" />
   </ItemGroup>
 
   <!-- Use current source code from the repo -->
