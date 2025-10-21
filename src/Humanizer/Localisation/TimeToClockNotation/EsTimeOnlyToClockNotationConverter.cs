@@ -1,4 +1,4 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 namespace Humanizer;
 
@@ -8,7 +8,7 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
     const int NOON = 12;
     const int AFTERNOON = 21;
 
-    public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
+    public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive, CultureInfo? culture)
     {
         switch (time)
         {
@@ -21,8 +21,8 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
         var article = GetArticle(time);
         var articleNextHour = GetArticle(time.AddHours(1));
-        var hour = NormalizeHour(time).ToWords(GrammaticalGender.Feminine);
-        var nextHour = NormalizeHour(time.AddHours(1)).ToWords(GrammaticalGender.Feminine);
+        var hour = NormalizeHour(time).ToWords(GrammaticalGender.Feminine, culture);
+        var nextHour = NormalizeHour(time.AddHours(1)).ToWords(GrammaticalGender.Feminine, culture);
         var dayPeriod = GetDayPeriod(time);
         var dayPeriodNextHour = GetDayPeriod(time.AddHours(1));
 
@@ -45,7 +45,7 @@ class EsTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 
         return clockNotationMap.GetValueOrDefault(
             normalizedMinutes,
-            $"{article} {hour} y {normalizedMinutes.ToWords()} {dayPeriod}");
+            $"{article} {hour} y {normalizedMinutes.ToWords(culture)} {dayPeriod}");
     }
 
     static int NormalizeHour(TimeOnly time) =>

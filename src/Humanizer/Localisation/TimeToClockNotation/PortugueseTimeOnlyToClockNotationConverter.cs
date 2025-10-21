@@ -1,10 +1,10 @@
-﻿#if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
 
 namespace Humanizer;
 
 class PortugueseTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
 {
-    public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive)
+    public string Convert(TimeOnly time, ClockNotationRounding roundToNearestFive, CultureInfo? culture)
     {
         switch (time)
         {
@@ -21,15 +21,15 @@ class PortugueseTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConve
 
         return normalizedMinutes switch
         {
-            00 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} horas",
-            15 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} e um quarto",
-            30 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} e meia",
-            40 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)} menos vinte",
-            45 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)} menos um quarto",
-            50 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)} menos dez",
-            55 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)} menos cinco",
-            60 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)} horas",
-            _ => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} e {normalizedMinutes.ToWords()}"
+            00 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine, culture)} horas",
+            15 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine, culture)} e um quarto",
+            30 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine, culture)} e meia",
+            40 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine, culture)} menos vinte",
+            45 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine, culture)} menos um quarto",
+            50 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine, culture)} menos dez",
+            55 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine, culture)} menos cinco",
+            60 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine, culture)} horas",
+            _ => $"{normalizedHour.ToWords(GrammaticalGender.Feminine, culture)} e {normalizedMinutes.ToWords(culture)}"
         };
     }
 }
