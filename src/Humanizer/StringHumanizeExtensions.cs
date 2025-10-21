@@ -67,9 +67,32 @@ public static partial class StringHumanizeExtensions
     }
 
     /// <summary>
-    /// Humanizes the input string; e.g. Underscored_input_String_is_turned_INTO_sentence -> 'Underscored input String is turned INTO sentence'
+    /// Transforms a string into a human-readable format by intelligently handling PascalCase, camelCase,
+    /// underscored_strings, and dash-separated-strings, converting them into space-separated text with
+    /// appropriate capitalization.
     /// </summary>
-    /// <param name="input">The string to be humanized</param>
+    /// <param name="input">The string to be humanized. Must not be null.</param>
+    /// <returns>
+    /// A humanized version of the input string with spaces inserted between words and appropriate
+    /// capitalization. Preserves all-uppercase acronyms unchanged.
+    /// </returns>
+    /// <remarks>
+    /// The method applies several rules in order:
+    /// - If the entire input is uppercase (an acronym), it returns unchanged
+    /// - Handles freestanding underscores/dashes (e.g., "some _ string")
+    /// - Splits on underscores and dashes
+    /// - Breaks up PascalCase and camelCase text
+    /// The first letter of the result is always capitalized.
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// "PascalCaseInputString".Humanize() => "Pascal case input string"
+    /// "Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
+    /// "dash-separated-string".Humanize() => "Dash separated string"
+    /// "HTML".Humanize() => "HTML"
+    /// "camelCaseText".Humanize() => "Camel case text"
+    /// </code>
+    /// </example>
     public static string Humanize(this string input)
     {
         // if input is all capitals (e.g. an acronym) then return it without change
@@ -94,10 +117,23 @@ public static partial class StringHumanizeExtensions
     }
 
     /// <summary>
-    /// Humanized the input string based on the provided casing
+    /// Transforms a string into a human-readable format and applies the specified letter casing.
     /// </summary>
-    /// <param name="input">The string to be humanized</param>
-    /// <param name="casing">The desired casing for the output</param>
+    /// <param name="input">The string to be humanized. Must not be null.</param>
+    /// <param name="casing">The desired letter casing to apply to the humanized result.</param>
+    /// <returns>
+    /// A humanized version of the input string with the specified casing applied.
+    /// </returns>
+    /// <remarks>
+    /// This is a convenience method that combines <see cref="Humanize(string)"/> with <see cref="CasingExtensions.ApplyCase"/>.
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// "PascalCaseInputString".Humanize(LetterCasing.AllCaps) => "PASCAL CASE INPUT STRING"
+    /// "PascalCaseInputString".Humanize(LetterCasing.LowerCase) => "pascal case input string"
+    /// "PascalCaseInputString".Humanize(LetterCasing.Title) => "Pascal Case Input String"
+    /// </code>
+    /// </example>
     public static string Humanize(this string input, LetterCasing casing) =>
         input
             .Humanize()
