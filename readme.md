@@ -7,6 +7,8 @@
 
 Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
 
+> **📚 Full Documentation**: See the [documentation folder](docs/index.md) for comprehensive guides, examples, and API reference.
+
 
 ## Install
 
@@ -52,41 +54,39 @@ The detailed explanation for how this works is in the comments [here](https://gi
 
 ### Humanize String
 
-`Humanize` string extensions allow you turn an otherwise computerized string into a more readable human-friendly one.
-The foundation of this was set in the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) where class names, method names and properties are turned into human-readable sentences.
+String humanization is a core feature that transforms computerized strings into readable, human-friendly text. This is particularly valuable when you need to display programming identifiers (class names, method names, properties) to end users in a readable format.
+
+The foundation of this feature was originally developed for the [BDDfy framework](https://github.com/TestStack/TestStack.BDDfy) to turn test method names into readable test descriptions. `Humanize` intelligently handles PascalCase, camelCase, underscored_strings, and dash-separated-strings.
 
 ```csharp
-"PascalCaseInputStringIsTurnedIntoSentence".Humanize() => "Pascal case input string is turned into sentence"
+"PascalCaseInputStringIsTurnedIntoSentence".Humanize() 
+    => "Pascal case input string is turned into sentence"
 
-"Underscored_input_string_is_turned_into_sentence".Humanize() => "Underscored input string is turned into sentence"
+"Underscored_input_string_is_turned_into_sentence".Humanize() 
+    => "Underscored input string is turned into sentence"
 
-"Underscored_input_String_is_turned_INTO_sentence".Humanize() => "Underscored input String is turned INTO sentence"
+"dash-separated-string".Humanize() 
+    => "Dash separated string"
 ```
 
-Note that a string that contains only upper case letters, and consists only of one word, is always treated as an acronym (regardless of its length). To guarantee that any arbitrary string will always be humanized you must use a transform (see `Transform` method below):
+**Acronym Handling**: Strings containing only uppercase letters are treated as acronyms and left unchanged. To humanize any string, use the `Transform` method:
 
 ```csharp
-// acronyms are left intact
-"HTML".Humanize() => "HTML"
+"HTML".Humanize() => "HTML"  // Acronym preserved
+"HUMANIZER".Humanize() => "HUMANIZER"  // All caps preserved
 
-// any unbroken upper case string is treated as an acronym
-"HUMANIZER".Humanize() => "HUMANIZER"
+// Force humanization with Transform
 "HUMANIZER".Transform(To.LowerCase, To.TitleCase) => "Humanizer"
 ```
 
-You may also specify the desired letter casing:
+**Letter Casing**: Control the output casing directly:
 
 ```csharp
 "CanReturnTitleCase".Humanize(LetterCasing.Title) => "Can Return Title Case"
-
-"Can_return_title_Case".Humanize(LetterCasing.Title) => "Can Return Title Case"
-
 "CanReturnLowerCase".Humanize(LetterCasing.LowerCase) => "can return lower case"
-
 "CanHumanizeIntoUpperCase".Humanize(LetterCasing.AllCaps) => "CAN HUMANIZE INTO UPPER CASE"
+"some string".Humanize(LetterCasing.Sentence) => "Some string"
 ```
-
- > The `LetterCasing` API and the methods accepting it are legacy from V0.2 era and will be deprecated in the future. Instead of that, you can use `Transform` method explained below.
 
 #### Version 3.0 Behavioral Change
 
@@ -104,23 +104,20 @@ In version 3.0, `Humanize` and `Titleize` now preserve input strings that contai
 
 ### Dehumanize String
 
-Much like you can humanize a computer friendly string into a human friendly one you can dehumanize a human friendly string into a computer friendly one:
+Reverse the humanization process by converting human-friendly strings back to PascalCase:
 
 ```csharp
-"Pascal case input string is turned into sentence".Dehumanize() => "PascalCaseInputStringIsTurnedIntoSentence"
+"Pascal case input string is turned into sentence".Dehumanize() 
+    => "PascalCaseInputStringIsTurnedIntoSentence"
+
+"some string".Dehumanize() => "SomeString"
+"Some String".Dehumanize() => "SomeString"
 ```
 
 
 ### Transform String
 
-There is a `Transform` method that supersedes `LetterCasing`, `ApplyCase` and `Humanize` overloads that accept `LetterCasing`.
-Transform method signature is as follows:
-
-```csharp
-string Transform(this string input, params IStringTransformer[] transformers)
-```
-
-And there are some out of the box implementations of `IStringTransformer` for letter casing:
+The `Transform` method provides a flexible, extensible way to apply string transformations. Unlike the legacy `LetterCasing` enum which limits you to built-in options, `IStringTransformer` is an interface you can implement in your codebase for domain-specific transformations.
 
 ```csharp
 "Sentence casing".Transform(To.LowerCase) => "sentence casing"
@@ -129,173 +126,93 @@ And there are some out of the box implementations of `IStringTransformer` for le
 "Sentence casing".Transform(To.UpperCase) => "SENTENCE CASING"
 ```
 
-`LowerCase` is a public static property on `To` class that returns an instance of private `ToLowerCase` class that implements `IStringTransformer` and knows how to turn a string into lower case.
 
-The benefit of using `Transform` and `IStringTransformer` over `ApplyCase` and `LetterCasing` is that `LetterCasing` is an enum and you're limited to use what's in the framework
-while `IStringTransformer` is an interface you can implement in your codebase once and use it with `Transform` method allowing for easy extension.
 
 
 ### Truncate String
 
-You can truncate a `string` using the `Truncate` method:
+Intelligently truncate strings with multiple strategies. The default uses the `…` character (one character) instead of `"..."` (three characters) to maximize visible text before truncation. You can also implement custom `ITruncator` strategies for specialized truncation logic.
 
-```c#
+```csharp
 "Long text to truncate".Truncate(10) => "Long text…"
-```
-
-By default, the `'…'` character is used to truncate strings. The advantage of using the `'…'` character instead of `"..."` is that the former only takes a single character and thus allows more text to be shown before truncation. If you want, you can also provide your own truncation string:
-
-```c#
 "Long text to truncate".Truncate(10, "---") => "Long te---"
-```
 
-The default truncation strategy, `Truncator.FixedLength`, is to truncate the input string to a specific length, including the truncation string length.
-There are four more truncator strategies available: one for a fixed number of (alphanumerical) characters, two that are similar to fixed length and fixed number of characters that try to preserve words as well or cut it off wholly, and another for a fixed number of words.
-To use a specific truncator when truncating, the two `Truncate` methods shown in the previous examples all have an overload that allow you to specify the `ITruncator` instance to use for the truncation.
-Here are examples on how to use the three provided truncators:
-
-```c#
+// Fixed length (default)
 "Long text to truncate".Truncate(10, Truncator.FixedLength) => "Long text…"
-"Long text to truncate".Truncate(10, "---", Truncator.FixedLength) => "Long te---"
 
-"Long text to truncate".Truncate(6, Truncator.FixedNumberOfCharacters) => "Long t…"
-"Long text to truncate".Truncate(6, "---", Truncator.FixedNumberOfCharacters) => "Lon---"
-
+// Fixed number of words
 "Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords) => "Long text…"
-"Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords) => "Long text---"
-    
-"Long text to truncate".Truncate(10, Truncator.DynamicLengthAndPreserveWords) => "Long text…"
-"Long text to truncate".Truncate(10, "---", Truncator.DynamicLengthAndPreserveWords) => "Long---"
 
-"Long text to truncate".Truncate(6, Truncator.DynamicNumberOfCharactersAndPreserveWords) => "Long…"
-"Long text to truncate".Truncate(6, "---", Truncator.DynamicNumberOfCharactersAndPreserveWords) => "---"
+// Truncate from the left
+"Long text to truncate".Truncate(10, Truncator.FixedLength, TruncateFrom.Left) 
+    => "… truncate"
 ```
 
-Note that you can also use create your own truncator by implementing the `ITruncator` interface.
 
-There is also an option to choose whether to truncate the string from the beginning (`TruncateFrom.Left`) or the end (`TruncateFrom.Right`).
-Default is the right as shown in the examples above. The examples below show how to truncate from the beginning of the string:
-
-```c#
-"Long text to truncate".Truncate(10, Truncator.FixedLength, TruncateFrom.Left) => "… truncate"
-"Long text to truncate".Truncate(10, "---", Truncator.FixedLength, TruncateFrom.Left) => "---runcate"
-
-"Long text to truncate".Truncate(10, Truncator.FixedNumberOfCharacters, TruncateFrom.Left) => "…o truncate"
-"Long text to truncate".Truncate(16, "---", Truncator.FixedNumberOfCharacters, TruncateFrom.Left) => "---ext to truncate"
-
-"Long text to truncate".Truncate(2, Truncator.FixedNumberOfWords, TruncateFrom.Left) => "…to truncate"
-"Long text to truncate".Truncate(2, "---", Truncator.FixedNumberOfWords, TruncateFrom.Left) => "---to truncate"
-    
-"Long text to truncate".Truncate(10, Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left) => "…truncate"
-"Long text to truncate".Truncate(16, "---", Truncator.DynamicLengthAndPreserveWords, TruncateFrom.Left) => "---to truncate"
-
-"Long text to truncate".Truncate(10, Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left) => "…truncate"
-"Long text to truncate".Truncate(16, "---", Truncator.DynamicNumberOfCharactersAndPreserveWords, TruncateFrom.Left) => "---to truncate"
-```
 
 
 ### Humanize Enums
 
-Calling `ToString` directly on enum members usually results in less than ideal output for users. The solution to this is usually to use `DescriptionAttribute` data annotation and then read that at runtime to get a more friendly output. That is a great solution; but more often than not we only need to put some space between words of an enum member - which is what `String.Humanize()` does well. For an enum like:
+Enum humanization eliminates the need to manually add spaces between words in enum member names. While you could use `DescriptionAttribute` on every enum member, Humanizer automatically handles the common case of simply needing to add spaces. When `DescriptionAttribute` (or any attribute with a `Description` property) is present, it takes precedence, making it easy to provide custom text only when needed.
 
 ```csharp
-public enum EnumUnderTest
+public enum UserType
 {
     [Description("Custom description")]
     MemberWithDescriptionAttribute,
     MemberWithoutDescriptionAttribute,
     ALLCAPITALS
 }
+
+// DescriptionAttribute value is used
+UserType.MemberWithDescriptionAttribute.Humanize() => "Custom description"
+
+// Automatic humanization when no attribute
+UserType.MemberWithoutDescriptionAttribute.Humanize() 
+    => "Member without description attribute"
+
+// Apply casing transformations
+UserType.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase) 
+    => "Member Without Description Attribute"
 ```
 
-You will get:
-
-```csharp
-// DescriptionAttribute is honored
-EnumUnderTest.MemberWithDescriptionAttribute.Humanize() => "Custom description"
-
-// In the absence of the Description attribute string.Humanizer kicks in
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize() => "Member without description attribute"
-
-// Of course you can still apply letter casing
-EnumUnderTest.MemberWithoutDescriptionAttribute.Humanize().Transform(To.TitleCase) => "Member Without Description Attribute"
-```
-
-You are not limited to `DescriptionAttribute` for custom description. Any attribute applied on enum members with a `string Description` property counts.
-This is to help with platforms with missing `DescriptionAttribute` and also for allowing subclasses of the `DescriptionAttribute`.
-
-You can even configure the name of the property of attibute to use as description.
-
-`Configurator.EnumDescriptionPropertyLocator = p => p.Name == "Info"`
-
-If you need to provide localised descriptions you can use `DisplayAttribute` data annotation instead.
-
-```csharp
-public enum EnumUnderTest
-{
-    [Display(Description = "EnumUnderTest_Member", ResourceType = typeof(Project.Resources))]
-    Member
-}
-```
-
-You will get:
-
-```csharp
-EnumUnderTest.Member.Humanize() => "content" // from Project.Resources found under "EnumUnderTest_Member" resource key
-```
-
-Hopefully this will help avoid littering enums with unnecessary attributes!
+Humanizer works with any attribute containing a `Description` property and supports localized `DisplayAttribute` for multi-language scenarios. This helps you avoid littering enums with unnecessary attributes while still providing customization when needed.
 
 
 ### Dehumanize Enums
 
-Dehumanizes a string into the Enum it was originally Humanized from! The API looks like:
+Convert humanized strings back to their original enum values:
 
 ```csharp
-public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
+"Member without description attribute".DehumanizeTo<UserType>() 
+    => UserType.MemberWithoutDescriptionAttribute
+
+// Non-generic version for runtime types
+"Member without description attribute".DehumanizeTo(typeof(UserType)) 
+    => UserType.MemberWithoutDescriptionAttribute
+
+// Handle missing matches gracefully
+"Invalid".DehumanizeTo<UserType>(OnNoMatch.ReturnsNull) => null
 ```
 
-And the usage is:
-
-```csharp
-"Member without description attribute".DehumanizeTo<EnumUnderTest>() => EnumUnderTest.MemberWithoutDescriptionAttribute
-```
-
-And just like the Humanize API it honors the `Description` attribute. You don't have to provide the casing you provided during humanization: it figures it out.
-
-There is also a non-generic counterpart for when the original Enum is not known at compile time:
-
-```csharp
-public static Enum DehumanizeTo(this string input, Type targetEnum, NoMatch onNoMatch = NoMatch.ThrowsException)
-```
-
-which can be used like:
-
-```csharp
-"Member without description attribute".DehumanizeTo(typeof(EnumUnderTest)) => EnumUnderTest.MemberWithoutDescriptionAttribute
-```
-
-By default, both methods throw a `NoMatchFoundException` when they cannot match the provided input against the target enum.
-In the non-generic method you can also ask the method to return null by setting the second optional parameter to `NoMatch.ReturnsNull`.
+The method honors `DescriptionAttribute` and is case-insensitive.
 
 
 ### Humanize DateTime
 
-You can `Humanize` an instance of `DateTime` or `DateTimeOffset` and get back a string telling how far back or forward in time that is:
+Get relative time descriptions for `DateTime` and `DateTimeOffset` values:
 
 ```csharp
-DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 DateTime.UtcNow.AddHours(-2).Humanize() => "2 hours ago"
+DateTime.UtcNow.AddHours(-30).Humanize() => "yesterday"
 
-DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
 DateTime.UtcNow.AddHours(2).Humanize() => "2 hours from now"
+DateTime.UtcNow.AddHours(30).Humanize() => "tomorrow"
 
 DateTimeOffset.UtcNow.AddHours(1).Humanize() => "an hour from now"
 ```
 
-Humanizer supports both local and UTC dates as well as dates with offset (`DateTimeOffset`). You could also provide the date you want the input date to be compared against. If null, it will use the current date as comparison base.
-Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used.
-Here are the API signatures:
+Supports both UTC and local times, with optional culture specification and custom comparison dates.
 
 ```csharp
 public static string Humanize(this DateTime input, bool utcDate = true, DateTime? dateToCompareAgainst = null, CultureInfo culture = null)
@@ -501,49 +418,36 @@ You can provide your own collection formatter by implementing `ICollectionFormat
 
 ### Inflector methods
 
-There are also a few inflector methods:
+Inflector methods handle the complexities of English pluralization and singularization rules, including irregular words (man/men, person/people) and uncountable words (fish, equipment). These methods save you from maintaining your own word lists and rules.
 
 
 #### Pluralize
 
-`Pluralize` pluralizes the provided input while taking irregular and uncountable words into consideration:
+Intelligently pluralize words, handling irregular and uncountable forms:
 
 ```csharp
 "Man".Pluralize() => "Men"
 "string".Pluralize() => "strings"
-```
+"person".Pluralize() => "people"
 
-Normally you would call `Pluralize` on a singular word but if you're unsure about the singularity of the word you can call the method with the optional `inputIsKnownToBeSingular` argument:
-
-```csharp
+// Uncertain plurality? Use the optional parameter
 "Men".Pluralize(inputIsKnownToBeSingular: false) => "Men"
-"Man".Pluralize(inputIsKnownToBeSingular: false) => "Men"
 "string".Pluralize(inputIsKnownToBeSingular: false) => "strings"
 ```
 
 
-The overload of `Pluralize` with `plurality` argument is obsolete and was removed in version 2.0.
-
-
 #### Singularize
 
-`Singularize` singularizes the provided input while taking irregular and uncountable words into consideration:
+Convert plural words to singular form:
 
 ```csharp
 "Men".Singularize() => "Man"
 "strings".Singularize() => "string"
-```
+"people".Singularize() => "person"
 
-Normally you would call `Singularize` on a plural word but if you're unsure about the plurality of the word you can call the method with the optional `inputIsKnownToBePlural` argument:
-
-```csharp
-"Men".Singularize(inputIsKnownToBePlural: false) => "Man"
+// Uncertain plurality? Use the optional parameter
 "Man".Singularize(inputIsKnownToBePlural: false) => "Man"
-"strings".Singularize(inputIsKnownToBePlural: false) => "string"
 ```
-
-
-The overload of `Singularize` with `plurality` argument is obsolete and was removed in version 2.0.
 
 
 ## Adding Words
@@ -573,462 +477,261 @@ Vocabularies.Default.AddSingular("(vert|ind)ices$", "$1ex");
 
 #### ToQuantity
 
-Many times you want to call `Singularize` and `Pluralize` to prefix a word with a number; e.g. "2 requests", "3 men". `ToQuantity` prefixes the provided word with the number and accordingly pluralizes or singularizes the word:
+Combine numbers with properly pluralized/singularized words:
 
 ```csharp
 "case".ToQuantity(0) => "0 cases"
 "case".ToQuantity(1) => "1 case"
 "case".ToQuantity(5) => "5 cases"
-"man".ToQuantity(0) => "0 men"
-"man".ToQuantity(1) => "1 man"
 "man".ToQuantity(2) => "2 men"
-```
 
-`ToQuantity` can figure out whether the input word is singular or plural and will singularize or pluralize as necessary:
-
-```csharp
-"men".ToQuantity(2) => "2 men"
-"process".ToQuantity(2) => "2 processes"
-"process".ToQuantity(1) => "1 process"
-"processes".ToQuantity(2) => "2 processes"
-"processes".ToQuantity(1) => "1 process"
-```
-
-You can also pass a second argument, `ShowQuantityAs`, to `ToQuantity` to specify how you want the provided quantity to be outputted. The default value is `ShowQuantityAs.Numeric` which is what we saw above. The other two values are `ShowQuantityAs.Words` and `ShowQuantityAs.None`.
-
-```csharp
+// Display quantity as words or hide it
 "case".ToQuantity(5, ShowQuantityAs.Words) => "five cases"
 "case".ToQuantity(5, ShowQuantityAs.None) => "cases"
-```
 
-There is also an overload that allows you to format the number. You can pass in the format and the culture to be used.
-
-```csharp
+// Format with custom number formatting
 "dollar".ToQuantity(2, "C0", new CultureInfo("en-US")) => "$2 dollars"
-"dollar".ToQuantity(2, "C2", new CultureInfo("en-US")) => "$2.00 dollars"
 "cases".ToQuantity(12000, "N0") => "12,000 cases"
 ```
 
 
 #### Ordinalize
 
-`Ordinalize` turns a number into an ordinal string used to denote the position in an ordered sequence such as 1st, 2nd, 3rd, 4th:
+Convert numbers to ordinal strings (1st, 2nd, 3rd, etc.):
 
 ```csharp
 1.Ordinalize() => "1st"
 5.Ordinalize() => "5th"
-```
+21.Ordinalize() => "21st"
+"21".Ordinalize() => "21st"
 
-You can also call `Ordinalize` on a numeric string and achieve the same result: `"21".Ordinalize()` => `"21st"`
-
-`Ordinalize` also supports grammatical gender for both forms.
-You can pass an argument to `Ordinalize` to specify which gender the number should be outputted in.
-The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
-
-```csharp
-// for Brazilian Portuguese locale
-1.Ordinalize(GrammaticalGender.Masculine) => "1º"
-1.Ordinalize(GrammaticalGender.Feminine) => "1ª"
-1.Ordinalize(GrammaticalGender.Neuter) => "1º"
-"2".Ordinalize(GrammaticalGender.Masculine) => "2º"
-"2".Ordinalize(GrammaticalGender.Feminine) => "2ª"
-"2".Ordinalize(GrammaticalGender.Neuter) => "2º"
-```
-
-Obviously this only applies to some cultures. For others passing gender in or not passing at all doesn't make any difference in the result.
-
-In addition, `Ordinalize` supports variations some cultures apply depending on the position of the ordinalized number in a sentence.
-Use the argument `wordForm` to get one result or another. Possible values are `WordForm.Abbreviation` and `WordForm.Normal`.
-You can combine `wordForm` argument with gender but passing this argument in when it is not applicable will not make any difference in the result.
-
-```csharp
-// Spanish locale
-1.Ordinalize(WordForm.Abbreviation) => "1.er" // As in "Vivo en el 1.er piso"
-1.Ordinalize(WordForm.Normal) => "1.º" // As in "He llegado el 1º"
-"3".Ordinalize(GrammaticalGender.Feminine, WordForm.Abbreviation) => "3.ª"
-"3".Ordinalize(GrammaticalGender.Feminine, WordForm.Normal) => "3.ª"
-"3".Ordinalize(GrammaticalGender.Masculine, WordForm.Abbreviation) => "3.er"
-"3".Ordinalize(GrammaticalGender.Masculine, WordForm.Normal) => "3.º"
+// Supports grammatical gender (culture-specific)
+1.Ordinalize(GrammaticalGender.Feminine) => "1ª"  // Brazilian Portuguese
+1.Ordinalize(GrammaticalGender.Masculine) => "1º"  // Brazilian Portuguese
 ```
 
 
-#### Titleize
+#### Titleize, Pascalize, Camelize
 
-`Titleize` converts the input words to Title casing; equivalent to `"some title".Humanize(LetterCasing.Title)`
-
-
-#### Pascalize
-
-`Pascalize` converts the input words to UpperCamelCase, also removing underscores and spaces:
+Convert strings to various coding conventions:
 
 ```csharp
+// Titleize: Title Case with spaces
+"some_title".Titleize() => "Some Title"
+
+// Pascalize: UpperCamelCase without spaces
 "some_title for something".Pascalize() => "SomeTitleForSomething"
-```
 
-
-#### Camelize
-
-`Camelize` behaves identically to `Pascalize`, except that the first character is lower case:
-
-```csharp
+// Camelize: lowerCamelCase without spaces
 "some_title for something".Camelize() => "someTitleForSomething"
 ```
 
 
-#### Underscore
+#### Underscore, Dasherize, Kebaberize
 
-`Underscore` separates the input words with underscore:
+Transform to common naming conventions:
 
 ```csharp
+// Underscore: snake_case
 "SomeTitle".Underscore() => "some_title"
-```
 
-
-#### Dasherize & Hyphenate
-
-`Dasherize` and `Hyphenate` replace underscores with dashes in the string:
-
-```csharp
+// Dasherize/Hyphenate: Replace underscores with dashes
 "some_title".Dasherize() => "some-title"
 "some_title".Hyphenate() => "some-title"
-```
 
-
-#### Kebaberize
-
-`Kebaberize` separates the input words with hyphens and all words are converted to lowercase
-
-```csharp
+// Kebaberize: kebab-case (lowercase with hyphens)
 "SomeText".Kebaberize() => "some-text"
+"some property name".Kebaberize() => "some-property-name"
 ```
 
 
 ### Fluent Date
 
-Humanizer provides a fluent API to deal with `DateTime` and `TimeSpan` as follows:
+Fluent date methods make time-based code dramatically more readable. Instead of verbose `DateTime.Now.AddDays(2).AddHours(3)` calls, you can write `DateTime.Now + 2.Days() + 3.Hours()`. This improves code clarity and reduces errors.
 
-`TimeSpan` methods:
+**TimeSpan methods:**
 
 ```csharp
 2.Milliseconds() => TimeSpan.FromMilliseconds(2)
-2.Seconds() => TimeSpan.FromSeconds(2)
-2.Minutes() => TimeSpan.FromMinutes(2)
-2.Hours() => TimeSpan.FromHours(2)
-2.Days() => TimeSpan.FromDays(2)
+5.Seconds() => TimeSpan.FromSeconds(5)
+3.Minutes() => TimeSpan.FromMinutes(3)
+4.Hours() => TimeSpan.FromHours(4)
+7.Days() => TimeSpan.FromDays(7)
 2.Weeks() => TimeSpan.FromDays(14)
 ```
 
-<small>There are no fluent APIs for month or year as a month could have between 28 and 31 days and a year could be 365 or 366 days.</small>
-
-You could use these methods to, for example, replace
+**Use fluent syntax instead of verbose `Add` methods:**
 
 ```csharp
+// Instead of this:
 DateTime.Now.AddDays(2).AddHours(3).AddMinutes(-5)
-```
 
-with
-
-```csharp
+// Write this:
 DateTime.Now + 2.Days() + 3.Hours() - 5.Minutes()
 ```
 
-There are also three categories of fluent methods to deal with `DateTime`:
+**DateTime construction:**
 
 ```csharp
-In.TheYear(2010) // Returns the first of January of 2010
-In.January // Returns 1st of January of the current year
-In.FebruaryOf(2009) // Returns 1st of February of 2009
+In.TheYear(2010) => new DateTime(2010, 1, 1)
+In.January => January 1st of current year
+In.FebruaryOf(2009) => February 1st, 2009
 
-In.One.Second //  DateTime.UtcNow.AddSeconds(1);
-In.Two.SecondsFrom(DateTime dateTime)
-In.Three.Minutes // With corresponding From method
-In.Three.Hours // With corresponding From method
-In.Three.Days // With corresponding From method
-In.Three.Weeks // With corresponding From method
-In.Three.Months // With corresponding From method
-In.Three.Years // With corresponding From method
-
-On.January.The4th // Returns 4th of January of the current year
-On.February.The(12) // Returns 12th of Feb of the current year
+On.January.The4th => January 4th of current year
+On.February.The(12) => February 12th of current year
 ```
 
-and some extension methods:
+**DateTime manipulation:**
 
 ```csharp
-var someDateTime = new DateTime(2011, 2, 10, 5, 25, 45, 125);
+var date = new DateTime(2011, 2, 10, 5, 25, 45, 125);
 
-// Returns new DateTime(2008, 2, 10, 5, 25, 45, 125) changing the year to 2008
-someDateTime.In(2008)
-
-// Returns new DateTime(2011, 2, 10, 2, 25, 45, 125) changing the hour to 2:25:45.125
-someDateTime.At(2)
-
-// Returns new DateTime(2011, 2, 10, 2, 20, 15, 125) changing the time to 2:20:15.125
-someDateTime.At(2, 20, 15)
-
-// Returns new DateTime(2011, 2, 10, 12, 0, 0) changing the time to 12:00:00.000
-someDateTime.AtNoon()
-
-// Returns new DateTime(2011, 2, 10, 0, 0, 0) changing the time to 00:00:00.000
-someDateTime.AtMidnight()
+date.In(2008) => Changes year to 2008
+date.At(2, 20, 15) => Changes time to 2:20:15.125
+date.AtNoon() => Changes time to 12:00:00
+date.AtMidnight() => Changes time to 00:00:00
 ```
-
-Obviously you could chain the methods too; e.g. `On.November.The13th.In(2010).AtNoon + 5.Minutes()`
 
 
 ### Number to numbers
 
-Humanizer provides a fluent API that produces (usually big) numbers in a clearer fashion:
+Create large numbers with readable fluent syntax:
 
 ```csharp
+3.Thousands() => 3000
+5.Millions() => 5000000
 1.25.Billions() => 1250000000
+
+// Chain for complex values
 3.Hundreds().Thousands() => 300000
 ```
 
 
 ### Number to words
 
-Humanizer can change numbers to words using the `ToWords` extension:
+Convert numbers to their word representation:
 
 ```csharp
 1.ToWords() => "one"
 10.ToWords() => "ten"
-11.ToWords() => "eleven"
 122.ToWords() => "one hundred and twenty-two"
 3501.ToWords() => "three thousand five hundred and one"
-```
 
-You can also pass a second argument, `GrammaticalGender`, to `ToWords` to specify which gender the number should be outputted in.
-The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
-
-```csharp
-// for Russian locale
-1.ToWords(GrammaticalGender.Masculine) => "один"
-1.ToWords(GrammaticalGender.Feminine) => "одна"
-1.ToWords(GrammaticalGender.Neuter) => "одно"
-```
-
-```csharp
-// for Arabic locale
-1.ToWords(GrammaticalGender.Masculine) => "واحد"
-1.ToWords(GrammaticalGender.Feminine) => "واحدة"
-1.ToWords(GrammaticalGender.Neuter) => "واحد"
-(-1).ToWords() => "ناقص واحد"
-```
-
-Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
-
-Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
-
-```csharp
-11.ToWords(new CultureInfo("en")) => "eleven"
+// Grammatical gender support (culture-specific)
 1.ToWords(GrammaticalGender.Masculine, new CultureInfo("ru")) => "один"
-```
+1.ToWords(GrammaticalGender.Feminine, new CultureInfo("ru")) => "одна"
 
-Another overload of the method allow you to pass a bool to remove the "And" that can be added before the last number:
-
-```csharp
-3501.ToWords(false) => "three thousand five hundred one"
-102.ToWords(false) => "one hundred two"
-```
-This method can be useful for writing checks for example.
-
-Furthermore, `ToWords` supports variations some cultures apply depending on the position of the number in a sentence.
-Use the argument `wordForm` to get one result or another. Possible values are `WordForm.Abbreviation` and `WordForm.Normal`.
-This argument can be combined with the rest of the arguments presented above.
-Passing `wordForm` argument in when it is not applicable will not make any difference in the result.
-
-```csharp
-// Spanish locale
-21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Masculine) => "veintiún mil quinientos un"
-21501.ToWords(WordForm.Normal, GrammaticalGender.Masculine) => "veintiún mil quinientos uno"
-21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Feminine) => "veintiuna mil quinientas una"
-// English US locale
-21501.ToWords(WordForm.Abbreviation, GrammaticalGender.Masculine, new CultureInfo("en-US")) => "twenty-one thousand five hundred and one"
+// Control "and" usage
+3501.ToWords(addAnd: false) => "three thousand five hundred one"
 ```
 
 
 ### Number to ordinal words
 
-This is kind of mixing `ToWords` with `Ordinalize`. You can call `ToOrdinalWords` on a number to get an ordinal representation of the number in words! For example:
+Convert numbers to ordinal word form (first, second, third, etc.):
 
 ```csharp
 0.ToOrdinalWords() => "zeroth"
 1.ToOrdinalWords() => "first"
 2.ToOrdinalWords() => "second"
-8.ToOrdinalWords() => "eighth"
 10.ToOrdinalWords() => "tenth"
-11.ToOrdinalWords() => "eleventh"
-12.ToOrdinalWords() => "twelfth"
-20.ToOrdinalWords() => "twentieth"
 21.ToOrdinalWords() => "twenty first"
 121.ToOrdinalWords() => "hundred and twenty first"
-```
 
-`ToOrdinalWords` also supports grammatical gender.
-You can pass a second argument to `ToOrdinalWords` to specify the gender of the output.
-The possible values are `GrammaticalGender.Masculine`, `GrammaticalGender.Feminine` and `GrammaticalGender.Neuter`:
-
-```csharp
-// for Brazilian Portuguese locale
-1.ToOrdinalWords(GrammaticalGender.Masculine) => "primeiro"
-1.ToOrdinalWords(GrammaticalGender.Feminine) => "primeira"
-1.ToOrdinalWords(GrammaticalGender.Neuter) => "primeiro"
-2.ToOrdinalWords(GrammaticalGender.Masculine) => "segundo"
-2.ToOrdinalWords(GrammaticalGender.Feminine) => "segunda"
-2.ToOrdinalWords(GrammaticalGender.Neuter) => "segundo"
-```
-
-```csharp
-// for Arabic locale
-1.ToOrdinalWords(GrammaticalGender.Masculine) => "الأول"
-1.ToOrdinalWords(GrammaticalGender.Feminine) => "الأولى"
-1.ToOrdinalWords(GrammaticalGender.Neuter) => "الأول"
-2.ToOrdinalWords(GrammaticalGender.Masculine) => "الثاني"
-2.ToOrdinalWords(GrammaticalGender.Feminine) => "الثانية"
-2.ToOrdinalWords(GrammaticalGender.Neuter) => "الثاني"
-```
-
-Obviously this only applies to some cultures. For others passing gender in doesn't make any difference in the result.
-
-Also, culture to use can be specified explicitly. If it is not, current thread's current UI culture is used. Here's an example:
-
-```csharp
-10.ToOrdinalWords(new CultureInfo("en-US")) => "tenth"
+// Grammatical gender support (culture-specific)
 1.ToOrdinalWords(GrammaticalGender.Masculine, new CultureInfo("pt-BR")) => "primeiro"
-```
-
-`ToOrdinalWords` also supports variations some cultures apply depending on the position of the ordinalized number in a sentence.
-Use the argument `wordForm` to get one result or another. Possible values are `WordForm.Abbreviation` and `WordForm.Normal`.
-Combine this argument with the rest of the arguments presented above.
-Passing `wordForm` argument in when it is not applicable will not make any difference in the result.
-
-```csharp
-// Spanish locale
-43.ToOrdinalWords(WordForm.Normal, GrammaticalGender.Masculine) => "cuadragésimo tercero"
-43.ToOrdinalWords(WordForm.Abbreviation, GrammaticalGender.Masculine) => "cuadragésimo tercer"
-43.ToOrdinalWords(WordForm.Abbreviation, GrammaticalGender.Feminine) => "cuadragésima tercera"
-// English locale
-43.ToOrdinalWords(GrammaticalGender.Masculine, WordForm.Abbreviation, new CultureInfo("en")) => "forty-third"
+1.ToOrdinalWords(GrammaticalGender.Feminine, new CultureInfo("pt-BR")) => "primeira"
 ```
 
 ### Words to Number Conversion
 
-This feature allows converting **English words** into numbers. Currently, it **only supports English (`en`)**.  
-If words from other languages are used, a `NotSupportedException` is thrown.
+Convert English words to numbers (currently English-only):
 
 ```csharp
-// English locale
 "twenty".ToNumber(new CultureInfo("en")) => 20
 "one hundred and five".ToNumber(new CultureInfo("en")) => 105
 "three thousand two hundred".ToNumber(new CultureInfo("en")) => 3200
 
+// Try pattern for safe conversion
 if ("forty-two".TryToNumber(out var number, new CultureInfo("en")))
-    Console.WriteLine(number); // 42
+    Console.WriteLine(number); // Outputs: 42
 
+// Get unrecognized words on failure
 if (!"tenn".TryToNumber(out var invalid, new CultureInfo("en"), out var badWord))
-    Console.WriteLine($"Unrecognized word: {badWord}"); // Unrecognized word: tenn
-
-// Unsupported locales (throws NotSupportedException)
-"vingt".ToNumber(new CultureInfo("fr"))   // French
-"veinte".ToNumber(new CultureInfo("es"))  // Spanish
+    Console.WriteLine($"Unrecognized word: {badWord}"); // Outputs: Unrecognized word: tenn
 ```
+
+> **Note:** Only English (`en`) is currently supported. Other languages throw `NotSupportedException`.
 
 ### DateTime to ordinal words
 
-This is kind of an extension of Ordinalize
+Convert dates to ordinal word format:
+
 ```csharp
-// for English UK locale
+// English UK
 new DateTime(2015, 1, 1).ToOrdinalWords() => "1st January 2015"
-new DateTime(2015, 2, 12).ToOrdinalWords() => "12th February 2015"
 new DateTime(2015, 3, 22).ToOrdinalWords() => "22nd March 2015"
-// for English US locale
+
+// English US
 new DateTime(2015, 1, 1).ToOrdinalWords() => "January 1st, 2015"
 new DateTime(2015, 2, 12).ToOrdinalWords() => "February 12th, 2015"
-new DateTime(2015, 3, 22).ToOrdinalWords() => "March 22nd, 2015"
+
+// Grammatical case support (culture-specific)
+new DateTime(2015, 1, 1).ToOrdinalWords(GrammaticalCase.Genitive)
 ```
-
-`ToOrdinalWords` also supports grammatical case.
-You can pass a second argument to `ToOrdinalWords` to specify the case of the output.
-The possible values are `GrammaticalCase.Nominative`, `GrammaticalCase.Genitive`, `GrammaticalCase.Dative`, `GrammaticalCase.Accusative`, `GrammaticalCase.Instrumental` and `GrammaticalGender.Prepositional`:
-
-```csharp
-// Example: Using ToOrdinalWords with grammatical case
-new DateTime(2015, 1, 1).ToOrdinalWords(GrammaticalCase.Genitive) // e.g., "1st of January 2015" in some languages
-```
-
-Obviously this only applies to some cultures. For others passing case in doesn't make any difference in the result.
 
 
 ### TimeOnly to Clock Notation
 
-Extends TimeOnly to allow humanizing it to a clock notation
+Convert `TimeOnly` to readable clock notation (.NET 6+):
+
 ```csharp
-// for English US locale
+// English US
 new TimeOnly(3, 0).ToClockNotation() => "three o'clock"
 new TimeOnly(12, 0).ToClockNotation() => "noon"
 new TimeOnly(14, 30).ToClockNotation() => "half past two"
 
-// for Brazilian Portuguese locale
+// Brazilian Portuguese
 new TimeOnly(3, 0).ToClockNotation() => "três em ponto"
-new TimeOnly(12, 0).ToClockNotation() => "meio-dia"
 new TimeOnly(14, 30).ToClockNotation() => "duas e meia"
+
+// Round to nearest 5 minutes
+new TimeOnly(15, 7).ToClockNotation(ClockNotationRounding.NearestFiveMinutes) 
+    => "five past three"
 ```
 
 
 ### Roman numerals
 
-Humanizer can change numbers to Roman numerals using the `ToRoman` extension. The numbers 1 through 10 can be expressed in Roman numerals as follows:
+Convert between integers and Roman numerals:
 
 ```csharp
+// To Roman (supports 1-3999)
 1.ToRoman() => "I"
-2.ToRoman() => "II"
-3.ToRoman() => "III"
 4.ToRoman() => "IV"
-5.ToRoman() => "V"
-6.ToRoman() => "VI"
-7.ToRoman() => "VII"
-8.ToRoman() => "VIII"
-9.ToRoman() => "IX"
 10.ToRoman() => "X"
-```
+1990.ToRoman() => "MCMXC"
 
-Also, the reverse operation using the `FromRoman` extension.
-
-```csharp
-"I".FromRoman() => 1
-"II".FromRoman() => 2
-"III".FromRoman() => 3
-"IV".FromRoman() => 4
-"V".FromRoman() => 5
+// From Roman
+"XIV".FromRoman() => 14
+"MCMXC".FromRoman() => 1990
 ```
-Note that only integers smaller than 4000 can be converted to Roman numerals.
 
 
 ### Metric numerals
 
-Humanizer can change numbers to Metric numerals using the `ToMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
+Convert between numbers and metric notation:
 
 ```csharp
+// To Metric
 1d.ToMetric() => "1"
 1230d.ToMetric() => "1.23k"
 0.1d.ToMetric() => "100m"
-```
+456789.ToMetric(decimals: 2) => "456.79k"
 
-Also, the reverse operation using the `FromMetric` extension.
-
-```csharp
-"1".FromMetric() => 1
+// From Metric
 "1.23k".FromMetric() => 1230
 "100m".FromMetric() => 0.1
-```
-
-The `int` and `long` data types are also supported:
-
-```csharp
-((int)456789).ToMetric(decimals: 2) => "456.79k"
-((int)456789).ToMetric(decimals: 20) => "456.78900000000000000000k"
-long.MaxValue.ToMetric(decimals: 12) => "9.223372036855E"
 ```
 
 
