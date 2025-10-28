@@ -101,6 +101,26 @@ public class ParsingTests
     }
 
     [Fact]
+    public void TryParseWithArabicCulture()
+    {
+        // Arabic culture uses multi-character PositiveSign and NegativeSign (with RTL mark U+061C)
+        var culture = new CultureInfo("ar");
+
+        // Test basic parsing works without exception
+        Assert.True(ByteSize.TryParse("0 b", culture, out var resultByteSize));
+        Assert.Equal(ByteSize.FromBits(0), resultByteSize);
+
+        Assert.True(ByteSize.TryParse("1024 KB", culture, out resultByteSize));
+        Assert.Equal(ByteSize.FromKilobytes(1024), resultByteSize);
+
+        Assert.True(ByteSize.TryParse("0 b".AsSpan(), culture, out resultByteSize));
+        Assert.Equal(ByteSize.FromBits(0), resultByteSize);
+
+        Assert.True(ByteSize.TryParse("1024 KB".AsSpan(), culture, out resultByteSize));
+        Assert.Equal(ByteSize.FromKilobytes(1024), resultByteSize);
+    }
+
+    [Fact]
     public void ParseDecimalMegabytes() =>
         Assert.Equal(ByteSize.FromMegabytes(100.5), ByteSize.Parse("100.5MB"));
 

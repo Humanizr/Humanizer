@@ -408,13 +408,13 @@ public struct ByteSize(double byteSize) :
 
         // Acquiring culture-specific parsing info
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
-        CharSpan numberSpecialChars =
-        [
-            Convert.ToChar(numberFormat.NumberDecimalSeparator),
-            Convert.ToChar(numberFormat.NumberGroupSeparator),
-            Convert.ToChar(numberFormat.PositiveSign),
-            Convert.ToChar(numberFormat.NegativeSign),
-        ];
+        var numberSpecialStrings = new[]
+        {
+            numberFormat.NumberDecimalSeparator,
+            numberFormat.NumberGroupSeparator,
+            numberFormat.PositiveSign,
+            numberFormat.NegativeSign,
+        };
 
         // Setup the result
         result = default;
@@ -423,7 +423,25 @@ public struct ByteSize(double byteSize) :
         int lastNumber;
         for (lastNumber = 0; lastNumber < s.Length; lastNumber++)
         {
-            if (!(char.IsDigit(s[lastNumber]) || numberSpecialChars.Contains(s[lastNumber])))
+            var remainingSpan = s[lastNumber..];
+            var isDigit = char.IsDigit(s[lastNumber]);
+            var isSpecialChar = false;
+            
+            if (!isDigit)
+            {
+                foreach (var specialString in numberSpecialStrings)
+                {
+                    if (remainingSpan.StartsWith(specialString))
+                    {
+                        isSpecialChar = true;
+                        // Skip the rest of the multi-character separator
+                        lastNumber += specialString.Length - 1;
+                        break;
+                    }
+                }
+            }
+            
+            if (!(isDigit || isSpecialChar))
             {
                 break;
             }
