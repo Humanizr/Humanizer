@@ -411,23 +411,12 @@ public struct ByteSize(double byteSize) :
         
         // Collect all unique characters from number format strings
         // Note: These can be multi-character strings in some cultures (e.g., Arabic)
-        var specialCharsSet = new HashSet<char>();
-        foreach (var c in numberFormat.NumberDecimalSeparator)
-        {
-            specialCharsSet.Add(c);
-        }
-        foreach (var c in numberFormat.NumberGroupSeparator)
-        {
-            specialCharsSet.Add(c);
-        }
-        foreach (var c in numberFormat.PositiveSign)
-        {
-            specialCharsSet.Add(c);
-        }
-        foreach (var c in numberFormat.NegativeSign)
-        {
-            specialCharsSet.Add(c);
-        }
+        var specialCharsSet = new HashSet<char>(
+            numberFormat.NumberDecimalSeparator
+                .Concat(numberFormat.NumberGroupSeparator)
+                .Concat(numberFormat.PositiveSign)
+                .Concat(numberFormat.NegativeSign)
+        );
 
         // Setup the result
         result = default;
