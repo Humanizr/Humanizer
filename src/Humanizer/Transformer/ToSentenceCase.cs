@@ -11,12 +11,14 @@ class ToSentenceCase : ICulturedStringTransformer
 
         if (input.Length >= 1)
         {
-            if (char.IsUpper(input[0]))
+            var firstChar = input[0];
+            if (char.IsUpper(firstChar))
             {
                 return input;
             }
 
-            return StringHumanizeExtensions.Concat(culture.TextInfo.ToUpper(input[0]), input.AsSpan(1));
+            var upperChar = char.ToUpper(firstChar, culture);
+            return StringHumanizeExtensions.Concat(upperChar, input.AsSpan(1));
         }
 
         return culture.TextInfo.ToUpper(input);

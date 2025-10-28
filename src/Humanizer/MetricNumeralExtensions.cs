@@ -294,12 +294,8 @@ public static class MetricNumeralExtensions
         var representation = decimals > 0
             ? $"{input}.{new string('0', decimals.Value)}"
             : input.ToString();
-        if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
-        {
-            representation += " ";
-        }
-
-        return representation;
+        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : "";
+        return representation + space;
     }
 
     /// <summary>
@@ -355,20 +351,20 @@ public static class MetricNumeralExtensions
 
         if (decimals == 0)
         {
-            return number
-                 + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
-                 + GetUnitText(symbol, formats);
+            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : "";
+            return number + space + GetUnitText(symbol, formats);
         }
         else
         {
             var decimalPlaces = Math.Min(decimals.Value, exponent);
             var extraZeroes = (decimals.Value - decimalPlaces);
+            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : "";
 
             return number
                  + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
                  + fractionalPart.ToString("d" + decimalPlaces)
                  + (extraZeroes <= 0 ? "" : new string('0', extraZeroes))
-                 + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
+                 + space
                  + GetUnitText(symbol, formats);
         }
     }
@@ -394,12 +390,8 @@ public static class MetricNumeralExtensions
                 .Round(input, decimals.Value)
                 .ToString()
             : input.ToString();
-        if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
-        {
-            representation += " ";
-        }
-
-        return representation;
+        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : "";
+        return representation + space;
     }
 
     /// <summary>
@@ -427,9 +419,8 @@ public static class MetricNumeralExtensions
         var symbol = Math.Sign(exponent) == 1
             ? Symbols[0][exponent - 1]
             : Symbols[1][-exponent - 1];
-        return number.ToString("G15")
-               + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
-               + GetUnitText(symbol, formats);
+        var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : "";
+        return number.ToString("G15") + space + GetUnitText(symbol, formats);
     }
 
     /// <summary>
@@ -440,25 +431,26 @@ public static class MetricNumeralExtensions
     /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
     static string GetUnitText(char symbol, MetricNumeralFormats? formats)
     {
-        if (formats.HasValue
-            && formats.Value.HasFlag(MetricNumeralFormats.UseName))
+        if (formats.HasValue)
         {
-            return UnitPrefixes[symbol].Name;
+            var formatValue = formats.Value;
+            if (formatValue.HasFlag(MetricNumeralFormats.UseName))
+            {
+                return UnitPrefixes[symbol].Name;
+            }
+
+            if (formatValue.HasFlag(MetricNumeralFormats.UseShortScaleWord))
+            {
+                return UnitPrefixes[symbol].ShortScaleWord;
+            }
+
+            if (formatValue.HasFlag(MetricNumeralFormats.UseLongScaleWord))
+            {
+                return UnitPrefixes[symbol].LongScaleWord;
+            }
         }
 
-        if (formats.HasValue
-            && formats.Value.HasFlag(MetricNumeralFormats.UseShortScaleWord))
-        {
-            return UnitPrefixes[symbol].ShortScaleWord;
-        }
-
-        if (formats.HasValue
-            && formats.Value.HasFlag(MetricNumeralFormats.UseLongScaleWord))
-        {
-            return UnitPrefixes[symbol].LongScaleWord;
-        }
-
-        return symbol.ToString();
+        return char.ToString(symbol);
     }
 
     /// <summary>
