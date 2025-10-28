@@ -250,8 +250,8 @@ public static class MetricNumeralExtensions
     {
         double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3.0;
         var number = double.Parse(input[..^1]);
-        var exponent = Math.Pow(10, Symbols[0]
-            .Contains(last)
+        var isPositive = Symbols[0].Contains(last);
+        var exponent = Math.Pow(10, isPositive
             ? getExponent(Symbols[0])
             : -getExponent(Symbols[1]));
         return number * exponent;
@@ -480,9 +480,7 @@ public static class MetricNumeralExtensions
     {
         var index = input.Length - 1;
         var last = input[index];
-        var isSymbol = Symbols[0]
-            .Contains(last) || Symbols[1]
-            .Contains(last);
+        var isSymbol = UnitPrefixes.ContainsKey(last);
         return !double.TryParse(isSymbol ? input[..index] : input, out _);
     }
 
