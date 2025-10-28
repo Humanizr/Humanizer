@@ -226,7 +226,7 @@ public static class MetricNumeralExtensions
             throw new ArgumentException("Empty or invalid Metric string.", nameof(input));
         }
 
-        return input.Replace(" ", string.Empty);
+        return input.Replace(" ", "");
     }
 
     /// <summary>
@@ -248,13 +248,19 @@ public static class MetricNumeralExtensions
     /// <returns>A number build from a Metric representation</returns>
     static double BuildMetricNumber(string input, char last)
     {
-        double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3.0;
         var number = double.Parse(input[..^1]);
-        var isPositive = Symbols[0].Contains(last);
-        var exponent = Math.Pow(10, isPositive
-            ? getExponent(Symbols[0])
-            : -getExponent(Symbols[1]));
-        return number * exponent;
+        var indexInPositive = Symbols[0].IndexOf(last);
+        if (indexInPositive >= 0)
+        {
+            var exponent = (indexInPositive + 1) * 3.0;
+            return number * Math.Pow(10, exponent);
+        }
+        else
+        {
+            var indexInNegative = Symbols[1].IndexOf(last);
+            var exponent = (indexInNegative + 1) * 3.0;
+            return number * Math.Pow(10, -exponent);
+        }
     }
 
     /// <summary>
