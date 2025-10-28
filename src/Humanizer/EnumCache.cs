@@ -5,9 +5,9 @@ namespace Humanizer;
 static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>
     where T : struct, Enum
 {
-    static readonly (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) Info = CreateInfo();
+    static readonly (T Zero, FrozenDictionary<T, string> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) Info = CreateInfo();
 
-    private static (T Zero, FrozenDictionary<T, string> Humanized, Dictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
+    private static (T Zero, FrozenDictionary<T, string> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
         var values = Enum.GetValues<T>().ToFrozenSet();
         var type = typeof(T);
@@ -25,7 +25,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         return (
             zero,
             humanized.ToFrozenDictionary(),
-            dehumanized,
+            dehumanized.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase),
             values,
             isBitFieldEnum);
     }
@@ -33,7 +33,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     public static (T Zero, FrozenDictionary<T, string> Humanized, FrozenSet<T> Values) GetInfo() =>
         (Info.Zero, Info.Humanized, Info.Values);
 
-    public static Dictionary<string, T> GetDehumanized() =>
+    public static FrozenDictionary<string, T> GetDehumanized() =>
         Info.Dehumanized;
 
     public static bool TreatAsFlags(T input)

@@ -18,7 +18,22 @@ class FixedNumberOfWordsTruncator : ITruncator
             return value;
         }
 
-        var numberOfWords = value.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+        // Count words without allocating array
+        var numberOfWords = 0;
+        var wasWhiteSpace = true;
+        foreach (var c in value)
+        {
+            if (char.IsWhiteSpace(c))
+            {
+                wasWhiteSpace = true;
+            }
+            else if (wasWhiteSpace)
+            {
+                numberOfWords++;
+                wasWhiteSpace = false;
+            }
+        }
+
         if (numberOfWords <= length)
         {
             return value;

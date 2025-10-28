@@ -31,13 +31,17 @@ public static class StringDehumanizeExtensions
     /// </example>
     public static string Dehumanize(this string input)
     {
-        var pascalizedWords = input
-            .Split(' ')
-            .Select(word => word
-                .Humanize()
-                .Pascalize());
-        return string
-            .Concat(pascalizedWords)
-            .Replace(" ", "");
+        var words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length == 0)
+        {
+            return input;
+        }
+
+        if (words.Length == 1)
+        {
+            return words[0].Humanize().Pascalize();
+        }
+
+        return string.Concat(words.Select(word => word.Humanize().Pascalize()));
     }
 }

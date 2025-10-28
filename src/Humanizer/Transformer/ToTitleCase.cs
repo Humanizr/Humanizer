@@ -37,10 +37,14 @@ partial class ToTitleCase : ICulturedStringTransformer
         return builder.ToString();
     }
 
-    static void Overwrite(StringBuilder builder, int index, string replacement) =>
-        builder
-            .Remove(index, replacement.Length)
-            .Insert(index, replacement);
+    static void Overwrite(StringBuilder builder, int index, string replacement)
+    {
+        // Directly overwrite characters instead of Remove + Insert
+        for (var i = 0; i < replacement.Length; i++)
+        {
+            builder[index + i] = replacement[i];
+        }
+    }
 
     static bool AllCapitals(string input)
     {

@@ -220,7 +220,7 @@ public struct ByteSize(double byteSize) :
             format = "0.##";
         }
 
-        if (!format.Contains('#') && !format.Contains('0'))
+        if (format.IndexOfAny(['#', '0']) < 0)
         {
             format = "0.## " + format;
         }

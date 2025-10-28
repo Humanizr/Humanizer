@@ -30,22 +30,19 @@ class CaTimeOnlyToClockNotationConverter : ITimeOnlyToClockNotationConverter
             ? 5 * Math.Round(time.Minute / 5.0)
             : time.Minute);
 
-        var clockNotationMap = new Dictionary<int, string>
+        return normalizedMinutes switch
         {
-            { 0, $"{article} {hour} {dayPeriod}" },
-            { 15 , $"{article} {hour} i quart {dayPeriod}" },
-            { 30 , $"{article} {hour} i mitja {dayPeriod}"},
-            { 35 , $"{articleNextHour} {nextHour} menys vint-i-cinc {dayPeriodNextHour}"},
-            { 40 , $"{articleNextHour} {nextHour} menys vint {dayPeriodNextHour}"},
-            { 45 , $"{articleNextHour} {nextHour} menys quart {dayPeriodNextHour}"},
-            { 50 , $"{articleNextHour} {nextHour} menys deu {dayPeriodNextHour}"},
-            { 55 , $"{articleNextHour} {nextHour} menys cinc {dayPeriodNextHour}"},
-            { 60 , $"{articleNextHour} {nextHour} {dayPeriodNextHour}"},
+            0 => $"{article} {hour} {dayPeriod}",
+            15 => $"{article} {hour} i quart {dayPeriod}",
+            30 => $"{article} {hour} i mitja {dayPeriod}",
+            35 => $"{articleNextHour} {nextHour} menys vint-i-cinc {dayPeriodNextHour}",
+            40 => $"{articleNextHour} {nextHour} menys vint {dayPeriodNextHour}",
+            45 => $"{articleNextHour} {nextHour} menys quart {dayPeriodNextHour}",
+            50 => $"{articleNextHour} {nextHour} menys deu {dayPeriodNextHour}",
+            55 => $"{articleNextHour} {nextHour} menys cinc {dayPeriodNextHour}",
+            60 => $"{articleNextHour} {nextHour} {dayPeriodNextHour}",
+            _ => $"{article} {hour} i {normalizedMinutes.ToWords()} {dayPeriod}"
         };
-
-        return clockNotationMap.GetValueOrDefault(
-            normalizedMinutes,
-            $"{article} {hour} i {normalizedMinutes.ToWords()} {dayPeriod}");
     }
 
     static int NormalizeHour(TimeOnly time) =>

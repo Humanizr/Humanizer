@@ -248,13 +248,19 @@ public static class MetricNumeralExtensions
     /// <returns>A number build from a Metric representation</returns>
     static double BuildMetricNumber(string input, char last)
     {
-        double getExponent(List<char> symbols) => (symbols.IndexOf(last) + 1) * 3.0;
         var number = double.Parse(input[..^1]);
-        var exponent = Math.Pow(10, Symbols[0]
-            .Contains(last)
-            ? getExponent(Symbols[0])
-            : -getExponent(Symbols[1]));
-        return number * exponent;
+        var indexInPositive = Symbols[0].IndexOf(last);
+        if (indexInPositive >= 0)
+        {
+            var exponent = (indexInPositive + 1) * 3.0;
+            return number * Math.Pow(10, exponent);
+        }
+        else
+        {
+            var indexInNegative = Symbols[1].IndexOf(last);
+            var exponent = (indexInNegative + 1) * 3.0;
+            return number * Math.Pow(10, -exponent);
+        }
     }
 
     /// <summary>
@@ -294,12 +300,8 @@ public static class MetricNumeralExtensions
         var representation = decimals > 0
             ? $"{input}.{new string('0', decimals.Value)}"
             : input.ToString();
-        if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
-        {
-            representation += " ";
-        }
-
-        return representation;
+        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
+        return representation + space;
     }
 
     /// <summary>
@@ -355,20 +357,20 @@ public static class MetricNumeralExtensions
 
         if (decimals == 0)
         {
-            return number
-                 + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
-                 + GetUnitText(symbol, formats);
+            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
+            return number + space + GetUnitText(symbol, formats);
         }
         else
         {
             var decimalPlaces = Math.Min(decimals.Value, exponent);
             var extraZeroes = (decimals.Value - decimalPlaces);
+            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
 
             return number
                  + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
                  + fractionalPart.ToString("d" + decimalPlaces)
-                 + (extraZeroes <= 0 ? "" : new string('0', extraZeroes))
-                 + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
+                 + (extraZeroes <= 0 ? string.Empty : new string('0', extraZeroes))
+                 + space
                  + GetUnitText(symbol, formats);
         }
     }
@@ -394,12 +396,8 @@ public static class MetricNumeralExtensions
                 .Round(input, decimals.Value)
                 .ToString()
             : input.ToString();
-        if ((formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace)
-        {
-            representation += " ";
-        }
-
-        return representation;
+        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
+        return representation + space;
     }
 
     /// <summary>
@@ -427,9 +425,8 @@ public static class MetricNumeralExtensions
         var symbol = Math.Sign(exponent) == 1
             ? Symbols[0][exponent - 1]
             : Symbols[1][-exponent - 1];
-        return number.ToString("G15")
-               + (formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty)
-               + GetUnitText(symbol, formats);
+        var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
+        return number.ToString("G15") + space + GetUnitText(symbol, formats);
     }
 
     /// <summary>
@@ -440,22 +437,23 @@ public static class MetricNumeralExtensions
     /// <returns>A symbol, a symbol's name, a symbol's short scale word or a symbol's long scale word</returns>
     static string GetUnitText(char symbol, MetricNumeralFormats? formats)
     {
-        if (formats.HasValue
-            && formats.Value.HasFlag(MetricNumeralFormats.UseName))
+        if (formats.HasValue)
         {
-            return UnitPrefixes[symbol].Name;
-        }
+            var formatValue = formats.Value;
+            if (formatValue.HasFlag(MetricNumeralFormats.UseName))
+            {
+                return UnitPrefixes[symbol].Name;
+            }
 
-        if (formats.HasValue
-            && formats.Value.HasFlag(MetricNumeralFormats.UseShortScaleWord))
-        {
-            return UnitPrefixes[symbol].ShortScaleWord;
-        }
+            if (formatValue.HasFlag(MetricNumeralFormats.UseShortScaleWord))
+            {
+                return UnitPrefixes[symbol].ShortScaleWord;
+            }
 
-        if (formats.HasValue
-            && formats.Value.HasFlag(MetricNumeralFormats.UseLongScaleWord))
-        {
-            return UnitPrefixes[symbol].LongScaleWord;
+            if (formatValue.HasFlag(MetricNumeralFormats.UseLongScaleWord))
+            {
+                return UnitPrefixes[symbol].LongScaleWord;
+            }
         }
 
         return symbol.ToString();
@@ -488,9 +486,7 @@ public static class MetricNumeralExtensions
     {
         var index = input.Length - 1;
         var last = input[index];
-        var isSymbol = Symbols[0]
-            .Contains(last) || Symbols[1]
-            .Contains(last);
+        var isSymbol = UnitPrefixes.ContainsKey(last);
         return !double.TryParse(isSymbol ? input[..index] : input, out _);
     }
 
