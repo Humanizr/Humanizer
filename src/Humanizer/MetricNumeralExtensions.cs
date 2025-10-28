@@ -226,7 +226,7 @@ public static class MetricNumeralExtensions
             throw new ArgumentException("Empty or invalid Metric string.", nameof(input));
         }
 
-        return input.Replace(" ", "");
+        return input.Replace(" ", string.Empty);
     }
 
     /// <summary>
@@ -300,7 +300,7 @@ public static class MetricNumeralExtensions
         var representation = decimals > 0
             ? $"{input}.{new string('0', decimals.Value)}"
             : input.ToString();
-        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : "";
+        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
 
@@ -357,19 +357,19 @@ public static class MetricNumeralExtensions
 
         if (decimals == 0)
         {
-            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : "";
+            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
             return number + space + GetUnitText(symbol, formats);
         }
         else
         {
             var decimalPlaces = Math.Min(decimals.Value, exponent);
             var extraZeroes = (decimals.Value - decimalPlaces);
-            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : "";
+            var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
 
             return number
                  + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
                  + fractionalPart.ToString("d" + decimalPlaces)
-                 + (extraZeroes <= 0 ? "" : new string('0', extraZeroes))
+                 + (extraZeroes <= 0 ? string.Empty : new string('0', extraZeroes))
                  + space
                  + GetUnitText(symbol, formats);
         }
@@ -396,7 +396,7 @@ public static class MetricNumeralExtensions
                 .Round(input, decimals.Value)
                 .ToString()
             : input.ToString();
-        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : "";
+        var space = (formats & MetricNumeralFormats.WithSpace) == MetricNumeralFormats.WithSpace ? " " : string.Empty;
         return representation + space;
     }
 
@@ -425,7 +425,7 @@ public static class MetricNumeralExtensions
         var symbol = Math.Sign(exponent) == 1
             ? Symbols[0][exponent - 1]
             : Symbols[1][-exponent - 1];
-        var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : "";
+        var space = formats.HasValue && formats.Value.HasFlag(MetricNumeralFormats.WithSpace) ? " " : string.Empty;
         return number.ToString("G15") + space + GetUnitText(symbol, formats);
     }
 
@@ -456,7 +456,7 @@ public static class MetricNumeralExtensions
             }
         }
 
-        return char.ToString(symbol);
+        return symbol.ToString();
     }
 
     /// <summary>

@@ -17,7 +17,7 @@ class ToSentenceCase : ICulturedStringTransformer
                 return input;
             }
 
-            var upperChar = char.ToUpper(firstChar, culture);
+            var upperChar = culture.TextInfo.ToUpper(firstChar);
             return StringHumanizeExtensions.Concat(upperChar, input.AsSpan(1));
         }
 
