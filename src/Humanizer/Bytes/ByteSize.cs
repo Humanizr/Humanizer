@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 using static System.Globalization.NumberStyles;
 
@@ -32,6 +33,8 @@ public struct ByteSize(double byteSize) :
     IComparable,
     IFormattable
 {
+    static readonly ConditionalWeakTable<NumberFormatInfo, HashSet<char>> numberFormatSpecialCharsCache = new();
+
     public static readonly ByteSize MinValue = FromBits(long.MinValue);
     public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
 
@@ -408,13 +411,18 @@ public struct ByteSize(double byteSize) :
 
         // Acquiring culture-specific parsing info
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
-        CharSpan numberSpecialChars =
-        [
-            Convert.ToChar(numberFormat.NumberDecimalSeparator),
-            Convert.ToChar(numberFormat.NumberGroupSeparator),
-            Convert.ToChar(numberFormat.PositiveSign),
-            Convert.ToChar(numberFormat.NegativeSign),
-        ];
+        
+        // Get or create cached set of special characters from number format strings
+        // Note: These can be multi-character strings in some cultures (e.g., Arabic)
+        var specialCharsSet = numberFormatSpecialCharsCache.GetValue(
+            numberFormat,
+            static nfi => new HashSet<char>(
+                nfi.NumberDecimalSeparator
+                    .Concat(nfi.NumberGroupSeparator)
+                    .Concat(nfi.PositiveSign)
+                    .Concat(nfi.NegativeSign)
+            )
+        );
 
         // Setup the result
         result = default;
@@ -423,7 +431,7 @@ public struct ByteSize(double byteSize) :
         int lastNumber;
         for (lastNumber = 0; lastNumber < s.Length; lastNumber++)
         {
-            if (!(char.IsDigit(s[lastNumber]) || numberSpecialChars.Contains(s[lastNumber])))
+            if (!(char.IsDigit(s[lastNumber]) || specialCharsSet.Contains(s[lastNumber])))
             {
                 break;
             }

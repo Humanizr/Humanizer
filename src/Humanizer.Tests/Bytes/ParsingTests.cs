@@ -101,6 +101,21 @@ public class ParsingTests
     }
 
     [Fact]
+    public void TryParseWithArabicCulture()
+    {
+        var arabic = new CultureInfo("ar");
+
+        Assert.True(ByteSize.TryParse("0 b", arabic, out var resultByteSize));
+        Assert.Equal(ByteSize.FromBits(0), resultByteSize);
+
+        Assert.True(ByteSize.TryParse("100KB", arabic, out resultByteSize));
+        Assert.Equal(ByteSize.FromKilobytes(100), resultByteSize);
+
+        Assert.True(ByteSize.TryParse("0 b".AsSpan(), arabic, out resultByteSize));
+        Assert.Equal(ByteSize.FromBits(0), resultByteSize);
+    }
+
+    [Fact]
     public void ParseDecimalMegabytes() =>
         Assert.Equal(ByteSize.FromMegabytes(100.5), ByteSize.Parse("100.5MB"));
 
