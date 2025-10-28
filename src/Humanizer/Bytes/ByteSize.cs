@@ -21,6 +21,7 @@
 //THE SOFTWARE.
 
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 using static System.Globalization.NumberStyles;
 
@@ -32,6 +33,8 @@ public struct ByteSize(double byteSize) :
     IComparable,
     IFormattable
 {
+    static readonly ConditionalWeakTable<NumberFormatInfo, HashSet<char>> numberFormatSpecialCharsCache = new();
+
     public static readonly ByteSize MinValue = FromBits(long.MinValue);
     public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
 
@@ -409,13 +412,16 @@ public struct ByteSize(double byteSize) :
         // Acquiring culture-specific parsing info
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
         
-        // Collect all unique characters from number format strings
+        // Get or create cached set of special characters from number format strings
         // Note: These can be multi-character strings in some cultures (e.g., Arabic)
-        var specialCharsSet = new HashSet<char>(
-            numberFormat.NumberDecimalSeparator
-                .Concat(numberFormat.NumberGroupSeparator)
-                .Concat(numberFormat.PositiveSign)
-                .Concat(numberFormat.NegativeSign)
+        var specialCharsSet = numberFormatSpecialCharsCache.GetValue(
+            numberFormat,
+            static nfi => new HashSet<char>(
+                nfi.NumberDecimalSeparator
+                    .Concat(nfi.NumberGroupSeparator)
+                    .Concat(nfi.PositiveSign)
+                    .Concat(nfi.NegativeSign)
+            )
         );
 
         // Setup the result
