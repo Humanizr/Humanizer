@@ -25,13 +25,26 @@ class FixedNumberOfCharactersTruncator : ITruncator
             return truncateFrom == TruncateFrom.Right ? value[..length] : value[^length..];
         }
 
-        var alphaNumericalCharactersProcessed = 0;
+        // Count letter or digit characters up to length + 1 to determine if truncation is needed
+        var alphaNumericalCount = 0;
+        foreach (var c in value)
+        {
+            if (char.IsLetterOrDigit(c))
+            {
+                alphaNumericalCount++;
+                if (alphaNumericalCount > length)
+                {
+                    break;
+                }
+            }
+        }
 
-        if (value.Count(char.IsLetterOrDigit) <= length)
+        if (alphaNumericalCount <= length)
         {
             return value;
         }
 
+        var alphaNumericalCharactersProcessed = 0;
         if (truncateFrom == TruncateFrom.Left)
         {
             for (var i = value.Length - 1; i > 0; i--)

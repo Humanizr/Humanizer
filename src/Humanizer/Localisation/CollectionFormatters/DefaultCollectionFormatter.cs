@@ -42,6 +42,7 @@ class DefaultCollectionFormatter(string defaultSeparator) : ICollectionFormatter
 
     string HumanizeDisplayStrings(IEnumerable<string?> strings, string separator)
     {
+        // Try to avoid ToArray for small known collections
         var itemsArray = strings
             .Select(item => item == null ? string.Empty : item.Trim())
             .Where(item => !string.IsNullOrWhiteSpace(item))
