@@ -3,7 +3,7 @@ namespace Humanizer;
 partial class ToTitleCase : ICulturedStringTransformer
 {
     public string Transform(string input) =>
-        Transform(input, null);
+        Transform(input, CultureInfo.CurrentCulture);
 
 #if NET7_0_OR_GREATER
     [GeneratedRegex(@"(\w|[^\u0000-\u007F])+'?\w*")]
