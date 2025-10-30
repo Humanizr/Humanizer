@@ -73,10 +73,13 @@ public static class ToQuantityExtensions
 
         if (showQuantityAs == ShowQuantityAs.Numeric)
         {
-            return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+            var quantityStr = quantity.ToString(format, formatProvider);
+            return formatProvider != null
+                ? string.Format(formatProvider, "{0} {1}", quantityStr, transformedInput)
+                : string.Concat(quantityStr, " ", transformedInput);
         }
 
-        return $"{quantity.ToWords()} {transformedInput}";
+        return string.Concat(quantity.ToWords(), " ", transformedInput);
     }
 
     /// <summary>
@@ -100,7 +103,10 @@ public static class ToQuantityExtensions
             ? input.Singularize(inputIsKnownToBePlural: false)
             : input.Pluralize(inputIsKnownToBeSingular: false);
 
-        return string.Format(formatProvider, "{0} {1}", quantity.ToString(format, formatProvider), transformedInput);
+        var quantityStr = quantity.ToString(format, formatProvider);
+        return formatProvider != null
+            ? string.Format(formatProvider, "{0} {1}", quantityStr, transformedInput)
+            : string.Concat(quantityStr, " ", transformedInput);
     }
 
     /// <summary>
