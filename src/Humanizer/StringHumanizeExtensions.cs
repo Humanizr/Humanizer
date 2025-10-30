@@ -53,10 +53,7 @@ public static partial class StringHumanizeExtensions
                     : value.ToLower();
             }));
 
-        if (result
-                .Replace(" ", "")
-                .All(char.IsUpper) &&
-            result.Contains(' '))
+        if (result.Where(c => c != ' ').All(char.IsUpper) && result.Contains(' '))
         {
             result = result.ToLower();
         }
