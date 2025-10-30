@@ -53,7 +53,7 @@ public static partial class StringHumanizeExtensions
                     : value.ToLower();
             }));
 
-        if (result.Where(c => c != ' ').All(char.IsUpper) && result.Contains(' '))
+        if (result.All(c => c == ' ' || char.IsUpper(c)) && result.Contains(' '))
         {
             result = result.ToLower();
         }
