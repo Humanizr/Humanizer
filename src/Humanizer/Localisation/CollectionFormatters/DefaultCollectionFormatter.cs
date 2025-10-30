@@ -60,7 +60,19 @@ class DefaultCollectionFormatter(string defaultSeparator) : ICollectionFormatter
             return itemsArray[0];
         }
 
-        return string.Format(GetConjunctionFormatString(count),
+        var conjunctionFormat = GetConjunctionFormatString(count);
+        if (conjunctionFormat == "{0} {1} {2}")
+        {
+            // Fast path: avoid string.Format for default format
+            return string.Concat(
+                string.Join(", ", itemsArray, 0, itemsArray.Length - 1),
+                " ",
+                separator,
+                " ",
+                itemsArray[^1]);
+        }
+
+        return string.Format(conjunctionFormat,
             string.Join(", ", itemsArray, 0, itemsArray.Length - 1),
             separator,
             itemsArray[^1]);

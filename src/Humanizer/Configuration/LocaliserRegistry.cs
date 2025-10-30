@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace Humanizer;
 
 /// <summary>
@@ -10,9 +8,7 @@ public class LocaliserRegistry<TLocaliser>
 {
     readonly Dictionary<string, Func<CultureInfo, TLocaliser>> localisers = [];
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
-#pragma warning disable IL2091 // We create the value ourselves via factory, not using parameterless constructor
-    readonly ConditionalWeakTable<CultureInfo, TLocaliser> resolvedLocalisersCache = new();
-#pragma warning restore IL2091
+    readonly ConcurrentDictionary<CultureInfo, TLocaliser> resolvedLocalisersCache = new();
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -39,7 +35,7 @@ public class LocaliserRegistry<TLocaliser>
     public TLocaliser ResolveForCulture(CultureInfo? culture)
     {
         var cultureInfo = culture ?? CultureInfo.CurrentUICulture;
-        return resolvedLocalisersCache.GetValue(cultureInfo, c => FindLocaliser(c)(c));
+        return resolvedLocalisersCache.GetOrAdd(cultureInfo, c => FindLocaliser(c)(c));
     }
 
     /// <summary>
