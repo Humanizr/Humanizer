@@ -54,7 +54,15 @@ public static class TimeSpanHumanizeExtensions
         var timeSpanExpression = timeSpan.Humanize(culture: culture, maxUnit: maxUnit, toWords: toWords);
 
         var cultureFormatter = Configurator.GetFormatter(culture);
-        return string.Format(cultureFormatter.TimeSpanHumanize_Age(), timeSpanExpression);
+        var ageFormat = cultureFormatter.TimeSpanHumanize_Age();
+        
+        // Fast path: avoid string.Format for common "{0} old" pattern
+        if (ageFormat == "{0} old")
+        {
+            return string.Concat(timeSpanExpression, " old");
+        }
+        
+        return string.Format(ageFormat, timeSpanExpression);
     }
 
     static List<string?> CreateTheTimePartsWithUpperAndLowerLimits(TimeSpan timespan, CultureInfo? culture, TimeUnit maxUnit, TimeUnit minUnit, bool toWords = false)
