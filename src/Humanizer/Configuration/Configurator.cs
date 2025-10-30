@@ -90,28 +90,45 @@ public static class Configurator
     /// <summary>
     /// The strategy to be used for DateTime.Humanize
     /// </summary>
+    /// <remarks>
+    /// This property should be set only once during application startup before any humanization operations occur.
+    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// </remarks>
     public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; } = new DefaultDateTimeHumanizeStrategy();
 
     /// <summary>
     /// The strategy to be used for DateTimeOffset.Humanize
     /// </summary>
+    /// <remarks>
+    /// This property should be set only once during application startup before any humanization operations occur.
+    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// </remarks>
     public static IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; } = new DefaultDateTimeOffsetHumanizeStrategy();
 
 #if NET6_0_OR_GREATER
     /// <summary>
     /// The strategy to be used for DateOnly.Humanize
     /// </summary>
+    /// <remarks>
+    /// This property should be set only once during application startup before any humanization operations occur.
+    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// </remarks>
     public static IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy { get; set; } = new DefaultDateOnlyHumanizeStrategy();
 
     /// <summary>
     /// The strategy to be used for TimeOnly.Humanize
     /// </summary>
+    /// <remarks>
+    /// This property should be set only once during application startup before any humanization operations occur.
+    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// </remarks>
     public static ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy { get; set; } = new DefaultTimeOnlyHumanizeStrategy();
 #endif
 
     static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
-    static Func<PropertyInfo, bool> enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
-    static bool enumDescriptionPropertyLocatorHasBeenUsed;
+    static readonly object enumDescriptionPropertyLocatorLock = new();
+    static volatile Func<PropertyInfo, bool> enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
+    static volatile bool enumDescriptionPropertyLocatorHasBeenUsed;
 
     internal static Func<PropertyInfo, bool> EnumDescriptionPropertyLocator
     {
@@ -128,17 +145,23 @@ public static class Configurator
     /// </summary>
     public static void UseEnumDescriptionPropertyLocator(Func<PropertyInfo, bool> func)
     {
-        if (enumDescriptionPropertyLocatorHasBeenUsed)
+        lock (enumDescriptionPropertyLocatorLock)
         {
-            throw new("UseEnumDescriptionPropertyLocator must be called before any Enum.Humanize has already been. Move the call to UseEnumDescriptionPropertyLocator to the app startup or a ModuleInitializer.");
-        }
+            if (enumDescriptionPropertyLocatorHasBeenUsed)
+            {
+                throw new("UseEnumDescriptionPropertyLocator must be called before any Enum.Humanize has already been. Move the call to UseEnumDescriptionPropertyLocator to the app startup or a ModuleInitializer.");
+            }
 
-        EnumDescriptionPropertyLocator = func;
+            EnumDescriptionPropertyLocator = func;
+        }
     }
 
     internal static void ResetUseEnumDescriptionPropertyLocator()
     {
-        enumDescriptionPropertyLocatorHasBeenUsed = false;
-        EnumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
+        lock (enumDescriptionPropertyLocatorLock)
+        {
+            enumDescriptionPropertyLocatorHasBeenUsed = false;
+            EnumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
+        }
     }
 }
