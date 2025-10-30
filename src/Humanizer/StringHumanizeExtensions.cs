@@ -47,38 +47,16 @@ public static partial class StringHumanizeExtensions
             .Select(match =>
             {
                 var value = match.Value;
-                var isAllUpper = true;
-                foreach (var c in value)
-                {
-                    if (!char.IsUpper(c))
-                    {
-                        isAllUpper = false;
-                        break;
-                    }
-                }
-                return isAllUpper &&
+                return value.All(char.IsUpper) &&
                        (value.Length > 1 || (match.Index > 0 && input[match.Index - 1] == ' ') || value == "I")
                     ? value
                     : value.ToLower();
             }));
 
-        // Check if result is all uppercase (ignoring spaces) without allocating
-        var hasSpace = false;
-        var allUpperIgnoringSpaces = true;
-        foreach (var c in result)
-        {
-            if (c == ' ')
-            {
-                hasSpace = true;
-            }
-            else if (!char.IsUpper(c))
-            {
-                allUpperIgnoringSpaces = false;
-                break;
-            }
-        }
-
-        if (allUpperIgnoringSpaces && hasSpace)
+        if (result
+                .Replace(" ", "")
+                .All(char.IsUpper) &&
+            result.Contains(' '))
         {
             result = result.ToLower();
         }
