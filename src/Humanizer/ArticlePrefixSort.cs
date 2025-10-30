@@ -75,7 +75,15 @@ public static partial class EnglishArticle
                 var lastThree = append[^3..];
                 if (lastThree.Equals("the", StringComparison.OrdinalIgnoreCase))
                 {
-                    inserted[i] = string.Concat(lastThree, " ", append[..^4]);
+                    inserted[i] = string.Create(item.Length, item, (span, str) =>
+                    {
+                        var source = str.AsSpan();
+                        var suffix = source[^3..];
+                        var prefix = source[..^4];
+                        suffix.CopyTo(span);
+                        span[suffix.Length] = ' ';
+                        prefix.CopyTo(span[(suffix.Length + 1)..]);
+                    });
                     continue;
                 }
             }
@@ -86,7 +94,15 @@ public static partial class EnglishArticle
                 var lastTwo = append[^2..];
                 if (lastTwo.Equals("an", StringComparison.OrdinalIgnoreCase))
                 {
-                    inserted[i] = string.Concat(lastTwo, " ", append[..^3]);
+                    inserted[i] = string.Create(item.Length, item, (span, str) =>
+                    {
+                        var source = str.AsSpan();
+                        var suffix = source[^2..];
+                        var prefix = source[..^3];
+                        suffix.CopyTo(span);
+                        span[suffix.Length] = ' ';
+                        prefix.CopyTo(span[(suffix.Length + 1)..]);
+                    });
                     continue;
                 }
             }
@@ -97,7 +113,15 @@ public static partial class EnglishArticle
                 var lastOne = append[^1..];
                 if (lastOne.Equals("a", StringComparison.OrdinalIgnoreCase))
                 {
-                    inserted[i] = string.Concat(lastOne, " ", append[..^2]);
+                    inserted[i] = string.Create(item.Length, item, (span, str) =>
+                    {
+                        var source = str.AsSpan();
+                        var suffix = source[^1..];
+                        var prefix = source[..^2];
+                        suffix.CopyTo(span);
+                        span[suffix.Length] = ' ';
+                        prefix.CopyTo(span[(suffix.Length + 1)..]);
+                    });
                     continue;
                 }
             }
