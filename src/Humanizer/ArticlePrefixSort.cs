@@ -63,35 +63,68 @@ public static partial class EnglishArticle
     public static string[] PrependArticleSuffix(string[] appended)
     {
         var inserted = new string[appended.Length];
-        var the = " the".AsSpan();
-        var an = " an".AsSpan();
-        var a = " a".AsSpan();
 
         for (var i = 0; i < appended.Length; i++)
         {
-            var append = appended[i]
-                .AsSpan();
-            if (append.EndsWith(the, StringComparison.OrdinalIgnoreCase))
+            var item = appended[i];
+            var append = item.AsSpan();
+            
+            // Check for " the" (4 chars total including space)
+            if (append.Length > 4 && append[^4] == ' ')
             {
-                inserted[i] = ToOriginalFormat(append, 3);
+                var lastThree = append[^3..];
+                if (lastThree.Equals("the", StringComparison.OrdinalIgnoreCase))
+                {
+                    inserted[i] = RearrangeArticle(item, suffixLength: 3, totalLength: 4);
+                    continue;
+                }
             }
-            else if (append.EndsWith(an, StringComparison.OrdinalIgnoreCase))
+            
+            // Check for " an" (3 chars total including space)
+            if (append.Length > 3 && append[^3] == ' ')
             {
-                inserted[i] = ToOriginalFormat(append, 2);
+                var lastTwo = append[^2..];
+                if (lastTwo.Equals("an", StringComparison.OrdinalIgnoreCase))
+                {
+                    inserted[i] = RearrangeArticle(item, suffixLength: 2, totalLength: 3);
+                    continue;
+                }
             }
-            else if (append.EndsWith(a, StringComparison.OrdinalIgnoreCase))
+            
+            // Check for " a" (2 chars total including space)
+            if (append.Length > 2 && append[^2] == ' ')
             {
-                inserted[i] = ToOriginalFormat(append, 1);
+                var lastOne = append[^1..];
+                if (lastOne.Equals("a", StringComparison.OrdinalIgnoreCase))
+                {
+                    inserted[i] = RearrangeArticle(item, suffixLength: 1, totalLength: 2);
+                    continue;
+                }
             }
-            else
-            {
-                inserted[i] = appended[i];
-            }
+            
+            inserted[i] = item;
         }
 
         return inserted;
     }
 
-    static string ToOriginalFormat(CharSpan value, int suffixLength) =>
-        $"{value[^suffixLength..]} {value[..^(suffixLength + 1)]}";
+    static string RearrangeArticle(string item, int suffixLength, int totalLength)
+    {
+#if NET6_0_OR_GREATER
+        return string.Create(item.Length, (item, suffixLength, totalLength), (span, state) =>
+        {
+            var source = state.item.AsSpan();
+            var suffix = source[^state.suffixLength..];
+            var prefix = source[..^state.totalLength];
+            suffix.CopyTo(span);
+            span[suffix.Length] = ' ';
+            prefix.CopyTo(span[(suffix.Length + 1)..]);
+        });
+#else
+        var source = item.AsSpan();
+        var suffix = source[^suffixLength..];
+        var prefix = source[..^totalLength];
+        return $"{suffix} {prefix}";
+#endif
+    }
 }

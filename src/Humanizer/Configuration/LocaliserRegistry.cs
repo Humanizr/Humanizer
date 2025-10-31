@@ -6,7 +6,9 @@ namespace Humanizer;
 public class LocaliserRegistry<TLocaliser>
     where TLocaliser : class
 {
-    readonly Dictionary<string, Func<CultureInfo, TLocaliser>> localisers = [];
+    readonly Dictionary<string, Func<CultureInfo, TLocaliser>> localisersBuilder = [];
+    readonly object lockObject = new();
+    volatile FrozenDictionary<string, Func<CultureInfo, TLocaliser>>? frozenLocalisers;
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
     readonly ConcurrentDictionary<CultureInfo, TLocaliser> resolvedLocalisersCache = new();
 
@@ -41,20 +43,55 @@ public class LocaliserRegistry<TLocaliser>
     /// <summary>
     /// Registers the localiser for the culture provided
     /// </summary>
-    public void Register(string localeCode, TLocaliser localiser) =>
-        localisers[localeCode] = _ => localiser;
+    public void Register(string localeCode, TLocaliser localiser)
+    {
+        lock (lockObject)
+        {
+            if (frozenLocalisers != null)
+            {
+                throw new InvalidOperationException("Cannot register localisers after the registry has been used.");
+            }
+            localisersBuilder[localeCode] = _ => localiser;
+        }
+    }
 
     /// <summary>
     /// Registers the localiser factory for the culture provided
     /// </summary>
-    public void Register(string localeCode, Func<CultureInfo, TLocaliser> localiser) =>
-        localisers[localeCode] = localiser;
+    public void Register(string localeCode, Func<CultureInfo, TLocaliser> localiser)
+    {
+        lock (lockObject)
+        {
+            if (frozenLocalisers != null)
+            {
+                throw new InvalidOperationException("Cannot register localisers after the registry has been used.");
+            }
+            localisersBuilder[localeCode] = localiser;
+        }
+    }
 
     Func<CultureInfo, TLocaliser> FindLocaliser(CultureInfo culture)
     {
+        // Check if already frozen (fast path without lock)
+        var frozen = frozenLocalisers;
+        if (frozen == null)
+        {
+            lock (lockObject)
+            {
+                // Double-check after acquiring lock
+                frozen = frozenLocalisers;
+                if (frozen == null)
+                {
+                    // Freeze the dictionary on first use for better read performance
+                    frozen = localisersBuilder.ToFrozenDictionary();
+                    frozenLocalisers = frozen;
+                }
+            }
+        }
+
         for (var c = culture; !string.IsNullOrEmpty(c.Name); c = c.Parent)
         {
-            if (localisers.TryGetValue(c.Name, out var localiser))
+            if (frozen.TryGetValue(c.Name, out var localiser))
             {
                 return localiser;
             }

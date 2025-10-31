@@ -3,12 +3,8 @@ namespace Humanizer;
 class ToLowerCase : ICulturedStringTransformer
 {
     public string Transform(string input) =>
-        Transform(input, null);
+        input.ToLower(CultureInfo.CurrentCulture);
 
-    public string Transform(string input, CultureInfo? culture)
-    {
-        culture ??= CultureInfo.CurrentCulture;
-
-        return culture.TextInfo.ToLower(input);
-    }
+    public string Transform(string input, CultureInfo? culture) =>
+        input.ToLower(culture ?? CultureInfo.CurrentCulture);
 }

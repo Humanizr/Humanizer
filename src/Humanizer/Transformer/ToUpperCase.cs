@@ -1,14 +1,10 @@
-﻿namespace Humanizer;
+namespace Humanizer;
 
 class ToUpperCase : ICulturedStringTransformer
 {
     public string Transform(string input) =>
-        Transform(input, null);
+        input.ToUpper(CultureInfo.CurrentCulture);
 
-    public string Transform(string input, CultureInfo? culture)
-    {
-        culture ??= CultureInfo.CurrentCulture;
-
-        return culture.TextInfo.ToUpper(input);
-    }
+    public string Transform(string input, CultureInfo? culture) =>
+        input.ToUpper(culture ?? CultureInfo.CurrentCulture);
 }
