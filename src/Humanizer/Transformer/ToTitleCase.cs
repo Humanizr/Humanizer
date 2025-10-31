@@ -3,7 +3,7 @@ namespace Humanizer;
 partial class ToTitleCase : ICulturedStringTransformer
 {
     public string Transform(string input) =>
-        Transform(input, null);
+        Transform(input, CultureInfo.CurrentCulture);
 
 #if NET7_0_OR_GREATER
     [GeneratedRegex(@"(\w|[^\u0000-\u007F])+'?\w*")]
@@ -16,9 +16,8 @@ partial class ToTitleCase : ICulturedStringTransformer
     private static Regex WordRegex() => WordRegexDefinition;
 #endif
 
-    public string Transform(string input, CultureInfo? culture)
+    public string Transform(string input, CultureInfo culture)
     {
-        culture ??= CultureInfo.CurrentCulture;
         var matches = WordRegex().Matches(input);
         var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;

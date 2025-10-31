@@ -39,8 +39,8 @@ public class LocaliserRegistry<TLocaliser>
         var cultureInfo = culture ?? CultureInfo.CurrentUICulture;
         var cultureName = cultureInfo.Name;
         
-        // Use ConcurrentDictionary with culture name (string) as key for better performance
-        // than CultureInfo equality checks, while maintaining thread-safe lock-free reads
+        // Use ConcurrentDictionary with culture name (string) as key to avoid CultureInfo equality checks
+        // and reduce allocations when the same culture is requested multiple times
         return cultureSpecificCache.GetOrAdd(cultureName, _ =>
         {
             var factory = FindLocaliser(cultureInfo);
