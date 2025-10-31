@@ -5,28 +5,30 @@ namespace Humanizer;
 static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] T>
     where T : struct, Enum
 {
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+    static readonly Type TypeOfT = typeof(T);
     static readonly (T Zero, FrozenDictionary<T, string> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) Info = CreateInfo();
 
     private static (T Zero, FrozenDictionary<T, string> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
-        var values = Enum.GetValues<T>().ToFrozenSet();
-        var type = typeof(T);
-        var zero = (T)Convert.ChangeType(Enum.ToObject(type, 0), type);
-        var humanized = new Dictionary<T, string>();
-        var dehumanized = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
-        foreach (var value in values)
+        var valuesArray = Enum.GetValues<T>();
+        var zero = default(T);
+        var count = valuesArray.Length;
+        var humanized = new Dictionary<T, string>(count);
+        var dehumanized = new Dictionary<string, T>(count, StringComparer.OrdinalIgnoreCase);
+        foreach (var value in valuesArray)
         {
             var description = GetDescription(value);
             humanized[value] = description;
             dehumanized[description] = value;
         }
 
-        var isBitFieldEnum = type.GetCustomAttribute<FlagsAttribute>() != null;
+        var isBitFieldEnum = TypeOfT.GetCustomAttribute<FlagsAttribute>() != null;
         return (
             zero,
             humanized.ToFrozenDictionary(),
             dehumanized.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase),
-            values,
+            valuesArray.ToFrozenSet(),
             isBitFieldEnum);
     }
 
@@ -38,24 +40,22 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
 
     public static bool TreatAsFlags(T input)
     {
-        var type = typeof(T);
         if (!Info.IsBitFieldEnum)
         {
             return false;
         }
 
-        return !Enum.IsDefined(type, input);
+        return !Enum.IsDefined(TypeOfT, input);
     }
 
     static string GetDescription(T input)
     {
-        var type = typeof(T);
 #if NET5_0_OR_GREATER
         var caseName = Enum.GetName(input)!;
 #else
-        var caseName = Enum.GetName(type, input)!;
+        var caseName = Enum.GetName(TypeOfT, input)!;
 #endif
-        var member = type.GetField(caseName)!;
+        var member = TypeOfT.GetField(caseName)!;
 
         if (TryGetDescription(member, out var description))
         {
