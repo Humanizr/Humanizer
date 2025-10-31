@@ -12,7 +12,7 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     private static (T Zero, FrozenDictionary<T, string> Humanized, FrozenDictionary<string, T> Dehumanized, FrozenSet<T> Values, bool IsBitFieldEnum) CreateInfo()
     {
         var valuesArray = Enum.GetValues<T>();
-        var zero = default(T);
+        var zero = (T)Convert.ChangeType(Enum.ToObject(TypeOfT, 0), TypeOfT);
         var count = valuesArray.Length;
         var humanized = new Dictionary<T, string>(count);
         var dehumanized = new Dictionary<string, T>(count, StringComparer.OrdinalIgnoreCase);
