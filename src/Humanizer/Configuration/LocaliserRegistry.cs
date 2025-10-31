@@ -10,7 +10,6 @@ public class LocaliserRegistry<TLocaliser>
     readonly object lockObject = new();
     volatile FrozenDictionary<string, Func<CultureInfo, TLocaliser>>? frozenLocalisers;
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
-    readonly ConcurrentDictionary<CultureInfo, TLocaliser> resolvedLocalisersCache = new();
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -37,7 +36,7 @@ public class LocaliserRegistry<TLocaliser>
     public TLocaliser ResolveForCulture(CultureInfo? culture)
     {
         var cultureInfo = culture ?? CultureInfo.CurrentUICulture;
-        return resolvedLocalisersCache.GetOrAdd(cultureInfo, c => FindLocaliser(c)(c));
+        return FindLocaliser(cultureInfo)(cultureInfo);
     }
 
     /// <summary>
