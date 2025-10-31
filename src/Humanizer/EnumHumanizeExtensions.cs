@@ -45,11 +45,18 @@ public static class EnumHumanizeExtensions
         var (zero, humanized, values) = EnumCache<T>.GetInfo();
         if (EnumCache<T>.TreatAsFlags(input))
         {
-            return values
-                .Where(_ => _.CompareTo(zero) != 0 &&
-                            input.HasFlag(_))
-                .Select(_ => _.Humanize())
-                .Humanize();
+            // Avoid LINQ allocations by manually iterating and building the list
+            List<string>? flagValues = null;
+            foreach (var value in values)
+            {
+                if (value.CompareTo(zero) != 0 && input.HasFlag(value))
+                {
+                    flagValues ??= new List<string>();
+                    flagValues.Add(humanized[value]);
+                }
+            }
+
+            return flagValues?.Humanize() ?? string.Empty;
         }
 
         return humanized[input];

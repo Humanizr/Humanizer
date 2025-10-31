@@ -3,12 +3,12 @@ namespace Humanizer;
 class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWordConverter>
 {
     public DateToOrdinalWordsConverterRegistry()
-        : base(new DefaultDateToOrdinalWordConverter())
+        : base(_ => new DefaultDateToOrdinalWordConverter())
     {
-        Register("en-US", new UsDateToOrdinalWordsConverter());
-        Register("fr", new FrDateToOrdinalWordsConverter());
-        Register("es", new EsDateToOrdinalWordsConverter());
-        Register("lt", new LtDateToOrdinalWordsConverter());
-        Register("ca", new CaDateToOrdinalWordsConverter());
+        Register("en-US", _ => new UsDateToOrdinalWordsConverter());
+        Register("fr", _ => new FrDateToOrdinalWordsConverter());
+        Register("es", _ => new EsDateToOrdinalWordsConverter());
+        Register("lt", _ => new LtDateToOrdinalWordsConverter());
+        Register("ca", _ => new CaDateToOrdinalWordsConverter());
     }
 }
