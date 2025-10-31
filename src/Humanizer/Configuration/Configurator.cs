@@ -92,7 +92,8 @@ public static class Configurator
     /// </summary>
     /// <remarks>
     /// This property should be set only once during application startup before any humanization operations occur.
-    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// For thread-safety, use volatile reads or appropriate synchronization when accessing this property in multi-threaded scenarios.
+    /// In production applications, avoid changing this value after the application has started serving requests.
     /// </remarks>
     public static IDateTimeHumanizeStrategy DateTimeHumanizeStrategy { get; set; } = new DefaultDateTimeHumanizeStrategy();
 
@@ -101,7 +102,8 @@ public static class Configurator
     /// </summary>
     /// <remarks>
     /// This property should be set only once during application startup before any humanization operations occur.
-    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// For thread-safety, use volatile reads or appropriate synchronization when accessing this property in multi-threaded scenarios.
+    /// In production applications, avoid changing this value after the application has started serving requests.
     /// </remarks>
     public static IDateTimeOffsetHumanizeStrategy DateTimeOffsetHumanizeStrategy { get; set; } = new DefaultDateTimeOffsetHumanizeStrategy();
 
@@ -111,7 +113,8 @@ public static class Configurator
     /// </summary>
     /// <remarks>
     /// This property should be set only once during application startup before any humanization operations occur.
-    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// For thread-safety, use volatile reads or appropriate synchronization when accessing this property in multi-threaded scenarios.
+    /// In production applications, avoid changing this value after the application has started serving requests.
     /// </remarks>
     public static IDateOnlyHumanizeStrategy DateOnlyHumanizeStrategy { get; set; } = new DefaultDateOnlyHumanizeStrategy();
 
@@ -120,7 +123,8 @@ public static class Configurator
     /// </summary>
     /// <remarks>
     /// This property should be set only once during application startup before any humanization operations occur.
-    /// Changing this value at runtime in a multi-threaded environment may result in inconsistent behavior.
+    /// For thread-safety, use volatile reads or appropriate synchronization when accessing this property in multi-threaded scenarios.
+    /// In production applications, avoid changing this value after the application has started serving requests.
     /// </remarks>
     public static ITimeOnlyHumanizeStrategy TimeOnlyHumanizeStrategy { get; set; } = new DefaultTimeOnlyHumanizeStrategy();
 #endif
