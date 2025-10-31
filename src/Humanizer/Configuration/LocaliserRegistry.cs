@@ -10,6 +10,7 @@ public class LocaliserRegistry<TLocaliser>
     readonly object lockObject = new();
     volatile FrozenDictionary<string, Func<CultureInfo, TLocaliser>>? frozenLocalisers;
     readonly Func<CultureInfo, TLocaliser> defaultLocaliser;
+    readonly Dictionary<string, TLocaliser> cultureSpecificCache = [];
 
     /// <summary>
     /// Creates a localiser registry with the default localiser set to the provided value
@@ -36,7 +37,32 @@ public class LocaliserRegistry<TLocaliser>
     public TLocaliser ResolveForCulture(CultureInfo? culture)
     {
         var cultureInfo = culture ?? CultureInfo.CurrentUICulture;
-        return FindLocaliser(cultureInfo)(cultureInfo);
+        var cultureName = cultureInfo.Name;
+        
+        // Fast path: check cache for this specific culture name
+        lock (cultureSpecificCache)
+        {
+            if (cultureSpecificCache.TryGetValue(cultureName, out var cachedLocaliser))
+            {
+                return cachedLocaliser;
+            }
+        }
+        
+        // Slow path: find the localiser factory and invoke it
+        var factory = FindLocaliser(cultureInfo);
+        var localiser = factory(cultureInfo);
+        
+        // Cache the result for this culture
+        lock (cultureSpecificCache)
+        {
+            // Double-check in case another thread cached it
+            if (!cultureSpecificCache.TryGetValue(cultureName, out var existing))
+            {
+                cultureSpecificCache[cultureName] = localiser;
+                return localiser;
+            }
+            return existing;
+        }
     }
 
     /// <summary>
