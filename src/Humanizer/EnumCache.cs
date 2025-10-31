@@ -50,7 +50,11 @@ static class EnumCache<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     static string GetDescription(T input)
     {
         var type = typeof(T);
-        var caseName = input.ToString();
+#if NET5_0_OR_GREATER
+        var caseName = Enum.GetName(input)!;
+#else
+        var caseName = Enum.GetName(type, input)!;
+#endif
         var member = type.GetField(caseName)!;
 
         if (TryGetDescription(member, out var description))

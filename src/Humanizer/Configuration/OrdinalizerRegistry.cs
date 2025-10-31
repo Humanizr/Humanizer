@@ -3,24 +3,24 @@ namespace Humanizer;
 class OrdinalizerRegistry : LocaliserRegistry<IOrdinalizer>
 {
     public OrdinalizerRegistry()
-        : base(new DefaultOrdinalizer())
+        : base(_ => new DefaultOrdinalizer())
     {
-        Register("de", new GermanOrdinalizer());
-        Register("en", new EnglishOrdinalizer());
+        Register("de", _ => new GermanOrdinalizer());
+        Register("en", _ => new EnglishOrdinalizer());
         Register("es", c => new SpanishOrdinalizer(c));
-        Register("fr", new FrenchOrdinalizer());
-        Register("is", new IcelandicOrdinalizer());
-        Register("it", new ItalianOrdinalizer());
-        Register("nl", new DutchOrdinalizer());
-        Register("pt", new PortugueseOrdinalizer());
-        Register("ro", new RomanianOrdinalizer());
-        Register("ru", new RussianOrdinalizer());
-        Register("tr", new TurkishOrdinalizer());
-        Register("uk", new UkrainianOrdinalizer());
-        Register("hy", new ArmenianOrdinalizer());
-        Register("az", new AzerbaijaniOrdinalizer());
-        Register("lb", new LuxembourgishOrdinalizer());
-        Register("hu", new HungarianOrdinalizer());
-        Register("ca", new CatalanOrdinalizer());
+        Register("fr", _ => new FrenchOrdinalizer());
+        Register("is", _ => new IcelandicOrdinalizer());
+        Register("it", _ => new ItalianOrdinalizer());
+        Register("nl", _ => new DutchOrdinalizer());
+        Register("pt", _ => new PortugueseOrdinalizer());
+        Register("ro", _ => new RomanianOrdinalizer());
+        Register("ru", _ => new RussianOrdinalizer());
+        Register("tr", _ => new TurkishOrdinalizer());
+        Register("uk", _ => new UkrainianOrdinalizer());
+        Register("hy", _ => new ArmenianOrdinalizer());
+        Register("az", _ => new AzerbaijaniOrdinalizer());
+        Register("lb", _ => new LuxembourgishOrdinalizer());
+        Register("hu", _ => new HungarianOrdinalizer());
+        Register("ca", _ => new CatalanOrdinalizer());
     }
 }

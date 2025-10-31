@@ -6,5 +6,5 @@ internal class WordsToNumberConverterRegistry : LocaliserRegistry<IWordsToNumber
         : base(culture => culture.TwoLetterISOLanguageName == "en"
             ? new EnglishWordsToNumberConverter()
             : new DefaultWordsToNumberConverter(culture)) =>
-             Register("en", new EnglishWordsToNumberConverter());
+             Register("en", _ => new EnglishWordsToNumberConverter());
 }
