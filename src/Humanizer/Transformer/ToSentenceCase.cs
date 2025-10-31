@@ -5,20 +5,17 @@ class ToSentenceCase : ICulturedStringTransformer
     public string Transform(string input) =>
         Transform(input, CultureInfo.CurrentCulture);
 
-    public string Transform(string input, CultureInfo? culture)
+    public string Transform(string input, CultureInfo culture)
     {
-        culture ??= CultureInfo.CurrentCulture;
 
         if (input.Length >= 1)
         {
-            var firstChar = input[0];
-            if (char.IsUpper(firstChar))
+            if (char.IsUpper(input[0]))
             {
                 return input;
             }
 
-            var upperChar = culture.TextInfo.ToUpper(firstChar);
-            return StringHumanizeExtensions.Concat(upperChar, input.AsSpan(1));
+            return StringHumanizeExtensions.Concat(culture.TextInfo.ToUpper(input[0]), input.AsSpan(1));
         }
 
         return culture.TextInfo.ToUpper(input);

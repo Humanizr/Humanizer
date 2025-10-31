@@ -16,9 +16,8 @@ partial class ToTitleCase : ICulturedStringTransformer
     private static Regex WordRegex() => WordRegexDefinition;
 #endif
 
-    public string Transform(string input, CultureInfo? culture)
+    public string Transform(string input, CultureInfo culture)
     {
-        culture ??= CultureInfo.CurrentCulture;
         var matches = WordRegex().Matches(input);
         var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;
