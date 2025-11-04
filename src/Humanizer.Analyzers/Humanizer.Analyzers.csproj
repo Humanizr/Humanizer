@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynComponent>true</IsRoslynComponent>
-    <NoWarn>$(NoWarn);RS2001;RS1038;RS1041</NoWarn>
-    <NBGV_GitEngine>Disabled</NBGV_GitEngine>
+    <NoWarn>$(NoWarn);RS2001;RS1038;RS1041;RS2003</NoWarn>
+    <AnalyzerLanguage>cs</AnalyzerLanguage>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/roslyn3.8/cs" Visible="false" />
   </ItemGroup>
 
 </Project>

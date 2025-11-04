@@ -33,7 +33,7 @@ public struct ByteSize(double byteSize) :
     IComparable,
     IFormattable
 {
-    static readonly ConditionalWeakTable<NumberFormatInfo, HashSet<char>> numberFormatSpecialCharsCache = new();
+    static readonly ConditionalWeakTable<NumberFormatInfo, HashSet<char>> NumberFormatSpecialCharsCache = new();
 
     public static readonly ByteSize MinValue = FromBits(long.MinValue);
     public static readonly ByteSize MaxValue = FromBits(long.MaxValue);
@@ -411,10 +411,10 @@ public struct ByteSize(double byteSize) :
 
         // Acquiring culture-specific parsing info
         var numberFormat = NumberFormatInfo.GetInstance(formatProvider);
-        
+
         // Get or create cached set of special characters from number format strings
         // Note: These can be multi-character strings in some cultures (e.g., Arabic)
-        var specialCharsSet = numberFormatSpecialCharsCache.GetValue(
+        var specialCharsSet = NumberFormatSpecialCharsCache.GetValue(
             numberFormat,
             static nfi => new HashSet<char>(
                 nfi.NumberDecimalSeparator
