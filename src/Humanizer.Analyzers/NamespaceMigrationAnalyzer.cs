@@ -1,10 +1,10 @@
+using System.Collections.Frozen;
+using System.Collections.Immutable;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Collections.Frozen;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace Humanizer.Analyzers;
 
@@ -60,12 +60,12 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
     {
         if (context.Node is not UsingDirectiveSyntax usingDirective)
             return;
-        
+
         if (usingDirective.Name is null)
             return;
 
         var namespaceName = usingDirective.Name.ToString();
-        
+
         if (OldNamespaces.Contains(namespaceName))
         {
             var diagnostic = Diagnostic.Create(Rule, usingDirective.Name.GetLocation(), namespaceName);
@@ -77,13 +77,13 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
     {
         if (context.Node is not QualifiedNameSyntax qualifiedName)
             return;
-        
+
         // Skip if this is part of a using directive (already handled above)
         if (qualifiedName.Parent is UsingDirectiveSyntax)
             return;
 
         var fullName = qualifiedName.ToString();
-        
+
         // Check if any old namespace is used as a prefix
         var matchingNamespace = OldNamespaces.FirstOrDefault(ns => IsNamespaceMatch(fullName, ns));
         if (matchingNamespace != null)

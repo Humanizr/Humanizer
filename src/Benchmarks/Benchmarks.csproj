@@ -5,15 +5,16 @@
     <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
     <UseBaselinePackage Condition="'$(UseBaselinePackage)' == ''">false</UseBaselinePackage>
     <BaselinePackageVersion Condition="'$(BaselinePackageVersion)' == ''">3.0.0-rc.6</BaselinePackageVersion>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="BenchmarkDotNet" Version ="0.15.4" />
   </ItemGroup>
 
   <!-- Use baseline package from NuGet for comparison -->
   <ItemGroup Condition="'$(UseBaselinePackage)' == 'true'">
-    <PackageReference Include="Humanizer" VersionOverride="$(BaselinePackageVersion)" />
+    <PackageReference Include="Humanizer" Version="$(BaselinePackageVersion)" />    
   </ItemGroup>
 
   <!-- Use current source code from the repo -->

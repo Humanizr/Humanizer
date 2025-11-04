@@ -1,14 +1,12 @@
+using System.Collections.Frozen;
+using System.Collections.Immutable;
+using System.Composition;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Collections.Frozen;
-using System.Collections.Immutable;
-using System.Composition;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Humanizer.Analyzers;
 
@@ -79,7 +77,7 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         // Check if "using Humanizer;" already exists
         if (root is CompilationUnitSyntax compilationUnit)
         {
-            var hasHumanizerUsing = compilationUnit.Usings.Any(static u => 
+            var hasHumanizerUsing = compilationUnit.Usings.Any(static u =>
                 u.Name?.ToFullString() == "Humanizer");
 
             if (hasHumanizerUsing)
@@ -107,7 +105,7 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         // Find which old namespace this qualified name starts with
         var fullName = qualifiedName.ToString().AsSpan();
         ReadOnlySpan<char> matchedNamespace = default;
-        
+
         foreach (var ns in OldNamespaces)
         {
             if (IsNamespaceMatch(fullName, ns.AsSpan()))
@@ -150,13 +148,13 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
 
         // Skip the matched namespace and the dot
         var startIndex = matchedNamespace.Length + 1;
-        
+
         if (startIndex >= fullName.Length)
             return "Humanizer";
 
         // Use modern string concatenation with spans
         var remainder = fullName[startIndex..];
-        
+
 #if NET10_0_OR_GREATER
         return string.Concat("Humanizer.", remainder);
 #else

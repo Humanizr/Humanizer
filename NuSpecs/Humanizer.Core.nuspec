@@ -15,12 +15,12 @@
     <repository type="$RepositoryType$" url="$RepositoryUrl$" commit="$RepositoryCommit$" />
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="System.Collections.Immutable" version="9.0.9" exclude="Build,Analyzers" />
+        <dependency id="System.Collections.Immutable" version="9.0.10" exclude="Build,Analyzers" />
         <dependency id="System.ComponentModel.Annotations" version="5.0.0" exclude="Build,Analyzers" />
         <dependency id="System.Memory" version="4.6.3" exclude="Build,Analyzers" />
       </group>
       <group targetFramework="net48">
-        <dependency id="System.Collections.Immutable" version="9.0.9" exclude="Build,Analyzers" />
+        <dependency id="System.Collections.Immutable" version="9.0.10" exclude="Build,Analyzers" />
         <dependency id="System.ComponentModel.Annotations" version="5.0.0" exclude="Build,Analyzers" />
         <dependency id="System.Memory" version="4.6.3" exclude="Build,Analyzers" />
       </group>
@@ -36,8 +36,7 @@
     <file src="Humanizer\bin\Release\net8.0\Humanizer.xml" target="lib\net8.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.dll" target="lib\net10.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.xml" target="lib\net10.0" />
-    <file src="Humanizer.Analyzers\bin\Release\netstandard2.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\netstandard2.0\cs" />
-    <file src="Humanizer.Analyzers\bin\Release\net10.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\net10.0\cs" />
+    <file src="Humanizer.Analyzers\bin\Release\netstandard2.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\roslyn3.8\cs" />    
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

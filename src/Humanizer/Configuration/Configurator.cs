@@ -130,7 +130,7 @@ public static class Configurator
 #endif
 
     static readonly Func<PropertyInfo, bool> DefaultEnumDescriptionPropertyLocator = p => p.Name == "Description";
-    static readonly object enumDescriptionPropertyLocatorLock = new();
+    static readonly object EnumDescriptionPropertyLocatorLock = new();
     static volatile Func<PropertyInfo, bool> enumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
     static volatile bool enumDescriptionPropertyLocatorHasBeenUsed;
 
@@ -149,7 +149,7 @@ public static class Configurator
     /// </summary>
     public static void UseEnumDescriptionPropertyLocator(Func<PropertyInfo, bool> func)
     {
-        lock (enumDescriptionPropertyLocatorLock)
+        lock (EnumDescriptionPropertyLocatorLock)
         {
             if (enumDescriptionPropertyLocatorHasBeenUsed)
             {
@@ -162,7 +162,7 @@ public static class Configurator
 
     internal static void ResetUseEnumDescriptionPropertyLocator()
     {
-        lock (enumDescriptionPropertyLocatorLock)
+        lock (EnumDescriptionPropertyLocatorLock)
         {
             enumDescriptionPropertyLocatorHasBeenUsed = false;
             EnumDescriptionPropertyLocator = DefaultEnumDescriptionPropertyLocator;
