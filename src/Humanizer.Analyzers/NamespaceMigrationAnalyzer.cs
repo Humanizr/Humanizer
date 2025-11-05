@@ -53,7 +53,6 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         context.EnableConcurrentExecution();
 
         context.RegisterSyntaxNodeAction(AnalyzeUsingDirective, SyntaxKind.UsingDirective);
-        context.RegisterSyntaxNodeAction(AnalyzeQualifiedName, SyntaxKind.QualifiedName);
     }
 
     private static void AnalyzeUsingDirective(SyntaxNodeAnalysisContext context)
@@ -73,37 +72,5 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    private static void AnalyzeQualifiedName(SyntaxNodeAnalysisContext context)
-    {
-        if (context.Node is not QualifiedNameSyntax qualifiedName)
-            return;
 
-        // Skip if this is part of a using directive (already handled above)
-        // Check all ancestors, not just immediate parent, because nested qualified names
-        // will have another qualified name as parent
-        if (qualifiedName.Ancestors().OfType<UsingDirectiveSyntax>().Any())
-            return;
-
-        var fullName = qualifiedName.ToString();
-
-        // Check if any old namespace is used as a prefix
-        var matchingNamespace = OldNamespaces.FirstOrDefault(ns => IsNamespaceMatch(fullName, ns));
-        if (matchingNamespace != null)
-        {
-            var diagnostic = Diagnostic.Create(Rule, qualifiedName.GetLocation(), matchingNamespace);
-            context.ReportDiagnostic(diagnostic);
-        }
-    }
-
-    private static bool IsNamespaceMatch(ReadOnlySpan<char> fullName, ReadOnlySpan<char> oldNamespace)
-    {
-        // Exact match
-        if (fullName.Length == oldNamespace.Length)
-            return fullName.Equals(oldNamespace, StringComparison.Ordinal);
-
-        // Prefix match with dot separator
-        return fullName.Length > oldNamespace.Length
-            && fullName[oldNamespace.Length] == '.'
-            && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
-    }
 }

@@ -117,23 +117,4 @@ class TestClass { }
                 .WithArguments("Humanizer.Configuration"));
     }
 
-    [Fact(Skip = "Cannot test qualified name usage with actual Humanizer assembly where old namespaces don't exist")]
-    public async Task QualifiedNameUsage_Diagnostic()
-    {
-        var test = @"
-using Humanizer;
-
-class TestClass 
-{
-    void Method()
-    {
-        var size = {|#0:Humanizer.Bytes.ByteSize|}.FromKilobytes(10);
-    }
-}
-";
-        await VerifyCS.VerifyAnalyzerAsync(test,
-            VerifyCS.Diagnostic(NamespaceMigrationAnalyzer.DiagnosticId)
-                .WithLocation(0)
-                .WithArguments("Humanizer.Bytes"));
-    }
 }
