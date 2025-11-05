@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 using System.Composition;
 
@@ -13,6 +14,23 @@ namespace Humanizer.Analyzers;
 public class NamespaceMigrationCodeFixProvider : CodeFixProvider
 {
     private const string Title = "Update to Humanizer namespace";
+
+    // Ordered by length (longest first) for optimal matching
+    private static readonly FrozenSet<string> OldNamespaces = FrozenSet.ToFrozenSet(
+        [
+            "Humanizer.Localisation.CollectionFormatters",
+            "Humanizer.Localisation.TimeToClockNotation",
+            "Humanizer.Localisation.DateToOrdinalWords",
+            "Humanizer.Localisation.NumberToWords",
+            "Humanizer.Localisation.Formatters",
+            "Humanizer.Localisation.Ordinalizers",
+            "Humanizer.DateTimeHumanizeStrategy",
+            "Humanizer.Configuration",
+            "Humanizer.Localisation",
+            "Humanizer.Inflections",
+            "Humanizer.Bytes"
+        ],
+        StringComparer.Ordinal);
 
     public sealed override ImmutableArray<string> FixableDiagnosticIds => [NamespaceMigrationAnalyzer.DiagnosticId];
 
@@ -38,6 +56,18 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
                     createChangedDocument: c => ReplaceUsingDirectiveAsync(context.Document, usingDirective, c),
                     equivalenceKey: Title),
                 diagnostic);
+            return;
+        }
+
+        // Handle qualified names (e.g., Humanizer.Bytes.ByteSize)
+        if (node is QualifiedNameSyntax qualifiedName)
+        {
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    title: Title,
+                    createChangedDocument: c => ReplaceQualifiedNameAsync(context.Document, qualifiedName, c),
+                    equivalenceKey: Title),
+                diagnostic);
         }
     }
 
@@ -58,4 +88,69 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         return document.WithSyntaxRoot(updatedRoot);
     }
 
+    private static async Task<Document> ReplaceQualifiedNameAsync(Document document, QualifiedNameSyntax qualifiedName, CancellationToken cancellationToken)
+    {
+        var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        if (root is null)
+            return document;
+
+        // Find which old namespace this qualified name starts with
+        var fullName = qualifiedName.ToString().AsSpan();
+        ReadOnlySpan<char> matchedNamespace = default;
+
+        foreach (var ns in OldNamespaces)
+        {
+            if (IsNamespaceMatch(fullName, ns.AsSpan()))
+            {
+                matchedNamespace = ns.AsSpan();
+                break;
+            }
+        }
+
+        if (matchedNamespace.IsEmpty)
+            return document;
+
+        // Replace the old namespace prefix with "Humanizer"
+        var newNameText = GetReplacementName(fullName, matchedNamespace);
+
+        var newQualifiedName = SyntaxFactory.ParseName(newNameText)
+            .WithLeadingTrivia(qualifiedName.GetLeadingTrivia())
+            .WithTrailingTrivia(qualifiedName.GetTrailingTrivia());
+
+        var updatedRoot = root.ReplaceNode(qualifiedName, newQualifiedName);
+        return document.WithSyntaxRoot(updatedRoot);
+    }
+
+    private static bool IsNamespaceMatch(ReadOnlySpan<char> fullName, ReadOnlySpan<char> oldNamespace)
+    {
+        // Exact match
+        if (fullName.Length == oldNamespace.Length)
+            return fullName.Equals(oldNamespace, StringComparison.Ordinal);
+
+        // Prefix match with dot separator
+        return fullName.Length > oldNamespace.Length
+            && fullName[oldNamespace.Length] == '.'
+            && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
+    }
+
+    private static string GetReplacementName(ReadOnlySpan<char> fullName, ReadOnlySpan<char> matchedNamespace)
+    {
+        if (fullName.Length == matchedNamespace.Length)
+            return "Humanizer";
+
+        // Skip the matched namespace and the dot
+        var startIndex = matchedNamespace.Length + 1;
+
+        if (startIndex >= fullName.Length)
+            return "Humanizer";
+
+        // Use modern string concatenation with spans
+        var remainder = fullName[startIndex..];
+
+#if NET10_0_OR_GREATER
+        return string.Concat("Humanizer.", remainder);
+#else
+        return string.Concat("Humanizer.", remainder.ToString());
+#endif
+    }
 }

@@ -117,4 +117,25 @@ class TestClass { }
                 .WithArguments("Humanizer.Configuration"));
     }
 
+    [Fact]
+    public async Task QualifiedNameUsage_Diagnostic()
+    {
+        var test = @"
+namespace TestNamespace
+{
+    class TestClass 
+    {
+        void Method()
+        {
+            var typeName = typeof({|#0:Humanizer.Bytes.IFormatter|}).Name;
+        }
+    }
+}
+";
+        await VerifyCS.VerifyAnalyzerAsync(test,
+            VerifyCS.Diagnostic(NamespaceMigrationAnalyzer.DiagnosticId)
+                .WithLocation(0)
+                .WithArguments("Humanizer.Bytes"));
+    }
+
 }

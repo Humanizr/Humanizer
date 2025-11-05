@@ -118,4 +118,40 @@ class TestClass { }
 
         await VerifyCS.VerifyCodeFixAsync(test, expected, fixedCode);
     }
+
+    [Fact]
+    public async Task FixQualifiedNameUsage()
+    {
+        var test = @"
+namespace TestNamespace
+{
+    class TestClass 
+    {
+        void Method()
+        {
+            var typeName = typeof(Humanizer.Bytes.IFormatter).Name;
+        }
+    }
+}
+";
+
+        var fixedCode = @"
+namespace TestNamespace
+{
+    class TestClass 
+    {
+        void Method()
+        {
+            var typeName = typeof(Humanizer.IFormatter).Name;
+        }
+    }
+}
+";
+
+        var expected = VerifyCS.Diagnostic(NamespaceMigrationAnalyzer.DiagnosticId)
+            .WithSpan(8, 35, 8, 61)
+            .WithArguments("Humanizer.Bytes");
+
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixedCode);
+    }
 }
