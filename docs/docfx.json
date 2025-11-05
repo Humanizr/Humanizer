@@ -1,0 +1,66 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../src",
+          "files": [
+            "Humanizer/Humanizer.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "properties": {
+        "TargetFramework": "net10.0"
+      }
+    }
+  ],
+  "build": {
+    "dest": "_site",
+    "content": [
+      {
+        "files": [
+          "**/*.md",
+          "toc.yml",
+          "**/toc.yml"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**",
+          "api/**.yml",
+          "assets/**"
+        ]
+      },
+      {
+        "files": [
+          "api/**.yml"
+        ],
+        "exclude": [
+          "api/toc.yml"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "src": ".",
+        "files": [
+          "assets/**"
+        ]
+      },
+      {
+        "src": "..",
+        "files": [
+          "logo.png"
+        ]
+      }
+    ],
+    "template": [
+      "default"
+    ],
+    "globalMetadata": {
+      "_appTitle": "Humanizer",
+      "_appLogoPath": "logo.png",
+      "_enableSearch": "true"
+    }
+  }
+}

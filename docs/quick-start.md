@@ -170,7 +170,9 @@ $"You have {singleItem} {"item".ToQuantity(singleItem)}";
 Explore the documentation for detailed information on each feature:
 
 - [String Humanization](string-humanization.md)
-- [DateTime Humanization](datetime-humanization.md)
-- [Number Conversions](number-to-words.md)
+- [Dates & Times](dates-and-times.md)
+- [Number Conversions](numbers.md)
 - [Pluralization](pluralization.md)
+- [Application Integration](application-integration.md)
+- [Testing and Quality Assurance](testing.md)
 - [All Features](index.md)

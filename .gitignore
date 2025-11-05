@@ -101,10 +101,20 @@ src/Humanizer.Tests/ApiApprover/PublicApiApprovalTest.approve_public_api.receive
 
 *.received.*
 
-# Jekyll
+# Documentation output
 docs/_site/
 docs/.jekyll-cache/
 docs/.sass-cache/
+docs/.docfx/
+docs/obj/
+docs/api/**.yml
+!docs/api/toc.yml
+docs/api/.manifest
+docs/api/.xrefmap.json
+docs/api/.xrefmap.yml
+docfx
+.docfx-artifacts/
+.docfx-worktrees/
 
 # BenchmarkDotNet artifacts
 **/BenchmarkDotNet.Artifacts/

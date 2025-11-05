@@ -1,0 +1,64 @@
+- name: Overview
+  href: index.md
+- name: Getting Started
+  items:
+    - name: Installation
+      href: installation.md
+    - name: Quick Start
+      href: quick-start.md
+- name: Strings
+  items:
+    - name: String Humanization
+      href: string-humanization.md
+    - name: String Dehumanization
+      href: string-dehumanization.md
+    - name: String Truncation
+      href: string-truncation.md
+    - name: String Transformations
+      href: string-transformations.md
+    - name: Inflector Helpers
+      href: inflector-methods.md
+    - name: Pluralization
+      href: pluralization.md
+- name: Enumerations
+  href: enumerations.md
+- name: Dates & Times
+  href: dates-and-times.md
+- name: Numbers & Quantities
+  href: numbers.md
+- name: Collections
+  href: collection-humanization.md
+- name: Specialized Features
+  items:
+    - name: ByteSize utilities
+      href: bytesize.md
+    - name: Heading helpers
+      href: heading.md
+    - name: Time unit symbols
+      href: time-unit-symbols.md
+- name: Localization
+  items:
+    - name: Overview
+      href: localization.md
+    - name: Custom Vocabularies
+      href: custom-vocabularies.md
+- name: Extensibility
+  href: extensibility.md
+- name: Operational Guidance
+  items:
+    - name: Application Integration
+      href: application-integration.md
+    - name: Performance and Optimization
+      href: performance.md
+    - name: Testing and Quality Assurance
+      href: testing.md
+    - name: Troubleshooting
+      href: troubleshooting.md
+- name: Advanced Configuration
+  href: configuration.md
+- name: Migration Guides
+  href: v3-namespace-migration.md
+- name: Contributing
+  href: contributing.md
+- name: API Reference
+  href: api/index.md

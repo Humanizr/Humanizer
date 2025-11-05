@@ -1,0 +1,125 @@
+name: Build and Deploy DocFX
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Install DocFX tool
+        run: dotnet tool install --tool-path . docfx
+
+      - name: Build multi-version documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ROOT="$PWD"
+          ARTIFACT_DIR="$ROOT/.docfx-artifacts"
+          WORKTREE_ROOT="$ROOT/.docfx-worktrees"
+
+          rm -rf "$ARTIFACT_DIR" "$WORKTREE_ROOT"
+          mkdir -p "$ARTIFACT_DIR" "$WORKTREE_ROOT"
+
+          ./docfx metadata docs/docfx.json
+          ./docfx build docs/docfx.json
+          mv docs/_site "$ARTIFACT_DIR/main"
+
+          RELEASE_VERSIONS=()
+          RELEASE_TMP="$(mktemp)"
+          git ls-remote --heads origin 'rel/v*' >"$RELEASE_TMP"
+          if [ -s "$RELEASE_TMP" ]; then
+            git fetch --no-tags origin 'refs/heads/rel/*:refs/remotes/origin/rel/*'
+            mapfile -t RELEASE_VERSIONS < <(git for-each-ref --format='%(refname:short)' refs/remotes/origin/rel | sed 's#^origin/rel/##' | sort -rV)
+          fi
+          rm -f "$RELEASE_TMP"
+
+          LATEST_RELEASE=""
+          for version in "${RELEASE_VERSIONS[@]}"; do
+            if [ -z "$version" ]; then
+              continue
+            fi
+            branch="origin/rel/$version"
+            worktree="$WORKTREE_ROOT/$version"
+            git worktree add --force "$worktree" "$branch"
+            pushd "$worktree" >/dev/null
+            "$ROOT/docfx" metadata docs/docfx.json
+            "$ROOT/docfx" build docs/docfx.json
+            popd >/dev/null
+            mkdir -p "$ARTIFACT_DIR/$version"
+            cp -a "$worktree/docs/_site/." "$ARTIFACT_DIR/$version/"
+            git worktree remove --force "$worktree"
+            if [ -z "$LATEST_RELEASE" ]; then
+              LATEST_RELEASE="$version"
+            fi
+          done
+
+          rm -rf docs/_site
+          mkdir -p docs/_site
+
+          if [ -n "$LATEST_RELEASE" ]; then
+            cp -a "$ARTIFACT_DIR/$LATEST_RELEASE/." docs/_site/
+          else
+            cp -a "$ARTIFACT_DIR/main/." docs/_site/
+            LATEST_RELEASE="main"
+          fi
+
+          mkdir -p docs/_site/main
+          cp -a "$ARTIFACT_DIR/main/." docs/_site/main/
+
+          for version in "${RELEASE_VERSIONS[@]}"; do
+            mkdir -p "docs/_site/$version"
+            cp -a "$ARTIFACT_DIR/$version/." "docs/_site/$version/"
+          done
+
+          if [ "${#RELEASE_VERSIONS[@]}" -gt 0 ]; then
+            releases_json=$(printf '"%s",' "${RELEASE_VERSIONS[@]}")
+            releases_json="[${releases_json%,}]"
+          else
+            releases_json="[]"
+          fi
+
+          printf '{\n  "latest": "%s",\n  "releases": %s,\n  "development": "main"\n}\n' "$LATEST_RELEASE" "$releases_json" > docs/_site/versions.json
+
+          rm -rf "$ARTIFACT_DIR" "$WORKTREE_ROOT"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

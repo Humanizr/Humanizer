@@ -78,4 +78,6 @@ DateTime.UtcNow.AddHours(-2).Humanize(); // Returns "2 hours ago"
 
 - [Quick Start Guide](quick-start.md)
 - [String Humanization](string-humanization.md)
-- [DateTime Humanization](datetime-humanization.md)
+- [Dates & Times](dates-and-times.md)
+- [Application Integration](application-integration.md)
+- [Troubleshooting](troubleshooting.md)
