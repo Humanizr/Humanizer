@@ -68,24 +68,28 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         }
     }
 
-    private static async Task<Document> ReplaceUsingDirectiveAsync(Document document, UsingDirectiveSyntax usingDirective, CancellationToken cancellationToken)
+    private static async Task<Document> ReplaceUsingDirectiveAsync(
+        Document document,
+        UsingDirectiveSyntax usingDirective, 
+        CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        if (root is null)
+        if (root is null || root is not CompilationUnitSyntax compilationUnit)
             return document;
 
-        // Check if "using Humanizer;" already exists
-        if (root is CompilationUnitSyntax compilationUnit)
+        // Check if "using Humanizer;" already exists (excluding the one we're fixing)
+        var currentNamespace = usingDirective.Name?.ToString();
+        var hasHumanizerUsing = compilationUnit.Usings.Any(u =>
         {
-            var hasHumanizerUsing = compilationUnit.Usings.Any(static u =>
-                u.Name?.ToFullString() == "Humanizer");
+            var uName = u.Name?.ToString();
+            return uName == "Humanizer" && uName != currentNamespace;
+        });
 
-            if (hasHumanizerUsing)
-            {
-                // Just remove the old using directive
-                var newRoot = root.RemoveNode(usingDirective, SyntaxRemoveOptions.KeepNoTrivia);
-                return document.WithSyntaxRoot(newRoot!);
-            }
+        if (hasHumanizerUsing)
+        {
+            // "using Humanizer;" already exists, just remove this old using directive
+            var newRoot = root.RemoveNode(usingDirective, SyntaxRemoveOptions.KeepNoTrivia);
+            return document.WithSyntaxRoot(newRoot!);
         }
 
         // Replace the namespace with "Humanizer"

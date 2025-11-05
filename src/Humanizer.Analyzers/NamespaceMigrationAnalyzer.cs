@@ -79,7 +79,9 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
             return;
 
         // Skip if this is part of a using directive (already handled above)
-        if (qualifiedName.Parent is UsingDirectiveSyntax)
+        // Check all ancestors, not just immediate parent, because nested qualified names
+        // will have another qualified name as parent
+        if (qualifiedName.Ancestors().OfType<UsingDirectiveSyntax>().Any())
             return;
 
         var fullName = qualifiedName.ToString();
