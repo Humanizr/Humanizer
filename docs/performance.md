@@ -35,7 +35,7 @@ try
     {
         item.DisplayAge = item.Created.Humanize();
         // ToQuantity expects a singular word and handles pluralization automatically
-        item.DisplayCount = item.Count.ToQuantity("item");
+        item.DisplayCount = item.Count.ToQuantity("élément");
     }
 }
 finally
