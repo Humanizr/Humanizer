@@ -79,7 +79,7 @@ app.Run();
     ModelMetadataProviders.Current = new HumanizingMetadataProvider();
     ```
 
-- When using Humanizer in Razor views compiled by the legacy ASP.NET MVC pipeline, add the portable class library references (for example `System.Runtime`, `System.Globalization`) to `web.config` so the view compiler can resolve them. See the [Stack Overflow guidance](https://stackoverflow.com/a/19942274/738188) for the exact `<compilation>` entry.
+- When using Humanizer in Razor views compiled by the legacy ASP.NET MVC pipeline, add the portable class library references (such as `System.Runtime`, `System.Globalization`) to `web.config` so the view compiler can resolve them. See the [Stack Overflow guidance](https://stackoverflow.com/a/19942274/738188) for the exact `<compilation>` entry.
 
 ## Background services and job processors
 
