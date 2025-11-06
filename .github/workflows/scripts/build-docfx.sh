@@ -33,29 +33,47 @@ fi
 rm -f "$RELEASE_TMP"
 
 LATEST_RELEASE=""
-for version in "${RELEASE_VERSIONS[@]}"; do
-  if [ -z "$version" ]; then
-    continue
-  fi
+BUILT_VERSIONS=()
+if [ "${#RELEASE_VERSIONS[@]}" -gt 0 ]; then
+  for version in "${RELEASE_VERSIONS[@]}"; do
+    if [ -z "$version" ]; then
+      continue
+    fi
 
-  branch="origin/rel/$version"
-  worktree="$WORKTREE_ROOT/$version"
-  git worktree add --force "$worktree" "$branch"
-  WORKTREES_TO_REMOVE+=("$worktree")
-  pushd "$worktree" >/dev/null
-  "$ROOT/docfx" metadata docs/docfx.json
-  "$ROOT/docfx" build docs/docfx.json
-  popd >/dev/null
+    branch="origin/rel/$version"
+    worktree="$WORKTREE_ROOT/$version"
+    git worktree add --force "$worktree" "$branch"
+    WORKTREES_TO_REMOVE+=("$worktree")
+    
+    # Skip branches without DocFX configuration
+    if [ ! -f "$worktree/docs/docfx.json" ]; then
+      echo "Skipping $version: no DocFX configuration found"
+      git worktree remove --force "$worktree"
+      unset 'WORKTREES_TO_REMOVE[-1]'
+      continue
+    fi
+    
+    pushd "$worktree" >/dev/null
+    if "$ROOT/docfx" metadata docs/docfx.json && "$ROOT/docfx" build docs/docfx.json; then
+      popd >/dev/null
 
-  mkdir -p "$ARTIFACT_DIR/$version"
-  cp -a "$worktree/docs/_site/." "$ARTIFACT_DIR/$version/"
-  git worktree remove --force "$worktree"
-  unset 'WORKTREES_TO_REMOVE[-1]'
+      mkdir -p "$ARTIFACT_DIR/$version"
+      cp -a "$worktree/docs/_site/." "$ARTIFACT_DIR/$version/"
+      git worktree remove --force "$worktree"
+      unset 'WORKTREES_TO_REMOVE[-1]'
 
-  if [ -z "$LATEST_RELEASE" ]; then
-    LATEST_RELEASE="$version"
-  fi
-done
+      BUILT_VERSIONS+=("$version")
+      if [ -z "$LATEST_RELEASE" ]; then
+        LATEST_RELEASE="$version"
+      fi
+    else
+      echo "Failed to build documentation for $version, skipping"
+      popd >/dev/null
+      git worktree remove --force "$worktree"
+      unset 'WORKTREES_TO_REMOVE[-1]'
+    fi
+  done
+fi
 
 rm -rf docs/_site
 mkdir -p docs/_site
@@ -70,14 +88,14 @@ fi
 mkdir -p docs/_site/main
 cp -a "$ARTIFACT_DIR/main/." docs/_site/main/
 
-for version in "${RELEASE_VERSIONS[@]}"; do
+for version in "${BUILT_VERSIONS[@]}"; do
   mkdir -p "docs/_site/$version"
   cp -a "$ARTIFACT_DIR/$version/." "docs/_site/$version/"
 done
 
-if [ "${#RELEASE_VERSIONS[@]}" -gt 0 ]; then
+if [ "${#BUILT_VERSIONS[@]}" -gt 0 ]; then
   releases_json="["
-  for version in "${RELEASE_VERSIONS[@]}"; do
+  for version in "${BUILT_VERSIONS[@]}"; do
     releases_json+="\"$version\",";
   done
   releases_json="${releases_json%,}"
