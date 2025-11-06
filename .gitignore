@@ -108,7 +108,6 @@ docs/.sass-cache/
 docs/.docfx/
 docs/obj/
 docs/api/**.yml
-!docs/api/toc.yml
 docs/api/.manifest
 docs/api/.xrefmap.json
 docs/api/.xrefmap.yml

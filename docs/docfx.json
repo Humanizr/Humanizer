@@ -34,9 +34,6 @@
       {
         "files": [
           "api/**.yml"
-        ],
-        "exclude": [
-          "api/toc.yml"
         ]
       }
     ],
