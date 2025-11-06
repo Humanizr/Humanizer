@@ -79,8 +79,19 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
             return;
 
         // Skip if this is part of a using directive (already handled above)
-        if (qualifiedName.Parent is UsingDirectiveSyntax)
+        // Check all ancestors, not just immediate parent, because nested qualified names
+        // will have another qualified name as parent
+        if (qualifiedName.Ancestors().OfType<UsingDirectiveSyntax>().Any())
             return;
+
+        // Skip if this qualified name has a parent qualified name that also matches
+        // We only want to report the outermost qualified name to avoid duplicate diagnostics
+        if (qualifiedName.Parent is QualifiedNameSyntax parentQualified)
+        {
+            var parentName = parentQualified.ToString();
+            if (HasMatchingNamespace(parentName))
+                return;
+        }
 
         var fullName = qualifiedName.ToString();
 
@@ -103,5 +114,16 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         return fullName.Length > oldNamespace.Length
             && fullName[oldNamespace.Length] == '.'
             && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
+    }
+
+    private static bool HasMatchingNamespace(string namespaceName)
+    {
+        var nameSpan = namespaceName.AsSpan();
+        foreach (var ns in OldNamespaces)
+        {
+            if (IsNamespaceMatch(nameSpan, ns))
+                return true;
+        }
+        return false;
     }
 }

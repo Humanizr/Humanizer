@@ -17,6 +17,7 @@ public static class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         var test = new CSharpAnalyzerTest<TAnalyzer, DefaultVerifier>
         {
             TestCode = source,
+            CompilerDiagnostics = CompilerDiagnostics.None,
         };
 
         test.TestState.AdditionalReferences.Add(typeof(Humanizer.ByteSize).Assembly);
@@ -40,6 +41,7 @@ public static class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         {
             TestCode = source,
             FixedCode = fixedSource,
+            CompilerDiagnostics = CompilerDiagnostics.None,
         };
 
         test.TestState.AdditionalReferences.Add(typeof(Humanizer.ByteSize).Assembly);

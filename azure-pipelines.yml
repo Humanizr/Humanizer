@@ -66,6 +66,13 @@ stages:
         arguments: -c $(BuildConfiguration) --coverage --xunit-info
       displayName: Run Tests
 
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: test
+        projects: .\src\Humanizer.Analyzers.Tests\Humanizer.Analyzers.Tests.csproj
+        arguments: -c $(BuildConfiguration)
+      displayName: Run Analyzer Tests
+
     # Generate code coverage report
     # https://danielpalme.github.io/ReportGenerator/
     - task: reportgenerator@5

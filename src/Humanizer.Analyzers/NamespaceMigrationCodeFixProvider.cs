@@ -46,8 +46,9 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         var diagnosticSpan = diagnostic.Location.SourceSpan;
         var node = root.FindNode(diagnosticSpan);
 
-        // Handle using directives
-        if (node is UsingDirectiveSyntax usingDirective)
+        // The diagnostic is reported on the namespace name, so navigate up to the using directive
+        var usingDirective = node.FirstAncestorOrSelf<UsingDirectiveSyntax>();
+        if (usingDirective is not null)
         {
             context.RegisterCodeFix(
                 CodeAction.Create(
@@ -55,9 +56,11 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
                     createChangedDocument: c => ReplaceUsingDirectiveAsync(context.Document, usingDirective, c),
                     equivalenceKey: Title),
                 diagnostic);
+            return;
         }
+
         // Handle qualified names (e.g., Humanizer.Bytes.ByteSize)
-        else if (node is QualifiedNameSyntax qualifiedName)
+        if (node is QualifiedNameSyntax qualifiedName)
         {
             context.RegisterCodeFix(
                 CodeAction.Create(
@@ -68,25 +71,14 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         }
     }
 
-    private static async Task<Document> ReplaceUsingDirectiveAsync(Document document, UsingDirectiveSyntax usingDirective, CancellationToken cancellationToken)
+    private static async Task<Document> ReplaceUsingDirectiveAsync(
+        Document document,
+        UsingDirectiveSyntax usingDirective, 
+        CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
         if (root is null)
             return document;
-
-        // Check if "using Humanizer;" already exists
-        if (root is CompilationUnitSyntax compilationUnit)
-        {
-            var hasHumanizerUsing = compilationUnit.Usings.Any(static u =>
-                u.Name?.ToFullString() == "Humanizer");
-
-            if (hasHumanizerUsing)
-            {
-                // Just remove the old using directive
-                var newRoot = root.RemoveNode(usingDirective, SyntaxRemoveOptions.KeepNoTrivia);
-                return document.WithSyntaxRoot(newRoot!);
-            }
-        }
 
         // Replace the namespace with "Humanizer"
         var newName = SyntaxFactory.IdentifierName("Humanizer");
