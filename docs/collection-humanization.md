@@ -8,7 +8,6 @@ using Humanizer;
 var items = new[] { "apples", "bananas", "pears" };
 items.Humanize();                   // "apples, bananas, and pears"
 items.Humanize("or");             // "apples, bananas, or pears"
-items.Humanize(useOxfordComma: false); // "apples, bananas and pears"
 ```
 
 ## Custom item formatting
@@ -42,15 +41,46 @@ text.ToQuantity(3, ShowQuantityAs.Words);    // "three coffee, tea, and water"
 
 ## Custom collection formatters
 
-To change separators or inject domain-specific rules globally, register an `ICollectionFormatter` implementation.
+To change separators or inject domain-specific rules globally, register an `ICollectionFormatter` implementation for the relevant culture.
 
 ```csharp
-using Humanizer.Configuration;
-using Humanizer.Collections.Formatters;
-
 Configurator.CollectionFormatters.Register(
-    typeof(IEnumerable<string>),
-    new OxfordStyleCollectionFormatter("; "));
+    "en-GB",
+    _ => new OxfordCommaWithSemicolonFormatter());
+
+public sealed class OxfordCommaWithSemicolonFormatter : ICollectionFormatter
+{
+    public string Humanize<T>(IEnumerable<T> collection) =>
+        Humanize(collection, item => item?.ToString());
+
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, string?> formatter) =>
+        Humanize(collection, formatter, "; and");
+
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> formatter) =>
+        Humanize(collection, item => formatter(item)?.ToString());
+
+    public string Humanize<T>(IEnumerable<T> collection, string separator) =>
+        Humanize(collection, item => item?.ToString(), separator);
+
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, string?> formatter, string separator)
+    {
+        var values = collection
+            .Select(formatter)
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Select(value => value!.Trim())
+            .ToArray();
+
+        return values.Length switch
+        {
+            0 => string.Empty,
+            1 => values[0],
+            _ => $"{string.Join("; ", values, 0, values.Length - 1)}{separator} {values[^1]}"
+        };
+    }
+
+    public string Humanize<T>(IEnumerable<T> collection, Func<T, object?> formatter, string separator) =>
+        Humanize(collection, item => formatter(item)?.ToString(), separator);
+}
 ```
 
 This configuration executes process-wide, so perform the registration during application startup (for example, in ASP.NET dependency configuration).

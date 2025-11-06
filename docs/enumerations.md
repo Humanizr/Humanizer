@@ -73,10 +73,17 @@ OrderStatus.ReadyToShip.Humanize(culture: new CultureInfo("fr"));
 
 ## Customizing enum behavior
 
-If you need to influence how enums are dehumanized globally, implement `IStringTransformer` or register custom strategies via `Configurator.EnumHumanize`. Common scenarios include:
+Use `Configurator.UseEnumDescriptionPropertyLocator` to point Humanizer at a different attribute property when resolving enum descriptions. This is helpful when your codebase relies on metadata such as `DisplayAttribute.ShortName` instead of `Description`.
 
-- Mapping legacy display text to new enum names during migrations.
-- Supporting domain-specific separators such as `/` or `:`.
-- Applying custom casing or prefixes before converting to text.
+```csharp
+Configurator.UseEnumDescriptionPropertyLocator(property => property.Name is "ShortName");
+```
 
-Because these adjustments operate globally, register them once during application startup.
+For additional preprocessing (for example, mapping legacy UI strings), normalize input before calling `DehumanizeTo`:
+
+```csharp
+var normalized = incomingText.Replace('/', ' ');
+var value = normalized.DehumanizeTo<OrderStatus>(OnNoMatch.ReturnsNull);
+```
+
+Because configuration is global, make these adjustments once during application startup and restore the original predicate in tests when necessary.

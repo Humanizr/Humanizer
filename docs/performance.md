@@ -14,23 +14,35 @@ Humanizer focuses on readability, but many applications call it in performance-s
 
 Humanizer already applies internal caching for culture-specific resources. Adding your own memoization rarely delivers additional wins and can easily serve the wrong culture if you ignore `CultureInfo`. If you discover a real hotspot that still needs memoization, key the cache with both the value **and** the culture (for example, `(value, CultureInfo.CurrentUICulture.Name)`) so French output is not reused for English callers.
 
-### Batched humanization
+### Minimize culture switches
 
-Group similar operations to minimize culture switches:
+Group similar operations to avoid thrashing `CultureInfo`:
 
 ```csharp
-using (new CultureScope("fr-FR"))
+var originalCulture = CultureInfo.CurrentCulture;
+var originalUICulture = CultureInfo.CurrentUICulture;
+
+try
 {
+    var culture = CultureInfo.GetCultureInfo("fr-FR");
+    CultureInfo.CurrentCulture = culture;
+    CultureInfo.CurrentUICulture = culture;
+
     foreach (var item in items)
     {
         item.DisplayAge = item.Created.Humanize();
         item.DisplayCount = item.Count.ToQuantity("élément");
     }
 }
+finally
+{
+    CultureInfo.CurrentCulture = originalCulture;
+    CultureInfo.CurrentUICulture = originalUICulture;
+}
 ```
 
-> [!NOTE]
-> `CultureScope` is a simple helper that saves and restores `CultureInfo.CurrentCulture`. Implement it with `IDisposable` so tests and hot paths stay predictable.
+> [!TIP]
+> Always restore the previous culture after you temporarily change it. Wrapping the pattern in a small `IDisposable` helper keeps call sites tidy, but the snippet above shows the core logic.
 
 ## TimeSpan and DateTime strategies
 
@@ -44,8 +56,8 @@ string concise = duration.Humanize(maxUnit: TimeUnit.Minute); // "1 minute"
 
 ## String truncation and transformations
 
-- Register a custom truncator that stops on word or sentence boundaries to reduce allocations from repeated substring operations.
-- Chain string transformers sparingly; each transformer runs sequentially, so remove redundant ones in `Configurator.StringTransformers`.
+- Prefer truncators that honor word boundaries (for example, `Truncator.DynamicLengthAndPreserveWords`) or implement your own `ITruncator` when the built-ins are insufficient.
+- Chain string transformers sparingly; each transformer runs sequentially, so remove redundant steps from the pipeline you pass to `Transform`.
 
 ## Large data sets
 

@@ -49,10 +49,14 @@ TimeSpan.FromHours(25).Humanize(minUnit: TimeUnit.Day); // "1 day"
 TimeSpan.FromDays(7).Humanize(maxUnit: TimeUnit.Day);   // "7 days"
 ```
 
-Switch to a custom strategy if you need domain-specific formatting:
+When you need domain-specific output, adjust the separator or format via the optional parameters:
 
 ```csharp
-Configurator.TimeSpanHumanizeStrategy = new DefaultTimeSpanHumanizeStrategy();
+var summary = TimeSpan.FromHours(42).Humanize(
+    precision: 2,
+    collectionSeparator: " • ",
+    toWords: true);
+// "two days • eighteen hours"
 ```
 
 ## Ordinal dates
@@ -62,7 +66,7 @@ Configurator.TimeSpanHumanizeStrategy = new DefaultTimeSpanHumanizeStrategy();
 ```csharp
 new DateTime(2025, 1, 1).ToOrdinalWords();        // "January 1st, 2025"
 new DateOnly(2025, 3, 14).ToOrdinalWords();       // "March 14th, 2025"
-new DateTime(2025, 1, 1).ToOrdinalWords(ToWordsExtensionGrammaticalCase.Genitive, new CultureInfo("ru"));
+new DateTime(2025, 1, 1).ToOrdinalWords(GrammaticalCase.Genitive);
 ```
 
 ## Clock notation with `TimeOnly`

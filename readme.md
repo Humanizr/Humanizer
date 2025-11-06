@@ -4,7 +4,7 @@
 [![NuGet version](https://img.shields.io/nuget/v/Humanizer.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer)
 [![NuGet downloads](https://img.shields.io/nuget/dt/Humanizer.Core.svg?logo=nuget&cacheSeconds=300)](https://www.nuget.org/packages/Humanizer.Core)
 
-Humanizer turns numbers, dates, enums, quantities, and strings into natural language across more than forty locales. Use it to surface human-friendly text in any .NET application with minimal ceremony.
+Humanizer turns numbers, dates, enums, quantities, and strings into natural language across more than 40 locales. Use it to surface human-friendly text in any .NET application with minimal ceremony.
 
 > Docs: see the [documentation folder](docs/index.md) for conceptual guides, API reference, and operational playbooks.
 

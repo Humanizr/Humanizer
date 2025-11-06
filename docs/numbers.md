@@ -4,7 +4,7 @@ Humanizer includes helpers for presenting numbers as readable phrases, handling 
 
 ## Words for cardinal numbers
 
-`ToWords()` converts integers and decimals into text that respects cultural conventions and grammatical gender where available.
+`ToWords()` converts whole numbers (`int` and `long`) into text that respects cultural conventions and, where available, grammatical gender.
 
 ```csharp
 using Humanizer;
@@ -13,13 +13,14 @@ using Humanizer;
 3501.ToWords(addAnd: false);                // "three thousand five hundred one"
 (-42).ToWords();                            // "minus forty-two"
 1.ToWords(GrammaticalGender.Feminine, new("pt")); // "uma"
-12.5m.ToWords();                            // "twelve point five"
+1_000_000L.ToWords();                       // "one million"
 ```
 
 ### Tips
 
 - Pass `addAnd: false` to omit "and" in English-style output.
 - Provide a `CultureInfo` to switch languages; ensure the corresponding satellite package is referenced (e.g., `Humanizer.Core.fr`).
+- For fractional values, format the integer and decimal parts separately; `ToWords` does not accept `decimal` or `double` inputs.
 
 ## Ordinal words
 

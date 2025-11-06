@@ -6,7 +6,7 @@ A reliable Humanizer integration includes automated tests that lock down localiz
 
 ### Pin cultures with `UseCulture`
 
-Create a reusable attribute that switches `CultureInfo.CurrentCulture` and `CultureInfo.CurrentUICulture` for the duration of a test. Humanizer ships a sample implementation inside the test project; you can copy the approach:
+Create a reusable attribute that switches `CultureInfo.CurrentCulture` and `CultureInfo.CurrentUICulture` for the duration of a test. Humanizer ships a sample implementation inside the test project ([see `UseCultureAttribute.cs`](../src/Humanizer.Tests/UseCultureAttribute.cs)); you can copy the approach:
 
 ```csharp
 public sealed class UseCultureAttribute : BeforeAfterTestAttribute
@@ -54,24 +54,33 @@ public class DateHumanizerTests
 
 ### Reset configuration between tests
 
-Humanizer configuration is global. Wrap tests that mutate `Configurator` in `IDisposable` fixtures to avoid cross-test side effects:
+Humanizer configuration is global. Capture the original value, assign your test override, and restore the previous value inside `Dispose`:
 
 ```csharp
-public class HumanizerConfigurationTests : IDisposable
+public sealed class HumanizerConfigurationTests : IDisposable
 {
+    private readonly IDateTimeHumanizeStrategy _originalStrategy = Configurator.DateTimeHumanizeStrategy;
+
     public HumanizerConfigurationTests()
     {
-        Configurator.TimeSpanHumanizeStrategy = new DefaultTimeSpanHumanizeStrategy();
+        Configurator.DateTimeHumanizeStrategy = new PrecisionDateTimeHumanizeStrategy(precision: 0.25m);
     }
 
     [Fact]
     public void Uses_custom_strategy()
     {
-        var text = TimeSpan.FromHours(26).Humanize(maxUnit: TimeUnit.Day);
-        Assert.Equal("1 day", text);
+        var comparison = DateTime.UtcNow;
+        var value = comparison.AddMinutes(-90);
+
+        var text = value.Humanize(dateToCompareAgainst: comparison);
+
+        Assert.Equal("an hour ago", text);
     }
 
-    public void Dispose() => Configurator.Reset();
+    public void Dispose()
+    {
+        Configurator.DateTimeHumanizeStrategy = _originalStrategy;
+    }
 }
 ```
 
@@ -134,7 +143,7 @@ dotnet tool run docfx build docs/docfx.json
 - [ ] Verify humanized strings in UI screens, emails, and notifications.
 - [ ] Validate logging and telemetry contain both raw values and humanized summaries.
 - [ ] Rebuild DocFX docs and skim feature guides for outdated snippets.
-- [ ] Review `Configurator` usage for thread safety and ensure a reset path exists for tests.
+- [ ] Review `Configurator` usage for thread safety and ensure tests restore any overridden settings.
 
 ## Related topics
 

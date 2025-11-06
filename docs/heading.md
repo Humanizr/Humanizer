@@ -14,14 +14,24 @@ using Humanizer;
 225.ToHeading();        // "south-west"
 
 // Culture-specific wording
-var currentCulture = new CultureInfo("de-DE");
-using (new CultureContext(currentCulture))
+var previousCulture = CultureInfo.CurrentCulture;
+var previousUICulture = CultureInfo.CurrentUICulture;
+try
 {
+    var culture = CultureInfo.GetCultureInfo("de-DE");
+    CultureInfo.CurrentCulture = culture;
+    CultureInfo.CurrentUICulture = culture;
+
     180.ToHeading();    // "süd"
+}
+finally
+{
+    CultureInfo.CurrentCulture = previousCulture;
+    CultureInfo.CurrentUICulture = previousUICulture;
 }
 ```
 
-If you only need short tokens, call `ToHeading(HeadingStyle.Short)` to receive values such as `N`, `SW`, or `ENE`.
+If you only need short tokens, call `ToHeading(HeadingStyle.Abbreviated)` to receive values such as `N`, `SW`, or `ENE`.
 
 ## Arrow representations
 
@@ -34,11 +44,11 @@ If you only need short tokens, call `ToHeading(HeadingStyle.Short)` to receive v
 
 ## Parsing short headings
 
-`FromShortHeading()` resolves abbreviations back into degrees, enabling round-tripping with external systems.
+`FromAbbreviatedHeading()` resolves abbreviations back into degrees, enabling round-tripping with external systems.
 
 ```csharp
-"NW".FromShortHeading();     // 315
-"S".FromShortHeading();      // 180
+"NW".FromAbbreviatedHeading();     // 315
+"S".FromAbbreviatedHeading();      // 180
 ```
 
 ## Precision and tolerance

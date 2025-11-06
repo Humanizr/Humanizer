@@ -49,7 +49,7 @@ Use this guide to diagnose common issues that arise when installing, configuring
 
 **Resolution**
 - Configuration is global; set strategies and formatters during application startup only.
-- In tests, call `Configurator.Reset()` during teardown (see [Testing and Quality Assurance](testing.md)).
+- In tests, capture the original configuration values, assign overrides for the test, and restore the originals during teardown.
 - Avoid mutating `Configurator` inside request handlers or controllers.
 
 ## Trimming or AOT issues

@@ -7,9 +7,6 @@ Humanizer ships as a set of extension methods and helper types that you can call
 ```csharp
 // Global usings in a .NET project file (Directory.Build.props) or Program.cs
 global using Humanizer;
-// Optional namespaces when you need specialized helpers
-global using Humanizer.Bytes;
-global using Humanizer.DateTimeHumanizeStrategy;
 ```
 
 - Install the appropriate NuGet package (see [Installation](installation.md)) and import the `Humanizer` namespace to access the core extension methods.
@@ -52,8 +49,36 @@ app.Run();
 
 ## ASP.NET MVC 4.x
 
-- Humanize display names by replacing the default metadata provider with a subclass that calls `Humanize()` when no `DisplayNameAttribute` or `DisplayAttribute` is present. A sample implementation lives under `samples/Humanizer.MvcSample`.
-- Register the provider during application start-up: `ModelMetadataProviders.Current = new HumanizerMetadataProvider();`
+- Humanize display names by replacing the default metadata provider with a subclass that calls `Humanize()` when no `DisplayNameAttribute` or `DisplayAttribute` is present. For example:
+
+    ```csharp
+    public sealed class HumanizingMetadataProvider : DataAnnotationsModelMetadataProvider
+    {
+        protected override ModelMetadata CreateMetadata(
+            IEnumerable<Attribute> attributes,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName)
+        {
+            var metadata = base.CreateMetadata(attributes, containerType, modelAccessor, modelType, propertyName);
+
+            if (string.IsNullOrEmpty(metadata.DisplayName) && !string.IsNullOrEmpty(propertyName))
+            {
+                metadata.DisplayName = propertyName.Humanize();
+            }
+
+            return metadata;
+        }
+    }
+    ```
+
+- Register the provider during application start-up:
+
+    ```csharp
+    ModelMetadataProviders.Current = new HumanizingMetadataProvider();
+    ```
+
 - When using Humanizer in Razor views compiled by the legacy ASP.NET MVC pipeline, add the portable class library references (for example `System.Runtime`, `System.Globalization`) to `web.config` so the view compiler can resolve them. See the [Stack Overflow guidance](https://stackoverflow.com/a/19942274/738188) for the exact `<compilation>` entry.
 
 ## Background services and job processors
