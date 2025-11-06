@@ -89,7 +89,7 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         if (qualifiedName.Parent is QualifiedNameSyntax parentQualified)
         {
             var parentName = parentQualified.ToString();
-            if (OldNamespaces.Any(ns => IsNamespaceMatch(parentName, ns)))
+            if (HasMatchingNamespace(parentName))
                 return;
         }
 
@@ -114,5 +114,16 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         return fullName.Length > oldNamespace.Length
             && fullName[oldNamespace.Length] == '.'
             && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
+    }
+
+    private static bool HasMatchingNamespace(string namespaceName)
+    {
+        var nameSpan = namespaceName.AsSpan();
+        foreach (var ns in OldNamespaces)
+        {
+            if (IsNamespaceMatch(nameSpan, ns))
+                return true;
+        }
+        return false;
     }
 }
