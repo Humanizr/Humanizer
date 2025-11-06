@@ -7,17 +7,26 @@ WORKTREE_ROOT="$ROOT/.docfx-worktrees"
 WORKTREES_TO_REMOVE=()
 
 cleanup() {
-  for worktree in "${WORKTREES_TO_REMOVE[@]:-}"; do
-    if [ -d "$worktree" ]; then
-      git worktree remove --force "$worktree" >/dev/null 2>&1 || true
-    fi
-  done
+  if [ ${#WORKTREES_TO_REMOVE[@]} -gt 0 ]; then
+    for worktree in "${WORKTREES_TO_REMOVE[@]}"; do
+      if [ -d "$worktree" ]; then
+        git worktree remove --force "$worktree" >/dev/null 2>&1 || true
+      fi
+    done
+  fi
   rm -rf "$ARTIFACT_DIR" "$WORKTREE_ROOT"
 }
 trap cleanup EXIT
 
 rm -rf "$ARTIFACT_DIR" "$WORKTREE_ROOT"
 mkdir -p "$ARTIFACT_DIR" "$WORKTREE_ROOT"
+
+# Verify docfx tool exists
+if [ ! -f "$ROOT/docfx" ]; then
+  echo "Error: docfx tool not found at $ROOT/docfx"
+  echo "Please run: dotnet tool install --tool-path . docfx"
+  exit 1
+fi
 
 ./docfx metadata docs/docfx.json
 ./docfx build docs/docfx.json

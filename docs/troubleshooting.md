@@ -16,7 +16,7 @@ Use this guide to diagnose common issues that arise when installing, configuring
 ## Restore failures with old SDKs
 
 **Symptoms**
-- `NU1004` or `NU3004` errors mentioning unrecognized locales during `dotnet restore`
+- `NU1004` errors mentioning unrecognized locales during `dotnet restore`
 
 **Resolution**
 - Upgrade to .NET SDK 9.0.200 or newer, or use Visual Studio/MSBuild builds that contain the locale parsing fix.
@@ -39,7 +39,7 @@ Use this guide to diagnose common issues that arise when installing, configuring
 
 **Resolution**
 - Some languages intentionally ship with partial feature support. Check whether ordinal or cardinal conversions exist for the target culture.
-- Consider contributing the missing implementation (see [Contributing](contributing.md)).
+- Consider contributing the missing implementation (see [Contributing](../.github/CONTRIBUTING.md)).
 - Provide a fallback by wrapping calls in `try/catch` and defaulting to English or a neutral culture.
 
 ## Configuration side effects

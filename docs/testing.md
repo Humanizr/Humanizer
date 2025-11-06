@@ -6,7 +6,7 @@ A reliable Humanizer integration includes automated tests that lock down localiz
 
 ### Pin cultures with `UseCulture`
 
-Create a reusable attribute that switches `CultureInfo.CurrentCulture` and `CultureInfo.CurrentUICulture` for the duration of a test. Humanizer ships a sample implementation inside the test project ([see `UseCultureAttribute.cs`](../src/Humanizer.Tests/UseCultureAttribute.cs)); you can copy the approach:
+Create a reusable attribute that switches `CultureInfo.CurrentCulture` and `CultureInfo.CurrentUICulture` for the duration of a test. Humanizer ships a sample implementation inside the test project (see [`UseCultureAttribute.cs` on GitHub](https://github.com/Humanizr/Humanizer/blob/main/src/Humanizer.Tests/UseCultureAttribute.cs)); you can copy the approach:
 
 ```csharp
 public sealed class UseCultureAttribute : BeforeAfterTestAttribute

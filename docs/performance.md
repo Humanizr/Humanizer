@@ -14,6 +14,9 @@ Humanizer focuses on readability, but many applications call it in performance-s
 
 Humanizer already applies internal caching for culture-specific resources. Adding your own memoization rarely delivers additional wins and can easily serve the wrong culture if you ignore `CultureInfo`. If you discover a real hotspot that still needs memoization, key the cache with both the value **and** the culture (for example, `(value, CultureInfo.CurrentUICulture.Name)`) so French output is not reused for English callers.
 
+> [!NOTE]
+> If you implement custom caching for humanized output in multi-threaded scenarios, use a thread-safe collection such as `ConcurrentDictionary` to avoid race conditions and data corruption.
+
 ### Minimize culture switches
 
 Group similar operations to avoid thrashing `CultureInfo`:
@@ -31,6 +34,7 @@ try
     foreach (var item in items)
     {
         item.DisplayAge = item.Created.Humanize();
+        // ToQuantity expects a singular word and handles pluralization automatically
         item.DisplayCount = item.Count.ToQuantity("élément");
     }
 }
