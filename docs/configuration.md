@@ -13,7 +13,7 @@ Configurator.DateTimeOffsetHumanizeStrategy = new PrecisionDateTimeOffsetHumaniz
 
 Configurator.Formatters.Register(
 	"en-GB",
-	culture => new CustomTimeUnitFormatter(culture));
+	cultureInfo => new CustomTimeUnitFormatter(cultureInfo));
 
 Configurator.CollectionFormatters.Register(
 	"en-GB",

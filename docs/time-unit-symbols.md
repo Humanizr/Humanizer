@@ -6,7 +6,7 @@ Humanizer exposes extensions for converting `TimeUnit` values into localized abb
 using Humanizer;
 using Humanizer.Localisation;
 
-timeUnit: TimeUnit = TimeUnit.Minute;
+var timeUnit = TimeUnit.Minute;
 string symbol = timeUnit.ToSymbol();   // "min"
 ```
 
@@ -26,4 +26,4 @@ var symbol = TimeUnit.Minute.ToSymbol();   // "min"
 ```
 
 > [!TIP]
-> When presenting mixed units (e.g., ``TimeSpan.Humanize(precision: 3)``), consider rendering the symbol for the smallest unit used to keep the output consistent.
+> When presenting mixed units (e.g., `TimeSpan.Humanize(precision: 3)`), consider rendering the symbol for the smallest unit used to keep the output consistent.
