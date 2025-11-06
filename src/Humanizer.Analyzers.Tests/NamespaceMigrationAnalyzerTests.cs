@@ -121,11 +121,14 @@ class TestClass { }
     public async Task QualifiedNameUsage_Diagnostic()
     {
         var test = @"
-class TestClass 
+namespace TestNamespace
 {
-    void Method()
+    class TestClass 
     {
-        var size = {|#0:Humanizer.Bytes.ByteSize|}.FromKilobytes(10);
+        void Method()
+        {
+            var typeName = typeof({|#0:Humanizer.Bytes.IFormatter|}).Name;
+        }
     }
 }
 ";
@@ -134,4 +137,5 @@ class TestClass
                 .WithLocation(0)
                 .WithArguments("Humanizer.Bytes"));
     }
+
 }

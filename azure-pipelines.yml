@@ -62,7 +62,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: .\src\Humanizer.Tests\Humanizer.Tests.csproj
+        projects: .\src\**\*.Tests.csproj
         arguments: -c $(BuildConfiguration) --coverage --xunit-info
       displayName: Run Tests
 
