@@ -49,7 +49,7 @@ Humanizer turns numbers, dates, enums, quantities, and strings into human-friend
 
 ## Versioned Docs
 
-The published site always serves the latest stable release at the root path. Development snapshots live under `/main/`, and prior releases remain under `/v{major.minor}/`. See [`/versions.json`](/versions.json) to enumerate the available builds programmatically.
+The published site always serves the latest stable release at the root path. Development snapshots live under `/main/`, and prior releases remain under `/{version}/`. See [`/versions.json`](/versions.json) to enumerate the available builds programmatically.
 
 ## API Reference
 
