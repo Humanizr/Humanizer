@@ -18,7 +18,7 @@ stages:
   jobs:
   - job: Build
     pool:
-      vmImage: windows-latest
+      vmImage: ubuntu-latest
 
     steps:
     - task: UseDotNet@2
@@ -44,14 +44,14 @@ stages:
         arguments: install --tool-path . nbgv
       displayName: Install NBGV tool
 
-    - script: nbgv cloud -c -a
+    - script: ./nbgv cloud -c -a
       displayName: Set Version
 
     - task: DotNetCoreCLI@2
       inputs:
         command: build
-        projects: .\src\Humanizer\Humanizer.csproj
-        arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)\Packages 
+        projects: ./src/Humanizer/Humanizer.csproj
+        arguments: -c $(BuildConfiguration) /t:PackNuSpecs /p:PackageOutputPath=$(Build.ArtifactStagingDirectory)/Packages 
       displayName: Restore, Build, and Pack
 
     - pwsh: |
@@ -62,7 +62,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: .\src\**\*.Tests.csproj
+        projects: **/*.Tests.csproj
         arguments: -c $(BuildConfiguration) --coverage --xunit-info
       displayName: Run Tests
 
@@ -77,7 +77,7 @@ stages:
         license: '$(ReportGeneratorLicenseKey)'
         publishCodeCoverageResults: true
       
-    - publish: $(Build.ArtifactStagingDirectory)\Packages
+    - publish: $(Build.ArtifactStagingDirectory)/Packages
       displayName: Publish build packages
       artifact: BuildPackages
 
