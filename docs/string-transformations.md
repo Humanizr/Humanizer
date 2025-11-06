@@ -61,7 +61,7 @@ using System.Text.RegularExpressions;
 
 public static class SlugTransform
 {
-	static readonly Regex NonSlugCharacters = new("[^a-z0-9]+", RegexOptions.IgnoreCase);
+	static readonly Regex NonSlugCharacters = new("[^a-z0-9]+");
 
 	public static string ToSlug(this string phrase)
 	{
