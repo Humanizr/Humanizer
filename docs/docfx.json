@@ -22,7 +22,9 @@
         "files": [
           "**/*.md",
           "toc.yml",
-          "**/toc.yml"
+          "**/toc.yml",
+          ".github/CONTRIBUTING.md",
+          "README.md"
         ],
         "exclude": [
           "obj/**",
