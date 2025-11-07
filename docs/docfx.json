@@ -1,0 +1,44 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../src",
+          "files": [
+            "Humanizer/Humanizer.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "properties": {
+        "TargetFramework": "net6.0"
+      }
+    }
+  ],
+  "build": {
+    "dest": "_site",
+    "content": [
+      {
+        "files": [
+          "api/**.yml"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "src": "..",
+        "files": [
+          "logo.png"
+        ]
+      }
+    ],
+    "template": [
+      "default"
+    ],
+    "globalMetadata": {
+      "_appTitle": "Humanizer",
+      "_appLogoPath": "logo.png",
+      "_enableSearch": "true"
+    }
+  }
+}
