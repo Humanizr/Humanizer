@@ -133,9 +133,11 @@ export default function ApiReference() {
       .filter(Boolean);
   }, [toc, normalizedFilter]);
 
-  const currentApiSrc = selectedItem && selectedVersion
-    ? useBaseUrl(`api/${selectedVersion}/api/${selectedItem.href}`)
-    : undefined;
+  const currentApiPath = selectedItem && selectedVersion
+    ? `api/${selectedVersion}/api/${selectedItem.href}`
+    : null;
+  const resolvedApiSrc = useBaseUrl(currentApiPath ?? '');
+  const currentApiSrc = currentApiPath ? resolvedApiSrc : null;
 
   const allVersionOptions = React.useMemo(() => {
     const options = [];
@@ -179,8 +181,8 @@ export default function ApiReference() {
 
   return (
     <Layout title="API reference" description="DocFX generated API reference wrapped by Docusaurus">
-      <div className="container">
-        <header>
+      <div className="container padding-vert--md">
+        <header className="margin-bottom--lg">
           <h1>API reference</h1>
           <p>
             Browse the Humanizer API surface across release branches (<code>rel/vN.N</code>) and the latest development build.
@@ -191,86 +193,88 @@ export default function ApiReference() {
             </div>
           )}
         </header>
-        <section className={styles.layout}>
-          <aside className={styles.sidebar}>
-            <div className={styles.versionPicker}>
-              <label htmlFor="api-version-select">Version</label>
-              <select
-                id="api-version-select"
-                value={selectedVersion ?? ''}
-                onChange={event => setSelectedVersion(event.target.value)}
-                disabled={manifestStatus === 'loading'}
-              >
-                {allVersionOptions.map(option => (
-                  <option value={option.value} key={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <input
-              type="search"
-              className={styles.filterInput}
-              placeholder="Filter namespaces or types"
-              value={filter}
-              onChange={event => setFilter(event.target.value)}
-            />
-            <div className={styles.namespaceList}>
-              {tocStatus === 'loading' && (
-                <div className="alert alert--info" role="status">
-                  Loading namespaces…
-                </div>
-              )}
-              {tocStatus === 'error' && (
-                <div className="alert alert--danger" role="alert">
-                  Unable to load API navigation for this version.
-                </div>
-              )}
-              {tocStatus === 'ready' && filteredNamespaces.length === 0 && (
-                <div className={styles.emptyState}>No matches found.</div>
-              )}
-              {filteredNamespaces.map(namespace => {
-                const children = Array.isArray(namespace.items) ? namespace.items : [];
-                const expanded = shouldExpandNamespace(namespace.name);
-                return (
-                  <div className={styles.namespaceGroup} key={namespace.name}>
-                    <button
-                      type="button"
-                      className={styles.namespaceHeader}
-                      onClick={() => toggleNamespace(namespace.name)}
-                      aria-expanded={expanded}
-                    >
-                      {namespace.name}
-                    </button>
-                    {expanded && (
-                      <ul className={styles.typeList}>
-                        {children.map(child => (
-                          <li key={child.href}>
-                            <button
-                              type="button"
-                              className={clsx(styles.typeButton, {
-                                [styles.typeButtonActive]: selectedItem?.href === child.href
-                              })}
-                              onClick={() =>
-                                setSelectedItem({
-                                  namespace: namespace.name,
-                                  name: child.name,
-                                  href: child.href
-                                })
-                              }
-                            >
-                              {child.name}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+        <div className={clsx('row', styles.page)}>
+          <div className={clsx('col col--3', styles.sidebarColumn)}>
+            <div className={styles.sidebarPanel}>
+              <div className={styles.versionPicker}>
+                <label htmlFor="api-version-select">Version</label>
+                <select
+                  id="api-version-select"
+                  value={selectedVersion ?? ''}
+                  onChange={event => setSelectedVersion(event.target.value)}
+                  disabled={manifestStatus === 'loading'}
+                >
+                  {allVersionOptions.map(option => (
+                    <option value={option.value} key={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <input
+                type="search"
+                className={styles.filterInput}
+                placeholder="Filter namespaces or types"
+                value={filter}
+                onChange={event => setFilter(event.target.value)}
+              />
+              <div className={styles.namespaceList}>
+                {tocStatus === 'loading' && (
+                  <div className="alert alert--info" role="status">
+                    Loading namespaces…
                   </div>
-                );
-              })}
+                )}
+                {tocStatus === 'error' && (
+                  <div className="alert alert--danger" role="alert">
+                    Unable to load API navigation for this version.
+                  </div>
+                )}
+                {tocStatus === 'ready' && filteredNamespaces.length === 0 && (
+                  <div className={styles.emptyState}>No matches found.</div>
+                )}
+                {filteredNamespaces.map(namespace => {
+                  const children = Array.isArray(namespace.items) ? namespace.items : [];
+                  const expanded = shouldExpandNamespace(namespace.name);
+                  return (
+                    <div className={styles.namespaceGroup} key={namespace.name}>
+                      <button
+                        type="button"
+                        className={styles.namespaceHeader}
+                        onClick={() => toggleNamespace(namespace.name)}
+                        aria-expanded={expanded}
+                      >
+                        {namespace.name}
+                      </button>
+                      {expanded && (
+                        <ul className={styles.typeList}>
+                          {children.map(child => (
+                            <li key={child.href}>
+                              <button
+                                type="button"
+                                className={clsx(styles.typeButton, {
+                                  [styles.typeButtonActive]: selectedItem?.href === child.href
+                                })}
+                                onClick={() =>
+                                  setSelectedItem({
+                                    namespace: namespace.name,
+                                    name: child.name,
+                                    href: child.href
+                                  })
+                                }
+                              >
+                                {child.name}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </aside>
-          <div className={styles.contentCard}>
+          </div>
+          <div className={clsx('col col--9', styles.contentColumn)}>
             {tocStatus === 'error' && (
               <div className="alert alert--warning" role="alert">
                 Select another version or rebuild the API reference locally to continue.
@@ -281,7 +285,7 @@ export default function ApiReference() {
             )}
             {currentApiSrc && (
               <>
-                <div className="apiControls">
+                <div className={clsx('margin-bottom--sm', styles.selectedContext)}>
                   <span>
                     Viewing: <strong>{selectedItem?.namespace}.{selectedItem?.name}</strong>
                   </span>
@@ -293,7 +297,7 @@ export default function ApiReference() {
               </>
             )}
           </div>
-        </section>
+        </div>
       </div>
     </Layout>
   );
