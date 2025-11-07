@@ -45,6 +45,24 @@ rm -rf "$ROOT/docs/_site"
 # Discover release branches
 RELEASE_VERSIONS=()
 SKIP_FETCH="${SKIP_RELEASE_FETCH:-0}"
+MIN_RELEASE_VERSION="${MIN_DOCFX_RELEASE:-v2.14}"
+
+should_build_release() {
+  local version="$1"
+  local min="$MIN_RELEASE_VERSION"
+  if [[ -z "$min" ]]; then
+    return 0
+  fi
+
+  local current="${version#v}"
+  local required="${min#v}"
+  local smallest
+  smallest="$(printf '%s\n%s\n' "$current" "$required" | sort -V | head -n1)"
+  if [[ "$smallest" == "$required" ]]; then
+    return 0
+  fi
+  return 1
+}
 
 if [ "$SKIP_FETCH" != "1" ]; then
   RELEASE_TMP="$(mktemp)"
@@ -66,6 +84,10 @@ BUILT_RELEASES=()
 
 for version in "${RELEASE_VERSIONS[@]}"; do
   [ -n "$version" ] || continue
+  if ! should_build_release "$version"; then
+    echo "Skipping $version: older than minimum DocFX release $MIN_RELEASE_VERSION"
+    continue
+  fi
 
   branch="origin/rel/$version"
   worktree="$WORKTREE_ROOT/$version"

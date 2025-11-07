@@ -66,7 +66,18 @@ Explore additional walk-throughs in the [Quick Start guide](docs/quick-start.md)
 
 ## Documentation and samples
 
-Humanizer's documentation site now uses Docusaurus for the main frame and DocFX for the API reference.
+Humanizer's documentation site now uses Docusaurus for the main frame and DocFX for the API reference. Use the helper script to generate everything locally:
+
+```bash
+scripts/generate-docs.sh
+   # build DocFX API + Docusaurus site
+scripts/generate-docs.sh --serve
+   # build then serve at http://localhost:3000
+# add --skip-release-fetch to skip rel/v* branch clones when offline
+# set MIN_DOCFX_RELEASE (default v2.14) to control which rel/v* branches emit API docs
+```
+
+If you prefer to run the individual steps manually:
 
 ```bash
 # Generate API reference (DocFX)
