@@ -58,6 +58,9 @@ const config = {
   ],
   themeConfig: {
     image: 'img/logo.png',
+    colorMode: {
+      respectPrefersColorScheme: true
+    },
     navbar: {
       title: 'Humanizer',
       logo: {
@@ -78,8 +81,9 @@ const config = {
         },
         {
           href: 'https://github.com/Humanizr/Humanizer',
-          label: 'GitHub',
-          position: 'right'
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository'
         }
       ]
     },
