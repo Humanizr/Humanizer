@@ -1,0 +1,8 @@
+- Use `.editorconfig` defaults: spaces, 4-space indentation, file-scoped namespaces, trim redundant blank lines.
+- Prefer language keywords (`string`, `int`) and `var` when the type is obvious. Avoid unnecessary `this.` qualifiers.
+- Order `using` statements with `System.*` first; rely on existing global usings.
+- Keep code self-documenting; comments are rare and reserved for non-obvious logic. Never wrap imports in `try/catch`.
+- Follow Humanizer naming conventions (camelCase private fields, PascalCase public members/static readonly/constants).
+- Skip braces for single-line statements when consistent with surrounding code.
+- Add XML documentation for any new or modified public APIs and update README/docs when behavior changes.
+- Tests: organize with xUnit, group by feature/culture, use `UseCulture` attribute for localization-specific assertions.
