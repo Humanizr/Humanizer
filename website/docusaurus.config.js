@@ -54,6 +54,18 @@ const config = {
           }
         ]
       }
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'api',
+        path: 'api-docs',
+        routeBasePath: 'api',
+        sidebarPath: require.resolve('./api-sidebars.js'),
+        editUrl: 'https://github.com/Humanizr/Humanizer/edit/main/website/api-docs/',
+        showLastUpdateAuthor: false,
+        showLastUpdateTime: false
+      }
     ]
   ],
   themeConfig: {
@@ -75,9 +87,11 @@ const config = {
             label: 'Guides'
           },
         {
-          label: 'API',
+          type: 'docSidebar',
+          sidebarId: 'apiSidebar',
+          docsPluginId: 'api',
           position: 'left',
-          to: '/api'
+          label: 'API'
         },
         {
           href: 'https://github.com/Humanizr/Humanizer',

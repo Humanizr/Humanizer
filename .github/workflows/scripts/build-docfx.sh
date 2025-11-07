@@ -6,6 +6,10 @@ ROOT="$(pwd)"
 ARTIFACT_DIR="$ROOT/.docfx-artifacts"
 WORKTREE_ROOT="$ROOT/.docfx-worktrees"
 STATIC_API_DIR="$ROOT/website/static/api"
+METADATA_ROOT="$ROOT/.dfmg-metadata"
+API_DOCS_ROOT="$ROOT/website/api-docs"
+API_VERSIONS_FILE="$API_DOCS_ROOT/versions.json"
+DFMG_CONFIG_PATH="$ROOT/docs/dfmg.config.yaml"
 WORKTREES_TO_REMOVE=()
 DOCFX_CMD="dotnet tool run docfx"
 
@@ -22,8 +26,12 @@ cleanup() {
 }
 trap cleanup EXIT
 
-rm -rf "$ARTIFACT_DIR" "$WORKTREE_ROOT"
-mkdir -p "$ARTIFACT_DIR" "$WORKTREE_ROOT"
+rm -rf "$ARTIFACT_DIR" "$WORKTREE_ROOT" "$METADATA_ROOT"
+mkdir -p "$ARTIFACT_DIR" "$WORKTREE_ROOT" "$METADATA_ROOT"
+rm -rf "$STATIC_API_DIR"
+mkdir -p "$STATIC_API_DIR"
+mkdir -p "$API_DOCS_ROOT"
+rm -rf "$API_DOCS_ROOT"/dev "$API_DOCS_ROOT"/v*
 
 build_docfx_for_checkout() {
   local checkout_root="$1"
@@ -36,6 +44,87 @@ build_docfx_for_checkout() {
 
   mkdir -p "$ARTIFACT_DIR/$destination_name"
   cp -a "$checkout_root/docs/_site/." "$ARTIFACT_DIR/$destination_name/"
+
+  if [ -d "$checkout_root/docs/api" ]; then
+    mkdir -p "$METADATA_ROOT/$destination_name"
+    cp -a "$checkout_root/docs/api/." "$METADATA_ROOT/$destination_name/"
+  fi
+}
+
+generate_markdown_for_version() {
+  local metadata_key="$1"
+  local slug="$2"
+  local label="$3"
+
+  local metadata_dir="$METADATA_ROOT/$metadata_key"
+  if [ ! -d "$metadata_dir" ]; then
+    echo "Skipping markdown generation for $metadata_key (metadata missing)"
+    return
+  fi
+
+  local output_dir="$API_DOCS_ROOT/$slug"
+  rm -rf "$output_dir"
+  mkdir -p "$output_dir"
+
+  DFMG_CONFIG="$DFMG_CONFIG_PATH" \
+  DFMG_YAML_PATH="$metadata_dir" \
+  DFMG_OUTPUT_PATH="$output_dir" \
+  dotnet tool run dfmg >/dev/null
+
+  # add a small marker so we know the directory corresponds to this slug
+  printf '{\n  "label": "%s",\n  "slug": "%s"\n}\n' "$label" "$slug" >"$output_dir/.dfmg-version.json"
+
+  sanitize_markdown_directory "$output_dir" "$slug"
+}
+
+sanitize_markdown_directory() {
+  local target_dir="$1"
+  local slug="$2"
+  python3 - "$target_dir" "$slug" <<'PY'
+import pathlib
+import re
+import sys
+
+root = pathlib.Path(sys.argv[1])
+slug = sys.argv[2]
+pattern = re.compile(r'(?<![`\\])\{([A-Za-z0-9_]+)\}')
+link_pattern = re.compile(r'\]\(((?:\./|\.\./)+)([^)]+)\)')
+
+for md_path in root.rglob('*.md'):
+    text = md_path.read_text(encoding='utf-8')
+    lines = text.splitlines()
+    inside_code = False
+    changed = False
+    for index, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith('```'):
+            inside_code = not inside_code
+            continue
+        if inside_code:
+            continue
+        new_line = pattern.sub(r'\\{\1\\}', line)
+        if new_line != line:
+            lines[index] = new_line
+            changed = True
+    if changed:
+        text = '\n'.join(lines) + '\n'
+    else:
+        text = '\n'.join(lines) + '\n'
+
+    def replace_links(match):
+        target = match.group(2)
+        if target.endswith('.md'):
+            target = target[:-3]
+        return f'](/api/{slug}/{target})'
+
+    new_text = link_pattern.sub(replace_links, text)
+    duplicate_namespace_pattern = re.compile(rf'/api/{slug}/([^/]+)/\1(?![A-Za-z0-9_])')
+    new_text = duplicate_namespace_pattern.sub(rf'/api/{slug}/\1', new_text)
+    if new_text != text:
+        text = new_text
+
+    md_path.write_text(text, encoding='utf-8')
+PY
 }
 
 # Build current checkout (development)
@@ -124,26 +213,39 @@ for version in "${BUILT_RELEASES[@]}"; do
   cp -a "$ARTIFACT_DIR/$version/." "$STATIC_API_DIR/$version/"
 done
 
+generate_markdown_for_version "main" "dev" "Latest dev (main)"
+for version in "${BUILT_RELEASES[@]}"; do
+  generate_markdown_for_version "$version" "$version" "$version"
+done
+
 if [ -n "$LATEST_RELEASE" ]; then
   DEFAULT_RELEASE="$LATEST_RELEASE"
+  DEFAULT_SLUG="$LATEST_RELEASE"
 else
   DEFAULT_RELEASE="main"
+  DEFAULT_SLUG="dev"
 fi
 
 if [ "${#BUILT_RELEASES[@]}" -gt 0 ]; then
-  releases_json="["
+  release_objects="["
   for version in "${BUILT_RELEASES[@]}"; do
-    releases_json+="\"$version\",";
+    release_objects+="{\"label\":\"$version\",\"slug\":\"$version\"},"
   done
-  releases_json="${releases_json%,}]"
+  release_objects="${release_objects%,}]"
 else
-  releases_json="[]"
+  release_objects="[]"
 fi
 
-cat >"$STATIC_API_DIR/versions.json" <<MANIFEST
+cat >"$API_VERSIONS_FILE" <<MANIFEST
 {
   "latest": "$DEFAULT_RELEASE",
-  "releases": $releases_json,
-  "development": "main"
+  "releases": $release_objects,
+  "development": {
+    "label": "Latest dev (main)",
+    "slug": "dev"
+  },
+  "defaultSlug": "$DEFAULT_SLUG"
 }
 MANIFEST
+
+cp "$API_VERSIONS_FILE" "$STATIC_API_DIR/versions.json"

@@ -66,7 +66,7 @@ Explore additional walk-throughs in the [Quick Start guide](docs/quick-start.md)
 
 ## Documentation and samples
 
-Humanizer's documentation site now uses Docusaurus for the main frame and DocFX for the API reference. Use the helper script to generate everything locally:
+Humanizer's documentation site now uses Docusaurus for the main frame. API reference content is emitted as Markdown via [DocFxMarkdownGen](https://github.com/Jan0660/DocFxMarkdownGen) so everything renders with the same navigation chrome as the guides. Use the helper script to generate everything locally:
 
 ```bash
 scripts/generate-docs.sh
@@ -76,6 +76,8 @@ scripts/generate-docs.sh --serve
 # add --skip-release-fetch to skip rel/v* branch clones when offline
 # set MIN_DOCFX_RELEASE (default v2.14) to control which rel/v* branches emit API docs
 ```
+
+`scripts/generate-docs.sh` runs the multi-version DocFX metadata build, transforms the YAML into Markdown with DocFxMarkdownGen, and finally executes the Docusaurus build. Run it before `npm start`/`npm run build` any time you need fresh docs.
 
 If you prefer to run the individual steps manually:
 

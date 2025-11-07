@@ -8,6 +8,13 @@
         "docfx"
       ],
       "rollForward": false
+    },
+    "docfxmarkdowngen": {
+      "version": "0.5.0",
+      "commands": [
+        "dfmg"
+      ],
+      "rollForward": false
     }
   }
 }
