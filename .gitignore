@@ -117,3 +117,11 @@ docfx
 
 # BenchmarkDotNet artifacts
 **/BenchmarkDotNet.Artifacts/
+
+# Docusaurus artifacts
+website/.docusaurus/
+website/build/
+website/node_modules/
+website/static/api/**
+!website/static/api
+!website/static/api/.gitkeep

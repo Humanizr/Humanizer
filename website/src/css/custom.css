@@ -1,0 +1,48 @@
+:root {
+  --ifm-color-primary: #5946d2;
+  --ifm-color-primary-dark: #4f3fbd;
+  --ifm-color-primary-darker: #493ab2;
+  --ifm-color-primary-darkest: #3a2f90;
+  --ifm-color-primary-light: #6d5cd7;
+  --ifm-color-primary-lighter: #7b6ade;
+  --ifm-color-primary-lightest: #9788e6;
+  --ifm-code-font-size: 95%;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #9788e6;
+  --ifm-color-primary-dark: #7667cc;
+  --ifm-color-primary-darker: #6152ba;
+  --ifm-color-primary-darkest: #3a2f90;
+  --ifm-color-primary-light: #b9adef;
+  --ifm-color-primary-lighter: #ccc1f5;
+  --ifm-color-primary-lightest: #e0d6fb;
+}
+
+.hero {
+  text-align: left;
+}
+
+.hero__title {
+  font-size: 3rem;
+}
+
+.hero__subtitle {
+  max-width: 640px;
+}
+
+.apiFrame {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.75rem;
+  width: 100%;
+  height: 70vh;
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.apiControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}

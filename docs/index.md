@@ -49,11 +49,11 @@ Humanizer turns numbers, dates, enums, quantities, and strings into human-friend
 
 ## Versioned Docs
 
-The published site always serves the latest stable release at the root path. Development snapshots live under `/main/`, and prior releases remain under `/{version}/`. See [`/versions.json`](/versions.json) to enumerate the available builds programmatically.
+The published site always serves the latest stable release at the root path inside the API viewer. Development snapshots live under `/main/`, and prior releases remain under `/{version}/`. See [`/api/versions.json`](/api/versions.json) to enumerate the available builds programmatically.
 
 ## API Reference
 
-Browse the generated [Humanizer API reference](api/index.md) for XML-documented namespaces, types, and members.
+Use the [API viewer](/api) to load the DocFX-generated reference for any release branch or the latest development build. Each selection surfaces the XML-documented namespaces, types, and members in an embedded frame, with an option to pop the page out into a dedicated tab.
 
 ## Contributing
 

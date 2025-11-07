@@ -66,14 +66,23 @@ Explore additional walk-throughs in the [Quick Start guide](docs/quick-start.md)
 
 ## Documentation and samples
 
-Generate and preview the DocFX site locally:
+Humanizer's documentation site now uses Docusaurus for the main frame and DocFX for the API reference.
 
 ```bash
+# Generate API reference (DocFX)
 dotnet tool restore
+dotnet tool run docfx metadata docs/docfx.json
 dotnet tool run docfx build docs/docfx.json
-# Local preview
-dotnet tool run docfx serve docs/_site
+
+# Build the Docusaurus site
+cd website
+npm install   # first run only; use npm ci afterwards
+npm run start # dev server with hot reload
+# or build static output
+npm run build
 ```
+
+To mirror the CI multi-version layout locally, run `.github/workflows/scripts/build-docfx.sh` from the repo root before `npm run build`; the script copies each release branch's API output under `website/static/api/<version>`.
 
 The `samples/Humanizer.MvcSample` project demonstrates metadata providers for ASP.NET MVC 4.x. Modern ASP.NET Core and Blazor scenarios are covered in [Application Integration](docs/application-integration.md).
 
