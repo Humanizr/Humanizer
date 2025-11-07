@@ -5,9 +5,7 @@ ls -a
 rg "search term"
 
 # Restore + build
-cd /home/claire/local-dev/Humanizer/src
-DOTNET_CLI_UI_LANGUAGE=en dotnet restore
-DOTNET_CLI_UI_LANGUAGE=en dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<out>
+dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<out>
 
 # Run tests (Linux skips net48)
 dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0
