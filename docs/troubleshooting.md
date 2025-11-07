@@ -39,7 +39,7 @@ Use this guide to diagnose common issues that arise when installing, configuring
 
 **Resolution**
 - Some languages intentionally ship with partial feature support. Check whether ordinal or cardinal conversions exist for the target culture.
-- Consider contributing the missing implementation (see [Contributing](../.github/CONTRIBUTING.md)).
+- Consider contributing the missing implementation (see [Contributing](contributing.md)).
 - Provide a fallback by wrapping calls in `try/catch` and defaulting to English or a neutral culture.
 
 ## Configuration side effects

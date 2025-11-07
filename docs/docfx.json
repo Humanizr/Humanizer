@@ -23,8 +23,8 @@
           "**/*.md",
           "toc.yml",
           "**/toc.yml",
-          ".github/CONTRIBUTING.md",
-          "README.md"
+          "../.github/CONTRIBUTING.md",
+          "../README.md"
         ],
         "exclude": [
           "obj/**",
@@ -54,7 +54,8 @@
       }
     ],
     "template": [
-      "default"
+      "default",
+      "templates/humanizer"
     ],
     "globalMetadata": {
       "_appTitle": "Humanizer",
