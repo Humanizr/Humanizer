@@ -25,37 +25,42 @@ namespace Humanizer;
 
 public static partial class InflectorExtensions
 {
+    private const string PascalizePattern = @"(?:[ _-]+|^)([a-zA-Z])";
+    private const string UnderscorePattern1 = @"([\p{Lu}]+)([\p{Lu}][\p{Ll}])";
+    private const string UnderscorePattern2 = @"([\p{Ll}\d])([\p{Lu}])";
+    private const string UnderscorePattern3 = @"[-\s]";
+
 #if NET7_0_OR_GREATER
-    [GeneratedRegex(@"(?:[ _-]+|^)([a-zA-Z])")]
+    [GeneratedRegex(PascalizePattern)]
     private static partial Regex PascalizeRegexGenerated();
     
     private static Regex PascalizeRegex() => PascalizeRegexGenerated();
 
-    [GeneratedRegex(@"([\p{Lu}]+)([\p{Lu}][\p{Ll}])")]
+    [GeneratedRegex(UnderscorePattern1)]
     private static partial Regex UnderscoreRegex1Generated();
     
     private static Regex UnderscoreRegex1() => UnderscoreRegex1Generated();
 
-    [GeneratedRegex(@"([\p{Ll}\d])([\p{Lu}])")]
+    [GeneratedRegex(UnderscorePattern2)]
     private static partial Regex UnderscoreRegex2Generated();
     
     private static Regex UnderscoreRegex2() => UnderscoreRegex2Generated();
 
-    [GeneratedRegex(@"[-\s]")]
+    [GeneratedRegex(UnderscorePattern3)]
     private static partial Regex UnderscoreRegex3Generated();
     
     private static Regex UnderscoreRegex3() => UnderscoreRegex3Generated();
 #else
-    private static readonly Regex PascalizeRegexField = new(@"(?:[ _-]+|^)([a-zA-Z])", RegexOptions.Compiled);
+    private static readonly Regex PascalizeRegexField = new(PascalizePattern, RegexOptions.Compiled);
     private static Regex PascalizeRegex() => PascalizeRegexField;
 
-    private static readonly Regex UnderscoreRegex1Field = new(@"([\p{Lu}]+)([\p{Lu}][\p{Ll}])", RegexOptions.Compiled);
+    private static readonly Regex UnderscoreRegex1Field = new(UnderscorePattern1, RegexOptions.Compiled);
     private static Regex UnderscoreRegex1() => UnderscoreRegex1Field;
 
-    private static readonly Regex UnderscoreRegex2Field = new(@"([\p{Ll}\d])([\p{Lu}])", RegexOptions.Compiled);
+    private static readonly Regex UnderscoreRegex2Field = new(UnderscorePattern2, RegexOptions.Compiled);
     private static Regex UnderscoreRegex2() => UnderscoreRegex2Field;
 
-    private static readonly Regex UnderscoreRegex3Field = new(@"[-\s]", RegexOptions.Compiled);
+    private static readonly Regex UnderscoreRegex3Field = new(UnderscorePattern3, RegexOptions.Compiled);
     private static Regex UnderscoreRegex3() => UnderscoreRegex3Field;
 #endif
 
