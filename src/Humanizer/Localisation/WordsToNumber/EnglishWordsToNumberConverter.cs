@@ -2,13 +2,15 @@ namespace Humanizer;
 
 internal partial class EnglishWordsToNumberConverter : GenderlessWordsToNumberConverter
 {
+    private const string OrdinalSuffixPattern = @"\b(\d+)(st|nd|rd|th)\b";
+
 #if NET7_0_OR_GREATER
-    [GeneratedRegex(@"\b(\d+)(st|nd|rd|th)\b")]
+    [GeneratedRegex(OrdinalSuffixPattern)]
     private static partial Regex OrdinalSuffixRegexGenerated();
     
     private static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexGenerated();
 #else
-    private static readonly Regex OrdinalSuffixRegexField = new(@"\b(\d+)(st|nd|rd|th)\b", RegexOptions.Compiled);
+    private static readonly Regex OrdinalSuffixRegexField = new(OrdinalSuffixPattern, RegexOptions.Compiled);
 
     private static Regex OrdinalSuffixRegex() => OrdinalSuffixRegexField;
 #endif

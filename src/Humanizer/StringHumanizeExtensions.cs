@@ -7,13 +7,21 @@ namespace Humanizer;
 /// </summary>
 public static partial class StringHumanizeExtensions
 {
+    const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";
+    const string IntegerAndOptionalLowercaseLetters = @"[0-9]+\p{Ll}*";
+    const string Acronym = @"\p{Lu}+(?=\p{Lu}|[0-9]|\b)";
+    const string SequenceOfOtherLetters = @"\p{Lo}+";
+    const string MidSentencePunctuation = "[,;]?";
+    const string PascalCaseWordPartsPattern = @"(\p{Lu}?\p{Ll}+|[0-9]+\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?";
+    const string FreestandingSpacingCharPattern = @"\s[-_]|[-_]\s";
+
 #if NET7_0_OR_GREATER
-    [GeneratedRegex(@"(\p{Lu}?\p{Ll}+|[0-9]+\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?", RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture)]
+    [GeneratedRegex(PascalCaseWordPartsPattern, RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture)]
     private static partial Regex PascalCaseWordPartsRegexGenerated();
     
     private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexGenerated();
 
-    [GeneratedRegex(@"\s[-_]|[-_]\s")]
+    [GeneratedRegex(FreestandingSpacingCharPattern)]
     private static partial Regex FreestandingSpacingCharRegexGenerated();
     
     private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexGenerated();
@@ -24,16 +32,10 @@ public static partial class StringHumanizeExtensions
 
     private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexField;
 
-    private static readonly Regex FreestandingSpacingCharRegexField = new(@"\s[-_]|[-_]\s", RegexOptions.Compiled);
+    private static readonly Regex FreestandingSpacingCharRegexField = new(FreestandingSpacingCharPattern, RegexOptions.Compiled);
 
     private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexField;
 #endif
-
-    const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";
-    const string IntegerAndOptionalLowercaseLetters = @"[0-9]+\p{Ll}*";
-    const string Acronym = @"\p{Lu}+(?=\p{Lu}|[0-9]|\b)";
-    const string SequenceOfOtherLetters = @"\p{Lo}+";
-    const string MidSentencePunctuation = "[,;]?";
 
     static string FromUnderscoreDashSeparatedWords(string input) =>
         string.Join(" ", input.Split(['_', '-']));

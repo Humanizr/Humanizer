@@ -41,14 +41,16 @@ public static partial class RomanNumeralExtensions
         };
     }
 
+    private const string ValidRomanNumeralPattern = @"^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$";
+
 #if NET7_0_OR_GREATER
-    [GeneratedRegex(@"^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$", RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    [GeneratedRegex(ValidRomanNumeralPattern, RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex ValidRomanNumeralGenerated();
     
     private static Regex ValidRomanNumeral() => ValidRomanNumeralGenerated();
 #else
     private static readonly Regex ValidRomanNumeralRegex = new(
-        "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
+        ValidRomanNumeralPattern,
         RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
     private static Regex ValidRomanNumeral() => ValidRomanNumeralRegex;

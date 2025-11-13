@@ -15,13 +15,15 @@ public partial class Vocabulary
     readonly List<Rule> singulars = [];
     readonly HashSet<string> uncountables = new(StringComparer.CurrentCultureIgnoreCase);
 
+    private const string LetterSPattern = "^([sS])[sS]*$";
+
 #if NET7_0_OR_GREATER
-    [GeneratedRegex("^([sS])[sS]*$")]
+    [GeneratedRegex(LetterSPattern)]
     private static partial Regex LetterSRegexGenerated();
     
     private static Regex LetterSRegex() => LetterSRegexGenerated();
 #else
-    private static readonly Regex LetterSRegexField = new("^([sS])[sS]*$", RegexOptions.Compiled);
+    private static readonly Regex LetterSRegexField = new(LetterSPattern, RegexOptions.Compiled);
 
     private static Regex LetterSRegex() => LetterSRegexField;
 #endif

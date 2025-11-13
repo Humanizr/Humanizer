@@ -5,13 +5,15 @@ partial class ToTitleCase : ICulturedStringTransformer
     public string Transform(string input) =>
         Transform(input, CultureInfo.CurrentCulture);
 
+    private const string WordPattern = @"(\w|[^\u0000-\u007F])+'?\w*";
+
 #if NET7_0_OR_GREATER
-    [GeneratedRegex(@"(\w|[^\u0000-\u007F])+'?\w*")]
+    [GeneratedRegex(WordPattern)]
     private static partial Regex WordRegexGenerated();
     
     private static Regex WordRegex() => WordRegexGenerated();
 #else
-    private static readonly Regex WordRegexDefinition = new(@"(\w|[^\u0000-\u007F])+'?\w*", RegexOptions.Compiled);
+    private static readonly Regex WordRegexDefinition = new(WordPattern, RegexOptions.Compiled);
 
     private static Regex WordRegex() => WordRegexDefinition;
 #endif
