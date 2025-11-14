@@ -1,0 +1,24 @@
+.apiSidebarWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.versionPicker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 1rem 1rem 1rem;
+  border-bottom: 1px solid var(--ifm-table-border-color);
+  margin-bottom: 0.5rem;
+}
+
+.versionPicker label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.versionPicker select {
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}

@@ -1,0 +1,7 @@
+- Ensure dotnet test passes for net10.0 and net8.0 (`src/Humanizer.Tests/Humanizer.Tests.csproj`). Avoid running net48 on Linux.
+- When applicable, run `dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs` (from `src`) to confirm packaging stays healthy.
+- Update or add xUnit tests alongside code changes, including culture-specific suites.
+- Refresh docs/README or XML summaries when altering behavior, locales, or APIs. Regenerate DocFX content if needed (`dotnet tool run docfx build docs/docfx.json`).
+- For localization additions, duplicate resource files, register formatters, and add tests in `src/Humanizer.Tests/Localisation/<culture>`.
+- After packaging, optionally run `verify-packages.ps1` with the package output path and minimum SDK (default 9.0.200).
+- Confirm `git status` shows only intended changes before handing off or creating a PR.

@@ -36,7 +36,6 @@ public class Example
     {
         var size = ByteSize.FromKilobytes(10);
         var formatter = new DefaultFormatter("en-US");
-        Configurator.Localisation = new CultureInfo("en-US");
     }
 }
 ```
@@ -51,7 +50,6 @@ public class Example
     {
         var size = ByteSize.FromKilobytes(10);
         var formatter = new DefaultFormatter("en-US");
-        Configurator.Localisation = new CultureInfo("en-US");
     }
 }
 ```
@@ -222,7 +220,7 @@ If you can't use the Roslyn analyzer (e.g., older IDE, build system limitations)
 
 ## Support
 
-- **Documentation:** See [Humanizer README](../readme.md)
+- **Documentation:** See [Humanizer README](https://github.com/Humanizr/Humanizer#readme)
 - **Issues:** [GitHub Issues](https://github.com/Humanizr/Humanizer/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/Humanizr/Humanizer/discussions)
 

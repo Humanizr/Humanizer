@@ -139,10 +139,10 @@ To contribute a new language or improve existing localizations:
 3. Register the formatter in `Configurator`
 4. Add tests for the new language
 
-See the [Contributing Guide](../CONTRIBUTING.md) for details.
+See the [Contributing Guide](contributing.md) for details.
 
 ## Related Topics
 
 - [Installation](installation.md) - How to install language packages
-- [Number to Words](number-to-words.md) - Language-specific number formatting
-- [DateTime Humanization](datetime-humanization.md) - Relative time in different languages
+- [Numbers](numbers.md) - Language-specific number formatting
+- [Dates & Times](dates-and-times.md) - Relative time in different languages
