@@ -90,7 +90,8 @@ public static partial class StringHumanizeExtensions
     public static string Humanize(this string input)
     {
         // if input is all capitals (e.g. an acronym) then return it without change
-        if (input.All(char.IsUpper))
+        // unless it contains separators which suggest it's a compound word that should be humanized
+        if (input.All(char.IsUpper) && !input.Contains('_') && !input.Contains('-'))
         {
             return input;
         }
