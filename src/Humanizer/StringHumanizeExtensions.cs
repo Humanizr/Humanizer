@@ -7,11 +7,6 @@ namespace Humanizer;
 /// </summary>
 public static partial class StringHumanizeExtensions
 {
-    const string OptionallyCapitalizedWord = @"\p{Lu}?\p{Ll}+";
-    const string IntegerAndOptionalLowercaseLetters = @"[0-9]+\p{Ll}*";
-    const string Acronym = @"\p{Lu}+(?=\p{Lu}|[0-9]|\b)";
-    const string SequenceOfOtherLetters = @"\p{Lo}+";
-    const string MidSentencePunctuation = "[,;]?";
     const string PascalCaseWordPartsPattern = @"(\p{Lu}?\p{Ll}+|[0-9]+\p{Ll}*|\p{Lu}+(?=\p{Lu}|[0-9]|\b)|\p{Lo}+)[,;]?";
     const string FreestandingSpacingCharPattern = @"\s[-_]|[-_]\s";
 
@@ -27,7 +22,7 @@ public static partial class StringHumanizeExtensions
     private static Regex FreestandingSpacingCharRegex() => FreestandingSpacingCharRegexGenerated();
 #else
     private static readonly Regex PascalCaseWordPartsRegexField = new(
-        $"({OptionallyCapitalizedWord}|{IntegerAndOptionalLowercaseLetters}|{Acronym}|{SequenceOfOtherLetters}){MidSentencePunctuation}",
+        PascalCaseWordPartsPattern,
         RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
     private static Regex PascalCaseWordPartsRegex() => PascalCaseWordPartsRegexField;
