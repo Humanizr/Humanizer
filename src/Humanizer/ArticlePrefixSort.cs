@@ -5,13 +5,15 @@ namespace Humanizer;
 /// </summary>
 public static partial class EnglishArticle
 {
+    private const string ArticlePattern = @"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+";
+
 #if NET7_0_OR_GREATER
-    [GeneratedRegex(@"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+")]
+    [GeneratedRegex(ArticlePattern)]
     private static partial Regex ArticleRegexGenerated();
     
     private static Regex ArticleRegex() => ArticleRegexGenerated();
 #else
-    private static readonly Regex ArticleRegexField = new(@"^((The)|(the)|(a)|(A)|(An)|(an))\s\w+", RegexOptions.Compiled);
+    private static readonly Regex ArticleRegexField = new(ArticlePattern, RegexOptions.Compiled);
 
     private static Regex ArticleRegex() => ArticleRegexField;
 #endif
