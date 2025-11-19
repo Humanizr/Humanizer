@@ -336,28 +336,4 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>temps nul</value>
   </data>
-  <data name="TimeUnit_Day" xml:space="preserve">
-    <value>j</value>
-  </data>
-  <data name="TimeUnit_Hour" xml:space="preserve">
-    <value>h</value>
-  </data>
-  <data name="TimeUnit_Millisecond" xml:space="preserve">
-    <value>ms</value>
-  </data>
-  <data name="TimeUnit_Minute" xml:space="preserve">
-    <value>min</value>
-  </data>
-  <data name="TimeUnit_Month" xml:space="preserve">
-    <value>mois</value>
-  </data>
-  <data name="TimeUnit_Second" xml:space="preserve">
-    <value>s</value>
-  </data>
-  <data name="TimeUnit_Week" xml:space="preserve">
-    <value>semaine</value>
-  </data>
-  <data name="TimeUnit_Year" xml:space="preserve">
-    <value>a</value>
-  </data>
 </root>

@@ -5,7 +5,7 @@
     
     Version 2.0
     
-    The primary goals of this format is to allow a simple XML format
+    The primary goals of this format is to allow a simple XML format 
     that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
@@ -238,7 +238,7 @@
     <value>1 週間</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>1 年</value>
+    <value>1 年間の</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>0 秒</value>

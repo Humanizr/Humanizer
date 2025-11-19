@@ -154,7 +154,7 @@
     <value>{0} 年后</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
-    <value>现在</value>
+    <value>今天</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>昨天</value>

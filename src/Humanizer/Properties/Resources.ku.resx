@@ -120,6 +120,9 @@
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} ڕۆژ لەمەوبەر</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Above20" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>{0} ڕۆژ لەمەوبەر</value>
   </data>
@@ -127,6 +130,9 @@
     <value>{0} ڕۆژ لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
+    <value>{0} ڕۆژ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_TrialQuadral" xml:space="preserve">
     <value>{0} ڕۆژ لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
@@ -141,13 +147,19 @@
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
     <value>{0} ڕۆژی دیکە</value>
   </data>
+  <data name="DateHumanize_MultipleDaysFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} ڕۆژی دیکە</value>
+  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleHoursAgo_Above20" xml:space="preserve">
     <value>{0} کاتژمێر لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Dual" xml:space="preserve">
     <value>{0} کاتژمێر لەمەوبەر</value>
   </data>
-  <data name="DateHumanize_MultipleHoursAgo_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursAgo_DualTrialQuadral" xml:space="preserve">
     <value>{0} کاتژمێر لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo_Plural" xml:space="preserve">
@@ -156,13 +168,16 @@
   <data name="DateHumanize_MultipleHoursAgo_Singular" xml:space="preserve">
     <value>{0} کاتژمێر لەمەوبەر</value>
   </data>
+  <data name="DateHumanize_MultipleHoursAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێر لەمەوبەر</value>
+  </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
     <value>{0} کاتژمێری دیکە</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
     <value>{0} کاتژمێری دیکە</value>
   </data>
-  <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleHoursFromNow_DualTrialQuadral" xml:space="preserve">
     <value>{0} کاتژمێری دیکە</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
@@ -171,13 +186,19 @@
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
     <value>{0} کاتژمێری دیکە</value>
   </data>
+  <data name="DateHumanize_MultipleHoursFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێری دیکە</value>
+  </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleMinutesAgo_Above20" xml:space="preserve">
     <value>{0} خولەک لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>{0} خولەک لەمەوبەر</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesAgo_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesAgo_DualTrialQuadral" xml:space="preserve">
     <value>{0} خولەک لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Plural" xml:space="preserve">
@@ -186,13 +207,16 @@
   <data name="DateHumanize_MultipleMinutesAgo_Singular" xml:space="preserve">
     <value>{0} خولەک لەمەوبەر</value>
   </data>
+  <data name="DateHumanize_MultipleMinutesAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} خولەک لەمەوبەر</value>
+  </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
     <value>{0} خولەکی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
     <value>{0} خولەکی دیکە</value>
   </data>
-  <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleMinutesFromNow_DualTrialQuadral" xml:space="preserve">
     <value>{0} خولەکی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
@@ -201,13 +225,16 @@
   <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
     <value>{0} خولەکی دیکە</value>
   </data>
+  <data name="DateHumanize_MultipleMinutesFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} خولەکی دیکە</value>
+  </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} مانگ لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Dual" xml:space="preserve">
     <value>{0} مانگ لەمەوبەر</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsAgo_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsAgo_DualTrialQuadral" xml:space="preserve">
     <value>{0} مانگ لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo_Plural" xml:space="preserve">
@@ -216,13 +243,16 @@
   <data name="DateHumanize_MultipleMonthsAgo_Singular" xml:space="preserve">
     <value>{0} مانگ لەمەوبەر</value>
   </data>
+  <data name="DateHumanize_MultipleMonthsAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} مانگ لەمەوبەر</value>
+  </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
     <value>{0} مانگی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
     <value>{0} مانگی دیکە</value>
   </data>
-  <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleMonthsFromNow_DualTrialQuadral" xml:space="preserve">
     <value>{0} مانگی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
@@ -231,13 +261,19 @@
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
     <value>{0} مانگی دیکە</value>
   </data>
+  <data name="DateHumanize_MultipleMonthsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} مانگی دیکە</value>
+  </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleSecondsAgo_Above20" xml:space="preserve">
     <value>{0} چرکە لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
     <value>{0} چرکە لەمەوبەر</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsAgo_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsAgo_DualTrialQuadral" xml:space="preserve">
     <value>{0} چرکە لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
@@ -246,13 +282,16 @@
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>{0} چرکە لەمەوبەر</value>
   </data>
+  <data name="DateHumanize_MultipleSecondsAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} چرکە لەمەوبەر</value>
+  </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>{0} چرکەی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
     <value>{0} چرکەی دیکە</value>
   </data>
-  <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleSecondsFromNow_DualTrialQuadral" xml:space="preserve">
     <value>{0} چرکەی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
@@ -261,13 +300,19 @@
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
     <value>{0} چرکەی دیکە</value>
   </data>
+  <data name="DateHumanize_MultipleSecondsFromNow_TrialQuadral" xml:space="preserve">
+    <value>{0} چرکەی دیکە</value>
+  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsAgo_Above20" xml:space="preserve">
     <value>{0} ساڵ لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Dual" xml:space="preserve">
     <value>{0} ساڵ لەمەوبەر</value>
   </data>
-  <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsAgo_DualTrialQuadral" xml:space="preserve">
     <value>{0} ساڵ لەمەوبەر</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
@@ -276,19 +321,25 @@
   <data name="DateHumanize_MultipleYearsAgo_Singular" xml:space="preserve">
     <value>{0} ساڵ لەمەوبەر</value>
   </data>
+  <data name="DateHumanize_MultipleYearsAgo_TrialQuadral" xml:space="preserve">
+    <value>{0} ساڵ لەمەوبەر</value>
+  </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
     <value>{0} ساڵی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
     <value>{0} ساڵی دیکە</value>
   </data>
-  <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
+  <data name="DateHumanize_MultipleYearsFromNow_DualTrialQuadral" xml:space="preserve">
     <value>{0} ساڵی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
     <value>{0} ساڵی دیکە</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
+    <value>{0} ساڵی دیکە</value>
+  </data>
+  <data name="DateHumanize_MultipleYearsFromNow_TrialQuadral" xml:space="preserve">
     <value>{0} ساڵی دیکە</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
@@ -339,7 +390,7 @@
   <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
     <value>{0} ڕۆژ</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleDays_DualTrialQuadral" xml:space="preserve">
     <value>{0} ڕۆژ</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
@@ -348,13 +399,16 @@
   <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
     <value>{0} ڕۆژ</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleDays_TrialQuadral" xml:space="preserve">
+    <value>{0} ڕۆژ</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} کاتژمێر</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Dual" xml:space="preserve">
     <value>{0} کاتژمێر</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleHours_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleHours_DualTrialQuadral" xml:space="preserve">
     <value>{0} کاتژمێر</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours_Plural" xml:space="preserve">
@@ -363,13 +417,16 @@
   <data name="TimeSpanHumanize_MultipleHours_Singular" xml:space="preserve">
     <value>{0} کاتژمێر</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleHours_TrialQuadral" xml:space="preserve">
+    <value>{0} کاتژمێر</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
     <value>{0} میلیچرکە</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
     <value>{0} میلیچرکە</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMilliseconds_DualTrialQuadral" xml:space="preserve">
     <value>{0} میلیچرکە</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
@@ -378,13 +435,16 @@
   <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
     <value>{0} میلیچرکە</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMilliseconds_TrialQuadral" xml:space="preserve">
+    <value>{0} میلیچرکە</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
     <value>{0} خولەک</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Dual" xml:space="preserve">
     <value>{0} خولەک</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMinutes_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMinutes_DualTrialQuadral" xml:space="preserve">
     <value>{0} خولەک</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes_Plural" xml:space="preserve">
@@ -393,13 +453,16 @@
   <data name="TimeSpanHumanize_MultipleMinutes_Singular" xml:space="preserve">
     <value>{0} خولەک</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMinutes_TrialQuadral" xml:space="preserve">
+    <value>{0} خولەک</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
     <value>{0} مانگ</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>{0} مانگ</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleMonths_DualTrialQuadral" xml:space="preserve">
     <value>{0} مانگ</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
@@ -408,13 +471,16 @@
   <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
     <value>{0} مانگ</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleMonths_TrialQuadral" xml:space="preserve">
+    <value>{0} مانگ</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
     <value>{0} چرکە</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Dual" xml:space="preserve">
     <value>{0} چرکە</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleSeconds_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleSeconds_DualTrialQuadral" xml:space="preserve">
     <value>{0} چرکە</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds_Plural" xml:space="preserve">
@@ -423,13 +489,16 @@
   <data name="TimeSpanHumanize_MultipleSeconds_Singular" xml:space="preserve">
     <value>{0} چرکە</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleSeconds_TrialQuadral" xml:space="preserve">
+    <value>{0} چرکە</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} هەفتە</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
     <value>{0} هەفتە</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleWeeks_DualTrialQuadral" xml:space="preserve">
     <value>{0} هەفتە</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
@@ -438,19 +507,25 @@
   <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
     <value>{0} هەفتە</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleWeeks_TrialQuadral" xml:space="preserve">
+    <value>{0} هەفتە</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} ساڵ</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
     <value>{0} ساڵ</value>
   </data>
-  <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
+  <data name="TimeSpanHumanize_MultipleYears_DualTrialQuadral" xml:space="preserve">
     <value>{0} ساڵ</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
     <value>{0} ساڵ</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0} ساڵ</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_TrialQuadral" xml:space="preserve">
     <value>{0} ساڵ</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
