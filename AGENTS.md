@@ -1,5 +1,12 @@
 # Agent Instructions
 
+ ## Tooling Expectations
+  - Always read this file before starting work.
+  - Codex must activate Serena for this repo at the start of every session.
+  - Use Serena for semantic code retrieval/editing.
+  - Use Context7 for up-to-date third-party docs.
+  - Use SequentialThinking for any decision-making.
+
 ## Scope
 These instructions apply to the entire repository.
 

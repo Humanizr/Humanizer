@@ -1,0 +1,12 @@
+- **Purpose:** Humanizer is a .NET library that converts numbers, dates, times, enums, quantities, strings, and collections into human-friendly text across 40+ locales. Primary code lives in `src/Humanizer`; validation happens in `src/Humanizer.Tests`.
+- **Tech stack:** C# targeting .NET 10.0/9.0/8.0 and .NET Framework 4.8 (plus .NET Standard 2.0 for analyzers). Uses xUnit for tests, DocFX for docs, Azure DevOps for CI, and optional analyzers under `src/Humanizer.Analyzers`.
+- **Repo layout:**
+  - `src/Humanizer` – main library, resources, configuration.
+  - `src/Humanizer.Tests` – xUnit suites organized by feature/culture (uses `UseCulture`).
+  - `src/Humanizer.Analyzers` + `.Tests` – Roslyn analyzers and coverage.
+  - `src/Benchmarks` – perf harness.
+  - `docs`/`docfx3` – documentation site built with DocFX.
+  - `NuSpecs`, `version.json`, `verify-packages.ps1` – packaging/release assets.
+- **Key guidelines:** Follow `.editorconfig`, modern C#, file-scoped namespaces, `var` for obvious types, System usings first, minimal comments, no `try/catch` around imports, XML docs for public APIs, update README/docs when behavior changes.
+- **Localization:** Cultures live under `src/Humanizer/Properties`; register new formatters in registry classes and add localized tests under `src/Humanizer.Tests/Localisation/<culture>`.
+- **Docs & samples:** Build via `dotnet tool run docfx` commands in README; samples under `samples/Humanizer.MvcSample` (legacy MVC example).

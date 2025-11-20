@@ -1,0 +1,99 @@
+/* Adjust layout so the header never overlaps content and navigation lives in the left rail. */
+body {
+  padding-top: 130px;
+}
+
+@media (max-width: 991.98px) {
+  body {
+    padding-top: 0;
+  }
+}
+
+/* Hide the horizontal mega menu and rely on the table of contents rail. */
+#navbar > ul.nav.level1 {
+  display: none;
+}
+
+/* Promote the top-level entries in the side navigation so it mirrors learn.microsoft.com. */
+@media (min-width: 992px) {
+  #sidetoggle .toc .nav.level1 > li {
+    margin-bottom: 0.75rem;
+  }
+
+  #sidetoggle .toc .nav.level1 > li > a {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2c2c2c;
+  }
+
+  #sidetoggle .toc .nav.level1 > li > ul.nav.level2 {
+    display: block !important;
+    margin-top: 0.35rem;
+    margin-left: 0;
+    padding-left: 1rem;
+    border-left: 3px solid rgba(0, 0, 0, 0.05);
+  }
+
+  #sidetoggle .toc .nav.level1 > li > ul.nav.level2 > li > a {
+    font-weight: 400;
+  }
+
+  #sidetoggle .toc .nav.level1 > li > .expand-stub {
+    display: none;
+  }
+}
+
+/* Avoid layout shift below the fixed header. */
+.container.body-content {
+  padding-top: 1.5rem;
+}
+
+/* Provide a visual separation between the header and content strip. */
+.subnav.navbar {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Automatic dark-mode support. */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1b1b1f;
+    color: #f3f3f3;
+  }
+
+  header .navbar,
+  .subnav.navbar {
+    background-color: #111217;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  #sidetoggle {
+    background-color: #141418;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  #sidetoggle .toc .nav.level1 > li > a {
+    color: #f3f3f3;
+  }
+
+  #sidetoggle .toc .nav.level1 > li > ul.nav.level2 {
+    border-left-color: rgba(255, 255, 255, 0.12);
+  }
+
+  #sidetoggle .toc .nav.level1 > li > ul.nav.level2 > li > a {
+    color: #d3d3d8;
+  }
+
+  article a {
+    color: #88c6ff;
+  }
+
+  article {
+    background-color: #1f1f25;
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+
+  .body-content {
+    background-color: #1b1b1f;
+  }
+}

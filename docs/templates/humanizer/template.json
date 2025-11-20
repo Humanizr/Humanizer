@@ -1,0 +1,4 @@
+{
+  "name": "humanizer",
+  "inherit": ["default"]
+}

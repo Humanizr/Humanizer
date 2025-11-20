@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "docfx": {
+      "version": "2.78.4",
+      "commands": [
+        "docfx"
+      ],
+      "rollForward": false
+    },
+    "docfxmarkdowngen": {
+      "version": "0.5.0",
+      "commands": [
+        "dfmg"
+      ],
+      "rollForward": false
+    }
+  }
+}

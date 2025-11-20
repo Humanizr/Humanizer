@@ -1,0 +1,7 @@
+outputPath: ./website/api-docs/latest
+yamlPath: ./docs/api
+indexSlug: /api
+rewriteInterlinks: true
+typesGrouping:
+  enabled: true
+  minCount: 8

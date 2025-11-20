@@ -10,7 +10,7 @@ to clarify expected behavior in our community.
 For more information see the [.NET Foundation Code of Conduct](http://www.dotnetfoundation.org/code-of-conduct).
 
 ### <a id="getting-started">Getting started</a>
-This project uses C# 8 language features and SDK-style projects, so you'll need any edition of [Visual Studio 2019](https://www.visualstudio.com/downloads/download-visual-studio-vs) to open and compile the project. The free [Community Edition](https://go.microsoft.com/fwlink/?LinkId=532606&clcid=0x409) will work.
+This project uses C# 14 language features and SDK-style projects, so you'll need .NET 10 SDK to compile.
 
 ### <a id="contribution-guideline">Contribution guideline</a>
 This project uses [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) for pull requests.
