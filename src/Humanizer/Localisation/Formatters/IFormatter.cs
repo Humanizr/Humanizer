@@ -7,8 +7,14 @@
 /// </summary>
 public interface IFormatter
 {
+    /// <summary>
+    /// Returns the localized string for "just now", used when a date humanizes to the present moment.
+    /// </summary>
     string DateHumanize_Now();
 
+    /// <summary>
+    /// Returns the localized string for "never", used when a date humanizes to a null or indeterminate value.
+    /// </summary>
     string DateHumanize_Never();
 
     /// <summary>
