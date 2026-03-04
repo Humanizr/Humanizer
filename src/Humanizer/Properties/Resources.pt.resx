@@ -117,6 +117,54 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+    <comment>Unidade de dados: bit</comment>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>bit</value>
+    <comment>Símbolo da unidade de dados: bit</comment>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>byte</value>
+    <comment>Unidade de dados: byte</comment>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+    <comment>Símbolo da unidade de dados: byte</comment>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabyte</value>
+    <comment>Unidade de dados: gigabyte</comment>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+    <comment>Símbolo da unidade de dados: gigabyte</comment>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobyte</value>
+    <comment>Unidade de dados: kilobyte</comment>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+    <comment>Símbolo da unidade de dados: kilobyte</comment>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabyte</value>
+    <comment>Unidade de dados: megabyte</comment>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+    <comment>Símbolo da unidade de dados: megabyte</comment>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabyte</value>
+    <comment>Unidade de dados: terabyte</comment>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+    <comment>Símbolo da unidade de dados: terabyte</comment>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>há {0} dias</value>
   </data>
@@ -581,6 +629,38 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>sem horário</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>d</value>
+    <comment>Unidade de tempo: dia</comment>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>h</value>
+    <comment>Unidade de tempo: hora</comment>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+    <comment>Unidade de tempo: milisegundo</comment>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min</value>
+    <comment>Unidade de tempo: minuto</comment>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>m</value>
+    <comment>Unidade de tempo: mês</comment>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+    <comment>Unidade de tempo: segundo</comment>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>semana</value>
+    <comment>Unidade de tempo: semana</comment>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>a</value>
+    <comment>Unidade de tempo: ano</comment>
   </data>
   <data name="W" xml:space="preserve">
     <value>oeste</value>
