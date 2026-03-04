@@ -176,4 +176,16 @@ public class EnumHumanizeTests
         First,
         Second
     }
+    [Fact]
+    public void Humanize_Works_For_Enum_Known_Only_At_Runtime()
+    {
+        Enum value = EnumUnderTest.MemberWithoutDescriptionAttribute;
+
+        var result = value.Humanize();
+
+        Assert.Equal(
+            EnumTestsResources.MemberWithoutDescriptionAttributeSentence,
+            result);
+    }
+
 }

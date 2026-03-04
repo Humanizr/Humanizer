@@ -26,15 +26,15 @@ public static class EnumHumanizeExtensions
     /// <code>
     /// enum UserType { AnonymousUser, RegisteredUser }
     /// UserType.AnonymousUser.Humanize() => "Anonymous user"
-    /// 
+    ///
     /// [Flags]
     /// enum Permission { None = 0, Read = 1, Write = 2, Delete = 4 }
     /// (Permission.Read | Permission.Write).Humanize() => "Read, Write"
-    /// 
-    /// enum Status 
-    /// { 
+    ///
+    /// enum Status
+    /// {
     ///     [Description("Currently active")]
-    ///     Active 
+    ///     Active
     /// }
     /// Status.Active.Humanize() => "Currently active"
     /// </code>
@@ -60,6 +60,23 @@ public static class EnumHumanizeExtensions
         }
 
         return humanized[input];
+    }
+
+    public static string Humanize(this Enum input)
+    {
+        if (input == null)
+            ArgumentNullException.ThrowIfNull(input);
+
+        var enumType = input.GetType();
+
+        // Get the generic Humanize<T> method
+        var method = typeof(EnumHumanizeExtensions)
+            .GetMethod(nameof(Humanize), new[] { enumType });
+
+        if (method == null)
+            throw new InvalidOperationException($"No Humanize method found for enum type {enumType}.");
+
+        return (string)method.Invoke(null, new object[] { input })!;
     }
 
 
