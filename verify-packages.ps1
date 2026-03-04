@@ -483,8 +483,9 @@ function Get-RestoreTargets {
     $sdkVersionsToTest = @(
         @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
         @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
+        @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" },
         # Validate net8 consumers on the latest SDK to avoid relying on downlevel SDK restore behavior.
-        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net8.0" }
+        @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net8.0" }
     )
 
     foreach ($sdkConfig in $sdkVersionsToTest) {
@@ -497,7 +498,9 @@ function Get-RestoreTargets {
                 $normalizedVersion = Get-NormalizedVersionString $sdkConfig.Version
             }
 
-            $displayName = if ($normalizedVersion) { ".NET $normalizedVersion" } else { ".NET $($sdkConfig.MajorVersion)" }
+            $baseDisplayName = if ($normalizedVersion) { ".NET $normalizedVersion" } else { ".NET $($sdkConfig.MajorVersion)" }
+            $displayName = "$baseDisplayName ($($sdkConfig.TargetFramework))"
+            $targetFrameworkId = ($sdkConfig.TargetFramework -replace '[^A-Za-z0-9]', '')
 
             $selectedVersionObject = ConvertTo-VersionObject $normalizedVersion
             $failureExpected = $false
@@ -509,7 +512,7 @@ function Get-RestoreTargets {
 
             $restoreTargets += [PSCustomObject]@{
                 Kind                = 'dotnet'
-                Id                  = "sdk$($sdkConfig.MajorVersion)"
+                Id                  = "sdk$($sdkConfig.MajorVersion)-$targetFrameworkId"
                 DisplayName         = $displayName
                 Version             = $normalizedVersion
                 TargetFramework     = $sdkConfig.TargetFramework
