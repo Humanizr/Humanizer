@@ -27,22 +27,6 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         isEnabledByDefault: true,
         description: Description);
 
-    // All the old namespaces that were consolidated in v3.
-    private static readonly string[] OldNamespaceValues =
-    [
-        "Humanizer.Bytes",
-        "Humanizer.Localisation",
-        "Humanizer.Localisation.Formatters",
-        "Humanizer.Localisation.NumberToWords",
-        "Humanizer.DateTimeHumanizeStrategy",
-        "Humanizer.Configuration",
-        "Humanizer.Localisation.DateToOrdinalWords",
-        "Humanizer.Localisation.Ordinalizers",
-        "Humanizer.Inflections",
-        "Humanizer.Localisation.CollectionFormatters",
-        "Humanizer.Localisation.TimeToClockNotation"
-    ];
-
     private static readonly string[] PrefixMatchingNamespaces =
     [
         "Humanizer.Localisation.CollectionFormatters",
@@ -58,7 +42,7 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         "Humanizer.Bytes"
     ];
 
-    private static readonly HashSet<string> OldNamespaces = new(OldNamespaceValues, StringComparer.Ordinal);
+    private static readonly HashSet<string> OldNamespaces = new(PrefixMatchingNamespaces, StringComparer.Ordinal);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
