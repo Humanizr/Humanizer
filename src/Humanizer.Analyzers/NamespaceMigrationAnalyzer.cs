@@ -43,6 +43,21 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         "Humanizer.Localisation.TimeToClockNotation"
     ];
 
+    private static readonly string[] PrefixMatchingNamespaces =
+    [
+        "Humanizer.Localisation.CollectionFormatters",
+        "Humanizer.Localisation.TimeToClockNotation",
+        "Humanizer.Localisation.DateToOrdinalWords",
+        "Humanizer.Localisation.NumberToWords",
+        "Humanizer.Localisation.Formatters",
+        "Humanizer.Localisation.Ordinalizers",
+        "Humanizer.DateTimeHumanizeStrategy",
+        "Humanizer.Configuration",
+        "Humanizer.Localisation",
+        "Humanizer.Inflections",
+        "Humanizer.Bytes"
+    ];
+
     private static readonly HashSet<string> OldNamespaces = new(OldNamespaceValues, StringComparer.Ordinal);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
@@ -129,13 +144,13 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
     {
 #if ROSLYN_4_14_OR_GREATER
         var nameSpan = namespaceName.AsSpan();
-        foreach (var ns in OldNamespaces)
+        foreach (var ns in PrefixMatchingNamespaces)
         {
             if (IsNamespaceMatch(nameSpan, ns))
                 return true;
         }
 #else
-        foreach (var ns in OldNamespaces)
+        foreach (var ns in PrefixMatchingNamespaces)
         {
             if (IsNamespaceMatch(namespaceName, ns))
                 return true;
@@ -149,7 +164,7 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
     {
 #if ROSLYN_4_14_OR_GREATER
         var fullNameSpan = fullName.AsSpan();
-        foreach (var ns in OldNamespaces)
+        foreach (var ns in PrefixMatchingNamespaces)
         {
             if (!IsNamespaceMatch(fullNameSpan, ns))
                 continue;
@@ -158,7 +173,7 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
             return true;
         }
 #else
-        foreach (var ns in OldNamespaces)
+        foreach (var ns in PrefixMatchingNamespaces)
         {
             if (!IsNamespaceMatch(fullName, ns))
                 continue;

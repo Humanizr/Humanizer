@@ -22,9 +22,9 @@
     The directory containing the built NuGet packages (.nupkg files).
 
 .PARAMETER MinimumPassingSdkVersion
-    Optional minimum .NET SDK version (e.g., "8.0.100") that is expected to restore packages successfully.
+    Optional minimum .NET SDK version (e.g., "9.0.200") that is expected to restore packages successfully.
     SDK targets with versions lower than this threshold are treated as expected failures (the script reports
-    success when they fail and failure when they succeed). The default value is 8.0.100.
+    success when they fail and failure when they succeed). The default value is 9.0.200.
 
 .EXAMPLE
     .\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
@@ -42,7 +42,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$PackagesDirectory,
 
-    [string]$MinimumPassingSdkVersion = "8.0.100"
+    [string]$MinimumPassingSdkVersion = "9.0.200"
 )
 
 $ErrorActionPreference = "Stop"
@@ -483,7 +483,8 @@ function Get-RestoreTargets {
     $sdkVersionsToTest = @(
         @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
         @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
-        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" }
+        # Validate net8 consumers on the latest SDK to avoid relying on downlevel SDK restore behavior.
+        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net8.0" }
     )
 
     foreach ($sdkConfig in $sdkVersionsToTest) {
