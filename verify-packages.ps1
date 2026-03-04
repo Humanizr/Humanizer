@@ -7,9 +7,9 @@
     across multiple .NET SDK versions. It performs the following checks:
     
     1. Verifies all expected packages exist (main metapackage, core package, and satellite packages)
-    2. Tests package restoration on multiple .NET SDK versions (8, 9, and 10)
+    2. Tests package restoration and build on multiple .NET SDK versions (8, 9, and 10)
        - Creates isolated test environments with global.json for each SDK version
-       - Validates that packages can be restored successfully
+       - Validates that packages can be restored and built successfully
     3. Verifies that the main Humanizer metapackage includes all satellite packages as dependencies
     
     The script is designed to run in CI/CD pipelines (Azure DevOps) and provides detailed
@@ -22,9 +22,9 @@
     The directory containing the built NuGet packages (.nupkg files).
 
 .PARAMETER MinimumPassingSdkVersion
-    Optional minimum .NET SDK version (e.g., "9.0.200") that is expected to restore packages successfully.
+    Optional minimum .NET SDK version (e.g., "8.0.100") that is expected to restore packages successfully.
     SDK targets with versions lower than this threshold are treated as expected failures (the script reports
-    success when they fail and failure when they succeed). The default value is 9.0.200.
+    success when they fail and failure when they succeed). The default value is 8.0.100.
 
 .EXAMPLE
     .\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
@@ -42,7 +42,7 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$PackagesDirectory,
 
-    [string]$MinimumPassingSdkVersion = "9.0.200"
+    [string]$MinimumPassingSdkVersion = "8.0.100"
 )
 
 $ErrorActionPreference = "Stop"
@@ -215,7 +215,7 @@ function Write-FilteredProcessOutput {
 
         if ($trimmed -match '^(?i)info\s*:') { continue }
 
-        $match = [regex]::Match($trimmed, '(?i)(error|warning)\s*:?.*')
+        $match = [regex]::Match($trimmed, '(?i)\b(error|warning)\b\s*:?.*')
         if ($match.Success) {
             $message = $match.Value.Trim()
             if (-not [string]::IsNullOrWhiteSpace($message)) {
@@ -237,10 +237,11 @@ function New-RestoreProjectFile {
         New-Item -ItemType Directory -Path $Directory -Force | Out-Null
     }
 
-    $projectContent = @"
+$projectContent = @"
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>$TargetFramework</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="$PackageVersion" />
@@ -415,8 +416,8 @@ function Get-RestoreDiagnostics {
             continue
         }
 
-        if ($trimmed -match "(?i)\berror\s*:?\s*[A-Z0-9]+:") {
-            $match = [regex]::Match($trimmed, "(?i)\berror\s*:?\s*[A-Z0-9]+:.*")
+        if ($trimmed -match "(?i)\berror\b\s*:?\s*[A-Z0-9]+:") {
+            $match = [regex]::Match($trimmed, "(?i)\berror\b\s*:?\s*[A-Z0-9]+:.*")
             if ($match.Success) {
                 $errorLines += $match.Value.Trim()
             } else {
@@ -425,8 +426,8 @@ function Get-RestoreDiagnostics {
             continue
         }
 
-        if ($trimmed -match "(?i)\bwarning\s*:?\s*[A-Z0-9]+:") {
-            $match = [regex]::Match($trimmed, "(?i)\bwarning\s*:?\s*[A-Z0-9]+:.*")
+        if ($trimmed -match "(?i)\bwarning\b\s*:?\s*[A-Z0-9]+:") {
+            $match = [regex]::Match($trimmed, "(?i)\bwarning\b\s*:?\s*[A-Z0-9]+:.*")
             if ($match.Success) {
                 $warningLines += $match.Value.Trim()
             } else {
@@ -658,6 +659,19 @@ function Invoke-DotnetRestoreTarget {
             $resultRecord.Details = $message
             return $resultRecord
         }
+        
+        Write-Host "Building project..."
+        $buildArguments = @("build", "--no-restore", "--verbosity", "minimal")
+        $buildResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $buildArguments -WorkingDirectory (Get-Location).Path
+        $buildSucceeded = ($buildResult.ExitCode -eq 0)
+        if (-not $buildSucceeded) {
+            $context = "Build failed for $($Target.DisplayName) during dotnet build"
+            $diagnostics = Publish-RestoreFailure $context $Target.DisplayName $buildResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $buildResult
+            return $resultRecord
+        }
+
+        Publish-RestoreSuccess "Build succeeded: $($Target.DisplayName)" $Target.DisplayName $buildResult
 
         $resultRecord.Success = $true
         return $resultRecord
@@ -745,6 +759,18 @@ function Invoke-MSBuildRestoreTarget {
             $resultRecord.Details = $message
             return $resultRecord
         }
+        
+        Write-Host "Building project..."
+        $msbuildBuildResult = Invoke-CapturedProcess -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Build", "/p:Restore=false", "/nologo") -WorkingDirectory (Get-Location).Path
+        $buildSucceeded = ($msbuildBuildResult.ExitCode -eq 0)
+        if (-not $buildSucceeded) {
+            $context = "Build failed for $($Target.DisplayName) during MSBuild build"
+            $diagnostics = Publish-RestoreFailure $context $Target.DisplayName $msbuildBuildResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $msbuildBuildResult
+            return $resultRecord
+        }
+
+        Publish-RestoreSuccess "Build succeeded: $($Target.DisplayName)" $Target.DisplayName $msbuildBuildResult
 
         $resultRecord.Success = $true
         return $resultRecord

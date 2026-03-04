@@ -1,4 +1,4 @@
-using System.Collections.Frozen;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 using Microsoft.CodeAnalysis;
@@ -27,25 +27,25 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         isEnabledByDefault: true,
         description: Description);
 
-    // All the old namespaces that were consolidated in v3
-    // Using FrozenSet for optimal lookup performance
-    private static readonly FrozenSet<string> OldNamespaces = FrozenSet.ToFrozenSet(
-        [
-            "Humanizer.Bytes",
-            "Humanizer.Localisation",
-            "Humanizer.Localisation.Formatters",
-            "Humanizer.Localisation.NumberToWords",
-            "Humanizer.DateTimeHumanizeStrategy",
-            "Humanizer.Configuration",
-            "Humanizer.Localisation.DateToOrdinalWords",
-            "Humanizer.Localisation.Ordinalizers",
-            "Humanizer.Inflections",
-            "Humanizer.Localisation.CollectionFormatters",
-            "Humanizer.Localisation.TimeToClockNotation"
-        ],
-        StringComparer.Ordinal);
+    // All the old namespaces that were consolidated in v3.
+    private static readonly string[] OldNamespaceValues =
+    [
+        "Humanizer.Bytes",
+        "Humanizer.Localisation",
+        "Humanizer.Localisation.Formatters",
+        "Humanizer.Localisation.NumberToWords",
+        "Humanizer.DateTimeHumanizeStrategy",
+        "Humanizer.Configuration",
+        "Humanizer.Localisation.DateToOrdinalWords",
+        "Humanizer.Localisation.Ordinalizers",
+        "Humanizer.Inflections",
+        "Humanizer.Localisation.CollectionFormatters",
+        "Humanizer.Localisation.TimeToClockNotation"
+    ];
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
+    private static readonly HashSet<string> OldNamespaces = new(OldNamespaceValues, StringComparer.Ordinal);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
     public override void Initialize(AnalysisContext context)
     {
@@ -94,16 +94,14 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
         }
 
         var fullName = qualifiedName.ToString();
+        if (!TryGetMatchingNamespace(fullName, out var matchingNamespace))
+            return;
 
-        // Check if any old namespace is used as a prefix
-        var matchingNamespace = OldNamespaces.FirstOrDefault(ns => IsNamespaceMatch(fullName, ns));
-        if (matchingNamespace != null)
-        {
-            var diagnostic = Diagnostic.Create(Rule, qualifiedName.GetLocation(), matchingNamespace);
-            context.ReportDiagnostic(diagnostic);
-        }
+        var diagnostic = Diagnostic.Create(Rule, qualifiedName.GetLocation(), matchingNamespace);
+        context.ReportDiagnostic(diagnostic);
     }
 
+#if ROSLYN_4_14_OR_GREATER
     private static bool IsNamespaceMatch(ReadOnlySpan<char> fullName, ReadOnlySpan<char> oldNamespace)
     {
         // Exact match
@@ -115,15 +113,62 @@ public class NamespaceMigrationAnalyzer : DiagnosticAnalyzer
             && fullName[oldNamespace.Length] == '.'
             && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
     }
+#else
+    private static bool IsNamespaceMatch(string fullName, string oldNamespace)
+    {
+        if (fullName.Length == oldNamespace.Length)
+            return string.Equals(fullName, oldNamespace, StringComparison.Ordinal);
+
+        return fullName.Length > oldNamespace.Length
+            && fullName[oldNamespace.Length] == '.'
+            && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
+    }
+#endif
 
     private static bool HasMatchingNamespace(string namespaceName)
     {
+#if ROSLYN_4_14_OR_GREATER
         var nameSpan = namespaceName.AsSpan();
         foreach (var ns in OldNamespaces)
         {
             if (IsNamespaceMatch(nameSpan, ns))
                 return true;
         }
+#else
+        foreach (var ns in OldNamespaces)
+        {
+            if (IsNamespaceMatch(namespaceName, ns))
+                return true;
+        }
+#endif
+
+        return false;
+    }
+
+    private static bool TryGetMatchingNamespace(string fullName, out string? matchingNamespace)
+    {
+#if ROSLYN_4_14_OR_GREATER
+        var fullNameSpan = fullName.AsSpan();
+        foreach (var ns in OldNamespaces)
+        {
+            if (!IsNamespaceMatch(fullNameSpan, ns))
+                continue;
+
+            matchingNamespace = ns;
+            return true;
+        }
+#else
+        foreach (var ns in OldNamespaces)
+        {
+            if (!IsNamespaceMatch(fullName, ns))
+                continue;
+
+            matchingNamespace = ns;
+            return true;
+        }
+#endif
+
+        matchingNamespace = null;
         return false;
     }
 }

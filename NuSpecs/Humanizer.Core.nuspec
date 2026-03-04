@@ -36,7 +36,10 @@
     <file src="Humanizer\bin\Release\net8.0\Humanizer.xml" target="lib\net8.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.dll" target="lib\net10.0" />
     <file src="Humanizer\bin\Release\net10.0\Humanizer.xml" target="lib\net10.0" />
-    <file src="Humanizer.Analyzers\bin\Release\netstandard2.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\roslyn3.8\cs" />    
+    <file src="Humanizer.Analyzers\bin\Release\roslyn3.8\netstandard2.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\roslyn3.8\cs" />
+    <file src="Humanizer.Analyzers\bin\Release\roslyn4.8\netstandard2.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\roslyn4.8\cs" />
+    <file src="Humanizer.Analyzers\bin\Release\roslyn4.14\netstandard2.0\Humanizer.Analyzers.dll" target="analyzers\dotnet\roslyn4.14\cs" />
+    <file src="Humanizer.Analyzers\build\Humanizer.Core.targets" target="buildTransitive\Humanizer.Core.targets" />
     <file src="..\logo.png" target="logo.png" />
   </files>
 </package>

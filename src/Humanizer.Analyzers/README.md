@@ -2,6 +2,8 @@
 
 A Roslyn analyzer and code fix provider to help migrate code from Humanizer v2 to v3.
 
+`Humanizer.Core` ships analyzer assets per Roslyn version so compatible analyzers are selected automatically by modern SDK/IDE hosts.
+
 ## What it does
 
 Humanizer v3 consolidates all sub-namespaces into the root `Humanizer` namespace. This analyzer:
