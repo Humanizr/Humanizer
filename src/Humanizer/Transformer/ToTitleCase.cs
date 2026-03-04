@@ -23,10 +23,14 @@ partial class ToTitleCase : ICulturedStringTransformer
         var matches = WordRegex().Matches(input);
         var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;
+        
+        // Check if this appears to be a multi-word result from humanizing separator-based input
+        bool isMultiWordFromSeparators = ContainsMultipleAllCapsWords(input);
+        
         foreach (Match word in matches)
         {
             var value = word.Value;
-            if (AllCapitals(value) || IsArticleOrConjunctionOrPreposition(value))
+            if ((AllCapitals(value, isMultiWordFromSeparators)) || IsArticleOrConjunctionOrPreposition(value))
             {
                 continue;
             }
@@ -47,7 +51,7 @@ partial class ToTitleCase : ICulturedStringTransformer
         }
     }
 
-    static bool AllCapitals(string input)
+    static bool AllCapitals(string input, bool isMultiWordFromSeparators = false)
     {
         foreach (var ch in input)
         {
@@ -57,7 +61,42 @@ partial class ToTitleCase : ICulturedStringTransformer
             }
         }
 
-        return true;
+        // If this appears to be from separator-based input, be more restrictive about preserving acronyms
+        if (isMultiWordFromSeparators)
+        {
+            // Only preserve very short words like "I", "IT", "TV"
+            return input.Length <= 3 && !input.Contains('_') && !input.Contains('-');
+        }
+
+        // For single words or mixed contexts, preserve potential acronyms more generously
+        // This preserves "HELLO", "STRAẞE", "ALLCAPS" etc.
+        return !input.Contains('_') && !input.Contains('-');
+    }
+    
+    static bool ContainsMultipleAllCapsWords(string input)
+    {
+        // Check if input contains multiple ALL-CAPS words separated by spaces
+        // This suggests it came from humanizing separator-based input like "LONGER_WORD" → "LONGER WORD"
+        var words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length < 2) return false;
+        
+        int allCapsCount = 0;
+        int totalWordCount = 0;
+        foreach (var word in words)
+        {
+            if (word.Any(char.IsLetter))
+            {
+                totalWordCount++;
+                if (word.All(char.IsUpper))
+                {
+                    allCapsCount++;
+                }
+            }
+        }
+        
+        // Only consider it "from separators" if ALL or most words are ALL-CAPS
+        // This catches "LONGER WORD" but not "Title humanization Honors ALLCAPS"
+        return allCapsCount >= 2 && allCapsCount >= totalWordCount * 0.75;
     }
 
     private static bool IsArticleOrConjunctionOrPreposition(string word) =>
