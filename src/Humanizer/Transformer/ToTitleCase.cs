@@ -23,10 +23,11 @@ partial class ToTitleCase : ICulturedStringTransformer
         var matches = WordRegex().Matches(input);
         var builder = new StringBuilder(input);
         var textInfo = culture.TextInfo;
-        foreach (Match word in matches)
+        for (var i = 0; i < matches.Count; i++)
         {
+            var word = matches[i];
             var value = word.Value;
-            if (AllCapitals(value) || IsArticleOrConjunctionOrPreposition(value))
+            if (AllCapitals(value) || (i > 0 && IsArticleOrConjunctionOrPreposition(value)))
             {
                 continue;
             }
