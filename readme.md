@@ -21,7 +21,7 @@ All languages: `Humanizer`
 
 ### Supported frameworks
 
-**Supported frameworks:** net10.0, net9.0, net8.0, net48
+**Supported frameworks:** net10.0, net8.0, net48
 
 **netstandard2.0:** The NuGet package also targets netstandard2.0 as a special case to support specific scenarios such as Roslyn Analyzers and MSBuild tasks that require netstandard2.0.
 
@@ -31,6 +31,8 @@ Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet
 
 > [!IMPORTANT]
 > **Humanizer 3.0 restore requirements**: The `Humanizer` metapackage now requires the NuGet locale parsing fix shipped in [.NET SDK 9.0.200 and corresponding Visual Studio/MSBuild updates](https://github.com/NuGet/NuGet.Client/pull/6124#issuecomment-3391090183). Restore operations must run on .NET SDK 9.0.200 or newer, or on Visual Studio 2022/MSBuild versions that include that patch. Older SDKs/MSBuild builds will fail to restore the metapackage because they do not recognize three-letter locale identifiers. As a workaround, reference `Humanizer.Core` directly and add the desired `Humanizer.Core.<locale>` satellite packages individually when targeting older tooling.
+
+> Upgrading from `2.14.1` to `3.0.8`? See [docs/migration-v3.md](docs/migration-v3.md) for the complete breaking-change checklist, patch-line fix notes, and known regression status.
 
 ### Specify Languages (Optional)
 
