@@ -249,12 +249,12 @@ Related:
 | [#1665](https://github.com/Humanizr/Humanizer/issues/1665) | Closed | Analyzer load failure due to `System.Memory` binding mismatch. | Fixed |
 | [#1672](https://github.com/Humanizr/Humanizer/issues/1672) | Closed | Analyzer load failure due to `System.Collections.Immutable` dependency mismatch. | Fixed |
 
-## Known Open Upgrade Issues (after 3.0.4)
+## Known Upgrade Issues After 3.0.4 (status as of March 5, 2026)
 
 | Issue | Status | Impact | Suggested mitigation |
 | --- | --- | --- | --- |
-| [#1652](https://github.com/Humanizr/Humanizer/issues/1652) | Open | `ToQuantity(int, ...)` overload removal remains an upgrade pain point (especially binary compatibility and exact-signature call sites). | Rebuild all dependent assemblies; switch call sites/delegates to `long` overloads explicitly. |
-| [#1658](https://github.com/Humanizr/Humanizer/issues/1658) | Open | `Transform(To.TitleCase)` can leave first-word articles/conjunctions/prepositions lowercase. | Add app-level casing normalization for the first word if this output matters. |
+| [#1652](https://github.com/Humanizr/Humanizer/issues/1652) | In progress (planned for next release) | `ToQuantity(int, ...)` overload removal remains an upgrade pain point (especially binary compatibility and exact-signature call sites). | Until the next release ships, rebuild all dependent assemblies and switch call sites/delegates to `long` overloads explicitly. |
+| [#1658](https://github.com/Humanizr/Humanizer/issues/1658) | In progress (planned for next release) | `Transform(To.TitleCase)` can leave first-word articles/conjunctions/prepositions lowercase. | Until the next release ships, add app-level casing normalization for the first word if this output matters. |
 | [#1668](https://github.com/Humanizr/Humanizer/issues/1668) | Open | Some `Dehumanize()` cases retain underscore before digits (for example `everything_0`). | Pre-normalize affected inputs before `Dehumanize()`, or use custom conversion logic for these patterns. |
 
 ## Recommended Validation Pass
