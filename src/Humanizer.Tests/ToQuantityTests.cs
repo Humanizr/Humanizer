@@ -81,6 +81,43 @@ public class ToQuantityTests
     public void ToQuantityNumeric(string word, int quantity, string expected) =>
         Assert.Equal(expected, word.ToQuantity(quantity));
 
+    [Fact]
+    public void ToQuantityPublicApiIncludesIntOverloads()
+    {
+        var hasCountOverload = false;
+        var hasFormatOverload = false;
+
+        foreach (var method in typeof(ToQuantityExtensions).GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
+        {
+            if (method.Name != "ToQuantity")
+            {
+                continue;
+            }
+
+            var parameters = method.GetParameters();
+
+            if (parameters.Length == 3 &&
+                parameters[0].ParameterType == typeof(string) &&
+                parameters[1].ParameterType == typeof(int) &&
+                parameters[2].ParameterType == typeof(ShowQuantityAs))
+            {
+                hasCountOverload = true;
+            }
+
+            if (parameters.Length == 4 &&
+                parameters[0].ParameterType == typeof(string) &&
+                parameters[1].ParameterType == typeof(int) &&
+                parameters[2].ParameterType == typeof(string) &&
+                parameters[3].ParameterType == typeof(IFormatProvider))
+            {
+                hasFormatOverload = true;
+            }
+        }
+
+        Assert.True(hasCountOverload);
+        Assert.True(hasFormatOverload);
+    }
+
     [Theory]
     [InlineData("hour", -1, "-1 hour")]
     [InlineData("hour", -0.5, "-0.5 hours")]
