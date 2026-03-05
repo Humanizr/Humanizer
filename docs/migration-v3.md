@@ -12,8 +12,6 @@ Validated against:
   - `ToQuantity(int, ...)` compatibility fix in [PR #1679](https://github.com/Humanizr/Humanizer/pull/1679)
   - `TitleCase` first-word capitalization fix in [PR #1678](https://github.com/Humanizr/Humanizer/pull/1678)
 
-> `3.0.8` may still be in publication/build at the time you read this. This guide tracks the release branch content intended for that patch.
-
 ## Quick Upgrade Checklist
 
 1. Update package/tooling prerequisites first (framework and restore requirements).
