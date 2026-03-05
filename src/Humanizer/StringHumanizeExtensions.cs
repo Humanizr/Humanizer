@@ -1,4 +1,6 @@
 using System.Runtime.InteropServices;
+using System.Linq;
+
 
 namespace Humanizer;
 
@@ -101,10 +103,11 @@ public static partial class StringHumanizeExtensions
     public static string Humanize(this string input)
     {
         // if input is all capitals (e.g. an acronym) then return it without change
-        if (input.All(char.IsUpper))
-        {
-            return input;
-        }
+       if (input.All(char.IsUpper) &&
+           input.Any(c => c == ' ' || c == '_' || c == '-'))
+       {
+           input = input.ToLowerInvariant();
+       }
 
         // if input contains a dash or underscore which precedes or follows a space (or both, e.g. freestanding)
         // remove the dash/underscore and run it through FromPascalCase
