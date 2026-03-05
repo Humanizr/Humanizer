@@ -2,6 +2,8 @@
 
 This document provides guidance on migrating code from Humanizer v2 to v3, focusing on the namespace consolidation changes.
 
+> For the full `2.14.1 -> 3.0.6` upgrade path (breaking changes, patch-line fixes, and issue status), see [migration-v3.md](migration-v3.md).
+
 ## What Changed in v3
 
 Humanizer v3 consolidates all sub-namespaces into the root `Humanizer` namespace. This is a **source-breaking change** that requires code updates.

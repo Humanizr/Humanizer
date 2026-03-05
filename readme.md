@@ -32,6 +32,8 @@ Humanizer symbols are source-indexed with [SourceLink](https://github.com/dotnet
 > [!IMPORTANT]
 > **Humanizer 3.0 restore requirements**: The `Humanizer` metapackage now requires the NuGet locale parsing fix shipped in [.NET SDK 9.0.200 and corresponding Visual Studio/MSBuild updates](https://github.com/NuGet/NuGet.Client/pull/6124#issuecomment-3391090183). Restore operations must run on .NET SDK 9.0.200 or newer, or on Visual Studio 2022/MSBuild versions that include that patch. Older SDKs/MSBuild builds will fail to restore the metapackage because they do not recognize three-letter locale identifiers. As a workaround, reference `Humanizer.Core` directly and add the desired `Humanizer.Core.<locale>` satellite packages individually when targeting older tooling.
 
+> Upgrading from `2.14.1` to `3.0.6`? See [docs/migration-v3.md](docs/migration-v3.md).
+
 ### Specify Languages (Optional)
 
 You choose which packages based on what NuGet package(s) you install. By default, the main `Humanizer` package installs all supported languages. If you're not sure, then just use the main `Humanizer` package.
