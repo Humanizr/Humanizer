@@ -78,6 +78,10 @@ string.Format(culture, "{0:N2}", value);
 Use `MetricNumeralFormats` instead:
 
 ```csharp
+// Equivalent to: value.ToMetric(hasSpace: true, useSymbol: true, decimals: 2);
+value.ToMetric(MetricNumeralFormats.WithSpace, decimals: 2);
+
+// If you previously passed useSymbol: false:
 value.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseName, decimals: 2);
 ```
 
@@ -216,12 +220,12 @@ Several locale package IDs changed between `2.14.1` and `3.0.8`:
 | `Humanizer.Core.fi-FI` | `Humanizer.Core.fi` |
 | `Humanizer.Core.ko-KR` | `Humanizer.Core.ko` |
 | `Humanizer.Core.ms-MY` | `Humanizer.Core.ms` |
+| `Humanizer.Core.nb-NO` | `Humanizer.Core.nb` |
 | `Humanizer.Core.th-TH` | `Humanizer.Core.th` |
 
 Removed from the metapackage dependency list (no direct one-to-one replacement):
 
 - `Humanizer.Core.fr-BE`
-- `Humanizer.Core.nb-NO`
 
 Related:
 - Locale ID normalization change: [commit 7b14ef6f](https://github.com/Humanizr/Humanizer/commit/7b14ef6f)
