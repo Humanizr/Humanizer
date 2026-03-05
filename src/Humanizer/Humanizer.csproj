@@ -56,8 +56,21 @@
     <!-- Reference the analyzer project to ensure it builds first and its outputs are available for packing -->
     <ProjectReference Include="..\Humanizer.Analyzers\Humanizer.Analyzers.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
+  
+  <Target Name="BuildAnalyzerVariants">
+    <MSBuild
+      Projects="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
+      Targets="Restore;Rebuild"
+      RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
+      Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks=;RoslynVersion=4.8;AnalyzerVariant=roslyn4.8" />
+    <MSBuild
+      Projects="$(MSBuildThisFileDirectory)..\Humanizer.Analyzers\Humanizer.Analyzers.csproj"
+      Targets="Restore;Rebuild"
+      RemoveProperties="TargetFramework;TargetFrameworks;RuntimeIdentifier;SelfContained"
+      Properties="Configuration=$(Configuration);TargetFramework=netstandard2.0;TargetFrameworks=;RoslynVersion=4.14;AnalyzerVariant=roslyn4.14" />
+  </Target>
 
-  <Target Name="PackNuSpecs" DependsOnTargets="GetBuildVersion;Build;_InitializeNuspecRepositoryInformationProperties">
+  <Target Name="PackNuSpecs" DependsOnTargets="GetBuildVersion;Build;BuildAnalyzerVariants;_InitializeNuspecRepositoryInformationProperties">
     <ItemGroup>
       <NuspecFiles Include="$(MSBuildThisFileDirectory)..\..\NuSpecs\*.nuspec" />
     </ItemGroup>
