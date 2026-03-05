@@ -194,3 +194,4 @@ Configurator.CollectionFormatters.Register("my-culture",
 - [Custom Vocabularies](custom-vocabularies.md) - Detailed pluralization customization
 - [Localization](localization.md) - Multi-language support
 - [Configuration](configuration.md) - Global configuration options
+- [Numbers](numbers.md) - Built-in numeric helpers and converters

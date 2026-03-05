@@ -1,70 +1,60 @@
 # Humanizer Documentation
 
-Humanizer meets all your .NET needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantities.
+Humanizer turns numbers, dates, enums, quantities, and strings into human-friendly text across more than forty locales. The library ships as lightweight extension methods that you can call from any .NET application, plus extensibility points for deeper customization. Use the guides below to install the library, explore each feature area, and operate Humanizer confidently in production.
 
 ## Getting Started
 
-- [Installation](installation.md) - How to install and configure Humanizer
-- [Quick Start Guide](quick-start.md) - Get up and running quickly
+- [Installation](installation.md) — Choose the right packages and configure Humanizer for your project.
+- [Quick Start Guide](quick-start.md) — Learn the core string and date helpers with short examples.
 
-## Core Features
+## Feature Guides
 
-### String Manipulation
-- [String Humanization](string-humanization.md) - Transform computerized strings to human-readable text
-- [String Dehumanization](string-dehumanization.md) - Convert back to PascalCase
-- [String Transformations](string-transformations.md) - Apply custom transformations with IStringTransformer
-- [String Truncation](string-truncation.md) - Intelligent truncation strategies
+- **Strings**
+	- [String Humanization](string-humanization.md)
+	- [String Dehumanization](string-dehumanization.md)
+	- [String Transformations](string-transformations.md)
+	- [String Truncation](string-truncation.md)
+	- [Inflector Helpers](inflector-methods.md)
+	- [Pluralization & Singularization](pluralization.md)
+- **Enumerations**
+	- [Enum humanization and dehumanization](enumerations.md)
+- **Dates & Times**
+	- [Relative time, durations, and clock notation](dates-and-times.md)
+- **Numbers & Quantities**
+	- [Numeric words, ordinals, metric, and Roman numerals](numbers.md)
+	- [ByteSize utilities](bytesize.md)
+- **Collections**
+	- [Human-friendly lists](collection-humanization.md)
+- **Specialized helpers**
+	- [Heading conversions](heading.md)
+	- [Time unit symbols](time-unit-symbols.md)
 
-### Enumerations
-- [Enum Humanization](enum-humanization.md) - Make enums readable
-- [Enum Dehumanization](enum-dehumanization.md) - Parse strings back to enums
+## Localization and Extensibility
 
-### Date and Time
-- [DateTime Humanization](datetime-humanization.md) - Relative time ("2 hours ago", "tomorrow")
-- [TimeSpan Humanization](timespan-humanization.md) - Human-readable durations
-- [Fluent Date API](fluent-date.md) - Readable date/time construction and manipulation
-- [DateTime to Ordinal Words](datetime-ordinal-words.md) - "1st of January 2020"
-- [TimeOnly to Clock Notation](timeonly-clock-notation.md) - "half past two" (.NET 6+)
+- [Localization](localization.md) — Manage language-specific resources and behaviors.
+- [Custom vocabularies](custom-vocabularies.md) — Override pluralization rules per culture.
+- [Configuration](configuration.md) — Register strategies, formatters, and transformers.
+- [Extensibility](extensibility.md) — Implement custom transformers, truncators, and converters.
 
-### Numbers
-- [Number to Words](number-to-words.md) - "123" → "one hundred twenty-three"
-- [Number to Ordinal Words](number-to-ordinal-words.md) - "1" → "first"
-- [Words to Number](words-to-number.md) - "forty-two" → 42
-- [Ordinalization](ordinalization.md) - "1" → "1st"
-- [Roman Numerals](roman-numerals.md) - Convert to/from Roman numerals
-- [Metric Numerals](metric-numerals.md) - "1230" → "1.23k"
-- [Number to Numbers](number-to-numbers.md) - Fluent API for large numbers
-- [Tupleize](tupleize.md) - "2" → "double"
+## Operational Guidance
 
-### Collections
-- [Collection Humanization](collection-humanization.md) - Turn lists into "item1, item2, and item3"
-- [ToQuantity](to-quantity.md) - "5 cases", "1 man", "2 men"
+- [Application Integration](application-integration.md) — Apply Humanizer across web, desktop, background, and CLI workloads.
+- [Performance and Optimization](performance.md) — Keep humanized output efficient in hot code paths.
+- [Testing and Quality Assurance](testing.md) — Lock down expectations with automated tests.
+- [Troubleshooting](troubleshooting.md) — Diagnose installation, localization, and configuration issues.
 
-### Word Manipulation
-- [Pluralization](pluralization.md) - Handle singular/plural forms
-- [Singularization](singularization.md) - Convert plurals to singular
-- [Inflector Methods](inflector-methods.md) - Pascalize, Camelize, Underscore, Kebaberize, etc.
+## Migration Support
 
-### Specialized Features
-- [ByteSize](bytesize.md) - Human-readable byte sizes
-- [Heading](heading.md) - Convert headings to text
-- [Time Unit Symbols](time-unit-symbols.md) - "ms", "s", "min", etc.
+- [Namespace Migration to v3](v3-namespace-migration.md) — Understand the breaking changes and updates introduced in the 3.x release.
 
-## Advanced Topics
+## Versioned Docs
 
-- [Localization](localization.md) - Multi-language support
-- [Custom Vocabularies](custom-vocabularies.md) - Add custom pluralization rules
-- [Extensibility](extensibility.md) - Implement custom transformers and truncators
-- [Configuration](configuration.md) - Customize Humanizer behavior
-
-## Migration Guides
-
-- [Migrating to v3.0](migration-v3.md) - Breaking changes and new features
+The published site always serves the latest stable release at the root path inside the API viewer. Development snapshots live under `/main/`, and prior releases remain under `/{version}/`. See [`/api/versions.json`](/api/versions.json) to enumerate the available builds programmatically.
 
 ## API Reference
 
-- [Complete API Reference](api-reference.md) - Full API documentation
+Use the [API viewer](/api) to load the DocFX-generated reference for any release branch or the latest development build. Each selection surfaces the XML-documented namespaces, types, and members in an embedded frame, with an option to pop the page out into a dedicated tab.
 
 ## Contributing
 
-- [Contributing Guide](../CONTRIBUTING.md) - How to contribute to Humanizer
+See the [contributing guide](contributing.md) for information about building, testing, and submitting improvements.
