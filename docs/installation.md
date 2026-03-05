@@ -32,7 +32,7 @@ dotnet add package Humanizer.Core.de  # German
 # Add as many language packages as needed
 ```
 
-Available language packages include: ar, az, bg, bn, ca, cs, da, de, el, es, fa, fi, fil, fr, he, hr, hu, hy, id, is, it, ja, ko, ku, lb, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sr, sr-Latn, sv, th, tr, uk, uz-Cyrl-UZ, uz-Latn-UZ, vi, zh-CN, zh-Hans, zh-Hant.
+Available language packages include: af, ar, az, bg, bn, ca, cs, da, de, el, es, fa, fi, fil, fr, he, hr, hu, hy, id, is, it, ja, ko, ku, lb, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sr, sr-Latn, sv, th, tr, uk, uz-Cyrl-UZ, uz-Latn-UZ, vi, zh-CN, zh-Hans, zh-Hant.
 
 ## Supported Frameworks
 

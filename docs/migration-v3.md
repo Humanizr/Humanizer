@@ -21,7 +21,7 @@ Validated against:
 3. Run the namespace migration analyzer and replace old `using Humanizer.*` directives.
 4. Replace removed APIs (`FormatWith`, obsolete `ToMetric` overloads, etc.).
 5. Rebuild all assemblies that reference Humanizer (binary compatibility changed in a few APIs).
-6. If you implement/extensibility points (`IFormatter`, `DefaultFormatter`), update those implementations.
+6. If you implement extensibility points (`IFormatter`, `DefaultFormatter`), update those implementations.
 7. Run behavioral regression tests for `Titleize`, `Pascalize`, `Dehumanize`, and enum humanization.
 
 ## Breaking Changes

@@ -69,6 +69,7 @@ Once you have installed or updated to `Humanizer.Core` v3.0.0 or later, the anal
 The package includes Roslyn-versioned analyzer assets, so modern .NET SDK/Visual Studio toolchains load a compatible analyzer automatically. You should not need to add manual `System.*` package references to make the analyzer load.
 
 If you are on `3.0.1` and see analyzer load warnings (for example AD0001) with older SDK/Visual Studio toolchains, upgrade to `3.0.8` and see the analyzer/patch-fix sections in [migration-v3.md](migration-v3.md).
+
 ### Usage in Visual Studio / Rider
 
 1. The analyzer will highlight old namespace usages with warnings (HUMANIZER001)
