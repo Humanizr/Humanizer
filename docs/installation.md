@@ -32,14 +32,13 @@ dotnet add package Humanizer.Core.de  # German
 # Add as many language packages as needed
 ```
 
-Available language packages include: ar, az, bg, bn-BD, cs, da, de, el, es, fa, fi, fr, he, hr, hu, hy, id, is, it, ja, ko, ku, lv, ms-MY, mt, nb, nb-NO, nl, pl, pt, pt-BR, ro, ru, sk, sl, sr, sr-Latn, sv, th, tr, uk, uz-Cyrl-UZ, uz-Latn-UZ, vi, zh-CN, zh-Hans, zh-Hant.
+Available language packages include: ar, az, bg, bn, ca, cs, da, de, el, es, fa, fi, fil, fr, he, hr, hu, hy, id, is, it, ja, ko, ku, lb, lt, lv, ms, mt, nb, nl, pl, pt, pt-BR, ro, ru, sk, sl, sr, sr-Latn, sv, th, tr, uk, uz-Cyrl-UZ, uz-Latn-UZ, vi, zh-CN, zh-Hans, zh-Hant.
 
 ## Supported Frameworks
 
 Humanizer supports the following .NET target frameworks:
 
 - **.NET 10.0** (net10.0)
-- **.NET 9.0** (net9.0)
 - **.NET 8.0** (net8.0)
 - **.NET Framework 4.8** (net48)
 - **.NET Standard 2.0** (netstandard2.0) - Special case for Roslyn Analyzers and MSBuild tasks
@@ -77,5 +76,6 @@ DateTime.UtcNow.AddHours(-2).Humanize(); // Returns "2 hours ago"
 ## Next Steps
 
 - [Quick Start Guide](quick-start.md)
+- [Migration from 2.14.1 to 3.0.1](migration-v3.md)
 - [String Humanization](string-humanization.md)
 - [DateTime Humanization](datetime-humanization.md)
