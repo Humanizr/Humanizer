@@ -239,9 +239,9 @@ Related:
 - `Titleize` no-letter preservation: [issue #385](https://github.com/Humanizr/Humanizer/issues/385), [PR #1611](https://github.com/Humanizr/Humanizer/pull/1611)
 - `TitleCase` first-word casing regression: [issue #1658](https://github.com/Humanizr/Humanizer/issues/1658)
 
-## Roslyn Analyzer Fixes (Included in 3.0.8 via 3.0.4)
+## Roslyn Analyzer Fixes Included in 3.0.8
 
-`3.0.8` includes analyzer loading compatibility fixes from [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676), originally delivered in `3.0.4`.
+`3.0.8` includes analyzer loading compatibility fixes from [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676).
 
 | Issue | Status | Impact in 3.0.1 | 3.0.8 result |
 | --- | --- | --- | --- |
