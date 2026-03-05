@@ -1,25 +1,33 @@
-# Migrating from Humanizer 2.14.1 to 3.0.1
+# Migrating from Humanizer 2.14.1 to 3.0.4
 
-This guide is for teams upgrading directly from `2.14.1` to `3.0.1`.
+This guide is for teams upgrading directly from `2.14.1` to `3.0.4`.
+
+This document was added to address [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656) (undocumented v3 breaking changes).
 
 Validated against:
-- Git tags `v2.14.1` and `v3.0.1`
-- Public issue reports through **March 5, 2026**
+- Git tag `v2.14.1`
+- v3 breaking-change commits through `v3.0.1`
+- post-`3.0.1` Roslyn analyzer compatibility fixes in [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676) (included in `3.0.4`)
 
 ## Quick Upgrade Checklist
 
 1. Update package/tooling prerequisites first (framework and restore requirements).
-2. Run the namespace migration analyzer and replace old `using Humanizer.*` directives.
-3. Replace removed APIs (`FormatWith`, obsolete `ToMetric` overloads, etc.).
-4. Rebuild all assemblies that reference Humanizer (binary compatibility changed in a few APIs).
-5. If you implement/extensibility points (`IFormatter`, `DefaultFormatter`), update those implementations.
-6. Run behavioral regression tests for `Titleize`, `Pascalize`, `Dehumanize`, and enum humanization.
+2. If you are on `3.0.1`, upgrade to `3.0.4` first to pick up analyzer loading fixes ([#1655](https://github.com/Humanizr/Humanizer/issues/1655), [#1665](https://github.com/Humanizr/Humanizer/issues/1665), [#1672](https://github.com/Humanizr/Humanizer/issues/1672)).
+3. Run the namespace migration analyzer and replace old `using Humanizer.*` directives.
+4. Replace removed APIs (`FormatWith`, obsolete `ToMetric` overloads, etc.).
+5. Rebuild all assemblies that reference Humanizer (binary compatibility changed in a few APIs).
+6. If you implement/extensibility points (`IFormatter`, `DefaultFormatter`), update those implementations.
+7. Run behavioral regression tests for `Titleize`, `Pascalize`, `Dehumanize`, and enum humanization.
 
 ## Breaking Changes
 
 ### Namespace Consolidation (source-breaking)
 
 All Humanizer APIs were consolidated into the root `Humanizer` namespace.
+
+Related:
+- [PR #1351](https://github.com/Humanizr/Humanizer/pull/1351)
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
 
 Before:
 
@@ -42,6 +50,10 @@ See also: [Namespace-only migration guide](v3-namespace-migration.md).
 ### Removed APIs
 
 1. `StringExtensions.FormatWith(...)` was removed.
+
+Related:
+- [PR #1395](https://github.com/Humanizr/Humanizer/pull/1395)
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
 
 Before:
 
@@ -66,12 +78,23 @@ Use `MetricNumeralFormats` instead:
 value.ToMetric(MetricNumeralFormats.WithSpace | MetricNumeralFormats.UseName, decimals: 2);
 ```
 
+Related:
+- [PR #1389](https://github.com/Humanizr/Humanizer/pull/1389)
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
+
 3. `ToQuantity(this string, int, ...)` overloads were removed.
 
 - `long` and `double` overloads remain.
 - This is a binary compatibility break for already-compiled assemblies that referenced the `int` signatures.
 
+Related:
+- [PR #1338](https://github.com/Humanizr/Humanizer/pull/1338)
+- Follow-up request to restore removed overloads: [issue #1652](https://github.com/Humanizr/Humanizer/issues/1652)
+
 4. `EnglishArticles` enum was removed.
+
+Related:
+- [PR #1443](https://github.com/Humanizr/Humanizer/pull/1443)
 
 5. `Configurator.EnumDescriptionPropertyLocator` public property was removed.
 
@@ -82,6 +105,9 @@ Configurator.UseEnumDescriptionPropertyLocator(p => p.Name == "Info");
 ```
 
 `UseEnumDescriptionPropertyLocator(...)` now throws if you call it after enum humanization has already occurred.
+
+Related:
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
 
 ### Enum API Signature Changes
 
@@ -96,7 +122,7 @@ public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
     where TTargetEnum : struct, IComparable, IFormattable
 ```
 
-After (`3.0.1`):
+After (`3.0.4`):
 
 ```csharp
 public static string Humanize<T>(this T input) where T : struct, Enum
@@ -109,6 +135,9 @@ Impact:
 
 - Code that stores values as `Enum` (not a concrete enum type) and then calls `.Humanize()` no longer compiles.
 - Generic callers with non-enum constraints for `DehumanizeTo<T>` no longer compile.
+
+Related:
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
 
 ### Extensibility Breaks (`IFormatter` / `DefaultFormatter`)
 
@@ -136,23 +165,32 @@ protected virtual string Format(TimeUnit unit, string resourceKey, int number, b
 
 If you had custom `DefaultFormatter` subclasses overriding the old signature, they must be migrated.
 
+Related:
+- API introduction that expanded formatter contract: [PR #1068](https://github.com/Humanizr/Humanizer/pull/1068)
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
+
 ## Framework, Packaging, and Tooling Breaks
 
 ### Target Framework Support Changes
 
-Compared to `2.14.1`, `3.0.1` removed support for:
+Compared to `2.14.1`, v3 removed support for:
 
 - `netstandard1.0`
 - `net462`
 - `net472`
 - dedicated `net6.0` assets (consumers on `net6.0`/`net7.0` now resolve `netstandard2.0` assets)
 
-`3.0.1` package assets target:
+`3.0.4` package assets target:
 
 - `netstandard2.0`
 - `net48`
 - `net8.0`
 - `net10.0`
+
+Related:
+- `netstandard1.0` removal: [PR #1322](https://github.com/Humanizr/Humanizer/pull/1322)
+- `net462`/`net472` removal: [PR #1482](https://github.com/Humanizr/Humanizer/pull/1482)
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
 
 ### Metapackage Restore Requirement
 
@@ -165,11 +203,14 @@ You need:
 
 On older tooling, restore can fail for the metapackage. Workaround: reference `Humanizer.Core` directly and install needed locale packages explicitly.
 
+Related:
+- NuGet locale parsing fix dependency note: [NuGet.Client discussion](https://github.com/NuGet/NuGet.Client/pull/6124#issuecomment-3391090183)
+
 ### Locale Package ID Changes
 
-Several locale package IDs changed between `2.14.1` and `3.0.1`:
+Several locale package IDs changed between `2.14.1` and `3.0.4`:
 
-| `2.14.1` package | `3.0.1` package |
+| `2.14.1` package | `3.0.4` package |
 | --- | --- |
 | `Humanizer.Core.bn-BD` | `Humanizer.Core.bn` |
 | `Humanizer.Core.fi-FI` | `Humanizer.Core.fi` |
@@ -182,21 +223,39 @@ Removed from the metapackage dependency list (no direct one-to-one replacement):
 - `Humanizer.Core.fr-BE`
 - `Humanizer.Core.nb-NO`
 
+Related:
+- Locale ID normalization change: [commit 7b14ef6f](https://github.com/Humanizr/Humanizer/commit/7b14ef6f)
+- Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
+
 ## Behavior Changes to Validate
 
 1. `Pascalize` now treats hyphens (`-`) as delimiters.
 2. `Dehumanize` output can differ because it is based on `Humanize().Pascalize()` and inherits `Pascalize` changes.
 3. `Humanize` / `Titleize` preserve strings with no recognized letters instead of returning empty string.
 
-## Known Regressions in 3.0.1 (status as of March 5, 2026)
+Related:
+- `Pascalize` hyphen behavior change: [issue #1282](https://github.com/Humanizr/Humanizer/issues/1282), [PR #1299](https://github.com/Humanizr/Humanizer/pull/1299)
+- `Dehumanize`/spacing impact reports: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656), [issue #1668](https://github.com/Humanizr/Humanizer/issues/1668)
+- `Titleize` no-letter preservation: [issue #385](https://github.com/Humanizr/Humanizer/issues/385), [PR #1611](https://github.com/Humanizr/Humanizer/pull/1611)
+- `TitleCase` first-word casing regression: [issue #1658](https://github.com/Humanizr/Humanizer/issues/1658)
+
+## Roslyn Analyzer Fixes Included in 3.0.4
+
+`3.0.4` includes analyzer loading compatibility fixes from [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676).
+
+| Issue | Status | Impact in 3.0.1 | 3.0.4 result |
+| --- | --- | --- | --- |
+| [#1655](https://github.com/Humanizr/Humanizer/issues/1655) | Closed | Analyzer could fail to load on .NET 8 SDK hosts. | Fixed |
+| [#1665](https://github.com/Humanizr/Humanizer/issues/1665) | Closed | Analyzer load failure due to `System.Memory` binding mismatch. | Fixed |
+| [#1672](https://github.com/Humanizr/Humanizer/issues/1672) | Closed | Analyzer load failure due to `System.Collections.Immutable` dependency mismatch. | Fixed |
+
+## Known Open Upgrade Issues (after 3.0.4)
 
 | Issue | Status | Impact | Suggested mitigation |
 | --- | --- | --- | --- |
-| [#1652](https://github.com/Humanizr/Humanizer/issues/1652) | Open | `ToQuantity(int, ...)` overload removal is still an upgrade pain point (especially binary compatibility and exact-signature call sites). | Rebuild all dependent assemblies; switch call sites/delegates to `long` overloads explicitly. |
-| [#1655](https://github.com/Humanizr/Humanizer/issues/1655) | Open | `Enum`-typed variables no longer support `.Humanize()` extension dispatch with the new generic signature. | Keep enum values strongly typed as concrete enum types where possible. |
+| [#1652](https://github.com/Humanizr/Humanizer/issues/1652) | Open | `ToQuantity(int, ...)` overload removal remains an upgrade pain point (especially binary compatibility and exact-signature call sites). | Rebuild all dependent assemblies; switch call sites/delegates to `long` overloads explicitly. |
 | [#1658](https://github.com/Humanizr/Humanizer/issues/1658) | Open | `Transform(To.TitleCase)` can leave first-word articles/conjunctions/prepositions lowercase. | Add app-level casing normalization for the first word if this output matters. |
 | [#1668](https://github.com/Humanizr/Humanizer/issues/1668) | Open | Some `Dehumanize()` cases retain underscore before digits (for example `everything_0`). | Pre-normalize affected inputs before `Dehumanize()`, or use custom conversion logic for these patterns. |
-| [#1654](https://github.com/Humanizr/Humanizer/issues/1654) / [#1659](https://github.com/Humanizr/Humanizer/issues/1659) | Closed after `3.0.1` | Analyzer loading warnings/errors on some Roslyn/SDK combinations. | Upgrade SDK/Visual Studio toolchain; if needed, disable analyzers temporarily in build until tooling is updated. |
 
 ## Recommended Validation Pass
 
