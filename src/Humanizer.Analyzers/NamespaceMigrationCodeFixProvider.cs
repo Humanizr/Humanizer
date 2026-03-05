@@ -1,4 +1,3 @@
-using System.Collections.Frozen;
 using System.Collections.Immutable;
 using System.Composition;
 
@@ -16,23 +15,22 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
     private const string Title = "Update to Humanizer namespace";
 
     // Ordered by length (longest first) for optimal matching
-    private static readonly FrozenSet<string> OldNamespaces = FrozenSet.ToFrozenSet(
-        [
-            "Humanizer.Localisation.CollectionFormatters",
-            "Humanizer.Localisation.TimeToClockNotation",
-            "Humanizer.Localisation.DateToOrdinalWords",
-            "Humanizer.Localisation.NumberToWords",
-            "Humanizer.Localisation.Formatters",
-            "Humanizer.Localisation.Ordinalizers",
-            "Humanizer.DateTimeHumanizeStrategy",
-            "Humanizer.Configuration",
-            "Humanizer.Localisation",
-            "Humanizer.Inflections",
-            "Humanizer.Bytes"
-        ],
-        StringComparer.Ordinal);
+    private static readonly string[] OldNamespaces =
+    [
+        "Humanizer.Localisation.CollectionFormatters",
+        "Humanizer.Localisation.TimeToClockNotation",
+        "Humanizer.Localisation.DateToOrdinalWords",
+        "Humanizer.Localisation.NumberToWords",
+        "Humanizer.Localisation.Formatters",
+        "Humanizer.Localisation.Ordinalizers",
+        "Humanizer.DateTimeHumanizeStrategy",
+        "Humanizer.Configuration",
+        "Humanizer.Localisation",
+        "Humanizer.Inflections",
+        "Humanizer.Bytes"
+    ];
 
-    public sealed override ImmutableArray<string> FixableDiagnosticIds => [NamespaceMigrationAnalyzer.DiagnosticId];
+    public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NamespaceMigrationAnalyzer.DiagnosticId);
 
     public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
@@ -95,23 +93,12 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
             return document;
 
         // Find which old namespace this qualified name starts with
-        var fullName = qualifiedName.ToString().AsSpan();
-        ReadOnlySpan<char> matchedNamespace = default;
-
-        foreach (var ns in OldNamespaces)
-        {
-            if (IsNamespaceMatch(fullName, ns.AsSpan()))
-            {
-                matchedNamespace = ns.AsSpan();
-                break;
-            }
-        }
-
-        if (matchedNamespace.IsEmpty)
+        var fullName = qualifiedName.ToString();
+        if (!TryGetMatchingNamespace(fullName, out var matchedNamespace))
             return document;
 
         // Replace the old namespace prefix with "Humanizer"
-        var newNameText = GetReplacementName(fullName, matchedNamespace);
+        var newNameText = GetReplacementName(fullName, matchedNamespace!);
 
         var newQualifiedName = SyntaxFactory.ParseName(newNameText)
             .WithLeadingTrivia(qualifiedName.GetLeadingTrivia())
@@ -121,6 +108,7 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         return document.WithSyntaxRoot(updatedRoot);
     }
 
+#if ROSLYN_4_14_OR_GREATER
     private static bool IsNamespaceMatch(ReadOnlySpan<char> fullName, ReadOnlySpan<char> oldNamespace)
     {
         // Exact match
@@ -132,8 +120,19 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
             && fullName[oldNamespace.Length] == '.'
             && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
     }
+#else
+    private static bool IsNamespaceMatch(string fullName, string oldNamespace)
+    {
+        if (fullName.Length == oldNamespace.Length)
+            return string.Equals(fullName, oldNamespace, StringComparison.Ordinal);
 
-    private static string GetReplacementName(ReadOnlySpan<char> fullName, ReadOnlySpan<char> matchedNamespace)
+        return fullName.Length > oldNamespace.Length
+            && fullName[oldNamespace.Length] == '.'
+            && fullName.StartsWith(oldNamespace, StringComparison.Ordinal);
+    }
+#endif
+
+    private static string GetReplacementName(string fullName, string matchedNamespace)
     {
         if (fullName.Length == matchedNamespace.Length)
             return "Humanizer";
@@ -144,13 +143,37 @@ public class NamespaceMigrationCodeFixProvider : CodeFixProvider
         if (startIndex >= fullName.Length)
             return "Humanizer";
 
-        // Use modern string concatenation with spans
-        var remainder = fullName[startIndex..];
-
 #if NET10_0_OR_GREATER
-        return string.Concat("Humanizer.", remainder);
+        return string.Concat("Humanizer.", fullName.AsSpan(startIndex));
 #else
-        return string.Concat("Humanizer.", remainder.ToString());
+        return string.Concat("Humanizer.", fullName.Substring(startIndex));
 #endif
+    }
+
+    private static bool TryGetMatchingNamespace(string fullName, out string? matchedNamespace)
+    {
+#if ROSLYN_4_14_OR_GREATER
+        var fullNameSpan = fullName.AsSpan();
+        foreach (var ns in OldNamespaces)
+        {
+            if (!IsNamespaceMatch(fullNameSpan, ns))
+                continue;
+
+            matchedNamespace = ns;
+            return true;
+        }
+#else
+        foreach (var ns in OldNamespaces)
+        {
+            if (!IsNamespaceMatch(fullName, ns))
+                continue;
+
+            matchedNamespace = ns;
+            return true;
+        }
+#endif
+
+        matchedNamespace = null;
+        return false;
     }
 }

@@ -7,9 +7,9 @@
     across multiple .NET SDK versions. It performs the following checks:
     
     1. Verifies all expected packages exist (main metapackage, core package, and satellite packages)
-    2. Tests package restoration on multiple .NET SDK versions (8, 9, and 10)
+    2. Tests package restoration and build on multiple .NET SDK versions (8, 9, and 10)
        - Creates isolated test environments with global.json for each SDK version
-       - Validates that packages can be restored successfully
+       - Validates that packages can be restored and built successfully
     3. Verifies that the main Humanizer metapackage includes all satellite packages as dependencies
     
     The script is designed to run in CI/CD pipelines (Azure DevOps) and provides detailed
@@ -215,7 +215,7 @@ function Write-FilteredProcessOutput {
 
         if ($trimmed -match '^(?i)info\s*:') { continue }
 
-        $match = [regex]::Match($trimmed, '(?i)(error|warning)\s*:?.*')
+        $match = [regex]::Match($trimmed, '(?i)\b(error|warning)\b\s*:?.*')
         if ($match.Success) {
             $message = $match.Value.Trim()
             if (-not [string]::IsNullOrWhiteSpace($message)) {
@@ -237,10 +237,11 @@ function New-RestoreProjectFile {
         New-Item -ItemType Directory -Path $Directory -Force | Out-Null
     }
 
-    $projectContent = @"
+$projectContent = @"
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>$TargetFramework</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="$PackageVersion" />
@@ -415,8 +416,8 @@ function Get-RestoreDiagnostics {
             continue
         }
 
-        if ($trimmed -match "(?i)\berror\s*:?\s*[A-Z0-9]+:") {
-            $match = [regex]::Match($trimmed, "(?i)\berror\s*:?\s*[A-Z0-9]+:.*")
+        if ($trimmed -match "(?i)\berror\b\s*:?\s*[A-Z0-9]+:") {
+            $match = [regex]::Match($trimmed, "(?i)\berror\b\s*:?\s*[A-Z0-9]+:.*")
             if ($match.Success) {
                 $errorLines += $match.Value.Trim()
             } else {
@@ -425,8 +426,8 @@ function Get-RestoreDiagnostics {
             continue
         }
 
-        if ($trimmed -match "(?i)\bwarning\s*:?\s*[A-Z0-9]+:") {
-            $match = [regex]::Match($trimmed, "(?i)\bwarning\s*:?\s*[A-Z0-9]+:.*")
+        if ($trimmed -match "(?i)\bwarning\b\s*:?\s*[A-Z0-9]+:") {
+            $match = [regex]::Match($trimmed, "(?i)\bwarning\b\s*:?\s*[A-Z0-9]+:.*")
             if ($match.Success) {
                 $warningLines += $match.Value.Trim()
             } else {
@@ -482,7 +483,9 @@ function Get-RestoreTargets {
     $sdkVersionsToTest = @(
         @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
         @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
-        @{ Version = "10.0.100-rc.2"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" }
+        @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" },
+        # Validate net8 consumers on the latest SDK to avoid relying on downlevel SDK restore behavior.
+        @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net8.0" }
     )
 
     foreach ($sdkConfig in $sdkVersionsToTest) {
@@ -495,7 +498,9 @@ function Get-RestoreTargets {
                 $normalizedVersion = Get-NormalizedVersionString $sdkConfig.Version
             }
 
-            $displayName = if ($normalizedVersion) { ".NET $normalizedVersion" } else { ".NET $($sdkConfig.MajorVersion)" }
+            $baseDisplayName = if ($normalizedVersion) { ".NET $normalizedVersion" } else { ".NET $($sdkConfig.MajorVersion)" }
+            $displayName = "$baseDisplayName ($($sdkConfig.TargetFramework))"
+            $targetFrameworkId = ($sdkConfig.TargetFramework -replace '[^A-Za-z0-9]', '')
 
             $selectedVersionObject = ConvertTo-VersionObject $normalizedVersion
             $failureExpected = $false
@@ -507,7 +512,7 @@ function Get-RestoreTargets {
 
             $restoreTargets += [PSCustomObject]@{
                 Kind                = 'dotnet'
-                Id                  = "sdk$($sdkConfig.MajorVersion)"
+                Id                  = "sdk$($sdkConfig.MajorVersion)-$targetFrameworkId"
                 DisplayName         = $displayName
                 Version             = $normalizedVersion
                 TargetFramework     = $sdkConfig.TargetFramework
@@ -658,6 +663,19 @@ function Invoke-DotnetRestoreTarget {
             $resultRecord.Details = $message
             return $resultRecord
         }
+        
+        Write-Host "Building project..."
+        $buildArguments = @("build", "--no-restore", "--verbosity", "minimal")
+        $buildResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $buildArguments -WorkingDirectory (Get-Location).Path
+        $buildSucceeded = ($buildResult.ExitCode -eq 0)
+        if (-not $buildSucceeded) {
+            $context = "Build failed for $($Target.DisplayName) during dotnet build"
+            $diagnostics = Publish-RestoreFailure $context $Target.DisplayName $buildResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $buildResult
+            return $resultRecord
+        }
+
+        Publish-RestoreSuccess "Build succeeded: $($Target.DisplayName)" $Target.DisplayName $buildResult
 
         $resultRecord.Success = $true
         return $resultRecord
@@ -745,6 +763,18 @@ function Invoke-MSBuildRestoreTarget {
             $resultRecord.Details = $message
             return $resultRecord
         }
+        
+        Write-Host "Building project..."
+        $msbuildBuildResult = Invoke-CapturedProcess -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Build", "/p:Restore=false", "/nologo") -WorkingDirectory (Get-Location).Path
+        $buildSucceeded = ($msbuildBuildResult.ExitCode -eq 0)
+        if (-not $buildSucceeded) {
+            $context = "Build failed for $($Target.DisplayName) during MSBuild build"
+            $diagnostics = Publish-RestoreFailure $context $Target.DisplayName $msbuildBuildResult
+            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $msbuildBuildResult
+            return $resultRecord
+        }
+
+        Publish-RestoreSuccess "Build succeeded: $($Target.DisplayName)" $Target.DisplayName $msbuildBuildResult
 
         $resultRecord.Success = $true
         return $resultRecord

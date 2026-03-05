@@ -8,20 +8,33 @@
     <IsRoslynComponent>true</IsRoslynComponent>
     <NoWarn>$(NoWarn);RS2001;RS1038;RS1041;RS2003</NoWarn>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+    <RoslynVersion Condition="'$(RoslynVersion)' == ''">3.8</RoslynVersion>
+    <AnalyzerVariant Condition="'$(AnalyzerVariant)' == ''">roslyn$(RoslynVersion)</AnalyzerVariant>
+    <OutputPath Condition="'$(AnalyzerVariant)' != ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\$(AnalyzerVariant)\</OutputPath>
+    <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '3.8'">3.8.0</RoslynCSharpVersion>
+    <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '3.8'">3.0.0</RoslynAnalyzerVersion>
+    <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.8'">4.8.0</RoslynCSharpVersion>
+    <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '4.8'">3.3.4</RoslynAnalyzerVersion>
+    <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.14'">4.14.0</RoslynCSharpVersion>
+    <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '4.14'">3.11.0</RoslynAnalyzerVersion>
+    <RoslynCSharpVersion Condition="'$(RoslynCSharpVersion)' == ''">3.8.0</RoslynCSharpVersion>
+    <RoslynAnalyzerVersion Condition="'$(RoslynAnalyzerVersion)' == ''">3.0.0</RoslynAnalyzerVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RoslynVersion)' == '4.14'">
+    <DefineConstants>$(DefineConstants);ROSLYN_4_14_OR_GREATER</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Polyfill" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="$(RoslynCSharpVersion)" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynCSharpVersion)" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="$(RoslynAnalyzerVersion)" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/roslyn3.8/cs" Visible="false" />
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/roslyn$(RoslynVersion)/cs" Visible="false" />
   </ItemGroup>
 
 </Project>
