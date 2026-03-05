@@ -1,18 +1,23 @@
-# Migrating from Humanizer 2.14.1 to 3.0.4
+# Migrating from Humanizer 2.14.1 to 3.0.8
 
-This guide is for teams upgrading directly from `2.14.1` to `3.0.4`.
+This guide is for teams upgrading directly from `2.14.1` to `3.0.8`.
 
 This document was added to address [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656) (undocumented v3 breaking changes).
 
 Validated against:
 - Git tag `v2.14.1`
 - v3 breaking-change commits through `v3.0.1`
-- post-`3.0.1` Roslyn analyzer compatibility fixes in [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676) (included in `3.0.4`)
+- v3 patch-line fixes included in `3.0.8`:
+  - Roslyn analyzer compatibility fixes in [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676)
+  - `ToQuantity(int, ...)` compatibility fix in [PR #1679](https://github.com/Humanizr/Humanizer/pull/1679)
+  - `TitleCase` first-word capitalization fix in [PR #1678](https://github.com/Humanizr/Humanizer/pull/1678)
+
+> `3.0.8` may still be in publication/build at the time you read this. This guide tracks the release branch content intended for that patch.
 
 ## Quick Upgrade Checklist
 
 1. Update package/tooling prerequisites first (framework and restore requirements).
-2. If you are on `3.0.1`, upgrade to `3.0.4` first to pick up analyzer loading fixes ([#1655](https://github.com/Humanizr/Humanizer/issues/1655), [#1665](https://github.com/Humanizr/Humanizer/issues/1665), [#1672](https://github.com/Humanizr/Humanizer/issues/1672)).
+2. If you are on `3.0.1`, upgrade to `3.0.8` to pick up patch-line compatibility fixes ([#1655](https://github.com/Humanizr/Humanizer/issues/1655), [#1665](https://github.com/Humanizr/Humanizer/issues/1665), [#1672](https://github.com/Humanizr/Humanizer/issues/1672), [#1652](https://github.com/Humanizr/Humanizer/issues/1652), [#1658](https://github.com/Humanizr/Humanizer/issues/1658)).
 3. Run the namespace migration analyzer and replace old `using Humanizer.*` directives.
 4. Replace removed APIs (`FormatWith`, obsolete `ToMetric` overloads, etc.).
 5. Rebuild all assemblies that reference Humanizer (binary compatibility changed in a few APIs).
@@ -82,14 +87,11 @@ Related:
 - [PR #1389](https://github.com/Humanizr/Humanizer/pull/1389)
 - Upgrade impact report: [issue #1656](https://github.com/Humanizr/Humanizer/issues/1656)
 
-3. `ToQuantity(this string, int, ...)` overloads were removed.
-
-- `long` and `double` overloads remain.
-- This is a binary compatibility break for already-compiled assemblies that referenced the `int` signatures.
+3. `ToQuantity(this string, int, ...)` overloads were removed in early v3 and later restored in the patch line (`3.0.6+`, including `3.0.8`).
 
 Related:
 - [PR #1338](https://github.com/Humanizr/Humanizer/pull/1338)
-- Follow-up request to restore removed overloads: [issue #1652](https://github.com/Humanizr/Humanizer/issues/1652)
+- Follow-up request and resolution: [issue #1652](https://github.com/Humanizr/Humanizer/issues/1652), [PR #1679](https://github.com/Humanizr/Humanizer/pull/1679)
 
 4. `EnglishArticles` enum was removed.
 
@@ -122,7 +124,7 @@ public static TTargetEnum DehumanizeTo<TTargetEnum>(this string input)
     where TTargetEnum : struct, IComparable, IFormattable
 ```
 
-After (`3.0.4`):
+After (`3.0.8`):
 
 ```csharp
 public static string Humanize<T>(this T input) where T : struct, Enum
@@ -180,7 +182,7 @@ Compared to `2.14.1`, v3 removed support for:
 - `net472`
 - dedicated `net6.0` assets (consumers on `net6.0`/`net7.0` now resolve `netstandard2.0` assets)
 
-`3.0.4` package assets target:
+`3.0.8` package assets target:
 
 - `netstandard2.0`
 - `net48`
@@ -208,9 +210,9 @@ Related:
 
 ### Locale Package ID Changes
 
-Several locale package IDs changed between `2.14.1` and `3.0.4`:
+Several locale package IDs changed between `2.14.1` and `3.0.8`:
 
-| `2.14.1` package | `3.0.4` package |
+| `2.14.1` package | `3.0.8` package |
 | --- | --- |
 | `Humanizer.Core.bn-BD` | `Humanizer.Core.bn` |
 | `Humanizer.Core.fi-FI` | `Humanizer.Core.fi` |
@@ -239,22 +241,27 @@ Related:
 - `Titleize` no-letter preservation: [issue #385](https://github.com/Humanizr/Humanizer/issues/385), [PR #1611](https://github.com/Humanizr/Humanizer/pull/1611)
 - `TitleCase` first-word casing regression: [issue #1658](https://github.com/Humanizr/Humanizer/issues/1658)
 
-## Roslyn Analyzer Fixes Included in 3.0.4
+## Roslyn Analyzer Fixes (Included in 3.0.8 via 3.0.4)
 
-`3.0.4` includes analyzer loading compatibility fixes from [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676).
+`3.0.8` includes analyzer loading compatibility fixes from [PR #1676](https://github.com/Humanizr/Humanizer/pull/1676), originally delivered in `3.0.4`.
 
-| Issue | Status | Impact in 3.0.1 | 3.0.4 result |
+| Issue | Status | Impact in 3.0.1 | 3.0.8 result |
 | --- | --- | --- | --- |
 | [#1655](https://github.com/Humanizr/Humanizer/issues/1655) | Closed | Analyzer could fail to load on .NET 8 SDK hosts. | Fixed |
 | [#1665](https://github.com/Humanizr/Humanizer/issues/1665) | Closed | Analyzer load failure due to `System.Memory` binding mismatch. | Fixed |
 | [#1672](https://github.com/Humanizr/Humanizer/issues/1672) | Closed | Analyzer load failure due to `System.Collections.Immutable` dependency mismatch. | Fixed |
 
-## Known Upgrade Issues After 3.0.4 (status as of March 5, 2026)
+## Compatibility Fixes Included in 3.0.8
+
+| Issue | Status | Patch-line fix |
+| --- | --- | --- |
+| [#1652](https://github.com/Humanizr/Humanizer/issues/1652) | Closed | `ToQuantity(int, ...)` compatibility restored via [PR #1679](https://github.com/Humanizr/Humanizer/pull/1679) (in `3.0.6+`, included in `3.0.8`). |
+| [#1658](https://github.com/Humanizr/Humanizer/issues/1658) | Closed | `TitleCase` first-word capitalization fixed via [PR #1678](https://github.com/Humanizr/Humanizer/pull/1678) (in `3.0.6+`, included in `3.0.8`). |
+
+## Remaining Known Upgrade Issue (as of March 5, 2026)
 
 | Issue | Status | Impact | Suggested mitigation |
 | --- | --- | --- | --- |
-| [#1652](https://github.com/Humanizr/Humanizer/issues/1652) | In progress (planned for next release) | `ToQuantity(int, ...)` overload removal remains an upgrade pain point (especially binary compatibility and exact-signature call sites). | Until the next release ships, rebuild all dependent assemblies and switch call sites/delegates to `long` overloads explicitly. |
-| [#1658](https://github.com/Humanizr/Humanizer/issues/1658) | In progress (planned for next release) | `Transform(To.TitleCase)` can leave first-word articles/conjunctions/prepositions lowercase. | Until the next release ships, add app-level casing normalization for the first word if this output matters. |
 | [#1668](https://github.com/Humanizr/Humanizer/issues/1668) | Open | Some `Dehumanize()` cases retain underscore before digits (for example `everything_0`). | Pre-normalize affected inputs before `Dehumanize()`, or use custom conversion logic for these patterns. |
 
 ## Recommended Validation Pass

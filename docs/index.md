@@ -59,7 +59,7 @@ Humanizer meets all your .NET needs for manipulating and displaying strings, enu
 
 ## Migration Guides
 
-- [Migrating from 2.14.1 to 3.0.4](migration-v3.md) - Comprehensive breaking changes, behavior changes, Roslyn fix notes, and known regressions
+- [Migrating from 2.14.1 to 3.0.8](migration-v3.md) - Comprehensive breaking changes, patch-line fixes, and known regressions
 - [Namespace migration details](v3-namespace-migration.md) - Namespace-only migration guidance and analyzer usage
 
 ## API Reference
