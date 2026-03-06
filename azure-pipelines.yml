@@ -64,10 +64,7 @@ stages:
         $(Build.SourcesDirectory)/verify-packages.ps1 `
           -PackageVersion '$(NBGV_NuGetPackageVersion)' `
           -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages' `
-          -MinimumPassingSdkVersion '9.0.200' `
-          -SmokeTestTargetFrameworks 'net8.0;net9.0;net10.0;net11.0;net48' `
-          -SmokeTestHosts 'console;webapi;blazor;wapproj' `
-          -SmokeTestScenarios 'meta;core-lang'
+          -IncludeWapProjSmokeTest
       displayName: Verify Package Structure and Dependencies
       failOnStderr: false
 

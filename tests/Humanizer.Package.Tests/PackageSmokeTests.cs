@@ -12,21 +12,6 @@ namespace Humanizer.Package.Tests;
 public class PackageSmokeTests
 {
     [Fact]
-    public void FindPackageVersion_prefers_the_metapackage_over_core_packages()
-    {
-        var packagePaths = new[]
-        {
-            @"C:\packages\Humanizer.Core.fr.3.1.0-dev.16.g5c096e17be.nupkg",
-            @"C:\packages\Humanizer.Core.3.1.0-dev.16.g5c096e17be.nupkg",
-            @"C:\packages\Humanizer.3.1.0-dev.16.g5c096e17be.nupkg"
-        };
-
-        var version = PackageTestContext.FindPackageVersion(packagePaths);
-
-        Assert.Equal("3.1.0-dev.16.g5c096e17be", version);
-    }
-
-    [Fact]
     public async Task Net48_consumer_loads_the_namespace_migration_analyzer()
     {
         var packageContext = await PackageTestContext.GetAsync();
@@ -281,7 +266,7 @@ sealed class PackageTestContext
         if (buildResult.ExitCode != 0)
             throw new XunitException($"Failed to build test packages.{Environment.NewLine}{buildResult.FormatForFailure()}");
 
-        var builtPackageVersion = FindPackageVersion(packageOutputPath);
+        var builtPackageVersion = GetMetapackageVersion(packageOutputPath);
         var (configPath, globalPackagesFolder) = WriteNuGetConfig(workingDirectory, packageOutputPath);
 
         return new PackageTestContext(workingDirectory, packageOutputPath, builtPackageVersion, configPath, globalPackagesFolder);
@@ -302,14 +287,11 @@ sealed class PackageTestContext
         throw new XunitException("Could not locate the repository root.");
     }
 
-    static string FindPackageVersion(string packagesDirectory) =>
-        FindPackageVersion(Directory.EnumerateFiles(packagesDirectory, "Humanizer.*.nupkg"));
-
-    internal static string FindPackageVersion(IEnumerable<string> packagePaths)
+    static string GetMetapackageVersion(string packagesDirectory)
     {
         var regex = new Regex(@"^Humanizer\.(?!Core(?:\.|$))(?<version>.+)\.nupkg$", RegexOptions.CultureInvariant);
 
-        foreach (var packagePath in packagePaths)
+        foreach (var packagePath in Directory.EnumerateFiles(packagesDirectory, "Humanizer.*.nupkg"))
         {
             var fileName = Path.GetFileName(packagePath);
             var match = regex.Match(fileName);
@@ -642,8 +624,7 @@ static class ProcessRunner
     public static async Task<ProcessResult> RunAsync(
         string fileName,
         IReadOnlyList<string> arguments,
-        string workingDirectory,
-        IReadOnlyDictionary<string, string>? environmentVariables = null)
+        string workingDirectory)
     {
         using var process = new Process();
         process.StartInfo = new ProcessStartInfo
@@ -658,12 +639,6 @@ static class ProcessRunner
 
         foreach (var argument in arguments)
             process.StartInfo.ArgumentList.Add(argument);
-
-        if (environmentVariables is not null)
-        {
-            foreach (var (key, value) in environmentVariables)
-                process.StartInfo.Environment[key] = value;
-        }
 
         process.Start();
 

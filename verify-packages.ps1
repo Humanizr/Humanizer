@@ -33,7 +33,8 @@
 .NOTES
     - The script requires .NET SDK 8, 9, 10, and/or 11 to be installed
     - SDKs that are not installed will be skipped with a warning
-    - Package smoke tests default to net8.0 and net10.0 locally; CI can pass a wider matrix
+    - Package smoke tests default to net8.0, net9.0, net10.0, net11.0, and net48 across console, Web API, and Blazor hosts
+    - WAP project smoke testing is Windows-only and opt-in via -IncludeWapProjSmokeTest
 #>
 
 param(
@@ -45,11 +46,11 @@ param(
 
     [string]$MinimumPassingSdkVersion = "9.0.200",
 
-    [string]$SmokeTestTargetFrameworks = "net8.0;net10.0",
+    [string]$SmokeTestTargetFrameworks = "net8.0;net9.0;net10.0;net11.0;net48",
 
-    [string]$SmokeTestHosts = "console",
+    [string]$SmokeTestScenarios = "meta;core-lang",
 
-    [string]$SmokeTestScenarios = "meta;core-lang"
+    [switch]$IncludeWapProjSmokeTest
 )
 
 $ErrorActionPreference = "Stop"
@@ -94,8 +95,7 @@ function Invoke-CapturedProcess {
     param(
         [Parameter(Mandatory = $true)][string]$FilePath,
         [string[]]$ArgumentList = @(),
-        [string]$WorkingDirectory,
-        [hashtable]$EnvironmentVariables
+        [string]$WorkingDirectory
     )
 
     $startInfo = New-Object System.Diagnostics.ProcessStartInfo
@@ -132,12 +132,6 @@ function Invoke-CapturedProcess {
 
     if ($WorkingDirectory) {
         $startInfo.WorkingDirectory = $WorkingDirectory
-    }
-
-    if ($EnvironmentVariables) {
-        foreach ($entry in $EnvironmentVariables.GetEnumerator()) {
-            $startInfo.Environment[$entry.Key] = [string]$entry.Value
-        }
     }
 
     $process = New-Object System.Diagnostics.Process
@@ -989,36 +983,43 @@ function Get-SmokeTestScenarioList {
 
 function Get-SmokeTestHostList {
     param(
-        [string]$ConfiguredHosts,
-        [bool]$RunningOnWindows
+        [bool]$RunningOnWindows,
+        [bool]$IncludeWapProjSmokeTest
     )
 
-    if ([string]::IsNullOrWhiteSpace($ConfiguredHosts)) {
-        return @()
+    $hosts = @('console', 'webapi', 'blazor')
+
+    if ($RunningOnWindows -and $IncludeWapProjSmokeTest) {
+        $hosts += 'wapproj'
     }
 
-    $hosts = $ConfiguredHosts.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries -bor [System.StringSplitOptions]::TrimEntries) |
-        Select-Object -Unique
-
-    if (-not $RunningOnWindows) {
-        $hosts = $hosts | Where-Object { $_ -ne 'wapproj' }
-    }
-
-    return @($hosts)
+    return @($hosts | Select-Object -Unique)
 }
 
-function Get-GlobalPackagesDirectory {
-    $result = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("nuget", "locals", "global-packages", "--list")
-    if ($result.ExitCode -ne 0) {
-        return $null
+function New-PngAsset {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][int]$Width,
+        [Parameter(Mandatory = $true)][int]$Height
+    )
+
+    if (-not ("System.Drawing.Bitmap" -as [type])) {
+        Add-Type -AssemblyName System.Drawing
     }
 
-    $line = ($result.StandardOutput -split "(`r`n|`r|`n)" | Where-Object { $_ -like 'global-packages:*' } | Select-Object -First 1)
-    if ([string]::IsNullOrWhiteSpace($line)) {
-        return $null
-    }
+    $bitmap = New-Object System.Drawing.Bitmap($Width, $Height)
+    try {
+        $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+        try {
+            $graphics.Clear([System.Drawing.Color]::White)
+        } finally {
+            $graphics.Dispose()
+        }
 
-    return ($line -replace '^global-packages:\s*', '').Trim()
+        $bitmap.Save($Path, [System.Drawing.Imaging.ImageFormat]::Png)
+    } finally {
+        $bitmap.Dispose()
+    }
 }
 
 function Invoke-WapProjSmokeTest {
@@ -1036,38 +1037,20 @@ function Invoke-WapProjSmokeTest {
         Details = $null
     }
 
-    $msbuildBinDirectory = Split-Path -Parent $MsbuildPath
-    $msbuildCurrentDirectory = Split-Path -Parent $msbuildBinDirectory
-    $msbuildRootDirectory = Split-Path -Parent $msbuildCurrentDirectory
-    $visualStudioRoot = Split-Path -Parent $msbuildRootDirectory
-    $templateDirectory = Join-Path $visualStudioRoot "Common7\IDE\ProjectTemplates\CSharp\Windows UAP\1033\WapProj"
-
-    if (-not (Test-Path $templateDirectory)) {
-        $resultRecord.Details = "WAP project template directory not found: $templateDirectory"
-        return $resultRecord
-    }
-
-    $globalPackagesDirectory = Get-GlobalPackagesDirectory
-    if ([string]::IsNullOrWhiteSpace($globalPackagesDirectory)) {
-        $resultRecord.Details = "Could not determine the global packages directory."
-        return $resultRecord
-    }
-
-    Get-ChildItem -Path $globalPackagesDirectory -Directory -Filter "humanizer*" -ErrorAction SilentlyContinue |
-        ForEach-Object {
-            $versionDirectory = Join-Path $_.FullName $PackageVersion
-            if (Test-Path $versionDirectory) {
-                Remove-Item -Path $versionDirectory -Recurse -Force -ErrorAction SilentlyContinue
-            }
-        }
-
     $smokeRoot = Join-Path $TempDir "WapProjSmoke"
     $entryPointDirectory = Join-Path $smokeRoot "EntryPointApp"
     $packageDirectory = Join-Path $smokeRoot "Package"
     $imagesDirectory = Join-Path $packageDirectory "Images"
-    New-Item -ItemType Directory -Path $entryPointDirectory, $packageDirectory, $imagesDirectory -Force | Out-Null
+    $localPackagesDirectory = Join-Path $smokeRoot ".nuget\packages"
+    New-Item -ItemType Directory -Path $entryPointDirectory, $packageDirectory, $imagesDirectory, $localPackagesDirectory -Force | Out-Null
 
-    Copy-Item -Path (Join-Path $templateDirectory "*.png") -Destination $imagesDirectory -Force
+    New-PngAsset -Path (Join-Path $imagesDirectory "SplashScreen.scale-200.png") -Width 1240 -Height 600
+    New-PngAsset -Path (Join-Path $imagesDirectory "LockScreenLogo.scale-200.png") -Width 48 -Height 48
+    New-PngAsset -Path (Join-Path $imagesDirectory "Square150x150Logo.scale-200.png") -Width 300 -Height 300
+    New-PngAsset -Path (Join-Path $imagesDirectory "Square44x44Logo.scale-200.png") -Width 88 -Height 88
+    New-PngAsset -Path (Join-Path $imagesDirectory "Square44x44Logo.targetsize-24_altform-unplated.png") -Width 24 -Height 24
+    New-PngAsset -Path (Join-Path $imagesDirectory "StoreLogo.png") -Width 50 -Height 50
+    New-PngAsset -Path (Join-Path $imagesDirectory "Wide310x150Logo.scale-200.png") -Width 620 -Height 300
 
     $entryPointProjectFile = Join-Path $entryPointDirectory "EntryPointApp.csproj"
     $entryPointProjectContent = @'
@@ -1079,12 +1062,13 @@ function Invoke-WapProjSmokeTest {
     <Nullable>enable</Nullable>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
+    <RestorePackagesPath>__PACKAGES_PATH__</RestorePackagesPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="__PACKAGE_VERSION__" />
   </ItemGroup>
 </Project>
-'@.Replace("__PACKAGE_VERSION__", $PackageVersion)
+'@.Replace("__PACKAGE_VERSION__", $PackageVersion).Replace("__PACKAGES_PATH__", $localPackagesDirectory)
     Set-Content -Path $entryPointProjectFile -Value $entryPointProjectContent -Encoding UTF8
 
     $entryPointProgramFile = Join-Path $entryPointDirectory "Program.cs"
@@ -1122,6 +1106,7 @@ Console.WriteLine(2.ToWords(new CultureInfo("fr")));
     <EntryPointProjectUniqueName>..\EntryPointApp\EntryPointApp.csproj</EntryPointProjectUniqueName>
     <DebuggerType>CoreClr</DebuggerType>
     <PackageOutputGroups>@(PackageOutputGroups);__GetPublishItems</PackageOutputGroups>
+    <RestorePackagesPath>__PACKAGES_PATH__</RestorePackagesPath>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -1138,7 +1123,7 @@ Console.WriteLine(2.ToWords(new CultureInfo("fr")));
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EntryPointApp\EntryPointApp.csproj" SkipGetTargetFrameworkProperties="true" Properties="RuntimeIdentifier=win-x64;SelfContained=true" />
+    <ProjectReference Include="..\EntryPointApp\EntryPointApp.csproj" SkipGetTargetFrameworkProperties="true" Properties="RuntimeIdentifier=win-x64;SelfContained=true;RestorePackagesPath=__PACKAGES_PATH__" />
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
   <Target Name="_ValidateAppReferenceItems" />
@@ -1148,13 +1133,13 @@ Console.WriteLine(2.ToWords(new CultureInfo("fr")));
     </PropertyGroup>
   </Target>
   <Target Name="PublishReferences" BeforeTargets="ExpandProjectReferences">
-    <MSBuild Projects="@(ProjectReference->'%(FullPath)')" BuildInParallel="$(BuildInParallel)" Targets="Publish" Properties="RuntimeIdentifier=win-x64;SelfContained=true" />
+    <MSBuild Projects="@(ProjectReference->'%(FullPath)')" BuildInParallel="$(BuildInParallel)" Targets="Publish" Properties="RuntimeIdentifier=win-x64;SelfContained=true;RestorePackagesPath=__PACKAGES_PATH__" />
   </Target>
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4948" PrivateAssets="all" />
   </ItemGroup>
 </Project>
-'@
+'@.Replace("__PACKAGES_PATH__", $localPackagesDirectory)
     Set-Content -Path $wapProjectFile -Value $wapProjectContent -Encoding UTF8
 
     $manifestFile = Join-Path $packageDirectory "Package.appxmanifest"
@@ -1194,13 +1179,16 @@ Console.WriteLine(2.ToWords(new CultureInfo("fr")));
     $nuGetConfigContent = @'
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
+  <config>
+    <add key="globalPackagesFolder" value="__PACKAGES_PATH__" />
+  </config>
   <packageSources>
     <clear />
     <add key="LocalPackages" value="__PACKAGES_DIRECTORY__" />
     <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
   </packageSources>
 </configuration>
-'@.Replace("__PACKAGES_DIRECTORY__", (Resolve-Path $PackagesDirectory).Path)
+'@.Replace("__PACKAGES_DIRECTORY__", (Resolve-Path $PackagesDirectory).Path).Replace("__PACKAGES_PATH__", $localPackagesDirectory)
     Set-Content -Path $nuGetConfigFile -Value $nuGetConfigContent -Encoding UTF8
 
     $restoreArguments = @(
@@ -1211,6 +1199,7 @@ Console.WriteLine(2.ToWords(new CultureInfo("fr")));
         "/p:Configuration=Release",
         "/p:RuntimeIdentifier=win-x64",
         "/p:SelfContained=true",
+        "/p:RestorePackagesPath=$localPackagesDirectory",
         "/nologo"
     )
     $restoreResult = Invoke-CapturedProcess -FilePath $MsbuildPath -ArgumentList $restoreArguments -WorkingDirectory $packageDirectory
@@ -1229,6 +1218,7 @@ Console.WriteLine(2.ToWords(new CultureInfo("fr")));
         "/p:Configuration=Release",
         "/p:RuntimeIdentifier=win-x64",
         "/p:SelfContained=true",
+        "/p:RestorePackagesPath=$localPackagesDirectory",
         "/nologo"
     )
     $buildResult = Invoke-CapturedProcess -FilePath $MsbuildPath -ArgumentList $buildArguments -WorkingDirectory $packageDirectory
@@ -1390,7 +1380,7 @@ try {
 
     $restoreTargets = Get-RestoreTargets -RunningOnWindows $runningOnWindows -MinimumPassingSdkVersion $MinimumPassingSdkVersion
     $smokeTestTargetFrameworkList = Get-SmokeTestTargetFrameworkList -ConfiguredTargetFrameworks $SmokeTestTargetFrameworks -RunningOnWindows $runningOnWindows
-    $smokeTestHostList = Get-SmokeTestHostList -ConfiguredHosts $SmokeTestHosts -RunningOnWindows $runningOnWindows
+    $smokeTestHostList = Get-SmokeTestHostList -RunningOnWindows $runningOnWindows -IncludeWapProjSmokeTest:$IncludeWapProjSmokeTest
     $packageSmokeHostList = @($smokeTestHostList | Where-Object { $_ -ne 'wapproj' })
     $smokeTestScenarioList = Get-SmokeTestScenarioList -ConfiguredScenarios $SmokeTestScenarios
 
