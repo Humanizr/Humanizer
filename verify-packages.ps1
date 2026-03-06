@@ -7,10 +7,11 @@
     across multiple .NET SDK versions. It performs the following checks:
     
     1. Verifies all expected packages exist (main metapackage, core package, and satellite packages)
-    2. Tests package restoration and build on multiple .NET SDK versions (8, 9, and 10)
+    2. Tests package restoration and build on multiple .NET SDK versions (8, 9, 10, and 11)
        - Creates isolated test environments with global.json for each SDK version
        - Validates that packages can be restored and built successfully
     3. Verifies that the main Humanizer metapackage includes all satellite packages as dependencies
+    4. Runs package smoke tests for metapackage and core-plus-language consumer scenarios
     
     The script is designed to run in CI/CD pipelines (Azure DevOps) and provides detailed
     logging with Azure DevOps-specific formatting.
@@ -30,9 +31,9 @@
     .\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
 
 .NOTES
-    - The script requires .NET SDK 8, 9, and/or 10 to be installed
+    - The script requires .NET SDK 8, 9, 10, and/or 11 to be installed
     - SDKs that are not installed will be skipped with a warning
-    - MSBuild on .NET Framework testing could be added for Windows environments
+    - Package smoke tests default to net8.0 and net10.0 locally; CI can pass a wider matrix
 #>
 
 param(
@@ -42,7 +43,11 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$PackagesDirectory,
 
-    [string]$MinimumPassingSdkVersion = "9.0.200"
+    [string]$MinimumPassingSdkVersion = "9.0.200",
+
+    [string]$SmokeTestTargetFrameworks = "net8.0;net10.0",
+
+    [string]$SmokeTestScenarios = "meta;core-lang"
 )
 
 $ErrorActionPreference = "Stop"
@@ -87,7 +92,8 @@ function Invoke-CapturedProcess {
     param(
         [Parameter(Mandatory = $true)][string]$FilePath,
         [string[]]$ArgumentList = @(),
-        [string]$WorkingDirectory
+        [string]$WorkingDirectory,
+        [hashtable]$EnvironmentVariables
     )
 
     $startInfo = New-Object System.Diagnostics.ProcessStartInfo
@@ -124,6 +130,12 @@ function Invoke-CapturedProcess {
 
     if ($WorkingDirectory) {
         $startInfo.WorkingDirectory = $WorkingDirectory
+    }
+
+    if ($EnvironmentVariables) {
+        foreach ($entry in $EnvironmentVariables.GetEnumerator()) {
+            $startInfo.Environment[$entry.Key] = [string]$entry.Value
+        }
     }
 
     $process = New-Object System.Diagnostics.Process
@@ -484,8 +496,10 @@ function Get-RestoreTargets {
         @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
         @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
         @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" },
-        # Validate net8 consumers on the latest SDK to avoid relying on downlevel SDK restore behavior.
-        @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net8.0" }
+        @{ Version = "11.0.100"; RollForward = "latestFeature"; Name = "SDK 11"; MajorVersion = 11; TargetFramework = "net11.0" },
+        # Validate downlevel consumers on the latest installed SDK to avoid relying on older restore behavior.
+        @{ Version = "11.0.100"; RollForward = "latestFeature"; Name = "SDK 11"; MajorVersion = 11; TargetFramework = "net8.0" },
+        @{ Version = "11.0.100"; RollForward = "latestFeature"; Name = "SDK 11"; MajorVersion = 11; TargetFramework = "net10.0" }
     )
 
     foreach ($sdkConfig in $sdkVersionsToTest) {
@@ -516,7 +530,7 @@ function Get-RestoreTargets {
                 DisplayName         = $displayName
                 Version             = $normalizedVersion
                 TargetFramework     = $sdkConfig.TargetFramework
-                GlobalJsonVersion   = $sdkConfig.Version
+                GlobalJsonVersion   = $selectedVersion
                 RollForward         = $sdkConfig.RollForward
                 FailureExpected     = $failureExpected
                 ExpectationReason   = $expectationReason
@@ -938,6 +952,96 @@ function Get-FailureDetailText {
     return $null
 }
 
+function Get-SmokeTestTargetFrameworkList {
+    param(
+        [string]$ConfiguredTargetFrameworks,
+        [bool]$RunningOnWindows
+    )
+
+    if ([string]::IsNullOrWhiteSpace($ConfiguredTargetFrameworks)) {
+        return @()
+    }
+
+    $targetFrameworks = $ConfiguredTargetFrameworks.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries -bor [System.StringSplitOptions]::TrimEntries) |
+        Select-Object -Unique
+
+    if (-not $RunningOnWindows) {
+        $targetFrameworks = $targetFrameworks | Where-Object { $_ -ne 'net48' }
+    }
+
+    return @($targetFrameworks)
+}
+
+function Get-SmokeTestScenarioList {
+    param([string]$ConfiguredScenarios)
+
+    if ([string]::IsNullOrWhiteSpace($ConfiguredScenarios)) {
+        return @()
+    }
+
+    return @(
+        $ConfiguredScenarios.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries -bor [System.StringSplitOptions]::TrimEntries) |
+            Select-Object -Unique
+    )
+}
+
+function Invoke-PackageSmokeTests {
+    param(
+        [Parameter(Mandatory = $true)][string]$PackageVersion,
+        [Parameter(Mandatory = $true)][string]$PackagesDirectory,
+        [Parameter(Mandatory = $true)][string[]]$TargetFrameworks,
+        [Parameter(Mandatory = $true)][string[]]$Scenarios
+    )
+
+    $resultRecord = [PSCustomObject]@{
+        DisplayName = "Package smoke tests"
+        Success = $false
+        Executed = $false
+        Details = $null
+        TargetFrameworks = @($TargetFrameworks)
+        Scenarios = @($Scenarios)
+    }
+
+    if ($TargetFrameworks.Count -eq 0 -or $Scenarios.Count -eq 0) {
+        $resultRecord.Success = $true
+        $resultRecord.Details = "Package smoke tests skipped (no frameworks or scenarios configured)"
+        return $resultRecord
+    }
+
+    $smokeTestProject = Join-Path $PSScriptRoot "tests/Humanizer.Package.Tests/Humanizer.Package.Tests.csproj"
+    if (-not (Test-Path $smokeTestProject)) {
+        $resultRecord.Details = "Package smoke test project not found: $smokeTestProject"
+        return $resultRecord
+    }
+
+    $resolvedPackagesDirectory = (Resolve-Path $PackagesDirectory).Path
+    $environmentVariables = @{
+        HUMANIZER_PACKAGES_DIR = $resolvedPackagesDirectory
+        HUMANIZER_PACKAGE_VERSION = $PackageVersion
+        HUMANIZER_PACKAGE_TEST_TARGET_FRAMEWORKS = ($TargetFrameworks -join ';')
+        HUMANIZER_PACKAGE_TEST_SCENARIOS = ($Scenarios -join ';')
+    }
+
+    $smokeTestResult = Invoke-CapturedProcess `
+        -FilePath "dotnet" `
+        -ArgumentList @("test", "--project", $smokeTestProject, "--framework", "net10.0") `
+        -WorkingDirectory $PSScriptRoot `
+        -EnvironmentVariables $environmentVariables
+
+    $resultRecord.Executed = $true
+
+    if ($smokeTestResult.ExitCode -ne 0) {
+        $context = "Package smoke tests failed for frameworks $($TargetFrameworks -join ', ') and scenarios $($Scenarios -join ', ')"
+        $diagnostics = Publish-RestoreFailure $context "Package smoke tests" $smokeTestResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $smokeTestResult
+        return $resultRecord
+    }
+
+    Publish-RestoreSuccess "Package smoke tests passed" "Package smoke tests" $smokeTestResult | Out-Null
+    $resultRecord.Success = $true
+    return $resultRecord
+}
+
 Write-AzureDevOpsSection "Humanizer Package Verification"
 Write-Host "Package Version: $PackageVersion"
 Write-Host "Packages Directory: $PackagesDirectory"
@@ -1004,6 +1108,8 @@ try {
     }
 
     $restoreTargets = Get-RestoreTargets -RunningOnWindows $runningOnWindows -MinimumPassingSdkVersion $MinimumPassingSdkVersion
+    $smokeTestTargetFrameworkList = Get-SmokeTestTargetFrameworkList -ConfiguredTargetFrameworks $SmokeTestTargetFrameworks -RunningOnWindows $runningOnWindows
+    $smokeTestScenarioList = Get-SmokeTestScenarioList -ConfiguredScenarios $SmokeTestScenarios
 
     foreach ($target in $restoreTargets) {
         Write-AzureDevOpsSection "Testing package restoration with $($target.DisplayName)"
@@ -1120,6 +1226,17 @@ try {
     Pop-Location
     Write-Host ""
 
+    Write-AzureDevOpsSection "Running package smoke tests"
+    $packageSmokeTestResult = Invoke-PackageSmokeTests `
+        -PackageVersion $PackageVersion `
+        -PackagesDirectory $PackagesDirectory `
+        -TargetFrameworks $smokeTestTargetFrameworkList `
+        -Scenarios $smokeTestScenarioList
+
+    if (-not $packageSmokeTestResult.Success) {
+        $verificationFailures += "Package smoke tests failed"
+    }
+
     Write-AzureDevOpsSection "Verification Summary"
 
     $restoreSuccesses = @($validRestoreResults | Where-Object { $_.Success })
@@ -1144,6 +1261,14 @@ try {
         $summaryLines += "  ✗ All satellites are dependencies of Humanizer"
     } else {
         $summaryLines += "  ✗ All satellites are dependencies of Humanizer (not verified)"
+    }
+
+    if ($packageSmokeTestResult.Success -and $packageSmokeTestResult.Executed) {
+        $summaryLines += "  ✓ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
+    } elseif ($packageSmokeTestResult.Executed) {
+        $summaryLines += "  ✗ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
+    } else {
+        $summaryLines += "  ✓ Package smoke tests skipped"
     }
 
     $summaryLines += ""

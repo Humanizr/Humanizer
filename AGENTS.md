@@ -5,12 +5,12 @@ These instructions apply to the entire repository.
 
 ## Project Overview
 - Humanizer is a .NET library for turning numbers, dates, times, enums, quantities, etc. into human-friendly text across many locales.
-- The main library lives in `src/Humanizer`; tests are under `src/Humanizer.Tests`.
+- The main library lives in `src/Humanizer`; tests are under `tests/`.
 
 ## Toolchain
 - Primary language: C# (modern features).
 - Target frameworks: .NET 8.0, .NET 10.0, and .NET Framework 4.8.
-- Tests use xUnit and should live alongside similar tests in `src/Humanizer.Tests`.
+- Tests use xUnit and should live alongside similar tests in `tests/Humanizer.Tests`.
 - Build with the .NET CLI (`dotnet`). Prefer the latest SDK (see install script in `.github/copilot-instructions.md`).
 
 ## Coding Guidelines
@@ -24,9 +24,9 @@ These instructions apply to the entire repository.
 - Add XML documentation for new or modified public APIs.
 
 ## Testing Expectations
-- Every functional change must include or update xUnit tests in `src/Humanizer.Tests`.
+- Every functional change must include or update xUnit tests in `tests/Humanizer.Tests`.
 - Use culture-specific folders and `UseCulture` attribute for localization tests when applicable.
-- Run the test suite for the supported .NET targets (`dotnet test src/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). Avoid invoking the net48 target on Linux, and allow a few minutes for each run to complete.
+- Run the test suite for the supported .NET targets (`dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). Avoid invoking the net48 target on Linux, and allow a few minutes for each run to complete.
 
 ## Build & Validation
 - Build command: `dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<path>` (from `src`). It must succeed without warnings or errors.
@@ -38,7 +38,7 @@ These instructions apply to the entire repository.
 ## Localization Guidance
 - When adding a locale, duplicate and translate the relevant resource files under `src/Humanizer/Properties`.
 - Register new formatters/converters in the appropriate registries (see `Configuration/FormatterRegistry.cs` and number converter factories).
-- Cover new localization behavior with targeted tests under `src/Humanizer.Tests/Localisation/{culture}`.
+- Cover new localization behavior with targeted tests under `tests/Humanizer.Tests/Localisation/{culture}`.
 
 ## Documentation Updates
 - Update `readme.md`, resource comments, or XML docs when introducing new features or behavior changes.

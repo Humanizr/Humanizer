@@ -18,7 +18,7 @@
     <PackageReference Include="Verify.XunitV3" />
     <PackageReference Include="Verify.DiffPlex" />
     <PackageReference Include="System.ComponentModel.Annotations" Condition="'$(TargetFramework)' == 'net48' " />
-    <ProjectReference Include="..\Humanizer\Humanizer.csproj" />
+    <ProjectReference Include="..\..\src\Humanizer\Humanizer.csproj" />
   </ItemGroup>
   
 </Project>
