@@ -28,7 +28,7 @@
     success when they fail and failure when they succeed). The default value is 9.0.200.
 
 .EXAMPLE
-    .\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
+    .\tests\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
 
 .NOTES
     - The script requires .NET SDK 8, 9, 10, and/or 11 to be installed
@@ -1037,6 +1037,12 @@ function Invoke-WapProjSmokeTest {
         Details = $null
     }
 
+    $fixtureRoot = Join-Path $PSScriptRoot "fixtures\WapProjSmoke"
+    if (-not (Test-Path $fixtureRoot)) {
+        $resultRecord.Details = "WAP project fixture directory not found: $fixtureRoot"
+        return $resultRecord
+    }
+
     $smokeRoot = Join-Path $TempDir "WapProjSmoke"
     $entryPointDirectory = Join-Path $smokeRoot "EntryPointApp"
     $packageDirectory = Join-Path $smokeRoot "Package"
@@ -1053,126 +1059,22 @@ function Invoke-WapProjSmokeTest {
     New-PngAsset -Path (Join-Path $imagesDirectory "Wide310x150Logo.scale-200.png") -Width 620 -Height 300
 
     $entryPointProjectFile = Join-Path $entryPointDirectory "EntryPointApp.csproj"
-    $entryPointProjectContent = @'
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <SelfContained>true</SelfContained>
-    <RestorePackagesPath>__PACKAGES_PATH__</RestorePackagesPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Humanizer" Version="__PACKAGE_VERSION__" />
-  </ItemGroup>
-</Project>
-'@.Replace("__PACKAGE_VERSION__", $PackageVersion).Replace("__PACKAGES_PATH__", $localPackagesDirectory)
+    $entryPointProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "EntryPointApp\EntryPointApp.csproj")).
+        Replace("__PACKAGE_VERSION__", $PackageVersion).
+        Replace("__PACKAGES_PATH__", $localPackagesDirectory)
     Set-Content -Path $entryPointProjectFile -Value $entryPointProjectContent -Encoding UTF8
 
     $entryPointProgramFile = Join-Path $entryPointDirectory "Program.cs"
-    $entryPointProgramContent = @'
-using Humanizer;
-using System.Globalization;
-
-Console.WriteLine(2.ToWords(new CultureInfo("fr")));
-'@
+    $entryPointProgramContent = Get-Content -Raw (Join-Path $fixtureRoot "EntryPointApp\Program.cs")
     Set-Content -Path $entryPointProgramFile -Value $entryPointProgramContent -Encoding UTF8
 
     $wapProjectFile = Join-Path $packageDirectory "Package.wapproj"
-    $wapProjectContent = @'
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0'">
-    <VisualStudioVersion>15.0</VisualStudioVersion>
-  </PropertyGroup>
-  <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-  </ItemGroup>
-  <PropertyGroup>
-    <WapProjPath Condition="'$(WapProjPath)'==''">$(MSBuildExtensionsPath)\Microsoft\DesktopBridge\</WapProjPath>
-  </PropertyGroup>
-  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
-  <PropertyGroup>
-    <ProjectGuid>{5A6E0905-0F24-4E09-8A57-4E16E7E7E0AA}</ProjectGuid>
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <DefaultLanguage>en-US</DefaultLanguage>
-    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <EntryPointProjectUniqueName>..\EntryPointApp\EntryPointApp.csproj</EntryPointProjectUniqueName>
-    <DebuggerType>CoreClr</DebuggerType>
-    <PackageOutputGroups>@(PackageOutputGroups);__GetPublishItems</PackageOutputGroups>
-    <RestorePackagesPath>__PACKAGES_PATH__</RestorePackagesPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
-      <SubType>Designer</SubType>
-    </AppxManifest>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Images\SplashScreen.scale-200.png" />
-    <Content Include="Images\LockScreenLogo.scale-200.png" />
-    <Content Include="Images\Square150x150Logo.scale-200.png" />
-    <Content Include="Images\Square44x44Logo.scale-200.png" />
-    <Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Images\StoreLogo.png" />
-    <Content Include="Images\Wide310x150Logo.scale-200.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EntryPointApp\EntryPointApp.csproj" SkipGetTargetFrameworkProperties="true" Properties="RuntimeIdentifier=win-x64;SelfContained=true;RestorePackagesPath=__PACKAGES_PATH__" />
-  </ItemGroup>
-  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
-  <Target Name="_ValidateAppReferenceItems" />
-  <Target Name="_FixEntryPoint" AfterTargets="_ConvertItems">
-    <PropertyGroup>
-      <EntryPointExe>EntryPointApp\EntryPointApp.exe</EntryPointExe>
-    </PropertyGroup>
-  </Target>
-  <Target Name="PublishReferences" BeforeTargets="ExpandProjectReferences">
-    <MSBuild Projects="@(ProjectReference->'%(FullPath)')" BuildInParallel="$(BuildInParallel)" Targets="Publish" Properties="RuntimeIdentifier=win-x64;SelfContained=true;RestorePackagesPath=__PACKAGES_PATH__" />
-  </Target>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4948" PrivateAssets="all" />
-  </ItemGroup>
-</Project>
-'@.Replace("__PACKAGES_PATH__", $localPackagesDirectory)
+    $wapProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "Package\Package.wapproj")).
+        Replace("__PACKAGES_PATH__", $localPackagesDirectory)
     Set-Content -Path $wapProjectFile -Value $wapProjectContent -Encoding UTF8
 
     $manifestFile = Join-Path $packageDirectory "Package.appxmanifest"
-    $manifestContent = @'
-<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap rescap">
-  <Identity Name="Humanizer.WapProbe" Publisher="CN=Humanizer" Version="1.0.0.0" />
-  <Properties>
-    <DisplayName>HumanizerWapProbe</DisplayName>
-    <PublisherDisplayName>Humanizer</PublisherDisplayName>
-    <Logo>Images\StoreLogo.png</Logo>
-  </Properties>
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
-  </Dependencies>
-  <Resources>
-    <Resource Language="en-us"/>
-  </Resources>
-  <Applications>
-    <Application Id="App" Executable="EntryPointApp\EntryPointApp.exe" EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements DisplayName="HumanizerWapProbe" Description="HumanizerWapProbe" BackgroundColor="transparent" Square150x150Logo="Images\Square150x150Logo.png" Square44x44Logo="Images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
-        <uap:SplashScreen Image="Images\SplashScreen.png" />
-      </uap:VisualElements>
-    </Application>
-  </Applications>
-  <Capabilities>
-    <Capability Name="internetClient" />
-    <rescap:Capability Name="runFullTrust" />
-  </Capabilities>
-</Package>
-'@
+    $manifestContent = Get-Content -Raw (Join-Path $fixtureRoot "Package\Package.appxmanifest")
     Set-Content -Path $manifestFile -Value $manifestContent -Encoding UTF8
 
     $nuGetConfigFile = Join-Path $smokeRoot "NuGet.config"
@@ -1259,7 +1161,7 @@ function Invoke-PackageSmokeTests {
         return $resultRecord
     }
 
-    $smokeTestProject = Join-Path $PSScriptRoot "tests/Humanizer.Package.Tests/Humanizer.Package.Tests.csproj"
+    $smokeTestProject = Join-Path $PSScriptRoot "Humanizer.Package.Tests/Humanizer.Package.Tests.csproj"
     if (-not (Test-Path $smokeTestProject)) {
         $resultRecord.Details = "Package smoke test project not found: $smokeTestProject"
         return $resultRecord
@@ -1289,7 +1191,7 @@ function Invoke-PackageSmokeTests {
     try {
         $smokeTestResult = Invoke-CapturedProcess `
             -FilePath "dotnet" `
-            -ArgumentList @("test", "--project", $smokeTestProject, "--framework", "net10.0") `
+            -ArgumentList @("test", "--project", $smokeTestProject) `
             -WorkingDirectory $PSScriptRoot
     } finally {
         if ($hadPreviousSettings) {

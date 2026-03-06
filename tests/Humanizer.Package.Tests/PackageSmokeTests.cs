@@ -240,36 +240,12 @@ sealed class PackageTestContext
         var workingDirectory = Path.Combine(Path.GetTempPath(), "Humanizer.Package.Tests", Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture));
         Directory.CreateDirectory(workingDirectory);
 
-        if (!string.IsNullOrWhiteSpace(settings.PackagesDirectory) &&
-            !string.IsNullOrWhiteSpace(settings.PackageVersion))
-        {
-            var (nuGetConfigPath, configuredGlobalPackagesFolder) = WriteNuGetConfig(workingDirectory, settings.PackagesDirectory);
-            return new PackageTestContext(workingDirectory, settings.PackagesDirectory, settings.PackageVersion, nuGetConfigPath, configuredGlobalPackagesFolder);
-        }
+        if (string.IsNullOrWhiteSpace(settings.PackagesDirectory) ||
+            string.IsNullOrWhiteSpace(settings.PackageVersion))
+            throw new XunitException($"Package smoke tests require settings from '{PackageSmokeSettings.GetSettingsFilePath()}'. Run tests/verify-packages.ps1 to generate them.");
 
-        var repositoryRoot = FindRepositoryRoot();
-        var packageOutputPath = Path.Combine(workingDirectory, "packages");
-        Directory.CreateDirectory(packageOutputPath);
-
-        var buildResult = await ProcessRunner.RunAsync(
-            "dotnet",
-            [
-                "build",
-                "Humanizer/Humanizer.csproj",
-                "-c",
-                "Release",
-                "/t:PackNuSpecs",
-                $"/p:PackageOutputPath={packageOutputPath}"
-            ],
-            Path.Combine(repositoryRoot, "src"));
-
-        if (buildResult.ExitCode != 0)
-            throw new XunitException($"Failed to build test packages.{Environment.NewLine}{buildResult.FormatForFailure()}");
-
-        var builtPackageVersion = GetMetapackageVersion(packageOutputPath);
-        var (configPath, globalPackagesFolder) = WriteNuGetConfig(workingDirectory, packageOutputPath);
-
-        return new PackageTestContext(workingDirectory, packageOutputPath, builtPackageVersion, configPath, globalPackagesFolder);
+        var (nuGetConfigPath, configuredGlobalPackagesFolder) = WriteNuGetConfig(workingDirectory, settings.PackagesDirectory);
+        return new PackageTestContext(workingDirectory, settings.PackagesDirectory, settings.PackageVersion, nuGetConfigPath, configuredGlobalPackagesFolder);
     }
 
     internal static string FindRepositoryRoot()
@@ -285,21 +261,6 @@ sealed class PackageTestContext
         }
 
         throw new XunitException("Could not locate the repository root.");
-    }
-
-    static string GetMetapackageVersion(string packagesDirectory)
-    {
-        var regex = new Regex(@"^Humanizer\.(?!Core(?:\.|$))(?<version>.+)\.nupkg$", RegexOptions.CultureInvariant);
-
-        foreach (var packagePath in Directory.EnumerateFiles(packagesDirectory, "Humanizer.*.nupkg"))
-        {
-            var fileName = Path.GetFileName(packagePath);
-            var match = regex.Match(fileName);
-            if (match.Success)
-                return match.Groups["version"].Value;
-        }
-
-        throw new XunitException("Could not determine the packaged Humanizer version from the available package files.");
     }
 
     void CreateConsoleProject(string projectDirectory, string targetFramework, PackageScenario packageScenario) =>
@@ -551,7 +512,7 @@ sealed class PackageSmokeSettings
     }
 
     public static string GetSettingsFilePath() =>
-        Path.Combine(PackageTestContext.FindRepositoryRoot(), "artifacts", "package-smoke-settings.json");
+        Path.Combine(PackageTestContext.FindRepositoryRoot(), "tests", "artifacts", "package-smoke-settings.json");
 
     static string[] ParseTargetFrameworks(string[]? targetFrameworks) =>
         targetFrameworks is { Length: > 0 }

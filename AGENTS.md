@@ -31,8 +31,8 @@ These instructions apply to the entire repository.
 ## Build & Validation
 - Build command: `dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<path>` (from `src`). It must succeed without warnings or errors.
 - If you need to reference those newly build packages, create or update `NuGet.config` to use that package output path as a package source--but never commit changes to that file.
-- When verifying restore, build first, then pass the output path into `verify-packages.ps1`.
-- When running `verify-packages.ps1`, you can override the default `-MinimumPassingSdkVersion` (`9.0.200`) to mark older SDK/MSBuild restores as expected failures.
+- When verifying restore, build first, then pass the output path into `tests/verify-packages.ps1`.
+- When running `tests/verify-packages.ps1`, you can override the default `-MinimumPassingSdkVersion` (`9.0.200`) to mark older SDK/MSBuild restores as expected failures.
 - Do not introduce new compiler warnings or break existing build/test workflows.
 
 ## Localization Guidance
