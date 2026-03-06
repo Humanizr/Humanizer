@@ -66,6 +66,7 @@ stages:
           -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages' `
           -MinimumPassingSdkVersion '9.0.200' `
           -SmokeTestTargetFrameworks 'net8.0;net9.0;net10.0;net11.0;net48' `
+          -SmokeTestHosts 'console;webapi;blazor;wapproj' `
           -SmokeTestScenarios 'meta;core-lang'
       displayName: Verify Package Structure and Dependencies
       failOnStderr: false

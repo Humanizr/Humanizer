@@ -47,6 +47,8 @@ param(
 
     [string]$SmokeTestTargetFrameworks = "net8.0;net10.0",
 
+    [string]$SmokeTestHosts = "console",
+
     [string]$SmokeTestScenarios = "meta;core-lang"
 )
 
@@ -985,11 +987,269 @@ function Get-SmokeTestScenarioList {
     )
 }
 
+function Get-SmokeTestHostList {
+    param(
+        [string]$ConfiguredHosts,
+        [bool]$RunningOnWindows
+    )
+
+    if ([string]::IsNullOrWhiteSpace($ConfiguredHosts)) {
+        return @()
+    }
+
+    $hosts = $ConfiguredHosts.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries -bor [System.StringSplitOptions]::TrimEntries) |
+        Select-Object -Unique
+
+    if (-not $RunningOnWindows) {
+        $hosts = $hosts | Where-Object { $_ -ne 'wapproj' }
+    }
+
+    return @($hosts)
+}
+
+function Get-GlobalPackagesDirectory {
+    $result = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("nuget", "locals", "global-packages", "--list")
+    if ($result.ExitCode -ne 0) {
+        return $null
+    }
+
+    $line = ($result.StandardOutput -split "(`r`n|`r|`n)" | Where-Object { $_ -like 'global-packages:*' } | Select-Object -First 1)
+    if ([string]::IsNullOrWhiteSpace($line)) {
+        return $null
+    }
+
+    return ($line -replace '^global-packages:\s*', '').Trim()
+}
+
+function Invoke-WapProjSmokeTest {
+    param(
+        [Parameter(Mandatory = $true)][string]$PackageVersion,
+        [Parameter(Mandatory = $true)][string]$PackagesDirectory,
+        [Parameter(Mandatory = $true)][string]$MsbuildPath,
+        [Parameter(Mandatory = $true)][string]$TempDir
+    )
+
+    $resultRecord = [PSCustomObject]@{
+        DisplayName = "WAP project smoke test"
+        Success = $false
+        Executed = $false
+        Details = $null
+    }
+
+    $msbuildBinDirectory = Split-Path -Parent $MsbuildPath
+    $msbuildCurrentDirectory = Split-Path -Parent $msbuildBinDirectory
+    $msbuildRootDirectory = Split-Path -Parent $msbuildCurrentDirectory
+    $visualStudioRoot = Split-Path -Parent $msbuildRootDirectory
+    $templateDirectory = Join-Path $visualStudioRoot "Common7\IDE\ProjectTemplates\CSharp\Windows UAP\1033\WapProj"
+
+    if (-not (Test-Path $templateDirectory)) {
+        $resultRecord.Details = "WAP project template directory not found: $templateDirectory"
+        return $resultRecord
+    }
+
+    $globalPackagesDirectory = Get-GlobalPackagesDirectory
+    if ([string]::IsNullOrWhiteSpace($globalPackagesDirectory)) {
+        $resultRecord.Details = "Could not determine the global packages directory."
+        return $resultRecord
+    }
+
+    Get-ChildItem -Path $globalPackagesDirectory -Directory -Filter "humanizer*" -ErrorAction SilentlyContinue |
+        ForEach-Object {
+            $versionDirectory = Join-Path $_.FullName $PackageVersion
+            if (Test-Path $versionDirectory) {
+                Remove-Item -Path $versionDirectory -Recurse -Force -ErrorAction SilentlyContinue
+            }
+        }
+
+    $smokeRoot = Join-Path $TempDir "WapProjSmoke"
+    $entryPointDirectory = Join-Path $smokeRoot "EntryPointApp"
+    $packageDirectory = Join-Path $smokeRoot "Package"
+    $imagesDirectory = Join-Path $packageDirectory "Images"
+    New-Item -ItemType Directory -Path $entryPointDirectory, $packageDirectory, $imagesDirectory -Force | Out-Null
+
+    Copy-Item -Path (Join-Path $templateDirectory "*.png") -Destination $imagesDirectory -Force
+
+    $entryPointProjectFile = Join-Path $entryPointDirectory "EntryPointApp.csproj"
+    $entryPointProjectContent = @'
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="__PACKAGE_VERSION__" />
+  </ItemGroup>
+</Project>
+'@.Replace("__PACKAGE_VERSION__", $PackageVersion)
+    Set-Content -Path $entryPointProjectFile -Value $entryPointProjectContent -Encoding UTF8
+
+    $entryPointProgramFile = Join-Path $entryPointDirectory "Program.cs"
+    $entryPointProgramContent = @'
+using Humanizer;
+using System.Globalization;
+
+Console.WriteLine(2.ToWords(new CultureInfo("fr")));
+'@
+    Set-Content -Path $entryPointProgramFile -Value $entryPointProgramContent -Encoding UTF8
+
+    $wapProjectFile = Join-Path $packageDirectory "Package.wapproj"
+    $wapProjectContent = @'
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0'">
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup>
+    <WapProjPath Condition="'$(WapProjPath)'==''">$(MSBuildExtensionsPath)\Microsoft\DesktopBridge\</WapProjPath>
+  </PropertyGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
+  <PropertyGroup>
+    <ProjectGuid>{5A6E0905-0F24-4E09-8A57-4E16E7E7E0AA}</ProjectGuid>
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <EntryPointProjectUniqueName>..\EntryPointApp\EntryPointApp.csproj</EntryPointProjectUniqueName>
+    <DebuggerType>CoreClr</DebuggerType>
+    <PackageOutputGroups>@(PackageOutputGroups);__GetPublishItems</PackageOutputGroups>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\SplashScreen.scale-200.png" />
+    <Content Include="Images\LockScreenLogo.scale-200.png" />
+    <Content Include="Images\Square150x150Logo.scale-200.png" />
+    <Content Include="Images\Square44x44Logo.scale-200.png" />
+    <Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Images\StoreLogo.png" />
+    <Content Include="Images\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntryPointApp\EntryPointApp.csproj" SkipGetTargetFrameworkProperties="true" Properties="RuntimeIdentifier=win-x64;SelfContained=true" />
+  </ItemGroup>
+  <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
+  <Target Name="_ValidateAppReferenceItems" />
+  <Target Name="_FixEntryPoint" AfterTargets="_ConvertItems">
+    <PropertyGroup>
+      <EntryPointExe>EntryPointApp\EntryPointApp.exe</EntryPointExe>
+    </PropertyGroup>
+  </Target>
+  <Target Name="PublishReferences" BeforeTargets="ExpandProjectReferences">
+    <MSBuild Projects="@(ProjectReference->'%(FullPath)')" BuildInParallel="$(BuildInParallel)" Targets="Publish" Properties="RuntimeIdentifier=win-x64;SelfContained=true" />
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4948" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
+'@
+    Set-Content -Path $wapProjectFile -Value $wapProjectContent -Encoding UTF8
+
+    $manifestFile = Join-Path $packageDirectory "Package.appxmanifest"
+    $manifestContent = @'
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap rescap">
+  <Identity Name="Humanizer.WapProbe" Publisher="CN=Humanizer" Version="1.0.0.0" />
+  <Properties>
+    <DisplayName>HumanizerWapProbe</DisplayName>
+    <PublisherDisplayName>Humanizer</PublisherDisplayName>
+    <Logo>Images\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.19041.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="en-us"/>
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="EntryPointApp\EntryPointApp.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements DisplayName="HumanizerWapProbe" Description="HumanizerWapProbe" BackgroundColor="transparent" Square150x150Logo="Images\Square150x150Logo.png" Square44x44Logo="Images\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+        <uap:SplashScreen Image="Images\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>
+'@
+    Set-Content -Path $manifestFile -Value $manifestContent -Encoding UTF8
+
+    $nuGetConfigFile = Join-Path $smokeRoot "NuGet.config"
+    $nuGetConfigContent = @'
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <clear />
+    <add key="LocalPackages" value="__PACKAGES_DIRECTORY__" />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+  </packageSources>
+</configuration>
+'@.Replace("__PACKAGES_DIRECTORY__", (Resolve-Path $PackagesDirectory).Path)
+    Set-Content -Path $nuGetConfigFile -Value $nuGetConfigContent -Encoding UTF8
+
+    $restoreArguments = @(
+        $wapProjectFile,
+        "/t:Restore",
+        "/p:RestoreConfigFile=$nuGetConfigFile",
+        "/p:Platform=x64",
+        "/p:Configuration=Release",
+        "/p:RuntimeIdentifier=win-x64",
+        "/p:SelfContained=true",
+        "/nologo"
+    )
+    $restoreResult = Invoke-CapturedProcess -FilePath $MsbuildPath -ArgumentList $restoreArguments -WorkingDirectory $packageDirectory
+    if ($restoreResult.ExitCode -ne 0) {
+        $diagnostics = Publish-RestoreFailure "WAP project restore failed" $resultRecord.DisplayName $restoreResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $restoreResult
+        return $resultRecord
+    }
+
+    $buildArguments = @(
+        $wapProjectFile,
+        "/t:Build",
+        "/p:Restore=false",
+        "/p:RestoreConfigFile=$nuGetConfigFile",
+        "/p:Platform=x64",
+        "/p:Configuration=Release",
+        "/p:RuntimeIdentifier=win-x64",
+        "/p:SelfContained=true",
+        "/nologo"
+    )
+    $buildResult = Invoke-CapturedProcess -FilePath $MsbuildPath -ArgumentList $buildArguments -WorkingDirectory $packageDirectory
+    $resultRecord.Executed = $true
+    if ($buildResult.ExitCode -ne 0) {
+        $diagnostics = Publish-RestoreFailure "WAP project build failed" $resultRecord.DisplayName $buildResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $buildResult
+        return $resultRecord
+    }
+
+    Publish-RestoreSuccess "WAP project build succeeded" $resultRecord.DisplayName $buildResult | Out-Null
+    $resultRecord.Success = $true
+    return $resultRecord
+}
+
 function Invoke-PackageSmokeTests {
     param(
         [Parameter(Mandatory = $true)][string]$PackageVersion,
         [Parameter(Mandatory = $true)][string]$PackagesDirectory,
         [Parameter(Mandatory = $true)][string[]]$TargetFrameworks,
+        [Parameter(Mandatory = $true)][string[]]$Hosts,
         [Parameter(Mandatory = $true)][string[]]$Scenarios
     )
 
@@ -998,13 +1258,14 @@ function Invoke-PackageSmokeTests {
         Success = $false
         Executed = $false
         Details = $null
+        Hosts = @($Hosts)
         TargetFrameworks = @($TargetFrameworks)
         Scenarios = @($Scenarios)
     }
 
-    if ($TargetFrameworks.Count -eq 0 -or $Scenarios.Count -eq 0) {
+    if ($TargetFrameworks.Count -eq 0 -or $Hosts.Count -eq 0 -or $Scenarios.Count -eq 0) {
         $resultRecord.Success = $true
-        $resultRecord.Details = "Package smoke tests skipped (no frameworks or scenarios configured)"
+        $resultRecord.Details = "Package smoke tests skipped (no frameworks, hosts, or scenarios configured)"
         return $resultRecord
     }
 
@@ -1015,23 +1276,43 @@ function Invoke-PackageSmokeTests {
     }
 
     $resolvedPackagesDirectory = (Resolve-Path $PackagesDirectory).Path
-    $environmentVariables = @{
-        HUMANIZER_PACKAGES_DIR = $resolvedPackagesDirectory
-        HUMANIZER_PACKAGE_VERSION = $PackageVersion
-        HUMANIZER_PACKAGE_TEST_TARGET_FRAMEWORKS = ($TargetFrameworks -join ';')
-        HUMANIZER_PACKAGE_TEST_SCENARIOS = ($Scenarios -join ';')
+    $settingsFilePath = Join-Path $PSScriptRoot "artifacts\package-smoke-settings.json"
+    $settingsDirectory = Split-Path -Parent $settingsFilePath
+    New-Item -ItemType Directory -Path $settingsDirectory -Force | Out-Null
+
+    $previousSettings = $null
+    $hadPreviousSettings = Test-Path $settingsFilePath
+    if ($hadPreviousSettings) {
+        $previousSettings = Get-Content -Raw $settingsFilePath
     }
 
-    $smokeTestResult = Invoke-CapturedProcess `
-        -FilePath "dotnet" `
-        -ArgumentList @("test", "--project", $smokeTestProject, "--framework", "net10.0") `
-        -WorkingDirectory $PSScriptRoot `
-        -EnvironmentVariables $environmentVariables
+    $settingsPayload = [ordered]@{
+        packagesDirectory = $resolvedPackagesDirectory
+        packageVersion = $PackageVersion
+        hosts = @($Hosts)
+        targetFrameworks = @($TargetFrameworks)
+        scenarios = @($Scenarios)
+    } | ConvertTo-Json -Depth 5
+
+    Set-Content -Path $settingsFilePath -Value $settingsPayload -Encoding UTF8
+
+    try {
+        $smokeTestResult = Invoke-CapturedProcess `
+            -FilePath "dotnet" `
+            -ArgumentList @("test", "--project", $smokeTestProject, "--framework", "net10.0") `
+            -WorkingDirectory $PSScriptRoot
+    } finally {
+        if ($hadPreviousSettings) {
+            Set-Content -Path $settingsFilePath -Value $previousSettings -Encoding UTF8
+        } elseif (Test-Path $settingsFilePath) {
+            Remove-Item -Path $settingsFilePath -Force -ErrorAction SilentlyContinue
+        }
+    }
 
     $resultRecord.Executed = $true
 
     if ($smokeTestResult.ExitCode -ne 0) {
-        $context = "Package smoke tests failed for frameworks $($TargetFrameworks -join ', ') and scenarios $($Scenarios -join ', ')"
+        $context = "Package smoke tests failed for frameworks $($TargetFrameworks -join ', '), hosts $($Hosts -join ', '), and scenarios $($Scenarios -join ', ')"
         $diagnostics = Publish-RestoreFailure $context "Package smoke tests" $smokeTestResult
         $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $smokeTestResult
         return $resultRecord
@@ -1109,6 +1390,8 @@ try {
 
     $restoreTargets = Get-RestoreTargets -RunningOnWindows $runningOnWindows -MinimumPassingSdkVersion $MinimumPassingSdkVersion
     $smokeTestTargetFrameworkList = Get-SmokeTestTargetFrameworkList -ConfiguredTargetFrameworks $SmokeTestTargetFrameworks -RunningOnWindows $runningOnWindows
+    $smokeTestHostList = Get-SmokeTestHostList -ConfiguredHosts $SmokeTestHosts -RunningOnWindows $runningOnWindows
+    $packageSmokeHostList = @($smokeTestHostList | Where-Object { $_ -ne 'wapproj' })
     $smokeTestScenarioList = Get-SmokeTestScenarioList -ConfiguredScenarios $SmokeTestScenarios
 
     foreach ($target in $restoreTargets) {
@@ -1231,10 +1514,38 @@ try {
         -PackageVersion $PackageVersion `
         -PackagesDirectory $PackagesDirectory `
         -TargetFrameworks $smokeTestTargetFrameworkList `
+        -Hosts $packageSmokeHostList `
         -Scenarios $smokeTestScenarioList
 
     if (-not $packageSmokeTestResult.Success) {
         $verificationFailures += "Package smoke tests failed"
+    }
+
+    $wapProjSmokeTestResult = [PSCustomObject]@{
+        DisplayName = "WAP project smoke test"
+        Success = $true
+        Executed = $false
+        Details = $null
+    }
+
+    if ($smokeTestHostList -contains 'wapproj') {
+        $msbuildSmokeTarget = $restoreTargets | Where-Object { $_.Kind -eq 'msbuild' } | Select-Object -First 1
+        if ($null -eq $msbuildSmokeTarget) {
+            $wapProjSmokeTestResult.Success = $false
+            $wapProjSmokeTestResult.Details = "WAP project smoke test requested but no MSBuild installation was found."
+            $verificationFailures += "WAP project smoke tests failed"
+        } else {
+            Write-AzureDevOpsSection "Running WAP project smoke test"
+            $wapProjSmokeTestResult = Invoke-WapProjSmokeTest `
+                -PackageVersion $PackageVersion `
+                -PackagesDirectory $PackagesDirectory `
+                -MsbuildPath $msbuildSmokeTarget.Path `
+                -TempDir $tempDir
+
+            if (-not $wapProjSmokeTestResult.Success) {
+                $verificationFailures += "WAP project smoke tests failed"
+            }
+        }
     }
 
     Write-AzureDevOpsSection "Verification Summary"
@@ -1264,11 +1575,21 @@ try {
     }
 
     if ($packageSmokeTestResult.Success -and $packageSmokeTestResult.Executed) {
-        $summaryLines += "  ✓ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
+        $summaryLines += "  ✓ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Hosts -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
     } elseif ($packageSmokeTestResult.Executed) {
-        $summaryLines += "  ✗ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
+        $summaryLines += "  ✗ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Hosts -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
     } else {
         $summaryLines += "  ✓ Package smoke tests skipped"
+    }
+
+    if ($smokeTestHostList -contains 'wapproj') {
+        if ($wapProjSmokeTestResult.Success -and $wapProjSmokeTestResult.Executed) {
+            $summaryLines += "  ✓ WAP project smoke test"
+        } elseif ($wapProjSmokeTestResult.Executed -or -not $wapProjSmokeTestResult.Success) {
+            $summaryLines += "  ✗ WAP project smoke test"
+        } else {
+            $summaryLines += "  ✓ WAP project smoke test skipped"
+        }
     }
 
     $summaryLines += ""
