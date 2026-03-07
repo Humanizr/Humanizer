@@ -966,31 +966,36 @@ function Invoke-WapProjSmokeTest {
     }
 
     $smokeRoot = Join-Path $TempDir "WapProjSmoke"
+    if (Test-Path $smokeRoot) {
+        Remove-Item -Path $smokeRoot -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    $localPackagesDirectory = Join-Path $smokeRoot ".nuget\packages"
+    New-Item -ItemType Directory -Path $smokeRoot -Force | Out-Null
+    Copy-Item -Path (Join-Path $fixtureRoot "EntryPointApp") -Destination (Join-Path $smokeRoot "EntryPointApp") -Recurse -Force
+    Copy-Item -Path (Join-Path $fixtureRoot "Package") -Destination (Join-Path $smokeRoot "Package") -Recurse -Force
+    New-Item -ItemType Directory -Path $localPackagesDirectory -Force | Out-Null
+
     $entryPointDirectory = Join-Path $smokeRoot "EntryPointApp"
     $packageDirectory = Join-Path $smokeRoot "Package"
-    $imagesDirectory = Join-Path $packageDirectory "Images"
-    $localPackagesDirectory = Join-Path $smokeRoot ".nuget\packages"
-    New-Item -ItemType Directory -Path $entryPointDirectory, $packageDirectory, $imagesDirectory, $localPackagesDirectory -Force | Out-Null
-    Copy-Item -Path (Join-Path $fixtureRoot "Package\Images\*") -Destination $imagesDirectory -Force
-
     $entryPointProjectFile = Join-Path $entryPointDirectory "EntryPointApp.csproj"
-    $entryPointProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "EntryPointApp\EntryPointApp.csproj.template")).
-        Replace("__PACKAGE_VERSION__", $PackageVersion).
-        Replace("__PACKAGES_PATH__", $localPackagesDirectory)
-    Set-Content -Path $entryPointProjectFile -Value $entryPointProjectContent -Encoding UTF8
-
-    $entryPointProgramFile = Join-Path $entryPointDirectory "Program.cs"
-    $entryPointProgramContent = Get-Content -Raw (Join-Path $fixtureRoot "EntryPointApp\Program.cs")
-    Set-Content -Path $entryPointProgramFile -Value $entryPointProgramContent -Encoding UTF8
+    Expand-TemplateFile `
+        -TemplatePath (Join-Path $entryPointDirectory "EntryPointApp.csproj.template") `
+        -DestinationPath $entryPointProjectFile `
+        -Tokens @{
+            "__PACKAGE_VERSION__" = $PackageVersion
+            "__PACKAGES_PATH__" = $localPackagesDirectory
+        }
+    Remove-Item -Path (Join-Path $entryPointDirectory "EntryPointApp.csproj.template") -Force -ErrorAction SilentlyContinue
 
     $wapProjectFile = Join-Path $packageDirectory "Package.wapproj"
-    $wapProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "Package\Package.wapproj.template")).
-        Replace("__PACKAGES_PATH__", $localPackagesDirectory)
-    Set-Content -Path $wapProjectFile -Value $wapProjectContent -Encoding UTF8
-
-    $manifestFile = Join-Path $packageDirectory "Package.appxmanifest"
-    $manifestContent = Get-Content -Raw (Join-Path $fixtureRoot "Package\Package.appxmanifest")
-    Set-Content -Path $manifestFile -Value $manifestContent -Encoding UTF8
+    Expand-TemplateFile `
+        -TemplatePath (Join-Path $packageDirectory "Package.wapproj.template") `
+        -DestinationPath $wapProjectFile `
+        -Tokens @{
+            "__PACKAGES_PATH__" = $localPackagesDirectory
+        }
+    Remove-Item -Path (Join-Path $packageDirectory "Package.wapproj.template") -Force -ErrorAction SilentlyContinue
 
     $nuGetConfigFile = Join-Path $smokeRoot "NuGet.config"
     $nuGetConfigContent = @'
@@ -1111,11 +1116,15 @@ function Expand-TemplateDirectory {
             New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
         }
 
+        if (-not $relativePath.EndsWith('.template')) {
+            Copy-Item -Path $item.FullName -Destination $destinationPath -Force
+            continue
+        }
+
         $content = Get-Content -Raw $item.FullName
         foreach ($token in $Tokens.GetEnumerator()) {
             $content = $content.Replace($token.Key, [string]$token.Value)
         }
-
         Set-Content -Path $destinationPath -Value $content -Encoding UTF8
     }
 }
@@ -1149,6 +1158,26 @@ function New-SmokeProjectNuGetConfig {
         GlobalPackagesDirectory = $globalPackagesDirectory
         NuGetConfigPath = $nuGetConfigPath
     }
+}
+
+function Expand-TemplateFile {
+    param(
+        [Parameter(Mandatory = $true)][string]$TemplatePath,
+        [Parameter(Mandatory = $true)][string]$DestinationPath,
+        [Parameter(Mandatory = $true)][hashtable]$Tokens
+    )
+
+    $content = Get-Content -Raw $TemplatePath
+    foreach ($token in $Tokens.GetEnumerator()) {
+        $content = $content.Replace($token.Key, [string]$token.Value)
+    }
+
+    $destinationParent = Split-Path -Parent $DestinationPath
+    if (-not [string]::IsNullOrWhiteSpace($destinationParent)) {
+        New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
+    }
+
+    Set-Content -Path $DestinationPath -Value $content -Encoding UTF8
 }
 
 function Invoke-SmokeProject {
