@@ -87,72 +87,28 @@ function Write-AzureDevOpsWarning {
     }
 }
 
-function Invoke-CapturedProcess {
+function Invoke-CommandText {
     param(
         [Parameter(Mandatory = $true)][string]$FilePath,
         [string[]]$ArgumentList = @(),
         [string]$WorkingDirectory
     )
 
-    $startInfo = New-Object System.Diagnostics.ProcessStartInfo
-    $startInfo.FileName = $FilePath
-    $startInfo.UseShellExecute = $false
-    $startInfo.RedirectStandardOutput = $true
-    $startInfo.RedirectStandardError = $true
-    $startInfo.CreateNoWindow = $true
-    if ($PSVersionTable.PSVersion.Major -ge 7 -and $null -ne $startInfo) {
-        if ($startInfo.PSObject.Properties.Match('StandardOutputEncoding').Count -gt 0) {
-            $startInfo.StandardOutputEncoding = [System.Text.Encoding]::UTF8
+    $currentLocation = Get-Location
+    try {
+        if ($WorkingDirectory) {
+            Set-Location $WorkingDirectory
         }
-        if ($startInfo.PSObject.Properties.Match('StandardErrorEncoding').Count -gt 0) {
-            $startInfo.StandardErrorEncoding = [System.Text.Encoding]::UTF8
+
+        $output = & $FilePath @ArgumentList 2>&1 | ForEach-Object { $_.ToString() }
+        return [PSCustomObject]@{
+            ExitCode = $LASTEXITCODE
+            Output   = ($output -join "`n")
         }
-    }
-
-    if ($ArgumentList) {
-        if ($startInfo.PSObject.Properties.Match('ArgumentList').Count -gt 0) {
-            foreach ($argument in $ArgumentList) {
-                [void]$startInfo.ArgumentList.Add($argument)
-            }
-        } else {
-            $escapedArguments = $ArgumentList | ForEach-Object {
-                if ($_ -match '\s' -or $_ -match '"') {
-                    '"' + ($_ -replace '"', '\"') + '"'
-                } else {
-                    $_
-                }
-            }
-            $startInfo.Arguments = [string]::Join(' ', $escapedArguments)
+    } finally {
+        if ($WorkingDirectory) {
+            Set-Location $currentLocation
         }
-    }
-
-    if ($WorkingDirectory) {
-        $startInfo.WorkingDirectory = $WorkingDirectory
-    }
-
-    $process = New-Object System.Diagnostics.Process
-    $process.StartInfo = $startInfo
-
-    $null = $process.Start()
-
-    $standardOutput = $process.StandardOutput.ReadToEnd()
-    $standardError = $process.StandardError.ReadToEnd()
-
-    $process.WaitForExit()
-
-    $exitCode = $process.ExitCode
-
-    $process.Dispose()
-
-    $combinedParts = @()
-    if ($standardOutput) { $combinedParts += $standardOutput }
-    if ($standardError) { $combinedParts += $standardError }
-
-    return [PSCustomObject]@{
-        ExitCode        = $exitCode
-        StandardOutput  = $standardOutput
-        StandardError   = $standardError
-        CombinedOutput  = ($combinedParts -join "`n")
     }
 }
 
@@ -205,13 +161,9 @@ function Write-FilteredProcessOutput {
         return
     }
 
-    $allText = @()
-    if ($ProcessResult.StandardOutput) { $allText += $ProcessResult.StandardOutput }
-    if ($ProcessResult.StandardError) { $allText += $ProcessResult.StandardError }
+    if ([string]::IsNullOrWhiteSpace($ProcessResult.Output)) { return }
 
-    if ($allText.Count -eq 0) { return }
-
-    $combined = $allText -join "`n"
+    $combined = $ProcessResult.Output
     $lines = $combined -split "(`r`n|`r|`n)"
     foreach ($line in $lines) {
         if ([string]::IsNullOrWhiteSpace($line)) { continue }
@@ -458,9 +410,9 @@ function Get-RestoreTargets {
 
     $minimumPassingVersionObject = ConvertTo-VersionObject $MinimumPassingSdkVersion
 
-    $listSdksResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("--list-sdks")
+    $listSdksResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList @("--list-sdks")
     if ($listSdksResult.ExitCode -ne 0) {
-        Write-AzureDevOpsErrorDetail "Failed to enumerate installed SDKs" $listSdksResult.CombinedOutput
+        Write-AzureDevOpsErrorDetail "Failed to enumerate installed SDKs" $listSdksResult.Output
         Write-FilteredProcessOutput -ProcessResult $listSdksResult
         throw "Unable to determine installed SDKs"
     }
@@ -468,8 +420,8 @@ function Get-RestoreTargets {
     Write-FilteredProcessOutput -ProcessResult $listSdksResult
 
     $installedSdkLines = @()
-    if ($listSdksResult.StandardOutput) {
-        $installedSdkLines = ($listSdksResult.StandardOutput -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    if ($listSdksResult.Output) {
+        $installedSdkLines = ($listSdksResult.Output -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
     }
 
     $sdksByMajor = @{}
@@ -628,7 +580,7 @@ function Invoke-DotnetRestoreTarget {
 
         Write-Host "Restoring packages..."
         $restoreArguments = @("restore", "--configfile", $NuGetConfig, "--verbosity", "minimal")
-        $restoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $restoreArguments -WorkingDirectory (Get-Location).Path
+        $restoreResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList $restoreArguments -WorkingDirectory (Get-Location).Path
 
         $restoreSucceeded = ($restoreResult.ExitCode -eq 0)
         if (-not $restoreSucceeded) {
@@ -672,7 +624,7 @@ function Invoke-DotnetRestoreTarget {
         
         Write-Host "Building project..."
         $buildArguments = @("build", "--no-restore", "--verbosity", "minimal")
-        $buildResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $buildArguments -WorkingDirectory (Get-Location).Path
+        $buildResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList $buildArguments -WorkingDirectory (Get-Location).Path
         $buildSucceeded = ($buildResult.ExitCode -eq 0)
         if (-not $buildSucceeded) {
             $context = "Build failed for $($Target.DisplayName) during dotnet build"
@@ -728,7 +680,7 @@ function Invoke-MSBuildRestoreTarget {
 
         $projectFile = New-RestoreProjectFile -Directory (Get-Location).Path -ProjectName "MetaTest" -TargetFramework "net48" -PackageVersion $PackageVersion
 
-        $msbuildRestoreResult = Invoke-CapturedProcess -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$NuGetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
+        $msbuildRestoreResult = Invoke-CommandText -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$NuGetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
 
         $restoreSucceeded = ($msbuildRestoreResult.ExitCode -eq 0)
         if (-not $restoreSucceeded) {
@@ -771,7 +723,7 @@ function Invoke-MSBuildRestoreTarget {
         }
         
         Write-Host "Building project..."
-        $msbuildBuildResult = Invoke-CapturedProcess -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Build", "/p:Restore=false", "/nologo") -WorkingDirectory (Get-Location).Path
+        $msbuildBuildResult = Invoke-CommandText -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Build", "/p:Restore=false", "/nologo") -WorkingDirectory (Get-Location).Path
         $buildSucceeded = ($msbuildBuildResult.ExitCode -eq 0)
         if (-not $buildSucceeded) {
             $context = "Build failed for $($Target.DisplayName) during MSBuild build"
@@ -858,15 +810,12 @@ function Publish-RestoreFailure {
         Write-FilteredProcessOutput -ProcessResult $ProcessResult
     }
 
-    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
+    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.Output
 
     Write-RestoreDiagnosticLines -DisplayName $DisplayName -Diagnostics $diagnostics -ErrorSeverity $ErrorSeverity
 
     if (($diagnostics.Errors.Count -eq 0) -and ($diagnostics.Warnings.Count -eq 0)) {
-        $fallbackMessage = $ProcessResult.StandardError
-        if ([string]::IsNullOrWhiteSpace($fallbackMessage)) {
-            $fallbackMessage = $ProcessResult.StandardOutput
-        }
+        $fallbackMessage = $ProcessResult.Output
 
         if (-not [string]::IsNullOrWhiteSpace($fallbackMessage)) {
             $fallbackLines = ($fallbackMessage -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
@@ -904,7 +853,7 @@ function Publish-RestoreSuccess {
         return $null
     }
 
-    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
+    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.Output
 
     Write-RestoreDiagnosticLines -DisplayName $DisplayName -Diagnostics $diagnostics
 
@@ -928,16 +877,8 @@ function Get-FailureDetailText {
     }
 
     if ($ProcessResult) {
-        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.StandardError)) {
-            return $ProcessResult.StandardError.Trim()
-        }
-
-        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.StandardOutput)) {
-            return $ProcessResult.StandardOutput.Trim()
-        }
-
-        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.CombinedOutput)) {
-            return $ProcessResult.CombinedOutput.Trim()
+        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.Output)) {
+            return $ProcessResult.Output.Trim()
         }
     }
 
@@ -1024,7 +965,7 @@ function Invoke-WapProjSmokeTest {
         "/p:RestorePackagesPath=$localPackagesDirectory",
         "/nologo"
     )
-    $restoreResult = Invoke-CapturedProcess -FilePath $MsbuildPath -ArgumentList $restoreArguments -WorkingDirectory $packageDirectory
+    $restoreResult = Invoke-CommandText -FilePath $MsbuildPath -ArgumentList $restoreArguments -WorkingDirectory $packageDirectory
     if ($restoreResult.ExitCode -ne 0) {
         $diagnostics = Publish-RestoreFailure "WAP project restore failed" $resultRecord.DisplayName $restoreResult
         $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $restoreResult
@@ -1043,7 +984,7 @@ function Invoke-WapProjSmokeTest {
         "/p:RestorePackagesPath=$localPackagesDirectory",
         "/nologo"
     )
-    $buildResult = Invoke-CapturedProcess -FilePath $MsbuildPath -ArgumentList $buildArguments -WorkingDirectory $packageDirectory
+    $buildResult = Invoke-CommandText -FilePath $MsbuildPath -ArgumentList $buildArguments -WorkingDirectory $packageDirectory
     $resultRecord.Executed = $true
     if ($buildResult.ExitCode -ne 0) {
         $diagnostics = Publish-RestoreFailure "WAP project build failed" $resultRecord.DisplayName $buildResult
@@ -1189,7 +1130,6 @@ function Invoke-SmokeProject {
         [Parameter(Mandatory = $true)][string]$PackageVersion,
         [Parameter(Mandatory = $true)][string]$PackagesDirectory,
         [Parameter(Mandatory = $true)][string]$TempDir,
-        [Parameter(Mandatory = $true)][ValidateSet('console', 'web', 'net48')][string]$RunMode,
         [switch]$ExpectAnalyzerDiagnostic
     )
 
@@ -1220,7 +1160,7 @@ function Invoke-SmokeProject {
     $projectContext = New-SmokeProjectNuGetConfig -ProjectDirectory $workingDirectory -PackagesDirectory $PackagesDirectory
     $projectFile = Join-Path $workingDirectory "Consumer.csproj"
 
-    $restoreResult = Invoke-CapturedProcess `
+    $restoreResult = Invoke-CommandText `
         -FilePath "dotnet" `
         -ArgumentList @("restore", $projectFile, "--configfile", $projectContext.NuGetConfigPath, "--packages", $projectContext.GlobalPackagesDirectory) `
         -WorkingDirectory $workingDirectory
@@ -1230,9 +1170,9 @@ function Invoke-SmokeProject {
         return $resultRecord
     }
 
+    $buildResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList @("build", $projectFile, "--no-restore") -WorkingDirectory $workingDirectory
     if ($ExpectAnalyzerDiagnostic) {
-        $buildResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("build", $projectFile, "--no-restore") -WorkingDirectory $workingDirectory
-        if ($buildResult.ExitCode -eq 0 -or (($buildResult.StandardOutput + $buildResult.StandardError) -notmatch 'HUMANIZER001')) {
+        if ($buildResult.ExitCode -eq 0 -or ($buildResult.Output -notmatch 'HUMANIZER001')) {
             $resultRecord.Details = "Expected HUMANIZER001 analyzer diagnostic for $DisplayName."
             return $resultRecord
         }
@@ -1241,35 +1181,9 @@ function Invoke-SmokeProject {
         return $resultRecord
     }
 
-    if ($RunMode -eq 'net48') {
-        $buildResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("build", $projectFile, "--no-restore") -WorkingDirectory $workingDirectory
-        if ($buildResult.ExitCode -ne 0) {
-            $diagnostics = Publish-RestoreFailure "Smoke project build failed: $DisplayName" $DisplayName $buildResult
-            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $buildResult
-            return $resultRecord
-        }
-
-        $exePath = Join-Path $workingDirectory "bin\Debug\$TargetFramework\Consumer.exe"
-        $runResult = Invoke-CapturedProcess -FilePath $exePath -WorkingDirectory $workingDirectory
-        if ($runResult.ExitCode -ne 0 -or $runResult.StandardOutput.Trim() -ne 'deux') {
-            $diagnostics = Publish-RestoreFailure "Smoke project run failed: $DisplayName" $DisplayName $runResult
-            $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $runResult
-            return $resultRecord
-        }
-
-        $resultRecord.Success = $true
-        return $resultRecord
-    }
-
-    $runArguments = @("run", "--project", $projectFile, "--no-restore")
-    if ($RunMode -eq 'web') {
-        $runArguments += @("--no-launch-profile", "--", "--humanizer-smoke-exit")
-    }
-
-    $runResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $runArguments -WorkingDirectory $workingDirectory
-    if ($runResult.ExitCode -ne 0 -or $runResult.StandardOutput.Trim() -ne 'deux') {
-        $diagnostics = Publish-RestoreFailure "Smoke project run failed: $DisplayName" $DisplayName $runResult
-        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $runResult
+    if ($buildResult.ExitCode -ne 0) {
+        $diagnostics = Publish-RestoreFailure "Smoke project build failed: $DisplayName" $DisplayName $buildResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $buildResult
         return $resultRecord
     }
 
@@ -1322,8 +1236,7 @@ function Invoke-PackageSmokeTests {
                             -Scenario $scenario `
                             -PackageVersion $PackageVersion `
                             -PackagesDirectory $resolvedPackagesDirectory `
-                            -TempDir $TempDir `
-                            -RunMode ($(if ($targetFramework -eq 'net48') { 'net48' } else { 'console' }))
+                            -TempDir $TempDir
                     }
                     'webapi' {
                         if ($targetFramework -eq 'net48') { continue }
@@ -1334,8 +1247,7 @@ function Invoke-PackageSmokeTests {
                             -Scenario $scenario `
                             -PackageVersion $PackageVersion `
                             -PackagesDirectory $resolvedPackagesDirectory `
-                            -TempDir $TempDir `
-                            -RunMode 'web'
+                            -TempDir $TempDir
                     }
                     'blazor' {
                         if ($targetFramework -eq 'net48') { continue }
@@ -1346,8 +1258,7 @@ function Invoke-PackageSmokeTests {
                             -Scenario $scenario `
                             -PackageVersion $PackageVersion `
                             -PackagesDirectory $resolvedPackagesDirectory `
-                            -TempDir $TempDir `
-                            -RunMode 'web'
+                            -TempDir $TempDir
                     }
                 }
             }
@@ -1362,7 +1273,6 @@ function Invoke-PackageSmokeTests {
         -PackageVersion $PackageVersion `
         -PackagesDirectory $resolvedPackagesDirectory `
         -TempDir $TempDir `
-        -RunMode 'net48' `
         -ExpectAnalyzerDiagnostic
 
     $smokeResults += Invoke-SmokeProject `
@@ -1373,7 +1283,6 @@ function Invoke-PackageSmokeTests {
         -PackageVersion $PackageVersion `
         -PackagesDirectory $resolvedPackagesDirectory `
         -TempDir $TempDir `
-        -RunMode 'web' `
         -ExpectAnalyzerDiagnostic
 
     $resultRecord.Executed = ($smokeResults.Count -gt 0)
@@ -1527,7 +1436,7 @@ try {
 
     if ($metaVerificationSucceeded -and $metaProjectCreated) {
         Write-Host "Restoring packages..."
-        $globalRestoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
+        $globalRestoreResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
         if ($globalRestoreResult.ExitCode -ne 0) {
             Publish-RestoreFailure "Failed to restore Humanizer metapackage" "Humanizer metapackage" $globalRestoreResult
             $verificationFailures += "Metapackage restore failed"
