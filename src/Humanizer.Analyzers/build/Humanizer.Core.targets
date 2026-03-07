@@ -4,9 +4,8 @@
     analyzer variants. In that case, force the baseline roslyn3.8 analyzer only.
   -->
   <ItemGroup Condition="'$(SupportsRoslynComponentVersioning)' != 'true'">
-    <Analyzer Remove="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll" />
-    <Analyzer Remove="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn4.8\cs\Humanizer.Analyzers.dll" />
-    <Analyzer Remove="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn4.14\cs\Humanizer.Analyzers.dll" />
+    <HumanizerAnalyzer Include="@(Analyzer)" Condition="'%(Filename)%(Extension)' == 'Humanizer.Analyzers.dll'" />
+    <Analyzer Remove="@(HumanizerAnalyzer)" />
     <Analyzer Include="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll"
               Condition="Exists('$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll')" />
   </ItemGroup>
