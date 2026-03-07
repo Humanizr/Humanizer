@@ -94,6 +94,7 @@ dotnet build
 ### Testing
 
 ```bash
+# from the repository root
 cd tests/Humanizer.Analyzers.Tests
 dotnet test
 ```

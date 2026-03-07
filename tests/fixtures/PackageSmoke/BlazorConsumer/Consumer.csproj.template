@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>__TARGET_FRAMEWORK__</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 __PACKAGE_REFERENCES__
