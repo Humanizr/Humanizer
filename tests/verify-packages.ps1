@@ -33,7 +33,7 @@
 .NOTES
     - The script requires .NET SDK 8, 9, 10, and/or 11 to be installed
     - SDKs that are not installed will be skipped with a warning
-    - Package smoke tests default to net8.0, net9.0, net10.0, net11.0, and net48 across console, Web API, and Blazor hosts
+    - Package smoke tests cover net8.0, net9.0, net10.0, net11.0, and net48 across console, Web API, and Blazor hosts
     - WAP project smoke testing is Windows-only and opt-in via -IncludeWapProjSmokeTest
 #>
 
@@ -45,10 +45,6 @@ param(
     [string]$PackagesDirectory,
 
     [string]$MinimumPassingSdkVersion = "9.0.200",
-
-    [string]$SmokeTestTargetFrameworks = "net8.0;net9.0;net10.0;net11.0;net48",
-
-    [string]$SmokeTestScenarios = "meta;core-lang",
 
     [switch]$IncludeWapProjSmokeTest
 )
@@ -948,80 +944,6 @@ function Get-FailureDetailText {
     return $null
 }
 
-function Get-SmokeTestTargetFrameworkList {
-    param(
-        [string]$ConfiguredTargetFrameworks,
-        [bool]$RunningOnWindows
-    )
-
-    if ([string]::IsNullOrWhiteSpace($ConfiguredTargetFrameworks)) {
-        return @()
-    }
-
-    $targetFrameworks = $ConfiguredTargetFrameworks.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries -bor [System.StringSplitOptions]::TrimEntries) |
-        Select-Object -Unique
-
-    if (-not $RunningOnWindows) {
-        $targetFrameworks = $targetFrameworks | Where-Object { $_ -ne 'net48' }
-    }
-
-    return @($targetFrameworks)
-}
-
-function Get-SmokeTestScenarioList {
-    param([string]$ConfiguredScenarios)
-
-    if ([string]::IsNullOrWhiteSpace($ConfiguredScenarios)) {
-        return @()
-    }
-
-    return @(
-        $ConfiguredScenarios.Split(';', [System.StringSplitOptions]::RemoveEmptyEntries -bor [System.StringSplitOptions]::TrimEntries) |
-            Select-Object -Unique
-    )
-}
-
-function Get-SmokeTestHostList {
-    param(
-        [bool]$RunningOnWindows,
-        [bool]$IncludeWapProjSmokeTest
-    )
-
-    $hosts = @('console', 'webapi', 'blazor')
-
-    if ($RunningOnWindows -and $IncludeWapProjSmokeTest) {
-        $hosts += 'wapproj'
-    }
-
-    return @($hosts | Select-Object -Unique)
-}
-
-function New-PngAsset {
-    param(
-        [Parameter(Mandatory = $true)][string]$Path,
-        [Parameter(Mandatory = $true)][int]$Width,
-        [Parameter(Mandatory = $true)][int]$Height
-    )
-
-    if (-not ("System.Drawing.Bitmap" -as [type])) {
-        Add-Type -AssemblyName System.Drawing
-    }
-
-    $bitmap = New-Object System.Drawing.Bitmap($Width, $Height)
-    try {
-        $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
-        try {
-            $graphics.Clear([System.Drawing.Color]::White)
-        } finally {
-            $graphics.Dispose()
-        }
-
-        $bitmap.Save($Path, [System.Drawing.Imaging.ImageFormat]::Png)
-    } finally {
-        $bitmap.Dispose()
-    }
-}
-
 function Invoke-WapProjSmokeTest {
     param(
         [Parameter(Mandatory = $true)][string]$PackageVersion,
@@ -1049,14 +971,7 @@ function Invoke-WapProjSmokeTest {
     $imagesDirectory = Join-Path $packageDirectory "Images"
     $localPackagesDirectory = Join-Path $smokeRoot ".nuget\packages"
     New-Item -ItemType Directory -Path $entryPointDirectory, $packageDirectory, $imagesDirectory, $localPackagesDirectory -Force | Out-Null
-
-    New-PngAsset -Path (Join-Path $imagesDirectory "SplashScreen.scale-200.png") -Width 1240 -Height 600
-    New-PngAsset -Path (Join-Path $imagesDirectory "LockScreenLogo.scale-200.png") -Width 48 -Height 48
-    New-PngAsset -Path (Join-Path $imagesDirectory "Square150x150Logo.scale-200.png") -Width 300 -Height 300
-    New-PngAsset -Path (Join-Path $imagesDirectory "Square44x44Logo.scale-200.png") -Width 88 -Height 88
-    New-PngAsset -Path (Join-Path $imagesDirectory "Square44x44Logo.targetsize-24_altform-unplated.png") -Width 24 -Height 24
-    New-PngAsset -Path (Join-Path $imagesDirectory "StoreLogo.png") -Width 50 -Height 50
-    New-PngAsset -Path (Join-Path $imagesDirectory "Wide310x150Logo.scale-200.png") -Width 620 -Height 300
+    Copy-Item -Path (Join-Path $fixtureRoot "Package\Images\*") -Destination $imagesDirectory -Force
 
     $entryPointProjectFile = Join-Path $entryPointDirectory "EntryPointApp.csproj"
     $entryPointProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "EntryPointApp\EntryPointApp.csproj.template")).
@@ -1509,10 +1424,16 @@ try {
     }
 
     $restoreTargets = Get-RestoreTargets -RunningOnWindows $runningOnWindows -MinimumPassingSdkVersion $MinimumPassingSdkVersion
-    $smokeTestTargetFrameworkList = Get-SmokeTestTargetFrameworkList -ConfiguredTargetFrameworks $SmokeTestTargetFrameworks -RunningOnWindows $runningOnWindows
-    $smokeTestHostList = Get-SmokeTestHostList -RunningOnWindows $runningOnWindows -IncludeWapProjSmokeTest:$IncludeWapProjSmokeTest
+    $smokeTestTargetFrameworkList = @('net8.0', 'net9.0', 'net10.0', 'net11.0')
+    if ($runningOnWindows) {
+        $smokeTestTargetFrameworkList += 'net48'
+    }
+    $smokeTestHostList = @('console', 'webapi', 'blazor')
+    if ($runningOnWindows -and $IncludeWapProjSmokeTest) {
+        $smokeTestHostList += 'wapproj'
+    }
     $packageSmokeHostList = @($smokeTestHostList | Where-Object { $_ -ne 'wapproj' })
-    $smokeTestScenarioList = Get-SmokeTestScenarioList -ConfiguredScenarios $SmokeTestScenarios
+    $smokeTestScenarioList = @('meta', 'core-lang')
 
     foreach ($target in $restoreTargets) {
         Write-AzureDevOpsSection "Testing package restoration with $($target.DisplayName)"
