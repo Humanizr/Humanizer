@@ -1059,7 +1059,7 @@ function Invoke-WapProjSmokeTest {
     New-PngAsset -Path (Join-Path $imagesDirectory "Wide310x150Logo.scale-200.png") -Width 620 -Height 300
 
     $entryPointProjectFile = Join-Path $entryPointDirectory "EntryPointApp.csproj"
-    $entryPointProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "EntryPointApp\EntryPointApp.csproj")).
+    $entryPointProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "EntryPointApp\EntryPointApp.csproj.template")).
         Replace("__PACKAGE_VERSION__", $PackageVersion).
         Replace("__PACKAGES_PATH__", $localPackagesDirectory)
     Set-Content -Path $entryPointProjectFile -Value $entryPointProjectContent -Encoding UTF8
@@ -1069,7 +1069,7 @@ function Invoke-WapProjSmokeTest {
     Set-Content -Path $entryPointProgramFile -Value $entryPointProgramContent -Encoding UTF8
 
     $wapProjectFile = Join-Path $packageDirectory "Package.wapproj"
-    $wapProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "Package\Package.wapproj")).
+    $wapProjectContent = (Get-Content -Raw (Join-Path $fixtureRoot "Package\Package.wapproj.template")).
         Replace("__PACKAGES_PATH__", $localPackagesDirectory)
     Set-Content -Path $wapProjectFile -Value $wapProjectContent -Encoding UTF8
 
