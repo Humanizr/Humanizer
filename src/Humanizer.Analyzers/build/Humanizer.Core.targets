@@ -5,12 +5,11 @@
   -->
   <Target Name="SelectHumanizerAnalyzerFallback"
           BeforeTargets="CoreCompile"
-          Condition="'$(SupportsRoslynComponentVersioning)' != 'true'">
+          Condition="'$(SupportsRoslynComponentVersioning)' != 'true' and Exists('$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll')">
     <ItemGroup>
-      <HumanizerAnalyzer Include="@(Analyzer)" Condition="'%(Filename)%(Extension)' == 'Humanizer.Analyzers.dll'" />
+      <HumanizerAnalyzer Include="@(Analyzer)" Condition="'%(Analyzer.Filename)%(Analyzer.Extension)' == 'Humanizer.Analyzers.dll'" />
       <Analyzer Remove="@(HumanizerAnalyzer)" />
-      <Analyzer Include="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll"
-                Condition="Exists('$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll')" />
+      <Analyzer Include="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll" />
     </ItemGroup>
   </Target>
 </Project>
