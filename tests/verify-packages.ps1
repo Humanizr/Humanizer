@@ -7,10 +7,11 @@
     across multiple .NET SDK versions. It performs the following checks:
     
     1. Verifies all expected packages exist (main metapackage, core package, and satellite packages)
-    2. Tests package restoration and build on multiple .NET SDK versions (8, 9, and 10)
+    2. Tests package restoration and build on multiple .NET SDK versions (8, 9, 10, and 11)
        - Creates isolated test environments with global.json for each SDK version
        - Validates that packages can be restored and built successfully
     3. Verifies that the main Humanizer metapackage includes all satellite packages as dependencies
+    4. Runs package smoke tests for metapackage and core-plus-language consumer scenarios
     
     The script is designed to run in CI/CD pipelines (Azure DevOps) and provides detailed
     logging with Azure DevOps-specific formatting.
@@ -27,12 +28,13 @@
     success when they fail and failure when they succeed). The default value is 9.0.200.
 
 .EXAMPLE
-    .\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
+    .\tests\verify-packages.ps1 -PackageVersion "3.0.0" -PackagesDirectory ".\artifacts\packages"
 
 .NOTES
-    - The script requires .NET SDK 8, 9, and/or 10 to be installed
+    - The script requires .NET SDK 8, 9, 10, and/or 11 to be installed
     - SDKs that are not installed will be skipped with a warning
-    - MSBuild on .NET Framework testing could be added for Windows environments
+    - Package smoke tests cover net8.0, net9.0, net10.0, net11.0, and net48 across console, Web API, and Blazor hosts
+    - WAP project smoke testing is Windows-only and opt-in via -IncludeWapProjSmokeTest
 #>
 
 param(
@@ -42,7 +44,9 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$PackagesDirectory,
 
-    [string]$MinimumPassingSdkVersion = "9.0.200"
+    [string]$MinimumPassingSdkVersion = "9.0.200",
+
+    [switch]$IncludeWapProjSmokeTest
 )
 
 $ErrorActionPreference = "Stop"
@@ -83,72 +87,28 @@ function Write-AzureDevOpsWarning {
     }
 }
 
-function Invoke-CapturedProcess {
+function Invoke-CommandText {
     param(
         [Parameter(Mandatory = $true)][string]$FilePath,
         [string[]]$ArgumentList = @(),
         [string]$WorkingDirectory
     )
 
-    $startInfo = New-Object System.Diagnostics.ProcessStartInfo
-    $startInfo.FileName = $FilePath
-    $startInfo.UseShellExecute = $false
-    $startInfo.RedirectStandardOutput = $true
-    $startInfo.RedirectStandardError = $true
-    $startInfo.CreateNoWindow = $true
-    if ($PSVersionTable.PSVersion.Major -ge 7 -and $null -ne $startInfo) {
-        if ($startInfo.PSObject.Properties.Match('StandardOutputEncoding').Count -gt 0) {
-            $startInfo.StandardOutputEncoding = [System.Text.Encoding]::UTF8
+    $currentLocation = Get-Location
+    try {
+        if ($WorkingDirectory) {
+            Set-Location $WorkingDirectory
         }
-        if ($startInfo.PSObject.Properties.Match('StandardErrorEncoding').Count -gt 0) {
-            $startInfo.StandardErrorEncoding = [System.Text.Encoding]::UTF8
+
+        $output = & $FilePath @ArgumentList 2>&1 | ForEach-Object { $_.ToString() }
+        return [PSCustomObject]@{
+            ExitCode = $LASTEXITCODE
+            Output   = ($output -join "`n")
         }
-    }
-
-    if ($ArgumentList) {
-        if ($startInfo.PSObject.Properties.Match('ArgumentList').Count -gt 0) {
-            foreach ($argument in $ArgumentList) {
-                [void]$startInfo.ArgumentList.Add($argument)
-            }
-        } else {
-            $escapedArguments = $ArgumentList | ForEach-Object {
-                if ($_ -match '\s' -or $_ -match '"') {
-                    '"' + ($_ -replace '"', '\"') + '"'
-                } else {
-                    $_
-                }
-            }
-            $startInfo.Arguments = [string]::Join(' ', $escapedArguments)
+    } finally {
+        if ($WorkingDirectory) {
+            Set-Location $currentLocation
         }
-    }
-
-    if ($WorkingDirectory) {
-        $startInfo.WorkingDirectory = $WorkingDirectory
-    }
-
-    $process = New-Object System.Diagnostics.Process
-    $process.StartInfo = $startInfo
-
-    $null = $process.Start()
-
-    $standardOutput = $process.StandardOutput.ReadToEnd()
-    $standardError = $process.StandardError.ReadToEnd()
-
-    $process.WaitForExit()
-
-    $exitCode = $process.ExitCode
-
-    $process.Dispose()
-
-    $combinedParts = @()
-    if ($standardOutput) { $combinedParts += $standardOutput }
-    if ($standardError) { $combinedParts += $standardError }
-
-    return [PSCustomObject]@{
-        ExitCode        = $exitCode
-        StandardOutput  = $standardOutput
-        StandardError   = $standardError
-        CombinedOutput  = ($combinedParts -join "`n")
     }
 }
 
@@ -201,13 +161,9 @@ function Write-FilteredProcessOutput {
         return
     }
 
-    $allText = @()
-    if ($ProcessResult.StandardOutput) { $allText += $ProcessResult.StandardOutput }
-    if ($ProcessResult.StandardError) { $allText += $ProcessResult.StandardError }
+    if ([string]::IsNullOrWhiteSpace($ProcessResult.Output)) { return }
 
-    if ($allText.Count -eq 0) { return }
-
-    $combined = $allText -join "`n"
+    $combined = $ProcessResult.Output
     $lines = $combined -split "(`r`n|`r|`n)"
     foreach ($line in $lines) {
         if ([string]::IsNullOrWhiteSpace($line)) { continue }
@@ -454,9 +410,9 @@ function Get-RestoreTargets {
 
     $minimumPassingVersionObject = ConvertTo-VersionObject $MinimumPassingSdkVersion
 
-    $listSdksResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("--list-sdks")
+    $listSdksResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList @("--list-sdks")
     if ($listSdksResult.ExitCode -ne 0) {
-        Write-AzureDevOpsErrorDetail "Failed to enumerate installed SDKs" $listSdksResult.CombinedOutput
+        Write-AzureDevOpsErrorDetail "Failed to enumerate installed SDKs" $listSdksResult.Output
         Write-FilteredProcessOutput -ProcessResult $listSdksResult
         throw "Unable to determine installed SDKs"
     }
@@ -464,8 +420,8 @@ function Get-RestoreTargets {
     Write-FilteredProcessOutput -ProcessResult $listSdksResult
 
     $installedSdkLines = @()
-    if ($listSdksResult.StandardOutput) {
-        $installedSdkLines = ($listSdksResult.StandardOutput -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    if ($listSdksResult.Output) {
+        $installedSdkLines = ($listSdksResult.Output -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
     }
 
     $sdksByMajor = @{}
@@ -484,8 +440,10 @@ function Get-RestoreTargets {
         @{ Version = "8.0.100"; RollForward = "latestFeature"; Name = "SDK 8"; MajorVersion = 8; TargetFramework = "net8.0" },
         @{ Version = "9.0.100"; RollForward = "latestFeature"; Name = "SDK 9"; MajorVersion = 9; TargetFramework = "net9.0" },
         @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net10.0" },
-        # Validate net8 consumers on the latest SDK to avoid relying on downlevel SDK restore behavior.
-        @{ Version = "10.0.100"; RollForward = "latestFeature"; Name = "SDK 10"; MajorVersion = 10; TargetFramework = "net8.0" }
+        @{ Version = "11.0.100"; RollForward = "latestFeature"; Name = "SDK 11"; MajorVersion = 11; TargetFramework = "net11.0" },
+        # Validate downlevel consumers on the latest installed SDK to avoid relying on older restore behavior.
+        @{ Version = "11.0.100"; RollForward = "latestFeature"; Name = "SDK 11"; MajorVersion = 11; TargetFramework = "net8.0" },
+        @{ Version = "11.0.100"; RollForward = "latestFeature"; Name = "SDK 11"; MajorVersion = 11; TargetFramework = "net10.0" }
     )
 
     foreach ($sdkConfig in $sdkVersionsToTest) {
@@ -516,7 +474,7 @@ function Get-RestoreTargets {
                 DisplayName         = $displayName
                 Version             = $normalizedVersion
                 TargetFramework     = $sdkConfig.TargetFramework
-                GlobalJsonVersion   = $sdkConfig.Version
+                GlobalJsonVersion   = $selectedVersion
                 RollForward         = $sdkConfig.RollForward
                 FailureExpected     = $failureExpected
                 ExpectationReason   = $expectationReason
@@ -622,7 +580,7 @@ function Invoke-DotnetRestoreTarget {
 
         Write-Host "Restoring packages..."
         $restoreArguments = @("restore", "--configfile", $NuGetConfig, "--verbosity", "minimal")
-        $restoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $restoreArguments -WorkingDirectory (Get-Location).Path
+        $restoreResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList $restoreArguments -WorkingDirectory (Get-Location).Path
 
         $restoreSucceeded = ($restoreResult.ExitCode -eq 0)
         if (-not $restoreSucceeded) {
@@ -666,7 +624,7 @@ function Invoke-DotnetRestoreTarget {
         
         Write-Host "Building project..."
         $buildArguments = @("build", "--no-restore", "--verbosity", "minimal")
-        $buildResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList $buildArguments -WorkingDirectory (Get-Location).Path
+        $buildResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList $buildArguments -WorkingDirectory (Get-Location).Path
         $buildSucceeded = ($buildResult.ExitCode -eq 0)
         if (-not $buildSucceeded) {
             $context = "Build failed for $($Target.DisplayName) during dotnet build"
@@ -722,7 +680,7 @@ function Invoke-MSBuildRestoreTarget {
 
         $projectFile = New-RestoreProjectFile -Directory (Get-Location).Path -ProjectName "MetaTest" -TargetFramework "net48" -PackageVersion $PackageVersion
 
-        $msbuildRestoreResult = Invoke-CapturedProcess -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$NuGetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
+        $msbuildRestoreResult = Invoke-CommandText -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Restore", "/p:RestoreConfigFile=$NuGetConfig", "/nologo") -WorkingDirectory (Get-Location).Path
 
         $restoreSucceeded = ($msbuildRestoreResult.ExitCode -eq 0)
         if (-not $restoreSucceeded) {
@@ -765,7 +723,7 @@ function Invoke-MSBuildRestoreTarget {
         }
         
         Write-Host "Building project..."
-        $msbuildBuildResult = Invoke-CapturedProcess -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Build", "/p:Restore=false", "/nologo") -WorkingDirectory (Get-Location).Path
+        $msbuildBuildResult = Invoke-CommandText -FilePath $Target.Path -ArgumentList @($projectFile, "/t:Build", "/p:Restore=false", "/nologo") -WorkingDirectory (Get-Location).Path
         $buildSucceeded = ($msbuildBuildResult.ExitCode -eq 0)
         if (-not $buildSucceeded) {
             $context = "Build failed for $($Target.DisplayName) during MSBuild build"
@@ -852,15 +810,12 @@ function Publish-RestoreFailure {
         Write-FilteredProcessOutput -ProcessResult $ProcessResult
     }
 
-    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
+    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.Output
 
     Write-RestoreDiagnosticLines -DisplayName $DisplayName -Diagnostics $diagnostics -ErrorSeverity $ErrorSeverity
 
     if (($diagnostics.Errors.Count -eq 0) -and ($diagnostics.Warnings.Count -eq 0)) {
-        $fallbackMessage = $ProcessResult.StandardError
-        if ([string]::IsNullOrWhiteSpace($fallbackMessage)) {
-            $fallbackMessage = $ProcessResult.StandardOutput
-        }
+        $fallbackMessage = $ProcessResult.Output
 
         if (-not [string]::IsNullOrWhiteSpace($fallbackMessage)) {
             $fallbackLines = ($fallbackMessage -split "(`r`n|`r|`n)") | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
@@ -898,7 +853,7 @@ function Publish-RestoreSuccess {
         return $null
     }
 
-    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.CombinedOutput
+    $diagnostics = Get-RestoreDiagnostics -Output $ProcessResult.Output
 
     Write-RestoreDiagnosticLines -DisplayName $DisplayName -Diagnostics $diagnostics
 
@@ -922,20 +877,423 @@ function Get-FailureDetailText {
     }
 
     if ($ProcessResult) {
-        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.StandardError)) {
-            return $ProcessResult.StandardError.Trim()
-        }
-
-        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.StandardOutput)) {
-            return $ProcessResult.StandardOutput.Trim()
-        }
-
-        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.CombinedOutput)) {
-            return $ProcessResult.CombinedOutput.Trim()
+        if (-not [string]::IsNullOrWhiteSpace($ProcessResult.Output)) {
+            return $ProcessResult.Output.Trim()
         }
     }
 
     return $null
+}
+
+function Invoke-WapProjSmokeTest {
+    param(
+        [Parameter(Mandatory = $true)][string]$PackageVersion,
+        [Parameter(Mandatory = $true)][string]$PackagesDirectory,
+        [Parameter(Mandatory = $true)][string]$MsbuildPath,
+        [Parameter(Mandatory = $true)][string]$TempDir
+    )
+
+    $resultRecord = [PSCustomObject]@{
+        DisplayName = "WAP project smoke test"
+        Success = $false
+        Executed = $false
+        Details = $null
+    }
+
+    $fixtureRoot = Join-Path $PSScriptRoot "fixtures\WapProjSmoke"
+    if (-not (Test-Path $fixtureRoot)) {
+        $resultRecord.Details = "WAP project fixture directory not found: $fixtureRoot"
+        return $resultRecord
+    }
+
+    $smokeRoot = Join-Path $TempDir "WapProjSmoke"
+    if (Test-Path $smokeRoot) {
+        Remove-Item -Path $smokeRoot -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    $localPackagesDirectory = Join-Path $smokeRoot ".nuget\packages"
+    New-Item -ItemType Directory -Path $smokeRoot -Force | Out-Null
+    Copy-Item -Path (Join-Path $fixtureRoot "EntryPointApp") -Destination (Join-Path $smokeRoot "EntryPointApp") -Recurse -Force
+    Copy-Item -Path (Join-Path $fixtureRoot "Package") -Destination (Join-Path $smokeRoot "Package") -Recurse -Force
+    New-Item -ItemType Directory -Path $localPackagesDirectory -Force | Out-Null
+
+    $entryPointDirectory = Join-Path $smokeRoot "EntryPointApp"
+    $packageDirectory = Join-Path $smokeRoot "Package"
+    $entryPointProjectFile = Join-Path $entryPointDirectory "EntryPointApp.csproj"
+    Expand-TemplateFile `
+        -TemplatePath (Join-Path $entryPointDirectory "EntryPointApp.csproj.template") `
+        -DestinationPath $entryPointProjectFile `
+        -Tokens @{
+            "__PACKAGE_VERSION__" = $PackageVersion
+            "__PACKAGES_PATH__" = $localPackagesDirectory
+        }
+    Remove-Item -Path (Join-Path $entryPointDirectory "EntryPointApp.csproj.template") -Force -ErrorAction SilentlyContinue
+
+    $wapProjectFile = Join-Path $packageDirectory "Package.wapproj"
+    Expand-TemplateFile `
+        -TemplatePath (Join-Path $packageDirectory "Package.wapproj.template") `
+        -DestinationPath $wapProjectFile `
+        -Tokens @{
+            "__PACKAGES_PATH__" = $localPackagesDirectory
+        }
+    Remove-Item -Path (Join-Path $packageDirectory "Package.wapproj.template") -Force -ErrorAction SilentlyContinue
+
+    $nuGetConfigFile = Join-Path $smokeRoot "NuGet.config"
+    $nuGetConfigContent = @'
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <config>
+    <add key="globalPackagesFolder" value="__PACKAGES_PATH__" />
+  </config>
+  <packageSources>
+    <clear />
+    <add key="LocalPackages" value="__PACKAGES_DIRECTORY__" />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+  </packageSources>
+</configuration>
+'@.Replace("__PACKAGES_DIRECTORY__", (Resolve-Path $PackagesDirectory).Path).Replace("__PACKAGES_PATH__", $localPackagesDirectory)
+    Set-Content -Path $nuGetConfigFile -Value $nuGetConfigContent -Encoding UTF8
+
+    $restoreArguments = @(
+        $wapProjectFile,
+        "/t:Restore",
+        "/p:RestoreConfigFile=$nuGetConfigFile",
+        "/p:Platform=x64",
+        "/p:Configuration=Release",
+        "/p:RuntimeIdentifier=win-x64",
+        "/p:SelfContained=true",
+        "/p:RestorePackagesPath=$localPackagesDirectory",
+        "/nologo"
+    )
+    $restoreResult = Invoke-CommandText -FilePath $MsbuildPath -ArgumentList $restoreArguments -WorkingDirectory $packageDirectory
+    if ($restoreResult.ExitCode -ne 0) {
+        $diagnostics = Publish-RestoreFailure "WAP project restore failed" $resultRecord.DisplayName $restoreResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $restoreResult
+        return $resultRecord
+    }
+
+    $buildArguments = @(
+        $wapProjectFile,
+        "/t:Build",
+        "/p:Restore=false",
+        "/p:RestoreConfigFile=$nuGetConfigFile",
+        "/p:Platform=x64",
+        "/p:Configuration=Release",
+        "/p:RuntimeIdentifier=win-x64",
+        "/p:SelfContained=true",
+        "/p:RestorePackagesPath=$localPackagesDirectory",
+        "/nologo"
+    )
+    $buildResult = Invoke-CommandText -FilePath $MsbuildPath -ArgumentList $buildArguments -WorkingDirectory $packageDirectory
+    $resultRecord.Executed = $true
+    if ($buildResult.ExitCode -ne 0) {
+        $diagnostics = Publish-RestoreFailure "WAP project build failed" $resultRecord.DisplayName $buildResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $buildResult
+        return $resultRecord
+    }
+
+    Publish-RestoreSuccess "WAP project build succeeded" $resultRecord.DisplayName $buildResult | Out-Null
+    $resultRecord.Success = $true
+    return $resultRecord
+}
+
+function Get-PackageReferencesXml {
+    param(
+        [Parameter(Mandatory = $true)][string]$Scenario,
+        [Parameter(Mandatory = $true)][string]$PackageVersion
+    )
+
+    switch ($Scenario.ToLowerInvariant()) {
+        'meta' {
+            return @"
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="$PackageVersion" />
+  </ItemGroup>
+"@
+        }
+        'core-lang' {
+            return @"
+  <ItemGroup>
+    <PackageReference Include="Humanizer.Core" Version="$PackageVersion" />
+    <PackageReference Include="Humanizer.Core.fr" Version="$PackageVersion" />
+  </ItemGroup>
+"@
+        }
+        default {
+            throw "Unsupported package smoke scenario '$Scenario'"
+        }
+    }
+}
+
+function Expand-TemplateDirectory {
+    param(
+        [Parameter(Mandatory = $true)][string]$TemplateDirectory,
+        [Parameter(Mandatory = $true)][string]$DestinationDirectory,
+        [Parameter(Mandatory = $true)][hashtable]$Tokens
+    )
+
+    New-Item -ItemType Directory -Path $DestinationDirectory -Force | Out-Null
+
+    foreach ($item in Get-ChildItem -Path $TemplateDirectory -Recurse -Force) {
+        $relativePath = $item.FullName.Substring($TemplateDirectory.Length).TrimStart('\', '/')
+        if ([string]::IsNullOrWhiteSpace($relativePath)) {
+            continue
+        }
+
+        if ($item.PSIsContainer) {
+            New-Item -ItemType Directory -Path (Join-Path $DestinationDirectory $relativePath) -Force | Out-Null
+            continue
+        }
+
+        $targetRelativePath = if ($relativePath.EndsWith('.template')) {
+            $relativePath.Substring(0, $relativePath.Length - '.template'.Length)
+        } else {
+            $relativePath
+        }
+
+        $destinationPath = Join-Path $DestinationDirectory $targetRelativePath
+        $destinationParent = Split-Path -Parent $destinationPath
+        if (-not [string]::IsNullOrWhiteSpace($destinationParent)) {
+            New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
+        }
+
+        if (-not $relativePath.EndsWith('.template')) {
+            Copy-Item -Path $item.FullName -Destination $destinationPath -Force
+            continue
+        }
+
+        $content = Get-Content -Raw $item.FullName
+        foreach ($token in $Tokens.GetEnumerator()) {
+            $content = $content.Replace($token.Key, [string]$token.Value)
+        }
+        Set-Content -Path $destinationPath -Value $content -Encoding UTF8
+    }
+}
+
+function New-SmokeProjectNuGetConfig {
+    param(
+        [Parameter(Mandatory = $true)][string]$ProjectDirectory,
+        [Parameter(Mandatory = $true)][string]$PackagesDirectory
+    )
+
+    $globalPackagesDirectory = Join-Path $ProjectDirectory ".nuget\packages"
+    New-Item -ItemType Directory -Path $globalPackagesDirectory -Force | Out-Null
+
+    $nuGetConfigPath = Join-Path $ProjectDirectory "NuGet.config"
+    $nuGetConfigContent = @"
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <config>
+    <add key="globalPackagesFolder" value="$globalPackagesDirectory" />
+  </config>
+  <packageSources>
+    <clear />
+    <add key="LocalPackages" value="$PackagesDirectory" />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+  </packageSources>
+</configuration>
+"@
+    Set-Content -Path $nuGetConfigPath -Value $nuGetConfigContent -Encoding UTF8
+
+    return [PSCustomObject]@{
+        GlobalPackagesDirectory = $globalPackagesDirectory
+        NuGetConfigPath = $nuGetConfigPath
+    }
+}
+
+function Expand-TemplateFile {
+    param(
+        [Parameter(Mandatory = $true)][string]$TemplatePath,
+        [Parameter(Mandatory = $true)][string]$DestinationPath,
+        [Parameter(Mandatory = $true)][hashtable]$Tokens
+    )
+
+    $content = Get-Content -Raw $TemplatePath
+    foreach ($token in $Tokens.GetEnumerator()) {
+        $content = $content.Replace($token.Key, [string]$token.Value)
+    }
+
+    $destinationParent = Split-Path -Parent $DestinationPath
+    if (-not [string]::IsNullOrWhiteSpace($destinationParent)) {
+        New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
+    }
+
+    Set-Content -Path $DestinationPath -Value $content -Encoding UTF8
+}
+
+function Invoke-SmokeProject {
+    param(
+        [Parameter(Mandatory = $true)][string]$TemplateDirectory,
+        [Parameter(Mandatory = $true)][string]$DisplayName,
+        [Parameter(Mandatory = $true)][string]$TargetFramework,
+        [Parameter(Mandatory = $true)][string]$Scenario,
+        [Parameter(Mandatory = $true)][string]$PackageVersion,
+        [Parameter(Mandatory = $true)][string]$PackagesDirectory,
+        [Parameter(Mandatory = $true)][string]$TempDir,
+        [switch]$ExpectAnalyzerDiagnostic
+    )
+
+    $resultRecord = [PSCustomObject]@{
+        DisplayName = $DisplayName
+        Success = $false
+        Details = $null
+    }
+
+    $templateName = Split-Path -Leaf $TemplateDirectory
+    $workingDirectory = Join-Path $TempDir ("smoke-{0}-{1}-{2}" -f $templateName, $Scenario, ($TargetFramework -replace '[^A-Za-z0-9]', ''))
+    if (Test-Path $workingDirectory) {
+        Remove-Item -Path $workingDirectory -Recurse -Force -ErrorAction SilentlyContinue
+    }
+
+    Expand-TemplateDirectory `
+        -TemplateDirectory $TemplateDirectory `
+        -DestinationDirectory $workingDirectory `
+        -Tokens @{
+            "__PACKAGE_REFERENCES__" = Get-PackageReferencesXml -Scenario $Scenario -PackageVersion $PackageVersion
+            "__TARGET_FRAMEWORK__" = $TargetFramework
+        }
+
+    if ($ExpectAnalyzerDiagnostic) {
+        Copy-Item -Path (Join-Path $PSScriptRoot "fixtures\PackageSmoke\AnalyzerProbe.cs") -Destination (Join-Path $workingDirectory "AnalyzerProbe.cs") -Force
+    }
+
+    $projectContext = New-SmokeProjectNuGetConfig -ProjectDirectory $workingDirectory -PackagesDirectory $PackagesDirectory
+    $projectFile = Join-Path $workingDirectory "Consumer.csproj"
+
+    $restoreResult = Invoke-CommandText `
+        -FilePath "dotnet" `
+        -ArgumentList @("restore", $projectFile, "--configfile", $projectContext.NuGetConfigPath, "--packages", $projectContext.GlobalPackagesDirectory) `
+        -WorkingDirectory $workingDirectory
+    if ($restoreResult.ExitCode -ne 0) {
+        $diagnostics = Publish-RestoreFailure "Smoke project restore failed: $DisplayName" $DisplayName $restoreResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $restoreResult
+        return $resultRecord
+    }
+
+    $buildResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList @("build", $projectFile, "--no-restore") -WorkingDirectory $workingDirectory
+    if ($ExpectAnalyzerDiagnostic) {
+        if ($buildResult.ExitCode -eq 0 -or ($buildResult.Output -notmatch 'HUMANIZER001')) {
+            $resultRecord.Details = "Expected HUMANIZER001 analyzer diagnostic for $DisplayName."
+            return $resultRecord
+        }
+
+        $resultRecord.Success = $true
+        return $resultRecord
+    }
+
+    if ($buildResult.ExitCode -ne 0) {
+        $diagnostics = Publish-RestoreFailure "Smoke project build failed: $DisplayName" $DisplayName $buildResult
+        $resultRecord.Details = Get-FailureDetailText -Diagnostics $diagnostics -ProcessResult $buildResult
+        return $resultRecord
+    }
+
+    $resultRecord.Success = $true
+    return $resultRecord
+}
+
+function Invoke-PackageSmokeTests {
+    param(
+        [Parameter(Mandatory = $true)][string]$PackageVersion,
+        [Parameter(Mandatory = $true)][string]$PackagesDirectory,
+        [Parameter(Mandatory = $true)][string[]]$TargetFrameworks,
+        [Parameter(Mandatory = $true)][string[]]$Hosts,
+        [Parameter(Mandatory = $true)][string[]]$Scenarios
+    )
+
+    $resultRecord = [PSCustomObject]@{
+        DisplayName = "Package smoke tests"
+        Success = $false
+        Executed = $false
+        Details = $null
+        Hosts = @($Hosts)
+        TargetFrameworks = @($TargetFrameworks)
+        Scenarios = @($Scenarios)
+    }
+
+    if ($TargetFrameworks.Count -eq 0 -or $Hosts.Count -eq 0 -or $Scenarios.Count -eq 0) {
+        $resultRecord.Success = $true
+        $resultRecord.Details = "Package smoke tests skipped (no frameworks, hosts, or scenarios configured)"
+        return $resultRecord
+    }
+
+    $packageSmokeFixtureRoot = Join-Path $PSScriptRoot "fixtures\PackageSmoke"
+    if (-not (Test-Path $packageSmokeFixtureRoot)) {
+        $resultRecord.Details = "Package smoke fixture root not found: $packageSmokeFixtureRoot"
+        return $resultRecord
+    }
+
+    $resolvedPackagesDirectory = (Resolve-Path $PackagesDirectory).Path
+    $smokeResults = @()
+    foreach ($scenario in $Scenarios) {
+        foreach ($targetFramework in $TargetFrameworks) {
+            foreach ($hostName in $Hosts) {
+                switch ($hostName) {
+                    'console' {
+                        $smokeResults += Invoke-SmokeProject `
+                            -TemplateDirectory (Join-Path $packageSmokeFixtureRoot 'ConsoleConsumer') `
+                            -DisplayName "Console $scenario $targetFramework" `
+                            -TargetFramework $targetFramework `
+                            -Scenario $scenario `
+                            -PackageVersion $PackageVersion `
+                            -PackagesDirectory $resolvedPackagesDirectory `
+                            -TempDir $TempDir
+                    }
+                    'webapi' {
+                        if ($targetFramework -eq 'net48') { continue }
+                        $smokeResults += Invoke-SmokeProject `
+                            -TemplateDirectory (Join-Path $packageSmokeFixtureRoot 'WebApiConsumer') `
+                            -DisplayName "Web API $scenario $targetFramework" `
+                            -TargetFramework $targetFramework `
+                            -Scenario $scenario `
+                            -PackageVersion $PackageVersion `
+                            -PackagesDirectory $resolvedPackagesDirectory `
+                            -TempDir $TempDir
+                    }
+                    'blazor' {
+                        if ($targetFramework -eq 'net48') { continue }
+                        $smokeResults += Invoke-SmokeProject `
+                            -TemplateDirectory (Join-Path $packageSmokeFixtureRoot 'BlazorConsumer') `
+                            -DisplayName "Blazor $scenario $targetFramework" `
+                            -TargetFramework $targetFramework `
+                            -Scenario $scenario `
+                            -PackageVersion $PackageVersion `
+                            -PackagesDirectory $resolvedPackagesDirectory `
+                            -TempDir $TempDir
+                    }
+                }
+            }
+        }
+    }
+
+    $smokeResults += Invoke-SmokeProject `
+        -TemplateDirectory (Join-Path $packageSmokeFixtureRoot 'ConsoleConsumer') `
+        -DisplayName 'Console analyzer net48' `
+        -TargetFramework 'net48' `
+        -Scenario 'meta' `
+        -PackageVersion $PackageVersion `
+        -PackagesDirectory $resolvedPackagesDirectory `
+        -TempDir $TempDir `
+        -ExpectAnalyzerDiagnostic
+
+    $smokeResults += Invoke-SmokeProject `
+        -TemplateDirectory (Join-Path $packageSmokeFixtureRoot 'BlazorConsumer') `
+        -DisplayName 'Blazor analyzer net8.0' `
+        -TargetFramework 'net8.0' `
+        -Scenario 'meta' `
+        -PackageVersion $PackageVersion `
+        -PackagesDirectory $resolvedPackagesDirectory `
+        -TempDir $TempDir `
+        -ExpectAnalyzerDiagnostic
+
+    $resultRecord.Executed = ($smokeResults.Count -gt 0)
+    $failedSmokeResult = $smokeResults | Where-Object { -not $_.Success } | Select-Object -First 1
+    if ($null -ne $failedSmokeResult) {
+        $resultRecord.Details = $failedSmokeResult.Details
+        return $resultRecord
+    }
+
+    $resultRecord.Success = $true
+    return $resultRecord
 }
 
 Write-AzureDevOpsSection "Humanizer Package Verification"
@@ -1004,6 +1362,16 @@ try {
     }
 
     $restoreTargets = Get-RestoreTargets -RunningOnWindows $runningOnWindows -MinimumPassingSdkVersion $MinimumPassingSdkVersion
+    $smokeTestTargetFrameworkList = @('net8.0', 'net9.0', 'net10.0', 'net11.0')
+    if ($runningOnWindows) {
+        $smokeTestTargetFrameworkList += 'net48'
+    }
+    $smokeTestHostList = @('console', 'webapi', 'blazor')
+    if ($runningOnWindows -and $IncludeWapProjSmokeTest) {
+        $smokeTestHostList += 'wapproj'
+    }
+    $packageSmokeHostList = @($smokeTestHostList | Where-Object { $_ -ne 'wapproj' })
+    $smokeTestScenarioList = @('meta', 'core-lang')
 
     foreach ($target in $restoreTargets) {
         Write-AzureDevOpsSection "Testing package restoration with $($target.DisplayName)"
@@ -1068,7 +1436,7 @@ try {
 
     if ($metaVerificationSucceeded -and $metaProjectCreated) {
         Write-Host "Restoring packages..."
-        $globalRestoreResult = Invoke-CapturedProcess -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
+        $globalRestoreResult = Invoke-CommandText -FilePath "dotnet" -ArgumentList @("restore", "--configfile", $nugetConfig) -WorkingDirectory (Get-Location).Path
         if ($globalRestoreResult.ExitCode -ne 0) {
             Publish-RestoreFailure "Failed to restore Humanizer metapackage" "Humanizer metapackage" $globalRestoreResult
             $verificationFailures += "Metapackage restore failed"
@@ -1120,6 +1488,45 @@ try {
     Pop-Location
     Write-Host ""
 
+    Write-AzureDevOpsSection "Running package smoke tests"
+    $packageSmokeTestResult = Invoke-PackageSmokeTests `
+        -PackageVersion $PackageVersion `
+        -PackagesDirectory $PackagesDirectory `
+        -TargetFrameworks $smokeTestTargetFrameworkList `
+        -Hosts $packageSmokeHostList `
+        -Scenarios $smokeTestScenarioList
+
+    if (-not $packageSmokeTestResult.Success) {
+        $verificationFailures += "Package smoke tests failed"
+    }
+
+    $wapProjSmokeTestResult = [PSCustomObject]@{
+        DisplayName = "WAP project smoke test"
+        Success = $true
+        Executed = $false
+        Details = $null
+    }
+
+    if ($smokeTestHostList -contains 'wapproj') {
+        $msbuildSmokeTarget = $restoreTargets | Where-Object { $_.Kind -eq 'msbuild' } | Select-Object -First 1
+        if ($null -eq $msbuildSmokeTarget) {
+            $wapProjSmokeTestResult.Success = $false
+            $wapProjSmokeTestResult.Details = "WAP project smoke test requested but no MSBuild installation was found."
+            $verificationFailures += "WAP project smoke tests failed"
+        } else {
+            Write-AzureDevOpsSection "Running WAP project smoke test"
+            $wapProjSmokeTestResult = Invoke-WapProjSmokeTest `
+                -PackageVersion $PackageVersion `
+                -PackagesDirectory $PackagesDirectory `
+                -MsbuildPath $msbuildSmokeTarget.Path `
+                -TempDir $tempDir
+
+            if (-not $wapProjSmokeTestResult.Success) {
+                $verificationFailures += "WAP project smoke tests failed"
+            }
+        }
+    }
+
     Write-AzureDevOpsSection "Verification Summary"
 
     $restoreSuccesses = @($validRestoreResults | Where-Object { $_.Success })
@@ -1144,6 +1551,24 @@ try {
         $summaryLines += "  ✗ All satellites are dependencies of Humanizer"
     } else {
         $summaryLines += "  ✗ All satellites are dependencies of Humanizer (not verified)"
+    }
+
+    if ($packageSmokeTestResult.Success -and $packageSmokeTestResult.Executed) {
+        $summaryLines += "  ✓ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Hosts -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
+    } elseif ($packageSmokeTestResult.Executed) {
+        $summaryLines += "  ✗ Package smoke tests: $($packageSmokeTestResult.TargetFrameworks -join ', ') / $($packageSmokeTestResult.Hosts -join ', ') / $($packageSmokeTestResult.Scenarios -join ', ')"
+    } else {
+        $summaryLines += "  ✓ Package smoke tests skipped"
+    }
+
+    if ($smokeTestHostList -contains 'wapproj') {
+        if ($wapProjSmokeTestResult.Success -and $wapProjSmokeTestResult.Executed) {
+            $summaryLines += "  ✓ WAP project smoke test"
+        } elseif ($wapProjSmokeTestResult.Executed -or -not $wapProjSmokeTestResult.Success) {
+            $summaryLines += "  ✗ WAP project smoke test"
+        } else {
+            $summaryLines += "  ✓ WAP project smoke test skipped"
+        }
     }
 
     $summaryLines += ""

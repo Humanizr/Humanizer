@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>__TARGET_FRAMEWORK__</TargetFramework>
+    <ImplicitUsings Condition="'$(TargetFramework)' == 'net48'">disable</ImplicitUsings>
+    <ImplicitUsings Condition="'$(TargetFramework)' != 'net48'">enable</ImplicitUsings>
+    <Nullable Condition="'$(TargetFramework)' == 'net48'">disable</Nullable>
+    <Nullable Condition="'$(TargetFramework)' != 'net48'">enable</Nullable>
+  </PropertyGroup>
+__PACKAGE_REFERENCES__
+</Project>
