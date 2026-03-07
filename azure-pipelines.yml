@@ -37,6 +37,12 @@ stages:
         includePreviewVersions: true
         version: 10.x
 
+    - task: UseDotNet@2
+      displayName: 'Use .NET 11 SDK'
+      inputs:
+        includePreviewVersions: true
+        version: 11.x
+
     - task: DotNetCoreCLI@2
       inputs:
         command: custom
@@ -55,14 +61,19 @@ stages:
       displayName: Restore, Build, and Pack
 
     - pwsh: |
-        $(Build.SourcesDirectory)/verify-packages.ps1 -PackageVersion '$(NBGV_NuGetPackageVersion)' -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages' -MinimumPassingSdkVersion '9.0.200'
+        $(Build.SourcesDirectory)/tests/verify-packages.ps1 `
+          -PackageVersion '$(NBGV_NuGetPackageVersion)' `
+          -PackagesDirectory '$(Build.ArtifactStagingDirectory)/Packages' `
+          -IncludeWapProjSmokeTest
       displayName: Verify Package Structure and Dependencies
       failOnStderr: false
 
     - task: DotNetCoreCLI@2
       inputs:
         command: test
-        projects: '**/*.Tests.csproj'
+        projects: |
+          tests/Humanizer.Tests/Humanizer.Tests.csproj
+          tests/Humanizer.Analyzers.Tests/Humanizer.Analyzers.Tests.csproj
         arguments: -c $(BuildConfiguration) --coverage --xunit-info
       displayName: Run Tests
 
