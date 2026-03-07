@@ -3,10 +3,14 @@
     Older environments that don't support Roslyn-versioned analyzer selection can load all
     analyzer variants. In that case, force the baseline roslyn3.8 analyzer only.
   -->
-  <ItemGroup Condition="'$(SupportsRoslynComponentVersioning)' != 'true'">
-    <HumanizerAnalyzer Include="@(Analyzer)" Condition="'%(Filename)%(Extension)' == 'Humanizer.Analyzers.dll'" />
-    <Analyzer Remove="@(HumanizerAnalyzer)" />
-    <Analyzer Include="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll"
-              Condition="Exists('$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll')" />
-  </ItemGroup>
+  <Target Name="SelectHumanizerAnalyzerFallback"
+          BeforeTargets="CoreCompile"
+          Condition="'$(SupportsRoslynComponentVersioning)' != 'true'">
+    <ItemGroup>
+      <HumanizerAnalyzer Include="@(Analyzer)" Condition="'%(Filename)%(Extension)' == 'Humanizer.Analyzers.dll'" />
+      <Analyzer Remove="@(HumanizerAnalyzer)" />
+      <Analyzer Include="$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll"
+                Condition="Exists('$(MSBuildThisFileDirectory)..\analyzers\dotnet\roslyn3.8\cs\Humanizer.Analyzers.dll')" />
+    </ItemGroup>
+  </Target>
 </Project>
