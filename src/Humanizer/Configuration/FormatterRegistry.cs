@@ -56,6 +56,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("lt", c => new LithuanianFormatter(c));
         Register("lb", c => new LuxembourgishFormatter(c));
         Register("ca", c => new CatalanFormatter(c));
+        RegisterDefaultFormatter("ur");
     }
 
     void RegisterDefaultFormatter(string localeCode) =>

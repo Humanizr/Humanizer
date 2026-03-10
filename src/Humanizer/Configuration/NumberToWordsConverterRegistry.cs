@@ -58,5 +58,6 @@ class NumberToWordsConverterRegistry : LocaliserRegistry<INumberToWordsConverter
         Register("lb", _ => new LuxembourgishNumberToWordsConverter());
         Register("hu", _ => new HungarianNumberToWordsConverter());
         Register("ca", _ => new CatalanNumberToWordsConverter());
+        Register("ur", _ => new UrduNumberToWordsConverter());
     }
 }
