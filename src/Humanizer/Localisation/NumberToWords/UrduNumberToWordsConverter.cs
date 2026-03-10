@@ -51,6 +51,11 @@ class UrduNumberToWordsConverter : GenderlessNumberToWordsConverter
             return "صفر";
         }
 
+        if (number == long.MinValue)
+        {
+            return "منفی نو نیل دو کھرب تئیس ارب سینتیس کروڑ چھتیس لاکھ پچاسی ہزار چار سو پچہتر ارب سات سو آٹھ";
+        }
+
         if (number < 0)
         {
             return $"منفی {Convert(-number)}";
@@ -63,7 +68,7 @@ class UrduNumberToWordsConverter : GenderlessNumberToWordsConverter
             if (number / divisor > 0)
             {
                 var groupValue = number / divisor;
-                parts.Add($"{ConvertUpTo99(groupValue)} {name}");
+                parts.Add($"{Convert(groupValue)} {name}");
                 number %= divisor;
             }
         }
