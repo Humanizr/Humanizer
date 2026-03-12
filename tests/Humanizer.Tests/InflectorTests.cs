@@ -115,6 +115,8 @@ public class InflectorTests
     [InlineData("customer_first_name", "CustomerFirstName")]
     [InlineData("customer_first_name goes here", "CustomerFirstNameGoesHere")]
     [InlineData("customer name", "CustomerName")]
+    [InlineData("customer name 1", "CustomerName1")]
+    [InlineData("customer name $", "CustomerName$")]
     [InlineData("customer   name", "CustomerName")]
     [InlineData("customer-first-name", "CustomerFirstName")]
     [InlineData("_customer-first-name", "CustomerFirstName")]
@@ -131,6 +133,8 @@ public class InflectorTests
     [InlineData("customer_first_name", "customerFirstName")]
     [InlineData("customer_first_name goes here", "customerFirstNameGoesHere")]
     [InlineData("customer name", "customerName")]
+    [InlineData("customer name 1", "customerName1")]
+    [InlineData("customer name $", "customerName$")]
     [InlineData("customer   name", "customerName")]
     [InlineData("", "")]
     public void Camelize(string input, string expectedOutput) =>
