@@ -25,7 +25,7 @@ namespace Humanizer;
 
 public static partial class InflectorExtensions
 {
-    private const string PascalizePattern = @"(?:[ _-]+|^)([a-zA-Z])";
+    private const string PascalizePattern = @"(?:[ _-]+|^)(.)";
     private const string UnderscorePattern1 = @"([\p{Lu}]+)([\p{Lu}][\p{Ll}])";
     private const string UnderscorePattern2 = @"([\p{Ll}\d])([\p{Lu}])";
     private const string UnderscorePattern3 = @"[-\s]";
