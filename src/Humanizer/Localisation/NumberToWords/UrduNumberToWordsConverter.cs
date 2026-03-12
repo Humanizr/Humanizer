@@ -75,34 +75,16 @@ class UrduNumberToWordsConverter : GenderlessNumberToWordsConverter
 
         if (number >= 100)
         {
-            parts.Add(HundredsMap[number / 100]);
+            parts.Add(HundredsMap[(int)(number / 100)]);
             number %= 100;
         }
 
         if (number > 0)
         {
-            parts.Add(UnitsMap[number]);
+            parts.Add(UnitsMap[(int)number]);
         }
 
         return string.Join(" ", parts);
-    }
-
-    static string ConvertUpTo99(long number)
-    {
-        if (number < 100)
-        {
-            return UnitsMap[number];
-        }
-
-        var result = HundredsMap[number / 100];
-        number %= 100;
-
-        if (number > 0)
-        {
-            result += " " + UnitsMap[number];
-        }
-
-        return result;
     }
 
     static readonly string[] OrdinalSuffixes =
