@@ -21,7 +21,7 @@
   <PropertyGroup>
     <PolyStringInterpolation>true</PolyStringInterpolation>
     <PolyNullability>true</PolyNullability>
-    <PolyGuard>true</PolyGuard>
+    <PolyEnsure>true</PolyEnsure>
   </PropertyGroup>
 
   <PropertyGroup>
