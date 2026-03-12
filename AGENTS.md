@@ -29,7 +29,7 @@ These instructions apply to the entire repository.
 - Run the test suite for the supported .NET targets (`dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` and `--framework net8.0`). Avoid invoking the net48 target on Linux, and allow a few minutes for each run to complete.
 
 ## Build & Validation
-- Build command: `dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<path>` (from `src`). It must succeed without warnings or errors.
+- Build command: `dotnet build src/Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<path>` (from the repository root). It must succeed without warnings or errors.
 - If you need to reference those newly build packages, create or update `NuGet.config` to use that package output path as a package source--but never commit changes to that file.
 - When verifying restore, build first, then pass the output path into `tests/verify-packages.ps1`.
 - When running `tests/verify-packages.ps1`, you can override the default `-MinimumPassingSdkVersion` (`9.0.200`) to mark older SDK/MSBuild restores as expected failures.

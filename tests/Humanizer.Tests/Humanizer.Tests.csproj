@@ -2,8 +2,6 @@
   <PropertyGroup>
     <TargetFrameworks>net10.0;net8.0;net48</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <SolutionDir>$(MSBuildThisFileDirectory)..\..\</SolutionDir>
-    <SolutionName>Humanizer</SolutionName>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
   </PropertyGroup>
