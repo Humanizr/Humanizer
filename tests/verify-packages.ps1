@@ -198,6 +198,7 @@ $projectContent = @"
   <PropertyGroup>
     <TargetFramework>$TargetFramework</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <MSBuildTreatWarningsAsErrors>true</MSBuildTreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="$PackageVersion" />
