@@ -1,12 +1,12 @@
 ﻿{
     "locale":  "tr",
     "source_review":  "docs\\\\reviews\\\\locales\\\\tr.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  1,
+                    "pending":  0,
                     "confirmed":  0,
                     "modified":  0,
-                    "rejected":  0
+                    "rejected":  1
                 },
     "findings":  [
                      {
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/tr/DateHumanizeTests.cs: explicit residual key assertion uses current literal"
                                       ],
                          "notes":  "Üslup/doğallık düzeltmesi; anlamsal hata değil.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "öbür gün",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "yarından sonra",
+                         "adjudicated_rationale":  "İkinci bağımsız ana dil değerlendirmesinde \"yarından sonra\" ifadesi Türkçede \"two days from now\" anlamını doğal ve açık biçimde karşılıyor. Önerilen \"öbür gün\" de mümkündür; ancak daha konuşma dili/bağlama açık kalabildiği için mevcut çeviriyi zorunlu olarak değiştirmeyi gerektiren bir kusur yoktur.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.tr.resx: DateHumanize_TwoDaysFromNow = 'yarından sonra'",
+                                                     "tests/Humanizer.Tests/Localisation/tr/DateHumanizeTests.cs: HasExplicitResidualDateResources asserts 'yarından sonra'"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      }
                  ]
 }
