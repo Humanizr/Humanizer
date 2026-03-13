@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "sv",
     "source_review":  "docs\\\\reviews\\\\locales\\\\sv.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  2,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  2,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -23,16 +23,18 @@
                                           "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:12"
                                       ],
                          "notes":  "Nuvarande test för sv förväntar sig den engelska pluralformen och bör justeras när resurssträngen rättas.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "byte",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Bekräftat. På idiomatisk svenska används enhetsnamnet utan engelsk plural-s i detta sammanhang: \"1 byte\", \"10 byte\". Formen \"bytes\" är inte naturlig i svensk löptext för datamängder.",
                          "adjudicated_evidence":  [
-
+                                                   "src/Humanizer/Properties/Resources.sv.resx:306",
+                                                   "src/Humanizer/Properties/Resources.sv.resx:309",
+                                                   "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:12"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Behåll singular och plural som \"byte\" i sv-resursen; uppdatera testförväntan från \"10 bytes\" till \"10 byte\" när fixen görs."
                      },
                      {
                          "locale":  "sv",
@@ -48,16 +50,18 @@
                                           "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:20"
                                       ],
                          "notes":  "Pluralformen med -s är ett engelskt mönster och låter onaturligt i svensk lokalisering.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "gigabyte",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Bekräftat. I svensk teknisk språkdräkt används normalt samma form för singular och plural här: \"1 gigabyte\", \"10 gigabyte\". \"Gigabytes\" är en direkt engelsk pluralisering.",
                          "adjudicated_evidence":  [
-
+                                                   "src/Humanizer/Properties/Resources.sv.resx:315",
+                                                   "src/Humanizer/Properties/Resources.sv.resx:318",
+                                                   "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:20"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Behåll singular och plural som \"gigabyte\" i sv-resursen; uppdatera testförväntan från \"10 gigabytes\" till \"10 gigabyte\" när fixen görs."
                      }
                  ]
 }
