@@ -453,4 +453,175 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>bez laika</value>
   </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>biti</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>baiti</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabaiti</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobaiti</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabaiti</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabaiti</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>pirms {0} dienām</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>pēc {0} dienām</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>pirms 2 dienām</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>pēc 2 dienām</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>diena</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>stunda</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>milisekunde</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>minūte</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mēnesis</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>sekunde</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>nedēļa</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>gads</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>ziemeļi</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>ziemeļziemeļaustrumi</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>ziemeļaustrumi</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>austrumziemeļaustrumi</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>austrumi</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>austrumdienvidaustrumi</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>dienvidaustrumi</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>dienviddienvidaustrumi</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>dienvidi</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>dienviddienvidrietumi</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>dienvidrietumi</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>rietumdienvidrietumi</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>rietumi</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>rietumziemeļrietumi</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>ziemeļrietumi</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>ziemeļziemeļrietumi</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>ZZA</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ZA</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>AZA</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>ADA</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>DA</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>DDA</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>DDR</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>DR</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>RDR</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>RZR</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ZR</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>ZZR</value>
+  </data>
 </root>
