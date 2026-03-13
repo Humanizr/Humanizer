@@ -4,15 +4,13 @@
     "owned_child_cultures":  [
                                  "ms-MY"
                              ],
-    "direct_test_directories":  {
-
-                                },
-    "review_status":  "pending",
+    "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\ms-MY",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  137,
-                    "ok":  137,
+                    "ok":  136,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  1
                 },
     "records":  [
                     {
@@ -1109,16 +1107,18 @@
                         "current_value":  "{0} tahun dari yang lalu",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} tahun dari yang lalu",
+                        "proposed_replacement":  "{0} tahun yang lalu",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Frasa \"dari yang lalu\" tidak gramatis dalam Bahasa Melayu baku dan menjejaskan kefahaman. Bentuk yang tepat dan natural ialah \"{0} tahun yang lalu\", selaras dengan pola tahun lain dalam locale ini.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ms.resx: DateHumanize_MultipleYearsAgo_Paucal = \"{0} tahun dari yang lalu\"",
+                                         "tests/Humanizer.Tests/Localisation/ms-MY/DateHumanizeTests.cs: [UseCulture(\"ms-MY\")] with ms resource lookup indicates child-culture fallback path",
+                                         "tests/Humanizer.Tests/Localisation/ms-MY/**/*: ms-MY tests rely on parent ms strings; defect propagates to owned child culture fallback"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defect is in parent ms resource and therefore inherited by owned child culture ms-MY fallback."
                     },
                     {
                         "locale":  "ms",
