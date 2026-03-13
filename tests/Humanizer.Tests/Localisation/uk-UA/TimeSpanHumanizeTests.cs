@@ -4,6 +4,13 @@ namespace ukUA;
 public class TimeSpanHumanizeTests
 {
     [Theory]
+    [InlineData(14, "2 тижні")]
+    [InlineData(366, "1 рік")]
+    [InlineData(366, "один рік", true)]
+    public void Age(int days, string expected, bool toWords = false) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
+
+    [Theory]
     [Trait("Translation", "Google")]
     [InlineData(366, "один рік", true)]
     [InlineData(366, "1 рік")]
