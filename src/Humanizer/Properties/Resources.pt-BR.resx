@@ -171,6 +171,9 @@
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>{0} dias atrás</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} dias atrás</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
     <value>{0} dias atrás</value>
   </data>
@@ -181,6 +184,9 @@
     <value>em {0} dias</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>em {0} dias</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>em {0} dias</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
@@ -344,6 +350,12 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>agora</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>2 dias atrás</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>em 2 dias</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ontem</value>

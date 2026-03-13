@@ -79,4 +79,20 @@ public class DateHumanizeTests
     [Fact]
     public void Now() =>
         DateHumanize.Verify("agora", 0, TimeUnit.Day, Tense.Future);
+
+    [Fact]
+    public void TwoDaysAgoHasExplicitBrazilianPortugueseResource()
+        => Assert.Equal("2 dias atrás", Resources.GetResource("DateHumanize_TwoDaysAgo", new("pt-BR")));
+
+    [Fact]
+    public void TwoDaysFromNowHasExplicitBrazilianPortugueseResource()
+        => Assert.Equal("em 2 dias", Resources.GetResource("DateHumanize_TwoDaysFromNow", new("pt-BR")));
+
+    [Fact]
+    public void MultipleDaysAgoPaucalHasExplicitBrazilianPortugueseResource()
+        => Assert.Equal("{0} dias atrás", Resources.GetResource("DateHumanize_MultipleDaysAgo_Paucal", new("pt-BR")));
+
+    [Fact]
+    public void MultipleDaysFromNowPaucalHasExplicitBrazilianPortugueseResource()
+        => Assert.Equal("em {0} dias", Resources.GetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("pt-BR")));
 }
