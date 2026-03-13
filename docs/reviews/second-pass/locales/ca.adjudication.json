@@ -16,24 +16,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} dies a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} dies",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} dies",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} dies",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -42,24 +42,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} dies a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} dies",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} dies",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} dies",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -68,24 +68,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} dia a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} dia",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} dia",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} dia",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -94,24 +94,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} minuts a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} minuts",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} minuts",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} minuts",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -120,24 +120,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} minuts a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} minuts",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} minuts",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} minuts",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -146,24 +146,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} minut a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} minut",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} minut",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} minut",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -172,24 +172,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} mesos a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} mesos",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} mesos",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} mesos",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -198,24 +198,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} mesos a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} mesos",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} mesos",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} mesos",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -224,24 +224,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} mes a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} mes",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} mes",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} mes",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -250,24 +250,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} segons a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} segons",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} segons",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} segons",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -276,24 +276,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} segons a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} segons",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} segons",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} segons",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -302,24 +302,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} segon a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} segon",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} segon",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} segon",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -328,24 +328,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} anys a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} anys",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} anys",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} anys",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -354,24 +354,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} anys a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} anys",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} anys",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} anys",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     },
     {
       "locale": "ca",
@@ -380,24 +380,24 @@
       "original_severity": "P3",
       "original_confidence": "high",
       "current_value": "{0} any a partir d'ara",
-      "proposed_replacement": "d'aquÃ­ {0} any",
-      "native_rationale": "En catalÃ  estÃ ndard Ã©s mÃ©s idiomÃ tic i coherent amb la resta del fitxer fer servir la construcciÃ³ Â«d'aquÃ­ {0} ...Â» en lloc de Â«{0} ... a partir d'araÂ».",
+      "proposed_replacement": "d'aquí {0} any",
+      "native_rationale": "En català estàndard és més idiomàtic i coherent amb la resta del fitxer fer servir la construcció «d'aquí {0} ...» en lloc de «{0} ... a partir d'ara».",
       "evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys Ã©s majoritÃ riament Â«d'aquÃ­ ...Â».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explÃ­citament Â«d'aquÃ­ ...Â» (p. ex. Â«d'aquÃ­ 2 segonsÂ», Â«d'aquÃ­ 2 minutsÂ», Â«d'aquÃ­ 2 diesÂ»)."
+        "src/Humanizer/Properties/Resources.ca.resx: la forma base de futur per a segons/minuts/hores/dies/mesos/anys és majoritàriament «d'aquí ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
       ],
-      "notes": "Millora d'idiomaticitat i consistÃ¨ncia interna; no canvia el significat semÃ ntic.",
+      "notes": "Millora d'idiomaticitat i consistència interna; no canvia el significat semàntic.",
       "adjudication": "confirmed",
       "adjudicated_status": "suspicious",
       "adjudicated_severity": "P3",
       "adjudicated_confidence": "high",
       "adjudicated_replacement": "d'aquí {0} any",
-      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que «{0} ... a partir d'ara» és gramatical però marcadament menys idiomàtic i menys coherent internament que «d'aquí {0} ...» en aquesta localització.",
+      "adjudicated_rationale": "Com a parlant nadiu de català, confirmo que la forma actual és correcta però menys idiomàtica i menys coherent internament que el patró «d'aquí {0} ...» present a la localització.",
       "adjudicated_evidence": [
-        "src/Humanizer/Properties/Resources.ca.resx: les entrades base de futur per segons/minuts/hores/dies/mesos/anys fan servir sistemàticament el patró «d'aquí ...».",
-        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els casos de futur validen «d'aquí ...» (p. ex. «d'aquí 2 segons», «d'aquí 2 minuts», «d'aquí 2 dies»)."
+        "src/Humanizer/Properties/Resources.ca.resx: les formes de futur base i paucal d'aquests mateixos grups fan servir «d'aquí {0} ...».",
+        "tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs: els tests de futur validen explícitament resultats de la forma «d'aquí N ...» per segons/minuts/dies/mesos/anys."
       ],
-      "adjudicated_notes": "Confirmat en segona passada independent; es manté la severitat P3 per consistència/idiomaticitat."
+      "adjudicated_notes": "Segona passada independent: proposta confirmada sense canvis."
     }
   ]
 }
