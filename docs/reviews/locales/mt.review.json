@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\mt",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  186,
-                    "ok":  186,
+                    "ok":  184,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  2
                 },
     "records":  [
                     {
@@ -1617,16 +1617,17 @@
                         "current_value":  "XL",
                         "neutral_reference":  "north",
                         "surface_family":  "Heading",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "XL",
+                        "proposed_replacement":  "tramuntana",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"XL\" hija abbrevjazzjoni ta\u0027 \"xlokk\" (southeast), mhux l-isem sħiħ tad-direzzjoni tat-tramuntana. Għall-valur sħiħ ta\u0027 N f\u0027Malti għandu jintuża \"tramuntana\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.mt.resx: key \"N\" currently uses \"XL\" while key \"N_Short\" is \"T\".",
+                                         "tests/Humanizer.Tests/Localisation/mt/HeadingTests.cs: full heading currently expects \"XL\" at 0°, indicating the resource is carrying an abbreviation in a full-form key."
                                      ],
-                        "notes":  ""
+                        "notes":  "Wrong cardinal direction term in full heading output."
                     },
                     {
                         "locale":  "mt",
@@ -2637,16 +2638,17 @@
                         "current_value":  "{0} snin",
                         "neutral_reference":  "{0} years",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} snin",
+                        "proposed_replacement":  "sena",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Il-forma singulari għal \"year\" hi \"sena\". Il-valur attwali \"{0} snin\" hu plural u joħloq qbil grammatikali ħażin għal singular.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.mt.resx: key \"TimeSpanHumanize_MultipleYears_Singular\" is \"{0} snin\".",
+                                         "tests/Humanizer.Tests/Localisation/mt/TimeSpanHumanizeTests.cs: singular year behavior expects \"sena\" for one-year equivalents."
                                      ],
-                        "notes":  ""
+                        "notes":  "Singular/plural mismatch."
                     },
                     {
                         "locale":  "mt",
