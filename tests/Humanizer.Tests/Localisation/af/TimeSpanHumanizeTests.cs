@@ -80,4 +80,10 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void NoTimeToWords() =>
         Assert.Equal("geen tyd", TimeSpan.Zero.Humanize(toWords: true));
+
+    [Theory]
+    [InlineData(14, "2 weke oud")]
+    [InlineData(366, "1 jaar oud")]
+    public void Age(int days, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }
