@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>بایت</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>گیگابایت</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} روز پیش</value>
   </data>
@@ -152,6 +164,9 @@
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
     <value>{0} سال بعد</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>هرگز</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>الآن</value>
@@ -216,6 +231,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} سال</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>یک روز</value>
   </data>
@@ -242,5 +260,77 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>الآن</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>روز</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ساعت</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>میلی‌ثانیه</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>دقیقه</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>ماه</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>ثانیه</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>هفته</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>سال</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>شمال</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>شمال‌شرق</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>شرق</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>جنوب‌شرق</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>جنوب</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>جنوب‌غرب</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>غرب</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>شمال‌غرب</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>ش</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ش‌شر</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>شر</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ج‌شر</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>ج</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ج‌غر</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>غر</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ش‌غر</value>
   </data>
 </root>
