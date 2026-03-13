@@ -5,7 +5,7 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\ja",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  42,
                     "ok":  42,
