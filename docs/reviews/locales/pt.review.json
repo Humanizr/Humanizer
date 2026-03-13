@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\pt",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  186,
-                    "ok":  186,
-                    "suspicious":  0,
-                    "defect":  0
+                    "ok":  177,
+                    "suspicious":  1,
+                    "defect":  8
                 },
     "records":  [
                     {
@@ -19,16 +19,17 @@
                         "current_value":  "bit",
                         "neutral_reference":  "bit",
                         "surface_family":  "DataUnit",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "bit",
+                        "proposed_replacement":  "b",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Em portugues tecnico, o simbolo de bit e \"b\" minusculo. \"bit\" e nome por extenso, nao simbolo.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: DataUnit_BitSymbol = bit",
+                                         "Padrao tecnico de unidades de dados: bit -> b, byte -> B"
                                      ],
-                        "notes":  ""
+                        "notes":  "Manter o nome por extenso em DataUnit_Bit, mas usar simbolo curto em DataUnit_BitSymbol."
                     },
                     {
                         "locale":  "pt",
@@ -2144,16 +2145,17 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milisegundos",
+                        "proposed_replacement":  "{0} milissegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\"). A forma atual esta ortograficamente errada.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs atualmente replica a grafia incorreta"
                                      ],
-                        "notes":  ""
+                        "notes":  "Atualizar testes de pt quando o recurso for corrigido."
                     },
                     {
                         "locale":  "pt",
@@ -2161,16 +2163,16 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milisegundos",
+                        "proposed_replacement":  "{0} milissegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Dual"
                                      ],
-                        "notes":  ""
+                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
                     },
                     {
                         "locale":  "pt",
@@ -2178,16 +2180,16 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milisegundos",
+                        "proposed_replacement":  "{0} milissegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Paucal"
                                      ],
-                        "notes":  ""
+                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
                     },
                     {
                         "locale":  "pt",
@@ -2195,16 +2197,16 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milisegundos",
+                        "proposed_replacement":  "{0} milissegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Plural"
                                      ],
-                        "notes":  ""
+                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
                     },
                     {
                         "locale":  "pt",
@@ -2212,16 +2214,16 @@
                         "current_value":  "{0} milisegundo",
                         "neutral_reference":  "{0} millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milisegundo",
+                        "proposed_replacement":  "{0} milissegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Singular"
                                      ],
-                        "notes":  ""
+                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
                     },
                     {
                         "locale":  "pt",
@@ -2722,16 +2724,16 @@
                         "current_value":  "1 milisegundo",
                         "neutral_reference":  "1 millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "1 milisegundo",
+                        "proposed_replacement":  "1 milissegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_SingleMillisecond"
                                      ],
-                        "notes":  ""
+                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
                     },
                     {
                         "locale":  "pt",
@@ -2739,16 +2741,16 @@
                         "current_value":  "um milisegundo",
                         "neutral_reference":  "one millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "um milisegundo",
+                        "proposed_replacement":  "um milissegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_SingleMillisecond_Words"
                                      ],
-                        "notes":  ""
+                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
                     },
                     {
                         "locale":  "pt",
@@ -2926,16 +2928,17 @@
                         "current_value":  "sem horÃ¡rio",
                         "neutral_reference":  "no time",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "sem horÃ¡rio",
-                        "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "status":  "suspicious",
+                        "severity":  "P2",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "sem tempo",
+                        "replacement_confidence":  "medium",
+                        "native_rationale":  "\"Sem horario\" soa a falta de agenda/slot, nao a duracao nula. Para TimeSpan zero, \"sem tempo\" e mais natural.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_Zero = sem horÃ¡rio",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs comenta que a saida atual nao faz muito sentido"
                                      ],
-                        "notes":  ""
+                        "notes":  "Revisar junto com estilo desejado para ToWords(TimeSpan.Zero) no projeto."
                     },
                     {
                         "locale":  "pt",
