@@ -117,10 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>비트</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>바이트</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>기가바이트</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>킬로바이트</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>메가바이트</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>테라바이트</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0}일 전</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>{0}일 전</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
     <value>{0}일 전</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
@@ -133,6 +172,9 @@
     <value>{0}일 후</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>{0}일 후</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>{0}일 후</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
@@ -327,6 +369,12 @@
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>1초 후</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>2일 전</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>2일 후</value>
+  </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>1년 전</value>
   </data>
@@ -426,29 +474,203 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0}년</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
+    <value>{0}일</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
+    <value>{0}개월</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
+    <value>{0}개월</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Plural" xml:space="preserve">
+    <value>{0}개월</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
+    <value>{0}개월</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Dual" xml:space="preserve">
+    <value>{0}년</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
+    <value>{0}년</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
+    <value>{0}년</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
+    <value>{0}년</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
+    <value>1일</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
     <value>1일</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
     <value>1시간</value>
   </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>1시간</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
+    <value>1밀리초</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
     <value>1밀리초</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1분</value>
   </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>1분</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
+    <value>1개월</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
     <value>1개월</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>1초</value>
   </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>1초</value>
+  </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
+    <value>1주</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
     <value>1주</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1년</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>1년</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>일</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>시간</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>밀리초</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>분</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>개월</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>초</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>주</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>년</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>북</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>북북동</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>북북동</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>북동</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>북동</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>동북동</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>동북동</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>동</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>동</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>동남동</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>동남동</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>남동</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>남동</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>남남동</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>남남동</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>남</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>남</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>남남서</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>남남서</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>남서</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>남서</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>서남서</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>서남서</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>서</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>서</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>서북서</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>서북서</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>북서</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>북서</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>북북서</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>북북서</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>북</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>방금</value>
