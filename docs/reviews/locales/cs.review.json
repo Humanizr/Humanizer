@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\cs",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  110,
-                    "ok":  110,
+                    "ok":  109,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  1
                 },
     "records":  [
                     {
@@ -1702,16 +1702,17 @@
                         "current_value":  "není čas",
                         "neutral_reference":  "no time",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "není čas",
+                        "proposed_replacement":  "žádný čas",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "„Není čas“ v češtině znamená „nemáme čas“ (situace spěchu), ne nulovou délku trvání. Pro význam „no time“ jako nulový interval je přirozené „žádný čas“.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.cs.resx: TimeSpanHumanize_Zero currently maps to \"není čas\".",
+                                         "tests/Humanizer.Tests/Localisation/cs/TimeSpanHumanizeTests.cs contains no zero-duration assertion, so this semantic mismatch is currently untested."
                                      ],
-                        "notes":  ""
+                        "notes":  "Semantic correction for zero-duration output."
                     },
                     {
                         "locale":  "cs",
