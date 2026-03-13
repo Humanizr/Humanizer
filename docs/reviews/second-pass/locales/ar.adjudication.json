@@ -1,12 +1,12 @@
 ﻿{
     "locale":  "ar",
     "source_review":  "docs\\\\reviews\\\\locales\\\\ar.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  8,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  7,
                     "modified":  0,
-                    "rejected":  0
+                    "rejected":  1
                 },
     "findings":  [
                      {
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/ar/DateHumanizeTests.cs: YearsAgo(-1) currently expects \"Ø§Ù„Ø¹Ø§Ù… Ø§Ù„Ø³Ø§Ø¨Ù‚\"."
                                       ],
                          "notes":  "ØªØ­Ø³ÙŠÙ† Ø¯Ù„Ø§Ù„ÙŠ/Ø£Ø³Ù„ÙˆØ¨ÙŠØ› Ø§Ù„Ø³Ù„Ø³Ù„Ø© Ø§Ù„Ø­Ø§Ù„ÙŠØ© Ù…ÙÙ‡ÙˆÙ…Ø© Ù„ÙƒÙ†Ù‡Ø§ Ø£Ù‚Ù„ Ù…Ø·Ø§Ø¨Ù‚Ø©Ù‹ Ù„Ù„Ù…Ø±Ø¬Ø¹.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "Ù…Ù†Ø° Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "Ã˜Â§Ã™â€žÃ˜Â¹Ã˜Â§Ã™â€¦ Ã˜Â§Ã™â€žÃ˜Â³Ã˜Â§Ã˜Â¨Ã™â€š",
+                         "adjudicated_rationale":  "The current wording is acceptable as a natural equivalent of \"last year\" in date-humanization contexts, so this does not need a localization change.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_SingleYearAgo",
+                                                     "tests/Humanizer.Tests/Localisation/ar/DateHumanizeTests.cs: YearsAgo(-1)"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "ar",
@@ -48,16 +49,17 @@
                                           "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds currently uses \"Ø¬Ø²Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©\"."
                                       ],
                          "notes":  "Ø®Ù„Ù„ Ù…ØµØ·Ù„Ø­ÙŠ ÙŠØ¤Ø«Ø± Ø¯Ù‚Ø© Ø§Ù„ÙˆØ­Ø¯Ø©.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "The current phrase means an unspecified fraction of a second, not the millisecond unit. The proposed technical unit term is correct.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds",
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeUnit_Millisecond"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass confirmed."
                      },
                      {
                          "locale":  "ar",
@@ -73,16 +75,17 @@
                                           "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs currently asserts this phrase for 2 ms."
                                       ],
                          "notes":  "Ø¨Ø¯ÙŠÙ„ Ù…Ù‚ØªØ±Ø­ ÙŠØ­Ø§ÙØ¸ Ø¹Ù„Ù‰ Ù†Ù…Ø· Ø§Ù„ØªØ«Ù†ÙŠØ© Ø§Ù„Ø­Ø§Ù„ÙŠ ÙÙŠ Ø§Ù„Ù…ÙˆØ§Ø±Ø¯.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØªÙŠÙ†",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "The existing dual form uses a generic \"two parts of a second\" expression and does not represent milliseconds accurately. The proposed dual unit form is acceptable.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Dual",
+                                                     "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Milliseconds"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass confirmed."
                      },
                      {
                          "locale":  "ar",
@@ -98,16 +101,17 @@
                                           "src/Humanizer/Properties/Resources.ar.resx already uses \"Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©\" in TimeUnit_Millisecond."
                                       ],
                          "notes":  "ØªØµØ­ÙŠØ­ Ù…ØµØ·Ù„Ø­ÙŠ ÙˆØ§ØªØ³Ø§Ù‚ Ø¯Ø§Ø®Ù„ÙŠ Ù…Ø¹ TimeUnit.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "The current plural phrase is non-terminological and can be interpreted as generic fractions. Using the explicit millisecond unit is the correct localization.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Plural",
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeUnit_Millisecond"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass confirmed."
                      },
                      {
                          "locale":  "ar",
@@ -123,16 +127,17 @@
                                           "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleMonths uses singular base \"{0} Ø´Ù‡Ø±\" for many-form behavior."
                                       ],
                          "notes":  "ÙŠÙˆØ¬Ø¯ Ø£Ø«Ø± Ù…ØªÙˆÙ‚Ø¹ Ø¹Ù„Ù‰ Ø§Ù„Ø§Ø®ØªØ¨Ø§Ø±Ø§Øª Ø§Ù„Ø­Ø§Ù„ÙŠØ© Ø§Ù„Ù…Ø±ØªØ¨Ø·Ø© Ø¨ØªØ±Ø¬Ù…Ø© Google.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} Ø´Ù‡Ø±",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "For the many-number branch (e.g., 11), Arabic requires the singular unit form. Keeping \"{0} أشهر\" here causes incorrect output for that branch.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMonths",
+                                                     "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Months(335)"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass confirmed."
                      },
                      {
                          "locale":  "ar",
@@ -148,16 +153,17 @@
                                           "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleYearsFromNow_Plural uses proper plural \"{0} Ø³Ù†ÙˆØ§Øª\"."
                                       ],
                          "notes":  "ØªØµØ­ÙŠØ­ Ø§ØªØ³Ø§Ù‚ ØµØ±ÙÙŠ Ø¯Ø§Ø®Ù„ Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ù„Ø³Ù†ÙˆØ§Øª.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} Ø³Ù†ÙˆØ§Øª",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "The plural-specific key must carry a true plural noun form. The current value duplicates singular behavior and loses grammatical contrast.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleYears_Plural",
+                                                     "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleYearsFromNow_Plural"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass confirmed."
                      },
                      {
                          "locale":  "ar",
@@ -173,16 +179,17 @@
                                           "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs marks month strings with [Trait(\"Translation\", \"Google\")]."
                                       ],
                          "notes":  "Ø®Ù„Ù„ Ù„ØºÙˆÙŠ ÙˆØ§Ø¶Ø­ Ù‚Ø§Ø¨Ù„ Ù„Ù„Ø±ØµØ¯ Ù„Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "Ø´Ù‡Ø± ÙˆØ§Ø­Ø¯",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "The existing value is a machine-ordered numeral phrase and is not natural Arabic. The proposed phrase is the correct native singular expression.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleMonth",
+                                                     "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Months(31)"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass confirmed."
                      },
                      {
                          "locale":  "ar",
@@ -198,16 +205,17 @@
                                           "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs marks year strings with [Trait(\"Translation\", \"Google\")]."
                                       ],
                          "notes":  "Ø®Ù„Ù„ Ù„ØºÙˆÙŠ Ù…Ø¨Ø§Ø´Ø± ÙÙŠ ØµÙŠØºØ© Ø§Ù„Ù…ÙØ±Ø¯.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "The current form is not idiomatic Arabic for a singular duration. The proposed wording is the correct native singular year expression.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleYear",
+                                                     "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Years(366)"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass confirmed."
                      }
                  ]
 }

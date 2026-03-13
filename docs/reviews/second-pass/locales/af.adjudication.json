@@ -1,113 +1,117 @@
-﻿{
-    "locale":  "af",
-    "source_review":  "docs\\\\reviews\\\\locales\\\\af.review.json",
-    "adjudication_status":  "pending",
-    "summary":  {
-                    "pending":  4,
-                    "confirmed":  0,
-                    "modified":  0,
-                    "rejected":  0
-                },
-    "findings":  [
-                     {
-                         "locale":  "af",
-                         "key":  "TimeSpanHumanize_SingleMillisecond",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "1 millisekond",
-                         "proposed_replacement":  "1 millisekonde",
-                         "native_rationale":  "Die korrekte Afrikaans enkelvoud is millisekonde. Millisekond is nie standaardvorm nie.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleMillisecond is currently 1 millisekond while plural is millisekondes.",
-                                          "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleMillisecondAgo uses 1 millisekonde terug."
-                                      ],
-                         "notes":  "Align singular form with established Afrikaans spelling.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "1 millisekonde",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "af",
-                         "key":  "TimeSpanHumanize_SingleMillisecond_Words",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "een millisekond",
-                         "proposed_replacement":  "een millisekonde",
-                         "native_rationale":  "Millisekond is ortografies onvanpas in Afrikaans; millisekonde is die natuurlike enkelvoud.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleMillisecond_Words is currently een millisekond.",
-                                          "Date/multi forms in the same locale consistently use millisekonde/millisekondes pattern."
-                                      ],
-                         "notes":  "Word-form variant should preserve standard singular morphology.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "een millisekonde",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "af",
-                         "key":  "TimeSpanHumanize_SingleSecond",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "1 sekond",
-                         "proposed_replacement":  "1 sekonde",
-                         "native_rationale":  "In standaard Afrikaans is die enkelvoud sekonde, nie sekond nie. Die huidige vorm is onidiomaties en ortografies afwykend.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleSecond is currently 1 sekond while plural is sekondes.",
-                                          "tests/Humanizer.Tests/Localisation/af/DateHumanizeTests.cs: singular second form is 1 sekonde terug."
-                                      ],
-                         "notes":  "Normalize singular noun morphology to standard Afrikaans.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "1 sekonde",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "af",
-                         "key":  "TimeSpanHumanize_SingleSecond_Words",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "een sekond",
-                         "proposed_replacement":  "een sekonde",
-                         "native_rationale":  "Sekond is nie die standaard geskrewe enkelvoud in Afrikaans nie; sekonde is korrek en konsekwent met ander tydfrases.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleSecond_Words is currently een sekond.",
-                                          "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleSecondAgo uses 1 sekonde terug."
-                                      ],
-                         "notes":  "Word-form variant should mirror numeric singular form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "een sekonde",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     }
-                 ]
+{
+  "locale": "af",
+  "source_review": "docs\\\\reviews\\\\locales\\\\af.review.json",
+  "adjudication_status": "completed",
+  "summary": {
+    "pending": 0,
+    "confirmed": 4,
+    "modified": 0,
+    "rejected": 0
+  },
+  "findings": [
+    {
+      "locale": "af",
+      "key": "TimeSpanHumanize_SingleMillisecond",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "1 millisekond",
+      "proposed_replacement": "1 millisekonde",
+      "native_rationale": "Die korrekte Afrikaans enkelvoud is millisekonde. Millisekond is nie standaardvorm nie.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleMillisecond is currently 1 millisekond while plural is millisekondes.",
+        "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleMillisecondAgo uses 1 millisekonde terug."
+      ],
+      "notes": "Align singular form with established Afrikaans spelling.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "1 millisekonde",
+      "adjudicated_rationale": "As onafhanklike tweede moedertaalbeoordelaar bevestig ek die bevinding: die standaard enkelvoud is \"millisekonde\". \"Millisekond\" is nie idiomatiese of ortografies standaard Afrikaans nie.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleMillisecondAgo en DateHumanize_SingleMillisecondFromNow gebruik reeds \"1 millisekonde\".",
+        "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_MultipleMilliseconds gebruik \"{0} millisekondes\", wat die stam \"millisekonde\" bevestig."
+      ],
+      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+    },
+    {
+      "locale": "af",
+      "key": "TimeSpanHumanize_SingleMillisecond_Words",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "een millisekond",
+      "proposed_replacement": "een millisekonde",
+      "native_rationale": "Millisekond is ortografies onvanpas in Afrikaans; millisekonde is die natuurlike enkelvoud.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleMillisecond_Words is currently een millisekond.",
+        "Date/multi forms in the same locale consistently use millisekonde/millisekondes pattern."
+      ],
+      "notes": "Word-form variant should preserve standard singular morphology.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "een millisekonde",
+      "adjudicated_rationale": "Hierdie woordvorm moet dieselfde korrekte enkelvoud gebruik as die syfervorm. \"Een millisekonde\" is die standaard Afrikaans; \"een millisekond\" is afwykend.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleMillisecondAgo gebruik \"1 millisekonde terug\".",
+        "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_MultipleMilliseconds gebruik \"{0} millisekondes\", dus stem \"millisekonde\" morfologies ooreen."
+      ],
+      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+    },
+    {
+      "locale": "af",
+      "key": "TimeSpanHumanize_SingleSecond",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "1 sekond",
+      "proposed_replacement": "1 sekonde",
+      "native_rationale": "In standaard Afrikaans is die enkelvoud sekonde, nie sekond nie. Die huidige vorm is onidiomaties en ortografies afwykend.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleSecond is currently 1 sekond while plural is sekondes.",
+        "tests/Humanizer.Tests/Localisation/af/DateHumanizeTests.cs: singular second form is 1 sekonde terug."
+      ],
+      "notes": "Normalize singular noun morphology to standard Afrikaans.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "1 sekonde",
+      "adjudicated_rationale": "Ek bevestig die bevinding: in standaard geskrewe Afrikaans is die enkelvoud \"sekonde\". \"Sekond\" is nie die korrekte normvorm in hierdie konteks nie.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleSecondAgo en DateHumanize_SingleSecondFromNow gebruik albei \"1 sekonde\".",
+        "tests/Humanizer.Tests/Localisation/af/DateHumanizeTests.cs: verwagte enkelvoud vir sekondes is \"1 sekonde terug\" en \"oor 1 sekonde\"."
+      ],
+      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+    },
+    {
+      "locale": "af",
+      "key": "TimeSpanHumanize_SingleSecond_Words",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "een sekond",
+      "proposed_replacement": "een sekonde",
+      "native_rationale": "Sekond is nie die standaard geskrewe enkelvoud in Afrikaans nie; sekonde is korrek en konsekwent met ander tydfrases.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_SingleSecond_Words is currently een sekond.",
+        "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleSecondAgo uses 1 sekonde terug."
+      ],
+      "notes": "Word-form variant should mirror numeric singular form.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "een sekonde",
+      "adjudicated_rationale": "Die woordvorm moet die standaard enkelvoud behou: \"sekonde\". \"Een sekond\" is nie natuurlike standaard Afrikaans vir hierdie gebruik nie.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_MultipleSeconds gebruik \"{0} sekondes\", wat by \"sekonde\" as enkelvoud aansluit.",
+        "src/Humanizer/Properties/Resources.af.resx en tests/Humanizer.Tests/Localisation/af/DateHumanizeTests.cs: enkelvoudige DateHumanize-vorme gebruik konsekwent \"1 sekonde\"."
+      ],
+      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+    }
+  ]
 }
