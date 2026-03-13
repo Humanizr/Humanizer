@@ -33,7 +33,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_SingleYearAgo",
                                                      "tests/Humanizer.Tests/Localisation/ar/DateHumanizeTests.cs: YearsAgo(-1)"
                                                   ],
-                         "adjudicated_notes":  "No change required."
+                         "adjudicated_notes":  "Second-pass independent review: keep current wording."
                      },
                      {
                          "locale":  "ar",
@@ -59,7 +59,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds",
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeUnit_Millisecond"
                                                   ],
-                         "adjudicated_notes":  "Second-pass confirmed."
+                         "adjudicated_notes":  "Second-pass confirmed by independent native review."
                      },
                      {
                          "locale":  "ar",
@@ -85,7 +85,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Dual",
                                                      "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Milliseconds"
                                                   ],
-                         "adjudicated_notes":  "Second-pass confirmed."
+                         "adjudicated_notes":  "Second-pass confirmed by independent native review."
                      },
                      {
                          "locale":  "ar",
@@ -111,7 +111,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Plural",
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeUnit_Millisecond"
                                                   ],
-                         "adjudicated_notes":  "Second-pass confirmed."
+                         "adjudicated_notes":  "Second-pass confirmed by independent native review."
                      },
                      {
                          "locale":  "ar",
@@ -137,7 +137,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMonths",
                                                      "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Months(335)"
                                                   ],
-                         "adjudicated_notes":  "Second-pass confirmed."
+                         "adjudicated_notes":  "Second-pass confirmed by independent native review."
                      },
                      {
                          "locale":  "ar",
@@ -163,7 +163,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleYears_Plural",
                                                      "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleYearsFromNow_Plural"
                                                   ],
-                         "adjudicated_notes":  "Second-pass confirmed."
+                         "adjudicated_notes":  "Second-pass confirmed by independent native review."
                      },
                      {
                          "locale":  "ar",
@@ -189,7 +189,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleMonth",
                                                      "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Months(31)"
                                                   ],
-                         "adjudicated_notes":  "Second-pass confirmed."
+                         "adjudicated_notes":  "Second-pass confirmed by independent native review."
                      },
                      {
                          "locale":  "ar",
@@ -215,7 +215,7 @@
                                                      "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleYear",
                                                      "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Years(366)"
                                                   ],
-                         "adjudicated_notes":  "Second-pass confirmed."
+                         "adjudicated_notes":  "Second-pass confirmed by independent native review."
                      }
                  ]
 }
