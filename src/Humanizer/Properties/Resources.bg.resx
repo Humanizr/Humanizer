@@ -117,10 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>бита</value>
+  </data>
+  <data name="DataUnit_Bit_Singular" xml:space="preserve">
+    <value>бит</value>
+  </data>
+  <data name="DataUnit_Bit_Plural" xml:space="preserve">
+    <value>бита</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>байта</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>байт</value>
+  </data>
+  <data name="DataUnit_Byte_Plural" xml:space="preserve">
+    <value>байта</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>килобайта</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Singular" xml:space="preserve">
+    <value>килобайт</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Plural" xml:space="preserve">
+    <value>килобайта</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>мегабайта</value>
+  </data>
+  <data name="DataUnit_Megabyte_Singular" xml:space="preserve">
+    <value>мегабайт</value>
+  </data>
+  <data name="DataUnit_Megabyte_Plural" xml:space="preserve">
+    <value>мегабайта</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>гигабайта</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>гигабайт</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Plural" xml:space="preserve">
+    <value>гигабайта</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>терабайта</value>
+  </data>
+  <data name="DataUnit_Terabyte_Singular" xml:space="preserve">
+    <value>терабайт</value>
+  </data>
+  <data name="DataUnit_Terabyte_Plural" xml:space="preserve">
+    <value>терабайта</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>преди {0} дена</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>преди {0} дена</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>след {0} дена</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>след {0} дена</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
@@ -155,6 +233,15 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>сега</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>никога</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>преди 2 дена</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>след 2 дена</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>вчера</value>
@@ -216,6 +303,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} години</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 ден</value>
   </data>
@@ -266,5 +356,77 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>няма време</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>ден</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ч.</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>мс.</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>мин.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>месец</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>сек.</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>седмица</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>година</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>север</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>североизток</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>изток</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>югоизток</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>юг</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>югозапад</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>запад</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>северозапад</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>С</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>СИ</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>И</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ЮИ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>Ю</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ЮЗ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>З</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>СЗ</value>
   </data>
 </root>
