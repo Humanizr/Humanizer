@@ -5,11 +5,11 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\tr",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  92,
-                    "ok":  92,
-                    "suspicious":  0,
+                    "ok":  91,
+                    "suspicious":  1,
                     "defect":  0
                 },
     "records":  [
@@ -716,16 +716,17 @@
                         "current_value":  "yarından sonra",
                         "neutral_reference":  "two days from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "yarından sonra",
+                        "proposed_replacement":  "öbür gün",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Mevcut ifade anlaşılır olsa da günlük Türkçede 'two days from now' için en doğal ve kalıp kullanım 'öbür gün'dür.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.tr.resx: DateHumanize_TwoDaysFromNow = 'yarından sonra'",
+                                         "tests/Humanizer.Tests/Localisation/tr/DateHumanizeTests.cs: explicit residual key assertion uses current literal"
                                      ],
-                        "notes":  ""
+                        "notes":  "Üslup/doğallık düzeltmesi; anlamsal hata değil."
                     },
                     {
                         "locale":  "tr",
