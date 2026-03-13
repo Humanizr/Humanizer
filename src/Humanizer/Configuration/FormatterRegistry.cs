@@ -45,7 +45,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("nb");
         RegisterDefaultFormatter("nl");
         Register("bn", c => new TrimPluralSuffixFormatter(c));
-        RegisterDefaultFormatter("it");
+        Register("it", c => new ItalianFormatter(c));
         RegisterDefaultFormatter("ta");
         Register("uz-Latn-UZ", c => new TrimPluralSuffixFormatter(c));
         Register("uz-Cyrl-UZ", c => new TrimPluralSuffixFormatter(c));

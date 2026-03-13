@@ -156,6 +156,15 @@
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>adesso</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>mai</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>l'altro ieri</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>dopodomani</value>
+  </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ieri</value>
   </data>
@@ -216,6 +225,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} anni</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} vecchio</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 giorno</value>
   </data>
@@ -266,5 +278,95 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>0 secondi</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>giorno</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ora</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mese</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>sec.</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>settimana</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>anno</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bytes</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabytes</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>gigabyte</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>nord</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>nord-est</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>est</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>sud-est</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>sud</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>sud-ovest</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>ovest</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>nord-ovest</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NE</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SE</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SO</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NO</value>
   </data>
 </root>
