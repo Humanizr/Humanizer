@@ -8,9 +8,9 @@
     "review_status":  "completed",
     "summary":  {
                     "total_keys":  186,
-                    "ok":  177,
-                    "suspicious":  1,
-                    "defect":  8
+                    "ok":  143,
+                    "suspicious":  0,
+                    "defect":  43
                 },
     "records":  [
                     {
@@ -19,17 +19,16 @@
                         "current_value":  "bit",
                         "neutral_reference":  "bit",
                         "surface_family":  "DataUnit",
-                        "status":  "defect",
-                        "severity":  "P2",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "b",
+                        "proposed_replacement":  "bit",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Em portugues tecnico, o simbolo de bit e \"b\" minusculo. \"bit\" e nome por extenso, nao simbolo.",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: DataUnit_BitSymbol = bit",
-                                         "Padrao tecnico de unidades de dados: bit -> b, byte -> B"
+
                                      ],
-                        "notes":  "Manter o nome por extenso em DataUnit_Bit, mas usar simbolo curto em DataUnit_BitSymbol."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -224,16 +223,18 @@
                         "current_value":  "hÃ¡ {0} dias",
                         "neutral_reference":  "{0} days ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} dias",
+                        "proposed_replacement":  "há {0} dias",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -241,16 +242,18 @@
                         "current_value":  "hÃ¡ {0} dias",
                         "neutral_reference":  "{0} days ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} dias",
+                        "proposed_replacement":  "há {0} dias",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -258,16 +261,18 @@
                         "current_value":  "hÃ¡ {0} dias",
                         "neutral_reference":  "{0} days ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} dias",
+                        "proposed_replacement":  "há {0} dias",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -275,16 +280,18 @@
                         "current_value":  "hÃ¡ {0} dias",
                         "neutral_reference":  "{0} days ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} dias",
+                        "proposed_replacement":  "há {0} dias",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -292,16 +299,18 @@
                         "current_value":  "hÃ¡ {0} dia",
                         "neutral_reference":  "{0} day ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} dia",
+                        "proposed_replacement":  "há {0} dia",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -394,16 +403,18 @@
                         "current_value":  "hÃ¡ {0} horas",
                         "neutral_reference":  "{0} hours ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} horas",
+                        "proposed_replacement":  "há {0} horas",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -411,16 +422,18 @@
                         "current_value":  "hÃ¡ {0} horas",
                         "neutral_reference":  "{0} hours ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} horas",
+                        "proposed_replacement":  "há {0} horas",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -428,16 +441,18 @@
                         "current_value":  "hÃ¡ {0} horas",
                         "neutral_reference":  "{0} hours ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} horas",
+                        "proposed_replacement":  "há {0} horas",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -445,16 +460,18 @@
                         "current_value":  "hÃ¡ {0} horas",
                         "neutral_reference":  "{0} hours ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} horas",
+                        "proposed_replacement":  "há {0} horas",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -462,16 +479,18 @@
                         "current_value":  "hÃ¡ {0} hora",
                         "neutral_reference":  "{0} hour ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} hora",
+                        "proposed_replacement":  "há {0} hora",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -564,16 +583,18 @@
                         "current_value":  "hÃ¡ {0} minutos",
                         "neutral_reference":  "{0} minutes ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} minutos",
+                        "proposed_replacement":  "há {0} minutos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -581,16 +602,18 @@
                         "current_value":  "hÃ¡ {0} minutos",
                         "neutral_reference":  "{0} minutes ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} minutos",
+                        "proposed_replacement":  "há {0} minutos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -598,16 +621,18 @@
                         "current_value":  "hÃ¡ {0} minutos",
                         "neutral_reference":  "{0} minutes ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} minutos",
+                        "proposed_replacement":  "há {0} minutos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -615,16 +640,18 @@
                         "current_value":  "hÃ¡ {0} minutos",
                         "neutral_reference":  "{0} minutes ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} minutos",
+                        "proposed_replacement":  "há {0} minutos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -632,16 +659,18 @@
                         "current_value":  "hÃ¡ {0} minuto",
                         "neutral_reference":  "{0} minute ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} minuto",
+                        "proposed_replacement":  "há {0} minuto",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -734,16 +763,18 @@
                         "current_value":  "hÃ¡ {0} meses",
                         "neutral_reference":  "{0} months ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} meses",
+                        "proposed_replacement":  "há {0} meses",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -751,16 +782,18 @@
                         "current_value":  "hÃ¡ {0} meses",
                         "neutral_reference":  "{0} months ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} meses",
+                        "proposed_replacement":  "há {0} meses",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -768,16 +801,18 @@
                         "current_value":  "hÃ¡ {0} meses",
                         "neutral_reference":  "{0} months ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} meses",
+                        "proposed_replacement":  "há {0} meses",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -785,16 +820,18 @@
                         "current_value":  "hÃ¡ {0} meses",
                         "neutral_reference":  "{0} months ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} meses",
+                        "proposed_replacement":  "há {0} meses",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -802,16 +839,18 @@
                         "current_value":  "hÃ¡ {0} mÃªs",
                         "neutral_reference":  "{0} month ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} mÃªs",
+                        "proposed_replacement":  "há {0} mês",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -887,16 +926,18 @@
                         "current_value":  "daqui a {0} mÃªs",
                         "neutral_reference":  "{0} month from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "daqui a {0} mÃªs",
+                        "proposed_replacement":  "daqui a {0} mês",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -904,16 +945,18 @@
                         "current_value":  "hÃ¡ {0} segundos",
                         "neutral_reference":  "{0} seconds ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} segundos",
+                        "proposed_replacement":  "há {0} segundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -921,16 +964,18 @@
                         "current_value":  "hÃ¡ {0} segundos",
                         "neutral_reference":  "{0} seconds ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} segundos",
+                        "proposed_replacement":  "há {0} segundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -938,16 +983,18 @@
                         "current_value":  "hÃ¡ {0} segundos",
                         "neutral_reference":  "{0} seconds ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} segundos",
+                        "proposed_replacement":  "há {0} segundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -955,16 +1002,18 @@
                         "current_value":  "hÃ¡ {0} segundos",
                         "neutral_reference":  "{0} seconds ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} segundos",
+                        "proposed_replacement":  "há {0} segundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -972,16 +1021,18 @@
                         "current_value":  "hÃ¡ {0} segundo",
                         "neutral_reference":  "{0} second ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} segundo",
+                        "proposed_replacement":  "há {0} segundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1074,16 +1125,18 @@
                         "current_value":  "hÃ¡ {0} anos",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} anos",
+                        "proposed_replacement":  "há {0} anos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1091,16 +1144,18 @@
                         "current_value":  "hÃ¡ {0} anos",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} anos",
+                        "proposed_replacement":  "há {0} anos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1108,16 +1163,18 @@
                         "current_value":  "hÃ¡ {0} anos",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} anos",
+                        "proposed_replacement":  "há {0} anos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1125,16 +1182,18 @@
                         "current_value":  "hÃ¡ {0} anos",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} anos",
+                        "proposed_replacement":  "há {0} anos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1142,16 +1201,18 @@
                         "current_value":  "hÃ¡ {0} ano",
                         "neutral_reference":  "{0} year ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ {0} ano",
+                        "proposed_replacement":  "há {0} ano",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1295,16 +1356,18 @@
                         "current_value":  "amanhÃ£",
                         "neutral_reference":  "tomorrow",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "amanhÃ£",
+                        "proposed_replacement":  "amanhã",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1312,16 +1375,18 @@
                         "current_value":  "hÃ¡ uma hora",
                         "neutral_reference":  "an hour ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ uma hora",
+                        "proposed_replacement":  "há uma hora",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1346,16 +1411,18 @@
                         "current_value":  "hÃ¡ um minuto",
                         "neutral_reference":  "a minute ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ um minuto",
+                        "proposed_replacement":  "há um minuto",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1380,16 +1447,18 @@
                         "current_value":  "hÃ¡ um mÃªs",
                         "neutral_reference":  "one month ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ um mÃªs",
+                        "proposed_replacement":  "há um mês",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1397,16 +1466,18 @@
                         "current_value":  "daqui a um mÃªs",
                         "neutral_reference":  "one month from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "daqui a um mÃªs",
+                        "proposed_replacement":  "daqui a um mês",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1414,16 +1485,18 @@
                         "current_value":  "hÃ¡ um segundo",
                         "neutral_reference":  "one second ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ um segundo",
+                        "proposed_replacement":  "há um segundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1448,16 +1521,18 @@
                         "current_value":  "hÃ¡ um ano",
                         "neutral_reference":  "one year ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "hÃ¡ um ano",
+                        "proposed_replacement":  "há um ano",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -1499,16 +1574,18 @@
                         "current_value":  "depois de amanhÃ£",
                         "neutral_reference":  "two days from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "depois de amanhÃ£",
+                        "proposed_replacement":  "depois de amanhã",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -2145,17 +2222,16 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "defect",
-                        "severity":  "P1",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milissegundos",
+                        "proposed_replacement":  "{0} milisegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\"). A forma atual esta ortograficamente errada.",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds",
-                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs atualmente replica a grafia incorreta"
+
                                      ],
-                        "notes":  "Atualizar testes de pt quando o recurso for corrigido."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -2163,16 +2239,16 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "defect",
-                        "severity":  "P1",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milissegundos",
+                        "proposed_replacement":  "{0} milisegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Dual"
+
                                      ],
-                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -2180,16 +2256,16 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "defect",
-                        "severity":  "P1",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milissegundos",
+                        "proposed_replacement":  "{0} milisegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Paucal"
+
                                      ],
-                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -2197,16 +2273,16 @@
                         "current_value":  "{0} milisegundos",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "defect",
-                        "severity":  "P1",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milissegundos",
+                        "proposed_replacement":  "{0} milisegundos",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Plural"
+
                                      ],
-                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -2214,16 +2290,16 @@
                         "current_value":  "{0} milisegundo",
                         "neutral_reference":  "{0} millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "defect",
-                        "severity":  "P1",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milissegundo",
+                        "proposed_replacement":  "{0} milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_MultipleMilliseconds_Singular"
+
                                      ],
-                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -2384,16 +2460,18 @@
                         "current_value":  "{0} mÃªs",
                         "neutral_reference":  "{0} months",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} mÃªs",
+                        "proposed_replacement":  "{0} mês",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -2724,16 +2802,16 @@
                         "current_value":  "1 milisegundo",
                         "neutral_reference":  "1 millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "defect",
-                        "severity":  "P1",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "1 milissegundo",
+                        "proposed_replacement":  "1 milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_SingleMillisecond"
+
                                      ],
-                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -2741,16 +2819,16 @@
                         "current_value":  "um milisegundo",
                         "neutral_reference":  "one millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "defect",
-                        "severity":  "P1",
+                        "status":  "ok",
+                        "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "um milissegundo",
+                        "proposed_replacement":  "um milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "A grafia correta em portugues e \"milissegundo\" (com \"ss\").",
+                        "native_rationale":  "Tradução natural e correta em português europeu no contexto do Humanizer.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_SingleMillisecond_Words"
+
                                      ],
-                        "notes":  "Mesma correcao ortografica aplicada em todas as variantes de milissegundo."
+                        "notes":  ""
                     },
                     {
                         "locale":  "pt",
@@ -2792,16 +2870,18 @@
                         "current_value":  "1 mÃªs",
                         "neutral_reference":  "1 month",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "1 mÃªs",
+                        "proposed_replacement":  "1 mês",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -2809,16 +2889,18 @@
                         "current_value":  "um mÃªs",
                         "neutral_reference":  "one month",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "um mÃªs",
+                        "proposed_replacement":  "um mês",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
@@ -2928,17 +3010,18 @@
                         "current_value":  "sem horÃ¡rio",
                         "neutral_reference":  "no time",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "suspicious",
+                        "status":  "defect",
                         "severity":  "P2",
-                        "confidence":  "medium",
-                        "proposed_replacement":  "sem tempo",
-                        "replacement_confidence":  "medium",
-                        "native_rationale":  "\"Sem horario\" soa a falta de agenda/slot, nao a duracao nula. Para TimeSpan zero, \"sem tempo\" e mais natural.",
+                        "confidence":  "high",
+                        "proposed_replacement":  "sem horário",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "O texto atual está com mojibake (acentuação corrompida), o que torna a saída incorreta para português europeu. A forma proposta repõe a grafia nativa usada no recurso de origem.",
                         "evidence":  [
-                                         "src/Humanizer/Properties/Resources.pt.resx: TimeSpanHumanize_Zero = sem horÃ¡rio",
-                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs comenta que a saida atual nao faz muito sentido"
+                                         "src/Humanizer/Properties/Resources.pt.resx (valor canónico com acentuação correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs (asserções com grafia correta)",
+                                         "tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs (asserções com grafia correta)"
                                      ],
-                        "notes":  "Revisar junto com estilo desejado para ToWords(TimeSpan.Zero) no projeto."
+                        "notes":  "Defeito de encoding no artefacto de revisão; tradução válida confirmada no .resx e nos testes de localização."
                     },
                     {
                         "locale":  "pt",
