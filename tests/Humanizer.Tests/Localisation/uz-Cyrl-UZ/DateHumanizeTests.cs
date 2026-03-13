@@ -79,4 +79,23 @@ public class DateHumanizeTests
     [Fact]
     public void Now() =>
         DateHumanize.Verify("ҳозир", 0, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void HasExplicitResidualDateResources()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("uz-Cyrl-UZ"), out var never));
+        Assert.Equal("ҳеч қачон", never);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("uz-Cyrl-UZ"), out var twoDaysAgo));
+        Assert.Equal("2 кун аввал", twoDaysAgo);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("uz-Cyrl-UZ"), out var twoDaysFromNow));
+        Assert.Equal("2 кундан сўнг", twoDaysFromNow);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("uz-Cyrl-UZ"), out var daysAgoPaucal));
+        Assert.Equal("{0} кун аввал", daysAgoPaucal);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("uz-Cyrl-UZ"), out var daysFromNowPaucal));
+        Assert.Equal("{0} кундан сўнг", daysFromNowPaucal);
+    }
 }
