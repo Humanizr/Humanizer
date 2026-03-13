@@ -4,15 +4,13 @@
     "owned_child_cultures":  [
                                  "uk-UA"
                              ],
-    "direct_test_directories":  {
-
-                                },
-    "review_status":  "pending",
+    "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\uk-UA",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  198,
-                    "ok":  198,
-                    "suspicious":  0,
-                    "defect":  0
+                    "ok":  189,
+                    "suspicious":  8,
+                    "defect":  1
                 },
     "records":  [
                     {
@@ -72,16 +70,16 @@
                         "current_value":  "б",
                         "neutral_reference":  "b",
                         "surface_family":  "DataUnit",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "б",
+                        "proposed_replacement":  "b",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Символ біта має бути латинською \"b\" за міжнародним технічним стандартом; кирилична \"б\" виглядає як локалізація слова, а не одиниці виміру.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:123"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by uk-UA via fallback."
                     },
                     {
                         "locale":  "uk",
@@ -1755,16 +1753,17 @@
                         "current_value":  "схід-північний схід",
                         "neutral_reference":  "east-northeast",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "схід-північний схід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "східно-північний схід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Для складених румбів українською нормативніше прислівникове поєднання (\"східно-\"), а форма з іменником \"схід-\" звучить кальковано.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:636",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:30"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
@@ -1789,16 +1788,17 @@
                         "current_value":  "схід-південний схід",
                         "neutral_reference":  "east-southeast",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "схід-південний схід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "східно-південний схід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "У технічній українській номенклатурі напрямків природніше \"східно-південний\", а не \"схід-південний\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:648",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:32"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
@@ -1891,16 +1891,17 @@
                         "current_value":  "північ-північний схід",
                         "neutral_reference":  "north-northeast",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "північ-північний схід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "північно-північний схід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Форма \"північ-північний\" стилістично груба; у румбах усталений прикметниково-прислівниковий компонент \"північно-\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:624",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:28"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
@@ -1925,16 +1926,17 @@
                         "current_value":  "північ-північний захід",
                         "neutral_reference":  "north-northwest",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "північ-північний захід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "північно-північний захід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Для складеного напрямку природніша й нормативніша форма \"північно-північний захід\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:708",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:42"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
@@ -2061,16 +2063,17 @@
                         "current_value":  "південь-південний схід",
                         "neutral_reference":  "south-southeast",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "південь-південний схід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "південно-південний схід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "У цій позиції очікується \"південно-\"; чинна форма сприймається як буквальна калька, а не природна українська назва румба.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:660",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:34"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
@@ -2095,16 +2098,17 @@
                         "current_value":  "південь-південний захід",
                         "neutral_reference":  "south-southwest",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "південь-південний захід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "південно-південний захід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Для складеного напряму нормативна модель: \"південно-південний захід\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:672",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:36"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
@@ -3319,16 +3323,17 @@
                         "current_value":  "захід-північний захід",
                         "neutral_reference":  "west-northwest",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "захід-північний захід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "західно-північний захід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Краще узгоджується зі словотвірною нормою румбів: \"західно-північний\", а не \"захід-північний\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:696",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:40"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
@@ -3353,16 +3358,17 @@
                         "current_value":  "захід-південний захід",
                         "neutral_reference":  "west-southwest",
                         "surface_family":  "Heading",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "захід-південний захід",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "західно-південний захід",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Для цього румба природніша форма \"західно-південний захід\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.uk.resx:684",
+                                         "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:38"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form."
                     },
                     {
                         "locale":  "uk",
