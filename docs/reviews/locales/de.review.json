@@ -6,7 +6,7 @@
                                  "de-LI"
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\de",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  112,
                     "ok":  112,
