@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\hr",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  109,
-                    "ok":  109,
+                    "ok":  107,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  2
                 },
     "records":  [
                     {
@@ -784,16 +784,17 @@
                         "current_value":  "juÄer",
                         "neutral_reference":  "yesterday",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "juÄer",
+                        "proposed_replacement":  "jučer",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Oblik \"juÄer\" je oštećen (mojibake). Ispravan hrvatski izraz je \"jučer\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.hr.resx: DateHumanize_SingleDayAgo = \"jučer\"",
+                                         "tests/Humanizer.Tests/Localisation/hr/DateHumanizeTests.cs: očekivanje \"jučer\" za -1 dan"
                                      ],
-                        "notes":  ""
+                        "notes":  "Potrebno uskladiti zapis u review artefaktu s izvornom lokalizacijom."
                     },
                     {
                         "locale":  "hr",
@@ -1685,16 +1686,17 @@
                         "current_value":  "bez podatka o vremenu",
                         "neutral_reference":  "no time",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "bez podatka o vremenu",
+                        "proposed_replacement":  "bez vremena",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"Bez podatka o vremenu\" znači da nema podatka, a ne da je trajanje nula. Za neutralni engleski \"no time\" prirodnije je \"bez vremena\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.hr.resx: TimeSpanHumanize_Zero = \"bez podatka o vremenu\"",
+                                         "Neutral reference je \"no time\" (bez dodatnog značenja o nedostajućim podacima)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Predloženi izraz je semantički bliži i prirodniji u hrvatskom UI kontekstu."
                     },
                     {
                         "locale":  "hr",
