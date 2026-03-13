@@ -13,6 +13,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("sl", c => new SlovenianFormatter(c));
         Register("hr", c => new CroatianFormatter(c));
         Register("sr", c => new SerbianFormatter(c));
+        Register("sr-Latn", c => new SerbianFormatter(c));
         Register("uk", c => new UkrainianFormatter(c));
         Register("fr", c => new FrenchFormatter(c));
         RegisterCzechSlovakPolishFormatter("cs");

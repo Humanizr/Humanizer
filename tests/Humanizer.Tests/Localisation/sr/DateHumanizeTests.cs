@@ -81,4 +81,12 @@ public class DateHumanizeDefaultStrategyTests
     [Fact]
     public void Now() =>
         DateHumanize.Verify("сада", 0, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void TwoDaysAgo() =>
+        DateHumanize.Verify("пре 2 дана", 2, TimeUnit.Day, Tense.Past);
+
+    [Fact]
+    public void TwoDaysFromNow() =>
+        DateHumanize.Verify("за 2 дана", 2, TimeUnit.Day, Tense.Future);
 }

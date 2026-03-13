@@ -413,15 +413,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.sr.resx`, `tests/Humanizer.Tests/Localisation/sr/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `sr`, preserving the current teen-number formatter fix and extending the locale to full approved parity.
 - **validation**: Targeted `sr` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Serbian Cyrillic residual `DateHumanize` (`Never`, `TwoDays*`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, full 16-point heading resources, and full `DataUnit_*` resources with Serbian singular/paucal/plural forms. Extended `SerbianFormatter` with `DataUnitHumanize` support so full-word byte sizes use Serbian forms instead of English suffixing.
+- **files edited/created**: `src/Humanizer/Configuration/FormatterRegistry.cs`, `src/Humanizer/Localisation/Formatters/SerbianFormatter.cs`, `src/Humanizer/Properties/Resources.sr.resx`, `tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sr/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sr/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/sr/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/sr/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/sr/Bytes/ToFullWordsTests.cs`
 
 ### T43: Complete Serbian Latin locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.sr-Latn.resx`, `tests/Humanizer.Tests/Localisation/sr-Latn/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `sr-Latn`, preserving the current teen-number formatter fix and extending the locale to full approved parity.
 - **validation**: Targeted `sr-Latn` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
+- **status**: Completed
+- **log**: Added Serbian Latin residual `DateHumanize` (`Never`, `TwoDays*`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, full 16-point heading resources, and full `DataUnit_*` resources aligned with the shared Serbian formatter path. Registered `sr-Latn` explicitly to use `SerbianFormatter` and added direct Latin-script regression coverage for `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
+- **files edited/created**: `src/Humanizer/Configuration/FormatterRegistry.cs`, `src/Humanizer/Localisation/Formatters/SerbianFormatter.cs`, `src/Humanizer/Properties/Resources.sr-Latn.resx`, `tests/Humanizer.Tests/Localisation/sr-Latn/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/Bytes/ToFullWordsTests.cs`
 - **status**: Not Completed
 - **log**:
 - **files edited/created**:

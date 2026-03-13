@@ -303,4 +303,208 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>без протеклог времена</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>никада</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>пре 2 дана</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>за 2 дана</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>битова</value>
+  </data>
+  <data name="DataUnit_Bit_Paucal" xml:space="preserve">
+    <value>бита</value>
+  </data>
+  <data name="DataUnit_Bit_Singular" xml:space="preserve">
+    <value>бит</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>бајтова</value>
+  </data>
+  <data name="DataUnit_Byte_Paucal" xml:space="preserve">
+    <value>бајта</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>бајт</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>гигабајтова</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Paucal" xml:space="preserve">
+    <value>гигабајта</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>гигабајт</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>килобајтова</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Paucal" xml:space="preserve">
+    <value>килобајта</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Singular" xml:space="preserve">
+    <value>килобајт</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>мегабајтова</value>
+  </data>
+  <data name="DataUnit_Megabyte_Paucal" xml:space="preserve">
+    <value>мегабајта</value>
+  </data>
+  <data name="DataUnit_Megabyte_Singular" xml:space="preserve">
+    <value>мегабајт</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>терабајтова</value>
+  </data>
+  <data name="DataUnit_Terabyte_Paucal" xml:space="preserve">
+    <value>терабајта</value>
+  </data>
+  <data name="DataUnit_Terabyte_Singular" xml:space="preserve">
+    <value>терабајт</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>дан</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ч</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>мс</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>мин</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>мес</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>с</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>нед</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>год</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>север</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>С</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>север-североисток</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>ССИ</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>североисток</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>СИ</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>исток-североисток</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>ИСИ</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>исток</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>И</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>исток-југоисток</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>ИЈИ</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>југоисток</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ЈИ</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>југ-југоисток</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>ЈЈИ</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>југ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>Ј</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>југ-југозапад</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>ЈЈЗ</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>југозапад</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ЈЗ</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>запад-југозапад</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>ЗЈЗ</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>запад</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>З</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>запад-северозапад</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>ЗСЗ</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>северозапад</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>СЗ</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>север-северозапад</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>ССЗ</value>
+  </data>
 </root>

@@ -111,4 +111,8 @@ public class TimeSpanHumanizeTests
         var actual = noTime.Humanize(toWords: true);
         Assert.Equal("bez proteklog vremena", actual);
     }
+
+    [Fact]
+    public void ToAge() =>
+        Assert.Equal("1 godina", TimeSpan.FromDays(366).ToAge());
 }
