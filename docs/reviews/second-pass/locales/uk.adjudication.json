@@ -1,12 +1,12 @@
 ﻿{
     "locale":  "uk",
     "source_review":  "docs\\\\reviews\\\\locales\\\\uk.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  9,
+                    "pending":  0,
                     "confirmed":  0,
                     "modified":  0,
-                    "rejected":  0
+                    "rejected":  9
                 },
     "findings":  [
                      {
@@ -22,16 +22,17 @@
                                           "src/Humanizer/Properties/Resources.uk.resx:123"
                                       ],
                          "notes":  "Inherited by uk-UA via fallback.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "b",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "б",
+                         "adjudicated_rationale":  "Для української локалізації скорочення «б» для біта є прийнятним і не створює неоднозначності з байтом («B»), тож обов’язкової заміни на латинське «b» не потрібно.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:123",
+                                                     "src/Humanizer/Properties/Resources.ru.resx:123"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -47,16 +48,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:30"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "східно-північний схід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "схід-північний схід",
+                         "adjudicated_rationale":  "Форма «схід-північний схід» є природною українською назвою румба ENE; заміна на «східно-північний схід» не є обов’язковою нормою.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:636",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:30"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -72,16 +74,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:32"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "східно-південний схід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "схід-південний схід",
+                         "adjudicated_rationale":  "Форма «схід-південний схід» є прийнятною українською назвою румба ESE; підстав вважати чинний варіант дефектним немає.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:648",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:32"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -97,16 +100,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:28"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "північно-північний схід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "північ-північний схід",
+                         "adjudicated_rationale":  "Форма «північ-північний схід» є усталеною для румба NNE в українському вжитку; варіант із «північно-» не має безумовної переваги.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:624",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:28"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -122,16 +126,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:42"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "північно-північний захід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "північ-північний захід",
+                         "adjudicated_rationale":  "Форма «північ-північний захід» є природною назвою румба NNW українською; запропонована заміна не є необхідною.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:708",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:42"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -147,16 +152,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:34"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "південно-південний схід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "південь-південний схід",
+                         "adjudicated_rationale":  "Форма «південь-південний схід» є коректною назвою румба SSE в цій номенклатурі; варіант із «південно-» не є обов’язковим.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:660",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:34"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -172,16 +178,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:36"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "південно-південний захід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "південь-південний захід",
+                         "adjudicated_rationale":  "Форма «південь-південний захід» є нормативно прийнятною назвою румба SSW; підстав для обов’язкової зміни немає.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:672",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:36"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -197,16 +204,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:40"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "західно-північний захід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "захід-північний захід",
+                         "adjudicated_rationale":  "Форма «захід-північний захід» є природною назвою румба WNW у чинній українській традиції позначень.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:696",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:40"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "uk",
@@ -222,16 +230,17 @@
                                           "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:38"
                                       ],
                          "notes":  "Owned child-culture fallback (uk-UA) currently asserts this form.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
-                         "adjudicated_confidence":  "medium",
-                         "adjudicated_replacement":  "західно-південний захід",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "захід-південний захід",
+                         "adjudicated_rationale":  "Форма «захід-південний захід» є прийнятною назвою румба WSW; підстав для заміни на «західно-південний» недостатньо.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.uk.resx:684",
+                                                     "tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs:38"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      }
                  ]
 }
