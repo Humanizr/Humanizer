@@ -13,6 +13,23 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
     [Theory]
+    [InlineData(14, false, "2 setmanes")]
+    [InlineData(366, false, "1 any")]
+    [InlineData(366, true, "un any")]
+    public void Age(int days, bool toWords, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
+
+    [Fact]
+    public void CatalanHasExplicitPaucalDayAndAgeResources()
+    {
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_Age", new("ca"), out var ageFormat));
+        Assert.Equal("{0}", ageFormat);
+
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_MultipleDays_Paucal", new("ca"), out var daysPaucal));
+        Assert.Equal("{0} dies", daysPaucal);
+    }
+
+    [Theory]
     [Trait("Translation", "Google")]
     [InlineData(31, "1 mes")]
     [InlineData(61, "2 mesos")]
