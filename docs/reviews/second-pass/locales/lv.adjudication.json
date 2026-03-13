@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "lv",
     "source_review":  "docs\\\\reviews\\\\locales\\\\lv.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  1,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  1,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -24,16 +24,18 @@
                                           "tests/Humanizer.Tests/Localisation/lv/DateHumanizeTests.cs (Latvian date humanization resources are locale-owned and explicitly validated)"
                                       ],
                          "notes":  "Direct grammatical correction; keeps style parallel with SingleHourFromNow/SingleSecondFromNow.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "pēc minūtes",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Confirmed. Latvian requires genitive singular after the preposition \"pēc\"; \"minūtēs\" is locative plural and ungrammatical in this construction. The correct fixed form is \"pēc minūtes\", consistent with the existing \"pirms minūtes\" pattern.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.lv.resx:316 (DateHumanize_SingleMinuteFromNow is currently \"pēc minūtēs\")",
+                                                     "src/Humanizer/Properties/Resources.lv.resx:313 (DateHumanize_SingleMinuteAgo uses \"pirms minūtes\", showing the expected singular genitive pattern)",
+                                                     "tests/Humanizer.Tests/Localisation/lv/DateHumanizeTests.cs:6 (Latvian date humanization relies on explicit locale resources)"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "First-pass replacement is correct; no modification needed."
                      }
                  ]
 }
