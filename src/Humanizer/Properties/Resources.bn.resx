@@ -117,10 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>বিট</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>বাইট</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>গিগাবাইট</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>কিলোবাইট</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>মেগাবাইট</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>টেরাবাইট</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} দিন আগে</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} দিন আগে</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} দিন পর</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>{0} দিন পর</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
@@ -156,11 +198,20 @@
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>এখন</value>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>কখনও না</value>
+  </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>গতকাল</value>
   </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>আগামিকাল</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>পরশু</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>পরশু</value>
   </data>
   <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>এক ঘণ্টা আগে</value>
@@ -216,6 +267,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} বছর</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} বয়স</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>এক দিন</value>
   </data>
@@ -242,5 +296,29 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>শূন্য সময়</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>দিন</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ঘণ্টা</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>মিলিসেকেন্ড</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>মিনিট</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>মাস</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>সেকেন্ড</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>সপ্তাহ</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>বছর</value>
   </data>
 </root>

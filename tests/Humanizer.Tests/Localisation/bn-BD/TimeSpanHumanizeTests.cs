@@ -4,6 +4,11 @@
 public class TimeSpanHumanizeTests
 {
     [Theory]
+    [InlineData(366, "এক বছর বয়স")]
+    public void Age(int days, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
+
+    [Theory]
     [Trait("Translation", "Google")]
     [InlineData(366, "এক বছর")]
     [InlineData(731, "2 বছর")]
