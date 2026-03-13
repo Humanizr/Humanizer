@@ -1,11 +1,11 @@
 ﻿{
     "locale":  "fr",
     "source_review":  "docs\\\\reviews\\\\locales\\\\fr.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  1,
+                    "pending":  0,
                     "confirmed":  0,
-                    "modified":  0,
+                    "modified":  1,
                     "rejected":  0
                 },
     "findings":  [
@@ -24,16 +24,18 @@
                                           "tests/Humanizer.Tests/Localisation/fr-BE/TimeSpanHumanizeTests.cs: NoTimeToWords hÃ©rite aussi de temps nul (fallback parent)"
                                       ],
                          "notes":  "Impact fallback: fr-BE et fr-CH hÃ©ritent cette chaÃ®ne; correction parent amÃ©liorerait les enfants sans override.",
-                         "adjudication":  "pending",
+                         "adjudication":  "modified",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "aucune durÃ©e",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "dur\u00e9e nulle",
+                         "adjudicated_rationale":  "\u0027temps nul\u0027 est compr\u00e9hensible mais peu idiomatique pour une dur\u00e9e; en fran\u00e7ais standard, la formulation naturelle pour TimeSpan.Zero est \u0027dur\u00e9e nulle\u0027.",
                          "adjudicated_evidence":  [
-
+                                                    "src/Humanizer/Properties/Resources.fr.resx:355 contient la valeur actuelle \u0022temps nul\u0022 pour TimeSpanHumanize_Zero.",
+                                                    "tests/Humanizer.Tests/Localisation/fr/TimeSpanHumanizeTests.cs:213 valide actuellement \u0022temps nul\u0022.",
+                                                    "tests/Humanizer.Tests/Localisation/fr-BE/TimeSpanHumanizeTests.cs:99 valide aussi \u0022temps nul\u0022 via fallback parent fr; il n\u0027existe pas de Resources.fr-BE.resx/Resources.fr-CH.resx."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Deuxi\u00e8me passe: d\u00e9faut confirm\u00e9 mais remplacement ajust\u00e9 de \u0022aucune dur\u00e9e\u0022 vers \u0022dur\u00e9e nulle\u0022 pour une formulation plus idiomatique et concise."
                      }
                  ]
 }
