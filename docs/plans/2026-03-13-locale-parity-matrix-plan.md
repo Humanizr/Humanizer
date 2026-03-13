@@ -107,9 +107,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.ca.resx`, `tests/Humanizer.Tests/Localisation/ca/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize` and `TimeSpanHumanize` gaps for `ca` and extend tests so the locale is fully closed out on approved surfaces.
 - **validation**: Targeted `ca` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the missing Catalan `DateHumanize` residual keys (`TwoDays*`, `MultipleDays*_Paucal`) and the missing `TimeSpanHumanize_Age` plus `TimeSpanHumanize_MultipleDays_Paucal` entries. Added direct Catalan regression coverage for explicit residual resource values and `ToAge` behavior.
+- **files edited/created**: `src/Humanizer/Properties/Resources.ca.resx`, `tests/Humanizer.Tests/Localisation/ca/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ca/TimeSpanHumanizeTests.cs`
 
 ### T9: Complete Czech locale parity
 - **depends_on**: [T1, T2]
@@ -134,9 +134,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.de.resx`, `tests/Humanizer.Tests/Localisation/de/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize` and `TimeSpanHumanize` gaps for `de`, preserving the existing heading, unit, and byte coverage.
 - **validation**: Targeted `de` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Closed the actionable German residual gap by adding an explicit `TimeSpanHumanize_Age` resource (`{0} alt`) and regression coverage for numeric and `toWords` `ToAge` behavior.
+- **files edited/created**: `src/Humanizer/Properties/Resources.de.resx`, `tests/Humanizer.Tests/Localisation/de/TimeSpanHumanizeTests.cs`
 
 ### T12: Complete Greek locale parity
 - **depends_on**: [T1, T2]
@@ -152,9 +152,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.es.resx`, `tests/Humanizer.Tests/Localisation/es/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize` and `TimeSpanHumanize` gaps for `es`, preserving the existing heading, unit, and byte fixes.
 - **validation**: Targeted `es` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the missing Spanish residual parity resources for `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`) and `TimeSpanHumanize` (`Age`, `MultipleDays_Paucal`). Added regression tests that assert explicit Spanish residual resource presence and values.
+- **files edited/created**: `src/Humanizer/Properties/Resources.es.resx`, `tests/Humanizer.Tests/Localisation/es/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/es/TimeSpanHumanizeTests.cs`
 
 ### T14: Complete Persian locale parity
 - **depends_on**: [T1, T2]
@@ -188,9 +188,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.fr.resx`, `tests/Humanizer.Tests/Localisation/fr/**/*`, `tests/Humanizer.Tests/Localisation/fr-BE/**/*`, `tests/Humanizer.Tests/Localisation/fr-CH/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, and heading surfaces for `fr` and add or extend tests accordingly without disturbing the existing byte/unit coverage.
 - **validation**: Targeted French locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the missing French residual `DateHumanize` keys (`TwoDays*`, `MultipleDays*_Paucal`) plus `TimeSpanHumanize_Age` and `TimeSpanHumanize_MultipleDays_Paucal`. Added direct French regression coverage for explicit residual resource values and presence.
+- **files edited/created**: `src/Humanizer/Properties/Resources.fr.resx`, `tests/Humanizer.Tests/Localisation/fr/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/fr/TimeSpanHumanizeTests.cs`
 
 ### T18: Complete Hebrew locale parity
 - **depends_on**: [T1, T2]
@@ -242,9 +242,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.is.resx`, `tests/Humanizer.Tests/Localisation/is/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize`, `TimeSpanHumanize`, and `TimeUnit` gaps for `is`, preserving the existing heading and byte coverage.
 - **validation**: Targeted `is` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the missing Icelandic residual `DateHumanize` keys (`TwoDays*`, `MultipleDays*_Dual`, `MultipleDays*_Paucal`) and the missing `TimeSpanHumanize` residual keys (`Age`, `MultipleDays_Dual`, `MultipleDays_Paucal`). Added direct Icelandic regression coverage asserting those resources resolve to Icelandic values instead of falling back to English.
+- **files edited/created**: `src/Humanizer/Properties/Resources.is.resx`, `tests/Humanizer.Tests/Localisation/is/ResourcesTests.cs`
 
 ### T24: Complete Italian locale parity
 - **depends_on**: [T1, T2]
@@ -278,18 +278,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.ku.resx`, `tests/Humanizer.Tests/Localisation/ku/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `ku`, preserving current date/time coverage and extending tests to all completed surfaces.
 - **validation**: Targeted `ku` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the missing Kurdish residual `DateHumanize` keys (`TwoDays*`, `MultipleDays*_Paucal`) plus `TimeSpanHumanize_Age`. Added direct Kurdish regression coverage for explicit residual resource values and stable `ToAge()` behavior.
+- **files edited/created**: `src/Humanizer/Properties/Resources.ku.resx`, `tests/Humanizer.Tests/Localisation/ku/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ku/TimeSpanHumanizeTests.cs`
 
 ### T28: Complete Luxembourgish locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.lb.resx`, `tests/Humanizer.Tests/Localisation/lb/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, and heading surfaces for `lb`, preserving the existing collection formatter and byte coverage.
 - **validation**: Targeted `lb` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the missing Luxembourgish residual `DateHumanize` keys (`TwoDays*`, `MultipleDays*_Paucal`) and `TimeSpanHumanize` residual keys (`Age`, `MultipleDays_Paucal`). Added direct Luxembourgish regression coverage for explicit residual resource presence/value and `ToAge()` behavior.
+- **files edited/created**: `src/Humanizer/Properties/Resources.lb.resx`, `tests/Humanizer.Tests/Localisation/lb/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/lb/TimeSpanHumanizeTests.cs`
 
 ### T29: Complete Lithuanian locale parity
 - **depends_on**: [T1, T2]
@@ -323,9 +323,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.mt.resx`, `tests/Humanizer.Tests/Localisation/mt/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, and `DataUnit` gaps for `mt`, preserving the current heading fixes.
 - **validation**: Targeted `mt` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added explicit Maltese `DateHumanize` residual keys (`TwoDays*`, `MultipleDays*_Paucal`), `TimeSpanHumanize_Age`, full `TimeUnit_*` resources, and explicit `DataUnit_*` resources. Added direct regression coverage for residual date/time resources, `ToAge`, `TimeUnit.ToSymbol`, `ByteSize.ToFullWords`, and Maltese `DataUnit` presence.
+- **files edited/created**: `src/Humanizer/Properties/Resources.mt.resx`, `tests/Humanizer.Tests/Localisation/mt/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/mt/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/mt/Bytes/ToFullWordsTests.cs`, `tests/Humanizer.Tests/Localisation/mt/TimeUnitToSymbolTests.cs`
 
 ### T33: Complete Norwegian Bokmal locale parity
 - **depends_on**: [T1, T2]
@@ -359,18 +359,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.pt.resx`, `tests/Humanizer.Tests/Localisation/pt/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize` and `TimeSpanHumanize` gaps for `pt`, preserving the current heading, unit, and byte coverage.
 - **validation**: Targeted `pt` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the missing Portuguese residual parity resources for `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`) and `TimeSpanHumanize_Age`. Added direct Portuguese tests for explicit residual resource presence/values and `ToAge` behavior.
+- **files edited/created**: `src/Humanizer/Properties/Resources.pt.resx`, `tests/Humanizer.Tests/Localisation/pt/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/pt/TimeSpanHumanizeTests.cs`
 
 ### T37: Complete Brazilian Portuguese residual parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.pt-BR.resx`, `tests/Humanizer.Tests/Localisation/pt-BR/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize` and `TimeSpanHumanize` gaps for `pt-BR`, preserving the current heading, unit, and byte coverage.
 - **validation**: Targeted `pt-BR` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added the four missing Brazilian Portuguese `DateHumanize` residual parity keys (`TwoDays*`, `MultipleDays*_Paucal`) and direct `pt-BR` tests asserting those residual resources, plus explicit `ToAge` coverage in the `TimeSpanHumanize` tests.
+- **files edited/created**: `src/Humanizer/Properties/Resources.pt-BR.resx`, `tests/Humanizer.Tests/Localisation/pt-BR/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs`
 
 ### T38: Complete Romanian locale parity
 - **depends_on**: [T1, T2]
