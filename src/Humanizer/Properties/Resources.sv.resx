@@ -171,6 +171,12 @@
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>aldrig</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>i förrgår</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>i övermorgon</value>
+  </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>igår</value>
   </data>
@@ -243,6 +249,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} år</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} gammal</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 dag</value>
   </data>
@@ -269,5 +278,95 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ingen tid</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>dag</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>timme</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>månad</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>sek.</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>vecka</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>år</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bytes</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabytes</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>gigabyte</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>nord</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>nordost</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>ost</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>sydost</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>syd</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>sydväst</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>väst</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>nordväst</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SO</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SV</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NV</value>
   </data>
 </root>

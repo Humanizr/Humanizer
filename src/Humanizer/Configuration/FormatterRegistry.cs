@@ -21,7 +21,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("bg", c => new BulgarianFormatter(c));
         RegisterDefaultFormatter("ku");
         RegisterDefaultFormatter("pt");
-        RegisterDefaultFormatter("sv");
+        Register("sv", c => new SwedishFormatter(c));
         Register("tr", c => new TrimPluralSuffixFormatter(c));
         Register("vi", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("en");
