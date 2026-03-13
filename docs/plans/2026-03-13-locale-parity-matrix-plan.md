@@ -224,9 +224,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.hy.resx`, `tests/Humanizer.Tests/Localisation/hy/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `hy`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `hy` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Armenian residual `DateHumanize` (`Never`, `TwoDays*`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, `DataUnit_*`, and 8-point heading resources. Routed Armenian through the trim-suffix formatter to stop English `s` plural leakage in `ByteSize.ToFullWords()`. Added direct Armenian regression coverage for explicit residual resources, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
+- **files edited/created**: `src/Humanizer/Configuration/FormatterRegistry.cs`, `src/Humanizer/Properties/Resources.hy.resx`, `tests/Humanizer.Tests/Localisation/hy/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/hy/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/hy/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/hy/Bytes/ToFullWordsTests.cs`
 
 ### T22: Complete Indonesian locale parity
 - **depends_on**: [T1, T2]

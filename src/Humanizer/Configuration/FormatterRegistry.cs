@@ -34,7 +34,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("fi", c => new FinnishFormatter(c));
         RegisterDefaultFormatter("fil");
         Register("hu", c => new HungarianFormatter(c));
-        RegisterDefaultFormatter("hy");
+        Register("hy", c => new TrimPluralSuffixFormatter(c));
         Register("id", c => new TrimPluralSuffixFormatter(c));
         Register("is", c => new IcelandicFormatter(c));
         Register("ja", c => new TrimPluralSuffixFormatter(c));

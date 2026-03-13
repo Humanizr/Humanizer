@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>բայթ</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>գիգաբայթ</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} օր առաջ</value>
   </data>
@@ -155,6 +167,15 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>հիմա</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>երբեք</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>2 օր առաջ</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>2 օրից</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>երեկ</value>
@@ -216,6 +237,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} տարի</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>մեկ օր</value>
   </data>
@@ -242,5 +266,77 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ժամանակը բացակայում է</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>օր</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ժամ</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>մվ</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>ր</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>ամիս</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>վ</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>շաբաթ</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>տարի</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>հյուսիս</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>հյուսիս-արևելք</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>արևելք</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>հարավ-արևելք</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>հարավ</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>հարավ-արևմուտք</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>արևմուտք</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>հյուսիս-արևմուտք</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>Հ</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ՀԱ</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>Ա</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ՀԱՐԱ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>ՀԱՐ</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ՀԱՐԱՄ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>ԱՄ</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ՀԱՄ</value>
   </data>
 </root>
