@@ -25,15 +25,24 @@ class CroatianFormatter(CultureInfo culture) :
         }
 
         var resourceKey = $"DataUnit_{dataUnit}";
-        if (count == 1 && Resources.TryGetResource(resourceKey + SingularPostfix, Culture, out var singular))
+        if (count == 1)
         {
-            return singular;
+            try
+            {
+                return Resources.GetResource(resourceKey + SingularPostfix, Culture);
+            }
+            catch (ArgumentException)
+            {
+            }
         }
 
         var resolvedKey = GetResourceKey(resourceKey, (int)count);
-        if (Resources.TryGetResource(resolvedKey, Culture, out var localized))
+        try
         {
-            return localized;
+            return Resources.GetResource(resolvedKey, Culture);
+        }
+        catch (ArgumentException)
+        {
         }
 
         return base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');

@@ -5,22 +5,22 @@ public class ResourcesTests
     [Fact]
     public void HasExplicitResidualResources()
     {
-        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("bg"), out var never));
+        var never = Resources.GetResource("DateHumanize_Never", new("bg-BG"));
         Assert.Equal("никога", never);
 
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("bg"), out var twoDaysAgo));
+        var twoDaysAgo = Resources.GetResource("DateHumanize_TwoDaysAgo", new("bg-BG"));
         Assert.Equal("преди 2 дена", twoDaysAgo);
 
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("bg"), out var twoDaysFromNow));
+        var twoDaysFromNow = Resources.GetResource("DateHumanize_TwoDaysFromNow", new("bg-BG"));
         Assert.Equal("след 2 дена", twoDaysFromNow);
 
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("bg"), out var daysAgoPaucal));
+        var daysAgoPaucal = Resources.GetResource("DateHumanize_MultipleDaysAgo_Paucal", new("bg-BG"));
         Assert.Equal("преди {0} дена", daysAgoPaucal);
 
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("bg"), out var daysFromNowPaucal));
+        var daysFromNowPaucal = Resources.GetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("bg-BG"));
         Assert.Equal("след {0} дена", daysFromNowPaucal);
 
-        Assert.True(Resources.TryGetResource("TimeSpanHumanize_Age", new("bg"), out var ageFormat));
+        var ageFormat = Resources.GetResource("TimeSpanHumanize_Age", new("bg-BG"));
         Assert.Equal("{0}", ageFormat);
     }
 }

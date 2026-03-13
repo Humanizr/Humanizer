@@ -17,19 +17,34 @@ class BulgarianFormatter(CultureInfo culture)
         }
 
         var resourceKey = $"DataUnit_{dataUnit}";
-        if (count == 1 && Resources.TryGetResource(resourceKey + SingularPostfix, Culture, out var singular))
+        if (count == 1)
         {
-            return singular;
+            try
+            {
+                return Resources.GetResource(resourceKey + SingularPostfix, Culture);
+            }
+            catch (ArgumentException)
+            {
+            }
         }
 
-        if (count > 1 && Resources.TryGetResource(resourceKey + PluralPostfix, Culture, out var plural))
+        if (count > 1)
         {
-            return plural;
+            try
+            {
+                return Resources.GetResource(resourceKey + PluralPostfix, Culture);
+            }
+            catch (ArgumentException)
+            {
+            }
         }
 
-        if (Resources.TryGetResource(resourceKey, Culture, out var localized))
+        try
         {
-            return localized;
+            return Resources.GetResource(resourceKey, Culture);
+        }
+        catch (ArgumentException)
+        {
         }
 
         return base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');
