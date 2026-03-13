@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "is",
     "source_review":  "docs\\\\reviews\\\\locales\\\\is.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  2,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  2,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/is/DateHumanizeTests.cs (SecondsAgo: \u0027fyrir 2 sekúndum\u0027)."
                                       ],
                          "notes":  "Samræmt við grunnlykilinn DateHumanize_MultipleSecondsAgo.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "fyrir {0} sekúndum",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Staðfest. Fyrir fleirtölu í framsetningu með forsetningunni \"fyrir\" þarf þágufall fleirtölu: \"sekúndum\". Núverandi strengur \"sekúndu\" er eintala og passar ekki við lykilinn _Plural né hegðun í prófum.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.is.resx (DateHumanize_MultipleSecondsAgo = \"fyrir {0} sekúndum\").",
+                                                     "tests/Humanizer.Tests/Localisation/is/DateHumanizeTests.cs (SecondsAgo staðfestir \"fyrir 2 sekúndum\")."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Engin breyting á tillögu fyrstu yfirferðar."
                      },
                      {
                          "locale":  "is",
@@ -48,16 +49,17 @@
                                           "tests/Humanizer.Tests/Localisation/is/TimeSpanHumanizeTests.cs (Months: \u00271 mánuður\u0027)."
                                       ],
                          "notes":  "Leiðrétt í samræmi við TimeSpanHumanize_SingleMonth.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} mánuður",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Staðfest. Singular-lykillinn þarf að skila eintölu, \"mánuður\". Núverandi gildi \"{0} mánuðir\" er fleirtala og veldur röngu úttaki fyrir 1.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.is.resx (TimeSpanHumanize_MultipleMonths_Singular er skráð sem \"{0} mánuðir\").",
+                                                     "tests/Humanizer.Tests/Localisation/is/TimeSpanHumanizeTests.cs (Months fyrir 31 daga væntir \"1 mánuður\")."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Engin breyting á tillögu fyrstu yfirferðar."
                      }
                  ]
 }
