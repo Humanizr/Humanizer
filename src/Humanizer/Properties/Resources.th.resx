@@ -453,4 +453,79 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ไม่มีเวลา</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} วันที่แล้ว</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>{0} วันจากนี้</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>เมื่อวานซืน</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>มะรืนนี้</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>วัน</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ชั่วโมง</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>มิลลิวินาที</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>นาที</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>เดือน</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>วินาที</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>สัปดาห์</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>ปี</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>บิต</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>ไบต์</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>กิโลไบต์</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>เมกะไบต์</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>กิกะไบต์</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>เทราไบต์</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
 </root>
