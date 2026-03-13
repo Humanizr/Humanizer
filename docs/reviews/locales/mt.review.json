@@ -2641,14 +2641,15 @@
                         "status":  "defect",
                         "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "sena",
+                        "proposed_replacement":  "{0} sena",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Il-forma singulari għal \"year\" hi \"sena\". Il-valur attwali \"{0} snin\" hu plural u joħloq qbil grammatikali ħażin għal singular.",
+                        "native_rationale":  "Għall-kategorija singulari b'placeholder numeriku, in-nom għandu jibqa' fis-singular: \"{0} sena\". Il-forma attwali \"{0} snin\" hi plural u tagħti qbil grammatikali żbaljat.",
                         "evidence":  [
                                          "src/Humanizer/Properties/Resources.mt.resx: key \"TimeSpanHumanize_MultipleYears_Singular\" is \"{0} snin\".",
-                                         "tests/Humanizer.Tests/Localisation/mt/TimeSpanHumanizeTests.cs: singular year behavior expects \"sena\" for one-year equivalents."
+                                         "tests/Humanizer.Tests/Localisation/mt/TimeSpanHumanizeTests.cs: one-year output is \"sena\", confirming the singular stem.",
+                                         "src/Humanizer/Properties/Resources.mt.resx: parallel pattern exists in \"TimeSpanHumanize_MultipleMinutes_Singular\" as \"{0} minuta\" (number + singular noun)."
                                      ],
-                        "notes":  "Singular/plural mismatch."
+                        "notes":  "Singular/plural agreement defect in numeric template."
                     },
                     {
                         "locale":  "mt",
