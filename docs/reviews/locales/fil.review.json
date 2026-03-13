@@ -7,12 +7,12 @@
     "direct_test_directories":  {
 
                                 },
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  185,
-                    "ok":  185,
-                    "suspicious":  0,
-                    "defect":  0
+                    "ok":  177,
+                    "suspicious":  1,
+                    "defect":  7
                 },
     "records":  [
                     {
@@ -1942,16 +1942,17 @@
                         "current_value":  "{0} gulang",
                         "neutral_reference":  "{0} old",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
-                        "confidence":  "high",
-                        "proposed_replacement":  "{0} gulang",
-                        "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "status":  "suspicious",
+                        "severity":  "P2",
+                        "confidence":  "medium",
+                        "proposed_replacement":  "{0} na gulang",
+                        "replacement_confidence":  "medium",
+                        "native_rationale":  "Mas natural sa Filipino ang may pang-angkop dito; \"{0} gulang\" ay nauunawaan pero tunog salin at bitin sa daloy.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:465",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:80-81"
                                      ],
-                        "notes":  ""
+                        "notes":  "Owned child-culture fallback (fil-PH) currently asserts the awkward form."
                     },
                     {
                         "locale":  "fil",
@@ -2129,16 +2130,17 @@
                         "current_value":  "{0} milliseconds",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milliseconds",
+                        "proposed_replacement":  "{0} milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "May halatang English leakage (\"milliseconds\"). Karaniwang Filipino localization: \"milisegundo\" at hindi kailangang English plural suffix.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:375-376",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by fil-PH via fallback."
                     },
                     {
                         "locale":  "fil",
@@ -2146,16 +2148,17 @@
                         "current_value":  "{0} milliseconds",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milliseconds",
+                        "proposed_replacement":  "{0} milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "May halatang English leakage (\"milliseconds\"). Dapat Filipino term at pare-pareho sa ibang plural-form keys.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:378-379",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by fil-PH via fallback."
                     },
                     {
                         "locale":  "fil",
@@ -2163,16 +2166,17 @@
                         "current_value":  "{0} milliseconds",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milliseconds",
+                        "proposed_replacement":  "{0} milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "May halatang English leakage (\"milliseconds\"). Dapat Filipino term at pare-pareho sa ibang plural-form keys.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:381-382",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by fil-PH via fallback."
                     },
                     {
                         "locale":  "fil",
@@ -2180,16 +2184,17 @@
                         "current_value":  "{0} milliseconds",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} milliseconds",
+                        "proposed_replacement":  "{0} milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "May halatang English leakage (\"milliseconds\"). Dapat Filipino term at pare-pareho sa ibang plural-form keys.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:384-385",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by fil-PH via fallback."
                     },
                     {
                         "locale":  "fil",
@@ -2197,16 +2202,17 @@
                         "current_value":  "{0} millisecond",
                         "neutral_reference":  "{0} millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} millisecond",
+                        "proposed_replacement":  "{0} milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "May halatang English leakage (\"millisecond\"). Sa Filipino, mas natural at konsistent ang \"milisegundo\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:387-388",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by fil-PH via fallback."
                     },
                     {
                         "locale":  "fil",
@@ -2707,16 +2713,17 @@
                         "current_value":  "1 millisecond",
                         "neutral_reference":  "1 millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "1 millisecond",
+                        "proposed_replacement":  "1 milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "English term pa rin ang gamit. Sa Filipino localization, dapat \"milisegundo\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:480-481",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by fil-PH via fallback."
                     },
                     {
                         "locale":  "fil",
@@ -2724,16 +2731,17 @@
                         "current_value":  "isang millisecond",
                         "neutral_reference":  "one millisecond",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "isang millisecond",
+                        "proposed_replacement":  "isang milisegundo",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "English term pa rin ang gamit. Sa natural na Filipino phrasing, \"isang milisegundo\" ang mas tama.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.fil.resx:483-484",
+                                         "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:89-90"
                                      ],
-                        "notes":  ""
+                        "notes":  "Inherited by fil-PH via fallback."
                     },
                     {
                         "locale":  "fil",
