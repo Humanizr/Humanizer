@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\he",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  114,
-                    "ok":  114,
+                    "ok":  108,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  6
                 },
     "records":  [
                     {
@@ -988,16 +988,17 @@
                         "current_value":  "מ",
                         "neutral_reference":  "E",
                         "surface_family":  "Heading",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "מ",
+                        "proposed_replacement":  "מז",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "הקיצור הנוכחי זהה ל-W_Short ולכן אינו מבחין בין מזרח למערב. בעברית מקובל לקצר מזרח ל\"מז\" ומערב ל\"מע\" כדי למנוע דו-משמעות.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.he.resx: E_Short='מ' and W_Short='מ'",
+                                         "tests/Humanizer.Tests/Localisation/he/HeadingTests.cs: 90° and 270° both expect 'מ'"
                                      ],
-                        "notes":  ""
+                        "notes":  "Requires corresponding test updates in HeadingTests."
                     },
                     {
                         "locale":  "he",
@@ -1056,16 +1057,17 @@
                         "current_value":  "צמ",
                         "neutral_reference":  "NE",
                         "surface_family":  "Heading",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "צמ",
+                        "proposed_replacement":  "צמז",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "הקיצור הנוכחי מתנגש עם NW_Short ולכן אינו חד-משמעי. צירוף \"צמז\" שומר על קצרות ומבהיר שזה צפון-מזרח.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.he.resx: NE_Short='צמ' and NW_Short='צמ'",
+                                         "tests/Humanizer.Tests/Localisation/he/HeadingTests.cs: 45° and 315° both expect 'צמ'"
                                      ],
-                        "notes":  ""
+                        "notes":  "Keep N_Short as 'צ'; disambiguate diagonal abbreviations."
                     },
                     {
                         "locale":  "he",
@@ -1090,16 +1092,17 @@
                         "current_value":  "צמ",
                         "neutral_reference":  "NW",
                         "surface_family":  "Heading",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "צמ",
+                        "proposed_replacement":  "צמע",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "הקיצור הנוכחי אינו מבדיל בין צפון-מערב לצפון-מזרח. \"צמע\" מבטא בבירור את רכיב המערב.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.he.resx: NE_Short='צמ' and NW_Short='צמ'",
+                                         "tests/Humanizer.Tests/Localisation/he/HeadingTests.cs: 45° and 315° both expect 'צמ'"
                                      ],
-                        "notes":  ""
+                        "notes":  "Paired change with NE_Short to keep a consistent scheme."
                     },
                     {
                         "locale":  "he",
@@ -1158,16 +1161,17 @@
                         "current_value":  "דמ",
                         "neutral_reference":  "SE",
                         "surface_family":  "Heading",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "דמ",
+                        "proposed_replacement":  "דמז",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "הקיצור הנוכחי מתנגש עם SW_Short ולכן לא מאפשר הבדלה בין דרום-מזרח לדרום-מערב. \"דמז\" מציין במפורש מזרח.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.he.resx: SE_Short='דמ' and SW_Short='דמ'",
+                                         "tests/Humanizer.Tests/Localisation/he/HeadingTests.cs: 135° and 225° both expect 'דמ'"
                                      ],
-                        "notes":  ""
+                        "notes":  "Keep S_Short as 'ד'; disambiguate diagonals only."
                     },
                     {
                         "locale":  "he",
@@ -1192,16 +1196,17 @@
                         "current_value":  "דמ",
                         "neutral_reference":  "SW",
                         "surface_family":  "Heading",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "דמ",
+                        "proposed_replacement":  "דמע",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "הקיצור הנוכחי זהה ל-SE_Short ולכן דו-משמעי. \"דמע\" מציין דרום-מערב באופן טבעי וברור.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.he.resx: SE_Short='דמ' and SW_Short='דמ'",
+                                         "tests/Humanizer.Tests/Localisation/he/HeadingTests.cs: 135° and 225° both expect 'דמ'"
                                      ],
-                        "notes":  ""
+                        "notes":  "Paired change with SE_Short."
                     },
                     {
                         "locale":  "he",
@@ -1940,16 +1945,17 @@
                         "current_value":  "מ",
                         "neutral_reference":  "W",
                         "surface_family":  "Heading",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "מ",
+                        "proposed_replacement":  "מע",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "הקיצור הנוכחי זהה ל-E_Short ולכן גורם להתנגשות סמנטית. \"מע\" הוא קיצור ברור של מערב ומונע בלבול ניווטי.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.he.resx: E_Short='מ' and W_Short='מ'",
+                                         "tests/Humanizer.Tests/Localisation/he/HeadingTests.cs: 90° and 270° both expect 'מ'"
                                      ],
-                        "notes":  ""
+                        "notes":  "Requires corresponding test updates in HeadingTests."
                     }
                 ]
 }
