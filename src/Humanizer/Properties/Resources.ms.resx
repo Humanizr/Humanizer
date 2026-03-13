@@ -117,10 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bait</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabait</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobait</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabait</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabait</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} hari yang lalu</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>{0} hari yang lalu</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
     <value>{0} hari yang lalu</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
@@ -133,6 +172,9 @@
     <value>{0} hari dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>{0} hari dari sekarang</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>{0} hari dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
@@ -327,6 +369,12 @@
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>sesaat dari sekarang</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>kelmarin</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>lusa</value>
+  </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>setahun yang lalu</value>
   </data>
@@ -426,6 +474,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} tahun</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 hari</value>
   </data>
@@ -452,5 +503,29 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>tiada masa</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>hari</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>jam</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>milisaat</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>minit</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>bulan</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>saat</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>minggu</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>tahun</value>
   </data>
 </root>
