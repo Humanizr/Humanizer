@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\lv",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  169,
-                    "ok":  169,
+                    "ok":  168,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  1
                 },
     "records":  [
                     {
@@ -1362,16 +1362,18 @@
                         "current_value":  "pÄ“c minÅ«tÄ“s",
                         "neutral_reference":  "a minute from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "pÄ“c minÅ«tÄ“s",
+                        "proposed_replacement":  "pēc minūtes",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Latviešu valodā pēc prievārda \"pēc\" vajadzīgs ģenitīvs vienskaitlī: \"minūtes\". Forma \"minūtēs\" ir lokatīva daudzskaitlī un šeit ir gramatiski nepareiza.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.lv.resx:255 (DateHumanize_SingleMinuteFromNow currently \"pēc minūtēs\")",
+                                         "src/Humanizer/Properties/Resources.lv.resx:252 (DateHumanize_SingleMinuteAgo uses correct \"pirms minūtes\")",
+                                         "tests/Humanizer.Tests/Localisation/lv/DateHumanizeTests.cs (Latvian date humanization resources are locale-owned and explicitly validated)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Direct grammatical correction; keeps style parallel with SingleHourFromNow/SingleSecondFromNow."
                     },
                     {
                         "locale":  "lv",
