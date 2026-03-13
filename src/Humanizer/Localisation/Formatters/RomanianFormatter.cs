@@ -7,6 +7,7 @@ class RomanianFormatter(CultureInfo culture) :
     const int MaxNumeralWithNoPreposition = 19;
     const int MinNumeralWithNoPreposition = 1;
     const string UnitPreposition = " de";
+    const string SingularPostfix = "_Singular";
 
     static readonly double Divider = Math.Pow(10, PrepositionIndicatingDecimals);
 
@@ -18,6 +19,36 @@ class RomanianFormatter(CultureInfo culture) :
             : string.Empty;
 
         return string.Format(format, number, preposition);
+    }
+
+    public override string DataUnitHumanize(DataUnit dataUnit, double count, bool toSymbol = true)
+    {
+        if (toSymbol)
+        {
+            return base.DataUnitHumanize(dataUnit, count, toSymbol);
+        }
+
+        var resourceKey = $"DataUnit_{dataUnit}";
+        if (count == 1)
+        {
+            try
+            {
+                return Resources.GetResource(resourceKey + SingularPostfix, Culture);
+            }
+            catch (ArgumentException)
+            {
+            }
+        }
+
+        try
+        {
+            return Resources.GetResource(resourceKey, Culture);
+        }
+        catch (ArgumentException)
+        {
+        }
+
+        return base.DataUnitHumanize(dataUnit, count, toSymbol).TrimEnd('s');
     }
 
     static bool ShouldUsePreposition(int number)
