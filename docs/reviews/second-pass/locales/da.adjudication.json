@@ -1,12 +1,12 @@
 ﻿{
     "locale":  "da",
     "source_review":  "docs\\\\reviews\\\\locales\\\\da.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  1,
+                    "pending":  0,
                     "confirmed":  0,
                     "modified":  0,
-                    "rejected":  0
+                    "rejected":  1
                 },
     "findings":  [
                      {
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/da/ResourcesTests.cs: asserts DateHumanize_TwoDaysAgo as \"forgårs\"."
                                       ],
                          "notes":  "Stilistisk/idiomatisk forbedring; nuværende formulering er forståelig, men lyder mere arkaiserende.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "i forgårs",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "forgårs",
+                         "adjudicated_rationale":  "Rejected. \"forgårs\" is standard, idiomatic Danish for \"two days ago\" and is natural in UI text; \"i forgårs\" is an alternative phrasing, not a required correction.",
                          "adjudicated_evidence":  [
-
+                                                   "src/Humanizer/Properties/Resources.da.resx: DateHumanize_TwoDaysAgo = \"forgårs\".",
+                                                   "tests/Humanizer.Tests/Localisation/da/ResourcesTests.cs: asserts \"forgårs\" for DateHumanize_TwoDaysAgo."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Second-pass independent review: keep current translation."
                      }
                  ]
 }
