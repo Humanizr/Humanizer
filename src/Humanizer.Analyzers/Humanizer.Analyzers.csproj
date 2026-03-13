@@ -13,8 +13,8 @@
     <RoslynVersion Condition="'$(RoslynVersion)' == ''">3.8</RoslynVersion>
     <AnalyzerVariant Condition="'$(AnalyzerVariant)' == ''">roslyn$(RoslynVersion)</AnalyzerVariant>
     <OutputPath Condition="'$(AnalyzerVariant)' != ''">$(MSBuildProjectDirectory)\bin\$(Configuration)\$(AnalyzerVariant)\</OutputPath>
-    <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '3.8'">3.8.0</RoslynCSharpVersion>
-    <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '3.8'">3.0.0</RoslynAnalyzerVersion>
+    <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '3.8'">5.3.0</RoslynCSharpVersion>
+    <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '3.8'">5.3.0-2.25625.1</RoslynAnalyzerVersion>
     <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.8'">4.8.0</RoslynCSharpVersion>
     <RoslynAnalyzerVersion Condition="'$(RoslynVersion)' == '4.8'">3.3.4</RoslynAnalyzerVersion>
     <RoslynCSharpVersion Condition="'$(RoslynVersion)' == '4.14'">4.14.0</RoslynCSharpVersion>
