@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "fil",
     "source_review":  "docs\\\\reviews\\\\locales\\\\fil.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  8,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  8,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:80-81"
                                       ],
                          "notes":  "Owned child-culture fallback (fil-PH) currently asserts the awkward form.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "suspicious",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "medium",
                          "adjudicated_replacement":  "{0} na gulang",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang suspicious: mas idiomatic sa Filipino ang may pang-angkop, kaya mas natural ang \"{0} na gulang\" kaysa \"{0} gulang\", lalo sa output na toWords (hal. \"isang taon na gulang\").",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:465",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:80-81"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "May style issue pero naiintindihan pa rin ang kasalukuyang output; dapat i-update nang sabay ang fil resource at fil-PH assertions."
                      },
                      {
                          "locale":  "fil",
@@ -48,16 +49,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                       ],
                          "notes":  "Inherited by fil-PH via fallback.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} milisegundo",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang defect: may hindi naisaling English unit (\"milliseconds\") sa fil locale. Dapat \"{0} milisegundo\" para sa natural at konsistent na Filipino output.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:375-376",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Apektado ang fil-PH fallback; kailangang i-align ang .resx at localization tests."
                      },
                      {
                          "locale":  "fil",
@@ -73,16 +75,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                       ],
                          "notes":  "Inherited by fil-PH via fallback.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} milisegundo",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang defect: may hindi naisaling English unit (\"milliseconds\") sa dual form. Sa Filipino, pareho ring \"milisegundo\" ang dapat gamitin.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:378-379",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Apektado ang fil-PH fallback; kailangang i-align ang .resx at localization tests."
                      },
                      {
                          "locale":  "fil",
@@ -98,16 +101,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                       ],
                          "notes":  "Inherited by fil-PH via fallback.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} milisegundo",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang defect: nanatiling English ang \"milliseconds\" sa paucal form. Filipino unit term na \"milisegundo\" ang tama at konsistent.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:381-382",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Apektado ang fil-PH fallback; kailangang i-align ang .resx at localization tests."
                      },
                      {
                          "locale":  "fil",
@@ -123,16 +127,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                       ],
                          "notes":  "Inherited by fil-PH via fallback.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} milisegundo",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang defect: English leakage pa rin ang \"milliseconds\" sa plural form. Dapat itong mapalitan ng \"milisegundo\".",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:384-385",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Apektado ang fil-PH fallback; kailangang i-align ang .resx at localization tests."
                      },
                      {
                          "locale":  "fil",
@@ -148,16 +153,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                       ],
                          "notes":  "Inherited by fil-PH via fallback.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} milisegundo",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang defect: English singular na \"millisecond\" pa rin ang gamit sa singular-form key. Sa Filipino, \"milisegundo\" ang wastong anyo.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:387-388",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Apektado ang fil-PH fallback; kailangang i-align ang .resx at localization tests."
                      },
                      {
                          "locale":  "fil",
@@ -173,16 +179,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                       ],
                          "notes":  "Inherited by fil-PH via fallback.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "1 milisegundo",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang defect: naka-English ang kasalukuyang string (\"1 millisecond\"). Filipino localization na \"1 milisegundo\" ang tamang replacement.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:480-481",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:63-66"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Apektado ang fil-PH fallback; kailangang i-align ang .resx at localization tests."
                      },
                      {
                          "locale":  "fil",
@@ -198,16 +205,17 @@
                                           "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:89-90"
                                       ],
                          "notes":  "Inherited by fil-PH via fallback.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "isang milisegundo",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Kinukumpirma ko ang finding bilang defect: English term pa rin ang nasa word-form variant (\"isang millisecond\"). Ang natural na Filipino ay \"isang milisegundo\".",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.fil.resx:483-484",
+                                                     "tests/Humanizer.Tests/Localisation/fil-PH/TimeSpanHumanizeTests.cs:89-90"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Apektado ang fil-PH fallback; kailangang i-align ang .resx at localization tests."
                      }
                  ]
 }
