@@ -51,6 +51,9 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [InlineData(5, "5 сати")]
+    [InlineData(12, "12 сати")]
+    [InlineData(13, "13 сати")]
+    [InlineData(14, "14 сати")]
     [InlineData(2, "2 сата")]
     [InlineData(1, "1 сат")]
     public void Hours(int hours, string expected)
@@ -74,6 +77,7 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [InlineData(2, "2 секунде")]
+    [InlineData(12, "12 секунди")]
     [InlineData(1, "1 секунда")]
     public void Seconds(int seconds, string expected)
     {

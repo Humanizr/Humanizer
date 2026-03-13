@@ -123,6 +123,12 @@
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>over {0} dagen</value>
   </data>
+  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
+    <value>{0} weken geleden</value>
+  </data>
+  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
+    <value>over {0} weken</value>
+  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} uur geleden</value>
   </data>
@@ -147,6 +153,12 @@
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>over {0} seconden</value>
   </data>
+  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
+    <value>{0} milliseconden geleden</value>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
+    <value>over {0} milliseconden</value>
+  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} jaar geleden</value>
   </data>
@@ -155,6 +167,9 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>nu</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nooit</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>gisteren</value>
@@ -185,6 +200,18 @@
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>over 1 seconde</value>
+  </data>
+  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
+    <value>1 week geleden</value>
+  </data>
+  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
+    <value>over 1 week</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
+    <value>1 milliseconde geleden</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
+    <value>over 1 milliseconde</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>1 jaar geleden</value>

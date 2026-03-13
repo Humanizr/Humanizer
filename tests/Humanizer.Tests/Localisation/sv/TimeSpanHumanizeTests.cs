@@ -22,7 +22,7 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromMinutes(number).Humanize());
 
     [Theory]
-    [InlineData(1, "1 timma")]
+    [InlineData(1, "1 timme")]
     [InlineData(2, "2 timmar")]
     public void Hours(int number, string expected) =>
         Assert.Equal(expected, TimeSpan.FromHours(number).Humanize());

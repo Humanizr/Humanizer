@@ -600,6 +600,9 @@
   <data name="TimeUnit_Hour" xml:space="preserve">
     <value>ó</value>
   </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
   <data name="TimeUnit_Minute" xml:space="preserve">
     <value>p</value>
   </data>

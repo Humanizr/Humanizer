@@ -130,7 +130,7 @@
     <value>B</value>
   </data>
   <data name="DataUnit_Gigabyte" xml:space="preserve">
-    <value>gigabye</value>
+    <value>gigabyte</value>
   </data>
   <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
     <value>GB</value>

@@ -123,6 +123,12 @@
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>{0} dage fra nu</value>
   </data>
+  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
+    <value>{0} uger siden</value>
+  </data>
+  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
+    <value>{0} uger fra nu</value>
+  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} timer siden</value>
   </data>
@@ -147,6 +153,12 @@
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>{0} sekunder fra nu</value>
   </data>
+  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
+    <value>{0} millisekunder siden</value>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
+    <value>{0} millisekunder fra nu</value>
+  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} år siden</value>
   </data>
@@ -155,6 +167,9 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>nu</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>aldrig</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>i går</value>
@@ -185,6 +200,18 @@
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>et sekund fra nu</value>
+  </data>
+  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
+    <value>en uge siden</value>
+  </data>
+  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
+    <value>en uge fra nu</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
+    <value>et millisekund siden</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
+    <value>et millisekund fra nu</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>et år siden</value>
@@ -219,6 +246,9 @@
   <data name="NE_Short" xml:space="preserve">
     <value>NØ</value>
   </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
   <data name="NNE" xml:space="preserve">
     <value>nordnordøst</value>
   </data>
@@ -245,6 +275,9 @@
   </data>
   <data name="SE_Short" xml:space="preserve">
     <value>SØ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
   </data>
   <data name="SSE" xml:space="preserve">
     <value>sydsydøst</value>

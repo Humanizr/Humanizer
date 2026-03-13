@@ -343,10 +343,10 @@
     <value>GL</value>
   </data>
   <data name="ESE" xml:space="preserve">
-    <value>east-southeast</value>
+    <value>xlokk il-lvant</value>
   </data>
   <data name="ESE_Short" xml:space="preserve">
-    <value>xlokk il-lvant</value>
+    <value>XL</value>
   </data>
   <data name="E_Short" xml:space="preserve">
     <value>L</value>

@@ -123,6 +123,12 @@
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>oor {0} dae</value>
   </data>
+  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
+    <value>{0} weke gelede</value>
+  </data>
+  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
+    <value>oor {0} weke</value>
+  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} ure gelede</value>
   </data>
@@ -147,6 +153,12 @@
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>oor {0} sekondes</value>
   </data>
+  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
+    <value>{0} millisekondes terug</value>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
+    <value>oor {0} millisekondes</value>
+  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} jaar gelede</value>
   </data>
@@ -155,6 +167,9 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>nou</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nooit</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>gister</value>
@@ -185,6 +200,18 @@
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>oor 1 sekonde</value>
+  </data>
+  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
+    <value>1 week gelede</value>
+  </data>
+  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
+    <value>oor 1 week</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
+    <value>1 millisekonde terug</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
+    <value>oor 1 millisekonde</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>1 jaar gelede</value>

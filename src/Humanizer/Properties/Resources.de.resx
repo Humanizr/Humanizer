@@ -159,6 +159,12 @@
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>in {0} Tagen</value>
   </data>
+  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
+    <value>vor {0} Wochen</value>
+  </data>
+  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
+    <value>in {0} Wochen</value>
+  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>vor {0} Stunden</value>
   </data>
@@ -182,6 +188,12 @@
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>in {0} Sekunden</value>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
+    <value>vor {0} Millisekunden</value>
+  </data>
+  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
+    <value>in {0} Millisekunden</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>vor {0} Jahren</value>
@@ -224,6 +236,18 @@
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>in einer Sekunde</value>
+  </data>
+  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
+    <value>vor einer Woche</value>
+  </data>
+  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
+    <value>in einer Woche</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
+    <value>vor einer Millisekunde</value>
+  </data>
+  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
+    <value>in einer Millisekunde</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>vor einem Jahr</value>

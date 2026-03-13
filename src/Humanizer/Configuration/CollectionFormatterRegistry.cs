@@ -8,7 +8,7 @@ class CollectionFormatterRegistry : LocaliserRegistry<ICollectionFormatter>
         Register("en", _ => new OxfordStyleCollectionFormatter());
         Register("it", _ => new DefaultCollectionFormatter("e"));
         Register("de", _ => new DefaultCollectionFormatter("und"));
-        Register("dk", _ => new DefaultCollectionFormatter("og"));
+        Register("da", _ => new DefaultCollectionFormatter("og"));
         Register("nl", _ => new DefaultCollectionFormatter("en"));
         Register("pt", _ => new DefaultCollectionFormatter("e"));
         Register("ro", _ => new DefaultCollectionFormatter("și"));

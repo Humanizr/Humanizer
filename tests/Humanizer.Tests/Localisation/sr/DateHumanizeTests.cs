@@ -30,12 +30,14 @@ public class DateHumanizeDefaultStrategyTests
 
     [Theory]
     [InlineData(1, "пре сат времена")]
+    [InlineData(12, "пре 12 сати")]
     [InlineData(10, "пре 10 сати")]
     public void HoursAgo(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
 
     [Theory]
     [InlineData(1, "за сат времена")]
+    [InlineData(12, "за 12 сати")]
     [InlineData(10, "за 10 сати")]
     public void HoursFromNow(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
