@@ -171,6 +171,12 @@
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>nooit</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>eergisteren</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>overmorgen</value>
+  </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>gisteren</value>
   </data>
@@ -243,6 +249,9 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} jaar</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} oud</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 dag</value>
   </data>
@@ -269,5 +278,77 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>geen tijd</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>dag</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>uur</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>maand</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>sec.</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>week</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>jaar</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>noord</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>noordoost</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>oost</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>zuidoost</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>zuid</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>zuidwest</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>west</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>noordwest</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ZO</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ZW</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NW</value>
   </data>
 </root>
