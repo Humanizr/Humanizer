@@ -89,4 +89,28 @@ public class DateHumanizeTests
     [InlineData(0, "issa")]
     public void Now(int years, string expected) =>
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
+
+    [Fact]
+    public void TwoDaysAgoHasExplicitMalteseResource()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("mt"), out var value));
+        Assert.Equal("jumejn ilu", value);
+    }
+
+    [Fact]
+    public void TwoDaysFromNowHasExplicitMalteseResource()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("mt"), out var value));
+        Assert.Equal("pitgħada", value);
+    }
+
+    [Fact]
+    public void DayPaucalResourcesExist()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("mt"), out var ago));
+        Assert.Equal("{0} jiem ilu", ago);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("mt"), out var fromNow));
+        Assert.Equal("{0} jiem oħra", fromNow);
+    }
 }
