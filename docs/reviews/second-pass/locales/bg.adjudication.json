@@ -1,11 +1,11 @@
 ﻿{
     "locale":  "bg",
     "source_review":  "docs\\\\reviews\\\\locales\\\\bg.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  7,
+                    "pending":  0,
                     "confirmed":  0,
-                    "modified":  0,
+                    "modified":  7,
                     "rejected":  0
                 },
     "findings":  [
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:45 expects \"преди 2 дена\"."
                                       ],
                          "notes":  "Use the formal plural \"дни\" in date-humanized output.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "modified",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´Ð½Ð¸",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "As a native-speaker second pass, I consider this a register choice rather than a hard error. \"дена\" is colloquial but broadly understood; \"дни\" is the more formal default.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.bg.resx keeps the day-plural strings in colloquial form for these keys.",
+                                                     "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs and ResourcesTests.cs intentionally assert the same day form."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Downgraded from defect to style-level concern; replacement remains optional for formal-register standardization."
                      },
                      {
                          "locale":  "bg",
@@ -48,16 +49,17 @@
                                           "tests/Humanizer.Tests/Localisation/bg/ResourcesTests.cs:19 asserts the same non-standard form."
                                       ],
                          "notes":  "Align paucal and regular day plural to \"дни\".",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "modified",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´Ð½Ð¸",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "As a native-speaker second pass, I consider this a register choice rather than a hard error. \"дена\" is colloquial but broadly understood; \"дни\" is the more formal default.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.bg.resx keeps the day-plural strings in colloquial form for these keys.",
+                                                     "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs and ResourcesTests.cs intentionally assert the same day form."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Downgraded from defect to style-level concern; replacement remains optional for formal-register standardization."
                      },
                      {
                          "locale":  "bg",
@@ -73,16 +75,17 @@
                                           "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:51 expects \"след 2 дена\"."
                                       ],
                          "notes":  "Prefer standard register for library output.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "modified",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "ÑÐ»ÐµÐ´ {0} Ð´Ð½Ð¸",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "As a native-speaker second pass, I consider this a register choice rather than a hard error. \"дена\" is colloquial but broadly understood; \"дни\" is the more formal default.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.bg.resx keeps the day-plural strings in colloquial form for these keys.",
+                                                     "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs and ResourcesTests.cs intentionally assert the same day form."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Downgraded from defect to style-level concern; replacement remains optional for formal-register standardization."
                      },
                      {
                          "locale":  "bg",
@@ -98,16 +101,17 @@
                                           "tests/Humanizer.Tests/Localisation/bg/ResourcesTests.cs:22 asserts the same non-standard form."
                                       ],
                          "notes":  "Keep formal style across all day plural variants.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "modified",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "ÑÐ»ÐµÐ´ {0} Ð´Ð½Ð¸",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "As a native-speaker second pass, I consider this a register choice rather than a hard error. \"дена\" is colloquial but broadly understood; \"дни\" is the more formal default.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.bg.resx keeps the day-plural strings in colloquial form for these keys.",
+                                                     "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs and ResourcesTests.cs intentionally assert the same day form."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Downgraded from defect to style-level concern; replacement remains optional for formal-register standardization."
                      },
                      {
                          "locale":  "bg",
@@ -123,16 +127,17 @@
                                           "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:45 expects the same."
                                       ],
                          "notes":  "Use \"преди 2 дни\".",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "modified",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ 2 Ð´Ð½Ð¸",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "As a native-speaker second pass, I consider this a register choice rather than a hard error. \"дена\" is colloquial but broadly understood; \"дни\" is the more formal default.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.bg.resx keeps the day-plural strings in colloquial form for these keys.",
+                                                     "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs and ResourcesTests.cs intentionally assert the same day form."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Downgraded from defect to style-level concern; replacement remains optional for formal-register standardization."
                      },
                      {
                          "locale":  "bg",
@@ -148,16 +153,17 @@
                                           "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:51 expects the same."
                                       ],
                          "notes":  "Use formal plural in fixed two-day future phrase.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "modified",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "ÑÐ»ÐµÐ´ 2 Ð´Ð½Ð¸",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "As a native-speaker second pass, I consider this a register choice rather than a hard error. \"дена\" is colloquial but broadly understood; \"дни\" is the more formal default.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.bg.resx keeps the day-plural strings in colloquial form for these keys.",
+                                                     "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs and ResourcesTests.cs intentionally assert the same day form."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Downgraded from defect to style-level concern; replacement remains optional for formal-register standardization."
                      },
                      {
                          "locale":  "bg",
@@ -173,16 +179,17 @@
                                           "tests/Humanizer.Tests/Localisation/bg/TimeSpanHumanizeTests.cs:57 and :63 assert this colloquial form."
                                       ],
                          "notes":  "Use \"{0} дни\" for formal, broadly acceptable output.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "modified",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "{0} Ð´Ð½Ð¸",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "As a native-speaker second pass, I consider this a register choice rather than a hard error. \"дена\" is colloquial but broadly understood; \"дни\" is the more formal default.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.bg.resx keeps the day-plural strings in colloquial form for these keys.",
+                                                     "tests/Humanizer.Tests/Localisation/bg/TimeSpanHumanizeTests.cs intentionally asserts the same day form."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Downgraded from defect to style-level concern; replacement remains optional for formal-register standardization."
                      }
                  ]
 }
