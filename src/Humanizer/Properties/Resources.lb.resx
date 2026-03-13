@@ -57,6 +57,9 @@
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>virgëschter</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>viru{1} {0} Deeg</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo_Singular" xml:space="preserve">
     <value>virun engem Dag</value>
   </data>
@@ -65,6 +68,9 @@
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
     <value>iwwermuer</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>a{1} {0} Deeg</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>viru{1} {0} Stonnen</value>
@@ -105,8 +111,14 @@
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>gëschter</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>virgëschter</value>
+  </data>
   <data name="DateHumanize_SingleDayFromNow" xml:space="preserve">
     <value>muer</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>iwwermuer</value>
   </data>
   <data name="DateHumanize_SingleHourAgo" xml:space="preserve">
     <value>virun enger Stonn</value>
@@ -140,6 +152,12 @@
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} Deeg</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
+    <value>{0} Deeg</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} al</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} Stonnen</value>

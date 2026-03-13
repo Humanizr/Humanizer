@@ -61,6 +61,13 @@ public class DateHumanizeTests
     public void DaysAgo(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
 
+    [Fact]
+    public void TwoDaysAgoResourceExists()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("lb-LU"), out var value));
+        Assert.Equal("virgëschter", value);
+    }
+
     [Theory]
     [InlineData(1, "muer")]
     [InlineData(2, "iwwermuer")]
@@ -68,6 +75,23 @@ public class DateHumanizeTests
     [InlineData(10, "an 10 Deeg")]
     public void DaysFromNow(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
+
+    [Fact]
+    public void TwoDaysFromNowResourceExists()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("lb-LU"), out var value));
+        Assert.Equal("iwwermuer", value);
+    }
+
+    [Fact]
+    public void DayPaucalResourcesExist()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("lb-LU"), out var past));
+        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("lb-LU"), out var future));
+
+        Assert.Equal("viru{1} {0} Deeg", past);
+        Assert.Equal("a{1} {0} Deeg", future);
+    }
 
     [Theory]
     [InlineData(1, "virun engem Mount")]
