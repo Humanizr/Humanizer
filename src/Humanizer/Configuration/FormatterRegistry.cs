@@ -26,7 +26,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("vi");
         RegisterDefaultFormatter("en");
         RegisterDefaultFormatter("af");
-        RegisterDefaultFormatter("az");
+        Register("az", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("da");
         RegisterDefaultFormatter("el");
         RegisterDefaultFormatter("es");
