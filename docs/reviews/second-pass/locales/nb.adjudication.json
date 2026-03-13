@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "nb",
     "source_review":  "docs\\\\reviews\\\\locales\\\\nb.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  2,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  2,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -24,16 +24,18 @@
                                           "src/Humanizer/Properties/Resources.nb.resx defines base form \"byte\""
                                       ],
                          "notes":  "Krever lokalisert flertallshåndtering i kodebanen for ByteSize.ToFullWords; ressursstrengen alene styrer ikke flertallsformen.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "byte",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Bekreftet. Som bokmålsskribent er \"byte\" korrekt grunnform, men engelsk flertall \"bytes\" i norsk UI er unaturlig. Forventet norsk form er uten engelsk -s-ending.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.nb.resx:330 sets DataUnit_Byte to \"byte\".",
+                                                     "tests/Humanizer.Tests/Localisation/nb/Bytes/ToFullWordsTests.cs:11 expects \"10 bytes\".",
+                                                     "tests/Humanizer.Tests/Localisation/nb/Bytes/ToFullWordsTests.cs:19 also expects \"10 gigabytes\", which indicates English pluralization path."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Feilen ligger i pluraliseringslogikken for ByteSize.ToFullWords for nb, ikke i selve ressursverdien."
                      },
                      {
                          "locale":  "nb",
@@ -49,16 +51,17 @@
                                           "src/Humanizer/Properties/Resources.nb.resx defines base form \"gigabyte\""
                                       ],
                          "notes":  "Samme årsak som for DataUnit_Byte: flertall må håndteres lokalisert i kode, ikke via engelsk standardbøying.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "gigabyte",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Bekreftet. \"Gigabyte\" er riktig bokmålsform både i singular og som vanlig teknisk flertall i norsk; \"gigabytes\" med engelsk -s er ikke naturlig i nb.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.nb.resx:336 sets DataUnit_Gigabyte to \"gigabyte\".",
+                                                     "tests/Humanizer.Tests/Localisation/nb/Bytes/ToFullWordsTests.cs:19 expects \"10 gigabytes\"."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Samme underliggende problem som DataUnit_Byte: engelsk bøying i stedet for nb-tilpasset pluralisering."
                      }
                  ]
 }
