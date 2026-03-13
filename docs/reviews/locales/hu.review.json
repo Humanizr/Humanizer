@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\hu",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  186,
-                    "ok":  186,
+                    "ok":  184,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  2
                 },
     "records":  [
                     {
@@ -1481,16 +1481,17 @@
                         "current_value":  "két éve",
                         "neutral_reference":  "two days ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "két éve",
+                        "proposed_replacement":  "tegnapelőtt",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A jelenlegi szöveg jelentése \"két éve\" (two years ago), ami szemantikailag hibás a \"two days ago\" kulcshoz. Magyarul a természetes, idiomatikus forma két nappal ezelőttre: \"tegnapelőtt\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.hu.resx: DateHumanize_TwoDaysAgo = \"két éve\"",
+                                         "tests/Humanizer.Tests/Localisation/hu/DateHumanizeTests.cs: napokra külön ellenőrzés van (1 nap: \"tegnap\", 10 nap: \"10 napja\"), de a TwoDays kulcs nincs külön lefedve"
                                      ],
-                        "notes":  ""
+                        "notes":  "Jelentéscsere: day -> year. Dedikált two-day teszt hiányzik, ezért a hiba észrevétlen maradt."
                     },
                     {
                         "locale":  "hu",
@@ -1498,16 +1499,17 @@
                         "current_value":  "két év múlva",
                         "neutral_reference":  "two days from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "két év múlva",
+                        "proposed_replacement":  "holnapután",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "A jelenlegi szöveg jelentése \"két év múlva\" (two years from now), ami hibás a \"two days from now\" kulcshoz. Magyarul a pontos és természetes megfelelő: \"holnapután\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.hu.resx: DateHumanize_TwoDaysFromNow = \"két év múlva\"",
+                                         "tests/Humanizer.Tests/Localisation/hu/DateHumanizeTests.cs: jövő idejű napokra csak 1 és 10 nap van tesztelve, a TwoDays kulcs nincs célzottan tesztelve"
                                      ],
-                        "notes":  ""
+                        "notes":  "Jelentéscsere: day -> year. A két napos speciális forma jelenleg teszt nélküli."
                     },
                     {
                         "locale":  "hu",
