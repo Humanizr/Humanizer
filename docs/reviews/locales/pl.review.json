@@ -5,11 +5,11 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\pl",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  110,
-                    "ok":  110,
-                    "suspicious":  0,
+                    "ok":  104,
+                    "suspicious":  6,
                     "defect":  0
                 },
     "records":  [
@@ -699,16 +699,17 @@
                         "current_value":  "przed {0} laty",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "przed {0} laty",
+                        "proposed_replacement":  "przed {0} latami",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Forma \"laty\" jest poprawna, ale wyraźnie książkowa i dziś rzadsza w interfejsach użytkowych. W nowoczesnym polskim UI naturalniej brzmi \"przed {0} latami\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pl.resx (DateHumanize_MultipleYearsAgo).",
+                                         "tests/Humanizer.Tests/Localisation/pl/DateHumanizeTests.cs (YearsAgo: \"przed 2 laty\")."
                                      ],
-                        "notes":  ""
+                        "notes":  "Nie jest to błąd gramatyczny; kwestia rejestru i naturalności."
                     },
                     {
                         "locale":  "pl",
@@ -716,16 +717,17 @@
                         "current_value":  "przed {0} laty",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "przed {0} laty",
+                        "proposed_replacement":  "przed {0} latami",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Analogicznie do klucza bazowego: \"laty\" jest akceptowalne, ale stylistycznie archaizujące. Współcześnie bardziej neutralne jest \"latami\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pl.resx (DateHumanize_MultipleYearsAgo_Paucal).",
+                                         "src/Humanizer/Properties/Resources.pl.resx (DateHumanize_MultipleYearsAgo ma ten sam wariant \"laty\")."
                                      ],
-                        "notes":  ""
+                        "notes":  "Wariant liczby paucal zachowuje tę samą uwagę stylistyczną."
                     },
                     {
                         "locale":  "pl",
@@ -1719,16 +1721,17 @@
                         "current_value":  "dzień",
                         "neutral_reference":  "d",
                         "surface_family":  "TimeUnit",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "dzień",
-                        "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "proposed_replacement":  "d",
+                        "replacement_confidence":  "medium",
+                        "native_rationale":  "Klucz jest używany jako symbol jednostki czasu, a \"dzień\" to pełna nazwa. W polskim skrótem-symboliem jest zwykle \"d\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Day).",
+                                         "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (ToSymbol mapuje ten klucz)."
                                      ],
-                        "notes":  ""
+                        "notes":  "Obecna wartość działa, ale semantycznie bardziej przypomina etykietę niż symbol."
                     },
                     {
                         "locale":  "pl",
@@ -1787,16 +1790,17 @@
                         "current_value":  "miesiąc",
                         "neutral_reference":  "mo",
                         "surface_family":  "TimeUnit",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "miesiąc",
-                        "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "proposed_replacement":  "mies.",
+                        "replacement_confidence":  "medium",
+                        "native_rationale":  "Dla symbolu jednostki czasu naturalniejszy jest skrót, nie pełna forma rzeczownika. W polskim interfejsie najczęściej używa się \"mies.\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Month).",
+                                         "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (ToSymbol dla Month)."
                                      ],
-                        "notes":  ""
+                        "notes":  "Warto rozważyć ujednolicenie stylu symboli między Day/Week/Month/Year i h/min/s/ms."
                     },
                     {
                         "locale":  "pl",
@@ -1821,16 +1825,17 @@
                         "current_value":  "tydzień",
                         "neutral_reference":  "week",
                         "surface_family":  "TimeUnit",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "tydzień",
-                        "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "proposed_replacement":  "tydz.",
+                        "replacement_confidence":  "medium",
+                        "native_rationale":  "ToSymbol sugeruje skrót/symbol jednostki. Pełne \"tydzień\" jest zrozumiałe, ale nie wygląda jak symbol jednostki czasu.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Week).",
+                                         "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (Week -> \"tydzień\")."
                                      ],
-                        "notes":  ""
+                        "notes":  "Ocena dotyczy naturalności symbolu, nie poprawności leksykalnej."
                     },
                     {
                         "locale":  "pl",
@@ -1838,16 +1843,17 @@
                         "current_value":  "rok",
                         "neutral_reference":  "y",
                         "surface_family":  "TimeUnit",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "rok",
-                        "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "proposed_replacement":  "r.",
+                        "replacement_confidence":  "medium",
+                        "native_rationale":  "Wartość \"rok\" jest pełnym słowem, a nie symbolem. Dla krótkiego oznaczenia jednostki częściej spotyka się \"r.\" (ew. \"l.\" zależnie od kontekstu).",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Year).",
+                                         "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (Year -> \"rok\")."
                                      ],
-                        "notes":  ""
+                        "notes":  "Wariant skrótu można doprecyzować zależnie od przyjętej konwencji produktu."
                     },
                     {
                         "locale":  "pl",
