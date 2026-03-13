@@ -5,7 +5,7 @@
                                  "nb-NO"
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\nb",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  90,
                     "ok":  90,
