@@ -5,11 +5,11 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\da",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  94,
-                    "ok":  94,
-                    "suspicious":  0,
+                    "ok":  93,
+                    "suspicious":  1,
                     "defect":  0
                 },
     "records":  [
@@ -597,16 +597,17 @@
                         "current_value":  "forgårs",
                         "neutral_reference":  "two days ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "suspicious",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "forgårs",
+                        "proposed_replacement":  "i forgårs",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"forgårs\" forstås, men i moderne dansk er \"i forgårs\" den klart mest idiomatiske og neutrale form til \"two days ago\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.da.resx: DateHumanize_TwoDaysAgo = \"forgårs\".",
+                                         "tests/Humanizer.Tests/Localisation/da/ResourcesTests.cs: asserts DateHumanize_TwoDaysAgo as \"forgårs\"."
                                      ],
-                        "notes":  ""
+                        "notes":  "Stilistisk/idiomatisk forbedring; nuværende formulering er forståelig, men lyder mere arkaiserende."
                     },
                     {
                         "locale":  "da",
