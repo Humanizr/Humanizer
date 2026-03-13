@@ -21,30 +21,53 @@ public class ResourceKeyTests
     public void TimeSpanHumanizeKeysExistence(int instance, string expectedResourceKey, string generatedResourceKey) =>
         Assert.NotNull(Resources.GetResource(generatedResourceKey));
 
+    [Theory]
+    [MemberData(nameof(TimeUnitSymbolResourceKeys))]
+    public void TimeUnitSymbolKeysExistence(TimeUnit unit, string generatedResourceKey) =>
+        Assert.NotNull(Resources.GetResource(generatedResourceKey));
+
+    [Theory]
+    [MemberData(nameof(DataUnitResourceKeys))]
+    public void DataUnitKeysExistence(string generatedResourceKey) =>
+        Assert.NotNull(Resources.GetResource(generatedResourceKey));
+
+    [Theory]
+    [MemberData(nameof(HeadingResourceKeys))]
+    public void HeadingKeysExistence(string generatedResourceKey) =>
+        Assert.NotNull(Resources.GetResource(generatedResourceKey));
+
     public static IEnumerable<object[]> DateHumanizeResourceKeys =>
     [
+        [0, "DateHumanize_SingleMillisecondAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Millisecond, Tense.Past)],
         [0, "DateHumanize_SingleSecondAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, Tense.Past)],
             [0, "DateHumanize_SingleMinuteAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, Tense.Past)],
             [0, "DateHumanize_SingleHourAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, Tense.Past)],
             [0, "DateHumanize_SingleDayAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, Tense.Past)],
+            [0, "DateHumanize_SingleWeekAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Week, Tense.Past)],
             [0, "DateHumanize_SingleMonthAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, Tense.Past)],
             [0, "DateHumanize_SingleYearAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, Tense.Past)],
+            [0, "DateHumanize_MultipleMillisecondsAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Millisecond, Tense.Past, count: 10)],
             [0, "DateHumanize_MultipleSecondsAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, Tense.Past, count: 10)],
             [0, "DateHumanize_MultipleMinutesAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, Tense.Past, count: 10)],
             [0, "DateHumanize_MultipleHoursAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, Tense.Past, count: 10)],
             [0, "DateHumanize_MultipleDaysAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, Tense.Past, count: 10)],
+            [0, "DateHumanize_MultipleWeeksAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Week, Tense.Past, count: 10)],
             [0, "DateHumanize_MultipleMonthsAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, Tense.Past, count: 10)],
             [0, "DateHumanize_MultipleYearsAgo", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, Tense.Past, count: 10)],
+            [0, "DateHumanize_SingleMillisecondFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Millisecond, Tense.Future, count: 1)],
             [0, "DateHumanize_SingleSecondFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, timeUnitTense: Tense.Future, count: 1)],
             [0, "DateHumanize_SingleMinuteFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, timeUnitTense: Tense.Future, count: 1)],
             [0, "DateHumanize_SingleHourFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, timeUnitTense: Tense.Future, count: 1)],
             [0, "DateHumanize_SingleDayFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, timeUnitTense: Tense.Future, count: 1)],
+            [0, "DateHumanize_SingleWeekFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Week, timeUnitTense: Tense.Future, count: 1)],
             [0, "DateHumanize_SingleMonthFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, timeUnitTense: Tense.Future, count: 1)],
             [0, "DateHumanize_SingleYearFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, timeUnitTense: Tense.Future, count: 1)],
+            [0, "DateHumanize_MultipleMillisecondsFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Millisecond, timeUnitTense: Tense.Future, count: 10)],
             [0, "DateHumanize_MultipleSecondsFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Second, timeUnitTense: Tense.Future, count: 10)],
             [0, "DateHumanize_MultipleMinutesFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Minute, timeUnitTense: Tense.Future, count: 10)],
             [0, "DateHumanize_MultipleHoursFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Hour, timeUnitTense: Tense.Future, count: 10)],
             [0, "DateHumanize_MultipleDaysFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Day, timeUnitTense: Tense.Future, count: 10)],
+            [0, "DateHumanize_MultipleWeeksFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Week, timeUnitTense: Tense.Future, count: 10)],
             [0, "DateHumanize_MultipleMonthsFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, timeUnitTense: Tense.Future, count: 10)],
             [0, "DateHumanize_MultipleYearsFromNow", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, timeUnitTense: Tense.Future, count: 10)],
             [0, "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Millisecond, Tense.Past, count: 0)],
@@ -55,7 +78,8 @@ public class ResourceKeyTests
             [5, "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Week, Tense.Past, count: 0)],
             [6, "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Month, Tense.Past, count: 0)],
             [7, "DateHumanize_Now", ResourceKeys.DateHumanize.GetResourceKey(TimeUnit.Year, Tense.Past, count: 0)],
-        [8, "DateHumanize_Now", ResourceKeys.DateHumanize.Now]
+        [8, "DateHumanize_Now", ResourceKeys.DateHumanize.Now],
+        [9, "DateHumanize_Never", ResourceKeys.DateHumanize.Never]
     ];
 
     public static IEnumerable<object[]> TimeSpanHumanizeResourceKeys =>
@@ -93,5 +117,30 @@ public class ResourceKeyTests
             [7, "TimeSpanHumanize_MultipleMonths", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Month, 0)],
         [8, "TimeSpanHumanize_MultipleYears", ResourceKeys.TimeSpanHumanize.GetResourceKey(TimeUnit.Year, 0)]
     ];
+
+    public static IEnumerable<object[]> TimeUnitSymbolResourceKeys =>
+        Enum.GetValues<TimeUnit>()
+            .Select(unit => new object[] { unit, ResourceKeys.TimeUnitSymbol.GetResourceKey(unit) });
+
+    public static IEnumerable<object[]> DataUnitResourceKeys =>
+    [
+        ["DataUnit_Bit"],
+        ["DataUnit_BitSymbol"],
+        ["DataUnit_Byte"],
+        ["DataUnit_ByteSymbol"],
+        ["DataUnit_Kilobyte"],
+        ["DataUnit_KilobyteSymbol"],
+        ["DataUnit_Megabyte"],
+        ["DataUnit_MegabyteSymbol"],
+        ["DataUnit_Gigabyte"],
+        ["DataUnit_GigabyteSymbol"],
+        ["DataUnit_Terabyte"],
+        ["DataUnit_TerabyteSymbol"]
+    ];
+
+    public static IEnumerable<object[]> HeadingResourceKeys =>
+        HeadingExtensions.Headings
+            .Concat(HeadingExtensions.HeadingsShort)
+            .Select(resourceKey => new object[] { resourceKey });
 }
 #pragma warning restore xUnit1026 // Theory methods should use all of their parameters

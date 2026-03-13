@@ -13,6 +13,13 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
     [Theory]
+    [InlineData(14, false, "2 hét")]
+    [InlineData(366, false, "1 év")]
+    [InlineData(366, true, "egy év")]
+    public void Age(int days, bool toWords, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
+
+    [Theory]
     [Trait("Translation", "Google")]
     [InlineData(31, "1 hónap")]
     [InlineData(61, "2 hónap")]

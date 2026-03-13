@@ -33,7 +33,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("fa");
         RegisterDefaultFormatter("fi");
         RegisterDefaultFormatter("fil");
-        RegisterDefaultFormatter("hu");
+        Register("hu", c => new HungarianFormatter(c));
         RegisterDefaultFormatter("hy");
         RegisterDefaultFormatter("id");
         Register("is", c => new IcelandicFormatter(c));
