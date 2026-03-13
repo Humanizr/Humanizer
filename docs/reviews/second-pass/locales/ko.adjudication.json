@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "ko",
     "source_review":  "docs\\\\reviews\\\\locales\\\\ko.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  1,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  1,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -24,16 +24,18 @@
                                           "src/Humanizer/Properties에는 Resources.ko-KR.resx가 없어서 ko-KR이 ko 값을 폴백으로 상속."
                                       ],
                          "notes":  "용어 오역으로 의미가 바뀌는 결함이며, ko-KR 자식 문화권에도 동일하게 전파됩니다.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "없음",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Second-pass native adjudication confirms this defect. \"사용 안 함\" means \"disabled/turned off\" and reads like a UI toggle state, not the temporal meaning of \"never\" used by nullable Date/Time humanization. \"없음\" is the most natural standalone Korean output for this API context and preserves expected null-date semantics.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.ko.resx: DateHumanize_Never is currently \"사용 안 함\".",
+                                                     "src/Humanizer/DateHumanizeExtensions.cs: nullable Humanize overloads return DateHumanize_Never when the value is null.",
+                                                     "tests/Humanizer.Tests/Localisation/ko-KR/DateHumanizeTests.cs: no assertion currently covers DateHumanize_Never, so this mistranslation is not blocked by ko-KR tests."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Independent second-pass Korean native review confirms first-pass replacement without modification."
                      }
                  ]
 }
