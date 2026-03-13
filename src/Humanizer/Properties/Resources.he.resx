@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>בייטים</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>בייט</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>גיגהבייטים</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>גיגהבייט</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>לפני {0} יום</value>
     <comment>{0} days ago</comment>
@@ -265,6 +283,9 @@
     <value>כעת</value>
     <comment>now</comment>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>לעולם לא</value>
+  </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>אתמול</value>
     <comment>yesterday</comment>
@@ -403,6 +424,9 @@
   <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
     <value>{0} שנים</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>יום</value>
     <comment>single day</comment>
@@ -436,5 +460,77 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>אין זמן</value>
     <comment>no time</comment>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>יום</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>שעה</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>מילישנייה</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>דקה</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>חודש</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>שנייה</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>שבוע</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>שנה</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>צפון</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>צפון מזרח</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>מזרח</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>דרום מזרח</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>דרום</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>דרום מערב</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>מערב</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>צפון מערב</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>צ</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>צמ</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>מ</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>דמ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>ד</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>דמ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>מ</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>צמ</value>
   </data>
 </root>
