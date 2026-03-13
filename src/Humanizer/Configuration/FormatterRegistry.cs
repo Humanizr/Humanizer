@@ -22,8 +22,8 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("ku");
         RegisterDefaultFormatter("pt");
         RegisterDefaultFormatter("sv");
-        RegisterDefaultFormatter("tr");
-        RegisterDefaultFormatter("vi");
+        Register("tr", c => new TrimPluralSuffixFormatter(c));
+        Register("vi", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("en");
         RegisterDefaultFormatter("af");
         Register("az", c => new TrimPluralSuffixFormatter(c));
@@ -35,9 +35,9 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("fil");
         Register("hu", c => new HungarianFormatter(c));
         RegisterDefaultFormatter("hy");
-        RegisterDefaultFormatter("id");
+        Register("id", c => new TrimPluralSuffixFormatter(c));
         Register("is", c => new IcelandicFormatter(c));
-        RegisterDefaultFormatter("ja");
+        Register("ja", c => new TrimPluralSuffixFormatter(c));
         Register("ko", c => new TrimPluralSuffixFormatter(c));
         Register("lv", c => new LatvianFormatter(c));
         Register("mt", c => new MalteseFormatter(c));
@@ -47,8 +47,8 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         Register("bn", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("it");
         RegisterDefaultFormatter("ta");
-        RegisterDefaultFormatter("uz-Latn-UZ");
-        RegisterDefaultFormatter("uz-Cyrl-UZ");
+        Register("uz-Latn-UZ", c => new TrimPluralSuffixFormatter(c));
+        Register("uz-Cyrl-UZ", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("zh-CN");
         RegisterDefaultFormatter("zh-Hans");
         RegisterDefaultFormatter("zh-Hant");
