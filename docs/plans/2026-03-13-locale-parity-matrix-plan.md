@@ -62,9 +62,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.af.resx`, `tests/Humanizer.Tests/Localisation/af/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `af`, preserving the current branch fixes and adding direct locale tests for each completed surface.
 - **validation**: Targeted `af` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Afrikaans residual `DateHumanize`, `TimeSpanHumanize_Age`, `TimeUnit_*`, `DataUnit_*`, and heading resources with direct regression coverage for residual resource lookup, `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.af.resx`, `tests/Humanizer.Tests/Localisation/af/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/af/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/af/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/af/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/af/Bytes/ToFullWordsTests.cs`
 
 ### T4: Complete Arabic locale parity
 - **depends_on**: [T1, T2]
@@ -89,9 +89,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.bg.resx`, `tests/Humanizer.Tests/Localisation/bg/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `bg`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `bg` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Bulgarian residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and Bulgarian `DataUnit_*` resources with singular/plural handling through `BulgarianFormatter`. Added direct coverage for residual resources, `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/BulgarianFormatter.cs`, `src/Humanizer/Properties/Resources.bg.resx`, `tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/bg/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/bg/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/bg/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/bg/Bytes/ToFullWordsTests.cs`
 
 ### T7: Complete Bengali locale parity
 - **depends_on**: [T1, T2]
@@ -116,18 +116,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.cs.resx`, `tests/Humanizer.Tests/Localisation/cs/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `cs`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `cs` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Czech residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, heading, and `DataUnit_*` resources, relying on the shared Czech/Slovak/Polish formatter for inflected data-unit forms. Added direct resource, symbol, heading, age, and byte-full-word regression coverage.
+- **files edited/created**: `src/Humanizer/Properties/Resources.cs.resx`, `tests/Humanizer.Tests/Localisation/cs/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/cs/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/cs/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/cs/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/cs/Bytes/ToFullWordsTests.cs`
 
 ### T10: Complete Danish residual parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.da.resx`, `tests/Humanizer.Tests/Localisation/da/**/*`
 - **description**: Finish the remaining T1-approved `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, and `DataUnit` gaps for `da`, preserving the current collection formatter and heading fixes.
 - **validation**: Targeted `da` locale tests cover all approved surfaces and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Closed the remaining Danish parity gaps by adding explicit residual `DateHumanize` and `TimeSpanHumanize_Age` resources and direct regression tests for residual resource lookup and `ToAge()` behavior, preserving the existing heading and collection formatter work already on the branch.
+- **files edited/created**: `src/Humanizer/Properties/Resources.da.resx`, `tests/Humanizer.Tests/Localisation/da/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/da/TimeSpanHumanizeTests.cs`
 
 ### T11: Complete German residual parity
 - **depends_on**: [T1, T2]
@@ -143,9 +143,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.el.resx`, `tests/Humanizer.Tests/Localisation/el/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `el`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `el` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Greek residual resources, `TimeUnit_*`, `DataUnit_*`, and heading coverage, then routed Greek full-word data units through the shared trim-suffix formatter path to remove English plural leakage. Added direct tests for resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Configuration/FormatterRegistry.cs`, `src/Humanizer/Properties/Resources.el.resx`, `tests/Humanizer.Tests/Localisation/el/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/el/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/el/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/el/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/el/Bytes/ToFullWordsTests.cs`
 
 ### T13: Complete Spanish residual parity
 - **depends_on**: [T1, T2]
@@ -161,18 +161,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.fa.resx`, `tests/Humanizer.Tests/Localisation/fa/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `fa`, including RTL-safe wording validation and direct locale tests for each completed surface.
 - **validation**: Targeted `fa` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Persian residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, `DataUnit_*`, and heading resources with RTL-safe direct regression coverage for residual resources, `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.fa.resx`, `tests/Humanizer.Tests/Localisation/fa/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/fa/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/fa/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/fa/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/fa/Bytes/ToFullWordsTests.cs`
 
 ### T15: Complete Finnish locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.fi.resx`, `tests/Humanizer.Tests/Localisation/fi-FI/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `fi`, expanding beyond the current limited date/time tests to full locale parity coverage.
 - **validation**: Targeted `fi-FI` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Finnish residual resources, `TimeUnit_*`, `DataUnit_*`, and heading coverage and extended `FinnishFormatter` so full-word data units handle Finnish singular/plural forms correctly. Added direct tests for residual resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/FinnishFormatter.cs`, `src/Humanizer/Properties/Resources.fi.resx`, `tests/Humanizer.Tests/Localisation/fi-FI/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/fi-FI/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/fi-FI/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/fi-FI/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/fi-FI/Bytes/ToFullWordsTests.cs`
 
 ### T16: Complete Filipino locale parity
 - **depends_on**: [T1, T2]
@@ -197,18 +197,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.he.resx`, `tests/Humanizer.Tests/Localisation/he/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `he`, including RTL-safe wording validation and direct locale tests for each completed surface.
 - **validation**: Targeted `he` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Hebrew residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and Hebrew `DataUnit_*` resources backed by `HebrewFormatter` for localized full-word data units. Added direct RTL-safe tests for resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/HebrewFormatter.cs`, `src/Humanizer/Properties/Resources.he.resx`, `tests/Humanizer.Tests/Localisation/he/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/he/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/he/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/he/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/he/Bytes/ToFullWordsTests.cs`
 
 ### T19: Complete Croatian locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.hr.resx`, `tests/Humanizer.Tests/Localisation/hr/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `hr`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `hr` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Croatian residual resources, `TimeUnit_*`, full heading resources, and Croatian `DataUnit_*` resources using `CroatianFormatter` for singular/paucal/plural byte-size forms. Added direct tests for resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/CroatianFormatter.cs`, `src/Humanizer/Properties/Resources.hr.resx`, `tests/Humanizer.Tests/Localisation/hr/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/hr/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/hr/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/hr/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/hr/Bytes/ToFullWordsTests.cs`
 
 ### T20: Complete Hungarian residual parity
 - **depends_on**: [T1, T2]
@@ -251,9 +251,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.it.resx`, `tests/Humanizer.Tests/Localisation/it/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `it`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `it` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Italian residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and Italian `DataUnit_*` resources backed by `ItalianFormatter` for singular/plural full-word byte sizes. Added direct tests for resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/ItalianFormatter.cs`, `src/Humanizer/Properties/Resources.it.resx`, `tests/Humanizer.Tests/Localisation/it/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/it/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/it/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/it/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/it/Bytes/ToFullWordsTests.cs`
 
 ### T25: Complete Japanese locale parity
 - **depends_on**: [T1, T2]
@@ -332,27 +332,27 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.nb.resx`, `tests/Humanizer.Tests/Localisation/nb/**/*`, `tests/Humanizer.Tests/Localisation/nb-NO/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `nb`, preserving the current date-resource fixes.
 - **validation**: Targeted Norwegian Bokmal locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Norwegian Bokmal residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and `DataUnit_*` resources with direct regression coverage for resources, `ToAge()`, `TimeUnit.ToSymbol()`, headings, and byte full words.
+- **files edited/created**: `src/Humanizer/Properties/Resources.nb.resx`, `tests/Humanizer.Tests/Localisation/nb/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/nb/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/nb/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/nb/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/nb/Bytes/ToFullWordsTests.cs`
 
 ### T34: Complete Dutch locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.nl.resx`, `tests/Humanizer.Tests/Localisation/nl/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `nl`, preserving the current date-resource fixes.
 - **validation**: Targeted `nl` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Dutch residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and `DataUnit_*` resources with direct regression coverage for resources, `ToAge()`, `TimeUnit.ToSymbol()`, headings, and byte full words.
+- **files edited/created**: `src/Humanizer/Properties/Resources.nl.resx`, `tests/Humanizer.Tests/Localisation/nl/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/nl/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/nl/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/nl/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/nl/Bytes/ToFullWordsTests.cs`
 
 ### T35: Complete Polish locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.pl.resx`, `tests/Humanizer.Tests/Localisation/pl/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `pl`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `pl` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Polish residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, heading, and `DataUnit_*` resources, relying on the shared Czech/Slovak/Polish formatter for inflected data-unit forms. Added direct tests for resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Properties/Resources.pl.resx`, `tests/Humanizer.Tests/Localisation/pl/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/pl/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/pl/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/pl/Bytes/ToFullWordsTests.cs`
 
 ### T36: Complete Portuguese residual parity
 - **depends_on**: [T1, T2]
@@ -377,9 +377,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.ro.resx`, `tests/Humanizer.Tests/Localisation/ro-Ro/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `ro`, preserving the existing collection formatter/date coverage and closing the remaining parity gap.
 - **validation**: Targeted `ro-Ro` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Romanian residual resources, full `TimeUnit_*`, full heading resources, and `DataUnit_*` resources handled through `RomanianFormatter`. Added direct regression coverage for residual resources, `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/RomanianFormatter.cs`, `src/Humanizer/Properties/Resources.ro.resx`, `tests/Humanizer.Tests/Localisation/ro-Ro/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ro-Ro/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ro-Ro/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/ro-Ro/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/ro-Ro/Bytes/ToFullWordsTests.cs`
 
 ### T39: Complete Russian residual parity
 - **depends_on**: [T1, T2]
@@ -395,9 +395,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.sk.resx`, `tests/Humanizer.Tests/Localisation/sk/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `sk`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `sk` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Slovak residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, heading, and `DataUnit_*` resources, relying on the shared Czech/Slovak/Polish formatter for inflected data-unit forms. Added direct tests for resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Properties/Resources.sk.resx`, `tests/Humanizer.Tests/Localisation/sk/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sk/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sk/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/sk/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/sk/Bytes/ToFullWordsTests.cs`
 
 ### T41: Complete Slovenian locale parity
 - **depends_on**: [T1, T2]
@@ -425,18 +425,15 @@ T1 --> T2 --> T54
 - **status**: Completed
 - **log**: Added Serbian Latin residual `DateHumanize` (`Never`, `TwoDays*`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, full 16-point heading resources, and full `DataUnit_*` resources aligned with the shared Serbian formatter path. Registered `sr-Latn` explicitly to use `SerbianFormatter` and added direct Latin-script regression coverage for `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
 - **files edited/created**: `src/Humanizer/Configuration/FormatterRegistry.cs`, `src/Humanizer/Localisation/Formatters/SerbianFormatter.cs`, `src/Humanizer/Properties/Resources.sr-Latn.resx`, `tests/Humanizer.Tests/Localisation/sr-Latn/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/sr-Latn/Bytes/ToFullWordsTests.cs`
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
 
 ### T44: Complete Swedish locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.sv.resx`, `tests/Humanizer.Tests/Localisation/sv/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `sv`, preserving the current singular-hour wording fix.
 - **validation**: Targeted `sv` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Swedish residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and `DataUnit_*` resources backed by `SwedishFormatter` for singular/plural full-word byte sizes. Added direct tests for resources, age, symbols, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/SwedishFormatter.cs`, `src/Humanizer/Properties/Resources.sv.resx`, `tests/Humanizer.Tests/Localisation/sv/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sv/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/sv/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/sv/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs`
 
 ### T45: Complete Thai locale parity
 - **depends_on**: [T1, T2]
@@ -461,9 +458,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.uk.resx`, `tests/Humanizer.Tests/Localisation/uk-UA/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `uk`, preserving current date/time coverage and extending the locale to full approved parity.
 - **validation**: Targeted `uk-UA` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Ukrainian residual `DateHumanize`, `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and Ukrainian `DataUnit_*` resources. Extended `UkrainianFormatter` with singular/paucal/plural data-unit selection so full-word byte sizes resolve to Ukrainian forms instead of English suffixing. Added direct tests for residual resources, `ToAge()`, `TimeUnit.ToSymbol()`, headings, and bytes.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/UkrainianFormatter.cs`, `src/Humanizer/Properties/Resources.uk.resx`, `tests/Humanizer.Tests/Localisation/uk-UA/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/uk-UA/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/uk-UA/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/uk-UA/TimeUnitToSymbolTests.cs`
 
 ### T48: Complete Uzbek Cyrillic locale parity
 - **depends_on**: [T1, T2]
@@ -497,36 +494,36 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.zh-CN.resx`, `src/Humanizer/Properties/Resources.zh-Hans.resx`, `tests/Humanizer.Tests/Localisation/zh-CN/**/*`, `tests/Humanizer.Tests/Localisation/zh-Hans/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for the Simplified Chinese locales, resolving any `zh-CN` versus `zh-Hans` sharing rules explicitly in the matrix.
 - **validation**: Targeted Simplified Chinese locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Simplified Chinese residual resources for `zh-CN` and `zh-Hans`, full `TimeUnit_*`, full heading resources, and `DataUnit_*` resources with direct regression coverage for resources, `ToAge()`, `TimeUnit.ToSymbol()`, headings, and byte full words. Routed Simplified Chinese full-word data units through the trim-suffix formatter path to remove English plural leakage.
+- **files edited/created**: `src/Humanizer/Configuration/FormatterRegistry.cs`, `src/Humanizer/Properties/Resources.zh-CN.resx`, `src/Humanizer/Properties/Resources.zh-Hans.resx`, `tests/Humanizer.Tests/Localisation/zh-CN/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-CN/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-CN/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/zh-CN/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/zh-CN/Bytes/ToFullWordsTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hans/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hans/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hans/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hans/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hans/Bytes/ToFullWordsTests.cs`
 
 ### T52: Complete Chinese Traditional locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.zh-Hant.resx`, `tests/Humanizer.Tests/Localisation/zh-Hant/**/*`, `tests/Humanizer.Tests/Localisation/zh-HK/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `zh-Hant`, resolving any Traditional Chinese fallback rules explicitly in the matrix.
 - **validation**: Targeted Traditional Chinese locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Traditional Chinese residual resources for `zh-Hant` and `zh-HK`, full `TimeUnit_*`, full heading resources, and `DataUnit_*` resources with direct regression coverage for resources, `ToAge()`, `TimeUnit.ToSymbol()`, headings, and byte full words. The shared trim-suffix Chinese formatter path now covers Traditional Chinese as well.
+- **files edited/created**: `src/Humanizer/Configuration/FormatterRegistry.cs`, `src/Humanizer/Properties/Resources.zh-Hant.resx`, `tests/Humanizer.Tests/Localisation/zh-Hant/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hant/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hant/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/zh-Hant/Bytes/ToFullWordsTests.cs`, `tests/Humanizer.Tests/Localisation/zh-HK/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/zh-HK/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/zh-HK/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/zh-HK/Bytes/ToFullWordsTests.cs`
 
 ### T53: Complete advanced locale backlog sweep for the remaining high-gap locales
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.*.resx`, `tests/Humanizer.Tests/Localisation/**/*`
 - **description**: After the per-locale tasks above are underway, sweep for any locale omitted by the current matrix snapshot or any matrix-approved surface that was reclassified during T1/T2. This is the catch-all task for deltas discovered by the authoritative matrix so the plan remains exhaustive without silently dropping surfaces.
 - **validation**: Matrix artifact shows no unassigned locale/surface backlog after the task is complete.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Performed the final backlog sweep during full-suite verification. No additional locale matrix gaps remained after the Lithuanian, Slovenian, Serbian, Ukrainian, and Chinese completions, but the sweep did uncover a shared resource-loading defect: `Resources.TryGetResource` depended on prior satellite assembly load order and did not reliably honor parent-culture fallback across frameworks. Fixed the helper and revalidated the previously flaky Arabic, Czech, Danish, Spanish, and Malay resource assertions on both target frameworks.
+- **files edited/created**: `src/Humanizer/Localisation/Resources.cs`
 
 ### T54: Full verification and documentation closeout
 - **depends_on**: [T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53]
 - **location**: `src/Humanizer/Humanizer.csproj`, `tests/Humanizer.Tests/Humanizer.Tests.csproj`, `readme.md`, `docs/plans/2026-03-13-locale-parity-matrix-plan.md`
 - **description**: Run the full branch verification suite after every locale task is complete. Update documentation only if supported behavior changed materially, and update this plan with actual completion logs instead of batch-level claims.
 - **validation**: `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0`, `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0`, and `dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=<path>` all succeed.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Full branch verification is green. `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net10.0` passed with 17,455 tests. `dotnet test --project tests/Humanizer.Tests/Humanizer.Tests.csproj --framework net8.0` passed with 17,455 tests. `dotnet build Humanizer/Humanizer.csproj -c Release /t:PackNuSpecs /p:PackageOutputPath=E:\Dev\Humanizer-locale\artifacts\locale-packages` succeeded from `src` with 0 warnings and 0 errors. During verification, framework-specific stale satellite resource state was eliminated by clean rebuilds, and the final passing runs were taken after the `TryGetResource` fix landed.
+- **files edited/created**: `docs/plans/2026-03-13-locale-parity-matrix-plan.md`, `src/Humanizer/Localisation/Resources.cs`
 
 ## Parallel Execution Groups
 
