@@ -94,6 +94,20 @@ public class TimeSpanHumanizeTests
         Assert.Equal("nada", TimeSpan.Zero.Humanize(toWords: true));
 
     [Fact]
+    public void AgeHasExplicitSpanishResource()
+    {
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_Age", new("es-ES"), out var ageFormat));
+        Assert.Equal("{0}", ageFormat);
+    }
+
+    [Fact]
+    public void DayPaucalResourceExists()
+    {
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_MultipleDays_Paucal", new("es-ES"), out var resourceFormat));
+        Assert.Equal("{0} días", resourceFormat);
+    }
+
+    [Fact]
     public void AllTimeSpansMustBeUniqueForASequenceOfDays()
     {
         var culture = new CultureInfo("es-ES");
