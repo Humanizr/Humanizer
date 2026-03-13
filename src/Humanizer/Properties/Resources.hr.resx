@@ -117,6 +117,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bajtova</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>bajt</value>
+  </data>
+  <data name="DataUnit_Byte_Paucal" xml:space="preserve">
+    <value>bajta</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobajtova</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Singular" xml:space="preserve">
+    <value>kilobajt</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Paucal" xml:space="preserve">
+    <value>kilobajta</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabajtova</value>
+  </data>
+  <data name="DataUnit_Megabyte_Singular" xml:space="preserve">
+    <value>megabajt</value>
+  </data>
+  <data name="DataUnit_Megabyte_Paucal" xml:space="preserve">
+    <value>megabajta</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabajtova</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>gigabajt</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Paucal" xml:space="preserve">
+    <value>gigabajta</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabajtova</value>
+  </data>
+  <data name="DataUnit_Terabyte_Singular" xml:space="preserve">
+    <value>terabajt</value>
+  </data>
+  <data name="DataUnit_Terabyte_Paucal" xml:space="preserve">
+    <value>terabajta</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>prije {0} dana</value>
   </data>
@@ -188,6 +248,15 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>upravo sada</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>nikada</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>prije 2 dana</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>za 2 dana</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>jučer</value>
@@ -273,6 +342,9 @@
   <data name="TimeSpanHumanize_MultipleYears_Paucal" xml:space="preserve">
     <value>{0} godine</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 dan</value>
   </data>
@@ -299,5 +371,77 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>bez podatka o vremenu</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>dan</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>sat</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mjesec</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>tjedan</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>godina</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>sjever</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>sjeveroistok</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>istok</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>jugoistok</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>jug</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>jugozapad</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>zapad</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>sjeverozapad</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>SI</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>JI</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>J</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>JZ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>SZ</value>
   </data>
 </root>
