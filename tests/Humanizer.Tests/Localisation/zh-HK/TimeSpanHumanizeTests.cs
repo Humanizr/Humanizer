@@ -68,4 +68,10 @@ public class TimeSpanHumanizeTests
     public void NoTimeToWords() =>
         // This one doesn't make a lot of sense but ... w/e
         Assert.Equal("沒有時間", TimeSpan.Zero.Humanize(toWords: true));
+
+    [Theory]
+    [InlineData(7, false, "1 周 歲")]
+    [InlineData(366, false, "1 年 歲")]
+    public void Age(int days, bool toWords, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
 }
