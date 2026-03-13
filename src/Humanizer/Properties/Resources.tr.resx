@@ -120,7 +120,13 @@
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} gün önce</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} gün önce</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>{0} gün sonra</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>{0} gün sonra</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
@@ -155,6 +161,15 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>şimdi</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>asla</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>evvelsi gün</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>yarından sonra</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>dün</value>
@@ -216,31 +231,166 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} yıl</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} yaşında</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 gün</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>bir gün</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
     <value>1 saat</value>
   </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>bir saat</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
     <value>1 milisaniye</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>bir milisaniye</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 dakika</value>
   </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>bir dakika</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
     <value>1 ay</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>bir ay</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>1 saniye</value>
   </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>bir saniye</value>
+  </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>1 hafta</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>bir hafta</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 yıl</value>
   </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>bir yıl</value>
+  </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>zaman farkı yok</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>saniye</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>dakika</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>saat</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>gün</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>hafta</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>ay</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>yıl</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bayt</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobayt</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabayt</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabayt</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabayt</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>kuzey</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>kuzeydoğu</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>doğu</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>güneydoğu</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>güney</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>güneybatı</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>batı</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>kuzeybatı</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>KD</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>GD</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>KB</value>
   </data>
 </root>
