@@ -425,4 +425,124 @@
     <value>حالاً</value>
     <comment>no time</comment>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>أبدًا</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>أول أمس</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>بعد غد</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} من العمر</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>مللي ثانية</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>ثانية</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>دقيقة</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>ساعة</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>يوم</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>أسبوع</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>سنة</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>بت</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>بايت</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>كيلوبايت</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>ميجابايت</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>جيجابايت</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>تيرابايت</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>شمال</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>ش</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>شمال-شرق</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ش.ق</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>شرق</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>ق</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>جنوب-شرق</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ج.ق</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>جنوب</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>ج</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>جنوب-غرب</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>ج.غ</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>غرب</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>غ</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>شمال-غرب</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ش.غ</value>
+  </data>
 </root>

@@ -75,4 +75,10 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void NoTimeToWords() =>
         Assert.Equal("حالاً", TimeSpan.Zero.Humanize(toWords: true));
+
+    [Theory]
+    [InlineData(4, "4 أيام من العمر")]
+    [InlineData(366, "السنة 1 من العمر")]
+    public void Age(int days, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }
