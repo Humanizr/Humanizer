@@ -6,9 +6,9 @@
   "review_status": "completed",
   "summary": {
     "total_keys": 185,
-    "ok": 178,
+    "ok": 177,
     "suspicious": 0,
-    "defect": 7
+    "defect": 8
   },
   "records": [
     {
@@ -2588,14 +2588,17 @@
       "current_value": "sem horário",
       "neutral_reference": "no time",
       "surface_family": "TimeSpanHumanize",
-      "status": "ok",
-      "severity": "P3",
+      "status": "defect",
+      "severity": "P2",
       "confidence": "high",
-      "proposed_replacement": "sem horário",
+      "proposed_replacement": "sem tempo",
       "replacement_confidence": "high",
-      "native_rationale": "Tradução natural e correta para pt-BR; mantida sem alterações.",
-      "evidence": [],
-      "notes": ""
+      "native_rationale": "Em pt-BR, “sem horário” significa “sem agendamento”, não “sem duração de tempo”. Para TimeSpan.Zero, a forma natural e semântica é “sem tempo”.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.pt-BR.resx (TimeSpanHumanize_Zero = \"sem horário\")",
+        "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (caso NoTimeToWords atualmente valida \"sem horário\")"
+      ],
+      "notes": "Sugestão linguística: ajustar recurso e teste para refletir ausência de duração, não ausência de agenda."
     },
     {
       "locale": "pt-BR",
