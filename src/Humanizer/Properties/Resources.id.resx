@@ -117,13 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabyte</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobyte</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabyte</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabyte</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} hari yang lalu</value>
     <comment>{0} days ago</comment>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} hari yang lalu</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>{0} hari dari sekarang</value>
     <comment>{0} days from now</comment>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>{0} hari dari sekarang</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} jam yang lalu</value>
@@ -165,9 +207,63 @@
     <value>{0} tahun dari sekarang</value>
     <comment>{0} years from now</comment>
   </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>tidak pernah</value>
+  </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>sekarang</value>
     <comment>now</comment>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>2 hari yang lalu</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>lusa</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>timur</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>utara</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>timur laut</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>TL</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>barat laut</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>BL</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>selatan</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>tenggara</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>TG</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>barat daya</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>BD</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>kemarin</value>
@@ -280,5 +376,35 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>waktu kosong</value>
     <comment>no time</comment>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>hari</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>jam</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>milidetik</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>menit</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>bulan</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>detik</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>minggu</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>tahun</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>barat</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>B</value>
   </data>
 </root>
