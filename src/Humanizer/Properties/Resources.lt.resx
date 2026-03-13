@@ -270,4 +270,205 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>nėra laiko</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>prieš 2 dienas</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>po 2 dienų</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bitai</value>
+  </data>
+  <data name="DataUnit_Bit_Plural" xml:space="preserve">
+    <value>bitų</value>
+  </data>
+  <data name="DataUnit_Bit_Singular" xml:space="preserve">
+    <value>bitas</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>baitai</value>
+  </data>
+  <data name="DataUnit_Byte_Plural" xml:space="preserve">
+    <value>baitų</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>baitas</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabaitai</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Plural" xml:space="preserve">
+    <value>gigabaitų</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>gigabaitas</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobaitai</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Plural" xml:space="preserve">
+    <value>kilobaitų</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Singular" xml:space="preserve">
+    <value>kilobaitas</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabaitai</value>
+  </data>
+  <data name="DataUnit_Megabyte_Plural" xml:space="preserve">
+    <value>megabaitų</value>
+  </data>
+  <data name="DataUnit_Megabyte_Singular" xml:space="preserve">
+    <value>megabaitas</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabaitai</value>
+  </data>
+  <data name="DataUnit_Terabyte_Plural" xml:space="preserve">
+    <value>terabaitų</value>
+  </data>
+  <data name="DataUnit_Terabyte_Singular" xml:space="preserve">
+    <value>terabaitas</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>d.</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>val.</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mėn.</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>sav.</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>m.</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>šiaurė</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>Š</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>šiaurės šiaurės rytai</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>ŠŠR</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>šiaurės rytai</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ŠR</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>rytų šiaurės rytai</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>RŠR</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>rytai</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>rytų pietryčiai</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>RPR</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>pietryčiai</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>PR</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>pietų pietryčiai</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>PPR</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>pietūs</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>pietų pietvakariai</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>PPV</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>pietvakariai</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>PV</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>vakarų pietvakariai</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>VPV</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>vakarai</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>vakarų šiaurės vakarai</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>VŠV</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>šiaurės vakarai</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ŠV</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>šiaurės šiaurės vakarai</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>ŠŠV</value>
+  </data>
 </root>

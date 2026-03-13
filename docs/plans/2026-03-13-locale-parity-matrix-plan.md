@@ -296,9 +296,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.lt.resx`, `tests/Humanizer.Tests/Localisation/lt/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `lt`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `lt` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Lithuanian residual `DateHumanize` (`Never`, `TwoDays*`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, full 16-point heading resources, and full `DataUnit_*` resources with singular/plural Lithuanian forms. Extended `LithuanianFormatter` with `DataUnitHumanize` support so full-word byte sizes use localized singular and genitive plural forms instead of English suffixing. Added direct regression coverage for explicit residual resources, `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`.
+- **files edited/created**: `src/Humanizer/Localisation/Formatters/LithuanianFormatter.cs`, `src/Humanizer/Properties/Resources.lt.resx`, `tests/Humanizer.Tests/Localisation/lt/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/lt/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/lt/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/lt/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/lt/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/lt/Bytes/ToFullWordsTests.cs`
 
 ### T30: Complete Latvian locale parity
 - **depends_on**: [T1, T2]
