@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\it",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  84,
-                    "ok":  84,
-                    "suspicious":  0,
-                    "defect":  0
+                    "ok":  80,
+                    "suspicious":  1,
+                    "defect":  3
                 },
     "records":  [
                     {
@@ -19,16 +19,17 @@
                         "current_value":  "bytes",
                         "neutral_reference":  "byte",
                         "surface_family":  "DataUnit",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "bytes",
+                        "proposed_replacement":  "byte",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "In italiano tecnico 'byte' resta invariabile: la forma plurale inglese 'bytes' non e idiomatica.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.it.resx: DataUnit_Byte = 'bytes'",
+                                         "tests/Humanizer.Tests/Localisation/it/Bytes/ToFullWordsTests.cs: ReturnsPluralBytes expects '10 bytes' (legacy behavior to correct)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Difetto lessicale: mantenere 'byte' sia al singolare sia al plurale."
                     },
                     {
                         "locale":  "it",
@@ -70,16 +71,17 @@
                         "current_value":  "gigabytes",
                         "neutral_reference":  "gigabyte",
                         "surface_family":  "DataUnit",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "gigabytes",
+                        "proposed_replacement":  "gigabyte",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Anche 'gigabyte' in uso italiano e invariabile; 'gigabytes' e un calco inglese non naturale.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.it.resx: DataUnit_Gigabyte = 'gigabytes'",
+                                         "tests/Humanizer.Tests/Localisation/it/Bytes/ToFullWordsTests.cs: ReturnsPluralGigabytes expects '10 gigabytes' (legacy behavior to correct)"
                                      ],
-                        "notes":  ""
+                        "notes":  "Allineare singolare/plurale a 'gigabyte'."
                     },
                     {
                         "locale":  "it",
@@ -835,16 +837,17 @@
                         "current_value":  "{0} vecchio",
                         "neutral_reference":  "{0} old",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} vecchio",
+                        "proposed_replacement":  "{0} anni",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "La stringa '{0} vecchio' e grammaticalmente scorretta e semanticamente impropria per l'eta; la resa naturale e '{0} anni'.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.it.resx: TimeSpanHumanize_Age = '{0} vecchio'",
+                                         "tests/Humanizer.Tests/Localisation/it/ResourcesTests.cs: HasExplicitResidualResources asserts current residual value"
                                      ],
-                        "notes":  ""
+                        "notes":  "Difetto di qualita alta: output innaturale in un caso utente comune."
                     },
                     {
                         "locale":  "it",
@@ -1039,16 +1042,17 @@
                         "current_value":  "una ora",
                         "neutral_reference":  "one hour",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
+                        "status":  "suspicious",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "una ora",
+                        "proposed_replacement":  "un'ora",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "In italiano standard davanti a 'ora' si usa normalmente l'elisione: 'un'ora'. 'Una ora' e comprensibile ma marcato/non standard.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.it.resx: TimeSpanHumanize_SingleHour_Words = 'una ora'",
+                                         "tests/Humanizer.Tests/Localisation/it/TimeSpanHumanizeTests.cs: Hours(toWords:true) currently expects 'una ora'"
                                      ],
-                        "notes":  ""
+                        "notes":  "Miglioria stilistica raccomandata; non blocca comprensione."
                     },
                     {
                         "locale":  "it",
