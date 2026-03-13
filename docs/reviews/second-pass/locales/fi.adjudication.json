@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "fi",
     "source_review":  "docs\\\\reviews\\\\locales\\\\fi.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  1,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  1,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -23,16 +23,18 @@
                                           "tests/Humanizer.Tests/Localisation/fi-FI/DateHumanizeTests.cs: [InlineData(1, \"sekuntti sitten\")]"
                                       ],
                          "notes":  "Typo appears in both resource and assertion; child culture fi-FI currently inherits this incorrect value from fi.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P1",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "sekunti sitten",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Vahvistettu. \"Sekuntti\" on kirjoitusvirhe suomessa; norminmukainen muoto on \"sekunti\". Aikailmauksessa oikea ja luonnollinen käännös on \"sekunti sitten\".",
                          "adjudicated_evidence":  [
-
+                                                   "src/Humanizer/Properties/Resources.fi.resx:192",
+                                                   "src/Humanizer/Properties/Resources.fi.resx:193",
+                                                   "tests/Humanizer.Tests/Localisation/fi-FI/DateHumanizeTests.cs:33"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Korjaa resurssiarvo muotoon \"sekunti sitten\" ja päivitä fi-FI-testin odotusarvo vastaamaan korjausta."
                      }
                  ]
 }
