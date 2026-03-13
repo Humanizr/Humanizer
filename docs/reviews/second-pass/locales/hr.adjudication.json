@@ -1,12 +1,12 @@
 ﻿{
     "locale":  "hr",
     "source_review":  "docs\\\\reviews\\\\locales\\\\hr.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  2,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  1,
                     "modified":  0,
-                    "rejected":  0
+                    "rejected":  1
                 },
     "findings":  [
                      {
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/hr/DateHumanizeTests.cs: očekivanje \"jučer\" za -1 dan"
                                       ],
                          "notes":  "Potrebno uskladiti zapis u review artefaktu s izvornom lokalizacijom.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P1",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "jučer",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Nalaz odbacujem: u stvarnom lokalizacijskom resursu vrijednost je ispravno \"jučer\". Problem \"juÄer\" je artefakt kodiranja u review zapisu (mojibake), a ne greška hrvatskog prijevoda.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.hr.resx: DateHumanize_SingleDayAgo = \"jučer\"",
+                                                     "tests/Humanizer.Tests/Localisation/hr/DateHumanizeTests.cs: [InlineData(-1, \"jučer\")]"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Nije potrebna izmjena lokalizacije; potrebno je samo ispravno kodiranje artefakta pregleda."
                      },
                      {
                          "locale":  "hr",
@@ -48,16 +49,18 @@
                                           "Neutral reference je \"no time\" (bez dodatnog značenja o nedostajućim podacima)"
                                       ],
                          "notes":  "Predloženi izraz je semantički bliži i prirodniji u hrvatskom UI kontekstu.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "bez vremena",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Nalaz potvrđujem: \"bez podatka o vremenu\" označava nedostatak informacije, a ne nulto trajanje. Za \"no time\" prirodniji i semantički točniji izraz u ovom kontekstu je \"bez vremena\".",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.resx: TimeSpanHumanize_Zero = \"no time\"",
+                                                     "src/Humanizer/Properties/Resources.hr.resx: TimeSpanHumanize_Zero = \"bez podatka o vremenu\"",
+                                                     "Semantička usporedba: \"bez podatka\" = nedostajući podatak, ne nulta količina vremena."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Drugi prolaz (neovisna procjena izvornog govornika): potvrđena potreba za terminološkim usklađenjem."
                      }
                  ]
 }
