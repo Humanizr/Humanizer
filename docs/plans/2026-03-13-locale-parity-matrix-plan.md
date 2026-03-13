@@ -71,18 +71,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.ar.resx`, `tests/Humanizer.Tests/Localisation/ar/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `ar`, including RTL-safe wording validation and direct locale tests for each completed surface.
 - **validation**: Targeted `ar` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added explicit Arabic residual resources (`DateHumanize_Never`, `TwoDays*`, `TimeSpanHumanize_Age`), full `TimeUnit_*`, `DataUnit_*`, and the 8-point heading set exercised by the locale tests. Added direct Arabic regression coverage for residual resources, `ToAge()`, `TimeUnit.ToSymbol()`, `ByteSize.ToFullWords()`, and heading formatting/reverse lookup. This task depends on the shared Arabic data-unit formatter widening from commit `ed17baaa`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.ar.resx`, `tests/Humanizer.Tests/Localisation/ar/ResourcesTests.cs`, `tests/Humanizer.Tests/Localisation/ar/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/ar/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/ar/Bytes/ToFullWordsTests.cs`, `tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs`
 
 ### T5: Complete Azerbaijani locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.az.resx`, `tests/Humanizer.Tests/Localisation/az/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `az`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `az` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Azerbaijani `DataUnit_*`, `TimeUnit_*`, residual `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`, `Never`), `TimeSpanHumanize_Age`, and heading resources. Added direct regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix formatter registration widened for `az`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.az.resx`, `tests/Humanizer.Tests/Localisation/az/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/az/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/az/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/az/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/az/Bytes/ToFullWordsTests.cs`
 
 ### T6: Complete Bulgarian locale parity
 - **depends_on**: [T1, T2]
@@ -98,9 +98,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.bn.resx`, `tests/Humanizer.Tests/Localisation/bn-BD/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `bn`, preserving current date/time tests and expanding them to cover each completed surface directly.
 - **validation**: Targeted `bn-BD` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Bengali `DataUnit_*`, `TimeUnit_*`, residual `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`, `Never`), and `TimeSpanHumanize_Age` resources. Added direct Bengali regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix data-unit formatter path from commit `b26dca1b`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.bn.resx`, `tests/Humanizer.Tests/Localisation/bn-BD/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/bn-BD/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/bn-BD/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/bn-BD/Bytes/ToFullWordsTests.cs`
 
 ### T8: Complete Catalan residual parity
 - **depends_on**: [T1, T2]
@@ -233,9 +233,9 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.id.resx`, `tests/Humanizer.Tests/Localisation/id/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `id`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `id` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Indonesian `DataUnit_*`, `TimeUnit_*`, residual `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`, `Never`), `TimeSpanHumanize_Age`, and heading resources. Added direct regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix formatter registration widened for `id`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.id.resx`, `tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/id/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/id/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/id/Bytes/ToFullWordsTests.cs`
 
 ### T23: Complete Icelandic residual parity
 - **depends_on**: [T1, T2]
@@ -260,18 +260,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.ja.resx`, `tests/Humanizer.Tests/Localisation/ja/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `ja`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `ja` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Japanese `DataUnit_*`, `TimeUnit_*`, residual `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`, `Never`), `TimeSpanHumanize_Age`, and Japanese heading resources. Added direct regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix formatter registration widened for `ja`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.ja.resx`, `tests/Humanizer.Tests/Localisation/ja/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ja/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ja/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/ja/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/ja/Bytes/ToFullWordsTests.cs`
 
 ### T26: Complete Korean locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.ko.resx`, `tests/Humanizer.Tests/Localisation/ko-KR/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `ko`, adding the missing direct `DateHumanize` coverage and completing the remaining resource families.
 - **validation**: Targeted `ko-KR` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Korean `DataUnit_*`, `TimeUnit_*`, residual `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`), `TimeSpanHumanize_Age`, `TimeSpanHumanize_MultipleDays_Paucal`, missing month/year variants, `*_Words` entries, and full/short heading resources. Added direct Korean regression coverage for residual date resources, `ToAge()`, `TimeUnit.ToSymbol()`, `ByteSize.ToFullWords()`, and heading round-tripping. This task depends on the shared trim-suffix data-unit formatter path from commit `b26dca1b`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.ko.resx`, `tests/Humanizer.Tests/Localisation/ko-KR/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ko-KR/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ko-KR/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/ko-KR/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/ko-KR/Bytes/ToFullWordsTests.cs`
 
 ### T27: Complete Kurdish locale parity
 - **depends_on**: [T1, T2]
@@ -305,18 +305,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.lv.resx`, `tests/Humanizer.Tests/Localisation/lv/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `lv`, including the currently missing direct `DateHumanize` coverage and all remaining resource-family gaps.
 - **validation**: Targeted `lv` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added explicit Latvian residual `DateHumanize` resources (`TwoDays*`, `MultipleDays*_Paucal`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, full heading resources, and `DataUnit_*` plural stems. Added direct regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`. This task depends on the dedicated Latvian formatter path from commit `4ef5f583`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.lv.resx`, `tests/Humanizer.Tests/Localisation/lv/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/lv/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/lv/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/lv/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/lv/Bytes/ToFullWordsTests.cs`
 
 ### T31: Complete Malay locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.ms.resx`, `tests/Humanizer.Tests/Localisation/ms-MY/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `ms`, including the currently missing direct `DateHumanize` coverage and all remaining resource-family gaps.
 - **validation**: Targeted `ms-MY` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Malay residual `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, and `DataUnit_*` resources. Added direct regression coverage for explicit residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, and `ByteSize.ToFullWords()`. Per task execution, `ToAge(toWords: true)` was treated as out of scope because Malay does not currently have independent number-to-words coverage in this locale scope.
+- **files edited/created**: `src/Humanizer/Properties/Resources.ms.resx`, `tests/Humanizer.Tests/Localisation/ms-MY/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ms-MY/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/ms-MY/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/ms-MY/Bytes/ToFullWordsTests.cs`
 
 ### T32: Complete Maltese residual parity
 - **depends_on**: [T1, T2]
@@ -440,18 +440,18 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.th.resx`, `tests/Humanizer.Tests/Localisation/th-TH/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `th`, preserving the existing direct date coverage and adding the missing `TimeSpanHumanize` and remaining parity surfaces.
 - **validation**: Targeted `th-TH` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Thai residual `DateHumanize` (`TwoDays*`, `MultipleDays*_Paucal`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, and `DataUnit_*` resources. Added direct regression coverage for explicit residual date resources, `ToAge()`, `TimeUnit.ToSymbol()`, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix data-unit formatter path from commit `b26dca1b`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.th.resx`, `tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/th-TH/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/th-TH/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/th-TH/Bytes/ToFullWordsTests.cs`
 
 ### T46: Complete Turkish locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.tr.resx`, `tests/Humanizer.Tests/Localisation/tr/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `tr`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `tr` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Turkish residual `DateHumanize` (`Never`, `TwoDays*`, `MultipleDays*_Paucal`), `TimeSpanHumanize_Age`, Turkish `TimeSpanHumanize_Single*_Words` entries for `ToAge(toWords: true)`, full `TimeUnit_*`, `DataUnit_*`, and 8-point heading resources. Added direct regression coverage for residual date resources, `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix formatter registration widened for `tr`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.tr.resx`, `tests/Humanizer.Tests/Localisation/tr/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/tr/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/tr/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/tr/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/tr/Bytes/ToFullWordsTests.cs`
 
 ### T47: Complete Ukrainian locale parity
 - **depends_on**: [T1, T2]
@@ -467,27 +467,27 @@ T1 --> T2 --> T54
 - **location**: `src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx`, `tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `uz-Cyrl-UZ`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `uz-Cyrl-UZ` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Uzbek Cyrillic `DataUnit_*`, `TimeUnit_*`, residual `DateHumanize`, `TimeSpanHumanize_Age`, and heading resources with direct regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix formatter registration widened for `uz-Cyrl-UZ`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx`, `tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/Bytes/ToFullWordsTests.cs`
 
 ### T49: Complete Uzbek Latin locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.uz-Latn-UZ.resx`, `tests/Humanizer.Tests/Localisation/uz-Latn-UZ/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `uz-Latn-UZ`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `uz-Latn-UZ` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Uzbek Latin `DataUnit_*`, `TimeUnit_*`, residual `DateHumanize`, `TimeSpanHumanize_Age`, and heading resources with direct regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, heading formatting/reverse lookup, and `ByteSize.ToFullWords()`. This task depends on the shared trim-suffix formatter registration widened for `uz-Latn-UZ`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.uz-Latn-UZ.resx`, `tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Latn-UZ/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Latn-UZ/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Latn-UZ/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/uz-Latn-UZ/Bytes/ToFullWordsTests.cs`
 
 ### T50: Complete Vietnamese locale parity
 - **depends_on**: [T1, T2]
 - **location**: `src/Humanizer/Properties/Resources.vi.resx`, `tests/Humanizer.Tests/Localisation/vi/**/*`
 - **description**: Complete all T1-approved missing `DateHumanize`, `TimeSpanHumanize`, `TimeUnit`, `DataUnit`, and heading surfaces for `vi`, adding direct locale tests for each completed surface.
 - **validation**: Targeted `vi` locale tests cover every completed surface and prove no English fallback remains on those surfaces.
-- **status**: Not Completed
-- **log**:
-- **files edited/created**:
+- **status**: Completed
+- **log**: Added Vietnamese residual `DateHumanize` (`Never`, `TwoDays*`, `MultipleDays*_Paucal`), `TimeSpanHumanize_Age`, full `TimeUnit_*`, `DataUnit_*`, and 8-point heading resources. Added direct regression coverage for residual date resources, numeric `ToAge()`, `TimeUnit.ToSymbol()`, `ByteSize.ToFullWords()`, and heading formatting/reverse lookup. This task depends on the shared trim-suffix formatter registration widened for `vi`.
+- **files edited/created**: `src/Humanizer/Properties/Resources.vi.resx`, `tests/Humanizer.Tests/Localisation/vi/DateHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/vi/TimeSpanHumanizeTests.cs`, `tests/Humanizer.Tests/Localisation/vi/TimeUnitToSymbolTests.cs`, `tests/Humanizer.Tests/Localisation/vi/HeadingTests.cs`, `tests/Humanizer.Tests/Localisation/vi/Bytes/ToFullWordsTests.cs`
 
 ### T51: Complete Chinese Simplified locale parity
 - **depends_on**: [T1, T2]
