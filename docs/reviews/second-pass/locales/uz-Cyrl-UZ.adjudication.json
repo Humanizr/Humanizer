@@ -1,225 +1,245 @@
-﻿{
-    "locale":  "uz-Cyrl-UZ",
-    "source_review":  "docs\\\\reviews\\\\locales\\\\uz-Cyrl-UZ.review.json",
-    "adjudication_status":  "pending",
-    "summary":  {
-                    "pending":  8,
-                    "confirmed":  0,
-                    "modified":  0,
-                    "rejected":  0
-                },
-    "findings":  [
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "DateHumanize_MultipleMinutesAgo",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»",
-                         "proposed_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»",
-                         "native_rationale":  "Ð£Ð·Ð±ÐµÐº Ð°Ð´Ð°Ð±Ð¸Ð¹ Ñ‚Ð¸Ð»Ð¸Ð´Ð° Ð²Ð°Ò›Ñ‚ Ð±Ð¸Ñ€Ð»Ð¸Ð³Ð¸ ÑƒÑ‡ÑƒÐ½ \"Ð´Ð°Ò›Ð¸Ò›Ð°\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ ÑˆÐ°ÐºÐ». \"{0} Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»\" Ñ€ÑƒÑÑ‡Ð°Ð³Ð° Ð¾Ò“Ð³Ð°Ð½ Ð²Ð° ÑˆÑƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð°Ð³Ð¸ \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»\" Ò³Ð°Ð¼Ð´Ð° TimeUnit Ñ‚Ð°Ñ€Ð¶Ð¸Ð¼Ð°Ð»Ð°Ñ€Ð¸ Ð±Ð¸Ð»Ð°Ð½ ÑƒÑÐ»ÑƒÐ±Ð¸Ð¹ Ð·Ð¸Ð´.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesAgo={0} Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(10) expects \"10 Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(1) expects \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
-                                      ],
-                         "notes":  "Normalize lexical choice to meyoriy Uzbek (Ð´Ð°Ò›Ð¸Ò›Ð°) across minute forms.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "DateHumanize_MultipleMinutesFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½ ÑÑžÐ½Ð³",
-                         "proposed_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³",
-                         "native_rationale":  "\"Ð”Ð°Ò›Ð¸Ò›Ð°\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ ÑˆÐ°ÐºÐ»; \"Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½\" Ñ€ÑƒÑÑ‡Ð° ÐºÐ°Ð»ÑŒÐºÐ° Ð±ÑžÐ»Ð¸Ð±, ÑˆÑƒ Ñ„Ð°Ð¹Ð»Ð´Ð°Ð³Ð¸ \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³\" Ð±Ð¸Ð»Ð°Ð½ Ð±Ð¸Ñ€ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° Ð°Ñ€Ð°Ð»Ð°Ñˆ ÑƒÑÐ»ÑƒÐ± Ò³Ð¾ÑÐ¸Ð» Ò›Ð¸Ð»ÑÐ¿Ñ‚Ð¸.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesFromNow={0} Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½ ÑÑžÐ½Ð³",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(10) expects \"10 Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½ ÑÑžÐ½Ð³\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(1) expects \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
-                                      ],
-                         "notes":  "Keep postposition pattern (Ð´Ð°Ð½ ÑÑžÐ½Ð³), only normalize time-unit lexeme.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "DateHumanize_MultipleSecondsAgo",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} ÑÐµÐºÑƒÐ½Ð´ Ð°Ð²Ð²Ð°Ð»",
-                         "proposed_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»",
-                         "native_rationale":  "Ð£Ð·Ð±ÐµÐºÑ‡Ð°Ð´Ð° \"ÑÐ¾Ð½Ð¸Ñ\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹; \"ÑÐµÐºÑƒÐ½Ð´\" Ñ€ÑƒÑÑ‡Ð° Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚. Ð‘Ð¸Ñ€Ð»Ð¸Ðº ÑˆÐ°ÐºÐ»Ð¸ Ð±Ñƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° Ð°Ð»Ð»Ð°Ò›Ð°Ñ‡Ð¾Ð½ \"Ð±Ð¸Ñ€ ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»\" Ð´ÐµÐ± Ð±ÐµÑ€Ð¸Ð»Ð³Ð°Ð½, ÐºÑžÐ¿Ð»Ð¸ÐºÐ´Ð° Ò³Ð°Ð¼ ÑˆÑƒ Ð±Ð°Ð·Ð° ÑÐ°Ò›Ð»Ð°Ð½Ð¸ÑˆÐ¸ ÐºÐµÑ€Ð°Ðº.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsAgo={0} ÑÐµÐºÑƒÐ½Ð´ Ð°Ð²Ð²Ð°Ð»",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(10) expects \"10 ÑÐµÐºÑƒÐ½Ð´ Ð°Ð²Ð²Ð°Ð»\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(1) expects \"Ð±Ð¸Ñ€ ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
-                                      ],
-                         "notes":  "Lexical consistency with singular second and TimeUnit symbols.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "DateHumanize_MultipleSecondsFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½ ÑÑžÐ½Ð³",
-                         "proposed_replacement":  "{0} ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³",
-                         "native_rationale":  "\"Ð¡Ð¾Ð½Ð¸Ñ\" Ð°Ð´Ð°Ð±Ð¸Ð¹ Ð¼ÐµÑŠÑ‘Ñ€Ð³Ð° Ð¼Ð¾Ñ; \"ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½\" Ñ€ÑƒÑÑ‡Ð° Ñ‚Ð°ÑŠÑÐ¸Ñ€. \"Ð‘Ð¸Ñ€ ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³\" ÑˆÐ°ÐºÐ»Ð¸ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° Ð¼Ð°Ð²Ð¶ÑƒÐ´, Ð´ÐµÐ¼Ð°Ðº ÐºÑžÐ¿Ð»Ð¸Ðº ÑƒÑ‡ÑƒÐ½ Ò³Ð°Ð¼ ÑˆÑƒ Ð»ÐµÐºÑÐµÐ¼Ð° Ò›ÑžÐ»Ð»Ð°Ð½Ð¸ÑˆÐ¸ ÐºÐµÑ€Ð°Ðº.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsFromNow={0} ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½ ÑÑžÐ½Ð³",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(10) expects \"10 ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½ ÑÑžÐ½Ð³\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(1) expects \"Ð±Ð¸Ñ€ ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
-                                      ],
-                         "notes":  "Normalize only noun; keep tense construction intact.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "{0} ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "TimeSpanHumanize_MultipleMinutes",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} Ð¼Ð¸Ð½ÑƒÑ‚",
-                         "proposed_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°",
-                         "native_rationale":  "\"ÐœÐ¸Ð½ÑƒÑ‚\" ÑžÑ€Ð½Ð¸Ð³Ð° \"Ð´Ð°Ò›Ð¸Ò›Ð°\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ Ð²Ð° ÑˆÑƒ Ð»Ð¾ÐºÐ°Ð»Ð½Ð¸Ð½Ð³ TimeUnit Ò›Ð°Ñ‚Ð¾Ñ€Ð»Ð°Ñ€Ð¸ Ð±Ð¸Ð»Ð°Ð½ Ð¼Ð¾Ñ. Ò²Ð¾Ð·Ð¸Ñ€Ð³Ð¸ Ò³Ð¾Ð»Ð°Ñ‚Ð´Ð° TimeSpan Ð²Ð° TimeUnit ÑžÑ€Ñ‚Ð°ÑÐ¸Ð´Ð° Ñ‚ÐµÑ€Ð¼Ð¸Ð½Ð¾Ð»Ð¾Ð³Ð¸Ðº Ð¿Ð°Ñ€Ñ‡Ð°Ð»Ð°Ð½Ð¸Ñˆ Ð±Ð¾Ñ€.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleMinutes={0} Ð¼Ð¸Ð½ÑƒÑ‚",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(2) expects \"2 Ð¼Ð¸Ð½ÑƒÑ‚\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
-                                      ],
-                         "notes":  "Terminology harmonization across Humanize surfaces.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "TimeSpanHumanize_MultipleSeconds",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} ÑÐµÐºÑƒÐ½Ð´",
-                         "proposed_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ",
-                         "native_rationale":  "\"Ð¡Ð¾Ð½Ð¸Ñ\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ ÑƒÐ·Ð±ÐµÐºÑ‡Ð° ÑˆÐ°ÐºÐ»; \"ÑÐµÐºÑƒÐ½Ð´\" Ñ€ÑƒÑ Ñ‚Ð¸Ð»Ð¸ Ñ‚Ð°ÑŠÑÐ¸Ñ€Ð¸. Ð¨Ñƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° TimeUnit Ð²Ð° DateHumanize Ð±Ð¸Ñ€Ð»Ð¸Ðº ÑˆÐ°ÐºÐ»Ð»Ð°Ñ€Ð¸ \"ÑÐ¾Ð½Ð¸Ñ\" Ð´ÐµÐ± ÐºÐµÐ»Ð³Ð°Ð½.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleSeconds={0} ÑÐµÐºÑƒÐ½Ð´",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(2) expects \"2 ÑÐµÐºÑƒÐ½Ð´\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
-                                      ],
-                         "notes":  "Align with normalized temporal lexicon.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "TimeSpanHumanize_SingleMinute",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "1 Ð¼Ð¸Ð½ÑƒÑ‚",
-                         "proposed_replacement":  "1 Ð´Ð°Ò›Ð¸Ò›Ð°",
-                         "native_rationale":  "Ð¡Ð¾Ð½Ð´Ð°Ð½ ÐºÐµÐ¹Ð¸Ð½ Ò³Ð°Ð¼ Ð²Ð°Ò›Ñ‚ Ð±Ð¸Ñ€Ð»Ð¸Ð³Ð¸ Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ Ñ€Ð°Ð²Ð¸ÑˆÐ´Ð° \"Ð´Ð°Ò›Ð¸Ò›Ð°\" Ð±ÑžÐ»Ð¸ÑˆÐ¸ ÐºÐµÑ€Ð°Ðº. \"1 Ð¼Ð¸Ð½ÑƒÑ‚\" ÑƒÐ·Ð±ÐµÐºÑ‡Ð° Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ´Ð° ÑÑ‚Ð¸Ð»Ð¸ÑÑ‚Ð¸Ðº Ñ€ÑƒÑÐ¸Ð·Ð¼ Ð±ÑžÐ»Ð¸Ð± Ñ‚ÑƒÑŽÐ»Ð°Ð´Ð¸.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleMinute=1 Ð¼Ð¸Ð½ÑƒÑ‚",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(1) expects \"1 Ð¼Ð¸Ð½ÑƒÑ‚\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
-                                      ],
-                         "notes":  "Use same noun for singular/plural for Uzbek numeral constructions.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "1 Ð´Ð°Ò›Ð¸Ò›Ð°",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "uz-Cyrl-UZ",
-                         "key":  "TimeSpanHumanize_SingleSecond",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "1 ÑÐµÐºÑƒÐ½Ð´",
-                         "proposed_replacement":  "1 ÑÐ¾Ð½Ð¸Ñ",
-                         "native_rationale":  "\"1 ÑÐµÐºÑƒÐ½Ð´\" ÑžÑ€Ð½Ð¸Ð³Ð° \"1 ÑÐ¾Ð½Ð¸Ñ\" Ð°Ð´Ð°Ð±Ð¸Ð¹ Ð½Ð¾Ñ€Ð¼Ð°Ð³Ð° Ð¼Ð¾Ñ Ð²Ð° ÑˆÑƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð°Ð³Ð¸ Ð±Ð¾ÑˆÒ›Ð° Ò›Ð°Ñ‚Ð¾Ñ€Ð»Ð°Ñ€ Ð±Ð¸Ð»Ð°Ð½ ÑƒÐ¹Ò“ÑƒÐ½.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleSecond=1 ÑÐµÐºÑƒÐ½Ð´",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(1) expects \"1 ÑÐµÐºÑƒÐ½Ð´\"",
-                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
-                                      ],
-                         "notes":  "Keep numeral format; replace noun only.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "1 ÑÐ¾Ð½Ð¸Ñ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     }
-                 ]
+{
+  "locale": "uz-Cyrl-UZ",
+  "source_review": "docs\\\\reviews\\\\locales\\\\uz-Cyrl-UZ.review.json",
+  "adjudication_status": "completed",
+  "summary": {
+    "pending": 0,
+    "confirmed": 8,
+    "modified": 0,
+    "rejected": 0
+  },
+  "findings": [
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "DateHumanize_MultipleMinutesAgo",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} минут аввал",
+      "proposed_replacement": "{0} дақиқа аввал",
+      "native_rationale": "Узбек адабий тилида вақт бирлиги учун \"дақиқа\" меъёрий шакл. \"{0} минут аввал\" русчага оғган ва шу локалдаги \"бир дақиқа аввал\" ҳамда TimeUnit таржималари билан услубий зид.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesAgo={0} минут аввал",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(10) expects \"10 минут аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(1) expects \"бир дақиқа аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "notes": "Normalize lexical choice to meyoriy Uzbek (дақиқа) across minute forms.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} дақиқа аввал",
+      "adjudicated_rationale": "Confirmed: in uz-Cyrl-UZ, the locale’s own baseline for minute is \"дақиқа\" (including singular DateHumanize and TimeUnit). Keeping \"минут\" in this plural form is an avoidable register mismatch.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesAgo={0} минут аввал",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(10) expects \"10 минут аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(1) expects \"бир дақиқа аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "DateHumanize_MultipleMinutesFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} минутдан сўнг",
+      "proposed_replacement": "{0} дақиқадан сўнг",
+      "native_rationale": "\"Дақиқа\" меъёрий шакл; \"минутдан\" русча калька бўлиб, шу файлдаги \"бир дақиқадан сўнг\" билан бир локалда аралаш услуб ҳосил қиляпти.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesFromNow={0} минутдан сўнг",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(10) expects \"10 минутдан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(1) expects \"бир дақиқадан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "notes": "Keep postposition pattern (дан сўнг), only normalize time-unit lexeme.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} дақиқадан сўнг",
+      "adjudicated_rationale": "Confirmed: this should use the same minute lexeme (\"дақиқа\") already used in the corresponding singular and TimeUnit entries; \"минутдан\" introduces inconsistent style within one locale.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesFromNow={0} минутдан сўнг",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(10) expects \"10 минутдан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(1) expects \"бир дақиқадан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "DateHumanize_MultipleSecondsAgo",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} секунд аввал",
+      "proposed_replacement": "{0} сония аввал",
+      "native_rationale": "Узбекчада \"сония\" меъёрий; \"секунд\" русча вариант. Бирлик шакли бу локалда аллақачон \"бир сония аввал\" деб берилган, кўпликда ҳам шу база сақланиши керак.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsAgo={0} секунд аввал",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(10) expects \"10 секунд аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(1) expects \"бир сония аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "notes": "Lexical consistency with singular second and TimeUnit symbols.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} сония аввал",
+      "adjudicated_rationale": "Confirmed: the locale consistently uses \"сония\" for the singular second and TimeUnit; plural past form should match that lexeme to avoid intra-locale terminology drift.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsAgo={0} секунд аввал",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(10) expects \"10 секунд аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(1) expects \"бир сония аввал\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "DateHumanize_MultipleSecondsFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} секунддан сўнг",
+      "proposed_replacement": "{0} сониядан сўнг",
+      "native_rationale": "\"Сония\" адабий меъёрга мос; \"секунддан\" русча таъсир. \"Бир сониядан сўнг\" шакли локалда мавжуд, демак кўплик учун ҳам шу лексема қўлланиши керак.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsFromNow={0} секунддан сўнг",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(10) expects \"10 секунддан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(1) expects \"бир сониядан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "notes": "Normalize only noun; keep tense construction intact.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} сониядан сўнг",
+      "adjudicated_rationale": "Confirmed: \"сониядан\" is the internally consistent and natural continuation of the locale’s second terminology; \"секунддан\" is mixed register relative to the rest of this surface.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsFromNow={0} секунддан сўнг",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(10) expects \"10 секунддан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(1) expects \"бир сониядан сўнг\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "TimeSpanHumanize_MultipleMinutes",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} минут",
+      "proposed_replacement": "{0} дақиқа",
+      "native_rationale": "\"Минут\" ўрнига \"дақиқа\" меъёрий ва шу локалнинг TimeUnit қаторлари билан мос. Ҳозирги ҳолатда TimeSpan ва TimeUnit ўртасида терминологик парчаланиш бор.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleMinutes={0} минут",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(2) expects \"2 минут\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "notes": "Terminology harmonization across Humanize surfaces.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} дақиқа",
+      "adjudicated_rationale": "Confirmed: TimeSpan outputs should align with the locale’s core time unit naming; using \"минут\" here conflicts with \"дақиқа\" in TimeUnit and in singular date phrasing.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleMinutes={0} минут",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(2) expects \"2 минут\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "TimeSpanHumanize_MultipleSeconds",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} секунд",
+      "proposed_replacement": "{0} сония",
+      "native_rationale": "\"Сония\" меъёрий узбекча шакл; \"секунд\" рус тили таъсири. Шу локалда TimeUnit ва DateHumanize бирлик шакллари \"сония\" деб келган.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleSeconds={0} секунд",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(2) expects \"2 секунд\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "notes": "Align with normalized temporal lexicon.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} сония",
+      "adjudicated_rationale": "Confirmed: keeping \"секунд\" in TimeSpan while the locale uses \"сония\" elsewhere fragments terminology; replacing with \"сония\" restores consistency and naturalness.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleSeconds={0} секунд",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(2) expects \"2 секунд\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "TimeSpanHumanize_SingleMinute",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "1 минут",
+      "proposed_replacement": "1 дақиқа",
+      "native_rationale": "Сондан кейин ҳам вақт бирлиги меъёрий равишда \"дақиқа\" бўлиши керак. \"1 минут\" узбекча интерфейсда стилистик русизм бўлиб туюлади.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleMinute=1 минут",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(1) expects \"1 минут\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "notes": "Use same noun for singular/plural for Uzbek numeral constructions.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "1 дақиқа",
+      "adjudicated_rationale": "Confirmed: this singular numeric form should use \"дақиқа\" to match the locale’s established minute lexeme and avoid mixing \"1 минут\" with other \"дақиқа\" strings in the same culture.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleMinute=1 минут",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(1) expects \"1 минут\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"дақиқа\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    },
+    {
+      "locale": "uz-Cyrl-UZ",
+      "key": "TimeSpanHumanize_SingleSecond",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "1 секунд",
+      "proposed_replacement": "1 сония",
+      "native_rationale": "\"1 секунд\" ўрнига \"1 сония\" адабий нормага мос ва шу локалдаги бошқа қаторлар билан уйғун.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleSecond=1 секунд",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(1) expects \"1 секунд\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "notes": "Keep numeral format; replace noun only.",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "1 сония",
+      "adjudicated_rationale": "Confirmed: the singular numeric second should follow the locale’s consistent \"сония\" usage rather than the mixed-form \"секунд\".",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleSecond=1 секунд",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(1) expects \"1 секунд\"",
+        "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"сония\""
+      ],
+      "adjudicated_notes": "Second-pass independent native review confirms first-pass defect and replacement."
+    }
+  ]
 }
