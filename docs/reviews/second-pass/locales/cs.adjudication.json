@@ -1,10 +1,10 @@
 ﻿{
     "locale":  "cs",
     "source_review":  "docs\\\\reviews\\\\locales\\\\cs.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  1,
-                    "confirmed":  0,
+                    "pending":  0,
+                    "confirmed":  1,
                     "modified":  0,
                     "rejected":  0
                 },
@@ -23,16 +23,17 @@
                                           "tests/Humanizer.Tests/Localisation/cs/TimeSpanHumanizeTests.cs contains no zero-duration assertion, so this semantic mismatch is currently untested."
                                       ],
                          "notes":  "Semantic correction for zero-duration output.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "žádný čas",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Jako druhý nezávislý rodilý mluvčí potvrzuji nález. Výraz „není čas“ v běžné češtině vyjadřuje nedostatek času (spěch), nikoli nulovou délku intervalu; pro TimeSpan.Zero je přirozenější a významově přesnější „žádný čas“.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.cs.resx: klíč TimeSpanHumanize_Zero je aktuálně přeložen jako \"není čas\", což významově odpovídá spíš situaci \"nemáme čas\".",
+                                                     "tests/Humanizer.Tests/Localisation/cs/TimeSpanHumanizeTests.cs: chybí aserce pro nulové trvání, takže stávající nevhodná formulace není testy zachycena."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Druhé kolo adjudikace: první návrh potvrzen bez úprav."
                      }
                  ]
 }
