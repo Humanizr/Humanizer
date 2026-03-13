@@ -1,888 +1,924 @@
-﻿{
-    "locale":  "th",
-    "source_review":  "docs\\\\reviews\\\\locales\\\\th.review.json",
-    "adjudication_status":  "pending",
-    "summary":  {
-                    "pending":  35,
-                    "confirmed":  0,
-                    "modified":  0,
-                    "rejected":  0
-                },
-    "findings":  [
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleDaysFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleDaysFromNow_Dual",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleDaysFromNow_Paucal",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleDaysFromNow_Plural",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleDaysFromNow_Singular",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleHoursFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleHoursFromNow_Dual",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleHoursFromNow_Paucal",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleHoursFromNow_Plural",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleHoursFromNow_Singular",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMinutesFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMinutesFromNow_Dual",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMinutesFromNow_Paucal",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMinutesFromNow_Plural",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMinutesFromNow_Singular",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMonthsFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMonthsFromNow_Dual",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMonthsFromNow_Paucal",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMonthsFromNow_Plural",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleMonthsFromNow_Singular",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleSecondsFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleSecondsFromNow_Dual",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleSecondsFromNow_Paucal",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleSecondsFromNow_Plural",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleSecondsFromNow_Singular",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleYearsFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleYearsFromNow_Dual",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleYearsFromNow_Paucal",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleYearsFromNow_Plural",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_MultipleYearsFromNow_Singular",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸ {0} à¸›à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_SingleHourFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "à¸«à¸™à¸¶à¹ˆà¸‡à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_SingleMinuteFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "à¸«à¸™à¸¶à¹ˆà¸‡à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_SingleMonthFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "à¸«à¸™à¸¶à¹ˆà¸‡à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¹€à¸”à¸·à¸­à¸™",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¹€à¸”à¸·à¸­à¸™",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_SingleSecondFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "à¸«à¸™à¸¶à¹ˆà¸‡à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸§à¸´à¸™à¸²à¸—à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "th",
-                         "key":  "DateHumanize_SingleYearFromNow",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
-                         "proposed_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µ",
-                         "native_rationale":  "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
-                                          "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
-                                      ],
-                         "notes":  "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µ",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     }
-                 ]
+{
+  "locale": "th",
+  "source_review": "docs\\\\reviews\\\\locales\\\\th.review.json",
+  "adjudication_status": "completed",
+  "summary": {
+    "pending": 0,
+    "confirmed": 35,
+    "modified": 0,
+    "rejected": 0
+  },
+  "findings": [
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleDaysFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleDaysFromNow_Dual",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleDaysFromNow_Paucal",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleDaysFromNow_Plural",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleDaysFromNow_Singular",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸±à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸±à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleHoursFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleHoursFromNow_Dual",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleHoursFromNow_Paucal",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleHoursFromNow_Plural",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleHoursFromNow_Singular",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMinutesFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMinutesFromNow_Dual",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMinutesFromNow_Paucal",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMinutesFromNow_Plural",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMinutesFromNow_Singular",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMonthsFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMonthsFromNow_Dual",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMonthsFromNow_Paucal",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMonthsFromNow_Plural",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleMonthsFromNow_Singular",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¹€à¸”à¸·à¸­à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleSecondsFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleSecondsFromNow_Dual",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleSecondsFromNow_Paucal",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleSecondsFromNow_Plural",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleSecondsFromNow_Singular",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleYearsFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleYearsFromNow_Dual",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleYearsFromNow_Paucal",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleYearsFromNow_Plural",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_MultipleYearsFromNow_Singular",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸ {0} à¸›à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_SingleHourFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "à¸«à¸™à¸¶à¹ˆà¸‡à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸Šà¸±à¹ˆà¸§à¹‚à¸¡à¸‡",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_SingleMinuteFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "à¸«à¸™à¸¶à¹ˆà¸‡à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_SingleMonthFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "à¸«à¸™à¸¶à¹ˆà¸‡à¹€à¸”à¸·à¸­à¸™à¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¹€à¸”à¸·à¸­à¸™",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¹€à¸”à¸·à¸­à¸™",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_SingleSecondFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "à¸«à¸™à¸¶à¹ˆà¸‡à¸§à¸´à¸™à¸²à¸—à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸§à¸´à¸™à¸²à¸—à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    },
+    {
+      "locale": "th",
+      "key": "DateHumanize_SingleYearFromNow",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µà¸ˆà¸²à¸à¸™à¸µà¹‰",
+      "proposed_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µ",
+      "native_rationale": "à¹‚à¸„à¸£à¸‡à¸ªà¸£à¹‰à¸²à¸‡ \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸Ÿà¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´à¸ªà¸³à¸«à¸£à¸±à¸šà¸ªà¸³à¸™à¸§à¸™à¸šà¸­à¸à¹€à¸§à¸¥à¸²à¹ƒà¸™à¸­à¸™à¸²à¸„à¸•à¸ à¸²à¸©à¸²à¹„à¸—à¸¢; à¸œà¸¹à¹‰à¹ƒà¸Šà¹‰à¹„à¸—à¸¢à¸—à¸±à¹ˆà¸§à¹„à¸›à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"à¸­à¸µà¸ ...\" à¸¡à¸²à¸à¸à¸§à¹ˆà¸²à¹à¸¥à¸°à¸­à¹ˆà¸²à¸™à¸¥à¸·à¹ˆà¸™à¸à¸§à¹ˆà¸²à¹ƒà¸™ UI.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: à¸à¸¥à¸¸à¹ˆà¸¡ DateHumanize_*FromNow à¹ƒà¸Šà¹‰à¸£à¸¹à¸› \"...à¸ˆà¸²à¸à¸™à¸µà¹‰\" à¸•à¹ˆà¸­à¹€à¸™à¸·à¹ˆà¸­à¸‡",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: à¸¡à¸µà¸à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¸£à¸¹à¸›à¹à¸šà¸š FromNow à¹ƒà¸™à¸§à¸±à¸’à¸™à¸˜à¸£à¸£à¸¡à¸¥à¸¹à¸ th-TH"
+      ],
+      "notes": "th-TH fallback à¹‚à¸”à¸¢à¸£à¸§à¸¡à¸¢à¸­à¸¡à¸£à¸±à¸šà¹„à¸”à¹‰ (à¸¡à¸µà¸„à¸µà¸¢à¹Œà¹€à¸‰à¸žà¸²à¸° TwoDays/Age/Paucal à¸„à¸£à¸š) à¹à¸•à¹ˆà¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡ FromNow à¸‚à¸­à¸‡ parent locale à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹€à¸›à¹‡à¸™à¸˜à¸£à¸£à¸¡à¸Šà¸²à¸•à¸´",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "à¸­à¸µà¸à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µ",
+      "adjudicated_rationale": "ยืนยันข้อสรุปครั้งแรก: สำนวน \"...จากนี้\" ไม่เป็นธรรมชาติสำหรับการบอกเวลาเชิงสัมพัทธ์ในภาษาไทย และควรใช้โครงสร้าง \"อีก ...\"",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.th.resx: ค่ากลุ่ม DateHumanize_*FromNow ปัจจุบันใช้รูป \"...จากนี้\"",
+        "tests/Humanizer.Tests/Localisation/th-TH/DateHumanizeTests.cs: มีการทดสอบทรัพยากรเฉพาะ th-TH และพฤติกรรม fallback จาก parent locale"
+      ],
+      "adjudicated_notes": "Second-pass (native): confirmed first-pass defect and replacement."
+    }
+  ]
 }
+
