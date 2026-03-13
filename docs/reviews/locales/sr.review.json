@@ -1,0 +1,2227 @@
+﻿{
+    "locale":  "sr",
+    "resource_file":  "src\\Humanizer\\Properties\\Resources.sr.resx",
+    "owned_child_cultures":  [
+
+                             ],
+    "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\sr",
+    "review_status":  "pending",
+    "summary":  {
+                    "total_keys":  130,
+                    "ok":  130,
+                    "suspicious":  0,
+                    "defect":  0
+                },
+    "records":  [
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Bit",
+                        "current_value":  "битова",
+                        "neutral_reference":  "bit",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "битова",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Bit_Paucal",
+                        "current_value":  "бита",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "бита",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Bit_Singular",
+                        "current_value":  "бит",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "бит",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_BitSymbol",
+                        "current_value":  "b",
+                        "neutral_reference":  "b",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "b",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Byte",
+                        "current_value":  "бајтова",
+                        "neutral_reference":  "byte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "бајтова",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Byte_Paucal",
+                        "current_value":  "бајта",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "бајта",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Byte_Singular",
+                        "current_value":  "бајт",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "бајт",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_ByteSymbol",
+                        "current_value":  "B",
+                        "neutral_reference":  "B",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "B",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Gigabyte",
+                        "current_value":  "гигабајтова",
+                        "neutral_reference":  "gigabyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "гигабајтова",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Gigabyte_Paucal",
+                        "current_value":  "гигабајта",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "гигабајта",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Gigabyte_Singular",
+                        "current_value":  "гигабајт",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "гигабајт",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_GigabyteSymbol",
+                        "current_value":  "GB",
+                        "neutral_reference":  "GB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "GB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Kilobyte",
+                        "current_value":  "килобајтова",
+                        "neutral_reference":  "kilobyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "килобајтова",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Kilobyte_Paucal",
+                        "current_value":  "килобајта",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "килобајта",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Kilobyte_Singular",
+                        "current_value":  "килобајт",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "килобајт",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_KilobyteSymbol",
+                        "current_value":  "KB",
+                        "neutral_reference":  "KB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "KB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Megabyte",
+                        "current_value":  "мегабајтова",
+                        "neutral_reference":  "megabyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "мегабајтова",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Megabyte_Paucal",
+                        "current_value":  "мегабајта",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "мегабајта",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Megabyte_Singular",
+                        "current_value":  "мегабајт",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "мегабајт",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_MegabyteSymbol",
+                        "current_value":  "MB",
+                        "neutral_reference":  "MB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "MB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Terabyte",
+                        "current_value":  "терабајтова",
+                        "neutral_reference":  "terabyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "терабајтова",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Terabyte_Paucal",
+                        "current_value":  "терабајта",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "терабајта",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_Terabyte_Singular",
+                        "current_value":  "терабајт",
+                        "neutral_reference":  null,
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "терабајт",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DataUnit_TerabyteSymbol",
+                        "current_value":  "TB",
+                        "neutral_reference":  "TB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "TB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleDaysAgo",
+                        "current_value":  "пре {0} дана",
+                        "neutral_reference":  "{0} days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleDaysAgo_Paucal",
+                        "current_value":  "пре {0} дана",
+                        "neutral_reference":  "{0} days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleDaysFromNow",
+                        "current_value":  "за {0} дана",
+                        "neutral_reference":  "{0} days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleDaysFromNow_Paucal",
+                        "current_value":  "за {0} дана",
+                        "neutral_reference":  "{0} days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleHoursAgo",
+                        "current_value":  "пре {0} сати",
+                        "neutral_reference":  "{0} hours ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} сати",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleHoursAgo_Paucal",
+                        "current_value":  "пре {0} сата",
+                        "neutral_reference":  "{0} hours ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} сата",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleHoursFromNow",
+                        "current_value":  "за {0} сати",
+                        "neutral_reference":  "{0} hours from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} сати",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleHoursFromNow_Paucal",
+                        "current_value":  "за {0} сата",
+                        "neutral_reference":  "{0} hours from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} сата",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMinutesAgo",
+                        "current_value":  "пре {0} минута",
+                        "neutral_reference":  "{0} minutes ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} минута",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMinutesAgo_Paucal",
+                        "current_value":  "пре {0} минута",
+                        "neutral_reference":  "{0} minutes ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} минута",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMinutesFromNow",
+                        "current_value":  "за {0} минута",
+                        "neutral_reference":  "{0} minutes from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} минута",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMinutesFromNow_Paucal",
+                        "current_value":  "за {0} минута",
+                        "neutral_reference":  "{0} minutes from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} минута",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMonthsAgo",
+                        "current_value":  "пре {0} месеци",
+                        "neutral_reference":  "{0} months ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} месеци",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMonthsAgo_Paucal",
+                        "current_value":  "пре {0} месеца",
+                        "neutral_reference":  "{0} months ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} месеца",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMonthsFromNow",
+                        "current_value":  "за {0} месеци",
+                        "neutral_reference":  "{0} months from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} месеци",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleMonthsFromNow_Paucal",
+                        "current_value":  "за {0} месеца",
+                        "neutral_reference":  "{0} months from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} месеца",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleSecondsAgo",
+                        "current_value":  "пре {0} секунди",
+                        "neutral_reference":  "{0} seconds ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} секунди",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleSecondsAgo_Paucal",
+                        "current_value":  "пре {0} секунде",
+                        "neutral_reference":  "{0} seconds ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} секунде",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleSecondsFromNow",
+                        "current_value":  "за {0} секунди",
+                        "neutral_reference":  "{0} seconds from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} секунди",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleSecondsFromNow_Paucal",
+                        "current_value":  "за {0} секунде",
+                        "neutral_reference":  "{0} seconds from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} секунде",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleYearsAgo",
+                        "current_value":  "пре {0} година",
+                        "neutral_reference":  "{0} years ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} година",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleYearsAgo_Paucal",
+                        "current_value":  "пре {0} године",
+                        "neutral_reference":  "{0} years ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре {0} године",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleYearsFromNow",
+                        "current_value":  "за {0} година",
+                        "neutral_reference":  "{0} years from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} година",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_MultipleYearsFromNow_Paucal",
+                        "current_value":  "за {0} године",
+                        "neutral_reference":  "{0} years from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за {0} године",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_Never",
+                        "current_value":  "никада",
+                        "neutral_reference":  "never",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "никада",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_Now",
+                        "current_value":  "сада",
+                        "neutral_reference":  "now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "сада",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleDayAgo",
+                        "current_value":  "јуче",
+                        "neutral_reference":  "yesterday",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "јуче",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleDayFromNow",
+                        "current_value":  "сутра",
+                        "neutral_reference":  "tomorrow",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "сутра",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleHourAgo",
+                        "current_value":  "пре сат времена",
+                        "neutral_reference":  "an hour ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре сат времена",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleHourFromNow",
+                        "current_value":  "за сат времена",
+                        "neutral_reference":  "an hour from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за сат времена",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleMinuteAgo",
+                        "current_value":  "пре минут",
+                        "neutral_reference":  "a minute ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре минут",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleMinuteFromNow",
+                        "current_value":  "за минут",
+                        "neutral_reference":  "a minute from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за минут",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleMonthAgo",
+                        "current_value":  "пре месец дана",
+                        "neutral_reference":  "one month ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре месец дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleMonthFromNow",
+                        "current_value":  "за месец дана",
+                        "neutral_reference":  "one month from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за месец дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleSecondAgo",
+                        "current_value":  "пре секунд",
+                        "neutral_reference":  "one second ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре секунд",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleSecondFromNow",
+                        "current_value":  "за секунд",
+                        "neutral_reference":  "one second from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за секунд",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleYearAgo",
+                        "current_value":  "пре годину дана",
+                        "neutral_reference":  "one year ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре годину дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_SingleYearFromNow",
+                        "current_value":  "за годину дана",
+                        "neutral_reference":  "one year from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за годину дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_TwoDaysAgo",
+                        "current_value":  "пре 2 дана",
+                        "neutral_reference":  "two days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "пре 2 дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "DateHumanize_TwoDaysFromNow",
+                        "current_value":  "за 2 дана",
+                        "neutral_reference":  "two days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "за 2 дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "E",
+                        "current_value":  "исток",
+                        "neutral_reference":  "east",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "исток",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "E_Short",
+                        "current_value":  "И",
+                        "neutral_reference":  "E",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "И",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "ENE",
+                        "current_value":  "исток-североисток",
+                        "neutral_reference":  "east-northeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "исток-североисток",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "ENE_Short",
+                        "current_value":  "ИСИ",
+                        "neutral_reference":  "ENE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ИСИ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "ESE",
+                        "current_value":  "исток-југоисток",
+                        "neutral_reference":  "east-southeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "исток-југоисток",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "ESE_Short",
+                        "current_value":  "ИЈИ",
+                        "neutral_reference":  "ESE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ИЈИ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "N",
+                        "current_value":  "север",
+                        "neutral_reference":  "north",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "север",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "N_Short",
+                        "current_value":  "С",
+                        "neutral_reference":  "N",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "С",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NE",
+                        "current_value":  "североисток",
+                        "neutral_reference":  "northeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "североисток",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NE_Short",
+                        "current_value":  "СИ",
+                        "neutral_reference":  "NE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "СИ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NNE",
+                        "current_value":  "север-североисток",
+                        "neutral_reference":  "north-northeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "север-североисток",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NNE_Short",
+                        "current_value":  "ССИ",
+                        "neutral_reference":  "NNE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ССИ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NNW",
+                        "current_value":  "север-северозапад",
+                        "neutral_reference":  "north-northwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "север-северозапад",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NNW_Short",
+                        "current_value":  "ССЗ",
+                        "neutral_reference":  "NNW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ССЗ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NW",
+                        "current_value":  "северозапад",
+                        "neutral_reference":  "northwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "северозапад",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "NW_Short",
+                        "current_value":  "СЗ",
+                        "neutral_reference":  "NW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "СЗ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "S",
+                        "current_value":  "југ",
+                        "neutral_reference":  "south",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "југ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "S_Short",
+                        "current_value":  "Ј",
+                        "neutral_reference":  "S",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "Ј",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SE",
+                        "current_value":  "југоисток",
+                        "neutral_reference":  "southeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "југоисток",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SE_Short",
+                        "current_value":  "ЈИ",
+                        "neutral_reference":  "SE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ЈИ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SSE",
+                        "current_value":  "југ-југоисток",
+                        "neutral_reference":  "south-southeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "југ-југоисток",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SSE_Short",
+                        "current_value":  "ЈЈИ",
+                        "neutral_reference":  "SSE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ЈЈИ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SSW",
+                        "current_value":  "југ-југозапад",
+                        "neutral_reference":  "south-southwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "југ-југозапад",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SSW_Short",
+                        "current_value":  "ЈЈЗ",
+                        "neutral_reference":  "SSW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ЈЈЗ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SW",
+                        "current_value":  "југозапад",
+                        "neutral_reference":  "southwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "југозапад",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "SW_Short",
+                        "current_value":  "ЈЗ",
+                        "neutral_reference":  "SW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ЈЗ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_Age",
+                        "current_value":  "{0}",
+                        "neutral_reference":  "{0} old",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0}",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleDays",
+                        "current_value":  "{0} дана",
+                        "neutral_reference":  "{0} days",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleDays_Paucal",
+                        "current_value":  "{0} дана",
+                        "neutral_reference":  "{0} days",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} дана",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleHours",
+                        "current_value":  "{0} сати",
+                        "neutral_reference":  "{0} hours",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} сати",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleHours_Paucal",
+                        "current_value":  "{0} сата",
+                        "neutral_reference":  "{0} hours",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} сата",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleMilliseconds",
+                        "current_value":  "{0} милисекунди",
+                        "neutral_reference":  "{0} milliseconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} милисекунди",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleMilliseconds_Paucal",
+                        "current_value":  "{0} милисекунде",
+                        "neutral_reference":  "{0} milliseconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} милисекунде",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleMinutes",
+                        "current_value":  "{0} минута",
+                        "neutral_reference":  "{0} minutes",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} минута",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleMinutes_Paucal",
+                        "current_value":  "{0} минута",
+                        "neutral_reference":  "{0} minutes",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} минута",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleMonths",
+                        "current_value":  "{0} месеци",
+                        "neutral_reference":  "{0} months",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} месеци",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleMonths_Paucal",
+                        "current_value":  "{0} месеца",
+                        "neutral_reference":  "{0} months",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} месеца",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleSeconds",
+                        "current_value":  "{0} секунди",
+                        "neutral_reference":  "{0} seconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} секунди",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleSeconds_Paucal",
+                        "current_value":  "{0} секунде",
+                        "neutral_reference":  "{0} seconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} секунде",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleWeeks",
+                        "current_value":  "{0} недеља",
+                        "neutral_reference":  "{0} weeks",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} недеља",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleWeeks_Paucal",
+                        "current_value":  "{0} недеље",
+                        "neutral_reference":  "{0} weeks",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} недеље",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleYears",
+                        "current_value":  "{0} година",
+                        "neutral_reference":  "{0} years",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} година",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_MultipleYears_Paucal",
+                        "current_value":  "{0} године",
+                        "neutral_reference":  "{0} years",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} године",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleDay",
+                        "current_value":  "1 дан",
+                        "neutral_reference":  "1 day",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 дан",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleHour",
+                        "current_value":  "1 сат",
+                        "neutral_reference":  "1 hour",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 сат",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleMillisecond",
+                        "current_value":  "1 милисекунда",
+                        "neutral_reference":  "1 millisecond",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 милисекунда",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleMinute",
+                        "current_value":  "1 минут",
+                        "neutral_reference":  "1 minute",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 минут",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleMonth",
+                        "current_value":  "1 месец",
+                        "neutral_reference":  "1 month",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 месец",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleSecond",
+                        "current_value":  "1 секунда",
+                        "neutral_reference":  "1 second",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 секунда",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleWeek",
+                        "current_value":  "1 недеља",
+                        "neutral_reference":  "1 week",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 недеља",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_SingleYear",
+                        "current_value":  "1 година",
+                        "neutral_reference":  "1 year",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 година",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeSpanHumanize_Zero",
+                        "current_value":  "без протеклог времена",
+                        "neutral_reference":  "no time",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "без протеклог времена",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Day",
+                        "current_value":  "дан",
+                        "neutral_reference":  "d",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "дан",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Hour",
+                        "current_value":  "ч",
+                        "neutral_reference":  "h",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ч",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Millisecond",
+                        "current_value":  "мс",
+                        "neutral_reference":  "ms",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "мс",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Minute",
+                        "current_value":  "мин",
+                        "neutral_reference":  "min",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "мин",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Month",
+                        "current_value":  "мес",
+                        "neutral_reference":  "mo",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "мес",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Second",
+                        "current_value":  "с",
+                        "neutral_reference":  "s",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "с",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Week",
+                        "current_value":  "нед",
+                        "neutral_reference":  "week",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "нед",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "TimeUnit_Year",
+                        "current_value":  "год",
+                        "neutral_reference":  "y",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "год",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "W",
+                        "current_value":  "запад",
+                        "neutral_reference":  "west",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "запад",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "W_Short",
+                        "current_value":  "З",
+                        "neutral_reference":  "W",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "З",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "WNW",
+                        "current_value":  "запад-северозапад",
+                        "neutral_reference":  "west-northwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "запад-северозапад",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "WNW_Short",
+                        "current_value":  "ЗСЗ",
+                        "neutral_reference":  "WNW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ЗСЗ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "WSW",
+                        "current_value":  "запад-југозапад",
+                        "neutral_reference":  "west-southwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "запад-југозапад",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "sr",
+                        "key":  "WSW_Short",
+                        "current_value":  "ЗЈЗ",
+                        "neutral_reference":  "WSW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ЗЈЗ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    }
+                ]
+}

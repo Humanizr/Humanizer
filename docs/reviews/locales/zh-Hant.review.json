@@ -1,0 +1,3179 @@
+﻿{
+    "locale":  "zh-Hant",
+    "resource_file":  "src\\Humanizer\\Properties\\Resources.zh-Hant.resx",
+    "owned_child_cultures":  [
+                                 "zh-HK"
+                             ],
+    "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\zh-Hant",
+    "review_status":  "pending",
+    "summary":  {
+                    "total_keys":  186,
+                    "ok":  186,
+                    "suspicious":  0,
+                    "defect":  0
+                },
+    "records":  [
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_Bit",
+                        "current_value":  "ä½å…ƒ",
+                        "neutral_reference":  "bit",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ä½å…ƒ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_BitSymbol",
+                        "current_value":  "b",
+                        "neutral_reference":  "b",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "b",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_Byte",
+                        "current_value":  "ä½å…ƒçµ„",
+                        "neutral_reference":  "byte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ä½å…ƒçµ„",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_ByteSymbol",
+                        "current_value":  "B",
+                        "neutral_reference":  "B",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "B",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_Gigabyte",
+                        "current_value":  "åå„„ä½å…ƒçµ„",
+                        "neutral_reference":  "gigabyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åå„„ä½å…ƒçµ„",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_GigabyteSymbol",
+                        "current_value":  "GB",
+                        "neutral_reference":  "GB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "GB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_Kilobyte",
+                        "current_value":  "åƒä½å…ƒçµ„",
+                        "neutral_reference":  "kilobyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åƒä½å…ƒçµ„",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_KilobyteSymbol",
+                        "current_value":  "KB",
+                        "neutral_reference":  "KB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "KB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_Megabyte",
+                        "current_value":  "ç™¾è¬ä½å…ƒçµ„",
+                        "neutral_reference":  "megabyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ç™¾è¬ä½å…ƒçµ„",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_MegabyteSymbol",
+                        "current_value":  "MB",
+                        "neutral_reference":  "MB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "MB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_Terabyte",
+                        "current_value":  "å…†ä½å…ƒçµ„",
+                        "neutral_reference":  "terabyte",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å…†ä½å…ƒçµ„",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DataUnit_TerabyteSymbol",
+                        "current_value":  "TB",
+                        "neutral_reference":  "TB",
+                        "surface_family":  "DataUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "TB",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysAgo",
+                        "current_value":  "{0} å¤©å‰",
+                        "neutral_reference":  "{0} days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysAgo_Dual",
+                        "current_value":  "{0} å¤©å‰",
+                        "neutral_reference":  "{0} days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysAgo_Paucal",
+                        "current_value":  "{0} å¤©å‰",
+                        "neutral_reference":  "{0} days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysAgo_Plural",
+                        "current_value":  "{0} å¤©å‰",
+                        "neutral_reference":  "{0} days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysAgo_Singular",
+                        "current_value":  "{0} å¤©å‰",
+                        "neutral_reference":  "{0} day ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysFromNow",
+                        "current_value":  "{0} å¤©å¾Œ",
+                        "neutral_reference":  "{0} days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysFromNow_Dual",
+                        "current_value":  "{0} å¤©å¾Œ",
+                        "neutral_reference":  "{0} days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysFromNow_Paucal",
+                        "current_value":  "{0} å¤©å¾Œ",
+                        "neutral_reference":  "{0} days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysFromNow_Plural",
+                        "current_value":  "{0} å¤©å¾Œ",
+                        "neutral_reference":  "{0} days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleDaysFromNow_Singular",
+                        "current_value":  "{0} å¤©å¾Œ",
+                        "neutral_reference":  "{0} day from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursAgo",
+                        "current_value":  "{0} å°æ™‚å‰",
+                        "neutral_reference":  "{0} hours ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursAgo_Dual",
+                        "current_value":  "{0} å°æ™‚å‰",
+                        "neutral_reference":  "{0} hours ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursAgo_Paucal",
+                        "current_value":  "{0} å°æ™‚å‰",
+                        "neutral_reference":  "{0} hours ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursAgo_Plural",
+                        "current_value":  "{0} å°æ™‚å‰",
+                        "neutral_reference":  "{0} hours ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursAgo_Singular",
+                        "current_value":  "{0} å°æ™‚å‰",
+                        "neutral_reference":  "{0} hour ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursFromNow",
+                        "current_value":  "{0} å°æ™‚å¾Œ",
+                        "neutral_reference":  "{0} hours from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursFromNow_Dual",
+                        "current_value":  "{0} å°æ™‚å¾Œ",
+                        "neutral_reference":  "{0} hours from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursFromNow_Paucal",
+                        "current_value":  "{0} å°æ™‚å¾Œ",
+                        "neutral_reference":  "{0} hours from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursFromNow_Plural",
+                        "current_value":  "{0} å°æ™‚å¾Œ",
+                        "neutral_reference":  "{0} hours from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleHoursFromNow_Singular",
+                        "current_value":  "{0} å°æ™‚å¾Œ",
+                        "neutral_reference":  "{0} hour from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesAgo",
+                        "current_value":  "{0} åˆ†é˜å‰",
+                        "neutral_reference":  "{0} minutes ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesAgo_Dual",
+                        "current_value":  "{0} åˆ†é˜å‰",
+                        "neutral_reference":  "{0} minutes ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesAgo_Paucal",
+                        "current_value":  "{0} åˆ†é˜å‰",
+                        "neutral_reference":  "{0} minutes ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesAgo_Plural",
+                        "current_value":  "{0} åˆ†é˜å‰",
+                        "neutral_reference":  "{0} minutes ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesAgo_Singular",
+                        "current_value":  "{0} åˆ†é˜å‰",
+                        "neutral_reference":  "{0} minute ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesFromNow",
+                        "current_value":  "{0} åˆ†é˜å¾Œ",
+                        "neutral_reference":  "{0} minutes from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesFromNow_Dual",
+                        "current_value":  "{0} åˆ†é˜å¾Œ",
+                        "neutral_reference":  "{0} minutes from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesFromNow_Paucal",
+                        "current_value":  "{0} åˆ†é˜å¾Œ",
+                        "neutral_reference":  "{0} minutes from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesFromNow_Plural",
+                        "current_value":  "{0} åˆ†é˜å¾Œ",
+                        "neutral_reference":  "{0} minutes from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMinutesFromNow_Singular",
+                        "current_value":  "{0} åˆ†é˜å¾Œ",
+                        "neutral_reference":  "{0} minute from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsAgo",
+                        "current_value":  "{0} å€‹æœˆå‰",
+                        "neutral_reference":  "{0} months ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsAgo_Dual",
+                        "current_value":  "{0} å€‹æœˆå‰",
+                        "neutral_reference":  "{0} months ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsAgo_Paucal",
+                        "current_value":  "{0} å€‹æœˆå‰",
+                        "neutral_reference":  "{0} months ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsAgo_Plural",
+                        "current_value":  "{0} å€‹æœˆå‰",
+                        "neutral_reference":  "{0} months ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsAgo_Singular",
+                        "current_value":  "{0} å€‹æœˆå‰",
+                        "neutral_reference":  "{0} month ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsFromNow",
+                        "current_value":  "{0} å€‹æœˆå¾Œ",
+                        "neutral_reference":  "{0} months from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsFromNow_Dual",
+                        "current_value":  "{0} å€‹æœˆå¾Œ",
+                        "neutral_reference":  "{0} months from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsFromNow_Paucal",
+                        "current_value":  "{0} å€‹æœˆå¾Œ",
+                        "neutral_reference":  "{0} months from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsFromNow_Plural",
+                        "current_value":  "{0} å€‹æœˆå¾Œ",
+                        "neutral_reference":  "{0} months from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleMonthsFromNow_Singular",
+                        "current_value":  "{0} å€‹æœˆå¾Œ",
+                        "neutral_reference":  "{0} month from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆå¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsAgo",
+                        "current_value":  "{0} ç§’é˜å‰",
+                        "neutral_reference":  "{0} seconds ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsAgo_Dual",
+                        "current_value":  "{0} ç§’é˜å‰",
+                        "neutral_reference":  "{0} seconds ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsAgo_Paucal",
+                        "current_value":  "{0} ç§’é˜å‰",
+                        "neutral_reference":  "{0} seconds ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsAgo_Plural",
+                        "current_value":  "{0} ç§’é˜å‰",
+                        "neutral_reference":  "{0} seconds ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsAgo_Singular",
+                        "current_value":  "{0} ç§’é˜å‰",
+                        "neutral_reference":  "{0} second ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsFromNow",
+                        "current_value":  "{0} ç§’é˜å¾Œ",
+                        "neutral_reference":  "{0} seconds from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsFromNow_Dual",
+                        "current_value":  "{0} ç§’é˜å¾Œ",
+                        "neutral_reference":  "{0} seconds from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsFromNow_Paucal",
+                        "current_value":  "{0} ç§’é˜å¾Œ",
+                        "neutral_reference":  "{0} seconds from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsFromNow_Plural",
+                        "current_value":  "{0} ç§’é˜å¾Œ",
+                        "neutral_reference":  "{0} seconds from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleSecondsFromNow_Singular",
+                        "current_value":  "{0} ç§’é˜å¾Œ",
+                        "neutral_reference":  "{0} second from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsAgo",
+                        "current_value":  "{0} å¹´å‰",
+                        "neutral_reference":  "{0} years ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsAgo_Dual",
+                        "current_value":  "{0} å¹´å‰",
+                        "neutral_reference":  "{0} years ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsAgo_Paucal",
+                        "current_value":  "{0} å¹´å‰",
+                        "neutral_reference":  "{0} years ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsAgo_Plural",
+                        "current_value":  "{0} å¹´å‰",
+                        "neutral_reference":  "{0} years ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsAgo_Singular",
+                        "current_value":  "{0} å¹´å‰",
+                        "neutral_reference":  "{0} year ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsFromNow",
+                        "current_value":  "{0} å¹´å¾Œ",
+                        "neutral_reference":  "{0} years from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsFromNow_Dual",
+                        "current_value":  "{0} å¹´å¾Œ",
+                        "neutral_reference":  "{0} years from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsFromNow_Paucal",
+                        "current_value":  "{0} å¹´å¾Œ",
+                        "neutral_reference":  "{0} years from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsFromNow_Plural",
+                        "current_value":  "{0} å¹´å¾Œ",
+                        "neutral_reference":  "{0} years from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_MultipleYearsFromNow_Singular",
+                        "current_value":  "{0} å¹´å¾Œ",
+                        "neutral_reference":  "{0} year from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_Never",
+                        "current_value":  "å¾žä¸",
+                        "neutral_reference":  "never",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å¾žä¸",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_Now",
+                        "current_value":  "ç¾åœ¨",
+                        "neutral_reference":  "now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ç¾åœ¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleDayAgo",
+                        "current_value":  "æ˜¨å¤©",
+                        "neutral_reference":  "yesterday",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ˜¨å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleDayFromNow",
+                        "current_value":  "æ˜Žå¤©",
+                        "neutral_reference":  "tomorrow",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ˜Žå¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleHourAgo",
+                        "current_value":  "1 å°æ™‚å‰",
+                        "neutral_reference":  "an hour ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å°æ™‚å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleHourFromNow",
+                        "current_value":  "1 å°æ™‚å¾Œ",
+                        "neutral_reference":  "an hour from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å°æ™‚å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleMinuteAgo",
+                        "current_value":  "1 åˆ†é˜å‰",
+                        "neutral_reference":  "a minute ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 åˆ†é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleMinuteFromNow",
+                        "current_value":  "1 åˆ†é˜å¾Œ",
+                        "neutral_reference":  "a minute from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 åˆ†é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleMonthAgo",
+                        "current_value":  "1 å€‹æœˆå‰",
+                        "neutral_reference":  "one month ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å€‹æœˆå‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleMonthFromNow",
+                        "current_value":  "1 å€‹æœˆå¾Œ",
+                        "neutral_reference":  "one month from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å€‹æœˆå¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleSecondAgo",
+                        "current_value":  "1 ç§’é˜å‰",
+                        "neutral_reference":  "one second ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 ç§’é˜å‰",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleSecondFromNow",
+                        "current_value":  "1 ç§’é˜å¾Œ",
+                        "neutral_reference":  "one second from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 ç§’é˜å¾Œ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleYearAgo",
+                        "current_value":  "åŽ»å¹´",
+                        "neutral_reference":  "one year ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åŽ»å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_SingleYearFromNow",
+                        "current_value":  "æ˜Žå¹´",
+                        "neutral_reference":  "one year from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ˜Žå¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_TwoDaysAgo",
+                        "current_value":  "å‰å¤©",
+                        "neutral_reference":  "two days ago",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å‰å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "DateHumanize_TwoDaysFromNow",
+                        "current_value":  "å¾Œå¤©",
+                        "neutral_reference":  "two days from now",
+                        "surface_family":  "DateHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å¾Œå¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "E",
+                        "current_value":  "æ±",
+                        "neutral_reference":  "east",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "E_Short",
+                        "current_value":  "æ±",
+                        "neutral_reference":  "E",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "ENE",
+                        "current_value":  "æ±åŒ—æ±",
+                        "neutral_reference":  "east-northeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±åŒ—æ±",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "ENE_Short",
+                        "current_value":  "æ±åŒ—æ±",
+                        "neutral_reference":  "ENE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±åŒ—æ±",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "ESE",
+                        "current_value":  "æ±å—æ±",
+                        "neutral_reference":  "east-southeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±å—æ±",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "ESE_Short",
+                        "current_value":  "æ±å—æ±",
+                        "neutral_reference":  "ESE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±å—æ±",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "N",
+                        "current_value":  "åŒ—",
+                        "neutral_reference":  "north",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "N_Short",
+                        "current_value":  "åŒ—",
+                        "neutral_reference":  "N",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NE",
+                        "current_value":  "æ±åŒ—",
+                        "neutral_reference":  "northeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NE_Short",
+                        "current_value":  "æ±åŒ—",
+                        "neutral_reference":  "NE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NNE",
+                        "current_value":  "åŒ—æ±åŒ—",
+                        "neutral_reference":  "north-northeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åŒ—æ±åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NNE_Short",
+                        "current_value":  "åŒ—æ±åŒ—",
+                        "neutral_reference":  "NNE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åŒ—æ±åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NNW",
+                        "current_value":  "åŒ—è¥¿åŒ—",
+                        "neutral_reference":  "north-northwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åŒ—è¥¿åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NNW_Short",
+                        "current_value":  "åŒ—è¥¿åŒ—",
+                        "neutral_reference":  "NNW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åŒ—è¥¿åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NW",
+                        "current_value":  "è¥¿åŒ—",
+                        "neutral_reference":  "northwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "NW_Short",
+                        "current_value":  "è¥¿åŒ—",
+                        "neutral_reference":  "NW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿åŒ—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "S",
+                        "current_value":  "å—",
+                        "neutral_reference":  "south",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "S_Short",
+                        "current_value":  "å—",
+                        "neutral_reference":  "S",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SE",
+                        "current_value":  "æ±å—",
+                        "neutral_reference":  "southeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SE_Short",
+                        "current_value":  "æ±å—",
+                        "neutral_reference":  "SE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ±å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SSE",
+                        "current_value":  "å—æ±å—",
+                        "neutral_reference":  "south-southeast",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å—æ±å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SSE_Short",
+                        "current_value":  "å—æ±å—",
+                        "neutral_reference":  "SSE",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å—æ±å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SSW",
+                        "current_value":  "å—è¥¿å—",
+                        "neutral_reference":  "south-southwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å—è¥¿å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SSW_Short",
+                        "current_value":  "å—è¥¿å—",
+                        "neutral_reference":  "SSW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å—è¥¿å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SW",
+                        "current_value":  "è¥¿å—",
+                        "neutral_reference":  "southwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "SW_Short",
+                        "current_value":  "è¥¿å—",
+                        "neutral_reference":  "SW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿å—",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_Age",
+                        "current_value":  "{0} æ­²",
+                        "neutral_reference":  "{0} old",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} æ­²",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleDays",
+                        "current_value":  "{0} å¤©",
+                        "neutral_reference":  "{0} days",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleDays_Dual",
+                        "current_value":  "{0} å¤©",
+                        "neutral_reference":  "{0} days",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleDays_Paucal",
+                        "current_value":  "{0} å¤©",
+                        "neutral_reference":  "{0} days",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleDays_Plural",
+                        "current_value":  "{0} å¤©",
+                        "neutral_reference":  "{0} days",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleDays_Singular",
+                        "current_value":  "{0} å¤©",
+                        "neutral_reference":  "{0} day",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleHours",
+                        "current_value":  "{0} å°æ™‚",
+                        "neutral_reference":  "{0} hours",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleHours_Dual",
+                        "current_value":  "{0} å°æ™‚",
+                        "neutral_reference":  "{0} hours",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleHours_Paucal",
+                        "current_value":  "{0} å°æ™‚",
+                        "neutral_reference":  "{0} hours",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleHours_Plural",
+                        "current_value":  "{0} å°æ™‚",
+                        "neutral_reference":  "{0} hours",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleHours_Singular",
+                        "current_value":  "{0} å°æ™‚",
+                        "neutral_reference":  "{0} hour",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMilliseconds",
+                        "current_value":  "{0} æ¯«ç§’",
+                        "neutral_reference":  "{0} milliseconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMilliseconds_Dual",
+                        "current_value":  "{0} æ¯«ç§’",
+                        "neutral_reference":  "{0} milliseconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMilliseconds_Paucal",
+                        "current_value":  "{0} æ¯«ç§’",
+                        "neutral_reference":  "{0} milliseconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMilliseconds_Plural",
+                        "current_value":  "{0} æ¯«ç§’",
+                        "neutral_reference":  "{0} milliseconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMilliseconds_Singular",
+                        "current_value":  "{0} æ¯«ç§’",
+                        "neutral_reference":  "{0} millisecond",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMinutes",
+                        "current_value":  "{0} åˆ†",
+                        "neutral_reference":  "{0} minutes",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMinutes_Dual",
+                        "current_value":  "{0} åˆ†",
+                        "neutral_reference":  "{0} minutes",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMinutes_Paucal",
+                        "current_value":  "{0} åˆ†",
+                        "neutral_reference":  "{0} minutes",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMinutes_Plural",
+                        "current_value":  "{0} åˆ†",
+                        "neutral_reference":  "{0} minutes",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMinutes_Singular",
+                        "current_value":  "{0} åˆ†",
+                        "neutral_reference":  "{0} minute",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMonths",
+                        "current_value":  "{0} å€‹æœˆ",
+                        "neutral_reference":  "{0} months",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMonths_Dual",
+                        "current_value":  "{0} å€‹æœˆ",
+                        "neutral_reference":  "{0} months",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMonths_Paucal",
+                        "current_value":  "{0} å€‹æœˆ",
+                        "neutral_reference":  "{0} months",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMonths_Plural",
+                        "current_value":  "{0} å€‹æœˆ",
+                        "neutral_reference":  "{0} months",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleMonths_Singular",
+                        "current_value":  "{0} å€‹æœˆ",
+                        "neutral_reference":  "{0} months",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å€‹æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleSeconds",
+                        "current_value":  "{0} ç§’",
+                        "neutral_reference":  "{0} seconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleSeconds_Dual",
+                        "current_value":  "{0} ç§’",
+                        "neutral_reference":  "{0} seconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleSeconds_Paucal",
+                        "current_value":  "{0} ç§’",
+                        "neutral_reference":  "{0} seconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleSeconds_Plural",
+                        "current_value":  "{0} ç§’",
+                        "neutral_reference":  "{0} seconds",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleSeconds_Singular",
+                        "current_value":  "{0} ç§’",
+                        "neutral_reference":  "{0} second",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleWeeks",
+                        "current_value":  "{0} å‘¨",
+                        "neutral_reference":  "{0} weeks",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleWeeks_Dual",
+                        "current_value":  "{0} å‘¨",
+                        "neutral_reference":  "{0} weeks",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleWeeks_Paucal",
+                        "current_value":  "{0} å‘¨",
+                        "neutral_reference":  "{0} weeks",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleWeeks_Plural",
+                        "current_value":  "{0} å‘¨",
+                        "neutral_reference":  "{0} weeks",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleWeeks_Singular",
+                        "current_value":  "{0} å‘¨",
+                        "neutral_reference":  "{0} week",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleYears",
+                        "current_value":  "{0} å¹´",
+                        "neutral_reference":  "{0} years",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleYears_Dual",
+                        "current_value":  "{0} å¹´",
+                        "neutral_reference":  "{0} years",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleYears_Paucal",
+                        "current_value":  "{0} å¹´",
+                        "neutral_reference":  "{0} years",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleYears_Plural",
+                        "current_value":  "{0} å¹´",
+                        "neutral_reference":  "{0} years",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_MultipleYears_Singular",
+                        "current_value":  "{0} å¹´",
+                        "neutral_reference":  "{0} years",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "{0} å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleDay",
+                        "current_value":  "1 å¤©",
+                        "neutral_reference":  "1 day",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleDays_Words",
+                        "current_value":  "1 å¤©",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleHour",
+                        "current_value":  "1 å°æ™‚",
+                        "neutral_reference":  "1 hour",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleHours_Words",
+                        "current_value":  "1 å°æ™‚",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleMillisecond",
+                        "current_value":  "1 æ¯«ç§’",
+                        "neutral_reference":  "1 millisecond",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleMilliseconds_Words",
+                        "current_value":  "1 æ¯«ç§’",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleMinute",
+                        "current_value":  "1 åˆ†",
+                        "neutral_reference":  "1 minute",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleMinutes_Words",
+                        "current_value":  "1 åˆ†",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleMonth",
+                        "current_value":  "1 å€‹æœˆ",
+                        "neutral_reference":  "1 month",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å€‹æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleMonths_Words",
+                        "current_value":  "1 å€‹æœˆ",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å€‹æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleSecond",
+                        "current_value":  "1 ç§’",
+                        "neutral_reference":  "1 second",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleSeconds_Words",
+                        "current_value":  "1 ç§’",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleWeek",
+                        "current_value":  "1 å‘¨",
+                        "neutral_reference":  "1 week",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleWeeks_Words",
+                        "current_value":  "1 å‘¨",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleYear",
+                        "current_value":  "1 å¹´",
+                        "neutral_reference":  "1 year",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_SingleYears_Words",
+                        "current_value":  "1 å¹´",
+                        "neutral_reference":  null,
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "1 å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeSpanHumanize_Zero",
+                        "current_value":  "æ²’æœ‰æ™‚é–“",
+                        "neutral_reference":  "no time",
+                        "surface_family":  "TimeSpanHumanize",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ²’æœ‰æ™‚é–“",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Day",
+                        "current_value":  "å¤©",
+                        "neutral_reference":  "d",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å¤©",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Hour",
+                        "current_value":  "å°æ™‚",
+                        "neutral_reference":  "h",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å°æ™‚",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Millisecond",
+                        "current_value":  "æ¯«ç§’",
+                        "neutral_reference":  "ms",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æ¯«ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Minute",
+                        "current_value":  "åˆ†",
+                        "neutral_reference":  "min",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "åˆ†",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Month",
+                        "current_value":  "æœˆ",
+                        "neutral_reference":  "mo",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "æœˆ",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Second",
+                        "current_value":  "ç§’",
+                        "neutral_reference":  "s",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "ç§’",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Week",
+                        "current_value":  "å‘¨",
+                        "neutral_reference":  "week",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å‘¨",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "TimeUnit_Year",
+                        "current_value":  "å¹´",
+                        "neutral_reference":  "y",
+                        "surface_family":  "TimeUnit",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "å¹´",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "W",
+                        "current_value":  "è¥¿",
+                        "neutral_reference":  "west",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "W_Short",
+                        "current_value":  "è¥¿",
+                        "neutral_reference":  "W",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "WNW",
+                        "current_value":  "è¥¿åŒ—è¥¿",
+                        "neutral_reference":  "west-northwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿åŒ—è¥¿",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "WNW_Short",
+                        "current_value":  "è¥¿åŒ—è¥¿",
+                        "neutral_reference":  "WNW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿åŒ—è¥¿",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "WSW",
+                        "current_value":  "è¥¿å—è¥¿",
+                        "neutral_reference":  "west-southwest",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿å—è¥¿",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "key":  "WSW_Short",
+                        "current_value":  "è¥¿å—è¥¿",
+                        "neutral_reference":  "WSW",
+                        "surface_family":  "Heading",
+                        "status":  "ok",
+                        "severity":  "P3",
+                        "confidence":  "high",
+                        "proposed_replacement":  "è¥¿å—è¥¿",
+                        "replacement_confidence":  "high",
+                        "native_rationale":  "Accepted pending native review.",
+                        "evidence":  [
+
+                                     ],
+                        "notes":  ""
+                    }
+                ]
+}

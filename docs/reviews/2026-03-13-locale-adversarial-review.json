@@ -1,0 +1,468 @@
+﻿{
+    "generated":  "2026-03-13",
+    "branch":  "codex/locale-translation-completion",
+    "locale_count":  51,
+    "locales":  [
+                    {
+                        "locale":  "af",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.af.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  92,
+                        "review_path":  "docs\\reviews\\locales\\af.review.json"
+                    },
+                    {
+                        "locale":  "ar",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ar.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  122,
+                        "review_path":  "docs\\reviews\\locales\\ar.review.json"
+                    },
+                    {
+                        "locale":  "az",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.az.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  100,
+                        "review_path":  "docs\\reviews\\locales\\az.review.json"
+                    },
+                    {
+                        "locale":  "bg",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.bg.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  104,
+                        "review_path":  "docs\\reviews\\locales\\bg.review.json"
+                    },
+                    {
+                        "locale":  "bn",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.bn.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  68,
+                        "review_path":  "docs\\reviews\\locales\\bn.review.json"
+                    },
+                    {
+                        "locale":  "ca",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ca.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\ca.review.json"
+                    },
+                    {
+                        "locale":  "cs",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.cs.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  110,
+                        "review_path":  "docs\\reviews\\locales\\cs.review.json"
+                    },
+                    {
+                        "locale":  "da",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.da.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  94,
+                        "review_path":  "docs\\reviews\\locales\\da.review.json"
+                    },
+                    {
+                        "locale":  "de",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.de.resx",
+                        "owned_child_cultures":  [
+                                                     "de-CH",
+                                                     "de-LI"
+                                                 ],
+                        "total_keys":  112,
+                        "review_path":  "docs\\reviews\\locales\\de.review.json"
+                    },
+                    {
+                        "locale":  "el",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.el.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  74,
+                        "review_path":  "docs\\reviews\\locales\\el.review.json"
+                    },
+                    {
+                        "locale":  "es",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.es.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\es.review.json"
+                    },
+                    {
+                        "locale":  "fa",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.fa.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  72,
+                        "review_path":  "docs\\reviews\\locales\\fa.review.json"
+                    },
+                    {
+                        "locale":  "fi",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.fi.resx",
+                        "owned_child_cultures":  [
+                                                     "fi-FI"
+                                                 ],
+                        "total_keys":  63,
+                        "review_path":  "docs\\reviews\\locales\\fi.review.json"
+                    },
+                    {
+                        "locale":  "fil",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.fil.resx",
+                        "owned_child_cultures":  [
+                                                     "fil-PH"
+                                                 ],
+                        "total_keys":  185,
+                        "review_path":  "docs\\reviews\\locales\\fil.review.json"
+                    },
+                    {
+                        "locale":  "fr",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.fr.resx",
+                        "owned_child_cultures":  [
+                                                     "fr-BE",
+                                                     "fr-CH"
+                                                 ],
+                        "total_keys":  87,
+                        "review_path":  "docs\\reviews\\locales\\fr.review.json"
+                    },
+                    {
+                        "locale":  "he",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.he.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  114,
+                        "review_path":  "docs\\reviews\\locales\\he.review.json"
+                    },
+                    {
+                        "locale":  "hr",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.hr.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  109,
+                        "review_path":  "docs\\reviews\\locales\\hr.review.json"
+                    },
+                    {
+                        "locale":  "hu",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.hu.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\hu.review.json"
+                    },
+                    {
+                        "locale":  "hy",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.hy.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  74,
+                        "review_path":  "docs\\reviews\\locales\\hy.review.json"
+                    },
+                    {
+                        "locale":  "id",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.id.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  84,
+                        "review_path":  "docs\\reviews\\locales\\id.review.json"
+                    },
+                    {
+                        "locale":  "is",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.is.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  144,
+                        "review_path":  "docs\\reviews\\locales\\is.review.json"
+                    },
+                    {
+                        "locale":  "it",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.it.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  84,
+                        "review_path":  "docs\\reviews\\locales\\it.review.json"
+                    },
+                    {
+                        "locale":  "ja",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ja.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  42,
+                        "review_path":  "docs\\reviews\\locales\\ja.review.json"
+                    },
+                    {
+                        "locale":  "ko",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ko.resx",
+                        "owned_child_cultures":  [
+                                                     "ko-KR"
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\ko.review.json"
+                    },
+                    {
+                        "locale":  "ku",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ku.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  134,
+                        "review_path":  "docs\\reviews\\locales\\ku.review.json"
+                    },
+                    {
+                        "locale":  "lb",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.lb.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  72,
+                        "review_path":  "docs\\reviews\\locales\\lb.review.json"
+                    },
+                    {
+                        "locale":  "lt",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.lt.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  153,
+                        "review_path":  "docs\\reviews\\locales\\lt.review.json"
+                    },
+                    {
+                        "locale":  "lv",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.lv.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  169,
+                        "review_path":  "docs\\reviews\\locales\\lv.review.json"
+                    },
+                    {
+                        "locale":  "ms",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ms.resx",
+                        "owned_child_cultures":  [
+                                                     "ms-MY"
+                                                 ],
+                        "total_keys":  137,
+                        "review_path":  "docs\\reviews\\locales\\ms.review.json"
+                    },
+                    {
+                        "locale":  "mt",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.mt.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\mt.review.json"
+                    },
+                    {
+                        "locale":  "nb",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.nb.resx",
+                        "owned_child_cultures":  [
+                                                     "nb-NO"
+                                                 ],
+                        "total_keys":  90,
+                        "review_path":  "docs\\reviews\\locales\\nb.review.json"
+                    },
+                    {
+                        "locale":  "nl",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.nl.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  78,
+                        "review_path":  "docs\\reviews\\locales\\nl.review.json"
+                    },
+                    {
+                        "locale":  "pl",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.pl.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  110,
+                        "review_path":  "docs\\reviews\\locales\\pl.review.json"
+                    },
+                    {
+                        "locale":  "pt",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.pt.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\pt.review.json"
+                    },
+                    {
+                        "locale":  "pt-BR",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.pt-BR.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  185,
+                        "review_path":  "docs\\reviews\\locales\\pt-BR.review.json"
+                    },
+                    {
+                        "locale":  "ro",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ro.resx",
+                        "owned_child_cultures":  [
+                                                     "ro-Ro"
+                                                 ],
+                        "total_keys":  76,
+                        "review_path":  "docs\\reviews\\locales\\ro.review.json"
+                    },
+                    {
+                        "locale":  "ru",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.ru.resx",
+                        "owned_child_cultures":  [
+                                                     "ru-RU"
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\ru.review.json"
+                    },
+                    {
+                        "locale":  "sk",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.sk.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  110,
+                        "review_path":  "docs\\reviews\\locales\\sk.review.json"
+                    },
+                    {
+                        "locale":  "sl",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.sl.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  156,
+                        "review_path":  "docs\\reviews\\locales\\sl.review.json"
+                    },
+                    {
+                        "locale":  "sr",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.sr.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  130,
+                        "review_path":  "docs\\reviews\\locales\\sr.review.json"
+                    },
+                    {
+                        "locale":  "sr-Latn",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.sr-Latn.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  130,
+                        "review_path":  "docs\\reviews\\locales\\sr-Latn.review.json"
+                    },
+                    {
+                        "locale":  "sv",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.sv.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  84,
+                        "review_path":  "docs\\reviews\\locales\\sv.review.json"
+                    },
+                    {
+                        "locale":  "th",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.th.resx",
+                        "owned_child_cultures":  [
+                                                     "th-TH"
+                                                 ],
+                        "total_keys":  137,
+                        "review_path":  "docs\\reviews\\locales\\th.review.json"
+                    },
+                    {
+                        "locale":  "tr",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.tr.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  92,
+                        "review_path":  "docs\\reviews\\locales\\tr.review.json"
+                    },
+                    {
+                        "locale":  "uk",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.uk.resx",
+                        "owned_child_cultures":  [
+                                                     "uk-UA"
+                                                 ],
+                        "total_keys":  198,
+                        "review_path":  "docs\\reviews\\locales\\uk.review.json"
+                    },
+                    {
+                        "locale":  "uz-Cyrl-UZ",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.uz-Cyrl-UZ.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  84,
+                        "review_path":  "docs\\reviews\\locales\\uz-Cyrl-UZ.review.json"
+                    },
+                    {
+                        "locale":  "uz-Latn-UZ",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.uz-Latn-UZ.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  84,
+                        "review_path":  "docs\\reviews\\locales\\uz-Latn-UZ.review.json"
+                    },
+                    {
+                        "locale":  "vi",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.vi.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  84,
+                        "review_path":  "docs\\reviews\\locales\\vi.review.json"
+                    },
+                    {
+                        "locale":  "zh-CN",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.zh-CN.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\zh-CN.review.json"
+                    },
+                    {
+                        "locale":  "zh-Hans",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.zh-Hans.resx",
+                        "owned_child_cultures":  [
+
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\zh-Hans.review.json"
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "resource_file":  "src\\Humanizer\\Properties\\Resources.zh-Hant.resx",
+                        "owned_child_cultures":  [
+                                                     "zh-HK"
+                                                 ],
+                        "total_keys":  186,
+                        "review_path":  "docs\\reviews\\locales\\zh-Hant.review.json"
+                    }
+                ]
+}
