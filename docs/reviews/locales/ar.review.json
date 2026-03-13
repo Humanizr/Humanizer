@@ -1,16 +1,16 @@
-﻿{
+{
     "locale":  "ar",
     "resource_file":  "src\\Humanizer\\Properties\\Resources.ar.resx",
     "owned_child_cultures":  [
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\ar",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  122,
-                    "ok":  122,
-                    "suspicious":  0,
-                    "defect":  0
+                    "ok":  114,
+                    "suspicious":  1,
+                    "defect":  7
                 },
     "records":  [
                     {
@@ -1039,16 +1039,17 @@
                         "current_value":  "Ø§Ù„Ø¹Ø§Ù… Ø§Ù„Ø³Ø§Ø¨Ù‚",
                         "neutral_reference":  "one year ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "suspicious",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "Ø§Ù„Ø¹Ø§Ù… Ø§Ù„Ø³Ø§Ø¨Ù‚",
+                        "proposed_replacement":  "منذ سنة واحدة",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"العام السابق\" أقرب إلى \"last year\" منه إلى \"one year ago\". صياغة \"منذ سنة واحدة\" أدق دلاليًا ومتسقة مع بقية صيغ \"منذ\" في نفس المجموعة.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_SingleYearAgo = \"العام السابق\" (comment: one year ago).",
+                                         "tests/Humanizer.Tests/Localisation/ar/DateHumanizeTests.cs: YearsAgo(-1) currently expects \"العام السابق\"."
                                      ],
-                        "notes":  ""
+                        "notes":  "تحسين دلالي/أسلوبي؛ السلسلة الحالية مفهومة لكنها أقل مطابقةً للمرجع."
                     },
                     {
                         "locale":  "ar",
@@ -1464,16 +1465,17 @@
                         "current_value":  "{0} Ø¬Ø²Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} Ø¬Ø²Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©",
+                        "proposed_replacement":  "{0} مللي ثانية",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"{0} جزء من الثانية\" لا تعبّر عن milliseconds كوحدة مستقلة؛ تُفهم كـ fraction عام من الثانية. المصطلح العربي التقني الشائع هو \"مللي ثانية\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ar.resx: TimeUnit_Millisecond = \"مللي ثانية\".",
+                                         "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds currently uses \"جزء من الثانية\"."
                                      ],
-                        "notes":  ""
+                        "notes":  "خلل مصطلحي يؤثر دقة الوحدة."
                     },
                     {
                         "locale":  "ar",
@@ -1481,16 +1483,17 @@
                         "current_value":  "Ø¬Ø²Ø¦ÙŠÙ† Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "Ø¬Ø²Ø¦ÙŠÙ† Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©",
-                        "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "proposed_replacement":  "مللي ثانيتين",
+                        "replacement_confidence":  "medium",
+                        "native_rationale":  "\"جزئين من الثانية\" غير دقيق كوحدة milliseconds. الصياغة المقترحة تحفظ التثنية وتُبقي اسم الوحدة التقنية.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Dual = \"جزئين من الثانية\".",
+                                         "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs currently asserts this phrase for 2 ms."
                                      ],
-                        "notes":  ""
+                        "notes":  "بديل مقترح يحافظ على نمط التثنية الحالي في الموارد."
                     },
                     {
                         "locale":  "ar",
@@ -1498,16 +1501,17 @@
                         "current_value":  "{0} Ø£Ø¬Ø²Ø§Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©",
                         "neutral_reference":  "{0} milliseconds",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} Ø£Ø¬Ø²Ø§Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©",
+                        "proposed_replacement":  "{0} مللي ثانية",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"{0} أجزاء من الثانية\" غير اصطلاحي للـ ms وقد يسبب لبسًا دلاليًا. \"مللي ثانية\" هو التعبير القياسي للمقدار العددي.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Plural currently uses \"أجزاء من الثانية\".",
+                                         "src/Humanizer/Properties/Resources.ar.resx already uses \"مللي ثانية\" in TimeUnit_Millisecond."
                                      ],
-                        "notes":  ""
+                        "notes":  "تصحيح مصطلحي واتساق داخلي مع TimeUnit."
                     },
                     {
                         "locale":  "ar",
@@ -1566,16 +1570,17 @@
                         "current_value":  "{0} Ø£Ø´Ù‡Ø±",
                         "neutral_reference":  "{0} months",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} Ø£Ø´Ù‡Ø±",
+                        "proposed_replacement":  "{0} شهر",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "الصيغة الحالية \"{0} أشهر\" في هذا المفتاح الأساسي تُنتج تركيبًا غير سليم للأعداد الكبيرة (مثل 11). الصيغة المفردة هنا أنسب لدور المفتاح الأساسي في العربية.",
                         "evidence":  [
-
+                                         "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Months(335) expects \"11 أشهر\" and is tagged [Trait(\"Translation\", \"Google\")].",
+                                         "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleMonths uses singular base \"{0} شهر\" for many-form behavior."
                                      ],
-                        "notes":  ""
+                        "notes":  "يوجد أثر متوقع على الاختبارات الحالية المرتبطة بترجمة Google."
                     },
                     {
                         "locale":  "ar",
@@ -1753,16 +1758,17 @@
                         "current_value":  "{0} Ø³Ù†Ø©",
                         "neutral_reference":  "{0} years",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} Ø³Ù†Ø©",
+                        "proposed_replacement":  "{0} سنوات",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "المفتاح الموسوم Plural يجب أن يحمل جمعًا حقيقيًا. القيمة الحالية \"{0} سنة\" تكرر المفرد وتفقد التفريق بين الصيغ.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleYears_Plural currently equals \"{0} سنة\".",
+                                         "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleYearsFromNow_Plural uses proper plural \"{0} سنوات\"."
                                      ],
-                        "notes":  ""
+                        "notes":  "تصحيح اتساق صرفي داخل مجموعة السنوات."
                     },
                     {
                         "locale":  "ar",
@@ -1838,16 +1844,17 @@
                         "current_value":  "Ø´Ù‡Ø± 1",
                         "neutral_reference":  "1 month",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "Ø´Ù‡Ø± 1",
+                        "proposed_replacement":  "شهر واحد",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"شهر 1\" ترتيب مترجم آليًا وغير طبيعي عربيًا. الصياغة السليمة: \"شهر واحد\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleMonth = \"شهر 1\".",
+                                         "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs marks month strings with [Trait(\"Translation\", \"Google\")]."
                                      ],
-                        "notes":  ""
+                        "notes":  "خلل لغوي واضح قابل للرصد للمستخدم النهائي."
                     },
                     {
                         "locale":  "ar",
@@ -1889,16 +1896,17 @@
                         "current_value":  "Ø§Ù„Ø³Ù†Ø© 1",
                         "neutral_reference":  "1 year",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P1",
                         "confidence":  "high",
-                        "proposed_replacement":  "Ø§Ù„Ø³Ù†Ø© 1",
+                        "proposed_replacement":  "سنة واحدة",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "\"السنة 1\" صياغة غير عربية طبيعية وتشير إلى ترجمة حرفية. المقابل الطبيعي: \"سنة واحدة\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleYear = \"السنة 1\".",
+                                         "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs marks year strings with [Trait(\"Translation\", \"Google\")]."
                                      ],
-                        "notes":  ""
+                        "notes":  "خلل لغوي مباشر في صيغة المفرد."
                     },
                     {
                         "locale":  "ar",
