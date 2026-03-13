@@ -33,7 +33,7 @@
         "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleMillisecondAgo en DateHumanize_SingleMillisecondFromNow gebruik reeds \"1 millisekonde\".",
         "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_MultipleMilliseconds gebruik \"{0} millisekondes\", wat die stam \"millisekonde\" bevestig."
       ],
-      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+      "adjudicated_notes": "Tweede-pass onafhanklike moedertaal-adjudikasie: eerste-pass voorstel onveranderd bevestig."
     },
     {
       "locale": "af",
@@ -59,7 +59,7 @@
         "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleMillisecondAgo gebruik \"1 millisekonde terug\".",
         "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_MultipleMilliseconds gebruik \"{0} millisekondes\", dus stem \"millisekonde\" morfologies ooreen."
       ],
-      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+      "adjudicated_notes": "Tweede-pass onafhanklike moedertaal-adjudikasie: eerste-pass voorstel onveranderd bevestig."
     },
     {
       "locale": "af",
@@ -85,7 +85,7 @@
         "src/Humanizer/Properties/Resources.af.resx: DateHumanize_SingleSecondAgo en DateHumanize_SingleSecondFromNow gebruik albei \"1 sekonde\".",
         "tests/Humanizer.Tests/Localisation/af/DateHumanizeTests.cs: verwagte enkelvoud vir sekondes is \"1 sekonde terug\" en \"oor 1 sekonde\"."
       ],
-      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+      "adjudicated_notes": "Tweede-pass onafhanklike moedertaal-adjudikasie: eerste-pass voorstel onveranderd bevestig."
     },
     {
       "locale": "af",
@@ -111,7 +111,7 @@
         "src/Humanizer/Properties/Resources.af.resx: TimeSpanHumanize_MultipleSeconds gebruik \"{0} sekondes\", wat by \"sekonde\" as enkelvoud aansluit.",
         "src/Humanizer/Properties/Resources.af.resx en tests/Humanizer.Tests/Localisation/af/DateHumanizeTests.cs: enkelvoudige DateHumanize-vorme gebruik konsekwent \"1 sekonde\"."
       ],
-      "adjudicated_notes": "Tweede-pass onafhanklike adjudikasie: eerste-pass voorstel onveranderd bevestig."
+      "adjudicated_notes": "Tweede-pass onafhanklike moedertaal-adjudikasie: eerste-pass voorstel onveranderd bevestig."
     }
   ]
 }
