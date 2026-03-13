@@ -5,12 +5,12 @@
                                  "zh-HK"
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\zh-Hant",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  186,
-                    "ok":  186,
+                    "ok":  178,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  8
                 },
     "records":  [
                     {
@@ -2481,87 +2481,97 @@
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeSpanHumanize_MultipleWeeks",
-                        "current_value":  "{0} å‘¨",
+                        "current_value":  "{0} 周",
                         "neutral_reference":  "{0} weeks",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} å‘¨",
+                        "proposed_replacement":  "{0} 週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "「周」在繁中可讀，但 zh-Hant/zh-HK 的星期量詞慣用為「週」，目前譯法帶有簡轉繁痕跡，地區自然度不足。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:213",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs:28",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs:26"
                                      ],
-                        "notes":  ""
+                        "notes":  "zh-HK 目前回退同字形，語意可懂但不屬香港常用書寫。"
                     },
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeSpanHumanize_MultipleWeeks_Dual",
-                        "current_value":  "{0} å‘¨",
+                        "current_value":  "{0} 周",
                         "neutral_reference":  "{0} weeks",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} å‘¨",
+                        "proposed_replacement":  "{0} 週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "複數變體沿用「周」，建議統一改為「週」以符合繁體中文地區用法。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:606",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs:29",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs:27"
                                      ],
-                        "notes":  ""
+                        "notes":  "需與主要 weeks 字串同步修正，避免詞形不一致。"
                     },
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeSpanHumanize_MultipleWeeks_Paucal",
-                        "current_value":  "{0} å‘¨",
+                        "current_value":  "{0} 周",
                         "neutral_reference":  "{0} weeks",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} å‘¨",
+                        "proposed_replacement":  "{0} 週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "此詞形與主詞條相同問題，繁中語境建議固定使用「週」。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:249",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs:28",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs:26"
                                      ],
-                        "notes":  ""
+                        "notes":  "zh-HK 回退可接受但不優。"
                     },
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeSpanHumanize_MultipleWeeks_Plural",
-                        "current_value":  "{0} å‘¨",
+                        "current_value":  "{0} 周",
                         "neutral_reference":  "{0} weeks",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} å‘¨",
+                        "proposed_replacement":  "{0} 週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "多數型仍應與繁中慣例一致使用「週」，目前字形偏離本地寫法。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:492",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs:29",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs:27"
                                      ],
-                        "notes":  ""
+                        "notes":  "建議與其他 week 詞條一起批次替換。"
                     },
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeSpanHumanize_MultipleWeeks_Singular",
-                        "current_value":  "{0} å‘¨",
+                        "current_value":  "{0} 周",
                         "neutral_reference":  "{0} week",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} å‘¨",
+                        "proposed_replacement":  "{0} 週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "單數型用「周」在繁中仍可理解，但非最自然地區寫法。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:369",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs:28",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs:26"
                                      ],
-                        "notes":  ""
+                        "notes":  "同系列詞條需一致改為「週」。"
                     },
                     {
                         "locale":  "zh-Hant",
@@ -2855,36 +2865,40 @@
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeSpanHumanize_SingleWeek",
-                        "current_value":  "1 å‘¨",
+                        "current_value":  "1 周",
                         "neutral_reference":  "1 week",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "1 å‘¨",
+                        "proposed_replacement":  "1 週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "單位「week」在繁體中文常寫作「週」，「1 周」屬非首選本地用法。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:237",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs:28",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs:26"
                                      ],
-                        "notes":  ""
+                        "notes":  "影響 zh-HK 直接回退結果。"
                     },
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeSpanHumanize_SingleWeeks_Words",
-                        "current_value":  "1 å‘¨",
+                        "current_value":  "1 周",
                         "neutral_reference":  null,
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "1 å‘¨",
+                        "proposed_replacement":  "1 週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "toWords 變體仍應沿用「週」；目前與繁中在地慣用字形不一致。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:393",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeSpanHumanizeTests.cs:28",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeSpanHumanizeTests.cs:26"
                                      ],
-                        "notes":  ""
+                        "notes":  "建議與 SingleWeek 同步修正。"
                     },
                     {
                         "locale":  "zh-Hant",
@@ -3042,19 +3056,21 @@
                     {
                         "locale":  "zh-Hant",
                         "key":  "TimeUnit_Week",
-                        "current_value":  "å‘¨",
+                        "current_value":  "周",
                         "neutral_reference":  "week",
                         "surface_family":  "TimeUnit",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "å‘¨",
+                        "proposed_replacement":  "週",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "基礎時間單位建議使用「週」，可同時提升 zh-Hant 與 zh-HK 回退輸出的在地自然度。",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.zh-Hant.resx:483",
+                                         "tests/Humanizer.Tests/Localisation/zh-Hant/TimeUnitToSymbolTests.cs:12",
+                                         "tests/Humanizer.Tests/Localisation/zh-HK/TimeUnitToSymbolTests.cs:12"
                                      ],
-                        "notes":  ""
+                        "notes":  "屬父文化字串，修正後可改善子文化 zh-HK fallback。"
                     },
                     {
                         "locale":  "zh-Hant",
