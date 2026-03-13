@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\sr",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  130,
-                    "ok":  130,
+                    "ok":  126,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  4
                 },
     "records":  [
                     {
@@ -937,16 +937,17 @@
                         "current_value":  "пре минут",
                         "neutral_reference":  "a minute ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "пре минут",
+                        "proposed_replacement":  "пре минуте",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "У стандардном српском после предлога \"пре\" стоји генитив: правилно је \"пре минуте\", док је \"пре минут\" граматички неисправан и не звучи природно.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.sr.resx: DateHumanize_SingleMinuteAgo = \"пре минут\"",
+                                         "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"пре минут\")]"
                                      ],
-                        "notes":  ""
+                        "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком."
                     },
                     {
                         "locale":  "sr",
@@ -954,16 +955,17 @@
                         "current_value":  "за минут",
                         "neutral_reference":  "a minute from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "за минут",
+                        "proposed_replacement":  "за минуту",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "После предлога \"за\" у овој конструкцији иде акузатив једнине: \"за минуту\". Облик \"за минут\" је граматички неисправан за именицу \"минута\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.sr.resx: DateHumanize_SingleMinuteFromNow = \"за минут\"",
+                                         "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"за минут\")]"
                                      ],
-                        "notes":  ""
+                        "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком."
                     },
                     {
                         "locale":  "sr",
@@ -1005,16 +1007,17 @@
                         "current_value":  "пре секунд",
                         "neutral_reference":  "one second ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "пре секунд",
+                        "proposed_replacement":  "пре секунде",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Са предлогом \"пре\" мора да стоји генитив: \"пре секунде\". Облик \"пре секунд\" није природан нити правописно исправан у српском.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.sr.resx: DateHumanize_SingleSecondAgo = \"пре секунд\"",
+                                         "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"пре секунд\")]"
                                      ],
-                        "notes":  ""
+                        "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком."
                     },
                     {
                         "locale":  "sr",
@@ -1022,16 +1025,17 @@
                         "current_value":  "за секунд",
                         "neutral_reference":  "one second from now",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "за секунд",
+                        "proposed_replacement":  "за секунду",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "У значењу будућег помераја времена исправан је акузатив: \"за секунду\". Облик \"за секунд\" је неусаглашен са падежом и делује као грешка.",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.sr.resx: DateHumanize_SingleSecondFromNow = \"за секунд\"",
+                                         "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"за секунд\")]"
                                      ],
-                        "notes":  ""
+                        "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком."
                     },
                     {
                         "locale":  "sr",
