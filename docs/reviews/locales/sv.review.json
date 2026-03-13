@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\sv",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  84,
-                    "ok":  84,
+                    "ok":  82,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  2
                 },
     "records":  [
                     {
@@ -19,16 +19,17 @@
                         "current_value":  "bytes",
                         "neutral_reference":  "byte",
                         "surface_family":  "DataUnit",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "bytes",
+                        "proposed_replacement":  "byte",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "På svenska böjs normalt inte dataenheten med -s efter tal; idiomatisk form är \"10 byte\", inte \"10 bytes\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.sv.resx:306",
+                                         "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:12"
                                      ],
-                        "notes":  ""
+                        "notes":  "Nuvarande test för sv förväntar sig den engelska pluralformen och bör justeras när resurssträngen rättas."
                     },
                     {
                         "locale":  "sv",
@@ -70,16 +71,17 @@
                         "current_value":  "gigabytes",
                         "neutral_reference":  "gigabyte",
                         "surface_family":  "DataUnit",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "gigabytes",
+                        "proposed_replacement":  "gigabyte",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Standard svensk användning är samma form i singular och plural för denna enhet: \"1 gigabyte\", \"10 gigabyte\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.sv.resx:315",
+                                         "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:20"
                                      ],
-                        "notes":  ""
+                        "notes":  "Pluralformen med -s är ett engelskt mönster och låter onaturligt i svensk lokalisering."
                     },
                     {
                         "locale":  "sv",
