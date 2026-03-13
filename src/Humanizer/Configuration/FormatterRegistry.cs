@@ -38,13 +38,13 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("id");
         Register("is", c => new IcelandicFormatter(c));
         RegisterDefaultFormatter("ja");
-        RegisterDefaultFormatter("ko");
+        Register("ko", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("lv");
         Register("mt", c => new MalteseFormatter(c));
-        RegisterDefaultFormatter("ms");
+        Register("ms", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("nb");
         RegisterDefaultFormatter("nl");
-        RegisterDefaultFormatter("bn");
+        Register("bn", c => new TrimPluralSuffixFormatter(c));
         RegisterDefaultFormatter("it");
         RegisterDefaultFormatter("ta");
         RegisterDefaultFormatter("uz-Latn-UZ");
@@ -52,7 +52,7 @@ class FormatterRegistry : LocaliserRegistry<IFormatter>
         RegisterDefaultFormatter("zh-CN");
         RegisterDefaultFormatter("zh-Hans");
         RegisterDefaultFormatter("zh-Hant");
-        RegisterDefaultFormatter("th");
+        Register("th", c => new TrimPluralSuffixFormatter(c));
         Register("lt", c => new LithuanianFormatter(c));
         Register("lb", c => new LuxembourgishFormatter(c));
         Register("ca", c => new CatalanFormatter(c));
