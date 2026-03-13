@@ -118,4 +118,5 @@ public class DateHumanizeTests
     [InlineData(1, "čez eno sekundo")]
     public void SecondsFromNow(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
+
 }

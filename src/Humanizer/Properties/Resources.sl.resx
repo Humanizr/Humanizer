@@ -366,4 +366,223 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>nič časa</value>
   </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>pred 2 dnevoma</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>čez 2 dni</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bitov</value>
+  </data>
+  <data name="DataUnit_Bit_Dual" xml:space="preserve">
+    <value>bita</value>
+  </data>
+  <data name="DataUnit_Bit_Paucal" xml:space="preserve">
+    <value>biti</value>
+  </data>
+  <data name="DataUnit_Bit_Singular" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bajtov</value>
+  </data>
+  <data name="DataUnit_Byte_Dual" xml:space="preserve">
+    <value>bajta</value>
+  </data>
+  <data name="DataUnit_Byte_Paucal" xml:space="preserve">
+    <value>bajti</value>
+  </data>
+  <data name="DataUnit_Byte_Singular" xml:space="preserve">
+    <value>bajt</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabajtov</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Dual" xml:space="preserve">
+    <value>gigabajta</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Paucal" xml:space="preserve">
+    <value>gigabajti</value>
+  </data>
+  <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
+    <value>gigabajt</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobajtov</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Dual" xml:space="preserve">
+    <value>kilobajta</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Paucal" xml:space="preserve">
+    <value>kilobajti</value>
+  </data>
+  <data name="DataUnit_Kilobyte_Singular" xml:space="preserve">
+    <value>kilobajt</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabajtov</value>
+  </data>
+  <data name="DataUnit_Megabyte_Dual" xml:space="preserve">
+    <value>megabajta</value>
+  </data>
+  <data name="DataUnit_Megabyte_Paucal" xml:space="preserve">
+    <value>megabajti</value>
+  </data>
+  <data name="DataUnit_Megabyte_Singular" xml:space="preserve">
+    <value>megabajt</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabajtov</value>
+  </data>
+  <data name="DataUnit_Terabyte_Dual" xml:space="preserve">
+    <value>terabajta</value>
+  </data>
+  <data name="DataUnit_Terabyte_Paucal" xml:space="preserve">
+    <value>terabajti</value>
+  </data>
+  <data name="DataUnit_Terabyte_Singular" xml:space="preserve">
+    <value>terabajt</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>d.</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>mes.</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>ted.</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>l.</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>sever</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>sever-severovzhod</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>SSV</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>severovzhod</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>SV</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>vzhod-severovzhod</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>VSV</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>vzhod</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>vzhod-jugovzhod</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>VJV</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>jugovzhod</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>JV</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>jug-jugovzhod</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>JJV</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>jug</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>J</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>jug-jugozahod</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>JJZ</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>jugozahod</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>JZ</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>zahod-jugozahod</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>ZJZ</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>zahod</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>zahod-severozahod</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>ZSZ</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>severozahod</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>SZ</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>sever-severozahod</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>SSZ</value>
+  </data>
 </root>
