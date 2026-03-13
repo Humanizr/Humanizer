@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabyte</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>{0} dae gelede</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} dae gelede</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>oor {0} dae</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>oor {0} dae</value>
   </data>
   <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
@@ -170,6 +188,12 @@
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>nooit</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>2 dae gelede</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>oor 2 dae</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>gister</value>
@@ -243,31 +267,130 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} jaar</value>
   </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} oud</value>
+  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 dag</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleDay_Words" xml:space="preserve">
+    <value>een dag</value>
   </data>
   <data name="TimeSpanHumanize_SingleHour" xml:space="preserve">
     <value>1 uur</value>
   </data>
+  <data name="TimeSpanHumanize_SingleHour_Words" xml:space="preserve">
+    <value>een uur</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
     <value>1 millisekond</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
+    <value>een millisekond</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 minuut</value>
   </data>
+  <data name="TimeSpanHumanize_SingleMinute_Words" xml:space="preserve">
+    <value>een minuut</value>
+  </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
     <value>1 maand</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleMonth_Words" xml:space="preserve">
+    <value>een maand</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>1 sekond</value>
   </data>
+  <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
+    <value>een sekond</value>
+  </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>1 week</value>
+  </data>
+  <data name="TimeSpanHumanize_SingleWeek_Words" xml:space="preserve">
+    <value>een week</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 jaar</value>
   </data>
+  <data name="TimeSpanHumanize_SingleYear_Words" xml:space="preserve">
+    <value>een jaar</value>
+  </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>geen tyd</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>dag</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>uur</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>maand</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>sek.</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>week</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>jaar</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>noord</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>noordoos</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>oos</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>suidoos</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>suid</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>suidwes</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>wes</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>noordwes</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>NO</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>SO</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>SW</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>NW</value>
   </data>
 </root>
