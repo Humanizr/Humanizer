@@ -243,4 +243,130 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>không giờ</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>cách đây {0} ngày</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>{0} ngày nữa</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>không bao giờ</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>hôm kia</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>ngày kia</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0} tuổi</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>mili giây</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>giây</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>phút</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>giờ</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>ngày</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>tuần</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>tháng</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>năm</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobyte</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>megabyte</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>gigabyte</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabyte</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>bắc</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>đông bắc</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>đông</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>đông nam</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>nam</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>tây nam</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>tây</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>tây bắc</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ĐB</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>Đ</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>ĐN</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>TN</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>TB</value>
+  </data>
 </root>

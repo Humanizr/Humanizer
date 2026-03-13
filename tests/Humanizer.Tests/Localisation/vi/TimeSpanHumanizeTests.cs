@@ -106,4 +106,10 @@ public class TimeSpanHumanizeTests
         var actual = noTime.Humanize(toWords: true);
         Assert.Equal("không giờ", actual);
     }
+
+    [Theory]
+    [InlineData(14, "2 tuần tuổi")]
+    [InlineData(366, "1 năm tuổi")]
+    public void Age(int days, string expected) =>
+        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }
