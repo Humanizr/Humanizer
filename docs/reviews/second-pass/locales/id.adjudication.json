@@ -1,351 +1,364 @@
-﻿{
-    "locale":  "id",
-    "source_review":  "docs\\\\reviews\\\\locales\\\\id.review.json",
-    "adjudication_status":  "pending",
-    "summary":  {
-                    "pending":  13,
-                    "confirmed":  0,
-                    "modified":  0,
-                    "rejected":  0
-                },
-    "findings":  [
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_MultipleDaysFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} hari dari sekarang",
-                         "proposed_replacement":  "dalam {0} hari",
-                         "native_rationale":  "Frasa \"{0} hari dari sekarang\" dapat dipahami, tetapi terdengar terjemahan literal. Dalam bahasa Indonesia alami, bentuk yang paling lazim adalah \"dalam {0} hari\" untuk konteks waktu mendatang.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Perlu sinkronisasi ekspektasi pengujian jika string produksi diubah.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "dalam {0} hari",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_MultipleDaysFromNow_Paucal",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} hari dari sekarang",
-                         "proposed_replacement":  "dalam {0} hari",
-                         "native_rationale":  "Varian paucal mewarisi masalah diksi yang sama: \"dari sekarang\" terdengar kaku. Bentuk \"dalam {0} hari\" lebih idiomatis dan umum dipakai penutur asli.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Jaga konsistensi dengan pasangan non-paucal.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "dalam {0} hari",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_MultipleHoursFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} jam dari sekarang",
-                         "proposed_replacement":  "dalam {0} jam",
-                         "native_rationale":  "\"{0} jam dari sekarang\" adalah terjemahan literal dan kurang natural dalam UI Indonesia. \"dalam {0} jam\" lebih ringkas dan idiomatis.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Perubahan menyentuh frase umum future tense.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "dalam {0} jam",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_MultipleMinutesFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} menit dari sekarang",
-                         "proposed_replacement":  "dalam {0} menit",
-                         "native_rationale":  "Untuk ekspresi waktu mendatang, penutur asli cenderung memakai \"dalam {0} menit\", bukan \"{0} menit dari sekarang\".",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Perlu penyelarasan dengan pola unit lain.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "dalam {0} menit",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_MultipleMonthsFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} bulan dari sekarang",
-                         "proposed_replacement":  "dalam {0} bulan",
-                         "native_rationale":  "Struktur \"dari sekarang\" tidak salah makna, tetapi terasa seperti hasil terjemahan langsung. \"dalam {0} bulan\" lebih alami dalam bahasa Indonesia standar.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Menjaga konsistensi gaya dengan unit hari/jam/menit.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "dalam {0} bulan",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_MultipleSecondsFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} detik dari sekarang",
-                         "proposed_replacement":  "dalam {0} detik",
-                         "native_rationale":  "Bentuk natural untuk hitung mundur adalah \"dalam {0} detik\". Bentuk saat ini terlalu harfiah.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Penting untuk konteks notifikasi real-time.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "dalam {0} detik",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_MultipleYearsFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "{0} tahun dari sekarang",
-                         "proposed_replacement":  "dalam {0} tahun",
-                         "native_rationale":  "Ungkapan waktu masa depan paling lazim: \"dalam {0} tahun\". Frasa sekarang dapat dipahami, tetapi tidak idiomatis.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Selaraskan dengan seluruh keluarga FromNow.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "dalam {0} tahun",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_SingleHourFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "sejam dari sekarang",
-                         "proposed_replacement":  "sejam lagi",
-                         "native_rationale":  "Untuk satuan tunggal, penutur asli jauh lebih natural memakai bentuk \"... lagi\" seperti \"sejam lagi\" ketimbang \"sejam dari sekarang\".",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Pertahankan gaya khusus bentuk singular.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "sejam lagi",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_SingleMinuteFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "semenit dari sekarang",
-                         "proposed_replacement":  "semenit lagi",
-                         "native_rationale":  "\"semenit lagi\" adalah bentuk idiomatis Indonesia. Bentuk saat ini kaku dan kurang percakapan.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Disarankan sejajar dengan \"sejam lagi\" dan \"sedetik lagi\".",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "semenit lagi",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_SingleMonthFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "sebulan dari sekarang",
-                         "proposed_replacement":  "sebulan lagi",
-                         "native_rationale":  "Frasa singular masa depan yang natural adalah \"sebulan lagi\". Versi sekarang terlalu literal.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Konsistenkan pola singular future.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "sebulan lagi",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_SingleSecondFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "sedetik dari sekarang",
-                         "proposed_replacement":  "sedetik lagi",
-                         "native_rationale":  "Dalam penggunaan nyata, \"sedetik lagi\" lebih alami dan ringkas daripada \"sedetik dari sekarang\".",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Relevan untuk output cepat/konversasional.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "sedetik lagi",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "DateHumanize_SingleYearFromNow",
-                         "original_status":  "suspicious",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "setahun dari sekarang",
-                         "proposed_replacement":  "setahun lagi",
-                         "native_rationale":  "Ungkapan idiomatis yang lazim adalah \"setahun lagi\". Bentuk sekarang tidak salah arti, tetapi tidak natural bagi penutur asli.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Tetap pertahankan makna kuantitas 1 tahun.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "setahun lagi",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     },
-                     {
-                         "locale":  "id",
-                         "key":  "TimeSpanHumanize_Zero",
-                         "original_status":  "defect",
-                         "original_severity":  "P1",
-                         "original_confidence":  "high",
-                         "current_value":  "waktu kosong",
-                         "proposed_replacement":  "tanpa waktu",
-                         "native_rationale":  "\"waktu kosong\" di Indonesia lebih dekat ke makna \"free time/slot kosong\", bukan \"no time\". Ini berisiko mengubah makna fungsional output.",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.id.resx",
-                                          "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
-                                          "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
-                                      ],
-                         "notes":  "Alternatif lain yang mungkin: \"tidak ada waktu\"; pilihannya tergantung gaya produk.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P1",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "tanpa waktu",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     }
-                 ]
+{
+  "locale": "id",
+  "source_review": "docs\\\\reviews\\\\locales\\\\id.review.json",
+  "adjudication_status": "completed",
+  "summary": {
+    "pending": 0,
+    "confirmed": 0,
+    "modified": 1,
+    "rejected": 12
+  },
+  "findings": [
+    {
+      "locale": "id",
+      "key": "DateHumanize_MultipleDaysFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} hari dari sekarang",
+      "proposed_replacement": "dalam {0} hari",
+      "native_rationale": "Frasa \"{0} hari dari sekarang\" dapat dipahami, tetapi terdengar terjemahan literal. Dalam bahasa Indonesia alami, bentuk yang paling lazim adalah \"dalam {0} hari\" untuk konteks waktu mendatang.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Perlu sinkronisasi ekspektasi pengujian jika string produksi diubah.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} hari dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_MultipleDaysFromNow_Paucal",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} hari dari sekarang",
+      "proposed_replacement": "dalam {0} hari",
+      "native_rationale": "Varian paucal mewarisi masalah diksi yang sama: \"dari sekarang\" terdengar kaku. Bentuk \"dalam {0} hari\" lebih idiomatis dan umum dipakai penutur asli.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Jaga konsistensi dengan pasangan non-paucal.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} hari dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_MultipleHoursFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} jam dari sekarang",
+      "proposed_replacement": "dalam {0} jam",
+      "native_rationale": "\"{0} jam dari sekarang\" adalah terjemahan literal dan kurang natural dalam UI Indonesia. \"dalam {0} jam\" lebih ringkas dan idiomatis.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Perubahan menyentuh frase umum future tense.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} jam dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_MultipleMinutesFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} menit dari sekarang",
+      "proposed_replacement": "dalam {0} menit",
+      "native_rationale": "Untuk ekspresi waktu mendatang, penutur asli cenderung memakai \"dalam {0} menit\", bukan \"{0} menit dari sekarang\".",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Perlu penyelarasan dengan pola unit lain.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} menit dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_MultipleMonthsFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} bulan dari sekarang",
+      "proposed_replacement": "dalam {0} bulan",
+      "native_rationale": "Struktur \"dari sekarang\" tidak salah makna, tetapi terasa seperti hasil terjemahan langsung. \"dalam {0} bulan\" lebih alami dalam bahasa Indonesia standar.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Menjaga konsistensi gaya dengan unit hari/jam/menit.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} bulan dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_MultipleSecondsFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} detik dari sekarang",
+      "proposed_replacement": "dalam {0} detik",
+      "native_rationale": "Bentuk natural untuk hitung mundur adalah \"dalam {0} detik\". Bentuk saat ini terlalu harfiah.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Penting untuk konteks notifikasi real-time.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} detik dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_MultipleYearsFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "{0} tahun dari sekarang",
+      "proposed_replacement": "dalam {0} tahun",
+      "native_rationale": "Ungkapan waktu masa depan paling lazim: \"dalam {0} tahun\". Frasa sekarang dapat dipahami, tetapi tidak idiomatis.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Selaraskan dengan seluruh keluarga FromNow.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "{0} tahun dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_SingleHourFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "sejam dari sekarang",
+      "proposed_replacement": "sejam lagi",
+      "native_rationale": "Untuk satuan tunggal, penutur asli jauh lebih natural memakai bentuk \"... lagi\" seperti \"sejam lagi\" ketimbang \"sejam dari sekarang\".",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Pertahankan gaya khusus bentuk singular.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "sejam dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_SingleMinuteFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "semenit dari sekarang",
+      "proposed_replacement": "semenit lagi",
+      "native_rationale": "\"semenit lagi\" adalah bentuk idiomatis Indonesia. Bentuk saat ini kaku dan kurang percakapan.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Disarankan sejajar dengan \"sejam lagi\" dan \"sedetik lagi\".",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "semenit dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_SingleMonthFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "sebulan dari sekarang",
+      "proposed_replacement": "sebulan lagi",
+      "native_rationale": "Frasa singular masa depan yang natural adalah \"sebulan lagi\". Versi sekarang terlalu literal.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Konsistenkan pola singular future.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "sebulan dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_SingleSecondFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "sedetik dari sekarang",
+      "proposed_replacement": "sedetik lagi",
+      "native_rationale": "Dalam penggunaan nyata, \"sedetik lagi\" lebih alami dan ringkas daripada \"sedetik dari sekarang\".",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Relevan untuk output cepat/konversasional.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "sedetik dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "DateHumanize_SingleYearFromNow",
+      "original_status": "suspicious",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "setahun dari sekarang",
+      "proposed_replacement": "setahun lagi",
+      "native_rationale": "Ungkapan idiomatis yang lazim adalah \"setahun lagi\". Bentuk sekarang tidak salah arti, tetapi tidak natural bagi penutur asli.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Tetap pertahankan makna kuantitas 1 tahun.",
+      "adjudication": "rejected",
+      "adjudicated_status": "ok",
+      "adjudicated_severity": "P3",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "setahun dari sekarang",
+      "adjudicated_rationale": "Bentuk \"{0} ... dari sekarang\" tetap alami dan lazim dipakai dalam bahasa Indonesia standar untuk menyatakan waktu relatif ke masa depan. Ini perbedaan gaya, bukan cacat terjemahan.",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (keluarga DateHumanize_*FromNow).",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs (ekspektasi current strings)."
+      ],
+      "adjudicated_notes": "No change required."
+    },
+    {
+      "locale": "id",
+      "key": "TimeSpanHumanize_Zero",
+      "original_status": "defect",
+      "original_severity": "P1",
+      "original_confidence": "high",
+      "current_value": "waktu kosong",
+      "proposed_replacement": "tanpa waktu",
+      "native_rationale": "\"waktu kosong\" di Indonesia lebih dekat ke makna \"free time/slot kosong\", bukan \"no time\". Ini berisiko mengubah makna fungsional output.",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.id.resx",
+        "tests/Humanizer.Tests/Localisation/id/DateHumanizeTests.cs",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs"
+      ],
+      "notes": "Alternatif lain yang mungkin: \"tidak ada waktu\"; pilihannya tergantung gaya produk.",
+      "adjudication": "modified",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "tidak ada waktu",
+      "adjudicated_rationale": "\"waktu kosong\" dalam bahasa Indonesia lebih sering dimaknai sebagai waktu luang/slot kosong, bukan durasi nol. Terjemahan yang lebih tepat untuk \"no time\" adalah \"tidak ada waktu\".",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.id.resx (TimeSpanHumanize_Zero).",
+        "tests/Humanizer.Tests/Localisation/id/TimeSpanHumanizeTests.cs (NoTimeToWords saat ini mengharapkan \"waktu kosong\")."
+      ],
+      "adjudicated_notes": "Modified in second pass: replacement adjusted to a more idiomatic zero-duration phrase."
+    }
+  ]
 }
