@@ -243,4 +243,178 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>zaman fərqi yoxdur</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>{0} gün əvvəl</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>{0} gün sonra</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>srağagün</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>birigün</value>
+  </data>
+  <data name="DateHumanize_Never" xml:space="preserve">
+    <value>heç vaxt</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="TimeUnit_Day" xml:space="preserve">
+    <value>gün</value>
+  </data>
+  <data name="TimeUnit_Hour" xml:space="preserve">
+    <value>saat</value>
+  </data>
+  <data name="TimeUnit_Millisecond" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="TimeUnit_Minute" xml:space="preserve">
+    <value>dəqiqə</value>
+  </data>
+  <data name="TimeUnit_Month" xml:space="preserve">
+    <value>ay</value>
+  </data>
+  <data name="TimeUnit_Second" xml:space="preserve">
+    <value>saniyə</value>
+  </data>
+  <data name="TimeUnit_Week" xml:space="preserve">
+    <value>həftə</value>
+  </data>
+  <data name="TimeUnit_Year" xml:space="preserve">
+    <value>il</value>
+  </data>
+  <data name="DataUnit_Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="DataUnit_BitSymbol" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="DataUnit_Byte" xml:space="preserve">
+    <value>bayt</value>
+  </data>
+  <data name="DataUnit_ByteSymbol" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="DataUnit_Kilobyte" xml:space="preserve">
+    <value>kilobayt</value>
+  </data>
+  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
+    <value>KB</value>
+  </data>
+  <data name="DataUnit_Megabyte" xml:space="preserve">
+    <value>meqabayt</value>
+  </data>
+  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="DataUnit_Gigabyte" xml:space="preserve">
+    <value>giqabayt</value>
+  </data>
+  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="DataUnit_Terabyte" xml:space="preserve">
+    <value>terabayt</value>
+  </data>
+  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
+    <value>TB</value>
+  </data>
+  <data name="N" xml:space="preserve">
+    <value>şimal</value>
+  </data>
+  <data name="NNE" xml:space="preserve">
+    <value>şimal-şimal-şərq</value>
+  </data>
+  <data name="NE" xml:space="preserve">
+    <value>şimal-şərq</value>
+  </data>
+  <data name="ENE" xml:space="preserve">
+    <value>şərq-şimal-şərq</value>
+  </data>
+  <data name="E" xml:space="preserve">
+    <value>şərq</value>
+  </data>
+  <data name="ESE" xml:space="preserve">
+    <value>şərq-cənub-şərq</value>
+  </data>
+  <data name="SE" xml:space="preserve">
+    <value>cənub-şərq</value>
+  </data>
+  <data name="SSE" xml:space="preserve">
+    <value>cənub-cənub-şərq</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>cənub</value>
+  </data>
+  <data name="SSW" xml:space="preserve">
+    <value>cənub-cənub-qərb</value>
+  </data>
+  <data name="SW" xml:space="preserve">
+    <value>cənub-qərb</value>
+  </data>
+  <data name="WSW" xml:space="preserve">
+    <value>qərb-cənub-qərb</value>
+  </data>
+  <data name="W" xml:space="preserve">
+    <value>qərb</value>
+  </data>
+  <data name="WNW" xml:space="preserve">
+    <value>qərb-şimal-qərb</value>
+  </data>
+  <data name="NW" xml:space="preserve">
+    <value>şimal-qərb</value>
+  </data>
+  <data name="NNW" xml:space="preserve">
+    <value>şimal-şimal-qərb</value>
+  </data>
+  <data name="N_Short" xml:space="preserve">
+    <value>Ş</value>
+  </data>
+  <data name="NNE_Short" xml:space="preserve">
+    <value>ŞŞŞ</value>
+  </data>
+  <data name="NE_Short" xml:space="preserve">
+    <value>ŞŞ</value>
+  </data>
+  <data name="ENE_Short" xml:space="preserve">
+    <value>Ş-ŞŞ</value>
+  </data>
+  <data name="E_Short" xml:space="preserve">
+    <value>Şər</value>
+  </data>
+  <data name="ESE_Short" xml:space="preserve">
+    <value>Ş-CŞ</value>
+  </data>
+  <data name="SE_Short" xml:space="preserve">
+    <value>CŞ</value>
+  </data>
+  <data name="SSE_Short" xml:space="preserve">
+    <value>CCŞ</value>
+  </data>
+  <data name="S_Short" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="SSW_Short" xml:space="preserve">
+    <value>CCQ</value>
+  </data>
+  <data name="SW_Short" xml:space="preserve">
+    <value>CQ</value>
+  </data>
+  <data name="WSW_Short" xml:space="preserve">
+    <value>Q-CQ</value>
+  </data>
+  <data name="W_Short" xml:space="preserve">
+    <value>Q</value>
+  </data>
+  <data name="WNW_Short" xml:space="preserve">
+    <value>Q-ŞQ</value>
+  </data>
+  <data name="NW_Short" xml:space="preserve">
+    <value>ŞQ</value>
+  </data>
+  <data name="NNW_Short" xml:space="preserve">
+    <value>ŞŞQ</value>
+  </data>
 </root>
