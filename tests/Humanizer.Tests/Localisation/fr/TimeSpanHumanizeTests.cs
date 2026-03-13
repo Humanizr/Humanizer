@@ -212,4 +212,18 @@ public class TimeSpanHumanizeTests
         var actual = noTime.Humanize(toWords: true);
         Assert.Equal("temps nul", actual);
     }
+
+    [Fact]
+    public void AgeHasExplicitFrenchResource()
+    {
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_Age", new("fr"), out var ageFormat));
+        Assert.Equal("{0}", ageFormat);
+    }
+
+    [Fact]
+    public void DayPaucalResourceExists()
+    {
+        Assert.True(Resources.TryGetResource("TimeSpanHumanize_MultipleDays_Paucal", new("fr"), out var resourceFormat));
+        Assert.Equal("{0} jours", resourceFormat);
+    }
 }

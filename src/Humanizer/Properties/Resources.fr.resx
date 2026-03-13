@@ -159,10 +159,22 @@
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>avant-hier</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>il y a {0} jours</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>avant-hier</value>
+  </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>dans {0} jours</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>après-demain</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
+    <value>dans {0} jours</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
     <value>après-demain</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
@@ -240,8 +252,14 @@
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} jours</value>
   </data>
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
+    <value>{0} jours</value>
+  </data>
   <data name="TimeSpanHumanize_MultipleDays_Singular" xml:space="preserve">
     <value>{0} jour</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} heures</value>
