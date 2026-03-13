@@ -1,38 +1,40 @@
-﻿{
-    "locale":  "hy",
-    "source_review":  "docs\\\\reviews\\\\locales\\\\hy.review.json",
-    "adjudication_status":  "pending",
-    "summary":  {
-                    "pending":  1,
-                    "confirmed":  0,
-                    "modified":  0,
-                    "rejected":  0
-                },
-    "findings":  [
-                     {
-                         "locale":  "hy",
-                         "key":  "TimeSpanHumanize_Zero",
-                         "original_status":  "defect",
-                         "original_severity":  "P2",
-                         "original_confidence":  "high",
-                         "current_value":  "ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯Õ¨ Õ¢Õ¡ÖÕ¡Õ¯Õ¡ÕµÕ¸Ö‚Õ´ Õ§",
-                         "proposed_replacement":  "ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯ Õ¹Õ¯Õ¡",
-                         "native_rationale":  "Â«ÔºÕ¡Õ´Õ¡Õ¶Õ¡Õ¯Õ¨ Õ¢Õ¡ÖÕ¡Õ¯Õ¡ÕµÕ¸Ö‚Õ´ Õ§Â» Õ±Ö‡Õ¡Õ¯Õ¥Ö€ÕºÕ¸Ö‚Õ´Õ¨ Õ¡Ö€Õ°Õ¥Õ½Õ¿Õ¡Õ¯Õ¡Õ¶ Õ§ Ö‡ Õ¢Õ¡Õ¼Õ¡ÖÕ« Õ©Õ¡Ö€Õ£Õ´Õ¡Õ¶Õ¸Ö‚Õ©ÕµÕ¡Õ¶ Õ¿ÕºÕ¡Õ¾Õ¸Ö€Õ¸Ö‚Õ©ÕµÕ¸Ö‚Õ¶ Õ§ Õ©Õ¸Õ²Õ¶Õ¸Ö‚Õ´Ö‰ Ô²Õ¶Õ¡Õ¯Õ¡Õ¶ Õ­Õ¸Õ½Ö„Õ¸Ö‚Õ´ Â«no timeÂ»-Õ« Õ°Õ¡Õ´Õ¡Ö€ Õ³Õ«Õ·Õ¿Õ¶ Õ§ Â«ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯ Õ¹Õ¯Õ¡Â»Ö‰",
-                         "evidence":  [
-                                          "src/Humanizer/Properties/Resources.hy.resx:267-268 uses \"ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯Õ¨ Õ¢Õ¡ÖÕ¡Õ¯Õ¡ÕµÕ¸Ö‚Õ´ Õ§\" for TimeSpanHumanize_Zero.",
-                                          "tests/Humanizer.Tests/Localisation/hy/TimeSpanHumanizeTests.cs:128 asserts the same awkward phrase for toWords: true."
-                                      ],
-                         "notes":  "ÔµÕ©Õ¥ ÖƒÕ¸Õ­Õ¡Ö€Õ«Õ¶Õ¸Ö‚Õ´Õ¨ Õ¨Õ¶Õ¤Õ¸Ö‚Õ¶Õ¾Õ«, ÕºÕ¥Õ¿Ö„ Õ§ Õ°Õ¡Õ´Õ¡ÕºÕ¡Õ¿Õ¡Õ½Õ­Õ¡Õ¶Õ¡Õ¢Õ¡Ö€ Õ©Õ¡Ö€Õ´Õ¡ÖÕ¶Õ¥Õ¬ hy/TimeSpanHumanizeTests.cs-Õ« NoTimeToWords Õ©Õ¥Õ½Õ¿Õ¨Ö‰",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
-                         "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯ Õ¹Õ¯Õ¡",
-                         "adjudicated_rationale":  "",
-                         "adjudicated_evidence":  [
-
-                                                  ],
-                         "adjudicated_notes":  ""
-                     }
-                 ]
+{
+  "locale": "hy",
+  "source_review": "docs\\\\reviews\\\\locales\\\\hy.review.json",
+  "adjudication_status": "completed",
+  "summary": {
+    "pending": 0,
+    "confirmed": 1,
+    "modified": 0,
+    "rejected": 0
+  },
+  "findings": [
+    {
+      "locale": "hy",
+      "key": "TimeSpanHumanize_Zero",
+      "original_status": "defect",
+      "original_severity": "P2",
+      "original_confidence": "high",
+      "current_value": "ժամանակը բացակայում է",
+      "proposed_replacement": "ժամանակ չկա",
+      "native_rationale": "«Ժամանակը բացակայում է» ձևակերպումը արհեստական է և բառացի թարգմանության տպավորություն է թողնում։ Բնական խոսքում «no time»-ի համար ճիշտն է «ժամանակ չկա»։",
+      "evidence": [
+        "src/Humanizer/Properties/Resources.hy.resx:267-268 uses \"ժամանակը բացակայում է\" for TimeSpanHumanize_Zero.",
+        "tests/Humanizer.Tests/Localisation/hy/TimeSpanHumanizeTests.cs:128 asserts the same awkward phrase for toWords: true."
+      ],
+      "notes": "Եթե փոխարինումը ընդունվի, պետք է համապատասխանաբար թարմացնել hy/TimeSpanHumanizeTests.cs-ի NoTimeToWords թեստը։",
+      "adjudication": "confirmed",
+      "adjudicated_status": "defect",
+      "adjudicated_severity": "P2",
+      "adjudicated_confidence": "high",
+      "adjudicated_replacement": "ժամանակ չկա",
+      "adjudicated_rationale": "Երկրորդ անկախ մայրենի ստուգմամբ առաջին-pass գնահատականը հաստատվում է. «ժամանակը բացակայում է» հայերենում ոչ բնական, բառացի ձևակերպում է, իսկ «ժամանակ չկա»-ն idiomatic և օգտագործական ճիշտ տարբերակն է TimeSpanHumanize_Zero-ի համար։",
+      "adjudicated_evidence": [
+        "src/Humanizer/Properties/Resources.hy.resx:267-268 currently sets TimeSpanHumanize_Zero to \"ժամանակը բացակայում է\", which is a literal calque rather than natural Armenian usage.",
+        "tests/Humanizer.Tests/Localisation/hy/TimeSpanHumanizeTests.cs:128 expects the same phrase in NoTimeToWords, confirming the awkward wording is baked into current behavior.",
+        "Native usage check: Armenian expresses \"no time\" as absence with \"չկա\"; \"ժամանակ չկա\" is the standard natural form."
+      ],
+      "adjudicated_notes": "Second-pass decision: first-pass finding and proposed replacement are confirmed without modification."
+    }
+  ]
 }
