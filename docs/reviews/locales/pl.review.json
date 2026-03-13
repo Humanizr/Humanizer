@@ -8,8 +8,8 @@
     "review_status":  "completed",
     "summary":  {
                     "total_keys":  110,
-                    "ok":  104,
-                    "suspicious":  6,
+                    "ok":  106,
+                    "suspicious":  4,
                     "defect":  0
                 },
     "records":  [
@@ -699,17 +699,17 @@
                         "current_value":  "przed {0} laty",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "suspicious",
+                        "status":  "ok",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "przed {0} latami",
+                        "proposed_replacement":  "przed {0} laty",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Forma \"laty\" jest poprawna, ale wyraźnie książkowa i dziś rzadsza w interfejsach użytkowych. W nowoczesnym polskim UI naturalniej brzmi \"przed {0} latami\".",
+                        "native_rationale":  "Forma \"przed {0} laty\" jest poprawna i naturalna w polszczyźnie ogólnej, choć ma odcień bardziej literacki niż \"latami\".",
                         "evidence":  [
                                          "src/Humanizer/Properties/Resources.pl.resx (DateHumanize_MultipleYearsAgo).",
                                          "tests/Humanizer.Tests/Localisation/pl/DateHumanizeTests.cs (YearsAgo: \"przed 2 laty\")."
                                      ],
-                        "notes":  "Nie jest to błąd gramatyczny; kwestia rejestru i naturalności."
+                        "notes":  "Pozostawiono bez zmian."
                     },
                     {
                         "locale":  "pl",
@@ -717,17 +717,17 @@
                         "current_value":  "przed {0} laty",
                         "neutral_reference":  "{0} years ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "suspicious",
+                        "status":  "ok",
                         "severity":  "P3",
                         "confidence":  "high",
-                        "proposed_replacement":  "przed {0} latami",
+                        "proposed_replacement":  "przed {0} laty",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Analogicznie do klucza bazowego: \"laty\" jest akceptowalne, ale stylistycznie archaizujące. Współcześnie bardziej neutralne jest \"latami\".",
+                        "native_rationale":  "Wariant paucal dziedziczy tę samą poprawną formę co klucz bazowy; \"laty\" jest akceptowalne i idiomatyczne.",
                         "evidence":  [
                                          "src/Humanizer/Properties/Resources.pl.resx (DateHumanize_MultipleYearsAgo_Paucal).",
                                          "src/Humanizer/Properties/Resources.pl.resx (DateHumanize_MultipleYearsAgo ma ten sam wariant \"laty\")."
                                      ],
-                        "notes":  "Wariant liczby paucal zachowuje tę samą uwagę stylistyczną."
+                        "notes":  "Pozostawiono bez zmian."
                     },
                     {
                         "locale":  "pl",
