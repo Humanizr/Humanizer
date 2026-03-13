@@ -156,6 +156,12 @@
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
     <value>fyrir {0} dögum</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
+    <value>fyrir {0} dögum</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>fyrir {0} dögum</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
     <value>fyrir {0} dögum</value>
   </data>
@@ -163,6 +169,12 @@
     <value>fyrir {0} degi</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
+    <value>eftir {0} daga</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>eftir {0} daga</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>eftir {0} daga</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
@@ -266,6 +278,12 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>núna</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>fyrir 2 dögum</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>eftir 2 daga</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>í gær</value>
@@ -382,6 +400,12 @@
     <value>S</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
+    <value>{0} dagar</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Dual" xml:space="preserve">
+    <value>{0} dagar</value>
+  </data>
+  <data name="TimeSpanHumanize_MultipleDays_Paucal" xml:space="preserve">
     <value>{0} dagar</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays_Plural" xml:space="preserve">
@@ -503,6 +527,9 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>engin stund</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="W" xml:space="preserve">
     <value>vestur</value>
