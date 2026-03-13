@@ -5,12 +5,12 @@
 
                              ],
     "direct_test_directories":  "tests\\Humanizer.Tests\\Localisation\\is",
-    "review_status":  "pending",
+    "review_status":  "completed",
     "summary":  {
                     "total_keys":  144,
-                    "ok":  144,
+                    "ok":  142,
                     "suspicious":  0,
-                    "defect":  0
+                    "defect":  2
                 },
     "records":  [
                     {
@@ -716,16 +716,17 @@
                         "current_value":  "fyrir {0} sekúndu",
                         "neutral_reference":  "{0} seconds ago",
                         "surface_family":  "DateHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "fyrir {0} sekúndu",
+                        "proposed_replacement":  "fyrir {0} sekúndum",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Þetta er fleirtölulykill en núverandi strengur er í eintölu (sekúndu). Eftir forsetninguna \"fyrir\" þarf hér þágufall fleirtölu: \"sekúndum\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.is.resx (DateHumanize_MultipleSecondsAgo notar 'fyrir {0} sekúndum').",
+                                         "tests/Humanizer.Tests/Localisation/is/DateHumanizeTests.cs (SecondsAgo: 'fyrir 2 sekúndum')."
                                      ],
-                        "notes":  ""
+                        "notes":  "Samræmt við grunnlykilinn DateHumanize_MultipleSecondsAgo."
                     },
                     {
                         "locale":  "is",
@@ -1906,16 +1907,17 @@
                         "current_value":  "{0} mánuðir",
                         "neutral_reference":  "{0} months",
                         "surface_family":  "TimeSpanHumanize",
-                        "status":  "ok",
-                        "severity":  "P3",
+                        "status":  "defect",
+                        "severity":  "P2",
                         "confidence":  "high",
-                        "proposed_replacement":  "{0} mánuðir",
+                        "proposed_replacement":  "{0} mánuður",
                         "replacement_confidence":  "high",
-                        "native_rationale":  "Accepted pending native review.",
+                        "native_rationale":  "Singular-lykillinn er rangur þar sem hann notar fleirtöluorðið \"mánuðir\". Fyrir eintölu á að vera \"mánuður\".",
                         "evidence":  [
-
+                                         "src/Humanizer/Properties/Resources.is.resx (TimeSpanHumanize_MultipleMonths_Singular).",
+                                         "tests/Humanizer.Tests/Localisation/is/TimeSpanHumanizeTests.cs (Months: '1 mánuður')."
                                      ],
-                        "notes":  ""
+                        "notes":  "Leiðrétt í samræmi við TimeSpanHumanize_SingleMonth."
                     },
                     {
                         "locale":  "is",
