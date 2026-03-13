@@ -1,0 +1,63 @@
+﻿{
+    "locale":  "is",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\is.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  2,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "is",
+                         "key":  "DateHumanize_MultipleSecondsAgo_Plural",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "fyrir {0} sekúndu",
+                         "proposed_replacement":  "fyrir {0} sekúndum",
+                         "native_rationale":  "Þetta er fleirtölulykill en núverandi strengur er í eintölu (sekúndu). Eftir forsetninguna \"fyrir\" þarf hér þágufall fleirtölu: \"sekúndum\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.is.resx (DateHumanize_MultipleSecondsAgo notar \u0027fyrir {0} sekúndum\u0027).",
+                                          "tests/Humanizer.Tests/Localisation/is/DateHumanizeTests.cs (SecondsAgo: \u0027fyrir 2 sekúndum\u0027)."
+                                      ],
+                         "notes":  "Samræmt við grunnlykilinn DateHumanize_MultipleSecondsAgo.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "fyrir {0} sekúndum",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "is",
+                         "key":  "TimeSpanHumanize_MultipleMonths_Singular",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} mánuðir",
+                         "proposed_replacement":  "{0} mánuður",
+                         "native_rationale":  "Singular-lykillinn er rangur þar sem hann notar fleirtöluorðið \"mánuðir\". Fyrir eintölu á að vera \"mánuður\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.is.resx (TimeSpanHumanize_MultipleMonths_Singular).",
+                                          "tests/Humanizer.Tests/Localisation/is/TimeSpanHumanizeTests.cs (Months: \u00271 mánuður\u0027)."
+                                      ],
+                         "notes":  "Leiðrétt í samræmi við TimeSpanHumanize_SingleMonth.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} mánuður",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

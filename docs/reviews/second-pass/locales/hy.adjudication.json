@@ -1,0 +1,38 @@
+﻿{
+    "locale":  "hy",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\hy.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  1,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "hy",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯Õ¨ Õ¢Õ¡ÖÕ¡Õ¯Õ¡ÕµÕ¸Ö‚Õ´ Õ§",
+                         "proposed_replacement":  "ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯ Õ¹Õ¯Õ¡",
+                         "native_rationale":  "Â«ÔºÕ¡Õ´Õ¡Õ¶Õ¡Õ¯Õ¨ Õ¢Õ¡ÖÕ¡Õ¯Õ¡ÕµÕ¸Ö‚Õ´ Õ§Â» Õ±Ö‡Õ¡Õ¯Õ¥Ö€ÕºÕ¸Ö‚Õ´Õ¨ Õ¡Ö€Õ°Õ¥Õ½Õ¿Õ¡Õ¯Õ¡Õ¶ Õ§ Ö‡ Õ¢Õ¡Õ¼Õ¡ÖÕ« Õ©Õ¡Ö€Õ£Õ´Õ¡Õ¶Õ¸Ö‚Õ©ÕµÕ¡Õ¶ Õ¿ÕºÕ¡Õ¾Õ¸Ö€Õ¸Ö‚Õ©ÕµÕ¸Ö‚Õ¶ Õ§ Õ©Õ¸Õ²Õ¶Õ¸Ö‚Õ´Ö‰ Ô²Õ¶Õ¡Õ¯Õ¡Õ¶ Õ­Õ¸Õ½Ö„Õ¸Ö‚Õ´ Â«no timeÂ»-Õ« Õ°Õ¡Õ´Õ¡Ö€ Õ³Õ«Õ·Õ¿Õ¶ Õ§ Â«ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯ Õ¹Õ¯Õ¡Â»Ö‰",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.hy.resx:267-268 uses \"ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯Õ¨ Õ¢Õ¡ÖÕ¡Õ¯Õ¡ÕµÕ¸Ö‚Õ´ Õ§\" for TimeSpanHumanize_Zero.",
+                                          "tests/Humanizer.Tests/Localisation/hy/TimeSpanHumanizeTests.cs:128 asserts the same awkward phrase for toWords: true."
+                                      ],
+                         "notes":  "ÔµÕ©Õ¥ ÖƒÕ¸Õ­Õ¡Ö€Õ«Õ¶Õ¸Ö‚Õ´Õ¨ Õ¨Õ¶Õ¤Õ¸Ö‚Õ¶Õ¾Õ«, ÕºÕ¥Õ¿Ö„ Õ§ Õ°Õ¡Õ´Õ¡ÕºÕ¡Õ¿Õ¡Õ½Õ­Õ¡Õ¶Õ¡Õ¢Õ¡Ö€ Õ©Õ¡Ö€Õ´Õ¡ÖÕ¶Õ¥Õ¬ hy/TimeSpanHumanizeTests.cs-Õ« NoTimeToWords Õ©Õ¥Õ½Õ¿Õ¨Ö‰",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "ÕªÕ¡Õ´Õ¡Õ¶Õ¡Õ¯ Õ¹Õ¯Õ¡",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

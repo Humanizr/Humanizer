@@ -1,0 +1,188 @@
+﻿{
+    "locale":  "bg",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\bg.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  7,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "bg",
+                         "key":  "DateHumanize_MultipleDaysAgo",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´ÐµÐ½Ð°",
+                         "proposed_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´Ð½Ð¸",
+                         "native_rationale":  "Standard written Bulgarian uses \"дни\" as the plural of \"ден\". \"дена\" is colloquial/regional and should not be the default UI string.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bg.resx:193 uses \"преди {0} дена\".",
+                                          "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:45 expects \"преди 2 дена\"."
+                                      ],
+                         "notes":  "Use the formal plural \"дни\" in date-humanized output.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´Ð½Ð¸",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "bg",
+                         "key":  "DateHumanize_MultipleDaysAgo_Paucal",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´ÐµÐ½Ð°",
+                         "proposed_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´Ð½Ð¸",
+                         "native_rationale":  "The paucal path should match standard Bulgarian plural usage. \"дни\" is standard; \"дена\" is colloquial.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bg.resx:196 uses \"преди {0} дена\".",
+                                          "tests/Humanizer.Tests/Localisation/bg/ResourcesTests.cs:19 asserts the same non-standard form."
+                                      ],
+                         "notes":  "Align paucal and regular day plural to \"дни\".",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ {0} Ð´Ð½Ð¸",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "bg",
+                         "key":  "DateHumanize_MultipleDaysFromNow",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "ÑÐ»ÐµÐ´ {0} Ð´ÐµÐ½Ð°",
+                         "proposed_replacement":  "ÑÐ»ÐµÐ´ {0} Ð´Ð½Ð¸",
+                         "native_rationale":  "Future-day phrasing should use the formal plural \"дни\"; current \"дена\" sounds colloquial.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bg.resx:199 uses \"след {0} дена\".",
+                                          "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:51 expects \"след 2 дена\"."
+                                      ],
+                         "notes":  "Prefer standard register for library output.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "ÑÐ»ÐµÐ´ {0} Ð´Ð½Ð¸",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "bg",
+                         "key":  "DateHumanize_MultipleDaysFromNow_Paucal",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "ÑÐ»ÐµÐ´ {0} Ð´ÐµÐ½Ð°",
+                         "proposed_replacement":  "ÑÐ»ÐµÐ´ {0} Ð´Ð½Ð¸",
+                         "native_rationale":  "Paucal/future form should also use formal plural \"дни\" for consistency and correctness.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bg.resx:202 uses \"след {0} дена\".",
+                                          "tests/Humanizer.Tests/Localisation/bg/ResourcesTests.cs:22 asserts the same non-standard form."
+                                      ],
+                         "notes":  "Keep formal style across all day plural variants.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "ÑÐ»ÐµÐ´ {0} Ð´Ð½Ð¸",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "bg",
+                         "key":  "DateHumanize_TwoDaysAgo",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "Ð¿Ñ€ÐµÐ´Ð¸ 2 Ð´ÐµÐ½Ð°",
+                         "proposed_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ 2 Ð´Ð½Ð¸",
+                         "native_rationale":  "Fixed two-day idiom should still use the standard plural noun \"дни\" in neutral UI language.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bg.resx:241 uses \"преди 2 дена\".",
+                                          "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:45 expects the same."
+                                      ],
+                         "notes":  "Use \"преди 2 дни\".",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "Ð¿Ñ€ÐµÐ´Ð¸ 2 Ð´Ð½Ð¸",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "bg",
+                         "key":  "DateHumanize_TwoDaysFromNow",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "ÑÐ»ÐµÐ´ 2 Ð´ÐµÐ½Ð°",
+                         "proposed_replacement":  "ÑÐ»ÐµÐ´ 2 Ð´Ð½Ð¸",
+                         "native_rationale":  "In standard Bulgarian, this should be \"след 2 дни\"; \"дена\" is colloquial.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bg.resx:244 uses \"след 2 дена\".",
+                                          "tests/Humanizer.Tests/Localisation/bg/DateHumanizeTests.cs:51 expects the same."
+                                      ],
+                         "notes":  "Use formal plural in fixed two-day future phrase.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "ÑÐ»ÐµÐ´ 2 Ð´Ð½Ð¸",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "bg",
+                         "key":  "TimeSpanHumanize_MultipleDays",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ð´ÐµÐ½Ð°",
+                         "proposed_replacement":  "{0} Ð´Ð½Ð¸",
+                         "native_rationale":  "Duration plural should be \"дни\" in standard Bulgarian. \"дена\" is conversational and less suitable for library defaults.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bg.resx:283 uses \"{0} дена\".",
+                                          "tests/Humanizer.Tests/Localisation/bg/TimeSpanHumanizeTests.cs:57 and :63 assert this colloquial form."
+                                      ],
+                         "notes":  "Use \"{0} дни\" for formal, broadly acceptable output.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ð´Ð½Ð¸",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

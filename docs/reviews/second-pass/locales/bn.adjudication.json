@@ -1,0 +1,65 @@
+﻿{
+    "locale":  "bn",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\bn.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  2,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "bn",
+                         "key":  "TimeSpanHumanize_SingleMonth",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "এক মাসের",
+                         "proposed_replacement":  "এক মাস",
+                         "native_rationale":  "‘এক মাসের’ এখানে অসম্পূর্ণ শোনায়; ‘-এর’ যোগে মালিকানা/সম্বন্ধ বোঝায় (যেমন ‘এক মাসের ছুটি’)। একক সময়সীমা হিসেবে স্বাভাবিক রূপ ‘এক মাস’।",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bn.resx: TimeSpanHumanize_SingleMonth =\u003e এক মাসের",
+                                          "tests/Humanizer.Tests/Localisation/bn-BD/TimeSpanHumanizeTests.cs: [Trait(\"Translation\", \"Google\")] on Months test suggests machine-translated string",
+                                          "Native usage: standalone duration in Bengali is \u0027এক মাস\u0027, not genitive \u0027এক মাসের\u0027"
+                                      ],
+                         "notes":  "",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "এক মাস",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "bn",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P3",
+                         "original_confidence":  "medium",
+                         "current_value":  "শূন্য সময়",
+                         "proposed_replacement":  "কোনো সময় নেই",
+                         "native_rationale":  "‘শূন্য সময়’ বাংলা ব্যবহারে ক্যালক-ধাঁচের/অপ্রাকৃত শোনায়। ‘no time’ অর্থে প্রাকৃতিক রূপ ‘কোনো সময় নেই’।",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.bn.resx: TimeSpanHumanize_Zero =\u003e শূন্য সময়",
+                                          "tests/Humanizer.Tests/Localisation/bn-BD/TimeSpanHumanizeTests.cs: NoTimeToWords expects this key, with comment noting awkward phrasing",
+                                          "Native usage prefers absence construction for \u0027no time\u0027"
+                                      ],
+                         "notes":  "",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P3",
+                         "adjudicated_confidence":  "medium",
+                         "adjudicated_replacement":  "কোনো সময় নেই",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

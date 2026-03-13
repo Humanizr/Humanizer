@@ -1,0 +1,235 @@
+﻿{
+    "generated":  "2026-03-13",
+    "branch":  "codex/locale-translation-completion",
+    "locale_count":  38,
+    "locales":  [
+                    {
+                        "locale":  "af",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\af.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\af.adjudication.json",
+                        "finding_count":  4
+                    },
+                    {
+                        "locale":  "ar",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\ar.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\ar.adjudication.json",
+                        "finding_count":  8
+                    },
+                    {
+                        "locale":  "az",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\az.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\az.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "bg",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\bg.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\bg.adjudication.json",
+                        "finding_count":  7
+                    },
+                    {
+                        "locale":  "bn",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\bn.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\bn.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "ca",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\ca.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\ca.adjudication.json",
+                        "finding_count":  15
+                    },
+                    {
+                        "locale":  "cs",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\cs.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\cs.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "da",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\da.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\da.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "el",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\el.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\el.adjudication.json",
+                        "finding_count":  7
+                    },
+                    {
+                        "locale":  "es",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\es.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\es.adjudication.json",
+                        "finding_count":  25
+                    },
+                    {
+                        "locale":  "fa",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\fa.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\fa.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "fi",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\fi.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\fi.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "fil",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\fil.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\fil.adjudication.json",
+                        "finding_count":  8
+                    },
+                    {
+                        "locale":  "fr",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\fr.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\fr.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "he",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\he.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\he.adjudication.json",
+                        "finding_count":  6
+                    },
+                    {
+                        "locale":  "hr",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\hr.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\hr.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "hu",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\hu.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\hu.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "hy",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\hy.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\hy.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "id",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\id.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\id.adjudication.json",
+                        "finding_count":  13
+                    },
+                    {
+                        "locale":  "is",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\is.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\is.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "it",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\it.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\it.adjudication.json",
+                        "finding_count":  4
+                    },
+                    {
+                        "locale":  "ko",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\ko.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\ko.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "lv",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\lv.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\lv.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "ms",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\ms.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\ms.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "mt",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\mt.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\mt.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "nb",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\nb.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\nb.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "pl",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\pl.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\pl.adjudication.json",
+                        "finding_count":  4
+                    },
+                    {
+                        "locale":  "pt",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\pt.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\pt.adjudication.json",
+                        "finding_count":  43
+                    },
+                    {
+                        "locale":  "pt-BR",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\pt-BR.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\pt-BR.adjudication.json",
+                        "finding_count":  8
+                    },
+                    {
+                        "locale":  "sr",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\sr.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\sr.adjudication.json",
+                        "finding_count":  4
+                    },
+                    {
+                        "locale":  "sv",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\sv.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\sv.adjudication.json",
+                        "finding_count":  2
+                    },
+                    {
+                        "locale":  "th",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\th.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\th.adjudication.json",
+                        "finding_count":  35
+                    },
+                    {
+                        "locale":  "tr",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\tr.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\tr.adjudication.json",
+                        "finding_count":  1
+                    },
+                    {
+                        "locale":  "uk",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\uk.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\uk.adjudication.json",
+                        "finding_count":  9
+                    },
+                    {
+                        "locale":  "uz-Cyrl-UZ",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\uz-Cyrl-UZ.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\uz-Cyrl-UZ.adjudication.json",
+                        "finding_count":  8
+                    },
+                    {
+                        "locale":  "uz-Latn-UZ",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\uz-Latn-UZ.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\uz-Latn-UZ.adjudication.json",
+                        "finding_count":  15
+                    },
+                    {
+                        "locale":  "vi",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\vi.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\vi.adjudication.json",
+                        "finding_count":  3
+                    },
+                    {
+                        "locale":  "zh-Hant",
+                        "source_review":  "docs\\\\reviews\\\\locales\\\\zh-Hant.review.json",
+                        "adjudication_review":  "docs\\\\reviews\\\\second-pass\\\\locales\\\\zh-Hant.adjudication.json",
+                        "finding_count":  8
+                    }
+                ]
+}

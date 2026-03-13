@@ -1,0 +1,63 @@
+﻿{
+    "locale":  "hr",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\hr.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  2,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "hr",
+                         "key":  "DateHumanize_SingleDayAgo",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "juÄer",
+                         "proposed_replacement":  "jučer",
+                         "native_rationale":  "Oblik \"juÄer\" je oštećen (mojibake). Ispravan hrvatski izraz je \"jučer\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.hr.resx: DateHumanize_SingleDayAgo = \"jučer\"",
+                                          "tests/Humanizer.Tests/Localisation/hr/DateHumanizeTests.cs: očekivanje \"jučer\" za -1 dan"
+                                      ],
+                         "notes":  "Potrebno uskladiti zapis u review artefaktu s izvornom lokalizacijom.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "jučer",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "hr",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bez podatka o vremenu",
+                         "proposed_replacement":  "bez vremena",
+                         "native_rationale":  "\"Bez podatka o vremenu\" znači da nema podatka, a ne da je trajanje nula. Za neutralni engleski \"no time\" prirodnije je \"bez vremena\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.hr.resx: TimeSpanHumanize_Zero = \"bez podatka o vremenu\"",
+                                          "Neutral reference je \"no time\" (bez dodatnog značenja o nedostajućim podacima)"
+                                      ],
+                         "notes":  "Predloženi izraz je semantički bliži i prirodniji u hrvatskom UI kontekstu.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "bez vremena",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

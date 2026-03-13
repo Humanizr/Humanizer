@@ -1,0 +1,38 @@
+﻿{
+    "locale":  "da",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\da.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  1,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "da",
+                         "key":  "DateHumanize_TwoDaysAgo",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "forgårs",
+                         "proposed_replacement":  "i forgårs",
+                         "native_rationale":  "\"forgårs\" forstås, men i moderne dansk er \"i forgårs\" den klart mest idiomatiske og neutrale form til \"two days ago\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.da.resx: DateHumanize_TwoDaysAgo = \"forgårs\".",
+                                          "tests/Humanizer.Tests/Localisation/da/ResourcesTests.cs: asserts DateHumanize_TwoDaysAgo as \"forgårs\"."
+                                      ],
+                         "notes":  "Stilistisk/idiomatisk forbedring; nuværende formulering er forståelig, men lyder mere arkaiserende.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "i forgårs",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

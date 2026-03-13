@@ -1,0 +1,38 @@
+﻿{
+    "locale":  "cs",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\cs.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  1,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "cs",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "není čas",
+                         "proposed_replacement":  "žádný čas",
+                         "native_rationale":  "„Není čas“ v češtině znamená „nemáme čas“ (situace spěchu), ne nulovou délku trvání. Pro význam „no time“ jako nulový interval je přirozené „žádný čas“.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.cs.resx: TimeSpanHumanize_Zero currently maps to \"není čas\".",
+                                          "tests/Humanizer.Tests/Localisation/cs/TimeSpanHumanizeTests.cs contains no zero-duration assertion, so this semantic mismatch is currently untested."
+                                      ],
+                         "notes":  "Semantic correction for zero-duration output.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "žádný čas",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

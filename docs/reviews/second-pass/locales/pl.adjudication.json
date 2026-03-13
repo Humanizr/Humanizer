@@ -1,0 +1,113 @@
+﻿{
+    "locale":  "pl",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\pl.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  4,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "pl",
+                         "key":  "TimeUnit_Day",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P3",
+                         "original_confidence":  "high",
+                         "current_value":  "dzień",
+                         "proposed_replacement":  "d",
+                         "native_rationale":  "Klucz jest używany jako symbol jednostki czasu, a \"dzień\" to pełna nazwa. W polskim skrótem-symboliem jest zwykle \"d\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Day).",
+                                          "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (ToSymbol mapuje ten klucz)."
+                                      ],
+                         "notes":  "Obecna wartość działa, ale semantycznie bardziej przypomina etykietę niż symbol.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "d",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pl",
+                         "key":  "TimeUnit_Month",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P3",
+                         "original_confidence":  "high",
+                         "current_value":  "miesiąc",
+                         "proposed_replacement":  "mies.",
+                         "native_rationale":  "Dla symbolu jednostki czasu naturalniejszy jest skrót, nie pełna forma rzeczownika. W polskim interfejsie najczęściej używa się \"mies.\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Month).",
+                                          "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (ToSymbol dla Month)."
+                                      ],
+                         "notes":  "Warto rozważyć ujednolicenie stylu symboli między Day/Week/Month/Year i h/min/s/ms.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "mies.",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pl",
+                         "key":  "TimeUnit_Week",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P3",
+                         "original_confidence":  "high",
+                         "current_value":  "tydzień",
+                         "proposed_replacement":  "tydz.",
+                         "native_rationale":  "ToSymbol sugeruje skrót/symbol jednostki. Pełne \"tydzień\" jest zrozumiałe, ale nie wygląda jak symbol jednostki czasu.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Week).",
+                                          "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (Week -\u003e \"tydzień\")."
+                                      ],
+                         "notes":  "Ocena dotyczy naturalności symbolu, nie poprawności leksykalnej.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "tydz.",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pl",
+                         "key":  "TimeUnit_Year",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P3",
+                         "original_confidence":  "high",
+                         "current_value":  "rok",
+                         "proposed_replacement":  "r.",
+                         "native_rationale":  "Wartość \"rok\" jest pełnym słowem, a nie symbolem. Dla krótkiego oznaczenia jednostki częściej spotyka się \"r.\" (ew. \"l.\" zależnie od kontekstu).",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Year).",
+                                          "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (Year -\u003e \"rok\")."
+                                      ],
+                         "notes":  "Wariant skrótu można doprecyzować zależnie od przyjętej konwencji produktu.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "r.",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

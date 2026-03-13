@@ -1,0 +1,63 @@
+﻿{
+    "locale":  "sv",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\sv.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  2,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "sv",
+                         "key":  "DataUnit_Byte",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bytes",
+                         "proposed_replacement":  "byte",
+                         "native_rationale":  "På svenska böjs normalt inte dataenheten med -s efter tal; idiomatisk form är \"10 byte\", inte \"10 bytes\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.sv.resx:306",
+                                          "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:12"
+                                      ],
+                         "notes":  "Nuvarande test för sv förväntar sig den engelska pluralformen och bör justeras när resurssträngen rättas.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "byte",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "sv",
+                         "key":  "DataUnit_Gigabyte",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "gigabytes",
+                         "proposed_replacement":  "gigabyte",
+                         "native_rationale":  "Standard svensk användning är samma form i singular och plural för denna enhet: \"1 gigabyte\", \"10 gigabyte\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.sv.resx:315",
+                                          "tests/Humanizer.Tests/Localisation/sv/Bytes/ToFullWordsTests.cs:20"
+                                      ],
+                         "notes":  "Pluralformen med -s är ett engelskt mönster och låter onaturligt i svensk lokalisering.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "gigabyte",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

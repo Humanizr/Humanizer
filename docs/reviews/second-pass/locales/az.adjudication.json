@@ -1,0 +1,38 @@
+﻿{
+    "locale":  "az",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\az.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  1,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "az",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "zaman fÉ™rqi yoxdur",
+                         "proposed_replacement":  "vaxt yoxdur",
+                         "native_rationale":  "\"zaman fÉ™rqi yoxdur\" ifadÉ™si iki vaxt nÃ¶qtÉ™si arasÄ±nda mÃ¼qayisÉ™ mÉ™nasÄ± verir. `TimeSpan.Zero` Ã¼Ã§Ã¼n AzÉ™rbaycan dilindÉ™ daha tÉ™bii vÉ™ birbaÅŸa qarÅŸÄ±lÄ±q \"vaxt yoxdur\"dur.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.az.resx: TimeSpanHumanize_Zero = zaman fÉ™rqi yoxdur",
+                                          "tests/Humanizer.Tests/Localisation/az/TimeSpanHumanizeTests.cs: NoTimeToWords testi bu aÃ§arÄ± yoxlayÄ±r"
+                                      ],
+                         "notes":  "MÉ™na uyÄŸunsuzluÄŸu: duration=0 Ã¼Ã§Ã¼n \"fÉ™rq\" deyil, \"mÃ¶vcudluq/yoxluq\" ifadÉ™si daha dÃ¼zgÃ¼ndÃ¼r.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "vaxt yoxdur",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

@@ -1,0 +1,388 @@
+﻿{
+    "locale":  "uz-Latn-UZ",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\uz-Latn-UZ.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  15,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_MultipleDaysFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} kundan so`ng",
+                         "proposed_replacement":  "{0} kundan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} kundan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_MultipleDaysFromNow_Paucal",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} kundan so`ng",
+                         "proposed_replacement":  "{0} kundan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} kundan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_MultipleHoursFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} soatdan so`ng",
+                         "proposed_replacement":  "{0} soatdan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} soatdan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_MultipleMinutesFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} minutdan so`ng",
+                         "proposed_replacement":  "{0} minutdan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} minutdan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_MultipleMonthsFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} oydan so`ng",
+                         "proposed_replacement":  "{0} oydan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} oydan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_MultipleSecondsFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} sekunddan so`ng",
+                         "proposed_replacement":  "{0} sekunddan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} sekunddan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_MultipleYearsFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} yildan so`ng",
+                         "proposed_replacement":  "{0} yildan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} yildan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_SingleHourFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bir soatdan so`ng",
+                         "proposed_replacement":  "bir soatdan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "bir soatdan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_SingleMinuteFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bir daqiqadan so`ng",
+                         "proposed_replacement":  "bir daqiqadan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "bir daqiqadan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_SingleMonthFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bir oydan so`ng",
+                         "proposed_replacement":  "bir oydan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "bir oydan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_SingleSecondFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bir soniyadan so`ng",
+                         "proposed_replacement":  "bir soniyadan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "bir soniyadan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_SingleYearFromNow",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bir yildan so`ng",
+                         "proposed_replacement":  "bir yildan so\u0027ng",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "bir yildan so\u0027ng",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_TwoDaysAgo",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "o`tgan kun",
+                         "proposed_replacement":  "2 kun avval",
+                         "native_rationale":  "Joriy ibora ikki kun oldin ma\u0027nosini aniq bermaydi, odatda kechaga yaqin talqin qilinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: DateHumanize_TwoDaysAgo qiymati semantik noaniq",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs: shu qiymat tekshirilgan"
+                                      ],
+                         "notes":  "Aniq vaqt ofseti uchun sonli variant afzal.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "2 kun avval",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "DateHumanize_TwoDaysFromNow",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "indindan keyin",
+                         "proposed_replacement":  "indinga",
+                         "native_rationale":  "Joriy ibora tabiiy emas; indinga ikki kundan keyinni tabiiy va aniq ifodalaydi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: DateHumanize_TwoDaysFromNow qiymati leksik noaniq",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs: shu qiymat tekshirilgan"
+                                      ],
+                         "notes":  "Leksik tabiiylik va aniqlik tuzatildi.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "indinga",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Latn-UZ",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "vaqt yo`q",
+                         "proposed_replacement":  "vaqt yo\u0027q",
+                         "native_rationale":  "Uz-Latn matnida apostrof belgisi bir xil bo\u0027lishi kerak; bu joylarda backtick ishlatilgani uchun imlo notekis ko\u0027rinadi.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Latn-UZ.resx: backtick bilan yozilgan shakl",
+                                          "tests/Humanizer.Tests/Localisation/uz-Latn-UZ/DateHumanizeTests.cs va TimeSpanHumanizeTests.cs: shu shaklga bog\u0027langan kutilmalar"
+                                      ],
+                         "notes":  "Ma\u0027no saqlangan, lekin imlo va belgilar birxilligi buzilgan.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "vaqt yo\u0027q",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

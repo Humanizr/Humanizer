@@ -1,0 +1,39 @@
+﻿{
+    "locale":  "lv",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\lv.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  1,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "lv",
+                         "key":  "DateHumanize_SingleMinuteFromNow",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "pÄ“c minÅ«tÄ“s",
+                         "proposed_replacement":  "pēc minūtes",
+                         "native_rationale":  "Latviešu valodā pēc prievārda \"pēc\" vajadzīgs ģenitīvs vienskaitlī: \"minūtes\". Forma \"minūtēs\" ir lokatīva daudzskaitlī un šeit ir gramatiski nepareiza.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.lv.resx:255 (DateHumanize_SingleMinuteFromNow currently \"pēc minūtēs\")",
+                                          "src/Humanizer/Properties/Resources.lv.resx:252 (DateHumanize_SingleMinuteAgo uses correct \"pirms minūtes\")",
+                                          "tests/Humanizer.Tests/Localisation/lv/DateHumanizeTests.cs (Latvian date humanization resources are locale-owned and explicitly validated)"
+                                      ],
+                         "notes":  "Direct grammatical correction; keeps style parallel with SingleHourFromNow/SingleSecondFromNow.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "pēc minūtes",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

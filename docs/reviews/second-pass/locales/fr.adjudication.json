@@ -1,0 +1,39 @@
+﻿{
+    "locale":  "fr",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\fr.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  1,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "fr",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "temps nul",
+                         "proposed_replacement":  "aucune durÃ©e",
+                         "native_rationale":  "\u0027temps nul\u0027 n\u0027est pas idiomatique en franÃ§ais produit; pour exprimer une durÃ©e nulle, \u0027aucune durÃ©e\u0027 est naturel et immÃ©diatement comprÃ©hensible.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.fr.resx: TimeSpanHumanize_Zero=temps nul",
+                                          "tests/Humanizer.Tests/Localisation/fr/TimeSpanHumanizeTests.cs: NoTimeToWords attend actuellement temps nul",
+                                          "tests/Humanizer.Tests/Localisation/fr-BE/TimeSpanHumanizeTests.cs: NoTimeToWords hÃ©rite aussi de temps nul (fallback parent)"
+                                      ],
+                         "notes":  "Impact fallback: fr-BE et fr-CH hÃ©ritent cette chaÃ®ne; correction parent amÃ©liorerait les enfants sans override.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "aucune durÃ©e",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

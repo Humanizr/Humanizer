@@ -1,0 +1,69 @@
+﻿{
+    "locale":  "fa",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\fa.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  2,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "fa",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡",
+                         "proposed_replacement":  "{0} Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡",
+                         "native_rationale":  "Ø¯Ø± ÙØ§Ø±Ø³ÛŒ Ù…Ø¹ÛŒØ§Ø±ØŒ ØªØ±Ú©ÛŒØ¨ Â«Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡Â» Ø¨Ø§ Ù†ÛŒÙ…â€ŒÙØ§ØµÙ„Ù‡ Ù†ÙˆØ´ØªÙ‡ Ù…ÛŒâ€ŒØ´ÙˆØ¯. Ø´Ú©Ù„ Ø¨Ø§ ÙØ§ØµÙ„Ù‡Ù” Ú©Ø§Ù…Ù„ Ù†Ø§Ù‡Ù…Ø§Ù‡Ù†Ú¯ Ùˆ Ø§Ø² Ù†Ø¸Ø± Ù†Ú¯Ø§Ø±Ø´ÛŒ Ù†Ø§Ø¯Ø±Ø³Øª Ø§Ø³ØªØŒ Ø¨Ù‡â€ŒØ®ØµÙˆØµ ÙˆÙ‚ØªÛŒ Ù‡Ù…ÛŒÙ† ÙØ§ÛŒÙ„ Ø¨Ø±Ø§ÛŒ TimeUnit Ù‡Ù…ÛŒÙ† ÙˆØ§Ú˜Ù‡ Ø±Ø§ Ø¨Ø§ Ù†ÛŒÙ…â€ŒÙØ§ØµÙ„Ù‡ Ø¢ÙˆØ±Ø¯Ù‡ Ø§Ø³Øª.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.fa.resx: TimeSpanHumanize_MultipleMilliseconds={0} Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡",
+                                          "src/Humanizer/Properties/Resources.fa.resx: TimeSpanHumanize_SingleMillisecond=ÛŒÚ© Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡",
+                                          "src/Humanizer/Properties/Resources.fa.resx: TimeUnit_Millisecond=Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡",
+                                          "tests/Humanizer.Tests/Localisation/fa/TimeSpanHumanizeTests.cs: expects \"ÛŒÚ© Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡\"",
+                                          "tests/Humanizer.Tests/Localisation/fa/TimeUnitToSymbolTests.cs: expects \"Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡\""
+                                      ],
+                         "notes":  "Orthographic consistency issue (space vs ZWNJ) within the same locale pack.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "fa",
+                         "key":  "TimeSpanHumanize_SingleMillisecond",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "ÛŒÚ© Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡",
+                         "proposed_replacement":  "ÛŒÚ© Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡",
+                         "native_rationale":  "Ø¯Ø± ÙØ§Ø±Ø³ÛŒ Ù…Ø¹ÛŒØ§Ø±ØŒ ØªØ±Ú©ÛŒØ¨ Â«Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡Â» Ø¨Ø§ Ù†ÛŒÙ…â€ŒÙØ§ØµÙ„Ù‡ Ù†ÙˆØ´ØªÙ‡ Ù…ÛŒâ€ŒØ´ÙˆØ¯. Ø´Ú©Ù„ Ø¨Ø§ ÙØ§ØµÙ„Ù‡Ù” Ú©Ø§Ù…Ù„ Ù†Ø§Ù‡Ù…Ø§Ù‡Ù†Ú¯ Ùˆ Ø§Ø² Ù†Ø¸Ø± Ù†Ú¯Ø§Ø±Ø´ÛŒ Ù†Ø§Ø¯Ø±Ø³Øª Ø§Ø³ØªØŒ Ø¨Ù‡â€ŒØ®ØµÙˆØµ ÙˆÙ‚ØªÛŒ Ù‡Ù…ÛŒÙ† ÙØ§ÛŒÙ„ Ø¨Ø±Ø§ÛŒ TimeUnit Ù‡Ù…ÛŒÙ† ÙˆØ§Ú˜Ù‡ Ø±Ø§ Ø¨Ø§ Ù†ÛŒÙ…â€ŒÙØ§ØµÙ„Ù‡ Ø¢ÙˆØ±Ø¯Ù‡ Ø§Ø³Øª.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.fa.resx: TimeSpanHumanize_MultipleMilliseconds={0} Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡",
+                                          "src/Humanizer/Properties/Resources.fa.resx: TimeSpanHumanize_SingleMillisecond=ÛŒÚ© Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡",
+                                          "src/Humanizer/Properties/Resources.fa.resx: TimeUnit_Millisecond=Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡",
+                                          "tests/Humanizer.Tests/Localisation/fa/TimeSpanHumanizeTests.cs: expects \"ÛŒÚ© Ù…ÛŒÙ„ÛŒ Ø«Ø§Ù†ÛŒÙ‡\"",
+                                          "tests/Humanizer.Tests/Localisation/fa/TimeUnitToSymbolTests.cs: expects \"Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡\""
+                                      ],
+                         "notes":  "Orthographic consistency issue (space vs ZWNJ) within the same locale pack.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "ÛŒÚ© Ù…ÛŒÙ„ÛŒâ€ŒØ«Ø§Ù†ÛŒÙ‡",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

@@ -1,0 +1,213 @@
+﻿{
+    "locale":  "ar",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\ar.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  8,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "ar",
+                         "key":  "DateHumanize_SingleYearAgo",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "Ã˜Â§Ã™â€žÃ˜Â¹Ã˜Â§Ã™â€¦ Ã˜Â§Ã™â€žÃ˜Â³Ã˜Â§Ã˜Â¨Ã™â€š",
+                         "proposed_replacement":  "Ù…Ù†Ø° Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©",
+                         "native_rationale":  "\"Ø§Ù„Ø¹Ø§Ù… Ø§Ù„Ø³Ø§Ø¨Ù‚\" Ø£Ù‚Ø±Ø¨ Ø¥Ù„Ù‰ \"last year\" Ù…Ù†Ù‡ Ø¥Ù„Ù‰ \"one year ago\". ØµÙŠØ§ØºØ© \"Ù…Ù†Ø° Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©\" Ø£Ø¯Ù‚ Ø¯Ù„Ø§Ù„ÙŠÙ‹Ø§ ÙˆÙ…ØªØ³Ù‚Ø© Ù…Ø¹ Ø¨Ù‚ÙŠØ© ØµÙŠØº \"Ù…Ù†Ø°\" ÙÙŠ Ù†ÙØ³ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_SingleYearAgo = \"Ø§Ù„Ø¹Ø§Ù… Ø§Ù„Ø³Ø§Ø¨Ù‚\" (comment: one year ago).",
+                                          "tests/Humanizer.Tests/Localisation/ar/DateHumanizeTests.cs: YearsAgo(-1) currently expects \"Ø§Ù„Ø¹Ø§Ù… Ø§Ù„Ø³Ø§Ø¨Ù‚\"."
+                                      ],
+                         "notes":  "ØªØ­Ø³ÙŠÙ† Ø¯Ù„Ø§Ù„ÙŠ/Ø£Ø³Ù„ÙˆØ¨ÙŠØ› Ø§Ù„Ø³Ù„Ø³Ù„Ø© Ø§Ù„Ø­Ø§Ù„ÙŠØ© Ù…ÙÙ‡ÙˆÙ…Ø© Ù„ÙƒÙ†Ù‡Ø§ Ø£Ù‚Ù„ Ù…Ø·Ø§Ø¨Ù‚Ø©Ù‹ Ù„Ù„Ù…Ø±Ø¬Ø¹.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "Ù…Ù†Ø° Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "ar",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ã˜Â¬Ã˜Â²Ã˜Â¡ Ã™â€¦Ã™â€  Ã˜Â§Ã™â€žÃ˜Â«Ã˜Â§Ã™â€ Ã™Å Ã˜Â©",
+                         "proposed_replacement":  "{0} Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©",
+                         "native_rationale":  "\"{0} Ø¬Ø²Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©\" Ù„Ø§ ØªØ¹Ø¨Ù‘Ø± Ø¹Ù† milliseconds ÙƒÙˆØ­Ø¯Ø© Ù…Ø³ØªÙ‚Ù„Ø©Ø› ØªÙÙÙ‡Ù… ÙƒÙ€ fraction Ø¹Ø§Ù… Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©. Ø§Ù„Ù…ØµØ·Ù„Ø­ Ø§Ù„Ø¹Ø±Ø¨ÙŠ Ø§Ù„ØªÙ‚Ù†ÙŠ Ø§Ù„Ø´Ø§Ø¦Ø¹ Ù‡Ùˆ \"Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.ar.resx: TimeUnit_Millisecond = \"Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©\".",
+                                          "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds currently uses \"Ø¬Ø²Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©\"."
+                                      ],
+                         "notes":  "Ø®Ù„Ù„ Ù…ØµØ·Ù„Ø­ÙŠ ÙŠØ¤Ø«Ø± Ø¯Ù‚Ø© Ø§Ù„ÙˆØ­Ø¯Ø©.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "ar",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds_Dual",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "Ã˜Â¬Ã˜Â²Ã˜Â¦Ã™Å Ã™â€  Ã™â€¦Ã™â€  Ã˜Â§Ã™â€žÃ˜Â«Ã˜Â§Ã™â€ Ã™Å Ã˜Â©",
+                         "proposed_replacement":  "Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØªÙŠÙ†",
+                         "native_rationale":  "\"Ø¬Ø²Ø¦ÙŠÙ† Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©\" ØºÙŠØ± Ø¯Ù‚ÙŠÙ‚ ÙƒÙˆØ­Ø¯Ø© milliseconds. Ø§Ù„ØµÙŠØ§ØºØ© Ø§Ù„Ù…Ù‚ØªØ±Ø­Ø© ØªØ­ÙØ¸ Ø§Ù„ØªØ«Ù†ÙŠØ© ÙˆØªÙØ¨Ù‚ÙŠ Ø§Ø³Ù… Ø§Ù„ÙˆØ­Ø¯Ø© Ø§Ù„ØªÙ‚Ù†ÙŠØ©.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Dual = \"Ø¬Ø²Ø¦ÙŠÙ† Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©\".",
+                                          "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs currently asserts this phrase for 2 ms."
+                                      ],
+                         "notes":  "Ø¨Ø¯ÙŠÙ„ Ù…Ù‚ØªØ±Ø­ ÙŠØ­Ø§ÙØ¸ Ø¹Ù„Ù‰ Ù†Ù…Ø· Ø§Ù„ØªØ«Ù†ÙŠØ© Ø§Ù„Ø­Ø§Ù„ÙŠ ÙÙŠ Ø§Ù„Ù…ÙˆØ§Ø±Ø¯.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØªÙŠÙ†",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "ar",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds_Plural",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ã˜Â£Ã˜Â¬Ã˜Â²Ã˜Â§Ã˜Â¡ Ã™â€¦Ã™â€  Ã˜Â§Ã™â€žÃ˜Â«Ã˜Â§Ã™â€ Ã™Å Ã˜Â©",
+                         "proposed_replacement":  "{0} Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©",
+                         "native_rationale":  "\"{0} Ø£Ø¬Ø²Ø§Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©\" ØºÙŠØ± Ø§ØµØ·Ù„Ø§Ø­ÙŠ Ù„Ù„Ù€ ms ÙˆÙ‚Ø¯ ÙŠØ³Ø¨Ø¨ Ù„Ø¨Ø³Ù‹Ø§ Ø¯Ù„Ø§Ù„ÙŠÙ‹Ø§. \"Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©\" Ù‡Ùˆ Ø§Ù„ØªØ¹Ø¨ÙŠØ± Ø§Ù„Ù‚ÙŠØ§Ø³ÙŠ Ù„Ù„Ù…Ù‚Ø¯Ø§Ø± Ø§Ù„Ø¹Ø¯Ø¯ÙŠ.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleMilliseconds_Plural currently uses \"Ø£Ø¬Ø²Ø§Ø¡ Ù…Ù† Ø§Ù„Ø«Ø§Ù†ÙŠØ©\".",
+                                          "src/Humanizer/Properties/Resources.ar.resx already uses \"Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©\" in TimeUnit_Millisecond."
+                                      ],
+                         "notes":  "ØªØµØ­ÙŠØ­ Ù…ØµØ·Ù„Ø­ÙŠ ÙˆØ§ØªØ³Ø§Ù‚ Ø¯Ø§Ø®Ù„ÙŠ Ù…Ø¹ TimeUnit.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ù…Ù„Ù„ÙŠ Ø«Ø§Ù†ÙŠØ©",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "ar",
+                         "key":  "TimeSpanHumanize_MultipleMonths",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ã˜Â£Ã˜Â´Ã™â€¡Ã˜Â±",
+                         "proposed_replacement":  "{0} Ø´Ù‡Ø±",
+                         "native_rationale":  "Ø§Ù„ØµÙŠØºØ© Ø§Ù„Ø­Ø§Ù„ÙŠØ© \"{0} Ø£Ø´Ù‡Ø±\" ÙÙŠ Ù‡Ø°Ø§ Ø§Ù„Ù…ÙØªØ§Ø­ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ ØªÙÙ†ØªØ¬ ØªØ±ÙƒÙŠØ¨Ù‹Ø§ ØºÙŠØ± Ø³Ù„ÙŠÙ… Ù„Ù„Ø£Ø¹Ø¯Ø§Ø¯ Ø§Ù„ÙƒØ¨ÙŠØ±Ø© (Ù…Ø«Ù„ 11). Ø§Ù„ØµÙŠØºØ© Ø§Ù„Ù…ÙØ±Ø¯Ø© Ù‡Ù†Ø§ Ø£Ù†Ø³Ø¨ Ù„Ø¯ÙˆØ± Ø§Ù„Ù…ÙØªØ§Ø­ Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ ÙÙŠ Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©.",
+                         "evidence":  [
+                                          "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs: Months(335) expects \"11 Ø£Ø´Ù‡Ø±\" and is tagged [Trait(\"Translation\", \"Google\")].",
+                                          "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleMonths uses singular base \"{0} Ø´Ù‡Ø±\" for many-form behavior."
+                                      ],
+                         "notes":  "ÙŠÙˆØ¬Ø¯ Ø£Ø«Ø± Ù…ØªÙˆÙ‚Ø¹ Ø¹Ù„Ù‰ Ø§Ù„Ø§Ø®ØªØ¨Ø§Ø±Ø§Øª Ø§Ù„Ø­Ø§Ù„ÙŠØ© Ø§Ù„Ù…Ø±ØªØ¨Ø·Ø© Ø¨ØªØ±Ø¬Ù…Ø© Google.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ø´Ù‡Ø±",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "ar",
+                         "key":  "TimeSpanHumanize_MultipleYears_Plural",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ã˜Â³Ã™â€ Ã˜Â©",
+                         "proposed_replacement":  "{0} Ø³Ù†ÙˆØ§Øª",
+                         "native_rationale":  "Ø§Ù„Ù…ÙØªØ§Ø­ Ø§Ù„Ù…ÙˆØ³ÙˆÙ… Plural ÙŠØ¬Ø¨ Ø£Ù† ÙŠØ­Ù…Ù„ Ø¬Ù…Ø¹Ù‹Ø§ Ø­Ù‚ÙŠÙ‚ÙŠÙ‹Ø§. Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„Ø­Ø§Ù„ÙŠØ© \"{0} Ø³Ù†Ø©\" ØªÙƒØ±Ø± Ø§Ù„Ù…ÙØ±Ø¯ ÙˆØªÙÙ‚Ø¯ Ø§Ù„ØªÙØ±ÙŠÙ‚ Ø¨ÙŠÙ† Ø§Ù„ØµÙŠØº.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_MultipleYears_Plural currently equals \"{0} Ø³Ù†Ø©\".",
+                                          "src/Humanizer/Properties/Resources.ar.resx: DateHumanize_MultipleYearsFromNow_Plural uses proper plural \"{0} Ø³Ù†ÙˆØ§Øª\"."
+                                      ],
+                         "notes":  "ØªØµØ­ÙŠØ­ Ø§ØªØ³Ø§Ù‚ ØµØ±ÙÙŠ Ø¯Ø§Ø®Ù„ Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ù„Ø³Ù†ÙˆØ§Øª.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ø³Ù†ÙˆØ§Øª",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "ar",
+                         "key":  "TimeSpanHumanize_SingleMonth",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "Ã˜Â´Ã™â€¡Ã˜Â± 1",
+                         "proposed_replacement":  "Ø´Ù‡Ø± ÙˆØ§Ø­Ø¯",
+                         "native_rationale":  "\"Ø´Ù‡Ø± 1\" ØªØ±ØªÙŠØ¨ Ù…ØªØ±Ø¬Ù… Ø¢Ù„ÙŠÙ‹Ø§ ÙˆØºÙŠØ± Ø·Ø¨ÙŠØ¹ÙŠ Ø¹Ø±Ø¨ÙŠÙ‹Ø§. Ø§Ù„ØµÙŠØ§ØºØ© Ø§Ù„Ø³Ù„ÙŠÙ…Ø©: \"Ø´Ù‡Ø± ÙˆØ§Ø­Ø¯\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleMonth = \"Ø´Ù‡Ø± 1\".",
+                                          "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs marks month strings with [Trait(\"Translation\", \"Google\")]."
+                                      ],
+                         "notes":  "Ø®Ù„Ù„ Ù„ØºÙˆÙŠ ÙˆØ§Ø¶Ø­ Ù‚Ø§Ø¨Ù„ Ù„Ù„Ø±ØµØ¯ Ù„Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "Ø´Ù‡Ø± ÙˆØ§Ø­Ø¯",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "ar",
+                         "key":  "TimeSpanHumanize_SingleYear",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "Ã˜Â§Ã™â€žÃ˜Â³Ã™â€ Ã˜Â© 1",
+                         "proposed_replacement":  "Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©",
+                         "native_rationale":  "\"Ø§Ù„Ø³Ù†Ø© 1\" ØµÙŠØ§ØºØ© ØºÙŠØ± Ø¹Ø±Ø¨ÙŠØ© Ø·Ø¨ÙŠØ¹ÙŠØ© ÙˆØªØ´ÙŠØ± Ø¥Ù„Ù‰ ØªØ±Ø¬Ù…Ø© Ø­Ø±ÙÙŠØ©. Ø§Ù„Ù…Ù‚Ø§Ø¨Ù„ Ø§Ù„Ø·Ø¨ÙŠØ¹ÙŠ: \"Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.ar.resx: TimeSpanHumanize_SingleYear = \"Ø§Ù„Ø³Ù†Ø© 1\".",
+                                          "tests/Humanizer.Tests/Localisation/ar/TimeSpanHumanizeTests.cs marks year strings with [Trait(\"Translation\", \"Google\")]."
+                                      ],
+                         "notes":  "Ø®Ù„Ù„ Ù„ØºÙˆÙŠ Ù…Ø¨Ø§Ø´Ø± ÙÙŠ ØµÙŠØºØ© Ø§Ù„Ù…ÙØ±Ø¯.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "Ø³Ù†Ø© ÙˆØ§Ø­Ø¯Ø©",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

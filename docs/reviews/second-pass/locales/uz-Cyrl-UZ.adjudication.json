@@ -1,0 +1,225 @@
+﻿{
+    "locale":  "uz-Cyrl-UZ",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\uz-Cyrl-UZ.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  8,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "DateHumanize_MultipleMinutesAgo",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»",
+                         "proposed_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»",
+                         "native_rationale":  "Ð£Ð·Ð±ÐµÐº Ð°Ð´Ð°Ð±Ð¸Ð¹ Ñ‚Ð¸Ð»Ð¸Ð´Ð° Ð²Ð°Ò›Ñ‚ Ð±Ð¸Ñ€Ð»Ð¸Ð³Ð¸ ÑƒÑ‡ÑƒÐ½ \"Ð´Ð°Ò›Ð¸Ò›Ð°\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ ÑˆÐ°ÐºÐ». \"{0} Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»\" Ñ€ÑƒÑÑ‡Ð°Ð³Ð° Ð¾Ò“Ð³Ð°Ð½ Ð²Ð° ÑˆÑƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð°Ð³Ð¸ \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»\" Ò³Ð°Ð¼Ð´Ð° TimeUnit Ñ‚Ð°Ñ€Ð¶Ð¸Ð¼Ð°Ð»Ð°Ñ€Ð¸ Ð±Ð¸Ð»Ð°Ð½ ÑƒÑÐ»ÑƒÐ±Ð¸Ð¹ Ð·Ð¸Ð´.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesAgo={0} Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(10) expects \"10 Ð¼Ð¸Ð½ÑƒÑ‚ Ð°Ð²Ð²Ð°Ð»\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesAgo(1) expects \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
+                                      ],
+                         "notes":  "Normalize lexical choice to meyoriy Uzbek (Ð´Ð°Ò›Ð¸Ò›Ð°) across minute forms.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð° Ð°Ð²Ð²Ð°Ð»",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "DateHumanize_MultipleMinutesFromNow",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½ ÑÑžÐ½Ð³",
+                         "proposed_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³",
+                         "native_rationale":  "\"Ð”Ð°Ò›Ð¸Ò›Ð°\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ ÑˆÐ°ÐºÐ»; \"Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½\" Ñ€ÑƒÑÑ‡Ð° ÐºÐ°Ð»ÑŒÐºÐ° Ð±ÑžÐ»Ð¸Ð±, ÑˆÑƒ Ñ„Ð°Ð¹Ð»Ð´Ð°Ð³Ð¸ \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³\" Ð±Ð¸Ð»Ð°Ð½ Ð±Ð¸Ñ€ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° Ð°Ñ€Ð°Ð»Ð°Ñˆ ÑƒÑÐ»ÑƒÐ± Ò³Ð¾ÑÐ¸Ð» Ò›Ð¸Ð»ÑÐ¿Ñ‚Ð¸.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleMinutesFromNow={0} Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½ ÑÑžÐ½Ð³",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(10) expects \"10 Ð¼Ð¸Ð½ÑƒÑ‚Ð´Ð°Ð½ ÑÑžÐ½Ð³\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: MinutesFromNow(1) expects \"Ð±Ð¸Ñ€ Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
+                                      ],
+                         "notes":  "Keep postposition pattern (Ð´Ð°Ð½ ÑÑžÐ½Ð³), only normalize time-unit lexeme.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°Ð´Ð°Ð½ ÑÑžÐ½Ð³",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "DateHumanize_MultipleSecondsAgo",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} ÑÐµÐºÑƒÐ½Ð´ Ð°Ð²Ð²Ð°Ð»",
+                         "proposed_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»",
+                         "native_rationale":  "Ð£Ð·Ð±ÐµÐºÑ‡Ð°Ð´Ð° \"ÑÐ¾Ð½Ð¸Ñ\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹; \"ÑÐµÐºÑƒÐ½Ð´\" Ñ€ÑƒÑÑ‡Ð° Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚. Ð‘Ð¸Ñ€Ð»Ð¸Ðº ÑˆÐ°ÐºÐ»Ð¸ Ð±Ñƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° Ð°Ð»Ð»Ð°Ò›Ð°Ñ‡Ð¾Ð½ \"Ð±Ð¸Ñ€ ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»\" Ð´ÐµÐ± Ð±ÐµÑ€Ð¸Ð»Ð³Ð°Ð½, ÐºÑžÐ¿Ð»Ð¸ÐºÐ´Ð° Ò³Ð°Ð¼ ÑˆÑƒ Ð±Ð°Ð·Ð° ÑÐ°Ò›Ð»Ð°Ð½Ð¸ÑˆÐ¸ ÐºÐµÑ€Ð°Ðº.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsAgo={0} ÑÐµÐºÑƒÐ½Ð´ Ð°Ð²Ð²Ð°Ð»",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(10) expects \"10 ÑÐµÐºÑƒÐ½Ð´ Ð°Ð²Ð²Ð°Ð»\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsAgo(1) expects \"Ð±Ð¸Ñ€ ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
+                                      ],
+                         "notes":  "Lexical consistency with singular second and TimeUnit symbols.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ Ð°Ð²Ð²Ð°Ð»",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "DateHumanize_MultipleSecondsFromNow",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½ ÑÑžÐ½Ð³",
+                         "proposed_replacement":  "{0} ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³",
+                         "native_rationale":  "\"Ð¡Ð¾Ð½Ð¸Ñ\" Ð°Ð´Ð°Ð±Ð¸Ð¹ Ð¼ÐµÑŠÑ‘Ñ€Ð³Ð° Ð¼Ð¾Ñ; \"ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½\" Ñ€ÑƒÑÑ‡Ð° Ñ‚Ð°ÑŠÑÐ¸Ñ€. \"Ð‘Ð¸Ñ€ ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³\" ÑˆÐ°ÐºÐ»Ð¸ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° Ð¼Ð°Ð²Ð¶ÑƒÐ´, Ð´ÐµÐ¼Ð°Ðº ÐºÑžÐ¿Ð»Ð¸Ðº ÑƒÑ‡ÑƒÐ½ Ò³Ð°Ð¼ ÑˆÑƒ Ð»ÐµÐºÑÐµÐ¼Ð° Ò›ÑžÐ»Ð»Ð°Ð½Ð¸ÑˆÐ¸ ÐºÐµÑ€Ð°Ðº.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: DateHumanize_MultipleSecondsFromNow={0} ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½ ÑÑžÐ½Ð³",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(10) expects \"10 ÑÐµÐºÑƒÐ½Ð´Ð´Ð°Ð½ ÑÑžÐ½Ð³\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/DateHumanizeTests.cs: SecondsFromNow(1) expects \"Ð±Ð¸Ñ€ ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
+                                      ],
+                         "notes":  "Normalize only noun; keep tense construction intact.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} ÑÐ¾Ð½Ð¸ÑÐ´Ð°Ð½ ÑÑžÐ½Ð³",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "TimeSpanHumanize_MultipleMinutes",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} Ð¼Ð¸Ð½ÑƒÑ‚",
+                         "proposed_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°",
+                         "native_rationale":  "\"ÐœÐ¸Ð½ÑƒÑ‚\" ÑžÑ€Ð½Ð¸Ð³Ð° \"Ð´Ð°Ò›Ð¸Ò›Ð°\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ Ð²Ð° ÑˆÑƒ Ð»Ð¾ÐºÐ°Ð»Ð½Ð¸Ð½Ð³ TimeUnit Ò›Ð°Ñ‚Ð¾Ñ€Ð»Ð°Ñ€Ð¸ Ð±Ð¸Ð»Ð°Ð½ Ð¼Ð¾Ñ. Ò²Ð¾Ð·Ð¸Ñ€Ð³Ð¸ Ò³Ð¾Ð»Ð°Ñ‚Ð´Ð° TimeSpan Ð²Ð° TimeUnit ÑžÑ€Ñ‚Ð°ÑÐ¸Ð´Ð° Ñ‚ÐµÑ€Ð¼Ð¸Ð½Ð¾Ð»Ð¾Ð³Ð¸Ðº Ð¿Ð°Ñ€Ñ‡Ð°Ð»Ð°Ð½Ð¸Ñˆ Ð±Ð¾Ñ€.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleMinutes={0} Ð¼Ð¸Ð½ÑƒÑ‚",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(2) expects \"2 Ð¼Ð¸Ð½ÑƒÑ‚\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
+                                      ],
+                         "notes":  "Terminology harmonization across Humanize surfaces.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} Ð´Ð°Ò›Ð¸Ò›Ð°",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "TimeSpanHumanize_MultipleSeconds",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} ÑÐµÐºÑƒÐ½Ð´",
+                         "proposed_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ",
+                         "native_rationale":  "\"Ð¡Ð¾Ð½Ð¸Ñ\" Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ ÑƒÐ·Ð±ÐµÐºÑ‡Ð° ÑˆÐ°ÐºÐ»; \"ÑÐµÐºÑƒÐ½Ð´\" Ñ€ÑƒÑ Ñ‚Ð¸Ð»Ð¸ Ñ‚Ð°ÑŠÑÐ¸Ñ€Ð¸. Ð¨Ñƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð° TimeUnit Ð²Ð° DateHumanize Ð±Ð¸Ñ€Ð»Ð¸Ðº ÑˆÐ°ÐºÐ»Ð»Ð°Ñ€Ð¸ \"ÑÐ¾Ð½Ð¸Ñ\" Ð´ÐµÐ± ÐºÐµÐ»Ð³Ð°Ð½.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_MultipleSeconds={0} ÑÐµÐºÑƒÐ½Ð´",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(2) expects \"2 ÑÐµÐºÑƒÐ½Ð´\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
+                                      ],
+                         "notes":  "Align with normalized temporal lexicon.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} ÑÐ¾Ð½Ð¸Ñ",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "TimeSpanHumanize_SingleMinute",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "1 Ð¼Ð¸Ð½ÑƒÑ‚",
+                         "proposed_replacement":  "1 Ð´Ð°Ò›Ð¸Ò›Ð°",
+                         "native_rationale":  "Ð¡Ð¾Ð½Ð´Ð°Ð½ ÐºÐµÐ¹Ð¸Ð½ Ò³Ð°Ð¼ Ð²Ð°Ò›Ñ‚ Ð±Ð¸Ñ€Ð»Ð¸Ð³Ð¸ Ð¼ÐµÑŠÑ‘Ñ€Ð¸Ð¹ Ñ€Ð°Ð²Ð¸ÑˆÐ´Ð° \"Ð´Ð°Ò›Ð¸Ò›Ð°\" Ð±ÑžÐ»Ð¸ÑˆÐ¸ ÐºÐµÑ€Ð°Ðº. \"1 Ð¼Ð¸Ð½ÑƒÑ‚\" ÑƒÐ·Ð±ÐµÐºÑ‡Ð° Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ´Ð° ÑÑ‚Ð¸Ð»Ð¸ÑÑ‚Ð¸Ðº Ñ€ÑƒÑÐ¸Ð·Ð¼ Ð±ÑžÐ»Ð¸Ð± Ñ‚ÑƒÑŽÐ»Ð°Ð´Ð¸.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleMinute=1 Ð¼Ð¸Ð½ÑƒÑ‚",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Minutes(1) expects \"1 Ð¼Ð¸Ð½ÑƒÑ‚\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Minute expects \"Ð´Ð°Ò›Ð¸Ò›Ð°\""
+                                      ],
+                         "notes":  "Use same noun for singular/plural for Uzbek numeral constructions.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "1 Ð´Ð°Ò›Ð¸Ò›Ð°",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "uz-Cyrl-UZ",
+                         "key":  "TimeSpanHumanize_SingleSecond",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "1 ÑÐµÐºÑƒÐ½Ð´",
+                         "proposed_replacement":  "1 ÑÐ¾Ð½Ð¸Ñ",
+                         "native_rationale":  "\"1 ÑÐµÐºÑƒÐ½Ð´\" ÑžÑ€Ð½Ð¸Ð³Ð° \"1 ÑÐ¾Ð½Ð¸Ñ\" Ð°Ð´Ð°Ð±Ð¸Ð¹ Ð½Ð¾Ñ€Ð¼Ð°Ð³Ð° Ð¼Ð¾Ñ Ð²Ð° ÑˆÑƒ Ð»Ð¾ÐºÐ°Ð»Ð´Ð°Ð³Ð¸ Ð±Ð¾ÑˆÒ›Ð° Ò›Ð°Ñ‚Ð¾Ñ€Ð»Ð°Ñ€ Ð±Ð¸Ð»Ð°Ð½ ÑƒÐ¹Ò“ÑƒÐ½.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.uz-Cyrl-UZ.resx: TimeSpanHumanize_SingleSecond=1 ÑÐµÐºÑƒÐ½Ð´",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeSpanHumanizeTests.cs: Seconds(1) expects \"1 ÑÐµÐºÑƒÐ½Ð´\"",
+                                          "tests/Humanizer.Tests/Localisation/uz-Cyrl-UZ/TimeUnitToSymbolTests.cs: TimeUnit.Second expects \"ÑÐ¾Ð½Ð¸Ñ\""
+                                      ],
+                         "notes":  "Keep numeral format; replace noun only.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "1 ÑÐ¾Ð½Ð¸Ñ",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

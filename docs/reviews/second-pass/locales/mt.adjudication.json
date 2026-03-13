@@ -1,0 +1,64 @@
+﻿{
+    "locale":  "mt",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\mt.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  2,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "mt",
+                         "key":  "N",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "XL",
+                         "proposed_replacement":  "tramuntana",
+                         "native_rationale":  "\"XL\" hija abbrevjazzjoni ta\u0027 \"xlokk\" (southeast), mhux l-isem sħiħ tad-direzzjoni tat-tramuntana. Għall-valur sħiħ ta\u0027 N f\u0027Malti għandu jintuża \"tramuntana\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.mt.resx: key \"N\" currently uses \"XL\" while key \"N_Short\" is \"T\".",
+                                          "tests/Humanizer.Tests/Localisation/mt/HeadingTests.cs: full heading currently expects \"XL\" at 0°, indicating the resource is carrying an abbreviation in a full-form key."
+                                      ],
+                         "notes":  "Wrong cardinal direction term in full heading output.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "tramuntana",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "mt",
+                         "key":  "TimeSpanHumanize_MultipleYears_Singular",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} snin",
+                         "proposed_replacement":  "{0} sena",
+                         "native_rationale":  "Għall-kategorija singulari b\u0027placeholder numeriku, in-nom għandu jibqa\u0027 fis-singular: \"{0} sena\". Il-forma attwali \"{0} snin\" hi plural u tagħti qbil grammatikali żbaljat.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.mt.resx: key \"TimeSpanHumanize_MultipleYears_Singular\" is \"{0} snin\".",
+                                          "tests/Humanizer.Tests/Localisation/mt/TimeSpanHumanizeTests.cs: one-year output is \"sena\", confirming the singular stem.",
+                                          "src/Humanizer/Properties/Resources.mt.resx: parallel pattern exists in \"TimeSpanHumanize_MultipleMinutes_Singular\" as \"{0} minuta\" (number + singular noun)."
+                                      ],
+                         "notes":  "Singular/plural agreement defect in numeric template.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} sena",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

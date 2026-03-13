@@ -1,0 +1,213 @@
+﻿{
+    "locale":  "pt-BR",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\pt-BR.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  8,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} milisegundos",
+                         "proposed_replacement":  "{0} milissegundos",
+                         "native_rationale":  "Em portuguÃªs do Brasil, a grafia correta Ã© â€œmilissegundoâ€ (com SS). A forma com um Ãºnico S (â€œmilisegundoâ€) estÃ¡ ortograficamente incorreta.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (chaves de milissegundo atualmente com \"milisegundo\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (asserÃ§Ãµes atuais tambÃ©m usam a grafia incorreta)"
+                                      ],
+                         "notes":  "Recomenda-se alinhar recursos e testes para â€œmilissegundo(s)â€.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} milissegundos",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds_Dual",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} milisegundos",
+                         "proposed_replacement":  "{0} milissegundos",
+                         "native_rationale":  "Em portuguÃªs do Brasil, a grafia correta Ã© â€œmilissegundoâ€ (com SS). A forma com um Ãºnico S (â€œmilisegundoâ€) estÃ¡ ortograficamente incorreta.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (chaves de milissegundo atualmente com \"milisegundo\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (asserÃ§Ãµes atuais tambÃ©m usam a grafia incorreta)"
+                                      ],
+                         "notes":  "Recomenda-se alinhar recursos e testes para â€œmilissegundo(s)â€.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} milissegundos",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds_Paucal",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} milisegundos",
+                         "proposed_replacement":  "{0} milissegundos",
+                         "native_rationale":  "Em portuguÃªs do Brasil, a grafia correta Ã© â€œmilissegundoâ€ (com SS). A forma com um Ãºnico S (â€œmilisegundoâ€) estÃ¡ ortograficamente incorreta.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (chaves de milissegundo atualmente com \"milisegundo\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (asserÃ§Ãµes atuais tambÃ©m usam a grafia incorreta)"
+                                      ],
+                         "notes":  "Recomenda-se alinhar recursos e testes para â€œmilissegundo(s)â€.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} milissegundos",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds_Plural",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} milisegundos",
+                         "proposed_replacement":  "{0} milissegundos",
+                         "native_rationale":  "Em portuguÃªs do Brasil, a grafia correta Ã© â€œmilissegundoâ€ (com SS). A forma com um Ãºnico S (â€œmilisegundoâ€) estÃ¡ ortograficamente incorreta.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (chaves de milissegundo atualmente com \"milisegundo\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (asserÃ§Ãµes atuais tambÃ©m usam a grafia incorreta)"
+                                      ],
+                         "notes":  "Recomenda-se alinhar recursos e testes para â€œmilissegundo(s)â€.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} milissegundos",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds_Singular",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} milisegundo",
+                         "proposed_replacement":  "{0} milissegundo",
+                         "native_rationale":  "Em portuguÃªs do Brasil, a grafia correta Ã© â€œmilissegundoâ€ (com SS). A forma com um Ãºnico S (â€œmilisegundoâ€) estÃ¡ ortograficamente incorreta.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (chaves de milissegundo atualmente com \"milisegundo\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (asserÃ§Ãµes atuais tambÃ©m usam a grafia incorreta)"
+                                      ],
+                         "notes":  "Recomenda-se alinhar recursos e testes para â€œmilissegundo(s)â€.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} milissegundo",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_SingleMillisecond",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "1 milisegundo",
+                         "proposed_replacement":  "1 milissegundo",
+                         "native_rationale":  "Em portuguÃªs do Brasil, a grafia correta Ã© â€œmilissegundoâ€ (com SS). A forma com um Ãºnico S (â€œmilisegundoâ€) estÃ¡ ortograficamente incorreta.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (chaves de milissegundo atualmente com \"milisegundo\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (asserÃ§Ãµes atuais tambÃ©m usam a grafia incorreta)"
+                                      ],
+                         "notes":  "Recomenda-se alinhar recursos e testes para â€œmilissegundo(s)â€.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "1 milissegundo",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_SingleMillisecond_Words",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "um milisegundo",
+                         "proposed_replacement":  "um milissegundo",
+                         "native_rationale":  "Em portuguÃªs do Brasil, a grafia correta Ã© â€œmilissegundoâ€ (com SS). A forma com um Ãºnico S (â€œmilisegundoâ€) estÃ¡ ortograficamente incorreta.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (chaves de milissegundo atualmente com \"milisegundo\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (asserÃ§Ãµes atuais tambÃ©m usam a grafia incorreta)"
+                                      ],
+                         "notes":  "Recomenda-se alinhar recursos e testes para â€œmilissegundo(s)â€.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "um milissegundo",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "pt-BR",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "sem horÃ¡rio",
+                         "proposed_replacement":  "sem tempo",
+                         "native_rationale":  "Em pt-BR, â€œsem horÃ¡rioâ€ significa â€œsem agendamentoâ€, nÃ£o â€œsem duraÃ§Ã£o de tempoâ€. Para TimeSpan.Zero, a forma natural e semÃ¢ntica Ã© â€œsem tempoâ€.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.pt-BR.resx (TimeSpanHumanize_Zero = \"sem horÃ¡rio\")",
+                                          "tests/Humanizer.Tests/Localisation/pt-BR/TimeSpanHumanizeTests.cs (caso NoTimeToWords atualmente valida \"sem horÃ¡rio\")"
+                                      ],
+                         "notes":  "SugestÃ£o linguÃ­stica: ajustar recurso e teste para refletir ausÃªncia de duraÃ§Ã£o, nÃ£o ausÃªncia de agenda.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "sem tempo",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

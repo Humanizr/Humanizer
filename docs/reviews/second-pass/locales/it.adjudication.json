@@ -1,0 +1,113 @@
+﻿{
+    "locale":  "it",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\it.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  4,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "it",
+                         "key":  "DataUnit_Byte",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "bytes",
+                         "proposed_replacement":  "byte",
+                         "native_rationale":  "In italiano tecnico \u0027byte\u0027 resta invariabile: la forma plurale inglese \u0027bytes\u0027 non e idiomatica.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.it.resx: DataUnit_Byte = \u0027bytes\u0027",
+                                          "tests/Humanizer.Tests/Localisation/it/Bytes/ToFullWordsTests.cs: ReturnsPluralBytes expects \u002710 bytes\u0027 (legacy behavior to correct)"
+                                      ],
+                         "notes":  "Difetto lessicale: mantenere \u0027byte\u0027 sia al singolare sia al plurale.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "byte",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "it",
+                         "key":  "DataUnit_Gigabyte",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "gigabytes",
+                         "proposed_replacement":  "gigabyte",
+                         "native_rationale":  "Anche \u0027gigabyte\u0027 in uso italiano e invariabile; \u0027gigabytes\u0027 e un calco inglese non naturale.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.it.resx: DataUnit_Gigabyte = \u0027gigabytes\u0027",
+                                          "tests/Humanizer.Tests/Localisation/it/Bytes/ToFullWordsTests.cs: ReturnsPluralGigabytes expects \u002710 gigabytes\u0027 (legacy behavior to correct)"
+                                      ],
+                         "notes":  "Allineare singolare/plurale a \u0027gigabyte\u0027.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "gigabyte",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "it",
+                         "key":  "TimeSpanHumanize_Age",
+                         "original_status":  "defect",
+                         "original_severity":  "P1",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} vecchio",
+                         "proposed_replacement":  "{0} anni",
+                         "native_rationale":  "La stringa \u0027{0} vecchio\u0027 e grammaticalmente scorretta e semanticamente impropria per l\u0027eta; la resa naturale e \u0027{0} anni\u0027.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.it.resx: TimeSpanHumanize_Age = \u0027{0} vecchio\u0027",
+                                          "tests/Humanizer.Tests/Localisation/it/ResourcesTests.cs: HasExplicitResidualResources asserts current residual value"
+                                      ],
+                         "notes":  "Difetto di qualita alta: output innaturale in un caso utente comune.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P1",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} anni",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "it",
+                         "key":  "TimeSpanHumanize_SingleHour_Words",
+                         "original_status":  "suspicious",
+                         "original_severity":  "P3",
+                         "original_confidence":  "high",
+                         "current_value":  "una ora",
+                         "proposed_replacement":  "un\u0027ora",
+                         "native_rationale":  "In italiano standard davanti a \u0027ora\u0027 si usa normalmente l\u0027elisione: \u0027un\u0027ora\u0027. \u0027Una ora\u0027 e comprensibile ma marcato/non standard.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.it.resx: TimeSpanHumanize_SingleHour_Words = \u0027una ora\u0027",
+                                          "tests/Humanizer.Tests/Localisation/it/TimeSpanHumanizeTests.cs: Hours(toWords:true) currently expects \u0027una ora\u0027"
+                                      ],
+                         "notes":  "Miglioria stilistica raccomandata; non blocca comprensione.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "suspicious",
+                         "adjudicated_severity":  "P3",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "un\u0027ora",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}

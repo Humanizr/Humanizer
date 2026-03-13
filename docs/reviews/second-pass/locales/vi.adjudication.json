@@ -1,0 +1,88 @@
+﻿{
+    "locale":  "vi",
+    "source_review":  "docs\\\\reviews\\\\locales\\\\vi.review.json",
+    "adjudication_status":  "pending",
+    "summary":  {
+                    "pending":  3,
+                    "confirmed":  0,
+                    "modified":  0,
+                    "rejected":  0
+                },
+    "findings":  [
+                     {
+                         "locale":  "vi",
+                         "key":  "TimeSpanHumanize_MultipleMilliseconds",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "{0} phần ngàn giây",
+                         "proposed_replacement":  "{0} mili giây",
+                         "native_rationale":  "\"phần ngàn giây\" đúng nghĩa đen nhưng gượng và không tự nhiên trong tiếng Việt hiện đại; cách dùng phổ biến và nhất quán trong giao diện là \"mili giây\".",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.vi.resx: TimeUnit_Millisecond = \"mili giây\" (chuẩn thuật ngữ đã có sẵn trong cùng locale).",
+                                          "tests/Humanizer.Tests/Localisation/vi/TimeUnitToSymbolTests.cs: xác nhận biểu diễn millisecond dùng \"mili giây\"."
+                                      ],
+                         "notes":  "Nên đồng bộ thuật ngữ millisecond giữa TimeSpanHumanize và TimeUnit.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "{0} mili giây",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "vi",
+                         "key":  "TimeSpanHumanize_SingleMillisecond",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "1 phần ngàn giây",
+                         "proposed_replacement":  "1 mili giây",
+                         "native_rationale":  "Bản hiện tại mang tính dịch sát nghĩa kỹ thuật, không tự nhiên với người Việt; \"1 mili giây\" là dạng chuẩn, dễ hiểu và thống nhất với các chuỗi liên quan.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.vi.resx: TimeUnit_Millisecond = \"mili giây\".",
+                                          "tests/Humanizer.Tests/Localisation/vi/TimeSpanHumanizeTests.cs: đang khóa chuỗi cũ \"1 phần ngàn giây\"."
+                                      ],
+                         "notes":  "Cần cập nhật test mong đợi sau khi sửa chuỗi.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "1 mili giây",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     },
+                     {
+                         "locale":  "vi",
+                         "key":  "TimeSpanHumanize_Zero",
+                         "original_status":  "defect",
+                         "original_severity":  "P2",
+                         "original_confidence":  "high",
+                         "current_value":  "không giờ",
+                         "proposed_replacement":  "không có thời gian",
+                         "native_rationale":  "\"không giờ\" trong tiếng Việt thường được hiểu là mốc giờ (ví dụ 0h), không diễn đạt tự nhiên nghĩa \"no time\" của một khoảng thời lượng bằng 0.",
+                         "evidence":  [
+                                          "src/Humanizer/Properties/Resources.vi.resx: TimeSpanHumanize_Zero có giá trị \"không giờ\".",
+                                          "tests/Humanizer.Tests/Localisation/vi/TimeSpanHumanizeTests.cs: NoTimeToWords hiện kỳ vọng \"không giờ\"."
+                                      ],
+                         "notes":  "Đề xuất ưu tiên tính tự nhiên ngữ nghĩa; có thể cân nhắc \"không có thời lượng\" nếu muốn văn phong kỹ thuật hơn.",
+                         "adjudication":  "pending",
+                         "adjudicated_status":  "defect",
+                         "adjudicated_severity":  "P2",
+                         "adjudicated_confidence":  "high",
+                         "adjudicated_replacement":  "không có thời gian",
+                         "adjudicated_rationale":  "",
+                         "adjudicated_evidence":  [
+
+                                                  ],
+                         "adjudicated_notes":  ""
+                     }
+                 ]
+}
