@@ -171,6 +171,9 @@
   <data name="DateHumanize_MultipleDaysAgo_Dual" xml:space="preserve">
     <value>há {0} dias</value>
   </data>
+  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
+    <value>há {0} dias</value>
+  </data>
   <data name="DateHumanize_MultipleDaysAgo_Plural" xml:space="preserve">
     <value>há {0} dias</value>
   </data>
@@ -181,6 +184,9 @@
     <value>daqui a {0} dias</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
+    <value>daqui a {0} dias</value>
+  </data>
+  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
     <value>daqui a {0} dias</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
@@ -344,6 +350,12 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>agora</value>
+  </data>
+  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
+    <value>anteontem</value>
+  </data>
+  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
+    <value>depois de amanhã</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>ontem</value>
@@ -578,6 +590,9 @@
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
     <value>{0} ano</value>
+  </data>
+  <data name="TimeSpanHumanize_Age" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 dia</value>
