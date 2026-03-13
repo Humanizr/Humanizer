@@ -1,12 +1,12 @@
 ﻿{
     "locale":  "pl",
     "source_review":  "docs\\\\reviews\\\\locales\\\\pl.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  4,
+                    "pending":  0,
                     "confirmed":  0,
                     "modified":  0,
-                    "rejected":  0
+                    "rejected":  4
                 },
     "findings":  [
                      {
@@ -23,16 +23,18 @@
                                           "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (ToSymbol mapuje ten klucz)."
                                       ],
                          "notes":  "Obecna wartość działa, ale semantycznie bardziej przypomina etykietę niż symbol.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "d",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "dzień",
+                         "adjudicated_rationale":  "Odrzucam zgłoszenie: w polskim locale pełne formy „dzień/tydzień/miesiąc/rok” w ToSymbol są naturalne i spójne z istniejącą konwencją Humanizera, gdzie dla części języków te jednostki nie są skracane do jednoznakowych symboli.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Day = \"dzień\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (oczekiwane Day -> \"dzień\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/TimeSpanHumanizeTests.cs (spójna terminologia: „1 dzień”, „2 dni”)."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Brak zmian; to kwestia preferencji skrótów, nie błąd lokalizacji."
                      },
                      {
                          "locale":  "pl",
@@ -48,16 +50,18 @@
                                           "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (ToSymbol dla Month)."
                                       ],
                          "notes":  "Warto rozważyć ujednolicenie stylu symboli między Day/Week/Month/Year i h/min/s/ms.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "mies.",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "miesiąc",
+                         "adjudicated_rationale":  "Odrzucam zgłoszenie: „miesiąc” jako symbol jednostki w tym API jest akceptowalny i idiomatyczny dla polskiego użytkownika. Wymuszenie skrótu „mies.” byłoby zmianą stylu, nie korektą jakości tłumaczenia.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Month = \"miesiąc\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (oczekiwane Month -> \"miesiąc\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/DateHumanizeTests.cs (spójna terminologia miesięcy w locale pl)."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Brak zmian; propozycja pass 1 dotyczyła wariantu stylistycznego."
                      },
                      {
                          "locale":  "pl",
@@ -73,16 +77,18 @@
                                           "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (Week -\u003e \"tydzień\")."
                                       ],
                          "notes":  "Ocena dotyczy naturalności symbolu, nie poprawności leksykalnej.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "tydz.",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "tydzień",
+                         "adjudicated_rationale":  "Odrzucam zgłoszenie: „tydzień” jest poprawnym i naturalnym polskim oznaczeniem jednostki czasu w kontekście Humanizera. Skrót „tydz.” może być używany, ale nie jest tu wymagany jako jedyna poprawna forma.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Week = \"tydzień\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (oczekiwane Week -> \"tydzień\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/TimeSpanHumanizeTests.cs (spójnie: „1 tydzień”, „2 tygodnie”)."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Brak zmian; obecna wartość jest poprawna i naturalna."
                      },
                      {
                          "locale":  "pl",
@@ -98,16 +104,18 @@
                                           "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (Year -\u003e \"rok\")."
                                       ],
                          "notes":  "Wariant skrótu można doprecyzować zależnie od przyjętej konwencji produktu.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "suspicious",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
                          "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "r.",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "rok",
+                         "adjudicated_rationale":  "Odrzucam zgłoszenie: „rok” jest standardową, jednoznaczną i naturalną formą dla użytkownika polskiego. Zamiana na „r.” to opcjonalny skrót redakcyjny, nie konieczna poprawka lokalizacyjna.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.pl.resx (TimeUnit_Year = \"rok\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/TimeUnitToSymbolTests.cs (oczekiwane Year -> \"rok\").",
+                                                     "tests/Humanizer.Tests/Localisation/pl/DateHumanizeTests.cs oraz TimeSpanHumanizeTests.cs (konsekwentne użycie leksemu „rok/lat(a)”)."
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Brak zmian; wykrycie pass 1 oceniam jako preferencję skrótu, nie defekt."
                      }
                  ]
 }
