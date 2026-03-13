@@ -1,12 +1,12 @@
 ﻿{
     "locale":  "sr",
     "source_review":  "docs\\\\reviews\\\\locales\\\\sr.review.json",
-    "adjudication_status":  "pending",
+    "adjudication_status":  "completed",
     "summary":  {
-                    "pending":  4,
-                    "confirmed":  0,
-                    "modified":  0,
-                    "rejected":  0
+                    "pending":  0,
+                    "confirmed":  2,
+                    "modified":  1,
+                    "rejected":  1
                 },
     "findings":  [
                      {
@@ -23,16 +23,18 @@
                                           "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"пре минут\")]"
                                       ],
                          "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком.",
-                         "adjudication":  "pending",
+                         "adjudication":  "modified",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "пре минуте",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "пре минута",
+                         "adjudicated_rationale":  "У српском је основни облик \"минут\" (м.р.). Уз предлог \"пре\" иде генитив, па је нормативни облик \"пре минута\". Први предлог \"пре минуте\" погрешно мења род именице.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.sr.resx:207",
+                                                     "src/Humanizer/Properties/Resources.sr.resx:288",
+                                                     "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs:19"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Задржан је статус defect, али је замена коригована у односу на први пас."
                      },
                      {
                          "locale":  "sr",
@@ -48,16 +50,18 @@
                                           "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"за минут\")]"
                                       ],
                          "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком.",
-                         "adjudication":  "pending",
-                         "adjudicated_status":  "defect",
-                         "adjudicated_severity":  "P2",
+                         "adjudication":  "rejected",
+                         "adjudicated_status":  "ok",
+                         "adjudicated_severity":  "P3",
                          "adjudicated_confidence":  "high",
-                         "adjudicated_replacement":  "за минуту",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_replacement":  "за минут",
+                         "adjudicated_rationale":  "Облик \"за минут\" је природан и граматички исправан у српском јер је \"минут\" мушког рода; у акузативу једнине (неживо) облик остаје \"минут\". Предложено \"за минуту\" намеће други лексички образац.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.sr.resx:210",
+                                                     "src/Humanizer/Properties/Resources.sr.resx:288",
+                                                     "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs:26"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "No change required."
                      },
                      {
                          "locale":  "sr",
@@ -73,16 +77,18 @@
                                           "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"пре секунд\")]"
                                       ],
                          "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "пре секунде",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Потврђујем налаз из првог паса: у овом locale-у се једнина за ову јединицу доследно води као \"секунда\" (нпр. \"1 секунда\"), па је уз \"пре\" исправно \"пре секунде\". Тренутно \"пре секунд\" је неприродно и падежно неисправно.",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.sr.resx:219",
+                                                     "src/Humanizer/Properties/Resources.sr.resx:294",
+                                                     "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs:7"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Задржана је предложена замена из првог паса."
                      },
                      {
                          "locale":  "sr",
@@ -98,16 +104,18 @@
                                           "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs: [InlineData(1, \"за секунд\")]"
                                       ],
                          "notes":  "Тест тренутно потврђује неисправан облик и треба га ускладити са исправком.",
-                         "adjudication":  "pending",
+                         "adjudication":  "confirmed",
                          "adjudicated_status":  "defect",
                          "adjudicated_severity":  "P2",
                          "adjudicated_confidence":  "high",
                          "adjudicated_replacement":  "за секунду",
-                         "adjudicated_rationale":  "",
+                         "adjudicated_rationale":  "Потврђујем налаз из првог паса: у будућој конструкцији са једнином природан и нормативан облик је \"за секунду\". Тренутно \"за секунд\" одступа од обрасца који locale већ користи за \"секунда\".",
                          "adjudicated_evidence":  [
-
+                                                     "src/Humanizer/Properties/Resources.sr.resx:222",
+                                                     "src/Humanizer/Properties/Resources.sr.resx:294",
+                                                     "tests/Humanizer.Tests/Localisation/sr/DateHumanizeTests.cs:13"
                                                   ],
-                         "adjudicated_notes":  ""
+                         "adjudicated_notes":  "Задржана је предложена замена из првог паса."
                      }
                  ]
 }
