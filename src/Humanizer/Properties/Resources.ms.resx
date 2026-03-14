@@ -310,7 +310,7 @@
     <value>{0} tahun yang lalu</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Paucal" xml:space="preserve">
-    <value>{0} tahun dari yang lalu</value>
+    <value>{0} tahun yang lalu</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo_Plural" xml:space="preserve">
     <value>{0} tahun yang lalu</value>

@@ -94,6 +94,6 @@ public class TimeSpanHumanizeTests
     {
         var noTime = TimeSpan.Zero;
         var actual = noTime.Humanize(toWords: true);
-        Assert.Equal("waktu kosong", actual);
+        Assert.Equal("tidak ada waktu", actual);
     }
 }

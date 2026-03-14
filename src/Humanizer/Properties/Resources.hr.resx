@@ -370,7 +370,7 @@
     <value>1 godina</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>bez podatka o vremenu</value>
+    <value>bez vremena</value>
   </data>
   <data name="TimeUnit_Day" xml:space="preserve">
     <value>dan</value>

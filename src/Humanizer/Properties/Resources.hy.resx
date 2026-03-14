@@ -265,7 +265,7 @@
     <value>մեկ տարի</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>ժամանակը բացակայում է</value>
+    <value>ժամանակ չկա</value>
   </data>
   <data name="TimeUnit_Day" xml:space="preserve">
     <value>օր</value>

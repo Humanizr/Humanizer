@@ -352,7 +352,7 @@
     <value>un an</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>temps nul</value>
+    <value>durée nulle</value>
   </data>
   <data name="TimeUnit_Day" xml:space="preserve">
     <value>j</value>

@@ -199,7 +199,7 @@
     <value>{0} giờ</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} phần ngàn giây</value>
+    <value>{0} mili giây</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
     <value>{0} phút</value>
@@ -223,7 +223,7 @@
     <value>1 giờ</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 phần ngàn giây</value>
+    <value>1 mili giây</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 phút</value>
@@ -241,7 +241,7 @@
     <value>1 năm</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>không giờ</value>
+    <value>không có thời lượng</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
     <value>cách đây {0} ngày</value>

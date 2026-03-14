@@ -9,7 +9,7 @@ public class ToFullWordsTests
 
     [Fact]
     public void ReturnsPluralBytes() =>
-        Assert.Equal("10 bytes", ByteSize.FromBytes(10).ToFullWords());
+        Assert.Equal("10 byte", ByteSize.FromBytes(10).ToFullWords());
 
     [Fact]
     public void ReturnsSingularGigabyte() =>
@@ -17,5 +17,5 @@ public class ToFullWordsTests
 
     [Fact]
     public void ReturnsPluralGigabytes() =>
-        Assert.Equal("10 gigabytes", ByteSize.FromGigabytes(10).ToFullWords());
+        Assert.Equal("10 gigabyte", ByteSize.FromGigabytes(10).ToFullWords());
 }

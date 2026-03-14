@@ -4,19 +4,19 @@
 public class DateHumanizeDefaultStrategyTests
 {
     [Theory]
-    [InlineData(1, "пре секунд")]
+    [InlineData(1, "пре секунде")]
     [InlineData(10, "пре 10 секунди")]
     public void SecondsAgo(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
 
     [Theory]
-    [InlineData(1, "за секунд")]
+    [InlineData(1, "за секунду")]
     [InlineData(10, "за 10 секунди")]
     public void SecondsFromNow(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
 
     [Theory]
-    [InlineData(1, "пре минут")]
+    [InlineData(1, "пре минута")]
     [InlineData(10, "пре 10 минута")]
     [InlineData(60, "пре сат времена")]
     public void MinutesAgo(int minutes, string expected) =>

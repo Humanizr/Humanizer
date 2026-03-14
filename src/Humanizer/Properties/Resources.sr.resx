@@ -205,7 +205,7 @@
     <value>за сат времена</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
-    <value>пре минут</value>
+    <value>пре минута</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
     <value>за минут</value>
@@ -217,10 +217,10 @@
     <value>за месец дана</value>
   </data>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
-    <value>пре секунд</value>
+    <value>пре секунде</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>за секунд</value>
+    <value>за секунду</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>пре годину дана</value>

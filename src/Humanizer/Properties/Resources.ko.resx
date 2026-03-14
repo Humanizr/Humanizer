@@ -334,7 +334,7 @@
     <value>{0}년 후</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
-    <value>사용 안 함</value>
+    <value>없음</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>지금</value>

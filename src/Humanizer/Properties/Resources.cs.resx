@@ -373,7 +373,7 @@
     <value>1 rok</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>není čas</value>
+    <value>žádný čas</value>
   </data>
   <data name="TimeUnit_Day" xml:space="preserve">
     <value>den</value>

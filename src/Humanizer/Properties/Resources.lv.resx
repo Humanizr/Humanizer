@@ -313,7 +313,7 @@
     <value>pirms minūtes</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>pēc minūtēs</value>
+    <value>pēc minūtes</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>pirms mēneša</value>
