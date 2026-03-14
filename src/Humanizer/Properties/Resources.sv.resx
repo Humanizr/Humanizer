@@ -304,7 +304,7 @@
     <value>år</value>
   </data>
   <data name="DataUnit_Byte" xml:space="preserve">
-    <value>bytes</value>
+    <value>byte</value>
   </data>
   <data name="DataUnit_Byte_Singular" xml:space="preserve">
     <value>byte</value>
@@ -313,7 +313,7 @@
     <value>B</value>
   </data>
   <data name="DataUnit_Gigabyte" xml:space="preserve">
-    <value>gigabytes</value>
+    <value>gigabyte</value>
   </data>
   <data name="DataUnit_Gigabyte_Singular" xml:space="preserve">
     <value>gigabyte</value>

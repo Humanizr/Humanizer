@@ -160,40 +160,40 @@
     <value>{0} kun avval</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>{0} kundan so`ng</value>
+    <value>{0} kundan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
-    <value>{0} kundan so`ng</value>
+    <value>{0} kundan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} soat avval</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>{0} soatdan so`ng</value>
+    <value>{0} soatdan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} minut avval</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} minutdan so`ng</value>
+    <value>{0} minutdan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} oy avval</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>{0} oydan so`ng</value>
+    <value>{0} oydan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} sekund avval</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} sekunddan so`ng</value>
+    <value>{0} sekunddan so'ng</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} yil avval</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>{0} yildan so`ng</value>
+    <value>{0} yildan so'ng</value>
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>hozir</value>
@@ -211,37 +211,37 @@
     <value>bir soat avval</value>
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>bir soatdan so`ng</value>
+    <value>bir soatdan so'ng</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>bir daqiqa avval</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>bir daqiqadan so`ng</value>
+    <value>bir daqiqadan so'ng</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>bir oy avval</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>bir oydan so`ng</value>
+    <value>bir oydan so'ng</value>
   </data>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>bir soniya avval</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>bir soniyadan so`ng</value>
+    <value>bir soniyadan so'ng</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>bir yil avval</value>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>bir yildan so`ng</value>
+    <value>bir yildan so'ng</value>
   </data>
   <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
-    <value>o`tgan kun</value>
+    <value>2 kun avval</value>
   </data>
   <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
-    <value>indindan keyin</value>
+    <value>indinga</value>
   </data>
   <data name="N" xml:space="preserve">
     <value>shimol</value>
@@ -343,7 +343,7 @@
     <value>1 yil</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>vaqt yo`q</value>
+    <value>vaqt yo'q</value>
   </data>
   <data name="TimeUnit_Day" xml:space="preserve">
     <value>kun</value>

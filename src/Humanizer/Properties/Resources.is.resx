@@ -241,7 +241,7 @@
     <value>fyrir {0} sekúndum</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Plural" xml:space="preserve">
-    <value>fyrir {0} sekúndu</value>
+    <value>fyrir {0} sekúndum</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Singular" xml:space="preserve">
     <value>fyrir {0} sekúndu</value>
@@ -448,7 +448,7 @@
     <value>{0} mánuðir</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Singular" xml:space="preserve">
-    <value>{0} mánuðir</value>
+    <value>{0} mánuður</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
     <value>{0} sekúndur</value>

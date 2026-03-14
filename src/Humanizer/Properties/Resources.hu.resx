@@ -376,10 +376,10 @@
     <value>egy év múlva</value>
   </data>
   <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
-    <value>két éve</value>
+    <value>tegnapelőtt</value>
   </data>
   <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
-    <value>két év múlva</value>
+    <value>holnapután</value>
   </data>
   <data name="E" xml:space="preserve">
     <value>kelet</value>

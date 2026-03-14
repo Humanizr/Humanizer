@@ -14,7 +14,7 @@ public class HeadingTests
     public void ToHeadingAbbreviated(double heading, string expected) =>
         Assert.Equal(expected, heading.ToHeading());
 
-    [InlineData(0, "XL")]
+    [InlineData(0, "tramuntana")]
     [InlineData(45, "grigal")]
     [InlineData(90, "lvant")]
     [InlineData(112.5, "xlokk il-lvant")]

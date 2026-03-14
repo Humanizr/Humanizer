@@ -400,7 +400,7 @@
     <value>L</value>
   </data>
   <data name="N" xml:space="preserve">
-    <value>XL</value>
+    <value>tramuntana</value>
   </data>
   <data name="NE" xml:space="preserve">
     <value>grigal</value>
@@ -577,7 +577,7 @@
     <value>{0} snin</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Singular" xml:space="preserve">
-    <value>{0} snin</value>
+    <value>{0} sena</value>
   </data>
   <data name="TimeSpanHumanize_Age" xml:space="preserve">
     <value>{0}</value>

@@ -283,7 +283,7 @@
     <value>এক মিনিট</value>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>এক মাসের</value>
+    <value>এক মাস</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>এক সেকেন্ড</value>
@@ -295,7 +295,7 @@
     <value>এক বছর</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>শূন্য সময়</value>
+    <value>কোনো সময় নেই</value>
   </data>
   <data name="TimeUnit_Day" xml:space="preserve">
     <value>দিন</value>

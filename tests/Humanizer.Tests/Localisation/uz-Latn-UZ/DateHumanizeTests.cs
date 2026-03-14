@@ -10,7 +10,7 @@ public class DateHumanizeTests
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
 
     [Theory]
-    [InlineData(1, "bir soniyadan so`ng")]
+    [InlineData(1, "bir soniyadan so'ng")]
     [InlineData(10, "10 sekunddan so`ng")]
     public void SecondsFromNow(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
@@ -23,7 +23,7 @@ public class DateHumanizeTests
         DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
 
     [Theory]
-    [InlineData(1, "bir daqiqadan so`ng")]
+    [InlineData(1, "bir daqiqadan so'ng")]
     [InlineData(10, "10 minutdan so`ng")]
     public void MinutesFromNow(int minutes, string expected) =>
         DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
@@ -35,7 +35,7 @@ public class DateHumanizeTests
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Past);
 
     [Theory]
-    [InlineData(1, "bir soatdan so`ng")]
+    [InlineData(1, "bir soatdan so'ng")]
     [InlineData(10, "10 soatdan so`ng")]
     public void HoursFromNow(int hours, string expected) =>
         DateHumanize.Verify(expected, hours, TimeUnit.Hour, Tense.Future);
@@ -59,7 +59,7 @@ public class DateHumanizeTests
         DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Past);
 
     [Theory]
-    [InlineData(1, "bir oydan so`ng")]
+    [InlineData(1, "bir oydan so'ng")]
     [InlineData(10, "10 oydan so`ng")]
     public void MonthsFromNow(int months, string expected) =>
         DateHumanize.Verify(expected, months, TimeUnit.Month, Tense.Future);
@@ -71,7 +71,7 @@ public class DateHumanizeTests
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
 
     [Theory]
-    [InlineData(1, "bir yildan so`ng")]
+    [InlineData(1, "bir yildan so'ng")]
     [InlineData(2, "2 yildan so`ng")]
     public void YearsFromNow(int years, string expected) =>
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Future);
@@ -87,15 +87,15 @@ public class DateHumanizeTests
         Assert.Equal("hech qachon", never);
 
         Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("uz-Latn-UZ"), out var twoDaysAgo));
-        Assert.Equal("o`tgan kun", twoDaysAgo);
+        Assert.Equal("2 kun avval", twoDaysAgo);
 
         Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("uz-Latn-UZ"), out var twoDaysFromNow));
-        Assert.Equal("indindan keyin", twoDaysFromNow);
+        Assert.Equal("indinga", twoDaysFromNow);
 
         Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("uz-Latn-UZ"), out var daysAgoPaucal));
         Assert.Equal("{0} kun avval", daysAgoPaucal);
 
         Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("uz-Latn-UZ"), out var daysFromNowPaucal));
-        Assert.Equal("{0} kundan so`ng", daysFromNowPaucal);
+        Assert.Equal("{0} kundan so'ng", daysFromNowPaucal);
     }
 }

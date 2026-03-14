@@ -214,7 +214,7 @@
     <value>{0} ساعت</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} میلی ثانیه</value>
+    <value>{0} میلی‌ثانیه</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
     <value>{0} دقیقه</value>
@@ -241,7 +241,7 @@
     <value>یک ساعت</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>یک میلی ثانیه</value>
+    <value>یک میلی‌ثانیه</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>یک دقیقه</value>

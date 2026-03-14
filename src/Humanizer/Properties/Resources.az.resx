@@ -241,7 +241,7 @@
     <value>1 il</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
-    <value>zaman fərqi yoxdur</value>
+    <value>vaxt yoxdur</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
     <value>{0} gün əvvəl</value>
