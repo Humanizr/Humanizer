@@ -1,4 +1,4 @@
-namespace it;
+﻿namespace it;
 
 public class ResourcesTests
 {
@@ -9,6 +9,6 @@ public class ResourcesTests
         Assert.Equal("mai", never);
 
         var ageFormat = Resources.GetResource("TimeSpanHumanize_Age", new("it"));
-        Assert.Equal("{0} vecchio", ageFormat);
+        Assert.Equal("{0} anni", ageFormat);
     }
 }

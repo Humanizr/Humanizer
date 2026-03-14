@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -190,16 +190,16 @@
     <value>TB</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo" xml:space="preserve">
-    <value>преди {0} дена</value>
+    <value>преди {0} дни</value>
   </data>
   <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
-    <value>преди {0} дена</value>
+    <value>преди {0} дни</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>след {0} дена</value>
+    <value>след {0} дни</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
-    <value>след {0} дена</value>
+    <value>след {0} дни</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>преди {0} часа</value>
@@ -238,10 +238,10 @@
     <value>никога</value>
   </data>
   <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
-    <value>преди 2 дена</value>
+    <value>преди 2 дни</value>
   </data>
   <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
-    <value>след 2 дена</value>
+    <value>след 2 дни</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>вчера</value>
@@ -280,7 +280,7 @@
     <value>след година</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
-    <value>{0} дена</value>
+    <value>{0} дни</value>
   </data>
   <data name="TimeSpanHumanize_MultipleHours" xml:space="preserve">
     <value>{0} часа</value>

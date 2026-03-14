@@ -54,7 +54,7 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
 
     [Theory]
-    [InlineData(1, "1 χιλιοσtό του δευτερολέπτου")]
+    [InlineData(1, "1 χιλιοστό του δευτερολέπτου")]
     [InlineData(2, "2 χιλιοστά του δευτερολέπτου")]
     public void Milliseconds(int milliseconds, string expected) =>
         Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
@@ -65,5 +65,5 @@ public class TimeSpanHumanizeTests
 
     [Fact]
     public void NoTimeToWords() =>
-        Assert.Equal("μηδέν χρόνος", TimeSpan.Zero.Humanize(toWords: true));
+        Assert.Equal("μηδενικός χρόνος", TimeSpan.Zero.Humanize(toWords: true));
 }

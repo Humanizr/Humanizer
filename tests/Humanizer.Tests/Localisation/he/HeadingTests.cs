@@ -5,13 +5,13 @@ public class HeadingTests
 {
     [Theory]
     [InlineData(0, "צ")]
-    [InlineData(45, "צמ")]
-    [InlineData(90, "מ")]
-    [InlineData(135, "דמ")]
+    [InlineData(45, "צמז")]
+    [InlineData(90, "מז")]
+    [InlineData(135, "דמז")]
     [InlineData(180, "ד")]
-    [InlineData(225, "דמ")]
-    [InlineData(270, "מ")]
-    [InlineData(315, "צמ")]
+    [InlineData(225, "דמע")]
+    [InlineData(270, "מע")]
+    [InlineData(315, "צמע")]
     public void ToHeadingAbbreviated(double heading, string expected) =>
         Assert.Equal(expected, heading.ToHeading());
 
@@ -26,4 +26,16 @@ public class HeadingTests
     [InlineData(315, "צפון מערב")]
     public void ToHeading(double heading, string expected) =>
         Assert.Equal(expected, heading.ToHeading(HeadingStyle.Full));
+
+    [Theory]
+    [InlineData("צ", 0)]
+    [InlineData("צמז", 45)]
+    [InlineData("מז", 90)]
+    [InlineData("דמז", 135)]
+    [InlineData("ד", 180)]
+    [InlineData("דמע", 225)]
+    [InlineData("מע", 270)]
+    [InlineData("צמע", 315)]
+    public void FromShortHeading(string heading, double expected) =>
+        Assert.Equal(expected, heading.FromAbbreviatedHeading());
 }

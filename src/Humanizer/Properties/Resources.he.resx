@@ -513,24 +513,24 @@
     <value>צ</value>
   </data>
   <data name="NE_Short" xml:space="preserve">
-    <value>צמ</value>
+    <value>צמז</value>
   </data>
   <data name="E_Short" xml:space="preserve">
-    <value>מ</value>
+    <value>מז</value>
   </data>
   <data name="SE_Short" xml:space="preserve">
-    <value>דמ</value>
+    <value>דמז</value>
   </data>
   <data name="S_Short" xml:space="preserve">
     <value>ד</value>
   </data>
   <data name="SW_Short" xml:space="preserve">
-    <value>דמ</value>
+    <value>דמע</value>
   </data>
   <data name="W_Short" xml:space="preserve">
-    <value>מ</value>
+    <value>מע</value>
   </data>
   <data name="NW_Short" xml:space="preserve">
-    <value>צמ</value>
+    <value>צמע</value>
   </data>
 </root>

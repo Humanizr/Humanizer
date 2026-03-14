@@ -64,7 +64,26 @@ function Repair-Mojibake([string] $value)
         return $value
     }
 
-    if ($value -notmatch 'Ã|Ð|Ñ|Ø|Ù|à')
+    $suspiciousChars = @(
+        [char]0x00C3,
+        [char]0x00D0,
+        [char]0x00D1,
+        [char]0x00D8,
+        [char]0x00D9,
+        [char]0x00E0
+    )
+
+    $looksBroken = $false
+    foreach ($char in $suspiciousChars)
+    {
+        if ($value.IndexOf($char) -ge 0)
+        {
+            $looksBroken = $true
+            break
+        }
+    }
+
+    if (!$looksBroken)
     {
         return $value
     }
@@ -89,10 +108,13 @@ foreach ($finding in @($adjudication.findings))
         continue
     }
 
-    $replacements.Add([pscustomobject]@{
-        Current = $currentValue
-        Replacement = $replacementValue
-    })
+    if ($currentValue.Length -ge 4 -and $replacementValue.Length -ge 4)
+    {
+        $replacements.Add([pscustomobject]@{
+            Current = $currentValue
+            Replacement = $replacementValue
+        })
+    }
 
     $node = @($xml.root.data | Where-Object { $_.name -eq $finding.key }) | Select-Object -First 1
     if ($null -eq $node)

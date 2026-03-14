@@ -373,19 +373,19 @@
     <value>{0} oras</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} milliseconds</value>
+    <value>{0} milisegundo</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>{0} milliseconds</value>
+    <value>{0} milisegundo</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Paucal" xml:space="preserve">
-    <value>{0} milliseconds</value>
+    <value>{0} milisegundo</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} milliseconds</value>
+    <value>{0} milisegundo</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Singular" xml:space="preserve">
-    <value>{0} millisecond</value>
+    <value>{0} milisegundo</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
     <value>{0} minuto</value>
@@ -463,7 +463,7 @@
     <value>{0} taon</value>
   </data>
   <data name="TimeSpanHumanize_Age" xml:space="preserve">
-    <value>{0} gulang</value>
+    <value>{0} na gulang</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 araw</value>
@@ -478,10 +478,10 @@
     <value>isang oras</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 millisecond</value>
+    <value>1 milisegundo</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
-    <value>isang millisecond</value>
+    <value>isang milisegundo</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 minuto</value>

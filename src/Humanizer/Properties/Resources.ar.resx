@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -326,15 +326,15 @@
     <comment>{0} hours</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds" xml:space="preserve">
-    <value>{0} جزء من الثانية</value>
+    <value>{0} ملي ثانية</value>
     <comment>{0} milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Dual" xml:space="preserve">
-    <value>جزئين من الثانية</value>
+    <value>ملي ثانيتين</value>
     <comment>two milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMilliseconds_Plural" xml:space="preserve">
-    <value>{0} أجزاء من الثانية</value>
+    <value>{0} ملي ثانية</value>
     <comment>{0} milliseconds</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
@@ -350,7 +350,7 @@
     <comment>{0} minutes</comment>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
-    <value>{0} أشهر</value>
+    <value>{0} شهر</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Dual" xml:space="preserve">
     <value>شهرين</value>
@@ -389,7 +389,7 @@
     <value>سنتين</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears_Plural" xml:space="preserve">
-    <value>{0} سنة</value>
+    <value>{0} سنوات</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>يوم واحد</value>
@@ -408,7 +408,7 @@
     <comment>single minute</comment>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
-    <value>شهر 1</value>
+    <value>شهر واحد</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
     <value>ثانية واحدة</value>
@@ -419,7 +419,7 @@
     <comment>single week</comment>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
-    <value>السنة 1</value>
+    <value>سنة واحدة</value>
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>حالاً</value>

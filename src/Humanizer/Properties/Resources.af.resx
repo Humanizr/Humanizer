@@ -283,10 +283,10 @@
     <value>een uur</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond" xml:space="preserve">
-    <value>1 millisekond</value>
+    <value>1 millisekonde</value>
   </data>
   <data name="TimeSpanHumanize_SingleMillisecond_Words" xml:space="preserve">
-    <value>een millisekond</value>
+    <value>een millisekonde</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
     <value>1 minuut</value>
@@ -301,10 +301,10 @@
     <value>een maand</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>1 sekond</value>
+    <value>1 sekonde</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond_Words" xml:space="preserve">
-    <value>een sekond</value>
+    <value>een sekonde</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>1 week</value>
