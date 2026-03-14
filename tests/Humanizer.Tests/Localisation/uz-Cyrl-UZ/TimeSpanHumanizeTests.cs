@@ -49,8 +49,8 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(2, "2 минут")]
-    [InlineData(1, "1 минут")]
+    [InlineData(2, "2 дақиқа")]
+    [InlineData(1, "1 дақиқа")]
     public void Minutes(int minutes, string expected)
     {
         var actual = TimeSpan.FromMinutes(minutes).Humanize();
@@ -58,8 +58,8 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(2, "2 секунд")]
-    [InlineData(1, "1 секунд")]
+    [InlineData(2, "2 сония")]
+    [InlineData(1, "1 сония")]
     public void Seconds(int seconds, string expected)
     {
         var actual = TimeSpan.FromSeconds(seconds).Humanize();

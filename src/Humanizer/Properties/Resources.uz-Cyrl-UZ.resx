@@ -130,10 +130,10 @@
     <value>{0} соатдан сўнг</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
-    <value>{0} минут аввал</value>
+    <value>{0} дақиқа аввал</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>{0} минутдан сўнг</value>
+    <value>{0} дақиқадан сўнг</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} ой аввал</value>
@@ -142,10 +142,10 @@
     <value>{0} ойдан сўнг</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
-    <value>{0} секунд аввал</value>
+    <value>{0} сония аввал</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>{0} секунддан сўнг</value>
+    <value>{0} сониядан сўнг</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} йил аввал</value>
@@ -202,13 +202,13 @@
     <value>{0} миллисекунд</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMinutes" xml:space="preserve">
-    <value>{0} минут</value>
+    <value>{0} дақиқа</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths" xml:space="preserve">
     <value>{0} ой</value>
   </data>
   <data name="TimeSpanHumanize_MultipleSeconds" xml:space="preserve">
-    <value>{0} секунд</value>
+    <value>{0} сония</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
     <value>{0} ҳафта</value>
@@ -226,13 +226,13 @@
     <value>1 миллисекунд</value>
   </data>
   <data name="TimeSpanHumanize_SingleMinute" xml:space="preserve">
-    <value>1 минут</value>
+    <value>1 дақиқа</value>
   </data>
   <data name="TimeSpanHumanize_SingleMonth" xml:space="preserve">
     <value>1 ой</value>
   </data>
   <data name="TimeSpanHumanize_SingleSecond" xml:space="preserve">
-    <value>1 секунд</value>
+    <value>1 сония</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
     <value>1 ҳафта</value>

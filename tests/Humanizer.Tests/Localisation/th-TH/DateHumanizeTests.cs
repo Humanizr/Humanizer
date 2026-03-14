@@ -23,6 +23,6 @@ public class DateHumanizeTests
     public void DayPaucalResourcesExist()
     {
         Assert.Equal("{0} วันที่แล้ว", Resources.GetResource("DateHumanize_MultipleDaysAgo_Paucal", new("th-TH")));
-        Assert.Equal("{0} วันจากนี้", Resources.GetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("th-TH")));
+        Assert.Equal("อีก {0} วัน", Resources.GetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("th-TH")));
     }
 }

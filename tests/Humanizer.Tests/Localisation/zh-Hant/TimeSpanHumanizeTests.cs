@@ -25,10 +25,10 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
     [Theory]
-    [InlineData(7, "1 周")]
-    [InlineData(14, "2 周")]
-    [InlineData(21, "3 周")]
-    [InlineData(77, "11 周")]
+    [InlineData(7, "1 週")]
+    [InlineData(14, "2 週")]
+    [InlineData(21, "3 週")]
+    [InlineData(77, "11 週")]
     public void Weeks(int days, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
 
@@ -72,7 +72,7 @@ public class TimeSpanHumanizeTests
         Assert.Equal("沒有時間", TimeSpan.Zero.Humanize(toWords: true));
 
     [Theory]
-    [InlineData(7, false, "1 周 歲")]
+    [InlineData(7, false, "1 週 歲")]
     [InlineData(366, false, "1 年 歲")]
     public void Age(int days, bool toWords, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));

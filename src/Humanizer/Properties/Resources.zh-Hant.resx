@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -211,7 +211,7 @@
     <value>{0} 秒</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks" xml:space="preserve">
-    <value>{0} 周</value>
+    <value>{0} 週</value>
   </data>
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} 年</value>
@@ -235,7 +235,7 @@
     <value>1 秒</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeek" xml:space="preserve">
-    <value>1 周</value>
+    <value>1 週</value>
   </data>
   <data name="TimeSpanHumanize_SingleYear" xml:space="preserve">
     <value>1 年</value>
@@ -247,7 +247,7 @@
     <value>1 個月</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Paucal" xml:space="preserve">
-    <value>{0} 周</value>
+    <value>{0} 週</value>
   </data>
   <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
     <value>GB</value>
@@ -367,7 +367,7 @@
     <value>東</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Singular" xml:space="preserve">
-    <value>{0} 周</value>
+    <value>{0} 週</value>
   </data>
   <data name="NE" xml:space="preserve">
     <value>東北</value>
@@ -391,7 +391,7 @@
     <value>{0} 年</value>
   </data>
   <data name="TimeSpanHumanize_SingleWeeks_Words" xml:space="preserve">
-    <value>1 周</value>
+    <value>1 週</value>
   </data>
   <data name="N" xml:space="preserve">
     <value>北</value>
@@ -481,7 +481,7 @@
     <value>西</value>
   </data>
   <data name="TimeUnit_Week" xml:space="preserve">
-    <value>周</value>
+    <value>週</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo_Dual" xml:space="preserve">
     <value>{0} 分鐘前</value>
@@ -490,7 +490,7 @@
     <value>{0} 天</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Plural" xml:space="preserve">
-    <value>{0} 周</value>
+    <value>{0} 週</value>
   </data>
   <data name="TimeSpanHumanize_MultipleMonths_Paucal" xml:space="preserve">
     <value>{0} 個月</value>
@@ -604,7 +604,7 @@
     <value>分</value>
   </data>
   <data name="TimeSpanHumanize_MultipleWeeks_Dual" xml:space="preserve">
-    <value>{0} 周</value>
+    <value>{0} 週</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo_Dual" xml:space="preserve">
     <value>{0} 秒鐘前</value>

@@ -5,26 +5,26 @@ public class DateHumanizeTests
 {
     [Theory]
     [InlineData(1, "бир сония аввал")]
-    [InlineData(10, "10 секунд аввал")]
+    [InlineData(10, "10 сония аввал")]
     public void SecondsAgo(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
 
     [Theory]
     [InlineData(1, "бир сониядан сўнг")]
-    [InlineData(10, "10 секунддан сўнг")]
+    [InlineData(10, "10 сониядан сўнг")]
     public void SecondsFromNow(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
 
     [Theory]
     [InlineData(1, "бир дақиқа аввал")]
-    [InlineData(10, "10 минут аввал")]
+    [InlineData(10, "10 дақиқа аввал")]
     [InlineData(60, "бир соат аввал")]
     public void MinutesAgo(int minutes, string expected) =>
         DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
 
     [Theory]
     [InlineData(1, "бир дақиқадан сўнг")]
-    [InlineData(10, "10 минутдан сўнг")]
+    [InlineData(10, "10 дақиқадан сўнг")]
     public void MinutesFromNow(int minutes, string expected) =>
         DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
 
