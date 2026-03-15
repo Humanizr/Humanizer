@@ -90,6 +90,6 @@ class IndonesianNumberToWordsConverter : GenderlessNumberToWordsConverter
             return $"minus {ConvertToOrdinal(-number)}";
         }
 
-        return number == 1 ? "pertama" : $"ke-{Convert(number)}";
+        return number == 1 ? "pertama" : $"ke{Convert(number)}";
     }
 }

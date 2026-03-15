@@ -4,7 +4,7 @@ namespace Humanizer;
 
 class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToClockNotationConverter>
 {
-    public TimeOnlyToClockNotationConvertersRegistry() : base(_ => new DefaultTimeOnlyToClockNotationConverter())
+    public TimeOnlyToClockNotationConvertersRegistry() : base(culture => new DefaultTimeOnlyToClockNotationConverter(culture))
     {
         RegisterDefaultConverter("af");
         RegisterDefaultConverter("ar");
@@ -60,7 +60,7 @@ class TimeOnlyToClockNotationConvertersRegistry : LocaliserRegistry<ITimeOnlyToC
     }
 
     void RegisterDefaultConverter(string localeCode) =>
-        Register(localeCode, _ => new DefaultTimeOnlyToClockNotationConverter());
+        Register(localeCode, culture => new DefaultTimeOnlyToClockNotationConverter(culture));
 }
 
 #endif

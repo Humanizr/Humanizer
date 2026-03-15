@@ -43,26 +43,26 @@ class FilipinoNumberToWordsConverter : GenderlessNumberToWordsConverter
         {
             var hundreds = Quantified(number / 100, "daan");
             var remainder = number % 100;
-            return remainder == 0 ? hundreds : $"{hundreds} {Convert(remainder)}";
+            return JoinMajorGroup(hundreds, remainder);
         }
 
         if (number < 1_000_000)
         {
             var thousands = Quantified(number / 1000, "libo");
             var remainder = number % 1000;
-            return remainder == 0 ? thousands : $"{thousands} {Convert(remainder)}";
+            return JoinMajorGroup(thousands, remainder);
         }
 
         if (number < 1_000_000_000)
         {
             var millions = Quantified(number / 1_000_000, "milyon");
             var remainder = number % 1_000_000;
-            return remainder == 0 ? millions : $"{millions} {Convert(remainder)}";
+            return JoinMajorGroup(millions, remainder);
         }
 
         var billions = Quantified(number / 1_000_000_000, "bilyon");
         var billionRemainder = number % 1_000_000_000;
-        return billionRemainder == 0 ? billions : $"{billions} {Convert(billionRemainder)}";
+        return JoinMajorGroup(billions, billionRemainder);
     }
 
     public override string ConvertToOrdinal(int number)
@@ -72,7 +72,20 @@ class FilipinoNumberToWordsConverter : GenderlessNumberToWordsConverter
             return $"minus {ConvertToOrdinal(-number)}";
         }
 
-        return number == 1 ? "una" : $"ika-{Convert(number)}";
+        return number switch
+        {
+            1 => "una",
+            2 => "ikalawa",
+            3 => "ikatlo",
+            4 => "ikaapat",
+            5 => "ikalima",
+            6 => "ikaanim",
+            7 => "ikapito",
+            8 => "ikawalo",
+            9 => "ikasiyam",
+            10 => "ikasampu",
+            _ => $"ika{Convert(number)}"
+        };
     }
 
     static string Quantified(long number, string unit)
@@ -87,7 +100,7 @@ class FilipinoNumberToWordsConverter : GenderlessNumberToWordsConverter
             return $"{Link(number)} {unit}";
         }
 
-        return $"{ConvertStatic(number)} {unit}";
+        return $"{LinkPhrase(ConvertStatic(number))} {unit}";
     }
 
     static string Link(long number) =>
@@ -107,4 +120,28 @@ class FilipinoNumberToWordsConverter : GenderlessNumberToWordsConverter
 
     static string ConvertStatic(long number) =>
         new FilipinoNumberToWordsConverter().Convert(number);
+
+    static string JoinMajorGroup(string prefix, long remainder)
+    {
+        if (remainder == 0)
+        {
+            return prefix;
+        }
+
+        var joiner = remainder >= 100
+            ? " "
+            : prefix.EndsWith("libo", StringComparison.Ordinal) ? "'t " : " at ";
+        return $"{prefix}{joiner}{ConvertStatic(remainder)}";
+    }
+
+    static string LinkPhrase(string phrase)
+    {
+        var trimmed = phrase.TrimEnd();
+        if (trimmed.EndsWith('n'))
+        {
+            return $"{trimmed}g";
+        }
+
+        return "aeiou".Contains(trimmed[^1]) ? $"{trimmed}ng" : $"{trimmed} na";
+    }
 }

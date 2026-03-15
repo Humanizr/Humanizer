@@ -166,8 +166,42 @@ public class WordsToNumberTests_NonEnglish
     }
 
     [Theory]
+    [InlineData("pt-BR", "123", 123)]
+    [InlineData("zh-CN", "-42", -42)]
+    public void Accepts_numeric_literals_for_supported_localized_cultures(string cultureName, string input, int expected)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        Assert.True(input.TryToNumber(out var parsedNumber, culture));
+        Assert.Equal(expected, parsedNumber);
+        Assert.Equal(expected, input.ToNumber(culture));
+    }
+
+    [Theory]
+    [InlineData("pt-BR", 10001)]
+    [InlineData("ru-RU", -10001)]
+    public void Rejects_localized_round_trips_outside_supported_range(string cultureName, int number)
+    {
+        var culture = new CultureInfo(cultureName);
+        var word = number.ToWords(culture);
+
+        Assert.False(word.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
+        Assert.Equal(0, parsedNumber);
+        Assert.False(string.IsNullOrWhiteSpace(unrecognizedWord));
+
+        var ex = Assert.Throws<ArgumentException>(() => word.ToNumber(culture));
+        Assert.Contains("round-trip values from -10000 to 10000", ex.Message);
+    }
+
+    [Theory]
+    [InlineData("da", "one")]
+    [InlineData("da-DK", "one")]
+    [InlineData("fil", "one")]
+    [InlineData("fil-PH", "one")]
     [InlineData("id-ID", "one")]
     [InlineData("ms-MY", "one")]
+    [InlineData("sk", "one")]
+    [InlineData("sk-SK", "one")]
     public void ThrowsForUnsupportedCultureWithoutEnglishFallback(string cultureName, string word)
     {
         var culture = new CultureInfo(cultureName);

@@ -19,8 +19,8 @@ public class NumberToWordsTests
 
     [Theory]
     [InlineData(1, "pertama")]
-    [InlineData(2, "ke-dua")]
-    [InlineData(10, "ke-sepuluh")]
+    [InlineData(2, "kedua")]
+    [InlineData(10, "kesepuluh")]
     public void ToOrdinalWords(int number, string expected) =>
         Assert.Equal(expected, number.ToOrdinalWords());
 }

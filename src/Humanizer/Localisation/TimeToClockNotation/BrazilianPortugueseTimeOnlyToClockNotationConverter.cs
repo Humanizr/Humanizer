@@ -15,20 +15,24 @@ class BrazilianPortugueseTimeOnlyToClockNotationConverter : ITimeOnlyToClockNota
         }
 
         var normalizedHour = time.Hour % 12;
+        var displayHour = normalizedHour == 0 ? 12 : normalizedHour;
         var normalizedMinutes = (int)(roundToNearestFive == ClockNotationRounding.NearestFiveMinutes
             ? 5 * Math.Round(time.Minute / 5.0)
             : time.Minute);
+        var nextHour = (displayHour % 12) + 1;
+        var nextHourText = nextHour.ToWords(GrammaticalGender.Feminine);
+        var nextHourArticle = nextHour == 1 ? "a" : "as";
 
         return normalizedMinutes switch
         {
-            00 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} em ponto",
-            30 => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} e meia",
-            40 => $"vinte para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            45 => $"quinze para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            50 => $"dez para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            55 => $"cinco para as {(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)}",
-            60 => $"{(normalizedHour + 1).ToWords(GrammaticalGender.Feminine)} em ponto",
-            _ => $"{normalizedHour.ToWords(GrammaticalGender.Feminine)} e {normalizedMinutes.ToWords()}"
+            00 => $"{displayHour.ToWords(GrammaticalGender.Feminine)} em ponto",
+            30 => $"{displayHour.ToWords(GrammaticalGender.Feminine)} e meia",
+            40 => $"vinte para {nextHourArticle} {nextHourText}",
+            45 => $"quinze para {nextHourArticle} {nextHourText}",
+            50 => $"dez para {nextHourArticle} {nextHourText}",
+            55 => $"cinco para {nextHourArticle} {nextHourText}",
+            60 => $"{nextHourText} em ponto",
+            _ => $"{displayHour.ToWords(GrammaticalGender.Feminine)} e {normalizedMinutes.ToWords()}"
         };
     }
 }

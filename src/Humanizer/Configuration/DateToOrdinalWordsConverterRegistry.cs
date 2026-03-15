@@ -40,7 +40,7 @@ class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWord
         RegisterDefaultConverter("nl");
         RegisterDefaultConverter("pl");
         RegisterDefaultConverter("pt");
-        RegisterDefaultConverter("pt-BR");
+        Register("pt-BR", _ => new PtBrDateToOrdinalWordsConverter());
         RegisterDefaultConverter("ro");
         RegisterDefaultConverter("ru");
         RegisterDefaultConverter("sk");

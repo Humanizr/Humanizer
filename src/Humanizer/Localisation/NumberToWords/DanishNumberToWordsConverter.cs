@@ -4,6 +4,30 @@ class DanishNumberToWordsConverter : GenderlessNumberToWordsConverter
 {
     static readonly string[] UnitsMap = ["nul", "en", "to", "tre", "fire", "fem", "seks", "syv", "otte", "ni", "ti", "elleve", "tolv", "tretten", "fjorten", "femten", "seksten", "sytten", "atten", "nitten"];
     static readonly string[] TensMap = ["", "", "tyve", "tredive", "fyrre", "halvtreds", "tres", "halvfjerds", "firs", "halvfems"];
+    static readonly Dictionary<int, string> OrdinalMap = new()
+    {
+        [0] = "nulte",
+        [1] = "første",
+        [2] = "anden",
+        [3] = "tredje",
+        [4] = "fjerde",
+        [5] = "femte",
+        [6] = "sjette",
+        [7] = "syvende",
+        [8] = "ottende",
+        [9] = "niende",
+        [10] = "tiende",
+        [11] = "ellevte",
+        [12] = "tolvte",
+        [13] = "trettende",
+        [14] = "fjortende",
+        [15] = "femtende",
+        [16] = "sekstende",
+        [17] = "syttende",
+        [18] = "attende",
+        [19] = "nittende",
+        [20] = "tyvende"
+    };
 
     public override string Convert(long number)
     {
@@ -62,23 +86,19 @@ class DanishNumberToWordsConverter : GenderlessNumberToWordsConverter
             return $"minus {ConvertToOrdinal(-number)}";
         }
 
-        return number switch
+        if (OrdinalMap.TryGetValue(number, out var ordinal))
         {
-            0 => "nulte",
-            1 => "første",
-            2 => "anden",
-            3 => "tredje",
-            4 => "fjerde",
-            5 => "femte",
-            6 => "sjette",
-            7 => "syvende",
-            8 => "ottende",
-            9 => "niende",
-            10 => "tiende",
-            _ => $"{Convert(number)}ende"
-        };
+            return ordinal;
+        }
+
+        if (number is > 20 and < 30)
+        {
+            return $"{UnitsMap[number % 10]}ogtyvende";
+        }
+
+        return $"{Convert(number)}ende";
     }
 
     string AppendRemainder(string prefix, long remainder) =>
-        remainder == 0 ? prefix : $"{prefix} {Convert(remainder)}";
+        remainder == 0 ? prefix : $"{prefix}{(remainder < 100 ? " og " : " ")}{Convert(remainder)}";
 }

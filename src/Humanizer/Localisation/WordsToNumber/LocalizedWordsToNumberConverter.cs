@@ -14,7 +14,10 @@ internal class LocalizedWordsToNumberConverter(CultureInfo culture) : Genderless
     {
         if (!TryConvert(words, out var parsedValue, out var unrecognizedWord))
         {
-            throw new ArgumentException($"Unrecognized number word: {unrecognizedWord ?? words}");
+            throw new ArgumentException(
+                $"Unrecognized number word: {unrecognizedWord ?? words}. " +
+                $"Localized words-to-number supports round-trip values from {MinSupportedValue} to {MaxSupportedValue}, " +
+                $"and ordinal round-trips from 0 to {MaxOrdinalSupportedValue}.");
         }
 
         return parsedValue;
@@ -55,7 +58,6 @@ internal class LocalizedWordsToNumberConverter(CultureInfo culture) : Genderless
         for (var value = MinSupportedValue; value <= MaxSupportedValue; value++)
         {
             TryAddMapping(map, value, () => value.ToWords(culture));
-            TryAddMapping(map, value, () => value.ToWords(false, culture));
         }
 
         for (var value = 0; value <= MaxOrdinalSupportedValue; value++)
