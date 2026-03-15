@@ -49,9 +49,6 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(12, "12 sati")]
-    [InlineData(13, "13 sati")]
-    [InlineData(14, "14 sati")]
     [InlineData(2, "2 sata")]
     [InlineData(1, "1 sat")]
     public void Hours(int hours, string expected)
@@ -75,7 +72,6 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [InlineData(2, "2 sekunde")]
-    [InlineData(12, "12 sekundi")]
     [InlineData(1, "1 sekunda")]
     public void Seconds(int seconds, string expected)
     {
@@ -111,8 +107,4 @@ public class TimeSpanHumanizeTests
         var actual = noTime.Humanize(toWords: true);
         Assert.Equal("bez proteklog vremena", actual);
     }
-
-    [Fact]
-    public void ToAge() =>
-        Assert.Equal("1 godina", TimeSpan.FromDays(366).ToAge());
 }

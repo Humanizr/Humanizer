@@ -54,13 +54,13 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [InlineData(1, "1 ден")]
-    [InlineData(2, "2 дни")]
+    [InlineData(2, "2 дена")]
     public void Days(int days, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize());
 
     [Theory]
     [InlineData(1, "един ден")]
-    [InlineData(2, "два дни")]
+    [InlineData(2, "два дена")]
     public void DaysToWords(int days, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(toWords: true));
 

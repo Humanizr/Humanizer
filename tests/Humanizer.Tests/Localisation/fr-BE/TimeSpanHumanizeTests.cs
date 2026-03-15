@@ -96,6 +96,6 @@ public class TimeSpanHumanizeTests
     {
         var noTime = TimeSpan.Zero;
         var actual = noTime.Humanize(toWords: true);
-        Assert.Equal("durée nulle", actual);
+        Assert.Equal("temps nul", actual);
     }
 }

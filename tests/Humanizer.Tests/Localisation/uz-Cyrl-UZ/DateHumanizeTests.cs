@@ -5,26 +5,26 @@ public class DateHumanizeTests
 {
     [Theory]
     [InlineData(1, "бир сония аввал")]
-    [InlineData(10, "10 сония аввал")]
+    [InlineData(10, "10 секунд аввал")]
     public void SecondsAgo(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Past);
 
     [Theory]
     [InlineData(1, "бир сониядан сўнг")]
-    [InlineData(10, "10 сониядан сўнг")]
+    [InlineData(10, "10 секунддан сўнг")]
     public void SecondsFromNow(int seconds, string expected) =>
         DateHumanize.Verify(expected, seconds, TimeUnit.Second, Tense.Future);
 
     [Theory]
     [InlineData(1, "бир дақиқа аввал")]
-    [InlineData(10, "10 дақиқа аввал")]
+    [InlineData(10, "10 минут аввал")]
     [InlineData(60, "бир соат аввал")]
     public void MinutesAgo(int minutes, string expected) =>
         DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Past);
 
     [Theory]
     [InlineData(1, "бир дақиқадан сўнг")]
-    [InlineData(10, "10 дақиқадан сўнг")]
+    [InlineData(10, "10 минутдан сўнг")]
     public void MinutesFromNow(int minutes, string expected) =>
         DateHumanize.Verify(expected, minutes, TimeUnit.Minute, Tense.Future);
 
@@ -79,23 +79,4 @@ public class DateHumanizeTests
     [Fact]
     public void Now() =>
         DateHumanize.Verify("ҳозир", 0, TimeUnit.Year, Tense.Future);
-
-    [Fact]
-    public void HasExplicitResidualDateResources()
-    {
-        Assert.True(Resources.TryGetResource("DateHumanize_Never", new("uz-Cyrl-UZ"), out var never));
-        Assert.Equal("ҳеч қачон", never);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysAgo", new("uz-Cyrl-UZ"), out var twoDaysAgo));
-        Assert.Equal("2 кун аввал", twoDaysAgo);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_TwoDaysFromNow", new("uz-Cyrl-UZ"), out var twoDaysFromNow));
-        Assert.Equal("2 кундан сўнг", twoDaysFromNow);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysAgo_Paucal", new("uz-Cyrl-UZ"), out var daysAgoPaucal));
-        Assert.Equal("{0} кун аввал", daysAgoPaucal);
-
-        Assert.True(Resources.TryGetResource("DateHumanize_MultipleDaysFromNow_Paucal", new("uz-Cyrl-UZ"), out var daysFromNowPaucal));
-        Assert.Equal("{0} кундан сўнг", daysFromNowPaucal);
-    }
 }

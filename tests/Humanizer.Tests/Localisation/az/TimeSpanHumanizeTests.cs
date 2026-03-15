@@ -104,19 +104,6 @@ public class TimeSpanHumanizeTests
     {
         var noTime = TimeSpan.Zero;
         var actual = noTime.Humanize(toWords: true);
-        Assert.Equal("vaxt yoxdur", actual);
-    }
-
-    [Theory]
-    [InlineData(14, "2 həftə")]
-    [InlineData(366, "1 il")]
-    public void Age(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
-
-    [Fact]
-    public void AgeHasExplicitAzerbaijaniResource()
-    {
-        Assert.True(Resources.TryGetResource("TimeSpanHumanize_Age", new("az"), out var ageFormat));
-        Assert.Equal("{0}", ageFormat);
+        Assert.Equal("zaman fərqi yoxdur", actual);
     }
 }

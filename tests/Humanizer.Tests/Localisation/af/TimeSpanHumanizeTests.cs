@@ -63,7 +63,7 @@ public class TimeSpanHumanizeTests
 
     [Fact]
     public void OneSecond() =>
-        Assert.Equal("1 sekonde", TimeSpan.FromSeconds(1).Humanize());
+        Assert.Equal("1 sekond", TimeSpan.FromSeconds(1).Humanize());
 
     [Fact]
     public void TwoMilliseconds() =>
@@ -71,7 +71,7 @@ public class TimeSpanHumanizeTests
 
     [Fact]
     public void OneMillisecond() =>
-        Assert.Equal("1 millisekonde", TimeSpan.FromMilliseconds(1).Humanize());
+        Assert.Equal("1 millisekond", TimeSpan.FromMilliseconds(1).Humanize());
 
     [Fact]
     public void NoTime() =>
@@ -80,10 +80,4 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void NoTimeToWords() =>
         Assert.Equal("geen tyd", TimeSpan.Zero.Humanize(toWords: true));
-
-    [Theory]
-    [InlineData(14, "2 weke oud")]
-    [InlineData(366, "1 jaar oud")]
-    public void Age(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }

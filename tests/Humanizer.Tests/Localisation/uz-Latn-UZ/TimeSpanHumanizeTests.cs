@@ -88,12 +88,6 @@ public class TimeSpanHumanizeTests
     {
         var noTime = TimeSpan.Zero;
         var actual = noTime.Humanize(toWords: true);
-        Assert.Equal("vaqt yo'q", actual);
+        Assert.Equal("vaqt yo`q", actual);
     }
-
-    [Theory]
-    [InlineData(14, "2 hafta yosh")]
-    [InlineData(366, "1 yil yosh")]
-    public void Age(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }

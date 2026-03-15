@@ -42,13 +42,13 @@ public class DateHumanizeTests
 
     [Theory]
     [InlineData(1, "вчера")]
-    [InlineData(2, "преди 2 дни")]
+    [InlineData(2, "преди 2 дена")]
     public void DaysAgo(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Past);
 
     [Theory]
     [InlineData(1, "утре")]
-    [InlineData(2, "след 2 дни")]
+    [InlineData(2, "след 2 дена")]
     public void DaysFromNow(int days, string expected) =>
         DateHumanize.Verify(expected, days, TimeUnit.Day, Tense.Future);
 

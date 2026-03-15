@@ -39,7 +39,7 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [InlineData(1, "1 ora")]
-    [InlineData(1, "un'ora", true)]
+    [InlineData(1, "una ora", true)]
     [InlineData(2, "2 ore")]
     public void Hours(int hours, string expected, bool toWords = false) =>
         Assert.Equal(expected, TimeSpan.FromHours(hours).Humanize(toWords: toWords));

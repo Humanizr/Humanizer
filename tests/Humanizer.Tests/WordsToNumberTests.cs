@@ -145,14 +145,36 @@ public class WordsToNumberTests_GB
 public class WordsToNumberTests_NonEnglish
 {
     [Theory]
-    [InlineData("es-ES", "veinte")]
-    [InlineData("fr-FR", "vingt")]
-    public void ThrowsForNonEnglishWords(string cultureName, string word)
+    [InlineData("es-ES", 21)]
+    [InlineData("fr-FR", 42)]
+    [InlineData("de-DE", 105)]
+    [InlineData("pt-BR", 99)]
+    [InlineData("ru-RU", 73)]
+    [InlineData("ar", 18)]
+    [InlineData("zh-CN", 12)]
+    [InlineData("ja-JP", 31)]
+    [InlineData("tr-TR", 64)]
+    public void RoundTripsSupportedLocalizedWords(string cultureName, int number)
     {
         var culture = new CultureInfo(cultureName);
-        var ex = Assert.Throws<NotSupportedException>(() =>
-            word.ToNumber(culture));
+        var word = number.ToWords(culture);
 
-        Assert.Contains($"'{culture.TwoLetterISOLanguageName}'", ex.Message);
+        Assert.True(word.TryToNumber(out var parsedNumber, culture, out var unrecognizedWord));
+        Assert.Equal(number, parsedNumber);
+        Assert.Null(unrecognizedWord);
+        Assert.Equal(number, word.ToNumber(culture));
+    }
+
+    [Theory]
+    [InlineData("id-ID", "one")]
+    [InlineData("ms-MY", "one")]
+    public void ThrowsForUnsupportedCultureWithoutEnglishFallback(string cultureName, string word)
+    {
+        var culture = new CultureInfo(cultureName);
+
+        var ex = Assert.Throws<NotSupportedException>(() => word.ToNumber(culture));
+        Assert.Contains($"'{culture.Name}'", ex.Message);
+
+        Assert.Throws<NotSupportedException>(() => word.TryToNumber(out _, culture));
     }
 }

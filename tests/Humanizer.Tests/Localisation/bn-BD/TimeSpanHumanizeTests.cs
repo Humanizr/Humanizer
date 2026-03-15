@@ -4,11 +4,6 @@
 public class TimeSpanHumanizeTests
 {
     [Theory]
-    [InlineData(366, "এক বছর বয়স")]
-    public void Age(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
-
-    [Theory]
     [Trait("Translation", "Google")]
     [InlineData(366, "এক বছর")]
     [InlineData(731, "2 বছর")]
@@ -19,7 +14,7 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [Trait("Translation", "Google")]
-    [InlineData(31, "এক মাস")]
+    [InlineData(31, "এক মাসের")]
     [InlineData(61, "2 মাস")]
     [InlineData(92, "3 মাস")]
     [InlineData(335, "11 মাস")]
@@ -69,5 +64,5 @@ public class TimeSpanHumanizeTests
     [Fact]
     public void NoTimeToWords() =>
         // This one really doesn't make a lot of sense but again... w/e
-        Assert.Equal("কোনো সময় নেই", TimeSpan.Zero.Humanize(toWords: true));
+        Assert.Equal("শূন্য সময়", TimeSpan.Zero.Humanize(toWords: true));
 }

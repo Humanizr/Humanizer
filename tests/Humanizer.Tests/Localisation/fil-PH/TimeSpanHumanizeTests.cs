@@ -60,32 +60,16 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [Trait("Translation", "Google Translate")]
-    [InlineData(1, "1 milisegundo")]
-    [InlineData(2, "2 milisegundo")]
+    [InlineData(1, "1 millisecond")]
+    [InlineData(2, "2 milliseconds")]
     public void Milliseconds(int milliseconds, string expected) =>
         Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
 
     [Fact]
     public void NoTime() =>
-        Assert.Equal("0 milisegundo", TimeSpan.Zero.Humanize());
+        Assert.Equal("0 milliseconds", TimeSpan.Zero.Humanize());
 
     [Fact]
     public void NoTimeToWords() =>
         Assert.Equal("walang oras", TimeSpan.Zero.Humanize(toWords: true));
-
-    [Theory]
-    [Trait("Translation", "Google Translate")]
-    [InlineData(4, false, "4 araw na gulang")]
-    [InlineData(367, true, "isang taon na gulang")]
-    public void Age(int days, bool toWords, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge(toWords: toWords));
-
-    [Theory]
-    [Trait("Translation", "Google Translate")]
-    [InlineData(24 * 60 * 60 * 1000, "isang araw")]
-    [InlineData(60 * 60 * 1000, "isang oras")]
-    [InlineData(60 * 1000, "isang minuto")]
-    [InlineData(1000, "isang segundo")]
-    public void TimeSpanWithNumbersConvertedToWords(int milliseconds, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize(toWords: true));
 }

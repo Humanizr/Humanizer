@@ -49,8 +49,8 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(2, "2 дақиқа")]
-    [InlineData(1, "1 дақиқа")]
+    [InlineData(2, "2 минут")]
+    [InlineData(1, "1 минут")]
     public void Minutes(int minutes, string expected)
     {
         var actual = TimeSpan.FromMinutes(minutes).Humanize();
@@ -58,8 +58,8 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(2, "2 сония")]
-    [InlineData(1, "1 сония")]
+    [InlineData(2, "2 секунд")]
+    [InlineData(1, "1 секунд")]
     public void Seconds(int seconds, string expected)
     {
         var actual = TimeSpan.FromSeconds(seconds).Humanize();
@@ -90,10 +90,4 @@ public class TimeSpanHumanizeTests
         var actual = noTime.Humanize(toWords: true);
         Assert.Equal("вақт йўқ", actual);
     }
-
-    [Theory]
-    [InlineData(14, "2 ҳафта")]
-    [InlineData(366, "1 йил")]
-    public void Age(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }

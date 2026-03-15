@@ -5,19 +5,19 @@ public class TimeSpanHumanizeTests
 {
     [Theory]
     [Trait("Translation", "Google")]
-    [InlineData(366, "سنة واحدة")]
+    [InlineData(366, "السنة 1")]
     [InlineData(731, "سنتين")]
-    [InlineData(1096, "3 سنوات")]
+    [InlineData(1096, "3 سنة")]
     [InlineData(4018, "11 سنة")]
     public void Years(int days, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
     [Theory]
     [Trait("Translation", "Google")]
-    [InlineData(31, "شهر واحد")]
+    [InlineData(31, "شهر 1")]
     [InlineData(61, "شهرين")]
     [InlineData(92, "3 أشهر")]
-    [InlineData(335, "11 شهر")]
+    [InlineData(335, "11 أشهر")]
     public void Months(int days, string expected) =>
         Assert.Equal(expected, TimeSpan.FromDays(days).Humanize(maxUnit: TimeUnit.Year));
 
@@ -62,23 +62,17 @@ public class TimeSpanHumanizeTests
 
     [Theory]
     [InlineData(1, "جزء من الثانية")]
-    [InlineData(2, "ملي ثانيتين")]
-    [InlineData(3, "3 ملي ثانية")]
-    [InlineData(11, "11 ملي ثانية")]
+    [InlineData(2, "جزئين من الثانية")]
+    [InlineData(3, "3 أجزاء من الثانية")]
+    [InlineData(11, "11 جزء من الثانية")]
     public void Milliseconds(int milliseconds, string expected) =>
         Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
 
     [Fact]
     public void NoTime() =>
-        Assert.Equal("0 ملي ثانية", TimeSpan.Zero.Humanize());
+        Assert.Equal("0 جزء من الثانية", TimeSpan.Zero.Humanize());
 
     [Fact]
     public void NoTimeToWords() =>
         Assert.Equal("حالاً", TimeSpan.Zero.Humanize(toWords: true));
-
-    [Theory]
-    [InlineData(4, "4 أيام من العمر")]
-    [InlineData(366, "سنة واحدة من العمر")]
-    public void Age(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }

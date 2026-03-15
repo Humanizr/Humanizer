@@ -52,14 +52,14 @@ public class TimeSpanHumanizeTests
         Assert.Equal(expected, TimeSpan.FromSeconds(seconds).Humanize());
 
     [Theory]
-    [InlineData(1, "یک میلی‌ثانیه")]
-    [InlineData(11, "11 میلی‌ثانیه")]
+    [InlineData(1, "یک میلی ثانیه")]
+    [InlineData(11, "11 میلی ثانیه")]
     public void Milliseconds(int milliseconds, string expected) =>
         Assert.Equal(expected, TimeSpan.FromMilliseconds(milliseconds).Humanize());
 
     [Fact]
     public void NoTime() =>
-        Assert.Equal("0 میلی‌ثانیه", TimeSpan.Zero.Humanize());
+        Assert.Equal("0 میلی ثانیه", TimeSpan.Zero.Humanize());
 
     [Fact]
     public void NoTimeToWords() =>

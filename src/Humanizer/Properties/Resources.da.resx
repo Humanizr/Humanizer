@@ -123,12 +123,6 @@
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>{0} dage fra nu</value>
   </data>
-  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
-    <value>{0} uger siden</value>
-  </data>
-  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
-    <value>{0} uger fra nu</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} timer siden</value>
   </data>
@@ -153,12 +147,6 @@
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>{0} sekunder fra nu</value>
   </data>
-  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
-    <value>{0} millisekunder siden</value>
-  </data>
-  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
-    <value>{0} millisekunder fra nu</value>
-  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} år siden</value>
   </data>
@@ -167,15 +155,6 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>nu</value>
-  </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>aldrig</value>
-  </data>
-  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
-    <value>forgårs</value>
-  </data>
-  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
-    <value>i overmorgen</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>i går</value>
@@ -206,18 +185,6 @@
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>et sekund fra nu</value>
-  </data>
-  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
-    <value>en uge siden</value>
-  </data>
-  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
-    <value>en uge fra nu</value>
-  </data>
-  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
-    <value>et millisekund siden</value>
-  </data>
-  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
-    <value>et millisekund fra nu</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>et år siden</value>
@@ -252,9 +219,6 @@
   <data name="NE_Short" xml:space="preserve">
     <value>NØ</value>
   </data>
-  <data name="N_Short" xml:space="preserve">
-    <value>N</value>
-  </data>
   <data name="NNE" xml:space="preserve">
     <value>nordnordøst</value>
   </data>
@@ -281,9 +245,6 @@
   </data>
   <data name="SE_Short" xml:space="preserve">
     <value>SØ</value>
-  </data>
-  <data name="S_Short" xml:space="preserve">
-    <value>S</value>
   </data>
   <data name="SSE" xml:space="preserve">
     <value>sydsydøst</value>
@@ -327,9 +288,6 @@
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} år</value>
   </data>
-  <data name="TimeSpanHumanize_Age" xml:space="preserve">
-    <value>{0} gammel</value>
-  </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>en dag</value>
   </data>
@@ -356,30 +314,6 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ingen tid</value>
-  </data>
-  <data name="TimeUnit_Day" xml:space="preserve">
-    <value>dag</value>
-  </data>
-  <data name="TimeUnit_Hour" xml:space="preserve">
-    <value>time</value>
-  </data>
-  <data name="TimeUnit_Millisecond" xml:space="preserve">
-    <value>ms</value>
-  </data>
-  <data name="TimeUnit_Minute" xml:space="preserve">
-    <value>min.</value>
-  </data>
-  <data name="TimeUnit_Month" xml:space="preserve">
-    <value>måned</value>
-  </data>
-  <data name="TimeUnit_Second" xml:space="preserve">
-    <value>sek.</value>
-  </data>
-  <data name="TimeUnit_Week" xml:space="preserve">
-    <value>uge</value>
-  </data>
-  <data name="TimeUnit_Year" xml:space="preserve">
-    <value>år</value>
   </data>
   <data name="W" xml:space="preserve">
     <value>vest</value>

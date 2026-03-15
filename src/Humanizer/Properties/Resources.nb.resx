@@ -123,12 +123,6 @@
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
     <value>{0} dager fra nå</value>
   </data>
-  <data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve">
-    <value>{0} uker siden</value>
-  </data>
-  <data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve">
-    <value>{0} uker fra nå</value>
-  </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} timer siden</value>
   </data>
@@ -153,12 +147,6 @@
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
     <value>{0} sekunder fra nå</value>
   </data>
-  <data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve">
-    <value>{0} millisekunder siden</value>
-  </data>
-  <data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve">
-    <value>{0} millisekunder fra nå</value>
-  </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} år siden</value>
   </data>
@@ -167,15 +155,6 @@
   </data>
   <data name="DateHumanize_Now" xml:space="preserve">
     <value>nå</value>
-  </data>
-  <data name="DateHumanize_Never" xml:space="preserve">
-    <value>aldri</value>
-  </data>
-  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
-    <value>i forgårs</value>
-  </data>
-  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
-    <value>i overmorgen</value>
   </data>
   <data name="DateHumanize_SingleDayAgo" xml:space="preserve">
     <value>i går</value>
@@ -207,18 +186,6 @@
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
     <value>ett sekund fra nå</value>
   </data>
-  <data name="DateHumanize_SingleWeekAgo" xml:space="preserve">
-    <value>en uke siden</value>
-  </data>
-  <data name="DateHumanize_SingleWeekFromNow" xml:space="preserve">
-    <value>en uke fra nå</value>
-  </data>
-  <data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve">
-    <value>ett millisekund siden</value>
-  </data>
-  <data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve">
-    <value>ett millisekund fra nå</value>
-  </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>ett år siden</value>
   </data>
@@ -248,9 +215,6 @@
   </data>
   <data name="TimeSpanHumanize_MultipleYears" xml:space="preserve">
     <value>{0} år</value>
-  </data>
-  <data name="TimeSpanHumanize_Age" xml:space="preserve">
-    <value>{0} gammel</value>
   </data>
   <data name="TimeSpanHumanize_SingleDay" xml:space="preserve">
     <value>1 dag</value>
@@ -302,89 +266,5 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ingen tid</value>
-  </data>
-  <data name="TimeUnit_Day" xml:space="preserve">
-    <value>dag</value>
-  </data>
-  <data name="TimeUnit_Hour" xml:space="preserve">
-    <value>time</value>
-  </data>
-  <data name="TimeUnit_Millisecond" xml:space="preserve">
-    <value>ms</value>
-  </data>
-  <data name="TimeUnit_Minute" xml:space="preserve">
-    <value>min.</value>
-  </data>
-  <data name="TimeUnit_Month" xml:space="preserve">
-    <value>måned</value>
-  </data>
-  <data name="TimeUnit_Second" xml:space="preserve">
-    <value>sek.</value>
-  </data>
-  <data name="TimeUnit_Week" xml:space="preserve">
-    <value>uke</value>
-  </data>
-  <data name="TimeUnit_Year" xml:space="preserve">
-    <value>år</value>
-  </data>
-  <data name="DataUnit_Byte" xml:space="preserve">
-    <value>byte</value>
-  </data>
-  <data name="DataUnit_ByteSymbol" xml:space="preserve">
-    <value>B</value>
-  </data>
-  <data name="DataUnit_Gigabyte" xml:space="preserve">
-    <value>gigabyte</value>
-  </data>
-  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
-    <value>GB</value>
-  </data>
-  <data name="N" xml:space="preserve">
-    <value>nord</value>
-  </data>
-  <data name="NE" xml:space="preserve">
-    <value>nordøst</value>
-  </data>
-  <data name="E" xml:space="preserve">
-    <value>øst</value>
-  </data>
-  <data name="SE" xml:space="preserve">
-    <value>sørøst</value>
-  </data>
-  <data name="S" xml:space="preserve">
-    <value>sør</value>
-  </data>
-  <data name="SW" xml:space="preserve">
-    <value>sørvest</value>
-  </data>
-  <data name="W" xml:space="preserve">
-    <value>vest</value>
-  </data>
-  <data name="NW" xml:space="preserve">
-    <value>nordvest</value>
-  </data>
-  <data name="N_Short" xml:space="preserve">
-    <value>N</value>
-  </data>
-  <data name="NE_Short" xml:space="preserve">
-    <value>NØ</value>
-  </data>
-  <data name="E_Short" xml:space="preserve">
-    <value>Ø</value>
-  </data>
-  <data name="SE_Short" xml:space="preserve">
-    <value>SØ</value>
-  </data>
-  <data name="S_Short" xml:space="preserve">
-    <value>S</value>
-  </data>
-  <data name="SW_Short" xml:space="preserve">
-    <value>SV</value>
-  </data>
-  <data name="W_Short" xml:space="preserve">
-    <value>V</value>
-  </data>
-  <data name="NW_Short" xml:space="preserve">
-    <value>NV</value>
   </data>
 </root>

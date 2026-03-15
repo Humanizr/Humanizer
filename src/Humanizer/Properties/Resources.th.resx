@@ -130,16 +130,16 @@
     <value>{0} วันที่แล้ว</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow" xml:space="preserve">
-    <value>อีก {0} วัน</value>
+    <value>{0} วันจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Dual" xml:space="preserve">
-    <value>อีก {0} วัน</value>
+    <value>{0} วันจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Plural" xml:space="preserve">
-    <value>อีก {0} วัน</value>
+    <value>{0} วันจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleDaysFromNow_Singular" xml:space="preserve">
-    <value>อีก {0} วัน</value>
+    <value>{0} วันจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleHoursAgo" xml:space="preserve">
     <value>{0} ชั่วโมงที่แล้ว</value>
@@ -157,19 +157,19 @@
     <value>{0} ชั่วโมงที่แล้ว</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow" xml:space="preserve">
-    <value>อีก {0} ชั่วโมง</value>
+    <value>{0} ชั่วโมงจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Dual" xml:space="preserve">
-    <value>อีก {0} ชั่วโมง</value>
+    <value>{0} ชั่วโมงจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Paucal" xml:space="preserve">
-    <value>อีก {0} ชั่วโมง</value>
+    <value>{0} ชั่วโมงจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Plural" xml:space="preserve">
-    <value>อีก {0} ชั่วโมง</value>
+    <value>{0} ชั่วโมงจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleHoursFromNow_Singular" xml:space="preserve">
-    <value>อีก {0} ชั่วโมง</value>
+    <value>{0} ชั่วโมงจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMinutesAgo" xml:space="preserve">
     <value>{0} นาทีที่แล้ว</value>
@@ -187,19 +187,19 @@
     <value>{0} นาทีที่แล้ว</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow" xml:space="preserve">
-    <value>อีก {0} นาที</value>
+    <value>{0} นาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Dual" xml:space="preserve">
-    <value>อีก {0} นาที</value>
+    <value>{0} นาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Paucal" xml:space="preserve">
-    <value>อีก {0} นาที</value>
+    <value>{0} นาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Plural" xml:space="preserve">
-    <value>อีก {0} นาที</value>
+    <value>{0} นาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMinutesFromNow_Singular" xml:space="preserve">
-    <value>อีก {0} นาที</value>
+    <value>{0} นาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMonthsAgo" xml:space="preserve">
     <value>{0} เดือนที่แล้ว</value>
@@ -217,19 +217,19 @@
     <value>{0} เดือนที่แล้ว</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow" xml:space="preserve">
-    <value>อีก {0} เดือน</value>
+    <value>{0} เดือนจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Dual" xml:space="preserve">
-    <value>อีก {0} เดือน</value>
+    <value>{0} เดือนจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Paucal" xml:space="preserve">
-    <value>อีก {0} เดือน</value>
+    <value>{0} เดือนจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Plural" xml:space="preserve">
-    <value>อีก {0} เดือน</value>
+    <value>{0} เดือนจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleMonthsFromNow_Singular" xml:space="preserve">
-    <value>อีก {0} เดือน</value>
+    <value>{0} เดือนจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleSecondsAgo" xml:space="preserve">
     <value>{0} วินาทีที่แล้ว</value>
@@ -247,19 +247,19 @@
     <value>{0} วินาทีที่แล้ว</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow" xml:space="preserve">
-    <value>อีก {0} วินาที</value>
+    <value>{0} วินาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Dual" xml:space="preserve">
-    <value>อีก {0} วินาที</value>
+    <value>{0} วินาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Paucal" xml:space="preserve">
-    <value>อีก {0} วินาที</value>
+    <value>{0} วินาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Plural" xml:space="preserve">
-    <value>อีก {0} วินาที</value>
+    <value>{0} วินาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleSecondsFromNow_Singular" xml:space="preserve">
-    <value>อีก {0} วินาที</value>
+    <value>{0} วินาทีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleYearsAgo" xml:space="preserve">
     <value>{0} ปีที่แล้ว</value>
@@ -277,19 +277,19 @@
     <value>{0} ปีที่แล้ว</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow" xml:space="preserve">
-    <value>อีก {0} ปี</value>
+    <value>{0} ปีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Dual" xml:space="preserve">
-    <value>อีก {0} ปี</value>
+    <value>{0} ปีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Paucal" xml:space="preserve">
-    <value>อีก {0} ปี</value>
+    <value>{0} ปีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Plural" xml:space="preserve">
-    <value>อีก {0} ปี</value>
+    <value>{0} ปีจากนี้</value>
   </data>
   <data name="DateHumanize_MultipleYearsFromNow_Singular" xml:space="preserve">
-    <value>อีก {0} ปี</value>
+    <value>{0} ปีจากนี้</value>
   </data>
   <data name="DateHumanize_Never" xml:space="preserve">
     <value>ไม่เคย</value>
@@ -307,31 +307,31 @@
     <value>หนึ่งชั่วโมงที่แล้ว</value>
   </data>
   <data name="DateHumanize_SingleHourFromNow" xml:space="preserve">
-    <value>อีกหนึ่งชั่วโมง</value>
+    <value>หนึ่งชั่วโมงจากนี้</value>
   </data>
   <data name="DateHumanize_SingleMinuteAgo" xml:space="preserve">
     <value>หนึ่งนาทีที่แล้ว</value>
   </data>
   <data name="DateHumanize_SingleMinuteFromNow" xml:space="preserve">
-    <value>อีกหนึ่งนาที</value>
+    <value>หนึ่งนาทีจากนี้</value>
   </data>
   <data name="DateHumanize_SingleMonthAgo" xml:space="preserve">
     <value>หนึ่งเดือนที่แล้ว</value>
   </data>
   <data name="DateHumanize_SingleMonthFromNow" xml:space="preserve">
-    <value>อีกหนึ่งเดือน</value>
+    <value>หนึ่งเดือนจากนี้</value>
   </data>
   <data name="DateHumanize_SingleSecondAgo" xml:space="preserve">
     <value>หนึ่งวินาทีที่แล้ว</value>
   </data>
   <data name="DateHumanize_SingleSecondFromNow" xml:space="preserve">
-    <value>อีกหนึ่งวินาที</value>
+    <value>หนึ่งวินาทีจากนี้</value>
   </data>
   <data name="DateHumanize_SingleYearAgo" xml:space="preserve">
     <value>หนึ่งปีที่แล้ว</value>
   </data>
   <data name="DateHumanize_SingleYearFromNow" xml:space="preserve">
-    <value>อีกหนึ่งปี</value>
+    <value>หนึ่งปีจากนี้</value>
   </data>
   <data name="TimeSpanHumanize_MultipleDays" xml:space="preserve">
     <value>{0} วัน</value>
@@ -452,80 +452,5 @@
   </data>
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>ไม่มีเวลา</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysAgo_Paucal" xml:space="preserve">
-    <value>{0} วันที่แล้ว</value>
-  </data>
-  <data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve">
-    <value>อีก {0} วัน</value>
-  </data>
-  <data name="DateHumanize_TwoDaysAgo" xml:space="preserve">
-    <value>เมื่อวานซืน</value>
-  </data>
-  <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
-    <value>มะรืนนี้</value>
-  </data>
-  <data name="TimeSpanHumanize_Age" xml:space="preserve">
-    <value>{0}</value>
-  </data>
-  <data name="TimeUnit_Day" xml:space="preserve">
-    <value>วัน</value>
-  </data>
-  <data name="TimeUnit_Hour" xml:space="preserve">
-    <value>ชั่วโมง</value>
-  </data>
-  <data name="TimeUnit_Millisecond" xml:space="preserve">
-    <value>มิลลิวินาที</value>
-  </data>
-  <data name="TimeUnit_Minute" xml:space="preserve">
-    <value>นาที</value>
-  </data>
-  <data name="TimeUnit_Month" xml:space="preserve">
-    <value>เดือน</value>
-  </data>
-  <data name="TimeUnit_Second" xml:space="preserve">
-    <value>วินาที</value>
-  </data>
-  <data name="TimeUnit_Week" xml:space="preserve">
-    <value>สัปดาห์</value>
-  </data>
-  <data name="TimeUnit_Year" xml:space="preserve">
-    <value>ปี</value>
-  </data>
-  <data name="DataUnit_Bit" xml:space="preserve">
-    <value>บิต</value>
-  </data>
-  <data name="DataUnit_BitSymbol" xml:space="preserve">
-    <value>b</value>
-  </data>
-  <data name="DataUnit_Byte" xml:space="preserve">
-    <value>ไบต์</value>
-  </data>
-  <data name="DataUnit_ByteSymbol" xml:space="preserve">
-    <value>B</value>
-  </data>
-  <data name="DataUnit_Kilobyte" xml:space="preserve">
-    <value>กิโลไบต์</value>
-  </data>
-  <data name="DataUnit_KilobyteSymbol" xml:space="preserve">
-    <value>KB</value>
-  </data>
-  <data name="DataUnit_Megabyte" xml:space="preserve">
-    <value>เมกะไบต์</value>
-  </data>
-  <data name="DataUnit_MegabyteSymbol" xml:space="preserve">
-    <value>MB</value>
-  </data>
-  <data name="DataUnit_Gigabyte" xml:space="preserve">
-    <value>กิกะไบต์</value>
-  </data>
-  <data name="DataUnit_GigabyteSymbol" xml:space="preserve">
-    <value>GB</value>
-  </data>
-  <data name="DataUnit_Terabyte" xml:space="preserve">
-    <value>เทราไบต์</value>
-  </data>
-  <data name="DataUnit_TerabyteSymbol" xml:space="preserve">
-    <value>TB</value>
   </data>
 </root>

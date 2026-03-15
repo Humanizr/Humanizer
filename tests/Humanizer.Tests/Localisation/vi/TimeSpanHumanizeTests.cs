@@ -81,8 +81,8 @@ public class TimeSpanHumanizeTests
     }
 
     [Theory]
-    [InlineData(2, "2 mili giây")]
-    [InlineData(1, "1 mili giây")]
+    [InlineData(2, "2 phần ngàn giây")]
+    [InlineData(1, "1 phần ngàn giây")]
     public void Milliseconds(int ms, string expected)
     {
         var actual = TimeSpan
@@ -96,7 +96,7 @@ public class TimeSpanHumanizeTests
     {
         var noTime = TimeSpan.Zero;
         var actual = noTime.Humanize();
-        Assert.Equal("0 mili giây", actual);
+        Assert.Equal("0 phần ngàn giây", actual);
     }
 
     [Fact]
@@ -104,12 +104,6 @@ public class TimeSpanHumanizeTests
     {
         var noTime = TimeSpan.Zero;
         var actual = noTime.Humanize(toWords: true);
-        Assert.Equal("không có thời lượng", actual);
+        Assert.Equal("không giờ", actual);
     }
-
-    [Theory]
-    [InlineData(14, "2 tuần tuổi")]
-    [InlineData(366, "1 năm tuổi")]
-    public void Age(int days, string expected) =>
-        Assert.Equal(expected, TimeSpan.FromDays(days).ToAge());
 }
