@@ -672,4 +672,4 @@
   <data name="NNW_Short" xml:space="preserve">
     <value>NNW</value>
   </data>
-</root>
+<data name="DateHumanize_MultipleDaysFromNow_Paucal" xml:space="preserve"><value>{0} araw mula ngayon</value></data><data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>isang milisegundo ang nakalipas</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>isang milisegundo mula ngayon</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>{0} milisegundong nakalipas</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>{0} milisegundo mula ngayon</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>isang linggo ang nakalipas</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>isang linggo mula ngayon</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>{0} linggong nakalipas</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>{0} linggo mula ngayon</value></data></root>

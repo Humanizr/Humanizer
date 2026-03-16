@@ -711,4 +711,4 @@
   <data name="NNW_Short" xml:space="preserve">
     <value>ПнПнЗх</value>
   </data>
-</root>
+<data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>мілісекунду тому</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>через мілісекунду</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>{0} мілісекунд тому</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>через {0} мілісекунд</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>тиждень тому</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>через тиждень</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>{0} тижнів тому</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>через {0} тижнів</value></data></root>

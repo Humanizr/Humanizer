@@ -616,4 +616,4 @@
   <data name="DateHumanize_TwoDaysFromNow" xml:space="preserve">
     <value>demà passat</value>
   </data>
-</root>
+<data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>fa un mil·lisegon</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>d'aquí un mil·lisegon</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>fa {0} mil·lisegons</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>d'aquí {0} mil·lisegons</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>fa una setmana</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>d'aquí una setmana</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>fa {0} setmanes</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>d'aquí {0} setmanes</value></data></root>

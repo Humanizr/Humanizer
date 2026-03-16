@@ -99,6 +99,23 @@ public class DateHumanizeTests
     public void YearsAgo(int years, string expected) =>
         DateHumanize.Verify(expected, years, TimeUnit.Year, Tense.Past);
 
+
+    [Fact]
+    public void WeekAndMillisecondResourcesExist()
+    {
+        Assert.True(Resources.TryGetResource("DateHumanize_SingleWeekAgo", new("bn-BD"), out var singleWeekAgo));
+        Assert.Equal("এক সপ্তাহ আগে", singleWeekAgo);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_SingleWeekFromNow", new("bn-BD"), out var singleWeekFromNow));
+        Assert.Equal("এক সপ্তাহ পর", singleWeekFromNow);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_SingleMillisecondAgo", new("bn-BD"), out var singleMillisecondAgo));
+        Assert.Equal("এক মিলিসেকেন্ড আগে", singleMillisecondAgo);
+
+        Assert.True(Resources.TryGetResource("DateHumanize_SingleMillisecondFromNow", new("bn-BD"), out var singleMillisecondFromNow));
+        Assert.Equal("এক মিলিসেকেন্ড পর", singleMillisecondFromNow);
+    }
+
     [Fact]
     public void NeverHasExplicitBengaliResource()
     {

@@ -675,4 +675,4 @@
   <data name="TimeSpanHumanize_Zero" xml:space="preserve">
     <value>방금</value>
   </data>
-</root>
+<data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>1밀리초 전</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>1밀리초 후</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>{0}밀리초 전</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>{0}밀리초 후</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>1주 전</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>1주 후</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>{0}주 전</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>{0}주 후</value></data></root>

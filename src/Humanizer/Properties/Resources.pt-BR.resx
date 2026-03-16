@@ -692,4 +692,4 @@
   <data name="W_Short" xml:space="preserve">
     <value>O</value>
   </data>
-</root>
+<data name="TimeSpanHumanize_Age" xml:space="preserve"><value>{0}</value></data><data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>um milissegundo atrás</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>em um milissegundo</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>{0} milissegundos atrás</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>em {0} milissegundos</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>uma semana atrás</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>em uma semana</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>{0} semanas atrás</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>em {0} semanas</value></data></root>

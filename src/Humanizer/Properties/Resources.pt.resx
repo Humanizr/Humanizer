@@ -695,4 +695,4 @@
   <data name="W_Short" xml:space="preserve">
     <value>O</value>
   </data>
-</root>
+<data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>há um milissegundo</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>daqui a um milissegundo</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>há {0} milissegundos</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>daqui a {0} milissegundos</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>há uma semana</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>daqui a uma semana</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>há {0} semanas</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>daqui a {0} semanas</value></data></root>

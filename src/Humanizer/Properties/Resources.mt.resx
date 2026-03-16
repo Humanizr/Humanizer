@@ -675,4 +675,4 @@
   <data name="W_Short" xml:space="preserve">
     <value>P</value>
   </data>
-</root>
+<data name="DateHumanize_SingleMillisecondAgo" xml:space="preserve"><value>millisekonda ilu</value></data><data name="DateHumanize_SingleMillisecondFromNow" xml:space="preserve"><value>millisekonda oħra</value></data><data name="DateHumanize_MultipleMillisecondsAgo" xml:space="preserve"><value>{0} millisekondi ilu</value></data><data name="DateHumanize_MultipleMillisecondsFromNow" xml:space="preserve"><value>{0} millisekondi oħra</value></data><data name="DateHumanize_SingleWeekAgo" xml:space="preserve"><value>ġimgħa ilu</value></data><data name="DateHumanize_SingleWeekFromNow" xml:space="preserve"><value>ġimgħa oħra</value></data><data name="DateHumanize_MultipleWeeksAgo" xml:space="preserve"><value>{0} ġimgħat ilu</value></data><data name="DateHumanize_MultipleWeeksFromNow" xml:space="preserve"><value>{0} ġimgħat oħra</value></data></root>
