@@ -71,7 +71,7 @@ public class ExactLocaleRegistryTests
     [Fact]
     public void Words_to_number_does_not_fall_back_to_english_for_unsupported_exact_locale()
     {
-        var culture = new CultureInfo("id-ID");
+        var culture = new CultureInfo("ga-IE");
 
         Assert.Throws<NotSupportedException>(() => "one".ToNumber(culture));
     }

@@ -13,7 +13,7 @@ class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWord
         Register("ca", _ => new CaDateToOrdinalWordsConverter());
         RegisterDefaultConverter("cs");
         RegisterDefaultConverter("da");
-        RegisterDefaultConverter("de");
+        Register("de", _ => new LongDateToOrdinalWordsConverter());
         Register("en-US", _ => new UsDateToOrdinalWordsConverter());
         RegisterDefaultConverter("el");
         Register("es", _ => new EsDateToOrdinalWordsConverter());
@@ -31,9 +31,9 @@ class DateToOrdinalWordsConverterRegistry : LocaliserRegistry<IDateToOrdinalWord
         RegisterDefaultConverter("ja");
         RegisterDefaultConverter("ko");
         RegisterDefaultConverter("ku");
-        RegisterDefaultConverter("lb");
+        Register("lb", _ => new LongDateToOrdinalWordsConverter());
         Register("lt", _ => new LtDateToOrdinalWordsConverter());
-        RegisterDefaultConverter("lv");
+        Register("lv", _ => new LongDateToOrdinalWordsConverter());
         RegisterDefaultConverter("ms");
         RegisterDefaultConverter("mt");
         RegisterDefaultConverter("nb");
